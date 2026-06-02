@@ -1,7 +1,7 @@
 ---
-id: "abu-hatim-aqidah-athar-001"
-date: "2026-06-01T00:00:00.000Z"
-title: "📖 Beispiel: Aqīdah wird nicht durch Meinungen gebaut"
+id: "abu-hatim-aqidah-athar-002"
+date: "2026-06-02T00:00:00.000Z"
+title: "📖 Aqīdah wird nicht durch Meinungen gebaut"
 category: "Aqīdah"
 topic: "Aqīdah und Āthār"
 scholar: "Abū Ḥātim ar-Rāzī"
@@ -10,15 +10,21 @@ tags:
   - "#Aqidah"
   - "#Sunnah"
   - "#Athar"
-source: "📝 Beispiel-Quellenzeile. Bitte später durch geprüfte exakte Quelle ersetzen."
+  - "#AbuHatim"
+  - "#AhlusSunnah"
+source: "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah, Bāb: Iʿtiqād Abī Zurʿah wa Abī Ḥātim, Athar Nr. 323, Band 1, S. 202–203."
 links:
-  - label: "→ Quelle"
-    url: "#"
+  - label: "→ Islamweb"
+    url: "https://www.islamweb.net/ar/library/content/110/36/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%A8%D9%8A-%D8%B2%D8%B1%D8%B9%D8%A9-%D9%88%D8%A3%D8%A8%D9%8A-%D8%AD%D8%A7%D8%AA%D9%85#:~:text=%D9%85%D8%B0%D9%87%D8%A8%D9%86%D8%A7%20%D9%88%D8%A7%D8%AE%D8%AA%D9%8A%D8%A7%D8%B1%D9%86%D8%A7%20%D8%A7%D8%AA%D8%A8%D8%A7%D8%B9%20%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D9%84%D9%87,%D9%88%D8%A7%D9%84%D8%AA%D9%85%D8%B3%D9%83%20%D8%A8%D9%85%D8%B0%D9%87%D8%A8%20%D8%A3%D9%87%D9%84%20%D8%A7%D9%84%D8%A3%D8%AB%D8%B1"
 logo: "logo-black.png"
 ---
 
 🖋️ **Abū Ḥātim ar-Rāzī** sagte:
 
-Dies ist ein Beispielbeitrag. Du kannst ihn später im Admin-Bereich löschen oder bearbeiten.
+„Unser Weg und unsere Wahl ist die Befolgung des Gesandten Allahs ﷺ, seiner Gefährten und der Tābiʿīn nach ihnen in Güte, sowie das Festhalten am Weg der Leute der Āthār.“
 
-🌙 **Fazit:** Beiträge erscheinen hier nach **Gelehrten**, **Büchern**, **Themen** und **Hashtags**.
+👉🏼 Die **Aqīdah** ist kein Feld für persönliche Vorlieben, philosophische Ausschmückungen oder neu erfundene Streitmethoden. Der sichere Weg ist das, was die frühen Imāme festhielten: **Qurʾān**, **Sunnah**, die Spuren der **Ṣaḥābah** und der überlieferte Weg der **Ahl al-Āthār**.
+
+Wer die Religion an bloße Meinung bindet, verliert die klare Spur. Wer sich aber an die **Überlieferung** bindet, bleibt näher an dem, worauf die ersten Generationen standen.
+
+🌙 **Fazit:** Wer **Aqīdah** lernen will, beginnt nicht bei Streitkunst und persönlicher Meinung, sondern bei dem, worauf die Imāme standen: **Befolgung**, **Āthār** und **Festhalten an der Sunnah**.
