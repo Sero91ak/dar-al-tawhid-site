@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAR AL TAWHID</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap');
+:root{--bg:#0b100d;--gold:#d6b46a;--gold2:#f1d992;--cream:#fff6df;--muted:#bac2b5;--line:rgba(214,180,106,.36);--shadow:0 24px 70px rgba(0,0,0,.42);--radius:24px;--serif:"Cormorant Garamond",Georgia,serif;--signature:"Great Vibes",cursive}
+*{box-sizing:border-box}
+body{margin:0;color:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 12% 0%,rgba(214,180,106,.20),transparent 34%),radial-gradient(circle at 86% 6%,rgba(241,217,146,.10),transparent 30%),linear-gradient(180deg,#070b09,var(--bg),#070b09);min-height:100vh}
+a{color:var(--gold2);text-decoration:none}
+.site{width:min(1220px,calc(100% - 28px));margin:auto}
+header{position:relative;padding:32px 0 18px;overflow:hidden}
+.hero-logo-bg{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:0}
+.hero-logo-bg img{width:min(570px,76vw);opacity:.105;filter:drop-shadow(0 10px 25px rgba(0,0,0,.45))}
+.hero,.panel,.post{border:1px solid var(--line);border-radius:var(--radius);background:rgba(23,33,28,.84);box-shadow:var(--shadow)}
+.hero{position:relative;z-index:1;padding:clamp(24px,4vw,46px);overflow:hidden}
+.hero:before,.post:before{content:"";position:absolute;inset:14px;border:1px solid rgba(214,180,106,.25);border-radius:18px;pointer-events:none}
+.top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand small{display:block;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;font-size:12px;margin-bottom:8px}
+h1{margin:0;font-family:var(--serif);font-size:clamp(38px,8vw,86px);line-height:.9;letter-spacing:.11em;color:var(--gold2);text-transform:uppercase;text-shadow:0 6px 20px rgba(0,0,0,.48)}
+.hero p,.notice{color:var(--muted)}
+.hero p{position:relative;z-index:1;max-width:920px;line-height:1.7;font-size:17px;margin:24px 0 0}
+button,.chip{border:1px solid var(--line);border-radius:999px;background:rgba(214,180,106,.09);color:var(--cream);padding:10px 14px;font-weight:850;cursor:pointer;font-size:14px;display:inline-flex;align-items:center;gap:7px}
+button:hover,.chip:hover{background:rgba(214,180,106,.18);transform:translateY(-1px)}
+.links,.nav-buttons,.list-buttons,.meta,.source-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;grid-template-columns:310px 1fr;gap:18px;padding:18px 0 42px;align-items:start}
+aside{position:sticky;top:14px;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(23,33,28,.82);box-shadow:var(--shadow)}
+h2,h3{font-family:var(--serif);color:var(--gold2);margin:0 0 12px;line-height:1.1}
+h2{font-size:34px}h3{font-size:25px}
+.search{width:100%;border:1px solid rgba(214,180,106,.30);border-radius:15px;background:rgba(0,0,0,.30);color:var(--cream);padding:12px;font:inherit;outline:none;margin-bottom:14px}
+.group{border-top:1px solid rgba(214,180,106,.18);padding-top:14px;margin-top:14px}
+.list-buttons button{padding:8px 11px;font-size:13px}
+.panel{padding:18px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{border:1px solid rgba(214,180,106,.22);border-radius:18px;padding:16px;background:linear-gradient(180deg,rgba(214,180,106,.12),rgba(0,0,0,.14))}
+.stat b{display:block;color:var(--gold2);font-size:28px}.stat span{color:var(--muted)}
+.posts{display:grid;gap:17px}
+.post{position:relative;overflow:hidden;padding:clamp(28px,5vw,48px);background:linear-gradient(145deg,rgba(23,33,28,.94),rgba(8,12,10,.98)),repeating-linear-gradient(135deg,rgba(214,180,106,.045) 0 1px,transparent 1px 20px)}
+.post-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,75%);opacity:.08;pointer-events:none;z-index:0;filter:drop-shadow(0 8px 20px rgba(0,0,0,.35))}
+.inner{position:relative;z-index:1}
+.title{font-family:var(--serif);font-size:clamp(31px,4.6vw,52px);font-weight:700;color:var(--gold2);margin:0 0 14px;text-align:center;line-height:1.04;text-shadow:0 5px 18px rgba(0,0,0,.48)}
+.meta{justify-content:center;margin:12px 0 20px}
+.badge{border:1px solid rgba(214,180,106,.30);background:rgba(214,180,106,.10);border-radius:999px;padding:7px 10px;color:var(--cream)}
+.statement{font-family:var(--serif);font-size:clamp(24px,3.1vw,34px);font-weight:600;line-height:1.52;text-align:center;color:#fff9e8;margin:22px auto;max-width:850px;letter-spacing:.01em}
+.statement strong,.statement .auto{color:var(--gold2);font-weight:700;font-style:italic;text-decoration:underline;text-decoration-thickness:1.8px;text-underline-offset:7px;text-decoration-color:rgba(241,217,146,.75)}
+.statement em{color:var(--gold2);font-family:var(--signature);font-style:normal;font-size:1.22em;text-decoration:underline;text-underline-offset:8px}
+.source{border-top:1px solid rgba(214,180,106,.20);padding-top:14px;margin-top:18px;text-align:center;color:var(--muted);line-height:1.55;font-size:14px}
+.source b{color:var(--cream)}
+.source-links{justify-content:center;margin-top:10px}
+.source-links a{border:1px solid rgba(214,180,106,.25);border-radius:999px;padding:7px 10px;background:rgba(0,0,0,.20);font-weight:850;font-size:13px}
+footer{text-align:center;color:var(--muted);border-top:1px solid rgba(214,180,106,.18);padding:30px 0 44px;line-height:1.8}
+.signature{font-family:var(--signature);font-size:36px;color:var(--gold2)}
+.empty{text-align:center;color:var(--muted);border:1px dashed rgba(214,180,106,.35);border-radius:var(--radius);padding:32px;background:rgba(0,0,0,.14)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}aside{position:static}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.stats{grid-template-columns:1fr}.statement{font-size:24px}.title{font-size:32px}h1{font-size:40px}.hero-logo-bg img{width:88vw}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="hero-logo-bg"><img src="logo-black.png" alt="Dar Al Tawhid Logo"></div>
+  <section class="hero">
+    <div class="top">
+      <div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><h1>DAR AL TAWHID</h1></div>
+      <nav class="links">
+        <a class="chip" href="https://t.me/dar_al_tauhid" target="_blank">Telegram @dar_al_tauhid</a>
+        <a class="chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank">Instagram @dar_at_tawhid</a>
+        <a class="chip" href="/admin/">Admin</a>
+      </nav>
+    </div>
+    <p>Beiträge nach Gelehrten, Büchern, Themen und Hashtags. Quellenlinks führen direkt zur markierten Passage, wenn der Link eine Textmarkierung enthält.</p>
+  </section>
+</header>
+<main class="site grid">
+<aside>
+  <h2>Navigation</h2>
+  <input id="searchInput" class="search" type="search" placeholder="Freie Suche…">
+  <div class="group"><h3>Gelehrte</h3><div id="scholarList" class="list-buttons"></div></div>
+  <div class="group"><h3>Bücher</h3><div id="bookList" class="list-buttons"></div></div>
+  <div class="group"><h3>Themen</h3><div id="topicList" class="list-buttons"></div></div>
+  <div class="group"><h3>Hashtags</h3><div id="tagList" class="list-buttons"></div></div>
+  <div class="group"><button id="resetFilters">Alles anzeigen</button></div>
+</aside>
+<section>
+  <section class="panel">
+    <h2>Übersicht</h2>
+    <div class="stats">
+      <div class="stat"><b id="statPosts">0</b><span>Beiträge</span></div>
+      <div class="stat"><b id="statScholars">0</b><span>Gelehrte</span></div>
+      <div class="stat"><b id="statBooks">0</b><span>Bücher</span></div>
+      <div class="stat"><b id="statTopics">0</b><span>Themen</span></div>
+    </div>
+  </section>
+  <section id="posts" class="posts"></section>
+</section>
+</main>
+<footer class="site">
+  <strong>DAR AL TAWHID</strong><br>
+  Folgt für mehr Wissen aus Qurʾān & Sunnah<br>
+  Telegram: @dar_al_tauhid · Instagram: @dar_at_tawhid<br>
+  <span class="signature">by Serhat Abu Malik</span>
+</footer>
+<script>
+let posts=[];let active={type:"all",value:"Alle"};const $=id=>document.getElementById(id);
+function esc(s=""){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function unique(a){return[...new Set(a.filter(Boolean))].sort((x,y)=>x.localeCompare(y,"de"))}
+function formatStatement(str=""){let out=esc(str).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>");["Allāh","Allah","Qurʾān","Sunnah","Ahlus-Sunnah","Ahl al-Sunnah","Tawḥīd","Aqīdah","Fiqh","Zuhd","Taqwā","Bidʿah","Īmān","Kufr","Schirk","Salaf","Āthār","Hadith"].forEach(w=>{const safe=w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");out=out.replace(new RegExp(`(?<![\\w>])(${safe})(?![^<]*>|[\\w])`,"g"),'<span class="auto">$1</span>')});return out.replace(/\n/g,"<br>")}
+function countBy(key,array=false){const m=new Map();posts.forEach(p=>{const vals=array?(p[key]||[]):[p[key]];vals.filter(Boolean).forEach(v=>m.set(v,(m.get(v)||0)+1))});return m}
+function btn(label,type,count){const b=document.createElement("button");b.type="button";b.textContent=count?`${label} (${count})`:label;if(active.type===type&&active.value===label)b.classList.add("active");b.onclick=()=>{active={type,value:label};render()};return b}
+function renderLists(){const lists=[["scholarList","scholar",countBy("scholar")],["bookList","book",countBy("book")],["topicList","topic",countBy("topic")],["tagList","tag",countBy("tags",true)]];for(const [id,type,map] of lists){$(id).innerHTML="";$(id).appendChild(btn("Alle","all",posts.length));[...map.keys()].sort((a,b)=>a.localeCompare(b,"de")).forEach(x=>$(id).appendChild(btn(x,type,map.get(x))))}}
+function matches(p,q){const hay=[p.title,p.category,p.topic,p.scholar,p.book,p.statement,p.source,...(p.tags||[])].join(" ").toLowerCase();let ok=!q||hay.includes(q);if(active.type==="scholar")ok=ok&&p.scholar===active.value;if(active.type==="book")ok=ok&&p.book===active.value;if(active.type==="topic")ok=ok&&p.topic===active.value;if(active.type==="tag")ok=ok&&(p.tags||[]).includes(active.value);return ok}
+function renderPosts(){const root=$("posts");root.innerHTML="";const q=$("searchInput").value.trim().toLowerCase();const filtered=posts.filter(p=>matches(p,q));if(!filtered.length){root.innerHTML='<div class="empty">Noch keine Beiträge vorhanden.</div>';return}filtered.forEach(p=>{const a=document.createElement("article");a.className="post";const links=(p.links||[]).map(l=>l.url?`<a href="${esc(l.url)}" target="_blank">${esc(l.label)}</a>`:"").join("");a.innerHTML=`<img class="post-logo" src="${esc(p.logo||"logo-black.png")}" alt="Logo"><div class="inner"><h2 class="title">${esc(p.title)}</h2><div class="meta"><button class="badge">${esc(p.topic)}</button><button class="badge">${esc(p.scholar)}</button><button class="badge">${esc(p.book)}</button>${(p.tags||[]).map(t=>`<button class="badge">${esc(t)}</button>`).join("")}</div><div class="statement">${formatStatement(p.statement)}</div><div class="source"><b>${esc(p.source)}</b><div class="source-links">${links}</div></div></div>`;root.appendChild(a)})}
+function renderStats(){$("statPosts").textContent=posts.length;$("statScholars").textContent=unique(posts.map(p=>p.scholar)).length;$("statBooks").textContent=unique(posts.map(p=>p.book)).length;$("statTopics").textContent=unique(posts.map(p=>p.topic)).length}
+function render(){renderStats();renderLists();renderPosts()}
+async function load(){try{const res=await fetch("posts.json",{cache:"no-store"});posts=await res.json()}catch(e){posts=[]}render()}
+$("searchInput").oninput=render;$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};
+load();
+</script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+    if (!user) window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+  });
+}
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</body>
+</html>
