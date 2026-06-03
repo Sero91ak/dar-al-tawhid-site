@@ -1,10 +1,8 @@
-DAR AL TAWHID – Finale Datei mit:
-- originale Telegram- und Instagram-Logos in Farbe
-- dezentem Emblem/Wasserzeichen
-- App-Manifest + Service Worker
-- App-Icons für Smartphone-Installation
+DAR AL TAWHID – Finale Version mit:
+- originalfarbenem Telegram- und Instagram-Logo
+- sauberem Emblem/Wasserzeichen
+- PWA/App-Installation
+- automatischem Lesen der Beiträge aus content/posts
 
-Upload:
-1. ZIP entpacken.
-2. ALLE Dateien gleichzeitig in dein GitHub-Repository hochladen und vorhandene Dateien ersetzen.
-3. Warten, bis GitHub Pages / Netlify neu gebaut hat.
+Wichtig:
+ZIP entpacken, dann NUR die Dateien im Ordner hochladen, nicht den Ordner selbst.

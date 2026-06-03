@@ -5,16 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DAR AL TAWHID</title>
 
-<meta name="theme-color" content="#07100b">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="DAR AL TAWHID">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap');
 
@@ -533,25 +523,6 @@ footer{
   font-size:27px;
 }
 
-
-.social-icon{
-  width:15px;
-  height:15px;
-  display:inline-block;
-  vertical-align:-2px;
-  flex:0 0 auto;
-}
-.footer-social{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  margin:0 6px;
-}
-.footer-social .social-icon{
-  width:14px;
-  height:14px;
-}
-
 /* Responsive */
 @media(max-width:1360px){
   .posts{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -589,6 +560,66 @@ footer{
   .modal-title{font-size:26px}
 }
 </style>
+<meta name="theme-color" content="#07100b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DAR AL TAWHID">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+
+
+<style id="social-emblem-final">
+.social-chip{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  padding:6px 11px!important;
+  background:rgba(255,255,255,.035)!important;
+}
+.social-icon{
+  width:18px!important;
+  height:18px!important;
+  flex:0 0 auto!important;
+  display:inline-block!important;
+  border-radius:5px!important;
+}
+.telegram-chip{border-color:rgba(42,171,238,.45)!important}
+.instagram-chip{border-color:rgba(214,36,159,.45)!important}
+.hero-logo img{
+  width:min(430px,64vw)!important;
+  opacity:.075!important;
+}
+.card-logo{
+  opacity:.045!important;
+}
+.footer-social{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  vertical-align:middle!important;
+}
+.footer-social .social-icon{
+  width:16px!important;
+  height:16px!important;
+}
+.footer-dot{color:var(--muted);margin:0 6px}
+@media(max-width:560px){
+  .social-chip{
+    width:100%;
+    justify-content:center;
+  }
+  .footer-dot{display:none}
+  .footer-social{
+    display:flex!important;
+    justify-content:center;
+    margin:4px 0;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -601,8 +632,8 @@ footer{
         <h1>DAR AL TAWHID</h1>
       </div>
       <nav class="links">
-        <a class="chip" href="https://t.me/dar_al_tauhid" target="_blank"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="120" fill="#2AABEE"/><path fill="#fff" d="M179.7 74.8 157.1 181.4c-1.7 7.5-6.1 9.4-12.4 5.9l-34.3-25.3-16.5 15.9c-1.8 1.8-3.4 3.4-6.9 3.4l2.5-35.1 63.9-57.7c2.8-2.5-.6-3.9-4.3-1.4l-79 49.7-34-10.6c-7.4-2.3-7.5-7.4 1.5-10.9L171 64.1c6.2-2.3 11.6 1.5 8.7 10.7z"/></svg><span>Telegram @dar_al_tauhid</span></a>
-        <a class="chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><defs><radialGradient id="igRadial" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="240" height="240" rx="54" fill="url(#igRadial)"/><path fill="none" stroke="#fff" stroke-width="18" d="M76 56h88c11 0 20 9 20 20v88c0 11-9 20-20 20H76c-11 0-20-9-20-20V76c0-11 9-20 20-20z"/><circle cx="120" cy="120" r="42" fill="none" stroke="#fff" stroke-width="18"/><circle cx="166" cy="74" r="12" fill="#fff"/></svg><span>Instagram @dar_at_tawhid</span></a>
+        <a class="chip social-chip telegram-chip" href="https://t.me/dar_al_tauhid" target="_blank"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="120" fill="#2AABEE"/><path fill="#fff" d="M179.7 74.8 157.1 181.4c-1.7 7.5-6.1 9.4-12.4 5.9l-34.3-25.3-16.5 15.9c-1.8 1.8-3.4 3.4-6.9 3.4l2.5-35.1 63.9-57.7c2.8-2.5-.6-3.9-4.3-1.4l-79 49.7-34-10.6c-7.4-2.3-7.5-7.4 1.5-10.9L171 64.1c6.2-2.3 11.6 1.5 8.7 10.7z"/></svg><span>Telegram @dar_al_tauhid</span></a>
+        <a class="chip social-chip instagram-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><defs><radialGradient id="igGradientMain" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="240" height="240" rx="54" fill="url(#igGradientMain)"/><path fill="none" stroke="#fff" stroke-width="18" d="M76 56h88c11 0 20 9 20 20v88c0 11-9 20-20 20H76c-11 0-20-9-20-20V76c0-11 9-20 20-20z"/><circle cx="120" cy="120" r="42" fill="none" stroke="#fff" stroke-width="18"/><circle cx="166" cy="74" r="12" fill="#fff"/></svg><span>Instagram @dar_at_tawhid</span></a>
       </nav>
     </div>
     <p>Willkommen bei DAR AL TAWHID. Hier findest du ausgewählte Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme – geordnet nach Gelehrten, Büchern, Themen und Hashtags.</p>
@@ -677,7 +708,9 @@ footer{
 <footer class="site">
   <strong>DAR AL TAWHID</strong><br>
   Folgt für mehr Wissen aus Qurʾān & Sunnah<br>
-  <span class="footer-social"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="120" fill="#2AABEE"/><path fill="#fff" d="M179.7 74.8 157.1 181.4c-1.7 7.5-6.1 9.4-12.4 5.9l-34.3-25.3-16.5 15.9c-1.8 1.8-3.4 3.4-6.9 3.4l2.5-35.1 63.9-57.7c2.8-2.5-.6-3.9-4.3-1.4l-79 49.7-34-10.6c-7.4-2.3-7.5-7.4 1.5-10.9L171 64.1c6.2-2.3 11.6 1.5 8.7 10.7z"/></svg><span>Telegram: @dar_al_tauhid</span></span> · <span class="footer-social"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><defs><radialGradient id="igRadial" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="240" height="240" rx="54" fill="url(#igRadial)"/><path fill="none" stroke="#fff" stroke-width="18" d="M76 56h88c11 0 20 9 20 20v88c0 11-9 20-20 20H76c-11 0-20-9-20-20V76c0-11 9-20 20-20z"/><circle cx="120" cy="120" r="42" fill="none" stroke="#fff" stroke-width="18"/><circle cx="166" cy="74" r="12" fill="#fff"/></svg><span>Instagram: @dar_at_tawhid</span></span><br>
+  <span class="footer-social"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="120" fill="#2AABEE"/><path fill="#fff" d="M179.7 74.8 157.1 181.4c-1.7 7.5-6.1 9.4-12.4 5.9l-34.3-25.3-16.5 15.9c-1.8 1.8-3.4 3.4-6.9 3.4l2.5-35.1 63.9-57.7c2.8-2.5-.6-3.9-4.3-1.4l-79 49.7-34-10.6c-7.4-2.3-7.5-7.4 1.5-10.9L171 64.1c6.2-2.3 11.6 1.5 8.7 10.7z"/></svg><span>Telegram: @dar_al_tauhid</span></span>
+  <span class="footer-dot">·</span>
+  <span class="footer-social"><svg class="social-icon" viewBox="0 0 240 240" aria-hidden="true"><defs><radialGradient id="igGradientMain" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="240" height="240" rx="54" fill="url(#igGradientMain)"/><path fill="none" stroke="#fff" stroke-width="18" d="M76 56h88c11 0 20 9 20 20v88c0 11-9 20-20 20H76c-11 0-20-9-20-20V76c0-11 9-20 20-20z"/><circle cx="120" cy="120" r="42" fill="none" stroke="#fff" stroke-width="18"/><circle cx="166" cy="74" r="12" fill="#fff"/></svg><span>Instagram: @dar_at_tawhid</span></span><br>
   <span class="signature">by Serhat Abu Malik</span>
 </footer>
 
@@ -831,14 +864,102 @@ function render(){
   renderPosts();
 }
 
+
+const GITHUB_POSTS_API = "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/content/posts?ref=main";
+
+function parseFrontmatterValue(v){
+  v = String(v || "").trim();
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) return v.slice(1, -1);
+  return v;
+}
+
+function parseMarkdownPost(text, filename){
+  const match = text.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/);
+  if (!match) {
+    return {id: filename.replace(/\.md$/,""),date:"",title:filename.replace(/\.md$/,""),category:"Allgemein",topic:"Allgemein",scholar:"Unbekannt",book:"",tags:[],source:"",links:[],logo:"logo-black.png",statement:text.trim()};
+  }
+  const yaml = match[1].split(/\r?\n/);
+  const body = match[2].trim();
+  const data = {};
+  let currentKey = null;
+  let currentObj = null;
+
+  for (const rawLine of yaml) {
+    const line = rawLine.replace(/\r/g,"");
+    if (!line.trim()) continue;
+
+    const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (keyMatch) {
+      currentKey = keyMatch[1];
+      const val = keyMatch[2].trim();
+      if (val === "") data[currentKey] = (currentKey === "tags" || currentKey === "links") ? [] : "";
+      else data[currentKey] = parseFrontmatterValue(val);
+      currentObj = null;
+      continue;
+    }
+
+    const listMatch = line.match(/^\s*-\s*(.*)$/);
+    if (listMatch && currentKey) {
+      const item = listMatch[1].trim();
+      if (!Array.isArray(data[currentKey])) data[currentKey] = [];
+      if (item.includes(":") && currentKey === "links") {
+        currentObj = {};
+        const m = item.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+        if (m) currentObj[m[1]] = parseFrontmatterValue(m[2]);
+        data[currentKey].push(currentObj);
+      } else {
+        data[currentKey].push(parseFrontmatterValue(item));
+        currentObj = null;
+      }
+      continue;
+    }
+
+    const objProp = line.match(/^\s+([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (objProp && currentObj) currentObj[objProp[1]] = parseFrontmatterValue(objProp[2]);
+  }
+
+  return {
+    id: data.id || filename.replace(/\.md$/,""),
+    date: data.date || "",
+    title: data.title || filename.replace(/\.md$/,""),
+    category: data.category || "Allgemein",
+    topic: data.topic || "Allgemein",
+    scholar: data.scholar || "Unbekannt",
+    book: data.book || "",
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    source: data.source || "",
+    links: Array.isArray(data.links) ? data.links : [],
+    logo: data.logo || "logo-black.png",
+    statement: body
+  };
+}
+
+async function loadMarkdownPostsFromGitHub(){
+  const listResponse = await fetch(GITHUB_POSTS_API, {cache:"no-store"});
+  if (!listResponse.ok) throw new Error("GitHub posts list could not be loaded");
+  const files = await listResponse.json();
+  const markdownFiles = files.filter(file => file.type === "file" && file.name.endsWith(".md")).sort((a,b)=>b.name.localeCompare(a.name));
+  const loaded = await Promise.all(markdownFiles.map(async file => {
+    const raw = await fetch(file.download_url + "?v=" + Date.now(), {cache:"no-store"});
+    const text = await raw.text();
+    return parseMarkdownPost(text, file.name);
+  }));
+  return loaded.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
+}
+
 async function load(){
   try{
-    posts=await (await fetch("posts.json",{cache:"no-store"})).json();
+    posts = await loadMarkdownPostsFromGitHub();
   }catch(e){
-    posts=[];
+    try{
+      posts = await (await fetch("posts.json",{cache:"no-store"})).json();
+    }catch(err){
+      posts = [];
+    }
   }
   render();
 }
+
 
 $("searchInput").oninput=render;
 $("resetFilters").onclick=()=>{
