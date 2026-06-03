@@ -812,14 +812,131 @@ function render(){
   renderPosts();
 }
 
+
+const GITHUB_POSTS_API = "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/content/posts?ref=main";
+
+function parseFrontmatterValue(v){
+  v = String(v || "").trim();
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+    return v.slice(1, -1);
+  }
+  return v;
+}
+
+function parseMarkdownPost(text, filename){
+  const match = text.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/);
+  if (!match) {
+    return {
+      id: filename.replace(/\.md$/,""),
+      date: "",
+      title: filename.replace(/\.md$/,""),
+      category: "Allgemein",
+      topic: "Allgemein",
+      scholar: "Unbekannt",
+      book: "",
+      tags: [],
+      source: "",
+      links: [],
+      logo: "logo-black.png",
+      statement: text.trim()
+    };
+  }
+
+  const yaml = match[1].split(/\r?\n/);
+  const body = match[2].trim();
+  const data = {};
+  let currentKey = null;
+  let currentObj = null;
+
+  for (const rawLine of yaml) {
+    const line = rawLine.replace(/\r/g, "");
+    if (!line.trim()) continue;
+
+    const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (keyMatch) {
+      currentKey = keyMatch[1];
+      let val = keyMatch[2].trim();
+
+      if (val === "") {
+        if (currentKey === "tags" || currentKey === "links") data[currentKey] = [];
+        else data[currentKey] = "";
+      } else {
+        data[currentKey] = parseFrontmatterValue(val);
+      }
+      currentObj = null;
+      continue;
+    }
+
+    const listMatch = line.match(/^\s*-\s*(.*)$/);
+    if (listMatch && currentKey) {
+      const item = listMatch[1].trim();
+      if (!Array.isArray(data[currentKey])) data[currentKey] = [];
+
+      if (item.includes(":") && currentKey === "links") {
+        currentObj = {};
+        const m = item.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+        if (m) currentObj[m[1]] = parseFrontmatterValue(m[2]);
+        data[currentKey].push(currentObj);
+      } else {
+        data[currentKey].push(parseFrontmatterValue(item));
+        currentObj = null;
+      }
+      continue;
+    }
+
+    const objProp = line.match(/^\s+([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (objProp && currentObj) {
+      currentObj[objProp[1]] = parseFrontmatterValue(objProp[2]);
+    }
+  }
+
+  return {
+    id: data.id || filename.replace(/\.md$/,""),
+    date: data.date || "",
+    title: data.title || filename.replace(/\.md$/,""),
+    category: data.category || "Allgemein",
+    topic: data.topic || "Allgemein",
+    scholar: data.scholar || "Unbekannt",
+    book: data.book || "",
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    source: data.source || "",
+    links: Array.isArray(data.links) ? data.links : [],
+    logo: data.logo || "logo-black.png",
+    statement: body
+  };
+}
+
+async function loadMarkdownPostsFromGitHub(){
+  const listResponse = await fetch(GITHUB_POSTS_API, {cache:"no-store"});
+  if (!listResponse.ok) throw new Error("GitHub posts list could not be loaded");
+  const files = await listResponse.json();
+
+  const markdownFiles = files
+    .filter(file => file.type === "file" && file.name.endsWith(".md"))
+    .sort((a,b) => b.name.localeCompare(a.name));
+
+  const loaded = await Promise.all(markdownFiles.map(async file => {
+    const raw = await fetch(file.download_url + "?v=" + Date.now(), {cache:"no-store"});
+    const text = await raw.text();
+    return parseMarkdownPost(text, file.name);
+  }));
+
+  return loaded.sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
 async function load(){
   try{
-    posts=await (await fetch("posts.json",{cache:"no-store"})).json();
+    posts = await loadMarkdownPostsFromGitHub();
   }catch(e){
-    posts=[];
+    try{
+      posts = await (await fetch("posts.json",{cache:"no-store"})).json();
+    }catch(err){
+      posts = [];
+    }
   }
   render();
 }
+
 
 $("searchInput").oninput=render;
 $("resetFilters").onclick=()=>{
