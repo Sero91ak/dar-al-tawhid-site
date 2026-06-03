@@ -1,0 +1,27 @@
+{
+  "name": "DAR AL TAWHID",
+  "short_name": "DAR AL TAWHID",
+  "description": "Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07100b",
+  "theme_color": "#07100b",
+  "lang": "de",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "logo-black.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo-black.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
