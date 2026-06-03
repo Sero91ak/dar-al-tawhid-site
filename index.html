@@ -556,6 +556,58 @@ footer{
   .detail-title{font-size:27px}
 }
 </style>
+
+<style id="dar-final-archive-style">
+.site{width:min(1600px,calc(100% - 28px))!important}
+.hero{padding:18px 24px!important}
+.hero p{font-size:13px!important;line-height:1.5!important;margin-top:11px!important}
+h1{font-size:clamp(31px,4vw,56px)!important;line-height:.92!important}
+.brand small{font-size:10px!important;margin-bottom:4px!important}
+.chip,button{font-size:11.5px!important;padding:6px 10px!important}
+.isnad-line-card{
+  position:relative!important;
+  overflow:hidden!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  background:linear-gradient(145deg,rgba(16,27,20,.88),rgba(7,12,9,.95))!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.28)!important;
+  padding:8px 14px!important;
+  margin:0 auto 11px!important;
+}
+.isnad-line-card:before{content:"";position:absolute;inset:7px;border:1px solid rgba(215,184,108,.16);border-radius:10px;pointer-events:none}
+.isnad-line-inner{position:relative;z-index:2;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;width:100%}
+.isnad-text{min-width:0;flex:1 1 auto;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;font-family:var(--serif);color:#fff9e8;font-size:clamp(15.5px,1vw,17.5px)!important;line-height:1.15!important}
+.isnad-text .label{color:var(--muted);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:9.5px!important;letter-spacing:.12em;text-transform:uppercase;font-weight:900;margin-right:7px}
+.isnad-text strong{color:var(--gold2);font-style:italic;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.isnad-source{flex:0 0 auto;max-width:360px;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;text-align:right;color:var(--muted);font-size:9.5px!important;line-height:1.15!important}
+.grid{grid-template-columns:220px 1fr!important;gap:12px!important;padding:12px 0 32px!important}
+aside{padding:11px!important}
+h2{font-size:22px!important}h3{font-size:16px!important}
+.search{font-size:12px!important;padding:8px!important;margin-bottom:8px!important}
+.group{padding-top:8px!important;margin-top:8px!important}
+.list-buttons button,.list button{font-size:10.5px!important;padding:5px 7px!important}
+.panel{padding:11px!important;margin-bottom:12px!important}
+.stats{gap:8px!important}.stat{padding:8px 10px!important}.stat b{font-size:18px!important}.stat span{font-size:10.5px!important}
+.posts{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+.post-card,.card{padding:13px!important;min-height:190px!important}
+.post-logo,.card-logo{width:min(170px,68%)!important;opacity:.038!important}
+.card-title,.card h2{font-size:clamp(18.5px,1.25vw,22px)!important;line-height:1.03!important;margin-bottom:6px!important;-webkit-line-clamp:3!important}
+.badge{font-size:9.5px!important;padding:3px 6px!important}
+.excerpt{font-size:14.8px!important;line-height:1.30!important;margin:7px 0!important;-webkit-line-clamp:2!important}
+.card-source{font-size:9px!important;line-height:1.25!important;padding-top:7px!important;margin-top:7px!important;-webkit-line-clamp:2!important}
+.open-btn,.open{font-size:10.5px!important;padding:5px 9px!important}
+.detail-view,.modal-card{max-width:720px!important;padding:clamp(17px,2.5vw,30px)!important}
+.detail-title,.modal-title{font-size:clamp(24px,3vw,36px)!important;line-height:1.04!important}
+.statement{font-size:clamp(17.5px,1.7vw,22px)!important;line-height:1.48!important;max-width:660px!important;margin:12px auto!important}
+.source{font-size:11px!important;line-height:1.42!important;padding-top:9px!important;margin-top:11px!important}
+.source-links a{font-size:10.5px!important;padding:5px 8px!important}
+footer{font-size:12px!important;padding:20px 0 32px!important}.signature,.sig{font-size:27px!important}
+@media(max-width:1360px){.posts{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:1050px){.grid{grid-template-columns:205px 1fr!important}.posts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){.site{width:min(100% - 18px,1600px)!important}.grid{grid-template-columns:1fr!important}aside{position:static!important}.stats{grid-template-columns:repeat(2,1fr)!important}.posts{grid-template-columns:1fr!important}.hero{padding:17px!important}.links{width:100%!important}.isnad-line-inner{display:block!important}.isnad-text{white-space:normal!important;display:block!important;font-size:16.5px!important}.isnad-source{max-width:none!important;white-space:normal!important;text-align:left!important;margin-top:5px!important}}
+@media(max-width:480px){.stats{grid-template-columns:1fr!important}h1{font-size:31px!important}.hero p{font-size:12.8px!important}.card-title,.card h2{font-size:21px!important}.statement{font-size:17.5px!important}.detail-title,.modal-title{font-size:26px!important}}
+</style>
+
 </head>
 
 <body>
@@ -576,12 +628,14 @@ footer{
   </section>
 </header>
 
+
 <section class="site isnad-line-card">
   <div class="isnad-line-inner">
     <div class="isnad-text"><span class="label">Maßstab der Überlieferung:</span> 🖋️ <strong>Ibn Sīrīn</strong> sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div>
     <div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div>
   </div>
 </section>
+
 
 <main class="site grid">
   <aside>
