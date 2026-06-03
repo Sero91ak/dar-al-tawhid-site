@@ -1,9 +1,14 @@
-const CACHE_NAME = "dar-al-tawhid-cache-v1";
+const CACHE_NAME = "dar-al-tawhid-pwa-v2";
 const FILES_TO_CACHE = [
   "./",
   "index.html",
   "posts.json",
   "manifest.json",
+  "app-icon-192.png",
+  "app-icon-512.png",
+  "apple-touch-icon.png",
+  "favicon-32.png",
+  "favicon-16.png",
   "logo-black.png",
   "logo-blue.png",
   "logo-cream.jpg"
@@ -26,16 +31,14 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  const request = event.request;
-  if (request.method !== "GET") return;
-
+  if (event.request.method !== "GET") return;
   event.respondWith(
-    fetch(request)
+    fetch(event.request)
       .then(response => {
         const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).catch(() => {});
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => {});
         return response;
       })
-      .catch(() => caches.match(request).then(cached => cached || caches.match("index.html")))
+      .catch(() => caches.match(event.request).then(cached => cached || caches.match("index.html")))
   );
 });
