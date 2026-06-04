@@ -727,6 +727,104 @@ footer{
 }
 </style>
 
+
+<style id="collapsible-filter-nav">
+/* Platzsparende Navigation: Gelehrte/Bücher/Themen/Hashtags aufklappbar */
+.filter-section{
+  border-top:1px solid rgba(215,184,108,.16);
+  padding-top:8px;
+  margin-top:8px;
+}
+
+.filter-section summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--gold2);
+  font-family:var(--serif);
+  font-size:17px;
+  font-weight:700;
+  line-height:1.15;
+  padding:4px 0 7px;
+}
+
+.filter-section summary::-webkit-details-marker{
+  display:none;
+}
+
+.filter-section summary::after{
+  content:"＋";
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+  border:1px solid rgba(215,184,108,.25);
+  width:23px;
+  height:23px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(215,184,108,.06);
+  flex:0 0 auto;
+}
+
+.filter-section[open] summary::after{
+  content:"−";
+  color:var(--gold2);
+}
+
+.filter-section .list-buttons{
+  padding:2px 0 3px;
+  max-height:230px;
+  overflow:auto;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(215,184,108,.35) transparent;
+}
+
+.filter-section .list-buttons::-webkit-scrollbar{
+  width:5px;
+}
+
+.filter-section .list-buttons::-webkit-scrollbar-thumb{
+  background:rgba(215,184,108,.30);
+  border-radius:999px;
+}
+
+.reset-group{
+  padding-top:9px!important;
+  margin-top:9px!important;
+}
+
+@media(max-width:760px){
+  aside{
+    padding:10px!important;
+  }
+
+  .filter-section{
+    padding-top:6px;
+    margin-top:6px;
+  }
+
+  .filter-section summary{
+    font-size:16px;
+    padding:3px 0 6px;
+  }
+
+  .filter-section .list-buttons{
+    max-height:165px;
+  }
+
+  .list-buttons button{
+    font-size:10.5px!important;
+    padding:5px 8px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -770,11 +868,28 @@ footer{
   <aside>
     <h2>Navigation</h2>
     <input id="searchInput" class="search" type="search" placeholder="Freie Suche…">
-    <div class="group"><h3>Gelehrte</h3><div id="scholarList" class="list-buttons"></div></div>
-    <div class="group"><h3>Bücher</h3><div id="bookList" class="list-buttons"></div></div>
-    <div class="group"><h3>Themen</h3><div id="topicList" class="list-buttons"></div></div>
-    <div class="group"><h3>Hashtags</h3><div id="tagList" class="list-buttons"></div></div>
-    <div class="group"><button id="resetFilters">Alles anzeigen</button></div>
+
+    <details class="filter-section" open>
+      <summary>Gelehrte</summary>
+      <div id="scholarList" class="list-buttons"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Bücher</summary>
+      <div id="bookList" class="list-buttons"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Themen</summary>
+      <div id="topicList" class="list-buttons"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Hashtags</summary>
+      <div id="tagList" class="list-buttons"></div>
+    </details>
+
+    <div class="group reset-group"><button id="resetFilters">Alles anzeigen</button></div>
   </aside>
 
   <section>
