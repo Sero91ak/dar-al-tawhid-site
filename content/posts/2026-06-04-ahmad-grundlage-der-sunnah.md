@@ -19,11 +19,9 @@ links:
 logo: "logo-black.png"
 ---
 
-🖋️ **Aussage**
-
 🖋️ **Aḥmad ibn Ḥanbal** sagte:
 
-„Die Grundlagen der **Sunnah** bei uns sind: das Festhalten an dem, worauf die Gefährten des Gesandten Allahs ﷺ waren.“
+> ***„Die Grundlagen der <u>Sunnah</u> bei uns sind: das Festhalten an dem, worauf die Gefährten des Gesandten Allahs ﷺ waren.“***
 
 👉🏼 **Erklärung**
 
@@ -31,4 +29,4 @@ Diese Aussage legt den Maßstab klar fest: **Aqīdah** und **Manhaj** werden nic
 
 Die frühen Imāme machten deutlich: Wer die Wahrheit sucht, schaut zuerst auf den **Qurʾān**, dann auf die **Sunnah**, dann auf das Verständnis und die Spuren der **Gefährten**. Genau darin liegt Sicherheit vor Abweichung und Neuerung.
 
-🌙 **Fazit:** Die Grundlage der **Ahlus-Sunnah** ist nicht bloße Behauptung, sondern ***Festhalten an dem Weg der Ṣaḥābah*** und an der überlieferten **Sunnah**.
+🌙 **Fazit:** Die Grundlage der **Ahlus-Sunnah** ist nicht bloße Behauptung, sondern ***<u>Festhalten an dem Weg der Ṣaḥābah</u>*** und an der überlieferten **Sunnah**.
