@@ -1,6 +1,6 @@
 ---
 id: "ahmad-grundlage-der-sunnah-001"
-date: "2026-06-04T00:00:00.000Z"
+date: "2026-06-05T00:00:00.000Z"
 title: "📖 Die Grundlage der Sunnah"
 category: "Aqīdah"
 topic: "Ṣaḥābah und Manhaj"
@@ -15,7 +15,7 @@ tags:
 source: "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah, Bāb: Iʿtiqād Aḥmad ibn Ḥanbal, Athar Nr. 317, Band 1, S. 176."
 links:
   - label: "→ Islamweb"
-    url: "https://www.islamweb.net/ar/library/content/110/32/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%AD%D9%85%D8%AF-%D8%A8%D9%86-%D8%AD%D9%86%D8%A8%D9%84#:~:text=%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D8%B9%D9%86%D8%AF%D9%86%D8%A7%20%D8%A7%D9%84%D8%AA%D9%85%D8%B3%D9%83%20%D8%A8%D9%85%D8%A7%20%D9%83%D8%A7%D9%86%20%D8%B9%D9%84%D9%8A%D9%87%20%D8%A3%D8%B5%D8%AD%D8%A7%D8%A8%20%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D9%84%D9%87"
+    url: "https://www.islamweb.net/ar/library/content/110/32/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%AD%D9%85%D8%AF-%D8%A8%D9%86-%D8%AD%D9%86%D8%A8%D9%84#:~:text=%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D8%B9%D9%86%D8%AF%D9%86%D8%A7,%D8%A3%D8%B5%D8%AD%D8%A7%D8%A8%20%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D9%84%D9%87"
 logo: "logo-black.png"
 ---
 
