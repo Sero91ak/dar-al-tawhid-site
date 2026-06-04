@@ -34,18 +34,29 @@
       min-height:100vh;
     }
 
-    /* ALTES WASSERZEICHEN KOMPLETT AUS */
+    /* Hintergrund-/Wasserzeichen-Logo komplett ausgeschaltet */
     body::before,
     body::after,
     .watermark,
     .background-watermark,
     .bg-watermark,
     .logo-watermark,
-    .site-watermark{
+    .site-watermark,
+    .page-watermark,
+    .main-watermark,
+    .watermark-bg,
+    .background-logo,
+    .bg-logo,
+    [class*="watermark"],
+    [class*="Watermark"],
+    [id*="watermark"],
+    [id*="Watermark"]{
       display:none!important;
       opacity:0!important;
+      visibility:hidden!important;
       background-image:none!important;
       content:none!important;
+      pointer-events:none!important;
     }
 
     a{color:inherit}
@@ -419,9 +430,6 @@
     }
 
     async function loadMarkdownPosts(){
-      // Browser können Ordner nicht automatisch auflisten.
-      // Darum: Für einzelne .md-Dateien bitte content/posts/posts-manifest.json anlegen:
-      // ["al-fudayl-bidah-unterstuetzen.md", "zweiter-beitrag.md"]
       try{
         const res = await fetch("content/posts/posts-manifest.json?cache=" + Date.now());
         if(!res.ok) return [];
