@@ -1,14 +1,16 @@
-const CACHE_NAME = "dar-al-tawhid-pwa-v2";
+const CACHE_NAME = "dar-al-tawhid-pwa-share-v1";
 const FILES_TO_CACHE = [
   "./",
   "index.html",
   "posts.json",
   "manifest.json",
+  "service-worker.js",
   "app-icon-192.png",
   "app-icon-512.png",
   "apple-touch-icon.png",
   "favicon-32.png",
   "favicon-16.png",
+  "app-share-image.png",
   "logo-black.png",
   "logo-blue.png",
   "logo-cream.jpg"

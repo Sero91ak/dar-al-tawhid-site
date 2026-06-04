@@ -588,15 +588,6 @@ footer{
 
 </style>
 
-<meta name="theme-color" content="#07100b">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="DAR AL TAWHID">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="logo-black.png">
-
-
 <style id="article-reading-fix">
 .detail-overlay,.overlay{padding:18px 12px!important}
 .detail-view,.modal-card{max-width:920px!important;width:min(920px,calc(100vw - 28px))!important;padding:clamp(18px,2.4vw,34px)!important}
@@ -700,6 +691,42 @@ footer{
 }
 </style>
 
+<meta name="theme-color" content="#07100b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DAR AL TAWḤID">
+<meta property="og:title" content="DAR AL TAWḤID">
+<meta property="og:description" content="Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme.">
+<meta property="og:image" content="https://sero91ak.github.io/dar-al-tawhid-site/app-share-image.png">
+<meta property="og:url" content="https://sero91ak.github.io/dar-al-tawhid-site/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DAR AL TAWḤID">
+<meta name="twitter:description" content="Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme.">
+<meta name="twitter:image" content="https://sero91ak.github.io/dar-al-tawhid-site/app-share-image.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+
+
+<style id="post-share-button-style">
+.share-post-btn{
+  border:1px solid rgba(215,184,108,.30);
+  border-radius:999px;
+  background:rgba(215,184,108,.11);
+  color:var(--gold2);
+  padding:7px 11px;
+  font-size:11.5px;
+  font-weight:800;
+}
+.share-post-btn:hover{
+  background:rgba(215,184,108,.20);
+}
+</style>
+
 </head>
 
 <body>
@@ -769,6 +796,7 @@ footer{
     <img id="detailLogo" class="post-logo" src="logo-black.png" alt="Logo">
     <div class="close-row">
       <button id="backBtn">← Zur Übersicht</button>
+      <button id="sharePostBtn" class="share-post-btn">Beitrag teilen</button>
       <button id="closeBtn">Schließen</button>
     </div>
     <h2 id="detailTitle" class="detail-title"></h2>
@@ -791,6 +819,7 @@ footer{
 
 <script>
 let posts=[];
+let currentPost=null;
 let active={type:"all",value:"Alle"};
 const $=id=>document.getElementById(id);
 
@@ -915,7 +944,8 @@ function renderPosts(){
 }
 
 function openPost(p){
-  $("detailLogo").src=p.logo||"logo-black.png";
+  currentPost=p;
+$("detailLogo").src=p.logo||"logo-black.png";
   $("detailTitle").textContent=p.title||"";
   $("detailMeta").innerHTML=`<span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span><span class="badge">${esc(p.topic||"")}</span>`+(p.tags||[]).slice(0,5).map(t=>`<span class="badge">${esc(t)}</span>`).join("");
   $("detailStatement").innerHTML=formatStatement(p.statement||"");
@@ -926,6 +956,38 @@ function openPost(p){
 
 function closePost(){
   $("detailOverlay").classList.remove("active");
+}
+
+
+function cleanShareText(s=""){
+  return String(s)
+    .replace(/\*\*(.*?)\*\*/g,"$1")
+    .replace(/\*(.*?)\*/g,"$1")
+    .replace(/\n{3,}/g,"\n\n")
+    .trim();
+}
+
+async function shareCurrentPost(){
+  if(!currentPost) return;
+  const title = currentPost.title || "DAR AL TAWḤID";
+  const text = cleanShareText(currentPost.statement || "").slice(0, 900);
+  const url = location.origin + location.pathname + "?post=" + encodeURIComponent(currentPost.id || "");
+  const shareData = { title, text, url };
+
+  if(navigator.share){
+    try{
+      await navigator.share(shareData);
+      return;
+    }catch(e){}
+  }
+
+  const fallback = title + "\n\n" + text + "\n\n" + url;
+  try{
+    await navigator.clipboard.writeText(fallback);
+    alert("Beitrag wurde kopiert. Du kannst ihn jetzt in WhatsApp, Telegram oder Instagram einfügen.");
+  }catch(e){
+    prompt("Kopiere den Beitrag:", fallback);
+  }
 }
 
 function renderStats(){
@@ -957,6 +1019,7 @@ $("resetFilters").onclick=()=>{
   render();
 };
 $("closeBtn").onclick=closePost;
+$("sharePostBtn").onclick=shareCurrentPost;
 $("backBtn").onclick=closePost;
 $("detailOverlay").onclick=e=>{if(e.target.id==="detailOverlay")closePost()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePost()});
