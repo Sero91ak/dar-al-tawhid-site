@@ -19,15 +19,15 @@ links:
 logo: "logo-black.png"
 ---
 
-🖋️ **Aussage**
-
 🖋️ **al-Awzāʿī** sagte:
 
-„Halte dich selbst an die **Sunnah**, bleib dort stehen, wo die Leute stehen geblieben sind, sprich mit dem, womit sie gesprochen haben, und halte dich zurück von dem, wovon sie sich zurückgehalten haben. Folge dem Weg deiner rechtschaffenen Vorgänger, denn dir genügt, was ihnen genügte.“
+> ***„Halte dich selbst an die <u>Sunnah</u>, bleib dort stehen, wo die Leute stehen geblieben sind, sprich mit dem, womit sie gesprochen haben, und halte dich zurück von dem, wovon sie sich zurückgehalten haben.“***
+
+> ***„Folge dem Weg deiner rechtschaffenen Vorgänger, denn dir genügt, was ihnen genügte.“***
 
 👉🏼 **Erklärung**
 
-Diese Aussage zeigt einen gewaltigen Grundsatz: Die Religion wird nicht durch **neue Methoden**, **Streitlust** oder persönliche Ausschmückung geschützt, sondern durch ***Festhalten an der Sunnah***, **Zurückhaltung** und **Befolgung der frühen Imāme**.
+Diese Aussage zeigt einen großen Grundsatz: Die Religion wird nicht durch **neue Methoden**, **Streitlust** oder persönliche Ausschmückung geschützt, sondern durch ***Festhalten an der Sunnah***, **Zurückhaltung** und **Befolgung der frühen Imāme**.
 
 Wer bei der **Sunnah** stehen bleibt, steht dort, wo die frühen Generationen standen. Und wer meint, die späteren Menschen bräuchten etwas, das den ersten Generationen nicht genügte, öffnet eine Tür zur **Bidʿah**.
 
