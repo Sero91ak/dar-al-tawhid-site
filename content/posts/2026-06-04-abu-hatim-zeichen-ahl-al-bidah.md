@@ -19,11 +19,9 @@ links:
 logo: "logo-black.png"
 ---
 
-🖋️ **Aussage**
-
 🖋️ **Abū Ḥātim ar-Rāzī** sagte:
 
-„Das Zeichen der **Ahl al-Bidʿah** ist das Herabsetzen der **Leute des Athar**.“
+> ***„Das Zeichen der <u>Ahl al-Bidʿah</u> ist das Herabsetzen der <u>Leute des Athar</u>.“***
 
 👉🏼 **Erklärung**
 
