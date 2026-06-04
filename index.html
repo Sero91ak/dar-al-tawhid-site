@@ -46,9 +46,97 @@ footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--saf
 const REPO_OWNER="Sero91ak",REPO_NAME="dar-al-tawhid-site",POSTS_DIR="content/posts",BRANCH="main";
 let posts=[],active={type:"all",value:"Alle"},currentPost=null;
 const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])),stripMd=s=>String(s??"").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"");
+
+function getPostUrl(post){
+  const url = new URL(location.origin + location.pathname);
+  if(post && post.id){
+    url.searchParams.set("post", post.id);
+  }
+  return url.toString();
+}
+
+async function shareCurrentPost(){
+  if(!currentPost) return;
+
+  const postUrl = getPostUrl(currentPost);
+  const text =
+    (currentPost.title || "") + "\n\n" +
+    stripMd(currentPost.statement || "") + "\n\n" +
+    postUrl;
+
+  if(navigator.share){
+    try{
+      await navigator.share({
+        title: currentPost.title || "DAR AL TAWḤID",
+        text: text,
+        url: postUrl
+      });
+      return;
+    }catch(e){
+      if(e && (e.name === "AbortError" || e.name === "NotAllowedError")) return;
+    }
+
+    try{
+      await navigator.share({
+        title: currentPost.title || "DAR AL TAWḤID",
+        text: text
+      });
+      return;
+    }catch(e2){
+      if(e2 && (e2.name === "AbortError" || e2.name === "NotAllowedError")) return;
+    }
+  }
+
+  try{
+    await navigator.clipboard.writeText(text);
+    alert("Beitrag-Link wurde kopiert.");
+  }catch(e){
+    prompt("Kopiere den Beitrag:", text);
+  }
+}
+
+function openPostFromUrl(){
+  const params = new URLSearchParams(location.search);
+  const postId = params.get("post");
+  if(!postId) return false;
+
+  const found = posts.find(p => String(p.id) === String(postId));
+  if(found){
+    active = {type:"all", value:"Alle"};
+    const input = document.getElementById("searchInput");
+    if(input) input.value = "";
+    render();
+    setTimeout(() => openPost(found, true), 80);
+    return true;
+  }
+  return false;
+}
+
 function parseValue(v){v=String(v||"").trim();if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v}
-function parseFM(md,name){let fm={},body=md;const m=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(m){body=m[2]||"";const lines=m[1].split(/\r?\n/);let current=null;for(const line of lines){let km=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(km){current=km[1];let val=km[2].trim();fm[current]=val===""?[]:parseValue(val);continue}let am=line.match(/^\s*-\s*(.*)$/);if(am&&current){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(am[1]))}}const lb=m[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(lb){const links=[];let item=null;lb[1].split(/\r?\n/).forEach(line=>{let lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={label:parseValue(lm[1]),url:""};links.push(item);return}lm=line.match(/^\s*url:\s*(.*)$/);if(lm&&item)item.url=parseValue(lm[1])});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:(fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[]);return{id:fm.id||name.replace(/\.md$/,""),date:fm.date||"",title:fm.title||name.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],statement:body.trim()}}
-async function loadPosts(){const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;const res=await fetch(api,{cache:"no-store"});if(!res.ok)throw new Error("GitHub API konnte content/posts nicht laden");const files=await res.json();const md=files.filter(f=>f.type==="file"&&f.name.endsWith(".md"));posts=await Promise.all(md.map(async f=>{const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${f.name}`;const r=await fetch(raw,{cache:"no-store"});return parseFM(await r.text(),f.name)}));posts.sort((a,b)=>String(b.date).localeCompare(String(a.date)))}
+
+function cleanBodyText(body){
+  let s = String(body || "");
+
+  // Ganze Markdown-Link-Zeilen entfernen, z.B. [→ Islamweb](https://...)
+  s = s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi, "");
+
+  // Einzelne rohe URL-Zeilen entfernen
+  s = s.replace(/^\s*https?:\/\/\S+\s*$/gmi, "");
+
+  // Falls ein Markdown-Link mitten im Text steht: nur Label behalten, URL entfernen
+  s = s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, "$1");
+
+  // Extrem lange sichtbare URL-Fragmente entfernen
+  s = s.replace(/https?:\/\/\S+/g, "");
+
+  // Doppelte Leerzeilen aufräumen
+  s = s.replace(/\n{3,}/g, "\n\n").trim();
+
+  return s;
+}
+
+function parseFM(md,name){let fm={},body=md;const m=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(m){body=m[2]||"";const lines=m[1].split(/\r?\n/);let current=null;for(const line of lines){let km=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(km){current=km[1];let val=km[2].trim();fm[current]=val===""?[]:parseValue(val);continue}let am=line.match(/^\s*-\s*(.*)$/);if(am&&current){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(am[1]))}}const lb=m[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(lb){const links=[];let item=null;lb[1].split(/\r?\n/).forEach(line=>{let lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={label:parseValue(lm[1]),url:""};links.push(item);return}lm=line.match(/^\s*url:\s*(.*)$/);if(lm&&item)item.url=parseValue(lm[1])});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:(fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[]);return{id:fm.id||name.replace(/\.md$/,""),date:fm.date||"",title:fm.title||name.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],statement:cleanBodyText(body)}}
+async function loadPosts(){const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;const res=await fetch(api,{cache:"no-store"});if(!res.ok)throw new Error("GitHub API konnte content/posts nicht laden");const files=await res.json();const md=files.filter(f=>f.type==="file"&&f.name.endsWith(".md"));posts=await Promise.all(md.map(async f=>{const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${f.name}`;const r=await fetch(raw,{cache:"no-store"});return parseFM(await r.text(),f.name)}));posts = posts.map(p => ({...p, statement: cleanBodyText(p.statement)})); posts.sort((a,b)=>String(b.date).localeCompare(String(a.date)))}
 function countBy(k){const m=new Map();posts.forEach(p=>{const v=p[k]||"Unbekannt";m.set(v,(m.get(v)||0)+1)});return m}function countTags(){const m=new Map();posts.forEach(p=>(p.tags||[]).forEach(t=>m.set(t,(m.get(t)||0)+1)));return m}
 function buttonList(root,map,type){root.innerHTML="";const all=document.createElement("button");all.textContent=`Alle (${posts.length})`;all.className=active.type==="all"?"active":"";all.onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};root.appendChild(all);[...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de")).forEach(([name,count])=>{const b=document.createElement("button");b.textContent=`${name} (${count})`;b.className=active.type===type&&active.value===name?"active":"";b.onclick=()=>{active={type,value:name};render()};root.appendChild(b)})}
 function buildCats(){const root=$("categoryList");root.innerHTML="";const map=countBy("category");[...map.keys()].sort((a,b)=>a.localeCompare(b,"de")).forEach(k=>{const btn=document.createElement("button");btn.className="mobile-cat-btn"+(active.type==="category"&&active.value===k?" active":"");btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;btn.onclick=()=>{active={type:"category",value:k};$("searchInput").value="";render();$("posts").scrollIntoView({behavior:"smooth",block:"start"})};root.appendChild(btn)})}
@@ -57,10 +145,10 @@ function renderStats(){$("countPosts").textContent=posts.length;$("countScholars
 function renderLists(){buttonList($("scholarList"),countBy("scholar"),"scholar");buttonList($("bookList"),countBy("book"),"book");buttonList($("topicList"),countBy("topic"),"topic");buttonList($("tagList"),countTags(),"tag")}
 function renderPosts(){const root=$("posts");const filtered=posts.filter(matches);const cleanHome=active.type==="all"&&!$("searchInput").value.trim();document.body.classList.toggle("clean-home",cleanHome);$("homeNotice").style.display=cleanHome?"block":"none";root.innerHTML="";if(!posts.length){root.innerHTML='<div class="error-box">Keine Markdown-Beiträge gefunden. Prüfe content/posts.</div>';return}filtered.forEach(p=>{const el=document.createElement("article");el.className="post-card";const quote=stripMd(p.statement).split("\n").filter(Boolean).find(x=>x.includes("„"))||stripMd(p.statement).slice(0,180);el.innerHTML=`<div><h3>${esc(p.title)}</h3><div class="meta"><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.topic||"")}</span>${(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${esc(t)}</span>`).join("")}</div><div class="excerpt">${esc(quote)}</div><div class="source-preview">${esc(p.source||"")}</div></div><button class="open">Beitrag öffnen</button>`;el.querySelector(".open").onclick=()=>openPost(p);root.appendChild(el)})}
 function formatText(raw){return esc(raw).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/\n/g,"<br>")}
-function openPost(p){currentPost=p;$("modalTitle").textContent=p.title||"";$("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;$("modalStatement").innerHTML=formatText(p.statement||"");$("modalSource").textContent=p.source||"";$("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}">${esc(l.label||"Quelle")}</a>`).join("");$("modal").classList.add("opened");document.body.style.overflow="hidden"}
-function closePost(){$("modal").classList.remove("opened");document.body.style.overflow=""}function render(){renderStats();renderLists();buildCats();renderPosts()}
-$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};$("closeBtn").onclick=closePost;$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};$("shareBtn").onclick=async()=>{if(!currentPost)return;const text=(currentPost.title||"")+"\n\n"+stripMd(currentPost.statement||"");if(navigator.share){try{await navigator.share({title:currentPost.title,text,url:location.href});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Beitrag kopiert.")}catch(e){prompt("Kopiere:",text)}};
-(async()=>{try{await loadPosts();render()}catch(e){console.error(e);$("posts").innerHTML='<div class="error-box"><strong>Beiträge konnten nicht geladen werden.</strong><br>Prüfe, ob das Repository öffentlich ist und .md-Dateien unter content/posts liegen.</div>';renderStats()}})();
+function openPost(p, fromUrl=false){currentPost=p;if(!fromUrl){try{history.replaceState({post:p.id},'',getPostUrl(p));}catch(e){}}$("modalTitle").textContent=p.title||"";$("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;$("modalStatement").innerHTML=formatText(p.statement||"");$("modalSource").textContent=p.source||"";$("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}">${esc(l.label||"Quelle")}</a>`).join("");$("modal").classList.add("opened");document.body.style.overflow="hidden"}
+function closePost(){$("modal").classList.remove("opened");document.body.style.overflow="";try{history.replaceState({},"",location.origin+location.pathname)}catch(e){}}function render(){renderStats();renderLists();buildCats();renderPosts()}
+$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};$("closeBtn").onclick=closePost;$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};$("shareBtn").onclick=shareCurrentPost;
+(async()=>{try{await loadPosts();render();openPostFromUrl()}catch(e){console.error(e);$("posts").innerHTML='<div class="error-box"><strong>Beiträge konnten nicht geladen werden.</strong><br>Prüfe, ob das Repository öffentlich ist und .md-Dateien unter content/posts liegen.</div>';renderStats()}})();
 </script>
 </body>
 </html>
