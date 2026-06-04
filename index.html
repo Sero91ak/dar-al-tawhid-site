@@ -1180,6 +1180,67 @@ footer{
 }
 </style>
 
+
+<style id="mobile-start-clean-final">
+@media(max-width:760px){
+  .mobile-start-notice{
+    display:block;
+    border:1px dashed rgba(215,184,108,.26);
+    border-radius:14px;
+    background:rgba(16,27,20,.58);
+    color:var(--muted);
+    text-align:center;
+    font-size:12px;
+    line-height:1.45;
+    padding:14px 12px;
+    margin-top:8px;
+  }
+
+  .mobile-start-notice strong{
+    display:block;
+    color:var(--gold2);
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.15;
+    margin-bottom:5px;
+  }
+
+  body.mobile-home-clean #posts{
+    display:none!important;
+  }
+
+  body.mobile-home-clean .mobile-more-wrap{
+    display:none!important;
+  }
+
+  .mobile-app-head h2{
+    font-size:22px!important;
+  }
+
+  .mobile-app-head span{
+    font-size:10.5px!important;
+  }
+
+  .mobile-cat-btn{
+    min-height:58px!important;
+  }
+
+  .mobile-cat-btn b{
+    font-size:14px!important;
+  }
+
+  .mobile-cat-btn span{
+    font-size:10.5px!important;
+  }
+}
+
+@media(min-width:761px){
+  .mobile-start-notice{
+    display:none!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1260,13 +1321,19 @@ footer{
     
 <section class="mobile-app-home" id="mobileAppHome">
   <div class="mobile-app-head">
-    <h2>App-Übersicht</h2>
-    <span>Kompakt suchen und auswählen</span>
+    <h2>Wissensbereiche</h2>
+    <span>Nach Themen öffnen</span>
   </div>
   <div class="mobile-quick-cats" id="mobileQuickCats"></div>
 </section>
 
     <section id="posts" class="posts"></section>
+    
+<div id="mobileStartNotice" class="mobile-start-notice">
+  <strong>Wähle einen Wissensbereich</strong>
+  Öffne zuerst einen Bereich wie Hadith, Aqīdah oder Manhaj. Danach erscheinen die passenden Beiträge.
+</div>
+
     <div class="mobile-more-wrap"><button id="mobileShowMore" type="button">Mehr Beiträge anzeigen</button></div>
   </section>
 </main>
@@ -1509,10 +1576,18 @@ function buildMobileQuickCats(){
   }
 }
 
+
+function updateMobileHomeCleanState(){
+  const clean = isMobileAppView && isMobileAppView() && active.type==="all" && !($("searchInput")?.value || "").trim();
+  document.body.classList.toggle("mobile-home-clean", clean);
+}
+
 function applyMobilePostLimit(){
   const btn=document.getElementById("mobileShowMore");
   const cards=[...document.querySelectorAll("#posts > article")];
   if(!btn) return;
+  updateMobileHomeCleanState();
+  if(document.body.classList.contains("mobile-home-clean")){btn.style.display="none";return;}
   if(!isMobileAppView()){
     cards.forEach(c=>c.classList.remove("mobile-hidden-post"));
     btn.style.display="none";
@@ -1539,6 +1614,7 @@ function render(){
   buildMobileQuickCats();
   renderPosts();
   applyMobilePostLimit();
+  updateMobileHomeCleanState();
 }
 
 async function load(){
