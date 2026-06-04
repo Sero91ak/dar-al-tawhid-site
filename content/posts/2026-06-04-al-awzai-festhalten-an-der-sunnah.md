@@ -1,6 +1,6 @@
 ---
 id: "al-awzai-sunnah-athar-001"
-date: "2026-06-04T00:00:00.000Z"
+date: "2026-06-05T00:00:00.000Z"
 title: "📖 Halte dich an die Sunnah"
 category: "Aqīdah"
 topic: "Sunnah und Āthār"
@@ -31,6 +31,6 @@ Diese Aussage zeigt einen gewaltigen Grundsatz: Die Religion wird nicht durch **
 
 Wer bei der **Sunnah** stehen bleibt, steht dort, wo die frühen Generationen standen. Und wer meint, die späteren Menschen bräuchten etwas, das den ersten Generationen nicht genügte, öffnet eine Tür zur **Bidʿah**.
 
-Die Stärke dieser Aussage liegt darin, dass al-Awzāʿī nicht zu Neuerung, Sonderweg oder persönlicher Meinung ruft, sondern zur **Bindung an das Überlieferte**.
+Die Stärke dieser Aussage liegt darin, dass al-Awzāʿī nicht zu Sonderwegen ruft, sondern zur **Bindung an das Überlieferte**.
 
 🌙 **Fazit:** Wer Sicherheit im **Dīn** sucht, soll nicht jeder neuen Rede folgen, sondern dort bleiben, wo die Imāme der **Ahlus-Sunnah** standen: bei **Sunnah**, **Āthār** und dem Weg der frühen Generationen.
