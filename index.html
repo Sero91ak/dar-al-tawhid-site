@@ -826,391 +826,154 @@ footer{
 </style>
 
 
-<style id="mobile-app-view-final">
-/* Desktop bleibt Website-Ansicht. Diese Regeln greifen hauptsächlich auf Smartphone/App. */
-.mobile-app-home,
-.mobile-more-wrap{
-  display:none;
+
+<style id="knowledge-sections-web-mobile-final">
+/* Wissensbereiche für Web + App: Startseite sauber, Beiträge erst nach Auswahl */
+.mobile-app-home{
+  display:block!important;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(16,27,20,.86);
+  box-shadow:var(--shadow);
+  padding:12px;
+  margin-bottom:12px;
 }
 
-@media(max-width:760px){
-  body{
-    background:
-      radial-gradient(circle at 10% 0%,rgba(215,184,108,.12),transparent 32%),
-      linear-gradient(180deg,#050806,#07100b,#050806)!important;
-  }
+.mobile-app-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
 
-  header{
-    padding:9px 0 7px!important;
-  }
+.mobile-app-head h2{
+  margin:0!important;
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:24px!important;
+  line-height:1.1;
+}
 
-  .hero{
-    padding:14px 13px!important;
-    border-radius:14px!important;
-  }
+.mobile-app-head span{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
 
-  .top{
-    display:block!important;
-  }
+.mobile-quick-cats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+}
 
-  .brand small{
-    font-size:8.5px!important;
-    letter-spacing:.14em!important;
-    margin-bottom:4px!important;
-  }
+.mobile-cat-btn{
+  border:1px solid rgba(215,184,108,.25);
+  background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.13));
+  color:var(--cream);
+  border-radius:13px;
+  padding:12px 11px;
+  min-height:64px;
+  text-align:left;
+  font-weight:800;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:4px;
+  cursor:pointer;
+}
 
-  h1{
-    font-size:clamp(31px,10vw,43px)!important;
-    letter-spacing:.09em!important;
-  }
+.mobile-cat-btn:hover{
+  background:linear-gradient(145deg,rgba(215,184,108,.17),rgba(0,0,0,.18));
+}
 
-  .links.social-links,
-  .links{
-    margin-top:10px!important;
-    display:grid!important;
-    grid-template-columns:1fr 1fr!important;
-    gap:7px!important;
-    width:100%!important;
-  }
+.mobile-cat-btn b{
+  color:var(--gold2);
+  font-size:15px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
 
-  .social-chip,
-  .chip{
-    justify-content:center!important;
-    padding:7px 8px!important;
-    font-size:10.5px!important;
-    min-width:0!important;
-  }
+.mobile-cat-btn span{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
 
-  .social-chip span:last-child{
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
-    white-space:nowrap!important;
-  }
+.mobile-start-notice{
+  display:block;
+  border:1px dashed rgba(215,184,108,.26);
+  border-radius:14px;
+  background:rgba(16,27,20,.58);
+  color:var(--muted);
+  text-align:center;
+  font-size:12.5px;
+  line-height:1.45;
+  padding:16px 12px;
+  margin-top:8px;
+  grid-column:1/-1;
+}
 
-  .hero-welcome{
-    margin-top:10px!important;
-    padding-top:9px!important;
-  }
+.mobile-start-notice strong{
+  display:block;
+  color:var(--gold2);
+  font-family:var(--serif);
+  font-size:20px;
+  line-height:1.15;
+  margin-bottom:5px;
+}
 
-  .salam-line{
-    font-size:19px!important;
-    line-height:1.18!important;
-  }
+body.mobile-home-clean #posts{
+  display:none!important;
+}
 
-  .welcome-line{
-    font-size:12.2px!important;
-    line-height:1.45!important;
-  }
+body.mobile-home-clean .mobile-more-wrap{
+  display:none!important;
+}
 
-  .isnad-compact-card,
-  .isnad-line-card{
-    margin-bottom:9px!important;
-  }
+/* Wenn Besucher einen Wissensbereich öffnen, erscheinen Beiträge normal */
+body:not(.mobile-home-clean) #posts{
+  display:grid!important;
+}
 
-  .grid{
-    display:block!important;
-    padding-top:9px!important;
-  }
-
-  aside{
-    position:static!important;
-    margin-bottom:10px!important;
-    border-radius:14px!important;
-    padding:10px!important;
-  }
-
-  aside h2{
-    font-size:20px!important;
-    margin-bottom:8px!important;
-  }
-
-  .search{
-    height:40px!important;
-    font-size:13px!important;
-  }
-
-  .filter-section:not(:first-of-type){
-    margin-top:5px!important;
-  }
-
-  .filter-section summary{
-    font-size:15.5px!important;
-    padding:6px 0!important;
-  }
-
-  .filter-section .list-buttons{
-    max-height:128px!important;
-    overflow:auto!important;
-    padding-bottom:3px!important;
-  }
-
-  .filter-section:not([open]) .list-buttons{
+/* Desktop: Wissensbereiche edel, trotzdem kompakt */
+@media(min-width:761px){
+  .mobile-more-wrap{
     display:none!important;
   }
 
-  .panel{
-    padding:10px!important;
-    margin-bottom:10px!important;
-    border-radius:14px!important;
-  }
-
-  .panel h2{
-    font-size:20px!important;
-  }
-
-  .stats{
-    grid-template-columns:repeat(4,1fr)!important;
-    gap:6px!important;
-  }
-
-  .stat{
-    padding:8px 7px!important;
-    min-height:55px!important;
-  }
-
-  .stat b{
-    font-size:17px!important;
-  }
-
-  .stat span{
-    font-size:9.5px!important;
-  }
-
-  .mobile-app-home{
+  .mobile-start-notice{
     display:block!important;
-    border:1px solid var(--line);
-    border-radius:14px;
-    background:rgba(16,27,20,.86);
-    box-shadow:var(--shadow);
-    padding:10px;
-    margin-bottom:10px;
-  }
-
-  .mobile-app-head{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:9px;
-  }
-
-  .mobile-app-head h2{
-    margin:0!important;
-    font-size:20px!important;
-    color:var(--gold2);
-    font-family:var(--serif);
-  }
-
-  .mobile-app-head span{
-    color:var(--muted);
-    font-size:10.5px;
-    white-space:nowrap;
-  }
-
-  .mobile-quick-cats{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:7px;
-  }
-
-  .mobile-cat-btn{
-    border:1px solid rgba(215,184,108,.25);
-    background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.13));
-    color:var(--cream);
-    border-radius:12px;
-    padding:10px 9px;
-    min-height:52px;
-    text-align:left;
-    font-weight:800;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:3px;
-  }
-
-  .mobile-cat-btn b{
-    color:var(--gold2);
-    font-size:13px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-
-  .mobile-cat-btn span{
-    color:var(--muted);
-    font-size:10px;
-    font-weight:700;
   }
 
   .posts{
-    display:grid!important;
-    grid-template-columns:1fr!important;
-    gap:8px!important;
-  }
-
-  .post-card,
-  .card{
-    min-height:0!important;
-    padding:10px 11px!important;
-    border-radius:13px!important;
-    display:block!important;
-  }
-
-  .post-card:before,
-  .card:before{
-    inset:5px!important;
-    border-radius:9px!important;
-  }
-
-  .post-logo,
-  .card-logo{
-    width:112px!important;
-    opacity:.028!important;
-  }
-
-  .card-title,
-  .card h2{
-    font-size:18px!important;
-    line-height:1.08!important;
-    margin-bottom:5px!important;
-    -webkit-line-clamp:2!important;
-  }
-
-  .meta{
-    gap:5px!important;
-  }
-
-  .badge{
-    font-size:8.8px!important;
-    padding:3px 6px!important;
-  }
-
-  .excerpt{
-    font-size:13.4px!important;
-    line-height:1.28!important;
-    margin:6px 0!important;
-    -webkit-line-clamp:1!important;
-  }
-
-  .card-source{
-    font-size:8.6px!important;
-    line-height:1.22!important;
-    margin-top:5px!important;
-    padding-top:5px!important;
-    -webkit-line-clamp:1!important;
-  }
-
-  .card-actions,
-  .actions{
-    margin-top:7px!important;
-  }
-
-  .open-btn,
-  .open{
-    width:100%!important;
-    justify-content:center!important;
-    padding:7px 10px!important;
-    font-size:10.5px!important;
-  }
-
-  .mobile-more-wrap{
-    display:flex!important;
-    justify-content:center;
-    margin:10px 0 4px;
-  }
-
-  #mobileShowMore{
-    width:100%;
-    max-width:330px;
-    padding:10px 13px!important;
-    font-size:12px!important;
-    color:var(--gold2);
-    background:rgba(215,184,108,.12);
-  }
-
-  .mobile-hidden-post{
-    display:none!important;
-  }
-
-  .overlay,
-  .detail-overlay{
-    padding:10px 7px!important;
-  }
-
-  .modal-card,
-  .detail-view{
-    width:calc(100vw - 14px)!important;
-    max-width:none!important;
-    padding:14px 12px!important;
-    border-radius:14px!important;
-  }
-
-  .close-row{
-    gap:7px!important;
-  }
-
-  .close-row button{
-    font-size:10.5px!important;
-    padding:7px 9px!important;
-  }
-
-  .modal-title,
-  .detail-title{
-    font-size:23px!important;
-    line-height:1.08!important;
-    margin-bottom:9px!important;
-  }
-
-  .statement{
-    font-size:16px!important;
-    line-height:1.62!important;
-    text-align:left!important;
-  }
-
-  .source{
-    font-size:10.5px!important;
-    line-height:1.35!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
   }
 }
 
-@media(min-width:761px){
-  .mobile-hidden-post{
-    display:block!important;
+@media(max-width:1180px) and (min-width:761px){
+  .mobile-quick-cats{
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 }
-</style>
 
+@media(max-width:900px) and (min-width:761px){
+  .mobile-quick-cats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
 
-<style id="mobile-start-clean-final">
 @media(max-width:760px){
-  .mobile-start-notice{
-    display:block;
-    border:1px dashed rgba(215,184,108,.26);
+  .mobile-app-home{
+    padding:10px;
+    margin-bottom:10px;
     border-radius:14px;
-    background:rgba(16,27,20,.58);
-    color:var(--muted);
-    text-align:center;
-    font-size:12px;
-    line-height:1.45;
-    padding:14px 12px;
-    margin-top:8px;
   }
 
-  .mobile-start-notice strong{
-    display:block;
-    color:var(--gold2);
-    font-family:var(--serif);
-    font-size:18px;
-    line-height:1.15;
-    margin-bottom:5px;
-  }
-
-  body.mobile-home-clean #posts{
-    display:none!important;
-  }
-
-  body.mobile-home-clean .mobile-more-wrap{
-    display:none!important;
+  .mobile-app-head{
+    margin-bottom:9px;
   }
 
   .mobile-app-head h2{
@@ -1218,25 +981,34 @@ footer{
   }
 
   .mobile-app-head span{
-    font-size:10.5px!important;
+    font-size:10.5px;
+  }
+
+  .mobile-quick-cats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
   }
 
   .mobile-cat-btn{
-    min-height:58px!important;
+    min-height:58px;
+    padding:10px 9px;
   }
 
   .mobile-cat-btn b{
-    font-size:14px!important;
+    font-size:14px;
   }
 
   .mobile-cat-btn span{
-    font-size:10.5px!important;
+    font-size:10.5px;
   }
-}
 
-@media(min-width:761px){
   .mobile-start-notice{
-    display:none!important;
+    font-size:12px;
+    padding:14px 12px;
+  }
+
+  .mobile-start-notice strong{
+    font-size:18px;
   }
 }
 </style>
@@ -1539,6 +1311,9 @@ async function shareCurrentPost(){
 }
 
 
+
+
+
 function isMobileAppView(){
   return window.matchMedia && window.matchMedia("(max-width:760px)").matches;
 }
@@ -1550,12 +1325,12 @@ function buildMobileQuickCats(){
   if(!root) return;
   root.innerHTML="";
   const map=countBy("category");
-  const preferred=["Aqīdah","Hadith","Āthār","Adab","Akhlaq","Zuhd","Fiqh","Tafsīr"];
+  const preferred=["Aqīdah","Hadith","Āthār","Manhaj","Adab","Akhlaq","Zuhd","Fiqh","Tafsīr"];
   const keys=[...map.keys()].sort((a,b)=>{
     const ai=preferred.indexOf(a), bi=preferred.indexOf(b);
     if(ai!==-1 || bi!==-1) return (ai===-1?99:ai)-(bi===-1?99:bi);
     return a.localeCompare(b,"de");
-  }).slice(0,8);
+  }).slice(0,12);
 
   keys.forEach(k=>{
     const btn=document.createElement("button");
@@ -1570,24 +1345,22 @@ function buildMobileQuickCats(){
     };
     root.appendChild(btn);
   });
-
-  if(!keys.length){
-    root.innerHTML='<div class="empty">Noch keine Kategorien vorhanden.</div>';
-  }
 }
 
-
 function updateMobileHomeCleanState(){
-  const clean = isMobileAppView && isMobileAppView() && active.type==="all" && !($("searchInput")?.value || "").trim();
+  const clean = active.type==="all" && !($("searchInput")?.value || "").trim();
   document.body.classList.toggle("mobile-home-clean", clean);
 }
 
 function applyMobilePostLimit(){
+  updateMobileHomeCleanState();
   const btn=document.getElementById("mobileShowMore");
   const cards=[...document.querySelectorAll("#posts > article")];
   if(!btn) return;
-  updateMobileHomeCleanState();
-  if(document.body.classList.contains("mobile-home-clean")){btn.style.display="none";return;}
+  if(document.body.classList.contains("mobile-home-clean")){
+    btn.style.display="none";
+    return;
+  }
   if(!isMobileAppView()){
     cards.forEach(c=>c.classList.remove("mobile-hidden-post"));
     btn.style.display="none";
@@ -1626,7 +1399,7 @@ async function load(){
   render();
 }
 
-$("searchInput").oninput=()=>{mobileExpanded=true;render();};
+$("searchInput").oninput=()=>{mobileExpanded=true;render();};render();};
 $("resetFilters").onclick=()=>{
   active={type:"all",value:"Alle"};
   mobileExpanded=false;
