@@ -26,7 +26,12 @@
 *{box-sizing:border-box}
 html{background:#07100b;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;padding:calc(max(8px,var(--safe-top))) max(0px,var(--safe-right)) calc(max(14px,var(--safe-bottom))) max(0px,var(--safe-left));background:radial-gradient(circle at 10% 0%,rgba(215,184,108,.12),transparent 35%),linear-gradient(180deg,#050806,#07100b 45%,#050806);color:var(--text);font-family:var(--sans);overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;background:url("watermark-circle-soft.png") center 6%/800px auto no-repeat;opacity:.035;pointer-events:none}
+
+/* Hintergrund-Wasserzeichen komplett entfernt – Layout bleibt unverändert */
+body:before{content:none!important;display:none!important;background:none!important;opacity:0!important;visibility:hidden!important}
+.post-card:before{content:none!important;display:none!important;background:none!important;opacity:0!important;visibility:hidden!important}
+[class*="watermark"], [id*="watermark"], [class*="Watermark"], [id*="Watermark"]{background-image:none!important}
+
 .site{width:min(1540px,calc(100vw - 18px));margin:0 auto;position:relative}
 .hero,.isnad,aside,.panel,.knowledge,.post-card,.notice{border:1px solid var(--line);background:rgba(16,29,20,.88);border-radius:20px;box-shadow:var(--shadow)}
 header{padding:8px 0 12px}
@@ -40,429 +45,32 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(42px,5.7vw,82px);
 .social-icon{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;flex:0 0 18px}
 .hero-welcome{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:1080px}
 .salam-line{font-family:var(--serif);font-size:clamp(20px,1.8vw,28px);color:var(--gold2);font-weight:700;margin-bottom:6px}
-.welcome-line{color:var(--muted);font-size:14px;line-height:1.6}
-.welcome-line strong{color:var(--cream)}
+.welcome-line{color:var(--muted);font-size:14px;line-height:1.6}.welcome-line strong{color:var(--cream)}
 .isnad{margin:0 auto 14px;padding:10px 14px;background:linear-gradient(135deg,rgba(16,29,20,.88),rgba(5,9,7,.94))}
 .isnad-top{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:900;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
 .isnad-top:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(215,184,108,.45),transparent)}
 .isnad-quote{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:650;margin-top:6px;color:var(--cream);letter-spacing:-.01em}
 .isnad-source{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px;color:var(--muted);font-size:10px}
 .grid{display:grid;grid-template-columns:270px 1fr;gap:18px;padding-bottom:28px}
-aside{position:sticky;top:12px;align-self:start;padding:16px}
-aside h2,.panel h2,.knowledge h2{font-family:var(--serif);color:var(--gold2);font-size:26px;margin:0 0 12px}
+aside{position:sticky;top:12px;align-self:start;padding:16px}aside h2,.panel h2,.knowledge h2{font-family:var(--serif);color:var(--gold2);font-size:26px;margin:0 0 12px}
 .search{width:100%;height:42px;border:1px solid var(--line);border-radius:12px;background:#08100b;color:var(--cream);padding:0 12px;font-size:14px;outline:none}
-.filter-section{border-top:1px solid var(--line2);padding-top:9px;margin-top:9px}
-.filter-section summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--gold2);font-family:var(--serif);font-size:18px;font-weight:700;padding:5px 0 8px}
-.filter-section summary::-webkit-details-marker{display:none}
-.filter-section summary:after{content:"＋";font-family:var(--sans);width:24px;height:24px;border:1px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
-.filter-section[open] summary:after{content:"−";color:var(--gold2)}
-.list-buttons{display:flex;gap:7px;flex-wrap:wrap;max-height:210px;overflow:auto;padding-bottom:3px}
-.list-buttons button.active,.mobile-cat-btn.active{background:rgba(215,184,108,.22);color:var(--gold2)}
-.main{min-width:0}
-.panel,.knowledge{padding:16px;margin-bottom:14px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.stat{border:1px solid var(--line);border-radius:14px;background:rgba(215,184,108,.06);padding:13px}
-.stat b{display:block;font-size:22px;color:var(--gold2)}
-.stat span{font-size:12px;color:var(--muted)}
-.knowledge-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
-.knowledge-head span{color:var(--muted);font-size:12px;font-weight:800}
-.mobile-quick-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
-.mobile-cat-btn{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.10));padding:13px;min-height:68px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:4px}
-.mobile-cat-btn b{color:var(--gold2);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mobile-cat-btn span{color:var(--muted);font-size:11px;font-weight:700}
-.notice{padding:18px;text-align:center;color:var(--muted);border-style:dashed;margin-bottom:12px}
-.notice strong{display:block;color:var(--gold2);font-family:var(--serif);font-size:22px;margin-bottom:5px}
-.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-body.clean-home .posts{display:none}
-.post-card{position:relative;overflow:hidden;padding:16px;min-height:205px;display:flex;flex-direction:column;justify-content:space-between}
-.post-card:before{content:"";position:absolute;inset:0;background:url("watermark-circle-card.png") center/270px no-repeat;opacity:.03;pointer-events:none}
-.post-card>*{position:relative;z-index:1}
-.post-card h3{font-family:var(--serif);font-size:24px;line-height:1.05;margin:0 0 8px;color:var(--gold2)}
-.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-.badge{font-size:10px;border:1px solid var(--line);border-radius:999px;background:rgba(215,184,108,.08);padding:4px 8px;font-weight:800;color:var(--cream)}
-.excerpt{font-family:var(--serif);font-size:16px;line-height:1.35;color:#f5f0df;margin:6px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.source-preview{font-size:10px;color:var(--muted);border-top:1px solid var(--line2);padding-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.open{margin-top:10px;color:var(--gold2)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:calc(max(12px,var(--safe-top)) + 8px) max(8px,var(--safe-right)) calc(max(16px,var(--safe-bottom)) + 10px) max(8px,var(--safe-left));z-index:50;overflow:auto}
-.modal.opened{display:flex}
-.article{width:min(900px,100%);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#0c1710,#06100a);box-shadow:var(--shadow);padding:22px}
-.article-top{display:flex;gap:8px;justify-content:flex-end;position:sticky;top:calc(max(8px,var(--safe-top)) + 4px);background:linear-gradient(180deg,#0c1710,#0c1710dd);padding-bottom:10px;z-index:2}
-.article h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--gold2);margin:8px 0 10px;text-align:center}
-.article .statement{font-family:var(--serif);font-size:22px;line-height:1.75;text-align:center;color:#fff8e8;white-space:pre-wrap}
-.article-source{font-size:12px;color:var(--muted);border-top:1px solid var(--line2);padding-top:12px;margin-top:15px;line-height:1.5}
-.article-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--safe-bottom));border-top:1px solid var(--line2)}
-.footer-social{display:flex;justify-content:center;gap:10px;align-items:center;flex-wrap:wrap;margin-top:7px}
-footer .signature{display:block;font-family:cursive;color:var(--gold2);font-size:28px;margin-top:8px}
+.filter-section{border-top:1px solid var(--line2);padding-top:9px;margin-top:9px}.filter-section summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--gold2);font-family:var(--serif);font-size:18px;font-weight:700;padding:5px 0 8px}.filter-section summary::-webkit-details-marker{display:none}.filter-section summary:after{content:"＋";font-family:var(--sans);width:24px;height:24px;border:1px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}.filter-section[open] summary:after{content:"−";color:var(--gold2)}
+.list-buttons{display:flex;gap:7px;flex-wrap:wrap;max-height:210px;overflow:auto;padding-bottom:3px}.list-buttons button.active,.mobile-cat-btn.active{background:rgba(215,184,108,.22);color:var(--gold2)}
+.main{min-width:0}.panel,.knowledge{padding:16px;margin-bottom:14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{border:1px solid var(--line);border-radius:14px;background:rgba(215,184,108,.06);padding:13px}.stat b{display:block;font-size:22px;color:var(--gold2)}.stat span{font-size:12px;color:var(--muted)}
+.knowledge-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}.knowledge-head span{color:var(--muted);font-size:12px;font-weight:800}.mobile-quick-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.mobile-cat-btn{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.10));padding:13px;min-height:68px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:4px}.mobile-cat-btn b{color:var(--gold2);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mobile-cat-btn span{color:var(--muted);font-size:11px;font-weight:700}
+.notice{padding:18px;text-align:center;color:var(--muted);border-style:dashed;margin-bottom:12px}.notice strong{display:block;color:var(--gold2);font-family:var(--serif);font-size:22px;margin-bottom:5px}
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}body.clean-home .posts{display:none}.post-card{position:relative;overflow:hidden;padding:16px;min-height:205px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg, rgba(16,29,20,.94), rgba(7,16,11,.94))!important}.post-card>*{position:relative;z-index:1}.post-card h3{font-family:var(--serif);font-size:24px;line-height:1.05;margin:0 0 8px;color:var(--gold2)}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.badge{font-size:10px;border:1px solid var(--line);border-radius:999px;background:rgba(215,184,108,.08);padding:4px 8px;font-weight:800;color:var(--cream)}.excerpt{font-family:var(--serif);font-size:16px;line-height:1.35;color:#f5f0df;margin:6px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.source-preview{font-size:10px;color:var(--muted);border-top:1px solid var(--line2);padding-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.open{margin-top:10px;color:var(--gold2)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:calc(max(12px,var(--safe-top)) + 8px) max(8px,var(--safe-right)) calc(max(16px,var(--safe-bottom)) + 10px) max(8px,var(--safe-left));z-index:50;overflow:auto}.modal.opened{display:flex}.article{width:min(900px,100%);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#0c1710,#06100a);box-shadow:var(--shadow);padding:22px}.article-top{display:flex;gap:8px;justify-content:flex-end;position:relative!important;top:auto!important;background:transparent!important;padding-bottom:10px;z-index:5}.article h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--gold2);margin:8px 0 10px;text-align:center}.article .statement{font-family:var(--serif);font-size:22px;line-height:1.75;text-align:center;color:#fff8e8;white-space:pre-wrap}.article-source{font-size:12px;color:var(--muted);border-top:1px solid var(--line2);padding-top:12px;margin-top:15px;line-height:1.5}.article-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--safe-bottom));border-top:1px solid var(--line2)}.footer-social{display:flex;justify-content:center;gap:10px;align-items:center;flex-wrap:wrap;margin-top:7px}footer .signature{display:block;font-family:cursive;color:var(--gold2);font-size:28px;margin-top:8px}
+.locked-original-socials{display:flex!important;justify-content:center!important;align-items:center!important;gap:16px!important;flex-wrap:wrap!important;margin-top:10px!important;margin-bottom:6px!important}.locked-original-socials .footer-social-item{display:inline-flex!important;align-items:center!important;gap:8px!important;color:var(--muted)!important;font-weight:750!important;font-size:16px!important;line-height:1!important;background:transparent!important;border:0!important;padding:0!important}.locked-original-socials .social-icon,.locked-original-socials svg{display:inline-flex!important;width:20px!important;height:20px!important;min-width:20px!important;flex:0 0 20px!important}.footer-social:not(.locked-original-socials){display:none!important}
+.brand-title-row{display:flex!important;align-items:center!important;gap:18px!important}.header-logo-mark{width:76px!important;height:76px!important;object-fit:contain!important;border-radius:999px!important;opacity:.96!important;filter:drop-shadow(0 0 18px rgba(242,223,155,.10))!important;flex:0 0 76px!important}
+.article .statement strong,.article .statement b{color:#fff7df!important;font-weight:900!important;text-shadow:0 0 12px rgba(242,223,155,.10)!important}.article .statement em,.article .statement i,.article .statement .important-term{color:#f2df9b!important;font-style:italic!important;font-weight:800!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:rgba(242,223,155,.62)}.article .statement .important-sentence{color:#fff7df!important;font-style:italic!important;font-weight:850!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;text-decoration-color:rgba(242,223,155,.52)}.article .statement .quote-inline{font-style:italic!important;font-weight:720!important;color:#fff7df!important}.article .statement .lead-name{font-weight:900!important;color:#fff7df!important}.article .statement .emoji-inline{display:inline!important;margin:0!important;padding:0!important}.article .statement .fazit-word{color:#f2df9b!important;font-weight:900!important}.article-source{font-family:var(--sans)!important;font-weight:650!important}.post-card .excerpt .important-term,.post-card .excerpt em,.post-card .excerpt i{text-decoration:none!important}
 @media(max-width:1200px){.posts{grid-template-columns:repeat(2,1fr)}.mobile-quick-cats{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){
-.site{width:calc(100% - 14px)!important;max-width:calc(100vw - 14px)!important}header{padding:6px 0 7px!important}.hero{padding:11px 12px!important;border-radius:15px!important}.top{display:block}.brand small{font-size:7.8px!important;letter-spacing:.13em!important;margin-bottom:5px!important}h1{font-size:clamp(28px,9.4vw,40px)!important;line-height:.88!important;letter-spacing:.075em!important}.links{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important;margin-top:8px!important}.social-chip{min-height:32px!important;padding:6px 7px!important;font-size:9.2px!important;justify-content:center!important;overflow:hidden!important}.social-chip span:last-child{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}.social-icon{width:16px!important;height:16px!important;flex-basis:16px!important}.hero-welcome{margin-top:9px!important;padding-top:9px!important}.salam-line{font-size:16.5px!important;line-height:1.18!important;margin-bottom:5px!important}.welcome-line{font-size:11.5px!important;line-height:1.42!important}.isnad{margin-bottom:9px!important;padding:7px 9px!important;border-radius:13px!important}.isnad-top{font-size:8.3px!important;letter-spacing:.13em!important}.isnad-quote{font-size:9.15px!important;line-height:1.14!important;letter-spacing:-0.012em!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important}.isnad-source{font-size:8.1px!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}.grid{display:block;gap:9px!important}aside,.panel,.knowledge{padding:10px!important;border-radius:15px!important;margin-bottom:9px!important}aside{position:static}aside h2,.panel h2,.knowledge h2{font-size:20px!important;margin-bottom:9px!important}.search{height:36px!important;font-size:12px!important}.filter-section:not([open]) .list-buttons{display:none}.filter-section summary{font-size:15px!important;padding:4px 0 6px!important}.stats{grid-template-columns:repeat(2,1fr)!important;gap:7px!important}.stat{padding:9px 10px!important;min-height:58px!important}.stat b{font-size:18px!important}.stat span{font-size:10.5px!important}.knowledge-head{margin-bottom:8px!important}.knowledge-head span{font-size:9.5px!important}.mobile-quick-cats{grid-template-columns:repeat(2,1fr)!important;gap:6px!important}.mobile-cat-btn{min-height:50px!important;padding:8px 8px!important;border-radius:12px!important}.mobile-cat-btn b{font-size:12.5px!important}.mobile-cat-btn span{font-size:9.4px!important}.notice{padding:12px 10px!important;border-radius:14px!important;font-size:11.5px!important}.notice strong{font-size:16.5px!important}.posts{grid-template-columns:1fr!important;gap:8px!important}.post-card{padding:10px!important;border-radius:14px!important;min-height:0!important}.post-card h3{font-size:18px!important;line-height:1.08!important}.badge{font-size:8.2px!important;padding:3px 6px!important}.excerpt{font-size:13px!important;line-height:1.32!important;-webkit-line-clamp:2!important}.source-preview{font-size:8.5px!important;padding-top:6px!important}.open{width:100%!important;min-height:34px!important;padding:7px 10px!important;font-size:10.5px!important}.article{width:calc(100vw - 16px)!important;padding:12px 11px!important;border-radius:16px!important}.article h2{font-size:22px!important;line-height:1.08!important;text-align:left!important}.article .statement{font-size:15.3px!important;line-height:1.55!important;text-align:left!important}.article-source{font-size:9.8px!important;line-height:1.35!important}footer{padding-top:18px!important;font-size:11px!important}footer .signature{font-size:22px!important}
+.site{width:calc(100% - 14px)!important;max-width:calc(100vw - 14px)!important}header{padding:6px 0 7px!important}.hero{padding:11px 12px!important;border-radius:15px!important}.top{display:block}.brand small{font-size:7.8px!important;letter-spacing:.13em!important;margin-bottom:5px!important}h1{font-size:clamp(28px,9.4vw,40px)!important;line-height:.88!important;letter-spacing:.075em!important}.links{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important;margin-top:8px!important}.social-chip{min-height:32px!important;padding:6px 7px!important;font-size:9.2px!important;justify-content:center!important;overflow:hidden!important}.social-chip span:last-child{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}.social-icon{width:16px!important;height:16px!important;flex-basis:16px!important}.hero-welcome{margin-top:9px!important;padding-top:9px!important}.salam-line{font-size:16.5px!important;line-height:1.18!important;margin-bottom:5px!important}.welcome-line{font-size:11.5px!important;line-height:1.42!important}.isnad{margin-bottom:9px!important;padding:7px 9px!important;border-radius:13px!important}.isnad-top{font-size:8.3px!important;letter-spacing:.13em!important}.isnad-quote{font-size:9.15px!important;line-height:1.14!important;letter-spacing:-0.012em!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important}.isnad-source{font-size:8.1px!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}.grid{display:block;gap:9px!important}aside,.panel,.knowledge{padding:10px!important;border-radius:15px!important;margin-bottom:9px!important}aside{position:static}aside h2,.panel h2,.knowledge h2{font-size:20px!important;margin-bottom:9px!important}.search{height:36px!important;font-size:12px!important}.filter-section:not([open]) .list-buttons{display:none}.filter-section summary{font-size:15px!important;padding:4px 0 6px!important}.stats{grid-template-columns:repeat(2,1fr)!important;gap:7px!important}.stat{padding:9px 10px!important;min-height:58px!important}.stat b{font-size:18px!important}.stat span{font-size:10.5px!important}.knowledge-head{margin-bottom:8px!important}.knowledge-head span{font-size:9.5px!important}.mobile-quick-cats{grid-template-columns:repeat(2,1fr)!important;gap:6px!important}.mobile-cat-btn{min-height:50px!important;padding:8px 8px!important;border-radius:12px!important}.mobile-cat-btn b{font-size:12.5px!important}.mobile-cat-btn span{font-size:9.4px!important}.notice{padding:12px 10px!important;border-radius:14px!important;font-size:11.5px!important}.notice strong{font-size:16.5px!important}.posts{grid-template-columns:1fr!important;gap:8px!important}.post-card{padding:10px!important;border-radius:14px!important;min-height:0!important}.post-card h3{font-size:18px!important;line-height:1.08!important}.badge{font-size:8.2px!important;padding:3px 6px!important}.excerpt{font-size:13px!important;line-height:1.32!important;-webkit-line-clamp:2!important}.source-preview{font-size:8.5px!important;padding-top:6px!important}.open{width:100%!important;min-height:34px!important;padding:7px 10px!important;font-size:10.5px!important}.article{width:calc(100vw - 16px)!important;padding:12px 11px!important;border-radius:16px!important}.article .statement{font-size:15.8px!important;line-height:1.62!important;text-align:left!important}.article h2{font-size:22px!important;line-height:1.08!important;text-align:left!important}.article-source{font-size:9.8px!important;line-height:1.35!important}footer{padding-top:18px!important;font-size:11px!important}footer .signature{font-size:22px!important}.locked-original-socials{gap:10px!important}.locked-original-socials .footer-social-item{font-size:12px!important;white-space:nowrap!important}.locked-original-socials .social-icon,.locked-original-socials svg{width:18px!important;height:18px!important;min-width:18px!important}.brand-title-row{gap:10px!important}.header-logo-mark{width:48px!important;height:48px!important;flex-basis:48px!important}
 }
-@media(max-width:390px){.isnad-quote{font-size:8.35px!important;letter-spacing:-0.018em!important}.isnad-source{font-size:7.7px!important}}
+@media(max-width:390px){.isnad-quote{font-size:8.35px!important;letter-spacing:-0.018em!important}.isnad-source{font-size:7.7px!important}.header-logo-mark{width:42px!important;height:42px!important;flex-basis:42px!important}}
 </style>
-<script>window.EMBEDDED_POSTS = [{"id": "dar-al-tawhid-total-001", "date": "2026-06-04T00:00:00.000Z", "title": "📖 Der Weg zum Wissen führt zum Paradies", "category": "Hadith", "topic": "Wissen und Qurʾān", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Wissen", "#Sunnah", "#AhlusSunnah", "#Quran"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb adh-Dhikr wa’d-Duʿāʾ, Hadith Nr. 2699a.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2699a"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer einen Weg beschreitet, auf dem er Wissen sucht, dem erleichtert Allah dadurch einen Weg zum Paradies.“\n\n👉🏼 Wissen ist im Dīn nicht bloße Information. Es ist ein Weg, durch den Allah den Diener zur Rechtleitung, zur Demut und zur Nähe zu Ihm führt.\n\n🌙 **Fazit:** Wer Wissen sucht, soll es mit Aufrichtigkeit, Sunnah und Demut suchen – denn der Weg des Wissens ist ein Weg zum Paradies."}, {"id": "dar-al-tawhid-total-002", "date": "2026-06-04T01:00:00.000Z", "title": "📖 Was nicht zum Dīn gehört, wird zurückgewiesen", "category": "Hadith", "topic": "Sunnah und Bidʿah", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Sunnah", "#Bidah", "#Manhaj", "#AhlusSunnah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb aṣ-Ṣulḥ, Hadith Nr. 2697.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:2697"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte:\n\n„Wer in diese unsere Angelegenheit etwas einführt, was nicht dazu gehört, dem wird es zurückgewiesen.“\n\n👉🏼 Der Dīn wird nicht durch schöne Absichten neu gebaut. Was Allah und Sein Gesandter ﷺ nicht als Religion eingesetzt haben, bleibt außerhalb der Religion.\n\n🌙 **Fazit:** Die Sicherheit liegt im Folgen der Sunnah – nicht im Erfinden neuer Wege."}, {"id": "dar-al-tawhid-total-003", "date": "2026-06-04T02:00:00.000Z", "title": "📖 Reinheit ist ein Teil des Īmān", "category": "Hadith", "topic": "Īmān und Reinigung", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Iman", "#Fiqh", "#Taharah", "#Akhlaq"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb aṭ-Ṭahārah, Hadith Nr. 223.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:223"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte:\n\n„Reinheit ist die Hälfte des Īmān.“\n\n👉🏼 Äußere Reinheit und innere Reinigung gehören zusammen. Der Muslim achtet auf seinen Körper, seine Anbetung und sein Herz.\n\n🌙 **Fazit:** Wer seinen Īmān pflegt, vernachlässigt weder die Reinheit des Körpers noch die Reinheit des Herzens."}, {"id": "dar-al-tawhid-total-004", "date": "2026-06-04T03:00:00.000Z", "title": "📖 Halāl ist klar und Ḥarām ist klar", "category": "Hadith", "topic": "Fiqh und Vorsicht", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Fiqh", "#Wara", "#Halal", "#Haram"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Īmān, Hadith Nr. 52.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:52"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Das Halāl ist klar und das Ḥarām ist klar; zwischen beiden gibt es zweifelhafte Angelegenheiten.“\n\n👉🏼 Der starke Diener schützt seinen Dīn, indem er sich nicht leichtfertig in Zweifelhaftes stürzt.\n\n🌙 **Fazit:** Vorsicht im Zweifel ist Schutz für Religion, Herz und Ehre."}, {"id": "dar-al-tawhid-total-005", "date": "2026-06-04T04:00:00.000Z", "title": "📖 Prüfungen tilgen Sünden", "category": "Hadith", "topic": "Geduld und Prüfung", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Sabr", "#Pruefung", "#Akhlaq", "#Iman"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Marḍā, Hadith Nr. 5641.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:5641"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nKein Muslim wird von Müdigkeit, Krankheit, Sorge, Trauer oder Schmerz getroffen, außer dass Allah dadurch von seinen Sünden tilgt.\n\n👉🏼 Der Gläubige sieht Prüfungen nicht nur äußerlich. Er weiß, dass Allah durch sie reinigen, erhöhen und zurückführen kann.\n\n🌙 **Fazit:** Geduld verwandelt Schmerz in Reinigung, wenn der Diener bei Allah Zuflucht sucht."}, {"id": "dar-al-tawhid-total-006", "date": "2026-06-04T05:00:00.000Z", "title": "📖 Allah schaut auf Herzen und Taten", "category": "Hadith", "topic": "Ikhlāṣ und Herz", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Ikhlas", "#Herz", "#Akhlaq", "#Tazkiyah"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Birr wa’ṣ-Ṣilah, Hadith Nr. 2564b.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2564b"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nAllah schaut nicht auf eure Gestalten und euren Besitz, sondern auf eure Herzen und eure Taten.\n\n👉🏼 Der Wert des Menschen liegt nicht in äußerer Darstellung, sondern in Aufrichtigkeit, Gehorsam und wahrer Anbetung.\n\n🌙 **Fazit:** Wer bei Allah Wert sucht, reinigt sein Herz und richtet seine Taten nach der Sunnah aus."}, {"id": "dar-al-tawhid-total-007", "date": "2026-06-04T06:00:00.000Z", "title": "📖 Die Angelegenheit des Gläubigen ist erstaunlich", "category": "Hadith", "topic": "Īmān und Lebensprüfung", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Iman", "#Sabr", "#Shukr", "#Zuhd"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb az-Zuhd wa’r-Raqāʾiq, Hadith Nr. 2999.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2999"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Erstaunlich ist die Angelegenheit des Gläubigen: Alles ist gut für ihn.“\n\n👉🏼 Wenn ihm Gutes widerfährt, ist er dankbar. Wenn ihn Schwierigkeit trifft, ist er geduldig. Beides wird für ihn zum Guten.\n\n🌙 **Fazit:** Īmān macht den Diener in Freude und Prüfung standhaft."}, {"id": "dar-al-tawhid-total-008", "date": "2026-06-04T07:00:00.000Z", "title": "📖 Allah ist so, wie Sein Diener von Ihm denkt", "category": "Hadith", "topic": "Husn aẓ-Ẓann bi-Allah", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Tawhid", "#Aqidah", "#Hoffnung", "#Iman"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb at-Tawḥīd, Hadith Nr. 7405.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:7405"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ überlieferte von seinem Herrn:\n\n„Ich bin bei der Annahme Meines Dieners über Mich.“\n\n👉🏼 Gute Hoffnung auf Allah ist kein leeres Wunschdenken. Sie verbindet Vertrauen, Reue, Gehorsam und Hoffnung auf Seine Barmherzigkeit.\n\n🌙 **Fazit:** Wer Allah richtig kennt, verbindet Hoffnung mit Gehorsam und Furcht mit Liebe."}, {"id": "dar-al-tawhid-total-009", "date": "2026-06-04T08:00:00.000Z", "title": "📖 Der starke Gläubige", "category": "Hadith", "topic": "Stärke im Dīn", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Iman", "#Sabr", "#Akhlaq", "#Staerke"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Qadar, Hadith Nr. 2664.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2664"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der starke Gläubige ist besser und Allah lieber als der schwache Gläubige; in beiden ist Gutes.“\n\n👉🏼 Stärke im Islam umfasst Īmān, Entschlossenheit, Geduld und nützliche Tat – nicht Hochmut oder Härte.\n\n🌙 **Fazit:** Suche Stärke in Gehorsam, Wissen und Standhaftigkeit."}, {"id": "dar-al-tawhid-total-010", "date": "2026-06-04T09:00:00.000Z", "title": "📖 Hochmut versperrt den Weg", "category": "Hadith", "topic": "Demut und Hochmut", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Akhlaq", "#Demut", "#Iman", "#Tazkiyah"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Īmān, Hadith Nr. 91a.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:91a"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„In das Paradies tritt nicht ein, wer im Herzen das Gewicht eines Senfkorns an Hochmut hat.“\n\n👉🏼 Hochmut ist nicht Würde. Hochmut ist das Ablehnen der Wahrheit und das Geringschätzen der Menschen.\n\n🌙 **Fazit:** Wer Wahrheit annimmt und die Menschen nicht verachtet, schützt sein Herz vor Hochmut."}, {"id": "dar-al-tawhid-total-011", "date": "2026-06-04T10:00:00.000Z", "title": "📖 Zwei leichte Worte auf der Zunge", "category": "Hadith", "topic": "Dhikr", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Dhikr", "#Akhlaq", "#Iman", "#Zuhd"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb ad-Daʿawāt, Hadith Nr. 6406.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:6406"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte:\n\n„Zwei Worte sind leicht auf der Zunge, schwer auf der Waage und geliebt beim Allerbarmer: Subḥānallāhi wa biḥamdih, Subḥānallāhil-ʿAẓīm.“\n\n👉🏼 Dhikr ist leicht für die Zunge, aber schwer in der Waage, wenn es aufrichtig gesprochen wird.\n\n🌙 **Fazit:** Vernachlässige nicht das, was Allah liebt, nur weil es leicht erscheint."}, {"id": "dar-al-tawhid-total-012", "date": "2026-06-04T11:00:00.000Z", "title": "📖 Almosen mindert kein Vermögen", "category": "Hadith", "topic": "Ṣadaqah", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Sadaqah", "#Zuhd", "#Akhlaq", "#Rizq"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Birr wa’ṣ-Ṣilah, Hadith Nr. 2588.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2588"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Ṣadaqah mindert kein Vermögen.“\n\n👉🏼 Wer für Allah gibt, verliert nicht wirklich. Allah ersetzt, segnet und erhöht den Diener durch Aufrichtigkeit und Großzügigkeit.\n\n🌙 **Fazit:** Gib für Allah, denn wahrer Besitz ist das, was bei Allah bleibt."}, {"id": "dar-al-tawhid-total-013", "date": "2026-06-04T12:00:00.000Z", "title": "📖 Nimm Wissen von Vertrauenswürdigen", "category": "Āthār", "topic": "Isnād und Wissen", "scholar": "Ibn Sīrīn", "book": "Muqaddimah Ṣaḥīḥ Muslim", "tags": ["#Athar", "#Isnad", "#Wissen", "#IbnSirin", "#Manhaj"], "source": "📝 Muslim ibn al-Ḥajjāj, Muqaddimah Ṣaḥīḥ Muslim; auch in Mishkāt al-Maṣābīḥ, Hadith Nr. 273.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/mishkat:273"}], "logo": "logo-black.png", "statement": "🖋️ **Ibn Sīrīn** sagte:\n\n„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“\n\n👉🏼 Der Dīn wird nicht von jeder Stimme genommen. Wissen braucht Vertrauen, Überlieferung, Sunnah und klare Grundlage.\n\n🌙 **Fazit:** Wer seinen Dīn schützt, prüft die Quelle seines Wissens."}, {"id": "dar-al-tawhid-total-014", "date": "2026-06-04T13:00:00.000Z", "title": "📖 Folge und erfinde nicht", "category": "Āthār", "topic": "Sunnah und Bidʿah", "scholar": "Ibn Masʿūd", "book": "Sunan ad-Dārimī", "tags": ["#Athar", "#Sahaba", "#IbnMasud", "#Sunnah", "#Bidah"], "source": "📝 ad-Dārimī, as-Sunan, Muqaddimah, Athar von ʿAbdullāh ibn Masʿūd; überliefert u.a. bei ad-Dārimī Nr. 211.", "links": [{"label": "→ Quelle", "url": "https://hadithanswers.com/follow-the-pious-predecessors-and-abstain-from-innovation/"}], "logo": "logo-black.png", "statement": "🖋️ **ʿAbdullāh ibn Masʿūd** sagte:\n\n„Folgt und erfindet nicht, denn euch wurde genügt.“\n\n👉🏼 Die Religion ist vollkommen. Der Diener braucht nicht neue Wege zu erfinden, wenn Allah die Rechtleitung bereits vollständig gemacht hat.\n\n🌙 **Fazit:** Genügsamkeit mit der Sunnah ist Sicherheit vor Bidʿah."}, {"id": "dar-al-tawhid-total-015", "date": "2026-06-04T14:00:00.000Z", "title": "📖 Die Sunnah als Rettung", "category": "Āthār", "topic": "Sunnah und Festhalten", "scholar": "Mālik ibn Anas", "book": "Tārīkh Dimashq", "tags": ["#Athar", "#Malik", "#Sunnah", "#Manhaj", "#AhlusSunnah"], "source": "📝 Ibn ʿAsākir, Tārīkh Dimashq, Bericht über Imām Mālik; bekannt als Aussage über die Sunnah als Arche Nūḥ.", "links": [{"label": "→ Quelle", "url": "https://www.abuaminaelias.com/dailyhadithonline/2019/06/03/malik-sunnah-is-ark-of-nuh/"}], "logo": "logo-black.png", "statement": "🖋️ **Mālik ibn Anas** sagte sinngemäß:\n\n„Die Sunnah ist wie die Arche Nūḥs: Wer sie besteigt, wird gerettet; wer sie verlässt, geht zugrunde.“\n\n👉🏼 Die Rettung liegt nicht in religiöser Neuerfindung, sondern im Festhalten an dem, womit der Gesandte Allahs ﷺ kam.\n\n🌙 **Fazit:** Wer Sicherheit sucht, hält sich an die Sunnah und verlässt nicht ihren Weg."}, {"id": "dar-al-tawhid-total-016", "date": "2026-06-04T15:00:00.000Z", "title": "📖 Stehe dort, wo die Frühen standen", "category": "Āthār", "topic": "Manhaj und Sunnah", "scholar": "al-Awzāʿī", "book": "ash-Sharīʿah von al-Ājurrī", "tags": ["#Athar", "#Awzai", "#Sunnah", "#Manhaj", "#Salaf"], "source": "📝 al-Ājurrī, ash-Sharīʿah, überliefert von al-Awzāʿī; sinngemäß in frühen Werken zum Festhalten an der Sunnah.", "links": [{"label": "→ Quelle", "url": "https://quotesfromthesalaf.wordpress.com/category/search-via-name/awzaaee-d-157/"}], "logo": "logo-black.png", "statement": "🖋️ **al-Awzāʿī** sagte sinngemäß:\n\n„Sei geduldig auf der Sunnah, halte an, wo die Leute angehalten haben, und sprich mit dem, womit sie gesprochen haben.“\n\n👉🏼 Der Weg der Ahlus-Sunnah ist nicht Übertreibung und nicht Neuerung, sondern Stehenbleiben bei dem, was die frühen Imāme überlieferten.\n\n🌙 **Fazit:** Wer sicher gehen will, überschreitet nicht den Weg der ersten Generationen."}, {"id": "dar-al-tawhid-total-017", "date": "2026-06-04T16:00:00.000Z", "title": "📖 Der Muslim schadet nicht mit Zunge und Hand", "category": "Hadith", "topic": "Akhlaq und Schutz", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Akhlaq", "#Islam", "#Zunge", "#Hand"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Īmān, Hadith Nr. 10.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:10"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der Muslim ist derjenige, vor dessen Zunge und Hand die Muslime sicher sind.“\n\n👉🏼 Islam zeigt sich nicht nur in Worten, sondern auch darin, dass die Menschen vor Unrecht, Verletzung und Schädigung sicher sind.\n\n🌙 **Fazit:** Ahlus-Sunnah verbindet Glauben mit gerechtem Verhalten."}, {"id": "dar-al-tawhid-total-018", "date": "2026-06-04T17:00:00.000Z", "title": "📖 Allah liebt beständige Taten", "category": "Hadith", "topic": "Beständigkeit", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Ibadah", "#Sabr", "#Zuhd", "#Akhlaq"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Hadith Nr. 6464.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:6464"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Die beliebtesten Taten bei Allah sind die beständigen, auch wenn sie wenig sind.“\n\n👉🏼 Der Diener wird nicht durch kurze Ausbrüche allein aufgebaut, sondern durch beständige Anbetung, Wissen und Geduld.\n\n🌙 **Fazit:** Wenig mit Beständigkeit ist besser als viel ohne Standhaftigkeit."}, {"id": "dar-al-tawhid-total-019", "date": "2026-06-04T18:00:00.000Z", "title": "📖 Wetteifern um Qurʾān und Geben", "category": "Hadith", "topic": "Qurʾān und Geben", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Quran", "#Wissen", "#Sadaqah", "#Akhlaq"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-ʿIlm, Hadith Nr. 73.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:73"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nWetteifern im erlaubten Sinne gibt es bei jemandem, dem Allah Qurʾān gab und der danach handelt, sowie bei jemandem, dem Allah Vermögen gab und der es rechtmäßig ausgibt.\n\n👉🏼 Das Herz soll nicht nach leerer Dunyā schauen, sondern nach Wissen, Qurʾān und rechtschaffener Tat streben.\n\n🌙 **Fazit:** Wetteifere um das, was dich Allah näherbringt."}, {"id": "dar-al-tawhid-total-020", "date": "2026-06-04T19:00:00.000Z", "title": "📖 Die Barmherzigen werden erbarmt", "category": "Hadith", "topic": "Barmherzigkeit", "scholar": "Prophet ﷺ", "book": "Sunan Abī Dāwūd", "tags": ["#Hadith", "#Barmherzigkeit", "#Akhlaq", "#Sunnah", "#Adab"], "source": "📝 Abū Dāwūd, as-Sunan, Kitāb al-Adab, Hadith Nr. 4941; von vielen Gelehrten als authentisch eingestuft.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/abudawud:4941"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Den Barmherzigen erbarmt sich der Allerbarmer. Seid barmherzig mit denen auf der Erde, dann wird sich Der über dem Himmel eurer erbarmen.“\n\n👉🏼 Barmherzigkeit ist keine Schwäche. Sie ist eine Eigenschaft, die Allah liebt und durch die Er Seinen Dienern Barmherzigkeit schenkt.\n\n🌙 **Fazit:** Wer Barmherzigkeit von Allah hofft, soll barmherzig gegenüber Seiner Schöpfung sein."}, {"id": "dar-al-tawhid-total-021", "date": "2026-06-04T20:00:00.000Z", "title": "📖 Der Dīn ist aufrichtiger Rat", "category": "Hadith", "topic": "Naṣīḥah und Aufrichtigkeit", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Nasiha", "#Akhlaq", "#Sunnah", "#Manhaj"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Īmān, Hadith Nr. 55.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:55a"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte:\n\n„Der Dīn ist Naṣīḥah.“\n\n👉🏼 Naṣīḥah bedeutet nicht bloß Kritik, sondern aufrichtige Treue gegenüber Allah, Seinem Buch, Seinem Gesandten ﷺ, den Imāmen der Muslime und den Muslimen allgemein.\n\n🌙 **Fazit:** Wer Naṣīḥah gibt, tut es mit Wissen, Aufrichtigkeit und Barmherzigkeit – nicht mit Hochmut oder Bloßstellung."}, {"id": "dar-al-tawhid-total-022", "date": "2026-06-04T21:00:00.000Z", "title": "📖 Der beste Islam", "category": "Hadith", "topic": "Akhlaq und Sicherheit", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Salam", "#Akhlaq", "#Islam", "#Sunnah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Īmān, Hadith Nr. 12.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:12"}], "logo": "logo-black.png", "statement": "🖋️ Ein Mann fragte den Gesandten Allahs ﷺ: Welcher Islam ist der beste?\n\nEr sagte sinngemäß: Dass du Speise gibst und den Salām grüßt – den, den du kennst und den, den du nicht kennst.\n\n👉🏼 Der Islam zeigt sich in Anbetung und zugleich im guten Umgang mit den Menschen.\n\n🌙 **Fazit:** Wer den Salām verbreitet und Gutes gibt, belebt eine Sunnah, die Herzen verbindet."}, {"id": "dar-al-tawhid-total-023", "date": "2026-06-04T22:00:00.000Z", "title": "📖 Wer an Allah und den Jüngsten Tag glaubt", "category": "Hadith", "topic": "Nachbarschaft und Gastrecht", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Iman", "#Nachbar", "#Akhlaq", "#Adab"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Adab, Hadith Nr. 6018.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:6018"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nWer an Allah und den Jüngsten Tag glaubt, soll seinen Nachbarn nicht schädigen; wer an Allah und den Jüngsten Tag glaubt, soll seinen Gast ehren.\n\n👉🏼 Īmān zeigt sich nicht nur im Gebet, sondern auch darin, wie man mit Nachbarn, Gästen und Menschen umgeht.\n\n🌙 **Fazit:** Wahrer Īmān schützt andere vor Schaden und bringt Nutzen in den Alltag."}, {"id": "dar-al-tawhid-total-024", "date": "2026-06-04T23:00:00.000Z", "title": "📖 Barmherzigkeit mit den Kleinen", "category": "Hadith", "topic": "Barmherzigkeit und Respekt", "scholar": "Prophet ﷺ", "book": "Jāmiʿ at-Tirmidhī", "tags": ["#Hadith", "#Barmherzigkeit", "#Adab", "#Akhlaq", "#Familie"], "source": "📝 at-Tirmidhī, al-Jāmiʿ, Kitāb al-Birr wa’ṣ-Ṣilah, Hadith Nr. 1919; von at-Tirmidhī als ḥasan ṣaḥīḥ eingestuft.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/tirmidhi:1919"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nNicht zu uns gehört, wer sich nicht unserer Kleinen erbarmt und nicht den Rang unserer Älteren erkennt.\n\n👉🏼 Der Dīn verbindet Barmherzigkeit gegenüber Schwachen mit Respekt gegenüber Älteren.\n\n🌙 **Fazit:** Ahlus-Sunnah zeigt sich in ʿAqīdah und im edlen Umgang mit Jung und Alt."}, {"id": "dar-al-tawhid-total-025", "date": "2026-06-04T00:00:00.000Z", "title": "📖 Das Gleichnis des guten Gefährten", "category": "Hadith", "topic": "Freundschaft und Einfluss", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Freundschaft", "#Akhlaq", "#Adab", "#Tazkiyah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb adh-Dhabāʾiḥ wa’ṣ-Ṣayd, Hadith Nr. 5534.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:5534"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ verglich den guten Gefährten mit einem Moschusverkäufer und den schlechten Gefährten mit einem Schmiedebläser.\n\n👉🏼 Gesellschaft formt Herz, Sprache, Denken und Verhalten. Darum achtet der Gläubige darauf, wer ihn begleitet.\n\n🌙 **Fazit:** Gute Gefährten ziehen dich zur Sunnah, schlechte Gefährten ziehen dich zur Nachlässigkeit."}, {"id": "dar-al-tawhid-total-026", "date": "2026-06-04T01:00:00.000Z", "title": "📖 Allah nimmt nur das Gute an", "category": "Hadith", "topic": "Halāl und Duʿā", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Halal", "#Dua", "#Tazkiyah", "#Fiqh"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Hadith Nr. 1015.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:1015"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte:\n\n„Allah ist gut und nimmt nur Gutes an.“\n\n👉🏼 Der Diener soll seine Nahrung, sein Einkommen und seine Taten reinigen, denn unreine Mittel verdunkeln das Herz und schwächen die Duʿā.\n\n🌙 **Fazit:** Wer Annahme bei Allah sucht, achtet auf Halāl, Aufrichtigkeit und Reinheit der Tat."}, {"id": "dar-al-tawhid-total-027", "date": "2026-06-04T02:00:00.000Z", "title": "📖 Die Hand, die gibt", "category": "Hadith", "topic": "Großzügigkeit", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Sadaqah", "#Zuhd", "#Rizq", "#Akhlaq"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb az-Zakāh, Hadith Nr. 1429.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:1429"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nDie obere Hand ist besser als die untere Hand.\n\n👉🏼 Der Muslim lernt Würde, Arbeit, Geben und Großzügigkeit. Er hängt sein Herz nicht an die Hände der Menschen.\n\n🌙 **Fazit:** Ehre liegt darin, für Allah zu geben und sich nicht unnötig abhängig zu machen."}, {"id": "dar-al-tawhid-total-028", "date": "2026-06-04T03:00:00.000Z", "title": "📖 Leichtigkeit und keine Erschwerung", "category": "Hadith", "topic": "Daʿwah und Weisheit", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Dawah", "#Wissen", "#Akhlaq", "#Sunnah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-ʿIlm, Hadith Nr. 69.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:69"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nMacht es leicht und erschwert es nicht; gebt frohe Botschaft und schreckt nicht ab.\n\n👉🏼 Die Sunnah ist nicht Chaos, Härte und Abschreckung ohne Wissen. Sie verbindet Wahrheit mit Weisheit.\n\n🌙 **Fazit:** Wer zur Wahrheit ruft, braucht Wissen, Milde und richtige Gewichtung."}, {"id": "dar-al-tawhid-total-029", "date": "2026-06-04T04:00:00.000Z", "title": "📖 Wer Böses sieht", "category": "Hadith", "topic": "Nahi ʿan al-Munkar", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Manhaj", "#Munkar", "#Iman", "#Fiqh"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Īmān, Hadith Nr. 49.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:49"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nWer von euch etwas Verwerfliches sieht, soll es ändern – mit seiner Hand, wenn er dazu imstande ist, sonst mit seiner Zunge, sonst mit seinem Herzen.\n\n👉🏼 Das Ändern des Munkar braucht Fähigkeit, Wissen und richtige Ordnung – nicht bloße Wut.\n\n🌙 **Fazit:** Das Herz des Gläubigen bleibt nicht gleichgültig gegenüber Sünde, aber er handelt mit Wissen und Maß."}, {"id": "dar-al-tawhid-total-030", "date": "2026-06-04T05:00:00.000Z", "title": "📖 Liebe für den Bruder", "category": "Hadith", "topic": "Brüderlichkeit im Īmān", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Bruderschaft", "#Iman", "#Akhlaq", "#Sunnah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Īmān, Hadith Nr. 13.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:13"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nKeiner von euch glaubt vollkommen, bis er für seinen Bruder liebt, was er für sich selbst liebt.\n\n👉🏼 Īmān reinigt das Herz von Egoismus, Neid und Härte gegenüber den Gläubigen.\n\n🌙 **Fazit:** Vollständiger Īmān zeigt sich darin, dass du für deinen Bruder Gutes liebst."}, {"id": "dar-al-tawhid-total-031", "date": "2026-06-04T06:00:00.000Z", "title": "📖 Der Gläubige ist wie ein Gebäude", "category": "Hadith", "topic": "Gemeinschaft und Unterstützung", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Bruderschaft", "#Akhlaq", "#Ummah", "#Sunnah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb aṣ-Ṣalāh, Hadith Nr. 481.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:481"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nDer Gläubige ist für den Gläubigen wie ein Gebäude, dessen Teile einander stärken.\n\n👉🏼 Die Muslime sollen einander stützen, nicht zerbrechen; helfen, nicht niederdrücken.\n\n🌙 **Fazit:** Wahre Brüderlichkeit stärkt den Dīn und schützt vor Vereinzelung."}, {"id": "dar-al-tawhid-total-032", "date": "2026-06-04T07:00:00.000Z", "title": "📖 Schutz durch das Gebet in der Nacht", "category": "Hadith", "topic": "Qiyām und Nähe zu Allah", "scholar": "Prophet ﷺ", "book": "Jāmiʿ at-Tirmidhī", "tags": ["#Hadith", "#Qiyam", "#Zuhd", "#Ibadah", "#Tazkiyah"], "source": "📝 at-Tirmidhī, al-Jāmiʿ, Kitāb ad-Daʿawāt, Hadith Nr. 3549; bekanntes Hadith über Qiyām al-Layl.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/tirmidhi:3549"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nHaltet am Nachtgebet fest, denn es war die Gewohnheit der Rechtschaffenen vor euch.\n\n👉🏼 Qiyām al-Layl reinigt das Herz, stärkt die Verbindung zu Allah und erzieht zur Aufrichtigkeit.\n\n🌙 **Fazit:** Wer Nähe zu Allah sucht, soll sich einen Anteil an der Nacht bewahren."}, {"id": "dar-al-tawhid-total-033", "date": "2026-06-04T08:00:00.000Z", "title": "📖 Allah liebt die Spuren der Gnade", "category": "Hadith", "topic": "Dankbarkeit und Erscheinung", "scholar": "Prophet ﷺ", "book": "Jāmiʿ at-Tirmidhī", "tags": ["#Hadith", "#Shukr", "#Akhlaq", "#Adab", "#Zuhd"], "source": "📝 at-Tirmidhī, al-Jāmiʿ, Kitāb al-Adab, Hadith Nr. 2819; bekanntes Hadith über das Zeigen der Gnade Allahs.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/tirmidhi:2819"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nAllah liebt es, die Spur Seiner Gnade an Seinem Diener zu sehen.\n\n👉🏼 Dankbarkeit zeigt sich nicht in Verschwendung, sondern darin, dass der Diener Allahs Gabe erkennt und sie im Gehorsam nutzt.\n\n🌙 **Fazit:** Nutze Allahs Gaben mit Dankbarkeit, Maß und Gehorsam."}, {"id": "dar-al-tawhid-total-034", "date": "2026-06-04T09:00:00.000Z", "title": "📖 Der Weg zur Liebe Allahs", "category": "Hadith", "topic": "Nawāfil und Nähe", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Ibadah", "#Nawafil", "#Tawhid", "#Tazkiyah"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Hadith Nr. 6502.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:6502"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ überlieferte von seinem Herrn:\n\nDer Diener nähert sich Allah durch freiwillige Taten, bis Allah ihn liebt.\n\n👉🏼 Pflichtgebete sind Grundlage, Nawāfil sind Nähe. Wer Allahs Liebe sucht, baut auf Pflichten und vermehrt freiwilligen Gehorsam.\n\n🌙 **Fazit:** Nähe zu Allah entsteht durch Aufrichtigkeit, Pflichten und beständige freiwillige Taten."}, {"id": "dar-al-tawhid-total-035", "date": "2026-06-04T10:00:00.000Z", "title": "📖 Der Mensch wird mit dem sein, den er liebt", "category": "Hadith", "topic": "Liebe und Gefolgschaft", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Liebe", "#Sunnah", "#Akhlaq", "#Manhaj"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Adab, Hadith Nr. 6169.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:6169"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nDer Mensch wird mit dem sein, den er liebt.\n\n👉🏼 Liebe im Dīn ist nicht nur Gefühl. Sie zeigt sich in Gefolgschaft, Nähe zur Sunnah und Abkehr von Wegen, die Allah missfallen.\n\n🌙 **Fazit:** Prüfe, wen du liebst, denn Liebe zieht den Menschen zu seinem Weg."}, {"id": "dar-al-tawhid-total-036", "date": "2026-06-04T11:00:00.000Z", "title": "📖 Bedecke die Fehler der Muslime", "category": "Hadith", "topic": "Barmherzigkeit und Schutz", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Akhlaq", "#Barmherzigkeit", "#Adab", "#Bruderschaft"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb adh-Dhikr wa’d-Duʿāʾ, Hadith Nr. 2699.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2699"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nWer einen Muslim bedeckt, den bedeckt Allah im Diesseits und im Jenseits.\n\n👉🏼 Fehler anderer sind kein Material für Bloßstellung. Wer bessern will, sucht Rechtleitung, nicht Schande.\n\n🌙 **Fazit:** Wer Bedeckung von Allah hofft, soll nicht leichtfertig die Blöße anderer verbreiten."}, {"id": "dar-al-tawhid-total-037", "date": "2026-06-04T12:00:00.000Z", "title": "📖 Geduld beim ersten Schlag", "category": "Hadith", "topic": "Sabr", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ al-Bukhārī", "tags": ["#Hadith", "#Sabr", "#Pruefung", "#Iman", "#Akhlaq"], "source": "📝 al-Bukhārī, Ṣaḥīḥ al-Bukhārī, Kitāb al-Janāʾiz, Hadith Nr. 1283.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/bukhari:1283"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nWahre Geduld ist beim ersten Schock.\n\n👉🏼 Geduld ist nicht erst dann stark, wenn alles vorbei ist. Sie zeigt sich besonders im ersten Moment der Prüfung.\n\n🌙 **Fazit:** Bitte Allah um Standhaftigkeit, bevor die Prüfung kommt, und halte dich beim ersten Schmerz an Ihn."}, {"id": "dar-al-tawhid-total-038", "date": "2026-06-04T13:00:00.000Z", "title": "📖 Die Waage des guten Charakters", "category": "Hadith", "topic": "Guter Charakter", "scholar": "Prophet ﷺ", "book": "Jāmiʿ at-Tirmidhī", "tags": ["#Hadith", "#Akhlaq", "#Adab", "#Iman", "#Tazkiyah"], "source": "📝 at-Tirmidhī, al-Jāmiʿ, Kitāb al-Birr wa’ṣ-Ṣilah, Hadith Nr. 2002; von at-Tirmidhī als ḥasan ṣaḥīḥ eingestuft.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/tirmidhi:2002"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\nNichts ist schwerer auf der Waage des Gläubigen am Tag der Auferstehung als guter Charakter.\n\n👉🏼 Akhlāq ist keine Nebensache. Guter Charakter gehört zu den schwersten Taten auf der Waage.\n\n🌙 **Fazit:** Wer seine Waage stärken will, arbeitet an seinem Charakter."}, {"id": "dar-al-tawhid-total-039", "date": "2026-06-04T14:00:00.000Z", "title": "📖 Die beste Rede ist das Buch Allahs", "category": "Hadith", "topic": "Qurʾān und Sunnah", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Quran", "#Sunnah", "#Manhaj", "#Aqidah"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb al-Jumuʿah, Hadith Nr. 867.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:867a"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte in der Khutbah sinngemäß:\n\nDie beste Rede ist das Buch Allahs und die beste Leitung ist die Leitung Muḥammads ﷺ.\n\n👉🏼 Keine Rede steht über dem Qurʾān und keine Leitung ist besser als die Sunnah des Propheten ﷺ.\n\n🌙 **Fazit:** Wer sichere Rechtleitung will, beginnt mit Qurʾān und Sunnah."}, {"id": "dar-al-tawhid-total-040", "date": "2026-06-04T15:00:00.000Z", "title": "📖 Die Welt ist ein Gefängnis für den Gläubigen", "category": "Hadith", "topic": "Zuhd und Jenseits", "scholar": "Prophet ﷺ", "book": "Ṣaḥīḥ Muslim", "tags": ["#Hadith", "#Zuhd", "#Dunya", "#Iman", "#Akhirah"], "source": "📝 Muslim ibn al-Ḥajjāj, Ṣaḥīḥ Muslim, Kitāb az-Zuhd wa’r-Raqāʾiq, Hadith Nr. 2956.", "links": [{"label": "→ Quelle", "url": "https://sunnah.com/muslim:2956"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte:\n\n„Die Welt ist ein Gefängnis für den Gläubigen und ein Paradies für den Kāfir.“\n\n👉🏼 Der Gläubige lebt nicht grenzenlos seinen Begierden nach. Er weiß, dass das wahre Leben im Jenseits ist.\n\n🌙 **Fazit:** Zuhd bedeutet, die Dunyā zu nutzen, ohne ihr Gefangener zu werden."}, {"id": "dar-al-tawhid-total-041", "date": "2026-06-04T16:00:00.000Z", "title": "📖 Der Weg der Gefährten", "category": "Aqīdah", "topic": "Ṣaḥābah und Manhaj", "scholar": "Aḥmad ibn Ḥanbal", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Ahmad", "#Sahaba", "#Sunnah", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Aḥmad ibn Ḥanbal, Athar Nr. 317, Band 1, S. 176.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/32/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%AD%D9%85%D8%AF-%D8%A8%D9%86-%D8%AD%D9%86%D8%A8%D9%84#:~:text=%D9%85%D8%A7%20%D9%83%D8%A7%D9%86%20%D8%B9%D9%84%D9%8A%D9%87%20%D8%A3%D8%B5%D8%AD%D8%A7%D8%A8%20%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D9%84%D9%87"}], "logo": "logo-black.png", "statement": "🖋️ Aḥmad ibn Ḥanbal sagte sinngemäß:\n\n„Die Grundlage ist das Festhalten an dem, worauf die Gefährten des Gesandten Allahs ﷺ waren.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Wer den geraden Weg sucht, beginnt beim Verständnis der Ṣaḥābah."}, {"id": "dar-al-tawhid-total-042", "date": "2026-06-04T17:00:00.000Z", "title": "📖 Bidʿah verlassen", "category": "Aqīdah", "topic": "Bidʿah und Sunnah", "scholar": "Aḥmad ibn Ḥanbal", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Bidah", "#Ahmad", "#Sunnah", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Aḥmad ibn Ḥanbal, Athar Nr. 317, Band 1, S. 176.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/32/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%AD%D9%85%D8%AF-%D8%A8%D9%86-%D8%AD%D9%86%D8%A8%D9%84#:~:text=%D9%88%D8%AA%D8%B1%D9%83%20%D8%A7%D9%84%D8%A8%D8%AF%D8%B9%20%D9%88%D9%83%D9%84%20%D8%A8%D8%AF%D8%B9%D8%A9%20%D9%81%D9%87%D9%8A%20%D8%B6%D9%84%D8%A7%D9%84%D8%A9"}], "logo": "logo-black.png", "statement": "🖋️ Aḥmad ibn Ḥanbal sagte sinngemäß:\n\n„Zu den Grundlagen gehört das Verlassen der Neuerungen; jede Bidʿah ist Irreleitung.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Sicherheit liegt nicht im Schmücken der Bidʿah, sondern im Festhalten an der Sunnah."}, {"id": "dar-al-tawhid-total-043", "date": "2026-06-04T18:00:00.000Z", "title": "📖 Taslīm gegenüber der Sunnah", "category": "Aqīdah", "topic": "Taslīm", "scholar": "Aḥmad ibn Ḥanbal", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Taslim", "#Ahmad", "#Manhaj", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Aḥmad ibn Ḥanbal, Athar Nr. 317, Band 1, S. 176.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/32/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%AD%D9%85%D8%AF-%D8%A8%D9%86-%D8%AD%D9%86%D8%A8%D9%84#:~:text=%D9%88%D9%84%D8%A7%20%D8%AA%D8%AF%D8%B1%D9%83%20%D8%A8%D8%A7%D9%84%D8%B9%D9%82%D9%88%D9%84%20%D9%88%D9%84%D8%A7%20%D8%A7%D9%84%D8%A3%D9%87%D9%88%D8%A7%D8%A1%20%D8%A5%D9%86%D9%85%D8%A7%20%D9%87%D9%88%20%D8%A7%D9%84%D8%A7%D8%AA%D8%A8%D8%A7%D8%B9%20%D9%88%D8%AA%D8%B1%D9%83%20%D8%A7%D9%84%D9%87%D9%88%D9%89"}], "logo": "logo-black.png", "statement": "🖋️ Aḥmad ibn Ḥanbal sagte sinngemäß:\n\n„Die Sunnah wird nicht durch bloße Vernunft oder Begierden erfasst; sie ist Befolgung und Verlassen der Begierde.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Taslīm schützt die Aqīdah vor Kalām, Streitlust und Begierde."}, {"id": "dar-al-tawhid-total-044", "date": "2026-06-04T19:00:00.000Z", "title": "📖 Ruʾyah im Jenseits", "category": "Aqīdah", "topic": "Ruʾyah", "scholar": "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Ruyah", "#AbuHatim", "#AbuZurah", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Abī Zurʿah wa Abī Ḥātim, Band 1, S. 198–199.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/36/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%A8%D9%8A-%D8%B2%D8%B1%D8%B9%D8%A9-%D9%88%D8%A3%D8%A8%D9%8A-%D8%AD%D8%A7%D8%AA%D9%85#:~:text=%D9%88%D8%A3%D9%87%D9%84%20%D8%A7%D9%84%D8%AC%D9%86%D8%A9%20%D9%8A%D8%B1%D9%88%D9%86%20%D8%B1%D8%A8%D9%87%D9%85%20%D9%8A%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D9%8A%D8%A7%D9%85%D8%A9"}], "logo": "logo-black.png", "statement": "🖋️ Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī sagte sinngemäß:\n\n„Die Bewohner des Paradieses werden ihren Herrn am Tag der Auferstehung sehen.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Die Ruʾyah wird bestätigt, wie sie überliefert wurde, ohne Umdeutung und ohne Wie."}, {"id": "dar-al-tawhid-total-045", "date": "2026-06-04T20:00:00.000Z", "title": "📖 Der Qurʾān ist Allahs Wort", "category": "Aqīdah", "topic": "Qurʾān", "scholar": "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Quran", "#AbuHatim", "#AbuZurah", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Abī Zurʿah wa Abī Ḥātim, Band 1, S. 198–199.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/36/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%A8%D9%8A-%D8%B2%D8%B1%D8%B9%D8%A9-%D9%88%D8%A3%D8%A8%D9%8A-%D8%AD%D8%A7%D8%AA%D9%85#:~:text=%D9%88%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%83%D9%84%D8%A7%D9%85%20%D8%A7%D9%84%D9%84%D9%87%20%D8%BA%D9%8A%D8%B1%20%D9%85%D8%AE%D9%84%D9%88%D9%82"}], "logo": "logo-black.png", "statement": "🖋️ Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī sagte sinngemäß:\n\n„Der Qurʾān ist Allahs Wort, nicht erschaffen.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Diese Aussage ist ein zentraler Grundsatz gegen die Jahmiyyah."}, {"id": "dar-al-tawhid-total-046", "date": "2026-06-04T21:00:00.000Z", "title": "📖 Waage und Becken sind Wahrheit", "category": "Aqīdah", "topic": "Ākhirah", "scholar": "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Akhirah", "#Mizan", "#AbuHatim", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Abī Zurʿah wa Abī Ḥātim, Band 1, S. 198–199.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/36/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A3%D8%A8%D9%8A-%D8%B2%D8%B1%D8%B9%D8%A9-%D9%88%D8%A3%D8%A8%D9%8A-%D8%AD%D8%A7%D8%AA%D9%85#:~:text=%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%B2%D8%A7%D9%86%20%D8%AD%D9%82%20%D9%88%D8%A7%D9%84%D8%AD%D9%88%D8%B6%20%D8%AD%D9%82"}], "logo": "logo-black.png", "statement": "🖋️ Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī sagte sinngemäß:\n\n„Die Waage ist wahr und das Becken ist wahr.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Die Angelegenheiten des Jenseits werden geglaubt, wie sie in den Texten gekommen sind."}, {"id": "dar-al-tawhid-total-047", "date": "2026-06-04T22:00:00.000Z", "title": "📖 Īmān nimmt durch Tat zu", "category": "Aqīdah", "topic": "Īmān", "scholar": "Sufyān ath-Thawrī", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Iman", "#Sufyan", "#Athar", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Sufyān ath-Thawrī, Band 1, S. 170–171.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/29/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A7%D9%84%D8%AB%D9%88%D8%B1%D9%8A#:~:text=%D9%88%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%82%D9%88%D9%84%20%D9%88%D8%B9%D9%85%D9%84%20%D9%88%D9%86%D9%8A%D8%A9%20%D8%8C%20%D9%8A%D8%B2%D9%8A%D8%AF%20%D9%88%D9%8A%D9%86%D9%82%D8%B5"}], "logo": "logo-black.png", "statement": "🖋️ Sufyān ath-Thawrī sagte sinngemäß:\n\n„Īmān ist Wort, Tat und Absicht; er nimmt zu und ab.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Īmān ist bei Ahlus-Sunnah kein leeres Wort, sondern Glaube, Aussage und rechtschaffene Tat."}, {"id": "dar-al-tawhid-total-048", "date": "2026-06-04T23:00:00.000Z", "title": "📖 Keine Tat ohne Sunnah", "category": "Aqīdah", "topic": "Sunnah und Īmān", "scholar": "Sufyān ath-Thawrī", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Sunnah", "#Iman", "#Sufyan", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Iʿtiqād Sufyān ath-Thawrī, Band 1, S. 170–171.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/29/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D8%AF-%D8%A7%D9%84%D8%AB%D9%88%D8%B1%D9%8A#:~:text=%D9%88%D9%84%D8%A7%20%D9%8A%D8%AC%D9%88%D8%B2%20%D8%A7%D9%84%D9%82%D9%88%D9%84%20%D9%88%D8%A7%D9%84%D8%B9%D9%85%D9%84%20%D9%88%D8%A7%D9%84%D9%86%D9%8A%D8%A9%20%D8%A5%D9%84%D8%A7%20%D8%A8%D9%85%D9%88%D8%A7%D9%81%D9%82%D8%A9%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9"}], "logo": "logo-black.png", "statement": "🖋️ Sufyān ath-Thawrī sagte sinngemäß:\n\n„Wort, Tat und Absicht sind nur gültig mit Übereinstimmung zur Sunnah.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Aufrichtigkeit braucht Mutābaʿah; die Tat wird durch Sunnah geordnet."}, {"id": "dar-al-tawhid-total-049", "date": "2026-06-04T00:00:00.000Z", "title": "📖 Īmān und Tat gehören zusammen", "category": "Aqīdah", "topic": "Īmān und ʿAmal", "scholar": "al-Awzāʿī", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#Iman", "#Awzai", "#Athar", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Bāb Jamāʿ al-Kalām fī al-Īmān, Band 5; Islamweb Bibliothek.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/110/%D9%82%D9%88%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D8%B2%D8%A7%D8%B9%D9%8A#:~:text=%D9%84%D8%A7%20%D9%8A%D8%B3%D8%AA%D9%82%D9%8A%D9%85%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D8%A5%D9%84%D8%A7%20%D8%A8%D8%A7%D9%84%D9%82%D9%88%D9%84"}], "logo": "logo-black.png", "statement": "🖋️ al-Awzāʿī sagte sinngemäß:\n\n„Īmān ist nicht aufrecht ohne Wort, und Wort und Īmān sind nicht aufrecht ohne Tat.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Die frühen Imāme trennten Īmān nicht von Tat und Gehorsam."}, {"id": "dar-al-tawhid-total-050", "date": "2026-06-04T01:00:00.000Z", "title": "📖 Genügsamkeit mit der Überlieferung", "category": "Aqīdah", "topic": "Sunnah und Athar", "scholar": "ʿAbdullāh ibn Masʿūd", "book": "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah", "tags": ["#Aqidah", "#IbnMasud", "#Sunnah", "#Athar", "#Islamweb"], "source": "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah, Athar von ʿAbdullāh ibn Masʿūd; Islamweb Bibliothek.", "links": [{"label": "→ Islamweb", "url": "https://www.islamweb.net/ar/library/content/110/24/%D8%B3%D9%8A%D8%A7%D9%82-%D9%85%D8%A7-%D8%B1%D9%88%D9%8A-%D8%B9%D9%86-%D8%A7%D9%84%D9%86%D8%A8%D9%8A-%D8%B5%D9%84%D9%89-%D8%A7%D9%84%D9%84%D9%87-%D8%B9%D9%84%D9%8A%D9%87-%D9%88%D8%B3%D9%84%D9%85-%D9%81%D9%8A-%D8%A7%D9%84%D8%AD%D8%AB-%D8%B9%D9%84%D9%89-%D8%A7%D9%84%D8%AA%D9%85%D8%B3%D9%83-%D8%A8%D8%A7%D9%84%D9%83%D8%A7%D8%A8-%D9%88%D8%A7%D9%84%D8%B3%D9%86%D8%A9#:~:text=%D8%A7%D8%AA%D8%A8%D8%B9%D9%88%D8%A7%20%D9%88%D9%84%D8%A7%20%D8%AA%D8%A8%D8%AA%D8%AF%D8%B9%D9%88%D8%A7%20%D9%81%D9%82%D8%AF%20%D9%83%D9%81%D9%8A%D8%AA%D9%85"}], "logo": "logo-black.png", "statement": "🖋️ ʿAbdullāh ibn Masʿūd sagte sinngemäß:\n\n„Folgt und erfindet nicht, denn euch wurde genügt.“\n\n👉🏼 Diese Aussage zeigt einen Grundsatz der frühen Imāme: **Aqīdah** wird mit **Überlieferung**, **Taslīm** und dem Weg der Ahlus-Sunnah bewahrt – nicht durch bloße Meinung oder Neuerung.\n\n🌙 **Fazit:** Die Religion ist vollständig; wer sicher gehen will, bleibt bei Überlieferung und Sunnah."}];</script>
-
-<style id="modal-safe-open-post-final">
-/* Sicherer Abstand für geöffnete Beiträge:
-   verhindert Überlappung mit Dynamic Island, Notch, Statusleiste,
-   Android-Punch-Hole und Browser-/App-Leisten. */
-
-:root{
-  --modal-safe-top: max(72px, calc(env(safe-area-inset-top, 0px) + 64px));
-  --modal-safe-bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 18px));
-}
-
-.modal{
-  align-items:flex-start!important;
-  padding-top:var(--modal-safe-top)!important;
-  padding-bottom:var(--modal-safe-bottom)!important;
-}
-
-.article{
-  margin-top:0!important;
-  max-height:none!important;
-}
-
-.article-top{
-  position:relative!important;
-  top:auto!important;
-  z-index:5!important;
-  background:transparent!important;
-  padding-top:0!important;
-}
-
-/* In installierter App / PWA noch mehr Sicherheit */
-@media all and (display-mode: standalone),
-       all and (display-mode: fullscreen),
-       all and (display-mode: minimal-ui){
-  :root{
-    --modal-safe-top: max(86px, calc(env(safe-area-inset-top, 0px) + 74px));
-    --modal-safe-bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 22px));
-  }
-}
-
-/* Smartphone-Ansicht */
-@media(max-width:820px){
-  :root{
-    --modal-safe-top: max(82px, calc(env(safe-area-inset-top, 0px) + 72px));
-    --modal-safe-bottom: max(26px, calc(env(safe-area-inset-bottom, 0px) + 20px));
-  }
-
-  .modal{
-    padding-left:8px!important;
-    padding-right:8px!important;
-  }
-
-  .article{
-    width:calc(100vw - 16px)!important;
-    border-radius:16px!important;
-    padding:12px 11px!important;
-  }
-
-  .article-top{
-    display:flex!important;
-    justify-content:flex-end!important;
-    gap:6px!important;
-    margin-bottom:8px!important;
-  }
-
-  .article-top button{
-    min-height:34px!important;
-    padding:7px 10px!important;
-    font-size:10px!important;
-  }
-
-  .article h2{
-    margin-top:6px!important;
-    padding-top:0!important;
-  }
-}
-
-/* Sehr kleine Smartphones */
-@media(max-width:390px){
-  :root{
-    --modal-safe-top: max(88px, calc(env(safe-area-inset-top, 0px) + 78px));
-  }
-}
-
-/* Querformat mit Notch/Punch-Hole */
-@media(max-height:520px) and (orientation:landscape){
-  :root{
-    --modal-safe-top: max(56px, calc(env(safe-area-inset-top, 0px) + 44px));
-  }
-
-  .modal{
-    padding-top:var(--modal-safe-top)!important;
-  }
-}
-</style>
-
-
-
-
-<style id="article-clean-highlight-final">
-/* DAR AL TAWḤID – saubere Beitrags-Typografie
-   Emojis bleiben inline. Keine kompletten Absätze unterstrichen.
-   Nur wichtige Begriffe/Sätze werden edel hervorgehoben. */
-
-:root{
-  --font-title: Georgia, "Times New Roman", serif;
-  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-statement: Georgia, "Times New Roman", serif;
-}
-
-/* Überschriften edel */
-h1,
-aside h2,
-.panel h2,
-.knowledge h2,
-.post-card h3,
-.article h2,
-.salam-line,
-.notice strong{
-  font-family:var(--font-title)!important;
-  font-weight:800!important;
-}
-
-/* Karten */
-.post-card h3{
-  color:#f2df9b!important;
-  font-weight:850!important;
-  letter-spacing:.01em;
-}
-
-.post-card .excerpt{
-  font-family:var(--font-statement)!important;
-  font-style:italic!important;
-  font-weight:650!important;
-  color:#fff7df!important;
-  text-decoration:none!important;
-}
-
-/* Geöffneter Beitrag */
-.article .statement{
-  font-family:var(--font-statement)!important;
-  font-weight:540!important;
-  letter-spacing:.006em!important;
-  color:#fff8e8!important;
-}
-
-/* normale fette Stellen */
-.article .statement strong,
-.article .statement b{
-  color:#fff7df!important;
-  font-weight:900!important;
-  text-shadow:0 0 12px rgba(242,223,155,.10)!important;
-}
-
-/* kurvige wichtige Begriffe */
-.article .statement em,
-.article .statement i,
-.article .statement .important-term{
-  color:#f2df9b!important;
-  font-style:italic!important;
-  font-weight:800!important;
-  text-decoration:underline;
-  text-decoration-thickness:1px;
-  text-underline-offset:4px;
-  text-decoration-color:rgba(242,223,155,.62);
-}
-
-/* Nur wenn ein ganzer Satz besonders wichtig ist */
-.article .statement .important-sentence{
-  color:#fff7df!important;
-  font-style:italic!important;
-  font-weight:850!important;
-  text-decoration:underline;
-  text-decoration-thickness:1px;
-  text-underline-offset:5px;
-  text-decoration-color:rgba(242,223,155,.52);
-}
-
-/* Zitat nicht komplett plump unterstreichen */
-.article .statement .quote-inline{
-  font-style:italic!important;
-  font-weight:720!important;
-  color:#fff7df!important;
-}
-
-/* Namen stärker */
-.article .statement .lead-name{
-  font-weight:900!important;
-  color:#fff7df!important;
-}
-
-/* Emoji-Zeilen bleiben inline – KEIN display:block auf Emoji */
-.article .statement .emoji-inline{
-  display:inline!important;
-  margin:0!important;
-  padding:0!important;
-}
-
-/* Fazit hervorheben, aber Emoji bleibt mit Text in derselben Zeile */
-.article .statement .fazit-word{
-  color:#f2df9b!important;
-  font-weight:900!important;
-}
-
-/* Quellenzeile */
-.article-source{
-  font-family:var(--font-body)!important;
-  font-weight:650!important;
-}
-
-/* Vorschau nicht alles unterstreichen */
-.post-card .excerpt .important-term,
-.post-card .excerpt em,
-.post-card .excerpt i{
-  text-decoration:none!important;
-}
-
-@media(max-width:820px){
-  .article .statement{
-    font-size:15.8px!important;
-    line-height:1.62!important;
-  }
-
-  .article .statement .important-term{
-    text-underline-offset:3px;
-  }
-
-  .article .statement .important-sentence{
-    text-underline-offset:4px;
-  }
-}
-</style>
-
-
-<style id="locked-original-social-icons-css">
-.locked-original-socials{
-  display:flex!important;
-  justify-content:center!important;
-  align-items:center!important;
-  gap:16px!important;
-  flex-wrap:wrap!important;
-  margin-top:10px!important;
-  margin-bottom:6px!important;
-}
-.locked-original-socials .footer-social-item{
-  display:inline-flex!important;
-  align-items:center!important;
-  gap:8px!important;
-  color:var(--muted)!important;
-  font-weight:750!important;
-  font-size:16px!important;
-  line-height:1!important;
-  background:transparent!important;
-  border:0!important;
-  padding:0!important;
-}
-.locked-original-socials .social-icon,
-.locked-original-socials svg{
-  display:inline-flex!important;
-  width:20px!important;
-  height:20px!important;
-  min-width:20px!important;
-  flex:0 0 20px!important;
-}
-.footer-social:not(.locked-original-socials){
-  display:none!important;
-}
-@media(max-width:820px){
-  .locked-original-socials{
-    gap:10px!important;
-  }
-  .locked-original-socials .footer-social-item{
-    font-size:12px!important;
-    white-space:nowrap!important;
-  }
-  .locked-original-socials .social-icon,
-  .locked-original-socials svg{
-    width:18px!important;
-    height:18px!important;
-    min-width:18px!important;
-  }
-}
-</style>
-
-
-<style id="dezent-watermark-header-logo-final">
-/* Dezent: großes Wasserzeichen im Hintergrund schwächer.
-   In Beitrags-Vorschau-Karten kein Wasserzeichen mehr.
-   Logo professionell oben neben dem Titel. */
-
-.brand-title-row{
-  display:flex!important;
-  align-items:center!important;
-  gap:18px!important;
-}
-
-.header-logo-mark{
-  width:76px!important;
-  height:76px!important;
-  object-fit:contain!important;
-  border-radius:999px!important;
-  opacity:.96!important;
-  filter:drop-shadow(0 0 18px rgba(242,223,155,.10))!important;
-  flex:0 0 76px!important;
-}
-
-/* Großes Hintergrund-Wasserzeichen: sichtbar, aber sehr dezent */
-body::before{
-  background-image:url("watermark-circle-soft.png")!important;
-  background-position:18% 44%!important;
-  background-size:min(600px, 52vw) auto!important;
-  background-repeat:no-repeat!important;
-  opacity:.092!important;
-  mix-blend-mode:normal!important;
-  filter:none!important;
-}
-
-/* WICHTIG: In den Beitragsvorschau-Karten kein Logo-Wasserzeichen */
-.post-card::before{
-  display:none!important;
-  content:none!important;
-  background:none!important;
-  opacity:0!important;
-}
-
-.post-card{
-  background:linear-gradient(145deg, rgba(16,29,20,.94), rgba(7,16,11,.94))!important;
-}
-
-/* Falls irgendwo alte Hintergrundbilder direkt gesetzt wurden */
-.post-card [style*="logo-black"],
-.post-card [style*="watermark"]{
-  background-image:none!important;
-}
-
-@media(max-width:820px){
-  .brand-title-row{
-    gap:10px!important;
-  }
-
-  .header-logo-mark{
-    width:48px!important;
-    height:48px!important;
-    flex-basis:48px!important;
-  }
-
-  body::before{
-    background-position:center 38%!important;
-    background-size:min(420px, 86vw) auto!important;
-    opacity:.068!important;
-  }
-}
-
-@media(max-width:390px){
-  .header-logo-mark{
-    width:42px!important;
-    height:42px!important;
-    flex-basis:42px!important;
-  }
-}
-</style>
-
 </head>
 <body class="clean-home">
 <header class="site">
@@ -484,167 +92,42 @@ body::before{
 </main>
 <div id="modal" class="modal" role="dialog" aria-modal="true"><article class="article"><div class="article-top"><button id="shareBtn">Beitrag teilen</button><button id="closeBtn">Schließen</button></div><h2 id="modalTitle"></h2><div id="modalMeta" class="meta"></div><div id="modalStatement" class="statement"></div><div id="modalSource" class="article-source"></div><div id="modalLinks" class="article-links"></div></article></div>
 <footer class="site"><strong>DAR AL TAWḤID</strong><br>Folgt für mehr Wissen aus Qurʾān & Sunnah
-
-  <!-- LOCKED_ORIGINAL_SOCIAL_ICONS_START -->
   <div class="footer-social locked-original-socials">
     <span class="footer-social-item"><span class="social-icon tg-original" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" role="img"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></span>
     <span class="footer-social-item"><span class="social-icon ig-original" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" role="img"><defs><linearGradient id="igFooterExactLogoFinal" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFooterExactLogoFinal)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></span>
   </div>
-  <!-- LOCKED_ORIGINAL_SOCIAL_ICONS_END -->
-
   <span class="signature">by Serhat Abu Malik</span></footer>
 <script>
-const DATA = window.EMBEDDED_POSTS || [];
-let posts = Array.isArray(DATA) ? DATA : [];
+let posts = [];
 let active = {type:"all", value:"Alle"};
 let currentPost = null;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const stripMd = s => String(s ?? "").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1");
-
-function formatPostText(raw){
-  let s = String(raw ?? "");
-  s = esc(s);
-
-  // Markdown erst respektieren
-  s = s.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-  s = s.replace(/\*(.*?)\*/g, "<em>$1</em>");
-
-  // Namen nach 🖋️ stark hervorheben, Emoji bleibt inline
-  s = s.replace(/🖋️\s*([^:\n]+):/g, "<span class='emoji-inline'>🖋️</span> <span class='lead-name'>$1:</span>");
-
-  // Zitat nur kursiv/stark, nicht komplett übertrieben unterstrichen
-  s = s.replace(/„([^“]+)“/g, "<span class='quote-inline'>„$1“</span>");
-
-  // Wichtige Fachbegriffe gezielt hervorheben, nicht ganze Absätze
-  const terms = [
-    "Aqīdah","ʿAqīdah","Sunnah","Qurʾān","Athar","Āthār","Taslīm","Kalām",
-    "Bidʿah","Ahlus-Sunnah","Ahl al-Sunnah","Ṣifāt","Tashbīh","Taʿṭīl",
-    "Takyīf","Īmān","Dīn","Ṣaḥābah","Jahmiyyah","Ruʾyah"
-  ];
-
-  for (const term of terms){
-    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const re = new RegExp("(?<![\\w>])(" + escaped + ")(?![\\w<])", "g");
-    s = s.replace(re, "<span class='important-term'>$1</span>");
-  }
-
-  // 👉🏼 bleibt inline am Anfang, nicht als einsame Zeile
-  s = s.replace(/👉🏼\s*/g, "<span class='emoji-inline'>👉🏼</span> ");
-
-  // 🌙 Fazit inline und Wort Fazit stark
-  s = s.replace(/🌙\s*(<strong>)?Fazit:?<\/strong>?/g, "<span class='emoji-inline'>🌙</span> <span class='fazit-word'>Fazit:</span>");
-  s = s.replace(/🌙\s*Fazit:?/g, "<span class='emoji-inline'>🌙</span> <span class='fazit-word'>Fazit:</span>");
-
-  // Nur kurze Kern-Sätze gezielt stärker, nicht alles:
-  s = s.replace(/(nicht durch bloße Meinung oder Neuerung)/g, "<span class='important-sentence'>$1</span>");
-  s = s.replace(/(nicht durch bloße Vernunft oder Begierden)/g, "<span class='important-sentence'>$1</span>");
-  s = s.replace(/(Der Qurʾān ist Allahs Wort, nicht erschaffen)/g, "<span class='important-sentence'>$1</span>");
-
-  return s.replace(/\n/g, "<br>");
-}
-
-
-
-
+function normalizePost(post){return {id:post.id||crypto.randomUUID(),date:post.date||"",title:post.title||"Ohne Titel",category:post.category||post.kategorie||"",topic:post.topic||post.thema||"",scholar:post.scholar||post.gelehrter||"",book:post.book||post.buch||"",tags:Array.isArray(post.tags)?post.tags:[],source:post.source||post.quelle||"",links:Array.isArray(post.links)?post.links:[],logo:post.logo||"logo-black.png",statement:post.statement||post.content||post.text||""}}
+function parseFrontMatter(md, fallbackId){const raw=String(md||"");const obj={id:fallbackId,tags:[],links:[]};let body=raw;if(raw.startsWith("---")){const end=raw.indexOf("---",3);if(end!==-1){const fm=raw.slice(3,end).trim().split("\n");body=raw.slice(end+3).trim();let i=0;while(i<fm.length){const line=fm[i];const trimmed=line.trim();if(!trimmed){i++;continue}if(trimmed==="links:"){obj.links=[];i++;while(i<fm.length){const l=fm[i];if(!l.startsWith("  -")&&!l.startsWith("    ")){i--;break}if(l.trim().startsWith("- label:")){const label=l.split("label:")[1].trim().replace(/^[\"']|[\"']$/g,"");let url="#";if(i+1<fm.length&&fm[i+1].includes("url:")){i++;url=fm[i].split("url:")[1].trim().replace(/^[\"']|[\"']$/g,"")}obj.links.push({label,url})}i++}}else{const m=trimmed.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(m){let val=m[2].trim().replace(/^[\"']|[\"']$/g,"");if(val.startsWith("[")&&val.endsWith("]")){try{val=JSON.parse(val.replace(/'/g,'\"'))}catch{val=val.slice(1,-1).split(",").map(x=>x.trim().replace(/^[\"']|[\"']$/g,""))}}obj[m[1]]=val}}i++}}}obj.content=body;obj.statement=body;return normalizePost(obj)}
+async function loadJsonPosts(){try{const res=await fetch("posts.json?cache="+Date.now());if(!res.ok)return[];const data=await res.json();return Array.isArray(data)?data.map(normalizePost):[]}catch(e){return[]}}
+async function loadMarkdownPosts(){try{const res=await fetch("content/posts/posts-manifest.json?cache="+Date.now());if(!res.ok)return[];const files=await res.json();if(!Array.isArray(files))return[];const out=[];for(const file of files){try{const clean=String(file).trim();if(!clean)continue;const path=clean.startsWith("content/posts/")?clean:"content/posts/"+clean;const mdRes=await fetch(path+"?cache="+Date.now());if(mdRes.ok){const md=await mdRes.text();out.push(parseFrontMatter(md,path.split("/").pop().replace(/\.md$/,"")))}}catch(e){}}return out}catch(e){return[]}}
+function formatPostText(raw){let s=String(raw??"");s=esc(s);s=s.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");s=s.replace(/\*(.*?)\*/g,"<em>$1</em>");s=s.replace(/🖋️\s*([^:\n]+):/g,"<span class='emoji-inline'>🖋️</span> <span class='lead-name'>$1:</span>");s=s.replace(/„([^“]+)“/g,"<span class='quote-inline'>„$1“</span>");const terms=["Aqīdah","ʿAqīdah","Sunnah","Qurʾān","Athar","Āthār","Taslīm","Kalām","Bidʿah","Ahlus-Sunnah","Ahl al-Sunnah","Ṣifāt","Tashbīh","Taʿṭīl","Takyīf","Īmān","Dīn","Ṣaḥābah","Jahmiyyah","Ruʾyah"];for(const term of terms){const escaped=term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const re=new RegExp("(?<![\\w>])("+escaped+")(?![\\w<])","g");s=s.replace(re,"<span class='important-term'>$1</span>")}s=s.replace(/👉🏼\s*/g,"<span class='emoji-inline'>👉🏼</span> ");s=s.replace(/🌙\s*(<strong>)?Fazit:?<\/strong>?/g,"<span class='emoji-inline'>🌙</span> <span class='fazit-word'>Fazit:</span>");s=s.replace(/🌙\s*Fazit:?/g,"<span class='emoji-inline'>🌙</span> <span class='fazit-word'>Fazit:</span>");s=s.replace(/(nicht durch bloße Meinung oder Neuerung)/g,"<span class='important-sentence'>$1</span>");s=s.replace(/(nicht durch bloße Vernunft oder Begierden)/g,"<span class='important-sentence'>$1</span>");s=s.replace(/(Der Qurʾān ist Allahs Wort, nicht erschaffen)/g,"<span class='important-sentence'>$1</span>");return s.replace(/\n/g,"<br>")}
 function countBy(key){const m=new Map();posts.forEach(p=>{const v=p[key]||"Unbekannt";m.set(v,(m.get(v)||0)+1)});return m}
 function countTags(){const m=new Map();posts.forEach(p=>(p.tags||[]).forEach(t=>m.set(t,(m.get(t)||0)+1)));return m}
 function buttonList(root,map,type){root.innerHTML="";const all=document.createElement("button");all.textContent=`Alle (${posts.length})`;all.className=active.type==="all"?"active":"";all.onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};root.appendChild(all);[...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de")).forEach(([name,count])=>{const b=document.createElement("button");b.textContent=`${name} (${count})`;b.className=active.type===type&&active.value===name?"active":"";b.onclick=()=>{active={type:type,value:name};render()};root.appendChild(b)})}
-function buildCategories(){const root=$("categoryList");root.innerHTML="";const preferred=["Aqīdah","Hadith","Āthār","Manhaj","Adab","Akhlaq","Zuhd","Fiqh","Tafsīr"];const map=countBy("category");const keys=[...map.keys()].sort((a,b)=>{const ai=preferred.indexOf(a),bi=preferred.indexOf(b);if(ai!==-1||bi!==-1)return(ai===-1?99:ai)-(bi===-1?99:bi);return a.localeCompare(b,"de")});keys.forEach(k=>{const btn=document.createElement("button");btn.className="mobile-cat-btn"+(active.type==="category"&&active.value===k?" active":"");btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;btn.onclick=()=>{active={type:"category",value:k};$("searchInput").value="";render();$("posts").scrollIntoView({behavior:"smooth",block:"start"})};root.appendChild(btn)})}
+function buildCategories(){const root=$("categoryList");root.innerHTML="";const preferred=["Aqīdah","Aqidah","Hadith","Āthār","Athar","Manhaj","Adab","Akhlaq","Zuhd","Fiqh","Tafsīr"];const map=countBy("category");const keys=[...map.keys()].sort((a,b)=>{const ai=preferred.indexOf(a),bi=preferred.indexOf(b);if(ai!==-1||bi!==-1)return(ai===-1?99:ai)-(bi===-1?99:bi);return a.localeCompare(b,"de")});keys.forEach(k=>{const btn=document.createElement("button");btn.className="mobile-cat-btn"+(active.type==="category"&&active.value===k?" active":"");btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;btn.onclick=()=>{active={type:"category",value:k};$("searchInput").value="";render();$("posts").scrollIntoView({behavior:"smooth",block:"start"})};root.appendChild(btn)})}
 function matches(p){const q=$("searchInput").value.trim().toLowerCase();let ok=true;if(active.type==="scholar")ok=ok&&p.scholar===active.value;if(active.type==="book")ok=ok&&p.book===active.value;if(active.type==="topic")ok=ok&&p.topic===active.value;if(active.type==="tag")ok=ok&&(p.tags||[]).includes(active.value);if(active.type==="category")ok=ok&&p.category===active.value;if(q)ok=ok&&[p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(q);return ok}
 function renderStats(){$("countPosts").textContent=posts.length;$("countScholars").textContent=countBy("scholar").size;$("countBooks").textContent=countBy("book").size;$("countTopics").textContent=countBy("topic").size}
 function renderLists(){buttonList($("scholarList"),countBy("scholar"),"scholar");buttonList($("bookList"),countBy("book"),"book");buttonList($("topicList"),countBy("topic"),"topic");buttonList($("tagList"),countTags(),"tag")}
 function renderPosts(){const root=$("posts");const filtered=posts.filter(matches);const cleanHome=active.type==="all"&&!$("searchInput").value.trim();document.body.classList.toggle("clean-home",cleanHome);$("homeNotice").style.display=cleanHome?"block":"none";root.innerHTML="";filtered.forEach(p=>{const el=document.createElement("article");el.className="post-card";const quote=stripMd(p.statement).split("\n").filter(Boolean).find(x=>x.includes("„"))||"";el.innerHTML=`<div><h3>${esc(p.title)}</h3><div class="meta"><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.topic||"")}</span>${(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${esc(t)}</span>`).join("")}</div><div class="excerpt">${esc(quote||p.statement||"")}</div><div class="source-preview">${esc(p.source||"")}</div></div><button class="open">Beitrag öffnen</button>`;el.querySelector(".open").onclick=()=>openPost(p);root.appendChild(el)})}
-function openPost(p){currentPost=p;$("modalTitle").textContent=p.title||"";$("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;$("modalStatement").innerHTML=formatPostText(p.statement||"");$("modalSource").textContent=p.source||"";$("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url)}">${esc(l.label||"Quelle")}</a>`).join("");$("modal").classList.add("opened");document.body.style.overflow="hidden"}
+function openPost(p){currentPost=p;$("modalTitle").textContent=p.title||"";$("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;$("modalStatement").innerHTML=formatPostText(p.statement||"");$("modalSource").textContent=p.source||"";$("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label||"Quelle")}</a>`).join("");$("modal").classList.add("opened");document.body.style.overflow="hidden"}
 function closePost(){$("modal").classList.remove("opened");document.body.style.overflow=""}
 function render(){renderStats();renderLists();buildCategories();renderPosts()}
-$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};
-$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};
-$("closeBtn").onclick=closePost;
-$("shareBtn").onclick = () => window.shareDarAlTawhidPost(currentPost);
-$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};
+$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};$("closeBtn").onclick=closePost;$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};
+function plainText(value){return String(value||"").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"").trim()}
+function buildShareUrl(post){try{const base=location.origin+location.pathname;const id=encodeURIComponent((post&&post.id)?post.id:"");return id?(base+"?post="+id):location.href}catch(e){return location.href}}
+window.shareDarAlTawhidPost=async function(post){if(!post)return;const title=plainText(post.title||"DAR AL TAWḤID");const statement=plainText(post.statement||"");const source=plainText(post.source||"");const url=buildShareUrl(post);const text=title+"\n\n"+statement+"\n\n"+(source?source+"\n\n":"")+url;const shareData={title,text,url};if(navigator.share){try{if(!navigator.canShare||navigator.canShare(shareData)){await navigator.share(shareData);return}}catch(err){if(err&&(err.name==="AbortError"||err.name==="NotAllowedError"))return}try{await navigator.share({title,text});return}catch(err2){if(err2&&(err2.name==="AbortError"||err2.name==="NotAllowedError"))return}}try{await navigator.clipboard.writeText(text);alert("Dein Gerät/Browser unterstützt das direkte Teilen hier nicht. Der Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",text)}};
+$("shareBtn").onclick=()=>window.shareDarAlTawhidPost(currentPost);
+async function init(){const embedded=Array.isArray(window.EMBEDDED_POSTS)?window.EMBEDDED_POSTS.map(normalizePost):[];const jsonPosts=await loadJsonPosts();const mdPosts=await loadMarkdownPosts();const map=new Map();[...embedded,...jsonPosts,...mdPosts].forEach(p=>map.set(p.id,p));posts=Array.from(map.values()).sort((a,b)=>String(b.date).localeCompare(String(a.date)));render();const params=new URLSearchParams(location.search);const openId=params.get("post");if(openId){const p=posts.find(x=>x.id===openId);if(p)openPost(p)}}
 if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{})}
-render();
+init();
 </script>
-
-<script id="native-share-fix">
-(function(){
-  function plainText(value){
-    return String(value || "")
-      .replace(/\*\*(.*?)\*\*/g, "$1")
-      .replace(/\*(.*?)\*/g, "$1")
-      .replace(/<[^>]+>/g, "")
-      .trim();
-  }
-
-  function buildShareUrl(post){
-    try{
-      const base = location.origin + location.pathname;
-      const id = encodeURIComponent((post && post.id) ? post.id : "");
-      return id ? (base + "?post=" + id) : location.href;
-    }catch(e){
-      return location.href;
-    }
-  }
-
-  window.shareDarAlTawhidPost = async function(post){
-    if(!post) return;
-
-    const title = plainText(post.title || "DAR AL TAWḤID");
-    const statement = plainText(post.statement || "");
-    const source = plainText(post.source || "");
-    const url = buildShareUrl(post);
-
-    const text =
-      title + "\n\n" +
-      statement + "\n\n" +
-      (source ? source + "\n\n" : "") +
-      url;
-
-    const shareData = {
-      title: title,
-      text: text,
-      url: url
-    };
-
-    // Android/iOS: echtes Teilen-Menü erzwingen, wenn möglich
-    if (navigator.share) {
-      try {
-        if (!navigator.canShare || navigator.canShare(shareData)) {
-          await navigator.share(shareData);
-          return;
-        }
-      } catch (err) {
-        // Wenn der Nutzer das Teilen-Menü abbricht, nichts kopieren.
-        if (err && (err.name === "AbortError" || err.name === "NotAllowedError")) {
-          return;
-        }
-      }
-
-      // Manche Android-Browser akzeptieren nur text ohne url-Feld
-      try {
-        await navigator.share({
-          title: title,
-          text: text
-        });
-        return;
-      } catch (err2) {
-        if (err2 && (err2.name === "AbortError" || err2.name === "NotAllowedError")) {
-          return;
-        }
-      }
-    }
-
-    // Nur wenn natives Teilen gar nicht möglich ist: kopieren
-    try{
-      await navigator.clipboard.writeText(text);
-      alert("Dein Gerät/Browser unterstützt das direkte Teilen hier nicht. Der Beitrag wurde kopiert.");
-    }catch(e){
-      prompt("Kopiere den Beitrag:", text);
-    }
-  };
-})();
-</script>
-
 </body>
 </html>
