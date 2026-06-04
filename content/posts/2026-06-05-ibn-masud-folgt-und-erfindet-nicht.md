@@ -5,17 +5,17 @@ title: "📖 Folgt und erfindet nicht"
 category: "Aqīdah"
 topic: "Ittibāʿ und Bidʿah"
 scholar: "ʿAbdullāh ibn Masʿūd"
-book: "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah"
+book: "Majmaʿ az-Zawāʾid wa Manbaʿ al-Fawāʾid"
 tags:
   - "#Aqidah"
   - "#Sunnah"
   - "#Athar"
   - "#IbnMasud"
   - "#AhlusSunnah"
-source: "📝 al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah, Muqaddimah, Bāb: al-Ḥath ʿalā al-Ittibāʿ wa’l-Iqtidāʾ, Band 1, S. 21."
+source: "📝 al-Haythamī, Majmaʿ az-Zawāʾid wa Manbaʿ al-Fawāʾid, Kitāb al-ʿIlm, Bāb: al-Iqtidāʾ bi’s-Salaf, Athar Nr. 853."
 links:
   - label: "→ Islamweb"
-    url: "https://www.islamweb.net/ar/library/content/110/14/%D8%A7%D9%84%D8%AD%D8%AB-%D8%B9%D9%84%D9%89-%D8%A7%D9%84%D8%A7%D8%AA%D8%A8%D8%A7%D8%B9-%D9%88%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%AF%D8%A7%D8%A1#:~:text=%D9%88%D8%B9%D9%86%20%D8%A7%D8%A8%D9%86%20%D9%85%D8%B3%D8%B9%D9%88%D8%AF,%D8%A7%D8%AA%D8%A8%D8%B9%D9%88%D8%A7%20%D9%88%D9%84%D8%A7%20%D8%AA%D8%A8%D8%AA%D8%AF%D8%B9%D9%88%D8%A7%20%D9%81%D9%82%D8%AF%20%D9%83%D9%81%D9%8A%D8%AA%D9%85"
+    url: "https://www.islamweb.net/ar/library/content/87/859/%D8%A8%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%AF%D8%A7%D8%A1-%D8%A8%D8%A7%D9%84%D8%B3%D9%84%D9%81#:~:text=%D8%B9%D9%86%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D9%84%D9%87%20%D8%A8%D9%86%20%D9%85%D8%B3%D8%B9%D9%88%D8%AF,%D8%A7%D8%AA%D8%A8%D8%B9%D9%88%D8%A7%20%D9%88%D9%84%D8%A7%20%D8%AA%D8%A8%D8%AA%D8%AF%D8%B9%D9%88%D8%A7%20%D9%81%D9%82%D8%AF%20%D9%83%D9%81%D9%8A%D8%AA%D9%85"
 logo: "logo-black.png"
 ---
 
@@ -31,4 +31,4 @@ Wer der **Sunnah** folgt, hält sich an einen sicheren Weg. Wer aber meint, Reli
 
 Die frühen Imāme verstanden deshalb: Sicherheit liegt nicht darin, viel Neues zu sagen, sondern darin, ***fest bei dem Überlieferten zu bleiben***.
 
-🌙 **Fazit:** Wer Schutz für seine **Aqīdah** sucht, soll nicht erfinden, sondern folgen: **Qurʾān**, **Sunnah** und die **Āthār** der frühen Generationen genügen.
+🌙 **Fazit:** Wer Schutz für seine **Aqīdah** sucht, soll nicht erfinden, sondern folgen: **Qurʾān**, **Sunnah** und die **Ā
