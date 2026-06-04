@@ -2,1067 +2,273 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DAR AL TAWHID</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap');
-
-:root{
-  --bg:#07100b;
-  --panel:#101b14;
-  --gold:#d7b86c;
-  --gold2:#f5df9b;
-  --cream:#fff6df;
-  --muted:#b7c0b5;
-  --line:rgba(215,184,108,.34);
-  --shadow:0 14px 34px rgba(0,0,0,.30);
-  --radius:15px;
-  --serif:"Cormorant Garamond",Georgia,serif;
-  --signature:"Great Vibes",cursive;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  color:var(--cream);
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(215,184,108,.13),transparent 30%),
-    linear-gradient(180deg,#050806,var(--bg),#050806);
-  min-height:100vh;
-}
-
-a{color:var(--gold2);text-decoration:none}
-
-.site{
-  width:min(1560px,calc(100% - 28px));
-  margin:auto;
-}
-
-/* Header */
-header{
-  position:relative;
-  padding:14px 0 10px;
-  overflow:hidden;
-}
-
-.hero{
-  position:relative;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:rgba(16,27,20,.86);
-  box-shadow:var(--shadow);
-  padding:20px 26px;
-  overflow:hidden;
-}
-
-.hero:before,
-.isnad-line-card:before,
-.post-card:before,
-.detail-view:before{
-  content:"";
-  position:absolute;
-  inset:8px;
-  border:1px solid rgba(215,184,108,.17);
-  border-radius:11px;
-  pointer-events:none;
-}
-
-.hero-logo-bg{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  pointer-events:none;
-  z-index:0;
-}
-
-.hero-logo-bg img{
-  width:min(410px,65vw);
-  opacity:.07;
-  filter:drop-shadow(0 10px 25px rgba(0,0,0,.45));
-}
-
-.top{
-  position:relative;
-  z-index:1;
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-.brand small{
-  display:block;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--muted);
-  font-size:10px;
-  margin-bottom:5px;
-}
-
-h1{
-  font-family:var(--serif);
-  font-size:clamp(32px,4.5vw,60px);
-  letter-spacing:.105em;
-  line-height:.92;
-  color:var(--gold2);
-  margin:0;
-  text-transform:uppercase;
-}
-
-.hero p{
-  position:relative;
-  z-index:1;
-  color:var(--muted);
-  font-size:13.5px;
-  line-height:1.5;
-  max-width:880px;
-  margin:12px 0 0;
-}
-
-.links,
-.meta,
-.list-buttons,
-.source-links,
-.card-actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-
-.chip,
-button{
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:rgba(215,184,108,.09);
-  color:var(--cream);
-  padding:7px 11px;
-  font-size:12px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.chip:hover,
-button:hover{
-  background:rgba(215,184,108,.18);
-}
-
-/* Ibn Sirin one-line bar */
-.isnad-line-card{
-  position:relative;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:
-    radial-gradient(circle at 18% 0%,rgba(215,184,108,.10),transparent 32%),
-    rgba(16,27,20,.86);
-  box-shadow:var(--shadow);
-  padding:10px 16px;
-  margin:0 auto 12px;
-  overflow:hidden;
-}
-
-.isnad-line-inner{
-  position:relative;
-  z-index:1;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-}
-
-.isnad-text{
-  min-width:0;
-  flex:1 1 auto;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  font-family:var(--serif);
-  color:#fff9e8;
-  font-size:clamp(16px,1.05vw,18px);
-  line-height:1.18;
-}
-
-.isnad-text .label{
-  color:var(--muted);
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-size:10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  font-weight:900;
-  margin-right:8px;
-}
-
-.isnad-text strong{
-  color:var(--gold2);
-  font-style:italic;
-  text-decoration:underline;
-  text-decoration-thickness:1.1px;
-  text-underline-offset:4px;
-}
-
-.isnad-source{
-  flex:0 0 auto;
-  max-width:395px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  text-align:right;
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.15;
-}
-
-/* Layout */
-.grid{
-  display:grid;
-  grid-template-columns:225px 1fr;
-  gap:13px;
-  padding:13px 0 32px;
-  align-items:start;
-}
-
-aside{
-  position:sticky;
-  top:10px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:rgba(16,27,20,.86);
-  box-shadow:var(--shadow);
-  padding:12px;
-}
-
-h2,
-h3{
-  font-family:var(--serif);
-  color:var(--gold2);
-  margin:0 0 8px;
-  line-height:1.1;
-}
-
-h2{font-size:23px}
-h3{font-size:17px}
-
-.search{
-  width:100%;
-  background:rgba(0,0,0,.30);
-  border:1px solid rgba(215,184,108,.30);
-  border-radius:10px;
-  color:var(--cream);
-  padding:8px;
-  font-size:12px;
-  margin-bottom:8px;
-}
-
-.group{
-  border-top:1px solid rgba(215,184,108,.16);
-  padding-top:8px;
-  margin-top:8px;
-}
-
-.list-buttons button{
-  padding:5px 8px;
-  font-size:11px;
-}
-
-.panel{
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:rgba(16,27,20,.86);
-  box-shadow:var(--shadow);
-  padding:12px;
-  margin-bottom:12px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-
-.stat{
-  border:1px solid rgba(215,184,108,.22);
-  border-radius:12px;
-  padding:9px 11px;
-  background:rgba(215,184,108,.08);
-}
-
-.stat b{
-  display:block;
-  color:var(--gold2);
-  font-size:19px;
-  line-height:1;
-}
-
-.stat span{
-  font-size:11px;
-  color:var(--muted);
-}
-
-/* Compact post cards */
-.posts{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:11px;
-}
-
-.post-card{
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:
-    linear-gradient(145deg,rgba(16,27,20,.96),rgba(6,10,8,.98)),
-    repeating-linear-gradient(135deg,rgba(215,184,108,.028) 0 1px,transparent 1px 18px);
-  box-shadow:var(--shadow);
-  padding:14px;
-  min-height:205px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.post-logo{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:min(185px,68%);
-  opacity:.04;
-  pointer-events:none;
-  z-index:0;
-}
-
-.card-inner{
-  position:relative;
-  z-index:1;
-}
-
-.card-title{
-  font-family:var(--serif);
-  font-size:clamp(19px,1.35vw,23px);
-  font-weight:700;
-  color:var(--gold2);
-  line-height:1.03;
-  margin:0 0 7px;
-  display:-webkit-box;
-  -webkit-line-clamp:3;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-.badge{
-  border:1px solid rgba(215,184,108,.28);
-  background:rgba(215,184,108,.09);
-  border-radius:999px;
-  padding:4px 7px;
-  color:var(--cream);
-  font-size:10px;
-  font-weight:750;
-}
-
-.excerpt{
-  font-family:var(--serif);
-  font-size:15.5px;
-  line-height:1.32;
-  color:#fff9e8;
-  margin:8px 0;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-.card-source{
-  border-top:1px solid rgba(215,184,108,.15);
-  padding-top:7px;
-  margin-top:7px;
-  color:var(--muted);
-  font-size:9.5px;
-  line-height:1.28;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-.open-btn{
-  position:relative;
-  z-index:1;
-  font-size:11px;
-  padding:6px 10px;
-  color:var(--gold2);
-  background:rgba(215,184,108,.15);
-}
-
-.empty{
-  grid-column:1/-1;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed rgba(215,184,108,.32);
-  border-radius:15px;
-  padding:22px;
-}
-
-/* Modal */
-.detail-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  z-index:1000;
-  display:none;
-  align-items:flex-start;
-  justify-content:center;
-  padding:18px 10px;
-  overflow:auto;
-}
-
-.detail-overlay.active{display:flex}
-
-.detail-view{
-  position:relative;
-  max-width:760px;
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:linear-gradient(145deg,rgba(16,27,20,.98),rgba(6,10,8,.99));
-  box-shadow:var(--shadow);
-  padding:clamp(18px,3vw,34px);
-  overflow:hidden;
-}
-
-.close-row{
-  position:relative;
-  z-index:2;
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.detail-title{
-  position:relative;
-  z-index:1;
-  text-align:center;
-  font-family:var(--serif);
-  font-size:clamp(25px,3.2vw,39px);
-  color:var(--gold2);
-  line-height:1.04;
-  margin:0 0 10px;
-}
-
-.statement{
-  position:relative;
-  z-index:1;
-  font-family:var(--serif);
-  font-size:clamp(18px,1.8vw,23px);
-  font-weight:600;
-  line-height:1.48;
-  text-align:center;
-  max-width:700px;
-  margin:14px auto;
-  color:#fff9e8;
-}
-
-.statement strong,
-.statement .auto{
-  color:var(--gold2);
-  font-style:italic;
-  text-decoration:underline;
-  text-underline-offset:5px;
-}
-
-.statement em{
-  font-family:var(--signature);
-  color:var(--gold2);
-  font-style:normal;
-}
-
-.source{
-  position:relative;
-  z-index:1;
-  border-top:1px solid rgba(215,184,108,.18);
-  padding-top:10px;
-  margin-top:12px;
-  text-align:center;
-  color:var(--muted);
-  font-size:11.5px;
-  line-height:1.45;
-}
-
-.source b{color:var(--cream)}
-
-.source-links{
-  justify-content:center;
-  margin-top:8px;
-}
-
-.source-links a{
-  border:1px solid rgba(215,184,108,.24);
-  border-radius:999px;
-  padding:5px 8px;
-  background:rgba(0,0,0,.20);
-  font-weight:800;
-  font-size:11px;
-}
-
-footer{
-  text-align:center;
-  color:var(--muted);
-  border-top:1px solid rgba(215,184,108,.18);
-  padding:22px 0 34px;
-  line-height:1.7;
-  font-size:12px;
-}
-
-.signature{
-  font-family:var(--signature);
-  font-size:28px;
-  color:var(--gold2);
-}
-
-/* Responsive */
-@media(max-width:1360px){
-  .posts{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-
-@media(max-width:1050px){
-  .grid{grid-template-columns:210px 1fr}
-  .posts{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-
-@media(max-width:760px){
-  .site{width:min(100% - 18px,1560px)}
-  .grid{grid-template-columns:1fr}
-  aside{position:static}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .posts{grid-template-columns:1fr}
-  .hero{padding:18px}
-  .links{width:100%}
-  .isnad-line-inner{display:block}
-  .isnad-text{white-space:normal;display:block;font-size:17px}
-  .isnad-source{max-width:none;white-space:normal;text-align:left;margin-top:5px}
-}
-
-@media(max-width:480px){
-  .stats{grid-template-columns:1fr}
-  h1{font-size:32px}
-  .hero p{font-size:13px}
-  .card-title{font-size:22px}
-  .statement{font-size:18px}
-  .detail-title{font-size:27px}
-}
-
-.social-links{justify-content:flex-end}
-.social-chip{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 14px;
-  font-size:12.5px;
-}
-.social-icon{
-  display:inline-flex;
-  width:18px;
-  height:18px;
-  align-items:center;
-  justify-content:center;
-  flex:0 0 18px;
-}
-.telegram-chip .social-icon svg,
-.instagram-chip .social-icon svg{display:block}
-
-@media(max-width:860px){
-  .social-links{justify-content:flex-start}
-}
-@media(max-width:760px){
-  .isnad-line-card{padding:12px 14px}
-  .isnad-kicker{margin-bottom:7px}
-  .isnad-quote-row{font-size:clamp(18px,5.4vw,24px);line-height:1.38}
-  .isnad-source{font-size:11.5px}
-  .social-chip{padding:7px 12px;font-size:12px}
-}
-
-</style>
-
-<style id="article-reading-fix">
-.detail-overlay,.overlay{padding:18px 12px!important}
-.detail-view,.modal-card{max-width:920px!important;width:min(920px,calc(100vw - 28px))!important;padding:clamp(18px,2.4vw,34px)!important}
-.detail-title,.modal-title{max-width:820px!important;margin:0 auto 14px!important;font-size:clamp(25px,2.5vw,38px)!important;line-height:1.08!important;text-align:center!important}
-#detailMeta.meta{justify-content:center!important;margin-bottom:14px!important}
-.statement{max-width:800px!important;margin:14px auto!important;text-align:left!important;font-size:clamp(17px,1.25vw,20px)!important;line-height:1.72!important;font-family:Georgia,"Times New Roman",serif!important;font-weight:500!important;letter-spacing:0!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
-.statement p{margin:0 0 15px!important}
-.statement .speaker{text-align:center!important;font-family:var(--serif)!important;font-size:clamp(18px,1.45vw,22px)!important;line-height:1.35!important;margin-bottom:16px!important}
-.statement .quote{text-align:center!important;font-family:var(--serif)!important;font-size:clamp(18px,1.45vw,22px)!important;line-height:1.55!important;color:#fff9e8!important;margin:0 auto 18px!important;max-width:760px!important}
-.statement .proof,.statement .conclusion{background:rgba(215,184,108,.045)!important;border:1px solid rgba(215,184,108,.14)!important;border-radius:12px!important;padding:12px 14px!important}
-.statement strong,.statement .auto{color:var(--gold2)!important;font-weight:700!important;font-style:italic!important;text-decoration:underline!important;text-decoration-thickness:1.1px!important;text-underline-offset:4px!important}
-.statement em{color:var(--gold2)!important;font-family:var(--serif)!important;font-style:italic!important;font-size:1em!important;text-decoration:underline!important;text-underline-offset:4px!important}
-.source{max-width:800px!important;margin:18px auto 0!important;font-size:11.5px!important;line-height:1.45!important;text-align:center!important}
-.source-links{justify-content:center!important}
-@media(max-width:680px){.detail-view,.modal-card{width:min(100%,calc(100vw - 18px))!important;padding:17px 14px!important}.statement{font-size:16.5px!important;line-height:1.68!important;max-width:100%!important}.statement .quote,.statement .speaker{text-align:left!important}.statement .proof,.statement .conclusion{padding:10px 11px!important}}
-</style>
-
-
-<style id="dar-welcome-salam-style">
-.hero-welcome{
-  position:relative;
-  z-index:2;
-  max-width:980px;
-  margin:14px 0 0;
-  padding-top:10px;
-  border-top:1px solid rgba(215,184,108,.16);
-}
-.salam-line{
-  font-family:var(--serif);
-  color:var(--gold2);
-  font-size:clamp(19px,1.7vw,27px);
-  line-height:1.15;
-  font-weight:700;
-  letter-spacing:.015em;
-  margin-bottom:6px;
-  text-shadow:0 5px 18px rgba(0,0,0,.38);
-}
-.welcome-line{
-  color:var(--muted);
-  font-size:clamp(12.8px,1vw,14.5px);
-  line-height:1.55;
-  max-width:880px;
-}
-.welcome-line strong{
-  color:var(--cream);
-  font-weight:800;
-}
-@media(max-width:760px){
-  .hero-welcome{
-    margin-top:12px;
-    padding-top:9px;
-  }
-  .salam-line{
-    font-size:21px;
-  }
-  .welcome-line{
-    font-size:13px;
-  }
-}
-</style>
-
-
-
-<style id="social-icons-and-isnad-final">
-.social-links{justify-content:flex-end}
-.social-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px}
-.social-icon{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;flex:0 0 18px;vertical-align:middle}
-.social-icon svg{display:block}
-.footer-social{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:5px 0 6px;color:var(--muted)}
-.footer-social span{display:inline-flex;align-items:center;gap:7px}
-.dot-sep{opacity:.65;gap:0!important}
-
-.isnad-compact-card{
-  position:relative;
-  width:min(1560px,calc(100% - 28px));
-  margin:0 auto 12px;
-  padding:9px 13px 8px;
-  border:1px solid rgba(215,184,108,.24);
-  border-radius:12px;
-  background:linear-gradient(135deg,rgba(16,27,20,.86),rgba(5,9,7,.94));
-  box-shadow:0 10px 24px rgba(0,0,0,.22);
-  overflow:hidden;
-}
-.isnad-compact-card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(215,184,108,.10);border-radius:9px;pointer-events:none}
-.isnad-topline{position:relative;z-index:1;display:flex;align-items:center;gap:10px;margin-bottom:5px}
-.isnad-topline::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(215,184,108,.45),rgba(215,184,108,0))}
-.isnad-topline span{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:10.5px;line-height:1;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:var(--muted);white-space:nowrap}
-.isnad-compact-text{position:relative;z-index:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-.isnad-compact-quote{color:var(--cream);font-size:13.2px;line-height:1.25;font-weight:650;letter-spacing:.01em}
-.isnad-compact-source{position:relative;z-index:1;margin-top:4px;color:var(--muted);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:10.3px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-@media(max-width:860px){.social-links{justify-content:flex-start}}
-@media(max-width:760px){
-  .isnad-compact-card{width:min(100% - 18px,1560px);padding:8px 11px}
-  .isnad-topline span{font-size:9.5px;letter-spacing:.10em}
-  .isnad-compact-text{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;text-overflow:clip}
-  .isnad-compact-text::-webkit-scrollbar{display:none}
-  .isnad-compact-quote{font-size:12.5px}
-  .isnad-compact-source{font-size:9.7px}
-  .footer-social{gap:6px;font-size:12px}
-}
-</style>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DAR AL TAWḤID</title>
+<meta name="description" content="Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme.">
 <meta name="theme-color" content="#07100b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DAR AL TAWḤID">
 <meta property="og:title" content="DAR AL TAWḤID">
 <meta property="og:description" content="Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme.">
-<meta property="og:image" content="https://sero91ak.github.io/dar-al-tawhid-site/app-share-image.png">
-<meta property="og:url" content="https://sero91ak.github.io/dar-al-tawhid-site/">
+<meta property="og:image" content="https://dar-al-tawhid.de/app-share-image.png">
+<meta property="og:url" content="https://dar-al-tawhid.de/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DAR AL TAWḤID">
 <meta name="twitter:description" content="Beiträge aus Qurʾān, Sunnah und den Āthār der frühen Imāme.">
-<meta name="twitter:image" content="https://sero91ak.github.io/dar-al-tawhid-site/app-share-image.png">
+<meta name="twitter:image" content="https://dar-al-tawhid.de/app-share-image.png">
+
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 
-
-<style id="post-share-button-style">
-.share-post-btn{
-  border:1px solid rgba(215,184,108,.30);
-  border-radius:999px;
-  background:rgba(215,184,108,.11);
-  color:var(--gold2);
-  padding:7px 11px;
-  font-size:11.5px;
-  font-weight:800;
+<style>
+:root{
+  --bg:#07100b;
+  --bg2:#0c1710;
+  --panel:#101d14;
+  --panel2:#162319;
+  --gold:#c9ad67;
+  --gold2:#f2df9b;
+  --cream:#fff7df;
+  --text:#f6f1df;
+  --muted:#b7c0b5;
+  --line:rgba(213,184,108,.28);
+  --line2:rgba(213,184,108,.16);
+  --shadow:0 20px 55px rgba(0,0,0,.34);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --radius:20px;
 }
-.share-post-btn:hover{
-  background:rgba(215,184,108,.20);
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(215,184,108,.12), transparent 32%),
+    radial-gradient(circle at 90% 10%, rgba(245,223,155,.07), transparent 30%),
+    linear-gradient(180deg,#050806,#07100b 38%,#050806);
+  color:var(--text);
+  font-family:var(--sans);
 }
-</style>
-
-
-<style id="collapsible-filter-nav">
-/* Platzsparende Navigation: Gelehrte/Bücher/Themen/Hashtags aufklappbar */
-.filter-section{
-  border-top:1px solid rgba(215,184,108,.16);
-  padding-top:8px;
-  margin-top:8px;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("logo-black.png") center 4%/720px auto no-repeat;
+  opacity:.035;
+  pointer-events:none;
 }
-
-.filter-section summary{
-  list-style:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  color:var(--gold2);
-  font-family:var(--serif);
-  font-size:17px;
-  font-weight:700;
-  line-height:1.15;
-  padding:4px 0 7px;
-}
-
-.filter-section summary::-webkit-details-marker{
-  display:none;
-}
-
-.filter-section summary::after{
-  content:"＋";
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-  color:var(--muted);
-  font-size:13px;
-  font-weight:800;
-  border:1px solid rgba(215,184,108,.25);
-  width:23px;
-  height:23px;
-  border-radius:999px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(215,184,108,.06);
-  flex:0 0 auto;
-}
-
-.filter-section[open] summary::after{
-  content:"−";
-  color:var(--gold2);
-}
-
-.filter-section .list-buttons{
-  padding:2px 0 3px;
-  max-height:230px;
-  overflow:auto;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(215,184,108,.35) transparent;
-}
-
-.filter-section .list-buttons::-webkit-scrollbar{
-  width:5px;
-}
-
-.filter-section .list-buttons::-webkit-scrollbar-thumb{
-  background:rgba(215,184,108,.30);
-  border-radius:999px;
-}
-
-.reset-group{
-  padding-top:9px!important;
-  margin-top:9px!important;
-}
-
-@media(max-width:760px){
-  aside{
-    padding:10px!important;
-  }
-
-  .filter-section{
-    padding-top:6px;
-    margin-top:6px;
-  }
-
-  .filter-section summary{
-    font-size:16px;
-    padding:3px 0 6px;
-  }
-
-  .filter-section .list-buttons{
-    max-height:165px;
-  }
-
-  .list-buttons button{
-    font-size:10.5px!important;
-    padding:5px 8px!important;
-  }
-}
-</style>
-
-
-
-<style id="knowledge-sections-web-mobile-final">
-/* Wissensbereiche für Web + App: Startseite sauber, Beiträge erst nach Auswahl */
-.mobile-app-home{
-  display:block!important;
+.site{width:min(1540px,calc(100% - 34px));margin:0 auto;position:relative}
+header{padding:18px 0 12px}
+.hero{
   border:1px solid var(--line);
   border-radius:var(--radius);
-  background:rgba(16,27,20,.86);
+  background:linear-gradient(140deg,rgba(16,29,20,.92),rgba(5,9,7,.86));
   box-shadow:var(--shadow);
-  padding:12px;
-  margin-bottom:12px;
+  padding:24px 28px;
+  overflow:hidden;
 }
-
-.mobile-app-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:10px;
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.brand small{
+  display:block;
+  color:var(--muted);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:8px;
 }
-
-.mobile-app-head h2{
-  margin:0!important;
+h1{
   font-family:var(--serif);
   color:var(--gold2);
-  font-size:24px!important;
-  line-height:1.1;
+  font-size:clamp(42px,5.7vw,82px);
+  letter-spacing:.13em;
+  line-height:.9;
+  margin:0;
+  font-weight:600;
 }
-
-.mobile-app-head span{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.mobile-quick-cats{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:9px;
-}
-
-.mobile-cat-btn{
-  border:1px solid rgba(215,184,108,.25);
-  background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.13));
+.links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.chip,.links a,button{
+  border:1px solid rgba(215,184,108,.30);
+  border-radius:999px;
+  background:rgba(215,184,108,.08);
   color:var(--cream);
-  border-radius:13px;
-  padding:12px 11px;
-  min-height:64px;
-  text-align:left;
+  padding:8px 14px;
+  text-decoration:none;
   font-weight:800;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:4px;
+  font-size:12px;
   cursor:pointer;
 }
+.social-chip{display:inline-flex;align-items:center;gap:8px}
+.social-icon{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;flex:0 0 18px}
+.hero-welcome{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:1050px}
+.salam-line{font-family:var(--serif);font-size:clamp(20px,1.8vw,28px);color:var(--gold2);font-weight:700;margin-bottom:6px}
+.welcome-line{color:var(--muted);font-size:14px;line-height:1.6}
+.welcome-line strong{color:var(--cream)}
 
-.mobile-cat-btn:hover{
-  background:linear-gradient(145deg,rgba(215,184,108,.17),rgba(0,0,0,.18));
+.isnad{
+  margin:0 auto 14px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(16,29,20,.88),rgba(5,9,7,.94));
+  box-shadow:var(--shadow);
+  padding:10px 14px;
 }
+.isnad-top{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:900;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.isnad-top::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(215,184,108,.45),transparent)}
+.isnad-quote{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:650;margin-top:6px;color:var(--cream)}
+.isnad-source{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px;color:var(--muted);font-size:10px}
 
-.mobile-cat-btn b{
-  color:var(--gold2);
-  font-size:15px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+.grid{display:grid;grid-template-columns:270px 1fr;gap:18px;padding-bottom:28px}
+aside,.panel,.knowledge,.post-card,.notice{
+  border:1px solid var(--line);
+  background:rgba(16,29,20,.88);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
 }
-
-.mobile-cat-btn span{
-  color:var(--muted);
-  font-size:11px;
-  font-weight:700;
-}
-
-.mobile-start-notice{
-  display:block;
-  border:1px dashed rgba(215,184,108,.26);
-  border-radius:14px;
-  background:rgba(16,27,20,.58);
-  color:var(--muted);
-  text-align:center;
-  font-size:12.5px;
-  line-height:1.45;
-  padding:16px 12px;
-  margin-top:8px;
-  grid-column:1/-1;
-}
-
-.mobile-start-notice strong{
-  display:block;
-  color:var(--gold2);
+aside{position:sticky;top:12px;align-self:start;padding:16px}
+aside h2,.panel h2,.knowledge h2{
   font-family:var(--serif);
-  font-size:20px;
-  line-height:1.15;
-  margin-bottom:5px;
+  color:var(--gold2);
+  font-size:26px;
+  margin:0 0 12px;
 }
-
-body.mobile-home-clean #posts{
-  display:none!important;
+.search{width:100%;height:42px;border:1px solid var(--line);border-radius:12px;background:#08100b;color:var(--cream);padding:0 12px;font-size:14px;outline:none}
+.filter-section{border-top:1px solid var(--line2);padding-top:9px;margin-top:9px}
+.filter-section summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  color:var(--gold2);font-family:var(--serif);font-size:18px;font-weight:700;padding:5px 0 8px
 }
+.filter-section summary::-webkit-details-marker{display:none}
+.filter-section summary::after{content:"＋";font-family:var(--sans);width:24px;height:24px;border:1px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
+.filter-section[open] summary::after{content:"−";color:var(--gold2)}
+.list-buttons{display:flex;gap:7px;flex-wrap:wrap;max-height:210px;overflow:auto;padding-bottom:3px}
+.list-buttons button.active,.mobile-cat-btn.active{background:rgba(215,184,108,.22);color:var(--gold2)}
+.main{min-width:0}
+.panel{padding:16px;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{border:1px solid var(--line);border-radius:14px;background:rgba(215,184,108,.06);padding:13px}
+.stat b{display:block;font-size:22px;color:var(--gold2)}
+.stat span{font-size:12px;color:var(--muted)}
 
-body.mobile-home-clean .mobile-more-wrap{
-  display:none!important;
-}
+.knowledge{padding:16px;margin-bottom:14px}
+.knowledge-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.knowledge-head span{color:var(--muted);font-size:12px;font-weight:800}
+.mobile-quick-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.mobile-cat-btn{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.10));padding:13px;min-height:68px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.mobile-cat-btn b{color:var(--gold2);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mobile-cat-btn span{color:var(--muted);font-size:11px;font-weight:700}
+.notice{padding:18px;text-align:center;color:var(--muted);border-style:dashed;margin-bottom:12px}
+.notice strong{display:block;color:var(--gold2);font-family:var(--serif);font-size:22px;margin-bottom:5px}
 
-/* Wenn Besucher einen Wissensbereich öffnen, erscheinen Beiträge normal */
-body:not(.mobile-home-clean) #posts{
-  display:grid!important;
-}
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+body.clean-home .posts{display:none}
+.post-card{position:relative;overflow:hidden;padding:16px;min-height:205px;display:flex;flex-direction:column;justify-content:space-between}
+.post-card::before{content:"";position:absolute;inset:0;background:url("logo-black.png") center/260px no-repeat;opacity:.03;pointer-events:none}
+.post-card>*{position:relative;z-index:1}
+.post-card h3{font-family:var(--serif);font-size:24px;line-height:1.05;margin:0 0 8px;color:var(--gold2)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.badge{font-size:10px;border:1px solid var(--line);border-radius:999px;background:rgba(215,184,108,.08);padding:4px 8px;font-weight:800;color:var(--cream)}
+.excerpt{font-family:var(--serif);font-size:16px;line-height:1.35;color:#f5f0df;margin:6px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.source-preview{font-size:10px;color:var(--muted);border-top:1px solid var(--line2);padding-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.open{margin-top:10px;color:var(--gold2)}
 
-/* Desktop: Wissensbereiche edel, trotzdem kompakt */
-@media(min-width:761px){
-  .mobile-more-wrap{
-    display:none!important;
-  }
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:18px;z-index:50;overflow:auto}
+.modal.opened{display:flex}
+.article{width:min(900px,100%);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#0c1710,#06100a);box-shadow:var(--shadow);padding:22px}
+.article-top{display:flex;gap:8px;justify-content:flex-end;position:sticky;top:0;background:linear-gradient(180deg,#0c1710,#0c1710dd);padding-bottom:10px;z-index:2}
+.article h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--gold2);margin:8px 0 10px;text-align:center}
+.article .statement{font-family:var(--serif);font-size:22px;line-height:1.75;text-align:center;color:#fff8e8;white-space:pre-wrap}
+.article-source{font-size:12px;color:var(--muted);border-top:1px solid var(--line2);padding-top:12px;margin-top:15px;line-height:1.5}
+.article-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 
-  .mobile-start-notice{
-    display:block!important;
-  }
+footer{text-align:center;color:var(--muted);padding:26px 0 34px;border-top:1px solid var(--line2)}
+footer .signature{display:block;font-family:cursive;color:var(--gold2);font-size:28px;margin-top:8px}
 
-  .posts{
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  }
-}
-
-@media(max-width:1180px) and (min-width:761px){
-  .mobile-quick-cats{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-}
-
-@media(max-width:900px) and (min-width:761px){
-  .mobile-quick-cats{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-
-@media(max-width:760px){
-  .mobile-app-home{
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:14px;
-  }
-
-  .mobile-app-head{
-    margin-bottom:9px;
-  }
-
-  .mobile-app-head h2{
-    font-size:22px!important;
-  }
-
-  .mobile-app-head span{
-    font-size:10.5px;
-  }
-
-  .mobile-quick-cats{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:7px;
-  }
-
-  .mobile-cat-btn{
-    min-height:58px;
-    padding:10px 9px;
-  }
-
-  .mobile-cat-btn b{
-    font-size:14px;
-  }
-
-  .mobile-cat-btn span{
-    font-size:10.5px;
-  }
-
-  .mobile-start-notice{
-    font-size:12px;
-    padding:14px 12px;
-  }
-
-  .mobile-start-notice strong{
-    font-size:18px;
-  }
+@media(max-width:1200px){.posts{grid-template-columns:repeat(2,1fr)}.mobile-quick-cats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){
+  .site{width:min(100% - 18px,1540px)}
+  header{padding:10px 0 8px}
+  .hero{padding:14px 13px;border-radius:16px}
+  .top{display:block}
+  h1{font-size:clamp(32px,10vw,44px);letter-spacing:.09em}
+  .brand small{font-size:8.5px;letter-spacing:.14em}
+  .links{display:grid;grid-template-columns:1fr 1fr;margin-top:10px}
+  .chip,.links a,button{font-size:10.5px;padding:7px 10px}
+  .salam-line{font-size:19px}
+  .welcome-line{font-size:12.5px}
+  .isnad{padding:9px 11px}
+  .isnad-quote{overflow-x:auto;text-overflow:clip;font-size:12.4px}
+  .grid{display:block}
+  aside{position:static;margin-bottom:10px;padding:12px}
+  aside h2,.panel h2,.knowledge h2{font-size:22px}
+  .filter-section:not([open]) .list-buttons{display:none}
+  .panel{padding:12px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:8px}
+  .knowledge{padding:12px}
+  .knowledge-head{align-items:center}
+  .knowledge-head span{font-size:10px}
+  .mobile-quick-cats{grid-template-columns:repeat(2,1fr);gap:7px}
+  .mobile-cat-btn{min-height:58px;padding:10px 9px}
+  .posts{grid-template-columns:1fr;gap:9px}
+  .post-card{min-height:0;padding:12px}
+  .post-card h3{font-size:20px}
+  .excerpt{font-size:14px;-webkit-line-clamp:1}
+  .article{padding:14px 12px;border-radius:16px}
+  .article h2{font-size:26px;text-align:left}
+  .article .statement{font-size:17px;line-height:1.65;text-align:left}
 }
 </style>
-
 
 <script id="embedded-posts-data">
 window.EMBEDDED_POSTS = [{"id": "verified-dorar-40-001", "date": "2026-06-04T01:00:00.000Z", "title": "📖 Wem Allah Gutes will", "category": "Hadith", "topic": "Wissen und Fiqh", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Wissen", "#Fiqh", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 22304; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 71.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/22304#:~:text=%D9%85%D9%8E%D9%86%20%D9%8A%D9%8F%D8%B1%D9%90%D8%AF%D9%90%20%D8%A7%D9%84%D9%84%D9%87%D9%8F%20%D8%A8%D9%87%20%D8%AE%D9%8E%D9%8A%D8%B1%D9%8B%D8%A7%20%D9%8A%D9%8F%D9%81%D9%8E%D9%82%D9%91%D9%90%D9%87%D9%92%D9%87%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AF%D9%91%D9%90%D9%8A%D9%86%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wem Allah Gutes will, dem schenkt Er Verständnis im Dīn.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-002", "date": "2026-06-04T02:00:00.000Z", "title": "📖 Taqwā überall", "category": "Hadith", "topic": "Taqwā und Akhlāq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Taqwa", "#Akhlaq", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 62439; at-Tirmidhī Nr. 1987, ḥasan li-ghayrih.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/62439#:~:text=%D8%A7%D8%AA%D9%91%D9%8E%D9%82%D9%90%20%D8%A7%D9%84%D9%84%D9%87%D9%8E%20%D8%AD%D9%8A%D8%AB%D9%8F%D9%85%D8%A7%20%D9%83%D9%86%D8%AA%D9%8E"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Fürchte Allah, wo immer du bist, und lass einer schlechten Tat eine gute folgen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-003", "date": "2026-06-04T03:00:00.000Z", "title": "📖 Zügel den Zorn", "category": "Hadith", "topic": "Akhlaq und Selbstbeherrschung", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Zorn", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 8337; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 6116.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/8337#:~:text=%D9%84%D8%A7%20%D8%AA%D9%8E%D8%BA%D8%B6%D9%8E%D8%A8%D9%92"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Werde nicht zornig.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-004", "date": "2026-06-04T04:00:00.000Z", "title": "📖 Sprich Gutes oder schweige", "category": "Hadith", "topic": "Zunge und Īmān", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Zunge", "#Iman", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 4361; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 6018.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/4361#:~:text=%D9%81%D9%84%D9%8A%D9%8E%D9%82%D9%8F%D9%84%D9%92%20%D8%AE%D9%8E%D9%8A%D8%B1%D9%8B%D8%A7%20%D8%A3%D9%88%20%D9%84%D9%8A%D9%8E%D8%B5%D9%85%D9%8F%D8%AA%D9%92"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer an Allah und den Jüngsten Tag glaubt, soll Gutes sprechen oder schweigen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-005", "date": "2026-06-04T05:00:00.000Z", "title": "📖 Wahre Stärke", "category": "Hadith", "topic": "Selbstbeherrschung", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Staerke", "#Zorn", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 10212; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 6114.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/10212#:~:text=%D9%84%D9%8A%D8%B3%20%D8%A7%D9%84%D8%B4%D9%91%D9%8E%D8%AF%D9%8A%D8%AF%D9%8F%20%D8%A8%D8%A7%D9%84%D8%B5%D9%91%D9%8F%D8%B1%D9%8E%D8%B9%D8%A9%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der Starke ist nicht der Ringer, sondern wer sich beim Zorn beherrscht.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-006", "date": "2026-06-04T06:00:00.000Z", "title": "📖 Bewahre Allahs Rechte", "category": "Hadith", "topic": "Tawḥīd und Vertrauen", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Tawhid", "#Aqidah", "#Vertrauen", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 36167; Hadith Ibn ʿAbbās.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/36167#:~:text=%D8%A7%D8%AD%D9%81%D9%8E%D8%B8%D9%90%20%D8%A7%D9%84%D9%84%D9%91%D9%8E%D9%87%D9%8E%20%D9%8A%D8%AD%D9%81%D9%8E%D8%B8%D9%83%D9%8E"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Bewahre Allah, dann bewahrt Er dich; wenn du bittest, bitte Allah.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-007", "date": "2026-06-04T07:00:00.000Z", "title": "📖 Der Muslim ist Bruder des Muslims", "category": "Hadith", "topic": "Brüderlichkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Bruderschaft", "#Akhlaq", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 668; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 2442.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/668#:~:text=%D8%A7%D9%84%D9%85%D9%8F%D8%B3%D9%84%D9%90%D9%85%D9%8F%20%D8%A3%D8%AE%D9%88%20%D8%A7%D9%84%D9%85%D9%8F%D8%B3%D9%84%D9%90%D9%85%D9%90%20%D9%84%D8%A7%20%D9%8A%D9%8E%D8%B8%D9%84%D9%90%D9%85%D9%8F%D9%87"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der Muslim ist Bruder des Muslims: Er tut ihm kein Unrecht und lässt ihn nicht im Stich.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-008", "date": "2026-06-04T08:00:00.000Z", "title": "📖 Barmherzigkeit auf Erden", "category": "Hadith", "topic": "Barmherzigkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Barmherzigkeit", "#Akhlaq", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 74284; Ṣaḥīḥ at-Tirmidhī Nr. 1924.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/74284#:~:text=%D8%A7%D9%84%D8%B1%D9%91%D9%8E%D8%A7%D8%AD%D9%90%D9%85%D9%88%D9%86%D9%8E%20%D9%8A%D8%B1%D8%AD%D9%8E%D9%85%D9%8F%D9%87%D9%85%20%D8%A7%D9%84%D8%B1%D9%91%D9%8E%D8%AD%D9%85%D9%86%D9%8F"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Den Barmherzigen erbarmt sich der Allerbarmer; seid barmherzig mit denen auf der Erde.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-009", "date": "2026-06-04T09:00:00.000Z", "title": "📖 Jedes Gute zählt", "category": "Hadith", "topic": "Gute Tat", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Sadaqah", "#Akhlaq", "#Gutes", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 65468; at-Tirmidhī Nr. 1970.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/65468#:~:text=%D9%83%D9%84%D9%91%D9%8F%20%D9%85%D8%B9%D8%B1%D9%88%D9%81%D9%8D%20%D8%B5%D8%AF%D9%82%D8%A9%D9%8C"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Jede gute Tat ist Ṣadaqah.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-010", "date": "2026-06-04T10:00:00.000Z", "title": "📖 Wer auf Gutes hinweist", "category": "Hadith", "topic": "Daʿwah und Nutzen", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Dawah", "#Gutes", "#Lohn", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 20334; Ṣaḥīḥ Muslim, Hadith Nr. 1893.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/20334#:~:text=%D9%85%D9%8E%D9%86%20%D8%AF%D9%8E%D9%84%D9%91%D9%8E%20%D8%B9%D9%84%D9%89%20%D8%AE%D9%8E%D9%8A%D8%B1%D9%8D%20%D9%81%D9%84%D9%87%20%D9%85%D9%90%D8%AB%D9%84%D9%8F%20%D8%A3%D8%AC%D8%B1%D9%90%20%D9%81%D8%A7%D8%B9%D9%90%D9%84%D9%90%D9%87"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer auf Gutes hinweist, erhält den Lohn dessen, der es tut.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-011", "date": "2026-06-04T11:00:00.000Z", "title": "📖 Ein Lächeln als Ṣadaqah", "category": "Hadith", "topic": "Akhlaq und Brüderlichkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Sadaqah", "#Bruderschaft", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 35764; Jāmiʿ at-Tirmidhī.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/35764#:~:text=%D8%AA%D9%8E%D8%A8%D9%8E%D8%B3%D9%91%D9%8F%D9%85%D9%8F%D9%83%D9%8E%20%D9%81%D9%8A%20%D9%88%D8%AC%D9%87%D9%90%20%D8%A3%D8%AE%D9%8A%D9%83%D9%8E%20%D9%84%D9%83%20%D8%B5%D8%AF%D9%82%D8%A9%D9%8C"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Dein Lächeln im Gesicht deines Bruders ist für dich Ṣadaqah.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-012", "date": "2026-06-04T12:00:00.000Z", "title": "📖 Die gute Worte sind Ṣadaqah", "category": "Hadith", "topic": "Zunge und Wohltat", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Zunge", "#Sadaqah", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 15013; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 2989.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/15013#:~:text=%D9%88%D8%A7%D9%84%D9%83%D9%8E%D9%84%D9%90%D9%85%D8%A9%D9%8F%20%D8%A7%D9%84%D8%B7%D9%91%D9%8E%D9%8A%D9%91%D9%90%D8%A8%D8%A9%D9%8F%20%D8%B5%D9%8E%D8%AF%D9%8E%D9%82%D8%A9%D9%8C"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Ein gutes Wort ist Ṣadaqah.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-013", "date": "2026-06-04T13:00:00.000Z", "title": "📖 Wer zur Rechtleitung ruft", "category": "Hadith", "topic": "Daʿwah", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Dawah", "#Manhaj", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 830; Hadith über den Ruf zur Rechtleitung.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/830#:~:text=%D9%85%D9%8E%D9%86%20%D8%AF%D8%B9%D8%A7%20%D8%A5%D9%84%D9%89%20%D9%87%D9%8F%D8%AF%D9%8B%D9%89%20%D9%83%D8%A7%D9%86%20%D9%84%D9%87%20%D9%85%D9%90%D9%86%20%D8%A7%D9%84%D8%A3%D8%AC%D8%B1%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer zur Rechtleitung ruft, erhält Lohn wie diejenigen, die ihm folgen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-014", "date": "2026-06-04T14:00:00.000Z", "title": "📖 Gläubige stärken einander", "category": "Hadith", "topic": "Brüderlichkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Bruderschaft", "#Ummah", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 22804; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 481.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/22804#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D8%A7%D9%84%D9%85%D9%8F%D8%A4%D9%85%D9%90%D9%86%D9%8E%20%D9%84%D9%84%D9%85%D9%8F%D8%A4%D9%85%D9%90%D9%86%D9%90%20%D9%83%D8%A7%D9%84%D8%A8%D9%8F%D9%86%D9%8A%D8%A7%D9%86%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der Gläubige ist für den Gläubigen wie ein Gebäude, dessen Teile einander stärken.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-015", "date": "2026-06-04T15:00:00.000Z", "title": "📖 Allah liebt Milde", "category": "Hadith", "topic": "Rifq und Akhlāq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Rifq", "#Akhlaq", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 43438; Ṣaḥīḥ Muslim, Hadith Nr. 2593.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/43438#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D8%A7%D9%84%D9%84%D9%87%D9%8E%20%D8%B1%D9%8E%D9%81%D9%8A%D9%82%D9%8C%20%D9%8A%D9%8F%D8%AD%D9%90%D8%A8%D9%91%D9%8F%20%D8%A7%D9%84%D8%B1%D9%91%D9%90%D9%81%D9%82%D9%8E"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Allah ist milde und liebt Milde.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-016", "date": "2026-06-04T16:00:00.000Z", "title": "📖 Milde schmückt jede Sache", "category": "Hadith", "topic": "Rifq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Rifq", "#Akhlaq", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 17555; Ṣaḥīḥ Muslim, Hadith Nr. 2594.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/17555#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D8%A7%D9%84%D8%B1%D9%91%D9%90%D9%81%D9%82%D9%8E%20%D9%84%D8%A7%20%D9%8A%D9%8E%D9%83%D9%88%D9%86%D9%8F%20%D9%81%D9%8A%20%D8%B4%D9%8E%D9%8A%D8%A1%D9%8D%20%D8%A5%D9%84%D9%91%D9%8E%D8%A7%20%D8%B2%D8%A7%D9%86%D9%8E%D9%87"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Milde ist in keiner Sache, außer dass sie sie schmückt.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-017", "date": "2026-06-04T17:00:00.000Z", "title": "📖 Der Beste zu seiner Familie", "category": "Hadith", "topic": "Familie und Akhlāq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Familie", "#Akhlaq", "#Adab", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 70466; Ṣaḥīḥ al-Jāmiʿ Nr. 3314.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/70466#:~:text=%D8%AE%D9%8A%D8%B1%D9%8F%D9%83%D9%8F%D9%85%20%D8%AE%D9%8A%D8%B1%D9%8F%D9%83%D9%85%20%D9%84%D9%90%D8%A3%D9%87%D9%92%D9%84%D9%90%D9%87%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der Beste von euch ist der Beste zu seiner Familie.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-018", "date": "2026-06-04T18:00:00.000Z", "title": "📖 Die Dunyā ist kein Paradies", "category": "Hadith", "topic": "Zuhd", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Zuhd", "#Dunya", "#Akhirah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 40088; Muslim Nr. 2956.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/40088#:~:text=%D8%A7%D9%84%D8%AF%D9%91%D9%8F%D9%86%D9%8A%D8%A7%20%D8%B3%D8%AC%D9%86%D9%8F%20%D8%A7%D9%84%D9%85%D8%A4%D9%85%D9%86%D9%90%20%D9%88%D8%AC%D9%86%D9%91%D9%8E%D8%A9%D9%8F%20%D8%A7%D9%84%D9%92%D9%83%D8%A7%D9%81%D8%B1%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Die Welt ist das Gefängnis des Gläubigen und das Paradies des Ungläubigen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-019", "date": "2026-06-04T19:00:00.000Z", "title": "📖 Wer nicht barmherzig ist", "category": "Hadith", "topic": "Barmherzigkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Barmherzigkeit", "#Akhlaq", "#Familie", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 141052; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 5997.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/141052#:~:text=%D9%85%D9%8E%D9%86%20%D9%84%D8%A7%20%D9%8A%D9%8E%D8%B1%D8%AD%D9%8E%D9%85%D9%8F%20%D9%84%D8%A7%20%D9%8A%D9%8F%D8%B1%D8%AD%D9%8E%D9%85%D9%8F"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer nicht barmherzig ist, dem wird keine Barmherzigkeit erwiesen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-020", "date": "2026-06-04T20:00:00.000Z", "title": "📖 Erleichtert und erschwert nicht", "category": "Hadith", "topic": "Daʿwah und Weisheit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Dawah", "#Rifq", "#Wissen", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 70; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 69.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/70#:~:text=%D9%8A%D9%8E%D8%B3%D9%91%D9%90%D8%B1%D9%88%D8%A7%20%D9%88%D9%84%D8%A7%20%D8%AA%D9%8F%D8%B9%D9%8E%D8%B3%D9%91%D9%90%D8%B1%D9%88%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Erleichtert und erschwert nicht; gebt frohe Botschaft und schreckt nicht ab.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-021", "date": "2026-06-04T21:00:00.000Z", "title": "📖 Gesandt zur Vollendung des Charakters", "category": "Hadith", "topic": "Akhlaq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Adab", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 113995; Ṣaḥīḥ al-Jāmiʿ Nr. 2833.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/113995#:~:text=%D8%A8%D9%8F%D8%B9%D9%90%D8%AB%D8%AA%D9%8F%20%D9%84%D8%A3%D9%8F%D8%AA%D9%8E%D9%85%D9%91%D9%90%D9%85%D9%8E%20%D8%B5%D8%A7%D9%84%D9%90%D8%AD%D9%8E%20%D8%A7%D9%84%D8%A3%D8%AE%D9%92%D9%84%D8%A7%D9%82%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Ich wurde gesandt, um die rechtschaffenen Charaktereigenschaften zu vollenden.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-022", "date": "2026-06-04T22:00:00.000Z", "title": "📖 Schwer auf der Waage", "category": "Hadith", "topic": "Akhlaq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Waage", "#Iman", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 69679; Hadith Abū ad-Dardāʾ.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/69679#:~:text=%D9%85%D8%A7%20%D9%85%D9%86%20%D8%B4%D9%8A%D8%A1%D9%8D%20%D9%8A%D9%8F%D9%88%D8%B6%D9%8E%D8%B9%D9%8F%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%90%D9%8A%D8%B2%D8%A7%D9%86%D9%90%20%D8%A3%D8%AB%D9%92%D9%82%D9%84%D9%8F%20%D9%85%D9%86%20%D8%AD%D9%8F%D8%B3%D9%92%D9%86%D9%90%20%D8%A7%D9%84%D8%AE%D9%8F%D9%84%D9%8F%D9%82%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Nichts ist am Tag der Auferstehung schwerer auf der Waage als guter Charakter.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-023", "date": "2026-06-04T23:00:00.000Z", "title": "📖 Die Besten im Charakter", "category": "Hadith", "topic": "Akhlaq", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Adab", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 15943; Ṣaḥīḥ al-Bukhārī, Hadith Nr. 3559.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/15943#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D9%85%D9%90%D9%86%20%D8%AE%D9%8A%D8%A7%D8%B1%D9%90%D9%83%D9%8F%D9%85%20%D8%A3%D8%AD%D8%B3%D9%8E%D9%86%D9%8E%D9%83%D9%8F%D9%85%20%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8B%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Zu den Besten von euch gehören diejenigen mit dem besten Charakter.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-024", "date": "2026-06-04T24:00:00.000Z", "title": "📖 Dieser Dīn ist leicht", "category": "Hadith", "topic": "Manhaj und Ibadah", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Manhaj", "#Ibadah", "#Rifq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 1478; Hadith über Erleichterung im Dīn.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/1478#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D9%87%D8%B0%D8%A7%20%D8%A7%D9%84%D8%AF%D9%8A%D9%86%D9%8E%20%D9%8A%D8%B3%D8%B1%D9%8C"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Dieser Dīn ist leicht; wer ihn übermäßig erschwert, wird überwältigt.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-025", "date": "2026-06-04T25:00:00.000Z", "title": "📖 Der Weg des Wissens", "category": "Hadith", "topic": "Wissen", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Wissen", "#Jannah", "#Sunnah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 122971; Muslim Nr. 2699.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/122971#:~:text=%D9%85%D9%86%20%D8%B3%D9%84%D9%83%20%D8%B7%D8%B1%D9%8A%D9%82%D8%A7%20%D9%8A%D9%84%D8%AA%D9%85%D8%B3%20%D9%81%D9%8A%D9%87%20%D8%B9%D9%84%D9%85%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer einen Weg beschreitet, auf dem er Wissen sucht, dem erleichtert Allah einen Weg zum Paradies.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-026", "date": "2026-06-04T26:00:00.000Z", "title": "📖 Neuerungen werden zurückgewiesen", "category": "Hadith", "topic": "Sunnah und Bidʿah", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Sunnah", "#Bidah", "#Manhaj", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 81042; Ṣaḥīḥ al-Bukhārī Nr. 2697, Muslim Nr. 1718.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/81042#:~:text=%D9%85%D9%8E%D9%86%20%D8%A3%D8%AD%D8%AF%D9%8E%D8%AB%D9%8E%20%D9%81%D9%8A%20%D8%A3%D9%85%D8%B1%D9%90%D9%86%D8%A7%20%D9%87%D8%B0%D8%A7%20%D9%85%D8%A7%20%D9%84%D9%8A%D8%B3%20%D9%81%D9%8A%D9%87%20%D9%81%D9%87%D9%88%20%D8%B1%D9%8E%D8%AF%D9%91%D9%8C"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wer in diese unsere Angelegenheit etwas einführt, was nicht dazu gehört, dem wird es zurückgewiesen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-027", "date": "2026-06-04T27:00:00.000Z", "title": "📖 Taten nach Absichten", "category": "Hadith", "topic": "Ikhlāṣ", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Ikhlas", "#Niyyah", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 64107; Hadith ʿUmar ibn al-Khaṭṭāb.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/64107#:~:text=%D8%A5%D9%86%D9%91%D9%8E%D9%85%D8%A7%20%D8%A7%D9%84%D8%A3%D8%B9%D9%85%D8%A7%D9%84%D9%8F%20%D8%A8%D8%A7%D9%84%D9%86%D9%91%D9%90%D9%8A%D9%91%D9%8E%D8%A7%D8%AA%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Die Taten sind nur entsprechend den Absichten.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-028", "date": "2026-06-04T28:00:00.000Z", "title": "📖 Der Dīn ist Naṣīḥah", "category": "Hadith", "topic": "Naṣīḥah", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Nasiha", "#Manhaj", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 34413; Muslim, Hadith Tamīm ad-Dārī.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/34413#:~:text=%D8%A7%D9%84%D8%AF%D9%91%D9%90%D9%8A%D9%86%D9%8F%20%D8%A7%D9%84%D9%86%D9%91%D9%8E%D8%B5%D9%8A%D8%AD%D8%A9%D9%8F"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der Dīn ist aufrichtiger Rat.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-029", "date": "2026-06-04T29:00:00.000Z", "title": "📖 Prüfung als Zeichen des Guten", "category": "Hadith", "topic": "Geduld und Prüfung", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Sabr", "#Pruefung", "#Iman", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 5676; al-Bukhārī Nr. 5645.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/5676#:~:text=%D9%85%D9%8E%D9%86%20%D9%8A%D9%8F%D8%B1%D9%90%D8%AF%D9%90%20%D8%A7%D9%84%D9%84%D9%87%D9%8F%20%D8%A8%D9%87%20%D8%AE%D9%8A%D8%B1%D9%8B%D8%A7%20%D9%8A%D9%8F%D8%B5%D9%90%D8%A8%D9%92%20%D9%85%D9%86%D9%87"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wem Allah Gutes will, den prüft Er.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-030", "date": "2026-06-04T30:00:00.000Z", "title": "📖 Verachte keine gute Tat", "category": "Hadith", "topic": "Gute Tat", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Akhlaq", "#Gutes", "#Adab", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 17589; Muslim Nr. 2626.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/17589#:~:text=%D9%84%D8%A7%20%D8%AA%D8%AD%D9%92%D9%82%D9%90%D8%B1%D9%8E%D9%86%D9%91%D9%8E%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%8F%D9%88%D9%81%D9%90%20%D8%B4%D9%8A%D9%92%D8%A6%D9%8B%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Verachte keine gute Tat, selbst wenn du deinem Bruder mit freundlichem Gesicht begegnest.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-031", "date": "2026-06-04T31:00:00.000Z", "title": "📖 Die Gläubigen wie ein Körper", "category": "Hadith", "topic": "Brüderlichkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Bruderschaft", "#Ummah", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 4340; Hadith an-Nuʿmān ibn Bashīr.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/4340#:~:text=%D9%85%D8%AB%D9%84%D9%8F%20%D8%A7%D9%84%D9%85%D8%A4%D9%85%D9%86%D9%8A%D9%86%20%D9%81%D9%8A%20%D8%AA%D9%8E%D9%88%D8%A7%D8%AF%D9%91%D9%90%D9%87%D9%85"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Das Gleichnis der Gläubigen in Liebe und Barmherzigkeit ist wie ein Körper.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-032", "date": "2026-06-04T32:00:00.000Z", "title": "📖 Der starke Gläubige", "category": "Hadith", "topic": "Īmān und Stärke", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Iman", "#Staerke", "#Sabr", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 62791; Muslim Nr. 2664.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/62791#:~:text=%D8%A7%D9%84%D9%85%D8%A4%D9%85%D9%86%D9%8F%20%D8%A7%D9%84%D9%82%D9%88%D9%8A%D9%91%D9%8F%20%D8%AE%D9%8A%D8%B1%D9%8C%20%D9%88%D8%A3%D8%AD%D8%A8%D9%91%D9%8F%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D9%84%D9%87%D9%90"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der starke Gläubige ist besser und Allah lieber als der schwache Gläubige; in beiden ist Gutes.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-033", "date": "2026-06-04T33:00:00.000Z", "title": "📖 Wenn Allah ein Haus liebt", "category": "Hadith", "topic": "Rifq in der Familie", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Familie", "#Rifq", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 113451; Ṣaḥīḥ al-Jāmiʿ Nr. 1704.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/113451#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D8%A7%D9%84%D9%84%D9%87%D9%8E%20%D8%A5%D8%B0%D8%A7%20%D8%A3%D8%AD%D8%A8%D9%91%D9%8E%20%D8%A3%D9%87%D9%84%D9%8E%20%D8%A8%D9%8A%D8%AA%D9%8D%20%D8%A3%D8%AF%D8%AE%D9%84%D9%8E%20%D8%B9%D9%84%D9%8A%D9%87%D9%85%D9%8F%20%D8%A7%D9%84%D8%B1%D9%91%D9%90%D9%81%D9%82%D9%8E"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wenn Allah eine Familie liebt, bringt Er Milde in sie hinein.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-034", "date": "2026-06-04T34:00:00.000Z", "title": "📖 Lehrt und erleichtert", "category": "Hadith", "topic": "Wissen und Daʿwah", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Wissen", "#Dawah", "#Rifq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 78068; as-Silsilah aṣ-Ṣaḥīḥah Nr. 1375.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/78068#:~:text=%D8%B9%D9%84%D9%91%D9%85%D9%88%D8%A7%20%D9%88%D9%8A%D8%B3%D9%91%D8%B1%D9%88%D8%A7%20%D9%88%D9%84%D8%A7%20%D8%AA%D8%B9%D8%B3%D9%91%D8%B1%D9%88%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Lehrt, erleichtert und erschwert nicht; wenn jemand zornig wird, soll er schweigen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-035", "date": "2026-06-04T35:00:00.000Z", "title": "📖 Ein erleichternder Lehrer", "category": "Hadith", "topic": "Daʿwah und Lehre", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Dawah", "#Rifq", "#Wissen", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 69633; Muslim Nr. 1478.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/69633#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D8%A7%D9%84%D9%84%D9%87%D9%8E%20%D9%84%D9%85%20%D9%8A%D8%A8%D8%B9%D8%AB%D9%92%D9%86%D9%8A%20%D9%85%D9%8F%D8%B9%D9%86%D9%91%D9%90%D8%AA%D9%8B%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Allah hat mich nicht als Erschwerer gesandt, sondern als lehrenden Erleichterer.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-036", "date": "2026-06-04T36:00:00.000Z", "title": "📖 Ruhe nach der Dunyā", "category": "Hadith", "topic": "Zuhd und Tod", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Zuhd", "#Tod", "#Akhirah", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 24149; Ṣaḥīḥ al-Bukhārī Nr. 6512.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/24149#:~:text=%D8%A7%D9%84%D8%B9%D9%8E%D8%A8%D8%AF%D9%8F%20%D8%A7%D9%84%D9%85%D9%8F%D8%A4%D9%85%D9%90%D9%86%D9%8F%20%D9%8A%D9%8E%D8%B3%D8%AA%D9%8E%D8%B1%D9%8A%D8%AD%D9%8F%20%D9%85%D9%90%D9%86%20%D9%86%D9%8E%D8%B5%D9%8E%D8%A8%D9%90%20%D8%A7%D9%84%D8%AF%D9%91%D9%8F%D9%86%D9%8A%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Der gläubige Diener ruht von der Mühsal der Dunyā zur Barmherzigkeit Allahs.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-037", "date": "2026-06-04T37:00:00.000Z", "title": "📖 Die Unantastbarkeit des Muslims", "category": "Hadith", "topic": "Brüderlichkeit und Rechte", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Bruderschaft", "#Akhlaq", "#Rechte", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 17127; Hadith über die Rechte des Muslims.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/17127#:~:text=%D9%83%D9%84%D9%91%D9%8F%20%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%85%D9%90%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%85%D9%90%20%D8%AD%D8%B1%D8%A7%D9%85%D9%8C"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Alles am Muslim ist für den Muslim unantastbar: seine Ehre, sein Besitz und sein Blut.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-038", "date": "2026-06-04T38:00:00.000Z", "title": "📖 Wahrheit ohne Furcht", "category": "Hadith", "topic": "Manhaj und Standhaftigkeit", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Manhaj", "#Wahrheit", "#Sabr", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 5051; Hadith ʿUbādah ibn aṣ-Ṣāmit.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/5051#:~:text=%D9%88%D8%A3%D9%86%20%D9%86%D9%8E%D9%82%D9%88%D9%84%D9%8E%20%D8%A8%D8%A7%D9%84%D8%AD%D9%8E%D9%82%D9%91%D9%90%20%D8%A3%D9%8A%D9%86%D9%8E%D9%85%D8%A7%20%D9%83%D9%8F%D9%86%D9%91%D9%8E%D8%A7"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wir wurden verpflichtet, die Wahrheit zu sagen, wo immer wir sind, und in Allah keine Tadelnden zu fürchten.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-039", "date": "2026-06-04T39:00:00.000Z", "title": "📖 Schweigen beim Zorn", "category": "Hadith", "topic": "Zunge und Zorn", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Zorn", "#Zunge", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Sharḥ Nr. 78068; as-Silsilah aṣ-Ṣaḥīḥah Nr. 1375.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/hadith/sharh/78068#:~:text=%D9%88%D8%A5%D8%B0%D8%A7%20%D8%BA%D8%B6%D8%A8%D9%8E%20%D8%A3%D8%AD%D8%AF%D9%83%D9%8F%D9%85%20%D9%81%D9%84%D9%8A%D8%B3%D9%83%D9%8F%D8%AA"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Wenn einer von euch zornig wird, soll er schweigen.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}, {"id": "verified-dorar-40-040", "date": "2026-06-04T40:00:00.000Z", "title": "📖 Wer anderen hilft", "category": "Hadith", "topic": "Brüderlichkeit und Nutzen", "scholar": "Prophet ﷺ", "book": "Dorar – al-Mawsūʿah al-Ḥadīthiyyah", "tags": ["#Hadith", "#Bruderschaft", "#Hilfe", "#Akhlaq", "#Dorar"], "source": "📝 Dorar, al-Mawsūʿah al-Ḥadīthiyyah, Uṣūl al-ḥadīth zu Muslim Nr. 2699.", "links": [{"label": "→ Dorar", "url": "https://dorar.net/h/dKCJZrc5?osoul=1#:~:text=%D9%88%D8%A7%D9%84%D9%84%D9%87%20%D9%81%D9%8A%20%D8%B9%D9%88%D9%86%20%D8%A7%D9%84%D8%B9%D8%A8%D8%AF%20%D9%85%D8%A7%20%D9%83%D8%A7%D9%86%20%D8%A7%D9%84%D8%B9%D8%A8%D8%AF%20%D9%81%D9%8A%20%D8%B9%D9%88%D9%86%20%D8%A3%D8%AE%D9%8A%D9%87"}], "logo": "logo-black.png", "statement": "🖋️ Der Gesandte Allahs ﷺ sagte sinngemäß:\n\n„Allah hilft dem Diener, solange der Diener seinem Bruder hilft.“\n\n👉🏼 Diese Aussage zeigt einen klaren Grundsatz aus Qurʾān und Sunnah: Der Dīn wird durch **authentische Überlieferung**, **Aufrichtigkeit** und **rechtschaffene Tat** getragen – nicht durch bloße Behauptung.\n\n🌙 **Fazit:** Wer sich an die Sunnah hält, schützt seinen Dīn und richtet sein Herz auf Allah aus."}];
 </script>
-
 </head>
+<body class="clean-home">
 
-<body>
 <header class="site">
   <section class="hero">
-    <div class="hero-logo-bg"><img src="logo-black.png" alt="DAR AL TAWHID Logo"></div>
     <div class="top">
       <div class="brand">
         <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
-        <h1>DAR AL TAWHID</h1>
+        <h1>DAR AL TAWḤID</h1>
       </div>
-      <nav class="links social-links">
-        <a class="chip social-chip telegram-chip" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener noreferrer"><span class="social-icon telegram-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a>
-        <a class="chip social-chip instagram-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><span class="social-icon instagram-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="igGradDar" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igGradDar)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a>
+      <nav class="links">
+        <a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span>
+          Telegram
+        </a>
+        <a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span>
+          Instagram
+        </a>
       </nav>
     </div>
     <div class="hero-welcome">
-  <div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div>
-  <div class="welcome-line">
-    Willkommen bei <strong>DAR AL TAWHID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.
-  </div>
-</div>
+      <div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div>
+      <div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.</div>
+    </div>
   </section>
 </header>
 
-
-
-
-<section class="site isnad-compact-card">
-  <div class="isnad-topline"><span>Maßstab der Überlieferung</span></div>
-  <div class="isnad-compact-text">
-    <span class="isnad-compact-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span>
-  </div>
-  <div class="isnad-compact-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div>
+<section class="site isnad">
+  <div class="isnad-top">Maßstab der Überlieferung</div>
+  <div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div>
+  <div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div>
 </section>
-
-
-
 
 <main class="site grid">
   <aside>
     <h2>Navigation</h2>
     <input id="searchInput" class="search" type="search" placeholder="Freie Suche…">
 
-    <details class="filter-section" open>
+    <details class="filter-section">
       <summary>Gelehrte</summary>
       <div id="scholarList" class="list-buttons"></div>
     </details>
@@ -1082,355 +288,242 @@ window.EMBEDDED_POSTS = [{"id": "verified-dorar-40-001", "date": "2026-06-04T01:
       <div id="tagList" class="list-buttons"></div>
     </details>
 
-    <div class="group reset-group"><button id="resetFilters">Alles anzeigen</button></div>
+    <div style="border-top:1px solid var(--line2);margin-top:10px;padding-top:10px">
+      <button id="resetFilters">Alles anzeigen</button>
+    </div>
   </aside>
 
-  <section>
+  <section class="main">
     <section class="panel">
       <h2>Übersicht</h2>
       <div class="stats">
-        <div class="stat"><b id="statPosts">0</b><span>Beiträge</span></div>
-        <div class="stat"><b id="statScholars">0</b><span>Gelehrte</span></div>
-        <div class="stat"><b id="statBooks">0</b><span>Bücher</span></div>
-        <div class="stat"><b id="statTopics">0</b><span>Themen</span></div>
+        <div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div>
+        <div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div>
+        <div class="stat"><b id="countBooks">0</b><span>Bücher</span></div>
+        <div class="stat"><b id="countTopics">0</b><span>Themen</span></div>
       </div>
     </section>
-    
-<section class="mobile-app-home" id="mobileAppHome">
-  <div class="mobile-app-head">
-    <h2>Wissensbereiche</h2>
-    <span>Nach Themen öffnen</span>
-  </div>
-  <div class="mobile-quick-cats" id="mobileQuickCats"></div>
-</section>
+
+    <section class="knowledge">
+      <div class="knowledge-head">
+        <h2>Wissensbereiche</h2>
+        <span>Nach Themen öffnen</span>
+      </div>
+      <div id="categoryList" class="mobile-quick-cats"></div>
+    </section>
+
+    <div id="homeNotice" class="notice">
+      <strong>Wähle einen Wissensbereich</strong>
+      Öffne zuerst einen Bereich wie Hadith, Aqīdah oder Manhaj. Danach erscheinen die passenden Beiträge.
+    </div>
 
     <section id="posts" class="posts"></section>
-    
-<div id="mobileStartNotice" class="mobile-start-notice">
-  <strong>Wähle einen Wissensbereich</strong>
-  Öffne zuerst einen Bereich wie Hadith, Aqīdah oder Manhaj. Danach erscheinen die passenden Beiträge.
-</div>
-
-    <div class="mobile-more-wrap"><button id="mobileShowMore" type="button">Mehr Beiträge anzeigen</button></div>
   </section>
 </main>
 
-<div id="detailOverlay" class="detail-overlay">
-  <article class="detail-view">
-    <img id="detailLogo" class="post-logo" src="logo-black.png" alt="Logo">
-    <div class="close-row">
-      <button id="backBtn">← Zur Übersicht</button>
-      <button id="sharePostBtn" class="share-post-btn">Beitrag teilen</button>
+<div id="modal" class="modal" role="dialog" aria-modal="true">
+  <article class="article">
+    <div class="article-top">
+      <button id="shareBtn">Beitrag teilen</button>
       <button id="closeBtn">Schließen</button>
     </div>
-    <h2 id="detailTitle" class="detail-title"></h2>
-    <div id="detailMeta" class="meta" style="justify-content:center;position:relative;z-index:1"></div>
-    <div id="detailStatement" class="statement"></div>
-    <div class="source"><b id="detailSource"></b><div id="detailLinks" class="source-links"></div></div>
+    <h2 id="modalTitle"></h2>
+    <div id="modalMeta" class="meta"></div>
+    <div id="modalStatement" class="statement"></div>
+    <div id="modalSource" class="article-source"></div>
+    <div id="modalLinks" class="article-links"></div>
   </article>
 </div>
 
 <footer class="site">
-  <strong>DAR AL TAWHID</strong><br>
+  <strong>DAR AL TAWḤID</strong><br>
   Folgt für mehr Wissen aus Qurʾān & Sunnah<br>
-  <div class="footer-social">
-  <span><span class="social-icon telegram-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span> Telegram: @dar_al_tauhid</span>
-  <span class="dot-sep">·</span>
-  <span><span class="social-icon instagram-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="igGradDar" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igGradDar)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span> Instagram: @dar_at_tawhid</span>
-</div>
+  Telegram: @dar_al_tauhid · Instagram: @dar_at_tawhid
   <span class="signature">by Serhat Abu Malik</span>
 </footer>
 
 <script>
-let posts=[];
-let currentPost=null;
-let active={type:"all",value:"Alle"};
-const $=id=>document.getElementById(id);
-
-function esc(s=""){
-  return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-}
-
-function unique(a){
-  return[...new Set(a.filter(Boolean))].sort((x,y)=>x.localeCompare(y,"de"));
-}
-
-function stripMd(s=""){
-  return String(s).replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/^\s*[👉🏼🌙🖋️]\s*/gm,"").trim();
-}
-
-function formatStatement(str=""){
-  const terms=["Allāh","Allah","Qurʾān","Sunnah","Ahlus-Sunnah","Ahl al-Sunnah","Tawḥīd","Aqīdah","Fiqh","Zuhd","Taqwā","Bidʿah","Īmān","Kufr","Schirk","Salaf","Āthār","Hadith","Ṣifāt","Jahmiyyah"];
-  function inlineFormat(s){
-    let out=esc(s)
-      .replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>")
-      .replace(/\*(.*?)\*/g,"<em>$1</em>");
-    terms.forEach(w=>{
-      const safe=w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-      out=out.replace(new RegExp(`(?<![\\w>])(${safe})(?![^<]*>|[\\w])`,"g"),'<span class="auto">$1</span>');
-    });
-    return out;
-  }
-  return String(str)
-    .split(/\n\s*\n/g)
-    .map(part=>part.trim())
-    .filter(Boolean)
-    .map(part=>{
-      let cls="";
-      if(part.startsWith("🖋️")) cls="speaker";
-      else if(part.startsWith("„") || part.startsWith("**„")) cls="quote";
-      else if(part.startsWith("👉🏼")) cls="proof";
-      else if(part.startsWith("🌙")) cls="conclusion";
-      return `<p class="${cls}">${inlineFormat(part).replace(/\n/g,"<br>")}</p>`;
-    })
-    .join("");
-}
-
-function countBy(key,array=false){
-  const m=new Map();
-  posts.forEach(p=>{
-    const vals=array?(p[key]||[]):[p[key]];
-    vals.filter(Boolean).forEach(v=>m.set(v,(m.get(v)||0)+1));
-  });
-  return m;
-}
-
-function btn(label,type,count){
-  const b=document.createElement("button");
-  b.type="button";
-  b.textContent=count?`${label} (${count})`:label;
-  if(active.type===type&&active.value===label)b.classList.add("active");
-  b.onclick=()=>{active={type,value:label};render()};
-  return b;
-}
-
-function renderLists(){
-  const lists=[
-    ["scholarList","scholar",countBy("scholar")],
-    ["bookList","book",countBy("book")],
-    ["topicList","topic",countBy("topic")],
-    ["tagList","tag",countBy("tags",true)]
-  ];
-  for(const [id,type,map] of lists){
-    $(id).innerHTML="";
-    $(id).appendChild(btn("Alle","all",posts.length));
-    [...map.keys()].sort((a,b)=>a.localeCompare(b,"de")).forEach(x=>$(id).appendChild(btn(x,type,map.get(x))));
-  }
-}
-
-function matches(p,q){
-  const hay=[p.title,p.category,p.topic,p.scholar,p.book,p.statement,p.source,...(p.tags||[])].join(" ").toLowerCase();
-  let ok=!q||hay.includes(q);
-  if(active.type==="scholar")ok=ok&&p.scholar===active.value;
-  if(active.type==="book")ok=ok&&p.book===active.value;
-  if(active.type==="topic")ok=ok&&p.topic===active.value;
-  if(active.type==="tag")ok=ok&&(p.tags||[]).includes(active.value);
-  if(active.type==="category")ok=ok&&p.category===active.value;
-  return ok;
-}
-
-function excerpt(p){
-  const lines=stripMd(p.statement||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
-  const first=lines.find(x=>x.includes("sagte")||x.startsWith("„")||x.length>30)||lines[0]||"";
-  return first.length>95?first.slice(0,95)+"…":first;
-}
-
-function renderPosts(){
-  const root=$("posts");
-  root.innerHTML="";
-  const q=$("searchInput").value.trim().toLowerCase();
-  const filtered=posts.filter(p=>matches(p,q));
-  if(!filtered.length){
-    root.innerHTML='<div class="empty">Noch keine Beiträge vorhanden.</div>';
-    return;
-  }
-  filtered.forEach((p,i)=>{
-    const a=document.createElement("article");
-    a.className="post-card";
-    const tags=(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${esc(t)}</span>`).join("");
-    a.innerHTML=`
-      <img class="post-logo" src="${esc(p.logo||"logo-black.png")}" alt="Logo">
-      <div class="card-inner">
-        <h2 class="card-title">${esc(p.title)}</h2>
-        <div class="meta">
-          <span class="badge">${esc(p.scholar)}</span>
-          <span class="badge">${esc(p.topic)}</span>
-          ${tags}
-        </div>
-        <p class="excerpt">${esc(excerpt(p))}</p>
-        <div class="card-source">${esc(p.source||"")}</div>
-      </div>
-      <div class="card-actions">
-        <button class="open-btn" data-open="${i}">Beitrag öffnen</button>
-      </div>`;
-    a.querySelector("[data-open]").onclick=()=>openPost(p);
-    root.appendChild(a);
-  });
-}
-
-function openPost(p){
-  currentPost=p;
-$("detailLogo").src=p.logo||"logo-black.png";
-  $("detailTitle").textContent=p.title||"";
-  $("detailMeta").innerHTML=`<span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span><span class="badge">${esc(p.topic||"")}</span>`+(p.tags||[]).slice(0,5).map(t=>`<span class="badge">${esc(t)}</span>`).join("");
-  $("detailStatement").innerHTML=formatStatement(p.statement||"");
-  $("detailSource").textContent=p.source||"";
-  $("detailLinks").innerHTML=(p.links||[]).map(l=>l.url?`<a href="${esc(l.url)}" target="_blank">${esc(l.label||"→ Quelle")}</a>`:"").join("");
-  $("detailOverlay").classList.add("active");
-}
-
-function closePost(){
-  $("detailOverlay").classList.remove("active");
-}
-
-
-function cleanShareText(s=""){
-  return String(s)
-    .replace(/\*\*(.*?)\*\*/g,"$1")
-    .replace(/\*(.*?)\*/g,"$1")
-    .replace(/\n{3,}/g,"\n\n")
-    .trim();
-}
-
-async function shareCurrentPost(){
-  if(!currentPost) return;
-  const title = currentPost.title || "DAR AL TAWḤID";
-  const text = cleanShareText(currentPost.statement || "").slice(0, 900);
-  const url = location.origin + location.pathname + "?post=" + encodeURIComponent(currentPost.id || "");
-  const shareData = { title, text, url };
-
-  if(navigator.share){
-    try{
-      await navigator.share(shareData);
-      return;
-    }catch(e){}
-  }
-
-  const fallback = title + "\n\n" + text + "\n\n" + url;
-  try{
-    await navigator.clipboard.writeText(fallback);
-    alert("Beitrag wurde kopiert. Du kannst ihn jetzt in WhatsApp, Telegram oder Instagram einfügen.");
-  }catch(e){
-    prompt("Kopiere den Beitrag:", fallback);
-  }
-}
-
-
-
-
-
-function isMobileAppView(){
-  return window.matchMedia && window.matchMedia("(max-width:760px)").matches;
-}
-
-let mobileExpanded=false;
-
-function buildMobileQuickCats(){
-  const root=document.getElementById("mobileQuickCats");
-  if(!root) return;
-  root.innerHTML="";
-  const map=countBy("category");
-  const preferred=["Aqīdah","Hadith","Āthār","Manhaj","Adab","Akhlaq","Zuhd","Fiqh","Tafsīr"];
-  const keys=[...map.keys()].sort((a,b)=>{
-    const ai=preferred.indexOf(a), bi=preferred.indexOf(b);
-    if(ai!==-1 || bi!==-1) return (ai===-1?99:ai)-(bi===-1?99:bi);
-    return a.localeCompare(b,"de");
-  }).slice(0,12);
-
-  keys.forEach(k=>{
-    const btn=document.createElement("button");
-    btn.type="button";
-    btn.className="mobile-cat-btn";
-    btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;
-    btn.onclick=()=>{
-      active={type:"category",value:k};
-      mobileExpanded=true;
-      render();
-      document.getElementById("posts")?.scrollIntoView({behavior:"smooth",block:"start"});
-    };
-    root.appendChild(btn);
-  });
-}
-
-function updateMobileHomeCleanState(){
-  const clean = active.type==="all" && !($("searchInput")?.value || "").trim();
-  document.body.classList.toggle("mobile-home-clean", clean);
-}
-
-function applyMobilePostLimit(){
-  updateMobileHomeCleanState();
-  const btn=document.getElementById("mobileShowMore");
-  const cards=[...document.querySelectorAll("#posts > article")];
-  if(!btn) return;
-  if(document.body.classList.contains("mobile-home-clean")){
-    btn.style.display="none";
-    return;
-  }
-  if(!isMobileAppView()){
-    cards.forEach(c=>c.classList.remove("mobile-hidden-post"));
-    btn.style.display="none";
-    return;
-  }
-  const limit=6;
-  cards.forEach((c,i)=>{
-    if(!mobileExpanded && i>=limit) c.classList.add("mobile-hidden-post");
-    else c.classList.remove("mobile-hidden-post");
-  });
-  btn.style.display=cards.length>limit && !mobileExpanded ? "inline-flex" : "none";
-}
-
-function renderStats(){
-  $("statPosts").textContent=posts.length;
-  $("statScholars").textContent=unique(posts.map(p=>p.scholar)).length;
-  $("statBooks").textContent=unique(posts.map(p=>p.book)).length;
-  $("statTopics").textContent=unique(posts.map(p=>p.topic)).length;
-}
-
-function render(){
-  renderStats();
-  renderLists();
-  buildMobileQuickCats();
-  renderPosts();
-  applyMobilePostLimit();
-  updateMobileHomeCleanState();
-}
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const stripMd = s => String(s ?? "").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1");
+let posts = [];
+let active = {type:"all", value:"Alle"};
+let currentPost = null;
 
 async function load(){
   try{
-    const res = await fetch("posts.json?v=" + Date.now(), { cache: "no-store" });
-    if(!res.ok) throw new Error("posts.json nicht erreichbar");
+    const res = await fetch("posts.json?v=" + Date.now(), {cache:"no-store"});
     const data = await res.json();
-    posts = Array.isArray(data) && data.length ? data : (window.EMBEDDED_POSTS || []);
+    posts = Array.isArray(data) && data.length ? data : window.EMBEDDED_POSTS;
   }catch(e){
     posts = window.EMBEDDED_POSTS || [];
   }
   render();
 }
 
-$("searchInput").oninput=()=>{mobileExpanded=true;render();};render();};
-$("resetFilters").onclick=()=>{
-  active={type:"all",value:"Alle"};
-  mobileExpanded=false;
-  $("searchInput").value="";
-  render();
-};
-if($("mobileShowMore")) $("mobileShowMore").onclick=()=>{mobileExpanded=true;render();};
-$("closeBtn").onclick=closePost;
-$("sharePostBtn").onclick=shareCurrentPost;
-$("backBtn").onclick=closePost;
-$("detailOverlay").onclick=e=>{if(e.target.id==="detailOverlay")closePost()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closePost()});
-window.addEventListener("resize", applyMobilePostLimit);
-load();
-</script>
+function countBy(key){
+  const map = new Map();
+  posts.forEach(p => {
+    const val = p[key] || "Unbekannt";
+    map.set(val, (map.get(val)||0)+1);
+  });
+  return map;
+}
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js").catch(() => {});
+function countTags(){
+  const map = new Map();
+  posts.forEach(p => (p.tags||[]).forEach(t => map.set(t,(map.get(t)||0)+1)));
+  return map;
+}
+
+function buttonList(root, map, type){
+  root.innerHTML = "";
+  const all = document.createElement("button");
+  all.textContent = `Alle (${posts.length})`;
+  all.className = active.type==="all" ? "active" : "";
+  all.onclick = () => { active={type:"all",value:"Alle"}; $("searchInput").value=""; render(); };
+  root.appendChild(all);
+  [...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de")).forEach(([name,count]) => {
+    const b = document.createElement("button");
+    b.textContent = `${name} (${count})`;
+    b.className = active.type===type && active.value===name ? "active" : "";
+    b.onclick = () => { active={type,value:name}; render(); };
+    root.appendChild(b);
   });
 }
-</script>
 
+function buildCategories(){
+  const root = $("categoryList");
+  root.innerHTML = "";
+  const preferred = ["Aqīdah","Hadith","Āthār","Manhaj","Adab","Akhlaq","Zuhd","Fiqh","Tafsīr"];
+  const map = countBy("category");
+  const keys = [...map.keys()].sort((a,b)=> {
+    const ai=preferred.indexOf(a), bi=preferred.indexOf(b);
+    if(ai!==-1 || bi!==-1) return (ai===-1?99:ai)-(bi===-1?99:bi);
+    return a.localeCompare(b,"de");
+  });
+  keys.forEach(k => {
+    const btn = document.createElement("button");
+    btn.className = "mobile-cat-btn" + (active.type==="category" && active.value===k ? " active" : "");
+    btn.innerHTML = `<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;
+    btn.onclick = () => {
+      active={type:"category",value:k};
+      $("searchInput").value="";
+      render();
+      $("posts").scrollIntoView({behavior:"smooth", block:"start"});
+    };
+    root.appendChild(btn);
+  });
+}
+
+function matches(p){
+  const q = $("searchInput").value.trim().toLowerCase();
+  let ok = true;
+  if(active.type==="scholar") ok = ok && p.scholar===active.value;
+  if(active.type==="book") ok = ok && p.book===active.value;
+  if(active.type==="topic") ok = ok && p.topic===active.value;
+  if(active.type==="tag") ok = ok && (p.tags||[]).includes(active.value);
+  if(active.type==="category") ok = ok && p.category===active.value;
+  if(q){
+    ok = ok && [p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(q);
+  }
+  return ok;
+}
+
+function renderStats(){
+  $("countPosts").textContent = posts.length;
+  $("countScholars").textContent = countBy("scholar").size;
+  $("countBooks").textContent = countBy("book").size;
+  $("countTopics").textContent = countBy("topic").size;
+}
+
+function renderLists(){
+  buttonList($("scholarList"), countBy("scholar"), "scholar");
+  buttonList($("bookList"), countBy("book"), "book");
+  buttonList($("topicList"), countBy("topic"), "topic");
+  buttonList($("tagList"), countTags(), "tag");
+}
+
+function renderPosts(){
+  const root = $("posts");
+  const filtered = posts.filter(matches);
+  const cleanHome = active.type==="all" && !$("searchInput").value.trim();
+  document.body.classList.toggle("clean-home", cleanHome);
+  $("homeNotice").style.display = cleanHome ? "block" : "none";
+  root.innerHTML = "";
+  filtered.forEach(p => {
+    const el = document.createElement("article");
+    el.className = "post-card";
+    const quote = stripMd(p.statement).split("\n").filter(Boolean).find(x => x.includes("„")) || "";
+    el.innerHTML = `
+      <div>
+        <h3>${esc(p.title)}</h3>
+        <div class="meta">
+          <span class="badge">${esc(p.scholar || "")}</span>
+          <span class="badge">${esc(p.topic || "")}</span>
+          ${(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${esc(t)}</span>`).join("")}
+        </div>
+        <div class="excerpt">${esc(quote || p.statement || "")}</div>
+        <div class="source-preview">${esc(p.source || "")}</div>
+      </div>
+      <button class="open">Beitrag öffnen</button>
+    `;
+    el.querySelector(".open").onclick = () => openPost(p);
+    root.appendChild(el);
+  });
+}
+
+function openPost(p){
+  currentPost = p;
+  $("modalTitle").textContent = p.title || "";
+  $("modalMeta").innerHTML = `
+    <span class="badge">${esc(p.category||"")}</span>
+    <span class="badge">${esc(p.scholar||"")}</span>
+    <span class="badge">${esc(p.book||"")}</span>
+  `;
+  $("modalStatement").textContent = stripMd(p.statement || "");
+  $("modalSource").textContent = p.source || "";
+  $("modalLinks").innerHTML = (p.links||[]).map(l=>`<a class="chip" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label||"Quelle")}</a>`).join("");
+  $("modal").classList.add("opened");
+  document.body.style.overflow="hidden";
+}
+
+function closePost(){
+  $("modal").classList.remove("opened");
+  document.body.style.overflow="";
+}
+
+async function sharePost(){
+  if(!currentPost) return;
+  const title = currentPost.title || "DAR AL TAWḤID";
+  const text = stripMd(currentPost.statement || "").slice(0,900);
+  const url = location.origin + location.pathname + "?post=" + encodeURIComponent(currentPost.id || "");
+  const data = {title, text, url};
+  if(navigator.share){
+    try{ await navigator.share(data); return; }catch(e){}
+  }
+  const fallback = title + "\n\n" + text + "\n\n" + url;
+  try{ await navigator.clipboard.writeText(fallback); alert("Beitrag wurde kopiert."); }
+  catch(e){ prompt("Kopiere den Beitrag:", fallback); }
+}
+
+$("searchInput").oninput = () => { active={type:"all",value:"Alle"}; render(); };
+$("resetFilters").onclick = () => { active={type:"all",value:"Alle"}; $("searchInput").value=""; render(); };
+$("closeBtn").onclick = closePost;
+$("shareBtn").onclick = sharePost;
+$("modal").onclick = e => { if(e.target.id==="modal") closePost(); };
+document.addEventListener("keydown", e => { if(e.key==="Escape") closePost(); });
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      const reg = await navigator.serviceWorker.register("service-worker.js?v=clean1");
+      if(reg && reg.update) reg.update();
+    } catch(e) {}
+  });
+}
+
+load();
+</script>
 </body>
 </html>
