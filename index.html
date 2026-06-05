@@ -6,12 +6,12 @@
 
 <title>DAR AL TAWḤID</title>
 
-<link rel="icon" href="/favicon.ico?v=structured-app-v2" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=structured-app-v2">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=structured-app-v2">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=structured-app-v2">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=structured-app-v2">
-<link rel="manifest" href="/manifest.json?v=structured-app-v2">
+<link rel="icon" href="/favicon.ico?v=structured-app-v3" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=structured-app-v3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=structured-app-v3">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=structured-app-v3">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=structured-app-v3">
+<link rel="manifest" href="/manifest.json?v=structured-app-v3">
 
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileImage" content="/app-icon-192.png?v=structured-app-v2">
+<meta name="msapplication-TileImage" content="/app-icon-192.png?v=structured-app-v3">
 <meta name="msapplication-TileColor" content="#080806">
 
 <style>
@@ -133,22 +133,22 @@ button,input{font:inherit}
 .brand-main{
   display:flex;
   align-items:center;
-  gap:17px;
+  gap:20px;
 }
 
 .logo{
-  width:76px;
-  height:76px;
-  flex:0 0 76px;
+  width:112px;
+  height:112px;
+  flex:0 0 112px;
   object-fit:contain;
   border-radius:999px;
-  filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.38));
 }
 
 h1{
   font-family:var(--serif);
   color:var(--gold2);
-  font-size:clamp(39px,5.6vw,82px);
+  font-size:clamp(42px,5.8vw,86px);
   line-height:.9;
   letter-spacing:.12em;
   margin:0;
@@ -157,7 +157,7 @@ h1{
 
 .socials{
   display:flex;
-  gap:9px;
+  gap:11px;
   flex-wrap:wrap;
   justify-content:flex-end;
 }
@@ -171,9 +171,9 @@ h1{
   color:var(--cream);
   text-decoration:none;
   border-radius:999px;
-  padding:9px 13px;
-  font-size:12px;
-  font-weight:850;
+  padding:11px 18px;
+  font-size:15px;
+  font-weight:900;
   cursor:pointer;
 }
 
@@ -181,16 +181,17 @@ h1{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:11px;
   white-space:nowrap;
-  min-width:118px;
+  min-width:150px;
+  min-height:48px;
 }
 
 .social-link svg{
-  width:18px;
-  height:18px;
+  width:25px;
+  height:25px;
   display:block;
-  flex:0 0 18px;
+  flex:0 0 25px;
 }
 
 .hero-text{
@@ -798,31 +799,39 @@ h1{
   }
 
   .brand-main{
-    gap:10px;
+    gap:12px;
   }
 
   .logo{
-    width:48px;
-    height:48px;
-    flex-basis:48px;
+    width:70px;
+    height:70px;
+    flex-basis:70px;
   }
 
   h1{
-    font-size:clamp(28px,9vw,40px);
+    font-size:clamp(31px,9.4vw,44px);
     letter-spacing:.075em;
   }
 
   .socials{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:7px;
+    gap:8px;
   }
 
   .social-link{
     justify-content:center;
-    padding:8px 7px;
-    font-size:10.5px;
+    padding:10px 9px;
+    font-size:13px;
     min-width:0;
+    min-height:46px;
+    gap:9px;
+  }
+
+  .social-link svg{
+    width:24px;
+    height:24px;
+    flex-basis:24px;
   }
 
   .hero-text{
@@ -1015,6 +1024,16 @@ h1{
 }
 
 @media(max-width:390px){
+  .logo{
+    width:64px;
+    height:64px;
+    flex-basis:64px;
+  }
+
+  h1{
+    font-size:clamp(29px,8.8vw,40px);
+  }
+
   .folder-grid,
   .latest-grid,
   .grid-list,
@@ -1053,13 +1072,13 @@ h1{
   }
 
   .logo{
-    width:42px;
-    height:42px;
-    flex-basis:42px;
+    width:76px;
+    height:76px;
+    flex-basis:76px;
   }
 
   h1{
-    font-size:clamp(29px,5.6vw,50px);
+    font-size:clamp(31px,5.8vw,54px);
   }
 }
 </style>
@@ -1343,18 +1362,6 @@ function countBy(key){
   return map;
 }
 
-function countTags(){
-  const map = new Map();
-
-  posts.forEach(post => {
-    (post.tags || []).forEach(tag => {
-      map.set(tag, (map.get(tag) || 0) + 1);
-    });
-  });
-
-  return map;
-}
-
 function savedIds(){
   return getJson(SAVE_KEY, []);
 }
@@ -1474,7 +1481,7 @@ function renderHome(){
   const scholarCount = [...countBy("scholar").keys()].filter(x => x && x !== "Unbekannt").length;
   const bookCount = [...countBy("book").keys()].filter(x => x && x !== "Unbekannt").length;
   const savedCount = savedIds().length;
-  const latest = posts.slice(0,6);
+  const latest = posts.slice(0,4);
 
   return `
     ${setHeader(
