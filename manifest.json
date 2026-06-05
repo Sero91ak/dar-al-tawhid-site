@@ -1,11 +1,11 @@
 {
   "name": "DAR AL TAWḤID",
   "short_name": "DAR AL TAWḤID",
-  "start_url": "/?source=pwa&v=rotation-force-final",
+  "start_url": "/?source=pwa&v=tablet-app-final",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#07100b",
-  "theme_color": "#07100b",
+  "background_color": "#06110b",
+  "theme_color": "#06110b",
   "description": "Beiträge aus Qurʾān, Sunnah und Āthār.",
   "orientation": "any",
   "icons": [
@@ -21,5 +21,10 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "id": "/",
+  "display_override": [
+    "standalone",
+    "fullscreen"
   ]
 }

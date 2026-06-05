@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="de">
 <head>
+<meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DAR AL TAWḤID</title>
-<meta name="theme-color" content="#07100b">
+<meta name="theme-color" content="#06110b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.json?v=rotation-force-final">
+<link rel="manifest" href="manifest.json?v=tablet-app-final">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{--bg:#07100b;--panel:#101d14;--gold:#c9ad67;--gold2:#f2df9b;--cream:#fff7df;--text:#f6f1df;--muted:#b7c0b5;--line:rgba(213,184,108,.28);--line2:rgba(213,184,108,.16);--shadow:0 18px 50px rgba(0,0,0,.35);--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
@@ -116,6 +117,352 @@ html, body{
   .article{
     max-height: calc(100vh - 36px) !important;
     overflow:auto !important;
+  }
+}
+</style>
+
+
+<style id="tablet-real-app-layout-final">
+/* Tablet-App-Layout für iPad und Android-Tablets.
+   Wichtig: Android-Rotation bleibt durch manifest orientation=any erhalten. */
+
+:root{
+  --app-safe-top: env(safe-area-inset-top, 0px);
+  --app-safe-right: env(safe-area-inset-right, 0px);
+  --app-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --app-safe-left: env(safe-area-inset-left, 0px);
+}
+
+/* echte App-Fläche statt Web-Dokument-Gefühl */
+html{
+  min-height: 100%;
+  background:#06110b !important;
+}
+
+body{
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(216,190,112,.12), transparent 34%),
+    radial-gradient(circle at 86% 16%, rgba(216,190,112,.06), transparent 32%),
+    linear-gradient(180deg, #06110b 0%, #07140d 48%, #040806 100%) !important;
+  padding-top: max(10px, var(--app-safe-top)) !important;
+  padding-right: max(10px, var(--app-safe-right)) !important;
+  padding-bottom: max(14px, var(--app-safe-bottom)) !important;
+  padding-left: max(10px, var(--app-safe-left)) !important;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Wenn die App installiert gestartet wurde, noch stärker wie App behandeln */
+body.pwa-installed,
+body.tablet-app-mode{
+  touch-action: manipulation;
+}
+
+/* iPad / Android Tablet: nicht wie Desktop-Webseite wirken */
+@media (min-width: 700px) and (max-width: 1366px){
+  .site{
+    width: min(1180px, calc(100vw - 34px)) !important;
+    max-width: min(1180px, calc(100vw - 34px)) !important;
+    margin-inline:auto !important;
+  }
+
+  header.site{
+    margin-top: 0 !important;
+  }
+
+  .hero{
+    border-radius: 28px !important;
+    padding: clamp(18px, 2.4vw, 30px) !important;
+    min-height: auto !important;
+    background:
+      linear-gradient(135deg, rgba(14,29,19,.97), rgba(4,9,7,.92)),
+      radial-gradient(circle at 25% 0%, rgba(230,199,118,.10), transparent 40%) !important;
+    box-shadow: 0 24px 65px rgba(0,0,0,.35) !important;
+  }
+
+  .top{
+    display:grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px) !important;
+    gap: 24px !important;
+    align-items:start !important;
+  }
+
+  .brand{
+    min-width:0 !important;
+  }
+
+  .brand small{
+    font-size: clamp(10px, 1.1vw, 13px) !important;
+    letter-spacing: .22em !important;
+    margin-bottom: 10px !important;
+  }
+
+  .brand-title-row{
+    display:flex !important;
+    align-items:center !important;
+    gap: clamp(15px, 2vw, 24px) !important;
+  }
+
+  .header-logo-mark{
+    width: clamp(68px, 7.2vw, 92px) !important;
+    height: clamp(68px, 7.2vw, 92px) !important;
+    flex: 0 0 clamp(68px, 7.2vw, 92px) !important;
+    border-radius: 999px !important;
+    object-fit: contain !important;
+  }
+
+  h1{
+    font-size: clamp(54px, 7.4vw, 92px) !important;
+    line-height: .86 !important;
+    letter-spacing: .13em !important;
+  }
+
+  .links{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap: 10px !important;
+    justify-content:flex-start !important;
+    margin-top: 0 !important;
+  }
+
+  .links a,
+  .social-chip{
+    min-height: 42px !important;
+    justify-content:center !important;
+    font-size: 13px !important;
+    border-radius: 999px !important;
+    background: rgba(218,190,112,.10) !important;
+  }
+
+  .hero-welcome{
+    margin-top: 20px !important;
+    padding-top: 17px !important;
+  }
+
+  .salam-line{
+    font-size: clamp(22px, 2.5vw, 32px) !important;
+    line-height: 1.15 !important;
+  }
+
+  .welcome-line{
+    max-width: 980px !important;
+    font-size: clamp(13px, 1.35vw, 16px) !important;
+    line-height: 1.55 !important;
+  }
+
+  .isnad{
+    border-radius: 22px !important;
+    padding: 14px 18px !important;
+    margin-top: 14px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .isnad-top{
+    font-size: 11px !important;
+    letter-spacing: .18em !important;
+  }
+
+  .isnad-quote{
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    font-size: clamp(13px, 1.35vw, 16px) !important;
+    line-height: 1.35 !important;
+  }
+
+  .isnad-source{
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    font-size: 11px !important;
+  }
+
+  .grid{
+    display:grid !important;
+    grid-template-columns: minmax(270px, 310px) minmax(0, 1fr) !important;
+    gap: 18px !important;
+    align-items:start !important;
+  }
+
+  aside{
+    position: sticky !important;
+    top: max(12px, var(--app-safe-top)) !important;
+    border-radius: 24px !important;
+    padding: 18px !important;
+    max-height: calc(100svh - max(30px, var(--app-safe-top)) - max(20px, var(--app-safe-bottom))) !important;
+    overflow:auto !important;
+    scrollbar-width: thin;
+  }
+
+  aside h2,
+  .panel h2,
+  .knowledge h2{
+    font-size: clamp(26px, 3vw, 34px) !important;
+  }
+
+  .panel,
+  .knowledge,
+  .notice,
+  .post-card{
+    border-radius: 24px !important;
+  }
+
+  .panel,
+  .knowledge{
+    padding: 18px !important;
+  }
+
+  .stats{
+    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .stat{
+    min-height: 74px !important;
+    padding: 14px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .stat b{
+    font-size: clamp(24px, 3vw, 32px) !important;
+  }
+
+  .mobile-quick-cats{
+    display:grid !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .mobile-cat-btn{
+    min-height: 74px !important;
+    border-radius: 18px !important;
+    padding: 14px 16px !important;
+  }
+
+  .mobile-cat-btn b{
+    font-size: 16px !important;
+  }
+
+  .mobile-cat-btn span{
+    font-size: 12px !important;
+  }
+
+  body:not(.clean-home) .posts{
+    display:grid !important;
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .post-card{
+    min-height: 230px !important;
+    padding: 18px !important;
+  }
+
+  .post-card h3{
+    font-size: clamp(26px, 3vw, 36px) !important;
+    line-height: 1.03 !important;
+  }
+
+  .excerpt{
+    font-size: clamp(17px, 1.9vw, 22px) !important;
+    line-height: 1.35 !important;
+  }
+
+  .source-preview{
+    font-size: 11px !important;
+  }
+
+  .open{
+    min-height: 40px !important;
+    font-size: 13px !important;
+  }
+
+  .modal{
+    align-items:center !important;
+    padding:
+      max(18px, var(--app-safe-top))
+      max(16px, var(--app-safe-right))
+      max(18px, var(--app-safe-bottom))
+      max(16px, var(--app-safe-left)) !important;
+  }
+
+  .article{
+    width:min(940px, calc(100vw - 40px)) !important;
+    max-height: calc(100svh - max(44px, var(--app-safe-top)) - max(30px, var(--app-safe-bottom))) !important;
+    overflow:auto !important;
+    border-radius: 28px !important;
+    padding: clamp(20px, 2.2vw, 32px) !important;
+  }
+
+  .article h2{
+    font-size: clamp(34px, 4.2vw, 52px) !important;
+  }
+
+  .article .statement{
+    font-size: clamp(21px, 2.3vw, 30px) !important;
+    line-height: 1.65 !important;
+  }
+
+  footer.site{
+    border-radius: 24px !important;
+    margin-top: 18px !important;
+    padding-top: 26px !important;
+  }
+}
+
+/* iPad Hochformat: App-Feeling statt breiter Webseite */
+@media (min-width: 700px) and (max-width: 1024px) and (orientation: portrait){
+  .site{
+    width: min(900px, calc(100vw - 28px)) !important;
+    max-width: min(900px, calc(100vw - 28px)) !important;
+  }
+
+  .top{
+    grid-template-columns: 1fr !important;
+  }
+
+  .links{
+    display:grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  aside{
+    position: static !important;
+    max-height:none !important;
+  }
+
+  body:not(.clean-home) .posts{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  }
+}
+
+/* Tablet Querformat: richtige App-Ansicht mit Sidebar */
+@media (min-width: 900px) and (orientation: landscape){
+  .grid{
+    grid-template-columns: 300px minmax(0,1fr) !important;
+  }
+
+  body:not(.clean-home) .posts{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  }
+}
+
+/* sehr große Tablets / Desktop-App */
+@media (min-width: 1200px){
+  body.tablet-app-mode .site{
+    width:min(1280px, calc(100vw - 52px)) !important;
+    max-width:min(1280px, calc(100vw - 52px)) !important;
+  }
+
+  body.tablet-app-mode body:not(.clean-home) .posts,
+  body.tablet-app-mode .posts{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
   }
 }
 </style>
@@ -258,6 +605,37 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     setTimeout(unlockOrientation, 500);
   });
   document.addEventListener("visibilitychange", unlockOrientation);
+})();
+</script>
+
+
+<script id="tablet-real-app-layout-final-js">
+(function(){
+  function isStandalone(){
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+      || window.navigator.standalone === true
+      || document.referrer.startsWith("android-app://");
+  }
+
+  function applyAppMode(){
+    var w = Math.max(window.innerWidth || 0, screen.width || 0);
+    var h = Math.max(window.innerHeight || 0, screen.height || 0);
+    var isTablet = Math.min(w, h) >= 700;
+
+    document.body.classList.toggle("pwa-installed", isStandalone());
+    document.body.classList.toggle("tablet-app-mode", isTablet);
+
+    document.documentElement.style.setProperty("--real-vw", (window.innerWidth || 0) + "px");
+    document.documentElement.style.setProperty("--real-vh", (window.innerHeight || 0) + "px");
+  }
+
+  window.addEventListener("load", applyAppMode);
+  window.addEventListener("resize", applyAppMode);
+  window.addEventListener("orientationchange", function(){
+    setTimeout(applyAppMode, 120);
+    setTimeout(applyAppMode, 450);
+  });
+  document.addEventListener("visibilitychange", applyAppMode);
 })();
 </script>
 
