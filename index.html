@@ -229,6 +229,112 @@ footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--saf
   }
 }
 
+
+/* ONESIGNAL_MINI_BUTTON_DEACTIVATE_FIX
+   Aktivierter Zustand wird klein/minimiert. Tippen öffnet ein kleines Menü mit Deaktivieren. */
+.push-active-panel{
+  display:none;
+  border: 1px solid rgba(96,185,116,.72);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
+    linear-gradient(180deg, rgba(14,36,22,.98), rgba(6,16,10,.98));
+  color:#f4f8e8;
+  box-shadow: 0 18px 42px rgba(0,0,0,.34);
+  padding: 13px 14px;
+}
+.push-active-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#e9ffd9;
+  font-weight:900;
+  font-size:14px;
+  margin-bottom:5px;
+}
+.push-active-text{
+  color:#d9e9d1;
+  font-size:12px;
+  line-height:1.45;
+}
+.push-active-actions{
+  margin-top:10px;
+  display:flex;
+  gap:8px;
+}
+.push-active-actions button{
+  appearance:none;
+  border-radius:12px;
+  min-height:40px;
+  padding:9px 11px;
+  font-weight:800;
+  cursor:pointer;
+}
+#pushDisableBtn{
+  border:1px solid rgba(235,165,130,.55);
+  background:rgba(120,45,26,.20);
+  color:#ffd5c6;
+}
+#pushCloseBtn{
+  border:1px solid rgba(217,189,114,.32);
+  background:rgba(255,255,255,.03);
+  color:#f0e6c4;
+}
+.push-widget.permission-granted{
+  width:auto;
+  align-items:flex-end;
+}
+.push-widget.permission-granted .push-widget-card{
+  display:none !important;
+}
+.push-widget.permission-granted .push-float-btn{
+  width:54px;
+  min-width:54px;
+  max-width:54px;
+  height:54px;
+  min-height:54px;
+  padding:0;
+  border-radius:18px;
+  overflow:hidden;
+}
+.push-widget.permission-granted .push-float-btn #pushFloatLabel{
+  display:none;
+}
+.push-widget.permission-granted .push-float-btn .mini-bell{
+  width:34px;
+  height:34px;
+  font-size:16px;
+}
+.push-widget.permission-granted.active-menu{
+  width:min(330px, calc(100vw - 24px));
+}
+.push-widget.permission-granted.active-menu .push-active-panel{
+  display:block;
+}
+.push-widget.permission-granted.active-menu .push-float-btn{
+  align-self:flex-end;
+}
+@media (max-width:699px){
+  .push-widget.permission-granted{
+    left:auto;
+    right:12px;
+    width:auto;
+  }
+  .push-widget.permission-granted.active-menu{
+    left:12px;
+    right:12px;
+    width:auto;
+  }
+  .push-widget.permission-granted .push-float-btn{
+    width:50px;
+    min-width:50px;
+    max-width:50px;
+    height:50px;
+    min-height:50px;
+    border-radius:17px;
+  }
+}
+
 </style>
 
 <style id="android-rotation-force-final-css">
@@ -1353,7 +1459,15 @@ Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
       <button id="pushDismissBtn" class="push-widget-ghost" type="button">Später</button>
     </div>
   </div>
-  <button id="pushFloatBtn" class="push-float-btn" type="button">
+  <div id="pushActivePanel" class="push-active-panel">
+    <div class="push-active-title">✅ Benachrichtigungen aktiv</div>
+    <div class="push-active-text">Du erhältst neue Beiträge von DAR AL TAWḤID direkt auf dein Gerät. Du kannst sie hier abbestellen oder später über die Geräte-/Browser-Einstellungen verwalten.</div>
+    <div class="push-active-actions">
+      <button id="pushDisableBtn" type="button">Deaktivieren</button>
+      <button id="pushCloseBtn" type="button">Schließen</button>
+    </div>
+  </div>
+  <button id="pushFloatBtn" class="push-float-btn" type="button" aria-label="Benachrichtigungen">
     <span class="mini-bell">🔔</span>
     <span id="pushFloatLabel">Benachrichtigungen aktivieren</span>
   </button>
@@ -1528,41 +1642,59 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
 <script id="dar-custom-push-widget">
 (function(){
   const DISMISS_KEY = "darPushWidgetDismissedV1";
+  const LOCAL_OPTOUT_KEY = "darPushLocalOptOutV1";
   const widget = document.getElementById("pushWidget");
-  const widgetCard = document.getElementById("pushWidgetCard");
   const enableBtn = document.getElementById("pushEnableBtn");
   const dismissBtn = document.getElementById("pushDismissBtn");
   const floatBtn = document.getElementById("pushFloatBtn");
   const floatLabel = document.getElementById("pushFloatLabel");
-
+  const disableBtn = document.getElementById("pushDisableBtn");
+  const closeBtn = document.getElementById("pushCloseBtn");
   if(!widget || !enableBtn || !floatBtn || !floatLabel) return;
 
   function getPermission(){
-    try{
-      if(window.Notification && Notification.permission) return Notification.permission;
-    }catch(e){}
+    try{ if(window.Notification && Notification.permission) return Notification.permission; }catch(e){}
     return "default";
   }
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ v === null ? localStorage.removeItem(k) : localStorage.setItem(k,v); }catch(e){} }
+  function introDismissed(){ return lsGet(DISMISS_KEY) === "1"; }
+  function setIntroDismissed(value){ lsSet(DISMISS_KEY, value ? "1" : null); }
+  function localOptedOut(){ return lsGet(LOCAL_OPTOUT_KEY) === "1"; }
+  function setLocalOptOut(value){ lsSet(LOCAL_OPTOUT_KEY, value ? "1" : null); }
 
-  function introDismissed(){
-    try{ return localStorage.getItem(DISMISS_KEY) === "1"; }catch(e){ return false; }
+  async function waitForOneSignal(timeoutMs){
+    const start = Date.now();
+    while(Date.now() - start < (timeoutMs || 8000)){
+      try{ if(window.OneSignal && window.DAR_ONE_SIGNAL_READY) return window.OneSignal; }catch(e){}
+      await new Promise(r => setTimeout(r, 180));
+    }
+    return window.OneSignal || null;
   }
 
-  function setIntroDismissed(value){
-    try{
-      if(value) localStorage.setItem(DISMISS_KEY, "1");
-      else localStorage.removeItem(DISMISS_KEY);
-    }catch(e){}
-  }
-
-  function updatePushUi(){
+  async function isOneSignalOptedIn(){
     const permission = getPermission();
-    widget.classList.remove("permission-granted", "hidden-card");
+    if(permission !== "granted") return false;
+    if(localOptedOut()) return false;
+    const OneSignal = await waitForOneSignal(1200);
+    try{
+      const ps = OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
+      if(ps && typeof ps.optedIn === "boolean") return ps.optedIn;
+      if(ps && typeof ps.getOptedIn === "function") return await ps.getOptedIn();
+    }catch(e){}
+    return true;
+  }
+
+  async function updatePushUi(){
+    const permission = getPermission();
+    const optedIn = await isOneSignalOptedIn();
+
+    widget.classList.remove("permission-granted", "hidden-card", "active-menu");
     floatBtn.classList.remove("active");
     enableBtn.disabled = false;
 
-    if(permission === "granted"){
-      widget.classList.add("permission-granted", "hidden-card");
+    if(optedIn){
+      widget.classList.add("permission-granted");
       floatBtn.classList.add("active");
       floatLabel.textContent = "Benachrichtigungen aktiv";
       enableBtn.textContent = "✅ Benachrichtigungen aktiv";
@@ -1577,22 +1709,15 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
       return;
     }
 
+    if(localOptedOut()){
+      floatLabel.textContent = "Benachrichtigungen aktivieren";
+      enableBtn.textContent = "🔔 Benachrichtigungen wieder aktivieren";
+      return;
+    }
+
     floatLabel.textContent = "Benachrichtigungen aktivieren";
     enableBtn.textContent = "🔔 Benachrichtigungen aktivieren";
-    if(introDismissed()){
-      widget.classList.add("hidden-card");
-    }
-  }
-
-  async function waitForOneSignal(timeoutMs){
-    const start = Date.now();
-    while(Date.now() - start < (timeoutMs || 8000)){
-      try{
-        if(window.OneSignal && window.DAR_ONE_SIGNAL_READY) return window.OneSignal;
-      }catch(e){}
-      await new Promise(r => setTimeout(r, 180));
-    }
-    return window.OneSignal || null;
+    if(introDismissed()) widget.classList.add("hidden-card");
   }
 
   function showMiniMessage(title, text){
@@ -1603,13 +1728,20 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     el.style.cssText = "position:fixed;left:12px;right:12px;top:calc(14px + env(safe-area-inset-top));z-index:60;border:1px solid rgba(217,189,114,.75);border-radius:16px;background:linear-gradient(180deg,rgba(18,32,23,.98),rgba(7,14,10,.98));box-shadow:0 14px 34px rgba(0,0,0,.34);padding:14px 16px;color:#fff6dc;font:14px/1.45 system-ui;";
     el.innerHTML = '<strong style="display:block;color:#f0d78d;font-family:Georgia,serif;font-size:16px;margin-bottom:4px;">'+title+'</strong><span style="color:#f7f0d7;">'+text+'</span>';
     document.body.appendChild(el);
-    setTimeout(function(){ el.remove(); }, 4200);
+    setTimeout(function(){ if(el.parentNode) el.remove(); }, 4200);
   }
 
   async function requestPush(){
     const permission = getPermission();
+    setLocalOptOut(false);
+
     if(permission === "granted"){
-      updatePushUi();
+      const OneSignal = await waitForOneSignal();
+      try{
+        const ps = OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
+        if(ps && typeof ps.optIn === "function") await ps.optIn();
+      }catch(e){}
+      await updatePushUi();
       showMiniMessage("Benachrichtigungen aktiv", "Du erhältst neue Beiträge von DAR AL TAWḤID direkt auf dein Gerät.");
       return;
     }
@@ -1620,7 +1752,6 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     }
 
     const OneSignal = await waitForOneSignal();
-
     try{
       if(OneSignal && OneSignal.Notifications && typeof OneSignal.Notifications.requestPermission === "function"){
         await OneSignal.Notifications.requestPermission();
@@ -1629,12 +1760,10 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
       } else if(window.Notification && typeof Notification.requestPermission === "function"){
         await Notification.requestPermission();
       }
-    } catch(e) {
-      console.error(e);
-    }
+    }catch(e){ console.error(e); }
 
-    setTimeout(function(){
-      updatePushUi();
+    setTimeout(async function(){
+      await updatePushUi();
       if(getPermission() === "granted"){
         setIntroDismissed(true);
         showMiniMessage("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh", "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge nun direkt als Benachrichtigung.");
@@ -1642,8 +1771,40 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     }, 500);
   }
 
+  async function disablePush(){
+    const OneSignal = await waitForOneSignal();
+    let done = false;
+    try{
+      const ps = OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
+      if(ps && typeof ps.optOut === "function"){
+        await ps.optOut();
+        done = true;
+      } else if(OneSignal && typeof OneSignal.logout === "function"){
+        await OneSignal.logout();
+        done = true;
+      }
+    }catch(e){ console.error(e); }
+
+    setLocalOptOut(true);
+    widget.classList.remove("active-menu");
+    await updatePushUi();
+    showMiniMessage("Benachrichtigungen deaktiviert", done ? "Du wurdest für DAR AL TAWḤID Benachrichtigungen abgemeldet." : "Die Anzeige wurde deaktiviert. Falls weiterhin Benachrichtigungen kommen, bitte zusätzlich in den Browser-Einstellungen ausschalten.");
+  }
+
   enableBtn.addEventListener("click", requestPush);
-  floatBtn.addEventListener("click", requestPush);
+
+  floatBtn.addEventListener("click", async function(){
+    const optedIn = await isOneSignalOptedIn();
+    if(optedIn){
+      widget.classList.toggle("active-menu");
+      return;
+    }
+    requestPush();
+  });
+
+  if(disableBtn) disableBtn.addEventListener("click", disablePush);
+  if(closeBtn) closeBtn.addEventListener("click", function(){ widget.classList.remove("active-menu"); });
+
   if(dismissBtn){
     dismissBtn.addEventListener("click", function(){
       setIntroDismissed(true);
@@ -1653,10 +1814,7 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
 
   document.addEventListener("visibilitychange", updatePushUi);
   window.addEventListener("focus", updatePushUi);
-  window.addEventListener("load", function(){
-    setTimeout(updatePushUi, 300);
-    setTimeout(updatePushUi, 1400);
-  });
+  window.addEventListener("load", function(){ setTimeout(updatePushUi, 300); setTimeout(updatePushUi, 1400); });
   setTimeout(updatePushUi, 1000);
 })();
 </script>
