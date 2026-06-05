@@ -45,6 +45,190 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(42px,5.7vw,82px);
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:88px 8px 28px;z-index:50;overflow:auto}.modal.opened{display:flex}.article{width:min(900px,100%);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#0c1710,#06100a);box-shadow:var(--shadow);padding:22px}.article-top{display:flex;gap:8px;justify-content:flex-end;padding-bottom:10px}.article h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--gold2);margin:8px 0 10px;text-align:center}.article .statement{font-family:var(--serif);font-size:22px;line-height:1.75;text-align:center;color:#fff8e8;white-space:pre-wrap}.article .statement strong{font-weight:900;color:#fff7df}.article .statement em{color:#f2df9b;font-style:italic;font-weight:800;text-decoration:underline;text-underline-offset:4px}.article-source{font-size:12px;color:var(--muted);border-top:1px solid var(--line2);padding-top:12px;margin-top:15px;line-height:1.5}.article-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--safe-bottom));border-top:1px solid var(--line2)}.locked-original-socials{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-top:10px;margin-bottom:6px}.footer-social-item{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:750;font-size:16px;line-height:1}.locked-original-socials svg{width:20px;height:20px;display:block}footer .signature{display:block;font-family:cursive;color:var(--gold2);font-size:28px;margin-top:8px}
 @media(max-width:1200px){.posts{grid-template-columns:repeat(2,1fr)}.mobile-quick-cats{grid-template-columns:repeat(3,1fr)}}@media(max-width:820px){.site{width:calc(100% - 14px);max-width:calc(100vw - 14px)}header{padding:6px 0 7px}.hero{padding:11px 12px;border-radius:15px}.top{display:block}.brand small{font-size:7.8px;letter-spacing:.13em;margin-bottom:5px}.brand-title-row{gap:10px}.header-logo-mark{width:48px;height:48px;flex-basis:48px}h1{font-size:clamp(28px,9.4vw,40px);line-height:.88;letter-spacing:.075em}.links{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.social-chip{min-height:32px;padding:6px 7px;font-size:9.2px;justify-content:center;overflow:hidden}.social-chip span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hero-welcome{margin-top:9px;padding-top:9px}.salam-line{font-size:16.5px;line-height:1.18;margin-bottom:5px}.welcome-line{font-size:11.5px;line-height:1.42}.isnad{margin-bottom:9px;padding:7px 9px;border-radius:13px}.isnad-top{font-size:8.3px;letter-spacing:.13em}.isnad-quote{font-size:9.15px;line-height:1.14;letter-spacing:-.012em;text-overflow:clip}.isnad-source{font-size:8.1px;line-height:1.2}.grid{display:block}aside,.panel,.knowledge{padding:10px;border-radius:15px;margin-bottom:9px}aside{position:static}aside h2,.panel h2,.knowledge h2{font-size:20px;margin-bottom:9px}.search{height:36px;font-size:12px}.filter-section:not([open]) .list-buttons{display:none}.filter-section summary{font-size:15px;padding:4px 0 6px}.stats{grid-template-columns:repeat(2,1fr);gap:7px}.stat{padding:9px 10px;min-height:58px}.stat b{font-size:18px}.stat span{font-size:10.5px}.mobile-quick-cats{grid-template-columns:repeat(2,1fr);gap:6px}.mobile-cat-btn{min-height:50px;padding:8px;border-radius:12px}.mobile-cat-btn b{font-size:12.5px}.mobile-cat-btn span{font-size:9.4px}.notice{padding:12px 10px}.posts{grid-template-columns:1fr;gap:8px}.post-card{padding:10px;border-radius:14px;min-height:0}.post-card h3{font-size:18px;line-height:1.08}.badge{font-size:8.2px;padding:3px 6px}.excerpt{font-size:13px;line-height:1.32}.source-preview{font-size:8.5px;padding-top:6px}.open{width:100%;min-height:34px;padding:7px 10px;font-size:10.5px}.article{width:calc(100vw - 16px);padding:12px 11px;border-radius:16px}.article h2{font-size:22px;line-height:1.08;text-align:left}.article .statement{font-size:15.3px;line-height:1.55;text-align:left}.article-source{font-size:9.8px;line-height:1.35}.footer-social-item{font-size:12px;white-space:nowrap}footer .signature{font-size:22px}}
+
+/* ONESIGNAL_FLOATING_WIDGET_FINAL */
+.push-widget{
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 40;
+  width: min(360px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  pointer-events: none;
+}
+.push-widget > *{ pointer-events: auto; }
+.push-widget-card,
+.push-float-btn{
+  border: 1px solid rgba(217,189,114,.72);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
+    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
+  box-shadow: 0 18px 42px rgba(0,0,0,.32);
+}
+.push-widget-card{
+  padding: 14px 15px;
+  color: #f8efd0;
+}
+.push-widget-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+.push-widget-bell{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(180deg, #eed48b, #caa24f);
+  color:#182012;
+  font-size: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+.push-widget-title{
+  display:flex;
+  flex-direction:column;
+  line-height:1.12;
+}
+.push-widget-title strong{
+  color: var(--gold2);
+  font-size: 16px;
+  font-family: var(--serif);
+}
+.push-widget-title span{
+  color: #d9cfaa;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.push-widget-text{
+  font-size: 13px;
+  line-height: 1.5;
+  color:#f7f0d7;
+}
+.push-widget-text strong{ color: #fff5cf; }
+.push-widget-actions{
+  margin-top: 12px;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.push-widget-btn,
+.push-float-btn{
+  font: inherit;
+  cursor: pointer;
+}
+.push-widget-btn{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.85);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #efd691, #d2ab55);
+  color:#152013;
+  font-weight: 800;
+  font-size: 14px;
+  flex: 1 1 220px;
+  min-height: 46px;
+}
+.push-widget-btn:hover,
+.push-float-btn:hover{ filter: brightness(1.03); }
+.push-widget-ghost{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.28);
+  border-radius: 14px;
+  padding: 12px 14px;
+  min-height: 46px;
+  background: rgba(255,255,255,.02);
+  color:#f0e6c4;
+  font-weight:700;
+}
+.push-float-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height: 54px;
+  padding: 13px 16px;
+  color:#fff8e6;
+  background:
+    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
+    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
+  font-weight: 800;
+  letter-spacing:.01em;
+}
+.push-float-btn .mini-bell{
+  display:grid;
+  place-items:center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #efd691, #cca450);
+  color:#152013;
+  font-size: 15px;
+}
+.push-float-btn.active{
+  border-color: rgba(96,185,116,.72);
+  background:
+    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
+    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
+}
+.push-float-btn.active .mini-bell{
+  background: linear-gradient(180deg, #8dd59e, #53a969);
+  color:#0c1b10;
+}
+.push-widget.hidden-card .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
+.push-inline-chip{
+  margin-top: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  border:1px solid rgba(217,189,114,.35);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.015);
+  color:#f4e8bf;
+  font-size: 13px;
+}
+.push-inline-chip strong{
+  display:block;
+  color:#fff3c9;
+  margin-bottom:2px;
+  font-size: 13px;
+}
+.push-inline-chip .chip-bell{
+  display:grid;
+  place-items:center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #efd691, #caa34f);
+  color:#152013;
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+@media (max-width: 699px){
+  .push-widget{
+    left: 12px;
+    right: 12px;
+    width: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .push-widget-card{
+    padding: 13px 13px;
+  }
+  .push-inline-chip{
+    display:none;
+  }
+}
+
 </style>
 
 <style id="android-rotation-force-final-css">
@@ -129,6 +313,190 @@ html, body{
     overflow:auto !important;
   }
 }
+
+/* ONESIGNAL_FLOATING_WIDGET_FINAL */
+.push-widget{
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 40;
+  width: min(360px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  pointer-events: none;
+}
+.push-widget > *{ pointer-events: auto; }
+.push-widget-card,
+.push-float-btn{
+  border: 1px solid rgba(217,189,114,.72);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
+    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
+  box-shadow: 0 18px 42px rgba(0,0,0,.32);
+}
+.push-widget-card{
+  padding: 14px 15px;
+  color: #f8efd0;
+}
+.push-widget-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+.push-widget-bell{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(180deg, #eed48b, #caa24f);
+  color:#182012;
+  font-size: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+.push-widget-title{
+  display:flex;
+  flex-direction:column;
+  line-height:1.12;
+}
+.push-widget-title strong{
+  color: var(--gold2);
+  font-size: 16px;
+  font-family: var(--serif);
+}
+.push-widget-title span{
+  color: #d9cfaa;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.push-widget-text{
+  font-size: 13px;
+  line-height: 1.5;
+  color:#f7f0d7;
+}
+.push-widget-text strong{ color: #fff5cf; }
+.push-widget-actions{
+  margin-top: 12px;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.push-widget-btn,
+.push-float-btn{
+  font: inherit;
+  cursor: pointer;
+}
+.push-widget-btn{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.85);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #efd691, #d2ab55);
+  color:#152013;
+  font-weight: 800;
+  font-size: 14px;
+  flex: 1 1 220px;
+  min-height: 46px;
+}
+.push-widget-btn:hover,
+.push-float-btn:hover{ filter: brightness(1.03); }
+.push-widget-ghost{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.28);
+  border-radius: 14px;
+  padding: 12px 14px;
+  min-height: 46px;
+  background: rgba(255,255,255,.02);
+  color:#f0e6c4;
+  font-weight:700;
+}
+.push-float-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height: 54px;
+  padding: 13px 16px;
+  color:#fff8e6;
+  background:
+    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
+    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
+  font-weight: 800;
+  letter-spacing:.01em;
+}
+.push-float-btn .mini-bell{
+  display:grid;
+  place-items:center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #efd691, #cca450);
+  color:#152013;
+  font-size: 15px;
+}
+.push-float-btn.active{
+  border-color: rgba(96,185,116,.72);
+  background:
+    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
+    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
+}
+.push-float-btn.active .mini-bell{
+  background: linear-gradient(180deg, #8dd59e, #53a969);
+  color:#0c1b10;
+}
+.push-widget.hidden-card .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
+.push-inline-chip{
+  margin-top: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  border:1px solid rgba(217,189,114,.35);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.015);
+  color:#f4e8bf;
+  font-size: 13px;
+}
+.push-inline-chip strong{
+  display:block;
+  color:#fff3c9;
+  margin-bottom:2px;
+  font-size: 13px;
+}
+.push-inline-chip .chip-bell{
+  display:grid;
+  place-items:center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #efd691, #caa34f);
+  color:#152013;
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+@media (max-width: 699px){
+  .push-widget{
+    left: 12px;
+    right: 12px;
+    width: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .push-widget-card{
+    padding: 13px 13px;
+  }
+  .push-inline-chip{
+    display:none;
+  }
+}
+
 </style>
 
 
@@ -475,6 +843,190 @@ body.tablet-app-mode{
     grid-template-columns: repeat(2, minmax(0,1fr)) !important;
   }
 }
+
+/* ONESIGNAL_FLOATING_WIDGET_FINAL */
+.push-widget{
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 40;
+  width: min(360px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  pointer-events: none;
+}
+.push-widget > *{ pointer-events: auto; }
+.push-widget-card,
+.push-float-btn{
+  border: 1px solid rgba(217,189,114,.72);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
+    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
+  box-shadow: 0 18px 42px rgba(0,0,0,.32);
+}
+.push-widget-card{
+  padding: 14px 15px;
+  color: #f8efd0;
+}
+.push-widget-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+.push-widget-bell{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(180deg, #eed48b, #caa24f);
+  color:#182012;
+  font-size: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+.push-widget-title{
+  display:flex;
+  flex-direction:column;
+  line-height:1.12;
+}
+.push-widget-title strong{
+  color: var(--gold2);
+  font-size: 16px;
+  font-family: var(--serif);
+}
+.push-widget-title span{
+  color: #d9cfaa;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.push-widget-text{
+  font-size: 13px;
+  line-height: 1.5;
+  color:#f7f0d7;
+}
+.push-widget-text strong{ color: #fff5cf; }
+.push-widget-actions{
+  margin-top: 12px;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.push-widget-btn,
+.push-float-btn{
+  font: inherit;
+  cursor: pointer;
+}
+.push-widget-btn{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.85);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #efd691, #d2ab55);
+  color:#152013;
+  font-weight: 800;
+  font-size: 14px;
+  flex: 1 1 220px;
+  min-height: 46px;
+}
+.push-widget-btn:hover,
+.push-float-btn:hover{ filter: brightness(1.03); }
+.push-widget-ghost{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.28);
+  border-radius: 14px;
+  padding: 12px 14px;
+  min-height: 46px;
+  background: rgba(255,255,255,.02);
+  color:#f0e6c4;
+  font-weight:700;
+}
+.push-float-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height: 54px;
+  padding: 13px 16px;
+  color:#fff8e6;
+  background:
+    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
+    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
+  font-weight: 800;
+  letter-spacing:.01em;
+}
+.push-float-btn .mini-bell{
+  display:grid;
+  place-items:center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #efd691, #cca450);
+  color:#152013;
+  font-size: 15px;
+}
+.push-float-btn.active{
+  border-color: rgba(96,185,116,.72);
+  background:
+    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
+    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
+}
+.push-float-btn.active .mini-bell{
+  background: linear-gradient(180deg, #8dd59e, #53a969);
+  color:#0c1b10;
+}
+.push-widget.hidden-card .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
+.push-inline-chip{
+  margin-top: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  border:1px solid rgba(217,189,114,.35);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.015);
+  color:#f4e8bf;
+  font-size: 13px;
+}
+.push-inline-chip strong{
+  display:block;
+  color:#fff3c9;
+  margin-bottom:2px;
+  font-size: 13px;
+}
+.push-inline-chip .chip-bell{
+  display:grid;
+  place-items:center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #efd691, #caa34f);
+  color:#152013;
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+@media (max-width: 699px){
+  .push-widget{
+    left: 12px;
+    right: 12px;
+    width: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .push-widget-card{
+    padding: 13px 13px;
+  }
+  .push-inline-chip{
+    display:none;
+  }
+}
+
 </style>
 
 
@@ -553,6 +1105,190 @@ summary,
   -webkit-overflow-scrolling: touch !important;
   touch-action: pan-y !important;
 }
+
+/* ONESIGNAL_FLOATING_WIDGET_FINAL */
+.push-widget{
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 40;
+  width: min(360px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  pointer-events: none;
+}
+.push-widget > *{ pointer-events: auto; }
+.push-widget-card,
+.push-float-btn{
+  border: 1px solid rgba(217,189,114,.72);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
+    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
+  box-shadow: 0 18px 42px rgba(0,0,0,.32);
+}
+.push-widget-card{
+  padding: 14px 15px;
+  color: #f8efd0;
+}
+.push-widget-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+.push-widget-bell{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(180deg, #eed48b, #caa24f);
+  color:#182012;
+  font-size: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+.push-widget-title{
+  display:flex;
+  flex-direction:column;
+  line-height:1.12;
+}
+.push-widget-title strong{
+  color: var(--gold2);
+  font-size: 16px;
+  font-family: var(--serif);
+}
+.push-widget-title span{
+  color: #d9cfaa;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.push-widget-text{
+  font-size: 13px;
+  line-height: 1.5;
+  color:#f7f0d7;
+}
+.push-widget-text strong{ color: #fff5cf; }
+.push-widget-actions{
+  margin-top: 12px;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.push-widget-btn,
+.push-float-btn{
+  font: inherit;
+  cursor: pointer;
+}
+.push-widget-btn{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.85);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #efd691, #d2ab55);
+  color:#152013;
+  font-weight: 800;
+  font-size: 14px;
+  flex: 1 1 220px;
+  min-height: 46px;
+}
+.push-widget-btn:hover,
+.push-float-btn:hover{ filter: brightness(1.03); }
+.push-widget-ghost{
+  appearance:none;
+  border:1px solid rgba(217,189,114,.28);
+  border-radius: 14px;
+  padding: 12px 14px;
+  min-height: 46px;
+  background: rgba(255,255,255,.02);
+  color:#f0e6c4;
+  font-weight:700;
+}
+.push-float-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height: 54px;
+  padding: 13px 16px;
+  color:#fff8e6;
+  background:
+    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
+    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
+  font-weight: 800;
+  letter-spacing:.01em;
+}
+.push-float-btn .mini-bell{
+  display:grid;
+  place-items:center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #efd691, #cca450);
+  color:#152013;
+  font-size: 15px;
+}
+.push-float-btn.active{
+  border-color: rgba(96,185,116,.72);
+  background:
+    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
+    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
+}
+.push-float-btn.active .mini-bell{
+  background: linear-gradient(180deg, #8dd59e, #53a969);
+  color:#0c1b10;
+}
+.push-widget.hidden-card .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-widget-card{ display:none; }
+.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
+.push-inline-chip{
+  margin-top: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  border:1px solid rgba(217,189,114,.35);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.015);
+  color:#f4e8bf;
+  font-size: 13px;
+}
+.push-inline-chip strong{
+  display:block;
+  color:#fff3c9;
+  margin-bottom:2px;
+  font-size: 13px;
+}
+.push-inline-chip .chip-bell{
+  display:grid;
+  place-items:center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #efd691, #caa34f);
+  color:#152013;
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+@media (max-width: 699px){
+  .push-widget{
+    left: 12px;
+    right: 12px;
+    width: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .push-widget-card{
+    padding: 13px 13px;
+  }
+  .push-inline-chip{
+    display:none;
+  }
+}
+
 </style>
 
 
@@ -578,10 +1314,13 @@ Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
       appId: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
       safari_web_id: "web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
       notifyButton: {
-        enable: true,
+        enable: false,
       },
       welcomeNotification: {
-        disable: false
+        disable: false,
+        title: "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
+        message: "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",
+        url: "https://dar-al-tawhid.de/"
       }
     });
 
@@ -595,10 +1334,30 @@ Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
 
 </head>
 <body class="clean-home">
-<header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.</div></div></section></header>
+<header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.<div class="push-inline-chip"><span class="chip-bell">🔔</span><div><strong>Benachrichtigungen einschalten</strong>Neue Beiträge direkt auf iPhone, iPad und Android erhalten.</div></div></div></section></header>
 <section class="site isnad"><div class="isnad-top">Maßstab der Überlieferung</div><div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
 <main class="site grid"><aside><h2>Navigation</h2><input id="searchInput" class="search" type="search" placeholder="Freie Suche…"><details class="filter-section"><summary>Gelehrte</summary><div id="scholarList" class="list-buttons"></div></details><details class="filter-section"><summary>Bücher</summary><div id="bookList" class="list-buttons"></div></details><details class="filter-section"><summary>Themen</summary><div id="topicList" class="list-buttons"></div></details><details class="filter-section"><summary>Hashtags</summary><div id="tagList" class="list-buttons"></div></details><div style="border-top:1px solid var(--line2);margin-top:10px;padding-top:10px"><button id="resetFilters">Alles anzeigen</button></div></aside><section class="main"><section class="panel"><h2>Übersicht</h2><div class="stats"><div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div><div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div><div class="stat"><b id="countBooks">0</b><span>Bücher</span></div><div class="stat"><b id="countTopics">0</b><span>Themen</span></div></div></section><section class="knowledge"><div class="knowledge-head"><h2>Wissensbereiche</h2><span>Nach Themen öffnen</span></div><div id="categoryList" class="mobile-quick-cats"></div></section><div id="homeNotice" class="notice"><strong>Wähle einen Wissensbereich</strong>Öffne zuerst einen Bereich. Danach erscheinen die passenden Beiträge.</div><section id="posts" class="posts"><div class="loading-box">Beiträge werden aus <strong>content/posts</strong> geladen…</div></section></section></main>
 <div id="modal" class="modal"><article class="article"><div class="article-top"><button id="shareBtn">Beitrag teilen</button><button id="closeBtn">Schließen</button></div><h2 id="modalTitle"></h2><div id="modalMeta" class="meta"></div><div id="modalStatement" class="statement"></div><div id="modalSource" class="article-source"></div><div id="modalLinks" class="article-links"></div></article></div>
+<div id="pushWidget" class="push-widget" aria-live="polite">
+  <div id="pushWidgetCard" class="push-widget-card">
+    <div class="push-widget-head">
+      <div class="push-widget-bell">🔔</div>
+      <div class="push-widget-title">
+        <strong>Benachrichtigungen</strong>
+        <span>DAR AL TAWḤID</span>
+      </div>
+    </div>
+    <div class="push-widget-text"><strong>As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</strong><br>Aktiviere die Benachrichtigungen und erhalte neue Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und <strong>Āthār</strong> direkt auf dein Gerät.</div>
+    <div class="push-widget-actions">
+      <button id="pushEnableBtn" class="push-widget-btn" type="button">🔔 Benachrichtigungen aktivieren</button>
+      <button id="pushDismissBtn" class="push-widget-ghost" type="button">Später</button>
+    </div>
+  </div>
+  <button id="pushFloatBtn" class="push-float-btn" type="button">
+    <span class="mini-bell">🔔</span>
+    <span id="pushFloatLabel">Benachrichtigungen aktivieren</span>
+  </button>
+</div>
 <footer class="site"><strong>DAR AL TAWḤID</strong><br>Folgt für mehr Wissen aus Qurʾān & Sunnah<div class="locked-original-socials"><span class="footer-social-item"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram @dar_al_tauhid</span></span><span class="footer-social-item"><svg viewBox="0 0 24 24" width="20" height="20"><defs><linearGradient id="igFooterMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFooterMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram @dar_at_tawhid</span></span></div><span class="signature">by Serhat Abu Malik</span></footer>
 <script>
 const REPO_OWNER="Sero91ak",REPO_NAME="dar-al-tawhid-site",POSTS_DIR="content/posts",BRANCH="main";
@@ -762,6 +1521,143 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     setTimeout(applyAppMode, 450);
   });
   document.addEventListener("visibilitychange", applyAppMode);
+})();
+</script>
+
+
+<script id="dar-custom-push-widget">
+(function(){
+  const DISMISS_KEY = "darPushWidgetDismissedV1";
+  const widget = document.getElementById("pushWidget");
+  const widgetCard = document.getElementById("pushWidgetCard");
+  const enableBtn = document.getElementById("pushEnableBtn");
+  const dismissBtn = document.getElementById("pushDismissBtn");
+  const floatBtn = document.getElementById("pushFloatBtn");
+  const floatLabel = document.getElementById("pushFloatLabel");
+
+  if(!widget || !enableBtn || !floatBtn || !floatLabel) return;
+
+  function getPermission(){
+    try{
+      if(window.Notification && Notification.permission) return Notification.permission;
+    }catch(e){}
+    return "default";
+  }
+
+  function introDismissed(){
+    try{ return localStorage.getItem(DISMISS_KEY) === "1"; }catch(e){ return false; }
+  }
+
+  function setIntroDismissed(value){
+    try{
+      if(value) localStorage.setItem(DISMISS_KEY, "1");
+      else localStorage.removeItem(DISMISS_KEY);
+    }catch(e){}
+  }
+
+  function updatePushUi(){
+    const permission = getPermission();
+    widget.classList.remove("permission-granted", "hidden-card");
+    floatBtn.classList.remove("active");
+    enableBtn.disabled = false;
+
+    if(permission === "granted"){
+      widget.classList.add("permission-granted", "hidden-card");
+      floatBtn.classList.add("active");
+      floatLabel.textContent = "Benachrichtigungen aktiv";
+      enableBtn.textContent = "✅ Benachrichtigungen aktiv";
+      enableBtn.disabled = true;
+      return;
+    }
+
+    if(permission === "denied"){
+      widget.classList.add("hidden-card");
+      floatLabel.textContent = "Benachrichtigungen blockiert";
+      enableBtn.textContent = "Im Browser freigeben";
+      return;
+    }
+
+    floatLabel.textContent = "Benachrichtigungen aktivieren";
+    enableBtn.textContent = "🔔 Benachrichtigungen aktivieren";
+    if(introDismissed()){
+      widget.classList.add("hidden-card");
+    }
+  }
+
+  async function waitForOneSignal(timeoutMs){
+    const start = Date.now();
+    while(Date.now() - start < (timeoutMs || 8000)){
+      try{
+        if(window.OneSignal && window.DAR_ONE_SIGNAL_READY) return window.OneSignal;
+      }catch(e){}
+      await new Promise(r => setTimeout(r, 180));
+    }
+    return window.OneSignal || null;
+  }
+
+  function showMiniMessage(title, text){
+    const old = document.getElementById("darPushMiniToast");
+    if(old) old.remove();
+    const el = document.createElement("div");
+    el.id = "darPushMiniToast";
+    el.style.cssText = "position:fixed;left:12px;right:12px;top:calc(14px + env(safe-area-inset-top));z-index:60;border:1px solid rgba(217,189,114,.75);border-radius:16px;background:linear-gradient(180deg,rgba(18,32,23,.98),rgba(7,14,10,.98));box-shadow:0 14px 34px rgba(0,0,0,.34);padding:14px 16px;color:#fff6dc;font:14px/1.45 system-ui;";
+    el.innerHTML = '<strong style="display:block;color:#f0d78d;font-family:Georgia,serif;font-size:16px;margin-bottom:4px;">'+title+'</strong><span style="color:#f7f0d7;">'+text+'</span>';
+    document.body.appendChild(el);
+    setTimeout(function(){ el.remove(); }, 4200);
+  }
+
+  async function requestPush(){
+    const permission = getPermission();
+    if(permission === "granted"){
+      updatePushUi();
+      showMiniMessage("Benachrichtigungen aktiv", "Du erhältst neue Beiträge von DAR AL TAWḤID direkt auf dein Gerät.");
+      return;
+    }
+
+    if(permission === "denied"){
+      showMiniMessage("Benachrichtigungen blockiert", "Bitte erlaube Benachrichtigungen in den Browser-Einstellungen, damit DAR AL TAWḤID dich informieren kann.");
+      return;
+    }
+
+    const OneSignal = await waitForOneSignal();
+
+    try{
+      if(OneSignal && OneSignal.Notifications && typeof OneSignal.Notifications.requestPermission === "function"){
+        await OneSignal.Notifications.requestPermission();
+      } else if(OneSignal && OneSignal.Slidedown && typeof OneSignal.Slidedown.promptPush === "function"){
+        await OneSignal.Slidedown.promptPush();
+      } else if(window.Notification && typeof Notification.requestPermission === "function"){
+        await Notification.requestPermission();
+      }
+    } catch(e) {
+      console.error(e);
+    }
+
+    setTimeout(function(){
+      updatePushUi();
+      if(getPermission() === "granted"){
+        setIntroDismissed(true);
+        showMiniMessage("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh", "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge nun direkt als Benachrichtigung.");
+      }
+    }, 500);
+  }
+
+  enableBtn.addEventListener("click", requestPush);
+  floatBtn.addEventListener("click", requestPush);
+  if(dismissBtn){
+    dismissBtn.addEventListener("click", function(){
+      setIntroDismissed(true);
+      updatePushUi();
+    });
+  }
+
+  document.addEventListener("visibilitychange", updatePushUi);
+  window.addEventListener("focus", updatePushUi);
+  window.addEventListener("load", function(){
+    setTimeout(updatePushUi, 300);
+    setTimeout(updatePushUi, 1400);
+  });
+  setTimeout(updatePushUi, 1000);
 })();
 </script>
 
