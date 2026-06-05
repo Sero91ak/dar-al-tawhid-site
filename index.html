@@ -1,1888 +1,2009 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <link rel="icon" href="/favicon.ico?v=favicon-app-symbol" sizes="any">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=favicon-app-symbol">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=favicon-app-symbol">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=favicon-app-symbol">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=favicon-app-symbol">
-  <link rel="manifest" href="/manifest.json?v=onesignal-clean-reset">
-
-  <meta name="msapplication-TileImage" content="/app-icon-192.png?v=favicon-app-symbol">
-  <meta name="msapplication-TileColor" content="#0b0a06">
-  <meta name="application-name" content="DAR AL TAWḤID">
-  <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <title>DAR AL TAWḤID</title>
-  <meta name="theme-color" content="#0b0a06">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <style>
-    :root{
-      --bg:#0b0a06;
-      --bg2:#141309;
-      --panel:#15140d;
-      --panel2:#1b1910;
-      --gold:#c9ad67;
-      --gold2:#f3df9a;
-      --cream:#fff6dc;
-      --text:#f4efd9;
-      --muted:#bfb8a3;
-      --line:rgba(216,190,112,.30);
-      --line2:rgba(216,190,112,.16);
-      --shadow:0 22px 65px rgba(0,0,0,.42);
-      --serif:Georgia,"Times New Roman",serif;
-      --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      --safe-top:env(safe-area-inset-top,0px);
-      --safe-bottom:env(safe-area-inset-bottom,0px);
-      --safe-left:env(safe-area-inset-left,0px);
-      --safe-right:env(safe-area-inset-right,0px);
-    }
-
-    *{box-sizing:border-box}
-
-    html{
-      background:var(--bg);
-      overflow-x:hidden;
-      -webkit-text-size-adjust:100%;
-      scroll-behavior:smooth;
-    }
-
-    body{
-      margin:0;
-      min-height:100dvh;
-      padding:
-        max(10px,var(--safe-top))
-        max(10px,var(--safe-right))
-        calc(max(16px,var(--safe-bottom)) + 0px)
-        max(10px,var(--safe-left));
-      color:var(--text);
-      font-family:var(--sans);
-      overflow-x:hidden;
-      background:
-        radial-gradient(circle at 20% 0%,rgba(243,223,154,.12),transparent 32%),
-        radial-gradient(circle at 82% 14%,rgba(201,173,103,.07),transparent 28%),
-        linear-gradient(180deg,#18170e 0%,#090906 42%,#050504 100%);
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    body:before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at 18% 26%,rgba(243,223,154,.045),transparent 28%),
-        url("watermark-circle-soft.png") 16% 38%/min(620px,58vw) auto no-repeat;
-      opacity:.55;
-      pointer-events:none;
-      z-index:-1;
-    }
-
-    a{color:inherit}
-    button,input{font:inherit}
-    button{cursor:pointer}
-
-    .site{
-      width:min(1320px,calc(100vw - 20px));
-      margin:0 auto;
-      position:relative;
-    }
-
-    .hero,
-    .panel,
-    .card,
-    .folder-card,
-    .post-card,
-    .modal-article,
-    .push-widget-card,
-    .push-float-btn,
-    .push-active-panel{
-      border:1px solid var(--line);
-      background:
-        radial-gradient(circle at top left,rgba(243,223,154,.055),transparent 36%),
-        linear-gradient(145deg,rgba(21,20,13,.94),rgba(7,7,5,.94));
-      box-shadow:var(--shadow);
-    }
-
-    .hero{
-      border-radius:30px;
-      overflow:hidden;
-      margin-top:8px;
-      margin-bottom:14px;
-    }
-
-    .hero-inner{
-      padding:30px 34px 22px;
-    }
-
-    .kicker{
-      color:var(--muted);
-      font-size:13px;
-      font-weight:900;
-      letter-spacing:.31em;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
-
-    .brand-main{
-      display:flex;
-      align-items:center;
-      gap:22px;
-      min-width:0;
-    }
-
-    .logo{
-      width:122px;
-      height:122px;
-      flex:0 0 122px;
-      object-fit:contain;
-      border-radius:999px;
-      filter:drop-shadow(0 14px 28px rgba(0,0,0,.48));
-    }
-
-    h1{
-      font-family:var(--serif);
-      color:var(--gold2);
-      font-size:clamp(44px,5.1vw,82px);
-      line-height:.92;
-      letter-spacing:.095em;
-      margin:0;
-      font-weight:900;
-      white-space:nowrap;
-      text-transform:uppercase;
-      text-shadow:
-        0 2px 0 rgba(0,0,0,.35),
-        0 14px 32px rgba(0,0,0,.46);
-    }
-
-    .social-row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-      margin-top:24px;
-    }
-
-    .social-link{
-      min-height:72px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:
-        radial-gradient(circle at top left,rgba(243,223,154,.07),transparent 42%),
-        rgba(255,255,255,.025);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      text-decoration:none;
-      color:var(--cream);
-      font-weight:900;
-      font-size:26px;
-      letter-spacing:.025em;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-    }
-
-    .social-icon{
-      width:48px;
-      height:48px;
-      flex:0 0 48px;
-      display:grid;
-      place-items:center;
-      border-radius:999px;
-    }
-
-    .social-icon svg{
-      width:48px;
-      height:48px;
-      display:block;
-    }
-
-    .welcome{
-      border-top:1px solid var(--line2);
-      margin-top:24px;
-      padding-top:20px;
-    }
-
-    .salam{
-      color:var(--gold2);
-      font-family:var(--serif);
-      font-size:clamp(22px,2.3vw,34px);
-      line-height:1.15;
-      font-weight:800;
-      margin-bottom:10px;
-    }
-
-    .welcome p{
-      margin:0;
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.65;
-      max-width:1040px;
-    }
-
-    .welcome strong{color:var(--cream)}
-
-    .isnad{
-      border-top:1px solid var(--line2);
-      margin-top:20px;
-      padding-top:16px;
-    }
-
-    .isnad-title{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:950;
-      letter-spacing:.26em;
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-
-    .isnad-title:after{
-      content:"";
-      height:1px;
-      flex:1;
-      background:linear-gradient(90deg,rgba(216,190,112,.45),transparent);
-    }
-
-    .isnad-quote{
-      color:var(--cream);
-      font-size:17px;
-      font-weight:850;
-      line-height:1.45;
-    }
-
-    .isnad-source{
-      color:var(--muted);
-      font-size:13px;
-      margin-top:6px;
-      line-height:1.45;
-    }
-
-    .breadcrumb{
-      width:min(1320px,calc(100vw - 20px));
-      margin:0 auto 10px;
-      color:var(--muted);
-      font-weight:900;
-      font-size:15px;
-      letter-spacing:.02em;
-    }
-
-    .layout{
-      display:block;
-      padding-bottom:26px;
-    }
-
-    .panel{
-      border-radius:28px;
-      padding:26px 28px;
-      margin-bottom:16px;
-    }
-
-    .panel-label{
-      color:var(--muted);
-      font-size:13px;
-      font-weight:950;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-      margin-bottom:8px;
-    }
-
-    .panel h2,
-    .page-title{
-      font-family:var(--serif);
-      color:var(--gold2);
-      font-size:clamp(34px,4.2vw,58px);
-      line-height:1.02;
-      margin:0 0 12px;
-      font-weight:900;
-    }
-
-    .panel-text{
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.6;
-      margin:0;
-      max-width:980px;
-    }
-
-    .divider{
-      height:1px;
-      background:linear-gradient(90deg,transparent,var(--line),transparent);
-      margin:24px 0;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:12px;
-    }
-
-    .stat{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.025);
-      border-radius:18px;
-      padding:18px 20px;
-      min-height:94px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .stat b{
-      display:block;
-      color:var(--gold2);
-      font-size:32px;
-      line-height:1;
-      margin-bottom:8px;
-    }
-
-    .stat span{
-      color:var(--muted);
-      font-size:14px;
-      font-weight:850;
-    }
-
-    .search-wrap{
-      position:relative;
-      margin-top:18px;
-    }
-
-    .search{
-      width:100%;
-      min-height:66px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(7,7,5,.76);
-      color:var(--cream);
-      padding:0 22px 0 58px;
-      font-size:22px;
-      outline:none;
-    }
-
-    .search:focus{
-      border-color:rgba(243,223,154,.72);
-      box-shadow:0 0 0 4px rgba(243,223,154,.10);
-    }
-
-    .search-icon{
-      position:absolute;
-      left:22px;
-      top:50%;
-      transform:translateY(-50%);
-      color:var(--muted);
-      font-size:24px;
-      pointer-events:none;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:14px;
-      margin:4px 0 14px;
-    }
-
-    .section-head h2{
-      font-family:var(--serif);
-      color:var(--gold2);
-      font-size:clamp(32px,4vw,52px);
-      line-height:1;
-      margin:0;
-    }
-
-    .section-head span{
-      color:var(--muted);
-      font-size:15px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .folder-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-    }
-
-    .folder-card{
-      min-height:190px;
-      border-radius:24px;
-      padding:26px;
-      text-align:left;
-      color:var(--text);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .folder-card:before{
-      content:"";
-      position:absolute;
-      inset:-40% auto auto -20%;
-      width:240px;
-      height:240px;
-      background:radial-gradient(circle,rgba(243,223,154,.09),transparent 70%);
-      pointer-events:none;
-    }
-
-    .folder-icon{
-      width:58px;
-      height:58px;
-      border:1px solid var(--line2);
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:rgba(255,255,255,.035);
-      font-size:28px;
-      margin-bottom:18px;
-      position:relative;
-      z-index:1;
-    }
-
-    .folder-card h3{
-      font-family:var(--serif);
-      color:var(--gold2);
-      font-size:clamp(24px,2.6vw,36px);
-      line-height:1.05;
-      margin:0 0 10px;
-      position:relative;
-      z-index:1;
-    }
-
-    .folder-card p{
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.45;
-      margin:0 0 16px;
-      position:relative;
-      z-index:1;
-    }
-
-    .folder-tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      position:relative;
-      z-index:1;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:34px;
-      padding:7px 12px;
-      border:1px solid var(--line2);
-      border-radius:999px;
-      background:rgba(255,255,255,.025);
-      color:var(--cream);
-      font-weight:900;
-      font-size:12px;
-      text-decoration:none;
-    }
-
-    .post-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-    }
-
-    .post-card{
-      min-height:310px;
-      border-radius:24px;
-      padding:26px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      overflow:hidden;
-      text-align:left;
-      color:var(--text);
-    }
-
-    .post-title{
-      font-family:var(--serif);
-      color:var(--gold2);
-      font-size:clamp(26px,3vw,42px);
-      line-height:1.03;
-      font-weight:900;
-      margin:0 0 12px;
-    }
-
-    .post-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:16px;
-    }
-
-    .quote{
-      font-family:var(--serif);
-      color:#fff8e8;
-      font-style:italic;
-      font-size:clamp(17px,2vw,26px);
-      line-height:1.32;
-      font-weight:750;
-      margin:0;
-      display:-webkit-box;
-      -webkit-line-clamp:3;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
-
-    .source{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.4;
-      border-top:1px solid var(--line2);
-      padding-top:14px;
-      margin-top:18px;
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
-
-    .open-post{
-      margin-top:16px;
-      width:100%;
-      min-height:46px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(243,223,154,.08);
-      color:var(--gold2);
-      font-weight:950;
-    }
-
-    .view{
-      display:none;
-    }
-
-    .view.active{
-      display:block;
-    }
-
-    .page-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .back-btn{
-      border:1px solid var(--line);
-      border-radius:999px;
-      min-height:46px;
-      padding:0 18px;
-      background:rgba(243,223,154,.08);
-      color:var(--cream);
-      font-weight:950;
-    }
-
-    .page-sub{
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.55;
-      margin:0 0 18px;
-    }
-
-    .item-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-    }
-
-    .item-card{
-      border:1px solid var(--line);
-      border-radius:24px;
-      background:
-        radial-gradient(circle at top left,rgba(243,223,154,.06),transparent 38%),
-        linear-gradient(145deg,rgba(21,20,13,.92),rgba(7,7,5,.92));
-      min-height:160px;
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      text-align:left;
-      color:var(--text);
-      box-shadow:var(--shadow);
-    }
-
-    .item-card h3{
-      font-family:var(--serif);
-      color:var(--gold2);
-      font-size:clamp(22px,2.4vw,34px);
-      line-height:1.08;
-      margin:0 0 12px;
-    }
-
-    .item-card span{
-      color:var(--muted);
-      font-size:15px;
-      font-weight:900;
-    }
-
-    .empty{
-      border:1px dashed var(--line);
-      border-radius:22px;
-      padding:24px;
-      color:var(--muted);
-      text-align:center;
-      background:rgba(255,255,255,.015);
-      font-size:16px;
-      line-height:1.55;
-    }
-
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:60;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:
-        max(14px,var(--safe-top))
-        max(10px,var(--safe-right))
-        max(14px,var(--safe-bottom))
-        max(10px,var(--safe-left));
-      background:rgba(0,0,0,.78);
-      overflow:auto;
-    }
-
-    .modal.opened{
-      display:flex;
-    }
-
-    .modal-article{
-      width:min(960px,100%);
-      max-height:calc(100dvh - 28px);
-      overflow:auto;
-      border-radius:28px;
-      padding:28px;
-    }
-
-    .modal-actions-top,
-    .article-actions,
-    .article-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin-bottom:14px;
-    }
-
-    .modal-actions-top{
-      justify-content:flex-end;
-    }
-
-    .action-btn{
-      border:1px solid var(--line);
-      border-radius:999px;
-      min-height:42px;
-      padding:8px 14px;
-      background:rgba(243,223,154,.075);
-      color:var(--cream);
-      font-weight:900;
-      text-decoration:none;
-    }
-
-    .action-btn.active{
-      border-color:rgba(94,185,118,.72);
-      color:#ddffd8;
-      background:rgba(94,185,118,.10);
-    }
-
-    .modal-title{
-      font-family:var(--serif);
-      color:var(--gold2);
-      text-align:center;
-      font-size:clamp(32px,4.5vw,56px);
-      line-height:1.06;
-      margin:12px 0 14px;
-    }
-
-    .modal-statement{
-      font-family:var(--serif);
-      color:#fff8e8;
-      font-size:clamp(21px,2.7vw,31px);
-      line-height:1.72;
-      text-align:center;
-      white-space:pre-wrap;
-    }
-
-    .modal-statement strong{
-      color:#fff6dc;
-      font-weight:950;
-    }
-
-    .modal-statement em{
-      color:var(--gold2);
-      font-style:italic;
-      font-weight:850;
-      text-decoration:underline;
-      text-underline-offset:5px;
-    }
-
-    .article-source{
-      border-top:1px solid var(--line2);
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.55;
-      margin-top:18px;
-      padding-top:14px;
-      text-align:center;
-    }
-
-    .hidden-panel{
-      display:none;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-      background:rgba(255,255,255,.018);
-      color:var(--cream);
-      font-size:14px;
-      line-height:1.55;
-      margin:12px 0;
-    }
-
-    .hidden-panel.show{
-      display:block;
-    }
-
-    footer{
-      text-align:center;
-      color:var(--muted);
-      padding:28px 0 calc(40px + var(--safe-bottom));
-      border-top:1px solid var(--line2);
-      margin-top:20px;
-    }
-
-    footer strong{
-      color:var(--gold2);
-      letter-spacing:.14em;
-    }
-
-    .footer-socials{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:20px;
-      flex-wrap:wrap;
-      margin:14px 0 8px;
-      font-weight:850;
-    }
-
-    .footer-socials span{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .footer-socials svg{
-      width:22px;
-      height:22px;
-      display:block;
-    }
-
-    .signature{
-      display:block;
-      color:var(--gold2);
-      font-family:cursive;
-      font-size:30px;
-      margin-top:8px;
-    }
-
-    .push-widget{
-      position:fixed;
-      right:max(14px,var(--safe-right));
-      bottom:calc(14px + var(--safe-bottom));
-      z-index:50;
-      width:min(360px,calc(100vw - 24px));
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      pointer-events:none;
-    }
-
-    .push-widget > *{pointer-events:auto}
-
-    .push-widget-card{
-      border-radius:20px;
-      padding:15px;
-      color:var(--cream);
-    }
-
-    .push-widget-head{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:8px;
-    }
-
-    .push-widget-bell{
-      width:40px;
-      height:40px;
-      border-radius:13px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(180deg,#f1da90,#c8a14f);
-      color:#15140d;
-      font-size:18px;
-      font-weight:900;
-    }
-
-    .push-widget-title strong{
-      display:block;
-      color:var(--gold2);
-      font-family:var(--serif);
-      font-size:18px;
-    }
-
-    .push-widget-title span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-    }
-
-    .push-widget-text{
-      color:var(--text);
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .push-widget-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    .push-widget-btn,
-    .push-widget-ghost{
-      border-radius:14px;
-      min-height:44px;
-      padding:10px 12px;
-      font-weight:900;
-    }
-
-    .push-widget-btn{
-      border:1px solid rgba(243,223,154,.85);
-      background:linear-gradient(180deg,#f1da90,#c8a14f);
-      color:#15140d;
-      flex:1 1 210px;
-    }
-
-    .push-widget-ghost{
-      border:1px solid var(--line2);
-      background:rgba(255,255,255,.025);
-      color:var(--cream);
-    }
-
-    .push-float-btn{
-      align-self:flex-end;
-      border-radius:20px;
-      min-height:58px;
-      padding:12px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      color:var(--cream);
-      font-weight:900;
-    }
-
-    .mini-bell{
-      width:34px;
-      height:34px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(180deg,#f1da90,#c8a14f);
-      color:#15140d;
-    }
-
-    .push-active-panel{
-      display:none;
-      border-radius:20px;
-      padding:14px;
-    }
-
-    .push-widget.hidden-card .push-widget-card{
-      display:none;
-    }
-
-    .push-widget.permission-granted{
-      width:auto;
-      align-items:flex-end;
-    }
-
-    .push-widget.permission-granted .push-widget-card{
-      display:none !important;
-    }
-
-    .push-widget.permission-granted .push-float-btn{
-      width:58px;
-      height:58px;
-      min-width:58px;
-      padding:0;
-      overflow:hidden;
-    }
-
-    .push-widget.permission-granted #pushFloatLabel{
-      display:none;
-    }
-
-    .push-widget.permission-granted.active-menu{
-      width:min(340px,calc(100vw - 24px));
-    }
-
-    .push-widget.permission-granted.active-menu .push-active-panel{
-      display:block;
-    }
-
-    @media(max-width:980px){
-      .folder-grid,
-      .item-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-
-      .stats{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-    }
-
-    @media(max-width:760px){
-      body{
-        padding-left:7px;
-        padding-right:7px;
-      }
-
-      .site,
-      .breadcrumb{
-        width:calc(100vw - 14px);
-      }
-
-      .hero{
-        border-radius:22px;
-        margin-top:76px;
-      }
-
-      .hero-inner{
-        padding:18px 16px 16px;
-      }
-
-      .kicker{
-        font-size:10px;
-        letter-spacing:.22em;
-        margin-bottom:14px;
-      }
-
-      .brand-main{
-        gap:10px;
-        width:100%;
-      }
-
-      .logo{
-        width:64px;
-        height:64px;
-        flex:0 0 64px;
-      }
-
-      h1{
-        font-size:clamp(27px,8vw,38px);
-        letter-spacing:.052em;
-        max-width:calc(100vw - 112px);
-        white-space:nowrap;
-      }
-
-      .social-row{
-        gap:8px;
-        margin-top:18px;
-      }
-
-      .social-link{
-        min-height:52px;
-        gap:9px;
-        font-size:17px;
-        padding:0 8px;
-      }
-
-      .social-icon,
-      .social-icon svg{
-        width:30px;
-        height:30px;
-        flex-basis:30px;
-      }
-
-      .welcome{
-        margin-top:18px;
-        padding-top:14px;
-      }
-
-      .salam{
-        font-size:21px;
-      }
-
-      .welcome p{
-        font-size:14px;
-        line-height:1.55;
-      }
-
-      .isnad-title{
-        font-size:10px;
-        letter-spacing:.19em;
-      }
-
-      .isnad-quote{
-        font-size:14px;
-      }
-
-      .isnad-source{
-        font-size:11px;
-      }
-
-      .breadcrumb{
-        font-size:13px;
-        margin-bottom:8px;
-      }
-
-      .panel{
-        padding:18px 16px;
-        border-radius:22px;
-        margin-bottom:12px;
-      }
-
-      .panel-label{
-        font-size:11px;
-        letter-spacing:.22em;
-      }
-
-      .panel h2,
-      .page-title{
-        font-size:clamp(34px,10vw,48px);
-      }
-
-      .panel-text,
-      .page-sub{
-        font-size:15px;
-        line-height:1.55;
-      }
-
-      .stats{
-        gap:8px;
-      }
-
-      .stat{
-        min-height:78px;
-        padding:13px;
-        border-radius:16px;
-      }
-
-      .stat b{
-        font-size:25px;
-      }
-
-      .stat span{
-        font-size:12px;
-      }
-
-      .search{
-        min-height:58px;
-        border-radius:19px;
-        font-size:16px;
-        padding-left:48px;
-      }
-
-      .search-icon{
-        left:18px;
-        font-size:20px;
-      }
-
-      .section-head h2{
-        font-size:34px;
-      }
-
-      .section-head span{
-        font-size:12px;
-      }
-
-      .folder-grid,
-      .item-grid,
-      .post-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:10px;
-      }
-
-      .folder-card{
-        min-height:164px;
-        padding:16px;
-        border-radius:20px;
-      }
-
-      .folder-icon{
-        width:46px;
-        height:46px;
-        font-size:22px;
-        border-radius:15px;
-        margin-bottom:12px;
-      }
-
-      .folder-card h3{
-        font-size:23px;
-      }
-
-      .folder-card p{
-        font-size:12px;
-        display:-webkit-box;
-        -webkit-line-clamp:2;
-        -webkit-box-orient:vertical;
-        overflow:hidden;
-      }
-
-      .pill{
-        min-height:28px;
-        padding:5px 9px;
-        font-size:10.5px;
-      }
-
-      .post-card{
-        min-height:254px;
-        padding:14px;
-        border-radius:20px;
-      }
-
-      .post-title{
-        font-size:23px;
-      }
-
-      .quote{
-        font-size:16px;
-        -webkit-line-clamp:3;
-      }
-
-      .source{
-        font-size:11px;
-        padding-top:10px;
-        margin-top:12px;
-      }
-
-      .open-post{
-        min-height:38px;
-        font-size:12px;
-      }
-
-      .item-card{
-        min-height:138px;
-        padding:16px;
-        border-radius:20px;
-      }
-
-      .item-card h3{
-        font-size:22px;
-      }
-
-      .item-card span{
-        font-size:12px;
-      }
-
-      .modal-article{
-        padding:16px;
-        border-radius:22px;
-      }
-
-      .modal-title{
-        font-size:28px;
-        text-align:left;
-      }
-
-      .modal-statement{
-        text-align:left;
-        font-size:18px;
-        line-height:1.58;
-      }
-
-      .modal-actions-top{
-        justify-content:flex-end;
-      }
-
-      .article-actions{
-        justify-content:flex-start;
-      }
-
-      .action-btn{
-        min-height:38px;
-        font-size:11.5px;
-      }
-
-      .footer-socials{
-        gap:12px;
-        font-size:13px;
-      }
-
-      .signature{
-        font-size:24px;
-      }
-
-      .push-widget{
-        right:12px;
-        left:auto;
-        width:auto;
-      }
-
-      .push-widget-card{
-        display:none;
-      }
-
-      .push-float-btn{
-        width:58px;
-        height:58px;
-        min-width:58px;
-        padding:0;
-      }
-
-      #pushFloatLabel{
-        display:none;
-      }
-    }
-
-    @media(max-width:390px){
-      .logo{
-        width:58px;
-        height:58px;
-        flex:0 0 58px;
-      }
-
-      h1{
-        font-size:clamp(24px,7.4vw,33px);
-        letter-spacing:.04em;
-        max-width:calc(100vw - 102px);
-      }
-
-      .social-link{
-        font-size:15px;
-      }
-
-      .post-title,
-      .folder-card h3,
-      .item-card h3{
-        font-size:20px;
-      }
-
-      .quote{
-        font-size:14.5px;
-      }
-    }
-  </style>
-
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-  <script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-      await OneSignal.init({
-        appId: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
-        safari_web_id: "web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
-        notifyButton: { enable: false },
-        welcomeNotification: {
-          disable: false,
-          title: "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
-          message: "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",
-          url: "https://dar-al-tawhid.de/"
-        }
-      });
-      window.DAR_ONE_SIGNAL_READY = true;
-    });
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+
+<title>DAR AL TAWḤID</title>
+
+<link rel="icon" href="/favicon.ico?v=structured-app-v3" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=structured-app-v3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=structured-app-v3">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=structured-app-v3">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=structured-app-v3">
+<link rel="manifest" href="/manifest.json?v=structured-app-v3">
+
+<meta name="application-name" content="DAR AL TAWḤID">
+<meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
+<meta name="theme-color" content="#080806">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="msapplication-TileImage" content="/app-icon-192.png?v=structured-app-v3">
+<meta name="msapplication-TileColor" content="#080806">
+
+<style>
+:root{
+  --bg:#070706;
+  --bg2:#0d0c09;
+  --panel:#12100c;
+  --panel2:#19150f;
+  --card:#14120e;
+  --gold:#c8a85b;
+  --gold2:#efd78e;
+  --bronze:#9b7a3c;
+  --cream:#f8efd4;
+  --text:#f6edd2;
+  --muted:#b8ad91;
+  --muted2:#8f856f;
+  --line:rgba(210,177,91,.30);
+  --line2:rgba(210,177,91,.16);
+  --soft:rgba(210,177,91,.08);
+  --danger:#ffd1c5;
+  --shadow:0 22px 65px rgba(0,0,0,.42);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+*{box-sizing:border-box}
+
+html{
+  min-height:100%;
+  background:var(--bg);
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100dvh;
+  color:var(--text);
+  font-family:var(--sans);
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),
+    radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),
+    linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%);
+  padding:
+    max(10px,var(--safe-top))
+    max(10px,env(safe-area-inset-right,0px))
+    max(18px,var(--safe-bottom))
+    max(10px,env(safe-area-inset-left,0px));
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:url("watermark-circle-soft.png") center 44%/min(620px,58vw) auto no-repeat;
+  opacity:.055;
+  z-index:0;
+}
+
+a{color:inherit}
+button,input{font:inherit}
+
+.app{
+  width:min(1180px,100%);
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+
+.top-shell{
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:
+    linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5,.92)),
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.12),transparent 45%);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin-bottom:14px;
+}
+
+.header{
+  padding:22px 24px 18px;
+}
+
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+}
+
+.brand{
+  min-width:0;
+}
+
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.brand-main{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.logo{
+  width:112px;
+  height:112px;
+  flex:0 0 112px;
+  object-fit:contain;
+  border-radius:999px;
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.38));
+}
+
+h1{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:clamp(42px,5.8vw,86px);
+  line-height:.9;
+  letter-spacing:.12em;
+  margin:0;
+  font-weight:800;
+}
+
+.socials{
+  display:flex;
+  gap:11px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.social-link,
+.pill,
+.btn,
+.icon-btn{
+  border:1px solid var(--line);
+  background:rgba(239,215,142,.075);
+  color:var(--cream);
+  text-decoration:none;
+  border-radius:999px;
+  padding:11px 18px;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  white-space:nowrap;
+  min-width:150px;
+  min-height:48px;
+}
+
+.social-link svg{
+  width:25px;
+  height:25px;
+  display:block;
+  flex:0 0 25px;
+}
+
+.hero-text{
+  border-top:1px solid var(--line2);
+  margin-top:16px;
+  padding-top:14px;
+  max-width:980px;
+}
+
+.salam{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:clamp(20px,2.1vw,30px);
+  line-height:1.18;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.intro{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+
+.intro strong{color:var(--cream)}
+
+.isnad{
+  border-top:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  padding:11px 24px 14px;
+}
+
+.isnad-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--muted2);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+  font-weight:950;
+}
+
+.isnad-label:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,rgba(210,177,91,.48),transparent);
+}
+
+.isnad-quote{
+  color:var(--cream);
+  margin-top:7px;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:800;
+}
+
+.isnad-source{
+  color:var(--muted);
+  margin-top:5px;
+  font-size:10px;
+  line-height:1.4;
+}
+
+.app-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.back-btn{
+  display:none;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--line);
+  background:rgba(239,215,142,.075);
+  color:var(--cream);
+  border-radius:999px;
+  min-height:40px;
+  padding:9px 14px;
+  cursor:pointer;
+  font-weight:900;
+  font-size:13px;
+}
+
+.back-btn.show{display:inline-flex}
+
+.crumb{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.view{
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));
+  box-shadow:var(--shadow);
+  padding:18px;
+  min-height:430px;
+}
+
+.view-head{
+  padding:4px 2px 14px;
+  border-bottom:1px solid var(--line2);
+  margin-bottom:14px;
+}
+
+.eyebrow{
+  color:var(--muted2);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-weight:950;
+  font-size:10px;
+  margin-bottom:7px;
+}
+
+.view h2{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:clamp(30px,4.5vw,54px);
+  line-height:1.02;
+  margin:0;
+}
+
+.view-desc{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  max-width:760px;
+  margin-top:8px;
+}
+
+.overview-panel{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.09),transparent 42%),
+    linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
+  padding:14px;
+  margin-bottom:12px;
+}
+
+.overview-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.overview-title h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  margin:0;
+  font-size:24px;
+  line-height:1.1;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+}
+
+.stat-card{
+  border:1px solid var(--line2);
+  border-radius:16px;
+  background:rgba(239,215,142,.045);
+  padding:10px;
+}
+
+.stat-card b{
+  display:block;
+  color:var(--gold2);
+  font-size:22px;
+  line-height:1;
+}
+
+.stat-card span{
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:850;
+}
+
+.main-search{
+  margin-bottom:13px;
+}
+
+.search{
+  width:100%;
+  height:48px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#090907;
+  color:var(--cream);
+  padding:0 15px;
+  outline:none;
+  font-size:16px;
+}
+
+.search:focus{
+  border-color:rgba(239,215,142,.58);
+  box-shadow:0 0 0 4px rgba(239,215,142,.09);
+}
+
+.section-block{
+  margin-top:14px;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.section-head h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:25px;
+  margin:0;
+  line-height:1.08;
+}
+
+.section-head span{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:850;
+}
+
+.folder-grid,
+.latest-grid,
+.grid-list,
+.post-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.folder-card,
+.post-card,
+.list-card,
+.info-card{
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.105),transparent 38%),
+    linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
+  border-radius:22px;
+  padding:15px;
+  box-shadow:0 14px 34px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease,filter .15s ease;
+}
+
+.folder-card:hover,
+.post-card:hover,
+.list-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(239,215,142,.52);
+  filter:brightness(1.04);
+}
+
+.folder-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:linear-gradient(180deg,rgba(239,215,142,.18),rgba(155,122,60,.08));
+  border:1px solid var(--line2);
+  color:var(--gold2);
+  font-size:21px;
+  margin-bottom:12px;
+}
+
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.info-card h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:22px;
+  line-height:1.08;
+  margin:0 0 7px;
+  overflow-wrap:anywhere;
+}
+
+.folder-card p,
+.info-card p{
+  color:var(--muted);
+  font-size:12.5px;
+  line-height:1.5;
+  margin:0;
+}
+
+.folder-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.folder-meta span,
+.badge{
+  border:1px solid var(--line2);
+  border-radius:999px;
+  padding:5px 8px;
+  color:var(--cream);
+  background:rgba(239,215,142,.055);
+  font-size:10px;
+  font-weight:900;
+}
+
+.list-card{
+  min-height:128px;
+}
+
+.list-card .count{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:850;
+}
+
+.post-card{
+  min-height:210px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.post-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:8px 0 10px;
+}
+
+.excerpt{
+  font-family:var(--serif);
+  color:#fff6dc;
+  font-size:15.5px;
+  line-height:1.42;
+  font-style:italic;
+  font-weight:650;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.source-preview{
+  border-top:1px solid var(--line2);
+  padding-top:9px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.35;
+  margin-top:12px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.empty,
+.loading,
+.error{
+  border:1px dashed var(--line);
+  border-radius:20px;
+  background:rgba(255,255,255,.014);
+  padding:18px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.error{
+  color:var(--danger);
+  border-color:rgba(255,160,140,.35);
+}
+
+.article{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.article-title{
+  text-align:center;
+  margin-bottom:14px;
+}
+
+.article-title h2{
+  font-size:clamp(31px,5vw,58px);
+}
+
+.article-meta{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:7px;
+  margin:12px 0 18px;
+}
+
+.statement{
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(239,215,142,.09),transparent 42%),
+    linear-gradient(180deg,rgba(19,17,13,.94),rgba(8,8,6,.94));
+  padding:28px;
+  color:#fff8e8;
+  font-family:var(--serif);
+  font-size:clamp(20px,2.4vw,29px);
+  line-height:1.78;
+  text-align:center;
+  white-space:pre-wrap;
+}
+
+.statement strong{
+  color:#fff7df;
+  font-weight:950;
+}
+
+.statement em{
+  color:var(--gold2);
+  font-style:italic;
+  font-weight:850;
+  text-decoration:underline;
+  text-underline-offset:5px;
+}
+
+.article-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:9px;
+  margin:18px 0;
+}
+
+.action-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(239,215,142,.075);
+  color:var(--cream);
+  min-height:42px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.action-btn.active{
+  color:#ebffdf;
+  border-color:rgba(105,190,115,.58);
+  background:rgba(105,190,115,.10);
+}
+
+.source-box{
+  border-top:1px solid var(--line2);
+  margin-top:16px;
+  padding-top:14px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  text-align:center;
+}
+
+.link-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+
+.link-row a{
+  border:1px solid var(--line);
+  background:rgba(239,215,142,.075);
+  color:var(--cream);
+  text-decoration:none;
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.info-card{
+  cursor:default;
+}
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  padding:22px 0 calc(26px + var(--safe-bottom));
+}
+
+.footer strong{
+  color:var(--gold2);
+}
+
+.footer-socials{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.footer-socials span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:13px;
+  font-weight:850;
+}
+
+.footer-socials svg{
+  width:19px;
+  height:19px;
+}
+
+.signature{
+  display:block;
+  color:var(--gold2);
+  font-family:cursive;
+  font-size:25px;
+  margin-top:8px;
+}
+
+.push-float{
+  position:fixed;
+  right:max(14px,env(safe-area-inset-right));
+  bottom:calc(14px + env(safe-area-inset-bottom));
+  z-index:30;
+  width:54px;
+  height:54px;
+  border-radius:18px;
+  border:1px solid rgba(239,215,142,.58);
+  background:
+    radial-gradient(circle at top left,rgba(239,215,142,.18),transparent 42%),
+    linear-gradient(180deg,rgba(22,19,14,.98),rgba(7,7,6,.98));
+  color:var(--gold2);
+  box-shadow:0 18px 44px rgba(0,0,0,.35);
+  cursor:pointer;
+  font-size:20px;
+}
+
+@media(max-width:980px){
+  .folder-grid,
+  .latest-grid,
+  .grid-list,
+  .post-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .header-row{
+    display:block;
+  }
+
+  .socials{
+    justify-content:flex-start;
+    margin-top:14px;
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+}
+
+@media(max-width:700px){
+  body{
+    padding-left:7px;
+    padding-right:7px;
+  }
+
+  .top-shell,
+  .view{
+    border-radius:20px;
+  }
+
+  .header{
+    padding:14px 13px 13px;
+  }
+
+  .brand small{
+    font-size:8px;
+    letter-spacing:.14em;
+    margin-bottom:6px;
+  }
+
+  .brand-main{
+    gap:12px;
+  }
+
+  .logo{
+    width:70px;
+    height:70px;
+    flex-basis:70px;
+  }
+
+  h1{
+    font-size:clamp(31px,9.4vw,44px);
+    letter-spacing:.075em;
+  }
+
+  .socials{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .social-link{
+    justify-content:center;
+    padding:10px 9px;
+    font-size:13px;
+    min-width:0;
+    min-height:46px;
+    gap:9px;
+  }
+
+  .social-link svg{
+    width:24px;
+    height:24px;
+    flex-basis:24px;
+  }
+
+  .hero-text{
+    margin-top:10px;
+    padding-top:10px;
+  }
+
+  .salam{
+    font-size:16.5px;
+  }
+
+  .intro{
+    font-size:11.5px;
+    line-height:1.45;
+  }
+
+  .isnad{
+    padding:9px 13px 11px;
+  }
+
+  .isnad-label{
+    font-size:8px;
+  }
+
+  .isnad-quote{
+    font-size:10.2px;
+  }
+
+  .isnad-source{
+    font-size:8.5px;
+  }
+
+  .view{
+    padding:11px;
+    min-height:420px;
+  }
+
+  .view-head{
+    padding-bottom:12px;
+  }
+
+  .view h2{
+    font-size:28px;
+  }
+
+  .view-desc{
+    font-size:11.6px;
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+
+  .stat-card{
+    padding:9px;
+    border-radius:14px;
+  }
+
+  .stat-card b{
+    font-size:19px;
+  }
+
+  .stat-card span{
+    font-size:10px;
+  }
+
+  .folder-grid,
+  .latest-grid,
+  .grid-list,
+  .post-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .folder-card,
+  .post-card,
+  .list-card,
+  .info-card{
+    border-radius:17px;
+    padding:11px;
+  }
+
+  .folder-card h3,
+  .post-card h3,
+  .list-card h3,
+  .info-card h3{
+    font-size:18px;
+    line-height:1.08;
+  }
+
+  .folder-card p{
+    font-size:11px;
+    line-height:1.38;
+  }
+
+  .folder-icon{
+    width:38px;
+    height:38px;
+    border-radius:14px;
+    font-size:18px;
+    margin-bottom:9px;
+  }
+
+  .folder-meta{
+    gap:5px;
+    margin-top:9px;
+  }
+
+  .folder-meta span,
+  .badge{
+    font-size:8.4px;
+    padding:4px 6px;
+  }
+
+  .list-card{
+    min-height:118px;
+  }
+
+  .list-card .count{
+    font-size:10.5px;
+  }
+
+  .post-card{
+    min-height:185px;
+  }
+
+  .excerpt{
+    font-size:12.8px;
+    line-height:1.32;
+    -webkit-line-clamp:3;
+  }
+
+  .source-preview{
+    font-size:8.5px;
+    margin-top:8px;
+    padding-top:7px;
+  }
+
+  .section-head h3{
+    font-size:21px;
+  }
+
+  .section-head span{
+    font-size:9.5px;
+  }
+
+  .overview-title h3{
+    font-size:21px;
+  }
+
+  .search{
+    height:46px;
+  }
+
+  .statement{
+    padding:16px;
+    border-radius:19px;
+    font-size:17px;
+    line-height:1.62;
+    text-align:left;
+  }
+
+  .article-title{
+    text-align:left;
+  }
+
+  .article-meta,
+  .article-actions,
+  .link-row{
+    justify-content:flex-start;
+  }
+
+  .source-box{
+    text-align:left;
+  }
+
+  .app-bar{
+    margin-bottom:9px;
+  }
+
+  .crumb{
+    font-size:10.5px;
+  }
+}
+
+@media(max-width:390px){
+  .logo{
+    width:64px;
+    height:64px;
+    flex-basis:64px;
+  }
+
+  h1{
+    font-size:clamp(29px,8.8vw,40px);
+  }
+
+  .folder-grid,
+  .latest-grid,
+  .grid-list,
+  .post-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+
+  .folder-card,
+  .post-card,
+  .list-card{
+    padding:10px;
+  }
+
+  .folder-card h3,
+  .post-card h3,
+  .list-card h3{
+    font-size:16.5px;
+  }
+
+  .excerpt{
+    font-size:12px;
+  }
+}
+
+@media(orientation:landscape) and (max-height:620px){
+  .folder-grid,
+  .latest-grid,
+  .grid-list,
+  .post-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .header{
+    padding:10px 14px;
+  }
+
+  .logo{
+    width:76px;
+    height:76px;
+    flex-basis:76px;
+  }
+
+  h1{
+    font-size:clamp(31px,5.8vw,54px);
+  }
+}
+</style>
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal){
+  await OneSignal.init({
+    appId:"786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+    safari_web_id:"web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
+    notifyButton:{enable:false},
+    welcomeNotification:{
+      disable:false,
+      title:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
+      message:"Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",
+      url:"https://dar-al-tawhid.de/"
+    }
+  });
+  window.DAR_ONE_SIGNAL_READY = true;
+});
+</script>
 </head>
 
 <body>
-  <header class="site hero">
-    <div class="hero-inner">
-      <div class="kicker">Beiträge nach Qurʾān, Sunnah & Āthār</div>
+<div class="app">
 
-      <div class="brand-main">
-        <img class="logo" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo">
-        <h1>DAR AL TAWḤID</h1>
+  <section class="top-shell">
+    <header class="header">
+      <div class="header-row">
+        <div class="brand">
+          <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
+          <div class="brand-main">
+            <img class="logo" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo">
+            <h1>DAR AL TAWḤID</h1>
+          </div>
+        </div>
+
+        <nav class="socials" aria-label="Social Media">
+          <a class="social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>
+            <span>Telegram</span>
+          </a>
+
+          <a class="social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igHead" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHead)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg>
+            <span>Instagram</span>
+          </a>
+        </nav>
       </div>
 
-      <nav class="social-row" aria-label="Social Media">
-        <a class="social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener">
-          <span class="social-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
-              <path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/>
-            </svg>
-          </span>
-          <span>Telegram</span>
-        </a>
-
-        <a class="social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">
-          <span class="social-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <defs>
-                <linearGradient id="igHead" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#feda75"/>
-                  <stop offset="35%" stop-color="#fa7e1e"/>
-                  <stop offset="65%" stop-color="#d62976"/>
-                  <stop offset="100%" stop-color="#4f5bd5"/>
-                </linearGradient>
-              </defs>
-              <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHead)"/>
-              <circle cx="12" cy="12" r="4.35" fill="none" stroke="#fff" stroke-width="2"/>
-              <circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/>
-            </svg>
-          </span>
-          <span>Instagram</span>
-        </a>
-      </nav>
-
-      <section class="welcome">
+      <div class="hero-text">
         <div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div>
-        <p>
-          Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus
-          <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>.
-          Wähle einen Ordner und öffne Beiträge strukturiert nach Thema, Gelehrtem oder Werk.
-        </p>
-      </section>
-
-      <section class="isnad">
-        <div class="isnad-title">Maßstab der Überlieferung</div>
-        <div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div>
-        <div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div>
-      </section>
-    </div>
-  </header>
-
-  <div id="breadcrumb" class="breadcrumb">Startseite</div>
-
-  <main class="site layout">
-    <section id="homeView" class="view active">
-      <section class="panel">
-        <div class="panel-label">App-Übersicht</div>
-        <h2>Startseite</h2>
-        <p class="panel-text">Alles ist in Ordnern aufgebaut. Öffne Themen, Gelehrte oder Bücher jeweils als eigene Seite mit Zurückbutton.</p>
-
-        <div class="divider"></div>
-
-        <section>
-          <div class="section-head">
-            <h2>Übersicht</h2>
-          </div>
-          <div class="stats">
-            <div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div>
-            <div class="stat"><b id="countTopics">0</b><span>Themen</span></div>
-            <div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div>
-            <div class="stat"><b id="countBooks">0</b><span>Bücher</span></div>
-          </div>
-        </section>
-
-        <div class="search-wrap">
-          <span class="search-icon">🔍</span>
-          <input id="homeSearch" class="search" type="search" placeholder="Suche nach Beitrag, Thema, Gelehrtem, Buch oder Quelle…">
+        <div class="intro">
+          Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>. Wähle einen Ordner und öffne die Beiträge strukturiert nach Thema, Gelehrtem oder Werk.
         </div>
-      </section>
+      </div>
+    </header>
 
-      <section class="panel">
-        <div class="section-head">
-          <h2>Neueste Beiträge</h2>
-          <span id="latestCount">4 aktuell angezeigt</span>
-        </div>
-        <div id="latestGrid" class="post-grid">
-          <div class="empty">Beiträge werden geladen…</div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="section-head">
-          <h2>Ordner</h2>
-          <span>Strukturiert öffnen</span>
-        </div>
-
-        <div class="folder-grid">
-          <button class="folder-card" data-view="topics" type="button">
-            <div>
-              <div class="folder-icon">🧭</div>
-              <h3>Themen</h3>
-              <p>Öffne Beiträge nach Aqīdah, Adab, Akhlāq, Fiqh, Tawḥīd und weiteren Bereichen.</p>
-            </div>
-            <div class="folder-tags"><span class="pill" id="topicFolderCount">0 Themen</span><span class="pill">Ordner</span></div>
-          </button>
-
-          <button class="folder-card" data-view="scholars" type="button">
-            <div>
-              <div class="folder-icon">👤</div>
-              <h3>Gelehrte</h3>
-              <p>Finde Beiträge direkt nach Imāmen, Ṣaḥābah, Tābiʿīn und Gelehrten.</p>
-            </div>
-            <div class="folder-tags"><span class="pill" id="scholarFolderCount">0 Gelehrte</span><span class="pill">Biografisch</span></div>
-          </button>
-
-          <button class="folder-card" data-view="books" type="button">
-            <div>
-              <div class="folder-icon">📚</div>
-              <h3>Bücher</h3>
-              <p>Finde Beiträge direkt nach den verwendeten Werken und Quellen.</p>
-            </div>
-            <div class="folder-tags"><span class="pill" id="bookFolderCount">0 Werke</span><span class="pill">Quellenstruktur</span></div>
-          </button>
-
-          <button class="folder-card" data-view="latest" type="button">
-            <div>
-              <div class="folder-icon">🆕</div>
-              <h3>Neueste Beiträge</h3>
-              <p>Zeigt die zuletzt hinzugefügten Beiträge aus deinem GitHub-Ordner content/posts.</p>
-            </div>
-            <div class="folder-tags"><span class="pill" id="latestFolderCount">0 Beiträge</span><span class="pill">Aktuell</span></div>
-          </button>
-
-          <button class="folder-card" data-view="saved" type="button">
-            <div>
-              <div class="folder-icon">♡</div>
-              <h3>Gespeichert</h3>
-              <p>Beiträge, die der Besucher lokal auf seinem Gerät speichert.</p>
-            </div>
-            <div class="folder-tags"><span class="pill" id="savedFolderCount">0 gespeichert</span><span class="pill">Lokal</span></div>
-          </button>
-
-          <button class="folder-card" data-view="search" type="button">
-            <div>
-              <div class="folder-icon">🔎</div>
-              <h3>Suche</h3>
-              <p>Suche über Titel, Thema, Gelehrten, Buch, Quelle, Tags und Beitragstext.</p>
-            </div>
-            <div class="folder-tags"><span class="pill">Schnellsuche</span><span class="pill">App-Ansicht</span></div>
-          </button>
-
-          <button class="folder-card" data-view="about" type="button">
-            <div>
-              <div class="folder-icon">⚖️</div>
-              <h3>Über diese App</h3>
-              <p>Der Maßstab der Seite: Qurʾān, Sunnah, Āthār und geprüfte Quellen statt bloßer Meinung.</p>
-            </div>
-            <div class="folder-tags"><span class="pill">Manhaj</span><span class="pill">Quellen</span></div>
-          </button>
-        </div>
-      </section>
+    <section class="isnad">
+      <div class="isnad-label">Maßstab der Überlieferung</div>
+      <div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div>
+      <div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div>
     </section>
+  </section>
 
-    <section id="pageView" class="view">
-      <section class="panel">
-        <div class="page-top">
-          <button id="backBtn" class="back-btn" type="button">← Zurück</button>
-        </div>
-        <div class="panel-label" id="pageLabel">Ordner</div>
-        <h2 id="pageTitle" class="page-title">Titel</h2>
-        <p id="pageSub" class="page-sub"></p>
+  <div class="app-bar">
+    <button id="backBtn" class="back-btn" type="button">← Zurück</button>
+    <div id="crumb" class="crumb">Startseite</div>
+  </div>
 
-        <div id="pageSearchWrap" class="search-wrap" style="display:none">
-          <span class="search-icon">🔍</span>
-          <input id="pageSearch" class="search" type="search" placeholder="In dieser Ansicht suchen…">
-        </div>
-      </section>
-
-      <section id="itemSection" class="panel" style="display:none">
-        <div id="itemGrid" class="item-grid"></div>
-      </section>
-
-      <section id="postSection" class="panel" style="display:none">
-        <div class="section-head">
-          <h2 id="postSectionTitle">Beiträge</h2>
-          <span id="postSectionCount">0 angezeigt</span>
-        </div>
-        <div id="postGrid" class="post-grid"></div>
-      </section>
-    </section>
+  <main id="appView" class="view">
+    <div class="loading">App wird geladen…</div>
   </main>
 
-  <div id="modal" class="modal">
-    <article class="modal-article">
-      <div class="modal-actions-top">
-        <button id="shareBtn" class="action-btn" type="button">Teilen</button>
-        <button id="closeBtn" class="action-btn" type="button">Schließen</button>
-      </div>
-
-      <h2 id="modalTitle" class="modal-title"></h2>
-      <div id="modalMeta" class="post-meta"></div>
-      <div id="modalStatement" class="modal-statement"></div>
-
-      <div class="article-actions">
-        <button id="savePostBtn" class="action-btn" type="button">♡ Speichern</button>
-        <button id="sourceCheckBtn" class="action-btn" type="button">🔎 Quelle prüfen</button>
-        <button id="originalToggleBtn" class="action-btn" type="button">ع Original anzeigen</button>
-        <button id="imageShareBtn" class="action-btn" type="button">🖼️ Als Bild teilen</button>
-        <button id="reportBtn" class="action-btn" type="button">⚠️ Fehler melden</button>
-      </div>
-
-      <div id="sourceCheckPanel" class="hidden-panel"></div>
-      <div id="originalPanel" class="hidden-panel">Für diesen Beitrag ist noch kein separater arabischer Originaltext hinterlegt. Die Funktion ist vorbereitet.</div>
-
-      <div id="modalSource" class="article-source"></div>
-      <div id="modalLinks" class="article-links"></div>
-    </article>
-  </div>
-
-  <div id="pushWidget" class="push-widget" aria-live="polite">
-    <div id="pushWidgetCard" class="push-widget-card">
-      <div class="push-widget-head">
-        <div class="push-widget-bell">🔔</div>
-        <div class="push-widget-title">
-          <strong>Benachrichtigungen</strong>
-          <span>DAR AL TAWḤID</span>
-        </div>
-      </div>
-      <div class="push-widget-text">
-        <strong>As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</strong><br>
-        Aktiviere Benachrichtigungen und erhalte neue Beiträge direkt auf dein Gerät.
-      </div>
-      <div class="push-widget-actions">
-        <button id="pushEnableBtn" class="push-widget-btn" type="button">🔔 Aktivieren</button>
-        <button id="pushDismissBtn" class="push-widget-ghost" type="button">Später</button>
-      </div>
-    </div>
-
-    <div id="pushActivePanel" class="push-active-panel">
-      <strong style="color:#ddffd8">✅ Benachrichtigungen aktiv</strong>
-      <div style="color:var(--muted);font-size:13px;line-height:1.45;margin-top:5px">
-        Du erhältst neue Beiträge von DAR AL TAWḤID direkt auf dein Gerät.
-      </div>
-      <div class="push-widget-actions">
-        <button id="pushDisableBtn" class="push-widget-ghost" type="button">Deaktivieren</button>
-        <button id="pushCloseBtn" class="push-widget-ghost" type="button">Schließen</button>
-      </div>
-    </div>
-
-    <button id="pushFloatBtn" class="push-float-btn" type="button" aria-label="Benachrichtigungen">
-      <span class="mini-bell">🔔</span>
-      <span id="pushFloatLabel">Benachrichtigungen</span>
-    </button>
-  </div>
-
-  <footer class="site">
+  <footer class="footer">
     <strong>DAR AL TAWḤID</strong><br>
     Folgt für mehr Wissen aus Qurʾān & Sunnah
     <div class="footer-socials">
       <span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
-          <path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/>
-        </svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>
         Telegram
       </span>
       <span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <defs>
-            <linearGradient id="igFooter" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#feda75"/>
-              <stop offset="35%" stop-color="#fa7e1e"/>
-              <stop offset="65%" stop-color="#d62976"/>
-              <stop offset="100%" stop-color="#4f5bd5"/>
-            </linearGradient>
-          </defs>
-          <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFooter)"/>
-          <circle cx="12" cy="12" r="4.35" fill="none" stroke="#fff" stroke-width="2"/>
-          <circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/>
-        </svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igFoot" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFoot)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg>
         Instagram
       </span>
     </div>
     <span class="signature">by Serhat Abu Malik</span>
   </footer>
+</div>
 
-  <script>
-    const REPO_OWNER = "Sero91ak";
-    const REPO_NAME = "dar-al-tawhid-site";
-    const POSTS_DIR = "content/posts";
-    const BRANCH = "main";
-    const REPORT_EMAIL = "dar.al.tauhid91@gmail.com";
+<button id="pushFloat" class="push-float" type="button" aria-label="Benachrichtigungen">🔔</button>
 
-    const VIEW_KEY = "darPostViewsV2";
-    const SAVE_KEY = "darSavedPostsV2";
-    const CACHE_KEY = "darCachedPostsV2";
+<script>
+const REPO_OWNER = "Sero91ak";
+const REPO_NAME = "dar-al-tawhid-site";
+const POSTS_DIR = "content/posts";
+const BRANCH = "main";
 
-    let posts = [];
-    let currentPost = null;
-    let currentPage = "home";
-    let pageMode = null;
-    let currentFilter = null;
+const CACHE_KEY = "darCachedPostsV3";
+const SAVE_KEY = "darSavedPostsV3";
 
-    const $ = id => document.getElementById(id);
+let posts = [];
+let currentRoute = {view:"home", value:""};
 
-    function esc(s){
-      return String(s ?? "").replace(/[&<>"']/g, m => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[m]));
-    }
+const $ = id => document.getElementById(id);
 
-    function stripMd(s){
-      return String(s ?? "")
-        .replace(/^>\s?/gm,"")
-        .replace(/\*\*\*(.*?)\*\*\*/g,"$1")
-        .replace(/\*\*(.*?)\*\*/g,"$1")
-        .replace(/\*(.*?)\*/g,"$1")
-        .replace(/<[^>]+>/g,"")
-        .trim();
-    }
+function esc(value){
+  return String(value ?? "").replace(/[&<>"']/g, m => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[m]));
+}
 
-    function formatText(raw){
-      return esc(raw)
-        .replace(/^&gt;\s?/gm,"")
-        .replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>")
-        .replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>")
-        .replace(/\*(.*?)\*/g,"<em>$1</em>")
-        .replace(/\n/g,"<br>");
-    }
+function stripMd(value){
+  return String(value ?? "")
+    .replace(/\*\*\*(.*?)\*\*\*/g,"$1")
+    .replace(/\*\*(.*?)\*\*/g,"$1")
+    .replace(/\*(.*?)\*/g,"$1")
+    .replace(/<[^>]+>/g,"");
+}
 
-    function getJsonStore(key,fallback){
-      try{
-        return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
-      }catch(e){
-        return fallback;
+function formatText(raw){
+  return esc(raw)
+    .replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>")
+    .replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g,"<em>$1</em>")
+    .replace(/\n/g,"<br>");
+}
+
+function getJson(key, fallback){
+  try{
+    return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
+  }catch(e){
+    return fallback;
+  }
+}
+
+function setJson(key, value){
+  try{
+    localStorage.setItem(key, JSON.stringify(value));
+  }catch(e){}
+}
+
+function cleanBodyText(body){
+  let s = String(body || "");
+
+  s = s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi, "");
+  s = s.replace(/^\s*https?:\/\/\S+\s*$/gmi, "");
+  s = s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, "$1");
+  s = s.replace(/https?:\/\/\S+/g, "");
+  s = s.replace(/\n{3,}/g, "\n\n").trim();
+
+  return s;
+}
+
+function parseValue(v){
+  v = String(v || "").trim();
+  if((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))){
+    return v.slice(1,-1);
+  }
+  return v;
+}
+
+function parseFrontMatter(md, filename){
+  let fm = {};
+  let body = md;
+
+  const match = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+
+  if(match){
+    body = match[2] || "";
+    const yaml = match[1];
+    const lines = yaml.split(/\r?\n/);
+    let current = null;
+
+    for(const line of lines){
+      const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+      if(keyMatch){
+        current = keyMatch[1];
+        const val = keyMatch[2].trim();
+        fm[current] = val === "" ? [] : parseValue(val);
+        continue;
+      }
+
+      const arrayMatch = line.match(/^\s*-\s*(.*)$/);
+      if(arrayMatch && current){
+        if(!Array.isArray(fm[current])) fm[current] = [];
+        fm[current].push(parseValue(arrayMatch[1]));
       }
     }
 
-    function setJsonStore(key,value){
-      try{
-        localStorage.setItem(key,JSON.stringify(value));
-      }catch(e){}
-    }
+    const linksBlock = yaml.match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);
+    if(linksBlock){
+      const links = [];
+      let item = null;
 
-    function parseValue(v){
-      v = String(v || "").trim();
-      if((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))){
-        return v.slice(1,-1);
-      }
-      return v;
-    }
-
-    function cleanBodyText(body){
-      let s = String(body || "");
-      s = s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi,"");
-      s = s.replace(/^\s*https?:\/\/\S+\s*$/gmi,"");
-      s = s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g,"$1");
-      s = s.replace(/https?:\/\/\S+/g,"");
-      s = s.replace(/\n{3,}/g,"\n\n").trim();
-      return s;
-    }
-
-    function parseFrontmatter(md,name){
-      let fm = {};
-      let body = md;
-      const match = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-
-      if(match){
-        body = match[2] || "";
-        const raw = match[1];
-        const lines = raw.split(/\r?\n/);
-        let current = null;
-        let linkItem = null;
-
-        for(const line of lines){
-          const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-          if(keyMatch){
-            current = keyMatch[1];
-            const val = keyMatch[2].trim();
-            if(current === "links"){
-              fm.links = [];
-            }else if(val === ""){
-              fm[current] = [];
-            }else{
-              fm[current] = parseValue(val);
-            }
-            linkItem = null;
-            continue;
-          }
-
-          const arrMatch = line.match(/^\s*-\s*(.*)$/);
-          if(arrMatch && current){
-            const val = arrMatch[1];
-
-            if(current === "links"){
-              const labelMatch = val.match(/^label:\s*(.*)$/);
-              if(labelMatch){
-                linkItem = {label:parseValue(labelMatch[1]),url:""};
-                fm.links.push(linkItem);
-              }
-              continue;
-            }
-
-            if(!Array.isArray(fm[current])) fm[current] = [];
-            fm[current].push(parseValue(val));
-            continue;
-          }
-
-          if(current === "links" && linkItem){
-            const urlMatch = line.match(/^\s*url:\s*(.*)$/);
-            const labelMatch = line.match(/^\s*label:\s*(.*)$/);
-            if(urlMatch) linkItem.url = parseValue(urlMatch[1]);
-            if(labelMatch) linkItem.label = parseValue(labelMatch[1]);
-          }
-        }
-      }
-
-      const tags = Array.isArray(fm.tags)
-        ? fm.tags
-        : (fm.tags ? String(fm.tags).split(/[ ,]+/).filter(Boolean) : []);
-
-      return {
-        id: fm.id || name.replace(/\.md$/,""),
-        date: fm.date || "",
-        title: fm.title || name.replace(/\.md$/,""),
-        category: fm.category || "Beiträge",
-        topic: fm.topic || fm.category || "Allgemein",
-        scholar: fm.scholar || "",
-        book: fm.book || "",
-        tags,
-        source: fm.source || "",
-        links: Array.isArray(fm.links) ? fm.links : [],
-        statement: cleanBodyText(body)
-      };
-    }
-
-    async function loadPosts(){
-      const api = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;
-
-      try{
-        const res = await fetch(api,{cache:"no-store"});
-        if(!res.ok) throw new Error("GitHub API konnte content/posts nicht laden.");
-
-        const files = await res.json();
-        const mdFiles = files.filter(f => f.type === "file" && f.name.endsWith(".md"));
-
-        posts = await Promise.all(mdFiles.map(async file => {
-          const raw = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${file.name}`;
-          const r = await fetch(raw,{cache:"no-store"});
-          return parseFrontmatter(await r.text(),file.name);
-        }));
-
-        posts = posts.map(p => ({...p,statement:cleanBodyText(p.statement)}));
-        posts.sort((a,b) => String(b.date).localeCompare(String(a.date)));
-        setJsonStore(CACHE_KEY,posts);
-      }catch(e){
-        const cached = getJsonStore(CACHE_KEY,[]);
-        if(cached && cached.length){
-          posts = cached;
+      linksBlock[1].split(/\r?\n/).forEach(line => {
+        let labelMatch = line.match(/^\s*-\s*label:\s*(.*)$/);
+        if(labelMatch){
+          item = {label:parseValue(labelMatch[1]), url:""};
+          links.push(item);
           return;
         }
-        throw e;
-      }
-    }
 
-    function countBy(key){
-      const map = new Map();
-      posts.forEach(p => {
-        const value = p[key] || "Unbekannt";
-        map.set(value,(map.get(value) || 0) + 1);
+        let urlMatch = line.match(/^\s*url:\s*(.*)$/);
+        if(urlMatch && item){
+          item.url = parseValue(urlMatch[1]);
+        }
       });
-      return map;
+
+      if(links.length) fm.links = links;
+    }
+  }
+
+  const tags = Array.isArray(fm.tags)
+    ? fm.tags
+    : fm.tags
+      ? String(fm.tags).split(/[ ,]+/).filter(Boolean)
+      : [];
+
+  return {
+    id: fm.id || filename.replace(/\.md$/,""),
+    date: fm.date || "",
+    title: fm.title || filename.replace(/\.md$/,""),
+    category: fm.category || "Beiträge",
+    topic: fm.topic || fm.category || "Allgemein",
+    scholar: fm.scholar || "",
+    book: fm.book || "",
+    tags,
+    source: fm.source || "",
+    links: Array.isArray(fm.links) ? fm.links : [],
+    statement: cleanBodyText(body)
+  };
+}
+
+async function loadPosts(){
+  const api = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;
+
+  try{
+    const response = await fetch(api, {cache:"no-store"});
+    if(!response.ok) throw new Error("GitHub API konnte content/posts nicht laden.");
+
+    const files = await response.json();
+    const markdownFiles = files.filter(file => file.type === "file" && file.name.endsWith(".md"));
+
+    posts = await Promise.all(markdownFiles.map(async file => {
+      const raw = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${file.name}`;
+      const r = await fetch(raw, {cache:"no-store"});
+      return parseFrontMatter(await r.text(), file.name);
+    }));
+
+    posts = posts
+      .map(post => ({...post, statement:cleanBodyText(post.statement)}))
+      .sort((a,b) => String(b.date).localeCompare(String(a.date)));
+
+    setJson(CACHE_KEY, posts);
+  }catch(error){
+    const cached = getJson(CACHE_KEY, []);
+    if(cached.length){
+      posts = cached;
+      return;
     }
 
-    function countTags(){
-      const map = new Map();
-      posts.forEach(p => (p.tags || []).forEach(t => map.set(t,(map.get(t) || 0) + 1)));
-      return map;
-    }
+    throw error;
+  }
+}
 
-    function savedIds(){
-      return getJsonStore(SAVE_KEY,[]);
-    }
+function countBy(key){
+  const map = new Map();
 
-    function isSaved(id){
-      return savedIds().includes(id);
-    }
+  posts.forEach(post => {
+    const value = post[key] || "Unbekannt";
+    map.set(value, (map.get(value) || 0) + 1);
+  });
 
-    function toggleSaved(id){
-      let ids = savedIds();
-      if(ids.includes(id)) ids = ids.filter(x => x !== id);
-      else ids.unshift(id);
-      setJsonStore(SAVE_KEY,ids.slice(0,100));
-    }
+  return map;
+}
 
-    function viewCounts(){
-      return getJsonStore(VIEW_KEY,{});
-    }
+function savedIds(){
+  return getJson(SAVE_KEY, []);
+}
 
-    function incrementView(id){
-      const counts = viewCounts();
-      counts[id] = (counts[id] || 0) + 1;
-      setJsonStore(VIEW_KEY,counts);
-    }
+function isSaved(id){
+  return savedIds().includes(id);
+}
 
-    function getQuote(p){
-      const lines = stripMd(p.statement || "").split("\n").map(x => x.trim()).filter(Boolean);
-      const quoteLine = lines.find(x => x.includes("„")) || lines[0] || "";
-      return quoteLine;
-    }
+function toggleSaved(id){
+  let list = savedIds();
 
-    function postMatchesSearch(p,query){
-      const q = String(query || "").trim().toLowerCase();
-      if(!q) return true;
-      const hay = [
-        p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags || []).join(" ")
-      ].join(" ").toLowerCase();
-      return hay.includes(q);
-    }
+  if(list.includes(id)){
+    list = list.filter(x => x !== id);
+  }else{
+    list.unshift(id);
+  }
 
-    function renderStats(){
-      $("countPosts").textContent = posts.length;
-      $("countTopics").textContent = countBy("category").size;
-      $("countScholars").textContent = countBy("scholar").size;
-      $("countBooks").textContent = countBy("book").size;
+  setJson(SAVE_KEY, list.slice(0,100));
+}
 
-      $("topicFolderCount").textContent = countBy("category").size + " Themen";
-      $("scholarFolderCount").textContent = countBy("scholar").size + " Gelehrte";
-      $("bookFolderCount").textContent = countBy("book").size + " Werke";
-      $("latestFolderCount").textContent = posts.length + " Beiträge";
-      $("savedFolderCount").textContent = savedIds().length + " gespeichert";
-    }
+function postUrl(post){
+  const url = new URL(location.origin + location.pathname);
+  url.hash = `post/${encodeURIComponent(post.id)}`;
+  return url.toString();
+}
 
-    function createPostCard(p){
-      const article = document.createElement("article");
-      article.className = "post-card";
+function routeToHash(view, value=""){
+  if(value) return `#${view}/${encodeURIComponent(value)}`;
+  return `#${view}`;
+}
 
-      article.innerHTML = `
-        <div>
-          <h3 class="post-title">📖 ${esc(p.title || "")}</h3>
-          <div class="post-meta">
-            <span class="pill">${esc(p.category || "Beiträge")}</span>
-            <span class="pill">${esc(p.scholar || p.topic || "Unbekannt")}</span>
-          </div>
-          <p class="quote">&gt; ${esc(getQuote(p))}</p>
+function navigate(view, value=""){
+  location.hash = routeToHash(view, value);
+}
+
+function readRoute(){
+  const hash = decodeURIComponent((location.hash || "#home").replace(/^#/,""));
+  const parts = hash.split("/");
+  return {
+    view: parts[0] || "home",
+    value: parts.slice(1).join("/") || ""
+  };
+}
+
+function parentRoute(route){
+  if(route.view === "topic") return {view:"topics"};
+  if(route.view === "scholar") return {view:"scholars"};
+  if(route.view === "book") return {view:"books"};
+  if(route.view === "post") return {view:"home"};
+  if(route.view !== "home") return {view:"home"};
+  return {view:"home"};
+}
+
+function setHeader(title, desc, eyebrow="DAR AL TAWḤID"){
+  return `
+    <div class="view-head">
+      <div class="eyebrow">${esc(eyebrow)}</div>
+      <h2>${esc(title)}</h2>
+      ${desc ? `<div class="view-desc">${esc(desc)}</div>` : ""}
+    </div>
+  `;
+}
+
+function findQuote(post){
+  const lines = stripMd(post.statement).split(/\n+/).map(x => x.trim()).filter(Boolean);
+  return lines.find(x => x.includes("„")) || lines[0] || "";
+}
+
+function postCard(post){
+  return `
+    <article class="post-card" data-nav="post" data-value="${esc(post.id)}">
+      <div>
+        <h3>${esc(post.title)}</h3>
+        <div class="post-meta">
+          ${post.category ? `<span class="badge">${esc(post.category)}</span>` : ""}
+          ${post.scholar ? `<span class="badge">${esc(post.scholar)}</span>` : ""}
         </div>
-        <div>
-          <div class="source">📝 ${esc(p.source || "Quelle wird angezeigt, wenn sie im Beitrag hinterlegt ist.")}</div>
-          <button class="open-post" type="button">Beitrag öffnen</button>
+        <div class="excerpt">${esc(findQuote(post))}</div>
+      </div>
+      <div class="source-preview">${esc(post.source || "")}</div>
+    </article>
+  `;
+}
+
+function listCard(title, count, view, value, icon="📁"){
+  return `
+    <article class="list-card" data-nav="${esc(view)}" data-value="${esc(value)}">
+      <div class="folder-icon">${icon}</div>
+      <h3>${esc(title)}</h3>
+      <div class="count">${count} Beiträge öffnen</div>
+    </article>
+  `;
+}
+
+function renderOverview(){
+  const topics = countBy("category").size;
+  const scholars = [...countBy("scholar").keys()].filter(x => x && x !== "Unbekannt").length;
+  const books = [...countBy("book").keys()].filter(x => x && x !== "Unbekannt").length;
+
+  return `
+    <section class="overview-panel">
+      <div class="overview-title">
+        <h3>Übersicht</h3>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><b>${posts.length}</b><span>Beiträge</span></div>
+        <div class="stat-card"><b>${topics}</b><span>Themen</span></div>
+        <div class="stat-card"><b>${scholars}</b><span>Gelehrte</span></div>
+        <div class="stat-card"><b>${books}</b><span>Bücher</span></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHome(){
+  const categoryCount = countBy("category").size;
+  const scholarCount = [...countBy("scholar").keys()].filter(x => x && x !== "Unbekannt").length;
+  const bookCount = [...countBy("book").keys()].filter(x => x && x !== "Unbekannt").length;
+  const savedCount = savedIds().length;
+  const latest = posts.slice(0,4);
+
+  return `
+    ${setHeader(
+      "Startseite",
+      "Alles ist jetzt in Ordnern aufgebaut. Öffne Themen, Gelehrte oder Bücher jeweils als eigene Seite mit Zurückbutton.",
+      "App-Übersicht"
+    )}
+
+    ${renderOverview()}
+
+    <section class="main-search">
+      <input id="homeSearchInput" class="search" type="search" placeholder="Suche nach Beitrag, Thema, Gelehrtem, Buch oder Quelle…">
+    </section>
+
+    <section id="homeSearchBlock" class="section-block" style="display:none">
+      <div class="section-head">
+        <h3>Suchergebnisse</h3>
+        <span id="homeSearchCount">0 Treffer</span>
+      </div>
+      <div id="homeSearchResults" class="post-grid"></div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h3>Neueste Beiträge</h3>
+        <span>${latest.length} aktuell angezeigt</span>
+      </div>
+      <div class="latest-grid">
+        ${latest.length ? latest.map(postCard).join("") : `<div class="empty">Noch keine Beiträge vorhanden.</div>`}
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h3>Ordner</h3>
+        <span>strukturiert öffnen</span>
+      </div>
+
+      <div class="folder-grid">
+        <article class="folder-card" data-nav="topics">
+          <div class="folder-icon">📚</div>
+          <h3>Themen</h3>
+          <p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche.</p>
+          <div class="folder-meta"><span>${categoryCount} Bereiche</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="scholars">
+          <div class="folder-icon">👤</div>
+          <h3>Gelehrte</h3>
+          <p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p>
+          <div class="folder-meta"><span>${scholarCount} Namen</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="books">
+          <div class="folder-icon">📖</div>
+          <h3>Bücher</h3>
+          <p>Beiträge direkt nach verwendeten Werken und Quellen.</p>
+          <div class="folder-meta"><span>${bookCount} Werke</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="recent">
+          <div class="folder-icon">🆕</div>
+          <h3>Alle neuesten</h3>
+          <p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p>
+          <div class="folder-meta"><span>${posts.length} Beiträge</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="saved">
+          <div class="folder-icon">♡</div>
+          <h3>Gespeichert</h3>
+          <p>Beiträge, die lokal auf dem Gerät gespeichert wurden.</p>
+          <div class="folder-meta"><span>${savedCount} gespeichert</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="about">
+          <div class="folder-icon">⚖️</div>
+          <h3>Über die App</h3>
+          <p>Maßstab, Quellenordnung und Aufbau der Seite.</p>
+          <div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div>
+        </article>
+      </div>
+    </section>
+  `;
+}
+
+function renderTopics(){
+  const map = countBy("category");
+  const items = [...map.entries()].sort((a,b) => a[0].localeCompare(b[0],"de"));
+
+  return `
+    ${setHeader(
+      "Themen",
+      "Wähle ein Thema. Danach öffnet sich eine eigene Themen-Seite mit nur den passenden Beiträgen.",
+      "Ordner"
+    )}
+
+    <section class="grid-list">
+      ${items.length ? items.map(([name,count]) => listCard(name, count, "topic", name, "📚")).join("") : `<div class="empty">Noch keine Themen erkannt.</div>`}
+    </section>
+  `;
+}
+
+function renderScholars(){
+  const map = countBy("scholar");
+  const items = [...map.entries()]
+    .filter(([name]) => name && name !== "Unbekannt")
+    .sort((a,b) => a[0].localeCompare(b[0],"de"));
+
+  return `
+    ${setHeader(
+      "Gelehrte",
+      "Wähle einen Namen. Danach öffnet sich eine eigene Ansicht mit den Beiträgen dieser Person.",
+      "Ordner"
+    )}
+
+    <section class="grid-list">
+      ${items.length ? items.map(([name,count]) => listCard(name, count, "scholar", name, "👤")).join("") : `<div class="empty">Noch keine Gelehrten erkannt.</div>`}
+    </section>
+  `;
+}
+
+function renderBooks(){
+  const map = countBy("book");
+  const items = [...map.entries()]
+    .filter(([name]) => name && name !== "Unbekannt")
+    .sort((a,b) => a[0].localeCompare(b[0],"de"));
+
+  return `
+    ${setHeader(
+      "Bücher",
+      "Wähle ein Werk. Danach erscheinen nur die Beiträge aus diesem Buch oder dieser Quelle.",
+      "Ordner"
+    )}
+
+    <section class="grid-list">
+      ${items.length ? items.map(([name,count]) => listCard(name, count, "book", name, "📖")).join("") : `<div class="empty">Noch keine Bücher erkannt.</div>`}
+    </section>
+  `;
+}
+
+function renderFiltered(type, value){
+  const filtered = posts.filter(post => String(post[type] || "") === String(value));
+
+  const titleMap = {
+    category:"Thema",
+    scholar:"Gelehrter",
+    book:"Buch"
+  };
+
+  return `
+    ${setHeader(
+      value,
+      `${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,
+      titleMap[type] || "Auswahl"
+    )}
+
+    <section class="post-grid">
+      ${filtered.length ? filtered.map(postCard).join("") : `<div class="empty">Keine Beiträge gefunden.</div>`}
+    </section>
+  `;
+}
+
+function renderRecent(){
+  const latest = posts.slice(0,60);
+
+  return `
+    ${setHeader(
+      "Neueste Beiträge",
+      "Die neuesten Beiträge aus content/posts, sortiert nach Datum.",
+      "Aktuell"
+    )}
+
+    <section class="post-grid">
+      ${latest.length ? latest.map(postCard).join("") : `<div class="empty">Noch keine Beiträge vorhanden.</div>`}
+    </section>
+  `;
+}
+
+function renderSaved(){
+  const ids = savedIds();
+  const saved = ids.map(id => posts.find(post => String(post.id) === String(id))).filter(Boolean);
+
+  return `
+    ${setHeader(
+      "Gespeicherte Beiträge",
+      "Diese Liste wird lokal auf dem Gerät des Besuchers gespeichert.",
+      "Favoriten"
+    )}
+
+    <section class="post-grid">
+      ${saved.length ? saved.map(postCard).join("") : `<div class="empty">Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.</div>`}
+    </section>
+  `;
+}
+
+function renderAbout(){
+  return `
+    ${setHeader(
+      "Über diese App",
+      "DAR AL TAWḤID soll eine geordnete Wissens-App sein – nicht eine unübersichtliche Sammelseite.",
+      "Maßstab"
+    )}
+
+    <section class="about-grid">
+      <article class="info-card">
+        <h3>Qurʾān zuerst</h3>
+        <p>Der Qurʾān ist der oberste Maßstab für Glauben, Wahrheit und Rechtleitung.</p>
+      </article>
+
+      <article class="info-card">
+        <h3>Dann Sunnah</h3>
+        <p>Die authentische Sunnah erklärt, bestätigt und verdeutlicht die Offenbarung.</p>
+      </article>
+
+      <article class="info-card">
+        <h3>Dann Āthār</h3>
+        <p>Aussagen der Ṣaḥābah, Tābiʿīn und frühen Imāme werden besonders berücksichtigt.</p>
+      </article>
+
+      <article class="info-card">
+        <h3>Quellen vor Meinung</h3>
+        <p>Keine ungenauen Zitate, keine falsche Zuschreibung und keine Quelle ohne Kontrolle.</p>
+      </article>
+    </section>
+  `;
+}
+
+function renderPost(id){
+  const post = posts.find(p => String(p.id) === String(id));
+
+  if(!post){
+    return `
+      ${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}
+      <div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>
+    `;
+  }
+
+  const links = (post.links || []).map(link => {
+    const label = link.label || "Quelle";
+    const url = link.url || link;
+    return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  }).join("");
+
+  return `
+    <article class="article">
+      <div class="article-title">
+        <div class="eyebrow">Beitrag</div>
+        <h2>${esc(post.title)}</h2>
+      </div>
+
+      <div class="article-meta">
+        ${post.category ? `<span class="badge">${esc(post.category)}</span>` : ""}
+        ${post.scholar ? `<span class="badge">${esc(post.scholar)}</span>` : ""}
+        ${post.book ? `<span class="badge">${esc(post.book)}</span>` : ""}
+        ${post.topic ? `<span class="badge">${esc(post.topic)}</span>` : ""}
+      </div>
+
+      <section class="statement">${formatText(post.statement || "")}</section>
+
+      <div class="article-actions">
+        <button id="saveBtn" class="action-btn ${isSaved(post.id) ? "active" : ""}" type="button">${isSaved(post.id) ? "♥ Gespeichert" : "♡ Speichern"}</button>
+        <button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button>
+        <button id="reportBtn" class="action-btn" type="button">Fehler melden</button>
+      </div>
+
+      <div class="source-box">
+        ${esc(post.source || "Keine Quelle hinterlegt.")}
+        <div class="link-row">
+          ${links || ""}
         </div>
-      `;
+      </div>
+    </article>
+  `;
+}
 
-      article.querySelector(".open-post").onclick = () => openPost(p);
-      article.onclick = e => {
-        if(e.target.tagName.toLowerCase() !== "button") openPost(p);
-      };
+function updateChrome(route){
+  const backBtn = $("backBtn");
+  const crumb = $("crumb");
 
-      return article;
-    }
+  if(route.view === "home"){
+    backBtn.classList.remove("show");
+    crumb.textContent = "Startseite";
+    return;
+  }
 
-    function renderPostGrid(root,list){
-      root.innerHTML = "";
-      if(!list.length){
-        root.innerHTML = '<div class="empty">Keine passenden Beiträge gefunden.</div>';
+  backBtn.classList.add("show");
+
+  const labels = {
+    topics:"Startseite / Themen",
+    scholars:"Startseite / Gelehrte",
+    books:"Startseite / Bücher",
+    recent:"Startseite / Neueste Beiträge",
+    saved:"Startseite / Gespeichert",
+    about:"Startseite / Über diese App",
+    topic:`Startseite / Themen / ${route.value}`,
+    scholar:`Startseite / Gelehrte / ${route.value}`,
+    book:`Startseite / Bücher / ${route.value}`,
+    post:"Startseite / Beitrag"
+  };
+
+  crumb.textContent = labels[route.view] || "Startseite";
+}
+
+function render(){
+  currentRoute = readRoute();
+  updateChrome(currentRoute);
+
+  let html = "";
+
+  if(currentRoute.view === "home") html = renderHome();
+  else if(currentRoute.view === "topics") html = renderTopics();
+  else if(currentRoute.view === "scholars") html = renderScholars();
+  else if(currentRoute.view === "books") html = renderBooks();
+  else if(currentRoute.view === "topic") html = renderFiltered("category", currentRoute.value);
+  else if(currentRoute.view === "scholar") html = renderFiltered("scholar", currentRoute.value);
+  else if(currentRoute.view === "book") html = renderFiltered("book", currentRoute.value);
+  else if(currentRoute.view === "recent") html = renderRecent();
+  else if(currentRoute.view === "saved") html = renderSaved();
+  else if(currentRoute.view === "about") html = renderAbout();
+  else if(currentRoute.view === "post") html = renderPost(currentRoute.value);
+  else html = renderHome();
+
+  $("appView").innerHTML = html;
+  bindEvents();
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function bindEvents(){
+  document.querySelectorAll("[data-nav]").forEach(el => {
+    el.onclick = () => {
+      const view = el.getAttribute("data-nav");
+      const value = el.getAttribute("data-value") || "";
+      navigate(view, value);
+    };
+  });
+
+  const homeSearchInput = $("homeSearchInput");
+  const homeSearchBlock = $("homeSearchBlock");
+  const homeSearchResults = $("homeSearchResults");
+  const homeSearchCount = $("homeSearchCount");
+
+  if(homeSearchInput && homeSearchBlock && homeSearchResults && homeSearchCount){
+    homeSearchInput.oninput = () => {
+      const q = homeSearchInput.value.trim().toLowerCase();
+
+      if(!q){
+        homeSearchBlock.style.display = "none";
+        homeSearchResults.innerHTML = "";
+        homeSearchCount.textContent = "0 Treffer";
         return;
       }
-      list.forEach(p => root.appendChild(createPostCard(p)));
+
+      const filtered = posts.filter(post => {
+        const haystack = [
+          post.title,
+          post.category,
+          post.topic,
+          post.scholar,
+          post.book,
+          post.source,
+          post.statement,
+          (post.tags || []).join(" ")
+        ].join(" ").toLowerCase();
+
+        return haystack.includes(q);
+      });
+
+      homeSearchBlock.style.display = "block";
+      homeSearchCount.textContent = `${filtered.length} Treffer`;
+      homeSearchResults.innerHTML = filtered.length
+        ? filtered.map(postCard).join("")
+        : `<div class="empty">Keine passenden Beiträge gefunden.</div>`;
+
+      bindEvents();
+    };
+  }
+
+  const saveBtn = $("saveBtn");
+  if(saveBtn && currentRoute.view === "post"){
+    saveBtn.onclick = () => {
+      toggleSaved(currentRoute.value);
+      render();
+    };
+  }
+
+  const shareBtn = $("shareBtn");
+  if(shareBtn && currentRoute.view === "post"){
+    shareBtn.onclick = async () => {
+      const post = posts.find(p => String(p.id) === String(currentRoute.value));
+      if(!post) return;
+
+      const text = `${post.title}\n\n${stripMd(post.statement)}\n\n${postUrl(post)}`;
+
+      if(navigator.share){
+        try{
+          await navigator.share({
+            title: post.title,
+            text,
+            url: postUrl(post)
+          });
+          return;
+        }catch(e){}
+      }
+
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Beitrag-Link wurde kopiert.");
+      }catch(e){
+        prompt("Kopiere den Beitrag:", text);
+      }
+    };
+  }
+
+  const reportBtn = $("reportBtn");
+  if(reportBtn && currentRoute.view === "post"){
+    reportBtn.onclick = () => {
+      const post = posts.find(p => String(p.id) === String(currentRoute.value));
+      if(!post) return;
+
+      const subject = encodeURIComponent("Fehler melden: " + post.title);
+      const body = encodeURIComponent(
+        "As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n" +
+        post.title + "\n" +
+        postUrl(post) +
+        "\n\nHinweis:\n"
+      );
+
+      location.href = `mailto:dar.al.tauhid91@gmail.com?subject=${subject}&body=${body}`;
+    };
+  }
+}
+
+$("backBtn").onclick = () => {
+  const parent = parentRoute(currentRoute);
+  navigate(parent.view, parent.value || "");
+};
+
+window.addEventListener("hashchange", render);
+
+window.addEventListener("load", async () => {
+  try{
+    await loadPosts();
+
+    if(!location.hash){
+      location.hash = "#home";
+    }else{
+      render();
+    }
+  }catch(error){
+    console.error(error);
+    $("appView").innerHTML = `
+      ${setHeader("Beiträge konnten nicht geladen werden","Prüfe, ob das Repository öffentlich ist und ob Markdown-Dateien unter content/posts liegen.","Fehler")}
+      <div class="error">GitHub konnte die Beiträge nicht laden.</div>
+    `;
+  }
+});
+</script>
+
+<script>
+(function(){
+  const pushBtn = document.getElementById("pushFloat");
+  if(!pushBtn) return;
+
+  async function waitForOneSignal(timeoutMs){
+    const start = Date.now();
+    while(Date.now() - start < (timeoutMs || 8000)){
+      try{
+        if(window.OneSignal && window.DAR_ONE_SIGNAL_READY) return window.OneSignal;
+      }catch(e){}
+      await new Promise(resolve => setTimeout(resolve,180));
+    }
+    return window.OneSignal || null;
+  }
+
+  pushBtn.addEventListener("click", async function(){
+    const permission = window.Notification ? Notification.permission : "default";
+
+    if(permission === "denied"){
+      alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");
+      return;
     }
 
-    function renderLatestHome(){
-      const latest = posts.slice(0,4);
-      $("
+    const OneSignal = await waitForOneSignal();
+
+    try{
+      if(OneSignal && OneSignal.Notifications && typeof OneSignal.Notifications.requestPermission === "function"){
+        await OneSignal.Notifications.requestPermission();
+      }else if(window.Notification && typeof Notification.requestPermission === "function"){
+        await Notification.requestPermission();
+      }
+    }catch(e){
+      console.error(e);
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  function applyAppMode(){
+    const isStandalone =
+      (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+      window.navigator.standalone === true ||
+      document.referrer.startsWith("android-app://");
+
+    document.body.classList.toggle("pwa-installed", isStandalone);
+
+    try{
+      document.documentElement.style.setProperty("--real-vw", window.innerWidth + "px");
+      document.documentElement.style.setProperty("--real-vh", window.innerHeight + "px");
+    }catch(e){}
+  }
+
+  window.addEventListener("load", applyAppMode);
+  window.addEventListener("resize", applyAppMode);
+  window.addEventListener("orientationchange", () => {
+    setTimeout(applyAppMode,120);
+    setTimeout(applyAppMode,450);
+  });
+})();
+</script>
+
+</body>
+</html>
