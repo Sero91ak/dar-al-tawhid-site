@@ -107,10 +107,28 @@ h1{font-size:clamp(40px,5vw,78px);letter-spacing:.105em;max-width:100%;overflow:
 /* As-Salāmu-Zeile soll eine Zeile bleiben */
 .salam{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+
+.direct-pick-panel{border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.10),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));padding:13px;margin:0 0 13px}
+.direct-pick-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.direct-pick-title h3{font-family:var(--serif);color:var(--gold2);font-size:23px;line-height:1.08;margin:0}
+.direct-pick-title span{color:var(--muted);font-size:11px;font-weight:850}
+.direct-pick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.direct-pick{height:44px;border:1px solid var(--line);border-radius:15px;background:#090907;color:var(--cream);padding:0 11px;outline:none;font-size:13px;font-weight:850}
+.direct-pick:focus{border-color:rgba(239,215,142,.58);box-shadow:0 0 0 4px rgba(239,215,142,.08)}
+
 @media(max-width:980px){.folder-grid,.latest-grid,.grid-list,.post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.header-row{display:block}.socials{justify-content:flex-start;margin-top:14px}.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){body{padding-left:7px;padding-right:7px}.top-shell,.view{border-radius:20px}.header{padding:14px 13px 13px}.brand small{font-size:8px;letter-spacing:.14em;margin-bottom:6px}.brand-main{gap:12px}.logo{width:70px;height:70px;flex-basis:70px}h1{font-size:clamp(28px,8.1vw,40px);letter-spacing:.045em;white-space:nowrap}.socials{display:grid;grid-template-columns:1fr 1fr;gap:8px}.social-link{justify-content:center;padding:10px 9px;font-size:13px;min-width:0;min-height:46px;gap:9px}.social-link svg{width:24px;height:24px;flex-basis:24px}.hero-text{margin-top:10px;padding-top:10px}.salam{font-size:16.5px}.intro{font-size:11.5px;line-height:1.45}.isnad{padding:9px 13px 11px}.isnad-label{font-size:8px}.isnad-quote{font-size:10.2px}.isnad-source{font-size:8.5px}.view{padding:11px;min-height:420px}.view-head{padding-bottom:12px}.view h2{font-size:28px}.view-desc{font-size:11.6px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.stat-card{padding:9px;border-radius:14px}.stat-card b{font-size:19px}.stat-card span{font-size:10px}.folder-grid,.latest-grid,.grid-list,.post-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.about-grid{grid-template-columns:1fr;gap:9px}.folder-card,.post-card,.list-card,.info-card,.dua-card{border-radius:17px;padding:11px}.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-size:18px;line-height:1.08}.folder-card p,.dua-card p{font-size:11px;line-height:1.38}.folder-icon{width:38px;height:38px;border-radius:14px;font-size:18px;margin-bottom:9px}.emoji-emblem{width:25px;height:25px;font-size:21px}.folder-meta{gap:5px;margin-top:9px}.folder-meta span,.badge{font-size:8.4px;padding:4px 6px}.list-card{min-height:118px}.list-card .count,.book-author{font-size:10.5px}.post-card{min-height:185px}.excerpt{font-size:12.8px;line-height:1.32;-webkit-line-clamp:3}.source-preview{font-size:8.5px;margin-top:8px;padding-top:7px}.section-head h3{font-size:21px}.section-head span{font-size:9.5px}.overview-title h3{font-size:21px}.search{height:46px}.quick-actions{grid-template-columns:1fr;gap:7px}.daily-box{border-radius:17px;padding:11px}.daily-title{font-size:20px}.daily-text{font-size:11.5px}.statement,.dua-detail-box{padding:16px;border-radius:19px;font-size:17px;line-height:1.62;text-align:left}.dua-arabic{font-size:24px}.dua-trans,.dua-de{font-size:15px}.article-title{text-align:left}.article-meta,.article-actions,.link-row{justify-content:flex-start}.source-box{text-align:left}.app-bar{margin-bottom:9px}.crumb{font-size:10.5px}}
 @media(max-width:390px){.logo{width:64px;height:64px;flex-basis:64px}h1{font-size:clamp(26px,7.8vw,36px)}.folder-grid,.latest-grid,.grid-list,.post-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.folder-card,.post-card,.list-card{padding:10px}.folder-card h3,.post-card h3,.list-card h3{font-size:16.5px}.excerpt{font-size:12px}}
 @media(orientation:landscape) and (max-height:620px){.folder-grid,.latest-grid,.grid-list,.post-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.header{padding:10px 14px}.logo{width:76px;height:76px;flex-basis:76px}h1{font-size:clamp(31px,5.8vw,54px)}}
+
+
+.direct-pick-panel{border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.10),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));padding:13px;margin:0 0 13px}
+.direct-pick-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.direct-pick-title h3{font-family:var(--serif);color:var(--gold2);font-size:23px;line-height:1.08;margin:0}
+.direct-pick-title span{color:var(--muted);font-size:11px;font-weight:850}
+.direct-pick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.direct-pick{height:44px;border:1px solid var(--line);border-radius:15px;background:#090907;color:var(--cream);padding:0 11px;outline:none;font-size:13px;font-weight:850}
+.direct-pick:focus{border-color:rgba(239,215,142,.58);box-shadow:0 0 0 4px rgba(239,215,142,.08)}
 
 @media(max-width:980px){
   .header-row{display:block}
@@ -130,6 +148,47 @@ h1{font-size:clamp(40px,5vw,78px);letter-spacing:.105em;max-width:100%;overflow:
   .logo{width:56px!important;height:56px!important;flex-basis:56px!important}
   h1{font-size:clamp(27px,9.1vw,35px)!important;letter-spacing:.018em!important}
   .salam{font-size:12px!important}
+}
+
+
+@media(max-width:700px){
+  .direct-pick-grid{grid-template-columns:1fr;gap:7px}
+  .direct-pick-panel{border-radius:17px;padding:11px}
+  .direct-pick-title{display:block}
+  .direct-pick-title h3{font-size:20px}
+  .direct-pick-title span{display:block;margin-top:4px;font-size:10px}
+}
+
+
+.calendar-panel{
+  border-color:rgba(255,255,255,.36)!important;
+  background:
+    radial-gradient(circle at 16% 0%,rgba(255,255,255,.20),transparent 36%),
+    radial-gradient(circle at 90% 10%,rgba(239,215,142,.20),transparent 38%),
+    linear-gradient(145deg,rgba(48,44,31,.98),rgba(18,17,13,.98))!important;
+  box-shadow:0 20px 48px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.035)!important;
+}
+.calendar-title h3{color:#fff8dd!important}
+.event-card{
+  border-color:rgba(255,255,255,.24)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.115),rgba(239,215,142,.055))!important;
+}
+.event-soon{
+  border-color:rgba(255,244,190,.78)!important;
+  background:linear-gradient(145deg,rgba(255,244,190,.22),rgba(255,255,255,.08))!important;
+}
+
+
+@media(min-width:981px){
+  .header-row{grid-template-columns:minmax(0,1fr) 168px!important}
+  .socials{width:168px!important}
+  .social-link{min-width:168px!important}
+  h1{font-size:clamp(40px,4.45vw,72px)!important;letter-spacing:.095em!important}
+}
+@media(max-width:700px){
+  .hijri-header-pill{max-width:52%!important;font-size:8.5px!important}
+  .brand small{max-width:46%!important}
+  h1{font-size:clamp(27px,8.7vw,36px)!important;letter-spacing:.012em!important}
 }
 
 </style>
@@ -156,7 +215,7 @@ OneSignalDeferred.push(async function(OneSignal){
         <div class="brand">
           <div class="brand-kicker-row">
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
-            <button id="hijriHeaderDate" class="hijri-header-pill" type="button" aria-label="Islamischer Kalender">🗓️ Islamischer Kalender</button>
+            <button id="hijriHeaderDate" class="hijri-header-pill" type="button" aria-label="Islamischer Kalender">🗓️ Datum wird geladen…</button>
           </div>
           <div class="brand-main"><img class="logo" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
         </div>
@@ -289,7 +348,41 @@ function getBookAuthor(bookName){const direct=posts.find(post=>String(post.book|
 function bookCard(bookName,count){const author=getBookAuthor(bookName);return`<article class="list-card" data-nav="book" data-value="${esc(bookName)}"><div class="folder-icon">${iconMarkup("book",bookName)}</div><h3>${esc(bookName)}</h3>${author?`<div class="book-author">🖋️ ${esc(author)}</div>`:""}<div class="count">${count} Beiträge öffnen</div></article>`}
 function duaCatMap(){const m=new Map();DUAS.forEach(d=>m.set(d.cat,(m.get(d.cat)||0)+1));return m}
 function renderOverview(){const topics=countBy("category").size;const scholars=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const books=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;return`<section class="overview-panel"><div class="overview-title"><h3>Übersicht</h3></div><div class="stats-grid"><div class="stat-card"><b>${posts.length}</b><span>Beiträge</span></div><div class="stat-card"><b>${topics}</b><span>Themen</span></div><div class="stat-card"><b>${scholars}</b><span>Gelehrte</span></div><div class="stat-card"><b>${DUAS.length}</b><span>Duʿāʾ</span></div></div></section>`}
-function renderHome(){const categoryCount=countBy("category").size;const scholarCount=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const latest=posts.slice(0,4);return`${setHeader("Startseite","Alles ist in Ordnern aufgebaut. Öffne Themen, Gelehrte, Bücher, Duʿāʾ oder den islamischen Kalender jeweils als eigene Seite mit Zurückbutton.","App-Übersicht")}${renderOverview()}${typeof renderMiniCalendar==="function"?renderMiniCalendar():""}${typeof renderRecommendedPost==="function"?renderRecommendedPost():""}${typeof renderDailyDua==="function"?renderDailyDua():""}<section class="quick-actions"><button class="quick-btn" data-nav="duas">🤲 Duʿāʾ öffnen</button><button class="quick-btn" data-nav="topics">📚 Kategorien</button><button class="quick-btn" data-nav="calendar">🗓️ Kalender</button><button class="quick-btn" data-nav="saved">♡ Gespeichert</button><button class="quick-btn" data-nav="recent">🆕 Neueste</button></section><section class="main-search"><input id="homeSearchInput" class="search" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…"></section>${typeof renderFilterPanel==="function"?renderFilterPanel("home"):""}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span></div><div class="latest-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</div></section><section class="section-block"><div class="section-head"><h3>Ordner</h3><span>strukturiert öffnen</span></div><div class="folder-grid"><article class="folder-card" data-nav="duas"><div class="folder-icon">${iconMarkup("duas","Duʿāʾ")}</div><h3>Duʿāʾ</h3><p>Umfangreiche authentische Sammlung aus Qurʾān und Sunnah mit Arabisch, Lautschrift, Deutsch und Quelle.</p><div class="folder-meta"><span>${DUAS.length} Duʿāʾ</span><span>${duaCatMap().size} Kategorien</span></div></article><article class="folder-card" data-nav="topics"><div class="folder-icon">${iconMarkup("topics","Themen Kategorien")}</div><h3>Kategorien</h3><p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche anklickbar auswählen.</p><div class="folder-meta"><span>${categoryCount} Bereiche</span></div></article><article class="folder-card" data-nav="scholars"><div class="folder-icon">${iconMarkup("scholars","Gelehrte")}</div><h3>Gelehrte</h3><p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p><div class="folder-meta"><span>${scholarCount} Namen</span></div></article><article class="folder-card" data-nav="books"><div class="folder-icon">${iconMarkup("books","Bücher")}</div><h3>Bücher</h3><p>Beiträge direkt nach verwendeten Werken und Quellen.</p><div class="folder-meta"><span>${bookCount} Werke</span></div></article><article class="folder-card" data-nav="calendar"><div class="folder-icon"><span class="emoji-emblem" aria-hidden="true">🗓️</span></div><h3>Islamischer Kalender</h3><p>Aktuelle islamische Daten und wichtige Termine automatisch fortlaufend.</p><div class="folder-meta"><span>Hijrī</span><span>Termine</span></div></article><article class="folder-card" data-nav="recent"><div class="folder-icon">${iconMarkup("recent","Alle neuesten")}</div><h3>Alle neuesten</h3><p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p><div class="folder-meta"><span>${posts.length} Beiträge</span></div></article><article class="folder-card" data-nav="saved"><div class="folder-icon">${iconMarkup("saved","Gespeichert")}</div><h3>Gespeichert</h3><p>Deine lokal gespeicherten Beiträge schnell wiederfinden.</p><div class="folder-meta"><span>${savedIds().length} Beiträge</span></div></article><article class="folder-card" data-nav="about"><div class="folder-icon">${iconMarkup("about","Über die App")}</div><h3>Über die App</h3><p>Maßstab, Quellenordnung und Aufbau der Seite.</p><div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div></article></div></section>`}
+
+function getHijriHeaderText(){
+  try{
+    const fmt=new Intl.DateTimeFormat("de-DE-u-ca-islamic",{day:"numeric",month:"long",year:"numeric"});
+    const parts=fmt.formatToParts(new Date());
+    const day=parts.find(p=>p.type==="day")?.value||"";
+    const month=parts.find(p=>p.type==="month")?.value||"";
+    const year=parts.find(p=>p.type==="year")?.value||"";
+    return `🗓️ ${day}. ${month} ${year}`;
+  }catch(e){
+    return "🗓️ Islamisches Datum";
+  }
+}
+function updateHijriHeaderDate(){
+  const el=document.getElementById("hijriHeaderDate");
+  if(!el)return;
+  el.textContent=getHijriHeaderText();
+  el.onclick=()=>navigate("calendar");
+}
+
+function renderDirectPickPanel(){
+  const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  const scholars=uniqueList("scholar").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  return `<section class="direct-pick-panel"><div class="direct-pick-title"><h3>Direkt auswählen</h3><span>Kategorie, Gelehrten oder Buch sofort öffnen</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Kategorie wählen</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrten wählen</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch wählen</option>${books}</select></div></section>`;
+}
+function bindDirectPickPanel(){
+  const c=document.getElementById("directCategory");
+  const s=document.getElementById("directScholar");
+  const b=document.getElementById("directBook");
+  if(c)c.onchange=()=>{if(c.value)navigate("topic",c.value)};
+  if(s)s.onchange=()=>{if(s.value)navigate("scholar",s.value)};
+  if(b)b.onchange=()=>{if(b.value)navigate("book",b.value)};
+}
+function renderHome(){const categoryCount=countBy("category").size;const scholarCount=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const latest=posts.slice(0,4);return`${setHeader("Startseite","Alles ist in Ordnern aufgebaut. Öffne Themen, Gelehrte, Bücher, Duʿāʾ oder den islamischen Kalender jeweils als eigene Seite mit Zurückbutton.","App-Übersicht")}${renderOverview()}${typeof renderMiniCalendar==="function"?renderMiniCalendar():""}${typeof renderRecommendedPost==="function"?renderRecommendedPost():""}${typeof renderDailyDua==="function"?renderDailyDua():""}${renderDirectPickPanel()}<section class="main-search"><input id="homeSearchInput" class="search" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…"></section>${typeof renderFilterPanel==="function"?renderFilterPanel("home"):""}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span></div><div class="latest-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</div></section><section class="section-block"><div class="section-head"><h3>Ordner</h3><span>strukturiert öffnen</span></div><div class="folder-grid"><article class="folder-card" data-nav="duas"><div class="folder-icon">${iconMarkup("duas","Duʿāʾ")}</div><h3>Duʿāʾ</h3><p>Umfangreiche authentische Sammlung aus Qurʾān und Sunnah mit Arabisch, Lautschrift, Deutsch und Quelle.</p><div class="folder-meta"><span>${DUAS.length} Duʿāʾ</span><span>${duaCatMap().size} Kategorien</span></div></article><article class="folder-card" data-nav="topics"><div class="folder-icon">${iconMarkup("topics","Themen Kategorien")}</div><h3>Kategorien</h3><p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche anklickbar auswählen.</p><div class="folder-meta"><span>${categoryCount} Bereiche</span></div></article><article class="folder-card" data-nav="scholars"><div class="folder-icon">${iconMarkup("scholars","Gelehrte")}</div><h3>Gelehrte</h3><p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p><div class="folder-meta"><span>${scholarCount} Namen</span></div></article><article class="folder-card" data-nav="books"><div class="folder-icon">${iconMarkup("books","Bücher")}</div><h3>Bücher</h3><p>Beiträge direkt nach verwendeten Werken und Quellen.</p><div class="folder-meta"><span>${bookCount} Werke</span></div></article><article class="folder-card" data-nav="calendar"><div class="folder-icon"><span class="emoji-emblem" aria-hidden="true">🗓️</span></div><h3>Islamischer Kalender</h3><p>Aktuelle islamische Daten und wichtige Termine automatisch fortlaufend.</p><div class="folder-meta"><span>Hijrī</span><span>Termine</span></div></article><article class="folder-card" data-nav="recent"><div class="folder-icon">${iconMarkup("recent","Alle neuesten")}</div><h3>Alle neuesten</h3><p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p><div class="folder-meta"><span>${posts.length} Beiträge</span></div></article><article class="folder-card" data-nav="saved"><div class="folder-icon">${iconMarkup("saved","Gespeichert")}</div><h3>Gespeichert</h3><p>Deine lokal gespeicherten Beiträge schnell wiederfinden.</p><div class="folder-meta"><span>${savedIds().length} Beiträge</span></div></article><article class="folder-card" data-nav="about"><div class="folder-icon">${iconMarkup("about","Über die App")}</div><h3>Über die App</h3><p>Maßstab, Quellenordnung und Aufbau der Seite.</p><div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div></article></div></section>`}
 function renderTopics(){const items=[...countBy("category").entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Kategorien","Wähle eine Kategorie. Danach öffnet sich eine eigene Kategorie-Seite mit nur den passenden Beiträgen.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join(""):`<div class="empty">Noch keine Kategorien erkannt.</div>`}</section>`}
 function renderScholars(){const items=[...countBy("scholar").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Gelehrte","Wähle einen Namen. Danach öffnet sich eine eigene Ansicht mit den Beiträgen dieser Person.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>listCard(name,count+" Beiträge","scholar",name,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
 function renderBooks(){const items=[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Bücher","Wähle ein Werk. Unter jedem Buch steht der zugehörige Gelehrte/Autor, damit die Quelle klar erkennbar ist.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>bookCard(name,count)).join(""):`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
@@ -303,7 +396,7 @@ function renderDua(id){const d=DUAS.find(x=>x.id===id);if(!d)return`${setHeader(
 function renderPost(id){const post=posts.find(p=>String(p.id)===String(id));if(!post){return`${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>`}const links=(post.links||[]).map(link=>{const label=link.label||"Quelle";const url=link.url||link;return`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`}).join("");return`<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div><section class="statement">${formatText(post.statement||"")}</section><div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}<div class="source-box">${esc(post.source||"Keine Quelle hinterlegt.")}<div class="link-row">${links||""}</div></div>${getRelatedPosts(post).length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${getRelatedPosts(post).map(postCard).join("")}</div></section>`:""}</article>`}
 function updateChrome(route){const backBtn=$("backBtn");const crumb=$("crumb");if(route.view==="home"){backBtn.classList.remove("show");crumb.textContent="Startseite";return}backBtn.classList.add("show");const labels={topics:"Startseite / Kategorien",scholars:"Startseite / Gelehrte",books:"Startseite / Bücher",recent:"Startseite / Neueste Beiträge",saved:"Startseite / Gespeichert",about:"Startseite / Über diese App",duas:"Startseite / Duʿāʾ",calendar:"Startseite / Islamischer Kalender",topic:`Startseite / Kategorien / ${route.value}`,scholar:`Startseite / Gelehrte / ${route.value}`,book:`Startseite / Bücher / ${route.value}`,"dua-cat":`Startseite / Duʿāʾ / ${route.value}`,dua:"Startseite / Duʿāʾ / Eintrag",post:"Startseite / Beitrag"};crumb.textContent=labels[route.view]||"Startseite"}
 function render(){currentRoute=readRoute();updateChrome(currentRoute);if(typeof updateHijriHeaderDate==="function")updateHijriHeaderDate();let html="";if(currentRoute.view==="home")html=renderHome();else if(currentRoute.view==="topics")html=renderTopics();else if(currentRoute.view==="scholars")html=renderScholars();else if(currentRoute.view==="books")html=renderBooks();else if(currentRoute.view==="topic")html=renderFiltered("category",currentRoute.value);else if(currentRoute.view==="scholar")html=renderFiltered("scholar",currentRoute.value);else if(currentRoute.view==="book")html=renderFiltered("book",currentRoute.value);else if(currentRoute.view==="recent")html=renderRecent();else if(currentRoute.view==="saved")html=renderSaved();else if(currentRoute.view==="calendar")html=renderCalendar();else if(currentRoute.view==="about")html=renderAbout();else if(currentRoute.view==="duas")html=renderDuas();else if(currentRoute.view==="dua-cat")html=renderDuaCat(currentRoute.value);else if(currentRoute.view==="dua")html=renderDua(currentRoute.value);else if(currentRoute.view==="post")html=renderPost(currentRoute.value);else html=renderHome();$("appView").innerHTML=html;bindEvents();window.scrollTo({top:0,behavior:"smooth"})}
-function bindEvents(){document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=()=>{const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";navigate(view,value)}});const homeSearchInput=$("homeSearchInput");const homeSearchBlock=$("homeSearchBlock");const homeSearchResults=$("homeSearchResults");const homeSearchCount=$("homeSearchCount");if(homeSearchInput&&homeSearchBlock&&homeSearchResults&&homeSearchCount){homeSearchInput.oninput=()=>{const q=homeSearchInput.value.trim().toLowerCase();if(!q){homeSearchBlock.style.display="none";homeSearchResults.innerHTML="";homeSearchCount.textContent="0 Treffer";return}const filteredPosts=posts.filter(post=>[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase().includes(q));const filteredDuas=DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q));homeSearchBlock.style.display="block";homeSearchCount.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;homeSearchResults.innerHTML=(filteredPosts.map(postCard).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}}
+function bindEvents(){bindDirectPickPanel();document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=()=>{const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";navigate(view,value)}});const homeSearchInput=$("homeSearchInput");const homeSearchBlock=$("homeSearchBlock");const homeSearchResults=$("homeSearchResults");const homeSearchCount=$("homeSearchCount");if(homeSearchInput&&homeSearchBlock&&homeSearchResults&&homeSearchCount){homeSearchInput.oninput=()=>{const q=homeSearchInput.value.trim().toLowerCase();if(!q){homeSearchBlock.style.display="none";homeSearchResults.innerHTML="";homeSearchCount.textContent="0 Treffer";return}const filteredPosts=posts.filter(post=>[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase().includes(q));const filteredDuas=DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q));homeSearchBlock.style.display="block";homeSearchCount.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;homeSearchResults.innerHTML=(filteredPosts.map(postCard).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}}
 const duaSearchInput=$("duaSearchInput");const duaSearchBlock=$("duaSearchBlock");const duaSearchResults=$("duaSearchResults");const duaSearchCount=$("duaSearchCount");if(duaSearchInput&&duaSearchBlock&&duaSearchResults&&duaSearchCount){duaSearchInput.oninput=()=>{const q=duaSearchInput.value.trim().toLowerCase();if(!q){duaSearchBlock.style.display="none";duaSearchResults.innerHTML="";duaSearchCount.textContent="0 Treffer";return}const filtered=DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q));duaSearchBlock.style.display="block";duaSearchCount.textContent=`${filtered.length} Treffer`;duaSearchResults.innerHTML=filtered.length?filtered.map(duaCard).join(""):`<div class="empty">Keine passende Duʿāʾ gefunden.</div>`;bindEvents()}}
 const saveBtn=$("saveBtn");if(saveBtn&&currentRoute.view==="post"){saveBtn.onclick=()=>{toggleSaved(currentRoute.value);render()}}const shareBtn=$("shareBtn");if(shareBtn&&currentRoute.view==="post"){shareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=`${post.title}\n\n${stripMd(post.statement)}\n\n${url}`;if(navigator.share){try{await navigator.share({title:post.title,text,url});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Beitrag-Link wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",text)}}}
 const shareDuaBtn=$("shareDuaBtn");if(shareDuaBtn&&currentRoute.view==="dua"){shareDuaBtn.onclick=async()=>{const d=DUAS.find(x=>String(x.id)===String(currentRoute.value));if(!d)return;const text=`${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}`;if(navigator.share){try{await navigator.share({title:d.title,text});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Duʿāʾ wurde kopiert.")}catch(e){prompt("Kopiere die Duʿāʾ:",text)}}}
@@ -317,5 +410,12 @@ $("backBtn").onclick=()=>{const parent=parentRoute(currentRoute);navigate(parent
 <script>
 (function(){function applyAppMode(){const isStandalone=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true||document.referrer.startsWith("android-app://");document.body.classList.toggle("pwa-installed",isStandalone);try{document.documentElement.style.setProperty("--real-vw",window.innerWidth+"px");document.documentElement.style.setProperty("--real-vh",window.innerHeight+"px")}catch(e){}}window.addEventListener("load",applyAppMode);window.addEventListener("resize",applyAppMode);window.addEventListener("orientationchange",()=>{setTimeout(applyAppMode,120);setTimeout(applyAppMode,450)})})();
 </script>
+
+<script>
+window.addEventListener("DOMContentLoaded",function(){
+  if(typeof updateHijriHeaderDate==="function") updateHijriHeaderDate();
+});
+</script>
+
 </body>
 </html>
