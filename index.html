@@ -9,7 +9,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.json?v=tablet-app-final">
+<link rel="manifest" href="manifest.json?v=android-scroll-fix">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{--bg:#07100b;--panel:#101d14;--gold:#c9ad67;--gold2:#f2df9b;--cream:#fff7df;--text:#f6f1df;--muted:#b7c0b5;--line:rgba(213,184,108,.28);--line2:rgba(213,184,108,.16);--shadow:0 18px 50px rgba(0,0,0,.35);--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
@@ -467,6 +467,84 @@ body.tablet-app-mode{
 }
 </style>
 
+
+<style id="android-smartphone-scroll-fix-final">
+/* Android Smartphone PWA Scroll-Fix: Rotation bleibt, Touch-Scroll wird freigegeben. */
+html,
+body{
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100dvh !important;
+  position: relative !important;
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: auto !important;
+}
+
+.site,
+header,
+main,
+.grid,
+.main,
+.panel,
+.knowledge,
+.posts,
+.post-card,
+.notice,
+aside{
+  touch-action: pan-y !important;
+}
+
+button,
+a,
+input,
+summary,
+.chip,
+.mobile-cat-btn,
+.open,
+.social-chip{
+  touch-action: manipulation !important;
+}
+
+@media (max-width: 699px){
+  body,
+  body.pwa-installed,
+  body.tablet-app-mode{
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100dvh !important;
+    touch-action: pan-y !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  .site,
+  .grid,
+  .main,
+  .posts{
+    overflow: visible !important;
+  }
+
+  aside{
+    overflow: visible !important;
+    max-height: none !important;
+    position: static !important;
+  }
+}
+
+.modal.opened{
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+
+.article{
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+</style>
+
 </head>
 <body class="clean-home">
 <header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.</div></div></section></header>
@@ -636,6 +714,31 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     setTimeout(applyAppMode, 450);
   });
   document.addEventListener("visibilitychange", applyAppMode);
+})();
+</script>
+
+
+<script id="android-smartphone-scroll-fix-final-js">
+(function(){
+  function unlockScroll(){
+    try{
+      document.documentElement.style.overflowY = "auto";
+      document.documentElement.style.height = "auto";
+      document.documentElement.style.touchAction = "pan-y";
+      document.body.style.overflowY = "auto";
+      document.body.style.height = "auto";
+      document.body.style.minHeight = "100dvh";
+      document.body.style.touchAction = "pan-y";
+    }catch(e){}
+  }
+
+  window.addEventListener("load", unlockScroll);
+  window.addEventListener("resize", unlockScroll);
+  window.addEventListener("orientationchange", function(){
+    setTimeout(unlockScroll, 100);
+    setTimeout(unlockScroll, 400);
+  });
+  document.addEventListener("visibilitychange", unlockScroll);
 })();
 </script>
 
