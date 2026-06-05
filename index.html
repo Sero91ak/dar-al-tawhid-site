@@ -1,2893 +1,819 @@
 <!doctype html>
 <html lang="de">
 <head>
-
-<link rel="icon" href="/favicon.ico?v=favicon-app-symbol" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=favicon-app-symbol">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=favicon-app-symbol">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=favicon-app-symbol">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=favicon-app-symbol">
-<link rel="manifest" href="/manifest.json?v=onesignal-clean-reset">
-<meta name="msapplication-TileImage" content="/app-icon-192.png?v=favicon-app-symbol">
-<meta name="msapplication-TileColor" content="#06110b">
-
-<meta name="application-name" content="DAR AL TAWḤID">
-<meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>DAR AL TAWḤID</title>
-<meta name="theme-color" content="#06110b">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAR AL TAWHID</title>
+<meta name="theme-color" content="#07100b">
 <style>
-:root{--bg:#07100b;--panel:#101d14;--gold:#c9ad67;--gold2:#f2df9b;--cream:#fff7df;--text:#f6f1df;--muted:#b7c0b5;--line:rgba(213,184,108,.28);--line2:rgba(213,184,108,.16);--shadow:0 18px 50px rgba(0,0,0,.35);--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap');
+
+:root{
+  --bg:#07100b;
+  --bg2:#0c1811;
+  --panel:#101c14;
+  --gold:#d7b86c;
+  --gold2:#f5df9b;
+  --cream:#fff6df;
+  --muted:#b7c0b5;
+  --line:rgba(215,184,108,.35);
+  --line2:rgba(215,184,108,.20);
+  --shadow:0 24px 70px rgba(0,0,0,.42);
+  --radius:24px;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --signature:"Great Vibes",cursive;
+}
+
 *{box-sizing:border-box}
-html{background:#07100b;overflow-x:hidden;-webkit-text-size-adjust:100%}
-body{margin:0;padding:calc(max(8px,var(--safe-top))) 0 calc(max(14px,var(--safe-bottom)));background:radial-gradient(circle at 10% 0%,rgba(215,184,108,.12),transparent 35%),linear-gradient(180deg,#050806,#07100b 45%,#050806);color:var(--text);font-family:var(--sans);overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;background:url("watermark-circle-soft.png") 18% 44%/min(600px,52vw) auto no-repeat;opacity:.075;pointer-events:none}
-.site{width:min(1540px,calc(100vw - 18px));margin:0 auto;position:relative}
-.hero,.isnad,aside,.panel,.knowledge,.post-card,.notice{border:1px solid var(--line);background:rgba(16,29,20,.88);border-radius:20px;box-shadow:var(--shadow)}
-header{padding:8px 0 12px}.hero{padding:24px 28px;background:linear-gradient(140deg,rgba(16,29,20,.94),rgba(5,9,7,.88));overflow:hidden}
-.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.brand small{display:block;color:var(--muted);letter-spacing:.24em;text-transform:uppercase;font-size:11px;font-weight:800;margin-bottom:8px}
-.brand-title-row{display:flex;align-items:center;gap:18px}.header-logo-mark{width:76px;height:76px;object-fit:contain;border-radius:999px;flex:0 0 76px}
-h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(42px,5.7vw,82px);letter-spacing:.13em;line-height:.9;margin:0;font-weight:700}
-.links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.chip,.links a,button{border:1px solid rgba(215,184,108,.30);border-radius:999px;background:rgba(215,184,108,.08);color:var(--cream);padding:8px 14px;text-decoration:none;font-weight:800;font-size:12px;cursor:pointer}
-.social-chip{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}.social-icon{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;flex:0 0 18px}
-.hero-welcome{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:1080px}.salam-line{font-family:var(--serif);font-size:clamp(20px,1.8vw,28px);color:var(--gold2);font-weight:700;margin-bottom:6px}.welcome-line{color:var(--muted);font-size:14px;line-height:1.6}.welcome-line strong{color:var(--cream)}
-.isnad{margin:0 auto 14px;padding:10px 14px;background:linear-gradient(135deg,rgba(16,29,20,.88),rgba(5,9,7,.94))}.isnad-top{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:900;font-size:10px;letter-spacing:.16em;text-transform:uppercase}.isnad-top:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(215,184,108,.45),transparent)}.isnad-quote{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:850;margin-top:6px;color:var(--cream)}.isnad-source{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px;color:var(--muted);font-size:10px}
-.grid{display:grid;grid-template-columns:270px 1fr;gap:18px;padding-bottom:28px}aside{position:sticky;top:12px;align-self:start;padding:16px}aside h2,.panel h2,.knowledge h2{font-family:var(--serif);color:var(--gold2);font-size:26px;margin:0 0 12px}.search{width:100%;height:42px;border:1px solid var(--line);border-radius:12px;background:#08100b;color:var(--cream);padding:0 12px;font-size:14px;outline:none}.filter-section{border-top:1px solid var(--line2);padding-top:9px;margin-top:9px}.filter-section summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--gold2);font-family:var(--serif);font-size:18px;font-weight:700;padding:5px 0 8px}.filter-section summary::-webkit-details-marker{display:none}.filter-section summary:after{content:"＋";font-family:var(--sans);width:24px;height:24px;border:1px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}.filter-section[open] summary:after{content:"−";color:var(--gold2)}.list-buttons{display:flex;gap:7px;flex-wrap:wrap;max-height:210px;overflow:auto;padding-bottom:3px}.list-buttons button.active,.mobile-cat-btn.active{background:rgba(215,184,108,.22);color:var(--gold2)}
-.panel,.knowledge{padding:16px;margin-bottom:14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{border:1px solid var(--line);border-radius:14px;background:rgba(215,184,108,.06);padding:13px}.stat b{display:block;font-size:22px;color:var(--gold2)}.stat span{font-size:12px;color:var(--muted)}
-.knowledge-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}.knowledge-head span{color:var(--muted);font-size:12px;font-weight:800}.mobile-quick-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.mobile-cat-btn{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(215,184,108,.10),rgba(0,0,0,.10));padding:13px;min-height:68px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:4px}.mobile-cat-btn b{color:var(--gold2);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mobile-cat-btn span{color:var(--muted);font-size:11px;font-weight:700}
-.notice,.loading-box,.error-box{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px;background:rgba(16,29,20,.70);margin-bottom:12px}.notice strong{display:block;color:var(--gold2);font-family:var(--serif);font-size:22px;margin-bottom:5px}.error-box{color:#ffd5d5;border-color:rgba(255,120,120,.35)}
-.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}body.clean-home .posts{display:none}.post-card{position:relative;overflow:hidden;padding:16px;min-height:205px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,rgba(16,29,20,.94),rgba(7,16,11,.94))}.post-card h3{font-family:var(--serif);font-size:24px;line-height:1.05;margin:0 0 8px;color:var(--gold2);font-weight:850}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.badge{font-size:10px;border:1px solid var(--line);border-radius:999px;background:rgba(215,184,108,.08);padding:4px 8px;font-weight:800;color:var(--cream)}.excerpt{font-family:var(--serif);font-size:16px;line-height:1.35;color:#f5f0df;margin:6px 0;font-style:italic;font-weight:650;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.source-preview{font-size:10px;color:var(--muted);border-top:1px solid var(--line2);padding-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.open{margin-top:10px;color:var(--gold2)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:88px 8px 28px;z-index:50;overflow:auto}.modal.opened{display:flex}.article{width:min(900px,100%);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#0c1710,#06100a);box-shadow:var(--shadow);padding:22px}.article-top{display:flex;gap:8px;justify-content:flex-end;padding-bottom:10px}.article h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--gold2);margin:8px 0 10px;text-align:center}.article .statement{font-family:var(--serif);font-size:22px;line-height:1.75;text-align:center;color:#fff8e8;white-space:pre-wrap}.article .statement strong{font-weight:900;color:#fff7df}.article .statement em{color:#f2df9b;font-style:italic;font-weight:800;text-decoration:underline;text-underline-offset:4px}.article-source{font-size:12px;color:var(--muted);border-top:1px solid var(--line2);padding-top:12px;margin-top:15px;line-height:1.5}.article-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--safe-bottom));border-top:1px solid var(--line2)}.locked-original-socials{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-top:10px;margin-bottom:6px}.footer-social-item{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:750;font-size:16px;line-height:1}.locked-original-socials svg{width:20px;height:20px;display:block}footer .signature{display:block;font-family:cursive;color:var(--gold2);font-size:28px;margin-top:8px}
-@media(max-width:1200px){.posts{grid-template-columns:repeat(2,1fr)}.mobile-quick-cats{grid-template-columns:repeat(3,1fr)}}@media(max-width:820px){.site{width:calc(100% - 14px);max-width:calc(100vw - 14px)}header{padding:6px 0 7px}.hero{padding:11px 12px;border-radius:15px}.top{display:block}.brand small{font-size:7.8px;letter-spacing:.13em;margin-bottom:5px}.brand-title-row{gap:10px}.header-logo-mark{width:48px;height:48px;flex-basis:48px}h1{font-size:clamp(28px,9.4vw,40px);line-height:.88;letter-spacing:.075em}.links{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.social-chip{min-height:32px;padding:6px 7px;font-size:9.2px;justify-content:center;overflow:hidden}.social-chip span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hero-welcome{margin-top:9px;padding-top:9px}.salam-line{font-size:16.5px;line-height:1.18;margin-bottom:5px}.welcome-line{font-size:11.5px;line-height:1.42}.isnad{margin-bottom:9px;padding:7px 9px;border-radius:13px}.isnad-top{font-size:8.3px;letter-spacing:.13em}.isnad-quote{font-size:9.15px;line-height:1.14;letter-spacing:-.012em;text-overflow:clip}.isnad-source{font-size:8.1px;line-height:1.2}.grid{display:block}aside,.panel,.knowledge{padding:10px;border-radius:15px;margin-bottom:9px}aside{position:static}aside h2,.panel h2,.knowledge h2{font-size:20px;margin-bottom:9px}.search{height:36px;font-size:12px}.filter-section:not([open]) .list-buttons{display:none}.filter-section summary{font-size:15px;padding:4px 0 6px}.stats{grid-template-columns:repeat(2,1fr);gap:7px}.stat{padding:9px 10px;min-height:58px}.stat b{font-size:18px}.stat span{font-size:10.5px}.mobile-quick-cats{grid-template-columns:repeat(2,1fr);gap:6px}.mobile-cat-btn{min-height:50px;padding:8px;border-radius:12px}.mobile-cat-btn b{font-size:12.5px}.mobile-cat-btn span{font-size:9.4px}.notice{padding:12px 10px}.posts{grid-template-columns:1fr;gap:8px}.post-card{padding:10px;border-radius:14px;min-height:0}.post-card h3{font-size:18px;line-height:1.08}.badge{font-size:8.2px;padding:3px 6px}.excerpt{font-size:13px;line-height:1.32}.source-preview{font-size:8.5px;padding-top:6px}.open{width:100%;min-height:34px;padding:7px 10px;font-size:10.5px}.article{width:calc(100vw - 16px);padding:12px 11px;border-radius:16px}.article h2{font-size:22px;line-height:1.08;text-align:left}.article .statement{font-size:15.3px;line-height:1.55;text-align:left}.article-source{font-size:9.8px;line-height:1.35}.footer-social-item{font-size:12px;white-space:nowrap}footer .signature{font-size:22px}}
 
-/* ONESIGNAL_FLOATING_WIDGET_FINAL */
-.push-widget{
-  position: fixed;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: calc(14px + env(safe-area-inset-bottom));
-  z-index: 40;
-  width: min(360px, calc(100vw - 24px));
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  pointer-events: none;
-}
-.push-widget > *{ pointer-events: auto; }
-.push-widget-card,
-.push-float-btn{
-  border: 1px solid rgba(217,189,114,.72);
-  border-radius: 18px;
+body{
+  margin:0;
+  color:var(--cream);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
-    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
-  box-shadow: 0 18px 42px rgba(0,0,0,.32);
-}
-.push-widget-card{
-  padding: 14px 15px;
-  color: #f8efd0;
-}
-.push-widget-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-.push-widget-bell{
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display:grid;
-  place-items:center;
-  background: linear-gradient(180deg, #eed48b, #caa24f);
-  color:#182012;
-  font-size: 18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
-}
-.push-widget-title{
-  display:flex;
-  flex-direction:column;
-  line-height:1.12;
-}
-.push-widget-title strong{
-  color: var(--gold2);
-  font-size: 16px;
-  font-family: var(--serif);
-}
-.push-widget-title span{
-  color: #d9cfaa;
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.push-widget-text{
-  font-size: 13px;
-  line-height: 1.5;
-  color:#f7f0d7;
-}
-.push-widget-text strong{ color: #fff5cf; }
-.push-widget-actions{
-  margin-top: 12px;
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.push-widget-btn,
-.push-float-btn{
-  font: inherit;
-  cursor: pointer;
-}
-.push-widget-btn{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.85);
-  border-radius: 14px;
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #efd691, #d2ab55);
-  color:#152013;
-  font-weight: 800;
-  font-size: 14px;
-  flex: 1 1 220px;
-  min-height: 46px;
-}
-.push-widget-btn:hover,
-.push-float-btn:hover{ filter: brightness(1.03); }
-.push-widget-ghost{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.28);
-  border-radius: 14px;
-  padding: 12px 14px;
-  min-height: 46px;
-  background: rgba(255,255,255,.02);
-  color:#f0e6c4;
-  font-weight:700;
-}
-.push-float-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  min-height: 54px;
-  padding: 13px 16px;
-  color:#fff8e6;
-  background:
-    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
-    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
-  font-weight: 800;
-  letter-spacing:.01em;
-}
-.push-float-btn .mini-bell{
-  display:grid;
-  place-items:center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #efd691, #cca450);
-  color:#152013;
-  font-size: 15px;
-}
-.push-float-btn.active{
-  border-color: rgba(96,185,116,.72);
-  background:
-    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
-    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
-}
-.push-float-btn.active .mini-bell{
-  background: linear-gradient(180deg, #8dd59e, #53a969);
-  color:#0c1b10;
-}
-.push-widget.hidden-card .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
-.push-inline-chip{
-  margin-top: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:10px;
-  border:1px solid rgba(217,189,114,.35);
-  border-radius: 16px;
-  padding: 10px 12px;
-  background: rgba(255,255,255,.015);
-  color:#f4e8bf;
-  font-size: 13px;
-}
-.push-inline-chip strong{
-  display:block;
-  color:#fff3c9;
-  margin-bottom:2px;
-  font-size: 13px;
-}
-.push-inline-chip .chip-bell{
-  display:grid;
-  place-items:center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: linear-gradient(180deg, #efd691, #caa34f);
-  color:#152013;
-  font-size: 16px;
-  flex: 0 0 auto;
-}
-@media (max-width: 699px){
-  .push-widget{
-    left: 12px;
-    right: 12px;
-    width: auto;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-  }
-  .push-widget-card{
-    padding: 13px 13px;
-  }
-  .push-inline-chip{
-    display:none;
-  }
+    radial-gradient(circle at 12% 0%,rgba(215,184,108,.18),transparent 34%),
+    radial-gradient(circle at 80% 8%,rgba(245,223,155,.08),transparent 30%),
+    linear-gradient(180deg,#050806,var(--bg),#050806);
+  min-height:100vh;
 }
 
+a{color:var(--gold2);text-decoration:none}
+.site{width:min(1240px,calc(100% - 28px));margin:auto}
 
-/* ONESIGNAL_MINI_BUTTON_DEACTIVATE_FIX
-   Aktivierter Zustand wird klein/minimiert. Tippen öffnet ein kleines Menü mit Deaktivieren. */
-.push-active-panel{
-  display:none;
-  border: 1px solid rgba(96,185,116,.72);
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
-    linear-gradient(180deg, rgba(14,36,22,.98), rgba(6,16,10,.98));
-  color:#f4f8e8;
-  box-shadow: 0 18px 42px rgba(0,0,0,.34);
-  padding: 13px 14px;
-}
-.push-active-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#e9ffd9;
-  font-weight:900;
-  font-size:14px;
-  margin-bottom:5px;
-}
-.push-active-text{
-  color:#d9e9d1;
-  font-size:12px;
-  line-height:1.45;
-}
-.push-active-actions{
-  margin-top:10px;
-  display:flex;
-  gap:8px;
-}
-.push-active-actions button{
-  appearance:none;
-  border-radius:12px;
-  min-height:40px;
-  padding:9px 11px;
-  font-weight:800;
-  cursor:pointer;
-}
-#pushDisableBtn{
-  border:1px solid rgba(235,165,130,.55);
-  background:rgba(120,45,26,.20);
-  color:#ffd5c6;
-}
-#pushCloseBtn{
-  border:1px solid rgba(217,189,114,.32);
-  background:rgba(255,255,255,.03);
-  color:#f0e6c4;
-}
-.push-widget.permission-granted{
-  width:auto;
-  align-items:flex-end;
-}
-.push-widget.permission-granted .push-widget-card{
-  display:none !important;
-}
-.push-widget.permission-granted .push-float-btn{
-  width:54px;
-  min-width:54px;
-  max-width:54px;
-  height:54px;
-  min-height:54px;
-  padding:0;
-  border-radius:18px;
+header{
+  position:relative;
+  padding:28px 0 18px;
   overflow:hidden;
 }
-.push-widget.permission-granted .push-float-btn #pushFloatLabel{
-  display:none;
-}
-.push-widget.permission-granted .push-float-btn .mini-bell{
-  width:34px;
-  height:34px;
-  font-size:16px;
-}
-.push-widget.permission-granted.active-menu{
-  width:min(330px, calc(100vw - 24px));
-}
-.push-widget.permission-granted.active-menu .push-active-panel{
-  display:block;
-}
-.push-widget.permission-granted.active-menu .push-float-btn{
-  align-self:flex-end;
-}
-@media (max-width:699px){
-  .push-widget.permission-granted{
-    left:auto;
-    right:12px;
-    width:auto;
-  }
-  .push-widget.permission-granted.active-menu{
-    left:12px;
-    right:12px;
-    width:auto;
-  }
-  .push-widget.permission-granted .push-float-btn{
-    width:50px;
-    min-width:50px;
-    max-width:50px;
-    height:50px;
-    min-height:50px;
-    border-radius:17px;
-  }
+
+.hero-logo-bg{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  z-index:0;
 }
 
-
-/* NAV_OVERVIEW_SORT_SCROLL_FIX
-   Übersicht steht jetzt über Navigation und ist kompakter.
-   Filter-Klicks springen direkt zu den Beiträgen. */
-.overview-top{
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  border-radius: 17px;
-}
-.overview-top h2{
-  font-size: 23px;
-  margin-bottom: 8px;
-}
-.overview-top .stats{
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-.overview-top .stat{
-  min-height: 54px;
-  padding: 8px 12px;
-}
-.overview-top .stat b{
-  font-size: 20px;
-}
-.overview-top .stat span{
-  font-size: 10px;
-}
-html{
-  scroll-behavior: smooth;
-}
-#posts{
-  scroll-margin-top: 18px;
-}
-@media(max-width:820px){
-  .overview-top{
-    padding: 10px;
-    margin-bottom: 9px;
-    border-radius: 15px;
-  }
-  .overview-top h2{
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-  .overview-top .stats{
-    grid-template-columns: repeat(2, 1fr);
-    gap: 7px;
-  }
-  .overview-top .stat{
-    min-height: 52px;
-    padding: 8px 10px;
-  }
-  .overview-top .stat b{
-    font-size: 17px;
-  }
-  .overview-top .stat span{
-    font-size: 9.8px;
-  }
-  #posts{
-    scroll-margin-top: 12px;
-  }
+.hero-logo-bg img{
+  width:min(560px,76vw);
+  opacity:.10;
+  filter:drop-shadow(0 10px 25px rgba(0,0,0,.45));
 }
 
-
-/* CATEGORY_COLLAPSE_SEARCH_ZOOM_RESET_FIX
-   iOS/Android App: keine Eingabe-Zooms, Wissensbereiche einklappbar,
-   Alles anzeigen zeigt wirklich alle Beiträge. */
-input,
-textarea,
-select,
-.search{
-  font-size:16px !important;
-}
-
-.category-toggle-wrap{
-  grid-column:1 / -1;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  margin-top:4px;
-}
-
-.category-hint{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.35;
-  text-align:center;
-}
-
-.category-toggle-btn{
-  width:100%;
-  min-height:42px;
-  border:1px solid rgba(217,189,114,.42);
-  border-radius:14px;
-  background:
-    radial-gradient(circle at top left, rgba(217,189,114,.10), transparent 45%),
-    linear-gradient(180deg, rgba(16,29,20,.96), rgba(8,16,11,.96));
-  color:var(--gold2);
-  font-weight:900;
-  cursor:pointer;
-  letter-spacing:.01em;
-}
-
-.category-toggle-btn:hover{
-  filter:brightness(1.05);
-}
-
-.search:focus{
-  outline:1px solid rgba(217,189,114,.55);
-  box-shadow:0 0 0 3px rgba(217,189,114,.10);
-}
-
-#resetFilters{
-  cursor:pointer;
-}
-
-@media(max-width:820px){
-  input,
-  textarea,
-  select,
-  .search{
-    font-size:16px !important;
-    line-height:1.2 !important;
-  }
-  .search{
-    height:42px;
-  }
-  .category-hint{
-    font-size:10.5px;
-  }
-  .category-toggle-btn{
-    min-height:40px;
-    font-size:12px;
-  }
-}
-
-
-/* SERIOUS_APP_FEATURES_PACK
-   Maßstab, Biografien, Quellen-Bibliothek, Lernpfade, Favoriten, Tagesbeitrag,
-   Neueste/Beliebte Beiträge, Quelle prüfen, Fehler melden, Share-Card, Offline. */
-.feature-panel,
-.method-panel,
-.dynamic-info-panel,
-.library-panel,
-.path-panel,
-.daily-panel,
-.saved-panel,
-.latest-panel,
-.popular-panel,
-.language-panel{
+.hero,.panel,.post-card,.detail-view,.internal-view{
   border:1px solid var(--line);
-  background:rgba(16,29,20,.88);
-  border-radius:20px;
+  border-radius:var(--radius);
+  background:rgba(16,28,20,.86);
   box-shadow:var(--shadow);
-  padding:14px;
-  margin-bottom:12px;
 }
 
-.feature-title{
+.hero{
+  position:relative;
+  z-index:1;
+  padding:clamp(24px,4vw,46px);
+  overflow:hidden;
+}
+
+.hero:before,.post-card:before,.detail-view:before,.internal-view:before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(215,184,108,.22);
+  border-radius:18px;
+  pointer-events:none;
+}
+
+.top{
+  position:relative;
+  z-index:1;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.feature-title h2,
-.feature-title h3{
-  font-family:var(--serif);
-  color:var(--gold2);
-  margin:0;
-  line-height:1.05;
-}
-
-.feature-title h2{font-size:24px}
-.feature-title h3{font-size:20px}
-
-.feature-sub{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.55;
-}
-
-.method-grid,
-.library-grid,
-.path-grid,
-.feature-mini-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-}
-
-.method-card,
-.library-card,
-.path-card,
-.mini-card{
-  border:1px solid var(--line2);
-  border-radius:15px;
-  background:rgba(255,255,255,.018);
-  padding:10px;
-}
-
-.method-card strong,
-.library-card strong,
-.path-card strong,
-.mini-card strong{
-  display:block;
-  color:#fff4cf;
-  font-weight:900;
-  margin-bottom:4px;
-}
-
-.method-card span,
-.library-card span,
-.path-card span,
-.mini-card span{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.45;
-}
-
-.dynamic-info-panel{
-  display:none;
-}
-
-.dynamic-info-panel.show{
-  display:block;
-}
-
-.info-chips{
-  display:flex;
+  gap:18px;
   flex-wrap:wrap;
-  gap:7px;
-  margin-top:10px;
 }
 
-.info-chip,
-.action-chip{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:34px;
-  padding:7px 10px;
-  border:1px solid var(--line2);
-  border-radius:999px;
-  background:rgba(255,255,255,.02);
-  color:var(--cream);
-  font-weight:800;
-  font-size:11px;
-  cursor:pointer;
-  text-decoration:none;
-}
-
-.info-chip:hover,
-.action-chip:hover{
-  filter:brightness(1.08);
-}
-
-.path-card{
-  cursor:pointer;
-}
-
-.path-card:hover{
-  border-color:rgba(217,189,114,.45);
-  filter:brightness(1.04);
-}
-
-.daily-card,
-.saved-empty,
-.inline-message{
-  border:1px dashed rgba(217,189,114,.35);
-  border-radius:16px;
-  padding:12px;
+.brand small{
+  display:block;
   color:var(--muted);
-  background:rgba(255,255,255,.012);
-  line-height:1.5;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:12px;
+  margin-bottom:8px;
 }
 
-.daily-card h3{
+h1{
+  margin:0;
+  font-family:var(--serif);
+  font-size:clamp(38px,8vw,86px);
+  line-height:.9;
+  letter-spacing:.11em;
+  color:var(--gold2);
+  text-transform:uppercase;
+  text-shadow:0 6px 20px rgba(0,0,0,.48);
+}
+
+h2,h3{
   font-family:var(--serif);
   color:var(--gold2);
-  margin:0 0 8px;
-  font-size:22px;
+  margin:0 0 12px;
   line-height:1.1;
 }
 
-.daily-card p{
-  margin:0 0 10px;
-  color:var(--cream);
-  font-size:13px;
-  line-height:1.5;
+h2{font-size:34px}
+h3{font-size:25px}
+
+.hero p{
+  position:relative;
+  z-index:1;
+  max-width:920px;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:17px;
+  margin:24px 0 0;
 }
 
-.list-row{
+button,.chip{
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(215,184,108,.09);
+  color:var(--cream);
+  padding:10px 14px;
+  font-weight:850;
+  cursor:pointer;
+  font-size:14px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  transition:.18s ease;
+}
+
+button:hover,.chip:hover{
+  background:rgba(215,184,108,.18);
+  transform:translateY(-1px);
+}
+
+.links,.list-buttons,.meta,.source-links,.card-actions,.quick-actions{
   display:flex;
   gap:10px;
-  align-items:center;
-  justify-content:space-between;
-  border:1px solid var(--line2);
-  border-radius:14px;
-  padding:9px 10px;
-  background:rgba(255,255,255,.015);
-  margin-bottom:7px;
-}
-
-.list-row strong{
-  color:var(--cream);
-  font-size:13px;
-  line-height:1.25;
-}
-
-.list-row span{
-  color:var(--muted);
-  font-size:10.5px;
-}
-
-.article-actions{
-  display:flex;
   flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-  margin:10px 0 8px;
+  align-items:center;
 }
 
-.article-action-btn{
-  border:1px solid var(--line2);
-  border-radius:999px;
-  background:rgba(255,255,255,.02);
+.quick-actions{
+  position:relative;
+  z-index:1;
+  margin-top:16px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:310px 1fr;
+  gap:18px;
+  padding:18px 0 42px;
+  align-items:start;
+}
+
+aside{
+  position:sticky;
+  top:14px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(16,28,20,.82);
+  box-shadow:var(--shadow);
+}
+
+.search{
+  width:100%;
+  border:1px solid rgba(215,184,108,.30);
+  border-radius:15px;
+  background:rgba(0,0,0,.30);
   color:var(--cream);
-  padding:8px 11px;
-  font-weight:850;
-  font-size:11px;
-  cursor:pointer;
-}
-
-.article-action-btn.active{
-  border-color:rgba(96,185,116,.65);
-  color:#e2ffd8;
-}
-
-.source-check-panel,
-.original-panel{
-  display:none;
-  border:1px solid rgba(217,189,114,.35);
-  border-radius:16px;
   padding:12px;
-  margin:10px 0;
-  background:rgba(255,255,255,.018);
+  font:inherit;
+  outline:none;
+  margin-bottom:14px;
+}
+
+.group{
+  border-top:1px solid rgba(215,184,108,.18);
+  padding-top:14px;
+  margin-top:14px;
+}
+
+.list-buttons button{
+  padding:8px 11px;
+  font-size:13px;
+}
+
+.panel{
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat{
+  border:1px solid rgba(215,184,108,.22);
+  border-radius:18px;
+  padding:16px;
+  background:linear-gradient(180deg,rgba(215,184,108,.12),rgba(0,0,0,.14));
+}
+
+.stat b{
+  display:block;
+  color:var(--gold2);
+  font-size:28px;
+}
+
+.stat span,.muted{color:var(--muted)}
+
+.posts{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
+
+.post-card{
+  position:relative;
+  overflow:hidden;
+  padding:28px;
+  min-height:310px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(145deg,rgba(16,28,20,.96),rgba(6,10,8,.98)),
+    repeating-linear-gradient(135deg,rgba(215,184,108,.045) 0 1px,transparent 1px 20px);
+}
+
+.post-logo{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(310px,75%);
+  opacity:.06;
+  pointer-events:none;
+  z-index:0;
+}
+
+.card-inner{
+  position:relative;
+  z-index:1;
+}
+
+.card-title{
+  font-family:var(--serif);
+  font-size:clamp(27px,3vw,38px);
+  font-weight:700;
+  color:var(--gold2);
+  margin:0 0 14px;
+  line-height:1.05;
+  text-shadow:0 5px 18px rgba(0,0,0,.48);
+}
+
+.badge{
+  border:1px solid rgba(215,184,108,.30);
+  background:rgba(215,184,108,.10);
+  border-radius:999px;
+  padding:7px 10px;
   color:var(--cream);
   font-size:12px;
+  font-weight:750;
+}
+
+.meta{margin:12px 0 14px}
+
+.excerpt{
+  color:#fff9e8;
+  font-family:var(--serif);
+  font-size:22px;
+  line-height:1.42;
+  margin:18px 0 20px;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.card-source{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+  border-top:1px solid rgba(215,184,108,.18);
+  padding-top:12px;
+  margin-top:12px;
+}
+
+.open-btn{
+  margin-top:14px;
+  background:rgba(215,184,108,.18);
+  color:var(--gold2);
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed rgba(215,184,108,.35);
+  border-radius:var(--radius);
+  padding:32px;
+  background:rgba(0,0,0,.14);
+}
+
+.detail-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:1000;
+  display:none;
+  align-items:flex-start;
+  justify-content:center;
+  padding:28px 14px;
+  overflow:auto;
+}
+
+.detail-overlay.active{display:flex}
+
+.detail-view,.internal-view{
+  position:relative;
+  max-width:900px;
+  width:100%;
+  padding:clamp(28px,5vw,58px);
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(16,28,20,.98),rgba(6,10,8,.99)),
+    repeating-linear-gradient(135deg,rgba(215,184,108,.045) 0 1px,transparent 1px 20px);
+}
+
+.close-row{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.close-btn{
+  background:rgba(120,20,20,.20);
+  border-color:rgba(230,95,95,.45);
+}
+
+.detail-title,.internal-title{
+  position:relative;
+  z-index:1;
+  font-family:var(--serif);
+  font-size:clamp(34px,5vw,58px);
+  font-weight:700;
+  color:var(--gold2);
+  margin:0 0 14px;
+  text-align:center;
+  line-height:1.04;
+}
+
+.statement,.internal-body{
+  position:relative;
+  z-index:1;
+  font-family:var(--serif);
+  font-size:clamp(24px,3.1vw,34px);
+  font-weight:600;
+  line-height:1.52;
+  text-align:center;
+  color:#fff9e8;
+  margin:22px auto;
+  max-width:850px;
+  letter-spacing:.01em;
+}
+
+.statement strong,.statement .auto,.internal-body strong{
+  color:var(--gold2);
+  font-weight:700;
+  font-style:italic;
+  text-decoration:underline;
+  text-decoration-thickness:1.8px;
+  text-underline-offset:7px;
+  text-decoration-color:rgba(245,223,155,.75);
+}
+
+.statement em{
+  color:var(--gold2);
+  font-family:var(--signature);
+  font-style:normal;
+  font-size:1.22em;
+  text-decoration:underline;
+  text-underline-offset:8px;
+}
+
+.source{
+  position:relative;
+  z-index:1;
+  border-top:1px solid rgba(215,184,108,.20);
+  padding-top:14px;
+  margin-top:18px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.55;
+  font-size:14px;
+}
+
+.source b{color:var(--cream)}
+
+.source-links{
+  justify-content:center;
+  margin-top:10px;
+}
+
+.source-links a{
+  border:1px solid rgba(215,184,108,.25);
+  border-radius:999px;
+  padding:7px 10px;
+  background:rgba(0,0,0,.20);
+  font-weight:850;
+  font-size:13px;
+}
+
+.source-list{
+  display:grid;
+  gap:12px;
+  margin-top:15px;
+}
+
+.source-item{
+  border:1px solid rgba(215,184,108,.22);
+  border-radius:18px;
+  padding:15px;
+  background:rgba(0,0,0,.16);
+  text-align:left;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;
   line-height:1.55;
 }
 
-.source-check-panel.show,
-.original-panel.show{
-  display:block;
+.source-item strong{
+  color:var(--gold2);
+  font-size:18px;
 }
 
-.lang-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+footer{
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid rgba(215,184,108,.18);
+  padding:30px 0 44px;
+  line-height:1.8;
 }
 
-.lang-btn{
-  border:1px solid var(--line2);
-  border-radius:999px;
-  padding:8px 12px;
-  background:rgba(255,255,255,.018);
-  color:var(--cream);
-  font-weight:900;
-}
-
-.lang-btn.active{
-  background:rgba(217,189,114,.16);
-  border-color:rgba(217,189,114,.48);
+.signature{
+  font-family:var(--signature);
+  font-size:36px;
   color:var(--gold2);
 }
 
-.push-pref-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:8px;
+@media(max-width:980px){
+  .posts{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  aside{position:static}
+  .stats{grid-template-columns:repeat(2,1fr)}
 }
 
-.push-pref{
-  border:1px solid var(--line2);
-  border-radius:12px;
-  min-height:36px;
-  padding:7px;
-  background:rgba(255,255,255,.015);
-  color:var(--cream);
-  font-size:11px;
-  font-weight:850;
-  cursor:pointer;
+@media(max-width:540px){
+  .stats{grid-template-columns:1fr}
+  .card-title{font-size:29px}
+  .statement,.internal-body{font-size:24px}
+  .detail-title,.internal-title{font-size:34px}
+  h1{font-size:40px}
+  .hero-logo-bg img{width:88vw}
 }
-
-.push-pref.active{
-  background:rgba(96,185,116,.13);
-  border-color:rgba(96,185,116,.45);
-  color:#dff8d7;
-}
-
-@media(max-width:820px){
-  .feature-panel,
-  .method-panel,
-  .dynamic-info-panel,
-  .library-panel,
-  .path-panel,
-  .daily-panel,
-  .saved-panel,
-  .latest-panel,
-  .popular-panel,
-  .language-panel{
-    padding:10px;
-    border-radius:15px;
-    margin-bottom:9px;
-  }
-
-  .feature-title h2{font-size:20px}
-  .feature-title h3{font-size:17px}
-
-  .method-grid,
-  .library-grid,
-  .path-grid,
-  .feature-mini-grid{
-    grid-template-columns:1fr;
-    gap:7px;
-  }
-
-  .push-pref-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .daily-card h3{
-    font-size:18px;
-  }
-
-  .list-row{
-    padding:8px;
-  }
-
-  .article-actions{
-    justify-content:flex-start;
-  }
-
-  .article-action-btn{
-    font-size:10.5px;
-    padding:8px 10px;
-  }
-}
-
-
-/* HEADER_ONE_LINE_LOGO_NAV_COLLAPSE_FIX
-   Header-App-Optik: Titel einzeilig, Logo größer, Navigation alles anzeigen/alles zuklappen. */
-
-.brand-title-row{
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-}
-
-.header-logo-mark{
-  width: 92px !important;
-  height: 92px !important;
-  flex: 0 0 92px !important;
-}
-
-.brand-title-row h1,
-h1{
-  white-space: nowrap !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-  line-height: .9 !important;
-}
-
-@media(max-width:820px){
-  .brand-title-row{
-    gap: 10px !important;
-  }
-
-  .header-logo-mark{
-    width: 64px !important;
-    height: 64px !important;
-    flex-basis: 64px !important;
-  }
-
-  h1{
-    font-size: clamp(30px, 8.2vw, 38px) !important;
-    letter-spacing: .055em !important;
-    transform: scaleX(.92);
-    transform-origin: left center;
-  }
-}
-
-@media(max-width:380px){
-  .header-logo-mark{
-    width: 58px !important;
-    height: 58px !important;
-    flex-basis: 58px !important;
-  }
-
-  h1{
-    font-size: clamp(27px, 7.8vw, 34px) !important;
-    letter-spacing: .045em !important;
-    transform: scaleX(.88);
-  }
-}
-
-.nav-control-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  border-top:1px solid var(--line2);
-  margin-top:10px;
-  padding-top:10px;
-}
-
-.nav-control-row button{
-  min-height:40px;
-  border:1px solid rgba(217,189,114,.38);
-  border-radius:999px;
-  background:rgba(255,255,255,.018);
-  color:var(--cream);
-  font-weight:900;
-  padding:8px 13px;
-  cursor:pointer;
-}
-
-.nav-control-row button.primary{
-  background:linear-gradient(180deg,rgba(217,189,114,.18),rgba(217,189,114,.06));
-  color:var(--gold2);
-}
-
-.nav-control-row button:hover{
-  filter:brightness(1.07);
-}
-
-@media(max-width:820px){
-  .nav-control-row{
-    gap:7px;
-    margin-top:8px;
-    padding-top:8px;
-  }
-
-  .nav-control-row button{
-    min-height:38px;
-    font-size:12px;
-    padding:7px 11px;
-  }
-}
-
 </style>
-
-<style id="android-rotation-force-final-css">
-/* Rotation-Fix: Querformat-Ansicht optimieren, aber nicht blockieren */
-html, body{
-  min-height: 100%;
-}
-
-/* Falls Android in Landscape dreht, muss die App sauber reagieren */
-@media (orientation: landscape){
-  body{
-    width: 100vw !important;
-    overflow-x: hidden !important;
-  }
-}
-
-/* Kleine Android-Geräte im Querformat */
-@media (orientation: landscape) and (max-height: 620px){
-  .site{
-    width: calc(100vw - 18px) !important;
-    max-width: calc(100vw - 18px) !important;
-  }
-
-  .hero{
-    padding: 10px 14px !important;
-  }
-
-  .brand-title-row .header-logo-mark,
-  .header-logo-mark{
-    width: 42px !important;
-    height: 42px !important;
-    flex-basis: 42px !important;
-  }
-
-  h1{
-    font-size: clamp(28px, 5.7vw, 48px) !important;
-    line-height: .9 !important;
-  }
-
-  .links{
-    display:flex !important;
-    gap:8px !important;
-    justify-content:flex-end !important;
-  }
-
-  .hero-welcome{
-    margin-top: 8px !important;
-    padding-top: 8px !important;
-  }
-
-  .salam-line{
-    font-size: 16px !important;
-  }
-
-  .welcome-line{
-    font-size: 11px !important;
-    line-height: 1.35 !important;
-  }
-
-  .grid{
-    display:grid !important;
-    grid-template-columns: 260px 1fr !important;
-    gap: 10px !important;
-  }
-
-  aside{
-    position: sticky !important;
-    top: 8px !important;
-  }
-
-  .posts{
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-  }
-
-  .modal{
-    padding-top: max(18px, env(safe-area-inset-top)) !important;
-    padding-bottom: 12px !important;
-  }
-
-  .article{
-    max-height: calc(100vh - 36px) !important;
-    overflow:auto !important;
-  }
-}
-
-/* ONESIGNAL_FLOATING_WIDGET_FINAL */
-.push-widget{
-  position: fixed;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: calc(14px + env(safe-area-inset-bottom));
-  z-index: 40;
-  width: min(360px, calc(100vw - 24px));
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  pointer-events: none;
-}
-.push-widget > *{ pointer-events: auto; }
-.push-widget-card,
-.push-float-btn{
-  border: 1px solid rgba(217,189,114,.72);
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
-    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
-  box-shadow: 0 18px 42px rgba(0,0,0,.32);
-}
-.push-widget-card{
-  padding: 14px 15px;
-  color: #f8efd0;
-}
-.push-widget-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-.push-widget-bell{
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display:grid;
-  place-items:center;
-  background: linear-gradient(180deg, #eed48b, #caa24f);
-  color:#182012;
-  font-size: 18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
-}
-.push-widget-title{
-  display:flex;
-  flex-direction:column;
-  line-height:1.12;
-}
-.push-widget-title strong{
-  color: var(--gold2);
-  font-size: 16px;
-  font-family: var(--serif);
-}
-.push-widget-title span{
-  color: #d9cfaa;
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.push-widget-text{
-  font-size: 13px;
-  line-height: 1.5;
-  color:#f7f0d7;
-}
-.push-widget-text strong{ color: #fff5cf; }
-.push-widget-actions{
-  margin-top: 12px;
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.push-widget-btn,
-.push-float-btn{
-  font: inherit;
-  cursor: pointer;
-}
-.push-widget-btn{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.85);
-  border-radius: 14px;
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #efd691, #d2ab55);
-  color:#152013;
-  font-weight: 800;
-  font-size: 14px;
-  flex: 1 1 220px;
-  min-height: 46px;
-}
-.push-widget-btn:hover,
-.push-float-btn:hover{ filter: brightness(1.03); }
-.push-widget-ghost{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.28);
-  border-radius: 14px;
-  padding: 12px 14px;
-  min-height: 46px;
-  background: rgba(255,255,255,.02);
-  color:#f0e6c4;
-  font-weight:700;
-}
-.push-float-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  min-height: 54px;
-  padding: 13px 16px;
-  color:#fff8e6;
-  background:
-    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
-    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
-  font-weight: 800;
-  letter-spacing:.01em;
-}
-.push-float-btn .mini-bell{
-  display:grid;
-  place-items:center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #efd691, #cca450);
-  color:#152013;
-  font-size: 15px;
-}
-.push-float-btn.active{
-  border-color: rgba(96,185,116,.72);
-  background:
-    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
-    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
-}
-.push-float-btn.active .mini-bell{
-  background: linear-gradient(180deg, #8dd59e, #53a969);
-  color:#0c1b10;
-}
-.push-widget.hidden-card .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
-.push-inline-chip{
-  margin-top: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:10px;
-  border:1px solid rgba(217,189,114,.35);
-  border-radius: 16px;
-  padding: 10px 12px;
-  background: rgba(255,255,255,.015);
-  color:#f4e8bf;
-  font-size: 13px;
-}
-.push-inline-chip strong{
-  display:block;
-  color:#fff3c9;
-  margin-bottom:2px;
-  font-size: 13px;
-}
-.push-inline-chip .chip-bell{
-  display:grid;
-  place-items:center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: linear-gradient(180deg, #efd691, #caa34f);
-  color:#152013;
-  font-size: 16px;
-  flex: 0 0 auto;
-}
-@media (max-width: 699px){
-  .push-widget{
-    left: 12px;
-    right: 12px;
-    width: auto;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-  }
-  .push-widget-card{
-    padding: 13px 13px;
-  }
-  .push-inline-chip{
-    display:none;
-  }
-}
-
-</style>
-
-
-<style id="tablet-real-app-layout-final">
-/* Tablet-App-Layout für iPad und Android-Tablets.
-   Wichtig: Android-Rotation bleibt durch manifest orientation=any erhalten. */
-
-:root{
-  --app-safe-top: env(safe-area-inset-top, 0px);
-  --app-safe-right: env(safe-area-inset-right, 0px);
-  --app-safe-bottom: env(safe-area-inset-bottom, 0px);
-  --app-safe-left: env(safe-area-inset-left, 0px);
-}
-
-/* echte App-Fläche statt Web-Dokument-Gefühl */
-html{
-  min-height: 100%;
-  background:#06110b !important;
-}
-
-body{
-  min-height: 100svh;
-  background:
-    radial-gradient(circle at 18% 8%, rgba(216,190,112,.12), transparent 34%),
-    radial-gradient(circle at 86% 16%, rgba(216,190,112,.06), transparent 32%),
-    linear-gradient(180deg, #06110b 0%, #07140d 48%, #040806 100%) !important;
-  padding-top: max(10px, var(--app-safe-top)) !important;
-  padding-right: max(10px, var(--app-safe-right)) !important;
-  padding-bottom: max(14px, var(--app-safe-bottom)) !important;
-  padding-left: max(10px, var(--app-safe-left)) !important;
-  overscroll-behavior: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Wenn die App installiert gestartet wurde, noch stärker wie App behandeln */
-body.pwa-installed,
-body.tablet-app-mode{
-  touch-action: manipulation;
-}
-
-/* iPad / Android Tablet: nicht wie Desktop-Webseite wirken */
-@media (min-width: 700px) and (max-width: 1366px){
-  .site{
-    width: min(1180px, calc(100vw - 34px)) !important;
-    max-width: min(1180px, calc(100vw - 34px)) !important;
-    margin-inline:auto !important;
-  }
-
-  header.site{
-    margin-top: 0 !important;
-  }
-
-  .hero{
-    border-radius: 28px !important;
-    padding: clamp(18px, 2.4vw, 30px) !important;
-    min-height: auto !important;
-    background:
-      linear-gradient(135deg, rgba(14,29,19,.97), rgba(4,9,7,.92)),
-      radial-gradient(circle at 25% 0%, rgba(230,199,118,.10), transparent 40%) !important;
-    box-shadow: 0 24px 65px rgba(0,0,0,.35) !important;
-  }
-
-  .top{
-    display:grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px) !important;
-    gap: 24px !important;
-    align-items:start !important;
-  }
-
-  .brand{
-    min-width:0 !important;
-  }
-
-  .brand small{
-    font-size: clamp(10px, 1.1vw, 13px) !important;
-    letter-spacing: .22em !important;
-    margin-bottom: 10px !important;
-  }
-
-  .brand-title-row{
-    display:flex !important;
-    align-items:center !important;
-    gap: clamp(15px, 2vw, 24px) !important;
-  }
-
-  .header-logo-mark{
-    width: clamp(68px, 7.2vw, 92px) !important;
-    height: clamp(68px, 7.2vw, 92px) !important;
-    flex: 0 0 clamp(68px, 7.2vw, 92px) !important;
-    border-radius: 999px !important;
-    object-fit: contain !important;
-  }
-
-  h1{
-    font-size: clamp(54px, 7.4vw, 92px) !important;
-    line-height: .86 !important;
-    letter-spacing: .13em !important;
-  }
-
-  .links{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:stretch !important;
-    gap: 10px !important;
-    justify-content:flex-start !important;
-    margin-top: 0 !important;
-  }
-
-  .links a,
-  .social-chip{
-    min-height: 42px !important;
-    justify-content:center !important;
-    font-size: 13px !important;
-    border-radius: 999px !important;
-    background: rgba(218,190,112,.10) !important;
-  }
-
-  .hero-welcome{
-    margin-top: 20px !important;
-    padding-top: 17px !important;
-  }
-
-  .salam-line{
-    font-size: clamp(22px, 2.5vw, 32px) !important;
-    line-height: 1.15 !important;
-  }
-
-  .welcome-line{
-    max-width: 980px !important;
-    font-size: clamp(13px, 1.35vw, 16px) !important;
-    line-height: 1.55 !important;
-  }
-
-  .isnad{
-    border-radius: 22px !important;
-    padding: 14px 18px !important;
-    margin-top: 14px !important;
-    margin-bottom: 16px !important;
-  }
-
-  .isnad-top{
-    font-size: 11px !important;
-    letter-spacing: .18em !important;
-  }
-
-  .isnad-quote{
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    font-size: clamp(13px, 1.35vw, 16px) !important;
-    line-height: 1.35 !important;
-  }
-
-  .isnad-source{
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    font-size: 11px !important;
-  }
-
-  .grid{
-    display:grid !important;
-    grid-template-columns: minmax(270px, 310px) minmax(0, 1fr) !important;
-    gap: 18px !important;
-    align-items:start !important;
-  }
-
-  aside{
-    position: sticky !important;
-    top: max(12px, var(--app-safe-top)) !important;
-    border-radius: 24px !important;
-    padding: 18px !important;
-    max-height: calc(100svh - max(30px, var(--app-safe-top)) - max(20px, var(--app-safe-bottom))) !important;
-    overflow:auto !important;
-    scrollbar-width: thin;
-  }
-
-  aside h2,
-  .panel h2,
-  .knowledge h2{
-    font-size: clamp(26px, 3vw, 34px) !important;
-  }
-
-  .panel,
-  .knowledge,
-  .notice,
-  .post-card{
-    border-radius: 24px !important;
-  }
-
-  .panel,
-  .knowledge{
-    padding: 18px !important;
-  }
-
-  .stats{
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-    gap: 12px !important;
-  }
-
-  .stat{
-    min-height: 74px !important;
-    padding: 14px 16px !important;
-    border-radius: 16px !important;
-  }
-
-  .stat b{
-    font-size: clamp(24px, 3vw, 32px) !important;
-  }
-
-  .mobile-quick-cats{
-    display:grid !important;
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-    gap: 12px !important;
-  }
-
-  .mobile-cat-btn{
-    min-height: 74px !important;
-    border-radius: 18px !important;
-    padding: 14px 16px !important;
-  }
-
-  .mobile-cat-btn b{
-    font-size: 16px !important;
-  }
-
-  .mobile-cat-btn span{
-    font-size: 12px !important;
-  }
-
-  body:not(.clean-home) .posts{
-    display:grid !important;
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-    gap: 14px !important;
-  }
-
-  .post-card{
-    min-height: 230px !important;
-    padding: 18px !important;
-  }
-
-  .post-card h3{
-    font-size: clamp(26px, 3vw, 36px) !important;
-    line-height: 1.03 !important;
-  }
-
-  .excerpt{
-    font-size: clamp(17px, 1.9vw, 22px) !important;
-    line-height: 1.35 !important;
-  }
-
-  .source-preview{
-    font-size: 11px !important;
-  }
-
-  .open{
-    min-height: 40px !important;
-    font-size: 13px !important;
-  }
-
-  .modal{
-    align-items:center !important;
-    padding:
-      max(18px, var(--app-safe-top))
-      max(16px, var(--app-safe-right))
-      max(18px, var(--app-safe-bottom))
-      max(16px, var(--app-safe-left)) !important;
-  }
-
-  .article{
-    width:min(940px, calc(100vw - 40px)) !important;
-    max-height: calc(100svh - max(44px, var(--app-safe-top)) - max(30px, var(--app-safe-bottom))) !important;
-    overflow:auto !important;
-    border-radius: 28px !important;
-    padding: clamp(20px, 2.2vw, 32px) !important;
-  }
-
-  .article h2{
-    font-size: clamp(34px, 4.2vw, 52px) !important;
-  }
-
-  .article .statement{
-    font-size: clamp(21px, 2.3vw, 30px) !important;
-    line-height: 1.65 !important;
-  }
-
-  footer.site{
-    border-radius: 24px !important;
-    margin-top: 18px !important;
-    padding-top: 26px !important;
-  }
-}
-
-/* iPad Hochformat: App-Feeling statt breiter Webseite */
-@media (min-width: 700px) and (max-width: 1024px) and (orientation: portrait){
-  .site{
-    width: min(900px, calc(100vw - 28px)) !important;
-    max-width: min(900px, calc(100vw - 28px)) !important;
-  }
-
-  .top{
-    grid-template-columns: 1fr !important;
-  }
-
-  .links{
-    display:grid !important;
-    grid-template-columns: 1fr 1fr !important;
-  }
-
-  .grid{
-    grid-template-columns: 1fr !important;
-  }
-
-  aside{
-    position: static !important;
-    max-height:none !important;
-  }
-
-  body:not(.clean-home) .posts{
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-  }
-}
-
-/* Tablet Querformat: richtige App-Ansicht mit Sidebar */
-@media (min-width: 900px) and (orientation: landscape){
-  .grid{
-    grid-template-columns: 300px minmax(0,1fr) !important;
-  }
-
-  body:not(.clean-home) .posts{
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-  }
-}
-
-/* sehr große Tablets / Desktop-App */
-@media (min-width: 1200px){
-  body.tablet-app-mode .site{
-    width:min(1280px, calc(100vw - 52px)) !important;
-    max-width:min(1280px, calc(100vw - 52px)) !important;
-  }
-
-  body.tablet-app-mode body:not(.clean-home) .posts,
-  body.tablet-app-mode .posts{
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-  }
-}
-
-/* ONESIGNAL_FLOATING_WIDGET_FINAL */
-.push-widget{
-  position: fixed;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: calc(14px + env(safe-area-inset-bottom));
-  z-index: 40;
-  width: min(360px, calc(100vw - 24px));
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  pointer-events: none;
-}
-.push-widget > *{ pointer-events: auto; }
-.push-widget-card,
-.push-float-btn{
-  border: 1px solid rgba(217,189,114,.72);
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
-    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
-  box-shadow: 0 18px 42px rgba(0,0,0,.32);
-}
-.push-widget-card{
-  padding: 14px 15px;
-  color: #f8efd0;
-}
-.push-widget-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-.push-widget-bell{
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display:grid;
-  place-items:center;
-  background: linear-gradient(180deg, #eed48b, #caa24f);
-  color:#182012;
-  font-size: 18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
-}
-.push-widget-title{
-  display:flex;
-  flex-direction:column;
-  line-height:1.12;
-}
-.push-widget-title strong{
-  color: var(--gold2);
-  font-size: 16px;
-  font-family: var(--serif);
-}
-.push-widget-title span{
-  color: #d9cfaa;
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.push-widget-text{
-  font-size: 13px;
-  line-height: 1.5;
-  color:#f7f0d7;
-}
-.push-widget-text strong{ color: #fff5cf; }
-.push-widget-actions{
-  margin-top: 12px;
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.push-widget-btn,
-.push-float-btn{
-  font: inherit;
-  cursor: pointer;
-}
-.push-widget-btn{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.85);
-  border-radius: 14px;
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #efd691, #d2ab55);
-  color:#152013;
-  font-weight: 800;
-  font-size: 14px;
-  flex: 1 1 220px;
-  min-height: 46px;
-}
-.push-widget-btn:hover,
-.push-float-btn:hover{ filter: brightness(1.03); }
-.push-widget-ghost{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.28);
-  border-radius: 14px;
-  padding: 12px 14px;
-  min-height: 46px;
-  background: rgba(255,255,255,.02);
-  color:#f0e6c4;
-  font-weight:700;
-}
-.push-float-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  min-height: 54px;
-  padding: 13px 16px;
-  color:#fff8e6;
-  background:
-    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
-    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
-  font-weight: 800;
-  letter-spacing:.01em;
-}
-.push-float-btn .mini-bell{
-  display:grid;
-  place-items:center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #efd691, #cca450);
-  color:#152013;
-  font-size: 15px;
-}
-.push-float-btn.active{
-  border-color: rgba(96,185,116,.72);
-  background:
-    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
-    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
-}
-.push-float-btn.active .mini-bell{
-  background: linear-gradient(180deg, #8dd59e, #53a969);
-  color:#0c1b10;
-}
-.push-widget.hidden-card .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
-.push-inline-chip{
-  margin-top: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:10px;
-  border:1px solid rgba(217,189,114,.35);
-  border-radius: 16px;
-  padding: 10px 12px;
-  background: rgba(255,255,255,.015);
-  color:#f4e8bf;
-  font-size: 13px;
-}
-.push-inline-chip strong{
-  display:block;
-  color:#fff3c9;
-  margin-bottom:2px;
-  font-size: 13px;
-}
-.push-inline-chip .chip-bell{
-  display:grid;
-  place-items:center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: linear-gradient(180deg, #efd691, #caa34f);
-  color:#152013;
-  font-size: 16px;
-  flex: 0 0 auto;
-}
-@media (max-width: 699px){
-  .push-widget{
-    left: 12px;
-    right: 12px;
-    width: auto;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-  }
-  .push-widget-card{
-    padding: 13px 13px;
-  }
-  .push-inline-chip{
-    display:none;
-  }
-}
-
-</style>
-
-
-<style id="android-smartphone-scroll-fix-final">
-/* Android Smartphone PWA Scroll-Fix: Rotation bleibt, Touch-Scroll wird freigegeben. */
-html,
-body{
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  height: auto !important;
-  min-height: 100dvh !important;
-  position: relative !important;
-  touch-action: pan-y !important;
-  -webkit-overflow-scrolling: touch !important;
-  overscroll-behavior-y: auto !important;
-}
-
-.site,
-header,
-main,
-.grid,
-.main,
-.panel,
-.knowledge,
-.posts,
-.post-card,
-.notice,
-aside{
-  touch-action: pan-y !important;
-}
-
-button,
-a,
-input,
-summary,
-.chip,
-.mobile-cat-btn,
-.open,
-.social-chip{
-  touch-action: manipulation !important;
-}
-
-@media (max-width: 699px){
-  body,
-  body.pwa-installed,
-  body.tablet-app-mode{
-    overflow-y: auto !important;
-    height: auto !important;
-    min-height: 100dvh !important;
-    touch-action: pan-y !important;
-    overscroll-behavior-y: auto !important;
-  }
-
-  .site,
-  .grid,
-  .main,
-  .posts{
-    overflow: visible !important;
-  }
-
-  aside{
-    overflow: visible !important;
-    max-height: none !important;
-    position: static !important;
-  }
-}
-
-.modal.opened{
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  touch-action: pan-y !important;
-}
-
-.article{
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  touch-action: pan-y !important;
-}
-
-/* ONESIGNAL_FLOATING_WIDGET_FINAL */
-.push-widget{
-  position: fixed;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: calc(14px + env(safe-area-inset-bottom));
-  z-index: 40;
-  width: min(360px, calc(100vw - 24px));
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  pointer-events: none;
-}
-.push-widget > *{ pointer-events: auto; }
-.push-widget-card,
-.push-float-btn{
-  border: 1px solid rgba(217,189,114,.72);
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at top left, rgba(37,74,46,.38), transparent 40%),
-    linear-gradient(180deg, rgba(17,31,22,.98), rgba(7,15,10,.98));
-  box-shadow: 0 18px 42px rgba(0,0,0,.32);
-}
-.push-widget-card{
-  padding: 14px 15px;
-  color: #f8efd0;
-}
-.push-widget-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-.push-widget-bell{
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display:grid;
-  place-items:center;
-  background: linear-gradient(180deg, #eed48b, #caa24f);
-  color:#182012;
-  font-size: 18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
-}
-.push-widget-title{
-  display:flex;
-  flex-direction:column;
-  line-height:1.12;
-}
-.push-widget-title strong{
-  color: var(--gold2);
-  font-size: 16px;
-  font-family: var(--serif);
-}
-.push-widget-title span{
-  color: #d9cfaa;
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.push-widget-text{
-  font-size: 13px;
-  line-height: 1.5;
-  color:#f7f0d7;
-}
-.push-widget-text strong{ color: #fff5cf; }
-.push-widget-actions{
-  margin-top: 12px;
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.push-widget-btn,
-.push-float-btn{
-  font: inherit;
-  cursor: pointer;
-}
-.push-widget-btn{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.85);
-  border-radius: 14px;
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #efd691, #d2ab55);
-  color:#152013;
-  font-weight: 800;
-  font-size: 14px;
-  flex: 1 1 220px;
-  min-height: 46px;
-}
-.push-widget-btn:hover,
-.push-float-btn:hover{ filter: brightness(1.03); }
-.push-widget-ghost{
-  appearance:none;
-  border:1px solid rgba(217,189,114,.28);
-  border-radius: 14px;
-  padding: 12px 14px;
-  min-height: 46px;
-  background: rgba(255,255,255,.02);
-  color:#f0e6c4;
-  font-weight:700;
-}
-.push-float-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  min-height: 54px;
-  padding: 13px 16px;
-  color:#fff8e6;
-  background:
-    radial-gradient(circle at top left, rgba(209,169,73,.16), transparent 45%),
-    linear-gradient(180deg, rgba(19,36,25,.98), rgba(8,17,12,.98));
-  font-weight: 800;
-  letter-spacing:.01em;
-}
-.push-float-btn .mini-bell{
-  display:grid;
-  place-items:center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #efd691, #cca450);
-  color:#152013;
-  font-size: 15px;
-}
-.push-float-btn.active{
-  border-color: rgba(96,185,116,.72);
-  background:
-    radial-gradient(circle at top left, rgba(96,185,116,.18), transparent 45%),
-    linear-gradient(180deg, rgba(15,41,23,.98), rgba(7,18,11,.98));
-}
-.push-float-btn.active .mini-bell{
-  background: linear-gradient(180deg, #8dd59e, #53a969);
-  color:#0c1b10;
-}
-.push-widget.hidden-card .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-widget-card{ display:none; }
-.push-widget.permission-granted .push-float-btn{ align-self:flex-end; }
-.push-inline-chip{
-  margin-top: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:10px;
-  border:1px solid rgba(217,189,114,.35);
-  border-radius: 16px;
-  padding: 10px 12px;
-  background: rgba(255,255,255,.015);
-  color:#f4e8bf;
-  font-size: 13px;
-}
-.push-inline-chip strong{
-  display:block;
-  color:#fff3c9;
-  margin-bottom:2px;
-  font-size: 13px;
-}
-.push-inline-chip .chip-bell{
-  display:grid;
-  place-items:center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: linear-gradient(180deg, #efd691, #caa34f);
-  color:#152013;
-  font-size: 16px;
-  flex: 0 0 auto;
-}
-@media (max-width: 699px){
-  .push-widget{
-    left: 12px;
-    right: 12px;
-    width: auto;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-  }
-  .push-widget-card{
-    padding: 13px 13px;
-  }
-  .push-inline-chip{
-    display:none;
-  }
-}
-
-</style>
-
-
-
-
-<!-- APP_NAME_FULL_RESTORED_ANDROID_IOS
-App-Name überall vollständig: DAR AL TAWḤID.
-Hinweis: Android/iOS entscheiden die Schriftgröße und kürzen unter dem Icon systembedingt, wenn zu wenig Platz ist.
--->
-
-
-
-<!-- ONESIGNAL_CLEAN_RESET_OFFICIAL
-Offizielle OneSignal Web SDK Integration.
-App ID: 786d7cd6-0455-4434-ab14-0c10a7bc6b1e
-Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
--->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
-      safari_web_id: "web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
-      notifyButton: {
-        enable: false,
-      },
-      welcomeNotification: {
-        disable: false,
-        title: "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
-        message: "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",
-        url: "https://dar-al-tawhid.de/"
-      }
-    });
-
-    window.DAR_ONE_SIGNAL_READY = true;
-
-    try {
-      console.log("DAR AL TAWḤID OneSignal ready");
-    } catch(e) {}
-  });
-</script>
-
 </head>
-<body class="clean-home">
-<header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.<div class="push-inline-chip"><span class="chip-bell">🔔</span><div><strong>Benachrichtigungen einschalten</strong>Neue Beiträge direkt auf iPhone, iPad und Android erhalten.</div></div></div></section></header>
-<section class="site isnad"><div class="isnad-top">Maßstab der Überlieferung</div><div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
-<section class="panel overview-top"><h2>Übersicht</h2><div class="stats"><div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div><div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div><div class="stat"><b id="countBooks">0</b><span>Bücher</span></div><div class="stat"><b id="countTopics">0</b><span>Themen</span></div></div></section>
-<main class="site grid"><aside><h2>Navigation</h2><input id="searchInput" class="search" type="search" placeholder="Freie Suche…"><details class="filter-section"><summary>Gelehrte</summary><div id="scholarList" class="list-buttons"></div></details><details class="filter-section"><summary>Bücher</summary><div id="bookList" class="list-buttons"></div></details><details class="filter-section"><summary>Themen</summary><div id="topicList" class="list-buttons"></div></details><details class="filter-section"><summary>Hashtags</summary><div id="tagList" class="list-buttons"></div></details><div class="nav-control-row">
-  <button id="resetFilters" class="primary" type="button">Alles anzeigen</button>
-  <button id="collapseNavBtn" type="button">Alles zuklappen</button>
-</div></aside><section class="main">
-<section id="methodPanel" class="method-panel">
-  <div class="feature-title">
-    <h2>📖 Unser Maßstab</h2>
-  </div>
-  <div class="feature-sub">Diese Seite soll nicht auf bloßen Meinungen beruhen, sondern auf überprüfbaren Quellen und einer klaren Ordnung.</div>
-  <div class="method-grid" style="margin-top:10px">
-    <div class="method-card"><strong>Qurʾān zuerst</strong><span>Der Qurʾān ist der oberste Maßstab für Glauben, Wahrheit und Rechtleitung.</span></div>
-    <div class="method-card"><strong>Dann Sunnah</strong><span>Die authentische Sunnah erklärt, bestätigt und verdeutlicht die Offenbarung.</span></div>
-    <div class="method-card"><strong>Dann Āthār</strong><span>Aussagen der Ṣaḥābah und frühen Imāme werden besonders berücksichtigt.</span></div>
-    <div class="method-card"><strong>Quellen vor Meinung</strong><span>Keine ungenauen Zitate, keine Zuschreibung ohne Prüfung und keine Quelle ohne Kontrolle.</span></div>
-  </div>
-</section>
-
-<section id="dailyPanel" class="daily-panel">
-  <div class="feature-title">
-    <h2>📖 Beitrag des Tages</h2>
-  </div>
-  <div id="dailyPost" class="daily-card">Beitrag des Tages wird geladen…</div>
-</section>
-
-<section id="learningPaths" class="path-panel">
-  <div class="feature-title">
-    <h2>🧭 Lernpfade</h2>
-  </div>
-  <div class="feature-sub">Für neue Besucher: Wähle einen Pfad und öffne direkt passende Beiträge.</div>
-  <div id="learningPathGrid" class="path-grid" style="margin-top:10px"></div>
-</section>
-
-<section id="dynamicInfoPanel" class="dynamic-info-panel">
-  <div class="feature-title">
-    <h2 id="dynamicInfoTitle">Kurzinfo</h2>
-  </div>
-  <div id="dynamicInfoText" class="feature-sub"></div>
-  <div id="dynamicInfoChips" class="info-chips"></div>
-</section>
-
-<section id="libraryPanel" class="library-panel">
-  <div class="feature-title">
-    <h2>📚 Quellen & Werke</h2>
-  </div>
-  <div class="feature-sub">Eine kompakte Übersicht über die Werke, aus denen die Beiträge stammen.</div>
-  <div id="libraryGrid" class="library-grid" style="margin-top:10px"></div>
-</section>
-
-<section id="savedPanel" class="saved-panel">
-  <div class="feature-title">
-    <h2>♡ Meine gespeicherten Beiträge</h2>
-  </div>
-  <div id="savedPosts" class="saved-empty">Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.</div>
-</section>
-
-<section id="latestPopularPanel" class="feature-panel">
-  <div class="feature-title">
-    <h2>🆕 Neueste & beliebte Beiträge</h2>
-  </div>
-  <div class="feature-mini-grid">
-    <div>
-      <h3 style="font-family:var(--serif);color:var(--gold2);margin:0 0 8px">Neu hinzugefügt</h3>
-      <div id="latestPosts"></div>
-    </div>
-    <div>
-      <h3 style="font-family:var(--serif);color:var(--gold2);margin:0 0 8px">Meist geöffnet</h3>
-      <div id="popularPosts"></div>
-    </div>
-  </div>
-</section>
-
-<section id="languagePanel" class="language-panel">
-  <div class="feature-title">
-    <h2>🌍 Sprache & Originaltext</h2>
-  </div>
-  <div class="feature-sub">Die Seite ist technisch vorbereitet für spätere Mehrsprachigkeit und Originaltext-Anzeige.</div>
-  <div class="lang-row" style="margin-top:10px">
-    <button class="lang-btn active" type="button">DE</button>
-    <button class="lang-btn" type="button" disabled>TR bald</button>
-    <button class="lang-btn" type="button" disabled>EN bald</button>
-    <button class="lang-btn" type="button" disabled>AR bald</button>
-  </div>
-  <div class="push-pref-grid">
-    <button class="push-pref" type="button" data-pref="Aqīdah">Aqīdah</button>
-    <button class="push-pref" type="button" data-pref="Adab">Adab</button>
-    <button class="push-pref" type="button" data-pref="Fiqh">Fiqh</button>
-    <button class="push-pref" type="button" data-pref="Tazkiyah">Tazkiyah</button>
-    <button class="push-pref" type="button" data-pref="Tawḥīd">Tawḥīd</button>
-    <button class="push-pref" type="button" data-pref="Hadith">Hadith</button>
-  </div>
-  <div class="feature-sub" style="margin-top:8px">Hinweis: Die Auswahl wird lokal gespeichert. Später kann sie mit OneSignal-Kategorien verbunden werden.</div>
-</section>
-<section class="knowledge"><div class="knowledge-head"><h2>Wissensbereiche</h2><span>Nach Themen öffnen</span></div><div id="categoryList" class="mobile-quick-cats"></div></section><div id="homeNotice" class="notice"><strong>Wähle einen Wissensbereich</strong>Öffne zuerst einen Bereich. Danach erscheinen die passenden Beiträge.</div><section id="posts" class="posts"><div class="loading-box">Beiträge werden aus <strong>content/posts</strong> geladen…</div></section></section></main>
-<div id="modal" class="modal"><article class="article"><div class="article-top"><button id="shareBtn">Beitrag teilen</button><button id="closeBtn">Schließen</button></div><h2 id="modalTitle"></h2><div id="modalMeta" class="meta"></div><div id="modalStatement" class="statement"></div>
-<div id="modalActions" class="article-actions">
-  <button id="savePostBtn" class="article-action-btn" type="button">♡ Speichern</button>
-  <button id="sourceCheckBtn" class="article-action-btn" type="button">🔎 Quelle prüfen</button>
-  <button id="originalToggleBtn" class="article-action-btn" type="button">ع Original anzeigen</button>
-  <button id="imageShareBtn" class="article-action-btn" type="button">🖼️ Als Bild teilen</button>
-  <button id="reportBtn" class="article-action-btn" type="button">⚠️ Fehler melden</button>
-</div>
-<div id="sourceCheckPanel" class="source-check-panel"></div>
-<div id="originalPanel" class="original-panel">Für diesen Beitrag ist noch kein separater arabischer Originaltext hinterlegt. Die Funktion ist vorbereitet.</div>
-<div id="modalSource" class="article-source"></div><div id="modalLinks" class="article-links"></div></article></div>
-<div id="pushWidget" class="push-widget" aria-live="polite">
-  <div id="pushWidgetCard" class="push-widget-card">
-    <div class="push-widget-head">
-      <div class="push-widget-bell">🔔</div>
-      <div class="push-widget-title">
-        <strong>Benachrichtigungen</strong>
-        <span>DAR AL TAWḤID</span>
+<body>
+<header class="site">
+  <div class="hero-logo-bg"><img src="logo-black.png" alt="Dar Al Tawhid Logo"></div>
+  <section class="hero">
+    <div class="top">
+      <div class="brand">
+        <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
+        <h1>DAR AL TAWHID</h1>
       </div>
+      <nav class="links">
+        <a class="chip" href="https://t.me/dar_al_tauhid" target="_blank">Telegram @dar_al_tauhid</a>
+        <a class="chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank">Instagram @dar_at_tawhid</a>
+      </nav>
     </div>
-    <div class="push-widget-text"><strong>As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</strong><br>Aktiviere die Benachrichtigungen und erhalte neue Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und <strong>Āthār</strong> direkt auf dein Gerät.</div>
-    <div class="push-widget-actions">
-      <button id="pushEnableBtn" class="push-widget-btn" type="button">🔔 Benachrichtigungen aktivieren</button>
-      <button id="pushDismissBtn" class="push-widget-ghost" type="button">Später</button>
+
+    <p>Professionelle Kartenansicht. Der vollständige Beitrag öffnet sich erst nach Klick auf „Beitrag öffnen“.</p>
+
+    <div class="quick-actions">
+      <button onclick="openInternal('masstab')">Unser Maßstab</button>
+      <button onclick="openInternal('sources')">Quellen & Werke</button>
     </div>
-  </div>
-  <div id="pushActivePanel" class="push-active-panel">
-    <div class="push-active-title">✅ Benachrichtigungen aktiv</div>
-    <div class="push-active-text">Du erhältst neue Beiträge von DAR AL TAWḤID direkt auf dein Gerät. Du kannst sie hier abbestellen oder später über die Geräte-/Browser-Einstellungen verwalten.</div>
-    <div class="push-active-actions">
-      <button id="pushDisableBtn" type="button">Deaktivieren</button>
-      <button id="pushCloseBtn" type="button">Schließen</button>
+  </section>
+</header>
+
+<main class="site grid">
+  <aside>
+    <h2>Navigation</h2>
+    <input id="searchInput" class="search" type="search" placeholder="Freie Suche…">
+
+    <div class="group"><h3>Gelehrte</h3><div id="scholarList" class="list-buttons"></div></div>
+    <div class="group"><h3>Bücher</h3><div id="bookList" class="list-buttons"></div></div>
+    <div class="group"><h3>Themen</h3><div id="topicList" class="list-buttons"></div></div>
+    <div class="group"><h3>Hashtags</h3><div id="tagList" class="list-buttons"></div></div>
+    <div class="group"><button id="resetFilters">Alles anzeigen</button></div>
+  </aside>
+
+  <section>
+    <section class="panel">
+      <h2>Übersicht</h2>
+      <div class="stats">
+        <div class="stat"><b id="statPosts">0</b><span>Beiträge</span></div>
+        <div class="stat"><b id="statScholars">0</b><span>Gelehrte</span></div>
+        <div class="stat"><b id="statBooks">0</b><span>Bücher</span></div>
+        <div class="stat"><b id="statTopics">0</b><span>Themen</span></div>
+      </div>
+    </section>
+
+    <section id="posts" class="posts"></section>
+  </section>
+</main>
+
+<div id="detailOverlay" class="detail-overlay">
+  <article class="detail-view">
+    <img id="detailLogo" class="post-logo" src="logo-black.png" alt="Logo">
+    <div class="close-row">
+      <button id="backBtn">← Zur Übersicht</button>
+      <button id="closeBtn" class="close-btn">Schließen</button>
     </div>
-  </div>
-  <button id="pushFloatBtn" class="push-float-btn" type="button" aria-label="Benachrichtigungen">
-    <span class="mini-bell">🔔</span>
-    <span id="pushFloatLabel">Benachrichtigungen aktivieren</span>
-  </button>
+    <h2 id="detailTitle" class="detail-title"></h2>
+    <div id="detailMeta" class="meta" style="justify-content:center;position:relative;z-index:1"></div>
+    <div id="detailStatement" class="statement"></div>
+    <div class="source"><b id="detailSource"></b><div id="detailLinks" class="source-links"></div></div>
+  </article>
 </div>
-<footer class="site"><strong>DAR AL TAWḤID</strong><br>Folgt für mehr Wissen aus Qurʾān & Sunnah<div class="locked-original-socials"><span class="footer-social-item"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram @dar_al_tauhid</span></span><span class="footer-social-item"><svg viewBox="0 0 24 24" width="20" height="20"><defs><linearGradient id="igFooterMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFooterMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram @dar_at_tawhid</span></span></div><span class="signature">by Serhat Abu Malik</span></footer>
+
+<div id="internalOverlay" class="detail-overlay">
+  <article class="internal-view">
+    <div class="close-row">
+      <button onclick="closeInternal()">← Zurück</button>
+      <button onclick="closeInternal()" class="close-btn">Schließen</button>
+    </div>
+    <h2 id="internalTitle" class="internal-title"></h2>
+    <div id="internalBody" class="internal-body"></div>
+  </article>
+</div>
+
+<footer class="site">
+  <strong>DAR AL TAWHID</strong><br>
+  Folgt für mehr Wissen aus Qurʾān & Sunnah<br>
+  Telegram: @dar_al_tauhid · Instagram: @dar_at_tawhid<br>
+  <span class="signature">by Serhat Abu Malik</span>
+</footer>
+
 <script>
-const REPO_OWNER="Sero91ak",REPO_NAME="dar-al-tawhid-site",POSTS_DIR="content/posts",BRANCH="main";
-let posts=[],active={type:"all",value:"Alle"},currentPost=null,showHomeNotice=true,catsExpanded=false;
-const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])),stripMd=s=>String(s??"").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"");
+let posts=[];
+let active={type:"all",value:"Alle"};
+const $=id=>document.getElementById(id);
 
-const VIEW_KEY="darPostViewsV1", SAVE_KEY="darSavedPostsV1", PREF_KEY="darPushCategoryPrefsV1";
-
-function getJsonStore(key,fallback){
-  try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}catch(e){return fallback}
-}
-function setJsonStore(key,value){
-  try{localStorage.setItem(key,JSON.stringify(value));}catch(e){}
-}
-function savedIds(){return getJsonStore(SAVE_KEY,[])}
-function isSaved(id){return savedIds().includes(id)}
-function toggleSavedPost(id){
-  let ids=savedIds();
-  if(ids.includes(id)) ids=ids.filter(x=>x!==id);
-  else ids.unshift(id);
-  setJsonStore(SAVE_KEY,ids.slice(0,80));
-}
-function viewCounts(){return getJsonStore(VIEW_KEY,{})}
-function incrementView(id){
-  const v=viewCounts();
-  v[id]=(v[id]||0)+1;
-  setJsonStore(VIEW_KEY,v);
-}
-function postLine(p){
-  return `<div class="list-row"><div><strong>${esc(p.title||"")}</strong><br><span>${esc(p.scholar||p.topic||"")}</span></div><button class="action-chip" type="button" data-open-post="${esc(p.id)}">Öffnen</button></div>`;
-}
-function bindOpenButtons(root=document){
-  root.querySelectorAll("[data-open-post]").forEach(btn=>{
-    btn.onclick=()=>{
-      const p=posts.find(x=>String(x.id)===String(btn.getAttribute("data-open-post")));
-      if(p) openPost(p);
-    };
-  });
-}
-function topicIncludes(p, words){
-  const hay=[p.category,p.topic,p.title,p.scholar,p.book,(p.tags||[]).join(" "),p.statement].join(" ").toLowerCase();
-  return words.some(w=>hay.includes(String(w).toLowerCase()));
-}
-function getScholarBio(name){
-  const bios={
-    "Aḥmad ibn Ḥanbal":"Imām Aḥmad ibn Ḥanbal gehört zu den großen Imāmen von Ahlus-Sunnah. Bekannt ist er besonders für Standhaftigkeit in der Frage des Qurʾān und für starke Bindung an Hadith und Āthār.",
-    "Ahmad ibn Hanbal":"Imām Aḥmad ibn Ḥanbal gehört zu den großen Imāmen von Ahlus-Sunnah. Bekannt ist er besonders für Standhaftigkeit in der Frage des Qurʾān und für starke Bindung an Hadith und Āthār.",
-    "Abū Ḥātim ar-Rāzī":"Abū Ḥātim ar-Rāzī war ein großer Hadith-Imām und Kritiker der Überlieferer. Seine Aussagen sind besonders wichtig für Aqīdah, Hadithmethodik und Bindung an Āthār.",
-    "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī":"Abū Ḥātim und Abū Zurʿah ar-Rāzī gehören zu den bekannten Imāmen der Hadithkritik. Ihre überlieferten Grundlagen zeigen klar die Aqīdah von Ahlus-Sunnah.",
-    "Mālik ibn Anas":"Imām Mālik ibn Anas war der Imām von Madīnah und Autor des Muwaṭṭaʾ. Er steht für Bindung an Sunnah, Praxis der frühen Generationen und klare Ehrfurcht vor Überlieferung.",
-    "al-Awzāʿī":"al-Awzāʿī war ein früher Imām aus Shām. Seine Aussagen betonen das Festhalten an den Āthār und Warnung vor Neuerungen.",
-    "al-Barbahārī":"al-Barbahārī war ein bekannter Imām im Bereich Sunnah und Aqīdah. Seine Aussagen werden oft im Kontext von Festhalten an Sunnah und Warnung vor Abweichung erwähnt.",
-    "al-Lālakāʾī":"al-Lālakāʾī überlieferte in seinem Werk eine große Sammlung von Aqīdah-Aussagen und Āthār der frühen Imāme.",
-    "Ibn Baṭṭah al-ʿUkbarī":"Ibn Baṭṭah al-ʿUkbarī ist bekannt für Werke zur Sunnah, Aqīdah und Warnung vor Bidʿah.",
-    "Ibn ʿAbbās":"Ibn ʿAbbās war ein großer Ṣaḥābī und bekannter Erklärer des Qurʾān.",
-    "al-Fuḍayl ibn ʿIyāḍ":"al-Fuḍayl ibn ʿIyāḍ ist bekannt für starke Aussagen zu Tazkiyah, Ikhlāṣ, Zuhd und Warnung vor Selbsttäuschung."
-  };
-  return bios[name] || "Zu diesem Gelehrten wird eine Kurzbiografie vorbereitet. Die vorhandenen Beiträge werden bereits nach seinem Namen gefiltert angezeigt.";
-}
-function getBookInfo(name,count){
-  if(!name) return "";
-  const low=name.toLowerCase();
-  let theme="Überlieferungen und Nutzen";
-  let why="Dieses Werk wird genutzt, weil es Aussagen, Hadithe oder Āthār enthält, die zur jeweiligen Thematik passen.";
-  if(low.includes("sunan")||low.includes("jāmi")||low.includes("musnad")||low.includes("sahih")||low.includes("ṣaḥīḥ")){
-    theme="Hadith und Sunnah";
-    why="Hadithwerke sind zentrale Grundlagen, um Aussagen direkt an authentische Überlieferung zu binden.";
-  }else if(low.includes("sunnah")||low.includes("iʿtiqād")||low.includes("ibānah")||low.includes("sharīʿah")||low.includes("tawḥīd")){
-    theme="Aqīdah und Sunnah";
-    why="Dieses Werk stärkt die Darstellung der Aqīdah von Ahlus-Sunnah anhand früher Überlieferungen.";
-  }else if(low.includes("muṣannaf")||low.includes("musannaf")){
-    theme="Āthār und frühe Überlieferungen";
-    why="Muṣannaf-Werke sind wichtig, weil sie viele frühe Aussagen der Ṣaḥābah, Tābiʿīn und Imāme sammeln.";
-  }
-  return {theme,why,count};
+function esc(s=""){
+  return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
 }
 
-
-function getPostUrl(post){
-  const url = new URL(location.origin + location.pathname);
-  if(post && post.id){
-    url.searchParams.set("post", post.id);
-  }
-  return url.toString();
+function unique(a){
+  return [...new Set(a.filter(Boolean))].sort((x,y)=>x.localeCompare(y,"de"));
 }
 
-async function shareCurrentPost(){
-  if(!currentPost) return;
-
-  const postUrl = getPostUrl(currentPost);
-  const text =
-    (currentPost.title || "") + "\n\n" +
-    stripMd(currentPost.statement || "") + "\n\n" +
-    postUrl;
-
-  if(navigator.share){
-    try{
-      await navigator.share({
-        title: currentPost.title || "DAR AL TAWḤID",
-        text: text,
-        url: postUrl
-      });
-      return;
-    }catch(e){
-      if(e && (e.name === "AbortError" || e.name === "NotAllowedError")) return;
-    }
-
-    try{
-      await navigator.share({
-        title: currentPost.title || "DAR AL TAWḤID",
-        text: text
-      });
-      return;
-    }catch(e2){
-      if(e2 && (e2.name === "AbortError" || e2.name === "NotAllowedError")) return;
-    }
-  }
-
-  try{
-    await navigator.clipboard.writeText(text);
-    alert("Beitrag-Link wurde kopiert.");
-  }catch(e){
-    prompt("Kopiere den Beitrag:", text);
-  }
+function stripMd(s=""){
+  return String(s)
+    .replace(/\*\*(.*?)\*\*/g,"$1")
+    .replace(/\*(.*?)\*/g,"$1")
+    .replace(/^\s*[👉🏼🌙🖋️]\s*/gm,"")
+    .trim();
 }
 
-function openPostFromUrl(){
-  const params = new URLSearchParams(location.search);
-  const postId = params.get("post");
-  if(!postId) return false;
+function formatStatement(str=""){
+  let out=esc(str)
+    .replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g,"<em>$1</em>");
 
-  const found = posts.find(p => String(p.id) === String(postId));
-  if(found){
-    active = {type:"all", value:"Alle"};
-    showHomeNotice=false;
-    const input = document.getElementById("searchInput");
-    if(input) input.value = "";
-    render();
-    setTimeout(() => openPost(found, true), 80);
-    return true;
-  }
-  return false;
-}
-
-function parseValue(v){v=String(v||"").trim();if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v}
-
-function cleanBodyText(body){
-  let s = String(body || "");
-
-  // Ganze Markdown-Link-Zeilen entfernen, z.B. [→ Islamweb](https://...)
-  s = s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi, "");
-
-  // Einzelne rohe URL-Zeilen entfernen
-  s = s.replace(/^\s*https?:\/\/\S+\s*$/gmi, "");
-
-  // Falls ein Markdown-Link mitten im Text steht: nur Label behalten, URL entfernen
-  s = s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, "$1");
-
-  // Extrem lange sichtbare URL-Fragmente entfernen
-  s = s.replace(/https?:\/\/\S+/g, "");
-
-  // Doppelte Leerzeilen aufräumen
-  s = s.replace(/\n{3,}/g, "\n\n").trim();
-
-  return s;
-}
-
-function parseFM(md,name){let fm={},body=md;const m=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(m){body=m[2]||"";const lines=m[1].split(/\r?\n/);let current=null;for(const line of lines){let km=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(km){current=km[1];let val=km[2].trim();fm[current]=val===""?[]:parseValue(val);continue}let am=line.match(/^\s*-\s*(.*)$/);if(am&&current){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(am[1]))}}const lb=m[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(lb){const links=[];let item=null;lb[1].split(/\r?\n/).forEach(line=>{let lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={label:parseValue(lm[1]),url:""};links.push(item);return}lm=line.match(/^\s*url:\s*(.*)$/);if(lm&&item)item.url=parseValue(lm[1])});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:(fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[]);return{id:fm.id||name.replace(/\.md$/,""),date:fm.date||"",title:fm.title||name.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],statement:cleanBodyText(body)}}
-async function loadPosts(){
-  const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;
-  try{
-    const res=await fetch(api,{cache:"no-store"});
-    if(!res.ok)throw new Error("GitHub API konnte content/posts nicht laden");
-    const files=await res.json();
-    const md=files.filter(f=>f.type==="file"&&f.name.endsWith(".md"));
-    posts=await Promise.all(md.map(async f=>{
-      const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${f.name}`;
-      const r=await fetch(raw,{cache:"no-store"});
-      return parseFM(await r.text(),f.name)
-    }));
-    posts=posts.map(p=>({...p,statement:cleanBodyText(p.statement)}));
-    posts.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
-    setJsonStore("darCachedPostsV1",posts);
-  }catch(e){
-    const cached=getJsonStore("darCachedPostsV1",[]);
-    if(cached&&cached.length){
-      posts=cached;
-      console.warn("Offline/Cache-Modus: Beiträge aus lokalem Cache geladen.",e);
-      return;
-    }
-    throw e;
-  }
-}
-function setNavigationSections(openAll){
-  document.querySelectorAll("aside .filter-section").forEach(d=>{
-    if(openAll) d.setAttribute("open","");
-    else d.removeAttribute("open");
-  });
-}
-function scrollToResults(){
-  const target = document.getElementById("posts") || document.querySelector(".knowledge");
-  if(!target) return;
-  setTimeout(() => {
-    target.scrollIntoView({behavior:"smooth", block:"start"});
-  }, 80);
-}
-function countBy(k){const m=new Map();posts.forEach(p=>{const v=p[k]||"Unbekannt";m.set(v,(m.get(v)||0)+1)});return m}function countTags(){const m=new Map();posts.forEach(p=>(p.tags||[]).forEach(t=>m.set(t,(m.get(t)||0)+1)));return m}
-function buttonList(root,map,type){root.innerHTML="";const all=document.createElement("button");all.textContent=`Alle (${posts.length})`;all.className=active.type==="all"?"active":"";all.onclick=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;$("searchInput").value="";render();scrollToResults()};root.appendChild(all);[...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de")).forEach(([name,count])=>{const b=document.createElement("button");b.textContent=`${name} (${count})`;b.className=active.type===type&&active.value===name?"active":"";b.onclick=()=>{active={type,value:name};showHomeNotice=false;render();scrollToResults()};root.appendChild(b)})}
-function buildCats(){
-  const root=$("categoryList");
-  root.innerHTML="";
-  const map=countBy("category");
-  const keys=[...map.keys()].sort((a,b)=>{
-    const order=["Adab","Akhlāq","Akhlaq"];
-    const ia=order.indexOf(a);
-    const ib=order.indexOf(b);
-    if(ia!==-1 || ib!==-1){
-      if(ia===-1) return 1;
-      if(ib===-1) return -1;
-      return ia-ib;
-    }
-    return a.localeCompare(b,"de");
+  ["Allāh","Allah","Qurʾān","Sunnah","Ahlus-Sunnah","Ahl al-Sunnah","Tawḥīd","Aqīdah","Fiqh","Zuhd","Taqwā","Bidʿah","Īmān","Kufr","Schirk","Salaf","Āthār","Hadith"].forEach(w=>{
+    const safe=w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+    out=out.replace(new RegExp(`(?<![\\w>])(${safe})(?![^<]*>|[\\w])`,"g"),'<span class="auto">$1</span>');
   });
 
-  const firstVisible=2;
-  const shouldExpand=catsExpanded || (active.type==="category" && keys.slice(firstVisible).includes(active.value));
-  const visible=shouldExpand ? keys : keys.slice(0, firstVisible);
+  return out.replace(/\n/g,"<br>");
+}
 
-  visible.forEach(k=>{
-    const btn=document.createElement("button");
-    btn.className="mobile-cat-btn"+(active.type==="category"&&active.value===k?" active":"");
-    btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;
-    btn.onclick=()=>{
-      active={type:"category",value:k};
-      showHomeNotice=false;
-      $("searchInput").value="";
-      render();
-      scrollToResults();
-    };
-    root.appendChild(btn);
+function countBy(key,array=false){
+  const m=new Map();
+  posts.forEach(p=>{
+    const vals=array?(p[key]||[]):[p[key]];
+    vals.filter(Boolean).forEach(v=>m.set(v,(m.get(v)||0)+1));
   });
-
-  if(keys.length>firstVisible){
-    const wrap=document.createElement("div");
-    wrap.className="category-toggle-wrap";
-
-    const hint=document.createElement("div");
-    hint.className="category-hint";
-    hint.textContent=shouldExpand
-      ? "Du kannst die weiteren Wissensbereiche wieder einklappen."
-      : "Hinweis: Weitere Wissensbereiche wie Aqīdah, Fiqh, Tawḥīd, Tazkiyah und Zuhd hier aufklappen.";
-
-    const toggle=document.createElement("button");
-    toggle.type="button";
-    toggle.className="category-toggle-btn";
-    toggle.textContent=shouldExpand ? "Wissensbereiche einklappen" : "Weitere Wissensbereiche anzeigen";
-    toggle.onclick=()=>{
-      catsExpanded=!shouldExpand;
-      render();
-      const target=document.querySelector(".knowledge");
-      if(target) setTimeout(()=>target.scrollIntoView({behavior:"smooth",block:"start"}),80);
-    };
-
-    wrap.appendChild(hint);
-    wrap.appendChild(toggle);
-    root.appendChild(wrap);
-  }
+  return m;
 }
-function matches(p){const q=$("searchInput").value.trim().toLowerCase();let ok=true;if(active.type==="scholar")ok=p.scholar===active.value;if(active.type==="book")ok=p.book===active.value;if(active.type==="topic")ok=p.topic===active.value;if(active.type==="tag")ok=(p.tags||[]).includes(active.value);if(active.type==="category")ok=p.category===active.value;if(q)ok=ok&&[p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(q);return ok}
 
-function renderFeaturePanels(){
-  renderDailyPost();
-  renderLearningPaths();
-  renderLibrary();
-  renderSavedPosts();
-  renderLatestPopular();
-  renderPushPrefs();
-  updateDynamicInfo();
+function btn(label,type,count){
+  const b=document.createElement("button");
+  b.type="button";
+  b.textContent=count?`${label} (${count})`:label;
+  if(active.type===type&&active.value===label)b.classList.add("active");
+  b.onclick=()=>{active={type,value:label};render()};
+  return b;
 }
-function renderDailyPost(){
-  const root=$("dailyPost");
-  if(!root||!posts.length)return;
-  const today=new Date();
-  const idx=Math.abs(today.getFullYear()*372+(today.getMonth()+1)*31+today.getDate())%posts.length;
-  const p=posts[idx];
-  const quote=stripMd(p.statement||"").split("\n").filter(Boolean)[0]||"";
-  root.innerHTML=`<h3>${esc(p.title)}</h3><p>${esc(quote.slice(0,190))}</p><button class="action-chip" type="button" data-open-post="${esc(p.id)}">Beitrag öffnen</button>`;
-  bindOpenButtons(root);
-}
-function renderLearningPaths(){
-  const root=$("learningPathGrid");
-  if(!root)return;
-  const paths=[
-    {title:"Tawḥīd Grundlagen",desc:"Beiträge zu Tawḥīd, Duʿāʾ, Allah allein anrufen und Grundlage des Dīn.",type:"category",value:"Tawhid",words:["tawhid","tawḥīd","duʿā","allah"]},
-    {title:"Aqīdah gegen Jahmiyyah",desc:"Aussagen zu Ṣifāt Allah, Qurʾān, Īmān und Widerlegung der Abweichungen.",type:"category",value:"Aqīdah",words:["aqīdah","sifat","ṣifāt","jahm","qurʾān"]},
-    {title:"Adab des Wissens",desc:"Adab, Wissen, Umgang mit Quellen und Benehmen beim Lernen.",type:"category",value:"Adab",words:["adab","wissen","ʿilm","quelle"]},
-    {title:"Akhlaq & Tazkiyah",desc:"Herz, Charakter, Tazkiyah, Geduld und Selbstreinigung.",type:"category",value:"Akhlāq",words:["akhlaq","akhlāq","tazkiyah","herz","geduld"]},
-    {title:"Fiqh-Grundlagen",desc:"Beiträge mit juristischem Nutzen und praktischer Einordnung.",type:"category",value:"Fiqh",words:["fiqh","salāh","gebet","hukm"]},
-    {title:"Manhaj der frühen Imāme",desc:"Festhalten an Sunnah, Āthār und Warnung vor Bidʿah.",type:"topic",value:"Manhaj",words:["sunnah","āthār","bidʿah","manhaj"]}
+
+function renderLists(){
+  const lists=[
+    ["scholarList","scholar",countBy("scholar")],
+    ["bookList","book",countBy("book")],
+    ["topicList","topic",countBy("topic")],
+    ["tagList","tag",countBy("tags",true)]
   ];
-  root.innerHTML=paths.map((p,i)=>`<div class="path-card" data-path-index="${i}"><strong>${esc(p.title)}</strong><span>${esc(p.desc)}</span></div>`).join("");
-  root.querySelectorAll(".path-card").forEach((card,i)=>{
-    card.onclick=()=>{
-      const path=paths[i];
-      const exact=posts.some(p=>p.category===path.value);
-      if(exact) active={type:"category",value:path.value};
-      else{
-        const found=posts.find(p=>topicIncludes(p,path.words));
-        active=found?{type:"category",value:found.category}:{type:"all",value:"Alle"};
-      }
-      showHomeNotice=false;
-      const input=$("searchInput"); if(input) input.value="";
-      render();
-      scrollToResults();
-    };
-  });
+
+  for(const [id,type,map] of lists){
+    $(id).innerHTML="";
+    $(id).appendChild(btn("Alle","all",posts.length));
+    [...map.keys()]
+      .sort((a,b)=>a.localeCompare(b,"de"))
+      .forEach(x=>$(id).appendChild(btn(x,type,map.get(x))));
+  }
 }
-function renderLibrary(){
-  const root=$("libraryGrid");
-  if(!root)return;
-  const map=countBy("book");
-  const entries=[...map.entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>b[1]-a[1]).slice(0,12);
-  root.innerHTML=entries.map(([name,count])=>{
-    const info=getBookInfo(name,count);
-    return `<div class="library-card"><strong>${esc(name)}</strong><span><b>Thema:</b> ${esc(info.theme)}<br><b>Nutzen:</b> ${esc(info.why)}<br><b>Beiträge:</b> ${count}</span><button class="action-chip" type="button" data-book-filter="${esc(name)}">Öffnen</button></div>`;
-  }).join("") || '<div class="inline-message">Noch keine Bücher erkannt.</div>';
-  root.querySelectorAll("[data-book-filter]").forEach(btn=>{
-    btn.onclick=()=>{
-      active={type:"book",value:btn.getAttribute("data-book-filter")};
-      showHomeNotice=false;
-      $("searchInput").value="";
-      render();
-      scrollToResults();
-    };
-  });
+
+function matches(p,q){
+  const hay=[p.title,p.category,p.topic,p.scholar,p.book,p.statement,p.source,...(p.tags||[])].join(" ").toLowerCase();
+  let ok=!q||hay.includes(q);
+
+  if(active.type==="scholar")ok=ok&&p.scholar===active.value;
+  if(active.type==="book")ok=ok&&p.book===active.value;
+  if(active.type==="topic")ok=ok&&p.topic===active.value;
+  if(active.type==="tag")ok=ok&&(p.tags||[]).includes(active.value);
+
+  return ok;
 }
-function renderSavedPosts(){
-  const root=$("savedPosts");
-  if(!root)return;
-  const ids=savedIds();
-  const saved=ids.map(id=>posts.find(p=>String(p.id)===String(id))).filter(Boolean);
-  if(!saved.length){
-    root.className="saved-empty";
-    root.innerHTML='Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.';
+
+function excerpt(p){
+  const text=stripMd(p.statement||"");
+  const lines=text.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  const first=lines.find(x=>x.includes("sagte")||x.startsWith("„")||x.length>30)||lines[0]||"";
+  return first.length>180?first.slice(0,180)+"…":first;
+}
+
+function renderPosts(){
+  const root=$("posts");
+  root.innerHTML="";
+  const q=$("searchInput").value.trim().toLowerCase();
+  const filtered=posts.filter(p=>matches(p,q));
+
+  if(!filtered.length){
+    root.innerHTML='<div class="empty">Noch keine Beiträge vorhanden.</div>';
     return;
   }
-  root.className="";
-  root.innerHTML=saved.slice(0,8).map(postLine).join("");
-  bindOpenButtons(root);
-}
-function renderLatestPopular(){
-  const latest=$("latestPosts"), popular=$("popularPosts");
-  if(latest){
-    latest.innerHTML=posts.slice(0,5).map(postLine).join("") || '<div class="inline-message">Noch keine Beiträge.</div>';
-    bindOpenButtons(latest);
-  }
-  if(popular){
-    const views=viewCounts();
-    const ranked=[...posts].sort((a,b)=>(views[b.id]||0)-(views[a.id]||0)).slice(0,5);
-    popular.innerHTML=ranked.some(p=>(views[p.id]||0)>0)
-      ? ranked.map(postLine).join("")
-      : '<div class="inline-message">Beliebte Beiträge erscheinen hier, sobald Besucher Beiträge öffnen.</div>';
-    bindOpenButtons(popular);
-  }
-}
-function renderPushPrefs(){
-  const prefs=getJsonStore(PREF_KEY,[]);
-  document.querySelectorAll(".push-pref").forEach(btn=>{
-    const val=btn.getAttribute("data-pref");
-    btn.classList.toggle("active",prefs.includes(val));
-    btn.onclick=()=>{
-      let list=getJsonStore(PREF_KEY,[]);
-      if(list.includes(val)) list=list.filter(x=>x!==val);
-      else list.push(val);
-      setJsonStore(PREF_KEY,list);
-      renderPushPrefs();
-    };
+
+  filtered.forEach((p,i)=>{
+    const a=document.createElement("article");
+    a.className="post-card";
+    const tags=(p.tags||[]).slice(0,5).map(t=>`<span class="badge">${esc(t)}</span>`).join("");
+
+    a.innerHTML=`
+      <img class="post-logo" src="${esc(p.logo||"logo-black.png")}" alt="Logo">
+      <div class="card-inner">
+        <h2 class="card-title">${esc(p.title)}</h2>
+        <div class="meta">
+          <span class="badge">${esc(p.scholar)}</span>
+          <span class="badge">${esc(p.topic)}</span>
+          ${tags}
+        </div>
+        <p class="excerpt">${esc(excerpt(p))}</p>
+        <div class="card-source">${esc(p.source||"")}</div>
+      </div>
+      <div class="card-actions" style="position:relative;z-index:1">
+        <button class="open-btn" data-open="${i}">Beitrag öffnen</button>
+      </div>`;
+
+    a.querySelector("[data-open]").onclick=()=>openPost(p);
+    root.appendChild(a);
   });
 }
-function updateDynamicInfo(){
-  const panel=$("dynamicInfoPanel");
-  const title=$("dynamicInfoTitle");
-  const text=$("dynamicInfoText");
-  const chips=$("dynamicInfoChips");
-  if(!panel||!title||!text||!chips)return;
-  panel.classList.remove("show");
-  if(active.type==="scholar"){
-    title.textContent="👤 Kurzbiografie: "+active.value;
-    text.textContent=getScholarBio(active.value);
-    chips.innerHTML=`<button class="action-chip" type="button" onclick="scrollToResults()">Beiträge anzeigen</button>`;
-    panel.classList.add("show");
-  }else if(active.type==="book"){
-    const count=posts.filter(p=>p.book===active.value).length;
-    const info=getBookInfo(active.value,count);
-    title.textContent="📚 Quelle: "+active.value;
-    text.innerHTML=`<strong>Thema:</strong> ${esc(info.theme)}<br><strong>Warum wichtig:</strong> ${esc(info.why)}<br><strong>Beiträge aus diesem Werk:</strong> ${count}`;
-    chips.innerHTML=`<button class="action-chip" type="button" onclick="scrollToResults()">Beiträge anzeigen</button>`;
-    panel.classList.add("show");
-  }else if(active.type==="topic"||active.type==="category"||active.type==="tag"){
-    title.textContent="🧭 Auswahl: "+active.value;
-    text.textContent="Die Beiträge unten sind nach dieser Auswahl gefiltert. So findet der Besucher schneller, was er sucht.";
-    chips.innerHTML=`<button class="action-chip" type="button" onclick="scrollToResults()">Zu den Beiträgen</button>`;
-    panel.classList.add("show");
+
+function openPost(p){
+  $("detailLogo").src=p.logo||"logo-black.png";
+  $("detailTitle").textContent=p.title||"";
+
+  $("detailMeta").innerHTML=
+    `<span class="badge">${esc(p.scholar||"")}</span>
+     <span class="badge">${esc(p.book||"")}</span>
+     <span class="badge">${esc(p.topic||"")}</span>`+
+    (p.tags||[]).map(t=>`<span class="badge">${esc(t)}</span>`).join("");
+
+  $("detailStatement").innerHTML=formatStatement(p.statement||"");
+  $("detailSource").textContent=p.source||"";
+  $("detailLinks").innerHTML=(p.links||[]).map(l=>l.url?`<a href="${esc(l.url)}" target="_blank">${esc(l.label||"→ Quelle")}</a>`:"").join("");
+
+  $("detailOverlay").classList.add("active");
+  history.replaceState(null,"","#"+encodeURIComponent(p.id||p.title||"beitrag"));
+}
+
+function closePost(){
+  $("detailOverlay").classList.remove("active");
+  history.replaceState(null,"",location.pathname);
+}
+
+function openInternal(name){
+  if(name==="masstab"){
+    $("internalTitle").textContent="📖 Unser Maßstab";
+    $("internalBody").innerHTML=
+      "👉🏼 Unser Maßstab ist zuerst der <strong>Qurʾān</strong>, dann die <strong>Sunnah</strong>, dann die <strong>Āthār</strong> der Ṣaḥābah und der frühen Imāme.<br><br>"+
+      "Beiträge werden nicht auf bloße Meinung, Trends oder unklare Zuschreibungen aufgebaut. Jede Aussage soll nach Möglichkeit mit genauer Quelle, Werk, Nummer oder Seite und direktem Quellenlink belegt werden.<br><br>"+
+      "🌙 <strong>Fazit:</strong> Diese Seite sammelt Beiträge, die an Qurʾān, Sunnah und den überlieferten Grundlagen der Ahlus-Sunnah ausgerichtet sind.";
+
+    history.replaceState(null,"","#unser-masstab");
+  }
+
+  if(name==="sources"){
+    $("internalTitle").textContent="📚 Quellen & Werke";
+
+    const books=countBy("book");
+    const items=[...books.keys()]
+      .sort((a,b)=>a.localeCompare(b,"de"))
+      .map(book=>{
+        const safeBook=book.replaceAll("'","\\'");
+        return `<div class="source-item">
+          <strong>${esc(book)}</strong><br>
+          <span class="muted">Beiträge aus diesem Werk: ${books.get(book)}</span><br>
+          <button style="margin-top:10px" onclick="filterBookFromInternal('${esc(safeBook)}')">Beiträge anzeigen</button>
+        </div>`;
+      }).join("");
+
+    $("internalBody").innerHTML=
+      `<p class="muted" style="text-align:center;font-family:system-ui;font-size:16px">
+        Kompakte interne Übersicht. Keine langen freien Quellenblöcke auf der Startseite.
+      </p>
+      <div class="source-list">${items || "<p>Keine Werke vorhanden.</p>"}</div>`;
+
+    history.replaceState(null,"","#quellen-werke");
+  }
+
+  $("internalOverlay").classList.add("active");
+}
+
+function filterBookFromInternal(book){
+  active={type:"book",value:book};
+  closeInternal();
+  render();
+  window.scrollTo({top:document.querySelector("#posts").offsetTop-20,behavior:"smooth"});
+}
+
+function closeInternal(){
+  $("internalOverlay").classList.remove("active");
+  history.replaceState(null,"",location.pathname);
+}
+
+function renderStats(){
+  $("statPosts").textContent=posts.length;
+  $("statScholars").textContent=unique(posts.map(p=>p.scholar)).length;
+  $("statBooks").textContent=unique(posts.map(p=>p.book)).length;
+  $("statTopics").textContent=unique(posts.map(p=>p.topic)).length;
+}
+
+function render(){
+  renderStats();
+  renderLists();
+  renderPosts();
+}
+
+async function load(){
+  try{
+    const res=await fetch("posts.json",{cache:"no-store"});
+    posts=await res.json();
+  }catch(e){
+    posts=[];
+  }
+
+  render();
+
+  if(location.hash==="#unser-masstab")openInternal("masstab");
+  else if(location.hash==="#quellen-werke")openInternal("sources");
+  else if(location.hash){
+    const id=decodeURIComponent(location.hash.slice(1));
+    const p=posts.find(x=>(x.id||x.title)===id);
+    if(p)openPost(p);
   }
 }
 
-function renderStats(){$("countPosts").textContent=posts.length;$("countScholars").textContent=countBy("scholar").size;$("countBooks").textContent=countBy("book").size;$("countTopics").textContent=countBy("topic").size}
-function renderLists(){buttonList($("scholarList"),countBy("scholar"),"scholar");buttonList($("bookList"),countBy("book"),"book");buttonList($("topicList"),countBy("topic"),"topic");buttonList($("tagList"),countTags(),"tag")}
-function renderPosts(){const root=$("posts");const filtered=posts.filter(matches);const cleanHome=showHomeNotice&&active.type==="all"&&!$("searchInput").value.trim();document.body.classList.toggle("clean-home",cleanHome);$("homeNotice").style.display=cleanHome?"block":"none";root.innerHTML="";if(!posts.length){root.innerHTML='<div class="error-box">Keine Markdown-Beiträge gefunden. Prüfe content/posts.</div>';return}filtered.forEach(p=>{const el=document.createElement("article");el.className="post-card";const quote=stripMd(p.statement).split("\n").filter(Boolean).find(x=>x.includes("„"))||stripMd(p.statement).slice(0,180);el.innerHTML=`<div><h3>${esc(p.title)}</h3><div class="meta"><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.topic||"")}</span>${(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${esc(t)}</span>`).join("")}</div><div class="excerpt">${esc(quote)}</div><div class="source-preview">${esc(p.source||"")}</div></div><button class="open">Beitrag öffnen</button>`;el.querySelector(".open").onclick=()=>openPost(p);root.appendChild(el)})}
-function formatText(raw){return esc(raw).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/\n/g,"<br>")}
-
-function createShareImage(p){
-  const canvas=document.createElement("canvas");
-  canvas.width=1080; canvas.height=1350;
-  const ctx=canvas.getContext("2d");
-  ctx.fillStyle="#06110b"; ctx.fillRect(0,0,canvas.width,canvas.height);
-  const g=ctx.createLinearGradient(0,0,1080,1350);
-  g.addColorStop(0,"#0f2116"); g.addColorStop(1,"#030604");
-  ctx.fillStyle=g; ctx.fillRect(34,34,1012,1282);
-  ctx.strokeStyle="#d6bd76"; ctx.lineWidth=4; ctx.strokeRect(54,54,972,1242);
-  ctx.fillStyle="#f2df9b"; ctx.font="700 58px Georgia, serif"; ctx.textAlign="center";
-  ctx.fillText("DAR AL TAWḤID",540,130);
-  ctx.fillStyle="#fff6dc"; ctx.font="700 46px Georgia, serif";
-  wrapCanvasText(ctx,p.title||"",540,250,880,58);
-  ctx.fillStyle="#f7f0d7"; ctx.font="italic 34px Georgia, serif";
-  const stmt=stripMd(p.statement||"").replace(/\s+/g," ").slice(0,360);
-  wrapCanvasText(ctx,"„"+stmt+"“",540,430,850,48);
-  ctx.fillStyle="#cfc3a0"; ctx.font="24px Arial";
-  wrapCanvasText(ctx,p.source||"",540,1120,880,34);
-  ctx.fillStyle="#f2df9b"; ctx.font="28px Arial";
-  ctx.fillText("@dar_al_tauhid  |  @dar_at_tawhid",540,1245);
-  canvas.toBlob(async blob=>{
-    const file=new File([blob],"dar-al-tawhid-beitrag.png",{type:"image/png"});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){
-      try{await navigator.share({files:[file],title:p.title||"DAR AL TAWḤID"});return;}catch(e){}
-    }
-    const a=document.createElement("a");
-    a.href=URL.createObjectURL(blob);
-    a.download="dar-al-tawhid-beitrag.png";
-    a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-  });
-}
-function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
-  const words=String(text||"").split(/\s+/); let line="";
-  for(let n=0;n<words.length;n++){
-    const test=line+words[n]+" ";
-    if(ctx.measureText(test).width>maxWidth&&n>0){
-      ctx.fillText(line,x,y); line=words[n]+" "; y+=lineHeight;
-    }else line=test;
-  }
-  ctx.fillText(line,x,y);
-}
-
-function openPost(p, fromUrl=false){
-  currentPost=p;
-  incrementView(p.id);
-  if(!fromUrl){try{history.replaceState({post:p.id},'',getPostUrl(p));}catch(e){}}
-  $("modalTitle").textContent=p.title||"";
-  $("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;
-  $("modalStatement").innerHTML=formatText(p.statement||"");
-
-  const saveBtn=$("savePostBtn");
-  if(saveBtn){
-    saveBtn.textContent=isSaved(p.id)?"♥ Gespeichert":"♡ Speichern";
-    saveBtn.classList.toggle("active",isSaved(p.id));
-  }
-
-  const sourcePanel=$("sourceCheckPanel");
-  if(sourcePanel){
-    sourcePanel.classList.remove("show");
-    sourcePanel.innerHTML=`<strong>Quelle prüfen</strong><br>${esc(p.source||"Keine Quelle hinterlegt.")}<br><br>${(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}" target="_blank" rel="noopener">${esc(l.label||"Quelle öffnen")}</a>`).join(" ") || "Noch kein Quellenlink hinterlegt."}`;
-  }
-
-  const originalPanel=$("originalPanel");
-  if(originalPanel) originalPanel.classList.remove("show");
-
-  $("modalSource").textContent=p.source||"";
-  $("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}" target="_blank" rel="noopener">${esc(l.label||"Quelle")}</a>`).join("");
-  $("modal").classList.add("opened");
-  document.body.style.overflow="hidden";
-  renderFeaturePanels();
-}
-function closePost(){$("modal").classList.remove("opened");document.body.style.overflow="";try{history.replaceState({},"",location.origin+location.pathname)}catch(e){}}function render(){renderStats();renderLists();buildCats();renderPosts();renderFeaturePanels()}
-$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;render()};$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;$("searchInput").value="";setNavigationSections(true);render();scrollToResults()};
-if($("collapseNavBtn"))$("collapseNavBtn").onclick=()=>{setNavigationSections(false)};$("closeBtn").onclick=closePost;$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};
-$("shareBtn").onclick=shareCurrentPost;
-if($("savePostBtn"))$("savePostBtn").onclick=()=>{if(!currentPost)return;toggleSavedPost(currentPost.id);const b=$("savePostBtn");b.textContent=isSaved(currentPost.id)?"♥ Gespeichert":"♡ Speichern";b.classList.toggle("active",isSaved(currentPost.id));renderSavedPosts()};
-if($("sourceCheckBtn"))$("sourceCheckBtn").onclick=()=>{$("sourceCheckPanel").classList.toggle("show")};
-if($("originalToggleBtn"))$("originalToggleBtn").onclick=()=>{$("originalPanel").classList.toggle("show")};
-if($("reportBtn"))$("reportBtn").onclick=()=>{if(!currentPost)return;const subject=encodeURIComponent("Fehler melden: "+(currentPost.title||"DAR AL TAWḤID Beitrag"));const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+(currentPost.title||"")+"\n"+getPostUrl(currentPost)+"\n\nHinweis:\n");location.href="mailto:sero91ak@gmail.com?subject="+subject+"&body="+body};
-if($("imageShareBtn"))$("imageShareBtn").onclick=()=>{if(!currentPost)return;createShareImage(currentPost)};
-
-(async()=>{try{await loadPosts();render();openPostFromUrl()}catch(e){console.error(e);$("posts").innerHTML='<div class="error-box"><strong>Beiträge konnten nicht geladen werden.</strong><br>Prüfe, ob das Repository öffentlich ist und .md-Dateien unter content/posts liegen.</div>';renderStats()}})();
+$("searchInput").oninput=render;
+$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};
+$("closeBtn").onclick=closePost;
+$("backBtn").onclick=closePost;
+$("detailOverlay").onclick=e=>{if(e.target.id==="detailOverlay")closePost()};
+$("internalOverlay").onclick=e=>{if(e.target.id==="internalOverlay")closeInternal()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closePost();closeInternal()}});
+load();
 </script>
-
-<script id="android-rotation-force-final-js">
-(function(){
-  async function unlockOrientation(){
-    try{
-      if(screen && screen.orientation && screen.orientation.unlock){
-        screen.orientation.unlock();
-      }
-    }catch(e){}
-
-    try{
-      document.documentElement.style.setProperty("--app-vw", window.innerWidth + "px");
-      document.documentElement.style.setProperty("--app-vh", window.innerHeight + "px");
-    }catch(e){}
-  }
-
-  window.addEventListener("load", unlockOrientation);
-  window.addEventListener("resize", unlockOrientation);
-  window.addEventListener("orientationchange", function(){
-    setTimeout(unlockOrientation, 150);
-    setTimeout(unlockOrientation, 500);
-  });
-  document.addEventListener("visibilitychange", unlockOrientation);
-})();
-</script>
-
-
-<script id="tablet-real-app-layout-final-js">
-(function(){
-  function isStandalone(){
-    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
-      || window.navigator.standalone === true
-      || document.referrer.startsWith("android-app://");
-  }
-
-  function applyAppMode(){
-    var w = Math.max(window.innerWidth || 0, screen.width || 0);
-    var h = Math.max(window.innerHeight || 0, screen.height || 0);
-    var isTablet = Math.min(w, h) >= 700;
-
-    document.body.classList.toggle("pwa-installed", isStandalone());
-    document.body.classList.toggle("tablet-app-mode", isTablet);
-
-    document.documentElement.style.setProperty("--real-vw", (window.innerWidth || 0) + "px");
-    document.documentElement.style.setProperty("--real-vh", (window.innerHeight || 0) + "px");
-  }
-
-  window.addEventListener("load", applyAppMode);
-  window.addEventListener("resize", applyAppMode);
-  window.addEventListener("orientationchange", function(){
-    setTimeout(applyAppMode, 120);
-    setTimeout(applyAppMode, 450);
-  });
-  document.addEventListener("visibilitychange", applyAppMode);
-})();
-</script>
-
-
-<script id="dar-custom-push-widget">
-(function(){
-  const DISMISS_KEY = "darPushWidgetDismissedV1";
-  const LOCAL_OPTOUT_KEY = "darPushLocalOptOutV1";
-  const widget = document.getElementById("pushWidget");
-  const enableBtn = document.getElementById("pushEnableBtn");
-  const dismissBtn = document.getElementById("pushDismissBtn");
-  const floatBtn = document.getElementById("pushFloatBtn");
-  const floatLabel = document.getElementById("pushFloatLabel");
-  const disableBtn = document.getElementById("pushDisableBtn");
-  const closeBtn = document.getElementById("pushCloseBtn");
-  if(!widget || !enableBtn || !floatBtn || !floatLabel) return;
-
-  function getPermission(){
-    try{ if(window.Notification && Notification.permission) return Notification.permission; }catch(e){}
-    return "default";
-  }
-  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
-  function lsSet(k,v){ try{ v === null ? localStorage.removeItem(k) : localStorage.setItem(k,v); }catch(e){} }
-  function introDismissed(){ return lsGet(DISMISS_KEY) === "1"; }
-  function setIntroDismissed(value){ lsSet(DISMISS_KEY, value ? "1" : null); }
-  function localOptedOut(){ return lsGet(LOCAL_OPTOUT_KEY) === "1"; }
-  function setLocalOptOut(value){ lsSet(LOCAL_OPTOUT_KEY, value ? "1" : null); }
-
-  async function waitForOneSignal(timeoutMs){
-    const start = Date.now();
-    while(Date.now() - start < (timeoutMs || 8000)){
-      try{ if(window.OneSignal && window.DAR_ONE_SIGNAL_READY) return window.OneSignal; }catch(e){}
-      await new Promise(r => setTimeout(r, 180));
-    }
-    return window.OneSignal || null;
-  }
-
-  async function isOneSignalOptedIn(){
-    const permission = getPermission();
-    if(permission !== "granted") return false;
-    if(localOptedOut()) return false;
-    const OneSignal = await waitForOneSignal(1200);
-    try{
-      const ps = OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
-      if(ps && typeof ps.optedIn === "boolean") return ps.optedIn;
-      if(ps && typeof ps.getOptedIn === "function") return await ps.getOptedIn();
-    }catch(e){}
-    return true;
-  }
-
-  async function updatePushUi(){
-    const permission = getPermission();
-    const optedIn = await isOneSignalOptedIn();
-
-    widget.classList.remove("permission-granted", "hidden-card", "active-menu");
-    floatBtn.classList.remove("active");
-    enableBtn.disabled = false;
-
-    if(optedIn){
-      widget.classList.add("permission-granted");
-      floatBtn.classList.add("active");
-      floatLabel.textContent = "Benachrichtigungen aktiv";
-      enableBtn.textContent = "✅ Benachrichtigungen aktiv";
-      enableBtn.disabled = true;
-      return;
-    }
-
-    if(permission === "denied"){
-      widget.classList.add("hidden-card");
-      floatLabel.textContent = "Benachrichtigungen blockiert";
-      enableBtn.textContent = "Im Browser freigeben";
-      return;
-    }
-
-    if(localOptedOut()){
-      floatLabel.textContent = "Benachrichtigungen aktivieren";
-      enableBtn.textContent = "🔔 Benachrichtigungen wieder aktivieren";
-      return;
-    }
-
-    floatLabel.textContent = "Benachrichtigungen aktivieren";
-    enableBtn.textContent = "🔔 Benachrichtigungen aktivieren";
-    if(introDismissed()) widget.classList.add("hidden-card");
-  }
-
-  function showMiniMessage(title, text){
-    const old = document.getElementById("darPushMiniToast");
-    if(old) old.remove();
-    const el = document.createElement("div");
-    el.id = "darPushMiniToast";
-    el.style.cssText = "position:fixed;left:12px;right:12px;top:calc(14px + env(safe-area-inset-top));z-index:60;border:1px solid rgba(217,189,114,.75);border-radius:16px;background:linear-gradient(180deg,rgba(18,32,23,.98),rgba(7,14,10,.98));box-shadow:0 14px 34px rgba(0,0,0,.34);padding:14px 16px;color:#fff6dc;font:14px/1.45 system-ui;";
-    el.innerHTML = '<strong style="display:block;color:#f0d78d;font-family:Georgia,serif;font-size:16px;margin-bottom:4px;">'+title+'</strong><span style="color:#f7f0d7;">'+text+'</span>';
-    document.body.appendChild(el);
-    setTimeout(function(){ if(el.parentNode) el.remove(); }, 4200);
-  }
-
-  async function requestPush(){
-    const permission = getPermission();
-    setLocalOptOut(false);
-
-    if(permission === "granted"){
-      const OneSignal = await waitForOneSignal();
-      try{
-        const ps = OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
-        if(ps && typeof ps.optIn === "function") await ps.optIn();
-      }catch(e){}
-      await updatePushUi();
-      showMiniMessage("Benachrichtigungen aktiv", "Du erhältst neue Beiträge von DAR AL TAWḤID direkt auf dein Gerät.");
-      return;
-    }
-
-    if(permission === "denied"){
-      showMiniMessage("Benachrichtigungen blockiert", "Bitte erlaube Benachrichtigungen in den Browser-Einstellungen, damit DAR AL TAWḤID dich informieren kann.");
-      return;
-    }
-
-    const OneSignal = await waitForOneSignal();
-    try{
-      if(OneSignal && OneSignal.Notifications && typeof OneSignal.Notifications.requestPermission === "function"){
-        await OneSignal.Notifications.requestPermission();
-      } else if(OneSignal && OneSignal.Slidedown && typeof OneSignal.Slidedown.promptPush === "function"){
-        await OneSignal.Slidedown.promptPush();
-      } else if(window.Notification && typeof Notification.requestPermission === "function"){
-        await Notification.requestPermission();
-      }
-    }catch(e){ console.error(e); }
-
-    setTimeout(async function(){
-      await updatePushUi();
-      if(getPermission() === "granted"){
-        setIntroDismissed(true);
-        showMiniMessage("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh", "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge nun direkt als Benachrichtigung.");
-      }
-    }, 500);
-  }
-
-  async function disablePush(){
-    const OneSignal = await waitForOneSignal();
-    let done = false;
-    try{
-      const ps = OneSignal && OneSignal.User && OneSignal.User.PushSubscription;
-      if(ps && typeof ps.optOut === "function"){
-        await ps.optOut();
-        done = true;
-      } else if(OneSignal && typeof OneSignal.logout === "function"){
-        await OneSignal.logout();
-        done = true;
-      }
-    }catch(e){ console.error(e); }
-
-    setLocalOptOut(true);
-    widget.classList.remove("active-menu");
-    await updatePushUi();
-    showMiniMessage("Benachrichtigungen deaktiviert", done ? "Du wurdest für DAR AL TAWḤID Benachrichtigungen abgemeldet." : "Die Anzeige wurde deaktiviert. Falls weiterhin Benachrichtigungen kommen, bitte zusätzlich in den Browser-Einstellungen ausschalten.");
-  }
-
-  enableBtn.addEventListener("click", requestPush);
-
-  floatBtn.addEventListener("click", async function(){
-    const optedIn = await isOneSignalOptedIn();
-    if(optedIn){
-      widget.classList.toggle("active-menu");
-      return;
-    }
-    requestPush();
-  });
-
-  if(disableBtn) disableBtn.addEventListener("click", disablePush);
-  if(closeBtn) closeBtn.addEventListener("click", function(){ widget.classList.remove("active-menu"); });
-
-  if(dismissBtn){
-    dismissBtn.addEventListener("click", function(){
-      setIntroDismissed(true);
-      updatePushUi();
-    });
-  }
-
-  document.addEventListener("visibilitychange", updatePushUi);
-  window.addEventListener("focus", updatePushUi);
-  window.addEventListener("load", function(){ setTimeout(updatePushUi, 300); setTimeout(updatePushUi, 1400); });
-  setTimeout(updatePushUi, 1000);
-})();
-</script>
-
-<script id="dar-push-debug-tool">
-(function(){
-  if(!new URLSearchParams(location.search).has("debugPush")) return;
-
-  function box(msg){
-    var el = document.getElementById("darPushDebug");
-    if(!el){
-      el = document.createElement("div");
-      el.id = "darPushDebug";
-      el.style.cssText = "position:fixed;left:10px;right:10px;bottom:10px;z-index:99999;background:#06110b;color:#f6e8b6;border:1px solid #d9bd72;border-radius:14px;padding:12px;font:13px system-ui;line-height:1.45;white-space:pre-wrap;";
-      document.body.appendChild(el);
-    }
-    el.textContent = msg;
-  }
-
-  window.addEventListener("load", function(){
-    setTimeout(function(){
-      var status = [];
-      status.push("OneSignal Debug DAR AL TAWḤID");
-      status.push("URL: " + location.href);
-      status.push("Notification permission: " + (window.Notification ? Notification.permission : "no Notification API"));
-      status.push("ServiceWorker supported: " + ("serviceWorker" in navigator));
-      status.push("DAR_ONE_SIGNAL_READY: " + (!!window.DAR_ONE_SIGNAL_READY));
-      box(status.join("\n"));
-    }, 2500);
-  });
-})();
-</script>
-
 </body>
 </html>
