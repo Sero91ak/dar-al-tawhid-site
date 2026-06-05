@@ -97,10 +97,12 @@ jobs:
                           k, v = line.split(":", 1)
                           v = v.strip().strip('"').strip("'")
                           fm[k.strip()] = v
+
               title = fm.get("title") or Path(path).stem
               post_id = fm.get("id") or Path(path).stem
               title = re.sub(r"\s+", " ", title).strip()
               post_id = post_id.strip()
+
               return {
                   "path": path,
                   "title": title,
@@ -114,59 +116,80 @@ jobs:
               p = posts[0]
               heading = "📖 Neuer Beitrag auf DAR AL TAWḤID"
               content = p["title"]
-              url = p["url"]
+              click_url = p["url"]
               name = f"GitHub Auto Push: {p['title'][:90]}"
           else:
               heading = "📚 Neue Beiträge auf DAR AL TAWḤID"
               content = f"{len(posts)} neue Beiträge wurden veröffentlicht. Öffne die App und lies die neuesten Beiträge."
-              url = SITE_URL
+              click_url = SITE_URL
               name = f"GitHub Auto Push: {len(posts)} neue Beiträge"
 
-          base_payload = {
+          payload = {
               "app_id": app_id,
               "target_channel": "push",
-              "headings": {"en": heading},
-              "contents": {"en": content},
-              "url": url,
-              "web_url": url,
+              "included_segments": ["Total Subscriptions"],
+              "headings": {
+                  "en": heading,
+                  "de": heading
+              },
+              "contents": {
+                  "en": content,
+                  "de": content
+              },
+
+              # WICHTIG:
+              # Nicht gleichzeitig "url" und "web_url" setzen.
+              # OneSignal meldet sonst:
+              # "Remove url field when setting app_url or web_url"
+              "web_url": click_url,
+
               "chrome_web_icon": f"{SITE_URL}/app-icon-192.png",
               "chrome_web_badge": f"{SITE_URL}/app-icon-192.png",
               "name": name,
           }
 
-          segments_to_try = ["Total Subscriptions", "Subscribed Users", "All Subscribers"]
+          data = json.dumps(payload).encode("utf-8")
+          req = urllib.request.Request(
+              "https://api.onesignal.com/notifications",
+              data=data,
+              headers={
+                  "Content-Type": "application/json",
+                  "Authorization": f"Key {api_key}",
+              },
+              method="POST",
+          )
 
-          last_error = None
-          for segment in segments_to_try:
-              payload = dict(base_payload)
-              payload["included_segments"] = [segment]
+          try:
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  raw = resp.read().decode("utf-8", errors="replace")
+                  print(raw)
 
-              data = json.dumps(payload).encode("utf-8")
-              req = urllib.request.Request(
-                  "https://api.onesignal.com/notifications",
-                  data=data,
-                  headers={
-                      "Content-Type": "application/json",
-                      "Authorization": f"Key {api_key}",
-                  },
-                  method="POST",
-              )
+                  try:
+                      result = json.loads(raw)
+                  except Exception:
+                      result = {}
 
-              try:
-                  with urllib.request.urlopen(req, timeout=30) as resp:
-                      raw = resp.read().decode("utf-8", errors="replace")
-                      print(f"OneSignal Push gesendet über Segment: {segment}")
-                      print(raw)
-                      sys.exit(0)
-              except urllib.error.HTTPError as e:
-                  raw = e.read().decode("utf-8", errors="replace")
-                  last_error = f"Segment {segment}: HTTP {e.code}: {raw}"
-                  print(last_error)
-              except Exception as e:
-                  last_error = f"Segment {segment}: {e}"
-                  print(last_error)
+                  if result.get("errors"):
+                      print("FEHLER: OneSignal hat Fehler zurückgegeben:")
+                      print(result["errors"])
+                      sys.exit(1)
 
-          print("FEHLER: OneSignal Push konnte nicht gesendet werden.")
-          print(last_error or "Unbekannter Fehler")
-          sys.exit(1)
+                  recipients = result.get("recipients")
+                  if recipients is not None:
+                      print(f"Empfänger: {recipients}")
+                      if int(recipients) <= 0:
+                          print("FEHLER: OneSignal hat 0 Empfänger gemeldet.")
+                          sys.exit(1)
+
+                  print("OneSignal Push erfolgreich gesendet.")
+                  print(f"Link: {click_url}")
+                  sys.exit(0)
+
+          except urllib.error.HTTPError as e:
+              raw = e.read().decode("utf-8", errors="replace")
+              print(f"HTTP {e.code}: {raw}")
+              sys.exit(1)
+          except Exception as e:
+              print(f"FEHLER: {e}")
+              sys.exit(1)
           PY
