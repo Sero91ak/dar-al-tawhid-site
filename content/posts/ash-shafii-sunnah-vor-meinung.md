@@ -18,7 +18,7 @@ tags:
 * “#Shafii”
 * “#Fiqh”
 * “#AhlusSunnah”
-    source: “📝 Ibn al-Qayyim, Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn, al-Qawl fī at-Taqlīd wa-inqisāmih, Bericht von ar-Rabīʿ über ash-Shāfiʿī.”
+    source: “📝 Ibn al-Qayyim, Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn, al-Qawl fī at-Taqlīd wa-inqisāmih, Bericht von ar-Rabīʿ über ash-Shāfiʿī, Band 2, S. 204.”
     links:
 * label: “→ Islamweb”
     url: “https://www.islamweb.net/ar/library/content/34/251/#:~:text=إذا%20وجدتم%20في%20كتابي%20خلاف%20سنة%20رسول%20الله%20صلى%20الله%20عليه%20وسلم,ودعوا%20ما%20قلت”
