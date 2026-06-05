@@ -470,6 +470,324 @@ select,
   }
 }
 
+
+/* SERIOUS_APP_FEATURES_PACK
+   Maßstab, Biografien, Quellen-Bibliothek, Lernpfade, Favoriten, Tagesbeitrag,
+   Neueste/Beliebte Beiträge, Quelle prüfen, Fehler melden, Share-Card, Offline. */
+.feature-panel,
+.method-panel,
+.dynamic-info-panel,
+.library-panel,
+.path-panel,
+.daily-panel,
+.saved-panel,
+.latest-panel,
+.popular-panel,
+.language-panel{
+  border:1px solid var(--line);
+  background:rgba(16,29,20,.88);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:14px;
+  margin-bottom:12px;
+}
+
+.feature-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.feature-title h2,
+.feature-title h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  margin:0;
+  line-height:1.05;
+}
+
+.feature-title h2{font-size:24px}
+.feature-title h3{font-size:20px}
+
+.feature-sub{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+}
+
+.method-grid,
+.library-grid,
+.path-grid,
+.feature-mini-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.method-card,
+.library-card,
+.path-card,
+.mini-card{
+  border:1px solid var(--line2);
+  border-radius:15px;
+  background:rgba(255,255,255,.018);
+  padding:10px;
+}
+
+.method-card strong,
+.library-card strong,
+.path-card strong,
+.mini-card strong{
+  display:block;
+  color:#fff4cf;
+  font-weight:900;
+  margin-bottom:4px;
+}
+
+.method-card span,
+.library-card span,
+.path-card span,
+.mini-card span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+.dynamic-info-panel{
+  display:none;
+}
+
+.dynamic-info-panel.show{
+  display:block;
+}
+
+.info-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+}
+
+.info-chip,
+.action-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:7px 10px;
+  border:1px solid var(--line2);
+  border-radius:999px;
+  background:rgba(255,255,255,.02);
+  color:var(--cream);
+  font-weight:800;
+  font-size:11px;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.info-chip:hover,
+.action-chip:hover{
+  filter:brightness(1.08);
+}
+
+.path-card{
+  cursor:pointer;
+}
+
+.path-card:hover{
+  border-color:rgba(217,189,114,.45);
+  filter:brightness(1.04);
+}
+
+.daily-card,
+.saved-empty,
+.inline-message{
+  border:1px dashed rgba(217,189,114,.35);
+  border-radius:16px;
+  padding:12px;
+  color:var(--muted);
+  background:rgba(255,255,255,.012);
+  line-height:1.5;
+}
+
+.daily-card h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  margin:0 0 8px;
+  font-size:22px;
+  line-height:1.1;
+}
+
+.daily-card p{
+  margin:0 0 10px;
+  color:var(--cream);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.list-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid var(--line2);
+  border-radius:14px;
+  padding:9px 10px;
+  background:rgba(255,255,255,.015);
+  margin-bottom:7px;
+}
+
+.list-row strong{
+  color:var(--cream);
+  font-size:13px;
+  line-height:1.25;
+}
+
+.list-row span{
+  color:var(--muted);
+  font-size:10.5px;
+}
+
+.article-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:10px 0 8px;
+}
+
+.article-action-btn{
+  border:1px solid var(--line2);
+  border-radius:999px;
+  background:rgba(255,255,255,.02);
+  color:var(--cream);
+  padding:8px 11px;
+  font-weight:850;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.article-action-btn.active{
+  border-color:rgba(96,185,116,.65);
+  color:#e2ffd8;
+}
+
+.source-check-panel,
+.original-panel{
+  display:none;
+  border:1px solid rgba(217,189,114,.35);
+  border-radius:16px;
+  padding:12px;
+  margin:10px 0;
+  background:rgba(255,255,255,.018);
+  color:var(--cream);
+  font-size:12px;
+  line-height:1.55;
+}
+
+.source-check-panel.show,
+.original-panel.show{
+  display:block;
+}
+
+.lang-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.lang-btn{
+  border:1px solid var(--line2);
+  border-radius:999px;
+  padding:8px 12px;
+  background:rgba(255,255,255,.018);
+  color:var(--cream);
+  font-weight:900;
+}
+
+.lang-btn.active{
+  background:rgba(217,189,114,.16);
+  border-color:rgba(217,189,114,.48);
+  color:var(--gold2);
+}
+
+.push-pref-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:8px;
+}
+
+.push-pref{
+  border:1px solid var(--line2);
+  border-radius:12px;
+  min-height:36px;
+  padding:7px;
+  background:rgba(255,255,255,.015);
+  color:var(--cream);
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.push-pref.active{
+  background:rgba(96,185,116,.13);
+  border-color:rgba(96,185,116,.45);
+  color:#dff8d7;
+}
+
+@media(max-width:820px){
+  .feature-panel,
+  .method-panel,
+  .dynamic-info-panel,
+  .library-panel,
+  .path-panel,
+  .daily-panel,
+  .saved-panel,
+  .latest-panel,
+  .popular-panel,
+  .language-panel{
+    padding:10px;
+    border-radius:15px;
+    margin-bottom:9px;
+  }
+
+  .feature-title h2{font-size:20px}
+  .feature-title h3{font-size:17px}
+
+  .method-grid,
+  .library-grid,
+  .path-grid,
+  .feature-mini-grid{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+
+  .push-pref-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .daily-card h3{
+    font-size:18px;
+  }
+
+  .list-row{
+    padding:8px;
+  }
+
+  .article-actions{
+    justify-content:flex-start;
+  }
+
+  .article-action-btn{
+    font-size:10.5px;
+    padding:8px 10px;
+  }
+}
+
 </style>
 
 <style id="android-rotation-force-final-css">
@@ -1578,8 +1896,107 @@ Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
 <header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.<div class="push-inline-chip"><span class="chip-bell">🔔</span><div><strong>Benachrichtigungen einschalten</strong>Neue Beiträge direkt auf iPhone, iPad und Android erhalten.</div></div></div></section></header>
 <section class="site isnad"><div class="isnad-top">Maßstab der Überlieferung</div><div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
 <section class="panel overview-top"><h2>Übersicht</h2><div class="stats"><div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div><div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div><div class="stat"><b id="countBooks">0</b><span>Bücher</span></div><div class="stat"><b id="countTopics">0</b><span>Themen</span></div></div></section>
-<main class="site grid"><aside><h2>Navigation</h2><input id="searchInput" class="search" type="search" placeholder="Freie Suche…"><details class="filter-section"><summary>Gelehrte</summary><div id="scholarList" class="list-buttons"></div></details><details class="filter-section"><summary>Bücher</summary><div id="bookList" class="list-buttons"></div></details><details class="filter-section"><summary>Themen</summary><div id="topicList" class="list-buttons"></div></details><details class="filter-section"><summary>Hashtags</summary><div id="tagList" class="list-buttons"></div></details><div style="border-top:1px solid var(--line2);margin-top:10px;padding-top:10px"><button id="resetFilters">Alles anzeigen</button></div></aside><section class="main"><section class="knowledge"><div class="knowledge-head"><h2>Wissensbereiche</h2><span>Nach Themen öffnen</span></div><div id="categoryList" class="mobile-quick-cats"></div></section><div id="homeNotice" class="notice"><strong>Wähle einen Wissensbereich</strong>Öffne zuerst einen Bereich. Danach erscheinen die passenden Beiträge.</div><section id="posts" class="posts"><div class="loading-box">Beiträge werden aus <strong>content/posts</strong> geladen…</div></section></section></main>
-<div id="modal" class="modal"><article class="article"><div class="article-top"><button id="shareBtn">Beitrag teilen</button><button id="closeBtn">Schließen</button></div><h2 id="modalTitle"></h2><div id="modalMeta" class="meta"></div><div id="modalStatement" class="statement"></div><div id="modalSource" class="article-source"></div><div id="modalLinks" class="article-links"></div></article></div>
+<main class="site grid"><aside><h2>Navigation</h2><input id="searchInput" class="search" type="search" placeholder="Freie Suche…"><details class="filter-section"><summary>Gelehrte</summary><div id="scholarList" class="list-buttons"></div></details><details class="filter-section"><summary>Bücher</summary><div id="bookList" class="list-buttons"></div></details><details class="filter-section"><summary>Themen</summary><div id="topicList" class="list-buttons"></div></details><details class="filter-section"><summary>Hashtags</summary><div id="tagList" class="list-buttons"></div></details><div style="border-top:1px solid var(--line2);margin-top:10px;padding-top:10px"><button id="resetFilters">Alles anzeigen</button></div></aside><section class="main">
+<section id="methodPanel" class="method-panel">
+  <div class="feature-title">
+    <h2>📖 Unser Maßstab</h2>
+  </div>
+  <div class="feature-sub">Diese Seite soll nicht auf bloßen Meinungen beruhen, sondern auf überprüfbaren Quellen und einer klaren Ordnung.</div>
+  <div class="method-grid" style="margin-top:10px">
+    <div class="method-card"><strong>Qurʾān zuerst</strong><span>Der Qurʾān ist der oberste Maßstab für Glauben, Wahrheit und Rechtleitung.</span></div>
+    <div class="method-card"><strong>Dann Sunnah</strong><span>Die authentische Sunnah erklärt, bestätigt und verdeutlicht die Offenbarung.</span></div>
+    <div class="method-card"><strong>Dann Āthār</strong><span>Aussagen der Ṣaḥābah und frühen Imāme werden besonders berücksichtigt.</span></div>
+    <div class="method-card"><strong>Quellen vor Meinung</strong><span>Keine ungenauen Zitate, keine Zuschreibung ohne Prüfung und keine Quelle ohne Kontrolle.</span></div>
+  </div>
+</section>
+
+<section id="dailyPanel" class="daily-panel">
+  <div class="feature-title">
+    <h2>📖 Beitrag des Tages</h2>
+  </div>
+  <div id="dailyPost" class="daily-card">Beitrag des Tages wird geladen…</div>
+</section>
+
+<section id="learningPaths" class="path-panel">
+  <div class="feature-title">
+    <h2>🧭 Lernpfade</h2>
+  </div>
+  <div class="feature-sub">Für neue Besucher: Wähle einen Pfad und öffne direkt passende Beiträge.</div>
+  <div id="learningPathGrid" class="path-grid" style="margin-top:10px"></div>
+</section>
+
+<section id="dynamicInfoPanel" class="dynamic-info-panel">
+  <div class="feature-title">
+    <h2 id="dynamicInfoTitle">Kurzinfo</h2>
+  </div>
+  <div id="dynamicInfoText" class="feature-sub"></div>
+  <div id="dynamicInfoChips" class="info-chips"></div>
+</section>
+
+<section id="libraryPanel" class="library-panel">
+  <div class="feature-title">
+    <h2>📚 Quellen & Werke</h2>
+  </div>
+  <div class="feature-sub">Eine kompakte Übersicht über die Werke, aus denen die Beiträge stammen.</div>
+  <div id="libraryGrid" class="library-grid" style="margin-top:10px"></div>
+</section>
+
+<section id="savedPanel" class="saved-panel">
+  <div class="feature-title">
+    <h2>♡ Meine gespeicherten Beiträge</h2>
+  </div>
+  <div id="savedPosts" class="saved-empty">Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.</div>
+</section>
+
+<section id="latestPopularPanel" class="feature-panel">
+  <div class="feature-title">
+    <h2>🆕 Neueste & beliebte Beiträge</h2>
+  </div>
+  <div class="feature-mini-grid">
+    <div>
+      <h3 style="font-family:var(--serif);color:var(--gold2);margin:0 0 8px">Neu hinzugefügt</h3>
+      <div id="latestPosts"></div>
+    </div>
+    <div>
+      <h3 style="font-family:var(--serif);color:var(--gold2);margin:0 0 8px">Meist geöffnet</h3>
+      <div id="popularPosts"></div>
+    </div>
+  </div>
+</section>
+
+<section id="languagePanel" class="language-panel">
+  <div class="feature-title">
+    <h2>🌍 Sprache & Originaltext</h2>
+  </div>
+  <div class="feature-sub">Die Seite ist technisch vorbereitet für spätere Mehrsprachigkeit und Originaltext-Anzeige.</div>
+  <div class="lang-row" style="margin-top:10px">
+    <button class="lang-btn active" type="button">DE</button>
+    <button class="lang-btn" type="button" disabled>TR bald</button>
+    <button class="lang-btn" type="button" disabled>EN bald</button>
+    <button class="lang-btn" type="button" disabled>AR bald</button>
+  </div>
+  <div class="push-pref-grid">
+    <button class="push-pref" type="button" data-pref="Aqīdah">Aqīdah</button>
+    <button class="push-pref" type="button" data-pref="Adab">Adab</button>
+    <button class="push-pref" type="button" data-pref="Fiqh">Fiqh</button>
+    <button class="push-pref" type="button" data-pref="Tazkiyah">Tazkiyah</button>
+    <button class="push-pref" type="button" data-pref="Tawḥīd">Tawḥīd</button>
+    <button class="push-pref" type="button" data-pref="Hadith">Hadith</button>
+  </div>
+  <div class="feature-sub" style="margin-top:8px">Hinweis: Die Auswahl wird lokal gespeichert. Später kann sie mit OneSignal-Kategorien verbunden werden.</div>
+</section>
+<section class="knowledge"><div class="knowledge-head"><h2>Wissensbereiche</h2><span>Nach Themen öffnen</span></div><div id="categoryList" class="mobile-quick-cats"></div></section><div id="homeNotice" class="notice"><strong>Wähle einen Wissensbereich</strong>Öffne zuerst einen Bereich. Danach erscheinen die passenden Beiträge.</div><section id="posts" class="posts"><div class="loading-box">Beiträge werden aus <strong>content/posts</strong> geladen…</div></section></section></main>
+<div id="modal" class="modal"><article class="article"><div class="article-top"><button id="shareBtn">Beitrag teilen</button><button id="closeBtn">Schließen</button></div><h2 id="modalTitle"></h2><div id="modalMeta" class="meta"></div><div id="modalStatement" class="statement"></div>
+<div id="modalActions" class="article-actions">
+  <button id="savePostBtn" class="article-action-btn" type="button">♡ Speichern</button>
+  <button id="sourceCheckBtn" class="article-action-btn" type="button">🔎 Quelle prüfen</button>
+  <button id="originalToggleBtn" class="article-action-btn" type="button">ع Original anzeigen</button>
+  <button id="imageShareBtn" class="article-action-btn" type="button">🖼️ Als Bild teilen</button>
+  <button id="reportBtn" class="article-action-btn" type="button">⚠️ Fehler melden</button>
+</div>
+<div id="sourceCheckPanel" class="source-check-panel"></div>
+<div id="originalPanel" class="original-panel">Für diesen Beitrag ist noch kein separater arabischer Originaltext hinterlegt. Die Funktion ist vorbereitet.</div>
+<div id="modalSource" class="article-source"></div><div id="modalLinks" class="article-links"></div></article></div>
 <div id="pushWidget" class="push-widget" aria-live="polite">
   <div id="pushWidgetCard" class="push-widget-card">
     <div class="push-widget-head">
@@ -1613,6 +2030,78 @@ Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
 const REPO_OWNER="Sero91ak",REPO_NAME="dar-al-tawhid-site",POSTS_DIR="content/posts",BRANCH="main";
 let posts=[],active={type:"all",value:"Alle"},currentPost=null,showHomeNotice=true,catsExpanded=false;
 const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])),stripMd=s=>String(s??"").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"");
+
+const VIEW_KEY="darPostViewsV1", SAVE_KEY="darSavedPostsV1", PREF_KEY="darPushCategoryPrefsV1";
+
+function getJsonStore(key,fallback){
+  try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}catch(e){return fallback}
+}
+function setJsonStore(key,value){
+  try{localStorage.setItem(key,JSON.stringify(value));}catch(e){}
+}
+function savedIds(){return getJsonStore(SAVE_KEY,[])}
+function isSaved(id){return savedIds().includes(id)}
+function toggleSavedPost(id){
+  let ids=savedIds();
+  if(ids.includes(id)) ids=ids.filter(x=>x!==id);
+  else ids.unshift(id);
+  setJsonStore(SAVE_KEY,ids.slice(0,80));
+}
+function viewCounts(){return getJsonStore(VIEW_KEY,{})}
+function incrementView(id){
+  const v=viewCounts();
+  v[id]=(v[id]||0)+1;
+  setJsonStore(VIEW_KEY,v);
+}
+function postLine(p){
+  return `<div class="list-row"><div><strong>${esc(p.title||"")}</strong><br><span>${esc(p.scholar||p.topic||"")}</span></div><button class="action-chip" type="button" data-open-post="${esc(p.id)}">Öffnen</button></div>`;
+}
+function bindOpenButtons(root=document){
+  root.querySelectorAll("[data-open-post]").forEach(btn=>{
+    btn.onclick=()=>{
+      const p=posts.find(x=>String(x.id)===String(btn.getAttribute("data-open-post")));
+      if(p) openPost(p);
+    };
+  });
+}
+function topicIncludes(p, words){
+  const hay=[p.category,p.topic,p.title,p.scholar,p.book,(p.tags||[]).join(" "),p.statement].join(" ").toLowerCase();
+  return words.some(w=>hay.includes(String(w).toLowerCase()));
+}
+function getScholarBio(name){
+  const bios={
+    "Aḥmad ibn Ḥanbal":"Imām Aḥmad ibn Ḥanbal gehört zu den großen Imāmen von Ahlus-Sunnah. Bekannt ist er besonders für Standhaftigkeit in der Frage des Qurʾān und für starke Bindung an Hadith und Āthār.",
+    "Ahmad ibn Hanbal":"Imām Aḥmad ibn Ḥanbal gehört zu den großen Imāmen von Ahlus-Sunnah. Bekannt ist er besonders für Standhaftigkeit in der Frage des Qurʾān und für starke Bindung an Hadith und Āthār.",
+    "Abū Ḥātim ar-Rāzī":"Abū Ḥātim ar-Rāzī war ein großer Hadith-Imām und Kritiker der Überlieferer. Seine Aussagen sind besonders wichtig für Aqīdah, Hadithmethodik und Bindung an Āthār.",
+    "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī":"Abū Ḥātim und Abū Zurʿah ar-Rāzī gehören zu den bekannten Imāmen der Hadithkritik. Ihre überlieferten Grundlagen zeigen klar die Aqīdah von Ahlus-Sunnah.",
+    "Mālik ibn Anas":"Imām Mālik ibn Anas war der Imām von Madīnah und Autor des Muwaṭṭaʾ. Er steht für Bindung an Sunnah, Praxis der frühen Generationen und klare Ehrfurcht vor Überlieferung.",
+    "al-Awzāʿī":"al-Awzāʿī war ein früher Imām aus Shām. Seine Aussagen betonen das Festhalten an den Āthār und Warnung vor Neuerungen.",
+    "al-Barbahārī":"al-Barbahārī war ein bekannter Imām im Bereich Sunnah und Aqīdah. Seine Aussagen werden oft im Kontext von Festhalten an Sunnah und Warnung vor Abweichung erwähnt.",
+    "al-Lālakāʾī":"al-Lālakāʾī überlieferte in seinem Werk eine große Sammlung von Aqīdah-Aussagen und Āthār der frühen Imāme.",
+    "Ibn Baṭṭah al-ʿUkbarī":"Ibn Baṭṭah al-ʿUkbarī ist bekannt für Werke zur Sunnah, Aqīdah und Warnung vor Bidʿah.",
+    "Ibn ʿAbbās":"Ibn ʿAbbās war ein großer Ṣaḥābī und bekannter Erklärer des Qurʾān.",
+    "al-Fuḍayl ibn ʿIyāḍ":"al-Fuḍayl ibn ʿIyāḍ ist bekannt für starke Aussagen zu Tazkiyah, Ikhlāṣ, Zuhd und Warnung vor Selbsttäuschung."
+  };
+  return bios[name] || "Zu diesem Gelehrten wird eine Kurzbiografie vorbereitet. Die vorhandenen Beiträge werden bereits nach seinem Namen gefiltert angezeigt.";
+}
+function getBookInfo(name,count){
+  if(!name) return "";
+  const low=name.toLowerCase();
+  let theme="Überlieferungen und Nutzen";
+  let why="Dieses Werk wird genutzt, weil es Aussagen, Hadithe oder Āthār enthält, die zur jeweiligen Thematik passen.";
+  if(low.includes("sunan")||low.includes("jāmi")||low.includes("musnad")||low.includes("sahih")||low.includes("ṣaḥīḥ")){
+    theme="Hadith und Sunnah";
+    why="Hadithwerke sind zentrale Grundlagen, um Aussagen direkt an authentische Überlieferung zu binden.";
+  }else if(low.includes("sunnah")||low.includes("iʿtiqād")||low.includes("ibānah")||low.includes("sharīʿah")||low.includes("tawḥīd")){
+    theme="Aqīdah und Sunnah";
+    why="Dieses Werk stärkt die Darstellung der Aqīdah von Ahlus-Sunnah anhand früher Überlieferungen.";
+  }else if(low.includes("muṣannaf")||low.includes("musannaf")){
+    theme="Āthār und frühe Überlieferungen";
+    why="Muṣannaf-Werke sind wichtig, weil sie viele frühe Aussagen der Ṣaḥābah, Tābiʿīn und Imāme sammeln.";
+  }
+  return {theme,why,count};
+}
+
 
 function getPostUrl(post){
   const url = new URL(location.origin + location.pathname);
@@ -1704,7 +2193,31 @@ function cleanBodyText(body){
 }
 
 function parseFM(md,name){let fm={},body=md;const m=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(m){body=m[2]||"";const lines=m[1].split(/\r?\n/);let current=null;for(const line of lines){let km=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(km){current=km[1];let val=km[2].trim();fm[current]=val===""?[]:parseValue(val);continue}let am=line.match(/^\s*-\s*(.*)$/);if(am&&current){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(am[1]))}}const lb=m[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(lb){const links=[];let item=null;lb[1].split(/\r?\n/).forEach(line=>{let lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={label:parseValue(lm[1]),url:""};links.push(item);return}lm=line.match(/^\s*url:\s*(.*)$/);if(lm&&item)item.url=parseValue(lm[1])});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:(fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[]);return{id:fm.id||name.replace(/\.md$/,""),date:fm.date||"",title:fm.title||name.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],statement:cleanBodyText(body)}}
-async function loadPosts(){const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;const res=await fetch(api,{cache:"no-store"});if(!res.ok)throw new Error("GitHub API konnte content/posts nicht laden");const files=await res.json();const md=files.filter(f=>f.type==="file"&&f.name.endsWith(".md"));posts=await Promise.all(md.map(async f=>{const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${f.name}`;const r=await fetch(raw,{cache:"no-store"});return parseFM(await r.text(),f.name)}));posts = posts.map(p => ({...p, statement: cleanBodyText(p.statement)})); posts.sort((a,b)=>String(b.date).localeCompare(String(a.date)))}
+async function loadPosts(){
+  const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;
+  try{
+    const res=await fetch(api,{cache:"no-store"});
+    if(!res.ok)throw new Error("GitHub API konnte content/posts nicht laden");
+    const files=await res.json();
+    const md=files.filter(f=>f.type==="file"&&f.name.endsWith(".md"));
+    posts=await Promise.all(md.map(async f=>{
+      const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${f.name}`;
+      const r=await fetch(raw,{cache:"no-store"});
+      return parseFM(await r.text(),f.name)
+    }));
+    posts=posts.map(p=>({...p,statement:cleanBodyText(p.statement)}));
+    posts.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    setJsonStore("darCachedPostsV1",posts);
+  }catch(e){
+    const cached=getJsonStore("darCachedPostsV1",[]);
+    if(cached&&cached.length){
+      posts=cached;
+      console.warn("Offline/Cache-Modus: Beiträge aus lokalem Cache geladen.",e);
+      return;
+    }
+    throw e;
+  }
+}
 function scrollToResults(){
   const target = document.getElementById("posts") || document.querySelector(".knowledge");
   if(!target) return;
@@ -1775,13 +2288,229 @@ function buildCats(){
   }
 }
 function matches(p){const q=$("searchInput").value.trim().toLowerCase();let ok=true;if(active.type==="scholar")ok=p.scholar===active.value;if(active.type==="book")ok=p.book===active.value;if(active.type==="topic")ok=p.topic===active.value;if(active.type==="tag")ok=(p.tags||[]).includes(active.value);if(active.type==="category")ok=p.category===active.value;if(q)ok=ok&&[p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(q);return ok}
+
+function renderFeaturePanels(){
+  renderDailyPost();
+  renderLearningPaths();
+  renderLibrary();
+  renderSavedPosts();
+  renderLatestPopular();
+  renderPushPrefs();
+  updateDynamicInfo();
+}
+function renderDailyPost(){
+  const root=$("dailyPost");
+  if(!root||!posts.length)return;
+  const today=new Date();
+  const idx=Math.abs(today.getFullYear()*372+(today.getMonth()+1)*31+today.getDate())%posts.length;
+  const p=posts[idx];
+  const quote=stripMd(p.statement||"").split("\n").filter(Boolean)[0]||"";
+  root.innerHTML=`<h3>${esc(p.title)}</h3><p>${esc(quote.slice(0,190))}</p><button class="action-chip" type="button" data-open-post="${esc(p.id)}">Beitrag öffnen</button>`;
+  bindOpenButtons(root);
+}
+function renderLearningPaths(){
+  const root=$("learningPathGrid");
+  if(!root)return;
+  const paths=[
+    {title:"Tawḥīd Grundlagen",desc:"Beiträge zu Tawḥīd, Duʿāʾ, Allah allein anrufen und Grundlage des Dīn.",type:"category",value:"Tawhid",words:["tawhid","tawḥīd","duʿā","allah"]},
+    {title:"Aqīdah gegen Jahmiyyah",desc:"Aussagen zu Ṣifāt Allah, Qurʾān, Īmān und Widerlegung der Abweichungen.",type:"category",value:"Aqīdah",words:["aqīdah","sifat","ṣifāt","jahm","qurʾān"]},
+    {title:"Adab des Wissens",desc:"Adab, Wissen, Umgang mit Quellen und Benehmen beim Lernen.",type:"category",value:"Adab",words:["adab","wissen","ʿilm","quelle"]},
+    {title:"Akhlaq & Tazkiyah",desc:"Herz, Charakter, Tazkiyah, Geduld und Selbstreinigung.",type:"category",value:"Akhlāq",words:["akhlaq","akhlāq","tazkiyah","herz","geduld"]},
+    {title:"Fiqh-Grundlagen",desc:"Beiträge mit juristischem Nutzen und praktischer Einordnung.",type:"category",value:"Fiqh",words:["fiqh","salāh","gebet","hukm"]},
+    {title:"Manhaj der frühen Imāme",desc:"Festhalten an Sunnah, Āthār und Warnung vor Bidʿah.",type:"topic",value:"Manhaj",words:["sunnah","āthār","bidʿah","manhaj"]}
+  ];
+  root.innerHTML=paths.map((p,i)=>`<div class="path-card" data-path-index="${i}"><strong>${esc(p.title)}</strong><span>${esc(p.desc)}</span></div>`).join("");
+  root.querySelectorAll(".path-card").forEach((card,i)=>{
+    card.onclick=()=>{
+      const path=paths[i];
+      const exact=posts.some(p=>p.category===path.value);
+      if(exact) active={type:"category",value:path.value};
+      else{
+        const found=posts.find(p=>topicIncludes(p,path.words));
+        active=found?{type:"category",value:found.category}:{type:"all",value:"Alle"};
+      }
+      showHomeNotice=false;
+      const input=$("searchInput"); if(input) input.value="";
+      render();
+      scrollToResults();
+    };
+  });
+}
+function renderLibrary(){
+  const root=$("libraryGrid");
+  if(!root)return;
+  const map=countBy("book");
+  const entries=[...map.entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>b[1]-a[1]).slice(0,12);
+  root.innerHTML=entries.map(([name,count])=>{
+    const info=getBookInfo(name,count);
+    return `<div class="library-card"><strong>${esc(name)}</strong><span><b>Thema:</b> ${esc(info.theme)}<br><b>Nutzen:</b> ${esc(info.why)}<br><b>Beiträge:</b> ${count}</span><button class="action-chip" type="button" data-book-filter="${esc(name)}">Öffnen</button></div>`;
+  }).join("") || '<div class="inline-message">Noch keine Bücher erkannt.</div>';
+  root.querySelectorAll("[data-book-filter]").forEach(btn=>{
+    btn.onclick=()=>{
+      active={type:"book",value:btn.getAttribute("data-book-filter")};
+      showHomeNotice=false;
+      $("searchInput").value="";
+      render();
+      scrollToResults();
+    };
+  });
+}
+function renderSavedPosts(){
+  const root=$("savedPosts");
+  if(!root)return;
+  const ids=savedIds();
+  const saved=ids.map(id=>posts.find(p=>String(p.id)===String(id))).filter(Boolean);
+  if(!saved.length){
+    root.className="saved-empty";
+    root.innerHTML='Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.';
+    return;
+  }
+  root.className="";
+  root.innerHTML=saved.slice(0,8).map(postLine).join("");
+  bindOpenButtons(root);
+}
+function renderLatestPopular(){
+  const latest=$("latestPosts"), popular=$("popularPosts");
+  if(latest){
+    latest.innerHTML=posts.slice(0,5).map(postLine).join("") || '<div class="inline-message">Noch keine Beiträge.</div>';
+    bindOpenButtons(latest);
+  }
+  if(popular){
+    const views=viewCounts();
+    const ranked=[...posts].sort((a,b)=>(views[b.id]||0)-(views[a.id]||0)).slice(0,5);
+    popular.innerHTML=ranked.some(p=>(views[p.id]||0)>0)
+      ? ranked.map(postLine).join("")
+      : '<div class="inline-message">Beliebte Beiträge erscheinen hier, sobald Besucher Beiträge öffnen.</div>';
+    bindOpenButtons(popular);
+  }
+}
+function renderPushPrefs(){
+  const prefs=getJsonStore(PREF_KEY,[]);
+  document.querySelectorAll(".push-pref").forEach(btn=>{
+    const val=btn.getAttribute("data-pref");
+    btn.classList.toggle("active",prefs.includes(val));
+    btn.onclick=()=>{
+      let list=getJsonStore(PREF_KEY,[]);
+      if(list.includes(val)) list=list.filter(x=>x!==val);
+      else list.push(val);
+      setJsonStore(PREF_KEY,list);
+      renderPushPrefs();
+    };
+  });
+}
+function updateDynamicInfo(){
+  const panel=$("dynamicInfoPanel");
+  const title=$("dynamicInfoTitle");
+  const text=$("dynamicInfoText");
+  const chips=$("dynamicInfoChips");
+  if(!panel||!title||!text||!chips)return;
+  panel.classList.remove("show");
+  if(active.type==="scholar"){
+    title.textContent="👤 Kurzbiografie: "+active.value;
+    text.textContent=getScholarBio(active.value);
+    chips.innerHTML=`<button class="action-chip" type="button" onclick="scrollToResults()">Beiträge anzeigen</button>`;
+    panel.classList.add("show");
+  }else if(active.type==="book"){
+    const count=posts.filter(p=>p.book===active.value).length;
+    const info=getBookInfo(active.value,count);
+    title.textContent="📚 Quelle: "+active.value;
+    text.innerHTML=`<strong>Thema:</strong> ${esc(info.theme)}<br><strong>Warum wichtig:</strong> ${esc(info.why)}<br><strong>Beiträge aus diesem Werk:</strong> ${count}`;
+    chips.innerHTML=`<button class="action-chip" type="button" onclick="scrollToResults()">Beiträge anzeigen</button>`;
+    panel.classList.add("show");
+  }else if(active.type==="topic"||active.type==="category"||active.type==="tag"){
+    title.textContent="🧭 Auswahl: "+active.value;
+    text.textContent="Die Beiträge unten sind nach dieser Auswahl gefiltert. So findet der Besucher schneller, was er sucht.";
+    chips.innerHTML=`<button class="action-chip" type="button" onclick="scrollToResults()">Zu den Beiträgen</button>`;
+    panel.classList.add("show");
+  }
+}
+
 function renderStats(){$("countPosts").textContent=posts.length;$("countScholars").textContent=countBy("scholar").size;$("countBooks").textContent=countBy("book").size;$("countTopics").textContent=countBy("topic").size}
 function renderLists(){buttonList($("scholarList"),countBy("scholar"),"scholar");buttonList($("bookList"),countBy("book"),"book");buttonList($("topicList"),countBy("topic"),"topic");buttonList($("tagList"),countTags(),"tag")}
 function renderPosts(){const root=$("posts");const filtered=posts.filter(matches);const cleanHome=showHomeNotice&&active.type==="all"&&!$("searchInput").value.trim();document.body.classList.toggle("clean-home",cleanHome);$("homeNotice").style.display=cleanHome?"block":"none";root.innerHTML="";if(!posts.length){root.innerHTML='<div class="error-box">Keine Markdown-Beiträge gefunden. Prüfe content/posts.</div>';return}filtered.forEach(p=>{const el=document.createElement("article");el.className="post-card";const quote=stripMd(p.statement).split("\n").filter(Boolean).find(x=>x.includes("„"))||stripMd(p.statement).slice(0,180);el.innerHTML=`<div><h3>${esc(p.title)}</h3><div class="meta"><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.topic||"")}</span>${(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${esc(t)}</span>`).join("")}</div><div class="excerpt">${esc(quote)}</div><div class="source-preview">${esc(p.source||"")}</div></div><button class="open">Beitrag öffnen</button>`;el.querySelector(".open").onclick=()=>openPost(p);root.appendChild(el)})}
 function formatText(raw){return esc(raw).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/\n/g,"<br>")}
-function openPost(p, fromUrl=false){currentPost=p;if(!fromUrl){try{history.replaceState({post:p.id},'',getPostUrl(p));}catch(e){}}$("modalTitle").textContent=p.title||"";$("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;$("modalStatement").innerHTML=formatText(p.statement||"");$("modalSource").textContent=p.source||"";$("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}">${esc(l.label||"Quelle")}</a>`).join("");$("modal").classList.add("opened");document.body.style.overflow="hidden"}
-function closePost(){$("modal").classList.remove("opened");document.body.style.overflow="";try{history.replaceState({},"",location.origin+location.pathname)}catch(e){}}function render(){renderStats();renderLists();buildCats();renderPosts()}
-$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;render()};$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;$("searchInput").value="";render();scrollToResults()};$("closeBtn").onclick=closePost;$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};$("shareBtn").onclick=shareCurrentPost;
+
+function createShareImage(p){
+  const canvas=document.createElement("canvas");
+  canvas.width=1080; canvas.height=1350;
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#06110b"; ctx.fillRect(0,0,canvas.width,canvas.height);
+  const g=ctx.createLinearGradient(0,0,1080,1350);
+  g.addColorStop(0,"#0f2116"); g.addColorStop(1,"#030604");
+  ctx.fillStyle=g; ctx.fillRect(34,34,1012,1282);
+  ctx.strokeStyle="#d6bd76"; ctx.lineWidth=4; ctx.strokeRect(54,54,972,1242);
+  ctx.fillStyle="#f2df9b"; ctx.font="700 58px Georgia, serif"; ctx.textAlign="center";
+  ctx.fillText("DAR AL TAWḤID",540,130);
+  ctx.fillStyle="#fff6dc"; ctx.font="700 46px Georgia, serif";
+  wrapCanvasText(ctx,p.title||"",540,250,880,58);
+  ctx.fillStyle="#f7f0d7"; ctx.font="italic 34px Georgia, serif";
+  const stmt=stripMd(p.statement||"").replace(/\s+/g," ").slice(0,360);
+  wrapCanvasText(ctx,"„"+stmt+"“",540,430,850,48);
+  ctx.fillStyle="#cfc3a0"; ctx.font="24px Arial";
+  wrapCanvasText(ctx,p.source||"",540,1120,880,34);
+  ctx.fillStyle="#f2df9b"; ctx.font="28px Arial";
+  ctx.fillText("@dar_al_tauhid  |  @dar_at_tawhid",540,1245);
+  canvas.toBlob(async blob=>{
+    const file=new File([blob],"dar-al-tawhid-beitrag.png",{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      try{await navigator.share({files:[file],title:p.title||"DAR AL TAWḤID"});return;}catch(e){}
+    }
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download="dar-al-tawhid-beitrag.png";
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  });
+}
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
+  const words=String(text||"").split(/\s+/); let line="";
+  for(let n=0;n<words.length;n++){
+    const test=line+words[n]+" ";
+    if(ctx.measureText(test).width>maxWidth&&n>0){
+      ctx.fillText(line,x,y); line=words[n]+" "; y+=lineHeight;
+    }else line=test;
+  }
+  ctx.fillText(line,x,y);
+}
+
+function openPost(p, fromUrl=false){
+  currentPost=p;
+  incrementView(p.id);
+  if(!fromUrl){try{history.replaceState({post:p.id},'',getPostUrl(p));}catch(e){}}
+  $("modalTitle").textContent=p.title||"";
+  $("modalMeta").innerHTML=`<span class="badge">${esc(p.category||"")}</span><span class="badge">${esc(p.scholar||"")}</span><span class="badge">${esc(p.book||"")}</span>`;
+  $("modalStatement").innerHTML=formatText(p.statement||"");
+
+  const saveBtn=$("savePostBtn");
+  if(saveBtn){
+    saveBtn.textContent=isSaved(p.id)?"♥ Gespeichert":"♡ Speichern";
+    saveBtn.classList.toggle("active",isSaved(p.id));
+  }
+
+  const sourcePanel=$("sourceCheckPanel");
+  if(sourcePanel){
+    sourcePanel.classList.remove("show");
+    sourcePanel.innerHTML=`<strong>Quelle prüfen</strong><br>${esc(p.source||"Keine Quelle hinterlegt.")}<br><br>${(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}" target="_blank" rel="noopener">${esc(l.label||"Quelle öffnen")}</a>`).join(" ") || "Noch kein Quellenlink hinterlegt."}`;
+  }
+
+  const originalPanel=$("originalPanel");
+  if(originalPanel) originalPanel.classList.remove("show");
+
+  $("modalSource").textContent=p.source||"";
+  $("modalLinks").innerHTML=(p.links||[]).map(l=>`<a class="chip" href="${esc(l.url||l)}" target="_blank" rel="noopener">${esc(l.label||"Quelle")}</a>`).join("");
+  $("modal").classList.add("opened");
+  document.body.style.overflow="hidden";
+  renderFeaturePanels();
+}
+function closePost(){$("modal").classList.remove("opened");document.body.style.overflow="";try{history.replaceState({},"",location.origin+location.pathname)}catch(e){}}function render(){renderStats();renderLists();buildCats();renderPosts();renderFeaturePanels()}
+$("searchInput").oninput=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;render()};$("resetFilters").onclick=()=>{active={type:"all",value:"Alle"};showHomeNotice=false;$("searchInput").value="";render();scrollToResults()};$("closeBtn").onclick=closePost;$("modal").onclick=e=>{if(e.target.id==="modal")closePost()};
+$("shareBtn").onclick=shareCurrentPost;
+if($("savePostBtn"))$("savePostBtn").onclick=()=>{if(!currentPost)return;toggleSavedPost(currentPost.id);const b=$("savePostBtn");b.textContent=isSaved(currentPost.id)?"♥ Gespeichert":"♡ Speichern";b.classList.toggle("active",isSaved(currentPost.id));renderSavedPosts()};
+if($("sourceCheckBtn"))$("sourceCheckBtn").onclick=()=>{$("sourceCheckPanel").classList.toggle("show")};
+if($("originalToggleBtn"))$("originalToggleBtn").onclick=()=>{$("originalPanel").classList.toggle("show")};
+if($("reportBtn"))$("reportBtn").onclick=()=>{if(!currentPost)return;const subject=encodeURIComponent("Fehler melden: "+(currentPost.title||"DAR AL TAWḤID Beitrag"));const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+(currentPost.title||"")+"\n"+getPostUrl(currentPost)+"\n\nHinweis:\n");location.href="mailto:sero91ak@gmail.com?subject="+subject+"&body="+body};
+if($("imageShareBtn"))$("imageShareBtn").onclick=()=>{if(!currentPost)return;createShareImage(currentPost)};
+
 (async()=>{try{await loadPosts();render();openPostFromUrl()}catch(e){console.error(e);$("posts").innerHTML='<div class="error-box"><strong>Beiträge konnten nicht geladen werden.</strong><br>Prüfe, ob das Repository öffentlich ist und .md-Dateien unter content/posts liegen.</div>';renderStats()}})();
 </script>
 
