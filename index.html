@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=favicon-app-symbol">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=favicon-app-symbol">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=favicon-app-symbol">
-<link rel="manifest" href="/manifest.json?v=favicon-app-symbol">
+<link rel="manifest" href="/manifest.json?v=onesignal-web-sdk">
 <meta name="msapplication-TileImage" content="/app-icon-192.png?v=favicon-app-symbol">
 <meta name="msapplication-TileColor" content="#06110b">
 
@@ -569,6 +569,84 @@ Browser-Tab, Safari-Lesezeichen, Android Chrome und iOS sollen das echte DAR AL 
 Wenn weiterhin nur ein Buchstabe erscheint: altes Lesezeichen löschen, Website-Daten/Cache leeren und neu speichern.
 -->
 
+
+<style id="dar-onesignal-style">
+/* DAR AL TAWḤID – OneSignal Push Button */
+#darPushBox{
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 9997;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+
+#darPushBtn{
+  pointer-events: auto;
+  border: 1px solid rgba(230,205,132,.42);
+  background: linear-gradient(135deg, rgba(18,34,22,.96), rgba(8,15,10,.96));
+  color: #f5e8b8;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .02em;
+  box-shadow: 0 12px 34px rgba(0,0,0,.38);
+  cursor: pointer;
+}
+
+#darPushBtn:hover{
+  filter: brightness(1.08);
+}
+
+#darPushHint{
+  pointer-events: none;
+  max-width: 280px;
+  border: 1px solid rgba(230,205,132,.28);
+  background: rgba(5,12,8,.94);
+  color: rgba(255,255,255,.84);
+  border-radius: 16px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 12px 34px rgba(0,0,0,.34);
+  display:none;
+}
+
+#darPushHint.show{
+  display:block;
+}
+
+#darPushBtn.dar-subscribed{
+  color: #dff3df;
+  border-color: rgba(126,216,139,.42);
+}
+
+@media (max-width: 699px){
+  #darPushBox{
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  #darPushBtn{
+    font-size: 12px;
+    padding: 9px 12px;
+  }
+  #darPushHint{
+    max-width: min(280px, calc(100vw - 28px));
+    font-size: 11px;
+  }
+}
+
+/* In Modalen nicht über dem Inhalt stören */
+.modal.opened ~ #darPushBox,
+body.modal-open #darPushBox{
+  display:none;
+}
+</style>
+
 </head>
 <body class="clean-home">
 <header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.</div></div></section></header>
@@ -763,6 +841,109 @@ $("searchInput").oninput=()=>{active={type:"all",value:"Alle"};render()};$("rese
     setTimeout(unlockScroll, 400);
   });
   document.addEventListener("visibilitychange", unlockScroll);
+})();
+</script>
+
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script id="dar-onesignal-web-sdk">
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+(function(){
+  function isIOSDevice(){
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+
+  function isStandalone(){
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+      window.navigator.standalone === true ||
+      document.referrer.startsWith("android-app://");
+  }
+
+  function createPushButton(){
+    if(document.getElementById("darPushBox")) return;
+
+    var box = document.createElement("div");
+    box.id = "darPushBox";
+
+    var hint = document.createElement("div");
+    hint.id = "darPushHint";
+
+    var btn = document.createElement("button");
+    btn.id = "darPushBtn";
+    btn.type = "button";
+    btn.textContent = "🔔 Benachrichtigungen aktivieren";
+
+    box.appendChild(hint);
+    box.appendChild(btn);
+    document.body.appendChild(box);
+
+    btn.addEventListener("click", async function(){
+      try{
+        if(isIOSDevice() && !isStandalone()){
+          hint.textContent = "Auf iPhone/iPad: Erst über Teilen → Zum Home-Bildschirm hinzufügen, dann die App öffnen und Benachrichtigungen aktivieren.";
+          hint.classList.add("show");
+          setTimeout(function(){ hint.classList.remove("show"); }, 7000);
+          return;
+        }
+
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        window.OneSignalDeferred.push(async function(OneSignal){
+          try{
+            if(!OneSignal.Notifications || !(await OneSignal.Notifications.isPushSupported())){
+              hint.textContent = "Dieser Browser unterstützt Web-Push leider nicht.";
+              hint.classList.add("show");
+              setTimeout(function(){ hint.classList.remove("show"); }, 5000);
+              return;
+            }
+
+            await OneSignal.Notifications.requestPermission();
+
+            if(OneSignal.Notifications.permission){
+              btn.textContent = "✅ Benachrichtigungen aktiv";
+              btn.classList.add("dar-subscribed");
+              hint.textContent = "Du erhältst jetzt Benachrichtigungen von DAR AL TAWḤID.";
+            }else{
+              hint.textContent = "Benachrichtigungen wurden nicht erlaubt. Du kannst sie später in den Browser-/App-Einstellungen aktivieren.";
+            }
+
+            hint.classList.add("show");
+            setTimeout(function(){ hint.classList.remove("show"); }, 5000);
+          }catch(e){
+            hint.textContent = "Benachrichtigungen konnten nicht aktiviert werden. Bitte später erneut versuchen.";
+            hint.classList.add("show");
+            setTimeout(function(){ hint.classList.remove("show"); }, 5000);
+          }
+        });
+      }catch(e){}
+    });
+  }
+
+  window.addEventListener("load", createPushButton);
+
+  window.OneSignalDeferred.push(async function(OneSignal){
+    await OneSignal.init({
+      appId: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+      serviceWorkerPath: "/service-worker.js",
+      serviceWorkerParam: { scope: "/" },
+      notifyButton: { enable: false },
+      allowLocalhostAsSecureOrigin: false
+    });
+
+    try{
+      OneSignal.Notifications.setDefaultTitle("DAR AL TAWḤID");
+      OneSignal.Notifications.setDefaultUrl("https://dar-al-tawhid.de/");
+    }catch(e){}
+
+    try{
+      var btn = document.getElementById("darPushBtn");
+      if(btn && OneSignal.Notifications && OneSignal.Notifications.permission){
+        btn.textContent = "✅ Benachrichtigungen aktiv";
+        btn.classList.add("dar-subscribed");
+      }
+    }catch(e){}
+  });
 })();
 </script>
 
