@@ -118,6 +118,7 @@ button,input{font:inherit}
 
 .brand{
   min-width:0;
+  flex:1 1 auto;
 }
 
 .brand small{
@@ -134,6 +135,7 @@ button,input{font:inherit}
   display:flex;
   align-items:center;
   gap:20px;
+  min-width:0;
 }
 
 .logo{
@@ -146,13 +148,16 @@ button,input{font:inherit}
 }
 
 h1{
-  font-family:var(--serif);
+  font-family:Georgia,"Palatino Linotype","Book Antiqua","Times New Roman",serif;
   color:var(--gold2);
-  font-size:clamp(42px,5.8vw,86px);
-  line-height:.9;
-  letter-spacing:.12em;
+  font-size:clamp(38px,5.2vw,78px);
+  line-height:.92;
+  letter-spacing:.055em;
   margin:0;
-  font-weight:800;
+  font-weight:900;
+  white-space:nowrap;
+  font-style:italic;
+  text-shadow:0 3px 0 rgba(0,0,0,.22),0 14px 30px rgba(0,0,0,.38);
 }
 
 .socials{
@@ -799,18 +804,20 @@ h1{
   }
 
   .brand-main{
-    gap:12px;
+    gap:10px;
   }
 
   .logo{
-    width:70px;
-    height:70px;
-    flex-basis:70px;
+    width:64px;
+    height:64px;
+    flex-basis:64px;
   }
 
   h1{
-    font-size:clamp(31px,9.4vw,44px);
-    letter-spacing:.075em;
+    font-size:clamp(25px,6.55vw,34px);
+    letter-spacing:.028em;
+    line-height:.95;
+    white-space:nowrap;
   }
 
   .socials{
@@ -1025,13 +1032,14 @@ h1{
 
 @media(max-width:390px){
   .logo{
-    width:64px;
-    height:64px;
-    flex-basis:64px;
+    width:58px;
+    height:58px;
+    flex-basis:58px;
   }
 
   h1{
-    font-size:clamp(29px,8.8vw,40px);
+    font-size:clamp(23px,6.35vw,31px);
+    letter-spacing:.02em;
   }
 
   .folder-grid,
@@ -1078,7 +1086,8 @@ h1{
   }
 
   h1{
-    font-size:clamp(31px,5.8vw,54px);
+    font-size:clamp(31px,5.4vw,56px);
+    white-space:nowrap;
   }
 }
 </style>
