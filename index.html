@@ -335,6 +335,68 @@ footer{text-align:center;color:var(--muted);padding:26px 0 calc(34px + var(--saf
   }
 }
 
+
+/* NAV_OVERVIEW_SORT_SCROLL_FIX
+   Übersicht steht jetzt über Navigation und ist kompakter.
+   Filter-Klicks springen direkt zu den Beiträgen. */
+.overview-top{
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 17px;
+}
+.overview-top h2{
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+.overview-top .stats{
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.overview-top .stat{
+  min-height: 54px;
+  padding: 8px 12px;
+}
+.overview-top .stat b{
+  font-size: 20px;
+}
+.overview-top .stat span{
+  font-size: 10px;
+}
+html{
+  scroll-behavior: smooth;
+}
+#posts{
+  scroll-margin-top: 18px;
+}
+@media(max-width:820px){
+  .overview-top{
+    padding: 10px;
+    margin-bottom: 9px;
+    border-radius: 15px;
+  }
+  .overview-top h2{
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .overview-top .stats{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+  }
+  .overview-top .stat{
+    min-height: 52px;
+    padding: 8px 10px;
+  }
+  .overview-top .stat b{
+    font-size: 17px;
+  }
+  .overview-top .stat span{
+    font-size: 9.8px;
+  }
+  #posts{
+    scroll-margin-top: 12px;
+  }
+}
+
 </style>
 
 <style id="android-rotation-force-final-css">
@@ -1442,7 +1504,8 @@ Safari Web ID: web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c
 <body class="clean-home">
 <header class="site"><section class="hero"><div class="top"><div class="brand"><small>Beiträge nach Qurʾān, Sunnah & Āthār</small><div class="brand-title-row"><img class="header-logo-mark" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div></div><nav class="links"><a class="social-chip" href="https://t.me/dar_al_tauhid" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg></span><span>Telegram @dar_al_tauhid</span></a><a class="social-chip" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank"><span class="social-icon"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="igHeadMd" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHeadMd)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg></span><span>Instagram @dar_at_tawhid</span></a></nav></div><div class="hero-welcome"><div class="salam-line">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="welcome-line">Willkommen bei <strong>DAR AL TAWḤID</strong> – ausgewählte Beiträge aus <strong>Qurʾān</strong>, <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>, übersichtlich geordnet nach Gelehrten, Büchern, Themen und Hashtags.<div class="push-inline-chip"><span class="chip-bell">🔔</span><div><strong>Benachrichtigungen einschalten</strong>Neue Beiträge direkt auf iPhone, iPad und Android erhalten.</div></div></div></section></header>
 <section class="site isnad"><div class="isnad-top">Maßstab der Überlieferung</div><div class="isnad-quote">🖋️ Ibn Sīrīn sagte: „Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
-<main class="site grid"><aside><h2>Navigation</h2><input id="searchInput" class="search" type="search" placeholder="Freie Suche…"><details class="filter-section"><summary>Gelehrte</summary><div id="scholarList" class="list-buttons"></div></details><details class="filter-section"><summary>Bücher</summary><div id="bookList" class="list-buttons"></div></details><details class="filter-section"><summary>Themen</summary><div id="topicList" class="list-buttons"></div></details><details class="filter-section"><summary>Hashtags</summary><div id="tagList" class="list-buttons"></div></details><div style="border-top:1px solid var(--line2);margin-top:10px;padding-top:10px"><button id="resetFilters">Alles anzeigen</button></div></aside><section class="main"><section class="panel"><h2>Übersicht</h2><div class="stats"><div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div><div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div><div class="stat"><b id="countBooks">0</b><span>Bücher</span></div><div class="stat"><b id="countTopics">0</b><span>Themen</span></div></div></section><section class="knowledge"><div class="knowledge-head"><h2>Wissensbereiche</h2><span>Nach Themen öffnen</span></div><div id="categoryList" class="mobile-quick-cats"></div></section><div id="homeNotice" class="notice"><strong>Wähle einen Wissensbereich</strong>Öffne zuerst einen Bereich. Danach erscheinen die passenden Beiträge.</div><section id="posts" class="posts"><div class="loading-box">Beiträge werden aus <strong>content/posts</strong> geladen…</div></section></section></main>
+<section class="panel overview-top"><h2>Übersicht</h2><div class="stats"><div class="stat"><b id="countPosts">0</b><span>Beiträge</span></div><div class="stat"><b id="countScholars">0</b><span>Gelehrte</span></div><div class="stat"><b id="countBooks">0</b><span>Bücher</span></div><div class="stat"><b id="countTopics">0</b><span>Themen</span></div></div></section>
+<main class="site grid"><aside><h2>Navigation</h2><input id="searchInput" class="search" type="search" placeholder="Freie Suche…"><details class="filter-section"><summary>Gelehrte</summary><div id="scholarList" class="list-buttons"></div></details><details class="filter-section"><summary>Bücher</summary><div id="bookList" class="list-buttons"></div></details><details class="filter-section"><summary>Themen</summary><div id="topicList" class="list-buttons"></div></details><details class="filter-section"><summary>Hashtags</summary><div id="tagList" class="list-buttons"></div></details><div style="border-top:1px solid var(--line2);margin-top:10px;padding-top:10px"><button id="resetFilters">Alles anzeigen</button></div></aside><section class="main"><section class="knowledge"><div class="knowledge-head"><h2>Wissensbereiche</h2><span>Nach Themen öffnen</span></div><div id="categoryList" class="mobile-quick-cats"></div></section><div id="homeNotice" class="notice"><strong>Wähle einen Wissensbereich</strong>Öffne zuerst einen Bereich. Danach erscheinen die passenden Beiträge.</div><section id="posts" class="posts"><div class="loading-box">Beiträge werden aus <strong>content/posts</strong> geladen…</div></section></section></main>
 <div id="modal" class="modal"><article class="article"><div class="article-top"><button id="shareBtn">Beitrag teilen</button><button id="closeBtn">Schließen</button></div><h2 id="modalTitle"></h2><div id="modalMeta" class="meta"></div><div id="modalStatement" class="statement"></div><div id="modalSource" class="article-source"></div><div id="modalLinks" class="article-links"></div></article></div>
 <div id="pushWidget" class="push-widget" aria-live="polite">
   <div id="pushWidgetCard" class="push-widget-card">
@@ -1568,9 +1631,16 @@ function cleanBodyText(body){
 
 function parseFM(md,name){let fm={},body=md;const m=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(m){body=m[2]||"";const lines=m[1].split(/\r?\n/);let current=null;for(const line of lines){let km=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(km){current=km[1];let val=km[2].trim();fm[current]=val===""?[]:parseValue(val);continue}let am=line.match(/^\s*-\s*(.*)$/);if(am&&current){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(am[1]))}}const lb=m[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(lb){const links=[];let item=null;lb[1].split(/\r?\n/).forEach(line=>{let lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={label:parseValue(lm[1]),url:""};links.push(item);return}lm=line.match(/^\s*url:\s*(.*)$/);if(lm&&item)item.url=parseValue(lm[1])});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:(fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[]);return{id:fm.id||name.replace(/\.md$/,""),date:fm.date||"",title:fm.title||name.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],statement:cleanBodyText(body)}}
 async function loadPosts(){const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;const res=await fetch(api,{cache:"no-store"});if(!res.ok)throw new Error("GitHub API konnte content/posts nicht laden");const files=await res.json();const md=files.filter(f=>f.type==="file"&&f.name.endsWith(".md"));posts=await Promise.all(md.map(async f=>{const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${f.name}`;const r=await fetch(raw,{cache:"no-store"});return parseFM(await r.text(),f.name)}));posts = posts.map(p => ({...p, statement: cleanBodyText(p.statement)})); posts.sort((a,b)=>String(b.date).localeCompare(String(a.date)))}
+function scrollToResults(){
+  const target = document.getElementById("posts") || document.querySelector(".knowledge");
+  if(!target) return;
+  setTimeout(() => {
+    target.scrollIntoView({behavior:"smooth", block:"start"});
+  }, 80);
+}
 function countBy(k){const m=new Map();posts.forEach(p=>{const v=p[k]||"Unbekannt";m.set(v,(m.get(v)||0)+1)});return m}function countTags(){const m=new Map();posts.forEach(p=>(p.tags||[]).forEach(t=>m.set(t,(m.get(t)||0)+1)));return m}
-function buttonList(root,map,type){root.innerHTML="";const all=document.createElement("button");all.textContent=`Alle (${posts.length})`;all.className=active.type==="all"?"active":"";all.onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render()};root.appendChild(all);[...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de")).forEach(([name,count])=>{const b=document.createElement("button");b.textContent=`${name} (${count})`;b.className=active.type===type&&active.value===name?"active":"";b.onclick=()=>{active={type,value:name};render()};root.appendChild(b)})}
-function buildCats(){const root=$("categoryList");root.innerHTML="";const map=countBy("category");[...map.keys()].sort((a,b)=>a.localeCompare(b,"de")).forEach(k=>{const btn=document.createElement("button");btn.className="mobile-cat-btn"+(active.type==="category"&&active.value===k?" active":"");btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;btn.onclick=()=>{active={type:"category",value:k};$("searchInput").value="";render();$("posts").scrollIntoView({behavior:"smooth",block:"start"})};root.appendChild(btn)})}
+function buttonList(root,map,type){root.innerHTML="";const all=document.createElement("button");all.textContent=`Alle (${posts.length})`;all.className=active.type==="all"?"active":"";all.onclick=()=>{active={type:"all",value:"Alle"};$("searchInput").value="";render();scrollToResults()};root.appendChild(all);[...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de")).forEach(([name,count])=>{const b=document.createElement("button");b.textContent=`${name} (${count})`;b.className=active.type===type&&active.value===name?"active":"";b.onclick=()=>{active={type,value:name};render();scrollToResults()};root.appendChild(b)})}
+function buildCats(){const root=$("categoryList");root.innerHTML="";const map=countBy("category");[...map.keys()].sort((a,b)=>a.localeCompare(b,"de")).forEach(k=>{const btn=document.createElement("button");btn.className="mobile-cat-btn"+(active.type==="category"&&active.value===k?" active":"");btn.innerHTML=`<b>${esc(k)}</b><span>${map.get(k)} Beiträge öffnen</span>`;btn.onclick=()=>{active={type:"category",value:k};$("searchInput").value="";render();scrollToResults()};root.appendChild(btn)})}
 function matches(p){const q=$("searchInput").value.trim().toLowerCase();let ok=true;if(active.type==="scholar")ok=p.scholar===active.value;if(active.type==="book")ok=p.book===active.value;if(active.type==="topic")ok=p.topic===active.value;if(active.type==="tag")ok=(p.tags||[]).includes(active.value);if(active.type==="category")ok=p.category===active.value;if(q)ok=ok&&[p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(q);return ok}
 function renderStats(){$("countPosts").textContent=posts.length;$("countScholars").textContent=countBy("scholar").size;$("countBooks").textContent=countBy("book").size;$("countTopics").textContent=countBy("topic").size}
 function renderLists(){buttonList($("scholarList"),countBy("scholar"),"scholar");buttonList($("bookList"),countBy("book"),"book");buttonList($("topicList"),countBy("topic"),"topic");buttonList($("tagList"),countTags(),"tag")}
