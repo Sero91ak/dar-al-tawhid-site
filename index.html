@@ -6,12 +6,12 @@
 
 <title>DAR AL TAWḤID</title>
 
-<link rel="icon" href="/favicon.ico?v=app-structure-v1" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=app-structure-v1">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=app-structure-v1">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=app-structure-v1">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=app-structure-v1">
-<link rel="manifest" href="/manifest.json?v=app-structure-v1">
+<link rel="icon" href="/favicon.ico?v=structured-app-v2" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=structured-app-v2">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=structured-app-v2">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=structured-app-v2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=structured-app-v2">
+<link rel="manifest" href="/manifest.json?v=structured-app-v2">
 
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileImage" content="/app-icon-192.png?v=app-structure-v1">
+<meta name="msapplication-TileImage" content="/app-icon-192.png?v=structured-app-v2">
 <meta name="msapplication-TileColor" content="#080806">
 
 <style>
@@ -40,7 +40,6 @@
   --line2:rgba(210,177,91,.16);
   --soft:rgba(210,177,91,.08);
   --danger:#ffd1c5;
-  --green:#142018;
   --shadow:0 22px 65px rgba(0,0,0,.42);
   --serif:Georgia,"Times New Roman",serif;
   --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -80,8 +79,7 @@ body:before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:
-    url("watermark-circle-soft.png") center 44%/min(620px,58vw) auto no-repeat;
+  background:url("watermark-circle-soft.png") center 44%/min(620px,58vw) auto no-repeat;
   opacity:.055;
   z-index:0;
 }
@@ -182,8 +180,10 @@ h1{
 .social-link{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
   white-space:nowrap;
+  min-width:118px;
 }
 
 .social-link svg{
@@ -293,25 +293,16 @@ h1{
 .view{
   border:1px solid var(--line);
   border-radius:28px;
-  background:
-    linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));
+  background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));
   box-shadow:var(--shadow);
   padding:18px;
   min-height:430px;
 }
 
 .view-head{
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
-  align-items:flex-end;
-  padding:4px 2px 16px;
+  padding:4px 2px 14px;
   border-bottom:1px solid var(--line2);
-  margin-bottom:16px;
-}
-
-.view-title-block{
-  min-width:0;
+  margin-bottom:14px;
 }
 
 .eyebrow{
@@ -339,106 +330,62 @@ h1{
   margin-top:8px;
 }
 
-.home-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:13px;
-}
-
-.folder-card,
-.post-card,
-.list-card,
-.info-card{
+.overview-panel{
   border:1px solid var(--line);
-  background:
-    radial-gradient(circle at 20% 0%,rgba(239,215,142,.105),transparent 38%),
-    linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
   border-radius:22px;
-  padding:17px;
-  box-shadow:0 14px 34px rgba(0,0,0,.25);
-  cursor:pointer;
-  transition:transform .15s ease,border-color .15s ease,filter .15s ease;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.09),transparent 42%),
+    linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
+  padding:14px;
+  margin-bottom:12px;
 }
 
-.folder-card:hover,
-.post-card:hover,
-.list-card:hover{
-  transform:translateY(-2px);
-  border-color:rgba(239,215,142,.52);
-  filter:brightness(1.04);
+.overview-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
 }
 
-.folder-icon{
-  width:46px;
-  height:46px;
-  display:grid;
-  place-items:center;
-  border-radius:16px;
-  background:linear-gradient(180deg,rgba(239,215,142,.18),rgba(155,122,60,.08));
-  border:1px solid var(--line2);
-  color:var(--gold2);
-  font-size:22px;
-  margin-bottom:14px;
-}
-
-.folder-card h3,
-.post-card h3,
-.list-card h3,
-.info-card h3{
+.overview-title h3{
   font-family:var(--serif);
   color:var(--gold2);
-  font-size:24px;
-  line-height:1.08;
-  margin:0 0 8px;
-}
-
-.folder-card p,
-.info-card p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.55;
   margin:0;
+  font-size:24px;
+  line-height:1.1;
 }
 
-.folder-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:13px;
-}
-
-.folder-meta span,
-.badge{
-  border:1px solid var(--line2);
-  border-radius:999px;
-  padding:5px 8px;
-  color:var(--cream);
-  background:rgba(239,215,142,.055);
-  font-size:10px;
-  font-weight:900;
-}
-
-.grid-list{
+.stats-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
 }
 
-.list-card{
-  min-height:118px;
+.stat-card{
+  border:1px solid var(--line2);
+  border-radius:16px;
+  background:rgba(239,215,142,.045);
+  padding:10px;
 }
 
-.list-card .count{
+.stat-card b{
+  display:block;
+  color:var(--gold2);
+  font-size:22px;
+  line-height:1;
+}
+
+.stat-card span{
+  display:block;
+  margin-top:5px;
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
   font-weight:850;
 }
 
-.search-wrap{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin-bottom:14px;
+.main-search{
+  margin-bottom:13px;
 }
 
 .search{
@@ -458,14 +405,127 @@ h1{
   box-shadow:0 0 0 4px rgba(239,215,142,.09);
 }
 
+.section-block{
+  margin-top:14px;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.section-head h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:25px;
+  margin:0;
+  line-height:1.08;
+}
+
+.section-head span{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:850;
+}
+
+.folder-grid,
+.latest-grid,
+.grid-list,
 .post-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
 }
 
+.folder-card,
+.post-card,
+.list-card,
+.info-card{
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.105),transparent 38%),
+    linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
+  border-radius:22px;
+  padding:15px;
+  box-shadow:0 14px 34px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease,filter .15s ease;
+}
+
+.folder-card:hover,
+.post-card:hover,
+.list-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(239,215,142,.52);
+  filter:brightness(1.04);
+}
+
+.folder-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:linear-gradient(180deg,rgba(239,215,142,.18),rgba(155,122,60,.08));
+  border:1px solid var(--line2);
+  color:var(--gold2);
+  font-size:21px;
+  margin-bottom:12px;
+}
+
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.info-card h3{
+  font-family:var(--serif);
+  color:var(--gold2);
+  font-size:22px;
+  line-height:1.08;
+  margin:0 0 7px;
+  overflow-wrap:anywhere;
+}
+
+.folder-card p,
+.info-card p{
+  color:var(--muted);
+  font-size:12.5px;
+  line-height:1.5;
+  margin:0;
+}
+
+.folder-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.folder-meta span,
+.badge{
+  border:1px solid var(--line2);
+  border-radius:999px;
+  padding:5px 8px;
+  color:var(--cream);
+  background:rgba(239,215,142,.055);
+  font-size:10px;
+  font-weight:900;
+}
+
+.list-card{
+  min-height:128px;
+}
+
+.list-card .count{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:850;
+}
+
 .post-card{
-  min-height:220px;
+  min-height:210px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -481,7 +541,7 @@ h1{
 .excerpt{
   font-family:var(--serif);
   color:#fff6dc;
-  font-size:16px;
+  font-size:15.5px;
   line-height:1.42;
   font-style:italic;
   font-weight:650;
@@ -695,7 +755,8 @@ h1{
 }
 
 @media(max-width:980px){
-  .home-grid,
+  .folder-grid,
+  .latest-grid,
   .grid-list,
   .post-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -708,6 +769,10 @@ h1{
   .socials{
     justify-content:flex-start;
     margin-top:14px;
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
   }
 }
 
@@ -756,14 +821,8 @@ h1{
   .social-link{
     justify-content:center;
     padding:8px 7px;
-    font-size:9.4px;
-    overflow:hidden;
-  }
-
-  .social-link span:last-child{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    font-size:10.5px;
+    min-width:0;
   }
 
   .hero-text{
@@ -802,7 +861,6 @@ h1{
   }
 
   .view-head{
-    display:block;
     padding-bottom:12px;
   }
 
@@ -814,9 +872,32 @@ h1{
     font-size:11.6px;
   }
 
-  .home-grid,
+  .stats-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+
+  .stat-card{
+    padding:9px;
+    border-radius:14px;
+  }
+
+  .stat-card b{
+    font-size:19px;
+  }
+
+  .stat-card span{
+    font-size:10px;
+  }
+
+  .folder-grid,
+  .latest-grid,
   .grid-list,
-  .post-grid,
+  .post-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
   .about-grid{
     grid-template-columns:1fr;
     gap:9px;
@@ -827,31 +908,79 @@ h1{
   .list-card,
   .info-card{
     border-radius:17px;
-    padding:13px;
+    padding:11px;
   }
 
   .folder-card h3,
   .post-card h3,
   .list-card h3,
   .info-card h3{
-    font-size:21px;
+    font-size:18px;
+    line-height:1.08;
+  }
+
+  .folder-card p{
+    font-size:11px;
+    line-height:1.38;
   }
 
   .folder-icon{
-    width:40px;
-    height:40px;
+    width:38px;
+    height:38px;
     border-radius:14px;
-    font-size:19px;
-    margin-bottom:10px;
+    font-size:18px;
+    margin-bottom:9px;
+  }
+
+  .folder-meta{
+    gap:5px;
+    margin-top:9px;
+  }
+
+  .folder-meta span,
+  .badge{
+    font-size:8.4px;
+    padding:4px 6px;
+  }
+
+  .list-card{
+    min-height:118px;
+  }
+
+  .list-card .count{
+    font-size:10.5px;
   }
 
   .post-card{
-    min-height:0;
+    min-height:185px;
   }
 
   .excerpt{
-    font-size:14px;
-    -webkit-line-clamp:2;
+    font-size:12.8px;
+    line-height:1.32;
+    -webkit-line-clamp:3;
+  }
+
+  .source-preview{
+    font-size:8.5px;
+    margin-top:8px;
+    padding-top:7px;
+  }
+
+  .section-head h3{
+    font-size:21px;
+  }
+
+  .section-head span{
+    font-size:9.5px;
+  }
+
+  .overview-title h3{
+    font-size:21px;
+  }
+
+  .search{
+    height:46px;
   }
 
   .statement{
@@ -876,14 +1005,6 @@ h1{
     text-align:left;
   }
 
-  .search-wrap{
-    display:block;
-  }
-
-  .search{
-    height:46px;
-  }
-
   .app-bar{
     margin-bottom:9px;
   }
@@ -893,11 +1014,38 @@ h1{
   }
 }
 
-@media(orientation:landscape) and (max-height:620px){
-  .home-grid,
+@media(max-width:390px){
+  .folder-grid,
+  .latest-grid,
   .grid-list,
   .post-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+
+  .folder-card,
+  .post-card,
+  .list-card{
+    padding:10px;
+  }
+
+  .folder-card h3,
+  .post-card h3,
+  .list-card h3{
+    font-size:16.5px;
+  }
+
+  .excerpt{
+    font-size:12px;
+  }
+}
+
+@media(orientation:landscape) and (max-height:620px){
+  .folder-grid,
+  .latest-grid,
+  .grid-list,
+  .post-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 
   .header{
@@ -953,12 +1101,12 @@ OneSignalDeferred.push(async function(OneSignal){
         <nav class="socials" aria-label="Social Media">
           <a class="social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>
-            <span>Telegram @dar_al_tauhid</span>
+            <span>Telegram</span>
           </a>
 
           <a class="social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igHead" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHead)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg>
-            <span>Instagram @dar_at_tawhid</span>
+            <span>Instagram</span>
           </a>
         </nav>
       </div>
@@ -993,11 +1141,11 @@ OneSignalDeferred.push(async function(OneSignal){
     <div class="footer-socials">
       <span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>
-        Telegram @dar_al_tauhid
+        Telegram
       </span>
       <span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igFoot" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFoot)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg>
-        Instagram @dar_at_tawhid
+        Instagram
       </span>
     </div>
     <span class="signature">by Serhat Abu Malik</span>
@@ -1012,8 +1160,8 @@ const REPO_NAME = "dar-al-tawhid-site";
 const POSTS_DIR = "content/posts";
 const BRANCH = "main";
 
-const CACHE_KEY = "darCachedPostsV2";
-const SAVE_KEY = "darSavedPostsV2";
+const CACHE_KEY = "darCachedPostsV3";
+const SAVE_KEY = "darSavedPostsV3";
 
 let posts = [];
 let currentRoute = {view:"home", value:""};
@@ -1195,6 +1343,18 @@ function countBy(key){
   return map;
 }
 
+function countTags(){
+  const map = new Map();
+
+  posts.forEach(post => {
+    (post.tags || []).forEach(tag => {
+      map.set(tag, (map.get(tag) || 0) + 1);
+    });
+  });
+
+  return map;
+}
+
 function savedIds(){
   return getJson(SAVE_KEY, []);
 }
@@ -1251,11 +1411,9 @@ function parentRoute(route){
 function setHeader(title, desc, eyebrow="DAR AL TAWḤID"){
   return `
     <div class="view-head">
-      <div class="view-title-block">
-        <div class="eyebrow">${esc(eyebrow)}</div>
-        <h2>${esc(title)}</h2>
-        ${desc ? `<div class="view-desc">${esc(desc)}</div>` : ""}
-      </div>
+      <div class="eyebrow">${esc(eyebrow)}</div>
+      <h2>${esc(title)}</h2>
+      ${desc ? `<div class="view-desc">${esc(desc)}</div>` : ""}
     </div>
   `;
 }
@@ -1273,7 +1431,6 @@ function postCard(post){
         <div class="post-meta">
           ${post.category ? `<span class="badge">${esc(post.category)}</span>` : ""}
           ${post.scholar ? `<span class="badge">${esc(post.scholar)}</span>` : ""}
-          ${post.topic ? `<span class="badge">${esc(post.topic)}</span>` : ""}
         </div>
         <div class="excerpt">${esc(findQuote(post))}</div>
       </div>
@@ -1292,68 +1449,113 @@ function listCard(title, count, view, value, icon="📁"){
   `;
 }
 
+function renderOverview(){
+  const topics = countBy("category").size;
+  const scholars = [...countBy("scholar").keys()].filter(x => x && x !== "Unbekannt").length;
+  const books = [...countBy("book").keys()].filter(x => x && x !== "Unbekannt").length;
+
+  return `
+    <section class="overview-panel">
+      <div class="overview-title">
+        <h3>Übersicht</h3>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><b>${posts.length}</b><span>Beiträge</span></div>
+        <div class="stat-card"><b>${topics}</b><span>Themen</span></div>
+        <div class="stat-card"><b>${scholars}</b><span>Gelehrte</span></div>
+        <div class="stat-card"><b>${books}</b><span>Bücher</span></div>
+      </div>
+    </section>
+  `;
+}
+
 function renderHome(){
   const categoryCount = countBy("category").size;
-  const scholarCount = countBy("scholar").size;
-  const bookCount = countBy("book").size;
+  const scholarCount = [...countBy("scholar").keys()].filter(x => x && x !== "Unbekannt").length;
+  const bookCount = [...countBy("book").keys()].filter(x => x && x !== "Unbekannt").length;
   const savedCount = savedIds().length;
+  const latest = posts.slice(0,6);
 
   return `
     ${setHeader(
       "Startseite",
-      "Wähle einen Ordner. Die Beiträge öffnen sich danach in einer eigenen Ansicht mit Zurückbutton – nicht mehr überladen auf der Hauptseite.",
+      "Alles ist jetzt in Ordnern aufgebaut. Öffne Themen, Gelehrte oder Bücher jeweils als eigene Seite mit Zurückbutton.",
       "App-Übersicht"
     )}
 
-    <section class="home-grid">
-      <article class="folder-card" data-nav="topics">
-        <div class="folder-icon">📚</div>
-        <h3>Themen</h3>
-        <p>Beiträge geordnet nach Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh, Tazkiyah, Zuhd und weiteren Bereichen.</p>
-        <div class="folder-meta"><span>${categoryCount} Bereiche</span><span>Themenordner</span></div>
-      </article>
+    ${renderOverview()}
 
-      <article class="folder-card" data-nav="scholars">
-        <div class="folder-icon">👤</div>
-        <h3>Gelehrte</h3>
-        <p>Öffne Beiträge nach den jeweiligen Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p>
-        <div class="folder-meta"><span>${scholarCount} Namen</span><span>Biografische Ordnung</span></div>
-      </article>
+    <section class="main-search">
+      <input id="homeSearchInput" class="search" type="search" placeholder="Suche nach Beitrag, Thema, Gelehrtem, Buch oder Quelle…">
+    </section>
 
-      <article class="folder-card" data-nav="books">
-        <div class="folder-icon">📖</div>
-        <h3>Bücher</h3>
-        <p>Finde Beiträge direkt nach den verwendeten Werken und Quellen.</p>
-        <div class="folder-meta"><span>${bookCount} Werke</span><span>Quellenstruktur</span></div>
-      </article>
+    <section id="homeSearchBlock" class="section-block" style="display:none">
+      <div class="section-head">
+        <h3>Suchergebnisse</h3>
+        <span id="homeSearchCount">0 Treffer</span>
+      </div>
+      <div id="homeSearchResults" class="post-grid"></div>
+    </section>
 
-      <article class="folder-card" data-nav="recent">
-        <div class="folder-icon">🆕</div>
+    <section class="section-block">
+      <div class="section-head">
         <h3>Neueste Beiträge</h3>
-        <p>Zeigt die zuletzt hinzugefügten Beiträge aus deinem GitHub-Ordner content/posts.</p>
-        <div class="folder-meta"><span>${posts.length} Beiträge</span><span>Aktuell</span></div>
-      </article>
+        <span>${latest.length} aktuell angezeigt</span>
+      </div>
+      <div class="latest-grid">
+        ${latest.length ? latest.map(postCard).join("") : `<div class="empty">Noch keine Beiträge vorhanden.</div>`}
+      </div>
+    </section>
 
-      <article class="folder-card" data-nav="saved">
-        <div class="folder-icon">♡</div>
-        <h3>Gespeichert</h3>
-        <p>Beiträge, die der Besucher lokal auf seinem Gerät speichert.</p>
-        <div class="folder-meta"><span>${savedCount} gespeichert</span><span>Lokal</span></div>
-      </article>
+    <section class="section-block">
+      <div class="section-head">
+        <h3>Ordner</h3>
+        <span>strukturiert öffnen</span>
+      </div>
 
-      <article class="folder-card" data-nav="search">
-        <div class="folder-icon">🔎</div>
-        <h3>Suche</h3>
-        <p>Suche über Titel, Thema, Gelehrten, Buch, Quelle, Tags und Beitragstext.</p>
-        <div class="folder-meta"><span>Schnellsuche</span><span>App-Ansicht</span></div>
-      </article>
+      <div class="folder-grid">
+        <article class="folder-card" data-nav="topics">
+          <div class="folder-icon">📚</div>
+          <h3>Themen</h3>
+          <p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche.</p>
+          <div class="folder-meta"><span>${categoryCount} Bereiche</span></div>
+        </article>
 
-      <article class="folder-card" data-nav="about">
-        <div class="folder-icon">⚖️</div>
-        <h3>Über diese App</h3>
-        <p>Der Maßstab der Seite: Qurʾān, Sunnah, Āthār und geprüfte Quellen statt bloßer Meinung.</p>
-        <div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div>
-      </article>
+        <article class="folder-card" data-nav="scholars">
+          <div class="folder-icon">👤</div>
+          <h3>Gelehrte</h3>
+          <p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p>
+          <div class="folder-meta"><span>${scholarCount} Namen</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="books">
+          <div class="folder-icon">📖</div>
+          <h3>Bücher</h3>
+          <p>Beiträge direkt nach verwendeten Werken und Quellen.</p>
+          <div class="folder-meta"><span>${bookCount} Werke</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="recent">
+          <div class="folder-icon">🆕</div>
+          <h3>Alle neuesten</h3>
+          <p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p>
+          <div class="folder-meta"><span>${posts.length} Beiträge</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="saved">
+          <div class="folder-icon">♡</div>
+          <h3>Gespeichert</h3>
+          <p>Beiträge, die lokal auf dem Gerät gespeichert wurden.</p>
+          <div class="folder-meta"><span>${savedCount} gespeichert</span></div>
+        </article>
+
+        <article class="folder-card" data-nav="about">
+          <div class="folder-icon">⚖️</div>
+          <h3>Über die App</h3>
+          <p>Maßstab, Quellenordnung und Aufbau der Seite.</p>
+          <div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div>
+        </article>
+      </div>
     </section>
   `;
 }
@@ -1370,7 +1572,7 @@ function renderTopics(){
     )}
 
     <section class="grid-list">
-      ${items.map(([name,count]) => listCard(name, count, "topic", name, "📚")).join("")}
+      ${items.length ? items.map(([name,count]) => listCard(name, count, "topic", name, "📚")).join("") : `<div class="empty">Noch keine Themen erkannt.</div>`}
     </section>
   `;
 }
@@ -1436,7 +1638,7 @@ function renderFiltered(type, value){
 }
 
 function renderRecent(){
-  const latest = posts.slice(0,30);
+  const latest = posts.slice(0,60);
 
   return `
     ${setHeader(
@@ -1464,24 +1666,6 @@ function renderSaved(){
 
     <section class="post-grid">
       ${saved.length ? saved.map(postCard).join("") : `<div class="empty">Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.</div>`}
-    </section>
-  `;
-}
-
-function renderSearch(){
-  return `
-    ${setHeader(
-      "Suche",
-      "Durchsuche Titel, Themen, Gelehrte, Bücher, Quellen, Tags und Beitragstext.",
-      "Schnellsuche"
-    )}
-
-    <div class="search-wrap">
-      <input id="searchInput" class="search" type="search" placeholder="Suchbegriff eingeben…">
-    </div>
-
-    <section id="searchResults" class="post-grid">
-      ${posts.slice(0,12).map(postCard).join("")}
     </section>
   `;
 }
@@ -1584,7 +1768,6 @@ function updateChrome(route){
     books:"Startseite / Bücher",
     recent:"Startseite / Neueste Beiträge",
     saved:"Startseite / Gespeichert",
-    search:"Startseite / Suche",
     about:"Startseite / Über diese App",
     topic:`Startseite / Themen / ${route.value}`,
     scholar:`Startseite / Gelehrte / ${route.value}`,
@@ -1610,7 +1793,6 @@ function render(){
   else if(currentRoute.view === "book") html = renderFiltered("book", currentRoute.value);
   else if(currentRoute.view === "recent") html = renderRecent();
   else if(currentRoute.view === "saved") html = renderSaved();
-  else if(currentRoute.view === "search") html = renderSearch();
   else if(currentRoute.view === "about") html = renderAbout();
   else if(currentRoute.view === "post") html = renderPost(currentRoute.value);
   else html = renderHome();
@@ -1630,12 +1812,21 @@ function bindEvents(){
     };
   });
 
-  const searchInput = $("searchInput");
-  const results = $("searchResults");
+  const homeSearchInput = $("homeSearchInput");
+  const homeSearchBlock = $("homeSearchBlock");
+  const homeSearchResults = $("homeSearchResults");
+  const homeSearchCount = $("homeSearchCount");
 
-  if(searchInput && results){
-    searchInput.oninput = () => {
-      const q = searchInput.value.trim().toLowerCase();
+  if(homeSearchInput && homeSearchBlock && homeSearchResults && homeSearchCount){
+    homeSearchInput.oninput = () => {
+      const q = homeSearchInput.value.trim().toLowerCase();
+
+      if(!q){
+        homeSearchBlock.style.display = "none";
+        homeSearchResults.innerHTML = "";
+        homeSearchCount.textContent = "0 Treffer";
+        return;
+      }
 
       const filtered = posts.filter(post => {
         const haystack = [
@@ -1652,8 +1843,10 @@ function bindEvents(){
         return haystack.includes(q);
       });
 
-      results.innerHTML = (q ? filtered : posts.slice(0,12)).length
-        ? (q ? filtered : posts.slice(0,12)).map(postCard).join("")
+      homeSearchBlock.style.display = "block";
+      homeSearchCount.textContent = `${filtered.length} Treffer`;
+      homeSearchResults.innerHTML = filtered.length
+        ? filtered.map(postCard).join("")
         : `<div class="empty">Keine passenden Beiträge gefunden.</div>`;
 
       bindEvents();
