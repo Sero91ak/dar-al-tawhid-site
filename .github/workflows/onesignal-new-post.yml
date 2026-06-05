@@ -1,0 +1,172 @@
+name: OneSignal Push bei neuem Beitrag
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/posts/*.md"
+  workflow_dispatch:
+    inputs:
+      post_file:
+        description: "Optional: einzelner Beitrag, z.B. content/posts/dateiname.md"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  send-push:
+    runs-on: ubuntu-latest
+
+    env:
+      ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
+      ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: OneSignal Push senden
+        shell: bash
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          import re
+          import sys
+          import urllib.request
+          import urllib.error
+          from pathlib import Path
+
+          DEFAULT_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          SITE_URL = "https://dar-al-tawhid.de"
+
+          app_id = (os.environ.get("ONESIGNAL_APP_ID") or DEFAULT_APP_ID).strip()
+          api_key = (os.environ.get("ONESIGNAL_REST_API_KEY") or "").strip()
+
+          if not api_key:
+              print("FEHLER: GitHub Secret ONESIGNAL_REST_API_KEY fehlt.")
+              sys.exit(1)
+
+          event_path = os.environ.get("GITHUB_EVENT_PATH", "")
+          event = {}
+          if event_path and Path(event_path).exists():
+              event = json.loads(Path(event_path).read_text(encoding="utf-8"))
+
+          changed = []
+
+          workflow_inputs = event.get("inputs") or {}
+          manual_file = (workflow_inputs.get("post_file") or "").strip()
+          if manual_file:
+              changed.append(manual_file)
+
+          if not changed:
+              for commit in event.get("commits", []):
+                  for key in ("added", "modified"):
+                      for f in commit.get(key, []):
+                          if f.startswith("content/posts/") and f.endswith(".md"):
+                              changed.append(f)
+
+          if not changed:
+              post_files = sorted(Path("content/posts").glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)
+              if post_files:
+                  changed.append(str(post_files[0]))
+
+          seen = set()
+          files = []
+          for f in changed:
+              if f not in seen and Path(f).exists():
+                  seen.add(f)
+                  files.append(f)
+
+          if not files:
+              print("Keine neue/geänderte .md-Datei in content/posts gefunden.")
+              sys.exit(0)
+
+          def parse_frontmatter(path):
+              text = Path(path).read_text(encoding="utf-8", errors="replace")
+              fm = {}
+              m = re.match(r"^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$", text)
+              if m:
+                  for line in m.group(1).splitlines():
+                      if ":" in line and not line.lstrip().startswith("-"):
+                          k, v = line.split(":", 1)
+                          v = v.strip().strip('"').strip("'")
+                          fm[k.strip()] = v
+              title = fm.get("title") or Path(path).stem
+              post_id = fm.get("id") or Path(path).stem
+              title = re.sub(r"\s+", " ", title).strip()
+              post_id = post_id.strip()
+              return {
+                  "path": path,
+                  "title": title,
+                  "id": post_id,
+                  "url": f"{SITE_URL}/?post={post_id}",
+              }
+
+          posts = [parse_frontmatter(f) for f in files]
+
+          if len(posts) == 1:
+              p = posts[0]
+              heading = "📖 Neuer Beitrag auf DAR AL TAWḤID"
+              content = p["title"]
+              url = p["url"]
+              name = f"GitHub Auto Push: {p['title'][:90]}"
+          else:
+              heading = "📚 Neue Beiträge auf DAR AL TAWḤID"
+              content = f"{len(posts)} neue Beiträge wurden veröffentlicht. Öffne die App und lies die neuesten Beiträge."
+              url = SITE_URL
+              name = f"GitHub Auto Push: {len(posts)} neue Beiträge"
+
+          base_payload = {
+              "app_id": app_id,
+              "target_channel": "push",
+              "headings": {"en": heading},
+              "contents": {"en": content},
+              "url": url,
+              "web_url": url,
+              "chrome_web_icon": f"{SITE_URL}/app-icon-192.png",
+              "chrome_web_badge": f"{SITE_URL}/app-icon-192.png",
+              "name": name,
+          }
+
+          segments_to_try = ["Total Subscriptions", "Subscribed Users", "All Subscribers"]
+
+          last_error = None
+          for segment in segments_to_try:
+              payload = dict(base_payload)
+              payload["included_segments"] = [segment]
+
+              data = json.dumps(payload).encode("utf-8")
+              req = urllib.request.Request(
+                  "https://api.onesignal.com/notifications",
+                  data=data,
+                  headers={
+                      "Content-Type": "application/json",
+                      "Authorization": f"Key {api_key}",
+                  },
+                  method="POST",
+              )
+
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as resp:
+                      raw = resp.read().decode("utf-8", errors="replace")
+                      print(f"OneSignal Push gesendet über Segment: {segment}")
+                      print(raw)
+                      sys.exit(0)
+              except urllib.error.HTTPError as e:
+                  raw = e.read().decode("utf-8", errors="replace")
+                  last_error = f"Segment {segment}: HTTP {e.code}: {raw}"
+                  print(last_error)
+              except Exception as e:
+                  last_error = f"Segment {segment}: {e}"
+                  print(last_error)
+
+          print("FEHLER: OneSignal Push konnte nicht gesendet werden.")
+          print(last_error or "Unbekannter Fehler")
+          sys.exit(1)
+          PY
