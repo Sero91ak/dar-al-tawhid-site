@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-cache-stable-header-mobile-fix-v10";
+const CACHE_NAME="dar-al-tawhid-cache-stable-share-icons-fix-v11";
 const CORE_ASSETS=[
   "/",
   "/index.html",
