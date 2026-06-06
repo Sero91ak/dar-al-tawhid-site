@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-cache-clean-share-v3-final";
+const CACHE_NAME="dar-al-tawhid-cache-safe-clean-share-v4";
 const CORE_ASSETS=[
   "/",
   "/index.html",
@@ -22,6 +22,15 @@ self.addEventListener("activate",event=>{
 self.addEventListener("fetch",event=>{
   const req=event.request;
   if(req.method!=="GET")return;
+  const isPostData=req.url.includes("api.github.com/repos/")||req.url.includes("raw.githubusercontent.com/");
+  if(isPostData){
+    event.respondWith(fetch(req).then(res=>{
+      const copy=res.clone();
+      caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
+      return res;
+    }).catch(()=>caches.match(req)));
+    return;
+  }
   event.respondWith(fetch(req).then(res=>{
     const copy=res.clone();
     caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
