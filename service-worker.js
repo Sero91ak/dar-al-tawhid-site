@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-cache-v1";
+const CACHE_NAME="dar-al-tawhid-cache-final-repair-3";
 const CORE_ASSETS=[
   "/",
   "/index.html",

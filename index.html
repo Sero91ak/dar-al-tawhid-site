@@ -699,8 +699,7 @@ const DUAS=[
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function stripMd(value){return String(value??"").replace(/\*\*\*(.*?)\*\*\*/g,"$1").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"")}
-function formatText(raw){return esc(raw).replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/
-/g,"<br>")}
+function formatText(raw){return esc(raw).replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/\n/g,"<br>")}
 function getJson(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch(e){return fallback}}
 function setJson(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
 function cleanBodyText(body){let s=String(body||"");s=s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi,"");s=s.replace(/^\s*https?:\/\/\S+\s*$/gmi,"");s=s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g,"$1");s=s.replace(/https?:\/\/\S+/g,"");s=s.replace(/\n{3,}/g,"\n\n").trim();return s}
