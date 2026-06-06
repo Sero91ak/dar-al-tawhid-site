@@ -374,6 +374,259 @@ h1{font-family:var(--display)!important;color:var(--gold2)!important;text-shadow
 mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!important}
 @media(max-width:700px){h1{letter-spacing:.035em!important}.signature{font-size:28px!important}.statement em,.dua-trans,.script-accent{font-size:1.22em}}
 
+
+/* Lesbarkeit-Korrektur: weniger kurvig, Quelle heller, Teilen professioneller */
+.statement{
+  font-size:clamp(20px,2.15vw,27px)!important;
+  line-height:1.72!important;
+  letter-spacing:.005em;
+}
+.statement em,
+.statement strong em,
+.dua-trans,
+.script-accent{
+  font-family:var(--serif)!important;
+  font-size:1.02em!important;
+  line-height:inherit!important;
+  color:#f1d98f!important;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:5px;
+  font-weight:700!important;
+}
+.article-actions{
+  max-width:980px;
+  margin:20px auto 10px!important;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px!important;
+}
+.article-actions .action-btn{
+  min-width:170px;
+  min-height:46px;
+  border-radius:18px!important;
+  font-size:13px!important;
+  background:linear-gradient(145deg,rgba(214,183,106,.12),rgba(8,14,10,.88))!important;
+}
+.share-panel{
+  max-width:760px;
+  margin:18px auto 22px;
+  border:1px solid rgba(214,183,106,.30);
+  border-radius:22px;
+  background:radial-gradient(circle at 20% 0%,rgba(240,217,143,.10),transparent 42%),linear-gradient(145deg,rgba(18,27,19,.94),rgba(6,8,6,.94));
+  padding:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+.share-panel-title{
+  font-family:var(--display);
+  color:#f0d98f;
+  text-align:center;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-bottom:11px;
+}
+.share-row{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px!important;
+  margin:0!important;
+}
+.share-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:48px;
+  border:1px solid rgba(214,183,106,.30);
+  border-radius:17px;
+  background:rgba(239,215,142,.055);
+  color:#f7efd6;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+}
+.share-btn svg{
+  width:24px;
+  height:24px;
+  flex:0 0 24px;
+}
+.share-btn.tg{background:linear-gradient(145deg,rgba(42,171,238,.14),rgba(8,14,10,.86))}
+.share-btn.wa{background:linear-gradient(145deg,rgba(37,211,102,.14),rgba(8,14,10,.86))}
+.share-btn.link{background:linear-gradient(145deg,rgba(214,183,106,.14),rgba(8,14,10,.86))}
+.share-btn:hover{
+  border-color:rgba(240,217,143,.62);
+  filter:brightness(1.07);
+}
+.source-strong{
+  max-width:980px;
+  margin:22px auto!important;
+  padding:22px!important;
+}
+.source-strong h3{
+  color:#f0d98f!important;
+  font-size:31px!important;
+  margin-bottom:18px!important;
+}
+.source-row{
+  color:#f7efd6!important;
+  font-size:15.5px!important;
+  line-height:1.65!important;
+  font-weight:650;
+}
+.source-row b{
+  color:#fff8e6!important;
+  font-size:13px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:8px!important;
+}
+.source-note{
+  color:#f0d98f!important;
+  font-size:13px!important;
+  font-weight:800;
+}
+.link-row a{
+  font-size:14px!important;
+  padding:10px 15px!important;
+  border-color:rgba(214,183,106,.38)!important;
+}
+.nav-posts button{
+  font-size:14px!important;
+}
+@media(max-width:700px){
+  .statement{font-size:18px!important;line-height:1.62!important}
+  .article-actions .action-btn{min-width:0;width:100%;font-size:12px!important}
+  .share-row{grid-template-columns:1fr!important}
+  .source-strong{padding:16px!important}
+  .source-strong h3{font-size:24px!important}
+  .source-row{font-size:13.5px!important}
+}
+
+
+/* FINAL FIX: Shirk-Version + lesbare Aussagen + professionelle Share/Quelle */
+.statement{
+  font-size:clamp(20px,2.15vw,27px)!important;
+  line-height:1.72!important;
+  letter-spacing:.005em;
+}
+.statement em,
+.statement strong em,
+.dua-trans,
+.script-accent{
+  font-family:var(--serif)!important;
+  font-size:1.02em!important;
+  line-height:inherit!important;
+  color:#f1d98f!important;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:5px;
+  font-weight:700!important;
+}
+.article-actions{
+  max-width:980px;
+  margin:20px auto 10px!important;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px!important;
+}
+.article-actions .action-btn{
+  min-width:170px;
+  min-height:46px;
+  border-radius:18px!important;
+  font-size:13px!important;
+  background:linear-gradient(145deg,rgba(214,183,106,.12),rgba(8,14,10,.88))!important;
+}
+.share-panel{
+  max-width:760px;
+  margin:18px auto 22px;
+  border:1px solid rgba(214,183,106,.30);
+  border-radius:22px;
+  background:radial-gradient(circle at 20% 0%,rgba(240,217,143,.10),transparent 42%),linear-gradient(145deg,rgba(18,27,19,.94),rgba(6,8,6,.94));
+  padding:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+.share-panel-title{
+  font-family:var(--display);
+  color:#f0d98f;
+  text-align:center;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-bottom:11px;
+}
+.share-row{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px!important;
+  margin:0!important;
+}
+.share-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:48px;
+  border:1px solid rgba(214,183,106,.30);
+  border-radius:17px;
+  background:rgba(239,215,142,.055);
+  color:#f7efd6;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+}
+.share-btn svg{width:24px;height:24px;flex:0 0 24px}
+.share-btn.tg{background:linear-gradient(145deg,rgba(42,171,238,.14),rgba(8,14,10,.86))}
+.share-btn.wa{background:linear-gradient(145deg,rgba(37,211,102,.14),rgba(8,14,10,.86))}
+.share-btn.link{background:linear-gradient(145deg,rgba(214,183,106,.14),rgba(8,14,10,.86))}
+.share-btn:hover{border-color:rgba(240,217,143,.62);filter:brightness(1.07)}
+.source-strong{
+  max-width:980px;
+  margin:22px auto!important;
+  padding:22px!important;
+}
+.source-strong h3{
+  color:#f0d98f!important;
+  font-size:31px!important;
+  margin-bottom:18px!important;
+}
+.source-row{
+  color:#f7efd6!important;
+  font-size:15.5px!important;
+  line-height:1.65!important;
+  font-weight:650;
+}
+.source-row b{
+  color:#fff8e6!important;
+  font-size:13px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:8px!important;
+}
+.source-note{
+  color:#f0d98f!important;
+  font-size:13px!important;
+  font-weight:800;
+}
+.link-row a{
+  font-size:14px!important;
+  padding:10px 15px!important;
+  border-color:rgba(214,183,106,.38)!important;
+}
+.nav-posts button{font-size:14px!important}
+@media(max-width:700px){
+  .statement{font-size:18px!important;line-height:1.62!important}
+  .article-actions .action-btn{min-width:0;width:100%;font-size:12px!important}
+  .share-row{grid-template-columns:1fr!important}
+  .source-strong{padding:16px!important}
+  .source-strong h3{font-size:24px!important}
+  .source-row{font-size:13.5px!important}
+}
+
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -446,7 +699,8 @@ const DUAS=[
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function stripMd(value){return String(value??"").replace(/\*\*\*(.*?)\*\*\*/g,"$1").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"")}
-function formatText(raw){let out=esc(raw).replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/\n/g,"<br>");["Tawḥīd","Sunnah","Qurʾān","Zuhd","Ikhlāṣ","Hadith","Ḥadīth","Isnād","Niʿmah"].forEach(w=>{out=out.replace(new RegExp(`(?<![\\w>])(${w})(?![\\w<])`,"g"),`<span class="script-accent">$1</span>`)});return out}
+function formatText(raw){return esc(raw).replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/
+/g,"<br>")}
 function getJson(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch(e){return fallback}}
 function setJson(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
 function cleanBodyText(body){let s=String(body||"");s=s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi,"");s=s.replace(/^\s*https?:\/\/\S+\s*$/gmi,"");s=s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g,"$1");s=s.replace(/https?:\/\/\S+/g,"");s=s.replace(/\n{3,}/g,"\n\n").trim();return s}
@@ -591,7 +845,11 @@ function renderDuaCat(cat){const items=DUAS.filter(d=>d.cat===cat);return`${setH
 function renderDua(id){const d=DUAS.find(x=>x.id===id);if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;return`<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="article-actions"><button id="shareDuaBtn" class="action-btn" type="button">Duʿāʾ teilen</button></div><div class="source-strong"><h3>Quelle</h3><div class="source-row">${esc(d.src)}</div></div></article>`}
 function getRelatedPosts(post){if(!post)return[];return posts.filter(p=>p.id!==post.id&&((post.category&&p.category===post.category)||(post.topic&&p.topic===post.topic)||(post.scholar&&p.scholar===post.scholar)||(post.book&&p.book===post.book))).slice(0,3)}
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
-function shareLinksForPost(post){const url=postUrl(post);const title=encodeURIComponent(post.title||"DAR AL TAWḤID");const text=encodeURIComponent(`${post.title}\n\n${stripMd(post.statement||"")}\n\n${url}`);return`<div class="share-row"><a class="action-btn" href="https://t.me/share/url?url=${encodeURIComponent(url)}&text=${title}" target="_blank" rel="noopener">Telegram teilen</a><a class="action-btn" href="https://wa.me/?text=${text}" target="_blank" rel="noopener">WhatsApp teilen</a><button id="copyLinkBtn" class="action-btn" type="button">Link kopieren</button></div>`}
+function shareLinksForPost(post){const url=postUrl(post);const title=encodeURIComponent(post.title||"DAR AL TAWḤID");const text=encodeURIComponent(`${post.title}
+
+${stripMd(post.statement||"")}
+
+${url}`);return`<section class="share-panel"><div class="share-panel-title">Beitrag weitergeben</div><div class="share-row"><a class="share-btn tg" href="https://t.me/share/url?url=${encodeURIComponent(url)}&text=${title}" target="_blank" rel="noopener" aria-label="Bei Telegram teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${text}" target="_blank" rel="noopener" aria-label="Bei WhatsApp teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.1 14.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.7-1.6-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.3 2.2 3.4 5.4 4.8.8.3 1.4.5 1.8.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4ZM12 3.5a8.5 8.5 0 0 0-7.2 13L4 20.5l4.1-1.1A8.5 8.5 0 1 0 12 3.5Z"/></svg><span>WhatsApp</span></a><button id="copyLinkBtn" class="share-btn link" type="button" aria-label="Link kopieren">🔗 <span>Link kopieren</span></button></div></section>`}
 function renderSourceStrong(post,links){const scan=(post.links||[]).find(l=>String(l.label||"").toLowerCase().includes("scan")||String(l.label||"").toLowerCase().includes("pdf")||String(l.url||"").toLowerCase().includes(".pdf")||String(l.url||"").toLowerCase().includes("#page"));return`<section class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(post.source||"Keine Quelle hinterlegt.")}</div><div class="source-row"><b>Direktlink</b><div class="link-row">${links||"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="source-row"><b>Scan/PDF falls vorhanden</b>${scan?`<div class="link-row"><a href="${esc(scan.url)}" target="_blank" rel="noopener">${esc(scan.label||"Scan/PDF")}</a></div>`:"Noch kein Scan/PDF-Link hinterlegt."}</div><div class="source-note">Hinweis: Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></section>`}
 function renderPostNavigation(post){const adj=getAdjacentPosts(post);return`<div class="nav-posts">${adj.prev?`<button type="button" data-nav="post" data-value="${esc(adj.prev.id)}">← Vorheriger Beitrag</button>`:`<button type="button" disabled>← Kein vorheriger Beitrag</button>`}${adj.next?`<button type="button" data-nav="post" data-value="${esc(adj.next.id)}">Nächster Beitrag →</button>`:`<button type="button" disabled>Kein nächster Beitrag →</button>`}</div>`}
 function renderPost(id){const post=posts.find(p=>String(p.id)===String(id));if(!post){return`${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>`}const links=(post.links||[]).map(link=>{const label=link.label||"Quelle";const url=link.url||link;return`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`}).join("");return`<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderSourceStatus(post)}<section class="statement">${formatText(post.statement||"")}</section><div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="copyPostBtn" class="action-btn" type="button">Beitrag kopieren</button><button id="copySourceBtn" class="action-btn" type="button">Quelle kopieren</button><button id="copyQuoteBtn" class="action-btn" type="button">Zitat kopieren</button><button id="copyMdBtn" class="action-btn" type="button">Markdown kopieren</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderSourceStrong(post,links)}${renderPostNavigation(post)}${getRelatedPosts(post).length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${getRelatedPosts(post).map(postCard).join("")}</div></section>`:""}</article>`}
