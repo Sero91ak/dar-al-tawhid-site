@@ -6,12 +6,12 @@
 
 <title>DAR AL TAWḤID</title>
 
-<link rel="icon" href="/favicon.ico?v=stable-all-open-fix-v9" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=stable-all-open-fix-v9">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=stable-all-open-fix-v9">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=stable-all-open-fix-v9">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=stable-all-open-fix-v9">
-<link rel="manifest" href="/manifest.json?v=stable-all-open-fix-v9">
+<link rel="icon" href="/favicon.ico?v=stable-header-mobile-fix-v10" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=stable-header-mobile-fix-v10">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=stable-header-mobile-fix-v10">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=stable-header-mobile-fix-v10">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=stable-header-mobile-fix-v10">
+<link rel="manifest" href="/manifest.json?v=stable-header-mobile-fix-v10">
 
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileImage" content="/app-icon-192.png?v=stable-all-open-fix-v9">
+<meta name="msapplication-TileImage" content="/app-icon-192.png?v=stable-header-mobile-fix-v10">
 <meta name="msapplication-TileColor" content="#080806">
 
 <style>
@@ -681,6 +681,97 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
 .share-row-v9 .share-btn.ig{background:linear-gradient(145deg,rgba(214,41,118,.16),rgba(8,14,10,.90))!important}
 @media(max-width:980px){.share-row-v9{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:520px){.share-row-v9{grid-template-columns:1fr!important}}
+
+
+/* HEADER MOBILE FIX V10: Logo + Titel sauber innerhalb der App-Ansicht */
+.brand-main{
+  width:100%;
+  max-width:100%;
+  overflow:visible!important;
+}
+.brand-main .logo{
+  flex-shrink:0!important;
+}
+.brand-main h1{
+  min-width:0!important;
+  flex:1 1 auto!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+  max-width:none!important;
+}
+
+@media(max-width:700px){
+  .header{
+    padding:14px 12px 13px!important;
+  }
+  .brand-main{
+    display:grid!important;
+    grid-template-columns:58px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:10px!important;
+  }
+  .brand-main .logo{
+    width:58px!important;
+    height:58px!important;
+    flex-basis:58px!important;
+  }
+  .brand-main h1{
+    font-size:clamp(28px,8.15vw,38px)!important;
+    letter-spacing:.018em!important;
+    line-height:.98!important;
+    transform:scaleX(.92);
+    transform-origin:left center;
+  }
+}
+
+@media(max-width:430px){
+  .brand-main{
+    grid-template-columns:54px minmax(0,1fr)!important;
+    gap:8px!important;
+  }
+  .brand-main .logo{
+    width:54px!important;
+    height:54px!important;
+    flex-basis:54px!important;
+  }
+  .brand-main h1{
+    font-size:clamp(27px,7.95vw,34px)!important;
+    letter-spacing:.004em!important;
+    transform:scaleX(.88);
+  }
+}
+
+@media(max-width:380px){
+  .brand-main{
+    grid-template-columns:48px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  .brand-main .logo{
+    width:48px!important;
+    height:48px!important;
+    flex-basis:48px!important;
+  }
+  .brand-main h1{
+    font-size:clamp(25px,7.65vw,31px)!important;
+    letter-spacing:0!important;
+    transform:scaleX(.86);
+  }
+}
+
+/* Kicker oben darf kürzen, aber nicht den Titel verschieben */
+@media(max-width:700px){
+  .brand-kicker-row{
+    width:100%!important;
+    overflow:hidden!important;
+  }
+  .brand small{
+    max-width:44%!important;
+  }
+  .hijri-header-pill{
+    max-width:54%!important;
+  }
+}
 
 </style>
 
