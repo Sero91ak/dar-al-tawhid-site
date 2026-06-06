@@ -2,7 +2,7 @@
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
-const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
+const SITE_URL = "https://dar-al-tawhid.de/";
 
 if (!API_KEY) {
   console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
@@ -15,12 +15,12 @@ async function sendTestPush() {
     target_channel: "push",
     included_segments: ["Subscribed Users"],
     headings: {
-      de: "DAR AL TAWḤID – Gebetszeiten",
-      en: "DAR AL TAWḤID – Prayer Times"
+      en: "DAR AL TAWḤID – Test",
+      de: "DAR AL TAWḤID – Test"
     },
     contents: {
-      de: "Test erfolgreich: Gebetszeiten-Push ist verbunden.",
-      en: "Test successful: Prayer push is connected."
+      en: "Test-Push erfolgreich verbunden.",
+      de: "Test-Push erfolgreich verbunden."
     },
     url: SITE_URL,
     isAnyWeb: true
@@ -36,13 +36,12 @@ async function sendTestPush() {
   });
 
   const text = await res.text();
+  console.log("OneSignal Antwort:", text);
 
   if (!res.ok) {
     console.error(`OneSignal Fehler ${res.status}:`, text);
     process.exit(1);
   }
-
-  console.log("Sofort-Test-Push gesendet:", text);
 }
 
 sendTestPush();
