@@ -177,6 +177,53 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
   .home-btn,.back-btn{min-height:38px;padding:8px 11px;font-size:12px}
 }
 
+
+/* Dezente Header-Socials: bleiben sichtbar, aber nicht dominant */
+.header .socials{
+  gap:8px;
+  width:142px;
+}
+.header .social-link{
+  min-width:142px;
+  min-height:40px;
+  padding:8px 12px;
+  font-size:12px;
+  border-color:rgba(210,177,91,.22);
+  background:rgba(239,215,142,.045);
+  opacity:.88;
+}
+.header .social-link svg{
+  width:20px;
+  height:20px;
+  flex-basis:20px;
+}
+.header .social-link:hover{
+  opacity:1;
+  border-color:rgba(239,215,142,.48);
+  background:rgba(239,215,142,.075);
+}
+@media(min-width:981px){
+  .header-row{grid-template-columns:minmax(0,1fr) 142px!important}
+  .header .socials{width:142px!important}
+  .header .social-link{min-width:142px!important}
+}
+@media(max-width:700px){
+  .header .socials{
+    gap:7px;
+    margin-top:12px;
+  }
+  .header .social-link{
+    min-height:40px;
+    padding:8px 9px;
+    font-size:12px;
+  }
+  .header .social-link svg{
+    width:21px;
+    height:21px;
+    flex-basis:21px;
+  }
+}
+
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
