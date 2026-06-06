@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-cache-pro-1";
+const CACHE_NAME="dar-al-tawhid-cache-v1";
 const CORE_ASSETS=[
   "/",
   "/index.html",
@@ -23,8 +23,7 @@ self.addEventListener("fetch",event=>{
   const req=event.request;
   if(req.method!=="GET")return;
 
-  const isPostData=req.url.includes("api.github.com/repos/")||req.url.includes("raw.githubusercontent.com/");
-  if(isPostData){
+  if(req.url.includes("api.github.com/repos/")||req.url.includes("raw.githubusercontent.com/")){
     event.respondWith(fetch(req).then(res=>{
       const copy=res.clone();
       caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
@@ -33,9 +32,11 @@ self.addEventListener("fetch",event=>{
     return;
   }
 
-  event.respondWith(fetch(req).then(res=>{
-    const copy=res.clone();
-    caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
-    return res;
-  }).catch(()=>caches.match(req).then(cached=>cached||caches.match("/index.html"))));
+  event.respondWith(caches.match(req).then(cached=>{
+    return cached||fetch(req).then(res=>{
+      const copy=res.clone();
+      caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
+      return res;
+    }).catch(()=>caches.match("/index.html"));
+  }));
 });
