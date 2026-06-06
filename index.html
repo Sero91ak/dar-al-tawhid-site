@@ -1345,6 +1345,7 @@ function buildShareText(post){
   const body=stripMd(post&&post.statement?post.statement:"").replace(/\n{3,}/g,"\n\n").trim();
   const source=stripMd(post&&post.source?post.source:"").trim();
   return `${title}\n\n${body}${source?`\n\n${source}`:""}\n\n🔗 Beitrag öffnen:\n${url}\n\nDAR AL TAWḤID`;
+}
 
 function buildAreaShareText(title,description,url){return `${title}\n\n${description||""}\n\n🔗 Öffnen:\n${url}\n\nDAR AL TAWḤID`}
 function buildDuaShareText(d){const url=duaUrl(d);return `${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}\n\n🔗 Duʿāʾ öffnen:\n${url}\n\nDAR AL TAWḤID`}
