@@ -1863,37 +1863,44 @@ window.addEventListener("offline",function(){const box=document.getElementById("
 </script>
 <script id="dar-qibla-126-safe-fix">
 (function(){
-  const QIBLA_DEG = 126;
   const QIBLA_TEXT = "Qibla-Richtung: ca. 126° Südost. In shāʾ الله mit der normalen Handy-Kompass-App auf 126° ausrichten.";
+  const QIBLA_HTML = 'Qibla-Richtung: ca. <strong>126° Südost</strong>. In shāʾ الله mit der normalen Handy-Kompass-App auf 126° ausrichten.';
+
+  function ensureQiblaStyle(){
+    if(document.getElementById("dar-qibla-hide-compass-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "dar-qibla-hide-compass-style";
+    style.textContent = `
+      .qibla-compass{display:none!important}
+      .qibla-layout{display:block!important}
+      .qibla-info{width:100%!important}
+      .qibla-info #qiblaStatus{display:none!important}
+      .qibla-info #startQiblaBtn{display:none!important}
+    `;
+    document.head.appendChild(style);
+  }
 
   window.qiblaBearing = function(){
-    return QIBLA_DEG;
+    return 126;
   };
 
   window.startQiblaCompass = async function(){
-    const needle = document.getElementById("qiblaNeedle");
-    const status = document.getElementById("qiblaStatus");
+    applyQiblaText();
+    alert(QIBLA_TEXT);
+  };
+
+  function applyQiblaText(){
+    ensureQiblaStyle();
 
     if(window.qiblaOrientationHandler){
       window.removeEventListener("deviceorientation", window.qiblaOrientationHandler, true);
       window.qiblaOrientationHandler = null;
     }
 
-    if(needle){
-      needle.style.transform = "translate(-50%,-88%) rotate(" + QIBLA_DEG + "deg)";
-    }
-
-    if(status){
-      status.textContent = QIBLA_TEXT;
-    }
-
-    alert(QIBLA_TEXT);
-  };
-
-  function applyQiblaText(){
     document.querySelectorAll(".qibla-info").forEach(function(box){
       const title = box.querySelector("h3");
-      const firstText = box.querySelector("p");
+      const paragraphs = box.querySelectorAll("p");
       const status = box.querySelector("#qiblaStatus");
       const button = box.querySelector("#startQiblaBtn");
 
@@ -1901,16 +1908,22 @@ window.addEventListener("offline",function(){const box=document.getElementById("
         title.textContent = "Qibla-Richtung";
       }
 
-      if(firstText){
-        firstText.innerHTML = 'Qibla-Richtung: ca. <strong>126° Südost</strong>. In shāʾ الله mit der normalen Handy-Kompass-App auf 126° ausrichten.';
+      if(paragraphs[0]){
+        paragraphs[0].innerHTML = QIBLA_HTML;
+      }
+
+      for(let i = 1; i < paragraphs.length; i++){
+        paragraphs[i].style.display = "none";
+        paragraphs[i].textContent = "";
       }
 
       if(status){
-        status.textContent = QIBLA_TEXT;
+        status.style.display = "none";
+        status.textContent = "";
       }
 
       if(button){
-        button.textContent = "🧭 Qibla-Hinweis anzeigen";
+        button.style.display = "none";
       }
     });
   }
@@ -1931,6 +1944,7 @@ window.addEventListener("offline",function(){const box=document.getElementById("
     setTimeout(applyQiblaText, 300);
   });
 })();
+</script>
 </script>
 </body>
 </html>
