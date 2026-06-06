@@ -1,1 +1,27 @@
+name: Prayer Push
 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  send-prayer-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send scheduled prayer notifications
+        env:
+          ONESIGNAL_APP_ID: "DEINE_ONESIGNAL_APP_ID_HIER_EINTRAGEN"
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+        run: node scripts/send-prayer-push.js
