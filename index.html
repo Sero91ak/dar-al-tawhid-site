@@ -787,6 +787,36 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
 @media(max-width:980px){.share-row-v11{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:520px){.share-row-v11{grid-template-columns:1fr!important}}
 
+
+/* MOBILE BUTTON SORTIERUNG ONLY V12: Smartphone 2 Buttons nebeneinander, sonst nichts geändert */
+@media(max-width:700px){
+  .article-actions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    align-items:stretch!important;
+    justify-content:stretch!important;
+  }
+  .article-actions .action-btn{
+    width:auto!important;
+    min-width:0!important;
+    min-height:46px!important;
+  }
+  .share-row-v11,
+  .share-row-v9,
+  .share-row-v2{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  .share-row-v11 .share-btn,
+  .share-row-v9 .share-btn,
+  .share-row-v2 .share-btn{
+    width:auto!important;
+    min-width:0!important;
+  }
+}
+
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
