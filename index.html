@@ -6,12 +6,12 @@
 
 <title>DAR AL TAWḤID</title>
 
-<link rel="icon" href="/favicon.ico?v=stable-calendar-fix-1" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=stable-calendar-fix-1">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=stable-calendar-fix-1">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=stable-calendar-fix-1">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=stable-calendar-fix-1">
-<link rel="manifest" href="/manifest.json?v=stable-calendar-fix-1">
+<link rel="icon" href="/favicon.ico?v=share-v2-final" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=share-v2-final">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=share-v2-final">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=share-v2-final">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=share-v2-final">
+<link rel="manifest" href="/manifest.json?v=share-v2-final">
 
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileImage" content="/app-icon-192.png?v=stable-calendar-fix-1">
+<meta name="msapplication-TileImage" content="/app-icon-192.png?v=share-v2-final">
 <meta name="msapplication-TileColor" content="#080806">
 
 <style>
@@ -628,37 +628,47 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
 }
 
 
-/* FINAL SHARE UPDATE: Original-ähnliche WhatsApp/Instagram Icons + Geräte-Teilen */
-.share-panel{
-  max-width:980px!important;
+/* SHARE V2 FINAL - 5 Buttons sichtbar: Teilen, Telegram, WhatsApp, Instagram, Link */
+.share-panel-v2{
+  max-width:1100px!important;
+  margin:18px auto 22px!important;
+  border:1px solid rgba(214,183,106,.34)!important;
+  border-radius:24px!important;
+  padding:16px!important;
 }
-.share-row{
+.share-row-v2{
   display:grid!important;
   grid-template-columns:repeat(5,minmax(0,1fr))!important;
   gap:10px!important;
+  margin:0!important;
 }
-.share-btn{
-  min-height:50px!important;
+.share-row-v2 .share-btn{
+  min-height:52px!important;
   border-radius:18px!important;
   font-size:13px!important;
   font-weight:950!important;
+  padding:10px 12px!important;
 }
-.share-btn svg{
-  width:25px!important;
-  height:25px!important;
-  flex:0 0 25px!important;
+.share-row-v2 .share-btn svg{
+  width:26px!important;
+  height:26px!important;
+  flex:0 0 26px!important;
 }
-.share-btn.native{
-  background:linear-gradient(145deg,rgba(240,217,143,.16),rgba(8,14,10,.88))!important;
+.share-emoji{
+  font-size:22px;
+  line-height:1;
 }
-.share-btn.ig{
-  background:linear-gradient(145deg,rgba(214,41,118,.14),rgba(8,14,10,.88))!important;
+.share-row-v2 .share-btn.native{
+  background:linear-gradient(145deg,rgba(240,217,143,.17),rgba(8,14,10,.90))!important;
+}
+.share-row-v2 .share-btn.ig{
+  background:linear-gradient(145deg,rgba(214,41,118,.16),rgba(8,14,10,.90))!important;
 }
 @media(max-width:980px){
-  .share-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .share-row-v2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(max-width:520px){
-  .share-row{grid-template-columns:1fr!important}
+  .share-row-v2{grid-template-columns:1fr!important}
 }
 
 </style>
@@ -878,11 +888,32 @@ function renderDuaCat(cat){const items=DUAS.filter(d=>d.cat===cat);return`${setH
 function renderDua(id){const d=DUAS.find(x=>x.id===id);if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;return`<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="article-actions"><button id="shareDuaBtn" class="action-btn" type="button">Duʿāʾ teilen</button></div><div class="source-strong"><h3>Quelle</h3><div class="source-row">${esc(d.src)}</div></div></article>`}
 function getRelatedPosts(post){if(!post)return[];return posts.filter(p=>p.id!==post.id&&((post.category&&p.category===post.category)||(post.topic&&p.topic===post.topic)||(post.scholar&&p.scholar===post.scholar)||(post.book&&p.book===post.book))).slice(0,3)}
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
-function shareLinksForPost(post){const url=postUrl(post);const title=encodeURIComponent(post.title||"DAR AL TAWḤID");const rawText=`${post.title}
-
-${stripMd(post.statement||"")}
-
-${url}`;const text=encodeURIComponent(rawText);return`<section class="share-panel"><div class="share-panel-title">Beitrag weitergeben</div><div class="share-row"><button id="nativeShareBtn" class="share-btn native" type="button" aria-label="Über Gerät teilen">↗️ <span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${encodeURIComponent(url)}&text=${title}" target="_blank" rel="noopener" aria-label="Bei Telegram teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${text}" target="_blank" rel="noopener" aria-label="Bei WhatsApp teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M12.04 5.02a6.86 6.86 0 0 0-5.9 10.36l-.86 3.15 3.23-.85a6.86 6.86 0 1 0 3.53-12.66Zm0 12.55a5.68 5.68 0 0 1-2.9-.79l-.21-.12-1.91.5.51-1.86-.14-.23a5.67 5.67 0 1 1 4.65 2.5Zm3.11-4.25c-.17-.08-1-.49-1.15-.55-.15-.06-.27-.08-.38.08-.11.17-.44.55-.54.66-.1.11-.2.12-.37.04-.17-.08-.72-.27-1.37-.85-.51-.45-.85-1-.95-1.17-.1-.17-.01-.26.07-.34.07-.07.17-.2.25-.29.08-.1.11-.17.17-.28.06-.11.03-.21-.01-.29-.04-.08-.38-.91-.52-1.25-.14-.33-.28-.28-.38-.29h-.33c-.11 0-.29.04-.44.21-.15.17-.58.57-.58 1.39s.59 1.61.67 1.72c.08.11 1.16 1.77 2.82 2.48.39.17.7.27.94.35.4.13.75.11 1.04.07.32-.05 1-.41 1.14-.8.14-.39.14-.73.1-.8-.04-.07-.15-.11-.32-.19Z"/></svg><span>WhatsApp</span></a><button id="instagramShareBtn" class="share-btn ig" type="button" aria-label="Instagram öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGrad)"/><circle cx="12" cy="12" r="4.35" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg><span>Instagram</span></button><button id="copyLinkBtn" class="share-btn link" type="button" aria-label="Link kopieren">🔗 <span>Link kopieren</span></button></div></section>`}
+function shareLinksForPost(post){
+  const url=postUrl(post);
+  const title=encodeURIComponent(post.title||"DAR AL TAWḤID");
+  const rawText=`${post.title}\n\n${stripMd(post.statement||"")}\n\n${url}`;
+  const text=encodeURIComponent(rawText);
+  return `<section class="share-panel share-panel-v2">
+    <div class="share-panel-title">Beitrag weitergeben</div>
+    <div class="share-row share-row-v2">
+      <button id="nativeShareBtn" class="share-btn native" type="button" aria-label="Über Gerät teilen">
+        <span class="share-emoji">↗️</span><span>Teilen</span>
+      </button>
+      <a class="share-btn tg" href="https://t.me/share/url?url=${encodeURIComponent(url)}&text=${title}" target="_blank" rel="noopener" aria-label="Bei Telegram teilen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span>
+      </a>
+      <a class="share-btn wa" href="https://wa.me/?text=${text}" target="_blank" rel="noopener" aria-label="Bei WhatsApp teilen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M12.04 5.02a6.86 6.86 0 0 0-5.9 10.36l-.86 3.15 3.23-.85a6.86 6.86 0 1 0 3.53-12.66Zm0 12.55a5.68 5.68 0 0 1-2.9-.79l-.21-.12-1.91.5.51-1.86-.14-.23a5.67 5.67 0 1 1 4.65 2.5Zm3.11-4.25c-.17-.08-1-.49-1.15-.55-.15-.06-.27-.08-.38.08-.11.17-.44.55-.54.66-.1.11-.2.12-.37.04-.17-.08-.72-.27-1.37-.85-.51-.45-.85-1-.95-1.17-.1-.17-.01-.26.07-.34.07-.07.17-.2.25-.29.08-.1.11-.17.17-.28.06-.11.03-.21-.01-.29-.04-.08-.38-.91-.52-1.25-.14-.33-.28-.28-.38-.29h-.33c-.11 0-.29.04-.44.21-.15.17-.58.57-.58 1.39s.59 1.61.67 1.72c.08.11 1.16 1.77 2.82 2.48.39.17.7.27.94.35.4.13.75.11 1.04.07.32-.05 1-.41 1.14-.8.14-.39.14-.73.1-.8-.04-.07-.15-.11-.32-.19Z"/></svg><span>WhatsApp</span>
+      </a>
+      <button id="instagramShareBtn" class="share-btn ig" type="button" aria-label="Instagram öffnen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGrad2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGrad2)"/><circle cx="12" cy="12" r="4.35" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg><span>Instagram</span>
+      </button>
+      <button id="copyLinkBtn" class="share-btn link" type="button" aria-label="Link kopieren">
+        <span class="share-emoji">🔗</span><span>Link kopieren</span>
+      </button>
+    </div>
+  </section>`;
+}
 function renderSourceStrong(post,links){const scan=(post.links||[]).find(l=>String(l.label||"").toLowerCase().includes("scan")||String(l.label||"").toLowerCase().includes("pdf")||String(l.url||"").toLowerCase().includes(".pdf")||String(l.url||"").toLowerCase().includes("#page"));return`<section class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(post.source||"Keine Quelle hinterlegt.")}</div><div class="source-row"><b>Direktlink</b><div class="link-row">${links||"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="source-row"><b>Scan/PDF falls vorhanden</b>${scan?`<div class="link-row"><a href="${esc(scan.url)}" target="_blank" rel="noopener">${esc(scan.label||"Scan/PDF")}</a></div>`:"Noch kein Scan/PDF-Link hinterlegt."}</div><div class="source-note">Hinweis: Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></section>`}
 function renderPostNavigation(post){const adj=getAdjacentPosts(post);return`<div class="nav-posts">${adj.prev?`<button type="button" data-nav="post" data-value="${esc(adj.prev.id)}">← Vorheriger Beitrag</button>`:`<button type="button" disabled>← Kein vorheriger Beitrag</button>`}${adj.next?`<button type="button" data-nav="post" data-value="${esc(adj.next.id)}">Nächster Beitrag →</button>`:`<button type="button" disabled>Kein nächster Beitrag →</button>`}</div>`}
 function renderPost(id){const post=posts.find(p=>String(p.id)===String(id));if(!post){return`${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>`}const links=(post.links||[]).map(link=>{const label=link.label||"Quelle";const url=link.url||link;return`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`}).join("");return`<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderSourceStatus(post)}<section class="statement">${formatText(post.statement||"")}</section><div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="copyPostBtn" class="action-btn" type="button">Beitrag kopieren</button><button id="copySourceBtn" class="action-btn" type="button">Quelle kopieren</button><button id="copyQuoteBtn" class="action-btn" type="button">Zitat kopieren</button><button id="copyMdBtn" class="action-btn" type="button">Markdown kopieren</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderSourceStrong(post,links)}${renderPostNavigation(post)}${getRelatedPosts(post).length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${getRelatedPosts(post).map(postCard).join("")}</div></section>`:""}</article>`}
@@ -896,7 +927,7 @@ const footerAppSave=$("footerAppSave");if(footerAppSave){footerAppSave.onclick=(
 const offlineBox=$("offlineBox");if(offlineBox){offlineBox.classList.toggle("show",!navigator.onLine)}
 
 const nativeShareBtn=$("nativeShareBtn");if(nativeShareBtn&&currentRoute.view==="post"){nativeShareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=`${post.title}\n\n${stripMd(post.statement||"")}`;if(navigator.share){try{await navigator.share({title:post.title,text,url});return}catch(e){}}try{await navigator.clipboard.writeText(`${text}\n\n${url}`);alert("Dein Gerät unterstützt direktes Teilen hier nicht. Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",`${text}\n\n${url}`)}}}
-const instagramShareBtn=$("instagramShareBtn");if(instagramShareBtn&&currentRoute.view==="post"){instagramShareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=`${post.title}\n\n${stripMd(post.statement||"")}\n\n${url}`;try{await navigator.clipboard.writeText(text)}catch(e){}window.open("https://www.instagram.com/","_blank","noopener");setTimeout(()=>alert("Beitrag wurde kopiert. Öffne Instagram und füge ihn in Story/Nachricht/Bio ein."),300)}}
+const instagramShareBtn=$("instagramShareBtn");if(instagramShareBtn&&currentRoute.view==="post"){instagramShareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=`${post.title}\n\n${stripMd(post.statement||"")}\n\n${url}`;try{await navigator.clipboard.writeText(text)}catch(e){}window.open("https://www.instagram.com/","_blank","noopener");setTimeout(()=>alert("Beitrag wurde kopiert. Öffne Instagram und füge ihn ein."),300)}}
 const reportBtn=$("reportBtn");if(reportBtn&&currentRoute.view==="post"){reportBtn.onclick=()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const subject=encodeURIComponent("Fehler melden: "+post.title);const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+post.title+"\n"+postUrl(post)+"\n\nHinweis:\n");location.href=`mailto:${REPORT_EMAIL}?subject=${subject}&body=${body}`}}}
 $("backBtn").onclick=()=>{const parent=parentRoute(currentRoute);navigate(parent.view,parent.value||"")};const homeBtnEl=$("homeBtn");if(homeBtnEl)homeBtnEl.onclick=()=>navigate("home");
 window.addEventListener("hashchange",render);
