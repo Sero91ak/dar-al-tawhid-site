@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-cache-stable-dua-post-fix-v8";
+const CACHE_NAME="dar-al-tawhid-cache-stable-all-open-fix-v9";
 const CORE_ASSETS=[
   "/",
   "/index.html",
