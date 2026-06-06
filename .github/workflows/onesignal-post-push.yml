@@ -1,1 +1,176 @@
+name: Send OneSignal push for new posts
 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/posts/*.md"
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Push-Titel"
+        required: false
+        default: "Neue Beiträge online"
+      message:
+        description: "Push-Text"
+        required: false
+        default: "Neue Beiträge auf DAR AL TAWḤID verfügbar."
+      url:
+        description: "Ziel-Link"
+        required: false
+        default: "https://dar-al-tawhid.de/#recent"
+
+jobs:
+  notify:
+    name: Send push notification
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      SITE_URL: "https://dar-al-tawhid.de"
+      ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+      ONESIGNAL_SEGMENT: ${{ vars.ONESIGNAL_SEGMENT }}
+      MANUAL_TITLE: ${{ github.event.inputs.title }}
+      MANUAL_MESSAGE: ${{ github.event.inputs.message }}
+      MANUAL_URL: ${{ github.event.inputs.url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed post files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          : > changed-posts.txt
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual run - no file detection needed."
+            exit 0
+          fi
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            git ls-tree -r --name-only "$AFTER" content/posts | grep -E '^content/posts/.*\.md$' > changed-posts.txt || true
+          else
+            git diff --name-only "$BEFORE" "$AFTER" -- 'content/posts/*.md' > changed-posts.txt || true
+          fi
+
+          echo "Changed posts:"
+          cat changed-posts.txt || true
+
+      - name: Send OneSignal notification
+        env:
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 <<'PY'
+          import json
+          import os
+          import re
+          import sys
+          import urllib.parse
+          import urllib.request
+          import urllib.error
+
+          api_key = os.environ.get("ONESIGNAL_API_KEY", "").strip()
+          app_id = os.environ.get("ONESIGNAL_APP_ID", "").strip()
+          segment = os.environ.get("ONESIGNAL_SEGMENT", "").strip() or "All Subscribers"
+          site_url = os.environ.get("SITE_URL", "https://dar-al-tawhid.de").rstrip("/")
+
+          if not api_key:
+              raise SystemExit("ONESIGNAL_API_KEY fehlt. Bitte in GitHub als Repository Secret speichern.")
+          if not app_id:
+              raise SystemExit("ONESIGNAL_APP_ID fehlt.")
+
+          def read_changed_files():
+              path = "changed-posts.txt"
+              if not os.path.exists(path):
+                  return []
+              files = []
+              with open(path, "r", encoding="utf-8") as f:
+                  for line in f:
+                      item = line.strip()
+                      if item.endswith(".md") and os.path.exists(item):
+                          files.append(item)
+              return files
+
+          def frontmatter_value(text, key):
+              pattern = re.compile(rf"^{re.escape(key)}:\s*[\"']?(.*?)[\"']?\s*$", re.M)
+              match = pattern.search(text)
+              return match.group(1).strip() if match else ""
+
+          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+
+          if event_name == "workflow_dispatch":
+              title = os.environ.get("MANUAL_TITLE") or "Neue Beiträge online"
+              message = os.environ.get("MANUAL_MESSAGE") or "Neue Beiträge auf DAR AL TAWḤID verfügbar."
+              url = os.environ.get("MANUAL_URL") or f"{site_url}/#recent"
+          else:
+              files = read_changed_files()
+
+              if not files:
+                  print("Keine geänderten Markdown-Beiträge gefunden. Keine Push gesendet.")
+                  sys.exit(0)
+
+              if len(files) == 1:
+                  with open(files[0], "r", encoding="utf-8") as f:
+                      text = f.read()
+                  post_title = frontmatter_value(text, "title") or "Neuer Beitrag"
+                  post_id = frontmatter_value(text, "id")
+                  title = "Neuer Beitrag online"
+                  message = post_title
+                  if post_id:
+                      url = f"{site_url}/#post/{urllib.parse.quote(post_id, safe='')}"
+                  else:
+                      url = f"{site_url}/#recent"
+              else:
+                  title = "Neue Beiträge online"
+                  message = f"{len(files)} neue Beiträge auf DAR AL TAWḤID verfügbar."
+                  url = f"{site_url}/#recent"
+
+          payload = {
+              "app_id": app_id,
+              "target_channel": "push",
+              "included_segments": [segment],
+              "headings": {
+                  "en": title,
+                  "de": title
+              },
+              "contents": {
+                  "en": message,
+                  "de": message
+              },
+              "url": url,
+              "name": f"github-posts-auto-{os.environ.get('GITHUB_RUN_ID', 'manual')}"
+          }
+
+          req = urllib.request.Request(
+              "https://api.onesignal.com/notifications",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={
+                  "Content-Type": "application/json; charset=utf-8",
+                  "Authorization": f"Key {api_key}"
+              },
+              method="POST"
+          )
+
+          try:
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  body = resp.read().decode("utf-8", errors="replace")
+                  print("OneSignal response:", body)
+          except urllib.error.HTTPError as e:
+              body = e.read().decode("utf-8", errors="replace")
+              print("OneSignal HTTP error:", e.code, body)
+              raise
+          PY
