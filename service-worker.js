@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-cache-share-v2-final";
+const CACHE_NAME="dar-al-tawhid-cache-clean-share-v3-final";
 const CORE_ASSETS=[
   "/",
   "/index.html",
