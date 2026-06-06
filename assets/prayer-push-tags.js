@@ -1,123 +1,114 @@
-/* DAR AL TAWḤID – OneSignal Gebetszeiten-Tags
-   Ergänzung ohne Layout-Änderung. Überschreibt nur den Klick auf „Erinnerung aktivieren“. */
-(function(){
-  const LOG_PREFIX = "[DAR Prayer Push]";
+// DAR AL TAWḤID – Standortbasierte Gebetszeiten-Tags für OneSignal
+// Diese Datei verändert kein Layout.
+// Sie speichert pro Nutzer: Push aktiv, Standort, Zeitzone, Methode.
 
-  function slug(value){
-    return String(value || "ort")
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 40) || "ort";
+(function () {
+  function log() {
+    try { console.log("[PrayerPushTags]", ...arguments); } catch (e) {}
   }
 
-  async function waitForOneSignal(timeoutMs){
-    const start = Date.now();
-    while(Date.now() - start < (timeoutMs || 12000)){
-      try{
-        if(window.OneSignal && window.DAR_ONE_SIGNAL_READY) return window.OneSignal;
-      }catch(e){}
-      await new Promise(resolve => setTimeout(resolve, 180));
+  async function waitForOneSignal(timeoutMs = 15000) {
+    const started = Date.now();
+
+    while (Date.now() - started < timeoutMs) {
+      if (window.OneSignal && window.OneSignal.User && window.OneSignal.User.addTags) {
+        return window.OneSignal;
+      }
+      await new Promise(resolve => setTimeout(resolve, 300));
     }
-    return window.OneSignal || null;
+
+    return null;
   }
 
-  function hasLocation(settings){
-    if(typeof window.hasPrayerLocation === "function") return window.hasPrayerLocation(settings);
-    return !!settings && Number.isFinite(Number(settings.lat)) && Number.isFinite(Number(settings.lon)) && settings.locationGranted === true;
+  function getPosition() {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error("Geolocation wird von diesem Gerät nicht unterstützt."));
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        position => resolve(position),
+        error => reject(error),
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 1000 * 60 * 60
+        }
+      );
+    });
   }
 
-  function getSettings(){
-    if(typeof window.getPrayerSettings === "function") return window.getPrayerSettings();
-    try{return JSON.parse(localStorage.getItem("darPrayerSettingsV1") || "{}");}catch(e){return {};}
-  }
+  async function setPrayerTags() {
+    const OneSignal = await waitForOneSignal();
 
-  function saveSettings(update){
-    if(typeof window.setPrayerSettings === "function") return window.setPrayerSettings(update);
-    try{
-      const current = JSON.parse(localStorage.getItem("darPrayerSettingsV1") || "{}");
-      localStorage.setItem("darPrayerSettingsV1", JSON.stringify(Object.assign(current, update)));
-    }catch(e){}
-  }
-
-  async function optInAndTag(){
-    const settings = getSettings();
-    if(!hasLocation(settings)){
-      alert("Bitte zuerst Standort freigeben oder Ort suchen.");
+    if (!OneSignal) {
+      alert("OneSignal ist noch nicht bereit. Bitte kurz warten und erneut versuchen.");
       return false;
     }
 
-    const OneSignal = await waitForOneSignal(12000);
-    if(!OneSignal || !OneSignal.User){
-      alert("OneSignal ist noch nicht bereit. Bitte Seite neu laden und erneut versuchen.");
+    let position;
+
+    try {
+      position = await getPosition();
+    } catch (err) {
+      alert("Standort konnte nicht erkannt werden. Bitte Standort erlauben und erneut versuchen.");
+      log("Standort-Fehler:", err);
       return false;
     }
 
-    try{
-      if(OneSignal.Notifications && typeof OneSignal.Notifications.isPushSupported === "function" && !OneSignal.Notifications.isPushSupported()){
-        alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");
-        return false;
-      }
+    const lat = Number(position.coords.latitude).toFixed(5);
+    const lon = Number(position.coords.longitude).toFixed(5);
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Berlin";
 
-      if(OneSignal.User.PushSubscription && typeof OneSignal.User.PushSubscription.optIn === "function"){
-        await OneSignal.User.PushSubscription.optIn();
-      }else if(OneSignal.Notifications && typeof OneSignal.Notifications.requestPermission === "function"){
-        await OneSignal.Notifications.requestPermission();
-      }else if(window.Notification && typeof Notification.requestPermission === "function"){
-        await Notification.requestPermission();
-      }
-
-      if(window.Notification && Notification.permission === "denied"){
-        alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");
-        return false;
-      }
-
-      const city = String(settings.city || "Aktueller Standort");
-      const citySlug = slug(city);
-      const asrName = Number(settings.asrFactor) === 2 ? "hanafi" : "standard";
-      const timezone = (Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Berlin");
-      const tags = {
+    try {
+      await OneSignal.User.addTags({
         prayer_notifications: "true",
-        prayer_city: city,
-        prayer_city_slug: citySlug,
-        prayer_lat: String(Number(settings.lat).toFixed(5)),
-        prayer_lon: String(Number(settings.lon).toFixed(5)),
-        prayer_asr: asrName,
-        prayer_method: "12deg",
+        prayer_lat: lat,
+        prayer_lon: lon,
         prayer_timezone: timezone,
-        prayer_updated_at: String(Math.floor(Date.now()/1000))
-      };
+        prayer_method: "12deg",
+        prayer_asr_factor: "1",
+        prayer_location_mode: "device",
+        prayer_site: "dar-al-tawhid",
+        prayer_source: "pwa",
+        prayer_version: "2"
+      });
 
-      if(typeof OneSignal.User.addTags === "function"){
-        OneSignal.User.addTags(tags);
-      }else if(typeof OneSignal.User.addTag === "function"){
-        Object.entries(tags).forEach(([key,value]) => OneSignal.User.addTag(key, value));
-      }else{
-        throw new Error("OneSignal addTags nicht verfügbar");
-      }
+      log("Gebetszeiten-Tags gesetzt:", {
+        prayer_lat: lat,
+        prayer_lon: lon,
+        prayer_timezone: timezone
+      });
 
-      saveSettings({reminder:true, oneSignalPrayer:true, oneSignalCitySlug:citySlug});
-      try{ if(typeof window.scheduleLocalPrayerReminders === "function") window.scheduleLocalPrayerReminders(); }catch(e){}
-      alert("Gebetszeiten-Push ist aktiviert. OneSignal hat deine Gebetszeiten-Tags gespeichert.");
-      console.log(LOG_PREFIX, "Tags gesetzt", tags);
       return true;
-    }catch(error){
-      console.error(LOG_PREFIX, error);
-      alert("Gebetszeiten-Push konnte nicht aktiviert werden. Bitte OneSignal, Service Worker und Browser-Berechtigung prüfen.");
+    } catch (err) {
+      alert("Gebetszeiten-Push konnte nicht gespeichert werden.");
+      log("OneSignal Tag Fehler:", err);
       return false;
     }
   }
 
-  window.DAR_activatePrayerOneSignalTags = optInAndTag;
+  function isPrayerButton(el) {
+    if (!el) return false;
 
-  document.addEventListener("click", function(event){
-    const target = event.target && event.target.closest ? event.target.closest("#enablePrayerReminderBtn") : null;
-    if(!target) return;
-    event.preventDefault();
-    event.stopPropagation();
-    if(typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
-    optInAndTag();
+    const text = (el.innerText || el.textContent || "").toLowerCase();
+
+    return text.includes("erinnerung aktivieren") ||
+           text.includes("gebetszeiten") ||
+           text.includes("standort verwenden") ||
+           text.includes("push aktivieren");
+  }
+
+  document.addEventListener("click", function (event) {
+    const btn = event.target && event.target.closest
+      ? event.target.closest("button, a")
+      : null;
+
+    if (isPrayerButton(btn)) {
+      setTimeout(setPrayerTags, 600);
+    }
   }, true);
+
+  window.DarAlTawhidSetPrayerPushTags = setPrayerTags;
 })();
