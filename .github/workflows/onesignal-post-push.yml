@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'content/posts/**.md'
       - 'content/posts/*.md'
+      - 'content/posts/**/*.md'
   workflow_dispatch:
 
 jobs:
@@ -74,6 +74,7 @@ jobs:
 
           if not api_key:
               raise SystemExit("ONESIGNAL_API_KEY fehlt oder ist leer. Bitte in GitHub als Repository Secret speichern.")
+
           if not app_id:
               raise SystemExit("ONESIGNAL_APP_ID fehlt.")
 
@@ -85,6 +86,7 @@ jobs:
           def changed_files():
               if not os.path.exists("changed-posts.txt"):
                   return []
+
               with open("changed-posts.txt", "r", encoding="utf-8") as f:
                   return [
                       x.strip()
@@ -101,18 +103,23 @@ jobs:
               title = "Test-Push"
               message = "DAR AL TAWḤID Push funktioniert."
               url = f"{site_url}/#recent"
+
           elif len(files) == 1:
               with open(files[0], "r", encoding="utf-8") as f:
                   text = f.read()
+
               post_title = frontmatter_value(text, "title") or "Neuer Beitrag"
               post_id = frontmatter_value(text, "id")
+
               title = "Neuer Beitrag online"
               message = post_title
               url = f"{site_url}/#post/{urllib.parse.quote(post_id, safe='')}" if post_id else f"{site_url}/#recent"
+
           elif len(files) > 1:
               title = "Neue Beiträge online"
               message = f"{len(files)} neue Beiträge auf DAR AL TAWḤID verfügbar."
               url = f"{site_url}/#recent"
+
           else:
               print("Keine neuen Markdown-Beiträge erkannt. Keine Push gesendet.")
               sys.exit(0)
@@ -120,9 +127,15 @@ jobs:
           payload = {
               "app_id": app_id,
               "target_channel": "push",
-              "included_segments": ["Subscribed Users"],
-              "headings": {"en": title, "de": title},
-              "contents": {"en": message, "de": message},
+              "included_segments": ["DAR_PUSH"],
+              "headings": {
+                  "en": title,
+                  "de": title
+              },
+              "contents": {
+                  "en": message,
+                  "de": message
+              },
               "url": url,
               "name": f"github-posts-auto-{os.environ.get('GITHUB_RUN_ID', 'manual')}"
           }
@@ -140,6 +153,7 @@ jobs:
           try:
               with urllib.request.urlopen(req, timeout=30) as resp:
                   print(resp.read().decode("utf-8", errors="replace"))
+
           except urllib.error.HTTPError as e:
               print(e.read().decode("utf-8", errors="replace"))
               raise
