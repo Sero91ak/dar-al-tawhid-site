@@ -1108,6 +1108,274 @@ body:before{
   background:transparent!important;
   border-top:0!important;
 }
+
+
+/* GEBETSZEITEN BASIS: nur Ergänzung, keine bestehende Struktur entfernt */
+.prayer-quick-card,.prayer-panel,.qibla-panel{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.10),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));
+  padding:15px;
+  margin-bottom:13px;
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+.prayer-quick-card{cursor:pointer}
+.prayer-quick-head,.prayer-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.prayer-quick-label,.prayer-small-label{color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;margin-bottom:5px}
+.prayer-quick-title,.prayer-panel-title{font-family:var(--serif);color:var(--gold2);font-size:25px;font-weight:800;line-height:1.08;margin:0}
+.prayer-quick-next{font-family:var(--serif);color:#fff6dc;font-size:19px;line-height:1.25;font-weight:800;text-align:right}
+.prayer-quick-count{color:var(--gold2);font-size:13px;font-weight:950;margin-top:4px;text-align:right}
+.prayer-time-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:10px}
+.prayer-time-card{border:1px solid var(--line2);border-radius:16px;background:rgba(239,215,142,.045);padding:10px;min-height:70px}
+.prayer-time-card.active{border-color:rgba(239,215,142,.62);background:rgba(239,215,142,.10);box-shadow:0 0 0 1px rgba(239,215,142,.06)}
+.prayer-time-card b{display:block;color:var(--gold2);font-size:13px;line-height:1.15;margin-bottom:6px}
+.prayer-time-card span{display:block;color:var(--cream);font-size:18px;font-weight:950;line-height:1}
+.prayer-time-card small{display:block;color:var(--muted);font-size:10px;font-weight:850;margin-top:5px}
+.prayer-settings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}
+.prayer-action-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:13px}
+.prayer-action-btn{border:1px solid var(--line);border-radius:17px;background:rgba(239,215,142,.075);color:var(--cream);min-height:46px;padding:10px 12px;font-size:12px;font-weight:950;cursor:pointer;text-align:center}
+.prayer-action-btn:hover{border-color:rgba(239,215,142,.55);filter:brightness(1.06)}
+.prayer-note{color:var(--muted);font-size:11px;line-height:1.55;margin-top:11px}
+.qibla-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:15px;align-items:center}
+.qibla-compass{width:220px;height:220px;border-radius:999px;border:2px solid var(--line);margin:0 auto;position:relative;background:radial-gradient(circle at center,rgba(239,215,142,.10),rgba(0,0,0,.20));box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 16px 36px rgba(0,0,0,.25)}
+.qibla-compass:before{content:"N";position:absolute;top:10px;left:50%;transform:translateX(-50%);color:var(--muted);font-weight:950;font-size:12px}
+.qibla-needle{position:absolute;left:50%;top:50%;width:6px;height:86px;border-radius:999px;background:linear-gradient(180deg,var(--gold2),var(--bronze));transform-origin:50% 88%;transform:translate(-50%,-88%) rotate(0deg);box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.qibla-needle:after{content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%);border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:18px solid var(--gold2)}
+.qibla-center{position:absolute;left:50%;top:50%;width:18px;height:18px;border-radius:999px;background:var(--cream);transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(239,215,142,.15)}
+.qibla-info h3{font-family:var(--serif);color:var(--gold2);font-size:24px;margin:0 0 8px}
+.qibla-info p{color:var(--muted);font-size:12px;line-height:1.55;margin:0 0 9px}
+@media(max-width:700px){
+  .prayer-quick-head,.prayer-panel-head{display:block}
+  .prayer-quick-next,.prayer-quick-count{text-align:left;margin-top:8px}
+  .prayer-time-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .prayer-settings-grid,.prayer-action-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .qibla-layout{grid-template-columns:1fr}
+  .qibla-compass{width:200px;height:200px}
+  .prayer-action-btn{font-size:11px;min-height:44px;padding:9px 10px}
+}
+@media(max-width:390px){.prayer-time-card span{font-size:16px}.prayer-time-card b{font-size:12px}}
+
+/* GEBETSZEITEN KOMPAKT FIX: Startseite nur aktuelle/nächste Gebetszeit, Details einklappbar */
+.prayer-compact-summary{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin-top:12px;
+}
+.prayer-summary-card{
+  border:1px solid var(--line2);
+  border-radius:17px;
+  background:rgba(239,215,142,.045);
+  padding:11px;
+  min-height:76px;
+}
+.prayer-summary-card b{
+  display:block;
+  color:var(--muted2);
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.prayer-summary-card span{
+  display:block;
+  color:var(--cream);
+  font-size:20px;
+  font-weight:950;
+  line-height:1.1;
+}
+.prayer-summary-card small{
+  display:block;
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:900;
+  margin-top:6px;
+}
+.prayer-detail-toggle{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(239,215,142,.075);
+  color:var(--cream);
+  min-height:44px;
+  padding:10px 12px;
+  font-size:12px;
+  font-weight:950;
+  cursor:pointer;
+  margin-top:12px;
+}
+.prayer-detail-toggle:hover{border-color:rgba(239,215,142,.55);filter:brightness(1.06)}
+.prayer-collapsible-body{
+  margin-top:12px;
+  border-top:1px solid var(--line2);
+  padding-top:12px;
+}
+.prayer-collapsible-body[hidden]{display:none!important}
+.prayer-calculation-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:0 0 12px;
+}
+.prayer-calculation-tags span{
+  border:1px solid var(--line2);
+  border-radius:999px;
+  background:rgba(239,215,142,.055);
+  color:var(--cream);
+  font-size:10px;
+  font-weight:900;
+  padding:5px 8px;
+}
+.qibla-mark{
+  position:absolute;
+  z-index:2;
+  color:var(--gold2);
+  font-size:10px;
+  font-weight:950;
+  line-height:1;
+  opacity:.86;
+  pointer-events:none;
+}
+.qibla-mark.mark-0{top:34px;left:50%;transform:translateX(-50%)}
+.qibla-mark.mark-90{right:14px;top:50%;transform:translateY(-50%)}
+.qibla-mark.mark-180{bottom:14px;left:50%;transform:translateX(-50%)}
+.qibla-mark.mark-270{left:14px;top:50%;transform:translateY(-50%)}
+.qibla-direction-small{color:var(--gold2);font-size:13px;font-weight:950;margin-top:8px}
+@media(max-width:700px){
+  .prayer-compact-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .prayer-summary-card{padding:10px;min-height:72px}
+  .prayer-summary-card span{font-size:16px}
+  .prayer-summary-card small{font-size:10px}
+}
+@media(max-width:370px){
+  .prayer-summary-card span{font-size:14px}
+  .prayer-summary-card b{font-size:8.5px;letter-spacing:.11em}
+}
+
+/* HEADER FINAL: Social nur als Emblem + aktuelles/nächstes Gebet rechts daneben */
+.header-tools{
+  display:grid;
+  grid-template-columns:auto minmax(250px,1fr);
+  gap:10px;
+  align-items:stretch;
+  width:100%;
+}
+.header .socials{
+  display:flex!important;
+  grid-template-columns:none!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:9px!important;
+  width:auto!important;
+  min-width:0!important;
+  margin-top:0!important;
+}
+.header .social-link{
+  width:52px!important;
+  min-width:52px!important;
+  height:48px!important;
+  min-height:48px!important;
+  padding:0!important;
+  border-radius:18px!important;
+  opacity:.96!important;
+}
+.header .social-link span{
+  display:none!important;
+}
+.header .social-link svg{
+  width:28px!important;
+  height:28px!important;
+  flex:0 0 28px!important;
+}
+.header-prayer-status{
+  border:1px solid rgba(214,183,106,.30);
+  background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(8,8,6,.86));
+  color:var(--cream);
+  border-radius:18px;
+  min-height:48px;
+  padding:8px 12px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  align-items:center;
+  cursor:pointer;
+  box-shadow:0 10px 28px rgba(0,0,0,.20);
+}
+.header-prayer-status:hover{
+  border-color:rgba(239,215,142,.55);
+  filter:brightness(1.05);
+}
+.header-prayer-item{
+  min-width:0;
+  border-left:1px solid rgba(214,183,106,.18);
+  padding-left:10px;
+}
+.header-prayer-item:first-child{
+  border-left:0;
+  padding-left:0;
+}
+.header-prayer-item b{
+  display:block;
+  color:var(--muted2);
+  font-family:var(--display);
+  font-size:8.5px;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  line-height:1.1;
+  margin-bottom:4px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.header-prayer-item span{
+  display:block;
+  color:var(--gold2);
+  font-size:12.5px;
+  font-weight:950;
+  line-height:1.18;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.header-prayer-item small{
+  display:block;
+  color:var(--muted);
+  font-size:9.5px;
+  font-weight:800;
+  line-height:1.15;
+  margin-top:2px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media(min-width:981px){
+  .header-row{grid-template-columns:minmax(0,1fr) 430px!important;align-items:start!important}
+  .header-tools{max-width:430px;justify-self:end}
+}
+@media(max-width:980px){
+  .header-tools{grid-template-columns:auto minmax(0,1fr);margin-top:14px}
+}
+@media(max-width:700px){
+  .header-tools{grid-template-columns:112px minmax(0,1fr);gap:8px;margin-top:12px}
+  .header .socials{gap:8px!important}
+  .header .social-link{width:52px!important;min-width:52px!important;height:44px!important;min-height:44px!important;border-radius:16px!important}
+  .header .social-link svg{width:27px!important;height:27px!important;flex-basis:27px!important}
+  .header-prayer-status{min-height:44px;padding:7px 9px;gap:7px;border-radius:16px}
+  .header-prayer-item{padding-left:7px}
+  .header-prayer-item b{font-size:7.4px;letter-spacing:.11em;margin-bottom:3px}
+  .header-prayer-item span{font-size:10.6px}
+  .header-prayer-item small{font-size:8px}
+}
+@media(max-width:390px){
+  .header-tools{grid-template-columns:104px minmax(0,1fr);gap:7px}
+  .header .social-link{width:48px!important;min-width:48px!important;height:42px!important;min-height:42px!important}
+  .header .social-link svg{width:25px!important;height:25px!important;flex-basis:25px!important}
+  .header-prayer-status{padding:7px 8px;gap:6px}
+  .header-prayer-item span{font-size:10px}
+}
+
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -1142,10 +1410,16 @@ OneSignalDeferred.push(async function(OneSignal){
           </div>
           <div class="brand-main"><img class="logo" src="watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
         </div>
-        <nav class="socials" aria-label="Social Media">
-          <a class="social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a>
-          <a class="social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igHead" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHead)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></a>
-        </nav>
+        <div class="header-tools">
+          <nav class="socials" aria-label="Social Media">
+            <a class="social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener" aria-label="Telegram öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a>
+            <a class="social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igHead" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHead)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></a>
+          </nav>
+          <div id="headerPrayerStatus" class="header-prayer-status" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen">
+            <div class="header-prayer-item"><b>Gebetszeiten</b><span>Standort freigeben</span></div>
+            <div class="header-prayer-item"><b>Nächstes Gebet</b><span>nach Freigabe</span></div>
+          </div>
+        </div>
       </div>
       <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro">Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</div></div>
     </header>
@@ -1192,10 +1466,12 @@ async function loadPosts(){const cached=getJson(CACHE_KEY,[]);const api=`https:/
 function countBy(key){const map=new Map();posts.forEach(post=>{const value=post[key]||"Unbekannt";map.set(value,(map.get(value)||0)+1)});return map}
 function savedIds(){return getJson(SAVE_KEY,[])}function isSaved(id){return savedIds().includes(id)}function toggleSaved(id){let list=savedIds();if(list.includes(id)){list=list.filter(x=>x!==id)}else{list.unshift(id)}setJson(SAVE_KEY,list.slice(0,100))}
 function postUrl(post){const url=new URL(location.origin+location.pathname);url.hash=`post/${encodeURIComponent(post.id)}`;return url.toString()}
+function routeUrl(view,value=""){const url=new URL(location.origin+location.pathname);url.hash=value?`${view}/${encodeURIComponent(value)}`:`${view}`;return url.toString()}
+function duaUrl(d){return routeUrl("dua",d.id)}
 function routeToHash(view,value=""){if(value)return`#${view}/${encodeURIComponent(value)}`;return`#${view}`}
 function navigate(view,value=""){location.hash=routeToHash(view,value)}
 function readRoute(){const hash=decodeURIComponent((location.hash||"#home").replace(/^#/,""));const parts=hash.split("/");return{view:parts[0]||"home",value:parts.slice(1).join("/")||""}}
-function parentRoute(route){if(route.view==="topic")return{view:"topics"};if(route.view==="scholar")return{view:"scholars"};if(route.view==="book")return{view:"books"};if(route.view==="dua-cat")return{view:"duas"};if(route.view==="dua")return{view:"duas"};if(route.view==="calendar")return{view:"home"};if(route.view==="series")return{view:"home"};if(route.view==="post")return{view:"home"};if(route.view!=="home")return{view:"home"};return{view:"home"}}
+function parentRoute(route){if(route.view==="topic")return{view:"topics"};if(route.view==="scholar")return{view:"scholars"};if(route.view==="book")return{view:"books"};if(route.view==="dua-cat")return{view:"duas"};if(route.view==="dua")return{view:"duas"};if(route.view==="calendar")return{view:"home"};if(route.view==="prayer")return{view:"home"};if(route.view==="series")return{view:"home"};if(route.view==="post")return{view:"home"};if(route.view!=="home")return{view:"home"};return{view:"home"}}
 function setHeader(title,desc,eyebrow="DAR AL TAWḤID"){return`<div class="view-head"><div class="eyebrow">${esc(eyebrow)}</div><h2>${esc(title)}</h2>${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
@@ -1277,6 +1553,8 @@ function renderSeries(id){
   const s=SERIES_DEFS.find(x=>x.id===id);
   if(!s)return `${setHeader("Serie nicht gefunden","Diese Serie konnte nicht geladen werden.","Serien")}<div class="empty">Keine Serie gefunden.</div>`;
   const items=postsForSeries(id);
+  const url=routeUrl("series",id);
+  const desc=`${items.length} Beiträge in der Serie ${s.title} auf DAR AL TAWḤID.`;
   return `${setHeader(s.title,`${items.length} Beiträge in dieser Serie.`, "Serie")}<section class="post-grid">${items.length?items.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge in dieser Serie.</div>`}</section>`;
 }
 const PINNED_DEFS=[
@@ -1298,6 +1576,125 @@ function searchMatchLabel(post,q){
   const hit=checks.find(([_,v])=>String(v||"").toLowerCase().includes(String(q).toLowerCase()));
   return hit?`<span class="search-match">Gefunden in: ${hit[0]}</span>`:"";
 }
+
+
+const PRAYER_SETTINGS_KEY="darPrayerSettingsV1";
+let prayerCountdownTimer=null;
+let qiblaOrientationHandler=null;
+function prayerDefaultSettings(){return{city:"Standort freigeben",lat:null,lon:null,angle:12,asrFactor:1,reminder:false,locationGranted:false}}
+function hasPrayerLocation(settings=getPrayerSettings()){return Number.isFinite(Number(settings.lat))&&Number.isFinite(Number(settings.lon))&&settings.locationGranted===true}
+function getPrayerSettings(){const saved=getJson(PRAYER_SETTINGS_KEY,null);const base=prayerDefaultSettings();const merged=saved?{...base,...saved}:base;if(!merged.locationGranted&&String(merged.city||"").toLowerCase()==="rheinbach"){merged.city=base.city;merged.lat=null;merged.lon=null}return merged}
+function setPrayerSettings(value){setJson(PRAYER_SETTINGS_KEY,{...getPrayerSettings(),...value})}
+function toRad(d){return d*Math.PI/180}
+function toDeg(r){return r*180/Math.PI}
+function fixAngle(a){return ((a%360)+360)%360}
+function fixHour(h){return ((h%24)+24)%24}
+function dayOfYear(date){const start=new Date(date.getFullYear(),0,0);return Math.floor((date-start)/86400000)}
+function sunTimeForAngle(date,lat,lon,angle,morning){
+  const N=dayOfYear(date);const lngHour=lon/15;const t=N+(((morning?6:18)-lngHour)/24);
+  const M=(0.9856*t)-3.289;
+  let L=M+(1.916*Math.sin(toRad(M)))+(0.020*Math.sin(toRad(2*M)))+282.634;L=fixAngle(L);
+  let RA=toDeg(Math.atan(0.91764*Math.tan(toRad(L))));RA=fixAngle(RA);
+  const Lquadrant=Math.floor(L/90)*90;const RAquadrant=Math.floor(RA/90)*90;RA=(RA+(Lquadrant-RAquadrant))/15;
+  const sinDec=0.39782*Math.sin(toRad(L));const cosDec=Math.cos(Math.asin(sinDec));
+  const zenith=90+angle;let cosH=(Math.cos(toRad(zenith))-(sinDec*Math.sin(toRad(lat))))/(cosDec*Math.cos(toRad(lat)));
+  if(cosH>1||cosH<-1)return null;
+  let H=morning?360-toDeg(Math.acos(cosH)):toDeg(Math.acos(cosH));H=H/15;
+  const T=H+RA-(0.06571*t)-6.622;const UT=T-lngHour;const tz=-date.getTimezoneOffset()/60;
+  return fixHour(UT+tz);
+}
+function solarNoon(date,lat,lon){const sunrise=sunTimeForAngle(date,lat,lon,0.833,true);const sunset=sunTimeForAngle(date,lat,lon,0.833,false);if(sunrise==null||sunset==null)return 12;return fixHour((sunrise+sunset)/2)}
+function declinationApprox(date){const N=dayOfYear(date);return 23.45*Math.sin(toRad((360/365)*(284+N)))}
+function asrTime(date,lat,lon,factor){
+  const noon=solarNoon(date,lat,lon);const dec=declinationApprox(date);const angle=toDeg(Math.atan(1/(factor+Math.tan(toRad(Math.abs(lat-dec))))));
+  const cosH=(Math.sin(toRad(angle))-Math.sin(toRad(lat))*Math.sin(toRad(dec)))/(Math.cos(toRad(lat))*Math.cos(toRad(dec)));
+  if(cosH>1||cosH<-1)return noon+4;
+  const H=toDeg(Math.acos(cosH))/15;return fixHour(noon+H);
+}
+function formatPrayerHour(h){if(h==null||Number.isNaN(h))return"--:--";const hh=Math.floor(fixHour(h));const mm=Math.round((fixHour(h)-hh)*60);const add=mm>=60?1:0;const finalH=(hh+add)%24;const finalM=mm>=60?0:mm;return String(finalH).padStart(2,"0")+":"+String(finalM).padStart(2,"0")}
+function prayerDateFromHour(base,h){const d=new Date(base);d.setHours(0,0,0,0);d.setMinutes(Math.round(fixHour(h)*60));return d}
+function calculatePrayerTimes(date=new Date(),settings=getPrayerSettings()){
+  if(!hasPrayerLocation(settings))return [];
+  const lat=Number(settings.lat),lon=Number(settings.lon),angle=Number(settings.angle||12),asrFactor=Number(settings.asrFactor||1);
+  const fajr=sunTimeForAngle(date,lat,lon,angle,true);const sunrise=sunTimeForAngle(date,lat,lon,0.833,true);const dhuhr=solarNoon(date,lat,lon);const asr=asrTime(date,lat,lon,asrFactor);const maghrib=sunTimeForAngle(date,lat,lon,0.833,false);const isha=sunTimeForAngle(date,lat,lon,angle,false);
+  return [{key:"fajr",name:"Fajr",time:fajr,note:"12°"},{key:"sunrise",name:"Sonnenaufgang",time:sunrise,note:"Info"},{key:"dhuhr",name:"Dhuhr",time:dhuhr,note:"Mittag"},{key:"asr",name:"ʿAṣr",time:asr,note:asrFactor===2?"Ḥanafī":"Standard"},{key:"maghrib",name:"Maghrib",time:maghrib,note:"Sonnenuntergang"},{key:"isha",name:"ʿIshāʾ",time:isha,note:"12° nautisch"}];
+}
+function nextPrayerInfo(settings=getPrayerSettings()){
+  if(!hasPrayerLocation(settings))return{key:"none",name:"Standort freigeben",date:new Date(),tomorrow:false};
+  const now=new Date();const today=calculatePrayerTimes(now,settings).filter(x=>x.key!=="sunrise");
+  for(const p of today){const d=prayerDateFromHour(now,p.time);if(d>now)return{...p,date:d,tomorrow:false}}
+  const tomorrow=new Date(now);tomorrow.setDate(now.getDate()+1);const first=calculatePrayerTimes(tomorrow,settings).find(x=>x.key==="fajr");return{...first,date:prayerDateFromHour(tomorrow,first.time),tomorrow:true};
+}
+function formatCountdown(ms){if(ms<0)ms=0;const total=Math.floor(ms/1000);const h=Math.floor(total/3600);const m=Math.floor((total%3600)/60);const s=total%60;return`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+function qiblaBearing(lat,lon){if(!Number.isFinite(Number(lat))||!Number.isFinite(Number(lon)))return 0;const kaabaLat=toRad(21.4225),kaabaLon=toRad(39.8262);const φ=toRad(lat),λ=toRad(lon);const dLon=kaabaLon-λ;const y=Math.sin(dLon);const x=Math.cos(φ)*Math.tan(kaabaLat)-Math.sin(φ)*Math.cos(dLon);return fixAngle(toDeg(Math.atan2(y,x)))}
+async function reversePrayerCity(lat,lon){try{const url=`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=de`;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("reverse failed");const j=await r.json();return j.city||j.locality||j.principalSubdivision||j.countryName||"Aktueller Standort"}catch(e){return`Aktueller Standort (${Number(lat).toFixed(3)}, ${Number(lon).toFixed(3)})`}}
+async function geocodePrayerCity(city){const q=String(city||"").trim();if(!q)throw new Error("Ort fehlt");const url=`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&accept-language=de&q=${encodeURIComponent(q)}`;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("Ort konnte nicht gesucht werden");const data=await r.json();if(!Array.isArray(data)||!data[0])throw new Error("Ort nicht gefunden");const item=data[0];const name=item.name||String(item.display_name||q).split(",")[0]||q;return{city:name,lat:Number(item.lat),lon:Number(item.lon),locationGranted:true}}
+function requestBrowserPosition(){return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:true,timeout:12000,maximumAge:600000}))}
+async function requestPrayerLocation(button){if(!navigator.geolocation){alert("Standort wird von diesem Browser nicht unterstützt.");return}const oldText=button?button.textContent:"";if(button)button.textContent="Standort wird angefragt…";try{const pos=await requestBrowserPosition();const lat=pos.coords.latitude,lon=pos.coords.longitude;const city=await reversePrayerCity(lat,lon);setPrayerSettings({lat,lon,city,locationGranted:true});render()}catch(err){if(button)button.textContent=oldText||"📍 Standort freigeben";alert("Standort konnte nicht geladen werden. Bitte Standortzugriff erlauben, damit die Gebetszeiten für deine Gegend angezeigt werden.")}}
+function qiblaCompassMarkup(rotation=0){
+  return `<div class="qibla-compass"><span class="qibla-mark mark-0">0°</span><span class="qibla-mark mark-90">90°</span><span class="qibla-mark mark-180">180°</span><span class="qibla-mark mark-270">270°</span><div id="qiblaNeedle" class="qibla-needle" style="transform:translate(-50%,-88%) rotate(${Number(rotation)||0}deg)"></div><div class="qibla-center"></div></div>`;
+}
+function prayerCalculationTags(settings=getPrayerSettings()){
+  return `<div class="prayer-calculation-tags"><span>Fajr 12°</span><span>ʿIshāʾ 12° nautisch</span><span>Maghrib Sonnenuntergang</span><span>ʿAṣr ${settings.asrFactor===2?"Ḥanafī":"Standard"}</span></div>`;
+}
+function renderPrayerQuickCard(){
+  const settings=getPrayerSettings();
+  if(!hasPrayerLocation(settings)){
+    return `<section class="prayer-quick-card"><div class="prayer-quick-head"><div><div class="prayer-quick-label">Gebetszeiten</div><h3 class="prayer-quick-title">🕌 Für deinen Standort</h3></div></div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Aktuell</b><span>Standort</span><small>freigeben</small></div><div class="prayer-summary-card"><b>Nächstes</b><span>nach Freigabe</span><small>automatisch</small></div></div><div class="prayer-action-row"><button id="quickUseLocationBtn" class="prayer-action-btn" type="button">📍 Standort freigeben</button><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Ordner öffnen</button></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Details & Kompass öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<section class="qibla-panel"><div class="qibla-layout">${qiblaCompassMarkup(0)}<div class="qibla-info"><h3>Qibla-Kompass</h3><p>Der Kompass wird nach Standortfreigabe berechnet. Die Zahlen zeigen die Grad-Richtung zur Orientierung.</p><p id="qiblaStatus">Noch kein Standort vorhanden.</p></div></div></section></div></section>`;
+  }
+  const next=nextPrayerInfo(settings);
+  const current=currentPrayerInfo(settings);
+  const times=calculatePrayerTimes(new Date(),settings);
+  const bearing=qiblaBearing(settings.lat,settings.lon);
+  return `<section class="prayer-quick-card"><div class="prayer-quick-head"><div><div class="prayer-quick-label">Gebetszeiten</div><h3 class="prayer-quick-title">🕌 Heute in ${esc(settings.city||"deinem Ort")}</h3></div></div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerHour(current.time):"--:--")}</span><small>${esc(settings.city||"dein Standort")}</small></div><div class="prayer-summary-card"><b>Nächstes</b><span>${esc(next.name)} · ${esc(formatPrayerHour(next.time))}</span><small id="prayerQuickCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Zeiten & Kompass öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${times.map(t=>`<div class="prayer-time-card ${t.key===next.key?"active":""}"><b>${esc(t.name)}</b><span>${formatPrayerHour(t.time)}</span><small>${esc(t.note)}</small></div>`).join("")}</div><section class="qibla-panel" style="margin-top:12px"><div class="qibla-layout">${qiblaCompassMarkup(bearing)}<div class="qibla-info"><h3>Qibla-Kompass</h3><p>Von ${esc(settings.city)} aus ungefähr <strong>${Math.round(bearing)}°</strong>. Die Zahlen am Kompass helfen bei der Orientierung.</p><p id="qiblaStatus">Tippe auf „Kompass starten“, damit der Pfeil mit der Handy-Ausrichtung arbeitet.</p><button id="startQiblaBtn" class="prayer-action-btn" type="button">🧭 Kompass starten</button></div></div></section></div></section>`;
+}
+function renderPrayerTimes(){
+  const settings=getPrayerSettings();
+  if(!hasPrayerLocation(settings)){
+    return `${setHeader("Gebetszeiten","Die App fragt deinen Standort erst nach deiner Freigabe ab. Danach wird die Stadt/Gegend deiner Nutzung angezeigt und die Gebetszeiten werden dafür berechnet.","🕌 Gebet")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Standort erforderlich</div><h3 class="prayer-panel-title">Gebetszeiten für deine Gegend</h3><div class="prayer-quick-count">Noch kein Standort freigegeben</div></div></div><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="" placeholder="Ort manuell eingeben" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row"><button id="useLocationBtn" class="prayer-action-btn" type="button">📍 Standort freigeben</button><button id="enablePrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Erinnerung aktivieren</button><button id="startQiblaBtn" class="prayer-action-btn" type="button">🧭 Kompass starten</button></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Berechnung & Kompass anzeigen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<section class="qibla-panel"><div class="qibla-layout">${qiblaCompassMarkup(0)}<div class="qibla-info"><h3>Qibla-Richtung</h3><p>Die Qibla-Richtung wird nach Standortfreigabe oder Ortssuche angezeigt.</p><p id="qiblaStatus">Noch kein Standort vorhanden.</p></div></div></section></div><div class="prayer-note">Keine feste Stadt ist voreingestellt. Erst nach deiner Freigabe oder manueller Ortssuche werden Gebetszeiten und Qibla berechnet.</div></section>`;
+  }
+  const times=calculatePrayerTimes(new Date(),settings);
+  const next=nextPrayerInfo(settings);
+  const current=currentPrayerInfo(settings);
+  const bearing=qiblaBearing(settings.lat,settings.lon);
+  return `${setHeader("Gebetszeiten","Berechnung: Fajr mit 12°, Maghrib bei Sonnenuntergang, ʿIshāʾ mit 12° nautischer Berechnung. Standort wird nur nach Freigabe genutzt.","🕌 Gebet")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Heute · ${esc(settings.city)}</div><h3 class="prayer-panel-title">Gebetszeiten für deinen Standort</h3></div></div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerHour(current.time):"--:--")}</span><small>${esc(settings.city||"dein Standort")}</small></div><div class="prayer-summary-card"><b>Nächstes</b><span>${esc(next.name)} · ${esc(formatPrayerHour(next.time))}</span><small id="prayerDetailCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Zeiten & Kompass öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${times.map(t=>`<div class="prayer-time-card ${t.key===next.key?"active":""}"><b>${esc(t.name)}</b><span>${formatPrayerHour(t.time)}</span><small>${esc(t.note)}</small></div>`).join("")}</div><section class="qibla-panel" style="margin-top:12px"><div class="qibla-layout">${qiblaCompassMarkup(bearing)}<div class="qibla-info"><h3>Qibla-Richtung</h3><p>Von ${esc(settings.city)} aus ungefähr <strong>${Math.round(bearing)}°</strong>. Die Zahlen am Kompass zeigen 0°, 90°, 180° und 270° zur Orientierung.</p><p id="qiblaStatus">Kompass noch nicht gestartet.</p><button id="startQiblaBtn" class="prayer-action-btn" type="button">🧭 Kompass starten</button></div></div></section></div><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="${esc(settings.city)}" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row"><button id="useLocationBtn" class="prayer-action-btn" type="button">📍 Standort neu freigeben</button><button id="enablePrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Erinnerung aktivieren</button></div><div class="prayer-note">Die detaillierten Zeiten und der Qibla-Kompass bleiben zugeklappt, damit die Startansicht übersichtlich bleibt.</div></section>`;
+}
+
+function currentPrayerInfo(settings=getPrayerSettings()){
+  if(!hasPrayerLocation(settings))return null;
+  const now=new Date();
+  const today=calculatePrayerTimes(now,settings).filter(x=>x.key!=="sunrise");
+  if(!today.length)return null;
+  let current=null;
+  for(const p of today){
+    const d=prayerDateFromHour(now,p.time);
+    if(d<=now)current=p;
+  }
+  if(!current)current=today[today.length-1];
+  return current;
+}
+function updateHeaderPrayerStatus(){
+  const el=$("headerPrayerStatus");
+  if(!el)return;
+  const settings=getPrayerSettings();
+  if(!hasPrayerLocation(settings)){
+    el.innerHTML=`<div class="header-prayer-item"><b>Gebetszeiten</b><span>Standort freigeben</span></div><div class="header-prayer-item"><b>Nächstes Gebet</b><span>nach Freigabe</span></div>`;
+    return;
+  }
+  const current=currentPrayerInfo(settings);
+  const next=nextPrayerInfo(settings);
+  const city=settings.city||"dein Standort";
+  el.innerHTML=`<div class="header-prayer-item"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerHour(current.time):"--:--")}</span><small>${esc(city)}</small></div><div class="header-prayer-item"><b>Nächstes</b><span>${esc(next.name)} · ${esc(formatPrayerHour(next.time))}</span><small id="headerPrayerCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div>`;
+}
+function updatePrayerCountdowns(){const quick=$("prayerQuickCountdown"),detail=$("prayerDetailCountdown");updateHeaderPrayerStatus();if(!quick&&!detail)return;const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){if(quick)quick.textContent="Standort freigeben";if(detail)detail.textContent="Standort freigeben";return}const next=nextPrayerInfo(settings);const text=formatCountdown(next.date-new Date());if(quick)quick.textContent=text;if(detail)detail.textContent=text}
+function scheduleLocalPrayerReminders(){const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}const now=new Date();calculatePrayerTimes(now,settings).filter(x=>x.key!=="sunrise").forEach(p=>{const d=prayerDateFromHour(now,p.time);if(d>now){setTimeout(()=>{try{new Notification(`Gebetszeit: ${p.name}`,{body:`${p.name} ist eingetreten. DAR AL TAWḤID`,tag:`prayer-${p.key}`})}catch(e){}},d-now)}})}
+function bindPrayerEvents(){if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnung & Kompass schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnung & Kompass anzeigen":"Alle Zeiten & Kompass öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=async()=>{if(!hasPrayerLocation()){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}if(!("Notification" in window)){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}let permission=Notification.permission;if(permission!=="granted")permission=await Notification.requestPermission();if(permission==="granted"){setPrayerSettings({reminder:true});scheduleLocalPrayerReminders();alert("Gebets-Erinnerungen wurden für heute aktiviert, solange die App im Browser/PWA-Kontext aktiv bleibt.")}else{alert("Benachrichtigungen wurden nicht erlaubt.")}};const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass}
+async function startQiblaCompass(){const settings=getPrayerSettings();const status=$("qiblaStatus");if(!hasPrayerLocation(settings)){if(status)status.textContent="Bitte zuerst Standort freigeben oder Ort suchen.";alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}const bearing=qiblaBearing(settings.lat,settings.lon);const needle=$("qiblaNeedle");if(!needle)return;if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==="function"){try{const res=await DeviceOrientationEvent.requestPermission();if(res!=="granted"){if(status)status.textContent="Kompass-Zugriff wurde nicht erlaubt.";return}}catch(e){if(status)status.textContent="Kompass-Erlaubnis konnte nicht geöffnet werden.";return}}
+  if(qiblaOrientationHandler)window.removeEventListener("deviceorientation",qiblaOrientationHandler,true);
+  qiblaOrientationHandler=function(event){let heading=null;if(typeof event.webkitCompassHeading==="number")heading=event.webkitCompassHeading;else if(typeof event.alpha==="number")heading=360-event.alpha;if(heading==null){if(status)status.textContent="Kompassdaten nicht verfügbar.";return}const rotation=fixAngle(bearing-heading);needle.style.transform=`translate(-50%,-88%) rotate(${rotation}deg)`;if(status)status.textContent=`Qibla ca. ${Math.round(bearing)}° · Handy-Ausrichtung ${Math.round(heading)}°.`};
+  window.addEventListener("deviceorientation",qiblaOrientationHandler,true);if(status)status.textContent="Kompass aktiv. Bewege das Handy kurz in einer 8, wenn die Richtung ungenau wirkt.";
+}
+
 function renderOverview(){const topics=countBy("category").size;const scholars=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const books=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;return`<section class="overview-panel"><div class="overview-title"><h3>Übersicht</h3></div><div class="stats-grid"><div class="stat-card"><b>${posts.length}</b><span>Beiträge</span></div><div class="stat-card"><b>${topics}</b><span>Kategorien</span></div><div class="stat-card"><b>${scholars}</b><span>Gelehrte</span></div><div class="stat-card"><b>${DUAS.length}</b><span>Duʿāʾ</span></div></div></section>`}
 function dailyDua(){if(!DUAS.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return DUAS[Math.abs(day)%DUAS.length]}
 function renderDailyDua(){const d=dailyDua();if(!d)return"";return`<section class="daily-box" data-nav="dua" data-value="${esc(d.id)}"><div class="daily-label">Duʿāʾ des Tages</div><h3 class="daily-title">${esc(d.title)}</h3><div class="daily-text">${esc(d.de||d.occasion||"")}</div><div class="folder-meta"><span>${esc(d.cat)}</span><span>${esc(d.type)}</span></div></section>`}
@@ -1313,21 +1710,21 @@ function calendarEventsForYear(){const h=approxHijriParts();const today=new Date
 function formatGregDate(d){return new Intl.DateTimeFormat("de-DE",{day:"2-digit",month:"long",year:"numeric"}).format(d)}
 function renderMiniCalendar(){const events=calendarEventsForYear().slice(0,4);return`<section class="calendar-panel"><div class="calendar-title"><div><h3>Islamische Termine</h3><p>Automatisch fortlaufend berechnet. Endgültige Termine können je nach Mondsichtung lokal abweichen.</p></div></div><div class="event-list">${events.map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)} ${ev.hYear}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${esc(ev.note)}</div></article>`).join("")}</div></section>`}
 function renderCalendar(){const h=islamicCalendarNow();const events=calendarEventsForYear();return`${setHeader("Islamischer Kalender",`Heute: ${h.day}. ${h.month} ${h.year} · ${h.greg}. Die Termine werden automatisch für das laufende/kommende islamische Jahr berechnet.`, "Kalender")}<section class="calendar-panel"><div class="calendar-title"><div><h3>Wichtige islamische Termine</h3><p>Die Berechnung ist automatisch. Für Ramaḍān und ʿĪd bleibt lokale Mondsichtung maßgeblich.</p></div></div><div class="event-list">${events.map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)} ${ev.hYear}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div><div class="calendar-note">Hinweis: Der islamische Kalender ist mondbasiert. Je nach Land, Mondsichtung und offizieller Bekanntgabe kann ein Datum um einen Tag abweichen.</div></section>`}
-function renderHome(){const categoryCount=countBy("category").size;const scholarCount=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const latest=posts.slice(0,4);return`${setHeader("Startseite","Alles ist in Ordnern aufgebaut. Öffne Kategorien, Gelehrte, Bücher, Duʿāʾ oder den Kalender jeweils als eigene Seite mit Zurückbutton.","App-Übersicht")}${renderOfflineBox()}${renderOverview()}${renderRecommendedPost()}${renderDailyDua()}${renderDirectPickPanel()}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${renderPinnedBox()}${renderSeriesBox()}<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span></div><div class="latest-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section><section class="section-block"><div class="section-head"><h3>Ordner</h3><span>strukturiert öffnen</span></div><div class="folder-grid"><article class="folder-card" data-nav="duas"><div class="folder-icon">${iconMarkup("duas","Duʿāʾ")}</div><h3>Duʿāʾ</h3><p>Sammlung aus Qurʾān und Sunnah mit Arabisch, Lautschrift, Deutsch und Quelle.</p><div class="folder-meta"><span>${DUAS.length} Duʿāʾ</span><span>${duaCatMap().size} Kategorien</span></div></article><article class="folder-card" data-nav="topics"><div class="folder-icon">${iconMarkup("topics","Kategorien")}</div><h3>Kategorien</h3><p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche.</p><div class="folder-meta"><span>${categoryCount} Bereiche</span></div></article><article class="folder-card" data-nav="scholars"><div class="folder-icon">${iconMarkup("scholars","Gelehrte")}</div><h3>Gelehrte</h3><p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p><div class="folder-meta"><span>${scholarCount} Namen</span></div></article><article class="folder-card" data-nav="books"><div class="folder-icon">${iconMarkup("books","Bücher")}</div><h3>Bücher</h3><p>Beiträge direkt nach verwendeten Werken und Quellen.</p><div class="folder-meta"><span>${bookCount} Werke</span></div></article><article class="folder-card" data-nav="calendar"><div class="folder-icon"><span class="emoji-emblem">🗓️</span></div><h3>Islamischer Kalender</h3><p>Aktuelle islamische Daten und wichtige Termine automatisch fortlaufend.</p><div class="folder-meta"><span>Hijrī</span><span>Termine</span></div></article><article class="folder-card" data-nav="recent"><div class="folder-icon">${iconMarkup("recent","Alle neuesten")}</div><h3>Alle neuesten</h3><p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p><div class="folder-meta"><span>${posts.length} Beiträge</span></div></article><article class="folder-card" data-nav="saved"><div class="folder-icon">${iconMarkup("saved","Gespeichert")}</div><h3>Gespeichert</h3><p>Deine lokal gespeicherten Beiträge schnell wiederfinden.</p><div class="folder-meta"><span>${savedIds().length} Beiträge</span></div></article><article class="folder-card" data-nav="about"><div class="folder-icon">${iconMarkup("about","Über die App")}</div><h3>Über die App</h3><p>Maßstab, Quellenordnung und Aufbau der Seite.</p><div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div></article></div></section>`}
-function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<999);const other=entries.filter(([name])=>categoryRank(name)>=999);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Bidʿah, Adab, Akhlaq, Ṣaḥābah, Tābiʿīn, Fiqh, Qurʾān & Tafsīr, Hadith und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
-function renderScholars(){const items=[...countBy("scholar").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Gelehrte","Wähle einen Namen. Danach öffnet sich eine eigene Ansicht mit den Beiträgen dieser Person.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>listCard(name,count+" Beiträge","scholar",name,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
-function renderBooks(){const items=[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Bücher","Wähle ein Werk. Unter jedem Buch steht der zugehörige Gelehrte/Autor, damit die Quelle klar erkennbar ist.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>bookCard(name,count)).join(""):`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
-function renderFiltered(type,value){const filtered=posts.filter(post=>String(post[type]||"")===String(value));const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};return`${setHeader(value,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${filtered.length?filtered.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}</section>`}
-function renderRecent(){const latest=posts.slice(0,60);return`${setHeader("Neueste Beiträge","Die neuesten Beiträge aus content/posts, sortiert nach Datum.","Aktuell")}<section class="post-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</section>`}
+function renderHome(){const categoryCount=countBy("category").size;const scholarCount=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const latest=posts.slice(0,4);return`${setHeader("Startseite","Alles ist in Ordnern aufgebaut. Öffne Kategorien, Gelehrte, Bücher, Duʿāʾ oder den Kalender jeweils als eigene Seite mit Zurückbutton.","App-Übersicht")}${renderOfflineBox()}${renderOverview()}${renderPrayerQuickCard()}${renderRecommendedPost()}${renderDailyDua()}${renderDirectPickPanel()}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${renderPinnedBox()}${renderSeriesBox()}<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span></div><div class="latest-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section><section class="section-block"><div class="section-head"><h3>Ordner</h3><span>strukturiert öffnen</span></div><div class="folder-grid"><article class="folder-card" data-nav="prayer"><div class="folder-icon"><span class="emoji-emblem">🕌</span></div><h3>Gebetszeiten</h3><p>Gebetszeiten, nächstes Gebet, Countdown, Erinnerungen und Qibla-Kompass.</p><div class="folder-meta"><span>Fajr 12°</span><span>Maghrib Sonnenuntergang</span></div></article><article class="folder-card" data-nav="duas"><div class="folder-icon">${iconMarkup("duas","Duʿāʾ")}</div><h3>Duʿāʾ</h3><p>Sammlung aus Qurʾān und Sunnah mit Arabisch, Lautschrift, Deutsch und Quelle.</p><div class="folder-meta"><span>${DUAS.length} Duʿāʾ</span><span>${duaCatMap().size} Kategorien</span></div></article><article class="folder-card" data-nav="topics"><div class="folder-icon">${iconMarkup("topics","Kategorien")}</div><h3>Kategorien</h3><p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche.</p><div class="folder-meta"><span>${categoryCount} Bereiche</span></div></article><article class="folder-card" data-nav="scholars"><div class="folder-icon">${iconMarkup("scholars","Gelehrte")}</div><h3>Gelehrte</h3><p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p><div class="folder-meta"><span>${scholarCount} Namen</span></div></article><article class="folder-card" data-nav="books"><div class="folder-icon">${iconMarkup("books","Bücher")}</div><h3>Bücher</h3><p>Beiträge direkt nach verwendeten Werken und Quellen.</p><div class="folder-meta"><span>${bookCount} Werke</span></div></article><article class="folder-card" data-nav="calendar"><div class="folder-icon"><span class="emoji-emblem">🗓️</span></div><h3>Islamischer Kalender</h3><p>Aktuelle islamische Daten und wichtige Termine automatisch fortlaufend.</p><div class="folder-meta"><span>Hijrī</span><span>Termine</span></div></article><article class="folder-card" data-nav="recent"><div class="folder-icon">${iconMarkup("recent","Alle neuesten")}</div><h3>Alle neuesten</h3><p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p><div class="folder-meta"><span>${posts.length} Beiträge</span></div></article><article class="folder-card" data-nav="saved"><div class="folder-icon">${iconMarkup("saved","Gespeichert")}</div><h3>Gespeichert</h3><p>Deine lokal gespeicherten Beiträge schnell wiederfinden.</p><div class="folder-meta"><span>${savedIds().length} Beiträge</span></div></article><article class="folder-card" data-nav="about"><div class="folder-icon">${iconMarkup("about","Über die App")}</div><h3>Über die App</h3><p>Maßstab, Quellenordnung und Aufbau der Seite.</p><div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div></article></div></section>`}
+function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<999);const other=entries.filter(([name])=>categoryRank(name)>=999);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Bidʿah, Adab, Akhlaq, Ṣaḥābah, Tābiʿīn, Fiqh, Qurʾān & Tafsīr, Hadith und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Bidʿah, Adab, Akhlaq, Ṣaḥābah, Tābiʿīn, Fiqh, Qurʾān & Tafsīr, Hadith und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
+function renderScholars(){const items=[...countBy("scholar").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));const url=routeUrl("scholars");const desc="Gelehrten-Übersicht auf DAR AL TAWḤID mit Beiträgen nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.";return`${setHeader("Gelehrte","Wähle einen Namen. Danach öffnet sich eine eigene Ansicht mit den Beiträgen dieser Person.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>listCard(name,count+" Beiträge","scholar",name,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
+function renderBooks(){const items=[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));const url=routeUrl("books");const desc="Bücher-Übersicht auf DAR AL TAWḤID mit Beiträgen direkt nach verwendeten Werken und Quellen.";return`${setHeader("Bücher","Wähle ein Werk. Unter jedem Buch steht der zugehörige Gelehrte/Autor, damit die Quelle klar erkennbar ist.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>bookCard(name,count)).join(""):`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
+function renderFiltered(type,value){const filtered=posts.filter(post=>String(post[type]||"")===String(value));const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",value);const desc=`${filtered.length} Beiträge im Bereich ${value} auf DAR AL TAWḤID.`;return`${setHeader(value,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${filtered.length?filtered.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}</section>`}
+function renderRecent(){const latest=posts.slice(0,60);const url=routeUrl("recent");const desc="Neueste Beiträge aus DAR AL TAWḤID, sortiert nach Datum.";return`${setHeader("Neueste Beiträge","Die neuesten Beiträge aus content/posts, sortiert nach Datum.","Aktuell")}<section class="post-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</section>`}
 function renderSaved(){const ids=savedIds();const saved=ids.map(id=>posts.find(p=>String(p.id)===String(id))).filter(Boolean);return`${setHeader("Gespeichert","Hier findest du deine lokal gespeicherten Beiträge auf diesem Gerät.","♡ Sammlung")}<section class="post-grid">${saved.length?saved.map(postCard).join(""):`<div class="empty">Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.</div>`}</section>`}
 function renderAbout(){return`${setHeader("Über diese App","DAR AL TAWḤID soll eine geordnete Wissens-App sein – nicht eine unübersichtliche Sammelseite.","Maßstab")}<section class="about-grid"><article class="info-card"><h3>Qurʾān zuerst</h3><p>Der Qurʾān ist der oberste Maßstab für Glauben, Wahrheit und Rechtleitung.</p></article><article class="info-card"><h3>Dann Sunnah</h3><p>Die authentische Sunnah erklärt, bestätigt und verdeutlicht die Offenbarung.</p></article><article class="info-card"><h3>Dann Āthār</h3><p>Aussagen der Ṣaḥābah, Tābiʿīn und frühen Imāme werden besonders berücksichtigt.</p></article><article class="info-card"><h3>Duʿāʾ-Sammlung</h3><p>Die Duʿāʾ-Sammlung ist nützlich geordnet, aber nicht als absolut vollständig bezeichnet.</p></article></section>${renderAppSaveBox()}`}
-function renderDuas(){const items=[...duaCatMap().entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Duʿāʾ aus Qurʾān und Sunnah",`${DUAS.length} bekannte Duʿāʾ mit Titel, Anlass, Arabisch, Lautschrift, Deutsch und Quelle.`, "Duʿāʾ-Ordner")}<section class="main-search"><input id="duaSearchInput" class="search" type="search" placeholder="Duʿāʾ suchen nach Anlass, Kategorie, Arabisch, Deutsch oder Quelle…"></section><section id="duaSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="duaSearchCount">0 Treffer</span></div><div id="duaSearchResults" class="post-grid"></div></section><section class="grid-list">${items.map(([name,count])=>listCard(name,count+" Duʿāʾ","dua-cat",name,"🤲")).join("")}</section>`}
+function renderDuas(){const items=[...duaCatMap().entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));const url=routeUrl("duas");const desc=`${DUAS.length} bekannte Duʿāʾ aus Qurʾān und Sunnah mit Titel, Anlass, Arabisch, Lautschrift, Deutsch und Quelle.`;return`${setHeader("Duʿāʾ aus Qurʾān und Sunnah",`${DUAS.length} bekannte Duʿāʾ mit Titel, Anlass, Arabisch, Lautschrift, Deutsch und Quelle.`, "Duʿāʾ-Ordner")}<section class="main-search"><input id="duaSearchInput" class="search" type="search" placeholder="Duʿāʾ suchen nach Anlass, Kategorie, Arabisch, Deutsch oder Quelle…"></section><section id="duaSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="duaSearchCount">0 Treffer</span></div><div id="duaSearchResults" class="post-grid"></div></section><section class="grid-list">${items.map(([name,count])=>listCard(name,count+" Duʿāʾ","dua-cat",name,"🤲")).join("")}</section>`}
 function duaCard(d){return`<article class="dua-card" data-nav="dua" data-value="${esc(d.id)}"><div class="folder-icon">${iconMarkup("dua-cat",d.cat)}</div><h3>${esc(d.title)}</h3><p>${esc(d.occasion)}</p><div class="folder-meta"><span>${esc(d.type)}</span><span>${esc(d.cat)}</span></div><div class="source-preview">${esc(d.src)}</div></article>`}
-function renderDuaCat(cat){const items=DUAS.filter(d=>d.cat===cat);return`${setHeader(cat,`${items.length} Duʿāʾ in dieser Kategorie.`, "Duʿāʾ-Kategorie")}<section class="post-grid">${items.map(duaCard).join("")}</section>`}
+function renderDuaCat(cat){const items=DUAS.filter(d=>d.cat===cat);const url=routeUrl("dua-cat",cat);const desc=`${items.length} Duʿāʾ in der Kategorie ${cat} auf DAR AL TAWḤID.`;return`${setHeader(cat,`${items.length} Duʿāʾ in dieser Kategorie.`, "Duʿāʾ-Kategorie")}<section class="post-grid">${items.map(duaCard).join("")}</section>`}
 function renderDua(id){
   const d=DUAS.find(x=>x.id===id);
   if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;
-  return `<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="article-actions"><button id="shareDuaBtn" class="action-btn" type="button">Duʿāʾ teilen</button><button id="copyDuaBtn" class="action-btn" type="button">Duʿāʾ kopieren</button></div><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div></article>`;
+  return `<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="article-actions"><button id="shareDuaBtn" class="action-btn" type="button">Duʿāʾ teilen</button><button id="copyDuaBtn" class="action-btn" type="button">Duʿāʾ kopieren</button></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div></article>`;
 }
 
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
@@ -1342,6 +1739,16 @@ function buildShareText(post){
   const source=stripMd(post&&post.source?post.source:"").trim();
   return `${title}\n\n${body}${source?`\n\n${source}`:""}\n\n🔗 Beitrag öffnen:\n${url}\n\nDAR AL TAWḤID`;
 }
+
+function buildAreaShareText(title,description,url){return `${title}\n\n${description||""}\n\n🔗 Öffnen:\n${url}\n\nDAR AL TAWḤID`}
+function buildDuaShareText(d){const url=duaUrl(d);return `${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}\n\n🔗 Duʿāʾ öffnen:\n${url}\n\nDAR AL TAWḤID`}
+function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText="Beim Teilen wird der Text mit Quelle und Link übernommen."){
+  const shareText=encodeURIComponent(text||"");
+  const shareTitle=encodeURIComponent(title||"DAR AL TAWḤID");
+  const shareUrl=encodeURIComponent(url||location.href);
+  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button></div><div class="share-help">${esc(helpText)}</div></section>`;
+}
+
 function renderSourceStrong(post){
   const links=(post.links||[]).map(link=>{
     const label=link.label||"Quelle";
@@ -1362,10 +1769,10 @@ function renderPostNavigation(post){
 }
 function shareLinksForPost(post){
   const url=postUrl(post);
-  const shareTextRaw=buildShareText(post);
-  const shareText=encodeURIComponent(shareTextRaw);
-  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">Beitrag weitergeben</div><div class="share-row share-row-v11"><button id="nativeShareBtn" class="share-btn native" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${encodeURIComponent(url)}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button id="instagramShareBtn" class="share-btn ig" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareV11" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareV11)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><button id="copyFullPostBtn" class="share-btn link" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>Beitrag kopieren</span></button></div><div class="share-help">Beim Teilen wird die komplette Aussage mit Quelle und dem Link zur Beitragsseite übernommen.</div></section>`;
+  const text=buildShareText(post);
+  return sharePanel("Beitrag weitergeben",post.title,text,url,"Beitrag kopieren","Beim Teilen wird die komplette Aussage mit Quelle und dem Link zur Beitragsseite übernommen.");
 }
+
 
 function renderPost(id){
   const post=posts.find(p=>String(p.id)===String(id));
@@ -1374,12 +1781,13 @@ function renderPost(id){
   return `<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderSourceStatus(post)}<section class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
 }
 function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||post.category===cat)&&(!scholar||post.scholar===scholar)&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");crumb.textContent="Startseite";return}backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={topics:"Startseite / Kategorien",scholars:"Startseite / Gelehrte",books:"Startseite / Bücher",recent:"Startseite / Neueste Beiträge",saved:"Startseite / Gespeichert",about:"Startseite / Über diese App",duas:"Startseite / Duʿāʾ",calendar:"Startseite / Islamischer Kalender",series:"Startseite / Serie",topic:`Startseite / Kategorien / ${route.value}`,scholar:`Startseite / Gelehrte / ${route.value}`,book:`Startseite / Bücher / ${route.value}`,"dua-cat":`Startseite / Duʿāʾ / ${route.value}`,dua:"Startseite / Duʿāʾ / Eintrag",post:"Startseite / Beitrag"};crumb.textContent=labels[route.view]||"Startseite"}
+function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");crumb.textContent="Startseite";return}backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={topics:"Startseite / Kategorien",scholars:"Startseite / Gelehrte",books:"Startseite / Bücher",recent:"Startseite / Neueste Beiträge",saved:"Startseite / Gespeichert",about:"Startseite / Über diese App",duas:"Startseite / Duʿāʾ",calendar:"Startseite / Islamischer Kalender",prayer:"Startseite / Gebetszeiten",series:"Startseite / Serie",topic:`Startseite / Kategorien / ${route.value}`,scholar:`Startseite / Gelehrte / ${route.value}`,book:`Startseite / Bücher / ${route.value}`,"dua-cat":`Startseite / Duʿāʾ / ${route.value}`,dua:"Startseite / Duʿāʾ / Eintrag",post:"Startseite / Beitrag"};crumb.textContent=labels[route.view]||"Startseite"}
 function render(){
   try{
     currentRoute=readRoute();
     updateChrome(currentRoute);
     updateHijriHeaderDate();
+    updateHeaderPrayerStatus();
     let html="";
     if(currentRoute.view==="home")html=renderHome();
     else if(currentRoute.view==="topics")html=renderTopics();
@@ -1389,6 +1797,7 @@ function render(){
     else if(currentRoute.view==="scholar")html=renderFiltered("scholar",currentRoute.value);
     else if(currentRoute.view==="book")html=renderFiltered("book",currentRoute.value);
     else if(currentRoute.view==="calendar")html=renderCalendar();
+    else if(currentRoute.view==="prayer")html=renderPrayerTimes();
     else if(currentRoute.view==="series")html=renderSeries(currentRoute.value);
     else if(currentRoute.view==="recent")html=renderRecent();
     else if(currentRoute.view==="saved")html=renderSaved();
@@ -1406,8 +1815,16 @@ function render(){
     $("appView").innerHTML=`${setHeader("Ansicht konnte nicht geöffnet werden","Ein JavaScript-Fehler wurde abgefangen. Bitte Startseite öffnen oder Cache löschen.","Fehler")}<div class="error">Fehlerdetails: ${esc(error&&error.message?error.message:error)}</div>`;
   }
 }
+function readShareData(el,key){try{return decodeURIComponent(el.getAttribute(key)||"")}catch(e){return el.getAttribute(key)||""}}
+function bindGenericShareButtons(){
+  document.querySelectorAll("[data-share-native]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const title=readShareData(btn,"data-share-title")||"DAR AL TAWḤID";const text=readShareData(btn,"data-share-text");const url=readShareData(btn,"data-share-url");if(navigator.share){try{await navigator.share({title,text,url});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Text wurde kopiert, weil direktes Teilen hier nicht unterstützt wird.")}catch(e){prompt("Kopiere den Text:",text)}}});
+  document.querySelectorAll("[data-share-instagram]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const text=readShareData(btn,"data-share-text");try{await navigator.clipboard.writeText(text)}catch(e){}window.open("https://www.instagram.com/","_blank","noopener");setTimeout(()=>alert("Text wurde kopiert. Öffne Instagram und füge ihn ein."),250)}});
+  document.querySelectorAll("[data-share-copy]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const text=readShareData(btn,"data-share-text");try{await navigator.clipboard.writeText(text);alert("Text wurde kopiert.")}catch(e){prompt("Kopiere den Text:",text)}}});
+}
 function bindEvents(){
   bindDirectPickPanel();
+  bindGenericShareButtons();
+  bindPrayerEvents();
   document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const collapsed=grid.classList.toggle("collapsed");btn.textContent=collapsed?"Alle anzeigen":"Zuklappen";}});
   document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=()=>{const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";navigate(view,value)}});
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
@@ -1430,7 +1847,7 @@ function bindEvents(){
 }
 $("backBtn").onclick=()=>{const parent=parentRoute(currentRoute);navigate(parent.view,parent.value||"")};const homeBtnEl=$("homeBtn");if(homeBtnEl)homeBtnEl.onclick=()=>navigate("home");
 window.addEventListener("hashchange",render);
-window.addEventListener("DOMContentLoaded",updateHijriHeaderDate);
+window.addEventListener("DOMContentLoaded",()=>{updateHijriHeaderDate();updateHeaderPrayerStatus();});
 window.addEventListener("load",async()=>{await loadPosts();if(!location.hash){location.hash="#home"}else{render()}});
 </script>
 <script>
