@@ -1029,6 +1029,85 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
   }
 }
 
+
+
+/* FARBE ZURÜCK V14: nur Farblook zurück auf dunkles Schwarz/Bronze-Gold; Button-Sortierung bleibt unverändert */
+:root{
+  --bg:#070706!important;
+  --bg2:#0d0c09!important;
+  --panel:#12100c!important;
+  --card:#14120e!important;
+  --gold:#c8a85b!important;
+  --gold2:#efd78e!important;
+  --bronze:#9b7a3c!important;
+  --cream:#f8efd4!important;
+  --text:#f6edd2!important;
+  --muted:#b8ad91!important;
+  --muted2:#8f856f!important;
+  --line:rgba(210,177,91,.30)!important;
+  --line2:rgba(210,177,91,.16)!important;
+}
+body{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),
+    radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),
+    linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%)!important;
+}
+body:before{
+  opacity:.055!important;
+  filter:none!important;
+}
+.top-shell{
+  border-color:var(--line)!important;
+  background:
+    linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5,.92)),
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.12),transparent 45%)!important;
+  box-shadow:var(--shadow)!important;
+}
+.view{
+  border-color:var(--line)!important;
+  background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92))!important;
+  box-shadow:var(--shadow)!important;
+}
+.folder-card,.post-card,.list-card,.info-card,.dua-card,.overview-panel,.direct-pick-panel,.search-pro-panel,.profile-box,.book-profile-box,.series-box,.pinned-box,.daily-box,.recommended-box,.source-strong,.statement,.dua-detail-box{
+  border-color:var(--line)!important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(239,215,142,.105),transparent 38%),
+    linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94))!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.25)!important;
+}
+.calendar-panel{
+  background:
+    radial-gradient(circle at 16% 0%,rgba(255,255,255,.20),transparent 36%),
+    radial-gradient(circle at 90% 10%,rgba(239,215,142,.20),transparent 38%),
+    linear-gradient(145deg,rgba(48,44,31,.98),rgba(18,17,13,.98))!important;
+}
+.event-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.115),rgba(239,215,142,.055))!important;
+}
+.social-link,.footer-social-link,.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,.footer-app-save,.share-btn{
+  background:rgba(239,215,142,.075)!important;
+  border-color:var(--line)!important;
+  color:var(--cream)!important;
+}
+.share-btn.tg{background:linear-gradient(145deg,rgba(42,171,238,.14),rgba(8,8,6,.86))!important;}
+.share-btn.wa{background:linear-gradient(145deg,rgba(37,211,102,.14),rgba(8,8,6,.86))!important;}
+.share-btn.ig{background:linear-gradient(145deg,rgba(214,41,118,.16),rgba(8,8,6,.90))!important;}
+.share-btn.link,.share-btn.native{background:linear-gradient(145deg,rgba(214,183,106,.14),rgba(8,8,6,.86))!important;}
+.badge,.folder-meta span,.status-chip,.search-match{
+  border-color:var(--line2)!important;
+  background:rgba(239,215,142,.055)!important;
+  color:var(--cream)!important;
+}
+.search,.direct-pick,.filter-select{
+  border-color:var(--line)!important;
+  background:#090907!important;
+  color:var(--cream)!important;
+}
+.footer{
+  background:transparent!important;
+  border-top:0!important;
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -1113,6 +1192,8 @@ async function loadPosts(){const cached=getJson(CACHE_KEY,[]);const api=`https:/
 function countBy(key){const map=new Map();posts.forEach(post=>{const value=post[key]||"Unbekannt";map.set(value,(map.get(value)||0)+1)});return map}
 function savedIds(){return getJson(SAVE_KEY,[])}function isSaved(id){return savedIds().includes(id)}function toggleSaved(id){let list=savedIds();if(list.includes(id)){list=list.filter(x=>x!==id)}else{list.unshift(id)}setJson(SAVE_KEY,list.slice(0,100))}
 function postUrl(post){const url=new URL(location.origin+location.pathname);url.hash=`post/${encodeURIComponent(post.id)}`;return url.toString()}
+function routeUrl(view,value=""){const url=new URL(location.origin+location.pathname);url.hash=value?`${view}/${encodeURIComponent(value)}`:`${view}`;return url.toString()}
+function duaUrl(d){return routeUrl("dua",d.id)}
 function routeToHash(view,value=""){if(value)return`#${view}/${encodeURIComponent(value)}`;return`#${view}`}
 function navigate(view,value=""){location.hash=routeToHash(view,value)}
 function readRoute(){const hash=decodeURIComponent((location.hash||"#home").replace(/^#/,""));const parts=hash.split("/");return{view:parts[0]||"home",value:parts.slice(1).join("/")||""}}
@@ -1198,7 +1279,9 @@ function renderSeries(id){
   const s=SERIES_DEFS.find(x=>x.id===id);
   if(!s)return `${setHeader("Serie nicht gefunden","Diese Serie konnte nicht geladen werden.","Serien")}<div class="empty">Keine Serie gefunden.</div>`;
   const items=postsForSeries(id);
-  return `${setHeader(s.title,`${items.length} Beiträge in dieser Serie.`, "Serie")}<section class="post-grid">${items.length?items.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge in dieser Serie.</div>`}</section>`;
+  const url=routeUrl("series",id);
+  const desc=`${items.length} Beiträge in der Serie ${s.title} auf DAR AL TAWḤID.`;
+  return `${setHeader(s.title,`${items.length} Beiträge in dieser Serie.`, "Serie")}${sharePanel("Serie weitergeben",s.title,buildAreaShareText(s.title,desc,url),url,"Serie kopieren","Diese Serie kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<section class="post-grid">${items.length?items.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge in dieser Serie.</div>`}</section>`;
 }
 const PINNED_DEFS=[
   {title:"Tawḥīd",keys:["tawḥīd","tauhid"]},{title:"Shirk",keys:["shirk","shirk"]},{title:"Sunnah",keys:["sunnah"]},{title:"Qurʾān",keys:["qurʾān","quran"]},{title:"Bidʿah",keys:["bidʿah","bidah"]},{title:"Quellenmethodik",keys:["isnād","isnad","quelle","überlieferung"]},{title:"Takfīr-Regeln",keys:["takfīr","takfir"]}
@@ -1235,20 +1318,20 @@ function formatGregDate(d){return new Intl.DateTimeFormat("de-DE",{day:"2-digit"
 function renderMiniCalendar(){const events=calendarEventsForYear().slice(0,4);return`<section class="calendar-panel"><div class="calendar-title"><div><h3>Islamische Termine</h3><p>Automatisch fortlaufend berechnet. Endgültige Termine können je nach Mondsichtung lokal abweichen.</p></div></div><div class="event-list">${events.map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)} ${ev.hYear}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${esc(ev.note)}</div></article>`).join("")}</div></section>`}
 function renderCalendar(){const h=islamicCalendarNow();const events=calendarEventsForYear();return`${setHeader("Islamischer Kalender",`Heute: ${h.day}. ${h.month} ${h.year} · ${h.greg}. Die Termine werden automatisch für das laufende/kommende islamische Jahr berechnet.`, "Kalender")}<section class="calendar-panel"><div class="calendar-title"><div><h3>Wichtige islamische Termine</h3><p>Die Berechnung ist automatisch. Für Ramaḍān und ʿĪd bleibt lokale Mondsichtung maßgeblich.</p></div></div><div class="event-list">${events.map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)} ${ev.hYear}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div><div class="calendar-note">Hinweis: Der islamische Kalender ist mondbasiert. Je nach Land, Mondsichtung und offizieller Bekanntgabe kann ein Datum um einen Tag abweichen.</div></section>`}
 function renderHome(){const categoryCount=countBy("category").size;const scholarCount=[...countBy("scholar").keys()].filter(x=>x&&x!=="Unbekannt").length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const latest=posts.slice(0,4);return`${setHeader("Startseite","Alles ist in Ordnern aufgebaut. Öffne Kategorien, Gelehrte, Bücher, Duʿāʾ oder den Kalender jeweils als eigene Seite mit Zurückbutton.","App-Übersicht")}${renderOfflineBox()}${renderOverview()}${renderRecommendedPost()}${renderDailyDua()}${renderDirectPickPanel()}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${renderPinnedBox()}${renderSeriesBox()}<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span></div><div class="latest-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section><section class="section-block"><div class="section-head"><h3>Ordner</h3><span>strukturiert öffnen</span></div><div class="folder-grid"><article class="folder-card" data-nav="duas"><div class="folder-icon">${iconMarkup("duas","Duʿāʾ")}</div><h3>Duʿāʾ</h3><p>Sammlung aus Qurʾān und Sunnah mit Arabisch, Lautschrift, Deutsch und Quelle.</p><div class="folder-meta"><span>${DUAS.length} Duʿāʾ</span><span>${duaCatMap().size} Kategorien</span></div></article><article class="folder-card" data-nav="topics"><div class="folder-icon">${iconMarkup("topics","Kategorien")}</div><h3>Kategorien</h3><p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche.</p><div class="folder-meta"><span>${categoryCount} Bereiche</span></div></article><article class="folder-card" data-nav="scholars"><div class="folder-icon">${iconMarkup("scholars","Gelehrte")}</div><h3>Gelehrte</h3><p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p><div class="folder-meta"><span>${scholarCount} Namen</span></div></article><article class="folder-card" data-nav="books"><div class="folder-icon">${iconMarkup("books","Bücher")}</div><h3>Bücher</h3><p>Beiträge direkt nach verwendeten Werken und Quellen.</p><div class="folder-meta"><span>${bookCount} Werke</span></div></article><article class="folder-card" data-nav="calendar"><div class="folder-icon"><span class="emoji-emblem">🗓️</span></div><h3>Islamischer Kalender</h3><p>Aktuelle islamische Daten und wichtige Termine automatisch fortlaufend.</p><div class="folder-meta"><span>Hijrī</span><span>Termine</span></div></article><article class="folder-card" data-nav="recent"><div class="folder-icon">${iconMarkup("recent","Alle neuesten")}</div><h3>Alle neuesten</h3><p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p><div class="folder-meta"><span>${posts.length} Beiträge</span></div></article><article class="folder-card" data-nav="saved"><div class="folder-icon">${iconMarkup("saved","Gespeichert")}</div><h3>Gespeichert</h3><p>Deine lokal gespeicherten Beiträge schnell wiederfinden.</p><div class="folder-meta"><span>${savedIds().length} Beiträge</span></div></article><article class="folder-card" data-nav="about"><div class="folder-icon">${iconMarkup("about","Über die App")}</div><h3>Über die App</h3><p>Maßstab, Quellenordnung und Aufbau der Seite.</p><div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div></article></div></section>`}
-function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<999);const other=entries.filter(([name])=>categoryRank(name)>=999);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Bidʿah, Adab, Akhlaq, Ṣaḥābah, Tābiʿīn, Fiqh, Qurʾān & Tafsīr, Hadith und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
-function renderScholars(){const items=[...countBy("scholar").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Gelehrte","Wähle einen Namen. Danach öffnet sich eine eigene Ansicht mit den Beiträgen dieser Person.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>listCard(name,count+" Beiträge","scholar",name,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
-function renderBooks(){const items=[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Bücher","Wähle ein Werk. Unter jedem Buch steht der zugehörige Gelehrte/Autor, damit die Quelle klar erkennbar ist.","Ordner")}<section class="grid-list">${items.length?items.map(([name,count])=>bookCard(name,count)).join(""):`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
-function renderFiltered(type,value){const filtered=posts.filter(post=>String(post[type]||"")===String(value));const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};return`${setHeader(value,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${filtered.length?filtered.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}</section>`}
-function renderRecent(){const latest=posts.slice(0,60);return`${setHeader("Neueste Beiträge","Die neuesten Beiträge aus content/posts, sortiert nach Datum.","Aktuell")}<section class="post-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</section>`}
+function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<999);const other=entries.filter(([name])=>categoryRank(name)>=999);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Bidʿah, Adab, Akhlaq, Ṣaḥābah, Tābiʿīn, Fiqh, Qurʾān & Tafsīr, Hadith und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Bidʿah, Adab, Akhlaq, Ṣaḥābah, Tābiʿīn, Fiqh, Qurʾān & Tafsīr, Hadith und Widerlegungen.","Ordner")}${sharePanel("Bereich weitergeben","Kategorien",buildAreaShareText("Kategorien",desc,url),url,"Bereich kopieren","Dieser Bereich kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
+function renderScholars(){const items=[...countBy("scholar").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));const url=routeUrl("scholars");const desc="Gelehrten-Übersicht auf DAR AL TAWḤID mit Beiträgen nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.";return`${setHeader("Gelehrte","Wähle einen Namen. Danach öffnet sich eine eigene Ansicht mit den Beiträgen dieser Person.","Ordner")}${sharePanel("Bereich weitergeben","Gelehrte",buildAreaShareText("Gelehrte",desc,url),url,"Bereich kopieren","Dieser Bereich kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<section class="grid-list">${items.length?items.map(([name,count])=>listCard(name,count+" Beiträge","scholar",name,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
+function renderBooks(){const items=[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").sort((a,b)=>a[0].localeCompare(b[0],"de"));const url=routeUrl("books");const desc="Bücher-Übersicht auf DAR AL TAWḤID mit Beiträgen direkt nach verwendeten Werken und Quellen.";return`${setHeader("Bücher","Wähle ein Werk. Unter jedem Buch steht der zugehörige Gelehrte/Autor, damit die Quelle klar erkennbar ist.","Ordner")}${sharePanel("Bereich weitergeben","Bücher",buildAreaShareText("Bücher",desc,url),url,"Bereich kopieren","Dieser Bereich kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<section class="grid-list">${items.length?items.map(([name,count])=>bookCard(name,count)).join(""):`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
+function renderFiltered(type,value){const filtered=posts.filter(post=>String(post[type]||"")===String(value));const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",value);const desc=`${filtered.length} Beiträge im Bereich ${value} auf DAR AL TAWḤID.`;return`${setHeader(value,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${sharePanel("Bereich weitergeben",value,buildAreaShareText(value,desc,url),url,"Bereich kopieren","Dieser Themenbereich kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${filtered.length?filtered.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}</section>`}
+function renderRecent(){const latest=posts.slice(0,60);const url=routeUrl("recent");const desc="Neueste Beiträge aus DAR AL TAWḤID, sortiert nach Datum.";return`${setHeader("Neueste Beiträge","Die neuesten Beiträge aus content/posts, sortiert nach Datum.","Aktuell")}${sharePanel("Bereich weitergeben","Neueste Beiträge",buildAreaShareText("Neueste Beiträge",desc,url),url,"Bereich kopieren","Dieser Bereich kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<section class="post-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</section>`}
 function renderSaved(){const ids=savedIds();const saved=ids.map(id=>posts.find(p=>String(p.id)===String(id))).filter(Boolean);return`${setHeader("Gespeichert","Hier findest du deine lokal gespeicherten Beiträge auf diesem Gerät.","♡ Sammlung")}<section class="post-grid">${saved.length?saved.map(postCard).join(""):`<div class="empty">Noch keine Beiträge gespeichert. Öffne einen Beitrag und tippe auf „♡ Speichern“.</div>`}</section>`}
 function renderAbout(){return`${setHeader("Über diese App","DAR AL TAWḤID soll eine geordnete Wissens-App sein – nicht eine unübersichtliche Sammelseite.","Maßstab")}<section class="about-grid"><article class="info-card"><h3>Qurʾān zuerst</h3><p>Der Qurʾān ist der oberste Maßstab für Glauben, Wahrheit und Rechtleitung.</p></article><article class="info-card"><h3>Dann Sunnah</h3><p>Die authentische Sunnah erklärt, bestätigt und verdeutlicht die Offenbarung.</p></article><article class="info-card"><h3>Dann Āthār</h3><p>Aussagen der Ṣaḥābah, Tābiʿīn und frühen Imāme werden besonders berücksichtigt.</p></article><article class="info-card"><h3>Duʿāʾ-Sammlung</h3><p>Die Duʿāʾ-Sammlung ist nützlich geordnet, aber nicht als absolut vollständig bezeichnet.</p></article></section>${renderAppSaveBox()}`}
-function renderDuas(){const items=[...duaCatMap().entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));return`${setHeader("Duʿāʾ aus Qurʾān und Sunnah",`${DUAS.length} bekannte Duʿāʾ mit Titel, Anlass, Arabisch, Lautschrift, Deutsch und Quelle.`, "Duʿāʾ-Ordner")}<section class="main-search"><input id="duaSearchInput" class="search" type="search" placeholder="Duʿāʾ suchen nach Anlass, Kategorie, Arabisch, Deutsch oder Quelle…"></section><section id="duaSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="duaSearchCount">0 Treffer</span></div><div id="duaSearchResults" class="post-grid"></div></section><section class="grid-list">${items.map(([name,count])=>listCard(name,count+" Duʿāʾ","dua-cat",name,"🤲")).join("")}</section>`}
+function renderDuas(){const items=[...duaCatMap().entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));const url=routeUrl("duas");const desc=`${DUAS.length} bekannte Duʿāʾ aus Qurʾān und Sunnah mit Titel, Anlass, Arabisch, Lautschrift, Deutsch und Quelle.`;return`${setHeader("Duʿāʾ aus Qurʾān und Sunnah",`${DUAS.length} bekannte Duʿāʾ mit Titel, Anlass, Arabisch, Lautschrift, Deutsch und Quelle.`, "Duʿāʾ-Ordner")}${sharePanel("Duʿāʾ-Bereich weitergeben","Duʿāʾ aus Qurʾān und Sunnah",buildAreaShareText("Duʿāʾ aus Qurʾān und Sunnah",desc,url),url,"Bereich kopieren","Dieser Duʿāʾ-Bereich kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<section class="main-search"><input id="duaSearchInput" class="search" type="search" placeholder="Duʿāʾ suchen nach Anlass, Kategorie, Arabisch, Deutsch oder Quelle…"></section><section id="duaSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="duaSearchCount">0 Treffer</span></div><div id="duaSearchResults" class="post-grid"></div></section><section class="grid-list">${items.map(([name,count])=>listCard(name,count+" Duʿāʾ","dua-cat",name,"🤲")).join("")}</section>`}
 function duaCard(d){return`<article class="dua-card" data-nav="dua" data-value="${esc(d.id)}"><div class="folder-icon">${iconMarkup("dua-cat",d.cat)}</div><h3>${esc(d.title)}</h3><p>${esc(d.occasion)}</p><div class="folder-meta"><span>${esc(d.type)}</span><span>${esc(d.cat)}</span></div><div class="source-preview">${esc(d.src)}</div></article>`}
-function renderDuaCat(cat){const items=DUAS.filter(d=>d.cat===cat);return`${setHeader(cat,`${items.length} Duʿāʾ in dieser Kategorie.`, "Duʿāʾ-Kategorie")}<section class="post-grid">${items.map(duaCard).join("")}</section>`}
+function renderDuaCat(cat){const items=DUAS.filter(d=>d.cat===cat);const url=routeUrl("dua-cat",cat);const desc=`${items.length} Duʿāʾ in der Kategorie ${cat} auf DAR AL TAWḤID.`;return`${setHeader(cat,`${items.length} Duʿāʾ in dieser Kategorie.`, "Duʿāʾ-Kategorie")}${sharePanel("Duʿāʾ-Kategorie weitergeben",cat,buildAreaShareText(cat,desc,url),url,"Kategorie kopieren","Diese Duʿāʾ-Kategorie kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<section class="post-grid">${items.map(duaCard).join("")}</section>`}
 function renderDua(id){
   const d=DUAS.find(x=>x.id===id);
   if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;
-  return `<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="article-actions"><button id="shareDuaBtn" class="action-btn" type="button">Duʿāʾ teilen</button><button id="copyDuaBtn" class="action-btn" type="button">Duʿāʾ kopieren</button></div><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div></article>`;
+  return `<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="article-actions"><button id="shareDuaBtn" class="action-btn" type="button">Duʿāʾ teilen</button><button id="copyDuaBtn" class="action-btn" type="button">Duʿāʾ kopieren</button></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div></article>`;
 }
 
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
@@ -1262,7 +1345,16 @@ function buildShareText(post){
   const body=stripMd(post&&post.statement?post.statement:"").replace(/\n{3,}/g,"\n\n").trim();
   const source=stripMd(post&&post.source?post.source:"").trim();
   return `${title}\n\n${body}${source?`\n\n${source}`:""}\n\n🔗 Beitrag öffnen:\n${url}\n\nDAR AL TAWḤID`;
+
+function buildAreaShareText(title,description,url){return `${title}\n\n${description||""}\n\n🔗 Öffnen:\n${url}\n\nDAR AL TAWḤID`}
+function buildDuaShareText(d){const url=duaUrl(d);return `${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}\n\n🔗 Duʿāʾ öffnen:\n${url}\n\nDAR AL TAWḤID`}
+function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText="Beim Teilen wird der Text mit Quelle und Link übernommen."){
+  const shareText=encodeURIComponent(text||"");
+  const shareTitle=encodeURIComponent(title||"DAR AL TAWḤID");
+  const shareUrl=encodeURIComponent(url||location.href);
+  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button></div><div class="share-help">${esc(helpText)}</div></section>`;
 }
+
 function renderSourceStrong(post){
   const links=(post.links||[]).map(link=>{
     const label=link.label||"Quelle";
@@ -1283,10 +1375,10 @@ function renderPostNavigation(post){
 }
 function shareLinksForPost(post){
   const url=postUrl(post);
-  const shareTextRaw=buildShareText(post);
-  const shareText=encodeURIComponent(shareTextRaw);
-  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">Beitrag weitergeben</div><div class="share-row share-row-v11"><button id="nativeShareBtn" class="share-btn native" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${encodeURIComponent(url)}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button id="instagramShareBtn" class="share-btn ig" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareV11" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareV11)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><button id="copyFullPostBtn" class="share-btn link" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>Beitrag kopieren</span></button></div><div class="share-help">Beim Teilen wird die komplette Aussage mit Quelle und dem Link zur Beitragsseite übernommen.</div></section>`;
+  const text=buildShareText(post);
+  return sharePanel("Beitrag weitergeben",post.title,text,url,"Beitrag kopieren","Beim Teilen wird die komplette Aussage mit Quelle und dem Link zur Beitragsseite übernommen.");
 }
+
 
 function renderPost(id){
   const post=posts.find(p=>String(p.id)===String(id));
@@ -1327,8 +1419,15 @@ function render(){
     $("appView").innerHTML=`${setHeader("Ansicht konnte nicht geöffnet werden","Ein JavaScript-Fehler wurde abgefangen. Bitte Startseite öffnen oder Cache löschen.","Fehler")}<div class="error">Fehlerdetails: ${esc(error&&error.message?error.message:error)}</div>`;
   }
 }
+function readShareData(el,key){try{return decodeURIComponent(el.getAttribute(key)||"")}catch(e){return el.getAttribute(key)||""}}
+function bindGenericShareButtons(){
+  document.querySelectorAll("[data-share-native]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const title=readShareData(btn,"data-share-title")||"DAR AL TAWḤID";const text=readShareData(btn,"data-share-text");const url=readShareData(btn,"data-share-url");if(navigator.share){try{await navigator.share({title,text,url});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Text wurde kopiert, weil direktes Teilen hier nicht unterstützt wird.")}catch(e){prompt("Kopiere den Text:",text)}}});
+  document.querySelectorAll("[data-share-instagram]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const text=readShareData(btn,"data-share-text");try{await navigator.clipboard.writeText(text)}catch(e){}window.open("https://www.instagram.com/","_blank","noopener");setTimeout(()=>alert("Text wurde kopiert. Öffne Instagram und füge ihn ein."),250)}});
+  document.querySelectorAll("[data-share-copy]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const text=readShareData(btn,"data-share-text");try{await navigator.clipboard.writeText(text);alert("Text wurde kopiert.")}catch(e){prompt("Kopiere den Text:",text)}}});
+}
 function bindEvents(){
   bindDirectPickPanel();
+  bindGenericShareButtons();
   document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const collapsed=grid.classList.toggle("collapsed");btn.textContent=collapsed?"Alle anzeigen":"Zuklappen";}});
   document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=()=>{const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";navigate(view,value)}});
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");

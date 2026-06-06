@@ -1,39 +1,11 @@
-const CACHE_NAME="dar-al-tawhid-cache-source-under-statement-v12";
-const CORE_ASSETS=[
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/watermark-my-logo-full.png",
-  "/watermark-circle-soft.png",
-  "/app-icon-192.png",
-  "/app-icon-512.png"
-];
+/* DAR AL TAWḤID – combined Service Worker for OneSignal Web Push.
+   Important: keep this file in the ROOT of the site: /service-worker.js */
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
-self.addEventListener("install",event=>{
-  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE_ASSETS).catch(()=>null)));
+self.addEventListener("install", function(event){
   self.skipWaiting();
 });
 
-self.addEventListener("activate",event=>{
-  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))));
-  self.clients.claim();
-});
-
-self.addEventListener("fetch",event=>{
-  const req=event.request;
-  if(req.method!=="GET")return;
-  const isPostData=req.url.includes("api.github.com/repos/")||req.url.includes("raw.githubusercontent.com/");
-  if(isPostData){
-    event.respondWith(fetch(req,{cache:"no-store"}).then(res=>{
-      const copy=res.clone();
-      caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
-      return res;
-    }).catch(()=>caches.match(req)));
-    return;
-  }
-  event.respondWith(fetch(req).then(res=>{
-    const copy=res.clone();
-    caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
-    return res;
-  }).catch(()=>caches.match(req).then(cached=>cached||caches.match("/index.html"))));
+self.addEventListener("activate", function(event){
+  event.waitUntil(self.clients.claim());
 });
