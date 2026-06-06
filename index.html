@@ -524,7 +524,7 @@ function renderBookProfile(name){
 }
 const SERIES_DEFS=[
   {id:"hukm-muhakamah",title:"Hukm & Muḥākamah",keys:["hukm","muḥākamah","muhakamah","tahakum"]},
-  {id:"formen-schirk",title:"Formen des Schirk",keys:["schirk","shirk"]},
+  {id:"formen-shirk",title:"Formen des Shirk",keys:["shirk","shirk"]},
   {id:"ahl-al-bidah",title:"Ahl al-Bidʿah",keys:["bidʿah","bidah","ahl al-bid"]},
   {id:"sifat-allah",title:"Ṣifāt Allah",keys:["ṣifāt","sifat","ruyah","istiwa","allāh","allah"]},
   {id:"sahabah",title:"Aussagen der Ṣaḥābah",keys:["ṣaḥābah","sahaba","ʿumar","ibn masʿūd","ibn ʿabbās"]},
@@ -544,7 +544,7 @@ function renderSeries(id){
   return `${setHeader(s.title,`${items.length} Beiträge in dieser Serie.`, "Serie")}<section class="post-grid">${items.length?items.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge in dieser Serie.</div>`}</section>`;
 }
 const PINNED_DEFS=[
-  {title:"Tawḥīd",keys:["tawḥīd","tauhid"]},{title:"Schirk",keys:["schirk","shirk"]},{title:"Sunnah",keys:["sunnah"]},{title:"Qurʾān",keys:["qurʾān","quran"]},{title:"Bidʿah",keys:["bidʿah","bidah"]},{title:"Quellenmethodik",keys:["isnād","isnad","quelle","überlieferung"]},{title:"Takfīr-Regeln",keys:["takfīr","takfir"]}
+  {title:"Tawḥīd",keys:["tawḥīd","tauhid"]},{title:"Shirk",keys:["shirk","shirk"]},{title:"Sunnah",keys:["sunnah"]},{title:"Qurʾān",keys:["qurʾān","quran"]},{title:"Bidʿah",keys:["bidʿah","bidah"]},{title:"Quellenmethodik",keys:["isnād","isnad","quelle","überlieferung"]},{title:"Takfīr-Regeln",keys:["takfīr","takfir"]}
 ];
 function pinnedPostsFor(def){return posts.filter(p=>def.keys.some(k=>[p.title,p.category,p.topic,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(k.toLowerCase()))).slice(0,1)}
 function renderPinnedBox(){
