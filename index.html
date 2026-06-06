@@ -6,12 +6,12 @@
 
 <title>DAR AL TAWḤID</title>
 
-<link rel="icon" href="/favicon.ico?v=stable-share-icons-fix-v11" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=stable-share-icons-fix-v11">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=stable-share-icons-fix-v11">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=stable-share-icons-fix-v11">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=stable-share-icons-fix-v11">
-<link rel="manifest" href="/manifest.json?v=stable-share-icons-fix-v11">
+<link rel="icon" href="/favicon.ico?v=source-under-statement-v12" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=source-under-statement-v12">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=source-under-statement-v12">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=source-under-statement-v12">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=source-under-statement-v12">
+<link rel="manifest" href="/manifest.json?v=source-under-statement-v12">
 
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileImage" content="/app-icon-192.png?v=stable-share-icons-fix-v11">
+<meta name="msapplication-TileImage" content="/app-icon-192.png?v=source-under-statement-v12">
 <meta name="msapplication-TileColor" content="#080806">
 
 <style>
@@ -1048,7 +1048,7 @@ function renderPost(id){
   const post=posts.find(p=>String(p.id)===String(id));
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>`;
   const related=getRelatedPosts(post);
-  return `<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderSourceStatus(post)}<section class="statement">${formatText(post.statement||"")}</section><div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderSourceStrong(post)}${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
+  return `<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderSourceStatus(post)}<section class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
 }
 function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||post.category===cat)&&(!scholar||post.scholar===scholar)&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");crumb.textContent="Startseite";return}backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={topics:"Startseite / Kategorien",scholars:"Startseite / Gelehrte",books:"Startseite / Bücher",recent:"Startseite / Neueste Beiträge",saved:"Startseite / Gespeichert",about:"Startseite / Über diese App",duas:"Startseite / Duʿāʾ",calendar:"Startseite / Islamischer Kalender",series:"Startseite / Serie",topic:`Startseite / Kategorien / ${route.value}`,scholar:`Startseite / Gelehrte / ${route.value}`,book:`Startseite / Bücher / ${route.value}`,"dua-cat":`Startseite / Duʿāʾ / ${route.value}`,dua:"Startseite / Duʿāʾ / Eintrag",post:"Startseite / Beitrag"};crumb.textContent=labels[route.view]||"Startseite"}
