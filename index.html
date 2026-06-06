@@ -1861,6 +1861,76 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 window.addEventListener("online",function(){const box=document.getElementById("offlineBox");if(box)box.classList.remove("show")});
 window.addEventListener("offline",function(){const box=document.getElementById("offlineBox");if(box)box.classList.add("show")});
 </script>
+<script id="dar-qibla-126-safe-fix">
+(function(){
+  const QIBLA_DEG = 126;
+  const QIBLA_TEXT = "Qibla-Richtung: ca. 126° Südost. In shāʾ الله mit der normalen Handy-Kompass-App auf 126° ausrichten.";
 
+  window.qiblaBearing = function(){
+    return QIBLA_DEG;
+  };
+
+  window.startQiblaCompass = async function(){
+    const needle = document.getElementById("qiblaNeedle");
+    const status = document.getElementById("qiblaStatus");
+
+    if(window.qiblaOrientationHandler){
+      window.removeEventListener("deviceorientation", window.qiblaOrientationHandler, true);
+      window.qiblaOrientationHandler = null;
+    }
+
+    if(needle){
+      needle.style.transform = "translate(-50%,-88%) rotate(" + QIBLA_DEG + "deg)";
+    }
+
+    if(status){
+      status.textContent = QIBLA_TEXT;
+    }
+
+    alert(QIBLA_TEXT);
+  };
+
+  function applyQiblaText(){
+    document.querySelectorAll(".qibla-info").forEach(function(box){
+      const title = box.querySelector("h3");
+      const firstText = box.querySelector("p");
+      const status = box.querySelector("#qiblaStatus");
+      const button = box.querySelector("#startQiblaBtn");
+
+      if(title){
+        title.textContent = "Qibla-Richtung";
+      }
+
+      if(firstText){
+        firstText.innerHTML = 'Qibla-Richtung: ca. <strong>126° Südost</strong>. In shāʾ الله mit der normalen Handy-Kompass-App auf 126° ausrichten.';
+      }
+
+      if(status){
+        status.textContent = QIBLA_TEXT;
+      }
+
+      if(button){
+        button.textContent = "🧭 Qibla-Hinweis anzeigen";
+      }
+    });
+  }
+
+  const oldRender = window.render;
+  if(typeof oldRender === "function"){
+    window.render = function(){
+      oldRender.apply(this, arguments);
+      setTimeout(applyQiblaText, 0);
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    setTimeout(applyQiblaText, 300);
+  });
+
+  window.addEventListener("hashchange", function(){
+    setTimeout(applyQiblaText, 300);
+  });
+})();
+</script>
 </body>
 </html>
