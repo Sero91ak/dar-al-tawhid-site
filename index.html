@@ -308,10 +308,10 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
   #latestGrid,#folderGrid{gap:14px}
   #latestGrid .post-card,#folderGrid .folder-card{padding:14px}
   .isnad{padding:10px 14px 12px}
-  .isnad-quote{font-size:11px;line-height:1.5;letter-spacing:0;margin-top:5px}
-  .isnad-speaker{display:inline;margin:0;white-space:normal}
-  .isnad-words{display:inline}
-  .isnad-source{font-size:9.5px;margin-top:4px}
+  .isnad-quote{font-size:11.5px;line-height:1.5;letter-spacing:0;margin-top:5px}
+  .isnad-speaker{display:block;margin:0 0 3px;white-space:normal}
+  .isnad-words{display:block;line-height:1.5}
+  .isnad-source{font-size:9.5px;margin-top:5px}
   .app-bar.is-home{margin-bottom:10px}
 }
 @media(max-width:700px){
@@ -1705,6 +1705,10 @@ OneSignalDeferred.push(async function(OneSignal){
     <button id="qiblaFloat" class="float-btn qibla-float" type="button" aria-label="Qibla-Kompass öffnen" title="Qibla-Kompass">🧭</button>
   </div>
   <div class="float-item">
+    <span id="savedFloatTip" class="float-tip" hidden>Gespeicherte Beiträge</span>
+    <button id="savedFloat" class="float-btn saved-float" type="button" aria-label="Gespeicherte Beiträge" title="Gespeicherte Beiträge">♡</button>
+  </div>
+  <div class="float-item">
     <span id="pushFloatTip" class="float-tip" hidden>Benachrichtigungen aktivieren</span>
     <button id="pushFloat" class="float-btn" type="button" aria-label="Benachrichtigungen" title="Benachrichtigungen">🔔</button>
   </div>
@@ -1928,8 +1932,24 @@ function postsForSeries(id){
   const s=SERIES_DEFS.find(x=>x.id===id); if(!s)return [];
   return posts.filter(p=>s.keys.some(k=>[p.title,p.category,p.topic,p.scholar,p.book,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(k.toLowerCase())));
 }
+function topicEmblem(title){
+  const k=String(title||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  let e="📚";
+  if(/shirk/.test(k))e="⚠️";
+  else if(/bid[a']?ah|ahl al-bid/.test(k))e="👥";
+  else if(/hukm|muhakamah|tahakum/.test(k))e="⚖️";
+  else if(/sifat|sifa allah/.test(k))e="ﷲ";
+  else if(/sahabah|sahaba|aussagen/.test(k))e="👥";
+  else if(/du'a|dua|bittgeb/.test(k))e="📖";
+  else if(/tawhid|tauhid/.test(k))e="☝️";
+  else if(/sunnah/.test(k))e="🕌";
+  else if(/qur|quran|tafsir/.test(k))e="📖";
+  else if(/isnad|quelle|methodik|uberlief/.test(k))e="🔗";
+  else if(/takfir/.test(k))e="⚖️";
+  return `<span class="emoji-emblem" aria-hidden="true">${e}</span>`;
+}
 function renderSeriesBox(){
-  return `<section class="series-box collapsible-section"><div class="collapsible-head"><h3 class="series-title">Serien</h3><button class="collapse-toggle" type="button" data-collapse-target="seriesGrid">Alle anzeigen</button></div><div id="seriesGrid" class="series-grid collapsible-grid collapsed">${SERIES_DEFS.map(s=>`<article class="series-card" data-nav="series" data-value="${esc(s.id)}"><h3>${esc(s.title)}</h3><p>${postsForSeries(s.id).length} passende Beiträge öffnen</p></article>`).join("")}</div><div class="collapsible-fade">Es werden zunächst nur die wichtigsten Serien angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
+  return `<section class="series-box collapsible-section"><div class="collapsible-head"><h3 class="series-title">Serien</h3><button class="collapse-toggle" type="button" data-collapse-target="seriesGrid">Alle anzeigen</button></div><div id="seriesGrid" class="series-grid collapsible-grid collapsed min-2">${SERIES_DEFS.map(s=>`<article class="series-card has-icon" data-nav="series" data-value="${esc(s.id)}"><div class="folder-icon">${topicEmblem(s.title)}</div><div class="card-text"><h3>${esc(s.title)}</h3><p>${postsForSeries(s.id).length} passende Beiträge öffnen</p></div></article>`).join("")}</div><div class="collapsible-fade">Es werden zunächst nur die wichtigsten Serien angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
 }
 function renderSeries(id){
   const s=SERIES_DEFS.find(x=>x.id===id);
@@ -1944,7 +1964,7 @@ const PINNED_DEFS=[
 ];
 function pinnedPostsFor(def){return posts.filter(p=>def.keys.some(k=>[p.title,p.category,p.topic,p.source,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(k.toLowerCase()))).slice(0,1)}
 function renderPinnedBox(){
-  return `<section class="pinned-box collapsible-section"><div class="collapsible-head"><h3 class="pinned-title">Wichtige Beiträge</h3><button class="collapse-toggle" type="button" data-collapse-target="pinnedGrid">Alle anzeigen</button></div><div id="pinnedGrid" class="pinned-grid collapsible-grid collapsed">${PINNED_DEFS.map(d=>{const found=pinnedPostsFor(d)[0];return `<article class="pinned-card" ${found?`data-nav="post" data-value="${esc(found.id)}"`:"data-nav=\"topics\""}><h3>${esc(d.title)}</h3><p>${found?esc(found.title):"Bereich öffnen"}</p></article>`}).join("")}</div><div class="collapsible-fade">Es werden zunächst nur drei zentrale Einstiege angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
+  return `<section class="pinned-box collapsible-section"><div class="collapsible-head"><h3 class="pinned-title">Wichtige Beiträge</h3><button class="collapse-toggle" type="button" data-collapse-target="pinnedGrid">Alle anzeigen</button></div><div id="pinnedGrid" class="pinned-grid collapsible-grid collapsed min-2">${PINNED_DEFS.map(d=>{const found=pinnedPostsFor(d)[0];return `<article class="pinned-card has-icon" ${found?`data-nav="post" data-value="${esc(found.id)}"`:"data-nav=\"topics\""}><div class="folder-icon">${topicEmblem(d.title)}</div><div class="card-text"><h3>${esc(d.title)}</h3><p>${found?esc(found.title):"Bereich öffnen"}</p></div></article>`}).join("")}</div><div class="collapsible-fade">Es werden zunächst nur zwei zentrale Einstiege angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
 }
 function renderOfflineBox(){
   return `<section id="offlineBox" class="offline-box"><strong>Offline-Modus aktiv</strong><br>Gespeicherte Inhalte werden angezeigt. Neue Beiträge laden wieder, sobald eine Verbindung besteht.</section>`;
@@ -2417,11 +2437,12 @@ window.addEventListener("hashchange",render);
 const FLOAT_TIPS_KEY="darFloatTipsShownV1";
 function showFloatTipsOnce(){
   try{if(localStorage.getItem(FLOAT_TIPS_KEY))return}catch(e){}
-  const qTip=$("qiblaFloatTip"),pTip=$("pushFloatTip");
+  const qTip=$("qiblaFloatTip"),sTip=$("savedFloatTip"),pTip=$("pushFloatTip");
   if(qTip)qTip.hidden=false;
+  if(sTip)sTip.hidden=false;
   if(pTip)pTip.hidden=false;
   setTimeout(()=>{
-    [qTip,pTip].forEach(t=>{
+    [qTip,sTip,pTip].forEach(t=>{
       if(!t)return;
       t.classList.add("hide");
       setTimeout(()=>{t.hidden=true;t.classList.remove("hide")},320);
@@ -2434,6 +2455,8 @@ window.addEventListener("DOMContentLoaded",()=>{
   updateHeaderPrayerStatus();
   const qiblaFloatBtn=$("qiblaFloat");
   if(qiblaFloatBtn)qiblaFloatBtn.onclick=openQiblaFromFloat;
+  const savedFloatBtn=$("savedFloat");
+  if(savedFloatBtn)savedFloatBtn.onclick=()=>navigate("saved");
   setTimeout(showFloatTipsOnce,900);
 });
 window.addEventListener("load",async()=>{
