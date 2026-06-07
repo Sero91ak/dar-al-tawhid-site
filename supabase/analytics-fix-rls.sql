@@ -1,31 +1,7 @@
--- DAR AL TAWḤID – Live-Statistik (einmal in Supabase SQL Editor ausführen)
+-- DAR AL TAWḤID – Fix: Statistik blieb bei 0 (RLS blockierte Inserts)
+-- Einmal im Supabase SQL Editor ausführen (Run)
 
-create table if not exists public.site_events (
-  id bigint generated always as identity primary key,
-  event_type text not null check (event_type in (
-    'page_view', 'post_view', 'post_share', 'post_save', 'dua_view', 'dua_share'
-  )),
-  content_type text,
-  content_id text,
-  content_title text,
-  session_id text not null,
-  created_at timestamptz not null default now()
-);
-
-create index if not exists idx_site_events_created on public.site_events (created_at desc);
-create index if not exists idx_site_events_session on public.site_events (session_id, created_at desc);
-
-create table if not exists public.stats_totals (
-  content_type text not null,
-  content_id text not null,
-  content_title text,
-  views bigint not null default 0,
-  shares bigint not null default 0,
-  saves bigint not null default 0,
-  updated_at timestamptz not null default now(),
-  primary key (content_type, content_id)
-);
-
+-- Trigger darf stats_totals als Owner schreiben (nicht als anon)
 create or replace function public.update_stats_totals()
 returns trigger
 language plpgsql
@@ -79,45 +55,7 @@ create trigger trg_update_stats_totals
 after insert on public.site_events
 for each row execute function public.update_stats_totals();
 
-create or replace function public.analytics_live()
-returns json
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select json_build_object(
-    'live_now', (
-      select count(distinct session_id)
-      from public.site_events
-      where created_at > now() - interval '5 minutes'
-    ),
-    'today_sessions', (
-      select count(distinct session_id)
-      from public.site_events
-      where created_at >= date_trunc('day', now() at time zone 'Europe/Berlin')
-    ),
-    'today_views', (
-      select count(*)
-      from public.site_events
-      where created_at >= date_trunc('day', now() at time zone 'Europe/Berlin')
-        and event_type in ('page_view', 'post_view', 'dua_view')
-    ),
-    'today_shares', (
-      select count(*)
-      from public.site_events
-      where created_at >= date_trunc('day', now() at time zone 'Europe/Berlin')
-        and event_type in ('post_share', 'dua_share')
-    ),
-    'today_saves', (
-      select count(*)
-      from public.site_events
-      where created_at >= date_trunc('day', now() at time zone 'Europe/Berlin')
-        and event_type = 'post_save'
-    )
-  );
-$$;
-
+-- RLS neu setzen
 alter table public.site_events enable row level security;
 alter table public.stats_totals enable row level security;
 
