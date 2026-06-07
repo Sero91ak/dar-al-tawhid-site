@@ -326,16 +326,25 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
     send_after: sendAfter.toISOString()
   };
 
-  const res = await fetch("https://api.onesignal.com/notifications", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": `Key ${API_KEY}`
-    },
-    body: JSON.stringify(body)
-  });
+  async function postWith(authHeader) {
+    const r = await fetch("https://api.onesignal.com/notifications", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": authHeader
+      },
+      body: JSON.stringify(body)
+    });
+    return { ok: r.ok, status: r.status, text: await r.text() };
+  }
 
-  const text = await res.text();
+  // Try modern "Key" auth first, fall back to legacy "Basic" on auth errors.
+  let res = await postWith(`Key ${API_KEY}`);
+  if (!res.ok && (res.status === 400 || res.status === 401 || res.status === 403)) {
+    res = await postWith(`Basic ${API_KEY}`);
+  }
+
+  const text = res.text;
 
   if (!res.ok) {
     console.error(`OneSignal Sendefehler ${res.status}:`, text);

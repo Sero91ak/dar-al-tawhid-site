@@ -2240,7 +2240,37 @@ function updateHeaderPrayerStatus(){
 }
 function updatePrayerCountdowns(){const quick=$("prayerQuickCountdown"),detail=$("prayerDetailCountdown");updateHeaderPrayerStatus();if(!quick&&!detail)return;const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){if(quick)quick.textContent="Standort freigeben";if(detail)detail.textContent="Standort freigeben";return}const next=nextPrayerInfo(settings);const text=formatCountdown(next.date-new Date());if(quick)quick.textContent=text;if(detail)detail.textContent=text}
 function scheduleLocalPrayerReminders(){const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}clearPrayerReminders();const now=new Date();calculatePrayerTimes(now,settings).filter(x=>x.key!=="sunrise").forEach(p=>{const d=prayerDateFromHour(now,p.time);if(d>now){const timeoutId=setTimeout(async()=>{await showPrayerNotification(`Gebetszeit: ${p.name}`,{body:`${p.name} ist eingetreten. DAR AL TAWḤID`,tag:`prayer-${p.key}`,renotify:true});},d-now);prayerReminderTimeouts.push(timeoutId)}})}
-function bindPrayerEvents(){stopQiblaCompass();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=async()=>{if(!hasPrayerLocation()){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}if(!("Notification" in window)){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}let permission=Notification.permission;if(permission!=="granted")permission=await Notification.requestPermission();if(permission==="granted"){setPrayerSettings({reminder:true});scheduleLocalPrayerReminders();alert("Gebets-Erinnerungen wurden für heute aktiviert, solange die App im Browser/PWA-Kontext aktiv bleibt.")}else{alert("Benachrichtigungen wurden nicht erlaubt.")}};const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+async function enablePrayerServerPush(settings){
+  try{
+    let OS=window.OneSignal;const start=Date.now();
+    while((!OS||!(OS.User&&typeof OS.User.addTags==="function"))&&Date.now()-start<9000){await new Promise(r=>setTimeout(r,200));OS=window.OneSignal}
+    if(!OS||!OS.User||typeof OS.User.addTags!=="function")return false;
+    try{if(OS.User.PushSubscription&&typeof OS.User.PushSubscription.optIn==="function")await OS.User.PushSubscription.optIn()}catch(e){}
+    const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin";
+    const lat=Number(settings.lat),lon=Number(settings.lon);
+    if(!Number.isFinite(lat)||!Number.isFinite(lon))return false;
+    await OS.User.addTags({
+      prayer_notifications:"true",
+      prayer_lat:lat.toFixed(5),
+      prayer_lon:lon.toFixed(5),
+      prayer_timezone:tz,
+      prayer_method:"12deg",
+      prayer_asr_factor:String(settings.asrFactor||1),
+      prayer_location_mode:"app",
+      prayer_site:"dar-al-tawhid",
+      prayer_source:"pwa",
+      prayer_version:"3"
+    });
+    return true;
+  }catch(e){console.warn("Gebets-Push konnte nicht aktiviert werden:",e);return false}
+}
+async function disablePrayerServerPush(){
+  try{
+    const OS=window.OneSignal;
+    if(OS&&OS.User&&typeof OS.User.addTag==="function"){await OS.User.addTag("prayer_notifications","false")}
+  }catch(e){}
+}
+function bindPrayerEvents(){stopQiblaCompass();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=async()=>{const s=getPrayerSettings();if(!hasPrayerLocation(s)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}if(!("Notification" in window)){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}const old=reminder.textContent;reminder.textContent="Wird aktiviert…";reminder.disabled=true;let permission=Notification.permission;if(permission!=="granted")permission=await Notification.requestPermission();if(permission!=="granted"){reminder.textContent=old;reminder.disabled=false;alert("Benachrichtigungen wurden nicht erlaubt. Bitte erlaube sie für diese Seite in den Browser-/Geräteeinstellungen und versuche es erneut.");return}setPrayerSettings({reminder:true});scheduleLocalPrayerReminders();const ok=await enablePrayerServerPush(s);reminder.textContent=old;reminder.disabled=false;if(ok){alert("Gebets-Benachrichtigungen sind aktiviert. Du bekommst sie automatisch zu jeder Gebetszeit für deinen Standort – auch wenn die App geschlossen ist. Die automatische Zustellung startet ab dem nächsten Tag.")}else{alert("Eine lokale Erinnerung ist aktiv (während die App offen ist). Die automatische Zustellung bei geschlossener App konnte nicht eingerichtet werden – bitte tippe oben auf 🔔 und erlaube Push, dann hier erneut „Erinnerung aktivieren“.")}};const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
@@ -2511,6 +2541,5 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 window.addEventListener("online",function(){const box=document.getElementById("offlineBox");if(box)box.classList.remove("show")});
 window.addEventListener("offline",function(){const box=document.getElementById("offlineBox");if(box)box.classList.add("show")});
 </script>
-<script src="assets/prayer-push-tags.js"></script>
 </body>
 </html>
