@@ -1425,6 +1425,7 @@ OneSignalDeferred.push(async function(OneSignal){
             <div class="header-prayer-item"><b>Gebetszeiten</b><span>Standort freigeben</span></div>
             <div class="header-prayer-item"><b>Nächstes Gebet</b><span>nach Freigabe</span></div>
           </div>
+          <button id="refreshDuasBtn" class="action-btn" type="button" title="Duʿāʾ aus GitHub neu laden">⟳ Duʿāʾ</button>
         </div>
       </div>
       <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro">Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</div></div>
@@ -1472,11 +1473,36 @@ function parseDuaMarkdown(md,filename){
   dua.tr=sections.lautschrift||dua.tr||"";
   dua.de=sections.deutsch||dua.de||"";
   dua.src=sections.quelle||dua.source||dua.src||dua.source||"";
+  // Normalize category key: some files use `cat`, others use `category` in frontmatter
+  dua.cat = dua.cat || dua.category || "";
   return dua;
 }
 async function loadExternalDuas(){
   const existingIds=new Set(DUAS.map(d=>String(d.id)));
   const pushDuas=extraDuas=>{if(!Array.isArray(extraDuas))return;extraDuas.forEach(d=>{if(d&&d.id&&!existingIds.has(String(d.id))){DUAS.push(d);existingIds.add(String(d.id))}})};
+  // Try GitHub API first (so uploaded files on GitHub appear immediately),
+  // then fall back to a local content/duas/duas.json if available.
+  try{
+    const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/duas?ref=${BRANCH}`;
+    const response=await fetch(api,{cache:"no-store"});
+    if(response.ok){
+      const files=await response.json();
+      const markdownFiles=files.filter(file=>file.type==="file"&&file.name.endsWith(".md"));
+      const extraDuas=await Promise.all(markdownFiles.map(async file=>{
+        // Append file.sha as cache-buster so newly pushed files appear immediately
+        const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/content/duas/${file.name}?v=${file.sha}`;
+        const r=await fetch(raw,{cache:"no-store"});
+        if(!r.ok){console.warn(`Raw-Datei konnte nicht geladen werden: ${file.name}`);return null}
+        return parseDuaMarkdown(await r.text(),file.name);
+      }));
+      pushDuas(extraDuas.filter(Boolean));
+      // return early if we loaded any markdown files from GitHub
+      if(markdownFiles.length) return;
+    }
+  }catch(error){
+    console.warn("GitHub-Fallback für Duas schlug fehl, versuche lokale duas.json:",error);
+  }
+  // Local JSON fallback
   try{
     const response=await fetch("content/duas/duas.json?v="+Date.now(),{cache:"no-store"});
     if(response.ok){
@@ -1485,23 +1511,7 @@ async function loadExternalDuas(){
       return;
     }
   }catch(error){
-    console.warn("duas.json konnte nicht geladen werden, versuche Markdown-Fallback:",error);
-  }
-  try{
-    const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/duas?ref=${BRANCH}`;
-    const response=await fetch(api,{cache:"no-store"});
-    if(!response.ok)throw new Error("GitHub API konnte content/duas nicht laden.");
-    const files=await response.json();
-    const markdownFiles=files.filter(file=>file.type==="file"&&file.name.endsWith(".md"));
-    const extraDuas=await Promise.all(markdownFiles.map(async file=>{
-      const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/content/duas/${file.name}`;
-      const r=await fetch(raw,{cache:"no-store"});
-      if(!r.ok)throw new Error(`Raw-Datei konnte nicht geladen werden: ${file.name}`);
-      return parseDuaMarkdown(await r.text(),file.name);
-    }));
-    pushDuas(extraDuas);
-  }catch(error){
-    console.warn("Externe Duʿāʾ konnten nicht geladen werden:",error);
+    console.warn("duas.json konnte nicht geladen werden:",error);
   }
 }
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -1875,6 +1885,8 @@ function bindEvents(){
   bindDirectPickPanel();
   bindGenericShareButtons();
   bindPrayerEvents();
+  const refreshBtn=$("refreshDuasBtn");
+  if(refreshBtn){refreshBtn.onclick=async(ev)=>{ev.stopPropagation();try{refreshBtn.textContent="⟳ Lädt...";await loadExternalDuas();render();refreshBtn.textContent="⟳ Duʿāʾ"}catch(e){console.error(e);refreshBtn.textContent="⟳ Fehler";setTimeout(()=>refreshBtn.textContent="⟳ Duʿāʾ",2000)}}}
   document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const collapsed=grid.classList.toggle("collapsed");btn.textContent=collapsed?"Alle anzeigen":"Zuklappen";}});
   document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=()=>{const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";navigate(view,value)}});
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
@@ -1906,6 +1918,8 @@ window.addEventListener("load",async()=>{
   }else{
     render();
   }
+  // Poll GitHub for new Duas every 5 minutes so uploaded files become visible automatically
+  try{setInterval(async ()=>{const before=DUAS.length;await loadExternalDuas();if(DUAS.length!==before){render()}},5*60*1000)}catch(e){}
 });
 </script>
 <script>
