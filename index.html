@@ -1486,6 +1486,32 @@ function setJson(key,value){try{localStorage.setItem(key,JSON.stringify(value))}
 function cleanBodyText(body){let s=String(body||"");s=s.replace(/^\s*\[[^\]]+\]\(https?:\/\/[^\s)]+\)\s*$/gmi,"");s=s.replace(/^\s*https?:\/\/\S+\s*$/gmi,"");s=s.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g,"$1");s=s.replace(/https?:\/\/\S+/g,"");s=s.replace(/\n{3,}/g,"\n\n").trim();return s}
 function parseValue(v){v=String(v||"").trim();if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v}
 function parseFrontMatter(md,filename){let fm={},body=md;const match=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(match){body=match[2]||"";const yaml=match[1];const lines=yaml.split(/\r?\n/);let current=null;for(const line of lines){const keyMatch=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(keyMatch){current=keyMatch[1];const val=keyMatch[2].trim();fm[current]=val===""?[]:parseValue(val);continue}const arrayMatch=line.match(/^\s*-\s*(.*)$/);if(arrayMatch&&current){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(arrayMatch[1]))}}const linksBlock=yaml.match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(linksBlock){const links=[];let item=null;linksBlock[1].split(/\r?\n/).forEach(line=>{let labelMatch=line.match(/^\s*-\s*label:\s*(.*)$/);if(labelMatch){item={label:parseValue(labelMatch[1]),url:""};links.push(item);return}let urlMatch=line.match(/^\s*url:\s*(.*)$/);if(urlMatch&&item){item.url=parseValue(urlMatch[1])}});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[];return{id:fm.id||filename.replace(/\.md$/,""),date:fm.date||"",title:fm.title||filename.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",author:fm.author||fm.bookAuthor||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],statement:cleanBodyText(body)}}
+function parseDuaMarkdown(md,filename){const dua=parseFrontMatter(md,filename);const content=md.replace(/^---[\s\S]*?---\s*/,'');const sections={};const regex=/##\s*(Arabisch|Lautschrift|Deutsch|Quelle)\s*([\s\S]*?)(?=(?:\n##\s*(?:Arabisch|Lautschrift|Deutsch|Quelle)|$))/gi;let match;while((match=regex.exec(content))){sections[match[1].toLowerCase()]=match[2].trim()}dua.ar=sections.arabisch||dua.ar||"";dua.tr=sections.lautschrift||dua.tr||"";dua.de=sections.deutsch||dua.de||"";dua.src=sections.quelle||dua.source||dua.src||dua.source||"";return dua}
+async function loadExternalDuas(){
+  const existingIds=new Set(DUAS.map(d=>String(d.id)));
+  const pushDuas=extraDuas=>{if(!Array.isArray(extraDuas))return;extraDuas.forEach(d=>{if(d&&d.id&&!existingIds.has(String(d.id))){DUAS.push(d);existingIds.add(String(d.id))}})};
+  try{
+    const response=await fetch("content/duas/duas.json?v="+Date.now(),{cache:"no-store"});
+    if(response.ok){
+      const extraDuas=await response.json();
+      pushDuas(extraDuas);
+      return;
+    }
+  }catch(error){
+    console.warn("duas.json konnte nicht geladen werden, versuche Markdown-Fallback:",error);
+  }
+  try{
+    const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/duas?ref=${BRANCH}`;
+    const response=await fetch(api,{cache:"no-store"});
+    if(!response.ok)throw new Error("GitHub API konnte content/duas nicht laden.");
+    const files=await response.json();
+    const markdownFiles=files.filter(file=>file.type==="file"&&file.name.endsWith(".md"));
+    const extraDuas=await Promise.all(markdownFiles.map(async file=>{const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/content/duas/${file.name}`;const r=await fetch(raw,{cache:"no-store"});if(!r.ok)throw new Error(`Raw-Datei konnte nicht geladen werden: ${file.name}`);return parseDuaMarkdown(await r.text(),file.name)}));
+    pushDuas(extraDuas);
+  }catch(error){
+    console.warn("Externe Duʿāʾ konnten nicht geladen werden:",error);
+  }
+}
 async function loadPosts(){const cached=getJson(CACHE_KEY,[]);const api=`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`;try{const response=await fetch(api,{cache:"no-store"});if(!response.ok)throw new Error("GitHub API konnte content/posts nicht laden.");const files=await response.json();const markdownFiles=files.filter(file=>file.type==="file"&&file.name.endsWith(".md"));posts=await Promise.all(markdownFiles.map(async file=>{const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${file.name}`;const r=await fetch(raw,{cache:"no-store"});if(!r.ok)throw new Error("Raw-Datei konnte nicht geladen werden.");return parseFrontMatter(await r.text(),file.name)}));posts=posts.map(post=>({...post,statement:cleanBodyText(post.statement)})).sort((a,b)=>String(b.date).localeCompare(String(a.date)));setJson(CACHE_KEY,posts)}catch(error){console.warn(error);posts=cached.length?cached:[]}}
 function countBy(key){const map=new Map();posts.forEach(post=>{const value=post[key]||"Unbekannt";map.set(value,(map.get(value)||0)+1)});return map}
 function savedIds(){return getJson(SAVE_KEY,[])}function isSaved(id){return savedIds().includes(id)}function toggleSaved(id){let list=savedIds();if(list.includes(id)){list=list.filter(x=>x!==id)}else{list.unshift(id)}setJson(SAVE_KEY,list.slice(0,100))}
