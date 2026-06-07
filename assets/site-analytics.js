@@ -99,7 +99,8 @@
   }
 
   function checkAdminPin(pin) {
-    return String(pin || "") === String(CFG.adminPin || "");
+    const cfg = window.DAR_ANALYTICS_CONFIG || CFG || {};
+    return String(pin || "").trim() === String(cfg.adminPin || "").trim();
   }
 
   initGA4();
