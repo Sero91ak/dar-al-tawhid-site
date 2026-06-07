@@ -231,7 +231,8 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 
 
 /* Erweiterungen: Quellenstatus, Profile, Serien, wichtige Beiträge, Offline, dezente App-Hilfe */
-.status-chip-row{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:10px 0 16px}
+.status-check-box{border:1px solid var(--line);border-radius:18px;background:radial-gradient(circle at 30% 0%,rgba(239,215,142,.06),transparent 45%),linear-gradient(180deg,rgba(17,15,11,.9),rgba(7,7,5,.9));margin-top:12px;padding:13px 15px}.status-check-label{color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px;text-align:center}
+.status-chip-row{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:0}
 .status-chip{border:1px solid var(--line2);border-radius:999px;background:rgba(239,215,142,.055);color:var(--cream);padding:6px 9px;font-size:10px;font-weight:950;line-height:1.1}
 .status-chip.ok{border-color:rgba(105,190,115,.45);background:rgba(105,190,115,.09)}
 .status-chip.warn{border-color:rgba(255,210,120,.46);background:rgba(255,210,120,.08)}
@@ -306,9 +307,11 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 @media(max-width:700px){
   #latestGrid,#folderGrid{gap:14px}
   #latestGrid .post-card,#folderGrid .folder-card{padding:14px}
-  .isnad-quote{font-size:12px;line-height:1.58;letter-spacing:.01em}
-  .isnad-speaker{display:block;margin-bottom:4px;white-space:normal}
-  .isnad-words{display:block;line-height:1.5}
+  .isnad{padding:10px 14px 12px}
+  .isnad-quote{font-size:11px;line-height:1.5;letter-spacing:0;margin-top:5px}
+  .isnad-speaker{display:inline;margin:0;white-space:normal}
+  .isnad-words{display:inline}
+  .isnad-source{font-size:9.5px;margin-top:4px}
   .app-bar.is-home{margin-bottom:10px}
 }
 @media(max-width:700px){
@@ -1279,15 +1282,16 @@ body:before{
 .qibla-pro-title{font-family:var(--serif);color:var(--gold2);font-size:26px;line-height:1.08;margin:4px 0 0;font-weight:800}
 .qibla-pro-sub{color:var(--muted);font-size:11px;line-height:1.45;margin:6px 0 0}
 .qibla-disclaimer{
-  border:1px solid rgba(255,196,120,.35);
-  border-radius:18px;
-  background:linear-gradient(145deg,rgba(255,160,80,.10),rgba(0,0,0,.18));
-  padding:12px 14px;
-  margin-bottom:14px;
+  border:1px solid rgba(255,196,120,.28);
+  border-radius:12px;
+  background:rgba(255,160,80,.06);
+  padding:8px 11px;
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:10.5px;
+  line-height:1.45;
 }
-.qibla-disclaimer strong{display:block;color:#ffe2b8;font-size:12px;font-weight:950;margin-bottom:6px;letter-spacing:.04em}
-.qibla-disclaimer p{color:var(--muted);font-size:11.5px;line-height:1.6;margin:0}
-.qibla-disclaimer p strong{color:#fff3d4}
+.qibla-disclaimer strong{color:#ffd9a8;font-weight:900}
 .qibla-layout-pro{align-items:stretch;gap:18px}
 .qibla-compass-pro{
   width:min(260px,78vw);
@@ -1319,6 +1323,28 @@ body:before{
   transition:transform .12s linear;
   transform-origin:50% 50%;
 }
+.qibla-rose:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  z-index:1;
+  pointer-events:none;
+  background:repeating-conic-gradient(from -0.6deg,rgba(239,215,142,.5) 0deg 1.2deg,transparent 1.2deg 30deg);
+  -webkit-mask:radial-gradient(circle,transparent 85%,#000 86%);
+  mask:radial-gradient(circle,transparent 85%,#000 86%);
+}
+.qibla-rose:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  z-index:1;
+  pointer-events:none;
+  background:repeating-conic-gradient(from -1.4deg,rgba(239,215,142,.62) 0deg 2.8deg,transparent 2.8deg 90deg);
+  -webkit-mask:radial-gradient(circle,transparent 79%,#000 80%);
+  mask:radial-gradient(circle,transparent 79%,#000 80%);
+}
 .qibla-cardinal{
   position:absolute;
   color:var(--muted);
@@ -1326,7 +1352,9 @@ body:before{
   font-weight:950;
   letter-spacing:.08em;
   z-index:3;
+  text-align:center;
 }
+.qibla-cardinal small{display:block;font-size:7.5px;font-weight:850;color:var(--muted2);letter-spacing:.04em;margin-top:1px}
 .qibla-n{top:14px;left:50%;transform:translateX(-50%);color:var(--gold2)}
 .qibla-e{right:14px;top:50%;transform:translateY(-50%)}
 .qibla-s{bottom:14px;left:50%;transform:translateX(-50%)}
@@ -1361,28 +1389,27 @@ body:before{
 }
 .qibla-forward-pointer{
   position:absolute;
-  top:6px;
+  top:3px;
   left:50%;
   transform:translateX(-50%);
-  width:0;
-  height:0;
-  border-left:9px solid transparent;
-  border-right:9px solid transparent;
-  border-bottom:14px solid #8cff9a;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
+  width:16px;
+  height:20px;
   z-index:6;
   pointer-events:none;
+  background:linear-gradient(180deg,#9dffb0,#3fd47a);
+  clip-path:polygon(50% 0,100% 100%,50% 78%,0 100%);
+  filter:drop-shadow(0 2px 7px rgba(63,212,122,.55));
 }
 .qibla-compass-center{
   position:absolute;
   left:50%;
   top:50%;
-  width:16px;
-  height:16px;
+  width:14px;
+  height:14px;
   border-radius:999px;
-  background:var(--cream);
+  background:radial-gradient(circle at 35% 30%,#fff7e2,var(--gold2) 70%);
   transform:translate(-50%,-50%);
-  box-shadow:0 0 0 4px rgba(239,215,142,.18);
+  box-shadow:0 0 0 4px rgba(239,215,142,.16),0 2px 8px rgba(0,0,0,.4);
   z-index:5;
 }
 .qibla-compass-pro.qibla-aligned .qibla-compass-face{
@@ -1858,7 +1885,7 @@ function sourceStatus(post){
 }
 function renderSourceStatus(post){
   const s=sourceStatus(post);
-  return `<div class="status-chip-row"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle ${s.sourceOk?"geprüft":"prüfen"}</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Direktlink ${s.direct?"vorhanden":"fehlt"}</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Textmarkierung ${s.marked?"vorhanden":"prüfen"}</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan/PDF ${s.scan?"vorhanden":"fehlt"}</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung ${s.attribution?"geprüft":"prüfen"}</span></div>`;
+  return `<div class="status-check-box"><div class="status-check-label">Quellenprüfung</div><div class="status-chip-row"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle ${s.sourceOk?"geprüft":"prüfen"}</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Direktlink ${s.direct?"vorhanden":"fehlt"}</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Textmarkierung ${s.marked?"vorhanden":"prüfen"}</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan/PDF ${s.scan?"vorhanden":"fehlt"}</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung ${s.attribution?"geprüft":"prüfen"}</span></div></div>`;
 }
 const CATEGORY_ORDER=["Aqīdah","Tawḥīd","Sunnah","Bidʿah","Adab","Akhlaq","Ṣaḥābah","Tābiʿīn","Fiqh","Duʿāʾ","Qurʾān & Tafsīr","Hadith","Widerlegungen"];
 function categoryRank(name){const n=String(name||"").toLowerCase();let i=CATEGORY_ORDER.findIndex(x=>n.includes(x.toLowerCase())||x.toLowerCase().includes(n));return i<0?999:i}
@@ -1995,13 +2022,13 @@ function requestBrowserPosition(){return new Promise((resolve,reject)=>navigator
 async function requestPrayerLocation(button){if(!navigator.geolocation){alert("Standort wird von diesem Browser nicht unterstützt.");return}const oldText=button?button.textContent:"";if(button)button.textContent="Standort wird angefragt…";try{const pos=await requestBrowserPosition();const lat=pos.coords.latitude,lon=pos.coords.longitude;const city=await reversePrayerCity(lat,lon);setPrayerSettings({lat,lon,city,locationGranted:true});render()}catch(err){if(button)button.textContent=oldText||"📍 Standort freigeben";alert("Standort konnte nicht geladen werden. Bitte Standortzugriff erlauben, damit die Gebetszeiten für deine Gegend angezeigt werden.")}}
 function qiblaCompassMarkup(bearing=0){
   const b=Math.round(Number(bearing)||0);
-  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><span class="qibla-cardinal qibla-n">N</span><span class="qibla-cardinal qibla-e">O</span><span class="qibla-cardinal qibla-s">S</span><span class="qibla-cardinal qibla-w">W</span><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)"><span class="qibla-kaaba-line"></span><span class="qibla-kaaba-icon">🕋</span></div></div><div class="qibla-forward-pointer" aria-hidden="true"></div><div class="qibla-compass-center"></div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>Qibla von Nord</small></div></div>`;
+  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><span class="qibla-cardinal qibla-n">N<small>0°</small></span><span class="qibla-cardinal qibla-e">O<small>90°</small></span><span class="qibla-cardinal qibla-s">S<small>180°</small></span><span class="qibla-cardinal qibla-w">W<small>270°</small></span><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)"><span class="qibla-kaaba-line"></span><span class="qibla-kaaba-icon">🕋</span></div></div><div class="qibla-forward-pointer" aria-hidden="true"></div><div class="qibla-compass-center"></div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>Qibla von Nord</small></div></div>`;
 }
 function renderQiblaProPanel(settings=getPrayerSettings()){
   const hasLoc=hasPrayerLocation(settings);
   const bearing=hasLoc?qiblaBearing(settings.lat,settings.lon):0;
   const bearingText=hasLoc?Math.round(bearing):"—";
-  return `<section class="qibla-pro-section" aria-labelledby="qiblaProTitle"><div class="qibla-pro-head"><div class="prayer-small-label">Qibla-Richtung</div><h3 class="qibla-pro-title" id="qiblaProTitle">🕋 Kompass zur Kaaba</h3><p class="qibla-pro-sub">Manuell starten · GPS-basiert · Richtung immer doppelt prüfen</p></div><div class="qibla-disclaimer" role="note"><strong>⚠️ Wichtiger Hinweis — bitte Richtung prüfen</strong><p>Dieser Kompass nutzt <strong>GPS</strong> und die <strong>Bewegungssensoren</strong> deines Smartphones. Magnetische Störungen, Metall, Gebäude oder ungenauer Standort können die Anzeige abweichen lassen. <strong>Vergleiche die Richtung mit einer verlässlichen Quelle</strong> (z.&nbsp;B. Moschee, Karte, erfahrene Person), bevor du betest. Im Zweifel lieber nachfragen als in einer falschen Richtung beten.</p></div>${hasLoc?`<div class="qibla-layout qibla-layout-pro">${qiblaCompassMarkup(bearing)}<div class="qibla-info qibla-info-pro"><div class="qibla-data-grid"><div class="qibla-data-item"><b>Standort</b><span>${esc(settings.city||"GPS")}</span></div><div class="qibla-data-item"><b>Qibla</b><span id="qiblaBearingLive">${bearingText}°</span></div><div class="qibla-data-item"><b>Ausrichtung</b><span id="qiblaHeadingLive">—</span></div><div class="qibla-data-item"><b>Abweichung</b><span id="qiblaDeltaLive">—</span></div></div><p class="qibla-instruction" id="qiblaInstruction">Tippe auf <strong>„Kompass starten“</strong>, erlaube Standort und Bewegungssensoren. Halte das Handy flach und drehe dich langsam, bis 🕋 oben in der Mitte steht.</p><p id="qiblaStatus" class="qibla-status" aria-live="polite">Kompass bereit — wird erst nach deinem Tippen aktiviert.</p><div class="qibla-action-row"><button id="startQiblaBtn" class="qibla-btn-start prayer-action-btn" type="button">🧭 Kompass starten</button><button id="stopQiblaBtn" class="qibla-btn-stop prayer-action-btn" type="button" hidden>⏹ Kompass stoppen</button></div></div></div>`:`<p class="qibla-no-location">Für den Qibla-Kompass wird dein <strong>GPS-Standort</strong> benötigt. Bitte auf <strong>„Standort freigeben“</strong> tippen oder einen Ort manuell suchen.</p>`}</section>`;
+  return `<section class="qibla-pro-section" aria-labelledby="qiblaProTitle"><div class="qibla-pro-head"><div class="prayer-small-label">Qibla-Richtung</div><h3 class="qibla-pro-title" id="qiblaProTitle">🕋 Kompass zur Kaaba</h3><p class="qibla-pro-sub">Manuell starten · GPS-basiert · Richtung immer doppelt prüfen</p></div><p class="qibla-disclaimer" role="note"><strong>⚠️ Richtung prüfen:</strong> GPS &amp; Sensoren können abweichen (Metall, Gebäude). Im Zweifel mit Moschee oder Karte vergleichen.</p>${hasLoc?`<div class="qibla-layout qibla-layout-pro">${qiblaCompassMarkup(bearing)}<div class="qibla-info qibla-info-pro"><div class="qibla-data-grid"><div class="qibla-data-item"><b>Standort</b><span>${esc(settings.city||"GPS")}</span></div><div class="qibla-data-item"><b>Qibla</b><span id="qiblaBearingLive">${bearingText}°</span></div><div class="qibla-data-item"><b>Ausrichtung</b><span id="qiblaHeadingLive">—</span></div><div class="qibla-data-item"><b>Abweichung</b><span id="qiblaDeltaLive">—</span></div></div><p class="qibla-instruction" id="qiblaInstruction">Tippe auf <strong>„Kompass starten“</strong>, erlaube Standort und Bewegungssensoren. Halte das Handy flach und drehe dich langsam, bis 🕋 oben in der Mitte steht.</p><p id="qiblaStatus" class="qibla-status" aria-live="polite">Kompass bereit — wird erst nach deinem Tippen aktiviert.</p><div class="qibla-action-row"><button id="startQiblaBtn" class="qibla-btn-start prayer-action-btn" type="button">🧭 Kompass starten</button><button id="stopQiblaBtn" class="qibla-btn-stop prayer-action-btn" type="button" hidden>⏹ Kompass stoppen</button></div></div></div>`:`<p class="qibla-no-location">Für den Qibla-Kompass wird dein <strong>GPS-Standort</strong> benötigt. Bitte auf <strong>„Standort freigeben“</strong> tippen oder einen Ort manuell suchen.</p>`}</section>`;
 }
 function getDeviceHeading(event){
   if(typeof event.webkitCompassHeading==="number"&&!Number.isNaN(event.webkitCompassHeading)&&event.webkitCompassHeading>=0)return event.webkitCompassHeading;
@@ -2311,7 +2338,7 @@ function renderPost(id){
   const post=posts.find(p=>String(p.id)===String(id));
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>`;
   const related=getRelatedPosts(post);
-  return `<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderSourceStatus(post)}<section class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
+  return `<article class="article"><div class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div><section class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}${renderSourceStatus(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="shareBtn" class="action-btn" type="button">Beitrag teilen</button><button id="readerBtn" class="action-btn" type="button">Lesemodus</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${shareLinksForPost(post)}${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
 }
 function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||post.category===cat)&&(!scholar||post.scholar===scholar)&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={topics:"Kategorien",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Gespeichert",about:"Über diese App",duas:"Duʿāʾ",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",series:"Serie",topic:route.value,scholar:route.value,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};if(crumb){crumb.textContent=labels[route.view]||"";crumb.classList.toggle("is-hidden",!crumb.textContent)}}
