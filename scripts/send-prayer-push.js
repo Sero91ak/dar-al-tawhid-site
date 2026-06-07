@@ -3,11 +3,11 @@
    GitHub Actions liest OneSignal-Subscriptions, prüft Nutzer-Tags und plant Pushs pro Standort. */
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
-const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
+const API_KEY = process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
 
 if (!API_KEY) {
-  console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
+  console.error("Fehlt: ONESIGNAL_API_KEY");
   process.exit(1);
 }
 
