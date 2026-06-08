@@ -1,6 +1,6 @@
 ---
 id: "amali-sind-nur-nach-niyyah-199"
-date: "2026-06-08T00:00:00.000Z"
+date: "2026-06-08T23:00:00.000Z"
 title: "📖 Taten sind nur nach Absicht"
 category: "Ikhlas"
 topic: "Niyyah (Absicht) und Ikhlas"
