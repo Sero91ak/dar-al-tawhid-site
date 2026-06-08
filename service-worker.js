@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v5';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v7';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -16,8 +16,22 @@ const APP_SHELL = [
   '/app-icon-192.png',
   '/app-icon-512.png',
   '/watermark-my-logo-full.png',
-  '/watermark-circle-soft.png'
+  '/watermark-circle-soft.png',
+  '/content/duas/duas.json',
+  '/assets/site-analytics.js'
 ];
+
+self.addEventListener('message', (event) => {
+  const data = event.data || {};
+  if (data.type !== 'PRECACHE' || !Array.isArray(data.urls) || !data.urls.length) return;
+  event.waitUntil(
+    caches.open(CACHE_VERSION).then((cache) => Promise.allSettled(
+      data.urls.map((url) => fetch(url, { cache: 'reload' })
+        .then((response) => (response && response.ok ? cache.put(url, response) : null))
+        .catch(() => null))
+    ))
+  );
+});
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
