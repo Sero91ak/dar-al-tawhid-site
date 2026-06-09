@@ -380,15 +380,16 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .quran-term-card b{display:block;color:#fff6dc;margin-bottom:4px}
 .quran-term-card span{display:block;color:#e6dcc0;line-height:1.55}
 @media(max-width:700px){.quran-surah-grid{grid-template-columns:1fr}}
-.bottom-nav{position:fixed;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:calc(8px + env(safe-area-inset-bottom));z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.13);border-radius:26px;background:linear-gradient(180deg,rgba(42,42,42,.54),rgba(9,9,8,.72));-webkit-backdrop-filter:blur(22px) saturate(1.45);backdrop-filter:blur(22px) saturate(1.45);box-shadow:0 -10px 34px rgba(0,0,0,.36),0 12px 38px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.12)}
-.bottom-nav-btn{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:51px;max-width:88px;border:1px solid transparent;border-radius:21px;background:transparent;color:rgba(248,239,212,.66);font-size:9px;font-weight:950;cursor:pointer;padding:5px 3px;font-family:var(--sans);transition:color .22s ease,background .22s ease,border-color .22s ease,transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s ease}
-.bottom-nav-btn .nav-icon{font-size:19px;line-height:1;display:block;transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .22s ease}
-.bottom-nav-btn.active{border-color:rgba(255,255,255,.17);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10));color:#fff8de;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 24px rgba(0,0,0,.24)}
-.bottom-nav-btn.active .nav-icon{transform:translateY(-1px) scale(1.08);filter:drop-shadow(0 2px 8px rgba(239,215,142,.22))}
-.bottom-nav-btn:hover:not(.active){color:var(--cream);background:rgba(255,255,255,.06)}
+.bottom-nav{position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:max(3px,calc(env(safe-area-inset-bottom) - 24px));z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.18);border-radius:27px;background:linear-gradient(180deg,rgba(74,76,74,.34),rgba(15,15,13,.42));-webkit-backdrop-filter:blur(28px) saturate(1.85);backdrop-filter:blur(28px) saturate(1.85);box-shadow:0 -6px 26px rgba(0,0,0,.24),0 16px 42px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.20),inset 0 -1px 0 rgba(255,255,255,.055);overflow:hidden}
+.bottom-nav:before{content:"";position:absolute;inset:1px;border-radius:26px;background:radial-gradient(circle at 18% 0%,rgba(255,255,255,.22),transparent 36%),radial-gradient(circle at 88% 8%,rgba(239,215,142,.12),transparent 34%),linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.025));pointer-events:none}
+.bottom-nav-btn{flex:1;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:51px;max-width:88px;border:1px solid transparent;border-radius:22px;background:transparent;color:rgba(248,239,212,.70);font-size:9px;font-weight:950;cursor:pointer;padding:5px 3px;font-family:var(--sans);text-shadow:0 1px 9px rgba(0,0,0,.62);transition:color .24s ease,background .24s ease,border-color .24s ease,transform .24s cubic-bezier(.2,.8,.2,1),box-shadow .24s ease,filter .24s ease}
+.bottom-nav-btn .nav-icon{font-size:19px;line-height:1;display:block;transition:transform .24s cubic-bezier(.2,.8,.2,1),filter .24s ease}
+.bottom-nav-btn.active{border-color:rgba(255,255,255,.20);background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.105));color:#fff9e5;box-shadow:inset 0 1px 0 rgba(255,255,255,.26),inset 0 -1px 0 rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.24);filter:saturate(1.08)}
+.bottom-nav-btn.active .nav-icon{transform:translateY(-1px) scale(1.10);filter:drop-shadow(0 2px 9px rgba(255,255,255,.20))}
+.bottom-nav-btn:hover:not(.active){color:var(--cream);background:rgba(255,255,255,.075)}
 .bottom-nav-btn:active{transform:scale(.96)}
-body.has-bottom-nav{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-body.has-bottom-nav .float-actions{bottom:calc(76px + env(safe-area-inset-bottom))}
+body.has-bottom-nav{padding-bottom:calc(70px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
+body.has-bottom-nav .float-actions{bottom:calc(76px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 .reader-mode .bottom-nav{display:none!important}
 @media(max-width:700px){
