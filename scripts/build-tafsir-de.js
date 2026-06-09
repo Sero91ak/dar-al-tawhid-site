@@ -10,6 +10,7 @@ const ROOT = path.join(__dirname, "..");
 const QURAN_DIR = path.join(ROOT, "content", "quran");
 const TAFSIR_DIR = path.join(ROOT, "content", "tafsir", "de");
 const CURATED_DIR = path.join(__dirname, "tafsir-curated");
+const ASBAB_FILE = path.join(CURATED_DIR, "asbab-sahih.json");
 
 function pad(n) {
   return String(n).padStart(3, "0");
@@ -20,6 +21,12 @@ function loadCurated(id) {
   if (!fs.existsSync(file)) return {};
   delete require.cache[require.resolve(file)];
   return require(file);
+}
+
+function loadAsbab() {
+  if (!fs.existsSync(ASBAB_FILE)) return {};
+  const payload = JSON.parse(fs.readFileSync(ASBAB_FILE, "utf8"));
+  return payload.entries || {};
 }
 
 function surahLabel(surah) {
@@ -103,6 +110,36 @@ function mergeEntry(base, override) {
   };
 }
 
+function asbabOverride(asbabEntries) {
+  if (!Array.isArray(asbabEntries) || !asbabEntries.length) return null;
+  const reports = asbabEntries.flatMap((entry) => entry.occasions || []);
+  if (!reports.length) return null;
+  const source = "Ṣaḥīḥ Asbāb an-Nuzūl (Ibrāhīm Muḥammad al-ʿAlī)";
+  return {
+    sabab:
+      `Für diese Ayah ist ein belegter Anlass der Offenbarung in ${source} überliefert. Arabischer Wortlaut des Berichtes:\n\n` +
+      reports.map((text, idx) => `${idx + 1}. ${text}`).join("\n\n"),
+    hadiths: reports.map((text, idx) => ({
+      source: `${source}${reports.length > 1 ? ` · Bericht ${idx + 1}` : ""}`,
+      text,
+      grading: "belegter Asbāb-an-Nuzūl-Bericht",
+    })),
+  };
+}
+
+function applyAsbab(entry, asbabEntries) {
+  const override = asbabOverride(asbabEntries);
+  if (!override) return entry;
+  const existingHadiths = Array.isArray(entry.hadiths)
+    ? entry.hadiths.filter((item) => item?.source !== "Einordnung · Überlieferung")
+    : [];
+  return {
+    ...entry,
+    sabab: override.sabab,
+    hadiths: [...override.hadiths, ...existingHadiths],
+  };
+}
+
 function buildSurah(id) {
   const qFile = path.join(QURAN_DIR, `${pad(id)}.json`);
   if (!fs.existsSync(qFile)) {
@@ -111,12 +148,14 @@ function buildSurah(id) {
   }
   const surah = JSON.parse(fs.readFileSync(qFile, "utf8"));
   const curated = loadCurated(id);
+  const asbab = loadAsbab();
   const meta = defaultMeta(surah);
   const curatedMeta = curated.__meta || {};
 
   const verses = surah.verses.map((v) => {
     const base = defaultEntry(v, meta, surah);
-    return mergeEntry(base, curated[v.id]);
+    const merged = mergeEntry(base, curated[v.id]);
+    return applyAsbab(merged, asbab[String(id)]?.[String(v.id)]);
   });
 
   const payload = {
