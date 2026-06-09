@@ -22,8 +22,13 @@ function loadCurated(id) {
   return require(file);
 }
 
+function surahLabel(surah) {
+  return surah.transliteration || `Sure ${surah.id}`;
+}
+
 function defaultMeta(surah) {
   const meccan = surah.type === "meccan";
+  const name = surahLabel(surah);
   return {
     place: meccan ? "Mekka" : "Medina",
     period: meccan
@@ -31,8 +36,9 @@ function defaultMeta(surah) {
       : "Medinensische Offenbarung (überwiegend nach der Hidschra)",
     year: meccan ? "vor der Hidschra" : "1–10 n. H. (je nach Ayah unterschiedlich)",
     defaultSabab: meccan
-      ? "Für diese Ayah ist kein gesonderter Einzel-Anlass (Sabab an-Nuzūl) in den klassischen Werken eindeutig überliefert. Sie gehört zum mekkanischen Offenbarungskorpus dieser Sure."
-      : "Für diese Ayah ist kein gesonderter Einzel-Anlass (Sabab an-Nuzūl) in den klassischen Werken eindeutig überliefert. Sie gehört zur Sūrat al-Baqarah, die überwiegend in Medina offenbart wurde und Gläubige in Glauben, Recht, Anbetung und Gemeinschaft unterrichtet.",
+      ? `Für diese Ayah ist kein gesonderter Einzel-Anlass (Sabab an-Nuzūl) in den klassischen Werken eindeutig überliefert. Sie gehört zum mekkanischen Offenbarungskorpus der Sūrat ${name}.`
+      : `Für diese Ayah ist kein gesonderter Einzel-Anlass (Sabab an-Nuzūl) in den klassischen Werken eindeutig überliefert. Sie gehört zur Sūrat ${name}, die überwiegend in Medina offenbart wurde und Gläubige in Glauben, Recht, Anbetung und Gemeinschaft unterrichtet.`,
+    surahName: name,
   };
 }
 
@@ -44,7 +50,7 @@ function defaultEntry(verse, meta) {
       {
         source: "Ibn Kathīr",
         text:
-          "Ibn Kathīr erklärt diese Ayah im Zusammenhang der Sūrat al-Baqarah und verbindet sie mit dem fortlaufenden Aufbau aus Tawḥīd, Gehorsam, Recht und Vorbildern für die frühe muslimische Gemeinschaft.",
+          `Ibn Kathīr erklärt diese Ayah im Zusammenhang der Sūrat ${meta.surahName} und verbindet sie mit dem fortlaufenden Aufbau aus Tawḥīd, Gehorsam, Recht und Vorbildern für die frühe muslimische Gemeinschaft.`,
       },
     ],
     sabab: meta.defaultSabab,
@@ -97,9 +103,12 @@ function buildSurah(id) {
   console.log(`Wrote ${out} (${verses.length} verses, ${Object.keys(curated).filter((k) => k !== "__meta").length} curated overrides)`);
 }
 
-const id = Number(process.argv[2] || "2");
-if (!Number.isFinite(id) || id < 1 || id > 114) {
-  console.error("Usage: node scripts/build-tafsir-de.js <surah-id 1-114>");
+const arg = process.argv[2] || "2";
+const range = arg.includes("-") ? arg.split("-").map(Number) : [Number(arg), Number(arg)];
+const from = range[0];
+const to = range[1] ?? range[0];
+if (!Number.isFinite(from) || !Number.isFinite(to) || from < 1 || to > 114 || from > to) {
+  console.error("Usage: node scripts/build-tafsir-de.js <surah-id> OR <from-to>  (e.g. 3 or 3-10)");
   process.exit(1);
 }
-buildSurah(id);
+for (let id = from; id <= to; id++) buildSurah(id);
