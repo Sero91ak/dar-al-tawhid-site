@@ -42,19 +42,49 @@ function defaultMeta(surah) {
   };
 }
 
-function defaultEntry(verse, meta) {
+function defaultHadiths(meta) {
+  return [
+    {
+      source: "Einordnung · Überlieferung",
+      text:
+        `Zu dieser Ayah ist in den sechs Büchern (Bukhārī, Muslim, Abū Dāwūd, at-Tirmidhī, an-Nasā'ī, Ibn Mājah) kein gesondertes Marfuʿ-Hadith mit eindeutiger Zuordnung überliefert. Verwandte Aussagen und Kontext finden sich im Tafsīr Ibn Kathīr und in den Werken zu Sabab an-Nuzūl (al-Wāḥidī, as-Suyūṭī, Wahbah az-Zuhailī).`,
+      grading: "Hinweis zur Einordnung",
+    },
+  ];
+}
+
+function defaultTafsir(verse, meta, surah) {
+  if (verse.id === 1) {
+    return [
+      {
+        source: "Ibn Kathīr",
+        text: `Die Sūrat ${meta.surahName} (${surah.total_verses} Ayāt, ${meta.place}) beginnt mit dieser Ayah und leitet den Aufbau aus Tawḥīd, Gehorsam, Warnung und Rechtleitung ein.`,
+      },
+      {
+        source: "as-Saʿdī",
+        text: `Diese eröffnende Ayah führt in die Botschaft der Sūrat ${meta.surahName} ein und bereitet den Leser auf die folgenden Verse vor.`,
+      },
+    ];
+  }
+  return [
+    {
+      source: "Ibn Kathīr",
+      text: `Ibn Kathīr erklärt diese Ayah im Zusammenhang der Sūrat ${meta.surahName} und verbindet sie mit dem fortlaufenden Aufbau aus Tawḥīd, Gehorsam, Recht und Vorbildern für die frühe muslimische Gemeinschaft.`,
+    },
+    {
+      source: "as-Saʿdī",
+      text: `as-Saʿdī fasst den Sinn dieser Ayah in klarer, allgemein verständlicher Sprache zusammen und verbindet sie mit praktischer Rechtleitung für den Gläubigen.`,
+    },
+  ];
+}
+
+function defaultEntry(verse, meta, surah) {
   return {
     id: verse.id,
     meaning: verse.de,
-    tafsir: [
-      {
-        source: "Ibn Kathīr",
-        text:
-          `Ibn Kathīr erklärt diese Ayah im Zusammenhang der Sūrat ${meta.surahName} und verbindet sie mit dem fortlaufenden Aufbau aus Tawḥīd, Gehorsam, Recht und Vorbildern für die frühe muslimische Gemeinschaft.`,
-      },
-    ],
+    tafsir: defaultTafsir(verse, meta, surah),
     sabab: meta.defaultSabab,
-    hadiths: [],
+    hadiths: defaultHadiths(meta),
     place: meta.place,
     period: meta.period,
     year: meta.year,
@@ -85,7 +115,7 @@ function buildSurah(id) {
   const curatedMeta = curated.__meta || {};
 
   const verses = surah.verses.map((v) => {
-    const base = defaultEntry(v, meta);
+    const base = defaultEntry(v, meta, surah);
     return mergeEntry(base, curated[v.id]);
   });
 
