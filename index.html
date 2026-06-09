@@ -1996,6 +1996,84 @@ body:before{
   grid-template-columns:1fr!important;
 }
 
+/* Mobile spacing polish: keep the home screen compact and premium. */
+@media(max-width:480px){
+  .view{
+    padding:13px!important;
+  }
+  .section-block{
+    margin-top:12px!important;
+    margin-bottom:4px!important;
+  }
+  .section-head{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center!important;
+    gap:2px 8px!important;
+    margin-bottom:9px!important;
+  }
+  .section-head h3{
+    grid-column:1;
+    grid-row:1;
+    font-size:20px!important;
+    line-height:1.04!important;
+  }
+  .section-head span{
+    grid-column:1;
+    grid-row:2;
+    flex:initial!important;
+    margin:0!important;
+    padding-left:1px!important;
+    font-size:9.2px!important;
+    line-height:1.2!important;
+  }
+  .section-head .collapse-toggle{
+    grid-column:2;
+    grid-row:1 / span 2;
+    align-self:center;
+    min-height:34px;
+    padding:7px 10px;
+  }
+  .main-search,
+  .direct-pick-panel,
+  .search-pro-panel,
+  .popular-panel,
+  .quran-home-teaser,
+  .ramadan-teaser,
+  .daily-box,
+  .recommended-box{
+    margin-bottom:9px!important;
+  }
+  .search-helper{
+    margin-top:6px!important;
+    line-height:1.35!important;
+  }
+  .latest-grid,
+  .post-grid{
+    gap:10px!important;
+  }
+  .post-card{
+    min-height:168px!important;
+    padding:12px!important;
+  }
+  .post-card h3{
+    font-size:17px!important;
+    line-height:1.08!important;
+  }
+  .post-meta{
+    gap:5px!important;
+    margin:7px 0 8px!important;
+  }
+  .excerpt{
+    font-size:12.2px!important;
+    line-height:1.3!important;
+  }
+  .source-preview{
+    margin-top:8px!important;
+    padding-top:7px!important;
+  }
+}
+
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -2684,12 +2762,12 @@ function renderPrayerQuickCard(){
 function renderPrayerTimes(){
   const settings=getPrayerSettings();
   if(!hasPrayerLocation(settings)){
-    return `${setHeader("Gebetszeiten","Die App fragt deinen Standort erst nach deiner Freigabe ab. Danach wird die Stadt/Gegend deiner Nutzung angezeigt und die Gebetszeiten werden dafür berechnet.","🕌 Gebet")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Standort erforderlich</div><h3 class="prayer-panel-title">Gebetszeiten für deine Gegend</h3><div class="prayer-quick-count">Noch kein Standort freigegeben</div></div></div>${renderQiblaProPanel(settings)}<div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="" placeholder="Ort manuell eingeben" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row"><button id="useLocationBtn" class="prayer-action-btn" type="button">📍 Standort freigeben</button><button id="enablePrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Erinnerung aktivieren</button></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Berechnungsdetails anzeigen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}</div><div class="prayer-note">Keine feste Stadt ist voreingestellt. Erst nach deiner Freigabe oder manueller Ortssuche werden Gebetszeiten und Qibla berechnet.</div></section>`;
+    return `${setHeader("Gebetszeiten","Die App fragt deinen Standort erst nach deiner Freigabe ab. Danach wird die Stadt/Gegend deiner Nutzung angezeigt und die Gebetszeiten werden dafür berechnet.","🕌 Gebet")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Standort erforderlich</div><h3 class="prayer-panel-title">Gebetszeiten für deine Gegend</h3><div class="prayer-quick-count">Noch kein Standort freigegeben</div></div></div>${renderQiblaProPanel(settings)}<div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="" placeholder="Ort manuell eingeben" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row"><button id="useLocationBtn" class="prayer-action-btn" type="button">📍 Standort freigeben</button><button id="enablePrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Erinnerung aktivieren</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Berechnungsdetails anzeigen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}</div><div class="prayer-note">Keine feste Stadt ist voreingestellt. Erst nach deiner Freigabe oder manueller Ortssuche werden Gebetszeiten und Qibla berechnet.</div></section>`;
   }
   const times=calculatePrayerTimes(new Date(),settings);
   const next=nextPrayerInfo(settings);
   const current=currentPrayerInfo(settings);const now=new Date();
-  return `${setHeader("Gebetszeiten","Berechnung: Fajr mit 12°, Maghrib bei Sonnenuntergang, ʿIshāʾ mit 12° nautisch, Taḥajjud im letzten Drittel der Nacht (Maghrib bis Fajr). Standort wird nur nach Freigabe genutzt.","🕌 Gebet")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Heute · ${esc(settings.city)}</div><h3 class="prayer-panel-title">Gebetszeiten für deinen Standort</h3></div></div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerTimeDisplay(current):"--:--")}</span><small>${esc(settings.city||"dein Standort")}</small></div><div class="prayer-summary-card"><b>Nächstes</b><span>${esc(next.name)} · ${esc(next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time))}</span><small id="prayerDetailCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div></div>${renderQiblaProPanel(settings)}<button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Gebetszeiten öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${renderPrayerTimeCards(times,next,now)}</div></div><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="${esc(settings.city)}" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row"><button id="useLocationBtn" class="prayer-action-btn" type="button">📍 Standort neu freigeben</button><button id="enablePrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Erinnerung aktivieren</button></div><div class="prayer-note">Der Qibla-Kompass ist oben sichtbar und startet nur manuell. Taḥajjud zeigt das letzte Drittel der Nacht bis Fajr.</div></section>`;
+  return `${setHeader("Gebetszeiten","Berechnung: Fajr mit 12°, Maghrib bei Sonnenuntergang, ʿIshāʾ mit 12° nautisch, Taḥajjud im letzten Drittel der Nacht (Maghrib bis Fajr). Standort wird nur nach Freigabe genutzt.","🕌 Gebet")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Heute · ${esc(settings.city)}</div><h3 class="prayer-panel-title">Gebetszeiten für deinen Standort</h3></div></div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerTimeDisplay(current):"--:--")}</span><small>${esc(settings.city||"dein Standort")}</small></div><div class="prayer-summary-card"><b>Nächstes</b><span>${esc(next.name)} · ${esc(next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time))}</span><small id="prayerDetailCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div></div>${renderQiblaProPanel(settings)}<button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Gebetszeiten öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${renderPrayerTimeCards(times,next,now)}</div></div><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="${esc(settings.city)}" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row"><button id="useLocationBtn" class="prayer-action-btn" type="button">📍 Standort neu freigeben</button><button id="enablePrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Erinnerung aktivieren</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-note">Der Qibla-Kompass ist oben sichtbar und startet nur manuell. Taḥajjud zeigt das letzte Drittel der Nacht bis Fajr.</div></section>`;
 }
 
 function currentPrayerInfo(settings=getPrayerSettings()){
@@ -2721,9 +2799,20 @@ function updateHeaderPrayerStatus(){
   el.innerHTML=`<div class="header-prayer-item"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerHour(current.time):"--:--")}</span><small>${esc(city)}</small></div><div class="header-prayer-item"><b>Nächstes</b><span>${esc(next.name)} · ${esc(formatPrayerHour(next.time))}</span><small id="headerPrayerCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div>`;
 }
 function updatePrayerCountdowns(){const quick=$("prayerQuickCountdown"),detail=$("prayerDetailCountdown");updateHeaderPrayerStatus();if(!quick&&!detail)return;const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){if(quick)quick.textContent="Standort freigeben";if(detail)detail.textContent="Standort freigeben";return}const next=nextPrayerInfo(settings);const text=formatCountdown(next.date-new Date());if(quick)quick.textContent=text;if(detail)detail.textContent=text}
-function scheduleLocalPrayerReminders(){const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}clearPrayerReminders();const now=new Date();calculatePrayerTimes(now,settings).filter(x=>x.key!=="sunrise").forEach(p=>{const d=prayerEventDate(now,p);if(d>now){const timeoutId=setTimeout(async()=>{const title=p.key==="tahajjud"?"Taḥajjud · letztes Drittel":`Gebetszeit: ${p.name}`;const body=p.key==="tahajjud"?"Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID":`${p.name} ist eingetreten. DAR AL TAWḤID`;await showPrayerNotification(title,{body,tag:`prayer-${p.key}`,renotify:true})},d-now);prayerReminderTimeouts.push(timeoutId)}})}
+function scheduleLocalPrayerReminders(){const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}clearPrayerReminders();const now=new Date();calculatePrayerTimes(now,settings).filter(x=>x.key!=="sunrise").forEach(p=>{const d=prayerEventDate(now,p);if(d>now){const timeoutId=setTimeout(async()=>{const title=p.key==="tahajjud"?"Taḥajjud · letztes Drittel":`Gebetszeit: ${p.name}`;const body=p.key==="tahajjud"?"Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID":`${p.name} ist eingetreten. DAR AL TAWḤID`;await showPrayerNotification(title,{body,tag:`prayer-${p.key}`,renotify:true});setTimeout(()=>scheduleLocalPrayerReminders(),60000)},d-now);prayerReminderTimeouts.push(timeoutId)}})}
 async function enablePrayerServerPush(settings){return syncPrayerPushTags(settings)}
 async function disablePrayerServerPush(){try{const OS=await waitForOneSignalReady();if(OS&&OS.User&&typeof OS.User.addTags==="function")await OS.User.addTags({prayer_notifications:"false"})}catch(e){}}
+async function sendPrayerTestNotification(){
+  if(!("Notification" in window)){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}
+  let permission=Notification.permission;
+  if(permission!=="granted")permission=await Notification.requestPermission();
+  if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
+  await showPrayerNotification("Gebetszeiten-Test",{
+    body:"Wenn du diese Nachricht siehst, sind Benachrichtigungen auf diesem Gerät erlaubt.",
+    tag:"prayer-test",
+    renotify:true
+  });
+}
 async function activatePrayerReminder(){
   const s=getPrayerSettings();
   if(!hasPrayerLocation(s)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}
@@ -2744,12 +2833,12 @@ async function activatePrayerReminder(){
   if(reminder){reminder.textContent=old;reminder.disabled=false}
   if(ok){
     const ios=isIOSDevice()&&!isStandalonePwa();
-    alert(ios?"Gebets-Push ist aktiv. Auf dem iPhone muss die App über Safari → Teilen → Zum Home-Bildschirm gespeichert sein, damit Push bei geschlossener App funktioniert.":"Gebets-Benachrichtigungen sind aktiv. Du bekommst Push zu jeder Gebetszeit für deinen Standort – auch wenn die App geschlossen ist.")
+    alert(ios?"Gebets-Erinnerung ist aktiv. Auf dem iPhone muss die App über Safari → Teilen → Zum Home-Bildschirm gespeichert und Push erlaubt sein. Teste danach mit „Test senden“.":"Gebets-Erinnerung ist aktiv. Teste sie mit „Test senden“. Lokale Erinnerungen laufen zuverlässig, solange die App aktiv/installiert ist; Push bei geschlossener App benötigt die OneSignal-Auslösung.")
   }else{
     alert("Lokale Erinnerung ist aktiv, solange die App offen ist. Für Push bei geschlossener App: zuerst 🔔 unten rechts tippen und Push erlauben, dann hier erneut „Erinnerung aktivieren“.")
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>activatePrayerReminder();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>activatePrayerReminder();const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
