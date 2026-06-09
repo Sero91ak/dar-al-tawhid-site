@@ -5,6 +5,7 @@
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
+const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
 
 if (!API_KEY) {
   console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
@@ -278,8 +279,32 @@ async function fetchLegacyPlayers() {
   return all;
 }
 
+async function fetchUserByAlias(aliasLabel, aliasId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
+
+  async function tryAuth(authHeader) {
+    const res = await fetch(url, {
+      headers: { Authorization: authHeader }
+    });
+    if (!res.ok) return { user: null, status: res.status, text: await res.text() };
+    return { user: JSON.parse(await res.text()), status: res.status, text: "" };
+  }
+
+  const keyResult = await tryAuth(`Key ${API_KEY}`);
+  if (keyResult.user) return keyResult.user;
+
+  const basicResult = await tryAuth(`Basic ${API_KEY}`);
+  if (basicResult.user) return basicResult.user;
+
+  return null;
+}
+
 async function fetchUserByExternalId(externalId) {
-  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/external_id/${encodeURIComponent(externalId)}`;
+  return fetchUserByAlias("external_id", externalId);
+}
+
+async function fetchUserBySubscriptionId(subscriptionId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/subscriptions/${encodeURIComponent(subscriptionId)}/user`;
 
   async function tryAuth(authHeader) {
     const res = await fetch(url, {
@@ -290,6 +315,12 @@ async function fetchUserByExternalId(externalId) {
   }
 
   return (await tryAuth(`Key ${API_KEY}`)) || (await tryAuth(`Basic ${API_KEY}`));
+}
+
+function extractUserTags(user) {
+  if (!user) return {};
+  const tags = user?.properties?.tags;
+  return tags && typeof tags === "object" ? { ...tags } : {};
 }
 
 function extractWebPushSubscriptionIds(user) {
@@ -304,26 +335,52 @@ function extractWebPushSubscriptionIds(user) {
     .filter(Boolean);
 }
 
+async function resolvePlayerTags(player) {
+  let tags = { ...(player.tags || {}) };
+  let subscriptionIds = [player.id].filter(Boolean);
+  const externalId = player.external_user_id || player.external_id;
+  let user = null;
+
+  if (externalId) {
+    user = await fetchUserByExternalId(externalId);
+  }
+
+  if (!extractUserTags(user).prayer_lat && player.id) {
+    const bySub = await fetchUserBySubscriptionId(player.id);
+    if (bySub) user = bySub;
+  }
+
+  if (user) {
+    tags = { ...tags, ...extractUserTags(user) };
+    const webIds = extractWebPushSubscriptionIds(user);
+    if (webIds.length) subscriptionIds = webIds;
+  }
+
+  return { tags, subscriptionIds, externalId };
+}
+
 async function fetchSubscriptions() {
   const players = await fetchLegacyPlayers();
   const enriched = [];
+  let userFetchMisses = 0;
+  let taggedUsers = 0;
 
   for (const player of players) {
-    let tags = { ...(player.tags || {}) };
-    let subscriptionIds = [player.id].filter(Boolean);
-    const externalId = player.external_user_id || player.external_id;
-
-    if ((!tags.prayer_notifications || !tags.prayer_lat) && externalId) {
-      const user = await fetchUserByExternalId(externalId);
-      if (user?.properties?.tags) {
-        tags = { ...tags, ...user.properties.tags };
-      }
-      const webIds = extractWebPushSubscriptionIds(user);
-      if (webIds.length) subscriptionIds = webIds;
+    const resolved = await resolvePlayerTags(player);
+    if (resolved.tags.prayer_notifications === "true" && resolved.tags.prayer_lat) {
+      taggedUsers += 1;
+    } else if (resolved.externalId || player.id) {
+      userFetchMisses += 1;
     }
 
-    enriched.push({ ...player, tags, subscriptionIds });
+    enriched.push({
+      ...player,
+      tags: resolved.tags,
+      subscriptionIds: resolved.subscriptionIds
+    });
   }
+
+  console.log(`Tag-Auflösung: ${taggedUsers} mit Gebets-Tags, ${userFetchMisses} ohne Tags trotz Subscription`);
 
   return enriched;
 }
@@ -396,17 +453,28 @@ function groupUsers(users) {
   return Array.from(map.values());
 }
 
-async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
-  const ids = group.subscriptionIds.slice(0, 2000);
-
-  if (!ids.length) return;
-
+function prayerNotificationCopy(prayer, mode) {
   const isTahajjud = prayer.key === "tahajjud";
+  const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
 
-  const body = {
-    app_id: APP_ID,
-    target_channel: "push",
-    include_subscription_ids: ids,
+  if (mode === "advance") {
+    return {
+      headings: {
+        de: `Nächstes Gebet: ${prayer.name}`,
+        en: `Next prayer: ${prayer.name}`
+      },
+      contents: {
+        de: isTahajjud
+          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht. DAR AL TAWḤID`
+          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr. DAR AL TAWḤID`,
+        en: isTahajjud
+          ? `Last third of the night begins in ${PRAYER_ADVANCE_MINUTES} min. DAR AL TAWḤID`
+          : `In ${PRAYER_ADVANCE_MINUTES} min · ${timeLabel}. DAR AL TAWḤID`
+      }
+    };
+  }
+
+  return {
     headings: {
       de: isTahajjud ? "Taḥajjud · letztes Drittel" : `Gebetszeit: ${prayer.name}`,
       en: isTahajjud ? "Tahajjud · last third of night" : `Prayer time: ${prayer.name}`
@@ -418,7 +486,23 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
       en: isTahajjud
         ? "Last third of the night – time for Tahajjud until Fajr. DAR AL TAWḤID"
         : `${prayer.name} time has entered. DAR AL TAWḤID`
-    },
+    }
+  };
+}
+
+async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "entry") {
+  const ids = group.subscriptionIds.slice(0, 2000);
+
+  if (!ids.length) return;
+
+  const copy = prayerNotificationCopy(prayer, mode);
+
+  const body = {
+    app_id: APP_ID,
+    target_channel: "push",
+    include_subscription_ids: ids,
+    headings: copy.headings,
+    contents: copy.contents,
     url: SITE_URL,
     isAnyWeb: true,
     send_after: sendAfter.toISOString()
@@ -455,7 +539,7 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
     : formatHour(prayer.time);
 
   console.log(
-    `Geplant: ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${text}`
+    `Geplant (${mode}): ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${text}`
   );
 }
 
@@ -494,21 +578,32 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
     );
 
     for (const prayer of prayers) {
-      const sendAfter = prayer.sendAfter
+      const entryAt = prayer.sendAfter
         ? prayer.sendAfter
         : prayer.time == null
           ? null
           : makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
 
-      if (!sendAfter) continue;
+      if (!entryAt) continue;
 
-      if (sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
-        const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
-        console.log(`Übersprungen, bereits vorbei: ${prayer.name} ${label} | ${group.timeZone}`);
-        continue;
+      const schedules = [
+        { mode: "entry", sendAfter: entryAt }
+      ];
+
+      if (prayer.key !== "sunrise") {
+        const advanceAt = new Date(entryAt.getTime() - PRAYER_ADVANCE_MINUTES * 60 * 1000);
+        schedules.push({ mode: "advance", sendAfter: advanceAt });
       }
 
-      await sendOneSignalToSubscriptions(group, prayer, sendAfter);
+      for (const schedule of schedules) {
+        if (schedule.sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
+          const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
+          console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
+          continue;
+        }
+
+        await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
+      }
     }
   }
 })();
