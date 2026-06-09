@@ -404,29 +404,24 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 body.has-bottom-nav{padding-bottom:calc(70px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
 body.has-bottom-nav .float-actions{bottom:calc(76px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
-.top-edge-fade{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 34px);background:linear-gradient(180deg,#000 0%,#000 env(safe-area-inset-top,0px),rgba(2,2,1,.88) calc(env(safe-area-inset-top,0px) + 10px),transparent 100%)}.top-swim-aura{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 88px);overflow:hidden}.top-swim-aura:before{content:"";position:absolute;left:8%;right:8%;top:calc(env(safe-area-inset-top,0px) + 8px);height:72px;background:radial-gradient(ellipse 100% 88% at 50% 100%,rgba(239,215,142,.20) 0%,rgba(34,28,18,.42) 34%,rgba(8,7,5,.72) 62%,rgba(0,0,0,.94) 84%,transparent 100%);filter:blur(14px);opacity:.92;transform:translateY(0);animation:topSwimDrift 9s ease-in-out infinite alternate}.top-swim-aura:after{content:"";position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 18px);height:58px;background:linear-gradient(180deg,transparent 0%,rgba(239,215,142,.05) 36%,rgba(18,16,12,.24) 68%,transparent 100%);opacity:.85}@keyframes topSwimDrift{0%{transform:translateY(0) scale(1)}100%{transform:translateY(5px) scale(1.03)}}.reader-mode .top-edge-fade,.reader-mode .top-swim-aura{display:none!important}
+.top-edge-fade{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 18px);background:linear-gradient(180deg,#000 0%,#000 env(safe-area-inset-top,0px),transparent 100%)}.top-swim-aura{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 52px);overflow:hidden}.top-swim-aura:before{content:"";position:absolute;left:0;right:0;top:env(safe-area-inset-top,0px);height:48px;background:radial-gradient(ellipse 92% 100% at 50% 100%,rgba(239,215,142,.11) 0%,rgba(28,23,15,.34) 38%,rgba(5,5,4,.62) 66%,rgba(0,0,0,.92) 88%,transparent 100%);filter:blur(10px);opacity:.88}.reader-mode .top-edge-fade,.reader-mode .top-swim-aura{display:none!important}
 .reader-mode .bottom-nav{display:none!important}
 html.is-standalone-pwa{background:#000}
 @media(max-width:700px){
   html.is-standalone-pwa body{
-    padding-top:max(24px,env(safe-area-inset-top,0px));
-    background:linear-gradient(180deg,#000 0%,#040403 56px,#0a0907 118px,#0b0a07 52%,#050504 100%),radial-gradient(circle at 12% 0%,rgba(239,215,142,.11),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%);
+    padding-top:env(safe-area-inset-top,0px);
+    background:linear-gradient(180deg,#000 0%,#060605 28px,#0a0907 64px,#0b0a07 52%,#050504 100%),radial-gradient(circle at 12% 0%,rgba(239,215,142,.09),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.08),transparent 32%);
   }
   html.is-standalone-pwa .top-shell{
-    overflow:visible;
-    margin-top:4px;
+    overflow:hidden;
+    margin-top:0;
+    border-top-color:transparent!important;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.45) 10px,#000 24px,#000 100%);
+    mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.45) 10px,#000 24px,#000 100%);
+    box-shadow:0 22px 65px rgba(0,0,0,.40),inset 0 -1px 0 rgba(210,177,91,.28),inset 1px 0 0 rgba(210,177,91,.24),inset -1px 0 0 rgba(210,177,91,.24)!important;
   }
-  html.is-standalone-pwa .top-shell:before{
-    content:"";
-    position:absolute;
-    top:-30px;
-    left:6%;
-    right:6%;
-    height:34px;
-    background:radial-gradient(ellipse 100% 100% at 50% 100%,rgba(239,215,142,.16) 0%,rgba(20,17,12,.48) 40%,rgba(0,0,0,.88) 78%,transparent 100%);
-    filter:blur(11px);
-    pointer-events:none;
-    z-index:-1;
+  html.is-standalone-pwa .top-shell .header{
+    padding-top:24px!important;
   }
   html.is-standalone-pwa .float-btn{
     width:50px;
