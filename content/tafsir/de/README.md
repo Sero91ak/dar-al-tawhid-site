@@ -19,6 +19,14 @@ Schema pro Datei:
         }
       ],
       "sabab": "Offenbarungsgrund, falls authentisch überliefert.",
+      "hadiths": [
+        {
+          "source": "Ṣaḥīḥ al-Bukhārī / Muslim / Sunan usw.",
+          "text": "Hadith oder Athar zur Ayah in deutscher Übertragung.",
+          "grading": "ṣaḥīḥ / ḥasan / geprüft",
+          "url": "https://..."
+        }
+      ],
       "place": "Mekka",
       "period": "Makkanische Phase",
       "year": "",
@@ -33,4 +41,4 @@ Schema pro Datei:
 }
 ```
 
-Wenn ein Feld noch nicht zuverlässig belegt ist, bleibt es leer. Die App erfindet keine Offenbarungsgründe oder Jahresangaben.
+Wenn ein Feld noch nicht zuverlässig belegt ist, bleibt es leer. Die App erfindet keine Offenbarungsgründe, Hadithe, Bewertungen oder Jahresangaben. Online-Quellen werden erst eingetragen, wenn Quelle, arabischer Ursprung und deutsche Übertragung geprüft sind.
