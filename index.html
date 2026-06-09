@@ -18,7 +18,7 @@
 <meta name="theme-color" content="#080806">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="msapplication-TileImage" content="/app-icon-192.png?v=source-under-statement-v12">
 <meta name="msapplication-TileColor" content="#080806">
 
@@ -393,6 +393,26 @@ body.has-bottom-nav{padding-bottom:calc(70px + max(0px,calc(env(safe-area-inset-
 body.has-bottom-nav .float-actions{bottom:calc(76px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 .reader-mode .bottom-nav{display:none!important}
+@media(max-width:700px){
+  html.is-standalone-pwa body{
+    padding-top:max(24px,env(safe-area-inset-top,0px));
+  }
+  html.is-standalone-pwa body.has-bottom-nav{
+    padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));
+  }
+  html.is-standalone-pwa .bottom-nav{
+    bottom:max(12px,env(safe-area-inset-bottom,0px));
+  }
+  html.is-standalone-pwa body.has-bottom-nav .float-actions{
+    bottom:calc(92px + env(safe-area-inset-bottom,0px));
+  }
+  html.is-standalone-pwa .float-btn{
+    width:50px;
+    height:50px;
+    flex-basis:50px;
+    border-radius:17px;
+  }
+}
 @media(max-width:700px){
   .profile-meta-grid,.book-meta-grid{grid-template-columns:1fr}
   .home-more-body .overview-compact .stats-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
@@ -2705,6 +2725,7 @@ const RAMADAN_DUA_CATS=["Vergebung","Standhaftigkeit","Herz","Gebet","Barmherzig
 const RAMADAN_POST_KEYS=["fast","siyām","siyam","ramad","tarāw","taraw","laylat","qadr","nahr","eid","fiṭr","fitr","ʿīd"];
 function isStandalonePwa(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true}
 function isIOSDevice(){return /iphone|ipad|ipod/i.test(navigator.userAgent)}
+function applyStandalonePwaClass(){document.documentElement.classList.toggle("is-standalone-pwa",isStandalonePwa())}
 function nextHijriEvent(month,day){const h=approxHijriParts();const today=new Date();today.setHours(0,0,0,0);for(const y of [h.year,h.year+1]){const g=gregorianFromHijri(y,month,day);g.setHours(0,0,0,0);const diff=Math.round((g-today)/86400000);if(diff>=0)return{gDate:g,diff,hYear:y,month,day}}return null}
 function seasonalIslamicContext(){const h=approxHijriParts();const {day,month,year}=h;if(month===9)return{phase:"ramadan",title:"Ramaḍān",subtitle:`Tag ${day} · ${hijriMonthName(9)} ${year}`,day,month,year};if(month===10&&day<=3)return{phase:"eid-fitr",title:"ʿĪd al-Fiṭr",subtitle:`${day}. ${hijriMonthName(10)} ${year}`,day,month,year};if(month===12&&day>=8&&day<=13)return{phase:"hajj",title:day===9?"Tag von ʿArafah":day===10?"ʿĪd al-Aḍḥā":"Tage von Dhū al-Ḥijjah",subtitle:`${day}. ${hijriMonthName(12)} ${year}`,day,month,year};if(month===12&&day>=1&&day<8)return{phase:"hajj-prep",title:"Dhū al-Ḥijjah",subtitle:`${day}. Tag · Hajj-Saison`,day,month,year};if(month===8||(month===7&&day>=15))return{phase:"ramadan-prep",title:month===8?"Vorbereitung auf Ramaḍān":"Ramaḍān naht",subtitle:`${day}. ${hijriMonthName(month)} ${year}`,day,month,year};const nextRam=nextHijriEvent(9,1);if(nextRam&&nextRam.diff>0&&nextRam.diff<=45)return{phase:"countdown",title:"Ramaḍān",subtitle:`Noch ca. ${nextRam.diff} Tage`,daysLeft:nextRam.diff,day,month,year,targetDate:nextRam.gDate};return null}
 function getSuhurIftarTimes(settings=getPrayerSettings()){if(!hasPrayerLocation(settings))return null;const times=calculatePrayerTimes(new Date(),settings);const suhur=times.find(t=>t.key==="fajr");const iftar=times.find(t=>t.key==="maghrib");if(!suhur||!iftar)return null;return{suhur,iftar,city:settings.city}}
@@ -2949,6 +2970,7 @@ function showFloatTipsOnce(){
   },6500);
 }
 window.addEventListener("DOMContentLoaded",()=>{
+  applyStandalonePwaClass();
   bindBottomNav();
   updateHijriHeaderDate();
   updateHeaderPrayerStatus();
