@@ -41,4 +41,17 @@ Schema pro Datei:
 }
 ```
 
-Wenn ein Feld noch nicht zuverlässig belegt ist, bleibt es leer. Die App erfindet keine Offenbarungsgründe, Hadithe, Bewertungen oder Jahresangaben. Online-Quellen werden erst eingetragen, wenn Quelle, arabischer Ursprung und deutsche Übertragung geprüft sind.
+Wenn ein Feld noch nicht zuverlässig belegt ist, bleibt es leer. Die App erfindet keine Offenbarungsgründe, Hadithe, Bewertungen oder Jahresangaben.
+
+## Neu generieren
+
+```bash
+node scripts/build-tafsir-data.js
+```
+
+Quellen im Build:
+- **Bedeutung:** `content/quran` (Bubenheim & Elyas)
+- **Tafsīr:** Ibn Kathīr (arabisch, spa5k/tafsir_api)
+- **Offenbarung / Hadithe:** Asbāb al-Nuzūl (arabisch, mostafaahmed97/asbab-al-nuzul-dataset)
+
+Deutsche Übersetzungen für Tafsīr und Offenbarungsgründe werden später ergänzt, sobald geprüft.
