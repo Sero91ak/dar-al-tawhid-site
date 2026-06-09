@@ -105,6 +105,15 @@ function dayOfYearFromLocal(localDate) {
   return Math.floor((current - start) / 86400000);
 }
 
+function addLocalDays(localDate, days) {
+  const d = new Date(Date.UTC(localDate.year, localDate.month - 1, localDate.day + days));
+  return {
+    year: d.getUTCFullYear(),
+    month: d.getUTCMonth() + 1,
+    day: d.getUTCDate()
+  };
+}
+
 function sunTimeForAngle(localDate, lat, lon, angle, morning, timeZone) {
   const N = dayOfYearFromLocal(localDate);
   const lngHour = lon / 15;
@@ -203,13 +212,36 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
   const maghrib = sunTimeForAngle(localDate, lat, lon, 0.833, false, timeZone);
   const isha = sunTimeForAngle(localDate, lat, lon, methodAngle, false, timeZone);
 
-  return [
+  const prayers = [
     { key: "fajr", name: "Fajr", time: fajr },
     { key: "dhuhr", name: "Dhuhr", time: dhuhr },
     { key: "asr", name: "ʿAṣr", time: asr },
     { key: "maghrib", name: "Maghrib", time: maghrib },
     { key: "isha", name: "ʿIshāʾ", time: isha }
   ];
+
+  const tomorrow = addLocalDays(localDate, 1);
+  const fajrNext = sunTimeForAngle(tomorrow, lat, lon, methodAngle, true, timeZone);
+
+  if (maghrib != null && fajrNext != null) {
+    const maghribUtc = makeUtcDateFromLocal(localDate, maghrib, timeZone);
+    const fajrUtc = makeUtcDateFromLocal(tomorrow, fajrNext, timeZone);
+
+    if (fajrUtc > maghribUtc) {
+      const startUtc = new Date(
+        maghribUtc.getTime() + ((fajrUtc.getTime() - maghribUtc.getTime()) * 2 / 3)
+      );
+
+      prayers.push({
+        key: "tahajjud",
+        name: "Taḥajjud",
+        time: null,
+        sendAfter: startUtc
+      });
+    }
+  }
+
+  return prayers;
 }
 
 async function fetchLegacyPlayers() {
@@ -369,17 +401,23 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
 
   if (!ids.length) return;
 
+  const isTahajjud = prayer.key === "tahajjud";
+
   const body = {
     app_id: APP_ID,
     target_channel: "push",
     include_subscription_ids: ids,
     headings: {
-      de: `Gebetszeit: ${prayer.name}`,
-      en: `Prayer time: ${prayer.name}`
+      de: isTahajjud ? "Taḥajjud · letztes Drittel" : `Gebetszeit: ${prayer.name}`,
+      en: isTahajjud ? "Tahajjud · last third of night" : `Prayer time: ${prayer.name}`
     },
     contents: {
-      de: `${prayer.name} ist eingetreten. DAR AL TAWḤID`,
-      en: `${prayer.name} time has entered. DAR AL TAWḤID`
+      de: isTahajjud
+        ? "Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID"
+        : `${prayer.name} ist eingetreten. DAR AL TAWḤID`,
+      en: isTahajjud
+        ? "Last third of the night – time for Tahajjud until Fajr. DAR AL TAWḤID"
+        : `${prayer.name} time has entered. DAR AL TAWḤID`
     },
     url: SITE_URL,
     isAnyWeb: true,
@@ -412,8 +450,12 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
     return;
   }
 
+  const timeLabel = prayer.time == null
+    ? sendAfter.toISOString()
+    : formatHour(prayer.time);
+
   console.log(
-    `Geplant: ${prayer.name} ${formatHour(prayer.time)} | ${ids.length} Nutzer | ${group.timeZone} → ${text}`
+    `Geplant: ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${text}`
   );
 }
 
@@ -452,12 +494,17 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
     );
 
     for (const prayer of prayers) {
-      if (prayer.time == null) continue;
+      const sendAfter = prayer.sendAfter
+        ? prayer.sendAfter
+        : prayer.time == null
+          ? null
+          : makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
 
-      const sendAfter = makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
+      if (!sendAfter) continue;
 
       if (sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
-        console.log(`Übersprungen, bereits vorbei: ${prayer.name} ${formatHour(prayer.time)} | ${group.timeZone}`);
+        const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
+        console.log(`Übersprungen, bereits vorbei: ${prayer.name} ${label} | ${group.timeZone}`);
         continue;
       }
 
