@@ -336,7 +336,7 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .direct-pick-panel.home-direct-pick{margin:0 0 13px}
 .direct-pick-panel.home-direct-pick .direct-pick-title h3{font-size:21px}
 .direct-pick-panel.home-direct-pick .direct-pick-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-.direct-pick-panel.home-direct-pick .direct-pick{height:40px;font-size:12px;padding:0 9px}
+.direct-pick-panel.home-direct-pick .direct-pick{height:40px;font-size:12px;padding:0 9px;min-width:0;text-overflow:ellipsis}
 .home-folder-section{margin-top:4px}
 .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:4px;padding:7px max(8px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-right));border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(14,12,9,.97),rgba(6,6,5,.98));backdrop-filter:blur(12px);box-shadow:0 -12px 40px rgba(0,0,0,.35)}
 .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:50px;max-width:88px;border:1px solid transparent;border-radius:15px;background:transparent;color:var(--muted);font-size:9px;font-weight:950;cursor:pointer;padding:5px 3px;font-family:var(--sans)}
@@ -353,7 +353,9 @@ body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-botto
   .home-more-body .overview-compact .stat-card{padding:6px 4px}
   .home-more-body .overview-compact .stat-card b{font-size:14px}
   .home-more-body .overview-compact .stat-card span{font-size:8.5px}
-  .direct-pick-panel.home-direct-pick .direct-pick-grid{grid-template-columns:1fr;gap:7px}
+  .direct-pick-panel.home-direct-pick .direct-pick-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .direct-pick-panel.home-direct-pick .direct-pick{height:38px;font-size:10px;padding:0 5px}
+  .direct-pick-panel.home-direct-pick .direct-pick-title span{display:none}
   .profile-title,.book-profile-title,.series-title,.pinned-title{font-size:21px}
   .status-chip-row{justify-content:flex-start}
 }
@@ -1124,6 +1126,15 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
     min-width:0!important;
     height:43px!important;
     font-size:12px!important;
+  }
+  .direct-pick-panel.home-direct-pick .direct-pick-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .direct-pick-panel.home-direct-pick .direct-pick{
+    height:38px!important;
+    font-size:10px!important;
+    padding:0 4px!important;
   }
   .footer-socials{
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
@@ -2080,7 +2091,7 @@ function renderFilterPanel(prefix="home",hidden=true){const cats=uniqueList("cat
 function renderSearchPanel(){
   return `<section class="search-pro-panel"><div class="search-line"><input id="homeSearchInput" class="search" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…"><button id="advancedFilterBtn" class="advanced-toggle" type="button">Filter anzeigen</button></div>${renderFilterPanel("home",true)}<div class="search-helper">Tipp: Nutze „Schnell auswählen“ für Thema, Gelehrten oder Buch. Die Filter brauchst du nur für gezielte Suche.</div></section>`;
 }
-function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=uniqueList("scholar").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");return`<section class="direct-pick-panel ${extraClass}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema / Kategorie</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch / Werk</option>${books}</select></div></section>`}
+function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=uniqueList("scholar").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");return`<section class="direct-pick-panel ${extraClass}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch</option>${books}</select></div></section>`}
 function bindDirectPickPanel(){const c=$("directCategory"),s=$("directScholar"),b=$("directBook");if(c){c.onchange=()=>{if(c.value){navigate("topic",c.value);c.selectedIndex=0}}};if(s){s.onchange=()=>{if(s.value){navigate("scholar",s.value);s.selectedIndex=0}}};if(b){b.onchange=()=>{if(b.value){navigate("book",b.value);b.selectedIndex=0}}}}
 
 function hasTextFragment(url){return String(url||"").includes("#:~:text=")}
