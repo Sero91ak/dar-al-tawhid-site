@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 /**
  * Builds content/quran-athar/de/NNN.json from content/tafsir/de/NNN.json
- * for selected surahs. Extracts tafsir entries and substantive hadith notes.
+ * for selected surahs.
+ *
+ * Strict mode: this file must NOT mirror Ibn Kathir/as-Sa'di tafsir panels.
+ * It only emits entries with an explicit early/riwayah basis and a usable
+ * authenticity marker. If a verse has no such entry, it stays empty.
  */
 const fs = require("fs");
 const path = require("path");
@@ -23,27 +27,34 @@ function loadSurahNames() {
   return map;
 }
 
-const GENERATION_RULES = [
-  [/ibn\s*ʿabb|ibn\s*abb/i, "Sahabi", "Tafsir"],
-  [/ibn\s*masʿ|ibn\s*masu/i, "Sahabi", "Tafsir"],
-  [/ab[uū]\s*hurayrah|ab[uū]\s*dharr|ʿāʾish|aishah|umar|uthman|ali\b/i, "Sahabi", "Tafsir"],
-  [/mujahid|qat[aā]d|ikrimah|saʿ[iī]d ibn jubayr|al-?hasan al-?bas|al-?ḍaḥh[aā]k|suddi/i, "Tabi'i", "Tafsir"],
-  [/ibn\s*kath[iī]r/i, "Imam des Tafsir", "Tafsir"],
-  [/as-?saʿd[iī]|saadi/i, "Imam", "Tafsir"],
-  [/ibn\s*taymiyyah|ibn\s*al-?qayyim|ahmad ibn hanbal|al-?bukh[aā]r[iī]|ab[uū]\s*hatim|ab[uū]\s*zurʿah|an-?nawaw[iī]/i, "Imam", "Tafsir"],
-  [/at-?tabar[iī]|al-?baghaw[iī]|al-?qurtub[iī]|al-?mawardi/i, "Imam", "Tafsir"],
+const EARLY_PERSON_RULES = [
+  [/ibn\s*ʿabb|ibn\s*abb/i, "Ibn ʿAbbās", "Sahabi"],
+  [/ibn\s*masʿ|ibn\s*masu/i, "Ibn Masʿūd", "Sahabi"],
+  [/ab[uū]\s*hurayrah/i, "Abū Hurayrah", "Sahabi"],
+  [/ab[uū]\s*dharr/i, "Abū Dharr", "Sahabi"],
+  [/ʿāʾish|aishah/i, "ʿĀʾishah", "Sahabiyyah"],
+  [/\bʿumar\b|\bumar\b/i, "ʿUmar ibn al-Khaṭṭāb", "Sahabi"],
+  [/\bʿuthm[aā]n\b|\buthman\b/i, "ʿUthmān ibn ʿAffān", "Sahabi"],
+  [/\bʿal[iī]\b|\bali\b/i, "ʿAlī ibn Abī Ṭālib", "Sahabi"],
+  [/muj[aā]hid/i, "Mujāhid", "Tābiʿī"],
+  [/qat[aā]dah?/i, "Qatādah", "Tābiʿī"],
+  [/ʿikrimah|ikrimah/i, "ʿIkrimah", "Tābiʿī"],
+  [/saʿ[iī]d ibn jubayr/i, "Saʿīd ibn Jubayr", "Tābiʿī"],
+  [/al-?hasan al-?bas/i, "al-Ḥasan al-Baṣrī", "Tābiʿī"],
+  [/al-?ḍaḥh[aā]k|ad-?dahhak/i, "aḍ-Ḍaḥḥāk", "Tābiʿī"],
+  [/as-?sudd[iī]|suddi/i, "as-Suddī", "Tābiʿī"],
+  [/ahmad ibn hanbal|im[aā]m ahmad/i, "Aḥmad ibn Ḥanbal", "Imam bis 4. Jh."],
+  [/al-?bukh[aā]r[iī]/i, "al-Bukhārī", "Imam bis 4. Jh."],
+  [/ab[uū]\s*hatim/i, "Abū Ḥātim ar-Rāzī", "Imam bis 4. Jh."],
+  [/ab[uū]\s*zurʿah/i, "Abū Zurʿah ar-Rāzī", "Imam bis 4. Jh."],
 ];
 
-function classifyPerson(source) {
-  const s = String(source || "");
-  for (const [re, generation, category] of GENERATION_RULES) {
-    if (re.test(s)) return { generation, category };
+function earlyPersonFrom(text) {
+  const s = String(text || "");
+  for (const [re, person, generation] of EARLY_PERSON_RULES) {
+    if (re.test(s)) return { person, generation };
   }
-  if (/prophet|gesandten|ﷺ|marfu/i.test(s)) return { generation: "Prophet ﷺ", category: "Hadith" };
-  if (/sahih|muslim|bukh|tirmidh|ab[uū]\s*d[aā]w|nas[aā]i|ibn\s*majah|musnad|ahmad/i.test(s)) {
-    return { generation: "Prophet ﷺ", category: "Hadith" };
-  }
-  return { generation: "Salaf", category: "Tafsir" };
+  return null;
 }
 
 function isGenericHadith(entry) {
@@ -56,11 +67,30 @@ function isGenericHadith(entry) {
   );
 }
 
-function cleanPerson(source) {
-  return String(source || "Überlieferung")
-    .replace(/\([^)]*\)/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+function isAuthentic(entry) {
+  const hay = `${entry?.source || ""} ${entry?.grading || ""}`.toLowerCase();
+  return (
+    hay.includes("ṣaḥīḥ") ||
+    hay.includes("sahih") ||
+    hay.includes("ḥasan") ||
+    hay.includes("hasan") ||
+    hay.includes("bukhārī") ||
+    hay.includes("bukhari") ||
+    hay.includes("muslim")
+  );
+}
+
+function hadithSourceIsReliable(entry) {
+  const hay = `${entry?.source || ""} ${entry?.grading || ""}`.toLowerCase();
+  return (
+    hay.includes("ṣaḥīḥ") ||
+    hay.includes("sahih") ||
+    hay.includes("bukhārī") ||
+    hay.includes("bukhari") ||
+    hay.includes("muslim") ||
+    hay.includes("ḥasan") ||
+    hay.includes("hasan")
+  );
 }
 
 function buildAtharFromTafsirVerse(verse, surahId, surahName) {
@@ -74,34 +104,37 @@ function buildAtharFromTafsirVerse(verse, surahId, surahName) {
     athar.push(item);
   };
 
+  // Do not mirror tafsir panels. Only accept tafsir rows when the source itself
+  // explicitly names an early authority and carries a usable authenticity marker.
   for (const row of verse.tafsir || []) {
     if (!row?.text || !String(row.text).trim()) continue;
-    const person = cleanPerson(row.source);
-    const meta = classifyPerson(person);
+    if (!isAuthentic(row)) continue;
+    const early = earlyPersonFrom(`${row.source || ""} ${row.text || ""}`);
+    if (!early) continue;
     push({
-      person,
-      generation: meta.generation,
-      category: meta.category,
+      person: early.person,
+      generation: early.generation,
+      category: "Athar-Tafsir",
       text: String(row.text).trim(),
-      source: `${row.source || person}; Tafsīr zu ${surahName} ${surahId}:${verse.id}`,
-      note: "Sinngemäße deutsche Zusammenfassung aus der Tafsīr-Sammlung.",
+      source: `${row.source || "Athar"}; Bezug zu ${surahName} ${surahId}:${verse.id}`,
+      grading: row.grading || "authentisch markiert",
+      note: "Streng gefiltert: nur frühe Autorität mit Authentizitäts-Hinweis.",
     });
   }
 
   for (const row of verse.hadiths || []) {
     if (!row?.text || isGenericHadith(row)) continue;
-    const person = /prophet|ﷺ|gesandten/i.test(row.text)
-      ? "Prophet Muhammad ﷺ"
-      : cleanPerson(row.source);
-    const meta = classifyPerson(`${person} ${row.source || ""}`);
+    if (!hadithSourceIsReliable(row)) continue;
+    const early = earlyPersonFrom(row.text);
+    const isMarfu = /prophet|gesandten|ﷺ|sagte/i.test(row.text);
     push({
-      person,
-      generation: meta.generation,
-      category: "Hadith",
+      person: early?.person || (isMarfu ? "Prophet Muhammad ﷺ" : "Ṣaḥīḥe Überlieferung"),
+      generation: early?.generation || (isMarfu ? "Prophet ﷺ" : "Überlieferung"),
+      category: early ? "Sahih-Athar / Hadith" : "Hadith-Tafsir",
       text: String(row.text).trim(),
       source: `${row.source || "Hadith"}; Bezug zu ${surahName} ${surahId}:${verse.id}`,
       grading: row.grading || "",
-      note: row.grading ? "" : "Hadith-Einordnung zur Ayah.",
+      note: "Streng übernommen: nur nicht-generische Überlieferung mit ṣaḥīḥ/ḥasan-Hinweis.",
     });
   }
 
@@ -121,7 +154,7 @@ function buildSurahAthar(surahId, surahNames) {
   }
 
   return {
-    source: `Āthār-Auszüge zu ${surahName} (deutsche Zusammenfassungen aus Tafsīr und Hadith-Überlieferungen)`,
+    source: `Strenge Āthār-Auszüge zu ${surahName}: nur frühe/riwāyah-basierte Einträge mit Authentizitäts-Hinweis`,
     updated: new Date().toISOString().slice(0, 10),
     verses,
   };
