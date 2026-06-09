@@ -80,7 +80,11 @@ function defaultTafsir(verse, meta, surah) {
     },
     {
       source: "as-Saʿdī",
-      text: `as-Saʿdī fasst den Sinn dieser Ayah in klarer, allgemein verständlicher Sprache zusammen und verbindet sie mit praktischer Rechtleitung für den Gläubigen.`,
+      text: `as-Saʿdī fasst den Sinn dieser Ayah in klarer, allgemein verständlicher deutscher Sprache zusammen und verbindet sie mit praktischer Rechtleitung für den Gläubigen.`,
+    },
+    {
+      source: "Ibn ʿAbbās",
+      text: `Die Erklärung von Ibn ʿAbbās zu dieser Ayah wird in deutscher Übertragung ergänzt, sobald der geprüfte Text vorliegt.`,
     },
   ];
 }
@@ -110,34 +114,9 @@ function mergeEntry(base, override) {
   };
 }
 
-function asbabOverride(asbabEntries) {
-  if (!Array.isArray(asbabEntries) || !asbabEntries.length) return null;
-  const reports = asbabEntries.flatMap((entry) => entry.occasions || []);
-  if (!reports.length) return null;
-  const source = "Ṣaḥīḥ Asbāb an-Nuzūl (Ibrāhīm Muḥammad al-ʿAlī)";
-  return {
-    sabab:
-      `Für diese Ayah ist ein belegter Anlass der Offenbarung in ${source} überliefert. Arabischer Wortlaut des Berichtes:\n\n` +
-      reports.map((text, idx) => `${idx + 1}. ${text}`).join("\n\n"),
-    hadiths: reports.map((text, idx) => ({
-      source: `${source}${reports.length > 1 ? ` · Bericht ${idx + 1}` : ""}`,
-      text,
-      grading: "belegter Asbāb-an-Nuzūl-Bericht",
-    })),
-  };
-}
-
-function applyAsbab(entry, asbabEntries) {
-  const override = asbabOverride(asbabEntries);
-  if (!override) return entry;
-  const existingHadiths = Array.isArray(entry.hadiths)
-    ? entry.hadiths.filter((item) => item?.source !== "Einordnung · Überlieferung")
-    : [];
-  return {
-    ...entry,
-    sabab: override.sabab,
-    hadiths: [...override.hadiths, ...existingHadiths],
-  };
+function applyAsbab(entry) {
+  // Kein arabischer Asbāb-Rohstoff in der App — nur geprüfte deutsche Texte aus Curated-Dateien.
+  return entry;
 }
 
 function buildSurah(id) {
@@ -155,7 +134,7 @@ function buildSurah(id) {
   const verses = surah.verses.map((v) => {
     const base = defaultEntry(v, meta, surah);
     const merged = mergeEntry(base, curated[v.id]);
-    return applyAsbab(merged, asbab[String(id)]?.[String(v.id)]);
+    return applyAsbab(merged);
   });
 
   const payload = {
