@@ -1891,10 +1891,25 @@ body:before{
   .folder-grid,
   .latest-grid,
   .grid-list,
-  .post-grid,
-  .direct-pick-grid,
+  .post-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
   .filter-grid{
     grid-template-columns:1fr!important;
+  }
+  .direct-pick-grid{
+    grid-template-columns:1fr!important;
+  }
+  .direct-pick-panel.home-direct-pick .direct-pick-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  .direct-pick-panel.home-direct-pick .direct-pick{
+    height:40px;
+    min-width:0;
+    padding:0 8px;
+    font-size:11.5px;
+    text-overflow:ellipsis;
   }
   .collapsible-grid.collapsed > article:nth-child(-n+3){
     display:block!important;
