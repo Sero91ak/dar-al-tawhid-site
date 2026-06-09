@@ -366,10 +366,12 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .quran-surah-head-ar{direction:rtl;font-size:clamp(22px,4.2vw,32px);color:#fff8e8;margin-top:4px;line-height:1.3}
 .quran-surah-head-meta{color:var(--muted);font-size:11px;font-weight:850;margin-top:6px}
 .quran-surah-head-tools{flex:0 0 auto;padding-top:4px}
-.quran-wake-btn{border:1px solid rgba(239,215,142,.48);border-radius:999px;background:rgba(239,215,142,.10);color:var(--cream);min-height:38px;padding:8px 14px;font-size:11px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
-.quran-wake-btn.is-on{border-color:rgba(140,255,154,.55);background:rgba(140,255,154,.12);color:#ebffdf}
-.quran-wake-btn.is-off{opacity:.82}
-.quran-wake-btn:disabled{opacity:.45;cursor:not-allowed}
+.quran-wake-btn{border:1px solid rgba(239,215,142,.48);border-radius:999px;background:rgba(239,215,142,.10);color:var(--cream);min-height:38px;padding:8px 14px;font-size:11px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:border-color .28s ease,background .28s ease,color .28s ease,box-shadow .28s ease,opacity .28s ease,transform .12s ease}
+.quran-wake-btn.is-on{border-color:rgba(140,255,154,.62);background:linear-gradient(180deg,rgba(140,255,154,.20),rgba(140,255,154,.09));color:#ebffdf;box-shadow:0 0 0 0 rgba(140,255,154,.34),0 4px 14px rgba(140,255,154,.20);animation:quran-wake-glow 2.2s ease-in-out infinite}
+.quran-wake-btn.is-off{border-color:rgba(239,215,142,.35);background:rgba(239,215,142,.08);opacity:.82;animation:none;box-shadow:none}
+.quran-wake-btn:active{transform:scale(.96)}
+.quran-wake-btn:disabled{opacity:.45;cursor:not-allowed;animation:none}
+@keyframes quran-wake-glow{0%,100%{box-shadow:0 0 0 0 rgba(140,255,154,.34),0 4px 14px rgba(140,255,154,.20)}50%{box-shadow:0 0 0 5px rgba(140,255,154,.18),0 4px 18px rgba(140,255,154,.30)}}
 .quran-ayah{border:1px solid var(--line2);border-radius:18px;background:rgba(239,215,142,.04);padding:13px 14px;margin-bottom:10px}
 .quran-ayah-num{color:var(--gold2);font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
 .quran-ayah-ar{direction:rtl;text-align:right;font-family:"Times New Roman",Georgia,serif;font-size:clamp(21px,4.8vw,28px);line-height:1.85;color:#fff9e8}
@@ -2160,18 +2162,18 @@ body:before{
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.quran-wake-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
   backdrop-filter:blur(10px) saturate(1.12)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.10)!important;
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.quran-wake-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):hover{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):hover{
   border-color:rgba(255,255,255,.20)!important;
   filter:brightness(1.03);
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.quran-wake-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):active{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):active{
   transform:scale(.99);
   filter:brightness(1.04);
 }
@@ -2206,6 +2208,20 @@ body:before{
 }
 .bottom-nav-btn.is-pressed .nav-icon,.bottom-nav-btn:active .nav-icon{transform:scale(.94)!important}
 .bottom-nav-btn.active:not(:active):not(.is-pressed) .nav-icon{transform:translateY(-1px) scale(1.08)!important}
+.quran-wake-btn.is-on{
+  border-color:rgba(140,255,154,.62)!important;
+  background:linear-gradient(180deg,rgba(140,255,154,.20),rgba(140,255,154,.09))!important;
+  color:#ebffdf!important;
+  box-shadow:0 0 0 0 rgba(140,255,154,.34),0 4px 14px rgba(140,255,154,.20)!important;
+  animation:quran-wake-glow 2.2s ease-in-out infinite!important;
+}
+.quran-wake-btn.is-off{
+  border-color:rgba(239,215,142,.35)!important;
+  background:rgba(239,215,142,.08)!important;
+  color:var(--cream)!important;
+  box-shadow:none!important;
+  animation:none!important;
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
