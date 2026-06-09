@@ -1533,7 +1533,7 @@ body:before{
   position:relative;
   background:radial-gradient(circle at center,rgba(239,215,142,.12),rgba(0,0,0,.28));
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 20px 44px rgba(0,0,0,.32);
-  overflow:visible;
+  overflow:hidden;
 }
 .qibla-compass-dial{
   position:absolute;
@@ -1596,37 +1596,44 @@ body:before{
 .qibla-w{left:14px;top:50%;transform:translateY(-50%)}
 .qibla-kaaba-marker{
   position:absolute;
-  left:50%;
-  top:50%;
-  width:2px;
-  margin-left:-1px;
-  height:40%;
-  transform-origin:50% 100%;
+  inset:0;
+  transform-origin:50% 50%;
   z-index:4;
   pointer-events:none;
 }
-.qibla-kaaba-icon{
+.qibla-kaaba-badge{
   position:absolute;
   left:50%;
-  top:0;
-  transform:translate(-50%,-58%);
-  font-size:24px;
-  line-height:1;
-  filter:drop-shadow(0 3px 8px rgba(0,0,0,.45));
-}
-.qibla-compass-pro.qibla-static-mode .qibla-kaaba-icon{
-  filter:drop-shadow(0 0 10px rgba(239,215,142,.55)) drop-shadow(0 3px 8px rgba(0,0,0,.45));
-}
-.qibla-kaaba-line{
-  position:absolute;
-  left:50%;
-  bottom:0;
-  width:3px;
-  height:100%;
+  top:20px;
   transform:translateX(-50%);
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
   border-radius:999px;
-  background:linear-gradient(180deg,var(--gold2),rgba(155,122,60,.4));
-  box-shadow:0 0 10px rgba(239,215,142,.35);
+  border:2px solid rgba(239,215,142,.62);
+  background:radial-gradient(circle at 35% 25%,rgba(255,248,226,.18),rgba(18,16,12,.96));
+  box-shadow:0 4px 14px rgba(0,0,0,.42),0 0 0 3px rgba(239,215,142,.08);
+  font-size:18px;
+  line-height:1;
+}
+.qibla-kaaba-badge:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-7px;
+  transform:translateX(-50%);
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-top:7px solid rgba(239,215,142,.72);
+}
+.qibla-compass-pro.qibla-static-mode .qibla-kaaba-badge{
+  border-color:rgba(255,196,120,.72);
+  box-shadow:0 4px 14px rgba(0,0,0,.42),0 0 0 4px rgba(255,196,120,.12);
+}
+.qibla-compass-pro.qibla-aligned .qibla-kaaba-badge{
+  border-color:rgba(140,255,154,.78);
+  box-shadow:0 4px 14px rgba(0,0,0,.42),0 0 0 4px rgba(140,255,154,.16);
 }
 .qibla-forward-pointer{
   position:absolute;
@@ -2856,7 +2863,7 @@ async function requestPrayerLocation(button){if(!navigator.geolocation){alert("S
 function qiblaCompassMarkup(bearing=0){
   const b=formatQiblaDegrees(bearing);
   const dir=qiblaDirectionNameDe(bearing);
-  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><div class="qibla-compass-dial"><span class="qibla-cardinal qibla-n">N<small>0°</small></span><span class="qibla-cardinal qibla-e">O<small>90°</small></span><span class="qibla-cardinal qibla-s">S<small>180°</small></span><span class="qibla-cardinal qibla-w">W<small>270°</small></span></div><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)" aria-hidden="true"><span class="qibla-kaaba-line"></span><span class="qibla-kaaba-icon" title="Qibla ${b}° ${dir}">🕋</span></div></div><div class="qibla-forward-pointer" aria-hidden="true"></div><div class="qibla-compass-center"></div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>Qibla · ${dir}</small></div></div>`;
+  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><div class="qibla-compass-dial"><span class="qibla-cardinal qibla-n">N<small>0°</small></span><span class="qibla-cardinal qibla-e">O<small>90°</small></span><span class="qibla-cardinal qibla-s">S<small>180°</small></span><span class="qibla-cardinal qibla-w">W<small>270°</small></span></div><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)" aria-hidden="true"><span class="qibla-kaaba-badge" title="Qibla ${b}° ${dir}">🕋</span></div></div><div class="qibla-forward-pointer" aria-hidden="true"></div><div class="qibla-compass-center"></div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>Qibla · ${dir}</small></div></div>`;
 }
 function renderQiblaProPanel(settings=getPrayerSettings()){
   const hasLoc=hasPrayerLocation(settings);
