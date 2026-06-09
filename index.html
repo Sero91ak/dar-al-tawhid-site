@@ -406,14 +406,13 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .quran-term-card b{display:block;color:#fff6dc;margin-bottom:4px}
 .quran-term-card span{display:block;color:#e6dcc0;line-height:1.55}
 @media(max-width:700px){.quran-surah-grid{grid-template-columns:1fr}.quran-quick-grid{grid-template-columns:minmax(0,1.15fr) minmax(58px,.62fr) auto!important}.quran-jump-bar{grid-template-columns:minmax(0,1.1fr) minmax(68px,.65fr) auto!important}.quran-jump-btn{width:auto}}
-.bottom-nav{--nav-pill-left:5px;--nav-pill-width:64px;position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm);z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.12);border-radius:27px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(14px) saturate(1.12);backdrop-filter:blur(14px) saturate(1.12);box-shadow:0 8px 22px rgba(0,0,0,.18);overflow:hidden;isolation:isolate;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.bottom-nav:before{display:none}
-.bottom-nav:after{content:"";position:absolute;top:5px;bottom:5px;left:var(--nav-pill-left);width:var(--nav-pill-width);border-radius:22px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);box-shadow:none;transition:left .38s cubic-bezier(.22,.82,.18,1),width .38s cubic-bezier(.22,.82,.18,1),opacity .24s ease;pointer-events:none;z-index:0;opacity:.9;will-change:left,width}
-.bottom-nav.is-pill-dragging:after{transition:none;transform:scale(1.018)}
+.bottom-nav{--nav-pill-left:5px;--nav-pill-width:64px;position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm);z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:0;padding:5px;border:1px solid rgba(255,255,255,.08);border-radius:27px;background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(10px) saturate(1.08);backdrop-filter:blur(10px) saturate(1.08);box-shadow:0 6px 18px rgba(0,0,0,.14);overflow:hidden;isolation:isolate;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.bottom-nav:before,.bottom-nav:after{display:none!important;content:none!important}
+.bottom-nav.is-pill-dragging:after{display:none!important}
 .bottom-nav.is-pill-dragging .bottom-nav-btn{pointer-events:none}
-.bottom-nav-btn{flex:1;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:51px;max-width:88px;border:1px solid transparent;border-radius:22px;background:transparent;color:rgba(248,239,212,.68);font-size:9px;font-weight:950;cursor:pointer;padding:5px 3px;font-family:var(--sans);text-shadow:0 1px 10px rgba(0,0,0,.66);transition:color .24s ease,transform .24s cubic-bezier(.2,.8,.2,1),filter .24s ease;touch-action:manipulation}
+.bottom-nav-btn{flex:1;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:51px;max-width:88px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;-webkit-appearance:none;appearance:none;outline:none;color:rgba(248,239,212,.68);font-size:9px;font-weight:950;cursor:pointer;padding:5px 3px;font-family:var(--sans);text-shadow:0 1px 10px rgba(0,0,0,.66);transition:color .24s ease,transform .24s cubic-bezier(.2,.8,.2,1),filter .24s ease;touch-action:manipulation}
 .bottom-nav-btn .nav-icon{font-size:19px;line-height:1;display:block;transition:transform .24s cubic-bezier(.2,.8,.2,1),filter .24s ease}
-.bottom-nav-btn.active{border-color:transparent;background:transparent;color:#fff9e5;box-shadow:none;filter:saturate(1.04)}
+.bottom-nav-btn.active{border:0!important;background:transparent!important;color:#fff9e5;box-shadow:none!important;filter:saturate(1.04)}
 .bottom-nav-btn.active .nav-icon{transform:translateY(-1px) scale(1.08);filter:drop-shadow(0 2px 8px rgba(255,255,255,.16))}
 .bottom-nav-btn:hover:not(.active){color:var(--cream)}
 .bottom-nav-btn:active{transform:scale(.96)}
@@ -2181,28 +2180,26 @@ body:before{
   color:#fff6dc!important;
 }
 .bottom-nav{
-  border-color:rgba(255,255,255,.12)!important;
-  background:rgba(255,255,255,.08)!important;
-  -webkit-backdrop-filter:blur(14px) saturate(1.12)!important;
-  backdrop-filter:blur(14px) saturate(1.12)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.18)!important;
+  border-color:rgba(255,255,255,.08)!important;
+  background:rgba(255,255,255,.04)!important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.08)!important;
+  backdrop-filter:blur(10px) saturate(1.08)!important;
+  box-shadow:0 6px 18px rgba(0,0,0,.14)!important;
 }
-.bottom-nav:before{display:none!important}
-.bottom-nav:after{
-  background:rgba(255,255,255,.10)!important;
-  border-color:rgba(255,255,255,.12)!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  box-shadow:none!important;
-}
+.bottom-nav:before,.bottom-nav:after{display:none!important;content:none!important}
 .bottom-nav-btn,.bottom-nav-btn:hover,.bottom-nav-btn:active,.bottom-nav-btn.active{
   background:transparent!important;
-  border-color:transparent!important;
+  border:0!important;
+  border-radius:0!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
   box-shadow:none!important;
-  transform:none;
+  outline:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
 }
+.bottom-nav-btn:active{transform:scale(.96)!important}
+.bottom-nav-btn.active{transform:none!important}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
