@@ -212,7 +212,7 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
   ];
 }
 
-async function fetchSubscriptions() {
+async function fetchLegacyPlayers() {
   const all = [];
   let offset = 0;
   const limit = 300;
@@ -244,6 +244,56 @@ async function fetchSubscriptions() {
   }
 
   return all;
+}
+
+async function fetchUserByExternalId(externalId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/external_id/${encodeURIComponent(externalId)}`;
+
+  async function tryAuth(authHeader) {
+    const res = await fetch(url, {
+      headers: { Authorization: authHeader }
+    });
+    if (!res.ok) return null;
+    return JSON.parse(await res.text());
+  }
+
+  return (await tryAuth(`Key ${API_KEY}`)) || (await tryAuth(`Basic ${API_KEY}`));
+}
+
+function extractWebPushSubscriptionIds(user) {
+  const subs = Array.isArray(user?.subscriptions) ? user.subscriptions : [];
+  return subs
+    .filter((s) => {
+      const type = String(s?.type || "").toLowerCase();
+      return type.includes("web") || type.includes("chrome") || type.includes("safari") || type.includes("mozilla");
+    })
+    .filter((s) => s.enabled !== false && s.invalid_identifier !== true)
+    .map((s) => s.id)
+    .filter(Boolean);
+}
+
+async function fetchSubscriptions() {
+  const players = await fetchLegacyPlayers();
+  const enriched = [];
+
+  for (const player of players) {
+    let tags = { ...(player.tags || {}) };
+    let subscriptionIds = [player.id].filter(Boolean);
+    const externalId = player.external_user_id || player.external_id;
+
+    if ((!tags.prayer_notifications || !tags.prayer_lat) && externalId) {
+      const user = await fetchUserByExternalId(externalId);
+      if (user?.properties?.tags) {
+        tags = { ...tags, ...user.properties.tags };
+      }
+      const webIds = extractWebPushSubscriptionIds(user);
+      if (webIds.length) subscriptionIds = webIds;
+    }
+
+    enriched.push({ ...player, tags, subscriptionIds });
+  }
+
+  return enriched;
 }
 
 function getPrayerUsers(players) {
@@ -300,7 +350,15 @@ function groupUsers(users) {
       });
     }
 
-    map.get(key).subscriptionIds.push(user.id);
+    const ids = user.subscriptionIds && user.subscriptionIds.length
+      ? user.subscriptionIds
+      : [user.id].filter(Boolean);
+
+    for (const id of ids) {
+      if (id && !map.get(key).subscriptionIds.includes(id)) {
+        map.get(key).subscriptionIds.push(id);
+      }
+    }
   }
 
   return Array.from(map.values());
@@ -309,10 +367,12 @@ function groupUsers(users) {
 async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
   const ids = group.subscriptionIds.slice(0, 2000);
 
+  if (!ids.length) return;
+
   const body = {
     app_id: APP_ID,
     target_channel: "push",
-    include_player_ids: ids,
+    include_subscription_ids: ids,
     headings: {
       de: `Gebetszeit: ${prayer.name}`,
       en: `Prayer time: ${prayer.name}`
@@ -369,6 +429,15 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
   console.log(`Subscriptions gesamt: ${players.length}`);
   console.log(`Gebetszeiten-Nutzer mit Standort: ${users.length}`);
   console.log(`Standort-Gruppen: ${groups.length}`);
+
+  if (!users.length && players.length) {
+    const sample = players.find((p) => p.external_user_id || p.external_id) || players[0];
+    console.log("Hinweis: Keine prayer_tags gefunden. Beispiel-Subscription:", JSON.stringify({
+      id: sample.id,
+      external_user_id: sample.external_user_id || sample.external_id || null,
+      tags: sample.tags || {}
+    }));
+  }
 
   for (const group of groups) {
     const localDate = todayLocalDate(group.timeZone);
