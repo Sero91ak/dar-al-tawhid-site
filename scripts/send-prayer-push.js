@@ -5,6 +5,9 @@
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
+const SITE_ORIGIN = SITE_URL.replace(/#.*$/, "").replace(/\/$/, "");
+const NOTIFICATION_ICON = `${SITE_ORIGIN}/notification-icon-256.png?v=1`;
+const NOTIFICATION_BADGE = `${SITE_ORIGIN}/notification-badge-96.png?v=1`;
 const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
 
 if (!API_KEY) {
@@ -505,7 +508,12 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
     contents: copy.contents,
     url: SITE_URL,
     isAnyWeb: true,
-    send_after: sendAfter.toISOString()
+    send_after: sendAfter.toISOString(),
+    chrome_web_icon: NOTIFICATION_ICON,
+    chrome_web_badge: NOTIFICATION_BADGE,
+    firefox_icon: NOTIFICATION_ICON,
+    chrome_icon: NOTIFICATION_ICON,
+    large_icon: NOTIFICATION_ICON
   };
 
   async function postWith(authHeader) {

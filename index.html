@@ -2340,7 +2340,7 @@ OneSignalDeferred.push(async function(OneSignal){
     safari_web_id:"web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
     notifyButton:{enable:false},
     autoResubscribe:true,
-    welcomeNotification:{disable:false,title:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",message:"Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",url:"https://dar-al-tawhid.de/"}
+    welcomeNotification:{disable:false,title:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",message:"Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",url:"https://dar-al-tawhid.de/",icon:"https://dar-al-tawhid.de/notification-icon-256.png?v=1"}
   });
   window.OneSignal=OneSignal;
   window.DAR_ONE_SIGNAL_READY=true;
@@ -2866,6 +2866,9 @@ function searchMatchLabel(post,q){
 
 const PRAYER_SETTINGS_KEY="darPrayerSettingsV1";
 const PUSH_USER_KEY="darPushExternalIdV1";
+const DAR_NOTIFICATION_ICON="/notification-icon-256.png?v=1";
+const DAR_NOTIFICATION_BADGE="/notification-badge-96.png?v=1";
+function darNotificationPayload(options={}){return{icon:options.icon||DAR_NOTIFICATION_ICON,badge:options.badge||DAR_NOTIFICATION_BADGE,...options}}
 let prayerCountdownTimer=null;
 let prayerReminderTimeouts=[];
 let qiblaOrientationHandler=null;
@@ -2885,7 +2888,7 @@ async function syncPrayerPushTags(settings){const s=settings||getPrayerSettings(
 function prayerPushAdvanceMinutes(){return 15}
 function prayerAdvanceNotificationCopy(prayer,settings){const timeLabel=prayer.key==="tahajjud"?formatPrayerTimeDisplay(prayer):formatPrayerHour(prayer.time);const city=settings&&settings.city?` · ${settings.city}`:"";return{title:`Nächstes Gebet: ${prayer.name}`,body:`In ${prayerPushAdvanceMinutes()} Min · ${timeLabel}${city} · DAR AL TAWḤID`,tag:`prayer-advance-${prayer.key}`}}
 function prayerEntryNotificationCopy(prayer){return{title:prayer.key==="tahajjud"?"Taḥajjud · letztes Drittel":`Gebetszeit: ${prayer.name}`,body:prayer.key==="tahajjud"?"Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID":`${prayer.name} ist eingetreten. DAR AL TAWḤID`,tag:`prayer-${prayer.key}`}}
-async function showPrayerNotification(title,options={}){try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,{icon:"/app-icon-192.png",badge:"/app-icon-192.png",...options})}catch(e){}}}}catch(e){}if("Notification" in window&&Notification.permission==="granted"){try{return new Notification(title,options)}catch(e){}}return null}
+async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if("Notification" in window&&Notification.permission==="granted"){try{return new Notification(title,payload)}catch(e){}}return null}
 function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s))scheduleLocalPrayerReminders()}
 function setPrayerSettings(value){const prev=getPrayerSettings();const next={...prev,...value};setJson(PRAYER_SETTINGS_KEY,next);if(next.reminder&&hasPrayerLocation(next)&&(prev.lat!==next.lat||prev.lon!==next.lon||prev.asrFactor!==next.asrFactor||!prev.reminder))syncPrayerPushTags(next).catch(()=>{})}
 function toRad(d){return d*Math.PI/180}
