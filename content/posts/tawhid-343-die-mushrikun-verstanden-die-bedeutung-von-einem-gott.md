@@ -1,5 +1,5 @@
----
-id: "tawhid-die-mushrikun-verstanden-die-bedeutung-von-einem-gott-343"
+﻿---
+id: "tawhid-343-die-mushrikun-verstanden-die-bedeutung-von-einem-gott"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Die Mushrikūn verstanden die Bedeutung von einem Gott"
 category: "Tawḥīd"

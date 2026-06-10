@@ -1,5 +1,5 @@
----
-id: "tawhid-fuersprecher-werden-nicht-angebetet-345"
+﻿---
+id: "tawhid-345-fuersprecher-werden-nicht-angebetet"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Fürsprecher werden nicht angebetet"
 category: "Tawḥīd"

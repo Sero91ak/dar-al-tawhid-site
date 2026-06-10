@@ -1,5 +1,5 @@
----
-id: "tawhid-dua-ist-ibadah-344"
+﻿---
+id: "tawhid-344-dua-ist-ibadah"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Duʿāʾ ist ʿIbādah"
 category: "Tawḥīd"

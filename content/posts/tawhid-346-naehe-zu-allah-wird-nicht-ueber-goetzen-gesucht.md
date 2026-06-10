@@ -1,5 +1,5 @@
----
-id: "tawhid-naehe-zu-allah-wird-nicht-ueber-goetzen-gesucht-346"
+﻿---
+id: "tawhid-346-naehe-zu-allah-wird-nicht-ueber-goetzen-gesucht"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Nähe zu Allah wird nicht über Götzen gesucht"
 category: "Tawḥīd"

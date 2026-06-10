@@ -1,5 +1,5 @@
----
-id: "tawhid-allah-liebt-ikhlas-in-der-ibadah-348"
+﻿---
+id: "tawhid-348-allah-liebt-ikhlas-in-der-ibadah"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Allah liebt Ikhlāṣ in der ʿIbādah"
 category: "Tawḥīd"
