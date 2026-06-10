@@ -1,0 +1,46 @@
+name: Sync to taxipro-dispatch
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - cursor/taxipro-sync-19cc
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout export branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+
+      - name: Push export to taxipro-dispatch
+        env:
+          PAT: ${{ secrets.TAXIPRO_DISPATCH_PAT }}
+        run: |
+          if [ -z "$PAT" ]; then
+            echo "::error::Secret TAXIPRO_DISPATCH_PAT fehlt. GitHub → dar-al-tawhid-site → Settings → Secrets → Actions → New repository secret"
+            exit 1
+          fi
+          git config user.name "cursor[bot]"
+          git config user.email "cursoragent@cursor.com"
+          git clone "https://x-access-token:${PAT}@github.com/Sero91ak/taxipro-dispatch.git" target
+          cd target
+          git checkout -B cursor/driver-app-portal-19cc
+          rsync -a --delete ../taxipro-dispatch-export/ ./ --exclude .git
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to sync"
+            exit 0
+          fi
+          git commit -m "Sync: Mobile PWA + Fahrer-App from Cloud Agent
+
+- Installable mobile PWA with bottom navigation
+- Driver portal: assignments, payments, signatures, documents, push
+- driver.html, manifest.json, service-worker.js, icons"
+          git push -f origin cursor/driver-app-portal-19cc
