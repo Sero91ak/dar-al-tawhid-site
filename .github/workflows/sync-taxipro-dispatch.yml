@@ -34,7 +34,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git clone "https://x-access-token:${PAT}@github.com/Sero91ak/taxipro-dispatch.git" repo
           cd repo
-          git checkout -B cursor/driver-app-portal-19cc
+          git checkout -B main
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           cp -a "$GITHUB_WORKSPACE/taxipro-dispatch-export/." ./
           git add -A
@@ -42,5 +42,5 @@ jobs:
             echo "Already up to date"
             exit 0
           fi
-          git commit -m "Sync: Mobile PWA + Fahrer-App from Cloud Agent"
-          git push -f origin cursor/driver-app-portal-19cc
+          git commit -m "Sync: Fahrer-PWA + mobile Disposition from Cloud Agent"
+          git push -f origin main
