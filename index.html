@@ -2342,7 +2342,7 @@ OneSignalDeferred.push(async function(OneSignal){
     safari_web_id:"web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
     notifyButton:{enable:false},
     autoResubscribe:true,
-    welcomeNotification:{disable:false,title:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",message:"Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",url:"https://dar-al-tawhid.de/",icon:"https://dar-al-tawhid.de/notification-icon-256.png?v=1"}
+    welcomeNotification:{disable:false,title:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",message:"Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",url:"https://dar-al-tawhid.de/",icon:"https://dar-al-tawhid.de/notification-icon-192.png?v=2"}
   });
   window.OneSignal=OneSignal;
   window.DAR_ONE_SIGNAL_READY=true;
@@ -2870,15 +2870,16 @@ function searchMatchLabel(post,q){
 
 const PRAYER_SETTINGS_KEY="darPrayerSettingsV1";
 const PUSH_USER_KEY="darPushExternalIdV1";
-const DAR_NOTIFICATION_ICON="/notification-icon-256.png?v=1";
-const DAR_NOTIFICATION_BADGE="/notification-badge-96.png?v=1";
+const DAR_NOTIFICATION_ICON="/notification-icon-192.png?v=2";
+const DAR_NOTIFICATION_BADGE="/notification-badge-96.png?v=2";
 const DAR_SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
 const DAR_NOTIFICATION_ICON_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_ICON}`;
 const DAR_NOTIFICATION_BADGE_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_BADGE}`;
 const PUSH_HEALTH_INTERVAL_MS=20*60*1000;
 let pushHealthTimer=null;
 let pushHealthRunning=false;
-function darNotificationPayload(options={}){return{icon:options.icon||DAR_NOTIFICATION_ICON,badge:options.badge||DAR_NOTIFICATION_BADGE,...options}}
+function darNotificationPayload(options={}){const base={icon:options.icon||DAR_NOTIFICATION_ICON,badge:options.badge||DAR_NOTIFICATION_BADGE,...options};if(isAndroidDevice()){delete base.image;delete base.largeIcon}return base}
+function isAndroidDevice(){return/Android/i.test(navigator.userAgent||"")}
 function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben"}={}){const active=Boolean(getPrayerSettings().reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";return `<div class="prayer-subsection-label">Erinnerungen</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div>`}
 function updatePrayerReminderButtons(){document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(getPrayerSettings().reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"})}
 function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)||Notification.permission==="granted";btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}

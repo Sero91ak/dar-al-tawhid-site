@@ -8,8 +8,8 @@ function siteOriginFromEnv(siteUrl) {
 
 function notificationAssets(siteUrl) {
   const origin = siteOriginFromEnv(siteUrl);
-  const icon = `${origin}/notification-icon-256.png?v=1`;
-  const badge = `${origin}/notification-badge-96.png?v=1`;
+  const icon = `${origin}/notification-icon-192.png?v=2`;
+  const badge = `${origin}/notification-badge-96.png?v=2`;
   return { origin, icon, badge };
 }
 
@@ -19,10 +19,7 @@ function withNotificationIcons(payload, siteUrl) {
     ...payload,
     chrome_web_icon: icon,
     chrome_web_badge: badge,
-    firefox_icon: icon,
-    chrome_icon: icon,
-    large_icon: icon,
-    small_icon: icon
+    firefox_icon: icon
   };
 }
 
