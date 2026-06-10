@@ -5,6 +5,11 @@
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
+const {
+  withNotificationIcons,
+  postOneSignalNotification
+} = require("./lib/onesignal-push");
+const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
 
 if (!API_KEY) {
   console.error("Fehlt: ONESIGNAL_API_KEY");
@@ -105,6 +110,15 @@ function dayOfYearFromLocal(localDate) {
   return Math.floor((current - start) / 86400000);
 }
 
+function addLocalDays(localDate, days) {
+  const d = new Date(Date.UTC(localDate.year, localDate.month - 1, localDate.day + days));
+  return {
+    year: d.getUTCFullYear(),
+    month: d.getUTCMonth() + 1,
+    day: d.getUTCDate()
+  };
+}
+
 function sunTimeForAngle(localDate, lat, lon, angle, morning, timeZone) {
   const N = dayOfYearFromLocal(localDate);
   const lngHour = lon / 15;
@@ -203,16 +217,39 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
   const maghrib = sunTimeForAngle(localDate, lat, lon, 0.833, false, timeZone);
   const isha = sunTimeForAngle(localDate, lat, lon, methodAngle, false, timeZone);
 
-  return [
+  const prayers = [
     { key: "fajr", name: "Fajr", time: fajr },
     { key: "dhuhr", name: "Dhuhr", time: dhuhr },
     { key: "asr", name: "ʿAṣr", time: asr },
     { key: "maghrib", name: "Maghrib", time: maghrib },
     { key: "isha", name: "ʿIshāʾ", time: isha }
   ];
+
+  const tomorrow = addLocalDays(localDate, 1);
+  const fajrNext = sunTimeForAngle(tomorrow, lat, lon, methodAngle, true, timeZone);
+
+  if (maghrib != null && fajrNext != null) {
+    const maghribUtc = makeUtcDateFromLocal(localDate, maghrib, timeZone);
+    const fajrUtc = makeUtcDateFromLocal(tomorrow, fajrNext, timeZone);
+
+    if (fajrUtc > maghribUtc) {
+      const startUtc = new Date(
+        maghribUtc.getTime() + ((fajrUtc.getTime() - maghribUtc.getTime()) * 2 / 3)
+      );
+
+      prayers.push({
+        key: "tahajjud",
+        name: "Taḥajjud",
+        time: null,
+        sendAfter: startUtc
+      });
+    }
+  }
+
+  return prayers;
 }
 
-async function fetchSubscriptions() {
+async function fetchLegacyPlayers() {
   const all = [];
   let offset = 0;
   const limit = 300;
@@ -244,6 +281,112 @@ async function fetchSubscriptions() {
   }
 
   return all;
+}
+
+async function fetchUserByAlias(aliasLabel, aliasId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
+
+  async function tryAuth(authHeader) {
+    const res = await fetch(url, {
+      headers: { Authorization: authHeader }
+    });
+    if (!res.ok) return { user: null, status: res.status, text: await res.text() };
+    return { user: JSON.parse(await res.text()), status: res.status, text: "" };
+  }
+
+  const keyResult = await tryAuth(`Key ${API_KEY}`);
+  if (keyResult.user) return keyResult.user;
+
+  const basicResult = await tryAuth(`Basic ${API_KEY}`);
+  if (basicResult.user) return basicResult.user;
+
+  return null;
+}
+
+async function fetchUserByExternalId(externalId) {
+  return fetchUserByAlias("external_id", externalId);
+}
+
+async function fetchUserBySubscriptionId(subscriptionId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/subscriptions/${encodeURIComponent(subscriptionId)}/user`;
+
+  async function tryAuth(authHeader) {
+    const res = await fetch(url, {
+      headers: { Authorization: authHeader }
+    });
+    if (!res.ok) return null;
+    return JSON.parse(await res.text());
+  }
+
+  return (await tryAuth(`Key ${API_KEY}`)) || (await tryAuth(`Basic ${API_KEY}`));
+}
+
+function extractUserTags(user) {
+  if (!user) return {};
+  const tags = user?.properties?.tags;
+  return tags && typeof tags === "object" ? { ...tags } : {};
+}
+
+function extractWebPushSubscriptionIds(user) {
+  const subs = Array.isArray(user?.subscriptions) ? user.subscriptions : [];
+  return subs
+    .filter((s) => {
+      const type = String(s?.type || "").toLowerCase();
+      return type.includes("web") || type.includes("chrome") || type.includes("safari") || type.includes("mozilla");
+    })
+    .filter((s) => s.enabled !== false && s.invalid_identifier !== true)
+    .map((s) => s.id)
+    .filter(Boolean);
+}
+
+async function resolvePlayerTags(player) {
+  let tags = { ...(player.tags || {}) };
+  let subscriptionIds = [player.id].filter(Boolean);
+  const externalId = player.external_user_id || player.external_id;
+  let user = null;
+
+  if (externalId) {
+    user = await fetchUserByExternalId(externalId);
+  }
+
+  if (!extractUserTags(user).prayer_lat && player.id) {
+    const bySub = await fetchUserBySubscriptionId(player.id);
+    if (bySub) user = bySub;
+  }
+
+  if (user) {
+    tags = { ...tags, ...extractUserTags(user) };
+    const webIds = extractWebPushSubscriptionIds(user);
+    if (webIds.length) subscriptionIds = webIds;
+  }
+
+  return { tags, subscriptionIds, externalId };
+}
+
+async function fetchSubscriptions() {
+  const players = await fetchLegacyPlayers();
+  const enriched = [];
+  let userFetchMisses = 0;
+  let taggedUsers = 0;
+
+  for (const player of players) {
+    const resolved = await resolvePlayerTags(player);
+    if (resolved.tags.prayer_notifications === "true" && resolved.tags.prayer_lat) {
+      taggedUsers += 1;
+    } else if (resolved.externalId || player.id) {
+      userFetchMisses += 1;
+    }
+
+    enriched.push({
+      ...player,
+      tags: resolved.tags,
+      subscriptionIds: resolved.subscriptionIds
+    });
+  }
+
+  console.log(`Tag-Auflösung: ${taggedUsers} mit Gebets-Tags, ${userFetchMisses} ohne Tags trotz Subscription`);
+
+  return enriched;
 }
 
 function getPrayerUsers(players) {
@@ -300,52 +443,88 @@ function groupUsers(users) {
       });
     }
 
-    map.get(key).subscriptionIds.push(user.id);
+    const ids = user.subscriptionIds && user.subscriptionIds.length
+      ? user.subscriptionIds
+      : [user.id].filter(Boolean);
+
+    for (const id of ids) {
+      if (id && !map.get(key).subscriptionIds.includes(id)) {
+        map.get(key).subscriptionIds.push(id);
+      }
+    }
   }
 
   return Array.from(map.values());
 }
 
-async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
-  const ids = group.subscriptionIds.slice(0, 2000);
+function prayerNotificationCopy(prayer, mode) {
+  const isTahajjud = prayer.key === "tahajjud";
+  const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
 
-  const body = {
-    app_id: APP_ID,
-    target_channel: "push",
-    include_player_ids: ids,
+  if (mode === "advance") {
+    return {
+      headings: {
+        de: `Nächstes Gebet: ${prayer.name}`,
+        en: `Next prayer: ${prayer.name}`
+      },
+      contents: {
+        de: isTahajjud
+          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht. DAR AL TAWḤID`
+          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr. DAR AL TAWḤID`,
+        en: isTahajjud
+          ? `Last third of the night begins in ${PRAYER_ADVANCE_MINUTES} min. DAR AL TAWḤID`
+          : `In ${PRAYER_ADVANCE_MINUTES} min · ${timeLabel}. DAR AL TAWḤID`
+      }
+    };
+  }
+
+  return {
     headings: {
-      de: `Gebetszeit: ${prayer.name}`,
-      en: `Prayer time: ${prayer.name}`
+      de: isTahajjud ? "Taḥajjud · letztes Drittel" : `Gebetszeit: ${prayer.name}`,
+      en: isTahajjud ? "Tahajjud · last third of night" : `Prayer time: ${prayer.name}`
     },
     contents: {
-      de: `${prayer.name} ist eingetreten. DAR AL TAWḤID`,
-      en: `${prayer.name} time has entered. DAR AL TAWḤID`
-    },
+      de: isTahajjud
+        ? "Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID"
+        : `${prayer.name} ist eingetreten. DAR AL TAWḤID`,
+      en: isTahajjud
+        ? "Last third of the night – time for Tahajjud until Fajr. DAR AL TAWḤID"
+        : `${prayer.name} time has entered. DAR AL TAWḤID`
+    }
+  };
+}
+
+async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "entry") {
+  const ids = group.subscriptionIds.slice(0, 2000);
+
+  if (!ids.length) return;
+
+  const copy = prayerNotificationCopy(prayer, mode);
+
+  const body = withNotificationIcons({
+    app_id: APP_ID,
+    target_channel: "push",
+    include_subscription_ids: ids,
+    headings: copy.headings,
+    contents: copy.contents,
     url: SITE_URL,
     isAnyWeb: true,
     send_after: sendAfter.toISOString()
-  };
+  }, SITE_URL);
 
-  const res = await fetch("https://api.onesignal.com/notifications", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Authorization": `Key ${API_KEY}`
-    },
-    body: JSON.stringify(body)
-  });
+  try {
+    const result = await postOneSignalNotification(body, API_KEY, { retries: 3 });
+    const timeLabel = prayer.time == null
+      ? sendAfter.toISOString()
+      : formatHour(prayer.time);
 
-  const text = await res.text();
-
-  if (!res.ok) {
-    console.error(`OneSignal Sendefehler ${res.status}:`, text);
+    console.log(
+      `Geplant (${mode}): ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${result.text}`
+    );
+  } catch (err) {
+    console.error(`OneSignal Sendefehler:`, err.message || err);
     process.exitCode = 1;
-    return;
   }
-
-  console.log(
-    `Geplant: ${prayer.name} ${formatHour(prayer.time)} | ${ids.length} Nutzer | ${group.timeZone} → ${text}`
-  );
 }
 
 (async function main() {
@@ -361,6 +540,15 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
   console.log(`Gebetszeiten-Nutzer mit Standort: ${users.length}`);
   console.log(`Standort-Gruppen: ${groups.length}`);
 
+  if (!users.length && players.length) {
+    const sample = players.find((p) => p.external_user_id || p.external_id) || players[0];
+    console.log("Hinweis: Keine prayer_tags gefunden. Beispiel-Subscription:", JSON.stringify({
+      id: sample.id,
+      external_user_id: sample.external_user_id || sample.external_id || null,
+      tags: sample.tags || {}
+    }));
+  }
+
   for (const group of groups) {
     const localDate = todayLocalDate(group.timeZone);
 
@@ -374,16 +562,32 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter) {
     );
 
     for (const prayer of prayers) {
-      if (prayer.time == null) continue;
+      const entryAt = prayer.sendAfter
+        ? prayer.sendAfter
+        : prayer.time == null
+          ? null
+          : makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
 
-      const sendAfter = makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
+      if (!entryAt) continue;
 
-      if (sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
-        console.log(`Übersprungen, bereits vorbei: ${prayer.name} ${formatHour(prayer.time)} | ${group.timeZone}`);
-        continue;
+      const schedules = [
+        { mode: "entry", sendAfter: entryAt }
+      ];
+
+      if (prayer.key !== "sunrise") {
+        const advanceAt = new Date(entryAt.getTime() - PRAYER_ADVANCE_MINUTES * 60 * 1000);
+        schedules.push({ mode: "advance", sendAfter: advanceAt });
       }
 
-      await sendOneSignalToSubscriptions(group, prayer, sendAfter);
+      for (const schedule of schedules) {
+        if (schedule.sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
+          const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
+          console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
+          continue;
+        }
+
+        await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
+      }
     }
   }
 })();

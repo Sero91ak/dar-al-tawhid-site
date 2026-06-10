@@ -3,11 +3,15 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v76';
 const APP_SHELL = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/notification-icon-192.png',
+  '/notification-icon-256.png',
+  '/notification-badge-96.png',
+  '/notification-badge-72.png',
   '/favicon.ico',
   '/favicon-16.png',
   '/favicon-32.png',
@@ -16,8 +20,24 @@ const APP_SHELL = [
   '/app-icon-192.png',
   '/app-icon-512.png',
   '/watermark-my-logo-full.png',
-  '/watermark-circle-soft.png'
+  '/watermark-circle-soft.png',
+  '/content/duas/duas.json',
+  '/content/quran/surahs.json',
+  '/content/quran-athar/de/001.json',
+  '/assets/site-analytics.js'
 ];
+
+self.addEventListener('message', (event) => {
+  const data = event.data || {};
+  if (data.type !== 'PRECACHE' || !Array.isArray(data.urls) || !data.urls.length) return;
+  event.waitUntil(
+    caches.open(CACHE_VERSION).then((cache) => Promise.allSettled(
+      data.urls.map((url) => fetch(url, { cache: 'reload' })
+        .then((response) => (response && response.ok ? cache.put(url, response) : null))
+        .catch(() => null))
+    ))
+  );
+});
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
