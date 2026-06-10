@@ -1,4 +1,4 @@
-﻿---
+---
 id: "tawhid-340-der-sinn-der-schoepfung-ist-ibadah"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Der Sinn der Schöpfung ist ʿIbādah"

@@ -1,4 +1,4 @@
-﻿---
+---
 id: "tawhid-349-keine-ibadah-neben-allah"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Keine ʿIbādah neben Allah"

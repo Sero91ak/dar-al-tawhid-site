@@ -1,4 +1,4 @@
-﻿---
+---
 id: "tawhid-342-nur-dich-beten-wir-an"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Nur Dich beten wir an"
