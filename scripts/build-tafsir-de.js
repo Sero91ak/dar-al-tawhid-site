@@ -10,7 +10,10 @@ const ROOT = path.join(__dirname, "..");
 const QURAN_DIR = path.join(ROOT, "content", "quran");
 const TAFSIR_DIR = path.join(ROOT, "content", "tafsir", "de");
 const CURATED_DIR = path.join(__dirname, "tafsir-curated");
-const ASBAB_FILE = path.join(CURATED_DIR, "asbab-sahih.json");
+const ASBAB_FILES = [
+  path.join(CURATED_DIR, "asbab-sahih.json"),
+  path.join(CURATED_DIR, "asbab-classical-51-114.json"),
+];
 
 function pad(n) {
   return String(n).padStart(3, "0");
@@ -24,9 +27,20 @@ function loadCurated(id) {
 }
 
 function loadAsbab() {
-  if (!fs.existsSync(ASBAB_FILE)) return {};
-  const payload = JSON.parse(fs.readFileSync(ASBAB_FILE, "utf8"));
-  return payload.entries || {};
+  const entries = {};
+  for (const file of ASBAB_FILES) {
+    if (!fs.existsSync(file)) continue;
+    const payload = JSON.parse(fs.readFileSync(file, "utf8"));
+    const src = payload.entries || {};
+    for (const [surah, ayahs] of Object.entries(src)) {
+      entries[surah] ||= {};
+      for (const [ayah, groups] of Object.entries(ayahs)) {
+        entries[surah][ayah] ||= [];
+        entries[surah][ayah].push(...groups);
+      }
+    }
+  }
+  return entries;
 }
 
 function surahLabel(surah) {
@@ -80,11 +94,7 @@ function defaultTafsir(verse, meta, surah) {
     },
     {
       source: "as-Saʿdī",
-      text: `as-Saʿdī fasst den Sinn dieser Ayah in klarer, allgemein verständlicher deutscher Sprache zusammen und verbindet sie mit praktischer Rechtleitung für den Gläubigen.`,
-    },
-    {
-      source: "Ibn ʿAbbās",
-      text: `Die Erklärung von Ibn ʿAbbās zu dieser Ayah wird in deutscher Übertragung ergänzt, sobald der geprüfte Text vorliegt.`,
+      text: `as-Saʿdī fasst den Sinn dieser Ayah in klarer, allgemein verständlicher Sprache zusammen und verbindet sie mit praktischer Rechtleitung für den Gläubigen.`,
     },
   ];
 }
@@ -114,9 +124,51 @@ function mergeEntry(base, override) {
   };
 }
 
-function applyAsbab(entry) {
-  // Kein arabischer Asbāb-Rohstoff in der App — nur geprüfte deutsche Texte aus Curated-Dateien.
-  return entry;
+function isArabicText(text) {
+  return /[\u0600-\u06FF]/.test(String(text || ""));
+}
+
+function asbabOverride(asbabEntries) {
+  if (!Array.isArray(asbabEntries) || !asbabEntries.length) return null;
+  const groups = asbabEntries.flatMap((entry) => {
+    const source = entry.source || "Ṣaḥīḥ Asbāb an-Nuzūl (Ibrāhīm Muḥammad al-ʿAlī)";
+    return (entry.occasions || []).map((text) => ({ source, text }));
+  });
+  if (!groups.length) return null;
+
+  const allArabic = groups.every((item) => isArabicText(item.text));
+  const sababParts = groups.map((item, idx) => {
+    const prefix = groups.length > 1 ? `${idx + 1}. ` : "";
+    if (allArabic) return `${prefix}${item.text}`;
+    return `${prefix}${item.text} (Quelle: ${item.source})`;
+  });
+  const sabab = allArabic
+    ? `Für diese Ayah ist ein belegter Anlass der Offenbarung überliefert. Arabischer Wortlaut des Berichtes:\n\n${sababParts.join("\n\n")}`
+    : groups.length === 1
+      ? groups[0].text
+      : `Für diese Ayah sind belegte Anlässe der Offenbarung in klassischen Quellen überliefert:\n\n${sababParts.join("\n\n")}`;
+
+  return {
+    sabab,
+    hadiths: groups.map((item, idx) => ({
+      source: `${item.source}${groups.length > 1 ? ` · Bericht ${idx + 1}` : ""}`,
+      text: item.text,
+      grading: allArabic ? "belegter Asbāb-an-Nuzūl-Bericht" : "belegter Asbāb-an-Nuzūl-Bericht · klassische Quellen",
+    })),
+  };
+}
+
+function applyAsbab(entry, asbabEntries) {
+  const override = asbabOverride(asbabEntries);
+  if (!override) return entry;
+  const existingHadiths = Array.isArray(entry.hadiths)
+    ? entry.hadiths.filter((item) => item?.source !== "Einordnung · Überlieferung")
+    : [];
+  return {
+    ...entry,
+    sabab: override.sabab,
+    hadiths: [...override.hadiths, ...existingHadiths],
+  };
 }
 
 function buildSurah(id) {
@@ -134,7 +186,7 @@ function buildSurah(id) {
   const verses = surah.verses.map((v) => {
     const base = defaultEntry(v, meta, surah);
     const merged = mergeEntry(base, curated[v.id]);
-    return applyAsbab(merged);
+    return applyAsbab(merged, asbab[String(id)]?.[String(v.id)]);
   });
 
   const payload = {
