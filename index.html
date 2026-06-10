@@ -85,6 +85,45 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
   gap:9px;
   align-items:center;
 }
+.search-input-shell{
+  position:relative;
+  min-width:0;
+  width:100%;
+}
+.search-input-icon{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  width:18px;
+  height:18px;
+  color:rgba(239,215,142,.82);
+  pointer-events:none;
+  z-index:1;
+  opacity:.88;
+}
+.search-input-icon svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+.search-input-shell .search{
+  cursor:text;
+  padding-left:44px!important;
+  border-color:rgba(239,215,142,.46)!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.68),rgba(10,9,7,.96))!important;
+  box-shadow:inset 0 2px 11px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,245,210,.045)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.search-input-shell .search:focus{
+  border-color:rgba(239,215,142,.62)!important;
+  box-shadow:inset 0 2px 9px rgba(0,0,0,.5),0 0 0 3px rgba(239,215,142,.11)!important;
+}
+.search-input-shell .search::placeholder{
+  color:rgba(247,239,214,.54)!important;
+  font-weight:850;
+}
 .advanced-toggle{
   border:1px solid var(--line);
   border-radius:999px;
@@ -2198,18 +2237,18 @@ body:before{
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
   backdrop-filter:blur(10px) saturate(1.12)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.10)!important;
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):hover{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):hover{
   border-color:rgba(255,255,255,.20)!important;
   filter:brightness(1.03);
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search,.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):active{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):active{
   transform:scale(.99);
   filter:brightness(1.04);
 }
@@ -2670,7 +2709,7 @@ function highlightText(value,q){const text=esc(value||"");if(!q)return text;cons
 function filteredPostCard(post,q=""){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${highlightText(post.title,q)}</h3><div class="post-meta">${post.category?`<span class="badge">${highlightText(post.category,q)}</span>`:""}${post.scholar?`<span class="badge">${highlightText(post.scholar,q)}</span>`:""}</div><div class="excerpt">${highlightText(findQuote(post),q)}</div></div><div class="source-preview">${highlightText(post.source||"",q)}${searchMatchLabel(post,q)}</div></article>`}
 function renderFilterPanel(prefix="home",hidden=true){const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const stateClass=hidden?"advanced-hidden":"advanced-visible";return`<section id="${prefix}FilterPanel" class="filter-panel ${stateClass}"><div class="filter-grid"><select id="${prefix}FilterCat" class="filter-select"><option value="">Alle Kategorien</option>${cats}</select><select id="${prefix}FilterScholar" class="filter-select"><option value="">Alle Gelehrten</option>${scholars}</select><select id="${prefix}FilterBook" class="filter-select"><option value="">Alle Bücher</option>${books}</select><select id="${prefix}FilterType" class="filter-select"><option value="">Qurʾān / Sunnah / Athar</option><option value="quran">Qurʾān / Tafsīr</option><option value="sunnah">Sunnah / Hadith</option><option value="athar">Āthār</option><option value="other">Sonstige</option></select></div></section>`}
 function renderSearchPanel(){
-  return `<section class="search-pro-panel"><div class="search-line"><input id="homeSearchInput" class="search" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…"><button id="advancedFilterBtn" class="advanced-toggle" type="button">Filter anzeigen</button></div>${renderFilterPanel("home",true)}<div class="search-helper">Tipp: Nutze „Schnell auswählen“ für Thema, Gelehrten oder Buch. Die Filter brauchst du nur für gezielte Suche.</div></section>`;
+  return `<section class="search-pro-panel"><div class="search-line"><div class="search-input-shell"><span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="homeSearchInput" class="search search-input-field" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…" autocomplete="off" spellcheck="false" enterkeyhint="search"></div><button id="advancedFilterBtn" class="advanced-toggle" type="button">Filter anzeigen</button></div>${renderFilterPanel("home",true)}<div class="search-helper">Tipp: Nutze „Schnell auswählen“ für Thema, Gelehrten oder Buch. Die Filter brauchst du nur für gezielte Suche.</div></section>`;
 }
 function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");return`<section class="direct-pick-panel ${extraClass}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch</option>${books}</select></div></section>`}
 function bindDirectPickPanel(){const c=$("directCategory"),s=$("directScholar"),b=$("directBook");if(c){c.onchange=()=>{if(c.value){navigate("topic",c.value);c.selectedIndex=0}}};if(s){s.onchange=()=>{if(s.value){navigate("scholar",s.value);s.selectedIndex=0}}};if(b){b.onchange=()=>{if(b.value){navigate("book",b.value);b.selectedIndex=0}}}}
