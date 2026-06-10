@@ -2428,6 +2428,7 @@ body:before{
 html[data-theme="light"]{
   color-scheme:light!important;
   --bg:#f4e8cc!important;--bg2:#ecd9ad!important;--panel:#fff4e4!important;--card:#fff4e4!important;
+  --page-cover:#f4e8cc!important;--page-cover-mid:#f0e0be!important;
   --gold:#9b7334!important;--gold2:#3d2a12!important;--bronze:#8a6530!important;
   --cream:#2a2218!important;--text:#2a2218!important;--muted:#5c4e3c!important;--muted2:#7a6a54!important;
   --line:rgba(155,122,60,.26)!important;--line2:rgba(155,122,60,.14)!important;
@@ -2870,13 +2871,31 @@ html[data-theme="light"] .float-btn{
   html[data-theme="light"] .app-bar{margin:0 15px 12px!important;padding:9px 10px!important}
   html[data-theme="light"] .crumb{font-size:12px!important;padding:8px 12px!important}
 }
-html[data-theme="light"] .top-edge-fade{
-  background:linear-gradient(180deg,#f4e8cc 0%,rgba(244,232,204,.92) 100%)!important;
-  height:calc(env(safe-area-inset-top,0px) + 18px)!important;
+html[data-theme="light"] .top-edge-fade,
+html[data-theme="light"] .top-swim-aura{
+  display:none!important;
 }
-html[data-theme="light"] .top-swim-aura:before{
-  background:radial-gradient(ellipse 96% 100% at 50% 100%,rgba(236,210,155,.22) 0%,rgba(244,232,204,.55) 55%,transparent 100%)!important;
-  opacity:1!important;
+html[data-theme="light"].is-standalone-pwa,
+html[data-theme="light"].is-standalone-pwa body{
+  background:var(--bg)!important;
+}
+@media(max-width:700px){
+  html[data-theme="light"].is-standalone-pwa body{
+    padding-top:max(6px,env(safe-area-inset-top,0px))!important;
+    background:var(--premium-bg)!important;
+  }
+  html[data-theme="light"].is-standalone-pwa .app:after{
+    display:none!important;
+  }
+  html[data-theme="light"].is-standalone-pwa .top-shell{
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    margin-top:0!important;
+  }
+  html[data-theme="light"].is-standalone-pwa .top-shell .header{
+    padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))!important;
+  }
 }
 html[data-theme="light"] .top-shell{
   border-radius:0!important;
