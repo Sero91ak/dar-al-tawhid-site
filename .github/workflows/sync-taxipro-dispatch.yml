@@ -6,8 +6,8 @@ on:
     branches:
       - main
     paths:
-      - taxipro-dispatch-export/**
-      - .github/workflows/sync-taxipro-dispatch.yml
+      - 'taxipro-dispatch-export/**'
+      - '.github/workflows/sync-taxipro-dispatch.yml'
 
 permissions:
   contents: read
@@ -16,32 +16,31 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Push export to taxipro-dispatch
+      - name: Verify export present
+        run: ls -la taxipro-dispatch-export/
+
+      - name: Push to taxipro-dispatch
         env:
           PAT: ${{ secrets.TAXIPRO_DISPATCH_PAT }}
         run: |
+          set -e
           if [ -z "$PAT" ]; then
-            echo "::error::Secret TAXIPRO_DISPATCH_PAT fehlt"
+            echo "::error::Secret TAXIPRO_DISPATCH_PAT fehlt in dar-al-tawhid-site → Settings → Secrets → Actions"
             exit 1
           fi
-          git config --global user.name "cursor[bot]"
-          git config --global user.email "cursoragent@cursor.com"
-          git clone "https://x-access-token:${PAT}@github.com/Sero91ak/taxipro-dispatch.git" target
-          cd target
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git clone "https://x-access-token:${PAT}@github.com/Sero91ak/taxipro-dispatch.git" repo
+          cd repo
           git checkout -B cursor/driver-app-portal-19cc
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           cp -a "$GITHUB_WORKSPACE/taxipro-dispatch-export/." ./
           git add -A
           if git diff --staged --quiet; then
-            echo "No changes to sync"
+            echo "Already up to date"
             exit 0
           fi
-          git commit -m "Sync: Mobile PWA + Fahrer-App
-
-- Installable mobile PWA with bottom navigation
-- Driver portal: assignments, payments, signatures, documents, push
-- driver.html, manifest.json, service-worker.js, icons"
+          git commit -m "Sync: Mobile PWA + Fahrer-App from Cloud Agent"
           git push -f origin cursor/driver-app-portal-19cc
