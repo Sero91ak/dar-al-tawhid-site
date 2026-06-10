@@ -1,0 +1,37 @@
+{
+  "name": "TaxiPro Dispatch",
+  "short_name": "TaxiPro",
+  "description": "Disposition für Taxi- und Krankentransport – Kalender, Kunden, Fahrer",
+  "start_url": "./index.html?source=pwa",
+  "shortcuts": [
+    {
+      "name": "Fahrer-App",
+      "short_name": "Fahrer",
+      "description": "Nur zugewiesene Fahrten für Fahrer",
+      "url": "./index.html?mode=driver",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "orientation": "any",
+  "background_color": "#1a2433",
+  "theme_color": "#0a1628",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
