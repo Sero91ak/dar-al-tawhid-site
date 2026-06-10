@@ -2,9 +2,43 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8"/>
-<meta http-equiv="refresh" content="0;url=index.html?mode=driver"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#0a1628"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Fahrer"/>
+<link rel="manifest" href="manifest-driver.json"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 <title>TaxiPro Fahrer</title>
-<script>location.replace('index.html?mode=driver'+location.search.replace('?','&'));</script>
+<style>
+:root{--bg:#1a2433;--text:#f2f6fa;--gold:#f5a623;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + var(--safe-top));padding-bottom:calc(24px + var(--safe-bottom))}
+.logo{font-size:22px;font-weight:700;margin-bottom:8px}
+.logo em{color:var(--gold);font-style:normal}
+.sub{font-size:14px;opacity:.75;text-align:center;line-height:1.5;margin-bottom:20px}
+.spinner{width:36px;height:36px;border:3px solid rgba(245,166,35,.25);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+a{color:var(--gold)}
+</style>
 </head>
-<body><p><a href="index.html?mode=driver">TaxiPro Fahrer-App öffnen</a></p></body>
+<body>
+<div class="spinner" aria-hidden="true"></div>
+<div class="logo">TaxiPro <em>Fahrer</em></div>
+<p class="sub">App wird geladen…</p>
+<script>
+(function(){
+  var q=location.search;
+  var sep=q?'&':'?';
+  var target='index.html'+q+sep+'mode=driver';
+  if(location.hash) target+=location.hash;
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./service-worker.js').catch(function(){});
+  }
+  location.replace(target);
+})();
+</script>
+<noscript><p><a href="index.html?mode=driver">TaxiPro Fahrer-App öffnen</a></p></noscript>
+</body>
 </html>

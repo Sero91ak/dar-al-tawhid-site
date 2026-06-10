@@ -11,7 +11,9 @@ TaxiPro ist eine **Progressive Web App (PWA)** – installierbar wie eine native
 - **Android (Chrome):** Menü → „App installieren“ oder Banner „Installieren“
 - **iPhone (Safari):** Teilen → „Zum Home-Bildschirm“
 
-Nach der Installation startet TaxiPro im Vollbild mit Bottom-Navigation, Touch-optimierten Formularen und Standort-Button (📍) für Abholadressen.
+Nach der Installation startet TaxiPro im Vollbild mit Bottom-Navigation, Schnellzugriff-Leiste, Pull-to-Refresh, Touch-optimierten Formularen und Standort-Button (📍) für Abholadressen.
+
+**Disponent mobil:** Kalender-Karten mit Route & Fahrer-Zuweisung, Wochen-Ansicht als Liste, Fahrer direkt in der Bottom-Navigation, Schnellbuttons für Sync/Maps/Cloud.
 
 ## Fahrer-App (separater Zugang)
 
@@ -22,6 +24,11 @@ Fahrer sehen **keine Zentrale** – nur ihre zugewiesenen Fahrten und Dokumente.
 2. Bei Fahrt auf **🚀** → **📱 App** (Fahrt erscheint in der Fahrer-App) oder **📲 WA** (WhatsApp)
 3. **Microsoft Cloud** verbinden (SharePoint) – damit Fahrer-Handys synchronisieren
 4. Monatsende: **📄 Dokument an Fahrer senden** (Excel/PDF) → Fahrer unterschreibt in der App
+
+**Fahrer-App installieren (eigene App auf dem Home-Bildschirm):**
+- Link von der Zentrale öffnen oder `driver.html` aufrufen
+- **Android:** Banner „Fahrer-App installieren“ oder Browser-Menü → App installieren
+- **iPhone:** Safari → Teilen → „Zum Home-Bildschirm“ (erscheint als **Fahrer**, nicht Dispatch)
 
 **Fahrer (Smartphone):**
 - Link öffnen: `index.html?mode=driver&token=…` oder PIN eingeben
