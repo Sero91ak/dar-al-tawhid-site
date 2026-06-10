@@ -35,6 +35,8 @@ Fahrer sehen **keine Zentrale** – nur ihre zugewiesenen Fahrten und Dokumente.
 
 Fahrer-Einstieg auch über: `driver.html`
 
+Stand: Juni 2026 · Mobile PWA + Fahrer-App
+
 ## Google Kalender verbinden
 
 In der [Google Cloud Console](https://console.cloud.google.com) unter OAuth-Client diese Origin eintragen:
