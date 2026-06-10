@@ -5,9 +5,10 @@
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
-const SITE_ORIGIN = SITE_URL.replace(/#.*$/, "").replace(/\/$/, "");
-const NOTIFICATION_ICON = `${SITE_ORIGIN}/notification-icon-256.png?v=1`;
-const NOTIFICATION_BADGE = `${SITE_ORIGIN}/notification-badge-96.png?v=1`;
+const {
+  withNotificationIcons,
+  postOneSignalNotification
+} = require("./lib/onesignal-push");
 const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
 
 if (!API_KEY) {
@@ -500,7 +501,7 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
 
   const copy = prayerNotificationCopy(prayer, mode);
 
-  const body = {
+  const body = withNotificationIcons({
     app_id: APP_ID,
     target_channel: "push",
     include_subscription_ids: ids,
@@ -508,47 +509,22 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
     contents: copy.contents,
     url: SITE_URL,
     isAnyWeb: true,
-    send_after: sendAfter.toISOString(),
-    chrome_web_icon: NOTIFICATION_ICON,
-    chrome_web_badge: NOTIFICATION_BADGE,
-    firefox_icon: NOTIFICATION_ICON,
-    chrome_icon: NOTIFICATION_ICON,
-    large_icon: NOTIFICATION_ICON
-  };
+    send_after: sendAfter.toISOString()
+  }, SITE_URL);
 
-  async function postWith(authHeader) {
-    const r = await fetch("https://api.onesignal.com/notifications", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "Authorization": authHeader
-      },
-      body: JSON.stringify(body)
-    });
-    return { ok: r.ok, status: r.status, text: await r.text() };
-  }
+  try {
+    const result = await postOneSignalNotification(body, API_KEY, { retries: 3 });
+    const timeLabel = prayer.time == null
+      ? sendAfter.toISOString()
+      : formatHour(prayer.time);
 
-  // Try modern "Key" auth first, fall back to legacy "Basic" on auth errors.
-  let res = await postWith(`Key ${API_KEY}`);
-  if (!res.ok && (res.status === 400 || res.status === 401 || res.status === 403)) {
-    res = await postWith(`Basic ${API_KEY}`);
-  }
-
-  const text = res.text;
-
-  if (!res.ok) {
-    console.error(`OneSignal Sendefehler ${res.status}:`, text);
+    console.log(
+      `Geplant (${mode}): ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${result.text}`
+    );
+  } catch (err) {
+    console.error(`OneSignal Sendefehler:`, err.message || err);
     process.exitCode = 1;
-    return;
   }
-
-  const timeLabel = prayer.time == null
-    ? sendAfter.toISOString()
-    : formatHour(prayer.time);
-
-  console.log(
-    `Geplant (${mode}): ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${text}`
-  );
 }
 
 (async function main() {
