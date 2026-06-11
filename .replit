@@ -37,3 +37,8 @@ externalPort = 80
 [deployment]
 deploymentTarget = "static"
 publicDir = "."
+
+[userenv]
+
+[userenv.shared]
+ONESIGNAL_API_KEY_NEW = "os_v2_app_pbwxzvqekvcdjkyubqikppdldzvwbzklwvnuwgusxkicld3xxqs3tmftkuwa6xg2fqkczk75oxp76ecb5u6zpyzbismjlzh2qluckrq"

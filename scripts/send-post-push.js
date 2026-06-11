@@ -9,7 +9,7 @@ const {
 } = require("./lib/onesignal-push");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
-const API_KEY = process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_APP_API_KEY;
+const API_KEY = process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de";
 const EVENT_NAME = process.env.GITHUB_EVENT_NAME || "";
 const RUN_ID = process.env.GITHUB_RUN_ID || "manual";

@@ -24,7 +24,7 @@ function withNotificationIcons(payload, siteUrl) {
 }
 
 async function postOneSignalNotification(body, apiKey, { retries = 3 } = {}) {
-  const cleanKey = String(apiKey || "")
+  const cleanKey = String(apiKey || process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_API_KEY_NEW || "")
     .replace(/\s+/g, "")
     .replace(/^(Key|Basic)/i, "")
     .trim();
