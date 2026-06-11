@@ -3332,6 +3332,9 @@ function supabaseHeaders(){const key=String(analyticsCfg().supabaseKey||"").trim
 async function sendAnalyticsEvent(eventType,meta){meta=meta||{};if(!hasSupabaseCfg())return false;const url=String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"");try{const res=await fetch(url+"/rest/v1/site_events",{method:"POST",headers:{...supabaseHeaders(),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({event_type:eventType,content_type:meta.contentType||null,content_id:meta.contentId!=null?String(meta.contentId):null,content_title:meta.contentTitle||null,session_id:analyticsSessionId()})});return res.ok}catch(e){return false}}
 async function fetchAnalyticsDashboard(){if(!hasSupabaseCfg())throw new Error("Supabase nicht konfiguriert");const url=String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"");const h=supabaseHeaders();const [liveRes,totalsRes]=await Promise.all([fetch(url+"/rest/v1/rpc/analytics_live",{headers:h}),fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=200",{headers:h})]);if(!liveRes.ok)throw new Error("Live-Statistik Fehler "+liveRes.status);if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);const live=await liveRes.json();const totals=await totalsRes.json();return{live:live||{},totals:Array.isArray(totals)?totals:[]}}
 function trackAnalytics(eventType,meta){meta=meta||{};try{window.DarAnalytics&&DarAnalytics.track(eventType,meta)}catch(e){}sendAnalyticsEvent(eventType,meta)}
+function installPlatform(){const ua=navigator.userAgent||"";if(/iphone|ipad|ipod/i.test(ua))return"ios";if(/android/i.test(ua))return"android";return"other"}
+function trackPwaInstall(platform,reason){const key="darPwaInstallTrackedV1";platform=platform||installPlatform();try{if(localStorage.getItem(key))return;localStorage.setItem(key,platform+":"+Date.now())}catch(e){}trackAnalytics("page_view",{contentType:"install",contentId:platform,contentTitle:(platform==="ios"?"iOS":platform==="android"?"Android":"Andere")+" App-Installation"+(reason?` · ${reason}`:"")})}
+function trackStandaloneInstallIfNeeded(){if(isStandalonePwa())trackPwaInstall(installPlatform(),"standalone")}
 function trackPostShare(id){const post=posts.find(p=>String(p.id)===String(id));trackAnalytics("post_share",{contentType:"post",contentId:id,contentTitle:post?.title})}
 function trackDuaShare(id){const d=DUAS.find(x=>x.id===id);trackAnalytics("dua_share",{contentType:"dua",contentId:id,contentTitle:d?.title})}
 function trackCurrentRoute(){if(currentRoute.view==="statistik")return;const r=currentRoute;if(r.view==="post"){const post=posts.find(p=>String(p.id)===String(r.value));trackAnalytics("post_view",{contentType:"post",contentId:r.value,contentTitle:post?.title})}else if(r.view==="dua"){const d=DUAS.find(x=>x.id===r.value);trackAnalytics("dua_view",{contentType:"dua",contentId:r.value,contentTitle:d?.title})}else{trackAnalytics("page_view",{contentType:"page",contentId:r.view,contentTitle:r.view})}}
@@ -3970,6 +3973,7 @@ function showPwaInstallModalIfNeeded(force){
   if(done)done.onclick=()=>dismissPwaInstallGuide(true);
 }
 function dismissPwaInstallGuide(fromModal){try{localStorage.setItem(PWA_GUIDE_KEY,"1")}catch(e){}const modal=$("pwaInstallModal");if(modal){modal.hidden=true;modal.setAttribute("aria-hidden","true")}const banner=$("pwaInstallBanner");if(banner)banner.remove()}
+window.addEventListener("appinstalled",()=>trackPwaInstall(installPlatform(),"appinstalled"));
 function needsPrayerPushHint(){const s=getPrayerSettings();if(s.reminder)return false;try{if(localStorage.getItem(PRAYER_HINT_KEY))return false}catch(e){}return true}
 function renderPrayerPushHint(){if(!needsPrayerPushHint())return "";const step=!hasPrayerLocation(getPrayerSettings())?"1. Standort freigeben · 2. Erinnerung aktivieren":"1. Gebetszeiten öffnen · 2. Erinnerung aktivieren";return `<section id="prayerPushHint" class="hint-banner prayer-hint"><div><strong>🔔 Gebets-Push auf dem Sperrbildschirm</strong><p>${step}. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung.</p></div><div class="hint-banner-actions"><button id="prayerHintGoBtn" class="hint-btn" type="button">Jetzt aktivieren</button><button id="prayerHintDismissBtn" class="hint-btn ghost" type="button">Später</button></div></section>`}
 function renderPopularPostsBlock(){return `<section id="popularPostsBlock" class="popular-panel premium-surface"><div class="section-head"><h3>Meist gelesen</h3><span id="popularPostsLabel">Beliebt bei Besuchern</span></div><div id="popularPostsContent" class="popular-list collapsed"><div class="loading" style="padding:12px;margin:0">Wird geladen …</div></div><button id="popularPostsToggle" class="popular-toggle" type="button" hidden>Mehr anzeigen</button></section>`}
@@ -4349,6 +4353,7 @@ window.addEventListener("DOMContentLoaded",()=>{
   restoreStatsAuth();
   initTheme();
   applyStandalonePwaClass();
+  trackStandaloneInstallIfNeeded();
   initAndroidTapCleanup();
   bindBottomNav();
   initBottomNavSwipe();

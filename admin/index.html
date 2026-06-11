@@ -107,8 +107,6 @@ button{cursor:pointer}
     </div>
     <div class="toolbar">
       <button class="btn primary" id="refreshBtn" type="button">Aktualisieren</button>
-      <button class="btn" id="copyReportBtn" type="button">Report kopieren</button>
-      <button class="btn" id="exportBtn" type="button">CSV Export</button>
       <button class="btn danger" id="logoutBtn" type="button">Abmelden</button>
     </div>
   </header>
@@ -148,12 +146,18 @@ async function fetchDashboard(){
   if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);
   return{live:await liveRes.json()||{},totals:await totalsRes.json()||[],updated:new Date()};
 }
-function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":"Seite"}
+function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":t==="install"?"Installation":"Seite"}
 function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
 function contentUrl(row){if(row.content_type==="post")return SITE_ORIGIN+"/#post/"+encodeURIComponent(row.content_id);if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);return SITE_ORIGIN}
 function score(row){return Number(row.views||0)+Number(row.shares||0)*4+Number(row.saves||0)*3}
 function engagement(row){const v=Number(row.views||0);return v?Math.round(((Number(row.shares||0)+Number(row.saves||0))/v)*100):0}
 function totals(){return (lastData?.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")}
+function installTotals(){
+  const rows=(lastData?.totals||[]).filter(x=>x.content_type==="install");
+  const count=id=>Number(rows.find(x=>String(x.content_id)===id)?.views||0);
+  const ios=count("ios"),android=count("android"),other=count("other");
+  return{ios,android,other,total:ios+android+other};
+}
 function sortedRows(rows){
   const list=[...rows];
   const sorter={
@@ -215,10 +219,11 @@ function renderShell(){
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
   const posts=rows.filter(x=>x.content_type==="post"),duas=rows.filter(x=>x.content_type==="dua");
+  const installs=installTotals();
   const views=rows.reduce((n,r)=>n+Number(r.views||0),0),shares=rows.reduce((n,r)=>n+Number(r.shares||0),0),saves=rows.reduce((n,r)=>n+Number(r.saves||0),0);
   const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
   const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
-  const body=currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):renderOverview({live,rows,posts,duas,views,shares,saves,top,topViews,topShares});
+  const body=currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):renderOverview({live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs});
   document.getElementById("panel").innerHTML=`
     <section class="hero">
       <div class="hero-card">
@@ -238,8 +243,8 @@ function renderShell(){
         <div class="mini-grid">
           <div class="mini"><b>Gesamtaufrufe</b><span>${views}</span><small>alle getrackten Inhalte</small></div>
           <div class="mini"><b>Interaktionen</b><span>${shares+saves}</span><small>geteilt und gespeichert</small></div>
-          <div class="mini"><b>Beiträge</b><span>${posts.length}</span><small>in Statistik erfasst</small></div>
-          <div class="mini"><b>Duʿāʾ</b><span>${duas.length}</span><small>in Statistik erfasst</small></div>
+          <div class="mini"><b>App installiert</b><span>${installs.total}</span><small>iOS und Android gesamt</small></div>
+          <div class="mini"><b>Inhalte</b><span>${posts.length+duas.length}</span><small>Beiträge und Duʿāʾ erfasst</small></div>
         </div>
       </div>
     </section>
@@ -260,6 +265,13 @@ function renderOverview(ctx){
       <div class="rank-list">${ctx.top.length?ctx.top.map((r,i)=>rankCard(r,i,"score")).join(""):`<div class="empty">Noch keine Daten.</div>`}</div>
     </div>
     <aside class="side-stack">
+      <div class="panel">
+        <div class="section-head"><h3>App-Installationen</h3><span>iOS / Android</span></div>
+        <div class="mini-grid">
+          <div class="mini"><b>iOS</b><span>${ctx.installs.ios}</span><small>Home-Bildschirm-App gestartet</small></div>
+          <div class="mini"><b>Android</b><span>${ctx.installs.android}</span><small>PWA installiert oder gestartet</small></div>
+        </div>
+      </div>
       <div class="panel">
         <div class="section-head"><h3>Meist gelesen</h3><span>Top 5</span></div>
         <div class="rank-list">${ctx.topViews.length?ctx.topViews.map((r,i)=>rankCard(r,i,"views")).join(""):`<div class="empty">Noch keine Aufrufe.</div>`}</div>
@@ -294,7 +306,7 @@ function renderContent(){
     <div class="rank-list">${rows.length?rows.map((r,i)=>rankCard(r,i,sortMode)).join(""):`<div class="empty">Keine passenden Inhalte gefunden.</div>`}</div>
   </section>`;
 }
-function renderActions(rows){
+function renderActions(rows,installs=installTotals()){
   const best=sortedRows(rows)[0];
   return `<section class="split">
     <div class="panel">
@@ -313,7 +325,7 @@ function renderActions(rows){
       </div>
       <div class="panel">
         <div class="section-head"><h3>App-Status</h3><span>PWA</span></div>
-        <div class="empty">Installierbar unter <strong>/admin/</strong> · getrennt von der Besucher-App · eigener Service Worker aktiv.</div>
+        <div class="empty">Besucher-App Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
       </div>
     </aside>
   </section>`;
@@ -335,20 +347,8 @@ async function renderDashboard(){
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
-function makeReport(){
-  const data=lastData||{live:{},totals:[],updated:new Date()},rows=sortedRows(totals()).slice(0,8);
-  return [`DAR Admin Report`,data.updated.toLocaleString("de-DE"),`Jetzt online: ${Number(data.live.live_now||0)}`,`Heute Besucher: ${Number(data.live.today_sessions||0)}`,`Heute Aufrufe: ${Number(data.live.today_views||0)}`,`Heute geteilt: ${Number(data.live.today_shares||0)}`,`Heute gespeichert: ${Number(data.live.today_saves||0)}`,"",...rows.map((r,i)=>`${i+1}. ${cleanTitle(r.content_title||r.content_id)} · ${Number(r.views||0)} Aufrufe · ${Number(r.shares||0)} Shares · ${Number(r.saves||0)} gespeichert`)].join("\n");
-}
-function exportCsv(){
-  const rows=sortedRows(totals());
-  const csv=["type,id,title,views,shares,saves,score,engagement_percent"].concat(rows.map(r=>[r.content_type,r.content_id,cleanTitle(r.content_title||r.content_id),Number(r.views||0),Number(r.shares||0),Number(r.saves||0),score(r),engagement(r)].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(","))).join("\n");
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
-  a.href=url;a.download="dar-admin-statistik.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),800);toast("CSV exportiert");
-}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
-document.getElementById("exportBtn").onclick=exportCsv;
-document.getElementById("copyReportBtn").onclick=async()=>{try{await navigator.clipboard.writeText(makeReport());toast("Report kopiert")}catch(e){toast("Kopieren nicht möglich")}};
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)renderDashboard()});
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{})})}
 authed=readAuth();
