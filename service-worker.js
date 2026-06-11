@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v88';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v89';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -24,10 +24,7 @@ const APP_SHELL = [
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
   '/content/quran-athar/de/001.json',
-  '/assets/site-analytics.js',
-  '/admin/',
-  '/admin/index.html',
-  '/admin/manifest.json'
+  '/assets/site-analytics.js'
 ];
 
 self.addEventListener('message', (event) => {
