@@ -1,4 +1,4 @@
-﻿---
+---
 id: "tawhid-347-millah-ibrahim-ist-lossagung-vom-shirk"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Millah Ibrāhīm ist Lossagung vom Shirk"

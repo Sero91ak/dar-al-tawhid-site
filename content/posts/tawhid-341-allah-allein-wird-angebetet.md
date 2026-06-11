@@ -1,4 +1,4 @@
-﻿---
+---
 id: "tawhid-341-allah-allein-wird-angebetet"
 date: "2026-06-09T00:00:00.000Z"
 title: "📖 Tawḥīd: Allah allein wird angebetet"

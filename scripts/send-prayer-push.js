@@ -251,16 +251,16 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
 
 async function fetchLegacyPlayers() {
   const all = [];
-  let afterId = null;
+  let offset = 0;
   const limit = 300;
 
   while (true) {
-    let url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/subscriptions?kind=ChromePush,SafariLegacyPush,SafariPush,FirefoxPush&limit=${limit}`;
-    if (afterId) url += `&after=${encodeURIComponent(afterId)}`;
+    const url =
+      `https://onesignal.com/api/v1/players?app_id=${encodeURIComponent(APP_ID)}&limit=${limit}&offset=${offset}`;
 
     const res = await fetch(url, {
       headers: {
-        "Authorization": `Key ${API_KEY}`
+        "Authorization": `Basic ${API_KEY}`
       }
     });
 
@@ -271,20 +271,13 @@ async function fetchLegacyPlayers() {
     }
 
     const data = JSON.parse(text);
-    const subs = Array.isArray(data.subscriptions) ? data.subscriptions : [];
+    const players = Array.isArray(data.players) ? data.players : [];
 
-    for (const sub of subs) {
-      all.push({
-        id: sub.id,
-        external_user_id: sub.external_id || null,
-        tags: {},
-        _subType: sub.type,
-        _enabled: sub.enabled !== false
-      });
-    }
+    all.push(...players);
 
-    if (subs.length < limit) break;
-    afterId = subs[subs.length - 1].id;
+    if (players.length < limit) break;
+
+    offset += limit;
   }
 
   return all;
