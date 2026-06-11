@@ -45,10 +45,12 @@ function buildMessage(files) {
     const text = fs.readFileSync(files[0], "utf8");
     const postTitle = frontmatterValue(text, "title") || "Neuer Beitrag";
     const postId = frontmatterValue(text, "id");
+    const url = postId ? `${site}/#post/${encodeURIComponent(postId)}` : `${site}/#recent`;
     return {
       title: "Neuer Beitrag online",
       message: postTitle,
-      url: postId ? `${site}/#post/${encodeURIComponent(postId)}` : `${site}/#recent`
+      url,
+      postId
     };
   }
 
@@ -104,6 +106,8 @@ async function sendWithFallbacks(basePayload) {
     headings: { en: copy.title, de: copy.title },
     contents: { en: copy.message, de: copy.message },
     url: copy.url,
+    web_url: copy.url,
+    data: { url: copy.url, post_id: copy.postId || "" },
     name: `github-posts-auto-${RUN_ID}`
   }, SITE_URL);
 

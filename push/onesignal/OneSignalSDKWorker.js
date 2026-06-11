@@ -1,7 +1,8 @@
 self.addEventListener("notificationclick", (event) => {
   const data = event.notification && event.notification.data ? event.notification.data : {};
   const custom = data.custom || data;
-  const targetUrl = data.url || data.launchURL || data.web_url || custom.u || custom.url || "/#recent";
+  const extra = data.additionalData || data.data || custom.a || {};
+  const targetUrl = data.url || data.launchURL || data.web_url || custom.u || custom.url || extra.url || "/#recent";
   const absoluteUrl = new URL(targetUrl, self.location.origin).href;
 
   event.notification.close();
