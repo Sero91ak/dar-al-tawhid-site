@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v83';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v84';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -82,6 +82,22 @@ self.addEventListener('fetch', (event) => {
 
   // Nur eigene Dateien cachen, keine fremden großen API/CDN-Antworten.
   if (url.origin !== self.location.origin) return;
+
+  // Beiträge immer zuerst vom Netz – veralteter posts-index.json blockiert sonst neue Inhalte.
+  if (url.pathname.startsWith('/content/posts/')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(request).then((cached) => {
