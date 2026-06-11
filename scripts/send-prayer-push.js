@@ -323,8 +323,18 @@ async function fetchUserBySubscriptionId(subscriptionId) {
 
 function extractUserTags(user) {
   if (!user) return {};
-  const tags = user?.properties?.tags;
-  return tags && typeof tags === "object" ? { ...tags } : {};
+  const merged = {};
+  const buckets = [
+    user?.properties?.tags,
+    user?.tags,
+    user?.data?.tags
+  ];
+  for (const bucket of buckets) {
+    if (bucket && typeof bucket === "object") {
+      Object.assign(merged, bucket);
+    }
+  }
+  return merged;
 }
 
 function extractWebPushSubscriptionIds(user) {
@@ -339,10 +349,16 @@ function extractWebPushSubscriptionIds(user) {
     .filter(Boolean);
 }
 
+async function fetchUserByOnesignalId(onesignalId) {
+  if (!onesignalId) return null;
+  return fetchUserByAlias("onesignal_id", onesignalId);
+}
+
 async function resolvePlayerTags(player) {
   let tags = { ...(player.tags || {}) };
   let subscriptionIds = [player.id].filter(Boolean);
   const externalId = player.external_user_id || player.external_id;
+  const onesignalId = player.onesignal_id || player.id;
   let user = null;
 
   if (externalId) {
@@ -352,6 +368,11 @@ async function resolvePlayerTags(player) {
   if (!extractUserTags(user).prayer_lat && player.id) {
     const bySub = await fetchUserBySubscriptionId(player.id);
     if (bySub) user = bySub;
+  }
+
+  if (!extractUserTags(user).prayer_lat && onesignalId) {
+    const byOs = await fetchUserByOnesignalId(onesignalId);
+    if (byOs) user = byOs;
   }
 
   if (user) {
@@ -542,11 +563,18 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
 
   if (!users.length && players.length) {
     const sample = players.find((p) => p.external_user_id || p.external_id) || players[0];
+    let sampleUser = null;
+    const sampleExternal = sample.external_user_id || sample.external_id;
+    if (sampleExternal) {
+      sampleUser = await fetchUserByExternalId(sampleExternal);
+    }
     console.log("Hinweis: Keine prayer_tags gefunden. Beispiel-Subscription:", JSON.stringify({
       id: sample.id,
-      external_user_id: sample.external_user_id || sample.external_id || null,
-      tags: sample.tags || {}
+      external_user_id: sampleExternal || null,
+      tags: sample.tags || {},
+      user_tags: extractUserTags(sampleUser)
     }));
+    console.log("Hinweis: Nutzer müssen in der App 🔔 tippen, Standort setzen und „Erinnerung aktivieren“ – dann Tags erneut synchronisieren.");
   }
 
   for (const group of groups) {
