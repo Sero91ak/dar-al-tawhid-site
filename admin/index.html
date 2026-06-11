@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>DAR Admin · Statistik</title>
+<title>DAR Admin · Dashboard</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/admin/manifest.json">
@@ -15,95 +15,171 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <style>
 :root{
-  --bg:#070706;--gold2:#efd78e;--cream:#f8efd4;--text:#f6edd2;
+  --bg:#070706;--gold:#d2b15b;--gold2:#efd78e;--cream:#f8efd4;--text:#f6edd2;
   --muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
   --serif:Georgia,"Times New Roman",serif;
   --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+  --accent-blue:#8ec5ff;--accent-green:#6fd38a;--accent-rose:#f0a8b8;--accent-violet:#c4b0ff;
 }
 *{box-sizing:border-box}
 html{min-height:100%;background:#060604}
 body{margin:0;min-height:100dvh;color:var(--text);font-family:var(--sans);
   background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),
+  radial-gradient(circle at 88% 8%,rgba(142,197,255,.08),transparent 28%),
   linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%);
-  padding:max(12px,var(--safe-top)) max(14px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(14px,env(safe-area-inset-left,0px))}
+  padding:max(10px,var(--safe-top)) max(12px,env(safe-area-inset-right,0px)) max(78px,var(--safe-bottom)) max(12px,env(safe-area-inset-left,0px))}
 button,input{font:inherit}
-.app{max-width:920px;margin:0 auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.app{max-width:980px;margin:0 auto}
+.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
-.brand img{width:44px;height:44px;border-radius:999px;flex:0 0 44px}
-.brand h1{margin:0;font-family:var(--serif);color:var(--gold2);font-size:20px;line-height:1.05;letter-spacing:.04em}
-.brand p{margin:2px 0 0;color:var(--muted);font-size:11px;font-weight:800}
+.brand img{width:46px;height:46px;border-radius:999px;flex:0 0 46px;box-shadow:0 0 0 2px rgba(239,215,142,.18)}
+.brand h1{margin:0;font-family:var(--serif);color:var(--gold2);font-size:21px;line-height:1.05;letter-spacing:.04em}
+.brand p{margin:3px 0 0;color:var(--muted);font-size:11px;font-weight:800;display:flex;align-items:center;gap:6px}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .pill{border:1px solid var(--line2);background:rgba(239,215,142,.08);color:var(--cream);
   border-radius:999px;min-height:36px;padding:7px 12px;font-size:12px;font-weight:900;cursor:pointer}
 .pill:active{transform:scale(.98)}
-.panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(18,16,12,.92),rgba(7,7,5,.94));
-  box-shadow:0 18px 46px rgba(0,0,0,.28);padding:18px 16px 20px;min-height:280px}
-.login{max-width:360px;margin:36px auto 20px;text-align:center}
-.login h2{margin:0 0 6px;font-family:var(--serif);color:var(--gold2);font-size:24px}
-.login p{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.5}
-.login input{width:100%;margin-bottom:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+.pill.primary{border-color:rgba(239,215,142,.45);background:linear-gradient(145deg,rgba(239,215,142,.18),rgba(239,215,142,.06))}
+.live-pulse{width:8px;height:8px;border-radius:999px;background:var(--accent-green);box-shadow:0 0 0 0 rgba(111,211,138,.55);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(111,211,138,.45)}70%{box-shadow:0 0 0 8px rgba(111,211,138,0)}}
+.panel{border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(18,16,12,.92),rgba(7,7,5,.94));
+  box-shadow:0 18px 46px rgba(0,0,0,.28);padding:16px 14px 18px;min-height:320px}
+.login{max-width:400px;margin:28px auto 16px;text-align:center}
+.login-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:999px;padding:6px 12px;
+  color:var(--gold2);font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.login h2{margin:0 0 8px;font-family:var(--serif);color:var(--gold2);font-size:28px}
+.login p{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.55}
+.login input{width:100%;margin-bottom:10px;padding:13px 14px;border-radius:14px;border:1px solid var(--line);
   background:rgba(0,0,0,.28);color:var(--cream);font-size:15px}
-.login button{width:100%;padding:12px;border-radius:14px;border:1px solid var(--line2);
-  background:rgba(239,215,142,.12);color:var(--cream);font-weight:950;cursor:pointer}
+.login button{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(239,215,142,.35);
+  background:linear-gradient(145deg,rgba(239,215,142,.18),rgba(239,215,142,.06));color:var(--cream);font-weight:950;cursor:pointer}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 0 0;text-align:left}
+.feature-chip{border:1px dashed var(--line2);border-radius:14px;padding:10px 11px;color:var(--muted);font-size:10.5px;line-height:1.45}
+.feature-chip b{display:block;color:var(--gold2);font-size:11px;margin-bottom:3px}
 .hint{margin-top:16px;padding:12px;border:1px dashed var(--line2);border-radius:14px;color:var(--muted);
   font-size:11px;line-height:1.55;text-align:left}
-.stats-dashboard{max-width:920px;margin:0 auto}
-.stats-hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
-.stats-hero-card{border:1px solid var(--line2);border-radius:20px;padding:16px 17px;
-  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.12),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.96),rgba(10,10,8,.96));min-height:98px}
-.stats-hero-card.accent{border-color:rgba(239,215,142,.55)}
-.stats-hero-card b,.stats-kpi-card b{display:block;color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
-.stats-hero-card span,.stats-kpi-card span{display:block;color:var(--gold2);font-size:clamp(24px,4.5vw,34px);font-weight:950;line-height:1.05}
-.stats-hero-card small,.stats-kpi-card small{display:block;color:var(--muted);font-size:10.5px;margin-top:5px;line-height:1.35}
-.stats-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 18px}
-.stats-kpi-card{border:1px solid var(--line2);border-radius:16px;padding:12px 13px;background:rgba(239,215,142,.045);min-height:78px}
-.stats-list-section{margin-top:6px}
-.stats-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 12px;padding:0 2px}
-.stats-section-head h3{margin:0;font-family:var(--serif);color:var(--gold2);font-size:22px;line-height:1.1}
-.stats-section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
-.stats-rank-list{display:flex;flex-direction:column;gap:10px}
-.stats-rank-card{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;
+.tabbar{display:flex;gap:6px;overflow:auto;padding:2px 2px 12px;scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tab-btn{flex:0 0 auto;border:1px solid var(--line2);background:rgba(239,215,142,.04);color:var(--muted);
+  border-radius:999px;min-height:36px;padding:8px 14px;font-size:11px;font-weight:950;cursor:pointer;white-space:nowrap}
+.tab-btn.active{color:var(--cream);border-color:rgba(239,215,142,.45);background:linear-gradient(145deg,rgba(239,215,142,.16),rgba(239,215,142,.05))}
+.hero-live{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;margin-bottom:14px}
+.hero-card{border:1px solid var(--line2);border-radius:22px;padding:16px 17px;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.12),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.96),rgba(10,10,8,.96))}
+.hero-card.live{border-color:rgba(111,211,138,.35);background:radial-gradient(circle at 18% 0%,rgba(111,211,138,.14),transparent 42%),linear-gradient(145deg,rgba(16,24,18,.96),rgba(10,10,8,.96))}
+.hero-card b{display:block;color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.hero-card .num{display:block;color:var(--gold2);font-size:clamp(28px,5vw,40px);font-weight:950;line-height:1}
+.hero-card.live .num{color:#b8f5c8}
+.hero-card small{display:block;color:var(--muted);font-size:10.5px;margin-top:6px;line-height:1.35}
+.hero-subgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.kpi{border:1px solid var(--line2);border-radius:18px;padding:12px 13px;background:rgba(239,215,142,.045);min-height:84px}
+.kpi b{display:block;color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.kpi span{display:block;color:var(--gold2);font-size:clamp(20px,3.5vw,28px);font-weight:950;line-height:1.05}
+.kpi small{display:block;color:var(--muted);font-size:10px;margin-top:5px;line-height:1.3}
+.kpi.accent-blue span{color:var(--accent-blue)}
+.kpi.accent-rose span{color:var(--accent-rose)}
+.kpi.accent-violet span{color:var(--accent-violet)}
+.section{margin-top:4px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 12px;padding:0 2px}
+.section-head h3{margin:0;font-family:var(--serif);color:var(--gold2);font-size:22px;line-height:1.1}
+.section-head span{color:var(--muted);font-size:11px;font-weight:850}
+.insight-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.insight{border:1px solid var(--line2);border-radius:18px;padding:14px;background:rgba(239,215,142,.03)}
+.insight h4{margin:0 0 8px;font-size:12px;color:var(--cream);font-weight:950}
+.insight p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
+.insight .big{margin-top:8px;color:var(--gold2);font-size:22px;font-weight:950}
+.bar-list{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:10px;align-items:center}
+.bar-meta{display:grid;gap:5px;min-width:0}
+.bar-title{color:var(--cream);font-size:11.5px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(239,215,142,.35),rgba(239,215,142,.85))}
+.bar-val{text-align:right;color:var(--gold2);font-size:11px;font-weight:950}
+.search-row{margin-bottom:12px}
+.search-row input{width:100%;padding:11px 13px;border-radius:14px;border:1px solid var(--line2);background:rgba(0,0,0,.24);color:var(--cream);font-size:13px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filter-chip{border:1px solid var(--line2);border-radius:999px;padding:6px 11px;font-size:10px;font-weight:950;color:var(--muted);cursor:pointer;background:transparent}
+.filter-chip.active{color:var(--cream);border-color:rgba(239,215,142,.4);background:rgba(239,215,142,.08)}
+.rank-list{display:flex;flex-direction:column;gap:10px}
+.rank-card{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;
   border:1px solid var(--line2);border-radius:18px;padding:14px 15px;
   background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.08),transparent 38%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
   cursor:pointer;text-align:left;width:100%}
-.stats-rank-num{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;
+.rank-num{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;
   background:rgba(239,215,142,.12);border:1px solid rgba(239,215,142,.22);color:var(--gold2);font-size:15px;font-weight:950}
-.stats-rank-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
-.stats-type-badge{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:4px 8px;
+.rank-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.type-badge{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:4px 8px;
   color:var(--cream);background:rgba(239,215,142,.06);font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
-.stats-open-hint{color:var(--muted2);font-size:10px;font-weight:850}
-.stats-rank-title{margin:0;color:#fff6dc;font-family:var(--serif);font-size:clamp(16px,2.2vw,19px);line-height:1.32;font-weight:700;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.stats-rank-metrics{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.stats-metric-pill{display:inline-flex;border:1px solid rgba(214,183,106,.18);border-radius:999px;padding:5px 9px;
+.open-hint{color:var(--muted2);font-size:10px;font-weight:850}
+.rank-title{margin:0;color:#fff6dc;font-family:var(--serif);font-size:clamp(15px,2.2vw,18px);line-height:1.32;font-weight:700;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rank-metrics{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.metric-pill{display:inline-flex;border:1px solid rgba(214,183,106,.18);border-radius:999px;padding:5px 9px;
   color:#f5e8c8;background:rgba(214,183,106,.06);font-size:10.5px;font-weight:900;white-space:nowrap}
-.stats-meta{color:var(--muted);font-size:11px;line-height:1.5;margin-top:14px;text-align:center}
-.stats-empty{padding:18px;border:1px dashed var(--line2);border-radius:16px;color:var(--muted);text-align:center;font-size:13px;line-height:1.55}
-.status-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:#5fd38a;margin-right:6px;vertical-align:middle}
-@media(max-width:900px){.stats-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){.stats-open-hint{display:none}.topbar{align-items:flex-start;flex-direction:column}}
+.eng-score{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(196,176,255,.22);border-radius:999px;
+  padding:4px 8px;color:var(--accent-violet);font-size:10px;font-weight:950}
+.tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tool-card{display:block;text-decoration:none;color:inherit;border:1px solid var(--line2);border-radius:18px;padding:14px;
+  background:linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94))}
+.tool-card b{display:block;color:var(--gold2);font-size:13px;margin-bottom:4px}
+.tool-card span{display:block;color:var(--muted);font-size:11px;line-height:1.45}
+.tool-card:active{transform:scale(.99)}
+.status-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.status-item{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border:1px solid var(--line2);
+  border-radius:14px;padding:10px 12px;font-size:11px;color:var(--muted)}
+.status-item strong{color:var(--cream);font-size:11.5px}
+.status-ok{color:var(--accent-green);font-weight:950;white-space:nowrap}
+.status-warn{color:#f0c674;font-weight:950;white-space:nowrap}
+.meta{color:var(--muted);font-size:11px;line-height:1.5;margin-top:14px;text-align:center}
+.empty{padding:18px;border:1px dashed var(--line2);border-radius:16px;color:var(--muted);text-align:center;font-size:13px;line-height:1.55}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px max(12px,env(safe-area-inset-right,0px)) max(10px,var(--safe-bottom)) max(12px,env(safe-area-inset-left,0px));
+  background:linear-gradient(180deg,rgba(6,6,4,0),rgba(6,6,4,.92) 24%,rgba(6,6,4,.98));
+  border-top:1px solid rgba(210,177,91,.12)}
+.bottom-nav-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.nav-btn{border:1px solid transparent;background:rgba(239,215,142,.04);color:var(--muted);border-radius:16px;min-height:52px;
+  padding:6px 4px;font-size:9px;font-weight:950;cursor:pointer;display:grid;place-items:center;gap:4px}
+.nav-btn .ico{font-size:16px;line-height:1}
+.nav-btn.active{color:var(--cream);border-color:rgba(239,215,142,.35);background:rgba(239,215,142,.1)}
+@media(max-width:900px){.kpi-grid,.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+  .hero-live,.insight-grid,.tools-grid{grid-template-columns:1fr}
+  .open-hint{display:none}
+  .topbar{align-items:flex-start;flex-direction:column}
+  .bottom-nav-inner{gap:4px}
+  .nav-btn{font-size:8px;min-height:48px}
+}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar" id="topbar" hidden>
     <div class="brand">
-      <img src="/app-icon-192.png" alt="" width="44" height="44">
+      <img src="/app-icon-192.png" alt="" width="46" height="46">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Live-Statistik</p>
+        <p><span class="live-pulse"></span><span id="liveLabel">Dashboard</span></p>
       </div>
     </div>
     <div class="toolbar">
-      <button class="pill" id="refreshBtn" type="button">↻ Aktualisieren</button>
+      <button class="pill primary" id="openSiteBtn" type="button">🌐 Seite</button>
+      <button class="pill" id="refreshBtn" type="button">↻</button>
       <button class="pill" id="logoutBtn" type="button">Abmelden</button>
     </div>
   </header>
   <main class="panel" id="panel"></main>
 </div>
+<nav class="bottom-nav" id="bottomNav" hidden aria-label="Admin Navigation">
+  <div class="bottom-nav-inner">
+    <button class="nav-btn active" data-tab="overview" type="button"><span class="ico">📊</span>Übersicht</button>
+    <button class="nav-btn" data-tab="posts" type="button"><span class="ico">📚</span>Beiträge</button>
+    <button class="nav-btn" data-tab="duas" type="button"><span class="ico">🤲</span>Duʿāʾ</button>
+    <button class="nav-btn" data-tab="engagement" type="button"><span class="ico">✨</span>Engagement</button>
+    <button class="nav-btn" data-tab="tools" type="button"><span class="ico">🛠</span>Tools</button>
+  </div>
+</nav>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -115,11 +191,18 @@ const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
 let refreshTimer=null;
 let authed=false;
+let currentTab="overview";
+let dashboardCache=null;
+let siteMetaCache=null;
+let listFilter="all";
+let searchQuery="";
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
 function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&&String(c.supabaseKey||"").trim())}
 function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
+function fmt(n){return Number(n||0).toLocaleString("de-DE")}
+function pct(part,total){if(!total)return "0%";return Math.round((Number(part||0)/Number(total))*100)+"%"}
 function readAuth(){
   try{
     const raw=localStorage.getItem(AUTH_KEY);
@@ -148,11 +231,26 @@ async function fetchDashboard(){
   const h=headers();
   const [liveRes,totalsRes]=await Promise.all([
     fetch(url+"/rest/v1/rpc/analytics_live",{headers:h,cache:"no-store"}),
-    fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=200",{headers:h,cache:"no-store"})
+    fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves,updated_at&order=views.desc&limit=500",{headers:h,cache:"no-store"})
   ]);
   if(!liveRes.ok)throw new Error("Live-Statistik Fehler "+liveRes.status);
   if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);
   return{live:await liveRes.json()||{},totals:await totalsRes.json()||[]};
+}
+async function fetchSiteMeta(){
+  if(siteMetaCache)return siteMetaCache;
+  const out={posts:0,duas:0,generated:null};
+  try{
+    const [postsRes,duasRes]=await Promise.all([
+      fetch(SITE_ORIGIN+"/content/posts/posts-index.json",{cache:"no-store"}),
+      fetch(SITE_ORIGIN+"/content/duas/duas.json",{cache:"no-store"})
+    ]);
+    if(postsRes.ok){const j=await postsRes.json();out.posts=Number(j.count||j.files?.length||0)}
+    if(duasRes.ok){const j=await duasRes.json();out.duas=Array.isArray(j)?j.length:Number(j?.length||0)}
+    out.generated=new Date().toISOString();
+  }catch(e){}
+  siteMetaCache=out;
+  return out;
 }
 function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":"Seite"}
 function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
@@ -161,36 +259,107 @@ function contentUrl(row){
   if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);
   return "";
 }
-function rankCard(row,idx){
+function engagementScore(row){
+  const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);
+  if(!views)return shares*3+saves*2;
+  return Math.round(((shares*3+saves*2)/views)*100);
+}
+function sumTotals(rows,field){return rows.reduce((a,r)=>a+Number(r[field]||0),0)}
+function computeStats(totals){
+  const rows=(totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua");
+  const posts=rows.filter(x=>x.content_type==="post");
+  const duas=rows.filter(x=>x.content_type==="dua");
+  const sortBy=(arr,key)=>arr.slice().sort((a,b)=>Number(b[key]||0)-Number(a[key]||0));
+  const withScore=rows.map(r=>({...r,score:engagementScore(r)}));
+  return{
+    all:rows,
+    posts,
+    duas,
+    totalViews:sumTotals(rows,"views"),
+    totalShares:sumTotals(rows,"shares"),
+    totalSaves:sumTotals(rows,"saves"),
+    topViews:sortBy(rows,"views").slice(0,8),
+    topShares:sortBy(rows,"shares").slice(0,8),
+    topSaves:sortBy(rows,"saves").slice(0,8),
+    topEngagement:sortBy(withScore,"score").filter(x=>Number(x.views||0)>2).slice(0,8),
+    zeroViews:rows.filter(x=>!Number(x.views||0)).length,
+    trackedPosts:posts.length,
+    trackedDuas:duas.length
+  };
+}
+function barChart(items,key,labelKey){
+  if(!items.length)return `<div class="empty">Noch keine Daten.</div>`;
+  const max=Math.max(...items.map(x=>Number(x[key]||0)),1);
+  return `<div class="bar-list">${items.map(item=>{
+    const val=Number(item[key]||0);
+    const width=Math.max(6,Math.round((val/max)*100));
+  return `<div class="bar-row"><div class="bar-meta"><div class="bar-title">${esc(cleanTitle(item.content_title||item.content_id))}</div><div class="bar-track"><div class="bar-fill" style="width:${width}%"></div></div></div><div class="bar-val">${fmt(val)}</div></div>`;
+  }).join("")}</div>`;
+}
+function rankCard(row,idx,showScore){
   const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);
   const title=cleanTitle(row.content_title||row.content_id);
   const href=contentUrl(row);
-  const open=href?`<span class="stats-open-hint">In App öffnen →</span>`:"";
-  return `<article class="stats-rank-card" data-href="${esc(href)}" tabindex="0" role="button">
-    <div class="stats-rank-num">${idx+1}</div>
+  const open=href?`<span class="open-hint">Öffnen →</span>`:"";
+  const score=showScore?`<span class="eng-score">✨ ${engagementScore(row)} Score</span>`:"";
+  return `<article class="rank-card" data-href="${esc(href)}" tabindex="0" role="button">
+    <div class="rank-num">${idx+1}</div>
     <div>
-      <div class="stats-rank-top"><span class="stats-type-badge">${esc(typeLabel(row.content_type))}</span>${open}</div>
-      <h3 class="stats-rank-title">${esc(title)}</h3>
-      <div class="stats-rank-metrics">
-        <span class="stats-metric-pill">👁 ${views} gelesen</span>
-        <span class="stats-metric-pill">↗ ${shares} geteilt</span>
-        <span class="stats-metric-pill">♡ ${saves} gespeichert</span>
+      <div class="rank-top"><span class="type-badge">${esc(typeLabel(row.content_type))}</span>${score}${open}</div>
+      <h3 class="rank-title">${esc(title)}</h3>
+      <div class="rank-metrics">
+        <span class="metric-pill">👁 ${fmt(views)}</span>
+        <span class="metric-pill">↗ ${fmt(shares)}</span>
+        <span class="metric-pill">♡ ${fmt(saves)}</span>
       </div>
     </div>
   </article>`;
 }
+function filterRows(rows){
+  let list=rows.slice();
+  if(listFilter==="views")list=list.filter(x=>Number(x.views||0)>0);
+  if(listFilter==="shares")list=list.filter(x=>Number(x.shares||0)>0);
+  if(listFilter==="saves")list=list.filter(x=>Number(x.saves||0)>0);
+  if(searchQuery){
+    const q=searchQuery.toLowerCase();
+    list=list.filter(x=>String(x.content_title||x.content_id||"").toLowerCase().includes(q));
+  }
+  return list.sort((a,b)=>(Number(b.views||0)+Number(b.shares||0)+Number(b.saves||0))-(Number(a.views||0)+Number(a.shares||0)+Number(a.saves||0)));
+}
+function bindRankCards(root){
+  (root||document).querySelectorAll(".rank-card[data-href]").forEach(card=>{
+    const href=card.getAttribute("data-href");
+    if(!href)return;
+    card.onclick=()=>window.open(href,"_blank","noopener");
+    card.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")card.click()};
+  });
+}
+function setTab(tab){
+  currentTab=tab;
+  document.querySelectorAll(".nav-btn[data-tab]").forEach(btn=>{
+    btn.classList.toggle("active",btn.getAttribute("data-tab")===tab);
+  });
+  renderCurrentTab();
+}
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
+  document.getElementById("bottomNav").hidden=true;
   document.getElementById("panel").innerHTML=`
     <section class="login">
-      <h2>🔒 Admin</h2>
-      <p>Statistik-App für DAR AL TAWḤID – nur Besucher & Inhalte verfolgen.</p>
+      <div class="login-badge"><span class="live-pulse"></span> Admin Dashboard</div>
+      <h2>DAR AL TAWḤID</h2>
+      <p>Live-Statistik, Top-Inhalte, Engagement & Schnellzugriff – nur für dich.</p>
       <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
-      <button id="loginBtn" type="button">Statistik öffnen</button>
+      <button id="loginBtn" type="button">Dashboard öffnen</button>
+      <div class="feature-grid">
+        <div class="feature-chip"><b>📊 Live</b>Besucher jetzt & heute</div>
+        <div class="feature-chip"><b>📚 Rankings</b>Beiträge & Duʿāʾ</div>
+        <div class="feature-chip"><b>✨ Engagement</b>Teilen, Speichern, Score</div>
+      </div>
       <div class="hint">
         <strong>Als App speichern:</strong><br>
         iPhone: Safari → Teilen → „Zum Home-Bildschirm“<br>
-        Android: Menü → „App installieren“<br><br>
+        Android: Chrome ⋮ → „App installieren“<br><br>
         URL: <strong>${esc(location.origin+"/admin/")}</strong>
       </div>
     </section>`;
@@ -203,44 +372,125 @@ function renderLogin(){
   input.onkeydown=e=>{if(e.key==="Enter")btn.click()};
   setTimeout(()=>{try{input.focus()}catch(e){}},80);
 }
+function renderOverview(live,stats,meta){
+  const shareRate=pct(stats.totalShares,stats.totalViews);
+  const saveRate=pct(stats.totalSaves,stats.totalViews);
+  return `
+    <div class="hero-live">
+      <div class="hero-card live"><b>Jetzt online</b><span class="num">${fmt(live.live_now)}</span><small>Aktive Besucher in den letzten 5 Minuten</small></div>
+      <div class="hero-subgrid">
+        <div class="hero-card"><b>Heute Besucher</b><span class="num">${fmt(live.today_sessions)}</span><small>Einzigartige Sitzungen</small></div>
+        <div class="hero-card"><b>Heute Aufrufe</b><span class="num">${fmt(live.today_views)}</span><small>Seiten, Beiträge & Duʿāʾ</small></div>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi accent-blue"><b>Heute geteilt</b><span>${fmt(live.today_shares)}</span><small>Beiträge & Duʿāʾ</small></div>
+      <div class="kpi accent-rose"><b>Heute gespeichert</b><span>${fmt(live.today_saves)}</span><small>Favoriten</small></div>
+      <div class="kpi"><b>Gesamt gelesen</b><span>${fmt(stats.totalViews)}</span><small>alle Zeiten</small></div>
+      <div class="kpi accent-violet"><b>Inhalte live</b><span>${fmt(meta.posts)}</span><small>${fmt(meta.duas)} Duʿāʾ online</small></div>
+    </div>
+    <div class="insight-grid">
+      <div class="insight"><h4>📈 Reichweite heute</h4><p>${fmt(live.today_views)} Aufrufe bei ${fmt(live.today_sessions)} Besuchern – durchschnittlich ${live.today_sessions?Math.max(1,Math.round(live.today_views/live.today_sessions)):0} pro Sitzung.</p></div>
+      <div class="insight"><h4>💬 Engagement gesamt</h4><p>Teilungsrate <strong>${shareRate}</strong> · Speicherrate <strong>${saveRate}</strong> · ${fmt(stats.trackedPosts)} Beiträge & ${fmt(stats.trackedDuas)} Duʿāʾ mit Statistik.</p><div class="big">${fmt(stats.totalShares+stats.totalSaves)} Aktionen</div></div>
+    </div>
+    <section class="section">
+      <div class="section-head"><h3>Top 5 gelesen</h3><span>heute & gesamt</span></div>
+      ${barChart(stats.topViews.slice(0,5),"views")}
+    </section>`;
+}
+function renderListTab(title,rows,showScore){
+  const filtered=filterRows(rows);
+  return `
+    <div class="search-row"><input id="adminSearch" type="search" placeholder="Suchen nach Titel oder ID…" value="${esc(searchQuery)}"></div>
+    <div class="filter-row">
+      <button class="filter-chip ${listFilter==="all"?"active":""}" data-filter="all" type="button">Alle</button>
+      <button class="filter-chip ${listFilter==="views"?"active":""}" data-filter="views" type="button">Mit Aufrufen</button>
+      <button class="filter-chip ${listFilter==="shares"?"active":""}" data-filter="shares" type="button">Geteilt</button>
+      <button class="filter-chip ${listFilter==="saves"?"active":""}" data-filter="saves" type="button">Gespeichert</button>
+    </div>
+    <section class="section">
+      <div class="section-head"><h3>${title}</h3><span>${filtered.length} Einträge</span></div>
+      <div class="rank-list">${filtered.length?filtered.map((r,i)=>rankCard(r,i,showScore)).join(""):`<div class="empty">Keine Treffer.</div>`}</div>
+    </section>`;
+}
+function renderEngagement(stats){
+  return `
+    <div class="kpi-grid">
+      <div class="kpi"><b>Geteilt gesamt</b><span>${fmt(stats.totalShares)}</span><small>Beiträge & Duʿāʾ</small></div>
+      <div class="kpi accent-rose"><b>Gespeichert</b><span>${fmt(stats.totalSaves)}</span><small>nur Beiträge</small></div>
+      <div class="kpi accent-violet"><b>Engagement-Score</b><span>${stats.topEngagement[0]?engagementScore(stats.topEngagement[0]):0}</span><small>Top-Inhalt</small></div>
+      <div class="kpi"><b>Ohne Aufrufe</b><span>${fmt(stats.zeroViews)}</span><small>noch unsichtbar</small></div>
+    </div>
+    <div class="insight-grid">
+      <section class="section"><div class="section-head"><h3>Meist geteilt</h3><span>Top 5</span></div>${barChart(stats.topShares.slice(0,5),"shares")}</section>
+      <section class="section"><div class="section-head"><h3>Meist gespeichert</h3><span>Top 5</span></div>${barChart(stats.topSaves.slice(0,5),"saves")}</section>
+    </div>
+    <section class="section">
+      <div class="section-head"><h3>Stärkstes Engagement</h3><span>Score = Teilen & Speichern pro Aufruf</span></div>
+      <div class="rank-list">${stats.topEngagement.length?stats.topEngagement.map((r,i)=>rankCard(r,i,true)).join(""):`<div class="empty">Noch zu wenig Daten für Engagement-Score.</div>`}</div>
+    </section>`;
+}
+function renderTools(meta,live,stats){
+  return `
+    <div class="tools-grid">
+      <a class="tool-card" href="${esc(SITE_ORIGIN)}/" target="_blank" rel="noopener"><b>🌐 Hauptseite</b><span>Live-App für Besucher öffnen</span></a>
+      <a class="tool-card" href="${esc(SITE_ORIGIN)}/#statistik" target="_blank" rel="noopener"><b>📊 Statistik in App</b><span>Statistik-Bereich der Haupt-PWA</span></a>
+      <a class="tool-card" href="${esc(SITE_ORIGIN)}/#recent" target="_blank" rel="noopener"><b>🆕 Neueste Beiträge</b><span>Zuletzt veröffentlichte Inhalte prüfen</span></a>
+      <a class="tool-card" href="${esc(SITE_ORIGIN)}/#prayer" target="_blank" rel="noopener"><b>🕌 Gebetszeiten</b><span>Gebets-Push & Standort testen</span></a>
+      <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site" target="_blank" rel="noopener"><b>📁 GitHub Repo</b><span>Beiträge hochladen & Actions prüfen</span></a>
+      <a class="tool-card" href="https://dar-al-tawhid.de/admin/" target="_blank" rel="noopener"><b>📱 Admin-URL</b><span>Diese App installieren & teilen</span></a>
+    </div>
+    <div class="status-list">
+      <div class="status-item"><div><strong>Supabase Analytics</strong><br>${hasSupabase()?"Verbunden · Live-Daten aktiv":"Nicht konfiguriert"}</div><span class="${hasSupabase()?"status-ok":"status-warn"}">${hasSupabase()?"OK":"Fehlt"}</span></div>
+      <div class="status-item"><div><strong>Inhalte online</strong><br>${fmt(meta.posts)} Beiträge · ${fmt(meta.duas)} Duʿāʾ</div><span class="status-ok">Live</span></div>
+      <div class="status-item"><div><strong>Statistik erfasst</strong><br>${fmt(stats.all.length)} Inhalte mit Tracking</div><span class="status-ok">${fmt(stats.totalViews)} Views</span></div>
+      <div class="status-item"><div><strong>Heute aktiv</strong><br>${fmt(live.today_sessions)} Besucher · ${fmt(live.live_now)} jetzt online</div><span class="status-ok">Live</span></div>
+    </div>
+    <div class="meta">Push-Workflows laufen über GitHub Actions · Beiträge: bei Upload · Gebetszeiten: alle 15 Min</div>`;
+}
+function renderCurrentTab(){
+  const panel=document.getElementById("panel");
+  if(!dashboardCache){
+    panel.innerHTML=`<div class="empty">Statistik wird geladen…</div>`;
+    return;
+  }
+  const live=dashboardCache.live||{};
+  const stats=computeStats(dashboardCache.totals||[]);
+  const meta=siteMetaCache||{posts:0,duas:0};
+  const liveLabel=document.getElementById("liveLabel");
+  if(liveLabel)liveLabel.textContent=`${fmt(live.live_now)} online · ${fmt(live.today_sessions)} heute`;
+  let html="";
+  if(currentTab==="overview")html=renderOverview(live,stats,meta);
+  else if(currentTab==="posts")html=renderListTab("Top Beiträge",stats.posts,false);
+  else if(currentTab==="duas")html=renderListTab("Top Duʿāʾ",stats.duas,false);
+  else if(currentTab==="engagement")html=renderEngagement(stats);
+  else if(currentTab==="tools")html=renderTools(meta,live,stats);
+  html+=`<div class="meta">Aktualisiert: ${esc(new Date().toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
+  panel.innerHTML=html;
+  bindRankCards(panel);
+  const search=document.getElementById("adminSearch");
+  if(search){
+    search.oninput=()=>{searchQuery=search.value.trim();renderCurrentTab()};
+    setTimeout(()=>{try{search.focus();search.setSelectionRange(search.value.length,search.value.length)}catch(e){}},30);
+  }
+  panel.querySelectorAll(".filter-chip[data-filter]").forEach(chip=>{
+    chip.onclick=()=>{listFilter=chip.getAttribute("data-filter")||"all";renderCurrentTab()};
+  });
+}
 async function renderDashboard(){
   const panel=document.getElementById("panel");
-  panel.innerHTML=`<div class="stats-empty">Statistik wird geladen…</div>`;
+  panel.innerHTML=`<div class="empty">Statistik wird geladen…</div>`;
   if(!hasSupabase()){
-    panel.innerHTML=`<div class="stats-empty">Supabase ist nicht konfiguriert.</div>`;
+    panel.innerHTML=`<div class="empty">Supabase ist nicht konfiguriert.</div>`;
     return;
   }
   try{
-    const data=await fetchDashboard();
-    const live=data.live||{};
-    const totals=(data.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")
-      .sort((a,b)=>(Number(b.views||0)+Number(b.shares||0)+Number(b.saves||0))-(Number(a.views||0)+Number(a.shares||0)+Number(a.saves||0)));
-    panel.innerHTML=`
-      <div class="stats-dashboard">
-        <div class="stats-hero-grid">
-          <div class="stats-hero-card accent"><b>Jetzt online</b><span>${Number(live.live_now||0)}</span><small>letzte 5 Minuten</small></div>
-          <div class="stats-hero-card"><b>Heute Besucher</b><span>${Number(live.today_sessions||0)}</span><small>einzigartige Sitzungen</small></div>
-        </div>
-        <div class="stats-kpi-grid">
-          <div class="stats-kpi-card"><b>Heute Aufrufe</b><span>${Number(live.today_views||0)}</span><small>Seiten + Beiträge</small></div>
-          <div class="stats-kpi-card"><b>Heute geteilt</b><span>${Number(live.today_shares||0)}</span><small>Beiträge + Duʿāʾ</small></div>
-          <div class="stats-kpi-card"><b>Heute gespeichert</b><span>${Number(live.today_saves||0)}</span><small>Beiträge</small></div>
-          <div class="stats-kpi-card"><b>Einträge gesamt</b><span>${totals.length}</span><small>in der Liste</small></div>
-        </div>
-        <section class="stats-list-section">
-          <div class="stats-section-head"><h3>Top Inhalte</h3><span>${totals.length} Einträge</span></div>
-          <div class="stats-rank-list">${totals.length?totals.map(rankCard).join(""):`<div class="stats-empty">Noch keine Daten.</div>`}</div>
-        </section>
-        <div class="stats-meta">Aktualisiert: ${esc(new Date().toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>
-      </div>`;
-    panel.querySelectorAll(".stats-rank-card[data-href]").forEach(card=>{
-      const href=card.getAttribute("data-href");
-      if(!href)return;
-      card.onclick=()=>window.open(href,"_blank","noopener");
-      card.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")card.click()};
-    });
+    const [data,meta]=await Promise.all([fetchDashboard(),fetchSiteMeta()]);
+    dashboardCache=data;
+    siteMetaCache=meta;
+    renderCurrentTab();
   }catch(e){
-    panel.innerHTML=`<div class="stats-empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`;
+    panel.innerHTML=`<div class="empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`;
   }
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
@@ -249,10 +499,15 @@ function renderApp(){
   authed=readAuth()||authed;
   if(!authed){stopRefresh();renderLogin();return}
   document.getElementById("topbar").hidden=false;
+  document.getElementById("bottomNav").hidden=false;
   startRefresh();
 }
-document.getElementById("refreshBtn").onclick=()=>renderDashboard();
-document.getElementById("logoutBtn").onclick=()=>{setAuth(false);renderApp()};
+document.getElementById("refreshBtn").onclick=()=>{siteMetaCache=null;renderDashboard()};
+document.getElementById("logoutBtn").onclick=()=>{setAuth(false);dashboardCache=null;siteMetaCache=null;searchQuery="";listFilter="all";currentTab="overview";renderApp()};
+document.getElementById("openSiteBtn").onclick=()=>window.open(SITE_ORIGIN+"/","_blank","noopener");
+document.querySelectorAll(".nav-btn[data-tab]").forEach(btn=>{
+  btn.onclick=()=>setTab(btn.getAttribute("data-tab")||"overview");
+});
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)renderDashboard()});
 if("serviceWorker" in navigator){
   window.addEventListener("load",()=>{
