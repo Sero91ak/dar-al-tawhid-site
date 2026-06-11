@@ -73,6 +73,11 @@ button{cursor:pointer}
 .tab.active{color:#fff7d6;border-color:rgba(239,215,142,.48);background:rgba(239,215,142,.13)}
 .controls{display:grid;grid-template-columns:minmax(220px,1fr) 150px 150px auto;gap:9px;margin-bottom:12px}
 .field{width:100%;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.24);color:var(--ink);padding:9px 11px}
+.upload-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.45fr);gap:10px;margin-top:12px}
+.paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
+.upload-stack{display:grid;gap:9px;align-content:start}
+.upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(239,215,142,.035)}
+.upload-status strong{color:var(--gold)}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 10px}
 .section-head h3{margin:0;font-family:var(--serif);font-size:22px;color:var(--gold)}
 .section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
@@ -91,7 +96,7 @@ button{cursor:pointer}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#11150f;color:#fff4cf;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.hero,.split{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
 @media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.panel{padding:11px;border-radius:16px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid,.quick-grid{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
 </style>
 </head>
@@ -125,6 +130,7 @@ const AUTH_TTL_MS=90*24*60*60*1000;
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 let refreshTimer=null,authed=false,lastData=null,currentTab="overview",query="",typeFilter="all",sortMode="score";
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
@@ -199,6 +205,33 @@ function rankCard(row,idx,mode="score"){
   </button>`;
 }
 function bindRankCards(){document.querySelectorAll(".rank-card[data-href]").forEach(card=>{card.onclick=()=>window.open(card.getAttribute("data-href"),"_blank","noopener")})}
+function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^"+key+":\\s*[\"']?(.*?)[\"']?\\s*$","m"));return m?m[1].trim():""}
+function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
+function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
+function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
+function utf8ToBase64(text){const bytes=new TextEncoder().encode(text);let bin="";for(let i=0;i<bytes.length;i+=0x8000){bin+=String.fromCharCode(...bytes.slice(i,i+0x8000))}return btoa(bin)}
+function base64ToUtf8(value){const bin=atob(String(value||"").replace(/\s/g,""));const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
+async function githubContent(path,token){const res=await fetch(`https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/${path}?ref=main`,{headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json"}});if(res.status===404)return null;if(!res.ok)throw new Error("GitHub Fehler "+res.status);return res.json()}
+async function githubPut(path,content,message,token,sha){const body={message,content:utf8ToBase64(content),branch:"main"};if(sha)body.sha=sha;const res=await fetch(`https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/${path}`,{method:"PUT",headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","Content-Type":"application/json"},body:JSON.stringify(body)});const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.message||("GitHub Upload Fehler "+res.status));return data}
+async function loadPostsIndexForUpload(token){
+  if(token){const file=await githubContent("content/posts/posts-index.json",token);if(file?.content)return{data:JSON.parse(base64ToUtf8(file.content)),sha:file.sha}}
+  const res=await fetch(`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/posts-index.json?t=${Date.now()}`,{cache:"no-store"});
+  if(!res.ok)throw new Error("posts-index.json konnte nicht geladen werden");
+  return{data:await res.json(),sha:""};
+}
+function normalizeMarkdownForUpload(markdown,nextNumber){
+  let out=String(markdown||"").trim();
+  if(!out)return out;
+  const iso=new Date().toISOString().replace(/\.\d{3}Z$/,".000Z");
+  if(/^date:\s*["']?.*?["']?\s*$/m.test(out))out=out.replace(/^date:\s*["']?.*?["']?\s*$/m,`date: "${iso}"`);
+  const id=frontmatterValue(out,"id");
+  if(id){
+    const next=String(nextNumber).padStart(3,"0");
+    const updated=/-\d{3}$/.test(id)?id.replace(/-\d{3}$/,`-${next}`):`${id}-${next}`;
+    out=out.replace(/^id:\s*["']?.*?["']?\s*$/m,`id: "${updated}"`);
+  }
+  return out+"\n";
+}
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
   document.getElementById("panel").innerHTML=`
@@ -317,6 +350,17 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
       </div>
+      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>GitHub API</span></div>
+      <div class="upload-grid">
+        <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+        <div class="upload-stack">
+          <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
+          <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
+          <input class="field" id="githubTokenInput" type="password" autocomplete="off" placeholder="GitHub Token nur für diesen Upload">
+          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird hochgeladen...":"Beitrag hochladen"}</button>
+          <div class="upload-status" id="uploadStatus">${draftStatus||"Token wird nicht gespeichert. Die App erstellt die Markdown-Datei und aktualisiert posts-index.json automatisch."}</div>
+        </div>
+      </div>
     </div>
     <aside class="side-stack">
       <div class="panel">
@@ -336,7 +380,60 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value};
+  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim()};
+  const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
+  const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostToGithub;
   bindRankCards();
+}
+function setUploadStatus(html){draftStatus=html;const el=document.getElementById("uploadStatus");if(el)el.innerHTML=html}
+async function prepareNextPostNumber(){
+  try{
+    draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
+    setUploadStatus("Prüfe aktuelle Nummer...");
+    const index=await loadPostsIndexForUpload("");
+    draftNextNumber=maxPostNumber(index.data.files)+1;
+    draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
+    const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
+    setUploadStatus(`Nächste Nummer: <strong>${draftNextNumber}</strong><br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>`);
+  }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
+}
+async function uploadPostToGithub(){
+  if(uploadBusy)return;
+  const token=(document.getElementById("githubTokenInput")?.value||"").trim();
+  draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
+  draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
+  if(!token){setUploadStatus("Bitte GitHub Token einfügen.");return}
+  if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
+  try{
+    uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und GitHub-Dateien...");
+    const indexFile=await loadPostsIndexForUpload(token);
+    const next=maxPostNumber(indexFile.data.files)+1;
+    if(!draftFilename)draftFilename=suggestFilename(draftMarkdown,next);
+    else if(/(?:^|-)\d{3}(?=-|\.md$)/.test(draftFilename))draftFilename=draftFilename.replace(/(^|-)\d{3}(?=-|\.md$)/,`$1${String(next).padStart(3,"0")}`);
+    if(!/^[a-z0-9][a-z0-9-]*\.md$/i.test(draftFilename)){setUploadStatus("Dateiname muss eine .md-Datei ohne Leerzeichen sein.");return}
+    const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
+    const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    const path=`content/posts/${draftFilename}`;
+    const existing=await githubContent(path,token);
+    if(existing)throw new Error("Diese Datei existiert schon: "+draftFilename);
+    setUploadStatus("Lade Beitrag hoch...");
+    const created=await githubPut(path,markdown,`Add post ${draftFilename}`,token);
+    const files=Array.isArray(indexFile.data.files)?indexFile.data.files.filter(f=>f&&f.name!==draftFilename):[];
+    files.push({name:draftFilename,sha:created.content.sha});
+    files.sort((a,b)=>String(a.name).localeCompare(String(b.name),"de"));
+    const payload={version:1,generated:new Date().toISOString(),count:files.length,files};
+    setUploadStatus("Aktualisiere posts-index.json...");
+    await githubPut("content/posts/posts-index.json",JSON.stringify(payload,null,2)+"\n",`Update posts index for ${draftFilename}`,token,indexFile.sha);
+    draftMarkdown=markdown;draftNextNumber=next;
+    setUploadStatus(`Fertig hochgeladen: <strong>${esc(draftFilename)}</strong><br>Nächste Nummer war: <strong>${next}</strong>`);
+    toast("Beitrag hochgeladen");
+  }catch(e){
+    setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Wenn der Beitrag hochgeladen wurde, aber der Index nicht, bitte posts-index.json prüfen.`);
+  }finally{
+    uploadBusy=false;
+    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Beitrag hochladen"}
+  }
 }
 async function renderDashboard(){
   const panel=document.getElementById("panel");
