@@ -6,7 +6,7 @@
 
 <title>DAR AL TAWḤID</title>
 
-<link rel="icon" href="/favicon.ico?v=source-under-statement-v12" sizes="any">
+<link rel="icon" href="/favicon.ico?v=source-under-statement-v13" sizes="any">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=source-under-statement-v12">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=source-under-statement-v12">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=source-under-statement-v12">
@@ -3953,8 +3953,12 @@ function ramadanDuas(){const picked=DUAS.filter(d=>RAMADAN_DUA_CATS.includes(d.c
 function ramadanPosts(){const matched=posts.filter(p=>RAMADAN_POST_KEYS.some(k=>[p.title,p.category,p.topic,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(k.toLowerCase())));if(matched.length>=2)return matched.slice(0,6);return posts.filter(p=>["adab","akhlaq","tawḥīd","tauhid","sunnah"].some(k=>String(p.category||"").toLowerCase().includes(k))).slice(0,5)}
 function renderPwaInstallBanner(){if(isStandalonePwa())return "";try{if(localStorage.getItem(PWA_GUIDE_KEY))return ""}catch(e){}const ios=isIOSDevice();return `<section id="pwaInstallBanner" class="pwa-banner"><div class="pwa-banner-text"><b>${ios?"App auf dem iPhone speichern":"App installieren"}</b><span>${ios?"Ohne Home-Bildschirm fehlen Push und Offline. Safari → Teilen → Zum Home-Bildschirm.":"Für Push & Offline: App installieren oder zum Startbildschirm hinzufügen."}</span></div><div class="hint-banner-actions"><button id="pwaBannerGuideBtn" class="hint-btn" type="button">Anleitung</button><button id="pwaBannerDismissBtn" class="hint-btn ghost" type="button">OK</button></div></section>`}
 function renderPwaInstallModalContent(){const ios=isIOSDevice();const steps=ios?[`<li><b>1.</b> Unten in Safari auf <b>Teilen</b> tippen (Quadrat mit Pfeil).</li>`,`<li><b>2.</b> <b>Zum Home-Bildschirm</b> wählen und Hinzufügen bestätigen.</li>`,`<li><b>3.</b> App ab dann über das Icon öffnen – Push & Offline funktionieren.</li>`]:[`<li><b>1.</b> Browser-Menü öffnen (⋮ oder Teilen).</li>`,`<li><b>2.</b> <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.</li>`,`<li><b>3.</b> Danach Push-Benachrichtigungen und Offline-Modus nutzen.</li>`];return `<div class="pwa-modal" role="dialog" aria-labelledby="pwaModalTitle"><h3 id="pwaModalTitle">App speichern</h3><p>${ios?"Auf dem iPhone läuft die volle App nur als gespeicherte Web-App. Im normalen Browser-Tab fehlen Push und Offline oft.":"Installiere die App für Push-Benachrichtigungen und Offline-Nutzung."}</p><ol class="pwa-steps">${steps.join("")}</ol><div class="pwa-modal-actions"><button id="pwaModalDoneBtn" class="hint-btn" type="button">Verstanden</button></div></div>`}
+function isInIframe(){try{return window.self!==window.top}catch(e){return true}}
+function isDevHost(){const h=location.hostname;return h==="localhost"||h.includes(".replit.")||h.includes(".spock.replit.")}
 function showPwaInstallModalIfNeeded(force){
   if(!force&&isStandalonePwa())return;
+  if(!force&&isInIframe())return;
+  if(!force&&isDevHost())return;
   const modal=$("pwaInstallModal");
   if(!modal)return;
   if(!force){try{if(localStorage.getItem(PWA_GUIDE_KEY))return}catch(e){}}
