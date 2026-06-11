@@ -1,6 +1,6 @@
 ---
 id: "ikhlas-allah-sieht-auf-herzen-und-taten-350"
-date: "2026-06-11T00:00:00.000Z"
+date: "2026-06-11T19:37:58.000Z"
 title: "📖 Allah sieht auf Herzen und Taten"
 category: "Ikhlas"
 topic: "Aufrichtigkeit und Reinigung des Herzens"
