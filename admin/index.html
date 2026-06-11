@@ -127,8 +127,10 @@ window.DAR_ANALYTICS_CONFIG={
 const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
 const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
+const GITHUB_TOKEN_KEY="darAdminGithubTokenV1";
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
+const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
 let refreshTimer=null,authed=false,lastData=null,currentTab="overview",query="",typeFilter="all",sortMode="score";
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
@@ -140,6 +142,8 @@ function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return 
 function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
+function savedGithubToken(){try{return localStorage.getItem(GITHUB_TOKEN_KEY)||""}catch(e){return""}}
+function setSavedGithubToken(token){try{if(token)localStorage.setItem(GITHUB_TOKEN_KEY,token);else localStorage.removeItem(GITHUB_TOKEN_KEY)}catch(e){}}
 async function fetchDashboard(){
   if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
   const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
@@ -356,9 +360,15 @@ function renderActions(rows,installs=installTotals()){
         <div class="upload-stack">
           <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
           <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
-          <input class="field" id="githubTokenInput" type="password" autocomplete="off" placeholder="GitHub Token nur für diesen Upload">
+          <input class="field" id="githubTokenInput" type="password" autocomplete="off" value="${esc(savedGithubToken())}" placeholder="GitHub Token">
+          <label class="upload-status" style="display:flex;align-items:center;gap:8px">
+            <input id="rememberGithubToken" type="checkbox" ${savedGithubToken()?"checked":""}>
+            <span>Token auf diesem Gerät merken</span>
+          </label>
+          <a class="btn" href="${GITHUB_TOKEN_URL}" target="_blank" rel="noopener">Token erstellen</a>
+          <button class="btn" id="forgetGithubTokenBtn" type="button">Token löschen</button>
           <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird hochgeladen...":"Beitrag hochladen"}</button>
-          <div class="upload-status" id="uploadStatus">${draftStatus||"Token wird nicht gespeichert. Die App erstellt die Markdown-Datei und aktualisiert posts-index.json automatisch."}</div>
+          <div class="upload-status" id="uploadStatus">${draftStatus||"Wenn du den Token merkst, bleibt er nur lokal auf diesem Gerät gespeichert. Die App erstellt die Markdown-Datei und aktualisiert posts-index.json automatisch."}</div>
         </div>
       </div>
     </div>
@@ -384,6 +394,7 @@ function bindUi(){
   const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostToGithub;
+  const forgetGithubTokenBtn=document.getElementById("forgetGithubTokenBtn");if(forgetGithubTokenBtn)forgetGithubTokenBtn.onclick=()=>{setSavedGithubToken("");const input=document.getElementById("githubTokenInput");if(input)input.value="";const remember=document.getElementById("rememberGithubToken");if(remember)remember.checked=false;setUploadStatus("Token wurde von diesem Gerät gelöscht.")};
   bindRankCards();
 }
 function setUploadStatus(html){draftStatus=html;const el=document.getElementById("uploadStatus");if(el)el.innerHTML=html}
@@ -401,9 +412,11 @@ async function prepareNextPostNumber(){
 async function uploadPostToGithub(){
   if(uploadBusy)return;
   const token=(document.getElementById("githubTokenInput")?.value||"").trim();
+  const remember=!!document.getElementById("rememberGithubToken")?.checked;
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
   if(!token){setUploadStatus("Bitte GitHub Token einfügen.");return}
+  if(remember)setSavedGithubToken(token);else setSavedGithubToken("");
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und GitHub-Dateien...");
