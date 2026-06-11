@@ -1,0 +1,27 @@
+{
+  "name": "DAR AL TAWḤID Statistik",
+  "short_name": "DAR Admin",
+  "description": "Live-Statistik für DAR AL TAWḤID – nur für Admin.",
+  "start_url": "/admin/?source=admin-pwa",
+  "scope": "/admin/",
+  "id": "/admin/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060604",
+  "theme_color": "#060604",
+  "icons": [
+    {
+      "src": "/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "display_override": ["standalone", "fullscreen"]
+}

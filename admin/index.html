@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>DAR Admin · Statistik</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/admin/manifest.json">
+<meta name="application-name" content="DAR Admin">
+<meta name="apple-mobile-web-app-title" content="DAR Admin">
+<meta name="theme-color" content="#060604">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<style>
+:root{
+  --bg:#070706;--gold2:#efd78e;--cream:#f8efd4;--text:#f6edd2;
+  --muted:#b8ad91;--muted2:#8f856f;
+  --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:#060604}
+body{margin:0;min-height:100dvh;color:var(--text);font-family:var(--sans);
+  background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),
+  linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%);
+  padding:max(12px,var(--safe-top)) max(14px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(14px,env(safe-area-inset-left,0px))}
+button,input{font:inherit}
+.app{max-width:920px;margin:0 auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:44px;height:44px;border-radius:999px;flex:0 0 44px}
+.brand h1{margin:0;font-family:var(--serif);color:var(--gold2);font-size:20px;line-height:1.05;letter-spacing:.04em}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:11px;font-weight:800}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{border:1px solid var(--line2);background:rgba(239,215,142,.08);color:var(--cream);
+  border-radius:999px;min-height:36px;padding:7px 12px;font-size:12px;font-weight:900;cursor:pointer}
+.pill:active{transform:scale(.98)}
+.panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(18,16,12,.92),rgba(7,7,5,.94));
+  box-shadow:0 18px 46px rgba(0,0,0,.28);padding:18px 16px 20px;min-height:280px}
+.login{max-width:360px;margin:36px auto 20px;text-align:center}
+.login h2{margin:0 0 6px;font-family:var(--serif);color:var(--gold2);font-size:24px}
+.login p{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.5}
+.login input{width:100%;margin-bottom:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(0,0,0,.28);color:var(--cream);font-size:15px}
+.login button{width:100%;padding:12px;border-radius:14px;border:1px solid var(--line2);
+  background:rgba(239,215,142,.12);color:var(--cream);font-weight:950;cursor:pointer}
+.hint{margin-top:16px;padding:12px;border:1px dashed var(--line2);border-radius:14px;color:var(--muted);
+  font-size:11px;line-height:1.55;text-align:left}
+.stats-dashboard{max-width:920px;margin:0 auto}
+.stats-hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.stats-hero-card{border:1px solid var(--line2);border-radius:20px;padding:16px 17px;
+  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.12),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.96),rgba(10,10,8,.96));min-height:98px}
+.stats-hero-card.accent{border-color:rgba(239,215,142,.55)}
+.stats-hero-card b,.stats-kpi-card b{display:block;color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
+.stats-hero-card span,.stats-kpi-card span{display:block;color:var(--gold2);font-size:clamp(24px,4.5vw,34px);font-weight:950;line-height:1.05}
+.stats-hero-card small,.stats-kpi-card small{display:block;color:var(--muted);font-size:10.5px;margin-top:5px;line-height:1.35}
+.stats-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 18px}
+.stats-kpi-card{border:1px solid var(--line2);border-radius:16px;padding:12px 13px;background:rgba(239,215,142,.045);min-height:78px}
+.stats-list-section{margin-top:6px}
+.stats-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 12px;padding:0 2px}
+.stats-section-head h3{margin:0;font-family:var(--serif);color:var(--gold2);font-size:22px;line-height:1.1}
+.stats-section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
+.stats-rank-list{display:flex;flex-direction:column;gap:10px}
+.stats-rank-card{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;
+  border:1px solid var(--line2);border-radius:18px;padding:14px 15px;
+  background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.08),transparent 38%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));
+  cursor:pointer;text-align:left;width:100%}
+.stats-rank-num{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;
+  background:rgba(239,215,142,.12);border:1px solid rgba(239,215,142,.22);color:var(--gold2);font-size:15px;font-weight:950}
+.stats-rank-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.stats-type-badge{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:4px 8px;
+  color:var(--cream);background:rgba(239,215,142,.06);font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.stats-open-hint{color:var(--muted2);font-size:10px;font-weight:850}
+.stats-rank-title{margin:0;color:#fff6dc;font-family:var(--serif);font-size:clamp(16px,2.2vw,19px);line-height:1.32;font-weight:700;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.stats-rank-metrics{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.stats-metric-pill{display:inline-flex;border:1px solid rgba(214,183,106,.18);border-radius:999px;padding:5px 9px;
+  color:#f5e8c8;background:rgba(214,183,106,.06);font-size:10.5px;font-weight:900;white-space:nowrap}
+.stats-meta{color:var(--muted);font-size:11px;line-height:1.5;margin-top:14px;text-align:center}
+.stats-empty{padding:18px;border:1px dashed var(--line2);border-radius:16px;color:var(--muted);text-align:center;font-size:13px;line-height:1.55}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:#5fd38a;margin-right:6px;vertical-align:middle}
+@media(max-width:900px){.stats-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.stats-open-hint{display:none}.topbar{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar" id="topbar" hidden>
+    <div class="brand">
+      <img src="/app-icon-192.png" alt="" width="44" height="44">
+      <div>
+        <h1>DAR Admin</h1>
+        <p><span class="status-dot"></span>Live-Statistik</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="pill" id="refreshBtn" type="button">↻ Aktualisieren</button>
+      <button class="pill" id="logoutBtn" type="button">Abmelden</button>
+    </div>
+  </header>
+  <main class="panel" id="panel"></main>
+</div>
+<script>
+window.DAR_ANALYTICS_CONFIG={
+  supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
+  supabaseKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw",
+  adminPin:"Dawud26"
+};
+const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
+const AUTH_KEY="darStatsAuthV1";
+const AUTH_TTL_MS=90*24*60*60*1000;
+let refreshTimer=null;
+let authed=false;
+
+function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
+function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&&String(c.supabaseKey||"").trim())}
+function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
+function readAuth(){
+  try{
+    const raw=localStorage.getItem(AUTH_KEY);
+    if(!raw)return false;
+    const data=JSON.parse(raw);
+    if(!data||!data.ok)return false;
+    if(Date.now()-Number(data.ts||0)>AUTH_TTL_MS){localStorage.removeItem(AUTH_KEY);return false}
+    return true;
+  }catch(e){return false}
+}
+function setAuth(on){
+  authed=!!on;
+  try{
+    if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));
+    else localStorage.removeItem(AUTH_KEY);
+  }catch(e){}
+}
+function checkPin(pin){
+  const want=String(cfg().adminPin||"").trim();
+  const got=String(pin||"").trim();
+  return want&&got.toLowerCase()===want.toLowerCase();
+}
+async function fetchDashboard(){
+  if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
+  const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
+  const h=headers();
+  const [liveRes,totalsRes]=await Promise.all([
+    fetch(url+"/rest/v1/rpc/analytics_live",{headers:h,cache:"no-store"}),
+    fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=200",{headers:h,cache:"no-store"})
+  ]);
+  if(!liveRes.ok)throw new Error("Live-Statistik Fehler "+liveRes.status);
+  if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);
+  return{live:await liveRes.json()||{},totals:await totalsRes.json()||[]};
+}
+function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":"Seite"}
+function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
+function contentUrl(row){
+  if(row.content_type==="post")return SITE_ORIGIN+"/#post/"+encodeURIComponent(row.content_id);
+  if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);
+  return "";
+}
+function rankCard(row,idx){
+  const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);
+  const title=cleanTitle(row.content_title||row.content_id);
+  const href=contentUrl(row);
+  const open=href?`<span class="stats-open-hint">In App öffnen →</span>`:"";
+  return `<article class="stats-rank-card" data-href="${esc(href)}" tabindex="0" role="button">
+    <div class="stats-rank-num">${idx+1}</div>
+    <div>
+      <div class="stats-rank-top"><span class="stats-type-badge">${esc(typeLabel(row.content_type))}</span>${open}</div>
+      <h3 class="stats-rank-title">${esc(title)}</h3>
+      <div class="stats-rank-metrics">
+        <span class="stats-metric-pill">👁 ${views} gelesen</span>
+        <span class="stats-metric-pill">↗ ${shares} geteilt</span>
+        <span class="stats-metric-pill">♡ ${saves} gespeichert</span>
+      </div>
+    </div>
+  </article>`;
+}
+function renderLogin(){
+  document.getElementById("topbar").hidden=true;
+  document.getElementById("panel").innerHTML=`
+    <section class="login">
+      <h2>🔒 Admin</h2>
+      <p>Statistik-App für DAR AL TAWḤID – nur Besucher & Inhalte verfolgen.</p>
+      <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
+      <button id="loginBtn" type="button">Statistik öffnen</button>
+      <div class="hint">
+        <strong>Als App speichern:</strong><br>
+        iPhone: Safari → Teilen → „Zum Home-Bildschirm“<br>
+        Android: Menü → „App installieren“<br><br>
+        URL: <strong>${esc(location.origin+"/admin/")}</strong>
+      </div>
+    </section>`;
+  const btn=document.getElementById("loginBtn");
+  const input=document.getElementById("pinInput");
+  btn.onclick=()=>{
+    if(checkPin(input.value.trim())){setAuth(true);renderApp()}
+    else alert("Falsches Passwort.");
+  };
+  input.onkeydown=e=>{if(e.key==="Enter")btn.click()};
+  setTimeout(()=>{try{input.focus()}catch(e){}},80);
+}
+async function renderDashboard(){
+  const panel=document.getElementById("panel");
+  panel.innerHTML=`<div class="stats-empty">Statistik wird geladen…</div>`;
+  if(!hasSupabase()){
+    panel.innerHTML=`<div class="stats-empty">Supabase ist nicht konfiguriert.</div>`;
+    return;
+  }
+  try{
+    const data=await fetchDashboard();
+    const live=data.live||{};
+    const totals=(data.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")
+      .sort((a,b)=>(Number(b.views||0)+Number(b.shares||0)+Number(b.saves||0))-(Number(a.views||0)+Number(a.shares||0)+Number(a.saves||0)));
+    panel.innerHTML=`
+      <div class="stats-dashboard">
+        <div class="stats-hero-grid">
+          <div class="stats-hero-card accent"><b>Jetzt online</b><span>${Number(live.live_now||0)}</span><small>letzte 5 Minuten</small></div>
+          <div class="stats-hero-card"><b>Heute Besucher</b><span>${Number(live.today_sessions||0)}</span><small>einzigartige Sitzungen</small></div>
+        </div>
+        <div class="stats-kpi-grid">
+          <div class="stats-kpi-card"><b>Heute Aufrufe</b><span>${Number(live.today_views||0)}</span><small>Seiten + Beiträge</small></div>
+          <div class="stats-kpi-card"><b>Heute geteilt</b><span>${Number(live.today_shares||0)}</span><small>Beiträge + Duʿāʾ</small></div>
+          <div class="stats-kpi-card"><b>Heute gespeichert</b><span>${Number(live.today_saves||0)}</span><small>Beiträge</small></div>
+          <div class="stats-kpi-card"><b>Einträge gesamt</b><span>${totals.length}</span><small>in der Liste</small></div>
+        </div>
+        <section class="stats-list-section">
+          <div class="stats-section-head"><h3>Top Inhalte</h3><span>${totals.length} Einträge</span></div>
+          <div class="stats-rank-list">${totals.length?totals.map(rankCard).join(""):`<div class="stats-empty">Noch keine Daten.</div>`}</div>
+        </section>
+        <div class="stats-meta">Aktualisiert: ${esc(new Date().toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>
+      </div>`;
+    panel.querySelectorAll(".stats-rank-card[data-href]").forEach(card=>{
+      const href=card.getAttribute("data-href");
+      if(!href)return;
+      card.onclick=()=>window.open(href,"_blank","noopener");
+      card.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")card.click()};
+    });
+  }catch(e){
+    panel.innerHTML=`<div class="stats-empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`;
+  }
+}
+function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
+function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
+function renderApp(){
+  authed=readAuth()||authed;
+  if(!authed){stopRefresh();renderLogin();return}
+  document.getElementById("topbar").hidden=false;
+  startRefresh();
+}
+document.getElementById("refreshBtn").onclick=()=>renderDashboard();
+document.getElementById("logoutBtn").onclick=()=>{setAuth(false);renderApp()};
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)renderDashboard()});
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{});
+  });
+}
+authed=readAuth();
+renderApp();
+</script>
+</body>
+</html>
