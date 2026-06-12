@@ -3,10 +3,8 @@ name: Prayer Push
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
-    - cron: "0 6 * * *"
-    - cron: "0 12 * * *"
-    - cron: "0 18 * * *"
+    # Alle 15 Min – damit 15-Min-Vorwarnung und Gebetszeit-Push exakt ankommen
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: read
@@ -27,4 +25,6 @@ jobs:
         env:
           ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
           ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          PRAYER_ADVANCE_MINUTES: "15"
+          SITE_URL: "https://dar-al-tawhid.de/#prayer"
         run: node scripts/send-prayer-push.js

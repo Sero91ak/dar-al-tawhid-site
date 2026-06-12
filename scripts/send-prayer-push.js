@@ -10,6 +10,8 @@ const {
   postOneSignalNotification
 } = require("./lib/onesignal-push");
 const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
+const SCHEDULE_WINDOW_MS = Number(process.env.PRAYER_SCHEDULE_WINDOW_MS || 20 * 60 * 1000);
+const MIN_SCHEDULE_LEAD_MS = Number(process.env.PRAYER_MIN_SCHEDULE_LEAD_MS || 45 * 1000);
 
 if (!API_KEY) {
   console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
@@ -323,8 +325,11 @@ async function fetchUserBySubscriptionId(subscriptionId) {
 
 function extractUserTags(user) {
   if (!user) return {};
-  const tags = user?.properties?.tags;
-  return tags && typeof tags === "object" ? { ...tags } : {};
+  const merged = {};
+  for (const bucket of [user?.properties?.tags, user?.tags, user?.data?.tags]) {
+    if (bucket && typeof bucket === "object") Object.assign(merged, bucket);
+  }
+  return merged;
 }
 
 function extractWebPushSubscriptionIds(user) {
@@ -339,10 +344,16 @@ function extractWebPushSubscriptionIds(user) {
     .filter(Boolean);
 }
 
+async function fetchUserByOnesignalId(onesignalId) {
+  if (!onesignalId) return null;
+  return fetchUserByAlias("onesignal_id", onesignalId);
+}
+
 async function resolvePlayerTags(player) {
   let tags = { ...(player.tags || {}) };
   let subscriptionIds = [player.id].filter(Boolean);
   const externalId = player.external_user_id || player.external_id;
+  const onesignalId = player.onesignal_id || player.id;
   let user = null;
 
   if (externalId) {
@@ -352,6 +363,11 @@ async function resolvePlayerTags(player) {
   if (!extractUserTags(user).prayer_lat && player.id) {
     const bySub = await fetchUserBySubscriptionId(player.id);
     if (bySub) user = bySub;
+  }
+
+  if (!extractUserTags(user).prayer_lat && onesignalId) {
+    const byOs = await fetchUserByOnesignalId(onesignalId);
+    if (byOs) user = byOs;
   }
 
   if (user) {
@@ -485,13 +501,34 @@ function prayerNotificationCopy(prayer, mode) {
     },
     contents: {
       de: isTahajjud
-        ? "Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID"
-        : `${prayer.name} ist eingetreten. DAR AL TAWḤID`,
+        ? "Das Gebet (Taḥajjud) ist eingetreten – letztes Drittel der Nacht. DAR AL TAWḤID"
+        : `Das Gebet (${prayer.name}) ist eingetreten. DAR AL TAWḤID`,
       en: isTahajjud
-        ? "Last third of the night – time for Tahajjud until Fajr. DAR AL TAWḤID"
-        : `${prayer.name} time has entered. DAR AL TAWḤID`
+        ? "Tahajjud prayer time has entered. DAR AL TAWḤID"
+        : `${prayer.name} prayer time has entered. DAR AL TAWḤID`
     }
   };
+}
+
+function groupScheduleKey(group) {
+  return [
+    group.lat.toFixed(3),
+    group.lon.toFixed(3),
+    group.timeZone,
+    group.methodAngle,
+    group.asrFactor
+  ].join("|");
+}
+
+function prayerExternalId(group, prayer, mode, sendAfter) {
+  const stamp = sendAfter.toISOString().replace(/[:.]/g, "-");
+  return `dar-prayer-${groupScheduleKey(group)}-${prayer.key}-${mode}-${stamp}`.slice(0, 180);
+}
+
+function shouldScheduleSend(sendAfter, now) {
+  const t = sendAfter.getTime();
+  const n = now.getTime();
+  return t > n + MIN_SCHEDULE_LEAD_MS && t <= n + SCHEDULE_WINDOW_MS;
 }
 
 async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "entry") {
@@ -509,7 +546,9 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
     contents: copy.contents,
     url: SITE_URL,
     isAnyWeb: true,
-    send_after: sendAfter.toISOString()
+    send_after: sendAfter.toISOString(),
+    external_id: prayerExternalId(group, prayer, mode, sendAfter),
+    name: `prayer-${mode}-${prayer.key}-${sendAfter.toISOString().slice(0, 16)}`
   }, SITE_URL);
 
   try {
@@ -549,45 +588,49 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
     }));
   }
 
+  let planned = 0;
+  let skipped = 0;
+
   for (const group of groups) {
-    const localDate = todayLocalDate(group.timeZone);
+    const baseDate = todayLocalDate(group.timeZone);
+    const localDates = [baseDate, addLocalDays(baseDate, 1)];
 
-    const prayers = calculatePrayerTimes(
-      localDate,
-      group.lat,
-      group.lon,
-      group.timeZone,
-      group.methodAngle,
-      group.asrFactor
-    );
+    for (const localDate of localDates) {
+      const prayers = calculatePrayerTimes(
+        localDate,
+        group.lat,
+        group.lon,
+        group.timeZone,
+        group.methodAngle,
+        group.asrFactor
+      );
 
-    for (const prayer of prayers) {
-      const entryAt = prayer.sendAfter
-        ? prayer.sendAfter
-        : prayer.time == null
-          ? null
-          : makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
+      for (const prayer of prayers) {
+        const entryAt = prayer.sendAfter
+          ? prayer.sendAfter
+          : prayer.time == null
+            ? null
+            : makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
 
-      if (!entryAt) continue;
+        if (!entryAt) continue;
 
-      const schedules = [
-        { mode: "entry", sendAfter: entryAt }
-      ];
+        const schedules = [
+          { mode: "entry", sendAfter: entryAt },
+          { mode: "advance", sendAfter: new Date(entryAt.getTime() - PRAYER_ADVANCE_MINUTES * 60 * 1000) }
+        ];
 
-      if (prayer.key !== "sunrise") {
-        const advanceAt = new Date(entryAt.getTime() - PRAYER_ADVANCE_MINUTES * 60 * 1000);
-        schedules.push({ mode: "advance", sendAfter: advanceAt });
-      }
+        for (const schedule of schedules) {
+          if (!shouldScheduleSend(schedule.sendAfter, now)) {
+            skipped += 1;
+            continue;
+          }
 
-      for (const schedule of schedules) {
-        if (schedule.sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
-          const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
-          console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
-          continue;
+          await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
+          planned += 1;
         }
-
-        await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
       }
     }
   }
+
+  console.log(`Gebets-Push Fenster: ${PRAYER_ADVANCE_MINUTES} Min vorher + zur Gebetszeit | geplant: ${planned} | außerhalb Fenster: ${skipped}`);
 })();
