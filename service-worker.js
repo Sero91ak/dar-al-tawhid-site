@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v83';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v84';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -57,6 +57,34 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Wenn Nutzer auf Push-Benachrichtigung klickt → Beitrag öffnen
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const targetUrl = event.notification.data?.url
+    || event.notification.data?.launchURL
+    || (event.notification.data?.buttons?.[0]?.url)
+    || event.notification.data?.additionalData?.launchURL
+    || 'https://dar-al-tawhid.de/';
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Schon ein Fenster offen? → fokussieren und zur URL navigieren
+      for (const client of clientList) {
+        const clientUrl = new URL(client.url);
+        const targetUrlObj = new URL(targetUrl);
+        if (clientUrl.origin === targetUrlObj.origin) {
+          client.focus();
+          client.navigate(targetUrl);
+          return;
+        }
+      }
+      // Kein Fenster offen → neues öffnen
+      return self.clients.openWindow(targetUrl);
+    })
+  );
+});
+
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
@@ -69,7 +97,7 @@ self.addEventListener('fetch', (event) => {
   // Navigation: online frisch laden, offline gecachte index.html anzeigen.
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: 'no-cache' })
         .then((response) => {
           const copy = response.clone();
           caches.open(CACHE_VERSION).then((cache) => cache.put('/index.html', copy)).catch(() => null);
