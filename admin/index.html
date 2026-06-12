@@ -87,7 +87,8 @@ button{cursor:pointer}
 .mini,.quick{border:1px solid var(--line2);border-radius:15px;padding:12px;background:rgba(0,0,0,.20);min-height:76px}
 .mini span{font-size:22px;color:#fff1bf;font-weight:950}
 .quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
-.quick{display:block;text-decoration:none;color:var(--ink)}
+.quick{display:block;text-decoration:none;color:var(--ink);text-align:left;width:100%;font:inherit;cursor:pointer}
+.quick:is(button){appearance:none;-webkit-appearance:none}
 .quick:hover{border-color:rgba(140,190,255,.42)}
 .tabs{display:flex;gap:8px;overflow:auto;padding:2px;margin:2px 0 12px}
 .tab{white-space:nowrap;border:1px solid var(--line2);background:rgba(90,140,220,.07);color:var(--soft);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:950}
@@ -412,7 +413,9 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${GITHUB_POSTS}" target="_blank" rel="noopener"><b>Posts-Ordner</b><small>Alle Markdown-Beiträge und Index-Datei prüfen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
+        <button class="quick" id="adminLocalPushTestBtn" type="button"><b>Test-Push nur dieses Gerät</b><small>Lokale Benachrichtigung auf diesem Admin-Gerät. Kein Versand an Besucher.</small></button>
       </div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
       <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>GitHub API</span></div>
       <div class="upload-grid">
         <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
@@ -453,8 +456,30 @@ function bindUi(){
   const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostToGithub;
+  const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const forgetGithubTokenBtn=document.getElementById("forgetGithubTokenBtn");if(forgetGithubTokenBtn)forgetGithubTokenBtn.onclick=()=>{setSavedGithubToken("");const input=document.getElementById("githubTokenInput");if(input)input.value="";const remember=document.getElementById("rememberGithubToken");if(remember)remember.checked=false;setUploadStatus("Token wurde von diesem Gerät gelöscht.")};
   bindRankCards();
+}
+function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
+async function sendAdminLocalPushTest(){
+  if(!("Notification" in window)){setAdminPushTestStatus("Dieses Gerät unterstützt keine Browser-Benachrichtigungen.");return}
+  let permission=Notification.permission;
+  if(permission!=="granted")permission=await Notification.requestPermission();
+  if(permission!=="granted"){setAdminPushTestStatus("Benachrichtigungen wurden nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}
+  const title="DAR AL TAWḤID · Gebetszeit: Test";
+  const body="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
+  try{
+    if("serviceWorker" in navigator){
+      const reg=await navigator.serviceWorker.ready;
+      await reg.showNotification(title,{body,tag:"admin-local-prayer-test",renotify:true,icon:"/notification-icon-192.png",badge:"/notification-badge-96.png",data:{url:"/admin/"}});
+    }else{
+      new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});
+    }
+    setAdminPushTestStatus("Test-Push wurde nur auf diesem Admin-Gerät ausgelöst.");
+  }catch(e){
+    try{new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});setAdminPushTestStatus("Test-Push wurde lokal ausgelöst.");}
+    catch(err){setAdminPushTestStatus("Test-Push konnte auf diesem Gerät nicht angezeigt werden.")}
+  }
 }
 function setUploadStatus(html){draftStatus=html;const el=document.getElementById("uploadStatus");if(el)el.innerHTML=html}
 async function prepareNextPostNumber(){

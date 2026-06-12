@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v9';
+const CACHE_VERSION = 'dar-admin-stats-v10';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
@@ -59,6 +59,18 @@ self.addEventListener('fetch', (event) => {
         return response;
       }).catch(() => cached);
       return cached || network;
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || '/admin/';
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
+      const existing = clients.find((client) => client.url.includes('/admin/'));
+      if (existing) return existing.focus();
+      return self.clients.openWindow(target);
     })
   );
 });
