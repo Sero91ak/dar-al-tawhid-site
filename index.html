@@ -3983,7 +3983,7 @@ async function runQiblaAutoStart(){
 
 function renderOverview(){const topics=countBy("category").size;const scholars=buildScholarCatalog().length;const books=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;return`<section class="overview-panel"><div class="overview-title"><h3>Übersicht</h3></div><div class="stats-grid"><div class="stat-card"><b>${posts.length}</b><span>Beiträge</span></div><div class="stat-card"><b>${topics}</b><span>Kategorien</span></div><div class="stat-card"><b>${scholars}</b><span>Gelehrte</span></div><div class="stat-card"><b>${DUAS.length}</b><span>Duʿāʾ</span></div></div></section>`}
 function renderOverviewCompact(){const topics=countBy("category").size;const scholars=buildScholarCatalog().length;const books=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;return`<section class="overview-panel overview-compact"><div class="stats-grid"><div class="stat-card"><b>${posts.length}</b><span>Beiträge</span></div><div class="stat-card"><b>${topics}</b><span>Themen</span></div><div class="stat-card"><b>${scholars}</b><span>Gelehrte</span></div><div class="stat-card"><b>${books}</b><span>Bücher</span></div></div></section>`}
-const PWA_GUIDE_KEY="darPwaInstallGuideV1";
+const PWA_GUIDE_KEY="darPwaInstallGuideV2";
 const PRAYER_HINT_KEY="darPrayerPushHintDismissedV1";
 const POPULAR_CACHE_KEY="darPopularPostsCacheV1";
 const RAMADAN_DUA_CATS=["Vergebung","Standhaftigkeit","Herz","Gebet","Barmherzigkeit","Schutz"];
