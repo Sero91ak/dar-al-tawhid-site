@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v100';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v101';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -87,6 +87,7 @@ self.addEventListener('fetch', (event) => {
     url.pathname === '/content/posts/posts-index.json' ||
     url.pathname.startsWith('/content/posts/') ||
     url.pathname.startsWith('/content/duas/') ||
+    url.pathname.startsWith('/content/updates/') ||
     url.pathname.startsWith('/assets/site-analytics.js');
 
   if (isFreshContent) {
