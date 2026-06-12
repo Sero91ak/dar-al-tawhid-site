@@ -250,37 +250,10 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
 }
 
 async function fetchLegacyPlayers() {
-  const all = [];
-  let offset = 0;
-  const limit = 300;
-
-  while (true) {
-    const url =
-      `https://onesignal.com/api/v1/players?app_id=${encodeURIComponent(APP_ID)}&limit=${limit}&offset=${offset}`;
-
-    const res = await fetch(url, {
-      headers: {
-        "Authorization": `Basic ${API_KEY}`
-      }
-    });
-
-    const text = await res.text();
-
-    if (!res.ok) {
-      throw new Error(`OneSignal Subscriptions Fehler ${res.status}: ${text}`);
-    }
-
-    const data = JSON.parse(text);
-    const players = Array.isArray(data.players) ? data.players : [];
-
-    all.push(...players);
-
-    if (players.length < limit) break;
-
-    offset += limit;
-  }
-
-  return all;
+  // OneSignal v2 API Key unterstützt keinen GET /players Zugriff.
+  // Wir senden stattdessen direkt über Filter-basierte OneSignal Notifications.
+  console.log("[Info] OneSignal v2 API: Subscriptions-Read deaktiviert, verwende Filter-basiertes Senden.");
+  return [];
 }
 
 async function fetchUserByAlias(aliasLabel, aliasId) {
