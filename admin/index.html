@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>DAR Admin · Command Center</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/admin/admin-icon-192.png">
 <link rel="manifest" href="/admin/manifest.json">
 <meta name="application-name" content="DAR Admin">
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
@@ -51,6 +51,25 @@ button{cursor:pointer}
 .login button{width:100%;justify-content:center}
 .hint{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:14px;color:var(--soft);font-size:11px;line-height:1.55;text-align:left;background:rgba(239,215,142,.035)}
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--green);margin-right:6px;vertical-align:middle;box-shadow:0 0 18px rgba(110,211,154,.72)}
+.admin-cover{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:
+  linear-gradient(135deg,rgba(5,7,5,.98),rgba(18,19,13,.96) 54%,rgba(8,10,7,.98)),
+  radial-gradient(circle at 78% 12%,rgba(239,215,142,.18),transparent 34%);
+  box-shadow:var(--shadow);min-height:315px;margin-bottom:12px;padding:20px;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px;align-items:center}
+.admin-cover:before{content:"";position:absolute;inset:13px;border:1px solid rgba(239,215,142,.12);border-radius:18px;pointer-events:none}
+.admin-cover-text{position:relative;z-index:1;max-width:650px}
+.admin-kicker{color:var(--green);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
+.admin-cover h2{font-family:var(--serif);font-size:clamp(34px,6vw,64px);line-height:.96;margin:0;color:#fff4cc}
+.admin-cover p{color:var(--soft);font-size:13px;line-height:1.6;margin:14px 0 0;max-width:560px}
+.admin-seal{position:relative;z-index:1;justify-self:center;width:min(240px,52vw);aspect-ratio:1;border-radius:50%;padding:10px;background:linear-gradient(145deg,rgba(239,215,142,.26),rgba(5,7,5,.72));box-shadow:0 28px 80px rgba(0,0,0,.42),0 0 0 1px rgba(239,215,142,.18)}
+.admin-seal img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.cover-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.folder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.folder-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(19,21,15,.94),rgba(8,9,7,.94));padding:15px;color:var(--ink);text-align:left;min-height:150px;box-shadow:0 14px 36px rgba(0,0,0,.24)}
+.folder-card:hover{border-color:rgba(239,215,142,.48)}
+.folder-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;border:1px solid rgba(239,215,142,.2);background:rgba(239,215,142,.08);font-size:22px;margin-bottom:12px}
+.folder-card h3{font-family:var(--serif);font-size:22px;line-height:1.05;color:var(--gold);margin:0 0 7px}
+.folder-card p{color:var(--soft);font-size:12px;line-height:1.45;margin:0}
+.folder-card small{display:block;color:var(--muted);font-size:10px;font-weight:900;margin-top:12px;text-transform:uppercase}
 .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:12px;margin-bottom:12px}
 .hero-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(21,24,17,.96),rgba(8,10,7,.96));padding:16px;min-height:170px}
 .hero-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
@@ -96,7 +115,7 @@ button{cursor:pointer}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#11150f;color:#fff4cf;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(max-width:950px){.admin-cover,.hero,.split,.upload-grid{grid-template-columns:1fr}.admin-seal{order:-1}.folder-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
 @media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.panel{padding:11px;border-radius:16px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid,.quick-grid{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
 </style>
 </head>
@@ -104,7 +123,7 @@ button{cursor:pointer}
 <div class="app">
   <header class="topbar" id="topbar" hidden>
     <div class="brand">
-      <img src="/app-icon-192.png" alt="" width="48" height="48">
+      <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
         <p><span class="status-dot"></span>Command Center</p>
@@ -131,7 +150,7 @@ const GITHUB_TOKEN_KEY="darAdminGithubTokenV1";
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
-let refreshTimer=null,authed=false,lastData=null,currentTab="overview",query="",typeFilter="all",sortMode="score";
+let refreshTimer=null,authed=false,lastData=null,currentTab="start",query="",typeFilter="all",sortMode="score";
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -240,7 +259,7 @@ function renderLogin(){
   document.getElementById("topbar").hidden=true;
   document.getElementById("panel").innerHTML=`
     <section class="login">
-      <img class="login-logo" src="/app-icon-192.png" alt="" width="74" height="74">
+      <img class="login-logo" src="/admin/admin-icon-192.png" alt="" width="74" height="74">
       <h2>Admin Command Center</h2>
       <p>Private Steuerzentrale für DAR AL TAWḤID mit Live-Zahlen, Inhaltsanalyse und schnellen Arbeitswegen.</p>
       <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
@@ -260,32 +279,11 @@ function renderShell(){
   const views=rows.reduce((n,r)=>n+Number(r.views||0),0),shares=rows.reduce((n,r)=>n+Number(r.shares||0),0),saves=rows.reduce((n,r)=>n+Number(r.saves||0),0);
   const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
   const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
-  const body=currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):renderOverview({live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs});
+  const ctx={live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs,updated:data.updated};
+  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
-    <section class="hero">
-      <div class="hero-card">
-        <div class="hero-title">
-          <div><h2>Übersicht</h2><p>Live-Zahlen, Inhaltsleistung und schnelle Arbeitswege für deine separate Admin-App.</p></div>
-          <span class="signal"><span class="status-dot"></span>${Number(live.live_now||0)} jetzt online</span>
-        </div>
-        <div class="metric-grid">
-          ${metric("Heute Besucher",Number(live.today_sessions||0),"einzigartige Sitzungen")}
-          ${metric("Heute Aufrufe",Number(live.today_views||0),"Seiten und Beiträge")}
-          ${metric("Heute geteilt",Number(live.today_shares||0),"Shares heute")}
-          ${metric("Heute gespeichert",Number(live.today_saves||0),"Favoriten heute")}
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="section-head"><h3>Command</h3><span>${esc(data.updated.toLocaleTimeString("de-DE"))}</span></div>
-        <div class="mini-grid">
-          <div class="mini"><b>Gesamtaufrufe</b><span>${views}</span><small>alle getrackten Inhalte</small></div>
-          <div class="mini"><b>Interaktionen</b><span>${shares+saves}</span><small>geteilt und gespeichert</small></div>
-          <div class="mini"><b>App installiert</b><span>${installs.total}</span><small>iOS und Android gesamt</small></div>
-          <div class="mini"><b>Inhalte</b><span>${posts.length+duas.length}</span><small>Beiträge und Duʿāʾ erfasst</small></div>
-        </div>
-      </div>
-    </section>
     <nav class="tabs">
+      ${tabButton("start","Start")}
       ${tabButton("overview","Dashboard")}
       ${tabButton("content","Inhalte")}
       ${tabButton("actions","Aktionen")}
@@ -295,6 +293,44 @@ function renderShell(){
   bindUi();
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
+function folderCard(icon,title,text,tab,meta){
+  return `<button class="folder-card" data-tab="${esc(tab)}" type="button"><span class="folder-icon">${esc(icon)}</span><h3>${esc(title)}</h3><p>${esc(text)}</p><small>${esc(meta||"Öffnen")}</small></button>`;
+}
+function renderStart(ctx){
+  return `<section class="admin-cover">
+    <div class="admin-cover-text">
+      <div class="admin-kicker">Admin-App · getrennt von der Besucher-App</div>
+      <h2>Command Deck</h2>
+      <p>Arbeite ruhig und geordnet: zuerst Lage prüfen, dann Inhalte kontrollieren, danach veröffentlichen oder Upload starten. Die Startseite bleibt sauber und öffnet Details erst im passenden Ordner.</p>
+      <div class="cover-actions">
+        <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
+        <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
+        <button class="btn" data-tab="overview" type="button">Statistik öffnen</button>
+      </div>
+    </div>
+    <div class="admin-seal"><img src="/admin/admin-icon-512.png" alt="DAR Admin Siegel" width="512" height="512"></div>
+  </section>
+  <section class="folder-grid">
+    ${folderCard("①","Übersicht","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","overview",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
+    ${folderCard("②","Inhaltskontrolle","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte erfasst`)}
+    ${folderCard("③","Aktionen","Neuen Beitrag vorbereiten, GitHub-Upload nutzen und schnelle Wege öffnen.","actions",`${ctx.installs.total} App-Installationen`)}
+  </section>
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-title"><div><h2>Heute</h2><p>Kurze Lageübersicht ohne offene Listen.</p></div></div>
+      <div class="metric-grid">
+        ${metric("Besucher",Number(ctx.live.today_sessions||0),"einzigartige Sitzungen")}
+        ${metric("Aufrufe",Number(ctx.live.today_views||0),"Seiten und Beiträge")}
+        ${metric("Geteilt",Number(ctx.live.today_shares||0),"Shares heute")}
+        ${metric("Gespeichert",Number(ctx.live.today_saves||0),"Favoriten heute")}
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="section-head"><h3>Bestes Signal</h3><span>${esc(ctx.updated.toLocaleTimeString("de-DE"))}</span></div>
+      ${ctx.top[0]?`<div class="empty">Aktuell stärkster Inhalt:<br><strong>${esc(cleanTitle(ctx.top[0].content_title||ctx.top[0].content_id))}</strong><br>Score ${score(ctx.top[0])} · ${Number(ctx.top[0].views||0)} Aufrufe</div>`:`<div class="empty">Noch keine Statistikdaten vorhanden.</div>`}
+    </div>
+  </section>`;
+}
 function renderOverview(ctx){
   return `<section class="split">
     <div class="panel">

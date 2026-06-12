@@ -3084,7 +3084,7 @@ window.DAR_ANALYTICS_CONFIG={
 </div>
 
 <script>
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const POSTS_DIR="content/posts";const BRANCH="main";const CACHE_KEY="darCachedPostsV5";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY="darPostFileMapV4";const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const POSTS_DIR="content/posts";const BRANCH="main";const CACHE_KEY="darCachedPostsV5";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY="darPostFileMapV4";const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const CONTENT_REFRESH_MS=60000;
 const QURAN_TR_MODES={readable:{label:"Lesbar",short:"Einfach · latin",hint:"Einfache lateinische Umschrift zum lauten Lesen."},tanzil:{label:"Tanzil",short:"Standard",hint:"Standard-Umschrift mit Doppellauten (Tanzil.net)."},academic:{label:"Wissenschaftlich",short:"Mit Diakritika",hint:"Akademische Umschrift mit ḥ, ʿ, ā und weiteren Zeichen."}};
 function getQuranTrMode(){try{const m=localStorage.getItem(QURAN_TR_KEY);return QURAN_TR_MODES[m]?m:"readable"}catch(e){return "readable"}}
 function setQuranTrMode(mode){if(!QURAN_TR_MODES[mode])return;try{localStorage.setItem(QURAN_TR_KEY,mode)}catch(e){}applyQuranTransliterationMode()}
@@ -3092,7 +3092,7 @@ function quranVerseTr(v,mode){mode=mode||getQuranTrMode();if(!v)return "";if(mod
 function renderQuranTransliterationPicker(){const mode=getQuranTrMode();const buttons=Object.entries(QURAN_TR_MODES).map(([key,info])=>`<button type="button" class="quran-tr-btn${mode===key?" active":""}" data-quran-tr="${key}"><span>${esc(info.label)}</span><small>${esc(info.short)}</small></button>`).join("");return `<section class="quran-tr-bar"><div class="quran-tr-label">Lautschrift wählen</div><div class="quran-tr-row">${buttons}</div><p class="quran-tr-note" id="quranTrModeNote">${esc(QURAN_TR_MODES[mode]?.hint||"")}</p></section>`}
 function renderQuranAyahTr(v){const mode=getQuranTrMode();const label=QURAN_TR_MODES[mode]?.label||"Lautschrift";const text=quranVerseTr(v,mode);return `<div class="quran-ayah-tr-wrap"><div class="quran-ayah-tr-label">Lautschrift · ${esc(label)}</div><div class="quran-ayah-tr" data-tr-tanzil="${esc(v.tr||"")}" data-tr-readable="${esc(v.tr_readable||v.tr||"")}" data-tr-academic="${esc(v.tr_academic||v.tr||"")}">${esc(text)}</div></div>`}
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{const text=el.getAttribute("data-tr-"+mode)||el.getAttribute("data-tr-tanzil")||"";el.textContent=text});document.querySelectorAll(".quran-ayah-tr-label").forEach(el=>{el.textContent="Lautschrift · "+(QURAN_TR_MODES[mode]?.label||"Lautschrift")});document.querySelectorAll(".quran-tr-btn").forEach(btn=>{btn.classList.toggle("active",btn.getAttribute("data-quran-tr")===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
-function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
+function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let postRouteLoadingId="";let appBootHydrated=false;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
 const THEME_KEY="darThemeV1";
 function getTheme(){try{const t=localStorage.getItem(THEME_KEY);return t==="light"?"light":"dark"}catch(e){return"dark"}}
 function applyTheme(theme){const next=theme==="light"?"light":"dark";document.documentElement.setAttribute("data-theme",next);try{localStorage.setItem(THEME_KEY,next)}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=next==="light"?"#f4e8cc":"#080806";const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=next==="light"?"default":"black";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next)})}
@@ -3315,6 +3315,30 @@ async function fetchGithubPostFileList(){const response=await fetch(`https://api
 async function resolvePostFileList(){const fromIndex=await fetchPostsIndexMeta();if(fromIndex&&fromIndex.length)return fromIndex;try{return await fetchGithubPostFileList()}catch(e){console.warn("Post-Liste:",e);return null}}
 async function loadPostsFromFileList(markdownFiles,cached){const fileMap=getJson(POST_FILE_MAP_KEY,{});const names=new Set(markdownFiles.map(f=>f.name));Object.keys(fileMap).forEach(name=>{if(!names.has(name))delete fileMap[name]});const needsFetch=markdownFiles.filter(f=>!fileMap[f.name]||fileMap[f.name].sha!==f.sha);const freshFromMap=markdownFiles.filter(f=>fileMap[f.name]&&fileMap[f.name].sha===f.sha&&fileMap[f.name].post).map(f=>fileMap[f.name].post);let fetchedPosts=[];if(needsFetch.length){for(let i=0;i<needsFetch.length;i+=8){const batch=needsFetch.slice(i,i+8);const results=await Promise.allSettled(batch.map(fetchPostFile));results.forEach(r=>{if(r.status==="fulfilled"){const sha=r.value.sha||markdownFiles.find(x=>x.name===r.value.name)?.sha||"";fileMap[r.value.name]={sha,post:r.value.post};fetchedPosts.push(r.value.post)}})}setJson(POST_FILE_MAP_KEY,fileMap)}const loaded=[...freshFromMap,...fetchedPosts];const merged=loaded.length?mergePostsLists([],loaded):mergePostsLists(cached,loaded);if(merged.length)applyPostsList(merged);else if(cached.length)applyPostsList(cached);if(merged.length){setJson(CACHE_KEY,posts);persistOfflineLibrary()}return posts.length}
 async function loadPosts(){const cached=getCachedPosts();if(!navigator.onLine){if(cached.length)applyPostsList(cached);return posts.length}try{const markdownFiles=await resolvePostFileList();if(!markdownFiles||!markdownFiles.length){if(cached.length)applyPostsList(cached);return posts.length}return await loadPostsFromFileList(markdownFiles,cached)}catch(error){console.warn(error);if(cached.length)applyPostsList(cached);return posts.length}}
+function postsSignature(){return posts.map(p=>`${p.id}:${p.date||""}:${p.title||""}:${p._sourceFile||""}`).join("|")}
+async function refreshContent({forceRender=false}={}){
+  if(!navigator.onLine)return false;
+  const before=postsSignature()+"::"+DUAS.length;
+  await loadPosts();
+  await loadExternalDuas();
+  normalizeLoadedDuas();
+  persistOfflineLibrary();
+  const changed=before!==postsSignature()+"::"+DUAS.length;
+  if(forceRender||changed)render();
+  return changed;
+}
+function ensurePostRouteData(route){
+  if(!route||route.view!=="post"||!route.value||!navigator.onLine)return;
+  if(posts.some(p=>String(p.id)===String(route.value)))return;
+  if(postRouteLoadingId===String(route.value))return;
+  postRouteLoadingId=String(route.value);
+  refreshContent({forceRender:false}).finally(()=>{
+    const id=postRouteLoadingId;
+    postRouteLoadingId="";
+    const r=readRoute();
+    if(r.view==="post"&&String(r.value)===id)render();
+  });
+}
 function countBy(key){const map=new Map();posts.forEach(post=>{let value=post[key]||"Unbekannt";if(key==="category")value=normalizePostCategory(value);map.set(value,(map.get(value)||0)+1)});return map}
 function savedIds(){return getJson(SAVE_KEY,[])}function isSaved(id){return savedIds().includes(id)}function toggleSaved(id){let list=savedIds();const adding=!list.includes(id);if(list.includes(id)){list=list.filter(x=>x!==id)}else{list.unshift(id)}setJson(SAVE_KEY,list.slice(0,100));if(adding){const post=posts.find(p=>String(p.id)===String(id));trackAnalytics("post_save",{contentType:"post",contentId:id,contentTitle:post?.title})}}
 const STATS_AUTH_KEY="darStatsAuthV1";const STATS_AUTH_TTL_MS=90*24*60*60*1000;let statsRefreshTimer=null;let statsAuthedMemory=false;
@@ -4069,6 +4093,7 @@ function shareLinksForPost(post){
 
 function renderPost(id){
   const post=posts.find(p=>String(p.id)===String(id));
+  if(!post&&postRouteLoadingId===String(id))return `${setHeader("Beitrag wird geladen","Der neue Beitrag wird direkt aus dem aktuellen Index geladen.","Laden")}<div class="loading">Beitrag wird aktualisiert…</div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div>`;
   const related=getRelatedPosts(post);
   return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div><section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}${renderSourceStatus(post)}${shareLinksForPost(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
@@ -4084,6 +4109,7 @@ function render(){
     updateChrome(currentRoute);
     updateHijriHeaderDate();
     updateHeaderPrayerStatus();
+    ensurePostRouteData(currentRoute);
     if(currentRoute.view==="quran"||currentRoute.view==="quran-surah"){
       const surahId=currentRoute.view==="quran-surah"?Number(String(currentRoute.value||"").split("/")[0]):NaN;
       const needsIndex=!quranMeta;
@@ -4350,6 +4376,11 @@ function initFloatTouchbar(){
   document.addEventListener("touchcancel",onDragEnd,{passive:true});
 }
 window.addEventListener("DOMContentLoaded",()=>{
+  if(!appBootHydrated){
+    appBootHydrated=true;
+    hydrateOfflineContent();
+    render();
+  }
   restoreStatsAuth();
   initTheme();
   applyStandalonePwaClass();
@@ -4372,20 +4403,17 @@ window.addEventListener("DOMContentLoaded",()=>{
   setTimeout(showPwaInstallModalIfNeeded,1200);
 });
 window.addEventListener("load",()=>{
-  hydrateOfflineContent();
+  if(!appBootHydrated){
+    appBootHydrated=true;
+    hydrateOfflineContent();
+  }
   render();
   loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()});
-  Promise.resolve().then(async()=>{
-    await loadPosts();
-    await loadExternalDuas();
-    normalizeLoadedDuas();
-    persistOfflineLibrary();
-    render();
-  });
+  Promise.resolve().then(()=>refreshContent({forceRender:true}));
   if(!location.hash){
     location.hash="#home";
   }
-  try{setInterval(async ()=>{if(!navigator.onLine)return;const beforePosts=posts.length;const beforeDuas=DUAS.length;await loadPosts();await loadExternalDuas();normalizeLoadedDuas();if(posts.length!==beforePosts||DUAS.length!==beforeDuas){persistOfflineLibrary();render()}},5*60*1000)}catch(e){}
+  try{setInterval(()=>refreshContent(),CONTENT_REFRESH_MS)}catch(e){}
 });
 </script>
 <script>
@@ -4396,8 +4424,10 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 </script>
 
 <script>
-window.addEventListener("online",function(){updateOfflineBox();if(navigator.onLine){loadPosts().then(()=>loadExternalDuas()).then(()=>{normalizeLoadedDuas();persistOfflineLibrary();render()})}});
+window.addEventListener("online",function(){updateOfflineBox();refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
+window.addEventListener("focus",function(){refreshContent()});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")refreshContent()});
 </script>
 </body>
 </html>

@@ -1,10 +1,27 @@
 /* DAR AL TAWḤID – keep this file for OneSignal compatibility and old browser registrations. */
-self.addEventListener("notificationclick", (event) => {
-  const data = event.notification && event.notification.data ? event.notification.data : {};
-  const custom = data.custom || data;
+function readOneSignalClickUrl(notification) {
+  const data = notification && notification.data ? notification.data : {};
+  const custom = data.custom || {};
   const extra = data.additionalData || data.data || custom.a || {};
-  const targetUrl = data.url || data.launchURL || data.web_url || custom.u || custom.url || extra.url || "/#recent";
-  const absoluteUrl = new URL(targetUrl, self.location.origin).href;
+  const candidates = [
+    data.url,
+    data.launchURL,
+    data.web_url,
+    data.open_url,
+    custom.u,
+    custom.url,
+    custom.web_url,
+    extra.url,
+    extra.web_url,
+    extra.launchURL
+  ];
+  const postId = data.post_id || data.postId || extra.post_id || extra.postId;
+  const targetUrl = candidates.find(Boolean) || (postId ? `/#post/${encodeURIComponent(postId)}` : "/#recent");
+  return new URL(targetUrl, self.location.origin).href;
+}
+
+self.addEventListener("notificationclick", (event) => {
+  const absoluteUrl = readOneSignalClickUrl(event.notification);
 
   event.notification.close();
   event.stopImmediatePropagation();
