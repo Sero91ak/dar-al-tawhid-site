@@ -3645,7 +3645,7 @@ const PRAYER_NOTIFICATION_MESSAGES={
   tahajjud:["Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr.","Eine gesegnete Zeit für Gebet, Duʿāʾ und Vergebung.","Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."]
 };
 function pickPrayerMessage(prayer){const list=PRAYER_NOTIFICATION_MESSAGES[prayer.key]||PRAYER_NOTIFICATION_MESSAGES.default;const dayKey=new Date().toISOString().slice(0,10);let seed=0;String(`${dayKey}-${prayer.key}-${Date.now()}`).split("").forEach(ch=>seed=(seed+ch.charCodeAt(0))%9973);return list[seed%list.length]}
-function prayerNotificationTitle(prayer,advance=false){if(prayer.key==="tahajjud")return advance?"DAR AL TAWḤID · Taḥajjud naht":"DAR AL TAWḤID · Taḥajjud";return advance?`DAR AL TAWḤID · Bald: ${prayer.name}`:`DAR AL TAWḤID · Gebetszeit: ${prayer.name}`}
+function prayerNotificationTitle(prayer,advance=false){if(prayer.key==="tahajjud")return advance?"DAR AL TAWḤID · Taḥajjud in 15 Min":"DAR AL TAWḤID · Taḥajjud ist eingetreten";return advance?`DAR AL TAWḤID · ${prayer.name} in 15 Min`:`DAR AL TAWḤID · ${prayer.name} ist eingetreten`}
 function prayerAdvanceNotificationCopy(prayer,settings){const timeLabel=prayer.key==="tahajjud"?formatPrayerTimeDisplay(prayer):formatPrayerHour(prayer.time);const city=settings&&settings.city?` · ${settings.city}`:"";return{title:prayerNotificationTitle(prayer,true),body:`In ${prayerPushAdvanceMinutes()} Min · ${timeLabel}${city}`,tag:`prayer-advance-${prayer.key}`}}
 function prayerEntryNotificationCopy(prayer){return{title:prayerNotificationTitle(prayer),body:pickPrayerMessage(prayer),tag:`prayer-${prayer.key}`}}
 async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{return new window.Notification(title,payload)}catch(e){}}return null}
@@ -3903,7 +3903,7 @@ async function sendPrayerTestNotification(){
   let permission=getNotificationPermission();
   if(permission!=="granted")permission=await requestNotificationPermission();
   if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
-  await showPrayerNotification("DAR AL TAWḤID · Gebetszeit: Test",{
+  await showPrayerNotification("DAR AL TAWḤID · ʿIshāʾ ist eingetreten",{
     body:"Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
     tag:"prayer-test",
     renotify:true
