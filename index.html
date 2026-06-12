@@ -3637,8 +3637,17 @@ async function waitForPushOptIn(OS,timeoutMs=25000){const os=OS||await waitForOn
 function buildPrayerPushTags(settings){const lat=Number(settings.lat),lon=Number(settings.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return null;return{prayer_notifications:"true",prayer_lat:lat.toFixed(5),prayer_lon:lon.toFixed(5),prayer_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",prayer_method:"12deg",prayer_asr_factor:String(settings.asrFactor||1),prayer_location_mode:"app",prayer_site:"dar-al-tawhid",prayer_source:"pwa",prayer_version:"5",dar_push:"true",post_notifications:"true",push_version:"5"}}
 async function syncPrayerPushTags(settings,{retries=5}={}){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;const tags=buildPrayerPushTags(s);if(!tags)return false;const OS=await waitForOneSignalReady();if(!OS)return false;await ensurePushUserLogin(OS);const opted=await waitForPushOptIn(OS);if(!opted)return false;for(let attempt=0;attempt<retries;attempt++){try{await OS.User.addTags(tags);await new Promise(r=>setTimeout(r,900*(attempt+1)));const local=OS.User.getTags?OS.User.getTags():{};if(local.prayer_notifications==="true"&&Boolean(local.prayer_lat))return true}catch(e){console.warn("Gebets-Push-Tags:",e)}await new Promise(r=>setTimeout(r,600))}return false}
 function prayerPushAdvanceMinutes(){return 15}
-function prayerAdvanceNotificationCopy(prayer,settings){const timeLabel=prayer.key==="tahajjud"?formatPrayerTimeDisplay(prayer):formatPrayerHour(prayer.time);const city=settings&&settings.city?` · ${settings.city}`:"";return{title:`Nächstes Gebet: ${prayer.name}`,body:`In ${prayerPushAdvanceMinutes()} Min · ${timeLabel}${city} · DAR AL TAWḤID`,tag:`prayer-advance-${prayer.key}`}}
-function prayerEntryNotificationCopy(prayer){return{title:prayer.key==="tahajjud"?"Taḥajjud · letztes Drittel":`Gebetszeit: ${prayer.name}`,body:prayer.key==="tahajjud"?"Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID":`${prayer.name} ist eingetreten. DAR AL TAWḤID`,tag:`prayer-${prayer.key}`}}
+const PRAYER_NOTIFICATION_MESSAGES={
+  default:["Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.","Nimm dir jetzt bewusst Zeit für dein Gebet.","Bewahre dein Gebet und erinnere dich an Allah."],
+  fajr:["Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.","Fajr ist eingetreten. Starte den Tag mit Gehorsam gegenüber Allah.","Der Tag beginnt mit einer großen Gelegenheit zum Gebet."],
+  asr:["Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.","ʿAṣr ist eingetreten. Achte besonders auf dieses Gebet.","Halte am ʿAṣr-Gebet fest und bewahre deine Zeit."],
+  isha:["Schließe deinen Tag mit Gehorsam gegenüber Allah ab.","ʿIshāʾ ist eingetreten. Beende den Tag mit Gebet und Ruhe.","Nimm dir am Ende des Tages Zeit für dein Gebet."],
+  tahajjud:["Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr.","Eine gesegnete Zeit für Gebet, Duʿāʾ und Vergebung.","Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."]
+};
+function pickPrayerMessage(prayer){const list=PRAYER_NOTIFICATION_MESSAGES[prayer.key]||PRAYER_NOTIFICATION_MESSAGES.default;const dayKey=new Date().toISOString().slice(0,10);let seed=0;String(`${dayKey}-${prayer.key}-${Date.now()}`).split("").forEach(ch=>seed=(seed+ch.charCodeAt(0))%9973);return list[seed%list.length]}
+function prayerNotificationTitle(prayer,advance=false){if(prayer.key==="tahajjud")return advance?"DAR AL TAWḤID · Taḥajjud naht":"DAR AL TAWḤID · Taḥajjud";return advance?`DAR AL TAWḤID · Bald: ${prayer.name}`:`DAR AL TAWḤID · Gebetszeit: ${prayer.name}`}
+function prayerAdvanceNotificationCopy(prayer,settings){const timeLabel=prayer.key==="tahajjud"?formatPrayerTimeDisplay(prayer):formatPrayerHour(prayer.time);const city=settings&&settings.city?` · ${settings.city}`:"";return{title:prayerNotificationTitle(prayer,true),body:`In ${prayerPushAdvanceMinutes()} Min · ${timeLabel}${city}`,tag:`prayer-advance-${prayer.key}`}}
+function prayerEntryNotificationCopy(prayer){return{title:prayerNotificationTitle(prayer),body:pickPrayerMessage(prayer),tag:`prayer-${prayer.key}`}}
 async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{return new window.Notification(title,payload)}catch(e){}}return null}
 function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s))scheduleLocalPrayerReminders({silent:true})}
 function setPrayerSettings(value){const prev=getPrayerSettings();const next={...prev,...value};if(prev.reminder)next.reminder=true;setJson(PRAYER_SETTINGS_KEY,next);if(next.reminder&&hasPrayerLocation(next))syncPrayerPushTags(next).catch(()=>{})}
@@ -3894,8 +3903,8 @@ async function sendPrayerTestNotification(){
   let permission=getNotificationPermission();
   if(permission!=="granted")permission=await requestNotificationPermission();
   if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
-  await showPrayerNotification("Gebetszeiten-Test",{
-    body:"Wenn du diese Nachricht siehst, sind Benachrichtigungen auf diesem Gerät erlaubt.",
+  await showPrayerNotification("DAR AL TAWḤID · Gebetszeit: Test",{
+    body:"Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
     tag:"prayer-test",
     renotify:true
   });
