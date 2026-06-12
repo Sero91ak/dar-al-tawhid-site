@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v7';
+const CACHE_VERSION = 'dar-admin-stats-v8';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
