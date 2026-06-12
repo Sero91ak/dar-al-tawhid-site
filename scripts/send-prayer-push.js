@@ -5,11 +5,14 @@
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
+const crypto = require("crypto");
 const {
   withNotificationIcons,
   postOneSignalNotification
 } = require("./lib/onesignal-push");
 const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
+const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || 20);
+const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 5);
 
 if (!API_KEY) {
   console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
@@ -457,6 +460,53 @@ function groupUsers(users) {
   return Array.from(map.values());
 }
 
+const PRAYER_NOTIFICATION_MESSAGES = {
+  default: [
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
+    "Nimm dir jetzt bewusst Zeit für dein Gebet.",
+    "Bewahre dein Gebet und erinnere dich an Allah."
+  ],
+  fajr: [
+    "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.",
+    "Fajr ist eingetreten. Starte den Tag mit Gehorsam gegenüber Allah.",
+    "Der Tag beginnt mit einer großen Gelegenheit zum Gebet."
+  ],
+  asr: [
+    "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
+    "ʿAṣr ist eingetreten. Achte besonders auf dieses Gebet.",
+    "Halte am ʿAṣr-Gebet fest und bewahre deine Zeit."
+  ],
+  isha: [
+    "Schließe deinen Tag mit Gehorsam gegenüber Allah ab.",
+    "ʿIshāʾ ist eingetreten. Beende den Tag mit Gebet und Ruhe.",
+    "Nimm dir am Ende des Tages Zeit für dein Gebet."
+  ],
+  tahajjud: [
+    "Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr.",
+    "Eine gesegnete Zeit für Gebet, Duʿāʾ und Vergebung.",
+    "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
+  ]
+};
+
+function pickPrayerMessage(prayer, sendAfter, group) {
+  const list = PRAYER_NOTIFICATION_MESSAGES[prayer.key] || PRAYER_NOTIFICATION_MESSAGES.default;
+  const seed = `${prayer.key}|${sendAfter.toISOString()}|${group.timeZone}|${group.lat.toFixed(3)}|${group.lon.toFixed(3)}`;
+  const hash = crypto.createHash("sha256").update(seed).digest();
+  return list[hash[0] % list.length];
+}
+
+function prayerNotificationTitle(prayer, mode) {
+  if (prayer.key === "tahajjud") {
+    return mode === "advance"
+      ? "DAR AL TAWḤID · Taḥajjud in 15 Min"
+      : "DAR AL TAWḤID · Taḥajjud ist eingetreten";
+  }
+
+  return mode === "advance"
+    ? `DAR AL TAWḤID · ${prayer.name} in ${PRAYER_ADVANCE_MINUTES} Min`
+    : `DAR AL TAWḤID · ${prayer.name} ist eingetreten`;
+}
+
 function prayerNotificationCopy(prayer, mode) {
   const isTahajjud = prayer.key === "tahajjud";
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
@@ -464,34 +514,52 @@ function prayerNotificationCopy(prayer, mode) {
   if (mode === "advance") {
     return {
       headings: {
-        de: `Nächstes Gebet: ${prayer.name}`,
-        en: `Next prayer: ${prayer.name}`
+        de: prayerNotificationTitle(prayer, mode),
+        en: prayerNotificationTitle(prayer, mode)
       },
       contents: {
         de: isTahajjud
-          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht. DAR AL TAWḤID`
-          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr. DAR AL TAWḤID`,
+          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht.`
+          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr.`,
         en: isTahajjud
-          ? `Last third of the night begins in ${PRAYER_ADVANCE_MINUTES} min. DAR AL TAWḤID`
-          : `In ${PRAYER_ADVANCE_MINUTES} min · ${timeLabel}. DAR AL TAWḤID`
+          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht.`
+          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr.`
       }
     };
   }
 
   return {
     headings: {
-      de: isTahajjud ? "Taḥajjud · letztes Drittel" : `Gebetszeit: ${prayer.name}`,
-      en: isTahajjud ? "Tahajjud · last third of night" : `Prayer time: ${prayer.name}`
+      de: prayerNotificationTitle(prayer, mode),
+      en: prayerNotificationTitle(prayer, mode)
     },
     contents: {
-      de: isTahajjud
-        ? "Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr. DAR AL TAWḤID"
-        : `${prayer.name} ist eingetreten. DAR AL TAWḤID`,
-      en: isTahajjud
-        ? "Last third of the night – time for Tahajjud until Fajr. DAR AL TAWḤID"
-        : `${prayer.name} time has entered. DAR AL TAWḤID`
+      de: "",
+      en: ""
     }
   };
+}
+
+function deterministicUuid(seed) {
+  const bytes = Buffer.from(crypto.createHash("sha256").update(seed).digest().subarray(0, 16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = bytes.toString("hex");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
+function scheduleIdentity(group, prayer, sendAfter, mode) {
+  return [
+    "prayer",
+    mode,
+    prayer.key,
+    sendAfter.toISOString(),
+    group.lat.toFixed(3),
+    group.lon.toFixed(3),
+    group.timeZone,
+    group.methodAngle,
+    group.asrFactor
+  ].join("|");
 }
 
 async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "entry") {
@@ -500,6 +568,11 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
   if (!ids.length) return;
 
   const copy = prayerNotificationCopy(prayer, mode);
+  if (mode === "entry") {
+    const message = pickPrayerMessage(prayer, sendAfter, group);
+    copy.contents.de = message;
+    copy.contents.en = message;
+  }
 
   const body = withNotificationIcons({
     app_id: APP_ID,
@@ -509,8 +582,12 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
     contents: copy.contents,
     url: SITE_URL,
     isAnyWeb: true,
-    send_after: sendAfter.toISOString()
+    idempotency_key: deterministicUuid(scheduleIdentity(group, prayer, sendAfter, mode))
   }, SITE_URL);
+
+  if (sendAfter.getTime() - Date.now() > 60 * 1000) {
+    body.send_after = sendAfter.toISOString();
+  }
 
   try {
     const result = await postOneSignalNotification(body, API_KEY, { retries: 3 });
@@ -529,8 +606,11 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
 
 (async function main() {
   const now = new Date();
+  const windowStart = new Date(now.getTime() - SCHEDULE_GRACE_MINUTES * 60 * 1000);
+  const windowEnd = new Date(now.getTime() + SCHEDULE_LOOKAHEAD_MINUTES * 60 * 1000);
 
   console.log("Lese OneSignal-Subscriptions mit Gebetszeiten-Tags...");
+  console.log(`Planungsfenster: ${windowStart.toISOString()} bis ${windowEnd.toISOString()}`);
 
   const players = await fetchSubscriptions();
   const users = getPrayerUsers(players);
@@ -580,9 +660,13 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
       }
 
       for (const schedule of schedules) {
-        if (schedule.sendAfter.getTime() <= now.getTime() + 2 * 60 * 1000) {
+        if (schedule.sendAfter < windowStart) {
           const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
           console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
+          continue;
+        }
+
+        if (schedule.sendAfter > windowEnd) {
           continue;
         }
 
