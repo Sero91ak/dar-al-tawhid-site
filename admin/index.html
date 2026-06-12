@@ -471,7 +471,7 @@ async function sendAdminLocalPushTest(){
   if(permission!=="granted")permission=await Notification.requestPermission();
   if(permission!=="granted"){setAdminPushTestStatus("Benachrichtigungen wurden nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}
   const prayer=document.getElementById("adminPushPrayerSelect")?.value||"ʿIshāʾ";
-  const title=`DAR AL TAWḤID · ${prayer} ist eingetreten`;
+  const title=`${prayer} ist eingetreten`;
   const body="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
   try{
     if("serviceWorker" in navigator){

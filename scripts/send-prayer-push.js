@@ -498,13 +498,13 @@ function pickPrayerMessage(prayer, sendAfter, group) {
 function prayerNotificationTitle(prayer, mode) {
   if (prayer.key === "tahajjud") {
     return mode === "advance"
-      ? "DAR AL TAWḤID · Taḥajjud in 15 Min"
-      : "DAR AL TAWḤID · Taḥajjud ist eingetreten";
+      ? "Taḥajjud in 15 Min"
+      : "Taḥajjud ist eingetreten";
   }
 
   return mode === "advance"
-    ? `DAR AL TAWḤID · ${prayer.name} in ${PRAYER_ADVANCE_MINUTES} Min`
-    : `DAR AL TAWḤID · ${prayer.name} ist eingetreten`;
+    ? `${prayer.name} in ${PRAYER_ADVANCE_MINUTES} Min`
+    : `${prayer.name} ist eingetreten`;
 }
 
 function prayerNotificationCopy(prayer, mode) {
