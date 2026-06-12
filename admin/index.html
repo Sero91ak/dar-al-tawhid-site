@@ -63,13 +63,13 @@ button{cursor:pointer}
 .admin-cover h2{font-family:var(--serif);font-size:clamp(30px,5vw,42px);line-height:1;margin:0;color:#fff4cc}
 .admin-cover p{color:var(--soft);font-size:12.5px;line-height:1.55;margin:12px 0 0;max-width:560px}
 .cover-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.folder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
-.folder-card{border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(19,21,15,.94),rgba(8,9,7,.94));padding:14px;color:var(--ink);text-align:left;min-height:126px;box-shadow:0 14px 36px rgba(0,0,0,.24)}
+.folder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.folder-card{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(19,21,15,.94),rgba(8,9,7,.94));padding:10px;color:var(--ink);text-align:left;min-height:74px;box-shadow:0 10px 24px rgba(0,0,0,.18)}
 .folder-card:hover{border-color:rgba(239,215,142,.48)}
-.folder-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;border:1px solid rgba(239,215,142,.2);background:rgba(239,215,142,.08);font-size:22px;margin-bottom:12px}
-.folder-card h3{font-family:var(--serif);font-size:22px;line-height:1.05;color:var(--gold);margin:0 0 7px}
-.folder-card p{color:var(--soft);font-size:12px;line-height:1.45;margin:0}
-.folder-card small{display:block;color:var(--muted);font-size:10px;font-weight:900;margin-top:12px;text-transform:uppercase}
+.folder-icon{display:none}
+.folder-card h3{font-family:var(--serif);font-size:18px;line-height:1.05;color:var(--gold);margin:0 0 7px}
+.folder-card p{display:none}
+.folder-card small{display:block;color:var(--muted);font-size:9.5px;font-weight:900;margin-top:0;text-transform:uppercase;line-height:1.25}
 .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:12px;margin-bottom:12px}
 .hero-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(21,24,17,.96),rgba(8,10,7,.96));padding:16px;min-height:170px}
 .hero-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
@@ -115,8 +115,8 @@ button{cursor:pointer}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#11150f;color:#fff4cf;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.folder-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:13px}.admin-kicker{font-size:9.5px;letter-spacing:.08em;margin-bottom:8px}.admin-cover h2{font-size:31px}.admin-cover p{font-size:12.5px;line-height:1.5}.cover-actions .btn,.cover-actions .signal{min-height:34px;font-size:11px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid,.quick-grid{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
+@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:13px}.admin-kicker{font-size:9.5px;letter-spacing:.08em;margin-bottom:8px}.admin-cover h2{font-size:31px}.admin-cover p{font-size:12.5px;line-height:1.5}.cover-actions .btn,.cover-actions .signal{min-height:34px;font-size:11px}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid,.quick-grid{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
 </style>
 </head>
 <body>
@@ -333,7 +333,7 @@ function renderStart(ctx){
   </section>
   <section class="folder-grid">
     ${folderCard("①","Übersicht","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","overview",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
-    ${folderCard("②","Inhaltskontrolle","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte erfasst`)}
+    ${folderCard("②","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("③","Aktionen","Neuen Beitrag vorbereiten, GitHub-Upload nutzen und schnelle Wege öffnen.","actions",`${ctx.installs.total} App-Installationen`)}
   </section>
   <section class="hero">
