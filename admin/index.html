@@ -38,11 +38,13 @@ button{cursor:pointer}
 .brand h1{margin:0;font-family:var(--serif);font-size:23px;line-height:1.03;color:var(--gold)}
 .brand p{margin:4px 0 0;color:var(--soft);font-size:12px;font-weight:800}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.toolbar .back-btn{display:none}
+.toolbar .back-btn.show{display:inline-flex}
 .btn,.chip{border:1px solid var(--line);background:rgba(239,215,142,.08);color:var(--ink);border-radius:12px;min-height:38px;padding:8px 12px;font-size:12px;font-weight:900;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
 .btn.primary{background:linear-gradient(135deg,rgba(239,215,142,.24),rgba(110,211,154,.10));border-color:rgba(239,215,142,.44)}
 .btn.danger{color:#ffe0dc;border-color:rgba(225,125,115,.28);background:rgba(225,125,115,.08)}
 .btn:active,.chip:active{transform:scale(.98)}
-.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(16,18,13,.94),rgba(7,8,6,.96));box-shadow:var(--shadow);padding:15px}
+.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(16,18,13,.94),rgba(7,8,6,.96));box-shadow:var(--shadow);padding:15px;overflow:hidden}
 .login{max-width:420px;margin:42px auto 20px;text-align:center}
 .login-logo{width:74px;height:74px;border-radius:20px;margin:0 auto 14px;display:block;box-shadow:0 16px 42px rgba(0,0,0,.34)}
 .login h2{margin:0 0 6px;font-family:var(--serif);font-size:28px;color:var(--gold)}
@@ -51,20 +53,20 @@ button{cursor:pointer}
 .login button{width:100%;justify-content:center}
 .hint{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:14px;color:var(--soft);font-size:11px;line-height:1.55;text-align:left;background:rgba(239,215,142,.035)}
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--green);margin-right:6px;vertical-align:middle;box-shadow:0 0 18px rgba(110,211,154,.72)}
-.admin-cover{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:
+.admin-cover{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:
   linear-gradient(135deg,rgba(5,7,5,.98),rgba(18,19,13,.96) 54%,rgba(8,10,7,.98)),
   radial-gradient(circle at 78% 12%,rgba(239,215,142,.18),transparent 34%);
-  box-shadow:var(--shadow);min-height:315px;margin-bottom:12px;padding:20px;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px;align-items:center}
+  box-shadow:var(--shadow);margin-bottom:12px;padding:16px;display:grid;grid-template-columns:78px minmax(0,1fr);gap:14px;align-items:start}
 .admin-cover:before{content:"";position:absolute;inset:13px;border:1px solid rgba(239,215,142,.12);border-radius:18px;pointer-events:none}
 .admin-cover-text{position:relative;z-index:1;max-width:650px}
 .admin-kicker{color:var(--green);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
-.admin-cover h2{font-family:var(--serif);font-size:clamp(34px,6vw,64px);line-height:.96;margin:0;color:#fff4cc}
-.admin-cover p{color:var(--soft);font-size:13px;line-height:1.6;margin:14px 0 0;max-width:560px}
-.admin-seal{position:relative;z-index:1;justify-self:center;width:min(240px,52vw);aspect-ratio:1;border-radius:50%;padding:10px;background:linear-gradient(145deg,rgba(239,215,142,.26),rgba(5,7,5,.72));box-shadow:0 28px 80px rgba(0,0,0,.42),0 0 0 1px rgba(239,215,142,.18)}
+.admin-cover h2{font-family:var(--serif);font-size:clamp(30px,5vw,42px);line-height:1;margin:0;color:#fff4cc}
+.admin-cover p{color:var(--soft);font-size:12.5px;line-height:1.55;margin:12px 0 0;max-width:560px}
+.admin-seal{position:relative;z-index:1;justify-self:center;width:72px;aspect-ratio:1;border-radius:50%;padding:4px;background:linear-gradient(145deg,rgba(239,215,142,.22),rgba(5,7,5,.72));box-shadow:0 12px 28px rgba(0,0,0,.34),0 0 0 1px rgba(239,215,142,.18)}
 .admin-seal img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-.cover-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.cover-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .folder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
-.folder-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(19,21,15,.94),rgba(8,9,7,.94));padding:15px;color:var(--ink);text-align:left;min-height:150px;box-shadow:0 14px 36px rgba(0,0,0,.24)}
+.folder-card{border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(19,21,15,.94),rgba(8,9,7,.94));padding:14px;color:var(--ink);text-align:left;min-height:126px;box-shadow:0 14px 36px rgba(0,0,0,.24)}
 .folder-card:hover{border-color:rgba(239,215,142,.48)}
 .folder-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;border:1px solid rgba(239,215,142,.2);background:rgba(239,215,142,.08);font-size:22px;margin-bottom:12px}
 .folder-card h3{font-family:var(--serif);font-size:22px;line-height:1.05;color:var(--gold);margin:0 0 7px}
@@ -115,8 +117,8 @@ button{cursor:pointer}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#11150f;color:#fff4cf;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.admin-cover,.hero,.split,.upload-grid{grid-template-columns:1fr}.admin-seal{order:-1}.folder-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.panel{padding:11px;border-radius:16px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid,.quick-grid{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
+@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.folder-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{grid-template-columns:58px minmax(0,1fr);gap:11px;padding:13px}.admin-seal{width:56px}.admin-kicker{font-size:9.5px;letter-spacing:.12em;margin-bottom:8px}.admin-cover h2{font-size:31px}.admin-cover p{font-size:12px;line-height:1.48}.cover-actions .btn,.cover-actions .signal{min-height:34px;font-size:11px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid,.quick-grid{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
 </style>
 </head>
 <body>
@@ -130,6 +132,7 @@ button{cursor:pointer}
       </div>
     </div>
     <div class="toolbar">
+      <button class="btn back-btn" id="adminBackBtn" type="button">← Zurück</button>
       <button class="btn primary" id="refreshBtn" type="button">Aktualisieren</button>
       <button class="btn danger" id="logoutBtn" type="button">Abmelden</button>
     </div>
@@ -150,7 +153,7 @@ const GITHUB_TOKEN_KEY="darAdminGithubTokenV1";
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
-let refreshTimer=null,authed=false,lastData=null,currentTab="start",query="",typeFilter="all",sortMode="score";
+let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score";
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -291,8 +294,29 @@ function renderShell(){
     ${body}
     <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
   bindUi();
+  updateAdminBackButton();
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
+function navigateAdmin(tab,{skipStack=false}={}){
+  if(!tab||tab===currentTab)return;
+  if(!skipStack)adminNavStack.push(currentTab);
+  currentTab=tab;
+  renderShell();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function adminBack(){
+  const prev=adminNavStack.pop();
+  if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="start"}else{return}
+  renderShell();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function updateAdminBackButton(){
+  const btn=document.getElementById("adminBackBtn");
+  if(!btn)return;
+  const canGoBack=currentTab!=="start"||adminNavStack.length>0;
+  btn.classList.toggle("show",canGoBack);
+  btn.disabled=!canGoBack;
+}
 function folderCard(icon,title,text,tab,meta){
   return `<button class="folder-card" data-tab="${esc(tab)}" type="button"><span class="folder-icon">${esc(icon)}</span><h3>${esc(title)}</h3><p>${esc(text)}</p><small>${esc(meta||"Öffnen")}</small></button>`;
 }
@@ -421,7 +445,7 @@ function renderActions(rows,installs=installTotals()){
   </section>`;
 }
 function bindUi(){
-  document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>{currentTab=btn.dataset.tab;renderShell()});
+  document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
   const search=document.getElementById("searchInput");if(search)search.oninput=e=>{query=e.target.value;renderShell()};
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
@@ -494,8 +518,25 @@ function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard();
+document.getElementById("adminBackBtn").onclick=()=>adminBack();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)renderDashboard()});
+let adminSwipe=null;
+document.addEventListener("touchstart",e=>{
+  const t=e.touches&&e.touches[0];if(!t)return;
+  const interactive=e.target.closest&&e.target.closest("input,textarea,select,button,a");
+  if(interactive)return;
+  adminSwipe={x:t.clientX,y:t.clientY,t:Date.now()};
+},{passive:true});
+document.addEventListener("touchend",e=>{
+  if(!adminSwipe)return;
+  const t=e.changedTouches&&e.changedTouches[0];if(!t){adminSwipe=null;return}
+  const dx=t.clientX-adminSwipe.x,dy=t.clientY-adminSwipe.y,dt=Date.now()-adminSwipe.t;
+  adminSwipe=null;
+  if(adminNavStack.length||currentTab!=="start"){
+    if(dx>78&&Math.abs(dy)<55&&dt<650)adminBack();
+  }
+},{passive:true});
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{})})}
 authed=readAuth();
 renderApp();
