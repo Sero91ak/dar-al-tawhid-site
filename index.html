@@ -3485,6 +3485,100 @@ html[data-theme="soft"] .share-row-v2 .share-btn.ig{
   border-color:rgba(214,41,118,.28)!important;
   color:#9b2258!important;
 }
+
+/* SANFT ELEGANT MOBILE POLISH: Header, Gebetsstatus und kleine Texte sauber lesbar */
+html[data-theme="soft"] .header-prayer-status{
+  background:linear-gradient(135deg,rgba(255,255,255,.58),rgba(238,217,225,.82))!important;
+  border-color:rgba(116,76,98,.24)!important;
+  color:var(--text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 8px 18px rgba(96,62,78,.08)!important;
+}
+html[data-theme="soft"] .header-prayer-item{border-left-color:rgba(116,76,98,.16)!important}
+html[data-theme="soft"] .header-prayer-item b{
+  color:var(--premium-label)!important;
+  opacity:1!important;
+}
+html[data-theme="soft"] .header-prayer-item span{
+  color:var(--premium-title)!important;
+  opacity:1!important;
+}
+html[data-theme="soft"] .header-prayer-item small{
+  color:var(--muted)!important;
+  opacity:1!important;
+}
+@media(max-width:700px){
+  html[data-theme="soft"] .header{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  html[data-theme="soft"] .brand-main{
+    grid-template-columns:54px minmax(0,1fr)!important;
+    gap:8px!important;
+    overflow:hidden!important;
+  }
+  html[data-theme="soft"] .brand-main .logo{
+    width:54px!important;
+    height:54px!important;
+    flex:0 0 54px!important;
+  }
+  html[data-theme="soft"] .brand-main h1{
+    font-size:clamp(24px,7.1vw,31px)!important;
+    letter-spacing:0!important;
+    line-height:.98!important;
+    transform:scaleX(.82)!important;
+    transform-origin:left center!important;
+    max-width:100%!important;
+    overflow:visible!important;
+  }
+  html[data-theme="soft"] .brand small{
+    font-size:10px!important;
+    letter-spacing:.16em!important;
+    line-height:1.35!important;
+  }
+  html[data-theme="soft"] .isnad-quote{
+    font-size:13px!important;
+    line-height:1.45!important;
+  }
+  html[data-theme="soft"] .isnad-source{
+    font-size:11px!important;
+    line-height:1.42!important;
+  }
+  html[data-theme="soft"] .app-bar{
+    justify-content:flex-start!important;
+  }
+  html[data-theme="soft"] .app-actions{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+  html[data-theme="soft"] .back-btn.show,
+  html[data-theme="soft"] .home-btn.show{
+    display:flex!important;
+    justify-content:center!important;
+    min-height:44px!important;
+    font-size:14px!important;
+    padding:9px 12px!important;
+  }
+  html[data-theme="soft"] .crumb{
+    display:none!important;
+  }
+}
+@media(max-width:390px){
+  html[data-theme="soft"] .brand-main{
+    grid-template-columns:48px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  html[data-theme="soft"] .brand-main .logo{
+    width:48px!important;
+    height:48px!important;
+    flex-basis:48px!important;
+  }
+  html[data-theme="soft"] .brand-main h1{
+    font-size:clamp(23px,7vw,29px)!important;
+    transform:scaleX(.80)!important;
+  }
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
