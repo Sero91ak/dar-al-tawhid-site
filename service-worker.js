@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v101';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v102';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -66,13 +66,23 @@ self.addEventListener('fetch', (event) => {
   // Keine OneSignal-Dateien anfassen.
   if (url.pathname.startsWith('/push/onesignal/')) return;
 
-  // Navigation: online frisch laden, offline gecachte index.html anzeigen.
+  // Navigation: online frisch laden, offline nur echte App-Shell cachen.
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put('/index.html', copy)).catch(() => null);
+          const type = response.headers.get('content-type') || '';
+          if (response.ok && type.includes('text/html')) {
+            const checkCopy = response.clone();
+            const cacheCopy = response.clone();
+            checkCopy.text()
+              .then((html) => {
+                if (html.includes('DAR AL TAWḤID') && html.includes('id="appView"')) {
+                  caches.open(CACHE_VERSION).then((cache) => cache.put('/index.html', cacheCopy)).catch(() => null);
+                }
+              })
+              .catch(() => null);
+          }
           return response;
         })
         .catch(() => caches.match('/index.html'))
