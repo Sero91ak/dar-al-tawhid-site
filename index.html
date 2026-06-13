@@ -3579,6 +3579,62 @@ html[data-theme="soft"] .header-prayer-item small{
     transform:scaleX(.80)!important;
   }
 }
+
+/* SANFT ELEGANT HEADER TUNE: Logo frei, Titel breit bis zum rechten Innenrand */
+@media(max-width:700px){
+  html[data-theme="soft"] .brand-main{
+    grid-template-columns:52px minmax(0,1fr)!important;
+    gap:13px!important;
+    align-items:center!important;
+    padding-right:2px!important;
+    overflow:visible!important;
+  }
+  html[data-theme="soft"] .brand-main .logo{
+    width:52px!important;
+    height:52px!important;
+    flex:0 0 52px!important;
+    filter:drop-shadow(0 8px 16px rgba(96,62,78,.18))!important;
+  }
+  html[data-theme="soft"] .brand-main h1{
+    font-size:clamp(27px,7.55vw,35px)!important;
+    letter-spacing:.002em!important;
+    line-height:.96!important;
+    transform:scaleX(.94)!important;
+    transform-origin:left center!important;
+    white-space:nowrap!important;
+    max-width:100%!important;
+  }
+}
+@media(max-width:430px){
+  html[data-theme="soft"] .brand-main{
+    grid-template-columns:50px minmax(0,1fr)!important;
+    gap:11px!important;
+  }
+  html[data-theme="soft"] .brand-main .logo{
+    width:50px!important;
+    height:50px!important;
+    flex-basis:50px!important;
+  }
+  html[data-theme="soft"] .brand-main h1{
+    font-size:clamp(26px,7.35vw,32px)!important;
+    transform:scaleX(.91)!important;
+  }
+}
+@media(max-width:390px){
+  html[data-theme="soft"] .brand-main{
+    grid-template-columns:46px minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+  html[data-theme="soft"] .brand-main .logo{
+    width:46px!important;
+    height:46px!important;
+    flex-basis:46px!important;
+  }
+  html[data-theme="soft"] .brand-main h1{
+    font-size:clamp(24px,7.15vw,30px)!important;
+    transform:scaleX(.88)!important;
+  }
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
