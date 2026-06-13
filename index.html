@@ -3353,6 +3353,138 @@ html[data-theme="soft"] .top-swim-aura{display:none!important}
   :root{--content-inset:12px}
   .view{padding-left:var(--content-inset)!important;padding-right:var(--content-inset)!important}
 }
+
+/* SANFT ELEGANT FINAL: spät geladene dunkle Spezialflächen lesbar überschreiben */
+html[data-theme="soft"] .current-focus-row{
+  background:linear-gradient(135deg,rgba(255,255,255,.54),rgba(237,215,223,.78))!important;
+  border-color:rgba(116,76,98,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 8px 22px rgba(96,62,78,.08)!important;
+}
+html[data-theme="soft"] .current-focus-icon{
+  background:rgba(255,255,255,.46)!important;
+  border-color:rgba(116,76,98,.22)!important;
+  color:var(--gold2)!important;
+}
+html[data-theme="soft"] .current-focus-text b,
+html[data-theme="soft"] .current-focus-arrow{color:var(--premium-title)!important}
+html[data-theme="soft"] .current-focus-text p{color:var(--premium-body)!important}
+html[data-theme="soft"] .current-focus-text small{color:var(--premium-label)!important}
+
+html[data-theme="soft"] .qibla-pro-section,
+html[data-theme="soft"] .prayer-panel,
+html[data-theme="soft"] .qibla-panel{
+  background:linear-gradient(145deg,rgba(255,255,255,.50),rgba(246,230,234,.72))!important;
+  border-color:rgba(116,76,98,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.70),0 10px 24px rgba(96,62,78,.08)!important;
+  color:var(--text)!important;
+}
+html[data-theme="soft"] .qibla-compass-face,
+html[data-theme="soft"] .qibla-compass{
+  background:radial-gradient(circle at center,rgba(255,253,249,.94),rgba(236,215,223,.72))!important;
+  border-color:rgba(116,76,98,.32)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 12px 26px rgba(96,62,78,.10)!important;
+}
+html[data-theme="soft"] .qibla-compass-dial:before{
+  border-color:rgba(116,76,98,.22)!important;
+}
+html[data-theme="soft"] .qibla-compass-dial:after,
+html[data-theme="soft"] .qibla-rose:before{
+  background:repeating-conic-gradient(from -0.6deg,rgba(116,76,98,.40) 0deg 1.2deg,transparent 1.2deg 30deg)!important;
+}
+html[data-theme="soft"] .qibla-cardinal,
+html[data-theme="soft"] .qibla-cardinal small,
+html[data-theme="soft"] .qibla-pro-sub,
+html[data-theme="soft"] .qibla-instruction,
+html[data-theme="soft"] .qibla-bearing-readout small{color:var(--muted)!important}
+html[data-theme="soft"] .qibla-n,
+html[data-theme="soft"] .qibla-pro-title,
+html[data-theme="soft"] .qibla-bearing-readout{color:var(--gold2)!important}
+html[data-theme="soft"] .qibla-data-item,
+html[data-theme="soft"] .qibla-status{
+  background:rgba(255,255,255,.48)!important;
+  border-color:rgba(116,76,98,.20)!important;
+  color:var(--text)!important;
+}
+html[data-theme="soft"] .qibla-data-item b{color:var(--premium-label)!important}
+html[data-theme="soft"] .qibla-data-item span,
+html[data-theme="soft"] .qibla-instruction strong,
+html[data-theme="soft"] .qibla-no-location strong{color:var(--premium-title)!important}
+html[data-theme="soft"] .qibla-btn-start{
+  background:var(--premium-pill-bg)!important;
+  border-color:var(--premium-pill-border)!important;
+  color:var(--premium-pill-text)!important;
+}
+
+html[data-theme="soft"] .status-check-box,
+html[data-theme="soft"] .share-panel,
+html[data-theme="soft"] .share-panel-v2,
+html[data-theme="soft"] .share-panel-v9,
+html[data-theme="soft"] .share-panel-v11{
+  background:linear-gradient(145deg,rgba(255,255,255,.52),rgba(246,230,234,.74))!important;
+  border-color:rgba(116,76,98,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.70),0 10px 24px rgba(96,62,78,.08)!important;
+  color:var(--text)!important;
+}
+html[data-theme="soft"] .status-chip{
+  background:rgba(255,255,255,.55)!important;
+  border-color:rgba(116,76,98,.20)!important;
+  color:var(--premium-title)!important;
+}
+html[data-theme="soft"] .status-chip.ok{
+  background:rgba(231,244,229,.72)!important;
+  border-color:rgba(78,132,84,.28)!important;
+  color:#284b2e!important;
+}
+html[data-theme="soft"] .status-chip.warn,
+html[data-theme="soft"] .status-chip.miss{
+  background:rgba(255,248,238,.78)!important;
+  border-color:rgba(150,104,60,.26)!important;
+  color:#6a4828!important;
+}
+html[data-theme="soft"] .share-panel-title{color:var(--premium-label)!important}
+html[data-theme="soft"] .share-help{color:var(--muted)!important}
+html[data-theme="soft"] .share-btn,
+html[data-theme="soft"] .share-row-v11 .share-btn,
+html[data-theme="soft"] .share-row-v9 .share-btn,
+html[data-theme="soft"] .share-row-v2 .share-btn{
+  background:var(--premium-pill-bg)!important;
+  border-color:var(--premium-pill-border)!important;
+  color:var(--premium-pill-text)!important;
+}
+html[data-theme="soft"] .share-btn.native,
+html[data-theme="soft"] .share-btn.link,
+html[data-theme="soft"] .share-row-v11 .share-btn.native,
+html[data-theme="soft"] .share-row-v11 .share-btn.link,
+html[data-theme="soft"] .share-row-v9 .share-btn.native,
+html[data-theme="soft"] .share-row-v9 .share-btn.link,
+html[data-theme="soft"] .share-row-v2 .share-btn.native,
+html[data-theme="soft"] .share-row-v2 .share-btn.link{
+  background:linear-gradient(145deg,rgba(255,251,247,.98),rgba(238,217,225,.86))!important;
+}
+html[data-theme="soft"] .share-btn.tg,
+html[data-theme="soft"] .share-row-v11 .share-btn.tg,
+html[data-theme="soft"] .share-row-v9 .share-btn.tg,
+html[data-theme="soft"] .share-row-v2 .share-btn.tg{
+  background:linear-gradient(145deg,rgba(42,171,238,.14),rgba(255,251,247,.94))!important;
+  border-color:rgba(42,171,238,.34)!important;
+  color:#1565a8!important;
+}
+html[data-theme="soft"] .share-btn.wa,
+html[data-theme="soft"] .share-row-v11 .share-btn.wa,
+html[data-theme="soft"] .share-row-v9 .share-btn.wa,
+html[data-theme="soft"] .share-row-v2 .share-btn.wa{
+  background:linear-gradient(145deg,rgba(37,211,102,.14),rgba(255,251,247,.94))!important;
+  border-color:rgba(37,211,102,.32)!important;
+  color:#1a7340!important;
+}
+html[data-theme="soft"] .share-btn.ig,
+html[data-theme="soft"] .share-row-v11 .share-btn.ig,
+html[data-theme="soft"] .share-row-v9 .share-btn.ig,
+html[data-theme="soft"] .share-row-v2 .share-btn.ig{
+  background:linear-gradient(145deg,rgba(214,41,118,.12),rgba(255,251,247,.94))!important;
+  border-color:rgba(214,41,118,.28)!important;
+  color:#9b2258!important;
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
