@@ -150,7 +150,6 @@ a{color:inherit}button,input,select{font:inherit}
 .app{width:min(1180px,100%);margin:0 auto;position:relative;z-index:1}
 .top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5,.92)),radial-gradient(circle at 20% 0%,rgba(239,215,142,.12),transparent 45%);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
 .top-shell:before{content:"";position:absolute;inset:0;background:var(--theme-deck-aura);opacity:.9;pointer-events:none}
-.top-shell:after{content:attr(data-theme-label);position:absolute;right:22px;top:18px;color:var(--muted2);font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;opacity:.42;pointer-events:none}
 .header{padding:22px 24px 18px}
 .header{position:relative;z-index:1}
 .header-row{display:grid;grid-template-columns:minmax(0,1fr) 168px;align-items:flex-start;gap:18px}
@@ -3964,7 +3963,7 @@ window.DAR_ANALYTICS_CONFIG={
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
 <div class="top-swim-aura" id="topSwimAura" aria-hidden="true"></div>
 <div class="app">
-  <section class="top-shell" data-theme-label="Klassisch Dunkel">
+  <section class="top-shell">
     <header class="header">
       <div class="header-row">
         <div class="brand">
@@ -4037,7 +4036,7 @@ const THEME_SETTINGS_KEY="darThemeSettingsV1";
 const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f4e8cc",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#efe2dc",status:"default",asset:"soft"}};
 function normalizeTheme(theme){return theme==="light"||theme==="soft"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
-function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;document.documentElement.setAttribute("data-theme",next);document.documentElement.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const shell=document.querySelector(".top-shell");if(shell)shell.setAttribute("data-theme-label",info.label);const logo=document.querySelector(".logo");if(logo)logo.title=`DAR AL TAWḤID · ${info.label}`;document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}}
+function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;document.documentElement.setAttribute("data-theme",next);document.documentElement.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo)logo.title="DAR AL TAWḤID";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}}
 function initTheme(){applyTheme(getTheme())}
 function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{applyTheme(btn.getAttribute("data-theme-select"))}})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
