@@ -13,10 +13,37 @@ const {
 const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
 const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || 20);
 const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 5);
+const ONESIGNAL_AUTH_KEY = String(API_KEY || "")
+  .replace(/\s+/g, "")
+  .replace(/^(Key|Basic)/i, "")
+  .trim();
 
 if (!API_KEY) {
   console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
   process.exit(1);
+}
+
+async function fetchOneSignalJson(url, options = {}) {
+  let last = null;
+
+  for (const authMode of ["Key", "Basic"]) {
+    const res = await fetch(url, {
+      ...options,
+      headers: {
+        ...(options.headers || {}),
+        Authorization: `${authMode} ${ONESIGNAL_AUTH_KEY}`
+      }
+    });
+    const text = await res.text();
+
+    if (res.ok) {
+      return text ? JSON.parse(text) : {};
+    }
+
+    last = new Error(`OneSignal ${res.status} (${authMode}): ${text}`);
+  }
+
+  throw last || new Error("OneSignal API request failed");
 }
 
 function toRad(d) {
@@ -261,19 +288,7 @@ async function fetchLegacyPlayers() {
     const url =
       `https://onesignal.com/api/v1/players?app_id=${encodeURIComponent(APP_ID)}&limit=${limit}&offset=${offset}`;
 
-    const res = await fetch(url, {
-      headers: {
-        "Authorization": `Basic ${API_KEY}`
-      }
-    });
-
-    const text = await res.text();
-
-    if (!res.ok) {
-      throw new Error(`OneSignal Subscriptions Fehler ${res.status}: ${text}`);
-    }
-
-    const data = JSON.parse(text);
+    const data = await fetchOneSignalJson(url);
     const players = Array.isArray(data.players) ? data.players : [];
 
     all.push(...players);
@@ -286,24 +301,60 @@ async function fetchLegacyPlayers() {
   return all;
 }
 
-async function fetchUserByAlias(aliasLabel, aliasId) {
-  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
+function normalizeUserRecord(user) {
+  const subscriptions = extractWebPushSubscriptionIds(user);
+  const tags = extractUserTags(user);
+  const externalId =
+    user?.identity?.external_id ||
+    user?.aliases?.external_id ||
+    user?.external_id ||
+    null;
 
-  async function tryAuth(authHeader) {
-    const res = await fetch(url, {
-      headers: { Authorization: authHeader }
-    });
-    if (!res.ok) return { user: null, status: res.status, text: await res.text() };
-    return { user: JSON.parse(await res.text()), status: res.status, text: "" };
+  return {
+    id: subscriptions[0] || user?.id || user?.onesignal_id || externalId,
+    external_user_id: externalId,
+    invalid_identifier: false,
+    notification_types: 1,
+    tags,
+    subscriptionIds: subscriptions
+  };
+}
+
+async function fetchAppUsers() {
+  const all = [];
+  let offset = 0;
+  const limit = 300;
+
+  while (true) {
+    const url =
+      `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users?limit=${limit}&offset=${offset}`;
+
+    const data = await fetchOneSignalJson(url);
+    const users = Array.isArray(data.users)
+      ? data.users
+      : Array.isArray(data.items)
+        ? data.items
+        : Array.isArray(data)
+          ? data
+          : [];
+
+    all.push(...users.map(normalizeUserRecord));
+
+    if (users.length < limit) break;
+
+    offset += limit;
   }
 
-  const keyResult = await tryAuth(`Key ${API_KEY}`);
-  if (keyResult.user) return keyResult.user;
+  return all;
+}
 
-  const basicResult = await tryAuth(`Basic ${API_KEY}`);
-  if (basicResult.user) return basicResult.user;
-
-  return null;
+async function fetchUserByAlias(aliasLabel, aliasId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
+  try {
+    return await fetchOneSignalJson(url);
+  } catch (err) {
+    return null;
+  }
 }
 
 async function fetchUserByExternalId(externalId) {
@@ -312,22 +363,27 @@ async function fetchUserByExternalId(externalId) {
 
 async function fetchUserBySubscriptionId(subscriptionId) {
   const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/subscriptions/${encodeURIComponent(subscriptionId)}/user`;
-
-  async function tryAuth(authHeader) {
-    const res = await fetch(url, {
-      headers: { Authorization: authHeader }
-    });
-    if (!res.ok) return null;
-    return JSON.parse(await res.text());
+  try {
+    return await fetchOneSignalJson(url);
+  } catch (err) {
+    return null;
   }
-
-  return (await tryAuth(`Key ${API_KEY}`)) || (await tryAuth(`Basic ${API_KEY}`));
 }
 
 function extractUserTags(user) {
   if (!user) return {};
-  const tags = user?.properties?.tags;
-  return tags && typeof tags === "object" ? { ...tags } : {};
+  const candidates = [
+    user?.properties?.tags,
+    user?.tags,
+    user?.properties?.custom_tags,
+    user?.custom_tags
+  ];
+
+  for (const tags of candidates) {
+    if (tags && typeof tags === "object") return { ...tags };
+  }
+
+  return {};
 }
 
 function extractWebPushSubscriptionIds(user) {
@@ -367,13 +423,32 @@ async function resolvePlayerTags(player) {
 }
 
 async function fetchSubscriptions() {
-  const players = await fetchLegacyPlayers();
+  let players = [];
+  let source = "users";
+
+  try {
+    players = await fetchAppUsers();
+  } catch (err) {
+    console.warn(`Neue OneSignal-User-Liste nicht lesbar, Legacy-Fallback: ${err.message || err}`);
+    source = "legacy";
+    players = await fetchLegacyPlayers();
+  }
+
   const enriched = [];
   let userFetchMisses = 0;
   let taggedUsers = 0;
 
   for (const player of players) {
-    const resolved = await resolvePlayerTags(player);
+    const resolved = source === "users"
+      ? {
+          tags: player.tags || {},
+          subscriptionIds: player.subscriptionIds && player.subscriptionIds.length
+            ? player.subscriptionIds
+            : [player.id].filter(Boolean),
+          externalId: player.external_user_id || player.external_id
+        }
+      : await resolvePlayerTags(player);
+
     if (resolved.tags.prayer_notifications === "true" && resolved.tags.prayer_lat) {
       taggedUsers += 1;
     } else if (resolved.externalId || player.id) {
@@ -387,6 +462,7 @@ async function fetchSubscriptions() {
     });
   }
 
+  console.log(`OneSignal-Quelle: ${source}`);
   console.log(`Tag-Auflösung: ${taggedUsers} mit Gebets-Tags, ${userFetchMisses} ohne Tags trotz Subscription`);
 
   return enriched;
