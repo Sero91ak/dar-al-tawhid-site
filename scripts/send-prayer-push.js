@@ -13,6 +13,8 @@ const {
 const DEFAULT_PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
 const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || (26 * 60));
 const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 15);
+const SUPABASE_URL = String(process.env.SUPABASE_URL || "https://djyfkttjbdraynuxrzno.supabase.co").replace(/\/$/, "");
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const ONESIGNAL_AUTH_KEY = String(API_KEY || "")
   .replace(/\s+/g, "")
   .replace(/^(Key|Basic)/i, "")
@@ -566,6 +568,64 @@ function groupUsers(users) {
   return Array.from(map.values());
 }
 
+async function fetchSupabasePrayerRegistrations() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.log("Supabase-Registrierungen: nicht konfiguriert");
+    return [];
+  }
+
+  const url =
+    `${SUPABASE_URL}/rest/v1/prayer_push_registrations?enabled=eq.true&select=device_id,subscription_id,lat,lon,timezone,method_angle,asr_factor,advance_minutes,tahajjud_mode,city,last_synced_at`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+
+    const text = await res.text();
+
+    if (!res.ok) {
+      console.warn(`Supabase-Registrierungen nicht lesbar (${res.status}): ${text.slice(0, 240)}`);
+      return [];
+    }
+
+    const rows = text ? JSON.parse(text) : [];
+
+    if (!Array.isArray(rows)) return [];
+
+    const registrations = rows
+      .filter((row) => row.subscription_id && Number.isFinite(Number(row.lat)) && Number.isFinite(Number(row.lon)))
+      .map((row) => ({
+        id: row.subscription_id,
+        external_user_id: row.device_id,
+        invalid_identifier: false,
+        notification_types: 1,
+        subscriptionIds: [row.subscription_id],
+        tags: {
+          prayer_notifications: "true",
+          prayer_lat: String(row.lat),
+          prayer_lon: String(row.lon),
+          prayer_timezone: String(row.timezone || "Europe/Berlin"),
+          prayer_method: String(row.method_angle || 12),
+          prayer_asr_factor: String(row.asr_factor || 1),
+          prayer_advance_minutes: String(row.advance_minutes || DEFAULT_PRAYER_ADVANCE_MINUTES),
+          prayer_tahajjud_mode: String(row.tahajjud_mode || "off")
+        },
+        source: "supabase",
+        last_synced_at: row.last_synced_at || null
+      }));
+
+    console.log(`Supabase-Registrierungen: ${registrations.length} aktiv`);
+    return registrations;
+  } catch (err) {
+    console.warn(`Supabase-Registrierungen Fehler: ${err.message || err}`);
+    return [];
+  }
+}
+
 const PRAYER_NOTIFICATION_MESSAGES = {
   default: [
     "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
@@ -724,11 +784,13 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
   console.log("Lese OneSignal-Subscriptions mit Gebetszeiten-Tags...");
   console.log(`Planungsfenster: ${windowStart.toISOString()} bis ${windowEnd.toISOString()}`);
 
-  const players = await fetchSubscriptions();
+  const oneSignalPlayers = await fetchSubscriptions();
+  const supabaseRegistrations = await fetchSupabasePrayerRegistrations();
+  const players = [...oneSignalPlayers, ...supabaseRegistrations];
   const users = getPrayerUsers(players);
   const groups = groupUsers(users);
 
-  console.log(`Subscriptions gesamt: ${players.length}`);
+  console.log(`Subscriptions gesamt: ${players.length} (${oneSignalPlayers.length} OneSignal, ${supabaseRegistrations.length} Supabase)`);
   console.log(`Gebetszeiten-Nutzer mit Standort: ${users.length}`);
   console.log(`Standort-Gruppen: ${groups.length}`);
 
