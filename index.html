@@ -49,17 +49,18 @@
 .premium-surface{border:1px solid var(--premium-border)!important;background:var(--premium-bg)!important;box-shadow:var(--premium-shadow)!important}
 .premium-pill{border:1px solid var(--premium-pill-border)!important;background:var(--premium-pill-bg)!important;color:var(--premium-pill-text)!important;border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.14)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .theme-switch-panel{padding:14px 15px;margin:0 0 13px;border-radius:22px}
-.account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px}
+.account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px;overflow:hidden;max-width:100%}
+.account-panel *{box-sizing:border-box;min-width:0}
 .account-panel h3{font-family:var(--serif);color:var(--gold2);font-size:26px;line-height:1.05;margin:0}
 .account-panel p{color:var(--muted);font-size:13px;line-height:1.55;margin:0}
-.account-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.account-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .account-form input{width:100%;min-height:48px;border:1px solid var(--line2);border-radius:16px;background:rgba(255,255,255,.035);color:var(--cream);padding:11px 13px;font:900 14px var(--sans);outline:none}
 .account-form input::placeholder{color:var(--muted)}
 .account-actions{display:flex;flex-wrap:wrap;gap:9px}
-.account-actions button{border:1px solid var(--line);border-radius:999px;background:rgba(239,215,142,.075);color:var(--cream);min-height:43px;padding:10px 14px;font-size:12px;font-weight:950;cursor:pointer}
+.account-actions button{flex:1 1 160px;max-width:100%;border:1px solid var(--line);border-radius:999px;background:rgba(239,215,142,.075);color:var(--cream);min-height:43px;padding:10px 14px;font-size:12px;font-weight:950;cursor:pointer;white-space:normal}
 .account-actions button.primary{background:linear-gradient(180deg,rgba(239,215,142,.22),rgba(155,122,60,.10));border-color:rgba(239,215,142,.42)}
 .account-actions button.danger{border-color:rgba(255,160,140,.35);background:rgba(120,48,35,.16)}
-.account-status{border:1px dashed var(--line2);border-radius:16px;padding:11px 12px;color:var(--muted);font-size:12.5px;line-height:1.45}
+.account-status{border:1px dashed var(--line2);border-radius:16px;padding:11px 12px;color:var(--muted);font-size:12.5px;line-height:1.45;overflow-wrap:anywhere}
 .account-status.ok{border-color:rgba(105,190,115,.42);color:#dff4d4}
 .account-status.warn{border-color:rgba(239,215,142,.38);color:var(--gold2)}
 .account-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
@@ -4152,7 +4153,8 @@ function validatePin(value){const p=String(value||"").trim();if(!/^[0-9]{4,8}$/.
 function accountSession(){try{const s=JSON.parse(localStorage.getItem(ACCOUNT_SESSION_KEY)||"null");return s&&s.id&&s.username?s:null}catch(e){return null}}
 function setAccountSession(s){try{s?localStorage.setItem(ACCOUNT_SESSION_KEY,JSON.stringify({id:s.id,username:s.username,ts:Date.now()})):localStorage.removeItem(ACCOUNT_SESSION_KEY)}catch(e){}}
 function supabaseBaseUrl(){return String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"")}
-async function supabaseRest(path,{method="GET",body=null,prefer=""}={}){if(!hasSupabaseCfg())throw new Error("Supabase ist noch nicht konfiguriert.");const headers={...supabaseHeaders()};if(body!=null)headers["Content-Type"]="application/json";if(prefer)headers.Prefer=prefer;const res=await fetch(`${supabaseBaseUrl()}/rest/v1/${String(path).replace(/^\/+/,"")}`,{method,headers,body:body==null?null:JSON.stringify(body)});if(!res.ok){const text=await res.text().catch(()=>"");throw new Error(`Cloud-Sync nicht bereit (${res.status}). ${text.slice(0,140)}`.trim())}if(res.status===204)return null;const text=await res.text();return text?JSON.parse(text):null}
+async function supabaseRest(path,{method="GET",body=null,prefer=""}={}){if(!hasSupabaseCfg())throw new Error("Supabase ist noch nicht konfiguriert.");const headers={...supabaseHeaders()};if(body!=null)headers["Content-Type"]="application/json";if(prefer)headers.Prefer=prefer;const res=await fetch(`${supabaseBaseUrl()}/rest/v1/${String(path).replace(/^\/+/,"")}`,{method,headers,body:body==null?null:JSON.stringify(body)});if(!res.ok){const text=await res.text().catch(()=>"");throw new Error(formatSupabaseAccountError(res.status,text))}if(res.status===204)return null;const text=await res.text();return text?JSON.parse(text):null}
+function formatSupabaseAccountError(status,text){let msg="";try{msg=JSON.parse(text||"{}").message||""}catch(e){msg=String(text||"")}if(status===404&&/user_profiles|user_saved_items|schema cache|Could not find the table/i.test(msg)){return"Cloud-Sync noch nicht bereit: Die Konto-Tabellen sind in Supabase noch nicht sichtbar. Bitte SQL im richtigen Projekt ausführen oder 1 Minute warten und erneut testen."}if(status===401||status===403)return"Cloud-Sync blockiert: Bitte Supabase-Regeln/Anon-Key prüfen.";return`Cloud-Sync nicht bereit (${status}). Bitte später erneut testen.`}
 function randomHex(bytes=16){const arr=new Uint8Array(bytes);crypto.getRandomValues(arr);return Array.from(arr,b=>b.toString(16).padStart(2,"0")).join("")}
 async function sha256Hex(value){if(!crypto.subtle)throw new Error("Dieses Gerät unterstützt die sichere PIN-Prüfung nicht.");const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(String(value)));return Array.from(new Uint8Array(buf),b=>b.toString(16).padStart(2,"0")).join("")}
 async function accountPinHash(username,pin,salt){return sha256Hex(`${username}:${pin}:${salt}:dar-al-tawhid-v1`)}
