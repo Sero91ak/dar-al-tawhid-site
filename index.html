@@ -508,6 +508,15 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .home-folder-section{margin-top:4px}
 .quran-meta-note{color:var(--muted);font-size:11px;line-height:1.55;margin:0 0 12px;padding:0 2px}
 .quran-surah-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.quran-search-results{display:grid;gap:9px}
+.quran-result-card{border:1px solid var(--line2);border-radius:17px;background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.08),transparent 38%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));padding:12px 13px;cursor:pointer;text-align:left;transition:transform .15s ease,border-color .15s ease}
+.quran-result-card:hover{transform:translateY(-1px);border-color:rgba(239,215,142,.50)}
+.quran-result-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+.quran-result-top h3{margin:0;color:var(--gold2);font-family:var(--serif);font-size:18px;line-height:1.12}
+.quran-result-top span{border:1px solid var(--line2);border-radius:999px;background:rgba(239,215,142,.08);color:var(--cream);font-size:10px;font-weight:950;padding:5px 8px;white-space:nowrap}
+.quran-result-de{color:var(--cream);font-size:13.5px;line-height:1.58}
+.quran-result-tr{color:var(--muted);font-size:11.5px;line-height:1.5;margin-top:7px}
+.quran-result-card mark.search-hit{border-radius:5px;padding:0 .14em;background:rgba(239,215,142,.28);color:#fff6dc}
 .quran-surah-card{border:1px solid var(--line2);border-radius:16px;background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.08),transparent 38%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));padding:11px 12px;cursor:pointer;text-align:left;min-height:74px}
 .quran-surah-card:hover{border-color:rgba(239,215,142,.48);transform:translateY(-1px)}
 .quran-surah-card .quran-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:10px;background:rgba(239,215,142,.12);border:1px solid rgba(239,215,142,.22);color:var(--gold2);font-size:12px;font-weight:950;margin-bottom:7px}
@@ -2807,6 +2816,7 @@ html[data-theme="light"] .source-row,
 html[data-theme="light"] .source-row b{color:var(--text)!important}
 html[data-theme="light"] .source-note{color:var(--muted)!important}
 html[data-theme="light"] .quran-surah-card,
+html[data-theme="light"] .quran-result-card,
 html[data-theme="light"] .quran-ayah,
 html[data-theme="light"] .quran-jump-bar,
 html[data-theme="light"] .quran-tafsir-bar,
@@ -2818,6 +2828,7 @@ html[data-theme="light"] .quran-athar-card{
   color:var(--text)!important;
 }
 html[data-theme="light"] .quran-surah-card h3,
+html[data-theme="light"] .quran-result-top h3,
 html[data-theme="light"] .quran-athar-card h4,
 html[data-theme="light"] .quran-term-card b{color:var(--gold2)!important}
 html[data-theme="light"] .quran-surah-card .quran-ar-name,
@@ -2830,9 +2841,11 @@ html[data-theme="light"] .quran-surah-head-ar,
 html[data-theme="light"] .quran-ayah-ar{color:#1a1612!important}
 html[data-theme="light"] .quran-ayah-tr{color:#6b4e28!important;font-weight:650!important}
 html[data-theme="light"] .quran-ayah-de,
+html[data-theme="light"] .quran-result-de,
 html[data-theme="light"] .quran-tafsir-panel,
 html[data-theme="light"] .quran-term-card span,
 html[data-theme="light"] .quran-athar-text{color:var(--text)!important}
+html[data-theme="light"] .quran-result-tr{color:var(--muted)!important}
 html[data-theme="light"] .quran-surah-head-meta,
 html[data-theme="light"] .quran-meta-note,
 html[data-theme="light"] .quran-tafsir-note,
@@ -3292,6 +3305,7 @@ html[data-theme="soft"] .quran-surah-card h3,
 html[data-theme="soft"] .quran-athar-card h4,
 html[data-theme="soft"] .quran-term-card b{color:var(--gold2)!important}
 html[data-theme="soft"] .quran-surah-card,
+html[data-theme="soft"] .quran-result-card,
 html[data-theme="soft"] .quran-ayah,
 html[data-theme="soft"] .quran-jump-bar,
 html[data-theme="soft"] .quran-tafsir-bar,
@@ -3312,6 +3326,7 @@ html[data-theme="soft"] .quran-athar-badge,
 html[data-theme="soft"] .quran-tr-label,
 html[data-theme="soft"] .quran-ayah-tr-label{color:var(--bronze)!important}
 html[data-theme="soft"] .quran-surah-card .quran-num,
+html[data-theme="soft"] .quran-result-top span,
 html[data-theme="soft"] .badge,
 html[data-theme="soft"] .folder-meta span,
 html[data-theme="soft"] .status-chip,
@@ -3325,6 +3340,47 @@ html[data-theme="soft"] mark.search-hit{
   background:rgba(229,202,214,.70)!important;
   color:var(--gold2)!important;
 }
+html[data-theme="soft"] .quran-result-de{color:var(--text)!important}
+html[data-theme="soft"] .quran-result-tr{color:var(--muted)!important}
+html[data-theme="soft"] .first-visit-panel,
+html[data-theme="soft"] .hint-banner,
+html[data-theme="soft"] .pwa-banner,
+html[data-theme="soft"] .pwa-modal,
+html[data-theme="soft"] .offline-box,
+html[data-theme="soft"] .app-save-box,
+html[data-theme="soft"] .home-refresh-panel,
+html[data-theme="soft"] .ramadan-panel,
+html[data-theme="soft"] .daily-box,
+html[data-theme="soft"] .recommended-box{
+  background:linear-gradient(145deg,rgba(255,255,255,.52),rgba(246,230,234,.74))!important;
+  border-color:rgba(116,76,98,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.70),0 10px 24px rgba(96,62,78,.08)!important;
+  color:var(--text)!important;
+}
+html[data-theme="soft"] .footer-action-tg,
+html[data-theme="soft"] .footer-action-ig,
+html[data-theme="soft"] .footer-action-save{
+  background:linear-gradient(145deg,rgba(255,251,247,.96),rgba(238,217,225,.84))!important;
+  border-color:var(--premium-pill-border)!important;
+  color:var(--premium-pill-text)!important;
+}
+html[data-theme="soft"] .pwa-modal h3,
+html[data-theme="soft"] .first-visit-panel b,
+html[data-theme="soft"] .hint-banner b,
+html[data-theme="soft"] .pwa-banner b,
+html[data-theme="soft"] .home-refresh-copy b,
+html[data-theme="soft"] .daily-title,
+html[data-theme="soft"] .recommended-title,
+html[data-theme="soft"] .ramadan-panel h3,
+html[data-theme="soft"] .quran-result-top h3{color:var(--gold2)!important}
+html[data-theme="soft"] .pwa-modal p,
+html[data-theme="soft"] .first-visit-panel p,
+html[data-theme="soft"] .hint-banner p,
+html[data-theme="soft"] .pwa-banner p,
+html[data-theme="soft"] .home-refresh-copy p,
+html[data-theme="soft"] .daily-text,
+html[data-theme="soft"] .recommended-text,
+html[data-theme="soft"] .ramadan-note{color:var(--muted)!important}
 html[data-theme="soft"] .footer{color:var(--muted)!important;border-top:1px solid var(--line2)!important}
 html[data-theme="soft"] .bottom-nav{
   background:rgba(255,248,242,.92)!important;
@@ -3877,7 +3933,7 @@ function quranVerseTr(v,mode){mode=mode||getQuranTrMode();if(!v)return "";if(mod
 function renderQuranTransliterationPicker(){const mode=getQuranTrMode();const buttons=Object.entries(QURAN_TR_MODES).map(([key,info])=>`<button type="button" class="quran-tr-btn${mode===key?" active":""}" data-quran-tr="${key}"><span>${esc(info.label)}</span><small>${esc(info.short)}</small></button>`).join("");return `<section class="quran-tr-bar"><div class="quran-tr-label">Lautschrift wählen</div><div class="quran-tr-row">${buttons}</div><p class="quran-tr-note" id="quranTrModeNote">${esc(QURAN_TR_MODES[mode]?.hint||"")}</p></section>`}
 function renderQuranAyahTr(v){const mode=getQuranTrMode();const label=QURAN_TR_MODES[mode]?.label||"Lautschrift";const text=quranVerseTr(v,mode);return `<div class="quran-ayah-tr-wrap"><div class="quran-ayah-tr-label">Lautschrift · ${esc(label)}</div><div class="quran-ayah-tr" data-tr-tanzil="${esc(v.tr||"")}" data-tr-readable="${esc(v.tr_readable||v.tr||"")}" data-tr-academic="${esc(v.tr_academic||v.tr||"")}">${esc(text)}</div></div>`}
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{const text=el.getAttribute("data-tr-"+mode)||el.getAttribute("data-tr-tanzil")||"";el.textContent=text});document.querySelectorAll(".quran-ayah-tr-label").forEach(el=>{el.textContent="Lautschrift · "+(QURAN_TR_MODES[mode]?.label||"Lautschrift")});document.querySelectorAll(".quran-tr-btn").forEach(btn=>{btn.classList.toggle("active",btn.getAttribute("data-quran-tr")===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
-function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let postRouteLoadingId="";let appBootHydrated=false;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
+function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
 const THEME_KEY="darThemeV1";
 function normalizeTheme(theme){return theme==="light"||theme==="soft"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
@@ -4072,7 +4128,7 @@ function scrollToQuranAyah(ayah){const el=document.getElementById(`ayah-${ayah}`
 function scrollToPostStatement(){const el=document.getElementById("postReadStart")||document.querySelector("#appView .article-title");if(!el)return false;const offset=14;const top=Math.max(0,el.getBoundingClientRect().top+window.scrollY-offset);window.scrollTo({top,behavior:"auto"});return true}
 function openQuranSurah(surahId,ayah){const id=Number(surahId);if(!Number.isFinite(id)||id<1||id>114)return;const meta=quranSurahMeta(id);const ay=Number(ayah);const value=ay>0&&meta?`${id}/${Math.min(ay,meta.total_verses)}`:String(id);navigate("quran-surah",value)}
 function bindQuranQuickPick(){const goBtn=$("quranQuickGo");const quickSurah=$("quranQuickSurah");const quickAyah=$("quranQuickAyah");const fillQuickAyahs=()=>{if(!quickSurah||!quickAyah)return;const meta=quranSurahMeta(Number(quickSurah.value));quickAyah.innerHTML=meta?quranAyahOptions(meta.total_verses):`<option value="">Ayah</option>`;quickAyah.disabled=!meta};const openQuick=()=>{const sid=Number(quickSurah?.value);if(!sid)return;openQuranSurah(sid,quickAyah?.value)};if(goBtn)goBtn.onclick=openQuick;if(quickSurah){quickSurah.onchange=fillQuickAyahs;fillQuickAyahs()}document.querySelectorAll("[data-quran-surah]").forEach(btn=>{btn.onclick=()=>openQuranSurah(btn.getAttribute("data-quran-surah"))});const jumpBtn=$("quranJumpBtn");const jumpSurah=$("quranJumpSurah");const jumpAyah=$("quranJumpAyah");if(jumpBtn){jumpBtn.onclick=()=>{const sid=Number(jumpSurah?.value)||Number(String(currentRoute.value||"").split("/")[0]);const ay=Number(jumpAyah?.value);if(sid&&sid!==Number(String(currentRoute.value||"").split("/")[0]))openQuranSurah(sid,ay);else if(ay>0)scrollToQuranAyah(ay);else if(sid)openQuranSurah(sid)}}if(jumpSurah){jumpSurah.onchange=()=>{const sid=Number(jumpSurah.value);if(sid)openQuranSurah(sid, jumpAyah?.value)}}if(jumpAyah){jumpAyah.onchange=()=>{const ay=Number(jumpAyah.value);if(ay>0)scrollToQuranAyah(ay)}}}
-function renderQuran(){if(!quranMeta)return `${setHeader("Qurʾān","Der edle Qurʾān wird geladen…","📖 Qurʾān")}<div class="loading">Qurʾān wird geladen…</div>`;const total=quranMeta.surahs.reduce((sum,s)=>sum+(s.total_verses||0),0);return `${setHeader("Qurʾān",`114 Suren · ${total} Ayāt · mit Arabisch, Lautschrift und deutscher Übersetzung.`,"📖 Qurʾān")}${renderQuranTransliterationPicker()}<p class="quran-meta-note">Arabisch (Uthmani) · 3 Lautschrift-Arten wählbar · Deutsch (Bubenheim &amp; Elyas). Tippe eine Sure zum Lesen.</p>${renderQuranQuickPick()}<section class="main-search"><input id="quranSearchInput" class="search" type="search" placeholder="Sure suchen nach Nummer, Name oder Arabisch…"></section><section id="quranSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-surah-grid"></div></section><section class="quran-surah-grid" id="quranSurahGrid">${quranMeta.surahs.map(quranSurahCard).join("")}</section>`}
+function renderQuran(){if(!quranMeta)return `${setHeader("Qurʾān","Der edle Qurʾān wird geladen…","📖 Qurʾān")}<div class="loading">Qurʾān wird geladen…</div>`;const total=quranMeta.surahs.reduce((sum,s)=>sum+(s.total_verses||0),0);return `${setHeader("Qurʾān",`114 Suren · ${total} Ayāt · mit Arabisch, Lautschrift und deutscher Übersetzung.`,"📖 Qurʾān")}${renderQuranTransliterationPicker()}<p class="quran-meta-note">Arabisch (Uthmani) · 3 Lautschrift-Arten wählbar · Deutsch (Bubenheim &amp; Elyas). Suche nach Sūrah, Ayah, Satzteil oder Begriffen wie Īmān, Shirk, Taghut, Kufr, Liebe, Geduld.</p>${renderQuranQuickPick()}<section class="main-search"><input id="quranSearchInput" class="search" type="search" placeholder="Qurʾān durchsuchen: iman, shirk, Liebe, Geduld, Satzteil…"></section><section id="quranSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section><section class="quran-surah-grid" id="quranSurahGrid">${quranMeta.surahs.map(quranSurahCard).join("")}</section>`}
 function quranWakeSupported(){return"wakeLock" in navigator}
 function isQuranSurahRoute(route){return route?.view==="quran-surah"}
 function isQuranWakeActive(){return!!(quranWakeLockRef&&!quranWakeLockRef.released)}
@@ -4084,7 +4140,32 @@ function initQuranWakeLock(){document.addEventListener("visibilitychange",()=>{i
 function renderQuranWakeBtn(){if(!quranWakeSupported())return `<div class="quran-reader-tools"><button id="quranWakeBtn" class="quran-wake-btn is-off" type="button" disabled title="Auf diesem Gerät nicht verfügbar">🌙 Nicht verfügbar</button></div>`;return `<div class="quran-reader-tools"><button id="quranWakeBtn" class="quran-wake-btn is-on" type="button" aria-pressed="true" title="Verhindert Abdunkeln und Sperre beim Lesen">☀️ Bildschirm bleibt an</button></div>`}
 function renderQuranSurahHead(id,meta){return `<section class="quran-surah-head"><div class="quran-surah-head-text"><h2>${esc(meta.transliteration)}</h2><div class="quran-surah-head-ar">${esc(meta.name)}</div><div class="quran-surah-head-meta">${id} · ${meta.total_verses} Ayāt · ${quranTypeLabel(meta.type)}</div></div><div class="quran-surah-head-tools">${renderQuranWakeBtn()}</div></section>`}
 function renderQuranSurah(rawValue){const parts=String(rawValue||"").split("/");const id=Number(parts[0]);const selectedAyah=Number(parts[1])||0;const meta=quranSurahMeta(id);const surah=quranSurahCache.get(id);showTafsirBlocks=getShowTafsirBlocks();const tafsir=tafsirSurahCache.get(id)||null;const athar=quranAtharCache.get(id)||null;if(!meta)return `${setHeader("Qurʾān","Sure nicht gefunden.","Fehler")}<div class="empty">Ungültige Sure.</div>`;if(!surah)return `${renderQuranSurahHead(id,meta)}<div class="loading">Sure ${id} wird geladen…</div>`;const prev=id>1?quranSurahMeta(id-1):null;const next=id<114?quranSurahMeta(id+1):null;return `${renderQuranSurahHead(id,meta)}${renderQuranJumpBar(id,meta.total_verses,selectedAyah)}${renderQuranTransliterationPicker()}${renderQuranTafsirBar(id,tafsir,athar)}<section class="quran-ayah-list">${surah.verses.map(v=>{const entry=ayahTafsirEntry(tafsir,v.id);const atharEntry=ayahAtharEntry(athar,v.id);return `<article class="quran-ayah" id="ayah-${v.id}"><div class="quran-ayah-num">Ayah ${v.id}</div><div class="quran-ayah-ar">${esc(v.ar)}</div>${renderQuranAyahTr(v)}<div class="quran-ayah-de">${esc(v.de)}</div>${renderAyahTafsir(v,entry,meta,atharEntry)}</article>`}).join("")}</section><div class="quran-surah-nav"><button type="button" data-nav="quran-surah" data-value="${prev?prev.id:""}" ${prev?"":"disabled"}>← ${prev?esc(prev.transliteration):"—"}</button><button type="button" data-nav="quran-surah" data-value="${next?next.id:""}" ${next?"":"disabled"}>${next?esc(next.transliteration):"—"} →</button></div><div class="quran-surah-nav"><button type="button" data-nav="quran">Alle Suren</button><button type="button" data-nav="duas">Duʿāʾ-Sammlung</button></div>`}
-function applyQuranSearch(){const q=($("quranSearchInput")?.value||"").trim().toLowerCase();const block=$("quranSearchBlock"),results=$("quranSearchResults"),count=$("quranSearchCount"),grid=$("quranSurahGrid");if(!quranMeta||!block||!results||!count||!grid)return;if(!q){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";grid.style.display="grid";return}const filtered=quranMeta.surahs.filter(s=>String(s.id).includes(q)||s.transliteration.toLowerCase().includes(q)||String(s.name).includes(q));block.style.display="block";grid.style.display="none";count.textContent=`${filtered.length} Treffer`;results.innerHTML=filtered.length?filtered.map(quranSurahCard).join(""):`<div class="empty">Keine Sure gefunden.</div>`;bindEvents()}
+function quranSearchNormalize(value){return String(value||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿ‘’`´ʼ]/g,"").replace(/[āâ]/g,"a").replace(/[īî]/g,"i").replace(/[ūû]/g,"u").replace(/[ä]/g,"a").replace(/[ö]/g,"o").replace(/[ü]/g,"u").replace(/ß/g,"ss").replace(/[ḥḫḍṣṭẓ]/g,m=>({ḥ:"h",ḫ:"kh",ḍ:"d",ṣ:"s",ṭ:"t",ẓ:"z"}[m]||m)).replace(/[^a-z0-9\u0600-\u06ff]+/g," ").replace(/\s+/g," ").trim()}
+const QURAN_SEARCH_SYNONYMS={
+  iman:["iman","iiman","glaube","glauben","glaubig","glaubige","muemin","mumin","mu'min","amanu","aamanu","yu'min","yuminoon"],
+  glaube:["glaube","glauben","glaubig","glaubige","iman","mu'min","mumin","amanu"],
+  shirk:["shirk","schirk","beigesell","beigesellen","beigesellt","beigesellung","teilhaber","seinesgleichen","götze","gotze","götzen","gotzen","abgott","abgötter","abgotter","andere gottheit"],
+  taghut:["taghut","taghoot","tagut","taghout","taghut","ṭāghūt","falsche gottheit","götze","gotze","gotzen","götzen","satan","teufel","tyrann"],
+  kufr:["kufr","kuffar","kafir","kaafir","kafirin","unglaube","unglaubig","unglaubige","unglaubigen","leugnen","leugner","kafar","kafaroo"],
+  heuchler:["heuchler","heuchelei","heuchlerisch","munafiq","munafiqun","munafiqin","sagen wir glauben","krankheit"],
+  liebe:["liebe","lieben","liebt","geliebt","yuhibbu","hubb"],
+  geduld:["geduld","geduldig","standhaft","standhaften","sabr","sabir","sabirin","ausharren"],
+  barmherzigkeit:["barmherzig","barmherzigkeit","erbarmen","erbarme","rahman","rahim","rahma"],
+  gebet:["gebet","gebete","beten","salah","salat","ṣalat","verrichten"],
+  rechtleitung:["rechtleitung","rechtgeleitet","leitung","huda","hudā","gerader weg"],
+  taqwa:["taqwa","takwā","gottesfurcht","gottesfurchtig","gottesfürchtig","furchtet allah","furcht vor allah"],
+  reue:["reue","bereut","bereuen","tauba","tawba","umkehr","vergib","vergebung"],
+  jenseits:["jenseits","auferstehung","tag des gerichts","jungster tag","jüngster tag","akhirah","akhira"],
+  hoelle:["holle","hölle","feuer","hollenfeuer","höllenfeuer","jahannam"],
+  paradies:["paradies","garten","garten","g die von bachen durcheilt","jannah","dschanna"]
+};
+function quranSearchTerms(query){const normalized=quranSearchNormalize(query);const rawTokens=normalized.split(" ").filter(t=>t.length>1);const terms=new Set(rawTokens);Object.entries(QURAN_SEARCH_SYNONYMS).forEach(([key,vals])=>{const all=[key,...vals].map(quranSearchNormalize);if(all.some(v=>v&&normalized.includes(v)))all.forEach(v=>v&&terms.add(v))});return{normalized,tokens:[...terms].filter(t=>t.length>1)}}
+async function buildQuranSearchIndex(){if(quranSearchIndex)return quranSearchIndex;if(quranSearchLoading)return quranSearchLoading;quranSearchLoading=(async()=>{await loadQuranIndex();const rows=[];if(!quranMeta)return rows;for(const meta of quranMeta.surahs){const surah=await loadQuranSurah(meta.id);if(!surah||!Array.isArray(surah.verses))continue;surah.verses.forEach(v=>{const surahName=meta.transliteration||surah.transliteration||"";const fields=[surahName,meta.name||surah.name||"",v.de||"",v.tr||"",v.tr_readable||"",v.tr_academic||"",v.ar||""].join(" ");rows.push({surahId:meta.id,ayah:v.id,surahName,ar:v.ar||"",de:v.de||"",tr:v.tr_readable||v.tr||v.tr_academic||"",norm:quranSearchNormalize(fields),deNorm:quranSearchNormalize(v.de||""),trNorm:quranSearchNormalize([v.tr,v.tr_readable,v.tr_academic].join(" "))})})}quranSearchIndex=rows;return rows})().finally(()=>{quranSearchLoading=null});return quranSearchLoading}
+function quranSearchScore(row,search){let score=0;if(row.norm.includes(search.normalized))score+=120;if(row.deNorm.includes(search.normalized))score+=80;if(row.trNorm.includes(search.normalized))score+=55;search.tokens.forEach(t=>{if(row.deNorm.includes(t))score+=18;if(row.trNorm.includes(t))score+=12;if(row.norm.includes(t))score+=6});if(score&&row.deNorm.split(" ").some(w=>search.tokens.includes(w)))score+=8;return score}
+function escapeRegExp(value){return String(value).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+function quranHighlight(text,terms){let html=esc(text||"");const clean=terms.map(t=>t.trim()).filter(t=>t.length>2).slice(0,12).sort((a,b)=>b.length-a.length);clean.forEach(term=>{const raw=escapeRegExp(esc(term));try{html=html.replace(new RegExp(`(${raw})`,"gi"),`<mark class="search-hit">$1</mark>`)}catch(e){}});return html}
+function quranResultCard(row,terms){return `<article class="quran-result-card" data-nav="quran-surah" data-value="${row.surahId}/${row.ayah}"><div class="quran-result-top"><h3>${esc(row.surahName)} ${row.surahId}:${row.ayah}</h3><span>Ayah öffnen</span></div><div class="quran-result-de">${quranHighlight(row.de,terms)}</div>${row.tr?`<div class="quran-result-tr">${quranHighlight(row.tr,terms)}</div>`:""}</article>`}
+async function applyQuranSearch(){const input=$("quranSearchInput");const q=(input?.value||"").trim();const block=$("quranSearchBlock"),results=$("quranSearchResults"),count=$("quranSearchCount"),grid=$("quranSurahGrid");if(!quranMeta||!block||!results||!count||!grid)return;if(!q){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";grid.style.display="grid";return}block.style.display="block";grid.style.display="none";const search=quranSearchTerms(q);if(search.normalized.length<2){count.textContent="Bitte mehr eingeben";results.innerHTML=`<div class="empty">Gib mindestens 2 Zeichen ein.</div>`;return}count.textContent="Suche läuft ...";results.innerHTML=`<div class="loading">Verse werden durchsucht…</div>`;const index=await buildQuranSearchIndex();if(quranSearchNormalize(input?.value||"")!==search.normalized)return;const surahMatches=quranMeta.surahs.filter(s=>String(s.id)===search.normalized||quranSearchNormalize(s.transliteration).includes(search.normalized)||quranSearchNormalize(s.name).includes(search.normalized)).map(s=>({surahId:s.id,ayah:1,surahName:s.transliteration,de:`Sure ${s.transliteration} öffnen`,tr:s.name,norm:"",deNorm:"",trNorm:"",score:70}));const matches=index.map(row=>({...row,score:quranSearchScore(row,search)})).filter(row=>row.score>0).sort((a,b)=>b.score-a.score||a.surahId-b.surahId||a.ayah-b.ayah).slice(0,80);const merged=[...surahMatches,...matches];count.textContent=`${merged.length} Treffer`;results.innerHTML=merged.length?merged.map(row=>quranResultCard(row,search.tokens.concat(search.normalized))).join(""):`<div class="empty">Keine passenden Verse gefunden. Probiere eine andere Schreibweise oder einen allgemeinen Begriff.</div>`;bindEvents()}
 async function ensureQuranRouteData(route){await loadQuranIndex();if(route.view==="quran"){syncQuranOfflinePrecache();return}if(route.view==="quran-surah"){const id=Number(String(route.value||"").split("/")[0]);if(Number.isFinite(id)){await loadQuranSurah(id);if(getShowTafsirBlocks())await Promise.all([loadTafsirSurah(id),loadQuranAtharSurah(id)])}}}
 function offlineLibrarySummary(){const live=`${posts.length} Beiträge, ${DUAS.length} Duʿāʾ`;try{const meta=getJson(OFFLINE_LIB_KEY,null);if(meta&&meta.updated&&!posts.length&&!DUAS.length)return `${meta.posts||0} Beiträge, ${meta.duas||0} Duʿāʾ`}catch(e){}return live}
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -5105,7 +5186,7 @@ function bindEvents(){
   if(homeSearchInput){homeSearchInput.oninput=applyHomeFilters;["homeFilterCat","homeFilterScholar","homeFilterBook","homeFilterType"].forEach(id=>{const el=$(id);if(el)el.onchange=applyHomeFilters})}
   const duaSearchInput=$("duaSearchInput");const duaSearchBlock=$("duaSearchBlock");const duaSearchResults=$("duaSearchResults");const duaSearchCount=$("duaSearchCount");
   if(duaSearchInput&&duaSearchBlock&&duaSearchResults&&duaSearchCount){duaSearchInput.oninput=()=>{const q=duaSearchInput.value.trim().toLowerCase();if(!q){duaSearchBlock.style.display="none";duaSearchResults.innerHTML="";duaSearchCount.textContent="0 Treffer";return}const filtered=DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q));duaSearchBlock.style.display="block";duaSearchCount.textContent=`${filtered.length} Treffer`;duaSearchResults.innerHTML=filtered.length?filtered.map(duaCard).join(""):`<div class="empty">Keine passende Duʿāʾ gefunden.</div>`;bindEvents()}}
-  const quranSearchInput=$("quranSearchInput");if(quranSearchInput)quranSearchInput.oninput=applyQuranSearch;
+  const quranSearchInput=$("quranSearchInput");if(quranSearchInput)quranSearchInput.oninput=()=>{clearTimeout(quranSearchTimer);quranSearchTimer=setTimeout(()=>applyQuranSearch(),180)};
   if(currentRoute.view==="quran-surah"){
     document.querySelectorAll(".quran-tafsir-tab").forEach(btn=>{btn.onclick=()=>{const block=btn.closest(".quran-tafsir-block");if(!block)return;const target=btn.getAttribute("data-tafsir-target");block.querySelectorAll(".quran-tafsir-tab").forEach(x=>x.classList.toggle("active",x===btn));block.querySelectorAll(".quran-tafsir-panel").forEach(panel=>panel.classList.toggle("active",panel.getAttribute("data-tafsir-panel")===target));try{localStorage.setItem(TAFSIR_ACTIVE_KEY,target||"meaning")}catch(e){}}});
     const tafsirToggle=$("quranTafsirToggle");if(tafsirToggle){tafsirToggle.onchange=async()=>{setShowTafsirBlocks(tafsirToggle.checked);const surahId=Number(String(currentRoute.value||"").split("/")[0]);if(tafsirToggle.checked&&Number.isFinite(surahId))await Promise.all([loadTafsirSurah(surahId),loadQuranAtharSurah(surahId)]);render()}}
