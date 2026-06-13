@@ -3593,6 +3593,20 @@ html[data-theme="soft"] .qibla-btn-start{
   border-color:var(--premium-pill-border)!important;
   color:var(--premium-pill-text)!important;
 }
+html[data-theme="soft"] .qibla-compass-pro.qibla-aligned .qibla-kaaba-badge{
+  border-color:rgba(218,164,64,.88)!important;
+  background:radial-gradient(circle at 35% 25%,rgba(255,238,176,.55),rgba(255,248,230,.96))!important;
+  box-shadow:0 6px 16px rgba(96,62,78,.14),0 0 0 5px rgba(218,164,64,.22)!important;
+}
+html[data-theme="soft"] .qibla-compass-pro.qibla-aligned .qibla-compass-face{
+  border-color:rgba(218,164,64,.78)!important;
+  background:radial-gradient(circle at center,rgba(255,252,238,.98),rgba(244,223,188,.72))!important;
+  box-shadow:inset 0 0 0 1px rgba(218,164,64,.16),0 0 0 5px rgba(218,164,64,.14),0 14px 30px rgba(96,62,78,.10)!important;
+}
+html[data-theme="soft"] .qibla-compass-pro.qibla-aligned .qibla-forward-pointer{
+  background:linear-gradient(180deg,#ffe89a,#d9a33f)!important;
+  filter:drop-shadow(0 2px 7px rgba(218,164,64,.52))!important;
+}
 
 html[data-theme="soft"] .status-check-box,
 html[data-theme="soft"] .share-panel,
@@ -3639,6 +3653,52 @@ html[data-theme="soft"] .share-row-v9 .share-btn.link,
 html[data-theme="soft"] .share-row-v2 .share-btn.native,
 html[data-theme="soft"] .share-row-v2 .share-btn.link{
   background:linear-gradient(145deg,rgba(255,251,247,.98),rgba(238,217,225,.86))!important;
+}
+
+/* HELL/SANFT: alte dunkle Push- und Kontrollflächen vollständig neutralisieren */
+html[data-theme="light"] .prayer-controls-compact,
+html[data-theme="light"] .prayer-push-status,
+html[data-theme="soft"] .prayer-controls-compact,
+html[data-theme="soft"] .prayer-push-status{
+  background:linear-gradient(145deg,rgba(255,255,255,.52),rgba(246,230,234,.74))!important;
+  border-color:rgba(116,76,98,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.70),0 10px 24px rgba(96,62,78,.07)!important;
+  color:var(--text)!important;
+}
+html[data-theme="light"] .prayer-controls-compact,
+html[data-theme="light"] .prayer-push-status{
+  background:linear-gradient(145deg,rgba(255,255,255,.52),rgba(255,241,215,.70))!important;
+  border-color:rgba(155,122,60,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.66),0 8px 20px rgba(120,90,40,.05)!important;
+}
+html[data-theme="light"] .prayer-push-status summary,
+html[data-theme="soft"] .prayer-push-status summary{
+  color:var(--premium-title)!important;
+}
+html[data-theme="light"] .prayer-push-status-item,
+html[data-theme="soft"] .prayer-push-status-item{
+  background:linear-gradient(145deg,rgba(255,255,255,.46),rgba(255,248,242,.66))!important;
+  border-color:var(--line2)!important;
+  color:var(--text)!important;
+}
+html[data-theme="light"] .prayer-push-status-item{
+  background:linear-gradient(145deg,rgba(255,255,255,.46),rgba(255,247,226,.68))!important;
+}
+html[data-theme="light"] .prayer-push-status-item b,
+html[data-theme="soft"] .prayer-push-status-item b{
+  color:var(--premium-label)!important;
+}
+html[data-theme="light"] .prayer-push-status-item span,
+html[data-theme="soft"] .prayer-push-status-item span{
+  color:var(--premium-title)!important;
+}
+html[data-theme="light"] .prayer-push-status-item.ok span,
+html[data-theme="soft"] .prayer-push-status-item.ok span{
+  color:#6b4b1f!important;
+}
+html[data-theme="light"] .prayer-push-status-item.warn span,
+html[data-theme="soft"] .prayer-push-status-item.warn span{
+  color:#8a6228!important;
 }
 html[data-theme="soft"] .share-btn.tg,
 html[data-theme="soft"] .share-row-v11 .share-btn.tg,
