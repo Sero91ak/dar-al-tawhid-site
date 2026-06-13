@@ -10,9 +10,9 @@ const {
   withNotificationIcons,
   postOneSignalNotification
 } = require("./lib/onesignal-push");
-const PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
-const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || 20);
-const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 5);
+const DEFAULT_PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
+const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || (26 * 60));
+const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 15);
 const ONESIGNAL_AUTH_KEY = String(API_KEY || "")
   .replace(/\s+/g, "")
   .replace(/^(Key|Basic)/i, "")
@@ -240,7 +240,29 @@ function formatHour(h) {
   return `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
 }
 
-function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFactor) {
+function normalizeAdvanceMinutes(value) {
+  const n = Number(value);
+  return [5, 10, 15].includes(n) ? n : DEFAULT_PRAYER_ADVANCE_MINUTES;
+}
+
+function normalizeTahajjudMode(value) {
+  const v = String(value || "off");
+  return ["off", "before30", "before60", "before90", "lastThird", "true"].includes(v)
+    ? (v === "true" ? "lastThird" : v)
+    : "off";
+}
+
+function tahajjudStartForMode(maghribUtc, fajrUtc, mode) {
+  if (mode === "off" || !(fajrUtc > maghribUtc)) return null;
+
+  if (mode === "before30") return new Date(fajrUtc.getTime() - 30 * 60000);
+  if (mode === "before60") return new Date(fajrUtc.getTime() - 60 * 60000);
+  if (mode === "before90") return new Date(fajrUtc.getTime() - 90 * 60000);
+
+  return new Date(maghribUtc.getTime() + ((fajrUtc.getTime() - maghribUtc.getTime()) * 2 / 3));
+}
+
+function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFactor, tahajjudMode = "off") {
   const fajr = sunTimeForAngle(localDate, lat, lon, methodAngle, true, timeZone);
   const dhuhr = solarNoon(localDate, lat, lon, timeZone);
   const asr = asrTime(localDate, lat, lon, asrFactor, timeZone);
@@ -258,21 +280,23 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
   const tomorrow = addLocalDays(localDate, 1);
   const fajrNext = sunTimeForAngle(tomorrow, lat, lon, methodAngle, true, timeZone);
 
-  if (maghrib != null && fajrNext != null) {
+  const normalizedTahajjud = normalizeTahajjudMode(tahajjudMode);
+
+  if (normalizedTahajjud !== "off" && maghrib != null && fajrNext != null) {
     const maghribUtc = makeUtcDateFromLocal(localDate, maghrib, timeZone);
     const fajrUtc = makeUtcDateFromLocal(tomorrow, fajrNext, timeZone);
 
     if (fajrUtc > maghribUtc) {
-      const startUtc = new Date(
-        maghribUtc.getTime() + ((fajrUtc.getTime() - maghribUtc.getTime()) * 2 / 3)
-      );
+      const startUtc = tahajjudStartForMode(maghribUtc, fajrUtc, normalizedTahajjud);
 
-      prayers.push({
-        key: "tahajjud",
-        name: "Taḥajjud",
-        time: null,
-        sendAfter: startUtc
-      });
+      if (startUtc) {
+        prayers.push({
+          key: "tahajjud",
+          name: "Taḥajjud",
+          time: null,
+          sendAfter: startUtc
+        });
+      }
     }
   }
 
@@ -500,6 +524,8 @@ function groupUsers(users) {
     const timeZone = String(tags.prayer_timezone || "Europe/Berlin");
     const methodAngle = Number(tags.prayer_method === "12deg" ? 12 : tags.prayer_method || 12);
     const asrFactor = Number(tags.prayer_asr_factor || 1);
+    const advanceMinutes = normalizeAdvanceMinutes(tags.prayer_advance_minutes);
+    const tahajjudMode = normalizeTahajjudMode(tags.prayer_tahajjud_mode || tags.prayer_tahajjud);
 
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
 
@@ -508,7 +534,9 @@ function groupUsers(users) {
       lon.toFixed(3),
       timeZone,
       methodAngle,
-      asrFactor
+      asrFactor,
+      advanceMinutes,
+      tahajjudMode
     ].join("|");
 
     if (!map.has(key)) {
@@ -518,6 +546,8 @@ function groupUsers(users) {
         timeZone,
         methodAngle,
         asrFactor,
+        advanceMinutes,
+        tahajjudMode,
         subscriptionIds: []
       });
     }
@@ -558,8 +588,8 @@ const PRAYER_NOTIFICATION_MESSAGES = {
     "Nimm dir am Ende des Tages Zeit für dein Gebet."
   ],
   tahajjud: [
-    "Letztes Drittel der Nacht – Zeit für Taḥajjud bis Fajr.",
-    "Eine gesegnete Zeit für Gebet, Duʿāʾ und Vergebung.",
+    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
+    "Steh für Allah auf, auch wenn es nur wenige Rakʿāt sind.",
     "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
   ]
 };
@@ -571,47 +601,51 @@ function pickPrayerMessage(prayer, sendAfter, group) {
   return list[hash[0] % list.length];
 }
 
-function prayerNotificationTitle(prayer, mode) {
+function prayerNotificationTitle(prayer, mode, group) {
   if (prayer.key === "tahajjud") {
-    return mode === "advance"
-      ? "Taḥajjud in 15 Min"
-      : "Taḥajjud ist eingetreten";
+    return "Taḥajjud-Erinnerung";
   }
 
+  const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
   return mode === "advance"
-    ? `${prayer.name} in ${PRAYER_ADVANCE_MINUTES} Min`
+    ? `${prayer.name} in ${advanceMinutes} Min`
     : `${prayer.name} ist eingetreten`;
 }
 
-function prayerNotificationCopy(prayer, mode) {
+function prayerNotificationCopy(prayer, mode, group) {
   const isTahajjud = prayer.key === "tahajjud";
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
+  const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
 
   if (mode === "advance") {
     return {
       headings: {
-        de: prayerNotificationTitle(prayer, mode),
-        en: prayerNotificationTitle(prayer, mode)
+        de: prayerNotificationTitle(prayer, mode, group),
+        en: prayerNotificationTitle(prayer, mode, group)
       },
       contents: {
         de: isTahajjud
-          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht.`
-          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr.`,
+          ? "Taḥajjud-Erinnerung ist bald."
+          : `In ${advanceMinutes} Min · ${timeLabel} Uhr.`,
         en: isTahajjud
-          ? `In ${PRAYER_ADVANCE_MINUTES} Min beginnt das letzte Drittel der Nacht.`
-          : `In ${PRAYER_ADVANCE_MINUTES} Min · ${timeLabel} Uhr.`
+          ? "Taḥajjud-Erinnerung ist bald."
+          : `In ${advanceMinutes} Min · ${timeLabel} Uhr.`
       }
     };
   }
 
   return {
     headings: {
-      de: prayerNotificationTitle(prayer, mode),
-      en: prayerNotificationTitle(prayer, mode)
+      de: prayerNotificationTitle(prayer, mode, group),
+      en: prayerNotificationTitle(prayer, mode, group)
     },
     contents: {
-      de: "",
-      en: ""
+      de: isTahajjud
+        ? "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah."
+        : "",
+      en: isTahajjud
+        ? "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah."
+        : ""
     }
   };
 }
@@ -634,7 +668,9 @@ function scheduleIdentity(group, prayer, sendAfter, mode) {
     group.lon.toFixed(3),
     group.timeZone,
     group.methodAngle,
-    group.asrFactor
+    group.asrFactor,
+    group.advanceMinutes,
+    group.tahajjudMode
   ].join("|");
 }
 
@@ -643,7 +679,7 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
 
   if (!ids.length) return;
 
-  const copy = prayerNotificationCopy(prayer, mode);
+  const copy = prayerNotificationCopy(prayer, mode, group);
   if (mode === "entry") {
     const message = pickPrayerMessage(prayer, sendAfter, group);
     copy.contents.de = message;
@@ -707,46 +743,60 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
 
   for (const group of groups) {
     const localDate = todayLocalDate(group.timeZone);
-
-    const prayers = calculatePrayerTimes(
+    const localDates = [
+      addLocalDays(localDate, -1),
       localDate,
-      group.lat,
-      group.lon,
-      group.timeZone,
-      group.methodAngle,
-      group.asrFactor
-    );
+      addLocalDays(localDate, 1),
+      addLocalDays(localDate, 2)
+    ];
+    const plannedInRun = new Set();
 
-    for (const prayer of prayers) {
-      const entryAt = prayer.sendAfter
-        ? prayer.sendAfter
-        : prayer.time == null
-          ? null
-          : makeUtcDateFromLocal(localDate, prayer.time, group.timeZone);
+    for (const dateForSchedule of localDates) {
+      const prayers = calculatePrayerTimes(
+        dateForSchedule,
+        group.lat,
+        group.lon,
+        group.timeZone,
+        group.methodAngle,
+        group.asrFactor,
+        group.tahajjudMode
+      );
 
-      if (!entryAt) continue;
+      for (const prayer of prayers) {
+        const entryAt = prayer.sendAfter
+          ? prayer.sendAfter
+          : prayer.time == null
+            ? null
+            : makeUtcDateFromLocal(dateForSchedule, prayer.time, group.timeZone);
 
-      const schedules = [
-        { mode: "entry", sendAfter: entryAt }
-      ];
+        if (!entryAt) continue;
 
-      if (prayer.key !== "sunrise") {
-        const advanceAt = new Date(entryAt.getTime() - PRAYER_ADVANCE_MINUTES * 60 * 1000);
-        schedules.push({ mode: "advance", sendAfter: advanceAt });
-      }
+        const schedules = [
+          { mode: "entry", sendAfter: entryAt }
+        ];
 
-      for (const schedule of schedules) {
-        if (schedule.sendAfter < windowStart) {
-          const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
-          console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
-          continue;
+        if (prayer.key !== "sunrise" && prayer.key !== "tahajjud") {
+          const advanceAt = new Date(entryAt.getTime() - normalizeAdvanceMinutes(group.advanceMinutes) * 60 * 1000);
+          schedules.push({ mode: "advance", sendAfter: advanceAt });
         }
 
-        if (schedule.sendAfter > windowEnd) {
-          continue;
-        }
+        for (const schedule of schedules) {
+          const identity = scheduleIdentity(group, prayer, schedule.sendAfter, schedule.mode);
+          if (plannedInRun.has(identity)) continue;
+          plannedInRun.add(identity);
 
-        await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
+          if (schedule.sendAfter < windowStart) {
+            const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
+            console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
+            continue;
+          }
+
+          if (schedule.sendAfter > windowEnd) {
+            continue;
+          }
+
+          await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
+        }
       }
     }
   }
