@@ -16,7 +16,7 @@
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
 <meta name="theme-color" content="#080806">
-<script>(function(){try{var t=localStorage.getItem("darThemeV1")||"dark";if(t!=="light"&&t!=="soft")t="dark";document.documentElement.setAttribute("data-theme",t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==="light"?"#f4e8cc":t==="soft"?"#efe2dc":"#080806";var sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=t==="dark"?"black":"default"}catch(e){}})();</script>
+<script>(function(){try{var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==="light"?"#f4e8cc":t==="soft"?"#efe2dc":"#080806";window.__DAR_INITIAL_THEME=t}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -44,11 +44,16 @@
   --premium-pill-border:rgba(239,215,142,.50);
   --premium-pill-bg:linear-gradient(135deg,rgba(239,215,142,.18),rgba(239,215,142,.07));
   --premium-pill-text:#fff4c6;
+  --theme-logo-ring:rgba(239,215,142,.50);
+  --theme-logo-glow:rgba(239,215,142,.16);
+  --theme-deck-aura:radial-gradient(circle at 12% 28%,rgba(239,215,142,.16),transparent 24%),radial-gradient(circle at 76% 8%,rgba(8,30,70,.18),transparent 30%);
 }
 /* Light theme: vollständige Regeln am Ende des Stylesheets */
 .premium-surface{border:1px solid var(--premium-border)!important;background:var(--premium-bg)!important;box-shadow:var(--premium-shadow)!important}
 .premium-pill{border:1px solid var(--premium-pill-border)!important;background:var(--premium-pill-bg)!important;color:var(--premium-pill-text)!important;border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.14)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .theme-switch-panel{padding:14px 15px;margin:0 0 13px;border-radius:22px}
+.theme-switch-panel:before{content:"";position:absolute;inset:7px;border:1px solid rgba(239,215,142,.08);border-radius:inherit;pointer-events:none}
+.theme-switch-panel{position:relative;overflow:hidden}
 .account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px;overflow:hidden;max-width:100%}
 .account-panel *{box-sizing:border-box;min-width:0}
 .account-panel h3{font-family:var(--serif);color:var(--gold2);font-size:26px;line-height:1.05;margin:0}
@@ -71,7 +76,16 @@
 .theme-switch-head h3{font-family:var(--serif);color:var(--premium-title);font-size:22px;line-height:1.08;margin:0 0 4px}
 .theme-switch-note{color:var(--premium-body);font-size:11px;line-height:1.45;margin:0}
 .theme-switch-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:4px}
-.theme-switch-btn{border:1px solid var(--premium-pill-border);background:var(--premium-pill-bg);color:var(--premium-pill-text);border-radius:999px;min-height:42px;padding:8px 10px;font-size:11.5px;line-height:1.15;font-weight:950;cursor:pointer;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;overflow-wrap:anywhere}
+.theme-switch-btn{position:relative;overflow:hidden;border:1px solid var(--premium-pill-border);background:var(--premium-pill-bg);color:var(--premium-pill-text);border-radius:18px;min-height:86px;padding:9px 10px;font-size:11.5px;line-height:1.15;font-weight:950;cursor:pointer;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;overflow-wrap:anywhere;display:grid;grid-template-rows:auto 1fr;gap:7px;text-align:left}
+.theme-preview{display:flex;align-items:center;gap:7px}
+.theme-preview-logo{width:28px;height:28px;border-radius:999px;border:1px solid var(--theme-preview-ring);background:var(--theme-preview-logo);box-shadow:0 8px 18px var(--theme-preview-shadow)}
+.theme-preview-lines{display:grid;gap:4px;flex:1}
+.theme-preview-lines i{display:block;height:5px;border-radius:999px;background:var(--theme-preview-line)}
+.theme-preview-lines i:last-child{width:68%;opacity:.72}
+.theme-switch-btn span:last-child{align-self:end}
+.theme-switch-btn[data-theme-select="dark"]{--theme-preview-ring:rgba(239,215,142,.52);--theme-preview-logo:radial-gradient(circle,#f7e7b4 0 32%,#16130e 35% 100%);--theme-preview-shadow:rgba(0,0,0,.36);--theme-preview-line:linear-gradient(90deg,#f0d98f,#30503c);background:linear-gradient(145deg,rgba(20,25,22,.96),rgba(6,7,6,.94))}
+.theme-switch-btn[data-theme-select="light"]{--theme-preview-ring:rgba(155,122,60,.38);--theme-preview-logo:radial-gradient(circle,#fffaf0 0 32%,#efe1bd 35% 100%);--theme-preview-shadow:rgba(130,94,42,.16);--theme-preview-line:linear-gradient(90deg,#6d4e24,#d8bf78);background:linear-gradient(145deg,rgba(255,251,241,.90),rgba(239,226,194,.72));color:#402c18}
+.theme-switch-btn[data-theme-select="soft"]{--theme-preview-ring:rgba(116,76,98,.34);--theme-preview-logo:radial-gradient(circle,#fff8f1 0 32%,#e7cfd5 35% 100%);--theme-preview-shadow:rgba(96,62,78,.13);--theme-preview-line:linear-gradient(90deg,#7d5368,#d7b9c5);background:linear-gradient(145deg,rgba(255,248,242,.94),rgba(238,217,225,.80));color:#34232c}
 .theme-switch-btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .theme-switch-btn.is-active{border-color:rgba(239,215,142,.72);box-shadow:0 0 0 1px rgba(239,215,142,.22),0 10px 24px rgba(0,0,0,.18)}
 html[data-theme="light"] .theme-switch-btn.is-active{border-color:rgba(155,122,60,.55);box-shadow:0 0 0 1px rgba(155,122,60,.18),0 10px 24px rgba(120,90,40,.12)}
@@ -101,10 +115,13 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;background:url
 a{color:inherit}button,input,select{font:inherit}
 .app{width:min(1180px,100%);margin:0 auto;position:relative;z-index:1}
 .top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5,.92)),radial-gradient(circle at 20% 0%,rgba(239,215,142,.12),transparent 45%);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+.top-shell:before{content:"";position:absolute;inset:0;background:var(--theme-deck-aura);opacity:.9;pointer-events:none}
+.top-shell:after{content:attr(data-theme-label);position:absolute;right:22px;top:18px;color:var(--muted2);font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;opacity:.42;pointer-events:none}
 .header{padding:22px 24px 18px}
+.header{position:relative;z-index:1}
 .header-row{display:grid;grid-template-columns:minmax(0,1fr) 168px;align-items:flex-start;gap:18px}
 .brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:11px}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hijri-header-pill{border:1px solid rgba(239,215,142,.42);background:linear-gradient(135deg,rgba(248,239,212,.13),rgba(239,215,142,.06));color:#fff8e3;border-radius:999px;min-height:34px;padding:7px 12px;font-size:11px;font-weight:950;white-space:nowrap;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.20)}
-.brand-main{display:flex;align-items:center;gap:24px;min-width:0;overflow:visible}.logo{width:112px;height:112px;flex:0 0 112px;object-fit:contain;border-radius:999px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.38))}
+.brand-main{display:flex;align-items:center;gap:24px;min-width:0;overflow:visible;position:relative}.logo{width:112px;height:112px;flex:0 0 112px;object-fit:contain;border-radius:999px;border:1px solid var(--theme-logo-ring);background:radial-gradient(circle,rgba(255,255,255,.10),transparent 62%);box-shadow:0 0 0 7px var(--theme-logo-glow),0 16px 34px rgba(0,0,0,.24);filter:drop-shadow(0 12px 24px rgba(0,0,0,.30))}
 h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px);line-height:.92;letter-spacing:.095em;margin:0;font-weight:800;white-space:nowrap;min-width:0;overflow:visible}
 .socials{display:grid;grid-template-columns:1fr;gap:11px;width:168px}.social-link,.pill,.btn,.icon-btn{border:1px solid var(--line);background:rgba(239,215,142,.075);color:var(--cream);text-decoration:none;border-radius:999px;padding:11px 18px;font-size:15px;font-weight:900;cursor:pointer}.social-link{display:inline-flex;align-items:center;justify-content:center;gap:11px;white-space:nowrap;min-width:168px;min-height:48px}.social-link svg{width:25px;height:25px;display:block;flex:0 0 25px}
 .hero-text{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:980px}.salam{font-family:var(--serif);color:var(--gold2);font-size:clamp(18px,1.9vw,29px);line-height:1.18;font-weight:800;margin-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.intro{color:var(--muted);font-size:14px;line-height:1.65}.intro strong{color:var(--cream)}
@@ -300,6 +317,7 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 @media(max-width:700px){body{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}.top-shell,.view{border-radius:20px}.header{padding:18px 15px 15px}.brand-kicker-row{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px}.brand small{font-size:9px;letter-spacing:.12em;max-width:100%;white-space:normal;overflow:visible;text-overflow:unset}.hijri-header-pill{font-size:8.5px;min-height:29px;padding:5px 7px;max-width:54%;flex-shrink:0;overflow:visible;text-overflow:unset}.brand-main{gap:12px}.logo{width:62px;height:62px;flex:0 0 62px}h1{font-size:clamp(27px,8.7vw,36px);letter-spacing:.012em;line-height:.95;white-space:nowrap}.socials{gap:10px;margin-top:16px}.social-link{justify-content:center;padding:10px 9px;font-size:13px;min-height:46px;gap:9px}.social-link svg{width:24px;height:24px;flex-basis:24px}.hero-text{margin-top:14px;padding-top:14px}.salam{font-size:clamp(12px,3.35vw,15px);line-height:1.2}.intro{font-size:11.5px;line-height:1.45}.isnad{padding:11px 14px 12px}.isnad-label{font-size:8px}.isnad-quote{font-size:10.2px}.isnad-source{font-size:8.5px}.view{padding:16px;min-height:420px}.view-head{padding-bottom:14px;margin-bottom:16px}.view h2{font-size:28px}.view-desc{font-size:11.6px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat-card{padding:10px;border-radius:14px}.stat-card b{font-size:19px}.stat-card span{font-size:10px}.about-grid{grid-template-columns:1fr;gap:11px}.folder-card,.post-card,.list-card,.info-card,.dua-card{border-radius:17px;padding:14px}.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-size:18px;line-height:1.08}.folder-card p,.dua-card p{font-size:11px;line-height:1.38}.folder-icon{width:38px;height:38px;border-radius:14px;font-size:18px;margin-bottom:9px}.emoji-emblem{width:25px;height:25px;font-size:21px}.folder-meta{gap:5px;margin-top:9px}.folder-meta span,.badge{font-size:8.4px;padding:4px 6px}.list-card{min-height:118px}.list-card .count,.book-author{font-size:10.5px}.post-card{min-height:185px}.excerpt{font-size:12.8px;line-height:1.32;-webkit-line-clamp:3}.source-preview{font-size:8.5px;margin-top:8px;padding-top:7px}.section-head h3{font-size:21px}.section-head span{font-size:9.5px}.overview-title h3{font-size:21px}.search{height:46px}.direct-pick-panel{border-radius:17px;padding:11px}.direct-pick-title{display:block}.direct-pick-title h3{font-size:20px}.direct-pick-title span{display:block;margin-top:4px;font-size:10px}.daily-box,.recommended-box,.calendar-panel{border-radius:17px;padding:14px}.daily-title,.recommended-title,.calendar-title h3{font-size:20px}.daily-text,.recommended-text{font-size:11.5px}.event-list{grid-template-columns:1fr}.calendar-title{display:block}.statement,.dua-detail-box{padding:16px;border-radius:19px;font-size:17px;line-height:1.62;text-align:left}.dua-arabic{font-size:24px}.dua-trans,.dua-de{font-size:15px}.article-title{text-align:left}.article-meta,.article-actions,.link-row{justify-content:flex-start}.source-strong{text-align:left}.app-bar{margin-bottom:9px}.crumb{font-size:10.5px}.nav-posts{grid-template-columns:1fr}}
 @media(max-width:390px){.logo{width:56px;height:56px;flex-basis:56px}h1{font-size:clamp(26px,8.4vw,34px);letter-spacing:.005em}.folder-card,.post-card,.list-card{padding:13px}.folder-card h3,.post-card h3,.list-card h3{font-size:16.5px}.excerpt{font-size:12px}.section-block{margin-top:18px}.section-head{margin-bottom:12px}}
 @media(max-width:520px){.account-form{grid-template-columns:1fr}.account-summary{grid-template-columns:1fr}.account-actions button{flex:1 1 150px}}
+@media(max-width:520px){.theme-switch-row{grid-template-columns:1fr}.theme-switch-btn{min-height:64px;grid-template-columns:auto 1fr;grid-template-rows:auto;align-items:center}.theme-switch-btn span:last-child{align-self:center}}
 
 @media(max-width:700px){
   .search-line{grid-template-columns:1fr}
@@ -2532,6 +2550,9 @@ html[data-theme="light"]{
   --premium-pill-border:rgba(155,122,60,.32)!important;
   --premium-pill-bg:linear-gradient(135deg,rgba(255,248,228,.98),rgba(245,222,175,.82))!important;
   --premium-pill-text:#3d2a12!important;
+  --theme-logo-ring:rgba(155,122,60,.42)!important;
+  --theme-logo-glow:rgba(255,255,255,.58)!important;
+  --theme-deck-aura:radial-gradient(circle at 14% 30%,rgba(255,255,255,.74),transparent 25%),radial-gradient(circle at 78% 6%,rgba(155,122,60,.18),transparent 34%),linear-gradient(145deg,rgba(255,250,238,.45),rgba(29,69,45,.055))!important;
 }
 html[data-theme="light"],
 html[data-theme="light"] body{
@@ -3061,6 +3082,9 @@ html[data-theme="soft"]{
   --premium-pill-border:rgba(116,76,98,.34)!important;
   --premium-pill-bg:linear-gradient(135deg,rgba(255,251,247,.98),rgba(238,217,225,.84))!important;
   --premium-pill-text:#34232c!important;
+  --theme-logo-ring:rgba(116,76,98,.34)!important;
+  --theme-logo-glow:rgba(255,248,242,.72)!important;
+  --theme-deck-aura:radial-gradient(circle at 15% 31%,rgba(255,255,255,.68),transparent 26%),radial-gradient(circle at 78% 8%,rgba(218,190,203,.45),transparent 34%),linear-gradient(145deg,rgba(255,248,242,.34),rgba(138,91,115,.055))!important;
 }
 html[data-theme="soft"],
 html[data-theme="soft"] body{
@@ -3866,7 +3890,7 @@ window.DAR_ANALYTICS_CONFIG={
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
 <div class="top-swim-aura" id="topSwimAura" aria-hidden="true"></div>
 <div class="app">
-  <section class="top-shell">
+  <section class="top-shell" data-theme-label="Klassisch Dunkel">
     <header class="header">
       <div class="header-row">
         <div class="brand">
@@ -3935,12 +3959,15 @@ function renderQuranAyahTr(v){const mode=getQuranTrMode();const label=QURAN_TR_M
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{const text=el.getAttribute("data-tr-"+mode)||el.getAttribute("data-tr-tanzil")||"";el.textContent=text});document.querySelectorAll(".quran-ayah-tr-label").forEach(el=>{el.textContent="Lautschrift · "+(QURAN_TR_MODES[mode]?.label||"Lautschrift")});document.querySelectorAll(".quran-tr-btn").forEach(btn=>{btn.classList.toggle("active",btn.getAttribute("data-quran-tr")===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
 function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
 const THEME_KEY="darThemeV1";
+const THEME_SETTINGS_KEY="darThemeSettingsV1";
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f4e8cc",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#efe2dc",status:"default",asset:"soft"}};
 function normalizeTheme(theme){return theme==="light"||theme==="soft"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
-function applyTheme(theme){const next=normalizeTheme(theme);document.documentElement.setAttribute("data-theme",next);try{localStorage.setItem(THEME_KEY,next)}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=next==="light"?"#f4e8cc":next==="soft"?"#efe2dc":"#080806";const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=next==="dark"?"black":"default";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next)})}
+function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;document.documentElement.setAttribute("data-theme",next);document.documentElement.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const shell=document.querySelector(".top-shell");if(shell)shell.setAttribute("data-theme-label",info.label);const logo=document.querySelector(".logo");if(logo)logo.title=`DAR AL TAWḤID · ${info.label}`;document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}}
 function initTheme(){applyTheme(getTheme())}
 function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{applyTheme(btn.getAttribute("data-theme-select"))}})}
-function renderThemeSwitchPanel(){const cur=getTheme();return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Klassisch hell, klassisch dunkel oder sanft elegant.</p></div><div class="theme-switch-row"><button type="button" class="theme-switch-btn${cur==="light"?" is-active":""}" data-theme-select="light">Klassisch Hell</button><button type="button" class="theme-switch-btn${cur==="dark"?" is-active":""}" data-theme-select="dark">Klassisch Dunkel</button><button type="button" class="theme-switch-btn${cur==="soft"?" is-active":""}" data-theme-select="soft">Sanft Elegant</button></div></section>`}
+function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
+function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}</div></section>`}
 
 const DUAS=[
 {id:"quran-001",type:"Qurʾān",cat:"Vergebung",title:"Duʿāʾ von Ādam und Ḥawwāʾ nach dem Fehler",occasion:"Reue und Vergebung",ar:"رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",tr:"Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā lanakūnanna mina-l-khāsirīn.",de:"Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",src:"📝 Qurʾān, al-Aʿrāf 7:23."},
