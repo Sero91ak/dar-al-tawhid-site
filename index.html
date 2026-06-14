@@ -4527,6 +4527,73 @@ html[data-theme] body.has-bottom-nav{
     padding-bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
   }
 }
+
+/* BESUCHER-APP WIDTH FINAL: mehr App-Fläche, kein dominanter Außenkasten */
+html[data-theme] .app{
+  width:min(1320px,100%)!important;
+  max-width:none!important;
+}
+html[data-theme] .top-shell,
+html[data-theme] .view{
+  border-color:rgba(239,215,142,.18)!important;
+}
+@media(max-width:700px){
+  :root{
+    --page-gutter-x:max(8px,env(safe-area-inset-left,0px));
+    --page-gutter-y:max(8px,env(safe-area-inset-right,0px));
+    --content-inset:13px;
+  }
+  html[data-theme] body,
+  html[data-theme] body.has-bottom-nav{
+    padding-left:var(--page-gutter-x)!important;
+    padding-right:var(--page-gutter-y)!important;
+  }
+  html[data-theme] .top-shell,
+  html[data-theme] .view{
+    border-color:rgba(239,215,142,.095)!important;
+    border-radius:18px!important;
+    box-shadow:0 12px 34px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.018)!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  html[data-theme="light"] .top-shell,
+  html[data-theme="light"] .view,
+  html[data-theme="soft"] .top-shell,
+  html[data-theme="soft"] .view{
+    border-color:rgba(116,76,98,.10)!important;
+    box-shadow:0 10px 28px rgba(80,48,34,.08),inset 0 0 0 1px rgba(255,255,255,.30)!important;
+  }
+  html[data-theme] .header{
+    padding-left:var(--content-inset)!important;
+    padding-right:var(--content-inset)!important;
+  }
+  html[data-theme] .view{
+    padding-left:var(--content-inset)!important;
+    padding-right:var(--content-inset)!important;
+  }
+  html[data-theme] .isnad{
+    padding-left:var(--content-inset)!important;
+    padding-right:var(--content-inset)!important;
+  }
+  html[data-theme] .app-bar{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  html[data-theme] .bottom-nav{
+    left:max(10px,env(safe-area-inset-left,0px))!important;
+    right:max(10px,env(safe-area-inset-right,0px))!important;
+  }
+  html[data-theme] .float-actions{
+    right:max(4px,env(safe-area-inset-right,0px))!important;
+  }
+}
+@media(max-width:390px){
+  :root{
+    --page-gutter-x:max(6px,env(safe-area-inset-left,0px));
+    --page-gutter-y:max(6px,env(safe-area-inset-right,0px));
+    --content-inset:12px;
+  }
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
