@@ -1,0 +1,10 @@
+name = "dar-admin-publisher"
+main = "worker.js"
+compatibility_date = "2026-06-14"
+
+[vars]
+GITHUB_OWNER = "Sero91ak"
+GITHUB_REPO = "dar-al-tawhid-site"
+GITHUB_BRANCH = "main"
+POSTS_DIR = "content/posts"
+ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
