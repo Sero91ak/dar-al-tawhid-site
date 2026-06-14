@@ -16,7 +16,7 @@
 <meta name="application-name" content="DAR AL TAWḤID">
 <meta name="apple-mobile-web-app-title" content="DAR AL TAWḤID">
 <meta name="theme-color" content="#080806">
-<script>(function(){try{var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==="light"?"#f4e8cc":t==="soft"?"#efe2dc":t==="royal"?"#07162c":"#080806";window.__DAR_INITIAL_THEME=t}catch(e){}})();</script>
+<script>(function(){try{var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -4453,6 +4453,59 @@ html[data-theme="light"] .account-actions button{
   background:var(--premium-pill-bg)!important;
   border-color:var(--premium-pill-border)!important;
 }
+
+/* GLOBALER APP-HINTERGRUND: keine fremde Farbe bei Bounce, Safe-Area oder Seitenrand */
+html[data-theme="dark"]{
+  --outer-bg-flat:#080806;
+  --outer-bg:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),linear-gradient(180deg,#080806 0%,#0b0a07 46%,#050504 100%);
+}
+html[data-theme="light"]{
+  --outer-bg-flat:#f7f0df;
+  --outer-bg:radial-gradient(circle at 16% 0%,rgba(255,255,255,.70),transparent 42%),linear-gradient(180deg,#fffaf0 0%,#f7efdf 48%,#f3ead8 100%);
+}
+html[data-theme="soft"]{
+  --outer-bg-flat:#f2e6e2;
+  --outer-bg:radial-gradient(circle at 15% 0%,rgba(255,255,255,.62),transparent 42%),radial-gradient(circle at 86% 12%,rgba(196,153,169,.16),transparent 34%),linear-gradient(180deg,#fff8f4 0%,#f3e5e2 52%,#ead9dc 100%);
+}
+html[data-theme="royal"]{
+  --outer-bg-flat:#07162c;
+  --outer-bg:radial-gradient(circle at 14% 0%,rgba(239,215,142,.15),transparent 38%),radial-gradient(circle at 86% 9%,rgba(57,112,170,.20),transparent 34%),linear-gradient(180deg,#07162c 0%,#0a1d39 48%,#041023 100%);
+}
+html[data-theme],
+html[data-theme].is-standalone-pwa{
+  min-height:100%;
+  background:var(--outer-bg-flat)!important;
+  background-color:var(--outer-bg-flat)!important;
+  overscroll-behavior-y:none;
+}
+html[data-theme] body,
+html[data-theme].is-standalone-pwa body{
+  min-height:100dvh;
+  background:var(--outer-bg)!important;
+  background-color:var(--outer-bg-flat)!important;
+  color:var(--text)!important;
+  overscroll-behavior-y:none;
+}
+html[data-theme] .app{
+  background:transparent!important;
+}
+html[data-theme] .top-edge-fade{
+  background:var(--outer-bg)!important;
+}
+html[data-theme] body.has-bottom-nav{
+  background:var(--outer-bg)!important;
+  background-color:var(--outer-bg-flat)!important;
+}
+@supports(padding:max(0px)){
+  html[data-theme] body{
+    padding-top:max(10px,env(safe-area-inset-top,0px))!important;
+    padding-bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
+  }
+  html[data-theme].is-standalone-pwa body{
+    padding-top:calc(env(safe-area-inset-top,0px) + 6px)!important;
+    padding-bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
+  }
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -4565,7 +4618,7 @@ function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.qu
 function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f4e8cc",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#efe2dc",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"}};
 function normalizeTheme(theme){return theme==="light"||theme==="soft"||theme==="royal"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;document.documentElement.setAttribute("data-theme",next);document.documentElement.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo)logo.title="DAR AL TAWḤID";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}}
