@@ -116,6 +116,22 @@ button{cursor:pointer}
 .change-item{border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:10px}
 .change-item b{display:block;color:#fff4cc;font-size:12px}
 .change-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:4px}
+.live-preview-shell{display:grid;grid-template-columns:260px minmax(0,1fr);gap:12px}
+.live-preview-device{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(8,17,30,.96),rgba(4,7,13,.98));padding:12px;box-shadow:var(--shadow)}
+.live-preview-device.mobile{max-width:430px;margin:0 auto}
+.live-preview-device.desktop{max-width:none}
+.live-preview-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.live-preview-frame{width:100%;height:72vh;min-height:520px;border:1px solid rgba(239,215,142,.18);border-radius:16px;background:#06080d}
+.live-preview-device.mobile .live-preview-frame{height:740px;border-radius:28px}
+.admin-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.admin-form-grid .wide{grid-column:1/-1}
+.admin-textarea{width:100%;min-height:110px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.24);color:var(--ink);padding:11px;font-size:12px;line-height:1.5}
+.planner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.planner-item{border:1px solid var(--line2);border-radius:16px;background:linear-gradient(145deg,rgba(90,140,220,.07),rgba(239,215,142,.03));padding:12px}
+.planner-item b{display:block;color:#fff4cc;font-size:13px;line-height:1.25}
+.planner-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:5px}
+.planner-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.notice-note{border:1px dashed rgba(239,215,142,.30);border-radius:14px;background:rgba(239,215,142,.06);padding:11px;color:var(--soft);font-size:11px;line-height:1.55}
 .push-test-card{grid-column:1/-1;cursor:default}
 .push-test-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px}
 .push-test-controls .field{min-height:36px;font-size:11px}
@@ -148,8 +164,8 @@ button{cursor:pointer}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
+@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{height:68vh;min-height:460px}}
 </style>
 </head>
 <body>
@@ -183,6 +199,10 @@ const AUTH_TTL_MS=90*24*60*60*1000;
 const GITHUB_TOKEN_KEY="darAdminGithubTokenV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
 const ADMIN_LOG_KEY="darAdminChangeLogV1";
+const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
+const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
+const ADMIN_REPORTS_KEY="darAdminReportsV1";
+const ADMIN_USERS_KEY="darAdminUsersV1";
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
@@ -204,6 +224,15 @@ function addAdminLog(type,title,detail){try{const list=readAdminLog();list.unshi
 function renderChangeLog(){const list=readAdminLog();return list.length?list.slice(0,6).map(item=>`<div class="change-item"><b>${esc(item.type)} · ${esc(new Date(item.ts).toLocaleString("de-DE"))}</b><span>${esc(item.title)}${item.detail?`<br>${esc(item.detail)}`:""}</span></div>`).join(""):`<div class="empty">Noch kein lokales Änderungsprotokoll.</div>`}
 function lastPublishLabel(){const item=readAdminLog().find(x=>x.type==="Veröffentlicht");return item?new Date(item.ts).toLocaleDateString("de-DE"):"Noch keine"}
 function lastAdminError(){const item=readAdminLog().find(x=>x.type==="Fehler");return item?item.title:"Keine"}
+function readStore(key){try{return JSON.parse(localStorage.getItem(key)||"[]").filter(Boolean)}catch(e){return[]}}
+function writeStore(key,list){try{localStorage.setItem(key,JSON.stringify((list||[]).slice(0,80)))}catch(e){}}
+function addStoreItem(key,item){const list=readStore(key);list.unshift({...item,id:item.id||String(Date.now()),createdAt:item.createdAt||new Date().toISOString()});writeStore(key,list);return list[0]}
+function removeStoreItem(key,id){writeStore(key,readStore(key).filter(x=>String(x.id)!==String(id)))}
+function updateStoreItem(key,id,patch){writeStore(key,readStore(key).map(x=>String(x.id)===String(id)?{...x,...patch,updatedAt:new Date().toISOString()}:x))}
+function planItems(){return readStore(ADMIN_PLAN_KEY)}
+function newsItems(){return readStore(ADMIN_NEWS_KEY)}
+function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
+function userItems(){return readStore(ADMIN_USERS_KEY)}
 function savedGithubToken(){try{return localStorage.getItem(GITHUB_TOKEN_KEY)||""}catch(e){return""}}
 function setSavedGithubToken(token){try{if(token)localStorage.setItem(GITHUB_TOKEN_KEY,token);else localStorage.removeItem(GITHUB_TOKEN_KEY)}catch(e){}}
 async function fetchDashboard(){
@@ -324,14 +353,20 @@ function renderShell(){
   const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
   const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
   const ctx={live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs,updated:data.updated};
-  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="stats"?renderStats(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="schedule"?renderSchedule():currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="stats"?renderStats(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tabs">
       ${tabButton("start","Start")}
+      ${tabButton("preview","Live-Vorschau")}
       ${tabButton("overview","Dashboard")}
       ${tabButton("content","Inhalte")}
       ${tabButton("actions","Aktionen")}
+      ${tabButton("schedule","Geplant")}
+      ${tabButton("news","News")}
+      ${tabButton("reports","Fehler")}
+      ${tabButton("users","Benutzer")}
       ${tabButton("stats","Statistik")}
+      ${tabButton("tech","Technik")}
       ${tabButton("settings","Einstellungen")}
     </nav>
     ${body}
@@ -379,8 +414,14 @@ function renderStart(ctx){
   </section>
   <section class="folder-grid">
     ${folderCard("①","Übersicht","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","overview",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
-    ${folderCard("②","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("③","Aktionen","Neuen Beitrag vorbereiten, prüfen und bewusst veröffentlichen.","actions",`${ctx.installs.total} App-Installationen`)}
+    ${folderCard("②","Vorschau","Echte Besucher-App mobil oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
+    ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
+    ${folderCard("④","Aktionen","Neuen Beitrag vorbereiten, prüfen und bewusst veröffentlichen.","actions",`${ctx.installs.total} App-Installationen`)}
+    ${folderCard("⑤","Geplant","Zeitgesteuerte Beiträge und Entwürfe überblicken.","schedule",`${planItems().length} geplant`)}
+    ${folderCard("⑥","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
+    ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
+    ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
+    ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -426,6 +467,153 @@ function renderOverview(ctx){
         <div class="section-head"><h3>Meist geteilt</h3><span>Top 5</span></div>
         <div class="rank-list">${ctx.topShares.length?ctx.topShares.map((r,i)=>rankCard(r,i,"shares")).join(""):`<div class="empty">Noch keine Shares.</div>`}</div>
       </div>
+    </aside>
+  </section>`;
+}
+function renderLivePreview(ctx){
+  const url=`${SITE_ORIGIN}/?adminPreview=${Date.now()}#home`;
+  return `<section class="live-preview-shell">
+    <aside class="side-stack">
+      <div class="panel">
+        <div class="section-head"><h3>Live-Vorschau</h3><span>echte App</span></div>
+        <div class="status-list">
+          <div class="status-row"><span><b>Mobile Ansicht</b><br>iPhone/PWA-ähnliche Breite im Admin prüfen.</span><strong class="status-pill">Aktiv</strong></div>
+          <div class="status-row"><span><b>Desktop Ansicht</b><br>Breite Vorschau für Browser und Tablet prüfen.</span><strong class="status-pill">Bereit</strong></div>
+          <div class="status-row"><span><b>Veröffentlichung</b><br>Änderungen werden erst durch den Upload live.</span><strong class="status-pill">gesichert</strong></div>
+        </div>
+        <div class="live-preview-toolbar" style="margin-top:12px">
+          <button class="btn primary" id="previewMobileBtn" type="button">Mobile</button>
+          <button class="btn" id="previewDesktopBtn" type="button">Desktop</button>
+          <a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Extern öffnen</a>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h3>Prüfliste</h3><span>vor Live</span></div>
+        ${validationList(draftMarkdown)}
+      </div>
+    </aside>
+    <div class="live-preview-device mobile" id="livePreviewDevice">
+      <iframe class="live-preview-frame" id="livePreviewFrame" src="${esc(url)}" title="DAR AL TAWḤID Live-Vorschau"></iframe>
+    </div>
+  </section>`;
+}
+function plannerCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.title||"Ohne Titel")}</b>
+    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>${esc(item.note||"")}</span>
+    <div class="planner-actions">
+      <button class="btn" data-plan-ready="${esc(item.id)}" type="button">Bereit</button>
+      <button class="btn danger" data-plan-remove="${esc(item.id)}" type="button">Entfernen</button>
+    </div>
+  </article>`;
+}
+function renderSchedule(){
+  const items=planItems();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Geplante Beiträge</h3><span>lokale Planung</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="planTitle" placeholder="Titel / Beitragsname">
+        <input class="field" id="planWhen" type="datetime-local">
+        <input class="field" id="planCategory" placeholder="Kategorie / Serie">
+        <select class="field" id="planStatus"><option>Entwurf</option><option>In Prüfung</option><option>Bereit</option><option>Veröffentlicht</option></select>
+        <textarea class="admin-textarea wide" id="planNote" placeholder="Notiz, Quelle, Datei oder Arbeitsstand"></textarea>
+        <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">Automatisches Veröffentlichen zur Uhrzeit braucht eine serverseitige Funktion, z. B. Cloudflare Worker/Cron oder Supabase Edge Function. Diese Admin-Ansicht bereitet die Planung sauber vor und verhindert unkontrolliertes Live-Schalten.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Liste</h3><span>${items.length} Einträge</span></div>
+      <div class="planner-grid">${items.length?items.map(plannerCard).join(""):`<div class="empty">Noch keine geplanten Beiträge.</div>`}</div>
+    </aside>
+  </section>`;
+}
+function newsCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.title||"News")}</b>
+    <span>${esc(item.text||"")}<br>Sichtbar bis: ${esc(item.until||"24 Stunden")} · Status: ${esc(item.status||"Entwurf")}</span>
+    <div class="planner-actions">
+      <button class="btn primary" data-news-publish="${esc(item.id)}" type="button">Als News markieren</button>
+      <button class="btn danger" data-news-remove="${esc(item.id)}" type="button">Entfernen</button>
+    </div>
+  </article>`;
+}
+function renderNews(){
+  const items=newsItems();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>News / Neues</h3><span>24-Stunden-Hinweise</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="newsTitle" placeholder="Kurzer Titel">
+        <select class="field" id="newsDuration"><option value="24 Stunden">24 Stunden</option><option value="bis manuell deaktiviert">manuell deaktivieren</option><option value="Entwurf">als Entwurf</option></select>
+        <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
+        <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">Live-Anzeige im Besucherbereich braucht einen veröffentlichten Datenstand oder Backend-Sync. Diese Liste dient als sauberer Admin-Entwurf und Veröffentlichungsprüfung.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
+      <div class="planner-grid">${items.length?items.map(newsCard).join(""):`<div class="empty">Noch keine News vorbereitet.</div>`}</div>
+    </aside>
+  </section>`;
+}
+function reportCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.area||"Bereich")} · ${esc(item.status||"Neu")}</b>
+    <span>${esc(item.text||"Keine Beschreibung")}<br>Nutzer: ${esc(item.user||"unbekannt")} · ${esc(new Date(item.createdAt||Date.now()).toLocaleString("de-DE"))}</span>
+    <div class="planner-actions">
+      <button class="btn" data-report-progress="${esc(item.id)}" type="button">In Bearbeitung</button>
+      <button class="btn primary" data-report-done="${esc(item.id)}" type="button">Behoben</button>
+      <button class="btn danger" data-report-remove="${esc(item.id)}" type="button">Archivieren</button>
+    </div>
+  </article>`;
+}
+function renderReports(){
+  const items=reportItems();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Fehlermeldungen</h3><span>registrierte Nutzer</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="reportUser" placeholder="Nutzername">
+        <select class="field" id="reportArea"><option>Push</option><option>Theme</option><option>Qurʾān-Suche</option><option>Gebetszeiten</option><option>Beitrag</option><option>Technik</option></select>
+        <textarea class="admin-textarea wide" id="reportText" placeholder="Meldung oder interne Notiz"></textarea>
+        <button class="btn primary wide" id="addReportBtn" type="button">Fehlermeldung erfassen</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">Das öffentliche Meldeformular für registrierte Nutzer braucht Konto-/Backend-Sync. Hier ist die Admin-Verwaltung für Status, Antwort und Archivierung vorbereitet.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
+      <div class="planner-grid">${items.length?items.map(reportCard).join(""):`<div class="empty">Keine Fehlermeldungen erfasst.</div>`}</div>
+    </aside>
+  </section>`;
+}
+function userCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.username||"Nutzer")}</b>
+    <span>Status: ${esc(item.status||"aktiv")}<br>Theme: ${esc(item.theme||"unbekannt")} · Push: ${esc(item.push||"offen")}<br>Letzte Aktivität: ${esc(item.lastActive||"nicht bekannt")}</span>
+    <div class="planner-actions">
+      <button class="btn" data-user-active="${esc(item.id)}" type="button">Aktiv</button>
+      <button class="btn danger" data-user-disable="${esc(item.id)}" type="button">Deaktivieren</button>
+    </div>
+  </article>`;
+}
+function renderUsers(ctx){
+  const items=userItems();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Benutzer</h3><span>Anmeldename + PIN</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="userName" placeholder="Anmeldename">
+        <select class="field" id="userTheme"><option>Klassisch Dunkel</option><option>Klassisch Hell</option><option>Sanft Elegant</option><option>Royal Nachtblau</option></select>
+        <select class="field" id="userPush"><option>Push offen</option><option>Push aktiv</option><option>Push blockiert</option></select>
+        <select class="field" id="userStatus"><option>aktiv</option><option>deaktiviert</option><option>prüfen</option></select>
+        <button class="btn primary wide" id="addUserBtn" type="button">Benutzer notieren</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">PINs dürfen niemals im Browser-Klartext gespeichert werden. Echte Konten brauchen Supabase/Backend mit Hashing und RLS. Diese Admin-Liste ist nur ein Überblick, keine PIN-Speicherung.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Überblick</h3><span>${items.length} Konten</span></div>
+      <div class="planner-grid">${items.length?items.map(userCard).join(""):`<div class="empty">Noch keine Benutzerübersicht vorhanden.</div>`}</div>
     </aside>
   </section>`;
 }
@@ -589,6 +777,32 @@ function renderSettings(ctx){
     </aside>
   </section>`;
 }
+function renderTech(ctx){
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Technik</h3><span>Systemstatus</span></div>
+      ${renderTechStatus(ctx)}
+      <div class="section-head" style="margin-top:16px"><h3>Backend-Grenzen</h3><span>wichtig</span></div>
+      <div class="status-list">
+        <div class="status-row"><span><b>GitHub Token</b><br>Sicher darf er nicht im Browser-Code stehen. Für echte Sicherheit braucht es Cloudflare Worker/Supabase Secret.</span><strong class="status-pill">Backend nötig</strong></div>
+        <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Automatisch zur Uhrzeit veröffentlichen geht zuverlässig nur serverseitig per Cron/Worker.</span><strong class="status-pill">Scheduler nötig</strong></div>
+        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Bei geschlossener PWA braucht es OneSignal/serverseitige Planung, lokale Timer reichen nicht.</span><strong class="status-pill">Server nötig</strong></div>
+        <div class="status-row"><span><b>Konto-Sync</b><br>Anmeldename/PIN muss mit Hashing, RLS und Tabellen im Backend laufen.</span><strong class="status-pill">Supabase</strong></div>
+      </div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel"><div class="section-head"><h3>Statuszahlen</h3><span>Admin</span></div>
+        <div class="command-grid">
+          <div class="command-card"><b>Geplant</b><span>${planItems().length}</span><small>lokale Einträge</small></div>
+          <div class="command-card"><b>News</b><span>${newsItems().length}</span><small>vorbereitet</small></div>
+          <div class="command-card"><b>Fehler</b><span>${reportItems().length}</span><small>erfasst</small></div>
+          <div class="command-card"><b>Benutzer</b><span>${userItems().length}</span><small>notiert</small></div>
+        </div>
+      </div>
+      <div class="panel"><div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div><div class="change-log">${renderChangeLog()}</div></div>
+    </aside>
+  </section>`;
+}
 function renderTechStatus(ctx){
   const checks=[
     ["Supabase verbunden",hasSupabase(),"Live- und Statistikdaten abrufbar"],
@@ -619,7 +833,25 @@ function bindUi(){
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostToGithub;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const forgetGithubTokenBtn=document.getElementById("forgetGithubTokenBtn");if(forgetGithubTokenBtn)forgetGithubTokenBtn.onclick=()=>{setSavedGithubToken("");const input=document.getElementById("githubTokenInput");if(input)input.value="";const remember=document.getElementById("rememberGithubToken");if(remember)remember.checked=false;setUploadStatus("Token wurde von diesem Gerät gelöscht.")};
+  bindCommandCenterForms();
   bindRankCards();
+}
+function bindCommandCenterForms(){
+  const mobile=document.getElementById("previewMobileBtn");if(mobile)mobile.onclick=()=>{document.getElementById("livePreviewDevice")?.classList.add("mobile");document.getElementById("livePreviewDevice")?.classList.remove("desktop")};
+  const desktop=document.getElementById("previewDesktopBtn");if(desktop)desktop.onclick=()=>{document.getElementById("livePreviewDevice")?.classList.add("desktop");document.getElementById("livePreviewDevice")?.classList.remove("mobile")};
+  const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",title);renderShell()};
+  document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
+  document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
+  const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
+  document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News als sichtbar markieren?")){updateStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsPublish,{status:"Sichtbar"});addAdminLog("News","News als sichtbar markiert","");renderShell()}});
+  const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
+  document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
+  document.querySelectorAll("[data-report-done]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportDone,{status:"Behoben"});addAdminLog("Fehler","Fehler als behoben markiert","");renderShell()});
+  document.querySelectorAll("[data-report-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Meldung archivieren?")){updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportRemove,{status:"Archiviert"});renderShell()}});
+  const addUser=document.getElementById("addUserBtn");if(addUser)addUser.onclick=()=>{const username=(document.getElementById("userName")?.value||"").trim();if(!username){toast("Anmeldename fehlt");return}addStoreItem(ADMIN_USERS_KEY,{username,theme:document.getElementById("userTheme")?.value||"",push:document.getElementById("userPush")?.value||"",status:document.getElementById("userStatus")?.value||"aktiv",lastActive:new Date().toLocaleString("de-DE")});addAdminLog("Benutzer","Benutzer notiert",username);renderShell()};
+  document.querySelectorAll("[data-user-disable]").forEach(btn=>btn.onclick=()=>{if(confirm("Diesen Nutzer wirklich deaktivieren?")){updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userDisable,{status:"deaktiviert"});addAdminLog("Benutzer","Benutzer deaktiviert","");renderShell()}});
+  document.querySelectorAll("[data-user-active]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userActive,{status:"aktiv"});renderShell()});
 }
 function updateDraftPreview(){
   const box=document.getElementById("draftPreviewBox");

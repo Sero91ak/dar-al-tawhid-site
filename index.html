@@ -4985,7 +4985,8 @@ function bottomNavMetrics(){const nav=$("bottomNav");if(!nav)return[];const navR
 function setBottomNavPill(left,width,dragging){const nav=$("bottomNav");if(!nav)return;nav.classList.toggle("is-pill-dragging",!!dragging);nav.style.setProperty("--nav-pill-left",`${left}px`);nav.style.setProperty("--nav-pill-width",`${width}px`)}
 function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-nav]").forEach((btn,i)=>btn.classList.toggle("active",i===idx))}
 function nearestBottomNavIndex(pillCenter,metrics){let best=0,d=Infinity;metrics.forEach((m,i)=>{const dist=Math.abs(m.center-pillCenter);if(dist<d){d=dist;best=i}});return best}
-function navigateBottomNavTab(tab,swipeDir){if(!tab||tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;if(tab==="home")clearQuranReturnState();clearNavStack();navigate(tab,"",{skipPush:true})}
+function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:0,behavior:"auto"})))}
+function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;clearNavStack();navigate(tab,"",{skipPush:true})}
 function updateBottomNavPill(){}
 function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route.view))})}
 function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)}})}
@@ -5934,7 +5935,7 @@ function bindEvents(){
   const statsLogoutBtn=$("statsLogoutBtn");if(statsLogoutBtn){statsLogoutBtn.onclick=()=>{setStatsAuthed(false);render()}}
   const offlineBox=$("offlineBox");if(offlineBox)updateOfflineBox();
 }
-$("backBtn").onclick=()=>goBack();const homeBtnEl=$("homeBtn");if(homeBtnEl)homeBtnEl.onclick=()=>{clearQuranReturnState();clearNavStack();navigate("home")};
+$("backBtn").onclick=()=>goBack();const homeBtnEl=$("homeBtn");if(homeBtnEl)homeBtnEl.onclick=()=>hardGoHome();
 window.addEventListener("hashchange",render);
 const FLOAT_TIPS_KEY="darFloatTipsShownV1";
 function showFloatTipsOnce(){
