@@ -90,6 +90,32 @@ button{cursor:pointer}
 .quick{display:block;text-decoration:none;color:var(--ink);text-align:left;width:100%;font:inherit;cursor:pointer}
 .quick:is(button){appearance:none;-webkit-appearance:none}
 .quick:hover{border-color:rgba(140,190,255,.42)}
+.command-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
+.command-card{border:1px solid var(--line2);border-radius:16px;background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.035));padding:12px;min-height:94px}
+.command-card b{display:block;color:var(--gold);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.command-card span{display:block;color:#fff5cf;font-size:18px;font-weight:950;line-height:1.15}
+.command-card small{display:block;color:var(--soft);font-size:10.5px;line-height:1.4;margin-top:6px}
+.workflow-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}
+.workflow-step{border:1px solid var(--line2);border-radius:15px;background:rgba(0,0,0,.18);padding:11px;min-height:82px;position:relative}
+.workflow-step:before{content:"";display:block;width:9px;height:9px;border-radius:999px;background:var(--muted);box-shadow:0 0 18px rgba(140,190,255,.14);margin-bottom:8px}
+.workflow-step.ready:before{background:var(--gold);box-shadow:0 0 18px rgba(239,215,142,.42)}
+.workflow-step b{display:block;color:#fff4cc;font-size:12px;line-height:1.18}
+.workflow-step small{display:block;color:var(--soft);font-size:10px;line-height:1.35;margin-top:6px}
+.status-list{display:grid;gap:8px}
+.status-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.18);padding:10px}
+.status-row b{color:#fff4cc;font-size:12px}
+.status-row span{color:var(--soft);font-size:11px;line-height:1.35}
+.status-pill{border:1px solid rgba(239,215,142,.24);border-radius:999px;background:rgba(239,215,142,.08);color:var(--gold)!important;padding:5px 8px;font-size:10px!important;font-weight:950;white-space:nowrap}
+.preview-box{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(9,18,31,.96),rgba(4,7,13,.96));padding:14px;margin-top:12px;display:grid;gap:10px}
+.preview-frame{border:1px solid rgba(239,215,142,.18);border-radius:16px;background:radial-gradient(circle at 20% 0%,rgba(239,215,142,.09),transparent 36%),linear-gradient(180deg,rgba(18,16,12,.96),rgba(7,7,5,.96));padding:15px;min-height:180px}
+.preview-frame h4{font-family:var(--serif);color:var(--gold);font-size:24px;line-height:1.1;margin:0 0 8px}
+.preview-frame p{color:var(--soft);font-size:12px;line-height:1.55;margin:0 0 8px}
+.preview-frame blockquote{margin:10px 0;border-left:3px solid rgba(239,215,142,.46);padding:8px 0 8px 12px;color:#fff7df;font-family:var(--serif);font-size:17px;line-height:1.55}
+.preview-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.change-log{display:grid;gap:8px}
+.change-item{border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:10px}
+.change-item b{display:block;color:#fff4cc;font-size:12px}
+.change-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:4px}
 .push-test-card{grid-column:1/-1;cursor:default}
 .push-test-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px}
 .push-test-controls .field{min-height:36px;font-size:11px}
@@ -122,8 +148,8 @@ button{cursor:pointer}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
+@media(max-width:950px){.hero,.split,.upload-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
 </style>
 </head>
 <body>
@@ -155,6 +181,8 @@ const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location
 const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
 const GITHUB_TOKEN_KEY="darAdminGithubTokenV1";
+const ADMIN_DRAFT_KEY="darAdminDraftV1";
+const ADMIN_LOG_KEY="darAdminChangeLogV1";
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
@@ -169,6 +197,13 @@ function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return 
 function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
+function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus}catch(e){}}
+function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,updatedAt:new Date().toISOString()}))}catch(e){}addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
+function readAdminLog(){try{return JSON.parse(localStorage.getItem(ADMIN_LOG_KEY)||"[]").filter(Boolean).slice(0,12)}catch(e){return[]}}
+function addAdminLog(type,title,detail){try{const list=readAdminLog();list.unshift({type,title,detail,ts:new Date().toISOString()});localStorage.setItem(ADMIN_LOG_KEY,JSON.stringify(list.slice(0,12)))}catch(e){}}
+function renderChangeLog(){const list=readAdminLog();return list.length?list.slice(0,6).map(item=>`<div class="change-item"><b>${esc(item.type)} · ${esc(new Date(item.ts).toLocaleString("de-DE"))}</b><span>${esc(item.title)}${item.detail?`<br>${esc(item.detail)}`:""}</span></div>`).join(""):`<div class="empty">Noch kein lokales Änderungsprotokoll.</div>`}
+function lastPublishLabel(){const item=readAdminLog().find(x=>x.type==="Veröffentlicht");return item?new Date(item.ts).toLocaleDateString("de-DE"):"Noch keine"}
+function lastAdminError(){const item=readAdminLog().find(x=>x.type==="Fehler");return item?item.title:"Keine"}
 function savedGithubToken(){try{return localStorage.getItem(GITHUB_TOKEN_KEY)||""}catch(e){return""}}
 function setSavedGithubToken(token){try{if(token)localStorage.setItem(GITHUB_TOKEN_KEY,token);else localStorage.removeItem(GITHUB_TOKEN_KEY)}catch(e){}}
 async function fetchDashboard(){
@@ -188,6 +223,7 @@ function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographi
 function contentUrl(row){if(row.content_type==="post")return SITE_ORIGIN+"/#post/"+encodeURIComponent(row.content_id);if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);return SITE_ORIGIN}
 function score(row){return Number(row.views||0)+Number(row.shares||0)*4+Number(row.saves||0)*3}
 function engagement(row){const v=Number(row.views||0);return v?Math.round(((Number(row.shares||0)+Number(row.saves||0))/v)*100):0}
+function countBy(rows,fn){return (rows||[]).reduce((acc,row)=>{const key=fn(row);acc[key]=(acc[key]||0)+1;return acc},{})}
 function totals(){return (lastData?.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")}
 function installTotals(){
   const rows=(lastData?.totals||[]).filter(x=>x.content_type==="install");
@@ -288,13 +324,15 @@ function renderShell(){
   const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
   const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
   const ctx={live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs,updated:data.updated};
-  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):renderStart(ctx);
+  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="stats"?renderStats(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tabs">
       ${tabButton("start","Start")}
       ${tabButton("overview","Dashboard")}
       ${tabButton("content","Inhalte")}
       ${tabButton("actions","Aktionen")}
+      ${tabButton("stats","Statistik")}
+      ${tabButton("settings","Einstellungen")}
     </nav>
     ${body}
     <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
@@ -335,13 +373,20 @@ function renderStart(ctx){
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
         <button class="btn" data-tab="overview" type="button">Statistik öffnen</button>
+        <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
       </div>
     </div>
   </section>
   <section class="folder-grid">
     ${folderCard("①","Übersicht","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","overview",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
     ${folderCard("②","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("③","Aktionen","Neuen Beitrag vorbereiten, GitHub-Upload nutzen und schnelle Wege öffnen.","actions",`${ctx.installs.total} App-Installationen`)}
+    ${folderCard("③","Aktionen","Neuen Beitrag vorbereiten, prüfen und bewusst veröffentlichen.","actions",`${ctx.installs.total} App-Installationen`)}
+  </section>
+  <section class="command-grid">
+    <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
+    <div class="command-card"><b>Nächster Entwurf</b><span>${draftMarkdown.trim()?"Bereit":"Leer"}</span><small>${draftFilename?esc(draftFilename):"Noch kein Beitrag vorbereitet"}</small></div>
+    <div class="command-card"><b>Push-Status</b><span>${"Notification" in window?"Prüfbar":"Nicht unterstützt"}</span><small>Test nur auf diesem Admin-Gerät</small></div>
+    <div class="command-card"><b>Letzter Fehler</b><span>${esc(lastAdminError())}</span><small>Aus lokalem Admin-Protokoll</small></div>
   </section>
   <section class="hero">
     <div class="hero-card">
@@ -384,6 +429,54 @@ function renderOverview(ctx){
     </aside>
   </section>`;
 }
+function workflowSteps(active="draft"){
+  const order=["draft","review","ready","published","disabled"];
+  const labels={draft:["Entwurf","Vorbereitet, aber nicht sichtbar."],review:["In Prüfung","Quellen, Darstellung und Links prüfen."],ready:["Bereit","Kann bewusst veröffentlicht werden."],published:["Veröffentlicht","Inhalt ist live sichtbar."],disabled:["Zurückgezogen","Gespeichert, aber nicht sichtbar."]};
+  const activeIndex=Math.max(0,order.indexOf(active));
+  return `<div class="workflow-grid">${order.map((key,i)=>`<div class="workflow-step ${i<=activeIndex?"ready":""}"><b>${esc(labels[key][0])}</b><small>${esc(labels[key][1])}</small></div>`).join("")}</div>`;
+}
+function markdownPreviewData(markdown){
+  const text=String(markdown||"");
+  const title=frontmatterValue(text,"title").replace(/^📖\s*/,"")||"Noch kein Titel";
+  const category=frontmatterValue(text,"category")||"Kategorie fehlt";
+  const scholar=frontmatterValue(text,"scholar")||frontmatterValue(text,"gelehrter")||"Gelehrter offen";
+  const book=frontmatterValue(text,"book")||frontmatterValue(text,"werk")||"Werk offen";
+  const source=frontmatterValue(text,"source")||frontmatterValue(text,"quelle")||"Quelle prüfen";
+  const body=text.replace(/^---[\s\S]*?---/,"").trim();
+  const quote=(body.match(/>+\s*(.+)/)||body.match(/(?:quote|aussage):\s*[\"']?(.+?)[\"']?\s*$/mi)||[])[1]||body.split(/\n\s*\n/).find(Boolean)||"Markdown einfügen, dann erscheint hier die Vorschau.";
+  return{title,category,scholar,book,source,quote:String(quote).replace(/^#+\s*/,"").trim().slice(0,420)};
+}
+function validationList(markdown){
+  const p=markdownPreviewData(markdown);
+  const checks=[
+    ["Titel",p.title!=="Noch kein Titel"],
+    ["Kategorie",p.category!=="Kategorie fehlt"],
+    ["Gelehrter",p.scholar!=="Gelehrter offen"],
+    ["Werk",p.book!=="Werk offen"],
+    ["Quelle",p.source!=="Quelle prüfen"],
+    ["Dateiname",!!draftFilename]
+  ];
+  return `<div class="status-list">${checks.map(([label,ok])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${ok?"Vorhanden":"Bitte prüfen oder ergänzen"}</span><strong class="status-pill">${ok?"OK":"Offen"}</strong></div>`).join("")}</div>`;
+}
+function renderDraftPreview(){
+  const p=markdownPreviewData(draftMarkdown);
+  return `<div class="preview-box" id="draftPreviewBox">
+    <div class="section-head"><h3>Live-Vorschau</h3><span>Admin-Entwurf</span></div>
+    <div class="preview-frame">
+      <h4>${esc(p.title)}</h4>
+      <p>${esc(p.category)} · ${esc(p.scholar)} · ${esc(p.book)}</p>
+      <blockquote>${esc(p.quote)}</blockquote>
+      <p><strong>Quelle:</strong> ${esc(p.source)}</p>
+    </div>
+    <div class="preview-tools">
+      <button class="btn primary" id="refreshPreviewBtn" type="button">Vorschau öffnen</button>
+      <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
+      <button class="btn" id="checkDraftBtn" type="button">Änderungen prüfen</button>
+      <button class="btn primary" id="publishReadyBtn" type="button">Bereit markieren</button>
+    </div>
+    ${validationList(draftMarkdown)}
+  </div>`;
+}
 function renderContent(){
   const rows=filteredRows();
   return `<section class="panel">
@@ -420,10 +513,13 @@ function renderActions(rows,installs=installTotals()){
         <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
+      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
       <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>GitHub API</span></div>
       <div class="upload-grid">
         <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
         <div class="upload-stack">
+          <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
           <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
           <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
           <input class="field" id="githubTokenInput" type="password" autocomplete="off" value="${esc(savedGithubToken())}" placeholder="GitHub Token">
@@ -433,10 +529,11 @@ function renderActions(rows,installs=installTotals()){
           </label>
           <a class="btn" href="${GITHUB_TOKEN_URL}" target="_blank" rel="noopener">Token erstellen</a>
           <button class="btn" id="forgetGithubTokenBtn" type="button">Token löschen</button>
-          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird hochgeladen...":"Beitrag hochladen"}</button>
+          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
           <div class="upload-status" id="uploadStatus">${draftStatus||"Wenn du den Token merkst, bleibt er nur lokal auf diesem Gerät gespeichert. Die App erstellt die Markdown-Datei und aktualisiert posts-index.json automatisch."}</div>
         </div>
       </div>
+      ${renderDraftPreview()}
     </div>
     <aside class="side-stack">
       <div class="panel">
@@ -447,8 +544,63 @@ function renderActions(rows,installs=installTotals()){
         <div class="section-head"><h3>App-Status</h3><span>PWA</span></div>
         <div class="empty">Besucher-App Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
       </div>
+      <div class="panel">
+        <div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div>
+        <div class="change-log">${renderChangeLog()}</div>
+      </div>
     </aside>
   </section>`;
+}
+function renderStats(ctx){
+  const categories=countBy(ctx.rows,r=>r.content_type||"page");
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Statistik</h3><span>Heute / Live / Inhalte</span></div>
+      <div class="command-grid">
+        <div class="command-card"><b>Live</b><span>${Number(ctx.live.live_now||0)}</span><small>Aktuell online</small></div>
+        <div class="command-card"><b>Heute</b><span>${Number(ctx.live.today_views||0)}</span><small>Seiten- und Inhaltsaufrufe</small></div>
+        <div class="command-card"><b>Favoriten</b><span>${Number(ctx.live.today_saves||0)}</span><small>heute gespeichert</small></div>
+        <div class="command-card"><b>Shares</b><span>${Number(ctx.live.today_shares||0)}</span><small>heute geteilt</small></div>
+      </div>
+      <div class="section-head"><h3>Beliebte Bereiche</h3><span>anonym</span></div>
+      <div class="status-list">${Object.entries(categories).map(([k,v])=>`<div class="status-row"><span><b>${esc(typeLabel(k))}</b><br>${v} erfasste Einträge</span><strong class="status-pill">${v}</strong></div>`).join("")}</div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel"><div class="section-head"><h3>Top Favoriten</h3><span>gespeichert</span></div><div class="rank-list">${sortedRows(ctx.rows).sort((a,b)=>Number(b.saves||0)-Number(a.saves||0)).slice(0,5).map((r,i)=>rankCard(r,i,"saves")).join("")||`<div class="empty">Noch keine Favoriten.</div>`}</div></div>
+      <div class="panel"><div class="section-head"><h3>Technik-Signale</h3><span>Status</span></div>${renderTechStatus(ctx)}</div>
+    </aside>
+  </section>`;
+}
+function renderSettings(ctx){
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Einstellungen & Technik</h3><span>interne Kontrolle</span></div>
+      ${renderTechStatus(ctx)}
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsregeln</h3><span>Sicherheit</span></div>
+      <div class="status-list">
+        <div class="status-row"><span><b>Direkt live vermeiden</b><br>Vor jedem Upload erscheint eine bewusste Sicherheitsabfrage.</span><strong class="status-pill">Aktiv</strong></div>
+        <div class="status-row"><span><b>Entwurf lokal speichern</b><br>Markdown und Dateiname bleiben auf diesem Admin-Gerät gespeichert.</span><strong class="status-pill">Aktiv</strong></div>
+        <div class="status-row"><span><b>Datenschutz</b><br>Statistik nutzt aggregierte Inhalte und keine Werbeprofile.</span><strong class="status-pill">Schonend</strong></div>
+      </div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel"><div class="section-head"><h3>Änderungsprotokoll</h3><span>letzte Aktionen</span></div><div class="change-log">${renderChangeLog()}</div></div>
+      <div class="panel"><div class="section-head"><h3>Admin-App</h3><span>getrennt</span></div><div class="empty">Diese Steuerzentrale bleibt unter <strong>/admin/</strong> getrennt von der Besucher-App.</div></div>
+    </aside>
+  </section>`;
+}
+function renderTechStatus(ctx){
+  const checks=[
+    ["Supabase verbunden",hasSupabase(),"Live- und Statistikdaten abrufbar"],
+    ["Daten geladen",!!lastData,`${ctx.updated?ctx.updated.toLocaleString("de-DE"):"Noch offen"}`],
+    ["GitHub Token lokal",!!savedGithubToken(),"Nur auf diesem Admin-Gerät gespeichert"],
+    ["Service Worker",!!("serviceWorker" in navigator),"Admin-PWA Registrierung möglich"],
+    ["Browser Push",!!("Notification" in window),"Lokaler Admin-Test möglich"],
+    ["PWA installierbar",!!("BeforeInstallPromptEvent" in window)||(typeof matchMedia==="function"&&matchMedia("(display-mode: standalone)").matches),"Browserabhängig"],
+    ["posts-index Upload",true,"Wird vor Upload geprüft"],
+    ["Sicherheitsabfrage",true,"Online veröffentlichen fragt bewusst nach"]
+  ];
+  return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
@@ -456,13 +608,27 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
-  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value};
-  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim()};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview()};
+  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview()};
+  const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
+  const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
+  const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
+  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Änderungen geprüft",draftFilename||"Entwurf");setUploadStatus("Prüfung markiert. Bitte Vorschau, Quelle, Titel, Kategorie und Links kontrollieren.");renderShell()};
+  const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostToGithub;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const forgetGithubTokenBtn=document.getElementById("forgetGithubTokenBtn");if(forgetGithubTokenBtn)forgetGithubTokenBtn.onclick=()=>{setSavedGithubToken("");const input=document.getElementById("githubTokenInput");if(input)input.value="";const remember=document.getElementById("rememberGithubToken");if(remember)remember.checked=false;setUploadStatus("Token wurde von diesem Gerät gelöscht.")};
   bindRankCards();
+}
+function updateDraftPreview(){
+  const box=document.getElementById("draftPreviewBox");
+  if(!box)return;
+  const fresh=renderDraftPreview();
+  const tmp=document.createElement("div");
+  tmp.innerHTML=fresh;
+  box.replaceWith(tmp.firstElementChild);
+  bindUi();
 }
 function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
 async function sendAdminLocalPushTest(){
@@ -496,6 +662,7 @@ async function prepareNextPostNumber(){
     draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
     const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
     setUploadStatus(`Nächste Nummer: <strong>${draftNextNumber}</strong><br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>`);
+    addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",draftFilename);
   }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
 async function uploadPostToGithub(){
@@ -507,6 +674,9 @@ async function uploadPostToGithub(){
   if(!token){setUploadStatus("Bitte GitHub Token einfügen.");return}
   if(remember)setSavedGithubToken(token);else setSavedGithubToken("");
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
+  const preview=markdownPreviewData(draftMarkdown);
+  const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`);
+  if(!ok){setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und GitHub-Dateien...");
     const indexFile=await loadPostsIndexForUpload(token);
@@ -529,8 +699,11 @@ async function uploadPostToGithub(){
     await githubPut("content/posts/posts-index.json",JSON.stringify(payload,null,2)+"\n",`Update posts index for ${draftFilename}`,token,indexFile.sha);
     draftMarkdown=markdown;draftNextNumber=next;
     setUploadStatus(`Fertig hochgeladen: <strong>${esc(draftFilename)}</strong><br>Nächste Nummer war: <strong>${next}</strong>`);
+    addAdminLog("Veröffentlicht","Beitrag online veröffentlicht",draftFilename);
+    saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
     toast("Beitrag hochgeladen");
   }catch(e){
+    addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
     setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Wenn der Beitrag hochgeladen wurde, aber der Index nicht, bitte posts-index.json prüfen.`);
   }finally{
     uploadBusy=false;
@@ -567,6 +740,7 @@ document.addEventListener("touchend",e=>{
   }
 },{passive:true});
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{})})}
+loadLocalDraft();
 authed=readAuth();
 renderApp();
 </script>
