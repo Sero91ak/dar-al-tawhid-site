@@ -22,8 +22,8 @@
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
 }
 *{box-sizing:border-box}
-html{min-height:100%;background:var(--bg)}
-body{margin:0;min-height:100dvh;color:var(--ink);font-family:var(--sans);letter-spacing:0;
+html{min-height:100%;height:auto;background:var(--bg);overflow-x:hidden;overflow-y:auto;touch-action:pan-y pinch-zoom}
+body{margin:0;min-height:100dvh;height:auto;color:var(--ink);font-family:var(--sans);letter-spacing:0;overflow-x:hidden;overflow-y:auto;touch-action:pan-y pinch-zoom;
   background:
     radial-gradient(circle at 8% -8%,rgba(90,140,220,.28),transparent 34%),
     radial-gradient(circle at 92% 0%,rgba(140,190,255,.18),transparent 30%),
@@ -31,7 +31,7 @@ body{margin:0;min-height:100dvh;color:var(--ink);font-family:var(--sans);letter-
   padding:max(12px,var(--safe-top)) max(14px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(14px,env(safe-area-inset-left,0px))}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:1180px;margin:0 auto}
+.app{max-width:1180px;margin:0 auto;min-height:100%;touch-action:pan-y pinch-zoom}
 .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:14px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand img{width:48px;height:48px;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.28),0 0 0 1px rgba(140,190,255,.22);flex:0 0 48px}
