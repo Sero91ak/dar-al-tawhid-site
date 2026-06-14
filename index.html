@@ -4625,7 +4625,15 @@ function quranVerseTr(v,mode){mode=mode||getQuranTrMode();if(!v)return "";if(mod
 function renderQuranTransliterationPicker(){const mode=getQuranTrMode();const buttons=Object.entries(QURAN_TR_MODES).map(([key,info])=>`<button type="button" class="quran-tr-btn${mode===key?" active":""}" data-quran-tr="${key}"><span>${esc(info.label)}</span><small>${esc(info.short)}</small></button>`).join("");return `<section class="quran-tr-bar"><div class="quran-tr-label">Lautschrift wählen</div><div class="quran-tr-row">${buttons}</div><p class="quran-tr-note" id="quranTrModeNote">${esc(QURAN_TR_MODES[mode]?.hint||"")}</p></section>`}
 function renderQuranAyahTr(v){const mode=getQuranTrMode();const label=QURAN_TR_MODES[mode]?.label||"Lautschrift";const text=quranVerseTr(v,mode);return `<div class="quran-ayah-tr-wrap"><div class="quran-ayah-tr-label">Lautschrift · ${esc(label)}</div><div class="quran-ayah-tr" data-tr-tanzil="${esc(v.tr||"")}" data-tr-readable="${esc(v.tr_readable||v.tr||"")}" data-tr-academic="${esc(v.tr_academic||v.tr||"")}">${esc(text)}</div></div>`}
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{const text=el.getAttribute("data-tr-"+mode)||el.getAttribute("data-tr-tanzil")||"";el.textContent=text});document.querySelectorAll(".quran-ayah-tr-label").forEach(el=>{el.textContent="Lautschrift · "+(QURAN_TR_MODES[mode]?.label||"Lautschrift")});document.querySelectorAll(".quran-tr-btn").forEach(btn=>{btn.classList.toggle("active",btn.getAttribute("data-quran-tr")===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
-function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
+function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;let lastFormPointerAt=0;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
+function isEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.account-form,.main-search,.search-pro-panel,.prayer-settings-grid,.theme-switch-row"))}
+function isFormEditingNow(){
+  const active=document.activeElement;
+  const activeTag=active&&active.tagName?active.tagName.toLowerCase():"";
+  const activeEditable=!!(active&&(activeTag==="input"||activeTag==="textarea"||activeTag==="select"||active.isContentEditable));
+  return activeEditable||Date.now()-lastFormPointerAt<1500;
+}
+document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFormPointerAt=Date.now()},{capture:true,passive:true});
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
 const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"}};
@@ -4882,6 +4890,7 @@ function activeCurrentUpdates(){const now=Date.now();return(Array.isArray(curren
 function postsSignature(){return posts.map(p=>`${p.id}:${p.date||""}:${p.title||""}:${p._sourceFile||""}`).join("|")}
 async function refreshContent({forceRender=false}={}){
   if(!navigator.onLine)return false;
+  if(isFormEditingNow())return false;
   const before=postsSignature()+"::"+DUAS.length+"::"+JSON.stringify(currentUpdates);
   await loadPosts();
   await loadExternalDuas();
@@ -5911,7 +5920,7 @@ function bindEvents(){
   const accountLogoutBtn=$("accountLogoutBtn");if(accountLogoutBtn)accountLogoutBtn.onclick=()=>logoutAccount();
   const accountPin=$("accountPin");if(accountPin)accountPin.onkeydown=e=>{if(e.key==="Enter")$("accountLoginBtn")?.click()};
   document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const collapsed=grid.classList.toggle("collapsed");const closedLabel=btn.getAttribute("data-collapse-closed")||"Alle anzeigen";const openLabel=btn.getAttribute("data-collapse-open")||"Zuklappen";btn.textContent=collapsed?closedLabel:openLabel;}});
-  document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=()=>{const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";window.__smoothNav=true;navigate(view,value)}});
+  document.querySelectorAll("[data-nav]").forEach(el=>{el.onclick=ev=>{if(isEditableTarget(ev.target))return;const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";window.__smoothNav=true;navigate(view,value)}});
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
   if(advancedFilterBtn&&homeFilterPanel){advancedFilterBtn.onclick=()=>{const open=homeFilterPanel.classList.contains("advanced-visible");homeFilterPanel.classList.toggle("advanced-visible",!open);homeFilterPanel.classList.toggle("advanced-hidden",open);advancedFilterBtn.classList.toggle("active",!open);advancedFilterBtn.textContent=open?"Filter anzeigen":"Filter ausblenden"}}
   const homeSearchInput=$("homeSearchInput");
@@ -6128,8 +6137,8 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script>
 window.addEventListener("online",function(){updateOfflineBox();refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
-window.addEventListener("focus",function(){refreshContent()});
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")refreshContent()});
+window.addEventListener("focus",function(){setTimeout(()=>refreshContent(),260)});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")setTimeout(()=>refreshContent(),260)});
 </script>
 </body>
 </html>

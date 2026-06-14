@@ -228,10 +228,17 @@ const DEFAULT_ADMIN_TABS=[
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
-let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score";
+let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
+function adminIsEditing(){
+  const active=document.activeElement;
+  const tag=active&&active.tagName?active.tagName.toLowerCase():"";
+  return tag==="input"||tag==="textarea"||tag==="select"||!!(active&&active.isContentEditable)||Date.now()-lastAdminFormPointerAt<1500;
+}
+document.addEventListener("pointerdown",e=>{if(adminEditableTarget(e.target))lastAdminFormPointerAt=Date.now()},{capture:true,passive:true});
 function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
 function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&&String(c.supabaseKey||"").trim())}
 function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
@@ -1088,7 +1095,8 @@ async function uploadPostToGithub(){
     const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Beitrag hochladen"}
   }
 }
-async function renderDashboard(){
+async function renderDashboard({force=false}={}){
+  if(!force&&adminIsEditing())return;
   const panel=document.getElementById("panel");
   if(!lastData)panel.innerHTML=`<div class="empty">Statistik wird geladen...</div>`;
   if(!hasSupabase()){panel.innerHTML=`<div class="empty">Supabase ist nicht konfiguriert.</div>`;return}
@@ -1097,10 +1105,10 @@ async function renderDashboard(){
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
-document.getElementById("refreshBtn").onclick=()=>renderDashboard();
+document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)renderDashboard()});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)setTimeout(()=>renderDashboard(),260)});
 let adminSwipe=null;
 document.addEventListener("touchstart",e=>{
   const t=e.touches&&e.touches[0];if(!t)return;
