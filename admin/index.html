@@ -212,10 +212,14 @@ window.DAR_ANALYTICS_CONFIG={
   supabaseKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw",
   adminPin:"Dawud26"
 };
+window.DAR_WORKER_CONFIG=window.DAR_WORKER_CONFIG||{
+  publishUrl:"/api/admin/publish"
+};
 const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
 const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
-const GITHUB_TOKEN_KEY="darAdminGithubTokenV1";
+const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
+const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
 const ADMIN_LOG_KEY="darAdminChangeLogV1";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
@@ -237,9 +241,6 @@ const DEFAULT_ADMIN_TABS=[
   ["settings","Einstellungen"],
   ["overview","Dashboard"]
 ];
-const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
-const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
-const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
@@ -303,8 +304,22 @@ function previewSize(){
   }catch(e){return{width:430,height:932,mode:"mobile"}}
 }
 function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
-function savedGithubToken(){try{return localStorage.getItem(GITHUB_TOKEN_KEY)||""}catch(e){return""}}
-function setSavedGithubToken(token){try{if(token)localStorage.setItem(GITHUB_TOKEN_KEY,token);else localStorage.removeItem(GITHUB_TOKEN_KEY)}catch(e){}}
+function workerPublishUrl(){
+  try{
+    return localStorage.getItem(WORKER_PUBLISH_URL_KEY)||String((window.DAR_WORKER_CONFIG||{}).publishUrl||"/api/admin/publish");
+  }catch(e){return String((window.DAR_WORKER_CONFIG||{}).publishUrl||"/api/admin/publish")}
+}
+function saveWorkerPublishUrl(url){try{if(url)localStorage.setItem(WORKER_PUBLISH_URL_KEY,url);else localStorage.removeItem(WORKER_PUBLISH_URL_KEY)}catch(e){}}
+function resolveWorkerUrl(url){const raw=String(url||"").trim()||"/api/admin/publish";return /^https?:\/\//i.test(raw)?raw:new URL(raw,SITE_ORIGIN).toString()}
+function workerHealthUrl(){
+  const url=new URL(resolveWorkerUrl(workerPublishUrl()));
+  if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/health");
+  else if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/health");
+  else url.pathname="/health";
+  return url.toString();
+}
+function savedWorkerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch(e){return""}}
+function setSavedWorkerSecret(secret){try{if(secret)localStorage.setItem(WORKER_SECRET_KEY,secret);else localStorage.removeItem(WORKER_SECRET_KEY)}catch(e){}}
 async function fetchDashboard(){
   if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
   const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
@@ -375,15 +390,10 @@ function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^
 function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
 function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
 function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
-function utf8ToBase64(text){const bytes=new TextEncoder().encode(text);let bin="";for(let i=0;i<bytes.length;i+=0x8000){bin+=String.fromCharCode(...bytes.slice(i,i+0x8000))}return btoa(bin)}
-function base64ToUtf8(value){const bin=atob(String(value||"").replace(/\s/g,""));const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
-async function githubContent(path,token){const res=await fetch(`https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/${path}?ref=main`,{headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json"}});if(res.status===404)return null;if(!res.ok)throw new Error("GitHub Fehler "+res.status);return res.json()}
-async function githubPut(path,content,message,token,sha){const body={message,content:utf8ToBase64(content),branch:"main"};if(sha)body.sha=sha;const res=await fetch(`https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/${path}`,{method:"PUT",headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","Content-Type":"application/json"},body:JSON.stringify(body)});const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.message||("GitHub Upload Fehler "+res.status));return data}
-async function loadPostsIndexForUpload(token){
-  if(token){const file=await githubContent("content/posts/posts-index.json",token);if(file?.content)return{data:JSON.parse(base64ToUtf8(file.content)),sha:file.sha}}
-  const res=await fetch(`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/posts-index.json?t=${Date.now()}`,{cache:"no-store"});
+async function loadPostsIndexForUpload(){
+  const res=await fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}`,{cache:"no-store"});
   if(!res.ok)throw new Error("posts-index.json konnte nicht geladen werden");
-  return{data:await res.json(),sha:""};
+  return{data:await res.json()};
 }
 function normalizeMarkdownForUpload(markdown,nextNumber){
   let out=String(markdown||"").trim();
@@ -397,6 +407,23 @@ function normalizeMarkdownForUpload(markdown,nextNumber){
     out=out.replace(/^id:\s*["']?.*?["']?\s*$/m,`id: "${updated}"`);
   }
   return out+"\n";
+}
+async function publishPostViaWorkerRequest(markdown,filename){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
+  if(!publishUrl)throw new Error("Worker URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(publishUrl);
+  if(remember)setSavedWorkerSecret(secret);else setSavedWorkerSecret("");
+  const res=await fetch(resolveWorkerUrl(publishUrl),{
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+    body:JSON.stringify({markdown,filename})
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  return data;
 }
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
@@ -771,8 +798,8 @@ function renderActions(rows,installs=installTotals()){
     <div class="panel">
       <div class="section-head"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
       <div class="quick-grid">
-        <a class="quick" href="${GITHUB_NEW_POST}" target="_blank" rel="noopener"><b>Neuer Beitrag</b><small>Direkt in GitHub unter content/posts anlegen.</small></a>
-        <a class="quick" href="${GITHUB_POSTS}" target="_blank" rel="noopener"><b>Posts-Ordner</b><small>Alle Markdown-Beiträge und Index-Datei prüfen.</small></a>
+        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown unten einfügen und über Cloudflare Worker veröffentlichen.</small></button>
+        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
         <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
@@ -782,7 +809,7 @@ function renderActions(rows,installs=installTotals()){
       ${renderNewsComposer()}
       <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
       ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
-      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>GitHub API</span></div>
+      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker</span></div>
       <div class="preview-box">
         <div class="section-head"><h3>Markdown-Metadaten</h3><span>Frontmatter-Hilfe</span></div>
         <div class="admin-form-grid">
@@ -803,15 +830,15 @@ function renderActions(rows,installs=installTotals()){
           <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
           <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
           <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
-          <input class="field" id="githubTokenInput" type="password" autocomplete="off" value="${esc(savedGithubToken())}" placeholder="GitHub Token">
+          <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="/api/admin/publish">
+          <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret">
           <label class="upload-status" style="display:flex;align-items:center;gap:8px">
-            <input id="rememberGithubToken" type="checkbox" ${savedGithubToken()?"checked":""}>
-            <span>Token auf diesem Gerät merken</span>
+            <input id="rememberWorkerSecret" type="checkbox" ${savedWorkerSecret()?"checked":""}>
+            <span>Worker Secret auf diesem Gerät merken</span>
           </label>
-          <a class="btn" href="${GITHUB_TOKEN_URL}" target="_blank" rel="noopener">Token erstellen</a>
-          <button class="btn" id="forgetGithubTokenBtn" type="button">Token löschen</button>
+          <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
           <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-          <div class="upload-status" id="uploadStatus">${draftStatus||"Wenn du den Token merkst, bleibt er nur lokal auf diesem Gerät gespeichert. Die App erstellt die Markdown-Datei und aktualisiert posts-index.json automatisch."}</div>
+          <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
       </div>
       ${renderDraftPreview()}
@@ -821,7 +848,7 @@ function renderActions(rows,installs=installTotals()){
           <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
           <a class="quick" href="${SITE_ORIGIN}/manifest.json" target="_blank" rel="noopener"><b>Manifest prüfen</b><small>PWA-Farbe, Name und Icons öffnen.</small></a>
           <a class="quick" href="${SITE_ORIGIN}/service-worker.js" target="_blank" rel="noopener"><b>Service Worker prüfen</b><small>Cache- und Offline-Datei öffnen.</small></a>
-          <a class="quick" href="${GITHUB_POSTS}" target="_blank" rel="noopener"><b>GitHub Inhalte</b><small>Posts-Ordner direkt öffnen.</small></a>
+          <a class="quick" href="${workerHealthUrl()}" target="_blank" rel="noopener"><b>Worker Status</b><small>Cloudflare Worker Health-Check öffnen.</small></a>
         </div>
       </div>
     </div>
@@ -917,11 +944,12 @@ function renderTechStatus(ctx){
   const checks=[
     ["Supabase verbunden",hasSupabase(),"Live- und Statistikdaten abrufbar"],
     ["Daten geladen",!!lastData,`${ctx.updated?ctx.updated.toLocaleString("de-DE"):"Noch offen"}`],
-    ["GitHub Token lokal",!!savedGithubToken(),"Nur auf diesem Admin-Gerät gespeichert"],
+    ["Cloudflare Worker",!!workerPublishUrl(),workerPublishUrl()],
+    ["GitHub Token",true,"Nur als Cloudflare Secret, nicht im Browser"],
     ["Service Worker",!!("serviceWorker" in navigator),"Admin-PWA Registrierung möglich"],
     ["Browser Push",!!("Notification" in window),"Lokaler Admin-Test möglich"],
     ["PWA installierbar",!!("BeforeInstallPromptEvent" in window)||(typeof matchMedia==="function"&&matchMedia("(display-mode: standalone)").matches),"Browserabhängig"],
-    ["posts-index Upload",true,"Wird vor Upload geprüft"],
+    ["posts-index Upload",true,"Wird serverseitig im Worker aktualisiert"],
     ["Sicherheitsabfrage",true,"Online veröffentlichen fragt bewusst nach"]
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
@@ -973,9 +1001,10 @@ function bindUi(){
   const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Änderungen geprüft",draftFilename||"Entwurf");setUploadStatus("Prüfung markiert. Bitte Vorschau, Quelle, Titel, Kategorie und Links kontrollieren.");renderShell()};
   const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
-  const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostToGithub;
+  const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
-  const forgetGithubTokenBtn=document.getElementById("forgetGithubTokenBtn");if(forgetGithubTokenBtn)forgetGithubTokenBtn.onclick=()=>{setSavedGithubToken("");const input=document.getElementById("githubTokenInput");if(input)input.value="";const remember=document.getElementById("rememberGithubToken");if(remember)remember.checked=false;setUploadStatus("Token wurde von diesem Gerät gelöscht.")};
+  const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
+  document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
   bindRankCards();
 }
@@ -1060,7 +1089,7 @@ async function prepareNextPostNumber(){
   try{
     draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
     setUploadStatus("Prüfe aktuelle Nummer...");
-    const index=await loadPostsIndexForUpload("");
+    const index=await loadPostsIndexForUpload();
     draftNextNumber=maxPostNumber(index.data.files)+1;
     draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
     const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
@@ -1068,49 +1097,37 @@ async function prepareNextPostNumber(){
     addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",draftFilename);
   }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
-async function uploadPostToGithub(){
+async function uploadPostViaWorker(){
   if(uploadBusy)return;
-  const token=(document.getElementById("githubTokenInput")?.value||"").trim();
-  const remember=!!document.getElementById("rememberGithubToken")?.checked;
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
-  if(!token){setUploadStatus("Bitte GitHub Token einfügen.");return}
-  if(remember)setSavedGithubToken(token);else setSavedGithubToken("");
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
   const preview=markdownPreviewData(draftMarkdown);
   const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`);
   if(!ok){setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
   try{
-    uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und GitHub-Dateien...");
-    const indexFile=await loadPostsIndexForUpload(token);
+    uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
+    const indexFile=await loadPostsIndexForUpload();
     const next=maxPostNumber(indexFile.data.files)+1;
     if(!draftFilename)draftFilename=suggestFilename(draftMarkdown,next);
     else if(/(?:^|-)\d{3}(?=-|\.md$)/.test(draftFilename))draftFilename=draftFilename.replace(/(^|-)\d{3}(?=-|\.md$)/,`$1${String(next).padStart(3,"0")}`);
     if(!/^[a-z0-9][a-z0-9-]*\.md$/i.test(draftFilename)){setUploadStatus("Dateiname muss eine .md-Datei ohne Leerzeichen sein.");return}
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
-    const path=`content/posts/${draftFilename}`;
-    const existing=await githubContent(path,token);
-    if(existing)throw new Error("Diese Datei existiert schon: "+draftFilename);
-    setUploadStatus("Lade Beitrag hoch...");
-    const created=await githubPut(path,markdown,`Add post ${draftFilename}`,token);
-    const files=Array.isArray(indexFile.data.files)?indexFile.data.files.filter(f=>f&&f.name!==draftFilename):[];
-    files.push({name:draftFilename,sha:created.content.sha});
-    files.sort((a,b)=>String(a.name).localeCompare(String(b.name),"de"));
-    const payload={version:1,generated:new Date().toISOString(),count:files.length,files};
-    setUploadStatus("Aktualisiere posts-index.json...");
-    await githubPut("content/posts/posts-index.json",JSON.stringify(payload,null,2)+"\n",`Update posts index for ${draftFilename}`,token,indexFile.sha);
-    draftMarkdown=markdown;draftNextNumber=next;
-    setUploadStatus(`Fertig hochgeladen: <strong>${esc(draftFilename)}</strong><br>Nächste Nummer war: <strong>${next}</strong>`);
-    addAdminLog("Veröffentlicht","Beitrag online veröffentlicht",draftFilename);
+    setUploadStatus("Sende Beitrag an Cloudflare Worker...");
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename);
+    draftFilename=result.filename||draftFilename;
+    draftMarkdown=markdown;draftNextNumber=result.number||next;
+    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
+    addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
     saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
     toast("Beitrag hochgeladen");
   }catch(e){
     addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
-    setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Wenn der Beitrag hochgeladen wurde, aber der Index nicht, bitte posts-index.json prüfen.`);
+    setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Bitte Worker URL, Admin Worker Secret und Cloudflare Secrets prüfen.`);
   }finally{
     uploadBusy=false;
-    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Beitrag hochladen"}
+    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}
   }
 }
 async function renderDashboard({force=false}={}){
