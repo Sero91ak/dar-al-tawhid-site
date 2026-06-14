@@ -10,6 +10,15 @@
 <meta name="application-name" content="DAR Admin">
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
 <meta name="theme-color" content="#07111d">
+<meta name="description" content="DAR Admin Command Center fuer Inhalte, News, Statistik und Live-Vorschau.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DAR AL TAWḤID">
+<meta property="og:title" content="DAR Admin">
+<meta property="og:description" content="Getrennte Admin-App fuer DAR AL TAWḤID.">
+<meta property="og:image" content="/admin/admin-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DAR Admin">
+<meta name="twitter:image" content="/admin/admin-icon-512.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -31,7 +40,7 @@ body{margin:0;min-height:100dvh;height:auto;color:var(--ink);font-family:var(--s
   padding:max(12px,var(--safe-top)) max(14px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(14px,env(safe-area-inset-left,0px))}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:1180px;margin:0 auto;min-height:100%;touch-action:pan-y pinch-zoom}
+.app{width:min(1460px,100%);margin:0 auto;min-height:100%;touch-action:pan-y pinch-zoom}
 .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:14px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand img{width:48px;height:48px;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.28),0 0 0 1px rgba(140,190,255,.22);flex:0 0 48px}
@@ -44,7 +53,7 @@ button{cursor:pointer}
 .btn.primary{background:linear-gradient(135deg,rgba(239,215,142,.20),rgba(90,140,220,.10));border-color:rgba(239,215,142,.38)}
 .btn.danger{color:#ffe0dc;border-color:rgba(225,125,115,.28);background:rgba(225,125,115,.08)}
 .btn:active,.chip:active{transform:scale(.98)}
-.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(10,17,28,.94),rgba(5,8,15,.96));box-shadow:var(--shadow);padding:15px;overflow:hidden}
+.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(10,17,28,.94),rgba(5,8,15,.96));box-shadow:var(--shadow);padding:15px;overflow:hidden;min-width:0}
 .login{max-width:420px;margin:42px auto 20px;text-align:center}
 .login-logo{width:74px;height:74px;border-radius:20px;margin:0 auto 14px;display:block;box-shadow:0 16px 42px rgba(0,0,0,.34),0 0 34px rgba(90,140,220,.22)}
 .login h2{margin:0 0 6px;font-family:var(--serif);font-size:28px;color:var(--gold)}
@@ -116,11 +125,13 @@ button{cursor:pointer}
 .change-item{border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:10px}
 .change-item b{display:block;color:#fff4cc;font-size:12px}
 .change-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:4px}
-.live-preview-shell{display:grid;grid-template-columns:270px minmax(0,1fr);gap:12px;align-items:start}
+.live-preview-shell{display:grid;grid-template-columns:minmax(250px,300px) minmax(0,1fr);gap:12px;align-items:start}
 .live-preview-device{--preview-w:430px;--preview-h:932px;width:min(100%,var(--preview-w));max-width:100%;margin:0 auto;border:1px solid rgba(144,183,232,.42);border-radius:42px;background:linear-gradient(180deg,rgba(18,31,52,.98),rgba(4,8,16,.99));padding:16px;box-shadow:0 26px 70px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.06);resize:both;overflow:auto}
 .live-preview-device.mobile{--preview-w:430px;--preview-h:932px}
 .live-preview-device.tablet{--preview-w:820px;--preview-h:1100px;border-radius:30px}
 .live-preview-device.desktop{--preview-w:1100px;--preview-h:760px;border-radius:22px}
+.live-preview-device.fullscreen{position:fixed;inset:max(10px,var(--safe-top)) max(10px,env(safe-area-inset-right,0px)) max(10px,var(--safe-bottom)) max(10px,env(safe-area-inset-left,0px));z-index:9999;width:auto!important;max-width:none!important;margin:0;border-radius:24px;resize:none;display:grid;grid-template-rows:minmax(0,1fr);background:#05080f}
+.live-preview-device.fullscreen .live-preview-frame{height:100%;min-height:0;border-radius:16px}
 .live-preview-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .preview-size-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .preview-size-row label{display:grid;gap:5px;color:var(--muted);font-size:9px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
@@ -143,11 +154,11 @@ button{cursor:pointer}
 .tab-order-buttons{display:flex;gap:6px}
 .push-test-controls .field{min-height:36px;font-size:11px}
 .push-test-controls .btn{min-height:36px;justify-content:center}
-.tabs{display:flex;gap:8px;overflow:auto;padding:2px;margin:2px 0 12px}
-.tab{white-space:nowrap;border:1px solid var(--line2);background:rgba(90,140,220,.07);color:var(--soft);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:950}
+.tabs{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 8px;margin:2px 0 12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.tab{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;border:1px solid var(--line2);background:rgba(90,140,220,.07);color:var(--soft);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:950}
 .tab.active{color:#fff4cc;border-color:rgba(239,215,142,.40);background:linear-gradient(135deg,rgba(239,215,142,.13),rgba(90,140,220,.12))}
 .controls{display:grid;grid-template-columns:minmax(220px,1fr) 150px 150px auto;gap:9px;margin-bottom:12px}
-.field{width:100%;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.24);color:var(--ink);padding:9px 11px}
+.field{width:100%;max-width:100%;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.24);color:var(--ink);padding:9px 11px}
 .upload-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.45fr);gap:10px;margin-top:12px}
 .paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
 .upload-stack{display:grid;gap:9px;align-content:start}
@@ -165,13 +176,14 @@ button{cursor:pointer}
 .tag.green{color:#dff0ff;border-color:rgba(140,190,255,.26);background:rgba(90,140,220,.09)}
 .tag.blue{color:#f7e6b5;border-color:rgba(239,215,142,.22);background:rgba(239,215,142,.06)}
 .score{font-size:22px;font-weight:950;color:var(--gold);min-width:42px;text-align:right}
-.split{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:12px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,360px);gap:12px}
 .side-stack{display:grid;gap:12px}
 .empty{padding:18px;border:1px dashed var(--line);border-radius:14px;color:var(--soft);text-align:center;font-size:13px;line-height:1.55}
 .meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
-@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
+@media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
+@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
 @media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
 </style>
 </head>
@@ -536,6 +548,7 @@ function renderLivePreview(ctx){
           <button class="btn primary" id="previewMobileBtn" type="button">Mobile</button>
           <button class="btn" id="previewTabletBtn" type="button">Tablet</button>
           <button class="btn" id="previewDesktopBtn" type="button">Desktop</button>
+          <button class="btn" id="previewFullscreenBtn" type="button">Vollbild</button>
           <button class="btn" id="previewResetBtn" type="button">Reset</button>
           <a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Extern öffnen</a>
         </div>
@@ -558,7 +571,7 @@ function renderLivePreview(ctx){
 function plannerCard(item){
   return `<article class="planner-item">
     <b>${esc(item.title||"Ohne Titel")}</b>
-    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>${esc(item.note||"")}</span>
+    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>Zeitzone: ${esc(item.timezone||"Europe/Berlin")}<br>${esc(item.note||"")}</span>
     <div class="planner-actions">
       <button class="btn" data-plan-ready="${esc(item.id)}" type="button">Bereit</button>
       <button class="btn danger" data-plan-remove="${esc(item.id)}" type="button">Entfernen</button>
@@ -573,12 +586,13 @@ function renderPlanningPanel(){
         <input class="field" id="planTitle" placeholder="Titel / Beitragsname">
         <input class="field" id="planWhen" type="datetime-local">
         <input class="field" id="planCategory" placeholder="Kategorie / Serie">
-        <select class="field" id="planStatus"><option>Entwurf</option><option>In Prüfung</option><option>Bereit</option><option>Veröffentlicht</option></select>
+        <select class="field" id="planTimezone"><option>Europe/Berlin</option><option>UTC</option></select>
+        <select class="field wide" id="planStatus"><option>Entwurf</option><option>Geplant</option><option>Sofort veröffentlichen</option><option>In Prüfung</option><option>Bereit</option><option>Veröffentlicht</option><option>Abgebrochen</option></select>
         <textarea class="admin-textarea wide" id="planNote" placeholder="Notiz, Quelle, Datei oder Arbeitsstand"></textarea>
         <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
       </div>
-      <div class="notice-note" style="margin-top:12px">Automatisches Veröffentlichen zur Uhrzeit braucht eine serverseitige Funktion, z. B. Cloudflare Worker/Cron oder Supabase Edge Function. Diese Admin-Ansicht bereitet die Planung sauber vor und verhindert unkontrolliertes Live-Schalten.</div>
-      <div class="planner-grid" style="margin-top:12px">${items.length?items.map(plannerCard).join(""):`<div class="empty">Noch keine geplanten Beiträge.</div>`}</div>
+      <div class="notice-note" style="margin-top:12px">${items.length?"Lokale Planungen sind vorbereitet. Automatisches Live-Schalten braucht den verbundenen Cloudflare/Scheduler.":"Noch keine geplanten Beiträge. Sobald du eine Planung speicherst, erscheint sie hier kompakt."}</div>
+      ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.map(plannerCard).join("")}</div>`:""}
     </div>`;
 }
 function renderSchedule(){
@@ -604,7 +618,7 @@ function renderNewsComposer(){
       <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
       <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
     </div>
-    <div class="planner-grid" style="margin-top:12px">${items.length?items.slice(0,4).map(newsCard).join(""):`<div class="empty">Noch keine News vorbereitet.</div>`}</div>
+    ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.slice(0,4).map(newsCard).join("")}</div>`:`<div class="notice-note" style="margin-top:12px">Noch keine News vorbereitet. Neue Meldungen erscheinen hier erst nach dem Speichern.</div>`}
   </div>`;
 }
 function renderNews(){
@@ -612,11 +626,11 @@ function renderNews(){
   return `<section class="split">
     <div class="panel">
       ${renderNewsComposer()}
-      <div class="notice-note" style="margin-top:12px">Live-Anzeige im Besucherbereich braucht einen veröffentlichten Datenstand oder Backend-Sync. Diese Liste dient als sauberer Admin-Entwurf und Veröffentlichungsprüfung.</div>
+      <div class="notice-note" style="margin-top:12px">News bleiben hier schlank vorbereitet. Die echte 24-Stunden-Live-Ausspielung braucht den verbundenen Backend-Sync.</div>
     </div>
     <aside class="panel">
       <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
-      <div class="planner-grid">${items.length?items.map(newsCard).join(""):`<div class="empty">Noch keine News vorbereitet.</div>`}</div>
+      ${items.length?`<div class="planner-grid">${items.map(newsCard).join("")}</div>`:`<div class="empty">Noch keine News vorbereitet.</div>`}
     </aside>
   </section>`;
 }
@@ -876,12 +890,14 @@ function renderTech(ctx){
     <div class="panel">
       <div class="section-head"><h3>Technik</h3><span>Systemstatus</span></div>
       ${renderTechStatus(ctx)}
-      <div class="section-head" style="margin-top:16px"><h3>Backend-Grenzen</h3><span>wichtig</span></div>
+      <div class="section-head" style="margin-top:16px"><h3>Backend-Anbindung</h3><span>Live-Funktionen</span></div>
       <div class="status-list">
-        <div class="status-row"><span><b>GitHub Token</b><br>Sicher darf er nicht im Browser-Code stehen. Für echte Sicherheit braucht es Cloudflare Worker/Supabase Secret.</span><strong class="status-pill">Backend nötig</strong></div>
-        <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Automatisch zur Uhrzeit veröffentlichen geht zuverlässig nur serverseitig per Cron/Worker.</span><strong class="status-pill">Scheduler nötig</strong></div>
-        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Bei geschlossener PWA braucht es OneSignal/serverseitige Planung, lokale Timer reichen nicht.</span><strong class="status-pill">Server nötig</strong></div>
-        <div class="status-row"><span><b>Konto-Sync</b><br>Anmeldename/PIN muss mit Hashing, RLS und Tabellen im Backend laufen.</span><strong class="status-pill">Supabase</strong></div>
+        <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
+        <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
+        <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
+        <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
+        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Nur serverseitig zuverlässig bei geschlossener PWA. Browser-Timer bleiben nur Zusatz.</span><strong class="status-pill">Scheduler nötig</strong></div>
+        <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
       </div>
     </div>
     <aside class="side-stack">
@@ -985,6 +1001,8 @@ function bindCommandCenterForms(){
   const tablet=document.getElementById("previewTabletBtn");if(tablet)tablet.onclick=()=>applyPreview(820,1100,"tablet");
   const desktop=document.getElementById("previewDesktopBtn");if(desktop)desktop.onclick=()=>applyPreview(1100,760,"desktop");
   const resetPreview=document.getElementById("previewResetBtn");if(resetPreview)resetPreview.onclick=()=>applyPreview(430,932,"mobile");
+  const fullscreen=document.getElementById("previewFullscreenBtn");if(fullscreen)fullscreen.onclick=()=>{const device=document.getElementById("livePreviewDevice");if(!device)return;device.classList.toggle("fullscreen");fullscreen.textContent=device.classList.contains("fullscreen")?"Vollbild schließen":"Vollbild";toast(device.classList.contains("fullscreen")?"Vorschau im Vollbild":"Vollbild geschlossen")};
+  if(!window.__adminPreviewEscapeBound){window.__adminPreviewEscapeBound=true;document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;const active=document.activeElement;if(active&&(active.matches?.("input,textarea,select,[contenteditable='true']")))return;const device=document.getElementById("livePreviewDevice");const btn=document.getElementById("previewFullscreenBtn");if(device?.classList.contains("fullscreen")){device.classList.remove("fullscreen");if(btn)btn.textContent="Vollbild"}})}
   const previewWidth=document.getElementById("previewWidthInput"),previewHeight=document.getElementById("previewHeightInput");
   if(previewWidth)previewWidth.onchange=()=>applyPreview(previewWidth.value,previewHeight?.value,previewSize().mode);
   if(previewHeight)previewHeight.onchange=()=>applyPreview(previewWidth?.value,previewHeight.value,previewSize().mode);
@@ -992,7 +1010,7 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
   const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
   const buildMarkdown=document.getElementById("buildMarkdownBtn");if(buildMarkdown)buildMarkdown.onclick=buildMarkdownFromFields;
-  const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",title);renderShell()};
+  const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const timezone=document.getElementById("planTimezone")?.value||"Europe/Berlin";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,timezone,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",`${title} · ${timezone}`);renderShell()};
   document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
   document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
   const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
