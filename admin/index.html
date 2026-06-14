@@ -185,6 +185,20 @@ button{cursor:pointer}
 @media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
 @media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
 @media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
+
+/* Final admin-frame correction: the whole admin app should not sit in a thick outer box. */
+.app{width:min(1540px,100%)}
+main#panel.panel{
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+@media(max-width:640px){
+  body{padding-left:max(6px,env(safe-area-inset-left,0px));padding-right:max(6px,env(safe-area-inset-right,0px))}
+  main#panel.panel{padding:0!important}
+}
 </style>
 </head>
 <body>
@@ -339,6 +353,21 @@ function score(row){return Number(row.views||0)+Number(row.shares||0)*4+Number(r
 function engagement(row){const v=Number(row.views||0);return v?Math.round(((Number(row.shares||0)+Number(row.saves||0))/v)*100):0}
 function countBy(rows,fn){return (rows||[]).reduce((acc,row)=>{const key=fn(row);acc[key]=(acc[key]||0)+1;return acc},{})}
 function totals(){return (lastData?.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")}
+function renderShellPreserveField(id,apply){
+  const el=document.getElementById(id);
+  const start=el&&typeof el.selectionStart==="number"?el.selectionStart:null;
+  const end=el&&typeof el.selectionEnd==="number"?el.selectionEnd:null;
+  if(typeof apply==="function")apply(el);
+  renderShell();
+  requestAnimationFrame(()=>{
+    const next=document.getElementById(id);
+    if(!next)return;
+    try{
+      next.focus({preventScroll:true});
+      if(start!==null&&typeof next.setSelectionRange==="function")next.setSelectionRange(start,end??start);
+    }catch(e){}
+  });
+}
 function installTotals(){
   const rows=(lastData?.totals||[]).filter(x=>x.content_type==="install");
   const count=id=>Number(rows.find(x=>String(x.content_id)===id)?.views||0);
@@ -989,7 +1018,7 @@ Quelle: ${source || "Quelle prüfen"}
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
-  const search=document.getElementById("searchInput");if(search)search.oninput=e=>{query=e.target.value;renderShell()};
+  const search=document.getElementById("searchInput");if(search)search.oninput=e=>renderShellPreserveField("searchInput",()=>{query=e.target.value});
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
