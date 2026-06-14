@@ -116,13 +116,16 @@ button{cursor:pointer}
 .change-item{border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:10px}
 .change-item b{display:block;color:#fff4cc;font-size:12px}
 .change-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:4px}
-.live-preview-shell{display:grid;grid-template-columns:260px minmax(0,1fr);gap:12px}
-.live-preview-device{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(8,17,30,.96),rgba(4,7,13,.98));padding:12px;box-shadow:var(--shadow)}
-.live-preview-device.mobile{max-width:430px;margin:0 auto}
-.live-preview-device.desktop{max-width:none}
+.live-preview-shell{display:grid;grid-template-columns:270px minmax(0,1fr);gap:12px;align-items:start}
+.live-preview-device{--preview-w:430px;--preview-h:932px;width:min(100%,var(--preview-w));max-width:100%;margin:0 auto;border:1px solid rgba(144,183,232,.42);border-radius:42px;background:linear-gradient(180deg,rgba(18,31,52,.98),rgba(4,8,16,.99));padding:16px;box-shadow:0 26px 70px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.06);resize:both;overflow:auto}
+.live-preview-device.mobile{--preview-w:430px;--preview-h:932px}
+.live-preview-device.tablet{--preview-w:820px;--preview-h:1100px;border-radius:30px}
+.live-preview-device.desktop{--preview-w:1100px;--preview-h:760px;border-radius:22px}
 .live-preview-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-.live-preview-frame{width:100%;height:72vh;min-height:520px;border:1px solid rgba(239,215,142,.18);border-radius:16px;background:#06080d}
-.live-preview-device.mobile .live-preview-frame{height:740px;border-radius:28px}
+.preview-size-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.preview-size-row label{display:grid;gap:5px;color:var(--muted);font-size:9px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
+.live-preview-frame{width:100%;height:var(--preview-h);min-height:420px;border:1px solid rgba(239,215,142,.18);border-radius:28px;background:#06080d}
+.live-preview-device.desktop .live-preview-frame{border-radius:14px}
 .admin-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .admin-form-grid .wide{grid-column:1/-1}
 .admin-textarea{width:100%;min-height:110px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.24);color:var(--ink);padding:11px;font-size:12px;line-height:1.5}
@@ -134,6 +137,10 @@ button{cursor:pointer}
 .notice-note{border:1px dashed rgba(239,215,142,.30);border-radius:14px;background:rgba(239,215,142,.06);padding:11px;color:var(--soft);font-size:11px;line-height:1.55}
 .push-test-card{grid-column:1/-1;cursor:default}
 .push-test-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px}
+.tab-order-list{display:grid;gap:8px}
+.tab-order-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:9px}
+.tab-order-item b{color:#fff4cc;font-size:12px}
+.tab-order-buttons{display:flex;gap:6px}
 .push-test-controls .field{min-height:36px;font-size:11px}
 .push-test-controls .btn{min-height:36px;justify-content:center}
 .tabs{display:flex;gap:8px;overflow:auto;padding:2px;margin:2px 0 12px}
@@ -165,7 +172,7 @@ button{cursor:pointer}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
 @media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{height:68vh;min-height:460px}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
 </style>
 </head>
 <body>
@@ -203,6 +210,21 @@ const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
+const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
+const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
+const DEFAULT_ADMIN_TABS=[
+  ["start","Start"],
+  ["actions","Aktionen"],
+  ["preview","Live-Vorschau"],
+  ["content","Inhalte"],
+  ["news","News"],
+  ["reports","Fehler"],
+  ["users","Benutzer"],
+  ["stats","Statistik"],
+  ["tech","Technik"],
+  ["settings","Einstellungen"],
+  ["overview","Dashboard"]
+];
 const GITHUB_NEW_POST="https://github.com/Sero91ak/dar-al-tawhid-site/new/main/content/posts";
 const GITHUB_POSTS="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts";
 const GITHUB_TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=DAR%20Admin%20Upload&description=Upload%20posts%20from%20DAR%20Admin%20App&expires_in=90&contents=write";
@@ -233,6 +255,35 @@ function planItems(){return readStore(ADMIN_PLAN_KEY)}
 function newsItems(){return readStore(ADMIN_NEWS_KEY)}
 function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
 function userItems(){return readStore(ADMIN_USERS_KEY)}
+function readTabOrder(){
+  try{
+    const raw=JSON.parse(localStorage.getItem(ADMIN_TAB_ORDER_KEY)||"[]");
+    const allowed=new Map(DEFAULT_ADMIN_TABS);
+    const ordered=raw.filter(id=>allowed.has(id)).map(id=>[id,allowed.get(id)]);
+    DEFAULT_ADMIN_TABS.forEach(tab=>{if(!ordered.some(x=>x[0]===tab[0]))ordered.push(tab)});
+    return ordered;
+  }catch(e){return DEFAULT_ADMIN_TABS}
+}
+function writeTabOrder(tabs){try{localStorage.setItem(ADMIN_TAB_ORDER_KEY,JSON.stringify(tabs.map(x=>Array.isArray(x)?x[0]:x)))}catch(e){}}
+function moveTab(id,dir){
+  const tabs=readTabOrder();
+  const i=tabs.findIndex(x=>x[0]===id),j=i+dir;
+  if(i<0||j<0||j>=tabs.length)return;
+  const tmp=tabs[i];tabs[i]=tabs[j];tabs[j]=tmp;
+  writeTabOrder(tabs);
+}
+function resetTabOrder(){try{localStorage.removeItem(ADMIN_TAB_ORDER_KEY)}catch(e){}}
+function previewSize(){
+  try{
+    const data=JSON.parse(localStorage.getItem(ADMIN_PREVIEW_SIZE_KEY)||"{}");
+    return{
+      width:Math.max(320,Math.min(1400,Number(data.width)||430)),
+      height:Math.max(520,Math.min(1600,Number(data.height)||932)),
+      mode:["mobile","tablet","desktop"].includes(data.mode)?data.mode:"mobile"
+    };
+  }catch(e){return{width:430,height:932,mode:"mobile"}}
+}
+function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
 function savedGithubToken(){try{return localStorage.getItem(GITHUB_TOKEN_KEY)||""}catch(e){return""}}
 function setSavedGithubToken(token){try{if(token)localStorage.setItem(GITHUB_TOKEN_KEY,token);else localStorage.removeItem(GITHUB_TOKEN_KEY)}catch(e){}}
 async function fetchDashboard(){
@@ -353,21 +404,11 @@ function renderShell(){
   const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
   const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
   const ctx={live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs,updated:data.updated};
-  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="schedule"?renderSchedule():currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="stats"?renderStats(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  if(currentTab==="schedule")currentTab="actions";
+  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="stats"?renderStats(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tabs">
-      ${tabButton("start","Start")}
-      ${tabButton("preview","Live-Vorschau")}
-      ${tabButton("overview","Dashboard")}
-      ${tabButton("content","Inhalte")}
-      ${tabButton("actions","Aktionen")}
-      ${tabButton("schedule","Geplant")}
-      ${tabButton("news","News")}
-      ${tabButton("reports","Fehler")}
-      ${tabButton("users","Benutzer")}
-      ${tabButton("stats","Statistik")}
-      ${tabButton("tech","Technik")}
-      ${tabButton("settings","Einstellungen")}
+      ${readTabOrder().map(([id,label])=>tabButton(id,label)).join("")}
     </nav>
     ${body}
     <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
@@ -376,6 +417,7 @@ function renderShell(){
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false}={}){
+  if(tab==="schedule")tab="actions";
   if(!tab||tab===currentTab)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
@@ -413,15 +455,15 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Übersicht","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","overview",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
-    ${folderCard("②","Vorschau","Echte Besucher-App mobil oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
+    ${folderCard("①","Aktionen","Neuen Beitrag, Planung, News und Upload zentral steuern.","actions",`${planItems().length} geplant`)}
+    ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("④","Aktionen","Neuen Beitrag vorbereiten, prüfen und bewusst veröffentlichen.","actions",`${ctx.installs.total} App-Installationen`)}
-    ${folderCard("⑤","Geplant","Zeitgesteuerte Beiträge und Entwürfe überblicken.","schedule",`${planItems().length} geplant`)}
-    ${folderCard("⑥","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
-    ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
-    ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
-    ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
+    ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
+    ${folderCard("⑤","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
+    ${folderCard("⑥","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
+    ${folderCard("⑦","Statistik","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","stats",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
+    ${folderCard("⑧","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
+    ${folderCard("⑨","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -472,27 +514,36 @@ function renderOverview(ctx){
 }
 function renderLivePreview(ctx){
   const url=`${SITE_ORIGIN}/?adminPreview=${Date.now()}#home`;
+  const size=previewSize();
   return `<section class="live-preview-shell">
     <aside class="side-stack">
       <div class="panel">
         <div class="section-head"><h3>Live-Vorschau</h3><span>echte App</span></div>
         <div class="status-list">
-          <div class="status-row"><span><b>Mobile Ansicht</b><br>iPhone/PWA-ähnliche Breite im Admin prüfen.</span><strong class="status-pill">Aktiv</strong></div>
-          <div class="status-row"><span><b>Desktop Ansicht</b><br>Breite Vorschau für Browser und Tablet prüfen.</span><strong class="status-pill">Bereit</strong></div>
+          <div class="status-row"><span><b>iPhone Pro Max</b><br>Große PWA-Vorschau mit realistischer Höhe.</span><strong class="status-pill">Standard</strong></div>
+          <div class="status-row"><span><b>Flexible Größe</b><br>Breite und Höhe manuell prüfen.</span><strong class="status-pill">${size.width} × ${size.height}</strong></div>
           <div class="status-row"><span><b>Veröffentlichung</b><br>Änderungen werden erst durch den Upload live.</span><strong class="status-pill">gesichert</strong></div>
         </div>
         <div class="live-preview-toolbar" style="margin-top:12px">
+          <button class="btn primary" id="previewProMaxBtn" type="button">iPhone Pro Max</button>
           <button class="btn primary" id="previewMobileBtn" type="button">Mobile</button>
+          <button class="btn" id="previewTabletBtn" type="button">Tablet</button>
           <button class="btn" id="previewDesktopBtn" type="button">Desktop</button>
+          <button class="btn" id="previewResetBtn" type="button">Reset</button>
           <a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Extern öffnen</a>
         </div>
+        <div class="preview-size-row">
+          <label>Breite <input class="field" id="previewWidthInput" type="number" min="320" max="1400" step="10" value="${esc(size.width)}"></label>
+          <label>Höhe <input class="field" id="previewHeightInput" type="number" min="520" max="1600" step="10" value="${esc(size.height)}"></label>
+        </div>
+        <div class="notice-note" style="margin-top:10px">Der Rahmen ist im Browser zusätzlich an der Ecke ziehbar. Der Inhalt bleibt die echte Besucher-App als Live-iframe.</div>
       </div>
       <div class="panel">
         <div class="section-head"><h3>Prüfliste</h3><span>vor Live</span></div>
         ${validationList(draftMarkdown)}
       </div>
     </aside>
-    <div class="live-preview-device mobile" id="livePreviewDevice">
+    <div class="live-preview-device ${esc(size.mode)}" id="livePreviewDevice" style="--preview-w:${esc(size.width)}px;--preview-h:${esc(size.height)}px">
       <iframe class="live-preview-frame" id="livePreviewFrame" src="${esc(url)}" title="DAR AL TAWḤID Live-Vorschau"></iframe>
     </div>
   </section>`;
@@ -507,11 +558,10 @@ function plannerCard(item){
     </div>
   </article>`;
 }
-function renderSchedule(){
+function renderPlanningPanel(){
   const items=planItems();
-  return `<section class="split">
-    <div class="panel">
-      <div class="section-head"><h3>Geplante Beiträge</h3><span>lokale Planung</span></div>
+  return `<div class="preview-box">
+      <div class="section-head"><h3>Geplante Veröffentlichungen</h3><span>${items.length} lokale Einträge</span></div>
       <div class="admin-form-grid">
         <input class="field" id="planTitle" placeholder="Titel / Beitragsname">
         <input class="field" id="planWhen" type="datetime-local">
@@ -521,12 +571,11 @@ function renderSchedule(){
         <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
       </div>
       <div class="notice-note" style="margin-top:12px">Automatisches Veröffentlichen zur Uhrzeit braucht eine serverseitige Funktion, z. B. Cloudflare Worker/Cron oder Supabase Edge Function. Diese Admin-Ansicht bereitet die Planung sauber vor und verhindert unkontrolliertes Live-Schalten.</div>
-    </div>
-    <aside class="panel">
-      <div class="section-head"><h3>Liste</h3><span>${items.length} Einträge</span></div>
-      <div class="planner-grid">${items.length?items.map(plannerCard).join(""):`<div class="empty">Noch keine geplanten Beiträge.</div>`}</div>
-    </aside>
-  </section>`;
+      <div class="planner-grid" style="margin-top:12px">${items.length?items.map(plannerCard).join(""):`<div class="empty">Noch keine geplanten Beiträge.</div>`}</div>
+    </div>`;
+}
+function renderSchedule(){
+  return `<section class="panel">${renderPlanningPanel()}</section>`;
 }
 function newsCard(item){
   return `<article class="planner-item">
@@ -538,17 +587,24 @@ function newsCard(item){
     </div>
   </article>`;
 }
+function renderNewsComposer(){
+  const items=newsItems();
+  return `<div class="preview-box">
+    <div class="section-head"><h3>News / Neues erstellen</h3><span>${items.length} vorbereitet</span></div>
+    <div class="admin-form-grid">
+      <input class="field" id="newsTitle" placeholder="Kurzer Titel">
+      <select class="field" id="newsDuration"><option value="24 Stunden">24 Stunden</option><option value="bis manuell deaktiviert">manuell deaktivieren</option><option value="Entwurf">als Entwurf</option></select>
+      <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
+      <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
+    </div>
+    <div class="planner-grid" style="margin-top:12px">${items.length?items.slice(0,4).map(newsCard).join(""):`<div class="empty">Noch keine News vorbereitet.</div>`}</div>
+  </div>`;
+}
 function renderNews(){
   const items=newsItems();
   return `<section class="split">
     <div class="panel">
-      <div class="section-head"><h3>News / Neues</h3><span>24-Stunden-Hinweise</span></div>
-      <div class="admin-form-grid">
-        <input class="field" id="newsTitle" placeholder="Kurzer Titel">
-        <select class="field" id="newsDuration"><option value="24 Stunden">24 Stunden</option><option value="bis manuell deaktiviert">manuell deaktivieren</option><option value="Entwurf">als Entwurf</option></select>
-        <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
-        <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
-      </div>
+      ${renderNewsComposer()}
       <div class="notice-note" style="margin-top:12px">Live-Anzeige im Besucherbereich braucht einen veröffentlichten Datenstand oder Backend-Sync. Diese Liste dient als sauberer Admin-Entwurf und Veröffentlichungsprüfung.</div>
     </div>
     <aside class="panel">
@@ -701,9 +757,25 @@ function renderActions(rows,installs=installTotals()){
         <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      ${renderPlanningPanel()}
+      ${renderNewsComposer()}
       <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
       ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
       <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>GitHub API</span></div>
+      <div class="preview-box">
+        <div class="section-head"><h3>Markdown-Metadaten</h3><span>Frontmatter-Hilfe</span></div>
+        <div class="admin-form-grid">
+          <input class="field" id="mdTitle" placeholder="Titel">
+          <input class="field" id="mdId" placeholder="ID / Slug">
+          <input class="field" id="mdDate" type="date">
+          <input class="field" id="mdCategory" placeholder="Kategorie">
+          <input class="field" id="mdScholar" placeholder="Gelehrter">
+          <input class="field" id="mdBook" placeholder="Werk / Buch">
+          <input class="field wide" id="mdSource" placeholder="Quelle">
+          <input class="field wide" id="mdTags" placeholder="Tags mit Komma trennen">
+          <button class="btn primary wide" id="buildMarkdownBtn" type="button">Markdown aus Feldern vorbereiten</button>
+        </div>
+      </div>
       <div class="upload-grid">
         <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
         <div class="upload-stack">
@@ -722,6 +794,15 @@ function renderActions(rows,installs=installTotals()){
         </div>
       </div>
       ${renderDraftPreview()}
+      <div class="preview-box">
+        <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
+        <div class="quick-grid">
+          <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
+          <a class="quick" href="${SITE_ORIGIN}/manifest.json" target="_blank" rel="noopener"><b>Manifest prüfen</b><small>PWA-Farbe, Name und Icons öffnen.</small></a>
+          <a class="quick" href="${SITE_ORIGIN}/service-worker.js" target="_blank" rel="noopener"><b>Service Worker prüfen</b><small>Cache- und Offline-Datei öffnen.</small></a>
+          <a class="quick" href="${GITHUB_POSTS}" target="_blank" rel="noopener"><b>GitHub Inhalte</b><small>Posts-Ordner direkt öffnen.</small></a>
+        </div>
+      </div>
     </div>
     <aside class="side-stack">
       <div class="panel">
@@ -760,10 +841,16 @@ function renderStats(ctx){
   </section>`;
 }
 function renderSettings(ctx){
+  const tabs=readTabOrder();
   return `<section class="split">
     <div class="panel">
       <div class="section-head"><h3>Einstellungen & Technik</h3><span>interne Kontrolle</span></div>
       ${renderTechStatus(ctx)}
+      <div class="section-head" style="margin-top:16px"><h3>Tab-Reihenfolge</h3><span>lokal gespeichert</span></div>
+      <div class="tab-order-list">
+        ${tabs.map(([id,label],i)=>`<div class="tab-order-item"><b>${esc(label)}</b><div class="tab-order-buttons"><button class="btn" data-tab-up="${esc(id)}" type="button" ${i===0?"disabled":""}>↑</button><button class="btn" data-tab-down="${esc(id)}" type="button" ${i===tabs.length-1?"disabled":""}>↓</button></div></div>`).join("")}
+      </div>
+      <button class="btn" id="resetTabOrderBtn" type="button" style="margin-top:10px">Reihenfolge zurücksetzen</button>
       <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsregeln</h3><span>Sicherheit</span></div>
       <div class="status-list">
         <div class="status-row"><span><b>Direkt live vermeiden</b><br>Vor jedem Upload erscheint eine bewusste Sicherheitsabfrage.</span><strong class="status-pill">Aktiv</strong></div>
@@ -816,6 +903,39 @@ function renderTechStatus(ctx){
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
 }
+function buildMarkdownFromFields(){
+  const title=(document.getElementById("mdTitle")?.value||"").trim();
+  if(!title){toast("Titel fehlt");return}
+  const slug=(document.getElementById("mdId")?.value||title).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  const date=(document.getElementById("mdDate")?.value||new Date().toISOString().slice(0,10)).trim();
+  const category=(document.getElementById("mdCategory")?.value||"").trim();
+  const scholar=(document.getElementById("mdScholar")?.value||"").trim();
+  const book=(document.getElementById("mdBook")?.value||"").trim();
+  const source=(document.getElementById("mdSource")?.value||"").trim();
+  const tags=(document.getElementById("mdTags")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+  draftFilename=draftFilename||`${slug}.md`;
+  draftMarkdown=`---
+id: "${slug}"
+title: "${title.replace(/"/g,"'")}"
+date: "${date}"
+category: "${category.replace(/"/g,"'")}"
+scholar: "${scholar.replace(/"/g,"'")}"
+book: "${book.replace(/"/g,"'")}"
+source: "${source.replace(/"/g,"'")}"
+tags: [${tags.map(x=>`"${x.replace(/"/g,"'")}"`).join(", ")}]
+---
+
+> Aussage hier einfügen.
+
+Quelle: ${source || "Quelle prüfen"}
+`;
+  const text=document.getElementById("postMarkdownInput"),file=document.getElementById("postFilenameInput");
+  if(text)text.value=draftMarkdown;
+  if(file)file.value=draftFilename;
+  addAdminLog("Entwurf","Markdown aus Metadaten vorbereitet",title);
+  updateDraftPreview();
+  toast("Markdown vorbereitet");
+}
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
   const search=document.getElementById("searchInput");if(search)search.oninput=e=>{query=e.target.value;renderShell()};
@@ -837,8 +957,34 @@ function bindUi(){
   bindRankCards();
 }
 function bindCommandCenterForms(){
-  const mobile=document.getElementById("previewMobileBtn");if(mobile)mobile.onclick=()=>{document.getElementById("livePreviewDevice")?.classList.add("mobile");document.getElementById("livePreviewDevice")?.classList.remove("desktop")};
-  const desktop=document.getElementById("previewDesktopBtn");if(desktop)desktop.onclick=()=>{document.getElementById("livePreviewDevice")?.classList.add("desktop");document.getElementById("livePreviewDevice")?.classList.remove("mobile")};
+  function applyPreview(width,height,mode){
+    const device=document.getElementById("livePreviewDevice");
+    const w=Math.max(320,Math.min(1400,Number(width)||430));
+    const h=Math.max(520,Math.min(1600,Number(height)||932));
+    const m=["mobile","tablet","desktop"].includes(mode)?mode:"mobile";
+    if(device){
+      device.classList.remove("mobile","tablet","desktop");
+      device.classList.add(m);
+      device.style.setProperty("--preview-w",w+"px");
+      device.style.setProperty("--preview-h",h+"px");
+    }
+    const wi=document.getElementById("previewWidthInput"),hi=document.getElementById("previewHeightInput");
+    if(wi)wi.value=String(w);
+    if(hi)hi.value=String(h);
+    savePreviewSize({width:w,height:h,mode:m});
+  }
+  const proMax=document.getElementById("previewProMaxBtn");if(proMax)proMax.onclick=()=>applyPreview(430,932,"mobile");
+  const mobile=document.getElementById("previewMobileBtn");if(mobile)mobile.onclick=()=>applyPreview(390,844,"mobile");
+  const tablet=document.getElementById("previewTabletBtn");if(tablet)tablet.onclick=()=>applyPreview(820,1100,"tablet");
+  const desktop=document.getElementById("previewDesktopBtn");if(desktop)desktop.onclick=()=>applyPreview(1100,760,"desktop");
+  const resetPreview=document.getElementById("previewResetBtn");if(resetPreview)resetPreview.onclick=()=>applyPreview(430,932,"mobile");
+  const previewWidth=document.getElementById("previewWidthInput"),previewHeight=document.getElementById("previewHeightInput");
+  if(previewWidth)previewWidth.onchange=()=>applyPreview(previewWidth.value,previewHeight?.value,previewSize().mode);
+  if(previewHeight)previewHeight.onchange=()=>applyPreview(previewWidth?.value,previewHeight.value,previewSize().mode);
+  document.querySelectorAll("[data-tab-up]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabUp,-1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabUp);renderShell()});
+  document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
+  const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
+  const buildMarkdown=document.getElementById("buildMarkdownBtn");if(buildMarkdown)buildMarkdown.onclick=buildMarkdownFromFields;
   const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",title);renderShell()};
   document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
   document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
