@@ -198,7 +198,39 @@ main#panel.panel{
 @media(max-width:640px){
   body{padding-left:max(6px,env(safe-area-inset-left,0px));padding-right:max(6px,env(safe-area-inset-right,0px))}
   main#panel.panel{padding:0!important}
+  .quick-grid,.preview-tools,.admin-form-grid,.planner-grid,.command-grid,.workflow-grid,.rank-list,.status-list,.mini-grid,.metric-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .quick,.workflow-step,.command-card,.metric,.mini,.status-row,.planner-item{min-height:auto;padding:10px}
+  .quick b,.workflow-step b,.command-card b,.metric b,.mini b,.status-row b,.planner-item b{font-size:9.4px;line-height:1.22}
+  .quick small,.workflow-step small,.command-card small,.metric small,.mini small,.status-row span,.planner-item span{font-size:9.5px;line-height:1.35}
+  .command-card span{font-size:20px}
+  .metric span,.mini span{font-size:24px}
+  .push-test-card,.admin-form-grid .wide,.preview-tools .btn:first-child,.preview-tools .btn:nth-child(2){grid-column:1/-1}
+  .push-test-controls{grid-template-columns:1fr!important}
+  .rank-card{grid-template-columns:30px minmax(0,1fr);gap:8px;padding:9px}
+  .rank-num{width:30px;height:30px;border-radius:10px}
+  .rank-title{font-size:14.5px;line-height:1.18}
+  .rank-meta{gap:4px}
+  .tag{font-size:8.8px;padding:3px 6px}
+  .score{grid-column:2;text-align:left;font-size:18px}
+  .section-head h3{font-size:20px}
+  .section-head span{font-size:9.5px}
+  .controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .controls .field:first-child,.controls .btn{grid-column:1/-1}
 }
+.admin-collapsible>.section-head{cursor:pointer;align-items:center;margin-bottom:12px}
+.admin-collapsible>.section-head h3{display:flex;align-items:center;gap:8px}
+.admin-collapsible>.section-head h3:before{content:"";width:7px;height:7px;border-radius:999px;background:var(--gold);box-shadow:0 0 16px rgba(239,215,142,.36);flex:0 0 7px}
+.admin-collapse-toggle{border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink);border-radius:999px;width:34px;height:34px;min-height:34px;padding:0;display:inline-grid;place-items:center;font-size:16px;font-weight:950;line-height:1;flex:0 0 34px}
+.admin-collapsible-body{display:grid;gap:10px}
+.admin-collapsible:not(.is-open)>.admin-collapsible-body{display:none}
+.admin-collapsible.is-collapsed{min-height:auto!important}
+.admin-collapsible.is-collapsed>.section-head{margin-bottom:0}
+.preview-box.admin-collapsible,.panel.admin-collapsible,.hero-card.admin-collapsible{display:block}
+.preview-box.admin-collapsible>.admin-collapsible-body{display:grid}
+.preview-box.admin-collapsible:not(.is-open)>.admin-collapsible-body{display:none}
 </style>
 </head>
 <body>
@@ -227,11 +259,12 @@ window.DAR_ANALYTICS_CONFIG={
   adminPin:"Dawud26"
 };
 window.DAR_WORKER_CONFIG=window.DAR_WORKER_CONFIG||{
-  publishUrl:"/api/admin/publish"
+  publishUrl:"https://dar-admin-publisher.sero91ak.workers.dev/publish"
 };
 const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
 const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
+const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.dev/publish";
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
@@ -318,13 +351,17 @@ function previewSize(){
   }catch(e){return{width:430,height:932,mode:"mobile"}}
 }
 function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
+function normalizeWorkerPublishUrl(url){
+  const raw=String(url||"").trim();
+  return(!raw||raw==="/api/admin/publish")?DEFAULT_WORKER_PUBLISH_URL:raw;
+}
 function workerPublishUrl(){
   try{
-    return localStorage.getItem(WORKER_PUBLISH_URL_KEY)||String((window.DAR_WORKER_CONFIG||{}).publishUrl||"/api/admin/publish");
-  }catch(e){return String((window.DAR_WORKER_CONFIG||{}).publishUrl||"/api/admin/publish")}
+    return normalizeWorkerPublishUrl(localStorage.getItem(WORKER_PUBLISH_URL_KEY)||String((window.DAR_WORKER_CONFIG||{}).publishUrl||DEFAULT_WORKER_PUBLISH_URL));
+  }catch(e){return normalizeWorkerPublishUrl(String((window.DAR_WORKER_CONFIG||{}).publishUrl||DEFAULT_WORKER_PUBLISH_URL))}
 }
-function saveWorkerPublishUrl(url){try{if(url)localStorage.setItem(WORKER_PUBLISH_URL_KEY,url);else localStorage.removeItem(WORKER_PUBLISH_URL_KEY)}catch(e){}}
-function resolveWorkerUrl(url){const raw=String(url||"").trim()||"/api/admin/publish";return /^https?:\/\//i.test(raw)?raw:new URL(raw,SITE_ORIGIN).toString()}
+function saveWorkerPublishUrl(url){try{if(url)localStorage.setItem(WORKER_PUBLISH_URL_KEY,normalizeWorkerPublishUrl(url));else localStorage.removeItem(WORKER_PUBLISH_URL_KEY)}catch(e){}}
+function resolveWorkerUrl(url){const raw=normalizeWorkerPublishUrl(url);return /^https?:\/\//i.test(raw)?raw:new URL(raw,SITE_ORIGIN).toString()}
 function workerHealthUrl(){
   const url=new URL(resolveWorkerUrl(workerPublishUrl()));
   if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/health");
@@ -415,6 +452,43 @@ function rankCard(row,idx,mode="score"){
   </button>`;
 }
 function bindRankCards(){document.querySelectorAll(".rank-card[data-href]").forEach(card=>{card.onclick=()=>window.open(card.getAttribute("data-href"),"_blank","noopener")})}
+function enhanceAdminCollapsibles(){
+  document.querySelectorAll("#panel .panel,#panel .hero-card,#panel .preview-box").forEach((card,index)=>{
+    if(card.dataset.collapseReady==="1")return;
+    const head=card.querySelector(":scope > .section-head");
+    if(!head)return;
+    const children=[...card.children].filter(child=>child!==head);
+    if(!children.length)return;
+    const body=document.createElement("div");
+    body.className="admin-collapsible-body";
+    children.forEach(child=>body.appendChild(child));
+    const toggle=document.createElement("button");
+    toggle.className="admin-collapse-toggle";
+    toggle.type="button";
+    toggle.setAttribute("aria-label","Bereich einklappen");
+    toggle.textContent="−";
+    head.appendChild(toggle);
+    card.classList.add("admin-collapsible","is-open");
+    card.dataset.collapseReady="1";
+    card.appendChild(body);
+    const setOpen=open=>{
+      card.classList.toggle("is-open",open);
+      card.classList.toggle("is-collapsed",!open);
+      toggle.textContent=open?"−":"+";
+      toggle.setAttribute("aria-label",open?"Bereich einklappen":"Bereich öffnen");
+    };
+    if(index>2&&currentTab!=="actions"&&currentTab!=="start")setOpen(false);
+    head.addEventListener("click",event=>{
+      if(event.target.closest("a,button,input,select,textarea,label,[contenteditable='true']"))return;
+      setOpen(!card.classList.contains("is-open"));
+    });
+    toggle.onclick=event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen(!card.classList.contains("is-open"));
+    };
+  });
+}
 function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^"+key+":\\s*[\"']?(.*?)[\"']?\\s*$","m"));return m?m[1].trim():""}
 function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
 function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
@@ -488,6 +562,7 @@ function renderShell(){
     ${body}
     <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
   bindUi();
+  enhanceAdminCollapsibles();
   updateAdminBackButton();
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
@@ -859,7 +934,7 @@ function renderActions(rows,installs=installTotals()){
           <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
           <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
           <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
-          <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="/api/admin/publish">
+          <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
           <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret">
           <label class="upload-status" style="display:flex;align-items:center;gap:8px">
             <input id="rememberWorkerSecret" type="checkbox" ${savedWorkerSecret()?"checked":""}>
