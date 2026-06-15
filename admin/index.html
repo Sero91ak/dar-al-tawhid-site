@@ -369,6 +369,14 @@ function workerHealthUrl(){
   else url.pathname="/health";
   return url.toString();
 }
+function workerEndpoint(path){
+  const url=new URL(resolveWorkerUrl(workerPublishUrl()));
+  const clean=String(path||"").replace(/^\/+/,"");
+  if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/"+clean);
+  else if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,`/${clean}`);
+  else url.pathname=`/${clean}`;
+  return url.toString();
+}
 function savedWorkerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch(e){return""}}
 function setSavedWorkerSecret(secret){try{if(secret)localStorage.setItem(WORKER_SECRET_KEY,secret);else localStorage.removeItem(WORKER_SECRET_KEY)}catch(e){}}
 async function fetchDashboard(){
@@ -523,6 +531,23 @@ async function publishPostViaWorkerRequest(markdown,filename){
     method:"POST",
     headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
     body:JSON.stringify({markdown,filename})
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  return data;
+}
+async function workerPostRequest(path,payload){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
+  if(!publishUrl)throw new Error("Worker URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(publishUrl);
+  if(remember)setSavedWorkerSecret(secret);else if(document.getElementById("rememberWorkerSecret"))setSavedWorkerSecret("");
+  const res=await fetch(workerEndpoint(path),{
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+    body:JSON.stringify(payload||{})
   });
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
@@ -702,9 +727,10 @@ function renderLivePreview(ctx){
 function plannerCard(item){
   return `<article class="planner-item">
     <b>${esc(item.title||"Ohne Titel")}</b>
-    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>Zeitzone: ${esc(item.timezone||"Europe/Berlin")}<br>${esc(item.note||"")}</span>
+    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>Zeitzone: ${esc(item.timezone||"Europe/Berlin")}<br>${esc(item.note||"")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
     <div class="planner-actions">
       <button class="btn" data-plan-ready="${esc(item.id)}" type="button">Bereit</button>
+      <button class="btn primary" data-plan-worker="${esc(item.id)}" type="button">Worker planen</button>
       <button class="btn danger" data-plan-remove="${esc(item.id)}" type="button">Entfernen</button>
     </div>
   </article>`;
@@ -722,7 +748,7 @@ function renderPlanningPanel(){
         <textarea class="admin-textarea wide" id="planNote" placeholder="Notiz, Quelle, Datei oder Arbeitsstand"></textarea>
         <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
       </div>
-      <div class="notice-note" style="margin-top:12px">${items.length?"Lokale Planungen sind vorbereitet. Automatisches Live-Schalten braucht den verbundenen Cloudflare/Scheduler.":"Noch keine geplanten Beiträge. Sobald du eine Planung speicherst, erscheint sie hier kompakt."}</div>
+      <div class="notice-note" style="margin-top:12px">${items.length?"Automatisches Live-Schalten läuft über Cloudflare Worker + Cron. Speichere zuerst die Planung und sende sie dann mit „Worker planen“ an den Scheduler.":"Noch keine geplanten Beiträge. Markdown unten einfügen, Uhrzeit setzen und dann an den Worker-Scheduler übergeben."}</div>
       ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.map(plannerCard).join("")}</div>`:""}
     </div>`;
 }
@@ -732,9 +758,9 @@ function renderSchedule(){
 function newsCard(item){
   return `<article class="planner-item">
     <b>${esc(item.title||"News")}</b>
-    <span>${esc(item.text||"")}<br>Sichtbar bis: ${esc(item.until||"24 Stunden")} · Status: ${esc(item.status||"Entwurf")}</span>
+    <span>${esc(item.text||"")}<br>Sichtbar bis: ${esc(item.until||"24 Stunden")} · Status: ${esc(item.status||"Entwurf")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
     <div class="planner-actions">
-      <button class="btn primary" data-news-publish="${esc(item.id)}" type="button">Als News markieren</button>
+      <button class="btn primary" data-news-publish="${esc(item.id)}" type="button">Live veröffentlichen</button>
       <button class="btn danger" data-news-remove="${esc(item.id)}" type="button">Entfernen</button>
     </div>
   </article>`;
@@ -757,7 +783,7 @@ function renderNews(){
   return `<section class="split">
     <div class="panel">
       ${renderNewsComposer()}
-      <div class="notice-note" style="margin-top:12px">News bleiben hier schlank vorbereitet. Die echte 24-Stunden-Live-Ausspielung braucht den verbundenen Backend-Sync.</div>
+      <div class="notice-note" style="margin-top:12px">News werden beim Veröffentlichen über den Cloudflare Worker in content/updates/current.json geschrieben und erscheinen danach auf der Startseite unter „Neu im Fokus“.</div>
     </div>
     <aside class="panel">
       <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
@@ -1146,9 +1172,10 @@ function bindCommandCenterForms(){
   const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const timezone=document.getElementById("planTimezone")?.value||"Europe/Berlin";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,timezone,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",`${title} · ${timezone}`);renderShell()};
   document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
   document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
+  document.querySelectorAll("[data-plan-worker]").forEach(btn=>btn.onclick=async()=>{const item=planItems().find(x=>String(x.id)===String(btn.dataset.planWorker));if(!item){toast("Planung fehlt");return}const markdown=String(draftMarkdown||"").trim();if(!markdown){toast("Markdown unten einfügen, dann Worker planen");return}if(!item.when){toast("Uhrzeit fehlt");return}btn.disabled=true;btn.textContent="Sende...";try{const result=await workerPostRequest("schedule",{id:item.id,title:item.title,when:item.when,timezone:item.timezone||"Europe/Berlin",filename:draftFilename,markdown});updateStoreItem(ADMIN_PLAN_KEY,item.id,{status:"Worker geplant",workerId:result.id,publishAt:result.publishAt});addAdminLog("Planung","Beim Worker-Scheduler gespeichert",`${item.title} · ${result.publishAt||item.when}`);toast("Worker-Scheduler gespeichert");renderShell()}catch(e){btn.disabled=false;btn.textContent="Worker planen";addAdminLog("Fehler","Planung konnte nicht an Worker gesendet werden",e.message||String(e));toast(e.message||"Worker-Planung fehlgeschlagen")}});
   const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
-  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News als sichtbar markieren?")){updateStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsPublish,{status:"Sichtbar"});addAdminLog("News","News als sichtbar markiert","");renderShell()}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live auf der Startseite veröffentlichen?"))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});addAdminLog("News","News live veröffentlicht",item.title);toast("News live veröffentlicht");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
   const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
   document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
   document.querySelectorAll("[data-report-done]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportDone,{status:"Behoben"});addAdminLog("Fehler","Fehler als behoben markiert","");renderShell()});

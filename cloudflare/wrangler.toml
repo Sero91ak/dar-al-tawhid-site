@@ -8,3 +8,8 @@ GITHUB_REPO = "dar-al-tawhid-site"
 GITHUB_BRANCH = "main"
 POSTS_DIR = "content/posts"
 ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
+UPDATES_PATH = "content/updates/current.json"
+SCHEDULE_PATH = "content/admin/planned-posts.json"
+
+[triggers]
+crons = ["*/5 * * * *"]
