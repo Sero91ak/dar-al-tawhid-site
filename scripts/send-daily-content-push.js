@@ -146,12 +146,21 @@ async function fetchLegacyPlayers() {
 
   while (true) {
     const url = `https://onesignal.com/api/v1/players?app_id=${encodeURIComponent(APP_ID)}&limit=${limit}&offset=${offset}`;
-    const res = await fetch(url, { headers: { Authorization: `Basic ${API_KEY}` } });
-    const text = await res.text();
+    let data = null;
+    let lastError = null;
 
-    if (!res.ok) throw new Error(`OneSignal Subscriptions Fehler ${res.status}: ${text}`);
+    for (const mode of ["Key", "Basic"]) {
+      const res = await fetch(url, { headers: { Authorization: `${mode} ${API_KEY}` } });
+      const text = await res.text();
+      if (res.ok) {
+        data = JSON.parse(text);
+        break;
+      }
+      lastError = new Error(`OneSignal Subscriptions Fehler ${res.status} (${mode}): ${text}`);
+    }
 
-    const data = JSON.parse(text);
+    if (!data) throw lastError || new Error("OneSignal Subscriptions Fehler");
+
     const players = Array.isArray(data.players) ? data.players : [];
     all.push(...players);
     if (players.length < limit) break;
