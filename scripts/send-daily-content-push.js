@@ -459,6 +459,7 @@ async function sendGroup(group, item, config, now) {
   const recommendation = pickRecommendation(posts, config, berlinDate);
 
   console.log(`Tägliche Push-Prüfung: ${now.toISOString()} | Duʿāʾ=${duas.length} | Beiträge=${posts.length}`);
+  console.log(`OneSignal-Key geladen: ${Boolean(ONESIGNAL_AUTH_KEY)} (${ONESIGNAL_AUTH_KEY.length} Zeichen)`);
 
   if (!dailyDua) console.log("Keine gültige Duʿāʾ gefunden.");
   if (!recommendation) console.log("Kein gültiger Empfehlungs-Beitrag gefunden.");
