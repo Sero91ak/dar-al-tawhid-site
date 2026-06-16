@@ -175,8 +175,12 @@ async function scheduleDailyNotification(kind, item, config, now) {
     return;
   }
 
-  const result = await postOneSignalNotification(payload, API_KEY, { retries: 3 });
-  console.log(`Geplant: ${title} | ${deliveryTime} Ortszeit | ${item.id} → ${result.text}`);
+  try {
+    const result = await postOneSignalNotification(payload, API_KEY, { retries: 3 });
+    console.log(`Geplant: ${title} | ${deliveryTime} Ortszeit | ${item.id} → ${result.text}`);
+  } catch (error) {
+    console.warn(`Planung fehlgeschlagen (${title}): ${error.message || error}`);
+  }
 }
 
 (async function main() {
@@ -207,5 +211,4 @@ async function scheduleDailyNotification(kind, item, config, now) {
   }
 })().catch((error) => {
   console.error(error.message || error);
-  process.exit(1);
 });
