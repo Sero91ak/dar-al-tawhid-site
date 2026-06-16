@@ -11,6 +11,10 @@ const {
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY || process.env.ONESIGNAL_API_KEY;
+const ONESIGNAL_AUTH_KEY = String(API_KEY || "")
+  .replace(/\s+/g, "")
+  .replace(/^(Key|Basic)/i, "")
+  .trim();
 const SITE_ORIGIN = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/#.*$/, "").replace(/\/$/, "");
 const DRY_RUN = process.env.DRY_RUN === "1" || process.env.DRY_RUN === "true";
 const SEND_WINDOW_MINUTES = Number(process.env.DAILY_PUSH_WINDOW_MINUTES || 75);
@@ -150,7 +154,7 @@ async function fetchLegacyPlayers() {
     let lastError = null;
 
     for (const mode of ["Key", "Basic"]) {
-      const res = await fetch(url, { headers: { Authorization: `${mode} ${API_KEY}` } });
+      const res = await fetch(url, { headers: { Authorization: `${mode} ${ONESIGNAL_AUTH_KEY}` } });
       const text = await res.text();
       if (res.ok) {
         data = JSON.parse(text);
@@ -174,7 +178,7 @@ async function fetchUserByAlias(aliasLabel, aliasId) {
   const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
 
   for (const mode of ["Key", "Basic"]) {
-    const res = await fetch(url, { headers: { Authorization: `${mode} ${API_KEY}` } });
+    const res = await fetch(url, { headers: { Authorization: `${mode} ${ONESIGNAL_AUTH_KEY}` } });
     if (res.ok) return JSON.parse(await res.text());
   }
 
@@ -185,7 +189,7 @@ async function fetchUserBySubscriptionId(subscriptionId) {
   const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/subscriptions/${encodeURIComponent(subscriptionId)}/user`;
 
   for (const mode of ["Key", "Basic"]) {
-    const res = await fetch(url, { headers: { Authorization: `${mode} ${API_KEY}` } });
+    const res = await fetch(url, { headers: { Authorization: `${mode} ${ONESIGNAL_AUTH_KEY}` } });
     if (res.ok) return JSON.parse(await res.text());
   }
 
@@ -289,7 +293,7 @@ async function updatePlayerTags(playerId, tags) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Basic ${API_KEY}`
+      Authorization: `Basic ${ONESIGNAL_AUTH_KEY}`
     },
     body: JSON.stringify({ app_id: APP_ID, tags })
   });
