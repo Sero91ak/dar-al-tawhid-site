@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>DAR Admin · Publisher</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/admin/manifest.json">
+<meta name="application-name" content="DAR Admin">
+<meta name="apple-mobile-web-app-title" content="DAR Admin">
+<meta name="theme-color" content="#061a35">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{
+  --bg:#06101f;--bg2:#071b36;--panel:#0a2344;--panel2:#0d2e58;--blue:#50a7ff;--blue2:#8fd0ff;
+  --gold:#efd78e;--text:#eff8ff;--muted:#9fb8d4;--muted2:#6f8cac;--line:rgba(143,208,255,.22);
+  --ok:#6ee7a8;--warn:#f5c86f;--bad:#ff8d8d;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --serif:Georgia,"Times New Roman",serif;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg)}
+body{margin:0;min-height:100dvh;color:var(--text);font-family:var(--sans);
+  background:radial-gradient(circle at 15% -4%,rgba(80,167,255,.26),transparent 33%),
+  radial-gradient(circle at 88% 0%,rgba(239,215,142,.14),transparent 31%),
+  linear-gradient(180deg,#061326 0%,#071a32 50%,#030913 100%);
+  padding:max(12px,var(--safe-top)) max(12px,env(safe-area-inset-right,0px)) max(20px,var(--safe-bottom)) max(12px,env(safe-area-inset-left,0px))}
+button,input,select,textarea{font:inherit}
+button,a,input,select,textarea{touch-action:manipulation}
+.app{max-width:1180px;margin:0 auto 86px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin:0 0 14px}
+.brand{display:flex;gap:12px;align-items:center;min-width:0}
+.brand img{width:48px;height:48px;border-radius:17px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(0,0,0,.28)}
+.brand h1{margin:0;font-family:var(--serif);font-size:clamp(22px,4.4vw,36px);color:#f7fbff;line-height:1}
+.brand p{margin:5px 0 0;color:var(--muted);font-size:12px;font-weight:800}
+.toolbar{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.pill,.primary,.ghost,.danger{border:1px solid var(--line);border-radius:999px;min-height:40px;padding:9px 14px;color:var(--text);font-size:12px;font-weight:950;background:rgba(143,208,255,.08);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.primary{background:linear-gradient(135deg,rgba(80,167,255,.42),rgba(19,88,164,.72));border-color:rgba(143,208,255,.55)}
+.ghost{background:rgba(255,255,255,.04)}
+.danger{background:rgba(255,141,141,.10);border-color:rgba(255,141,141,.32)}
+.pill:active,.primary:active,.ghost:active,.danger:active{transform:scale(.98)}
+.hero{border:1px solid rgba(143,208,255,.26);border-radius:28px;padding:18px;background:radial-gradient(circle at 10% 0%,rgba(80,167,255,.22),transparent 42%),linear-gradient(145deg,rgba(13,46,88,.94),rgba(5,17,34,.96));box-shadow:0 22px 60px rgba(0,0,0,.28);margin-bottom:13px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:14px;align-items:stretch}
+.hero h2{font-family:var(--serif);font-size:clamp(25px,5vw,52px);line-height:1.02;margin:0 0 8px;color:#fff}
+.hero p{margin:0;color:var(--muted);line-height:1.55;font-size:14px;max-width:720px}
+.status-card{border:1px solid var(--line);border-radius:22px;background:rgba(4,15,30,.55);padding:14px;display:grid;gap:10px}
+.status-row{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;border-top:1px solid rgba(143,208,255,.12);padding-top:9px}
+.status-row:first-child{border-top:0;padding-top:0}
+.status-row b{color:var(--text)}
+.dot{width:9px;height:9px;border-radius:999px;background:var(--warn);display:inline-block;box-shadow:0 0 16px currentColor}
+.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}
+.tabs{position:sticky;top:max(8px,var(--safe-top));z-index:20;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:0 0 12px;padding:7px;border:1px solid rgba(143,208,255,.2);border-radius:22px;background:rgba(4,15,30,.78);backdrop-filter:blur(16px)}
+.tab{border:1px solid transparent;border-radius:16px;background:transparent;color:var(--muted);min-height:48px;padding:8px 7px;font-size:11px;font-weight:950;cursor:pointer}
+.tab.active{border-color:rgba(143,208,255,.45);background:linear-gradient(135deg,rgba(80,167,255,.22),rgba(239,215,142,.08));color:#fff}
+.panel{border:1px solid rgba(143,208,255,.22);border-radius:28px;background:linear-gradient(180deg,rgba(8,31,61,.94),rgba(4,15,30,.95));box-shadow:0 18px 48px rgba(0,0,0,.22);padding:16px}
+.grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(360px,1.06fr);gap:14px;align-items:start}
+.section{border:1px solid rgba(143,208,255,.16);border-radius:22px;background:rgba(4,15,30,.45);padding:14px;min-width:0}
+.section h3{margin:0 0 10px;font-family:var(--serif);color:#fff;font-size:24px;line-height:1.1}
+.section p{margin:0 0 12px;color:var(--muted);line-height:1.5;font-size:13px}
+label{display:grid;gap:6px;color:var(--muted);font-size:10.5px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+input,select,textarea{width:100%;border:1px solid rgba(143,208,255,.24);border-radius:15px;background:rgba(3,12,24,.72);color:var(--text);padding:11px 12px;outline:none}
+textarea{min-height:120px;resize:vertical;line-height:1.45;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
+textarea.big{min-height:420px}
+input:focus,select:focus,textarea:focus{border-color:rgba(143,208,255,.66);box-shadow:0 0 0 3px rgba(80,167,255,.14)}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}
+.result{border:1px dashed rgba(143,208,255,.28);border-radius:16px;background:rgba(0,0,0,.18);padding:12px;color:var(--muted);font-size:12px;line-height:1.55;white-space:pre-wrap;min-height:44px}
+.preview{border:1px solid rgba(239,215,142,.20);border-radius:24px;background:radial-gradient(circle at 50% 0%,rgba(239,215,142,.08),transparent 40%),linear-gradient(180deg,rgba(9,22,41,.94),rgba(3,10,20,.96));padding:18px;min-height:300px}
+.preview .eyebrow{color:var(--gold);font-size:11px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}
+.preview h2{font-family:var(--serif);font-size:clamp(24px,3vw,36px);line-height:1.08;margin:9px 0;color:#fff}
+.preview .meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.badge{border:1px solid rgba(143,208,255,.22);border-radius:999px;padding:5px 9px;color:#d8edff;background:rgba(80,167,255,.08);font-size:11px;font-weight:850}
+.statement{margin-top:12px;color:#fff8e8;font-family:var(--serif);font-size:20px;line-height:1.72;white-space:pre-wrap;text-align:center}
+.source{margin-top:13px;border-top:1px solid rgba(143,208,255,.16);padding-top:11px;color:var(--muted);font-size:12px;line-height:1.5}
+.tool-grid,.kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tool-card,.kpi{border:1px solid rgba(143,208,255,.17);border-radius:18px;background:rgba(80,167,255,.06);padding:13px;text-decoration:none;color:var(--text);min-height:86px}
+.tool-card b,.kpi b{display:block;color:#fff;margin-bottom:6px}
+.tool-card span,.kpi small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
+.kpi strong{display:block;font-size:28px;color:var(--blue2);line-height:1.05}
+.list{display:grid;gap:9px}
+.list-card{border:1px solid rgba(143,208,255,.16);border-radius:17px;background:rgba(255,255,255,.035);padding:12px}
+.list-card b{display:block;color:#fff;margin-bottom:5px}
+.list-card small{color:var(--muted)}
+.hidden{display:none!important}
+.mobile-save{display:none}
+@media(max-width:900px){.hero-grid,.grid{grid-template-columns:1fr}.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.tool-grid,.kpi-grid{grid-template-columns:1fr 1fr}.textarea.big{min-height:320px}}
+@media(max-width:620px){body{padding-left:9px;padding-right:9px}.topbar{display:block}.toolbar{justify-content:flex-start;margin-top:10px}.tabs{grid-template-columns:repeat(2,minmax(0,1fr));position:static}.panel,.hero{border-radius:22px;padding:12px}.form-grid,.tool-grid,.kpi-grid{grid-template-columns:1fr}.mobile-save{display:inline-flex}.tab{min-height:42px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <img src="/app-icon-192.png" alt="" width="48" height="48">
+      <div>
+        <h1>DAR Admin</h1>
+        <p>Publisher · Markdown · News · Planung · Statistik</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <a class="pill" href="/" target="_blank" rel="noopener">Haupt-App</a>
+      <a class="pill" href="https://github.com/Sero91ak/dar-al-tawhid-site" target="_blank" rel="noopener">GitHub</a>
+      <button class="pill" id="refreshBtn" type="button">Status</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h2>Blaue Admin-Zentrale</h2>
+        <p>Erstelle Beiträge als Markdown, veröffentliche sie direkt nach GitHub, setze News in der App, plane Beiträge und prüfe Live-Statistiken. Die Haupt-App wird dabei nicht optisch verändert.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-row"><span><i class="dot" id="apiDot"></i> Publisher API</span><b id="apiState">Prüfen...</b></div>
+        <div class="status-row"><span>Repo</span><b id="repoState">Sero91ak/dar-al-tawhid-site</b></div>
+        <div class="status-row"><span>Secret</span><b id="secretState">Nicht verbunden</b></div>
+        <div class="actions">
+          <button class="primary" id="connectBtn" type="button">Admin-Secret verbinden</button>
+          <button class="ghost" id="clearSecretBtn" type="button">Secret löschen</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabs" aria-label="Admin Bereiche">
+    <button class="tab active" data-tab="compose" type="button">Beitrag</button>
+    <button class="tab" data-tab="markdown" type="button">Markdown</button>
+    <button class="tab" data-tab="news" type="button">News</button>
+    <button class="tab" data-tab="schedule" type="button">Planung</button>
+    <button class="tab" data-tab="daily-push" type="button">Tages-Pushs</button>
+    <button class="tab" data-tab="stats" type="button">Statistik</button>
+    <button class="tab" data-tab="tools" type="button">Tools</button>
+  </nav>
+
+  <main class="panel">
+    <section id="tab-compose" class="tab-panel">
+      <div class="grid">
+        <div class="section">
+          <h3>Beitrag erstellen</h3>
+          <p>Felder ausfüllen, Markdown prüfen und dann direkt nach GitHub veröffentlichen.</p>
+          <div class="form-grid">
+            <label>Titel<input id="postTitle" placeholder="z.B. Ibn ʿAbbās: Rabbānī sein"></label>
+            <label>Kategorie<select id="postCategory"><option>Manhaj</option><option>Aqīdah</option><option>Fiqh</option><option>Hadith</option><option>Tafsīr</option><option>Zuhd</option><option>Adab</option><option>Akhlaq</option><option>Biographie</option></select></label>
+            <label>Thema<input id="postTopic" placeholder="Wissen, Rabbānī, Salaf"></label>
+            <label>Gelehrter / Person<input id="postScholar" placeholder="Ibn ʿAbbās"></label>
+            <label>Buch / Werk<input id="postBook" placeholder="Quelle / Werk"></label>
+            <label>Tags<input id="postTags" placeholder="#Manhaj, #Wissen"></label>
+          </div>
+          <label>Quellenzeile<input id="postSource" placeholder="Quelle mit Band/Seite"></label>
+          <label>Aussage / Beitragstext<textarea id="postBody" placeholder="Aussage oder Text hier einfügen"></textarea></label>
+          <label>Optionaler Dateiname<input id="postFilename" placeholder="leer lassen = automatisch"></label>
+          <div class="actions">
+            <button class="ghost" id="buildMarkdownBtn" type="button">Markdown bauen</button>
+            <button class="primary" id="publishComposeBtn" type="button">Beitrag live veröffentlichen</button>
+            <button class="ghost" id="copyMarkdownBtn" type="button">Markdown kopieren</button>
+          </div>
+          <div class="result" id="composeResult">Bereit.</div>
+        </div>
+        <div class="section">
+          <h3>Vorschau</h3>
+          <article class="preview" id="postPreview"></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-markdown" class="tab-panel hidden">
+      <div class="grid">
+        <div class="section">
+          <h3>Markdown direkt veröffentlichen</h3>
+          <p>Für fertige Beiträge aus Notizen, GitHub oder alten Entwürfen. Frontmatter wird vom Publisher normalisiert.</p>
+          <label>Markdown<textarea class="big" id="rawMarkdown" spellcheck="false"></textarea></label>
+          <label>Dateiname optional<input id="rawFilename" placeholder="z.B. ibn-abbas-rabbani-sein.md"></label>
+          <div class="actions">
+            <button class="primary" id="publishRawBtn" type="button">Markdown veröffentlichen</button>
+            <button class="ghost" id="loadFromComposeBtn" type="button">Aus Beitrag übernehmen</button>
+            <button class="ghost" id="copyRawBtn" type="button">Kopieren</button>
+          </div>
+          <div class="result" id="rawResult">Bereit.</div>
+        </div>
+        <div class="section">
+          <h3>Markdown-Vorschau</h3>
+          <div class="preview" id="markdownPreview"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-news" class="tab-panel hidden">
+      <div class="grid">
+        <div class="section">
+          <h3>News erstellen</h3>
+          <p>Diese Meldung erscheint in der Haupt-App im Bereich "Neu im Fokus".</p>
+          <label>News-Titel<input id="newsTitle" placeholder="Neue Beiträge online"></label>
+          <label>Text<textarea id="newsText" placeholder="Kurze Meldung für die App"></textarea></label>
+          <div class="form-grid">
+            <label>Badge<input id="newsBadge" value="News"></label>
+            <label>Sichtbar für Stunden<input id="newsHours" type="number" min="1" value="24"></label>
+            <label>Ziel<select id="newsNav"><option value="recent">Neueste Beiträge</option><option value="topics">Kategorien</option><option value="duas">Duʿāʾ</option><option value="more">Mehr</option></select></label>
+            <label>Wert optional<input id="newsValue" placeholder="Post-ID oder leer"></label>
+          </div>
+          <div class="actions">
+            <button class="primary" id="publishNewsBtn" type="button">News live setzen</button>
+          </div>
+          <div class="result" id="newsResult">Bereit.</div>
+        </div>
+        <div class="section">
+          <h3>News-Vorschau</h3>
+          <div class="list-card"><b id="newsPreviewTitle">Neue Beiträge online</b><small id="newsPreviewText">Kurze Meldung für die App</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-schedule" class="tab-panel hidden">
+      <div class="grid">
+        <div class="section">
+          <h3>Beitrag planen</h3>
+          <p>Speichert einen Beitrag in GitHub unter der Planungsdatei. Der Worker kann ihn später veröffentlichen.</p>
+          <label>Markdown<textarea class="big" id="scheduleMarkdown" spellcheck="false"></textarea></label>
+          <div class="form-grid">
+            <label>Veröffentlichen am<input id="scheduleWhen" type="datetime-local"></label>
+            <label>Dateiname optional<input id="scheduleFilename" placeholder="automatisch"></label>
+          </div>
+          <div class="actions">
+            <button class="primary" id="scheduleBtn" type="button">Planen speichern</button>
+            <button class="ghost" id="runSchedulerBtn" type="button">Scheduler jetzt ausführen</button>
+          </div>
+          <div class="result" id="scheduleResult">Bereit.</div>
+        </div>
+        <div class="section">
+          <h3>Hinweis</h3>
+          <p>Geplante Beiträge werden in `content/admin/planned-posts.json` gespeichert. Der Cloudflare Worker hat bereits Scheduler-Unterstützung.</p>
+          <div class="tool-grid">
+            <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/admin" target="_blank" rel="noopener"><b>Planungsdatei</b><span>Auf GitHub öffnen</span></a>
+            <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions" target="_blank" rel="noopener"><b>Actions</b><span>Workflows prüfen</span></a>
+            <a class="tool-card" href="/#recent" target="_blank" rel="noopener"><b>Neueste</b><span>In der App prüfen</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-daily-push" class="tab-panel hidden">
+      <div class="grid">
+        <div class="section">
+          <h3>Tägliche Pushs</h3>
+          <p>Morgens Duʿāʾ des Tages, mittags Heute empfohlen. Der Versand läuft serverseitig über GitHub Actions und OneSignal.</p>
+          <div class="kpi-grid">
+            <div class="kpi"><b>Duʿāʾ des Tages</b><strong>09:00</strong><small>pro Nutzer-Zeitzone</small></div>
+            <div class="kpi"><b>Heute empfohlen</b><strong>12:00</strong><small>pro Nutzer-Zeitzone</small></div>
+            <div class="kpi"><b>Doppelschutz</b><strong>1×</strong><small>pro Nutzer und Tag</small></div>
+          </div>
+          <div class="actions">
+            <a class="primary" href="https://github.com/Sero91ak/dar-al-tawhid-site/blob/main/content/admin/daily-push.json" target="_blank" rel="noopener">Konfiguration öffnen</a>
+            <a class="ghost" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/daily-content-push.yml" target="_blank" rel="noopener">Scheduler-Status</a>
+            <button class="ghost" id="copyDailyPushConfigBtn" type="button">Standard-Konfig kopieren</button>
+          </div>
+          <div class="result" id="dailyPushResult">Bereit. Manuelle Auswahl erfolgt über `content/admin/daily-push.json`; leer = automatische Auswahl geprüfter Inhalte.</div>
+        </div>
+        <div class="section">
+          <h3>Push-Vorschau</h3>
+          <div class="list">
+            <div class="list-card"><b>Duʿāʾ des Tages</b><small>Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ.</small></div>
+            <div class="list-card"><b>Heute empfohlen</b><small>Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.</small></div>
+          </div>
+          <p style="margin-top:12px">Besucher können beide Kategorien einzeln in der App deaktivieren. Gebetszeiten und Taḥajjud bleiben getrennte Schalter.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-stats" class="tab-panel hidden">
+      <div class="section">
+        <h3>Live-Statistik</h3>
+        <p>Besucher, Aufrufe, Teilen und gespeicherte Beiträge.</p>
+        <div id="statsBox" class="result">Statistik wird geladen...</div>
+      </div>
+    </section>
+
+    <section id="tab-tools" class="tab-panel hidden">
+      <div class="section">
+        <h3>Werkzeuge</h3>
+        <div class="tool-grid">
+          <a class="tool-card" href="https://dar-admin-publisher.sero91ak.workers.dev/health" target="_blank" rel="noopener"><b>Publisher Health</b><span>Cloudflare Worker prüfen</span></a>
+          <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts" target="_blank" rel="noopener"><b>Beiträge</b><span>Markdown-Dateien auf GitHub</span></a>
+          <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/blob/main/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Posts-Index</b><span>Automatisch aktualisiert</span></a>
+          <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/blob/main/content/updates/current.json" target="_blank" rel="noopener"><b>News-Datei</b><span>Neu im Fokus</span></a>
+          <a class="tool-card" href="/#image-editor" target="_blank" rel="noopener"><b>Bild-Beitrag</b><span>Vorlagen & Teilen</span></a>
+          <a class="tool-card" href="/admin/" target="_blank" rel="noopener"><b>Admin installieren</b><span>Als PWA speichern</span></a>
+        </div>
+        <div class="actions">
+          <button class="ghost" id="exportDraftBtn" type="button">Entwurf exportieren</button>
+          <button class="ghost" id="importDraftBtn" type="button">Entwurf importieren</button>
+        </div>
+        <div class="result" id="toolsResult">Bereit.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const PUBLISHER="https://dar-admin-publisher.sero91ak.workers.dev";
+const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
+const SECRET_KEY="darAdminPublisherSecretV1";
+const DRAFT_KEY="darAdminPublisherDraftV1";
+const TAB_KEY="darAdminPublisherTabV1";
+const ANALYTICS={
+  supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
+  supabaseKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw"
+};
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function secret(){try{return localStorage.getItem(SECRET_KEY)||""}catch(e){return""}}
+function setSecret(v){try{v?localStorage.setItem(SECRET_KEY,v):localStorage.removeItem(SECRET_KEY)}catch(e){}updateSecretState()}
+function updateSecretState(){$("secretState").textContent=secret()?"Verbunden":"Nicht verbunden"}
+function headers(){return{"Content-Type":"application/json","X-Admin-Secret":secret()}}
+async function api(path,payload){
+  if(!secret())throw new Error("Admin-Secret fehlt. Bitte zuerst verbinden.");
+  const res=await fetch(PUBLISHER+path,{method:"POST",headers:headers(),body:JSON.stringify(payload||{})});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||data.ok===false)throw new Error(data.error||("API Fehler "+res.status));
+  return data;
+}
+function result(id,msg,ok=true){const el=$(id);if(el){el.style.borderColor=ok?"rgba(110,231,168,.42)":"rgba(255,141,141,.45)";el.textContent=msg}}
+function slugify(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ʿ|'/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80)||"beitrag"}
+function splitTags(s){return String(s||"").split(",").map(x=>x.trim()).filter(Boolean)}
+function q(s){return String(s||"").replace(/"/g,'\\"')}
+function buildMarkdown(){
+  const title=$("postTitle").value.trim();
+  const tags=splitTags($("postTags").value);
+  const body=$("postBody").value.trim();
+  const lines=[
+    "---",
+    `title: "${q(title)}"`,
+    `date: "${new Date().toISOString()}"`,
+    `category: "${q($("postCategory").value)}"`,
+    `topic: "${q($("postTopic").value.trim())}"`,
+    `scholar: "${q($("postScholar").value.trim())}"`,
+    `book: "${q($("postBook").value.trim())}"`,
+    `source: "${q($("postSource").value.trim())}"`,
+    "tags:",
+    ...tags.map(t=>"  - "+q(t)),
+    "---",
+    "",
+    body
+  ];
+  return lines.join("\n").trim()+"\n";
+}
+function parseFrontMatter(md){
+  const out={};
+  const m=String(md||"").match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if(!m)return{body:md||""};
+  m[1].split(/\n/).forEach(line=>{
+    const idx=line.indexOf(":");
+    if(idx>0){out[line.slice(0,idx).trim()]=line.slice(idx+1).trim().replace(/^"|"$/g,"")}
+  });
+  out.body=m[2]||"";
+  return out;
+}
+function renderPostPreview(){
+  const title=$("postTitle").value.trim()||"Beitragstitel";
+  const body=$("postBody").value.trim()||"Aussage oder Beitragstext erscheint hier.";
+  const meta=[$("postCategory").value,$("postScholar").value,$("postBook").value].filter(Boolean);
+  $("postPreview").innerHTML=`<div class="eyebrow">Beitrag</div><h2>${esc(title)}</h2><div class="meta">${meta.map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</div><div class="statement">${esc(body)}</div><div class="source"><b>Quelle:</b> ${esc($("postSource").value||"Noch keine Quelle")}</div>`;
+}
+function renderMarkdownPreview(){
+  const data=parseFrontMatter($("rawMarkdown").value);
+  $("markdownPreview").innerHTML=`<div class="eyebrow">Markdown</div><h2>${esc(data.title||"Ohne Titel")}</h2><div class="meta">${[data.category,data.scholar,data.book].filter(Boolean).map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</div><div class="statement">${esc(data.body||"Noch kein Markdown.")}</div><div class="source"><b>Quelle:</b> ${esc(data.source||"")}</div>`;
+}
+function saveDraft(){
+  const ids=["postTitle","postCategory","postTopic","postScholar","postBook","postTags","postSource","postBody","postFilename","rawMarkdown","rawFilename","newsTitle","newsText","newsBadge","newsHours","newsNav","newsValue","scheduleMarkdown","scheduleWhen","scheduleFilename"];
+  const data={};
+  ids.forEach(id=>{const el=$(id);if(el)data[id]=el.value});
+  try{localStorage.setItem(DRAFT_KEY,JSON.stringify(data))}catch(e){}
+}
+function loadDraft(){
+  try{
+    const data=JSON.parse(localStorage.getItem(DRAFT_KEY)||"{}");
+    Object.keys(data).forEach(id=>{if($(id))$(id).value=data[id]});
+  }catch(e){}
+}
+function switchTab(tab){
+  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+tab));
+  try{localStorage.setItem(TAB_KEY,tab)}catch(e){}
+  if(tab==="stats")loadStats();
+}
+async function checkHealth(){
+  try{
+    const res=await fetch(PUBLISHER+"/health",{cache:"no-store"});
+    const data=await res.json();
+    $("apiDot").className="dot ok";
+    $("apiState").textContent=data.ok?"Online":"Unklar";
+    $("repoState").textContent=data.repo||"Sero91ak/dar-al-tawhid-site";
+  }catch(e){
+    $("apiDot").className="dot bad";
+    $("apiState").textContent="Nicht erreichbar";
+  }
+}
+async function publishMarkdown(markdown,filename,resultId){
+  const data=await api("/api/admin/publish",{markdown,filename});
+  result(resultId,`Veröffentlicht: ${data.filename}\nNummer: ${data.number}\nCommit: ${data.commitSha||"-"}\nPfad: ${data.postPath}`,true);
+  return data;
+}
+async function loadStats(){
+  const box=$("statsBox");
+  box.textContent="Statistik wird geladen...";
+  try{
+    const url=ANALYTICS.supabaseUrl.replace(/\/$/,"");
+    const h={apikey:ANALYTICS.supabaseKey,Authorization:"Bearer "+ANALYTICS.supabaseKey};
+    const [liveRes,totalsRes]=await Promise.all([
+      fetch(url+"/rest/v1/rpc/analytics_live",{headers:h,cache:"no-store"}),
+      fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=12",{headers:h,cache:"no-store"})
+    ]);
+    if(!liveRes.ok||!totalsRes.ok)throw new Error("Supabase Fehler");
+    const live=await liveRes.json();
+    const totals=await totalsRes.json();
+    box.innerHTML=`<div class="kpi-grid"><div class="kpi"><b>Jetzt online</b><strong>${Number(live.live_now||0)}</strong><small>letzte 5 Minuten</small></div><div class="kpi"><b>Heute Besucher</b><strong>${Number(live.today_sessions||0)}</strong><small>Sitzungen</small></div><div class="kpi"><b>Heute geteilt</b><strong>${Number(live.today_shares||0)}</strong><small>Beiträge und Duʿāʾ</small></div></div><div class="list" style="margin-top:12px">${totals.map(x=>`<div class="list-card"><b>${esc(x.content_title||x.content_id)}</b><small>${esc(x.content_type)} · ${Number(x.views||0)} gelesen · ${Number(x.shares||0)} geteilt · ${Number(x.saves||0)} gespeichert</small></div>`).join("")}</div>`;
+  }catch(e){box.textContent="Statistik konnte nicht geladen werden: "+(e.message||e)}
+}
+function init(){
+  loadDraft();
+  updateSecretState();
+  renderPostPreview();
+  renderMarkdownPreview();
+  checkHealth();
+  document.querySelectorAll(".tab").forEach(btn=>btn.onclick=()=>switchTab(btn.dataset.tab));
+  switchTab(localStorage.getItem(TAB_KEY)||"compose");
+  ["postTitle","postCategory","postTopic","postScholar","postBook","postTags","postSource","postBody"].forEach(id=>$(id).addEventListener("input",()=>{renderPostPreview();saveDraft()}));
+  ["rawMarkdown"].forEach(id=>$(id).addEventListener("input",()=>{renderMarkdownPreview();saveDraft()}));
+  document.querySelectorAll("input,select,textarea").forEach(el=>el.addEventListener("change",saveDraft));
+  $("connectBtn").onclick=()=>{
+    const current=secret();
+    const v=prompt("Admin-Secret für Publisher Worker eingeben:",current);
+    if(v!==null)setSecret(v.trim());
+  };
+  $("clearSecretBtn").onclick=()=>{if(confirm("Admin-Secret auf diesem Gerät löschen?"))setSecret("")};
+  $("refreshBtn").onclick=()=>{checkHealth();if(!document.getElementById("tab-stats").classList.contains("hidden"))loadStats()};
+  $("buildMarkdownBtn").onclick=()=>{$("rawMarkdown").value=buildMarkdown();renderMarkdownPreview();switchTab("markdown");saveDraft()};
+  $("copyMarkdownBtn").onclick=async()=>{await navigator.clipboard.writeText(buildMarkdown());result("composeResult","Markdown kopiert.",true)};
+  $("publishComposeBtn").onclick=async()=>{
+    try{result("composeResult","Veröffentliche...",true);await publishMarkdown(buildMarkdown(),$("postFilename").value.trim(),"composeResult")}
+    catch(e){result("composeResult",e.message||String(e),false)}
+  };
+  $("loadFromComposeBtn").onclick=()=>{$("rawMarkdown").value=buildMarkdown();$("rawFilename").value=$("postFilename").value;renderMarkdownPreview();saveDraft()};
+  $("copyRawBtn").onclick=async()=>{await navigator.clipboard.writeText($("rawMarkdown").value);result("rawResult","Markdown kopiert.",true)};
+  $("publishRawBtn").onclick=async()=>{
+    try{result("rawResult","Veröffentliche...",true);await publishMarkdown($("rawMarkdown").value,$("rawFilename").value.trim(),"rawResult")}
+    catch(e){result("rawResult",e.message||String(e),false)}
+  };
+  $("publishNewsBtn").onclick=async()=>{
+    try{
+      result("newsResult","News wird veröffentlicht...",true);
+      const data=await api("/api/admin/publish-news",{title:$("newsTitle").value,text:$("newsText").value,badge:$("newsBadge").value,ttlHours:Number($("newsHours").value||24),nav:$("newsNav").value,value:$("newsValue").value});
+      result("newsResult",`News veröffentlicht: ${data.id}\nCommit: ${data.commitSha||"-"}\nPfad: ${data.updatesPath}`,true);
+    }catch(e){result("newsResult",e.message||String(e),false)}
+  };
+  ["newsTitle","newsText"].forEach(id=>$(id).addEventListener("input",()=>{$("newsPreviewTitle").textContent=$("newsTitle").value||"Neue Beiträge online";$("newsPreviewText").textContent=$("newsText").value||"Kurze Meldung für die App";saveDraft()}));
+  $("scheduleBtn").onclick=async()=>{
+    try{
+      result("scheduleResult","Planung wird gespeichert...",true);
+      const data=await api("/api/admin/schedule",{markdown:$("scheduleMarkdown").value,when:$("scheduleWhen").value,filename:$("scheduleFilename").value});
+      result("scheduleResult",`Geplant: ${data.id}\nZeit: ${data.publishAt}\nCommit: ${data.commitSha||"-"}`,true);
+    }catch(e){result("scheduleResult",e.message||String(e),false)}
+  };
+  $("runSchedulerBtn").onclick=async()=>{
+    try{const data=await api("/api/admin/run-scheduler",{});result("scheduleResult",`Scheduler geprüft: ${data.checked}\nVeröffentlicht: ${data.published}`,true)}
+    catch(e){result("scheduleResult",e.message||String(e),false)}
+  };
+  $("copyDailyPushConfigBtn").onclick=async()=>{await navigator.clipboard.writeText(JSON.stringify({automatic:true,dailyDua:{enabled:true,hour:9,id:""},recommendation:{enabled:true,hour:12,id:""}},null,2));result("dailyPushResult","Standard-Konfiguration kopiert.",true)};
+  $("exportDraftBtn").onclick=async()=>{const data=localStorage.getItem(DRAFT_KEY)||"{}";await navigator.clipboard.writeText(data);result("toolsResult","Entwurf als JSON kopiert.",true)};
+  $("importDraftBtn").onclick=()=>{const data=prompt("Entwurf-JSON einfügen:");if(!data)return;try{localStorage.setItem(DRAFT_KEY,data);loadDraft();renderPostPreview();renderMarkdownPreview();result("toolsResult","Entwurf importiert.",true)}catch(e){result("toolsResult","Import fehlgeschlagen.",false)}};
+  const now=new Date(Date.now()+60*60*1000);
+  if(!$("scheduleWhen").value)$("scheduleWhen").value=now.toISOString().slice(0,16);
+}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{}))}
+init();
+</script>
+</body>
+</html>
