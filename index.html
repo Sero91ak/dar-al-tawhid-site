@@ -2927,11 +2927,11 @@ html[data-theme="light"] .footer{color:var(--muted)!important;border-top:1px sol
 html[data-theme="light"] .footer strong,
 html[data-theme="light"] .signature{color:var(--gold2)!important}
 html[data-theme="light"] .bottom-nav{
-  background:rgba(255,244,228,.92)!important;
+  background:rgba(255,244,228,.25)!important;
   border-color:rgba(155,122,60,.18)!important;
   box-shadow:0 6px 18px rgba(120,90,40,.09)!important;
-  backdrop-filter:blur(12px)!important;
-  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
 }
 html[data-theme="light"] .bottom-nav-btn{color:rgba(74,55,32,.58)!important;text-shadow:none!important}
 html[data-theme="light"] .bottom-nav-btn.active,
@@ -3422,11 +3422,11 @@ html[data-theme="soft"] .recommended-text,
 html[data-theme="soft"] .ramadan-note{color:var(--muted)!important}
 html[data-theme="soft"] .footer{color:var(--muted)!important;border-top:1px solid var(--line2)!important}
 html[data-theme="soft"] .bottom-nav{
-  background:rgba(255,248,242,.92)!important;
+  background:rgba(255,248,242,.25)!important;
   border-color:rgba(116,76,98,.20)!important;
   box-shadow:0 6px 18px rgba(96,62,78,.10)!important;
-  backdrop-filter:blur(12px)!important;
-  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
 }
 html[data-theme="soft"] .bottom-nav-btn{color:rgba(58,38,48,.58)!important;text-shadow:none!important}
 html[data-theme="soft"] .bottom-nav-btn.active,
@@ -3767,11 +3767,11 @@ html[data-theme="royal"] .qibla-status{
   border-color:rgba(239,215,142,.20)!important;
 }
 html[data-theme="royal"] .bottom-nav{
-  background:rgba(7,21,43,.88)!important;
+  background:rgba(7,21,43,.25)!important;
   border-color:rgba(239,215,142,.20)!important;
   box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
-  backdrop-filter:blur(12px)!important;
-  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
 }
 html[data-theme="royal"] .bottom-nav-btn{color:rgba(248,236,204,.68)!important;text-shadow:none!important}
 html[data-theme="royal"] .bottom-nav-btn.active,
@@ -4437,9 +4437,11 @@ html[data-theme="light"] .share-panel-v11{
   box-shadow:inset 0 1px 0 rgba(255,255,255,.70),0 8px 20px rgba(110,82,40,.045)!important;
 }
 html[data-theme="light"] .bottom-nav{
-  background:rgba(255,250,241,.94)!important;
+  background:rgba(255,250,241,.25)!important;
   border-color:rgba(139,108,55,.14)!important;
   box-shadow:0 6px 18px rgba(110,82,40,.07)!important;
+  backdrop-filter:blur(12px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
 }
 html[data-theme="light"] .bottom-nav-pill,
 html[data-theme="light"] .social-link,
@@ -5981,7 +5983,8 @@ function renderDuaCat(cat){normalizeLoadedDuas();const items=DUAS.filter(d=>{con
 function renderDua(id){
   const d=DUAS.find(x=>x.id===id);
   if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;
-  return `<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.")}<div class="article-actions"><button class="action-btn" type="button" data-image-dua-open="${esc(d.id)}">🖼️ Als Bild teilen</button></div></article>`;
+  const imageAction=`<button class="share-btn image-post" data-image-dua-open="${esc(d.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Als Bild teilen</span></button>`;
+  return `<article class="article"><div class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.",imageAction)}</article>`;
 }
 
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
