@@ -28,6 +28,31 @@ if (!API_KEY && !DRY_RUN) {
   process.exit(1);
 }
 
+async function fetchOneSignalJson(url, options = {}) {
+  if (DRY_RUN && !API_KEY) return {};
+
+  let last = null;
+
+  for (const authMode of ["Key", "Basic"]) {
+    const res = await fetch(url, {
+      ...options,
+      headers: {
+        ...(options.headers || {}),
+        Authorization: `${authMode} ${ONESIGNAL_AUTH_KEY}`
+      }
+    });
+    const text = await res.text();
+
+    if (res.ok) {
+      return text ? JSON.parse(text) : {};
+    }
+
+    last = new Error(`OneSignal ${res.status} (${authMode}): ${text}`);
+  }
+
+  throw last || new Error("OneSignal API request failed");
+}
+
 function readJson(file, fallback) {
   try {
     return JSON.parse(fs.readFileSync(file, "utf8"));
@@ -150,21 +175,7 @@ async function fetchLegacyPlayers() {
 
   while (true) {
     const url = `https://onesignal.com/api/v1/players?app_id=${encodeURIComponent(APP_ID)}&limit=${limit}&offset=${offset}`;
-    let data = null;
-    let lastError = null;
-
-    for (const mode of ["Key", "Basic"]) {
-      const res = await fetch(url, { headers: { Authorization: `${mode} ${ONESIGNAL_AUTH_KEY}` } });
-      const text = await res.text();
-      if (res.ok) {
-        data = JSON.parse(text);
-        break;
-      }
-      lastError = new Error(`OneSignal Subscriptions Fehler ${res.status} (${mode}): ${text}`);
-    }
-
-    if (!data) throw lastError || new Error("OneSignal Subscriptions Fehler");
-
+    const data = await fetchOneSignalJson(url);
     const players = Array.isArray(data.players) ? data.players : [];
     all.push(...players);
     if (players.length < limit) break;
@@ -174,31 +185,83 @@ async function fetchLegacyPlayers() {
   return all;
 }
 
-async function fetchUserByAlias(aliasLabel, aliasId) {
-  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
+async function fetchAppUsers() {
+  if (DRY_RUN && !API_KEY) return [];
 
-  for (const mode of ["Key", "Basic"]) {
-    const res = await fetch(url, { headers: { Authorization: `${mode} ${ONESIGNAL_AUTH_KEY}` } });
-    if (res.ok) return JSON.parse(await res.text());
+  const all = [];
+  let offset = 0;
+  const limit = 300;
+
+  while (true) {
+    const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users?limit=${limit}&offset=${offset}`;
+    const data = await fetchOneSignalJson(url);
+    const users = Array.isArray(data.users)
+      ? data.users
+      : Array.isArray(data.items)
+        ? data.items
+        : Array.isArray(data)
+          ? data
+          : [];
+
+    all.push(...users.map(normalizeUserRecord));
+    if (users.length < limit) break;
+    offset += limit;
   }
 
-  return null;
+  return all;
+}
+
+function normalizeUserRecord(user) {
+  const subscriptions = extractWebPushSubscriptionIds(user);
+  const tags = extractUserTags(user);
+  const externalId =
+    user?.identity?.external_id ||
+    user?.aliases?.external_id ||
+    user?.external_id ||
+    null;
+
+  return {
+    id: subscriptions[0] || user?.id || user?.onesignal_id || externalId,
+    external_user_id: externalId,
+    invalid_identifier: false,
+    notification_types: 1,
+    tags,
+    subscriptionIds: subscriptions
+  };
+}
+
+async function fetchUserByAlias(aliasLabel, aliasId) {
+  const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/users/by/${encodeURIComponent(aliasLabel)}/${encodeURIComponent(aliasId)}`;
+  try {
+    return await fetchOneSignalJson(url);
+  } catch {
+    return null;
+  }
 }
 
 async function fetchUserBySubscriptionId(subscriptionId) {
   const url = `https://api.onesignal.com/apps/${encodeURIComponent(APP_ID)}/subscriptions/${encodeURIComponent(subscriptionId)}/user`;
-
-  for (const mode of ["Key", "Basic"]) {
-    const res = await fetch(url, { headers: { Authorization: `${mode} ${ONESIGNAL_AUTH_KEY}` } });
-    if (res.ok) return JSON.parse(await res.text());
+  try {
+    return await fetchOneSignalJson(url);
+  } catch {
+    return null;
   }
-
-  return null;
 }
 
 function extractUserTags(user) {
-  const tags = user?.properties?.tags;
-  return tags && typeof tags === "object" ? { ...tags } : {};
+  if (!user) return {};
+  const candidates = [
+    user?.properties?.tags,
+    user?.tags,
+    user?.properties?.custom_tags,
+    user?.custom_tags
+  ];
+
+  for (const tags of candidates) {
+    if (tags && typeof tags === "object") return { ...tags };
+  }
+
+  return {};
 }
 
 function extractWebPushSubscriptionIds(user) {
@@ -228,13 +291,33 @@ async function resolvePlayer(player) {
 }
 
 async function fetchSubscriptions() {
-  const players = await fetchLegacyPlayers();
+  let players = [];
+  let source = "users";
+
+  try {
+    players = await fetchAppUsers();
+  } catch (err) {
+    console.warn(`Neue OneSignal-User-Liste nicht lesbar, Legacy-Fallback: ${err.message || err}`);
+    source = "legacy";
+    players = await fetchLegacyPlayers();
+  }
+
   const out = [];
 
   for (const player of players) {
+    if (source === "users") {
+      out.push({
+        ...player,
+        tags: player.tags || {},
+        subscriptionIds: player.subscriptionIds?.length ? player.subscriptionIds : [player.id].filter(Boolean)
+      });
+      continue;
+    }
+
     out.push(await resolvePlayer(player));
   }
 
+  console.log(`OneSignal-Quelle: ${source}`);
   return out;
 }
 
