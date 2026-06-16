@@ -5,6 +5,8 @@
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
+const { spawnSync } = require("node:child_process");
+const path = require("node:path");
 const {
   withNotificationIcons,
   postOneSignalNotification
@@ -530,8 +532,32 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
   }
 }
 
+function shouldRunPrayerPush(now) {
+  const hour = now.getUTCHours();
+  const minute = now.getUTCMinutes();
+  return [0, 6, 12, 18].includes(hour) && minute < 25;
+}
+
+function runDailyContentPushSync() {
+  const result = spawnSync(process.execPath, [path.join(__dirname, "send-daily-content-push.js")], {
+    stdio: "inherit",
+    env: process.env
+  });
+
+  if (result.status !== 0) {
+    console.error(`Daily content push Exit-Code: ${result.status}`);
+  }
+}
+
 (async function main() {
   const now = new Date();
+
+  runDailyContentPushSync();
+
+  if (!shouldRunPrayerPush(now)) {
+    console.log(`Gebets-Push übersprungen (${now.toISOString()} – stündlicher Tages-Push-Lauf).`);
+    return;
+  }
 
   console.log("Lese OneSignal-Subscriptions mit Gebetszeiten-Tags...");
 
