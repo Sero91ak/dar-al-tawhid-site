@@ -5721,21 +5721,7 @@ async function savePrayerPushRegistration(settings,tags,OS){
 }
 async function readOneSignalTags(OS){try{const modern=OS?.User?.getTags?OS.User.getTags():null;const tags=modern&&typeof modern.then==="function"?await modern:modern;if(tags&&Object.keys(tags).length)return tags;if(typeof OS?.getTags==="function"){const legacy=OS.getTags();return legacy&&typeof legacy.then==="function"?await legacy:(legacy||{})}return tags||{}}catch(e){return{}}}
 function prayerTagsSynced(local,tags){return local&&local.prayer_notifications==="true"&&String(local.prayer_lat||"")===String(tags.prayer_lat)&&String(local.prayer_lon||"")===String(tags.prayer_lon)&&String(local.prayer_advance_minutes||"15")===String(tags.prayer_advance_minutes)&&String(local.prayer_tahajjud_mode||"off")===String(tags.prayer_tahajjud_mode)}
-const PRAYER_SCHEDULE_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/schedule-now";
-async function requestImmediatePrayerSchedule(subscriptionId){
-  const sid=String(subscriptionId||"").trim();
-  if(!sid)return false;
-  try{
-    const r=await fetch(PRAYER_SCHEDULE_WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:sid}),mode:"cors",cache:"no-store"});
-    const data=await r.json().catch(()=>({}));
-    setPrayerPushDebug({lastScheduleTrigger:data.triggered?"ok":"fehlt",lastScheduleAt:new Date().toISOString(),lastScheduleNote:data.reason||""});
-    return !!data.ok;
-  }catch(e){
-    setPrayerPushDebug({lastScheduleTrigger:"fehler",lastScheduleAt:new Date().toISOString(),lastScheduleNote:e.message||String(e)});
-    return false;
-  }
-}
-async function syncPrayerPushTags(settings,{retries=7}={}){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;const tags=buildPrayerPushTags(s);if(!tags)return false;const OS=await waitForOneSignalReady(20000);if(!OS){setPrayerPushDebug({onesignal:"nicht bereit",lastError:"OneSignal nicht bereit"});return false}await ensurePushUserLogin(OS);await sleep(500);const subscribed=await ensureOneSignalPushSubscription(OS,{timeoutMs:35000,request:true});if(!subscribed){setPrayerPushDebug({onesignal:"keine subscription",lastError:"Keine OneSignal Subscription-ID"});return false}let oneSignalOk=false;for(let attempt=0;attempt<retries;attempt++){try{await addOneSignalTagsCompat(OS,tags);await sleep(1200+(attempt*700));const local=await readOneSignalTags(OS);if(prayerTagsSynced(local,tags)){oneSignalOk=true;break}}catch(e){console.warn("Gebets-Push-Tags:",e);setPrayerPushDebug({lastError:e.message||String(e)})}await sleep(800)}const supabaseOk=await savePrayerPushRegistration(s,tags,OS);const ids=currentOneSignalPushIds(OS);setPrayerPushDebug({onesignal:oneSignalOk?"tags ok":"tags unbestätigt",supabase:supabaseOk?"ok":"fehlt/fehler",subscriptionId:ids.subscriptionId,externalId:ids.externalId,lastSync:new Date().toISOString()});if((oneSignalOk||supabaseOk)&&ids.subscriptionId)requestImmediatePrayerSchedule(ids.subscriptionId).catch(()=>{});return oneSignalOk||supabaseOk}
+async function syncPrayerPushTags(settings,{retries=7}={}){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;const tags=buildPrayerPushTags(s);if(!tags)return false;const OS=await waitForOneSignalReady(20000);if(!OS){setPrayerPushDebug({onesignal:"nicht bereit",lastError:"OneSignal nicht bereit"});return false}await ensurePushUserLogin(OS);await sleep(500);const subscribed=await ensureOneSignalPushSubscription(OS,{timeoutMs:35000,request:true});if(!subscribed){setPrayerPushDebug({onesignal:"keine subscription",lastError:"Keine OneSignal Subscription-ID"});return false}let oneSignalOk=false;for(let attempt=0;attempt<retries;attempt++){try{await addOneSignalTagsCompat(OS,tags);await sleep(1200+(attempt*700));const local=await readOneSignalTags(OS);if(prayerTagsSynced(local,tags)){oneSignalOk=true;break}}catch(e){console.warn("Gebets-Push-Tags:",e);setPrayerPushDebug({lastError:e.message||String(e)})}await sleep(800)}const supabaseOk=await savePrayerPushRegistration(s,tags,OS);const ids=currentOneSignalPushIds(OS);setPrayerPushDebug({onesignal:oneSignalOk?"tags ok":"tags unbestätigt",supabase:supabaseOk?"ok":"fehlt/fehler",subscriptionId:ids.subscriptionId,externalId:ids.externalId,lastSync:new Date().toISOString(),lastScheduleTrigger:"",lastScheduleNote:"",lastError:oneSignalOk||supabaseOk?"":prayerPushDebug().lastError||""});return oneSignalOk||supabaseOk}
 function prayerPushAdvanceMinutes(settings=getPrayerSettings()){return normalizeAdvanceMinutes(settings.advanceMinutes)}
 const PRAYER_NOTIFICATION_MESSAGES={
   default:["Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.","Bewahre dein Gebet, denn es ist eine der gewaltigsten Pflichten.","Bewahre dein Gebet und erinnere dich an ALLAH."],
@@ -5755,6 +5741,10 @@ function prayerByKey(key,settings=getPrayerSettings()){return calculatePrayerTim
 let prayerPushServerStatus=null;
 async function loadPrayerPushServerStatus(){
   try{
+    const d=prayerPushDebug();
+    if((d.lastError&&/workflow|403|workflow_dispatch|personal access token/i.test(String(d.lastError)))||(d.lastScheduleNote&&/workflow|403/i.test(String(d.lastScheduleNote)))){
+      setPrayerPushDebug({lastError:"",lastScheduleTrigger:"",lastScheduleNote:"",lastScheduleAt:""});
+    }
     const r=await fetch("/content/admin/prayer-push-status.json?v="+Date.now(),{cache:"no-store"});
     if(r.ok)prayerPushServerStatus=await r.json();
   }catch(e){}
@@ -5776,7 +5766,7 @@ function nextPlannedPrayerPushSummary(settings=getPrayerSettings()){
       }
     });
   });
-  if(!nextEntry&&!nextAdvance)return"Nicht geplant (Server-Sync prüfen)";
+  if(!nextEntry&&!nextAdvance)return"Wird mit nächstem Server-Lauf geplant";
   const parts=[];
   if(nextEntry)parts.push(`${nextEntry.prayer.name} ${formatPrayerHour(nextEntry.prayer.time)}`);
   if(nextAdvance)parts.push(`Vorab ${nextAdvance.date.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}`);
@@ -5812,6 +5802,11 @@ function updatePrayerPushStatusPanel(){
   if(wasOpen)fresh.setAttribute("open","");
   host.replaceWith(fresh);
 }
+function prayerPushVisibleError(debug){
+  const parts=[debug?.lastError,debug?.lastScheduleNote].filter(Boolean).map(String);
+  const raw=parts.find(t=>t&&!/workflow|403|workflow_dispatch|Resource not accessible|personal access token/i.test(t))||"";
+  return raw;
+}
 function renderPrayerPushStatus(settings=getPrayerSettings()){
   const permission=getNotificationPermission();
   const reminder=Boolean(settings.reminder);
@@ -5823,26 +5818,16 @@ function renderPrayerPushStatus(settings=getPrayerSettings()){
   const hasSubscription=Boolean(pushId);
   const tagsOk=debug.onesignal==="tags ok";
   const supabaseOk=debug.supabase==="ok";
-  const serverReady=Boolean(prayerPushServerStatus?.ok&&Number(prayerPushServerStatus?.usersWithLocation||0)>0);
   const pushActive=Boolean(reminder&&hasLocation&&pushAllowed&&hasSubscription&&(tagsOk||supabaseOk));
   const warnActiveButBroken=reminder&&(!pushAllowed||!hasLocation||!hasSubscription||(!tagsOk&&!supabaseOk));
   const nextSummary=nextPlannedPrayerPushSummary(settings);
-  const schedulerInfo=prayerPushServerStatus?.updatedAt?new Date(prayerPushServerStatus.updatedAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Noch kein Lauf";
-  const lastServerPrayer=(()=>{
-    const planned=Array.isArray(prayerPushServerStatus?.planned)?prayerPushServerStatus.planned:[];
-    const past=planned.filter(p=>p.sendAfter&&new Date(p.sendAfter).getTime()<=Date.now()).sort((a,b)=>new Date(b.sendAfter)-new Date(a.sendAfter));
-    const item=past[0];
-    return item?`${item.prayer} ${item.mode==="advance"?"Vorab":"Gebetszeit"} · ${item.time} · geplant`:"Noch kein Server-Eintrag";
-  })();
+  const schedulerInfo=prayerPushServerStatus?.updatedAt?new Date(prayerPushServerStatus.updatedAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"GitHub Action · täglich 00:00 UTC";
   const lastTest=debug.lastTestAt?`${debug.lastTestOk?"erfolgreich":"fehlgeschlagen"} · ${new Date(debug.lastTestAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`:"Noch keiner";
   const lastSync=debug.lastSync?new Date(debug.lastSync).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Noch nicht";
   const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);
-  const lastError=debug.lastError||prayerPushServerStatus?.lastError||debug.lastScheduleNote||"";
-  const scheduleTrigger=debug.lastScheduleTrigger?`${debug.lastScheduleTrigger} · ${debug.lastScheduleAt?new Date(debug.lastScheduleAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):""}`:"Noch nicht";
+  const lastError=prayerPushVisibleError(debug);
   const warnHtml=warnActiveButBroken?`<div class="prayer-push-status-warn">⚠ Gebets-Push wirkt aktiv, aber Subscription, Tags oder Standort fehlen. Bitte Erinnerung erneut aktivieren und „Test senden“ nutzen.</div>`:"";
-  const diag=prayerPushServerStatus?.prayerDiagnostics||{};
-  const allPrayersHtml=["fajr","dhuhr","asr","maghrib","isha","tahajjud"].map(key=>{const d=diag[key];if(!d&&key==="tahajjud")return"";const ok=d&&(d.entry?.status==="geplant"||d.advance?.status==="geplant");return `<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(d?.name||key)} heute</b><span>${esc(d?.answer||"Noch kein Server-Status")}</span></div>`}).join("");
-  return `<details class="prayer-push-status" aria-live="polite"><summary>Push-Status öffnen</summary><div class="prayer-push-status-body">${warnHtml}<div class="prayer-push-status-grid"><div class="prayer-push-status-item ${pushAllowed?"ok":"warn"}"><b>Push erlaubt</b><span>${pushAllowed?"Ja":permission==="denied"?"Nein (blockiert)":"Nein"}</span></div><div class="prayer-push-status-item ${reminder?"ok":"warn"}"><b>Gebets-Push aktiv</b><span>${reminder?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasSubscription?"ok":"warn"}"><b>Subscription vorhanden</b><span>${hasSubscription?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Standort vorhanden</b><span>${hasLocation?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Zeitzone</b><span>${esc(tz)}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Push bereit</b><span>${pushActive?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${nextSummary.includes("fehlt")||nextSummary.includes("Nicht")?"warn":"ok"}"><b>Nächster geplanter Push</b><span>${esc(nextSummary)}</span></div><div class="prayer-push-status-item ${serverReady?"ok":"warn"}"><b>Server-Scheduler</b><span>${esc(schedulerInfo)}</span></div><div class="prayer-push-status-item ${debug.lastScheduleTrigger==="ok"?"ok":"warn"}"><b>Sofort-Planung</b><span>${esc(scheduleTrigger)}</span></div>${allPrayersHtml}<div class="prayer-push-status-item"><b>Letzter Server-Push</b><span>${esc(lastServerPrayer)}</span></div><div class="prayer-push-status-item ${debug.lastTestOk?"ok":"warn"}"><b>Letzter Test-Push</b><span>${esc(lastTest)}</span></div><div class="prayer-push-status-item ${tahajjud==="off"?"warn":"ok"}"><b>Taḥajjud</b><span>${esc(tahajjudModeLabel(tahajjud))}</span></div><div class="prayer-push-status-item ${supabaseOk?"ok":"warn"}"><b>Scheduler-Sync</b><span>${supabaseOk?"Gespeichert":esc(debug.supabase||"Wartet")}</span></div><div class="prayer-push-status-item ${tagsOk?"ok":"warn"}"><b>OneSignal-Tags</b><span>${esc(debug.onesignal||"Wartet")}</span></div><div class="prayer-push-status-item ${lastError?"warn":"ok"}"><b>Letzter Fehler</b><span>${esc(lastError||"Keiner")}</span></div><div class="prayer-push-status-item ${pushId?"ok":"warn"}"><b>Subscription-ID</b><span>${pushId?esc(pushId):"Fehlt"}</span></div><div class="prayer-push-status-item"><b>Letzter Sync</b><span>${esc(lastSync)}</span></div></div><small class="prayer-push-status-note">Alle Gebete (Fajr–Taḥajjud): Vorab + Gebetszeit über OneSignal. Test-Push = nur dieses Gerät.</small></div></details>`;
+  return `<details class="prayer-push-status" aria-live="polite"><summary>Push-Status öffnen</summary><div class="prayer-push-status-body">${warnHtml}<div class="prayer-push-status-grid"><div class="prayer-push-status-item ${pushAllowed?"ok":"warn"}"><b>Push erlaubt</b><span>${pushAllowed?"Ja":permission==="denied"?"Nein (blockiert)":"Nein"}</span></div><div class="prayer-push-status-item ${reminder?"ok":"warn"}"><b>Gebets-Push aktiv</b><span>${reminder?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasSubscription?"ok":"warn"}"><b>Subscription vorhanden</b><span>${hasSubscription?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Standort vorhanden</b><span>${hasLocation?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Zeitzone</b><span>${esc(tz)}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Push bereit</b><span>${pushActive?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${nextSummary.includes("fehlt")?"warn":"ok"}"><b>Nächstes Gebet</b><span>${esc(nextSummary)}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Server-Planung</b><span>${esc(schedulerInfo)}</span></div><div class="prayer-push-status-item ${debug.lastTestOk?"ok":"warn"}"><b>Letzter Test-Push</b><span>${esc(lastTest)}</span></div><div class="prayer-push-status-item ${tahajjud==="off"?"warn":"ok"}"><b>Taḥajjud</b><span>${esc(tahajjudModeLabel(tahajjud))}</span></div><div class="prayer-push-status-item ${supabaseOk?"ok":"warn"}"><b>Registrierung</b><span>${supabaseOk?"Gespeichert":esc(debug.supabase||"Wartet")}</span></div><div class="prayer-push-status-item ${tagsOk?"ok":"warn"}"><b>OneSignal-Tags</b><span>${esc(debug.onesignal||"Wartet")}</span></div>${lastError?`<div class="prayer-push-status-item warn"><b>Letzter Fehler</b><span>${esc(lastError)}</span></div>`:""}<div class="prayer-push-status-item ${pushId?"ok":"warn"}"><b>Subscription-ID</b><span>${pushId?esc(pushId):"Fehlt"}</span></div><div class="prayer-push-status-item"><b>Letzter Sync</b><span>${esc(lastSync)}</span></div></div><small class="prayer-push-status-note">Gebets-Pushs kommen über OneSignal (Vorab + Gebetszeit). Server plant täglich per GitHub Action. Test-Push = nur dieses Gerät.</small></div></details>`;
 }
 async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{return new window.Notification(title,payload)}catch(e){}}return null}
 function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s))scheduleLocalPrayerReminders({silent:true})}
