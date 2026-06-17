@@ -99,3 +99,4 @@ Die naechste Beitragsnummer basiert auf der Anzahl der Index-Eintraege plus 1 (z
 
 Der Worker verlangt `ADMIN_PUBLISH_SECRET` als Header `X-Admin-Secret`.
 Der GitHub-Token darf nie in der Admin-App oder im Browser gespeichert werden.
+# Deploy trigger 2026-06-17T07:41:15Z
