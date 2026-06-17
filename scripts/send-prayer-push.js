@@ -6,6 +6,7 @@ const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc
 const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_APP_API_KEY || process.env.ONESIGNAL_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
 const crypto = require("crypto");
+const fs = require("fs");
 const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 const {
@@ -13,8 +14,10 @@ const {
   postOneSignalNotification
 } = require("./lib/onesignal-push");
 const DEFAULT_PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
-const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || (26 * 60));
-const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 15);
+const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || (48 * 60));
+const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 60);
+const PRAYER_STATUS_PATH = path.join(__dirname, "..", "content", "admin", "prayer-push-status.json");
+const REFERENCE_LOCATION = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 const SUPABASE_URL = String(process.env.SUPABASE_URL || "https://djyfkttjbdraynuxrzno.supabase.co").replace(/\/$/, "");
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const ONESIGNAL_AUTH_KEY = String(API_KEY || "")
@@ -514,7 +517,12 @@ function getPrayerUsers(players) {
       tags.prayer_lon &&
       tags.prayer_timezone;
 
+    const subscriptionIds = p.subscriptionIds && p.subscriptionIds.length
+      ? p.subscriptionIds.filter(Boolean)
+      : [p.id].filter(Boolean);
+
     const subscribed =
+      subscriptionIds.length > 0 &&
       p.invalid_identifier !== true &&
       p.notification_types !== -2;
 
@@ -803,12 +811,77 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
         recipients: ids.length,
         timeZone: group.timeZone
       });
+      stats.oneSignalResponses.push({
+        prayer: prayer.key,
+        mode,
+        recipients: ids.length,
+        response: String(result.text || "").slice(0, 240)
+      });
     }
   } catch (err) {
     console.error(`OneSignal Sendefehler (${mode} ${prayer.name} ${timeLabel}):`, err.message || err);
     if (stats) stats.errors += 1;
     process.exitCode = 1;
   }
+}
+
+function localDateKey(date, timeZone) {
+  const p = getLocalParts(date, timeZone);
+  return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
+}
+
+function buildTodayPrayerOverview(planned, skippedPastDetails, reference = REFERENCE_LOCATION) {
+  const localDate = todayLocalDate(reference.timeZone);
+  const dateKey = localDateKey(new Date(), reference.timeZone);
+  const prayers = calculatePrayerTimes(
+    localDate,
+    reference.lat,
+    reference.lon,
+    reference.timeZone,
+    12,
+    1,
+    "off"
+  );
+  const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
+  const overview = {};
+
+  for (const key of keys) {
+    const ref = prayers.find((p) => p.key === key);
+    const time = ref?.time == null ? null : formatHour(ref.time);
+    const advancePlanned = planned.filter((p) => p.key === key && p.mode === "advance" && localDateKey(new Date(p.sendAfter), reference.timeZone) === dateKey);
+    const entryPlanned = planned.filter((p) => p.key === key && p.mode === "entry" && localDateKey(new Date(p.sendAfter), reference.timeZone) === dateKey);
+    const skipped = skippedPastDetails.filter((p) => p.key === key);
+    const advanceRecipients = advancePlanned.reduce((sum, p) => sum + (p.recipients || 0), 0);
+    const entryRecipients = entryPlanned.reduce((sum, p) => sum + (p.recipients || 0), 0);
+
+    overview[key] = {
+      name: ref?.name || key,
+      time,
+      advance: {
+        status: advancePlanned.length ? "geplant" : skipped.some((s) => s.mode === "advance") ? "übersprungen" : "nicht geplant",
+        sendAfter: advancePlanned[0]?.sendAfter || skipped.find((s) => s.mode === "advance")?.sendAfter || null,
+        recipients: advanceRecipients,
+        count: advancePlanned.length
+      },
+      entry: {
+        status: entryPlanned.length ? "geplant" : skipped.some((s) => s.mode === "entry") ? "übersprungen" : "nicht geplant",
+        sendAfter: entryPlanned[0]?.sendAfter || skipped.find((s) => s.mode === "entry")?.sendAfter || null,
+        recipients: entryRecipients,
+        count: entryPlanned.length
+      }
+    };
+  }
+
+  return {
+    date: dateKey,
+    reference: `${reference.city} · ${reference.timeZone}`,
+    prayers: overview
+  };
+}
+
+function writePrayerPushStatus(report) {
+  fs.mkdirSync(path.dirname(PRAYER_STATUS_PATH), { recursive: true });
+  fs.writeFileSync(PRAYER_STATUS_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 }
 
 function runDailyContentPushSync() {
@@ -830,7 +903,7 @@ function runDailyContentPushSync() {
 
   const windowStart = new Date(now.getTime() - SCHEDULE_GRACE_MINUTES * 60 * 1000);
   const windowEnd = new Date(now.getTime() + SCHEDULE_LOOKAHEAD_MINUTES * 60 * 1000);
-  const stats = { scheduled: 0, skippedPast: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0, planned: [] };
+  const stats = { scheduled: 0, skippedPast: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0, planned: [], skippedPastDetails: [], oneSignalResponses: [] };
 
   console.log("Lese OneSignal-Subscriptions mit Gebetszeiten-Tags...");
   console.log(`Planungsfenster: ${windowStart.toISOString()} bis ${windowEnd.toISOString()}`);
@@ -907,6 +980,15 @@ function runDailyContentPushSync() {
             const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
             console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
             stats.skippedPast += 1;
+            stats.skippedPastDetails.push({
+              key: prayer.key,
+              prayer: prayer.name,
+              mode: schedule.mode,
+              sendAfter: schedule.sendAfter.toISOString(),
+              time: label,
+              timeZone: group.timeZone,
+              reason: "vorbei"
+            });
             continue;
           }
 
@@ -941,5 +1023,52 @@ function runDailyContentPushSync() {
     }
   } else {
     console.log("Keine Pushs in diesem Planungsfenster geplant.");
+  }
+
+  const todayOverview = buildTodayPrayerOverview(stats.planned, stats.skippedPastDetails);
+  const maghribDiag = todayOverview.prayers.maghrib || null;
+  const statusReport = {
+    updatedAt: new Date().toISOString(),
+    ok: stats.errors === 0,
+    windowStart: windowStart.toISOString(),
+    windowEnd: windowEnd.toISOString(),
+    graceMinutes: SCHEDULE_GRACE_MINUTES,
+    lookaheadMinutes: SCHEDULE_LOOKAHEAD_MINUTES,
+    subscriptionsTotal: players.length,
+    subscriptionsOneSignal: oneSignalPlayers.length,
+    subscriptionsSupabase: supabaseRegistrations.length,
+    usersWithLocation: users.length,
+    locationGroups: groups.length,
+    scheduled: stats.scheduled,
+    recipients: stats.recipients,
+    skippedPast: stats.skippedPast,
+    skippedWindow: stats.skippedWindow,
+    duplicates: stats.duplicates,
+    errors: stats.errors,
+    lastError: stats.errors ? "OneSignal API Fehler – siehe GitHub Actions Log" : null,
+    today: todayOverview,
+    maghribDiagnostic: maghribDiag ? {
+      plannedAdvance: maghribDiag.advance.status,
+      plannedEntry: maghribDiag.entry.status,
+      time: maghribDiag.time,
+      advanceRecipients: maghribDiag.advance.recipients,
+      entryRecipients: maghribDiag.entry.recipients,
+      answer: maghribDiag.entry.status === "geplant"
+        ? `Maghrib ${maghribDiag.time} wurde an OneSignal übergeben (${maghribDiag.entry.recipients} Empfänger).`
+        : maghribDiag.entry.status === "übersprungen"
+          ? `Maghrib ${maghribDiag.time} wurde übersprungen (Zeitfenster vorbei oder Scheduler zu spät).`
+          : `Maghrib ${maghribDiag.time} wurde in diesem Lauf nicht geplant – keine registrierten Nutzer oder außerhalb des Fensters.`
+    } : null,
+    planned: stats.planned.slice(0, 80),
+    skippedPastDetails: stats.skippedPastDetails.slice(0, 40),
+    oneSignalResponses: stats.oneSignalResponses.slice(0, 20)
+  };
+
+  try {
+    writePrayerPushStatus(statusReport);
+    console.log(`Status gespeichert: ${PRAYER_STATUS_PATH}`);
+  } catch (err) {
+    console.error("Status-Datei konnte nicht geschrieben werden:", err.message || err);
+    process.exitCode = 1;
   }
 })();

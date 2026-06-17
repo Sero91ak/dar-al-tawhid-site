@@ -852,7 +852,20 @@ async function workerPostRequest(path,payload){
     body:JSON.stringify(payload||{})
   });
   const data=await res.json().catch(()=>({}));
-  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  if(!res.ok||!data.ok)throw new Error(data.error||data.reason||`Worker Fehler ${res.status}`);
+  return data;
+}
+async function workerGetRequest(path){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  if(!publishUrl)throw new Error("Worker URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  const res=await fetch(workerEndpoint(path),{
+    method:"GET",
+    headers:{"X-Admin-Secret":secret}
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
 function renderLogin(){
@@ -1233,9 +1246,9 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
-        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle Gebet und Art. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab-Erinnerung</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+        <div class="quick push-test-card"><b>Gebetszeiten-Push Kontrolle</b><small>Scheduler-Status, Maghrib-Diagnose und echter OneSignal-Test.</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Scheduler anstoßen</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>echter Versand</span></div><div class="push-test-controls"><input class="field" id="adminPrayerSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab-Erinnerung</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button><button class="btn" id="adminLocalPushTestBtn" type="button">Lokal testen</button></div></div>
       </div>
-      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">OneSignal-Test benötigt die Subscription-ID aus der Besucher-App (Push-Status).</div>
       ${renderTelegramPanel()}
       ${renderNewsComposer()}
       <div class="preview-box" style="margin-top:14px">
@@ -1365,6 +1378,9 @@ function bindUi(){
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
+  const oneSignalPrayerBtn=document.getElementById("adminOneSignalPrayerTestBtn");if(oneSignalPrayerBtn)oneSignalPrayerBtn.onclick=sendAdminOneSignalPrayerTest;
+  const prayerStatusBtn=document.getElementById("adminPrayerStatusBtn");if(prayerStatusBtn)prayerStatusBtn.onclick=loadAdminPrayerPushStatus;
+  const prayerRunBtn=document.getElementById("adminPrayerRunBtn");if(prayerRunBtn)prayerRunBtn.onclick=triggerAdminPrayerScheduler;
   const tgEnabled=document.getElementById("telegramPostEnabled");
   const tgRefreshBtn=document.getElementById("adminTelegramRefreshPreviewBtn");
   const syncTelegramModeState=()=>{
@@ -1457,15 +1473,79 @@ function updateDraftPreview(){
   updateTelegramPanelStatus();
 }
 function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
+function setAdminPrayerStatusHtml(html){const el=document.getElementById("adminPrayerStatusBox");if(el)el.innerHTML=html}
+function formatPrayerPushStatusHtml(status){
+  if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
+  const updated=status.updatedAt?new Date(status.updatedAt).toLocaleString("de-DE"):"unbekannt";
+  const mag=status.maghribDiagnostic;
+  let html=`<strong>Letzter Scheduler-Lauf:</strong> ${esc(updated)}<br>`;
+  html+=`<strong>Nutzer mit Standort:</strong> ${esc(String(status.usersWithLocation||0))} · <strong>Gruppen:</strong> ${esc(String(status.locationGroups||0))}<br>`;
+  html+=`<strong>Geplant:</strong> ${esc(String(status.scheduled||0))} · <strong>Empfänger:</strong> ${esc(String(status.recipients||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
+  if(mag){
+    html+=`<br><strong>Maghrib heute (${esc(mag.time||"--:--")}):</strong><br>`;
+    html+=`Vorab: ${esc(status.today?.prayers?.maghrib?.advance?.status||mag.plannedAdvance||"?")} (${esc(String(mag.advanceRecipients||0))} Empf.) · Gebetszeit: ${esc(status.today?.prayers?.maghrib?.entry?.status||mag.plannedEntry||"?")} (${esc(String(mag.entryRecipients||0))} Empf.)<br>`;
+    html+=`<span style="color:#dfffd8">${esc(mag.answer||"")}</span><br>`;
+  }
+  const prayers=status.today?.prayers||{};
+  const keys=["fajr","dhuhr","asr","maghrib","isha","tahajjud"];
+  html+=`<br><table style="width:100%;border-collapse:collapse;font-size:11px"><tr><th align="left">Gebet</th><th>Zeit</th><th>Vorab</th><th>Gebetszeit</th></tr>`;
+  keys.forEach(key=>{
+    const p=prayers[key];
+    if(!p&&key==="tahajjud")return;
+    html+=`<tr><td>${esc(p?.name||key)}</td><td>${esc(p?.time||"--")}</td><td>${esc(p?.advance?.status||"—")}</td><td>${esc(p?.entry?.status||"—")}</td></tr>`;
+  });
+  html+=`</table>`;
+  if(status.lastError)html+=`<br><span style="color:#f0c674">Fehler: ${esc(status.lastError)}</span>`;
+  return html;
+}
+async function loadAdminPrayerPushStatus(){
+  const box=document.getElementById("adminPrayerStatusBox");
+  if(box)box.textContent="Lade Scheduler-Status…";
+  try{
+    const data=await workerGetRequest("api/admin/prayer/status");
+    setAdminPrayerStatusHtml(formatPrayerPushStatusHtml(data.status));
+    addAdminLog("Gebets-Push","Scheduler-Status geladen",data.status?.updatedAt||"");
+  }catch(e){
+    setAdminPrayerStatusHtml(`<span style="color:#f0c674">Status konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
+  }
+}
+async function triggerAdminPrayerScheduler(){
+  const box=document.getElementById("adminPrayerStatusBox");
+  if(box)box.textContent="Starte Scheduler…";
+  try{
+    const data=await workerPostRequest("api/admin/prayer/run",{});
+    setAdminPrayerStatusHtml(`<span style="color:#dfffd8">${esc(data.reason||"Scheduler angestoßen")}</span>`);
+    addAdminLog("Gebets-Push","Scheduler angestoßen",data.reason||"");
+    setTimeout(()=>loadAdminPrayerPushStatus(),8000);
+  }catch(e){
+    setAdminPrayerStatusHtml(`<span style="color:#f0c674">Scheduler konnte nicht gestartet werden: ${esc(e.message||e)}</span>`);
+  }
+}
+async function sendAdminOneSignalPrayerTest(){
+  const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||"").trim();
+  const prayer=document.getElementById("adminPushPrayerSelect")?.value||"maghrib";
+  const mode=document.getElementById("adminPushModeSelect")?.value||"entry";
+  if(!subscriptionId){setAdminPushTestStatus("Bitte Subscription-ID aus der Besucher-App einfügen (Push-Status).");return}
+  setAdminPushTestStatus("Sende OneSignal-Test…");
+  try{
+    const result=await workerPostRequest("api/admin/prayer/test",{subscriptionId,prayer,mode,advanceMinutes:15});
+    const recipients=result.oneSignal?.parsed?.recipients ?? result.oneSignal?.recipients ?? "?";
+    setAdminPushTestStatus(`OneSignal-Test gesendet: ${result.sent?"ja":"nein"} · Gebet ${prayer} · Modus ${mode} · Empfänger ${recipients} · ${result.reason||result.oneSignal?.text||"ok"}`);
+    addAdminLog("Gebets-Push","OneSignal-Test gesendet",`${prayer} / ${mode}`);
+  }catch(e){
+    setAdminPushTestStatus(`OneSignal-Test fehlgeschlagen: ${e.message||e}`);
+  }
+}
 async function sendAdminLocalPushTest(){
   if(!("Notification" in window)){setAdminPushTestStatus("Dieses Gerät unterstützt keine Browser-Benachrichtigungen.");return}
   let permission=Notification.permission;
   if(permission!=="granted")permission=await Notification.requestPermission();
   if(permission!=="granted"){setAdminPushTestStatus("Benachrichtigungen wurden nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}
-  const prayerName=document.getElementById("adminPushPrayerSelect")?.value||"Fajr";
+  const prayerName=document.getElementById("adminPushPrayerSelect")?.value||"maghrib";
   const mode=document.getElementById("adminPushModeSelect")?.value||"entry";
-  const prayerKeyMap={"Fajr":"fajr","Dhuhr":"dhuhr","ʿAṣr":"asr","Maghrib":"maghrib","ʿIshāʾ":"isha","Taḥajjud":"tahajjud"};
-  const key=prayerKeyMap[prayerName]||"isha";
+  const prayerKeyMap={fajr:"fajr",dhuhr:"dhuhr",asr:"asr",maghrib:"maghrib",isha:"isha",tahajjud:"tahajjud",Fajr:"fajr",Dhuhr:"dhuhr","ʿAṣr":"asr",Maghrib:"maghrib","ʿIshāʾ":"isha",Taḥajjud:"tahajjud"};
+  const key=prayerKeyMap[prayerName]||"maghrib";
+  const displayName={fajr:"Fajr",dhuhr:"Dhuhr",asr:"ʿAṣr",maghrib:"Maghrib",isha:"ʿIshāʾ",tahajjud:"Taḥajjud"}[key]||prayerName;
   const sampleTimes={fajr:"04:12",dhuhr:"13:05",asr:"17:53",maghrib:"21:18",isha:"22:42",tahajjud:"02:30"};
   const timeLabel=sampleTimes[key]||"12:00";
   const reminder="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
@@ -1474,10 +1554,10 @@ async function sendAdminLocalPushTest(){
     title=mode==="advance"?`[Test] Taḥajjud in 15 Min`:"[Test] Taḥajjud-Erinnerung";
     body=mode==="advance"?`Noch 15 Minuten bis ${timeLabel} Uhr. Bereite dich auf Taḥajjud vor. Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.`:`${timeLabel} Uhr – jetzt ist Gelegenheit für Taḥajjud. Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.`;
   }else if(mode==="advance"){
-    title=`[Test] ${prayerName} in 15 Min`;
+    title=`[Test] ${displayName} in 15 Min`;
     body=`Noch 15 Minuten bis ${timeLabel} Uhr. Bereite dich auf das Gebet vor. ${reminder}`;
   }else{
-    title=`[Test] ${prayerName} ist eingetreten`;
+    title=`[Test] ${displayName} ist eingetreten`;
     body=`${timeLabel} Uhr – jetzt ist Gebetszeit. ${reminder}`;
   }
   try{
@@ -1487,7 +1567,7 @@ async function sendAdminLocalPushTest(){
     }else{
       new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});
     }
-    setAdminPushTestStatus(`Test-Push (${mode==="advance"?"Vorab":"Gebetszeit"}) für ${prayerName} wurde nur auf diesem Admin-Gerät ausgelöst.`);
+    setAdminPushTestStatus(`Lokaler Test (${mode==="advance"?"Vorab":"Gebetszeit"}) für ${displayName} auf diesem Admin-Gerät.`);
   }catch(e){
     try{new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});setAdminPushTestStatus("Test-Push wurde lokal ausgelöst.");}
     catch(err){setAdminPushTestStatus("Test-Push konnte auf diesem Gerät nicht angezeigt werden.")}

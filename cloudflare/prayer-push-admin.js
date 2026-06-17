@@ -1,0 +1,192 @@
+const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
+const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
+const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
+
+const PRAYER_NAMES = {
+  fajr: "Fajr",
+  dhuhr: "Dhuhr",
+  asr: "ʿAṣr",
+  maghrib: "Maghrib",
+  isha: "ʿIshāʾ",
+  tahajjud: "Taḥajjud"
+};
+
+const PRAYER_MESSAGES = {
+  default: [
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
+    "Bewahre dein Gebet, denn es ist eine der gewaltigsten Pflichten.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
+  ],
+  fajr: [
+    "Beginne deinen Tag mit dem Gebet und dem Gedenken an ALLAH.",
+    "Der Tag beginnt mit einer großen Gelegenheit zum Gebet."
+  ],
+  dhuhr: [
+    "Halte am Mittagsgebet fest und ordne deinen Tag um ALLAH.",
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH."
+  ],
+  asr: [
+    "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
+    "Achte besonders auf dieses Gebet."
+  ],
+  maghrib: [
+    "Schließe den Tagabschnitt mit Gehorsam gegenüber ALLAH ab.",
+    "Maghrib ist eingetreten – nimm dir Zeit für dein Gebet.",
+    "Lass die Dunyā nicht zwischen dir und deinem Gebet stehen."
+  ],
+  isha: [
+    "Schließe deinen Tag mit Gehorsam gegenüber ALLAH ab.",
+    "Beende den Tag mit Gebet und Ruhe."
+  ],
+  tahajjud: [
+    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu ALLAH.",
+    "Wende dich in der Stille der Nacht ALLAH zu – Er ist nah und erhört das Bittgebet."
+  ]
+};
+
+function pickPrayerMessage(key, seed = "") {
+  const list = PRAYER_MESSAGES[key] || PRAYER_MESSAGES.default;
+  let hash = 0;
+  const text = `${key}-${seed}-${new Date().toISOString().slice(0, 10)}`;
+  for (let i = 0; i < text.length; i++) hash = (hash + text.charCodeAt(i)) % 9973;
+  return list[hash % list.length];
+}
+
+export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
+  const key = String(prayerKey || "maghrib").toLowerCase();
+  const name = PRAYER_NAMES[key] || "Maghrib";
+  const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
+  const timeLabel = "21:45";
+  const reminder = pickPrayerMessage(key, mode);
+  const title = mode === "advance"
+    ? (key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`)
+    : (key === "tahajjud" ? "Taḥajjud-Erinnerung" : `${name} ist eingetreten`);
+  const body = mode === "advance"
+    ? `Noch ${minutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf ${key === "tahajjud" ? "Taḥajjud" : "das Gebet"} vor. ${reminder}`
+    : `${timeLabel} Uhr – jetzt ist ${key === "tahajjud" ? "Gelegenheit für Taḥajjud" : "Gebetszeit"}. ${reminder}`;
+  return { title: `[Test] ${title}`, body, key, mode };
+}
+
+export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const statusPath = env.PRAYER_STATUS_PATH || DEFAULT_PRAYER_STATUS_PATH;
+  try {
+    const file = await githubGet(env, owner, repo, statusPath, branch);
+    if (!file?.content) return { ok: false, error: "Status-Datei fehlt" };
+    return { ok: true, status: JSON.parse(base64ToUtf8(file.content)) };
+  } catch (err) {
+    return { ok: false, error: err.message || String(err) };
+  }
+}
+
+async function postOneSignal(env, payload) {
+  const apiKey = String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || "")
+    .replace(/\s+/g, "")
+    .replace(/^(Key|Basic)/i, "")
+    .trim();
+  if (!apiKey) throw new Error("OneSignal API Key fehlt am Worker");
+
+  let lastError = "Unbekannter Fehler";
+  for (const authMode of ["Key", "Basic"]) {
+    const res = await fetch("https://api.onesignal.com/notifications", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Authorization: `${authMode} ${apiKey}`
+      },
+      body: JSON.stringify(payload)
+    });
+    const text = await res.text();
+    if (res.ok) {
+      let parsed = {};
+      try { parsed = text ? JSON.parse(text) : {}; } catch (e) {}
+      return { ok: true, status: res.status, text, parsed, recipients: parsed.recipients || parsed.id || null };
+    }
+    lastError = `OneSignal ${res.status} (${authMode}): ${text}`;
+  }
+  throw new Error(lastError);
+}
+
+export async function sendPrayerTestPush(env, input = {}) {
+  const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+  if (!subscriptionId) {
+    return { ok: true, sent: false, reason: "Subscription-ID fehlt" };
+  }
+
+  const prayerKey = String(input.prayer || input.prayerKey || "maghrib").toLowerCase();
+  const mode = String(input.mode || "entry").toLowerCase() === "advance" ? "advance" : "entry";
+  const advanceMinutes = Number(input.advanceMinutes || 15);
+  const copy = buildPrayerTestCopy(prayerKey, mode, advanceMinutes);
+  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
+  const icon = `${site}/notification-icon-192.png?v=2`;
+  const badge = `${site}/notification-badge-96.png?v=2`;
+
+  const payload = {
+    app_id: appId,
+    target_channel: "push",
+    include_subscription_ids: [subscriptionId],
+    headings: { de: copy.title, en: copy.title },
+    contents: { de: copy.body, en: copy.body },
+    url: `${site}/#prayer`,
+    data: { type: "prayer-test", prayer: prayerKey, mode, test: true },
+    chrome_web_icon: icon,
+    chrome_web_badge: badge,
+    firefox_icon: icon,
+    name: `prayer-test-${prayerKey}-${mode}-${Date.now()}`
+  };
+
+  try {
+    const result = await postOneSignal(env, payload);
+    return {
+      ok: true,
+      sent: true,
+      prayer: prayerKey,
+      mode,
+      title: copy.title,
+      body: copy.body,
+      subscriptionId,
+      oneSignal: result
+    };
+  } catch (err) {
+    return {
+      ok: true,
+      sent: false,
+      prayer: prayerKey,
+      mode,
+      subscriptionId,
+      reason: err.message || String(err)
+    };
+  }
+}
+
+export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8) {
+  if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
+  const statusResult = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
+  const updatedAt = statusResult?.status?.updatedAt ? new Date(statusResult.status.updatedAt).getTime() : 0;
+  if (updatedAt && Date.now() - updatedAt < 90 * 60 * 1000) {
+    return { triggered: false, reason: "Scheduler-Status ist aktuell" };
+  }
+
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/prayer-push.yml/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "User-Agent": "dar-admin-publisher"
+    },
+    body: JSON.stringify({ ref: env.GITHUB_BRANCH || "main" })
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    return { triggered: false, reason: `GitHub workflow_dispatch fehlgeschlagen: ${res.status} ${text.slice(0, 200)}` };
+  }
+
+  return { triggered: true, reason: "Prayer-Push Workflow ausgelöst (Status war veraltet)" };
+}

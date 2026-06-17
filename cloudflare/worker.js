@@ -5,6 +5,11 @@ import {
   buildTelegramHtml,
   shortenForCaption
 } from "./telegram-formatter.js";
+import {
+  readPrayerPushStatus,
+  sendPrayerTestPush,
+  ensurePrayerSchedulerFresh
+} from "./prayer-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -18,6 +23,7 @@ const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
+const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
 
@@ -71,8 +77,13 @@ export default {
         "/api/admin/push/retry",
         "/api/admin/push/status"
       ]);
+      const prayerPaths = new Set([
+        "/api/admin/prayer/status",
+        "/api/admin/prayer/test",
+        "/api/admin/prayer/run"
+      ]);
 
-      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -92,6 +103,14 @@ export default {
         const postId = String(url.searchParams.get("postId") || "").trim();
         const registry = await readPendingPushesRegistry(env);
         return json({ ok: true, postId, status: postId ? registry.pushes?.[postId] || null : registry }, cors);
+      }
+
+      if (url.pathname === "/api/admin/prayer/status") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const result = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
+        return json(result, cors, result.ok ? 200 : 503);
       }
 
       if (request.method !== "POST") {
@@ -121,6 +140,15 @@ export default {
         }
       }
 
+      if (prayerPaths.has(url.pathname)) {
+        if (url.pathname.endsWith("/test")) {
+          return json(await sendPrayerTestPush(env, input), cors);
+        }
+        if (url.pathname.endsWith("/run")) {
+          return json(await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8), cors);
+        }
+      }
+
       if (publishPaths.has(url.pathname)) {
         return json(await publishPostFromMarkdown(env, input, ctx), cors);
       }
@@ -144,6 +172,7 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(runScheduledPublishes(env));
     ctx.waitUntil(processAllPendingPushes(env));
+    ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8));
   }
 };
 

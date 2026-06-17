@@ -3,10 +3,11 @@ name: Prayer Push
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 * * * *"
+    - cron: "15 1 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   send-prayer-push:
@@ -29,3 +30,15 @@ jobs:
         run: |
           echo "Berechne und sende Gebetszeiten-Pushs..."
           node scripts/send-prayer-push.js
+
+      - name: Commit prayer push status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/admin/prayer-push-status.json
+          if git diff --staged --quiet; then
+            echo "Keine Status-Änderung."
+          else
+            git commit -m "chore: Gebets-Push Scheduler-Status aktualisieren"
+            git push
+          fi
