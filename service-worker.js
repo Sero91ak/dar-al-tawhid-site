@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v91';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v92';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -93,6 +93,9 @@ self.addEventListener('fetch', (event) => {
 
   // Keine OneSignal-Dateien anfassen.
   if (url.pathname.startsWith('/push/onesignal/')) return;
+
+  // Admin-App hat eigenen Service Worker unter /admin/ – nicht abfangen.
+  if (url.pathname.startsWith('/admin')) return;
 
   // Navigation: online frisch laden, offline gecachte index.html anzeigen.
   if (request.mode === 'navigate') {

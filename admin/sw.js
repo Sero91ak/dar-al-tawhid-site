@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v17';
+const CACHE_VERSION = 'dar-admin-stats-v18';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
@@ -9,7 +9,9 @@ const SHELL = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
-      .then((cache) => cache.addAll(SHELL.map((url) => new Request(url, { cache: 'reload' }))))
+      .then((cache) => Promise.allSettled(
+        SHELL.map((url) => cache.add(new Request(url, { cache: 'reload' })))
+      ))
       .catch(() => null)
       .then(() => self.skipWaiting())
   );
