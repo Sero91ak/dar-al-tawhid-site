@@ -4709,7 +4709,7 @@ html[data-theme] .view{
 .image-template-card b{display:block;margin-top:4px;font-size:9px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--editor-text)}
 .image-template-card small{display:none;color:var(--editor-muted)}
 .image-editor-preview{display:flex;flex-direction:column;align-items:stretch;gap:6px;width:100%}
-.image-editor-touch-wrap{position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0}
+.image-editor-touch-wrap{position:relative;touch-action:none;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0;overflow:hidden}
 .image-editor-touch-wrap.is-dragging,.image-editor-touch-wrap.is-pinch-active{touch-action:none}
 .image-editor-guides{position:absolute;inset:0;pointer-events:none;z-index:2}
 .image-editor-guide{position:absolute;border:2px dashed var(--editor-guide);border-radius:10px;box-sizing:border-box;transition:border-color .15s ease,box-shadow .15s ease}
@@ -4879,7 +4879,7 @@ body.image-editor-test-mode #appView.view{padding-top:8px;touch-action:pan-y}
 .ie-power-top{padding:0 2px;touch-action:pan-y}
 .ie-power-stage{border:1px solid var(--editor-border);border-radius:16px;background:var(--editor-stage-bg);padding:8px;box-shadow:var(--editor-shadow);touch-action:pan-y}
 .ie-power-preview{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:min(100%,520px);margin:0 auto;touch-action:pan-y}
-.ie-power-touch-wrap{position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0}
+.ie-power-touch-wrap{position:relative;touch-action:none;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0;overflow:hidden}
 .ie-power-touch-wrap.is-edit-active,.ie-power-touch-wrap.is-dragging,.ie-power-touch-wrap.is-pinch-active{touch-action:none}
 .ie-power-touch-wrap.is-edit-active #imageEditorCanvas,.ie-power-touch-wrap.is-dragging #imageEditorCanvas{touch-action:none}
 .ie-power-sheet{border:1px solid var(--editor-border);border-radius:16px;background:var(--editor-panel-bg);overflow:hidden;touch-action:pan-y;box-shadow:var(--editor-shadow)}
@@ -6235,23 +6235,27 @@ function renderQuranHomeTeaser(){return `<section class="quran-home-teaser premi
 function renderRamadanHomeTeaser(){const ctx=seasonalIslamicContext();if(!ctx)return "";const headline=ctx.phase==="countdown"?`Noch ca. ${ctx.daysLeft} Tage bis Ramaḍān`:ctx.phase==="ramadan"?`Tag ${ctx.day} im Fastenmonat`:ctx.title;return `<section class="ramadan-teaser" data-nav="ramadan"><div class="ramadan-teaser-head"><span class="ramadan-teaser-label">${ctx.phase==="ramadan"?"🌙 Ramaḍān":"✨ Saisonaler Bereich"}</span><h3>${esc(headline)}</h3><p class="ramadan-teaser-note">${esc(ctx.subtitle)} · Suḥūr, Iftār, Duʿāʾ & Beiträge</p></div>${renderSuhurIftarRow(false)}<button class="ramadan-teaser-btn" type="button" data-nav="ramadan">Ramaḍān-/ʿĪd-Bereich öffnen →</button></section>`}
 function renderHomeMoreSection(){return `<section class="section-block home-more-section premium-surface"><div class="collapsible-head"><div><h3>Mehr entdecken</h3><span class="home-more-sub">Serien & wichtige Beiträge</span></div><button class="collapse-toggle premium-pill" type="button" data-collapse-target="homeMoreBody" data-collapse-closed="Öffnen" data-collapse-open="Schließen">Öffnen</button></div><div id="homeMoreBody" class="home-more-body collapsed">${renderOverviewCompact()}${renderPinnedBox()}${renderSeriesBox()}</div></section>`}
 function renderHomeFolderSection(){const categoryCount=countBy("category").size;const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const ramadanFolder=seasonalIslamicContext()?`<article class="folder-card" data-nav="ramadan"><div class="folder-icon"><span class="emoji-emblem">🌙</span></div><h3>Ramaḍān & ʿĪd</h3><p>Suḥūr, Iftār, Duʿāʾ und wichtige Beiträge für die Saison.</p><div class="folder-meta"><span>Saison</span><span>Countdown</span></div></article>`:"";return `<section class="section-block home-folder-section"><div class="section-head"><h3>Ordner</h3><span>schnell öffnen</span><button class="collapse-toggle" type="button" data-collapse-target="folderGrid">Alle anzeigen</button></div><div id="folderGrid" class="folder-grid collapsible-grid collapsed">${ramadanFolder}<article class="folder-card" data-nav="quran"><div class="folder-icon"><span class="emoji-emblem">📖</span></div><h3>Qurʾān</h3><p>Alle 114 Suren mit Arabisch, Lautschrift und deutscher Übersetzung.</p><div class="folder-meta"><span>114 Suren</span><span>6236 Ayāt</span></div></article><article class="folder-card" data-nav="prayer"><div class="folder-icon"><span class="emoji-emblem">🕌</span></div><h3>Gebetszeiten</h3><p>Gebetszeiten, nächstes Gebet, Countdown, Erinnerungen und Qibla-Kompass.</p><div class="folder-meta"><span>Fajr 12°</span><span>Maghrib Sonnenuntergang</span></div></article><article class="folder-card" data-nav="duas"><div class="folder-icon">${iconMarkup("duas","Duʿāʾ")}</div><h3>Duʿāʾ</h3><p>Sammlung aus Qurʾān und Sunnah mit Arabisch, Lautschrift, Deutsch und Quelle.</p><div class="folder-meta"><span>${DUAS.length} Duʿāʾ</span><span>${duaCatMap().size} Kategorien</span></div></article><article class="folder-card" data-nav="topics"><div class="folder-icon">${iconMarkup("topics","Kategorien")}</div><h3>Kategorien</h3><p>Adab, Akhlāq, Aqīdah, Tawḥīd, Fiqh und weitere Bereiche.</p><div class="folder-meta"><span>${categoryCount} Bereiche</span></div></article><article class="folder-card" data-nav="scholars"><div class="folder-icon">${iconMarkup("scholars","Gelehrte")}</div><h3>Gelehrte</h3><p>Beiträge nach Imāmen, Ṣaḥābah, Tābiʿīn und frühen Gelehrten.</p><div class="folder-meta"><span>${scholarCount} Namen</span></div></article><article class="folder-card" data-nav="books"><div class="folder-icon">${iconMarkup("books","Bücher")}</div><h3>Bücher</h3><p>Beiträge direkt nach verwendeten Werken und Quellen.</p><div class="folder-meta"><span>${bookCount} Werke</span></div></article><article class="folder-card" data-nav="calendar"><div class="folder-icon"><span class="emoji-emblem">🗓️</span></div><h3>Islamischer Kalender</h3><p>Aktuelle islamische Daten und wichtige Termine automatisch fortlaufend.</p><div class="folder-meta"><span>Hijrī</span><span>Termine</span></div></article><article class="folder-card" data-nav="recent"><div class="folder-icon">${iconMarkup("recent","Alle neuesten")}</div><h3>Alle neuesten</h3><p>Mehr neue Beiträge anzeigen, sortiert nach Datum.</p><div class="folder-meta"><span>${posts.length} Beiträge</span></div></article><article class="folder-card" data-nav="saved"><div class="folder-icon">${iconMarkup("saved","Favoriten")}</div><h3>Favoriten</h3><p>Beiträge, die du dir merken willst – alle Inhalte sind ohnehin offline verfügbar.</p><div class="folder-meta"><span>${savedIds().length} Favoriten</span></div></article><article class="folder-card" data-nav="about"><div class="folder-icon">${iconMarkup("about","Über die App")}</div><h3>Über die App</h3><p>Maßstab, Quellenordnung und Aufbau der Seite.</p><div class="folder-meta"><span>Manhaj</span><span>Quellen</span></div></article></div></section>`}
+const IMAGE_EDITOR_CANVAS_W=1080;
+const IMAGE_EDITOR_CANVAS_H=1350;
+const IMAGE_EDITOR_MAIN_SAFE={x:150,y:268,w:780,h:620};
+const IMAGE_EDITOR_SOURCE_SAFE={x:170,y:982,w:740,h:68};
 const IMAGE_EDITOR_TEMPLATES=[
-{id:"bibliothek-braun",name:"Bibliothek Braun",src:"assets/post-templates/bibliothek-braun.jpg",tone:"Braun / Gold",text:{x:210,y:300,w:660,h:650},source:{x:230,y:960,w:620,h:76},color:"#3b2515"},
-{id:"gruen-moschee",name:"Grün Moschee",src:"assets/post-templates/gruen-moschee.jpg",tone:"Grün / Gold",text:{x:150,y:255,w:780,h:710},source:{x:175,y:980,w:730,h:70},color:"#173226"},
-{id:"nachtblau-buecher",name:"Nachtblau Bücher",src:"assets/post-templates/nachtblau-buecher.jpg",tone:"Nachtblau / Gold",text:{x:150,y:260,w:780,h:700},source:{x:185,y:982,w:710,h:70},color:"#102b44"},
-{id:"sanft-rose",name:"Sanft Rosé",src:"assets/post-templates/sanft-rose.jpg",tone:"Rosé / Gold",text:{x:170,y:245,w:740,h:725},source:{x:190,y:985,w:700,h:68},color:"#5a342d"},
-{id:"schwarz-buecher",name:"Schwarz Bücher",src:"assets/post-templates/schwarz-buecher.jpg",tone:"Schwarz / Gold",text:{x:210,y:290,w:660,h:655},source:{x:230,y:955,w:620,h:76},color:"#2d251c"},
-{id:"bordeaux",name:"Bordeaux",src:"assets/post-templates/bordeaux.jpg",tone:"Bordeaux / Gold",text:{x:195,y:280,w:690,h:670},source:{x:210,y:980,w:660,h:72},color:"#4b1616"},
-{id:"petrol-pflanze",name:"Petrol Pflanze",src:"assets/post-templates/petrol-pflanze.jpg",tone:"Petrol / Gold",text:{x:165,y:255,w:750,h:690},source:{x:195,y:975,w:690,h:70},color:"#153d3c"},
-{id:"olive-pflanze",name:"Olive Pflanze",src:"assets/post-templates/olive-pflanze.jpg",tone:"Olive / Gold",text:{x:170,y:250,w:740,h:710},source:{x:190,y:985,w:700,h:68},color:"#344028"},
-{id:"royal-blau",name:"Royal Blau",src:"assets/post-templates/royal-blau.jpg",tone:"Royalblau / Gold",text:{x:205,y:295,w:670,h:655},source:{x:230,y:960,w:620,h:76},color:"#132d4f"},
-{id:"sand-buecher",name:"Sand Bücher",src:"assets/post-templates/sand-buecher.jpg",tone:"Sand / Petrol",text:{x:205,y:300,w:670,h:650},source:{x:230,y:960,w:620,h:76},color:"#173d3a"},
-{id:"buecher-teal",name:"Bücher Teal",src:"assets/post-templates/buecher-teal.jpg",tone:"Teal / Gold",text:{x:210,y:290,w:660,h:655},source:{x:230,y:955,w:620,h:76},color:"#173d3a"},
-{id:"olive-mihrab",name:"Olive Mihrab",src:"assets/post-templates/olive-mihrab.jpg",tone:"Olive / Gold",text:{x:195,y:280,w:690,h:670},source:{x:210,y:980,w:660,h:72},color:"#344028"},
-{id:"petrol-ornament",name:"Petrol Ornament",src:"assets/post-templates/petrol-ornament.jpg",tone:"Petrol / Gold",text:{x:165,y:255,w:750,h:690},source:{x:195,y:975,w:690,h:70},color:"#153d3c"},
-{id:"schwarz-welle",name:"Schwarz Welle",src:"assets/post-templates/schwarz-welle.jpg",tone:"Schwarz / Gold",text:{x:205,y:295,w:670,h:655},source:{x:230,y:960,w:620,h:76},color:"#2d251c"},
-{id:"nacht-mond",name:"Nacht Mond",src:"assets/post-templates/nacht-mond.jpg",tone:"Nachtblau / Gold",text:{x:150,y:260,w:780,h:700},source:{x:185,y:982,w:710,h:70},color:"#102b44"},
-{id:"schwarz-rahmen",name:"Schwarz Rahmen",src:"assets/post-templates/schwarz-rahmen.jpg",tone:"Schwarz / Gold",text:{x:210,y:290,w:660,h:655},source:{x:230,y:955,w:620,h:76},color:"#2d251c"}
+{id:"bibliothek-braun",name:"Bibliothek Braun",src:"assets/post-templates/bibliothek-braun.jpg",tone:"Braun / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#3b2515"},
+{id:"gruen-moschee",name:"Grün Moschee",src:"assets/post-templates/gruen-moschee.jpg",tone:"Grün / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#173226"},
+{id:"nachtblau-buecher",name:"Nachtblau Bücher",src:"assets/post-templates/nachtblau-buecher.jpg",tone:"Nachtblau / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#102b44"},
+{id:"sanft-rose",name:"Sanft Rosé",src:"assets/post-templates/sanft-rose.jpg",tone:"Rosé / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#5a342d"},
+{id:"schwarz-buecher",name:"Schwarz Bücher",src:"assets/post-templates/schwarz-buecher.jpg",tone:"Schwarz / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#2d251c"},
+{id:"bordeaux",name:"Bordeaux",src:"assets/post-templates/bordeaux.jpg",tone:"Bordeaux / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#4b1616"},
+{id:"petrol-pflanze",name:"Petrol Pflanze",src:"assets/post-templates/petrol-pflanze.jpg",tone:"Petrol / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#153d3c"},
+{id:"olive-pflanze",name:"Olive Pflanze",src:"assets/post-templates/olive-pflanze.jpg",tone:"Olive / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#344028"},
+{id:"royal-blau",name:"Royal Blau",src:"assets/post-templates/royal-blau.jpg",tone:"Royalblau / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#132d4f"},
+{id:"sand-buecher",name:"Sand Bücher",src:"assets/post-templates/sand-buecher.jpg",tone:"Sand / Petrol",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#173d3a"},
+{id:"buecher-teal",name:"Bücher Teal",src:"assets/post-templates/buecher-teal.jpg",tone:"Teal / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#173d3a"},
+{id:"olive-mihrab",name:"Olive Mihrab",src:"assets/post-templates/olive-mihrab.jpg",tone:"Olive / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#344028"},
+{id:"petrol-ornament",name:"Petrol Ornament",src:"assets/post-templates/petrol-ornament.jpg",tone:"Petrol / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#153d3c"},
+{id:"schwarz-welle",name:"Schwarz Welle",src:"assets/post-templates/schwarz-welle.jpg",tone:"Schwarz / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#2d251c"},
+{id:"nacht-mond",name:"Nacht Mond",src:"assets/post-templates/nacht-mond.jpg",tone:"Nachtblau / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#102b44"},
+{id:"schwarz-rahmen",name:"Schwarz Rahmen",src:"assets/post-templates/schwarz-rahmen.jpg",tone:"Schwarz / Gold",text:{...IMAGE_EDITOR_MAIN_SAFE},source:{...IMAGE_EDITOR_SOURCE_SAFE},color:"#2d251c"}
 ];
 const IMAGE_EDITOR_FONTS=[
 {id:"serif",label:"Elegant (Serif)",css:"'Cormorant Garamond', Georgia, 'Times New Roman', serif"},
@@ -6281,8 +6285,93 @@ function imageEditorFontCss(id){return (IMAGE_EDITOR_FONTS.find(f=>f.id===id)||I
 function imageTemplateById(id){return IMAGE_EDITOR_TEMPLATES.find(t=>t.id===id)||IMAGE_EDITOR_TEMPLATES[0]}
 function imageTemplateUrl(src){const path=String(src||"").replace(/^\//,"");return new URL(path,location.origin+"/").href+"?v="+IMAGE_TEMPLATE_VERSION}
 function sourceTextFromPost(post){return [post?.scholar,post?.book,post?.source].filter(Boolean).join(" · ")||"Quelle prüfen"}
+function buildImageEditorMainFromPost(post){
+  const quote=stripMd(post?.statement||findQuote(post)||post?.title||"").trim();
+  const scholar=String(post?.scholar||"").trim();
+  const fazit=stripMd(post?.conclusion||"").trim();
+  let out="";
+  if(scholar)out+=`🖋️ ${scholar} sagte:\n\n`;
+  if(quote)out+=quote;
+  if(fazit)out+=(out?"\n\n":"")+`🌙 Fazit: ${fazit}`;
+  return out.trim();
+}
 function resetImageEditorOffsets(){imageEditorState.offsetX=0;imageEditorState.offsetY=0;imageEditorState.sourceOffsetX=0;imageEditorState.sourceOffsetY=0}
-function clampImageEditorOffset(box,offsetX,offsetY){const pad=16;const maxX=Math.max(0,box.w/2-pad);const maxY=Math.max(0,box.h/2-pad);return{x:Math.max(-maxX,Math.min(maxX,offsetX)),y:Math.max(-maxY,Math.min(maxY,offsetY))}}
+function imageEditorInnerBox(box){const pad=14;return{x:box.x+pad,y:box.y+pad,w:Math.max(40,box.w-pad*2),h:Math.max(40,box.h-pad*2)}}
+function imageEditorOffsetLimits(box,blockW,blockH){const inner=imageEditorInnerBox(box);const maxX=Math.max(0,(inner.w-blockW)/2);const maxY=Math.max(0,(inner.h-blockH)/2);return{maxX,maxY}}
+function clampImageEditorOffset(box,offsetX,offsetY,metrics){const inner=imageEditorInnerBox(box);const blockW=metrics?.blockW??inner.w*0.75;const blockH=metrics?.blockH??inner.h*0.75;const limits=imageEditorOffsetLimits(box,blockW,blockH);return{x:Math.max(-limits.maxX,Math.min(limits.maxX,offsetX)),y:Math.max(-limits.maxY,Math.min(limits.maxY,offsetY))}}
+function imageEditorBlockBox(block){const t=imageTemplateById(imageEditorState.templateId);const box=block==="source"?t.source:t.text;const off=imageEditorBlockOffsets(block);return{x:box.x+off.x,y:box.y+off.y,w:box.w,h:box.h}}
+function parseImageEditorMainText(text){
+  const raw=String(text||"").replace(/\r\n/g,"\n").trim();
+  if(!raw)return{nameLine:"",bodyText:"",fazit:""};
+  const lines=raw.split("\n");
+  let nameLine="",body=[],fazit="",phase="start";
+  lines.forEach(line=>{
+    const t=line.trim();
+    if(!t){if(body.length)body.push("");return}
+    if(/^🖋️/.test(t)||(phase==="start"&&/sagte\s*:?\s*$/i.test(t))){
+      nameLine=nameLine?(nameLine+" "+t):t;
+      phase="body";
+      return;
+    }
+    if(/^🌙/.test(t)||/^(\*\*)?Fazit:/i.test(t)){
+      fazit=fazit?(fazit+" "+t):t;
+      phase="fazit";
+      return;
+    }
+    if(phase==="fazit")fazit+=(fazit?" ":"")+t;
+    else body.push(t);
+  });
+  return{
+    nameLine:nameLine.replace(/^🖋️\s*/,"").trim(),
+    bodyText:body.join("\n").trim(),
+    fazit:fazit.replace(/^🌙\s*/,"").replace(/^\*\*Fazit:\*\*\s*/i,"").replace(/^Fazit:\s*/i,"").trim()
+  };
+}
+function imageEditorMainSegments(parsed,baseSize){
+  const size=Number(baseSize)||58;
+  const segments=[];
+  if(parsed.nameLine)segments.push({text:parsed.nameLine,size:Math.max(24,Math.round(size*0.74)),lineHeight:1.16,weight:"700",kind:"name"});
+  if(parsed.bodyText)segments.push({text:parsed.bodyText,size,lineHeight:1.22,weight:"700",kind:"body"});
+  if(parsed.fazit)segments.push({text:"🌙 Fazit: "+parsed.fazit,size:Math.max(24,Math.round(size*0.9)),lineHeight:1.18,weight:"700",kind:"fazit"});
+  return segments;
+}
+function measureImageEditorSegments(ctx,segments,inner,font,lineHeightMul){
+  const gap=Math.round((segments[0]?.size||48)*0.28);
+  let totalH=0,maxW=0;
+  const laid=segments.map(seg=>{
+    const lhMul=seg.lineHeight||lineHeightMul||1.22;
+    const fit=fitImageEditorText(ctx,seg.text,{x:0,y:0,w:inner.w,h:inner.h},font,seg.size,lhMul,20);
+    ctx.font=`${seg.weight||"700"} ${fit.fontSize}px ${font}`;
+    const blockH=fit.lines.length*fit.lineHeightPx;
+    totalH+=blockH+gap;
+    maxW=Math.max(maxW,...fit.lines.map(line=>ctx.measureText(line).width));
+    return{...seg,...fit,gap};
+  });
+  if(laid.length)totalH-=gap;
+  return{segments:laid,totalH,blockW:Math.min(inner.w,maxW),blockH:totalH,gap};
+}
+function fitImageEditorMainSegments(ctx,parsed,inner,font,baseSize,lineHeight){
+  let size=Number(baseSize)||58;
+  let layout=null;
+  for(;size>=26;size-=1){
+    const segments=imageEditorMainSegments(parsed,size);
+    layout=measureImageEditorSegments(ctx,segments,inner,font,lineHeight);
+    if(layout.blockH<=inner.h)break;
+  }
+  if(layout&&layout.blockH>inner.h){
+    for(let i=0;i<layout.segments.length;i++){
+      const seg=layout.segments[i];
+      while(seg.fontSize>20&&layout.blockH>inner.h){
+        seg.fontSize-=1;
+        const refit=fitImageEditorText(ctx,seg.text,{x:0,y:0,w:inner.w,h:inner.h},font,seg.fontSize,seg.lineHeight||lineHeight,20);
+        Object.assign(seg,refit);
+        layout=measureImageEditorSegments(ctx,layout.segments.map(s=>({text:s.text,size:s.fontSize,lineHeight:s.lineHeight,weight:s.weight,kind:s.kind})),inner,font,lineHeight);
+      }
+    }
+  }
+  const ok=layout&&layout.blockH<=inner.h;
+  return{...(layout||{segments:[],totalH:0,blockW:inner.w,blockH:0,gap:0}),ok:!!ok,fontSize:size};
+}
 function imageEditorBlockOffsets(block){return block==="source"?{x:imageEditorState.sourceOffsetX,y:imageEditorState.sourceOffsetY}:{x:imageEditorState.offsetX,y:imageEditorState.offsetY}}
 function setImageEditorBlockOffsets(block,offsetX,offsetY){if(block==="source"){imageEditorState.sourceOffsetX=offsetX;imageEditorState.sourceOffsetY=offsetY}else{imageEditorState.offsetX=offsetX;imageEditorState.offsetY=offsetY}}
 
@@ -6295,6 +6384,7 @@ function setImageEditorBlockOffsets(block,offsetX,offsetY){if(block==="source"){
   imageEditorState.fontSize=42;
   imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;
   resetImageEditorOffsets();
+  imageEditorState.needsLayout=true;
   imageEditorRouteSeed="";
 }
 function seedImageEditorFromDua(duaId){
@@ -6307,9 +6397,10 @@ function seedImageEditorFromDua(duaId){
     imageEditorState.fontSize=48;
     imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;
     resetImageEditorOffsets();
+    imageEditorState.needsLayout=true;
     imageEditorRouteSeed="";
   }
-function seedImageEditorFromRoute(value){const key=String(value||"");if(imageEditorRouteSeed===key)return;imageEditorRouteSeed=key;if(!key)return;const post=posts.find(p=>String(p.id)===key);if(!post)return;imageEditorState.mainText=stripMd(post.statement||findQuote(post)||post.title||"").trim();imageEditorState.sourceText=sourceTextFromPost(post);imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets()}
+function seedImageEditorFromRoute(value){const key=String(value||"");if(imageEditorRouteSeed===key)return;imageEditorRouteSeed=key;if(!key)return;const post=posts.find(p=>String(p.id)===key);if(!post)return;imageEditorState.mainText=buildImageEditorMainFromPost(post);imageEditorState.sourceText=sourceTextFromPost(post);imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets();imageEditorState.needsLayout=true}
 function imageEditorTextFieldHtml(label,id,block,placeholder,text,active){return `<label>${label}<textarea id="${id}" class="${active?"is-active":""}" placeholder="${esc(placeholder)}">${esc(text)}</textarea><button type="button" class="image-editor-expand-btn" data-editor-expand="${block}">Groß bearbeiten</button></label>`}
 function ensureImageEditorTextModal(){
   if($("imageEditorTextModal"))return;
@@ -6339,7 +6430,9 @@ function updateImageEditorTextModalHint(){
   const size=block==="source"?imageEditorState.sourceSize:imageEditorState.fontSize;
   const lh=block==="source"?1.18:imageEditorState.lineHeight;
   const min=block==="source"?14:26;
-  const fit=fitImageEditorText(ctx,area.value,box,font,size,lh,min);
+  let fit;
+  if(block==="source")fit=fitImageEditorText(ctx,area.value,imageEditorInnerBox(box),font,size,lh,min);
+  else fit=fitImageEditorMainSegments(ctx,parseImageEditorMainText(area.value),imageEditorInnerBox(box),font,size,lh);
   if(!fit.ok)hint.textContent+=" Text ist zu lang. Bitte kürzen oder Schrift verkleinern.";
 }
 function openImageEditorTextExpand(block){
@@ -6361,8 +6454,7 @@ function closeImageEditorTextExpand(save){
     if(block==="source")imageEditorState.sourceText=area.value||"";
     else imageEditorState.mainText=area.value||"";
     syncImageEditorInputsFromState();
-    renderImageEditorCanvas();
-    downloadImageEditor();
+    renderImageEditorCanvas().then(()=>downloadImageEditor());
   }
   imageEditorState.textExpandBlock="";
   modal.hidden=true;
@@ -6378,7 +6470,7 @@ function renderImageEditor(){
   seedImageEditorFromRoute(currentRoute.value);
   const t=imageTemplateById(imageEditorState.templateId);
   const mainActive=imageEditorState.activeBlock==="main";
-  return `${setHeader("Bild-Beitrag erstellen","Vorlage wählen, Text auf dem Bild verschieben und als 1080 × 1350 px exportieren.","Editor")}<section class="image-editor-shell" id="imageEditorAnchor"><div class="image-editor-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="lazy"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div><div class="image-editor-workspace"><div class="image-editor-stage"><div class="image-editor-preview"><div class="image-editor-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-block-tabs"><button type="button" data-editor-block="main" class="${mainActive?"active":""}">Haupttext</button><button type="button" data-editor-block="source" class="${mainActive?"":"active"}">Quelle</button></div><div class="image-editor-touch-hint">Aktiven Textblock wählen · 1 Finger verschieben · 2 Finger vergrößern/verkleinern</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div><div class="image-editor-panel"><details open class="image-editor-group"><summary>Text</summary><div class="image-editor-group-body image-editor-form">${imageEditorTextFieldHtml("Hauptaussage","imageEditorMain","main","Aussage oder Zitat",imageEditorState.mainText,mainActive)}${imageEditorTextFieldHtml("Quelle","imageEditorSource","source","Quelle, Gelehrter oder Werk",imageEditorState.sourceText,!mainActive)}</div></details><details class="image-editor-group"><summary>Typografie</summary><div class="image-editor-group-body image-editor-form"><div class="image-editor-controls"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><label>Farbe<select id="imageEditorColor">${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></label><label>Ausrichtung<select id="imageEditorAlign"><option value="center" ${imageEditorState.align==="center"?"selected":""}>Zentriert</option><option value="left" ${imageEditorState.align==="left"?"selected":""}>Linksbündig</option></select></label></div></div></details><details class="image-editor-group"><summary>Feineinstellung</summary><div class="image-editor-group-body"><div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="28" max="82" value="${imageEditorState.fontSize}"></div><div class="image-editor-range"><span>Zeilenabstand</span><output id="imageEditorLineHeightOut">${imageEditorState.lineHeight}</output><input id="imageEditorLineHeight" type="range" min="1.05" max="1.55" step="0.01" value="${imageEditorState.lineHeight}"></div><div class="image-editor-range"><span>Text höher/tiefer</span><output id="imageEditorOffsetOut">${imageEditorState.offsetY}</output><input id="imageEditorOffset" type="range" min="-90" max="90" value="${imageEditorState.offsetY}"></div><div class="image-editor-range"><span>Quelle Größe</span><output id="imageEditorSourceSizeOut">${imageEditorState.sourceSize}</output><input id="imageEditorSourceSize" type="range" min="16" max="34" value="${imageEditorState.sourceSize}"></div></div></div></details><div class="image-editor-actions"><button id="imageEditorAutoFit" type="button">Automatisch einpassen</button><button id="imageEditorShare" class="primary" type="button">Teilen</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Speichern</a></div></div></div></section>`}
+  return `${setHeader("Bild-Beitrag erstellen","Vorlage wählen, Text auf dem Bild verschieben und als 1080 × 1350 px exportieren.","Editor")}<section class="image-editor-shell" id="imageEditorAnchor"><div class="image-editor-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="lazy"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div><div class="image-editor-workspace"><div class="image-editor-stage"><div class="image-editor-preview"><div class="image-editor-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-block-tabs"><button type="button" data-editor-block="main" class="${mainActive?"active":""}">Haupttext</button><button type="button" data-editor-block="source" class="${mainActive?"":"active"}">Quelle</button></div><div class="image-editor-touch-hint">Aktiven Textblock wählen · 1 Finger verschieben · 2 Finger vergrößern/verkleinern</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div><div class="image-editor-panel"><details open class="image-editor-group"><summary>Text</summary><div class="image-editor-group-body image-editor-form">${imageEditorTextFieldHtml("Hauptaussage","imageEditorMain","main","Aussage oder Zitat",imageEditorState.mainText,mainActive)}${imageEditorTextFieldHtml("Quelle","imageEditorSource","source","Quelle, Gelehrter oder Werk",imageEditorState.sourceText,!mainActive)}</div></details><details class="image-editor-group"><summary>Typografie</summary><div class="image-editor-group-body image-editor-form"><div class="image-editor-controls"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><label>Farbe<select id="imageEditorColor">${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></label><label>Ausrichtung<select id="imageEditorAlign"><option value="center" ${imageEditorState.align==="center"?"selected":""}>Zentriert</option><option value="left" ${imageEditorState.align==="left"?"selected":""}>Linksbündig</option></select></label></div></div></details><details class="image-editor-group"><summary>Feineinstellung</summary><div class="image-editor-group-body"><div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="28" max="82" value="${imageEditorState.fontSize}"></div><div class="image-editor-range"><span>Zeilenabstand</span><output id="imageEditorLineHeightOut">${imageEditorState.lineHeight}</output><input id="imageEditorLineHeight" type="range" min="1.05" max="1.55" step="0.01" value="${imageEditorState.lineHeight}"></div><div class="image-editor-range"><span>Text höher/tiefer</span><output id="imageEditorOffsetOut">${imageEditorState.offsetY}</output><input id="imageEditorOffset" type="range" min="-120" max="120" value="${imageEditorState.offsetY}"></div><div class="image-editor-range"><span>Text links/rechts</span><output id="imageEditorOffsetXOut">${imageEditorState.offsetX}</output><input id="imageEditorOffsetX" type="range" min="-120" max="120" value="${imageEditorState.offsetX}"></div><div class="image-editor-range"><span>Quelle Größe</span><output id="imageEditorSourceSizeOut">${imageEditorState.sourceSize}</output><input id="imageEditorSourceSize" type="range" min="16" max="34" value="${imageEditorState.sourceSize}"></div></div></div></details><div class="image-editor-actions"><button id="imageEditorAutoFit" type="button">Automatisch einpassen</button><button id="imageEditorShare" class="primary" type="button">Teilen</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Speichern</a></div></div></div></section>`}
 const IMAGE_EDITOR_TEST_TABS=[{id:"text",label:"Text"},{id:"font",label:"Schrift"},{id:"color",label:"Farbe"},{id:"position",label:"Position"},{id:"source",label:"Quelle"},{id:"export",label:"Export"}];
 function renderImageEditorTestColorChips(){return IMAGE_EDITOR_COLORS.map(c=>{const light=c.value==="#efe0bd";return `<button type="button" class="ie-power-color-chip ${c.value===imageEditorState.color?"active":""}" data-image-color="${esc(c.value)}" style="background:${esc(c.value)};color:${light?"#3b2515":"#fff7ea"}">${esc(c.label)}</button>`}).join("")}
 function renderImageEditorTestPosition(){return `<div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="28" max="82" value="${imageEditorState.fontSize}"></div><div class="image-editor-range"><span>Zeilenabstand</span><output id="imageEditorLineHeightOut">${imageEditorState.lineHeight}</output><input id="imageEditorLineHeight" type="range" min="1.05" max="1.55" step="0.01" value="${imageEditorState.lineHeight}"></div><div class="image-editor-range"><span>Quelle Größe</span><output id="imageEditorSourceSizeOut">${imageEditorState.sourceSize}</output><input id="imageEditorSourceSize" type="range" min="16" max="34" value="${imageEditorState.sourceSize}"></div><div class="image-editor-range"><span>Haupt L/R</span><output id="imageEditorOffsetXOut">${imageEditorState.offsetX}</output><input id="imageEditorOffsetX" type="range" min="-90" max="90" value="${imageEditorState.offsetX}"></div><div class="image-editor-range"><span>Haupt H/R</span><output id="imageEditorOffsetOut">${imageEditorState.offsetY}</output><input id="imageEditorOffset" type="range" min="-90" max="90" value="${imageEditorState.offsetY}"></div><div class="image-editor-range"><span>Quelle L/R</span><output id="imageEditorSourceOffsetXOut">${imageEditorState.sourceOffsetX}</output><input id="imageEditorSourceOffsetX" type="range" min="-90" max="90" value="${imageEditorState.sourceOffsetX}"></div><div class="image-editor-range"><span>Quelle H/R</span><output id="imageEditorSourceOffsetYOut">${imageEditorState.sourceOffsetY}</output><input id="imageEditorSourceOffsetY" type="range" min="-90" max="90" value="${imageEditorState.sourceOffsetY}"></div></div>`}
@@ -6402,21 +6494,72 @@ function renderImageEditorTest(){
   return `<div class="ie-power-test-badge">🧪 Test-Vorschau · noch nicht live</div><div class="ie-power-app" id="imageEditorAnchor"><header class="ie-power-toolbar"><button type="button" id="imageEditorBack">← Zurück</button><span class="ie-power-toolbar-title">Bild-Beitrag</span><button type="button" id="imageEditorMoveToggle" class="${edit?"active":""}">${edit?"Scrollen":"Text bewegen"}</button><button type="button" id="imageEditorSaveTop" class="primary">Speichern</button></header><div class="ie-power-layout">${templates}${stage}${renderImageEditorTestSheet()}</div></div>`;
 }
 function setImageEditorInteractionMode(mode){imageEditorState.interactionMode=mode==="edit"?"edit":"scroll";const wrap=$("imageEditorTouchWrap"),btn=$("imageEditorMoveToggle");if(wrap){wrap.classList.toggle("is-edit-active",imageEditorState.interactionMode==="edit");wrap.classList.remove("is-dragging")}if(btn){btn.classList.toggle("active",imageEditorState.interactionMode==="edit");btn.textContent=imageEditorState.interactionMode==="edit"?"Scrollen":"Text bewegen"}imageEditorTouch=null;updateImageEditorGuides()}
-function autoFitImageEditor(){resetImageEditorOffsets();const canvas=$("imageEditorCanvas");const ctx=canvas?.getContext("2d");const t=imageTemplateById(imageEditorState.templateId);if(!ctx)return;const font=imageEditorFontCss(imageEditorState.font);const mainFit=fitImageEditorText(ctx,imageEditorState.mainText,t.text,font,82,imageEditorState.lineHeight,26);imageEditorState.fontSize=Math.max(28,Math.min(82,mainFit.fontSize));const sourceFit=fitImageEditorText(ctx,imageEditorState.sourceText,t.source,font,34,1.18,14);imageEditorState.sourceSize=Math.max(16,Math.min(34,sourceFit.fontSize));if(currentRoute.view==="image-editor-test")render();else{syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()}}
+function autoFitImageEditor(){resetImageEditorOffsets();const canvas=$("imageEditorCanvas");const ctx=canvas?.getContext("2d");const t=imageTemplateById(imageEditorState.templateId);if(!ctx)return;const font=imageEditorFontCss(imageEditorState.font);const inner=imageEditorInnerBox(t.text);const parsed=parseImageEditorMainText(imageEditorState.mainText);const mainFit=fitImageEditorMainSegments(ctx,parsed,inner,font,82,imageEditorState.lineHeight);imageEditorState.fontSize=Math.max(28,Math.min(82,mainFit.fontSize||58));const sourceInner=imageEditorInnerBox(t.source);const sourceFit=fitImageEditorText(ctx,imageEditorState.sourceText,sourceInner,font,34,1.18,14);imageEditorState.sourceSize=Math.max(16,Math.min(34,sourceFit.fontSize));if(currentRoute.view==="image-editor-test")render();else{syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()}}
+function layoutImageEditorForTemplate(){resetImageEditorOffsets();autoFitImageEditor()}
 function loadImageEditorTemplate(src){const url=imageTemplateUrl(src);if(imageEditorCache.has(url))return imageEditorCache.get(url);const p=new Promise((resolve,reject)=>{const img=new Image();img.crossOrigin="anonymous";img.onload=()=>resolve(img);img.onerror=()=>reject(new Error("Template load failed: "+url));img.src=url});imageEditorCache.set(url,p);return p}
 function wrapCanvasText(ctx,text,maxWidth){const lines=[];String(text||"").replace(/\r\n/g,"\n").split("\n").forEach(raw=>{const words=raw.trim().split(/\s+/).filter(Boolean);if(!words.length){lines.push("");return}let line="";words.forEach(word=>{const test=line?line+" "+word:word;if(ctx.measureText(test).width<=maxWidth){line=test}else{if(line)lines.push(line);line=word}});if(line)lines.push(line)});return lines}
 function fitImageEditorText(ctx,text,box,font,size,lineHeight,minSize){let s=Number(size)||58,lines=[],lh=0;for(;s>=minSize;s-=1){ctx.font=`700 ${s}px ${font}`;lines=wrapCanvasText(ctx,text,box.w);lh=s*lineHeight;if(lines.length*lh<=box.h)break}return{fontSize:s,lines,lineHeightPx:lh,ok:s>=minSize&&lines.length*lh<=box.h}}
-function drawImageEditorText(ctx,text,box,opts){if(!String(text||"").trim())return{ok:true,fontSize:opts.size};const fit=fitImageEditorText(ctx,text,box,opts.font,opts.size,opts.lineHeight,opts.minSize||24);ctx.font=`700 ${fit.fontSize}px ${opts.font}`;ctx.fillStyle=opts.color;ctx.textBaseline="alphabetic";ctx.textAlign=opts.align;const clamped=clampImageEditorOffset(box,opts.offsetX||0,opts.offsetY||0);const x=(opts.align==="left"?box.x:box.x+box.w/2)+clamped.x;const blockH=fit.lines.length*fit.lineHeightPx;let y=box.y+(box.h-blockH)/2+fit.fontSize+clamped.y;fit.lines.forEach(line=>{ctx.fillText(line,x,y);y+=fit.lineHeightPx});return fit}
-function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/1080,sy=rect.height/1350,t=imageTemplateById(imageEditorState.templateId);layer.innerHTML=["main","source"].map(kind=>{const box=kind==="source"?t.source:t.text;const off=imageEditorBlockOffsets(kind);const active=imageEditorState.activeBlock===kind;const left=(box.x+off.x)*sx,top=(box.y+off.y)*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide ${active?"is-active":""}" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`}).join("")}
+function drawImageEditorSimpleText(ctx,text,box,opts){
+  if(!String(text||"").trim())return{ok:true,fontSize:opts.size,blockW:0,blockH:0};
+  const inner=imageEditorInnerBox(box);
+  const fit=fitImageEditorText(ctx,text,inner,opts.font,opts.size,opts.lineHeight,opts.minSize||14);
+  const blockH=fit.lines.length*fit.lineHeightPx;
+  const blockW=Math.max(...fit.lines.map(line=>ctx.measureText(line).width),0);
+  const clamped=clampImageEditorOffset(box,opts.offsetX||0,opts.offsetY||0,{blockW:Math.min(inner.w,blockW),blockH});
+  const x=(opts.align==="left"?inner.x:inner.x+inner.w/2)+clamped.x;
+  let y=inner.y+(inner.h-blockH)/2+fit.fontSize+clamped.y;
+  ctx.font=`700 ${fit.fontSize}px ${opts.font}`;
+  ctx.fillStyle=opts.color;
+  ctx.textBaseline="alphabetic";
+  ctx.textAlign=opts.align;
+  fit.lines.forEach(line=>{ctx.fillText(line,x,y);y+=fit.lineHeightPx});
+  return{...fit,blockW:Math.min(inner.w,blockW),blockH,clamped};
+}
+function drawImageEditorMainText(ctx,text,box,opts){
+  const parsed=parseImageEditorMainText(text);
+  if(!parsed.nameLine&&!parsed.bodyText&&!parsed.fazit)return{ok:true,fontSize:opts.size,blockW:0,blockH:0};
+  const inner=imageEditorInnerBox(box);
+  const layout=fitImageEditorMainSegments(ctx,parsed,inner,opts.font,opts.size,opts.lineHeight);
+  const clamped=clampImageEditorOffset(box,opts.offsetX||0,opts.offsetY||0,{blockW:layout.blockW,blockH:layout.blockH});
+  const x=(opts.align==="left"?inner.x:inner.x+inner.w/2)+clamped.x;
+  let y=inner.y+(inner.h-layout.blockH)/2+clamped.y;
+  ctx.fillStyle=opts.color;
+  ctx.textBaseline="alphabetic";
+  ctx.textAlign=opts.align;
+  layout.segments.forEach((seg,idx)=>{
+    ctx.font=`${seg.weight||"700"} ${seg.fontSize}px ${opts.font}`;
+    const firstBaseline=seg.fontSize;
+    y+=firstBaseline;
+    seg.lines.forEach(line=>{ctx.fillText(line,x,y);y+=seg.lineHeightPx});
+    if(idx<layout.segments.length-1)y+=layout.gap;
+  });
+  return{...layout,fontSize:layout.fontSize||opts.size,clamped};
+}
+function drawImageEditorText(ctx,text,box,opts){return opts.kind==="main"?drawImageEditorMainText(ctx,text,box,opts):drawImageEditorSimpleText(ctx,text,box,opts)}
+function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/IMAGE_EDITOR_CANVAS_W,sy=rect.height/IMAGE_EDITOR_CANVAS_H;layer.innerHTML=["main","source"].map(kind=>{const box=imageEditorBlockBox(kind);const active=imageEditorState.activeBlock===kind;const left=box.x*sx,top=box.y*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide ${active?"is-active":""}" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`}).join("")}
 function imageEditorCanExport(){const warning=($("imageEditorWarning")?.textContent||"").trim();if(warning.includes("nicht geladen"))return false;if(!String(imageEditorState.mainText||"").trim())return false;if(warning.includes("zu lang"))return false;return imageEditorState.templateReady}
 function updateImageEditorExportButtons(){const ok=imageEditorCanExport();["imageEditorShare","imageEditorSaveTop"].forEach(id=>{const btn=$(id);if(btn){btn.disabled=!ok;btn.title=ok?"":"Bitte Vorlage laden und Text prüfen"}});const dl=$("imageEditorDownload");if(dl){dl.classList.toggle("is-disabled",!ok);dl.setAttribute("aria-disabled",ok?"false":"true")}}
-async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;const warning=$("imageEditorWarning");const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");const fontCss=imageEditorFontCss(imageEditorState.font);ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false;try{const img=await loadImageEditorTemplate(t.src);ctx.drawImage(img,0,0,1080,1350);imageEditorState.templateReady=true;const main=drawImageEditorText(ctx,imageEditorState.mainText,t.text,{font:fontCss,color:imageEditorState.color,size:imageEditorState.fontSize,lineHeight:imageEditorState.lineHeight,align:imageEditorState.align,offsetX:imageEditorState.offsetX,offsetY:imageEditorState.offsetY,minSize:26});const source=drawImageEditorText(ctx,imageEditorState.sourceText,t.source,{font:fontCss,color:imageEditorState.color,size:imageEditorState.sourceSize,lineHeight:1.18,align:"center",offsetX:imageEditorState.sourceOffsetX,offsetY:imageEditorState.sourceOffsetY,minSize:14});const tooLong=(!main.ok||!source.ok);if(warning)warning.textContent=tooLong?(currentRoute.view==="image-editor-test"?"Der Text ist zu lang. Bitte kürzen oder kleinere Schrift wählen.":"Text ist für diese Vorlage zu lang. Bitte kürzen oder kleinere Schrift wählen."):""}catch(e){if(warning)warning.textContent="Vorlage konnte nicht geladen werden."}updateImageEditorGuides();updateImageEditorExportButtons()}
+async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;const warning=$("imageEditorWarning");const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");const fontCss=imageEditorFontCss(imageEditorState.font);ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true;const main=drawImageEditorText(ctx,imageEditorState.mainText,t.text,{kind:"main",font:fontCss,color:imageEditorState.color,size:imageEditorState.fontSize,lineHeight:imageEditorState.lineHeight,align:imageEditorState.align,offsetX:imageEditorState.offsetX,offsetY:imageEditorState.offsetY,minSize:26});const source=drawImageEditorText(ctx,imageEditorState.sourceText,t.source,{kind:"source",font:fontCss,color:imageEditorState.color,size:imageEditorState.sourceSize,lineHeight:1.18,align:"center",offsetX:imageEditorState.sourceOffsetX,offsetY:imageEditorState.sourceOffsetY,minSize:14});const tooLong=(!main.ok||!source.ok);if(warning)warning.textContent=tooLong?"Der Text ist zu lang. Bitte kürzen oder Schriftgröße reduzieren.":""}catch(e){if(warning)warning.textContent="Vorlage konnte nicht geladen werden."}updateImageEditorGuides();updateImageEditorExportButtons();syncImageEditorOffsetSliderLimits()}
+function syncImageEditorOffsetSliderLimits(){
+  const t=imageTemplateById(imageEditorState.templateId);
+  const mainInner=imageEditorInnerBox(t.text);
+  const sourceInner=imageEditorInnerBox(t.source);
+  const mainMax=Math.max(40,Math.round(mainInner.h/2));
+  const sourceMax=Math.max(30,Math.round(sourceInner.h/2));
+  [["imageEditorOffset",imageEditorState.offsetY,mainMax],["imageEditorOffsetX",imageEditorState.offsetX,mainMax],["imageEditorSourceOffsetX",imageEditorState.sourceOffsetX,sourceMax],["imageEditorSourceOffsetY",imageEditorState.sourceOffsetY,sourceMax]].forEach(([id,val,max])=>{
+    const el=$(id);if(!el)return;
+    el.min=String(-max);el.max=String(max);
+    const clamped=Math.max(-max,Math.min(max,Number(val)||0));
+    if(Number(el.value)!==clamped)el.value=String(clamped);
+  });
+}
 function setImageEditorStateFromInputs(){imageEditorState.mainText=$("imageEditorMain")?.value||"";imageEditorState.sourceText=$("imageEditorSource")?.value||"";imageEditorState.font=$("imageEditorFont")?.value||"serif";imageEditorState.color=$("imageEditorColor")?.value||imageTemplateById(imageEditorState.templateId).color;imageEditorState.align=$("imageEditorAlign")?.value||"center";imageEditorState.fontSize=Number($("imageEditorFontSize")?.value||58);imageEditorState.lineHeight=Number($("imageEditorLineHeight")?.value||1.22);imageEditorState.offsetY=Number($("imageEditorOffset")?.value||0);imageEditorState.sourceSize=Number($("imageEditorSourceSize")?.value||24);const ox=$("imageEditorOffsetX");if(ox)imageEditorState.offsetX=Number(ox.value||0);const sox=$("imageEditorSourceOffsetX");if(sox)imageEditorState.sourceOffsetX=Number(sox.value||0);const soy=$("imageEditorSourceOffsetY");if(soy)imageEditorState.sourceOffsetY=Number(soy.value||0)}
 function syncImageEditorInputsFromState(){const map={imageEditorMain:imageEditorState.mainText,imageEditorSource:imageEditorState.sourceText,imageEditorFont:imageEditorState.font,imageEditorColor:imageEditorState.color,imageEditorAlign:imageEditorState.align,imageEditorFontSize:imageEditorState.fontSize,imageEditorLineHeight:imageEditorState.lineHeight,imageEditorOffset:imageEditorState.offsetY,imageEditorOffsetX:imageEditorState.offsetX,imageEditorSourceSize:imageEditorState.sourceSize,imageEditorSourceOffsetX:imageEditorState.sourceOffsetX,imageEditorSourceOffsetY:imageEditorState.sourceOffsetY};Object.entries(map).forEach(([id,val])=>{const el=$(id);if(el&&String(el.value)!==String(val))el.value=val});updateImageEditorOutputs()}
 function updateImageEditorOutputs(){["FontSize","LineHeight","Offset","OffsetX","SourceSize","SourceOffsetX","SourceOffsetY"].forEach(name=>{const input=$("imageEditor"+name),out=$("imageEditor"+name+"Out");if(input&&out)out.textContent=input.value})}
-function imageEditorCanvasScale(canvas){const rect=canvas.getBoundingClientRect();return{width:1080/Math.max(1,rect.width),height:1350/Math.max(1,rect.height)}}
+function imageEditorCanvasScale(canvas){const rect=canvas.getBoundingClientRect();return{width:IMAGE_EDITOR_CANVAS_W/Math.max(1,rect.width),height:IMAGE_EDITOR_CANVAS_H/Math.max(1,rect.height),rect}}
+function screenToImageEditorCanvas(clientX,clientY,canvas){const rect=canvas.getBoundingClientRect();const scale=imageEditorCanvasScale(canvas);return{x:(clientX-rect.left)*scale.width,y:(clientY-rect.top)*scale.height}}
 function imageEditorTouchDistance(touches){const dx=touches[0].clientX-touches[1].clientX,dy=touches[0].clientY-touches[1].clientY;return Math.hypot(dx,dy)}
-function imageEditorPickBlock(clientX,clientY,canvas){const rect=canvas.getBoundingClientRect();const scale=imageEditorCanvasScale(canvas);const cx=(clientX-rect.left)*scale.width,cy=(clientY-rect.top)*scale.height;const t=imageTemplateById(imageEditorState.templateId);const hit=(box)=>cx>=box.x&&cx<=box.x+box.w&&cy>=box.y&&cy<=box.y+box.h;if(hit(t.source))return"source";return"main"}
+function imageEditorPickBlock(clientX,clientY,canvas){const p=screenToImageEditorCanvas(clientX,clientY,canvas);const hit=(box)=>p.x>=box.x&&p.x<=box.x+box.w&&p.y>=box.y&&p.y<=box.y+box.h;if(hit(imageEditorBlockBox("source")))return"source";if(hit(imageEditorBlockBox("main")))return"main";return imageEditorState.activeBlock||"main"}
 function setImageEditorActiveBlock(block){imageEditorState.activeBlock=block==="source"?"source":"main";document.querySelectorAll("[data-editor-block]").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-editor-block")===imageEditorState.activeBlock));const main=$("imageEditorMain"),source=$("imageEditorSource");if(main)main.classList.toggle("is-active",imageEditorState.activeBlock==="main");if(source)source.classList.toggle("is-active",imageEditorState.activeBlock==="source");updateImageEditorGuides();updateImageEditorExportButtons()}
 function bindImageEditorTouch(){
   const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas");
@@ -6572,7 +6715,7 @@ function bindImageEditorTest(){
   const move=$("imageEditorMoveToggle");if(move)move.onclick=()=>setImageEditorInteractionMode(imageEditorState.interactionMode==="edit"?"scroll":"edit");
   const sheetToggle=$("imageEditorSheetToggle");if(sheetToggle)sheetToggle.onclick=()=>{imageEditorState.sheetOpen=!imageEditorState.sheetOpen;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.toggle("is-collapsed",!imageEditorState.sheetOpen);sheetToggle.setAttribute("aria-expanded",imageEditorState.sheetOpen?"true":"false")};
   document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>{btn.onclick=()=>setImageEditorTestSheetTab(btn.getAttribute("data-editor-sheet-tab")||"text")});
-  document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets();document.querySelectorAll("[data-image-template]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-template")===imageEditorState.templateId));renderImageEditorCanvas();downloadImageEditor()}});
+  document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();document.querySelectorAll("[data-image-template]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-template")===imageEditorState.templateId))}});
   document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});
   document.querySelectorAll("[data-image-color]").forEach(btn=>{btn.onclick=()=>{imageEditorState.color=btn.getAttribute("data-image-color")||imageEditorState.color;const hidden=$("imageEditorColor");if(hidden)hidden.value=imageEditorState.color;document.querySelectorAll("[data-image-color]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-color")===imageEditorState.color));renderImageEditorCanvas();downloadImageEditor()}});
   bindImageEditorTestInputs();
@@ -6581,10 +6724,9 @@ function bindImageEditorTest(){
   const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();
   bindImageEditorTestTouch();
   bindImageEditorTextExpand();
-  renderImageEditorCanvas();
-  downloadImageEditor();
+  if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}
 }
-function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bindImageEditorTest();if(currentRoute.view!=="image-editor")return;document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets();render()}});document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorSourceSize"].forEach(id=>{const el=$(id);if(!el)return;el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")}});const auto=$("imageEditorAutoFit");if(auto)auto.onclick=()=>autoFitImageEditor();const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();bindImageEditorTextExpand();bindImageEditorTouch();renderImageEditorCanvas();downloadImageEditor()}
+function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bindImageEditorTest();if(currentRoute.view!=="image-editor")return;document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();render()}});document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorOffsetX","imageEditorSourceSize"].forEach(id=>{const el=$(id);if(!el)return;el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")}});const auto=$("imageEditorAutoFit");if(auto)auto.onclick=()=>autoFitImageEditor();const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();bindImageEditorTextExpand();bindImageEditorTouch();if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}}
 function renderMore(){const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const ramadan=seasonalIslamicContext()?listCard("Ramaḍān & ʿĪd","Saisonale Beiträge & Zeiten","ramadan","","🌙"):"";const account=accountSession()?`${accountSession().username} · Sync aktiv`:"Anmeldename + PIN";return `${setHeader("Mehr","Gelehrte, Bücher, Kalender und persönliche Bereiche.","Menü")}${renderThemeSwitchPanel()}<section class="grid-list">${listCard("Mein Bereich",account,"account","","🔐")}${ramadan}${listCard("Bild-Beitrag","Vorlage wählen, Text setzen, teilen","image-editor","","🖼️")}${listCard("Bild-Editor (Test)","Neue Power-Version · Vorschau","image-editor-test","","🧪")}${listCard("Qurʾān","114 Suren · Arabisch & Lautschrift","quran","","📖")}${listCard("Gelehrte",scholarCount+" Namen","scholars","","👤")}${listCard("Bücher",bookCount+" Werke","books","","📖")}${listCard("Islamischer Kalender","Hijrī-Termine","calendar","","🗓️")}${listCard("Favoriten",savedIds().length+" gespeichert","saved","","♡")}${listCard("Über die App","Maßstab & Quellen","about","","ℹ️")}</section>`}
 function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
 function dailyDua(){if(!DUAS.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return DUAS[Math.abs(day)%DUAS.length]}
