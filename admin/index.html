@@ -1193,8 +1193,8 @@ async function sendAdminLocalPushTest(){
   const reminder="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
   let title,body;
   if(key==="tahajjud"){
-    title="[Test] Taḥajjud-Erinnerung";
-    body=mode==="advance"?"Taḥajjud-Erinnerung ist bald.":"Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.";
+    title=mode==="advance"?`[Test] Taḥajjud in 15 Min`:"[Test] Taḥajjud-Erinnerung";
+    body=mode==="advance"?`Noch 15 Minuten bis ${timeLabel} Uhr. Bereite dich auf Taḥajjud vor. Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.`:`${timeLabel} Uhr – jetzt ist Gelegenheit für Taḥajjud. Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.`;
   }else if(mode==="advance"){
     title=`[Test] ${prayerName} in 15 Min`;
     body=`Noch 15 Minuten bis ${timeLabel} Uhr. Bereite dich auf das Gebet vor. ${reminder}`;

@@ -294,10 +294,15 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
       const startUtc = tahajjudStartForMode(maghribUtc, fajrUtc, normalizedTahajjud);
 
       if (startUtc) {
+        const startParts = getLocalParts(startUtc, timeZone);
+        const timeDecimal = fixHour(
+          startParts.hour + startParts.minute / 60 + startParts.second / 3600
+        );
+
         prayers.push({
           key: "tahajjud",
           name: "Taḥajjud",
-          time: null,
+          time: timeDecimal,
           sendAfter: startUtc
         });
       }
@@ -666,10 +671,23 @@ const PRAYER_NOTIFICATION_MESSAGES = {
   ],
   tahajjud: [
     "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
-    "Steh für Allah auf, auch wenn es nur wenige Rakʿāt sind.",
-    "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
+    "Steh in der stillen Nacht für deinen Herrn auf – selbst wenige Rakʿāt sind kostbar.",
+    "Nutze die Zeit vor Fajr für Bittgebet, Reue und Nähe zu Allah.",
+    "Das Nachtgebet bringt dem Gläubigen Licht, Trost und Nähe zu seinem Herrn.",
+    "Wende dich in der Stille der Nacht Allah zu – Er ist nah und erhört das Bittgebet."
   ]
 };
+
+function formatHourFromUtcDate(date, timeZone) {
+  const parts = getLocalParts(date, timeZone);
+  return formatHour(parts.hour + parts.minute / 60 + parts.second / 3600);
+}
+
+function prayerTimeLabel(prayer, sendAfter, timeZone) {
+  if (prayer.time != null) return formatHour(prayer.time);
+  if (sendAfter && timeZone) return formatHourFromUtcDate(sendAfter, timeZone);
+  return "--:--";
+}
 
 function pickPrayerMessage(prayer, sendAfter, group) {
   const list = PRAYER_NOTIFICATION_MESSAGES[prayer.key] || PRAYER_NOTIFICATION_MESSAGES.default;
@@ -680,7 +698,10 @@ function pickPrayerMessage(prayer, sendAfter, group) {
 
 function prayerNotificationTitle(prayer, mode, group) {
   if (prayer.key === "tahajjud") {
-    return "Taḥajjud-Erinnerung";
+    const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
+    return mode === "advance"
+      ? `Taḥajjud in ${advanceMinutes} Min`
+      : "Taḥajjud-Erinnerung";
   }
 
   const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
@@ -691,20 +712,18 @@ function prayerNotificationTitle(prayer, mode, group) {
 
 function prayerNotificationCopy(prayer, mode, group, sendAfter) {
   const isTahajjud = prayer.key === "tahajjud";
-  const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
+  const timeLabel = prayerTimeLabel(prayer, sendAfter, group?.timeZone);
   const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
-  const reminder = isTahajjud
-    ? PRAYER_NOTIFICATION_MESSAGES.tahajjud[0]
-    : pickPrayerMessage(prayer, sendAfter, group);
+  const reminder = pickPrayerMessage(prayer, sendAfter, group);
 
   let body;
   if (mode === "advance") {
     body = isTahajjud
-      ? "Taḥajjud-Erinnerung ist bald."
+      ? `Noch ${advanceMinutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf Taḥajjud vor. ${reminder}`
       : `Noch ${advanceMinutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf das Gebet vor. ${reminder}`;
   } else {
     body = isTahajjud
-      ? reminder
+      ? `${timeLabel} Uhr – jetzt ist Gelegenheit für Taḥajjud. ${reminder}`
       : `${timeLabel} Uhr – jetzt ist Gebetszeit. ${reminder}`;
   }
 
@@ -871,7 +890,7 @@ function runDailyContentPushSync() {
           { mode: "entry", sendAfter: entryAt }
         ];
 
-        if (prayer.key !== "sunrise" && prayer.key !== "tahajjud") {
+        if (prayer.key !== "sunrise") {
           const advanceAt = new Date(entryAt.getTime() - normalizeAdvanceMinutes(group.advanceMinutes) * 60 * 1000);
           schedules.push({ mode: "advance", sendAfter: advanceAt });
         }
