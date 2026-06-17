@@ -5801,6 +5801,17 @@ function nextPlannedPrayerNotification(settings=getPrayerSettings()){
   candidates.sort((a,b)=>a.date-b.date);
   return candidates[0]||null;
 }
+function updatePrayerPushStatusPanel(){
+  const host=document.querySelector(".prayer-push-status");
+  if(!host||currentRoute.view!=="prayer")return;
+  const wasOpen=host.hasAttribute("open");
+  const tmp=document.createElement("div");
+  tmp.innerHTML=renderPrayerPushStatus(getPrayerSettings());
+  const fresh=tmp.firstElementChild;
+  if(!fresh)return;
+  if(wasOpen)fresh.setAttribute("open","");
+  host.replaceWith(fresh);
+}
 function renderPrayerPushStatus(settings=getPrayerSettings()){
   const permission=getNotificationPermission();
   const reminder=Boolean(settings.reminder);
@@ -6152,7 +6163,7 @@ async function activatePrayerReminder(){
     }
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();loadPrayerPushServerStatus().then(()=>{if(currentRoute.view==="prayer")render()});if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();loadPrayerPushServerStatus().then(()=>updatePrayerPushStatusPanel());if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
@@ -6906,6 +6917,10 @@ function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toL
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");updateBottomNav(route);if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",topics:"Kategorien",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",ramadan:"Ramaḍān & ʿĪd",series:"Serie",statistik:"Statistik",more:"Mehr","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
+    const routeBefore=readRoute();
+    const sigBefore=routeSig(routeBefore);
+    const scrollBefore=window.scrollY||0;
+    const sameRoute=window.__lastRenderSig===sigBefore;
     currentRoute=readRoute();
     syncNavStackOnHashChange();
     if(currentRoute.view==="home"&&shouldRestoreQuranAfterSurah()){navigate("quran");return}
@@ -6997,12 +7012,17 @@ function render(){
       }else if(fromGesture||BOTTOM_NAV_TABS.includes(currentRoute.view)){
         window.scrollTo({top:0,behavior:"auto"});
         window.__smoothNav=false;
+      }else if(sameRoute&&typeof window.__restoreScrollY!=="number"){
+        requestAnimationFrame(()=>window.scrollTo({top:scrollBefore,behavior:"auto"}));
+        window.__smoothNav=false;
       }else{
         const saved=getNavScroll(currentRoute);
         if(saved>0){requestAnimationFrame(()=>window.scrollTo({top:saved,behavior:"auto"}));window.__smoothNav=false}
-        else{window.scrollTo({top:0,behavior:"smooth"});window.__smoothNav=false}
+        else if(!sameRoute){window.scrollTo({top:0,behavior:window.__smoothNav?"smooth":"auto"});window.__smoothNav=false}
+        else{requestAnimationFrame(()=>window.scrollTo({top:scrollBefore,behavior:"auto"}));window.__smoothNav=false}
       }
     }
+    window.__lastRenderSig=routeSig(currentRoute);
   }catch(error){
     console.error(error);
     $("appView").innerHTML=`${setHeader("Ansicht konnte nicht geöffnet werden","Ein JavaScript-Fehler wurde abgefangen. Bitte Startseite öffnen oder Cache löschen.","Fehler")}<div class="error">Fehlerdetails: ${esc(error&&error.message?error.message:error)}</div>`;

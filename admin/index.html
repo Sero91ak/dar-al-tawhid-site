@@ -1477,10 +1477,17 @@ function setAdminPrayerStatusHtml(html){const el=document.getElementById("adminP
 function formatPrayerPushStatusHtml(status){
   if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
   const updated=status.updatedAt?new Date(status.updatedAt).toLocaleString("de-DE"):"unbekannt";
+  const schedStatus=status.schedulerStatus|| (status.ok?"success":status.errors?"error":"warning");
+  const schedLabel=schedStatus==="success"?"erfolgreich":schedStatus==="error"?"Fehler":schedStatus==="warning"?"Warnung":"unbekannt";
+  const schedColor=schedStatus==="success"?"#dfffd8":schedStatus==="error"?"#f0c674":"#e8d9a8";
+  const engine=status.schedulerEngine||"unbekannt";
   const mag=status.maghribDiagnostic;
+  const plannedToday=Number(status.scheduled||0);
   let html=`<strong>Letzter Scheduler-Lauf:</strong> ${esc(updated)}<br>`;
-  html+=`<strong>Nutzer mit Standort:</strong> ${esc(String(status.usersWithLocation||0))} · <strong>Gruppen:</strong> ${esc(String(status.locationGroups||0))}<br>`;
-  html+=`<strong>Geplant:</strong> ${esc(String(status.scheduled||0))} · <strong>Empfänger:</strong> ${esc(String(status.recipients||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
+  html+=`<strong>Scheduler-Status:</strong> <span style="color:${schedColor}">${esc(schedLabel)}</span> · Engine: ${esc(engine)}<br>`;
+  html+=`<strong>Nutzer mit Standort:</strong> ${esc(String(status.usersWithLocation||0))} · <strong>Gebets-Push aktiv:</strong> ${esc(String(status.usersWithActivePush||status.usersWithLocation||0))}<br>`;
+  html+=`<strong>Gruppen:</strong> ${esc(String(status.locationGroups||0))} · <strong>Geplant heute:</strong> ${esc(String(plannedToday))} · <strong>Empfänger:</strong> ${esc(String(status.recipients||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
+  if(status.subscriptionsSupabase!=null)html+=`<strong>Quellen:</strong> OneSignal ${esc(String(status.subscriptionsOneSignal||0))} · Supabase ${esc(String(status.subscriptionsSupabase||0))}<br>`;
   if(mag){
     html+=`<br><strong>Maghrib heute (${esc(mag.time||"--:--")}):</strong><br>`;
     html+=`Vorab: ${esc(status.today?.prayers?.maghrib?.advance?.status||mag.plannedAdvance||"?")} (${esc(String(mag.advanceRecipients||0))} Empf.) · Gebetszeit: ${esc(status.today?.prayers?.maghrib?.entry?.status||mag.plannedEntry||"?")} (${esc(String(mag.entryRecipients||0))} Empf.)<br>`;
@@ -1498,7 +1505,9 @@ function formatPrayerPushStatusHtml(status){
     html+=`<tr><td>${esc(p?.name||key)}</td><td>${esc(p?.time||"--")}</td><td>${esc(p?.advance?.status||"—")}</td><td>${esc(p?.entry?.status||"—")}</td><td style="font-size:10px">${statusLine}</td></tr>`;
   });
   html+=`</table>`;
-  if(status.lastError)html+=`<br><span style="color:#f0c674">Fehler: ${esc(status.lastError)}</span>`;
+  if(status.lastError)html+=`<br><span style="color:#f0c674"><strong>Fehlergrund:</strong> ${esc(status.lastError)}</span>`;
+  if(status.errors>0&&!status.lastError)html+=`<br><span style="color:#f0c674">OneSignal-Fehler beim Planen – Details im Scheduler-Log.</span>`;
+  if(Number(status.usersWithLocation||0)===0)html+=`<br><span style="color:#f0c674">Kein Nutzer mit Standort und aktivem Gebets-Push. Besucher-App: Standort freigeben und Erinnerung aktivieren.</span>`;
   return html;
 }
 async function loadAdminPrayerPushStatus(){
@@ -1514,14 +1523,21 @@ async function loadAdminPrayerPushStatus(){
 }
 async function triggerAdminPrayerScheduler(){
   const box=document.getElementById("adminPrayerStatusBox");
-  if(box)box.textContent="Starte Scheduler…";
+  if(box)box.textContent="Starte Scheduler im Worker…";
   try{
     const data=await workerPostRequest("api/admin/prayer/run",{});
-    setAdminPrayerStatusHtml(`<span style="color:#dfffd8">${esc(data.reason||"Scheduler angestoßen")}</span>`);
-    addAdminLog("Gebets-Push","Scheduler angestoßen",data.reason||"");
-    setTimeout(()=>loadAdminPrayerPushStatus(),8000);
+    const ok=data.schedulerStatus==="success"||data.ok;
+    const color=ok?"#dfffd8":"#f0c674";
+    let html=`<span style="color:${color}"><strong>${esc(data.reason||"Scheduler abgeschlossen")}</strong></span>`;
+    if(data.status)html+=`<br><br>${formatPrayerPushStatusHtml(data.status)}`;
+    else if(data.usersWithLocation!=null)html+=`<br>Nutzer: ${esc(String(data.usersWithLocation))} · Geplant: ${esc(String(data.scheduled||0))} · Fehler: ${esc(String(data.errors||0))}`;
+    setAdminPrayerStatusHtml(html);
+    addAdminLog("Gebets-Push","Scheduler im Worker",data.reason||"");
+    if(!data.status)setTimeout(()=>loadAdminPrayerPushStatus(),3000);
   }catch(e){
-    setAdminPrayerStatusHtml(`<span style="color:#f0c674">Scheduler konnte nicht gestartet werden: ${esc(e.message||e)}</span>`);
+    const msg=String(e.message||e);
+    const is403=msg.includes("403")||msg.includes("workflow");
+    setAdminPrayerStatusHtml(`<span style="color:#f0c674"><strong>Scheduler konnte nicht gestartet werden</strong><br>${esc(is403?"GitHub workflow_dispatch nicht mehr nötig – bitte Worker neu deployen.":msg)}</span>`);
   }
 }
 async function sendAdminOneSignalPrayerTest(){
