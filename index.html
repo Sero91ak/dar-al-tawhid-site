@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
 <title>DAR AL TAWḤID</title>
 
@@ -121,12 +121,12 @@ html[data-theme="light"] .theme-switch-btn.is-active{border-color:rgba(155,122,6
 .first-visit-panel .hint-banner-actions{flex:0 0 auto}
 @media(max-width:680px){.first-visit-panel{align-items:flex-start}.first-visit-grid{justify-content:flex-start}.first-visit-theme{width:100%;justify-content:space-between}.first-visit-theme .theme-switch-row{flex:1}.first-visit-theme .theme-switch-btn{flex:1}.first-visit-panel .hint-banner-actions{width:100%}.first-visit-panel .hint-btn{flex:1 1 120px}}
 *{box-sizing:border-box}
-html{min-height:100%;height:auto;background:var(--bg);overflow-x:hidden;overflow-y:auto;-webkit-text-size-adjust:100%;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;touch-action:auto}
-body{-webkit-tap-highlight-color:transparent;touch-action:auto}
+html{min-height:100%;height:auto;background:var(--bg);overflow-x:hidden;overflow-y:auto;-webkit-text-size-adjust:100%;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;touch-action:pan-y;overscroll-behavior-x:none;max-width:100vw}
+body{-webkit-tap-highlight-color:transparent;touch-action:pan-y;overscroll-behavior-x:none;max-width:100vw}
 body{margin:0;min-height:100dvh;height:auto;color:var(--text);font-family:var(--sans);overflow-x:hidden;overflow-y:auto;background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%);padding:max(10px,var(--safe-top)) max(10px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(10px,env(safe-area-inset-left,0px))}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;background:url("watermark-circle-soft.png") center 44%/min(620px,58vw) auto no-repeat;opacity:.055;z-index:0}
 a{color:inherit}button,input,select{font:inherit}
-.app{width:min(1180px,100%);margin:0 auto;position:relative;z-index:1;min-height:100%;touch-action:auto}
+.app{width:min(1180px,100%);max-width:100%;margin:0 auto;position:relative;z-index:1;min-height:100%;touch-action:pan-y;overflow-x:hidden}
 .top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5,.92)),radial-gradient(circle at 20% 0%,rgba(239,215,142,.12),transparent 45%);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
 .top-shell:before{content:"";position:absolute;inset:0;background:var(--theme-deck-aura);opacity:.9;pointer-events:none}
 .header{padding:22px 24px 18px}
@@ -139,7 +139,7 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .hero-text{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:980px}.salam{font-family:var(--serif);color:var(--gold2);font-size:clamp(18px,1.9vw,29px);line-height:1.18;font-weight:800;margin-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.intro{color:var(--muted);font-size:14px;line-height:1.65}.intro strong{color:var(--cream)}
 .isnad{border-top:1px solid var(--line2);background:rgba(0,0,0,.18);padding:11px 24px 14px}.isnad-label{display:flex;align-items:center;gap:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.18em;font-size:10px;font-weight:950}.isnad-label:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(210,177,91,.48),transparent)}.isnad-quote{color:var(--cream);margin-top:7px;font-size:13px;line-height:1.45;font-weight:800;text-wrap:pretty}.isnad-speaker{color:var(--gold2);white-space:nowrap}.isnad-words{display:inline;text-wrap:pretty}.isnad-source{color:var(--muted);margin-top:5px;font-size:10px;line-height:1.4}
 .app-bar{display:flex;align-items:center;justify-content:flex-start;gap:9px;margin-bottom:12px;flex-wrap:nowrap;overflow:hidden}.back-btn{display:none;align-items:center;gap:7px;border:1px solid var(--line);background:rgba(239,215,142,.075);color:var(--cream);border-radius:999px;min-height:38px;padding:8px 14px;cursor:pointer;font-weight:900;font-size:12.5px;white-space:nowrap;flex-shrink:0}.back-btn.show{display:inline-flex}.crumb{color:var(--muted);font-size:12px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.crumb:empty,.crumb.is-hidden{display:none}
-#appView{touch-action:auto;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(0)}
+#appView{touch-action:pan-y;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(0);max-width:100%;overflow-x:hidden}
 .view{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));box-shadow:var(--shadow);padding:20px;min-height:430px}
 .view.is-tab-swiping{transition:none!important;user-select:none;-webkit-user-select:none}
 .view.tab-swipe-left{animation:tabSwipeFromRight .44s cubic-bezier(.25,.82,.22,1) both}
@@ -4501,7 +4501,8 @@ html[data-theme].is-standalone-pwa{
   background:var(--outer-bg-flat)!important;
   background-color:var(--outer-bg-flat)!important;
   overscroll-behavior-y:auto;
-  touch-action:auto;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
 }
 html[data-theme] body,
 html[data-theme].is-standalone-pwa body{
@@ -4513,12 +4514,14 @@ html[data-theme].is-standalone-pwa body{
   background-color:var(--outer-bg-flat)!important;
   color:var(--text)!important;
   overscroll-behavior-y:auto;
-  touch-action:auto;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
 }
 html[data-theme] .app{
   min-height:100%;
   background:transparent!important;
-  touch-action:auto;
+  touch-action:pan-y;
+  overflow-x:hidden;
 }
 html[data-theme] .top-edge-fade{
   background:var(--outer-bg)!important;
@@ -4689,8 +4692,8 @@ html[data-theme] .view{
 .image-template-card b{display:block;margin-top:4px;font-size:9px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--editor-text)}
 .image-template-card small{display:none;color:var(--editor-muted)}
 .image-editor-preview{display:flex;flex-direction:column;align-items:stretch;gap:6px;width:100%}
-.image-editor-touch-wrap{position:relative;touch-action:none;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0}
-.image-editor-touch-wrap.is-dragging{opacity:.98}
+.image-editor-touch-wrap{position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0}
+.image-editor-touch-wrap.is-dragging,.image-editor-touch-wrap.is-pinch-active{touch-action:none}
 .image-editor-guides{position:absolute;inset:0;pointer-events:none;z-index:2}
 .image-editor-guide{position:absolute;border:2px dashed var(--editor-guide);border-radius:10px;box-sizing:border-box;transition:border-color .15s ease,box-shadow .15s ease}
 .image-editor-guide.is-active{border:3px solid var(--editor-guide-active);box-shadow:0 0 0 2px var(--editor-guide-ring)}
@@ -4707,7 +4710,19 @@ html[data-theme] .view{
 .image-editor-group-body{padding:0 10px 10px;display:grid;gap:8px}
 .image-editor-form{display:grid;gap:8px}
 .image-editor-form label{display:grid;gap:4px;color:var(--editor-muted);font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
-.image-editor-form textarea,.image-editor-form select{width:100%;border:1px solid var(--editor-field-line);border-radius:12px;background:var(--editor-field-bg);color:var(--editor-field-text);padding:10px 11px;font:800 14px/1.35 var(--sans);outline:none;-webkit-appearance:none;appearance:none}
+.image-editor-form textarea,.image-editor-form select{width:100%;border:1px solid var(--editor-field-line);border-radius:12px;background:var(--editor-field-bg);color:var(--editor-field-text);padding:10px 11px;font:800 16px/1.35 var(--sans);outline:none;-webkit-appearance:none;appearance:none}
+.image-editor-expand-btn{margin-top:6px;border:1px solid var(--editor-border);border-radius:10px;background:var(--editor-button-bg);color:var(--editor-button-text);min-height:36px;padding:8px 10px;font-size:11px;font-weight:950;cursor:pointer;touch-action:manipulation;width:100%}
+.ie-text-modal-overlay{position:fixed;inset:0;z-index:85;display:grid;align-items:end;padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:rgba(0,0,0,.42);backdrop-filter:blur(3px);touch-action:pan-y}
+.ie-text-modal-overlay[hidden]{display:none!important}
+.ie-text-modal-sheet{border:1px solid var(--editor-border);border-radius:18px 18px 16px 16px;background:var(--editor-panel-bg);box-shadow:var(--editor-shadow-strong);padding:12px 12px max(14px,env(safe-area-inset-bottom));display:grid;gap:10px;max-height:min(92vh,720px);width:100%;max-width:min(560px,100%);margin:0 auto;touch-action:pan-y}
+.ie-text-modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ie-text-modal-head h3{margin:0;font-size:14px;font-weight:950;color:var(--editor-warning)}
+.ie-text-modal-head button{border:1px solid var(--editor-border);border-radius:999px;background:var(--editor-button-bg);color:var(--editor-button-text);min-height:36px;padding:8px 12px;font-size:11px;font-weight:950;cursor:pointer;touch-action:manipulation}
+.ie-text-modal-sheet textarea{width:100%;min-height:min(52vh,420px);max-height:min(58vh,480px);border:1px solid var(--editor-field-line);border-radius:14px;background:var(--editor-field-bg);color:var(--editor-field-text);padding:12px 13px;font:800 16px/1.45 var(--sans);resize:vertical;white-space:pre-wrap;word-break:break-word;touch-action:manipulation}
+.ie-text-modal-hint{min-height:14px;margin:0;font-size:10px;font-weight:850;color:var(--editor-muted);line-height:1.4}
+.ie-text-modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ie-text-modal-actions button{border:1px solid var(--editor-border);border-radius:12px;background:var(--editor-button-bg);color:var(--editor-button-text);min-height:44px;padding:10px 12px;font-size:12px;font-weight:950;cursor:pointer;touch-action:manipulation}
+.ie-text-modal-actions button.primary{background:var(--editor-primary-bg);border-color:var(--editor-active-border);color:var(--editor-active-text)}
 .image-editor-form textarea::placeholder{color:var(--editor-placeholder)}
 .image-editor-form textarea{min-height:68px;max-height:140px;resize:vertical}
 .image-editor-form textarea.is-active,.image-editor-form select:focus{border-color:var(--editor-focus-border);box-shadow:0 0 0 2px var(--editor-focus-ring)}
@@ -4848,7 +4863,7 @@ body.image-editor-test-mode #appView.view{padding-top:8px;touch-action:pan-y}
 .ie-power-stage{border:1px solid var(--editor-border);border-radius:16px;background:var(--editor-stage-bg);padding:8px;box-shadow:var(--editor-shadow);touch-action:pan-y}
 .ie-power-preview{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:min(100%,520px);margin:0 auto;touch-action:pan-y}
 .ie-power-touch-wrap{position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;width:100%;max-width:100%;margin:0 auto;line-height:0}
-.ie-power-touch-wrap.is-edit-active,.ie-power-touch-wrap.is-dragging{touch-action:none}
+.ie-power-touch-wrap.is-edit-active,.ie-power-touch-wrap.is-dragging,.ie-power-touch-wrap.is-pinch-active{touch-action:none}
 .ie-power-touch-wrap.is-edit-active #imageEditorCanvas,.ie-power-touch-wrap.is-dragging #imageEditorCanvas{touch-action:none}
 .ie-power-sheet{border:1px solid var(--editor-border);border-radius:16px;background:var(--editor-panel-bg);overflow:hidden;touch-action:pan-y;box-shadow:var(--editor-shadow)}
 .ie-power-sheet.is-collapsed .ie-power-sheet-body{display:none}
@@ -4984,7 +4999,7 @@ window.DAR_ANALYTICS_CONFIG={
 </div>
 
 <script>
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const POSTS_DIR="content/posts";const BRANCH="main";const CACHE_KEY="darCachedPostsV5";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY="darPostFileMapV4";const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const CONTENT_REFRESH_MS=60000;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const POSTS_DIR="content/posts";const BRANCH="main";const CACHE_KEY="darCachedPostsV5";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY="darPostFileMapV4";const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const CONTENT_REFRESH_MS=60000;
 const CURRENT_UPDATES_PATH="/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY="darCurrentUpdatesV1";let currentUpdates=[];
 const QURAN_TR_MODES={readable:{label:"Lesbar",short:"Einfach · latin",hint:"Einfache lateinische Umschrift zum lauten Lesen."},tanzil:{label:"Tanzil",short:"Standard",hint:"Standard-Umschrift mit Doppellauten (Tanzil.net)."},academic:{label:"Wissenschaftlich",short:"Mit Diakritika",hint:"Akademische Umschrift mit ḥ, ʿ, ā und weiteren Zeichen."}};
 function getQuranTrMode(){try{const m=localStorage.getItem(QURAN_TR_KEY);return QURAN_TR_MODES[m]?m:"readable"}catch(e){return "readable"}}
@@ -4993,8 +5008,8 @@ function quranVerseTr(v,mode){mode=mode||getQuranTrMode();if(!v)return "";if(mod
 function renderQuranTransliterationPicker(){const mode=getQuranTrMode();const buttons=Object.entries(QURAN_TR_MODES).map(([key,info])=>`<button type="button" class="quran-tr-btn${mode===key?" active":""}" data-quran-tr="${key}"><span>${esc(info.label)}</span><small>${esc(info.short)}</small></button>`).join("");return `<section class="quran-tr-bar"><div class="quran-tr-label">Lautschrift wählen</div><div class="quran-tr-row">${buttons}</div><p class="quran-tr-note" id="quranTrModeNote">${esc(QURAN_TR_MODES[mode]?.hint||"")}</p></section>`}
 function renderQuranAyahTr(v){const mode=getQuranTrMode();const label=QURAN_TR_MODES[mode]?.label||"Lautschrift";const text=quranVerseTr(v,mode);return `<div class="quran-ayah-tr-wrap"><div class="quran-ayah-tr-label">Lautschrift · ${esc(label)}</div><div class="quran-ayah-tr" data-tr-tanzil="${esc(v.tr||"")}" data-tr-readable="${esc(v.tr_readable||v.tr||"")}" data-tr-academic="${esc(v.tr_academic||v.tr||"")}">${esc(text)}</div></div>`}
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{const text=el.getAttribute("data-tr-"+mode)||el.getAttribute("data-tr-tanzil")||"";el.textContent=text});document.querySelectorAll(".quran-ayah-tr-label").forEach(el=>{el.textContent="Lautschrift · "+(QURAN_TR_MODES[mode]?.label||"Lautschrift")});document.querySelectorAll(".quran-tr-btn").forEach(btn=>{btn.classList.toggle("active",btn.getAttribute("data-quran-tr")===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
-function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;let lastFormPointerAt=0;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
-function isEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.account-form,.main-search,.search-pro-panel,.prayer-settings-grid,.theme-switch-row"))}
+function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};let homeSearchPostIds=[];let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let postRouteLoadingId="";let appBootHydrated=false;let lastFormPointerAt=0;const quranSurahCache=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=true;const $=id=>document.getElementById(id);
+function isEditableTarget(target){if(!target||!target.closest)return false;if(target.closest("[data-nav]"))return false;return!!target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.account-form,.main-search,.search-pro-panel,.prayer-settings-grid,.theme-switch-row")}
 function isFormEditingNow(){
   const active=document.activeElement;
   const activeTag=active&&active.tagName?active.tagName.toLowerCase():"";
@@ -5356,7 +5371,27 @@ function saveQuranListScroll(){try{sessionStorage.setItem(QURAN_SCROLL_KEY,Strin
 function clearQuranReturnState(){try{sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}}
 function shouldRestoreQuranAfterSurah(){try{return sessionStorage.getItem(QURAN_RETURN_KEY)==="1"&&Number(sessionStorage.getItem(QURAN_SCROLL_KEY)||0)>0}catch(e){return false}}
 function restoreQuranListScroll(){if(!shouldRestoreQuranAfterSurah())return false;let y=0;try{y=Number(sessionStorage.getItem(QURAN_SCROLL_KEY)||0)}catch(e){}if(y<=0)return false;requestAnimationFrame(()=>window.scrollTo({top:y,behavior:"auto"}));try{sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}return true}
-function navigate(view,value="",opts={}){const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home")clearNavStack()}if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();window.__smoothNav=true;location.hash=routeToHash(view,value)}
+function postIdsForBrowseRoute(route){
+  if(!route)return[];
+  const v=route.value||"";
+  if(route.view==="recent")return posts.slice(0,60).map(p=>String(p.id));
+  if(route.view==="topic")return posts.filter(p=>normalizePostCategory(p.category)===normalizePostCategory(v)).map(p=>String(p.id));
+  if(route.view==="scholar")return postsForScholarKey(resolveScholarRef(v).key).map(p=>String(p.id));
+  if(route.view==="book")return posts.filter(p=>String(p.book||"")===String(v)).map(p=>String(p.id));
+  if(route.view==="series")return postsForSeries(v).map(p=>String(p.id));
+  if(route.view==="saved")return savedIds().map(String);
+  if(route.view==="home"&&homeSearchPostIds.length)return homeSearchPostIds.slice();
+  return[];
+}
+function rememberPostBrowseFromRoute(fromRoute){
+  const ids=postIdsForBrowseRoute(fromRoute);
+  if(!ids.length)return;
+  try{sessionStorage.setItem(POST_BROWSE_KEY,JSON.stringify({ids,from:{view:fromRoute.view,value:fromRoute.value||""}}))}catch(e){}
+}
+function getPostBrowseIds(){
+  try{const raw=sessionStorage.getItem(POST_BROWSE_KEY);const ctx=raw?JSON.parse(raw):null;return Array.isArray(ctx?.ids)?ctx.ids.map(String):[]}catch(e){return[]}
+}
+function navigate(view,value="",opts={}){const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home")clearNavStack()}if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();window.__smoothNav=true;location.hash=routeToHash(view,value)}
 function goBack(){if(currentRoute.view==="home")return;const stack=getNavStack();if(stack.length){const prev=stack.pop();setNavStack(stack);window.__restoreScrollY=Number(prev?.scroll!=null?prev.scroll:getNavScroll(prev))||0;navigate(prev.view,prev.value||"",{skipPush:true});return}const parent=parentRoute(currentRoute);window.__restoreScrollY=getNavScroll(parent);navigate(parent.view,parent.value||"",{skipPush:true})}
 function readRoute(){const hash=decodeURIComponent((location.hash||"#home").replace(/^#/,""));const parts=hash.split("/");return{view:parts[0]||"home",value:parts.slice(1).join("/")||""}}
 function parentRoute(route){if(route.view==="news-detail")return{view:"home"};if(route.view==="topic")return{view:"topics"};if(route.view==="scholar")return{view:"scholars"};if(route.view==="book")return{view:"books"};if(route.view==="dua-cat")return{view:"duas"};if(route.view==="dua")return{view:"duas"};if(route.view==="quran-surah")return{view:"quran"};if(route.view==="calendar")return{view:"more"};if(route.view==="saved")return{view:"more"};if(route.view==="account")return{view:"more"};if(route.view==="about")return{view:"more"};if(route.view==="scholars")return{view:"more"};if(route.view==="books")return{view:"more"};if(route.view==="image-editor")return{view:"more"};if(route.view==="image-editor-test")return{view:"more"};if(route.view==="more")return{view:"home"};if(route.view==="prayer")return{view:"home"};if(route.view==="ramadan")return{view:"home"};if(route.view==="quran")return{view:"home"};if(route.view==="series")return{view:"home"};if(route.view==="post")return{view:"recent"};if(route.view==="recent")return{view:"topics"};if(route.view==="topics")return{view:"home"};if(route.view!=="home")return{view:"home"};return{view:"home"}}
@@ -6138,7 +6173,7 @@ const IMAGE_EDITOR_COLORS=[
 ];
 const IMAGE_TEMPLATE_VERSION="4";
 const imageEditorCache=new Map();
-let imageEditorState={templateId:"bibliothek-braun",mainText:"",sourceText:"",font:"serif",color:"#3b2515",fontSize:58,lineHeight:1.22,align:"center",offsetX:0,offsetY:0,sourceSize:24,sourceOffsetX:0,sourceOffsetY:0,activeBlock:"main",templateReady:false,interactionMode:"scroll",sheetTab:"text",sheetOpen:true};
+let imageEditorState={templateId:"bibliothek-braun",mainText:"",sourceText:"",font:"serif",color:"#3b2515",fontSize:58,lineHeight:1.22,align:"center",offsetX:0,offsetY:0,sourceSize:24,sourceOffsetX:0,sourceOffsetY:0,activeBlock:"main",templateReady:false,interactionMode:"scroll",sheetTab:"text",sheetOpen:true,textExpandBlock:""};
 let imageEditorRouteSeed="";
 let imageEditorTouch=null;
 function imageEditorFontCss(id){return (IMAGE_EDITOR_FONTS.find(f=>f.id===id)||IMAGE_EDITOR_FONTS[0]).css}
@@ -6174,22 +6209,86 @@ function seedImageEditorFromDua(duaId){
     imageEditorRouteSeed="";
   }
 function seedImageEditorFromRoute(value){const key=String(value||"");if(imageEditorRouteSeed===key)return;imageEditorRouteSeed=key;if(!key)return;const post=posts.find(p=>String(p.id)===key);if(!post)return;imageEditorState.mainText=stripMd(post.statement||findQuote(post)||post.title||"").trim();imageEditorState.sourceText=sourceTextFromPost(post);imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets()}
+function imageEditorTextFieldHtml(label,id,block,placeholder,text,active){return `<label>${label}<textarea id="${id}" class="${active?"is-active":""}" placeholder="${esc(placeholder)}">${esc(text)}</textarea><button type="button" class="image-editor-expand-btn" data-editor-expand="${block}">Groß bearbeiten</button></label>`}
+function ensureImageEditorTextModal(){
+  if($("imageEditorTextModal"))return;
+  const el=document.createElement("div");
+  el.id="imageEditorTextModal";
+  el.className="ie-text-modal-overlay";
+  el.hidden=true;
+  el.innerHTML=`<div class="ie-text-modal-sheet" role="dialog" aria-modal="true" aria-labelledby="imageEditorTextModalTitle"><div class="ie-text-modal-head"><h3 id="imageEditorTextModalTitle">Text bearbeiten</h3><button type="button" id="imageEditorTextModalCancel">Abbrechen</button></div><textarea id="imageEditorTextModalArea" rows="14" placeholder="Text eingeben…"></textarea><p id="imageEditorTextModalHint" class="ie-text-modal-hint"></p><div class="ie-text-modal-actions"><button type="button" id="imageEditorTextModalCancelBottom">Abbrechen</button><button type="button" id="imageEditorTextModalSave" class="primary">Speichern</button></div></div>`;
+  document.body.appendChild(el);
+  const close=(save)=>closeImageEditorTextExpand(save);
+  $("imageEditorTextModalCancel").onclick=()=>close(false);
+  $("imageEditorTextModalCancelBottom").onclick=()=>close(false);
+  $("imageEditorTextModalSave").onclick=()=>close(true);
+  el.onclick=ev=>{if(ev.target===el)close(false)};
+  $("imageEditorTextModalArea").oninput=updateImageEditorTextModalHint;
+}
+function updateImageEditorTextModalHint(){
+  const hint=$("imageEditorTextModalHint"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;
+  if(!hint||!area||!block)return;
+  const lines=String(area.value||"").split(/\n/).length;
+  hint.textContent=`${lines} Zeile${lines===1?"":"n"} · Änderungen erscheinen nach dem Speichern in der Vorschau.`;
+  const canvas=$("imageEditorCanvas"),ctx=canvas?.getContext("2d");
+  if(!ctx)return;
+  const t=imageTemplateById(imageEditorState.templateId);
+  const box=block==="source"?t.source:t.text;
+  const font=imageEditorFontCss(imageEditorState.font);
+  const size=block==="source"?imageEditorState.sourceSize:imageEditorState.fontSize;
+  const lh=block==="source"?1.18:imageEditorState.lineHeight;
+  const min=block==="source"?14:26;
+  const fit=fitImageEditorText(ctx,area.value,box,font,size,lh,min);
+  if(!fit.ok)hint.textContent+=" Text ist zu lang. Bitte kürzen oder Schrift verkleinern.";
+}
+function openImageEditorTextExpand(block){
+  ensureImageEditorTextModal();
+  imageEditorState.textExpandBlock=block==="source"?"source":"main";
+  setImageEditorActiveBlock(imageEditorState.textExpandBlock);
+  const modal=$("imageEditorTextModal"),title=$("imageEditorTextModalTitle"),area=$("imageEditorTextModalArea");
+  if(!modal||!title||!area)return;
+  title.textContent=imageEditorState.textExpandBlock==="source"?"Quelle bearbeiten":"Hauptaussage bearbeiten";
+  area.value=imageEditorState.textExpandBlock==="source"?imageEditorState.sourceText:imageEditorState.mainText;
+  updateImageEditorTextModalHint();
+  modal.hidden=false;
+  requestAnimationFrame(()=>{try{area.focus();area.setSelectionRange(area.value.length,area.value.length)}catch(e){}});
+}
+function closeImageEditorTextExpand(save){
+  const modal=$("imageEditorTextModal"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;
+  if(!modal)return;
+  if(save&&area&&block){
+    if(block==="source")imageEditorState.sourceText=area.value||"";
+    else imageEditorState.mainText=area.value||"";
+    syncImageEditorInputsFromState();
+    renderImageEditorCanvas();
+    downloadImageEditor();
+  }
+  imageEditorState.textExpandBlock="";
+  modal.hidden=true;
+}
+function bindImageEditorTextExpand(){
+  document.querySelectorAll("[data-editor-expand]").forEach(btn=>{
+    if(btn.dataset.expandBound==="1")return;
+    btn.dataset.expandBound="1";
+    btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();openImageEditorTextExpand(btn.getAttribute("data-editor-expand"))};
+  });
+}
 function renderImageEditor(){
   seedImageEditorFromRoute(currentRoute.value);
   const t=imageTemplateById(imageEditorState.templateId);
   const mainActive=imageEditorState.activeBlock==="main";
-  return `${setHeader("Bild-Beitrag erstellen","Vorlage wählen, Text auf dem Bild verschieben und als 1080 × 1350 px exportieren.","Editor")}<section class="image-editor-shell" id="imageEditorAnchor"><div class="image-editor-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="lazy"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div><div class="image-editor-workspace"><div class="image-editor-stage"><div class="image-editor-preview"><div class="image-editor-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-block-tabs"><button type="button" data-editor-block="main" class="${mainActive?"active":""}">Haupttext</button><button type="button" data-editor-block="source" class="${mainActive?"":"active"}">Quelle</button></div><div class="image-editor-touch-hint">Aktiven Textblock wählen · 1 Finger verschieben · 2 Finger vergrößern/verkleinern</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div><div class="image-editor-panel"><details open class="image-editor-group"><summary>Text</summary><div class="image-editor-group-body image-editor-form"><label>Hauptaussage<textarea id="imageEditorMain" class="${mainActive?"is-active":""}" placeholder="Aussage oder Zitat">${esc(imageEditorState.mainText)}</textarea></label><label>Quelle<textarea id="imageEditorSource" class="${mainActive?"":"is-active"}" placeholder="Quelle, Gelehrter oder Werk">${esc(imageEditorState.sourceText)}</textarea></label></div></details><details class="image-editor-group"><summary>Typografie</summary><div class="image-editor-group-body image-editor-form"><div class="image-editor-controls"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><label>Farbe<select id="imageEditorColor">${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></label><label>Ausrichtung<select id="imageEditorAlign"><option value="center" ${imageEditorState.align==="center"?"selected":""}>Zentriert</option><option value="left" ${imageEditorState.align==="left"?"selected":""}>Linksbündig</option></select></label></div></div></details><details class="image-editor-group"><summary>Feineinstellung</summary><div class="image-editor-group-body"><div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="28" max="82" value="${imageEditorState.fontSize}"></div><div class="image-editor-range"><span>Zeilenabstand</span><output id="imageEditorLineHeightOut">${imageEditorState.lineHeight}</output><input id="imageEditorLineHeight" type="range" min="1.05" max="1.55" step="0.01" value="${imageEditorState.lineHeight}"></div><div class="image-editor-range"><span>Text höher/tiefer</span><output id="imageEditorOffsetOut">${imageEditorState.offsetY}</output><input id="imageEditorOffset" type="range" min="-90" max="90" value="${imageEditorState.offsetY}"></div><div class="image-editor-range"><span>Quelle Größe</span><output id="imageEditorSourceSizeOut">${imageEditorState.sourceSize}</output><input id="imageEditorSourceSize" type="range" min="16" max="34" value="${imageEditorState.sourceSize}"></div></div></div></details><div class="image-editor-actions"><button id="imageEditorAutoFit" type="button">Automatisch einpassen</button><button id="imageEditorShare" class="primary" type="button">Teilen</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Speichern</a></div></div></div></section>`}
+  return `${setHeader("Bild-Beitrag erstellen","Vorlage wählen, Text auf dem Bild verschieben und als 1080 × 1350 px exportieren.","Editor")}<section class="image-editor-shell" id="imageEditorAnchor"><div class="image-editor-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="lazy"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div><div class="image-editor-workspace"><div class="image-editor-stage"><div class="image-editor-preview"><div class="image-editor-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-block-tabs"><button type="button" data-editor-block="main" class="${mainActive?"active":""}">Haupttext</button><button type="button" data-editor-block="source" class="${mainActive?"":"active"}">Quelle</button></div><div class="image-editor-touch-hint">Aktiven Textblock wählen · 1 Finger verschieben · 2 Finger vergrößern/verkleinern</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div><div class="image-editor-panel"><details open class="image-editor-group"><summary>Text</summary><div class="image-editor-group-body image-editor-form">${imageEditorTextFieldHtml("Hauptaussage","imageEditorMain","main","Aussage oder Zitat",imageEditorState.mainText,mainActive)}${imageEditorTextFieldHtml("Quelle","imageEditorSource","source","Quelle, Gelehrter oder Werk",imageEditorState.sourceText,!mainActive)}</div></details><details class="image-editor-group"><summary>Typografie</summary><div class="image-editor-group-body image-editor-form"><div class="image-editor-controls"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><label>Farbe<select id="imageEditorColor">${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></label><label>Ausrichtung<select id="imageEditorAlign"><option value="center" ${imageEditorState.align==="center"?"selected":""}>Zentriert</option><option value="left" ${imageEditorState.align==="left"?"selected":""}>Linksbündig</option></select></label></div></div></details><details class="image-editor-group"><summary>Feineinstellung</summary><div class="image-editor-group-body"><div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="28" max="82" value="${imageEditorState.fontSize}"></div><div class="image-editor-range"><span>Zeilenabstand</span><output id="imageEditorLineHeightOut">${imageEditorState.lineHeight}</output><input id="imageEditorLineHeight" type="range" min="1.05" max="1.55" step="0.01" value="${imageEditorState.lineHeight}"></div><div class="image-editor-range"><span>Text höher/tiefer</span><output id="imageEditorOffsetOut">${imageEditorState.offsetY}</output><input id="imageEditorOffset" type="range" min="-90" max="90" value="${imageEditorState.offsetY}"></div><div class="image-editor-range"><span>Quelle Größe</span><output id="imageEditorSourceSizeOut">${imageEditorState.sourceSize}</output><input id="imageEditorSourceSize" type="range" min="16" max="34" value="${imageEditorState.sourceSize}"></div></div></div></details><div class="image-editor-actions"><button id="imageEditorAutoFit" type="button">Automatisch einpassen</button><button id="imageEditorShare" class="primary" type="button">Teilen</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Speichern</a></div></div></div></section>`}
 const IMAGE_EDITOR_TEST_TABS=[{id:"text",label:"Text"},{id:"font",label:"Schrift"},{id:"color",label:"Farbe"},{id:"position",label:"Position"},{id:"source",label:"Quelle"},{id:"export",label:"Export"}];
 function renderImageEditorTestColorChips(){return IMAGE_EDITOR_COLORS.map(c=>{const light=c.value==="#efe0bd";return `<button type="button" class="ie-power-color-chip ${c.value===imageEditorState.color?"active":""}" data-image-color="${esc(c.value)}" style="background:${esc(c.value)};color:${light?"#3b2515":"#fff7ea"}">${esc(c.label)}</button>`}).join("")}
 function renderImageEditorTestPosition(){return `<div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="28" max="82" value="${imageEditorState.fontSize}"></div><div class="image-editor-range"><span>Zeilenabstand</span><output id="imageEditorLineHeightOut">${imageEditorState.lineHeight}</output><input id="imageEditorLineHeight" type="range" min="1.05" max="1.55" step="0.01" value="${imageEditorState.lineHeight}"></div><div class="image-editor-range"><span>Quelle Größe</span><output id="imageEditorSourceSizeOut">${imageEditorState.sourceSize}</output><input id="imageEditorSourceSize" type="range" min="16" max="34" value="${imageEditorState.sourceSize}"></div><div class="image-editor-range"><span>Haupt L/R</span><output id="imageEditorOffsetXOut">${imageEditorState.offsetX}</output><input id="imageEditorOffsetX" type="range" min="-90" max="90" value="${imageEditorState.offsetX}"></div><div class="image-editor-range"><span>Haupt H/R</span><output id="imageEditorOffsetOut">${imageEditorState.offsetY}</output><input id="imageEditorOffset" type="range" min="-90" max="90" value="${imageEditorState.offsetY}"></div><div class="image-editor-range"><span>Quelle L/R</span><output id="imageEditorSourceOffsetXOut">${imageEditorState.sourceOffsetX}</output><input id="imageEditorSourceOffsetX" type="range" min="-90" max="90" value="${imageEditorState.sourceOffsetX}"></div><div class="image-editor-range"><span>Quelle H/R</span><output id="imageEditorSourceOffsetYOut">${imageEditorState.sourceOffsetY}</output><input id="imageEditorSourceOffsetY" type="range" min="-90" max="90" value="${imageEditorState.sourceOffsetY}"></div></div>`}
 function renderImageEditorTestSheet(){
   const tab=imageEditorState.sheetTab||"text",mainActive=imageEditorState.activeBlock==="main";
   const panels={
-    text:`<div class="image-editor-form"><label>Hauptaussage<textarea id="imageEditorMain" class="${mainActive?"is-active":""}" placeholder="Aussage oder Zitat">${esc(imageEditorState.mainText)}</textarea></label><button id="imageEditorAutoFit" type="button">Automatisch einpassen</button></div>`,
+    text:`<div class="image-editor-form">${imageEditorTextFieldHtml("Hauptaussage","imageEditorMain","main","Aussage oder Zitat",imageEditorState.mainText,mainActive)}<button id="imageEditorAutoFit" type="button">Automatisch einpassen</button></div>`,
     font:`<div class="image-editor-form"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><label>Ausrichtung<select id="imageEditorAlign"><option value="center" ${imageEditorState.align==="center"?"selected":""}>Zentriert</option><option value="left" ${imageEditorState.align==="left"?"selected":""}>Linksbündig</option></select></label></div>`,
     color:`<div class="ie-power-color-grid">${renderImageEditorTestColorChips()}<select id="imageEditorColor" hidden>${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></div>`,
     position:renderImageEditorTestPosition(),
-    source:`<div class="image-editor-form"><label>Quelle<textarea id="imageEditorSource" class="${mainActive?"":"is-active"}" placeholder="Quelle, Gelehrter oder Werk">${esc(imageEditorState.sourceText)}</textarea></label></div>`,
+    source:`<div class="image-editor-form">${imageEditorTextFieldHtml("Quelle","imageEditorSource","source","Quelle, Gelehrter oder Werk",imageEditorState.sourceText,!mainActive)}</div>`,
     export:`<div class="image-editor-actions"><button id="imageEditorShare" class="primary" type="button">Teilen</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Speichern</a></div><p class="ie-power-export-note">Export: 1080 × 1350 px · identisch zur Vorschau</p>`
   };
   return `<aside class="ie-power-sheet ${imageEditorState.sheetOpen?"":"is-collapsed"}" id="imageEditorSheet"><button type="button" class="ie-power-sheet-handle" id="imageEditorSheetToggle" aria-expanded="${imageEditorState.sheetOpen?"true":"false"}"><span></span></button><div class="ie-power-sheet-tabs">${IMAGE_EDITOR_TEST_TABS.map(x=>`<button type="button" data-editor-sheet-tab="${esc(x.id)}" class="${tab===x.id?"active":""}">${esc(x.label)}</button>`).join("")}</div><div class="ie-power-sheet-body">${IMAGE_EDITOR_TEST_TABS.map(x=>`<div class="ie-power-sheet-panel ${tab===x.id?"active":""}" data-editor-sheet-panel="${esc(x.id)}">${panels[x.id]||""}</div>`).join("")}</div></aside>`;
@@ -6226,15 +6325,18 @@ function bindImageEditorTouch(){
   const refresh=()=>{if(rafId)return;rafId=requestAnimationFrame(()=>{rafId=0;syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()})};
   const onStart=e=>{
     const t=imageTemplateById(imageEditorState.templateId);
+    if(e.touches&&e.touches.length===2){
+      e.preventDefault();
+      wrap.classList.add("is-pinch-active","is-dragging");
+      imageEditorTouch={mode:"pinch",block:imageEditorState.activeBlock,startDist:imageEditorTouchDistance(e.touches),startSize:imageEditorState.activeBlock==="source"?imageEditorState.sourceSize:imageEditorState.fontSize};
+      return;
+    }
     if(e.touches&&e.touches.length===1){
       const picked=imageEditorPickBlock(e.touches[0].clientX,e.touches[0].clientY,canvas);
       setImageEditorActiveBlock(picked);
       const box=picked==="source"?t.source:t.text;
       const off=imageEditorBlockOffsets(picked);
       imageEditorTouch={mode:"drag",block:picked,box,startX:e.touches[0].clientX,startY:e.touches[0].clientY,baseX:off.x,baseY:off.y,startSize:picked==="source"?imageEditorState.sourceSize:imageEditorState.fontSize};
-      wrap.classList.add("is-dragging");
-    }else if(e.touches&&e.touches.length===2){
-      imageEditorTouch={mode:"pinch",block:imageEditorState.activeBlock,startDist:imageEditorTouchDistance(e.touches),startSize:imageEditorState.activeBlock==="source"?imageEditorState.sourceSize:imageEditorState.fontSize};
       wrap.classList.add("is-dragging");
     }
   };
@@ -6257,8 +6359,8 @@ function bindImageEditorTouch(){
       refresh();
     }
   };
-  const onEnd=()=>{imageEditorTouch=null;wrap.classList.remove("is-dragging")};
-  wrap.addEventListener("touchstart",onStart,{passive:true});
+  const onEnd=()=>{imageEditorTouch=null;wrap.classList.remove("is-dragging","is-pinch-active")};
+  wrap.addEventListener("touchstart",onStart,{passive:false});
   wrap.addEventListener("touchmove",onMove,{passive:false});
   wrap.addEventListener("touchend",onEnd,{passive:true});
   wrap.addEventListener("touchcancel",onEnd,{passive:true});
@@ -6277,13 +6379,14 @@ function bindImageEditorTestTouch(){
   wrap.dataset.testTouchBound="1";
   let rafId=0;
   const refresh=()=>{if(rafId)return;rafId=requestAnimationFrame(()=>{rafId=0;syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()})};
-  const release=()=>{imageEditorTouch=null;wrap.classList.remove("is-dragging")};
+  const release=()=>{imageEditorTouch=null;wrap.classList.remove("is-dragging","is-pinch-active")};
   const onStart=e=>{
     if(!e.touches)return;
     const t=imageTemplateById(imageEditorState.templateId);
     if(e.touches.length===2&&imageEditorState.interactionMode==="edit"){
+      e.preventDefault();
       imageEditorTouch={mode:"pinch",block:imageEditorState.activeBlock,startDist:imageEditorTouchDistance(e.touches),startSize:imageEditorState.activeBlock==="source"?imageEditorState.sourceSize:imageEditorState.fontSize};
-      wrap.classList.add("is-dragging");
+      wrap.classList.add("is-dragging","is-pinch-active");
       return;
     }
     if(e.touches.length!==1)return;
@@ -6331,7 +6434,7 @@ function bindImageEditorTestTouch(){
     }
     release();
   };
-  wrap.addEventListener("touchstart",onStart,{passive:true});
+  wrap.addEventListener("touchstart",onStart,{passive:false});
   wrap.addEventListener("touchmove",onMove,{passive:false});
   wrap.addEventListener("touchend",onEnd,{passive:true});
   wrap.addEventListener("touchcancel",onEnd,{passive:true});
@@ -6376,10 +6479,11 @@ function bindImageEditorTest(){
   const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};
   const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();
   bindImageEditorTestTouch();
+  bindImageEditorTextExpand();
   renderImageEditorCanvas();
   downloadImageEditor();
 }
-function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bindImageEditorTest();if(currentRoute.view!=="image-editor")return;document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets();render()}});document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorSourceSize"].forEach(id=>{const el=$(id);if(!el)return;el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")}});const auto=$("imageEditorAutoFit");if(auto)auto.onclick=()=>autoFitImageEditor();const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();bindImageEditorTouch();renderImageEditorCanvas();downloadImageEditor()}
+function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bindImageEditorTest();if(currentRoute.view!=="image-editor")return;document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;resetImageEditorOffsets();render()}});document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorSourceSize"].forEach(id=>{const el=$(id);if(!el)return;el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")}});const auto=$("imageEditorAutoFit");if(auto)auto.onclick=()=>autoFitImageEditor();const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();bindImageEditorTextExpand();bindImageEditorTouch();renderImageEditorCanvas();downloadImageEditor()}
 function renderMore(){const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const ramadan=seasonalIslamicContext()?listCard("Ramaḍān & ʿĪd","Saisonale Beiträge & Zeiten","ramadan","","🌙"):"";const account=accountSession()?`${accountSession().username} · Sync aktiv`:"Anmeldename + PIN";return `${setHeader("Mehr","Gelehrte, Bücher, Kalender und persönliche Bereiche.","Menü")}${renderThemeSwitchPanel()}<section class="grid-list">${listCard("Mein Bereich",account,"account","","🔐")}${ramadan}${listCard("Bild-Beitrag","Vorlage wählen, Text setzen, teilen","image-editor","","🖼️")}${listCard("Bild-Editor (Test)","Neue Power-Version · Vorschau","image-editor-test","","🧪")}${listCard("Qurʾān","114 Suren · Arabisch & Lautschrift","quran","","📖")}${listCard("Gelehrte",scholarCount+" Namen","scholars","","👤")}${listCard("Bücher",bookCount+" Werke","books","","📖")}${listCard("Islamischer Kalender","Hijrī-Termine","calendar","","🗓️")}${listCard("Favoriten",savedIds().length+" gespeichert","saved","","♡")}${listCard("Über die App","Maßstab & Quellen","about","","ℹ️")}</section>`}
 function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
 function dailyDua(){if(!DUAS.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return DUAS[Math.abs(day)%DUAS.length]}
@@ -6455,10 +6559,13 @@ function getRelatedPosts(post){
   return posts.filter(p=>p.id!==post.id && (p.category===post.category || p.scholar===post.scholar || p.book===post.book)).slice(0,3);
 }
 function renderPostNavigation(post){
-  const index=posts.findIndex(p=>String(p.id)===String(post.id));
-  const prev=index>0?posts[index-1]:null;
-  const next=index>=0&&index<posts.length-1?posts[index+1]:null;
-  return `<div class="nav-posts"><button type="button" ${prev?`data-nav="post" data-value="${esc(prev.id)}"`:"disabled"}>← ${prev?"Vorheriger Beitrag":"Kein vorheriger Beitrag"}</button><button type="button" ${next?`data-nav="post" data-value="${esc(next.id)}"`:"disabled"}>${next?"Nächster Beitrag":"Kein nächster Beitrag"} →</button></div>`;
+  const browseIds=getPostBrowseIds();
+  const ids=browseIds.length?browseIds:posts.map(p=>String(p.id));
+  const curId=String(post.id);
+  const index=ids.indexOf(curId);
+  const prev=index>0?ids[index-1]:null;
+  const next=index>=0&&index<ids.length-1?ids[index+1]:null;
+  return `<div class="nav-posts"><button type="button" ${prev?`data-nav="post" data-value="${esc(prev)}"`:"disabled"}>← ${prev?"Vorheriger Beitrag":"Kein vorheriger Beitrag"}</button><button type="button" ${next?`data-nav="post" data-value="${esc(next)}"`:"disabled"}>${next?"Nächster Beitrag":"Kein nächster Beitrag"} →</button></div>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -6476,7 +6583,7 @@ function renderPost(id){
   const related=getRelatedPosts(post);
   return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div><section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}${renderSourceStatus(post)}${shareLinksForPost(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
 }
-function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
+function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");updateBottomNav(route);if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",topics:"Kategorien",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",ramadan:"Ramaḍān & ʿĪd",series:"Serie",statistik:"Statistik",more:"Mehr","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
@@ -6691,6 +6798,16 @@ function markFloatTouchbarActivated(){
   if(bar)bar.classList.remove("is-intro");
   setTimeout(collapseFloatTouchbar,320);
 }
+function initAppZoomLock(){
+  if(window.__appZoomLockBound)return;
+  window.__appZoomLockBound=true;
+  ["gesturestart","gesturechange","gestureend"].forEach(type=>{document.addEventListener(type,e=>{if(e.target?.closest?.("#imageEditorTouchWrap,.ie-power-touch-wrap"))return;e.preventDefault()},{passive:false})});
+  document.addEventListener("touchmove",e=>{
+    if(e.touches.length<2)return;
+    if(e.target?.closest?.("#imageEditorTouchWrap,.ie-power-touch-wrap"))return;
+    e.preventDefault();
+  },{passive:false});
+}
 function initFloatTouchbar(){
   const bar=$("floatActions");
   const panel=$("floatActionsPanel");
@@ -6786,6 +6903,7 @@ window.addEventListener("DOMContentLoaded",()=>{
   applyStandalonePwaClass();
   trackStandaloneInstallIfNeeded();
   initAndroidTapCleanup();
+  initAppZoomLock();
   bindBottomNav();
   initBottomNavSwipe();
   initBottomNavContentSwipe();
