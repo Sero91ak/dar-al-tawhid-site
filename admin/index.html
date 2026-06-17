@@ -198,6 +198,18 @@ button{cursor:pointer}
 .planner-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
 .notice-note{border:1px dashed rgba(239,215,142,.30);border-radius:14px;background:rgba(239,215,142,.06);padding:11px;color:var(--soft);font-size:11px;line-height:1.55}
 .push-test-card{grid-column:1/-1;cursor:default}
+.telegram-panel{border:1px solid rgba(42,171,238,.28);border-radius:16px;background:linear-gradient(145deg,rgba(42,171,238,.08),rgba(0,0,0,.18));padding:12px;display:grid;gap:10px;margin-top:10px}
+.telegram-panel h4{margin:0;color:#dff3ff;font-family:var(--serif);font-size:18px}
+.telegram-options{display:grid;gap:8px}
+.telegram-option{display:flex;align-items:flex-start;gap:8px;color:var(--soft);font-size:11.5px;line-height:1.45}
+.telegram-option input{margin-top:2px}
+.telegram-preview{border:1px solid rgba(42,171,238,.22);border-radius:14px;background:rgba(0,0,0,.24);padding:12px;max-height:360px;overflow:auto;font-size:12.5px;line-height:1.55;color:#f7f0df;white-space:pre-wrap}
+.telegram-preview b,.telegram-preview strong{color:#fff4cc}
+.telegram-preview i,.telegram-preview em{font-style:italic;color:#fff8e8}
+.telegram-preview blockquote{margin:8px 0;padding:8px 10px;border-left:3px solid rgba(42,171,238,.55);background:rgba(42,171,238,.08);color:#fff7df}
+.telegram-meta{display:flex;flex-wrap:wrap;gap:8px}
+.telegram-meta .status-pill{margin:0}
+.telegram-actions{display:flex;flex-wrap:wrap;gap:8px}
 .push-test-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px}
 .tab-order-list{display:grid;gap:8px}
 .tab-order-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:9px}
@@ -325,6 +337,7 @@ const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
 const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
+const ADMIN_TELEGRAM_PREFS_KEY="darAdminTelegramPrefsV1";
 const DEFAULT_ADMIN_TABS=[
   ["actions","Aktionen"],
   ["start","Start"],
@@ -340,6 +353,8 @@ const DEFAULT_ADMIN_TABS=[
 ];
 let refreshTimer=null,authed=false,lastData=null,currentTab="actions",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0,adminShellScrollY=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
+let telegramPrefs=readTelegramPrefs();
+let telegramPreviewData=null,telegramPreviewBusy=false,telegramPreviewError="",telegramResendArmed=false,telegramPreviewTimer=null;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
@@ -583,7 +598,7 @@ function normalizeMarkdownForUpload(markdown,nextNumber){
   }
   return out+"\n";
 }
-async function publishPostViaWorkerRequest(markdown,filename){
+async function publishPostViaWorkerRequest(markdown,filename,extra={}){
   const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
   const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
@@ -594,7 +609,7 @@ async function publishPostViaWorkerRequest(markdown,filename){
   const res=await fetch(resolveWorkerUrl(publishUrl),{
     method:"POST",
     headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
-    body:JSON.stringify({markdown,filename})
+    body:JSON.stringify({markdown,filename,...extra})
   });
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
@@ -614,8 +629,264 @@ async function workerPostRequest(path,payload){
     body:JSON.stringify(payload||{})
   });
   const data=await res.json().catch(()=>({}));
-  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  if(!res.ok||!data.ok)throw new Error(data.error||data.message||`Worker Fehler ${res.status}`);
   return data;
+}
+function readTelegramPrefs(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(ADMIN_TELEGRAM_PREFS_KEY)||"{}");
+    const mode=saved.mode==="image"||saved.mode==="both"||saved.mode==="text"?saved.mode:"text";
+    return{
+      enabled:!!saved.enabled,
+      mode,
+      modeImage:mode==="image"||!!saved.modeImage,
+      modeBoth:mode==="both"||!!saved.modeBoth,
+      imageBase64:"",
+      imageMime:"image/png",
+      imageName:saved.imageName||""
+    };
+  }catch(e){
+    return{enabled:false,mode:"text",modeImage:false,modeBoth:false,imageBase64:"",imageMime:"image/png",imageName:""};
+  }
+}
+function saveTelegramPrefs(){
+  try{
+    localStorage.setItem(ADMIN_TELEGRAM_PREFS_KEY,JSON.stringify({
+      enabled:!!telegramPrefs.enabled,
+      mode:resolveTelegramMode(),
+      modeImage:!!telegramPrefs.modeImage,
+      modeBoth:!!telegramPrefs.modeBoth,
+      imageName:telegramPrefs.imageName||""
+    }));
+  }catch(e){}
+}
+function resolveTelegramMode(){
+  const mode=telegramPrefs.mode||"text";
+  return mode==="both"||mode==="image"||mode==="text"?mode:"text";
+}
+function syncTelegramPrefsFromUi(){
+  telegramPrefs.enabled=!!document.getElementById("telegramEnabledInput")?.checked;
+  const mode=document.querySelector('input[name="telegramMode"]:checked')?.value||"text";
+  telegramPrefs.mode=mode;
+  telegramPrefs.modeImage=mode==="image";
+  telegramPrefs.modeBoth=mode==="both";
+  saveTelegramPrefs();
+}
+function renderTelegramValidationList(validation){
+  if(!validation)return `<div class="upload-status">Telegram-Vorschau wird geladen…</div>`;
+  const rows=[
+    ...(validation.errors||[]).map(msg=>`<div class="status-row"><span><b>Blockiert</b><br>${esc(msg)}</span><strong class="status-pill">Fehler</strong></div>`),
+    ...(validation.warnings||[]).map(msg=>`<div class="status-row"><span><b>Hinweis</b><br>${esc(msg)}</span><strong class="status-pill">Warnung</strong></div>`)
+  ];
+  if(!rows.length)rows.push(`<div class="status-row"><span><b>Format</b><br>Telegram-Text entspricht den DAR-Regeln.</span><strong class="status-pill">OK</strong></div>`);
+  return `<div class="status-list">${rows.join("")}</div>`;
+}
+function renderTelegramPreviewHtml(html){
+  if(!html)return `<div class="upload-status">Noch keine Telegram-Vorschau.</div>`;
+  return `<div class="telegram-preview">${html}</div>`;
+}
+function renderTelegramPanel(){
+  const mode=resolveTelegramMode();
+  const validation=telegramPreviewData?.validation;
+  const length=validation?.length||0;
+  const limit=validation?.limit||4096;
+  const imageName=telegramPrefs.imageName||"";
+  return `<div class="telegram-panel" id="telegramPanel">
+    <h4>Telegram · @dar_al_tauhid</h4>
+    <div class="telegram-options">
+      <label class="telegram-option"><input id="telegramEnabledInput" type="checkbox" ${telegramPrefs.enabled?"checked":""}> <span><b>Auch auf Telegram posten</b><br>Nichts wird ungeprüft versendet – Vorschau und Regeln gelten vor dem Senden.</span></label>
+      <label class="telegram-option"><input id="telegramModeTextInput" type="radio" name="telegramMode" value="text" ${mode==="text"?"checked":""} ${!telegramPrefs.enabled?"disabled":""}> <span>Als Telegram-Text posten</span></label>
+      <label class="telegram-option"><input id="telegramModeImageInput" type="radio" name="telegramMode" value="image" ${mode==="image"?"checked":""} ${!telegramPrefs.enabled?"disabled":""}> <span>Als Telegram-Bildbeitrag posten (1080×1350 PNG/JPG)</span></label>
+      <label class="telegram-option"><input id="telegramModeBothInput" type="radio" name="telegramMode" value="both" ${mode==="both"?"checked":""} ${!telegramPrefs.enabled?"disabled":""}> <span>Text + Bildbeitrag posten</span></label>
+      <label class="telegram-option"><input id="telegramImageInput" type="file" accept="image/png,image/jpeg,image/jpg" ${mode==="text"||!telegramPrefs.enabled?"disabled":""}> <span>Bildbeitrag wählen ${imageName?`· <strong>${esc(imageName)}</strong>`:""}</span></label>
+    </div>
+    <div class="telegram-meta">
+      <strong class="status-pill">${telegramPreviewBusy?"Lädt…":validation?.ok?"Bereit":"Prüfen"}</strong>
+      <strong class="status-pill">${length}/${limit} Zeichen</strong>
+      <strong class="status-pill">${mode==="text"?"Nur Text":mode==="image"?"Nur Bild":"Text + Bild"}</strong>
+    </div>
+    ${telegramPreviewError?`<div class="upload-status">Telegram-Vorschau: ${esc(telegramPreviewError)}</div>`:""}
+    ${renderTelegramPreviewHtml(telegramPreviewData?.html||"")}
+    ${renderTelegramValidationList(validation)}
+    <div class="telegram-actions">
+      <button class="btn" id="telegramPreviewBtn" type="button">Telegram-Vorschau aktualisieren</button>
+      <button class="btn primary" id="telegramTestBtn" type="button">Telegram-Test senden</button>
+      <button class="btn" id="telegramResendBtn" type="button" ${telegramResendArmed?"":"disabled"}>Telegram erneut senden</button>
+    </div>
+    <div class="upload-status">Bot-Token bleibt nur als Cloudflare Secret. Die Admin-App sendet Markdown an den Worker; der Worker formatiert HTML und postet in @dar_al_tauhid.</div>
+  </div>`;
+}
+function scheduleTelegramPreview(){
+  if(telegramPreviewTimer)clearTimeout(telegramPreviewTimer);
+  telegramPreviewTimer=setTimeout(()=>{refreshTelegramPreview({silent:true}).catch(()=>{})},650);
+}
+async function refreshTelegramPreview({silent=false}={}){
+  const markdown=(document.getElementById("postMarkdownInput")?.value||draftMarkdown||"").trim();
+  if(!markdown){
+    telegramPreviewData=null;
+    telegramPreviewError="";
+    if(!silent)updateTelegramPanel();
+    return null;
+  }
+  telegramPreviewBusy=true;
+  telegramPreviewError="";
+  if(!silent)updateTelegramPanel();
+  try{
+    const postId=frontmatterValue(markdown,"id");
+    const data=await workerPostRequest("telegram/preview",{markdown,postId});
+    telegramPreviewData=data.preview||null;
+    telegramPreviewBusy=false;
+    if(!silent)updateTelegramPanel();
+    return telegramPreviewData;
+  }catch(e){
+    telegramPreviewBusy=false;
+    telegramPreviewError=e.message||String(e);
+    if(!silent)updateTelegramPanel();
+    throw e;
+  }
+}
+async function sendTelegramTest(){
+  syncTelegramPrefsFromUi();
+  setUploadStatus("Sende Telegram-Test…");
+  try{
+    const result=await workerPostRequest("telegram/test",{});
+    setUploadStatus(`Telegram-Test gesendet.<br>Nachricht-ID: <strong>${esc(String(result.telegram?.telegramMessageId||"ok"))}</strong>`);
+    addAdminLog("Telegram","Test gesendet","@dar_al_tauhid");
+    toast("Telegram-Test gesendet");
+  }catch(e){
+    setUploadStatus(`Telegram-Test fehlgeschlagen: ${esc(e.message||e)}`);
+    addAdminLog("Fehler","Telegram-Test fehlgeschlagen",e.message||String(e));
+  }
+}
+async function resendTelegramPost(){
+  syncTelegramPrefsFromUi();
+  draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
+  if(!draftMarkdown.trim()){setUploadStatus("Markdown fehlt für Telegram-Neusendung.");return}
+  if(!confirm("Diesen Beitrag wirklich erneut an Telegram senden? Es entsteht ein weiterer Kanal-Post."))return;
+  try{
+    setUploadStatus("Sende Telegram erneut…");
+    const built=buildTelegramPublishPayload(draftMarkdown,draftFilename,true);
+    const result=await workerPostRequest("telegram/send",{
+      markdown:built.markdown,
+      filename:built.filename,
+      postId:frontmatterValue(built.markdown,"id"),
+      mode:built.telegram.mode,
+      imageBase64:built.telegram.imageBase64,
+      imageMime:built.telegram.imageMime,
+      forceResend:true
+    });
+    renderTelegramPublishStatus(result.telegram||result);
+    addAdminLog("Telegram","Erneut gesendet",draftFilename||"Beitrag");
+  }catch(e){
+    setUploadStatus(`Telegram erneut senden fehlgeschlagen: ${esc(e.message||e)}`);
+  }
+}
+function buildTelegramPublishPayload(markdown,filename,forceResend=false){
+  syncTelegramPrefsFromUi();
+  const mode=resolveTelegramMode();
+  const payload={markdown,filename,postId:frontmatterValue(markdown,"id"),mode,forceResend:!!forceResend};
+  if(mode==="image"||mode==="both"){
+    payload.imageBase64=telegramPrefs.imageBase64||"";
+    payload.imageMime=telegramPrefs.imageMime||"image/png";
+  }
+  return{
+    markdown,
+    filename,
+    telegram:telegramPrefs.enabled?{
+      enabled:true,
+      mode,
+      imageBase64:payload.imageBase64||"",
+      imageMime:payload.imageMime||"image/png",
+      forceResend:!!forceResend
+    }:{enabled:false}
+  };
+}
+function renderTelegramPublishStatus(telegram,websiteResult=null){
+  const websiteLine=websiteResult?`Website: <strong>${esc(websiteResult.filename||"")}</strong> · Commit <strong>${esc(websiteResult.commitSha||"ok")}</strong><br>`:"";
+  if(!telegram||telegram.skipped&&!telegram.duplicateBlocked&&telegram.telegramStatus==="not_sent"){
+    if(websiteResult)setUploadStatus(`${websiteLine}Telegram: nicht aktiviert.`);
+    return;
+  }
+  if(telegram.telegramStatus==="sent"){
+    setUploadStatus(`${websiteLine}Telegram: <strong>gesendet</strong> · Nachricht-ID <strong>${esc(String(telegram.telegramMessageId||""))}</strong>`);
+    telegramResendArmed=true;
+    return;
+  }
+  if(telegram.duplicateBlocked){
+    setUploadStatus(`${websiteLine}Telegram: <strong>übersprungen</strong> – Beitrag wurde bereits gesendet. Für erneutes Senden den Button „Telegram erneut senden“ nutzen.`);
+    telegramResendArmed=true;
+    return;
+  }
+  setUploadStatus(`${websiteLine}Website veröffentlicht, Telegram fehlgeschlagen.<br>Fehler: <strong>${esc(String(telegram.telegramError||"Unbekannt"))}</strong>${telegram.telegramErrorCode?`<br>Code: <strong>${esc(String(telegram.telegramErrorCode))}</strong>`:""}<br><button class="btn" id="telegramRetryInlineBtn" type="button">Telegram erneut senden</button>`);
+  telegramResendArmed=true;
+  const retry=document.getElementById("telegramRetryInlineBtn");
+  if(retry)retry.onclick=()=>resendTelegramPost();
+}
+function updateTelegramPanel(){
+  const panel=document.getElementById("telegramPanel");
+  if(!panel)return;
+  const fresh=renderTelegramPanel();
+  const tmp=document.createElement("div");
+  tmp.innerHTML=fresh;
+  panel.replaceWith(tmp.firstElementChild);
+  bindTelegramUi();
+}
+async function loadTelegramImageFile(file){
+  if(!file)return;
+  if(!/^image\/(png|jpeg|jpg)$/i.test(file.type||""))throw new Error("Nur PNG oder JPG erlaubt");
+  const dataUrl=await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(String(reader.result||""));
+    reader.onerror=()=>reject(new Error("Bild konnte nicht gelesen werden"));
+    reader.readAsDataURL(file);
+  });
+  const img=await new Promise((resolve,reject)=>{
+    const el=new Image();
+    el.onload=()=>resolve(el);
+    el.onerror=()=>reject(new Error("Bild konnte nicht geladen werden"));
+    el.src=dataUrl;
+  });
+  if(Math.abs(img.width-1080)>4||Math.abs(img.height-1350)>4){
+    throw new Error(`Bild muss 1080×1350 px sein (aktuell: ${img.width}×${img.height})`);
+  }
+  telegramPrefs.imageBase64=dataUrl;
+  telegramPrefs.imageMime=file.type||"image/png";
+  telegramPrefs.imageName=file.name||"bild.png";
+  saveTelegramPrefs();
+}
+function bindTelegramUi(){
+  const enabled=document.getElementById("telegramEnabledInput");
+  if(enabled)enabled.onchange=()=>{syncTelegramPrefsFromUi();updateTelegramPanel();scheduleTelegramPreview()};
+  ["telegramModeTextInput","telegramModeImageInput","telegramModeBothInput"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.onchange=()=>{
+      telegramPrefs.modeImage=id==="telegramModeImageInput"&&el.checked;
+      telegramPrefs.modeBoth=id==="telegramModeBothInput"&&el.checked;
+      if(id==="telegramModeTextInput"&&el.checked){telegramPrefs.modeImage=false;telegramPrefs.modeBoth=false}
+      if(telegramPrefs.modeBoth)telegramPrefs.modeImage=false;
+      saveTelegramPrefs();
+      updateTelegramPanel();
+    };
+  });
+  const imageInput=document.getElementById("telegramImageInput");
+  if(imageInput)imageInput.onchange=async e=>{
+    const file=e.target.files&&e.target.files[0];
+    if(!file)return;
+    try{
+      await loadTelegramImageFile(file);
+      setUploadStatus(`Bildbeitrag bereit: <strong>${esc(telegramPrefs.imageName)}</strong> (1080×1350)`);
+      updateTelegramPanel();
+    }catch(err){
+      setUploadStatus(`Bildbeitrag: ${esc(err.message||err)}`);
+    }
+  };
+  const previewBtn=document.getElementById("telegramPreviewBtn");
+  if(previewBtn)previewBtn.onclick=()=>refreshTelegramPreview().catch(e=>setUploadStatus(`Telegram-Vorschau: ${esc(e.message||e)}`));
+  const testBtn=document.getElementById("telegramTestBtn");
+  if(testBtn)testBtn.onclick=()=>sendTelegramTest();
+  const resendBtn=document.getElementById("telegramResendBtn");
+  if(resendBtn)resendBtn.onclick=()=>resendTelegramPost();
 }
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
@@ -981,6 +1252,7 @@ function renderActions(rows,installs=installTotals()){
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
           <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
+          ${renderTelegramPanel()}
           <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
           <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
@@ -1113,7 +1385,7 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
-  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview()};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview();scheduleTelegramPreview()};
   const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview()};
   const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
   const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
@@ -1125,6 +1397,7 @@ function bindUi(){
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
+  bindTelegramUi();
   bindCommandCenterForms();
   bindRankCards();
 }
@@ -1231,9 +1504,29 @@ async function uploadPostViaWorker(){
   if(uploadBusy)return;
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
+  syncTelegramPrefsFromUi();
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
   const preview=markdownPreviewData(draftMarkdown);
-  const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`);
+  if(telegramPrefs.enabled){
+    try{
+      const tg=await refreshTelegramPreview({silent:true});
+      if(!tg?.validation?.ok){
+        setUploadStatus(`Telegram blockiert:<br>${esc((tg?.validation?.errors||["Unbekannter Fehler"]).join(" · "))}`);
+        updateTelegramPanel();
+        return;
+      }
+      const mode=resolveTelegramMode();
+      if((mode==="image"||mode==="both")&&!telegramPrefs.imageBase64){
+        setUploadStatus("Telegram-Bildbeitrag fehlt. Bitte 1080×1350 PNG/JPG wählen.");
+        return;
+      }
+    }catch(e){
+      setUploadStatus(`Telegram-Vorschau fehlgeschlagen: ${esc(e.message||e)}`);
+      return;
+    }
+  }
+  const tgNote=telegramPrefs.enabled?`\n\nTelegram: ${resolveTelegramMode()==="text"?"Text":resolveTelegramMode()==="image"?"Bildbeitrag":"Text + Bild"}`:"";
+  const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}${tgNote}`);
   if(!ok){setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
@@ -1243,11 +1536,21 @@ async function uploadPostViaWorker(){
     if(!/^[a-z0-9][a-z0-9-]*\.md$/i.test(draftFilename)){setUploadStatus("Dateiname muss eine .md-Datei ohne Leerzeichen sein.");return}
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    const publishExtra=buildTelegramPublishPayload(markdown,draftFilename,false);
     setUploadStatus("Sende Beitrag an Cloudflare Worker...");
-    const result=await publishPostViaWorkerRequest(markdown,draftFilename);
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename,publishExtra);
     draftFilename=result.filename||draftFilename;
     draftMarkdown=markdown;draftNextNumber=result.number||next;
-    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
+    if(result.telegram&&telegramPrefs.enabled){
+      renderTelegramPublishStatus(result.telegram,{filename:draftFilename,commitSha:result.commitSha||""});
+      if(result.telegram.telegramStatus==="sent"){
+        addAdminLog("Telegram","Mit Beitrag gesendet",draftFilename);
+      }else if(result.telegram.telegramStatus==="failed"){
+        addAdminLog("Fehler","Website ok, Telegram fehlgeschlagen",result.telegram.telegramError||draftFilename);
+      }
+    }else{
+      setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
+    }
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
     saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
     toast("Beitrag hochgeladen");
@@ -1291,6 +1594,8 @@ document.addEventListener("touchend",e=>{
 },{passive:true});
 window.addEventListener("error",e=>{const panel=document.getElementById("panel");if(!panel)return;const msg=String(e.message||e.error||"Unbekannter Fehler");panel.innerHTML=`<section class="login"><h2>Admin Fehler</h2><p>${esc(msg)}</p><button class="btn primary" type="button" onclick="location.reload()">Neu laden</button><button class="btn" type="button" onclick="window.__DAR_ADMIN_REPAIR__&&window.__DAR_ADMIN_REPAIR__()">Cache reparieren</button></section>`});
 loadLocalDraft();
+telegramPrefs=readTelegramPrefs();
+if(draftMarkdown.trim())setTimeout(()=>refreshTelegramPreview({silent:true}).catch(()=>{}),500);
 authed=readAuth();
 renderApp();
 </script>
