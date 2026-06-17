@@ -52,3 +52,15 @@ jobs:
             exit 1
           fi
           echo "posts-index.json OK ($count entries)."
+
+      - name: Bild-Beitrag templates must exist
+        run: |
+          missing=0
+          for name in bibliothek-braun gruen-moschee nachtblau-buecher sanft-rose schwarz-buecher bordeaux petrol-pflanze olive-pflanze royal-blau sand-buecher; do
+            if [ ! -s "assets/post-templates/${name}.jpg" ]; then
+              echo "::error::Missing assets/post-templates/${name}.jpg"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then exit 1; fi
+          echo "Bild-Beitrag templates OK (10 files)."
