@@ -3,21 +3,16 @@
    GitHub Actions liest OneSignal-Subscriptions, prüft Nutzer-Tags und plant Pushs pro Standort. */
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
-const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_APP_API_KEY || process.env.ONESIGNAL_API_KEY;
+const API_KEY = process.env.ONESIGNAL_APP_API_KEY;
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de/#prayer";
 const crypto = require("crypto");
-const fs = require("fs");
-const { spawnSync } = require("node:child_process");
-const path = require("node:path");
 const {
   withNotificationIcons,
   postOneSignalNotification
 } = require("./lib/onesignal-push");
 const DEFAULT_PRAYER_ADVANCE_MINUTES = Number(process.env.PRAYER_ADVANCE_MINUTES || 15);
-const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || (48 * 60));
-const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 60);
-const PRAYER_STATUS_PATH = path.join(__dirname, "..", "content", "admin", "prayer-push-status.json");
-const REFERENCE_LOCATION = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
+const SCHEDULE_LOOKAHEAD_MINUTES = Number(process.env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || (26 * 60));
+const SCHEDULE_GRACE_MINUTES = Number(process.env.PRAYER_SCHEDULE_GRACE_MINUTES || 15);
 const SUPABASE_URL = String(process.env.SUPABASE_URL || "https://djyfkttjbdraynuxrzno.supabase.co").replace(/\/$/, "");
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const ONESIGNAL_AUTH_KEY = String(API_KEY || "")
@@ -297,15 +292,10 @@ function calculatePrayerTimes(localDate, lat, lon, timeZone, methodAngle, asrFac
       const startUtc = tahajjudStartForMode(maghribUtc, fajrUtc, normalizedTahajjud);
 
       if (startUtc) {
-        const startParts = getLocalParts(startUtc, timeZone);
-        const timeDecimal = fixHour(
-          startParts.hour + startParts.minute / 60 + startParts.second / 3600
-        );
-
         prayers.push({
           key: "tahajjud",
           name: "Taḥajjud",
-          time: timeDecimal,
+          time: null,
           sendAfter: startUtc
         });
       }
@@ -517,12 +507,7 @@ function getPrayerUsers(players) {
       tags.prayer_lon &&
       tags.prayer_timezone;
 
-    const subscriptionIds = p.subscriptionIds && p.subscriptionIds.length
-      ? p.subscriptionIds.filter(Boolean)
-      : [p.id].filter(Boolean);
-
     const subscribed =
-      subscriptionIds.length > 0 &&
       p.invalid_identifier !== true &&
       p.notification_types !== -2;
 
@@ -643,64 +628,31 @@ async function fetchSupabasePrayerRegistrations() {
 
 const PRAYER_NOTIFICATION_MESSAGES = {
   default: [
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
-    "Bewahre dein Gebet, denn es ist eine der gewaltigsten Pflichten.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
+    "Nimm dir jetzt bewusst Zeit für dein Gebet.",
+    "Bewahre dein Gebet und erinnere dich an Allah."
   ],
   fajr: [
-    "Beginne deinen Tag mit dem Gebet und dem Gedenken an ALLAH.",
-    "Starte den Tag mit Gehorsam gegenüber ALLAH.",
-    "Der Tag beginnt mit einer großen Gelegenheit zum Gebet.",
-    "Wenn der Ruf zum Gebet naht, bereite dein Herz vor.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
-  ],
-  dhuhr: [
-    "Halte am Mittagsgebet fest und ordne deinen Tag um ALLAH.",
-    "Nimm dir bewusst Zeit für Dhuhr und erinnere dich an ALLAH.",
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
-    "Lass die Dunyā nicht zwischen dir und deinem Gebet stehen.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
+    "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.",
+    "Fajr ist eingetreten. Starte den Tag mit Gehorsam gegenüber Allah.",
+    "Der Tag beginnt mit einer großen Gelegenheit zum Gebet."
   ],
   asr: [
     "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
-    "Achte besonders auf dieses Gebet.",
-    "Halte am ʿAṣr-Gebet fest und bewahre deine Zeit.",
-    "Das Gebet zu seiner Zeit gehört zu den wichtigsten Taten.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
-  ],
-  maghrib: [
-    "Schließe den Tagabschnitt mit Gehorsam gegenüber ALLAH ab.",
-    "Maghrib ist eingetreten – nimm dir Zeit für dein Gebet.",
-    "Danke ALLAH und bewahre dein Gebet zur richtigen Zeit.",
-    "Lass die Dunyā nicht zwischen dir und deinem Gebet stehen.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
+    "ʿAṣr ist eingetreten. Achte besonders auf dieses Gebet.",
+    "Halte am ʿAṣr-Gebet fest und bewahre deine Zeit."
   ],
   isha: [
-    "Schließe deinen Tag mit Gehorsam gegenüber ALLAH ab.",
-    "Beende den Tag mit Gebet und Ruhe.",
-    "Nimm dir am Ende des Tages Zeit für dein Gebet.",
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
+    "Schließe deinen Tag mit Gehorsam gegenüber Allah ab.",
+    "ʿIshāʾ ist eingetreten. Beende den Tag mit Gebet und Ruhe.",
+    "Nimm dir am Ende des Tages Zeit für dein Gebet."
   ],
   tahajjud: [
-    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu ALLAH.",
-    "Steh in der stillen Nacht für deinen Herrn auf – selbst wenige Rakʿāt sind kostbar.",
-    "Nutze die Zeit vor Fajr für Bittgebet, Reue und Nähe zu ALLAH.",
-    "Das Nachtgebet bringt dem Gläubigen Licht, Trost und Nähe zu seinem Herrn.",
-    "Wende dich in der Stille der Nacht ALLAH zu – Er ist nah und erhört das Bittgebet."
+    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
+    "Steh für Allah auf, auch wenn es nur wenige Rakʿāt sind.",
+    "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
   ]
 };
-
-function formatHourFromUtcDate(date, timeZone) {
-  const parts = getLocalParts(date, timeZone);
-  return formatHour(parts.hour + parts.minute / 60 + parts.second / 3600);
-}
-
-function prayerTimeLabel(prayer, sendAfter, timeZone) {
-  if (prayer.time != null) return formatHour(prayer.time);
-  if (sendAfter && timeZone) return formatHourFromUtcDate(sendAfter, timeZone);
-  return "--:--";
-}
 
 function pickPrayerMessage(prayer, sendAfter, group) {
   const list = PRAYER_NOTIFICATION_MESSAGES[prayer.key] || PRAYER_NOTIFICATION_MESSAGES.default;
@@ -711,10 +663,7 @@ function pickPrayerMessage(prayer, sendAfter, group) {
 
 function prayerNotificationTitle(prayer, mode, group) {
   if (prayer.key === "tahajjud") {
-    const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
-    return mode === "advance"
-      ? `Taḥajjud in ${advanceMinutes} Min`
-      : "Taḥajjud-Erinnerung";
+    return "Taḥajjud-Erinnerung";
   }
 
   const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
@@ -723,27 +672,41 @@ function prayerNotificationTitle(prayer, mode, group) {
     : `${prayer.name} ist eingetreten`;
 }
 
-function prayerNotificationCopy(prayer, mode, group, sendAfter) {
+function prayerNotificationCopy(prayer, mode, group) {
   const isTahajjud = prayer.key === "tahajjud";
-  const timeLabel = prayerTimeLabel(prayer, sendAfter, group?.timeZone);
+  const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
   const advanceMinutes = normalizeAdvanceMinutes(group?.advanceMinutes);
-  const reminder = pickPrayerMessage(prayer, sendAfter, group);
 
-  let body;
   if (mode === "advance") {
-    body = isTahajjud
-      ? `Noch ${advanceMinutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf Taḥajjud vor. ${reminder}`
-      : `Noch ${advanceMinutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf das Gebet vor. ${reminder}`;
-  } else {
-    body = isTahajjud
-      ? `${timeLabel} Uhr – jetzt ist Gelegenheit für Taḥajjud. ${reminder}`
-      : `${timeLabel} Uhr – jetzt ist Gebetszeit. ${reminder}`;
+    return {
+      headings: {
+        de: prayerNotificationTitle(prayer, mode, group),
+        en: prayerNotificationTitle(prayer, mode, group)
+      },
+      contents: {
+        de: isTahajjud
+          ? "Taḥajjud-Erinnerung ist bald."
+          : `In ${advanceMinutes} Min · ${timeLabel} Uhr.`,
+        en: isTahajjud
+          ? "Taḥajjud-Erinnerung ist bald."
+          : `In ${advanceMinutes} Min · ${timeLabel} Uhr.`
+      }
+    };
   }
 
-  const title = prayerNotificationTitle(prayer, mode, group);
   return {
-    headings: { de: title, en: title },
-    contents: { de: body, en: body }
+    headings: {
+      de: prayerNotificationTitle(prayer, mode, group),
+      en: prayerNotificationTitle(prayer, mode, group)
+    },
+    contents: {
+      de: isTahajjud
+        ? "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah."
+        : "",
+      en: isTahajjud
+        ? "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah."
+        : ""
+    }
   };
 }
 
@@ -771,12 +734,17 @@ function scheduleIdentity(group, prayer, sendAfter, mode) {
   ].join("|");
 }
 
-async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "entry", stats = null) {
+async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "entry") {
   const ids = group.subscriptionIds.slice(0, 2000);
 
   if (!ids.length) return;
 
-  const copy = prayerNotificationCopy(prayer, mode, group, sendAfter);
+  const copy = prayerNotificationCopy(prayer, mode, group);
+  if (mode === "entry") {
+    const message = pickPrayerMessage(prayer, sendAfter, group);
+    copy.contents.de = message;
+    copy.contents.en = message;
+  }
 
   const body = withNotificationIcons({
     app_id: APP_ID,
@@ -793,213 +761,36 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
     body.send_after = sendAfter.toISOString();
   }
 
-  const timeLabel = prayer.time == null
-    ? sendAfter.toISOString()
-    : formatHour(prayer.time);
-
   try {
     const result = await postOneSignalNotification(body, API_KEY, { retries: 3 });
+    const timeLabel = prayer.time == null
+      ? sendAfter.toISOString()
+      : formatHour(prayer.time);
 
     console.log(
-      `Geplant (${mode}): ${prayer.name} ${timeLabel} | send_after=${body.send_after || "sofort"} | ${ids.length} Empfänger | ${group.timeZone} → ${result.text}`
+      `Geplant (${mode}): ${prayer.name} ${timeLabel} | ${ids.length} Nutzer | ${group.timeZone} → ${result.text}`
     );
-
-    if (stats) {
-      stats.scheduled += 1;
-      stats.recipients += ids.length;
-      stats.planned.push({
-        prayer: prayer.name,
-        key: prayer.key,
-        mode,
-        time: timeLabel,
-        sendAfter: sendAfter.toISOString(),
-        recipients: ids.length,
-        timeZone: group.timeZone
-      });
-      stats.oneSignalResponses.push({
-        prayer: prayer.key,
-        mode,
-        recipients: ids.length,
-        response: String(result.text || "").slice(0, 240)
-      });
-    }
   } catch (err) {
-    console.error(`OneSignal Sendefehler (${mode} ${prayer.name} ${timeLabel}):`, err.message || err);
-    if (stats) stats.errors += 1;
+    console.error(`OneSignal Sendefehler:`, err.message || err);
     process.exitCode = 1;
-  }
-}
-
-function mergePrayerPlayers(oneSignalPlayers, supabaseRegistrations) {
-  const bySub = new Map();
-
-  for (const player of oneSignalPlayers) {
-    const ids = player.subscriptionIds?.length ? player.subscriptionIds : [player.id].filter(Boolean);
-    for (const id of ids) {
-      if (!id) continue;
-      bySub.set(id, {
-        ...player,
-        tags: { ...(player.tags || {}) },
-        subscriptionIds: [id]
-      });
-    }
-  }
-
-  for (const player of supabaseRegistrations) {
-    const id = player.subscriptionIds?.[0] || player.id;
-    if (!id) continue;
-    const existing = bySub.get(id);
-    const tags = { ...(existing?.tags || {}), ...(player.tags || {}) };
-    if (!tags.prayer_lat && player.tags?.prayer_lat) Object.assign(tags, player.tags);
-    if (!tags.prayer_notifications && player.tags?.prayer_notifications) tags.prayer_notifications = player.tags.prayer_notifications;
-    bySub.set(id, {
-      ...(existing || player),
-      tags,
-      subscriptionIds: [id],
-      source: existing ? "merged" : "supabase"
-    });
-  }
-
-  return Array.from(bySub.values());
-}
-
-function filterGroupsBySubscription(groups, subscriptionId) {
-  const sid = String(subscriptionId || "").trim();
-  if (!sid) return groups;
-  return groups
-    .map((group) => ({
-      ...group,
-      subscriptionIds: group.subscriptionIds.filter((id) => id === sid)
-    }))
-    .filter((group) => group.subscriptionIds.length > 0);
-}
-
-function buildPrayerDiagnostics(overview) {
-  const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
-  const diagnostics = {};
-  keys.forEach((key) => {
-    const p = overview?.prayers?.[key];
-    if (!p) return;
-    const entryOk = p.entry?.status === "geplant";
-    const advanceOk = p.advance?.status === "geplant";
-    let answer;
-    if (entryOk && advanceOk) {
-      answer = `${p.name} ${p.time}: Vorab und Gebetszeit geplant (${p.entry.recipients} Empfänger).`;
-    } else if (entryOk) {
-      answer = `${p.name} ${p.time}: Gebetszeit geplant, Vorab ${p.advance?.status || "offen"}.`;
-    } else if (p.entry?.status === "übersprungen") {
-      answer = `${p.name} ${p.time}: übersprungen – Scheduler zu spät oder Zeitfenster vorbei.`;
-    } else {
-      answer = `${p.name} ${p.time || "--:--"}: nicht geplant – keine Empfänger oder außerhalb des Fensters.`;
-    }
-    diagnostics[key] = {
-      name: p.name,
-      time: p.time,
-      advance: p.advance,
-      entry: p.entry,
-      answer
-    };
-  });
-  return diagnostics;
-}
-
-function localDateKey(date, timeZone) {
-  const p = getLocalParts(date, timeZone);
-  return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
-}
-
-function buildTodayPrayerOverview(planned, skippedPastDetails, reference = REFERENCE_LOCATION) {
-  const localDate = todayLocalDate(reference.timeZone);
-  const dateKey = localDateKey(new Date(), reference.timeZone);
-  const prayers = calculatePrayerTimes(
-    localDate,
-    reference.lat,
-    reference.lon,
-    reference.timeZone,
-    12,
-    1,
-    "off"
-  );
-  const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
-  const overview = {};
-
-  for (const key of keys) {
-    const ref = prayers.find((p) => p.key === key);
-    const time = ref?.time == null ? null : formatHour(ref.time);
-    const advancePlanned = planned.filter((p) => p.key === key && p.mode === "advance" && localDateKey(new Date(p.sendAfter), reference.timeZone) === dateKey);
-    const entryPlanned = planned.filter((p) => p.key === key && p.mode === "entry" && localDateKey(new Date(p.sendAfter), reference.timeZone) === dateKey);
-    const skipped = skippedPastDetails.filter((p) => p.key === key);
-    const advanceRecipients = advancePlanned.reduce((sum, p) => sum + (p.recipients || 0), 0);
-    const entryRecipients = entryPlanned.reduce((sum, p) => sum + (p.recipients || 0), 0);
-
-    overview[key] = {
-      name: ref?.name || key,
-      time,
-      advance: {
-        status: advancePlanned.length ? "geplant" : skipped.some((s) => s.mode === "advance") ? "übersprungen" : "nicht geplant",
-        sendAfter: advancePlanned[0]?.sendAfter || skipped.find((s) => s.mode === "advance")?.sendAfter || null,
-        recipients: advanceRecipients,
-        count: advancePlanned.length
-      },
-      entry: {
-        status: entryPlanned.length ? "geplant" : skipped.some((s) => s.mode === "entry") ? "übersprungen" : "nicht geplant",
-        sendAfter: entryPlanned[0]?.sendAfter || skipped.find((s) => s.mode === "entry")?.sendAfter || null,
-        recipients: entryRecipients,
-        count: entryPlanned.length
-      }
-    };
-  }
-
-  return {
-    date: dateKey,
-    reference: `${reference.city} · ${reference.timeZone}`,
-    prayers: overview
-  };
-}
-
-function writePrayerPushStatus(report) {
-  fs.mkdirSync(path.dirname(PRAYER_STATUS_PATH), { recursive: true });
-  fs.writeFileSync(PRAYER_STATUS_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
-}
-
-function runDailyContentPushSync() {
-  const env = { ...process.env, FORCE_DAILY_SCHEDULE: "1" };
-  const result = spawnSync(process.execPath, [path.join(__dirname, "send-daily-content-push.js")], {
-    stdio: "inherit",
-    env
-  });
-
-  if (result.status !== 0) {
-    console.error(`Daily content push Exit-Code: ${result.status}`);
   }
 }
 
 (async function main() {
   const now = new Date();
-
-  runDailyContentPushSync();
-
   const windowStart = new Date(now.getTime() - SCHEDULE_GRACE_MINUTES * 60 * 1000);
   const windowEnd = new Date(now.getTime() + SCHEDULE_LOOKAHEAD_MINUTES * 60 * 1000);
-  const stats = { scheduled: 0, skippedPast: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0, planned: [], skippedPastDetails: [], oneSignalResponses: [] };
 
   console.log("Lese OneSignal-Subscriptions mit Gebetszeiten-Tags...");
   console.log(`Planungsfenster: ${windowStart.toISOString()} bis ${windowEnd.toISOString()}`);
 
   const oneSignalPlayers = await fetchSubscriptions();
   const supabaseRegistrations = await fetchSupabasePrayerRegistrations();
-  const players = mergePrayerPlayers(oneSignalPlayers, supabaseRegistrations);
+  const players = [...oneSignalPlayers, ...supabaseRegistrations];
   const users = getPrayerUsers(players);
-  let groups = groupUsers(users);
-  const singleSubscription = String(process.env.SCHEDULE_SUBSCRIPTION_ID || "").trim();
-  if (singleSubscription) {
-    groups = filterGroupsBySubscription(groups, singleSubscription);
-    console.log(`Sofort-Planung für Subscription ${singleSubscription}: ${groups.length} Standort-Gruppe(n)`);
-  }
-  const taggedCount = players.filter((p) => p.tags?.prayer_notifications === "true" && p.tags?.prayer_lat).length;
+  const groups = groupUsers(users);
 
   console.log(`Subscriptions gesamt: ${players.length} (${oneSignalPlayers.length} OneSignal, ${supabaseRegistrations.length} Supabase)`);
-  console.log(`Gebets-Tags (OneSignal/Supabase): ${taggedCount}`);
   console.log(`Gebetszeiten-Nutzer mit Standort: ${users.length}`);
   console.log(`Standort-Gruppen: ${groups.length}`);
 
@@ -1046,117 +837,29 @@ function runDailyContentPushSync() {
           { mode: "entry", sendAfter: entryAt }
         ];
 
-        if (prayer.key !== "sunrise") {
+        if (prayer.key !== "sunrise" && prayer.key !== "tahajjud") {
           const advanceAt = new Date(entryAt.getTime() - normalizeAdvanceMinutes(group.advanceMinutes) * 60 * 1000);
           schedules.push({ mode: "advance", sendAfter: advanceAt });
         }
 
         for (const schedule of schedules) {
           const identity = scheduleIdentity(group, prayer, schedule.sendAfter, schedule.mode);
-          if (plannedInRun.has(identity)) {
-            stats.duplicates += 1;
-            continue;
-          }
+          if (plannedInRun.has(identity)) continue;
           plannedInRun.add(identity);
 
           if (schedule.sendAfter < windowStart) {
             const label = prayer.time == null ? prayer.name : formatHour(prayer.time);
             console.log(`Übersprungen, bereits vorbei (${schedule.mode}): ${prayer.name} ${label} | ${group.timeZone}`);
-            stats.skippedPast += 1;
-            stats.skippedPastDetails.push({
-              key: prayer.key,
-              prayer: prayer.name,
-              mode: schedule.mode,
-              sendAfter: schedule.sendAfter.toISOString(),
-              time: label,
-              timeZone: group.timeZone,
-              reason: "vorbei"
-            });
             continue;
           }
 
           if (schedule.sendAfter > windowEnd) {
-            stats.skippedWindow += 1;
             continue;
           }
 
-          await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode, stats);
+          await sendOneSignalToSubscriptions(group, prayer, schedule.sendAfter, schedule.mode);
         }
       }
     }
-  }
-
-  console.log("--- Gebets-Push Zusammenfassung ---");
-  console.log(`Subscriptions gelesen: ${players.length}`);
-  console.log(`Nutzer mit Gebets-Tags: ${users.length}`);
-  console.log(`Standort-Gruppen: ${groups.length}`);
-  console.log(`Geplante Pushs: ${stats.scheduled}`);
-  console.log(`Empfänger gesamt: ${stats.recipients}`);
-  console.log(`Übersprungen (vorbei): ${stats.skippedPast}`);
-  console.log(`Übersprungen (außerhalb Fenster): ${stats.skippedWindow}`);
-  console.log(`Duplikate verhindert: ${stats.duplicates}`);
-  console.log(`OneSignal-Fehler: ${stats.errors}`);
-  const todayOverview = buildTodayPrayerOverview(stats.planned, stats.skippedPastDetails);
-  const prayerDiagnostics = buildPrayerDiagnostics(todayOverview);
-  if (stats.planned.length) {
-    console.log("Geplante Pushs (Detail):");
-    for (const item of stats.planned.slice(0, 40)) {
-      console.log(`  · ${item.mode} ${item.prayer} ${item.time} → ${item.recipients} Empfänger (${item.timeZone}) @ ${item.sendAfter}`);
-    }
-    if (stats.planned.length > 40) {
-      console.log(`  … und ${stats.planned.length - 40} weitere`);
-    }
-    const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
-    console.log("Gebete heute (Rheinbach-Referenz):");
-    keys.forEach((key) => {
-      const d = prayerDiagnostics[key];
-      if (!d) return;
-      console.log(`  · ${d.name} ${d.time || "--:--"}: Vorab=${d.advance?.status}, Gebetszeit=${d.entry?.status}`);
-    });
-  } else {
-    console.log("Keine Pushs in diesem Planungsfenster geplant.");
-  }
-
-  const maghribDiag = prayerDiagnostics.maghrib || todayOverview.prayers.maghrib || null;
-  const statusReport = {
-    updatedAt: new Date().toISOString(),
-    ok: stats.errors === 0,
-    windowStart: windowStart.toISOString(),
-    windowEnd: windowEnd.toISOString(),
-    graceMinutes: SCHEDULE_GRACE_MINUTES,
-    lookaheadMinutes: SCHEDULE_LOOKAHEAD_MINUTES,
-    subscriptionsTotal: players.length,
-    subscriptionsOneSignal: oneSignalPlayers.length,
-    subscriptionsSupabase: supabaseRegistrations.length,
-    usersWithLocation: users.length,
-    locationGroups: groups.length,
-    scheduled: stats.scheduled,
-    recipients: stats.recipients,
-    skippedPast: stats.skippedPast,
-    skippedWindow: stats.skippedWindow,
-    duplicates: stats.duplicates,
-    errors: stats.errors,
-    lastError: stats.errors ? "OneSignal API Fehler – siehe GitHub Actions Log" : null,
-    today: todayOverview,
-    prayerDiagnostics,
-    maghribDiagnostic: maghribDiag ? {
-      plannedAdvance: maghribDiag.advance?.status,
-      plannedEntry: maghribDiag.entry?.status,
-      time: maghribDiag.time,
-      advanceRecipients: maghribDiag.advance?.recipients,
-      entryRecipients: maghribDiag.entry?.recipients,
-      answer: maghribDiag.answer || ""
-    } : null,
-    planned: stats.planned.slice(0, 80),
-    skippedPastDetails: stats.skippedPastDetails.slice(0, 40),
-    oneSignalResponses: stats.oneSignalResponses.slice(0, 20)
-  };
-
-  try {
-    writePrayerPushStatus(statusReport);
-    console.log(`Status gespeichert: ${PRAYER_STATUS_PATH}`);
-  } catch (err) {
-    console.error("Status-Datei konnte nicht geschrieben werden:", err.message || err);
-    process.exitCode = 1;
   }
 })();

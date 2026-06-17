@@ -1,5 +1,3 @@
-import { runPrayerPushScheduler } from "./prayer-push-scheduler.js";
-
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
@@ -114,7 +112,7 @@ async function postOneSignal(env, payload) {
 export async function sendPrayerTestPush(env, input = {}) {
   const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
   if (!subscriptionId) {
-    return { ok: true, sent: false, reason: "Subscription-ID fehlt", testType: "onesignal-single" };
+    return { ok: true, sent: false, reason: "Subscription-ID fehlt" };
   }
 
   const prayerKey = String(input.prayer || input.prayerKey || "maghrib").toLowerCase();
@@ -145,7 +143,6 @@ export async function sendPrayerTestPush(env, input = {}) {
     return {
       ok: true,
       sent: true,
-      testType: "onesignal-single",
       prayer: prayerKey,
       mode,
       title: copy.title,
@@ -157,7 +154,6 @@ export async function sendPrayerTestPush(env, input = {}) {
     return {
       ok: true,
       sent: false,
-      testType: "onesignal-single",
       prayer: prayerKey,
       mode,
       subscriptionId,
@@ -166,58 +162,60 @@ export async function sendPrayerTestPush(env, input = {}) {
   }
 }
 
-function schedulerDeps(githubGet, githubPut, base64ToUtf8, utf8ToBase64) {
-  return { githubGet, githubPut, base64ToUtf8, utf8ToBase64 };
-}
-
-export async function triggerPrayerWorkflowForSubscription(env, subscriptionId, deps = {}) {
+export async function triggerPrayerWorkflowForSubscription(env, subscriptionId) {
   const sid = String(subscriptionId || "").trim();
   if (!sid) return { triggered: false, reason: "Subscription-ID fehlt" };
+  if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
 
-  const result = await runPrayerPushScheduler(
-    env,
-    { subscriptionId: sid, force: true },
-    schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
-  );
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/prayer-push.yml/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "User-Agent": "dar-admin-publisher"
+    },
+    body: JSON.stringify({
+      ref: env.GITHUB_BRANCH || "main",
+      inputs: { subscription_id: sid }
+    })
+  });
 
-  return {
-    triggered: result.triggered,
-    ok: result.ok,
-    schedulerStatus: result.schedulerStatus,
-    reason: result.reason,
-    scheduled: result.scheduled,
-    recipients: result.recipients,
-    usersWithLocation: result.usersWithLocation,
-    status: result.status
-  };
-}
-
-export async function runPrayerSchedulerNow(env, deps = {}, options = {}) {
-  return runPrayerPushScheduler(
-    env,
-    { force: Boolean(options.force), subscriptionId: options.subscriptionId || "" },
-    schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
-  );
-}
-
-export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {
-  if (options.force) {
-    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
+  if (!res.ok) {
+    const text = await res.text();
+    return { triggered: false, reason: `Workflow fehlgeschlagen: ${res.status} ${text.slice(0, 200)}` };
   }
 
+  return { triggered: true, reason: `Alle Gebets-Pushs werden für Subscription ${sid.slice(0, 8)}… geplant.` };
+}
+
+export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8) {
+  if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
   const statusResult = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
   const updatedAt = statusResult?.status?.updatedAt ? new Date(statusResult.status.updatedAt).getTime() : 0;
-  const stale = !updatedAt || Date.now() - updatedAt >= 90 * 60 * 1000;
-
-  if (!stale && !options.alwaysRun) {
-    return {
-      triggered: false,
-      ok: true,
-      schedulerStatus: statusResult?.status?.schedulerStatus || "success",
-      reason: "Scheduler-Status ist aktuell",
-      status: statusResult?.status || null
-    };
+  if (updatedAt && Date.now() - updatedAt < 90 * 60 * 1000) {
+    return { triggered: false, reason: "Scheduler-Status ist aktuell" };
   }
 
-  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/prayer-push.yml/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "User-Agent": "dar-admin-publisher"
+    },
+    body: JSON.stringify({ ref: env.GITHUB_BRANCH || "main" })
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    return { triggered: false, reason: `GitHub workflow_dispatch fehlgeschlagen: ${res.status} ${text.slice(0, 200)}` };
+  }
+
+  return { triggered: true, reason: "Prayer-Push Workflow ausgelöst (Status war veraltet)" };
 }

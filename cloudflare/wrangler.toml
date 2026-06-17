@@ -19,8 +19,6 @@ crons = ["30 * * * *"]
 #   wrangler secret put GITHUB_TOKEN
 #   wrangler secret put ADMIN_PUBLISH_SECRET
 #   wrangler secret put ONESIGNAL_API_KEY_NEW
-#   wrangler secret put SUPABASE_URL          (optional – Standard ist eingebaut)
-#   wrangler secret put SUPABASE_ANON_KEY     (optional – für prayer_push_registrations)
 #   wrangler secret put TELEGRAM_BOT_TOKEN
 #   TELEGRAM_CHANNEL_USERNAME defaults to @dar_al_tauhid (optional override)
 #   PENDING_PUSHES_PATH defaults to content/admin/pending-pushes.json
