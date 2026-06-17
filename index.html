@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar.">
 <meta name="twitter:image" content="/app-icon-512.png?v=source-under-statement-v12">
 <meta name="theme-color" content="#080806">
-<script>(function(){try{var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t}catch(e){}})();</script>
+<script>(function(){try{var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -2543,6 +2543,19 @@ body:before{
   -webkit-appearance:none;
   appearance:none;
   touch-action:manipulation;
+}
+/* Android: Footer/Signatur vollständig scrollbar – Theme-Padding überdeckt sonst Bottom-Nav */
+html.is-android[data-theme] body.has-bottom-nav{
+  padding-bottom:calc(94px + max(12px,env(safe-area-inset-bottom,0px)))!important;
+}
+html.is-android body.has-bottom-nav .footer{
+  padding-bottom:calc(28px + max(12px,env(safe-area-inset-bottom,0px)))!important;
+}
+html.is-android.is-standalone-pwa body.has-bottom-nav{
+  padding-bottom:calc(98px + max(16px,env(safe-area-inset-bottom,0px)))!important;
+}
+html.is-android.is-standalone-pwa body.has-bottom-nav .footer{
+  padding-bottom:calc(32px + max(16px,env(safe-area-inset-bottom,0px)))!important;
 }
 .quran-wake-btn.is-on{
   border-color:rgba(140,255,154,.62)!important;
