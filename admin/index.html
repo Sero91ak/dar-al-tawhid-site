@@ -320,15 +320,14 @@ const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
 const ADMIN_LOG_KEY="darAdminChangeLogV1";
-const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
 const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const DEFAULT_ADMIN_TABS=[
-  ["start","Start"],
   ["actions","Aktionen"],
+  ["start","Start"],
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
   ["news","News"],
@@ -339,7 +338,7 @@ const DEFAULT_ADMIN_TABS=[
   ["settings","Einstellungen"],
   ["overview","Dashboard"]
 ];
-let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
+let refreshTimer=null,authed=false,lastData=null,currentTab="actions",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0,adminShellScrollY=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -369,7 +368,6 @@ function writeStore(key,list){try{localStorage.setItem(key,JSON.stringify((list|
 function addStoreItem(key,item){const list=readStore(key);list.unshift({...item,id:item.id||String(Date.now()),createdAt:item.createdAt||new Date().toISOString()});writeStore(key,list);return list[0]}
 function removeStoreItem(key,id){writeStore(key,readStore(key).filter(x=>String(x.id)!==String(id)))}
 function updateStoreItem(key,id,patch){writeStore(key,readStore(key).map(x=>String(x.id)===String(id)?{...x,...patch,updatedAt:new Date().toISOString()}:x))}
-function planItems(){return readStore(ADMIN_PLAN_KEY)}
 function newsItems(){return readStore(ADMIN_NEWS_KEY)}
 function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
 function userItems(){return readStore(ADMIN_USERS_KEY)}
@@ -450,11 +448,12 @@ function engagement(row){const v=Number(row.views||0);return v?Math.round(((Numb
 function countBy(rows,fn){return (rows||[]).reduce((acc,row)=>{const key=fn(row);acc[key]=(acc[key]||0)+1;return acc},{})}
 function totals(){return (lastData?.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")}
 function renderShellPreserveField(id,apply){
+  adminShellScrollY=window.scrollY||document.documentElement.scrollTop||0;
   const el=document.getElementById(id);
   const start=el&&typeof el.selectionStart==="number"?el.selectionStart:null;
   const end=el&&typeof el.selectionEnd==="number"?el.selectionEnd:null;
   if(typeof apply==="function")apply(el);
-  renderShell();
+  renderShell({keepScroll:true});
   requestAnimationFrame(()=>{
     const next=document.getElementById(id);
     if(!next)return;
@@ -637,7 +636,9 @@ function renderLogin(){
   if(repair)repair.onclick=()=>{if(window.__DAR_ADMIN_REPAIR__)window.__DAR_ADMIN_REPAIR__();else location.reload(true)};
   setTimeout(()=>{try{input.focus()}catch(e){}},80);
 }
-function renderShell(){
+function renderShell(opts={}){
+  const keepScroll=opts.keepScroll!==false;
+  if(keepScroll)adminShellScrollY=window.scrollY||document.documentElement.scrollTop||0;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
   const posts=rows.filter(x=>x.content_type==="post"),duas=rows.filter(x=>x.content_type==="dua");
@@ -657,21 +658,24 @@ function renderShell(){
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
+  if(keepScroll){
+    requestAnimationFrame(()=>window.scrollTo({top:adminShellScrollY,behavior:"auto"}));
+  }else if(opts.scrollTop){
+    requestAnimationFrame(()=>window.scrollTo({top:0,behavior:"auto"}));
+  }
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
-function navigateAdmin(tab,{skipStack=false}={}){
+function navigateAdmin(tab,{skipStack=false,scrollTop=false}={}){
   if(tab==="schedule")tab="actions";
   if(!tab||tab===currentTab)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
-  renderShell();
-  window.scrollTo({top:0,behavior:"smooth"});
+  renderShell({keepScroll:!scrollTop,scrollTop:!!scrollTop});
 }
 function adminBack(){
   const prev=adminNavStack.pop();
-  if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="start"}else{return}
-  renderShell();
-  window.scrollTo({top:0,behavior:"smooth"});
+  if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="actions"}else{return}
+  renderShell({keepScroll:true});
 }
 function updateAdminBackButton(){
   const btn=document.getElementById("adminBackBtn");
@@ -698,7 +702,7 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Aktionen","Neuen Beitrag, Planung, News und Upload zentral steuern.","actions",`${planItems().length} geplant`)}
+    ${folderCard("①","Aktionen","Beiträge direkt vorbereiten, veröffentlichen und News steuern.","actions","Direkt arbeiten")}
     ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
@@ -791,37 +795,6 @@ function renderLivePreview(ctx){
       <iframe class="live-preview-frame" id="livePreviewFrame" src="${esc(url)}" title="DAR AL TAWḤID Live-Vorschau"></iframe>
     </div>
   </section>`;
-}
-function plannerCard(item){
-  return `<article class="planner-item">
-    <b>${esc(item.title||"Ohne Titel")}</b>
-    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>Zeitzone: ${esc(item.timezone||"Europe/Berlin")}<br>${esc(item.note||"")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
-    <div class="planner-actions">
-      <button class="btn" data-plan-ready="${esc(item.id)}" type="button">Bereit</button>
-      <button class="btn primary" data-plan-worker="${esc(item.id)}" type="button">Worker planen</button>
-      <button class="btn danger" data-plan-remove="${esc(item.id)}" type="button">Entfernen</button>
-    </div>
-  </article>`;
-}
-function renderPlanningPanel(){
-  const items=planItems();
-  return `<div class="preview-box">
-      <div class="section-head"><h3>Geplante Veröffentlichungen</h3><span>${items.length} lokale Einträge</span></div>
-      <div class="admin-form-grid">
-        <input class="field" id="planTitle" placeholder="Titel / Beitragsname">
-        <input class="field" id="planWhen" type="datetime-local">
-        <input class="field" id="planCategory" placeholder="Kategorie / Serie">
-        <select class="field" id="planTimezone"><option>Europe/Berlin</option><option>UTC</option></select>
-        <select class="field wide" id="planStatus"><option>Entwurf</option><option>Geplant</option><option>Sofort veröffentlichen</option><option>In Prüfung</option><option>Bereit</option><option>Veröffentlicht</option><option>Abgebrochen</option></select>
-        <textarea class="admin-textarea wide" id="planNote" placeholder="Notiz, Quelle, Datei oder Arbeitsstand"></textarea>
-        <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
-      </div>
-      <div class="notice-note" style="margin-top:12px">${items.length?"Automatisches Live-Schalten läuft über Cloudflare Worker + Cron. Speichere zuerst die Planung und sende sie dann mit „Worker planen“ an den Scheduler.":"Noch keine geplanten Beiträge. Markdown unten einfügen, Uhrzeit setzen und dann an den Worker-Scheduler übergeben."}</div>
-      ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.map(plannerCard).join("")}</div>`:""}
-    </div>`;
-}
-function renderSchedule(){
-  return `<section class="panel">${renderPlanningPanel()}</section>`;
 }
 function newsCard(item){
   return `<article class="planner-item">
@@ -994,34 +967,7 @@ function renderActions(rows,installs=installTotals()){
   const best=sortedRows(rows)[0];
   return `<section class="split">
     <div class="panel">
-      <div class="section-head"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
-      <div class="quick-grid">
-        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown unten einfügen und über Cloudflare Worker veröffentlichen.</small></button>
-        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
-        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
-      </div>
-      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
-      ${renderPlanningPanel()}
-      ${renderNewsComposer()}
-      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
-      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
-      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker</span></div>
-      <div class="preview-box">
-        <div class="section-head"><h3>Markdown-Metadaten</h3><span>Frontmatter-Hilfe</span></div>
-        <div class="admin-form-grid">
-          <input class="field" id="mdTitle" placeholder="Titel">
-          <input class="field" id="mdId" placeholder="ID / Slug">
-          <input class="field" id="mdDate" type="date">
-          <input class="field" id="mdCategory" placeholder="Kategorie">
-          <input class="field" id="mdScholar" placeholder="Gelehrter">
-          <input class="field" id="mdBook" placeholder="Werk / Buch">
-          <input class="field wide" id="mdSource" placeholder="Quelle">
-          <input class="field wide" id="mdTags" placeholder="Tags mit Komma trennen">
-          <button class="btn primary wide" id="buildMarkdownBtn" type="button">Markdown aus Feldern vorbereiten</button>
-        </div>
-      </div>
+      <div class="section-head"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker · sofort oben</span></div>
       <div class="upload-grid">
         <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
         <div class="upload-stack">
@@ -1040,7 +986,18 @@ function renderActions(rows,installs=installTotals()){
         </div>
       </div>
       ${renderDraftPreview()}
-      <div class="preview-box">
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
+      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
+      <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Wege & Tests</span></div>
+      <div class="quick-grid">
+        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
+        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+      </div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      ${renderNewsComposer()}
+      <div class="preview-box" style="margin-top:14px">
         <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
         <div class="quick-grid">
           <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
@@ -1119,7 +1076,6 @@ function renderTech(ctx){
       <div class="status-list">
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
-        <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
         <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
         <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Nur serverseitig zuverlässig bei geschlossener PWA. Browser-Timer bleiben nur Zusatz.</span><strong class="status-pill">Scheduler nötig</strong></div>
         <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
@@ -1128,7 +1084,6 @@ function renderTech(ctx){
     <aside class="side-stack">
       <div class="panel"><div class="section-head"><h3>Statuszahlen</h3><span>Admin</span></div>
         <div class="command-grid">
-          <div class="command-card"><b>Geplant</b><span>${planItems().length}</span><small>lokale Einträge</small></div>
           <div class="command-card"><b>News</b><span>${newsItems().length}</span><small>vorbereitet</small></div>
           <div class="command-card"><b>Fehler</b><span>${reportItems().length}</span><small>erfasst</small></div>
           <div class="command-card"><b>Benutzer</b><span>${userItems().length}</span><small>notiert</small></div>
@@ -1151,39 +1106,6 @@ function renderTechStatus(ctx){
     ["Sicherheitsabfrage",true,"Online veröffentlichen fragt bewusst nach"]
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
-}
-function buildMarkdownFromFields(){
-  const title=(document.getElementById("mdTitle")?.value||"").trim();
-  if(!title){toast("Titel fehlt");return}
-  const slug=(document.getElementById("mdId")?.value||title).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
-  const date=(document.getElementById("mdDate")?.value||new Date().toISOString().slice(0,10)).trim();
-  const category=(document.getElementById("mdCategory")?.value||"").trim();
-  const scholar=(document.getElementById("mdScholar")?.value||"").trim();
-  const book=(document.getElementById("mdBook")?.value||"").trim();
-  const source=(document.getElementById("mdSource")?.value||"").trim();
-  const tags=(document.getElementById("mdTags")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
-  draftFilename=draftFilename||`${slug}.md`;
-  draftMarkdown=`---
-id: "${slug}"
-title: "${title.replace(/"/g,"'")}"
-date: "${date}"
-category: "${category.replace(/"/g,"'")}"
-scholar: "${scholar.replace(/"/g,"'")}"
-book: "${book.replace(/"/g,"'")}"
-source: "${source.replace(/"/g,"'")}"
-tags: [${tags.map(x=>`"${x.replace(/"/g,"'")}"`).join(", ")}]
----
-
-> Aussage hier einfügen.
-
-Quelle: ${source || "Quelle prüfen"}
-`;
-  const text=document.getElementById("postMarkdownInput"),file=document.getElementById("postFilenameInput");
-  if(text)text.value=draftMarkdown;
-  if(file)file.value=draftFilename;
-  addAdminLog("Entwurf","Markdown aus Metadaten vorbereitet",title);
-  updateDraftPreview();
-  toast("Markdown vorbereitet");
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
@@ -1236,11 +1158,6 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-tab-up]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabUp,-1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabUp);renderShell()});
   document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
   const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
-  const buildMarkdown=document.getElementById("buildMarkdownBtn");if(buildMarkdown)buildMarkdown.onclick=buildMarkdownFromFields;
-  const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const timezone=document.getElementById("planTimezone")?.value||"Europe/Berlin";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,timezone,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",`${title} · ${timezone}`);renderShell()};
-  document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
-  document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
-  document.querySelectorAll("[data-plan-worker]").forEach(btn=>btn.onclick=async()=>{const item=planItems().find(x=>String(x.id)===String(btn.dataset.planWorker));if(!item){toast("Planung fehlt");return}const markdown=String(draftMarkdown||"").trim();if(!markdown){toast("Markdown unten einfügen, dann Worker planen");return}if(!item.when){toast("Uhrzeit fehlt");return}btn.disabled=true;btn.textContent="Sende...";try{const result=await workerPostRequest("schedule",{id:item.id,title:item.title,when:item.when,timezone:item.timezone||"Europe/Berlin",filename:draftFilename,markdown});updateStoreItem(ADMIN_PLAN_KEY,item.id,{status:"Worker geplant",workerId:result.id,publishAt:result.publishAt});addAdminLog("Planung","Beim Worker-Scheduler gespeichert",`${item.title} · ${result.publishAt||item.when}`);toast("Worker-Scheduler gespeichert");renderShell()}catch(e){btn.disabled=false;btn.textContent="Worker planen";addAdminLog("Fehler","Planung konnte nicht an Worker gesendet werden",e.message||String(e));toast(e.message||"Worker-Planung fehlgeschlagen")}});
   const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
   document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live auf der Startseite veröffentlichen?"))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});addAdminLog("News","News live veröffentlicht",item.title);toast("News live veröffentlicht");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
