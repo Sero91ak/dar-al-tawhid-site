@@ -1,3 +1,11 @@
+import {
+  parsePostForTelegram,
+  validateTelegramPost,
+  buildTelegramPreview,
+  buildTelegramHtml,
+  shortenForCaption
+} from "./telegram-formatter.js";
+
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
 const DEFAULT_BRANCH = "main";
@@ -8,6 +16,7 @@ const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
+const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 
 export default {
   async fetch(request, env) {
@@ -28,6 +37,8 @@ export default {
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
           hasAdminSecret: Boolean(env.ADMIN_PUBLISH_SECRET),
           hasOneSignalKey: Boolean(oneSignalApiKey(env)),
+          hasTelegramToken: Boolean(telegramBotToken(env)),
+          telegramChannel: telegramChannelId(env),
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
           scheduler: "ready"
@@ -47,9 +58,24 @@ export default {
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
       const schedulePaths = new Set(["/schedule", "/api/admin/schedule"]);
       const schedulerPaths = new Set(["/run-scheduler", "/api/admin/run-scheduler"]);
+      const telegramPaths = new Set([
+        "/api/admin/telegram/preview",
+        "/api/admin/telegram/test",
+        "/api/admin/telegram/send",
+        "/api/admin/telegram/status"
+      ]);
 
-      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
+      }
+
+      if (url.pathname === "/api/admin/telegram/status") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const postId = String(url.searchParams.get("postId") || "").trim();
+        const registry = await readTelegramPostsRegistry(env);
+        return json({ ok: true, postId, status: postId ? registry.posts?.[postId] || null : registry }, cors);
       }
 
       if (request.method !== "POST") {
@@ -60,6 +86,18 @@ export default {
       assertAuthorized(request, env);
 
       const input = await request.json().catch(() => ({}));
+
+      if (telegramPaths.has(url.pathname)) {
+        if (url.pathname.endsWith("/preview")) {
+          return json(buildTelegramPreviewResponse(env, input), cors);
+        }
+        if (url.pathname.endsWith("/test")) {
+          return json(await sendTelegramTest(env), cors);
+        }
+        if (url.pathname.endsWith("/send")) {
+          return json(await sendTelegramPost(env, input), cors);
+        }
+      }
 
       if (publishPaths.has(url.pathname)) {
         return json(await publishPostFromMarkdown(env, input), cors);
@@ -188,6 +226,17 @@ async function publishPostFromMarkdown(env, input) {
     };
   }
 
+  let telegram = { sent: false, skipped: true, status: "not_sent" };
+  if (input.telegram?.enabled) {
+    telegram = await sendTelegramPost(env, {
+      markdown,
+      postId,
+      mode: input.telegram.mode || "text",
+      imageBase64: input.telegram.imageBase64 || "",
+      forceResend: Boolean(input.telegram.forceResend)
+    });
+  }
+
   return {
     ok: true,
     filename,
@@ -199,7 +248,8 @@ async function publishPostFromMarkdown(env, input) {
     postId,
     publishedAt,
     liveCheck,
-    push
+    push,
+    telegram
   };
 }
 
@@ -661,4 +711,267 @@ async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, 
   }
 
   return { sent: false, reason: lastError };
+}
+
+function telegramBotToken(env) {
+  return String(env.TELEGRAM_BOT_TOKEN || "").trim();
+}
+
+function telegramChannelId(env) {
+  return String(env.TELEGRAM_CHANNEL_USERNAME || env.TELEGRAM_CHANNEL_ID || "@dar_al_tauhid").trim();
+}
+
+function siteOrigin(env) {
+  return String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+}
+
+function telegramPostsPath(env) {
+  return trimSlashes(env.TELEGRAM_POSTS_PATH || DEFAULT_TELEGRAM_POSTS_PATH);
+}
+
+async function readTelegramPostsRegistry(env) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const path = telegramPostsPath(env);
+  const file = await githubGet(env, owner, repo, path, branch);
+  if (!file?.content) return { posts: {} };
+  try {
+    const data = JSON.parse(base64ToUtf8(file.content));
+    return { posts: data.posts || {}, sha: file.sha };
+  } catch (error) {
+    return { posts: {}, sha: file.sha };
+  }
+}
+
+async function writeTelegramPostStatus(env, postId, patch) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const path = telegramPostsPath(env);
+  const registry = await readTelegramPostsRegistry(env);
+  const posts = { ...(registry.posts || {}) };
+  const key = String(postId || "").trim();
+  if (!key) return null;
+  posts[key] = {
+    ...(posts[key] || {}),
+    ...patch,
+    postId: key,
+    updatedAt: new Date().toISOString()
+  };
+  const payload = { version: 1, generated: new Date().toISOString(), posts };
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    path,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    `Update telegram status ${key}`,
+    branch,
+    registry.sha
+  );
+  return posts[key];
+}
+
+function buildTelegramPreviewResponse(env, input) {
+  const markdown = String(input.markdown || "").trim();
+  const fields = parsePostForTelegram(markdown, {
+    postId: input.postId || "",
+    websiteOrigin: siteOrigin(env)
+  });
+  const preview = buildTelegramPreview(fields);
+  return {
+    ok: preview.validation.ok,
+    fields,
+    preview,
+    errors: preview.validation.errors,
+    warnings: [
+      preview.tooLong ? "Telegram-Text ist zu lang." : "",
+      preview.captionTooLong ? "Text ist für Foto-Caption zu lang – es wird gekürzt oder getrennt gesendet." : ""
+    ].filter(Boolean)
+  };
+}
+
+async function telegramApiCall(env, method, payload, { multipart = false } = {}) {
+  const token = telegramBotToken(env);
+  if (!token) throw httpError("TELEGRAM_BOT_TOKEN fehlt am Worker", 500);
+  const url = `https://api.telegram.org/bot${token}/${method}`;
+  let res;
+  if (multipart) {
+    res = await fetch(url, { method: "POST", body: payload });
+  } else {
+    res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.ok === false) {
+    throw httpError(`Telegram ${method} Fehler: ${data.description || res.status}`, res.status || 500);
+  }
+  return data.result || data;
+}
+
+function base64ToBytes(base64) {
+  const bin = atob(String(base64 || "").replace(/^data:image\/\w+;base64,/, ""));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+async function sendTelegramPhoto(env, { chatId, imageBase64, caption }) {
+  const bytes = base64ToBytes(imageBase64);
+  const form = new FormData();
+  form.append("chat_id", chatId);
+  form.append("photo", new Blob([bytes], { type: "image/png" }), "dar-al-tawhid-bildbeitrag.png");
+  if (caption) {
+    form.append("caption", caption);
+    form.append("parse_mode", "HTML");
+  }
+  return telegramApiCall(env, "sendPhoto", form, { multipart: true });
+}
+
+async function sendTelegramText(env, { chatId, text }) {
+  return telegramApiCall(env, "sendMessage", {
+    chat_id: chatId,
+    text,
+    parse_mode: "HTML",
+    disable_web_page_preview: false
+  });
+}
+
+async function sendTelegramTest(env) {
+  const chatId = telegramChannelId(env);
+  const text = [
+    "<b>DAR AL TAWḤID Test</b>",
+    "Telegram-Verbindung funktioniert."
+  ].join("\n");
+  const result = await sendTelegramText(env, { chatId, text });
+  return {
+    ok: true,
+    sent: true,
+    status: "sent",
+    telegramMessageId: result?.message_id || null,
+    telegramSentAt: new Date().toISOString(),
+    target: chatId
+  };
+}
+
+async function sendTelegramPost(env, input) {
+  const markdown = String(input.markdown || "").trim();
+  const postId = String(input.postId || frontmatterValue(markdown, "id") || "").trim();
+  const mode = String(input.mode || "text");
+  const forceResend = Boolean(input.forceResend);
+  const imageBase64 = String(input.imageBase64 || "");
+  const chatId = telegramChannelId(env);
+
+  if (!telegramBotToken(env)) {
+    return {
+      sent: false,
+      status: "failed",
+      telegramStatus: "failed",
+      telegramError: "TELEGRAM_BOT_TOKEN fehlt am Worker",
+      skipped: false
+    };
+  }
+
+  const registry = await readTelegramPostsRegistry(env);
+  const existing = registry.posts?.[postId];
+  if (!forceResend && (existing?.status === "sent" || existing?.telegramStatus === "sent")) {
+    return {
+      sent: false,
+      status: "sent",
+      telegramStatus: "sent",
+      skipped: true,
+      reason: "Beitrag wurde bereits an Telegram gesendet.",
+      telegramMessageId: existing.telegramMessageId || null,
+      telegramSentAt: existing.telegramSentAt || null
+    };
+  }
+
+  const fields = parsePostForTelegram(markdown, { postId, websiteOrigin: siteOrigin(env) });
+  const validation = validateTelegramPost(fields);
+  if (!validation.ok) {
+    return {
+      sent: false,
+      status: "failed",
+      telegramStatus: "failed",
+      telegramError: validation.errors.join(" "),
+      errors: validation.errors,
+      skipped: false
+    };
+  }
+
+  const html = buildTelegramHtml(fields);
+  const preview = buildTelegramPreview(fields);
+  if (preview.tooLong && mode === "text") {
+    return {
+      sent: false,
+      status: "failed",
+      telegramStatus: "failed",
+      telegramError: "Telegram-Text ist zu lang.",
+      skipped: false
+    };
+  }
+
+  const sendText = mode === "text" || mode === "both";
+  const sendImage = (mode === "image" || mode === "both") && imageBase64;
+
+  if ((mode === "image" || mode === "both") && !imageBase64) {
+    return {
+      sent: false,
+      status: "failed",
+      telegramStatus: "failed",
+      telegramError: "Bildbeitrag fehlt oder konnte nicht generiert werden.",
+      skipped: false
+    };
+  }
+
+  try {
+    let messageId = null;
+
+    if (sendImage) {
+      const caption = preview.captionTooLong ? shortenForCaption(html) : html;
+      const photoResult = await sendTelegramPhoto(env, { chatId, imageBase64, caption });
+      messageId = photoResult?.message_id || null;
+      if (mode === "both" || preview.captionTooLong) {
+        const followup = await sendTelegramText(env, { chatId, text: html });
+        messageId = followup?.message_id || messageId;
+      }
+    } else if (sendText) {
+      const textResult = await sendTelegramText(env, { chatId, text: html });
+      messageId = textResult?.message_id || null;
+    } else {
+      throw httpError("Kein Telegram-Modus gewählt", 400);
+    }
+
+    const statusPatch = {
+      status: "sent",
+      telegramStatus: "sent",
+      telegramMessageId: messageId,
+      telegramSentAt: new Date().toISOString(),
+      telegramError: ""
+    };
+    if (postId) await writeTelegramPostStatus(env, postId, statusPatch);
+
+    return {
+      ok: true,
+      sent: true,
+      skipped: false,
+      target: chatId,
+      mode,
+      previewLength: html.length,
+      ...statusPatch
+    };
+  } catch (error) {
+    const fail = {
+      status: "failed",
+      telegramStatus: "failed",
+      telegramError: error.message || String(error),
+      telegramSentAt: new Date().toISOString()
+    };
+    if (postId) await writeTelegramPostStatus(env, postId, fail).catch(() => null);
+    return { sent: false, skipped: false, ...fail };
+  }
 }

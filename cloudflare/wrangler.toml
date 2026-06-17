@@ -15,3 +15,5 @@ SCHEDULE_PATH = "content/admin/planned-posts.json"
 #   wrangler secret put GITHUB_TOKEN
 #   wrangler secret put ADMIN_PUBLISH_SECRET
 #   wrangler secret put ONESIGNAL_API_KEY_NEW
+#   wrangler secret put TELEGRAM_BOT_TOKEN
+#   TELEGRAM_CHANNEL_USERNAME defaults to @dar_al_tauhid (optional override)
