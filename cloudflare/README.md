@@ -4,6 +4,59 @@ Dieser Worker veroeffentlicht Admin-Beitraege serverseitig ins Repository `Sero9
 
 Die Admin-App spricht nicht mehr direkt mit GitHub. Sie sendet Markdown und Dateiname an den Worker. Der Worker nutzt das Cloudflare-Secret `GITHUB_TOKEN`.
 
+## Deploy
+
+### Option A: Lokal (empfohlen beim ersten Mal)
+
+```bash
+cd cloudflare
+npm install -g wrangler   # falls noch nicht installiert
+wrangler login            # Browser öffnet sich → Cloudflare anmelden
+```
+
+Secrets **einmalig** setzen (GitHub Fine-grained Token mit Repo-Schreibzugriff):
+
+```bash
+wrangler secret put GITHUB_TOKEN
+wrangler secret put ADMIN_PUBLISH_SECRET
+```
+
+`ADMIN_PUBLISH_SECRET` = dasselbe Passwort, das du in der Admin-App unter „Admin-Secret verbinden“ eingibst.
+
+Deploy:
+
+```bash
+./deploy.sh
+# oder: wrangler deploy
+```
+
+Prüfen:
+
+```bash
+curl https://dar-admin-publisher.sero91ak.workers.dev/health
+```
+
+Mit Admin-Secret (nächste Beitragsnummer):
+
+```bash
+curl -H "X-Admin-Secret: DEIN_SECRET" \
+  https://dar-admin-publisher.sero91ak.workers.dev/api/admin/next-number
+```
+
+Erwartung nach Merge: `"postCount":391,"nextNumber":392`
+
+### Option B: GitHub Actions (automatisch bei Push auf main)
+
+In GitHub → Settings → Secrets → Actions:
+
+| Secret | Inhalt |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API Token mit „Workers Scripts Edit“ |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID aus Cloudflare Dashboard |
+
+Workflow: `.github/workflows/deploy-admin-publisher.yml`  
+Manuell starten: Actions → „Deploy Admin Publisher Worker“ → Run workflow
+
 ## Einrichtung
 
 1. `wrangler.toml.example` nach `wrangler.toml` kopieren.
