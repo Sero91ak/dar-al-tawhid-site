@@ -64,3 +64,10 @@ jobs:
           done
           if [ "$missing" -ne 0 ]; then exit 1; fi
           echo "Bild-Beitrag templates OK (10 files)."
+
+      - name: Daily push toggles must exist
+        run: |
+          grep -q 'syncDailyPushTags' index.html || { echo "::error::Daily push sync missing from index.html"; exit 1; }
+          grep -q 'daily-push-panel' index.html || { echo "::error::Daily push panel missing from index.html"; exit 1; }
+          grep -q 'data-daily-push' index.html || { echo "::error::Home push buttons missing from index.html"; exit 1; }
+          echo "Daily push feature OK."
