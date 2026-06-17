@@ -1,7 +1,5 @@
-const CACHE_VERSION = 'dar-admin-stats-v14';
+const CACHE_VERSION = 'dar-admin-stats-v15';
 const SHELL = [
-  '/admin/',
-  '/admin/index.html',
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
   '/admin/admin-icon-512.png',
@@ -21,7 +19,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(
-        keys.filter((key) => key.startsWith('dar-admin-stats-') && key !== CACHE_VERSION)
+        keys.filter((key) => key !== CACHE_VERSION)
           .map((key) => caches.delete(key))
       ))
       .then(() => self.clients.claim())
@@ -36,12 +34,18 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   if (!url.pathname.startsWith('/admin')) return;
 
-  if (request.mode === 'navigate') {
+  const isAdminShell = request.mode === 'navigate'
+    || url.pathname === '/admin/'
+    || url.pathname === '/admin/index.html';
+
+  if (isAdminShell) {
     event.respondWith(
-      fetch(request)
+      fetch(new Request('/admin/index.html', { cache: 'no-store' }))
         .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put('/admin/index.html', copy)).catch(() => null);
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put('/admin/index.html', copy)).catch(() => null);
+          }
           return response;
         })
         .catch(() => caches.match('/admin/index.html'))
