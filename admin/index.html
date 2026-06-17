@@ -24,13 +24,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v20";
+  var ADMIN_SW_CACHE="dar-admin-stats-v22";
+  var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
     return caches.keys().then(function(keys){
       return Promise.all(keys.filter(function(k){
-        return k.indexOf("dar-admin-stats-")===0&&k!==ADMIN_SW_CACHE;
+        return (k.indexOf("dar-admin-stats-")===0&&k!==ADMIN_SW_CACHE)||k.indexOf("dar-al-tawhid-offline-light-")===0;
       }).map(function(k){return caches.delete(k)}));
     });
   }
@@ -44,15 +45,32 @@
       }));
     });
   }
+  function registerAdmin(){
+    if(!("serviceWorker" in navigator))return Promise.resolve();
+    return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/",updateViaCache:"none"});
+  }
   window.__DAR_ADMIN_REPAIR__=function(){
-    return dropVisitorWorkers().then(cleanCaches).then(function(){
-      if("serviceWorker" in navigator)return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"});
-    }).then(function(){location.reload()});
+    if(!("serviceWorker" in navigator))return cleanCaches().then(function(){location.replace("/admin/?repair=1")});
+    return navigator.serviceWorker.getRegistrations().then(function(regs){
+      return Promise.all(regs.map(function(reg){return reg.unregister().catch(function(){})}));
+    }).then(cleanCaches).then(function(){
+      try{localStorage.removeItem(MIG_KEY)}catch(e){}
+      location.replace("/admin/?repair=1");
+    });
   };
-  var bootKey="darAdminBootRepairV20";
-  if(sessionStorage.getItem(bootKey))return;
-  sessionStorage.setItem(bootKey,"1");
-  dropVisitorWorkers().then(cleanCaches).catch(function(){});
+  if("serviceWorker" in navigator&&localStorage.getItem(MIG_KEY)!=="done"){
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      if(!regs.length){localStorage.setItem(MIG_KEY,"done");return registerAdmin()}
+      return Promise.all(regs.map(function(reg){return reg.unregister().catch(function(){})}))
+        .then(cleanCaches)
+        .then(function(){
+          localStorage.setItem(MIG_KEY,"done");
+          location.replace("/admin/?swfix=1");
+        });
+    }).catch(function(){localStorage.setItem(MIG_KEY,"done")});
+    return;
+  }
+  dropVisitorWorkers().then(cleanCaches).then(registerAdmin).catch(function(){});
 })();
 </script>
 <style>
@@ -1339,7 +1357,6 @@ document.addEventListener("touchend",e=>{
     if(dx>78&&Math.abs(dy)<55&&dt<650)adminBack();
   }
 },{passive:true});
-if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{})})}
 window.addEventListener("error",e=>{const panel=document.getElementById("panel");if(!panel)return;const msg=String(e.message||e.error||"Unbekannter Fehler");panel.innerHTML=`<section class="login"><h2>Admin Fehler</h2><p>${esc(msg)}</p><button class="btn primary" type="button" onclick="location.reload()">Neu laden</button><button class="btn" type="button" onclick="window.__DAR_ADMIN_REPAIR__&&window.__DAR_ADMIN_REPAIR__()">Cache reparieren</button></section>`});
 loadLocalDraft();
 authed=readAuth();

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v20';
+const CACHE_VERSION = 'dar-admin-stats-v22';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
@@ -28,25 +28,6 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-async function loadAdminShell() {
-  const request = new Request('/admin/index.html', { cache: 'no-store' });
-  try {
-    const response = await fetch(request);
-    if (response && response.ok) {
-      const copy = response.clone();
-      const cache = await caches.open(CACHE_VERSION);
-      await cache.put('/admin/index.html', copy).catch(() => null);
-      return response;
-    }
-  } catch (e) {}
-  const cached = await caches.match('/admin/index.html');
-  if (cached) return cached;
-  return new Response(
-    '<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DAR Admin</title></head><body style="font-family:system-ui;background:#05080f;color:#f7f0df;padding:24px"><h1>Admin offline</h1><p>Bitte Internet prüfen und Seite neu laden.</p><p><a href="/admin/" style="color:#efd78e">/admin/ neu öffnen</a></p></body></html>',
-    { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
-  );
-}
-
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
@@ -55,19 +36,14 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   if (!url.pathname.startsWith('/admin')) return;
 
-  const isAdminShell = request.mode === 'navigate'
-    || url.pathname === '/admin/'
-    || url.pathname === '/admin/index.html';
-
-  if (isAdminShell) {
-    event.respondWith(loadAdminShell());
-    return;
-  }
+  // Safari/iOS: never serve navigation or admin HTML via SW (307 redirect on index.html).
+  if (request.mode === 'navigate') return;
+  if (url.pathname === '/admin/' || url.pathname === '/admin/index.html') return;
 
   event.respondWith(
     caches.match(request).then((cached) => {
       const network = fetch(request).then((response) => {
-        if (response && response.ok) {
+        if (response && response.ok && response.status === 200 && response.type === 'basic') {
           const copy = response.clone();
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
         }
