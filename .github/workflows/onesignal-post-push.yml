@@ -61,4 +61,9 @@ jobs:
           ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_RUN_ID: ${{ github.run_id }}
-        run: node scripts/send-post-push.js
+        run: |
+          if [ -z "${ONESIGNAL_API_KEY_NEW:-}" ] && [ -z "${ONESIGNAL_API_KEY:-}" ] && [ -z "${ONESIGNAL_APP_API_KEY:-}" ]; then
+            echo "Hinweis: Kein OneSignal API-Key in GitHub Secrets gesetzt."
+            echo "Der Cloudflare Worker kann Push trotzdem senden, wenn ONESIGNAL_API_KEY_NEW dort gesetzt ist."
+          fi
+          node scripts/send-post-push.js
