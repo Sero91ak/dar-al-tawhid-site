@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v19';
+const CACHE_VERSION = 'dar-admin-stats-v20';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
@@ -21,12 +21,31 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(
-        keys.filter((key) => key !== CACHE_VERSION)
+        keys.filter((key) => key.startsWith('dar-admin-stats-') && key !== CACHE_VERSION)
           .map((key) => caches.delete(key))
       ))
       .then(() => self.clients.claim())
   );
 });
+
+async function loadAdminShell() {
+  const request = new Request('/admin/index.html', { cache: 'no-store' });
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) {
+      const copy = response.clone();
+      const cache = await caches.open(CACHE_VERSION);
+      await cache.put('/admin/index.html', copy).catch(() => null);
+      return response;
+    }
+  } catch (e) {}
+  const cached = await caches.match('/admin/index.html');
+  if (cached) return cached;
+  return new Response(
+    '<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DAR Admin</title></head><body style="font-family:system-ui;background:#05080f;color:#f7f0df;padding:24px"><h1>Admin offline</h1><p>Bitte Internet prüfen und Seite neu laden.</p><p><a href="/admin/" style="color:#efd78e">/admin/ neu öffnen</a></p></body></html>',
+    { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+  );
+}
 
 self.addEventListener('fetch', (event) => {
   const request = event.request;
@@ -41,17 +60,7 @@ self.addEventListener('fetch', (event) => {
     || url.pathname === '/admin/index.html';
 
   if (isAdminShell) {
-    event.respondWith(
-      fetch(new Request('/admin/index.html', { cache: 'no-store' }))
-        .then((response) => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put('/admin/index.html', copy)).catch(() => null);
-          }
-          return response;
-        })
-        .catch(() => caches.match('/admin/index.html'))
-    );
+    event.respondWith(loadAdminShell());
     return;
   }
 
