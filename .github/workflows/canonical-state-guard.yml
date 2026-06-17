@@ -1,0 +1,54 @@
+name: Canonical State Guard
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Visitor app must stay complete
+        run: |
+          lines=$(wc -l < index.html)
+          if [ "$lines" -lt 6000 ]; then
+            echo "::error::index.html has $lines lines; expected at least 6000 (full visitor app)."
+            exit 1
+          fi
+          echo "Visitor index.html OK ($lines lines)."
+
+      - name: Admin must stay Command Center
+        run: |
+          if grep -qE 'Admin-Zentrale|Blaue Admin' admin/index.html; then
+            echo "::error::admin/index.html contains the forbidden blue Admin-Zentrale layout."
+            exit 1
+          fi
+          if ! grep -q 'Command Center' admin/index.html; then
+            echo "::error::admin/index.html must contain the Command Center UI."
+            exit 1
+          fi
+          admin_lines=$(wc -l < admin/index.html)
+          if [ "$admin_lines" -lt 1000 ]; then
+            echo "::error::admin/index.html has $admin_lines lines; expected at least 1000."
+            exit 1
+          fi
+          echo "Admin Command Center OK ($admin_lines lines)."
+
+      - name: Posts index must stay populated
+        run: |
+          count=$(python3 -c "import json; print(len(json.load(open('content/posts/posts-index.json'))['files']))")
+          if [ "$count" -lt 350 ]; then
+            echo "::error::posts-index.json has $count entries; expected at least 350."
+            exit 1
+          fi
+          echo "posts-index.json OK ($count entries)."
