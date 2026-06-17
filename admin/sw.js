@@ -1,10 +1,10 @@
-const CACHE_VERSION = 'dar-admin-publisher-blue-v1';
+const CACHE_VERSION = 'dar-admin-stats-v14';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
   '/admin/manifest.json',
-  '/app-icon-192.png',
-  '/app-icon-512.png',
+  '/admin/admin-icon-192.png',
+  '/admin/admin-icon-512.png',
   '/favicon.ico'
 ];
 
@@ -21,7 +21,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(
-        keys.filter((key) => (key.startsWith('dar-admin-stats-') || key.startsWith('dar-admin-publisher-')) && key !== CACHE_VERSION)
+        keys.filter((key) => key.startsWith('dar-admin-stats-') && key !== CACHE_VERSION)
           .map((key) => caches.delete(key))
       ))
       .then(() => self.clients.claim())
@@ -59,6 +59,18 @@ self.addEventListener('fetch', (event) => {
         return response;
       }).catch(() => cached);
       return cached || network;
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || '/admin/';
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
+      const existing = clients.find((client) => client.url.includes('/admin/'));
+      if (existing) return existing.focus();
+      return self.clients.openWindow(target);
     })
   );
 });

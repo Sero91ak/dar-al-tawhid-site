@@ -3,538 +3,1310 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>DAR Admin · Publisher</title>
+<title>DAR Admin · Command Center</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/admin/admin-icon-192.png">
 <link rel="manifest" href="/admin/manifest.json">
 <meta name="application-name" content="DAR Admin">
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
-<meta name="theme-color" content="#061a35">
+<meta name="theme-color" content="#07111d">
+<meta name="description" content="DAR Admin Command Center fuer Inhalte, News, Statistik und Live-Vorschau.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DAR AL TAWḤID">
+<meta property="og:title" content="DAR Admin">
+<meta property="og:description" content="Getrennte Admin-App fuer DAR AL TAWḤID.">
+<meta property="og:image" content="/admin/admin-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DAR Admin">
+<meta name="twitter:image" content="/admin/admin-icon-512.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <style>
 :root{
-  --bg:#06101f;--bg2:#071b36;--panel:#0a2344;--panel2:#0d2e58;--blue:#50a7ff;--blue2:#8fd0ff;
-  --gold:#efd78e;--text:#eff8ff;--muted:#9fb8d4;--muted2:#6f8cac;--line:rgba(143,208,255,.22);
-  --ok:#6ee7a8;--warn:#f5c86f;--bad:#ff8d8d;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --serif:Georgia,"Times New Roman",serif;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
+  --bg:#05080f;--panel:#0a111c;--panel2:#101a29;--ink:#f7f0df;--soft:#d2c9b7;--muted:#8f99a7;
+  --gold:#efd78e;--bronze:#b8954b;--green:#8fc7ff;--red:#ff9a90;--blue:#90c8ff;
+  --line:rgba(140,190,255,.24);--line2:rgba(239,215,142,.14);--shadow:0 22px 70px rgba(0,0,0,.42);
+  --serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
 }
 *{box-sizing:border-box}
-html{min-height:100%;background:var(--bg)}
-body{margin:0;min-height:100dvh;color:var(--text);font-family:var(--sans);
-  background:radial-gradient(circle at 15% -4%,rgba(80,167,255,.26),transparent 33%),
-  radial-gradient(circle at 88% 0%,rgba(239,215,142,.14),transparent 31%),
-  linear-gradient(180deg,#061326 0%,#071a32 50%,#030913 100%);
-  padding:max(12px,var(--safe-top)) max(12px,env(safe-area-inset-right,0px)) max(20px,var(--safe-bottom)) max(12px,env(safe-area-inset-left,0px))}
-button,input,select,textarea{font:inherit}
-button,a,input,select,textarea{touch-action:manipulation}
-.app{max-width:1180px;margin:0 auto 86px}
-.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin:0 0 14px}
-.brand{display:flex;gap:12px;align-items:center;min-width:0}
-.brand img{width:48px;height:48px;border-radius:17px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(0,0,0,.28)}
-.brand h1{margin:0;font-family:var(--serif);font-size:clamp(22px,4.4vw,36px);color:#f7fbff;line-height:1}
-.brand p{margin:5px 0 0;color:var(--muted);font-size:12px;font-weight:800}
-.toolbar{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
-.pill,.primary,.ghost,.danger{border:1px solid var(--line);border-radius:999px;min-height:40px;padding:9px 14px;color:var(--text);font-size:12px;font-weight:950;background:rgba(143,208,255,.08);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-.primary{background:linear-gradient(135deg,rgba(80,167,255,.42),rgba(19,88,164,.72));border-color:rgba(143,208,255,.55)}
-.ghost{background:rgba(255,255,255,.04)}
-.danger{background:rgba(255,141,141,.10);border-color:rgba(255,141,141,.32)}
-.pill:active,.primary:active,.ghost:active,.danger:active{transform:scale(.98)}
-.hero{border:1px solid rgba(143,208,255,.26);border-radius:28px;padding:18px;background:radial-gradient(circle at 10% 0%,rgba(80,167,255,.22),transparent 42%),linear-gradient(145deg,rgba(13,46,88,.94),rgba(5,17,34,.96));box-shadow:0 22px 60px rgba(0,0,0,.28);margin-bottom:13px}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:14px;align-items:stretch}
-.hero h2{font-family:var(--serif);font-size:clamp(25px,5vw,52px);line-height:1.02;margin:0 0 8px;color:#fff}
-.hero p{margin:0;color:var(--muted);line-height:1.55;font-size:14px;max-width:720px}
-.status-card{border:1px solid var(--line);border-radius:22px;background:rgba(4,15,30,.55);padding:14px;display:grid;gap:10px}
-.status-row{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;border-top:1px solid rgba(143,208,255,.12);padding-top:9px}
-.status-row:first-child{border-top:0;padding-top:0}
-.status-row b{color:var(--text)}
-.dot{width:9px;height:9px;border-radius:999px;background:var(--warn);display:inline-block;box-shadow:0 0 16px currentColor}
-.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}
-.tabs{position:sticky;top:max(8px,var(--safe-top));z-index:20;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:0 0 12px;padding:7px;border:1px solid rgba(143,208,255,.2);border-radius:22px;background:rgba(4,15,30,.78);backdrop-filter:blur(16px)}
-.tab{border:1px solid transparent;border-radius:16px;background:transparent;color:var(--muted);min-height:48px;padding:8px 7px;font-size:11px;font-weight:950;cursor:pointer}
-.tab.active{border-color:rgba(143,208,255,.45);background:linear-gradient(135deg,rgba(80,167,255,.22),rgba(239,215,142,.08));color:#fff}
-.panel{border:1px solid rgba(143,208,255,.22);border-radius:28px;background:linear-gradient(180deg,rgba(8,31,61,.94),rgba(4,15,30,.95));box-shadow:0 18px 48px rgba(0,0,0,.22);padding:16px}
-.grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(360px,1.06fr);gap:14px;align-items:start}
-.section{border:1px solid rgba(143,208,255,.16);border-radius:22px;background:rgba(4,15,30,.45);padding:14px;min-width:0}
-.section h3{margin:0 0 10px;font-family:var(--serif);color:#fff;font-size:24px;line-height:1.1}
-.section p{margin:0 0 12px;color:var(--muted);line-height:1.5;font-size:13px}
-label{display:grid;gap:6px;color:var(--muted);font-size:10.5px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-input,select,textarea{width:100%;border:1px solid rgba(143,208,255,.24);border-radius:15px;background:rgba(3,12,24,.72);color:var(--text);padding:11px 12px;outline:none}
-textarea{min-height:120px;resize:vertical;line-height:1.45;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
-textarea.big{min-height:420px}
-input:focus,select:focus,textarea:focus{border-color:rgba(143,208,255,.66);box-shadow:0 0 0 3px rgba(80,167,255,.14)}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}
-.result{border:1px dashed rgba(143,208,255,.28);border-radius:16px;background:rgba(0,0,0,.18);padding:12px;color:var(--muted);font-size:12px;line-height:1.55;white-space:pre-wrap;min-height:44px}
-.preview{border:1px solid rgba(239,215,142,.20);border-radius:24px;background:radial-gradient(circle at 50% 0%,rgba(239,215,142,.08),transparent 40%),linear-gradient(180deg,rgba(9,22,41,.94),rgba(3,10,20,.96));padding:18px;min-height:300px}
-.preview .eyebrow{color:var(--gold);font-size:11px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}
-.preview h2{font-family:var(--serif);font-size:clamp(24px,3vw,36px);line-height:1.08;margin:9px 0;color:#fff}
-.preview .meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
-.badge{border:1px solid rgba(143,208,255,.22);border-radius:999px;padding:5px 9px;color:#d8edff;background:rgba(80,167,255,.08);font-size:11px;font-weight:850}
-.statement{margin-top:12px;color:#fff8e8;font-family:var(--serif);font-size:20px;line-height:1.72;white-space:pre-wrap;text-align:center}
-.source{margin-top:13px;border-top:1px solid rgba(143,208,255,.16);padding-top:11px;color:var(--muted);font-size:12px;line-height:1.5}
-.tool-grid,.kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.tool-card,.kpi{border:1px solid rgba(143,208,255,.17);border-radius:18px;background:rgba(80,167,255,.06);padding:13px;text-decoration:none;color:var(--text);min-height:86px}
-.tool-card b,.kpi b{display:block;color:#fff;margin-bottom:6px}
-.tool-card span,.kpi small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
-.kpi strong{display:block;font-size:28px;color:var(--blue2);line-height:1.05}
-.list{display:grid;gap:9px}
-.list-card{border:1px solid rgba(143,208,255,.16);border-radius:17px;background:rgba(255,255,255,.035);padding:12px}
-.list-card b{display:block;color:#fff;margin-bottom:5px}
-.list-card small{color:var(--muted)}
-.hidden{display:none!important}
-.mobile-save{display:none}
-@media(max-width:900px){.hero-grid,.grid{grid-template-columns:1fr}.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.tool-grid,.kpi-grid{grid-template-columns:1fr 1fr}.textarea.big{min-height:320px}}
-@media(max-width:620px){body{padding-left:9px;padding-right:9px}.topbar{display:block}.toolbar{justify-content:flex-start;margin-top:10px}.tabs{grid-template-columns:repeat(2,minmax(0,1fr));position:static}.panel,.hero{border-radius:22px;padding:12px}.form-grid,.tool-grid,.kpi-grid{grid-template-columns:1fr}.mobile-save{display:inline-flex}.tab{min-height:42px}}
+html{min-height:100%;height:auto;background:var(--bg);overflow-x:hidden;overflow-y:auto;touch-action:pan-y pinch-zoom}
+body{margin:0;min-height:100dvh;height:auto;color:var(--ink);font-family:var(--sans);letter-spacing:0;overflow-x:hidden;overflow-y:auto;touch-action:pan-y pinch-zoom;
+  background:
+    radial-gradient(circle at 8% -8%,rgba(90,140,220,.28),transparent 34%),
+    radial-gradient(circle at 92% 0%,rgba(140,190,255,.18),transparent 30%),
+    linear-gradient(180deg,#05080f 0%,#09111d 52%,#05080f 100%);
+  padding:max(12px,var(--safe-top)) max(14px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(14px,env(safe-area-inset-left,0px))}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{width:min(1460px,100%);margin:0 auto;min-height:100%;touch-action:pan-y pinch-zoom}
+.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:48px;height:48px;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.28),0 0 0 1px rgba(140,190,255,.22);flex:0 0 48px}
+.brand h1{margin:0;font-family:var(--serif);font-size:23px;line-height:1.03;color:var(--gold)}
+.brand p{margin:4px 0 0;color:var(--soft);font-size:12px;font-weight:800}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.toolbar .back-btn{display:none}
+.toolbar .back-btn.show{display:inline-flex}
+.btn,.chip{border:1px solid var(--line);background:rgba(90,140,220,.10);color:var(--ink);border-radius:12px;min-height:38px;padding:8px 12px;font-size:12px;font-weight:900;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn.primary{background:linear-gradient(135deg,rgba(239,215,142,.20),rgba(90,140,220,.10));border-color:rgba(239,215,142,.38)}
+.btn.danger{color:#ffe0dc;border-color:rgba(225,125,115,.28);background:rgba(225,125,115,.08)}
+.btn:active,.chip:active{transform:scale(.98)}
+.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(10,17,28,.94),rgba(5,8,15,.96));box-shadow:var(--shadow);padding:15px;overflow:hidden;min-width:0}
+.login{max-width:420px;margin:42px auto 20px;text-align:center}
+.login-logo{width:74px;height:74px;border-radius:20px;margin:0 auto 14px;display:block;box-shadow:0 16px 42px rgba(0,0,0,.34),0 0 34px rgba(90,140,220,.22)}
+.login h2{margin:0 0 6px;font-family:var(--serif);font-size:28px;color:var(--gold)}
+.login p{margin:0 0 18px;color:var(--soft);font-size:13px;line-height:1.5}
+.login input{width:100%;margin-bottom:10px;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.32);color:var(--ink);font-size:15px}
+.login button{width:100%;justify-content:center}
+.hint{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:14px;color:var(--soft);font-size:11px;line-height:1.55;text-align:left;background:rgba(90,140,220,.055)}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:#8fc7ff;margin-right:6px;vertical-align:middle;box-shadow:0 0 18px rgba(140,190,255,.55)}
+.admin-cover{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:
+  linear-gradient(135deg,rgba(4,8,16,.98),rgba(11,24,39,.96) 54%,rgba(5,9,18,.98)),
+  radial-gradient(circle at 78% 12%,rgba(90,140,220,.24),transparent 34%),
+  radial-gradient(circle at 12% 0%,rgba(239,215,142,.11),transparent 30%);
+  box-shadow:var(--shadow);margin-bottom:12px;padding:24px;display:block}
+.admin-cover:before{content:"";position:absolute;inset:18px;border:1px solid rgba(140,190,255,.13);border-radius:17px;pointer-events:none}
+.admin-cover-text{position:relative;z-index:1;max-width:650px}
+.admin-kicker{color:var(--gold);font-size:10.5px;font-weight:950;text-transform:uppercase;letter-spacing:.13em;margin-bottom:11px}
+.admin-cover h2{font-family:var(--serif);font-size:clamp(30px,5vw,42px);line-height:1;margin:0;color:#fff4cc;overflow-wrap:normal}
+.admin-cover p{color:var(--soft);font-size:12.5px;line-height:1.55;margin:12px 0 0;max-width:560px;text-wrap:pretty}
+.cover-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;max-width:520px}
+.cover-actions .btn,.cover-actions .signal{min-width:0}
+.folder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.folder-card{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(12,24,39,.90),rgba(8,10,9,.94));padding:10px;color:var(--ink);text-align:left;min-height:74px;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.folder-card:hover{border-color:rgba(140,190,255,.52)}
+.folder-icon{display:none}
+.folder-card h3{font-family:var(--serif);font-size:18px;line-height:1.05;color:var(--gold);margin:0 0 7px}
+.folder-card p{display:none}
+.folder-card small{display:block;color:var(--muted);font-size:9.5px;font-weight:900;margin-top:0;text-transform:uppercase;line-height:1.25}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:12px;margin-bottom:12px}
+.hero-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(13,25,40,.94),rgba(7,9,10,.96));padding:16px;min-height:170px}
+.hero-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
+.hero-title h2{margin:0;font-family:var(--serif);font-size:clamp(24px,4vw,38px);line-height:1.02;color:#fff4cc}
+.hero-title p{margin:6px 0 0;color:var(--soft);font-size:12px;line-height:1.45;max-width:560px}
+.signal{border:1px solid rgba(140,190,255,.34);border-radius:999px;padding:6px 10px;color:#eef6ff;background:rgba(90,140,220,.12);font-size:11px;font-weight:950;white-space:nowrap}
+.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.metric{border:1px solid var(--line2);border-radius:15px;padding:12px;background:linear-gradient(145deg,rgba(90,140,220,.075),rgba(239,215,142,.035));min-height:84px}
+.metric b,.mini b,.quick b{display:block;color:var(--muted);font-size:10px;font-weight:950;text-transform:uppercase;margin-bottom:7px}
+.metric span{display:block;color:var(--gold);font-size:clamp(22px,4vw,34px);font-weight:950;line-height:1.02}
+.metric small,.mini small,.quick small{display:block;color:var(--soft);font-size:10.5px;line-height:1.35;margin-top:5px}
+.mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mini,.quick{border:1px solid var(--line2);border-radius:15px;padding:12px;background:rgba(0,0,0,.20);min-height:76px}
+.mini span{font-size:22px;color:#fff1bf;font-weight:950}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.quick{display:block;text-decoration:none;color:var(--ink);text-align:left;width:100%;font:inherit;cursor:pointer}
+.quick:is(button){appearance:none;-webkit-appearance:none}
+.quick:hover{border-color:rgba(140,190,255,.42)}
+.command-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
+.command-card{border:1px solid var(--line2);border-radius:16px;background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.035));padding:12px;min-height:94px}
+.command-card b{display:block;color:var(--gold);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.command-card span{display:block;color:#fff5cf;font-size:18px;font-weight:950;line-height:1.15}
+.command-card small{display:block;color:var(--soft);font-size:10.5px;line-height:1.4;margin-top:6px}
+.workflow-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}
+.workflow-step{border:1px solid var(--line2);border-radius:15px;background:rgba(0,0,0,.18);padding:11px;min-height:82px;position:relative}
+.workflow-step:before{content:"";display:block;width:9px;height:9px;border-radius:999px;background:var(--muted);box-shadow:0 0 18px rgba(140,190,255,.14);margin-bottom:8px}
+.workflow-step.ready:before{background:var(--gold);box-shadow:0 0 18px rgba(239,215,142,.42)}
+.workflow-step b{display:block;color:#fff4cc;font-size:12px;line-height:1.18}
+.workflow-step small{display:block;color:var(--soft);font-size:10px;line-height:1.35;margin-top:6px}
+.status-list{display:grid;gap:8px}
+.status-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.18);padding:10px}
+.status-row b{color:#fff4cc;font-size:12px}
+.status-row span{color:var(--soft);font-size:11px;line-height:1.35}
+.status-pill{border:1px solid rgba(239,215,142,.24);border-radius:999px;background:rgba(239,215,142,.08);color:var(--gold)!important;padding:5px 8px;font-size:10px!important;font-weight:950;white-space:nowrap}
+.preview-box{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(9,18,31,.96),rgba(4,7,13,.96));padding:14px;margin-top:12px;display:grid;gap:10px}
+.preview-frame{border:1px solid rgba(239,215,142,.18);border-radius:16px;background:radial-gradient(circle at 20% 0%,rgba(239,215,142,.09),transparent 36%),linear-gradient(180deg,rgba(18,16,12,.96),rgba(7,7,5,.96));padding:15px;min-height:180px}
+.preview-frame h4{font-family:var(--serif);color:var(--gold);font-size:24px;line-height:1.1;margin:0 0 8px}
+.preview-frame p{color:var(--soft);font-size:12px;line-height:1.55;margin:0 0 8px}
+.preview-frame blockquote{margin:10px 0;border-left:3px solid rgba(239,215,142,.46);padding:8px 0 8px 12px;color:#fff7df;font-family:var(--serif);font-size:17px;line-height:1.55}
+.preview-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.change-log{display:grid;gap:8px}
+.change-item{border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:10px}
+.change-item b{display:block;color:#fff4cc;font-size:12px}
+.change-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:4px}
+.live-preview-shell{display:grid;grid-template-columns:minmax(250px,300px) minmax(0,1fr);gap:12px;align-items:start}
+.live-preview-device{--preview-w:430px;--preview-h:932px;width:min(100%,var(--preview-w));max-width:100%;margin:0 auto;border:1px solid rgba(144,183,232,.42);border-radius:42px;background:linear-gradient(180deg,rgba(18,31,52,.98),rgba(4,8,16,.99));padding:16px;box-shadow:0 26px 70px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.06);resize:both;overflow:auto}
+.live-preview-device.mobile{--preview-w:430px;--preview-h:932px}
+.live-preview-device.tablet{--preview-w:820px;--preview-h:1100px;border-radius:30px}
+.live-preview-device.desktop{--preview-w:1100px;--preview-h:760px;border-radius:22px}
+.live-preview-device.fullscreen{position:fixed;inset:max(10px,var(--safe-top)) max(10px,env(safe-area-inset-right,0px)) max(10px,var(--safe-bottom)) max(10px,env(safe-area-inset-left,0px));z-index:9999;width:auto!important;max-width:none!important;margin:0;border-radius:24px;resize:none;display:grid;grid-template-rows:minmax(0,1fr);background:#05080f}
+.live-preview-device.fullscreen .live-preview-frame{height:100%;min-height:0;border-radius:16px}
+.live-preview-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.preview-size-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.preview-size-row label{display:grid;gap:5px;color:var(--muted);font-size:9px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
+.live-preview-frame{width:100%;height:var(--preview-h);min-height:420px;border:1px solid rgba(239,215,142,.18);border-radius:28px;background:#06080d}
+.live-preview-device.desktop .live-preview-frame{border-radius:14px}
+.admin-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.admin-form-grid .wide{grid-column:1/-1}
+.admin-textarea{width:100%;min-height:110px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.24);color:var(--ink);padding:11px;font-size:12px;line-height:1.5}
+.planner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.planner-item{border:1px solid var(--line2);border-radius:16px;background:linear-gradient(145deg,rgba(90,140,220,.07),rgba(239,215,142,.03));padding:12px}
+.planner-item b{display:block;color:#fff4cc;font-size:13px;line-height:1.25}
+.planner-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:5px}
+.planner-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.notice-note{border:1px dashed rgba(239,215,142,.30);border-radius:14px;background:rgba(239,215,142,.06);padding:11px;color:var(--soft);font-size:11px;line-height:1.55}
+.push-test-card{grid-column:1/-1;cursor:default}
+.push-test-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px}
+.tab-order-list{display:grid;gap:8px}
+.tab-order-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:9px}
+.tab-order-item b{color:#fff4cc;font-size:12px}
+.tab-order-buttons{display:flex;gap:6px}
+.push-test-controls .field{min-height:36px;font-size:11px}
+.push-test-controls .btn{min-height:36px;justify-content:center}
+.tabs{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 8px;margin:2px 0 12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.tab{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;border:1px solid var(--line2);background:rgba(90,140,220,.07);color:var(--soft);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:950}
+.tab.active{color:#fff4cc;border-color:rgba(239,215,142,.40);background:linear-gradient(135deg,rgba(239,215,142,.13),rgba(90,140,220,.12))}
+.controls{display:grid;grid-template-columns:minmax(220px,1fr) 150px 150px auto;gap:9px;margin-bottom:12px}
+.field{width:100%;max-width:100%;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.24);color:var(--ink);padding:9px 11px}
+.upload-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.45fr);gap:10px;margin-top:12px}
+.paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
+.upload-stack{display:grid;gap:9px;align-content:start}
+.upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.055)}
+.upload-status strong{color:var(--gold)}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 10px}
+.section-head h3{margin:0;font-family:var(--serif);font-size:22px;color:var(--gold)}
+.section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
+.rank-list{display:grid;gap:9px}
+.rank-card{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line2);border-radius:15px;padding:11px;background:linear-gradient(145deg,rgba(12,24,39,.90),rgba(6,8,10,.94));text-align:left;color:inherit;width:100%}
+.rank-num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:rgba(239,215,142,.10);border:1px solid rgba(239,215,142,.20);color:var(--gold);font-weight:950}
+.rank-title{margin:0;font-family:var(--serif);font-size:17px;line-height:1.25;color:#fff7db;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rank-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.tag{border:1px solid rgba(239,215,142,.16);border-radius:999px;padding:4px 8px;color:var(--soft);background:rgba(239,215,142,.045);font-size:10.5px;font-weight:900;white-space:nowrap}
+.tag.green{color:#dff0ff;border-color:rgba(140,190,255,.26);background:rgba(90,140,220,.09)}
+.tag.blue{color:#f7e6b5;border-color:rgba(239,215,142,.22);background:rgba(239,215,142,.06)}
+.score{font-size:22px;font-weight:950;color:var(--gold);min-width:42px;text-align:right}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,360px);gap:12px}
+.side-stack{display:grid;gap:12px}
+.empty{padding:18px;border:1px dashed var(--line);border-radius:14px;color:var(--soft);text-align:center;font-size:13px;line-height:1.55}
+.meta-line{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;margin-top:12px}
+.toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
+.toast.show{opacity:1}
+@media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
+@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
+
+/* Final admin-frame correction: the whole admin app should not sit in a thick outer box. */
+.app{width:min(1540px,100%)}
+main#panel.panel{
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+@media(max-width:640px){
+  body{padding-left:max(6px,env(safe-area-inset-left,0px));padding-right:max(6px,env(safe-area-inset-right,0px))}
+  main#panel.panel{padding:0!important}
+  .quick-grid,.preview-tools,.admin-form-grid,.planner-grid,.command-grid,.workflow-grid,.rank-list,.status-list,.mini-grid,.metric-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .quick,.workflow-step,.command-card,.metric,.mini,.status-row,.planner-item{min-height:auto;padding:10px}
+  .quick b,.workflow-step b,.command-card b,.metric b,.mini b,.status-row b,.planner-item b{font-size:9.4px;line-height:1.22}
+  .quick small,.workflow-step small,.command-card small,.metric small,.mini small,.status-row span,.planner-item span{font-size:9.5px;line-height:1.35}
+  .command-card span{font-size:20px}
+  .metric span,.mini span{font-size:24px}
+  .push-test-card,.admin-form-grid .wide,.preview-tools .btn:first-child,.preview-tools .btn:nth-child(2){grid-column:1/-1}
+  .push-test-controls{grid-template-columns:1fr!important}
+  .rank-card{grid-template-columns:30px minmax(0,1fr);gap:8px;padding:9px}
+  .rank-num{width:30px;height:30px;border-radius:10px}
+  .rank-title{font-size:14.5px;line-height:1.18}
+  .rank-meta{gap:4px}
+  .tag{font-size:8.8px;padding:3px 6px}
+  .score{grid-column:2;text-align:left;font-size:18px}
+  .section-head h3{font-size:20px}
+  .section-head span{font-size:9.5px}
+  .controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .controls .field:first-child,.controls .btn{grid-column:1/-1}
+}
+.admin-collapsible>.section-head{cursor:pointer;align-items:center;margin-bottom:12px}
+.admin-collapsible>.section-head h3{display:flex;align-items:center;gap:8px}
+.admin-collapsible>.section-head h3:before{content:"";width:7px;height:7px;border-radius:999px;background:var(--gold);box-shadow:0 0 16px rgba(239,215,142,.36);flex:0 0 7px}
+.admin-collapse-toggle{border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink);border-radius:999px;width:34px;height:34px;min-height:34px;padding:0;display:inline-grid;place-items:center;font-size:16px;font-weight:950;line-height:1;flex:0 0 34px}
+.admin-collapsible-body{display:grid;gap:10px}
+.admin-collapsible:not(.is-open)>.admin-collapsible-body{display:none}
+.admin-collapsible.is-collapsed{min-height:auto!important}
+.admin-collapsible.is-collapsed>.section-head{margin-bottom:0}
+.preview-box.admin-collapsible,.panel.admin-collapsible,.hero-card.admin-collapsible{display:block}
+.preview-box.admin-collapsible>.admin-collapsible-body{display:grid}
+.preview-box.admin-collapsible:not(.is-open)>.admin-collapsible-body{display:none}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="topbar">
+  <header class="topbar" id="topbar" hidden>
     <div class="brand">
-      <img src="/app-icon-192.png" alt="" width="48" height="48">
+      <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p>Publisher · Markdown · News · Planung · Statistik</p>
+        <p><span class="status-dot"></span>Command Center</p>
       </div>
     </div>
     <div class="toolbar">
-      <a class="pill" href="/" target="_blank" rel="noopener">Haupt-App</a>
-      <a class="pill" href="https://github.com/Sero91ak/dar-al-tawhid-site" target="_blank" rel="noopener">GitHub</a>
-      <button class="pill" id="refreshBtn" type="button">Status</button>
+      <button class="btn back-btn" id="adminBackBtn" type="button">← Zurück</button>
+      <button class="btn primary" id="refreshBtn" type="button">Aktualisieren</button>
+      <button class="btn danger" id="logoutBtn" type="button">Abmelden</button>
     </div>
   </header>
+  <main class="panel" id="panel"></main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+window.DAR_ANALYTICS_CONFIG={
+  supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
+  supabaseKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw",
+  adminPin:"Dawud26"
+};
+window.DAR_WORKER_CONFIG=window.DAR_WORKER_CONFIG||{
+  publishUrl:"https://dar-admin-publisher.sero91ak.workers.dev/publish"
+};
+const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
+const AUTH_KEY="darStatsAuthV1";
+const AUTH_TTL_MS=90*24*60*60*1000;
+const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.dev/publish";
+const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
+const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
+const ADMIN_DRAFT_KEY="darAdminDraftV1";
+const ADMIN_LOG_KEY="darAdminChangeLogV1";
+const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
+const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
+const ADMIN_REPORTS_KEY="darAdminReportsV1";
+const ADMIN_USERS_KEY="darAdminUsersV1";
+const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
+const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
+const DEFAULT_ADMIN_TABS=[
+  ["start","Start"],
+  ["actions","Aktionen"],
+  ["preview","Live-Vorschau"],
+  ["content","Inhalte"],
+  ["news","News"],
+  ["reports","Fehler"],
+  ["users","Benutzer"],
+  ["stats","Statistik"],
+  ["tech","Technik"],
+  ["settings","Einstellungen"],
+  ["overview","Dashboard"]
+];
+let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <h2>Blaue Admin-Zentrale</h2>
-        <p>Erstelle Beiträge als Markdown, veröffentliche sie direkt nach GitHub, setze News in der App, plane Beiträge und prüfe Live-Statistiken. Die Haupt-App wird dabei nicht optisch verändert.</p>
-      </div>
-      <div class="status-card">
-        <div class="status-row"><span><i class="dot" id="apiDot"></i> Publisher API</span><b id="apiState">Prüfen...</b></div>
-        <div class="status-row"><span>Repo</span><b id="repoState">Sero91ak/dar-al-tawhid-site</b></div>
-        <div class="status-row"><span>Beiträge</span><b id="postCountState">–</b></div>
-        <div class="status-row"><span>Nächste Nr.</span><b id="nextPostNumberState">–</b></div>
-        <div class="status-row"><span>Secret</span><b id="secretState">Nicht verbunden</b></div>
-        <div class="actions">
-          <button class="primary" id="connectBtn" type="button">Admin-Secret verbinden</button>
-          <button class="ghost" id="clearSecretBtn" type="button">Secret löschen</button>
-        </div>
+function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
+function adminIsEditing(){
+  const active=document.activeElement;
+  const tag=active&&active.tagName?active.tagName.toLowerCase():"";
+  return tag==="input"||tag==="textarea"||tag==="select"||!!(active&&active.isContentEditable)||Date.now()-lastAdminFormPointerAt<1500;
+}
+document.addEventListener("pointerdown",e=>{if(adminEditableTarget(e.target))lastAdminFormPointerAt=Date.now()},{capture:true,passive:true});
+function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
+function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&&String(c.supabaseKey||"").trim())}
+function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
+function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return false;const data=JSON.parse(raw);if(!data||!data.ok)return false;if(Date.now()-Number(data.ts||0)>AUTH_TTL_MS){localStorage.removeItem(AUTH_KEY);return false}return true}catch(e){return false}}
+function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
+function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
+function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
+function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus}catch(e){}}
+function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,updatedAt:new Date().toISOString()}))}catch(e){}addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
+function readAdminLog(){try{return JSON.parse(localStorage.getItem(ADMIN_LOG_KEY)||"[]").filter(Boolean).slice(0,12)}catch(e){return[]}}
+function addAdminLog(type,title,detail){try{const list=readAdminLog();list.unshift({type,title,detail,ts:new Date().toISOString()});localStorage.setItem(ADMIN_LOG_KEY,JSON.stringify(list.slice(0,12)))}catch(e){}}
+function renderChangeLog(){const list=readAdminLog();return list.length?list.slice(0,6).map(item=>`<div class="change-item"><b>${esc(item.type)} · ${esc(new Date(item.ts).toLocaleString("de-DE"))}</b><span>${esc(item.title)}${item.detail?`<br>${esc(item.detail)}`:""}</span></div>`).join(""):`<div class="empty">Noch kein lokales Änderungsprotokoll.</div>`}
+function lastPublishLabel(){const item=readAdminLog().find(x=>x.type==="Veröffentlicht");return item?new Date(item.ts).toLocaleDateString("de-DE"):"Noch keine"}
+function lastAdminError(){const item=readAdminLog().find(x=>x.type==="Fehler");return item?item.title:"Keine"}
+function readStore(key){try{return JSON.parse(localStorage.getItem(key)||"[]").filter(Boolean)}catch(e){return[]}}
+function writeStore(key,list){try{localStorage.setItem(key,JSON.stringify((list||[]).slice(0,80)))}catch(e){}}
+function addStoreItem(key,item){const list=readStore(key);list.unshift({...item,id:item.id||String(Date.now()),createdAt:item.createdAt||new Date().toISOString()});writeStore(key,list);return list[0]}
+function removeStoreItem(key,id){writeStore(key,readStore(key).filter(x=>String(x.id)!==String(id)))}
+function updateStoreItem(key,id,patch){writeStore(key,readStore(key).map(x=>String(x.id)===String(id)?{...x,...patch,updatedAt:new Date().toISOString()}:x))}
+function planItems(){return readStore(ADMIN_PLAN_KEY)}
+function newsItems(){return readStore(ADMIN_NEWS_KEY)}
+function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
+function userItems(){return readStore(ADMIN_USERS_KEY)}
+function readTabOrder(){
+  try{
+    const raw=JSON.parse(localStorage.getItem(ADMIN_TAB_ORDER_KEY)||"[]");
+    const allowed=new Map(DEFAULT_ADMIN_TABS);
+    const ordered=raw.filter(id=>allowed.has(id)).map(id=>[id,allowed.get(id)]);
+    DEFAULT_ADMIN_TABS.forEach(tab=>{if(!ordered.some(x=>x[0]===tab[0]))ordered.push(tab)});
+    return ordered;
+  }catch(e){return DEFAULT_ADMIN_TABS}
+}
+function writeTabOrder(tabs){try{localStorage.setItem(ADMIN_TAB_ORDER_KEY,JSON.stringify(tabs.map(x=>Array.isArray(x)?x[0]:x)))}catch(e){}}
+function moveTab(id,dir){
+  const tabs=readTabOrder();
+  const i=tabs.findIndex(x=>x[0]===id),j=i+dir;
+  if(i<0||j<0||j>=tabs.length)return;
+  const tmp=tabs[i];tabs[i]=tabs[j];tabs[j]=tmp;
+  writeTabOrder(tabs);
+}
+function resetTabOrder(){try{localStorage.removeItem(ADMIN_TAB_ORDER_KEY)}catch(e){}}
+function previewSize(){
+  try{
+    const data=JSON.parse(localStorage.getItem(ADMIN_PREVIEW_SIZE_KEY)||"{}");
+    return{
+      width:Math.max(320,Math.min(1400,Number(data.width)||430)),
+      height:Math.max(520,Math.min(1600,Number(data.height)||932)),
+      mode:["mobile","tablet","desktop"].includes(data.mode)?data.mode:"mobile"
+    };
+  }catch(e){return{width:430,height:932,mode:"mobile"}}
+}
+function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
+function normalizeWorkerPublishUrl(url){
+  const raw=String(url||"").trim();
+  return(!raw||raw==="/api/admin/publish")?DEFAULT_WORKER_PUBLISH_URL:raw;
+}
+function workerPublishUrl(){
+  try{
+    return normalizeWorkerPublishUrl(localStorage.getItem(WORKER_PUBLISH_URL_KEY)||String((window.DAR_WORKER_CONFIG||{}).publishUrl||DEFAULT_WORKER_PUBLISH_URL));
+  }catch(e){return normalizeWorkerPublishUrl(String((window.DAR_WORKER_CONFIG||{}).publishUrl||DEFAULT_WORKER_PUBLISH_URL))}
+}
+function saveWorkerPublishUrl(url){try{if(url)localStorage.setItem(WORKER_PUBLISH_URL_KEY,normalizeWorkerPublishUrl(url));else localStorage.removeItem(WORKER_PUBLISH_URL_KEY)}catch(e){}}
+function resolveWorkerUrl(url){const raw=normalizeWorkerPublishUrl(url);return /^https?:\/\//i.test(raw)?raw:new URL(raw,SITE_ORIGIN).toString()}
+function workerHealthUrl(){
+  const url=new URL(resolveWorkerUrl(workerPublishUrl()));
+  if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/health");
+  else if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/health");
+  else url.pathname="/health";
+  return url.toString();
+}
+function workerEndpoint(path){
+  const url=new URL(resolveWorkerUrl(workerPublishUrl()));
+  const clean=String(path||"").replace(/^\/+/,"");
+  if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/"+clean);
+  else if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,`/${clean}`);
+  else url.pathname=`/${clean}`;
+  return url.toString();
+}
+function savedWorkerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch(e){return""}}
+function setSavedWorkerSecret(secret){try{if(secret)localStorage.setItem(WORKER_SECRET_KEY,secret);else localStorage.removeItem(WORKER_SECRET_KEY)}catch(e){}}
+async function fetchDashboard(){
+  if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
+  const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
+  const h=headers();
+  const [liveRes,totalsRes]=await Promise.all([
+    fetch(url+"/rest/v1/rpc/analytics_live",{headers:h,cache:"no-store"}),
+    fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=300",{headers:h,cache:"no-store"})
+  ]);
+  if(!liveRes.ok)throw new Error("Live-Statistik Fehler "+liveRes.status);
+  if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);
+  return{live:await liveRes.json()||{},totals:await totalsRes.json()||[],updated:new Date()};
+}
+function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":t==="install"?"Installation":"Seite"}
+function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
+function contentUrl(row){if(row.content_type==="post")return SITE_ORIGIN+"/#post/"+encodeURIComponent(row.content_id);if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);return SITE_ORIGIN}
+function score(row){return Number(row.views||0)+Number(row.shares||0)*4+Number(row.saves||0)*3}
+function engagement(row){const v=Number(row.views||0);return v?Math.round(((Number(row.shares||0)+Number(row.saves||0))/v)*100):0}
+function countBy(rows,fn){return (rows||[]).reduce((acc,row)=>{const key=fn(row);acc[key]=(acc[key]||0)+1;return acc},{})}
+function totals(){return (lastData?.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")}
+function renderShellPreserveField(id,apply){
+  const el=document.getElementById(id);
+  const start=el&&typeof el.selectionStart==="number"?el.selectionStart:null;
+  const end=el&&typeof el.selectionEnd==="number"?el.selectionEnd:null;
+  if(typeof apply==="function")apply(el);
+  renderShell();
+  requestAnimationFrame(()=>{
+    const next=document.getElementById(id);
+    if(!next)return;
+    try{
+      next.focus({preventScroll:true});
+      if(start!==null&&typeof next.setSelectionRange==="function")next.setSelectionRange(start,end??start);
+    }catch(e){}
+  });
+}
+function installTotals(){
+  const rows=(lastData?.totals||[]).filter(x=>x.content_type==="install");
+  const count=id=>Number(rows.find(x=>String(x.content_id)===id)?.views||0);
+  const ios=count("ios"),android=count("android"),other=count("other");
+  return{ios,android,other,total:ios+android+other};
+}
+function sortedRows(rows){
+  const list=[...rows];
+  const sorter={
+    score:(a,b)=>score(b)-score(a),
+    views:(a,b)=>Number(b.views||0)-Number(a.views||0),
+    shares:(a,b)=>Number(b.shares||0)-Number(a.shares||0),
+    saves:(a,b)=>Number(b.saves||0)-Number(a.saves||0),
+    title:(a,b)=>cleanTitle(a.content_title||a.content_id).localeCompare(cleanTitle(b.content_title||b.content_id),"de")
+  }[sortMode]||((a,b)=>score(b)-score(a));
+  return list.sort(sorter);
+}
+function filteredRows(){
+  const q=query.trim().toLowerCase();
+  return sortedRows(totals().filter(row=>{
+    if(typeFilter!=="all"&&row.content_type!==typeFilter)return false;
+    if(!q)return true;
+    return [row.content_title,row.content_id,row.content_type].join(" ").toLowerCase().includes(q);
+  }));
+}
+function metric(label,value,note,cls=""){return `<div class="metric ${cls}"><b>${esc(label)}</b><span>${esc(value)}</span><small>${esc(note)}</small></div>`}
+function rankCard(row,idx,mode="score"){
+  const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);
+  const title=cleanTitle(row.content_title||row.content_id);
+  const href=contentUrl(row);
+  const main=mode==="views"?views:mode==="shares"?shares:mode==="saves"?saves:score(row);
+  return `<button class="rank-card" data-href="${esc(href)}" type="button">
+    <span class="rank-num">${idx+1}</span>
+    <span>
+      <h4 class="rank-title">${esc(title)}</h4>
+      <span class="rank-meta">
+        <span class="tag">${esc(typeLabel(row.content_type))}</span>
+        <span class="tag green">${views} gelesen</span>
+        <span class="tag blue">${shares} geteilt</span>
+        <span class="tag">${saves} gespeichert</span>
+        <span class="tag">${engagement(row)}% Reaktion</span>
+      </span>
+    </span>
+    <strong class="score">${main}</strong>
+  </button>`;
+}
+function bindRankCards(){document.querySelectorAll(".rank-card[data-href]").forEach(card=>{card.onclick=()=>window.open(card.getAttribute("data-href"),"_blank","noopener")})}
+function enhanceAdminCollapsibles(){
+  document.querySelectorAll("#panel .panel,#panel .hero-card,#panel .preview-box").forEach((card,index)=>{
+    if(card.dataset.collapseReady==="1")return;
+    const head=card.querySelector(":scope > .section-head");
+    if(!head)return;
+    const children=[...card.children].filter(child=>child!==head);
+    if(!children.length)return;
+    const body=document.createElement("div");
+    body.className="admin-collapsible-body";
+    children.forEach(child=>body.appendChild(child));
+    const toggle=document.createElement("button");
+    toggle.className="admin-collapse-toggle";
+    toggle.type="button";
+    toggle.setAttribute("aria-label","Bereich einklappen");
+    toggle.textContent="−";
+    head.appendChild(toggle);
+    card.classList.add("admin-collapsible","is-open");
+    card.dataset.collapseReady="1";
+    card.appendChild(body);
+    const setOpen=open=>{
+      card.classList.toggle("is-open",open);
+      card.classList.toggle("is-collapsed",!open);
+      toggle.textContent=open?"−":"+";
+      toggle.setAttribute("aria-label",open?"Bereich einklappen":"Bereich öffnen");
+    };
+    if(index>2&&currentTab!=="actions"&&currentTab!=="start")setOpen(false);
+    head.addEventListener("click",event=>{
+      if(event.target.closest("a,button,input,select,textarea,label,[contenteditable='true']"))return;
+      setOpen(!card.classList.contains("is-open"));
+    });
+    toggle.onclick=event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen(!card.classList.contains("is-open"));
+    };
+  });
+}
+function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^"+key+":\\s*[\"']?(.*?)[\"']?\\s*$","m"));return m?m[1].trim():""}
+function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
+function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
+function nextPostNumber(files){return (Array.isArray(files)?files.filter(f=>f&&(f.name||typeof f==="string")):[]).length+1}
+function workerNextNumberUrl(publishUrl){const url=new URL(resolveWorkerUrl(publishUrl||workerPublishUrl()));if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/api/admin/next-number");else if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/next-number");else url.pathname="/api/admin/next-number";return url.toString()}
+async function resolveNextPostNumber(){
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  if(secret){
+    try{
+      const res=await fetch(workerNextNumberUrl(),{headers:{"X-Admin-Secret":secret},cache:"no-store"});
+      const data=await res.json().catch(()=>({}));
+      if(res.ok&&data.ok!==false&&Number(data.nextNumber)>0)return Number(data.nextNumber);
+    }catch(e){}
+  }
+  const index=await loadPostsIndexForUpload();
+  return nextPostNumber(index.data.files);
+}
+function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
+async function loadPostsIndexForUpload(){
+  const res=await fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}`,{cache:"no-store"});
+  if(!res.ok)throw new Error("posts-index.json konnte nicht geladen werden");
+  return{data:await res.json()};
+}
+function normalizeMarkdownForUpload(markdown,nextNumber){
+  let out=String(markdown||"").trim();
+  if(!out)return out;
+  const iso=new Date().toISOString().replace(/\.\d{3}Z$/,".000Z");
+  if(/^date:\s*["']?.*?["']?\s*$/m.test(out))out=out.replace(/^date:\s*["']?.*?["']?\s*$/m,`date: "${iso}"`);
+  const id=frontmatterValue(out,"id");
+  if(id){
+    const next=String(nextNumber).padStart(3,"0");
+    const updated=/-\d{3}$/.test(id)?id.replace(/-\d{3}$/,`-${next}`):`${id}-${next}`;
+    out=out.replace(/^id:\s*["']?.*?["']?\s*$/m,`id: "${updated}"`);
+  }
+  return out+"\n";
+}
+async function publishPostViaWorkerRequest(markdown,filename){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
+  if(!publishUrl)throw new Error("Worker URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(publishUrl);
+  if(remember)setSavedWorkerSecret(secret);else setSavedWorkerSecret("");
+  const res=await fetch(resolveWorkerUrl(publishUrl),{
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+    body:JSON.stringify({markdown,filename})
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  return data;
+}
+async function workerPostRequest(path,payload){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
+  if(!publishUrl)throw new Error("Worker URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(publishUrl);
+  if(remember)setSavedWorkerSecret(secret);else if(document.getElementById("rememberWorkerSecret"))setSavedWorkerSecret("");
+  const res=await fetch(workerEndpoint(path),{
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+    body:JSON.stringify(payload||{})
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  return data;
+}
+function renderLogin(){
+  document.getElementById("topbar").hidden=true;
+  document.getElementById("panel").innerHTML=`
+    <section class="login">
+      <img class="login-logo" src="/admin/admin-icon-192.png" alt="" width="74" height="74">
+      <h2>Admin Command Center</h2>
+      <p>Private Steuerzentrale für DAR AL TAWḤID mit Live-Zahlen, Inhaltsanalyse und schnellen Arbeitswegen.</p>
+      <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
+      <button class="btn primary" id="loginBtn" type="button">Dashboard öffnen</button>
+      <div class="hint"><strong>Als eigene Admin-App speichern:</strong><br>iPhone: Safari teilen, dann „Zum Home-Bildschirm“.<br>Android: Browser-Menü, dann „App installieren“.<br><br>URL: <strong>${esc(location.origin+"/admin/")}</strong></div>
+    </section>`;
+  const btn=document.getElementById("loginBtn"),input=document.getElementById("pinInput");
+  btn.onclick=()=>{if(checkPin(input.value.trim())){setAuth(true);renderApp()}else alert("Falsches Passwort.")};
+  input.onkeydown=e=>{if(e.key==="Enter")btn.click()};
+  setTimeout(()=>{try{input.focus()}catch(e){}},80);
+}
+function renderShell(){
+  const data=lastData||{live:{},totals:[],updated:new Date()};
+  const live=data.live||{},rows=totals();
+  const posts=rows.filter(x=>x.content_type==="post"),duas=rows.filter(x=>x.content_type==="dua");
+  const installs=installTotals();
+  const views=rows.reduce((n,r)=>n+Number(r.views||0),0),shares=rows.reduce((n,r)=>n+Number(r.shares||0),0),saves=rows.reduce((n,r)=>n+Number(r.saves||0),0);
+  const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
+  const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
+  const ctx={live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs,updated:data.updated};
+  if(currentTab==="schedule")currentTab="actions";
+  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="stats"?renderStats(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  document.getElementById("panel").innerHTML=`
+    <nav class="tabs">
+      ${readTabOrder().map(([id,label])=>tabButton(id,label)).join("")}
+    </nav>
+    ${body}
+    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
+  bindUi();
+  enhanceAdminCollapsibles();
+  updateAdminBackButton();
+}
+function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
+function navigateAdmin(tab,{skipStack=false}={}){
+  if(tab==="schedule")tab="actions";
+  if(!tab||tab===currentTab)return;
+  if(!skipStack)adminNavStack.push(currentTab);
+  currentTab=tab;
+  renderShell();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function adminBack(){
+  const prev=adminNavStack.pop();
+  if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="start"}else{return}
+  renderShell();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function updateAdminBackButton(){
+  const btn=document.getElementById("adminBackBtn");
+  if(!btn)return;
+  const canGoBack=currentTab!=="start"||adminNavStack.length>0;
+  btn.classList.toggle("show",canGoBack);
+  btn.disabled=!canGoBack;
+}
+function folderCard(icon,title,text,tab,meta){
+  return `<button class="folder-card" data-tab="${esc(tab)}" type="button"><span class="folder-icon">${esc(icon)}</span><h3>${esc(title)}</h3><p>${esc(text)}</p><small>${esc(meta||"Öffnen")}</small></button>`;
+}
+function renderStart(ctx){
+  return `<section class="admin-cover">
+    <div class="admin-cover-text">
+      <div class="admin-kicker">DAR AL TAWḤID · Verwaltung</div>
+      <h2>DAR Admin</h2>
+      <p>Geordnete Verwaltung für Statistik, Inhalte und Veröffentlichung. Alles ist in klare Bereiche gelegt, damit die Startseite ruhig bleibt.</p>
+      <div class="cover-actions">
+        <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
+        <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
+        <button class="btn" data-tab="overview" type="button">Statistik öffnen</button>
+        <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
       </div>
     </div>
   </section>
-
-  <nav class="tabs" aria-label="Admin Bereiche">
-    <button class="tab active" data-tab="compose" type="button">Beitrag</button>
-    <button class="tab" data-tab="markdown" type="button">Markdown</button>
-    <button class="tab" data-tab="news" type="button">News</button>
-    <button class="tab" data-tab="schedule" type="button">Planung</button>
-    <button class="tab" data-tab="daily-push" type="button">Tages-Pushs</button>
-    <button class="tab" data-tab="stats" type="button">Statistik</button>
-    <button class="tab" data-tab="tools" type="button">Tools</button>
-  </nav>
-
-  <main class="panel">
-    <section id="tab-compose" class="tab-panel">
-      <div class="grid">
-        <div class="section">
-          <h3>Beitrag erstellen</h3>
-          <p>Felder ausfüllen, Markdown prüfen und dann direkt nach GitHub veröffentlichen.</p>
-          <div class="form-grid">
-            <label>Titel<input id="postTitle" placeholder="z.B. Ibn ʿAbbās: Rabbānī sein"></label>
-            <label>Kategorie<select id="postCategory"><option>Manhaj</option><option>Aqīdah</option><option>Fiqh</option><option>Hadith</option><option>Tafsīr</option><option>Zuhd</option><option>Adab</option><option>Akhlaq</option><option>Biographie</option></select></label>
-            <label>Thema<input id="postTopic" placeholder="Wissen, Rabbānī, Salaf"></label>
-            <label>Gelehrter / Person<input id="postScholar" placeholder="Ibn ʿAbbās"></label>
-            <label>Buch / Werk<input id="postBook" placeholder="Quelle / Werk"></label>
-            <label>Tags<input id="postTags" placeholder="#Manhaj, #Wissen"></label>
-          </div>
-          <label>Quellenzeile<input id="postSource" placeholder="Quelle mit Band/Seite"></label>
-          <label>Aussage / Beitragstext<textarea id="postBody" placeholder="Aussage oder Text hier einfügen"></textarea></label>
-          <p class="result" id="postNumberHint" style="margin-top:0;margin-bottom:10px;border-style:solid">Beitragsnummer wird geladen…</p>
-          <label>Optionaler Dateiname<input id="postFilename" placeholder="leer lassen = automatisch"></label>
-          <div class="actions">
-            <button class="ghost" id="buildMarkdownBtn" type="button">Markdown bauen</button>
-            <button class="primary" id="publishComposeBtn" type="button">Beitrag live veröffentlichen</button>
-            <button class="ghost" id="copyMarkdownBtn" type="button">Markdown kopieren</button>
-          </div>
-          <div class="result" id="composeResult">Bereit.</div>
-        </div>
-        <div class="section">
-          <h3>Vorschau</h3>
-          <article class="preview" id="postPreview"></article>
-        </div>
+  <section class="folder-grid">
+    ${folderCard("①","Aktionen","Neuen Beitrag, Planung, News und Upload zentral steuern.","actions",`${planItems().length} geplant`)}
+    ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
+    ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
+    ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
+    ${folderCard("⑤","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
+    ${folderCard("⑥","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
+    ${folderCard("⑦","Statistik","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","stats",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
+    ${folderCard("⑧","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
+    ${folderCard("⑨","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
+  </section>
+  <section class="command-grid">
+    <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
+    <div class="command-card"><b>Nächster Entwurf</b><span>${draftMarkdown.trim()?"Bereit":"Leer"}</span><small>${draftFilename?esc(draftFilename):"Noch kein Beitrag vorbereitet"}</small></div>
+    <div class="command-card"><b>Push-Status</b><span>${"Notification" in window?"Prüfbar":"Nicht unterstützt"}</span><small>Test nur auf diesem Admin-Gerät</small></div>
+    <div class="command-card"><b>Letzter Fehler</b><span>${esc(lastAdminError())}</span><small>Aus lokalem Admin-Protokoll</small></div>
+  </section>
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-title"><div><h2>Heute</h2><p>Kurze Lageübersicht ohne offene Listen.</p></div></div>
+      <div class="metric-grid">
+        ${metric("Besucher",Number(ctx.live.today_sessions||0),"einzigartige Sitzungen")}
+        ${metric("Aufrufe",Number(ctx.live.today_views||0),"Seiten und Beiträge")}
+        ${metric("Geteilt",Number(ctx.live.today_shares||0),"Shares heute")}
+        ${metric("Gespeichert",Number(ctx.live.today_saves||0),"Favoriten heute")}
       </div>
-    </section>
-
-    <section id="tab-markdown" class="tab-panel hidden">
-      <div class="grid">
-        <div class="section">
-          <h3>Markdown direkt veröffentlichen</h3>
-          <p>Für fertige Beiträge aus Notizen, GitHub oder alten Entwürfen. Frontmatter wird vom Publisher normalisiert.</p>
-          <label>Markdown<textarea class="big" id="rawMarkdown" spellcheck="false"></textarea></label>
-          <label>Dateiname optional<input id="rawFilename" placeholder="z.B. ibn-abbas-rabbani-sein.md"></label>
-          <div class="actions">
-            <button class="primary" id="publishRawBtn" type="button">Markdown veröffentlichen</button>
-            <button class="ghost" id="loadFromComposeBtn" type="button">Aus Beitrag übernehmen</button>
-            <button class="ghost" id="copyRawBtn" type="button">Kopieren</button>
-          </div>
-          <div class="result" id="rawResult">Bereit.</div>
-        </div>
-        <div class="section">
-          <h3>Markdown-Vorschau</h3>
-          <div class="preview" id="markdownPreview"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tab-news" class="tab-panel hidden">
-      <div class="grid">
-        <div class="section">
-          <h3>News erstellen</h3>
-          <p>Diese Meldung erscheint in der Haupt-App im Bereich "Neu im Fokus".</p>
-          <label>News-Titel<input id="newsTitle" placeholder="Neue Beiträge online"></label>
-          <label>Text<textarea id="newsText" placeholder="Kurze Meldung für die App"></textarea></label>
-          <div class="form-grid">
-            <label>Badge<input id="newsBadge" value="News"></label>
-            <label>Sichtbar für Stunden<input id="newsHours" type="number" min="1" value="24"></label>
-            <label>Ziel<select id="newsNav"><option value="recent">Neueste Beiträge</option><option value="topics">Kategorien</option><option value="duas">Duʿāʾ</option><option value="more">Mehr</option></select></label>
-            <label>Wert optional<input id="newsValue" placeholder="Post-ID oder leer"></label>
-          </div>
-          <div class="actions">
-            <button class="primary" id="publishNewsBtn" type="button">News live setzen</button>
-          </div>
-          <div class="result" id="newsResult">Bereit.</div>
-        </div>
-        <div class="section">
-          <h3>News-Vorschau</h3>
-          <div class="list-card"><b id="newsPreviewTitle">Neue Beiträge online</b><small id="newsPreviewText">Kurze Meldung für die App</small></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tab-schedule" class="tab-panel hidden">
-      <div class="grid">
-        <div class="section">
-          <h3>Beitrag planen</h3>
-          <p>Speichert einen Beitrag in GitHub unter der Planungsdatei. Der Worker kann ihn später veröffentlichen.</p>
-          <label>Markdown<textarea class="big" id="scheduleMarkdown" spellcheck="false"></textarea></label>
-          <div class="form-grid">
-            <label>Veröffentlichen am<input id="scheduleWhen" type="datetime-local"></label>
-            <label>Dateiname optional<input id="scheduleFilename" placeholder="automatisch"></label>
-          </div>
-          <div class="actions">
-            <button class="primary" id="scheduleBtn" type="button">Planen speichern</button>
-            <button class="ghost" id="runSchedulerBtn" type="button">Scheduler jetzt ausführen</button>
-          </div>
-          <div class="result" id="scheduleResult">Bereit.</div>
-        </div>
-        <div class="section">
-          <h3>Hinweis</h3>
-          <p>Geplante Beiträge werden in `content/admin/planned-posts.json` gespeichert. Der Cloudflare Worker hat bereits Scheduler-Unterstützung.</p>
-          <div class="tool-grid">
-            <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/admin" target="_blank" rel="noopener"><b>Planungsdatei</b><span>Auf GitHub öffnen</span></a>
-            <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions" target="_blank" rel="noopener"><b>Actions</b><span>Workflows prüfen</span></a>
-            <a class="tool-card" href="/#recent" target="_blank" rel="noopener"><b>Neueste</b><span>In der App prüfen</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tab-daily-push" class="tab-panel hidden">
-      <div class="grid">
-        <div class="section">
-          <h3>Tägliche Pushs</h3>
-          <p>Morgens Duʿāʾ des Tages, mittags Heute empfohlen. Der Versand läuft serverseitig über GitHub Actions und OneSignal.</p>
-          <div class="kpi-grid">
-            <div class="kpi"><b>Duʿāʾ des Tages</b><strong>09:00</strong><small>pro Nutzer-Zeitzone</small></div>
-            <div class="kpi"><b>Heute empfohlen</b><strong>12:00</strong><small>pro Nutzer-Zeitzone</small></div>
-            <div class="kpi"><b>Doppelschutz</b><strong>1×</strong><small>pro Nutzer und Tag</small></div>
-          </div>
-          <div class="actions">
-            <a class="primary" href="https://github.com/Sero91ak/dar-al-tawhid-site/blob/main/content/admin/daily-push.json" target="_blank" rel="noopener">Konfiguration öffnen</a>
-            <a class="ghost" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/daily-content-push.yml" target="_blank" rel="noopener">Scheduler-Status</a>
-            <button class="ghost" id="copyDailyPushConfigBtn" type="button">Standard-Konfig kopieren</button>
-          </div>
-          <div class="result" id="dailyPushResult">Bereit. Manuelle Auswahl erfolgt über `content/admin/daily-push.json`; leer = automatische Auswahl geprüfter Inhalte.</div>
-        </div>
-        <div class="section">
-          <h3>Push-Vorschau</h3>
-          <div class="list">
-            <div class="list-card"><b>Duʿāʾ des Tages</b><small>Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ.</small></div>
-            <div class="list-card"><b>Heute empfohlen</b><small>Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.</small></div>
-          </div>
-          <p style="margin-top:12px">Besucher können beide Kategorien einzeln in der App deaktivieren. Gebetszeiten und Taḥajjud bleiben getrennte Schalter.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="tab-stats" class="tab-panel hidden">
-      <div class="section">
-        <h3>Live-Statistik</h3>
-        <p>Besucher, Aufrufe, Teilen und gespeicherte Beiträge.</p>
-        <div id="statsBox" class="result">Statistik wird geladen...</div>
-      </div>
-    </section>
-
-    <section id="tab-tools" class="tab-panel hidden">
-      <div class="section">
-        <h3>Werkzeuge</h3>
-        <div class="tool-grid">
-          <a class="tool-card" href="https://dar-admin-publisher.sero91ak.workers.dev/health" target="_blank" rel="noopener"><b>Publisher Health</b><span>Cloudflare Worker prüfen</span></a>
-          <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/content/posts" target="_blank" rel="noopener"><b>Beiträge</b><span>Markdown-Dateien auf GitHub</span></a>
-          <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/blob/main/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Posts-Index</b><span>Automatisch aktualisiert</span></a>
-          <a class="tool-card" href="https://github.com/Sero91ak/dar-al-tawhid-site/blob/main/content/updates/current.json" target="_blank" rel="noopener"><b>News-Datei</b><span>Neu im Fokus</span></a>
-          <a class="tool-card" href="/#image-editor" target="_blank" rel="noopener"><b>Bild-Beitrag</b><span>Vorlagen & Teilen</span></a>
-          <a class="tool-card" href="/admin/" target="_blank" rel="noopener"><b>Admin installieren</b><span>Als PWA speichern</span></a>
-        </div>
-        <div class="actions">
-          <button class="ghost" id="exportDraftBtn" type="button">Entwurf exportieren</button>
-          <button class="ghost" id="importDraftBtn" type="button">Entwurf importieren</button>
-        </div>
-        <div class="result" id="toolsResult">Bereit.</div>
-      </div>
-    </section>
-  </main>
-</div>
-
-<script>
-const PUBLISHER="https://dar-admin-publisher.sero91ak.workers.dev";
-const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
-const POSTS_INDEX_URL=SITE_ORIGIN+"/content/posts/posts-index.json";
-let postNumberInfo={postCount:0,nextNumber:0,maxSerial:0};
-const SECRET_KEY="darAdminPublisherSecretV1";
-const DRAFT_KEY="darAdminPublisherDraftV1";
-const TAB_KEY="darAdminPublisherTabV1";
-const ANALYTICS={
-  supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
-  supabaseKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw"
-};
-const $=id=>document.getElementById(id);
-function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
-function secret(){try{return localStorage.getItem(SECRET_KEY)||""}catch(e){return""}}
-function setSecret(v){try{v?localStorage.setItem(SECRET_KEY,v):localStorage.removeItem(SECRET_KEY)}catch(e){}updateSecretState()}
-function updateSecretState(){$("secretState").textContent=secret()?"Verbunden":"Nicht verbunden"}
-function headers(){return{"Content-Type":"application/json","X-Admin-Secret":secret()}}
-async function api(path,payload){
-  if(!secret())throw new Error("Admin-Secret fehlt. Bitte zuerst verbinden.");
-  const res=await fetch(PUBLISHER+path,{method:"POST",headers:headers(),body:JSON.stringify(payload||{})});
-  const data=await res.json().catch(()=>({}));
-  if(!res.ok||data.ok===false)throw new Error(data.error||("API Fehler "+res.status));
-  return data;
+    </div>
+    <div class="hero-card">
+      <div class="section-head"><h3>Bestes Signal</h3><span>${esc(ctx.updated.toLocaleTimeString("de-DE"))}</span></div>
+      ${ctx.top[0]?`<div class="empty">Aktuell stärkster Inhalt:<br><strong>${esc(cleanTitle(ctx.top[0].content_title||ctx.top[0].content_id))}</strong><br>Score ${score(ctx.top[0])} · ${Number(ctx.top[0].views||0)} Aufrufe</div>`:`<div class="empty">Noch keine Statistikdaten vorhanden.</div>`}
+    </div>
+  </section>`;
 }
-function result(id,msg,ok=true){const el=$(id);if(el){el.style.borderColor=ok?"rgba(110,231,168,.42)":"rgba(255,141,141,.45)";el.textContent=msg}}
-function slugify(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ʿ|'/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80)||"beitrag"}
-function padPostNumber(n){return String(Math.max(1,Number(n)||1)).padStart(3,"0")}
-function suggestAutoFilename(){
-  const title=$("postTitle").value.trim()||"neuer-beitrag";
-  const category=$("postCategory").value||"beitrag";
-  return `${slugify(category)}-${padPostNumber(postNumberInfo.nextNumber)}-${slugify(title.replace(/^📖\s*/,""))}.md`;
+function renderOverview(ctx){
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Stärkste Inhalte</h3><span>nach Admin-Score</span></div>
+      <div class="rank-list">${ctx.top.length?ctx.top.map((r,i)=>rankCard(r,i,"score")).join(""):`<div class="empty">Noch keine Daten.</div>`}</div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel">
+        <div class="section-head"><h3>App-Installationen</h3><span>iOS / Android</span></div>
+        <div class="mini-grid">
+          <div class="mini"><b>iOS</b><span>${ctx.installs.ios}</span><small>Home-Bildschirm-App gestartet</small></div>
+          <div class="mini"><b>Android</b><span>${ctx.installs.android}</span><small>PWA installiert oder gestartet</small></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h3>Meist gelesen</h3><span>Top 5</span></div>
+        <div class="rank-list">${ctx.topViews.length?ctx.topViews.map((r,i)=>rankCard(r,i,"views")).join(""):`<div class="empty">Noch keine Aufrufe.</div>`}</div>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h3>Meist geteilt</h3><span>Top 5</span></div>
+        <div class="rank-list">${ctx.topShares.length?ctx.topShares.map((r,i)=>rankCard(r,i,"shares")).join(""):`<div class="empty">Noch keine Shares.</div>`}</div>
+      </div>
+    </aside>
+  </section>`;
 }
-function renderPostNumberInfo(){
-  const count=Number(postNumberInfo.postCount||0);
-  const next=Number(postNumberInfo.nextNumber||0);
-  const maxSerial=Number(postNumberInfo.maxSerial||0);
-  if($("postCountState"))$("postCountState").textContent=count?String(count):"–";
-  if($("nextPostNumberState"))$("nextPostNumberState").textContent=next?String(next):"–";
-  const hint=$("postNumberHint");
-  if(hint){
-    if(!count){hint.textContent="Beitragsnummer konnte nicht geladen werden. Bitte Status aktualisieren.";return}
-    hint.textContent=`Aktuell ${count} Beiträge im Index · Nächste Nummer: ${next} · Vorschlag: ${suggestAutoFilename()}${maxSerial&&maxSerial>=next?` · Höchste Serien-Nr. in Dateinamen: ${maxSerial}`:""}`;
-  }
-  const fn=$("postFilename");
-  if(fn&&!fn.value.trim())fn.placeholder=`automatisch → ${suggestAutoFilename()}`;
+function renderLivePreview(ctx){
+  const url=`${SITE_ORIGIN}/?adminPreview=${Date.now()}#home`;
+  const size=previewSize();
+  return `<section class="live-preview-shell">
+    <aside class="side-stack">
+      <div class="panel">
+        <div class="section-head"><h3>Live-Vorschau</h3><span>echte App</span></div>
+        <div class="status-list">
+          <div class="status-row"><span><b>iPhone Pro Max</b><br>Große PWA-Vorschau mit realistischer Höhe.</span><strong class="status-pill">Standard</strong></div>
+          <div class="status-row"><span><b>Flexible Größe</b><br>Breite und Höhe manuell prüfen.</span><strong class="status-pill">${size.width} × ${size.height}</strong></div>
+          <div class="status-row"><span><b>Veröffentlichung</b><br>Änderungen werden erst durch den Upload live.</span><strong class="status-pill">gesichert</strong></div>
+        </div>
+        <div class="live-preview-toolbar" style="margin-top:12px">
+          <button class="btn primary" id="previewProMaxBtn" type="button">iPhone Pro Max</button>
+          <button class="btn primary" id="previewMobileBtn" type="button">Mobile</button>
+          <button class="btn" id="previewTabletBtn" type="button">Tablet</button>
+          <button class="btn" id="previewDesktopBtn" type="button">Desktop</button>
+          <button class="btn" id="previewFullscreenBtn" type="button">Vollbild</button>
+          <button class="btn" id="previewResetBtn" type="button">Reset</button>
+          <a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Extern öffnen</a>
+        </div>
+        <div class="preview-size-row">
+          <label>Breite <input class="field" id="previewWidthInput" type="number" min="320" max="1400" step="10" value="${esc(size.width)}"></label>
+          <label>Höhe <input class="field" id="previewHeightInput" type="number" min="520" max="1600" step="10" value="${esc(size.height)}"></label>
+        </div>
+        <div class="notice-note" style="margin-top:10px">Der Rahmen ist im Browser zusätzlich an der Ecke ziehbar. Der Inhalt bleibt die echte Besucher-App als Live-iframe.</div>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h3>Prüfliste</h3><span>vor Live</span></div>
+        ${validationList(draftMarkdown)}
+      </div>
+    </aside>
+    <div class="live-preview-device ${esc(size.mode)}" id="livePreviewDevice" style="--preview-w:${esc(size.width)}px;--preview-h:${esc(size.height)}px">
+      <iframe class="live-preview-frame" id="livePreviewFrame" src="${esc(url)}" title="DAR AL TAWḤID Live-Vorschau"></iframe>
+    </div>
+  </section>`;
 }
-async function loadPostNumberInfoFallback(){
-  const res=await fetch(POSTS_INDEX_URL,{cache:"no-store"});
-  if(!res.ok)throw new Error("Posts-Index "+res.status);
-  const data=await res.json();
-  const files=Array.isArray(data.files)?data.files:[];
-  const postCount=files.filter(f=>f&&f.name).length;
-  let maxSerial=0;
-  files.forEach(f=>{
-    const name=String(f.name||"");
-    for(const m of name.matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g))maxSerial=Math.max(maxSerial,Number(m[1]));
-  });
-  postNumberInfo={postCount,nextNumber:postCount+1,maxSerial};
-  renderPostNumberInfo();
+function plannerCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.title||"Ohne Titel")}</b>
+    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>Zeitzone: ${esc(item.timezone||"Europe/Berlin")}<br>${esc(item.note||"")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
+    <div class="planner-actions">
+      <button class="btn" data-plan-ready="${esc(item.id)}" type="button">Bereit</button>
+      <button class="btn primary" data-plan-worker="${esc(item.id)}" type="button">Worker planen</button>
+      <button class="btn danger" data-plan-remove="${esc(item.id)}" type="button">Entfernen</button>
+    </div>
+  </article>`;
 }
-async function loadPostNumberInfo(){
-  if($("postCountState"))$("postCountState").textContent="…";
-  if($("nextPostNumberState"))$("nextPostNumberState").textContent="…";
-  if(secret()){
-    try{
-      const res=await fetch(PUBLISHER+"/api/admin/next-number",{headers:headers(),cache:"no-store"});
-      const data=await res.json().catch(()=>({}));
-      if(res.ok&&data.ok!==false){
-        postNumberInfo={postCount:Number(data.postCount||0),nextNumber:Number(data.nextNumber||0),maxSerial:Number(data.maxSerial||0)};
-        renderPostNumberInfo();
-        return;
-      }
-    }catch(e){}
-  }
-  try{await loadPostNumberInfoFallback()}catch(e){
-    if($("postCountState"))$("postCountState").textContent="Fehler";
-    if($("nextPostNumberState"))$("nextPostNumberState").textContent="–";
-    const hint=$("postNumberHint");
-    if(hint)hint.textContent="Beitragsnummer konnte nicht geladen werden: "+(e.message||e);
-  }
+function renderPlanningPanel(){
+  const items=planItems();
+  return `<div class="preview-box">
+      <div class="section-head"><h3>Geplante Veröffentlichungen</h3><span>${items.length} lokale Einträge</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="planTitle" placeholder="Titel / Beitragsname">
+        <input class="field" id="planWhen" type="datetime-local">
+        <input class="field" id="planCategory" placeholder="Kategorie / Serie">
+        <select class="field" id="planTimezone"><option>Europe/Berlin</option><option>UTC</option></select>
+        <select class="field wide" id="planStatus"><option>Entwurf</option><option>Geplant</option><option>Sofort veröffentlichen</option><option>In Prüfung</option><option>Bereit</option><option>Veröffentlicht</option><option>Abgebrochen</option></select>
+        <textarea class="admin-textarea wide" id="planNote" placeholder="Notiz, Quelle, Datei oder Arbeitsstand"></textarea>
+        <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">${items.length?"Automatisches Live-Schalten läuft über Cloudflare Worker + Cron. Speichere zuerst die Planung und sende sie dann mit „Worker planen“ an den Scheduler.":"Noch keine geplanten Beiträge. Markdown unten einfügen, Uhrzeit setzen und dann an den Worker-Scheduler übergeben."}</div>
+      ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.map(plannerCard).join("")}</div>`:""}
+    </div>`;
 }
-function splitTags(s){return String(s||"").split(",").map(x=>x.trim()).filter(Boolean)}
-function q(s){return String(s||"").replace(/"/g,'\\"')}
-function buildMarkdown(){
-  const title=$("postTitle").value.trim();
-  const tags=splitTags($("postTags").value);
-  const body=$("postBody").value.trim();
-  const lines=[
-    "---",
-    `title: "${q(title)}"`,
-    `date: "${new Date().toISOString()}"`,
-    `category: "${q($("postCategory").value)}"`,
-    `topic: "${q($("postTopic").value.trim())}"`,
-    `scholar: "${q($("postScholar").value.trim())}"`,
-    `book: "${q($("postBook").value.trim())}"`,
-    `source: "${q($("postSource").value.trim())}"`,
-    "tags:",
-    ...tags.map(t=>"  - "+q(t)),
-    "---",
-    "",
-    body
+function renderSchedule(){
+  return `<section class="panel">${renderPlanningPanel()}</section>`;
+}
+function newsCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.title||"News")}</b>
+    <span>${esc(item.text||"")}<br>Sichtbar bis: ${esc(item.until||"24 Stunden")} · Status: ${esc(item.status||"Entwurf")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
+    <div class="planner-actions">
+      <button class="btn primary" data-news-publish="${esc(item.id)}" type="button">Live veröffentlichen</button>
+      <button class="btn danger" data-news-remove="${esc(item.id)}" type="button">Entfernen</button>
+    </div>
+  </article>`;
+}
+function renderNewsComposer(){
+  const items=newsItems();
+  return `<div class="preview-box">
+    <div class="section-head"><h3>News / Neues erstellen</h3><span>${items.length} vorbereitet</span></div>
+    <div class="admin-form-grid">
+      <input class="field" id="newsTitle" placeholder="Kurzer Titel">
+      <select class="field" id="newsDuration"><option value="24 Stunden">24 Stunden</option><option value="bis manuell deaktiviert">manuell deaktivieren</option><option value="Entwurf">als Entwurf</option></select>
+      <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
+      <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
+    </div>
+    ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.slice(0,4).map(newsCard).join("")}</div>`:`<div class="notice-note" style="margin-top:12px">Noch keine News vorbereitet. Neue Meldungen erscheinen hier erst nach dem Speichern.</div>`}
+  </div>`;
+}
+function renderNews(){
+  const items=newsItems();
+  return `<section class="split">
+    <div class="panel">
+      ${renderNewsComposer()}
+      <div class="notice-note" style="margin-top:12px">News werden beim Veröffentlichen über den Cloudflare Worker in content/updates/current.json geschrieben und erscheinen danach auf der Startseite unter „Neu im Fokus“.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
+      ${items.length?`<div class="planner-grid">${items.map(newsCard).join("")}</div>`:`<div class="empty">Noch keine News vorbereitet.</div>`}
+    </aside>
+  </section>`;
+}
+function reportCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.area||"Bereich")} · ${esc(item.status||"Neu")}</b>
+    <span>${esc(item.text||"Keine Beschreibung")}<br>Nutzer: ${esc(item.user||"unbekannt")} · ${esc(new Date(item.createdAt||Date.now()).toLocaleString("de-DE"))}</span>
+    <div class="planner-actions">
+      <button class="btn" data-report-progress="${esc(item.id)}" type="button">In Bearbeitung</button>
+      <button class="btn primary" data-report-done="${esc(item.id)}" type="button">Behoben</button>
+      <button class="btn danger" data-report-remove="${esc(item.id)}" type="button">Archivieren</button>
+    </div>
+  </article>`;
+}
+function renderReports(){
+  const items=reportItems();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Fehlermeldungen</h3><span>registrierte Nutzer</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="reportUser" placeholder="Nutzername">
+        <select class="field" id="reportArea"><option>Push</option><option>Theme</option><option>Qurʾān-Suche</option><option>Gebetszeiten</option><option>Beitrag</option><option>Technik</option></select>
+        <textarea class="admin-textarea wide" id="reportText" placeholder="Meldung oder interne Notiz"></textarea>
+        <button class="btn primary wide" id="addReportBtn" type="button">Fehlermeldung erfassen</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">Das öffentliche Meldeformular für registrierte Nutzer braucht Konto-/Backend-Sync. Hier ist die Admin-Verwaltung für Status, Antwort und Archivierung vorbereitet.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
+      <div class="planner-grid">${items.length?items.map(reportCard).join(""):`<div class="empty">Keine Fehlermeldungen erfasst.</div>`}</div>
+    </aside>
+  </section>`;
+}
+function userCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.username||"Nutzer")}</b>
+    <span>Status: ${esc(item.status||"aktiv")}<br>Theme: ${esc(item.theme||"unbekannt")} · Push: ${esc(item.push||"offen")}<br>Letzte Aktivität: ${esc(item.lastActive||"nicht bekannt")}</span>
+    <div class="planner-actions">
+      <button class="btn" data-user-active="${esc(item.id)}" type="button">Aktiv</button>
+      <button class="btn danger" data-user-disable="${esc(item.id)}" type="button">Deaktivieren</button>
+    </div>
+  </article>`;
+}
+function renderUsers(ctx){
+  const items=userItems();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Benutzer</h3><span>Anmeldename + PIN</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="userName" placeholder="Anmeldename">
+        <select class="field" id="userTheme"><option>Klassisch Dunkel</option><option>Klassisch Hell</option><option>Sanft Elegant</option><option>Royal Nachtblau</option></select>
+        <select class="field" id="userPush"><option>Push offen</option><option>Push aktiv</option><option>Push blockiert</option></select>
+        <select class="field" id="userStatus"><option>aktiv</option><option>deaktiviert</option><option>prüfen</option></select>
+        <button class="btn primary wide" id="addUserBtn" type="button">Benutzer notieren</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">PINs dürfen niemals im Browser-Klartext gespeichert werden. Echte Konten brauchen Supabase/Backend mit Hashing und RLS. Diese Admin-Liste ist nur ein Überblick, keine PIN-Speicherung.</div>
+    </div>
+    <aside class="panel">
+      <div class="section-head"><h3>Überblick</h3><span>${items.length} Konten</span></div>
+      <div class="planner-grid">${items.length?items.map(userCard).join(""):`<div class="empty">Noch keine Benutzerübersicht vorhanden.</div>`}</div>
+    </aside>
+  </section>`;
+}
+function workflowSteps(active="draft"){
+  const order=["draft","review","ready","published","disabled"];
+  const labels={draft:["Entwurf","Vorbereitet, aber nicht sichtbar."],review:["In Prüfung","Quellen, Darstellung und Links prüfen."],ready:["Bereit","Kann bewusst veröffentlicht werden."],published:["Veröffentlicht","Inhalt ist live sichtbar."],disabled:["Zurückgezogen","Gespeichert, aber nicht sichtbar."]};
+  const activeIndex=Math.max(0,order.indexOf(active));
+  return `<div class="workflow-grid">${order.map((key,i)=>`<div class="workflow-step ${i<=activeIndex?"ready":""}"><b>${esc(labels[key][0])}</b><small>${esc(labels[key][1])}</small></div>`).join("")}</div>`;
+}
+function markdownPreviewData(markdown){
+  const text=String(markdown||"");
+  const title=frontmatterValue(text,"title").replace(/^📖\s*/,"")||"Noch kein Titel";
+  const category=frontmatterValue(text,"category")||"Kategorie fehlt";
+  const scholar=frontmatterValue(text,"scholar")||frontmatterValue(text,"gelehrter")||"Gelehrter offen";
+  const book=frontmatterValue(text,"book")||frontmatterValue(text,"werk")||"Werk offen";
+  const source=frontmatterValue(text,"source")||frontmatterValue(text,"quelle")||"Quelle prüfen";
+  const body=text.replace(/^---[\s\S]*?---/,"").trim();
+  const quote=(body.match(/>+\s*(.+)/)||body.match(/(?:quote|aussage):\s*[\"']?(.+?)[\"']?\s*$/mi)||[])[1]||body.split(/\n\s*\n/).find(Boolean)||"Markdown einfügen, dann erscheint hier die Vorschau.";
+  return{title,category,scholar,book,source,quote:String(quote).replace(/^#+\s*/,"").trim().slice(0,420)};
+}
+function validationList(markdown){
+  const p=markdownPreviewData(markdown);
+  const checks=[
+    ["Titel",p.title!=="Noch kein Titel"],
+    ["Kategorie",p.category!=="Kategorie fehlt"],
+    ["Gelehrter",p.scholar!=="Gelehrter offen"],
+    ["Werk",p.book!=="Werk offen"],
+    ["Quelle",p.source!=="Quelle prüfen"],
+    ["Dateiname",!!draftFilename]
   ];
-  return lines.join("\n").trim()+"\n";
+  return `<div class="status-list">${checks.map(([label,ok])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${ok?"Vorhanden":"Bitte prüfen oder ergänzen"}</span><strong class="status-pill">${ok?"OK":"Offen"}</strong></div>`).join("")}</div>`;
 }
-function parseFrontMatter(md){
-  const out={};
-  const m=String(md||"").match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  if(!m)return{body:md||""};
-  m[1].split(/\n/).forEach(line=>{
-    const idx=line.indexOf(":");
-    if(idx>0){out[line.slice(0,idx).trim()]=line.slice(idx+1).trim().replace(/^"|"$/g,"")}
-  });
-  out.body=m[2]||"";
-  return out;
+function renderDraftPreview(){
+  const p=markdownPreviewData(draftMarkdown);
+  return `<div class="preview-box" id="draftPreviewBox">
+    <div class="section-head"><h3>Live-Vorschau</h3><span>Admin-Entwurf</span></div>
+    <div class="preview-frame">
+      <h4>${esc(p.title)}</h4>
+      <p>${esc(p.category)} · ${esc(p.scholar)} · ${esc(p.book)}</p>
+      <blockquote>${esc(p.quote)}</blockquote>
+      <p><strong>Quelle:</strong> ${esc(p.source)}</p>
+    </div>
+    <div class="preview-tools">
+      <button class="btn primary" id="refreshPreviewBtn" type="button">Vorschau öffnen</button>
+      <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
+      <button class="btn" id="checkDraftBtn" type="button">Änderungen prüfen</button>
+      <button class="btn primary" id="publishReadyBtn" type="button">Bereit markieren</button>
+    </div>
+    ${validationList(draftMarkdown)}
+  </div>`;
 }
-function renderPostPreview(){
-  const title=$("postTitle").value.trim()||"Beitragstitel";
-  const body=$("postBody").value.trim()||"Aussage oder Beitragstext erscheint hier.";
-  const meta=[$("postCategory").value,$("postScholar").value,$("postBook").value].filter(Boolean);
-  $("postPreview").innerHTML=`<div class="eyebrow">Beitrag</div><h2>${esc(title)}</h2><div class="meta">${meta.map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</div><div class="statement">${esc(body)}</div><div class="source"><b>Quelle:</b> ${esc($("postSource").value||"Noch keine Quelle")}</div>`;
+function renderContent(){
+  const rows=filteredRows();
+  return `<section class="panel">
+    <div class="section-head"><h3>Inhaltskontrolle</h3><span>${rows.length} Treffer</span></div>
+    <div class="controls">
+      <input class="field" id="searchInput" value="${esc(query)}" type="search" placeholder="Suchen nach Titel, ID oder Typ">
+      <select class="field" id="typeFilter">
+        <option value="all" ${typeFilter==="all"?"selected":""}>Alle Typen</option>
+        <option value="post" ${typeFilter==="post"?"selected":""}>Nur Beiträge</option>
+        <option value="dua" ${typeFilter==="dua"?"selected":""}>Nur Duʿāʾ</option>
+      </select>
+      <select class="field" id="sortMode">
+        <option value="score" ${sortMode==="score"?"selected":""}>Score</option>
+        <option value="views" ${sortMode==="views"?"selected":""}>Aufrufe</option>
+        <option value="shares" ${sortMode==="shares"?"selected":""}>Shares</option>
+        <option value="saves" ${sortMode==="saves"?"selected":""}>Favoriten</option>
+        <option value="title" ${sortMode==="title"?"selected":""}>Titel A-Z</option>
+      </select>
+      <button class="btn" id="clearFilters" type="button">Zurücksetzen</button>
+    </div>
+    <div class="rank-list">${rows.length?rows.map((r,i)=>rankCard(r,i,sortMode)).join(""):`<div class="empty">Keine passenden Inhalte gefunden.</div>`}</div>
+  </section>`;
 }
-function renderMarkdownPreview(){
-  const data=parseFrontMatter($("rawMarkdown").value);
-  $("markdownPreview").innerHTML=`<div class="eyebrow">Markdown</div><h2>${esc(data.title||"Ohne Titel")}</h2><div class="meta">${[data.category,data.scholar,data.book].filter(Boolean).map(x=>`<span class="badge">${esc(x)}</span>`).join("")}</div><div class="statement">${esc(data.body||"Noch kein Markdown.")}</div><div class="source"><b>Quelle:</b> ${esc(data.source||"")}</div>`;
+function renderActions(rows,installs=installTotals()){
+  const best=sortedRows(rows)[0];
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
+      <div class="quick-grid">
+        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown unten einfügen und über Cloudflare Worker veröffentlichen.</small></button>
+        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
+        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+      </div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      ${renderPlanningPanel()}
+      ${renderNewsComposer()}
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
+      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
+      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker</span></div>
+      <div class="preview-box">
+        <div class="section-head"><h3>Markdown-Metadaten</h3><span>Frontmatter-Hilfe</span></div>
+        <div class="admin-form-grid">
+          <input class="field" id="mdTitle" placeholder="Titel">
+          <input class="field" id="mdId" placeholder="ID / Slug">
+          <input class="field" id="mdDate" type="date">
+          <input class="field" id="mdCategory" placeholder="Kategorie">
+          <input class="field" id="mdScholar" placeholder="Gelehrter">
+          <input class="field" id="mdBook" placeholder="Werk / Buch">
+          <input class="field wide" id="mdSource" placeholder="Quelle">
+          <input class="field wide" id="mdTags" placeholder="Tags mit Komma trennen">
+          <button class="btn primary wide" id="buildMarkdownBtn" type="button">Markdown aus Feldern vorbereiten</button>
+        </div>
+      </div>
+      <div class="upload-grid">
+        <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+        <div class="upload-stack">
+          <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
+          <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
+          <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
+          <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
+          <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret">
+          <label class="upload-status" style="display:flex;align-items:center;gap:8px">
+            <input id="rememberWorkerSecret" type="checkbox" ${savedWorkerSecret()?"checked":""}>
+            <span>Worker Secret auf diesem Gerät merken</span>
+          </label>
+          <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
+          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
+          <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
+        </div>
+      </div>
+      ${renderDraftPreview()}
+      <div class="preview-box">
+        <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
+        <div class="quick-grid">
+          <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
+          <a class="quick" href="${SITE_ORIGIN}/manifest.json" target="_blank" rel="noopener"><b>Manifest prüfen</b><small>PWA-Farbe, Name und Icons öffnen.</small></a>
+          <a class="quick" href="${SITE_ORIGIN}/service-worker.js" target="_blank" rel="noopener"><b>Service Worker prüfen</b><small>Cache- und Offline-Datei öffnen.</small></a>
+          <a class="quick" href="${workerHealthUrl()}" target="_blank" rel="noopener"><b>Worker Status</b><small>Cloudflare Worker Health-Check öffnen.</small></a>
+        </div>
+      </div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel">
+        <div class="section-head"><h3>Heute wichtig</h3><span>Hinweis</span></div>
+        ${best?`<div class="empty">Stärkster Inhalt aktuell:<br><strong>${esc(cleanTitle(best.content_title||best.content_id))}</strong><br>Score ${score(best)} · ${Number(best.views||0)} Aufrufe</div>`:`<div class="empty">Noch keine Statistikdaten vorhanden.</div>`}
+      </div>
+      <div class="panel">
+        <div class="section-head"><h3>App-Status</h3><span>PWA</span></div>
+        <div class="empty">Besucher-App Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div>
+        <div class="change-log">${renderChangeLog()}</div>
+      </div>
+    </aside>
+  </section>`;
 }
-function saveDraft(){
-  const ids=["postTitle","postCategory","postTopic","postScholar","postBook","postTags","postSource","postBody","postFilename","rawMarkdown","rawFilename","newsTitle","newsText","newsBadge","newsHours","newsNav","newsValue","scheduleMarkdown","scheduleWhen","scheduleFilename"];
-  const data={};
-  ids.forEach(id=>{const el=$(id);if(el)data[id]=el.value});
-  try{localStorage.setItem(DRAFT_KEY,JSON.stringify(data))}catch(e){}
+function renderStats(ctx){
+  const categories=countBy(ctx.rows,r=>r.content_type||"page");
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Statistik</h3><span>Heute / Live / Inhalte</span></div>
+      <div class="command-grid">
+        <div class="command-card"><b>Live</b><span>${Number(ctx.live.live_now||0)}</span><small>Aktuell online</small></div>
+        <div class="command-card"><b>Heute</b><span>${Number(ctx.live.today_views||0)}</span><small>Seiten- und Inhaltsaufrufe</small></div>
+        <div class="command-card"><b>Favoriten</b><span>${Number(ctx.live.today_saves||0)}</span><small>heute gespeichert</small></div>
+        <div class="command-card"><b>Shares</b><span>${Number(ctx.live.today_shares||0)}</span><small>heute geteilt</small></div>
+      </div>
+      <div class="section-head"><h3>Beliebte Bereiche</h3><span>anonym</span></div>
+      <div class="status-list">${Object.entries(categories).map(([k,v])=>`<div class="status-row"><span><b>${esc(typeLabel(k))}</b><br>${v} erfasste Einträge</span><strong class="status-pill">${v}</strong></div>`).join("")}</div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel"><div class="section-head"><h3>Top Favoriten</h3><span>gespeichert</span></div><div class="rank-list">${sortedRows(ctx.rows).sort((a,b)=>Number(b.saves||0)-Number(a.saves||0)).slice(0,5).map((r,i)=>rankCard(r,i,"saves")).join("")||`<div class="empty">Noch keine Favoriten.</div>`}</div></div>
+      <div class="panel"><div class="section-head"><h3>Technik-Signale</h3><span>Status</span></div>${renderTechStatus(ctx)}</div>
+    </aside>
+  </section>`;
 }
-function loadDraft(){
+function renderSettings(ctx){
+  const tabs=readTabOrder();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Einstellungen & Technik</h3><span>interne Kontrolle</span></div>
+      ${renderTechStatus(ctx)}
+      <div class="section-head" style="margin-top:16px"><h3>Tab-Reihenfolge</h3><span>lokal gespeichert</span></div>
+      <div class="tab-order-list">
+        ${tabs.map(([id,label],i)=>`<div class="tab-order-item"><b>${esc(label)}</b><div class="tab-order-buttons"><button class="btn" data-tab-up="${esc(id)}" type="button" ${i===0?"disabled":""}>↑</button><button class="btn" data-tab-down="${esc(id)}" type="button" ${i===tabs.length-1?"disabled":""}>↓</button></div></div>`).join("")}
+      </div>
+      <button class="btn" id="resetTabOrderBtn" type="button" style="margin-top:10px">Reihenfolge zurücksetzen</button>
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsregeln</h3><span>Sicherheit</span></div>
+      <div class="status-list">
+        <div class="status-row"><span><b>Direkt live vermeiden</b><br>Vor jedem Upload erscheint eine bewusste Sicherheitsabfrage.</span><strong class="status-pill">Aktiv</strong></div>
+        <div class="status-row"><span><b>Entwurf lokal speichern</b><br>Markdown und Dateiname bleiben auf diesem Admin-Gerät gespeichert.</span><strong class="status-pill">Aktiv</strong></div>
+        <div class="status-row"><span><b>Datenschutz</b><br>Statistik nutzt aggregierte Inhalte und keine Werbeprofile.</span><strong class="status-pill">Schonend</strong></div>
+      </div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel"><div class="section-head"><h3>Änderungsprotokoll</h3><span>letzte Aktionen</span></div><div class="change-log">${renderChangeLog()}</div></div>
+      <div class="panel"><div class="section-head"><h3>Admin-App</h3><span>getrennt</span></div><div class="empty">Diese Steuerzentrale bleibt unter <strong>/admin/</strong> getrennt von der Besucher-App.</div></div>
+    </aside>
+  </section>`;
+}
+function renderTech(ctx){
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Technik</h3><span>Systemstatus</span></div>
+      ${renderTechStatus(ctx)}
+      <div class="section-head" style="margin-top:16px"><h3>Backend-Anbindung</h3><span>Live-Funktionen</span></div>
+      <div class="status-list">
+        <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
+        <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
+        <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
+        <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
+        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Nur serverseitig zuverlässig bei geschlossener PWA. Browser-Timer bleiben nur Zusatz.</span><strong class="status-pill">Scheduler nötig</strong></div>
+        <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
+      </div>
+    </div>
+    <aside class="side-stack">
+      <div class="panel"><div class="section-head"><h3>Statuszahlen</h3><span>Admin</span></div>
+        <div class="command-grid">
+          <div class="command-card"><b>Geplant</b><span>${planItems().length}</span><small>lokale Einträge</small></div>
+          <div class="command-card"><b>News</b><span>${newsItems().length}</span><small>vorbereitet</small></div>
+          <div class="command-card"><b>Fehler</b><span>${reportItems().length}</span><small>erfasst</small></div>
+          <div class="command-card"><b>Benutzer</b><span>${userItems().length}</span><small>notiert</small></div>
+        </div>
+      </div>
+      <div class="panel"><div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div><div class="change-log">${renderChangeLog()}</div></div>
+    </aside>
+  </section>`;
+}
+function renderTechStatus(ctx){
+  const checks=[
+    ["Supabase verbunden",hasSupabase(),"Live- und Statistikdaten abrufbar"],
+    ["Daten geladen",!!lastData,`${ctx.updated?ctx.updated.toLocaleString("de-DE"):"Noch offen"}`],
+    ["Cloudflare Worker",!!workerPublishUrl(),workerPublishUrl()],
+    ["GitHub Token",true,"Nur als Cloudflare Secret, nicht im Browser"],
+    ["Service Worker",!!("serviceWorker" in navigator),"Admin-PWA Registrierung möglich"],
+    ["Browser Push",!!("Notification" in window),"Lokaler Admin-Test möglich"],
+    ["PWA installierbar",!!("BeforeInstallPromptEvent" in window)||(typeof matchMedia==="function"&&matchMedia("(display-mode: standalone)").matches),"Browserabhängig"],
+    ["posts-index Upload",true,"Wird serverseitig im Worker aktualisiert"],
+    ["Sicherheitsabfrage",true,"Online veröffentlichen fragt bewusst nach"]
+  ];
+  return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
+}
+function buildMarkdownFromFields(){
+  const title=(document.getElementById("mdTitle")?.value||"").trim();
+  if(!title){toast("Titel fehlt");return}
+  const slug=(document.getElementById("mdId")?.value||title).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  const date=(document.getElementById("mdDate")?.value||new Date().toISOString().slice(0,10)).trim();
+  const category=(document.getElementById("mdCategory")?.value||"").trim();
+  const scholar=(document.getElementById("mdScholar")?.value||"").trim();
+  const book=(document.getElementById("mdBook")?.value||"").trim();
+  const source=(document.getElementById("mdSource")?.value||"").trim();
+  const tags=(document.getElementById("mdTags")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+  draftFilename=draftFilename||`${slug}.md`;
+  draftMarkdown=`---
+id: "${slug}"
+title: "${title.replace(/"/g,"'")}"
+date: "${date}"
+category: "${category.replace(/"/g,"'")}"
+scholar: "${scholar.replace(/"/g,"'")}"
+book: "${book.replace(/"/g,"'")}"
+source: "${source.replace(/"/g,"'")}"
+tags: [${tags.map(x=>`"${x.replace(/"/g,"'")}"`).join(", ")}]
+---
+
+> Aussage hier einfügen.
+
+Quelle: ${source || "Quelle prüfen"}
+`;
+  const text=document.getElementById("postMarkdownInput"),file=document.getElementById("postFilenameInput");
+  if(text)text.value=draftMarkdown;
+  if(file)file.value=draftFilename;
+  addAdminLog("Entwurf","Markdown aus Metadaten vorbereitet",title);
+  updateDraftPreview();
+  toast("Markdown vorbereitet");
+}
+function bindUi(){
+  document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
+  const search=document.getElementById("searchInput");if(search)search.oninput=e=>renderShellPreserveField("searchInput",()=>{query=e.target.value});
+  const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
+  const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
+  const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview()};
+  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview()};
+  const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
+  const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
+  const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
+  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Änderungen geprüft",draftFilename||"Entwurf");setUploadStatus("Prüfung markiert. Bitte Vorschau, Quelle, Titel, Kategorie und Links kontrollieren.");renderShell()};
+  const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
+  const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
+  const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
+  const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
+  const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
+  document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
+  bindCommandCenterForms();
+  bindRankCards();
+}
+function bindCommandCenterForms(){
+  function applyPreview(width,height,mode){
+    const device=document.getElementById("livePreviewDevice");
+    const w=Math.max(320,Math.min(1400,Number(width)||430));
+    const h=Math.max(520,Math.min(1600,Number(height)||932));
+    const m=["mobile","tablet","desktop"].includes(mode)?mode:"mobile";
+    if(device){
+      device.classList.remove("mobile","tablet","desktop");
+      device.classList.add(m);
+      device.style.setProperty("--preview-w",w+"px");
+      device.style.setProperty("--preview-h",h+"px");
+    }
+    const wi=document.getElementById("previewWidthInput"),hi=document.getElementById("previewHeightInput");
+    if(wi)wi.value=String(w);
+    if(hi)hi.value=String(h);
+    savePreviewSize({width:w,height:h,mode:m});
+  }
+  const proMax=document.getElementById("previewProMaxBtn");if(proMax)proMax.onclick=()=>applyPreview(430,932,"mobile");
+  const mobile=document.getElementById("previewMobileBtn");if(mobile)mobile.onclick=()=>applyPreview(390,844,"mobile");
+  const tablet=document.getElementById("previewTabletBtn");if(tablet)tablet.onclick=()=>applyPreview(820,1100,"tablet");
+  const desktop=document.getElementById("previewDesktopBtn");if(desktop)desktop.onclick=()=>applyPreview(1100,760,"desktop");
+  const resetPreview=document.getElementById("previewResetBtn");if(resetPreview)resetPreview.onclick=()=>applyPreview(430,932,"mobile");
+  const fullscreen=document.getElementById("previewFullscreenBtn");if(fullscreen)fullscreen.onclick=()=>{const device=document.getElementById("livePreviewDevice");if(!device)return;device.classList.toggle("fullscreen");fullscreen.textContent=device.classList.contains("fullscreen")?"Vollbild schließen":"Vollbild";toast(device.classList.contains("fullscreen")?"Vorschau im Vollbild":"Vollbild geschlossen")};
+  if(!window.__adminPreviewEscapeBound){window.__adminPreviewEscapeBound=true;document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;const active=document.activeElement;if(active&&(active.matches?.("input,textarea,select,[contenteditable='true']")))return;const device=document.getElementById("livePreviewDevice");const btn=document.getElementById("previewFullscreenBtn");if(device?.classList.contains("fullscreen")){device.classList.remove("fullscreen");if(btn)btn.textContent="Vollbild"}})}
+  const previewWidth=document.getElementById("previewWidthInput"),previewHeight=document.getElementById("previewHeightInput");
+  if(previewWidth)previewWidth.onchange=()=>applyPreview(previewWidth.value,previewHeight?.value,previewSize().mode);
+  if(previewHeight)previewHeight.onchange=()=>applyPreview(previewWidth?.value,previewHeight.value,previewSize().mode);
+  document.querySelectorAll("[data-tab-up]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabUp,-1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabUp);renderShell()});
+  document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
+  const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
+  const buildMarkdown=document.getElementById("buildMarkdownBtn");if(buildMarkdown)buildMarkdown.onclick=buildMarkdownFromFields;
+  const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const timezone=document.getElementById("planTimezone")?.value||"Europe/Berlin";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,timezone,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",`${title} · ${timezone}`);renderShell()};
+  document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
+  document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
+  document.querySelectorAll("[data-plan-worker]").forEach(btn=>btn.onclick=async()=>{const item=planItems().find(x=>String(x.id)===String(btn.dataset.planWorker));if(!item){toast("Planung fehlt");return}const markdown=String(draftMarkdown||"").trim();if(!markdown){toast("Markdown unten einfügen, dann Worker planen");return}if(!item.when){toast("Uhrzeit fehlt");return}btn.disabled=true;btn.textContent="Sende...";try{const result=await workerPostRequest("schedule",{id:item.id,title:item.title,when:item.when,timezone:item.timezone||"Europe/Berlin",filename:draftFilename,markdown});updateStoreItem(ADMIN_PLAN_KEY,item.id,{status:"Worker geplant",workerId:result.id,publishAt:result.publishAt});addAdminLog("Planung","Beim Worker-Scheduler gespeichert",`${item.title} · ${result.publishAt||item.when}`);toast("Worker-Scheduler gespeichert");renderShell()}catch(e){btn.disabled=false;btn.textContent="Worker planen";addAdminLog("Fehler","Planung konnte nicht an Worker gesendet werden",e.message||String(e));toast(e.message||"Worker-Planung fehlgeschlagen")}});
+  const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
+  document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live auf der Startseite veröffentlichen?"))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});addAdminLog("News","News live veröffentlicht",item.title);toast("News live veröffentlicht");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
+  const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
+  document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
+  document.querySelectorAll("[data-report-done]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportDone,{status:"Behoben"});addAdminLog("Fehler","Fehler als behoben markiert","");renderShell()});
+  document.querySelectorAll("[data-report-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Meldung archivieren?")){updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportRemove,{status:"Archiviert"});renderShell()}});
+  const addUser=document.getElementById("addUserBtn");if(addUser)addUser.onclick=()=>{const username=(document.getElementById("userName")?.value||"").trim();if(!username){toast("Anmeldename fehlt");return}addStoreItem(ADMIN_USERS_KEY,{username,theme:document.getElementById("userTheme")?.value||"",push:document.getElementById("userPush")?.value||"",status:document.getElementById("userStatus")?.value||"aktiv",lastActive:new Date().toLocaleString("de-DE")});addAdminLog("Benutzer","Benutzer notiert",username);renderShell()};
+  document.querySelectorAll("[data-user-disable]").forEach(btn=>btn.onclick=()=>{if(confirm("Diesen Nutzer wirklich deaktivieren?")){updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userDisable,{status:"deaktiviert"});addAdminLog("Benutzer","Benutzer deaktiviert","");renderShell()}});
+  document.querySelectorAll("[data-user-active]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userActive,{status:"aktiv"});renderShell()});
+}
+function updateDraftPreview(){
+  const box=document.getElementById("draftPreviewBox");
+  if(!box)return;
+  const fresh=renderDraftPreview();
+  const tmp=document.createElement("div");
+  tmp.innerHTML=fresh;
+  box.replaceWith(tmp.firstElementChild);
+  bindUi();
+}
+function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
+async function sendAdminLocalPushTest(){
+  if(!("Notification" in window)){setAdminPushTestStatus("Dieses Gerät unterstützt keine Browser-Benachrichtigungen.");return}
+  let permission=Notification.permission;
+  if(permission!=="granted")permission=await Notification.requestPermission();
+  if(permission!=="granted"){setAdminPushTestStatus("Benachrichtigungen wurden nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}
+  const prayer=document.getElementById("adminPushPrayerSelect")?.value||"ʿIshāʾ";
+  const title=`${prayer} ist eingetreten`;
+  const body="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
   try{
-    const data=JSON.parse(localStorage.getItem(DRAFT_KEY)||"{}");
-    Object.keys(data).forEach(id=>{if($(id))$(id).value=data[id]});
-  }catch(e){}
-}
-function switchTab(tab){
-  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
-  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+tab));
-  try{localStorage.setItem(TAB_KEY,tab)}catch(e){}
-  if(tab==="stats")loadStats();
-}
-async function checkHealth(){
-  try{
-    const res=await fetch(PUBLISHER+"/health",{cache:"no-store"});
-    const data=await res.json();
-    $("apiDot").className="dot ok";
-    $("apiState").textContent=data.ok?"Online":"Unklar";
-    $("repoState").textContent=data.repo||"Sero91ak/dar-al-tawhid-site";
+    if("serviceWorker" in navigator){
+      const reg=await navigator.serviceWorker.ready;
+      await reg.showNotification(title,{body,tag:"admin-local-prayer-test",renotify:true,icon:"/notification-icon-192.png",badge:"/notification-badge-96.png",data:{url:"/admin/"}});
+    }else{
+      new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});
+    }
+    setAdminPushTestStatus(`Test-Push für ${prayer} wurde nur auf diesem Admin-Gerät ausgelöst.`);
   }catch(e){
-    $("apiDot").className="dot bad";
-    $("apiState").textContent="Nicht erreichbar";
+    try{new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});setAdminPushTestStatus("Test-Push wurde lokal ausgelöst.");}
+    catch(err){setAdminPushTestStatus("Test-Push konnte auf diesem Gerät nicht angezeigt werden.")}
   }
 }
-async function publishMarkdown(markdown,filename,resultId){
-  const data=await api("/api/admin/publish",{markdown,filename});
-  result(resultId,`Veröffentlicht: ${data.filename}\nNummer: ${data.number}\nBeiträge im Index: ${data.postCount||postNumberInfo.postCount+1||"?"}\nCommit: ${data.commitSha||"-"}\nPfad: ${data.postPath}`,true);
-  await loadPostNumberInfo();
-  return data;
-}
-async function loadStats(){
-  const box=$("statsBox");
-  box.textContent="Statistik wird geladen...";
+function setUploadStatus(html){draftStatus=html;const el=document.getElementById("uploadStatus");if(el)el.innerHTML=html}
+async function prepareNextPostNumber(){
   try{
-    const url=ANALYTICS.supabaseUrl.replace(/\/$/,"");
-    const h={apikey:ANALYTICS.supabaseKey,Authorization:"Bearer "+ANALYTICS.supabaseKey};
-    const [liveRes,totalsRes]=await Promise.all([
-      fetch(url+"/rest/v1/rpc/analytics_live",{headers:h,cache:"no-store"}),
-      fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=12",{headers:h,cache:"no-store"})
-    ]);
-    if(!liveRes.ok||!totalsRes.ok)throw new Error("Supabase Fehler");
-    const live=await liveRes.json();
-    const totals=await totalsRes.json();
-    box.innerHTML=`<div class="kpi-grid"><div class="kpi"><b>Jetzt online</b><strong>${Number(live.live_now||0)}</strong><small>letzte 5 Minuten</small></div><div class="kpi"><b>Heute Besucher</b><strong>${Number(live.today_sessions||0)}</strong><small>Sitzungen</small></div><div class="kpi"><b>Heute geteilt</b><strong>${Number(live.today_shares||0)}</strong><small>Beiträge und Duʿāʾ</small></div></div><div class="list" style="margin-top:12px">${totals.map(x=>`<div class="list-card"><b>${esc(x.content_title||x.content_id)}</b><small>${esc(x.content_type)} · ${Number(x.views||0)} gelesen · ${Number(x.shares||0)} geteilt · ${Number(x.saves||0)} gespeichert</small></div>`).join("")}</div>`;
-  }catch(e){box.textContent="Statistik konnte nicht geladen werden: "+(e.message||e)}
+    draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
+    setUploadStatus("Prüfe aktuelle Nummer...");
+    draftNextNumber=await resolveNextPostNumber();
+    draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
+    const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
+    setUploadStatus(`Nächste Nummer: <strong>${draftNextNumber}</strong><br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>`);
+    addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",draftFilename);
+  }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
-function init(){
-  loadDraft();
-  updateSecretState();
-  renderPostPreview();
-  renderMarkdownPreview();
-  checkHealth();
-  loadPostNumberInfo();
-  document.querySelectorAll(".tab").forEach(btn=>btn.onclick=()=>switchTab(btn.dataset.tab));
-  switchTab(localStorage.getItem(TAB_KEY)||"compose");
-  ["postTitle","postCategory","postTopic","postScholar","postBook","postTags","postSource","postBody"].forEach(id=>$(id).addEventListener("input",()=>{renderPostPreview();renderPostNumberInfo();saveDraft()}));
-  ["rawMarkdown"].forEach(id=>$(id).addEventListener("input",()=>{renderMarkdownPreview();saveDraft()}));
-  document.querySelectorAll("input,select,textarea").forEach(el=>el.addEventListener("change",saveDraft));
-  $("connectBtn").onclick=()=>{
-    const current=secret();
-    const v=prompt("Admin-Secret für Publisher Worker eingeben:",current);
-    if(v!==null){setSecret(v.trim());loadPostNumberInfo()}
-  };
-  $("clearSecretBtn").onclick=()=>{if(confirm("Admin-Secret auf diesem Gerät löschen?"))setSecret("")};
-  $("refreshBtn").onclick=()=>{checkHealth();loadPostNumberInfo();if(!document.getElementById("tab-stats").classList.contains("hidden"))loadStats()};
-  $("buildMarkdownBtn").onclick=()=>{$("rawMarkdown").value=buildMarkdown();renderMarkdownPreview();switchTab("markdown");saveDraft()};
-  $("copyMarkdownBtn").onclick=async()=>{await navigator.clipboard.writeText(buildMarkdown());result("composeResult","Markdown kopiert.",true)};
-  $("publishComposeBtn").onclick=async()=>{
-    try{result("composeResult","Veröffentliche...",true);await publishMarkdown(buildMarkdown(),$("postFilename").value.trim(),"composeResult")}
-    catch(e){result("composeResult",e.message||String(e),false)}
-  };
-  $("loadFromComposeBtn").onclick=()=>{$("rawMarkdown").value=buildMarkdown();$("rawFilename").value=$("postFilename").value;renderMarkdownPreview();saveDraft()};
-  $("copyRawBtn").onclick=async()=>{await navigator.clipboard.writeText($("rawMarkdown").value);result("rawResult","Markdown kopiert.",true)};
-  $("publishRawBtn").onclick=async()=>{
-    try{result("rawResult","Veröffentliche...",true);await publishMarkdown($("rawMarkdown").value,$("rawFilename").value.trim(),"rawResult")}
-    catch(e){result("rawResult",e.message||String(e),false)}
-  };
-  $("publishNewsBtn").onclick=async()=>{
-    try{
-      result("newsResult","News wird veröffentlicht...",true);
-      const data=await api("/api/admin/publish-news",{title:$("newsTitle").value,text:$("newsText").value,badge:$("newsBadge").value,ttlHours:Number($("newsHours").value||24),nav:$("newsNav").value,value:$("newsValue").value});
-      result("newsResult",`News veröffentlicht: ${data.id}\nCommit: ${data.commitSha||"-"}\nPfad: ${data.updatesPath}`,true);
-    }catch(e){result("newsResult",e.message||String(e),false)}
-  };
-  ["newsTitle","newsText"].forEach(id=>$(id).addEventListener("input",()=>{$("newsPreviewTitle").textContent=$("newsTitle").value||"Neue Beiträge online";$("newsPreviewText").textContent=$("newsText").value||"Kurze Meldung für die App";saveDraft()}));
-  $("scheduleBtn").onclick=async()=>{
-    try{
-      result("scheduleResult","Planung wird gespeichert...",true);
-      const data=await api("/api/admin/schedule",{markdown:$("scheduleMarkdown").value,when:$("scheduleWhen").value,filename:$("scheduleFilename").value});
-      result("scheduleResult",`Geplant: ${data.id}\nZeit: ${data.publishAt}\nCommit: ${data.commitSha||"-"}`,true);
-    }catch(e){result("scheduleResult",e.message||String(e),false)}
-  };
-  $("runSchedulerBtn").onclick=async()=>{
-    try{const data=await api("/api/admin/run-scheduler",{});result("scheduleResult",`Scheduler geprüft: ${data.checked}\nVeröffentlicht: ${data.published}`,true)}
-    catch(e){result("scheduleResult",e.message||String(e),false)}
-  };
-  $("copyDailyPushConfigBtn").onclick=async()=>{await navigator.clipboard.writeText(JSON.stringify({automatic:true,dailyDua:{enabled:true,hour:9,id:""},recommendation:{enabled:true,hour:12,id:""}},null,2));result("dailyPushResult","Standard-Konfiguration kopiert.",true)};
-  $("exportDraftBtn").onclick=async()=>{const data=localStorage.getItem(DRAFT_KEY)||"{}";await navigator.clipboard.writeText(data);result("toolsResult","Entwurf als JSON kopiert.",true)};
-  $("importDraftBtn").onclick=()=>{const data=prompt("Entwurf-JSON einfügen:");if(!data)return;try{localStorage.setItem(DRAFT_KEY,data);loadDraft();renderPostPreview();renderMarkdownPreview();result("toolsResult","Entwurf importiert.",true)}catch(e){result("toolsResult","Import fehlgeschlagen.",false)}};
-  const now=new Date(Date.now()+60*60*1000);
-  if(!$("scheduleWhen").value)$("scheduleWhen").value=now.toISOString().slice(0,16);
+async function uploadPostViaWorker(){
+  if(uploadBusy)return;
+  draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
+  draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
+  if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
+  const preview=markdownPreviewData(draftMarkdown);
+  const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`);
+  if(!ok){setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
+  try{
+    uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
+    const next=await resolveNextPostNumber();
+    if(!draftFilename)draftFilename=suggestFilename(draftMarkdown,next);
+    else if(/(?:^|-)\d{3}(?=-|\.md$)/.test(draftFilename))draftFilename=draftFilename.replace(/(^|-)\d{3}(?=-|\.md$)/,`$1${String(next).padStart(3,"0")}`);
+    if(!/^[a-z0-9][a-z0-9-]*\.md$/i.test(draftFilename)){setUploadStatus("Dateiname muss eine .md-Datei ohne Leerzeichen sein.");return}
+    const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
+    const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    setUploadStatus("Sende Beitrag an Cloudflare Worker...");
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename);
+    draftFilename=result.filename||draftFilename;
+    draftMarkdown=markdown;draftNextNumber=result.number||next;
+    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
+    addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
+    saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
+    toast("Beitrag hochgeladen");
+  }catch(e){
+    addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
+    setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Bitte Worker URL, Admin Worker Secret und Cloudflare Secrets prüfen.`);
+  }finally{
+    uploadBusy=false;
+    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}
+  }
 }
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{}))}
-init();
+async function renderDashboard({force=false}={}){
+  if(!force&&adminIsEditing())return;
+  const panel=document.getElementById("panel");
+  if(!lastData)panel.innerHTML=`<div class="empty">Statistik wird geladen...</div>`;
+  if(!hasSupabase()){panel.innerHTML=`<div class="empty">Supabase ist nicht konfiguriert.</div>`;return}
+  try{lastData=await fetchDashboard();renderShell()}catch(e){panel.innerHTML=`<div class="empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}
+}
+function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
+function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
+function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
+document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
+document.getElementById("adminBackBtn").onclick=()=>adminBack();
+document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)setTimeout(()=>renderDashboard(),260)});
+let adminSwipe=null;
+document.addEventListener("touchstart",e=>{
+  const t=e.touches&&e.touches[0];if(!t)return;
+  const interactive=e.target.closest&&e.target.closest("input,textarea,select,button,a");
+  if(interactive)return;
+  adminSwipe={x:t.clientX,y:t.clientY,t:Date.now()};
+},{passive:true});
+document.addEventListener("touchend",e=>{
+  if(!adminSwipe)return;
+  const t=e.changedTouches&&e.changedTouches[0];if(!t){adminSwipe=null;return}
+  const dx=t.clientX-adminSwipe.x,dy=t.clientY-adminSwipe.y,dt=Date.now()-adminSwipe.t;
+  adminSwipe=null;
+  if(adminNavStack.length||currentTab!=="start"){
+    if(dx>78&&Math.abs(dy)<55&&dt<650)adminBack();
+  }
+},{passive:true});
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{})})}
+loadLocalDraft();
+authed=readAuth();
+renderApp();
 </script>
 </body>
 </html>
