@@ -11,6 +11,7 @@ ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
 UPDATES_PATH = "content/updates/current.json"
 SCHEDULE_PATH = "content/admin/planned-posts.json"
 
-# Secrets (einmalig setzen, bleiben am Worker gespeichert):
+# Secrets (einmalig setzen, bleibt am Worker gespeichert):
 #   wrangler secret put GITHUB_TOKEN
 #   wrangler secret put ADMIN_PUBLISH_SECRET
+#   wrangler secret put ONESIGNAL_API_KEY_NEW
