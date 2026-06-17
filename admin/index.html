@@ -22,6 +22,39 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script>
+(function(){
+  var ADMIN_SW_CACHE="dar-admin-stats-v20";
+  if(!location.pathname.startsWith("/admin"))return;
+  function cleanCaches(){
+    if(!("caches" in window))return Promise.resolve();
+    return caches.keys().then(function(keys){
+      return Promise.all(keys.filter(function(k){
+        return k.indexOf("dar-admin-stats-")===0&&k!==ADMIN_SW_CACHE;
+      }).map(function(k){return caches.delete(k)}));
+    });
+  }
+  function dropVisitorWorkers(){
+    if(!("serviceWorker" in navigator))return Promise.resolve();
+    return navigator.serviceWorker.getRegistrations().then(function(regs){
+      return Promise.all(regs.map(function(reg){
+        var script=(reg.active&&reg.active.scriptURL)||(reg.waiting&&reg.waiting.scriptURL)||(reg.installing&&reg.installing.scriptURL)||"";
+        if(script.indexOf("/admin/sw.js")!==-1)return Promise.resolve();
+        return reg.unregister().catch(function(){});
+      }));
+    });
+  }
+  window.__DAR_ADMIN_REPAIR__=function(){
+    return dropVisitorWorkers().then(cleanCaches).then(function(){
+      if("serviceWorker" in navigator)return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"});
+    }).then(function(){location.reload()});
+  };
+  var bootKey="darAdminBootRepairV20";
+  if(sessionStorage.getItem(bootKey))return;
+  sessionStorage.setItem(bootKey,"1");
+  dropVisitorWorkers().then(cleanCaches).catch(function(){});
+})();
+</script>
 <style>
 :root{
   --bg:#05080f;--panel:#0a111c;--panel2:#101a29;--ink:#f7f0df;--soft:#d2c9b7;--muted:#8f99a7;
@@ -576,11 +609,14 @@ function renderLogin(){
       <p>Private Steuerzentrale für DAR AL TAWḤID mit Live-Zahlen, Inhaltsanalyse und schnellen Arbeitswegen.</p>
       <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
       <button class="btn primary" id="loginBtn" type="button">Dashboard öffnen</button>
+      <button class="btn" id="adminRepairBtn" type="button" style="margin-top:10px">Admin-Cache reparieren</button>
       <div class="hint"><strong>Als eigene Admin-App speichern:</strong><br>iPhone: Safari teilen, dann „Zum Home-Bildschirm“.<br>Android: Browser-Menü, dann „App installieren“.<br><br>URL: <strong>${esc(location.origin+"/admin/")}</strong></div>
     </section>`;
   const btn=document.getElementById("loginBtn"),input=document.getElementById("pinInput");
   btn.onclick=()=>{if(checkPin(input.value.trim())){setAuth(true);renderApp()}else alert("Falsches Passwort.")};
   input.onkeydown=e=>{if(e.key==="Enter")btn.click()};
+  const repair=document.getElementById("adminRepairBtn");
+  if(repair)repair.onclick=()=>{if(window.__DAR_ADMIN_REPAIR__)window.__DAR_ADMIN_REPAIR__();else location.reload(true)};
   setTimeout(()=>{try{input.focus()}catch(e){}},80);
 }
 function renderShell(){
@@ -1304,6 +1340,7 @@ document.addEventListener("touchend",e=>{
   }
 },{passive:true});
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"}).catch(()=>{})})}
+window.addEventListener("error",e=>{const panel=document.getElementById("panel");if(!panel)return;const msg=String(e.message||e.error||"Unbekannter Fehler");panel.innerHTML=`<section class="login"><h2>Admin Fehler</h2><p>${esc(msg)}</p><button class="btn primary" type="button" onclick="location.reload()">Neu laden</button><button class="btn" type="button" onclick="window.__DAR_ADMIN_REPAIR__&&window.__DAR_ADMIN_REPAIR__()">Cache reparieren</button></section>`});
 loadLocalDraft();
 authed=readAuth();
 renderApp();
