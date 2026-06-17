@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v20";
+  var ADMIN_SW_CACHE="dar-admin-stats-v21";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -49,7 +49,7 @@
       if("serviceWorker" in navigator)return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/"});
     }).then(function(){location.reload()});
   };
-  var bootKey="darAdminBootRepairV20";
+  var bootKey="darAdminBootRepairV21";
   if(sessionStorage.getItem(bootKey))return;
   sessionStorage.setItem(bootKey,"1");
   dropVisitorWorkers().then(cleanCaches).catch(function(){});
