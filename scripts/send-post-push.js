@@ -15,6 +15,7 @@ const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de";
 const EVENT_NAME = process.env.GITHUB_EVENT_NAME || "";
 const RUN_ID = process.env.GITHUB_RUN_ID || "manual";
 const POSTS_DIR = process.env.POSTS_DIR || "content/posts";
+const LIVE_CHECK_SCHEDULE_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
 
 function frontmatterValue(text, key) {
   const pattern = new RegExp(`^${key}:\\s*["']?(.*?)["']?\\s*$`, "m");
@@ -43,44 +44,91 @@ function changedPostFiles() {
     .filter((line) => line && line !== "manual" && line.endsWith(".md") && fs.existsSync(line));
 }
 
-async function verifyPostLive({ filename, postId }) {
+function diagnoseLiveFailure(steps) {
+  if (!steps.indexFoundPublic) return "Indexdatei öffentlich nicht gefunden – Cloudflare Deployment evtl. noch nicht fertig.";
+  if (!steps.postInIndex) return "Beitrag ist nicht im öffentlichen Index enthalten.";
+  if (!steps.postFilePublic) return "Beitrag-Datei öffentlich nicht erreichbar – evtl. alte Cache-Version.";
+  if (!steps.visitorUrlOk) return "Besucher-URL (?post=…) noch nicht erreichbar.";
+  return "Beitrag noch nicht live erreichbar.";
+}
+
+async function fetchLiveResources({ filename, postId }) {
   const site = siteOriginFromEnv(SITE_URL);
-  const maxAttempts = 8;
-  const delayMs = 2000;
-  const result = { ok: false, indexOk: false, postOk: false, attempts: 0 };
+  const bust = Date.now();
+  const postPath = `${POSTS_DIR}/${filename}`;
+  const result = {
+    indexFoundPublic: false,
+    postInIndex: false,
+    postFilePublic: false,
+    visitorUrlOk: false,
+    visitorUrl: postId ? buildPostPushUrl(postId, bust) : null
+  };
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    result.attempts = attempt;
-    const bust = Date.now();
+  try {
+    const indexRes = await fetch(`${site}/${POSTS_DIR}/posts-index.json?v=${bust}`, { cache: "no-store" });
+    if (indexRes.ok) {
+      result.indexFoundPublic = true;
+      const indexData = await indexRes.json();
+      const files = Array.isArray(indexData.files) ? indexData.files : [];
+      result.postInIndex = files.some((file) => file && (file.name === filename || String(file.name).replace(/\.md$/, "") === String(postId)));
+    } else {
+      result.indexHttpStatus = indexRes.status;
+    }
+  } catch (err) {
+    result.indexError = err.message || String(err);
+  }
 
+  try {
+    const postRes = await fetch(`${site}/${postPath}?v=${bust}`, { cache: "no-store" });
+    result.postFilePublic = postRes.ok;
+    if (!postRes.ok) result.postHttpStatus = postRes.status;
+  } catch (err) {
+    result.postError = err.message || String(err);
+  }
+
+  if (result.visitorUrl) {
     try {
-      const indexRes = await fetch(`${site}/${POSTS_DIR}/posts-index.json?v=${bust}`, { cache: "no-store" });
-      if (indexRes.ok) {
-        const indexData = await indexRes.json();
-        const files = Array.isArray(indexData.files) ? indexData.files : [];
-        result.indexOk = files.some((file) => file && (file.name === filename || String(file.name).replace(/\.md$/, "") === String(postId)));
-      }
+      const navRes = await fetch(result.visitorUrl.split("#")[0], { cache: "no-store", redirect: "follow" });
+      result.visitorUrlOk = navRes.ok;
     } catch (err) {
-      result.indexError = err.message || String(err);
+      result.visitorError = err.message || String(err);
     }
-
-    try {
-      const postPath = `${POSTS_DIR}/${encodeURIComponent(filename)}`;
-      const postRes = await fetch(`${site}/${postPath}?v=${bust}`, { cache: "no-store" });
-      result.postOk = postRes.ok;
-    } catch (err) {
-      result.postError = err.message || String(err);
-    }
-
-    if (result.indexOk && result.postOk) {
-      result.ok = true;
-      return result;
-    }
-
-    if (attempt < maxAttempts) await sleep(delayMs);
   }
 
   return result;
+}
+
+async function verifyPostLive({ filename, postId }) {
+  let lastResult = null;
+  let elapsed = 0;
+
+  for (let i = 0; i < LIVE_CHECK_SCHEDULE_MS.length; i++) {
+    const target = LIVE_CHECK_SCHEDULE_MS[i];
+    const waitMs = target - elapsed;
+    if (waitMs > 0) await sleep(waitMs);
+    elapsed = target;
+
+    const live = await fetchLiveResources({ filename, postId });
+    const steps = {
+      indexFoundPublic: live.indexFoundPublic,
+      postInIndex: live.postInIndex,
+      postFilePublic: live.postFilePublic,
+      visitorUrlOk: live.visitorUrlOk
+    };
+    const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
+    lastResult = {
+      ok,
+      steps,
+      indexOk: steps.postInIndex,
+      postOk: steps.postFilePublic,
+      attempts: i + 1,
+      diagnosis: ok ? "" : diagnoseLiveFailure(steps),
+      ...live
+    };
+    if (ok) return lastResult;
+  }
+
+  return lastResult;
 }
 
 function buildMessage(files) {
@@ -123,6 +171,10 @@ function buildMessage(files) {
 }
 
 async function sendWithFallbacks(basePayload) {
+  if (!API_KEY) {
+    throw new Error("OneSignal API-Key fehlt (ONESIGNAL_API_KEY_NEW / ONESIGNAL_API_KEY / ONESIGNAL_APP_API_KEY)");
+  }
+
   const attempts = [
     { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
@@ -162,18 +214,24 @@ async function sendWithFallbacks(basePayload) {
   }
 
   if (copy.postId && copy.filename) {
+    console.log("Warte auf Live-Verfügbarkeit (bis zu 5 Minuten) …");
     const live = await verifyPostLive({ filename: copy.filename, postId: copy.postId });
     if (!live.ok) {
-      console.error("Beitrag noch nicht live erreichbar. Push wurde nicht gesendet.", live);
-      process.exit(1);
+      console.warn("Beitrag nach Wartezeit noch nicht live erreichbar.");
+      console.warn("Diagnose:", live.diagnosis || "unbekannt");
+      console.warn("Schritte:", JSON.stringify(live.steps || {}, null, 2));
+      console.warn("Der Cloudflare Worker speichert den Push als pending und versucht automatisch nachzusenden.");
+      console.warn("Alternativ in der Admin-App: „Live erneut prüfen & Push senden“.");
+      return;
     }
-    console.log("Live-Prüfung erfolgreich:", live);
+    console.log("Live-Prüfung erfolgreich:", JSON.stringify(live, null, 2));
   }
 
   const pushData = copy.postId ? {
     type: "post",
     postId: copy.postId,
     slug: copy.postId,
+    filename: copy.filename,
     url: copy.url,
     publishedAt: copy.publishedAt || new Date().toISOString(),
     cacheVersion: String(copy.cacheVersion || Date.now())
@@ -191,6 +249,6 @@ async function sendWithFallbacks(basePayload) {
 
   await sendWithFallbacks(payload);
 })().catch((err) => {
-  console.error(err.message || err);
+  console.error("OneSignal Fehler:", err.message || err);
   process.exit(1);
 });

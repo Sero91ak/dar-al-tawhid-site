@@ -17,3 +17,4 @@ SCHEDULE_PATH = "content/admin/planned-posts.json"
 #   wrangler secret put ONESIGNAL_API_KEY_NEW
 #   wrangler secret put TELEGRAM_BOT_TOKEN
 #   TELEGRAM_CHANNEL_USERNAME defaults to @dar_al_tauhid (optional override)
+#   PENDING_PUSHES_PATH defaults to content/admin/pending-pushes.json

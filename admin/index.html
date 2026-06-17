@@ -348,6 +348,7 @@ const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_TELEGRAM_PREFS_KEY="darAdminTelegramPrefsV1";
 const ADMIN_TELEGRAM_STATUS_KEY="darAdminTelegramStatusV1";
+const ADMIN_LAST_PUSH_KEY="darAdminLastPublishPushV1";
 const DEFAULT_ADMIN_TABS=[
   ["actions","Aktionen"],
   ["start","Start"],
@@ -362,7 +363,7 @@ const DEFAULT_ADMIN_TABS=[
   ["overview","Dashboard"]
 ];
 let refreshTimer=null,authed=false,lastData=null,currentTab="actions",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0,adminShellScrollY=0;
-let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,telegramPreviewTimer=null,lastTelegramPreview=null,lastTelegramStatus=null;
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,telegramPreviewTimer=null,lastTelegramPreview=null,lastTelegramStatus=null,lastPublishPushContext=null;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
@@ -729,7 +730,61 @@ async function sendTelegramResend(force=true){
     toast(e.message||"Telegram fehlgeschlagen");
   }
 }
-function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
+function readLastPublishPushContext(){try{return JSON.parse(localStorage.getItem(ADMIN_LAST_PUSH_KEY)||"null")}catch(e){return null}}
+function saveLastPublishPushContext(ctx){try{localStorage.setItem(ADMIN_LAST_PUSH_KEY,JSON.stringify(ctx||null));lastPublishPushContext=ctx}catch(e){}}
+function stepLabel(ok){return ok?`<strong style="color:#8fd7a8">ja</strong>`:`<strong style="color:#ff9f9f">nein</strong>`}
+function formatPublishStatusHtml(result){
+  const live=result.liveCheck||{};
+  const push=result.push||{};
+  const steps=live.steps||{};
+  const tg=result.telegram||{};
+  let html=`<strong>Veröffentlichung abgeschlossen:</strong> ${esc(result.filename||draftFilename||"")}<br>`;
+  html+=`Nummer: <strong>${esc(result.number||"")}</strong> · Commit: <strong>${esc(result.commitSha||"erstellt")}</strong><br><br>`;
+  html+=`<strong>Live-Prüfung Schritt für Schritt</strong><br>`;
+  html+=`GitHub-Datei erstellt: ${stepLabel(steps.githubFileCreated!==false)}<br>`;
+  html+=`Index auf GitHub aktualisiert: ${stepLabel(steps.indexUpdatedGithub!==false)}<br>`;
+  html+=`Index öffentlich gefunden: ${stepLabel(steps.indexFoundPublic)}<br>`;
+  html+=`Beitrag im Index enthalten: ${stepLabel(steps.postInIndex)}<br>`;
+  html+=`Cloudflare Deployment erkannt: ${stepLabel(steps.cloudflareDeployed)}<br>`;
+  html+=`Beitrag-Datei öffentlich erreichbar: ${stepLabel(steps.postFilePublic)}<br>`;
+  html+=`Besucher-URL erreichbar: ${stepLabel(steps.visitorUrlOk)}<br>`;
+  html+=`Push wartet: ${stepLabel(!!push.pending||!!push.waitingForLive)}<br>`;
+  html+=`Push gesendet: ${stepLabel(!!push.sent)}<br>`;
+  if(live.diagnosis)html+=`<span style="color:#f0c674">Fehlergrund: ${esc(live.diagnosis)}</span><br>`;
+  if(push.reason&&!push.sent)html+=`<span style="color:#f0c674">${esc(push.reason)}</span><br>`;
+  if(push.sent&&push.targetUrl)html+=`Push-Ziel: <strong>${esc(push.targetUrl)}</strong><br>`;
+  if(tg.sent)html+=`Telegram: <strong>gesendet</strong>${tg.telegramMessageId?` · Message-ID ${esc(tg.telegramMessageId)}`:""}<br>`;
+  else if(tg.telegramError||tg.error)html+=`<span style="color:#ff9f9f">Telegram fehlgeschlagen: ${esc(tg.telegramError||tg.error)}</span><br>`;
+  return html;
+}
+async function retryLivePush(){
+  const ctx=lastPublishPushContext||readLastPublishPushContext();
+  const postId=ctx?.postId||frontmatterValue(draftMarkdown,"id")||String(draftFilename||"").replace(/\.md$/i,"");
+  const filename=ctx?.filename||draftFilename;
+  if(!postId||!filename){toast("Kein veröffentlichter Beitrag für Push-Retry");return}
+  const btn=document.getElementById("adminRetryPushBtn");
+  if(btn){btn.disabled=true;btn.textContent="Prüfe Live & Push …"}
+  setUploadStatus("Prüfe Index, Beitrag und Live-Verfügbarkeit … Push wird bei Erfolg gesendet.");
+  try{
+    const result=await workerPostRequest("api/admin/push/retry",{
+      postId,
+      filename,
+      postTitle:ctx?.postTitle||frontmatterValue(draftMarkdown,"title")||"Neuer Beitrag",
+      publishedAt:ctx?.publishedAt||new Date().toISOString(),
+      postPath:ctx?.postPath||`content/posts/${filename}`
+    });
+    const push=result.push||{};
+    const merged={...ctx,filename,postId,liveCheck:result.liveCheck||push.liveCheck||{},push};
+    saveLastPublishPushContext(merged);
+    setUploadStatus(formatPublishStatusHtml({filename,number:ctx?.number,commitSha:ctx?.commitSha,liveCheck:merged.liveCheck,push,telegram:{}}));
+    toast(push.sent?"Push gesendet":push.pending?"Push wartet noch auf Live-Verfügbarkeit":"Push fehlgeschlagen");
+  }catch(e){
+    setUploadStatus(`Push-Retry fehlgeschlagen: ${esc(e.message||e)}`);
+    toast(e.message||"Push-Retry fehlgeschlagen");
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent="Live erneut prüfen & Push senden"}
+  }
+}
 function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
 function nextPostNumber(files){return (Array.isArray(files)?files.filter(f=>f&&(f.name||typeof f==="string")):[]).length+1}
 function workerNextNumberUrl(publishUrl){const url=new URL(resolveWorkerUrl(publishUrl||workerPublishUrl()));if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/api/admin/next-number");else if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/next-number");else url.pathname="/api/admin/next-number";return url.toString()}
@@ -1166,6 +1221,7 @@ function renderActions(rows,installs=installTotals()){
           </label>
           <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
           <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
+          <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
           <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
       </div>
@@ -1307,6 +1363,7 @@ function bindUi(){
   const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
+  const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const tgEnabled=document.getElementById("telegramPostEnabled");
   const tgRefreshBtn=document.getElementById("adminTelegramRefreshPreviewBtn");
@@ -1495,16 +1552,15 @@ async function uploadPostViaWorker(){
     const live=result.liveCheck||{};
     const push=result.push||{};
     const tg=result.telegram||{};
-    const pushLine=push.sent
-      ? `Push gesendet · Ziel: <strong>${esc(push.targetUrl||result.postId||"")}</strong>`
-      : push.waitingForLive
-        ? `<span style="color:#f0c674">Beitrag veröffentlicht, aber noch nicht für Besucher abrufbar. Push wurde nicht gesendet.</span>`
-        : `Push nicht gesendet: ${esc(push.reason||"unbekannt")}`;
-    let tgLine="";
-    if(tg.sent)tgLine=`<br>Telegram: <strong>gesendet</strong>${tg.telegramMessageId?` · Message-ID ${esc(tg.telegramMessageId)}`:""}`;
-    else if(tg.skipped&&tg.reason)tgLine=`<br>Telegram: <span style="color:#f0c674">übersprungen · ${esc(tg.reason)}</span>`;
-    else if(tg.telegramError||tg.error)tgLine=`<br><span style="color:#ff9f9f">Website veröffentlicht, Telegram fehlgeschlagen: ${esc(tg.telegramError||tg.error)}</span>`;
-    else if(telegramPayload)tgLine=`<br>Telegram: nicht gesendet`;
+    saveLastPublishPushContext({
+      postId:result.postId||frontmatterValue(markdown,"id"),
+      filename:draftFilename,
+      postTitle:frontmatterValue(markdown,"title")||"Neuer Beitrag",
+      publishedAt:result.publishedAt||new Date().toISOString(),
+      postPath:result.postPath||`content/posts/${draftFilename}`,
+      number:result.number||next,
+      commitSha:result.commitSha||""
+    });
     if(result.postId||frontmatterValue(markdown,"id")){
       writeLocalTelegramStatus(result.postId||frontmatterValue(markdown,"id"),{
         telegramStatus:tg.sent?"sent":tg.telegramError||tg.error?"failed":"not_sent",
@@ -1513,10 +1569,10 @@ async function uploadPostViaWorker(){
         telegramError:tg.telegramError||tg.error||tg.reason||null
       });
     }
-    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong><br>Index aktualisiert: <strong>${live.indexOk?"ja":"nein"}</strong><br>Beitrag live erreichbar: <strong>${live.ok?"ja":"nein"}</strong><br>${pushLine}${tgLine}`);
+    setUploadStatus(formatPublishStatusHtml({filename:draftFilename,number:result.number||next,commitSha:result.commitSha,liveCheck:live,push,telegram:tg}));
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
     saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
-    toast(tg.telegramError&&!tg.sent?"Website ok, Telegram fehlgeschlagen":"Beitrag hochgeladen");
+    toast(push.sent?"Beitrag veröffentlicht & Push gesendet":push.pending?"Veröffentlicht – Push wartet auf Live":tg.telegramError&&!tg.sent?"Website ok, Telegram fehlgeschlagen":"Beitrag hochgeladen");
     updateTelegramPanelStatus();
   }catch(e){
     addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");

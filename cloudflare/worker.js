@@ -17,9 +17,12 @@ const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
+const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
+const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const cors = corsHeaders(request, env);
 
@@ -64,8 +67,12 @@ export default {
         "/api/admin/telegram/send",
         "/api/admin/telegram/status"
       ]);
+      const pushPaths = new Set([
+        "/api/admin/push/retry",
+        "/api/admin/push/status"
+      ]);
 
-      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -76,6 +83,15 @@ export default {
         const postId = String(url.searchParams.get("postId") || "").trim();
         const registry = await readTelegramPostsRegistry(env);
         return json({ ok: true, postId, status: postId ? registry.posts?.[postId] || null : registry }, cors);
+      }
+
+      if (url.pathname === "/api/admin/push/status") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const postId = String(url.searchParams.get("postId") || "").trim();
+        const registry = await readPendingPushesRegistry(env);
+        return json({ ok: true, postId, status: postId ? registry.pushes?.[postId] || null : registry }, cors);
       }
 
       if (request.method !== "POST") {
@@ -99,8 +115,14 @@ export default {
         }
       }
 
+      if (pushPaths.has(url.pathname)) {
+        if (url.pathname.endsWith("/retry")) {
+          return json(await retryPendingPostPush(env, input), cors);
+        }
+      }
+
       if (publishPaths.has(url.pathname)) {
-        return json(await publishPostFromMarkdown(env, input), cors);
+        return json(await publishPostFromMarkdown(env, input, ctx), cors);
       }
 
       if (newsPaths.has(url.pathname)) {
@@ -121,6 +143,7 @@ export default {
 
   async scheduled(event, env, ctx) {
     ctx.waitUntil(runScheduledPublishes(env));
+    ctx.waitUntil(processAllPendingPushes(env));
   }
 };
 
@@ -151,7 +174,7 @@ function listPostFiles(files) {
   return (Array.isArray(files) ? files : []).filter((file) => file && (file.name || typeof file === "string"));
 }
 
-async function publishPostFromMarkdown(env, input) {
+async function publishPostFromMarkdown(env, input, ctx) {
   const markdownRaw = String(input.markdown || "").trim();
   let filename = String(input.filename || "").trim();
 
@@ -211,19 +234,53 @@ async function publishPostFromMarkdown(env, input) {
   const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
   const postId = frontmatterValue(markdown, "id");
   const publishedAt = new Date().toISOString();
-  const liveCheck = await verifyPostLiveAvailability(env, { filename, postId, postPath, indexPath });
+  const githubSteps = { postCreated: true, indexUpdated: true };
+  const liveCheck = await verifyPostLiveAvailability(
+    env,
+    { filename, postId, postPath, githubSteps },
+    { schedule: "quick" }
+  );
   let push;
   if (liveCheck.ok) {
     push = await sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion: Date.now() });
     push.liveCheck = liveCheck;
+    push.pending = false;
+    if (postId) {
+      await writePendingPushStatus(env, postId, {
+        postId,
+        filename,
+        postTitle,
+        publishedAt,
+        postPath,
+        status: "sent",
+        sentAt: new Date().toISOString(),
+        lastError: "",
+        liveCheck
+      });
+    }
   } else {
+    const pendingRecord = {
+      postId,
+      filename,
+      postTitle,
+      publishedAt,
+      postPath,
+      status: "pending",
+      createdAt: publishedAt,
+      lastError: liveCheck.diagnosis || "Push wartet auf Live-Verfügbarkeit"
+    };
+    if (postId) await writePendingPushStatus(env, postId, pendingRecord);
     push = {
       sent: false,
-      reason: "Beitrag veröffentlicht, aber noch nicht für Besucher abrufbar. Push wurde nicht gesendet.",
+      pending: true,
+      reason: "Push wartet auf Live-Verfügbarkeit",
       waitingForLive: true,
       liveCheck,
       targetUrl: buildPostPushUrl(env, postId, Date.now())
     };
+    if (ctx && postId) {
+      ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
+    }
   }
 
   let telegram = { sent: false, skipped: true, status: "not_sent" };
@@ -586,54 +643,287 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function verifyPostLiveAvailability(env, { filename, postId, postPath }) {
-  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+function pendingPushesPath(env) {
+  return trimSlashes(env.PENDING_PUSHES_PATH || DEFAULT_PENDING_PUSHES_PATH);
+}
+
+async function readPendingPushesRegistry(env) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const path = pendingPushesPath(env);
+  const file = await githubGet(env, owner, repo, path, branch);
+  if (!file?.content) return { pushes: {} };
+  try {
+    const data = JSON.parse(base64ToUtf8(file.content));
+    return { pushes: data.pushes || {}, sha: file.sha };
+  } catch (error) {
+    return { pushes: {}, sha: file.sha };
+  }
+}
+
+async function writePendingPushStatus(env, postId, patch) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const path = pendingPushesPath(env);
+  const registry = await readPendingPushesRegistry(env);
+  const pushes = { ...(registry.pushes || {}) };
+  const key = String(postId || "").trim();
+  if (!key) return null;
+  pushes[key] = {
+    ...(pushes[key] || {}),
+    ...patch,
+    postId: key,
+    updatedAt: new Date().toISOString()
+  };
+  const payload = { version: 1, generated: new Date().toISOString(), pushes };
+  await githubPut(
+    env,
+    owner,
+    repo,
+    path,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    `Update pending push ${key}`,
+    branch,
+    registry.sha
+  );
+  return pushes[key];
+}
+
+function diagnoseLiveFailure(steps, live = {}) {
+  if (!steps.githubFileCreated) return "GitHub-Datei wurde nicht erstellt.";
+  if (!steps.indexUpdatedGithub) return "Indexdatei wurde auf GitHub nicht aktualisiert.";
+  if (!steps.indexFoundPublic) {
+    if (live.indexHttpStatus === 404) return "Indexdatei öffentlich nicht gefunden.";
+    return "GitHub Commit erfolgreich, aber Cloudflare Deployment noch nicht fertig.";
+  }
+  if (!steps.postInIndex) return "Beitrag ist nicht im öffentlichen Index enthalten.";
+  if (!steps.postFilePublic) {
+    if (live.postHttpStatus === 404) return "Beitrag-Datei öffentlich nicht erreichbar.";
+    return "Cloudflare liefert noch alte Cache-Version.";
+  }
+  if (!steps.visitorUrlOk) return "Besucher-URL (?post=…) noch nicht erreichbar.";
+  return "";
+}
+
+function buildLiveCheckResult(githubSteps, live, attempts) {
+  const steps = {
+    githubFileCreated: !!githubSteps?.postCreated,
+    indexUpdatedGithub: !!githubSteps?.indexUpdated,
+    indexFoundPublic: !!live.indexFoundPublic,
+    postInIndex: !!live.postInIndex,
+    postFilePublic: !!live.postFilePublic,
+    visitorUrlOk: !!live.visitorUrlOk,
+    cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
+  };
+  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
+  const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
+  return {
+    ok,
+    steps,
+    diagnosis,
+    indexOk: steps.postInIndex,
+    postOk: steps.postFilePublic,
+    visitorUrlOk: steps.visitorUrlOk,
+    attempts,
+    site: live.site,
+    postId: live.postId,
+    indexGenerated: live.indexGenerated,
+    indexCount: live.indexCount,
+    visitorUrl: live.visitorUrl,
+    indexError: live.indexError,
+    postError: live.postError,
+    visitorError: live.visitorError
+  };
+}
+
+async function fetchLiveResources(env, { filename, postId, postPath }) {
+  const site = siteOrigin(env);
   const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
-  const maxAttempts = 8;
-  const delayMs = 2000;
-  const result = { ok: false, indexOk: false, postOk: false, attempts: 0, site, postId: String(postId || "") };
+  const bust = Date.now();
+  const result = {
+    site,
+    postId: String(postId || ""),
+    indexFoundPublic: false,
+    postInIndex: false,
+    postFilePublic: false,
+    visitorUrlOk: false,
+    indexGenerated: null,
+    indexCount: null,
+    visitorUrl: postId ? buildPostPushUrl(env, postId, bust) : null
+  };
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    result.attempts = attempt;
-    const bust = Date.now();
-
-    try {
-      const indexRes = await fetch(`${site}/${postsDir}/posts-index.json?v=${bust}`, { cache: "no-store" });
-      if (indexRes.ok) {
-        const indexData = await indexRes.json();
-        const files = listPostFiles(indexData.files || []);
-        result.indexOk = files.some((file) => file.name === filename);
-        if (!result.indexOk && postId) {
-          result.indexOk = files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId));
-        }
+  try {
+    const indexRes = await fetch(`${site}/${postsDir}/posts-index.json?v=${bust}`, { cache: "no-store" });
+    if (indexRes.ok) {
+      result.indexFoundPublic = true;
+      const indexData = await indexRes.json();
+      result.indexGenerated = indexData.generated || null;
+      result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || 0;
+      const files = listPostFiles(indexData.files || []);
+      result.postInIndex = files.some((file) => file.name === filename);
+      if (!result.postInIndex && postId) {
+        result.postInIndex = files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId));
       }
-    } catch (error) {
-      result.indexError = error.message || String(error);
+    } else {
+      result.indexHttpStatus = indexRes.status;
     }
+  } catch (error) {
+    result.indexError = error.message || String(error);
+  }
 
+  try {
+    const postRes = await fetch(`${site}/${postPath}?v=${bust}`, { cache: "no-store" });
+    result.postFilePublic = postRes.ok;
+    if (!postRes.ok) result.postHttpStatus = postRes.status;
+  } catch (error) {
+    result.postError = error.message || String(error);
+  }
+
+  if (result.visitorUrl) {
     try {
-      const postRes = await fetch(`${site}/${postPath}?v=${bust}`, { cache: "no-store" });
-      result.postOk = postRes.ok;
+      const navRes = await fetch(result.visitorUrl.split("#")[0], { cache: "no-store", redirect: "follow" });
+      result.visitorUrlOk = navRes.ok;
+      if (!navRes.ok) result.visitorHttpStatus = navRes.status;
     } catch (error) {
-      result.postError = error.message || String(error);
+      result.visitorError = error.message || String(error);
     }
-
-    if (result.indexOk && result.postOk) {
-      result.ok = true;
-      return result;
-    }
-
-    if (attempt < maxAttempts) await sleep(delayMs);
   }
 
   return result;
 }
 
+async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {}) {
+  const delays = schedule === "quick" ? LIVE_CHECK_SCHEDULE_QUICK_MS : LIVE_CHECK_SCHEDULE_FULL_MS;
+  let lastResult = null;
+  let elapsed = 0;
+
+  for (let i = 0; i < delays.length; i++) {
+    const target = delays[i];
+    const waitMs = target - elapsed;
+    if (waitMs > 0) await sleep(waitMs);
+    elapsed = target;
+
+    const live = await fetchLiveResources(env, opts);
+    lastResult = buildLiveCheckResult(opts.githubSteps || {}, live, i + 1);
+    if (lastResult.ok) return lastResult;
+  }
+
+  return lastResult;
+}
+
+async function processPendingPushUntilLive(env, record) {
+  const postId = String(record?.postId || "").trim();
+  if (!postId) return { sent: false, reason: "postId fehlt" };
+
+  const registry = await readPendingPushesRegistry(env);
+  if (registry.pushes?.[postId]?.status === "sent") {
+    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
+  }
+
+  const liveCheck = await verifyPostLiveAvailability(
+    env,
+    {
+      filename: record.filename,
+      postId,
+      postPath: record.postPath,
+      githubSteps: { postCreated: true, indexUpdated: true }
+    },
+    { schedule: "full" }
+  );
+
+  await writePendingPushStatus(env, postId, {
+    lastCheckAt: new Date().toISOString(),
+    liveCheck,
+    attempts: liveCheck.attempts,
+    lastError: liveCheck.ok ? "" : liveCheck.diagnosis
+  });
+
+  if (!liveCheck.ok) {
+    return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+  }
+
+  const push = await sendNewPostPush(env, {
+    postTitle: record.postTitle,
+    postId,
+    filename: record.filename,
+    publishedAt: record.publishedAt,
+    cacheVersion: Date.now()
+  });
+
+  if (push.sent) {
+    await writePendingPushStatus(env, postId, {
+      status: "sent",
+      sentAt: new Date().toISOString(),
+      lastError: "",
+      pushResult: { target: push.target, targetUrl: push.targetUrl }
+    });
+  } else {
+    await writePendingPushStatus(env, postId, {
+      status: "failed",
+      lastError: push.reason || "OneSignal Push fehlgeschlagen"
+    });
+  }
+
+  return { ...push, liveCheck, pending: !push.sent };
+}
+
+async function processAllPendingPushes(env) {
+  const registry = await readPendingPushesRegistry(env);
+  const pending = Object.values(registry.pushes || {}).filter((item) => item?.status === "pending");
+  const results = [];
+  for (const record of pending) {
+    results.push(await processPendingPushUntilLive(env, record));
+  }
+  return { processed: pending.length, results };
+}
+
+async function retryPendingPostPush(env, input) {
+  const postId = String(input.postId || "").trim();
+  const filename = sanitizeFilename(String(input.filename || "").trim());
+  const postTitle = String(input.postTitle || "").trim() || "Neuer Beitrag";
+  const publishedAt = String(input.publishedAt || new Date().toISOString());
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const postPath = String(input.postPath || `${postsDir}/${filename}`).trim();
+  if (!postId || !filename) throw httpError("postId und filename fehlen", 400);
+
+  const registry = await readPendingPushesRegistry(env);
+  const existing = registry.pushes?.[postId];
+  if (existing?.status === "sent" && !input.forceResend) {
+    return {
+      ok: true,
+      sent: true,
+      skipped: true,
+      reason: "Push wurde bereits gesendet.",
+      liveCheck: existing.liveCheck || null,
+      push: { sent: true, targetUrl: buildPostPushUrl(env, postId, Date.now()) }
+    };
+  }
+
+  const record = {
+    postId,
+    filename,
+    postTitle: existing?.postTitle || postTitle,
+    publishedAt: existing?.publishedAt || publishedAt,
+    postPath: existing?.postPath || postPath,
+    status: "pending"
+  };
+  await writePendingPushStatus(env, postId, record);
+  const push = await processPendingPushUntilLive(env, record);
+  return {
+    ok: true,
+    postId,
+    filename,
+    liveCheck: push.liveCheck || null,
+    push
+  };
+}
 async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion }) {
   const apiKey = oneSignalApiKey(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   if (!apiKey) {
-    return { sent: false, reason: "ONESIGNAL_API_KEY_NEW fehlt am Worker" };
+    return { sent: false, reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)" };
   }
 
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
@@ -648,6 +938,7 @@ async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, 
     type: "post",
     postId: slug,
     slug,
+    filename: String(filename || "").trim(),
     url,
     publishedAt: publishedAt || new Date().toISOString(),
     cacheVersion: String(version)
@@ -672,6 +963,10 @@ async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, 
     {
       ...basePayload,
       filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
+    },
+    {
+      ...basePayload,
+      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
     }
   ];
 
