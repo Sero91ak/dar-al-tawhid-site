@@ -353,32 +353,99 @@ async function resolvePlayerTags(env, appId, player) {
   return { tags, subscriptionIds, externalId };
 }
 
+function hasPrayerTags(tags) {
+  if (!tags || typeof tags !== "object") return false;
+  const active = tags.prayer_notifications === "true" || tags.prayer_notifications === true;
+  return Boolean(active && tags.prayer_lat && tags.prayer_lon && tags.prayer_timezone);
+}
+
+async function enrichPlayerTags(env, appId, player) {
+  let tags = { ...(player.tags || {}) };
+  let subscriptionIds = player.subscriptionIds?.length
+    ? player.subscriptionIds.filter(Boolean)
+    : [player.id].filter(Boolean);
+
+  if (!hasPrayerTags(tags) && subscriptionIds.length) {
+    const resolved = await resolvePlayerTags(env, appId, {
+      id: subscriptionIds[0],
+      tags,
+      external_user_id: player.external_user_id || player.external_id,
+      external_id: player.external_user_id || player.external_id
+    });
+    tags = { ...tags, ...resolved.tags };
+    if (resolved.subscriptionIds?.length) subscriptionIds = resolved.subscriptionIds;
+  }
+
+  return { tags, subscriptionIds };
+}
+
 async function fetchSubscriptions(env) {
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  let players = [];
-  let source = "users";
+  const bySub = new Map();
+  const sources = [];
+  let tagResolveCount = 0;
 
   try {
-    players = await fetchAppUsers(env, appId);
+    const legacy = await fetchLegacyPlayers(env, appId);
+    if (legacy.length) {
+      sources.push("legacy");
+      for (const player of legacy) {
+        const before = hasPrayerTags(player.tags);
+        const enriched = await enrichPlayerTags(env, appId, {
+          ...player,
+          subscriptionIds: [player.id].filter(Boolean)
+        });
+        if (!before && hasPrayerTags(enriched.tags)) tagResolveCount += 1;
+        const id = enriched.subscriptionIds[0] || player.id;
+        if (!id) continue;
+        bySub.set(id, {
+          ...player,
+          id,
+          tags: enriched.tags,
+          subscriptionIds: enriched.subscriptionIds
+        });
+      }
+    }
   } catch (err) {
-    source = "legacy";
-    players = await fetchLegacyPlayers(env, appId);
+    // try users API below
   }
 
-  const enriched = [];
-  for (const player of players) {
-    const resolved = source === "users"
-      ? {
-          tags: player.tags || {},
-          subscriptionIds: player.subscriptionIds?.length ? player.subscriptionIds : [player.id].filter(Boolean),
-          externalId: player.external_user_id || player.external_id
+  try {
+    const users = await fetchAppUsers(env, appId);
+    if (users.length) {
+      sources.push("users");
+      for (const player of users) {
+        const ids = player.subscriptionIds?.length ? player.subscriptionIds : [player.id].filter(Boolean);
+        for (const id of ids) {
+          if (!id) continue;
+          const existing = bySub.get(id);
+          const merged = {
+            ...(existing || player),
+            id,
+            tags: { ...(existing?.tags || {}), ...(player.tags || {}) },
+            subscriptionIds: [id],
+            external_user_id: player.external_user_id || player.external_id || existing?.external_user_id
+          };
+          const before = hasPrayerTags(merged.tags);
+          const enriched = await enrichPlayerTags(env, appId, merged);
+          if (!before && hasPrayerTags(enriched.tags)) tagResolveCount += 1;
+          bySub.set(id, { ...merged, tags: enriched.tags, subscriptionIds: enriched.subscriptionIds });
         }
-      : await resolvePlayerTags(env, appId, player);
-
-    enriched.push({ ...player, tags: resolved.tags, subscriptionIds: resolved.subscriptionIds });
+      }
+    }
+  } catch (err) {
+    if (!bySub.size) throw err;
   }
 
-  return { players: enriched, source };
+  if (!bySub.size) {
+    throw new Error("Keine OneSignal-Subscriptions lesbar");
+  }
+
+  return {
+    players: Array.from(bySub.values()),
+    source: sources.join("+") || "none",
+    tagResolveCount
+  };
 }
 
 function getPrayerUsers(players) {
@@ -418,43 +485,80 @@ function groupUsers(users) {
 }
 
 async function fetchSupabasePrayerRegistrations(env) {
-  const url = String(env.SUPABASE_URL || DEFAULT_SUPABASE_URL).replace(/\/$/, "");
-  const key = env.SUPABASE_ANON_KEY || env.SUPABASE_KEY || DEFAULT_SUPABASE_ANON_KEY;
-  if (!url || !key) return [];
+  const apiPath =
+    "/rest/v1/prayer_push_registrations?enabled=eq.true&select=device_id,subscription_id,lat,lon,timezone,method_angle,asr_factor,advance_minutes,tahajjud_mode,city,last_synced_at";
 
-  const apiUrl = `${url}/rest/v1/prayer_push_registrations?enabled=eq.true&select=device_id,subscription_id,lat,lon,timezone,method_angle,asr_factor,advance_minutes,tahajjud_mode,city,last_synced_at`;
-  try {
-    const res = await fetch(apiUrl, {
-      headers: { apikey: key, Authorization: `Bearer ${key}` }
-    });
-    const text = await res.text();
-    if (!res.ok) return [];
-    const rows = text ? JSON.parse(text) : [];
-    if (!Array.isArray(rows)) return [];
-    return rows
-      .filter((row) => row.subscription_id && Number.isFinite(Number(row.lat)) && Number.isFinite(Number(row.lon)))
-      .map((row) => ({
-        id: row.subscription_id,
-        external_user_id: row.device_id,
-        invalid_identifier: false,
-        notification_types: 1,
-        subscriptionIds: [row.subscription_id],
-        tags: {
-          prayer_notifications: "true",
-          prayer_lat: String(row.lat),
-          prayer_lon: String(row.lon),
-          prayer_timezone: String(row.timezone || "Europe/Berlin"),
-          prayer_method: String(row.method_angle || 12),
-          prayer_asr_factor: String(row.asr_factor || 1),
-          prayer_advance_minutes: String(row.advance_minutes || DEFAULT_PRAYER_ADVANCE_MINUTES),
-          prayer_tahajjud_mode: String(row.tahajjud_mode || "off")
-        },
-        source: "supabase",
-        last_synced_at: row.last_synced_at || null
-      }));
-  } catch (err) {
-    return [];
+  const candidates = [];
+  const envUrl = String(env.SUPABASE_URL || "").replace(/\/$/, "");
+  const envKey = String(env.SUPABASE_ANON_KEY || env.SUPABASE_KEY || "").trim();
+  if (envUrl && envKey) candidates.push({ url: envUrl, key: envKey, label: "env" });
+  candidates.push({ url: DEFAULT_SUPABASE_URL, key: DEFAULT_SUPABASE_ANON_KEY, label: "default" });
+
+  const seen = new Set();
+  let lastError = null;
+
+  for (const candidate of candidates) {
+    const sig = `${candidate.url}|${candidate.key.slice(0, 12)}`;
+    if (seen.has(sig)) continue;
+    seen.add(sig);
+
+    try {
+      const res = await fetch(`${candidate.url}${apiPath}`, {
+        headers: {
+          apikey: candidate.key,
+          Authorization: `Bearer ${candidate.key}`,
+          Accept: "application/json"
+        }
+      });
+      const text = await res.text();
+      if (!res.ok) {
+        lastError = `${candidate.label}: HTTP ${res.status} ${text.slice(0, 160)}`;
+        continue;
+      }
+      const rows = text ? JSON.parse(text) : [];
+      if (!Array.isArray(rows)) {
+        lastError = `${candidate.label}: ungültige Antwort`;
+        continue;
+      }
+      const registrations = rows
+        .filter((row) => row.subscription_id && Number.isFinite(Number(row.lat)) && Number.isFinite(Number(row.lon)))
+        .map((row) => ({
+          id: row.subscription_id,
+          external_user_id: row.device_id,
+          invalid_identifier: false,
+          notification_types: 1,
+          subscriptionIds: [row.subscription_id],
+          tags: {
+            prayer_notifications: "true",
+            prayer_lat: String(row.lat),
+            prayer_lon: String(row.lon),
+            prayer_timezone: String(row.timezone || "Europe/Berlin"),
+            prayer_method: String(row.method_angle || 12),
+            prayer_asr_factor: String(row.asr_factor || 1),
+            prayer_advance_minutes: String(row.advance_minutes || DEFAULT_PRAYER_ADVANCE_MINUTES),
+            prayer_tahajjud_mode: String(row.tahajjud_mode || "off")
+          },
+          source: "supabase",
+          last_synced_at: row.last_synced_at || null
+        }));
+      return {
+        registrations,
+        meta: {
+          ok: true,
+          source: candidate.label,
+          url: candidate.url,
+          count: registrations.length
+        }
+      };
+    } catch (err) {
+      lastError = `${candidate.label}: ${err.message || String(err)}`;
+    }
   }
+
+  return {
+    registrations: [],
+    meta: { ok: false, error: lastError || "Supabase nicht erreichbar", count: 0 }
+  };
 }
 
 function mergePrayerPlayers(oneSignalPlayers, supabaseRegistrations) {
@@ -928,10 +1032,12 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
 
   let oneSignalPlayers = [];
   let oneSignalSource = "users";
+  let oneSignalTagResolveCount = 0;
   try {
     const result = await fetchSubscriptions(env);
     oneSignalPlayers = result.players;
     oneSignalSource = result.source;
+    oneSignalTagResolveCount = result.tagResolveCount || 0;
   } catch (err) {
     return {
       ok: false,
@@ -942,7 +1048,9 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     };
   }
 
-  const supabaseRegistrations = await fetchSupabasePrayerRegistrations(env);
+  const supabaseResult = await fetchSupabasePrayerRegistrations(env);
+  const supabaseRegistrations = supabaseResult.registrations || [];
+  const supabaseMeta = supabaseResult.meta || { ok: false, count: 0 };
   const players = mergePrayerPlayers(oneSignalPlayers, supabaseRegistrations);
   const users = getPrayerUsers(players);
   let groups = groupUsers(users);
@@ -1031,7 +1139,11 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
 
   const lastError = stats.errors
     ? (stats.errorDetails?.[0] || "OneSignal API Fehler beim Planen")
-    : (users.length === 0 ? "Keine Nutzer mit aktivem Gebets-Push und Standort gefunden" : null);
+    : (users.length === 0
+      ? (supabaseMeta.ok
+        ? `Keine aktiven Registrierungen (Supabase: ${supabaseMeta.count}, OneSignal mit Tags: ${taggedCount})`
+        : `Keine Nutzer gefunden. Supabase-Fehler: ${supabaseMeta.error || "unbekannt"}`)
+      : null);
 
   const statusReport = {
     updatedAt: new Date().toISOString(),
@@ -1051,6 +1163,8 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     subscriptionsOneSignal: oneSignalPlayers.length,
     subscriptionsSupabase: supabaseRegistrations.length,
     oneSignalSource,
+    oneSignalTagResolveCount,
+    supabaseMeta,
     usersWithLocation: users.length,
     usersWithActivePush: users.length,
     locationGroups: groups.length,
