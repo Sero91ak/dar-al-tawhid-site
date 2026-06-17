@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v89';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v90';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -24,20 +24,7 @@ const APP_SHELL = [
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
   '/content/quran-athar/de/001.json',
-  '/assets/site-analytics.js',
-  '/assets/post-templates/bibliothek-braun.jpg',
-  '/assets/post-templates/gruen-moschee.jpg',
-  '/assets/post-templates/nachtblau-buecher.jpg',
-  '/assets/post-templates/sanft-rose.jpg',
-  '/assets/post-templates/schwarz-buecher.jpg',
-  '/assets/post-templates/bordeaux.jpg',
-  '/assets/post-templates/petrol-pflanze.jpg',
-  '/assets/post-templates/olive-pflanze.jpg',
-  '/assets/post-templates/royal-blau.jpg',
-  '/assets/post-templates/sand-buecher.jpg',
-  '/admin/',
-  '/admin/index.html',
-  '/admin/manifest.json'
+  '/assets/site-analytics.js'
 ];
 
 self.addEventListener('message', (event) => {
@@ -70,6 +57,34 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Wenn Nutzer auf Push-Benachrichtigung klickt → Beitrag öffnen
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const targetUrl = event.notification.data?.url
+    || event.notification.data?.launchURL
+    || (event.notification.data?.buttons?.[0]?.url)
+    || event.notification.data?.additionalData?.launchURL
+    || 'https://dar-al-tawhid.de/';
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Schon ein Fenster offen? → fokussieren und zur URL navigieren
+      for (const client of clientList) {
+        const clientUrl = new URL(client.url);
+        const targetUrlObj = new URL(targetUrl);
+        if (clientUrl.origin === targetUrlObj.origin) {
+          client.focus();
+          client.navigate(targetUrl);
+          return;
+        }
+      }
+      // Kein Fenster offen → neues öffnen
+      return self.clients.openWindow(targetUrl);
+    })
+  );
+});
+
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
@@ -82,7 +97,7 @@ self.addEventListener('fetch', (event) => {
   // Navigation: online frisch laden, offline gecachte index.html anzeigen.
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: 'no-cache' })
         .then((response) => {
           const copy = response.clone();
           caches.open(CACHE_VERSION).then((cache) => cache.put('/index.html', copy)).catch(() => null);
