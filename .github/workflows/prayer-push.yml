@@ -1,5 +1,6 @@
 name: Prayer Push
 
+# Backup-Scheduler – Haupt-Scheduler ist Cloudflare Worker Cron (alle 5 Min).
 on:
   workflow_dispatch:
   schedule:

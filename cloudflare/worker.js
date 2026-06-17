@@ -51,16 +51,28 @@ export default {
           telegramChannel: telegramChannelId(env),
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
+          prayerScheduler: "cloudflare-worker-cron",
+          prayerCron: "*/5 * * * *",
           scheduler: "ready"
         }, cors);
+      }
+
+      if (url.pathname === "/api/prayer/status" && request.method === "GET") {
+        const result = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
+        return json(result, cors, result.ok ? 200 : 200);
       }
 
       if (url.pathname === "/api/prayer/schedule-now" && request.method === "POST") {
         const input = await request.json().catch(() => ({}));
         const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
         if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
-        const result = await triggerPrayerWorkflowForSubscription(env, subscriptionId);
-        return json({ ok: result.triggered, ...result }, cors, result.triggered ? 200 : 503);
+        const result = await triggerPrayerWorkflowForSubscription(env, subscriptionId, {
+          githubGet,
+          githubPut,
+          base64ToUtf8,
+          utf8ToBase64
+        });
+        return json({ ok: result.triggered && result.ok !== false, ...result }, cors, result.triggered ? 200 : 503);
       }
 
       if (url.pathname === "/api/admin/next-number") {
@@ -154,7 +166,8 @@ export default {
           return json(await sendPrayerTestPush(env, input), cors);
         }
         if (url.pathname.endsWith("/run")) {
-          return json(await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8), cors);
+          const result = await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
+          return json(result, cors, result.ok === false ? 503 : 200);
         }
       }
 
@@ -181,7 +194,7 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(runScheduledPublishes(env));
     ctx.waitUntil(processAllPendingPushes(env));
-    ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8));
+    ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
   }
 };
 

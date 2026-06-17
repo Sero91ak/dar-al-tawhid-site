@@ -1246,7 +1246,7 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
-        <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>GitHub Action „Prayer Push“ plant Vorab- und Gebetszeit-Meldungen über OneSignal (täglich 00:00&nbsp;UTC).</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><a class="btn" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/prayer-push.yml" target="_blank" rel="noopener">GitHub Action</a></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Status geladen. Automatischer Lauf täglich um 00:00&nbsp;UTC.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><input class="field" id="adminPrayerSubscriptionInput" placeholder="Subscription-ID aus Besucher-App" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
+        <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Cloudflare Worker Cron (alle 5&nbsp;Min) plant Vorab- und Gebetszeit-Meldungen über OneSignal. GitHub Action bleibt nur als Backup.</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button><a class="btn" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/prayer-push.yml" target="_blank" rel="noopener">Backup (GitHub)</a></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><input class="field" id="adminPrayerSubscriptionInput" placeholder="Subscription-ID aus Besucher-App" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Subscription-ID aus der Besucher-App kopieren: Gebetszeiten → Push-Status öffnen.</div>
       ${renderTelegramPanel()}
@@ -1331,7 +1331,7 @@ function renderTech(ctx){
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
         <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
-        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Läuft über GitHub Action „Prayer Push“ (täglich 00:00&nbsp;UTC). OneSignal-Test im Upload-Bereich.</span><strong class="status-pill">GitHub</strong></div>
+        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Cloudflare Worker Cron alle 5&nbsp;Min (Haupt-Scheduler). GitHub Action nur Backup.</span><strong class="status-pill">Worker</strong></div>
         <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
       </div>
     </div>
@@ -1379,6 +1379,7 @@ function bindUi(){
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const oneSignalPrayerBtn=document.getElementById("adminOneSignalPrayerTestBtn");if(oneSignalPrayerBtn)oneSignalPrayerBtn.onclick=sendAdminOneSignalPrayerTest;
   const prayerStatusBtn=document.getElementById("adminPrayerStatusBtn");if(prayerStatusBtn)prayerStatusBtn.onclick=loadAdminPrayerPushStatus;
+  const prayerRunBtn=document.getElementById("adminPrayerRunBtn");if(prayerRunBtn)prayerRunBtn.onclick=triggerAdminPrayerScheduler;
   const tgEnabled=document.getElementById("telegramPostEnabled");
   const tgRefreshBtn=document.getElementById("adminTelegramRefreshPreviewBtn");
   const syncTelegramModeState=()=>{
@@ -1473,20 +1474,33 @@ function updateDraftPreview(){
 function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
 function setAdminPrayerStatusHtml(html){const el=document.getElementById("adminPrayerStatusBox");if(el)el.innerHTML=html}
 function formatPrayerPushStatusHtml(status){
-  const ghLink=`<a href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/prayer-push.yml" target="_blank" rel="noopener" style="color:#efd78e">GitHub → Prayer Push</a>`;
-  if(!status||!status.updatedAt){
-    return`<strong>Gebetszeiten-Push aktiv</strong><br>Scheduler: GitHub Action (nicht Worker).<br>Automatisch täglich um <strong>00:00 UTC</strong> (ca. 02:00 MESZ).<br>Manuell starten: ${ghLink} → <em>Run workflow</em>.<br><br><span style="color:#e8d9a8">Noch kein Status-Eintrag gespeichert. Das ist normal, solange die Action noch nicht gelaufen ist oder keine Status-Datei schreibt.</span>`;
+  if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
+  const updated=status.updatedAt?new Date(status.updatedAt).toLocaleString("de-DE"):"unbekannt";
+  const schedStatus=status.schedulerStatus||(status.ok?"success":status.errors?"error":"warning");
+  const schedLabel=schedStatus==="success"?"erfolgreich":schedStatus==="error"?"Fehler":schedStatus==="warning"?"Warnung":"unbekannt";
+  const schedColor=schedStatus==="success"?"#dfffd8":schedStatus==="error"?"#f0c674":"#e8d9a8";
+  const engine=status.schedulerEngine||"cloudflare-worker";
+  const mag=status.maghribDiagnostic;
+  const next=status.nextPlannedPush;
+  const plannedToday=Number(status.scheduled||0);
+  const sentToday=Number(status.sentTodayCount||0);
+  let html=`<strong>Letzter Cron-Lauf:</strong> ${esc(updated)}<br>`;
+  html+=`<strong>Scheduler-Status:</strong> <span style="color:${schedColor}">${esc(schedLabel)}</span> · Engine: ${esc(engine)}<br>`;
+  if(next?.sendAfter){
+    const nextAt=new Date(next.sendAfter).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+    html+=`<strong>Nächster geplanter Push:</strong> ${esc(next.prayer||"")} (${esc(next.mode||"")}) · ${esc(nextAt)}<br>`;
   }
-  const updated=new Date(status.updatedAt).toLocaleString("de-DE");
+  html+=`<strong>Nutzer mit Standort:</strong> ${esc(String(status.usersWithLocation||0))} · <strong>Gebets-Push aktiv:</strong> ${esc(String(status.usersWithActivePush||status.usersWithLocation||0))}<br>`;
+  html+=`<strong>Gruppen:</strong> ${esc(String(status.locationGroups||0))} · <strong>Geplant heute:</strong> ${esc(String(plannedToday))} · <strong>Gesendet heute:</strong> ${esc(String(sentToday))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
+  if(status.subscriptionsSupabase!=null)html+=`<strong>Quellen:</strong> OneSignal ${esc(String(status.subscriptionsOneSignal||0))} · Supabase ${esc(String(status.subscriptionsSupabase||0))}<br>`;
+  if(mag){
+    html+=`<br><strong>Maghrib heute (${esc(mag.time||"--:--")}):</strong><br>`;
+    html+=`Vorab: ${esc(status.today?.prayers?.maghrib?.advance?.status||mag.plannedAdvance||"?")} · Gebetszeit: ${esc(status.today?.prayers?.maghrib?.entry?.status||mag.plannedEntry||"?")}<br>`;
+    html+=`<span style="color:#dfffd8">${esc(mag.answer||"")}</span><br>`;
+  }
   const prayers=status.today?.prayers||{};
+  const diagnostics=status.prayerDiagnostics||{};
   const keys=["fajr","dhuhr","asr","maghrib","isha","tahajjud"];
-  let html=`<strong>Letzter Lauf:</strong> ${esc(updated)}<br>`;
-  html+=`<strong>Scheduler:</strong> GitHub Action · ${ghLink}<br>`;
-  if(status.usersWithLocation!=null)html+=`<strong>Nutzer mit Standort:</strong> ${esc(String(status.usersWithLocation))}`;
-  if(status.locationGroups!=null)html+=` · <strong>Gruppen:</strong> ${esc(String(status.locationGroups))}`;
-  if(status.scheduled!=null)html+=` · <strong>Geplant:</strong> ${esc(String(status.scheduled))}`;
-  if(status.recipients!=null)html+=` · <strong>Empfänger:</strong> ${esc(String(status.recipients))}`;
-  html+=`<br>`;
   html+=`<br><table style="width:100%;border-collapse:collapse;font-size:11px"><tr><th align="left">Gebet</th><th>Zeit</th><th>Vorab</th><th>Gebetszeit</th></tr>`;
   keys.forEach(key=>{
     const p=prayers[key];
@@ -1494,28 +1508,51 @@ function formatPrayerPushStatusHtml(status){
     html+=`<tr><td>${esc(p?.name||key)}</td><td>${esc(p?.time||"--")}</td><td>${esc(p?.advance?.status||"—")}</td><td>${esc(p?.entry?.status||"—")}</td></tr>`;
   });
   html+=`</table>`;
-  if(status.lastError)html+=`<br><span style="color:#f0c674"><strong>Hinweis:</strong> ${esc(status.lastError)}</span>`;
+  const osResp=status.oneSignalResponses;
+  if(Array.isArray(osResp)&&osResp.length){
+    html+=`<br><strong>OneSignal-Antworten:</strong><br>`;
+    osResp.slice(0,5).forEach(r=>{
+      html+=`<span style="font-size:10px">${esc(r.prayer||"")} ${esc(r.mode||"")} · ${esc(String(r.recipients||0))} Empf. · ${esc(String(r.response||"").slice(0,120))}</span><br>`;
+    });
+  }
+  if(status.lastError)html+=`<br><span style="color:#f0c674"><strong>Fehlergrund:</strong> ${esc(status.lastError)}</span>`;
+  if(Number(status.usersWithLocation||0)===0)html+=`<br><span style="color:#f0c674">Kein Nutzer mit Standort und aktivem Gebets-Push.</span>`;
   return html;
 }
 async function loadAdminPrayerPushStatus(){
   const box=document.getElementById("adminPrayerStatusBox");
-  if(box)box.textContent="Lade Status…";
+  if(box)box.textContent="Lade Scheduler-Status…";
   try{
     let status=null;
     try{
-      const r=await fetch(`${SITE_ORIGIN}/content/admin/prayer-push-status.json?v=${Date.now()}`,{cache:"no-store"});
-      if(r.ok)status=await r.json();
+      const data=await workerGetRequest("api/admin/prayer/status");
+      if(data?.status)status=data.status;
     }catch(e){}
     if(!status?.updatedAt){
       try{
-        const data=await workerGetRequest("api/admin/prayer/status");
-        if(data?.status)status=data.status;
+        const r=await fetch(`${SITE_ORIGIN}/content/admin/prayer-push-status.json?v=${Date.now()}`,{cache:"no-store"});
+        if(r.ok)status=await r.json();
       }catch(e){}
     }
     setAdminPrayerStatusHtml(formatPrayerPushStatusHtml(status));
-    addAdminLog("Gebets-Push","Status geladen",status?.updatedAt||"kein Eintrag");
+    addAdminLog("Gebets-Push","Scheduler-Status geladen",status?.updatedAt||"");
   }catch(e){
     setAdminPrayerStatusHtml(`<span style="color:#f0c674">Status konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
+  }
+}
+async function triggerAdminPrayerScheduler(){
+  const box=document.getElementById("adminPrayerStatusBox");
+  if(box)box.textContent="Starte Worker-Cron…";
+  try{
+    const data=await workerPostRequest("api/admin/prayer/run",{});
+    const ok=data.schedulerStatus==="success"||data.ok;
+    const color=ok?"#dfffd8":"#f0c674";
+    let html=`<span style="color:${color}"><strong>${esc(data.reason||"Scheduler abgeschlossen")}</strong></span>`;
+    if(data.status)html+=`<br><br>${formatPrayerPushStatusHtml(data.status)}`;
+    setAdminPrayerStatusHtml(html);
+    addAdminLog("Gebets-Push","Worker-Cron gestartet",data.reason||"");
+  }catch(e){
+    setAdminPrayerStatusHtml(`<span style="color:#f0c674"><strong>Scheduler konnte nicht gestartet werden</strong><br>${esc(e.message||e)}</span>`);
   }
 }
 async function sendAdminOneSignalPrayerTest(){

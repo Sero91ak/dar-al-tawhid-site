@@ -8,6 +8,7 @@ on:
     paths:
       - cloudflare/worker.js
       - cloudflare/prayer-push-admin.js
+      - cloudflare/prayer-push-scheduler.js
       - cloudflare/wrangler.toml
       - .github/workflows/deploy-admin-publisher.yml
 

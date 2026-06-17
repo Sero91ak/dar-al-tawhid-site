@@ -1,3 +1,8 @@
+import {
+  runPrayerPushScheduler,
+  readPrayerPushStatusFromKv
+} from "./prayer-push-scheduler.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
@@ -13,34 +18,33 @@ const PRAYER_NAMES = {
 
 const PRAYER_MESSAGES = {
   default: [
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
-    "Bewahre dein Gebet, denn es ist eine der gewaltigsten Pflichten.",
-    "Bewahre dein Gebet und erinnere dich an ALLAH."
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
+    "Nimm dir jetzt bewusst Zeit für dein Gebet.",
+    "Bewahre dein Gebet und erinnere dich an Allah."
   ],
   fajr: [
-    "Beginne deinen Tag mit dem Gebet und dem Gedenken an ALLAH.",
+    "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.",
     "Der Tag beginnt mit einer großen Gelegenheit zum Gebet."
   ],
   dhuhr: [
-    "Halte am Mittagsgebet fest und ordne deinen Tag um ALLAH.",
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH."
+    "Halte am Mittagsgebet fest und ordne deinen Tag um Allah.",
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah."
   ],
   asr: [
     "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
     "Achte besonders auf dieses Gebet."
   ],
   maghrib: [
-    "Schließe den Tagabschnitt mit Gehorsam gegenüber ALLAH ab.",
-    "Maghrib ist eingetreten – nimm dir Zeit für dein Gebet.",
-    "Lass die Dunyā nicht zwischen dir und deinem Gebet stehen."
+    "Schließe den Tagabschnitt mit Gehorsam gegenüber Allah ab.",
+    "Nimm dir jetzt bewusst Zeit für dein Gebet."
   ],
   isha: [
-    "Schließe deinen Tag mit Gehorsam gegenüber ALLAH ab.",
+    "Schließe deinen Tag mit Gehorsam gegenüber Allah ab.",
     "Beende den Tag mit Gebet und Ruhe."
   ],
   tahajjud: [
-    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu ALLAH.",
-    "Wende dich in der Stille der Nacht ALLAH zu – Er ist nah und erhört das Bittgebet."
+    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
+    "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
   ]
 };
 
@@ -56,18 +60,22 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
   const name = PRAYER_NAMES[key] || "Maghrib";
   const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
-  const timeLabel = "21:45";
-  const reminder = pickPrayerMessage(key, mode);
+  const timeLabel = "21:46";
   const title = mode === "advance"
     ? (key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`)
     : (key === "tahajjud" ? "Taḥajjud-Erinnerung" : `${name} ist eingetreten`);
   const body = mode === "advance"
-    ? `Noch ${minutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf ${key === "tahajjud" ? "Taḥajjud" : "das Gebet"} vor. ${reminder}`
-    : `${timeLabel} Uhr – jetzt ist ${key === "tahajjud" ? "Gelegenheit für Taḥajjud" : "Gebetszeit"}. ${reminder}`;
+    ? (key === "tahajjud" ? "Taḥajjud-Erinnerung ist bald." : `In ${minutes} Min · ${timeLabel} Uhr.`)
+    : pickPrayerMessage(key, mode);
   return { title: `[Test] ${title}`, body, key, mode };
 }
 
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
+  const kvStatus = await readPrayerPushStatusFromKv(env);
+  if (kvStatus?.updatedAt) {
+    return { ok: true, status: kvStatus, source: "kv" };
+  }
+
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
@@ -75,7 +83,7 @@ export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
   try {
     const file = await githubGet(env, owner, repo, statusPath, branch);
     if (!file?.content) return { ok: false, error: "Status-Datei fehlt" };
-    return { ok: true, status: JSON.parse(base64ToUtf8(file.content)) };
+    return { ok: true, status: JSON.parse(base64ToUtf8(file.content)), source: "github" };
   } catch (err) {
     return { ok: false, error: err.message || String(err) };
   }
@@ -162,60 +170,44 @@ export async function sendPrayerTestPush(env, input = {}) {
   }
 }
 
-export async function triggerPrayerWorkflowForSubscription(env, subscriptionId) {
-  const sid = String(subscriptionId || "").trim();
-  if (!sid) return { triggered: false, reason: "Subscription-ID fehlt" };
-  if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
-
-  const owner = env.GITHUB_OWNER || "Sero91ak";
-  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/prayer-push.yml/dispatches`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "User-Agent": "dar-admin-publisher"
-    },
-    body: JSON.stringify({
-      ref: env.GITHUB_BRANCH || "main",
-      inputs: { subscription_id: sid }
-    })
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    return { triggered: false, reason: `Workflow fehlgeschlagen: ${res.status} ${text.slice(0, 200)}` };
-  }
-
-  return { triggered: true, reason: `Alle Gebets-Pushs werden für Subscription ${sid.slice(0, 8)}… geplant.` };
+function schedulerDeps(githubGet, githubPut, base64ToUtf8, utf8ToBase64) {
+  return { githubGet, githubPut, base64ToUtf8, utf8ToBase64 };
 }
 
-export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8) {
-  if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
-  const statusResult = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
-  const updatedAt = statusResult?.status?.updatedAt ? new Date(statusResult.status.updatedAt).getTime() : 0;
-  if (updatedAt && Date.now() - updatedAt < 90 * 60 * 1000) {
-    return { triggered: false, reason: "Scheduler-Status ist aktuell" };
+export async function triggerPrayerWorkflowForSubscription(env, subscriptionId, deps = {}) {
+  const sid = String(subscriptionId || "").trim();
+  if (!sid) return { triggered: false, reason: "Subscription-ID fehlt" };
+
+  const result = await runPrayerPushScheduler(
+    env,
+    { subscriptionId: sid, force: true },
+    schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
+  );
+
+  return {
+    triggered: result.triggered,
+    ok: result.ok,
+    schedulerStatus: result.schedulerStatus,
+    reason: result.reason,
+    scheduled: result.scheduled,
+    recipients: result.recipients,
+    usersWithLocation: result.usersWithLocation,
+    status: result.status
+  };
+}
+
+export async function runPrayerSchedulerNow(env, deps = {}, options = {}) {
+  return runPrayerPushScheduler(
+    env,
+    { force: Boolean(options.force), subscriptionId: options.subscriptionId || "" },
+    schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
+  );
+}
+
+export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {
+  if (options.force) {
+    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
   }
 
-  const owner = env.GITHUB_OWNER || "Sero91ak";
-  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/prayer-push.yml/dispatches`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "User-Agent": "dar-admin-publisher"
-    },
-    body: JSON.stringify({ ref: env.GITHUB_BRANCH || "main" })
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    return { triggered: false, reason: `GitHub workflow_dispatch fehlgeschlagen: ${res.status} ${text.slice(0, 200)}` };
-  }
-
-  return { triggered: true, reason: "Prayer-Push Workflow ausgelöst (Status war veraltet)" };
+  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
 }

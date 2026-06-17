@@ -13,7 +13,14 @@ SCHEDULE_PATH = "content/admin/planned-posts.json"
 PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json"
 
 [triggers]
-crons = ["30 * * * *"]
+crons = ["*/5 * * * *"]
+
+# KV für Gebetszeiten-Status, Dedupe und Nutzer-Registry (einmalig anlegen):
+#   wrangler kv namespace create PRAYER_PUSH_KV
+# Dann id unten eintragen:
+# [[kv_namespaces]]
+# binding = "PRAYER_PUSH_KV"
+# id = "<namespace-id>"
 
 # Secrets (einmalig setzen, bleibt am Worker gespeichert):
 #   wrangler secret put GITHUB_TOKEN
