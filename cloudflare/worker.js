@@ -1,6 +1,7 @@
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
 const DEFAULT_BRANCH = "main";
+// Deployed via GitHub Actions (.github/workflows/deploy-admin-publisher.yml)
 const DEFAULT_POSTS_DIR = "content/posts";
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
