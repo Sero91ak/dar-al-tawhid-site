@@ -150,6 +150,13 @@ button{cursor:pointer}
 .quick{display:block;text-decoration:none;color:var(--ink);text-align:left;width:100%;font:inherit;cursor:pointer}
 .quick:is(button){appearance:none;-webkit-appearance:none}
 .quick:hover{border-color:rgba(140,190,255,.42)}
+.quick-telegram{border-color:rgba(42,171,238,.42)!important;background:linear-gradient(145deg,rgba(42,171,238,.14),rgba(0,0,0,.22))!important}
+.quick-telegram:hover{border-color:rgba(42,171,238,.62)!important}
+.telegram-panel{border:1px solid rgba(42,171,238,.28);border-radius:18px;background:linear-gradient(145deg,rgba(42,171,238,.10),rgba(0,0,0,.20));padding:14px;margin-top:12px}
+.telegram-panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.telegram-panel-head svg{width:28px;height:28px;flex:0 0 28px}
+.telegram-panel-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.telegram-panel-note{color:var(--soft);font-size:11px;line-height:1.45;margin-top:10px}
 .command-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
 .command-card{border:1px solid var(--line2);border-radius:16px;background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.035));padding:12px;min-height:94px}
 .command-card b{display:block;color:var(--gold);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
@@ -259,7 +266,7 @@ main#panel.panel{
   .command-card span{font-size:20px}
   .metric span,.mini span{font-size:24px}
   .push-test-card,.admin-form-grid .wide,.preview-tools .btn:first-child,.preview-tools .btn:nth-child(2){grid-column:1/-1}
-  .push-test-controls{grid-template-columns:1fr!important}
+  .telegram-panel-actions{grid-template-columns:1fr}
   .rank-card{grid-template-columns:30px minmax(0,1fr);gap:8px;padding:9px}
   .rank-num{width:30px;height:30px;border-radius:10px}
   .rank-title{font-size:14.5px;line-height:1.18}
@@ -313,6 +320,7 @@ window.DAR_WORKER_CONFIG=window.DAR_WORKER_CONFIG||{
   publishUrl:"https://dar-admin-publisher.sero91ak.workers.dev/publish"
 };
 const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
+const TELEGRAM_CHANNEL_URL="https://t.me/dar_al_tauhid";
 const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
 const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.dev/publish";
@@ -548,6 +556,33 @@ function enhanceAdminCollapsibles(){
   });
 }
 function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^"+key+":\\s*[\"']?(.*?)[\"']?\\s*$","m"));return m?m[1].trim():""}
+function adminTelegramShareInfo(){
+  const p=markdownPreviewData(draftMarkdown);
+  const postId=frontmatterValue(draftMarkdown,"id")||String(draftFilename||"").replace(/\.md$/,"");
+  const url=postId?`${SITE_ORIGIN}/?post=${encodeURIComponent(postId)}&v=${Date.now()}#post/${encodeURIComponent(postId)}`:`${SITE_ORIGIN}/#recent`;
+  const text=`${p.title}\n\n${url}`;
+  const tgShare=`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(p.title)}`;
+  return{title:p.title,url,text,tgShare,channel:TELEGRAM_CHANNEL_URL,ready:Boolean(draftMarkdown.trim())};
+}
+function renderTelegramPanel(){
+  const info=adminTelegramShareInfo();
+  return `<section class="telegram-panel" id="adminTelegramPanel">
+    <div class="telegram-panel-head">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>
+      <div>
+        <div class="section-head" style="margin:0"><h3>Telegram</h3><span>Kanal &amp; Teilen</span></div>
+        <p class="telegram-panel-note" style="margin:4px 0 0">Nach der Veröffentlichung Beitrag direkt in Telegram teilen oder den Kanal öffnen.</p>
+      </div>
+    </div>
+    <div class="telegram-panel-actions">
+      <a class="quick quick-telegram" href="${esc(info.channel)}" target="_blank" rel="noopener"><b>Telegram Kanal</b><small>@dar_al_tauhid öffnen</small></a>
+      <a class="quick quick-telegram" href="${esc(info.tgShare)}" target="_blank" rel="noopener" id="adminTelegramShareLink"><b>Beitrag teilen</b><small>${info.ready?esc(info.title): "Zuerst Markdown einfügen"}</small></a>
+      <button class="quick quick-telegram" id="adminTelegramCopyBtn" type="button"><b>Text kopieren</b><small>Titel + Link für Telegram</small></button>
+      <button class="quick quick-telegram" id="adminTelegramPreviewBtn" type="button"><b>Link prüfen</b><small>Beitrags-URL in neuem Tab</small></button>
+    </div>
+    <div class="telegram-panel-note" id="adminTelegramStatus">${info.ready?`Aktueller Link: <strong>${esc(info.url)}</strong>`:"Noch kein Entwurf. Markdown einfügen oder veröffentlichen, dann erscheint hier der Telegram-Link."}</div>
+  </section>`;
+}
 function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
 function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
 function nextPostNumber(files){return (Array.isArray(files)?files.filter(f=>f&&(f.name||typeof f==="string")):[]).length+1}
@@ -698,6 +733,7 @@ function renderStart(ctx){
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
         <button class="btn" data-tab="overview" type="button">Statistik öffnen</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
+        <a class="btn quick-telegram" href="${TELEGRAM_CHANNEL_URL}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">Telegram Kanal</a>
       </div>
     </div>
   </section>
@@ -996,6 +1032,7 @@ function renderActions(rows,installs=installTotals()){
         <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle Gebet und Art. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab-Erinnerung</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      ${renderTelegramPanel()}
       ${renderNewsComposer()}
       <div class="preview-box" style="margin-top:14px">
         <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
@@ -1113,8 +1150,8 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
-  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview()};
-  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview()};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview();updateTelegramPanelStatus()};
+  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview();updateTelegramPanelStatus()};
   const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
   const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
   const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
@@ -1123,6 +1160,8 @@ function bindUi(){
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
+  const telegramCopyBtn=document.getElementById("adminTelegramCopyBtn");if(telegramCopyBtn)telegramCopyBtn.onclick=async()=>{const info=adminTelegramShareInfo();if(!info.ready){toast("Zuerst Markdown einfügen");return}try{await navigator.clipboard.writeText(info.text);toast("Telegram-Text kopiert")}catch(e){prompt("Kopiere den Telegram-Text:",info.text)}};
+  const telegramPreviewBtn=document.getElementById("adminTelegramPreviewBtn");if(telegramPreviewBtn)telegramPreviewBtn.onclick=()=>{const info=adminTelegramShareInfo();if(!info.ready){toast("Zuerst Markdown einfügen");return}window.open(info.url,"_blank","noopener")};
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
@@ -1169,6 +1208,18 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-user-disable]").forEach(btn=>btn.onclick=()=>{if(confirm("Diesen Nutzer wirklich deaktivieren?")){updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userDisable,{status:"deaktiviert"});addAdminLog("Benutzer","Benutzer deaktiviert","");renderShell()}});
   document.querySelectorAll("[data-user-active]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userActive,{status:"aktiv"});renderShell()});
 }
+function updateTelegramPanelStatus(){
+  const el=document.getElementById("adminTelegramStatus");
+  const link=document.getElementById("adminTelegramShareLink");
+  if(!el&&!link)return;
+  const info=adminTelegramShareInfo();
+  if(el)el.innerHTML=info.ready?`Aktueller Link: <strong>${esc(info.url)}</strong>`:"Noch kein Entwurf. Markdown einfügen oder veröffentlichen, dann erscheint hier der Telegram-Link.";
+  if(link){
+    link.href=info.tgShare;
+    const small=link.querySelector("small");
+    if(small)small.textContent=info.ready?info.title:"Zuerst Markdown einfügen";
+  }
+}
 function updateDraftPreview(){
   const box=document.getElementById("draftPreviewBox");
   if(!box)return;
@@ -1177,6 +1228,7 @@ function updateDraftPreview(){
   tmp.innerHTML=fresh;
   box.replaceWith(tmp.firstElementChild);
   bindUi();
+  updateTelegramPanelStatus();
 }
 function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
 async function sendAdminLocalPushTest(){
@@ -1258,6 +1310,7 @@ async function uploadPostViaWorker(){
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
     saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
     toast("Beitrag hochgeladen");
+    updateTelegramPanelStatus();
   }catch(e){
     addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
     setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Bitte Worker URL, Admin Worker Secret und Cloudflare Secrets prüfen.`);
