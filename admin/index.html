@@ -115,6 +115,8 @@ input:focus,select:focus,textarea:focus{border-color:rgba(143,208,255,.66);box-s
       <div class="status-card">
         <div class="status-row"><span><i class="dot" id="apiDot"></i> Publisher API</span><b id="apiState">Prüfen...</b></div>
         <div class="status-row"><span>Repo</span><b id="repoState">Sero91ak/dar-al-tawhid-site</b></div>
+        <div class="status-row"><span>Beiträge</span><b id="postCountState">–</b></div>
+        <div class="status-row"><span>Nächste Nr.</span><b id="nextPostNumberState">–</b></div>
         <div class="status-row"><span>Secret</span><b id="secretState">Nicht verbunden</b></div>
         <div class="actions">
           <button class="primary" id="connectBtn" type="button">Admin-Secret verbinden</button>
@@ -150,6 +152,7 @@ input:focus,select:focus,textarea:focus{border-color:rgba(143,208,255,.66);box-s
           </div>
           <label>Quellenzeile<input id="postSource" placeholder="Quelle mit Band/Seite"></label>
           <label>Aussage / Beitragstext<textarea id="postBody" placeholder="Aussage oder Text hier einfügen"></textarea></label>
+          <p class="result" id="postNumberHint" style="margin-top:0;margin-bottom:10px;border-style:solid">Beitragsnummer wird geladen…</p>
           <label>Optionaler Dateiname<input id="postFilename" placeholder="leer lassen = automatisch"></label>
           <div class="actions">
             <button class="ghost" id="buildMarkdownBtn" type="button">Markdown bauen</button>
@@ -299,6 +302,8 @@ input:focus,select:focus,textarea:focus{border-color:rgba(143,208,255,.66);box-s
 <script>
 const PUBLISHER="https://dar-admin-publisher.sero91ak.workers.dev";
 const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
+const POSTS_INDEX_URL=SITE_ORIGIN+"/content/posts/posts-index.json";
+let postNumberInfo={postCount:0,nextNumber:0,maxSerial:0};
 const SECRET_KEY="darAdminPublisherSecretV1";
 const DRAFT_KEY="darAdminPublisherDraftV1";
 const TAB_KEY="darAdminPublisherTabV1";
@@ -321,6 +326,61 @@ async function api(path,payload){
 }
 function result(id,msg,ok=true){const el=$(id);if(el){el.style.borderColor=ok?"rgba(110,231,168,.42)":"rgba(255,141,141,.45)";el.textContent=msg}}
 function slugify(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ʿ|'/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80)||"beitrag"}
+function padPostNumber(n){return String(Math.max(1,Number(n)||1)).padStart(3,"0")}
+function suggestAutoFilename(){
+  const title=$("postTitle").value.trim()||"neuer-beitrag";
+  const category=$("postCategory").value||"beitrag";
+  return `${slugify(category)}-${padPostNumber(postNumberInfo.nextNumber)}-${slugify(title.replace(/^📖\s*/,""))}.md`;
+}
+function renderPostNumberInfo(){
+  const count=Number(postNumberInfo.postCount||0);
+  const next=Number(postNumberInfo.nextNumber||0);
+  const maxSerial=Number(postNumberInfo.maxSerial||0);
+  if($("postCountState"))$("postCountState").textContent=count?String(count):"–";
+  if($("nextPostNumberState"))$("nextPostNumberState").textContent=next?String(next):"–";
+  const hint=$("postNumberHint");
+  if(hint){
+    if(!count){hint.textContent="Beitragsnummer konnte nicht geladen werden. Bitte Status aktualisieren.";return}
+    hint.textContent=`Aktuell ${count} Beiträge im Index · Nächste Nummer: ${next} · Vorschlag: ${suggestAutoFilename()}${maxSerial&&maxSerial>=next?` · Höchste Serien-Nr. in Dateinamen: ${maxSerial}`:""}`;
+  }
+  const fn=$("postFilename");
+  if(fn&&!fn.value.trim())fn.placeholder=`automatisch → ${suggestAutoFilename()}`;
+}
+async function loadPostNumberInfoFallback(){
+  const res=await fetch(POSTS_INDEX_URL,{cache:"no-store"});
+  if(!res.ok)throw new Error("Posts-Index "+res.status);
+  const data=await res.json();
+  const files=Array.isArray(data.files)?data.files:[];
+  const postCount=files.filter(f=>f&&f.name).length;
+  let maxSerial=0;
+  files.forEach(f=>{
+    const name=String(f.name||"");
+    for(const m of name.matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g))maxSerial=Math.max(maxSerial,Number(m[1]));
+  });
+  postNumberInfo={postCount,nextNumber:postCount+1,maxSerial};
+  renderPostNumberInfo();
+}
+async function loadPostNumberInfo(){
+  if($("postCountState"))$("postCountState").textContent="…";
+  if($("nextPostNumberState"))$("nextPostNumberState").textContent="…";
+  if(secret()){
+    try{
+      const res=await fetch(PUBLISHER+"/api/admin/next-number",{headers:headers(),cache:"no-store"});
+      const data=await res.json().catch(()=>({}));
+      if(res.ok&&data.ok!==false){
+        postNumberInfo={postCount:Number(data.postCount||0),nextNumber:Number(data.nextNumber||0),maxSerial:Number(data.maxSerial||0)};
+        renderPostNumberInfo();
+        return;
+      }
+    }catch(e){}
+  }
+  try{await loadPostNumberInfoFallback()}catch(e){
+    if($("postCountState"))$("postCountState").textContent="Fehler";
+    if($("nextPostNumberState"))$("nextPostNumberState").textContent="–";
+    const hint=$("postNumberHint");
+    if(hint)hint.textContent="Beitragsnummer konnte nicht geladen werden: "+(e.message||e);
+  }
+}
 function splitTags(s){return String(s||"").split(",").map(x=>x.trim()).filter(Boolean)}
 function q(s){return String(s||"").replace(/"/g,'\\"')}
 function buildMarkdown(){
@@ -397,7 +457,8 @@ async function checkHealth(){
 }
 async function publishMarkdown(markdown,filename,resultId){
   const data=await api("/api/admin/publish",{markdown,filename});
-  result(resultId,`Veröffentlicht: ${data.filename}\nNummer: ${data.number}\nCommit: ${data.commitSha||"-"}\nPfad: ${data.postPath}`,true);
+  result(resultId,`Veröffentlicht: ${data.filename}\nNummer: ${data.number}\nBeiträge im Index: ${data.postCount||postNumberInfo.postCount+1||"?"}\nCommit: ${data.commitSha||"-"}\nPfad: ${data.postPath}`,true);
+  await loadPostNumberInfo();
   return data;
 }
 async function loadStats(){
@@ -422,18 +483,19 @@ function init(){
   renderPostPreview();
   renderMarkdownPreview();
   checkHealth();
+  loadPostNumberInfo();
   document.querySelectorAll(".tab").forEach(btn=>btn.onclick=()=>switchTab(btn.dataset.tab));
   switchTab(localStorage.getItem(TAB_KEY)||"compose");
-  ["postTitle","postCategory","postTopic","postScholar","postBook","postTags","postSource","postBody"].forEach(id=>$(id).addEventListener("input",()=>{renderPostPreview();saveDraft()}));
+  ["postTitle","postCategory","postTopic","postScholar","postBook","postTags","postSource","postBody"].forEach(id=>$(id).addEventListener("input",()=>{renderPostPreview();renderPostNumberInfo();saveDraft()}));
   ["rawMarkdown"].forEach(id=>$(id).addEventListener("input",()=>{renderMarkdownPreview();saveDraft()}));
   document.querySelectorAll("input,select,textarea").forEach(el=>el.addEventListener("change",saveDraft));
   $("connectBtn").onclick=()=>{
     const current=secret();
     const v=prompt("Admin-Secret für Publisher Worker eingeben:",current);
-    if(v!==null)setSecret(v.trim());
+    if(v!==null){setSecret(v.trim());loadPostNumberInfo()}
   };
   $("clearSecretBtn").onclick=()=>{if(confirm("Admin-Secret auf diesem Gerät löschen?"))setSecret("")};
-  $("refreshBtn").onclick=()=>{checkHealth();if(!document.getElementById("tab-stats").classList.contains("hidden"))loadStats()};
+  $("refreshBtn").onclick=()=>{checkHealth();loadPostNumberInfo();if(!document.getElementById("tab-stats").classList.contains("hidden"))loadStats()};
   $("buildMarkdownBtn").onclick=()=>{$("rawMarkdown").value=buildMarkdown();renderMarkdownPreview();switchTab("markdown");saveDraft()};
   $("copyMarkdownBtn").onclick=async()=>{await navigator.clipboard.writeText(buildMarkdown());result("composeResult","Markdown kopiert.",true)};
   $("publishComposeBtn").onclick=async()=>{
