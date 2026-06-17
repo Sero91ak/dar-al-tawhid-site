@@ -6,6 +6,8 @@ const DEFAULT_POSTS_DIR = "content/posts";
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
+const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
+const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 
 export default {
   async fetch(request, env) {
@@ -25,6 +27,7 @@ export default {
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
           hasAdminSecret: Boolean(env.ADMIN_PUBLISH_SECRET),
+          hasOneSignalKey: Boolean(oneSignalApiKey(env)),
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
           scheduler: "ready"
@@ -167,6 +170,10 @@ async function publishPostFromMarkdown(env, input) {
     indexFile?.sha
   );
 
+  const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
+  const postId = frontmatterValue(markdown, "id");
+  const push = await sendNewPostPush(env, { postTitle, postId });
+
   return {
     ok: true,
     filename,
@@ -174,7 +181,8 @@ async function publishPostFromMarkdown(env, input) {
     postCount: nextFiles.length,
     postPath,
     indexPath,
-    commitSha: updatedIndex.commit?.sha || created.commit?.sha || ""
+    commitSha: updatedIndex.commit?.sha || created.commit?.sha || "",
+    push
   };
 }
 
@@ -491,4 +499,82 @@ function base64ToUtf8(value) {
   const bytes = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
   return new TextDecoder().decode(bytes);
+}
+
+function oneSignalApiKey(env) {
+  return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "")
+    .replace(/\s+/g, "")
+    .replace(/^(Key|Basic)/i, "")
+    .trim();
+}
+
+async function sendNewPostPush(env, { postTitle, postId }) {
+  const apiKey = oneSignalApiKey(env);
+  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
+  if (!apiKey) {
+    return { sent: false, reason: "ONESIGNAL_API_KEY_NEW fehlt am Worker" };
+  }
+
+  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+  const title = "Neuer Beitrag online";
+  const message = String(postTitle || "Neuer Beitrag").trim();
+  const url = postId ? `${site}/#post/${encodeURIComponent(postId)}` : `${site}/#recent`;
+  const icon = `${site}/notification-icon-192.png?v=2`;
+  const badge = `${site}/notification-badge-96.png?v=2`;
+
+  const basePayload = {
+    app_id: appId,
+    target_channel: "push",
+    headings: { en: title, de: title },
+    contents: { en: message, de: message },
+    url,
+    chrome_web_icon: icon,
+    chrome_web_badge: badge,
+    firefox_icon: icon,
+    name: `admin-publish-${Date.now()}`
+  };
+
+  const attempts = [
+    { ...basePayload, included_segments: ["DAR_PUSH"] },
+    { ...basePayload, included_segments: ["Subscribed Users"] },
+    {
+      ...basePayload,
+      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
+    }
+  ];
+
+  let lastError = "Unbekannter Fehler";
+
+  for (const payload of attempts) {
+    for (const authMode of ["Key", "Basic"]) {
+      try {
+        const res = await fetch("https://api.onesignal.com/notifications", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            Authorization: `${authMode} ${apiKey}`
+          },
+          body: JSON.stringify(payload)
+        });
+        const text = await res.text();
+        if (res.ok) {
+          return {
+            sent: true,
+            target: payload.included_segments?.[0] || "tag-filter",
+            authMode,
+            response: text.slice(0, 400)
+          };
+        }
+        if (res.status === 400 || res.status === 401 || res.status === 403) {
+          lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
+          continue;
+        }
+        lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
+      } catch (error) {
+        lastError = error.message || String(error);
+      }
+    }
+  }
+
+  return { sent: false, reason: lastError };
 }

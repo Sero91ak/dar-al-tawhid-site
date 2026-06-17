@@ -23,7 +23,9 @@ jobs:
       - name: Send scheduled prayer notifications
         env:
           ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
         run: |
           echo "Berechne und sende Gebetszeiten-Pushs..."
           node scripts/send-prayer-push.js

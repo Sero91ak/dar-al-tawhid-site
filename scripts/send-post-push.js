@@ -70,6 +70,10 @@ async function sendWithFallbacks(basePayload) {
     {
       ...basePayload,
       filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
+    },
+    {
+      ...basePayload,
+      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
     }
   ];
 
