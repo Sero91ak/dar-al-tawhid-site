@@ -2,6 +2,11 @@ name: Prayer Push
 
 on:
   workflow_dispatch:
+    inputs:
+      subscription_id:
+        description: "Optional – nur diese Subscription sofort planen (alle Gebete)"
+        required: false
+        type: string
   schedule:
     - cron: "0 * * * *"
     - cron: "15 1 * * *"
@@ -27,6 +32,7 @@ jobs:
           ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
           ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          SCHEDULE_SUBSCRIPTION_ID: ${{ github.event.inputs.subscription_id || '' }}
         run: |
           echo "Berechne und sende Gebetszeiten-Pushs..."
           node scripts/send-prayer-push.js

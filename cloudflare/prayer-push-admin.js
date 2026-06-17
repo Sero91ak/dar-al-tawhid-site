@@ -162,6 +162,35 @@ export async function sendPrayerTestPush(env, input = {}) {
   }
 }
 
+export async function triggerPrayerWorkflowForSubscription(env, subscriptionId) {
+  const sid = String(subscriptionId || "").trim();
+  if (!sid) return { triggered: false, reason: "Subscription-ID fehlt" };
+  if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
+
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/prayer-push.yml/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "User-Agent": "dar-admin-publisher"
+    },
+    body: JSON.stringify({
+      ref: env.GITHUB_BRANCH || "main",
+      inputs: { subscription_id: sid }
+    })
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    return { triggered: false, reason: `Workflow fehlgeschlagen: ${res.status} ${text.slice(0, 200)}` };
+  }
+
+  return { triggered: true, reason: `Alle Gebets-Pushs werden für Subscription ${sid.slice(0, 8)}… geplant.` };
+}
+
 export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8) {
   if (!env.GITHUB_TOKEN) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
   const statusResult = await readPrayerPushStatus(env, githubGet, base64ToUtf8);

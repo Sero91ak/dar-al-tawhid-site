@@ -1487,12 +1487,15 @@ function formatPrayerPushStatusHtml(status){
     html+=`<span style="color:#dfffd8">${esc(mag.answer||"")}</span><br>`;
   }
   const prayers=status.today?.prayers||{};
+  const diagnostics=status.prayerDiagnostics||{};
   const keys=["fajr","dhuhr","asr","maghrib","isha","tahajjud"];
-  html+=`<br><table style="width:100%;border-collapse:collapse;font-size:11px"><tr><th align="left">Gebet</th><th>Zeit</th><th>Vorab</th><th>Gebetszeit</th></tr>`;
+  html+=`<br><table style="width:100%;border-collapse:collapse;font-size:11px"><tr><th align="left">Gebet</th><th>Zeit</th><th>Vorab</th><th>Gebetszeit</th><th>Status</th></tr>`;
   keys.forEach(key=>{
     const p=prayers[key];
+    const d=diagnostics[key];
     if(!p&&key==="tahajjud")return;
-    html+=`<tr><td>${esc(p?.name||key)}</td><td>${esc(p?.time||"--")}</td><td>${esc(p?.advance?.status||"—")}</td><td>${esc(p?.entry?.status||"—")}</td></tr>`;
+    const statusLine=d?.answer?esc(d.answer):`${esc(p?.advance?.status||"—")} / ${esc(p?.entry?.status||"—")}`;
+    html+=`<tr><td>${esc(p?.name||key)}</td><td>${esc(p?.time||"--")}</td><td>${esc(p?.advance?.status||"—")}</td><td>${esc(p?.entry?.status||"—")}</td><td style="font-size:10px">${statusLine}</td></tr>`;
   });
   html+=`</table>`;
   if(status.lastError)html+=`<br><span style="color:#f0c674">Fehler: ${esc(status.lastError)}</span>`;

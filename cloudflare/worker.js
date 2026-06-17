@@ -8,7 +8,8 @@ import {
 import {
   readPrayerPushStatus,
   sendPrayerTestPush,
-  ensurePrayerSchedulerFresh
+  ensurePrayerSchedulerFresh,
+  triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
@@ -52,6 +53,14 @@ export default {
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
           scheduler: "ready"
         }, cors);
+      }
+
+      if (url.pathname === "/api/prayer/schedule-now" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+        if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
+        const result = await triggerPrayerWorkflowForSubscription(env, subscriptionId);
+        return json({ ok: result.triggered, ...result }, cors, result.triggered ? 200 : 503);
       }
 
       if (url.pathname === "/api/admin/next-number") {

@@ -643,46 +643,51 @@ async function fetchSupabasePrayerRegistrations() {
 
 const PRAYER_NOTIFICATION_MESSAGES = {
   default: [
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
-    "Nimm dir jetzt bewusst Zeit für dein Gebet.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
+    "Bewahre dein Gebet, denn es ist eine der gewaltigsten Pflichten.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
   ],
   fajr: [
-    "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.",
-    "Starte den Tag mit Gehorsam gegenüber Allah.",
+    "Beginne deinen Tag mit dem Gebet und dem Gedenken an ALLAH.",
+    "Starte den Tag mit Gehorsam gegenüber ALLAH.",
     "Der Tag beginnt mit einer großen Gelegenheit zum Gebet.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
+    "Wenn der Ruf zum Gebet naht, bereite dein Herz vor.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
   ],
   dhuhr: [
-    "Halte am Mittagsgebet fest und ordne deinen Tag um Allah.",
-    "Nimm dir bewusst Zeit für Dhuhr und erinnere dich an Allah.",
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
+    "Halte am Mittagsgebet fest und ordne deinen Tag um ALLAH.",
+    "Nimm dir bewusst Zeit für Dhuhr und erinnere dich an ALLAH.",
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
+    "Lass die Dunyā nicht zwischen dir und deinem Gebet stehen.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
   ],
   asr: [
     "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
     "Achte besonders auf dieses Gebet.",
     "Halte am ʿAṣr-Gebet fest und bewahre deine Zeit.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
+    "Das Gebet zu seiner Zeit gehört zu den wichtigsten Taten.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
   ],
   maghrib: [
-    "Schließe den Tagabschnitt mit Gehorsam gegenüber Allah ab.",
+    "Schließe den Tagabschnitt mit Gehorsam gegenüber ALLAH ab.",
     "Maghrib ist eingetreten – nimm dir Zeit für dein Gebet.",
-    "Danke Allah und bewahre dein Gebet zur richtigen Zeit.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
+    "Danke ALLAH und bewahre dein Gebet zur richtigen Zeit.",
+    "Lass die Dunyā nicht zwischen dir und deinem Gebet stehen.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
   ],
   isha: [
-    "Schließe deinen Tag mit Gehorsam gegenüber Allah ab.",
+    "Schließe deinen Tag mit Gehorsam gegenüber ALLAH ab.",
     "Beende den Tag mit Gebet und Ruhe.",
     "Nimm dir am Ende des Tages Zeit für dein Gebet.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
+    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei ALLAH.",
+    "Bewahre dein Gebet und erinnere dich an ALLAH."
   ],
   tahajjud: [
-    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
+    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu ALLAH.",
     "Steh in der stillen Nacht für deinen Herrn auf – selbst wenige Rakʿāt sind kostbar.",
-    "Nutze die Zeit vor Fajr für Bittgebet, Reue und Nähe zu Allah.",
+    "Nutze die Zeit vor Fajr für Bittgebet, Reue und Nähe zu ALLAH.",
     "Das Nachtgebet bringt dem Gläubigen Licht, Trost und Nähe zu seinem Herrn.",
-    "Wende dich in der Stille der Nacht Allah zu – Er ist nah und erhört das Bittgebet."
+    "Wende dich in der Stille der Nacht ALLAH zu – Er ist nah und erhört das Bittgebet."
   ]
 };
 
@@ -825,6 +830,79 @@ async function sendOneSignalToSubscriptions(group, prayer, sendAfter, mode = "en
   }
 }
 
+function mergePrayerPlayers(oneSignalPlayers, supabaseRegistrations) {
+  const bySub = new Map();
+
+  for (const player of oneSignalPlayers) {
+    const ids = player.subscriptionIds?.length ? player.subscriptionIds : [player.id].filter(Boolean);
+    for (const id of ids) {
+      if (!id) continue;
+      bySub.set(id, {
+        ...player,
+        tags: { ...(player.tags || {}) },
+        subscriptionIds: [id]
+      });
+    }
+  }
+
+  for (const player of supabaseRegistrations) {
+    const id = player.subscriptionIds?.[0] || player.id;
+    if (!id) continue;
+    const existing = bySub.get(id);
+    const tags = { ...(existing?.tags || {}), ...(player.tags || {}) };
+    if (!tags.prayer_lat && player.tags?.prayer_lat) Object.assign(tags, player.tags);
+    if (!tags.prayer_notifications && player.tags?.prayer_notifications) tags.prayer_notifications = player.tags.prayer_notifications;
+    bySub.set(id, {
+      ...(existing || player),
+      tags,
+      subscriptionIds: [id],
+      source: existing ? "merged" : "supabase"
+    });
+  }
+
+  return Array.from(bySub.values());
+}
+
+function filterGroupsBySubscription(groups, subscriptionId) {
+  const sid = String(subscriptionId || "").trim();
+  if (!sid) return groups;
+  return groups
+    .map((group) => ({
+      ...group,
+      subscriptionIds: group.subscriptionIds.filter((id) => id === sid)
+    }))
+    .filter((group) => group.subscriptionIds.length > 0);
+}
+
+function buildPrayerDiagnostics(overview) {
+  const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
+  const diagnostics = {};
+  keys.forEach((key) => {
+    const p = overview?.prayers?.[key];
+    if (!p) return;
+    const entryOk = p.entry?.status === "geplant";
+    const advanceOk = p.advance?.status === "geplant";
+    let answer;
+    if (entryOk && advanceOk) {
+      answer = `${p.name} ${p.time}: Vorab und Gebetszeit geplant (${p.entry.recipients} Empfänger).`;
+    } else if (entryOk) {
+      answer = `${p.name} ${p.time}: Gebetszeit geplant, Vorab ${p.advance?.status || "offen"}.`;
+    } else if (p.entry?.status === "übersprungen") {
+      answer = `${p.name} ${p.time}: übersprungen – Scheduler zu spät oder Zeitfenster vorbei.`;
+    } else {
+      answer = `${p.name} ${p.time || "--:--"}: nicht geplant – keine Empfänger oder außerhalb des Fensters.`;
+    }
+    diagnostics[key] = {
+      name: p.name,
+      time: p.time,
+      advance: p.advance,
+      entry: p.entry,
+      answer
+    };
+  });
+  return diagnostics;
+}
+
 function localDateKey(date, timeZone) {
   const p = getLocalParts(date, timeZone);
   return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
@@ -910,9 +988,14 @@ function runDailyContentPushSync() {
 
   const oneSignalPlayers = await fetchSubscriptions();
   const supabaseRegistrations = await fetchSupabasePrayerRegistrations();
-  const players = [...oneSignalPlayers, ...supabaseRegistrations];
+  const players = mergePrayerPlayers(oneSignalPlayers, supabaseRegistrations);
   const users = getPrayerUsers(players);
-  const groups = groupUsers(users);
+  let groups = groupUsers(users);
+  const singleSubscription = String(process.env.SCHEDULE_SUBSCRIPTION_ID || "").trim();
+  if (singleSubscription) {
+    groups = filterGroupsBySubscription(groups, singleSubscription);
+    console.log(`Sofort-Planung für Subscription ${singleSubscription}: ${groups.length} Standort-Gruppe(n)`);
+  }
   const taggedCount = players.filter((p) => p.tags?.prayer_notifications === "true" && p.tags?.prayer_lat).length;
 
   console.log(`Subscriptions gesamt: ${players.length} (${oneSignalPlayers.length} OneSignal, ${supabaseRegistrations.length} Supabase)`);
@@ -1013,6 +1096,8 @@ function runDailyContentPushSync() {
   console.log(`Übersprungen (außerhalb Fenster): ${stats.skippedWindow}`);
   console.log(`Duplikate verhindert: ${stats.duplicates}`);
   console.log(`OneSignal-Fehler: ${stats.errors}`);
+  const todayOverview = buildTodayPrayerOverview(stats.planned, stats.skippedPastDetails);
+  const prayerDiagnostics = buildPrayerDiagnostics(todayOverview);
   if (stats.planned.length) {
     console.log("Geplante Pushs (Detail):");
     for (const item of stats.planned.slice(0, 40)) {
@@ -1021,12 +1106,18 @@ function runDailyContentPushSync() {
     if (stats.planned.length > 40) {
       console.log(`  … und ${stats.planned.length - 40} weitere`);
     }
+    const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
+    console.log("Gebete heute (Rheinbach-Referenz):");
+    keys.forEach((key) => {
+      const d = prayerDiagnostics[key];
+      if (!d) return;
+      console.log(`  · ${d.name} ${d.time || "--:--"}: Vorab=${d.advance?.status}, Gebetszeit=${d.entry?.status}`);
+    });
   } else {
     console.log("Keine Pushs in diesem Planungsfenster geplant.");
   }
 
-  const todayOverview = buildTodayPrayerOverview(stats.planned, stats.skippedPastDetails);
-  const maghribDiag = todayOverview.prayers.maghrib || null;
+  const maghribDiag = prayerDiagnostics.maghrib || todayOverview.prayers.maghrib || null;
   const statusReport = {
     updatedAt: new Date().toISOString(),
     ok: stats.errors === 0,
@@ -1047,17 +1138,14 @@ function runDailyContentPushSync() {
     errors: stats.errors,
     lastError: stats.errors ? "OneSignal API Fehler – siehe GitHub Actions Log" : null,
     today: todayOverview,
+    prayerDiagnostics,
     maghribDiagnostic: maghribDiag ? {
-      plannedAdvance: maghribDiag.advance.status,
-      plannedEntry: maghribDiag.entry.status,
+      plannedAdvance: maghribDiag.advance?.status,
+      plannedEntry: maghribDiag.entry?.status,
       time: maghribDiag.time,
-      advanceRecipients: maghribDiag.advance.recipients,
-      entryRecipients: maghribDiag.entry.recipients,
-      answer: maghribDiag.entry.status === "geplant"
-        ? `Maghrib ${maghribDiag.time} wurde an OneSignal übergeben (${maghribDiag.entry.recipients} Empfänger).`
-        : maghribDiag.entry.status === "übersprungen"
-          ? `Maghrib ${maghribDiag.time} wurde übersprungen (Zeitfenster vorbei oder Scheduler zu spät).`
-          : `Maghrib ${maghribDiag.time} wurde in diesem Lauf nicht geplant – keine registrierten Nutzer oder außerhalb des Fensters.`
+      advanceRecipients: maghribDiag.advance?.recipients,
+      entryRecipients: maghribDiag.entry?.recipients,
+      answer: maghribDiag.answer || ""
     } : null,
     planned: stats.planned.slice(0, 80),
     skippedPastDetails: stats.skippedPastDetails.slice(0, 40),
