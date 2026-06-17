@@ -172,7 +172,21 @@ async function publishPostFromMarkdown(env, input) {
 
   const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
   const postId = frontmatterValue(markdown, "id");
-  const push = await sendNewPostPush(env, { postTitle, postId });
+  const publishedAt = new Date().toISOString();
+  const liveCheck = await verifyPostLiveAvailability(env, { filename, postId, postPath, indexPath });
+  let push;
+  if (liveCheck.ok) {
+    push = await sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion: Date.now() });
+    push.liveCheck = liveCheck;
+  } else {
+    push = {
+      sent: false,
+      reason: "Beitrag veröffentlicht, aber noch nicht für Besucher abrufbar. Push wurde nicht gesendet.",
+      waitingForLive: true,
+      liveCheck,
+      targetUrl: buildPostPushUrl(env, postId, Date.now())
+    };
+  }
 
   return {
     ok: true,
@@ -182,6 +196,9 @@ async function publishPostFromMarkdown(env, input) {
     postPath,
     indexPath,
     commitSha: updatedIndex.commit?.sha || created.commit?.sha || "",
+    postId,
+    publishedAt,
+    liveCheck,
     push
   };
 }
@@ -508,7 +525,61 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
-async function sendNewPostPush(env, { postTitle, postId }) {
+function buildPostPushUrl(env, postId, cacheVersion) {
+  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+  const slug = String(postId || "").trim();
+  const v = cacheVersion || Date.now();
+  return `${site}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function verifyPostLiveAvailability(env, { filename, postId, postPath }) {
+  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const maxAttempts = 8;
+  const delayMs = 2000;
+  const result = { ok: false, indexOk: false, postOk: false, attempts: 0, site, postId: String(postId || "") };
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    result.attempts = attempt;
+    const bust = Date.now();
+
+    try {
+      const indexRes = await fetch(`${site}/${postsDir}/posts-index.json?v=${bust}`, { cache: "no-store" });
+      if (indexRes.ok) {
+        const indexData = await indexRes.json();
+        const files = listPostFiles(indexData.files || []);
+        result.indexOk = files.some((file) => file.name === filename);
+        if (!result.indexOk && postId) {
+          result.indexOk = files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId));
+        }
+      }
+    } catch (error) {
+      result.indexError = error.message || String(error);
+    }
+
+    try {
+      const postRes = await fetch(`${site}/${postPath}?v=${bust}`, { cache: "no-store" });
+      result.postOk = postRes.ok;
+    } catch (error) {
+      result.postError = error.message || String(error);
+    }
+
+    if (result.indexOk && result.postOk) {
+      result.ok = true;
+      return result;
+    }
+
+    if (attempt < maxAttempts) await sleep(delayMs);
+  }
+
+  return result;
+}
+
+async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion }) {
   const apiKey = oneSignalApiKey(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   if (!apiKey) {
@@ -518,9 +589,19 @@ async function sendNewPostPush(env, { postTitle, postId }) {
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const title = "Neuer Beitrag online";
   const message = String(postTitle || "Neuer Beitrag").trim();
-  const url = postId ? `${site}/#post/${encodeURIComponent(postId)}` : `${site}/#recent`;
+  const slug = String(postId || "").trim();
+  const version = cacheVersion || Date.now();
+  const url = slug ? buildPostPushUrl(env, slug, version) : `${site}/#recent`;
   const icon = `${site}/notification-icon-192.png?v=2`;
   const badge = `${site}/notification-badge-96.png?v=2`;
+  const pushData = {
+    type: "post",
+    postId: slug,
+    slug,
+    url,
+    publishedAt: publishedAt || new Date().toISOString(),
+    cacheVersion: String(version)
+  };
 
   const basePayload = {
     app_id: appId,
@@ -528,6 +609,7 @@ async function sendNewPostPush(env, { postTitle, postId }) {
     headings: { en: title, de: title },
     contents: { en: message, de: message },
     url,
+    data: pushData,
     chrome_web_icon: icon,
     chrome_web_badge: badge,
     firefox_icon: icon,
@@ -562,6 +644,8 @@ async function sendNewPostPush(env, { postTitle, postId }) {
             sent: true,
             target: payload.included_segments?.[0] || "tag-filter",
             authMode,
+            targetUrl: url,
+            data: pushData,
             response: text.slice(0, 400)
           };
         }

@@ -5,7 +5,8 @@ const fs = require("fs");
 const path = require("path");
 const {
   withNotificationIcons,
-  postOneSignalNotification
+  postOneSignalNotification,
+  siteOriginFromEnv
 } = require("./lib/onesignal-push");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
@@ -13,11 +14,23 @@ const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_API_K
 const SITE_URL = process.env.SITE_URL || "https://dar-al-tawhid.de";
 const EVENT_NAME = process.env.GITHUB_EVENT_NAME || "";
 const RUN_ID = process.env.GITHUB_RUN_ID || "manual";
+const POSTS_DIR = process.env.POSTS_DIR || "content/posts";
 
 function frontmatterValue(text, key) {
   const pattern = new RegExp(`^${key}:\\s*["']?(.*?)["']?\\s*$`, "m");
   const match = text.match(pattern);
   return match ? match[1].trim() : "";
+}
+
+function buildPostPushUrl(postId, cacheVersion) {
+  const site = siteOriginFromEnv(SITE_URL);
+  const slug = String(postId || "").trim();
+  const v = cacheVersion || Date.now();
+  return `${site}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function changedPostFiles() {
@@ -30,8 +43,48 @@ function changedPostFiles() {
     .filter((line) => line && line !== "manual" && line.endsWith(".md") && fs.existsSync(line));
 }
 
+async function verifyPostLive({ filename, postId }) {
+  const site = siteOriginFromEnv(SITE_URL);
+  const maxAttempts = 8;
+  const delayMs = 2000;
+  const result = { ok: false, indexOk: false, postOk: false, attempts: 0 };
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    result.attempts = attempt;
+    const bust = Date.now();
+
+    try {
+      const indexRes = await fetch(`${site}/${POSTS_DIR}/posts-index.json?v=${bust}`, { cache: "no-store" });
+      if (indexRes.ok) {
+        const indexData = await indexRes.json();
+        const files = Array.isArray(indexData.files) ? indexData.files : [];
+        result.indexOk = files.some((file) => file && (file.name === filename || String(file.name).replace(/\.md$/, "") === String(postId)));
+      }
+    } catch (err) {
+      result.indexError = err.message || String(err);
+    }
+
+    try {
+      const postPath = `${POSTS_DIR}/${encodeURIComponent(filename)}`;
+      const postRes = await fetch(`${site}/${postPath}?v=${bust}`, { cache: "no-store" });
+      result.postOk = postRes.ok;
+    } catch (err) {
+      result.postError = err.message || String(err);
+    }
+
+    if (result.indexOk && result.postOk) {
+      result.ok = true;
+      return result;
+    }
+
+    if (attempt < maxAttempts) await sleep(delayMs);
+  }
+
+  return result;
+}
+
 function buildMessage(files) {
-  const site = SITE_URL.replace(/\/$/, "");
+  const site = siteOriginFromEnv(SITE_URL);
 
   if (EVENT_NAME === "workflow_dispatch") {
     return {
@@ -45,10 +98,16 @@ function buildMessage(files) {
     const text = fs.readFileSync(files[0], "utf8");
     const postTitle = frontmatterValue(text, "title") || "Neuer Beitrag";
     const postId = frontmatterValue(text, "id");
+    const filename = path.basename(files[0]);
+    const cacheVersion = Date.now();
     return {
       title: "Neuer Beitrag online",
       message: postTitle,
-      url: postId ? `${site}/#post/${encodeURIComponent(postId)}` : `${site}/#recent`
+      postId,
+      filename,
+      publishedAt: frontmatterValue(text, "date") || new Date().toISOString(),
+      cacheVersion,
+      url: postId ? buildPostPushUrl(postId, cacheVersion) : `${site}/#recent`
     };
   }
 
@@ -102,12 +161,31 @@ async function sendWithFallbacks(basePayload) {
     return;
   }
 
+  if (copy.postId && copy.filename) {
+    const live = await verifyPostLive({ filename: copy.filename, postId: copy.postId });
+    if (!live.ok) {
+      console.error("Beitrag noch nicht live erreichbar. Push wurde nicht gesendet.", live);
+      process.exit(1);
+    }
+    console.log("Live-Prüfung erfolgreich:", live);
+  }
+
+  const pushData = copy.postId ? {
+    type: "post",
+    postId: copy.postId,
+    slug: copy.postId,
+    url: copy.url,
+    publishedAt: copy.publishedAt || new Date().toISOString(),
+    cacheVersion: String(copy.cacheVersion || Date.now())
+  } : undefined;
+
   const payload = withNotificationIcons({
     app_id: APP_ID,
     target_channel: "push",
     headings: { en: copy.title, de: copy.title },
     contents: { en: copy.message, de: copy.message },
     url: copy.url,
+    data: pushData,
     name: `github-posts-auto-${RUN_ID}`
   }, SITE_URL);
 

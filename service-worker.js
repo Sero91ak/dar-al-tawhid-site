@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v105';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v106';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -27,8 +27,61 @@ const APP_SHELL = [
   '/assets/site-analytics.js'
 ];
 
+let bypassPostCacheUntil = 0;
+
+function isPostDataRequest(url) {
+  return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json');
+}
+
+function parsePostIdFromUrl(rawUrl) {
+  try {
+    const url = new URL(rawUrl);
+    const fromQuery = url.searchParams.get('post');
+    if (fromQuery) return decodeURIComponent(fromQuery);
+    const pathMatch = url.pathname.match(/^\/post\/([^/?#]+)/i);
+    if (pathMatch) return decodeURIComponent(pathMatch[1]);
+    const hash = decodeURIComponent((url.hash || '').replace(/^#/, ''));
+    const hashMatch = hash.match(/^post\/(.+)$/);
+    if (hashMatch) return hashMatch[1];
+  } catch (e) {}
+  return '';
+}
+
+function buildPostLaunchUrl(postId, cacheVersion) {
+  const slug = String(postId || '').trim();
+  const v = cacheVersion || Date.now();
+  const origin = self.location.origin;
+  return `${origin}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`;
+}
+
+async function focusClientToPost(clientList, targetUrl, postId) {
+  const targetUrlObj = new URL(targetUrl);
+  for (const client of clientList) {
+    const clientUrl = new URL(client.url);
+    if (clientUrl.origin !== targetUrlObj.origin) continue;
+    await client.focus();
+    client.postMessage({
+      type: 'NAVIGATE_POST',
+      postId: postId || parsePostIdFromUrl(targetUrl),
+      url: targetUrl
+    });
+    if (typeof client.navigate === 'function') {
+      try {
+        await client.navigate(targetUrl);
+        return true;
+      } catch (e) {}
+    }
+    return true;
+  }
+  return false;
+}
+
 self.addEventListener('message', (event) => {
   const data = event.data || {};
+  if (data.type === 'BYPASS_POST_CACHE') {
+    bypassPostCacheUntil = Date.now() + 5 * 60 * 1000;
+    return;
+  }
   if (data.type !== 'PRECACHE' || !Array.isArray(data.urls) || !data.urls.length) return;
   event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => Promise.allSettled(
@@ -61,25 +114,18 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 
-  const targetUrl = event.notification.data?.url
+  const data = event.notification.data || {};
+  const postId = String(data.postId || data.slug || parsePostIdFromUrl(data.url || '')).trim();
+  const targetUrl = data.url
     || event.notification.data?.launchURL
     || (event.notification.data?.buttons?.[0]?.url)
     || event.notification.data?.additionalData?.launchURL
-    || 'https://dar-al-tawhid.de/';
+    || (postId ? buildPostLaunchUrl(postId, data.cacheVersion || Date.now()) : 'https://dar-al-tawhid.de/');
 
   event.waitUntil(
-    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-      // Schon ein Fenster offen? → fokussieren und zur URL navigieren
-      for (const client of clientList) {
-        const clientUrl = new URL(client.url);
-        const targetUrlObj = new URL(targetUrl);
-        if (clientUrl.origin === targetUrlObj.origin) {
-          client.focus();
-          client.navigate(targetUrl);
-          return;
-        }
-      }
-      // Kein Fenster offen → neues öffnen
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async (clientList) => {
+      const focused = await focusClientToPost(clientList, targetUrl, postId);
+      if (focused) return;
       return self.clients.openWindow(targetUrl);
     })
   );
@@ -113,6 +159,22 @@ self.addEventListener('fetch', (event) => {
 
   // Nur eigene Dateien cachen, keine fremden großen API/CDN-Antworten.
   if (url.origin !== self.location.origin) return;
+
+  // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
+  if (isPostDataRequest(url) || Date.now() < bypassPostCacheUntil) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(request).then((cached) => {
