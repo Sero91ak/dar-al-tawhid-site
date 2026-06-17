@@ -6285,52 +6285,89 @@ function imageEditorFontCss(id){return (IMAGE_EDITOR_FONTS.find(f=>f.id===id)||I
 function imageTemplateById(id){return IMAGE_EDITOR_TEMPLATES.find(t=>t.id===id)||IMAGE_EDITOR_TEMPLATES[0]}
 function imageTemplateUrl(src){const path=String(src||"").replace(/^\//,"");return new URL(path,location.origin+"/").href+"?v="+IMAGE_TEMPLATE_VERSION}
 function sourceTextFromPost(post){return [post?.scholar,post?.book,post?.source].filter(Boolean).join(" · ")||"Quelle prüfen"}
+function stripImageEditorMarkdown(text){
+  return String(text||"").replace(/\r\n/g,"\n").replace(/^>\s?/gm,"").replace(/\*\*\*(.*?)\*\*\*/g,"$1").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"").replace(/\n{3,}/g,"\n\n").trim();
+}
+function normalizeImageEditorSpeaker(name){
+  let n=String(name||"").replace(/^🖋️\s*/,"").replace(/\s+/g," ").trim();
+  if(/^der\s+prophet/i.test(n)||/^prophet(\s*ﷺ)?$/i.test(n)||/^prophet\s*ﷺ/i.test(n))return"Der Prophet ﷺ";
+  return n;
+}
+function formatImageEditorNameLine(speaker){
+  const n=normalizeImageEditorSpeaker(speaker);
+  return n?`🖋️ ${n} sagte:`:"";
+}
+function extractNameLineCandidate(line){
+  const t=stripImageEditorMarkdown(line).trim();
+  const m=t.match(/^(?:🖋️\s*)?(.+?)\s+sagte\s*:?\s*$/i);
+  return m?normalizeImageEditorSpeaker(m[1]):null;
+}
+function parseImageEditorBodySource(text,fallbackScholar){
+  const lines=stripImageEditorMarkdown(text).split("\n");
+  let nameSpeaker="",body=[],fazit="",phase="scan";
+  const pushBody=line=>{
+    let t=String(line||"").replace(/^>\s?/,"").trim();
+    if(!t)return;
+    if(extractNameLineCandidate(t))return;
+    if(/^🖋️/.test(t)&&/sagte/i.test(t))return;
+    body.push(t);
+  };
+  lines.forEach(line=>{
+    const t=line.trim();
+    if(!t){if(body.length&&phase==="body")body.push("");return}
+    const inline=t.match(/^(?:🖋️\s*)?(.+?)\s+sagte\s*:\s*(.*)$/i);
+    if(inline&&!nameSpeaker){
+      nameSpeaker=normalizeImageEditorSpeaker(inline[1]);
+      const rest=String(inline[2]||"").trim();
+      if(rest){
+        const innerName=extractNameLineCandidate(rest);
+        if(innerName)nameSpeaker=innerName;
+        else pushBody(rest);
+      }
+      phase="body";
+      return;
+    }
+    const nameCand=extractNameLineCandidate(t);
+    if(nameCand&&!nameSpeaker){nameSpeaker=nameCand;phase="body";return}
+    if(/^🌙/.test(t)||/^Fazit:/i.test(t)){fazit=fazit?(fazit+" "+t):t;phase="fazit";return}
+    if(phase==="fazit")fazit+=(fazit?" ":"")+t;
+    else pushBody(t);
+  });
+  if(!nameSpeaker&&fallbackScholar)nameSpeaker=normalizeImageEditorSpeaker(fallbackScholar);
+  fazit=fazit.replace(/^🌙\s*/,"").replace(/^Fazit:\s*/i,"").trim();
+  let bodyText=body.join("\n").trim();
+  bodyText=bodyText.replace(/^(?:🖋️\s*)?[^\n]+?\s+sagte\s*:?\s*/gim,"").replace(/^>\s?/gm,"").trim();
+  return{nameLine:nameSpeaker,bodyText,fazit};
+}
+function composeImageEditorMainText(parsed){
+  const parts=[];
+  if(parsed.nameLine)parts.push(formatImageEditorNameLine(parsed.nameLine));
+  if(parsed.bodyText)parts.push(parsed.bodyText);
+  if(parsed.fazit)parts.push(`🌙 Fazit: ${parsed.fazit}`);
+  return parts.join("\n\n").trim();
+}
 function buildImageEditorMainFromPost(post){
-  const quote=stripMd(post?.statement||findQuote(post)||post?.title||"").trim();
-  const scholar=String(post?.scholar||"").trim();
-  const fazit=stripMd(post?.conclusion||"").trim();
-  let out="";
-  if(scholar)out+=`🖋️ ${scholar} sagte:\n\n`;
-  if(quote)out+=quote;
-  if(fazit)out+=(out?"\n\n":"")+`🌙 Fazit: ${fazit}`;
-  return out.trim();
+  const parsed=parseImageEditorBodySource(post?.statement||"",post?.scholar||"");
+  if(!parsed.bodyText){
+    const quote=stripImageEditorMarkdown(findQuote(post)||"");
+    if(quote&&!extractNameLineCandidate(quote))parsed.bodyText=quote.replace(/^>\s?/gm,"").trim();
+  }
+  return composeImageEditorMainText(parsed);
+}
+function normalizeImageEditorMainText(text,fallbackScholar){
+  return composeImageEditorMainText(parseImageEditorBodySource(text,fallbackScholar||""));
 }
 function resetImageEditorOffsets(){imageEditorState.offsetX=0;imageEditorState.offsetY=0;imageEditorState.sourceOffsetX=0;imageEditorState.sourceOffsetY=0}
+function imageEditorScholarFallback(){const key=String(currentRoute.value||"");if(!key)return"";const post=posts.find(p=>String(p.id)===key);return post?.scholar||""}
 function imageEditorInnerBox(box){const pad=14;return{x:box.x+pad,y:box.y+pad,w:Math.max(40,box.w-pad*2),h:Math.max(40,box.h-pad*2)}}
 function imageEditorOffsetLimits(box,blockW,blockH){const inner=imageEditorInnerBox(box);const maxX=Math.max(0,(inner.w-blockW)/2);const maxY=Math.max(0,(inner.h-blockH)/2);return{maxX,maxY}}
 function clampImageEditorOffset(box,offsetX,offsetY,metrics){const inner=imageEditorInnerBox(box);const blockW=metrics?.blockW??inner.w*0.75;const blockH=metrics?.blockH??inner.h*0.75;const limits=imageEditorOffsetLimits(box,blockW,blockH);return{x:Math.max(-limits.maxX,Math.min(limits.maxX,offsetX)),y:Math.max(-limits.maxY,Math.min(limits.maxY,offsetY))}}
 function imageEditorBlockBox(block){const t=imageTemplateById(imageEditorState.templateId);const box=block==="source"?t.source:t.text;const off=imageEditorBlockOffsets(block);return{x:box.x+off.x,y:box.y+off.y,w:box.w,h:box.h}}
-function parseImageEditorMainText(text){
-  const raw=String(text||"").replace(/\r\n/g,"\n").trim();
-  if(!raw)return{nameLine:"",bodyText:"",fazit:""};
-  const lines=raw.split("\n");
-  let nameLine="",body=[],fazit="",phase="start";
-  lines.forEach(line=>{
-    const t=line.trim();
-    if(!t){if(body.length)body.push("");return}
-    if(/^🖋️/.test(t)||(phase==="start"&&/sagte\s*:?\s*$/i.test(t))){
-      nameLine=nameLine?(nameLine+" "+t):t;
-      phase="body";
-      return;
-    }
-    if(/^🌙/.test(t)||/^(\*\*)?Fazit:/i.test(t)){
-      fazit=fazit?(fazit+" "+t):t;
-      phase="fazit";
-      return;
-    }
-    if(phase==="fazit")fazit+=(fazit?" ":"")+t;
-    else body.push(t);
-  });
-  return{
-    nameLine:nameLine.replace(/^🖋️\s*/,"").trim(),
-    bodyText:body.join("\n").trim(),
-    fazit:fazit.replace(/^🌙\s*/,"").replace(/^\*\*Fazit:\*\*\s*/i,"").replace(/^Fazit:\s*/i,"").trim()
-  };
-}
+function parseImageEditorMainText(text){return parseImageEditorBodySource(text,"")}
 function imageEditorMainSegments(parsed,baseSize){
   const size=Number(baseSize)||58;
   const segments=[];
-  if(parsed.nameLine)segments.push({text:parsed.nameLine,size:Math.max(24,Math.round(size*0.74)),lineHeight:1.16,weight:"700",kind:"name"});
+  if(parsed.nameLine)segments.push({text:formatImageEditorNameLine(parsed.nameLine),size:Math.max(22,Math.round(size*0.72)),lineHeight:1.14,weight:"700",kind:"name",align:"center"});
   if(parsed.bodyText)segments.push({text:parsed.bodyText,size,lineHeight:1.22,weight:"700",kind:"body"});
   if(parsed.fazit)segments.push({text:"🌙 Fazit: "+parsed.fazit,size:Math.max(24,Math.round(size*0.9)),lineHeight:1.18,weight:"700",kind:"fazit"});
   return segments;
@@ -6365,7 +6402,7 @@ function fitImageEditorMainSegments(ctx,parsed,inner,font,baseSize,lineHeight){
         seg.fontSize-=1;
         const refit=fitImageEditorText(ctx,seg.text,{x:0,y:0,w:inner.w,h:inner.h},font,seg.fontSize,seg.lineHeight||lineHeight,20);
         Object.assign(seg,refit);
-        layout=measureImageEditorSegments(ctx,layout.segments.map(s=>({text:s.text,size:s.fontSize,lineHeight:s.lineHeight,weight:s.weight,kind:s.kind})),inner,font,lineHeight);
+        layout=measureImageEditorSegments(ctx,layout.segments.map(s=>({text:s.text,size:s.fontSize,lineHeight:s.lineHeight,weight:s.weight,kind:s.kind,align:s.align})),inner,font,lineHeight);
       }
     }
   }
@@ -6452,7 +6489,7 @@ function closeImageEditorTextExpand(save){
   if(!modal)return;
   if(save&&area&&block){
     if(block==="source")imageEditorState.sourceText=area.value||"";
-    else imageEditorState.mainText=area.value||"";
+    else imageEditorState.mainText=normalizeImageEditorMainText(area.value||"",imageEditorScholarFallback());
     syncImageEditorInputsFromState();
     renderImageEditorCanvas().then(()=>downloadImageEditor());
   }
@@ -6494,7 +6531,7 @@ function renderImageEditorTest(){
   return `<div class="ie-power-test-badge">🧪 Test-Vorschau · noch nicht live</div><div class="ie-power-app" id="imageEditorAnchor"><header class="ie-power-toolbar"><button type="button" id="imageEditorBack">← Zurück</button><span class="ie-power-toolbar-title">Bild-Beitrag</span><button type="button" id="imageEditorMoveToggle" class="${edit?"active":""}">${edit?"Scrollen":"Text bewegen"}</button><button type="button" id="imageEditorSaveTop" class="primary">Speichern</button></header><div class="ie-power-layout">${templates}${stage}${renderImageEditorTestSheet()}</div></div>`;
 }
 function setImageEditorInteractionMode(mode){imageEditorState.interactionMode=mode==="edit"?"edit":"scroll";const wrap=$("imageEditorTouchWrap"),btn=$("imageEditorMoveToggle");if(wrap){wrap.classList.toggle("is-edit-active",imageEditorState.interactionMode==="edit");wrap.classList.remove("is-dragging")}if(btn){btn.classList.toggle("active",imageEditorState.interactionMode==="edit");btn.textContent=imageEditorState.interactionMode==="edit"?"Scrollen":"Text bewegen"}imageEditorTouch=null;updateImageEditorGuides()}
-function autoFitImageEditor(){resetImageEditorOffsets();const canvas=$("imageEditorCanvas");const ctx=canvas?.getContext("2d");const t=imageTemplateById(imageEditorState.templateId);if(!ctx)return;const font=imageEditorFontCss(imageEditorState.font);const inner=imageEditorInnerBox(t.text);const parsed=parseImageEditorMainText(imageEditorState.mainText);const mainFit=fitImageEditorMainSegments(ctx,parsed,inner,font,82,imageEditorState.lineHeight);imageEditorState.fontSize=Math.max(28,Math.min(82,mainFit.fontSize||58));const sourceInner=imageEditorInnerBox(t.source);const sourceFit=fitImageEditorText(ctx,imageEditorState.sourceText,sourceInner,font,34,1.18,14);imageEditorState.sourceSize=Math.max(16,Math.min(34,sourceFit.fontSize));if(currentRoute.view==="image-editor-test")render();else{syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()}}
+function autoFitImageEditor(){imageEditorState.mainText=normalizeImageEditorMainText(imageEditorState.mainText,imageEditorScholarFallback());resetImageEditorOffsets();const canvas=$("imageEditorCanvas");const ctx=canvas?.getContext("2d");const t=imageTemplateById(imageEditorState.templateId);if(!ctx)return;const font=imageEditorFontCss(imageEditorState.font);const inner=imageEditorInnerBox(t.text);const parsed=parseImageEditorMainText(imageEditorState.mainText);const mainFit=fitImageEditorMainSegments(ctx,parsed,inner,font,82,imageEditorState.lineHeight);imageEditorState.fontSize=Math.max(28,Math.min(82,mainFit.fontSize||58));const sourceInner=imageEditorInnerBox(t.source);const sourceFit=fitImageEditorText(ctx,imageEditorState.sourceText,sourceInner,font,34,1.18,14);imageEditorState.sourceSize=Math.max(16,Math.min(34,sourceFit.fontSize));if(currentRoute.view==="image-editor-test")render();else{syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()}}
 function layoutImageEditorForTemplate(){resetImageEditorOffsets();autoFitImageEditor()}
 function loadImageEditorTemplate(src){const url=imageTemplateUrl(src);if(imageEditorCache.has(url))return imageEditorCache.get(url);const p=new Promise((resolve,reject)=>{const img=new Image();img.crossOrigin="anonymous";img.onload=()=>resolve(img);img.onerror=()=>reject(new Error("Template load failed: "+url));img.src=url});imageEditorCache.set(url,p);return p}
 function wrapCanvasText(ctx,text,maxWidth){const lines=[];String(text||"").replace(/\r\n/g,"\n").split("\n").forEach(raw=>{const words=raw.trim().split(/\s+/).filter(Boolean);if(!words.length){lines.push("");return}let line="";words.forEach(word=>{const test=line?line+" "+word:word;if(ctx.measureText(test).width<=maxWidth){line=test}else{if(line)lines.push(line);line=word}});if(line)lines.push(line)});return lines}
@@ -6521,12 +6558,13 @@ function drawImageEditorMainText(ctx,text,box,opts){
   const inner=imageEditorInnerBox(box);
   const layout=fitImageEditorMainSegments(ctx,parsed,inner,opts.font,opts.size,opts.lineHeight);
   const clamped=clampImageEditorOffset(box,opts.offsetX||0,opts.offsetY||0,{blockW:layout.blockW,blockH:layout.blockH});
-  const x=(opts.align==="left"?inner.x:inner.x+inner.w/2)+clamped.x;
   let y=inner.y+(inner.h-layout.blockH)/2+clamped.y;
   ctx.fillStyle=opts.color;
   ctx.textBaseline="alphabetic";
-  ctx.textAlign=opts.align;
   layout.segments.forEach((seg,idx)=>{
+    const segAlign=seg.align||opts.align||"center";
+    const x=(segAlign==="left"?inner.x:inner.x+inner.w/2)+clamped.x;
+    ctx.textAlign=segAlign;
     ctx.font=`${seg.weight||"700"} ${seg.fontSize}px ${opts.font}`;
     const firstBaseline=seg.fontSize;
     y+=firstBaseline;
@@ -6706,7 +6744,7 @@ function bindImageEditorTestTouch(){
   });
   window.addEventListener("mouseup",()=>{drag=null;wrap.classList.remove("is-dragging")});
 }
-function bindImageEditorTestInputs(){["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorOffsetX","imageEditorSourceSize","imageEditorSourceOffsetX","imageEditorSourceOffsetY"].forEach(id=>{const el=$(id);if(!el||el.dataset.testBound==="1")return;el.dataset.testBound="1";el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")}})}
+function bindImageEditorTestInputs(){["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorOffsetX","imageEditorSourceSize","imageEditorSourceOffsetX","imageEditorSourceOffsetY"].forEach(id=>{const el=$(id);if(!el||el.dataset.testBound==="1")return;el.dataset.testBound="1";el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")};if(id==="imageEditorMain")el.onblur=()=>{const norm=normalizeImageEditorMainText(el.value||"",imageEditorScholarFallback());if(el.value!==norm){imageEditorState.mainText=norm;el.value=norm;syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()}}})}
 function setImageEditorTestSheetTab(tab){imageEditorState.sheetTab=IMAGE_EDITOR_TEST_TABS.some(x=>x.id===tab)?tab:"text";imageEditorState.sheetOpen=true;render()}
 function bindImageEditorTest(){
   if(currentRoute.view!=="image-editor-test")return;
@@ -6726,7 +6764,7 @@ function bindImageEditorTest(){
   bindImageEditorTextExpand();
   if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}
 }
-function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bindImageEditorTest();if(currentRoute.view!=="image-editor")return;document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();render()}});document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorOffsetX","imageEditorSourceSize"].forEach(id=>{const el=$(id);if(!el)return;el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")}});const auto=$("imageEditorAutoFit");if(auto)auto.onclick=()=>autoFitImageEditor();const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();bindImageEditorTextExpand();bindImageEditorTouch();if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}}
+function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bindImageEditorTest();if(currentRoute.view!=="image-editor")return;document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();render()}});document.querySelectorAll("[data-editor-block]").forEach(btn=>{btn.onclick=()=>setImageEditorActiveBlock(btn.getAttribute("data-editor-block"))});["imageEditorMain","imageEditorSource","imageEditorFont","imageEditorColor","imageEditorAlign","imageEditorFontSize","imageEditorLineHeight","imageEditorOffset","imageEditorOffsetX","imageEditorSourceSize"].forEach(id=>{const el=$(id);if(!el)return;el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();renderImageEditorCanvas();downloadImageEditor()};el.onchange=el.oninput;el.onfocus=()=>{if(id==="imageEditorSource")setImageEditorActiveBlock("source");else if(id==="imageEditorMain")setImageEditorActiveBlock("main")};if(id==="imageEditorMain")el.onblur=()=>{const norm=normalizeImageEditorMainText(el.value||"",imageEditorScholarFallback());if(el.value!==norm){imageEditorState.mainText=norm;el.value=norm;syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()}}});const auto=$("imageEditorAutoFit");if(auto)auto.onclick=()=>autoFitImageEditor();const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert("Bitte zuerst Vorlage laden und Text prüfen.");return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();bindImageEditorTextExpand();bindImageEditorTouch();if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}}
 function renderMore(){const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const ramadan=seasonalIslamicContext()?listCard("Ramaḍān & ʿĪd","Saisonale Beiträge & Zeiten","ramadan","","🌙"):"";const account=accountSession()?`${accountSession().username} · Sync aktiv`:"Anmeldename + PIN";return `${setHeader("Mehr","Gelehrte, Bücher, Kalender und persönliche Bereiche.","Menü")}${renderThemeSwitchPanel()}<section class="grid-list">${listCard("Mein Bereich",account,"account","","🔐")}${ramadan}${listCard("Bild-Beitrag","Vorlage wählen, Text setzen, teilen","image-editor","","🖼️")}${listCard("Bild-Editor (Test)","Neue Power-Version · Vorschau","image-editor-test","","🧪")}${listCard("Qurʾān","114 Suren · Arabisch & Lautschrift","quran","","📖")}${listCard("Gelehrte",scholarCount+" Namen","scholars","","👤")}${listCard("Bücher",bookCount+" Werke","books","","📖")}${listCard("Islamischer Kalender","Hijrī-Termine","calendar","","🗓️")}${listCard("Favoriten",savedIds().length+" gespeichert","saved","","♡")}${listCard("Über die App","Maßstab & Quellen","about","","ℹ️")}</section>`}
 function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
 function dailyDua(){if(!DUAS.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return DUAS[Math.abs(day)%DUAS.length]}
