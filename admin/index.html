@@ -1247,7 +1247,14 @@ async function uploadPostViaWorker(){
     const result=await publishPostViaWorkerRequest(markdown,draftFilename);
     draftFilename=result.filename||draftFilename;
     draftMarkdown=markdown;draftNextNumber=result.number||next;
-    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
+    const live=result.liveCheck||{};
+    const push=result.push||{};
+    const pushLine=push.sent
+      ? `Push gesendet · Ziel: <strong>${esc(push.targetUrl||result.postId||"")}</strong>`
+      : push.waitingForLive
+        ? `<span style="color:#f0c674">Beitrag veröffentlicht, aber noch nicht für Besucher abrufbar. Push wurde nicht gesendet.</span>`
+        : `Push nicht gesendet: ${esc(push.reason||"unbekannt")}`;
+    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong><br>Index aktualisiert: <strong>${live.indexOk?"ja":"nein"}</strong><br>Beitrag live erreichbar: <strong>${live.ok?"ja":"nein"}</strong><br>${pushLine}`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
     saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
     toast("Beitrag hochgeladen");
