@@ -1646,6 +1646,9 @@ body:before{
 .prayer-push-status-item.ok span{color:#dfffd8}
 .prayer-push-status-item.warn span{color:#ffe4a3}
 .prayer-push-status-note{color:var(--muted);font-size:9.5px;line-height:1.35;margin:8px 1px 0}
+.prayer-push-status-warn{border:1px solid rgba(255,196,120,.35);border-radius:12px;background:rgba(255,196,120,.12);color:#ffe4a3;font-size:10.5px;line-height:1.35;padding:8px 9px;margin-bottom:8px}
+.prayer-push-test-note{display:block;color:var(--muted);font-size:9.5px;line-height:1.35;margin:4px 1px 8px}
+.prayer-push-test-grid{margin-top:4px}
 .prayer-controls-compact{border:1px solid var(--line2);border-radius:19px;background:rgba(0,0,0,.12);padding:10px;margin-top:12px}
 .prayer-controls-compact .prayer-detail-toggle{margin:0 0 8px}
 .prayer-controls-compact .filter-select{height:40px;border-radius:14px;font-size:12px}
@@ -5602,7 +5605,7 @@ function renderHighlightPushButton(key,label){const active=dailyPushPref(getPray
 function buildDailyPushTags(settings=getPrayerSettings()){return{daily_dua_notifications:dailyPushPref(settings,"dailyDua")?"true":"false",daily_recommendation_notifications:dailyPushPref(settings,"dailyRecommendation")?"true":"false",push_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",dar_push:"true",post_notifications:"true",push_site:"dar-al-tawhid",push_version:"7"}}
 async function syncDailyPushTags(settings=getPrayerSettings(),{ensureOptIn=false}={}){const OS=await waitForOneSignalReady();if(!OS)return false;await ensurePushUserLogin(OS);if(ensureOptIn){const opted=await waitForPushOptIn(OS);if(!opted)return false}try{await addOneSignalTagsCompat(OS,buildDailyPushTags(settings));return true}catch(e){console.warn("Tages-Push-Tags:",e);return false}}
 async function setDailyPushPreference(key,active){const next={};next[key]=!!active;if(active){if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}let permission=getNotificationPermission();if(permission!=="granted")permission=await requestNotificationPermission();if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}const OS=await waitForOneSignalReady();if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS)}}setPrayerSettings(next);const ok=await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:!!active});updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();if(active&&!ok)alert("Einstellung gespeichert. Push wird im Hintergrund erneut verbunden.")}
-function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben"}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);return `<div class="prayer-subsection-label">Erinnerungen</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderDailyPushPanel()}${renderPrayerPushStatus(settings)}`}
+function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben"}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);const testPrayerOpts=["fajr","dhuhr","asr","maghrib","isha","tahajjud"].map(k=>{const p=prayerByKey(k,settings);const name=p?p.name:(k==="tahajjud"?"Taḥajjud":k);return `<option value="${k}">${name}</option>`}).join("");return `<div class="prayer-subsection-label">Erinnerungen</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div><div class="prayer-settings-grid prayer-push-test-grid"><select id="prayerTestPrayerSelect" class="filter-select" aria-label="Gebet für Test-Push">${testPrayerOpts}</select><select id="prayerTestModeSelect" class="filter-select" aria-label="Art des Test-Pushs"><option value="advance">Test · Vorab-Erinnerung</option><option value="entry" selected>Test · Gebetszeit</option></select></div><small class="prayer-push-test-note">Test-Push nur auf diesem Gerät – kein Massenversand, keine echte Planung.</small>${renderDailyPushPanel()}${renderPrayerPushStatus(settings)}`}
 function updatePrayerReminderButtons(){const s=getPrayerSettings();document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(s.reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"});document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Duʿāʾ des Tages · 09:00"});document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Heute empfohlen · 12:00"})}
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
 function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)||getNotificationPermission()==="granted";btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}
@@ -5669,15 +5672,40 @@ async function syncPrayerPushTags(settings,{retries=7}={}){const s=settings||get
 function prayerPushAdvanceMinutes(settings=getPrayerSettings()){return normalizeAdvanceMinutes(settings.advanceMinutes)}
 const PRAYER_NOTIFICATION_MESSAGES={
   default:["Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.","Nimm dir jetzt bewusst Zeit für dein Gebet.","Bewahre dein Gebet und erinnere dich an Allah."],
-  fajr:["Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.","Fajr ist eingetreten. Starte den Tag mit Gehorsam gegenüber Allah.","Der Tag beginnt mit einer großen Gelegenheit zum Gebet."],
-  asr:["Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.","ʿAṣr ist eingetreten. Achte besonders auf dieses Gebet.","Halte am ʿAṣr-Gebet fest und bewahre deine Zeit."],
-  isha:["Schließe deinen Tag mit Gehorsam gegenüber Allah ab.","ʿIshāʾ ist eingetreten. Beende den Tag mit Gebet und Ruhe.","Nimm dir am Ende des Tages Zeit für dein Gebet."],
+  fajr:["Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.","Starte den Tag mit Gehorsam gegenüber Allah.","Der Tag beginnt mit einer großen Gelegenheit zum Gebet.","Bewahre dein Gebet und erinnere dich an Allah."],
+  dhuhr:["Halte am Mittagsgebet fest und ordne deinen Tag um Allah.","Nimm dir bewusst Zeit für Dhuhr und erinnere dich an Allah.","Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.","Bewahre dein Gebet und erinnere dich an Allah."],
+  asr:["Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.","Achte besonders auf dieses Gebet.","Halte am ʿAṣr-Gebet fest und bewahre deine Zeit.","Bewahre dein Gebet und erinnere dich an Allah."],
+  maghrib:["Schließe den Tagabschnitt mit Gehorsam gegenüber Allah ab.","Maghrib ist eingetreten – nimm dir Zeit für dein Gebet.","Danke Allah und bewahre dein Gebet zur richtigen Zeit.","Bewahre dein Gebet und erinnere dich an Allah."],
+  isha:["Schließe deinen Tag mit Gehorsam gegenüber Allah ab.","Beende den Tag mit Gebet und Ruhe.","Nimm dir am Ende des Tages Zeit für dein Gebet.","Bewahre dein Gebet und erinnere dich an Allah."],
   tahajjud:["Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.","Steh für Allah auf, auch wenn es nur wenige Rakʿāt sind.","Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."]
 };
-function pickPrayerMessage(prayer){const list=PRAYER_NOTIFICATION_MESSAGES[prayer.key]||PRAYER_NOTIFICATION_MESSAGES.default;const dayKey=new Date().toISOString().slice(0,10);let seed=0;String(`${dayKey}-${prayer.key}-${Date.now()}`).split("").forEach(ch=>seed=(seed+ch.charCodeAt(0))%9973);return list[seed%list.length]}
+function pickPrayerMessage(prayer,seedExtra=""){const list=PRAYER_NOTIFICATION_MESSAGES[prayer.key]||PRAYER_NOTIFICATION_MESSAGES.default;const dayKey=new Date().toISOString().slice(0,10);let seed=0;String(`${dayKey}-${prayer.key}-${seedExtra}`).split("").forEach(ch=>seed=(seed+ch.charCodeAt(0))%9973);return list[seed%list.length]}
 function prayerNotificationTitle(prayer,advance=false,settings=getPrayerSettings()){if(prayer.key==="tahajjud")return"Taḥajjud-Erinnerung";const minutes=prayerPushAdvanceMinutes(settings);return advance?`${prayer.name} in ${minutes} Min`:`${prayer.name} ist eingetreten`}
-function prayerAdvanceNotificationCopy(prayer,settings){const timeLabel=formatPrayerHour(prayer.time);const city=settings&&settings.city?` · ${settings.city}`:"";const minutes=prayerPushAdvanceMinutes(settings);return{title:prayerNotificationTitle(prayer,true,settings),body:`In ${minutes} Min · ${timeLabel}${city}`,tag:`prayer-advance-${prayer.key}`}}
-function prayerEntryNotificationCopy(prayer,settings=getPrayerSettings()){if(prayer.key==="tahajjud")return{title:"Taḥajjud-Erinnerung",body:"Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",tag:"prayer-tahajjud"};return{title:prayerNotificationTitle(prayer,false,settings),body:pickPrayerMessage(prayer),tag:`prayer-${prayer.key}`}}
+function prayerAdvanceNotificationCopy(prayer,settings){const timeLabel=formatPrayerHour(prayer.time);const minutes=prayerPushAdvanceMinutes(settings);const reminder=prayer.key==="tahajjud"?PRAYER_NOTIFICATION_MESSAGES.tahajjud[0]:pickPrayerMessage(prayer,`advance-${timeLabel}`);const body=prayer.key==="tahajjud"?"Taḥajjud-Erinnerung ist bald.":`Noch ${minutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf das Gebet vor. ${reminder}`;return{title:prayerNotificationTitle(prayer,true,settings),body,tag:`prayer-advance-${prayer.key}`}}
+function prayerEntryNotificationCopy(prayer,settings=getPrayerSettings()){if(prayer.key==="tahajjud")return{title:"Taḥajjud-Erinnerung",body:PRAYER_NOTIFICATION_MESSAGES.tahajjud[0],tag:"prayer-tahajjud"};const timeLabel=formatPrayerHour(prayer.time);const reminder=pickPrayerMessage(prayer,`entry-${timeLabel}`);return{title:prayerNotificationTitle(prayer,false,settings),body:`${timeLabel} Uhr – jetzt ist Gebetszeit. ${reminder}`,tag:`prayer-${prayer.key}`}}
+function prayerByKey(key,settings=getPrayerSettings()){return calculatePrayerTimes(new Date(),settings).find(p=>p.key===key)||null}
+function nextPlannedPrayerPushSummary(settings=getPrayerSettings()){
+  if(!hasPrayerLocation(settings))return"Standort fehlt";
+  const now=new Date();
+  const advanceMs=prayerPushAdvanceMinutes(settings)*60000;
+  let nextEntry=null,nextAdvance=null;
+  [-1,0,1].forEach(offset=>{
+    const base=new Date(now);base.setDate(now.getDate()+offset);
+    calculatePrayerTimes(base,settings).filter(p=>p.key!=="sunrise"&&(p.key!=="tahajjud"||tahajjudNotificationsEnabled(settings))).forEach(p=>{
+      const entryAt=prayerEventDate(base,p);
+      if(entryAt>now&&(!nextEntry||entryAt<nextEntry.date))nextEntry={prayer:p,date:entryAt};
+      if(p.key!=="tahajjud"&&advanceMs>0){
+        const advanceAt=new Date(entryAt.getTime()-advanceMs);
+        if(advanceAt>now&&(!nextAdvance||advanceAt<nextAdvance.date))nextAdvance={prayer:p,date:advanceAt};
+      }
+    });
+  });
+  if(!nextEntry&&!nextAdvance)return"Noch nicht geplant";
+  const parts=[];
+  if(nextEntry)parts.push(`${nextEntry.prayer.name} ${formatPrayerHour(nextEntry.prayer.time)}`);
+  if(nextAdvance)parts.push(`Vorab ${nextAdvance.date.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}`);
+  return parts.join(" · ");
+}
 function nextPlannedPrayerNotification(settings=getPrayerSettings()){
   if(!hasPrayerLocation(settings))return null;
   const now=new Date();
@@ -5701,13 +5729,20 @@ function renderPrayerPushStatus(settings=getPrayerSettings()){
   const permission=getNotificationPermission();
   const reminder=Boolean(settings.reminder);
   const pushAllowed=permission==="granted";
-  const pushActive=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)||pushAllowed&&reminder;
-  const next=nextPlannedPrayerNotification(settings);
-  const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);
+  const hasLocation=hasPrayerLocation(settings);
+  const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||settings.timezone||"Europe/Berlin";
   const debug=prayerPushDebug();
   const pushId=window.OneSignal?.User?.PushSubscription?.id||debug.subscriptionId||"";
+  const tagsOk=debug.onesignal==="tags ok";
+  const supabaseOk=debug.supabase==="ok";
+  const pushActive=Boolean(reminder&&hasLocation&&pushAllowed&&(tagsOk||supabaseOk)&&pushId);
+  const warnActiveButBroken=reminder&&(!pushAllowed||!hasLocation||(!tagsOk&&!supabaseOk)||!pushId);
+  const nextSummary=nextPlannedPrayerPushSummary(settings);
+  const lastTest=debug.lastTestAt?`${debug.lastTestOk?"erfolgreich":"fehlgeschlagen"} · ${new Date(debug.lastTestAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`:"Noch keiner";
   const lastSync=debug.lastSync?new Date(debug.lastSync).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Noch nicht";
-  return `<details class="prayer-push-status" aria-live="polite"><summary>Push-Status öffnen</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid"><div class="prayer-push-status-item ${pushAllowed?"ok":"warn"}"><b>Push erlaubt</b><span>${pushAllowed?"Ja":permission==="denied"?"Blockiert":"Noch nicht erlaubt"}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Push aktiv</b><span>${pushActive?"Ja":"Noch verbinden"}</span></div><div class="prayer-push-status-item ${reminder?"ok":"warn"}"><b>Gebets-Erinnerung</b><span>${reminder?"Aktiv":"Aus"}</span></div><div class="prayer-push-status-item ${next?"ok":"warn"}"><b>Nächste Meldung</b><span>${next?esc(`${next.label} · ${next.date.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}`):"Noch nicht geplant"}</span></div><div class="prayer-push-status-item ${tahajjud==="off"?"warn":"ok"}"><b>Taḥajjud</b><span>${esc(tahajjudModeLabel(tahajjud))}</span></div><div class="prayer-push-status-item ${pushId?"ok":"warn"}"><b>Push-ID</b><span>${pushId?esc(pushId.slice(0,8)+"…"):"Fehlt"}</span></div><div class="prayer-push-status-item ${debug.supabase==="ok"?"ok":"warn"}"><b>Scheduler-Sync</b><span>${debug.supabase==="ok"?"Gespeichert":esc(debug.supabase||"Wartet")}</span></div><div class="prayer-push-status-item ${debug.onesignal==="tags ok"?"ok":"warn"}"><b>OneSignal-Tags</b><span>${esc(debug.onesignal||"Wartet")}</span></div><div class="prayer-push-status-item ${debug.lastError?"warn":"ok"}"><b>Letzter Sync</b><span>${esc(debug.lastError||lastSync)}</span></div></div></div></details>`;
+  const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);
+  const warnHtml=warnActiveButBroken?`<div class="prayer-push-status-warn">⚠ Push wirkt aktiv, aber Subscription oder Gebets-Tags fehlen. Bitte „Test senden“ nutzen oder Erinnerung erneut aktivieren.</div>`:"";
+  return `<details class="prayer-push-status" aria-live="polite"><summary>Push-Status öffnen</summary><div class="prayer-push-status-body">${warnHtml}<div class="prayer-push-status-grid"><div class="prayer-push-status-item ${pushAllowed?"ok":"warn"}"><b>Push erlaubt</b><span>${pushAllowed?"Ja":permission==="denied"?"Nein (blockiert)":"Nein"}</span></div><div class="prayer-push-status-item ${reminder?"ok":"warn"}"><b>Gebets-Push aktiv</b><span>${reminder?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Push bereit</b><span>${pushActive?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Standort gespeichert</b><span>${hasLocation?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Zeitzone</b><span>${esc(tz)}</span></div><div class="prayer-push-status-item ${nextSummary.includes("fehlt")||nextSummary.includes("nicht")?"warn":"ok"}"><b>Nächster Push</b><span>${esc(nextSummary)}</span></div><div class="prayer-push-status-item ${debug.lastTestOk?"ok":"warn"}"><b>Letzter Test-Push</b><span>${esc(lastTest)}</span></div><div class="prayer-push-status-item ${tahajjud==="off"?"warn":"ok"}"><b>Taḥajjud</b><span>${esc(tahajjudModeLabel(tahajjud))}</span></div><div class="prayer-push-status-item ${pushId?"ok":"warn"}"><b>Subscription-ID</b><span>${pushId?esc(pushId.slice(0,8)+"…"):"Fehlt"}</span></div><div class="prayer-push-status-item ${supabaseOk?"ok":"warn"}"><b>Scheduler-Sync</b><span>${supabaseOk?"Gespeichert":esc(debug.supabase||"Wartet")}</span></div><div class="prayer-push-status-item ${tagsOk?"ok":"warn"}"><b>OneSignal-Tags</b><span>${esc(debug.onesignal||"Wartet")}</span></div><div class="prayer-push-status-item ${debug.lastError?"warn":"ok"}"><b>Letzter Sync</b><span>${esc(debug.lastError||lastSync)}</span></div></div><small class="prayer-push-status-note">Test-Push = nur dieses Gerät. Geplante Gebets-Pushs kommen über OneSignal vom Server.</small></div></details>`;
 }
 async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{return new window.Notification(title,payload)}catch(e){}}return null}
 function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s))scheduleLocalPrayerReminders({silent:true})}
@@ -5976,11 +6011,23 @@ async function sendPrayerTestNotification(){
   let permission=getNotificationPermission();
   if(permission!=="granted")permission=await requestNotificationPermission();
   if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
-  await showPrayerNotification("Test-Benachrichtigung erfolgreich",{
-    body:"Die Push-Funktion ist aktiv.",
-    tag:"prayer-test",
-    renotify:true
-  });
+  const settings=getPrayerSettings();
+  const prayerKey=document.getElementById("prayerTestPrayerSelect")?.value||"fajr";
+  const mode=document.getElementById("prayerTestModeSelect")?.value||"entry";
+  let prayer=prayerByKey(prayerKey,settings);
+  if(!prayer&&prayerKey==="tahajjud")prayer={key:"tahajjud",name:"Taḥajjud",time:3};
+  if(!prayer){alert("Bitte zuerst Standort freigeben, damit Gebetszeiten berechnet werden können.");return}
+  const copy=mode==="advance"?prayerAdvanceNotificationCopy(prayer,settings):prayerEntryNotificationCopy(prayer,settings);
+  const title=`[Test] ${copy.title}`;
+  const body=copy.body;
+  try{
+    await showPrayerNotification(title,{body,tag:`prayer-test-${prayerKey}-${mode}`,renotify:true,data:{url:"/#prayer",test:true}});
+    setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode});
+    render();
+  }catch(e){
+    setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:e.message||String(e)});
+    alert("Test-Push konnte nicht angezeigt werden.");
+  }
 }
 async function activatePrayerReminder(){
   const s=getPrayerSettings();

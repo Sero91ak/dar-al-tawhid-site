@@ -993,7 +993,7 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
-        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle Gebet und Art. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab-Erinnerung</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
       ${renderNewsComposer()}
@@ -1184,9 +1184,24 @@ async function sendAdminLocalPushTest(){
   let permission=Notification.permission;
   if(permission!=="granted")permission=await Notification.requestPermission();
   if(permission!=="granted"){setAdminPushTestStatus("Benachrichtigungen wurden nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}
-  const prayer=document.getElementById("adminPushPrayerSelect")?.value||"ʿIshāʾ";
-  const title=`${prayer} ist eingetreten`;
-  const body="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
+  const prayerName=document.getElementById("adminPushPrayerSelect")?.value||"Fajr";
+  const mode=document.getElementById("adminPushModeSelect")?.value||"entry";
+  const prayerKeyMap={"Fajr":"fajr","Dhuhr":"dhuhr","ʿAṣr":"asr","Maghrib":"maghrib","ʿIshāʾ":"isha","Taḥajjud":"tahajjud"};
+  const key=prayerKeyMap[prayerName]||"isha";
+  const sampleTimes={fajr:"04:12",dhuhr:"13:05",asr:"17:53",maghrib:"21:18",isha:"22:42",tahajjud:"02:30"};
+  const timeLabel=sampleTimes[key]||"12:00";
+  const reminder="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
+  let title,body;
+  if(key==="tahajjud"){
+    title="[Test] Taḥajjud-Erinnerung";
+    body=mode==="advance"?"Taḥajjud-Erinnerung ist bald.":"Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.";
+  }else if(mode==="advance"){
+    title=`[Test] ${prayerName} in 15 Min`;
+    body=`Noch 15 Minuten bis ${timeLabel} Uhr. Bereite dich auf das Gebet vor. ${reminder}`;
+  }else{
+    title=`[Test] ${prayerName} ist eingetreten`;
+    body=`${timeLabel} Uhr – jetzt ist Gebetszeit. ${reminder}`;
+  }
   try{
     if("serviceWorker" in navigator){
       const reg=await navigator.serviceWorker.ready;
@@ -1194,7 +1209,7 @@ async function sendAdminLocalPushTest(){
     }else{
       new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});
     }
-    setAdminPushTestStatus(`Test-Push für ${prayer} wurde nur auf diesem Admin-Gerät ausgelöst.`);
+    setAdminPushTestStatus(`Test-Push (${mode==="advance"?"Vorab":"Gebetszeit"}) für ${prayerName} wurde nur auf diesem Admin-Gerät ausgelöst.`);
   }catch(e){
     try{new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});setAdminPushTestStatus("Test-Push wurde lokal ausgelöst.");}
     catch(err){setAdminPushTestStatus("Test-Push konnte auf diesem Gerät nicht angezeigt werden.")}
