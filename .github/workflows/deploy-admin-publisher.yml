@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - cloudflare/worker.js
+      - cloudflare/post-push-admin.js
       - cloudflare/prayer-push-admin.js
       - cloudflare/prayer-push-scheduler.js
       - cloudflare/daily-push-admin.js

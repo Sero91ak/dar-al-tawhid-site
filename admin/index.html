@@ -807,6 +807,44 @@ async function assertVisitorAppHealthyForLive(){
   throw new Error("Besucher-App nicht startklar");
 }
 function stepLabel(ok){return ok?`<strong style="color:#8fd7a8">ja</strong>`:`<strong style="color:#ff9f9f">nein</strong>`}
+const PRAYER_PUSH_DEBUG_KEY="darPrayerPushDebugV1";
+function readLocalDeviceSubscriptionId(){
+  try{
+    const raw=localStorage.getItem(PRAYER_PUSH_DEBUG_KEY);
+    if(!raw)return "";
+    const data=JSON.parse(raw);
+    return String(data.subscriptionId||"").trim();
+  }catch(e){return ""}
+}
+function formatOneSignalPushHtml(result,label){
+  if(!result)return `<span style="color:#f0c674">${esc(label||"OneSignal")}: keine Antwort</span>`;
+  const os=result.oneSignal||result;
+  const sent=!!result.sent;
+  const status=os.httpStatus||result.httpStatus||"?";
+  const recipients=os.recipients??result.recipients??"?";
+  const notificationId=os.notificationId||result.notificationId||"—";
+  const subscriptionId=result.subscriptionId||"";
+  const target=result.target||result.filter||result.segment||"";
+  const sentAt=result.sentAt?new Date(result.sentAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"";
+  let html=`<strong>${esc(label||(sent?"OneSignal erfolgreich":"OneSignal fehlgeschlagen"))}</strong><br>`;
+  html+=`Status: <strong>${esc(String(status))}</strong><br>`;
+  html+=`Notification ID: <strong>${esc(String(notificationId))}</strong><br>`;
+  html+=`Empfänger: <strong>${esc(String(recipients))}</strong><br>`;
+  if(subscriptionId)html+=`Subscription-ID: <strong>${esc(subscriptionId)}</strong><br>`;
+  if(target)html+=`Zielgruppe: <strong>${esc(String(target))}</strong><br>`;
+  if(sentAt)html+=`Gesendet: <strong>${esc(sentAt)}</strong><br>`;
+  if(os.errors)html+=`<span style="color:#f0c674">Fehler: ${esc(JSON.stringify(os.errors).slice(0,400))}</span><br>`;
+  if(os.invalidSubscriptions)html+=`<span style="color:#f0c674">Ungültige Subscriptions: ${esc(JSON.stringify(os.invalidSubscriptions).slice(0,200))}</span><br>`;
+  if(os.text&&!sent)html+=`<span style="color:#f0c674">${esc(String(os.text).slice(0,300))}</span><br>`;
+  if(result.reason&&!sent)html+=`<span style="color:#f0c674"><strong>Fehlergrund:</strong> ${esc(result.reason)}</span><br>`;
+  if(Array.isArray(result.attempts)&&result.attempts.length){
+    html+=`<br><strong>Versuche:</strong><br>`;
+    result.attempts.slice(0,6).forEach(a=>{
+      html+=`<span style="font-size:10px">${esc(a.target||"")} · HTTP ${esc(String(a.httpStatus||"?"))} · Empf. ${esc(String(a.recipients??"?"))}${a.notificationId?` · ID ${esc(a.notificationId)}`:""}${a.reason?` · ${esc(a.reason)}`:""}</span><br>`;
+    });
+  }
+  return html;
+}
 function formatPublishStatusHtml(result){
   const live=result.liveCheck||{};
   const push=result.push||{};
@@ -814,21 +852,29 @@ function formatPublishStatusHtml(result){
   const tg=result.telegram||{};
   let html=`<strong>Veröffentlichung abgeschlossen:</strong> ${esc(result.filename||draftFilename||"")}<br>`;
   html+=`Nummer: <strong>${esc(result.number||"")}</strong> · Commit: <strong>${esc(result.commitSha||"erstellt")}</strong><br><br>`;
-  html+=`<strong>Live-Prüfung Schritt für Schritt</strong><br>`;
-  html+=`GitHub-Datei erstellt: ${stepLabel(steps.githubFileCreated!==false)}<br>`;
-  html+=`Index auf GitHub aktualisiert: ${stepLabel(steps.indexUpdatedGithub!==false)}<br>`;
+  html+=`<strong>Push-Kette Schritt für Schritt</strong><br>`;
+  html+=`Beitrag erstellt: ${stepLabel(steps.githubFileCreated!==false)}<br>`;
+  html+=`Index aktualisiert: ${stepLabel(steps.indexUpdatedGithub!==false)}<br>`;
   html+=`Index öffentlich gefunden: ${stepLabel(steps.indexFoundPublic)}<br>`;
   html+=`Beitrag im Index enthalten: ${stepLabel(steps.postInIndex)}<br>`;
   html+=`Cloudflare Deployment erkannt: ${stepLabel(steps.cloudflareDeployed)}<br>`;
   html+=`Beitrag-Datei öffentlich erreichbar: ${stepLabel(steps.postFilePublic)}<br>`;
+  html+=`Beitrag öffentlich erreichbar: ${stepLabel(steps.postFilePublic&&steps.postInIndex)}<br>`;
   html+=`Besucher-URL erreichbar: ${stepLabel(steps.visitorUrlOk)}<br>`;
+  html+=`Push vorbereitet: ${stepLabel(push.prepared!==false)}<br>`;
+  html+=`OneSignal API aufgerufen: ${stepLabel(!!push.oneSignalCalled||!!push.oneSignal||!!push.attempts?.length)}<br>`;
   html+=`Push wartet: ${stepLabel(!!push.pending||!!push.waitingForLive)}<br>`;
   html+=`Push gesendet: ${stepLabel(!!push.sent)}<br>`;
-  if(live.diagnosis)html+=`<span style="color:#f0c674">Fehlergrund: ${esc(live.diagnosis)}</span><br>`;
-  if(push.reason&&!push.sent)html+=`<span style="color:#f0c674">${esc(push.reason)}</span><br>`;
+  if(live.diagnosis)html+=`<span style="color:#f0c674"><strong>Fehlergrund Live:</strong> ${esc(live.diagnosis)}</span><br>`;
+  if(push.reason&&!push.sent)html+=`<span style="color:#f0c674"><strong>Fehlergrund Push:</strong> ${esc(push.reason)}</span><br>`;
   if(push.sent&&push.targetUrl)html+=`Push-Ziel: <strong>${esc(push.targetUrl)}</strong><br>`;
-  if(tg.sent)html+=`Telegram: <strong>gesendet</strong>${tg.telegramMessageId?` · Message-ID ${esc(tg.telegramMessageId)}`:""}<br>`;
-  else if(tg.telegramError||tg.error)html+=`<span style="color:#ff9f9f">Telegram fehlgeschlagen: ${esc(tg.telegramError||tg.error)}</span><br>`;
+  if(push.oneSignal||push.attempts?.length){
+    html+=`<br>${formatOneSignalPushHtml(push,"OneSignal Beitrag-Push")}`;
+  }else if(push.response){
+    html+=`<br><span style="font-size:11px">OneSignal Response: ${esc(String(push.response).slice(0,400))}</span><br>`;
+  }
+  if(tg.sent)html+=`<br>Telegram: <strong>gesendet</strong>${tg.telegramMessageId?` · Message-ID ${esc(tg.telegramMessageId)}`:""}<br>`;
+  else if(tg.telegramError||tg.error)html+=`<br><span style="color:#ff9f9f">Telegram fehlgeschlagen: ${esc(tg.telegramError||tg.error)}</span><br>`;
   return html;
 }
 async function retryLivePush(){
@@ -1337,6 +1383,7 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${stagingAppUrl()}" target="_blank" rel="noopener"><b>Test-App öffnen</b><small>Private Vorschau mit Staging-Daten.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
+        <div class="quick push-test-card"><b>Beitrag-Push</b><small>Neuer Beitrag · OneSignal · Live-Prüfung vor Versand</small><div class="push-test-controls"><button class="btn" id="adminPostPushLogBtn" type="button">Push-Log laden</button><button class="btn" id="adminPostPushDetectSubBtn" type="button">Gerät-Subscription erkennen</button></div><div class="upload-status" id="adminPostPushLogBox" style="margin-top:10px">Noch kein Beitrag-Push-Log geladen.</div><div class="section-head" style="margin-top:12px"><h3>Test-Push an dieses Gerät</h3><span>Subscription aus Besucher-App</span></div><div class="push-test-controls"><input class="field" id="adminPostPushSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Beitrag-Push Subscription-ID" value="${esc(readLocalDeviceSubscriptionId())}"><button class="btn primary" id="adminPostPushTestBtn" type="button">Test-Push senden</button></div><div class="upload-status" id="adminPostPushTestStatus" style="margin-top:8px">${readLocalDeviceSubscriptionId()?"Gerät-Subscription erkannt.":"Keine gültige Subscription-ID für dieses Gerät gefunden. Push in der Besucher-App neu aktivieren."}</div></div>
         <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Worker-Cron alle 5&nbsp;Min · Nutzer aus Supabase · Push über OneSignal</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><button class="btn" id="adminPushRegsBtn" type="button">Registrierungen laden</button><select class="field" id="adminPrayerSubscriptionSelect" aria-label="Push-Empfänger auswählen" style="display:none"><option value="">Empfänger wählen…</option></select><input class="field" id="adminPrayerSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
         <div class="quick push-test-card"><b>Tägliche Pushs</b><small>Duʿāʾ 09:00 · Empfehlung 12:00 · Ortszeit pro Nutzer</small><div class="push-test-controls"><button class="btn" id="adminDailyStatusBtn" type="button">Status laden</button><button class="btn" id="adminDailyRunBtn" type="button">Cron jetzt starten</button><button class="btn" id="adminDailyConfigBtn" type="button">Konfiguration laden</button></div><div class="upload-status" id="adminDailyStatusBox" style="margin-top:10px">Noch kein Tages-Push-Status geladen.</div><div class="push-test-controls" style="margin-top:10px"><label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="adminDailyAutomatic" checked> Automatische Auswahl</label></div><div class="push-test-controls"><input class="field" id="adminDailyDuaId" placeholder="Duʿāʾ-ID (leer = automatisch)" aria-label="Duʿāʾ-ID"><input class="field" id="adminDailyRecId" placeholder="Beitrags-ID (leer = automatisch)" aria-label="Beitrags-ID"><input class="field" id="adminDailyRecFile" placeholder="Beitrags-Datei optional" aria-label="Beitrags-Datei"></div><div class="push-test-controls"><textarea class="field" id="adminDailyDuaBody" rows="2" placeholder="Duʿāʾ-Push-Text"></textarea><textarea class="field" id="adminDailyRecBody" rows="2" placeholder="Empfehlungs-Push-Text"></textarea></div><div class="push-test-controls"><button class="btn" id="adminDailyPreviewDuaBtn" type="button">Vorschau Duʿāʾ</button><button class="btn" id="adminDailyPreviewRecBtn" type="button">Vorschau Empfehlung</button><button class="btn primary" id="adminDailySaveBtn" type="button">Konfiguration speichern</button></div><div class="upload-status" id="adminDailyPreviewBox" style="margin-top:8px;font-size:11px">Vorschau erscheint hier.</div><div class="section-head" style="margin-top:12px"><h3>Tages-Push Test</h3><span>Subscription-ID wie bei Gebets-Push</span></div><div class="push-test-controls"><select class="field" id="adminDailyTestKind" aria-label="Tages-Push Art"><option value="dua">Duʿāʾ des Tages</option><option value="recommendation">Heute empfohlen</option></select><button class="btn primary" id="adminDailyTestBtn" type="button">Test senden</button></div></div>
       </div>
@@ -1474,6 +1521,9 @@ function bindUi(){
   const visitorHealthRefreshBtn=document.getElementById("visitorHealthRefreshBtn");if(visitorHealthRefreshBtn)visitorHealthRefreshBtn.onclick=()=>refreshVisitorAppHealth();
   if(currentTab==="actions")refreshVisitorAppHealth({silent:true});
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
+  const postPushLogBtn=document.getElementById("adminPostPushLogBtn");if(postPushLogBtn)postPushLogBtn.onclick=loadAdminPostPushLog;
+  const postPushDetectBtn=document.getElementById("adminPostPushDetectSubBtn");if(postPushDetectBtn)postPushDetectBtn.onclick=detectAdminDeviceSubscription;
+  const postPushTestBtn=document.getElementById("adminPostPushTestBtn");if(postPushTestBtn)postPushTestBtn.onclick=sendAdminPostPushTest;
   const pushRegsBtn=document.getElementById("adminPushRegsBtn");if(pushRegsBtn)pushRegsBtn.onclick=loadAdminPushRegistrations;
   const pushRegsSelect=document.getElementById("adminPrayerSubscriptionSelect");if(pushRegsSelect)pushRegsSelect.onchange=()=>{const input=document.getElementById("adminPrayerSubscriptionInput");if(input&&pushRegsSelect.value)input.value=pushRegsSelect.value};
   const oneSignalPrayerBtn=document.getElementById("adminOneSignalPrayerTestBtn");if(oneSignalPrayerBtn)oneSignalPrayerBtn.onclick=sendAdminOneSignalPrayerTest;
@@ -1577,7 +1627,65 @@ function updateDraftPreview(){
   bindUi();
   updateTelegramPanelStatus();
 }
-function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
+function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.innerHTML=typeof text==="string"?esc(text):text}
+function setAdminPostPushTestStatus(html){const el=document.getElementById("adminPostPushTestStatus");if(el)el.innerHTML=html}
+function setAdminPostPushLogHtml(html){const el=document.getElementById("adminPostPushLogBox");if(el)el.innerHTML=html}
+function detectAdminDeviceSubscription(){
+  const sid=readLocalDeviceSubscriptionId();
+  const input=document.getElementById("adminPostPushSubscriptionInput");
+  const prayerInput=document.getElementById("adminPrayerSubscriptionInput");
+  if(sid){
+    if(input)input.value=sid;
+    if(prayerInput&&!prayerInput.value)prayerInput.value=sid;
+    setAdminPostPushTestStatus(`<strong style="color:#8fd7a8">Gerät-Subscription erkannt:</strong> ${esc(sid)}`);
+    toast("Subscription-ID erkannt");
+  }else{
+    setAdminPostPushTestStatus(`<strong style="color:#ff9f9f">Keine gültige Subscription-ID für dieses Gerät gefunden.</strong> Push in der Besucher-App neu aktivieren.`);
+    toast("Keine Subscription gefunden");
+  }
+}
+async function loadAdminPostPushLog(){
+  setAdminPostPushLogHtml("Lade Push-Log…");
+  try{
+    const data=await workerGetRequest("api/admin/push/log");
+    const log=data.log||{};
+    let html="<strong>Push-Log</strong><br>";
+    if(log.lastPostPush){
+      html+=`<br><strong>Letzter Beitrag-Push</strong><br>${formatOneSignalPushHtml(log.lastPostPush,"Beitrag-Push")}`;
+    }else html+=`<br><span style="color:#f0c674">Noch kein Beitrag-Push im Log.</span>`;
+    if(log.lastTestPush){
+      html+=`<br><br><strong>Letzter Test-Push</strong><br>${formatOneSignalPushHtml(log.lastTestPush,"Test-Push")}`;
+    }
+    if(Array.isArray(log.history)&&log.history.length){
+      html+=`<br><br><strong>Verlauf (${log.history.length})</strong><br>`;
+      log.history.slice(0,5).forEach(entry=>{
+        const when=entry.loggedAt?new Date(entry.loggedAt).toLocaleString("de-DE"):"";
+        html+=`<span style="font-size:10px">${esc(entry.kind||"?")} · ${esc(when)} · gesendet ${entry.sent?"ja":"nein"} · Empf. ${esc(String(entry.recipients??"?"))}${entry.reason&&!entry.sent?` · ${esc(entry.reason)}`:""}</span><br>`;
+      });
+    }
+    setAdminPostPushLogHtml(html);
+  }catch(e){
+    setAdminPostPushLogHtml(`<span style="color:#f0c674">Push-Log konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
+  }
+}
+async function sendAdminPostPushTest(){
+  const subscriptionId=(document.getElementById("adminPostPushSubscriptionInput")?.value||readLocalDeviceSubscriptionId()||"").trim();
+  if(!subscriptionId){
+    setAdminPostPushTestStatus(`<strong style="color:#ff9f9f">Keine gültige Subscription-ID für dieses Gerät gefunden. Push neu aktivieren.</strong>`);
+    return;
+  }
+  const postTitle=frontmatterValue(draftMarkdown,"title")||"Test-Beitrag";
+  const postId=frontmatterValue(draftMarkdown,"id")||String(draftFilename||"").replace(/\.md$/i,"")||"test-post-push";
+  setAdminPostPushTestStatus("Sende Beitrag-Push-Test an OneSignal…");
+  try{
+    const result=await workerPostRequest("api/admin/push/test",{subscriptionId,postTitle,postId,filename:draftFilename||"test-post.md"});
+    setAdminPostPushTestStatus(formatOneSignalPushHtml(result,result.sent?"OneSignal-Test erfolgreich":"OneSignal-Test fehlgeschlagen"));
+    addAdminLog("Beitrag-Push","Test gesendet",result.sent?`${result.oneSignal?.recipients??"?"} Empfänger`:(result.reason||"fehlgeschlagen"));
+    toast(result.sent?"Beitrag-Test-Push gesendet":"Beitrag-Test-Push fehlgeschlagen");
+  }catch(e){
+    setAdminPostPushTestStatus(`<span style="color:#f0c674"><strong>Test fehlgeschlagen</strong><br>${esc(e.message||e)}</span>`);
+  }
+}
 async function loadAdminPushRegistrations(){
   if(!hasSupabase()){setAdminPushTestStatus("Supabase nicht konfiguriert.");return}
   const select=document.getElementById("adminPrayerSubscriptionSelect");
@@ -1690,18 +1798,26 @@ async function triggerAdminPrayerScheduler(){
   }
 }
 async function sendAdminOneSignalPrayerTest(){
-  const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||"").trim();
+  const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||readLocalDeviceSubscriptionId()||"").trim();
   const prayer=document.getElementById("adminPushPrayerSelect")?.value||"maghrib";
   const mode=document.getElementById("adminPushModeSelect")?.value||"entry";
-  if(!subscriptionId){setAdminPushTestStatus("Bitte Subscription-ID einfügen oder Registrierungen laden.");return}
+  if(!subscriptionId){setAdminPushTestStatus("Bitte Subscription-ID einfügen, Registrierungen laden oder Gerät-Subscription erkennen.");return}
   setAdminPushTestStatus("Sende OneSignal-Test…");
   try{
     const result=await workerPostRequest("api/admin/prayer/test",{subscriptionId,prayer,mode,advanceMinutes:15});
-    const recipients=result.oneSignal?.parsed?.recipients ?? result.oneSignal?.recipients ?? "?";
-    setAdminPushTestStatus(`OneSignal-Test gesendet: ${result.sent?"ja":"nein"} · Gebet ${prayer} · Modus ${mode} · Empfänger ${recipients} · ${result.reason||result.oneSignal?.text||"ok"}`);
+    const os=result.oneSignal||{};
+    const formatted=formatOneSignalPushHtml({
+      sent:result.sent,
+      oneSignal:os,
+      subscriptionId,
+      target:`prayer-${prayer}-${mode}`,
+      sentAt:new Date().toISOString(),
+      reason:result.reason||""
+    },result.sent?"OneSignal Gebets-Test erfolgreich":"OneSignal Gebets-Test fehlgeschlagen");
+    setAdminPushTestStatus(formatted);
     addAdminLog("Gebets-Push","OneSignal-Test gesendet",`${prayer} / ${mode}`);
   }catch(e){
-    setAdminPushTestStatus(`OneSignal-Test fehlgeschlagen: ${e.message||e}`);
+    setAdminPushTestStatus(`<span style="color:#f0c674">OneSignal-Test fehlgeschlagen: ${esc(e.message||e)}</span>`);
   }
 }
 let adminDailyConfigSha="";
