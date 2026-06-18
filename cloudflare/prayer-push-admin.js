@@ -83,7 +83,11 @@ export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
   try {
     const file = await githubGet(env, owner, repo, statusPath, branch);
     if (!file?.content) return { ok: false, error: "Status-Datei fehlt" };
-    return { ok: true, status: JSON.parse(base64ToUtf8(file.content)), source: "github" };
+    const status = JSON.parse(base64ToUtf8(file.content));
+    if (!status?.updatedAt) {
+      return { ok: false, error: "Noch kein Scheduler-Lauf gespeichert", status: null };
+    }
+    return { ok: true, status, source: "github" };
   } catch (err) {
     return { ok: false, error: err.message || String(err) };
   }

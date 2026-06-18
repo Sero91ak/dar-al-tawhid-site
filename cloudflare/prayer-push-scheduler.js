@@ -10,8 +10,8 @@ const DEFAULT_SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 
 const DEFAULT_PRAYER_ADVANCE_MINUTES = 15;
-const SCHEDULE_LOOKAHEAD_MINUTES = 40;
-const SCHEDULE_GRACE_MINUTES = 6;
+const SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60;
+const SCHEDULE_GRACE_MINUTES = 15;
 const KV_STATUS_KEY = "prayer:status";
 const KV_USERS_KEY = "prayer:users";
 const KV_ERROR_LOG_KEY = "prayer:errorlog";
@@ -862,7 +862,7 @@ async function sendOneSignalToSubscriptions(env, group, prayer, sendAfter, mode,
     idempotency_key: idempotencyKey
   }, env);
 
-  if (sendAfter.getTime() - Date.now() > 60 * 1000) {
+  if (sendAfter.getTime() - Date.now() > 30 * 1000) {
     body.send_after = sendAfter.toISOString();
   }
 
