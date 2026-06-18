@@ -71,9 +71,9 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
 }
 
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
-  const kvStatus = await readPrayerPushStatusFromKv(env);
-  if (kvStatus?.updatedAt) {
-    return { ok: true, status: kvStatus, source: "kv" };
+  const cached = readPrayerPushStatusFromKv();
+  if (cached?.updatedAt) {
+    return { ok: true, status: cached, source: "worker" };
   }
 
   const owner = env.GITHUB_OWNER || "Sero91ak";
