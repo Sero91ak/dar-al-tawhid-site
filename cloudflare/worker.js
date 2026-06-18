@@ -42,8 +42,6 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
 
