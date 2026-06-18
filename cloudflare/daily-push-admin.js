@@ -45,11 +45,16 @@ export async function saveDailyPushConfig(env, config, sha, githubPut, utf8ToBas
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
   const path = env.DAILY_PUSH_CONFIG_PATH || DEFAULT_DAILY_CONFIG_PATH;
-  await githubPut(env, owner, repo, path, branch, {
-    message: `Admin: tägliche Push-Konfiguration ${new Date().toISOString()}`,
-    content: utf8ToBase64(JSON.stringify(config, null, 2) + "\n"),
-    sha: sha || undefined
-  });
+  await githubPut(
+    env,
+    owner,
+    repo,
+    path,
+    JSON.stringify(config, null, 2) + "\n",
+    `Admin: tägliche Push-Konfiguration ${new Date().toISOString()}`,
+    branch,
+    sha || undefined
+  );
   return { ok: true };
 }
 

@@ -230,17 +230,22 @@ async function regenerateDailyContent(env, deps, dateKey, tz) {
     recommendation,
     dua
   };
-  if (deps?.githubPut && deps?.utf8ToBase64) {
+  if (deps?.githubPut) {
     try {
       const owner = env.GITHUB_OWNER || "Sero91ak";
       const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
       const branch = env.GITHUB_BRANCH || "main";
       const existing = deps.githubGet ? await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch) : null;
-      await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, branch, {
-        message: `Daily content ${dateKey}`,
-        content: deps.utf8ToBase64(JSON.stringify(data, null, 2) + "\n"),
-        sha: existing?.sha
-      });
+      await deps.githubPut(
+        env,
+        owner,
+        repo,
+        DAILY_CONTENT_PATH,
+        `${JSON.stringify(data, null, 2)}\n`,
+        `Daily content ${dateKey}`,
+        branch,
+        existing?.sha
+      );
     } catch (e) {
       data.writeError = e.message || String(e);
     }
@@ -352,18 +357,23 @@ export function readDailyPushStatusFromKv() {
 }
 
 async function writeStatusGithub(env, status, deps) {
-  if (!deps?.githubPut || !deps?.utf8ToBase64) return;
+  if (!deps?.githubPut) return;
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
   const path = env.DAILY_PUSH_STATUS_PATH || DEFAULT_DAILY_STATUS_PATH;
   try {
     const existing = await deps.githubGet(env, owner, repo, path, branch);
-    await deps.githubPut(env, owner, repo, path, branch, {
-      message: `Daily push ${status.updatedAt}`,
-      content: deps.utf8ToBase64(JSON.stringify(status, null, 2)),
-      sha: existing?.sha
-    });
+    await deps.githubPut(
+      env,
+      owner,
+      repo,
+      path,
+      `${JSON.stringify(status, null, 2)}\n`,
+      `Daily push ${status.updatedAt}`,
+      branch,
+      existing?.sha
+    );
   } catch (e) {
     status.githubWriteError = e.message || String(e);
   }
