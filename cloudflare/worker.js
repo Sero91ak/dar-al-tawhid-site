@@ -17,6 +17,7 @@ import {
   saveDailyPushConfig,
   ensureDailyPushSchedulerFresh,
   sendDailyTestPush,
+  sendWelcomePush,
   buildDailyPushPreview
 } from "./daily-push-admin.js";
 
@@ -96,6 +97,22 @@ export default {
         const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
         if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
         const result = await sendPrayerTestPush(env, input);
+        return json({ ok: Boolean(result.sent), ...result }, cors, result.sent ? 200 : 503);
+      }
+
+      if (url.pathname === "/api/push/welcome" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+        if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
+        const result = await sendWelcomePush(env, input);
+        return json({ ok: Boolean(result.sent), ...result }, cors, result.sent ? 200 : 503);
+      }
+
+      if (url.pathname === "/api/daily/test" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+        if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
+        const result = await sendDailyTestPush(env, input);
         return json({ ok: Boolean(result.sent), ...result }, cors, result.sent ? 200 : 503);
       }
 

@@ -5021,7 +5021,7 @@ OneSignalDeferred.push(async function(OneSignal){
   window.OneSignal=OneSignal;
   window.DAR_ONE_SIGNAL_READY=true;
   try{await ensurePushUserLogin(OneSignal)}catch(e){}
-  try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}catch(e){}
+  try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationAndWelcome().catch(()=>{});maintainPushHealth({silent:true}).catch(()=>{})})}catch(e){}
   try{if(getPrayerSettings().reminder)await syncPrayerPushTags()}catch(e){}
   try{startPushHealthMonitor()}catch(e){}
   try{updatePushFloatButton()}catch(e){}
@@ -5799,7 +5799,7 @@ function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const a
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
-async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;const OS=await waitForOneSignalReady(15000);if(OS){await ensurePushUserLogin(OS);if(!OS.User?.PushSubscription?.optedIn)await waitForPushOptIn(OS,20000);await ensurePostPushTags(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});await savePushRegistration(getPrayerSettings(),OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){clearPrayerReminders();scheduleLocalPrayerReminders({silent:true});const synced=await syncPrayerPushTags(s,{retries:5});if(!synced)ok=false}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
+async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;const OS=await waitForOneSignalReady(15000);if(OS){await syncPushRegistrationAndWelcome(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){clearPrayerReminders();scheduleLocalPrayerReminders({silent:true});const synced=await syncPrayerPushTags(s,{retries:5});if(!synced)ok=false}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
 function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(()=>{maintainPushHealth({silent:true}).catch(()=>{})},PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")maintainPushHealth({silent:true}).catch(()=>{})});window.addEventListener("online",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}
 let prayerCountdownTimer=null;
 let prayerReminderTimeouts=[];
@@ -5903,6 +5903,30 @@ function nextPlannedPrayerNotification(settings=getPrayerSettings()){
   return candidates[0]||null;
 }
 const PRAYER_PUSH_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev";
+const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
+async function sendWelcomePushIfNeeded(OS){
+  try{
+    if(localStorage.getItem(WELCOME_PUSH_SENT_KEY)==="1")return false;
+    const os=OS||await waitForOneSignalReady(10000);
+    const subId=String(os?.User?.PushSubscription?.id||"").trim();
+    if(!subId||!os?.User?.PushSubscription?.optedIn)return false;
+    const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:subId})});
+    const data=await r.json().catch(()=>({}));
+    if(r.ok&&data.sent){localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1");return true}
+  }catch(e){console.warn("Willkommens-Push:",e)}
+  return false;
+}
+async function syncPushRegistrationAndWelcome(OS){
+  const os=OS||await waitForOneSignalReady(12000);
+  if(!os)return false;
+  await ensurePushUserLogin(os);
+  if(!os.User?.PushSubscription?.optedIn)await waitForPushOptIn(os,20000);
+  await ensurePostPushTags(os);
+  await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
+  const saved=await savePushRegistration(getPrayerSettings(),os);
+  await sendWelcomePushIfNeeded(os);
+  return saved;
+}
 function renderPrayerPushHints(settings=getPrayerSettings()){
   const permission=getNotificationPermission();
   const reminder=Boolean(settings.reminder);
@@ -7520,7 +7544,7 @@ window.addEventListener("load",()=>{
 });
 </script>
 <script>
-(function(){const pushBtn=document.getElementById("pushFloat");if(!pushBtn)return;async function waitForOneSignal(timeoutMs){const start=Date.now();while(Date.now()-start<(timeoutMs||10000)){try{if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY)return window.OneSignal}catch(e){}await new Promise(resolve=>setTimeout(resolve,180))}return window.OneSignal||null}pushBtn.addEventListener("click",async function(){const permission=typeof getNotificationPermission==="function"?getNotificationPermission():"default";if(permission==="denied"){alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");return}const OneSignal=await waitForOneSignal();try{if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.isPushSupported==="function"&&!OneSignal.Notifications.isPushSupported()){alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");return}if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&typeof OneSignal.User.PushSubscription.optIn==="function"){await OneSignal.User.PushSubscription.optIn()}else if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.requestPermission==="function"){await OneSignal.Notifications.requestPermission()}else if(typeof requestNotificationPermission==="function"){await requestNotificationPermission()}setTimeout(async function(){try{if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&OneSignal.User.PushSubscription.optedIn){if(typeof ensurePostPushTags==="function")await ensurePostPushTags(OneSignal);if(typeof syncPrayerPushTags==="function"&&getPrayerSettings().reminder){await syncPrayerPushTags(undefined,{retries:5})}if(typeof maintainPushHealth==="function")await maintainPushHealth({silent:true});if(typeof updatePushFloatButton==="function")updatePushFloatButton();alert("✓ Push-Benachrichtigungen sind aktiv – für Beiträge und Gebetszeiten.")}}catch(e){}},350)}catch(e){console.error(e);alert("Push konnte nicht aktiviert werden. Bitte prüfe Browser-Berechtigung und OneSignal-Service-Worker.")}})})();
+(function(){const pushBtn=document.getElementById("pushFloat");if(!pushBtn)return;async function waitForOneSignal(timeoutMs){const start=Date.now();while(Date.now()-start<(timeoutMs||10000)){try{if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY)return window.OneSignal}catch(e){}await new Promise(resolve=>setTimeout(resolve,180))}return window.OneSignal||null}pushBtn.addEventListener("click",async function(){const permission=typeof getNotificationPermission==="function"?getNotificationPermission():"default";if(permission==="denied"){alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");return}const OneSignal=await waitForOneSignal();try{if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.isPushSupported==="function"&&!OneSignal.Notifications.isPushSupported()){alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");return}if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&typeof OneSignal.User.PushSubscription.optIn==="function"){await OneSignal.User.PushSubscription.optIn()}else if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.requestPermission==="function"){await OneSignal.Notifications.requestPermission()}else if(typeof requestNotificationPermission==="function"){await requestNotificationPermission()}await new Promise(r=>setTimeout(r,400));if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&OneSignal.User.PushSubscription.optedIn){const welcomed=typeof syncPushRegistrationAndWelcome==="function"?await syncPushRegistrationAndWelcome(OneSignal):false;if(getPrayerSettings().reminder&&typeof syncPrayerPushTags==="function"){await syncPrayerPushTags(undefined,{retries:5})}if(typeof maintainPushHealth==="function")await maintainPushHealth({silent:true});if(typeof updatePushFloatButton==="function")updatePushFloatButton();alert(welcomed?"✓ Push aktiv – Willkommens-Nachricht wurde gesendet.":"✓ Push-Benachrichtigungen sind aktiv – für Beiträge, Tagesinhalt und Gebetszeiten.")}}catch(e){console.error(e);alert("Push konnte nicht aktiviert werden. Bitte prüfe Browser-Berechtigung und OneSignal-Service-Worker.")}})})();
 </script>
 <script>
 if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/service-worker.js",{updateViaCache:"none"}).catch(function(e){console.warn("Service Worker konnte nicht registriert werden:",e)})})}

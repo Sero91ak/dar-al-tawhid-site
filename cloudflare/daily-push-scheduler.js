@@ -11,7 +11,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const DUA_HOUR = 9;
 const REC_HOUR = 12;
-const SEND_WINDOW_MINUTES = 5;
+const SEND_WINDOW_MINUTES = 15;
 
 let lastDailyStatusReport = null;
 
@@ -236,11 +236,16 @@ async function regenerateDailyContent(env, deps, dateKey, tz) {
       const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
       const branch = env.GITHUB_BRANCH || "main";
       const existing = deps.githubGet ? await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch) : null;
-      await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, branch, {
-        message: `Daily content ${dateKey}`,
-        content: deps.utf8ToBase64(JSON.stringify(data, null, 2) + "\n"),
-        sha: existing?.sha
-      });
+      await deps.githubPut(
+        env,
+        owner,
+        repo,
+        DAILY_CONTENT_PATH,
+        JSON.stringify(data, null, 2) + "\n",
+        `Daily content ${dateKey}`,
+        branch,
+        existing?.sha
+      );
     } catch (e) {
       data.writeError = e.message || String(e);
     }
@@ -359,11 +364,16 @@ async function writeStatusGithub(env, status, deps) {
   const path = env.DAILY_PUSH_STATUS_PATH || DEFAULT_DAILY_STATUS_PATH;
   try {
     const existing = await deps.githubGet(env, owner, repo, path, branch);
-    await deps.githubPut(env, owner, repo, path, branch, {
-      message: `Daily push ${status.updatedAt}`,
-      content: deps.utf8ToBase64(JSON.stringify(status, null, 2)),
-      sha: existing?.sha
-    });
+    await deps.githubPut(
+      env,
+      owner,
+      repo,
+      path,
+      JSON.stringify(status, null, 2) + "\n",
+      `Daily push ${status.updatedAt}`,
+      branch,
+      existing?.sha
+    );
   } catch (e) {
     status.githubWriteError = e.message || String(e);
   }

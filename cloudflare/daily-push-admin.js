@@ -45,11 +45,16 @@ export async function saveDailyPushConfig(env, config, sha, githubPut, utf8ToBas
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
   const path = env.DAILY_PUSH_CONFIG_PATH || DEFAULT_DAILY_CONFIG_PATH;
-  await githubPut(env, owner, repo, path, branch, {
-    message: `Admin: tägliche Push-Konfiguration ${new Date().toISOString()}`,
-    content: utf8ToBase64(JSON.stringify(config, null, 2) + "\n"),
-    sha: sha || undefined
-  });
+  await githubPut(
+    env,
+    owner,
+    repo,
+    path,
+    JSON.stringify(config, null, 2) + "\n",
+    `Admin: tägliche Push-Konfiguration ${new Date().toISOString()}`,
+    branch,
+    sha || undefined
+  );
   return { ok: true };
 }
 
@@ -92,6 +97,36 @@ async function postOneSignal(env, payload) {
   let parsed = {};
   try { parsed = text ? JSON.parse(text) : {}; } catch (e) {}
   return { text, parsed, recipients: parsed.recipients ?? parsed.id ?? null };
+}
+
+export async function sendWelcomePush(env, input = {}) {
+  const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+  if (!subscriptionId) return { ok: true, sent: false, reason: "Subscription-ID fehlt" };
+
+  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+  const appId = String(env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e").trim();
+  const title = "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
+  const body = "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.";
+  const url = `${site}/#home`;
+
+  const payload = {
+    app_id: appId,
+    target_channel: "push",
+    include_subscription_ids: [subscriptionId],
+    headings: { de: title, en: title },
+    contents: { de: body, en: body },
+    url,
+    data: { type: "welcome", source: "dar-welcome-push" },
+    chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
+    chrome_web_badge: `${site}/notification-badge-96.png?v=2`
+  };
+
+  try {
+    const result = await postOneSignal(env, payload);
+    return { ok: true, sent: true, subscriptionId, oneSignal: result };
+  } catch (err) {
+    return { ok: true, sent: false, subscriptionId, reason: err.message || String(err) };
+  }
 }
 
 export async function sendDailyTestPush(env, input = {}) {
