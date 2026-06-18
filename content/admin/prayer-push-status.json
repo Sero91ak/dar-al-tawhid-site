@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-18T10:45:28.259Z",
+  "updatedAt": "2026-06-18T10:50:28.711Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-18T10:45:28.259Z",
+  "lastCronRun": "2026-06-18T10:50:28.711Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-18T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-18T10:30:22.256Z",
-  "windowEnd": "2026-06-19T12:45:22.256Z",
+  "windowStart": "2026-06-18T10:35:22.256Z",
+  "windowEnd": "2026-06-19T12:50:22.256Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 14,
@@ -867,6 +867,12 @@
       "lastSyncedAt": "2026-06-18T10:44:28.577+00:00"
     },
     {
+      "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-18T10:48:10.396+00:00"
+    },
+    {
       "subscriptionId": "f7ff6759-35cb-4850-9e26-b62c80eae715",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -919,12 +925,6 @@
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-06-18T01:38:08.193+00:00"
-    },
-    {
-      "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-18T10:08:21.452+00:00"
     },
     {
       "subscriptionId": "bdd836d7-d282-4369-ac2a-eaf97c4ccc20",
