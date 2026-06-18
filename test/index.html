@@ -4959,6 +4959,20 @@ body.image-editor-mode .image-editor-guide.is-active{outline:2px dashed var(--ed
 body.image-editor-mode .ie-power-preview{margin-bottom:10px}
 body.image-editor-mode .image-editor-touch-hint{margin:10px 0 2px;padding:7px 9px;border:1px solid var(--editor-border);border-radius:11px;background:var(--editor-card-bg);font-size:10.5px;line-height:1.35}
 body.image-editor-mode .ie-power-sheet{margin-top:12px}
+
+/* Dezente, edle Trennung der Editor-Bereiche (Test) */
+body.image-editor-mode .ie-power-block-row{gap:8px;padding-bottom:12px;margin-bottom:2px;border-bottom:1px solid rgba(239,215,142,.14)}
+body.image-editor-mode .ie-power-block-row button{min-height:40px;padding:8px 6px;font-size:10.5px;border-radius:13px;font-weight:900;background:var(--editor-card-bg);box-shadow:none}
+body.image-editor-mode .ie-power-block-row button.active{background:var(--editor-active-bg);border-color:var(--editor-active-border);box-shadow:0 0 0 1px var(--editor-active-ring)}
+body.image-editor-mode .image-editor-touch-hint{margin:12px 0 12px;padding:9px 11px;border:1px solid rgba(239,215,142,.16);border-radius:13px;background:var(--editor-card-bg);color:var(--editor-muted);font-weight:850;text-align:center}
+body.image-editor-mode .ie-power-sheet{margin-top:14px;border:1px solid var(--editor-border);border-radius:18px;overflow:hidden;box-shadow:var(--editor-shadow)}
+body.image-editor-mode .ie-power-sheet-handle{padding:9px 0 5px}
+body.image-editor-mode .ie-power-sheet-tabs{padding:4px 10px 9px;gap:7px;border-bottom:1px solid rgba(239,215,142,.12)}
+body.image-editor-mode .ie-power-sheet-tabs button{min-height:34px;padding:7px 13px;font-size:10.5px;border-radius:999px}
+body.image-editor-mode .ie-power-sheet-body{padding-top:11px}
+html[data-theme="light"] body.image-editor-mode .ie-power-block-row{border-bottom-color:rgba(155,122,60,.20)}
+html[data-theme="light"] body.image-editor-mode .ie-power-sheet-tabs{border-bottom-color:rgba(155,122,60,.18)}
+html[data-theme="soft"] body.image-editor-mode .ie-power-block-row{border-bottom-color:rgba(116,76,98,.20)}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
