@@ -45,11 +45,12 @@ export default {
       }
 
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
+      const pushPaths = new Set(["/api/admin/push/retry"]);
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
       const schedulePaths = new Set(["/schedule", "/api/admin/schedule"]);
       const schedulerPaths = new Set(["/run-scheduler", "/api/admin/run-scheduler"]);
 
-      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...pushPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -66,6 +67,10 @@ export default {
         const result = await publishPostFromMarkdown(env, input);
         result.push = await sendNewPostPush(env, result, input.markdown);
         return json(result, cors);
+      }
+
+      if (pushPaths.has(url.pathname)) {
+        return json(await retryPostPush(env, input), cors);
       }
 
       if (newsPaths.has(url.pathname)) {
@@ -242,6 +247,41 @@ async function sendNewPostPush(env, result, markdown) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) return { ok: false, sent: false, status: res.status, reason: data.errors || data.message || "OneSignal Fehler" };
   return { ok: true, sent: true, id: data.id || "", url };
+}
+
+async function verifyPostLivePublic(env, filename) {
+  const site = siteOrigin(env);
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const bust = Date.now();
+  try {
+    const indexRes = await fetch(`${site}/${postsDir}/posts-index.json?v=${bust}`, { cache: "no-store" });
+    if (!indexRes.ok) return { ok: false, reason: `Index nicht erreichbar (HTTP ${indexRes.status})` };
+    const indexData = await indexRes.json();
+    const files = listPostFiles(indexData.files || []);
+    if (!files.some((file) => file.name === filename)) return { ok: false, reason: "Beitrag nicht im öffentlichen Index" };
+    const postRes = await fetch(`${site}/${postsDir}/${filename}?v=${bust}`, { cache: "no-store" });
+    if (!postRes.ok) return { ok: false, reason: `Beitrag-Datei nicht erreichbar (HTTP ${postRes.status})` };
+    return { ok: true, reason: "" };
+  } catch (error) {
+    return { ok: false, reason: error.message || String(error) };
+  }
+}
+
+async function retryPostPush(env, input) {
+  const filename = sanitizeFilename(String(input.filename || "").trim());
+  const markdown = String(input.markdown || "").trim();
+  if (!filename) throw httpError("filename fehlt", 400);
+  const liveCheck = await verifyPostLivePublic(env, filename);
+  const result = {
+    filename,
+    postId: String(input.postId || frontmatterValue(markdown, "id") || filename.replace(/\.md$/i, "")).trim(),
+    title: String(input.postTitle || frontmatterValue(markdown, "title")).replace(/^📖\s*/, "").trim() || "Neuer Beitrag"
+  };
+  if (!liveCheck.ok) {
+    return { ok: true, filename, liveCheck, push: { sent: false, reason: liveCheck.reason || "Beitrag noch nicht live erreichbar" } };
+  }
+  const push = await sendNewPostPush(env, result, markdown);
+  return { ok: true, filename, postId: result.postId, liveCheck, push };
 }
 
 function siteOrigin(env) {
