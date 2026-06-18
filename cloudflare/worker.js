@@ -25,6 +25,7 @@ const DEFAULT_REPO = "dar-al-tawhid-site";
 const DEFAULT_BRANCH = "main";
 // Deployed via GitHub Actions (.github/workflows/deploy-admin-publisher.yml)
 const DEFAULT_POSTS_DIR = "content/posts";
+const DEFAULT_STAGING_POSTS_DIR = "content/staging/posts";
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
@@ -100,6 +101,7 @@ export default {
       }
 
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
+      const stagingPaths = new Set(["/api/admin/staging/publish"]);
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
       const schedulePaths = new Set(["/schedule", "/api/admin/schedule"]);
       const schedulerPaths = new Set(["/run-scheduler", "/api/admin/run-scheduler"]);
@@ -127,7 +129,7 @@ export default {
         "/api/admin/daily/preview"
       ]);
 
-      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -239,6 +241,10 @@ export default {
         return json(await publishPostFromMarkdown(env, input, ctx), cors);
       }
 
+      if (stagingPaths.has(url.pathname)) {
+        return json(await publishPostFromMarkdown(env, input, ctx, { staging: true }), cors);
+      }
+
       if (newsPaths.has(url.pathname)) {
         return json(await publishNewsUpdate(env, input), cors);
       }
@@ -290,7 +296,7 @@ function listPostFiles(files) {
   return (Array.isArray(files) ? files : []).filter((file) => file && (file.name || typeof file === "string"));
 }
 
-async function publishPostFromMarkdown(env, input, ctx) {
+async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   const markdownRaw = String(input.markdown || "").trim();
   let filename = String(input.filename || "").trim();
 
@@ -299,7 +305,8 @@ async function publishPostFromMarkdown(env, input, ctx) {
   const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
-  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const staging = Boolean(options.staging || input.staging);
+  const postsDir = trimSlashes(staging ? (env.STAGING_POSTS_DIR || DEFAULT_STAGING_POSTS_DIR) : (env.POSTS_DIR || DEFAULT_POSTS_DIR));
   const indexPath = `${postsDir}/posts-index.json`;
 
   const indexFile = await githubGet(env, owner, repo, indexPath, branch);
@@ -351,6 +358,23 @@ async function publishPostFromMarkdown(env, input, ctx) {
   const postId = frontmatterValue(markdown, "id");
   const publishedAt = new Date().toISOString();
   const githubSteps = { postCreated: true, indexUpdated: true };
+  if (staging) {
+    return {
+      ok: true,
+      staging: true,
+      filename,
+      number: nextNumber,
+      postCount: nextFiles.length,
+      postPath,
+      indexPath,
+      commitSha: updatedIndex.commit?.sha || created.commit?.sha || "",
+      postId,
+      publishedAt,
+      previewUrl: `${siteOrigin(env)}/?env=staging&refresh=${Date.now()}#post/${encodeURIComponent(postId || filename.replace(/\.md$/i, ""))}`,
+      push: { sent: false, skipped: true, staging: true, reason: "Staging sendet keine Besucher-Pushs." },
+      telegram: { sent: false, skipped: true, staging: true }
+    };
+  }
   const liveCheck = await verifyPostLiveAvailability(
     env,
     { filename, postId, postPath, githubSteps },

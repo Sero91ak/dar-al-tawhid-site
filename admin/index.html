@@ -467,6 +467,8 @@ async function fetchDashboard(){
 function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":t==="install"?"Installation":"Seite"}
 function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
 function contentUrl(row){if(row.content_type==="post")return SITE_ORIGIN+"/#post/"+encodeURIComponent(row.content_id);if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);return SITE_ORIGIN}
+function stagingAppUrl(route="home",value=""){const hash=value?`#${route}/${encodeURIComponent(value)}`:`#${route}`;return `${SITE_ORIGIN}/?env=staging&refresh=${Date.now()}${hash}`}
+function openStagingPreview(postId=""){window.open(stagingAppUrl(postId?"post":"home",postId),"_blank","noopener")}
 function score(row){return Number(row.views||0)+Number(row.shares||0)*4+Number(row.saves||0)*3}
 function engagement(row){const v=Number(row.views||0);return v?Math.round(((Number(row.shares||0)+Number(row.saves||0))/v)*100):0}
 function countBy(rows,fn){return (rows||[]).reduce((acc,row)=>{const key=fn(row);acc[key]=(acc[key]||0)+1;return acc},{})}
@@ -1145,8 +1147,8 @@ function renderUsers(ctx){
   </section>`;
 }
 function workflowSteps(active="draft"){
-  const order=["draft","review","ready","published","disabled"];
-  const labels={draft:["Entwurf","Vorbereitet, aber nicht sichtbar."],review:["In Prüfung","Quellen, Darstellung und Links prüfen."],ready:["Bereit","Kann bewusst veröffentlicht werden."],published:["Veröffentlicht","Inhalt ist live sichtbar."],disabled:["Zurückgezogen","Gespeichert, aber nicht sichtbar."]};
+  const order=["draft","staging","review","ready","published","disabled"];
+  const labels={draft:["Entwurf","Nur lokal im Admin."],staging:["Test-App","Private Vorschau, nicht öffentlich live."],review:["Prüfung bestanden","Quellen, Darstellung und Links geprüft."],ready:["Bereit","Kann bewusst live veröffentlicht werden."],published:["Live","Inhalt ist in der Besucher-App sichtbar."],disabled:["Zurückgezogen","Gespeichert, aber nicht sichtbar."]};
   const activeIndex=Math.max(0,order.indexOf(active));
   return `<div class="workflow-grid">${order.map((key,i)=>`<div class="workflow-step ${i<=activeIndex?"ready":""}"><b>${esc(labels[key][0])}</b><small>${esc(labels[key][1])}</small></div>`).join("")}</div>`;
 }
@@ -1186,7 +1188,9 @@ function renderDraftPreview(){
     <div class="preview-tools">
       <button class="btn primary" id="refreshPreviewBtn" type="button">Vorschau öffnen</button>
       <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
-      <button class="btn" id="checkDraftBtn" type="button">Änderungen prüfen</button>
+      <button class="btn" id="publishStagingBtn" type="button">In Test-App anzeigen</button>
+      <button class="btn" id="openStagingPreviewBtn" type="button">Test-Vorschau öffnen</button>
+      <button class="btn" id="checkDraftBtn" type="button">Prüfung bestanden</button>
       <button class="btn primary" id="publishReadyBtn" type="button">Bereit markieren</button>
     </div>
     ${validationList(draftMarkdown)}
@@ -1233,7 +1237,7 @@ function renderActions(rows,installs=installTotals()){
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
           <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
-          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
+          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Live veröffentlichen"}</button>
           <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
           <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
@@ -1244,6 +1248,7 @@ function renderActions(rows,installs=installTotals()){
       <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Wege & Tests</span></div>
       <div class="quick-grid">
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
+        <a class="quick" href="${stagingAppUrl()}" target="_blank" rel="noopener"><b>Test-App öffnen</b><small>Private Vorschau mit Staging-Daten.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
         <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Worker-Cron alle 5&nbsp;Min · Nutzer aus Supabase · Push über OneSignal</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><button class="btn" id="adminPushRegsBtn" type="button">Registrierungen laden</button><select class="field" id="adminPrayerSubscriptionSelect" aria-label="Push-Empfänger auswählen" style="display:none"><option value="">Empfänger wählen…</option></select><input class="field" id="adminPrayerSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
@@ -1358,7 +1363,7 @@ function renderTechStatus(ctx){
     ["Browser Push",!!("Notification" in window),"Lokaler Admin-Test möglich"],
     ["PWA installierbar",!!("BeforeInstallPromptEvent" in window)||(typeof matchMedia==="function"&&matchMedia("(display-mode: standalone)").matches),"Browserabhängig"],
     ["posts-index Upload",true,"Wird serverseitig im Worker aktualisiert"],
-    ["Sicherheitsabfrage",true,"Online veröffentlichen fragt bewusst nach"]
+    ["Sicherheitsabfrage",true,"Live veröffentlichen fragt bewusst nach"]
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
 }
@@ -1373,7 +1378,9 @@ function bindUi(){
   const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
   const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
   const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
-  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Änderungen geprüft",draftFilename||"Entwurf");setUploadStatus("Prüfung markiert. Bitte Vorschau, Quelle, Titel, Kategorie und Links kontrollieren.");renderShell()};
+  const publishStagingBtn=document.getElementById("publishStagingBtn");if(publishStagingBtn)publishStagingBtn.onclick=publishPostToStaging;
+  const openStagingPreviewBtn=document.getElementById("openStagingPreviewBtn");if(openStagingPreviewBtn)openStagingPreviewBtn.onclick=()=>openStagingPreview(frontmatterValue(draftMarkdown,"id"));
+  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Prüfung bestanden",draftFilename||"Entwurf");setUploadStatus("Prüfung bestanden. Der Beitrag kann jetzt bewusst live veröffentlicht werden.");renderShell()};
   const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
@@ -1746,6 +1753,25 @@ async function prepareNextPostNumber(){
     addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",draftFilename);
   }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
+async function publishPostToStaging(){
+  draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
+  draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();
+  if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
+  try{
+    uploadBusy=true;
+    setUploadStatus("Sende Entwurf in die private Test-App … Besucher sehen das noch nicht.");
+    if(!draftFilename){const next=await resolveNextPostNumber();draftFilename=suggestFilename(draftMarkdown,next);const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename}
+    const result=await workerPostRequest("api/admin/staging/publish",{markdown:draftMarkdown,filename:draftFilename,staging:true});
+    const preview=result.previewUrl||stagingAppUrl("post",result.postId||frontmatterValue(draftMarkdown,"id"));
+    addAdminLog("Test-App","Entwurf in Test-App veröffentlicht",result.filename||draftFilename);
+    setUploadStatus(`<strong>In Test-App sichtbar.</strong><br>Status: Test · Push erlaubt: nein · Live erreichbar: nein<br><a href="${esc(preview)}" target="_blank" rel="noopener">Test-Vorschau öffnen</a>`);
+    window.open(preview,"_blank","noopener");
+  }catch(e){
+    setUploadStatus(`Test-App konnte nicht aktualisiert werden: ${esc(e.message||e)}`);
+  }finally{
+    uploadBusy=false;
+  }
+}
 async function uploadPostViaWorker(){
   if(uploadBusy)return;
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
@@ -1820,7 +1846,7 @@ async function uploadPostViaWorker(){
     setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Bitte Worker URL, Admin Worker Secret und Cloudflare Secrets prüfen.`);
   }finally{
     uploadBusy=false;
-    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}
+    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Live veröffentlichen"}
   }
 }
 async function renderDashboard({force=false}={}){
