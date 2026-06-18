@@ -14,3 +14,5 @@ SCHEDULE_PATH = "content/admin/planned-posts.json"
 # Secrets (einmalig setzen, bleiben am Worker gespeichert):
 #   wrangler secret put GITHUB_TOKEN
 #   wrangler secret put ADMIN_PUBLISH_SECRET
+#   wrangler secret put ONESIGNAL_API_KEY_NEW
+#   wrangler secret put ONESIGNAL_APP_ID   (optional, Standard ist gesetzt)

@@ -6,7 +6,7 @@ const DEFAULT_POSTS_DIR = "content/posts";
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
-const DEFAULT_ONESIGNAL_APP_ID = "477c3e7b-f51c-4b7a-826e-04d8e83ec1a4";
+const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 
 export default {
   async fetch(request, env) {
@@ -27,7 +27,7 @@ export default {
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
           hasAdminSecret: Boolean(env.ADMIN_PUBLISH_SECRET),
-          hasOneSignal: Boolean(env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY),
+          hasOneSignal: Boolean(oneSignalApiKey(env)),
           visitor,
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
@@ -209,8 +209,14 @@ async function checkVisitorSiteHealth(env) {
 }
 
 async function sendNewPostPush(env, result, markdown) {
-  const apiKey = String(env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "").trim();
-  if (!apiKey) return { ok: false, sent: false, reason: "OneSignal API Key fehlt" };
+  const apiKey = oneSignalApiKey(env);
+  if (!apiKey) {
+    return {
+      ok: false,
+      sent: false,
+      reason: "OneSignal API Key fehlt am Cloudflare Worker (Secret: ONESIGNAL_API_KEY_NEW)"
+    };
+  }
   const site = siteOrigin(env);
   const postId = result.postId || frontmatterValue(markdown, "id") || String(result.filename || "").replace(/\.md$/i, "");
   const title = result.title || frontmatterValue(markdown, "title").replace(/^📖\s*/, "").trim() || "Neuer Beitrag";
@@ -219,6 +225,7 @@ async function sendNewPostPush(env, result, markdown) {
   const payload = {
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
+    included_segments: ["DAR_PUSH"],
     headings: { en: "Neuer Beitrag online", de: "Neuer Beitrag online" },
     contents: { en: title, de: title },
     url,
@@ -236,17 +243,35 @@ async function sendNewPostPush(env, result, markdown) {
     firefox_icon: `${site}/notification-icon-192.png?v=2`,
     name: `admin-publish-${cacheVersion}`
   };
-  const res = await fetch("https://onesignal.com/api/v1/notifications", {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${apiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) return { ok: false, sent: false, status: res.status, reason: data.errors || data.message || "OneSignal Fehler" };
-  return { ok: true, sent: true, id: data.id || "", url };
+
+  let lastError = "OneSignal Fehler";
+  for (const authMode of ["Key", "Basic"]) {
+    const res = await fetch("https://api.onesignal.com/notifications", {
+      method: "POST",
+      headers: {
+        Authorization: `${authMode} ${apiKey}`,
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+    const text = await res.text();
+    let data = {};
+    try { data = text ? JSON.parse(text) : {}; } catch (error) {}
+    if (res.ok) {
+      return {
+        ok: true,
+        sent: true,
+        id: data.id || "",
+        recipients: data.recipients ?? null,
+        url,
+        response: text.slice(0, 400)
+      };
+    }
+    lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
+    if (res.status === 401 || res.status === 403) continue;
+  }
+
+  return { ok: false, sent: false, reason: lastError };
 }
 
 async function verifyPostLivePublic(env, filename) {
@@ -282,6 +307,13 @@ async function retryPostPush(env, input) {
   }
   const push = await sendNewPostPush(env, result, markdown);
   return { ok: true, filename, postId: result.postId, liveCheck, push };
+}
+
+function oneSignalApiKey(env) {
+  return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "")
+    .replace(/\s+/g, "")
+    .replace(/^(Key|Basic)/i, "")
+    .trim();
 }
 
 function siteOrigin(env) {
