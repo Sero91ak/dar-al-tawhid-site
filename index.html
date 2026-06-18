@@ -6163,7 +6163,7 @@ async function activatePrayerReminder(){
   scheduleLocalPrayerReminders({silent:true});
   const wasInactive=!s.reminder;
   const OS=await waitForOneSignalReady();
-  if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false})}
+  if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});await savePushRegistration(getPrayerSettings(),OS)}
   const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
   loadPrayerPushServerStatus().catch(()=>{});
   updatePrayerReminderButtons();
