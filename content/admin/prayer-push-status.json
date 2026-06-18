@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-18T11:40:28.138Z",
+  "updatedAt": "2026-06-18T11:45:27.759Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-18T11:40:28.138Z",
+  "lastCronRun": "2026-06-18T11:45:27.759Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-18T15:39:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-18T11:25:22.255Z",
-  "windowEnd": "2026-06-19T13:40:22.255Z",
+  "windowStart": "2026-06-18T11:30:22.255Z",
+  "windowEnd": "2026-06-19T13:45:22.255Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 14,
@@ -28,9 +28,9 @@
   "usersWithLocation": 14,
   "usersWithActivePush": 14,
   "locationGroups": 3,
-  "scheduled": 28,
-  "recipients": 149,
-  "skippedPast": 38,
+  "scheduled": 27,
+  "recipients": 148,
+  "skippedPast": 39,
   "skippedWindow": 48,
   "duplicates": 6,
   "errors": 0,
@@ -56,7 +56,7 @@
         "time": "13:33",
         "advance": {
           "status": "geplant",
-          "recipients": 15
+          "recipients": 14
         },
         "entry": {
           "status": "geplant",
@@ -132,7 +132,7 @@
       "time": "13:33",
       "advance": {
         "status": "geplant",
-        "recipients": 15
+        "recipients": 14
       },
       "entry": {
         "status": "geplant",
@@ -396,15 +396,6 @@
       "time": "13:33",
       "sendAfter": "2026-06-19T11:18:00.000Z",
       "recipients": 10,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:33",
-      "sendAfter": "2026-06-18T11:28:00.000Z",
-      "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
     {
@@ -718,6 +709,13 @@
       "mode": "advance",
       "sendAfter": "2026-06-18T01:20:00.000Z",
       "time": "03:25",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "dhuhr",
+      "mode": "advance",
+      "sendAfter": "2026-06-18T11:28:00.000Z",
+      "time": "13:33",
       "timeZone": "Europe/Berlin"
     }
   ],
