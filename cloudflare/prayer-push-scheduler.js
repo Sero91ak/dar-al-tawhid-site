@@ -4,6 +4,8 @@
  * Kein OneSignal-User-Scan (verursachte „Too many subrequests“).
  */
 
+import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
@@ -16,34 +18,6 @@ const SCHEDULE_GRACE_MINUTES = 15;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 
 let lastStatusReport = null;
-
-const PRAYER_NOTIFICATION_MESSAGES = {
-  default: [
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
-    "Nimm dir jetzt bewusst Zeit für dein Gebet.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
-  ],
-  fajr: [
-    "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.",
-    "Fajr ist eingetreten. Starte den Tag mit Gehorsam gegenüber Allah.",
-    "Der Tag beginnt mit einer großen Gelegenheit zum Gebet."
-  ],
-  asr: [
-    "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
-    "ʿAṣr ist eingetreten. Achte besonders auf dieses Gebet.",
-    "Halte am ʿAṣr-Gebet fest und bewahre deine Zeit."
-  ],
-  isha: [
-    "Schließe deinen Tag mit Gehorsam gegenüber Allah ab.",
-    "ʿIshāʾ ist eingetreten. Beende den Tag mit Gebet und Ruhe.",
-    "Nimm dir am Ende des Tages Zeit für dein Gebet."
-  ],
-  tahajjud: [
-    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
-    "Steh für Allah auf, auch wenn es nur wenige Rakʿāt sind.",
-    "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
-  ]
-};
 
 function oneSignalApiKey(env) {
   return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || "")
@@ -239,14 +213,6 @@ function groupRegistrations(rows, onlySubId = "") {
   return Array.from(map.values());
 }
 
-function pickMessage(prayer, sendAfter, group) {
-  const list = PRAYER_NOTIFICATION_MESSAGES[prayer.key] || PRAYER_NOTIFICATION_MESSAGES.default;
-  const seed = `${prayer.key}|${sendAfter.toISOString()}|${group.timeZone}|${group.lat.toFixed(3)}`;
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) h = (h + seed.charCodeAt(i)) % 9973;
-  return list[h % list.length];
-}
-
 function notifyTitle(prayer, mode, group) {
   if (prayer.key === "tahajjud") return mode === "advance" ? "Taḥajjud-Erinnerung" : "Taḥajjud-Erinnerung";
   const m = normAdvance(group.advanceMinutes);
@@ -256,17 +222,15 @@ function notifyTitle(prayer, mode, group) {
 function notifyCopy(prayer, mode, group) {
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
   const m = normAdvance(group.advanceMinutes);
-  const title = notifyTitle(prayer, mode, group);
   if (mode === "advance") {
-    const body = prayer.key === "tahajjud" ? "Taḥajjud-Erinnerung ist bald." : `In ${m} Min · ${timeLabel} Uhr.`;
+    const title = notifyTitle(prayer, mode, group);
+    const body = buildAdvancePushBody(prayer.key, m, timeLabel);
     return { headings: { de: title, en: title }, contents: { de: body, en: body } };
   }
+  const variant = pickPrayerEntryVariant(prayer.key, timeLabel);
   return {
-    headings: { de: title, en: title },
-    contents: {
-      de: prayer.key === "tahajjud" ? "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah." : "",
-      en: prayer.key === "tahajjud" ? "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah." : ""
-    }
+    headings: { de: variant.title, en: variant.title },
+    contents: { de: variant.body, en: variant.body }
   };
 }
 
@@ -312,11 +276,6 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   sentInRun.add(idKey);
 
   const copy = notifyCopy(prayer, mode, group);
-  if (mode === "entry") {
-    const msg = pickMessage(prayer, sendAfter, group);
-    copy.contents.de = msg;
-    copy.contents.en = msg;
-  }
 
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
