@@ -4712,8 +4712,8 @@ html[data-theme] .view{
 .image-editor-touch-wrap{position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;width:100%;max-width:min(100%,440px);margin:0 auto;line-height:0;overflow:hidden}
 .image-editor-touch-wrap.is-dragging,.image-editor-touch-wrap.is-pinch-active{touch-action:none}
 .image-editor-guides{position:absolute;inset:0;pointer-events:none;z-index:2}
-.image-editor-guide{position:absolute;border:none;outline:1.5px dashed var(--editor-guide);outline-offset:5px;border-radius:8px;box-sizing:border-box;opacity:0;transition:opacity .15s ease,outline-color .15s ease}
-.image-editor-guide.is-active{opacity:1;outline:2px solid var(--editor-guide-active);outline-offset:4px;box-shadow:0 0 0 3px var(--editor-guide-ring)}
+.image-editor-guide{position:absolute;border:none;outline:1.5px dashed var(--editor-guide);outline-offset:8px;border-radius:8px;box-sizing:content-box;opacity:0;transition:opacity .15s ease,outline-color .15s ease;pointer-events:none}
+.image-editor-guide.is-active{opacity:1;outline:2px solid var(--editor-guide-active);outline-offset:7px;box-shadow:0 0 0 4px var(--editor-guide-ring)}
 #imageEditorCanvas{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;border-radius:12px;box-shadow:var(--editor-canvas-shadow);background:var(--editor-preview-bg);touch-action:pan-y}
 .image-editor-touch-wrap.is-dragging #imageEditorCanvas,.image-editor-touch-wrap.is-pinch-active #imageEditorCanvas{touch-action:none}
 .image-editor-retry-btn{margin-left:6px;border:1px solid var(--editor-border);border-radius:999px;background:var(--editor-button-bg);color:var(--editor-button-text);min-height:28px;padding:4px 10px;font-size:10px;font-weight:950;cursor:pointer;touch-action:manipulation;vertical-align:middle}
@@ -6324,7 +6324,7 @@ const IMAGE_EDITOR_COLORS=[
 {value:"#173d3a",label:"Sand-Petrol"},
 {value:"#efe0bd",label:"Creme hell"}
 ];
-const IMAGE_TEMPLATE_VERSION="5";
+const IMAGE_TEMPLATE_VERSION="6";
 const imageEditorCache=new Map();
 let imageEditorState={templateId:"bibliothek-braun",mainText:"",sourceText:"",font:"serif",color:"#3b2515",fontSize:58,lineHeight:1.22,align:"center",offsetX:0,offsetY:0,sourceSize:24,sourceOffsetX:0,sourceOffsetY:0,activeBlock:"main",templateReady:false,interactionMode:"scroll",sheetTab:"text",sheetOpen:true,textExpandBlock:"",mainMetrics:null,sourceMetrics:null,mainGuideRect:null,sourceGuideRect:null,lastTemplateImg:null,templateLoadFailed:false};
 let imageEditorRouteSeed="";
@@ -6431,6 +6431,11 @@ function imageEditorMainSegments(parsed,baseSize){
   if(parsed.fazit)segments.push({text:"🌙 Fazit: "+parsed.fazit,size:Math.max(24,Math.round(size*0.9)),lineHeight:1.18,weight:"700",kind:"fazit"});
   return segments;
 }
+function imageEditorSegmentDrawHeight(seg){return(seg.fontSize||32)+((seg.lines?.length||0)*seg.lineHeightPx)}
+function imageEditorLayoutDrawHeight(layout){let h=0;(layout?.segments||[]).forEach((seg,idx)=>{h+=imageEditorSegmentDrawHeight(seg);if(idx<(layout.segments.length-1))h+=layout.gap||0});return h}
+function imageEditorBoundsInit(){return{minX:Infinity,minY:Infinity,maxX:-Infinity,maxY:-Infinity}}
+function imageEditorBoundsAdd(b,ctx,line,x,y,align){const m=ctx.measureText(line);const fs=parseFloat(String(ctx.font).match(/(\d+(?:\.\d+)?)px/)?.[1])||32;const ascent=m.actualBoundingBoxAscent||fs*0.78;const descent=m.actualBoundingBoxDescent||fs*0.22;const left=align==="center"?x-m.width/2:(align==="right"?x-m.width:x);b.minX=Math.min(b.minX,left);b.maxX=Math.max(b.maxX,left+m.width);b.minY=Math.min(b.minY,y-ascent);b.maxY=Math.max(b.maxY,y+descent)}
+function imageEditorBoundsRect(b,pad){if(!isFinite(b.minX)||!isFinite(b.minY))return null;const p=pad||14;return{x:b.minX-p,y:b.minY-p,w:b.maxX-b.minX+p*2,h:b.maxY-b.minY+p*2}}
 function measureImageEditorSegments(ctx,segments,inner,font,lineHeightMul){
   const gap=Math.round((segments[0]?.size||48)*0.28);
   let totalH=0,maxW=0;
@@ -6438,7 +6443,7 @@ function measureImageEditorSegments(ctx,segments,inner,font,lineHeightMul){
     const lhMul=seg.lineHeight||lineHeightMul||1.22;
     const fit=fitImageEditorText(ctx,seg.text,{x:0,y:0,w:inner.w,h:inner.h},font,seg.size,lhMul,20);
     ctx.font=`${seg.weight||"700"} ${fit.fontSize}px ${font}`;
-    const blockH=fit.lines.length*fit.lineHeightPx;
+    const blockH=imageEditorSegmentDrawHeight({fontSize:fit.fontSize,lines:fit.lines,lineHeightPx:fit.lineHeightPx});
     totalH+=blockH+gap;
     maxW=Math.max(maxW,...fit.lines.map(line=>ctx.measureText(line).width));
     return{...seg,...fit,gap};
@@ -6625,42 +6630,45 @@ function drawImageEditorSimpleText(ctx,text,box,opts){
   if(!String(text||"").trim())return{ok:true,fontSize:opts.size,blockW:0,blockH:0,guideRect:null};
   const inner=imageEditorInnerBox(box);
   const fit=fitImageEditorText(ctx,text,inner,opts.font,opts.size,opts.lineHeight,opts.minSize||14);
-  const blockH=fit.lines.length*fit.lineHeightPx;
+  const drawH=imageEditorSegmentDrawHeight({fontSize:fit.fontSize,lines:fit.lines,lineHeightPx:fit.lineHeightPx});
   const blockW=Math.max(...fit.lines.map(line=>ctx.measureText(line).width),0);
-  const metrics={blockW:Math.min(inner.w,blockW),blockH};
+  const metrics={blockW:Math.min(inner.w,blockW),blockH:drawH};
   const clamped=clampImageEditorOffset(box,opts.offsetX||0,opts.offsetY||0,metrics);
   const x=(opts.align==="left"?inner.x:inner.x+inner.w/2)+clamped.x;
-  let y=inner.y+(inner.h-blockH)/2+fit.fontSize+clamped.y;
+  let y=inner.y+(inner.h-drawH)/2+clamped.y;
   ctx.font=`700 ${fit.fontSize}px ${opts.font}`;
   ctx.fillStyle=opts.color;
   ctx.textBaseline="alphabetic";
   ctx.textAlign=opts.align;
-  fit.lines.forEach(line=>{ctx.fillText(line,x,y);y+=fit.lineHeightPx});
-  const guideRect={x:inner.x+(inner.w-metrics.blockW)/2+clamped.x,y:inner.y+(inner.h-blockH)/2+clamped.y,w:metrics.blockW,h:blockH};
-  return{...fit,blockW:metrics.blockW,blockH,clamped,metrics,guideRect};
+  const bounds=imageEditorBoundsInit();
+  y+=fit.fontSize;
+  fit.lines.forEach(line=>{imageEditorBoundsAdd(bounds,ctx,line,x,y,opts.align);ctx.fillText(line,x,y);y+=fit.lineHeightPx});
+  const guideRect=imageEditorBoundsRect(bounds,16);
+  return{...fit,blockW:metrics.blockW,blockH:drawH,clamped,metrics,guideRect};
 }
 function drawImageEditorMainText(ctx,text,box,opts){
   const parsed=parseImageEditorMainText(text);
   if(!parsed.nameLine&&!parsed.bodyText&&!parsed.fazit)return{ok:true,fontSize:opts.size,blockW:0,blockH:0,guideRect:null};
   const inner=imageEditorInnerBox(box);
   const layout=fitImageEditorMainSegments(ctx,parsed,inner,opts.font,opts.size,opts.lineHeight);
-  const metrics={blockW:layout.blockW,blockH:layout.blockH};
+  const drawH=imageEditorLayoutDrawHeight(layout);
+  const metrics={blockW:layout.blockW,blockH:drawH};
   const clamped=clampImageEditorOffset(box,opts.offsetX||0,opts.offsetY||0,metrics);
-  let y=inner.y+(inner.h-layout.blockH)/2+clamped.y;
+  let y=inner.y+(inner.h-drawH)/2+clamped.y;
   ctx.fillStyle=opts.color;
   ctx.textBaseline="alphabetic";
+  const bounds=imageEditorBoundsInit();
   layout.segments.forEach((seg,idx)=>{
     const segAlign=seg.align||opts.align||"center";
     const x=(segAlign==="left"?inner.x:inner.x+inner.w/2)+clamped.x;
     ctx.textAlign=segAlign;
     ctx.font=`${seg.weight||"700"} ${seg.fontSize}px ${opts.font}`;
-    const firstBaseline=seg.fontSize;
-    y+=firstBaseline;
-    seg.lines.forEach(line=>{ctx.fillText(line,x,y);y+=seg.lineHeightPx});
+    y+=seg.fontSize;
+    seg.lines.forEach(line=>{imageEditorBoundsAdd(bounds,ctx,line,x,y,segAlign);ctx.fillText(line,x,y);y+=seg.lineHeightPx});
     if(idx<layout.segments.length-1)y+=layout.gap;
   });
-  const guideRect={x:inner.x+(inner.w-layout.blockW)/2+clamped.x,y:inner.y+(inner.h-layout.blockH)/2+clamped.y,w:layout.blockW,h:layout.blockH};
-  return{...layout,fontSize:layout.fontSize||opts.size,clamped,metrics,guideRect};
+  const guideRect=imageEditorBoundsRect(bounds,16);
+  return{...layout,fontSize:layout.fontSize||opts.size,blockH:drawH,clamped,metrics,guideRect};
 }
 function drawImageEditorText(ctx,text,box,opts){return opts.kind==="main"?drawImageEditorMainText(ctx,text,box,opts):drawImageEditorSimpleText(ctx,text,box,opts)}
 function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/IMAGE_EDITOR_CANVAS_W,sy=rect.height/IMAGE_EDITOR_CANVAS_H;const active=imageEditorState.activeBlock;const guideFor=(kind)=>{if(kind!==active)return"";const guideRect=kind==="source"?imageEditorState.sourceGuideRect:imageEditorState.mainGuideRect;const box=guideRect||imageEditorInnerBox(imageEditorBlockBox(kind));const left=box.x*sx,top=box.y*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide is-active" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`};layer.innerHTML=guideFor("main")+guideFor("source")}
