@@ -1626,9 +1626,20 @@ function formatDailyPushStatusHtml(status){
   html+=`<strong>Status:</strong> <span style="color:${color}">${esc(sched)}</span> · Engine: ${esc(status.schedulerEngine||"daily-v1")}<br>`;
   html+=`<strong>Nutzer geprüft:</strong> ${esc(String(status.usersChecked||0))} · <strong>Gesendet:</strong> ${esc(String(status.sent||0))} · <strong>Duplikate:</strong> ${esc(String(status.duplicates||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
   html+=`<strong>Duʿāʾ-Kandidaten:</strong> ${esc(String(status.duaCandidates||0))} · <strong>Empfehlungs-Kandidaten:</strong> ${esc(String(status.recCandidates||0))}<br>`;
-  html+=`<strong>Inhalte:</strong> ${esc(String(status.duasAvailable||0))} Duʿāʾ · ${esc(String(status.postsAvailable||0))} Beiträge<br>`;
+  if(status.currentRecommendation)html+=`<strong>Heute empfohlen:</strong> ${esc(status.currentRecommendation.title||"")} · ID ${esc(status.currentRecommendation.id||"")}${status.currentRecommendation.category?` · ${esc(status.currentRecommendation.category)}`:""}${status.currentRecommendation.scholar?` · ${esc(status.currentRecommendation.scholar)}`:""}<br>`;
+  if(status.currentDua)html+=`<strong>Duʿāʾ des Tages:</strong> ${esc(status.currentDua.title||"")} · ID ${esc(status.currentDua.id||"")}${status.currentDua.category?` · ${esc(status.currentDua.category)}`:""}<br>`;
+  if(status.dailyContentDate)html+=`<strong>Tagesquelle:</strong> ${esc(status.dailyContentDate)}<br>`;
   if(status.lastError)html+=`<span style="color:#f0c674"><strong>Fehler:</strong> ${esc(status.lastError)}</span><br>`;
   return html;
+}
+async function loadAdminDailySelection(){
+  try{
+    const r=await fetch(`${SITE_ORIGIN}/content/updates/daily.json?v=${Date.now()}`,{cache:"no-store"});
+    if(!r.ok)return"";
+    const d=await r.json();
+    const rec=d.recommendation||{},dua=d.dua||{};
+    return `<div class="status-list" style="margin-top:8px"><div class="status-row"><span><b>Heute empfohlen</b><br>${esc(rec.title||"—")}${rec.scholar?` · ${esc(rec.scholar)}`:""}${rec.category?` · ${esc(rec.category)}`:""}<br>ID: ${esc(rec.id||"—")}</span><strong class="status-pill">${esc(d.date||"")}</strong></div><div class="status-row"><span><b>Duʿāʾ des Tages</b><br>${esc(dua.title||"—")}${dua.category?` · ${esc(dua.category)}`:""}<br>ID: ${esc(dua.id||"—")}</span><strong class="status-pill">12:00 / 09:00</strong></div></div>`;
+  }catch(e){return""}
 }
 async function loadAdminDailyPushStatus(){
   const box=document.getElementById("adminDailyStatusBox");
@@ -1645,7 +1656,8 @@ async function loadAdminDailyPushStatus(){
         if(r.ok)status=await r.json();
       }catch(e){}
     }
-    setAdminDailyStatusHtml(formatDailyPushStatusHtml(status));
+    const selectionHtml=await loadAdminDailySelection();
+    setAdminDailyStatusHtml((selectionHtml?selectionHtml+"<br>":"")+formatDailyPushStatusHtml(status));
     addAdminLog("Tages-Push","Status geladen",status?.updatedAt||"");
   }catch(e){
     setAdminDailyStatusHtml(`<span style="color:#f0c674">Status konnte nicht geladen werden: ${esc(e.message||e)}</span>`);

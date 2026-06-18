@@ -103,10 +103,24 @@ export async function sendDailyTestPush(env, input = {}) {
   const appId = String(env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e").trim();
   const isDua = kind === "dua";
   const title = isDua ? "Duʿāʾ des Tages" : "Heute empfohlen";
-  const body = isDua
-    ? "Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ."
-    : "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.";
-  const url = isDua ? `${site}/#duas` : `${site}/#recent`;
+
+  let daily = null;
+  try {
+    const res = await fetch(`${site}/content/updates/daily.json?v=${Date.now()}`, { headers: { Accept: "application/json" } });
+    if (res.ok) daily = await res.json();
+  } catch (e) {}
+  const item = isDua ? daily?.dua : daily?.recommendation;
+  if (!item || !item.id) {
+    return { ok: true, sent: false, kind, subscriptionId, reason: "Kein aktiver Tagesinhalt gefunden – Push nicht gesendet" };
+  }
+
+  const itemTitle = String(item.title || "").trim();
+  const snippet = String(item.snippet || "").trim();
+  const body = [itemTitle, snippet].filter(Boolean).join(snippet ? " – " : "") ||
+    (isDua ? "Heutige Duʿāʾ aus Qurʾān & Sunnah." : "Heute empfohlener Beitrag.");
+  const url = isDua
+    ? `${site}/#dua/${encodeURIComponent(item.id)}`
+    : `${site}/#post/${encodeURIComponent(item.id)}`;
 
   const payload = {
     app_id: appId,
@@ -115,7 +129,13 @@ export async function sendDailyTestPush(env, input = {}) {
     headings: { de: `[Test] ${title}`, en: `[Test] ${title}` },
     contents: { de: body, en: body },
     url,
-    data: { type: isDua ? "daily_dua" : "daily_recommendation", test: true, source: "admin-test" },
+    data: {
+      type: isDua ? "daily_dua" : "daily_recommendation",
+      content_id: item.id,
+      date: daily?.date || "",
+      test: true,
+      source: "admin-test"
+    },
     chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
     chrome_web_badge: `${site}/notification-badge-96.png?v=2`
   };
