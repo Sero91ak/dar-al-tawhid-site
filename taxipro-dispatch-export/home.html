@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#0a1628"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<title>TaxiPro – Taxi Meckenheim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a1628;--text:#f2f6fa;--muted:#8fa3bc;--gold:#f5a623;--teal:#14b8a6;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(245,166,35,.08),transparent 45%),radial-gradient(circle at 80% 100%,rgba(20,184,166,.08),transparent 40%),var(--bg);color:var(--text);min-height:100dvh;padding:28px 20px;padding-top:calc(28px + var(--safe-top));padding-bottom:calc(28px + var(--safe-bottom))}
+.wrap{max-width:440px;margin:0 auto;display:flex;flex-direction:column;min-height:calc(100dvh - 56px - var(--safe-top) - var(--safe-bottom));justify-content:center}
+.head{text-align:center;margin-bottom:32px}
+.head h1{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px}
+.head h1 em{color:var(--gold);font-style:normal}
+.head p{font-size:14px;color:var(--muted);line-height:1.5}
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{display:block;text-decoration:none;color:inherit;background:rgba(26,36,51,.85);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px 20px;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
+.card:active{transform:scale(.98)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.card.dispatch::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.card.driver::before{background:linear-gradient(90deg,var(--teal),transparent)}
+.card:hover{border-color:rgba(255,255,255,.16);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.card-icon{font-size:32px;margin-bottom:10px}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.card-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px}
+.card.dispatch .card-cta{background:rgba(245,166,35,.15);color:var(--gold)}
+.card.driver .card-cta{background:rgba(20,184,166,.15);color:#5eead4}
+.foot{margin-top:28px;text-align:center;font-size:11px;color:var(--muted);line-height:1.6}
+.foot strong{color:var(--text);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <h1>TaxiPro <em>Meckenheim</em></h1>
+    <p>Internes System · Zentrale &amp; Fahrer · kostenlos · ohne API-Key</p>
+  </header>
+  <div class="cards">
+    <a class="card dispatch" href="dispatch.html?source=home">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Zentrale / Disponent</div>
+      <p class="card-desc">Kalender, Kunden, Fahrten planen, Fahrer zuweisen, Google Drive Sync, Abrechnung.</p>
+      <span class="card-cta">Zentrale öffnen →</span>
+    </a>
+    <a class="card driver" href="driver.html?source=home">
+      <div class="card-icon">🚕</div>
+      <div class="card-title">Fahrer-App</div>
+      <p class="card-desc">Nur deine Fahrten, Navigation, Team-Chat, Fahrschein, Schichtzeiten.</p>
+      <span class="card-cta">Fahrer-App öffnen →</span>
+    </a>
+  </div>
+  <p class="foot"><strong>Tipp:</strong> Zentrale über <strong>dispatch.html</strong> installieren · Fahrer über <strong>driver.html</strong> – zwei getrennte Apps auf dem Home-Bildschirm.</p>
+</div>
+</body>
+</html>
