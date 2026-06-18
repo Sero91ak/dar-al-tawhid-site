@@ -1,8 +1,27 @@
 {
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v1",
-  "schedulerStatus": "pending",
-  "updatedAt": null,
-  "usersChecked": 0,
+  "schedulerStatus": "success",
+  "updatedAt": "2026-06-18T15:55:29.904Z",
+  "usersChecked": 18,
+  "duaCandidates": 0,
+  "recCandidates": 0,
   "sent": 0,
-  "note": "Wird vom Cloudflare Worker Cron alle 5 Minuten aktualisiert."
+  "skipped": 0,
+  "duplicates": 0,
+  "errors": 0,
+  "dailyContentDate": "2026-06-18",
+  "currentRecommendation": {
+    "id": "abu-hatim-hadithkritik-ist-wissen-393",
+    "title": "Hadithkritik ist Wissen, nicht Vermutung",
+    "category": "Hadith",
+    "scholar": "Abū Ḥātim ar-Rāzī"
+  },
+  "currentDua": {
+    "id": "sunnah-008",
+    "title": "Duʿāʾ beim Betreten der Moschee",
+    "category": "Moschee"
+  },
+  "configAutomatic": true,
+  "responses": []
 }
