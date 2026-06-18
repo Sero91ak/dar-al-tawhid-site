@@ -206,6 +206,9 @@ button{cursor:pointer}
 .push-test-controls .field{min-height:36px;font-size:11px}
 .push-test-controls .btn{min-height:36px;justify-content:center}
 .tabs{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 8px;margin:2px 0 12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.tab-picker{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin:2px 0 12px}
+.tab-picker-label{font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.tab-select{width:100%;min-height:42px;font-size:13px;font-weight:700}
 .tab{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;border:1px solid var(--line2);background:rgba(90,140,220,.07);color:var(--soft);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:950}
 .tab.active{color:#fff4cc;border-color:rgba(239,215,142,.40);background:linear-gradient(135deg,rgba(239,215,142,.13),rgba(90,140,220,.12))}
 .controls{display:grid;grid-template-columns:minmax(220px,1fr) 150px 150px auto;gap:9px;margin-bottom:12px}
@@ -658,8 +661,11 @@ function renderShell(){
   if(currentTab==="schedule")currentTab="actions";
   const body=currentTab==="overview"?renderOverview(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="stats"?renderStats(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
-    <nav class="tabs">
-      ${readTabOrder().map(([id,label])=>tabButton(id,label)).join("")}
+    <nav class="tab-picker" aria-label="Admin-Bereich wählen">
+      <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
+      <select class="field tab-select" id="adminTabSelect">
+        ${readTabOrder().map(([id,label])=>`<option value="${esc(id)}" ${currentTab===id?"selected":""}>${esc(label)}</option>`).join("")}
+      </select>
     </nav>
     ${body}
     <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
@@ -1003,34 +1009,7 @@ function renderActions(rows,installs=installTotals()){
   const best=sortedRows(rows)[0];
   return `<section class="split">
     <div class="panel">
-      <div class="section-head"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
-      <div class="quick-grid">
-        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown unten einfügen und über Cloudflare Worker veröffentlichen.</small></button>
-        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
-        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
-      </div>
-      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
-      ${renderPlanningPanel()}
-      ${renderNewsComposer()}
-      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
-      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
-      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker</span></div>
-      <div class="preview-box">
-        <div class="section-head"><h3>Markdown-Metadaten</h3><span>Frontmatter-Hilfe</span></div>
-        <div class="admin-form-grid">
-          <input class="field" id="mdTitle" placeholder="Titel">
-          <input class="field" id="mdId" placeholder="ID / Slug">
-          <input class="field" id="mdDate" type="date">
-          <input class="field" id="mdCategory" placeholder="Kategorie">
-          <input class="field" id="mdScholar" placeholder="Gelehrter">
-          <input class="field" id="mdBook" placeholder="Werk / Buch">
-          <input class="field wide" id="mdSource" placeholder="Quelle">
-          <input class="field wide" id="mdTags" placeholder="Tags mit Komma trennen">
-          <button class="btn primary wide" id="buildMarkdownBtn" type="button">Markdown aus Feldern vorbereiten</button>
-        </div>
-      </div>
+      <div class="section-head" style="margin-top:0"><h3>Beitrag erstellen</h3><span>GitHub-Markdown</span></div>
       <div class="upload-grid">
         <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
         <div class="upload-stack">
@@ -1049,6 +1028,19 @@ function renderActions(rows,installs=installTotals()){
         </div>
       </div>
       ${renderDraftPreview()}
+      <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
+      <div class="quick-grid">
+        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown oben einfügen und über Cloudflare Worker veröffentlichen.</small></button>
+        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
+        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+      </div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      ${renderPlanningPanel()}
+      ${renderNewsComposer()}
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
+      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
       <div class="preview-box">
         <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
         <div class="quick-grid">
@@ -1161,41 +1153,9 @@ function renderTechStatus(ctx){
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
 }
-function buildMarkdownFromFields(){
-  const title=(document.getElementById("mdTitle")?.value||"").trim();
-  if(!title){toast("Titel fehlt");return}
-  const slug=(document.getElementById("mdId")?.value||title).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
-  const date=(document.getElementById("mdDate")?.value||new Date().toISOString().slice(0,10)).trim();
-  const category=(document.getElementById("mdCategory")?.value||"").trim();
-  const scholar=(document.getElementById("mdScholar")?.value||"").trim();
-  const book=(document.getElementById("mdBook")?.value||"").trim();
-  const source=(document.getElementById("mdSource")?.value||"").trim();
-  const tags=(document.getElementById("mdTags")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
-  draftFilename=draftFilename||`${slug}.md`;
-  draftMarkdown=`---
-id: "${slug}"
-title: "${title.replace(/"/g,"'")}"
-date: "${date}"
-category: "${category.replace(/"/g,"'")}"
-scholar: "${scholar.replace(/"/g,"'")}"
-book: "${book.replace(/"/g,"'")}"
-source: "${source.replace(/"/g,"'")}"
-tags: [${tags.map(x=>`"${x.replace(/"/g,"'")}"`).join(", ")}]
----
-
-> Aussage hier einfügen.
-
-Quelle: ${source || "Quelle prüfen"}
-`;
-  const text=document.getElementById("postMarkdownInput"),file=document.getElementById("postFilenameInput");
-  if(text)text.value=draftMarkdown;
-  if(file)file.value=draftFilename;
-  addAdminLog("Entwurf","Markdown aus Metadaten vorbereitet",title);
-  updateDraftPreview();
-  toast("Markdown vorbereitet");
-}
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
+  const tabSelect=document.getElementById("adminTabSelect");if(tabSelect)tabSelect.onchange=e=>navigateAdmin(e.target.value);
   const search=document.getElementById("searchInput");if(search)search.oninput=e=>renderShellPreserveField("searchInput",()=>{query=e.target.value});
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
@@ -1245,7 +1205,6 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-tab-up]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabUp,-1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabUp);renderShell()});
   document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
   const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
-  const buildMarkdown=document.getElementById("buildMarkdownBtn");if(buildMarkdown)buildMarkdown.onclick=buildMarkdownFromFields;
   const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const timezone=document.getElementById("planTimezone")?.value||"Europe/Berlin";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,timezone,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",`${title} · ${timezone}`);renderShell()};
   document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
   document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
