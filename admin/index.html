@@ -24,8 +24,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v22";
-  var MIG_KEY="darAdminSwFixV22";
+  var ADMIN_SW_CACHE="dar-admin-stats-v23";
+  var MIG_KEY="darAdminSwFixV23";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -363,7 +363,7 @@ const DEFAULT_ADMIN_TABS=[
   ["overview","Dashboard"]
 ];
 let refreshTimer=null,authed=false,lastData=null,currentTab="actions",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0,adminShellScrollY=0;
-let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,telegramPreviewTimer=null,lastTelegramPreview=null,lastTelegramStatus=null,lastPublishPushContext=null;
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,telegramPreviewTimer=null,lastTelegramPreview=null,lastTelegramStatus=null,lastPublishPushContext=null,visitorAppHealth={ok:true,issues:[],checkedAt:"",checking:false};
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
@@ -734,7 +734,78 @@ async function sendTelegramResend(force=true){
 }
 function readLastPublishPushContext(){try{return JSON.parse(localStorage.getItem(ADMIN_LAST_PUSH_KEY)||"null")}catch(e){return null}}
 function saveLastPublishPushContext(ctx){try{localStorage.setItem(ADMIN_LAST_PUSH_KEY,JSON.stringify(ctx||null));lastPublishPushContext=ctx}catch(e){}}
-function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
+window.slugify=window.slugify||function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"};
+function adminSlugPart(value){
+  const fn=typeof window.slugify==="function"?window.slugify:(typeof slugify==="function"?slugify:null);
+  if(fn)try{return fn(value)}catch(e){}
+  return String(value||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag";
+}
+function extractVisitorMainScript(html){
+  const match=String(html||"").match(/<script>\nconst REPO_OWNER[\s\S]*?<\/script>/);
+  return match?match[0].replace(/^<script>\n/,"").replace(/<\/script>$/,""):"";
+}
+function validateVisitorMainScript(code){
+  const issues=[];
+  if(!code)issues.push("Besucher-App Hauptscript nicht gefunden");
+  else{
+    if(!code.includes("function render("))issues.push("render() fehlt in index.html");
+    try{new Function(code)}catch(e){issues.push(`JavaScript-Syntaxfehler: ${e.message||e}`);}
+  }
+  return issues;
+}
+async function checkVisitorAppHealth(){
+  const issues=[];
+  try{
+    const res=await fetch(`${SITE_ORIGIN}/index.html?visitorHealth=${Date.now()}`,{cache:"no-store",credentials:"same-origin"});
+    if(!res.ok)issues.push(`index.html antwortet mit HTTP ${res.status}`);
+    else issues.push(...validateVisitorMainScript(extractVisitorMainScript(await res.text())));
+  }catch(e){issues.push(`index.html nicht erreichbar: ${e.message||e}`);}
+  try{
+    const res=await fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?visitorHealth=${Date.now()}`,{cache:"no-store",credentials:"same-origin"});
+    if(!res.ok)issues.push(`posts-index.json HTTP ${res.status}`);
+    else{
+      const data=await res.json();
+      if(!data||!Array.isArray(data.files))issues.push("posts-index.json ist ungültig");
+    }
+  }catch(e){issues.push(`posts-index.json: ${e.message||e}`);}
+  return{ok:issues.length===0,issues,checkedAt:new Date().toISOString()};
+}
+function renderVisitorAppHealthPanel(){
+  const h=visitorAppHealth||{};
+  const ok=!!h.ok&&!h.checking;
+  return `<div class="upload-status visitor-health-panel" id="visitorHealthBox" style="margin-top:10px;border:1px solid ${ok?"rgba(143,215,168,.35)":"rgba(255,159,159,.45)"}"><strong>Besucher-App Schutz:</strong> ${h.checking?'<span style="color:#f0c674">wird geprüft …</span>':ok?'<span style="color:#8fd7a8">startklar · Live erlaubt</span>':'<span style="color:#ff9f9f">Live blockiert</span>'}<br>${h.checking?"Prüfe index.html, Script und posts-index.json …":(h.issues&&h.issues.length?h.issues.map(i=>esc(i)).join("<br>"):"index.html, Script und posts-index.json OK.")}${h.checkedAt&&!h.checking?`<br><small>Zuletzt: ${esc(new Date(h.checkedAt).toLocaleString("de-DE"))}</small>`:""}<br><button class="btn" id="visitorHealthRefreshBtn" type="button" style="margin-top:8px">Besucher-App prüfen</button></div>`;
+}
+function updateVisitorHealthUi(){
+  const box=$("visitorHealthBox");
+  if(box)box.outerHTML=renderVisitorAppHealthPanel();
+  const btn=$("uploadPostBtn");
+  const blocked=!visitorAppHealth.ok||visitorAppHealth.checking;
+  if(btn){
+    btn.disabled=uploadBusy||blocked;
+    btn.textContent=uploadBusy?"Wird veröffentlicht...":blocked&&!visitorAppHealth.checking?"Live blockiert (App defekt)":"Live veröffentlichen";
+  }
+  const refreshBtn=$("visitorHealthRefreshBtn");
+  if(refreshBtn)refreshBtn.onclick=()=>refreshVisitorAppHealth();
+}
+async function refreshVisitorAppHealth({silent=false}={}){
+  visitorAppHealth={...visitorAppHealth,checking:true};
+  updateVisitorHealthUi();
+  try{
+    visitorAppHealth={...(await checkVisitorAppHealth()),checking:false};
+  }catch(e){
+    visitorAppHealth={ok:false,issues:[e.message||String(e)],checkedAt:new Date().toISOString(),checking:false};
+  }
+  updateVisitorHealthUi();
+  if(!silent&&!visitorAppHealth.ok)toast("Live blockiert – Besucher-App prüfen");
+  return visitorAppHealth;
+}
+async function assertVisitorAppHealthyForLive(){
+  const health=visitorAppHealth.checkedAt&&!visitorAppHealth.checking?visitorAppHealth:await refreshVisitorAppHealth({silent:true});
+  if(health.ok)return health;
+  setUploadStatus(`<strong style="color:#ff9f9f">Live blockiert:</strong> Besucher-App ist nicht startklar.<br>${(health.issues||[]).map(i=>esc(i)).join("<br>")}<br><br>Nutze <strong>In Test-App anzeigen</strong> – Besucher bleiben geschützt.`);
+  toast("Live blockiert – Besucher-App prüfen");
+  throw new Error("Besucher-App nicht startklar");
+}
 function stepLabel(ok){return ok?`<strong style="color:#8fd7a8">ja</strong>`:`<strong style="color:#ff9f9f">nein</strong>`}
 function formatPublishStatusHtml(result){
   const live=result.liveCheck||{};
@@ -793,17 +864,30 @@ function nextPostNumber(files){return (Array.isArray(files)?files.filter(f=>f&&(
 function workerNextNumberUrl(publishUrl){const url=new URL(resolveWorkerUrl(publishUrl||workerPublishUrl()));if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/api/admin/next-number");else if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/next-number");else url.pathname="/api/admin/next-number";return url.toString()}
 async function resolveNextPostNumber(){
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  let workerHint="";
   if(secret){
     try{
       const res=await fetch(workerNextNumberUrl(),{headers:{"X-Admin-Secret":secret},cache:"no-store"});
       const data=await res.json().catch(()=>({}));
       if(res.ok&&data.ok!==false&&Number(data.nextNumber)>0)return Number(data.nextNumber);
-    }catch(e){}
+      workerHint=data.error||`Worker antwortete mit HTTP ${res.status}`;
+    }catch(e){workerHint=e.message||String(e)}
+  }else{
+    workerHint="Kein Admin-Secret hinterlegt";
   }
-  const index=await loadPostsIndexForUpload();
-  return nextPostNumber(index.data.files);
+  try{
+    const index=await loadPostsIndexForUpload();
+    return nextPostNumber(index.data.files);
+  }catch(e){
+    throw new Error(workerHint?`Worker: ${workerHint}. Fallback posts-index.json: ${e.message||e}`:`posts-index.json konnte nicht geladen werden: ${e.message||e}`);
+  }
 }
-function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
+function suggestFilename(markdown,nextNumber){
+  const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";
+  const category=frontmatterValue(markdown,"category")||"beitrag";
+  const num=Math.max(1,Number(nextNumber)||1);
+  return `${adminSlugPart(category)}-${String(num).padStart(3,"0")}-${adminSlugPart(title)}.md`;
+}
 async function loadPostsIndexForUpload(){
   const res=await fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}`,{cache:"no-store"});
   if(!res.ok)throw new Error("posts-index.json konnte nicht geladen werden");
@@ -1238,7 +1322,8 @@ function renderActions(rows,installs=installTotals()){
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
           <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
-          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Live veröffentlichen"}</button>
+          ${renderVisitorAppHealthPanel()}
+          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy||!visitorAppHealth.ok||visitorAppHealth.checking?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":(!visitorAppHealth.ok&&!visitorAppHealth.checking?"Live blockiert (App defekt)":"Live veröffentlichen")}</button>
           <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
           <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
@@ -1275,7 +1360,7 @@ function renderActions(rows,installs=installTotals()){
       </div>
       <div class="panel">
         <div class="section-head"><h3>App-Status</h3><span>PWA</span></div>
-        <div class="empty">Besucher-App Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
+        <div class="empty">Besucher-App Schutz: <strong style="color:${visitorAppHealth.ok&&!visitorAppHealth.checking?"#8fd7a8":"#ff9f9f"}">${visitorAppHealth.checking?"wird geprüft …":visitorAppHealth.ok?"startklar":"Live blockiert"}</strong><br>Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
       </div>
       <div class="panel">
         <div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div>
@@ -1385,6 +1470,8 @@ function bindUi(){
   const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
+  const visitorHealthRefreshBtn=document.getElementById("visitorHealthRefreshBtn");if(visitorHealthRefreshBtn)visitorHealthRefreshBtn.onclick=()=>refreshVisitorAppHealth();
+  if(currentTab==="actions")refreshVisitorAppHealth({silent:true});
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const pushRegsBtn=document.getElementById("adminPushRegsBtn");if(pushRegsBtn)pushRegsBtn.onclick=loadAdminPushRegistrations;
   const pushRegsSelect=document.getElementById("adminPrayerSubscriptionSelect");if(pushRegsSelect)pushRegsSelect.onchange=()=>{const input=document.getElementById("adminPrayerSubscriptionInput");if(input&&pushRegsSelect.value)input.value=pushRegsSelect.value};
@@ -1758,13 +1845,17 @@ function setUploadStatus(html){draftStatus=html;const el=document.getElementById
 async function prepareNextPostNumber(){
   try{
     draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
+    if(!draftMarkdown.trim()){setUploadStatus("Bitte zuerst Markdown-Beitrag einfügen.");return}
     setUploadStatus("Prüfe aktuelle Nummer...");
     draftNextNumber=await resolveNextPostNumber();
     draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
     const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
     setUploadStatus(`Nächste Nummer: <strong>${draftNextNumber}</strong><br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>`);
     addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",draftFilename);
-  }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
+  }catch(e){
+    setUploadStatus(`Nummer konnte nicht ermittelt werden: ${esc(e.message||e)}`);
+    toast(e.message||"Nummer konnte nicht ermittelt werden");
+  }
 }
 async function publishPostToStaging(){
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
@@ -1814,6 +1905,11 @@ async function uploadPostViaWorker(){
   }
   const ok=confirm(confirmMsg);
   if(!ok){setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
+  try{
+    await assertVisitorAppHealthyForLive();
+  }catch(e){
+    return;
+  }
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
     const next=await resolveNextPostNumber();
