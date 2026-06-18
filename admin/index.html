@@ -1247,6 +1247,7 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
         <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Worker-Cron alle 5&nbsp;Min · Nutzer aus Supabase · Push über OneSignal</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><input class="field" id="adminPrayerSubscriptionInput" placeholder="Subscription-ID aus Besucher-App" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
+        <div class="quick push-test-card"><b>Tägliche Pushs</b><small>Duʿāʾ 09:00 · Empfehlung 12:00 · Ortszeit pro Nutzer</small><div class="push-test-controls"><button class="btn" id="adminDailyStatusBtn" type="button">Status laden</button><button class="btn" id="adminDailyRunBtn" type="button">Cron jetzt starten</button><button class="btn" id="adminDailyConfigBtn" type="button">Konfiguration laden</button></div><div class="upload-status" id="adminDailyStatusBox" style="margin-top:10px">Noch kein Tages-Push-Status geladen.</div><div class="push-test-controls" style="margin-top:10px"><label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="adminDailyAutomatic" checked> Automatische Auswahl</label></div><div class="push-test-controls"><input class="field" id="adminDailyDuaId" placeholder="Duʿāʾ-ID (leer = automatisch)" aria-label="Duʿāʾ-ID"><input class="field" id="adminDailyRecId" placeholder="Beitrags-ID (leer = automatisch)" aria-label="Beitrags-ID"><input class="field" id="adminDailyRecFile" placeholder="Beitrags-Datei optional" aria-label="Beitrags-Datei"></div><div class="push-test-controls"><textarea class="field" id="adminDailyDuaBody" rows="2" placeholder="Duʿāʾ-Push-Text"></textarea><textarea class="field" id="adminDailyRecBody" rows="2" placeholder="Empfehlungs-Push-Text"></textarea></div><div class="push-test-controls"><button class="btn" id="adminDailyPreviewDuaBtn" type="button">Vorschau Duʿāʾ</button><button class="btn" id="adminDailyPreviewRecBtn" type="button">Vorschau Empfehlung</button><button class="btn primary" id="adminDailySaveBtn" type="button">Konfiguration speichern</button></div><div class="upload-status" id="adminDailyPreviewBox" style="margin-top:8px;font-size:11px">Vorschau erscheint hier.</div><div class="section-head" style="margin-top:12px"><h3>Tages-Push Test</h3><span>Subscription-ID wie bei Gebets-Push</span></div><div class="push-test-controls"><select class="field" id="adminDailyTestKind" aria-label="Tages-Push Art"><option value="dua">Duʿāʾ des Tages</option><option value="recommendation">Heute empfohlen</option></select><button class="btn primary" id="adminDailyTestBtn" type="button">Test senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Subscription-ID aus der Besucher-App kopieren: Gebetszeiten → Push-Status öffnen.</div>
       ${renderTelegramPanel()}
@@ -1380,6 +1381,13 @@ function bindUi(){
   const oneSignalPrayerBtn=document.getElementById("adminOneSignalPrayerTestBtn");if(oneSignalPrayerBtn)oneSignalPrayerBtn.onclick=sendAdminOneSignalPrayerTest;
   const prayerStatusBtn=document.getElementById("adminPrayerStatusBtn");if(prayerStatusBtn)prayerStatusBtn.onclick=loadAdminPrayerPushStatus;
   const prayerRunBtn=document.getElementById("adminPrayerRunBtn");if(prayerRunBtn)prayerRunBtn.onclick=triggerAdminPrayerScheduler;
+  const dailyStatusBtn=document.getElementById("adminDailyStatusBtn");if(dailyStatusBtn)dailyStatusBtn.onclick=loadAdminDailyPushStatus;
+  const dailyRunBtn=document.getElementById("adminDailyRunBtn");if(dailyRunBtn)dailyRunBtn.onclick=triggerAdminDailyScheduler;
+  const dailyConfigBtn=document.getElementById("adminDailyConfigBtn");if(dailyConfigBtn)dailyConfigBtn.onclick=loadAdminDailyPushConfig;
+  const dailySaveBtn=document.getElementById("adminDailySaveBtn");if(dailySaveBtn)dailySaveBtn.onclick=saveAdminDailyPushConfig;
+  const dailyPreviewDuaBtn=document.getElementById("adminDailyPreviewDuaBtn");if(dailyPreviewDuaBtn)dailyPreviewDuaBtn.onclick=()=>previewAdminDailyPush("dua");
+  const dailyPreviewRecBtn=document.getElementById("adminDailyPreviewRecBtn");if(dailyPreviewRecBtn)dailyPreviewRecBtn.onclick=()=>previewAdminDailyPush("recommendation");
+  const dailyTestBtn=document.getElementById("adminDailyTestBtn");if(dailyTestBtn)dailyTestBtn.onclick=sendAdminDailyTestPush;
   const tgEnabled=document.getElementById("telegramPostEnabled");
   const tgRefreshBtn=document.getElementById("adminTelegramRefreshPreviewBtn");
   const syncTelegramModeState=()=>{
@@ -1568,6 +1576,132 @@ async function sendAdminOneSignalPrayerTest(){
     addAdminLog("Gebets-Push","OneSignal-Test gesendet",`${prayer} / ${mode}`);
   }catch(e){
     setAdminPushTestStatus(`OneSignal-Test fehlgeschlagen: ${e.message||e}`);
+  }
+}
+let adminDailyConfigSha="";
+function setAdminDailyStatusHtml(html){const el=document.getElementById("adminDailyStatusBox");if(el)el.innerHTML=html}
+function formatDailyPushStatusHtml(status){
+  if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
+  const updated=status.updatedAt?new Date(status.updatedAt).toLocaleString("de-DE"):"unbekannt";
+  const sched=status.schedulerStatus||"unbekannt";
+  const color=sched==="success"?"#dfffd8":sched==="error"?"#f0c674":"#e8d9a8";
+  let html=`<strong>Letzter Lauf:</strong> ${esc(updated)}<br>`;
+  html+=`<strong>Status:</strong> <span style="color:${color}">${esc(sched)}</span> · Engine: ${esc(status.schedulerEngine||"daily-v1")}<br>`;
+  html+=`<strong>Nutzer geprüft:</strong> ${esc(String(status.usersChecked||0))} · <strong>Gesendet:</strong> ${esc(String(status.sent||0))} · <strong>Duplikate:</strong> ${esc(String(status.duplicates||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
+  html+=`<strong>Duʿāʾ-Kandidaten:</strong> ${esc(String(status.duaCandidates||0))} · <strong>Empfehlungs-Kandidaten:</strong> ${esc(String(status.recCandidates||0))}<br>`;
+  html+=`<strong>Inhalte:</strong> ${esc(String(status.duasAvailable||0))} Duʿāʾ · ${esc(String(status.postsAvailable||0))} Beiträge<br>`;
+  if(status.lastError)html+=`<span style="color:#f0c674"><strong>Fehler:</strong> ${esc(status.lastError)}</span><br>`;
+  return html;
+}
+async function loadAdminDailyPushStatus(){
+  const box=document.getElementById("adminDailyStatusBox");
+  if(box)box.textContent="Lade Tages-Push-Status…";
+  try{
+    let status=null;
+    try{
+      const data=await workerGetRequest("api/admin/daily/status");
+      if(data?.status)status=data.status;
+    }catch(e){}
+    if(!status?.updatedAt){
+      try{
+        const r=await fetch(`${SITE_ORIGIN}/content/admin/daily-push-status.json?v=${Date.now()}`,{cache:"no-store"});
+        if(r.ok)status=await r.json();
+      }catch(e){}
+    }
+    setAdminDailyStatusHtml(formatDailyPushStatusHtml(status));
+    addAdminLog("Tages-Push","Status geladen",status?.updatedAt||"");
+  }catch(e){
+    setAdminDailyStatusHtml(`<span style="color:#f0c674">Status konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
+  }
+}
+async function triggerAdminDailyScheduler(){
+  const box=document.getElementById("adminDailyStatusBox");
+  if(box)box.textContent="Starte Tages-Push-Cron…";
+  try{
+    const data=await workerPostRequest("api/admin/daily/run",{});
+    let html=`<span style="color:${data.ok?"#dfffd8":"#f0c674"}"><strong>${esc(data.reason||"Scheduler abgeschlossen")}</strong></span>`;
+    if(data.status)html+=`<br><br>${formatDailyPushStatusHtml(data.status)}`;
+    setAdminDailyStatusHtml(html);
+    addAdminLog("Tages-Push","Cron gestartet",data.reason||"");
+  }catch(e){
+    setAdminDailyStatusHtml(`<span style="color:#f0c674">Scheduler-Fehler: ${esc(e.message||e)}</span>`);
+  }
+}
+function readAdminDailyConfigForm(){
+  return{
+    automatic:Boolean(document.getElementById("adminDailyAutomatic")?.checked),
+    dailyDua:{
+      enabled:true,
+      hour:9,
+      id:String(document.getElementById("adminDailyDuaId")?.value||"").trim(),
+      title:"Duʿāʾ des Tages",
+      body:String(document.getElementById("adminDailyDuaBody")?.value||"").trim()
+    },
+    recommendation:{
+      enabled:true,
+      hour:12,
+      id:String(document.getElementById("adminDailyRecId")?.value||"").trim(),
+      file:String(document.getElementById("adminDailyRecFile")?.value||"").trim(),
+      title:"Heute empfohlen",
+      body:String(document.getElementById("adminDailyRecBody")?.value||"").trim()
+    }
+  };
+}
+function fillAdminDailyConfigForm(config){
+  const c=config||{};
+  const auto=document.getElementById("adminDailyAutomatic");if(auto)auto.checked=c.automatic!==false;
+  const duaId=document.getElementById("adminDailyDuaId");if(duaId)duaId.value=c.dailyDua?.id||"";
+  const recId=document.getElementById("adminDailyRecId");if(recId)recId.value=c.recommendation?.id||"";
+  const recFile=document.getElementById("adminDailyRecFile");if(recFile)recFile.value=c.recommendation?.file||"";
+  const duaBody=document.getElementById("adminDailyDuaBody");if(duaBody)duaBody.value=c.dailyDua?.body||"";
+  const recBody=document.getElementById("adminDailyRecBody");if(recBody)recBody.value=c.recommendation?.body||"";
+}
+async function loadAdminDailyPushConfig(){
+  const box=document.getElementById("adminDailyPreviewBox");
+  if(box)box.textContent="Lade Konfiguration…";
+  try{
+    const data=await workerGetRequest("api/admin/daily/config");
+    adminDailyConfigSha=data.sha||"";
+    fillAdminDailyConfigForm(data.config||{});
+    if(box)box.textContent="Konfiguration geladen.";
+    addAdminLog("Tages-Push","Konfiguration geladen","");
+  }catch(e){
+    if(box)box.textContent=`Konfiguration konnte nicht geladen werden: ${e.message||e}`;
+  }
+}
+async function saveAdminDailyPushConfig(){
+  const box=document.getElementById("adminDailyPreviewBox");
+  if(box)box.textContent="Speichere…";
+  try{
+    const config=readAdminDailyConfigForm();
+    await workerPostRequest("api/admin/daily/save",{config,sha:adminDailyConfigSha});
+    if(box)box.textContent="Konfiguration gespeichert.";
+    addAdminLog("Tages-Push","Konfiguration gespeichert","");
+    await loadAdminDailyPushConfig();
+  }catch(e){
+    if(box)box.textContent=`Speichern fehlgeschlagen: ${e.message||e}`;
+  }
+}
+function previewAdminDailyPush(kind){
+  const box=document.getElementById("adminDailyPreviewBox");
+  const config=readAdminDailyConfigForm();
+  const section=kind==="recommendation"?config.recommendation:config.dailyDua;
+  const title=section?.title||(kind==="recommendation"?"Heute empfohlen":"Duʿāʾ des Tages");
+  const body=section?.body||(kind==="recommendation"?"Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.":"Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ.");
+  if(box)box.innerHTML=`<strong>${esc(title)}</strong> · ${esc(String(section?.hour||""))}:00 Ortszeit<br>${esc(body)}${section?.id?`<br><small>Manuell: ${esc(section.id)}</small>`:""}`;
+}
+async function sendAdminDailyTestPush(){
+  const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||document.getElementById("adminDailySubscriptionInput")?.value||"").trim();
+  const kind=document.getElementById("adminDailyTestKind")?.value||"dua";
+  const box=document.getElementById("adminDailyPreviewBox");
+  if(!subscriptionId){if(box)box.textContent="Bitte Subscription-ID im Gebets-Push-Bereich einfügen.";return}
+  if(box)box.textContent="Sende Tages-Push-Test…";
+  try{
+    const result=await workerPostRequest("api/admin/daily/test",{subscriptionId,kind});
+    if(box)box.textContent=`Test ${result.sent?"gesendet":"fehlgeschlagen"} · ${kind} · ${result.reason||"ok"}`;
+    addAdminLog("Tages-Push","Test gesendet",kind);
+  }catch(e){
+    if(box)box.textContent=`Test fehlgeschlagen: ${e.message||e}`;
   }
 }
 function setUploadStatus(html){draftStatus=html;const el=document.getElementById("uploadStatus");if(el)el.innerHTML=html}

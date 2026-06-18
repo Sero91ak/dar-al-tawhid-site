@@ -11,6 +11,14 @@ import {
   ensurePrayerSchedulerFresh,
   triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
+import {
+  readDailyPushStatus,
+  readDailyPushConfig,
+  saveDailyPushConfig,
+  ensureDailyPushSchedulerFresh,
+  sendDailyTestPush,
+  buildDailyPushPreview
+} from "./daily-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -53,6 +61,8 @@ export default {
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
           prayerScheduler: "cloudflare-worker-cron",
           prayerCron: "*/5 * * * *",
+          dailyPushScheduler: "cloudflare-worker-daily-v1",
+          dailyPushCron: "*/5 * * * *",
           scheduler: "ready"
         }, cors);
       }
@@ -60,6 +70,11 @@ export default {
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
         const result = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, result.ok ? 200 : 200);
+      }
+
+      if (url.pathname === "/api/daily/status" && request.method === "GET") {
+        const result = await readDailyPushStatus(env, githubGet, base64ToUtf8);
+        return json(result, cors, 200);
       }
 
       if (url.pathname === "/api/prayer/schedule-now" && request.method === "POST") {
@@ -103,8 +118,16 @@ export default {
         "/api/admin/prayer/test",
         "/api/admin/prayer/run"
       ]);
+      const dailyPaths = new Set([
+        "/api/admin/daily/status",
+        "/api/admin/daily/config",
+        "/api/admin/daily/save",
+        "/api/admin/daily/run",
+        "/api/admin/daily/test",
+        "/api/admin/daily/preview"
+      ]);
 
-      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -132,6 +155,31 @@ export default {
         assertAuthorized(request, env);
         const result = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, result.ok ? 200 : 503);
+      }
+
+      if (url.pathname === "/api/admin/daily/status") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const result = await readDailyPushStatus(env, githubGet, base64ToUtf8);
+        return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/daily/config") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const result = await readDailyPushConfig(env, githubGet, base64ToUtf8);
+        return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/daily/preview") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const kind = String(url.searchParams.get("kind") || "dua");
+        const cfg = await readDailyPushConfig(env, githubGet, base64ToUtf8);
+        return json({ ok: true, preview: buildDailyPushPreview(cfg.config || {}, kind) }, cors);
       }
 
       if (request.method !== "POST") {
@@ -171,6 +219,22 @@ export default {
         }
       }
 
+      if (dailyPaths.has(url.pathname)) {
+        if (url.pathname.endsWith("/test")) {
+          return json(await sendDailyTestPush(env, input), cors);
+        }
+        if (url.pathname.endsWith("/run")) {
+          const result = await ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
+          return json(result, cors, result.ok === false ? 503 : 200);
+        }
+        if (url.pathname.endsWith("/save")) {
+          const config = input.config || input;
+          const sha = String(input.sha || "").trim() || undefined;
+          await saveDailyPushConfig(env, config, sha, githubPut, utf8ToBase64);
+          return json({ ok: true, saved: true }, cors);
+        }
+      }
+
       if (publishPaths.has(url.pathname)) {
         return json(await publishPostFromMarkdown(env, input, ctx), cors);
       }
@@ -195,6 +259,7 @@ export default {
     ctx.waitUntil(runScheduledPublishes(env));
     ctx.waitUntil(processAllPendingPushes(env));
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
+    ctx.waitUntil(ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
   }
 };
 

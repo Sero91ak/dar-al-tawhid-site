@@ -106,16 +106,28 @@ function dailyConfig() {
   return { ...fallback, ...readJson(CONFIG_PATH, {}) };
 }
 
-function pickDailyDua(duas, config, dateKey) {
+function pickDailyDua(duas, config, dateKey, timeZone) {
   const manualId = config?.dailyDua?.id;
   const manual = manualId ? duas.find((d) => String(d.id) === String(manualId)) : null;
-  return manual || stablePick(duas, dateKey, 3);
+  if (manual) return manual;
+  if (!duas.length) return null;
+  const parts = dateKey.split("-");
+  const start = Date.UTC(Number(parts[0]), 0, 0);
+  const current = Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+  const day = Math.floor((current - start) / 86400000);
+  return duas[Math.abs(day) % duas.length];
 }
 
 function pickRecommendation(posts, config, dateKey) {
   const manualId = config?.recommendation?.id;
   const manual = manualId ? posts.find((p) => String(p.id) === String(manualId)) : null;
-  return manual || stablePick(posts, dateKey, 7);
+  if (manual) return manual;
+  if (!posts.length) return null;
+  const parts = dateKey.split("-");
+  const start = Date.UTC(Number(parts[0]), 0, 0);
+  const current = Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+  const day = Math.floor((current - start) / 86400000);
+  return posts[Math.abs(day * 7) % posts.length];
 }
 
 function formatDeliveryTime(hour24) {
@@ -189,7 +201,7 @@ async function scheduleDailyNotification(kind, item, config, now) {
   const duas = loadDuas();
   const posts = loadPosts();
   const berlinDate = dayKey(now, "Europe/Berlin");
-  const dailyDua = pickDailyDua(duas, config, berlinDate);
+  const dailyDua = pickDailyDua(duas, config, berlinDate, "Europe/Berlin");
   const recommendation = pickRecommendation(posts, config, berlinDate);
 
   console.log(`Tägliche Push-Prüfung: ${now.toISOString()} | Duʿāʾ=${duas.length} | Beiträge=${posts.length}`);
