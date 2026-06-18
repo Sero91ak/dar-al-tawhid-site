@@ -1246,10 +1246,10 @@ function renderActions(rows,installs=installTotals()){
         <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
-        <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Worker-Cron alle 5&nbsp;Min · Nutzer aus Supabase · Push über OneSignal</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><input class="field" id="adminPrayerSubscriptionInput" placeholder="Subscription-ID aus Besucher-App" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
+        <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Worker-Cron alle 5&nbsp;Min · Nutzer aus Supabase · Push über OneSignal</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><button class="btn" id="adminPushRegsBtn" type="button">Registrierungen laden</button><select class="field" id="adminPrayerSubscriptionSelect" aria-label="Push-Empfänger auswählen" style="display:none"><option value="">Empfänger wählen…</option></select><input class="field" id="adminPrayerSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
         <div class="quick push-test-card"><b>Tägliche Pushs</b><small>Duʿāʾ 09:00 · Empfehlung 12:00 · Ortszeit pro Nutzer</small><div class="push-test-controls"><button class="btn" id="adminDailyStatusBtn" type="button">Status laden</button><button class="btn" id="adminDailyRunBtn" type="button">Cron jetzt starten</button><button class="btn" id="adminDailyConfigBtn" type="button">Konfiguration laden</button></div><div class="upload-status" id="adminDailyStatusBox" style="margin-top:10px">Noch kein Tages-Push-Status geladen.</div><div class="push-test-controls" style="margin-top:10px"><label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="adminDailyAutomatic" checked> Automatische Auswahl</label></div><div class="push-test-controls"><input class="field" id="adminDailyDuaId" placeholder="Duʿāʾ-ID (leer = automatisch)" aria-label="Duʿāʾ-ID"><input class="field" id="adminDailyRecId" placeholder="Beitrags-ID (leer = automatisch)" aria-label="Beitrags-ID"><input class="field" id="adminDailyRecFile" placeholder="Beitrags-Datei optional" aria-label="Beitrags-Datei"></div><div class="push-test-controls"><textarea class="field" id="adminDailyDuaBody" rows="2" placeholder="Duʿāʾ-Push-Text"></textarea><textarea class="field" id="adminDailyRecBody" rows="2" placeholder="Empfehlungs-Push-Text"></textarea></div><div class="push-test-controls"><button class="btn" id="adminDailyPreviewDuaBtn" type="button">Vorschau Duʿāʾ</button><button class="btn" id="adminDailyPreviewRecBtn" type="button">Vorschau Empfehlung</button><button class="btn primary" id="adminDailySaveBtn" type="button">Konfiguration speichern</button></div><div class="upload-status" id="adminDailyPreviewBox" style="margin-top:8px;font-size:11px">Vorschau erscheint hier.</div><div class="section-head" style="margin-top:12px"><h3>Tages-Push Test</h3><span>Subscription-ID wie bei Gebets-Push</span></div><div class="push-test-controls"><select class="field" id="adminDailyTestKind" aria-label="Tages-Push Art"><option value="dua">Duʿāʾ des Tages</option><option value="recommendation">Heute empfohlen</option></select><button class="btn primary" id="adminDailyTestBtn" type="button">Test senden</button></div></div>
       </div>
-      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Subscription-ID aus der Besucher-App kopieren: Gebetszeiten → Push-Status öffnen.</div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Subscription-ID manuell einfügen oder „Registrierungen laden“ nutzen (Supabase).</div>
       ${renderTelegramPanel()}
       ${renderNewsComposer()}
       <div class="preview-box" style="margin-top:14px">
@@ -1378,6 +1378,8 @@ function bindUi(){
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
+  const pushRegsBtn=document.getElementById("adminPushRegsBtn");if(pushRegsBtn)pushRegsBtn.onclick=loadAdminPushRegistrations;
+  const pushRegsSelect=document.getElementById("adminPrayerSubscriptionSelect");if(pushRegsSelect)pushRegsSelect.onchange=()=>{const input=document.getElementById("adminPrayerSubscriptionInput");if(input&&pushRegsSelect.value)input.value=pushRegsSelect.value};
   const oneSignalPrayerBtn=document.getElementById("adminOneSignalPrayerTestBtn");if(oneSignalPrayerBtn)oneSignalPrayerBtn.onclick=sendAdminOneSignalPrayerTest;
   const prayerStatusBtn=document.getElementById("adminPrayerStatusBtn");if(prayerStatusBtn)prayerStatusBtn.onclick=loadAdminPrayerPushStatus;
   const prayerRunBtn=document.getElementById("adminPrayerRunBtn");if(prayerRunBtn)prayerRunBtn.onclick=triggerAdminPrayerScheduler;
@@ -1480,6 +1482,34 @@ function updateDraftPreview(){
   updateTelegramPanelStatus();
 }
 function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
+async function loadAdminPushRegistrations(){
+  if(!hasSupabase()){setAdminPushTestStatus("Supabase nicht konfiguriert.");return}
+  const select=document.getElementById("adminPrayerSubscriptionSelect");
+  const input=document.getElementById("adminPrayerSubscriptionInput");
+  setAdminPushTestStatus("Lade Push-Registrierungen…");
+  try{
+    const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
+    const r=await fetch(url+"/rest/v1/prayer_push_registrations?subscription_id=not.is.null&select=subscription_id,device_id,city,enabled,daily_dua_enabled,daily_recommendation_enabled,last_synced_at&order=last_synced_at.desc&limit=50",{headers:headers(),cache:"no-store"});
+    if(!r.ok)throw new Error("Fehler "+r.status);
+    const rows=await r.json();
+    if(!Array.isArray(rows)||!rows.length){if(select){select.style.display="none";select.innerHTML='<option value="">Empfänger wählen…</option>'}setAdminPushTestStatus("Keine Registrierungen mit Subscription-ID gefunden.");return}
+    if(select){
+      select.innerHTML='<option value="">Empfänger wählen…</option>'+rows.map(row=>{
+        const city=String(row.city||"ohne Ort").trim();
+        const flags=[row.enabled?"Gebet":null,row.daily_dua_enabled?"Duʿāʾ":null,row.daily_recommendation_enabled?"Empfehlung":null].filter(Boolean).join(" · ")||"Push";
+        const synced=row.last_synced_at?new Date(row.last_synced_at).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"";
+        const label=`${city} · ${flags}${synced?" · "+synced:""}`;
+        return `<option value="${esc(String(row.subscription_id||""))}">${esc(label)}</option>`;
+      }).join("");
+      select.style.display="";
+    }
+    if(input&&!input.value&&rows[0]?.subscription_id)input.value=String(rows[0].subscription_id);
+    setAdminPushTestStatus(`${rows.length} Registrierung(en) geladen. Empfänger wählen oder ID manuell einfügen.`);
+    addAdminLog("Push","Registrierungen geladen",String(rows.length));
+  }catch(e){
+    setAdminPushTestStatus(`Registrierungen konnten nicht geladen werden: ${e.message||e}`);
+  }
+}
 function setAdminPrayerStatusHtml(html){const el=document.getElementById("adminPrayerStatusBox");if(el)el.innerHTML=html}
 function formatPrayerPushStatusHtml(status){
   if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
@@ -1567,7 +1597,7 @@ async function sendAdminOneSignalPrayerTest(){
   const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||"").trim();
   const prayer=document.getElementById("adminPushPrayerSelect")?.value||"maghrib";
   const mode=document.getElementById("adminPushModeSelect")?.value||"entry";
-  if(!subscriptionId){setAdminPushTestStatus("Bitte Subscription-ID aus der Besucher-App einfügen (Push-Status).");return}
+  if(!subscriptionId){setAdminPushTestStatus("Bitte Subscription-ID einfügen oder Registrierungen laden.");return}
   setAdminPushTestStatus("Sende OneSignal-Test…");
   try{
     const result=await workerPostRequest("api/admin/prayer/test",{subscriptionId,prayer,mode,advanceMinutes:15});

@@ -1648,6 +1648,7 @@ body:before{
 .prayer-push-status-item.warn span{color:#ffe4a3}
 .prayer-push-status-note{color:var(--muted);font-size:9.5px;line-height:1.35;margin:8px 1px 0}
 .prayer-push-status-warn{border:1px solid rgba(255,196,120,.35);border-radius:12px;background:rgba(255,196,120,.12);color:#ffe4a3;font-size:10.5px;line-height:1.35;padding:8px 9px;margin-bottom:8px}
+.prayer-push-hints{margin-top:8px;display:grid;gap:7px}
 .prayer-push-test-note{display:block;color:var(--muted);font-size:9.5px;line-height:1.35;margin:4px 1px 8px}
 .prayer-push-test-grid{margin-top:4px}
 .prayer-controls-compact{border:1px solid var(--line2);border-radius:19px;background:rgba(0,0,0,.12);padding:10px;margin-top:12px}
@@ -5667,7 +5668,7 @@ function renderHighlightPushButton(key,label){const active=dailyPushPref(getPray
 function buildDailyPushTags(settings=getPrayerSettings()){return{daily_dua_notifications:dailyPushPref(settings,"dailyDua")?"true":"false",daily_recommendation_notifications:dailyPushPref(settings,"dailyRecommendation")?"true":"false",push_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",dar_push:"true",post_notifications:"true",push_site:"dar-al-tawhid",push_version:"7"}}
 async function syncDailyPushTags(settings=getPrayerSettings(),{ensureOptIn=false}={}){const OS=await waitForOneSignalReady();if(!OS)return false;await ensurePushUserLogin(OS);if(ensureOptIn){const opted=await waitForPushOptIn(OS);if(!opted)return false}try{await addOneSignalTagsCompat(OS,buildDailyPushTags(settings));return true}catch(e){console.warn("Tages-Push-Tags:",e);return false}}
 async function setDailyPushPreference(key,active){const next={};next[key]=!!active;if(active){if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}let permission=getNotificationPermission();if(permission!=="granted")permission=await requestNotificationPermission();if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}const OS=await waitForOneSignalReady();if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS)}}setPrayerSettings(next);const ok=await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:!!active});await savePushRegistration(getPrayerSettings(),await waitForOneSignalReady(8000));updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();if(active&&!ok)alert("Einstellung gespeichert. Push wird im Hintergrund erneut verbunden.")}
-function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben"}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);const next=nextPlannedPrayerNotification(settings);const testPrayer=next?.prayer?.key||"maghrib";const testMode=next?.mode||"entry";return `<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div><div class="prayer-settings-grid prayer-push-test-grid"><select id="prayerTestPrayerSelect" class="filter-select" aria-label="Gebet für Test"><option value="fajr" ${testPrayer==="fajr"?"selected":""}>Fajr</option><option value="dhuhr" ${testPrayer==="dhuhr"?"selected":""}>Dhuhr</option><option value="asr" ${testPrayer==="asr"?"selected":""}>ʿAṣr</option><option value="maghrib" ${testPrayer==="maghrib"?"selected":""}>Maghrib</option><option value="isha" ${testPrayer==="isha"?"selected":""}>ʿIshāʾ</option><option value="tahajjud" ${testPrayer==="tahajjud"?"selected":""}>Taḥajjud</option></select><select id="prayerTestModeSelect" class="filter-select" aria-label="Test-Art"><option value="advance" ${testMode==="advance"?"selected":""}>15 Min vorher</option><option value="entry" ${testMode==="entry"?"selected":""}>Zur Gebetszeit</option></select></div>${renderDailyPushPanel()}${renderPrayerPushStatus(settings)}`}
+function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben"}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);return `<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderDailyPushPanel()}${renderPrayerPushHints(settings)}`}
 function updatePrayerReminderButtons(){const s=getPrayerSettings();document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(s.reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"});document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Duʿāʾ des Tages · 09:00"});document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Heute empfohlen · 12:00"})}
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
 function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)||getNotificationPermission()==="granted";btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}
@@ -5758,106 +5759,16 @@ function prayerNotificationTitle(prayer,advance=false,settings=getPrayerSettings
 function prayerAdvanceNotificationCopy(prayer,settings,eventDate){const timeLabel=prayerTimeLabel(prayer,eventDate||prayerEventDate(new Date(),prayer));const minutes=prayerPushAdvanceMinutes(settings);const reminder=pickPrayerMessage(prayer,`advance-${timeLabel}`);const prep=prayer.key==="tahajjud"?"Taḥajjud":"das Gebet";return{title:prayerNotificationTitle(prayer,true,settings),body:`Noch ${minutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf ${prep} vor. ${reminder}`,tag:`prayer-advance-${prayer.key}`}}
 function prayerEntryNotificationCopy(prayer,settings=getPrayerSettings(),eventDate){const timeLabel=prayerTimeLabel(prayer,eventDate||prayerEventDate(new Date(),prayer));const reminder=pickPrayerMessage(prayer,`entry-${timeLabel}`);const lead=prayer.key==="tahajjud"?"jetzt ist Gelegenheit für Taḥajjud":"jetzt ist Gebetszeit";return{title:prayerNotificationTitle(prayer,false,settings),body:`${timeLabel} Uhr – ${lead}. ${reminder}`,tag:prayer.key==="tahajjud"?"prayer-tahajjud":`prayer-${prayer.key}`}}
 function prayerByKey(key,settings=getPrayerSettings()){return calculatePrayerTimes(new Date(),settings).find(p=>p.key===key)||null}
-let prayerPushServerStatus=null;
-const PRAYER_PUSH_WORKER_STATUS_URL="https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/status";
-async function loadPrayerPushServerStatus(){
-  try{
-    const d=prayerPushDebug();
-    if((d.lastError&&/workflow|403|workflow_dispatch|personal access token/i.test(String(d.lastError)))||(d.lastScheduleNote&&/workflow|403/i.test(String(d.lastScheduleNote)))){
-      setPrayerPushDebug({lastError:"",lastScheduleTrigger:"",lastScheduleNote:"",lastScheduleAt:""});
-    }
-    try{
-      const wr=await fetch(PRAYER_PUSH_WORKER_STATUS_URL+"?v="+Date.now(),{cache:"no-store"});
-      if(wr.ok){
-        const wd=await wr.json();
-        if(wd?.status?.updatedAt){prayerPushServerStatus=wd.status;return prayerPushServerStatus}
-      }
-    }catch(e){}
-    const r=await fetch("/content/admin/prayer-push-status.json?v="+Date.now(),{cache:"no-store"});
-    if(r.ok)prayerPushServerStatus=await r.json();
-  }catch(e){}
-  return prayerPushServerStatus;
-}
-function nextPlannedPrayerPushSummary(settings=getPrayerSettings()){
-  if(!hasPrayerLocation(settings))return"Standort fehlt";
-  const now=new Date();
-  const advanceMs=prayerPushAdvanceMinutes(settings)*60000;
-  let nextEntry=null,nextAdvance=null;
-  [-1,0,1].forEach(offset=>{
-    const base=new Date(now);base.setDate(now.getDate()+offset);
-    calculatePrayerTimes(base,settings).filter(p=>p.key!=="sunrise"&&(p.key!=="tahajjud"||tahajjudNotificationsEnabled(settings))).forEach(p=>{
-      const entryAt=prayerEventDate(base,p);
-      if(entryAt>now&&(!nextEntry||entryAt<nextEntry.date))nextEntry={prayer:p,date:entryAt};
-      if(advanceMs>0){
-        const advanceAt=new Date(entryAt.getTime()-advanceMs);
-        if(advanceAt>now&&(!nextAdvance||advanceAt<nextAdvance.date))nextAdvance={prayer:p,date:advanceAt};
-      }
-    });
-  });
-  if(!nextEntry&&!nextAdvance)return"Wird mit nächstem Server-Lauf geplant";
-  const parts=[];
-  if(nextEntry)parts.push(`${nextEntry.prayer.name} ${formatPrayerHour(nextEntry.prayer.time)}`);
-  if(nextAdvance)parts.push(`Vorab ${nextAdvance.date.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}`);
-  return parts.join(" · ");
-}
-function nextPlannedPrayerNotification(settings=getPrayerSettings()){
-  if(!hasPrayerLocation(settings))return null;
-  const now=new Date();
-  const advanceMs=prayerPushAdvanceMinutes(settings)*60000;
-  const candidates=[];
-  [-1,0,1].forEach(offset=>{
-    const base=new Date(now);base.setDate(now.getDate()+offset);
-    calculatePrayerTimes(base,settings).filter(p=>p.key!=="sunrise"&&(p.key!=="tahajjud"||tahajjudNotificationsEnabled(settings))).forEach(p=>{
-      const entryAt=prayerEventDate(base,p);
-      if(advanceMs>0){
-        const advanceAt=new Date(entryAt.getTime()-advanceMs);
-        if(advanceAt>now)candidates.push({prayer:p,mode:"advance",date:advanceAt,label:`${p.name} · ${formatPrayerHour(p.time)} (${prayerPushAdvanceMinutes(settings)} Min vorher)`});
-      }
-      if(entryAt>now)candidates.push({prayer:p,mode:"entry",date:entryAt,label:p.key==="tahajjud"?`Taḥajjud · ${formatPrayerTimeDisplay(p)}`:`${p.name} · ${formatPrayerHour(p.time)}`});
-    });
-  });
-  candidates.sort((a,b)=>a.date-b.date);
-  return candidates[0]||null;
-}
-function updatePrayerPushStatusPanel(){
-  const host=document.querySelector(".prayer-push-status");
-  if(!host||currentRoute.view!=="prayer")return;
-  const wasOpen=host.hasAttribute("open");
-  const tmp=document.createElement("div");
-  tmp.innerHTML=renderPrayerPushStatus(getPrayerSettings());
-  const fresh=tmp.firstElementChild;
-  if(!fresh)return;
-  if(wasOpen)fresh.setAttribute("open","");
-  host.replaceWith(fresh);
-}
-function prayerPushVisibleError(debug){
-  const parts=[debug?.lastError,debug?.lastScheduleNote].filter(Boolean).map(String);
-  const raw=parts.find(t=>t&&!/workflow|403|workflow_dispatch|Resource not accessible|personal access token/i.test(t))||"";
-  return raw;
-}
-function renderPrayerPushStatus(settings=getPrayerSettings()){
+function renderPrayerPushHints(settings=getPrayerSettings()){
   const permission=getNotificationPermission();
   const reminder=Boolean(settings.reminder);
-  const pushAllowed=permission==="granted";
   const hasLocation=hasPrayerLocation(settings);
-  const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||settings.timezone||"Europe/Berlin";
-  const debug=prayerPushDebug();
-  const pushId=window.OneSignal?.User?.PushSubscription?.id||debug.subscriptionId||"";
-  const hasSubscription=Boolean(pushId);
-  const tagsOk=debug.onesignal==="tags ok";
-  const supabaseOk=debug.supabase==="ok";
-  const pushActive=Boolean(reminder&&hasLocation&&pushAllowed&&hasSubscription&&(tagsOk||supabaseOk));
-  const warnActiveButBroken=reminder&&(!pushAllowed||!hasLocation||!hasSubscription||(!tagsOk&&!supabaseOk));
-  const nextSummary=nextPlannedPrayerPushSummary(settings);
-  const schedulerInfo=prayerPushServerStatus?.updatedAt?new Date(prayerPushServerStatus.updatedAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):(prayerPushServerStatus?.schedulerEngine?.includes("worker")?"Worker-Cron · alle 5 Min":"Wird geplant");
-  const lastTest=debug.lastTestAt?`${debug.lastTestOk?"erfolgreich":"fehlgeschlagen"} · ${new Date(debug.lastTestAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`:"Noch keiner";
-  const lastSync=debug.lastSync?new Date(debug.lastSync).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Noch nicht";
-  const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);
-  const dailyDuaOn=dailyPushPref(settings,"dailyDua");
-  const dailyRecOn=dailyPushPref(settings,"dailyRecommendation");
-  const lastError=prayerPushVisibleError(debug);
-  const warnHtml=warnActiveButBroken?`<div class="prayer-push-status-warn">⚠ Gebets-Push wirkt aktiv, aber Subscription, Tags oder Standort fehlen. Bitte Erinnerung erneut aktivieren und „Test senden“ nutzen.</div>`:"";
-  return `<details class="prayer-push-status" aria-live="polite"><summary>Push-Status öffnen</summary><div class="prayer-push-status-body">${warnHtml}<div class="prayer-push-status-grid"><div class="prayer-push-status-item ${pushAllowed?"ok":"warn"}"><b>Push erlaubt</b><span>${pushAllowed?"Ja":permission==="denied"?"Nein (blockiert)":"Nein"}</span></div><div class="prayer-push-status-item ${reminder?"ok":"warn"}"><b>Gebets-Push aktiv</b><span>${reminder?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${dailyDuaOn?"ok":"warn"}"><b>Duʿāʾ des Tages</b><span>${dailyDuaOn?"09:00 aktiv":"Aus"}</span></div><div class="prayer-push-status-item ${dailyRecOn?"ok":"warn"}"><b>Heute empfohlen</b><span>${dailyRecOn?"12:00 aktiv":"Aus"}</span></div><div class="prayer-push-status-item ${hasSubscription?"ok":"warn"}"><b>Subscription vorhanden</b><span>${hasSubscription?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Standort vorhanden</b><span>${hasLocation?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${hasLocation?"ok":"warn"}"><b>Zeitzone</b><span>${esc(tz)}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Gebets-Push bereit</b><span>${pushActive?"Ja":"Nein"}</span></div><div class="prayer-push-status-item ${nextSummary.includes("fehlt")?"warn":"ok"}"><b>Nächstes Gebet</b><span>${esc(nextSummary)}</span></div><div class="prayer-push-status-item ${pushActive?"ok":"warn"}"><b>Server-Planung</b><span>${esc(schedulerInfo)}</span></div><div class="prayer-push-status-item ${debug.lastTestOk?"ok":"warn"}"><b>Letzter Test-Push</b><span>${esc(lastTest)}</span></div><div class="prayer-push-status-item ${tahajjud==="off"?"warn":"ok"}"><b>Taḥajjud</b><span>${esc(tahajjudModeLabel(tahajjud))}</span></div><div class="prayer-push-status-item ${supabaseOk?"ok":"warn"}"><b>Registrierung</b><span>${supabaseOk?"Gespeichert":esc(debug.supabase||"Wartet")}</span></div><div class="prayer-push-status-item ${tagsOk?"ok":"warn"}"><b>OneSignal-Tags</b><span>${esc(debug.onesignal||"Wartet")}</span></div>${lastError?`<div class="prayer-push-status-item warn"><b>Letzter Fehler</b><span>${esc(lastError)}</span></div>`:""}<div class="prayer-push-status-item ${pushId?"ok":"warn"}"><b>Subscription-ID</b><span>${pushId?esc(pushId):"Fehlt"}</span></div><div class="prayer-push-status-item"><b>Letzter Sync</b><span>${esc(lastSync)}</span></div></div><small class="prayer-push-status-note">Gebets-Pushs: Cloudflare Worker Cron · Tägliche Erinnerungen: 09:00 Duʿāʾ · 12:00 Empfehlung (Ortszeit). Test-Push = nur dieses Gerät.</small></div></details>`;
+  const hints=[];
+  if(permission==="denied")hints.push("Benachrichtigungen sind blockiert. Bitte in den Geräte-Einstellungen für diese App erlauben.");
+  else if(reminder&&!hasLocation)hints.push("Standort fehlt – für Gebets-Push bitte oben Standort freigeben.");
+  else if(reminder&&permission!=="granted")hints.push("Bitte Benachrichtigungen erlauben, damit Gebets-Erinnerungen ankommen.");
+  if(!hints.length)return "";
+  return `<div class="prayer-push-hints" aria-live="polite">${hints.map(t=>`<div class="prayer-push-status-warn">⚠ ${esc(t)}</div>`).join("")}</div>`;
 }
 async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{return new window.Notification(title,payload)}catch(e){}}return null}
 function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s))scheduleLocalPrayerReminders({silent:true})}
@@ -6127,8 +6038,9 @@ async function sendPrayerTestNotification(){
   if(permission!=="granted")permission=await requestNotificationPermission();
   if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
   const settings=getPrayerSettings();
-  const prayerKey=$("prayerTestPrayerSelect")?.value||nextPlannedPrayerNotification(settings)?.prayer?.key||"maghrib";
-  const mode=$("prayerTestModeSelect")?.value||"entry";
+  const planned=nextPlannedPrayerNotification(settings);
+  const prayerKey=planned?.prayer?.key||"maghrib";
+  const mode=planned?.mode||"entry";
   let prayer=prayerByKey(prayerKey,settings);
   if(prayerKey==="tahajjud"&&!prayer){const info=tahajjudReminderInfo(new Date(),settings);prayer=info?{key:"tahajjud",name:"Taḥajjud",time:info.time,eventDate:info.startDate}:{key:"tahajjud",name:"Taḥajjud",time:2.5}}
   if(!prayer){alert("Bitte zuerst Standort freigeben, damit Gebetszeiten berechnet werden können.");return}
@@ -6165,7 +6077,6 @@ async function activatePrayerReminder(){
   const OS=await waitForOneSignalReady();
   if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});await savePushRegistration(getPrayerSettings(),OS)}
   const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
-  loadPrayerPushServerStatus().catch(()=>{});
   updatePrayerReminderButtons();
   updatePushFloatButton();
   if(reminder)reminder.disabled=false;
@@ -6178,7 +6089,7 @@ async function activatePrayerReminder(){
     }
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();loadPrayerPushServerStatus().then(()=>updatePrayerPushStatusPanel());if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
