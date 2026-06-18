@@ -6,6 +6,7 @@ const DEFAULT_POSTS_DIR = "content/posts";
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
+const DEFAULT_ONESIGNAL_APP_ID = "477c3e7b-f51c-4b7a-826e-04d8e83ec1a4";
 
 export default {
   async fetch(request, env) {
@@ -18,6 +19,7 @@ export default {
 
     try {
       if (url.pathname === "/health" || url.pathname === "/api/admin/health") {
+        const visitor = await checkVisitorSiteHealth(env);
         return json({
           ok: true,
           service: "dar-admin-publisher",
@@ -25,6 +27,8 @@ export default {
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
           hasAdminSecret: Boolean(env.ADMIN_PUBLISH_SECRET),
+          hasOneSignal: Boolean(env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY),
+          visitor,
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
           scheduler: "ready"
@@ -59,7 +63,9 @@ export default {
       const input = await request.json().catch(() => ({}));
 
       if (publishPaths.has(url.pathname)) {
-        return json(await publishPostFromMarkdown(env, input), cors);
+        const result = await publishPostFromMarkdown(env, input);
+        result.push = await sendNewPostPush(env, result, input.markdown);
+        return json(result, cors);
       }
 
       if (newsPaths.has(url.pathname)) {
@@ -171,11 +177,75 @@ async function publishPostFromMarkdown(env, input) {
     ok: true,
     filename,
     number: nextNumber,
+    postId: frontmatterValue(markdown, "id") || filename.replace(/\.md$/i, ""),
+    title: frontmatterValue(markdown, "title").replace(/^📖\s*/, "").trim(),
     postCount: nextFiles.length,
     postPath,
     indexPath,
     commitSha: updatedIndex.commit?.sha || created.commit?.sha || ""
   };
+}
+
+async function checkVisitorSiteHealth(env) {
+  const site = siteOrigin(env);
+  try {
+    const [shell, index] = await Promise.allSettled([
+      fetch(`${site}/?health=${Date.now()}`, { cf: { cacheTtl: 0 } }),
+      fetch(`${site}/${trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR)}/posts-index.json?health=${Date.now()}`, { cf: { cacheTtl: 0 } })
+    ]);
+    return {
+      ok: shell.status === "fulfilled" && shell.value.ok && index.status === "fulfilled" && index.value.ok,
+      shell: shell.status === "fulfilled" ? shell.value.status : 0,
+      postsIndex: index.status === "fulfilled" ? index.value.status : 0
+    };
+  } catch (error) {
+    return { ok: false, error: error.message || String(error) };
+  }
+}
+
+async function sendNewPostPush(env, result, markdown) {
+  const apiKey = String(env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "").trim();
+  if (!apiKey) return { ok: false, sent: false, reason: "OneSignal API Key fehlt" };
+  const site = siteOrigin(env);
+  const postId = result.postId || frontmatterValue(markdown, "id") || String(result.filename || "").replace(/\.md$/i, "");
+  const title = result.title || frontmatterValue(markdown, "title").replace(/^📖\s*/, "").trim() || "Neuer Beitrag";
+  const cacheVersion = Date.now();
+  const url = `${site}/?post=${encodeURIComponent(postId)}&v=${cacheVersion}#post/${encodeURIComponent(postId)}`;
+  const payload = {
+    app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
+    target_channel: "push",
+    headings: { en: "Neuer Beitrag online", de: "Neuer Beitrag online" },
+    contents: { en: title, de: title },
+    url,
+    data: {
+      type: "post",
+      postId,
+      slug: postId,
+      filename: result.filename || "",
+      url,
+      publishedAt: new Date().toISOString(),
+      cacheVersion: String(cacheVersion)
+    },
+    chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
+    chrome_web_badge: `${site}/notification-badge-96.png?v=2`,
+    firefox_icon: `${site}/notification-icon-192.png?v=2`,
+    name: `admin-publish-${cacheVersion}`
+  };
+  const res = await fetch("https://onesignal.com/api/v1/notifications", {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${apiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) return { ok: false, sent: false, status: res.status, reason: data.errors || data.message || "OneSignal Fehler" };
+  return { ok: true, sent: true, id: data.id || "", url };
+}
+
+function siteOrigin(env) {
+  return String(env.SITE_ORIGIN || env.ALLOWED_ORIGIN || DEFAULT_ALLOWED_ORIGIN).replace(/\/$/, "");
 }
 
 async function publishNewsUpdate(env, input) {

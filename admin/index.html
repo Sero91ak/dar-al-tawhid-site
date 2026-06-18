@@ -420,6 +420,15 @@ function workerHealthUrl(){
   else url.pathname="/health";
   return url.toString();
 }
+async function checkVisitorAppHealth(){
+  const checks=await Promise.allSettled([
+    fetch(`${SITE_ORIGIN}/?health=${Date.now()}`,{cache:"no-store"}),
+    fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?health=${Date.now()}`,{cache:"no-store"})
+  ]);
+  const shellOk=checks[0].status==="fulfilled"&&checks[0].value.ok;
+  const indexOk=checks[1].status==="fulfilled"&&checks[1].value.ok;
+  return{ok:shellOk&&indexOk,shellOk,indexOk,checkedAt:new Date().toISOString()};
+}
 function workerEndpoint(path){
   const url=new URL(resolveWorkerUrl(workerPublishUrl()));
   const clean=String(path||"").replace(/^\/+/,"");
@@ -1313,11 +1322,17 @@ async function uploadPostViaWorker(){
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
     setUploadStatus("Sende Beitrag an Cloudflare Worker...");
     const result=await publishPostViaWorkerRequest(markdown,draftFilename);
-    draftFilename=result.filename||draftFilename;
-    draftMarkdown=markdown;draftNextNumber=result.number||next;
-    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
-    addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
-    saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
+    const uploadedFilename=result.filename||draftFilename;
+    const uploadedNumber=result.number||next;
+    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong><br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
+    addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
+    draftMarkdown="";
+    draftFilename="";
+    draftNextNumber=null;
+    try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}
+    const text=document.getElementById("postMarkdownInput");if(text)text.value="";
+    if(filenameInput)filenameInput.value="";
+    updateDraftPreview();
     toast("Beitrag hochgeladen");
   }catch(e){
     addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
