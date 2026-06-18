@@ -4973,6 +4973,20 @@ body.image-editor-mode .ie-power-sheet-body{padding-top:11px}
 html[data-theme="light"] body.image-editor-mode .ie-power-block-row{border-bottom-color:rgba(155,122,60,.20)}
 html[data-theme="light"] body.image-editor-mode .ie-power-sheet-tabs{border-bottom-color:rgba(155,122,60,.18)}
 html[data-theme="soft"] body.image-editor-mode .ie-power-block-row{border-bottom-color:rgba(116,76,98,.20)}
+
+/* Werkzeugleiste direkt unter Hinweis, dezent, klar aufklappbar (Test) */
+@media(max-width:900px){
+body.image-editor-mode .ie-power-sheet{position:static!important;bottom:auto!important;margin-top:10px}
+}
+body.image-editor-mode .ie-power-block-row{border-bottom:none!important;padding-bottom:6px;margin-bottom:8px}
+body.image-editor-mode .image-editor-touch-hint{margin:8px 0 10px;border:1px solid rgba(239,215,142,.13)}
+body.image-editor-mode .ie-power-sheet-tabs{border-bottom:1px solid rgba(239,215,142,.10)}
+body.image-editor-mode .ie-power-sheet{margin-top:10px;border:1px solid rgba(239,215,142,.22);box-shadow:0 -2px 14px rgba(0,0,0,.18)}
+body.image-editor-mode .ie-power-sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;border-bottom:1px solid rgba(239,215,142,.08);background:transparent}
+body.image-editor-mode .ie-power-sheet-handle span{width:46px;height:5px;border-radius:999px;background:var(--editor-sheet-handle)}
+body.image-editor-mode .ie-power-sheet-handle::after{content:"Werkzeuge ▾";font-size:9px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;color:var(--editor-muted)}
+body.image-editor-mode .ie-power-sheet.is-collapsed .ie-power-sheet-handle::after{content:"Werkzeuge ▸"}
+html[data-theme="light"] body.image-editor-mode .ie-power-sheet,html[data-theme="soft"] body.image-editor-mode .ie-power-sheet{border-color:rgba(155,122,60,.24)}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
