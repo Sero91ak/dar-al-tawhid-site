@@ -4987,6 +4987,19 @@ body.image-editor-mode .ie-power-sheet-handle span{width:46px;height:5px;border-
 body.image-editor-mode .ie-power-sheet-handle::after{content:"Werkzeuge ▾";font-size:9px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;color:var(--editor-muted)}
 body.image-editor-mode .ie-power-sheet.is-collapsed .ie-power-sheet-handle::after{content:"Werkzeuge ▸"}
 html[data-theme="light"] body.image-editor-mode .ie-power-sheet,html[data-theme="soft"] body.image-editor-mode .ie-power-sheet{border-color:rgba(155,122,60,.24)}
+
+/* Einheitlicher Bearbeitungsbereich mit einer klaren Start-Linie (Test) */
+body.image-editor-mode .ie-power-block-row,
+body.image-editor-mode .image-editor-touch-hint,
+body.image-editor-mode .ie-power-sheet{width:100%;max-width:520px;margin-left:auto;margin-right:auto}
+body.image-editor-mode .ie-power-block-row{border-bottom:none!important;margin-bottom:0;padding-bottom:12px}
+body.image-editor-mode .ie-power-edit-zone-start{display:none}
+body.image-editor-mode .image-editor-touch-hint{position:relative;margin:0 auto;border:none!important;border-top:1px solid rgba(239,215,142,.30)!important;border-radius:0;background:transparent;padding:12px 12px 10px;text-align:center}
+body.image-editor-mode .image-editor-touch-hint::before{content:"BEARBEITUNG";display:block;margin:0 0 7px;font-size:9px;font-weight:950;letter-spacing:.22em;color:var(--editor-warning)}
+body.image-editor-mode .ie-power-sheet{margin-top:10px;border:1px solid rgba(239,215,142,.20)!important;box-shadow:0 -1px 12px rgba(0,0,0,.16)}
+body.image-editor-mode .ie-power-sheet-tabs{border-bottom:1px solid rgba(239,215,142,.10)}
+html[data-theme="light"] body.image-editor-mode .image-editor-touch-hint{border-top-color:rgba(155,122,60,.32)!important}
+html[data-theme="soft"] body.image-editor-mode .image-editor-touch-hint{border-top-color:rgba(116,76,98,.30)!important}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
