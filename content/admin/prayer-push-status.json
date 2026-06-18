@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-18T07:00:22.577Z",
+  "updatedAt": "2026-06-18T07:05:22.907Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-18T07:00:22.577Z",
+  "lastCronRun": "2026-06-18T07:05:22.907Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-18T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-18T06:45:20.613Z",
-  "windowEnd": "2026-06-19T09:00:20.613Z",
+  "windowStart": "2026-06-18T06:50:20.614Z",
+  "windowEnd": "2026-06-19T09:05:20.614Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
@@ -828,12 +828,6 @@
       "lastSyncedAt": "2026-06-14T21:40:05.243+00:00"
     },
     {
-      "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-18T05:04:21.538+00:00"
-    },
-    {
       "subscriptionId": "19ab451c-bf40-4b43-a99e-2cef488cd734",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -858,16 +852,22 @@
       "lastSyncedAt": "2026-06-18T06:50:28.518+00:00"
     },
     {
-      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-18T06:58:57.572+00:00"
-    },
-    {
       "subscriptionId": "8fe3c8c1-f070-40a9-a9c4-1ecf5806d0ed",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-06-17T21:45:15.648+00:00"
+    },
+    {
+      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-18T07:02:15.851+00:00"
+    },
+    {
+      "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-18T07:02:32.492+00:00"
     },
     {
       "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
