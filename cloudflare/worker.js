@@ -100,6 +100,16 @@ export default {
         return json({ ok: true, ...(await fetchPostNumberInfo(env)) }, cors);
       }
 
+      if (url.pathname === "/api/admin/visitor-health") {
+        if (request.method !== "GET") {
+          return json({ ok: false, error: "GET required" }, cors, 405);
+        }
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const health = await checkVisitorSiteHealth(env);
+        return json({ ok: health.ok, ...health }, cors, health.ok ? 200 : 503);
+      }
+
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
       const stagingPaths = new Set(["/api/admin/staging/publish"]);
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
@@ -308,6 +318,13 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   const staging = Boolean(options.staging || input.staging);
   const postsDir = trimSlashes(staging ? (env.STAGING_POSTS_DIR || DEFAULT_STAGING_POSTS_DIR) : (env.POSTS_DIR || DEFAULT_POSTS_DIR));
   const indexPath = `${postsDir}/posts-index.json`;
+
+  if (!staging) {
+    const health = await checkVisitorSiteHealth(env);
+    if (!health.ok) {
+      throw httpError(`Live blockiert – Besucher-App nicht startklar: ${health.issues.join(" · ")}`, 503);
+    }
+  }
 
   const indexFile = await githubGet(env, owner, repo, indexPath, branch);
   const indexData = indexFile?.content ? JSON.parse(base64ToUtf8(indexFile.content)) : { version: 1, files: [] };
@@ -1158,6 +1175,47 @@ function telegramChannelId(env) {
 
 function siteOrigin(env) {
   return String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
+}
+
+function extractVisitorMainScriptFromHtml(html) {
+  const match = String(html || "").match(/<script>\nconst REPO_OWNER[\s\S]*?<\/script>/);
+  return match ? match[0].replace(/^<script>\n/, "").replace(/<\/script>$/, "") : "";
+}
+
+function validateVisitorMainScript(code) {
+  const issues = [];
+  if (!code) {
+    issues.push("Besucher-App Hauptscript nicht gefunden");
+    return issues;
+  }
+  if (!code.includes("function render(")) issues.push("render() fehlt in index.html");
+  if (/BYPASS_POST_CACHE"\)\}\}catch\(e\)\{\}/.test(code) && !/BYPASS_POST_CACHE"\)\}\}\}\}catch\(e\)\{\}/.test(code)) {
+    issues.push("hardRefreshApp Syntaxfehler (fehlende Klammer)");
+  }
+  return issues;
+}
+
+async function checkVisitorSiteHealth(env) {
+  const issues = [];
+  const origin = siteOrigin(env);
+  try {
+    const res = await fetch(`${origin}/index.html?visitorHealth=${Date.now()}`, { redirect: "follow" });
+    if (!res.ok) issues.push(`index.html antwortet mit HTTP ${res.status}`);
+    else issues.push(...validateVisitorMainScript(extractVisitorMainScriptFromHtml(await res.text())));
+  } catch (e) {
+    issues.push(`index.html nicht erreichbar: ${e.message || e}`);
+  }
+  try {
+    const res = await fetch(`${origin}/content/posts/posts-index.json?visitorHealth=${Date.now()}`);
+    if (!res.ok) issues.push(`posts-index.json HTTP ${res.status}`);
+    else {
+      const data = await res.json();
+      if (!data || !Array.isArray(data.files)) issues.push("posts-index.json ist ungültig");
+    }
+  } catch (e) {
+    issues.push(`posts-index.json: ${e.message || e}`);
+  }
+  return { ok: issues.length === 0, issues, checkedAt: new Date().toISOString(), origin };
 }
 
 function telegramPostsPath(env) {
