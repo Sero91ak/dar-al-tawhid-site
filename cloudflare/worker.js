@@ -91,6 +91,14 @@ export default {
         return json({ ok: result.triggered && result.ok !== false, ...result }, cors, result.triggered ? 200 : 503);
       }
 
+      if (url.pathname === "/api/prayer/test" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+        if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
+        const result = await sendPrayerTestPush(env, input);
+        return json({ ok: Boolean(result.sent), ...result }, cors, result.sent ? 200 : 503);
+      }
+
       if (url.pathname === "/api/admin/next-number") {
         if (request.method !== "GET") {
           return json({ ok: false, error: "GET required" }, cors, 405);

@@ -5880,6 +5880,26 @@ function prayerNotificationTitle(prayer,advance=false,settings=getPrayerSettings
 function prayerAdvanceNotificationCopy(prayer,settings,eventDate){const timeLabel=prayerTimeLabel(prayer,eventDate||prayerEventDate(new Date(),prayer));const minutes=prayerPushAdvanceMinutes(settings);const reminder=pickPrayerMessage(prayer,`advance-${timeLabel}`);const prep=prayer.key==="tahajjud"?"Taḥajjud":"das Gebet";return{title:prayerNotificationTitle(prayer,true,settings),body:`Noch ${minutes} Minuten bis ${timeLabel} Uhr. Bereite dich auf ${prep} vor. ${reminder}`,tag:`prayer-advance-${prayer.key}`}}
 function prayerEntryNotificationCopy(prayer,settings=getPrayerSettings(),eventDate){const timeLabel=prayerTimeLabel(prayer,eventDate||prayerEventDate(new Date(),prayer));const reminder=pickPrayerMessage(prayer,`entry-${timeLabel}`);const lead=prayer.key==="tahajjud"?"jetzt ist Gelegenheit für Taḥajjud":"jetzt ist Gebetszeit";return{title:prayerNotificationTitle(prayer,false,settings),body:`${timeLabel} Uhr – ${lead}. ${reminder}`,tag:prayer.key==="tahajjud"?"prayer-tahajjud":`prayer-${prayer.key}`}}
 function prayerByKey(key,settings=getPrayerSettings()){return calculatePrayerTimes(new Date(),settings).find(p=>p.key===key)||null}
+function nextPlannedPrayerNotification(settings=getPrayerSettings()){
+  if(!hasPrayerLocation(settings))return null;
+  const now=new Date();
+  const advanceMs=prayerPushAdvanceMinutes(settings)*60000;
+  const candidates=[];
+  [-1,0,1].forEach(offset=>{
+    const base=new Date(now);base.setDate(now.getDate()+offset);
+    calculatePrayerTimes(base,settings).filter(p=>p.key!=="sunrise"&&(p.key!=="tahajjud"||tahajjudNotificationsEnabled(settings))).forEach(p=>{
+      const entryAt=prayerEventDate(base,p);
+      if(advanceMs>0){
+        const advanceAt=new Date(entryAt.getTime()-advanceMs);
+        if(advanceAt>now)candidates.push({prayer:p,mode:"advance",date:advanceAt});
+      }
+      if(entryAt>now)candidates.push({prayer:p,mode:"entry",date:entryAt});
+    });
+  });
+  candidates.sort((a,b)=>a.date-b.date);
+  return candidates[0]||null;
+}
+const PRAYER_PUSH_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev";
 function renderPrayerPushHints(settings=getPrayerSettings()){
   const permission=getNotificationPermission();
   const reminder=Boolean(settings.reminder);
@@ -6154,28 +6174,50 @@ function scheduleLocalPrayerReminders({silent=false}={}){const settings=getPraye
 async function enablePrayerServerPush(settings){return syncPrayerPushTags(settings)}
 async function disablePrayerServerPush(){try{const OS=await waitForOneSignalReady();if(OS&&OS.User&&typeof OS.User.addTags==="function")await OS.User.addTags({prayer_notifications:"false"});const id=localStorage.getItem(PUSH_USER_KEY);if(id&&hasSupabaseCfg())await supabaseRest(`prayer_push_registrations?device_id=eq.${encodeURIComponent(id)}`,{method:"PATCH",prefer:"return=minimal",body:{enabled:false,last_synced_at:new Date().toISOString()}})}catch(e){}}
 async function sendPrayerTestNotification(){
-  if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}
-  let permission=getNotificationPermission();
-  if(permission!=="granted")permission=await requestNotificationPermission();
-  if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
-  const settings=getPrayerSettings();
-  const planned=nextPlannedPrayerNotification(settings);
-  const prayerKey=planned?.prayer?.key||"maghrib";
-  const mode=planned?.mode||"entry";
-  let prayer=prayerByKey(prayerKey,settings);
-  if(prayerKey==="tahajjud"&&!prayer){const info=tahajjudReminderInfo(new Date(),settings);prayer=info?{key:"tahajjud",name:"Taḥajjud",time:info.time,eventDate:info.startDate}:{key:"tahajjud",name:"Taḥajjud",time:2.5}}
-  if(!prayer){alert("Bitte zuerst Standort freigeben, damit Gebetszeiten berechnet werden können.");return}
-  const eventDate=prayer.eventDate||prayerEventDate(new Date(),prayer);
-  const copy=mode==="advance"?prayerAdvanceNotificationCopy(prayer,settings,eventDate):prayerEntryNotificationCopy(prayer,settings,eventDate);
-  const title=`[Test] ${copy.title}`;
-  const body=copy.body;
+  const btn=$("testPrayerReminderBtn");
+  const oldText=btn?btn.textContent:"";
+  if(btn){btn.disabled=true;btn.textContent="Wird gesendet…"}
   try{
-    await showPrayerNotification(title,{body,tag:`prayer-test-${prayerKey}-${mode}`,renotify:true,data:{url:"/#prayer",test:true}});
-    setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode});
-    render();
+    if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}
+    let permission=getNotificationPermission();
+    if(permission!=="granted")permission=await requestNotificationPermission();
+    if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Geräte-/Browser-Einstellungen erlauben.");return}
+    const settings=getPrayerSettings();
+    const planned=nextPlannedPrayerNotification(settings);
+    const prayerKey=planned?.prayer?.key||"maghrib";
+    const mode=planned?.mode||"entry";
+    let prayer=prayerByKey(prayerKey,settings);
+    if(prayerKey==="tahajjud"&&!prayer){const info=tahajjudReminderInfo(new Date(),settings);prayer=info?{key:"tahajjud",name:"Taḥajjud",time:info.time,eventDate:info.startDate}:{key:"tahajjud",name:"Taḥajjud",time:2.5}}
+    if(!prayer){alert("Bitte zuerst Standort freigeben, damit Gebetszeiten berechnet werden können.");return}
+    const eventDate=prayer.eventDate||prayerEventDate(new Date(),prayer);
+    const copy=mode==="advance"?prayerAdvanceNotificationCopy(prayer,settings,eventDate):prayerEntryNotificationCopy(prayer,settings,eventDate);
+    const title=`[Test] ${copy.title}`;
+    const body=copy.body;
+    const OS=await waitForOneSignalReady(12000);
+    const subId=String(OS?.User?.PushSubscription?.id||"").trim();
+    if(subId){
+      try{
+        const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/prayer/test`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:subId,prayer:prayerKey,mode,advanceMinutes:prayerPushAdvanceMinutes(settings)})});
+        const data=await r.json().catch(()=>({}));
+        if(r.ok&&data.sent){
+          setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"onesignal"});
+          alert("✓ Test-Push wurde gesendet. Prüfe Sperrbildschirm oder Mitteilungszentrale.");
+          return;
+        }
+      }catch(e){console.warn("Gebets-Test-Push (Server):",e)}
+    }
+    const shown=await showPrayerNotification(title,{body,tag:`prayer-test-${prayerKey}-${mode}`,renotify:true,data:{url:"/#prayer",test:true}});
+    if(!shown){
+      setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:"Keine lokale Anzeige – OneSignal-Test fehlgeschlagen oder Subscription fehlt"});
+      alert("Test-Push konnte nicht angezeigt werden. Bitte Erinnerung aktivieren und kurz warten, dann erneut testen.");
+      return;
+    }
+    setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"local"});
   }catch(e){
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:e.message||String(e)});
-    alert("Test-Push konnte nicht angezeigt werden.");
+    alert("Test-Push konnte nicht gesendet werden.");
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=oldText||"🔔 Test senden"}
   }
 }
 async function activatePrayerReminder(){
