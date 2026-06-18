@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v110';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v111';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -34,6 +34,11 @@ const APP_SHELL = [
 ];
 
 let bypassPostCacheUntil = 0;
+let hardRefreshUntil = 0;
+
+function refreshBypassActive() {
+  return Date.now() < hardRefreshUntil || Date.now() < bypassPostCacheUntil;
+}
 
 function isPostDataRequest(url) {
   return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json');
@@ -86,6 +91,31 @@ self.addEventListener('message', (event) => {
   const data = event.data || {};
   if (data.type === 'BYPASS_POST_CACHE') {
     bypassPostCacheUntil = Date.now() + 5 * 60 * 1000;
+    return;
+  }
+  if (data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+    return;
+  }
+  if (data.type === 'HARD_REFRESH') {
+    hardRefreshUntil = Date.now() + 15 * 60 * 1000;
+    bypassPostCacheUntil = Math.max(bypassPostCacheUntil, hardRefreshUntil);
+    const respond = () => {
+      const client = event.source;
+      if (client && typeof client.postMessage === 'function') {
+        try { client.postMessage({ type: 'HARD_REFRESH_DONE' }); } catch (e) {}
+      }
+    };
+    event.waitUntil(
+      caches.keys()
+        .then((keys) => Promise.all(
+          keys.filter((key) => key.startsWith('dar-al-tawhid-offline-light-'))
+            .map((key) => caches.delete(key))
+        ))
+        .then(() => self.skipWaiting())
+        .then(respond)
+        .catch(respond)
+    );
     return;
   }
   if (data.type !== 'PRECACHE' || !Array.isArray(data.urls) || !data.urls.length) return;
@@ -152,7 +182,7 @@ self.addEventListener('fetch', (event) => {
   // Navigation: online frisch laden, offline gecachte index.html anzeigen.
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request, { cache: 'no-cache' })
+      fetch(request, { cache: refreshBypassActive() ? 'no-store' : 'no-cache' })
         .then((response) => {
           const copy = response.clone();
           caches.open(CACHE_VERSION).then((cache) => cache.put('/index.html', copy)).catch(() => null);
@@ -165,6 +195,22 @@ self.addEventListener('fetch', (event) => {
 
   // Nur eigene Dateien cachen, keine fremden großen API/CDN-Antworten.
   if (url.origin !== self.location.origin) return;
+
+  // Nach App-Aktualisieren: kurz alles frisch vom Netz laden.
+  if (refreshBypassActive()) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
 
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
   if (isPostDataRequest(url) || Date.now() < bypassPostCacheUntil) {
