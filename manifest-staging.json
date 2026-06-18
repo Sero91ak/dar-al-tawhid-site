@@ -1,7 +1,7 @@
 {
   "name": "Dar Test",
   "short_name": "Dar Test",
-  "start_url": "/?env=staging&source=pwa#home",
+  "start_url": "/test/?env=staging&source=pwa#home",
   "scope": "/",
   "display": "standalone",
   "background_color": "#061826",
@@ -37,7 +37,7 @@
       "purpose": "any maskable"
     }
   ],
-  "id": "/?env=staging",
+  "id": "/test/?env=staging",
   "display_override": [
     "standalone",
     "fullscreen"
