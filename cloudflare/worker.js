@@ -35,8 +35,11 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
+const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
+const ONESIGNAL_BATCH_SIZE = 2000;
 
 export default {
   async fetch(request, env, ctx) {
@@ -814,6 +817,53 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
+function supabaseApiKey(env) {
+  return String(env.SUPABASE_SERVICE_KEY || env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY || SUPABASE_ANON_KEY).trim();
+}
+
+function uniqueValues(values) {
+  return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
+}
+
+function chunkValues(values, size) {
+  const out = [];
+  for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
+  return out;
+}
+
+async function loadPostPushSubscriptionIds(env) {
+  const key = supabaseApiKey(env);
+  if (!key) return [];
+  const base = `${SUPABASE_URL}/rest/v1/prayer_push_registrations`;
+  const queries = [
+    "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at",
+    "subscription_id=not.is.null&select=subscription_id,last_synced_at"
+  ];
+
+  for (const query of queries) {
+    try {
+      const res = await fetch(`${base}?${query}`, {
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          Accept: "application/json"
+        }
+      });
+      const text = await res.text();
+      if (!res.ok) {
+        if (res.status === 400 && query.includes("push_opted_in")) continue;
+        throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
+      }
+      const rows = text ? JSON.parse(text) : [];
+      return uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
+    } catch (error) {
+      if (!query.includes("push_opted_in")) return [];
+    }
+  }
+
+  return [];
+}
+
 function buildPostPushUrl(env, postId, cacheVersion) {
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const slug = String(postId || "").trim();
@@ -1139,7 +1189,12 @@ async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, 
     name: `admin-publish-${Date.now()}`
   };
 
+  const subscriptionIds = await loadPostPushSubscriptionIds(env);
   const attempts = [
+    ...chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
+      ...basePayload,
+      include_subscription_ids: ids
+    })),
     { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
     {
@@ -1169,7 +1224,7 @@ async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, 
         if (res.ok) {
           return {
             sent: true,
-            target: payload.included_segments?.[0] || "tag-filter",
+            target: payload.include_subscription_ids ? `supabase-subscriptions:${payload.include_subscription_ids.length}` : (payload.included_segments?.[0] || "tag-filter"),
             authMode,
             targetUrl: url,
             data: pushData,

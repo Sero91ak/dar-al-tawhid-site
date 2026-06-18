@@ -230,7 +230,7 @@ async function regenerateDailyContent(env, deps, dateKey, tz) {
     recommendation,
     dua
   };
-  if (deps?.githubPut && deps?.utf8ToBase64) {
+  if (deps?.githubPut) {
     try {
       const owner = env.GITHUB_OWNER || "Sero91ak";
       const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
@@ -241,7 +241,7 @@ async function regenerateDailyContent(env, deps, dateKey, tz) {
         owner,
         repo,
         DAILY_CONTENT_PATH,
-        JSON.stringify(data, null, 2) + "\n",
+        `${JSON.stringify(data, null, 2)}\n`,
         `Daily content ${dateKey}`,
         branch,
         existing?.sha
@@ -357,7 +357,7 @@ export function readDailyPushStatusFromKv() {
 }
 
 async function writeStatusGithub(env, status, deps) {
-  if (!deps?.githubPut || !deps?.utf8ToBase64) return;
+  if (!deps?.githubPut) return;
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
@@ -369,7 +369,7 @@ async function writeStatusGithub(env, status, deps) {
       owner,
       repo,
       path,
-      JSON.stringify(status, null, 2) + "\n",
+      `${JSON.stringify(status, null, 2)}\n`,
       `Daily push ${status.updatedAt}`,
       branch,
       existing?.sha
