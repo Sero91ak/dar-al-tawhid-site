@@ -5937,7 +5937,7 @@ function renderPrayerPushHints(settings=getPrayerSettings()){
   if(!hints.length)return "";
   return `<div class="prayer-push-hints" aria-live="polite">${hints.map(t=>`<div class="prayer-push-status-warn">⚠ ${esc(t)}</div>`).join("")}</div>`;
 }
-async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{return await reg.showNotification(title,payload)}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{return new window.Notification(title,payload)}catch(e){}}return null}
+async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg?.showNotification){try{await reg.showNotification(title,payload);return true}catch(e){}}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{const n=new window.Notification(title,payload);return Boolean(n)}catch(e){}}return false}
 async function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s))await scheduleLocalPrayerRemindersIfNeeded({silent:true})}
 function setPrayerSettings(value){const prev=getPrayerSettings();const next={...prev,...value};if(prev.reminder)next.reminder=true;setJson(PRAYER_SETTINGS_KEY,next);if(next.reminder&&hasPrayerLocation(next))syncPrayerPushTags(next).catch(()=>{});if(getNotificationPermission()==="granted"){syncDailyPushTags(next,{ensureOptIn:false}).catch(()=>{});waitForOneSignalReady(5000).then(OS=>savePushRegistration(next,OS)).catch(()=>{})}}
 function toRad(d){return d*Math.PI/180}
@@ -6239,6 +6239,7 @@ async function sendPrayerTestNotification(){
       return;
     }
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"local"});
+    alert("✓ Test-Push wurde gesendet. Prüfe Sperrbildschirm oder Mitteilungszentrale.");
   }catch(e){
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:e.message||String(e)});
     alert("Test-Push konnte nicht gesendet werden.");
