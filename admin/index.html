@@ -734,6 +734,7 @@ async function sendTelegramResend(force=true){
 }
 function readLastPublishPushContext(){try{return JSON.parse(localStorage.getItem(ADMIN_LAST_PUSH_KEY)||"null")}catch(e){return null}}
 function saveLastPublishPushContext(ctx){try{localStorage.setItem(ADMIN_LAST_PUSH_KEY,JSON.stringify(ctx||null));lastPublishPushContext=ctx}catch(e){}}
+function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
 function stepLabel(ok){return ok?`<strong style="color:#8fd7a8">ja</strong>`:`<strong style="color:#ff9f9f">nein</strong>`}
 function formatPublishStatusHtml(result){
   const live=result.liveCheck||{};
