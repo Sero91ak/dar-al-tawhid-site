@@ -17,12 +17,13 @@
   var mode=p.get('mode');
   var onDriverHtml=/driver\.html$/i.test(location.pathname);
   var onDispatchHtml=/dispatch\.html$/i.test(location.pathname);
-  var driver=onDriverHtml||mode==='driver'||p.has('token')||p.has('boot')||p.has('t')||(p.has('d')&&p.has('t'));
+  var onIndexHtml=/index\.html$/i.test(location.pathname)||(!onDriverHtml&&!onDispatchHtml&&!/home\.html$/i.test(location.pathname));
   var dispatch=onDispatchHtml||mode==='dispatch';
+  var driver=!dispatch&&(onDriverHtml||mode==='driver'||p.has('token')||p.has('boot')||p.has('t')||(p.has('d')&&p.has('t')));
   var standalone=window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches;
   try{
     var role=localStorage.getItem('tp_app_role');
-    if(!driver&&standalone&&role==='driver') driver=true;
+    if(!dispatch&&!driver&&standalone&&role==='driver') driver=true;
     if(!driver&&!dispatch&&standalone&&role==='dispatch') dispatch=true;
   }catch(e){}
   function driverPwaUrl(){
@@ -39,8 +40,10 @@
   if(standalone){
     try{
       var r=localStorage.getItem('tp_app_role');
-      if(r==='driver'&&!onDriverHtml){location.replace(driverPwaUrl());return;}
-      if((r==='dispatch'||!r)&&!onDispatchHtml&&!onDriverHtml&&!driver){
+      if(r==='driver'&&!onDriverHtml&&!driver){
+        location.replace(driverPwaUrl());return;
+      }
+      if((r==='dispatch'||!r)&&!onDispatchHtml&&!onDriverHtml&&!driver&&!dispatch){
         location.replace(dispatchPwaUrl());return;
       }
     }catch(e){}
@@ -60,7 +63,7 @@
       if(did)sqs.set('d',did);if(tkn)sqs.set('t',tkn);if(pin)sqs.set('p',pin);
       var drvUrl=base+'driver.html'+(sqs.toString()?'?'+sqs:'');
       var as=document.getElementById('apple-start-url');if(as)as.setAttribute('content',drvUrl);
-      if(!onDriverHtml) history.replaceState(null,'',drvUrl);
+      if(!onDriverHtml&&!onIndexHtml) history.replaceState(null,'',drvUrl);
     }catch(e){}
   }else{
     document.documentElement.classList.add('dispatch-boot');
