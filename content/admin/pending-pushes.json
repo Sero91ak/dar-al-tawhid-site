@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-06-18T14:01:38.360Z",
+  "generated": "2026-06-18T14:02:40.238Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -49,8 +49,32 @@
       "postPath": "content/posts/akhlaq-395-wer-schweigt-wird-gerettet.md",
       "status": "pending",
       "createdAt": "2026-06-18T14:00:48.454Z",
-      "lastError": "Beitrag ist nicht im öffentlichen Index enthalten.",
-      "updatedAt": "2026-06-18T14:01:38.360Z"
+      "lastError": "",
+      "updatedAt": "2026-06-18T14:02:40.238Z",
+      "lastCheckAt": "2026-06-18T14:02:40.041Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 4,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "abdullah-ibn-amr-schweigen-rettung-395",
+        "indexGenerated": "2026-06-18T14:00:47.409Z",
+        "indexCount": 395,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=abdullah-ibn-amr-schweigen-rettung-395&v=1781791359835#post/abdullah-ibn-amr-schweigen-rettung-395"
+      },
+      "attempts": 4
     }
   }
 }
