@@ -24,8 +24,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v23";
-  var MIG_KEY="darAdminSwFixV23";
+  var ADMIN_SW_CACHE="dar-admin-stats-v22";
+  var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -150,26 +150,6 @@ button{cursor:pointer}
 .quick{display:block;text-decoration:none;color:var(--ink);text-align:left;width:100%;font:inherit;cursor:pointer}
 .quick:is(button){appearance:none;-webkit-appearance:none}
 .quick:hover{border-color:rgba(140,190,255,.42)}
-.quick-telegram{border-color:rgba(42,171,238,.42)!important;background:linear-gradient(145deg,rgba(42,171,238,.14),rgba(0,0,0,.22))!important}
-.quick-telegram:hover{border-color:rgba(42,171,238,.62)!important}
-.telegram-panel{border:1px solid rgba(42,171,238,.28);border-radius:18px;background:linear-gradient(145deg,rgba(42,171,238,.10),rgba(0,0,0,.20));padding:14px;margin-top:12px}
-.telegram-panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.telegram-panel-head svg{width:28px;height:28px;flex:0 0 28px}
-.telegram-panel-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.telegram-panel-note{color:var(--soft);font-size:11px;line-height:1.45;margin-top:10px}
-.telegram-options{display:grid;gap:8px;margin:12px 0}
-.telegram-option{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4;color:var(--ink)}
-.telegram-option input{margin-top:2px}
-.telegram-preview-box{border:1px solid rgba(42,171,238,.24);border-radius:14px;background:rgba(0,0,0,.24);padding:12px;margin-top:10px;max-height:360px;overflow:auto}
-.telegram-preview-box pre{white-space:pre-wrap;word-break:break-word;font:500 12px/1.55 var(--sans);color:#eef6ff;margin:0}
-.telegram-preview-box .tg-render b{font-weight:950}
-.telegram-preview-box .tg-render i{font-style:italic}
-.telegram-preview-box .tg-render blockquote{margin:8px 0;padding:8px 10px;border-left:3px solid rgba(42,171,238,.55);background:rgba(42,171,238,.08);border-radius:8px}
-.telegram-validation{display:grid;gap:6px;margin-top:10px}
-.telegram-validation .ok{color:#8fd7a8;font-size:11px;font-weight:900}
-.telegram-validation .warn{color:#f0c674;font-size:11px;font-weight:900}
-.telegram-validation .err{color:#ff9f9f;font-size:11px;font-weight:900}
-#adminTelegramCanvas{display:none}
 .command-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
 .command-card{border:1px solid var(--line2);border-radius:16px;background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.035));padding:12px;min-height:94px}
 .command-card b{display:block;color:var(--gold);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
@@ -279,7 +259,7 @@ main#panel.panel{
   .command-card span{font-size:20px}
   .metric span,.mini span{font-size:24px}
   .push-test-card,.admin-form-grid .wide,.preview-tools .btn:first-child,.preview-tools .btn:nth-child(2){grid-column:1/-1}
-  .telegram-panel-actions{grid-template-columns:1fr}
+  .push-test-controls{grid-template-columns:1fr!important}
   .rank-card{grid-template-columns:30px minmax(0,1fr);gap:8px;padding:9px}
   .rank-num{width:30px;height:30px;border-radius:10px}
   .rank-title{font-size:14.5px;line-height:1.18}
@@ -333,7 +313,6 @@ window.DAR_WORKER_CONFIG=window.DAR_WORKER_CONFIG||{
   publishUrl:"https://dar-admin-publisher.sero91ak.workers.dev/publish"
 };
 const SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
-const TELEGRAM_CHANNEL_URL="https://t.me/dar_al_tauhid";
 const AUTH_KEY="darStatsAuthV1";
 const AUTH_TTL_MS=90*24*60*60*1000;
 const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.dev/publish";
@@ -341,17 +320,15 @@ const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
 const ADMIN_LOG_KEY="darAdminChangeLogV1";
+const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
 const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
-const ADMIN_TELEGRAM_PREFS_KEY="darAdminTelegramPrefsV1";
-const ADMIN_TELEGRAM_STATUS_KEY="darAdminTelegramStatusV1";
-const ADMIN_LAST_PUSH_KEY="darAdminLastPublishPushV1";
 const DEFAULT_ADMIN_TABS=[
-  ["actions","Aktionen"],
   ["start","Start"],
+  ["actions","Aktionen"],
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
   ["news","News"],
@@ -362,8 +339,8 @@ const DEFAULT_ADMIN_TABS=[
   ["settings","Einstellungen"],
   ["overview","Dashboard"]
 ];
-let refreshTimer=null,authed=false,lastData=null,currentTab="actions",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0,adminShellScrollY=0;
-let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,telegramPreviewTimer=null,lastTelegramPreview=null,lastTelegramStatus=null,lastPublishPushContext=null,visitorAppHealth={ok:true,issues:[],checkedAt:"",checking:false};
+let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
@@ -392,6 +369,7 @@ function writeStore(key,list){try{localStorage.setItem(key,JSON.stringify((list|
 function addStoreItem(key,item){const list=readStore(key);list.unshift({...item,id:item.id||String(Date.now()),createdAt:item.createdAt||new Date().toISOString()});writeStore(key,list);return list[0]}
 function removeStoreItem(key,id){writeStore(key,readStore(key).filter(x=>String(x.id)!==String(id)))}
 function updateStoreItem(key,id,patch){writeStore(key,readStore(key).map(x=>String(x.id)===String(id)?{...x,...patch,updatedAt:new Date().toISOString()}:x))}
+function planItems(){return readStore(ADMIN_PLAN_KEY)}
 function newsItems(){return readStore(ADMIN_NEWS_KEY)}
 function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
 function userItems(){return readStore(ADMIN_USERS_KEY)}
@@ -467,19 +445,16 @@ async function fetchDashboard(){
 function typeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":t==="install"?"Installation":"Seite"}
 function cleanTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
 function contentUrl(row){if(row.content_type==="post")return SITE_ORIGIN+"/#post/"+encodeURIComponent(row.content_id);if(row.content_type==="dua")return SITE_ORIGIN+"/#dua/"+encodeURIComponent(row.content_id);return SITE_ORIGIN}
-function stagingAppUrl(route="home",value=""){const hash=value?`#${route}/${encodeURIComponent(value)}`:`#${route}`;return `${SITE_ORIGIN}/?env=staging&refresh=${Date.now()}${hash}`}
-function openStagingPreview(postId=""){window.open(stagingAppUrl(postId?"post":"home",postId),"_blank","noopener")}
 function score(row){return Number(row.views||0)+Number(row.shares||0)*4+Number(row.saves||0)*3}
 function engagement(row){const v=Number(row.views||0);return v?Math.round(((Number(row.shares||0)+Number(row.saves||0))/v)*100):0}
 function countBy(rows,fn){return (rows||[]).reduce((acc,row)=>{const key=fn(row);acc[key]=(acc[key]||0)+1;return acc},{})}
 function totals(){return (lastData?.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua")}
 function renderShellPreserveField(id,apply){
-  adminShellScrollY=window.scrollY||document.documentElement.scrollTop||0;
   const el=document.getElementById(id);
   const start=el&&typeof el.selectionStart==="number"?el.selectionStart:null;
   const end=el&&typeof el.selectionEnd==="number"?el.selectionEnd:null;
   if(typeof apply==="function")apply(el);
-  renderShell({keepScroll:true});
+  renderShell();
   requestAnimationFrame(()=>{
     const next=document.getElementById(id);
     if(!next)return;
@@ -574,366 +549,23 @@ function enhanceAdminCollapsibles(){
   });
 }
 function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^"+key+":\\s*[\"']?(.*?)[\"']?\\s*$","m"));return m?m[1].trim():""}
-function readTelegramPrefs(){try{return JSON.parse(localStorage.getItem(ADMIN_TELEGRAM_PREFS_KEY)||"{}")||{}}catch(e){return{}}}
-function saveTelegramPrefs(prefs){try{localStorage.setItem(ADMIN_TELEGRAM_PREFS_KEY,JSON.stringify(prefs||{}))}catch(e){}}
-function getTelegramPrefs(){const saved=readTelegramPrefs();return{enabled:!!saved.enabled,mode:["text","image","both"].includes(saved.mode)?saved.mode:"text",sendImage:!!saved.sendImage}}
-function setTelegramPref(key,value){const next={...getTelegramPrefs(),[key]:value};saveTelegramPrefs(next);return next}
-function readLocalTelegramStatus(postId){try{const all=JSON.parse(localStorage.getItem(ADMIN_TELEGRAM_STATUS_KEY)||"{}");return all[String(postId||"")]||null}catch(e){return null}}
-function writeLocalTelegramStatus(postId,patch){try{const all=JSON.parse(localStorage.getItem(ADMIN_TELEGRAM_STATUS_KEY)||"{}");all[String(postId)]={...(all[String(postId)]||{}),...patch,postId:String(postId),updatedAt:new Date().toISOString()};localStorage.setItem(ADMIN_TELEGRAM_STATUS_KEY,JSON.stringify(all))}catch(e){}}
-function currentDraftPostId(){return frontmatterValue(draftMarkdown,"id")||String(draftFilename||"").replace(/\.md$/,"")}
-async function fetchTelegramPreviewFromWorker(){
-  if(!draftMarkdown.trim()){lastTelegramPreview=null;return null}
-  try{
-    const data=await workerPostRequest("api/admin/telegram/preview",{markdown:draftMarkdown,postId:currentDraftPostId()});
-    lastTelegramPreview=data;
-    return data;
-  }catch(e){
-    lastTelegramPreview={ok:false,errors:[e.message||String(e)],preview:{plainPreview:"",html:"",length:0,tooLong:false,captionTooLong:false,validation:{ok:false,errors:[e.message||String(e)]}}};
-    return lastTelegramPreview;
-  }
-}
-function scheduleTelegramPreviewRefresh(){
-  if(telegramPreviewTimer)clearTimeout(telegramPreviewTimer);
-  telegramPreviewTimer=setTimeout(async()=>{await fetchTelegramPreviewFromWorker();renderTelegramPreviewUi()},350);
-}
-function renderTelegramPreviewUi(){
-  const box=document.getElementById("adminTelegramPreviewBox");
-  const meta=document.getElementById("adminTelegramPreviewMeta");
-  if(!box)return;
-  const data=lastTelegramPreview;
-  if(!draftMarkdown.trim()){box.innerHTML=`<div class="empty">Markdown einfügen, dann erscheint hier die Telegram-Vorschau.</div>`;if(meta)meta.textContent="";return}
-  if(!data){box.innerHTML=`<div class="empty">Vorschau wird geladen…</div>`;return}
-  const preview=data.preview||{};
-  const html=String(preview.html||"");
-  const plain=String(preview.plainPreview||"");
-  box.innerHTML=`<div class="tg-render">${html}</div><pre>${esc(plain)}</pre>`;
-  const errs=[...(data.errors||[]),...(preview.validation?.errors||[]),...(data.warnings||[])];
-  if(meta){
-    meta.innerHTML=`${preview.length||0} Zeichen${preview.tooLong?' · <span class="err">zu lang</span>':""}${preview.captionTooLong?' · <span class="warn">Caption zu lang</span>':""}${data.ok?` · <span class="ok">Format OK</span>`:` · <span class="err">Prüfung offen</span>`}${errs.length?`<br>${errs.map(x=>`<span class="err">${esc(x)}</span>`).join("<br>")}`:""}`;
-  }
-}
-function renderTelegramPanel(){
-  const prefs=getTelegramPrefs();
-  const postId=currentDraftPostId();
-  const localStatus=readLocalTelegramStatus(postId);
-  const statusLabel=localStatus?.telegramStatus==="sent"?`Bereits gesendet · ${esc(localStatus.telegramSentAt||"")}`:localStatus?.telegramStatus==="failed"?`Fehlgeschlagen · ${esc(localStatus.telegramError||"")}`:"Noch nicht gesendet";
-  return `<section class="telegram-panel" id="adminTelegramPanel">
-    <div class="telegram-panel-head">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>
-      <div>
-        <div class="section-head" style="margin:0"><h3>Telegram Autopost</h3><span>@dar_al_tauhid</span></div>
-        <p class="telegram-panel-note" style="margin:4px 0 0">Optional nach Veröffentlichung – streng nach DAR AL TAWḤID Beitragsformat, HTML-formatiert, mit Vorschau und Status.</p>
-      </div>
-    </div>
-    <div class="telegram-options">
-      <label class="telegram-option"><input id="telegramPostEnabled" type="checkbox" ${prefs.enabled?"checked":""}> <span><b>Auch auf Telegram posten</b><br>Nur wenn Vorschau und Pflichtfelder in Ordnung sind.</span></label>
-      <label class="telegram-option"><input name="telegramPostMode" type="radio" value="text" ${prefs.mode==="text"?"checked":""}> <span>Als Telegram-Text posten</span></label>
-      <label class="telegram-option"><input name="telegramPostMode" type="radio" value="image" ${prefs.mode==="image"?"checked":""}> <span>Als Telegram-Bildbeitrag posten (1080 × 1350 px)</span></label>
-      <label class="telegram-option"><input name="telegramPostMode" type="radio" value="both" ${prefs.mode==="both"?"checked":""}> <span>Text + Bildbeitrag posten</span></label>
-    </div>
-    <div class="section-head" style="margin-top:8px"><h3>Telegram-Vorschau</h3><span>vor dem Senden prüfen</span></div>
-    <div class="telegram-preview-box" id="adminTelegramPreviewBox"><div class="empty">Vorschau wird vorbereitet…</div></div>
-    <div class="telegram-validation" id="adminTelegramPreviewMeta"></div>
-    <div class="telegram-panel-actions" style="margin-top:10px">
-      <button class="quick quick-telegram" id="adminTelegramRefreshPreviewBtn" type="button"><b>Vorschau aktualisieren</b><small>Formatter + Längenprüfung</small></button>
-      <button class="quick quick-telegram" id="adminTelegramTestBtn" type="button"><b>Telegram-Test senden</b><small>Kurze Testnachricht an Kanal</small></button>
-      <button class="quick quick-telegram" id="adminTelegramResendBtn" type="button"><b>Telegram erneut senden</b><small>Nur mit Warnung · kein Doppelpost</small></button>
-      <a class="quick quick-telegram" href="${TELEGRAM_CHANNEL_URL}" target="_blank" rel="noopener"><b>Telegram Kanal öffnen</b><small>@dar_al_tauhid</small></a>
-    </div>
-    <div class="telegram-panel-note" id="adminTelegramStatus">${postId?`Beitrag: <strong>${esc(postId)}</strong> · ${statusLabel}`:"Noch kein Entwurf. Markdown einfügen, Vorschau prüfen, dann veröffentlichen."}</div>
-    <canvas id="adminTelegramCanvas" width="1080" height="1350" aria-hidden="true"></canvas>
-  </section>`;
-}
-async function renderAdminTelegramImageBase64(){
-  const canvas=document.getElementById("adminTelegramCanvas");
-  if(!canvas||!draftMarkdown.trim())return "";
-  const ctx=canvas.getContext("2d");
-  const title=(frontmatterValue(draftMarkdown,"title")||"DAR AL TAWḤID").replace(/^📖\s*/,"");
-  const quote=(lastTelegramPreview?.fields?.statement||markdownPreviewData(draftMarkdown).quote||"").slice(0,420);
-  const source=(frontmatterValue(draftMarkdown,"source")||"").slice(0,120);
-  const img=new Image();
-  img.crossOrigin="anonymous";
-  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=`${SITE_ORIGIN}/assets/post-templates/bibliothek-braun.jpg?v=4`});
-  ctx.clearRect(0,0,1080,1350);
-  ctx.drawImage(img,0,0,1080,1350);
-  ctx.fillStyle="#3b2515";
-  ctx.textAlign="center";
-  ctx.font="700 54px 'Cormorant Garamond', Georgia, serif";
-  wrapCanvasText(ctx,title,540,300,660,64);
-  ctx.font="italic 700 42px 'Cormorant Garamond', Georgia, serif";
-  wrapCanvasText(ctx,`„${quote}“`,540,720,700,52);
-  ctx.font="600 28px Arial, sans-serif";
-  wrapCanvasText(ctx,source,540,1180,700,34);
-  return canvas.toDataURL("image/png").split(",")[1]||"";
-}
-function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
-  const words=String(text||"").split(/\s+/);
-  let line="",dy=0;
-  for(const word of words){
-    const test=line?`${line} ${word}`:word;
-    if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line,x,y+dy);line=word;dy+=lineHeight}else line=test;
-  }
-  if(line)ctx.fillText(line,x,y+dy);
-}
-function collectTelegramPublishOptions(){
-  const prefs=getTelegramPrefs();
-  return{prefs,enabled:!!document.getElementById("telegramPostEnabled")?.checked,mode:document.querySelector('input[name="telegramPostMode"]:checked')?.value||prefs.mode||"text"};
-}
-async function buildTelegramPayloadForPublish(){
-  const {enabled,mode}=collectTelegramPublishOptions();
-  if(!enabled)return null;
-  const preview=lastTelegramPreview||await fetchTelegramPreviewFromWorker();
-  if(!preview?.ok)throw new Error((preview?.errors||["Telegram-Vorschau nicht bereit."]).join(" "));
-  let imageBase64="";
-  if(mode==="image"||mode==="both")imageBase64=await renderAdminTelegramImageBase64();
-  return{enabled:true,mode,imageBase64};
-}
-async function refreshTelegramPreview(){
-  setTelegramPref("enabled",!!document.getElementById("telegramPostEnabled")?.checked);
-  setTelegramPref("mode",document.querySelector('input[name="telegramPostMode"]:checked')?.value||"text");
-  await fetchTelegramPreviewFromWorker();
-  renderTelegramPreviewUi();
-  updateTelegramPanelStatus();
-}
-async function sendTelegramTestMessage(){
-  if(!confirm("Kurze Testnachricht an @dar_al_tauhid senden?"))return;
-  try{
-    const result=await workerPostRequest("api/admin/telegram/test",{});
-    toast(result.sent?"Telegram-Test gesendet":"Telegram-Test fehlgeschlagen");
-    setUploadStatus(result.sent?`Telegram-Test erfolgreich · Kanal ${esc(result.target||"@dar_al_tauhid")}`:`Telegram-Test fehlgeschlagen`);
-  }catch(e){
-    toast(e.message||"Telegram-Test fehlgeschlagen");
-    setUploadStatus(`Telegram-Test fehlgeschlagen: ${esc(e.message||e)}`);
-  }
-}
-async function sendTelegramResend(force=true){
-  if(!draftMarkdown.trim()){toast("Kein Markdown vorhanden");return}
-  if(force&&!confirm("Diesen Beitrag erneut an Telegram senden? Es sollte nur passieren, wenn der vorherige Versand fehlgeschlagen ist."))return;
-  const preview=lastTelegramPreview||await fetchTelegramPreviewFromWorker();
-  if(!preview?.ok){toast((preview?.errors||["Telegram-Vorschau ungültig"]).join(" "));return}
-  const mode=document.querySelector('input[name="telegramPostMode"]:checked')?.value||getTelegramPrefs().mode||"text";
-  let imageBase64="";
-  if(mode==="image"||mode==="both"){
-    imageBase64=await renderAdminTelegramImageBase64();
-    if(!imageBase64){toast("Bildbeitrag konnte nicht generiert werden");return}
-  }
-  try{
-    const result=await workerPostRequest("api/admin/telegram/send",{markdown:draftMarkdown,postId:currentDraftPostId(),mode,imageBase64,forceResend:true});
-    writeLocalTelegramStatus(currentDraftPostId(),{
-      telegramStatus:result.sent?"sent":"failed",
-      telegramMessageId:result.telegramMessageId||null,
-      telegramSentAt:result.telegramSentAt||null,
-      telegramError:result.telegramError||result.reason||null
-    });
-    setUploadStatus(result.sent?`Telegram gesendet · Message-ID ${esc(result.telegramMessageId||"—")}`:`Website ok, Telegram fehlgeschlagen: ${esc(result.telegramError||result.reason||"unbekannt")}`);
-    updateTelegramPanelStatus();
-    toast(result.sent?"Telegram gesendet":"Telegram fehlgeschlagen");
-  }catch(e){
-    toast(e.message||"Telegram fehlgeschlagen");
-  }
-}
-function readLastPublishPushContext(){try{return JSON.parse(localStorage.getItem(ADMIN_LAST_PUSH_KEY)||"null")}catch(e){return null}}
-function saveLastPublishPushContext(ctx){try{localStorage.setItem(ADMIN_LAST_PUSH_KEY,JSON.stringify(ctx||null));lastPublishPushContext=ctx}catch(e){}}
-window.slugify=window.slugify||function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"};
-function adminSlugPart(value){
-  const fn=typeof window.slugify==="function"?window.slugify:(typeof slugify==="function"?slugify:null);
-  if(fn)try{return fn(value)}catch(e){}
-  return String(value||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag";
-}
-function extractVisitorMainScript(html){
-  const match=String(html||"").match(/<script>\nconst REPO_OWNER[\s\S]*?<\/script>/);
-  return match?match[0].replace(/^<script>\n/,"").replace(/<\/script>$/,""):"";
-}
-function validateVisitorMainScript(code){
-  const issues=[];
-  if(!code)issues.push("Besucher-App Hauptscript nicht gefunden");
-  else{
-    if(!code.includes("function render("))issues.push("render() fehlt in index.html");
-    try{new Function(code)}catch(e){issues.push(`JavaScript-Syntaxfehler: ${e.message||e}`);}
-  }
-  return issues;
-}
-async function checkVisitorAppHealth(){
-  const issues=[];
-  try{
-    const res=await fetch(`${SITE_ORIGIN}/index.html?visitorHealth=${Date.now()}`,{cache:"no-store",credentials:"same-origin"});
-    if(!res.ok)issues.push(`index.html antwortet mit HTTP ${res.status}`);
-    else issues.push(...validateVisitorMainScript(extractVisitorMainScript(await res.text())));
-  }catch(e){issues.push(`index.html nicht erreichbar: ${e.message||e}`);}
-  try{
-    const res=await fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?visitorHealth=${Date.now()}`,{cache:"no-store",credentials:"same-origin"});
-    if(!res.ok)issues.push(`posts-index.json HTTP ${res.status}`);
-    else{
-      const data=await res.json();
-      if(!data||!Array.isArray(data.files))issues.push("posts-index.json ist ungültig");
-    }
-  }catch(e){issues.push(`posts-index.json: ${e.message||e}`);}
-  return{ok:issues.length===0,issues,checkedAt:new Date().toISOString()};
-}
-function renderVisitorAppHealthPanel(){
-  const h=visitorAppHealth||{};
-  const ok=!!h.ok&&!h.checking;
-  return `<div class="upload-status visitor-health-panel" id="visitorHealthBox" style="margin-top:10px;border:1px solid ${ok?"rgba(143,215,168,.35)":"rgba(255,159,159,.45)"}"><strong>Besucher-App Schutz:</strong> ${h.checking?'<span style="color:#f0c674">wird geprüft …</span>':ok?'<span style="color:#8fd7a8">startklar · Live erlaubt</span>':'<span style="color:#ff9f9f">Live blockiert</span>'}<br>${h.checking?"Prüfe index.html, Script und posts-index.json …":(h.issues&&h.issues.length?h.issues.map(i=>esc(i)).join("<br>"):"index.html, Script und posts-index.json OK.")}${h.checkedAt&&!h.checking?`<br><small>Zuletzt: ${esc(new Date(h.checkedAt).toLocaleString("de-DE"))}</small>`:""}<br><button class="btn" id="visitorHealthRefreshBtn" type="button" style="margin-top:8px">Besucher-App prüfen</button></div>`;
-}
-function updateVisitorHealthUi(){
-  const box=$("visitorHealthBox");
-  if(box)box.outerHTML=renderVisitorAppHealthPanel();
-  const btn=$("uploadPostBtn");
-  const blocked=!visitorAppHealth.ok||visitorAppHealth.checking;
-  if(btn){
-    btn.disabled=uploadBusy||blocked;
-    btn.textContent=uploadBusy?"Wird veröffentlicht...":blocked&&!visitorAppHealth.checking?"Live blockiert (App defekt)":"Live veröffentlichen";
-  }
-  const refreshBtn=$("visitorHealthRefreshBtn");
-  if(refreshBtn)refreshBtn.onclick=()=>refreshVisitorAppHealth();
-}
-async function refreshVisitorAppHealth({silent=false}={}){
-  visitorAppHealth={...visitorAppHealth,checking:true};
-  updateVisitorHealthUi();
-  try{
-    visitorAppHealth={...(await checkVisitorAppHealth()),checking:false};
-  }catch(e){
-    visitorAppHealth={ok:false,issues:[e.message||String(e)],checkedAt:new Date().toISOString(),checking:false};
-  }
-  updateVisitorHealthUi();
-  if(!silent&&!visitorAppHealth.ok)toast("Live blockiert – Besucher-App prüfen");
-  return visitorAppHealth;
-}
-async function assertVisitorAppHealthyForLive(){
-  const health=visitorAppHealth.checkedAt&&!visitorAppHealth.checking?visitorAppHealth:await refreshVisitorAppHealth({silent:true});
-  if(health.ok)return health;
-  setUploadStatus(`<strong style="color:#ff9f9f">Live blockiert:</strong> Besucher-App ist nicht startklar.<br>${(health.issues||[]).map(i=>esc(i)).join("<br>")}<br><br>Nutze <strong>In Test-App anzeigen</strong> – Besucher bleiben geschützt.`);
-  toast("Live blockiert – Besucher-App prüfen");
-  throw new Error("Besucher-App nicht startklar");
-}
-function stepLabel(ok){return ok?`<strong style="color:#8fd7a8">ja</strong>`:`<strong style="color:#ff9f9f">nein</strong>`}
-const PRAYER_PUSH_DEBUG_KEY="darPrayerPushDebugV1";
-function readLocalDeviceSubscriptionId(){
-  try{
-    const raw=localStorage.getItem(PRAYER_PUSH_DEBUG_KEY);
-    if(!raw)return "";
-    const data=JSON.parse(raw);
-    return String(data.subscriptionId||"").trim();
-  }catch(e){return ""}
-}
-function formatOneSignalPushHtml(result,label){
-  if(!result)return `<span style="color:#f0c674">${esc(label||"OneSignal")}: keine Antwort</span>`;
-  const os=result.oneSignal||result;
-  const sent=!!result.sent;
-  const status=os.httpStatus||result.httpStatus||"?";
-  const recipients=os.recipients??result.recipients??"?";
-  const notificationId=os.notificationId||result.notificationId||"—";
-  const subscriptionId=result.subscriptionId||"";
-  const target=result.target||result.filter||result.segment||"";
-  const sentAt=result.sentAt?new Date(result.sentAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"";
-  let html=`<strong>${esc(label||(sent?"OneSignal erfolgreich":"OneSignal fehlgeschlagen"))}</strong><br>`;
-  html+=`Status: <strong>${esc(String(status))}</strong><br>`;
-  html+=`Notification ID: <strong>${esc(String(notificationId))}</strong><br>`;
-  html+=`Empfänger: <strong>${esc(String(recipients))}</strong><br>`;
-  if(subscriptionId)html+=`Subscription-ID: <strong>${esc(subscriptionId)}</strong><br>`;
-  if(target)html+=`Zielgruppe: <strong>${esc(String(target))}</strong><br>`;
-  if(sentAt)html+=`Gesendet: <strong>${esc(sentAt)}</strong><br>`;
-  if(os.errors)html+=`<span style="color:#f0c674">Fehler: ${esc(JSON.stringify(os.errors).slice(0,400))}</span><br>`;
-  if(os.invalidSubscriptions)html+=`<span style="color:#f0c674">Ungültige Subscriptions: ${esc(JSON.stringify(os.invalidSubscriptions).slice(0,200))}</span><br>`;
-  if(os.text&&!sent)html+=`<span style="color:#f0c674">${esc(String(os.text).slice(0,300))}</span><br>`;
-  if(result.reason&&!sent)html+=`<span style="color:#f0c674"><strong>Fehlergrund:</strong> ${esc(result.reason)}</span><br>`;
-  if(Array.isArray(result.attempts)&&result.attempts.length){
-    html+=`<br><strong>Versuche:</strong><br>`;
-    result.attempts.slice(0,6).forEach(a=>{
-      html+=`<span style="font-size:10px">${esc(a.target||"")} · HTTP ${esc(String(a.httpStatus||"?"))} · Empf. ${esc(String(a.recipients??"?"))}${a.notificationId?` · ID ${esc(a.notificationId)}`:""}${a.reason?` · ${esc(a.reason)}`:""}</span><br>`;
-    });
-  }
-  return html;
-}
-function formatPublishStatusHtml(result){
-  const live=result.liveCheck||{};
-  const push=result.push||{};
-  const steps=live.steps||{};
-  const tg=result.telegram||{};
-  let html=`<strong>Veröffentlichung abgeschlossen:</strong> ${esc(result.filename||draftFilename||"")}<br>`;
-  html+=`Nummer: <strong>${esc(result.number||"")}</strong> · Commit: <strong>${esc(result.commitSha||"erstellt")}</strong><br><br>`;
-  html+=`<strong>Push-Kette Schritt für Schritt</strong><br>`;
-  html+=`Beitrag erstellt: ${stepLabel(steps.githubFileCreated!==false)}<br>`;
-  html+=`Index aktualisiert: ${stepLabel(steps.indexUpdatedGithub!==false)}<br>`;
-  html+=`Index öffentlich gefunden: ${stepLabel(steps.indexFoundPublic)}<br>`;
-  html+=`Beitrag im Index enthalten: ${stepLabel(steps.postInIndex)}<br>`;
-  html+=`Cloudflare Deployment erkannt: ${stepLabel(steps.cloudflareDeployed)}<br>`;
-  html+=`Beitrag-Datei öffentlich erreichbar: ${stepLabel(steps.postFilePublic)}<br>`;
-  html+=`Beitrag öffentlich erreichbar: ${stepLabel(steps.postFilePublic&&steps.postInIndex)}<br>`;
-  html+=`Besucher-URL erreichbar: ${stepLabel(steps.visitorUrlOk)}<br>`;
-  html+=`Push vorbereitet: ${stepLabel(push.prepared!==false)}<br>`;
-  html+=`OneSignal API aufgerufen: ${stepLabel(!!push.oneSignalCalled||!!push.oneSignal||!!push.attempts?.length)}<br>`;
-  html+=`Push wartet: ${stepLabel(!!push.pending||!!push.waitingForLive)}<br>`;
-  html+=`Push gesendet: ${stepLabel(!!push.sent)}<br>`;
-  if(live.diagnosis)html+=`<span style="color:#f0c674"><strong>Fehlergrund Live:</strong> ${esc(live.diagnosis)}</span><br>`;
-  if(push.reason&&!push.sent)html+=`<span style="color:#f0c674"><strong>Fehlergrund Push:</strong> ${esc(push.reason)}</span><br>`;
-  if(push.sent&&push.targetUrl)html+=`Push-Ziel: <strong>${esc(push.targetUrl)}</strong><br>`;
-  if(push.oneSignal||push.attempts?.length){
-    html+=`<br>${formatOneSignalPushHtml(push,"OneSignal Beitrag-Push")}`;
-  }else if(push.response){
-    html+=`<br><span style="font-size:11px">OneSignal Response: ${esc(String(push.response).slice(0,400))}</span><br>`;
-  }
-  if(tg.sent)html+=`<br>Telegram: <strong>gesendet</strong>${tg.telegramMessageId?` · Message-ID ${esc(tg.telegramMessageId)}`:""}<br>`;
-  else if(tg.telegramError||tg.error)html+=`<br><span style="color:#ff9f9f">Telegram fehlgeschlagen: ${esc(tg.telegramError||tg.error)}</span><br>`;
-  return html;
-}
-async function retryLivePush(){
-  const ctx=lastPublishPushContext||readLastPublishPushContext();
-  const postId=ctx?.postId||frontmatterValue(draftMarkdown,"id")||String(draftFilename||"").replace(/\.md$/i,"");
-  const filename=ctx?.filename||draftFilename;
-  if(!postId||!filename){toast("Kein veröffentlichter Beitrag für Push-Retry");return}
-  const btn=document.getElementById("adminRetryPushBtn");
-  if(btn){btn.disabled=true;btn.textContent="Prüfe Live & Push …"}
-  setUploadStatus("Prüfe Index, Beitrag und Live-Verfügbarkeit … Push wird bei Erfolg gesendet.");
-  try{
-    const result=await workerPostRequest("api/admin/push/retry",{
-      postId,
-      filename,
-      postTitle:ctx?.postTitle||frontmatterValue(draftMarkdown,"title")||"Neuer Beitrag",
-      publishedAt:ctx?.publishedAt||new Date().toISOString(),
-      postPath:ctx?.postPath||`content/posts/${filename}`
-    });
-    const push=result.push||{};
-    const merged={...ctx,filename,postId,liveCheck:result.liveCheck||push.liveCheck||{},push};
-    saveLastPublishPushContext(merged);
-    setUploadStatus(formatPublishStatusHtml({filename,number:ctx?.number,commitSha:ctx?.commitSha,liveCheck:merged.liveCheck,push,telegram:{}}));
-    toast(push.sent?"Push gesendet":push.pending?"Push wartet noch auf Live-Verfügbarkeit":"Push fehlgeschlagen");
-  }catch(e){
-    setUploadStatus(`Push-Retry fehlgeschlagen: ${esc(e.message||e)}`);
-    toast(e.message||"Push-Retry fehlgeschlagen");
-  }finally{
-    if(btn){btn.disabled=false;btn.textContent="Live erneut prüfen & Push senden"}
-  }
-}
+function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
 function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
 function nextPostNumber(files){return (Array.isArray(files)?files.filter(f=>f&&(f.name||typeof f==="string")):[]).length+1}
 function workerNextNumberUrl(publishUrl){const url=new URL(resolveWorkerUrl(publishUrl||workerPublishUrl()));if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/api/admin/next-number");else if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/next-number");else url.pathname="/api/admin/next-number";return url.toString()}
 async function resolveNextPostNumber(){
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
-  let workerHint="";
   if(secret){
     try{
       const res=await fetch(workerNextNumberUrl(),{headers:{"X-Admin-Secret":secret},cache:"no-store"});
       const data=await res.json().catch(()=>({}));
       if(res.ok&&data.ok!==false&&Number(data.nextNumber)>0)return Number(data.nextNumber);
-      workerHint=data.error||`Worker antwortete mit HTTP ${res.status}`;
-    }catch(e){workerHint=e.message||String(e)}
-  }else{
-    workerHint="Kein Admin-Secret hinterlegt";
+    }catch(e){}
   }
-  try{
-    const index=await loadPostsIndexForUpload();
-    return nextPostNumber(index.data.files);
-  }catch(e){
-    throw new Error(workerHint?`Worker: ${workerHint}. Fallback posts-index.json: ${e.message||e}`:`posts-index.json konnte nicht geladen werden: ${e.message||e}`);
-  }
+  const index=await loadPostsIndexForUpload();
+  return nextPostNumber(index.data.files);
 }
-function suggestFilename(markdown,nextNumber){
-  const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";
-  const category=frontmatterValue(markdown,"category")||"beitrag";
-  const num=Math.max(1,Number(nextNumber)||1);
-  return `${adminSlugPart(category)}-${String(num).padStart(3,"0")}-${adminSlugPart(title)}.md`;
-}
+function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
 async function loadPostsIndexForUpload(){
   const res=await fetch(`${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}`,{cache:"no-store"});
   if(!res.ok)throw new Error("posts-index.json konnte nicht geladen werden");
@@ -952,7 +584,7 @@ function normalizeMarkdownForUpload(markdown,nextNumber){
   }
   return out+"\n";
 }
-async function publishPostViaWorkerRequest(markdown,filename,telegramPayload){
+async function publishPostViaWorkerRequest(markdown,filename){
   const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
   const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
@@ -960,12 +592,10 @@ async function publishPostViaWorkerRequest(markdown,filename,telegramPayload){
   if(!secret)throw new Error("Admin Worker Secret fehlt");
   saveWorkerPublishUrl(publishUrl);
   if(remember)setSavedWorkerSecret(secret);else setSavedWorkerSecret("");
-  const body={markdown,filename};
-  if(telegramPayload)body.telegram=telegramPayload;
   const res=await fetch(resolveWorkerUrl(publishUrl),{
     method:"POST",
     headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
-    body:JSON.stringify(body)
+    body:JSON.stringify({markdown,filename})
   });
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
@@ -985,20 +615,7 @@ async function workerPostRequest(path,payload){
     body:JSON.stringify(payload||{})
   });
   const data=await res.json().catch(()=>({}));
-  if(!res.ok||!data.ok)throw new Error(data.error||data.reason||`Worker Fehler ${res.status}`);
-  return data;
-}
-async function workerGetRequest(path){
-  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
-  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
-  if(!publishUrl)throw new Error("Worker URL fehlt");
-  if(!secret)throw new Error("Admin Worker Secret fehlt");
-  const res=await fetch(workerEndpoint(path),{
-    method:"GET",
-    headers:{"X-Admin-Secret":secret}
-  });
-  const data=await res.json().catch(()=>({}));
-  if(!res.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
 function renderLogin(){
@@ -1020,9 +637,7 @@ function renderLogin(){
   if(repair)repair.onclick=()=>{if(window.__DAR_ADMIN_REPAIR__)window.__DAR_ADMIN_REPAIR__();else location.reload(true)};
   setTimeout(()=>{try{input.focus()}catch(e){}},80);
 }
-function renderShell(opts={}){
-  const keepScroll=opts.keepScroll!==false;
-  if(keepScroll)adminShellScrollY=window.scrollY||document.documentElement.scrollTop||0;
+function renderShell(){
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
   const posts=rows.filter(x=>x.content_type==="post"),duas=rows.filter(x=>x.content_type==="dua");
@@ -1042,24 +657,21 @@ function renderShell(opts={}){
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
-  if(keepScroll){
-    requestAnimationFrame(()=>window.scrollTo({top:adminShellScrollY,behavior:"auto"}));
-  }else if(opts.scrollTop){
-    requestAnimationFrame(()=>window.scrollTo({top:0,behavior:"auto"}));
-  }
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
-function navigateAdmin(tab,{skipStack=false,scrollTop=false}={}){
+function navigateAdmin(tab,{skipStack=false}={}){
   if(tab==="schedule")tab="actions";
   if(!tab||tab===currentTab)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
-  renderShell({keepScroll:!scrollTop,scrollTop:!!scrollTop});
+  renderShell();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 function adminBack(){
   const prev=adminNavStack.pop();
-  if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="actions"}else{return}
-  renderShell({keepScroll:true});
+  if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="start"}else{return}
+  renderShell();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 function updateAdminBackButton(){
   const btn=document.getElementById("adminBackBtn");
@@ -1082,12 +694,11 @@ function renderStart(ctx){
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
         <button class="btn" data-tab="overview" type="button">Statistik öffnen</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
-        <a class="btn quick-telegram" href="${TELEGRAM_CHANNEL_URL}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">Telegram Kanal</a>
       </div>
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Aktionen","Beiträge direkt vorbereiten, veröffentlichen und News steuern.","actions","Direkt arbeiten")}
+    ${folderCard("①","Aktionen","Neuen Beitrag, Planung, News und Upload zentral steuern.","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
@@ -1180,6 +791,37 @@ function renderLivePreview(ctx){
       <iframe class="live-preview-frame" id="livePreviewFrame" src="${esc(url)}" title="DAR AL TAWḤID Live-Vorschau"></iframe>
     </div>
   </section>`;
+}
+function plannerCard(item){
+  return `<article class="planner-item">
+    <b>${esc(item.title||"Ohne Titel")}</b>
+    <span>Status: ${esc(item.status||"Entwurf")}<br>Geplant: ${esc(item.when||"nicht gesetzt")}<br>Zeitzone: ${esc(item.timezone||"Europe/Berlin")}<br>${esc(item.note||"")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
+    <div class="planner-actions">
+      <button class="btn" data-plan-ready="${esc(item.id)}" type="button">Bereit</button>
+      <button class="btn primary" data-plan-worker="${esc(item.id)}" type="button">Worker planen</button>
+      <button class="btn danger" data-plan-remove="${esc(item.id)}" type="button">Entfernen</button>
+    </div>
+  </article>`;
+}
+function renderPlanningPanel(){
+  const items=planItems();
+  return `<div class="preview-box">
+      <div class="section-head"><h3>Geplante Veröffentlichungen</h3><span>${items.length} lokale Einträge</span></div>
+      <div class="admin-form-grid">
+        <input class="field" id="planTitle" placeholder="Titel / Beitragsname">
+        <input class="field" id="planWhen" type="datetime-local">
+        <input class="field" id="planCategory" placeholder="Kategorie / Serie">
+        <select class="field" id="planTimezone"><option>Europe/Berlin</option><option>UTC</option></select>
+        <select class="field wide" id="planStatus"><option>Entwurf</option><option>Geplant</option><option>Sofort veröffentlichen</option><option>In Prüfung</option><option>Bereit</option><option>Veröffentlicht</option><option>Abgebrochen</option></select>
+        <textarea class="admin-textarea wide" id="planNote" placeholder="Notiz, Quelle, Datei oder Arbeitsstand"></textarea>
+        <button class="btn primary wide" id="addPlanBtn" type="button">Planung speichern</button>
+      </div>
+      <div class="notice-note" style="margin-top:12px">${items.length?"Automatisches Live-Schalten läuft über Cloudflare Worker + Cron. Speichere zuerst die Planung und sende sie dann mit „Worker planen“ an den Scheduler.":"Noch keine geplanten Beiträge. Markdown unten einfügen, Uhrzeit setzen und dann an den Worker-Scheduler übergeben."}</div>
+      ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.map(plannerCard).join("")}</div>`:""}
+    </div>`;
+}
+function renderSchedule(){
+  return `<section class="panel">${renderPlanningPanel()}</section>`;
 }
 function newsCard(item){
   return `<article class="planner-item">
@@ -1278,8 +920,8 @@ function renderUsers(ctx){
   </section>`;
 }
 function workflowSteps(active="draft"){
-  const order=["draft","staging","review","ready","published","disabled"];
-  const labels={draft:["Entwurf","Nur lokal im Admin."],staging:["Test-App","Private Vorschau, nicht öffentlich live."],review:["Prüfung bestanden","Quellen, Darstellung und Links geprüft."],ready:["Bereit","Kann bewusst live veröffentlicht werden."],published:["Live","Inhalt ist in der Besucher-App sichtbar."],disabled:["Zurückgezogen","Gespeichert, aber nicht sichtbar."]};
+  const order=["draft","review","ready","published","disabled"];
+  const labels={draft:["Entwurf","Vorbereitet, aber nicht sichtbar."],review:["In Prüfung","Quellen, Darstellung und Links prüfen."],ready:["Bereit","Kann bewusst veröffentlicht werden."],published:["Veröffentlicht","Inhalt ist live sichtbar."],disabled:["Zurückgezogen","Gespeichert, aber nicht sichtbar."]};
   const activeIndex=Math.max(0,order.indexOf(active));
   return `<div class="workflow-grid">${order.map((key,i)=>`<div class="workflow-step ${i<=activeIndex?"ready":""}"><b>${esc(labels[key][0])}</b><small>${esc(labels[key][1])}</small></div>`).join("")}</div>`;
 }
@@ -1319,9 +961,7 @@ function renderDraftPreview(){
     <div class="preview-tools">
       <button class="btn primary" id="refreshPreviewBtn" type="button">Vorschau öffnen</button>
       <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
-      <button class="btn" id="publishStagingBtn" type="button">In Test-App anzeigen</button>
-      <button class="btn" id="openStagingPreviewBtn" type="button">Test-Vorschau öffnen</button>
-      <button class="btn" id="checkDraftBtn" type="button">Prüfung bestanden</button>
+      <button class="btn" id="checkDraftBtn" type="button">Änderungen prüfen</button>
       <button class="btn primary" id="publishReadyBtn" type="button">Bereit markieren</button>
     </div>
     ${validationList(draftMarkdown)}
@@ -1354,7 +994,34 @@ function renderActions(rows,installs=installTotals()){
   const best=sortedRows(rows)[0];
   return `<section class="split">
     <div class="panel">
-      <div class="section-head"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker · sofort oben</span></div>
+      <div class="section-head"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
+      <div class="quick-grid">
+        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown unten einfügen und über Cloudflare Worker veröffentlichen.</small></button>
+        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
+        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
+        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+      </div>
+      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      ${renderPlanningPanel()}
+      ${renderNewsComposer()}
+      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
+      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
+      <div class="section-head" style="margin-top:16px"><h3>Beitrag direkt hochladen</h3><span>Cloudflare Worker</span></div>
+      <div class="preview-box">
+        <div class="section-head"><h3>Markdown-Metadaten</h3><span>Frontmatter-Hilfe</span></div>
+        <div class="admin-form-grid">
+          <input class="field" id="mdTitle" placeholder="Titel">
+          <input class="field" id="mdId" placeholder="ID / Slug">
+          <input class="field" id="mdDate" type="date">
+          <input class="field" id="mdCategory" placeholder="Kategorie">
+          <input class="field" id="mdScholar" placeholder="Gelehrter">
+          <input class="field" id="mdBook" placeholder="Werk / Buch">
+          <input class="field wide" id="mdSource" placeholder="Quelle">
+          <input class="field wide" id="mdTags" placeholder="Tags mit Komma trennen">
+          <button class="btn primary wide" id="buildMarkdownBtn" type="button">Markdown aus Feldern vorbereiten</button>
+        </div>
+      </div>
       <div class="upload-grid">
         <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
         <div class="upload-stack">
@@ -1368,29 +1035,12 @@ function renderActions(rows,installs=installTotals()){
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
           <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
-          ${renderVisitorAppHealthPanel()}
-          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy||!visitorAppHealth.ok||visitorAppHealth.checking?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":(!visitorAppHealth.ok&&!visitorAppHealth.checking?"Live blockiert (App defekt)":"Live veröffentlichen")}</button>
-          <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
+          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
           <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
       </div>
       ${renderDraftPreview()}
-      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
-      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
-      <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Wege & Tests</span></div>
-      <div class="quick-grid">
-        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Live-Vorschau</b><small>Besucher-App in neuem Fenster öffnen.</small></a>
-        <a class="quick" href="${stagingAppUrl()}" target="_blank" rel="noopener"><b>Test-App öffnen</b><small>Private Vorschau mit Staging-Daten.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
-        <div class="quick push-test-card"><b>Beitrag-Push</b><small>Neuer Beitrag · OneSignal · Live-Prüfung vor Versand</small><div class="push-test-controls"><button class="btn" id="adminPostPushLogBtn" type="button">Push-Log laden</button><button class="btn" id="adminPostPushDetectSubBtn" type="button">Gerät-Subscription erkennen</button></div><div class="upload-status" id="adminPostPushLogBox" style="margin-top:10px">Noch kein Beitrag-Push-Log geladen.</div><div class="section-head" style="margin-top:12px"><h3>Test-Push an dieses Gerät</h3><span>Subscription aus Besucher-App</span></div><div class="push-test-controls"><input class="field" id="adminPostPushSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Beitrag-Push Subscription-ID" value="${esc(readLocalDeviceSubscriptionId())}"><button class="btn primary" id="adminPostPushTestBtn" type="button">Test-Push senden</button></div><div class="upload-status" id="adminPostPushTestStatus" style="margin-top:8px">${readLocalDeviceSubscriptionId()?"Gerät-Subscription erkannt.":"Keine gültige Subscription-ID für dieses Gerät gefunden. Push in der Besucher-App neu aktivieren."}</div></div>
-        <div class="quick push-test-card"><b>Gebetszeiten-Push</b><small>Worker-Cron alle 5&nbsp;Min · Nutzer aus Supabase · Push über OneSignal</small><div class="push-test-controls"><button class="btn" id="adminPrayerStatusBtn" type="button">Status laden</button><button class="btn" id="adminPrayerRunBtn" type="button">Cron jetzt starten</button></div><div class="upload-status" id="adminPrayerStatusBox" style="margin-top:10px">Noch kein Scheduler-Status geladen.</div><div class="section-head" style="margin-top:12px"><h3>OneSignal Test-Push</h3><span>Einzeltest an eine Subscription</span></div><div class="push-test-controls"><button class="btn" id="adminPushRegsBtn" type="button">Registrierungen laden</button><select class="field" id="adminPrayerSubscriptionSelect" aria-label="Push-Empfänger auswählen" style="display:none"><option value="">Empfänger wählen…</option></select><input class="field" id="adminPrayerSubscriptionInput" placeholder="OneSignal Subscription-ID" aria-label="Subscription-ID"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="fajr">Fajr</option><option value="dhuhr">Dhuhr</option><option value="asr">ʿAṣr</option><option value="maghrib" selected>Maghrib</option><option value="isha">ʿIshāʾ</option><option value="tahajjud">Taḥajjud</option></select><select class="field" id="adminPushModeSelect" aria-label="Art des Test-Pushs"><option value="advance">Vorab (15&nbsp;Min)</option><option value="entry" selected>Gebetszeit</option></select><button class="btn primary" id="adminOneSignalPrayerTestBtn" type="button">OneSignal senden</button></div></div>
-        <div class="quick push-test-card"><b>Tägliche Pushs</b><small>Duʿāʾ 09:00 · Empfehlung 12:00 · Ortszeit pro Nutzer</small><div class="push-test-controls"><button class="btn" id="adminDailyStatusBtn" type="button">Status laden</button><button class="btn" id="adminDailyRunBtn" type="button">Cron jetzt starten</button><button class="btn" id="adminDailyConfigBtn" type="button">Konfiguration laden</button></div><div class="upload-status" id="adminDailyStatusBox" style="margin-top:10px">Noch kein Tages-Push-Status geladen.</div><div class="push-test-controls" style="margin-top:10px"><label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="adminDailyAutomatic" checked> Automatische Auswahl</label></div><div class="push-test-controls"><input class="field" id="adminDailyDuaId" placeholder="Duʿāʾ-ID (leer = automatisch)" aria-label="Duʿāʾ-ID"><input class="field" id="adminDailyRecId" placeholder="Beitrags-ID (leer = automatisch)" aria-label="Beitrags-ID"><input class="field" id="adminDailyRecFile" placeholder="Beitrags-Datei optional" aria-label="Beitrags-Datei"></div><div class="push-test-controls"><textarea class="field" id="adminDailyDuaBody" rows="2" placeholder="Duʿāʾ-Push-Text"></textarea><textarea class="field" id="adminDailyRecBody" rows="2" placeholder="Empfehlungs-Push-Text"></textarea></div><div class="push-test-controls"><button class="btn" id="adminDailyPreviewDuaBtn" type="button">Vorschau Duʿāʾ</button><button class="btn" id="adminDailyPreviewRecBtn" type="button">Vorschau Empfehlung</button><button class="btn primary" id="adminDailySaveBtn" type="button">Konfiguration speichern</button></div><div class="upload-status" id="adminDailyPreviewBox" style="margin-top:8px;font-size:11px">Vorschau erscheint hier.</div><div class="section-head" style="margin-top:12px"><h3>Tages-Push Test</h3><span>Subscription-ID wie bei Gebets-Push</span></div><div class="push-test-controls"><select class="field" id="adminDailyTestKind" aria-label="Tages-Push Art"><option value="dua">Duʿāʾ des Tages</option><option value="recommendation">Heute empfohlen</option></select><button class="btn primary" id="adminDailyTestBtn" type="button">Test senden</button></div></div>
-      </div>
-      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Subscription-ID manuell einfügen oder „Registrierungen laden“ nutzen (Supabase).</div>
-      ${renderTelegramPanel()}
-      ${renderNewsComposer()}
-      <div class="preview-box" style="margin-top:14px">
+      <div class="preview-box">
         <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
         <div class="quick-grid">
           <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
@@ -1407,7 +1057,7 @@ function renderActions(rows,installs=installTotals()){
       </div>
       <div class="panel">
         <div class="section-head"><h3>App-Status</h3><span>PWA</span></div>
-        <div class="empty">Besucher-App Schutz: <strong style="color:${visitorAppHealth.ok&&!visitorAppHealth.checking?"#8fd7a8":"#ff9f9f"}">${visitorAppHealth.checking?"wird geprüft …":visitorAppHealth.ok?"startklar":"Live blockiert"}</strong><br>Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
+        <div class="empty">Besucher-App Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
       </div>
       <div class="panel">
         <div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div>
@@ -1469,15 +1119,16 @@ function renderTech(ctx){
       <div class="status-list">
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
+        <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
         <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
-        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Cloudflare Worker Cron alle 5&nbsp;Min (Haupt-Scheduler). GitHub Action nur Backup.</span><strong class="status-pill">Worker</strong></div>
-        <div class="status-row"><span><b>System Health</b><br>Besucher-App, Push, Index und Worker – bei Rot kein Live-Deploy.</span><strong class="status-pill"><a href="/admin/health.html" target="_blank" rel="noopener" style="color:inherit">Health öffnen</a></strong></div>
-        <div class="status-row"><span><b>Rollback-Stand</b><br>Branch <code>stable-last-working</code> · siehe STABILITY.md</span><strong class="status-pill">Sicher</strong></div>
+        <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Nur serverseitig zuverlässig bei geschlossener PWA. Browser-Timer bleiben nur Zusatz.</span><strong class="status-pill">Scheduler nötig</strong></div>
+        <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
       </div>
     </div>
     <aside class="side-stack">
       <div class="panel"><div class="section-head"><h3>Statuszahlen</h3><span>Admin</span></div>
         <div class="command-grid">
+          <div class="command-card"><b>Geplant</b><span>${planItems().length}</span><small>lokale Einträge</small></div>
           <div class="command-card"><b>News</b><span>${newsItems().length}</span><small>vorbereitet</small></div>
           <div class="command-card"><b>Fehler</b><span>${reportItems().length}</span><small>erfasst</small></div>
           <div class="command-card"><b>Benutzer</b><span>${userItems().length}</span><small>notiert</small></div>
@@ -1497,9 +1148,42 @@ function renderTechStatus(ctx){
     ["Browser Push",!!("Notification" in window),"Lokaler Admin-Test möglich"],
     ["PWA installierbar",!!("BeforeInstallPromptEvent" in window)||(typeof matchMedia==="function"&&matchMedia("(display-mode: standalone)").matches),"Browserabhängig"],
     ["posts-index Upload",true,"Wird serverseitig im Worker aktualisiert"],
-    ["Sicherheitsabfrage",true,"Live veröffentlichen fragt bewusst nach"]
+    ["Sicherheitsabfrage",true,"Online veröffentlichen fragt bewusst nach"]
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
+}
+function buildMarkdownFromFields(){
+  const title=(document.getElementById("mdTitle")?.value||"").trim();
+  if(!title){toast("Titel fehlt");return}
+  const slug=(document.getElementById("mdId")?.value||title).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  const date=(document.getElementById("mdDate")?.value||new Date().toISOString().slice(0,10)).trim();
+  const category=(document.getElementById("mdCategory")?.value||"").trim();
+  const scholar=(document.getElementById("mdScholar")?.value||"").trim();
+  const book=(document.getElementById("mdBook")?.value||"").trim();
+  const source=(document.getElementById("mdSource")?.value||"").trim();
+  const tags=(document.getElementById("mdTags")?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+  draftFilename=draftFilename||`${slug}.md`;
+  draftMarkdown=`---
+id: "${slug}"
+title: "${title.replace(/"/g,"'")}"
+date: "${date}"
+category: "${category.replace(/"/g,"'")}"
+scholar: "${scholar.replace(/"/g,"'")}"
+book: "${book.replace(/"/g,"'")}"
+source: "${source.replace(/"/g,"'")}"
+tags: [${tags.map(x=>`"${x.replace(/"/g,"'")}"`).join(", ")}]
+---
+
+> Aussage hier einfügen.
+
+Quelle: ${source || "Quelle prüfen"}
+`;
+  const text=document.getElementById("postMarkdownInput"),file=document.getElementById("postFilenameInput");
+  if(text)text.value=draftMarkdown;
+  if(file)file.value=draftFilename;
+  addAdminLog("Entwurf","Markdown aus Metadaten vorbereitet",title);
+  updateDraftPreview();
+  toast("Markdown vorbereitet");
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
@@ -1507,58 +1191,16 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
-  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview();updateTelegramPanelStatus();scheduleTelegramPreviewRefresh()};
-  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview();updateTelegramPanelStatus();scheduleTelegramPreviewRefresh()};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview()};
+  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview()};
   const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
   const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
   const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
-  const publishStagingBtn=document.getElementById("publishStagingBtn");if(publishStagingBtn)publishStagingBtn.onclick=publishPostToStaging;
-  const openStagingPreviewBtn=document.getElementById("openStagingPreviewBtn");if(openStagingPreviewBtn)openStagingPreviewBtn.onclick=()=>openStagingPreview(frontmatterValue(draftMarkdown,"id"));
-  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Prüfung bestanden",draftFilename||"Entwurf");setUploadStatus("Prüfung bestanden. Der Beitrag kann jetzt bewusst live veröffentlicht werden.");renderShell()};
+  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Änderungen geprüft",draftFilename||"Entwurf");setUploadStatus("Prüfung markiert. Bitte Vorschau, Quelle, Titel, Kategorie und Links kontrollieren.");renderShell()};
   const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
-  const visitorHealthRefreshBtn=document.getElementById("visitorHealthRefreshBtn");if(visitorHealthRefreshBtn)visitorHealthRefreshBtn.onclick=()=>refreshVisitorAppHealth();
-  if(currentTab==="actions")refreshVisitorAppHealth({silent:true});
-  const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
-  const postPushLogBtn=document.getElementById("adminPostPushLogBtn");if(postPushLogBtn)postPushLogBtn.onclick=loadAdminPostPushLog;
-  const postPushDetectBtn=document.getElementById("adminPostPushDetectSubBtn");if(postPushDetectBtn)postPushDetectBtn.onclick=detectAdminDeviceSubscription;
-  const postPushTestBtn=document.getElementById("adminPostPushTestBtn");if(postPushTestBtn)postPushTestBtn.onclick=sendAdminPostPushTest;
-  const pushRegsBtn=document.getElementById("adminPushRegsBtn");if(pushRegsBtn)pushRegsBtn.onclick=loadAdminPushRegistrations;
-  const pushRegsSelect=document.getElementById("adminPrayerSubscriptionSelect");if(pushRegsSelect)pushRegsSelect.onchange=()=>{const input=document.getElementById("adminPrayerSubscriptionInput");if(input&&pushRegsSelect.value)input.value=pushRegsSelect.value};
-  const oneSignalPrayerBtn=document.getElementById("adminOneSignalPrayerTestBtn");if(oneSignalPrayerBtn)oneSignalPrayerBtn.onclick=sendAdminOneSignalPrayerTest;
-  const prayerStatusBtn=document.getElementById("adminPrayerStatusBtn");if(prayerStatusBtn)prayerStatusBtn.onclick=loadAdminPrayerPushStatus;
-  const prayerRunBtn=document.getElementById("adminPrayerRunBtn");if(prayerRunBtn)prayerRunBtn.onclick=triggerAdminPrayerScheduler;
-  const dailyStatusBtn=document.getElementById("adminDailyStatusBtn");if(dailyStatusBtn)dailyStatusBtn.onclick=loadAdminDailyPushStatus;
-  const dailyRunBtn=document.getElementById("adminDailyRunBtn");if(dailyRunBtn)dailyRunBtn.onclick=triggerAdminDailyScheduler;
-  const dailyConfigBtn=document.getElementById("adminDailyConfigBtn");if(dailyConfigBtn)dailyConfigBtn.onclick=loadAdminDailyPushConfig;
-  const dailySaveBtn=document.getElementById("adminDailySaveBtn");if(dailySaveBtn)dailySaveBtn.onclick=saveAdminDailyPushConfig;
-  const dailyPreviewDuaBtn=document.getElementById("adminDailyPreviewDuaBtn");if(dailyPreviewDuaBtn)dailyPreviewDuaBtn.onclick=()=>previewAdminDailyPush("dua");
-  const dailyPreviewRecBtn=document.getElementById("adminDailyPreviewRecBtn");if(dailyPreviewRecBtn)dailyPreviewRecBtn.onclick=()=>previewAdminDailyPush("recommendation");
-  const dailyTestBtn=document.getElementById("adminDailyTestBtn");if(dailyTestBtn)dailyTestBtn.onclick=sendAdminDailyTestPush;
-  const tgEnabled=document.getElementById("telegramPostEnabled");
-  const tgRefreshBtn=document.getElementById("adminTelegramRefreshPreviewBtn");
-  const syncTelegramModeState=()=>{
-    const on=!!tgEnabled?.checked;
-    document.querySelectorAll('input[name="telegramPostMode"]').forEach(r=>{r.disabled=!on});
-    if(tgRefreshBtn)tgRefreshBtn.disabled=!on;
-  };
-  if(tgEnabled){
-    syncTelegramModeState();
-    tgEnabled.onchange=()=>{
-      setTelegramPref("enabled",tgEnabled.checked);
-      syncTelegramModeState();
-      if(tgEnabled.checked)scheduleTelegramPreviewRefresh();
-      else{lastTelegramPreview=null;renderTelegramPreviewUi();}
-    };
-  }
-  document.querySelectorAll('input[name="telegramPostMode"]').forEach(r=>{
-    r.onchange=()=>{setTelegramPref("mode",r.value);scheduleTelegramPreviewRefresh()};
-  });
-  const tgRefresh=document.getElementById("adminTelegramRefreshPreviewBtn");if(tgRefresh)tgRefresh.onclick=refreshTelegramPreview;
-  const tgTest=document.getElementById("adminTelegramTestBtn");if(tgTest)tgTest.onclick=sendTelegramTestMessage;
-  const tgResend=document.getElementById("adminTelegramResendBtn");if(tgResend)tgResend.onclick=()=>sendTelegramResend(true);
-  if(document.getElementById("adminTelegramPanel")&&draftMarkdown.trim())scheduleTelegramPreviewRefresh();
+  const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
@@ -1594,6 +1236,11 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-tab-up]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabUp,-1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabUp);renderShell()});
   document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
   const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
+  const buildMarkdown=document.getElementById("buildMarkdownBtn");if(buildMarkdown)buildMarkdown.onclick=buildMarkdownFromFields;
+  const addPlan=document.getElementById("addPlanBtn");if(addPlan)addPlan.onclick=()=>{const title=(document.getElementById("planTitle")?.value||"").trim();const when=document.getElementById("planWhen")?.value||"";const status=document.getElementById("planStatus")?.value||"Entwurf";const timezone=document.getElementById("planTimezone")?.value||"Europe/Berlin";const category=(document.getElementById("planCategory")?.value||"").trim();const note=(document.getElementById("planNote")?.value||"").trim();if(!title){toast("Titel fehlt");return}addStoreItem(ADMIN_PLAN_KEY,{title,when,status,timezone,note:category?`${category} · ${note}`:note});addAdminLog("Planung","Geplanten Beitrag gespeichert",`${title} · ${timezone}`);renderShell()};
+  document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
+  document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
+  document.querySelectorAll("[data-plan-worker]").forEach(btn=>btn.onclick=async()=>{const item=planItems().find(x=>String(x.id)===String(btn.dataset.planWorker));if(!item){toast("Planung fehlt");return}const markdown=String(draftMarkdown||"").trim();if(!markdown){toast("Markdown unten einfügen, dann Worker planen");return}if(!item.when){toast("Uhrzeit fehlt");return}btn.disabled=true;btn.textContent="Sende...";try{const result=await workerPostRequest("schedule",{id:item.id,title:item.title,when:item.when,timezone:item.timezone||"Europe/Berlin",filename:draftFilename,markdown});updateStoreItem(ADMIN_PLAN_KEY,item.id,{status:"Worker geplant",workerId:result.id,publishAt:result.publishAt});addAdminLog("Planung","Beim Worker-Scheduler gespeichert",`${item.title} · ${result.publishAt||item.when}`);toast("Worker-Scheduler gespeichert");renderShell()}catch(e){btn.disabled=false;btn.textContent="Worker planen";addAdminLog("Fehler","Planung konnte nicht an Worker gesendet werden",e.message||String(e));toast(e.message||"Worker-Planung fehlgeschlagen")}});
   const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
   document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live auf der Startseite veröffentlichen?"))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});addAdminLog("News","News live veröffentlicht",item.title);toast("News live veröffentlicht");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
@@ -1605,18 +1252,6 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-user-disable]").forEach(btn=>btn.onclick=()=>{if(confirm("Diesen Nutzer wirklich deaktivieren?")){updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userDisable,{status:"deaktiviert"});addAdminLog("Benutzer","Benutzer deaktiviert","");renderShell()}});
   document.querySelectorAll("[data-user-active]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userActive,{status:"aktiv"});renderShell()});
 }
-function updateTelegramPanelStatus(){
-  const el=document.getElementById("adminTelegramStatus");
-  if(!el)return;
-  const postId=currentDraftPostId();
-  const local=postId?readLocalTelegramStatus(postId):null;
-  let statusLabel="Noch nicht gesendet";
-  if(local?.telegramStatus==="sent")statusLabel=`Gesendet${local.telegramSentAt?` · ${esc(local.telegramSentAt.slice(0,10))}`:""}`;
-  else if(local?.telegramStatus==="failed")statusLabel=`Fehlgeschlagen · ${esc(local.telegramError||"unbekannt")}`;
-  el.innerHTML=postId
-    ?`Beitrag: <strong>${esc(postId)}</strong> · Telegram: ${statusLabel} · Kanal @dar_al_tauhid`
-    :"Noch kein Entwurf. Markdown einfügen, Vorschau prüfen, dann veröffentlichen.";
-}
 function updateDraftPreview(){
   const box=document.getElementById("draftPreviewBox");
   if(!box)return;
@@ -1625,373 +1260,40 @@ function updateDraftPreview(){
   tmp.innerHTML=fresh;
   box.replaceWith(tmp.firstElementChild);
   bindUi();
-  updateTelegramPanelStatus();
 }
-function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.innerHTML=typeof text==="string"?esc(text):text}
-function setAdminPostPushTestStatus(html){const el=document.getElementById("adminPostPushTestStatus");if(el)el.innerHTML=html}
-function setAdminPostPushLogHtml(html){const el=document.getElementById("adminPostPushLogBox");if(el)el.innerHTML=html}
-function detectAdminDeviceSubscription(){
-  const sid=readLocalDeviceSubscriptionId();
-  const input=document.getElementById("adminPostPushSubscriptionInput");
-  const prayerInput=document.getElementById("adminPrayerSubscriptionInput");
-  if(sid){
-    if(input)input.value=sid;
-    if(prayerInput&&!prayerInput.value)prayerInput.value=sid;
-    setAdminPostPushTestStatus(`<strong style="color:#8fd7a8">Gerät-Subscription erkannt:</strong> ${esc(sid)}`);
-    toast("Subscription-ID erkannt");
-  }else{
-    setAdminPostPushTestStatus(`<strong style="color:#ff9f9f">Keine gültige Subscription-ID für dieses Gerät gefunden.</strong> Push in der Besucher-App neu aktivieren.`);
-    toast("Keine Subscription gefunden");
-  }
-}
-async function loadAdminPostPushLog(){
-  setAdminPostPushLogHtml("Lade Push-Log…");
+function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
+async function sendAdminLocalPushTest(){
+  if(!("Notification" in window)){setAdminPushTestStatus("Dieses Gerät unterstützt keine Browser-Benachrichtigungen.");return}
+  let permission=Notification.permission;
+  if(permission!=="granted")permission=await Notification.requestPermission();
+  if(permission!=="granted"){setAdminPushTestStatus("Benachrichtigungen wurden nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}
+  const prayer=document.getElementById("adminPushPrayerSelect")?.value||"ʿIshāʾ";
+  const title=`${prayer} ist eingetreten`;
+  const body="Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.";
   try{
-    const data=await workerGetRequest("api/admin/push/log");
-    const log=data.log||{};
-    let html="<strong>Push-Log</strong><br>";
-    if(log.lastPostPush){
-      html+=`<br><strong>Letzter Beitrag-Push</strong><br>${formatOneSignalPushHtml(log.lastPostPush,"Beitrag-Push")}`;
-    }else html+=`<br><span style="color:#f0c674">Noch kein Beitrag-Push im Log.</span>`;
-    if(log.lastTestPush){
-      html+=`<br><br><strong>Letzter Test-Push</strong><br>${formatOneSignalPushHtml(log.lastTestPush,"Test-Push")}`;
+    if("serviceWorker" in navigator){
+      const reg=await navigator.serviceWorker.ready;
+      await reg.showNotification(title,{body,tag:"admin-local-prayer-test",renotify:true,icon:"/notification-icon-192.png",badge:"/notification-badge-96.png",data:{url:"/admin/"}});
+    }else{
+      new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});
     }
-    if(Array.isArray(log.history)&&log.history.length){
-      html+=`<br><br><strong>Verlauf (${log.history.length})</strong><br>`;
-      log.history.slice(0,5).forEach(entry=>{
-        const when=entry.loggedAt?new Date(entry.loggedAt).toLocaleString("de-DE"):"";
-        html+=`<span style="font-size:10px">${esc(entry.kind||"?")} · ${esc(when)} · gesendet ${entry.sent?"ja":"nein"} · Empf. ${esc(String(entry.recipients??"?"))}${entry.reason&&!entry.sent?` · ${esc(entry.reason)}`:""}</span><br>`;
-      });
-    }
-    setAdminPostPushLogHtml(html);
+    setAdminPushTestStatus(`Test-Push für ${prayer} wurde nur auf diesem Admin-Gerät ausgelöst.`);
   }catch(e){
-    setAdminPostPushLogHtml(`<span style="color:#f0c674">Push-Log konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
-  }
-}
-async function sendAdminPostPushTest(){
-  const subscriptionId=(document.getElementById("adminPostPushSubscriptionInput")?.value||readLocalDeviceSubscriptionId()||"").trim();
-  if(!subscriptionId){
-    setAdminPostPushTestStatus(`<strong style="color:#ff9f9f">Keine gültige Subscription-ID für dieses Gerät gefunden. Push neu aktivieren.</strong>`);
-    return;
-  }
-  const postTitle=frontmatterValue(draftMarkdown,"title")||"Test-Beitrag";
-  const postId=frontmatterValue(draftMarkdown,"id")||String(draftFilename||"").replace(/\.md$/i,"")||"test-post-push";
-  setAdminPostPushTestStatus("Sende Beitrag-Push-Test an OneSignal…");
-  try{
-    const result=await workerPostRequest("api/admin/push/test",{subscriptionId,postTitle,postId,filename:draftFilename||"test-post.md"});
-    setAdminPostPushTestStatus(formatOneSignalPushHtml(result,result.sent?"OneSignal-Test erfolgreich":"OneSignal-Test fehlgeschlagen"));
-    addAdminLog("Beitrag-Push","Test gesendet",result.sent?`${result.oneSignal?.recipients??"?"} Empfänger`:(result.reason||"fehlgeschlagen"));
-    toast(result.sent?"Beitrag-Test-Push gesendet":"Beitrag-Test-Push fehlgeschlagen");
-  }catch(e){
-    setAdminPostPushTestStatus(`<span style="color:#f0c674"><strong>Test fehlgeschlagen</strong><br>${esc(e.message||e)}</span>`);
-  }
-}
-async function loadAdminPushRegistrations(){
-  if(!hasSupabase()){setAdminPushTestStatus("Supabase nicht konfiguriert.");return}
-  const select=document.getElementById("adminPrayerSubscriptionSelect");
-  const input=document.getElementById("adminPrayerSubscriptionInput");
-  setAdminPushTestStatus("Lade Push-Registrierungen…");
-  try{
-    const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
-    const r=await fetch(url+"/rest/v1/prayer_push_registrations?subscription_id=not.is.null&select=subscription_id,device_id,city,enabled,daily_dua_enabled,daily_recommendation_enabled,last_synced_at&order=last_synced_at.desc&limit=50",{headers:headers(),cache:"no-store"});
-    if(!r.ok)throw new Error("Fehler "+r.status);
-    const rows=await r.json();
-    if(!Array.isArray(rows)||!rows.length){if(select){select.style.display="none";select.innerHTML='<option value="">Empfänger wählen…</option>'}setAdminPushTestStatus("Keine Registrierungen mit Subscription-ID gefunden.");return}
-    if(select){
-      select.innerHTML='<option value="">Empfänger wählen…</option>'+rows.map(row=>{
-        const city=String(row.city||"ohne Ort").trim();
-        const flags=[row.enabled?"Gebet":null,row.daily_dua_enabled?"Duʿāʾ":null,row.daily_recommendation_enabled?"Empfehlung":null].filter(Boolean).join(" · ")||"Push";
-        const synced=row.last_synced_at?new Date(row.last_synced_at).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"";
-        const label=`${city} · ${flags}${synced?" · "+synced:""}`;
-        return `<option value="${esc(String(row.subscription_id||""))}">${esc(label)}</option>`;
-      }).join("");
-      select.style.display="";
-    }
-    if(input&&!input.value&&rows[0]?.subscription_id)input.value=String(rows[0].subscription_id);
-    setAdminPushTestStatus(`${rows.length} Registrierung(en) geladen. Empfänger wählen oder ID manuell einfügen.`);
-    addAdminLog("Push","Registrierungen geladen",String(rows.length));
-  }catch(e){
-    setAdminPushTestStatus(`Registrierungen konnten nicht geladen werden: ${e.message||e}`);
-  }
-}
-function setAdminPrayerStatusHtml(html){const el=document.getElementById("adminPrayerStatusBox");if(el)el.innerHTML=html}
-function formatPrayerPushStatusHtml(status){
-  if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
-  const updated=status.updatedAt?new Date(status.updatedAt).toLocaleString("de-DE"):"unbekannt";
-  const schedStatus=status.schedulerStatus||(status.ok?"success":status.errors?"error":"warning");
-  const schedLabel=schedStatus==="success"?"erfolgreich":schedStatus==="error"?"Fehler":schedStatus==="warning"?"Warnung":"unbekannt";
-  const schedColor=schedStatus==="success"?"#dfffd8":schedStatus==="error"?"#f0c674":"#e8d9a8";
-  const engine=status.schedulerEngine||"cloudflare-worker";
-  const mag=status.maghribDiagnostic;
-  const next=status.nextPlannedPush;
-  const plannedToday=Number(status.scheduled||0);
-  const sentToday=Number(status.sentTodayCount||0);
-  let html=`<strong>Letzter Cron-Lauf:</strong> ${esc(updated)}<br>`;
-  html+=`<strong>Scheduler-Status:</strong> <span style="color:${schedColor}">${esc(schedLabel)}</span> · Engine: ${esc(engine)}<br>`;
-  if(next?.sendAfter){
-    const nextAt=new Date(next.sendAfter).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
-    html+=`<strong>Nächster geplanter Push:</strong> ${esc(next.prayer||"")} (${esc(next.mode||"")}) · ${esc(nextAt)}<br>`;
-  }
-  html+=`<strong>Nutzer mit Standort:</strong> ${esc(String(status.usersWithLocation||0))} · <strong>Quelle:</strong> ${esc(status.userSource||"supabase")}<br>`;
-  html+=`<strong>Gruppen:</strong> ${esc(String(status.locationGroups||0))} · <strong>Geplant heute:</strong> ${esc(String(plannedToday))} · <strong>Empfänger:</strong> ${esc(String(status.recipients||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
-  if(status.subscriptionsSupabase!=null)html+=`<strong>Supabase aktiv:</strong> ${esc(String(status.subscriptionsSupabase||0))}<br>`;
-  if(mag){
-    html+=`<br><strong>Maghrib heute (${esc(mag.time||"--:--")}):</strong><br>`;
-    html+=`Vorab: ${esc(status.today?.prayers?.maghrib?.advance?.status||mag.plannedAdvance||"?")} · Gebetszeit: ${esc(status.today?.prayers?.maghrib?.entry?.status||mag.plannedEntry||"?")}<br>`;
-    html+=`<span style="color:#dfffd8">${esc(mag.answer||"")}</span><br>`;
-  }
-  const prayers=status.today?.prayers||{};
-  const diagnostics=status.prayerDiagnostics||{};
-  const keys=["fajr","dhuhr","asr","maghrib","isha","tahajjud"];
-  html+=`<br><table style="width:100%;border-collapse:collapse;font-size:11px"><tr><th align="left">Gebet</th><th>Zeit</th><th>Vorab</th><th>Gebetszeit</th></tr>`;
-  keys.forEach(key=>{
-    const p=prayers[key];
-    if(!p&&key==="tahajjud")return;
-    html+=`<tr><td>${esc(p?.name||key)}</td><td>${esc(p?.time||"--")}</td><td>${esc(p?.advance?.status||"—")}</td><td>${esc(p?.entry?.status||"—")}</td></tr>`;
-  });
-  html+=`</table>`;
-  const osResp=status.oneSignalResponses;
-  if(Array.isArray(osResp)&&osResp.length){
-    html+=`<br><strong>OneSignal-Antworten:</strong><br>`;
-    osResp.slice(0,5).forEach(r=>{
-      html+=`<span style="font-size:10px">${esc(r.prayer||"")} ${esc(r.mode||"")} · ${esc(String(r.recipients||0))} Empf. · ${esc(String(r.response||"").slice(0,120))}</span><br>`;
-    });
-  }
-  if(status.lastError)html+=`<br><span style="color:#f0c674"><strong>Fehlergrund:</strong> ${esc(status.lastError)}</span>`;
-  if(Number(status.usersWithLocation||0)===0)html+=`<br><span style="color:#f0c674">Kein Nutzer mit Standort und aktivem Gebets-Push.</span>`;
-  return html;
-}
-async function loadAdminPrayerPushStatus(){
-  const box=document.getElementById("adminPrayerStatusBox");
-  if(box)box.textContent="Lade Scheduler-Status…";
-  try{
-    let status=null;
-    try{
-      const data=await workerGetRequest("api/admin/prayer/status");
-      if(data?.status)status=data.status;
-    }catch(e){}
-    if(!status?.updatedAt){
-      try{
-        const r=await fetch(`${SITE_ORIGIN}/content/admin/prayer-push-status.json?v=${Date.now()}`,{cache:"no-store"});
-        if(r.ok)status=await r.json();
-      }catch(e){}
-    }
-    setAdminPrayerStatusHtml(formatPrayerPushStatusHtml(status));
-    addAdminLog("Gebets-Push","Scheduler-Status geladen",status?.updatedAt||"");
-  }catch(e){
-    setAdminPrayerStatusHtml(`<span style="color:#f0c674">Status konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
-  }
-}
-async function triggerAdminPrayerScheduler(){
-  const box=document.getElementById("adminPrayerStatusBox");
-  if(box)box.textContent="Starte Worker-Cron…";
-  try{
-    const data=await workerPostRequest("api/admin/prayer/run",{});
-    const ok=data.schedulerStatus==="success"||data.ok;
-    const color=ok?"#dfffd8":"#f0c674";
-    let html=`<span style="color:${color}"><strong>${esc(data.reason||"Scheduler abgeschlossen")}</strong></span>`;
-    if(data.status)html+=`<br><br>${formatPrayerPushStatusHtml(data.status)}`;
-    setAdminPrayerStatusHtml(html);
-    addAdminLog("Gebets-Push","Worker-Cron gestartet",data.reason||"");
-  }catch(e){
-    setAdminPrayerStatusHtml(`<span style="color:#f0c674"><strong>Scheduler konnte nicht gestartet werden</strong><br>${esc(e.message||e)}</span>`);
-  }
-}
-async function sendAdminOneSignalPrayerTest(){
-  const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||readLocalDeviceSubscriptionId()||"").trim();
-  const prayer=document.getElementById("adminPushPrayerSelect")?.value||"maghrib";
-  const mode=document.getElementById("adminPushModeSelect")?.value||"entry";
-  if(!subscriptionId){setAdminPushTestStatus("Bitte Subscription-ID einfügen, Registrierungen laden oder Gerät-Subscription erkennen.");return}
-  setAdminPushTestStatus("Sende OneSignal-Test…");
-  try{
-    const result=await workerPostRequest("api/admin/prayer/test",{subscriptionId,prayer,mode,advanceMinutes:15});
-    const os=result.oneSignal||{};
-    const formatted=formatOneSignalPushHtml({
-      sent:result.sent,
-      oneSignal:os,
-      subscriptionId,
-      target:`prayer-${prayer}-${mode}`,
-      sentAt:new Date().toISOString(),
-      reason:result.reason||""
-    },result.sent?"OneSignal Gebets-Test erfolgreich":"OneSignal Gebets-Test fehlgeschlagen");
-    setAdminPushTestStatus(formatted);
-    addAdminLog("Gebets-Push","OneSignal-Test gesendet",`${prayer} / ${mode}`);
-  }catch(e){
-    setAdminPushTestStatus(`<span style="color:#f0c674">OneSignal-Test fehlgeschlagen: ${esc(e.message||e)}</span>`);
-  }
-}
-let adminDailyConfigSha="";
-function setAdminDailyStatusHtml(html){const el=document.getElementById("adminDailyStatusBox");if(el)el.innerHTML=html}
-function formatDailyPushStatusHtml(status){
-  if(!status)return"<span style='color:#f0c674'>Kein Status verfügbar.</span>";
-  const updated=status.updatedAt?new Date(status.updatedAt).toLocaleString("de-DE"):"unbekannt";
-  const sched=status.schedulerStatus||"unbekannt";
-  const color=sched==="success"?"#dfffd8":sched==="error"?"#f0c674":"#e8d9a8";
-  let html=`<strong>Letzter Lauf:</strong> ${esc(updated)}<br>`;
-  html+=`<strong>Status:</strong> <span style="color:${color}">${esc(sched)}</span> · Engine: ${esc(status.schedulerEngine||"daily-v1")}<br>`;
-  html+=`<strong>Nutzer geprüft:</strong> ${esc(String(status.usersChecked||0))} · <strong>Gesendet:</strong> ${esc(String(status.sent||0))} · <strong>Duplikate:</strong> ${esc(String(status.duplicates||0))} · <strong>Fehler:</strong> ${esc(String(status.errors||0))}<br>`;
-  html+=`<strong>Duʿāʾ-Kandidaten:</strong> ${esc(String(status.duaCandidates||0))} · <strong>Empfehlungs-Kandidaten:</strong> ${esc(String(status.recCandidates||0))}<br>`;
-  if(status.currentRecommendation)html+=`<strong>Heute empfohlen:</strong> ${esc(status.currentRecommendation.title||"")} · ID ${esc(status.currentRecommendation.id||"")}${status.currentRecommendation.category?` · ${esc(status.currentRecommendation.category)}`:""}${status.currentRecommendation.scholar?` · ${esc(status.currentRecommendation.scholar)}`:""}<br>`;
-  if(status.currentDua)html+=`<strong>Duʿāʾ des Tages:</strong> ${esc(status.currentDua.title||"")} · ID ${esc(status.currentDua.id||"")}${status.currentDua.category?` · ${esc(status.currentDua.category)}`:""}<br>`;
-  if(status.dailyContentDate)html+=`<strong>Tagesquelle:</strong> ${esc(status.dailyContentDate)}<br>`;
-  if(status.lastError)html+=`<span style="color:#f0c674"><strong>Fehler:</strong> ${esc(status.lastError)}</span><br>`;
-  return html;
-}
-async function loadAdminDailySelection(){
-  try{
-    const r=await fetch(`${SITE_ORIGIN}/content/updates/daily.json?v=${Date.now()}`,{cache:"no-store"});
-    if(!r.ok)return"";
-    const d=await r.json();
-    const rec=d.recommendation||{},dua=d.dua||{};
-    return `<div class="status-list" style="margin-top:8px"><div class="status-row"><span><b>Heute empfohlen</b><br>${esc(rec.title||"—")}${rec.scholar?` · ${esc(rec.scholar)}`:""}${rec.category?` · ${esc(rec.category)}`:""}<br>ID: ${esc(rec.id||"—")}</span><strong class="status-pill">${esc(d.date||"")}</strong></div><div class="status-row"><span><b>Duʿāʾ des Tages</b><br>${esc(dua.title||"—")}${dua.category?` · ${esc(dua.category)}`:""}<br>ID: ${esc(dua.id||"—")}</span><strong class="status-pill">12:00 / 09:00</strong></div></div>`;
-  }catch(e){return""}
-}
-async function loadAdminDailyPushStatus(){
-  const box=document.getElementById("adminDailyStatusBox");
-  if(box)box.textContent="Lade Tages-Push-Status…";
-  try{
-    let status=null;
-    try{
-      const data=await workerGetRequest("api/admin/daily/status");
-      if(data?.status)status=data.status;
-    }catch(e){}
-    if(!status?.updatedAt){
-      try{
-        const r=await fetch(`${SITE_ORIGIN}/content/admin/daily-push-status.json?v=${Date.now()}`,{cache:"no-store"});
-        if(r.ok)status=await r.json();
-      }catch(e){}
-    }
-    const selectionHtml=await loadAdminDailySelection();
-    setAdminDailyStatusHtml((selectionHtml?selectionHtml+"<br>":"")+formatDailyPushStatusHtml(status));
-    addAdminLog("Tages-Push","Status geladen",status?.updatedAt||"");
-  }catch(e){
-    setAdminDailyStatusHtml(`<span style="color:#f0c674">Status konnte nicht geladen werden: ${esc(e.message||e)}</span>`);
-  }
-}
-async function triggerAdminDailyScheduler(){
-  const box=document.getElementById("adminDailyStatusBox");
-  if(box)box.textContent="Starte Tages-Push-Cron…";
-  try{
-    const data=await workerPostRequest("api/admin/daily/run",{});
-    let html=`<span style="color:${data.ok?"#dfffd8":"#f0c674"}"><strong>${esc(data.reason||"Scheduler abgeschlossen")}</strong></span>`;
-    if(data.status)html+=`<br><br>${formatDailyPushStatusHtml(data.status)}`;
-    setAdminDailyStatusHtml(html);
-    addAdminLog("Tages-Push","Cron gestartet",data.reason||"");
-  }catch(e){
-    setAdminDailyStatusHtml(`<span style="color:#f0c674">Scheduler-Fehler: ${esc(e.message||e)}</span>`);
-  }
-}
-function readAdminDailyConfigForm(){
-  return{
-    automatic:Boolean(document.getElementById("adminDailyAutomatic")?.checked),
-    dailyDua:{
-      enabled:true,
-      hour:9,
-      id:String(document.getElementById("adminDailyDuaId")?.value||"").trim(),
-      title:"Duʿāʾ des Tages",
-      body:String(document.getElementById("adminDailyDuaBody")?.value||"").trim()
-    },
-    recommendation:{
-      enabled:true,
-      hour:12,
-      id:String(document.getElementById("adminDailyRecId")?.value||"").trim(),
-      file:String(document.getElementById("adminDailyRecFile")?.value||"").trim(),
-      title:"Heute empfohlen",
-      body:String(document.getElementById("adminDailyRecBody")?.value||"").trim()
-    }
-  };
-}
-function fillAdminDailyConfigForm(config){
-  const c=config||{};
-  const auto=document.getElementById("adminDailyAutomatic");if(auto)auto.checked=c.automatic!==false;
-  const duaId=document.getElementById("adminDailyDuaId");if(duaId)duaId.value=c.dailyDua?.id||"";
-  const recId=document.getElementById("adminDailyRecId");if(recId)recId.value=c.recommendation?.id||"";
-  const recFile=document.getElementById("adminDailyRecFile");if(recFile)recFile.value=c.recommendation?.file||"";
-  const duaBody=document.getElementById("adminDailyDuaBody");if(duaBody)duaBody.value=c.dailyDua?.body||"";
-  const recBody=document.getElementById("adminDailyRecBody");if(recBody)recBody.value=c.recommendation?.body||"";
-}
-async function loadAdminDailyPushConfig(){
-  const box=document.getElementById("adminDailyPreviewBox");
-  if(box)box.textContent="Lade Konfiguration…";
-  try{
-    const data=await workerGetRequest("api/admin/daily/config");
-    adminDailyConfigSha=data.sha||"";
-    fillAdminDailyConfigForm(data.config||{});
-    if(box)box.textContent="Konfiguration geladen.";
-    addAdminLog("Tages-Push","Konfiguration geladen","");
-  }catch(e){
-    if(box)box.textContent=`Konfiguration konnte nicht geladen werden: ${e.message||e}`;
-  }
-}
-async function saveAdminDailyPushConfig(){
-  const box=document.getElementById("adminDailyPreviewBox");
-  if(box)box.textContent="Speichere…";
-  try{
-    const config=readAdminDailyConfigForm();
-    await workerPostRequest("api/admin/daily/save",{config,sha:adminDailyConfigSha});
-    if(box)box.textContent="Konfiguration gespeichert.";
-    addAdminLog("Tages-Push","Konfiguration gespeichert","");
-    await loadAdminDailyPushConfig();
-  }catch(e){
-    if(box)box.textContent=`Speichern fehlgeschlagen: ${e.message||e}`;
-  }
-}
-function previewAdminDailyPush(kind){
-  const box=document.getElementById("adminDailyPreviewBox");
-  const config=readAdminDailyConfigForm();
-  const section=kind==="recommendation"?config.recommendation:config.dailyDua;
-  const title=section?.title||(kind==="recommendation"?"Heute empfohlen":"Duʿāʾ des Tages");
-  const body=section?.body||(kind==="recommendation"?"Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.":"Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ.");
-  if(box)box.innerHTML=`<strong>${esc(title)}</strong> · ${esc(String(section?.hour||""))}:00 Ortszeit<br>${esc(body)}${section?.id?`<br><small>Manuell: ${esc(section.id)}</small>`:""}`;
-}
-async function sendAdminDailyTestPush(){
-  const subscriptionId=(document.getElementById("adminPrayerSubscriptionInput")?.value||document.getElementById("adminDailySubscriptionInput")?.value||"").trim();
-  const kind=document.getElementById("adminDailyTestKind")?.value||"dua";
-  const box=document.getElementById("adminDailyPreviewBox");
-  if(!subscriptionId){if(box)box.textContent="Bitte Subscription-ID im Gebets-Push-Bereich einfügen.";return}
-  if(box)box.textContent="Sende Tages-Push-Test…";
-  try{
-    const result=await workerPostRequest("api/admin/daily/test",{subscriptionId,kind});
-    if(box)box.textContent=`Test ${result.sent?"gesendet":"fehlgeschlagen"} · ${kind} · ${result.reason||"ok"}`;
-    addAdminLog("Tages-Push","Test gesendet",kind);
-  }catch(e){
-    if(box)box.textContent=`Test fehlgeschlagen: ${e.message||e}`;
+    try{new Notification(title,{body,tag:"admin-local-prayer-test",icon:"/notification-icon-192.png"});setAdminPushTestStatus("Test-Push wurde lokal ausgelöst.");}
+    catch(err){setAdminPushTestStatus("Test-Push konnte auf diesem Gerät nicht angezeigt werden.")}
   }
 }
 function setUploadStatus(html){draftStatus=html;const el=document.getElementById("uploadStatus");if(el)el.innerHTML=html}
 async function prepareNextPostNumber(){
   try{
     draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
-    if(!draftMarkdown.trim()){setUploadStatus("Bitte zuerst Markdown-Beitrag einfügen.");return}
     setUploadStatus("Prüfe aktuelle Nummer...");
     draftNextNumber=await resolveNextPostNumber();
     draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
     const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
     setUploadStatus(`Nächste Nummer: <strong>${draftNextNumber}</strong><br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>`);
     addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",draftFilename);
-  }catch(e){
-    setUploadStatus(`Nummer konnte nicht ermittelt werden: ${esc(e.message||e)}`);
-    toast(e.message||"Nummer konnte nicht ermittelt werden");
-  }
-}
-async function publishPostToStaging(){
-  draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;
-  draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();
-  if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
-  try{
-    uploadBusy=true;
-    setUploadStatus("Sende Entwurf in die private Test-App … Besucher sehen das noch nicht.");
-    if(!draftFilename){const next=await resolveNextPostNumber();draftFilename=suggestFilename(draftMarkdown,next);const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename}
-    const result=await workerPostRequest("api/admin/staging/publish",{markdown:draftMarkdown,filename:draftFilename,staging:true});
-    const preview=result.previewUrl||stagingAppUrl("post",result.postId||frontmatterValue(draftMarkdown,"id"));
-    addAdminLog("Test-App","Entwurf in Test-App veröffentlicht",result.filename||draftFilename);
-    setUploadStatus(`<strong>In Test-App sichtbar.</strong><br>Status: Test · Push erlaubt: nein · Live erreichbar: nein<br><a href="${esc(preview)}" target="_blank" rel="noopener">Test-Vorschau öffnen</a>`);
-    window.open(preview,"_blank","noopener");
-  }catch(e){
-    setUploadStatus(`Test-App konnte nicht aktualisiert werden: ${esc(e.message||e)}`);
-  }finally{
-    uploadBusy=false;
-  }
+  }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
 async function uploadPostViaWorker(){
   if(uploadBusy)return;
@@ -1999,34 +1301,8 @@ async function uploadPostViaWorker(){
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
   const preview=markdownPreviewData(draftMarkdown);
-  let telegramPayload=null;
-  try{
-    telegramPayload=await buildTelegramPayloadForPublish();
-  }catch(e){
-    setUploadStatus(`Telegram-Vorschau blockiert Veröffentlichung: ${esc(e.message||e)}`);
-    return;
-  }
-  if(telegramPayload){
-    if(!lastTelegramPreview?.ok){
-      await refreshTelegramPreview();
-      if(!lastTelegramPreview?.ok){
-        setUploadStatus("Telegram-Vorschau ungültig. Bitte Fehler beheben oder Telegram-Autopost deaktivieren.");
-        return;
-      }
-    }
-  }
-  let confirmMsg=`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`;
-  if(telegramPayload){
-    const modeLabel=telegramPayload.mode==="image"?"Bildbeitrag":telegramPayload.mode==="both"?"Text + Bild":"Text";
-    confirmMsg+=`\n\nTelegram: Ja (${modeLabel}) → @dar_al_tauhid`;
-  }
-  const ok=confirm(confirmMsg);
+  const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`);
   if(!ok){setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
-  try{
-    await assertVisitorAppHealthyForLive();
-  }catch(e){
-    return;
-  }
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
     const next=await resolveNextPostNumber();
@@ -2035,44 +1311,20 @@ async function uploadPostViaWorker(){
     if(!/^[a-z0-9][a-z0-9-]*\.md$/i.test(draftFilename)){setUploadStatus("Dateiname muss eine .md-Datei ohne Leerzeichen sein.");return}
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
-    if(telegramPayload&&(telegramPayload.mode==="image"||telegramPayload.mode==="both")&&!telegramPayload.imageBase64){
-      telegramPayload.imageBase64=await renderAdminTelegramImageBase64();
-    }
     setUploadStatus("Sende Beitrag an Cloudflare Worker...");
-    const result=await publishPostViaWorkerRequest(markdown,draftFilename,telegramPayload);
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename);
     draftFilename=result.filename||draftFilename;
     draftMarkdown=markdown;draftNextNumber=result.number||next;
-    const live=result.liveCheck||{};
-    const push=result.push||{};
-    const tg=result.telegram||{};
-    saveLastPublishPushContext({
-      postId:result.postId||frontmatterValue(markdown,"id"),
-      filename:draftFilename,
-      postTitle:frontmatterValue(markdown,"title")||"Neuer Beitrag",
-      publishedAt:result.publishedAt||new Date().toISOString(),
-      postPath:result.postPath||`content/posts/${draftFilename}`,
-      number:result.number||next,
-      commitSha:result.commitSha||""
-    });
-    if(result.postId||frontmatterValue(markdown,"id")){
-      writeLocalTelegramStatus(result.postId||frontmatterValue(markdown,"id"),{
-        telegramStatus:tg.sent?"sent":tg.telegramError||tg.error?"failed":"not_sent",
-        telegramMessageId:tg.telegramMessageId||null,
-        telegramSentAt:tg.telegramSentAt||null,
-        telegramError:tg.telegramError||tg.error||tg.reason||null
-      });
-    }
-    setUploadStatus(formatPublishStatusHtml({filename:draftFilename,number:result.number||next,commitSha:result.commitSha,liveCheck:live,push,telegram:tg}));
+    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(draftFilename)}</strong><br>Nummer: <strong>${esc(result.number||next)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",draftFilename);
     saveLocalDraft("Entwurf nach Veröffentlichung lokal aktualisiert.");
-    toast(push.sent?"Beitrag veröffentlicht & Push gesendet":push.pending?"Veröffentlicht – Push wartet auf Live":tg.telegramError&&!tg.sent?"Website ok, Telegram fehlgeschlagen":"Beitrag hochgeladen");
-    updateTelegramPanelStatus();
+    toast("Beitrag hochgeladen");
   }catch(e){
     addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
     setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Bitte Worker URL, Admin Worker Secret und Cloudflare Secrets prüfen.`);
   }finally{
     uploadBusy=false;
-    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Live veröffentlichen"}
+    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}
   }
 }
 async function renderDashboard({force=false}={}){

@@ -10,22 +10,7 @@ POSTS_DIR = "content/posts"
 ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
 UPDATES_PATH = "content/updates/current.json"
 SCHEDULE_PATH = "content/admin/planned-posts.json"
-PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json"
 
-[triggers]
-crons = ["*/5 * * * *"]
-
-# KV für Gebetszeiten-Status, Dedupe und Nutzer-Registry (einmalig anlegen):
-#   wrangler kv namespace create PRAYER_PUSH_KV
-# Dann id unten eintragen:
-# [[kv_namespaces]]
-# binding = "PRAYER_PUSH_KV"
-# id = "<namespace-id>"
-
-# Secrets (einmalig setzen, bleibt am Worker gespeichert):
+# Secrets (einmalig setzen, bleiben am Worker gespeichert):
 #   wrangler secret put GITHUB_TOKEN
 #   wrangler secret put ADMIN_PUBLISH_SECRET
-#   wrangler secret put ONESIGNAL_API_KEY_NEW
-#   wrangler secret put TELEGRAM_BOT_TOKEN
-#   TELEGRAM_CHANNEL_USERNAME defaults to @dar_al_tauhid (optional override)
-#   PENDING_PUSHES_PATH defaults to content/admin/pending-pushes.json
