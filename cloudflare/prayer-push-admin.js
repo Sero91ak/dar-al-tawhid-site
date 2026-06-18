@@ -2,6 +2,7 @@ import {
   runPrayerPushScheduler,
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
+import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -16,58 +17,17 @@ const PRAYER_NAMES = {
   tahajjud: "Taḥajjud"
 };
 
-const PRAYER_MESSAGES = {
-  default: [
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah.",
-    "Nimm dir jetzt bewusst Zeit für dein Gebet.",
-    "Bewahre dein Gebet und erinnere dich an Allah."
-  ],
-  fajr: [
-    "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah.",
-    "Der Tag beginnt mit einer großen Gelegenheit zum Gebet."
-  ],
-  dhuhr: [
-    "Halte am Mittagsgebet fest und ordne deinen Tag um Allah.",
-    "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah."
-  ],
-  asr: [
-    "Bewahre dieses Gebet – verliere nicht deine gewaltige Gelegenheit.",
-    "Achte besonders auf dieses Gebet."
-  ],
-  maghrib: [
-    "Schließe den Tagabschnitt mit Gehorsam gegenüber Allah ab.",
-    "Nimm dir jetzt bewusst Zeit für dein Gebet."
-  ],
-  isha: [
-    "Schließe deinen Tag mit Gehorsam gegenüber Allah ab.",
-    "Beende den Tag mit Gebet und Ruhe."
-  ],
-  tahajjud: [
-    "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah.",
-    "Nutze die Stille der Nacht für Bittgebet und Nähe zu Allah."
-  ]
-};
-
-function pickPrayerMessage(key, seed = "") {
-  const list = PRAYER_MESSAGES[key] || PRAYER_MESSAGES.default;
-  let hash = 0;
-  const text = `${key}-${seed}-${new Date().toISOString().slice(0, 10)}`;
-  for (let i = 0; i < text.length; i++) hash = (hash + text.charCodeAt(i)) % 9973;
-  return list[hash % list.length];
-}
-
 export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
   const name = PRAYER_NAMES[key] || "Maghrib";
   const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
   const timeLabel = "21:46";
-  const title = mode === "advance"
-    ? (key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`)
-    : (key === "tahajjud" ? "Taḥajjud-Erinnerung" : `${name} ist eingetreten`);
-  const body = mode === "advance"
-    ? (key === "tahajjud" ? "Taḥajjud-Erinnerung ist bald." : `In ${minutes} Min · ${timeLabel} Uhr.`)
-    : pickPrayerMessage(key, mode);
-  return { title: `[Test] ${title}`, body, key, mode };
+  if (mode === "advance") {
+    const title = key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`;
+    return { title: `[Test] ${title}`, body: buildAdvancePushBody(key, minutes, timeLabel), key, mode };
+  }
+  const variant = pickPrayerEntryVariant(key, timeLabel);
+  return { title: `[Test] ${variant.title}`, body: variant.body, key, mode };
 }
 
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
