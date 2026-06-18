@@ -167,43 +167,93 @@ async function loadPostFiles(env) {
     .filter((n) => n && String(n).endsWith(".md"));
 }
 
-function pickDailyDua(duas, config, day, tz) {
-  const manualId = config?.dailyDua?.id;
-  if (manualId) {
-    const manual = duas.find((d) => String(d.id) === String(manualId));
-    if (manual) return manual;
-  }
-  if (!duas.length) return null;
-  const doy = dayOfYearInTz(new Date(), tz);
-  return duas[Math.abs(doy) % duas.length];
-}
-
 async function loadPostMeta(file, env) {
   const origin = siteOrigin(env);
   const md = await fetch(`${origin}/content/posts/${encodeURIComponent(file)}`).then((r) => r.text());
   const id = parseFrontMatterId(md, file);
   const titleMatch = md.match(/^title:\s*["']?(.+?)["']?\s*$/m);
-  return { id, title: titleMatch ? titleMatch[1].trim() : id, file };
+  const title = titleMatch ? titleMatch[1].trim().replace(/^📖\s*/, "") : id;
+  const category = (md.match(/^category:\s*["']?(.+?)["']?\s*$/m) || [])[1] || "";
+  const scholar = (md.match(/^scholar:\s*["']?(.+?)["']?\s*$/m) || [])[1] || "";
+  return { id, title, file, category, scholar, snippet: extractPostSnippet(md) };
 }
 
-async function pickRecommendation(postFiles, config, day, tz, env) {
-  const manualId = config?.recommendation?.id;
-  const manualFile = config?.recommendation?.file;
-  if (manualFile && postFiles.includes(manualFile)) {
-    return loadPostMeta(manualFile, env);
+function extractPostSnippet(markdown) {
+  const body = String(markdown || "").replace(/^---[\s\S]*?---/, "").trim();
+  const quote = (body.match(/^>\s*(.+)$/m) || [])[1] || body.split(/\n\s*\n/).find((x) => x.trim());
+  return String(quote || "").replace(/^#+\s*/, "").replace(/[*_>`]/g, "").trim().slice(0, 220);
+}
+
+const DAILY_CONTENT_PATH = "content/updates/daily.json";
+
+async function loadDailyContentFile(env, deps) {
+  const origin = siteOrigin(env);
+  try {
+    return await fetchJsonUrl(`${origin}/${DAILY_CONTENT_PATH}?v=${Date.now()}`);
+  } catch (e) {
+    if (deps?.githubGet) {
+      const owner = env.GITHUB_OWNER || "Sero91ak";
+      const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+      const branch = env.GITHUB_BRANCH || "main";
+      const file = await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch);
+      if (file?.content) return JSON.parse(deps.base64ToUtf8(file.content));
+    }
+    return null;
   }
-  if (manualId) {
-    const hint = postFiles.find((f) => String(f).includes(String(manualId)) || String(f).replace(/\.md$/i, "") === String(manualId));
-    const candidates = hint ? [hint, ...postFiles.filter((f) => f !== hint).slice(0, 8)] : postFiles.slice(0, 12);
-    for (const file of candidates) {
-      const meta = await loadPostMeta(file, env);
-      if (String(meta.id) === String(manualId)) return meta;
+}
+
+async function regenerateDailyContent(env, deps, dateKey, tz) {
+  const origin = siteOrigin(env);
+  const doy = dayOfYearInTz(new Date(), tz);
+  let recommendation = null;
+  let dua = null;
+  try {
+    const postFiles = await loadPostFiles(env);
+    if (postFiles.length) {
+      const file = postFiles[Math.abs(doy * 7) % postFiles.length];
+      recommendation = await loadPostMeta(file, env);
+    }
+  } catch (e) {}
+  try {
+    const pool = await fetchJsonUrl(`${origin}/content/duas/daily-dua-pool.json?v=${Date.now()}`);
+    if (Array.isArray(pool) && pool.length) {
+      const d = pool[Math.abs(doy) % pool.length];
+      dua = { id: d.id, title: d.title, snippet: d.snippet || "", category: d.cat || "" };
+    }
+  } catch (e) {}
+  if (!recommendation && !dua) return null;
+  const data = {
+    date: dateKey,
+    timezone: tz,
+    generated: new Date().toISOString(),
+    source: "dar-daily-scheduler-regenerated",
+    recommendation,
+    dua
+  };
+  if (deps?.githubPut && deps?.utf8ToBase64) {
+    try {
+      const owner = env.GITHUB_OWNER || "Sero91ak";
+      const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+      const branch = env.GITHUB_BRANCH || "main";
+      const existing = deps.githubGet ? await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch) : null;
+      await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, branch, {
+        message: `Daily content ${dateKey}`,
+        content: deps.utf8ToBase64(JSON.stringify(data, null, 2) + "\n"),
+        sha: existing?.sha
+      });
+    } catch (e) {
+      data.writeError = e.message || String(e);
     }
   }
-  if (!postFiles.length) return null;
-  const doy = dayOfYearInTz(new Date(), tz);
-  const file = postFiles[Math.abs(doy * 7) % postFiles.length];
-  return loadPostMeta(file, env);
+  return data;
+}
+
+async function ensureDailyContent(env, deps, dateKey, tz) {
+  const existing = await loadDailyContentFile(env, deps);
+  if (existing && existing.date === dateKey && (existing.recommendation?.id || existing.dua?.id)) {
+    return existing;
+  }
+  return regenerateDailyContent(env, deps, dateKey, tz);
 }
 
 async function uuidFrom(seed) {
@@ -249,12 +299,10 @@ async function sendDailyPush(env, row, kind, item, config, dateKey, stats) {
   if (section?.enabled === false || !item?.id) return;
 
   const title = String(section?.title || (isDua ? "Duʿāʾ des Tages" : "Heute empfohlen"));
-  const body = String(
-    section?.body ||
-      (isDua
-        ? "Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ."
-        : "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.")
-  );
+  const itemTitle = String(item.title || "").trim();
+  const snippet = String(item.snippet || "").trim();
+  const body = [itemTitle, snippet].filter(Boolean).join(snippet ? " – " : "") ||
+    (isDua ? "Heutige Duʿāʾ aus Qurʾān & Sunnah." : "Heute empfohlener Beitrag.");
   const origin = siteOrigin(env);
   const url = isDua
     ? `${origin}/#dua/${encodeURIComponent(item.id)}`
@@ -336,17 +384,17 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   };
 
   let config;
-  let duas;
-  let postFiles;
   let rows;
+  let dailyContent;
+  const tzCanonical = "Europe/Berlin";
+  const canonicalDateKey = dayKey(now, tzCanonical);
 
   try {
-    [config, duas, postFiles, rows] = await Promise.all([
+    [config, rows] = await Promise.all([
       loadDailyConfig(env, deps),
-      loadDuas(env),
-      loadPostFiles(env),
       loadDailyRegistrations(env)
     ]);
+    dailyContent = await ensureDailyContent(env, deps, canonicalDateKey, tzCanonical);
   } catch (err) {
     const status = {
       ok: false,
@@ -361,42 +409,50 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     return { ok: false, triggered: true, reason: status.lastError, status };
   }
 
-  const recCache = new Map();
+  const duaItem = dailyContent?.dua?.id ? dailyContent.dua : null;
+  const recItem = dailyContent?.recommendation?.id ? dailyContent.recommendation : null;
+
+  if (!duaItem && !recItem) {
+    const status = {
+      ok: false,
+      schedulerEngine: "cloudflare-worker-daily-v1",
+      schedulerStatus: "warning",
+      updatedAt: now.toISOString(),
+      lastError: "Kein aktiver Tagesinhalt gefunden – Push nicht gesendet",
+      dailyContentDate: dailyContent?.date || null,
+      ...stats
+    };
+    lastDailyStatusReport = status;
+    await writeStatusGithub(env, status, deps);
+    return { ok: false, triggered: true, reason: status.lastError, status };
+  }
 
   for (const row of rows) {
     stats.checked += 1;
     const tz = String(row.timezone || "Europe/Berlin");
     const local = getLocalParts(now, tz);
-    const dateKey = dayKey(now, tz);
+    const dateKey = canonicalDateKey;
 
     const duaOn = row.daily_dua_enabled !== false;
     const recOn = row.daily_recommendation_enabled !== false;
     const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
     const recHour = Number(config?.recommendation?.hour ?? REC_HOUR);
 
-    if (duaOn && config?.dailyDua?.enabled !== false && isSendWindow(local, duaHour)) {
+    if (duaOn && duaItem && config?.dailyDua?.enabled !== false && isSendWindow(local, duaHour)) {
       if (row.last_dua_push_date === dateKey) {
         stats.duplicates += 1;
       } else {
         stats.duaCandidates += 1;
-        const item = pickDailyDua(duas, config, dateKey, tz);
-        if (item) await sendDailyPush(env, row, "dua", item, config, dateKey, stats);
-        else stats.skipped += 1;
+        await sendDailyPush(env, row, "dua", duaItem, config, dateKey, stats);
       }
     }
 
-    if (recOn && config?.recommendation?.enabled !== false && isSendWindow(local, recHour)) {
+    if (recOn && recItem && config?.recommendation?.enabled !== false && isSendWindow(local, recHour)) {
       if (row.last_recommendation_push_date === dateKey) {
         stats.duplicates += 1;
       } else {
         stats.recCandidates += 1;
-        let item = recCache.get(dateKey);
-        if (!item) {
-          item = await pickRecommendation(postFiles, config, dateKey, tz, env);
-          if (item) recCache.set(dateKey, item);
-        }
-        if (item) await sendDailyPush(env, row, "recommendation", item, config, dateKey, stats);
-        else stats.skipped += 1;
+        await sendDailyPush(env, row, "recommendation", recItem, config, dateKey, stats);
       }
     }
   }
@@ -413,8 +469,9 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     skipped: stats.skipped,
     duplicates: stats.duplicates,
     errors: stats.errors,
-    duasAvailable: duas.length,
-    postsAvailable: postFiles.length,
+    dailyContentDate: dailyContent?.date || null,
+    currentRecommendation: recItem ? { id: recItem.id, title: recItem.title, category: recItem.category || "", scholar: recItem.scholar || "" } : null,
+    currentDua: dailyContent?.dua ? { id: dailyContent.dua.id, title: dailyContent.dua.title, category: dailyContent.dua.category || "" } : null,
     configAutomatic: config?.automatic !== false,
     responses: stats.responses.slice(0, 20)
   };
