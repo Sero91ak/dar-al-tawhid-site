@@ -1424,7 +1424,8 @@ function renderTech(ctx){
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
         <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
         <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Cloudflare Worker Cron alle 5&nbsp;Min (Haupt-Scheduler). GitHub Action nur Backup.</span><strong class="status-pill">Worker</strong></div>
-        <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
+        <div class="status-row"><span><b>System Health</b><br>Besucher-App, Push, Index und Worker – bei Rot kein Live-Deploy.</span><strong class="status-pill"><a href="/admin/health.html" target="_blank" rel="noopener" style="color:inherit">Health öffnen</a></strong></div>
+        <div class="status-row"><span><b>Rollback-Stand</b><br>Branch <code>stable-last-working</code> · siehe STABILITY.md</span><strong class="status-pill">Sicher</strong></div>
       </div>
     </div>
     <aside class="side-stack">

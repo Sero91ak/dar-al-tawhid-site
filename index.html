@@ -5426,15 +5426,19 @@ function ensurePostRouteData(route){
         const direct=await loadSinglePostFresh(id);
         if(direct||posts.some(p=>String(p.id)===id)){clearPostRouteState();if(readRoute().view==="post"&&String(readRoute().value)===id)render();return}
       }
+      const retryDelays=[1000,3000,6000];
+      let retryIdx=0;
       while(Date.now()<deadline){
         if(!navigator.onLine)break;
         await refreshContent({forceRender:false});
         if(posts.some(p=>String(p.id)===id)){clearPostRouteState();if(readRoute().view==="post"&&String(readRoute().value)===id)render();return}
-        await sleep(1200);
+        const wait=retryDelays[Math.min(retryIdx,retryDelays.length-1)];
+        retryIdx+=1;
+        await sleep(wait);
       }
       if(!posts.some(p=>String(p.id)===id)){
         postRouteFailedId=id;
-        postRouteError="Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.";
+        postRouteError="Beitrag noch nicht abrufbar. Bitte aktualisieren.";
       }
     }catch(e){
       postRouteFailedId=id;
@@ -5507,7 +5511,37 @@ function applyPushLaunchRoute(){const postId=parsePushPostIdFromUrl(location.hre
 function clearPostRouteState(){postRouteLoadingId="";postRouteFailedId="";postRouteError=""}
 async function fetchPostsIndexFresh(){const bust=Date.now();for(const url of[`${POSTS_INDEX_PATH}?v=${bust}`,`${POSTS_INDEX_RAW}?v=${bust}`]){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();if(data&&Array.isArray(data.files)&&data.files.length)return data.files.filter(f=>f&&f.name&&String(f.name).endsWith(".md")).map(f=>({name:String(f.name),sha:String(f.sha||"")}))}catch(e){}}return null}
 async function loadSinglePostFresh(postId){const id=String(postId||"").trim();if(!id)return null;const files=await fetchPostsIndexFresh();if(!files||!files.length)return null;let file=files.find(f=>f.name.replace(/\.md$/,"")===id)||files.find(f=>String(f.name).includes(id));if(!file){for(const f of files){try{const r=await fetchPostFile(f);if(String(r.post?.id)===id){file=f;const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[r.name]={sha:r.sha||f.sha||"",post:r.post};setJson(POST_FILE_MAP_KEY,fileMap);const merged=mergePostsLists(posts,[r.post]);applyPostsList(merged);setJson(CACHE_KEY,posts);return r.post}}catch(e){}}}if(!file)return null;const result=await fetchPostFile(file);const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[result.name]={sha:result.sha||file.sha||"",post:result.post};setJson(POST_FILE_MAP_KEY,fileMap);const merged=mergePostsLists(posts,[result.post]);applyPostsList(merged);setJson(CACHE_KEY,posts);return result.post}
-async function openPostFromPush(postId,url){const id=String(postId||parsePushPostIdFromUrl(url||location.href)||"").trim();if(!id)return;postRouteFailedId="";postRouteError="";postRouteLoadingId=id;render();if(await loadSinglePostFresh(id)||posts.some(p=>String(p.id)===id)){clearPostRouteState();navigate("post",id,{skipPush:true});return}await refreshContent({forceRender:false});if(posts.some(p=>String(p.id)===id)){clearPostRouteState();navigate("post",id,{skipPush:true});return}clearPostRouteState();postRouteFailedId=id;postRouteError="Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.";navigate("post",id,{skipPush:true})}
+async function openPostFromPush(postId,url){
+  const id=String(postId||parsePushPostIdFromUrl(url||location.href)||"").trim();
+  if(!id)return;
+  postRouteFailedId="";postRouteError="";postRouteLoadingId=id;
+  render();
+  try{
+    if("serviceWorker" in navigator){
+      const reg=await navigator.serviceWorker.getRegistration("/").catch(()=>null);
+      reg?.active?.postMessage?.({type:"BYPASS_POST_CACHE"});
+    }
+  }catch(e){}
+  const delays=[0,1000,3000,6000];
+  for(const waitMs of delays){
+    if(waitMs)await sleep(waitMs);
+    if(await loadSinglePostFresh(id)||posts.some(p=>String(p.id)===id)){
+      clearPostRouteState();
+      navigate("post",id,{skipPush:true});
+      return;
+    }
+    await refreshContent({forceRender:false});
+    if(posts.some(p=>String(p.id)===id)){
+      clearPostRouteState();
+      navigate("post",id,{skipPush:true});
+      return;
+    }
+  }
+  clearPostRouteState();
+  postRouteFailedId=id;
+  postRouteError="Beitrag noch nicht abrufbar. Bitte aktualisieren.";
+  navigate("post",id,{skipPush:true});
+}
 function openDailyPushTarget(data,url){const type=String(data?.type||"").trim();const contentId=String(data?.content_id||data?.contentId||"").trim();if(type==="daily_dua"&&contentId){navigate("dua",contentId);return true}if(type==="daily_recommendation"&&contentId){openPostFromPush(contentId,url);return true}return false}
 function routeUrl(view,value=""){const url=new URL(location.origin+location.pathname);url.hash=value?`${view}/${encodeURIComponent(value)}`:`${view}`;return url.toString()}
 function duaUrl(d){return routeUrl("dua",d.id)}

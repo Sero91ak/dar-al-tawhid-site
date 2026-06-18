@@ -248,12 +248,11 @@ async function regenerateDailyContent(env, deps, dateKey, tz) {
   return data;
 }
 
-async function ensureDailyContent(env, deps, dateKey, tz) {
-  const existing = await loadDailyContentFile(env, deps);
-  if (existing && existing.date === dateKey && (existing.recommendation?.id || existing.dua?.id)) {
-    return existing;
-  }
-  return regenerateDailyContent(env, deps, dateKey, tz);
+async function loadDailyContentForPush(env, deps, dateKey) {
+  const data = await loadDailyContentFile(env, deps);
+  if (!data || data.date !== dateKey) return null;
+  if (!data.dua?.id && !data.recommendation?.id) return null;
+  return data;
 }
 
 async function uuidFrom(seed) {
@@ -394,7 +393,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
       loadDailyConfig(env, deps),
       loadDailyRegistrations(env)
     ]);
-    dailyContent = await ensureDailyContent(env, deps, canonicalDateKey, tzCanonical);
+    dailyContent = await loadDailyContentForPush(env, deps, canonicalDateKey);
   } catch (err) {
     const status = {
       ok: false,
@@ -418,7 +417,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
       schedulerEngine: "cloudflare-worker-daily-v1",
       schedulerStatus: "warning",
       updatedAt: now.toISOString(),
-      lastError: "Kein aktiver Tagesinhalt gefunden – Push nicht gesendet",
+      lastError: "Kein aktiver Tagesinhalt in content/updates/daily.json für heute – Push nicht gesendet (keine Zufallsauswahl)",
       dailyContentDate: dailyContent?.date || null,
       ...stats
     };
