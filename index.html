@@ -6981,7 +6981,7 @@ function renderCalendar(){const h=islamicCalendarNow();const events=calendarEven
 function renderHomeRefreshPanel(){return `<section class="home-refresh-panel"><div class="home-refresh-copy"><span>App-Update</span><b>Aktualisieren</b><p>Neue Beiträge und App-Version sofort frisch laden.</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">Aktualisieren</button></section>`}
 async function darPostSwMessage(type,timeoutMs=8000){return new Promise(resolve=>{try{if(!("serviceWorker" in navigator)){resolve(false);return}let done=false;const finish=ok=>{if(done)return;done=true;resolve(!!ok)};const timer=setTimeout(()=>finish(false),timeoutMs);const onMsg=ev=>{if(ev.data&&ev.data.type===type+"_DONE"){clearTimeout(timer);navigator.serviceWorker.removeEventListener("message",onMsg);finish(true)}};navigator.serviceWorker.addEventListener("message",onMsg);const post=sw=>{try{sw&&sw.postMessage&&sw.postMessage({type})}catch(e){}};post(navigator.serviceWorker.controller);navigator.serviceWorker.ready.then(reg=>{post(reg.active);post(reg.waiting);post(reg.installing)}).catch(()=>null)}catch(e){resolve(false)}})}
 async function darWaitForSwControl(timeoutMs=7000){if(!("serviceWorker" in navigator))return false;if(navigator.serviceWorker.controller)return true;return new Promise(resolve=>{let done=false;const finish=ok=>{if(done)return;done=true;resolve(!!ok)};const timer=setTimeout(()=>finish(false),timeoutMs);navigator.serviceWorker.addEventListener("controllerchange",()=>finish(true),{once:true})})}
-async function hardRefreshApp(){const btn=$("hardRefreshBtn"),postBtn=$("postHardRefreshBtn");if(btn){btn.disabled=true;btn.textContent="Wird geladen..."}if(postBtn){postBtn.disabled=true;postBtn.textContent="Wird geladen..."}clearPostRouteState();[CACHE_KEY,CACHE_KEY_LEGACY,POST_FILE_MAP_KEY,DUA_CACHE_KEY,OFFLINE_LIB_KEY,QURAN_CACHE_KEY,QURAN_PRECACHE_KEY,CURRENT_UPDATES_CACHE_KEY,POPULAR_CACHE_KEY].forEach(key=>{try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch(e){}});try{if("caches" in window){const names=await caches.keys();await Promise.all(names.filter(name=>String(name).startsWith("dar-al-tawhid-offline-")).map(name=>caches.delete(name)))}}catch(e){}try{if("serviceWorker" in navigator){const reg=await navigator.serviceWorker.getRegistration("/").catch(()=>null)||await navigator.serviceWorker.ready.catch(()=>null);if(reg){reg.active?.postMessage?.({type:"HARD_REFRESH"});reg.waiting?.postMessage?.({type:"SKIP_WAITING"});if(typeof reg.update==="function")await reg.update();await darPostSwMessage("HARD_REFRESH",8000);if(reg.waiting){reg.waiting.postMessage({type:"SKIP_WAITING"});await darWaitForSwControl(7000)}else if(reg.installing){reg.installing.postMessage({type:"SKIP_WAITING"});await darWaitForSwControl(7000)}reg.active?.postMessage?.({type:"BYPASS_POST_CACHE"})}}catch(e){}try{const shellPath=(location.pathname||"").startsWith("/test")?"/test/index.html":"/index.html";await fetch(`${shellPath}?appRefresh=${Date.now()}`,{cache:"no-store",credentials:"same-origin"})}catch(e){}const hash=location.hash||"#home";const path=location.pathname||"/";location.replace(`${path}?appRefresh=${Date.now()}${hash}`)}
+async function hardRefreshApp(){const btn=$("hardRefreshBtn"),postBtn=$("postHardRefreshBtn");if(btn){btn.disabled=true;btn.textContent="Wird geladen..."}if(postBtn){postBtn.disabled=true;postBtn.textContent="Wird geladen..."}clearPostRouteState();[CACHE_KEY,CACHE_KEY_LEGACY,POST_FILE_MAP_KEY,DUA_CACHE_KEY,OFFLINE_LIB_KEY,QURAN_CACHE_KEY,QURAN_PRECACHE_KEY,CURRENT_UPDATES_CACHE_KEY,POPULAR_CACHE_KEY].forEach(key=>{try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch(e){}});try{if("caches" in window){const names=await caches.keys();await Promise.all(names.filter(name=>String(name).startsWith("dar-al-tawhid-offline-")).map(name=>caches.delete(name)))}}catch(e){}try{if("serviceWorker" in navigator){const reg=await navigator.serviceWorker.getRegistration("/").catch(()=>null)||await navigator.serviceWorker.ready.catch(()=>null);if(reg){reg.active?.postMessage?.({type:"HARD_REFRESH"});reg.waiting?.postMessage?.({type:"SKIP_WAITING"});if(typeof reg.update==="function")await reg.update();await darPostSwMessage("HARD_REFRESH",8000);if(reg.waiting){reg.waiting.postMessage({type:"SKIP_WAITING"});await darWaitForSwControl(7000)}else if(reg.installing){reg.installing.postMessage({type:"SKIP_WAITING"});await darWaitForSwControl(7000)}reg.active?.postMessage?.({type:"BYPASS_POST_CACHE"})}}}catch(e){}try{const shellPath=(location.pathname||"").startsWith("/test")?"/test/index.html":"/index.html";await fetch(`${shellPath}?appRefresh=${Date.now()}`,{cache:"no-store",credentials:"same-origin"})}catch(e){}const hash=location.hash||"#home";const path=location.pathname||"/";location.replace(`${path}?appRefresh=${Date.now()}${hash}`)}
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${setHeader("Startseite","","App-Übersicht")}${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<999);const other=entries.filter(([name])=>categoryRank(name)>=999);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
@@ -7384,52 +7384,63 @@ function initFloatTouchbar(){
   document.addEventListener("touchcancel",onDragEnd,{passive:true});
 }
 window.addEventListener("DOMContentLoaded",()=>{
-  if(!appBootHydrated){
-    appBootHydrated=true;
-    hydrateOfflineContent();
-    render();
+  try{
+    if(!appBootHydrated){
+      appBootHydrated=true;
+      try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
+      render();
+    }
+    restoreStatsAuth();
+    initTheme();
+    applyStandalonePwaClass();
+    trackStandaloneInstallIfNeeded();
+    initAndroidTapCleanup();
+    initAppZoomLock();
+    bindBottomNav();
+    initBottomNavSwipe();
+    initBottomNavContentSwipe();
+    initFloatTouchbar();
+    initQuranWakeLock();
+    updateHijriHeaderDate();
+    updateHeaderPrayerStatus();
+    requestAnimationFrame(updateBottomNavPill);
+    window.addEventListener("resize",updateBottomNavPill,{passive:true});
+    const qiblaFloatBtn=$("qiblaFloat");
+    if(qiblaFloatBtn)qiblaFloatBtn.onclick=()=>{markFloatTouchbarActivated();openQiblaFromFloat()};
+    const savedFloatBtn=$("savedFloat");
+    if(savedFloatBtn)savedFloatBtn.onclick=()=>{markFloatTouchbarActivated();navigate("saved")};
+    setTimeout(showFloatTipsOnce,900);
+  }catch(e){
+    console.error("App-Start fehlgeschlagen:",e);
+    const el=$("appView");
+    if(el)el.innerHTML=`${setHeader("App-Start fehlgeschlagen","Ein Fehler beim Laden der App wurde abgefangen.","Fehler")}<div class="error">${esc(e.message||e)}<br><br>Bitte „Aktualisieren“ nutzen oder Cache leeren.</div>`;
   }
-  restoreStatsAuth();
-  initTheme();
-  applyStandalonePwaClass();
-  trackStandaloneInstallIfNeeded();
-  initAndroidTapCleanup();
-  initAppZoomLock();
-  bindBottomNav();
-  initBottomNavSwipe();
-  initBottomNavContentSwipe();
-  initFloatTouchbar();
-  initQuranWakeLock();
-  updateHijriHeaderDate();
-  updateHeaderPrayerStatus();
-  requestAnimationFrame(updateBottomNavPill);
-  window.addEventListener("resize",updateBottomNavPill,{passive:true});
-  const qiblaFloatBtn=$("qiblaFloat");
-  if(qiblaFloatBtn)qiblaFloatBtn.onclick=()=>{markFloatTouchbarActivated();openQiblaFromFloat()};
-  const savedFloatBtn=$("savedFloat");
-  if(savedFloatBtn)savedFloatBtn.onclick=()=>{markFloatTouchbarActivated();navigate("saved")};
-  setTimeout(showFloatTipsOnce,900);
 });
 window.addEventListener("load",()=>{
-  applyPushLaunchRoute();
-  if(!appBootHydrated){
-    appBootHydrated=true;
-    hydrateOfflineContent();
+  try{
+    applyPushLaunchRoute();
+    if(!appBootHydrated){
+      appBootHydrated=true;
+      try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
+    }
+    render();
+    if("serviceWorker" in navigator&&!window.__darSwMessageBound){
+      window.__darSwMessageBound=true;
+      navigator.serviceWorker.addEventListener("message",(ev)=>{
+        const d=ev.data||{};
+        if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);
+      });
+    }
+    loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()}).catch(e=>console.warn("Qurʾān-Index:",e));
+    Promise.resolve().then(()=>refreshContent({forceRender:true})).catch(e=>console.warn("Inhalte aktualisieren:",e));
+    if(!location.hash){
+      location.hash="#home";
+    }
+    try{setInterval(()=>refreshContent().catch(()=>{}),CONTENT_REFRESH_MS)}catch(e){}
+  }catch(e){
+    console.error("App-Ladevorgang fehlgeschlagen:",e);
+    try{render()}catch(e2){}
   }
-  render();
-  if("serviceWorker" in navigator&&!window.__darSwMessageBound){
-    window.__darSwMessageBound=true;
-    navigator.serviceWorker.addEventListener("message",(ev)=>{
-      const d=ev.data||{};
-      if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);
-    });
-  }
-  loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()});
-  Promise.resolve().then(()=>refreshContent({forceRender:true}));
-  if(!location.hash){
-    location.hash="#home";
-  }
-  try{setInterval(()=>refreshContent(),CONTENT_REFRESH_MS)}catch(e){}
 });
 </script>
 <script>
