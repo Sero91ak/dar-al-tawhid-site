@@ -1,0 +1,375 @@
+name: Codex Live Push Fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/codex-live-push-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Apply push delivery fix
+        run: |
+          cat > .codex-live-push-fix.cjs <<'NODE'
+          const fs = require("fs");
+
+          function read(file) { return fs.readFileSync(file, "utf8"); }
+          function write(file, content) { fs.writeFileSync(file, content, "utf8"); }
+          function replaceExact(text, oldText, newText, label) {
+            if (text.includes(newText)) return text;
+            if (!text.includes(oldText)) throw new Error(`Missing pattern: ${label}`);
+            return text.replace(oldText, newText);
+          }
+
+          function patchDailyAdmin() {
+            const file = "cloudflare/daily-push-admin.js";
+            let s = read(file);
+            if (!s.includes("`${JSON.stringify(config, null, 2)}\\n`,")) {
+              const re = /await githubPut\(env, owner, repo, path, branch, \{\s*message: ([^\n]+),\s*content: utf8ToBase64\(([^\n]+)\),\s*sha: sha \|\| undefined\s*\}\);/m;
+              const m = s.match(re);
+              if (!m) throw new Error("daily admin githubPut pattern missing");
+              s = s.replace(re, `await githubPut(\n    env,\n    owner,\n    repo,\n    path,\n    ${m[2]},\n    ${m[1]},\n    branch,\n    sha || undefined\n  );`);
+            }
+            write(file, s);
+          }
+
+          function patchDailyScheduler() {
+            const file = "cloudflare/daily-push-scheduler.js";
+            let s = read(file);
+            s = s.replace("if (deps?.githubPut && deps?.utf8ToBase64) {", "if (deps?.githubPut) {");
+            s = replaceExact(s,
+          `      await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, branch, {
+            message: \`Daily content \${dateKey}\`,
+            content: deps.utf8ToBase64(JSON.stringify(data, null, 2) + "\\n"),
+            sha: existing?.sha
+          });`,
+          `      await deps.githubPut(
+            env,
+            owner,
+            repo,
+            DAILY_CONTENT_PATH,
+            \`${JSON.stringify(data, null, 2)}\\n\`,
+            \`Daily content \${dateKey}\`,
+            branch,
+            existing?.sha
+          );`,
+          "daily content githubPut");
+            if (!s.includes("async function loadDailyContentForPush")) {
+              s = replaceExact(s,
+          `async function ensureDailyContent(env, deps, dateKey, tz) {
+            const existing = await loadDailyContentFile(env, deps);
+            if (existing && existing.date === dateKey && (existing.recommendation?.id || existing.dua?.id)) {
+              return existing;
+            }
+            return regenerateDailyContent(env, deps, dateKey, tz);
+          }`,
+          `async function loadDailyContentForPush(env, deps, dateKey) {
+            const data = await loadDailyContentFile(env, deps);
+            if (!data || data.date !== dateKey) return null;
+            if (!data.dua?.id && !data.recommendation?.id) return null;
+            return data;
+          }`,
+          "daily content loader");
+            }
+            s = s.replace("dailyContent = await ensureDailyContent(env, deps, canonicalDateKey, tzCanonical);", "dailyContent = await loadDailyContentForPush(env, deps, canonicalDateKey);");
+            s = s.replace("if (!deps?.githubPut || !deps?.utf8ToBase64) return;", "if (!deps?.githubPut) return;");
+            s = replaceExact(s,
+          `    await deps.githubPut(env, owner, repo, path, branch, {
+              message: \`Daily push \${status.updatedAt}\`,
+              content: deps.utf8ToBase64(JSON.stringify(status, null, 2)),
+              sha: existing?.sha
+            });`,
+          `    await deps.githubPut(
+              env,
+              owner,
+              repo,
+              path,
+              \`${JSON.stringify(status, null, 2)}\\n\`,
+              \`Daily push \${status.updatedAt}\`,
+              branch,
+              existing?.sha
+            );`,
+          "daily status githubPut");
+            s = s.replace("Kein aktiver Tagesinhalt gefunden – Push nicht gesendet", "Kein aktiver Tagesinhalt in content/updates/daily.json für heute – Push nicht gesendet (keine Zufallsauswahl)");
+            write(file, s);
+          }
+
+          function patchWorker() {
+            const file = "cloudflare/worker.js";
+            let s = read(file);
+            if (!s.includes("const SUPABASE_URL =")) {
+              s = s.replace(
+                "const DEFAULT_PRAYER_STATUS_PATH = \"content/admin/prayer-push-status.json\";",
+                "const DEFAULT_PRAYER_STATUS_PATH = \"content/admin/prayer-push-status.json\";\nconst SUPABASE_URL = \"https://djyfkttjbdraynuxrzno.supabase.co\";\nconst SUPABASE_ANON_KEY = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw\";"
+              );
+            }
+            if (!s.includes("const ONESIGNAL_BATCH_SIZE =")) {
+              s = s.replace("const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];", "const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];\nconst ONESIGNAL_BATCH_SIZE = 2000;");
+            }
+            if (!s.includes("function loadPostPushSubscriptionIds")) {
+              const helper = `
+          function supabaseApiKey(env) {
+            return String(env.SUPABASE_SERVICE_KEY || env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY || SUPABASE_ANON_KEY).trim();
+          }
+
+          function uniqueValues(values) {
+            return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
+          }
+
+          function chunkValues(values, size) {
+            const out = [];
+            for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
+            return out;
+          }
+
+          async function loadPostPushSubscriptionIds(env) {
+            const key = supabaseApiKey(env);
+            if (!key) return [];
+            const base = \`${"${SUPABASE_URL}"}/rest/v1/prayer_push_registrations\`;
+            const queries = [
+              "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at",
+              "subscription_id=not.is.null&select=subscription_id,last_synced_at"
+            ];
+
+            for (const query of queries) {
+              try {
+                const res = await fetch(\`${"${base}"}?${"${query}"}\`, {
+                  headers: {
+                    apikey: key,
+                    Authorization: \`Bearer ${"${key}"}\`,
+                    Accept: "application/json"
+                  }
+                });
+                const text = await res.text();
+                if (!res.ok) {
+                  if (res.status === 400 && query.includes("push_opted_in")) continue;
+                  throw new Error(\`Supabase ${"${res.status}"}: ${"${text.slice(0, 200)}"}\`);
+                }
+                const rows = text ? JSON.parse(text) : [];
+                return uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
+              } catch (error) {
+                if (!query.includes("push_opted_in")) return [];
+              }
+            }
+
+            return [];
+          }
+          `;
+              s = s.replace("function buildPostPushUrl(env, postId, cacheVersion) {", `${helper}\nfunction buildPostPushUrl(env, postId, cacheVersion) {`);
+            }
+            if (!s.includes("const subscriptionIds = await loadPostPushSubscriptionIds(env);")) {
+              s = s.replace(
+          `  const attempts = [
+              { ...basePayload, included_segments: ["DAR_PUSH"] },`,
+          `  const subscriptionIds = await loadPostPushSubscriptionIds(env);
+            const attempts = [
+              ...chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
+                ...basePayload,
+                include_subscription_ids: ids
+              })),
+              { ...basePayload, included_segments: ["DAR_PUSH"] },`
+              );
+            }
+            s = s.replace("target: payload.included_segments?.[0] || \"tag-filter\",", "target: payload.include_subscription_ids ? `supabase-subscriptions:${payload.include_subscription_ids.length}` : (payload.included_segments?.[0] || \"tag-filter\"),");
+            write(file, s);
+          }
+
+          function patchSendPostPush() {
+            const file = "scripts/send-post-push.js";
+            let s = read(file);
+            if (!s.includes("const SUPABASE_URL =")) {
+              s = s.replace(
+                "const SITE_URL = process.env.SITE_URL || \"https://dar-al-tawhid.de\";",
+                "const SITE_URL = process.env.SITE_URL || \"https://dar-al-tawhid.de\";\nconst SUPABASE_URL = process.env.SUPABASE_URL || \"https://djyfkttjbdraynuxrzno.supabase.co\";\nconst SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw\";"
+              );
+            }
+            if (!s.includes("const ONESIGNAL_BATCH_SIZE =")) {
+              s = s.replace("const LIVE_CHECK_SCHEDULE_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];", "const LIVE_CHECK_SCHEDULE_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];\nconst ONESIGNAL_BATCH_SIZE = 2000;");
+            }
+            if (!s.includes("async function fetchRegisteredSubscriptionIds")) {
+              const helper = `
+          function uniqueValues(values) {
+            return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
+          }
+
+          function chunk(values, size) {
+            const out = [];
+            for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
+            return out;
+          }
+
+          async function fetchRegisteredSubscriptionIds() {
+            const key = String(process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY || "").trim();
+            if (!SUPABASE_URL || !key) return [];
+            const base = \`${"${String(SUPABASE_URL).replace(/\\/$/, \"\")}"}/rest/v1/prayer_push_registrations\`;
+            const queries = [
+              "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at",
+              "subscription_id=not.is.null&select=subscription_id,last_synced_at"
+            ];
+
+            for (const query of queries) {
+              try {
+                const res = await fetch(\`${"${base}"}?${"${query}"}\`, {
+                  headers: {
+                    apikey: key,
+                    Authorization: \`Bearer ${"${key}"}\`,
+                    Accept: "application/json"
+                  }
+                });
+                const text = await res.text();
+                if (!res.ok) {
+                  if (res.status === 400 && query.includes("push_opted_in")) continue;
+                  throw new Error(\`Supabase ${"${res.status}"}: ${"${text.slice(0, 200)}"}\`);
+                }
+                const rows = text ? JSON.parse(text) : [];
+                return uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
+              } catch (err) {
+                console.warn("Supabase Subscription-Liste nicht lesbar:", err.message || err);
+                if (!query.includes("push_opted_in")) return [];
+              }
+            }
+            return [];
+          }
+          `;
+              s = s.replace("function changedPostFiles() {", `${helper}\nfunction changedPostFiles() {`);
+            }
+            if (!s.includes("const subscriptionIds = await fetchRegisteredSubscriptionIds();")) {
+              s = s.replace(
+          `  const attempts = [
+              { ...basePayload, included_segments: ["DAR_PUSH"] },`,
+          `  const subscriptionIds = await fetchRegisteredSubscriptionIds();
+            const attempts = [
+              ...chunk(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
+                ...basePayload,
+                include_subscription_ids: ids
+              })),
+              { ...basePayload, included_segments: ["DAR_PUSH"] },`
+              );
+            }
+            s = s.replace(
+              "console.log(`Post-Push gesendet (${payload.included_segments?.[0] || \"tag-filter\"}):`, result.text);",
+              "const target = payload.include_subscription_ids ? `supabase-subscriptions:${payload.include_subscription_ids.length}` : (payload.included_segments?.[0] || \"tag-filter\");\n      console.log(`Post-Push gesendet (${target}):`, result.text);"
+            );
+            write(file, s);
+          }
+
+          function patchHtml(file) {
+            let s = read(file);
+            s = s.replaceAll("serviceWorkerPath: 'push/onesignal/OneSignalSDKWorker.js'", "serviceWorkerPath: '/push/onesignal/OneSignalSDKWorker.js'");
+            s = s.replaceAll('serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js"', 'serviceWorkerPath: "/push/onesignal/OneSignalSDKWorker.js"');
+            if (!s.includes("const retryDelays=[1000,3000,6000];")) {
+              s = s.replace(
+          `      while(Date.now()<deadline){
+                  if(!navigator.onLine)break;
+                  await refreshContent({forceRender:false});
+                  if(posts.some(p=>String(p.id)===id)){clearPostRouteState();if(readRoute().view==="post"&&String(readRoute().value)===id)render();return}
+                  await sleep(1200);
+                }
+                if(!posts.some(p=>String(p.id)===id)){
+                  postRouteFailedId=id;
+                  postRouteError="Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.";`,
+          `      const retryDelays=[1000,3000,6000];
+                let retryIdx=0;
+                while(Date.now()<deadline){
+                  if(!navigator.onLine)break;
+                  await refreshContent({forceRender:false});
+                  if(posts.some(p=>String(p.id)===id)){clearPostRouteState();if(readRoute().view==="post"&&String(readRoute().value)===id)render();return}
+                  const wait=retryDelays[Math.min(retryIdx,retryDelays.length-1)];
+                  retryIdx+=1;
+                  await sleep(wait);
+                }
+                if(!posts.some(p=>String(p.id)===id)){
+                  postRouteFailedId=id;
+                  postRouteError="Beitrag noch nicht abrufbar. Bitte aktualisieren.";`
+              );
+            }
+            if (!s.includes("reg?.active?.postMessage?.({type:\"BYPASS_POST_CACHE\"});")) {
+              s = s.replace(
+          `async function openPostFromPush(postId,url){const id=String(postId||parsePushPostIdFromUrl(url||location.href)||"").trim();if(!id)return;postRouteFailedId="";postRouteError="";postRouteLoadingId=id;render();if(await loadSinglePostFresh(id)||posts.some(p=>String(p.id)===id)){clearPostRouteState();navigate("post",id,{skipPush:true});return}await refreshContent({forceRender:false});if(posts.some(p=>String(p.id)===id)){clearPostRouteState();navigate("post",id,{skipPush:true});return}clearPostRouteState();postRouteFailedId=id;postRouteError="Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.";navigate("post",id,{skipPush:true})}`,
+          `async function openPostFromPush(postId,url){
+            const id=String(postId||parsePushPostIdFromUrl(url||location.href)||"").trim();
+            if(!id)return;
+            postRouteFailedId="";postRouteError="";postRouteLoadingId=id;
+            render();
+            try{
+              if("serviceWorker" in navigator){
+                const reg=await navigator.serviceWorker.getRegistration("/").catch(()=>null);
+                reg?.active?.postMessage?.({type:"BYPASS_POST_CACHE"});
+              }
+            }catch(e){}
+            const delays=[0,1000,3000,6000];
+            for(const waitMs of delays){
+              if(waitMs)await sleep(waitMs);
+              if(await loadSinglePostFresh(id)||posts.some(p=>String(p.id)===id)){
+                clearPostRouteState();
+                navigate("post",id,{skipPush:true});
+                return;
+              }
+              await refreshContent({forceRender:false});
+              if(posts.some(p=>String(p.id)===id)){
+                clearPostRouteState();
+                navigate("post",id,{skipPush:true});
+                return;
+              }
+            }
+            clearPostRouteState();
+            postRouteFailedId=id;
+            postRouteError="Beitrag noch nicht abrufbar. Bitte aktualisieren.";
+            navigate("post",id,{skipPush:true});
+          }`
+              );
+            }
+            write(file, s);
+          }
+
+          patchDailyAdmin();
+          patchDailyScheduler();
+          patchWorker();
+          patchSendPostPush();
+          patchHtml("index.html");
+          patchHtml("test/index.html");
+          NODE
+
+          node .codex-live-push-fix.cjs
+          rm .codex-live-push-fix.cjs
+
+      - name: Validate syntax
+        run: |
+          node --check cloudflare/worker.js
+          node --check cloudflare/daily-push-admin.js
+          node --check cloudflare/daily-push-scheduler.js
+          node --check scripts/send-post-push.js
+          node - <<'NODE'
+          const fs=require('fs');
+          for(const file of ['index.html','test/index.html','admin/index.html']){
+            const html=fs.readFileSync(file,'utf8');
+            const scripts=[...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
+            for(const code of scripts) new Function(code);
+            console.log(`${file}: OK (${scripts.length} scripts)`);
+          }
+          NODE
+
+      - name: Commit live fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cloudflare/daily-push-admin.js cloudflare/daily-push-scheduler.js cloudflare/worker.js scripts/send-post-push.js index.html test/index.html
+          if git diff --cached --quiet; then
+            echo "No live fix changes needed."
+            exit 0
+          fi
+          git commit -m "Fix push delivery paths"
+          git push
