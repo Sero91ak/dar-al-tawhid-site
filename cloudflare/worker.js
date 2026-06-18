@@ -20,6 +20,13 @@ import {
   sendWelcomePush,
   buildDailyPushPreview
 } from "./daily-push-admin.js";
+import {
+  sendNewPostPush,
+  sendPostPushTest,
+  readPostPushLog,
+  appendPostPushLog,
+  buildPostPushUrl
+} from "./post-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -39,7 +46,6 @@ const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
-const ONESIGNAL_BATCH_SIZE = 2000;
 
 export default {
   async fetch(request, env, ctx) {
@@ -151,7 +157,9 @@ export default {
       ]);
       const pushPaths = new Set([
         "/api/admin/push/retry",
-        "/api/admin/push/status"
+        "/api/admin/push/status",
+        "/api/admin/push/test",
+        "/api/admin/push/log"
       ]);
       const prayerPaths = new Set([
         "/api/admin/prayer/status",
@@ -187,6 +195,14 @@ export default {
         const postId = String(url.searchParams.get("postId") || "").trim();
         const registry = await readPendingPushesRegistry(env);
         return json({ ok: true, postId, status: postId ? registry.pushes?.[postId] || null : registry }, cors);
+      }
+
+      if (url.pathname === "/api/admin/push/log") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const log = await readPostPushLog(env, githubGet, base64ToUtf8);
+        return json({ ok: true, log }, cors);
       }
 
       if (url.pathname === "/api/admin/prayer/status") {
@@ -246,6 +262,15 @@ export default {
       if (pushPaths.has(url.pathname)) {
         if (url.pathname.endsWith("/retry")) {
           return json(await retryPendingPostPush(env, input), cors);
+        }
+        if (url.pathname.endsWith("/test")) {
+          const result = await sendPostPushTest(env, input);
+          try {
+            await appendPostPushLog(env, { kind: "test", ...result }, { githubGet, githubPut, base64ToUtf8 });
+          } catch (logError) {
+            result.logError = logError.message || String(logError);
+          }
+          return json(result, cors);
         }
       }
 
@@ -430,18 +455,57 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     push = await sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion: Date.now() });
     push.liveCheck = liveCheck;
     push.pending = false;
+    push.prepared = push.prepared !== false;
+    try {
+      await appendPostPushLog(env, {
+        kind: "post",
+        postId,
+        filename,
+        postTitle,
+        sent: push.sent,
+        reason: push.reason || "",
+        oneSignal: push.oneSignal || null,
+        attempts: push.attempts || [],
+        target: push.target || null,
+        targetUrl: push.targetUrl || null,
+        recipients: push.oneSignal?.recipients ?? null,
+        notificationId: push.oneSignal?.notificationId || null
+      }, { githubGet, githubPut, base64ToUtf8 });
+    } catch (logError) {
+      push.logError = logError.message || String(logError);
+    }
     if (postId) {
-      await writePendingPushStatus(env, postId, {
+      const pushPatch = {
         postId,
         filename,
         postTitle,
         publishedAt,
         postPath,
-        status: "sent",
-        sentAt: new Date().toISOString(),
-        lastError: "",
-        liveCheck
-      });
+        liveCheck,
+        pushResult: {
+          sent: push.sent,
+          target: push.target || null,
+          targetUrl: push.targetUrl || null,
+          oneSignal: push.oneSignal || null,
+          attempts: push.attempts || [],
+          recipients: push.oneSignal?.recipients ?? null,
+          notificationId: push.oneSignal?.notificationId || null
+        }
+      };
+      if (push.sent) {
+        await writePendingPushStatus(env, postId, {
+          ...pushPatch,
+          status: "sent",
+          sentAt: push.sentAt || new Date().toISOString(),
+          lastError: ""
+        });
+      } else {
+        await writePendingPushStatus(env, postId, {
+          ...pushPatch,
+          status: "failed",
+          lastError: push.reason || "OneSignal Push fehlgeschlagen"
+        });
+      }
     }
   } else {
     const pendingRecord = {
@@ -817,60 +881,6 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
-function supabaseApiKey(env) {
-  return String(env.SUPABASE_SERVICE_KEY || env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY || SUPABASE_ANON_KEY).trim();
-}
-
-function uniqueValues(values) {
-  return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
-}
-
-function chunkValues(values, size) {
-  const out = [];
-  for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
-  return out;
-}
-
-async function loadPostPushSubscriptionIds(env) {
-  const key = supabaseApiKey(env);
-  if (!key) return [];
-  const base = `${SUPABASE_URL}/rest/v1/prayer_push_registrations`;
-  const queries = [
-    "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at",
-    "subscription_id=not.is.null&select=subscription_id,last_synced_at"
-  ];
-
-  for (const query of queries) {
-    try {
-      const res = await fetch(`${base}?${query}`, {
-        headers: {
-          apikey: key,
-          Authorization: `Bearer ${key}`,
-          Accept: "application/json"
-        }
-      });
-      const text = await res.text();
-      if (!res.ok) {
-        if (res.status === 400 && query.includes("push_opted_in")) continue;
-        throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
-      }
-      const rows = text ? JSON.parse(text) : [];
-      return uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
-    } catch (error) {
-      if (!query.includes("push_opted_in")) return [];
-    }
-  }
-
-  return [];
-}
-
-function buildPostPushUrl(env, postId, cacheVersion) {
-  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
-  const slug = String(postId || "").trim();
-  const v = cacheVersion || Date.now();
-  return `${site}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`;
-}
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -1084,17 +1094,48 @@ async function processPendingPushUntilLive(env, record) {
     cacheVersion: Date.now()
   });
 
+  try {
+    await appendPostPushLog(env, {
+      kind: "post",
+      postId,
+      filename: record.filename,
+      postTitle: record.postTitle,
+      sent: push.sent,
+      pendingRetry: !push.sent,
+      reason: push.reason || "",
+      oneSignal: push.oneSignal || null,
+      attempts: push.attempts || [],
+      target: push.target || null,
+      targetUrl: push.targetUrl || null,
+      recipients: push.oneSignal?.recipients ?? null,
+      notificationId: push.oneSignal?.notificationId || null
+    }, { githubGet, githubPut, base64ToUtf8 });
+  } catch (logError) {
+    push.logError = logError.message || String(logError);
+  }
+
+  const pushResult = {
+    sent: push.sent,
+    target: push.target || null,
+    targetUrl: push.targetUrl || null,
+    oneSignal: push.oneSignal || null,
+    attempts: push.attempts || [],
+    recipients: push.oneSignal?.recipients ?? null,
+    notificationId: push.oneSignal?.notificationId || null
+  };
+
   if (push.sent) {
     await writePendingPushStatus(env, postId, {
       status: "sent",
-      sentAt: new Date().toISOString(),
+      sentAt: push.sentAt || new Date().toISOString(),
       lastError: "",
-      pushResult: { target: push.target, targetUrl: push.targetUrl }
+      pushResult
     });
   } else {
     await writePendingPushStatus(env, postId, {
       status: "failed",
-      lastError: push.reason || "OneSignal Push fehlgeschlagen"
+      lastError: push.reason || "OneSignal Push fehlgeschlagen",
+      pushResult
     });
   }
 
@@ -1150,99 +1191,6 @@ async function retryPendingPostPush(env, input) {
     liveCheck: push.liveCheck || null,
     push
   };
-}
-async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion }) {
-  const apiKey = oneSignalApiKey(env);
-  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  if (!apiKey) {
-    return { sent: false, reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)" };
-  }
-
-  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
-  const title = "Neuer Beitrag online";
-  const message = String(postTitle || "Neuer Beitrag").trim();
-  const slug = String(postId || "").trim();
-  const version = cacheVersion || Date.now();
-  const url = slug ? buildPostPushUrl(env, slug, version) : `${site}/#recent`;
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
-  const pushData = {
-    type: "post",
-    postId: slug,
-    slug,
-    filename: String(filename || "").trim(),
-    url,
-    publishedAt: publishedAt || new Date().toISOString(),
-    cacheVersion: String(version)
-  };
-
-  const basePayload = {
-    app_id: appId,
-    target_channel: "push",
-    headings: { en: title, de: title },
-    contents: { en: message, de: message },
-    url,
-    data: pushData,
-    chrome_web_icon: icon,
-    chrome_web_badge: badge,
-    firefox_icon: icon,
-    name: `admin-publish-${Date.now()}`
-  };
-
-  const subscriptionIds = await loadPostPushSubscriptionIds(env);
-  const attempts = [
-    ...chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
-      ...basePayload,
-      include_subscription_ids: ids
-    })),
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
-  ];
-
-  let lastError = "Unbekannter Fehler";
-
-  for (const payload of attempts) {
-    for (const authMode of ["Key", "Basic"]) {
-      try {
-        const res = await fetch("https://api.onesignal.com/notifications", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            Authorization: `${authMode} ${apiKey}`
-          },
-          body: JSON.stringify(payload)
-        });
-        const text = await res.text();
-        if (res.ok) {
-          return {
-            sent: true,
-            target: payload.include_subscription_ids ? `supabase-subscriptions:${payload.include_subscription_ids.length}` : (payload.included_segments?.[0] || "tag-filter"),
-            authMode,
-            targetUrl: url,
-            data: pushData,
-            response: text.slice(0, 400)
-          };
-        }
-        if (res.status === 400 || res.status === 401 || res.status === 403) {
-          lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
-          continue;
-        }
-        lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
-      } catch (error) {
-        lastError = error.message || String(error);
-      }
-    }
-  }
-
-  return { sent: false, reason: lastError };
 }
 
 function telegramBotToken(env) {
