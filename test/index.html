@@ -3900,7 +3900,7 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
   }
 }
 
-/* SMARAGD ROYAL PREMIUM — Spiegel Royal Nachtblau (Layout), Smaragd-Farben + Glas-Tabs */
+/* SMARAGD ROYAL PREMIUM — Neuaufbau: 1:1 Royal-Struktur, nur Smaragd-Farben */
 html[data-theme="emerald"]{
   color-scheme:dark!important;
   --bg:#061611!important;--bg2:#0B241B!important;--panel:#0c2018!important;--card:#102720!important;
@@ -3962,6 +3962,8 @@ html[data-theme="emerald"] .crumb{
   color:var(--gold2)!important;font-family:var(--serif)!important;font-size:13px!important;font-weight:800!important;
   min-height:40px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
 }
+html[data-theme="emerald"] h1,
+html[data-theme="emerald"] .salam,
 html[data-theme="emerald"] .view h2,
 html[data-theme="emerald"] .section-head h3,
 html[data-theme="emerald"] .folder-card h3,
@@ -3975,8 +3977,6 @@ html[data-theme="emerald"] .book-profile-title,
 html[data-theme="emerald"] .popular-row-text h4,
 html[data-theme="emerald"] .calendar-title h3,
 html[data-theme="emerald"] .event-name{color:var(--premium-title)!important;text-shadow:0 2px 22px rgba(0,0,0,.42)!important}
-html[data-theme="emerald"] h1,
-html[data-theme="emerald"] .salam{color:var(--gold2)!important;text-shadow:0 1px 10px rgba(0,0,0,.22)!important}
 html[data-theme="emerald"] .brand small,
 html[data-theme="emerald"] .eyebrow,
 html[data-theme="emerald"] .isnad-label,
@@ -4204,11 +4204,10 @@ html[data-theme="emerald"] .qibla-status{
 }
 html[data-theme="emerald"] .bottom-nav{
   background:rgba(6,22,17,.25)!important;
-  border:1px solid rgba(201,164,90,.20)!important;
+  border-color:rgba(201,164,90,.20)!important;
   box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
   backdrop-filter:blur(12px) saturate(1.08)!important;
   -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
-  isolation:auto!important;
 }
 html[data-theme="emerald"] .bottom-nav-btn{color:rgba(248,243,232,.68)!important;text-shadow:none!important}
 html[data-theme="emerald"] .bottom-nav-btn.active,
@@ -4250,22 +4249,6 @@ html[data-theme="emerald"] .top-swim-aura{display:none!important}
   }
 }
 
-html[data-theme="emerald"] .theme-switch-row .theme-switch-btn{
-  width:100%!important;
-  min-width:0!important;
-  max-width:none!important;
-  flex:initial!important;
-  flex-basis:auto!important;
-  grid-column:auto!important;
-  transform:none!important;
-  scale:none!important;
-}
-html[data-theme="emerald"]:has(.pwa-modal-overlay:not([hidden])) .float-actions,
-html[data-theme="emerald"]:has(.ie-text-modal-overlay:not([hidden])) .float-actions{
-  opacity:0!important;
-  pointer-events:none!important;
-  visibility:hidden!important;
-}
 /* MOBILE GUTTER FINAL: einheitlicher Seitenrand — iOS, Android, Browser, PWA */
 @media(max-width:700px){
   :root{
@@ -5103,42 +5086,6 @@ html[data-theme] .view{
   }
 }
 
-/* SMARAGD: gleiche App-Breite/Aufbau wie Royal Nachtblau + glasige Tab-Leiste */
-html[data-theme="emerald"] .app{
-  width:min(1420px,100%)!important;
-  max-width:none!important;
-  border:0!important;
-  box-shadow:none!important;
-  background:transparent!important;
-  overflow:visible!important;
-}
-html[data-theme="emerald"] .top-shell,
-html[data-theme="emerald"] .view{
-  border:0!important;
-  box-shadow:none!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  width:100%!important;
-  max-width:100%!important;
-}
-html[data-theme="emerald"] .premium-surface,
-html[data-theme="emerald"] .current-focus,
-html[data-theme="emerald"] .home-refresh-panel,
-html[data-theme="emerald"] .direct-pick-panel.home-direct-pick,
-html[data-theme="emerald"] .theme-switch-panel{
-  width:100%!important;
-  max-width:100%!important;
-  box-sizing:border-box!important;
-}
-html[data-theme="emerald"] .bottom-nav{
-  background:rgba(6,22,17,.25)!important;
-  border:1px solid rgba(201,164,90,.20)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
-  backdrop-filter:blur(12px) saturate(1.08)!important;
-  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
-  isolation:auto!important;
-}
-
 .staging-app-banner{border:1px solid rgba(255,196,120,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,196,120,.18),rgba(239,215,142,.06));color:var(--cream);padding:10px 12px;margin:0 0 12px;font-size:12px;font-weight:900;line-height:1.35;text-align:center}.staging-app-banner b{color:var(--gold2)}
 :root{
 --editor-bg:transparent;
@@ -5468,42 +5415,6 @@ body.image-editor-mode .ie-power-sheet{position:static!important;bottom:auto!imp
 body.image-editor-mode .ie-power-block-row{border-bottom:none!important;padding-bottom:6px;margin-bottom:8px}
 body.image-editor-mode .image-editor-touch-hint{margin:8px 0 10px;border:1px solid rgba(239,215,142,.13)}
 body.image-editor-mode .ie-power-sheet-tabs{border-bottom:1px solid rgba(239,215,142,.10)}
-body.image-editor-mode .ie-power-sheet{margin-top:10px;border:1px solid rgba(239,215,142,.22);box-shadow:0 -2px 14px rgba(0,0,0,.18)}
-body.image-editor-mode .ie-power-sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;border-bottom:1px solid rgba(239,215,142,.08);background:transparent}
-body.image-editor-mode .ie-power-sheet-handle span{width:46px;height:5px;border-radius:999px;background:var(--editor-sheet-handle)}
-body.image-editor-mode .ie-power-sheet-handle::after{content:"Werkzeuge ▾";font-size:9px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;color:var(--editor-muted)}
-body.image-editor-mode .ie-power-sheet.is-collapsed .ie-power-sheet-handle::after{content:"Werkzeuge ▸"}
-html[data-theme="light"] body.image-editor-mode .ie-power-sheet,html[data-theme="soft"] body.image-editor-mode .ie-power-sheet{border-color:rgba(155,122,60,.24)}
-
-/* Einheitlicher Bearbeitungsbereich mit einer klaren Start-Linie (Test) */
-body.image-editor-mode .ie-power-block-row,
-body.image-editor-mode .image-editor-touch-hint,
-body.image-editor-mode .ie-power-sheet{width:100%;max-width:520px;margin-left:auto;margin-right:auto}
-body.image-editor-mode .ie-power-block-row{border-bottom:none!important;margin-bottom:0;padding-bottom:12px}
-body.image-editor-mode .ie-power-edit-zone-start{display:none}
-body.image-editor-mode .image-editor-touch-hint{position:relative;margin:0 auto;border:none!important;border-top:1px solid rgba(239,215,142,.30)!important;border-radius:0;background:transparent;padding:12px 12px 10px;text-align:center}
-body.image-editor-mode .image-editor-touch-hint::before{content:"BEARBEITUNG";display:block;margin:0 0 7px;font-size:9px;font-weight:950;letter-spacing:.22em;color:var(--editor-warning)}
-body.image-editor-mode .ie-power-sheet{margin-top:10px;border:1px solid rgba(239,215,142,.20)!important;box-shadow:0 -1px 12px rgba(0,0,0,.16)}
-body.image-editor-mode .ie-power-sheet-tabs{border-bottom:1px solid rgba(239,215,142,.10)}
-html[data-theme="light"] body.image-editor-mode .image-editor-touch-hint{border-top-color:rgba(155,122,60,.32)!important}
-html[data-theme="soft"] body.image-editor-mode .image-editor-touch-hint{border-top-color:rgba(116,76,98,.30)!important}
-</style>
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-OneSignalDeferred.push(async function(OneSignal){
-  await OneSignal.init({
-    appId:"786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
-    serviceWorkerPath:"push/onesignal/OneSignalSDKWorker.js",
-    serviceWorkerParam:{scope:"/push/onesignal/"},
-    safari_web_id:"web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
-    notifyButton:{enable:false},
-    autoResubscribe:true,
-    welcomeNotification:{disable:false,title:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",message:"Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.",url:"https://dar-al-tawhid.de/",icon:"https://dar-al-tawhid.de/notification-icon-192.png?v=2"}
-  });
-  window.OneSignal=OneSignal;
-  window.DAR_ONE_SIGNAL_READY=true;
   try{await ensurePushUserLogin(OneSignal)}catch(e){}
   try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationAndWelcome().catch(()=>{});maintainPushHealth({silent:true}).catch(()=>{})})}catch(e){}
   try{if(getPrayerSettings().reminder)await syncPrayerPushTags()}catch(e){}
