@@ -471,7 +471,8 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     { schedule: "quick" }
   );
   let push;
-  if (liveCheck.ok) {
+  const skipPush = Boolean(input.skipPush || options.skipPush);
+  if (liveCheck.ok && !skipPush) {
     push = await sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion: Date.now() });
     push.liveCheck = liveCheck;
     push.pending = false;
@@ -488,6 +489,13 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
         liveCheck
       });
     }
+  } else if (skipPush) {
+    push = {
+      sent: false,
+      skipped: true,
+      reason: "Push übersprungen (Sammelveröffentlichung)",
+      liveCheck
+    };
   } else {
     const pendingRecord = {
       postId,
