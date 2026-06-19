@@ -112,6 +112,10 @@ if (!worker.includes("/api/admin/next-number")) fail("worker.js: next-number feh
 if (!worker.includes("checkVisitorSiteHealth")) fail("worker.js: visitor-health fehlt");
 if (!worker.includes("sendNewPostPush")) fail("worker.js: post push fehlt");
 
+// Push-System (streng – blockiert Deploy bei fehlendem Scheduler)
+const pushGuardFails = require("./push-system-guard.js").runPushSystemGuard();
+if (pushGuardFails) failed += pushGuardFails;
+
 // Push scripts
 if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-prayer-push.js fehlt");
 if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");
