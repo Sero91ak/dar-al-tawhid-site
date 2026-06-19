@@ -157,6 +157,14 @@ export default {
         return json({ ok: health.ok, ...health }, cors, health.ok ? 200 : 503);
       }
 
+      if (url.pathname === "/api/admin/post" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const filename = sanitizeFilename(String(url.searchParams.get("filename") || "").trim());
+        if (!filename) return json({ ok: false, error: "filename fehlt" }, cors, 400);
+        return json(await fetchPostMarkdown(env, filename), cors);
+      }
+
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
       const stagingPaths = new Set(["/api/admin/staging/publish"]);
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
@@ -190,8 +198,12 @@ export default {
         "/api/admin/jummah/test",
         "/api/admin/jummah/run"
       ]);
+      const categoryLayoutPaths = new Set(["/api/admin/category-layout"]);
+      const postCategoryPaths = new Set(["/api/admin/post/category"]);
+      const postUpdatePaths = new Set(["/api/admin/post/update"]);
+      const categoryRenamePaths = new Set(["/api/admin/category/rename"]);
 
-      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths, ...categoryLayoutPaths, ...postCategoryPaths, ...postUpdatePaths, ...categoryRenamePaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -324,6 +336,22 @@ export default {
 
       if (stagingPaths.has(url.pathname)) {
         return json(await publishPostFromMarkdown(env, input, ctx, { staging: true }), cors);
+      }
+
+      if (categoryLayoutPaths.has(url.pathname)) {
+        return json(await publishCategoryLayout(env, input), cors);
+      }
+
+      if (postCategoryPaths.has(url.pathname)) {
+        return json(await updatePostCategory(env, input), cors);
+      }
+
+      if (postUpdatePaths.has(url.pathname)) {
+        return json(await updateExistingPost(env, input), cors);
+      }
+
+      if (categoryRenamePaths.has(url.pathname)) {
+        return json(await renameCategoryLabel(env, input), cors);
       }
 
       if (newsPaths.has(url.pathname)) {
@@ -545,6 +573,226 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     liveCheck,
     push,
     telegram
+  };
+}
+
+async function fetchPostMarkdown(env, filename) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const postPath = `${postsDir}/${filename}`;
+  const file = await githubGet(env, owner, repo, postPath, branch);
+  if (!file?.content) throw httpError(`Beitrag nicht gefunden: ${filename}`, 404);
+  const markdown = base64ToUtf8(file.content);
+  return {
+    ok: true,
+    filename,
+    markdown,
+    sha: file.sha || "",
+    postPath,
+    title: frontmatterValue(markdown, "title") || filename,
+    category: frontmatterValue(markdown, "category") || "",
+    postId: frontmatterValue(markdown, "id") || ""
+  };
+}
+
+async function updateExistingPost(env, input) {
+  const filename = sanitizeFilename(String(input.filename || "").trim());
+  const markdown = String(input.markdown || "").trim();
+  const sha = String(input.sha || "").trim();
+  const skipPush = input.skipPush !== false;
+
+  if (!filename) throw httpError("Dateiname fehlt", 400);
+  if (!markdown) throw httpError("Markdown fehlt", 400);
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const postPath = `${postsDir}/${filename}`;
+  const existing = await githubGet(env, owner, repo, postPath, branch);
+  if (!existing?.content) throw httpError(`Beitrag nicht gefunden: ${filename}`, 404);
+  if (sha && existing.sha && sha !== existing.sha) {
+    throw httpError("Datei wurde zwischenzeitlich geändert — bitte neu laden", 409);
+  }
+
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    postPath,
+    markdown.endsWith("\n") ? markdown : markdown + "\n",
+    `Update post ${filename}`,
+    branch,
+    existing.sha
+  );
+
+  return {
+    ok: true,
+    filename,
+    postPath,
+    commitSha: saved.commit?.sha || "",
+    postId: frontmatterValue(markdown, "id") || "",
+    push: { sent: false, skipped: skipPush, reason: skipPush ? "Korrektur ohne Push" : "Push nicht angefordert" }
+  };
+}
+
+async function publishCategoryLayout(env, input) {
+  const main = Array.isArray(input.main) ? input.main.map((x) => String(x || "").trim()).filter(Boolean) : [];
+  const order = Array.isArray(input.order) ? input.order.map((x) => String(x || "").trim()).filter(Boolean) : [];
+  if (!order.length) throw httpError("Kategorie-Reihenfolge (order) fehlt", 400);
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const layoutPath = trimSlashes(env.CATEGORY_LAYOUT_PATH || "content/admin/category-layout.json");
+  const file = await githubGet(env, owner, repo, layoutPath, branch);
+  const payload = {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    main,
+    order
+  };
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    layoutPath,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    "Update category layout",
+    branch,
+    file?.sha
+  );
+  return {
+    ok: true,
+    layoutPath,
+    mainCount: main.length,
+    orderCount: order.length,
+    commitSha: saved.commit?.sha || ""
+  };
+}
+
+function applyCategoryToMarkdown(markdown, category) {
+  const cat = String(category || "").trim();
+  if (!cat) return String(markdown || "").trim();
+  let out = String(markdown || "").trim();
+  const safe = cat.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  if (/^category:\s/m.test(out)) return out.replace(/^category:\s*["']?.*?["']?\s*$/m, `category: "${safe}"`);
+  if (/^---\s*\n/.test(out)) return out.replace(/^---\s*\n/, `---\ncategory: "${safe}"\n`);
+  return `---\ncategory: "${safe}"\n---\n\n${out}`;
+}
+
+function categoryLabelKey(name) {
+  return String(name || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u02bf\u02be\u2018\u2019'`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+async function updatePostCategory(env, input) {
+  const filename = sanitizeFilename(String(input.filename || "").trim());
+  const category = String(input.category || "").trim();
+  if (!filename) throw httpError("Dateiname fehlt", 400);
+  if (!category) throw httpError("Ziel-Kategorie fehlt", 400);
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const postPath = `${postsDir}/${filename}`;
+  const file = await githubGet(env, owner, repo, postPath, branch);
+  if (!file?.content) throw httpError(`Beitrag nicht gefunden: ${filename}`, 404);
+
+  const markdown = applyCategoryToMarkdown(base64ToUtf8(file.content), category);
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    postPath,
+    markdown,
+    `Move ${filename} to category ${category}`,
+    branch,
+    file.sha
+  );
+  return {
+    ok: true,
+    filename,
+    category,
+    postPath,
+    commitSha: saved.commit?.sha || ""
+  };
+}
+
+async function renameCategoryLabel(env, input) {
+  const fromLabel = String(input.fromLabel || "").trim();
+  const toLabel = String(input.toLabel || "").trim();
+  if (!fromLabel || !toLabel) throw httpError("Alter und neuer Ordnername fehlen", 400);
+  if (categoryLabelKey(fromLabel) === categoryLabelKey(toLabel)) {
+    throw httpError("Neuer Name ist identisch mit dem alten", 400);
+  }
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const layoutPath = trimSlashes(env.CATEGORY_LAYOUT_PATH || "content/admin/category-layout.json");
+
+  const layoutFile = await githubGet(env, owner, repo, layoutPath, branch);
+  const layoutData = layoutFile?.content ? JSON.parse(base64ToUtf8(layoutFile.content)) : { version: 1, main: [], order: [] };
+  const fromKey = categoryLabelKey(fromLabel);
+  const mapLabel = (label) => (categoryLabelKey(label) === fromKey ? toLabel : label);
+  const main = (Array.isArray(layoutData.main) ? layoutData.main : []).map(mapLabel);
+  let order = (Array.isArray(layoutData.order) ? layoutData.order : []).map(mapLabel);
+  if (!order.some((x) => categoryLabelKey(x) === categoryLabelKey(toLabel))) order.push(toLabel);
+
+  await githubPut(
+    env,
+    owner,
+    repo,
+    layoutPath,
+    `${JSON.stringify({ version: 1, updatedAt: new Date().toISOString(), main, order }, null, 2)}\n`,
+    `Rename category ${fromLabel} -> ${toLabel}`,
+    branch,
+    layoutFile?.sha
+  );
+
+  const indexData = await readPostsIndex(env);
+  const files = listPostFiles(indexData.files);
+  let updatedPosts = 0;
+  for (const file of files) {
+    const name = String(file.name || "").trim();
+    if (!name) continue;
+    const postPath = `${postsDir}/${name}`;
+    const postFile = await githubGet(env, owner, repo, postPath, branch);
+    if (!postFile?.content) continue;
+    const markdown = base64ToUtf8(postFile.content);
+    const current = frontmatterValue(markdown, "category");
+    if (categoryLabelKey(current) !== fromKey) continue;
+    const nextMarkdown = applyCategoryToMarkdown(markdown, toLabel);
+    await githubPut(
+      env,
+      owner,
+      repo,
+      postPath,
+      nextMarkdown,
+      `Rename category in ${name}`,
+      branch,
+      postFile.sha
+    );
+    updatedPosts += 1;
+  }
+
+  return {
+    ok: true,
+    fromLabel,
+    toLabel,
+    updatedPosts,
+    layoutPath
   };
 }
 

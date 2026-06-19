@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v29";
+  var ADMIN_SW_CACHE="dar-admin-stats-v30";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -162,6 +162,28 @@ button{cursor:pointer}
 .visitor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .visitor-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border:1px dashed var(--line2);border-radius:14px;padding:10px 12px;color:var(--soft);font-size:11px}
 .visitor-foot strong{color:var(--gold)}
+.ordner-studio{display:grid;gap:12px}
+.ordner-lead{margin:0;color:var(--soft);font-size:12px;line-height:1.5;max-width:820px}
+.ordner-grid{display:grid;grid-template-columns:minmax(240px,.85fr) minmax(260px,.95fr) minmax(320px,1.2fr);gap:12px;align-items:start}
+.ordner-cats,.ordner-posts,.ordner-editor{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:8px}
+.cat-order-list{display:flex;flex-direction:column;gap:6px;flex:1;max-height:min(42vh,340px);overflow:auto;margin:4px 0}
+.cat-order-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.1);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
+.cat-order-row.is-main{border-color:rgba(239,215,142,.26);background:rgba(239,215,142,.04)}
+.cat-order-row.is-selected{border-color:rgba(140,190,255,.48);box-shadow:0 0 0 1px rgba(140,190,255,.18)}
+.cat-order-name{font-size:11px;font-weight:900;color:var(--ink);line-height:1.35}
+.cat-order-meta{font-size:9px;color:var(--soft);margin-top:2px}
+.cat-order-actions{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.cat-order-actions .btn,.pill-btn{min-height:30px;padding:0 8px;font-size:10px;border:1px solid var(--line2);border-radius:999px;background:rgba(0,0,0,.18);color:var(--soft);font-weight:900}
+.pill-btn.is-on{color:var(--gold);border-color:rgba(239,215,142,.34);background:rgba(239,215,142,.08)}
+.ordner-cat-tools{display:grid;gap:6px}
+.ordner-post-list{display:flex;flex-direction:column;gap:6px;flex:1;max-height:min(46vh,380px);overflow:auto}
+.ordner-post-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
+.ordner-post-row.is-active{border-color:rgba(140,190,255,.5);background:rgba(90,140,220,.08)}
+.ordner-post-title{font-size:11px;font-weight:900;color:var(--ink);line-height:1.35}
+.ordner-post-meta{font-size:9px;color:var(--soft);margin-top:2px}
+.ordner-move-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:4px}
+.ordner-editor-area{flex:1;min-height:min(48vh,420px);max-height:min(52vh,480px)}
+.ordner-editor-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .workflow-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}
 .workflow-step{border:1px solid var(--line2);border-radius:15px;background:rgba(0,0,0,.18);padding:11px;min-height:82px;position:relative}
 .workflow-step:before{content:"";display:block;width:9px;height:9px;border-radius:999px;background:var(--muted);box-shadow:0 0 18px rgba(140,190,255,.14);margin-bottom:8px}
@@ -244,7 +266,7 @@ button{cursor:pointer}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
 @media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
-@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell,.visitor-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
+@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell,.visitor-grid,.ordner-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
 @media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
 
 /* Final admin-frame correction: the whole admin app should not sit in a thick outer box. */
@@ -378,6 +400,7 @@ const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
   ["besucher","Besucher"],
+  ["ordner","Ordner"],
   ["actions","Aktionen"],
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
@@ -389,8 +412,13 @@ const DEFAULT_ADMIN_TABS=[
 ];
 const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
+const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null;
+let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayoutBusy=false,categoryLayoutLoaded=false;
+let ordnerCatalog=[],ordnerCatalogBusy=false,ordnerCatalogLoaded=false;
+let ordnerSelectedCat="",ordnerPostQuery="",ordnerCatSearch="",ordnerRenameValue="",ordnerStatus="",ordnerEditorStatus="",ordnerBusy=false;
+let ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let liveNewsItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -934,6 +962,106 @@ async function workerGetRequest(path,{admin=false}={}){
   if(!res.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
+function categoryKeyAdmin(name){return String(name||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[\u02bf\u02be\u2018\u2019'`]/g,"").replace(/\s+/g," ").trim()}
+function parseCategoryFromMarkdownHead(text){const m=String(text||"").match(/^category:\s*["']?(.*?)["']?\s*$/m);return m?m[1].trim():""}
+function parseTitleFromMarkdownHead(text){const m=String(text||"").match(/^title:\s*["']?(.*?)["']?\s*$/m);return m?m[1].trim().replace(/^📖\s*/,""):""}
+function parseIdFromMarkdownHead(text){const m=String(text||"").match(/^id:\s*["']?(.*?)["']?\s*$/m);return m?m[1].trim():""}
+async function fetchPostsIndexFiles(){const bust=Date.now();const urls=[`${SITE_ORIGIN}/content/posts/posts-index.json?v=${bust}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/posts-index.json?v=${bust}`];for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();if(data&&Array.isArray(data.files)&&data.files.length)return data.files}catch(e){}}return[]}
+async function discoverLiveCategories(){
+  const files=await fetchPostsIndexFiles();
+  const counts={};
+  for(let i=0;i<files.length;i+=12){
+    const batch=files.slice(i,i+12);
+    await Promise.all(batch.map(async file=>{
+      const name=file.name||file;if(!name)return;
+      const urls=[`${SITE_ORIGIN}/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`];
+      for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const head=(await r.text()).slice(0,900);const cat=parseCategoryFromMarkdownHead(head);if(cat){counts[cat]=(counts[cat]||0)+1;break}}catch(e){}}
+    }));
+  }
+  return counts;
+}
+async function fetchLiveCategoryLayout(){
+  const bust=Date.now();
+  const urls=[`${SITE_ORIGIN}/content/admin/category-layout.json?v=${bust}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/admin/category-layout.json?v=${bust}`];
+  for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();if(data&&Array.isArray(data.order)&&data.order.length)return{main:Array.isArray(data.main)?data.main:[],order:data.order}}catch(e){}}
+  return{main:[...DEFAULT_CATEGORY_MAIN],order:[...DEFAULT_CATEGORY_MAIN]};
+}
+function mergeCategoryLayout(live,counts){
+  const order=[...(live?.order||[])];
+  Object.keys(counts||{}).forEach(cat=>{if(!order.some(x=>categoryKeyAdmin(x)===categoryKeyAdmin(cat)))order.push(cat)});
+  const main=(live?.main||DEFAULT_CATEGORY_MAIN).filter(cat=>order.some(x=>categoryKeyAdmin(x)===categoryKeyAdmin(cat)));
+  return{main,order};
+}
+async function ensureCategoryLayoutDraft(force){
+  if(categoryLayoutLoaded&&!force)return categoryLayoutDraft;
+  categoryLayoutBusy=true;
+  try{
+    const [live,counts]=await Promise.all([fetchLiveCategoryLayout(),discoverLiveCategories()]);
+    categoryLayoutCounts=counts||{};
+    categoryLayoutDraft=mergeCategoryLayout(live,counts);
+    categoryLayoutLoaded=true;
+    if(!ordnerSelectedCat&&categoryLayoutDraft.order?.length)ordnerSelectedCat=categoryLayoutDraft.order[0];
+    return categoryLayoutDraft;
+  }finally{categoryLayoutBusy=false}
+}
+async function ensureOrdnerCatalog(force){
+  if(ordnerCatalogLoaded&&!force)return ordnerCatalog;
+  ordnerCatalogBusy=true;
+  try{
+    const files=await fetchPostsIndexFiles();
+    const catalog=[];
+    for(let i=0;i<files.length;i+=10){
+      const batch=files.slice(i,i+10);
+      await Promise.all(batch.map(async file=>{
+        const name=file.name||file;if(!name||!String(name).endsWith(".md"))return;
+        const urls=[`${SITE_ORIGIN}/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`];
+        for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const head=(await r.text()).slice(0,1200);catalog.push({filename:name,title:parseTitleFromMarkdownHead(head)||name.replace(/\.md$/,""),category:parseCategoryFromMarkdownHead(head)||"Beiträge",id:parseIdFromMarkdownHead(head)||name.replace(/\.md$/,""),date:(head.match(/^date:\s*["']?(.*?)["']?\s*$/m)||[])[1]||""});break}catch(e){}}
+      }));
+    }
+    ordnerCatalog=catalog.sort((a,b)=>(b.date||"").localeCompare(a.date||"")||a.title.localeCompare(b.title,"de"));
+    ordnerCatalogLoaded=true;
+    return ordnerCatalog;
+  }finally{ordnerCatalogBusy=false}
+}
+async function ensureOrdnerData(force){
+  if(!force&&ordnerCatalogLoaded&&categoryLayoutLoaded)return;
+  ordnerBusy=true;
+  try{await Promise.all([ensureCategoryLayoutDraft(force),ensureOrdnerCatalog(force)])}finally{ordnerBusy=false}
+}
+function moveCategoryInDraft(name,dir){
+  const key=categoryKeyAdmin(name);
+  const order=[...(categoryLayoutDraft.order||[])];
+  const i=order.findIndex(x=>categoryKeyAdmin(x)===key);
+  if(i<0)return;
+  const j=i+(dir<0?-1:1);
+  if(j<0||j>=order.length)return;
+  const tmp=order[i];order[i]=order[j];order[j]=tmp;
+  categoryLayoutDraft={...categoryLayoutDraft,order};
+}
+function toggleCategoryMainDraft(name){
+  const key=categoryKeyAdmin(name);
+  let main=[...(categoryLayoutDraft.main||[])];
+  const has=main.some(x=>categoryKeyAdmin(x)===key);
+  if(has)main=main.filter(x=>categoryKeyAdmin(x)!==key);
+  else main.push(name);
+  categoryLayoutDraft={...categoryLayoutDraft,main};
+}
+function setOrdnerStatus(msg){ordnerStatus=msg;const el=document.getElementById("ordnerStatus");if(el)el.textContent=msg}
+function setOrdnerEditorStatus(msg){ordnerEditorStatus=msg;const el=document.getElementById("ordnerEditorStatus");if(el)el.textContent=msg}
+async function loadOrdnerPost(filename){
+  if(!filename)return;
+  ordnerEditorStatus="Lade Beitrag…";
+  try{
+    const data=await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
+    ordnerEdit={filename:data.filename||filename,markdown:data.markdown||"",sha:data.sha||"",postId:data.postId||"",title:data.title||filename,dirty:false};
+    ordnerSelectedCat=data.category||ordnerSelectedCat;
+    setOrdnerEditorStatus("Bereit zum Bearbeiten.");
+  }catch(e){
+    ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
+    setOrdnerEditorStatus(`Fehler: ${e.message||e}`);
+    toast(e.message||"Beitrag konnte nicht geladen werden");
+  }
+}
 function formatJummahPushTime(iso){if(!iso)return"—";try{return new Date(iso).toLocaleString("de-DE")}catch(e){return String(iso)}}
 function renderJummahPushStatusBox(payload){
   const st=payload?.status||payload||{};
@@ -1019,7 +1147,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -1032,6 +1160,7 @@ function renderShell(){
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
+  if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -1041,7 +1170,8 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"){
+    if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -1075,7 +1205,7 @@ function renderStart(ctx){
     <div class="admin-cover-text">
       <div class="admin-kicker">DAR AL TAWḤID · Verwaltung</div>
       <h2>DAR Admin</h2>
-      <p>Geordnete Verwaltung für Besucher, Inhalte und Veröffentlichung. Statistik und Live-Zahlen liegen gebündelt im Bereich Besucher.</p>
+      <p>Geordnete Verwaltung für Besucher, Ordner und Veröffentlichung. Im Ordner-Studio sortierst du Kategorien, verschiebst Beiträge und korrigierst Texte live ohne Push.</p>
       <div class="cover-actions">
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
@@ -1087,14 +1217,15 @@ function renderStart(ctx){
   <section class="folder-grid">
     ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
-    ${folderCard("③","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
-    ${folderCard("④","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("⑤","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
-    ${folderCard("⑥","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
-    ${folderCard("⑦","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
-    ${folderCard("⑧","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
-    ${folderCard("⑨","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
-    ${folderCard("⑩","Sammel-Paket","ZIP hochladen · Thema wählen · Paket live stellen.","actions-bulk","ZIP · Paket")}
+    ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
+    ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
+    ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
+    ${folderCard("⑥","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
+    ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
+    ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
+    ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
+    ${folderCard("⑩","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
+    ${folderCard("⑪","Sammel-Paket","ZIP hochladen · Thema wählen · Paket live stellen.","actions-bulk","ZIP · Paket")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -1180,6 +1311,70 @@ function renderVisitors(ctx){
     <div class="visitor-foot">
       <span>Vollständige Rangliste mit Suche &amp; Filter im Bereich <strong>Inhalte</strong>.</span>
       <button class="btn" data-tab="content" type="button">Inhalte öffnen</button>
+    </div>
+  </section>`;
+}
+function renderOrdner(){
+  const busy=ordnerBusy||categoryLayoutBusy||ordnerCatalogBusy;
+  const cats=(categoryLayoutDraft.order||[]).filter(name=>!ordnerCatSearch.trim()||name.toLowerCase().includes(ordnerCatSearch.trim().toLowerCase()));
+  const selected=ordnerSelectedCat||categoryLayoutDraft.order?.[0]||"";
+  const mainSet=new Set((categoryLayoutDraft.main||[]).map(categoryKeyAdmin));
+  const q=ordnerPostQuery.trim().toLowerCase();
+  const posts=ordnerCatalog.filter(p=>categoryKeyAdmin(p.category)===categoryKeyAdmin(selected)).filter(p=>!q||[p.title,p.filename,p.id,p.category].join(" ").toLowerCase().includes(q));
+  const catRows=cats.map((name,idx)=>{
+    const realIdx=(categoryLayoutDraft.order||[]).indexOf(name);
+    const isMain=mainSet.has(categoryKeyAdmin(name));
+    const count=categoryLayoutCounts[name]||ordnerCatalog.filter(p=>categoryKeyAdmin(p.category)===categoryKeyAdmin(name)).length;
+    const isSel=categoryKeyAdmin(name)===categoryKeyAdmin(selected);
+    return `<div class="cat-order-row ${isMain?"is-main":""} ${isSel?"is-selected":""}" data-ordner-cat="${esc(name)}" role="button" tabindex="0">
+      <div><div class="cat-order-name">${esc(name)}</div><div class="cat-order-meta">${count} Beiträge · ${isMain?"Hauptbereich":"Weitere Kategorien"}</div></div>
+      <div class="cat-order-actions">
+        <button class="btn" type="button" data-cat-up="${realIdx}" title="Nach oben">↑</button>
+        <button class="btn" type="button" data-cat-down="${realIdx}" title="Nach unten">↓</button>
+        <button class="pill-btn ${isMain?"is-on":""}" type="button" data-cat-main="${realIdx}">${isMain?"Haupt":"Weiter"}</button>
+      </div>
+    </div>`;
+  }).join("");
+  const postRows=posts.map(p=>`<button class="ordner-post-row ${ordnerEdit.filename===p.filename?"is-active":""}" data-ordner-post="${esc(p.filename)}" type="button"><span><span class="ordner-post-title">${esc(cleanTitle(p.title))}</span><span class="ordner-post-meta">${esc(p.filename)}</span></span><strong class="status-pill">${esc(p.id||"")}</strong></button>`).join("");
+  const catOptions=(categoryLayoutDraft.order||[]).map(c=>`<option value="${esc(c)}" ${categoryKeyAdmin(c)===categoryKeyAdmin(selected)?"selected":""}>${esc(c)}</option>`).join("");
+  const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
+  return `<section class="ordner-studio">
+    <div class="panel ordner-head">
+      <div class="section-head"><h3>Ordner-Studio</h3><span>${busy?"lädt…":"Inhalte verwalten"}</span></div>
+      <p class="ordner-lead">Ordner sortieren (Hauptbereich / Weitere), umbenennen, Beiträge verschieben und Texte korrigieren — live speichern <strong>ohne Push</strong>.${workerReady?"":" Worker Secret unter Aktionen hinterlegen, damit Speichern funktioniert."}</p>
+    </div>
+    <div class="ordner-grid">
+      <aside class="panel ordner-cats">
+        <div class="section-head"><h3>Ordner</h3><span>${(categoryLayoutDraft.order||[]).length}</span></div>
+        <input class="field" id="ordnerCatSearch" type="search" placeholder="Ordner suchen…" value="${esc(ordnerCatSearch)}">
+        <div class="cat-order-list" id="ordnerCatList">${catRows||`<div class="empty">${busy?"Lade Ordner…":"Keine Ordner."}</div>`}</div>
+        <div class="ordner-cat-tools">
+          <input class="field" id="ordnerRenameInput" placeholder="Neuer Name für „${esc(selected||"Ordner")}“" value="${esc(ordnerRenameValue)}">
+          <button class="btn" id="ordnerRenameBtn" type="button" ${selected?"":"disabled"}>Ordner umbenennen</button>
+          <button class="btn primary" id="ordnerLayoutSaveBtn" type="button">Ordner-Reihenfolge speichern</button>
+          <button class="btn" id="ordnerDataReloadBtn" type="button">Alles neu laden</button>
+        </div>
+        <div class="upload-status" id="ordnerStatus">${esc(ordnerStatus||"Reihenfolge wird in content/admin/category-layout.json gespeichert.")}</div>
+      </aside>
+      <div class="panel ordner-posts">
+        <div class="section-head"><h3>${esc(selected||"Beiträge")}</h3><span>${posts.length}</span></div>
+        <input class="field" id="ordnerPostSearch" type="search" placeholder="Beitrag suchen…" value="${esc(ordnerPostQuery)}">
+        <div class="ordner-post-list">${postRows||`<div class="empty">${busy?"Lade Beiträge…":selected?"Keine Beiträge in diesem Ordner.":"Ordner links wählen."}</div>`}</div>
+        <div class="ordner-move-row">
+          <select class="field" id="ordnerMoveTarget">${catOptions}</select>
+          <button class="btn" id="ordnerMoveBtn" type="button" ${ordnerEdit.filename?"":"disabled"}>Beitrag verschieben</button>
+        </div>
+      </div>
+      <div class="panel ordner-editor">
+        <div class="section-head"><h3>Editor</h3><span>${ordnerEdit.filename?esc(ordnerEdit.filename):"Beitrag wählen"}</span></div>
+        ${ordnerEdit.filename?`<textarea class="paste-area ordner-editor-area" id="ordnerEditor" spellcheck="false">${esc(ordnerEdit.markdown)}</textarea>
+        <div class="ordner-editor-actions">
+          <button class="btn" id="ordnerEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
+          <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(ordnerEdit.postId||ordnerEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">Live öffnen</a>
+          <button class="btn primary" id="ordnerSaveBtn" type="button">Live speichern (ohne Push)</button>
+        </div>
+        <div class="upload-status" id="ordnerEditorStatus">${esc(ordnerEditorStatus||"Korrekturen gehen direkt live — ohne Benachrichtigung an Besucher.")}</div>`:`<div class="empty">Links einen Beitrag wählen. Der Markdown-Text erscheint hier zum Bearbeiten.</div>`}
+      </div>
     </div>
   </section>`;
 }
@@ -1626,6 +1821,109 @@ function renderTechStatus(ctx){
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
 }
+function bindOrdnerUi(){
+  document.querySelectorAll("[data-ordner-cat]").forEach(row=>{
+    row.onclick=e=>{
+      if(e.target.closest("button"))return;
+      ordnerSelectedCat=row.getAttribute("data-ordner-cat")||ordnerSelectedCat;
+      ordnerRenameValue="";
+      renderShell();
+    };
+  });
+  document.querySelectorAll("[data-cat-up]").forEach(btn=>{btn.onclick=e=>{e.stopPropagation();const idx=Number(btn.dataset.catUp);const name=categoryLayoutDraft.order?.[idx];if(!name)return;moveCategoryInDraft(name,-1);renderShell()}});
+  document.querySelectorAll("[data-cat-down]").forEach(btn=>{btn.onclick=e=>{e.stopPropagation();const idx=Number(btn.dataset.catDown);const name=categoryLayoutDraft.order?.[idx];if(!name)return;moveCategoryInDraft(name,1);renderShell()}});
+  document.querySelectorAll("[data-cat-main]").forEach(btn=>{btn.onclick=e=>{e.stopPropagation();const idx=Number(btn.dataset.catMain);const name=categoryLayoutDraft.order?.[idx];if(!name)return;toggleCategoryMainDraft(name);renderShell()}});
+  const catSearch=document.getElementById("ordnerCatSearch");if(catSearch)catSearch.oninput=e=>{ordnerCatSearch=e.target.value;renderShellPreserveField("ordnerCatSearch",()=>{})};
+  const postSearch=document.getElementById("ordnerPostSearch");if(postSearch)postSearch.oninput=e=>{ordnerPostQuery=e.target.value;renderShellPreserveField("ordnerPostSearch",()=>{})};
+  const renameInput=document.getElementById("ordnerRenameInput");if(renameInput)renameInput.oninput=e=>{ordnerRenameValue=e.target.value};
+  document.querySelectorAll("[data-ordner-post]").forEach(btn=>{btn.onclick=async()=>{
+    const fn=btn.getAttribute("data-ordner-post");
+    if(ordnerEdit.dirty&&!confirm("Ungespeicherte Änderungen verwerfen?"))return;
+    await loadOrdnerPost(fn);
+    renderShell();
+  }});
+  const editor=document.getElementById("ordnerEditor");if(editor)editor.oninput=e=>{ordnerEdit={...ordnerEdit,markdown:e.target.value,dirty:true}};
+  const dataReload=document.getElementById("ordnerDataReloadBtn");if(dataReload)dataReload.onclick=async()=>{
+    if(ordnerEdit.dirty&&!confirm("Ungespeicherte Änderungen verwerfen und neu laden?"))return;
+    categoryLayoutLoaded=false;ordnerCatalogLoaded=false;setOrdnerStatus("Lade…");
+    await ensureOrdnerData(true);
+    setOrdnerStatus("Ordner und Beiträge neu geladen.");
+    renderShell();
+  };
+  const layoutSave=document.getElementById("ordnerLayoutSaveBtn");if(layoutSave)layoutSave.onclick=async()=>{
+    if(!confirm("Ordner-Reihenfolge live speichern?\n\nBesucher sehen die Änderung unter Kategorien nach dem nächsten Laden."))return;
+    layoutSave.disabled=true;setOrdnerStatus("Speichere Ordner…");
+    try{
+      const result=await workerPostRequest("category-layout",{main:categoryLayoutDraft.main||[],order:categoryLayoutDraft.order||[]});
+      addAdminLog("Ordner","Kategorie-Layout live gespeichert",`${(categoryLayoutDraft.main||[]).length} Haupt · ${(categoryLayoutDraft.order||[]).length} gesamt`);
+      setOrdnerStatus(`Gespeichert · ${(categoryLayoutDraft.main||[]).length} Hauptbereiche · Commit ${String(result.commitSha||"").slice(0,7)}`);
+      toast("Ordner-Reihenfolge live");
+    }catch(e){setOrdnerStatus(`Fehler: ${e.message||e}`);toast(e.message||"Speichern fehlgeschlagen")}
+    finally{layoutSave.disabled=false}
+  };
+  const renameBtn=document.getElementById("ordnerRenameBtn");if(renameBtn)renameBtn.onclick=async()=>{
+    const from=ordnerSelectedCat;
+    const to=(document.getElementById("ordnerRenameInput")?.value||ordnerRenameValue||"").trim();
+    if(!from||!to){toast("Ordner und neuer Name nötig");return}
+    if(!confirm(`Ordner „${from}“ in „${to}“ umbenennen?\n\nAlle Beiträge in diesem Ordner werden angepasst.`))return;
+    renameBtn.disabled=true;setOrdnerStatus("Benenne um…");
+    try{
+      const result=await workerPostRequest("category/rename",{fromLabel:from,toLabel:to});
+      addAdminLog("Ordner","Ordner umbenannt",`${from} → ${to} · ${result.updatedPosts||0} Beiträge`);
+      ordnerSelectedCat=to;ordnerRenameValue="";categoryLayoutLoaded=false;ordnerCatalogLoaded=false;
+      await ensureOrdnerData(true);
+      setOrdnerStatus(`Umbenannt: ${result.updatedPosts||0} Beiträge aktualisiert.`);
+      toast("Ordner umbenannt");
+      renderShell();
+    }catch(e){setOrdnerStatus(`Fehler: ${e.message||e}`);toast(e.message||"Umbenennen fehlgeschlagen")}
+    finally{renameBtn.disabled=false}
+  };
+  const moveBtn=document.getElementById("ordnerMoveBtn");if(moveBtn)moveBtn.onclick=async()=>{
+    const filename=ordnerEdit.filename;
+    const category=(document.getElementById("ordnerMoveTarget")?.value||"").trim();
+    if(!filename||!category){toast("Beitrag wählen und Ziel-Ordner setzen");return}
+    if(!confirm(`Beitrag nach „${category}“ verschieben?`))return;
+    moveBtn.disabled=true;
+    try{
+      await workerPostRequest("post/category",{filename,category});
+      addAdminLog("Beitrag","In anderen Ordner verschoben",`${filename} → ${category}`);
+      ordnerCatalogLoaded=false;
+      await ensureOrdnerCatalog(true);
+      ordnerSelectedCat=category;
+      if(ordnerEdit.filename===filename){ordnerEdit={...ordnerEdit,category};await loadOrdnerPost(filename)}
+      setOrdnerStatus(`Verschoben: ${filename}`);
+      toast("Beitrag verschoben");
+      renderShell();
+    }catch(e){setOrdnerStatus(`Fehler: ${e.message||e}`);toast(e.message||"Verschieben fehlgeschlagen")}
+    finally{moveBtn.disabled=false}
+  };
+  const editorReload=document.getElementById("ordnerEditorReloadBtn");if(editorReload)editorReload.onclick=async()=>{
+    if(!ordnerEdit.filename)return;
+    if(ordnerEdit.dirty&&!confirm("Ungespeicherte Änderungen verwerfen?"))return;
+    await loadOrdnerPost(ordnerEdit.filename);
+    renderShell();
+  };
+  const saveBtn=document.getElementById("ordnerSaveBtn");if(saveBtn)saveBtn.onclick=async()=>{
+    if(!ordnerEdit.filename)return;
+    const markdown=document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown;
+    if(!markdown.trim()){toast("Markdown ist leer");return}
+    if(!confirm(`Beitrag „${ordnerEdit.filename}“ live speichern?\n\nKein Push — nur Korrektur für Besucher.`))return;
+    saveBtn.disabled=true;setOrdnerEditorStatus("Speichere live…");
+    try{
+      const result=await workerPostRequest("post/update",{filename:ordnerEdit.filename,markdown,sha:ordnerEdit.sha,skipPush:true});
+      ordnerEdit={...ordnerEdit,markdown,sha:"",dirty:false};
+      ordnerCatalogLoaded=false;
+      await ensureOrdnerCatalog(true);
+      addAdminLog("Korrektur","Beitrag live ohne Push",ordnerEdit.filename);
+      setOrdnerEditorStatus(`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)} · ohne Push`);
+      toast("Live gespeichert (ohne Push)");
+      renderShell();
+    }catch(e){
+      setOrdnerEditorStatus(`Fehler: ${e.message||e}`);
+      toast(e.message||"Speichern fehlgeschlagen");
+    }finally{saveBtn.disabled=false}
+  };
+}
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
   const tabSelect=document.getElementById("adminTabSelect");if(tabSelect)tabSelect.onchange=e=>navigateAdmin(e.target.value);
@@ -1658,6 +1956,7 @@ function bindUi(){
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
   bindRankCards();
+  bindOrdnerUi();
 }
 function bindCommandCenterForms(){
   function applyPreview(width,height,mode){
