@@ -22,6 +22,11 @@ import {
   sendWelcomePush,
   buildDailyPushPreview
 } from "./daily-push-admin.js";
+import {
+  readJummahPushStatus,
+  ensureJummahPushSchedulerFresh,
+  sendJummahTestPush
+} from "./jummah-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -67,6 +72,8 @@ export default {
           prayerCron: "*/5 * * * *",
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
+          jummahPushScheduler: "cloudflare-worker-jummah-v1",
+          jummahPushCron: "*/5 * * * *",
           scheduler: "ready"
         }, cors);
       }
@@ -78,6 +85,11 @@ export default {
 
       if (url.pathname === "/api/daily/status" && request.method === "GET") {
         const result = await readDailyPushStatus(env, githubGet, base64ToUtf8);
+        return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/jummah/status" && request.method === "GET") {
+        const result = await readJummahPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, 200);
       }
 
@@ -115,6 +127,14 @@ export default {
         const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
         if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
         const result = await sendDailyTestPush(env, input);
+        return json({ ok: Boolean(result.sent), ...result }, cors, result.sent ? 200 : 503);
+      }
+
+      if (url.pathname === "/api/jummah/test" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
+        if (!subscriptionId) return json({ ok: false, error: "subscriptionId fehlt" }, cors, 400);
+        const result = await sendJummahTestPush(env, input);
         return json({ ok: Boolean(result.sent), ...result }, cors, result.sent ? 200 : 503);
       }
 
@@ -165,8 +185,13 @@ export default {
         "/api/admin/daily/test",
         "/api/admin/daily/preview"
       ]);
+      const jummahPaths = new Set([
+        "/api/admin/jummah/status",
+        "/api/admin/jummah/test",
+        "/api/admin/jummah/run"
+      ]);
 
-      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -201,6 +226,14 @@ export default {
         assertConfigured(env);
         assertAuthorized(request, env);
         const result = await readDailyPushStatus(env, githubGet, base64ToUtf8);
+        return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/jummah/status") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const result = await readJummahPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, 200);
       }
 
@@ -274,6 +307,16 @@ export default {
         }
       }
 
+      if (jummahPaths.has(url.pathname)) {
+        if (url.pathname.endsWith("/test")) {
+          return json(await sendJummahTestPush(env, input), cors);
+        }
+        if (url.pathname.endsWith("/run")) {
+          const result = await ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
+          return json(result, cors, result.ok === false ? 503 : 200);
+        }
+      }
+
       if (publishPaths.has(url.pathname)) {
         return json(await publishPostFromMarkdown(env, input, ctx), cors);
       }
@@ -304,6 +347,7 @@ export default {
     ctx.waitUntil(processAllPendingPushes(env));
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
+    ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
   }
 };
 

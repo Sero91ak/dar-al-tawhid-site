@@ -10,6 +10,7 @@ on:
       - cloudflare/wrangler.toml
       - cloudflare/prayer-push-*.js
       - cloudflare/daily-push-*.js
+      - cloudflare/jummah-push-*.js
       - cloudflare/post-push-admin.js
       - .github/workflows/deploy-admin-publisher.yml
 

@@ -631,6 +631,57 @@ async function workerPostRequest(path,payload){
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
+async function workerGetRequest(path,{admin=false}={}){
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const headers=admin&&secret?{"X-Admin-Secret":secret}:{};
+  const res=await fetch(workerEndpoint(path),{cache:"no-store",headers});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  return data;
+}
+function formatJummahPushTime(iso){if(!iso)return"—";try{return new Date(iso).toLocaleString("de-DE")}catch(e){return String(iso)}}
+function renderJummahPushStatusBox(payload){
+  const st=payload?.status||payload||{};
+  const err=st.lastError||payload?.error||"";
+  const active=st.schedulerStatus||"unbekannt";
+  const pill=active==="success"?"OK":active==="error"?"Fehler":"Prüfen";
+  const src=st.timeSource==="manual"?"Manuell":st.timeSource==="dhuhr-auto"?"Automatisch nach Dhuhr":st.timeSource||"—";
+  return `<div class="status-row"><span><b>Jumuʿah-Push aktiv</b><br>Engine: ${esc(st.schedulerEngine||"—")} · Quelle: ${esc(String(st.userSource||"supabase"))}</span><strong class="status-pill">${esc(pill)}</strong></div>
+  <div class="status-row"><span><b>Nutzer mit Jumuʿah-Push</b><br>${esc(String(st.usersWithJummah??st.subscriptionsTotal??0))} registriert</span><strong class="status-pill">${st.usersWithJummah>0?"Aktiv":"0"}</strong></div>
+  <div class="status-row"><span><b>Nächster Morgenpush (09:00)</b><br>${esc(formatJummahPushTime(st.nextMorningPush?.sendAfter))} · ${esc(st.nextMorningPush?.time||"—")}</span><strong class="status-pill">Freitag</strong></div>
+  <div class="status-row"><span><b>Nächster Vorabpush</b><br>${esc(formatJummahPushTime(st.nextAdvancePush?.sendAfter))} · ${esc(st.nextAdvancePush?.time||"—")}</span><strong class="status-pill">${esc(src)}</strong></div>
+  <div class="status-row"><span><b>Nächster Hauptpush</b><br>${esc(formatJummahPushTime(st.nextMainPush?.sendAfter))} · ${esc(st.nextMainPush?.time||"—")}</span><strong class="status-pill">${esc(src)}</strong></div>
+  <div class="status-row"><span><b>Letzter Jumuʿah-Push</b><br>${esc(st.lastPush?`${st.lastPush.mode} · ${st.lastPush.time} · ${st.lastRecipients||0} Empfänger`:"Noch keiner")}</span><strong class="status-pill">${st.lastPush?"OK":"—"}</strong></div>
+  <div class="status-row"><span><b>OneSignal / Fehler</b><br>${err?`<strong style="color:#ff9f9f">${esc(err)}</strong>`:esc(String(st.lastOneSignalResponse?.response||"Kein Fehler"))}</span><strong class="status-pill">${err?"Fehler":"OK"}</strong></div>`;
+}
+async function loadAdminJummahPushStatus(){
+  const box=document.getElementById("adminJummahPushStatus");
+  const note=document.getElementById("adminJummahPushNote");
+  if(!box)return;
+  box.innerHTML=`<div class="empty">Status wird geladen…</div>`;
+  try{
+    const data=await workerGetRequest("api/jummah/status");
+    box.innerHTML=renderJummahPushStatusBox(data);
+    if(note)note.textContent=data.ok?"Jumuʿah-Scheduler erreichbar.":"Jumuʿah-Status mit Hinweis geladen.";
+  }catch(e){
+    box.innerHTML=`<div class="status-row"><span><b>Fehler</b><br>${esc(e.message||String(e))}</span><strong class="status-pill">Fehler</strong></div>`;
+    if(note)note.textContent="Jumuʿah-Status konnte nicht geladen werden.";
+  }
+}
+async function runAdminJummahScheduler(){
+  const btn=document.getElementById("adminJummahRunBtn");
+  const note=document.getElementById("adminJummahPushNote");
+  if(btn){btn.disabled=true;btn.textContent="Läuft…"}
+  try{
+    const result=await workerPostRequest("api/admin/jummah/run",{});
+    if(note)note.textContent=result.reason||"Scheduler-Lauf abgeschlossen.";
+    toast(result.ok?"Jumuʿah-Scheduler OK":"Jumuʿah-Scheduler mit Hinweis");
+    await loadAdminJummahPushStatus();
+  }catch(e){
+    if(note)note.textContent=e.message||String(e);
+    toast(e.message||"Scheduler fehlgeschlagen");
+  }finally{if(btn){btn.disabled=false;btn.textContent="Scheduler jetzt ausführen"}}
+}
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
   document.getElementById("panel").innerHTML=`
@@ -1118,6 +1169,13 @@ function renderTech(ctx){
     <div class="panel">
       <div class="section-head"><h3>Technik</h3><span>Systemstatus</span></div>
       ${renderTechStatus(ctx)}
+      <div class="section-head" style="margin-top:16px"><h3>Jumuʿah-Push</h3><span>Freitag · getrennt von Gebets-Push</span></div>
+      <div class="status-list" id="adminJummahPushStatus"><div class="empty">Status wird geladen…</div></div>
+      <div class="quick-grid" style="margin-top:10px">
+        <button class="btn" id="adminJummahRefreshBtn" type="button">Status aktualisieren</button>
+        <button class="btn primary" id="adminJummahRunBtn" type="button">Scheduler jetzt ausführen</button>
+      </div>
+      <div class="upload-status" id="adminJummahPushNote" style="margin-top:8px">Nur freitags · Dhuhr-Fallback oder manuelle Moschee-Zeit</div>
       <div class="section-head" style="margin-top:16px"><h3>Backend-Anbindung</h3><span>Live-Funktionen</span></div>
       <div class="status-list">
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
@@ -1173,6 +1231,9 @@ function bindUi(){
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
+  const jummahRefreshBtn=document.getElementById("adminJummahRefreshBtn");if(jummahRefreshBtn)jummahRefreshBtn.onclick=()=>loadAdminJummahPushStatus();
+  const jummahRunBtn=document.getElementById("adminJummahRunBtn");if(jummahRunBtn)jummahRunBtn.onclick=()=>runAdminJummahScheduler();
+  if(document.getElementById("adminJummahPushStatus"))loadAdminJummahPushStatus();
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
