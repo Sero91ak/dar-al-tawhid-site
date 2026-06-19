@@ -116,6 +116,10 @@ if (!worker.includes("sendNewPostPush")) fail("worker.js: post push fehlt");
 const pushGuardFails = require("./push-system-guard.js").runPushSystemGuard();
 if (pushGuardFails) failed += pushGuardFails;
 
+// App-Update + Willkommens-Push-Schutz (Versions-Banner-Schleife)
+const versionGuardFails = require("./version-update-guard.js").runVersionUpdateGuard();
+if (versionGuardFails) failed += versionGuardFails;
+
 // Push scripts
 if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-prayer-push.js fehlt");
 if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");

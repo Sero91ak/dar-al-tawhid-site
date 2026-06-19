@@ -57,3 +57,12 @@ git checkout stable-last-working -- index.html admin/index.html service-worker.j
 - Admin Upload: **Besucher-App Schutz** Panel
 - Worker: `GET /api/admin/visitor-health` (mit Admin Secret)
 - CI: `node scripts/app-health-check.js`
+- **Version-Update-Schutz:** `node scripts/version-update-guard.js` (Banner-Schleife, HARD_REFRESH, Willkommens-Push)
+- **Push-Schutz:** `node scripts/push-system-guard.js`
+
+## Geschützte Update-Logik (nicht entfernen)
+
+- Versions-Banner nur bei echtem `version.json`-Unterschied
+- Schleifen-Schutz via `dar_version_update_pending` (sessionStorage)
+- `Aktualisieren` → `repairPushConnection` + `HARD_REFRESH` + Willkommens-Push
+- CI blockiert Deploy wenn Marker fehlen (`VERSION_UPDATE_GUARD` in `index.html`)

@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v24";
+  var ADMIN_SW_CACHE="dar-admin-stats-v25";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -311,6 +311,17 @@ main#panel.panel{
 .bulk-pack-zip-head b{font-size:11px;color:var(--gold);letter-spacing:.04em}
 .bulk-pack-zip-note{font-size:10px;color:var(--soft);line-height:1.45;margin-top:8px}
 .bulk-pack-zip-list{font-size:10px;color:var(--muted);margin-top:6px;max-height:88px;overflow:auto;line-height:1.45}
+.admin-actions-lead{margin:0 0 12px;color:var(--soft);font-size:11px;line-height:1.5}
+.admin-actions-head{margin-bottom:4px!important}
+.admin-fold{border:1px solid var(--line2);border-radius:16px;background:rgba(0,0,0,.14);margin-top:12px;overflow:hidden}
+.admin-fold>summary{padding:12px 14px;cursor:pointer;font-weight:950;color:var(--gold);font-size:12px;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.admin-fold>summary::-webkit-details-marker{display:none}
+.admin-fold>summary:after{content:"+";color:var(--muted);font-size:14px;font-weight:900}
+.admin-fold[open]>summary:after{content:"−"}
+.admin-fold-body{padding:0 14px 14px}
+.admin-step-strip{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.admin-step-chip{border:1px solid rgba(239,215,142,.28);border-radius:999px;padding:4px 9px;font-size:9px;font-weight:950;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;background:rgba(239,215,142,.06)}
+.bulk-pack-panel.is-featured{border-color:rgba(239,215,142,.42);background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.05))}
 @media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}}
 </style>
 </head>
@@ -805,21 +816,22 @@ function bindBulkZipUpload(){
   };
 }
 function renderBulkPackPanel(){
-  return `<div class="bulk-pack-panel" id="bulkPackPanel">
-    <div class="section-head" style="margin-top:0"><h3>Sammel-Paket</h3><span>mehrere Beiträge · ein Thema</span></div>
-    <p class="bulk-pack-hint">Mehrere Markdown-Beiträge auf einmal veröffentlichen. Jeder Beitrag wird wie gewohnt <strong>eigenständig</strong> in der Besucher-App angezeigt (Neueste, Kategorie, Einzelansicht). Beiträge mit einer Leerzeile und <code>===</code> trennen — oder mehrere <code>---</code>-Frontmatter-Blöcke hintereinander.</p>
+  return `<div class="bulk-pack-panel is-featured" id="bulkPackPanel">
+    <div class="section-head" style="margin-top:0"><h3>Sammel-Paket</h3><span>ZIP · Thema · Live</span></div>
+    <div class="admin-step-strip"><span class="admin-step-chip">1 ZIP wählen</span><span class="admin-step-chip">2 Kategorie</span><span class="admin-step-chip">3 Veröffentlichen</span></div>
+    <p class="bulk-pack-hint">Mehrere Beiträge zu <strong>einem Ordner</strong> (z. B. <em>Takfīr bi'l-ʿUmūm</em>). Jeder Beitrag erscheint einzeln in Neueste, Kategorie und Einzelansicht.</p>
     <div class="bulk-pack-zip" id="bulkPackZipBox">
       <div class="bulk-pack-zip-head">
-        <b>ZIP hochladen</b>
-        <label class="btn" for="bulkZipFileInput">ZIP-Datei wählen</label>
+        <b>Schritt 1 · ZIP hochladen</b>
+        <label class="btn primary" for="bulkZipFileInput">ZIP-Datei wählen</label>
         <input id="bulkZipFileInput" type="file" accept=".zip,application/zip" hidden>
       </div>
-      <p class="bulk-pack-zip-note">Alle <code>.md</code>-Dateien aus der ZIP werden automatisch ins Feld unten geladen (sortiert, mit <code>===</code> getrennt). Danach wie gewohnt Kategorie setzen und veröffentlichen.</p>
+      <p class="bulk-pack-zip-note">Alle <code>.md</code>-Dateien werden sortiert geladen und mit <code>===</code> getrennt. Bei Dateinamen mit „takfir“ / „umum“ wird die Kategorie automatisch vorgeschlagen.</p>
       <div class="bulk-pack-zip-list" id="bulkZipFileList"></div>
       <div class="bulk-pack-zip-note" id="bulkZipFileName" style="margin-top:4px;color:var(--gold)"></div>
     </div>
     <div class="bulk-pack-meta">
-      <input class="field" id="bulkCategoryInput" placeholder="Kategorie / Ordner (z. B. Takfīr bi'l-ʿUmūm)">
+      <input class="field" id="bulkCategoryInput" placeholder="Schritt 2 · Kategorie (z. B. Takfīr bi'l-ʿUmūm)">
       <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:0;min-height:42px">
         <input id="bulkPublishNews" type="checkbox" checked>
         <span>Nach dem Paket Fokus-News veröffentlichen</span>
@@ -1021,7 +1033,7 @@ function renderStart(ctx){
     ${folderCard("⑦","Statistik","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","stats",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
     ${folderCard("⑧","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
     ${folderCard("⑨","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
-    ${folderCard("⑩","Sammel-Paket","Mehrere Beiträge zu einem Thema auf einmal veröffentlichen.","actions-bulk","Paket")}
+    ${folderCard("⑩","Sammel-Paket","ZIP hochladen · Thema wählen · Paket live stellen.","actions-bulk","ZIP · Paket")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -1349,60 +1361,83 @@ function renderContent(){
 }
 function renderActions(rows,installs=installTotals()){
   const best=sortedRows(rows)[0];
-  return `<section class="split">
-    <div class="panel">
-      <div class="section-head" style="margin-top:0"><h3>Beitrag erstellen</h3><span>GitHub-Markdown</span></div>
-      <div class="upload-grid">
-        <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
-        <div class="upload-stack">
-          <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
-          <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
-          <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
+  return `<section class="split admin-actions-layout">
+    <div class="panel admin-actions-main">
+      <div class="section-head admin-actions-head"><h3>Aktionen</h3><span>Veröffentlichen</span></div>
+      <p class="admin-actions-lead">Einzelbeitrag oder Sammel-Paket per ZIP. Alle bestehenden Funktionen bleiben erhalten — nur übersichtlicher geordnet.</p>
+      ${renderBulkPackPanel()}
+      <details class="admin-fold" open>
+        <summary>Einzelbeitrag · Markdown</summary>
+        <div class="admin-fold-body">
+          <div class="upload-grid">
+            <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+            <div class="upload-stack">
+              <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
+              <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
+              <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
+              <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
+              <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
+            </div>
+          </div>
+          ${renderDraftPreview()}
+        </div>
+      </details>
+      <details class="admin-fold">
+        <summary>Worker-Verbindung</summary>
+        <div class="admin-fold-body">
           <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
-          <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret">
-          <label class="upload-status" style="display:flex;align-items:center;gap:8px">
+          <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret" style="margin-top:8px">
+          <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:8px 0 0;min-height:38px">
             <input id="rememberWorkerSecret" type="checkbox" ${savedWorkerSecret()?"checked":""}>
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
-          <button class="btn" id="forgetWorkerSecretBtn" type="button">Worker Secret löschen</button>
-          <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-          <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
-          <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
+          <button class="btn" id="forgetWorkerSecretBtn" type="button" style="margin-top:8px">Worker Secret löschen</button>
+          <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
-      </div>
-      ${renderBulkPackPanel()}
-      ${renderDraftPreview()}
-      <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
-      <div class="quick-grid">
-        <button class="quick" type="button" data-scroll-bulk><b>Sammel-Paket</b><small>Mehrere Beiträge zu einem Thema auf einmal veröffentlichen.</small></button>
-        <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown oben einfügen und über Cloudflare Worker veröffentlichen.</small></button>
-        <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
-        <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
-        <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
-      </div>
-      <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
-      <div class="section-head" style="margin-top:16px"><h3>Jumuʿah-Push</h3><span>Freitag</span></div>
-      <div class="status-list" id="adminJummahPushStatusActions"><div class="empty">Status wird geladen…</div></div>
-      <div class="quick-grid" style="margin-top:10px">
-        <button class="btn" id="adminJummahRefreshBtnActions" type="button">Jumuʿah-Status aktualisieren</button>
-        <button class="btn" id="adminJummahRunBtnActions" type="button">Plan prüfen (ohne Versand)</button>
-        <button class="btn primary" id="adminJummahLiveBtnActions" type="button">Live Push freigeben</button>
-      </div>
-      <div class="upload-status" id="adminJummahPushNoteActions" style="margin-top:8px">Admin sendet nicht automatisch an Besucher. Erst „Live Push freigeben“.</div>
-      ${renderPlanningPanel()}
-      ${renderNewsComposer({compact:true})}
-      <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
-      ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
-      <div class="preview-box">
-        <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
-        <div class="quick-grid">
-          <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
-          <a class="quick" href="${SITE_ORIGIN}/manifest.json" target="_blank" rel="noopener"><b>Manifest prüfen</b><small>PWA-Farbe, Name und Icons öffnen.</small></a>
-          <a class="quick" href="${SITE_ORIGIN}/service-worker.js" target="_blank" rel="noopener"><b>Service Worker prüfen</b><small>Cache- und Offline-Datei öffnen.</small></a>
-          <a class="quick" href="${workerHealthUrl()}" target="_blank" rel="noopener"><b>Worker Status</b><small>Cloudflare Worker Health-Check öffnen.</small></a>
+      </details>
+      <details class="admin-fold">
+        <summary>Schnellaktionen &amp; Test-Push</summary>
+        <div class="admin-fold-body">
+          <div class="quick-grid">
+            <button class="quick" type="button" data-scroll-bulk><b>Sammel-Paket</b><small>ZIP oder Markdown-Paket veröffentlichen.</small></button>
+            <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown einfügen und online stellen.</small></button>
+            <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
+            <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite bei den neuen Beiträgen öffnen.</small></a>
+            <a class="quick" href="${SITE_ORIGIN}/" target="_blank" rel="noopener"><b>Besucher-App</b><small>Startseite in neuem Fenster öffnen.</small></a>
+            <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Lokal auf diesem Admin-Gerät — kein Massenversand.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
+          </div>
+          <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
         </div>
-      </div>
+      </details>
+      <details class="admin-fold">
+        <summary>Jumuʿah-Push · Planung · News</summary>
+        <div class="admin-fold-body">
+          <div class="status-list" id="adminJummahPushStatusActions"><div class="empty">Status wird geladen…</div></div>
+          <div class="quick-grid" style="margin-top:10px">
+            <button class="btn" id="adminJummahRefreshBtnActions" type="button">Jumuʿah-Status aktualisieren</button>
+            <button class="btn" id="adminJummahRunBtnActions" type="button">Plan prüfen (ohne Versand)</button>
+            <button class="btn primary" id="adminJummahLiveBtnActions" type="button">Live Push freigeben</button>
+          </div>
+          <div class="upload-status" id="adminJummahPushNoteActions" style="margin-top:8px">Admin sendet nicht automatisch an Besucher. Erst „Live Push freigeben“.</div>
+          ${renderPlanningPanel()}
+          ${renderNewsComposer({compact:true})}
+        </div>
+      </details>
+      <details class="admin-fold">
+        <summary>Veröffentlichungsablauf &amp; App-Links</summary>
+        <div class="admin-fold-body">
+          ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
+          <div class="preview-box" style="margin-top:12px">
+            <div class="section-head"><h3>App-Aktionen</h3><span>schnelle Kontrolle</span></div>
+            <div class="quick-grid">
+              <a class="quick" href="${SITE_ORIGIN}/?refresh=${Date.now()}#home" target="_blank" rel="noopener"><b>Besucher-App hart aktualisieren</b><small>Mit frischem Refresh-Parameter öffnen.</small></a>
+              <a class="quick" href="${SITE_ORIGIN}/manifest.json" target="_blank" rel="noopener"><b>Manifest prüfen</b><small>PWA-Farbe, Name und Icons öffnen.</small></a>
+              <a class="quick" href="${SITE_ORIGIN}/service-worker.js" target="_blank" rel="noopener"><b>Service Worker prüfen</b><small>Cache- und Offline-Datei öffnen.</small></a>
+              <a class="quick" href="${workerHealthUrl()}" target="_blank" rel="noopener"><b>Worker Status</b><small>Cloudflare Worker Health-Check öffnen.</small></a>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
     <aside class="side-stack">
       <div class="panel">
