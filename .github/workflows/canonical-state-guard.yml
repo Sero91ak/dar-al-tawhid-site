@@ -77,3 +77,6 @@ jobs:
 
       - name: App health check script
         run: node scripts/app-health-check.js
+
+      - name: Version update guard (Banner-Schleife + Willkommens-Push)
+        run: node scripts/version-update-guard.js
