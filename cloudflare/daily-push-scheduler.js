@@ -404,6 +404,9 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
       loadDailyRegistrations(env)
     ]);
     dailyContent = await loadDailyContentForPush(env, deps, canonicalDateKey);
+    if (!dailyContent?.dua?.id && !dailyContent?.recommendation?.id) {
+      dailyContent = await regenerateDailyContent(env, deps, canonicalDateKey, tzCanonical);
+    }
   } catch (err) {
     const status = {
       ok: false,

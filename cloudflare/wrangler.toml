@@ -10,6 +10,11 @@ POSTS_DIR = "content/posts"
 ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
 UPDATES_PATH = "content/updates/current.json"
 SCHEDULE_PATH = "content/admin/planned-posts.json"
+PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json"
+DAILY_PUSH_STATUS_PATH = "content/admin/daily-push-status.json"
+
+[triggers]
+crons = ["*/5 * * * *"]
 
 # Secrets (einmalig setzen, bleiben am Worker gespeichert):
 #   wrangler secret put GITHUB_TOKEN
