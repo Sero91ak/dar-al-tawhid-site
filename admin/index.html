@@ -655,32 +655,34 @@ function renderJummahPushStatusBox(payload){
   <div class="status-row"><span><b>OneSignal / Fehler</b><br>${err?`<strong style="color:#ff9f9f">${esc(err)}</strong>`:esc(String(st.lastOneSignalResponse?.response||"Kein Fehler"))}</span><strong class="status-pill">${err?"Fehler":"OK"}</strong></div>`;
 }
 async function loadAdminJummahPushStatus(){
-  const box=document.getElementById("adminJummahPushStatus");
-  const note=document.getElementById("adminJummahPushNote");
-  if(!box)return;
-  box.innerHTML=`<div class="empty">Status wird geladen…</div>`;
+  const boxes=[document.getElementById("adminJummahPushStatus"),document.getElementById("adminJummahPushStatusActions")].filter(Boolean);
+  const notes=[document.getElementById("adminJummahPushNote"),document.getElementById("adminJummahPushNoteActions")].filter(Boolean);
+  if(!boxes.length)return;
+  boxes.forEach(box=>{box.innerHTML=`<div class="empty">Status wird geladen…</div>`});
   try{
     const data=await workerGetRequest("api/jummah/status");
-    box.innerHTML=renderJummahPushStatusBox(data);
-    if(note)note.textContent=data.ok?"Jumuʿah-Scheduler erreichbar.":"Jumuʿah-Status mit Hinweis geladen.";
+    const html=renderJummahPushStatusBox(data);
+    boxes.forEach(box=>{box.innerHTML=html});
+    notes.forEach(note=>{if(note)note.textContent=data.ok?"Jumuʿah-Scheduler erreichbar.":"Jumuʿah-Status mit Hinweis geladen."});
   }catch(e){
-    box.innerHTML=`<div class="status-row"><span><b>Fehler</b><br>${esc(e.message||String(e))}</span><strong class="status-pill">Fehler</strong></div>`;
-    if(note)note.textContent="Jumuʿah-Status konnte nicht geladen werden.";
+    const err=`<div class="status-row"><span><b>Fehler</b><br>${esc(e.message||String(e))}</span><strong class="status-pill">Fehler</strong></div>`;
+    boxes.forEach(box=>{box.innerHTML=err});
+    notes.forEach(note=>{if(note)note.textContent="Jumuʿah-Status konnte nicht geladen werden."});
   }
 }
 async function runAdminJummahScheduler(){
-  const btn=document.getElementById("adminJummahRunBtn");
-  const note=document.getElementById("adminJummahPushNote");
-  if(btn){btn.disabled=true;btn.textContent="Läuft…"}
+  const btns=[document.getElementById("adminJummahRunBtn"),document.getElementById("adminJummahRunBtnActions")].filter(Boolean);
+  const notes=[document.getElementById("adminJummahPushNote"),document.getElementById("adminJummahPushNoteActions")].filter(Boolean);
+  btns.forEach(btn=>{btn.disabled=true;btn.textContent="Läuft…"});
   try{
     const result=await workerPostRequest("api/admin/jummah/run",{});
     if(note)note.textContent=result.reason||"Scheduler-Lauf abgeschlossen.";
     toast(result.ok?"Jumuʿah-Scheduler OK":"Jumuʿah-Scheduler mit Hinweis");
     await loadAdminJummahPushStatus();
   }catch(e){
-    if(note)note.textContent=e.message||String(e);
+    notes.forEach(note=>{if(note)note.textContent=e.message||String(e)});
     toast(e.message||"Scheduler fehlgeschlagen");
-  }finally{if(btn){btn.disabled=false;btn.textContent="Scheduler jetzt ausführen"}}
+  }finally{btns.forEach(btn=>{btn.disabled=false;btn.textContent=btn.id.includes("Actions")?"Jumuʿah-Scheduler starten":"Scheduler jetzt ausführen"})}
 }
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
@@ -1090,6 +1092,13 @@ function renderActions(rows,installs=installTotals()){
         <div class="quick push-test-card"><b>Test-Push nur dieses Gerät</b><small>Wähle ein Gebet. Die Benachrichtigung bleibt lokal auf diesem Admin-Gerät.</small><div class="push-test-controls"><select class="field" id="adminPushPrayerSelect" aria-label="Gebet für Test-Push"><option value="Fajr">Fajr</option><option value="Dhuhr">Dhuhr</option><option value="ʿAṣr">ʿAṣr</option><option value="Maghrib">Maghrib</option><option value="ʿIshāʾ" selected>ʿIshāʾ</option><option value="Taḥajjud">Taḥajjud</option></select><button class="btn primary" id="adminLocalPushTestBtn" type="button">Senden</button></div></div>
       </div>
       <div class="upload-status" id="adminPushTestStatus" style="margin-top:10px">Test-Push nutzt nur dieses Gerät und keinen Massenversand.</div>
+      <div class="section-head" style="margin-top:16px"><h3>Jumuʿah-Push</h3><span>Freitag</span></div>
+      <div class="status-list" id="adminJummahPushStatusActions"><div class="empty">Status wird geladen…</div></div>
+      <div class="quick-grid" style="margin-top:10px">
+        <button class="btn" id="adminJummahRefreshBtnActions" type="button">Jumuʿah-Status aktualisieren</button>
+        <button class="btn primary" id="adminJummahRunBtnActions" type="button">Jumuʿah-Scheduler starten</button>
+      </div>
+      <div class="upload-status" id="adminJummahPushNoteActions" style="margin-top:8px">Freitags · Dhuhr-Fallback oder manuelle Moschee-Zeit · Details auch unter Technik</div>
       ${renderPlanningPanel()}
       ${renderNewsComposer()}
       <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
@@ -1233,7 +1242,9 @@ function bindUi(){
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const jummahRefreshBtn=document.getElementById("adminJummahRefreshBtn");if(jummahRefreshBtn)jummahRefreshBtn.onclick=()=>loadAdminJummahPushStatus();
   const jummahRunBtn=document.getElementById("adminJummahRunBtn");if(jummahRunBtn)jummahRunBtn.onclick=()=>runAdminJummahScheduler();
-  if(document.getElementById("adminJummahPushStatus"))loadAdminJummahPushStatus();
+  const jummahRefreshBtnActions=document.getElementById("adminJummahRefreshBtnActions");if(jummahRefreshBtnActions)jummahRefreshBtnActions.onclick=()=>loadAdminJummahPushStatus();
+  const jummahRunBtnActions=document.getElementById("adminJummahRunBtnActions");if(jummahRunBtnActions)jummahRunBtnActions.onclick=()=>runAdminJummahScheduler();
+  if(document.getElementById("adminJummahPushStatus")||document.getElementById("adminJummahPushStatusActions"))loadAdminJummahPushStatus();
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
