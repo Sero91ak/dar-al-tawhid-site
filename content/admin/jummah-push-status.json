@@ -1,19 +1,50 @@
 {
-  "updatedAt": null,
-  "ok": false,
-  "schedulerStatus": "pending",
+  "updatedAt": "2026-06-19T14:20:12.273Z",
+  "ok": true,
+  "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v1",
+  "dryRun": false,
   "userSource": "supabase-only",
-  "subscriptionsTotal": 0,
+  "cronIntervalMinutes": 5,
+  "lastCronRun": "2026-06-19T14:20:12.273Z",
+  "subscriptionsTotal": 1,
+  "usersWithJummah": 1,
+  "locationGroups": 1,
   "timeSource": "dhuhr-auto",
   "nextMorningPush": null,
   "nextAdvancePush": null,
   "nextMainPush": null,
+  "nextPlannedPush": null,
+  "windowStart": "2026-06-19T14:05:11.016Z",
+  "windowEnd": "2026-06-20T16:20:11.016Z",
+  "scheduled": 0,
+  "recipients": 0,
+  "skippedPast": 3,
+  "skippedWindow": 0,
+  "duplicates": 0,
+  "errors": 0,
   "lastPush": null,
   "lastRecipients": 0,
   "lastOneSignalResponse": null,
-  "lastError": "Noch kein Scheduler-Lauf",
+  "lastError": null,
   "planned": [],
+  "skippedPastDetails": [
+    {
+      "mode": "morning",
+      "sendAfter": "2026-06-19T07:00:00.000Z",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "mode": "advance",
+      "sendAfter": "2026-06-19T11:03:00.000Z",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "mode": "entry",
+      "sendAfter": "2026-06-19T11:33:00.000Z",
+      "timeZone": "Europe/Berlin"
+    }
+  ],
   "oneSignalResponses": [],
   "errorDetails": []
 }
