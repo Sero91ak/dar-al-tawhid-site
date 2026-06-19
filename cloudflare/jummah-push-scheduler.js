@@ -360,6 +360,7 @@ export function readJummahPushStatusFromKv() {
 
 export async function runJummahPushScheduler(env, options = {}, deps = {}) {
   const onlySub = String(options.subscriptionId || options.subscription_id || "").trim();
+  const dryRun = Boolean(options.dryRun);
   const lookahead = Number(env.JUMMAH_SCHEDULE_LOOKAHEAD_MINUTES || SCHEDULE_LOOKAHEAD_MINUTES);
   const grace = Number(env.JUMMAH_SCHEDULE_GRACE_MINUTES || SCHEDULE_GRACE_MINUTES);
 
@@ -407,7 +408,26 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
           continue;
         }
         try {
-          await sendJummahPush(env, group, slot, stats, sentInRun);
+          if (dryRun) {
+            const ids = group.subscriptionIds.slice(0, 2000);
+            if (ids.length) {
+              stats.scheduled += 1;
+              stats.recipients += ids.length;
+              stats.planned.push({
+                prayer: "Jumuʿah",
+                key: "jummah",
+                mode: slot.mode,
+                time: slot.timeLabel,
+                sendAfter: slot.sendAfter.toISOString(),
+                recipients: ids.length,
+                timeZone: group.timeZone,
+                timeSource: group.jummahUseManualTime ? "manual" : "dhuhr-auto",
+                dryRun: true
+              });
+            }
+          } else {
+            await sendJummahPush(env, group, slot, stats, sentInRun);
+          }
         } catch (err) {
           stats.errors += 1;
           stats.errorDetails.push(`${slot.mode} Jumuʿah: ${err.message || err}`);
@@ -424,6 +444,7 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
     ok: stats.errors === 0 && userCount > 0,
     schedulerStatus: stats.errors ? "error" : userCount ? "success" : "warning",
     schedulerEngine: "cloudflare-worker-jummah-v1",
+    dryRun,
     userSource: "supabase-only",
     cronIntervalMinutes: 5,
     lastCronRun: new Date().toISOString(),
@@ -468,7 +489,9 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
     ? `Fehler: ${stats.errorDetails[0]} (${stats.scheduled} geplant, ${stats.errors} Fehler)`
     : userCount === 0
       ? "Keine Jumuʿah-Registrierungen in Supabase gefunden."
-      : `Erfolgreich: ${stats.scheduled} Jumuʿah-Pushs für ${stats.recipients} Empfänger geplant.`;
+      : dryRun
+        ? `Trockenlauf: ${stats.scheduled} Jumuʿah-Pushs für ${stats.recipients} Empfänger geplant (kein Versand).`
+        : `Erfolgreich: ${stats.scheduled} Jumuʿah-Pushs für ${stats.recipients} Empfänger geplant.`;
 
   return {
     ok: stats.errors === 0 && userCount > 0,

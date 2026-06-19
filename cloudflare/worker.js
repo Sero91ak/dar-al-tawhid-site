@@ -312,7 +312,8 @@ export default {
           return json(await sendJummahTestPush(env, input), cors);
         }
         if (url.pathname.endsWith("/run")) {
-          const result = await ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
+          const live = Boolean(input.live || input.livePush);
+          const result = await ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true, dryRun: !live });
           return json(result, cors, result.ok === false ? 503 : 200);
         }
       }

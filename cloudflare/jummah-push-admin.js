@@ -55,7 +55,10 @@ function schedulerDeps(githubGet, githubPut, base64ToUtf8, utf8ToBase64) {
 export async function runJummahSchedulerNow(env, deps = {}, options = {}) {
   return runJummahPushScheduler(
     env,
-    { subscriptionId: options.subscriptionId || "" },
+    {
+      subscriptionId: options.subscriptionId || "",
+      dryRun: Boolean(options.dryRun)
+    },
     schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
   );
 }
@@ -64,7 +67,7 @@ export async function ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf
   return runJummahSchedulerNow(
     env,
     { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },
-    { force: Boolean(options?.force), subscriptionId: options.subscriptionId || "" }
+    { force: Boolean(options?.force), subscriptionId: options.subscriptionId || "", dryRun: Boolean(options?.dryRun) }
   );
 }
 

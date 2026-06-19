@@ -670,19 +670,28 @@ async function loadAdminJummahPushStatus(){
     notes.forEach(note=>{if(note)note.textContent="Jumuʿah-Status konnte nicht geladen werden."});
   }
 }
-async function runAdminJummahScheduler(){
+async function runAdminJummahScheduler({live=false}={}){
   const btns=[document.getElementById("adminJummahRunBtn"),document.getElementById("adminJummahRunBtnActions")].filter(Boolean);
+  const liveBtns=[document.getElementById("adminJummahLiveBtn"),document.getElementById("adminJummahLiveBtnActions")].filter(Boolean);
   const notes=[document.getElementById("adminJummahPushNote"),document.getElementById("adminJummahPushNoteActions")].filter(Boolean);
-  btns.forEach(btn=>{btn.disabled=true;btn.textContent="Läuft…"});
+  if(live){
+    if(!confirm("Live Push freigeben?\n\nJumuʿah-Pushs werden jetzt an alle registrierten Besucher gesendet."))return;
+    if(!confirm("Letzte Bestätigung: Wirklich live an alle Besucher senden?"))return;
+  }
+  btns.forEach(btn=>{btn.disabled=true;btn.textContent=live?"Sende live…":"Prüfe Plan…"});
+  liveBtns.forEach(btn=>{btn.disabled=true});
   try{
-    const result=await workerPostRequest("api/admin/jummah/run",{});
-    if(note)note.textContent=result.reason||"Scheduler-Lauf abgeschlossen.";
-    toast(result.ok?"Jumuʿah-Scheduler OK":"Jumuʿah-Scheduler mit Hinweis");
+    const result=await workerPostRequest("api/admin/jummah/run",{live:!!live});
+    notes.forEach(note=>{if(note)note.textContent=result.reason||(live?"Live-Lauf abgeschlossen.":"Plan geprüft – kein Versand an Besucher.")});
+    toast(live?(result.ok?"Live Push ausgelöst":"Live Push mit Hinweis"):(result.ok?"Plan geprüft (ohne Versand)":"Plan-Prüfung mit Hinweis"));
     await loadAdminJummahPushStatus();
   }catch(e){
     notes.forEach(note=>{if(note)note.textContent=e.message||String(e)});
-    toast(e.message||"Scheduler fehlgeschlagen");
-  }finally{btns.forEach(btn=>{btn.disabled=false;btn.textContent=btn.id.includes("Actions")?"Jumuʿah-Scheduler starten":"Scheduler jetzt ausführen"})}
+    toast(e.message||"Jumuʿah-Aktion fehlgeschlagen");
+  }finally{
+    btns.forEach(btn=>{btn.disabled=false;btn.textContent="Plan prüfen (ohne Versand)"});
+    liveBtns.forEach(btn=>{btn.disabled=false});
+  }
 }
 function renderLogin(){
   document.getElementById("topbar").hidden=true;
@@ -1096,9 +1105,10 @@ function renderActions(rows,installs=installTotals()){
       <div class="status-list" id="adminJummahPushStatusActions"><div class="empty">Status wird geladen…</div></div>
       <div class="quick-grid" style="margin-top:10px">
         <button class="btn" id="adminJummahRefreshBtnActions" type="button">Jumuʿah-Status aktualisieren</button>
-        <button class="btn primary" id="adminJummahRunBtnActions" type="button">Jumuʿah-Scheduler starten</button>
+        <button class="btn" id="adminJummahRunBtnActions" type="button">Plan prüfen (ohne Versand)</button>
+        <button class="btn primary" id="adminJummahLiveBtnActions" type="button">Live Push freigeben</button>
       </div>
-      <div class="upload-status" id="adminJummahPushNoteActions" style="margin-top:8px">Freitags · Dhuhr-Fallback oder manuelle Moschee-Zeit · Details auch unter Technik</div>
+      <div class="upload-status" id="adminJummahPushNoteActions" style="margin-top:8px">Admin sendet nicht automatisch an Besucher. Erst „Live Push freigeben“.</div>
       ${renderPlanningPanel()}
       ${renderNewsComposer()}
       <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
@@ -1182,9 +1192,10 @@ function renderTech(ctx){
       <div class="status-list" id="adminJummahPushStatus"><div class="empty">Status wird geladen…</div></div>
       <div class="quick-grid" style="margin-top:10px">
         <button class="btn" id="adminJummahRefreshBtn" type="button">Status aktualisieren</button>
-        <button class="btn primary" id="adminJummahRunBtn" type="button">Scheduler jetzt ausführen</button>
+        <button class="btn" id="adminJummahRunBtn" type="button">Plan prüfen (ohne Versand)</button>
+        <button class="btn primary" id="adminJummahLiveBtn" type="button">Live Push freigeben</button>
       </div>
-      <div class="upload-status" id="adminJummahPushNote" style="margin-top:8px">Nur freitags · Dhuhr-Fallback oder manuelle Moschee-Zeit</div>
+      <div class="upload-status" id="adminJummahPushNote" style="margin-top:8px">Admin sendet nicht automatisch an Besucher. Erst „Live Push freigeben“.</div>
       <div class="section-head" style="margin-top:16px"><h3>Backend-Anbindung</h3><span>Live-Funktionen</span></div>
       <div class="status-list">
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
@@ -1241,9 +1252,11 @@ function bindUi(){
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const jummahRefreshBtn=document.getElementById("adminJummahRefreshBtn");if(jummahRefreshBtn)jummahRefreshBtn.onclick=()=>loadAdminJummahPushStatus();
-  const jummahRunBtn=document.getElementById("adminJummahRunBtn");if(jummahRunBtn)jummahRunBtn.onclick=()=>runAdminJummahScheduler();
+  const jummahRunBtn=document.getElementById("adminJummahRunBtn");if(jummahRunBtn)jummahRunBtn.onclick=()=>runAdminJummahScheduler({live:false});
+  const jummahLiveBtn=document.getElementById("adminJummahLiveBtn");if(jummahLiveBtn)jummahLiveBtn.onclick=()=>runAdminJummahScheduler({live:true});
   const jummahRefreshBtnActions=document.getElementById("adminJummahRefreshBtnActions");if(jummahRefreshBtnActions)jummahRefreshBtnActions.onclick=()=>loadAdminJummahPushStatus();
-  const jummahRunBtnActions=document.getElementById("adminJummahRunBtnActions");if(jummahRunBtnActions)jummahRunBtnActions.onclick=()=>runAdminJummahScheduler();
+  const jummahRunBtnActions=document.getElementById("adminJummahRunBtnActions");if(jummahRunBtnActions)jummahRunBtnActions.onclick=()=>runAdminJummahScheduler({live:false});
+  const jummahLiveBtnActions=document.getElementById("adminJummahLiveBtnActions");if(jummahLiveBtnActions)jummahLiveBtnActions.onclick=()=>runAdminJummahScheduler({live:true});
   if(document.getElementById("adminJummahPushStatus")||document.getElementById("adminJummahPushStatusActions"))loadAdminJummahPushStatus();
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
