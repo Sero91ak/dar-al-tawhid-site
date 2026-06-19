@@ -314,7 +314,22 @@ main#panel.panel{
 .preview-box.admin-collapsible,.panel.admin-collapsible,.hero-card.admin-collapsible{display:block}
 .preview-box.admin-collapsible>.admin-collapsible-body{display:grid}
 .preview-box.admin-collapsible:not(.is-open)>.admin-collapsible-body{display:none}
-.news-workspace{display:grid;gap:12px;max-width:760px}
+.news-workspace{display:grid;gap:10px;max-width:820px}
+.news-manage-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.news-manage-toolbar .field{flex:1;min-width:140px}
+.news-manage-list{display:grid;gap:6px;max-height:min(52vh,480px);overflow:auto}
+.news-row{border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.12);overflow:hidden}
+.news-row summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;cursor:pointer;list-style:none}
+.news-row summary::-webkit-details-marker{display:none}
+.news-row-title{font-size:11px;font-weight:900;color:#fff4cc;line-height:1.3}
+.news-row-meta{font-size:9px;color:var(--soft);margin-top:2px}
+.news-row-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.news-row-body{padding:0 10px 10px;display:grid;gap:8px}
+.news-row-preview{font-size:10px;line-height:1.45;color:var(--soft);margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-row-actions{display:flex;flex-wrap:wrap;gap:6px}
+.news-pill.expired{background:rgba(140,140,140,.12);color:#ccc;border:1px solid rgba(140,140,140,.22)}
+.news-pill.removed{background:rgba(225,125,115,.12);color:#ffc9c3;border:1px solid rgba(225,125,115,.22)}
+.news-compose-compact .admin-textarea{min-height:68px;max-height:120px}
 .news-list{display:grid;gap:8px}
 .news-card{border:1px solid var(--line2);border-radius:14px;padding:10px 12px;background:linear-gradient(145deg,rgba(90,140,220,.06),rgba(239,215,142,.02))}
 .news-card-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-bottom:6px}
@@ -419,7 +434,8 @@ let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayou
 let ordnerCatalog=[],ordnerCatalogBusy=false,ordnerCatalogLoaded=false;
 let ordnerSelectedCat="",ordnerPostQuery="",ordnerCatSearch="",ordnerRenameValue="",ordnerStatus="",ordnerEditorStatus="",ordnerBusy=false;
 let ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
-let liveNewsItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
+let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
+let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
@@ -468,8 +484,21 @@ function newsItemExpiresAt(item){
 }
 function isNewsItemActive(item){
   if(!item||item.visible===false)return false;
+  if(item.status==="removed"||item.status==="archived")return false;
   const exp=newsItemExpiresAt(item);
   return exp===null||exp>Date.now();
+}
+function newsItemStatus(item){
+  if(!item)return "unbekannt";
+  if(item.status==="removed"||item.status==="archived"||item.visible===false)return "gelöscht";
+  const exp=newsItemExpiresAt(item);
+  if(exp!==null&&exp<=Date.now())return "abgelaufen";
+  return "live";
+}
+function newsStatusPill(status){
+  const cls=status==="live"?"live":status==="abgelaufen"?"expired":"removed";
+  const label=status==="live"?"Live":status==="abgelaufen"?"Abgelaufen":"Gelöscht";
+  return `<span class="news-pill ${cls}">${label}</span>`;
 }
 function truncateNewsText(text,max=110){
   const clean=String(text||"").replace(/\s+/g," ").trim();
@@ -493,7 +522,8 @@ async function fetchLiveNewsItems({force=false}={}){
     if(!res.ok)throw new Error("Live-News konnten nicht geladen werden");
     const data=await res.json();
     const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];
-    liveNewsItems=items.filter(isNewsItemActive).sort((a,b)=>Date.parse(b.createdAt||0)-Date.parse(a.createdAt||0));
+    liveNewsAllItems=items.slice().sort((a,b)=>Date.parse(b.createdAt||0)-Date.parse(a.createdAt||0));
+    liveNewsItems=liveNewsAllItems.filter(isNewsItemActive);
     liveNewsError="";
     liveNewsFetchedAt=new Date();
   }catch(e){
@@ -1446,6 +1476,37 @@ function renderPlanningPanel(){
 function renderSchedule(){
   return `<section class="panel">${renderPlanningPanel()}</section>`;
 }
+function filteredNewsItems(){
+  const q=newsSearchQuery.trim().toLowerCase();
+  return liveNewsAllItems.filter(item=>{
+    const status=newsItemStatus(item);
+    if(newsFilter==="live"&&status!=="live")return false;
+    if(newsFilter==="expired"&&status!=="abgelaufen")return false;
+    if(newsFilter==="deleted"&&status!=="gelöscht")return false;
+    if(q){const hay=[item.title,item.text,item.id,item.badge].join(" ").toLowerCase();if(!hay.includes(q))return false}
+    return true;
+  });
+}
+function newsManageRow(item){
+  const status=newsItemStatus(item);
+  const full=String(item.text||"").trim();
+  const created=item.createdAt?new Date(item.createdAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—";
+  const canDelete=status!=="gelöscht";
+  return `<details class="news-row">
+    <summary>
+      <span><span class="news-row-title">${esc(item.title||"News")}</span><span class="news-row-meta">${esc(created)} · ${esc(formatNewsUntil(item))}</span></span>
+      <span class="news-row-badges">${newsStatusPill(status)}</span>
+    </summary>
+    <div class="news-row-body">
+      <p class="news-row-preview">${esc(truncateNewsText(full,160))}</p>
+      <div class="news-row-actions">
+        <a class="btn" href="${SITE_ORIGIN}/#news-detail/${encodeURIComponent(item.id||"")}" target="_blank" rel="noopener">Vorschau</a>
+        ${status==="live"?`<button class="btn" data-news-edit="${esc(item.id)}" type="button">Bearbeiten</button>`:""}
+        ${canDelete?`<button class="btn danger" data-news-delete="${esc(item.id)}" type="button">Löschen</button>`:""}
+      </div>
+    </div>
+  </details>`;
+}
 function newsLiveCard(item){
   const full=String(item.text||"").trim();
   const short=truncateNewsText(full,110);
@@ -1478,12 +1539,17 @@ function newsDraftCard(item){
     </div>
   </article>`;
 }
-function renderNewsFormFields(){
-  return `<div class="admin-form-grid news-form-grid">
-      <input class="field" id="newsTitle" placeholder="Kurzer Titel">
-      <select class="field" id="newsDuration"><option value="24 Stunden">24 Stunden</option><option value="bis manuell deaktiviert">manuell deaktivieren</option><option value="Entwurf">als Entwurf</option></select>
-      <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
-      <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
+function getEditingNewsItem(){return editingNewsId?liveNewsAllItems.find(x=>String(x.id)===String(editingNewsId)):null}
+function renderNewsFormFields(compact){
+  const editItem=getEditingNewsItem();
+  const editing=editingNewsId?` · Bearbeitung ${esc(editingNewsId)}`:"";
+  return `<div class="admin-form-grid news-form-grid${compact?" news-compose-compact":""}">
+      <input class="field" id="newsTitle" placeholder="Kurzer Titel" value="${esc(editItem?.title||"")}">
+      <select class="field" id="newsDuration"><option value="24 Stunden"${!editItem||Number(editItem.ttlHours||24)<168&&!String(editItem.until||"").includes("manuell")?" selected":""}>24 Stunden</option><option value="bis manuell deaktiviert"${editItem&&(Number(editItem.ttlHours||0)>=168||String(editItem.until||"").includes("manuell"))?" selected":""}>Dauerhaft / manuell</option></select>
+      <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher">${esc(editItem?.text||"")}</textarea>
+      <button class="btn primary wide" id="publishNewsLiveBtn" type="button">${editingNewsId?"Änderung live speichern (ohne Push)":"Live posten"}</button>
+      ${editingNewsId?`<button class="btn" id="cancelNewsEditBtn" type="button">Bearbeitung abbrechen</button>`:""}
+      ${editing?`<span class="news-sync-note">${editing}</span>`:""}
     </div>`;
 }
 function renderNewsComposer(options={}){
@@ -1491,37 +1557,40 @@ function renderNewsComposer(options={}){
   const drafts=newsDraftItems();
   return `<div class="preview-box news-composer${compact?" news-composer-compact":""}">
     <div class="section-head"><h3>News</h3><span>${newsSummaryLabel()}</span></div>
-    ${renderNewsFormFields()}
-    ${compact?`<div class="notice-note">Live-Übersicht auf allen Geräten im Tab „News“. Entwürfe bleiben nur lokal auf diesem Gerät.</div>`:`<div class="notice-note">Nach „Live veröffentlichen“ erscheint die Meldung unter „Neu im Fokus“ und wird als Push mit deinem Titel und Kurztext gesendet.</div>`}
-    ${!compact&&drafts.length?`<div class="news-list" style="margin-top:10px">${drafts.slice(0,3).map(newsDraftCard).join("")}${drafts.length>3?`<div class="notice-note">+ ${drafts.length-3} weitere Entwürfe im Tab News</div>`:""}</div>`:""}
+    ${renderNewsFormFields(compact)}
+    ${compact?`<div class="notice-note">Live-Verwaltung im Tab „News“. Entwürfe nur lokal auf diesem Gerät.</div>`:""}
+    ${!compact&&drafts.length?`<div class="news-manage-list" style="margin-top:10px">${drafts.slice(0,2).map(newsDraftCard).join("")}${drafts.length>2?`<div class="notice-note">+ ${drafts.length-2} weitere Entwürfe</div>`:""}</div>`:""}
   </div>`;
 }
-function renderNewsLiveSection(){
-  if(liveNewsLoading&&!liveNewsFetchedAt)return `<div class="empty">Live-News werden geladen…</div>`;
-  if(liveNewsError)return `<div class="notice-note">${esc(liveNewsError)}</div>`;
-  if(!liveNewsItems.length)return `<div class="empty">Aktuell keine Live-News auf der Startseite.</div>`;
-  return `<div class="news-list">${liveNewsItems.map(newsLiveCard).join("")}</div>`;
+function renderNewsManageSection(){
+  const rows=filteredNewsItems();
+  const counts={live:0,expired:0,deleted:0};
+  liveNewsAllItems.forEach(item=>{const s=newsItemStatus(item);if(s==="live")counts.live++;else if(s==="abgelaufen")counts.expired++;else if(s==="gelöscht")counts.deleted++});
+  return `<div class="panel news-panel">
+    <div class="section-head"><h3>Verwaltung</h3><span>${rows.length} Treffer · ${counts.live} live</span></div>
+    <div class="news-manage-toolbar">
+      <input class="field" id="newsSearchInput" type="search" placeholder="News suchen…" value="${esc(newsSearchQuery)}">
+      <select class="field" id="newsFilterSelect">
+        <option value="live" ${newsFilter==="live"?"selected":""}>Aktiv (${counts.live})</option>
+        <option value="expired" ${newsFilter==="expired"?"selected":""}>Abgelaufen (${counts.expired})</option>
+        <option value="deleted" ${newsFilter==="deleted"?"selected":""}>Gelöscht (${counts.deleted})</option>
+        <option value="all" ${newsFilter==="all"?"selected":""}>Alle (${liveNewsAllItems.length})</option>
+      </select>
+      <button class="btn" id="newsRefreshLiveBtn" type="button"${liveNewsLoading?" disabled":""}>${liveNewsLoading?"Lädt…":"Aktualisieren"}</button>
+    </div>
+    <div class="news-manage-list">${rows.length?rows.map(newsManageRow).join(""):`<div class="empty">${liveNewsLoading?"News werden geladen…":"Keine News in diesem Filter."}</div>`}</div>
+    <div class="news-sync-note" style="margin-top:8px">${liveNewsFetchedAt?`Zuletzt: ${liveNewsFetchedAt.toLocaleTimeString("de-DE")} · content/updates/current.json`:"Synchron mit dem Server"}</div>
+  </div>`;
 }
 function renderNews(){
-  const drafts=newsDraftItems();
-  const liveCount=liveNewsItems.length;
   return `<section class="news-workspace">
-    <div class="panel news-panel">
-      <div class="section-head"><h3>Live auf Startseite</h3><span>${liveCount} aktiv · alle Geräte</span></div>
-      ${renderNewsLiveSection()}
-      <div class="news-toolbar">
-        <button class="btn" id="newsRefreshLiveBtn" type="button"${liveNewsLoading?" disabled":""}>${liveNewsLoading?"Lädt…":"Live-Liste aktualisieren"}</button>
-        <span class="news-sync-note">${liveNewsFetchedAt?`Zuletzt: ${liveNewsFetchedAt.toLocaleTimeString("de-DE")} · content/updates/current.json`:"Synchron mit dem Server"}</span>
-      </div>
+    <div class="panel news-panel news-compose-compact">
+      <div class="section-head"><h3>Neue Meldung</h3><span>Neu im Fokus · optional Push</span></div>
+      ${renderNewsFormFields(true)}
+      <div class="notice-note">Live posten erscheint unter „Neu im Fokus“. Push nur beim ersten Live-Post, nicht bei Korrekturen.</div>
     </div>
-    <div class="preview-box news-panel">
-      <div class="section-head"><h3>Neu erstellen</h3><span>24-Stunden-Hinweis</span></div>
-      ${renderNewsFormFields()}
-    </div>
-    ${drafts.length?`<div class="panel news-panel">
-      <div class="section-head"><h3>Entwürfe</h3><span>${drafts.length} · nur dieses Gerät</span></div>
-      <div class="news-list">${drafts.map(newsDraftCard).join("")}</div>
-    </div>`:""}
+    ${renderNewsManageSection()}
+    ${newsDraftItems().length?`<details class="panel news-panel"><summary class="section-head" style="cursor:pointer;list-style:none"><h3>Entwürfe</h3><span>${newsDraftItems().length} · nur dieses Gerät</span></summary><div class="news-manage-list" style="margin-top:8px">${newsDraftItems().map(newsDraftCard).join("")}</div></details>`:""}
   </section>`;
 }
 function reportCard(item){
@@ -1992,11 +2061,70 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-plan-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese Planung entfernen?")){removeStoreItem(ADMIN_PLAN_KEY,btn.dataset.planRemove);addAdminLog("Planung","Planung entfernt","");renderShell()}});
   document.querySelectorAll("[data-plan-ready]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_PLAN_KEY,btn.dataset.planReady,{status:"Bereit"});addAdminLog("Planung","Planung als bereit markiert","");renderShell()});
   document.querySelectorAll("[data-plan-worker]").forEach(btn=>btn.onclick=async()=>{const item=planItems().find(x=>String(x.id)===String(btn.dataset.planWorker));if(!item){toast("Planung fehlt");return}const markdown=String(draftMarkdown||"").trim();if(!markdown){toast("Markdown unten einfügen, dann Worker planen");return}if(!item.when){toast("Uhrzeit fehlt");return}btn.disabled=true;btn.textContent="Sende...";try{const result=await workerPostRequest("schedule",{id:item.id,title:item.title,when:item.when,timezone:item.timezone||"Europe/Berlin",filename:draftFilename,markdown});updateStoreItem(ADMIN_PLAN_KEY,item.id,{status:"Worker geplant",workerId:result.id,publishAt:result.publishAt});addAdminLog("Planung","Beim Worker-Scheduler gespeichert",`${item.title} · ${result.publishAt||item.when}`);toast("Worker-Scheduler gespeichert");renderShell()}catch(e){btn.disabled=false;btn.textContent="Worker planen";addAdminLog("Fehler","Planung konnte nicht an Worker gesendet werden",e.message||String(e));toast(e.message||"Worker-Planung fehlgeschlagen")}});
-  const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
+  const publishNewsLive=document.getElementById("publishNewsLiveBtn");
+  if(publishNewsLive)publishNewsLive.onclick=async()=>{
+    const title=(document.getElementById("newsTitle")?.value||"").trim();
+    const text=(document.getElementById("newsText")?.value||"").trim();
+    const duration=document.getElementById("newsDuration")?.value||"24 Stunden";
+    if(!title||!text){toast("Titel und Text fehlen");return}
+    const hours=String(duration).includes("manuell")?720:24;
+    const isEdit=!!editingNewsId;
+    if(!isEdit&&!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet."))return;
+    publishNewsLive.disabled=true;
+    const oldLabel=publishNewsLive.textContent;
+    publishNewsLive.textContent=isEdit?"Speichere…":"Sende…";
+    try{
+      const payload={title,text,ttlHours:hours,badge:"News",nav:"recent"};
+      if(isEdit){payload.id=editingNewsId;payload.skipPush=true}
+      const result=await workerPostRequest("news",payload);
+      await fetchLiveNewsItems({force:true});
+      editingNewsId=null;
+      addAdminLog("News",isEdit?"News korrigiert":"News live",title+(result.push?.sent?" · Push":""));
+      toast(isEdit?"News aktualisiert (ohne Push)":result.push?.sent?"News live · Push gesendet":"News live");
+      renderShell();
+    }catch(e){
+      publishNewsLive.disabled=false;
+      publishNewsLive.textContent=oldLabel;
+      addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));
+      toast(e.message||"News-Veröffentlichung fehlgeschlagen");
+    }
+  };
+  const cancelNewsEdit=document.getElementById("cancelNewsEditBtn");
+  if(cancelNewsEdit)cancelNewsEdit.onclick=()=>{editingNewsId=null;renderShell()};
+  const newsSearchInput=document.getElementById("newsSearchInput");
+  if(newsSearchInput)newsSearchInput.oninput=()=>{newsSearchQuery=newsSearchInput.value;renderShell()};
+  const newsFilterSelect=document.getElementById("newsFilterSelect");
+  if(newsFilterSelect)newsFilterSelect.onchange=()=>{newsFilter=newsFilterSelect.value||"live";renderShell()};
+  document.querySelectorAll("[data-news-edit]").forEach(btn=>btn.onclick=()=>{
+    const item=liveNewsAllItems.find(x=>String(x.id)===String(btn.dataset.newsEdit));
+    if(!item){toast("News fehlt");return}
+    editingNewsId=item.id;
+    renderShell();
+    document.querySelector(".news-compose-compact")?.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  document.querySelectorAll("[data-news-delete]").forEach(btn=>btn.onclick=async()=>{
+    const id=btn.dataset.newsDelete;
+    const item=liveNewsAllItems.find(x=>String(x.id)===String(id));
+    if(!item){toast("News fehlt");return}
+    const title=item.title||"News";
+    if(!confirm(`Diese News wirklich löschen?\n\n„${title}“ wird sofort aus der Besucher-App ausgeblendet.\n\nAbbrechen = behalten · OK = endgültig ausblenden`))return;
+    btn.disabled=true;
+    try{
+      await workerPostRequest("news/delete",{id,hard:false});
+      await fetchLiveNewsItems({force:true});
+      if(String(editingNewsId)===String(id))editingNewsId=null;
+      addAdminLog("News","News gelöscht",title);
+      toast("News entfernt – nicht mehr in der Besucher-App sichtbar.");
+      renderShell();
+    }catch(e){
+      btn.disabled=false;
+      addAdminLog("Fehler","News konnte nicht gelöscht werden",e.message||String(e));
+      toast(e.message||"Löschen fehlgeschlagen");
+    }
+  });
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
   document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
   const newsRefreshLive=document.getElementById("newsRefreshLiveBtn");if(newsRefreshLive)newsRefreshLive.onclick=async()=>{newsRefreshLive.disabled=true;newsRefreshLive.textContent="Lädt…";await fetchLiveNewsItems({force:true});toast(liveNewsError?"Live-News konnten nicht geladen werden":"Live-News aktualisiert");renderShell()};
-  document.querySelectorAll("[data-news-live-expand]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.newsLiveExpand;const box=document.getElementById(`newsLiveText-${id}`);const item=liveNewsItems.find(x=>String(x.id)===String(id));if(!box||!item)return;const open=box.classList.toggle("is-expanded");box.textContent=open?String(item.text||"").trim():truncateNewsText(item.text,110);btn.textContent=open?"Weniger":"Mehr anzeigen"});
   const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
   document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
   document.querySelectorAll("[data-report-done]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportDone,{status:"Behoben"});addAdminLog("Fehler","Fehler als behoben markiert","");renderShell()});

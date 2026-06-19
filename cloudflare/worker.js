@@ -168,6 +168,7 @@ export default {
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
       const stagingPaths = new Set(["/api/admin/staging/publish"]);
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
+      const newsDeletePaths = new Set(["/api/admin/news/delete"]);
       const schedulePaths = new Set(["/schedule", "/api/admin/schedule"]);
       const schedulerPaths = new Set(["/run-scheduler", "/api/admin/run-scheduler"]);
       const telegramPaths = new Set([
@@ -203,7 +204,7 @@ export default {
       const postUpdatePaths = new Set(["/api/admin/post/update"]);
       const categoryRenamePaths = new Set(["/api/admin/category/rename"]);
 
-      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths, ...categoryLayoutPaths, ...postCategoryPaths, ...postUpdatePaths, ...categoryRenamePaths].includes(url.pathname)) {
+      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...newsDeletePaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths, ...categoryLayoutPaths, ...postCategoryPaths, ...postUpdatePaths, ...categoryRenamePaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -352,6 +353,10 @@ export default {
 
       if (categoryRenamePaths.has(url.pathname)) {
         return json(await renameCategoryLabel(env, input), cors);
+      }
+
+      if (newsDeletePaths.has(url.pathname)) {
+        return json(await deleteNewsUpdate(env, input), cors);
       }
 
       if (newsPaths.has(url.pathname)) {
@@ -859,6 +864,55 @@ async function publishNewsUpdate(env, input) {
   }
 
   return { ok: true, id, updatesPath, commitSha: saved.commit?.sha || "", push };
+}
+
+async function deleteNewsUpdate(env, input) {
+  const id = String(input.id || "").trim();
+  if (!id) throw httpError("News-ID fehlt", 400);
+  const hard = Boolean(input.hard);
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const updatesPath = trimSlashes(env.UPDATES_PATH || DEFAULT_UPDATES_PATH);
+  const file = await githubGet(env, owner, repo, updatesPath, branch);
+  const current = file?.content ? JSON.parse(base64ToUtf8(file.content)) : { items: [] };
+  const items = Array.isArray(current) ? current : Array.isArray(current.items) ? current.items : [];
+  const found = items.find((entry) => entry && String(entry.id) === id);
+  if (!found) throw httpError(`News nicht gefunden: ${id}`, 404);
+
+  const nextItems = hard
+    ? items.filter((entry) => entry && String(entry.id) !== id)
+    : items.map((entry) => {
+        if (!entry || String(entry.id) !== id) return entry;
+        return {
+          ...entry,
+          status: "removed",
+          visible: false,
+          removedAt: new Date().toISOString()
+        };
+      });
+
+  const payload = { items: nextItems.slice(0, 20) };
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    updatesPath,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    hard ? `Delete news ${id}` : `Remove news ${id}`,
+    branch,
+    file?.sha
+  );
+
+  return {
+    ok: true,
+    id,
+    hard,
+    removed: true,
+    updatesPath,
+    commitSha: saved.commit?.sha || ""
+  };
 }
 
 async function saveScheduledPost(env, input) {
