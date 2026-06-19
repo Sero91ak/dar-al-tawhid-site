@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-19T09:25:18.894Z",
+  "updatedAt": "2026-06-19T09:30:18.967Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-19T09:25:18.894Z",
+  "lastCronRun": "2026-06-19T09:30:18.967Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-19T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-19T09:10:11.006Z",
-  "windowEnd": "2026-06-20T11:25:11.006Z",
+  "windowStart": "2026-06-19T09:15:11.006Z",
+  "windowEnd": "2026-06-20T11:30:11.006Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 20,
@@ -28,10 +28,10 @@
   "usersWithLocation": 20,
   "usersWithActivePush": 20,
   "locationGroups": 4,
-  "scheduled": 38,
-  "recipients": 214,
+  "scheduled": 39,
+  "recipients": 215,
   "skippedPast": 48,
-  "skippedWindow": 69,
+  "skippedWindow": 68,
   "duplicates": 5,
   "errors": 0,
   "lastError": null,
@@ -56,7 +56,7 @@
         "time": "13:33",
         "advance": {
           "status": "geplant",
-          "recipients": 39
+          "recipients": 40
         },
         "entry": {
           "status": "geplant",
@@ -132,7 +132,7 @@
       "time": "13:33",
       "advance": {
         "status": "geplant",
-        "recipients": 39
+        "recipients": 40
       },
       "entry": {
         "status": "geplant",
@@ -440,6 +440,15 @@
       "mode": "advance",
       "time": "03:25",
       "sendAfter": "2026-06-20T01:20:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:34",
+      "sendAfter": "2026-06-20T11:29:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -955,12 +964,6 @@
       "lastSyncedAt": "2026-06-18T10:21:40.357+00:00"
     },
     {
-      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-19T09:11:27.752+00:00"
-    },
-    {
       "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -971,6 +974,12 @@
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-06-19T09:16:28.736+00:00"
+    },
+    {
+      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-19T09:27:09.542+00:00"
     },
     {
       "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
