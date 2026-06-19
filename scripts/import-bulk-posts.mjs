@@ -77,6 +77,24 @@ function suggestFilename(markdown, nextNumber) {
   return `${slugify(category)}-${String(nextNumber).padStart(3, "0")}-${slugify(title)}.md`;
 }
 
+function isBulkMarkdownExcluded(markdown, sourcePath = "") {
+  const md = String(markdown || "").trim();
+  const base = String(sourcePath || "").split(/[/\\]/).pop() || "";
+  if (!md || md.length < 20) return "zu kurz";
+  if (/prufbericht|prüfbericht|readme|report|kontrolle|checklist|inhalt(?:sverzeichnis)?/i.test(base)) {
+    return "Hilfsdatei im Dateinamen";
+  }
+  if (/nicht\s+zum\s+Hochladen/i.test(md)) return "interner Hinweis (nicht zum Hochladen)";
+  if (/^#\s*Pr[üu]fbericht/m.test(md)) return "Prüfbericht, kein Beitrag";
+  if (/Dieser Bericht ist\s+\*\*nicht zum Hochladen\*\*/i.test(md)) return "Prüfbericht, kein Beitrag";
+  const title = frontmatterValue(md, "title").replace(/^📖\s*/, "").trim();
+  if (!title) {
+    if (/^#\s+/.test(md) && !/^(#\s+📖|#\s+Beitrag)/.test(md)) return "kein Titel/Frontmatter";
+    if (/^category:\s/m.test(md) && !/^title:\s/m.test(md) && /^#\s+/.test(md)) return "kein title:-Feld";
+  }
+  return "";
+}
+
 function sha1(content) {
   return createHash("sha1").update(content).digest("hex");
 }
@@ -173,8 +191,16 @@ function main() {
   if (args.dryRun) console.log("Modus: dry-run (keine Dateien schreiben)");
 
   const imported = [];
+  const skipped = [];
   for (const mdPath of mdPaths) {
     const raw = fs.readFileSync(mdPath, "utf8");
+    const rel = path.relative(sourceDir, mdPath);
+    const skipReason = isBulkMarkdownExcluded(raw, rel);
+    if (skipReason) {
+      skipped.push({ file: rel, reason: skipReason });
+      console.log(`  ⊘ übersprungen (${skipReason}): ${rel}`);
+      continue;
+    }
     const withCategory = applyCategory(raw, args.category);
     const normalized = normalizeMarkdown(withCategory, nextNumber);
     let filename = suggestFilename(normalized, nextNumber);
@@ -221,6 +247,7 @@ function main() {
   }
 
   console.log(`Fertig: ${imported.length} Beiträge${args.staging ? " (Staging)" : " (Live)"}.`);
+  if (skipped.length) console.log(`Übersprungen: ${skipped.length} Hilfsdatei(en)/Prüfberichte.`);
 }
 
 main();

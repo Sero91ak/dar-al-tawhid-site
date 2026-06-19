@@ -708,6 +708,38 @@ async function publishPostViaWorkerRequest(markdown,filename,options={}){
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
+function isBulkZipEntryIgnored(path){
+  const p=String(path||"").replace(/\\/g,"/");
+  if(!p||p.endsWith("/")||/(^|\/)(__MACOSX|\.)/.test(p)||/^\._/.test(p.split("/").pop()||""))return true;
+  const base=(p.split("/").pop()||"").toLowerCase();
+  return /prufbericht|prüfbericht|readme|report|kontrolle|checklist|inhalt(?:sverzeichnis)?|index\.md$/.test(base);
+}
+function isBulkMarkdownExcluded(markdown,sourcePath){
+  const md=String(markdown||"").trim();
+  const base=String(sourcePath||"").split("/").pop()||"";
+  if(!md||md.length<20)return "zu kurz";
+  if(/prufbericht|prüfbericht|readme|report|kontrolle|checklist|inhalt(?:sverzeichnis)?/i.test(base))return "Hilfsdatei im Dateinamen";
+  if(/nicht\s+zum\s+Hochladen/i.test(md))return "interner Hinweis (nicht zum Hochladen)";
+  if(/^#\s*Prüfbericht/m.test(md)||/^#\s*Prufbericht/m.test(md))return "Prüfbericht, kein Beitrag";
+  if(/Dieser Bericht ist\s+\*\*nicht zum Hochladen\*\*/i.test(md))return "Prüfbericht, kein Beitrag";
+  const title=frontmatterValue(md,"title").replace(/^📖\s*/,"").trim();
+  if(!title){
+    if(/^#\s+/.test(md)&&!/^(#\s+📖|#\s+Beitrag)/.test(md))return "kein Titel/Frontmatter";
+    if(/^category:\s/m.test(md)&&!/^title:\s/m.test(md)&&/^#\s+/.test(md))return "kein title:-Feld";
+  }
+  return "";
+}
+function filterBulkMarkdownPosts(items){
+  const kept=[],skipped=[];
+  (items||[]).forEach(item=>{
+    const md=typeof item==="string"?item:item.markdown;
+    const path=typeof item==="string"?"":item.path||"";
+    const reason=isBulkMarkdownExcluded(md,path);
+    if(reason)skipped.push({path:path||"(Markdown)",reason});
+    else kept.push(md);
+  });
+  return {posts:kept,skipped};
+}
 function splitBulkMarkdownPosts(raw){
   const text=String(raw||"").trim();
   if(!text)return [];
@@ -739,6 +771,9 @@ function splitBulkMarkdownPosts(raw){
   if(!chunks.length)return [text];
   return chunks.filter(c=>c.length>20);
 }
+function splitBulkMarkdownPostsForPublish(raw){
+  return filterBulkMarkdownPosts(splitBulkMarkdownPosts(raw).map(md=>({markdown:md}))).posts;
+}
 function applyBulkCategoryToMarkdown(markdown,category){
   const cat=String(category||"").trim();
   if(!cat)return String(markdown||"").trim();
@@ -748,7 +783,7 @@ function applyBulkCategoryToMarkdown(markdown,category){
   if(/^---\s*\n/.test(out))return out.replace(/^---\s*\n/,`---\ncategory: "${safe}"\n`);
   return `---\ncategory: "${safe}"\n---\n\n${out}`;
 }
-function countBulkMarkdownPosts(raw){return splitBulkMarkdownPosts(raw).length}
+function countBulkMarkdownPosts(raw){return splitBulkMarkdownPostsForPublish(raw).length}
 let jsZipPromise=null;
 function loadJsZip(){
   if(window.JSZip)return Promise.resolve(window.JSZip);
@@ -760,10 +795,6 @@ function loadJsZip(){
     document.head.appendChild(script);
   });
   return jsZipPromise;
-}
-function isBulkZipEntryIgnored(path){
-  const p=String(path||"").replace(/\\/g,"/");
-  return !p||p.endsWith("/")||/(^|\/)(__MACOSX|\.)/.test(p)||/^\._/.test(p.split("/").pop()||"");
 }
 async function importBulkZipFile(file){
   if(!file)throw new Error("Keine Datei gewählt");
@@ -780,8 +811,10 @@ async function importBulkZipFile(file){
   if(!entries.length)throw new Error("In der ZIP wurden keine .md-Dateien gefunden.");
   entries.sort((a,b)=>a.path.localeCompare(b.path,"de"));
   const texts=await Promise.all(entries.map(({entry})=>entry.async("string")));
-  const combined=texts.map(t=>String(t||"").trim()).filter(t=>t.length>20).join("\n\n===\n\n");
-  if(!combined.trim())throw new Error("Die Markdown-Dateien in der ZIP sind leer oder zu kurz.");
+  const loaded=entries.map((e,i)=>({path:e.path,markdown:String(texts[i]||"").trim()})).filter(x=>x.markdown.length>20);
+  const filtered=filterBulkMarkdownPosts(loaded);
+  if(!filtered.posts.length)throw new Error(filtered.skipped.length?"Alle .md-Dateien wurden als Hilfsdateien/Prüfberichte erkannt – keine Beiträge zum Veröffentlichen.":"Die Markdown-Dateien in der ZIP sind leer oder zu kurz.");
+  const combined=filtered.posts.join("\n\n===\n\n");
   const area=document.getElementById("bulkPackMarkdownInput");
   if(area)area.value=combined;
   const catInput=document.getElementById("bulkCategoryInput");
@@ -790,13 +823,18 @@ async function importBulkZipFile(file){
     if(/takfir|umum|ʿumūm|umum/i.test(guess))catInput.value="Takfīr bi'l-ʿUmūm";
     else if(guess)catInput.value=guess.slice(0,80);
   }
-  const n=countBulkMarkdownPosts(combined);
+  const n=filtered.posts.length;
   const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";
   const list=document.getElementById("bulkZipFileList");
-  if(list)list.innerHTML=entries.slice(0,12).map(e=>esc(e.path)).join("<br>")+(entries.length>12?`<br>… +${entries.length-12} weitere`:"");
+  const shown=loaded.slice(0,12).map(e=>{
+    const skip=filtered.skipped.find(s=>s.path===e.path);
+    return skip?`<span style="opacity:.55">${esc(e.path)} · übersprungen (${esc(skip.reason)})</span>`:esc(e.path);
+  }).join("<br>")+(loaded.length>12?`<br>… +${loaded.length-12} weitere`:"");
+  if(list)list.innerHTML=shown;
   const nameLabel=document.getElementById("bulkZipFileName");if(nameLabel)nameLabel.textContent=file.name;
-  setBulkPackStatus(`ZIP geladen: <strong>${n}</strong> Beiträge aus <strong>${entries.length}</strong> .md-Dateien. Bitte Kategorie prüfen, dann „Beiträge zählen“ oder direkt veröffentlichen.`);
-  addAdminLog("ZIP",`${n} Beiträge aus ${file.name} geladen`,entries[0]?.path||file.name);
+  const skipNote=filtered.skipped.length?`<br><span style="color:var(--gold)">${filtered.skipped.length} Hilfsdatei(en) übersprungen (z. B. Prüfbericht/readme).</span>`:"";
+  setBulkPackStatus(`ZIP geladen: <strong>${n}</strong> Beiträge aus <strong>${entries.length}</strong> .md-Dateien.${skipNote} Bitte Kategorie prüfen, dann „Beiträge zählen“ oder direkt veröffentlichen.`);
+  addAdminLog("ZIP",`${n} Beiträge aus ${file.name} geladen${filtered.skipped.length?` · ${filtered.skipped.length} übersprungen`:""}`,entries[0]?.path||file.name);
   toast(`${n} Beiträge aus ZIP geladen`);
   document.getElementById("bulkPackMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"});
 }
@@ -826,7 +864,7 @@ function renderBulkPackPanel(){
         <label class="btn primary" for="bulkZipFileInput">ZIP-Datei wählen</label>
         <input id="bulkZipFileInput" type="file" accept=".zip,application/zip" hidden>
       </div>
-      <p class="bulk-pack-zip-note">Alle <code>.md</code>-Dateien werden sortiert geladen und mit <code>===</code> getrennt. Bei Dateinamen mit „takfir“ / „umum“ wird die Kategorie automatisch vorgeschlagen.</p>
+      <p class="bulk-pack-zip-note">Alle <code>.md</code>-Dateien werden sortiert geladen und mit <code>===</code> getrennt. <strong>Prüfberichte, readme und Dateien ohne Titel</strong> werden automatisch übersprungen. Bei Dateinamen mit „takfir“ / „umum“ wird die Kategorie automatisch vorgeschlagen.</p>
       <div class="bulk-pack-zip-list" id="bulkZipFileList"></div>
       <div class="bulk-pack-zip-note" id="bulkZipFileName" style="margin-top:4px;color:var(--gold)"></div>
     </div>
@@ -1772,8 +1810,8 @@ async function uploadBulkPackViaWorker(){
   if(bulkPackBusy||uploadBusy)return;
   const raw=document.getElementById("bulkPackMarkdownInput")?.value||"";
   const category=(document.getElementById("bulkCategoryInput")?.value||"").trim();
-  const posts=splitBulkMarkdownPosts(raw).map(md=>applyBulkCategoryToMarkdown(md,category));
-  if(!posts.length){setBulkPackStatus("Keine Beiträge erkannt. Bitte Markdown einfügen und Beiträge mit <strong>===</strong> trennen.");toast("Paket leer");return}
+  const posts=splitBulkMarkdownPostsForPublish(raw).map(md=>applyBulkCategoryToMarkdown(md,category));
+  if(!posts.length){setBulkPackStatus("Keine Beiträge erkannt. Prüfberichte/readme werden automatisch übersprungen. Beiträge mit <strong>===</strong> trennen oder Frontmatter nutzen.");toast("Paket leer");return}
   if(category&&!posts.every(md=>frontmatterValue(md,"category")===category)){/* applied above */}
   const previewTitles=posts.slice(0,4).map(md=>frontmatterValue(md,"title")||"Ohne Titel").join("\n· ");
   const ok=confirm(`Ganzes Paket live veröffentlichen?\n\n${posts.length} einzelne Beiträge werden nacheinander online gestellt.\nJeder erscheint wie gewohnt in Neueste / Kategorie / Einzelansicht.\n\n${category?`Kategorie: ${category}\n\n`:""}${previewTitles}${posts.length>4?"\n…":""}`);
