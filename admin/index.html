@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v30";
+  var ADMIN_SW_CACHE="dar-admin-stats-v31";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -618,9 +618,25 @@ async function checkVisitorAppHealth(){
 function workerEndpoint(path){
   const url=new URL(resolveWorkerUrl(workerPublishUrl()));
   const clean=String(path||"").replace(/^\/+/,"");
-  if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/"+clean);
-  else if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,`/${clean}`);
-  else url.pathname=`/${clean}`;
+  if(/^api\//i.test(clean)){
+    url.pathname="/"+clean;
+    return url.toString();
+  }
+  const legacyRootPaths=new Set(["news","schedule","run-scheduler","publish-news"]);
+  const isLegacyPublishBase=url.pathname.endsWith("/publish")&&!url.pathname.endsWith("/api/admin/publish");
+  const isAdminPublishBase=url.pathname.endsWith("/api/admin/publish");
+  if(isAdminPublishBase){
+    url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/"+clean);
+  }else if(isLegacyPublishBase){
+    const topSegment=clean.split("/")[0];
+    if(!clean.includes("/")&&legacyRootPaths.has(topSegment)){
+      url.pathname=url.pathname.replace(/\/publish$/,`/${clean}`);
+    }else{
+      url.pathname="/api/admin/"+clean;
+    }
+  }else{
+    url.pathname=`/${clean}`;
+  }
   return url.toString();
 }
 function savedWorkerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch(e){return""}}
