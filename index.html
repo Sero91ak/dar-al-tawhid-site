@@ -28,7 +28,7 @@
 <meta name="twitter:image" content="/app-icon-512.png?v=source-under-statement-v12">
 <meta name="theme-color" content="#080806">
 <script>(function(){try{var p=new URLSearchParams(location.search);var wantStaging=p.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(wantStaging&&!underTest){location.replace("/test/"+location.search+location.hash);return}}catch(e){}})();</script>
-<script>(function(){try{var params=new URLSearchParams(location.search);var staging=params.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest-staging.json?v=dar-test-v2";if(staging&&touch)touch.href="/test-apple-touch-icon.png?v=dar-test-v2";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="Dar Test";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="Dar Test"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="emerald")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",emerald:"Smaragd Royal Premium"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",emerald:"#061611"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=staging?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=staging?"#061826":colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=staging}catch(e){}})();</script>
+<script>(function(){try{var params=new URLSearchParams(location.search);var staging=params.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest-staging.json?v=dar-test-v2";if(staging&&touch)touch.href="/test-apple-touch-icon.png?v=dar-test-v2";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="Dar Test";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="Dar Test"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=staging?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=staging?"#061826":colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=staging}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -87,7 +87,7 @@
 .theme-switch-head{margin-bottom:10px}
 .theme-switch-head h3{font-family:var(--serif);color:var(--premium-title);font-size:22px;line-height:1.08;margin:0 0 4px}
 .theme-switch-note{color:var(--premium-body);font-size:11px;line-height:1.45;margin:0}
-.theme-switch-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:4px;width:100%}
+.theme-switch-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:4px;width:100%}
 .theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;transform:none;border:1px solid var(--theme-card-border,var(--premium-pill-border));background:var(--theme-card-bg,var(--premium-pill-bg));color:var(--theme-card-text,var(--premium-pill-text));border-radius:18px;min-height:86px;padding:9px 10px;font-size:11.5px;line-height:1.15;font-weight:950;cursor:pointer;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;overflow-wrap:anywhere;display:grid;grid-template-rows:auto 1fr;gap:7px;text-align:left;box-shadow:inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.06))}
 .theme-preview{display:flex;align-items:center;gap:7px}
 .theme-preview-logo{width:28px;height:28px;border-radius:999px;border:1px solid var(--theme-preview-ring);background:var(--theme-preview-logo);box-shadow:0 8px 18px var(--theme-preview-shadow)}
@@ -99,12 +99,9 @@
 .theme-switch-btn[data-theme-select="light"]{--theme-card-bg:linear-gradient(145deg,#fffdf7,#f1e5cf);--theme-card-border:rgba(148,114,57,.30);--theme-card-text:#3e2b17;--theme-card-shine:rgba(255,255,255,.72);--theme-preview-ring:rgba(155,122,60,.38);--theme-preview-logo:radial-gradient(circle,#fffaf0 0 32%,#efe1bd 35% 100%);--theme-preview-shadow:rgba(130,94,42,.16);--theme-preview-line:linear-gradient(90deg,#6d4e24,#d8bf78)}
 .theme-switch-btn[data-theme-select="soft"]{--theme-card-bg:linear-gradient(145deg,#fff9f4,#ead5dd);--theme-card-border:rgba(116,76,98,.28);--theme-card-text:#34232c;--theme-card-shine:rgba(255,255,255,.70);--theme-preview-ring:rgba(116,76,98,.34);--theme-preview-logo:radial-gradient(circle,#fff8f1 0 32%,#e7cfd5 35% 100%);--theme-preview-shadow:rgba(96,62,78,.13);--theme-preview-line:linear-gradient(90deg,#7d5368,#d7b9c5)}
 .theme-switch-btn[data-theme-select="royal"]{--theme-card-bg:linear-gradient(145deg,#0d2b55,#041126);--theme-card-border:rgba(239,215,142,.44);--theme-card-text:#fff2c6;--theme-card-shine:rgba(255,255,255,.055);--theme-preview-ring:rgba(239,215,142,.58);--theme-preview-logo:radial-gradient(circle,#f8e9b7 0 30%,#0a1f3d 34% 100%);--theme-preview-shadow:rgba(4,12,28,.40);--theme-preview-line:linear-gradient(90deg,#efd78e,#2b6fa3)}
-.theme-switch-btn[data-theme-select="emerald"]{--theme-card-bg:linear-gradient(145deg,#12382B,#061611);--theme-card-border:rgba(201,164,90,.44);--theme-card-text:#F8F3E8;--theme-card-shine:rgba(255,255,255,.05);--theme-preview-ring:rgba(201,164,90,.58);--theme-preview-logo:radial-gradient(circle,#E3C982 0 30%,#0E2A20 34% 100%);--theme-preview-shadow:rgba(4,18,14,.40);--theme-preview-line:linear-gradient(90deg,#C9A45A,#2C8A64)}
 .theme-switch-btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .theme-switch-btn.is-active{border-color:rgba(239,215,142,.78)!important;box-shadow:0 0 0 1px rgba(239,215,142,.28),0 10px 24px rgba(0,0,0,.18),inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.06))!important}
 .theme-switch-btn.is-active:after{content:"✓";position:absolute;right:8px;top:8px;width:19px;height:19px;border-radius:999px;display:grid;place-items:center;background:rgba(239,215,142,.92);color:#21170a;font-size:12px;font-weight:950;box-shadow:0 3px 10px rgba(0,0,0,.18)}
-.theme-switch-btn[data-theme-select="emerald"].is-active{background:linear-gradient(145deg,rgba(7,42,30,.92),rgba(17,82,59,.78))!important;border-color:rgba(227,201,130,.42)!important;box-shadow:0 12px 30px rgba(0,0,0,.24),0 0 0 1px rgba(227,201,130,.22),inset 0 1px 0 rgba(255,255,255,.10)!important}
-.theme-switch-btn[data-theme-select="emerald"].is-active:after{background:rgba(227,201,130,.92)!important;color:#1a1208!important}
 html[data-theme="light"] .theme-switch-btn.is-active{border-color:rgba(155,122,60,.55);box-shadow:0 0 0 1px rgba(155,122,60,.18),0 10px 24px rgba(120,90,40,.12)}
 .first-visit-panel{border:1px solid rgba(140,190,255,.35);background:linear-gradient(145deg,rgba(90,140,220,.12),rgba(8,8,6,.92));padding:13px 14px;margin:0 0 13px;border-radius:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
 .first-visit-head{min-width:0;flex:1 1 260px}
@@ -338,8 +335,8 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 @media(max-width:700px){body{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}.top-shell,.view{border-radius:20px}.header{padding:18px 15px 15px}.brand-kicker-row{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px}.brand small{font-size:9px;letter-spacing:.12em;max-width:100%;white-space:normal;overflow:visible;text-overflow:unset}.hijri-header-pill{font-size:8.5px;min-height:29px;padding:5px 7px;max-width:54%;flex-shrink:0;overflow:visible;text-overflow:unset}.brand-main{gap:12px}.logo{width:62px;height:62px;flex:0 0 62px}h1{font-size:clamp(27px,8.7vw,36px);letter-spacing:.012em;line-height:.95;white-space:nowrap}.socials{gap:10px;margin-top:16px}.social-link{justify-content:center;padding:10px 9px;font-size:13px;min-height:46px;gap:9px}.social-link svg{width:24px;height:24px;flex-basis:24px}.hero-text{margin-top:14px;padding-top:14px}.salam{font-size:clamp(12px,3.35vw,15px);line-height:1.2}.intro{font-size:11.5px;line-height:1.45}.isnad{padding:11px 14px 12px}.isnad-label{font-size:8px}.isnad-quote{font-size:10.2px}.isnad-source{font-size:8.5px}.view{padding:16px;min-height:420px}.view-head{padding-bottom:14px;margin-bottom:16px}.view h2{font-size:28px}.view-desc{font-size:11.6px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat-card{padding:10px;border-radius:14px}.stat-card b{font-size:19px}.stat-card span{font-size:10px}.about-grid{grid-template-columns:1fr;gap:11px}.folder-card,.post-card,.list-card,.info-card,.dua-card{border-radius:17px;padding:14px}.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-size:18px;line-height:1.08}.folder-card p,.dua-card p{font-size:11px;line-height:1.38}.folder-icon{width:38px;height:38px;border-radius:14px;font-size:18px;margin-bottom:9px}.emoji-emblem{width:25px;height:25px;font-size:21px}.folder-meta{gap:5px;margin-top:9px}.folder-meta span,.badge{font-size:8.4px;padding:4px 6px}.list-card{min-height:118px}.list-card .count,.book-author{font-size:10.5px}.post-card{min-height:185px}.excerpt{font-size:12.8px;line-height:1.32;-webkit-line-clamp:3}.source-preview{font-size:8.5px;margin-top:8px;padding-top:7px}.section-head h3{font-size:21px}.section-head span{font-size:9.5px}.overview-title h3{font-size:21px}.search{height:46px}.direct-pick-panel{border-radius:17px;padding:11px}.direct-pick-title{display:block}.direct-pick-title h3{font-size:20px}.direct-pick-title span{display:block;margin-top:4px;font-size:10px}.daily-box,.recommended-box,.calendar-panel{border-radius:17px;padding:14px}.daily-title,.recommended-title,.calendar-title h3{font-size:20px}.daily-text,.recommended-text{font-size:11.5px}.event-list{grid-template-columns:1fr}.calendar-title{display:block}.statement,.dua-detail-box{padding:16px;border-radius:19px;font-size:17px;line-height:1.62;text-align:left}.dua-arabic{font-size:24px}.dua-trans,.dua-de{font-size:15px}.article-title{text-align:left}.article-meta,.article-actions,.link-row{justify-content:flex-start}.source-strong{text-align:left}.app-bar{margin-bottom:9px}.crumb{font-size:10.5px}.nav-posts{grid-template-columns:1fr}}
 @media(max-width:390px){.logo{width:56px;height:56px;flex-basis:56px}h1{font-size:clamp(26px,8.4vw,34px);letter-spacing:.005em}.folder-card,.post-card,.list-card{padding:13px}.folder-card h3,.post-card h3,.list-card h3{font-size:16.5px}.excerpt{font-size:12px}.section-block{margin-top:18px}.section-head{margin-bottom:12px}}
 @media(max-width:520px){.account-form{grid-template-columns:1fr}.account-summary{grid-template-columns:1fr}.account-actions button{flex:1 1 150px}}
-@media(max-width:520px){.theme-switch-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.theme-switch-btn{min-height:58px;border-radius:15px;padding:7px 4px;font-size:8.8px;line-height:1.08;gap:4px;text-align:center;grid-template-rows:auto auto;align-items:center;justify-items:center;width:100%;min-width:0;max-width:none;transform:none}.theme-preview{gap:4px;justify-content:center;width:100%}.theme-preview-logo{width:20px;height:20px;flex-shrink:0}.theme-preview-lines{display:none}.theme-switch-btn span:last-child{align-self:center;width:100%}.first-visit-theme .theme-switch-row{grid-template-columns:repeat(5,minmax(0,1fr))}.first-visit-theme .theme-switch-btn{min-height:34px;padding:7px 8px;font-size:10px;display:block;text-align:center}}
-@media(max-width:370px){.theme-switch-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.theme-switch-btn{min-height:54px;padding:6px 3px;font-size:8px}.theme-preview-logo{width:18px;height:18px}}
+@media(max-width:520px){.theme-switch-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.theme-switch-btn{min-height:58px;border-radius:15px;padding:7px 4px;font-size:8.8px;line-height:1.08;gap:4px;text-align:center;grid-template-rows:auto auto;align-items:center;justify-items:center;width:100%;min-width:0;max-width:none;transform:none}.theme-preview{gap:4px;justify-content:center;width:100%}.theme-preview-logo{width:20px;height:20px;flex-shrink:0}.theme-preview-lines{display:none}.theme-switch-btn span:last-child{align-self:center;width:100%}.first-visit-theme .theme-switch-row{grid-template-columns:repeat(4,minmax(0,1fr))}.first-visit-theme .theme-switch-btn{min-height:34px;padding:7px 8px;font-size:10px;display:block;text-align:center}}
+@media(max-width:370px){.theme-switch-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.theme-switch-btn{min-height:54px;padding:6px 3px;font-size:8px}.theme-preview-logo{width:18px;height:18px}}
 
 @media(max-width:700px){
   .search-line{grid-template-columns:1fr}
@@ -3900,372 +3897,7 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
   }
 }
 
-/* SMARAGD ROYAL PREMIUM — Spiegel Royal Nachtblau (Layout), Smaragd-Farben + Glas-Tabs */
-html[data-theme="emerald"]{
-  color-scheme:dark!important;
-  --bg:#061611!important;--bg2:#0B241B!important;--panel:#0c2018!important;--card:#102720!important;
-  --page-cover:#061611!important;--page-cover-mid:#0B241B!important;
-  --gold:#c9a45a!important;--gold2:#e3c982!important;--bronze:#9b7838!important;
-  --cream:#f8f3e8!important;--text:#f8f3e8!important;--muted:rgba(248,243,232,.76)!important;--muted2:rgba(168,181,168,.82)!important;
-  --line:rgba(201,164,90,.34)!important;--line2:rgba(201,164,90,.18)!important;
-  --shadow:0 22px 65px rgba(0,0,0,.42)!important;
-  --premium-border:rgba(201,164,90,.42)!important;
-  --premium-bg:radial-gradient(circle at 15% 0%,rgba(227,201,130,.18),transparent 42%),radial-gradient(circle at 88% 14%,rgba(44,138,100,.20),transparent 34%),linear-gradient(145deg,#12382B 0%,#0B241B 52%,#061611 100%)!important;
-  --premium-shadow:0 18px 46px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)!important;
-  --premium-label:#e3c982!important;--premium-title:#f8f3e8!important;--premium-body:rgba(216,207,182,.92)!important;
-  --premium-pill-border:rgba(201,164,90,.46)!important;
-  --premium-pill-bg:linear-gradient(135deg,rgba(201,164,90,.16),rgba(30,107,78,.18))!important;
-  --premium-pill-text:rgba(248,243,232,.75)!important;
-  --theme-logo-ring:rgba(201,164,90,.54)!important;
-  --theme-logo-glow:rgba(227,201,130,.20)!important;
-  --theme-deck-aura:radial-gradient(circle at 13% 29%,rgba(227,201,130,.16),transparent 25%),radial-gradient(circle at 78% 7%,rgba(44,138,100,.20),transparent 34%),linear-gradient(145deg,rgba(6,22,17,.34),rgba(201,164,90,.045))!important;
-}
-html[data-theme="emerald"],
-html[data-theme="emerald"] body{
-  background:var(--premium-bg)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] body:before{opacity:.035!important;filter:none!important}
-html[data-theme="emerald"] .app{
-  background:var(--premium-bg)!important;
-  border:1px solid var(--premium-border)!important;
-  border-radius:28px!important;
-  box-shadow:var(--premium-shadow)!important;
-  overflow:hidden!important;
-}
-html[data-theme="emerald"] .top-shell,
-html[data-theme="emerald"] .view{
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  border-radius:0!important;
-}
-html[data-theme="emerald"] .top-shell{margin-bottom:0!important;border-radius:0!important;margin-top:0!important}
-html[data-theme="emerald"] .header{padding-top:max(18px,calc(env(safe-area-inset-top,0px) + 8px))!important}
-html[data-theme="emerald"] .isnad{
-  background:rgba(6,22,17,.30)!important;
-  border-top:1px solid var(--line2)!important;
-}
-html[data-theme="emerald"] .hero-text{border-top-color:var(--line2)!important}
-html[data-theme="emerald"] .app-bar,
-html[data-theme="emerald"] .header-prayer-status{
-  background:linear-gradient(145deg,rgba(17,58,44,.82),rgba(6,22,17,.86))!important;
-  border:1px solid rgba(201,164,90,.22)!important;
-  color:var(--text)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 24px rgba(0,0,0,.22)!important;
-}
-html[data-theme="emerald"] .app-bar{border-radius:16px!important;padding:0!important;margin:0 var(--content-inset,14px) 10px!important}
-html[data-theme="emerald"] .app-bar.is-home{display:none!important}
-html[data-theme="emerald"] .crumb{
-  flex:1 1 auto!important;text-align:right!important;padding:9px 14px!important;
-  background:rgba(15,50,38,.78)!important;border:1px solid var(--line2)!important;border-radius:999px!important;
-  color:var(--gold2)!important;font-family:var(--serif)!important;font-size:13px!important;font-weight:800!important;
-  min-height:40px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
-}
-html[data-theme="emerald"] .view h2,
-html[data-theme="emerald"] .section-head h3,
-html[data-theme="emerald"] .folder-card h3,
-html[data-theme="emerald"] .post-card h3,
-html[data-theme="emerald"] .list-card h3,
-html[data-theme="emerald"] .info-card h3,
-html[data-theme="emerald"] .dua-card h3,
-html[data-theme="emerald"] .overview-title h3,
-html[data-theme="emerald"] .profile-title,
-html[data-theme="emerald"] .book-profile-title,
-html[data-theme="emerald"] .popular-row-text h4,
-html[data-theme="emerald"] .calendar-title h3,
-html[data-theme="emerald"] .event-name{color:var(--premium-title)!important;text-shadow:0 2px 22px rgba(0,0,0,.42)!important}
-html[data-theme="emerald"] h1,
-html[data-theme="emerald"] .salam{color:var(--gold2)!important;text-shadow:0 1px 10px rgba(0,0,0,.22)!important}
-html[data-theme="emerald"] .brand small,
-html[data-theme="emerald"] .eyebrow,
-html[data-theme="emerald"] .isnad-label,
-html[data-theme="emerald"] .dua-label,
-html[data-theme="emerald"] .status-check-label,
-html[data-theme="emerald"] .home-more-sub,
-html[data-theme="emerald"] .prayer-small-label,
-html[data-theme="emerald"] .prayer-quick-label{color:var(--premium-label)!important}
-html[data-theme="emerald"] .intro,
-html[data-theme="emerald"] .view-desc,
-html[data-theme="emerald"] .folder-card p,
-html[data-theme="emerald"] .info-card p,
-html[data-theme="emerald"] .dua-card p,
-html[data-theme="emerald"] .isnad-quote,
-html[data-theme="emerald"] .isnad-source,
-html[data-theme="emerald"] .excerpt,
-html[data-theme="emerald"] .popular-row-text p,
-html[data-theme="emerald"] .source-preview,
-html[data-theme="emerald"] .source-note,
-html[data-theme="emerald"] .section-head span,
-html[data-theme="emerald"] .quran-surah-head-meta,
-html[data-theme="emerald"] .quran-meta-note,
-html[data-theme="emerald"] .quran-tafsir-note,
-html[data-theme="emerald"] .quran-tafsir-empty,
-html[data-theme="emerald"] .quran-athar-source,
-html[data-theme="emerald"] .quran-surah-card small,
-html[data-theme="emerald"] .event-date,
-html[data-theme="emerald"] .empty,
-html[data-theme="emerald"] .loading,
-html[data-theme="emerald"] .error{color:var(--muted)!important}
-html[data-theme="emerald"] .premium-surface,
-html[data-theme="emerald"] .folder-card,
-html[data-theme="emerald"] .post-card,
-html[data-theme="emerald"] .list-card,
-html[data-theme="emerald"] .info-card,
-html[data-theme="emerald"] .dua-card,
-html[data-theme="emerald"] .overview-panel,
-html[data-theme="emerald"] .direct-pick-panel,
-html[data-theme="emerald"] .search-pro-panel,
-html[data-theme="emerald"] .filter-panel,
-html[data-theme="emerald"] .profile-box,
-html[data-theme="emerald"] .book-profile-box,
-html[data-theme="emerald"] .series-box,
-html[data-theme="emerald"] .pinned-box,
-html[data-theme="emerald"] .popular-panel,
-html[data-theme="emerald"] .prayer-panel,
-html[data-theme="emerald"] .qibla-panel,
-html[data-theme="emerald"] .statement,
-html[data-theme="emerald"] .dua-detail-box,
-html[data-theme="emerald"] .source-strong,
-html[data-theme="emerald"] .calendar-panel,
-html[data-theme="emerald"] .event-card,
-html[data-theme="emerald"] .current-focus-card{
-  background:linear-gradient(145deg,rgba(18,56,43,.86),rgba(6,22,17,.92))!important;
-  border-color:rgba(201,164,90,.24)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 30px rgba(0,0,0,.26)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] .home-more-body .pinned-box,
-html[data-theme="emerald"] .home-more-body .series-box,
-html[data-theme="emerald"] .home-more-body .overview-compact .stat-card,
-html[data-theme="emerald"] .home-more-body .series-card.has-icon,
-html[data-theme="emerald"] .home-more-body .pinned-card.has-icon,
-html[data-theme="emerald"] .prayer-summary-card,
-html[data-theme="emerald"] .popular-row,
-html[data-theme="emerald"] .stat-card,
-html[data-theme="emerald"] .prayer-time-card,
-html[data-theme="emerald"] .prayer-controls-compact,
-html[data-theme="emerald"] .prayer-push-status,
-html[data-theme="emerald"] .prayer-push-status-item{
-  background:linear-gradient(145deg,rgba(22,65,48,.72),rgba(9,30,22,.82))!important;
-  border-color:rgba(201,164,90,.20)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] .stat-card b,
-html[data-theme="emerald"] .prayer-quick-title,
-html[data-theme="emerald"] .prayer-panel-title,
-html[data-theme="emerald"] .prayer-summary-card b,
-html[data-theme="emerald"] .prayer-summary-card span,
-html[data-theme="emerald"] .prayer-summary-card small,
-html[data-theme="emerald"] .prayer-time-card b,
-html[data-theme="emerald"] .prayer-time-card span,
-html[data-theme="emerald"] .prayer-time-card small,
-html[data-theme="emerald"] .pinned-title,
-html[data-theme="emerald"] .series-title,
-html[data-theme="emerald"] .home-more-section .collapsible-head h3,
-html[data-theme="emerald"] .prayer-push-status summary,
-html[data-theme="emerald"] .prayer-push-status-item span{color:var(--premium-title)!important}
-html[data-theme="emerald"] .prayer-push-status-item b{color:var(--premium-label)!important}
-html[data-theme="emerald"] .prayer-push-status-item.ok span{color:#f4ecd2!important}
-html[data-theme="emerald"] .prayer-push-status-item.warn span{color:#ffd89b!important}
-html[data-theme="emerald"] .search,
-html[data-theme="emerald"] .direct-pick,
-html[data-theme="emerald"] .filter-select,
-html[data-theme="emerald"] .account-form input{
-  background:rgba(10,35,28,.76)!important;
-  color:var(--text)!important;
-  border-color:rgba(201,164,90,.24)!important;
-}
-html[data-theme="emerald"] .search::placeholder{color:var(--muted2)!important}
-html[data-theme="emerald"] .social-link,
-html[data-theme="emerald"] .action-btn,
-html[data-theme="emerald"] .advanced-toggle,
-html[data-theme="emerald"] .collapse-toggle:not(.premium-pill),
-html[data-theme="emerald"] .back-btn,
-html[data-theme="emerald"] .home-btn,
-html[data-theme="emerald"] .hijri-header-pill,
-html[data-theme="emerald"] .footer-action-btn,
-html[data-theme="emerald"] .prayer-action-btn,
-html[data-theme="emerald"] .prayer-detail-toggle,
-html[data-theme="emerald"] .link-row a,
-html[data-theme="emerald"] .nav-posts button,
-html[data-theme="emerald"] .share-btn.native,
-html[data-theme="emerald"] .share-btn.link,
-html[data-theme="emerald"] .quran-surah-nav button,
-html[data-theme="emerald"] .quran-popular-btn,
-html[data-theme="emerald"] .quran-jump-btn,
-html[data-theme="emerald"] .quran-tafsir-tab,
-html[data-theme="emerald"] .quran-wake-btn,
-html[data-theme="emerald"] .quran-tr-btn,
-html[data-theme="emerald"] .account-actions button{
-  background:var(--premium-pill-bg)!important;
-  border-color:var(--premium-pill-border)!important;
-  color:var(--premium-pill-text)!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-html[data-theme="emerald"] .action-btn.active,
-html[data-theme="emerald"] .prayer-action-btn.active,
-html[data-theme="emerald"] .float-btn.push-active,
-html[data-theme="emerald"] .quran-tafsir-tab.active,
-html[data-theme="emerald"] .quran-wake-btn.is-on,
-html[data-theme="emerald"] .quran-tr-btn.active,
-html[data-theme="emerald"] .theme-switch-btn.is-active{
-  border-color:rgba(201,164,90,.64)!important;
-  background:linear-gradient(145deg,rgba(201,164,90,.22),rgba(44,138,100,.18))!important;
-  color:var(--gold2)!important;
-  box-shadow:0 0 0 1px rgba(201,164,90,.16),0 10px 26px rgba(0,0,0,.22)!important;
-}
-html[data-theme="emerald"] .statement strong,
-html[data-theme="emerald"] .dua-de,
-html[data-theme="emerald"] .source-row,
-html[data-theme="emerald"] .source-row b,
-html[data-theme="emerald"] .quran-ayah-de,
-html[data-theme="emerald"] .quran-result-de,
-html[data-theme="emerald"] .quran-tafsir-panel,
-html[data-theme="emerald"] .quran-term-card span,
-html[data-theme="emerald"] .quran-athar-text{color:var(--text)!important}
-html[data-theme="emerald"] .dua-arabic,
-html[data-theme="emerald"] .quran-surah-head-ar,
-html[data-theme="emerald"] .quran-ayah-ar{color:#f8f3e8!important}
-html[data-theme="emerald"] .statement em,
-html[data-theme="emerald"] .dua-trans,
-html[data-theme="emerald"] .script-accent,
-html[data-theme="emerald"] .quran-ayah-tr,
-html[data-theme="emerald"] .quran-result-tr{color:#d5dcc8!important}
-html[data-theme="emerald"] .quran-surah-card,
-html[data-theme="emerald"] .quran-result-card,
-html[data-theme="emerald"] .quran-ayah,
-html[data-theme="emerald"] .quran-jump-bar,
-html[data-theme="emerald"] .quran-tafsir-bar,
-html[data-theme="emerald"] .quran-term-card,
-html[data-theme="emerald"] .quran-athar-card,
-html[data-theme="emerald"] .quran-tr-bar,
-html[data-theme="emerald"] .first-visit-panel,
-html[data-theme="emerald"] .hint-banner,
-html[data-theme="emerald"] .pwa-banner,
-html[data-theme="emerald"] .pwa-modal,
-html[data-theme="emerald"] .offline-box,
-html[data-theme="emerald"] .app-save-box,
-html[data-theme="emerald"] .home-refresh-panel,
-html[data-theme="emerald"] .ramadan-panel,
-html[data-theme="emerald"] .daily-box,
-html[data-theme="emerald"] .recommended-box,
-html[data-theme="emerald"] .status-check-box,
-html[data-theme="emerald"] .share-panel,
-html[data-theme="emerald"] .share-panel-v2,
-html[data-theme="emerald"] .share-panel-v9,
-html[data-theme="emerald"] .share-panel-v11{
-  background:linear-gradient(145deg,rgba(18,56,43,.82),rgba(6,22,17,.90))!important;
-  border-color:rgba(201,164,90,.24)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 28px rgba(0,0,0,.24)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] .badge,
-html[data-theme="emerald"] .folder-meta span,
-html[data-theme="emerald"] .status-chip,
-html[data-theme="emerald"] .search-match,
-html[data-theme="emerald"] .prayer-calculation-tags span,
-html[data-theme="emerald"] .quran-surah-card .quran-num{
-  background:rgba(201,164,90,.10)!important;
-  border-color:rgba(201,164,90,.22)!important;
-  color:var(--premium-title)!important;
-}
-html[data-theme="emerald"] mark.search-hit{
-  background:rgba(201,164,90,.25)!important;
-  color:var(--gold2)!important;
-}
-html[data-theme="emerald"] .qibla-pro-section,
-html[data-theme="emerald"] .qibla-panel{
-  background:linear-gradient(145deg,rgba(18,56,43,.84),rgba(6,22,17,.92))!important;
-  border-color:rgba(201,164,90,.26)!important;
-}
-html[data-theme="emerald"] .qibla-compass,
-html[data-theme="emerald"] .qibla-compass-face{
-  background:radial-gradient(circle at center,rgba(24,65,48,.92),rgba(5,18,14,.94))!important;
-  border-color:rgba(201,164,90,.42)!important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 18px 40px rgba(0,0,0,.32)!important;
-}
-html[data-theme="emerald"] .qibla-cardinal,
-html[data-theme="emerald"] .qibla-cardinal small,
-html[data-theme="emerald"] .qibla-pro-sub,
-html[data-theme="emerald"] .qibla-instruction,
-html[data-theme="emerald"] .qibla-bearing-readout small{color:var(--muted)!important}
-html[data-theme="emerald"] .qibla-n,
-html[data-theme="emerald"] .qibla-pro-title,
-html[data-theme="emerald"] .qibla-bearing-readout,
-html[data-theme="emerald"] .qibla-data-item span,
-html[data-theme="emerald"] .qibla-status{color:var(--gold2)!important}
-html[data-theme="emerald"] .qibla-data-item,
-html[data-theme="emerald"] .qibla-status{
-  background:rgba(10,35,28,.66)!important;
-  border-color:rgba(201,164,90,.20)!important;
-}
-html[data-theme="emerald"] .bottom-nav{
-  background:rgba(6,22,17,.25)!important;
-  border:1px solid rgba(201,164,90,.20)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
-  backdrop-filter:blur(12px) saturate(1.08)!important;
-  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
-  isolation:auto!important;
-}
-html[data-theme="emerald"] .bottom-nav-btn{color:rgba(248,243,232,.68)!important;text-shadow:none!important}
-html[data-theme="emerald"] .bottom-nav-btn.active,
-html[data-theme="emerald"] .bottom-nav-btn.is-pressed,
-html[data-theme="emerald"] .bottom-nav-btn:active{color:var(--gold2)!important}
-html[data-theme="emerald"] .bottom-nav-pill{
-  background:linear-gradient(135deg,rgba(201,164,90,.18),rgba(30,107,78,.22))!important;
-  box-shadow:0 4px 16px rgba(0,0,0,.26)!important;
-}
-html[data-theme="emerald"] .float-touch-handle,
-html[data-theme="emerald"] .float-btn{
-  background:linear-gradient(145deg,rgba(17,58,44,.94),rgba(5,18,14,.96))!important;
-  border-color:rgba(201,164,90,.38)!important;
-  color:var(--gold2)!important;
-  box-shadow:0 12px 30px rgba(0,0,0,.32)!important;
-}
-html[data-theme="emerald"] .footer{color:var(--muted)!important;border-top:1px solid var(--line2)!important}
-html[data-theme="emerald"] .footer strong,
-html[data-theme="emerald"] .signature,
-html[data-theme="emerald"] .book-author{color:var(--gold2)!important}
-html[data-theme="emerald"] .top-edge-fade,
-html[data-theme="emerald"] .top-swim-aura{display:none!important}
-@media(max-width:700px){
-  html[data-theme="emerald"] .app-bar{margin:0 var(--content-inset,14px) 10px!important;padding:0!important}
-  html[data-theme="emerald"] .crumb{font-size:12px!important;padding:8px 12px!important}
-  html[data-theme="emerald"].is-standalone-pwa body{
-    padding-top:max(6px,env(safe-area-inset-top,0px))!important;
-    background:var(--premium-bg)!important;
-  }
-  html[data-theme="emerald"].is-standalone-pwa .app:after{display:none!important}
-  html[data-theme="emerald"].is-standalone-pwa .top-shell{
-    border:0!important;
-    border-radius:0!important;
-    box-shadow:none!important;
-    margin-top:0!important;
-  }
-  html[data-theme="emerald"].is-standalone-pwa .top-shell .header{
-    padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))!important;
-  }
-}
 
-html[data-theme="emerald"] .theme-switch-row .theme-switch-btn{
-  width:100%!important;
-  min-width:0!important;
-  max-width:none!important;
-  flex:initial!important;
-  flex-basis:auto!important;
-  grid-column:auto!important;
-  transform:none!important;
-  scale:none!important;
-}
-html[data-theme="emerald"]:has(.pwa-modal-overlay:not([hidden])) .float-actions,
-html[data-theme="emerald"]:has(.ie-text-modal-overlay:not([hidden])) .float-actions{
-  opacity:0!important;
-  pointer-events:none!important;
-  visibility:hidden!important;
-}
 /* MOBILE GUTTER FINAL: einheitlicher Seitenrand — iOS, Android, Browser, PWA */
 @media(max-width:700px){
   :root{
@@ -4771,7 +4403,6 @@ html[data-theme] .theme-switch-btn[data-theme-select]:not(.premium-pill),
 html[data-theme="light"] .theme-switch-btn[data-theme-select],
 html[data-theme="soft"] .theme-switch-btn[data-theme-select],
 html[data-theme="royal"] .theme-switch-btn[data-theme-select],
-html[data-theme="emerald"] .theme-switch-btn[data-theme-select]{
   background:var(--theme-card-bg)!important;
   border-color:var(--theme-card-border)!important;
   color:var(--theme-card-text)!important;
@@ -4781,7 +4412,6 @@ html[data-theme] .theme-switch-btn[data-theme-select] *,
 html[data-theme="light"] .theme-switch-btn[data-theme-select] *,
 html[data-theme="soft"] .theme-switch-btn[data-theme-select] *,
 html[data-theme="royal"] .theme-switch-btn[data-theme-select] *,
-html[data-theme="emerald"] .theme-switch-btn[data-theme-select] *{
   color:var(--theme-card-text)!important;
   text-shadow:none!important;
 }
@@ -4797,18 +4427,10 @@ html[data-theme] .theme-switch-btn[data-theme-select].is-active,
 html[data-theme="light"] .theme-switch-btn[data-theme-select].is-active,
 html[data-theme="soft"] .theme-switch-btn[data-theme-select].is-active,
 html[data-theme="royal"] .theme-switch-btn[data-theme-select].is-active,
-html[data-theme="emerald"] .theme-switch-btn[data-theme-select].is-active{
   background:var(--theme-card-bg)!important;
   border-color:rgba(239,215,142,.82)!important;
   color:var(--theme-card-text)!important;
   box-shadow:0 0 0 1px rgba(239,215,142,.30),0 12px 28px rgba(0,0,0,.16),inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.08))!important;
-}
-html[data-theme] .theme-switch-btn[data-theme-select="emerald"].is-active,
-html[data-theme="emerald"] .theme-switch-btn[data-theme-select="emerald"].is-active{
-  background:linear-gradient(145deg,rgba(7,42,30,.92),rgba(17,82,59,.78))!important;
-  border-color:rgba(227,201,130,.42)!important;
-  color:#F8F3E8!important;
-  box-shadow:0 12px 30px rgba(0,0,0,.24),0 0 0 1px rgba(227,201,130,.22),inset 0 1px 0 rgba(255,255,255,.10)!important;
 }
 html[data-theme] .theme-switch-btn[data-theme-select="light"].is-active{
   box-shadow:0 0 0 1px rgba(155,122,60,.24),0 12px 26px rgba(120,90,40,.13),inset 0 1px 0 var(--theme-card-shine)!important;
@@ -4948,10 +4570,6 @@ html[data-theme="soft"]{
 html[data-theme="royal"]{
   --outer-bg-flat:#07162c;
   --outer-bg:radial-gradient(circle at 14% 0%,rgba(239,215,142,.15),transparent 38%),radial-gradient(circle at 86% 9%,rgba(57,112,170,.20),transparent 34%),linear-gradient(180deg,#07162c 0%,#0a1d39 48%,#041023 100%);
-}
-html[data-theme="emerald"]{
-  --outer-bg-flat:#061611;
-  --outer-bg:radial-gradient(circle at 14% 0%,rgba(227,201,130,.15),transparent 38%),radial-gradient(circle at 86% 9%,rgba(44,138,100,.20),transparent 34%),linear-gradient(180deg,#061611 0%,#0B241B 48%,#12382B 100%);
 }
 html[data-theme],
 html[data-theme].is-standalone-pwa{
@@ -5103,41 +4721,6 @@ html[data-theme] .view{
   }
 }
 
-/* SMARAGD: gleiche App-Breite/Aufbau wie Royal Nachtblau + glasige Tab-Leiste */
-html[data-theme="emerald"] .app{
-  width:min(1420px,100%)!important;
-  max-width:none!important;
-  border:0!important;
-  box-shadow:none!important;
-  background:transparent!important;
-  overflow:visible!important;
-}
-html[data-theme="emerald"] .top-shell,
-html[data-theme="emerald"] .view{
-  border:0!important;
-  box-shadow:none!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  width:100%!important;
-  max-width:100%!important;
-}
-html[data-theme="emerald"] .premium-surface,
-html[data-theme="emerald"] .current-focus,
-html[data-theme="emerald"] .home-refresh-panel,
-html[data-theme="emerald"] .direct-pick-panel.home-direct-pick,
-html[data-theme="emerald"] .theme-switch-panel{
-  width:100%!important;
-  max-width:100%!important;
-  box-sizing:border-box!important;
-}
-html[data-theme="emerald"] .bottom-nav{
-  background:rgba(6,22,17,.25)!important;
-  border:1px solid rgba(201,164,90,.20)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
-  backdrop-filter:blur(12px) saturate(1.08)!important;
-  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
-  isolation:auto!important;
-}
 
 .staging-app-banner{border:1px solid rgba(255,196,120,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,196,120,.18),rgba(239,215,142,.06));color:var(--cream);padding:10px 12px;margin:0 0 12px;font-size:12px;font-weight:900;line-height:1.35;text-align:center}.staging-app-banner b{color:var(--gold2)}
 :root{
@@ -5639,14 +5222,14 @@ function isFormEditingNow(){
 document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFormPointerAt=Date.now()},{capture:true,passive:true});
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},emerald:{label:"Smaragd Royal Premium",color:"#061611",status:"black",asset:"emerald"}};
-function normalizeTheme(theme){return theme==="light"||theme==="soft"||theme==="royal"||theme==="emerald"?theme:"dark"}
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"}};
+function normalizeTheme(theme){return theme==="light"||theme==="soft"||theme==="royal"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
-function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo)logo.title="DAR AL TAWḤID";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="emerald")root.style.backgroundColor=""}))}
+function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo)logo.title="DAR AL TAWḤID";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");root.style.backgroundColor=""}))}
 function initTheme(){applyTheme(getTheme())}
 function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{applyTheme(btn.getAttribute("data-theme-select"))}})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
-function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("emerald")}</div></section>`}
+function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}</div></section>`}
 
 const DUAS=[
 {id:"quran-001",type:"Qurʾān",cat:"Vergebung",title:"Duʿāʾ von Ādam und Ḥawwāʾ nach dem Fehler",occasion:"Reue und Vergebung",ar:"رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",tr:"Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā lanakūnanna mina-l-khāsirīn.",de:"Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",src:"📝 Qurʾān, al-Aʿrāf 7:23."},
@@ -6992,7 +6575,7 @@ function renderSuhurIftarRow(large){const t=getSuhurIftarTimes();if(!t)return `<
 function ramadanDuas(){const picked=DUAS.filter(d=>RAMADAN_DUA_CATS.includes(d.cat));return(picked.length?picked:DUAS).slice(0,8)}
 function ramadanPosts(){const matched=posts.filter(p=>RAMADAN_POST_KEYS.some(k=>[p.title,p.category,p.topic,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(k.toLowerCase())));if(matched.length>=2)return matched.slice(0,6);return posts.filter(p=>["adab","akhlaq","tawḥīd","tauhid","sunnah"].some(k=>String(p.category||"").toLowerCase().includes(k))).slice(0,5)}
 function installGuideCopy(){if(isIOSDevice())return{label:"iPhone / iPad",title:"App speichern für Push & Offline",note:"Safari: Teilen antippen, dann Zum Home-Bildschirm wählen.",steps:["Safari benutzen, nicht den In-App-Browser.","Unten auf Teilen tippen.","Zum Home-Bildschirm wählen und Hinzufügen bestätigen."]};if(isAndroidDevice())return{label:"Android",title:"App installieren für Push & Offline",note:"Browser-Menü ⋮ öffnen, dann App installieren oder Zum Startbildschirm wählen.",steps:["Browser-Menü mit ⋮ öffnen.","App installieren oder Zum Startbildschirm hinzufügen wählen.","Danach DAR AL TAWḤID über das neue Icon öffnen."]};return{label:"App",title:"DAR AL TAWḤID als App speichern",note:"Browser-Menü öffnen und App installieren oder Zum Startbildschirm wählen.",steps:["Browser-Menü oder Teilen öffnen.","App installieren oder Zum Startbildschirm hinzufügen wählen.","Danach die App über das Icon öffnen."]}}
-function renderInlineThemeChoice(){const cur=getTheme();return `<div class="first-visit-theme"><span>Farbe</span><div class="theme-switch-row"><button type="button" class="theme-switch-btn${cur==="light"?" is-active":""}" data-theme-select="light">Hell</button><button type="button" class="theme-switch-btn${cur==="dark"?" is-active":""}" data-theme-select="dark">Dunkel</button><button type="button" class="theme-switch-btn${cur==="soft"?" is-active":""}" data-theme-select="soft">Sanft</button><button type="button" class="theme-switch-btn${cur==="royal"?" is-active":""}" data-theme-select="royal">Royal</button><button type="button" class="theme-switch-btn${cur==="emerald"?" is-active":""}" data-theme-select="emerald">Smaragd</button></div></div>`}
+function renderInlineThemeChoice(){const cur=getTheme();return `<div class="first-visit-theme"><span>Farbe</span><div class="theme-switch-row"><button type="button" class="theme-switch-btn${cur==="light"?" is-active":""}" data-theme-select="light">Hell</button><button type="button" class="theme-switch-btn${cur==="dark"?" is-active":""}" data-theme-select="dark">Dunkel</button><button type="button" class="theme-switch-btn${cur==="soft"?" is-active":""}" data-theme-select="soft">Sanft</button><button type="button" class="theme-switch-btn${cur==="royal"?" is-active":""}" data-theme-select="royal">Royal</button></div></div>`}
 function renderPwaInstallBanner(){if(isStandalonePwa())return "";try{if(localStorage.getItem(PWA_GUIDE_KEY))return ""}catch(e){}const copy=installGuideCopy();return `<section id="pwaInstallBanner" class="first-visit-panel"><div class="first-visit-head"><span class="first-visit-label">${esc(copy.label)}</span><h3 class="first-visit-title">${esc(copy.title)}</h3><p class="first-visit-note">${esc(copy.note)}</p></div><div class="first-visit-grid">${renderInlineThemeChoice()}<div class="hint-banner-actions"><button id="pwaBannerGuideBtn" class="hint-btn" type="button">Anleitung</button><button id="pwaBannerDismissBtn" class="hint-btn ghost" type="button">Später</button></div></div></section>`}
 function renderPwaInstallModalContent(){const ios=isIOSDevice();const steps=ios?[`<li><b>1.</b> Unten in Safari auf <b>Teilen</b> tippen (Quadrat mit Pfeil).</li>`,`<li><b>2.</b> <b>Zum Home-Bildschirm</b> wählen und Hinzufügen bestätigen.</li>`,`<li><b>3.</b> App ab dann über das Icon öffnen – Push & Offline funktionieren.</li>`]:[`<li><b>1.</b> Browser-Menü öffnen (⋮ oder Teilen).</li>`,`<li><b>2.</b> <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.</li>`,`<li><b>3.</b> Danach Push-Benachrichtigungen und Offline-Modus nutzen.</li>`];return `<div class="pwa-modal" role="dialog" aria-labelledby="pwaModalTitle"><h3 id="pwaModalTitle">App speichern</h3><p>${ios?"Auf dem iPhone läuft die volle App nur als gespeicherte Web-App. Im normalen Browser-Tab fehlen Push und Offline oft.":"Installiere die App für Push-Benachrichtigungen und Offline-Nutzung."}</p><ol class="pwa-steps">${steps.join("")}</ol><div class="pwa-modal-actions"><button id="pwaModalDoneBtn" class="hint-btn" type="button">Verstanden</button></div></div>`}
 function showPwaInstallModalIfNeeded(force){
