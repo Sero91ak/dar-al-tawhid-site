@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-19T22:45:24.761Z",
+  "updatedAt": "2026-06-19T22:50:24.406Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-19T22:45:24.761Z",
+  "lastCronRun": "2026-06-19T22:50:24.406Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-20T01:07:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-19T22:30:10.976Z",
-  "windowEnd": "2026-06-21T00:45:10.976Z",
+  "windowStart": "2026-06-19T22:35:10.976Z",
+  "windowEnd": "2026-06-21T00:50:10.976Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 22,
@@ -994,12 +994,6 @@
       "lastSyncedAt": "2026-06-19T15:24:03.846+00:00"
     },
     {
-      "subscriptionId": "bdd836d7-d282-4369-ac2a-eaf97c4ccc20",
-      "timezone": "Europe/Berlin",
-      "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-19T22:45:02.819+00:00"
-    },
-    {
       "subscriptionId": "7fe8041e-fb2b-488c-9596-e0b4a9daeb38",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -1016,6 +1010,12 @@
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-06-19T10:00:14.826+00:00"
+    },
+    {
+      "subscriptionId": "bdd836d7-d282-4369-ac2a-eaf97c4ccc20",
+      "timezone": "Europe/Berlin",
+      "city": "Meckenheim",
+      "lastSyncedAt": "2026-06-19T22:48:56.66+00:00"
     },
     {
       "subscriptionId": "187b4bf7-9cb5-4ef3-8a2b-986b792a43c4",
@@ -1045,7 +1045,7 @@
       "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-19T22:44:34.076+00:00"
+      "lastSyncedAt": "2026-06-19T22:45:19.709+00:00"
     },
     {
       "subscriptionId": "e67e4b16-6faf-4f42-9569-38e915259e79",
