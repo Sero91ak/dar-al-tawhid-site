@@ -300,7 +300,13 @@ main#panel.panel{
 .news-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
 .news-sync-note{font-size:10px;color:var(--soft)}
 .news-form-grid .admin-textarea{min-height:72px}
-.news-composer-compact .admin-textarea{min-height:60px}
+.bulk-pack-panel{border:1px solid var(--line2);border-radius:16px;padding:12px;background:linear-gradient(145deg,rgba(90,140,220,.06),rgba(239,215,142,.02));margin-top:14px}
+.bulk-pack-panel .paste-area{min-height:220px;max-height:min(52vh,520px)}
+.bulk-pack-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.bulk-pack-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.bulk-pack-hint{font-size:10px;color:var(--soft);line-height:1.45;margin:8px 0 0}
+.bulk-pack-count{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -360,7 +366,7 @@ const DEFAULT_ADMIN_TABS=[
   ["overview","Dashboard"]
 ];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
-let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,lastPublishPushContext=null;
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null;
 let liveNewsItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -667,7 +673,7 @@ function normalizeMarkdownForUpload(markdown,nextNumber){
   }
   return out+"\n";
 }
-async function publishPostViaWorkerRequest(markdown,filename){
+async function publishPostViaWorkerRequest(markdown,filename,options={}){
   const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
   const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
@@ -675,14 +681,82 @@ async function publishPostViaWorkerRequest(markdown,filename){
   if(!secret)throw new Error("Admin Worker Secret fehlt");
   saveWorkerPublishUrl(publishUrl);
   if(remember)setSavedWorkerSecret(secret);else setSavedWorkerSecret("");
+  const body={markdown,filename};
+  if(options.skipPush)body.skipPush=true;
   const res=await fetch(resolveWorkerUrl(publishUrl),{
     method:"POST",
     headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
-    body:JSON.stringify({markdown,filename})
+    body:JSON.stringify(body)
   });
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
+}
+function splitBulkMarkdownPosts(raw){
+  const text=String(raw||"").trim();
+  if(!text)return [];
+  if(/\n\s*===+\s*\n/.test(text)){
+    return text.split(/\n\s*===+\s*\n/).map(s=>s.trim()).filter(s=>s.length>20);
+  }
+  const chunks=[];
+  let pos=0;
+  while(pos<text.length){
+    const start=text.indexOf("---",pos);
+    if(start<0)break;
+    const fmClose=text.indexOf("\n---",start+3);
+    if(fmClose<0){chunks.push(text.slice(start).trim());break}
+    let next=fmClose+4;
+    while(next<text.length){
+      const candidate=text.indexOf("\n---\n",next);
+      if(candidate<0)break;
+      const peek=text.slice(candidate+5,candidate+120);
+      if(/^[a-zA-Z][\w-]*\s*:/m.test(peek)){
+        chunks.push(text.slice(start,candidate+1).trim());
+        pos=candidate+1;
+        next=-1;
+        break;
+      }
+      next=candidate+4;
+    }
+    if(next!==-1){chunks.push(text.slice(start).trim());break}
+  }
+  if(!chunks.length)return [text];
+  return chunks.filter(c=>c.length>20);
+}
+function applyBulkCategoryToMarkdown(markdown,category){
+  const cat=String(category||"").trim();
+  if(!cat)return String(markdown||"").trim();
+  let out=String(markdown||"").trim();
+  const safe=cat.replace(/\\/g,"\\\\").replace(/"/g,'\\"');
+  if(/^category:\s/m.test(out))return out.replace(/^category:\s*["']?.*?["']?\s*$/m,`category: "${safe}"`);
+  if(/^---\s*\n/.test(out))return out.replace(/^---\s*\n/,`---\ncategory: "${safe}"\n`);
+  return `---\ncategory: "${safe}"\n---\n\n${out}`;
+}
+function countBulkMarkdownPosts(raw){return splitBulkMarkdownPosts(raw).length}
+function renderBulkPackPanel(){
+  return `<div class="bulk-pack-panel" id="bulkPackPanel">
+    <div class="section-head" style="margin-top:0"><h3>Sammel-Paket</h3><span>mehrere Beiträge · ein Thema</span></div>
+    <p class="bulk-pack-hint">Mehrere Markdown-Beiträge auf einmal veröffentlichen. Jeder Beitrag wird wie gewohnt <strong>eigenständig</strong> in der Besucher-App angezeigt (Neueste, Kategorie, Einzelansicht). Beiträge mit einer Leerzeile und <code>===</code> trennen — oder mehrere <code>---</code>-Frontmatter-Blöcke hintereinander.</p>
+    <div class="bulk-pack-meta">
+      <input class="field" id="bulkCategoryInput" placeholder="Kategorie / Ordner (z. B. Takfīr bi'l-ʿUmūm)">
+      <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:0;min-height:42px">
+        <input id="bulkPublishNews" type="checkbox" checked>
+        <span>Nach dem Paket Fokus-News veröffentlichen</span>
+      </label>
+    </div>
+    <textarea class="paste-area" id="bulkPackMarkdownInput" spellcheck="false" placeholder="Beitrag 1 (mit --- Frontmatter ---)\n\n===\n\nBeitrag 2\n\n===\n\nBeitrag 3 ..."></textarea>
+    <div class="bulk-pack-meta">
+      <input class="field" id="bulkNewsTitleInput" placeholder="Fokus-Titel (leer = automatisch)">
+      <select class="field" id="bulkNewsDuration"><option value="24 Stunden">24 Stunden sichtbar</option><option value="bis manuell deaktiviert">Manuell deaktivieren</option></select>
+    </div>
+    <textarea class="admin-textarea wide" id="bulkNewsTextInput" placeholder="Fokus-Text für „Neu im Fokus“ (leer = Standardtext mit Kategorie-Link)"></textarea>
+    <div class="bulk-pack-actions">
+      <button class="btn" id="bulkCountBtn" type="button">Beiträge zählen</button>
+      <button class="btn primary" id="bulkPublishBtn" type="button" ${bulkPackBusy?"disabled":""}>${bulkPackBusy?"Veröffentliche Paket…":"Ganzes Paket live veröffentlichen"}</button>
+      <span class="bulk-pack-count" id="bulkPackCountLabel"></span>
+    </div>
+    <div class="upload-status" id="bulkPackStatus" style="margin-top:8px">Tipp: Gleiche Kategorie setzt alle Beiträge in denselben Ordner unter „Kategorien“.</div>
+  </div>`;
 }
 async function workerPostRequest(path,payload){
   const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
@@ -1206,6 +1280,7 @@ function renderActions(rows,installs=installTotals()){
           <div class="upload-status" id="uploadStatus">${draftStatus||"GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json."}</div>
         </div>
       </div>
+      ${renderBulkPackPanel()}
       ${renderDraftPreview()}
       <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
       <div class="quick-grid">
@@ -1364,6 +1439,8 @@ function bindUi(){
   const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
+  const bulkCountBtn=document.getElementById("bulkCountBtn");if(bulkCountBtn)bulkCountBtn.onclick=()=>{const n=countBulkMarkdownPosts(document.getElementById("bulkPackMarkdownInput")?.value||"");const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";setBulkPackStatus(n?`${n} Beiträge im Paket erkannt.`:"Keine Beiträge erkannt — mit === trennen oder Frontmatter-Blöcke nutzen.")};
+  const bulkPublishBtn=document.getElementById("bulkPublishBtn");if(bulkPublishBtn)bulkPublishBtn.onclick=uploadBulkPackViaWorker;
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const jummahRefreshBtn=document.getElementById("adminJummahRefreshBtn");if(jummahRefreshBtn)jummahRefreshBtn.onclick=()=>loadAdminJummahPushStatus();
@@ -1561,6 +1638,74 @@ async function uploadPostViaWorker(){
   }finally{
     uploadBusy=false;
     const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}
+  }
+}
+function setBulkPackStatus(html){const el=document.getElementById("bulkPackStatus");if(el)el.innerHTML=html}
+async function uploadBulkPackViaWorker(){
+  if(bulkPackBusy||uploadBusy)return;
+  const raw=document.getElementById("bulkPackMarkdownInput")?.value||"";
+  const category=(document.getElementById("bulkCategoryInput")?.value||"").trim();
+  const posts=splitBulkMarkdownPosts(raw).map(md=>applyBulkCategoryToMarkdown(md,category));
+  if(!posts.length){setBulkPackStatus("Keine Beiträge erkannt. Bitte Markdown einfügen und Beiträge mit <strong>===</strong> trennen.");toast("Paket leer");return}
+  if(category&&!posts.every(md=>frontmatterValue(md,"category")===category)){/* applied above */}
+  const previewTitles=posts.slice(0,4).map(md=>frontmatterValue(md,"title")||"Ohne Titel").join("\n· ");
+  const ok=confirm(`Ganzes Paket live veröffentlichen?\n\n${posts.length} einzelne Beiträge werden nacheinander online gestellt.\nJeder erscheint wie gewohnt in Neueste / Kategorie / Einzelansicht.\n\n${category?`Kategorie: ${category}\n\n`:""}${previewTitles}${posts.length>4?"\n…":""}`);
+  if(!ok){setBulkPackStatus("Sammel-Veröffentlichung abgebrochen.");return}
+  bulkPackBusy=true;
+  const bulkBtn=document.getElementById("bulkPublishBtn");if(bulkBtn){bulkBtn.disabled=true;bulkBtn.textContent="Veröffentliche Paket…"}
+  const published=[];
+  let lastResult=null;
+  try{
+    for(let i=0;i<posts.length;i++){
+      const md=posts[i];
+      const title=frontmatterValue(md,"title")||`Beitrag ${i+1}`;
+      setBulkPackStatus(`Veröffentliche <strong>${i+1}/${posts.length}</strong>: ${esc(title)} …`);
+      const next=await resolveNextPostNumber();
+      const filename=suggestFilename(md,next);
+      const normalized=normalizeMarkdownForUpload(md,next);
+      const isLast=i===posts.length-1;
+      lastResult=await publishPostViaWorkerRequest(normalized,filename,{skipPush:!isLast});
+      published.push({filename:lastResult.filename||filename,title,number:lastResult.number||next});
+      saveLastPublishPushContext({
+        filename:lastResult.filename||filename,
+        number:lastResult.number||next,
+        postId:lastResult.postId||frontmatterValue(normalized,"id")||filename.replace(/\.md$/i,""),
+        postTitle:title,
+        markdown:normalized,
+        commitSha:lastResult.commitSha||"",
+        push:lastResult.push||null
+      });
+    }
+    let newsLine="";
+    const publishNews=!!document.getElementById("bulkPublishNews")?.checked;
+    if(publishNews&&category){
+      const newsTitle=(document.getElementById("bulkNewsTitleInput")?.value||"").trim()||`Neue Kategorie: ${category}`;
+      const newsText=(document.getElementById("bulkNewsTextInput")?.value||"").trim()||`Assalāmu ʿalaikum,\n\nes wurden ${published.length} neue Beiträge zum Thema „${category}“ veröffentlicht. Tippe hier, um den Ordner mit allen Aussagen zu öffnen.\n\nBarakallāhu fīkum.`;
+      const hours=String(document.getElementById("bulkNewsDuration")?.value||"").includes("manuell")?720:24;
+      try{
+        const newsResult=await workerPostRequest("news",{id:`bulk-${slugify(category)}-${Date.now()}`,title:newsTitle,text:newsText,ttlHours:hours,badge:"Neu",nav:"topic",value:category,count:published.length});
+        newsLine=`<br>Fokus-News live: <strong>${esc(newsTitle)}</strong> · ID ${esc(String(newsResult.id||""))}`;
+        addAdminLog("News","Fokus-News nach Sammel-Paket",newsTitle);
+      }catch(e){
+        newsLine=`<br>Fokus-News fehlgeschlagen: ${esc(e.message||String(e))}`;
+      }
+    }else if(publishNews&&!category){
+      newsLine="<br>Fokus-News übersprungen (Kategorie fehlt für Ordner-Link).";
+    }
+    const list=published.slice(0,6).map(p=>esc(p.filename)).join("<br>")+(published.length>6?`<br>… +${published.length-6} weitere`:"");
+    setBulkPackStatus(`Paket fertig: <strong>${published.length}</strong> Beiträge live.<br>${list}${newsLine}<br><a href="${SITE_ORIGIN}/#topics" target="_blank" rel="noopener">Kategorien prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge</a>`);
+    addAdminLog("Sammel-Paket",`${published.length} Beiträge veröffentlicht`,category||published[0]?.filename||"");
+    toast(`${published.length} Beiträge veröffentlicht`);
+    const bulkArea=document.getElementById("bulkPackMarkdownInput");if(bulkArea)bulkArea.value="";
+    const countLabel=document.getElementById("bulkPackCountLabel");if(countLabel)countLabel.textContent="";
+  }catch(e){
+    const done=published.length;
+    addAdminLog("Fehler",`Sammel-Paket ab Beitrag ${done+1}: ${e.message||e}`,category||"");
+    setBulkPackStatus(`Fehler nach ${done}/${posts.length} Beiträgen: ${esc(e.message||e)}${done?`<br>${done} Beiträge wurden bereits live gestellt.`:""}`);
+    toast(e.message||"Sammel-Veröffentlichung fehlgeschlagen");
+  }finally{
+    bulkPackBusy=false;
+    if(bulkBtn){bulkBtn.disabled=false;bulkBtn.textContent="Ganzes Paket live veröffentlichen"}
   }
 }
 async function renderDashboard({force=false}={}){
