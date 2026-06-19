@@ -1,3 +1,5 @@
+/* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
+   Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js). */
 import {
   parsePostForTelegram,
   validateTelegramPost,
@@ -296,6 +298,7 @@ export default {
     }
   },
 
+  // PUSH_SYSTEM_GUARD: Cron alle 5 Min – Gebet + Tages-Push (wrangler.toml crons)
   async scheduled(event, env, ctx) {
     ctx.waitUntil(runScheduledPublishes(env));
     ctx.waitUntil(processAllPendingPushes(env));

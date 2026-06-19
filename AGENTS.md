@@ -16,3 +16,16 @@ Bei jeder Aufgabe:
 9. Neue Änderungen, Beiträge, Funktionen, Layouts und Reparaturen immer zuerst direkt in Dar Test / Staging bereitstellen, damit der Nutzer sie prüfen kann. Nicht direkt live für Besucher veröffentlichen.
 10. Live-Veröffentlichung auf `main` oder in die Besucher-App nur nach ausdrücklicher Freigabe des Nutzers, z. B. „push live“, „live veröffentlichen“ oder „freigeben“.
 11. Push-Benachrichtigungen aus Test/Staging dürfen niemals an alle Besucher gehen; dort nur Admin-/Test-Pushs nutzen.
+
+## Push-System-Schutz (streng – nicht verletzen)
+
+Das Push-System ist geschützt durch `scripts/push-system-guard.js` und CI (Canonical State Guard, App Health Check, Worker-Deploy).
+
+**Verboten ohne ausdrückliche Freigabe des Nutzers:**
+- Entfernen oder Ausdünnen von `cloudflare/worker.js` (Scheduler, `/api/prayer/*`, `/api/daily/*`, `/api/push/welcome`)
+- Entfernen des Cron `[triggers] crons = ["*/5 * * * *"]` aus `cloudflare/wrangler.toml`
+- Löschen/Deaktivieren von `prayer-push-*.js`, `daily-push-*.js`
+- Entfernen von `syncPrayerPushTags`, `syncDailyPushTags`, `savePushRegistration`, Tages-Push-Panel in `index.html`/`test/index.html`
+- Admin-Rollbacks die den Worker auf reine Publish-Logik reduzieren
+
+**Vor jedem Merge auf `main`:** `node scripts/push-system-guard.js` muss grün sein. Bei Worker-Änderungen deployt die GitHub Action nur, wenn der Guard besteht.
