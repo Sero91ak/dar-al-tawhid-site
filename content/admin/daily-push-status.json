@@ -2,13 +2,13 @@
   "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v1",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-19T09:55:11.004Z",
+  "updatedAt": "2026-06-19T10:05:11.005Z",
   "usersChecked": 20,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 9,
+  "sent": 9,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 11,
   "errors": 0,
   "dailyContentDate": "2026-06-19",
   "currentRecommendation": {
@@ -23,5 +23,69 @@
     "category": "Vergebung"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-470027ac-73e3-40b5-b345-3a0b3628bc40",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "adf3a30a-04f9-430c-a747-d53031ada7ff",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-9df713fd-4676-4d0d-b22e-8466776f2d04",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "c60f13f0-328e-4696-830f-45d1c0f18935",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-3d800e16-8266-4880-a05f-b1326094e403",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "30834fef-f78c-47c7-8a8f-f77b32276cc3",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-0332852f-9b6c-4fa3-a3cf-6c061afa5184",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "f49444e0-05f5-48c0-8bca-ce5ab03aea42",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-83db5812-702a-4560-8433-6176873fe495",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "36d8c867-f239-43a2-960c-9c5bf633c2c5",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-a61c7db5-79ea-4e8d-b9c3-77626baf06af",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "c60599a6-dd90-4957-ba33-b1566c7c2915",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-f7436c50-02d1-4a07-85d3-d16b55c36962",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "d9d4c802-5c91-4d09-9421-c79f5f7b90d6",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-93e0501f-2246-4f90-9a87-774695dff33b",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "5faa941c-f287-414f-8ba6-ca9dcc641654",
+      "ok": true
+    },
+    {
+      "kind": "recommendation",
+      "deviceId": "dar-60afe1af-580d-48b1-ac35-826fabd19ab2",
+      "contentId": "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126",
+      "recipients": "82d1b84f-e2f9-43ea-9e21-85f12cb3df4c",
+      "ok": true
+    }
+  ]
 }
