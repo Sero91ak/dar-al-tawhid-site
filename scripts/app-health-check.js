@@ -93,6 +93,9 @@ if (daily && !daily.recommendation?.id && !daily.dua?.id) {
 // Prayer status
 checkJson("prayer-push-status.json", "content/admin/prayer-push-status.json");
 
+// version.json
+checkJson("version.json", "version.json");
+
 // Service workers
 const visitorSw = read("service-worker.js");
 if (!visitorSw.match(/dar-al-tawhid-offline-light-v\d+/)) fail("service-worker.js: CACHE_VERSION fehlt");
