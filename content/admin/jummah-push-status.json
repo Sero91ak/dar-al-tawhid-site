@@ -1,50 +1,34 @@
 {
-  "updatedAt": "2026-06-19T19:30:11.356Z",
-  "ok": true,
-  "schedulerStatus": "success",
+  "updatedAt": "2026-06-19T19:35:11.378Z",
+  "ok": false,
+  "schedulerStatus": "warning",
   "schedulerEngine": "cloudflare-worker-jummah-v1",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-19T19:30:11.356Z",
-  "subscriptionsTotal": 1,
-  "usersWithJummah": 1,
-  "locationGroups": 1,
+  "lastCronRun": "2026-06-19T19:35:11.378Z",
+  "subscriptionsTotal": 0,
+  "usersWithJummah": 0,
+  "locationGroups": 0,
   "timeSource": "dhuhr-auto",
   "nextMorningPush": null,
   "nextAdvancePush": null,
   "nextMainPush": null,
   "nextPlannedPush": null,
-  "windowStart": "2026-06-19T19:15:10.979Z",
-  "windowEnd": "2026-06-20T21:30:10.979Z",
+  "windowStart": "2026-06-19T19:20:10.976Z",
+  "windowEnd": "2026-06-20T21:35:10.976Z",
   "scheduled": 0,
   "recipients": 0,
-  "skippedPast": 3,
+  "skippedPast": 0,
   "skippedWindow": 0,
   "duplicates": 0,
   "errors": 0,
   "lastPush": null,
   "lastRecipients": 0,
   "lastOneSignalResponse": null,
-  "lastError": null,
+  "lastError": "Keine Nutzer mit Jumuʿah-Push in Supabase.",
   "planned": [],
-  "skippedPastDetails": [
-    {
-      "mode": "morning",
-      "sendAfter": "2026-06-19T07:00:00.000Z",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "mode": "advance",
-      "sendAfter": "2026-06-19T11:03:00.000Z",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "mode": "entry",
-      "sendAfter": "2026-06-19T11:33:00.000Z",
-      "timeZone": "Europe/Berlin"
-    }
-  ],
+  "skippedPastDetails": [],
   "oneSignalResponses": [],
   "errorDetails": []
 }
