@@ -168,7 +168,7 @@ export default {
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
       const stagingPaths = new Set(["/api/admin/staging/publish"]);
       const newsPaths = new Set(["/news", "/api/admin/news", "/publish-news", "/api/admin/publish-news"]);
-      const newsDeletePaths = new Set(["/api/admin/news/delete"]);
+      const newsDeletePaths = new Set(["/news/delete", "/api/admin/news/delete"]);
       const schedulePaths = new Set(["/schedule", "/api/admin/schedule"]);
       const schedulerPaths = new Set(["/run-scheduler", "/api/admin/run-scheduler"]);
       const telegramPaths = new Set([
