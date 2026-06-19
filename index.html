@@ -469,6 +469,8 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .home-refresh-copy p{margin:3px 0 0;color:var(--premium-body);font-size:10.5px;line-height:1.35}
 .home-refresh-btn{border:1px solid var(--premium-pill-border);border-radius:999px;background:var(--premium-pill-bg);color:var(--premium-pill-text);min-height:38px;padding:8px 13px;font-size:11px;font-weight:950;cursor:pointer;white-space:nowrap;box-shadow:var(--soft-shadow)}
 .home-refresh-btn:disabled{opacity:.68;cursor:wait}
+.home-refresh-panel.is-update-available{border-color:rgba(239,215,142,.55);box-shadow:0 0 0 1px rgba(239,215,142,.12),var(--premium-shadow)}
+.home-refresh-panel.is-update-available .home-refresh-btn{background:linear-gradient(135deg,rgba(239,215,142,.22),rgba(155,122,60,.16));border-color:rgba(239,215,142,.55)}
 @media(max-width:430px){.home-refresh-panel{align-items:flex-start;padding:10px}.home-refresh-copy b{font-size:17px}.home-refresh-copy p{font-size:10px}.home-refresh-btn{min-height:36px;padding:7px 11px;font-size:10px}}
 .hint-banner{border:1px solid rgba(140,190,255,.35);border-radius:20px;background:linear-gradient(145deg,rgba(90,140,220,.12),rgba(8,8,6,.92));padding:14px 15px;margin:0 0 13px;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
 .hint-banner strong{display:block;color:#dbe8ff;font-size:14px;margin-bottom:4px}
@@ -5011,7 +5013,7 @@ html[data-theme="soft"] body.image-editor-mode .image-editor-touch-hint{border-t
 .quran-ayah-num{display:flex;align-items:center;justify-content:space-between;gap:8px}
   .quran-ayah-share-btn{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:2px 6px;border-radius:8px;opacity:.55;transition:opacity .2s;line-height:1;margin-left:auto;flex-shrink:0}
   .quran-ayah-share-btn:hover{opacity:1;background:rgba(239,215,142,.12)}
-.new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
+.new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -7111,7 +7113,8 @@ function calendarEventsForYear(){const h=approxHijriParts();const today=new Date
 function formatGregDate(d){return new Intl.DateTimeFormat("de-DE",{day:"2-digit",month:"long",year:"numeric"}).format(d)}
 function renderMiniCalendar(){const events=calendarEventsForYear().slice(0,4);return`<section class="calendar-panel"><div class="calendar-title"><div><h3>Islamische Termine</h3><p>Automatisch fortlaufend berechnet. Endgültige Termine können je nach Mondsichtung lokal abweichen.</p></div></div><div class="event-list">${events.map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)} ${ev.hYear}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${esc(ev.note)}</div></article>`).join("")}</div></section>`}
 function renderCalendar(){const h=islamicCalendarNow();const events=calendarEventsForYear();return`${setHeader("Islamischer Kalender",`Heute: ${h.day}. ${h.month} ${h.year} · ${h.greg}. Die Termine werden automatisch für das laufende/kommende islamische Jahr berechnet.`, "Kalender")}<section class="calendar-panel"><div class="calendar-title"><div><h3>Wichtige islamische Termine</h3><p>Die Berechnung ist automatisch. Für Ramaḍān und ʿĪd bleibt lokale Mondsichtung maßgeblich.</p></div></div><div class="event-list">${events.map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)} ${ev.hYear}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div><div class="calendar-note">Hinweis: Der islamische Kalender ist mondbasiert. Je nach Land, Mondsichtung und offizieller Bekanntgabe kann ein Datum um einen Tag abweichen.</div></section>`}
-function renderHomeRefreshPanel(){return `<section class="home-refresh-panel"><div class="home-refresh-copy"><span>Aktualisieren</span><b>Seite neu laden</b><p>Lädt die App-Seite und neue Beiträge vom Server. Deine Einstellungen bleiben erhalten.</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">Aktualisieren</button></section>`}
+function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;return `<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Aktualisieren</span><b>${newer?"Neue Version verfügbar":"Seite neu laden"}</b><p>Lädt die App-Seite und neue Beiträge vom Server. Deine Einstellungen bleiben erhalten.</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Aktualisieren"}</button></section>`}
+const APP_BUILD_ID="app-shell-v119";
 async function darPostSwMessage(type,timeoutMs=8000){return new Promise(resolve=>{try{if(!("serviceWorker" in navigator)){resolve(false);return}let done=false;const finish=ok=>{if(done)return;done=true;resolve(!!ok)};const timer=setTimeout(()=>finish(false),timeoutMs);const onMsg=ev=>{if(ev.data&&ev.data.type===type+"_DONE"){clearTimeout(timer);navigator.serviceWorker.removeEventListener("message",onMsg);finish(true)}};navigator.serviceWorker.addEventListener("message",onMsg);const post=sw=>{try{sw&&sw.postMessage&&sw.postMessage({type})}catch(e){}};post(navigator.serviceWorker.controller);navigator.serviceWorker.ready.then(reg=>{post(reg.active);post(reg.waiting);post(reg.installing)}).catch(()=>null)}catch(e){resolve(false)}})}
 async function darWaitForSwControl(timeoutMs=7000){if(!("serviceWorker" in navigator))return false;if(navigator.serviceWorker.controller)return true;return new Promise(resolve=>{let done=false;const finish=ok=>{if(done)return;done=true;resolve(!!ok)};const timer=setTimeout(()=>finish(false),timeoutMs);navigator.serviceWorker.addEventListener("controllerchange",()=>finish(true),{once:true})})}
 function hardRefreshApp(){["hardRefreshBtn","postHardRefreshBtn"].forEach(id=>{const el=$(id);if(el){el.disabled=true;el.textContent="Wird geladen..."}});try{if("serviceWorker" in navigator)navigator.serviceWorker.getRegistration("/").then(reg=>{if(reg&&typeof reg.update==="function")reg.update().catch(()=>{})}).catch(()=>{})}catch(e){}const path=location.pathname||"/";const hash=location.hash||"#home";location.replace(path+"?r="+Date.now()+hash)}
@@ -7590,42 +7593,90 @@ window.addEventListener("focus",function(){setTimeout(()=>refreshContent(),260)}
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")setTimeout(()=>refreshContent(),260)});
 </script>
 <script>
-  /* Auto-Refresh: neue Beiträge erkennen und Banner anzeigen */
+  /* Auto-Refresh: App-Version und neue Beiträge erkennen */
   (function() {
     const CHECK_INTERVAL = 60 * 1000;
     let isChecking = false;
-    function showNewPostsBanner(newCount) {
-      const banner = document.getElementById('newPostsBanner');
+    let bannerMode = null;
+    function getBanner() { return document.getElementById('newPostsBanner'); }
+    function setHomeRefreshHint(on) {
+      document.querySelectorAll('.home-refresh-panel').forEach(function(el) {
+        el.classList.toggle('is-update-available', !!on);
+      });
+      var btn = document.getElementById('hardRefreshBtn');
+      if (btn && on && !btn.disabled) btn.textContent = 'Jetzt laden';
+      else if (btn && !btn.disabled) btn.textContent = 'Aktualisieren';
+    }
+    function showBanner(mode, label) {
+      var banner = getBanner();
       if (!banner) return;
-      const text = banner.querySelector('.new-posts-text');
-      if (text) text.textContent = newCount + ' neue Beiträge verfügbar';
+      bannerMode = mode;
+      var icon = banner.querySelector('.new-posts-icon');
+      var text = banner.querySelector('.new-posts-text');
+      var refresh = banner.querySelector('.new-posts-refresh');
+      if (mode === 'version') {
+        if (icon) icon.textContent = '✨';
+        if (text) text.textContent = 'Neue App-Version verfügbar';
+        if (refresh) refresh.textContent = 'Jetzt laden';
+        banner.setAttribute('aria-label', 'Neue App-Version laden');
+        banner.classList.add('is-app-version');
+        setHomeRefreshHint(true);
+        window.__darAppVersionAvailable = true;
+      } else {
+        if (icon) icon.textContent = '\u23F3';
+        if (text) text.textContent = label || 'Neue Beiträge verfügbar';
+        if (refresh) refresh.textContent = 'Aktualisieren';
+        banner.setAttribute('aria-label', 'Neue Beiträge anzeigen');
+        banner.classList.remove('is-app-version');
+        setHomeRefreshHint(false);
+      }
       banner.classList.remove('hidden');
       banner.style.display = 'flex';
     }
-    function hideNewPostsBanner() {
-      const banner = document.getElementById('newPostsBanner');
+    function hideBanner() {
+      var banner = getBanner();
       if (!banner) return;
       banner.classList.add('hidden');
       banner.style.display = 'none';
+      banner.classList.remove('is-app-version');
+      bannerMode = null;
+      setHomeRefreshHint(false);
+      window.__darAppVersionAvailable = false;
     }
-    async function checkForNewPosts() {
+    async function checkForUpdates() {
       if (isChecking || !navigator.onLine) return;
       isChecking = true;
       try {
-        if (typeof fetchPostsIndexMeta === 'function' && typeof posts !== 'undefined') {
-          const meta = await fetchPostsIndexMeta();
-          const remoteCount = Array.isArray(meta) ? meta.length : 0;
-          const currentCount = Array.isArray(posts) ? posts.length : 0;
-          if (remoteCount > currentCount) showNewPostsBanner(remoteCount - currentCount);
+        if (typeof APP_BUILD_ID === 'string') {
+          try {
+            var vr = await fetch('/version.json?v=' + Date.now(), { cache: 'no-store' });
+            if (vr.ok) {
+              var remote = await vr.json();
+              if (remote && remote.buildId && String(remote.buildId) !== String(APP_BUILD_ID)) {
+                showBanner('version');
+                return;
+              }
+            }
+          } catch (e) {}
         }
+        if (typeof fetchPostsIndexMeta === 'function' && typeof posts !== 'undefined') {
+          var meta = await fetchPostsIndexMeta();
+          var remoteCount = Array.isArray(meta) ? meta.length : 0;
+          var currentCount = Array.isArray(posts) ? posts.length : 0;
+          if (remoteCount > currentCount) {
+            showBanner('posts', (remoteCount - currentCount) + ' neue Beiträge verfügbar');
+            return;
+          }
+        }
+        hideBanner();
       } catch (e) {
-        console.warn('Auto-refresh check:', e);
+        console.warn('Update-Check:', e);
       } finally {
         isChecking = false;
       }
     }
     async function refreshPosts() {
-      hideNewPostsBanner();
+      hideBanner();
       if (typeof refreshContent === 'function') await refreshContent({ forceRender: true });
       else {
         if (typeof loadPosts === 'function') await loadPosts();
@@ -7635,19 +7686,32 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         if (typeof render === 'function') render();
       }
     }
+    function onBannerActivate() {
+      if (bannerMode === 'version') {
+        if (typeof hardRefreshApp === 'function') hardRefreshApp();
+        else location.reload();
+        return;
+      }
+      refreshPosts();
+    }
     function initAutoRefresh() {
-      const banner = document.getElementById('newPostsBanner');
-      if (banner) banner.addEventListener('click', function() { refreshPosts(); });
-      setTimeout(function() { checkForNewPosts(); }, 12000);
-      setInterval(function() { checkForNewPosts(); }, CHECK_INTERVAL);
-      window.addEventListener('online', function() { checkForNewPosts(); });
+      var banner = getBanner();
+      if (banner) {
+        banner.addEventListener('click', onBannerActivate);
+        banner.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBannerActivate(); }
+        });
+      }
+      setTimeout(function() { checkForUpdates(); }, 12000);
+      setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
+      window.addEventListener('online', function() { checkForUpdates(); });
     }
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initAutoRefresh);
     } else {
       initAutoRefresh();
     }
-    window.DAR_AUTO_REFRESH = { check: checkForNewPosts, refresh: refreshPosts, hideBanner: hideNewPostsBanner, showBanner: showNewPostsBanner };
+    window.DAR_AUTO_REFRESH = { check: checkForUpdates, refresh: refreshPosts, hideBanner: hideBanner, showBanner: showBanner };
   })();
   </script>
 </body>
