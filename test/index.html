@@ -5097,6 +5097,16 @@ OneSignalDeferred.push(async function(OneSignal){
       const postId=String(data.postId||data.slug||"").trim();
       const url=String(data.url||n.launchURL||n.url||"").trim();
       if(openDailyPushTarget(data,url)){try{event.preventDefault?.()}catch(e){}return}
+      if(String(data.type||"")==="news"){
+        try{event.preventDefault?.()}catch(e){}
+        const newsId=String(data.newsId||"").trim();
+        const nav=String(data.nav||"").trim();
+        const val=String(data.value||"").trim();
+        if(nav&&val&&nav!=="news-detail"){navigate(nav,val);return}
+        if(newsId){navigate("news-detail",newsId);return}
+        if(url){location.href=url}
+        return
+      }
       if(String(data.type||"")==="post"||postId){try{event.preventDefault?.()}catch(e){}openPostFromPush(postId,url)}
     });
   }catch(e){}
