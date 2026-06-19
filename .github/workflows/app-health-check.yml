@@ -25,6 +25,9 @@ jobs:
       - name: Push system guard
         run: node scripts/push-system-guard.js
 
+      - name: Version update guard (Banner-Schleife + Willkommens-Push)
+        run: node scripts/version-update-guard.js
+
       - name: Visitor SW must not touch admin
         run: |
           if grep -E "'/admin|\"/admin" service-worker.js | grep -q APP_SHELL; then

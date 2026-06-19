@@ -8002,6 +8002,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       hideBanner: hideAllBanners,
       markVersionUpdatePending: markVersionUpdatePending
     };
+    (function assertDarAutoRefreshGuard() {
+      var req = ['check', 'refresh', 'hideAllBanners', 'markVersionUpdatePending'];
+      var missing = req.filter(function(k) { return typeof window.DAR_AUTO_REFRESH[k] !== 'function'; });
+      if (missing.length) console.error('VERSION_UPDATE_GUARD runtime: fehlende DAR_AUTO_REFRESH API:', missing.join(', '));
+    })();
   })();
   </script>
 </body>

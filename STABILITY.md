@@ -63,6 +63,7 @@ git checkout stable-last-working -- index.html admin/index.html service-worker.j
 ## Geschützte Update-Logik (nicht entfernen)
 
 - Versions-Banner nur bei echtem `version.json`-Unterschied
-- Schleifen-Schutz via `dar_version_update_pending` (sessionStorage)
-- `Aktualisieren` → `repairPushConnection` + `HARD_REFRESH` + Willkommens-Push
-- CI blockiert Deploy wenn Marker fehlen (`VERSION_UPDATE_GUARD` in `index.html`)
+- Schleifen-Schutz via `dar_version_update_pending` (sessionStorage, 120 s Cooldown)
+- `Aktualisieren` → `repairPushConnection` (nicht nur `maintainPushHealth`) + `HARD_REFRESH` + Willkommens-Push
+- `maintainPushHealth` → `syncPushRegistrationAndWelcome` (nicht `syncPushRegistrationOnly`)
+- CI blockiert Deploy wenn Marker fehlen oder verbotene Muster auftauchen (`VERSION_UPDATE_GUARD` in `index.html` + `test/index.html`)
