@@ -4022,7 +4022,7 @@ html[data-theme="emerald"] .profile-title,
 html[data-theme="emerald"] .book-profile-title,
 html[data-theme="emerald"] .popular-row-text h4,
 html[data-theme="emerald"] .calendar-title h3,
-html[data-theme="emerald"] .event-name{color:var(--premium-title)!important;text-shadow:0 2px 22px rgba(0,0,0,.42)!important}
+html[data-theme="emerald"] .event-name{color:var(--premium-title)!important;text-shadow:0 1px 10px rgba(0,0,0,.22)!important}
 html[data-theme="emerald"] .brand small,
 html[data-theme="emerald"] .eyebrow,
 html[data-theme="emerald"] .isnad-label,
@@ -4196,8 +4196,6 @@ html[data-theme="emerald"] .offline-box,
 html[data-theme="emerald"] .app-save-box,
 html[data-theme="emerald"] .home-refresh-panel,
 html[data-theme="emerald"] .ramadan-panel,
-html[data-theme="emerald"] .daily-box,
-html[data-theme="emerald"] .recommended-box,
 html[data-theme="emerald"] .status-check-box,
 html[data-theme="emerald"] .share-panel,
 html[data-theme="emerald"] .share-panel-v2,
@@ -4731,6 +4729,139 @@ html[data-theme="emerald"] .pwa-modal{
   html[data-theme="emerald"] .list-card:hover,
   html[data-theme="emerald"] .dua-card:hover{transform:none!important}
 }
+
+/* SMARAGD ROYAL PREMIUM — Ultimatum-Abschluss (Tiefe, Kompakt, Lesbarkeit) */
+html[data-theme="emerald"] .top-shell:before{opacity:.82!important}
+html[data-theme="emerald"] .top-shell:after{
+  background:
+    radial-gradient(circle at 88% 8%,rgba(227,201,130,.16),transparent 40%),
+    linear-gradient(180deg,rgba(6,22,17,.06),transparent 38%)!important;
+  opacity:1!important;
+}
+html[data-theme="emerald"] .bottom-nav{
+  border-top:1px solid rgba(201,164,90,.28)!important;
+  background:var(--nav-bg)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+html[data-theme="emerald"] .view-head{
+  padding:2px 2px 12px!important;
+  margin-bottom:14px!important;
+}
+html[data-theme="emerald"] .view h2{
+  font-size:clamp(26px,4.2vw,48px)!important;
+  text-shadow:0 1px 10px rgba(0,0,0,.22)!important;
+}
+html[data-theme="emerald"] .view-desc{
+  font-size:12.5px!important;
+  line-height:1.55!important;
+  color:var(--text-muted)!important;
+}
+html[data-theme="emerald"] .current-focus{
+  padding:11px 12px!important;
+  margin-bottom:11px!important;
+  border-radius:18px!important;
+}
+html[data-theme="emerald"] .current-focus-head h3{font-size:21px!important}
+html[data-theme="emerald"] .home-refresh-panel{
+  border-radius:16px!important;
+  margin-bottom:10px!important;
+}
+html[data-theme="emerald"] .highlight-sections{
+  gap:6px!important;
+  margin:2px 0 8px!important;
+}
+html[data-theme="emerald"] .daily-box,
+html[data-theme="emerald"] .recommended-box{
+  background:var(--card-bg)!important;
+  border:1px solid rgba(155,120,56,.30)!important;
+  box-shadow:var(--shadow-card-light)!important;
+  color:var(--text-main-dark)!important;
+  border-radius:16px!important;
+  padding:10px 12px!important;
+  margin:0 0 8px!important;
+}
+html[data-theme="emerald"] .daily-title,
+html[data-theme="emerald"] .recommended-title{
+  color:var(--text-main-dark)!important;
+  font-size:19px!important;
+  text-shadow:none!important;
+}
+html[data-theme="emerald"] .daily-text,
+html[data-theme="emerald"] .recommended-text{color:var(--text-muted-dark)!important;font-size:12px!important}
+html[data-theme="emerald"] .daily-label,
+html[data-theme="emerald"] .recommended-label{color:var(--accent-strong)!important}
+html[data-theme="emerald"] .filter-panel{
+  border-radius:16px!important;
+  padding:10px!important;
+  margin-bottom:10px!important;
+}
+html[data-theme="emerald"] .statement,
+html[data-theme="emerald"] .dua-detail-box,
+html[data-theme="emerald"] .article .statement,
+html[data-theme="emerald"] .quran-ayah{
+  background:var(--card-bg-dark)!important;
+  border:1px solid var(--border-soft)!important;
+  box-shadow:var(--shadow-soft)!important;
+  text-shadow:none!important;
+}
+html[data-theme="emerald"] .statement em,
+html[data-theme="emerald"] .dua-trans,
+html[data-theme="emerald"] .script-accent,
+html[data-theme="emerald"] .quran-ayah-tr{
+  color:var(--text-muted)!important;
+  text-decoration:underline;
+  text-decoration-color:rgba(201,164,90,.42)!important;
+  text-underline-offset:4px!important;
+}
+html[data-theme="emerald"] .quran-wake-btn.is-on{
+  animation:none!important;
+  border-color:rgba(201,164,90,.48)!important;
+  background:linear-gradient(145deg,rgba(30,107,78,.72),rgba(14,58,44,.88))!important;
+  color:var(--text-main)!important;
+  box-shadow:0 0 0 1px rgba(201,164,90,.14),0 8px 20px rgba(0,0,0,.22)!important;
+}
+html[data-theme="emerald"] .account-actions button.primary,
+html[data-theme="emerald"] .hint-btn.primary:not(#hardRefreshBtn),
+html[data-theme="emerald"] button.primary:not(.theme-switch-btn):not(#imageEditorSaveTop){
+  background:var(--btn-primary-bg)!important;
+  color:var(--text-main)!important;
+  border:1px solid rgba(227,201,130,.42)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+html[data-theme="emerald"] #hardRefreshBtn.home-refresh-btn,
+html[data-theme="emerald"] .home-refresh-panel.is-update-available #hardRefreshBtn,
+html[data-theme="emerald"] #imageEditorSaveTop.primary,
+html[data-theme="emerald"] #postHardRefreshBtn{
+  background:var(--btn-gold-bg)!important;
+  color:var(--text-main-dark)!important;
+  border:1px solid rgba(155,120,56,.38)!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+html[data-theme="emerald"] :where(
+  button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,
+  .home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,
+  .quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,
+  .link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill
+):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save){
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+@media(hover:hover) and (pointer:fine){
+  html[data-theme="emerald"] .action-btn.primary:hover,
+  html[data-theme="emerald"] .hint-btn.primary:hover,
+  html[data-theme="emerald"] button.primary:not(.theme-switch-btn):not(#imageEditorSaveTop):hover{
+    background:linear-gradient(135deg,var(--accent-green-hover),var(--accent-green))!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  }
+  html[data-theme="emerald"] #hardRefreshBtn:hover,
+  html[data-theme="emerald"] #imageEditorSaveTop:hover,
+  html[data-theme="emerald"] #postHardRefreshBtn:hover{
+    filter:brightness(1.03)!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.28)!important;
+  }
+}
+
 /* MOBILE GUTTER FINAL: einheitlicher Seitenrand — iOS, Android, Browser, PWA */
 @media(max-width:700px){
   :root{
