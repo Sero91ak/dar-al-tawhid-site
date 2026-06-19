@@ -482,6 +482,18 @@ function newsItemExpiresAt(item){
   const ttl=Number(item?.ttlHours||24);
   return created+ttl*60*60*1000;
 }
+function newsDurationHours(value){
+  const v=String(value||"24 Stunden");
+  if(v.includes("manuell"))return 720;
+  if(v.includes("72"))return 72;
+  return 24;
+}
+function newsDurationFromItem(item){
+  if(!item)return "24 Stunden";
+  if(Number(item.ttlHours||0)>=168||String(item.until||"").includes("manuell"))return "bis manuell deaktiviert";
+  if(Number(item.ttlHours||24)===72)return "72 Stunden";
+  return "24 Stunden";
+}
 function isNewsItemActive(item){
   if(!item||item.visible===false)return false;
   if(item.status==="removed"||item.status==="archived")return false;
@@ -956,7 +968,7 @@ function renderBulkPackPanel(){
     <textarea class="paste-area" id="bulkPackMarkdownInput" spellcheck="false" placeholder="Beitrag 1 (mit --- Frontmatter ---)\n\n===\n\nBeitrag 2\n\n===\n\nBeitrag 3 ..."></textarea>
     <div class="bulk-pack-meta">
       <input class="field" id="bulkNewsTitleInput" placeholder="Fokus-Titel (leer = automatisch)">
-      <select class="field" id="bulkNewsDuration"><option value="24 Stunden">24 Stunden sichtbar</option><option value="bis manuell deaktiviert">Manuell deaktivieren</option></select>
+      <select class="field" id="bulkNewsDuration"><option value="24 Stunden">24 Stunden sichtbar</option><option value="72 Stunden">72 Stunden sichtbar</option><option value="bis manuell deaktiviert">Manuell deaktivieren</option></select>
     </div>
     <textarea class="admin-textarea wide" id="bulkNewsTextInput" placeholder="Fokus-Text für „Neu im Fokus“ (leer = Standardtext mit Kategorie-Link)"></textarea>
     <div class="bulk-pack-actions">
@@ -1250,7 +1262,7 @@ function renderStart(ctx){
     ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
     ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("⑥","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
+    ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
     ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
     ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
     ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
@@ -1545,7 +1557,7 @@ function renderNewsFormFields(compact){
   const editing=editingNewsId?` · Bearbeitung ${esc(editingNewsId)}`:"";
   return `<div class="admin-form-grid news-form-grid${compact?" news-compose-compact":""}">
       <input class="field" id="newsTitle" placeholder="Kurzer Titel" value="${esc(editItem?.title||"")}">
-      <select class="field" id="newsDuration"><option value="24 Stunden"${!editItem||Number(editItem.ttlHours||24)<168&&!String(editItem.until||"").includes("manuell")?" selected":""}>24 Stunden</option><option value="bis manuell deaktiviert"${editItem&&(Number(editItem.ttlHours||0)>=168||String(editItem.until||"").includes("manuell"))?" selected":""}>Dauerhaft / manuell</option></select>
+      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"?" selected":""}>72 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
       <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher">${esc(editItem?.text||"")}</textarea>
       <button class="btn primary wide" id="publishNewsLiveBtn" type="button">${editingNewsId?"Änderung live speichern (ohne Push)":"Live posten"}</button>
       ${editingNewsId?`<button class="btn" id="cancelNewsEditBtn" type="button">Bearbeitung abbrechen</button>`:""}
@@ -1858,7 +1870,7 @@ function renderTech(ctx){
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
         <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
-        <div class="status-row"><span><b>News 24 Stunden</b><br>Live-Meldungen werden aus content/updates/current.json geladen und sind auf allen Admin-Geräten gleich sichtbar.</span><strong class="status-pill">${liveNewsItems.length?"Live":"Bereit"}</strong></div>
+        <div class="status-row"><span><b>News 24–72 Stunden</b><br>Live-Meldungen werden aus content/updates/current.json geladen und sind auf allen Admin-Geräten gleich sichtbar.</span><strong class="status-pill">${liveNewsItems.length?"Live":"Bereit"}</strong></div>
         <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Nur serverseitig zuverlässig bei geschlossener PWA. Browser-Timer bleiben nur Zusatz.</span><strong class="status-pill">Scheduler nötig</strong></div>
         <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
       </div>
@@ -2067,7 +2079,7 @@ function bindCommandCenterForms(){
     const text=(document.getElementById("newsText")?.value||"").trim();
     const duration=document.getElementById("newsDuration")?.value||"24 Stunden";
     if(!title||!text){toast("Titel und Text fehlen");return}
-    const hours=String(duration).includes("manuell")?720:24;
+    const hours=newsDurationHours(duration);
     const isEdit=!!editingNewsId;
     if(!isEdit&&!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet."))return;
     publishNewsLive.disabled=true;
@@ -2123,7 +2135,7 @@ function bindCommandCenterForms(){
     }
   });
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
-  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=newsDurationHours(item.until||"24 Stunden");const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
   const newsRefreshLive=document.getElementById("newsRefreshLiveBtn");if(newsRefreshLive)newsRefreshLive.onclick=async()=>{newsRefreshLive.disabled=true;newsRefreshLive.textContent="Lädt…";await fetchLiveNewsItems({force:true});toast(liveNewsError?"Live-News konnten nicht geladen werden":"Live-News aktualisiert");renderShell()};
   const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
   document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
@@ -2312,7 +2324,7 @@ async function uploadBulkPackViaWorker(){
     if(publishNews&&category){
       const newsTitle=(document.getElementById("bulkNewsTitleInput")?.value||"").trim()||`Neue Kategorie: ${category}`;
       const newsText=(document.getElementById("bulkNewsTextInput")?.value||"").trim()||`Assalāmu ʿalaikum,\n\nes wurden ${published.length} neue Beiträge zum Thema „${category}“ veröffentlicht. Tippe hier, um den Ordner mit allen Aussagen zu öffnen.\n\nBarakallāhu fīkum.`;
-      const hours=String(document.getElementById("bulkNewsDuration")?.value||"").includes("manuell")?720:24;
+      const hours=newsDurationHours(document.getElementById("bulkNewsDuration")?.value||"24 Stunden");
       try{
         const newsResult=await workerPostRequest("news",{id:`bulk-${slugify(category)}-${Date.now()}`,title:newsTitle,text:newsText,ttlHours:hours,badge:"Neu",nav:"topic",value:category,count:published.length});
         const pushTag=newsResult.push?.sent?" · Push gesendet":newsResult.push?.reason?` · Push: ${esc(newsResult.push.reason)}`:"";
