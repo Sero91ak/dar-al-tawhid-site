@@ -4543,7 +4543,7 @@ html[data-theme="emerald"] body.image-editor-mode .ie-power-sheet{
   html[data-theme="emerald"] .post-grid{
     grid-template-columns:repeat(3,minmax(0,1fr))!important;
   }
-  html[data-theme="emerald"] .app{width:min(1180px,100%)!important}
+  html[data-theme="emerald"] .app{width:min(1420px,100%)!important}
   html[data-theme="emerald"] .statement,
   html[data-theme="emerald"] .article{max-width:820px!important}
 }
@@ -5672,6 +5672,25 @@ html[data-theme] .view{
 /* Final app-frame correction: remove the dominant outer box and use more width. */
 html[data-theme] .app{
   width:min(1420px,100%)!important;
+}
+/* SMARAGD WIDTH FINAL: volle Fläche, kein schwarzer Außenkasten */
+html[data-theme="emerald"] .app{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  width:min(1420px,100%)!important;
+}
+html[data-theme="emerald"],
+html[data-theme="emerald"] body{
+  background:var(--outer-bg)!important;
+  background-color:var(--outer-bg-flat)!important;
+}
+html[data-theme="emerald"].is-standalone-pwa,
+html[data-theme="emerald"].is-standalone-pwa body{
+  background:var(--outer-bg)!important;
+  background-color:var(--outer-bg-flat)!important;
 }
 html[data-theme] .top-shell,
 html[data-theme] .view{
