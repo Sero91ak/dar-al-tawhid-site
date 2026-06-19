@@ -69,14 +69,17 @@ function runPushSystemGuard() {
   mustInclude("worker.js Imports", worker, [
     'from "./prayer-push-admin.js"',
     'from "./daily-push-admin.js"',
+    'from "./jummah-push-admin.js"',
     "ensurePrayerSchedulerFresh",
-    "ensureDailyPushSchedulerFresh"
+    "ensureDailyPushSchedulerFresh",
+    "ensureJummahPushSchedulerFresh"
   ]);
 
   mustInclude("worker.js Cron scheduled()", worker, [
     "async scheduled(event, env, ctx)",
     "ctx.waitUntil(ensurePrayerSchedulerFresh",
-    "ctx.waitUntil(ensureDailyPushSchedulerFresh"
+    "ctx.waitUntil(ensureDailyPushSchedulerFresh",
+    "ctx.waitUntil(ensureJummahPushSchedulerFresh"
   ]);
 
   mustNotMatch(
@@ -89,16 +92,20 @@ function runPushSystemGuard() {
   mustInclude("worker.js Öffentliche Push-API", worker, [
     'url.pathname === "/api/prayer/status"',
     'url.pathname === "/api/daily/status"',
+    'url.pathname === "/api/jummah/status"',
     'url.pathname === "/api/prayer/test"',
     'url.pathname === "/api/daily/test"',
+    'url.pathname === "/api/jummah/test"',
     'url.pathname === "/api/push/welcome"'
   ]);
 
   mustInclude("worker.js Health Push-Metadaten", worker, [
     'prayerScheduler: "cloudflare-worker-cron"',
     'dailyPushScheduler: "cloudflare-worker-daily-v1"',
+    'jummahPushScheduler: "cloudflare-worker-jummah-v1"',
     'prayerCron: "*/5 * * * *"',
-    'dailyPushCron: "*/5 * * * *"'
+    'dailyPushCron: "*/5 * * * *"',
+    'jummahPushCron: "*/5 * * * *"'
   ]);
 
   mustInclude("worker.js PUSH_SYSTEM_GUARD Marker", worker, [
@@ -113,7 +120,9 @@ function runPushSystemGuard() {
     "cloudflare/prayer-push-admin.js",
     "cloudflare/prayer-push-copy.js",
     "cloudflare/daily-push-scheduler.js",
-    "cloudflare/daily-push-admin.js"
+    "cloudflare/daily-push-admin.js",
+    "cloudflare/jummah-push-scheduler.js",
+    "cloudflare/jummah-push-admin.js"
   ].forEach((file) => mustExist(file));
 
   mustInclude("prayer-push-scheduler.js", read("cloudflare/prayer-push-scheduler.js"), [
@@ -125,13 +134,23 @@ function runPushSystemGuard() {
     "regenerateDailyContent"
   ]);
 
+  mustInclude("jummah-push-scheduler.js", read("cloudflare/jummah-push-scheduler.js"), [
+    "export async function runJummahPushScheduler",
+    "solarNoon",
+    "isFridayLocal"
+  ]);
+
   for (const htmlFile of ["index.html", "test/index.html"]) {
     const html = read(htmlFile);
     mustInclude(`${htmlFile} Push-Sync`, html, [
       "function syncPrayerPushTags",
       "function syncDailyPushTags",
+      "function syncJummahPushTags",
       "function savePushRegistration",
       "function buildDailyPushTags",
+      "function buildJummahPushTags",
+      "jummah-push-panel",
+      "enableJummahPushBtn",
       "daily-push-panel",
       "enableDailyDuaPushBtn",
       "enableDailyRecommendationPushBtn",
@@ -142,6 +161,7 @@ function runPushSystemGuard() {
   mustExist("content/updates/daily.json");
   mustExist("content/admin/daily-push.json");
   mustExist("content/admin/daily-push-schema.sql");
+  mustExist("content/admin/jummah-push-schema.sql");
 
   const daily = JSON.parse(read("content/updates/daily.json"));
   if (!daily?.dua?.id || !daily?.recommendation?.id) {
@@ -159,7 +179,8 @@ function runPushSystemGuard() {
   const deployWorkflow = read(".github/workflows/deploy-admin-publisher.yml");
   mustInclude("deploy-admin-publisher.yml", deployWorkflow, [
     "cloudflare/prayer-push-*.js",
-    "cloudflare/daily-push-*.js"
+    "cloudflare/daily-push-*.js",
+    "cloudflare/jummah-push-*.js"
   ]);
 
   return failed;
