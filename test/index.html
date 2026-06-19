@@ -3898,8 +3898,9 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
   }
 }
 
-/* SMARAGD ROYAL PREMIUM — Design-System (Token-basiert) */
+/* SMARAGD ROYAL PREMIUM — professionelles Theme-System (Besucher-App) */
 html[data-theme="emerald"]{
+  color-scheme:dark!important;
   --theme-ease:background-color .22s ease,color .22s ease,border-color .22s ease,box-shadow .22s ease,transform .18s ease,opacity .18s ease;
   --app-bg:#061611;
   --app-bg-soft:#0B241B;
@@ -3919,17 +3920,16 @@ html[data-theme="emerald"]{
   --accent-green-hover:#2C8A64;
   --border-soft:rgba(201,164,90,.32);
   --border-strong:rgba(201,164,90,.42);
-  --shadow-soft:0 14px 34px rgba(0,0,0,.24),inset 0 1px 0 rgba(227,201,130,.10);
-  --shadow-card-light:0 12px 28px rgba(20,14,7,.10),inset 0 1px 0 rgba(255,255,255,.48);
+  --shadow-soft:0 12px 34px rgba(0,0,0,.22),inset 0 1px 0 rgba(227,201,130,.10);
+  --shadow-card-light:0 10px 28px rgba(20,14,7,.10),inset 0 1px 0 rgba(255,255,255,.48);
   --success:#2E7D55;
   --warning:#B7791F;
   --error:#A84532;
-  --hero-bg:linear-gradient(135deg,#061611 0%,#0B241B 48%,#12382B 100%);
-  --hero-shimmer:radial-gradient(circle at 85% 10%,rgba(227,201,130,.18),transparent 34%);
+  --hero-bg:linear-gradient(135deg,#061611 0%,#0B241B 50%,#12382B 100%);
+  --hero-shimmer:radial-gradient(circle at top right,rgba(227,201,130,.16),transparent 38%);
   --btn-primary-bg:linear-gradient(135deg,#1E6B4E,#2C8A64);
   --btn-gold-bg:linear-gradient(135deg,#C9A45A,#E3C982);
   --nav-bg:rgba(6,22,17,.94);
-  /* Legacy-Alias für bestehende Variablen */
   --bg:var(--app-bg)!important;
   --bg2:var(--app-bg-soft)!important;
   --panel:var(--surface-strong)!important;
@@ -3949,16 +3949,16 @@ html[data-theme="emerald"]{
   --danger:var(--error)!important;
   --premium-border:var(--border-soft)!important;
   --premium-bg:var(--hero-shimmer),var(--hero-bg)!important;
-  --premium-shadow:var(--shadow-soft),inset 0 1px 0 rgba(255,255,255,.05)!important;
+  --premium-shadow:var(--shadow-soft)!important;
   --premium-label:var(--accent-soft)!important;
   --premium-title:var(--text-main)!important;
   --premium-body:rgba(216,207,182,.92)!important;
   --premium-pill-border:var(--border-soft)!important;
-  --premium-pill-bg:linear-gradient(135deg,rgba(30,107,78,.20),rgba(201,164,90,.12))!important;
-  --premium-pill-text:var(--text-main)!important;
+  --premium-pill-bg:rgba(255,255,255,.05)!important;
+  --premium-pill-text:rgba(248,243,232,.75)!important;
   --theme-logo-ring:rgba(201,164,90,.48)!important;
   --theme-logo-glow:rgba(227,201,130,.20)!important;
-  --theme-deck-aura:radial-gradient(circle at 13% 29%,rgba(227,201,130,.12),transparent 25%),radial-gradient(circle at 78% 7%,rgba(44,138,100,.16),transparent 34%)!important;
+  --theme-deck-aura:radial-gradient(circle at 13% 29%,rgba(227,201,130,.10),transparent 25%),radial-gradient(circle at 78% 7%,rgba(44,138,100,.12),transparent 34%)!important;
   --ok:var(--success)!important;
   --warn:var(--warning)!important;
   --card-light:#F7F1E3!important;
@@ -3969,9 +3969,13 @@ html[data-theme="emerald"]{
 html[data-theme="emerald"],
 html[data-theme="emerald"] body{
   background:var(--premium-bg)!important;
-  color:var(--text)!important;
+  color:var(--text-main)!important;
+  transition:var(--theme-ease)!important;
 }
-html[data-theme="emerald"] body:before{opacity:.045!important;filter:hue-rotate(12deg) saturate(.88)!important}
+html.theme-switching{background:var(--app-bg,#061611)!important}
+html.theme-switching,
+html.theme-switching body{transition:var(--theme-ease)!important}
+html[data-theme="emerald"] body:before{opacity:.035!important;filter:none!important}
 html[data-theme="emerald"] .app{
   background:var(--premium-bg)!important;
   border:1px solid var(--premium-border)!important;
@@ -3986,31 +3990,42 @@ html[data-theme="emerald"] .view{
   box-shadow:none!important;
   border-radius:0!important;
 }
-html[data-theme="emerald"] .top-shell{margin-bottom:0!important;border-radius:0!important;margin-top:0!important}
+html[data-theme="emerald"] .top-shell{
+  position:relative!important;
+  overflow:hidden!important;
+  margin-bottom:0!important;
+  margin-top:0!important;
+}
+html[data-theme="emerald"] .top-shell:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:var(--hero-shimmer);
+  opacity:.95;
+}
+html[data-theme="emerald"] .header,
+html[data-theme="emerald"] .isnad,
+html[data-theme="emerald"] .hero-text{position:relative;z-index:1}
 html[data-theme="emerald"] .header{padding-top:max(18px,calc(env(safe-area-inset-top,0px) + 8px))!important}
-html[data-theme="emerald"] .isnad{
-  background:rgba(7,26,20,.30)!important;
-  border-top:1px solid var(--line2)!important;
-}
+html[data-theme="emerald"] .isnad{background:rgba(7,26,20,.28)!important;border-top:1px solid var(--line2)!important}
 html[data-theme="emerald"] .hero-text{border-top-color:var(--line2)!important}
-html[data-theme="emerald"] .app-bar,
-html[data-theme="emerald"] .header-prayer-status{
-  background:linear-gradient(145deg,rgba(14,58,44,.82),rgba(6,18,37,.86))!important;
-  border:1px solid rgba(201,164,90,.22)!important;
-  color:var(--text)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 24px rgba(0,0,0,.22)!important;
-}
-html[data-theme="emerald"] .app-bar{border-radius:16px!important;padding:0!important;margin:0 var(--content-inset,14px) 10px!important}
-html[data-theme="emerald"] .app-bar.is-home{display:none!important}
-html[data-theme="emerald"] .crumb{
-  flex:1 1 auto!important;text-align:right!important;padding:9px 14px!important;
-  background:rgba(16,50,40,.78)!important;border:1px solid var(--line2)!important;border-radius:999px!important;
-  color:var(--gold2)!important;font-family:var(--serif)!important;font-size:13px!important;font-weight:800!important;
-  min-height:40px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
-}
+html[data-theme="emerald"] .view{padding:18px!important}
+html[data-theme="emerald"] .view-head{padding:2px 2px 12px!important;margin-bottom:14px!important;border-bottom-color:var(--line2)!important}
+html[data-theme="emerald"] .view h2{font-size:clamp(26px,4.2vw,48px)!important;color:var(--text-main)!important;text-shadow:0 1px 10px rgba(0,0,0,.22)!important}
+html[data-theme="emerald"] .view-desc{color:var(--text-muted)!important;font-size:12.5px!important;line-height:1.55!important}
 html[data-theme="emerald"] h1,
-html[data-theme="emerald"] .salam,
-html[data-theme="emerald"] .view h2,
+html[data-theme="emerald"] .salam{color:var(--accent-soft)!important;text-shadow:0 1px 10px rgba(0,0,0,.22)!important}
+html[data-theme="emerald"] .intro{color:var(--text-muted)!important}
+html[data-theme="emerald"] .intro strong{color:var(--text-main)!important}
+html[data-theme="emerald"] .brand small,
+html[data-theme="emerald"] .eyebrow,
+html[data-theme="emerald"] .isnad-label,
+html[data-theme="emerald"] .dua-label,
+html[data-theme="emerald"] .status-check-label,
+html[data-theme="emerald"] .home-more-sub,
+html[data-theme="emerald"] .prayer-small-label,
+html[data-theme="emerald"] .prayer-quick-label{color:var(--accent-soft)!important}
 html[data-theme="emerald"] .section-head h3,
 html[data-theme="emerald"] .folder-card h3,
 html[data-theme="emerald"] .post-card h3,
@@ -4022,17 +4037,7 @@ html[data-theme="emerald"] .profile-title,
 html[data-theme="emerald"] .book-profile-title,
 html[data-theme="emerald"] .popular-row-text h4,
 html[data-theme="emerald"] .calendar-title h3,
-html[data-theme="emerald"] .event-name{color:var(--premium-title)!important;text-shadow:0 1px 10px rgba(0,0,0,.22)!important}
-html[data-theme="emerald"] .brand small,
-html[data-theme="emerald"] .eyebrow,
-html[data-theme="emerald"] .isnad-label,
-html[data-theme="emerald"] .dua-label,
-html[data-theme="emerald"] .status-check-label,
-html[data-theme="emerald"] .home-more-sub,
-html[data-theme="emerald"] .prayer-small-label,
-html[data-theme="emerald"] .prayer-quick-label{color:var(--premium-label)!important}
-html[data-theme="emerald"] .intro,
-html[data-theme="emerald"] .view-desc,
+html[data-theme="emerald"] .event-name{color:var(--text-main)!important;text-shadow:none!important}
 html[data-theme="emerald"] .folder-card p,
 html[data-theme="emerald"] .info-card p,
 html[data-theme="emerald"] .dua-card p,
@@ -4051,537 +4056,22 @@ html[data-theme="emerald"] .quran-athar-source,
 html[data-theme="emerald"] .quran-surah-card small,
 html[data-theme="emerald"] .event-date,
 html[data-theme="emerald"] .empty,
-html[data-theme="emerald"] .loading,
-html[data-theme="emerald"] .error{color:var(--muted)!important}
-html[data-theme="emerald"] .premium-surface,
-html[data-theme="emerald"] .folder-card,
-html[data-theme="emerald"] .post-card,
-html[data-theme="emerald"] .list-card,
-html[data-theme="emerald"] .info-card,
-html[data-theme="emerald"] .dua-card,
-html[data-theme="emerald"] .overview-panel,
-html[data-theme="emerald"] .direct-pick-panel,
-html[data-theme="emerald"] .search-pro-panel,
-html[data-theme="emerald"] .filter-panel,
-html[data-theme="emerald"] .profile-box,
-html[data-theme="emerald"] .book-profile-box,
-html[data-theme="emerald"] .series-box,
-html[data-theme="emerald"] .pinned-box,
-html[data-theme="emerald"] .popular-panel,
-html[data-theme="emerald"] .prayer-panel,
-html[data-theme="emerald"] .qibla-panel,
-html[data-theme="emerald"] .statement,
-html[data-theme="emerald"] .dua-detail-box,
-html[data-theme="emerald"] .source-strong,
-html[data-theme="emerald"] .calendar-panel,
-html[data-theme="emerald"] .event-card,
-html[data-theme="emerald"] .current-focus-card{
-  background:linear-gradient(145deg,rgba(18,56,43,.86),rgba(7,26,20,.92))!important;
-  border-color:rgba(201,164,90,.24)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 30px rgba(0,0,0,.26)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] .home-more-body .pinned-box,
-html[data-theme="emerald"] .home-more-body .series-box,
-html[data-theme="emerald"] .home-more-body .overview-compact .stat-card,
-html[data-theme="emerald"] .home-more-body .series-card.has-icon,
-html[data-theme="emerald"] .home-more-body .pinned-card.has-icon,
-html[data-theme="emerald"] .prayer-summary-card,
-html[data-theme="emerald"] .popular-row,
-html[data-theme="emerald"] .stat-card,
-html[data-theme="emerald"] .prayer-time-card,
-html[data-theme="emerald"] .prayer-controls-compact,
-html[data-theme="emerald"] .prayer-push-status,
-html[data-theme="emerald"] .prayer-push-status-item{
-  background:linear-gradient(145deg,rgba(18,67,52,.72),rgba(9,32,25,.82))!important;
-  border-color:rgba(201,164,90,.20)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] .stat-card b,
-html[data-theme="emerald"] .prayer-quick-title,
-html[data-theme="emerald"] .prayer-panel-title,
-html[data-theme="emerald"] .prayer-summary-card b,
-html[data-theme="emerald"] .prayer-summary-card span,
-html[data-theme="emerald"] .prayer-summary-card small,
-html[data-theme="emerald"] .prayer-time-card b,
-html[data-theme="emerald"] .prayer-time-card span,
-html[data-theme="emerald"] .prayer-time-card small,
-html[data-theme="emerald"] .pinned-title,
-html[data-theme="emerald"] .series-title,
-html[data-theme="emerald"] .home-more-section .collapsible-head h3,
-html[data-theme="emerald"] .prayer-push-status summary,
-html[data-theme="emerald"] .prayer-push-status-item span{color:var(--premium-title)!important}
-html[data-theme="emerald"] .prayer-push-status-item b{color:var(--premium-label)!important}
-html[data-theme="emerald"] .prayer-push-status-item.ok span{color:#E3C982!important}
-html[data-theme="emerald"] .prayer-push-status-item.warn span{color:#E3C982!important}
-html[data-theme="emerald"] .search,
-html[data-theme="emerald"] .direct-pick,
-html[data-theme="emerald"] .filter-select,
-html[data-theme="emerald"] .account-form input{
-  background:rgba(14,42,32,.76)!important;
-  color:var(--text)!important;
-  border-color:rgba(201,164,90,.24)!important;
-}
-html[data-theme="emerald"] .search::placeholder{color:var(--muted2)!important}
-html[data-theme="emerald"] .social-link,
-html[data-theme="emerald"] .action-btn,
-html[data-theme="emerald"] .advanced-toggle,
-html[data-theme="emerald"] .collapse-toggle:not(.premium-pill),
-html[data-theme="emerald"] .back-btn,
-html[data-theme="emerald"] .home-btn,
-html[data-theme="emerald"] .hijri-header-pill,
-html[data-theme="emerald"] .footer-action-btn,
-html[data-theme="emerald"] .prayer-action-btn,
-html[data-theme="emerald"] .prayer-detail-toggle,
-html[data-theme="emerald"] .link-row a,
-html[data-theme="emerald"] .nav-posts button,
-html[data-theme="emerald"] .share-btn.native,
-html[data-theme="emerald"] .share-btn.link,
-html[data-theme="emerald"] .quran-surah-nav button,
-html[data-theme="emerald"] .quran-popular-btn,
-html[data-theme="emerald"] .quran-jump-btn,
-html[data-theme="emerald"] .quran-tafsir-tab,
-html[data-theme="emerald"] .quran-wake-btn,
-html[data-theme="emerald"] .quran-tr-btn,
-html[data-theme="emerald"] .account-actions button{
-  background:var(--premium-pill-bg)!important;
-  border-color:var(--premium-pill-border)!important;
-  color:var(--premium-pill-text)!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-html[data-theme="emerald"] .action-btn.active,
-html[data-theme="emerald"] .prayer-action-btn.active,
-html[data-theme="emerald"] .float-btn.push-active,
-html[data-theme="emerald"] .quran-tafsir-tab.active,
-html[data-theme="emerald"] .quran-wake-btn.is-on,
-html[data-theme="emerald"] .quran-tr-btn.active,
-html[data-theme="emerald"] .theme-switch-btn.is-active{
-  border-color:rgba(201,164,90,.64)!important;
-  background:linear-gradient(145deg,rgba(201,164,90,.22),rgba(44,138,100,.18))!important;
-  color:var(--gold2)!important;
-  box-shadow:0 0 0 1px rgba(201,164,90,.16),0 10px 26px rgba(0,0,0,.22)!important;
-}
-html[data-theme="emerald"] .statement strong,
-html[data-theme="emerald"] .dua-de,
-html[data-theme="emerald"] .source-row,
-html[data-theme="emerald"] .source-row b,
-html[data-theme="emerald"] .quran-ayah-de,
-html[data-theme="emerald"] .quran-result-de,
-html[data-theme="emerald"] .quran-tafsir-panel,
-html[data-theme="emerald"] .quran-term-card span,
-html[data-theme="emerald"] .quran-athar-text{color:var(--text)!important}
-html[data-theme="emerald"] .dua-arabic,
-html[data-theme="emerald"] .quran-surah-head-ar,
-html[data-theme="emerald"] .quran-ayah-ar{color:#F8F3E8!important}
-html[data-theme="emerald"] .statement em,
-html[data-theme="emerald"] .dua-trans,
-html[data-theme="emerald"] .script-accent,
-html[data-theme="emerald"] .quran-ayah-tr,
-html[data-theme="emerald"] .quran-result-tr{color:#c9bfaa!important}
-html[data-theme="emerald"] .quran-surah-card,
-html[data-theme="emerald"] .quran-result-card,
-html[data-theme="emerald"] .quran-ayah,
-html[data-theme="emerald"] .quran-jump-bar,
-html[data-theme="emerald"] .quran-tafsir-bar,
-html[data-theme="emerald"] .quran-term-card,
-html[data-theme="emerald"] .quran-athar-card,
-html[data-theme="emerald"] .quran-tr-bar,
-html[data-theme="emerald"] .first-visit-panel,
-html[data-theme="emerald"] .hint-banner,
-html[data-theme="emerald"] .pwa-banner,
-html[data-theme="emerald"] .pwa-modal,
-html[data-theme="emerald"] .offline-box,
-html[data-theme="emerald"] .app-save-box,
-html[data-theme="emerald"] .home-refresh-panel,
-html[data-theme="emerald"] .ramadan-panel,
-html[data-theme="emerald"] .status-check-box,
-html[data-theme="emerald"] .share-panel,
-html[data-theme="emerald"] .share-panel-v2,
-html[data-theme="emerald"] .share-panel-v9,
-html[data-theme="emerald"] .share-panel-v11{
-  background:linear-gradient(145deg,rgba(18,56,43,.82),rgba(7,26,20,.90))!important;
-  border-color:rgba(201,164,90,.24)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 28px rgba(0,0,0,.24)!important;
-  color:var(--text)!important;
-}
-html[data-theme="emerald"] .badge,
-html[data-theme="emerald"] .folder-meta span,
-html[data-theme="emerald"] .status-chip,
-html[data-theme="emerald"] .search-match,
-html[data-theme="emerald"] .prayer-calculation-tags span,
-html[data-theme="emerald"] .quran-surah-card .quran-num{
-  background:rgba(201,164,90,.10)!important;
-  border-color:rgba(201,164,90,.22)!important;
-  color:var(--premium-title)!important;
-}
-html[data-theme="emerald"] mark.search-hit{
-  background:rgba(201,164,90,.25)!important;
-  color:var(--gold2)!important;
-}
-html[data-theme="emerald"] .qibla-pro-section,
-html[data-theme="emerald"] .qibla-panel{
-  background:linear-gradient(145deg,rgba(18,56,43,.84),rgba(7,26,20,.92))!important;
-  border-color:rgba(201,164,90,.26)!important;
-}
-html[data-theme="emerald"] .qibla-compass,
-html[data-theme="emerald"] .qibla-compass-face{
-  background:radial-gradient(circle at center,rgba(20,70,55,.92),rgba(5,20,16,.94))!important;
-  border-color:rgba(201,164,90,.42)!important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 18px 40px rgba(0,0,0,.32)!important;
-}
-html[data-theme="emerald"] .qibla-cardinal,
-html[data-theme="emerald"] .qibla-cardinal small,
-html[data-theme="emerald"] .qibla-pro-sub,
-html[data-theme="emerald"] .qibla-instruction,
-html[data-theme="emerald"] .qibla-bearing-readout small{color:var(--muted)!important}
-html[data-theme="emerald"] .qibla-n,
-html[data-theme="emerald"] .qibla-pro-title,
-html[data-theme="emerald"] .qibla-bearing-readout,
-html[data-theme="emerald"] .qibla-data-item span,
-html[data-theme="emerald"] .qibla-status{color:var(--gold2)!important}
-html[data-theme="emerald"] .qibla-data-item,
-html[data-theme="emerald"] .qibla-status{
-  background:rgba(14,42,32,.66)!important;
-  border-color:rgba(201,164,90,.20)!important;
-}
-html[data-theme="emerald"] .bottom-nav{
-  background:rgba(7,26,20,.25)!important;
-  border-color:rgba(201,164,90,.20)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
-  backdrop-filter:blur(12px) saturate(1.08)!important;
-  -webkit-backdrop-filter:blur(12px) saturate(1.08)!important;
-}
-html[data-theme="emerald"] .bottom-nav-btn{color:rgba(248,243,232,.62)!important;text-shadow:none!important}
-html[data-theme="emerald"] .bottom-nav-btn.active,
-html[data-theme="emerald"] .bottom-nav-btn.is-pressed,
-html[data-theme="emerald"] .bottom-nav-btn:active{color:var(--gold2)!important}
-html[data-theme="emerald"] .bottom-nav-pill{
-  background:linear-gradient(135deg,rgba(201,164,90,.18),rgba(44,138,100,.22))!important;
-  box-shadow:0 4px 16px rgba(0,0,0,.26)!important;
-}
-html[data-theme="emerald"] .float-touch-handle,
-html[data-theme="emerald"] .float-btn{
-  background:linear-gradient(145deg,rgba(14,58,44,.94),rgba(5,18,14,.96))!important;
-  border-color:rgba(201,164,90,.38)!important;
-  color:var(--gold2)!important;
-  box-shadow:0 12px 30px rgba(0,0,0,.32)!important;
-}
-html[data-theme="emerald"] .footer{color:var(--muted)!important;border-top:1px solid var(--line2)!important}
-html[data-theme="emerald"] .footer strong,
-html[data-theme="emerald"] .signature,
-html[data-theme="emerald"] .book-author{color:var(--gold2)!important}
-html[data-theme="emerald"] .top-edge-fade,
-html[data-theme="emerald"] .top-swim-aura{display:none!important}
-@media(max-width:700px){
-  html[data-theme="emerald"] .top-shell,
-  html[data-theme="emerald"] .view{border-radius:0!important;margin-bottom:0!important}
-  html[data-theme="emerald"] .app-bar{margin:0 var(--content-inset,14px) 10px!important;padding:0!important}
-  html[data-theme="emerald"] .crumb{font-size:12px!important;padding:8px 12px!important}
-  html[data-theme="emerald"].is-standalone-pwa body{
-    padding-top:max(6px,env(safe-area-inset-top,0px))!important;
-    background:var(--premium-bg)!important;
-  }
-  html[data-theme="emerald"].is-standalone-pwa .app:after{display:none!important}
-  html[data-theme="emerald"].is-standalone-pwa .top-shell{
-    border:0!important;
-    border-radius:0!important;
-    box-shadow:none!important;
-    margin-top:0!important;
-  }
-  html[data-theme="emerald"].is-standalone-pwa .top-shell .header{
-    padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))!important;
-  }
-}
-html[data-theme="emerald"],
-html[data-theme="emerald"] body{
-  transition:var(--theme-ease)!important;
-}
-html.theme-switching,
-html.theme-switching body{
-  transition:var(--theme-ease)!important;
-}
-html[data-theme="emerald"] h1,
-html[data-theme="emerald"] .salam{color:var(--accent-soft)!important;text-shadow:0 1px 12px rgba(0,0,0,.28)!important}
-html[data-theme="emerald"] .intro,
-html[data-theme="emerald"] .intro strong{color:var(--text-muted)!important}
-html[data-theme="emerald"] .intro strong{color:var(--text-main)!important}
-html[data-theme="emerald"] .view{
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  border-radius:0!important;
-  padding:18px!important;
-}
-html[data-theme="emerald"] .view-head{border-bottom-color:var(--line2)!important}
-html[data-theme="emerald"] .premium-surface,
-html[data-theme="emerald"] .folder-card,
-html[data-theme="emerald"] .post-card,
-html[data-theme="emerald"] .list-card,
-html[data-theme="emerald"] .info-card,
-html[data-theme="emerald"] .dua-card,
-html[data-theme="emerald"] .overview-panel,
-html[data-theme="emerald"] .direct-pick-panel,
-html[data-theme="emerald"] .search-pro-panel,
-html[data-theme="emerald"] .filter-panel,
-html[data-theme="emerald"] .profile-box,
-html[data-theme="emerald"] .book-profile-box,
-html[data-theme="emerald"] .series-box,
-html[data-theme="emerald"] .pinned-box,
-html[data-theme="emerald"] .popular-panel,
-html[data-theme="emerald"] .prayer-panel,
-html[data-theme="emerald"] .qibla-panel,
-html[data-theme="emerald"] .calendar-panel,
-html[data-theme="emerald"] .event-card,
-html[data-theme="emerald"] .stat-card,
-html[data-theme="emerald"] .prayer-time-card,
-html[data-theme="emerald"] .prayer-summary-card,
-html[data-theme="emerald"] .popular-row,
-html[data-theme="emerald"] .article{
-  background:var(--card-bg-dark)!important;
-  border:1px solid var(--border-soft)!important;
-  box-shadow:var(--shadow-soft)!important;
-  color:var(--text-main)!important;
-  border-radius:20px!important;
-  transition:var(--theme-ease)!important;
-}
-html[data-theme="emerald"] .folder-card:hover,
-html[data-theme="emerald"] .post-card:hover,
-html[data-theme="emerald"] .list-card:hover,
-html[data-theme="emerald"] .dua-card:hover{
-  transform:translateY(-2px)!important;
-  border-color:rgba(201,164,90,.42)!important;
-  box-shadow:0 14px 36px rgba(0,0,0,.26)!important;
-}
-html[data-theme="emerald"] .current-focus.premium-surface{
-  background:var(--card-bg-dark)!important;
-  border:1px solid var(--border-soft)!important;
-  box-shadow:var(--shadow-soft)!important;
-  color:var(--text-main)!important;
-}
-html[data-theme="emerald"] .current-focus.premium-surface .current-focus-head span{color:var(--accent-soft)!important}
-html[data-theme="emerald"] .current-focus.premium-surface .current-focus-head h3{color:var(--text-main)!important;text-shadow:0 1px 12px rgba(0,0,0,.28)!important}
-html[data-theme="emerald"] .current-focus.premium-surface .current-focus-all{
-  background:rgba(255,255,255,.06)!important;
-  border:1px solid rgba(201,164,90,.28)!important;
-  color:var(--text-main)!important;
-}
-html[data-theme="emerald"] .current-focus-row{
-  background:var(--card-bg)!important;
-  border:1px solid rgba(155,120,56,.28)!important;
-  box-shadow:var(--shadow-card-light)!important;
-  color:var(--text-main-dark)!important;
-}
-html[data-theme="emerald"] .current-focus-row .current-focus-text b{color:var(--text-main-dark)!important;text-shadow:none!important}
-html[data-theme="emerald"] .current-focus-row .current-focus-text p{color:var(--text-muted-dark)!important}
-html[data-theme="emerald"] .current-focus-row .current-focus-text small{color:rgba(30,23,16,.58)!important}
-html[data-theme="emerald"] .current-focus-row .current-focus-arrow{color:var(--accent-green)!important}
-html[data-theme="emerald"] .current-focus-row .current-focus-icon{background:rgba(30,107,78,.10)!important;border-color:rgba(201,164,90,.26)!important}
-html[data-theme="emerald"] .excerpt{color:var(--text-main)!important;font-style:normal!important}
-html[data-theme="emerald"] .search,
-html[data-theme="emerald"] .direct-pick,
-html[data-theme="emerald"] .filter-select,
-html[data-theme="emerald"] .account-form input{
-  background:rgba(6,22,17,.78)!important;
-  border:1px solid var(--border-soft)!important;
-  color:var(--text-main)!important;
-  border-radius:16px!important;
-  transition:var(--theme-ease)!important;
-}
-html[data-theme="emerald"] .search::placeholder{color:var(--text-muted)!important}
-html[data-theme="emerald"] .filter-panel{
-  padding:11px!important;
-  margin-bottom:11px!important;
-}
-html[data-theme="emerald"] .section-block{margin-top:16px!important;margin-bottom:4px!important}
-html[data-theme="emerald"] .section-head{margin-bottom:11px!important}
-html[data-theme="emerald"] .section-head h3{color:var(--accent-soft)!important;text-shadow:none!important}
-html[data-theme="emerald"] .section-head span{color:var(--text-muted)!important}
-html[data-theme="emerald"] .action-btn,
-html[data-theme="emerald"] .advanced-toggle,
-html[data-theme="emerald"] .collapse-toggle:not(.premium-pill),
-html[data-theme="emerald"] .back-btn,
-html[data-theme="emerald"] .home-btn,
-html[data-theme="emerald"] .prayer-action-btn,
-html[data-theme="emerald"] .account-actions button,
-html[data-theme="emerald"] .quran-tafsir-tab,
-html[data-theme="emerald"] .quran-tr-btn,
-html[data-theme="emerald"] .quran-wake-btn,
-html[data-theme="emerald"] .hint-btn:not(.primary){
-  background:rgba(255,255,255,.05)!important;
-  border:1px solid rgba(201,164,90,.24)!important;
-  color:rgba(248,243,232,.75)!important;
-  transition:var(--theme-ease)!important;
-}
-html[data-theme="emerald"] .action-btn:active,
-html[data-theme="emerald"] .hint-btn:active,
-html[data-theme="emerald"] .bottom-nav-btn:active,
-html[data-theme="emerald"] .theme-switch-btn:active{
-  transform:translateY(1px) scale(.99)!important;
-}
-html[data-theme="emerald"] .action-btn.primary,
-html[data-theme="emerald"] .hint-btn.primary,
-html[data-theme="emerald"] button.primary:not(.theme-switch-btn),
-html[data-theme="emerald"] .account-actions button.primary{
-  background:var(--btn-primary-bg)!important;
-  color:var(--text-main)!important;
-  border:1px solid rgba(227,201,130,.42)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.12)!important;
-}
-html[data-theme="emerald"] .action-btn.primary:hover,
-html[data-theme="emerald"] .hint-btn.primary:hover{
-  background:linear-gradient(135deg,var(--accent-green-hover),var(--accent-green))!important;
-}
-html[data-theme="emerald"] .action-btn.gold,
-html[data-theme="emerald"] .hint-btn.gold,
-html[data-theme="emerald"] .premium-pill.gold-accent{
-  background:var(--btn-gold-bg)!important;
-  color:var(--text-main-dark)!important;
-  border:1px solid rgba(155,120,56,.36)!important;
-}
-html[data-theme="emerald"] .action-btn.active,
-html[data-theme="emerald"] .quran-tafsir-tab.active,
-html[data-theme="emerald"] .quran-tr-btn.active,
-html[data-theme="emerald"] .quran-wake-btn.is-on,
-html[data-theme="emerald"] .advanced-toggle.active,
-html[data-theme="emerald"] .theme-switch-btn.is-active{
-  background:rgba(201,164,90,.18)!important;
-  color:var(--accent-soft)!important;
-  border:1px solid var(--border-strong)!important;
-  box-shadow:0 0 0 1px rgba(201,164,90,.12)!important;
-}
-html[data-theme="emerald"] .bottom-nav{
-  background:var(--nav-bg)!important;
-  backdrop-filter:blur(14px)!important;
-  -webkit-backdrop-filter:blur(14px)!important;
+html[data-theme="emerald"] .loading{color:var(--text-muted)!important}
+html[data-theme="emerald"] .error{color:var(--error)!important}
+html[data-theme="emerald"] .app-bar,
+html[data-theme="emerald"] .header-prayer-status{
+  background:linear-gradient(145deg,rgba(14,58,44,.82),rgba(6,22,17,.88))!important;
   border:1px solid rgba(201,164,90,.22)!important;
-  border-top:1px solid rgba(201,164,90,.28)!important;
-  box-shadow:0 10px 28px rgba(0,0,0,.28)!important;
-}
-html[data-theme="emerald"] .bottom-nav-btn{color:rgba(248,243,232,.58)!important;text-shadow:none!important;transition:var(--theme-ease)!important}
-html[data-theme="emerald"] .bottom-nav-btn.active,
-html[data-theme="emerald"] .bottom-nav-btn.is-pressed{color:var(--accent-soft)!important}
-html[data-theme="emerald"] .bottom-nav-pill{
-  background:linear-gradient(135deg,rgba(201,164,90,.18),rgba(30,107,78,.20))!important;
-  box-shadow:0 4px 14px rgba(0,0,0,.22)!important;
-}
-html[data-theme="emerald"] .float-btn{
-  background:linear-gradient(145deg,rgba(14,58,44,.96),rgba(6,22,17,.98))!important;
-  border:1px solid rgba(201,164,90,.36)!important;
-  color:var(--accent-soft)!important;
-  box-shadow:0 10px 26px rgba(0,0,0,.28)!important;
-  transition:var(--theme-ease)!important;
-}
-html[data-theme="emerald"] .float-btn.push-active{
-  background:linear-gradient(145deg,rgba(30,107,78,.88),rgba(14,58,44,.94))!important;
-}
-html[data-theme="emerald"]:has(.pwa-modal-overlay:not([hidden])) .float-actions{
-  opacity:0!important;
-  pointer-events:none!important;
-  visibility:hidden!important;
-}
-html[data-theme="emerald"] .pwa-modal-overlay{
-  background:rgba(4,14,11,.78)!important;
-  backdrop-filter:blur(8px)!important;
-}
-html[data-theme="emerald"] .pwa-modal{
-  background:linear-gradient(145deg,rgba(11,36,27,.98),rgba(6,22,17,.99))!important;
-  border:1px solid var(--border-soft)!important;
   color:var(--text-main)!important;
-  box-shadow:var(--shadow-soft)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 24px rgba(0,0,0,.22)!important;
 }
-html[data-theme="emerald"] .pwa-modal h3{color:var(--accent-soft)!important}
-html[data-theme="emerald"] .pwa-modal p{color:var(--text-muted)!important}
-html[data-theme="emerald"] .pwa-modal .hint-btn{
-  background:rgba(255,255,255,.06)!important;
-  border-color:var(--border-soft)!important;
-  color:var(--text-main)!important;
-}
-html[data-theme="emerald"] .error{color:var(--error)!important;border-color:rgba(168,69,50,.35)!important}
-html[data-theme="emerald"] .account-status.ok{color:var(--success)!important;border-color:rgba(46,125,85,.38)!important}
-html[data-theme="emerald"] .account-status.warn{color:var(--warning)!important;border-color:rgba(183,121,31,.38)!important}
-html[data-theme="emerald"] .prayer-push-status-item.ok span{color:var(--success)!important}
-html[data-theme="emerald"] .prayer-push-status-item.warn span{color:var(--warning)!important}
-html[data-theme="emerald"] .badge,
-html[data-theme="emerald"] .folder-meta span{
-  background:rgba(201,164,90,.10)!important;
-  border-color:rgba(201,164,90,.22)!important;
-  color:var(--accent-soft)!important;
-}
-html[data-theme="emerald"] mark.search-hit{
-  background:rgba(201,164,90,.22)!important;
-  color:var(--text-main-dark)!important;
-}
-html[data-theme="emerald"] .statement,
-html[data-theme="emerald"] .dua-detail-box,
-html[data-theme="emerald"] .quran-ayah{
-  line-height:1.72!important;
-}
-html[data-theme="emerald"] .dua-arabic,
-html[data-theme="emerald"] .quran-ayah-ar{color:var(--text-main)!important}
-html[data-theme="emerald"] .dua-trans,
-html[data-theme="emerald"] .quran-ayah-tr{color:var(--text-muted)!important}
-html[data-theme="emerald"] body.image-editor-mode .ie-power-toolbar,
-html[data-theme="emerald"] body.image-editor-mode .ie-power-sheet{
-  background:rgba(11,36,27,.96)!important;
-  border-color:var(--border-soft)!important;
-}
-@media(min-width:900px){
-  html[data-theme="emerald"] .folder-grid,
-  html[data-theme="emerald"] .post-grid,
-  html[data-theme="emerald"] .grid-list{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  }
-}
-@media(min-width:1100px){
-  html[data-theme="emerald"] .folder-grid,
-  html[data-theme="emerald"] .post-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  }
-  html[data-theme="emerald"] .app{width:min(1180px,100%)!important}
-  html[data-theme="emerald"] .statement,
-  html[data-theme="emerald"] .article{max-width:820px!important}
-}
-
-
-/* EMERALD PREMIUM — Schimmer, Ornament, Tiefe (kontrolliert) */
-html.theme-switching{background:var(--app-bg,#061611)!important}
-html[data-theme="emerald"] body:before{
-  opacity:.05!important;
-  filter:none!important;
-  background:
-    radial-gradient(circle at 18% 22%,rgba(201,164,90,.06),transparent 38%),
-    radial-gradient(circle at 82% 12%,rgba(44,138,100,.05),transparent 36%),
-    repeating-linear-gradient(45deg,transparent 0 28px,rgba(201,164,90,.025) 28px 29px),
-    repeating-linear-gradient(-45deg,transparent 0 28px,rgba(201,164,90,.018) 28px 29px),
-    url("watermark-circle-soft.png") center 44%/min(620px,58vw) no-repeat!important;
-}
-html[data-theme="emerald"] .top-shell{
-  position:relative!important;
-  overflow:hidden!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-html[data-theme="emerald"] .top-shell:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:radial-gradient(circle at 88% 8%,rgba(227,201,130,.14),transparent 42%);
-  opacity:.9;
-}
-html[data-theme="emerald"] .header{
-  position:relative;
-  z-index:1;
-}
-html[data-theme="emerald"] .logo{
-  box-shadow:0 0 0 6px var(--theme-logo-glow),0 14px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)!important;
-}
-html[data-theme="emerald"] .gold-divider{
-  background:linear-gradient(90deg,transparent,rgba(201,164,90,.42),transparent)!important;
-  opacity:.85!important;
+html[data-theme="emerald"] .app-bar{border-radius:16px!important;padding:0!important;margin:0 var(--content-inset,14px) 10px!important}
+html[data-theme="emerald"] .app-bar.is-home{display:none!important}
+html[data-theme="emerald"] .crumb{
+  flex:1 1 auto!important;text-align:right!important;padding:9px 14px!important;
+  background:rgba(16,50,40,.78)!important;border:1px solid var(--line2)!important;border-radius:999px!important;
+  color:var(--accent-soft)!important;font-family:var(--serif)!important;font-size:13px!important;font-weight:800!important;
+  min-height:40px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
 }
 html[data-theme="emerald"] .premium-surface,
 html[data-theme="emerald"] .folder-card,
@@ -4607,226 +4097,141 @@ html[data-theme="emerald"] .prayer-time-card,
 html[data-theme="emerald"] .prayer-summary-card,
 html[data-theme="emerald"] .popular-row,
 html[data-theme="emerald"] .article,
-html[data-theme="emerald"] .home-refresh-panel{
-  position:relative!important;
-  overflow:hidden!important;
-}
-html[data-theme="emerald"] .premium-surface:before,
-html[data-theme="emerald"] .folder-card:before,
-html[data-theme="emerald"] .post-card:before,
-html[data-theme="emerald"] .list-card:before,
-html[data-theme="emerald"] .info-card:before,
-html[data-theme="emerald"] .dua-card:before,
-html[data-theme="emerald"] .overview-panel:before,
-html[data-theme="emerald"] .direct-pick-panel:before,
-html[data-theme="emerald"] .search-pro-panel:before,
-html[data-theme="emerald"] .filter-panel:before,
-html[data-theme="emerald"] .prayer-panel:before,
-html[data-theme="emerald"] .qibla-panel:before,
-html[data-theme="emerald"] .stat-card:before,
-html[data-theme="emerald"] .prayer-time-card:before,
-html[data-theme="emerald"] .popular-row:before,
-html[data-theme="emerald"] .article:before,
-html[data-theme="emerald"] .home-refresh-panel:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:10%;
-  right:10%;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(227,201,130,.24),transparent);
-  pointer-events:none;
-  z-index:1;
-}
-html[data-theme="emerald"] .current-focus-row:before,
-html[data-theme="emerald"] .daily-box:before,
-html[data-theme="emerald"] .recommended-box:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:8%;
-  right:8%;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
-  pointer-events:none;
-}
-html[data-theme="emerald"] .daily-box,
-html[data-theme="emerald"] .recommended-box{
-  background:var(--card-bg)!important;
-  border:1px solid rgba(155,120,56,.30)!important;
-  box-shadow:var(--shadow-card-light)!important;
-  color:var(--text-main-dark)!important;
-  padding:10px 12px!important;
-  margin:4px 0 8px!important;
-  border-radius:18px!important;
-  position:relative!important;
-}
-html[data-theme="emerald"] .daily-title,
-html[data-theme="emerald"] .recommended-title{color:var(--text-main-dark)!important;text-shadow:none!important}
-html[data-theme="emerald"] .daily-text,
-html[data-theme="emerald"] .recommended-text{color:var(--text-muted-dark)!important}
-html[data-theme="emerald"] .daily-label,
-html[data-theme="emerald"] .recommended-label{color:var(--accent-strong)!important}
-html[data-theme="emerald"] .highlight-sections{gap:6px!important;margin:2px 0 6px!important}
-html[data-theme="emerald"] .home-refresh-panel{
+html[data-theme="emerald"] .home-refresh-panel,
+html[data-theme="emerald"] .quran-surah-card,
+html[data-theme="emerald"] .quran-result-card,
+html[data-theme="emerald"] .quran-ayah,
+html[data-theme="emerald"] .quran-jump-bar,
+html[data-theme="emerald"] .quran-tafsir-bar,
+html[data-theme="emerald"] .quran-term-card,
+html[data-theme="emerald"] .quran-athar-card,
+html[data-theme="emerald"] .quran-tr-bar,
+html[data-theme="emerald"] .first-visit-panel,
+html[data-theme="emerald"] .hint-banner,
+html[data-theme="emerald"] .pwa-banner,
+html[data-theme="emerald"] .offline-box,
+html[data-theme="emerald"] .app-save-box,
+html[data-theme="emerald"] .ramadan-panel,
+html[data-theme="emerald"] .status-check-box,
+html[data-theme="emerald"] .share-panel,
+html[data-theme="emerald"] .share-panel-v2,
+html[data-theme="emerald"] .share-panel-v9,
+html[data-theme="emerald"] .share-panel-v11,
+html[data-theme="emerald"] .source-strong,
+html[data-theme="emerald"] .statement,
+html[data-theme="emerald"] .dua-detail-box{
   background:var(--card-bg-dark)!important;
   border:1px solid var(--border-soft)!important;
   box-shadow:var(--shadow-soft)!important;
-  padding:9px 11px!important;
-  margin-bottom:10px!important;
-}
-html[data-theme="emerald"] .home-refresh-copy b{color:var(--text-main)!important}
-html[data-theme="emerald"] .home-refresh-copy p{color:var(--text-muted)!important;font-size:10px!important}
-html[data-theme="emerald"] #hardRefreshBtn.home-refresh-btn,
-html[data-theme="emerald"] .home-refresh-panel.is-update-available .home-refresh-btn,
-html[data-theme="emerald"] #imageEditorSaveTop.primary{
-  background:var(--btn-gold-bg)!important;
-  color:var(--text-main-dark)!important;
-  border:1px solid rgba(155,120,56,.38)!important;
-  box-shadow:0 8px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.22)!important;
-}
-html[data-theme="emerald"] .statement,
-html[data-theme="emerald"] .dua-detail-box,
-html[data-theme="emerald"] .dua-de,
-html[data-theme="emerald"] .quran-ayah-de,
-html[data-theme="emerald"] .article .statement{
-  background:linear-gradient(145deg,rgba(11,36,27,.92),rgba(6,22,17,.96))!important;
   color:var(--text-main)!important;
-  text-shadow:none!important;
-  box-shadow:var(--shadow-soft)!important;
+  border-radius:18px!important;
+  transition:var(--theme-ease)!important;
+}
+html[data-theme="emerald"] .daily-box,
+html[data-theme="emerald"] .recommended-box,
+html[data-theme="emerald"] .current-focus-row{
+  background:var(--card-bg)!important;
+  border:1px solid rgba(155,120,56,.28)!important;
+  box-shadow:var(--shadow-card-light)!important;
+  color:var(--text-main-dark)!important;
+  border-radius:16px!important;
+}
+html[data-theme="emerald"] .current-focus.premium-surface{
+  background:var(--card-bg-dark)!important;
   border:1px solid var(--border-soft)!important;
-}
-html[data-theme="emerald"] .statement strong,
-html[data-theme="emerald"] .statement em{color:var(--text-main)!important}
-html[data-theme="emerald"] .float-btn{
-  box-shadow:0 10px 26px rgba(0,0,0,.28),0 0 0 1px rgba(227,201,130,.12),inset 0 1px 0 rgba(255,255,255,.06)!important;
-}
-html[data-theme="emerald"] .pwa-modal-overlay{
-  transition:opacity .22s ease,backdrop-filter .22s ease!important;
-}
-html[data-theme="emerald"] .pwa-modal{
-  box-shadow:0 20px 48px rgba(0,0,0,.34),inset 0 1px 0 rgba(227,201,130,.10)!important;
-  transition:transform .22s ease,opacity .22s ease,box-shadow .22s ease!important;
-}
-@media(hover:hover) and (pointer:fine){
-  html[data-theme="emerald"] .action-btn.primary:hover,
-  html[data-theme="emerald"] .hint-btn.primary:hover,
-  html[data-theme="emerald"] button.primary:not(.theme-switch-btn):hover{
-    box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  html[data-theme="emerald"] *,
-  html[data-theme="emerald"] *::before,
-  html[data-theme="emerald"] *::after,
-  html.theme-switching,
-  html.theme-switching *{
-    animation:none!important;
-    transition:none!important;
-  }
-  html[data-theme="emerald"] .folder-card:hover,
-  html[data-theme="emerald"] .post-card:hover,
-  html[data-theme="emerald"] .list-card:hover,
-  html[data-theme="emerald"] .dua-card:hover{transform:none!important}
-}
-
-/* SMARAGD ROYAL PREMIUM — Ultimatum-Abschluss (Tiefe, Kompakt, Lesbarkeit) */
-html[data-theme="emerald"] .top-shell:before{opacity:.82!important}
-html[data-theme="emerald"] .top-shell:after{
-  background:
-    radial-gradient(circle at 88% 8%,rgba(227,201,130,.16),transparent 40%),
-    linear-gradient(180deg,rgba(6,22,17,.06),transparent 38%)!important;
-  opacity:1!important;
-}
-html[data-theme="emerald"] .bottom-nav{
-  border-top:1px solid rgba(201,164,90,.28)!important;
-  background:var(--nav-bg)!important;
-  backdrop-filter:blur(14px)!important;
-  -webkit-backdrop-filter:blur(14px)!important;
-}
-html[data-theme="emerald"] .view-head{
-  padding:2px 2px 12px!important;
-  margin-bottom:14px!important;
-}
-html[data-theme="emerald"] .view h2{
-  font-size:clamp(26px,4.2vw,48px)!important;
-  text-shadow:0 1px 10px rgba(0,0,0,.22)!important;
-}
-html[data-theme="emerald"] .view-desc{
-  font-size:12.5px!important;
-  line-height:1.55!important;
-  color:var(--text-muted)!important;
-}
-html[data-theme="emerald"] .current-focus{
+  box-shadow:var(--shadow-soft)!important;
+  color:var(--text-main)!important;
   padding:11px 12px!important;
   margin-bottom:11px!important;
   border-radius:18px!important;
 }
-html[data-theme="emerald"] .current-focus-head h3{font-size:21px!important}
-html[data-theme="emerald"] .home-refresh-panel{
-  border-radius:16px!important;
-  margin-bottom:10px!important;
+html[data-theme="emerald"] .current-focus-head span{color:var(--accent-soft)!important}
+html[data-theme="emerald"] .current-focus-head h3{color:var(--text-main)!important;font-size:21px!important;text-shadow:none!important}
+html[data-theme="emerald"] .current-focus-all{
+  background:rgba(201,164,90,.18)!important;
+  border:1px solid var(--border-soft)!important;
+  color:var(--accent-soft)!important;
 }
-html[data-theme="emerald"] .highlight-sections{
-  gap:6px!important;
-  margin:2px 0 8px!important;
-}
-html[data-theme="emerald"] .daily-box,
-html[data-theme="emerald"] .recommended-box{
-  background:var(--card-bg)!important;
-  border:1px solid rgba(155,120,56,.30)!important;
-  box-shadow:var(--shadow-card-light)!important;
-  color:var(--text-main-dark)!important;
-  border-radius:16px!important;
-  padding:10px 12px!important;
-  margin:0 0 8px!important;
-}
+html[data-theme="emerald"] .current-focus-row .current-focus-text b{color:var(--text-main-dark)!important}
+html[data-theme="emerald"] .current-focus-row .current-focus-text p{color:var(--text-muted-dark)!important}
+html[data-theme="emerald"] .current-focus-row .current-focus-text small{color:var(--text-muted-dark)!important}
+html[data-theme="emerald"] .current-focus-row .current-focus-arrow{color:var(--accent-green)!important}
 html[data-theme="emerald"] .daily-title,
-html[data-theme="emerald"] .recommended-title{
-  color:var(--text-main-dark)!important;
-  font-size:19px!important;
-  text-shadow:none!important;
-}
+html[data-theme="emerald"] .recommended-title{color:var(--text-main-dark)!important;text-shadow:none!important;font-size:19px!important}
 html[data-theme="emerald"] .daily-text,
 html[data-theme="emerald"] .recommended-text{color:var(--text-muted-dark)!important;font-size:12px!important}
 html[data-theme="emerald"] .daily-label,
 html[data-theme="emerald"] .recommended-label{color:var(--accent-strong)!important}
-html[data-theme="emerald"] .filter-panel{
-  border-radius:16px!important;
-  padding:10px!important;
-  margin-bottom:10px!important;
+html[data-theme="emerald"] .highlight-sections{gap:6px!important;margin:2px 0 8px!important}
+html[data-theme="emerald"] .filter-panel{padding:10px!important;margin-bottom:10px!important}
+html[data-theme="emerald"] .home-more-body .pinned-box,
+html[data-theme="emerald"] .home-more-body .series-box,
+html[data-theme="emerald"] .home-more-body .overview-compact .stat-card,
+html[data-theme="emerald"] .prayer-controls-compact,
+html[data-theme="emerald"] .prayer-push-status,
+html[data-theme="emerald"] .prayer-push-status-item{
+  background:linear-gradient(145deg,rgba(11,36,27,.88),rgba(6,22,17,.94))!important;
+  border-color:rgba(201,164,90,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
 }
-html[data-theme="emerald"] .statement,
-html[data-theme="emerald"] .dua-detail-box,
-html[data-theme="emerald"] .article .statement,
-html[data-theme="emerald"] .quran-ayah{
-  background:var(--card-bg-dark)!important;
+html[data-theme="emerald"] .search,
+html[data-theme="emerald"] .direct-pick,
+html[data-theme="emerald"] .filter-select,
+html[data-theme="emerald"] .account-form input{
+  background:rgba(6,22,17,.78)!important;
   border:1px solid var(--border-soft)!important;
-  box-shadow:var(--shadow-soft)!important;
-  text-shadow:none!important;
-}
-html[data-theme="emerald"] .statement em,
-html[data-theme="emerald"] .dua-trans,
-html[data-theme="emerald"] .script-accent,
-html[data-theme="emerald"] .quran-ayah-tr{
-  color:var(--text-muted)!important;
-  text-decoration:underline;
-  text-decoration-color:rgba(201,164,90,.42)!important;
-  text-underline-offset:4px!important;
-}
-html[data-theme="emerald"] .quran-wake-btn.is-on{
-  animation:none!important;
-  border-color:rgba(201,164,90,.48)!important;
-  background:linear-gradient(145deg,rgba(30,107,78,.72),rgba(14,58,44,.88))!important;
   color:var(--text-main)!important;
-  box-shadow:0 0 0 1px rgba(201,164,90,.14),0 8px 20px rgba(0,0,0,.22)!important;
+  border-radius:14px!important;
 }
+html[data-theme="emerald"] .search::placeholder{color:var(--text-muted)!important}
+html[data-theme="emerald"] .social-link,
+html[data-theme="emerald"] .action-btn,
+html[data-theme="emerald"] .advanced-toggle,
+html[data-theme="emerald"] .collapse-toggle:not(.premium-pill),
+html[data-theme="emerald"] .back-btn,
+html[data-theme="emerald"] .home-btn,
+html[data-theme="emerald"] .hijri-header-pill,
+html[data-theme="emerald"] .footer-action-btn,
+html[data-theme="emerald"] .prayer-action-btn,
+html[data-theme="emerald"] .prayer-detail-toggle,
+html[data-theme="emerald"] .link-row a,
+html[data-theme="emerald"] .nav-posts button,
+html[data-theme="emerald"] .share-btn.native,
+html[data-theme="emerald"] .share-btn.link,
+html[data-theme="emerald"] .quran-surah-nav button,
+html[data-theme="emerald"] .quran-popular-btn,
+html[data-theme="emerald"] .quran-jump-btn,
+html[data-theme="emerald"] .quran-tafsir-tab,
+html[data-theme="emerald"] .quran-wake-btn,
+html[data-theme="emerald"] .quran-tr-btn,
+html[data-theme="emerald"] .account-actions button:not(.primary){
+  background:var(--premium-pill-bg)!important;
+  border:1px solid rgba(201,164,90,.24)!important;
+  color:var(--premium-pill-text)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  transition:var(--theme-ease)!important;
+}
+html[data-theme="emerald"] .action-btn.active,
+html[data-theme="emerald"] .prayer-action-btn.active,
+html[data-theme="emerald"] .quran-tafsir-tab.active,
+html[data-theme="emerald"] .quran-tr-btn.active,
+html[data-theme="emerald"] .quran-wake-btn.is-on,
+html[data-theme="emerald"] .advanced-toggle.active,
+html[data-theme="emerald"] .theme-switch-btn.is-active{
+  background:rgba(201,164,90,.18)!important;
+  border:1px solid var(--border-strong)!important;
+  color:var(--accent-soft)!important;
+  box-shadow:0 0 0 1px rgba(201,164,90,.12)!important;
+}
+html[data-theme="emerald"] .quran-wake-btn.is-on{animation:none!important}
+html[data-theme="emerald"] .action-btn.primary,
+html[data-theme="emerald"] .hint-btn.primary,
 html[data-theme="emerald"] .account-actions button.primary,
-html[data-theme="emerald"] .hint-btn.primary:not(#hardRefreshBtn),
 html[data-theme="emerald"] button.primary:not(.theme-switch-btn):not(#imageEditorSaveTop){
   background:var(--btn-primary-bg)!important;
   color:var(--text-main)!important;
-  border:1px solid rgba(227,201,130,.42)!important;
+  border:1px solid rgba(227,201,130,.38)!important;
   box-shadow:0 8px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.12)!important;
 }
 html[data-theme="emerald"] #hardRefreshBtn.home-refresh-btn,
@@ -4835,30 +4240,114 @@ html[data-theme="emerald"] #imageEditorSaveTop.primary,
 html[data-theme="emerald"] #postHardRefreshBtn{
   background:var(--btn-gold-bg)!important;
   color:var(--text-main-dark)!important;
-  border:1px solid rgba(155,120,56,.38)!important;
+  border:1px solid rgba(155,120,56,.36)!important;
   box-shadow:0 8px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.22)!important;
 }
-html[data-theme="emerald"] :where(
-  button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,
-  .home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,
-  .quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,
-  .link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill
-):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save){
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
+html[data-theme="emerald"] .action-btn:active,
+html[data-theme="emerald"] .hint-btn:active,
+html[data-theme="emerald"] .bottom-nav-btn:active,
+html[data-theme="emerald"] .theme-switch-btn:active,
+html[data-theme="emerald"] button.primary:active{transform:translateY(1px) scale(.99)!important}
+html[data-theme="emerald"] .dua-arabic,
+html[data-theme="emerald"] .quran-surah-head-ar,
+html[data-theme="emerald"] .quran-ayah-ar{color:var(--text-main)!important}
+html[data-theme="emerald"] .statement em,
+html[data-theme="emerald"] .dua-trans,
+html[data-theme="emerald"] .script-accent,
+html[data-theme="emerald"] .quran-ayah-tr{color:var(--text-muted)!important;text-shadow:none!important}
+html[data-theme="emerald"] .statement,
+html[data-theme="emerald"] .dua-de,
+html[data-theme="emerald"] .quran-ayah-de{text-shadow:none!important;line-height:1.72!important}
+html[data-theme="emerald"] .badge,
+html[data-theme="emerald"] .folder-meta span,
+html[data-theme="emerald"] .status-chip,
+html[data-theme="emerald"] .search-match{
+  background:rgba(201,164,90,.10)!important;
+  border-color:rgba(201,164,90,.22)!important;
+  color:var(--accent-soft)!important;
+}
+html[data-theme="emerald"] mark.search-hit{background:rgba(201,164,90,.22)!important;color:var(--text-main-dark)!important}
+html[data-theme="emerald"] .account-status.ok{color:var(--success)!important}
+html[data-theme="emerald"] .account-status.warn{color:var(--warning)!important}
+html[data-theme="emerald"] .bottom-nav{
+  background:var(--nav-bg)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  border-top:1px solid rgba(201,164,90,.28)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.28)!important;
+}
+html[data-theme="emerald"] .bottom-nav-btn{color:rgba(248,243,232,.58)!important;text-shadow:none!important;transition:var(--theme-ease)!important}
+html[data-theme="emerald"] .bottom-nav-btn.active,
+html[data-theme="emerald"] .bottom-nav-btn.is-pressed{color:var(--accent-soft)!important}
+html[data-theme="emerald"] .bottom-nav-pill{background:rgba(201,164,90,.18)!important}
+html[data-theme="emerald"] .float-touch-handle,
+html[data-theme="emerald"] .float-btn{
+  background:linear-gradient(145deg,rgba(14,58,44,.94),rgba(6,22,17,.96))!important;
+  border:1px solid rgba(201,164,90,.36)!important;
+  color:var(--accent-soft)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.28)!important;
+  transition:var(--theme-ease)!important;
+}
+html[data-theme="emerald"]:has(.pwa-modal-overlay:not([hidden])) .float-actions{
+  opacity:0!important;
+  pointer-events:none!important;
+  visibility:hidden!important;
+}
+html[data-theme="emerald"] .pwa-modal-overlay{background:rgba(4,14,11,.78)!important;backdrop-filter:blur(8px)!important}
+html[data-theme="emerald"] .pwa-modal{
+  background:linear-gradient(145deg,rgba(11,36,27,.98),rgba(6,22,17,.99))!important;
+  border:1px solid var(--border-soft)!important;
+  color:var(--text-main)!important;
+  box-shadow:var(--shadow-soft)!important;
+}
+html[data-theme="emerald"] .pwa-modal h3{color:var(--accent-soft)!important}
+html[data-theme="emerald"] .pwa-modal p{color:var(--text-muted)!important}
+html[data-theme="emerald"] .footer{color:var(--text-muted)!important;border-top:1px solid var(--line2)!important}
+html[data-theme="emerald"] .footer strong,
+html[data-theme="emerald"] .signature{color:var(--accent-soft)!important}
+html[data-theme="emerald"] .top-edge-fade,
+html[data-theme="emerald"] .top-swim-aura{display:none!important}
+html[data-theme="emerald"] .staging-app-banner{
+  background:linear-gradient(135deg,rgba(201,164,90,.14),rgba(30,107,78,.10))!important;
+  border-color:rgba(201,164,90,.32)!important;
+  color:var(--text-main)!important;
+}
+html[data-theme="emerald"] .staging-app-banner b{color:var(--accent-soft)!important}
+@media(min-width:900px){
+  html[data-theme="emerald"] .folder-grid,
+  html[data-theme="emerald"] .post-grid,
+  html[data-theme="emerald"] .grid-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(min-width:1100px){
+  html[data-theme="emerald"] .folder-grid,
+  html[data-theme="emerald"] .post-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  html[data-theme="emerald"] .statement,
+  html[data-theme="emerald"] .article{max-width:820px!important}
+}
+@media(max-width:700px){
+  html[data-theme="emerald"] .top-shell,
+  html[data-theme="emerald"] .view{border-radius:0!important;margin-bottom:0!important}
+  html[data-theme="emerald"] .app-bar{margin:0 var(--content-inset,14px) 10px!important}
+  html[data-theme="emerald"] .crumb{font-size:12px!important;padding:8px 12px!important}
+  html[data-theme="emerald"].is-standalone-pwa body{padding-top:max(6px,env(safe-area-inset-top,0px))!important;background:var(--premium-bg)!important}
+  html[data-theme="emerald"].is-standalone-pwa .app:after{display:none!important}
+  html[data-theme="emerald"].is-standalone-pwa .top-shell{border:0!important;border-radius:0!important;box-shadow:none!important;margin-top:0!important}
+  html[data-theme="emerald"].is-standalone-pwa .top-shell .header{padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme="emerald"] *,
+  html[data-theme="emerald"] *::before,
+  html[data-theme="emerald"] *::after,
+  html.theme-switching,
+  html.theme-switching *{animation:none!important;transition:none!important}
 }
 @media(hover:hover) and (pointer:fine){
-  html[data-theme="emerald"] .action-btn.primary:hover,
-  html[data-theme="emerald"] .hint-btn.primary:hover,
+  html[data-theme="emerald"] .folder-card:hover,
+  html[data-theme="emerald"] .post-card:hover,
+  html[data-theme="emerald"] .list-card:hover,
+  html[data-theme="emerald"] .dua-card:hover{transform:translateY(-1px)!important;border-color:rgba(201,164,90,.42)!important}
   html[data-theme="emerald"] button.primary:not(.theme-switch-btn):not(#imageEditorSaveTop):hover{
     background:linear-gradient(135deg,var(--accent-green-hover),var(--accent-green))!important;
-    box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.14)!important;
-  }
-  html[data-theme="emerald"] #hardRefreshBtn:hover,
-  html[data-theme="emerald"] #imageEditorSaveTop:hover,
-  html[data-theme="emerald"] #postHardRefreshBtn:hover{
-    filter:brightness(1.03)!important;
-    box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.28)!important;
   }
 }
 
@@ -5689,12 +5178,6 @@ html[data-theme] .view{
 }
 
 .staging-app-banner{border:1px solid rgba(255,196,120,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,196,120,.18),rgba(239,215,142,.06));color:var(--cream);padding:10px 12px;margin:0 0 12px;font-size:12px;font-weight:900;line-height:1.35;text-align:center}.staging-app-banner b{color:var(--gold2)}
-html[data-theme="emerald"] .staging-app-banner{
-  background:linear-gradient(135deg,rgba(201,164,90,.16),rgba(30,107,78,.12))!important;
-  border-color:rgba(201,164,90,.34)!important;
-  color:var(--text-main)!important;
-}
-html[data-theme="emerald"] .staging-app-banner b{color:var(--accent-soft)!important}
 :root{
 --editor-bg:transparent;
 --editor-card-bg:rgba(239,215,142,.06);
