@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v23";
+  var ADMIN_SW_CACHE="dar-admin-stats-v24";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -306,6 +306,11 @@ main#panel.panel{
 .bulk-pack-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
 .bulk-pack-hint{font-size:10px;color:var(--soft);line-height:1.45;margin:8px 0 0}
 .bulk-pack-count{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.bulk-pack-zip{border:1px dashed rgba(239,215,142,.34);border-radius:14px;padding:12px;margin-top:10px;background:rgba(0,0,0,.18)}
+.bulk-pack-zip-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.bulk-pack-zip-head b{font-size:11px;color:var(--gold);letter-spacing:.04em}
+.bulk-pack-zip-note{font-size:10px;color:var(--soft);line-height:1.45;margin-top:8px}
+.bulk-pack-zip-list{font-size:10px;color:var(--muted);margin-top:6px;max-height:88px;overflow:auto;line-height:1.45}
 @media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}}
 </style>
 </head>
@@ -733,10 +738,86 @@ function applyBulkCategoryToMarkdown(markdown,category){
   return `---\ncategory: "${safe}"\n---\n\n${out}`;
 }
 function countBulkMarkdownPosts(raw){return splitBulkMarkdownPosts(raw).length}
+let jsZipPromise=null;
+function loadJsZip(){
+  if(window.JSZip)return Promise.resolve(window.JSZip);
+  if(!jsZipPromise)jsZipPromise=new Promise((resolve,reject)=>{
+    const script=document.createElement("script");
+    script.src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js";
+    script.onload=()=>window.JSZip?resolve(window.JSZip):reject(new Error("JSZip nicht verfügbar"));
+    script.onerror=()=>reject(new Error("JSZip konnte nicht geladen werden (Internet nötig)."));
+    document.head.appendChild(script);
+  });
+  return jsZipPromise;
+}
+function isBulkZipEntryIgnored(path){
+  const p=String(path||"").replace(/\\/g,"/");
+  return !p||p.endsWith("/")||/(^|\/)(__MACOSX|\.)/.test(p)||/^\._/.test(p.split("/").pop()||"");
+}
+async function importBulkZipFile(file){
+  if(!file)throw new Error("Keine Datei gewählt");
+  if(!/\.zip$/i.test(file.name))throw new Error("Bitte eine .zip-Datei wählen.");
+  setBulkPackStatus(`Lese ZIP <strong>${esc(file.name)}</strong> …`);
+  const JSZip=await loadJsZip();
+  const zip=await JSZip.loadAsync(await file.arrayBuffer());
+  const entries=[];
+  zip.forEach((relPath,entry)=>{
+    if(isBulkZipEntryIgnored(relPath))return;
+    if(!/\.md$/i.test(relPath))return;
+    entries.push({path:relPath.replace(/\\/g,"/"),entry});
+  });
+  if(!entries.length)throw new Error("In der ZIP wurden keine .md-Dateien gefunden.");
+  entries.sort((a,b)=>a.path.localeCompare(b.path,"de"));
+  const texts=await Promise.all(entries.map(({entry})=>entry.async("string")));
+  const combined=texts.map(t=>String(t||"").trim()).filter(t=>t.length>20).join("\n\n===\n\n");
+  if(!combined.trim())throw new Error("Die Markdown-Dateien in der ZIP sind leer oder zu kurz.");
+  const area=document.getElementById("bulkPackMarkdownInput");
+  if(area)area.value=combined;
+  const catInput=document.getElementById("bulkCategoryInput");
+  if(catInput&&!catInput.value.trim()){
+    const guess=String(file.name||"").replace(/\.zip$/i,"").replace(/[_-]+/g," ").trim();
+    if(/takfir|umum|ʿumūm|umum/i.test(guess))catInput.value="Takfīr bi'l-ʿUmūm";
+    else if(guess)catInput.value=guess.slice(0,80);
+  }
+  const n=countBulkMarkdownPosts(combined);
+  const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";
+  const list=document.getElementById("bulkZipFileList");
+  if(list)list.innerHTML=entries.slice(0,12).map(e=>esc(e.path)).join("<br>")+(entries.length>12?`<br>… +${entries.length-12} weitere`:"");
+  const nameLabel=document.getElementById("bulkZipFileName");if(nameLabel)nameLabel.textContent=file.name;
+  setBulkPackStatus(`ZIP geladen: <strong>${n}</strong> Beiträge aus <strong>${entries.length}</strong> .md-Dateien. Bitte Kategorie prüfen, dann „Beiträge zählen“ oder direkt veröffentlichen.`);
+  addAdminLog("ZIP",`${n} Beiträge aus ${file.name} geladen`,entries[0]?.path||file.name);
+  toast(`${n} Beiträge aus ZIP geladen`);
+  document.getElementById("bulkPackMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function bindBulkZipUpload(){
+  const input=document.getElementById("bulkZipFileInput");
+  if(!input||input.dataset.bound==="1")return;
+  input.dataset.bound="1";
+  input.onchange=async e=>{
+    const file=e.target.files&&e.target.files[0];
+    e.target.value="";
+    if(!file)return;
+    try{await importBulkZipFile(file)}catch(err){
+      setBulkPackStatus(`ZIP-Fehler: ${esc(err.message||err)}`);
+      toast(err.message||"ZIP konnte nicht gelesen werden");
+      addAdminLog("Fehler",String(err.message||err),file.name||"ZIP");
+    }
+  };
+}
 function renderBulkPackPanel(){
   return `<div class="bulk-pack-panel" id="bulkPackPanel">
     <div class="section-head" style="margin-top:0"><h3>Sammel-Paket</h3><span>mehrere Beiträge · ein Thema</span></div>
     <p class="bulk-pack-hint">Mehrere Markdown-Beiträge auf einmal veröffentlichen. Jeder Beitrag wird wie gewohnt <strong>eigenständig</strong> in der Besucher-App angezeigt (Neueste, Kategorie, Einzelansicht). Beiträge mit einer Leerzeile und <code>===</code> trennen — oder mehrere <code>---</code>-Frontmatter-Blöcke hintereinander.</p>
+    <div class="bulk-pack-zip" id="bulkPackZipBox">
+      <div class="bulk-pack-zip-head">
+        <b>ZIP hochladen</b>
+        <label class="btn" for="bulkZipFileInput">ZIP-Datei wählen</label>
+        <input id="bulkZipFileInput" type="file" accept=".zip,application/zip" hidden>
+      </div>
+      <p class="bulk-pack-zip-note">Alle <code>.md</code>-Dateien aus der ZIP werden automatisch ins Feld unten geladen (sortiert, mit <code>===</code> getrennt). Danach wie gewohnt Kategorie setzen und veröffentlichen.</p>
+      <div class="bulk-pack-zip-list" id="bulkZipFileList"></div>
+      <div class="bulk-pack-zip-note" id="bulkZipFileName" style="margin-top:4px;color:var(--gold)"></div>
+    </div>
     <div class="bulk-pack-meta">
       <input class="field" id="bulkCategoryInput" placeholder="Kategorie / Ordner (z. B. Takfīr bi'l-ʿUmūm)">
       <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:0;min-height:42px">
@@ -1451,6 +1532,7 @@ function bindUi(){
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const bulkCountBtn=document.getElementById("bulkCountBtn");if(bulkCountBtn)bulkCountBtn.onclick=()=>{const n=countBulkMarkdownPosts(document.getElementById("bulkPackMarkdownInput")?.value||"");const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";setBulkPackStatus(n?`${n} Beiträge im Paket erkannt.`:"Keine Beiträge erkannt — mit === trennen oder Frontmatter-Blöcke nutzen.")};
   const bulkPublishBtn=document.getElementById("bulkPublishBtn");if(bulkPublishBtn)bulkPublishBtn.onclick=uploadBulkPackViaWorker;
+  bindBulkZipUpload();
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const jummahRefreshBtn=document.getElementById("adminJummahRefreshBtn");if(jummahRefreshBtn)jummahRefreshBtn.onclick=()=>loadAdminJummahPushStatus();
