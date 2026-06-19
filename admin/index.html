@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v22";
+  var ADMIN_SW_CACHE="dar-admin-stats-v23";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -881,16 +881,24 @@ function renderShell(){
   updateAdminBackButton();
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
-function navigateAdmin(tab,{skipStack=false}={}){
+function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(tab==="schedule")tab="actions";
-  if(!tab||tab===currentTab)return;
+  if(tab==="actions-bulk"){tab="actions";scrollToBulk=true}
+  if(!tab||tab===currentTab&&!scrollToBulk)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"){
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
-  window.scrollTo({top:0,behavior:"smooth"});
+  if(scrollToBulk){
+    requestAnimationFrame(()=>{
+      const el=document.getElementById("bulkPackPanel");
+      if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+  }else{
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
 }
 function adminBack(){
   const prev=adminNavStack.pop();
@@ -923,7 +931,7 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Aktionen","Neuen Beitrag, Planung, News und Upload zentral steuern.","actions",`${planItems().length} geplant`)}
+    ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
@@ -932,6 +940,7 @@ function renderStart(ctx){
     ${folderCard("⑦","Statistik","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","stats",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
     ${folderCard("⑧","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
     ${folderCard("⑨","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
+    ${folderCard("⑩","Sammel-Paket","Mehrere Beiträge zu einem Thema auf einmal veröffentlichen.","actions-bulk","Paket")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -1284,6 +1293,7 @@ function renderActions(rows,installs=installTotals()){
       ${renderDraftPreview()}
       <div class="section-head" style="margin-top:16px"><h3>Schnellaktionen</h3><span>Admin-Wege</span></div>
       <div class="quick-grid">
+        <button class="quick" type="button" data-scroll-bulk><b>Sammel-Paket</b><small>Mehrere Beiträge zu einem Thema auf einmal veröffentlichen.</small></button>
         <button class="quick" type="button" data-scroll-upload><b>Neuer Beitrag</b><small>Markdown oben einfügen und über Cloudflare Worker veröffentlichen.</small></button>
         <a class="quick" href="${SITE_ORIGIN}/content/posts/posts-index.json" target="_blank" rel="noopener"><b>Index prüfen</b><small>Öffentliche posts-index.json kontrollieren.</small></a>
         <a class="quick" href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener"><b>Neueste Beiträge</b><small>Live-Seite direkt bei den neuen Beiträgen öffnen.</small></a>
