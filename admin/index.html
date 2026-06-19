@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v25";
+  var ADMIN_SW_CACHE="dar-admin-stats-v29";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -155,6 +155,13 @@ button{cursor:pointer}
 .command-card b{display:block;color:var(--gold);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
 .command-card span{display:block;color:#fff5cf;font-size:18px;font-weight:950;line-height:1.15}
 .command-card small{display:block;color:var(--soft);font-size:10.5px;line-height:1.4;margin-top:6px}
+.visitor-shell{display:grid;gap:12px}
+.visitor-hero{margin:0}
+.visitor-lead{margin:0 0 14px;color:var(--soft);font-size:12px;line-height:1.5;max-width:720px}
+.visitor-kpi.metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.visitor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.visitor-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border:1px dashed var(--line2);border-radius:14px;padding:10px 12px;color:var(--soft);font-size:11px}
+.visitor-foot strong{color:var(--gold)}
 .workflow-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}
 .workflow-step{border:1px solid var(--line2);border-radius:15px;background:rgba(0,0,0,.18);padding:11px;min-height:82px;position:relative}
 .workflow-step:before{content:"";display:block;width:9px;height:9px;border-radius:999px;background:var(--muted);box-shadow:0 0 18px rgba(140,190,255,.14);margin-bottom:8px}
@@ -237,7 +244,7 @@ button{cursor:pointer}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
 @media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
-@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
+@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell,.visitor-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}}
 @media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
 
 /* Final admin-frame correction: the whole admin app should not sit in a thick outer box. */
@@ -370,17 +377,18 @@ const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
+  ["besucher","Besucher"],
   ["actions","Aktionen"],
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
   ["news","News"],
   ["reports","Fehler"],
   ["users","Benutzer"],
-  ["stats","Statistik"],
   ["tech","Technik"],
-  ["settings","Einstellungen"],
-  ["overview","Dashboard"]
+  ["settings","Einstellungen"]
 ];
+const ADMIN_REFRESH_MS=30000;
+const VISITOR_REFRESH_MS=15000;
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null;
 let liveNewsItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
@@ -469,12 +477,24 @@ async function fetchLiveNewsItems({force=false}={}){
 }
 function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
 function userItems(){return readStore(ADMIN_USERS_KEY)}
+function normalizeAdminTab(tab){
+  const id=String(tab||"").trim();
+  if(id==="stats"||id==="overview")return"besucher";
+  if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
+  return id||"start";
+}
 function readTabOrder(){
   try{
     const raw=JSON.parse(localStorage.getItem(ADMIN_TAB_ORDER_KEY)||"[]");
     const allowed=new Map(DEFAULT_ADMIN_TABS);
-    const ordered=raw.filter(id=>allowed.has(id)).map(id=>[id,allowed.get(id)]);
-    DEFAULT_ADMIN_TABS.forEach(tab=>{if(!ordered.some(x=>x[0]===tab[0]))ordered.push(tab)});
+    const seen=new Set();
+    const ordered=[];
+    raw.map(normalizeAdminTab).forEach(id=>{
+      if(!allowed.has(id)||seen.has(id))return;
+      seen.add(id);
+      ordered.push([id,allowed.get(id)]);
+    });
+    DEFAULT_ADMIN_TABS.forEach(tab=>{if(!seen.has(tab[0]))ordered.push(tab)});
     return ordered;
   }catch(e){return DEFAULT_ADMIN_TABS}
 }
@@ -996,8 +1016,10 @@ function renderShell(){
   const top=sortedRows(rows).slice(0,5), topViews=sortedRows(rows).sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,5);
   const topShares=sortedRows(rows).sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,5);
   const ctx={live,rows,posts,duas,views,shares,saves,top,topViews,topShares,installs,updated:data.updated};
+  currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
-  const body=currentTab==="overview"?renderOverview(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows,installs):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="stats"?renderStats(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const refreshSec=currentTab==="besucher"?15:30;
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -1006,18 +1028,19 @@ function renderShell(){
       </select>
     </nav>
     ${body}
-    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div>`;
+    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
-  if(tab==="schedule")tab="actions";
+  tab=normalizeAdminTab(tab);
   if(tab==="actions-bulk"){tab="actions";scrollToBulk=true}
   if(!tab||tab===currentTab&&!scrollToBulk)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
+  restartRefreshInterval();
   if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"){
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
@@ -1052,23 +1075,23 @@ function renderStart(ctx){
     <div class="admin-cover-text">
       <div class="admin-kicker">DAR AL TAWḤID · Verwaltung</div>
       <h2>DAR Admin</h2>
-      <p>Geordnete Verwaltung für Statistik, Inhalte und Veröffentlichung. Alles ist in klare Bereiche gelegt, damit die Startseite ruhig bleibt.</p>
+      <p>Geordnete Verwaltung für Besucher, Inhalte und Veröffentlichung. Statistik und Live-Zahlen liegen gebündelt im Bereich Besucher.</p>
       <div class="cover-actions">
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
-        <button class="btn" data-tab="overview" type="button">Statistik öffnen</button>
+        <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
       </div>
     </div>
   </section>
   <section class="folder-grid">
     ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
-    ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
-    ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
-    ${folderCard("⑤","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
-    ${folderCard("⑥","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
-    ${folderCard("⑦","Statistik","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","stats",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
+    ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
+    ${folderCard("③","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
+    ${folderCard("④","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
+    ${folderCard("⑤","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
+    ${folderCard("⑥","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
+    ${folderCard("⑦","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
     ${folderCard("⑧","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
     ${folderCard("⑨","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
     ${folderCard("⑩","Sammel-Paket","ZIP hochladen · Thema wählen · Paket live stellen.","actions-bulk","ZIP · Paket")}
@@ -1078,46 +1101,86 @@ function renderStart(ctx){
     <div class="command-card"><b>Nächster Entwurf</b><span>${draftMarkdown.trim()?"Bereit":"Leer"}</span><small>${draftFilename?esc(draftFilename):"Noch kein Beitrag vorbereitet"}</small></div>
     <div class="command-card"><b>Push-Status</b><span>${"Notification" in window?"Prüfbar":"Nicht unterstützt"}</span><small>Test nur auf diesem Admin-Gerät</small></div>
     <div class="command-card"><b>Letzter Fehler</b><span>${esc(lastAdminError())}</span><small>Aus lokalem Admin-Protokoll</small></div>
-  </section>
-  <section class="hero">
-    <div class="hero-card">
-      <div class="hero-title"><div><h2>Heute</h2><p>Kurze Lageübersicht ohne offene Listen.</p></div></div>
-      <div class="metric-grid">
-        ${metric("Besucher",Number(ctx.live.today_sessions||0),"einzigartige Sitzungen")}
-        ${metric("Aufrufe",Number(ctx.live.today_views||0),"Seiten und Beiträge")}
-        ${metric("Geteilt",Number(ctx.live.today_shares||0),"Shares heute")}
-        ${metric("Gespeichert",Number(ctx.live.today_saves||0),"Favoriten heute")}
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="section-head"><h3>Bestes Signal</h3><span>${esc(ctx.updated.toLocaleTimeString("de-DE"))}</span></div>
-      ${ctx.top[0]?`<div class="empty">Aktuell stärkster Inhalt:<br><strong>${esc(cleanTitle(ctx.top[0].content_title||ctx.top[0].content_id))}</strong><br>Score ${score(ctx.top[0])} · ${Number(ctx.top[0].views||0)} Aufrufe</div>`:`<div class="empty">Noch keine Statistikdaten vorhanden.</div>`}
-    </div>
   </section>`;
 }
-function renderOverview(ctx){
-  return `<section class="split">
-    <div class="panel">
-      <div class="section-head"><h3>Stärkste Inhalte</h3><span>nach Admin-Score</span></div>
-      <div class="rank-list">${ctx.top.length?ctx.top.map((r,i)=>rankCard(r,i,"score")).join(""):`<div class="empty">Noch keine Daten.</div>`}</div>
+function renderVisitors(ctx){
+  const live=Number(ctx.live.live_now||0);
+  const sessions=Number(ctx.live.today_sessions||0);
+  const todayViews=Number(ctx.live.today_views||0);
+  const todayShares=Number(ctx.live.today_shares||0);
+  const todaySaves=Number(ctx.live.today_saves||0);
+  const postViews=ctx.posts.reduce((n,r)=>n+Number(r.views||0),0);
+  const postShares=ctx.posts.reduce((n,r)=>n+Number(r.shares||0),0);
+  const postSaves=ctx.posts.reduce((n,r)=>n+Number(r.saves||0),0);
+  const duaViews=ctx.duas.reduce((n,r)=>n+Number(r.views||0),0);
+  const topViews=[...ctx.rows].sort((a,b)=>Number(b.views||0)-Number(a.views||0)).slice(0,6);
+  const topShares=[...ctx.rows].sort((a,b)=>Number(b.shares||0)-Number(a.shares||0)).slice(0,6);
+  const topSaves=[...ctx.rows].sort((a,b)=>Number(b.saves||0)-Number(a.saves||0)).slice(0,6);
+  const best=ctx.top[0];
+  return `<section class="visitor-shell">
+    <div class="panel visitor-hero">
+      <div class="section-head">
+        <h3>Besucher &amp; Nutzung</h3>
+        <span class="signal"><span class="status-dot"></span>${live} live · Refresh 15 s</span>
+      </div>
+      <p class="visitor-lead">Anonyme Live- und Tagesstatistik aus der Besucher-App: wer gerade online ist, wie oft Inhalte geöffnet, geteilt oder gespeichert werden, und wie viele die App installiert haben.</p>
+      <div class="metric-grid visitor-kpi">
+        ${metric("Live",live,"Besucher gerade in der App")}
+        ${metric("Heute",sessions,"einzigartige Sitzungen")}
+        ${metric("Aufrufe",todayViews,"Seiten & Beiträge heute")}
+        ${metric("Geteilt",todayShares,"Shares heute")}
+        ${metric("Gespeichert",todaySaves,"Favoriten heute")}
+        ${metric("App",ctx.installs.total,"Installationen gesamt")}
+      </div>
     </div>
-    <aside class="side-stack">
+    <div class="visitor-grid">
       <div class="panel">
-        <div class="section-head"><h3>App-Installationen</h3><span>iOS / Android</span></div>
+        <div class="section-head"><h3>App-Installation</h3><span>PWA · Besucher</span></div>
         <div class="mini-grid">
-          <div class="mini"><b>iOS</b><span>${ctx.installs.ios}</span><small>Home-Bildschirm-App gestartet</small></div>
-          <div class="mini"><b>Android</b><span>${ctx.installs.android}</span><small>PWA installiert oder gestartet</small></div>
+          <div class="mini"><b>Gesamt</b><span>${ctx.installs.total}</span><small>Home-Bildschirm / installiert</small></div>
+          <div class="mini"><b>iOS</b><span>${ctx.installs.ios}</span><small>iPhone &amp; iPad</small></div>
+          <div class="mini"><b>Android</b><span>${ctx.installs.android}</span><small>PWA installiert</small></div>
+          <div class="mini"><b>Andere</b><span>${ctx.installs.other}</span><small>Desktop &amp; sonstige</small></div>
         </div>
       </div>
       <div class="panel">
-        <div class="section-head"><h3>Meist gelesen</h3><span>Top 5</span></div>
-        <div class="rank-list">${ctx.topViews.length?ctx.topViews.map((r,i)=>rankCard(r,i,"views")).join(""):`<div class="empty">Noch keine Aufrufe.</div>`}</div>
+        <div class="section-head"><h3>Gesamt (Inhalte)</h3><span>alle Zeiten</span></div>
+        <div class="command-grid" style="margin:0">
+          <div class="command-card"><b>Gelesen</b><span>${ctx.views}</span><small>Beiträge &amp; Duʿāʾ</small></div>
+          <div class="command-card"><b>Geteilt</b><span>${ctx.shares}</span><small>Shares gesamt</small></div>
+          <div class="command-card"><b>Gespeichert</b><span>${ctx.saves}</span><small>Favoriten gesamt</small></div>
+          <div class="command-card"><b>Inhalte</b><span>${ctx.posts.length+ctx.duas.length}</span><small>${ctx.posts.length} Beiträge · ${ctx.duas.length} Duʿāʾ</small></div>
+        </div>
       </div>
       <div class="panel">
-        <div class="section-head"><h3>Meist geteilt</h3><span>Top 5</span></div>
-        <div class="rank-list">${ctx.topShares.length?ctx.topShares.map((r,i)=>rankCard(r,i,"shares")).join(""):`<div class="empty">Noch keine Shares.</div>`}</div>
+        <div class="section-head"><h3>Beiträge vs. Duʿāʾ</h3><span>Aufrufe gesamt</span></div>
+        <div class="status-list">
+          <div class="status-row"><span><b>Beiträge</b><br>${ctx.posts.length} erfasst · ${postViews} Aufrufe · ${postShares} Shares · ${postSaves} Favoriten</span><strong class="status-pill">${postViews}</strong></div>
+          <div class="status-row"><span><b>Duʿāʾ</b><br>${ctx.duas.length} erfasst · ${duaViews} Aufrufe</span><strong class="status-pill">${duaViews}</strong></div>
+          ${best?`<div class="status-row"><span><b>Stärkster Inhalt</b><br>${esc(cleanTitle(best.content_title||best.content_id))}<br>Score ${score(best)} · ${Number(best.views||0)} Aufrufe</span><strong class="status-pill">${score(best)}</strong></div>`:""}
+        </div>
       </div>
-    </aside>
+    </div>
+    <section class="split">
+      <div class="panel">
+        <div class="section-head"><h3>Meist gelesen</h3><span>Top 6</span></div>
+        <div class="rank-list">${topViews.length?topViews.map((r,i)=>rankCard(r,i,"views")).join(""):`<div class="empty">Noch keine Aufrufe.</div>`}</div>
+      </div>
+      <aside class="side-stack">
+        <div class="panel">
+          <div class="section-head"><h3>Meist geteilt</h3><span>Top 6</span></div>
+          <div class="rank-list">${topShares.length?topShares.map((r,i)=>rankCard(r,i,"shares")).join(""):`<div class="empty">Noch keine Shares.</div>`}</div>
+        </div>
+        <div class="panel">
+          <div class="section-head"><h3>Meist gespeichert</h3><span>Top 6</span></div>
+          <div class="rank-list">${topSaves.length?topSaves.map((r,i)=>rankCard(r,i,"saves")).join(""):`<div class="empty">Noch keine Favoriten.</div>`}</div>
+        </div>
+      </aside>
+    </section>
+    <div class="visitor-foot">
+      <span>Vollständige Rangliste mit Suche &amp; Filter im Bereich <strong>Inhalte</strong>.</span>
+      <button class="btn" data-tab="content" type="button">Inhalte öffnen</button>
+    </div>
   </section>`;
 }
 function renderLivePreview(ctx){
@@ -1397,8 +1460,7 @@ function renderContent(){
     <div class="rank-list">${rows.length?rows.map((r,i)=>rankCard(r,i,sortMode)).join(""):`<div class="empty">Keine passenden Inhalte gefunden.</div>`}</div>
   </section>`;
 }
-function renderActions(rows,installs=installTotals()){
-  const best=sortedRows(rows)[0];
+function renderActions(rows){
   return `<section class="split admin-actions-layout">
     <div class="panel admin-actions-main">
       <div class="section-head admin-actions-head"><h3>Aktionen</h3><span>Veröffentlichen</span></div>
@@ -1479,37 +1541,14 @@ function renderActions(rows,installs=installTotals()){
     </div>
     <aside class="side-stack">
       <div class="panel">
-        <div class="section-head"><h3>Heute wichtig</h3><span>Hinweis</span></div>
-        ${best?`<div class="empty">Stärkster Inhalt aktuell:<br><strong>${esc(cleanTitle(best.content_title||best.content_id))}</strong><br>Score ${score(best)} · ${Number(best.views||0)} Aufrufe</div>`:`<div class="empty">Noch keine Statistikdaten vorhanden.</div>`}
-      </div>
-      <div class="panel">
-        <div class="section-head"><h3>App-Status</h3><span>PWA</span></div>
-        <div class="empty">Besucher-App Installationen: <strong>${installs.total}</strong><br>iOS: <strong>${installs.ios}</strong> · Android: <strong>${installs.android}</strong><br><br>Admin-App bleibt getrennt unter <strong>/admin/</strong>.</div>
+        <div class="section-head"><h3>Besucher</h3><span>Statistik</span></div>
+        <div class="empty">Live-Zahlen, Klicks, Shares und Installationen findest du gebündelt im Bereich <strong>Besucher</strong> — dort aktualisiert sich alles alle 15 Sekunden.</div>
+        <button class="btn primary" data-tab="besucher" type="button" style="margin-top:10px;width:100%;justify-content:center">Besucher öffnen</button>
       </div>
       <div class="panel">
         <div class="section-head"><h3>Änderungsprotokoll</h3><span>lokal</span></div>
         <div class="change-log">${renderChangeLog()}</div>
       </div>
-    </aside>
-  </section>`;
-}
-function renderStats(ctx){
-  const categories=countBy(ctx.rows,r=>r.content_type||"page");
-  return `<section class="split">
-    <div class="panel">
-      <div class="section-head"><h3>Statistik</h3><span>Heute / Live / Inhalte</span></div>
-      <div class="command-grid">
-        <div class="command-card"><b>Live</b><span>${Number(ctx.live.live_now||0)}</span><small>Aktuell online</small></div>
-        <div class="command-card"><b>Heute</b><span>${Number(ctx.live.today_views||0)}</span><small>Seiten- und Inhaltsaufrufe</small></div>
-        <div class="command-card"><b>Favoriten</b><span>${Number(ctx.live.today_saves||0)}</span><small>heute gespeichert</small></div>
-        <div class="command-card"><b>Shares</b><span>${Number(ctx.live.today_shares||0)}</span><small>heute geteilt</small></div>
-      </div>
-      <div class="section-head"><h3>Beliebte Bereiche</h3><span>anonym</span></div>
-      <div class="status-list">${Object.entries(categories).map(([k,v])=>`<div class="status-row"><span><b>${esc(typeLabel(k))}</b><br>${v} erfasste Einträge</span><strong class="status-pill">${v}</strong></div>`).join("")}</div>
-    </div>
-    <aside class="side-stack">
-      <div class="panel"><div class="section-head"><h3>Top Favoriten</h3><span>gespeichert</span></div><div class="rank-list">${sortedRows(ctx.rows).sort((a,b)=>Number(b.saves||0)-Number(a.saves||0)).slice(0,5).map((r,i)=>rankCard(r,i,"saves")).join("")||`<div class="empty">Noch keine Favoriten.</div>`}</div></div>
-      <div class="panel"><div class="section-head"><h3>Technik-Signale</h3><span>Status</span></div>${renderTechStatus(ctx)}</div>
     </aside>
   </section>`;
 }
@@ -1883,7 +1922,9 @@ async function renderDashboard({force=false}={}){
   try{lastData=await fetchDashboard();await newsPromise;renderShell()}catch(e){panel.innerHTML=`<div class="empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
-function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
+function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
+function restartRefreshInterval(){if(!authed)return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
