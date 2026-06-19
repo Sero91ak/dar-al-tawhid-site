@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-06-19T15:37:51.612Z",
+  "generated": "2026-06-19T16:10:12.416Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -89,8 +89,32 @@
       "postPath": "content/posts/takfir-bi-l-umum-409-ibn-al-mubarak-eine-zeit-in-der-du-a-fur-die-allg.md",
       "status": "pending",
       "createdAt": "2026-06-19T15:37:41.224Z",
-      "lastError": "Beitrag ist nicht im öffentlichen Index enthalten.",
-      "updatedAt": "2026-06-19T15:37:51.612Z"
+      "lastError": "",
+      "updatedAt": "2026-06-19T16:10:12.416Z",
+      "lastCheckAt": "2026-06-19T16:10:12.107Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "zuhd-409",
+        "indexGenerated": "2026-06-19T15:43:40.531Z",
+        "indexCount": 408,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=zuhd-409&v=1781885411673#post/zuhd-409"
+      },
+      "attempts": 1
     }
   }
 }
