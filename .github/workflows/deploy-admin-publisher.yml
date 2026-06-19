@@ -11,6 +11,7 @@ on:
       - cloudflare/prayer-push-*.js
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
+      - cloudflare/onesignal-delivery.js
       - cloudflare/post-push-admin.js
       - .github/workflows/deploy-admin-publisher.yml
 
@@ -36,7 +37,7 @@ jobs:
         run: npm install -g wrangler
 
       - name: Push system guard (block deploy if scheduler missing)
-        run: node scripts/push-system-guard.js
+        run: node ../scripts/push-system-guard.js
 
       - name: Deploy worker
         env:
