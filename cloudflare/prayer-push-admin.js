@@ -3,6 +3,7 @@ import {
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
 import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
+import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -112,20 +113,25 @@ export async function sendPrayerTestPush(env, input = {}) {
 
   try {
     const result = await postOneSignal(env, payload);
+    const delivery = evaluateOneSignalDelivery(result.parsed);
     return {
       ok: true,
-      sent: true,
+      sent: delivery.delivered,
+      delivered: delivery.delivered,
       prayer: prayerKey,
       mode,
       title: copy.title,
       body: copy.body,
       subscriptionId,
+      notificationId: delivery.notificationId || null,
+      reason: delivery.reason || null,
       oneSignal: result
     };
   } catch (err) {
     return {
       ok: true,
       sent: false,
+      delivered: false,
       prayer: prayerKey,
       mode,
       subscriptionId,

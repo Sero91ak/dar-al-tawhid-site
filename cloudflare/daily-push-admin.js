@@ -2,6 +2,7 @@ import {
   runDailyPushScheduler,
   readDailyPushStatusFromKv
 } from "./daily-push-scheduler.js";
+import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
@@ -123,9 +124,18 @@ export async function sendWelcomePush(env, input = {}) {
 
   try {
     const result = await postOneSignal(env, payload);
-    return { ok: true, sent: true, subscriptionId, oneSignal: result };
+    const delivery = evaluateOneSignalDelivery(result.parsed);
+    return {
+      ok: true,
+      sent: delivery.delivered,
+      delivered: delivery.delivered,
+      subscriptionId,
+      notificationId: delivery.notificationId || null,
+      reason: delivery.reason || null,
+      oneSignal: result
+    };
   } catch (err) {
-    return { ok: true, sent: false, subscriptionId, reason: err.message || String(err) };
+    return { ok: true, sent: false, delivered: false, subscriptionId, reason: err.message || String(err) };
   }
 }
 
@@ -177,9 +187,19 @@ export async function sendDailyTestPush(env, input = {}) {
 
   try {
     const result = await postOneSignal(env, payload);
-    return { ok: true, sent: true, kind, subscriptionId, oneSignal: result };
+    const delivery = evaluateOneSignalDelivery(result.parsed);
+    return {
+      ok: true,
+      sent: delivery.delivered,
+      delivered: delivery.delivered,
+      kind,
+      subscriptionId,
+      notificationId: delivery.notificationId || null,
+      reason: delivery.reason || null,
+      oneSignal: result
+    };
   } catch (err) {
-    return { ok: true, sent: false, kind, subscriptionId, reason: err.message || String(err) };
+    return { ok: true, sent: false, delivered: false, kind, subscriptionId, reason: err.message || String(err) };
   }
 }
 

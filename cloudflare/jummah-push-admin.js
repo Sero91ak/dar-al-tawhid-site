@@ -3,6 +3,7 @@ import {
   readJummahPushStatusFromKv
 } from "./jummah-push-scheduler.js";
 import { jummahCopyForMode } from "./jummah-push-copy.js";
+import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_JUMMAH_STATUS_PATH = "content/admin/jummah-push-status.json";
@@ -104,5 +105,14 @@ export async function sendJummahTestPush(env, input = {}) {
   }
   let parsed = {};
   try { parsed = text ? JSON.parse(text) : {}; } catch (e) {}
-  return { sent: true, mode, recipients: parsed.recipients ?? 1, response: text.slice(0, 200) };
+  const delivery = evaluateOneSignalDelivery(parsed);
+  return {
+    sent: delivery.delivered,
+    delivered: delivery.delivered,
+    mode,
+    notificationId: delivery.notificationId || null,
+    reason: delivery.reason || null,
+    recipients: parsed.recipients ?? (delivery.delivered ? 1 : 0),
+    response: text.slice(0, 200)
+  };
 }
