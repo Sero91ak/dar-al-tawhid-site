@@ -7332,7 +7332,8 @@ function hardRefreshApp(){
   (async()=>{
     ["hardRefreshBtn","postHardRefreshBtn"].forEach(id=>{const el=$(id);if(el){el.disabled=true;el.textContent="Wird aktualisiert..."}});
     resetTabSwipePreview();ensureBottomNavDock();
-    try{if(typeof window.DAR_AUTO_REFRESH?.hidePostsBanner==="function")window.DAR_AUTO_REFRESH.hidePostsBanner()}catch(e){}
+    try{if(typeof window.DAR_AUTO_REFRESH?.markVersionUpdatePending==="function")window.DAR_AUTO_REFRESH.markVersionUpdatePending(window.__darRemoteBuildId||"")}catch(e){}
+    try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
     window.__darAppVersionAvailable=false;
     try{await syncAppServices({silent:true})}catch(e){console.warn("Aktualisieren:",e)}
     try{await requestHardShellRefresh()}catch(e){console.warn("Shell-Refresh:",e)}
@@ -7343,7 +7344,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v127";
+const APP_BUILD_ID="app-shell-v128";
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${setHeader("Startseite","","App-Übersicht")}${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<999);const other=entries.filter(([name])=>categoryRank(name)>=999);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
@@ -7822,13 +7823,42 @@ window.addEventListener("focus",function(){setTimeout(()=>refreshContent(),260)}
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")setTimeout(()=>refreshContent(),260)});
 </script>
 <script>
-  /* Auto-Refresh: neue Beiträge erkennen; App-Version nur über Startseite „Aktualisieren“ */
+  /* Auto-Refresh: App-Version (Banner nur bei echtem Update) + neue Beiträge */
   (function() {
     const CHECK_INTERVAL = 60 * 1000;
+    const VERSION_UPDATE_KEY = 'dar_version_update_pending';
+    const VERSION_UPDATE_COOLDOWN_MS = 120000;
     let isChecking = false;
     let bannerMode = null;
-    let versionMismatch = false;
+    let remoteBuildId = null;
     function getBanner() { return document.getElementById('newPostsBanner'); }
+    function readVersionUpdatePending() {
+      try {
+        var raw = sessionStorage.getItem(VERSION_UPDATE_KEY);
+        if (!raw) return null;
+        var data = JSON.parse(raw);
+        return data && data.buildId ? data : null;
+      } catch (e) { return null; }
+    }
+    function markVersionUpdatePending(buildId) {
+      var id = String(buildId || window.__darRemoteBuildId || '').trim();
+      if (!id) return;
+      try {
+        sessionStorage.setItem(VERSION_UPDATE_KEY, JSON.stringify({ buildId: id, at: Date.now() }));
+      } catch (e) {}
+    }
+    function clearVersionUpdatePending() {
+      try { sessionStorage.removeItem(VERSION_UPDATE_KEY); } catch (e) {}
+    }
+    function shouldSuppressVersionBanner(targetBuildId) {
+      if (typeof APP_BUILD_ID === 'string' && String(APP_BUILD_ID) === String(targetBuildId)) {
+        clearVersionUpdatePending();
+        return true;
+      }
+      var pending = readVersionUpdatePending();
+      if (!pending || String(pending.buildId) !== String(targetBuildId)) return false;
+      return (Date.now() - Number(pending.at || 0)) < VERSION_UPDATE_COOLDOWN_MS;
+    }
     function setHomeRefreshHint(on) {
       window.__darAppVersionAvailable = !!on;
       document.querySelectorAll('.home-refresh-panel').forEach(function(el) {
@@ -7839,6 +7869,21 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var btn = document.getElementById('hardRefreshBtn');
       if (btn && on && !btn.disabled) btn.textContent = 'Jetzt laden';
       else if (btn && !btn.disabled) btn.textContent = 'Aktualisieren';
+    }
+    function showVersionBanner() {
+      var banner = getBanner();
+      if (!banner) return;
+      bannerMode = 'version';
+      var icon = banner.querySelector('.new-posts-icon');
+      var text = banner.querySelector('.new-posts-text');
+      var refresh = banner.querySelector('.new-posts-refresh');
+      if (icon) icon.textContent = '\u2728';
+      if (text) text.textContent = 'Neue App-Version verfügbar';
+      if (refresh) refresh.textContent = 'Jetzt laden';
+      banner.setAttribute('aria-label', 'Neue App-Version laden');
+      banner.classList.add('is-app-version');
+      banner.classList.remove('hidden');
+      banner.style.display = 'flex';
     }
     function showPostsBanner(label) {
       var banner = getBanner();
@@ -7855,7 +7900,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       banner.classList.remove('hidden');
       banner.style.display = 'flex';
     }
-    function hidePostsBanner() {
+    function hideAllBanners() {
       var banner = getBanner();
       if (!banner) return;
       banner.classList.add('hidden');
@@ -7867,7 +7912,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (isChecking || !navigator.onLine) return;
       isChecking = true;
       try {
-        versionMismatch = false;
+        remoteBuildId = null;
+        var versionMismatch = false;
         if (typeof APP_BUILD_ID === 'string') {
           try {
             var vr = await fetch('/version.json?v=' + Date.now(), { cache: 'no-store' });
@@ -7875,13 +7921,24 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
               var remote = await vr.json();
               if (remote && remote.buildId && String(remote.buildId) !== String(APP_BUILD_ID)) {
                 versionMismatch = true;
+                remoteBuildId = String(remote.buildId);
+                window.__darRemoteBuildId = remoteBuildId;
               }
             }
           } catch (e) {}
         }
-        setHomeRefreshHint(versionMismatch);
-        if (versionMismatch) {
-          hidePostsBanner();
+        if (!versionMismatch) {
+          window.__darRemoteBuildId = '';
+          clearVersionUpdatePending();
+          setHomeRefreshHint(false);
+          hideAllBanners();
+        } else {
+          setHomeRefreshHint(true);
+          if (shouldSuppressVersionBanner(remoteBuildId)) {
+            hideAllBanners();
+            return;
+          }
+          showVersionBanner();
           return;
         }
         if (typeof fetchPostsIndexMeta === 'function' && typeof posts !== 'undefined') {
@@ -7893,7 +7950,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
             return;
           }
         }
-        hidePostsBanner();
+        hideAllBanners();
       } catch (e) {
         console.warn('Update-Check:', e);
       } finally {
@@ -7901,7 +7958,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
     }
     async function refreshPosts() {
-      hidePostsBanner();
+      hideAllBanners();
       if (typeof syncAppServices === 'function') await syncAppServices({ silent: true });
       if (typeof refreshContent === 'function') await refreshContent({ forceRender: true });
       else {
@@ -7913,6 +7970,13 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
     }
     function onBannerActivate() {
+      if (bannerMode === 'version') {
+        markVersionUpdatePending(remoteBuildId || window.__darRemoteBuildId || '');
+        hideAllBanners();
+        if (typeof hardRefreshApp === 'function') hardRefreshApp();
+        else location.reload();
+        return;
+      }
       if (bannerMode === 'posts') refreshPosts();
     }
     function initAutoRefresh() {
@@ -7932,7 +7996,14 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     } else {
       initAutoRefresh();
     }
-    window.DAR_AUTO_REFRESH = { check: checkForUpdates, refresh: refreshPosts, hidePostsBanner: hidePostsBanner, hideBanner: hidePostsBanner };
+    window.DAR_AUTO_REFRESH = {
+      check: checkForUpdates,
+      refresh: refreshPosts,
+      hideAllBanners: hideAllBanners,
+      hidePostsBanner: hideAllBanners,
+      hideBanner: hideAllBanners,
+      markVersionUpdatePending: markVersionUpdatePending
+    };
   })();
   </script>
 </body>
