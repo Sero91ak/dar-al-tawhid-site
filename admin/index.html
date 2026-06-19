@@ -285,6 +285,22 @@ main#panel.panel{
 .preview-box.admin-collapsible,.panel.admin-collapsible,.hero-card.admin-collapsible{display:block}
 .preview-box.admin-collapsible>.admin-collapsible-body{display:grid}
 .preview-box.admin-collapsible:not(.is-open)>.admin-collapsible-body{display:none}
+.news-workspace{display:grid;gap:12px;max-width:760px}
+.news-list{display:grid;gap:8px}
+.news-card{border:1px solid var(--line2);border-radius:14px;padding:10px 12px;background:linear-gradient(145deg,rgba(90,140,220,.06),rgba(239,215,142,.02))}
+.news-card-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-bottom:6px}
+.news-card-head b{flex:1 1 100%;color:#fff4cc;font-size:13px;line-height:1.25}
+.news-meta{font-size:10px;color:var(--soft)}
+.news-pill{font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+.news-pill.live{background:rgba(80,200,140,.15);color:#9dffc8;border:1px solid rgba(80,200,140,.25)}
+.news-pill.draft{background:rgba(239,215,142,.12);color:#efefcc;border:1px solid rgba(239,215,142,.22)}
+.news-card-text{font-size:10.5px;line-height:1.45;color:var(--soft);margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-card-text.is-expanded{-webkit-line-clamp:unset;display:block}
+.news-card-actions,.news-card-foot{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.news-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.news-sync-note{font-size:10px;color:var(--soft)}
+.news-form-grid .admin-textarea{min-height:72px}
+.news-composer-compact .admin-textarea{min-height:60px}
 </style>
 </head>
 <body>
@@ -345,6 +361,7 @@ const DEFAULT_ADMIN_TABS=[
 ];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,lastPublishPushContext=null;
+let liveNewsItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
@@ -375,6 +392,59 @@ function removeStoreItem(key,id){writeStore(key,readStore(key).filter(x=>String(
 function updateStoreItem(key,id,patch){writeStore(key,readStore(key).map(x=>String(x.id)===String(id)?{...x,...patch,updatedAt:new Date().toISOString()}:x))}
 function planItems(){return readStore(ADMIN_PLAN_KEY)}
 function newsItems(){return readStore(ADMIN_NEWS_KEY)}
+function newsDraftItems(){return newsItems().filter(x=>x.status!=="Live"&&x.status!=="Veröffentlicht")}
+function newsSummaryLabel(){
+  const live=liveNewsItems.length,drafts=newsDraftItems().length;
+  if(live&&drafts)return `${live} live · ${drafts} Entwurf`;
+  if(live)return `${live} live`;
+  if(drafts)return `${drafts} Entwurf`;
+  return "Keine Meldung";
+}
+function newsItemExpiresAt(item){
+  const expires=Date.parse(item?.expiresAt||"");
+  if(Number.isFinite(expires))return expires;
+  const created=Date.parse(item?.createdAt||item?.date||item?.publishedAt||"");
+  if(!Number.isFinite(created))return null;
+  const ttl=Number(item?.ttlHours||24);
+  return created+ttl*60*60*1000;
+}
+function isNewsItemActive(item){
+  if(!item||item.visible===false)return false;
+  const exp=newsItemExpiresAt(item);
+  return exp===null||exp>Date.now();
+}
+function truncateNewsText(text,max=110){
+  const clean=String(text||"").replace(/\s+/g," ").trim();
+  if(clean.length<=max)return clean;
+  return clean.slice(0,max-1)+"…";
+}
+function formatNewsUntil(item){
+  const exp=newsItemExpiresAt(item);
+  if(!exp)return String(item.until||item.ttlHours?`${item.ttlHours} Std.`:"24 Std.");
+  const diff=exp-Date.now();
+  if(diff<=0)return "abgelaufen";
+  const hours=Math.ceil(diff/3600000);
+  if(hours>=48)return `bis ${new Date(exp).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`;
+  return `noch ~${hours} Std.`;
+}
+async function fetchLiveNewsItems({force=false}={}){
+  if(liveNewsLoading&&!force)return liveNewsItems;
+  liveNewsLoading=true;
+  try{
+    const res=await fetch(`${SITE_ORIGIN}/content/updates/current.json?t=${Date.now()}`,{cache:"no-store"});
+    if(!res.ok)throw new Error("Live-News konnten nicht geladen werden");
+    const data=await res.json();
+    const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];
+    liveNewsItems=items.filter(isNewsItemActive).sort((a,b)=>Date.parse(b.createdAt||0)-Date.parse(a.createdAt||0));
+    liveNewsError="";
+    liveNewsFetchedAt=new Date();
+  }catch(e){
+    liveNewsError=e.message||String(e);
+  }finally{
+    liveNewsLoading=false;
+  }
+  return liveNewsItems;
+}
 function reportItems(){return readStore(ADMIN_REPORTS_KEY)}
 function userItems(){return readStore(ADMIN_USERS_KEY)}
 function readTabOrder(){
@@ -742,6 +812,9 @@ function navigateAdmin(tab,{skipStack=false}={}){
   if(!tab||tab===currentTab)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"){
+    fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
+  }
   renderShell();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -779,7 +852,7 @@ function renderStart(ctx){
     ${folderCard("①","Aktionen","Neuen Beitrag, Planung, News und Upload zentral steuern.","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("③","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",`${newsItems().length} Meldungen`)}
+    ${folderCard("④","News","24-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
     ${folderCard("⑤","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
     ${folderCard("⑥","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
     ${folderCard("⑦","Statistik","Live-Zahlen, Installationen und stärkste Inhalte kompakt prüfen.","stats",`${Number(ctx.live.today_views||0)} Aufrufe heute`)}
@@ -901,40 +974,82 @@ function renderPlanningPanel(){
 function renderSchedule(){
   return `<section class="panel">${renderPlanningPanel()}</section>`;
 }
-function newsCard(item){
-  return `<article class="planner-item">
-    <b>${esc(item.title||"News")}</b>
-    <span>${esc(item.text||"")}<br>Sichtbar bis: ${esc(item.until||"24 Stunden")} · Status: ${esc(item.status||"Entwurf")}${item.workerId?`<br>Worker: ${esc(item.workerId)}`:""}</span>
-    <div class="planner-actions">
+function newsLiveCard(item){
+  const full=String(item.text||"").trim();
+  const short=truncateNewsText(full,110);
+  const needsMore=full.length>short.length;
+  return `<article class="news-card news-card-live">
+    <div class="news-card-head">
+      <span class="news-pill live">Live</span>
+      <b>${esc(item.title||"News")}</b>
+      <span class="news-meta">${esc(formatNewsUntil(item))} · ${esc(new Date(item.createdAt||Date.now()).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}))}</span>
+    </div>
+    <p class="news-card-text" id="newsLiveText-${esc(item.id)}">${esc(short)}</p>
+    ${needsMore?`<button class="btn news-expand-btn" type="button" data-news-live-expand="${esc(item.id)}">Mehr anzeigen</button>`:""}
+    <div class="news-card-foot">
+      <a class="btn" href="${SITE_ORIGIN}/#home" target="_blank" rel="noopener">Auf Startseite prüfen</a>
+    </div>
+  </article>`;
+}
+function newsDraftCard(item){
+  const full=String(item.text||"").trim();
+  return `<article class="news-card news-card-draft">
+    <div class="news-card-head">
+      <span class="news-pill draft">Entwurf · nur dieses Gerät</span>
+      <b>${esc(item.title||"News")}</b>
+      <span class="news-meta">${esc(item.until||"24 Stunden")} · ${esc(item.status||"Entwurf")}</span>
+    </div>
+    <p class="news-card-text">${esc(truncateNewsText(full,110))}</p>
+    <div class="news-card-actions">
       <button class="btn primary" data-news-publish="${esc(item.id)}" type="button">Live veröffentlichen</button>
       <button class="btn danger" data-news-remove="${esc(item.id)}" type="button">Entfernen</button>
     </div>
   </article>`;
 }
-function renderNewsComposer(){
-  const items=newsItems();
-  return `<div class="preview-box">
-    <div class="section-head"><h3>News / Neues erstellen</h3><span>${items.length} vorbereitet</span></div>
-    <div class="admin-form-grid">
+function renderNewsFormFields(){
+  return `<div class="admin-form-grid news-form-grid">
       <input class="field" id="newsTitle" placeholder="Kurzer Titel">
       <select class="field" id="newsDuration"><option value="24 Stunden">24 Stunden</option><option value="bis manuell deaktiviert">manuell deaktivieren</option><option value="Entwurf">als Entwurf</option></select>
       <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher"></textarea>
       <button class="btn primary wide" id="addNewsBtn" type="button">News vorbereiten</button>
-    </div>
-    ${items.length?`<div class="planner-grid" style="margin-top:12px">${items.slice(0,4).map(newsCard).join("")}</div>`:`<div class="notice-note" style="margin-top:12px">Noch keine News vorbereitet. Neue Meldungen erscheinen hier erst nach dem Speichern.</div>`}
+    </div>`;
+}
+function renderNewsComposer(options={}){
+  const compact=!!options.compact;
+  const drafts=newsDraftItems();
+  return `<div class="preview-box news-composer${compact?" news-composer-compact":""}">
+    <div class="section-head"><h3>News</h3><span>${newsSummaryLabel()}</span></div>
+    ${renderNewsFormFields()}
+    ${compact?`<div class="notice-note">Live-Übersicht auf allen Geräten im Tab „News“. Entwürfe bleiben nur lokal auf diesem Gerät.</div>`:`<div class="notice-note">Nach „Live veröffentlichen“ erscheint die Meldung serverseitig auf allen Admin-Geräten und in der Besucher-App unter „Neu im Fokus“.</div>`}
+    ${!compact&&drafts.length?`<div class="news-list" style="margin-top:10px">${drafts.slice(0,3).map(newsDraftCard).join("")}${drafts.length>3?`<div class="notice-note">+ ${drafts.length-3} weitere Entwürfe im Tab News</div>`:""}</div>`:""}
   </div>`;
 }
+function renderNewsLiveSection(){
+  if(liveNewsLoading&&!liveNewsFetchedAt)return `<div class="empty">Live-News werden geladen…</div>`;
+  if(liveNewsError)return `<div class="notice-note">${esc(liveNewsError)}</div>`;
+  if(!liveNewsItems.length)return `<div class="empty">Aktuell keine Live-News auf der Startseite.</div>`;
+  return `<div class="news-list">${liveNewsItems.map(newsLiveCard).join("")}</div>`;
+}
 function renderNews(){
-  const items=newsItems();
-  return `<section class="split">
-    <div class="panel">
-      ${renderNewsComposer()}
-      <div class="notice-note" style="margin-top:12px">News werden beim Veröffentlichen über den Cloudflare Worker in content/updates/current.json geschrieben und erscheinen danach auf der Startseite unter „Neu im Fokus“.</div>
+  const drafts=newsDraftItems();
+  const liveCount=liveNewsItems.length;
+  return `<section class="news-workspace">
+    <div class="panel news-panel">
+      <div class="section-head"><h3>Live auf Startseite</h3><span>${liveCount} aktiv · alle Geräte</span></div>
+      ${renderNewsLiveSection()}
+      <div class="news-toolbar">
+        <button class="btn" id="newsRefreshLiveBtn" type="button"${liveNewsLoading?" disabled":""}>${liveNewsLoading?"Lädt…":"Live-Liste aktualisieren"}</button>
+        <span class="news-sync-note">${liveNewsFetchedAt?`Zuletzt: ${liveNewsFetchedAt.toLocaleTimeString("de-DE")} · content/updates/current.json`:"Synchron mit dem Server"}</span>
+      </div>
     </div>
-    <aside class="panel">
-      <div class="section-head"><h3>Meldungen</h3><span>${items.length}</span></div>
-      ${items.length?`<div class="planner-grid">${items.map(newsCard).join("")}</div>`:`<div class="empty">Noch keine News vorbereitet.</div>`}
-    </aside>
+    <div class="preview-box news-panel">
+      <div class="section-head"><h3>Neu erstellen</h3><span>24-Stunden-Hinweis</span></div>
+      ${renderNewsFormFields()}
+    </div>
+    ${drafts.length?`<div class="panel news-panel">
+      <div class="section-head"><h3>Entwürfe</h3><span>${drafts.length} · nur dieses Gerät</span></div>
+      <div class="news-list">${drafts.map(newsDraftCard).join("")}</div>
+    </div>`:""}
   </section>`;
 }
 function reportCard(item){
@@ -1110,7 +1225,7 @@ function renderActions(rows,installs=installTotals()){
       </div>
       <div class="upload-status" id="adminJummahPushNoteActions" style="margin-top:8px">Admin sendet nicht automatisch an Besucher. Erst „Live Push freigeben“.</div>
       ${renderPlanningPanel()}
-      ${renderNewsComposer()}
+      ${renderNewsComposer({compact:true})}
       <div class="section-head" style="margin-top:16px"><h3>Veröffentlichungsablauf</h3><span>Kontrolle vor live</span></div>
       ${workflowSteps(draftMarkdown.trim()?"review":"draft")}
       <div class="preview-box">
@@ -1201,7 +1316,7 @@ function renderTech(ctx){
         <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
         <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
-        <div class="status-row"><span><b>News 24 Stunden</b><br>Admin-Entwurf ist vorhanden. Echte Besucher-Live-Anzeige mit Ablauf braucht Backend-Sync.</span><strong class="status-pill">Vorbereitet</strong></div>
+        <div class="status-row"><span><b>News 24 Stunden</b><br>Live-Meldungen werden aus content/updates/current.json geladen und sind auf allen Admin-Geräten gleich sichtbar.</span><strong class="status-pill">${liveNewsItems.length?"Live":"Bereit"}</strong></div>
         <div class="status-row"><span><b>Gebetszeiten-Push</b><br>Nur serverseitig zuverlässig bei geschlossener PWA. Browser-Timer bleiben nur Zusatz.</span><strong class="status-pill">Scheduler nötig</strong></div>
         <div class="status-row"><span><b>Konto-Sync/PIN</b><br>Supabase-Tabellen muessen sichtbar sein; PIN darf nur gehasht gespeichert werden.</span><strong class="status-pill">Supabase</strong></div>
       </div>
@@ -1210,7 +1325,7 @@ function renderTech(ctx){
       <div class="panel"><div class="section-head"><h3>Statuszahlen</h3><span>Admin</span></div>
         <div class="command-grid">
           <div class="command-card"><b>Geplant</b><span>${planItems().length}</span><small>lokale Einträge</small></div>
-          <div class="command-card"><b>News</b><span>${newsItems().length}</span><small>vorbereitet</small></div>
+          <div class="command-card"><b>News</b><span>${liveNewsItems.length||newsDraftItems().length}</span><small>${liveNewsItems.length?"live":"Entwürfe lokal"}</small></div>
           <div class="command-card"><b>Fehler</b><span>${reportItems().length}</span><small>erfasst</small></div>
           <div class="command-card"><b>Benutzer</b><span>${userItems().length}</span><small>notiert</small></div>
         </div>
@@ -1299,7 +1414,9 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-plan-worker]").forEach(btn=>btn.onclick=async()=>{const item=planItems().find(x=>String(x.id)===String(btn.dataset.planWorker));if(!item){toast("Planung fehlt");return}const markdown=String(draftMarkdown||"").trim();if(!markdown){toast("Markdown unten einfügen, dann Worker planen");return}if(!item.when){toast("Uhrzeit fehlt");return}btn.disabled=true;btn.textContent="Sende...";try{const result=await workerPostRequest("schedule",{id:item.id,title:item.title,when:item.when,timezone:item.timezone||"Europe/Berlin",filename:draftFilename,markdown});updateStoreItem(ADMIN_PLAN_KEY,item.id,{status:"Worker geplant",workerId:result.id,publishAt:result.publishAt});addAdminLog("Planung","Beim Worker-Scheduler gespeichert",`${item.title} · ${result.publishAt||item.when}`);toast("Worker-Scheduler gespeichert");renderShell()}catch(e){btn.disabled=false;btn.textContent="Worker planen";addAdminLog("Fehler","Planung konnte nicht an Worker gesendet werden",e.message||String(e));toast(e.message||"Worker-Planung fehlgeschlagen")}});
   const addNews=document.getElementById("addNewsBtn");if(addNews)addNews.onclick=()=>{const title=(document.getElementById("newsTitle")?.value||"").trim();const text=(document.getElementById("newsText")?.value||"").trim();const duration=document.getElementById("newsDuration")?.value||"24 Stunden";if(!title||!text){toast("Titel und Text fehlen");return}addStoreItem(ADMIN_NEWS_KEY,{title,text,until:duration,status:duration==="Entwurf"?"Entwurf":"Vorbereitet"});addAdminLog("News","News vorbereitet",title);renderShell()};
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
-  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live auf der Startseite veröffentlichen?"))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});addAdminLog("News","News live veröffentlicht",item.title);toast("News live veröffentlicht");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live auf der Startseite veröffentlichen?"))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=String(item.until||"").includes("manuell")?720:24;const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});addAdminLog("News","News live veröffentlicht",item.title);toast("News live veröffentlicht");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
+  const newsRefreshLive=document.getElementById("newsRefreshLiveBtn");if(newsRefreshLive)newsRefreshLive.onclick=async()=>{newsRefreshLive.disabled=true;newsRefreshLive.textContent="Lädt…";await fetchLiveNewsItems({force:true});toast(liveNewsError?"Live-News konnten nicht geladen werden":"Live-News aktualisiert");renderShell()};
+  document.querySelectorAll("[data-news-live-expand]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.newsLiveExpand;const box=document.getElementById(`newsLiveText-${id}`);const item=liveNewsItems.find(x=>String(x.id)===String(id));if(!box||!item)return;const open=box.classList.toggle("is-expanded");box.textContent=open?String(item.text||"").trim():truncateNewsText(item.text,110);btn.textContent=open?"Weniger":"Mehr anzeigen"});
   const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
   document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
   document.querySelectorAll("[data-report-done]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportDone,{status:"Behoben"});addAdminLog("Fehler","Fehler als behoben markiert","");renderShell()});
@@ -1451,7 +1568,8 @@ async function renderDashboard({force=false}={}){
   const panel=document.getElementById("panel");
   if(!lastData)panel.innerHTML=`<div class="empty">Statistik wird geladen...</div>`;
   if(!hasSupabase()){panel.innerHTML=`<div class="empty">Supabase ist nicht konfiguriert.</div>`;return}
-  try{lastData=await fetchDashboard();renderShell()}catch(e){panel.innerHTML=`<div class="empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}
+  const newsPromise=fetchLiveNewsItems({force});
+  try{lastData=await fetchDashboard();await newsPromise;renderShell()}catch(e){panel.innerHTML=`<div class="empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,30000)}
