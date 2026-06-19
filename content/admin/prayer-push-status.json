@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-19T08:35:19.121Z",
+  "updatedAt": "2026-06-19T08:40:18.205Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-19T08:35:19.121Z",
+  "lastCronRun": "2026-06-19T08:40:18.205Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-19T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-19T08:20:11.052Z",
-  "windowEnd": "2026-06-20T10:35:11.052Z",
+  "windowStart": "2026-06-19T08:25:11.005Z",
+  "windowEnd": "2026-06-20T10:40:11.005Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 20,
@@ -922,16 +922,16 @@
   ],
   "userRegistry": [
     {
+      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-19T08:36:15.374+00:00"
+    },
+    {
       "subscriptionId": "2c445e0f-e9f0-4534-ac56-00cf1ea2bdad",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-06-19T08:24:28.686+00:00"
-    },
-    {
-      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-19T08:25:41.047+00:00"
     },
     {
       "subscriptionId": "bc789eca-ada5-4694-ab60-78ab89e59433",
@@ -997,13 +997,7 @@
       "subscriptionId": "e67e4b16-6faf-4f42-9569-38e915259e79",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-19T08:28:35.026+00:00"
-    },
-    {
-      "subscriptionId": "187b4bf7-9cb5-4ef3-8a2b-986b792a43c4",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-19T03:11:51.52+00:00"
+      "lastSyncedAt": "2026-06-19T08:36:47.267+00:00"
     },
     {
       "subscriptionId": "bdd836d7-d282-4369-ac2a-eaf97c4ccc20",
@@ -1016,6 +1010,12 @@
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
       "lastSyncedAt": "2026-06-18T16:17:31.486+00:00"
+    },
+    {
+      "subscriptionId": "187b4bf7-9cb5-4ef3-8a2b-986b792a43c4",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-19T08:37:14.497+00:00"
     },
     {
       "subscriptionId": "81bd67f9-1adb-4a61-8358-32b317355e62",
