@@ -190,8 +190,10 @@ export default {
         "/api/admin/jummah/test",
         "/api/admin/jummah/run"
       ]);
+      const categoryLayoutPaths = new Set(["/api/admin/category-layout"]);
+      const postCategoryPaths = new Set(["/api/admin/post/category"]);
 
-      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths].includes(url.pathname)) {
+      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths, ...categoryLayoutPaths, ...postCategoryPaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -328,6 +330,14 @@ export default {
 
       if (newsPaths.has(url.pathname)) {
         return json(await publishNewsUpdate(env, input), cors);
+      }
+
+      if (categoryLayoutPaths.has(url.pathname)) {
+        return json(await publishCategoryLayout(env, input), cors);
+      }
+
+      if (postCategoryPaths.has(url.pathname)) {
+        return json(await updatePostCategory(env, input), cors);
       }
 
       if (schedulePaths.has(url.pathname)) {
@@ -599,6 +609,85 @@ async function publishNewsUpdate(env, input) {
     file?.sha
   );
   return { ok: true, id, updatesPath, commitSha: saved.commit?.sha || "" };
+}
+
+async function publishCategoryLayout(env, input) {
+  const main = Array.isArray(input.main) ? input.main.map((x) => String(x || "").trim()).filter(Boolean) : [];
+  const order = Array.isArray(input.order) ? input.order.map((x) => String(x || "").trim()).filter(Boolean) : [];
+  if (!order.length) throw httpError("Kategorie-Reihenfolge (order) fehlt", 400);
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const layoutPath = trimSlashes(env.CATEGORY_LAYOUT_PATH || "content/admin/category-layout.json");
+  const file = await githubGet(env, owner, repo, layoutPath, branch);
+  const payload = {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    main,
+    order
+  };
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    layoutPath,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    "Update category layout",
+    branch,
+    file?.sha
+  );
+  return {
+    ok: true,
+    layoutPath,
+    mainCount: main.length,
+    orderCount: order.length,
+    commitSha: saved.commit?.sha || ""
+  };
+}
+
+function applyCategoryToMarkdown(markdown, category) {
+  const cat = String(category || "").trim();
+  if (!cat) return String(markdown || "").trim();
+  let out = String(markdown || "").trim();
+  const safe = cat.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  if (/^category:\s/m.test(out)) return out.replace(/^category:\s*["']?.*?["']?\s*$/m, `category: "${safe}"`);
+  if (/^---\s*\n/.test(out)) return out.replace(/^---\s*\n/, `---\ncategory: "${safe}"\n`);
+  return `---\ncategory: "${safe}"\n---\n\n${out}`;
+}
+
+async function updatePostCategory(env, input) {
+  const filename = sanitizeFilename(String(input.filename || "").trim());
+  const category = String(input.category || "").trim();
+  if (!filename) throw httpError("Dateiname fehlt", 400);
+  if (!category) throw httpError("Ziel-Kategorie fehlt", 400);
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const postPath = `${postsDir}/${filename}`;
+  const file = await githubGet(env, owner, repo, postPath, branch);
+  if (!file?.content) throw httpError(`Beitrag nicht gefunden: ${filename}`, 404);
+
+  const markdown = applyCategoryToMarkdown(base64ToUtf8(file.content), category);
+  const saved = await githubPut(
+    env,
+    owner,
+    repo,
+    postPath,
+    markdown,
+    `Move ${filename} to category ${category}`,
+    branch,
+    file.sha
+  );
+  return {
+    ok: true,
+    filename,
+    category,
+    postPath,
+    commitSha: saved.commit?.sha || ""
+  };
 }
 
 async function saveScheduledPost(env, input) {

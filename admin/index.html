@@ -322,7 +322,21 @@ main#panel.panel{
 .admin-step-strip{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
 .admin-step-chip{border:1px solid rgba(239,215,142,.28);border-radius:999px;padding:4px 9px;font-size:9px;font-weight:950;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;background:rgba(239,215,142,.06)}
 .bulk-pack-panel.is-featured{border-color:rgba(239,215,142,.42);background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.05))}
-@media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}}
+.single-post-panel{border:1px solid rgba(239,215,142,.38);border-radius:16px;padding:12px;background:linear-gradient(145deg,rgba(239,215,142,.06),rgba(0,0,0,.12));margin-top:10px}
+.single-post-panel .paste-area{min-height:200px;max-height:min(48vh,460px)}
+.single-post-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.single-post-head b{font-size:11px;color:var(--gold);letter-spacing:.04em}
+.cat-order-list{display:flex;flex-direction:column;gap:6px;max-height:min(46vh,380px);overflow:auto;margin:8px 0}
+.cat-order-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.1)}
+.cat-order-row.is-main{border-color:rgba(239,215,142,.26);background:rgba(239,215,142,.04)}
+.cat-order-name{font-size:11px;font-weight:900;color:var(--text);line-height:1.35}
+.cat-order-meta{font-size:9px;color:var(--soft);margin-top:2px}
+.cat-order-actions{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.cat-order-actions .btn,.cat-order-actions .pill-btn{min-height:30px;padding:0 8px;font-size:10px}
+.pill-btn{border:1px solid var(--line2);border-radius:999px;background:rgba(0,0,0,.18);color:var(--soft);font-weight:800;cursor:pointer}
+.pill-btn.is-on{border-color:rgba(239,215,142,.34);color:var(--gold);background:rgba(239,215,142,.08)}
+.post-move-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:10px;align-items:end}
+@media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}.post-move-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -383,6 +397,8 @@ const DEFAULT_ADMIN_TABS=[
 ];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null;
+let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayoutBusy=false,categoryLayoutLoaded=false;
+const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
 let liveNewsItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -853,9 +869,133 @@ function bindBulkZipUpload(){
     }
   };
 }
+function categoryKeyAdmin(name){return String(name||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[\u02bf\u02be\u2018\u2019'`]/g,"").replace(/\s+/g," ").trim()}
+function parseCategoryFromMarkdownHead(text){const m=String(text||"").match(/^category:\s*["']?(.*?)["']?\s*$/m);return m?m[1].trim():""}
+async function fetchPostsIndexFiles(){const bust=Date.now();const urls=[`${SITE_ORIGIN}/content/posts/posts-index.json?v=${bust}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/posts-index.json?v=${bust}`];for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();if(data&&Array.isArray(data.files)&&data.files.length)return data.files}catch(e){}}return[]}
+async function discoverLiveCategories(){
+  const files=await fetchPostsIndexFiles();
+  const counts={};
+  for(let i=0;i<files.length;i+=12){
+    const batch=files.slice(i,i+12);
+    await Promise.all(batch.map(async file=>{
+      const name=file.name||file;
+      if(!name)return;
+      const urls=[`${SITE_ORIGIN}/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`];
+      for(const url of urls){
+        try{
+          const r=await fetch(url,{cache:"no-store"});
+          if(!r.ok)continue;
+          const head=(await r.text()).slice(0,900);
+          const cat=parseCategoryFromMarkdownHead(head);
+          if(cat){counts[cat]=(counts[cat]||0)+1;break}
+        }catch(e){}
+      }
+    }));
+  }
+  return counts;
+}
+async function fetchLiveCategoryLayout(){
+  const bust=Date.now();
+  const urls=[`${SITE_ORIGIN}/content/admin/category-layout.json?v=${bust}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/admin/category-layout.json?v=${bust}`];
+  for(const url of urls){
+    try{
+      const r=await fetch(url,{cache:"no-store"});
+      if(!r.ok)continue;
+      const data=await r.json();
+      if(data&&Array.isArray(data.order)&&data.order.length)return{main:Array.isArray(data.main)?data.main:[],order:data.order};
+    }catch(e){}
+  }
+  return{main:[...DEFAULT_CATEGORY_MAIN],order:[...DEFAULT_CATEGORY_MAIN]};
+}
+function mergeCategoryLayout(live,counts){
+  const order=[...(live?.order||[])];
+  Object.keys(counts||{}).forEach(cat=>{
+    if(!order.some(x=>categoryKeyAdmin(x)===categoryKeyAdmin(cat)))order.push(cat);
+  });
+  const main=(live?.main||DEFAULT_CATEGORY_MAIN).filter(cat=>order.some(x=>categoryKeyAdmin(x)===categoryKeyAdmin(cat)));
+  return{main,order};
+}
+async function ensureCategoryLayoutDraft(force){
+  if(categoryLayoutLoaded&&!force)return categoryLayoutDraft;
+  categoryLayoutBusy=true;
+  try{
+    const [live,counts]=await Promise.all([fetchLiveCategoryLayout(),discoverLiveCategories()]);
+    categoryLayoutCounts=counts||{};
+    categoryLayoutDraft=mergeCategoryLayout(live,counts);
+    categoryLayoutLoaded=true;
+    return categoryLayoutDraft;
+  }finally{categoryLayoutBusy=false}
+}
+function moveCategoryInDraft(name,dir){
+  const key=categoryKeyAdmin(name);
+  const order=[...(categoryLayoutDraft.order||[])];
+  const i=order.findIndex(x=>categoryKeyAdmin(x)===key);
+  if(i<0)return;
+  const j=i+(dir<0?-1:1);
+  if(j<0||j>=order.length)return;
+  const tmp=order[i];order[i]=order[j];order[j]=tmp;
+  categoryLayoutDraft={...categoryLayoutDraft,order};
+}
+function toggleCategoryMainDraft(name){
+  const key=categoryKeyAdmin(name);
+  let main=[...(categoryLayoutDraft.main||[])];
+  const has=main.some(x=>categoryKeyAdmin(x)===key);
+  if(has)main=main.filter(x=>categoryKeyAdmin(x)!==key);
+  else main.push(name);
+  categoryLayoutDraft={...categoryLayoutDraft,main};
+}
+function setCatOrderStatus(html){const el=document.getElementById("catOrderStatus");if(el)el.innerHTML=html}
+function renderCategoryOrderPanel(){
+  const order=categoryLayoutDraft.order||[];
+  const mainSet=new Set((categoryLayoutDraft.main||[]).map(categoryKeyAdmin));
+  const rows=order.map((name,idx)=>{
+    const isMain=mainSet.has(categoryKeyAdmin(name));
+    const count=categoryLayoutCounts[name]||0;
+    return `<div class="cat-order-row ${isMain?"is-main":""}">
+      <div><div class="cat-order-name">${esc(name)}</div><div class="cat-order-meta">${count?`${count} Beiträge`:"—"} · ${isMain?"Hauptbereich":"Weitere Kategorien"}</div></div>
+      <div class="cat-order-actions">
+        <button class="btn" type="button" data-cat-up="${idx}" title="Nach oben">↑</button>
+        <button class="btn" type="button" data-cat-down="${idx}" title="Nach unten">↓</button>
+        <button class="pill-btn ${isMain?"is-on":""}" type="button" data-cat-main="${idx}">${isMain?"Haupt":"Weiter"}</button>
+      </div>
+    </div>`;
+  }).join("");
+  const options=order.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  return `<div class="cat-order-panel" id="catOrderPanel">
+    <p class="bulk-pack-hint">Ordner in der Besucher-App unter <strong>Kategorien</strong> sortieren. <em>Haupt</em> = oben bei Hauptbereiche.</p>
+    <div class="cat-order-list" id="catOrderList">${rows||`<div class="empty">Keine Kategorien geladen.</div>`}</div>
+    <div class="bulk-pack-actions">
+      <button class="btn" id="catOrderReloadBtn" type="button" ${categoryLayoutBusy?"disabled":""}>Neu laden</button>
+      <button class="btn primary" id="catOrderSaveBtn" type="button" ${categoryLayoutBusy?"disabled":""}>Ordner live speichern</button>
+    </div>
+    <div class="upload-status" id="catOrderStatus" style="margin-top:8px">${categoryLayoutBusy?"Lade Kategorien…":"Änderungen werden in content/admin/category-layout.json gespeichert."}</div>
+    <div class="post-move-grid">
+      <input class="field" id="postMoveFilename" placeholder="beitrag-dateiname.md">
+      <select class="field" id="postMoveCategory">${options}</select>
+      <button class="btn" id="postMoveBtn" type="button">Beitrag verschieben</button>
+    </div>
+    <p class="bulk-pack-hint" style="margin-top:6px">Einzelnen Beitrag in einen anderen Ordner verschieben (nur <code>category:</code> im Frontmatter).</p>
+  </div>`;
+}
+function renderSinglePostPanel(){
+  return `<div class="single-post-panel" id="singlePostPanel">
+    <div class="single-post-head"><b>Einzelbeitrag · Markdown</b><span class="bulk-pack-count">Live veröffentlichen</span></div>
+    <div class="upload-grid">
+      <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+      <div class="upload-stack">
+        <button class="btn primary" id="previewDraftBtn" type="button">Vorschau</button>
+        <button class="btn" id="nextNumberBtn" type="button">Nummer holen</button>
+        <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
+        <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Veröffentliche…":"Online veröffentlichen"}</button>
+        <button class="btn" id="adminRetryPushBtn" type="button">Push erneut prüfen</button>
+      </div>
+    </div>
+    ${renderDraftPreview()}
+  </div>`;
+}
 function renderBulkPackPanel(){
-  return `<div class="bulk-pack-panel is-featured" id="bulkPackPanel">
-    <div class="section-head" style="margin-top:0"><h3>Sammel-Paket</h3><span>ZIP · Thema · Live</span></div>
+  return `<div class="bulk-pack-panel" id="bulkPackPanel">
+    <div class="section-head" style="margin-top:0"><h3>Sammel-Paket</h3><span>ZIP · Thema</span></div>
     <div class="admin-step-strip"><span class="admin-step-chip">1 ZIP wählen</span><span class="admin-step-chip">2 Kategorie</span><span class="admin-step-chip">3 Veröffentlichen</span></div>
     <p class="bulk-pack-hint">Mehrere Beiträge zu <strong>einem Ordner</strong> (z. B. <em>Takfīr bi'l-ʿUmūm</em>). Jeder Beitrag erscheint einzeln in Neueste, Kategorie und Einzelansicht.</p>
     <div class="bulk-pack-zip" id="bulkPackZipBox">
@@ -1399,26 +1539,16 @@ function renderContent(){
 }
 function renderActions(rows,installs=installTotals()){
   const best=sortedRows(rows)[0];
+  if(currentTab==="actions"&&!categoryLayoutLoaded&&!categoryLayoutBusy)ensureCategoryLayoutDraft(false).then(()=>{if(currentTab==="actions")renderShell()});
   return `<section class="split admin-actions-layout">
     <div class="panel admin-actions-main">
-      <div class="section-head admin-actions-head"><h3>Aktionen</h3><span>Veröffentlichen</span></div>
-      <p class="admin-actions-lead">Einzelbeitrag oder Sammel-Paket per ZIP. Alle bestehenden Funktionen bleiben erhalten — nur übersichtlicher geordnet.</p>
+      <div class="section-head admin-actions-head"><h3>Aktionen</h3><span>Veröffentlichen · Ordner</span></div>
+      <p class="admin-actions-lead">Einzelbeitrag zuerst, darunter Sammel-Paket. Ordner-Reihenfolge steuerst du kompakt unter „Ordner ordnen“.</p>
+      ${renderSinglePostPanel()}
       ${renderBulkPackPanel()}
-      <details class="admin-fold" open>
-        <summary>Einzelbeitrag · Markdown</summary>
-        <div class="admin-fold-body">
-          <div class="upload-grid">
-            <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
-            <div class="upload-stack">
-              <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
-              <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
-              <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
-              <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-              <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
-            </div>
-          </div>
-          ${renderDraftPreview()}
-        </div>
+      <details class="admin-fold">
+        <summary>Ordner ordnen</summary>
+        <div class="admin-fold-body">${renderCategoryOrderPanel()}</div>
       </details>
       <details class="admin-fold">
         <summary>Worker-Verbindung</summary>
@@ -1587,6 +1717,47 @@ function renderTechStatus(ctx){
   ];
   return `<div class="status-list">${checks.map(([label,ok,note])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${esc(note)}</span><strong class="status-pill">${ok?"OK":"Prüfen"}</strong></div>`).join("")}</div>`;
 }
+function bindCategoryOrderUi(){
+  document.querySelectorAll("[data-cat-up]").forEach(btn=>{btn.onclick=()=>{const idx=Number(btn.dataset.catUp);const name=categoryLayoutDraft.order?.[idx];if(!name)return;moveCategoryInDraft(name,-1);renderShell()}});
+  document.querySelectorAll("[data-cat-down]").forEach(btn=>{btn.onclick=()=>{const idx=Number(btn.dataset.catDown);const name=categoryLayoutDraft.order?.[idx];if(!name)return;moveCategoryInDraft(name,1);renderShell()}});
+  document.querySelectorAll("[data-cat-main]").forEach(btn=>{btn.onclick=()=>{const idx=Number(btn.dataset.catMain);const name=categoryLayoutDraft.order?.[idx];if(!name)return;toggleCategoryMainDraft(name);renderShell()}});
+  const reloadBtn=document.getElementById("catOrderReloadBtn");
+  if(reloadBtn)reloadBtn.onclick=async()=>{categoryLayoutLoaded=false;setCatOrderStatus("Lade Kategorien…");await ensureCategoryLayoutDraft(true);setCatOrderStatus("Kategorien neu geladen.");renderShell()};
+  const saveBtn=document.getElementById("catOrderSaveBtn");
+  if(saveBtn)saveBtn.onclick=async()=>{
+    if(!confirm("Ordner-Reihenfolge live speichern?\n\nBesucher sehen die Änderung unter Kategorien nach dem nächsten Laden."))return;
+    saveBtn.disabled=true;setCatOrderStatus("Speichere…");
+    try{
+      const result=await workerPostRequest("category-layout",{main:categoryLayoutDraft.main||[],order:categoryLayoutDraft.order||[]});
+      addAdminLog("Ordner","Kategorie-Layout live gespeichert",`${(categoryLayoutDraft.main||[]).length} Haupt · ${(categoryLayoutDraft.order||[]).length} gesamt`);
+      setCatOrderStatus(`Live gespeichert · ${(categoryLayoutDraft.main||[]).length} Hauptbereiche · Commit ${esc(String(result.commitSha||"").slice(0,7))}`);
+      toast("Ordner-Reihenfolge live");
+    }catch(e){
+      setCatOrderStatus(`Fehler: ${esc(e.message||e)}`);
+      toast(e.message||"Speichern fehlgeschlagen");
+    }finally{saveBtn.disabled=false}
+  };
+  const moveBtn=document.getElementById("postMoveBtn");
+  if(moveBtn)moveBtn.onclick=async()=>{
+    const filename=(document.getElementById("postMoveFilename")?.value||"").trim();
+    const category=(document.getElementById("postMoveCategory")?.value||"").trim();
+    if(!filename||!category){toast("Dateiname und Ziel-Ordner fehlen");return}
+    if(!confirm(`Beitrag „${filename}“ nach „${category}“ verschieben?`))return;
+    moveBtn.disabled=true;
+    try{
+      const result=await workerPostRequest("post/category",{filename,category});
+      addAdminLog("Beitrag","Kategorie geändert",`${filename} → ${category}`);
+      setCatOrderStatus(`Beitrag verschoben: <strong>${esc(filename)}</strong> → ${esc(category)}`);
+      toast("Beitrag verschoben");
+      categoryLayoutLoaded=false;
+      await ensureCategoryLayoutDraft(true);
+      renderShell();
+    }catch(e){
+      setCatOrderStatus(`Verschieben fehlgeschlagen: ${esc(e.message||e)}`);
+      toast(e.message||"Verschieben fehlgeschlagen");
+    }finally{moveBtn.disabled=false}
+  };
+}
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
   const tabSelect=document.getElementById("adminTabSelect");if(tabSelect)tabSelect.onchange=e=>navigateAdmin(e.target.value);
@@ -1606,6 +1777,7 @@ function bindUi(){
   const bulkCountBtn=document.getElementById("bulkCountBtn");if(bulkCountBtn)bulkCountBtn.onclick=()=>{const n=countBulkMarkdownPosts(document.getElementById("bulkPackMarkdownInput")?.value||"");const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";setBulkPackStatus(n?`${n} Beiträge im Paket erkannt.`:"Keine Beiträge erkannt — mit === trennen oder Frontmatter-Blöcke nutzen.")};
   const bulkPublishBtn=document.getElementById("bulkPublishBtn");if(bulkPublishBtn)bulkPublishBtn.onclick=uploadBulkPackViaWorker;
   bindBulkZipUpload();
+  bindCategoryOrderUi();
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
   const jummahRefreshBtn=document.getElementById("adminJummahRefreshBtn");if(jummahRefreshBtn)jummahRefreshBtn.onclick=()=>loadAdminJummahPushStatus();
@@ -1616,7 +1788,7 @@ function bindUi(){
   const jummahLiveBtnActions=document.getElementById("adminJummahLiveBtnActions");if(jummahLiveBtnActions)jummahLiveBtnActions.onclick=()=>runAdminJummahScheduler({live:true});
   if(document.getElementById("adminJummahPushStatus")||document.getElementById("adminJummahPushStatusActions"))loadAdminJummahPushStatus();
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
-  document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
+  document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("singlePostPanel")?.scrollIntoView({behavior:"smooth",block:"start"}));
   bindCommandCenterForms();
   bindRankCards();
 }
