@@ -12,6 +12,8 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const DUA_HOUR = 9;
 const REC_HOUR = 12;
 const SEND_WINDOW_MINUTES = 15;
+const DUA_CATCHUP_UNTIL_HOUR = 12;
+const REC_CATCHUP_UNTIL_HOUR = 18;
 
 let lastDailyStatusReport = null;
 
@@ -76,6 +78,12 @@ function dayOfYearInTz(date, timeZone) {
 
 function isSendWindow(localParts, hour) {
   return localParts.hour === hour && localParts.minute < SEND_WINDOW_MINUTES;
+}
+
+function isCatchupWindow(localParts, hour, untilHour) {
+  if (localParts.hour < hour || localParts.hour >= untilHour) return false;
+  if (localParts.hour === hour) return localParts.minute >= SEND_WINDOW_MINUTES;
+  return true;
 }
 
 async function supabaseFetch(env, path, options = {}) {
@@ -450,7 +458,10 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
     const recHour = Number(config?.recommendation?.hour ?? REC_HOUR);
 
-    if (duaOn && duaItem && config?.dailyDua?.enabled !== false && isSendWindow(local, duaHour)) {
+    const duaWindow = isSendWindow(local, duaHour) || isCatchupWindow(local, duaHour, DUA_CATCHUP_UNTIL_HOUR);
+    const recWindow = isSendWindow(local, recHour) || isCatchupWindow(local, recHour, REC_CATCHUP_UNTIL_HOUR);
+
+    if (duaOn && duaItem && config?.dailyDua?.enabled !== false && duaWindow) {
       if (row.last_dua_push_date === dateKey) {
         stats.duplicates += 1;
       } else {
@@ -459,7 +470,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
       }
     }
 
-    if (recOn && recItem && config?.recommendation?.enabled !== false && isSendWindow(local, recHour)) {
+    if (recOn && recItem && config?.recommendation?.enabled !== false && recWindow) {
       if (row.last_recommendation_push_date === dateKey) {
         stats.duplicates += 1;
       } else {
