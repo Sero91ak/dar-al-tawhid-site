@@ -377,10 +377,10 @@ export default {
 
   // PUSH_SYSTEM_GUARD: Cron alle 5 Min – Gebet + Tages-Push (wrangler.toml crons)
   async scheduled(event, env, ctx) {
+    ctx.waitUntil(ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(runScheduledPublishes(env));
     ctx.waitUntil(processAllPendingPushes(env));
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
-    ctx.waitUntil(ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
   }
 };
