@@ -5489,45 +5489,39 @@ html[data-theme="soft"] body.image-editor-mode .image-editor-touch-hint{border-t
 :root{
   --deck-radius:28px;
   --deck-surface:
-    radial-gradient(ellipse 118% 74% at 50% -16%, rgba(239,215,142,.11) 0%, transparent 58%),
-    radial-gradient(ellipse 72% 44% at 12% 0%, rgba(239,215,142,.07) 0%, transparent 54%),
-    radial-gradient(ellipse 68% 40% at 88% 4%, rgba(155,122,60,.06) 0%, transparent 52%),
-    linear-gradient(180deg, rgba(14,12,10,.20) 0%, rgba(10,9,7,.07) 36%, transparent 100%);
+    radial-gradient(ellipse 132% 88% at 50% -22%, rgba(239,215,142,.12) 0%, transparent 68%),
+    radial-gradient(ellipse 54% 38% at 10% 0%, rgba(239,215,142,.07) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 38% at 90% 0%, rgba(155,122,60,.06) 0%, transparent 62%);
 }
 html[data-theme="dark"]{
   --deck-surface:
-    radial-gradient(ellipse 118% 74% at 50% -16%, rgba(239,215,142,.11) 0%, transparent 58%),
-    radial-gradient(ellipse 72% 44% at 12% 0%, rgba(239,215,142,.07) 0%, transparent 54%),
-    radial-gradient(ellipse 68% 40% at 88% 4%, rgba(155,122,60,.06) 0%, transparent 52%),
-    linear-gradient(180deg, rgba(14,12,10,.20) 0%, rgba(10,9,7,.07) 36%, transparent 100%);
+    radial-gradient(ellipse 132% 88% at 50% -22%, rgba(239,215,142,.12) 0%, transparent 68%),
+    radial-gradient(ellipse 54% 38% at 10% 0%, rgba(239,215,142,.07) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 38% at 90% 0%, rgba(155,122,60,.06) 0%, transparent 62%);
 }
 html[data-theme="light"]{
   --deck-surface:
-    radial-gradient(ellipse 118% 74% at 50% -16%, rgba(255,255,255,.62) 0%, transparent 58%),
-    radial-gradient(ellipse 72% 44% at 14% 0%, rgba(236,210,155,.16) 0%, transparent 54%),
-    radial-gradient(ellipse 68% 40% at 86% 4%, rgba(221,197,150,.10) 0%, transparent 52%),
-    linear-gradient(180deg, rgba(255,250,240,.34) 0%, rgba(255,248,235,.10) 34%, transparent 100%);
+    radial-gradient(ellipse 132% 88% at 50% -22%, rgba(255,255,255,.58) 0%, transparent 68%),
+    radial-gradient(ellipse 54% 38% at 10% 0%, rgba(236,210,155,.14) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 38% at 90% 0%, rgba(221,197,150,.09) 0%, transparent 62%);
 }
 html[data-theme="soft"]{
   --deck-surface:
-    radial-gradient(ellipse 118% 74% at 50% -16%, rgba(255,255,255,.52) 0%, transparent 58%),
-    radial-gradient(ellipse 72% 44% at 14% 0%, rgba(234,213,221,.22) 0%, transparent 54%),
-    radial-gradient(ellipse 68% 40% at 86% 4%, rgba(196,153,169,.12) 0%, transparent 52%),
-    linear-gradient(180deg, rgba(255,249,244,.30) 0%, rgba(250,236,238,.08) 34%, transparent 100%);
+    radial-gradient(ellipse 132% 88% at 50% -22%, rgba(255,255,255,.48) 0%, transparent 68%),
+    radial-gradient(ellipse 54% 38% at 10% 0%, rgba(234,213,221,.18) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 38% at 90% 0%, rgba(196,153,169,.10) 0%, transparent 62%);
 }
 html[data-theme="royal"]{
   --deck-surface:
-    radial-gradient(ellipse 118% 74% at 50% -16%, rgba(239,215,142,.12) 0%, transparent 58%),
-    radial-gradient(ellipse 72% 44% at 12% 0%, rgba(239,215,142,.07) 0%, transparent 54%),
-    radial-gradient(ellipse 68% 40% at 88% 4%, rgba(64,128,190,.14) 0%, transparent 52%),
-    linear-gradient(180deg, rgba(7,22,44,.28) 0%, rgba(6,18,37,.10) 34%, transparent 100%);
+    radial-gradient(ellipse 132% 88% at 50% -22%, rgba(239,215,142,.13) 0%, transparent 68%),
+    radial-gradient(ellipse 54% 38% at 10% 0%, rgba(239,215,142,.07) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 38% at 90% 0%, rgba(64,128,190,.12) 0%, transparent 62%);
 }
 html[data-theme="bordeaux"]{
   --deck-surface:
-    radial-gradient(ellipse 118% 74% at 50% -16%, rgba(214,190,132,.12) 0%, transparent 58%),
-    radial-gradient(ellipse 72% 44% at 14% 0%, rgba(214,190,132,.08) 0%, transparent 54%),
-    radial-gradient(ellipse 68% 40% at 86% 4%, rgba(106,43,51,.16) 0%, transparent 52%),
-    linear-gradient(180deg, rgba(74,31,36,.24) 0%, rgba(50,19,23,.09) 34%, transparent 100%);
+    radial-gradient(ellipse 132% 88% at 50% -22%, rgba(214,190,132,.13) 0%, transparent 68%),
+    radial-gradient(ellipse 54% 38% at 10% 0%, rgba(214,190,132,.08) 0%, transparent 62%),
+    radial-gradient(ellipse 54% 38% at 90% 0%, rgba(106,43,51,.14) 0%, transparent 62%);
 }
 html[data-theme] .app{
   background:transparent!important;
@@ -5540,7 +5534,12 @@ html[data-theme] .app:after{
   display:none!important;
 }
 html[data-theme] .top-shell,
-html[data-theme] .top-shell.premium-surface{
+html[data-theme] .top-shell.premium-surface,
+html[data-theme="dark"] .top-shell,
+html[data-theme="light"] .top-shell,
+html[data-theme="soft"] .top-shell,
+html[data-theme="royal"] .top-shell,
+html[data-theme="bordeaux"] .top-shell{
   position:relative;
   isolation:isolate;
   border:0!important;
@@ -5558,11 +5557,26 @@ html[data-theme] .top-shell:before{
   inset:0!important;
   border-radius:inherit!important;
   background:var(--theme-deck-aura,transparent)!important;
-  opacity:.48!important;
+  opacity:.42!important;
   pointer-events:none!important;
   z-index:0!important;
-  -webkit-mask-image:radial-gradient(ellipse 112% 100% at 50% 0%, #000 58%, transparent 100%);
-  mask-image:radial-gradient(ellipse 112% 100% at 50% 0%, #000 58%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 118% 100% at 50% 0%, #000 52%, transparent 100%);
+  mask-image:radial-gradient(ellipse 118% 100% at 50% 0%, #000 52%, transparent 100%);
+}
+html[data-theme="bordeaux"] .top-shell:before{
+  opacity:.42!important;
+}
+html[data-theme] .top-shell:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  z-index:0!important;
+  background:
+    radial-gradient(ellipse 26% 34% at 0% 0%, var(--outer-bg-flat) 0%, transparent 100%),
+    radial-gradient(ellipse 26% 34% at 100% 0%, var(--outer-bg-flat) 0%, transparent 100%);
+  opacity:1!important;
 }
 html[data-theme] .top-shell .header,
 html[data-theme] .top-shell .isnad{
@@ -5576,19 +5590,31 @@ html[data-theme] .top-edge-fade{
 html[data-theme] .top-swim-aura{
   display:none!important;
 }
-html[data-theme].is-standalone-pwa .top-shell{
+html[data-theme].is-standalone-pwa .top-shell,
+html[data-theme="light"].is-standalone-pwa .top-shell,
+html[data-theme="soft"].is-standalone-pwa .top-shell,
+html[data-theme="royal"].is-standalone-pwa .top-shell,
+html[data-theme="bordeaux"].is-standalone-pwa .top-shell{
   border:0!important;
   box-shadow:none!important;
   overflow:visible!important;
+  border-radius:var(--deck-radius)!important;
+  background:var(--deck-surface)!important;
 }
 @media(max-width:700px){
   :root{--deck-radius:18px}
   html[data-theme] .top-shell,
-  html[data-theme] .top-shell.premium-surface{
+  html[data-theme] .top-shell.premium-surface,
+  html[data-theme="dark"] .top-shell,
+  html[data-theme="light"] .top-shell,
+  html[data-theme="soft"] .top-shell,
+  html[data-theme="royal"] .top-shell,
+  html[data-theme="bordeaux"] .top-shell{
     border:0!important;
     box-shadow:none!important;
     overflow:visible!important;
     border-radius:var(--deck-radius)!important;
+    background:var(--deck-surface)!important;
   }
 }
 @media(max-width:520px){
