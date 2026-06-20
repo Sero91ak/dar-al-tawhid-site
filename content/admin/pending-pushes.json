@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-06-20T07:13:31.608Z",
+  "generated": "2026-06-20T08:40:12.175Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -129,8 +129,32 @@
       "postPath": "content/posts/adhkar-409-ayat-al-kursi-im-haus.md",
       "status": "pending",
       "createdAt": "2026-06-20T07:13:21.247Z",
-      "lastError": "Beitrag ist nicht im öffentlichen Index enthalten.",
-      "updatedAt": "2026-06-20T07:13:31.608Z"
+      "lastError": "",
+      "updatedAt": "2026-06-20T08:40:12.175Z",
+      "lastCheckAt": "2026-06-20T08:40:11.871Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "yahya-bin-main-ayat-al-kursi-im-haus-409",
+        "indexGenerated": "2026-06-20T07:13:20.321Z",
+        "indexCount": 409,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=yahya-bin-main-ayat-al-kursi-im-haus-409&v=1781944811602#post/yahya-bin-main-ayat-al-kursi-im-haus-409"
+      },
+      "attempts": 1
     }
   }
 }
