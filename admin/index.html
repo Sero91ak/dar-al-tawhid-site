@@ -2372,6 +2372,7 @@ function saveLastPublishPushContext(ctx){
 function formatPushStatusLine(push){
   if(!push)return "";
   if(push.sent)return `<br>Push: <strong style="color:#8fd7a8">gesendet</strong>${push.id?` · ID ${esc(String(push.id))}`:""}${push.url?`<br>Push-Ziel: ${esc(push.url)}`:""}`;
+  if(push.pending||push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf stabile Live-Verfügbarkeit</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
   return `<br>Push: <strong style="color:#ff9f9f">fehlgeschlagen</strong> · ${esc(String(push.reason||push.message||"unbekannt"))}`;
 }
 async function retryLivePush(){
@@ -2470,10 +2471,10 @@ async function uploadPostViaWorker(){
     updatePublishStep("urlLive",live.url?"ok":"skip",live.url?"Besucher-Link vorbereitet":"Besucher-Link wartet auf Index/Datei");
     const push=result.push||null;
     updatePublishStep("pushReady",push?"ok":"skip",push?"Push-Antwort vom Worker":"Kein Push-Status vom Worker");
-    updatePublishStep("onesignal",push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
-    updatePublishStep("pushSent",push&&push.sent?"ok":"error",push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
-    updatePublishStep("done",push&&push.sent&&live.file?"ok":"skip",push&&push.sent&&live.file?"Fertig":"Fertig mit Hinweis");
-    updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
+    updatePublishStep("onesignal",push?.pending?"skip":push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?.pending?"Wartet auf stabile Live-Prüfung":push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
+    updatePublishStep("pushSent",push?.pending?"skip":push&&push.sent?"ok":"error",push?.pending?"Wird automatisch gesendet, sobald der Beitrag stabil online ist":push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
+    updatePublishStep("done",(push&&push.sent||push?.pending)&&live.file?"ok":"skip",push?.pending?"Beitrag erstellt · Push wartet":push&&push.sent&&live.file?"Fertig":"Fertig mit Hinweis");
+    updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live-Verfügbarkeit":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     finishPublishTrack(live.file?"ok":"error",live.file?"":live.reason||"Live-Datei noch nicht erreichbar");
     setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(result.push)}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);

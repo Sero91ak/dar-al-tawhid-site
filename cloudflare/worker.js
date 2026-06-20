@@ -42,7 +42,7 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
+const LIVE_CHECK_SCHEDULE_FULL_MS = [30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
 
 export default {
@@ -507,24 +507,7 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   );
   let push;
   const skipPush = Boolean(input.skipPush || options.skipPush);
-  if (liveCheck.ok && !skipPush) {
-    push = await sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion: Date.now() });
-    push.liveCheck = liveCheck;
-    push.pending = false;
-    if (postId) {
-      await writePendingPushStatus(env, postId, {
-        postId,
-        filename,
-        postTitle,
-        publishedAt,
-        postPath,
-        status: "sent",
-        sentAt: new Date().toISOString(),
-        lastError: "",
-        liveCheck
-      });
-    }
-  } else if (skipPush) {
+  if (skipPush) {
     push = {
       sent: false,
       skipped: true,
@@ -546,7 +529,9 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     push = {
       sent: false,
       pending: true,
-      reason: "Push wartet auf Live-Verfügbarkeit",
+      reason: liveCheck.ok
+        ? "Push wird erst nach stabiler Live-Prüfung gesendet."
+        : "Push wartet auf Live-Verfügbarkeit",
       waitingForLive: true,
       liveCheck,
       targetUrl: buildPostPushUrl(env, postId, Date.now())
