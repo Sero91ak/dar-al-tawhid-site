@@ -5809,6 +5809,93 @@ html[data-theme="light"] .font-slider-panel,html[data-theme="soft"] .font-slider
 .app-font-panel{display:block!important;padding:12px!important}
 .app-font-panel .font-panel-copy{margin-bottom:6px!important}.app-font-panel .font-panel-copy b{font-size:21px!important}.app-font-panel .font-panel-copy span{display:none!important}
 .new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
+
+/* DECK BLEND FINAL: wie Bordeaux sauber — kein Kachel-Rand, kein Ecken-Halo */
+:root{--deck-radius:28px}
+html[data-theme] .app,
+html[data-theme="dark"] .app,
+html[data-theme="light"] .app,
+html[data-theme="soft"] .app,
+html[data-theme="royal"] .app,
+html[data-theme="bordeaux"] .app{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  border-radius:0!important;
+  outline:none!important;
+}
+html[data-theme] .app:after,
+html.is-standalone-pwa .app:after{
+  display:none!important;
+  content:none!important;
+}
+html[data-theme] .top-shell,
+html[data-theme] .top-shell.premium-surface,
+html[data-theme="dark"] .top-shell,
+html[data-theme="light"] .top-shell,
+html[data-theme="soft"] .top-shell,
+html[data-theme="royal"] .top-shell,
+html[data-theme="bordeaux"] .top-shell,
+html.is-standalone-pwa .top-shell,
+html[data-theme].is-standalone-pwa .top-shell,
+html[data-theme="light"].is-standalone-pwa .top-shell,
+html[data-theme="soft"].is-standalone-pwa .top-shell,
+html[data-theme="royal"].is-standalone-pwa .top-shell,
+html[data-theme="bordeaux"].is-standalone-pwa .top-shell{
+  position:relative;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  background:transparent!important;
+  background-image:none!important;
+  background-color:transparent!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+  isolation:auto;
+  border-radius:var(--deck-radius)!important;
+}
+html[data-theme] .top-shell:before,
+html[data-theme] .top-shell:after,
+html.is-standalone-pwa .top-shell:before,
+html.is-standalone-pwa .top-shell:after{
+  display:none!important;
+  content:none!important;
+}
+html[data-theme="bordeaux"] .top-shell:before{
+  display:none!important;
+  opacity:0!important;
+}
+html[data-theme] .top-shell .header,
+html[data-theme] .top-shell .isnad{
+  position:relative;
+  z-index:1;
+}
+html[data-theme] .top-edge-fade,
+html[data-theme] .top-swim-aura{
+  display:none!important;
+}
+@media(max-width:700px){
+  :root{--deck-radius:18px}
+  html[data-theme] .top-shell,
+  html[data-theme] .top-shell.premium-surface,
+  html[data-theme="dark"] .top-shell,
+  html[data-theme="light"] .top-shell,
+  html[data-theme="soft"] .top-shell,
+  html[data-theme="royal"] .top-shell,
+  html[data-theme="bordeaux"] .top-shell,
+  html.is-standalone-pwa .top-shell{
+    border:0!important;
+    box-shadow:none!important;
+    background:transparent!important;
+    border-radius:var(--deck-radius)!important;
+  }
+}
+@media(max-width:520px){
+  :root{--deck-radius:16px}
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
