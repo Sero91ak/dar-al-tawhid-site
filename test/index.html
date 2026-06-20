@@ -5656,6 +5656,150 @@ html[data-theme] .view{
   }
 }
 
+/* Premium hero transition: one structure, theme-owned colors, no spacing trick. */
+html[data-theme="dark"]{
+  --theme-page-bg:#080806;
+  --theme-hero-bg:linear-gradient(180deg,rgba(8,8,6,.96) 0%,rgba(10,9,7,.98) 48%,rgba(8,8,6,.90) 100%);
+  --theme-hero-surface:radial-gradient(circle at 15% 0%,rgba(239,215,142,.12),transparent 38%),linear-gradient(180deg,rgba(13,12,9,.96) 0%,rgba(7,7,6,.97) 62%,rgba(7,7,6,.88) 100%);
+  --theme-hero-glow:rgba(239,215,142,.13);
+  --theme-hero-border:rgba(239,215,142,.24);
+  --theme-hero-blend-top:rgba(8,8,6,1);
+  --theme-hero-blend-bottom:rgba(8,8,6,0);
+  --theme-accent:#efd78e;
+  --theme-text:#f7eed8;
+  --theme-muted:rgba(247,238,216,.70);
+}
+html[data-theme="light"]{
+  --theme-page-bg:#f7f0df;
+  --theme-hero-bg:linear-gradient(180deg,rgba(247,240,223,1) 0%,rgba(255,250,240,.98) 48%,rgba(247,240,223,.88) 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(255,255,255,.92),transparent 40%),radial-gradient(circle at 86% 8%,rgba(210,174,116,.16),transparent 36%),linear-gradient(180deg,rgba(255,252,245,.98) 0%,rgba(249,240,222,.96) 62%,rgba(247,236,216,.88) 100%);
+  --theme-hero-glow:rgba(214,190,132,.22);
+  --theme-hero-border:rgba(155,122,60,.22);
+  --theme-hero-blend-top:rgba(247,240,223,1);
+  --theme-hero-blend-bottom:rgba(247,240,223,0);
+  --theme-accent:#8f6b32;
+  --theme-text:#3d2a12;
+  --theme-muted:rgba(61,42,18,.68);
+}
+html[data-theme="soft"]{
+  --theme-page-bg:#f2e6e2;
+  --theme-hero-bg:linear-gradient(180deg,rgba(242,230,226,1) 0%,rgba(255,248,244,.98) 48%,rgba(242,230,226,.88) 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(255,255,255,.88),transparent 40%),radial-gradient(circle at 84% 10%,rgba(196,153,169,.18),transparent 38%),linear-gradient(180deg,rgba(255,249,245,.98) 0%,rgba(246,229,226,.96) 62%,rgba(238,218,221,.88) 100%);
+  --theme-hero-glow:rgba(210,174,116,.18);
+  --theme-hero-border:rgba(116,76,98,.20);
+  --theme-hero-blend-top:rgba(242,230,226,1);
+  --theme-hero-blend-bottom:rgba(242,230,226,0);
+  --theme-accent:#80536a;
+  --theme-text:#34232c;
+  --theme-muted:rgba(52,35,44,.66);
+}
+html[data-theme="royal"]{
+  --theme-page-bg:#07162c;
+  --theme-hero-bg:linear-gradient(180deg,rgba(7,22,44,1) 0%,rgba(8,29,56,.98) 50%,rgba(5,16,35,.90) 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(239,215,142,.13),transparent 38%),radial-gradient(circle at 86% 8%,rgba(37,99,142,.22),transparent 38%),linear-gradient(180deg,rgba(9,30,58,.98) 0%,rgba(6,20,42,.96) 62%,rgba(5,16,35,.88) 100%);
+  --theme-hero-glow:rgba(37,99,142,.24);
+  --theme-hero-border:rgba(239,215,142,.24);
+  --theme-hero-blend-top:rgba(7,22,44,1);
+  --theme-hero-blend-bottom:rgba(7,22,44,0);
+  --theme-accent:#efd78e;
+  --theme-text:#f7eed8;
+  --theme-muted:rgba(247,238,216,.70);
+}
+html[data-theme="emerald"],
+html[data-theme="smaragd"],
+html[data-theme="aurora"]{
+  --theme-page-bg:#06120f;
+  --theme-hero-bg:linear-gradient(180deg,rgba(4,15,13,1) 0%,rgba(8,31,27,.98) 50%,rgba(4,15,13,.90) 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(214,190,132,.13),transparent 38%),radial-gradient(circle at 84% 8%,rgba(25,109,93,.20),transparent 40%),radial-gradient(circle at 46% -8%,rgba(42,88,104,.14),transparent 42%),linear-gradient(180deg,rgba(8,32,28,.98) 0%,rgba(5,22,19,.96) 62%,rgba(4,15,13,.88) 100%);
+  --theme-hero-glow:rgba(28,105,87,.22);
+  --theme-hero-border:rgba(214,190,132,.23);
+  --theme-hero-blend-top:rgba(4,15,13,1);
+  --theme-hero-blend-bottom:rgba(4,15,13,0);
+  --theme-accent:#d6be84;
+  --theme-text:#f7eed8;
+  --theme-muted:rgba(247,238,216,.70);
+}
+html[data-theme="bordeaux"]{
+  --theme-page-bg:#140b0c;
+  --theme-hero-bg:linear-gradient(180deg,rgba(20,11,12,1) 0%,rgba(42,18,22,.98) 50%,rgba(18,8,9,.90) 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(214,190,132,.14),transparent 38%),radial-gradient(circle at 84% 9%,rgba(120,42,50,.24),transparent 38%),linear-gradient(180deg,rgba(43,18,22,.98) 0%,rgba(25,10,12,.96) 62%,rgba(18,8,9,.88) 100%);
+  --theme-hero-glow:rgba(214,190,132,.15);
+  --theme-hero-border:rgba(214,190,132,.24);
+  --theme-hero-blend-top:rgba(20,11,12,1);
+  --theme-hero-blend-bottom:rgba(20,11,12,0);
+  --theme-accent:#d6be84;
+  --theme-text:#f7eed8;
+  --theme-muted:rgba(247,238,216,.70);
+}
+html[data-theme] .theme-hero-shell{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:1px solid var(--theme-hero-border)!important;
+  border-radius:28px 28px 20px 20px!important;
+  background:var(--theme-hero-bg)!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+html[data-theme] .theme-hero-shell::before,
+html[data-theme] .theme-hero-shell::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+html[data-theme] .theme-hero-shell::before{
+  background:linear-gradient(180deg,var(--theme-hero-blend-top) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 68%,var(--theme-hero-blend-bottom) 100%),radial-gradient(circle at 18% 0%,var(--theme-hero-glow),transparent 42%),radial-gradient(circle at 86% 5%,var(--theme-hero-glow),transparent 36%);
+  opacity:.98;
+}
+html[data-theme] .theme-hero-shell::after{
+  border-radius:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -42px 72px rgba(0,0,0,.16),inset 0 0 0 1px rgba(255,255,255,.025);
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,0) 34%,rgba(0,0,0,.10) 100%);
+  mix-blend-mode:screen;
+  opacity:.62;
+}
+html[data-theme] .theme-hero-shell > *{
+  position:relative;
+  z-index:1;
+}
+html[data-theme] .theme-hero-surface{
+  background:var(--theme-hero-surface)!important;
+}
+html[data-theme] .theme-hero-shell .isnad{
+  background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(0,0,0,.055))!important;
+}
+html[data-theme] .theme-hero-shell .app-bar{
+  background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.015),rgba(0,0,0,.08))!important;
+  border-color:var(--theme-hero-border)!important;
+}
+html[data-theme="light"] .theme-hero-shell,
+html[data-theme="soft"] .theme-hero-shell{
+  box-shadow:0 16px 38px rgba(110,82,40,.08),inset 0 1px 0 rgba(255,255,255,.66)!important;
+}
+html[data-theme="light"] .theme-hero-shell::after,
+html[data-theme="soft"] .theme-hero-shell::after{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.74),inset 0 -38px 70px rgba(130,90,48,.08),inset 0 0 0 1px rgba(255,255,255,.26);
+  background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0) 36%,rgba(120,82,48,.07) 100%);
+  mix-blend-mode:normal;
+  opacity:.9;
+}
+@media(max-width:700px){
+  html[data-theme] .theme-hero-shell{
+    border-radius:24px 24px 18px 18px!important;
+    border:1px solid var(--theme-hero-border)!important;
+    box-shadow:0 13px 34px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.05)!important;
+  }
+  html[data-theme] .theme-hero-shell::after{
+    height:auto!important;
+    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0) 34%,rgba(0,0,0,.10) 100%)!important;
+  }
+  html[data-theme="light"] .theme-hero-shell,
+  html[data-theme="soft"] .theme-hero-shell{
+    box-shadow:0 12px 30px rgba(110,82,40,.075),inset 0 1px 0 rgba(255,255,255,.66)!important;
+  }
+}
+
 
 .staging-app-banner{border:1px solid rgba(255,196,120,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,196,120,.18),rgba(239,215,142,.06));color:var(--cream);padding:10px 12px;margin:0 0 12px;font-size:12px;font-weight:900;line-height:1.35;text-align:center}.staging-app-banner b{color:var(--gold2)}
 :root{
@@ -6070,8 +6214,8 @@ window.DAR_ANALYTICS_CONFIG={
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
 <div class="top-swim-aura" id="topSwimAura" aria-hidden="true"></div>
 <div class="app">
-  <section class="top-shell">
-    <header class="header">
+  <section class="top-shell theme-hero-shell">
+    <header class="header theme-hero-surface">
       <div class="header-row">
         <div class="brand">
           <div class="brand-kicker-row">
