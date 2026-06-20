@@ -1,7 +1,7 @@
 ---
 id: "bukhari-sahih-ehrfurcht-411"
 date: "2026-06-20T19:36:20.000Z"
-title: "Wie al-Bukhārī sein Ṣaḥīḥ behandelte"
+title: 📖 "Wie al-Bukhārī sein Ṣaḥīḥ behandelte"
 category: "Hadith"
 topic: "Ehrfurcht vor Hadith"
 scholar: "Muḥammad b. Ismāʿīl al-Bukhārī"
