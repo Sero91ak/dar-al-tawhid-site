@@ -8295,7 +8295,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v133";
+const APP_BUILD_ID="app-shell-v132";
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${setHeader("Startseite","","App-Übersicht")}${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
@@ -8966,99 +8966,5 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
   })();
   </script>
-  <style id="dar-cover-transition-final">
-  /* Deckblatt-Uebergang final: oben ruhiger Statusbereich, darunter eine edle Theme-Karte. */
-  html[data-theme="dark"]{
-    --cover-status-bg:#000000;
-    --cover-stage-bg:linear-gradient(180deg,#000 0%,#030403 58%,#070706 100%);
-    --cover-card-bg:radial-gradient(circle at 86% 12%,rgba(22,58,54,.22),transparent 34%),radial-gradient(circle at 18% 0%,rgba(239,215,142,.12),transparent 38%),linear-gradient(180deg,#080907 0%,#060706 100%);
-    --cover-card-border:rgba(239,215,142,.22);
-    --cover-card-shadow:0 18px 44px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.035);
-  }
-  html[data-theme="light"]{
-    --cover-status-bg:#f7f0df;
-    --cover-stage-bg:linear-gradient(180deg,#f7f0df 0%,#fbf4e6 58%,#fffaf0 100%);
-    --cover-card-bg:radial-gradient(circle at 82% 10%,rgba(155,122,60,.10),transparent 34%),radial-gradient(circle at 18% 0%,rgba(255,255,255,.88),transparent 40%),linear-gradient(180deg,#fffaf0 0%,#f7eedc 100%);
-    --cover-card-border:rgba(155,122,60,.22);
-    --cover-card-shadow:0 16px 36px rgba(120,90,40,.10),inset 0 1px 0 rgba(255,255,255,.84);
-  }
-  html[data-theme="soft"]{
-    --cover-status-bg:#f2e6e2;
-    --cover-stage-bg:linear-gradient(180deg,#f2e6e2 0%,#fff8f4 58%,#f7ecea 100%);
-    --cover-card-bg:radial-gradient(circle at 82% 10%,rgba(116,76,98,.12),transparent 34%),radial-gradient(circle at 18% 0%,rgba(255,255,255,.82),transparent 40%),linear-gradient(180deg,#fff8f4 0%,#f1e1df 100%);
-    --cover-card-border:rgba(116,76,98,.20);
-    --cover-card-shadow:0 16px 36px rgba(96,62,78,.10),inset 0 1px 0 rgba(255,255,255,.74);
-  }
-  html[data-theme="royal"]{
-    --cover-status-bg:#020814;
-    --cover-stage-bg:linear-gradient(180deg,#020814 0%,#061329 58%,#07162c 100%);
-    --cover-card-bg:radial-gradient(circle at 84% 10%,rgba(46,118,176,.22),transparent 34%),radial-gradient(circle at 18% 0%,rgba(239,215,142,.13),transparent 38%),linear-gradient(180deg,#08172d 0%,#061225 100%);
-    --cover-card-border:rgba(239,215,142,.23);
-    --cover-card-shadow:0 18px 44px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.045);
-  }
-  html[data-theme="bordeaux"]{
-    --cover-status-bg:#070203;
-    --cover-stage-bg:linear-gradient(180deg,#070203 0%,#17090b 58%,#240f13 100%);
-    --cover-card-bg:radial-gradient(circle at 84% 10%,rgba(120,42,50,.24),transparent 34%),radial-gradient(circle at 18% 0%,rgba(214,190,132,.13),transparent 38%),linear-gradient(180deg,#241014 0%,#16090b 100%);
-    --cover-card-border:rgba(214,190,132,.23);
-    --cover-card-shadow:0 18px 44px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.04);
-  }
-  @media(max-width:700px){
-    html[data-theme],
-    html[data-theme].is-standalone-pwa{
-      background:var(--cover-status-bg)!important;
-      background-color:var(--cover-status-bg)!important;
-    }
-    html[data-theme] body,
-    html[data-theme] body.has-bottom-nav,
-    html[data-theme].is-standalone-pwa body{
-      padding-top:0!important;
-      background:var(--cover-stage-bg)!important;
-      background-color:var(--cover-status-bg)!important;
-    }
-    html[data-theme] .top-edge-fade{
-      height:calc(env(safe-area-inset-top,0px) + 104px)!important;
-      background:linear-gradient(180deg,var(--cover-status-bg) 0%,var(--cover-status-bg) 56%,rgba(0,0,0,0) 100%)!important;
-      opacity:1!important;
-    }
-    html[data-theme] .top-swim-aura{
-      display:none!important;
-    }
-    html[data-theme] .app{
-      padding-top:calc(env(safe-area-inset-top,0px) + 74px)!important;
-      background:transparent!important;
-    }
-    html[data-theme] .app:after{
-      display:none!important;
-    }
-    html[data-theme] .top-shell{
-      margin-top:0!important;
-      border-radius:28px 28px 18px 18px!important;
-      border:1px solid var(--cover-card-border)!important;
-      background:var(--cover-card-bg)!important;
-      box-shadow:var(--cover-card-shadow)!important;
-      overflow:hidden!important;
-      position:relative!important;
-    }
-    html[data-theme] .top-shell:before{
-      opacity:.86!important;
-    }
-    html[data-theme] .top-shell:after{
-      content:""!important;
-      position:absolute!important;
-      inset:0 0 auto 0!important;
-      height:86px!important;
-      pointer-events:none!important;
-      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,0) 78%)!important;
-      opacity:1!important;
-      z-index:0!important;
-    }
-    html[data-theme] .top-shell .header{
-      padding-top:22px!important;
-      position:relative!important;
-      z-index:1!important;
-    }
-  }
-  </style>
 </body>
 </html>
