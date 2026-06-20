@@ -2,13 +2,13 @@
   "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v1",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-20T08:50:16.053Z",
+  "updatedAt": "2026-06-20T09:05:16.039Z",
   "usersChecked": 22,
-  "duaCandidates": 0,
+  "duaCandidates": 2,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 2,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 20,
   "errors": 0,
   "dailyContentDate": "2026-06-20",
   "currentRecommendation": {
@@ -23,5 +23,20 @@
     "category": "Rechtleitung"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "deviceId": "dar-e2f572f1-dde3-41c6-8c1e-7d30d5a27f1b",
+      "contentId": "quran-003",
+      "recipients": "254305f5-81c9-4237-b874-6031aed6c19e",
+      "ok": true
+    },
+    {
+      "kind": "dua",
+      "deviceId": "dar-60afe1af-580d-48b1-ac35-826fabd19ab2",
+      "contentId": "quran-003",
+      "recipients": "9ca9063e-21ca-4d07-8d20-2ee1c8b6a5a6",
+      "ok": true
+    }
+  ]
 }
