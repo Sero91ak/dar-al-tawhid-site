@@ -28,7 +28,7 @@
 <meta name="twitter:image" content="/app-icon-512.png?v=source-under-statement-v12">
 <meta name="theme-color" content="#080806">
 <script>(function(){try{var p=new URLSearchParams(location.search);var wantStaging=p.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(wantStaging&&!underTest){location.replace("/test/"+location.search+location.hash);return}}catch(e){}})();</script>
-<script>(function(){try{var params=new URLSearchParams(location.search);var staging=params.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest-staging.json?v=dar-test-v2";if(staging&&touch)touch.href="/test-apple-touch-icon.png?v=dar-test-v2";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="Dar Test";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="Dar Test"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=staging?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=staging?"#061826":colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=staging}catch(e){}})();</script>
+<script>(function(){try{var params=new URLSearchParams(location.search);var staging=params.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest-staging.json?v=dar-test-v2";if(staging&&touch)touch.href="/test-apple-touch-icon.png?v=dar-test-v2";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="Dar Test";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="Dar Test"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="aurora")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",aurora:"Imperial Aurora Premium"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",aurora:"#050806"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=staging?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=staging?"#061826":colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=staging}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -87,7 +87,7 @@
 .theme-switch-head{margin-bottom:10px}
 .theme-switch-head h3{font-family:var(--serif);color:var(--premium-title);font-size:22px;line-height:1.08;margin:0 0 4px}
 .theme-switch-note{color:var(--premium-body);font-size:11px;line-height:1.45;margin:0}
-.theme-switch-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:4px;width:100%}
+.theme-switch-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:4px;width:100%}
 .theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;transform:none;border:1px solid var(--theme-card-border,var(--premium-pill-border));background:var(--theme-card-bg,var(--premium-pill-bg));color:var(--theme-card-text,var(--premium-pill-text));border-radius:18px;min-height:86px;padding:9px 10px;font-size:11.5px;line-height:1.15;font-weight:950;cursor:pointer;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;overflow-wrap:anywhere;display:grid;grid-template-rows:auto 1fr;gap:7px;text-align:left;box-shadow:inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.06))}
 .theme-preview{display:flex;align-items:center;gap:7px}
 .theme-preview-logo{width:28px;height:28px;border-radius:999px;border:1px solid var(--theme-preview-ring);background:var(--theme-preview-logo);box-shadow:0 8px 18px var(--theme-preview-shadow)}
@@ -99,6 +99,7 @@
 .theme-switch-btn[data-theme-select="light"]{--theme-card-bg:linear-gradient(145deg,#fffdf7,#f1e5cf);--theme-card-border:rgba(148,114,57,.30);--theme-card-text:#3e2b17;--theme-card-shine:rgba(255,255,255,.72);--theme-preview-ring:rgba(155,122,60,.38);--theme-preview-logo:radial-gradient(circle,#fffaf0 0 32%,#efe1bd 35% 100%);--theme-preview-shadow:rgba(130,94,42,.16);--theme-preview-line:linear-gradient(90deg,#6d4e24,#d8bf78)}
 .theme-switch-btn[data-theme-select="soft"]{--theme-card-bg:linear-gradient(145deg,#fff9f4,#ead5dd);--theme-card-border:rgba(116,76,98,.28);--theme-card-text:#34232c;--theme-card-shine:rgba(255,255,255,.70);--theme-preview-ring:rgba(116,76,98,.34);--theme-preview-logo:radial-gradient(circle,#fff8f1 0 32%,#e7cfd5 35% 100%);--theme-preview-shadow:rgba(96,62,78,.13);--theme-preview-line:linear-gradient(90deg,#7d5368,#d7b9c5)}
 .theme-switch-btn[data-theme-select="royal"]{--theme-card-bg:linear-gradient(145deg,#0d2b55,#041126);--theme-card-border:rgba(239,215,142,.44);--theme-card-text:#fff2c6;--theme-card-shine:rgba(255,255,255,.055);--theme-preview-ring:rgba(239,215,142,.58);--theme-preview-logo:radial-gradient(circle,#f8e9b7 0 30%,#0a1f3d 34% 100%);--theme-preview-shadow:rgba(4,12,28,.40);--theme-preview-line:linear-gradient(90deg,#efd78e,#2b6fa3)}
+.theme-switch-btn[data-theme-select="aurora"]{--theme-card-bg:linear-gradient(145deg,#123629,#071C14);--theme-card-border:rgba(216,190,122,.44);--theme-card-text:#F6F1E3;--theme-card-shine:rgba(255,255,255,.05);--theme-preview-ring:rgba(216,190,122,.58);--theme-preview-logo:radial-gradient(circle,#E7D59D 0 28%,#184238 34%,#0D2B21 100%);--theme-preview-shadow:rgba(5,8,6,.42);--theme-preview-line:linear-gradient(90deg,#D8BE7A,#184238)}
 .theme-switch-btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .theme-switch-btn.is-active{border-color:rgba(239,215,142,.78)!important;box-shadow:0 0 0 1px rgba(239,215,142,.28),0 10px 24px rgba(0,0,0,.18),inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.06))!important}
 .theme-switch-btn.is-active:after{content:"✓";position:absolute;right:8px;top:8px;width:19px;height:19px;border-radius:999px;display:grid;place-items:center;background:rgba(239,215,142,.92);color:#21170a;font-size:12px;font-weight:950;box-shadow:0 3px 10px rgba(0,0,0,.18)}
@@ -335,8 +336,8 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 @media(max-width:700px){body{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}.top-shell,.view{border-radius:20px}.header{padding:18px 15px 15px}.brand-kicker-row{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px}.brand small{font-size:9px;letter-spacing:.12em;max-width:100%;white-space:normal;overflow:visible;text-overflow:unset}.hijri-header-pill{font-size:8.5px;min-height:29px;padding:5px 7px;max-width:54%;flex-shrink:0;overflow:visible;text-overflow:unset}.brand-main{gap:12px}.logo{width:62px;height:62px;flex:0 0 62px}h1{font-size:clamp(27px,8.7vw,36px);letter-spacing:.012em;line-height:.95;white-space:nowrap}.socials{gap:10px;margin-top:16px}.social-link{justify-content:center;padding:10px 9px;font-size:13px;min-height:46px;gap:9px}.social-link svg{width:24px;height:24px;flex-basis:24px}.hero-text{margin-top:14px;padding-top:14px}.salam{font-size:clamp(12px,3.35vw,15px);line-height:1.2}.intro{font-size:11.5px;line-height:1.45}.isnad{padding:11px 14px 12px}.isnad-label{font-size:8px}.isnad-quote{font-size:10.2px}.isnad-source{font-size:8.5px}.view{padding:16px;min-height:420px}.view-head{padding-bottom:14px;margin-bottom:16px}.view h2{font-size:28px}.view-desc{font-size:11.6px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat-card{padding:10px;border-radius:14px}.stat-card b{font-size:19px}.stat-card span{font-size:10px}.about-grid{grid-template-columns:1fr;gap:11px}.folder-card,.post-card,.list-card,.info-card,.dua-card{border-radius:17px;padding:14px}.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-size:18px;line-height:1.08}.folder-card p,.dua-card p{font-size:11px;line-height:1.38}.folder-icon{width:38px;height:38px;border-radius:14px;font-size:18px;margin-bottom:9px}.emoji-emblem{width:25px;height:25px;font-size:21px}.folder-meta{gap:5px;margin-top:9px}.folder-meta span,.badge{font-size:8.4px;padding:4px 6px}.list-card{min-height:118px}.list-card .count,.book-author{font-size:10.5px}.post-card{min-height:185px}.excerpt{font-size:12.8px;line-height:1.32;-webkit-line-clamp:3}.source-preview{font-size:8.5px;margin-top:8px;padding-top:7px}.section-head h3{font-size:21px}.section-head span{font-size:9.5px}.overview-title h3{font-size:21px}.search{height:46px}.direct-pick-panel{border-radius:17px;padding:11px}.direct-pick-title{display:block}.direct-pick-title h3{font-size:20px}.direct-pick-title span{display:block;margin-top:4px;font-size:10px}.daily-box,.recommended-box,.calendar-panel{border-radius:17px;padding:14px}.daily-title,.recommended-title,.calendar-title h3{font-size:20px}.daily-text,.recommended-text{font-size:11.5px}.event-list{grid-template-columns:1fr}.calendar-title{display:block}.statement,.dua-detail-box{padding:16px;border-radius:19px;font-size:17px;line-height:1.62;text-align:left}.dua-arabic{font-size:24px}.dua-trans,.dua-de{font-size:15px}.article-title{text-align:left}.article-meta,.article-actions,.link-row{justify-content:flex-start}.source-strong{text-align:left}.app-bar{margin-bottom:9px}.crumb{font-size:10.5px}.nav-posts{grid-template-columns:1fr}}
 @media(max-width:390px){.logo{width:56px;height:56px;flex-basis:56px}h1{font-size:clamp(26px,8.4vw,34px);letter-spacing:.005em}.folder-card,.post-card,.list-card{padding:13px}.folder-card h3,.post-card h3,.list-card h3{font-size:16.5px}.excerpt{font-size:12px}.section-block{margin-top:18px}.section-head{margin-bottom:12px}}
 @media(max-width:520px){.account-form{grid-template-columns:1fr}.account-summary{grid-template-columns:1fr}.account-actions button{flex:1 1 150px}}
-@media(max-width:520px){.theme-switch-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.theme-switch-btn{min-height:58px;border-radius:15px;padding:7px 4px;font-size:8.8px;line-height:1.08;gap:4px;text-align:center;grid-template-rows:auto auto;align-items:center;justify-items:center;width:100%;min-width:0;max-width:none;transform:none}.theme-preview{gap:4px;justify-content:center;width:100%}.theme-preview-logo{width:20px;height:20px;flex-shrink:0}.theme-preview-lines{display:none}.theme-switch-btn span:last-child{align-self:center;width:100%}.first-visit-theme .theme-switch-row{grid-template-columns:repeat(4,minmax(0,1fr))}.first-visit-theme .theme-switch-btn{min-height:34px;padding:7px 8px;font-size:10px;display:block;text-align:center}}
-@media(max-width:370px){.theme-switch-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.theme-switch-btn{min-height:54px;padding:6px 3px;font-size:8px}.theme-preview-logo{width:18px;height:18px}}
+@media(max-width:520px){.theme-switch-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.theme-switch-btn{min-height:58px;border-radius:15px;padding:7px 4px;font-size:8.8px;line-height:1.08;gap:4px;text-align:center;grid-template-rows:auto auto;align-items:center;justify-items:center;width:100%;min-width:0;max-width:none;transform:none}.theme-preview{gap:4px;justify-content:center;width:100%}.theme-preview-logo{width:20px;height:20px;flex-shrink:0}.theme-preview-lines{display:none}.theme-switch-btn span:last-child{align-self:center;width:100%}.first-visit-theme .theme-switch-row{grid-template-columns:repeat(5,minmax(0,1fr))}.first-visit-theme .theme-switch-btn{min-height:34px;padding:7px 8px;font-size:10px;display:block;text-align:center}}
+@media(max-width:370px){.theme-switch-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.theme-switch-btn{min-height:54px;padding:6px 3px;font-size:8px}.theme-preview-logo{width:18px;height:18px}}
 
 @media(max-width:700px){
   .search-line{grid-template-columns:1fr}
@@ -3898,6 +3899,569 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
 }
 
 
+/* IMPERIAL AURORA PREMIUM: dunkles luxuriöses Nacht-Grün — eigenständig, nicht blau */
+html[data-theme="aurora"]{
+  color-scheme:dark!important;
+  --bg:#071C14!important;--bg2:#0D2B21!important;--panel:#123629!important;--card:#184238!important;
+  --page-cover:#050806!important;--page-cover-mid:#071C14!important;
+  --gold:#D8BE7A!important;--gold2:#E7D59D!important;--bronze:#B8924F!important;
+  --cream:#F6F1E3!important;--text:#F6F1E3!important;--muted:rgba(246,241,227,.78)!important;--muted2:rgba(246,241,227,.58)!important;
+  --line:rgba(216,190,122,.26)!important;--line2:rgba(216,190,122,.14)!important;
+  --shadow:0 22px 65px rgba(0,0,0,.42)!important;
+  --premium-border:rgba(216,190,122,.20)!important;
+  --premium-bg:radial-gradient(circle at 18% 12%,rgba(216,190,122,.09),transparent 22%),radial-gradient(circle at 82% 16%,rgba(24,66,56,.28),transparent 30%),radial-gradient(circle at 56% 78%,rgba(13,43,33,.24),transparent 26%),linear-gradient(135deg,#050806 0%,#071C14 18%,#0D2B21 40%,#123629 64%,#184238 82%,#0A1713 100%)!important;
+  --premium-shadow:0 18px 46px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)!important;
+  --premium-label:#E7D59D!important;--premium-title:#F6F1E3!important;--premium-body:rgba(246,241,227,.78)!important;
+  --premium-pill-border:rgba(255,255,255,.10)!important;
+  --premium-pill-bg:linear-gradient(180deg,rgba(18,46,36,.70) 0%,rgba(10,24,18,.58) 100%)!important;
+  --premium-pill-text:#F6F1E3!important;
+  --theme-logo-ring:rgba(216,190,122,.46)!important;
+  --theme-logo-glow:rgba(216,190,122,.14)!important;
+  --theme-deck-aura:radial-gradient(circle at 18% 12%,rgba(216,190,122,.08),transparent 24%),radial-gradient(circle at 82% 16%,rgba(24,66,56,.20),transparent 32%),linear-gradient(145deg,rgba(13,43,33,.24),rgba(24,66,56,.08))!important;
+  --aurora-card:linear-gradient(180deg,rgba(11,30,23,.92) 0%,rgba(8,22,18,.84) 100%)!important;
+  --aurora-glass:linear-gradient(180deg,rgba(18,46,36,.70) 0%,rgba(10,24,18,.58) 100%)!important;
+}
+html[data-theme="aurora"],
+html[data-theme="aurora"] body{
+  background:var(--premium-bg)!important;
+  color:var(--text)!important;
+}
+html[data-theme="aurora"] body:before{opacity:.045!important;filter:hue-rotate(8deg) saturate(.92)!important}
+html[data-theme="aurora"] .app{
+  background:var(--premium-bg)!important;
+  border:1px solid var(--premium-border)!important;
+  border-radius:28px!important;
+  box-shadow:var(--premium-shadow)!important;
+  overflow:hidden!important;
+}
+html[data-theme="aurora"] .top-shell,
+html[data-theme="aurora"] .view{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+html[data-theme="aurora"] .top-shell{margin-bottom:0!important;border-radius:0!important;margin-top:0!important}
+html[data-theme="aurora"] .header{padding-top:max(18px,calc(env(safe-area-inset-top,0px) + 8px))!important}
+html[data-theme="aurora"] .isnad{
+  background:rgba(7,17,29,.30)!important;
+  border-top:1px solid var(--line2)!important;
+}
+html[data-theme="aurora"] .hero-text{border-top-color:var(--line2)!important}
+html[data-theme="aurora"] .app-bar,
+html[data-theme="aurora"] .header-prayer-status{
+  background:linear-gradient(145deg,rgba(16,34,54,.82),rgba(10,22,35,.88))!important;
+  border:1px solid rgba(216,190,122,.18)!important;
+  color:var(--text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 24px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+html[data-theme="aurora"] .app-bar{border-radius:16px!important;padding:0!important;margin:0 var(--content-inset,14px) 10px!important}
+html[data-theme="aurora"] .app-bar.is-home{display:none!important}
+html[data-theme="aurora"] .crumb{
+  flex:1 1 auto!important;text-align:right!important;padding:9px 14px!important;
+  background:rgba(14,38,58,.78)!important;border:1px solid var(--line2)!important;border-radius:999px!important;
+  color:var(--gold2)!important;font-family:var(--serif)!important;font-size:13px!important;font-weight:800!important;
+  min-height:40px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+}
+html[data-theme="aurora"] h1,
+html[data-theme="aurora"] .salam,
+html[data-theme="aurora"] .view h2,
+html[data-theme="aurora"] .section-head h3,
+html[data-theme="aurora"] .folder-card h3,
+html[data-theme="aurora"] .post-card h3,
+html[data-theme="aurora"] .list-card h3,
+html[data-theme="aurora"] .info-card h3,
+html[data-theme="aurora"] .dua-card h3,
+html[data-theme="aurora"] .overview-title h3,
+html[data-theme="aurora"] .profile-title,
+html[data-theme="aurora"] .book-profile-title,
+html[data-theme="aurora"] .popular-row-text h4,
+html[data-theme="aurora"] .calendar-title h3,
+html[data-theme="aurora"] .event-name{color:var(--premium-title)!important;text-shadow:0 2px 22px rgba(0,0,0,.42)!important}
+html[data-theme="aurora"] .brand small,
+html[data-theme="aurora"] .eyebrow,
+html[data-theme="aurora"] .isnad-label,
+html[data-theme="aurora"] .dua-label,
+html[data-theme="aurora"] .status-check-label,
+html[data-theme="aurora"] .home-more-sub,
+html[data-theme="aurora"] .prayer-small-label,
+html[data-theme="aurora"] .prayer-quick-label{color:var(--premium-label)!important}
+html[data-theme="aurora"] .intro,
+html[data-theme="aurora"] .view-desc,
+html[data-theme="aurora"] .folder-card p,
+html[data-theme="aurora"] .info-card p,
+html[data-theme="aurora"] .dua-card p,
+html[data-theme="aurora"] .isnad-quote,
+html[data-theme="aurora"] .isnad-source,
+html[data-theme="aurora"] .excerpt,
+html[data-theme="aurora"] .popular-row-text p,
+html[data-theme="aurora"] .source-preview,
+html[data-theme="aurora"] .source-note,
+html[data-theme="aurora"] .section-head span,
+html[data-theme="aurora"] .quran-surah-head-meta,
+html[data-theme="aurora"] .quran-meta-note,
+html[data-theme="aurora"] .quran-tafsir-note,
+html[data-theme="aurora"] .quran-tafsir-empty,
+html[data-theme="aurora"] .quran-athar-source,
+html[data-theme="aurora"] .quran-surah-card small,
+html[data-theme="aurora"] .event-date,
+html[data-theme="aurora"] .empty,
+html[data-theme="aurora"] .loading,
+html[data-theme="aurora"] .error{color:var(--muted)!important}
+html[data-theme="aurora"] .premium-surface,
+html[data-theme="aurora"] .folder-card,
+html[data-theme="aurora"] .post-card,
+html[data-theme="aurora"] .list-card,
+html[data-theme="aurora"] .info-card,
+html[data-theme="aurora"] .dua-card,
+html[data-theme="aurora"] .overview-panel,
+html[data-theme="aurora"] .direct-pick-panel,
+html[data-theme="aurora"] .search-pro-panel,
+html[data-theme="aurora"] .filter-panel,
+html[data-theme="aurora"] .profile-box,
+html[data-theme="aurora"] .book-profile-box,
+html[data-theme="aurora"] .series-box,
+html[data-theme="aurora"] .pinned-box,
+html[data-theme="aurora"] .popular-panel,
+html[data-theme="aurora"] .prayer-panel,
+html[data-theme="aurora"] .qibla-panel,
+html[data-theme="aurora"] .statement,
+html[data-theme="aurora"] .dua-detail-box,
+html[data-theme="aurora"] .source-strong,
+html[data-theme="aurora"] .calendar-panel,
+html[data-theme="aurora"] .event-card,
+html[data-theme="aurora"] .current-focus-card{
+  background:linear-gradient(145deg,rgba(15,30,44,.86),rgba(7,17,29,.92))!important;
+  border-color:rgba(216,190,122,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 30px rgba(0,0,0,.26)!important;
+  color:var(--text)!important;
+}
+html[data-theme="aurora"] .home-more-body .pinned-box,
+html[data-theme="aurora"] .home-more-body .series-box,
+html[data-theme="aurora"] .home-more-body .overview-compact .stat-card,
+html[data-theme="aurora"] .home-more-body .series-card.has-icon,
+html[data-theme="aurora"] .home-more-body .pinned-card.has-icon,
+html[data-theme="aurora"] .prayer-summary-card,
+html[data-theme="aurora"] .popular-row,
+html[data-theme="aurora"] .stat-card,
+html[data-theme="aurora"] .prayer-time-card,
+html[data-theme="aurora"] .prayer-controls-compact,
+html[data-theme="aurora"] .prayer-push-status,
+html[data-theme="aurora"] .prayer-push-status-item{
+  background:linear-gradient(180deg,rgba(16,34,54,.78) 0%,rgba(10,22,35,.70) 100%)!important;border:1px solid rgba(216,190,122,.16)!important;box-shadow:0 10px 30px rgba(0,0,0,.22)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+  color:var(--text)!important;
+}
+html[data-theme="aurora"] .stat-card b,
+html[data-theme="aurora"] .prayer-quick-title,
+html[data-theme="aurora"] .prayer-panel-title,
+html[data-theme="aurora"] .prayer-summary-card b,
+html[data-theme="aurora"] .prayer-summary-card span,
+html[data-theme="aurora"] .prayer-summary-card small,
+html[data-theme="aurora"] .prayer-time-card b,
+html[data-theme="aurora"] .prayer-time-card span,
+html[data-theme="aurora"] .prayer-time-card small,
+html[data-theme="aurora"] .pinned-title,
+html[data-theme="aurora"] .series-title,
+html[data-theme="aurora"] .home-more-section .collapsible-head h3,
+html[data-theme="aurora"] .prayer-push-status summary,
+html[data-theme="aurora"] .prayer-push-status-item span{color:var(--premium-title)!important}
+html[data-theme="aurora"] .prayer-push-status-item b{color:var(--premium-label)!important}
+html[data-theme="aurora"] .prayer-push-status-item.ok span{color:#E7D59D!important}
+html[data-theme="aurora"] .prayer-push-status-item.warn span{color:#E7D59D!important}
+html[data-theme="aurora"] .search,
+html[data-theme="aurora"] .direct-pick,
+html[data-theme="aurora"] .filter-select,
+html[data-theme="aurora"] .account-form input{
+  background:rgba(10,22,35,.76)!important;
+  color:var(--text)!important;
+  border-color:rgba(216,190,122,.24)!important;
+}
+html[data-theme="aurora"] .search::placeholder{color:var(--muted2)!important}
+html[data-theme="aurora"] .social-link,
+html[data-theme="aurora"] .action-btn,
+html[data-theme="aurora"] .advanced-toggle,
+html[data-theme="aurora"] .collapse-toggle:not(.premium-pill),
+html[data-theme="aurora"] .back-btn,
+html[data-theme="aurora"] .home-btn,
+html[data-theme="aurora"] .hijri-header-pill,
+html[data-theme="aurora"] .footer-action-btn,
+html[data-theme="aurora"] .prayer-action-btn,
+html[data-theme="aurora"] .prayer-detail-toggle,
+html[data-theme="aurora"] .link-row a,
+html[data-theme="aurora"] .nav-posts button,
+html[data-theme="aurora"] .share-btn.native,
+html[data-theme="aurora"] .share-btn.link,
+html[data-theme="aurora"] .quran-surah-nav button,
+html[data-theme="aurora"] .quran-popular-btn,
+html[data-theme="aurora"] .quran-jump-btn,
+html[data-theme="aurora"] .quran-tafsir-tab,
+html[data-theme="aurora"] .quran-wake-btn,
+html[data-theme="aurora"] .quran-tr-btn,
+html[data-theme="aurora"] .account-actions button{background:var(--premium-pill-bg)!important;border:1px solid rgba(255,255,255,.10)!important;color:var(--premium-pill-text)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.20)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+}
+html[data-theme="aurora"] .action-btn.active,
+html[data-theme="aurora"] .prayer-action-btn.active,
+html[data-theme="aurora"] .float-btn.push-active,
+html[data-theme="aurora"] .quran-tafsir-tab.active,
+html[data-theme="aurora"] .quran-wake-btn.is-on,
+html[data-theme="aurora"] .quran-tr-btn.active,
+html[data-theme="aurora"] .theme-switch-btn.is-active{
+  border:1px solid rgba(232,213,155,.35)!important;
+  background:linear-gradient(135deg,rgba(216,190,122,.22),rgba(24,75,68,.28))!important;
+  color:var(--gold2)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 26px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+html[data-theme="aurora"] .statement strong,
+html[data-theme="aurora"] .dua-de,
+html[data-theme="aurora"] .source-row,
+html[data-theme="aurora"] .source-row b,
+html[data-theme="aurora"] .quran-ayah-de,
+html[data-theme="aurora"] .quran-result-de,
+html[data-theme="aurora"] .quran-tafsir-panel,
+html[data-theme="aurora"] .quran-term-card span,
+html[data-theme="aurora"] .quran-athar-text{color:var(--text)!important}
+html[data-theme="aurora"] .dua-arabic,
+html[data-theme="aurora"] .quran-surah-head-ar,
+html[data-theme="aurora"] .quran-ayah-ar{color:#F6F1E3!important}
+html[data-theme="aurora"] .statement em,
+html[data-theme="aurora"] .dua-trans,
+html[data-theme="aurora"] .script-accent,
+html[data-theme="aurora"] .quran-ayah-tr,
+html[data-theme="aurora"] .quran-result-tr{color:rgba(246,241,227,.72)!important}
+html[data-theme="aurora"] .quran-surah-card,
+html[data-theme="aurora"] .quran-result-card,
+html[data-theme="aurora"] .quran-ayah,
+html[data-theme="aurora"] .quran-jump-bar,
+html[data-theme="aurora"] .quran-tafsir-bar,
+html[data-theme="aurora"] .quran-term-card,
+html[data-theme="aurora"] .quran-athar-card,
+html[data-theme="aurora"] .quran-tr-bar,
+html[data-theme="aurora"] .first-visit-panel,
+html[data-theme="aurora"] .hint-banner,
+html[data-theme="aurora"] .pwa-banner,
+html[data-theme="aurora"] .pwa-modal,
+html[data-theme="aurora"] .offline-box,
+html[data-theme="aurora"] .app-save-box,
+html[data-theme="aurora"] .home-refresh-panel,
+html[data-theme="aurora"] .ramadan-panel,
+html[data-theme="aurora"] .daily-box,
+html[data-theme="aurora"] .recommended-box,
+html[data-theme="aurora"] .status-check-box,
+html[data-theme="aurora"] .share-panel,
+html[data-theme="aurora"] .share-panel-v2,
+html[data-theme="aurora"] .share-panel-v9,
+html[data-theme="aurora"] .share-panel-v11{
+  background:linear-gradient(145deg,rgba(15,30,44,.82),rgba(7,17,29,.90))!important;
+  border-color:rgba(216,190,122,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 28px rgba(0,0,0,.24)!important;
+  color:var(--text)!important;
+}
+html[data-theme="aurora"] .badge,
+html[data-theme="aurora"] .folder-meta span,
+html[data-theme="aurora"] .status-chip,
+html[data-theme="aurora"] .search-match,
+html[data-theme="aurora"] .prayer-calculation-tags span,
+html[data-theme="aurora"] .quran-surah-card .quran-num{
+  background:rgba(216,190,122,.10)!important;
+  border-color:rgba(216,190,122,.22)!important;
+  color:var(--premium-title)!important;
+}
+html[data-theme="aurora"] mark.search-hit{
+  background:rgba(216,190,122,.25)!important;
+  color:var(--gold2)!important;
+}
+html[data-theme="aurora"] .qibla-pro-section,
+html[data-theme="aurora"] .qibla-panel{
+  background:linear-gradient(145deg,rgba(15,30,44,.84),rgba(7,17,29,.92))!important;
+  border-color:rgba(216,190,122,.26)!important;
+}
+html[data-theme="aurora"] .qibla-compass,
+html[data-theme="aurora"] .qibla-compass-face{
+  background:radial-gradient(circle at center,rgba(20,50,72,.92),rgba(5,8,12,.94))!important;
+  border-color:rgba(216,190,122,.42)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 18px 40px rgba(0,0,0,.32)!important;
+}
+html[data-theme="aurora"] .qibla-cardinal,
+html[data-theme="aurora"] .qibla-cardinal small,
+html[data-theme="aurora"] .qibla-pro-sub,
+html[data-theme="aurora"] .qibla-instruction,
+html[data-theme="aurora"] .qibla-bearing-readout small{color:var(--muted)!important}
+html[data-theme="aurora"] .qibla-n,
+html[data-theme="aurora"] .qibla-pro-title,
+html[data-theme="aurora"] .qibla-bearing-readout,
+html[data-theme="aurora"] .qibla-data-item span,
+html[data-theme="aurora"] .qibla-status{color:var(--gold2)!important}
+html[data-theme="aurora"] .qibla-data-item,
+html[data-theme="aurora"] .qibla-status{
+  background:rgba(10,22,35,.66)!important;
+  border-color:rgba(216,190,122,.20)!important;
+}
+html[data-theme="aurora"] .bottom-nav{
+  background:linear-gradient(180deg,rgba(11,28,45,.72),rgba(7,17,29,.82))!important;
+  border:1px solid rgba(216,190,122,.14)!important;
+  border-top:1px solid rgba(216,190,122,.28)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
+  backdrop-filter:blur(16px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.08)!important;
+}
+html[data-theme="aurora"] .bottom-nav-btn{color:rgba(246,241,227,.58)!important;text-shadow:none!important}
+html[data-theme="aurora"] .bottom-nav-btn.active,
+html[data-theme="aurora"] .bottom-nav-btn.is-pressed,
+html[data-theme="aurora"] .bottom-nav-btn:active{color:var(--gold2)!important}
+html[data-theme="aurora"] .bottom-nav-pill{
+  background:linear-gradient(135deg,rgba(216,190,122,.18),rgba(24,75,68,.22))!important;
+  box-shadow:0 4px 16px rgba(0,0,0,.26)!important;
+}
+html[data-theme="aurora"] .float-touch-handle,
+html[data-theme="aurora"] .float-btn{
+  background:linear-gradient(145deg,rgba(16,34,54,.94),rgba(5,8,12,.96))!important;
+  border-color:rgba(216,190,122,.38)!important;
+  color:var(--gold2)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.32)!important;
+}
+html[data-theme="aurora"] .footer{color:var(--muted)!important;border-top:1px solid var(--line2)!important}
+html[data-theme="aurora"] .footer strong,
+html[data-theme="aurora"] .signature,
+html[data-theme="aurora"] .book-author{color:var(--gold2)!important}
+html[data-theme="aurora"] .top-edge-fade,
+html[data-theme="aurora"] .top-swim-aura{display:none!important}
+@media(max-width:700px){
+  html[data-theme="aurora"] .app-bar{margin:0 var(--content-inset,14px) 10px!important;padding:0!important}
+  html[data-theme="aurora"] .crumb{font-size:12px!important;padding:8px 12px!important}
+  html[data-theme="aurora"].is-standalone-pwa body{
+    padding-top:max(6px,env(safe-area-inset-top,0px))!important;
+    background:var(--premium-bg)!important;
+  }
+  html[data-theme="aurora"].is-standalone-pwa .app:after{display:none!important}
+  html[data-theme="aurora"].is-standalone-pwa .top-shell{
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    margin-top:0!important;
+  }
+  html[data-theme="aurora"].is-standalone-pwa .top-shell .header{
+    padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))!important;
+  }
+}
+
+
+/* IMPERIAL AURORA FINAL: grün-dominant, Layout-Parität Royal Nachtblau */
+html[data-theme="aurora"] .app{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  width:min(1320px,100%)!important;
+  max-width:none!important;
+}
+html[data-theme="aurora"] .view{
+  padding:20px!important;
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+html[data-theme="aurora"] .theme-switch-panel,
+html[data-theme="aurora"] .theme-switch-panel.premium-surface{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:0 0 13px!important;
+  padding:14px 15px!important;
+  overflow:visible!important;
+  background:linear-gradient(180deg,rgba(11,30,23,.92) 0%,rgba(8,22,18,.84) 100%)!important;
+  border:1px solid rgba(216,190,122,.16)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+html[data-theme="aurora"] .theme-switch-row{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin-top:4px!important;
+  width:100%!important;
+  max-width:none!important;
+}
+html[data-theme="aurora"] .theme-switch-btn{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  flex:initial!important;
+}
+html[data-theme="aurora"] #appView.view,
+html[data-theme="aurora"] .grid-list,
+html[data-theme="aurora"] .section-block{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+html[data-theme="aurora"] .premium-surface,
+html[data-theme="aurora"] .folder-card,
+html[data-theme="aurora"] .post-card,
+html[data-theme="aurora"] .list-card,
+html[data-theme="aurora"] .info-card,
+html[data-theme="aurora"] .dua-card,
+html[data-theme="aurora"] .overview-panel,
+html[data-theme="aurora"] .direct-pick-panel,
+html[data-theme="aurora"] .search-pro-panel,
+html[data-theme="aurora"] .filter-panel,
+html[data-theme="aurora"] .profile-box,
+html[data-theme="aurora"] .book-profile-box,
+html[data-theme="aurora"] .series-box,
+html[data-theme="aurora"] .pinned-box,
+html[data-theme="aurora"] .popular-panel,
+html[data-theme="aurora"] .prayer-panel,
+html[data-theme="aurora"] .qibla-panel,
+html[data-theme="aurora"] .statement,
+html[data-theme="aurora"] .dua-detail-box,
+html[data-theme="aurora"] .source-strong,
+html[data-theme="aurora"] .calendar-panel,
+html[data-theme="aurora"] .event-card,
+html[data-theme="aurora"] .current-focus-card,
+html[data-theme="aurora"] .quran-surah-card,
+html[data-theme="aurora"] .quran-result-card,
+html[data-theme="aurora"] .quran-ayah,
+html[data-theme="aurora"] .first-visit-panel,
+html[data-theme="aurora"] .hint-banner,
+html[data-theme="aurora"] .pwa-banner,
+html[data-theme="aurora"] .pwa-modal,
+html[data-theme="aurora"] .offline-box,
+html[data-theme="aurora"] .daily-box,
+html[data-theme="aurora"] .recommended-box,
+html[data-theme="aurora"] .share-panel,
+html[data-theme="aurora"] .share-panel-v2,
+html[data-theme="aurora"] .share-panel-v9,
+html[data-theme="aurora"] .share-panel-v11{
+  background:linear-gradient(180deg,rgba(11,30,23,.92) 0%,rgba(8,22,18,.84) 100%)!important;
+  border:1px solid rgba(216,190,122,.16)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  color:var(--text)!important;
+}
+html[data-theme="aurora"] .home-more-body .pinned-box,
+html[data-theme="aurora"] .home-more-body .series-box,
+html[data-theme="aurora"] .prayer-summary-card,
+html[data-theme="aurora"] .popular-row,
+html[data-theme="aurora"] .stat-card,
+html[data-theme="aurora"] .prayer-time-card,
+html[data-theme="aurora"] .prayer-controls-compact,
+html[data-theme="aurora"] .prayer-push-status,
+html[data-theme="aurora"] .prayer-push-status-item{
+  background:linear-gradient(180deg,rgba(13,43,33,.88) 0%,rgba(10,24,18,.76) 100%)!important;
+  border:1px solid rgba(216,190,122,.14)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+}
+html[data-theme="aurora"] .social-link,
+html[data-theme="aurora"] .action-btn,
+html[data-theme="aurora"] .advanced-toggle,
+html[data-theme="aurora"] .collapse-toggle:not(.premium-pill),
+html[data-theme="aurora"] .back-btn,
+html[data-theme="aurora"] .home-btn,
+html[data-theme="aurora"] .hijri-header-pill,
+html[data-theme="aurora"] .footer-action-btn,
+html[data-theme="aurora"] .prayer-action-btn,
+html[data-theme="aurora"] .quran-tafsir-tab,
+html[data-theme="aurora"] .quran-popular-btn,
+html[data-theme="aurora"] .quran-jump-btn,
+html[data-theme="aurora"] .account-actions button{
+  background:linear-gradient(180deg,rgba(18,46,36,.70) 0%,rgba(10,24,18,.58) 100%)!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+}
+html[data-theme="aurora"] .action-btn.active,
+html[data-theme="aurora"] .prayer-action-btn.active,
+html[data-theme="aurora"] .quran-tafsir-tab.active,
+html[data-theme="aurora"] .quran-wake-btn.is-on,
+html[data-theme="aurora"] .quran-tr-btn.active,
+html[data-theme="aurora"] .theme-switch-btn.is-active{
+  background:linear-gradient(135deg,rgba(216,190,122,.18),rgba(24,66,56,.30))!important;
+  border:1px solid rgba(232,213,155,.34)!important;
+  color:#E7D59D!important;
+}
+html[data-theme="aurora"] .app-bar,
+html[data-theme="aurora"] .header-prayer-status{
+  background:linear-gradient(145deg,rgba(18,46,36,.84),rgba(10,24,18,.90))!important;
+  border:1px solid rgba(216,190,122,.16)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+html[data-theme="aurora"] .isnad{
+  background:rgba(7,28,20,.32)!important;
+}
+html[data-theme="aurora"] .crumb{
+  background:rgba(13,43,33,.78)!important;
+}
+html[data-theme="aurora"] .bottom-nav{
+  background:linear-gradient(180deg,rgba(11,30,23,.82),rgba(7,28,20,.90))!important;
+  border:1px solid rgba(216,190,122,.12)!important;
+  border-top:1px solid rgba(216,190,122,.22)!important;
+  backdrop-filter:blur(16px) saturate(1.06)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.06)!important;
+}
+html[data-theme="aurora"] .bottom-nav-btn{
+  color:rgba(246,241,227,.58)!important;
+}
+html[data-theme="aurora"] .bottom-nav-btn.active,
+html[data-theme="aurora"] .bottom-nav-btn.is-pressed,
+html[data-theme="aurora"] .bottom-nav-btn:active{
+  color:#E7D59D!important;
+}
+html[data-theme="aurora"] .bottom-nav-pill{
+  background:linear-gradient(135deg,rgba(216,190,122,.18),rgba(24,66,56,.30))!important;
+}
+html[data-theme="aurora"] .float-touch-handle,
+html[data-theme="aurora"] .float-btn{
+  background:linear-gradient(145deg,rgba(18,46,36,.94),rgba(7,28,20,.96))!important;
+  border-color:rgba(216,190,122,.34)!important;
+  color:#E7D59D!important;
+}
+html[data-theme="aurora"] h1,
+html[data-theme="aurora"] .salam,
+html[data-theme="aurora"] .view h2,
+html[data-theme="aurora"] .section-head h3,
+html[data-theme="aurora"] .theme-switch-head h3{
+  color:#F6F1E3!important;
+  text-shadow:0 1px 14px rgba(0,0,0,.28)!important;
+}
+html[data-theme="aurora"] .intro,
+html[data-theme="aurora"] .view-desc,
+html[data-theme="aurora"] .theme-switch-note,
+html[data-theme="aurora"] .folder-card p,
+html[data-theme="aurora"] .list-card p{
+  color:rgba(246,241,227,.78)!important;
+}
+@media(max-width:520px){
+  html[data-theme="aurora"] .theme-switch-row{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:5px!important;
+    width:100%!important;
+  }
+  html[data-theme="aurora"] .theme-switch-btn{
+    min-height:58px!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+  }
+}
+@media(max-width:700px){
+  html[data-theme="aurora"] .view{
+    padding-left:var(--content-inset,14px)!important;
+    padding-right:var(--content-inset,14px)!important;
+  }
+}
+
+
+
 /* MOBILE GUTTER FINAL: einheitlicher Seitenrand — iOS, Android, Browser, PWA */
 @media(max-width:700px){
   :root{
@@ -4403,6 +4967,7 @@ html[data-theme] .theme-switch-btn[data-theme-select]:not(.premium-pill),
 html[data-theme="light"] .theme-switch-btn[data-theme-select],
 html[data-theme="soft"] .theme-switch-btn[data-theme-select],
 html[data-theme="royal"] .theme-switch-btn[data-theme-select],
+html[data-theme="aurora"] .theme-switch-btn[data-theme-select]{
   background:var(--theme-card-bg)!important;
   border-color:var(--theme-card-border)!important;
   color:var(--theme-card-text)!important;
@@ -4412,6 +4977,7 @@ html[data-theme] .theme-switch-btn[data-theme-select] *,
 html[data-theme="light"] .theme-switch-btn[data-theme-select] *,
 html[data-theme="soft"] .theme-switch-btn[data-theme-select] *,
 html[data-theme="royal"] .theme-switch-btn[data-theme-select] *,
+html[data-theme="aurora"] .theme-switch-btn[data-theme-select] *{
   color:var(--theme-card-text)!important;
   text-shadow:none!important;
 }
@@ -4427,6 +4993,7 @@ html[data-theme] .theme-switch-btn[data-theme-select].is-active,
 html[data-theme="light"] .theme-switch-btn[data-theme-select].is-active,
 html[data-theme="soft"] .theme-switch-btn[data-theme-select].is-active,
 html[data-theme="royal"] .theme-switch-btn[data-theme-select].is-active,
+html[data-theme="aurora"] .theme-switch-btn[data-theme-select].is-active{
   background:var(--theme-card-bg)!important;
   border-color:rgba(239,215,142,.82)!important;
   color:var(--theme-card-text)!important;
@@ -4570,6 +5137,10 @@ html[data-theme="soft"]{
 html[data-theme="royal"]{
   --outer-bg-flat:#07162c;
   --outer-bg:radial-gradient(circle at 14% 0%,rgba(239,215,142,.15),transparent 38%),radial-gradient(circle at 86% 9%,rgba(57,112,170,.20),transparent 34%),linear-gradient(180deg,#07162c 0%,#0a1d39 48%,#041023 100%);
+}
+html[data-theme="aurora"]{
+  --outer-bg-flat:#050806;
+  --outer-bg:radial-gradient(circle at 18% 12%,rgba(216,190,122,.09),transparent 22%),radial-gradient(circle at 82% 16%,rgba(24,66,56,.28),transparent 30%),radial-gradient(circle at 56% 78%,rgba(13,43,33,.24),transparent 26%),linear-gradient(135deg,#050806 0%,#071C14 18%,#0D2B21 40%,#123629 64%,#184238 82%,#0A1713 100%);
 }
 html[data-theme],
 html[data-theme].is-standalone-pwa{
@@ -4936,6 +5507,36 @@ html[data-theme="royal"]{
 --editor-guide-active:rgba(239,215,142,.86);
 --editor-guide-ring:rgba(239,215,142,.16);
 }
+html[data-theme="aurora"]{
+--editor-stage-bg:radial-gradient(circle at 50% 0%,rgba(216,190,122,.10),transparent 45%),linear-gradient(180deg,rgba(11,30,23,.96),rgba(7,28,20,.96));
+--editor-preview-bg:#0D2B21;
+--editor-card-bg:rgba(18,46,36,.72);
+--editor-panel-bg:rgba(10,24,18,.78);
+--editor-button-bg:rgba(18,46,36,.82);
+--editor-button-text:#F6F1E3;
+--editor-text:#F6F1E3;
+--editor-tab-bg:rgba(18,46,36,.68);
+--editor-active-bg:linear-gradient(135deg,rgba(216,190,122,.18),rgba(24,66,56,.82));
+--editor-active-text:#F6F1E3;
+--editor-active-border:rgba(232,213,155,.48);
+--editor-active-ring:rgba(216,190,122,.14);
+--editor-shadow:0 10px 28px rgba(0,0,0,.22);
+--editor-shadow-strong:0 18px 44px rgba(0,0,0,.28);
+--editor-canvas-shadow:0 10px 28px rgba(0,0,0,.26);
+--editor-range-bg:rgba(18,46,36,.72);
+--editor-primary-bg:linear-gradient(135deg,rgba(216,190,122,.88),rgba(184,146,79,.84));
+--editor-field-bg:rgba(7,28,20,.88);
+--editor-field-text:#F6F1E3;
+--editor-field-line:rgba(216,190,122,.24);
+--editor-placeholder:rgba(246,241,227,.48);
+--editor-template-img-border:rgba(216,190,122,.18);
+--editor-sheet-handle:rgba(216,190,122,.35);
+--editor-warning:#E7D59D;
+--editor-muted:rgba(246,241,227,.58);
+--editor-guide:rgba(216,190,122,.30);
+--editor-guide-active:rgba(232,213,155,.86);
+--editor-guide-ring:rgba(216,190,122,.16);
+}
 body.image-editor-test-mode.has-bottom-nav{padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}
 body.image-editor-test-mode .bottom-nav,body.image-editor-test-mode .float-actions{display:none!important}
 body.image-editor-test-mode .top-shell,body.image-editor-test-mode .isnad{display:none}
@@ -5007,6 +5608,7 @@ body.image-editor-mode .image-editor-guide.is-active{outline-offset:10px;box-sha
 html[data-theme="light"] body.image-editor-mode .ie-power-toolbar,html[data-theme="light"] body.image-editor-mode .ie-power-sheet{background:rgba(255,248,228,.98)!important}
 html[data-theme="soft"] body.image-editor-mode .ie-power-toolbar,html[data-theme="soft"] body.image-editor-mode .ie-power-sheet{background:rgba(255,246,243,.98)!important}
 html[data-theme="royal"] body.image-editor-mode .ie-power-toolbar,html[data-theme="royal"] body.image-editor-mode .ie-power-sheet{background:rgba(12,36,68,.94)!important}
+html[data-theme="aurora"] body.image-editor-mode .ie-power-toolbar,html[data-theme="aurora"] body.image-editor-mode .ie-power-sheet{background:rgba(7,28,20,.94)!important}
 @media(max-width:420px){body.image-editor-mode .ie-power-toolbar{grid-template-columns:auto minmax(58px,1fr) auto auto;gap:4px;padding:5px}body.image-editor-mode .ie-power-toolbar button{padding:6px 7px;font-size:9px}body.image-editor-mode .ie-power-toolbar-title{font-size:11px}.ie-power-block-row button{font-size:8.8px;padding:6px 3px}}
 
 .ie-power-touch-wrap{touch-action:pan-y}
@@ -5222,14 +5824,14 @@ function isFormEditingNow(){
 document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFormPointerAt=Date.now()},{capture:true,passive:true});
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"}};
-function normalizeTheme(theme){return theme==="light"||theme==="soft"||theme==="royal"?theme:"dark"}
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},aurora:{label:"Imperial Aurora Premium",color:"#050806",status:"black",asset:"aurora"}};
+function normalizeTheme(theme){return theme==="light"||theme==="soft"||theme==="royal"||theme==="aurora"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
-function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo)logo.title="DAR AL TAWḤID";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");root.style.backgroundColor=""}))}
+function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo)logo.title="DAR AL TAWḤID";document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="aurora")root.style.backgroundColor=""}))}
 function initTheme(){applyTheme(getTheme())}
 function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{applyTheme(btn.getAttribute("data-theme-select"))}})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
-function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}</div></section>`}
+function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("aurora")}</div></section>`}
 
 const DUAS=[
 {id:"quran-001",type:"Qurʾān",cat:"Vergebung",title:"Duʿāʾ von Ādam und Ḥawwāʾ nach dem Fehler",occasion:"Reue und Vergebung",ar:"رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",tr:"Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā lanakūnanna mina-l-khāsirīn.",de:"Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",src:"📝 Qurʾān, al-Aʿrāf 7:23."},
@@ -6575,7 +7177,7 @@ function renderSuhurIftarRow(large){const t=getSuhurIftarTimes();if(!t)return `<
 function ramadanDuas(){const picked=DUAS.filter(d=>RAMADAN_DUA_CATS.includes(d.cat));return(picked.length?picked:DUAS).slice(0,8)}
 function ramadanPosts(){const matched=posts.filter(p=>RAMADAN_POST_KEYS.some(k=>[p.title,p.category,p.topic,p.statement,(p.tags||[]).join(" ")].join(" ").toLowerCase().includes(k.toLowerCase())));if(matched.length>=2)return matched.slice(0,6);return posts.filter(p=>["adab","akhlaq","tawḥīd","tauhid","sunnah"].some(k=>String(p.category||"").toLowerCase().includes(k))).slice(0,5)}
 function installGuideCopy(){if(isIOSDevice())return{label:"iPhone / iPad",title:"App speichern für Push & Offline",note:"Safari: Teilen antippen, dann Zum Home-Bildschirm wählen.",steps:["Safari benutzen, nicht den In-App-Browser.","Unten auf Teilen tippen.","Zum Home-Bildschirm wählen und Hinzufügen bestätigen."]};if(isAndroidDevice())return{label:"Android",title:"App installieren für Push & Offline",note:"Browser-Menü ⋮ öffnen, dann App installieren oder Zum Startbildschirm wählen.",steps:["Browser-Menü mit ⋮ öffnen.","App installieren oder Zum Startbildschirm hinzufügen wählen.","Danach DAR AL TAWḤID über das neue Icon öffnen."]};return{label:"App",title:"DAR AL TAWḤID als App speichern",note:"Browser-Menü öffnen und App installieren oder Zum Startbildschirm wählen.",steps:["Browser-Menü oder Teilen öffnen.","App installieren oder Zum Startbildschirm hinzufügen wählen.","Danach die App über das Icon öffnen."]}}
-function renderInlineThemeChoice(){const cur=getTheme();return `<div class="first-visit-theme"><span>Farbe</span><div class="theme-switch-row"><button type="button" class="theme-switch-btn${cur==="light"?" is-active":""}" data-theme-select="light">Hell</button><button type="button" class="theme-switch-btn${cur==="dark"?" is-active":""}" data-theme-select="dark">Dunkel</button><button type="button" class="theme-switch-btn${cur==="soft"?" is-active":""}" data-theme-select="soft">Sanft</button><button type="button" class="theme-switch-btn${cur==="royal"?" is-active":""}" data-theme-select="royal">Royal</button></div></div>`}
+function renderInlineThemeChoice(){const cur=getTheme();return `<div class="first-visit-theme"><span>Farbe</span><div class="theme-switch-row"><button type="button" class="theme-switch-btn${cur==="light"?" is-active":""}" data-theme-select="light">Hell</button><button type="button" class="theme-switch-btn${cur==="dark"?" is-active":""}" data-theme-select="dark">Dunkel</button><button type="button" class="theme-switch-btn${cur==="soft"?" is-active":""}" data-theme-select="soft">Sanft</button><button type="button" class="theme-switch-btn${cur==="royal"?" is-active":""}" data-theme-select="royal">Royal</button><button type="button" class="theme-switch-btn${cur==="aurora"?" is-active":""}" data-theme-select="aurora">Aurora</button></div></div>`}
 function renderPwaInstallBanner(){if(isStandalonePwa())return "";try{if(localStorage.getItem(PWA_GUIDE_KEY))return ""}catch(e){}const copy=installGuideCopy();return `<section id="pwaInstallBanner" class="first-visit-panel"><div class="first-visit-head"><span class="first-visit-label">${esc(copy.label)}</span><h3 class="first-visit-title">${esc(copy.title)}</h3><p class="first-visit-note">${esc(copy.note)}</p></div><div class="first-visit-grid">${renderInlineThemeChoice()}<div class="hint-banner-actions"><button id="pwaBannerGuideBtn" class="hint-btn" type="button">Anleitung</button><button id="pwaBannerDismissBtn" class="hint-btn ghost" type="button">Später</button></div></div></section>`}
 function renderPwaInstallModalContent(){const ios=isIOSDevice();const steps=ios?[`<li><b>1.</b> Unten in Safari auf <b>Teilen</b> tippen (Quadrat mit Pfeil).</li>`,`<li><b>2.</b> <b>Zum Home-Bildschirm</b> wählen und Hinzufügen bestätigen.</li>`,`<li><b>3.</b> App ab dann über das Icon öffnen – Push & Offline funktionieren.</li>`]:[`<li><b>1.</b> Browser-Menü öffnen (⋮ oder Teilen).</li>`,`<li><b>2.</b> <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.</li>`,`<li><b>3.</b> Danach Push-Benachrichtigungen und Offline-Modus nutzen.</li>`];return `<div class="pwa-modal" role="dialog" aria-labelledby="pwaModalTitle"><h3 id="pwaModalTitle">App speichern</h3><p>${ios?"Auf dem iPhone läuft die volle App nur als gespeicherte Web-App. Im normalen Browser-Tab fehlen Push und Offline oft.":"Installiere die App für Push-Benachrichtigungen und Offline-Nutzung."}</p><ol class="pwa-steps">${steps.join("")}</ol><div class="pwa-modal-actions"><button id="pwaModalDoneBtn" class="hint-btn" type="button">Verstanden</button></div></div>`}
 function showPwaInstallModalIfNeeded(force){
