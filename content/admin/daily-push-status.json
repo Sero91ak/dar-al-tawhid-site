@@ -2,13 +2,13 @@
   "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v1",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-20T10:10:16.037Z",
+  "updatedAt": "2026-06-20T12:55:16.038Z",
   "usersChecked": 22,
   "duaCandidates": 0,
-  "recCandidates": 2,
-  "sent": 2,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 20,
+  "duplicates": 22,
   "errors": 0,
   "dailyContentDate": "2026-06-20",
   "currentRecommendation": {
@@ -23,20 +23,5 @@
     "category": "Rechtleitung"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "deviceId": "dar-60afe1af-580d-48b1-ac35-826fabd19ab2",
-      "contentId": "tawhid-346-naehe-zu-allah-wird-nicht-ueber-goetzen-gesucht",
-      "recipients": "d172a719-60af-41bb-9b4b-5427e0a4c036",
-      "ok": true
-    },
-    {
-      "kind": "recommendation",
-      "deviceId": "dar-9df713fd-4676-4d0d-b22e-8466776f2d04",
-      "contentId": "tawhid-346-naehe-zu-allah-wird-nicht-ueber-goetzen-gesucht",
-      "recipients": "e9c3dbf2-764d-462f-a748-9b6d1264978f",
-      "ok": true
-    }
-  ]
+  "responses": []
 }
