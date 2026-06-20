@@ -80,3 +80,6 @@ jobs:
 
       - name: Version update guard (Banner-Schleife + Willkommens-Push)
         run: node scripts/version-update-guard.js
+
+      - name: Bottom nav guard (Tab-Leiste fix am Viewport)
+        run: node scripts/bottom-nav-guard.js
