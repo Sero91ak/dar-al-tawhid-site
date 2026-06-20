@@ -792,6 +792,8 @@ function stripYamlQuotes(value){let val=sanitizeMarkdownQuotes(String(value||"")
 function frontmatterValue(text,key){const m=String(text||"").match(new RegExp("^"+key+":\\s*(.*)$","m"));return m?stripYamlQuotes(m[1]):""}
 function slugify(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70)||"beitrag"}
 function maxPostNumber(files){let max=0;(files||[]).forEach(file=>{const name=typeof file==="string"?file:file.name;for(const m of String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)){max=Math.max(max,Number(m[1]))}});return max}
+function postFileSerial(name){const matches=[...String(name||"").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)];return matches.length?Number(matches[matches.length-1][1]):0}
+function resolveLastPostFilename(files,postCount){const list=(files||[]).map(f=>(typeof f==="string"?{name:f}:f)).filter(f=>f?.name);if(!list.length)return "";const count=Math.max(1,Number(postCount)||list.length);const target=String(count).padStart(3,"0");const exact=list.find(f=>new RegExp(`-${target}(?:-|\\.md$)`).test(String(f.name||"")));if(exact)return exact.name;let best="",bestSerial=-1;list.forEach(f=>{const serial=postFileSerial(f.name);if(serial>bestSerial){bestSerial=serial;best=f.name}});return best}
 function nextPostNumber(files){return (Array.isArray(files)?files.filter(f=>f&&(f.name||typeof f==="string")):[]).length+1}
 function mergePostsIndexFiles(...lists){const map=new Map();lists.flat().filter(Boolean).forEach(file=>{const name=String(file.name||file||"").trim();if(!name||!name.endsWith(".md"))return;const sha=String(file.sha||"");const prev=map.get(name);if(!prev||sha)map.set(name,{name,sha:sha||prev?.sha||""})});return Array.from(map.values()).sort((a,b)=>a.name.localeCompare(b.name,"de"))}
 function workerNextNumberUrl(publishUrl){const url=new URL(resolveWorkerUrl(publishUrl||workerPublishUrl()));if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/api/admin/next-number");else if(url.pathname.endsWith("/api/admin/publish"))url.pathname=url.pathname.replace(/\/api\/admin\/publish$/,"/api/admin/next-number");else url.pathname="/api/admin/next-number";return url.toString()}
@@ -809,8 +811,10 @@ async function resolveNextPostNumberInfo(){
   if(!files.length&&!workerInfo)throw new Error("posts-index.json konnte nicht geladen werden");
   const postCount=Math.max(files.length,Number(workerInfo?.postCount||0));
   const nextNumber=postCount+1;
-  const sorted=files.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name),"de"));
-  return{postCount,nextNumber,maxSerial:maxPostNumber(files),lastFilename:sorted.length?sorted[sorted.length-1].name:"",source:workerInfo?"worker+index":"index",workerPostCount:workerInfo?.postCount||null};
+  const lastFilename=resolveLastPostFilename(files,postCount);
+  const lastSerial=postFileSerial(lastFilename);
+  const serialWarning=lastFilename&&lastSerial>0&&lastSerial!==postCount?`Warnung: Dateiname hat Nr. ${lastSerial}, Index zählt ${postCount} Beiträge.`:"";
+  return{postCount,nextNumber,maxSerial:maxPostNumber(files),lastFilename,lastSerial,serialWarning,source:workerInfo?"worker+index":"index",workerPostCount:workerInfo?.postCount||null};
 }
 async function resolveNextPostNumber(){return (await resolveNextPostNumberInfo()).nextNumber}
 function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
@@ -2418,7 +2422,7 @@ async function prepareNextPostNumber(){
     draftNextNumber=info.nextNumber;
     draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
     const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
-    setUploadStatus(`Beiträge im Index: <strong>${info.postCount}</strong><br>Nächste Nummer: <strong>${info.nextNumber}</strong><br>Letzter Beitrag: <strong>${esc(info.lastFilename||"—")}</strong><br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>${info.workerPostCount!=null?`<br>Worker/GitHub: <strong>${info.workerPostCount}</strong> · Quelle: ${esc(info.source)}`:""}`);
+    setUploadStatus(`Beiträge im Index: <strong>${info.postCount}</strong><br>Nächste Nummer: <strong>${info.nextNumber}</strong><br>Letzter Beitrag: <strong>${esc(info.lastFilename||"—")}</strong>${info.lastSerial?` · Nr. <strong>${info.lastSerial}</strong>`:""}<br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>${info.serialWarning?`<br><span style="color:#f87171">${esc(info.serialWarning)}</span>`:""}${info.workerPostCount!=null?`<br>Worker/GitHub: <strong>${info.workerPostCount}</strong> · Quelle: ${esc(info.source)}`:""}`);
     addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",`${info.nextNumber} · ${draftFilename}`);
   }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
