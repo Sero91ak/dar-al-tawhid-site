@@ -42,7 +42,10 @@
   --text:#f6edd2;--muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
   --danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);
-  --serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --display:"Cinzel",Georgia,"Times New Roman",serif;
+  --script:"Allura","Brush Script MT",cursive;
+  --sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --page-cover:#060604;--page-cover-mid:#0b0a07;
   --page-gutter-x:10px;--content-inset:20px;
@@ -776,6 +779,21 @@ html.is-standalone-pwa{background:var(--page-cover)}
     padding:7px 10px;
     font-size:10px;
   }
+}
+
+/* Typografie wie zuvor: Cormorant/Cinzel/Inter — ohne Grün-Farbschema */
+h1{font-family:var(--display)!important;letter-spacing:clamp(.02em,.055em,.115em)!important}
+.brand small,.eyebrow,.isnad-label{font-family:var(--display)!important;letter-spacing:.22em!important}
+.salam{font-family:var(--serif)!important}
+.view h2,.overview-title h3,.section-head h3,.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3,.profile-title,.book-profile-title,.series-title,.pinned-title,.calendar-title h3,.daily-title,.recommended-title,.quran-home-teaser h3,.prayer-panel-title,.prayer-quick-title,.current-focus-head h3{
+  font-family:var(--serif)!important;font-weight:700!important
+}
+.statement,.excerpt{font-family:var(--serif)!important}
+.footer strong{font-family:var(--display)!important;letter-spacing:.08em}
+.signature{font-family:var(--script)!important;font-size:34px!important;letter-spacing:.015em}
+@media(max-width:700px){
+  h1{letter-spacing:.035em!important}
+  .signature{font-size:28px!important}
 }
 
 /* Lesbarkeit-Korrektur: weniger kurvig, Quelle heller, Teilen professioneller */
