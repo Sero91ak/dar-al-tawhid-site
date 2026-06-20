@@ -12,6 +12,10 @@ tags:
   - "#Shirk"
   - "#Aqidah"
   - "#Sunnah"
+introTitle: "🧭 Einordnung"
+intro: |
+  Dieser Beitrag überliefert die ḥadīth der Fitrah: Der Mensch wird nicht mit Schirk geboren, sondern mit der natürlichen Anlage zum Tawḥīd.
+  Die Schayāṭīn irreführen danach durch verdrehte Maßstäbe und verbotene Neuerungen — deshalb schützt nur Qurʾān und Sunnah die Fitrah.
 source: "📝 Muslim, Ṣaḥīḥ, Nr. 2865; an-Nasāʾī, as-Sunan al-Kubrā, Nr. 8017; Ibn Ḥibbān, Ṣaḥīḥ, Nr. 653."
 links:
   - label: "→ Islamweb"
