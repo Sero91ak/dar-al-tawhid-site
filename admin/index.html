@@ -1997,6 +1997,15 @@ function renderSettings(ctx){
   </section>`;
 }
 function renderTech(ctx){
+  const workerUrl=workerPublishUrl();
+  const workerSecretReady=!!savedWorkerSecret();
+  const workerReady=!!workerUrl&&workerSecretReady;
+  const workerStatus=workerReady?"Aktiv":workerUrl?"Secret fehlt":"Fehlt";
+  const workerNote=workerReady
+    ? `Worker-Endpunkt ist hinterlegt und ein Secret ist auf diesem Gerät gespeichert: ${workerUrl}`
+    : workerUrl
+      ? `Worker-Endpunkt ist hinterlegt: ${workerUrl}. Zum Veröffentlichen fehlt auf diesem Gerät noch das Admin Worker Secret.`
+      : "Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.";
   return `<section class="split">
     <div class="panel">
       <div class="section-head"><h3>Technik</h3><span>Systemstatus</span></div>
@@ -2011,7 +2020,7 @@ function renderTech(ctx){
       <div class="upload-status" id="adminJummahPushNote" style="margin-top:8px">Admin sendet nicht automatisch an Besucher. Erst „Live Push freigeben“.</div>
       <div class="section-head" style="margin-top:16px"><h3>Backend-Anbindung</h3><span>Live-Funktionen</span></div>
       <div class="status-list">
-        <div class="status-row"><span><b>Cloudflare Worker</b><br>Noch kein Worker-Endpunkt in der App hinterlegt. Sobald URL und Secret da sind, kann der Admin sicher darueber veroeffentlichen.</span><strong class="status-pill">Fehlt</strong></div>
+        <div class="status-row"><span><b>Cloudflare Worker</b><br>${esc(workerNote)}</span><strong class="status-pill">${esc(workerStatus)}</strong></div>
         <div class="status-row"><span><b>GitHub Secret</b><br>Aktuell kann ein lokaler Token genutzt werden. Sicherer Live-Betrieb braucht Token als Worker-Secret, nicht im Browser.</span><strong class="status-pill">Lokal</strong></div>
         <div class="status-row"><span><b>Geplante Veröffentlichungen</b><br>Datum, Status und Zeitzone werden sauber vorbereitet. Automatisches Schalten braucht Cron/Worker.</span><strong class="status-pill">Vorbereitet</strong></div>
         <div class="status-row"><span><b>News 24–72 Stunden</b><br>Live-Meldungen werden aus content/updates/current.json geladen und sind auf allen Admin-Geräten gleich sichtbar.</span><strong class="status-pill">${liveNewsItems.length?"Live":"Bereit"}</strong></div>
