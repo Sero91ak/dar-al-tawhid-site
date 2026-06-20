@@ -1,26 +1,23 @@
-⸻
-
-id: "“fitrah-schayatin-irrefuehrung-001”-410"
+---
+id: "fitrah-schayatin-irrefuehrung-410"
 date: "2026-06-20T17:45:25.000Z"
-title: “📖 Die Fitrah und die Irreführung der Schayāṭīn”
-category: “Aqīdah”
-topic: “Fitrah, Tawḥīd und Schirk”
-scholar: “Prophet Muḥammad ﷺ”
-book: “Ṣaḥīḥ Muslim”
+title: "📖 Die Fitrah und die Irreführung der Schayāṭīn"
+category: "Aqīdah"
+topic: "Fitrah, Tawḥīd und Schirk"
+scholar: "Prophet Muḥammad ﷺ"
+book: "Ṣaḥīḥ Muslim"
 tags:
-
-* “#Fitrah”
-* “#Tawhid”
-* “#Shirk”
-* “#Aqidah”
-* “#Sunnah”
-    source: “📝 Muslim, Ṣaḥīḥ, Nr. 2865; an-Nasāʾī, as-Sunan al-Kubrā, Nr. 8017; Ibn Ḥibbān, Ṣaḥīḥ, Nr. 653.”
-    links:
-* label: “→ Islamweb”
-    url: “https://www.islamweb.net/ar/library/content/1/5181/باب-الصفات-التي-يعرف-بها-في-الدنيا-أهل-الجنة-وأهل-النار#:~:text=وإني%20خلقت%20عبادي%20حنفاء%20كلهم,ما%20لم%20أنزل%20به%20سلطانا”
-    logo: “logo-black.png”
-
-⸻
+  - "#Fitrah"
+  - "#Tawhid"
+  - "#Shirk"
+  - "#Aqidah"
+  - "#Sunnah"
+source: "📝 Muslim, Ṣaḥīḥ, Nr. 2865; an-Nasāʾī, as-Sunan al-Kubrā, Nr. 8017; Ibn Ḥibbān, Ṣaḥīḥ, Nr. 653."
+links:
+  - label: "→ Islamweb"
+    url: "https://www.islamweb.net/ar/library/content/1/5181/باب-الصفات-التي-يعرف-بها-في-الدنيا-أهل-الجنة-وأهل-النار#:~:text=وإني%20خلقت%20عبادي%20حنفاء%20كلهم,ما%20لم%20أنزل%20به%20سلطانا"
+logo: "logo-black.png"
+---
 
 🖋️ ʿIyāḍ ibn Ḥimār berichtete, dass der Prophet ﷺ von seinem Herrn überlieferte:
 
