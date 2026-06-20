@@ -390,12 +390,15 @@ async function fetchPostNumberInfo(env) {
   const files = listPostFiles(indexData.files);
   const postCount = files.length;
   const nextNumber = nextPostNumber(files);
-  const sorted = files.slice().sort((a, b) => String(a.name).localeCompare(String(b.name), "de"));
+  const lastFilename = resolveLastPostFilename(files, postCount);
+  const lastSerial = postFileSerial(lastFilename);
   return {
     postCount,
     nextNumber,
     maxSerial: maxPostNumber(files),
-    lastFilename: sorted.length ? sorted[sorted.length - 1].name : "",
+    lastFilename,
+    lastSerial,
+    serialMismatch: Boolean(lastFilename && lastSerial > 0 && lastSerial !== postCount),
     indexPath: `${trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR)}/posts-index.json`
   };
 }
@@ -1137,6 +1140,30 @@ function maxPostNumber(files) {
     }
   }
   return max;
+}
+
+function postFileSerial(name) {
+  const matches = [...String(name || "").matchAll(/(?:^|-)(\d{3})(?=-|\.md$)/g)];
+  return matches.length ? Number(matches[matches.length - 1][1]) : 0;
+}
+
+function resolveLastPostFilename(files, postCount) {
+  const list = listPostFiles(files).map((f) => (typeof f === "string" ? { name: f } : f)).filter((f) => f?.name);
+  if (!list.length) return "";
+  const count = Math.max(1, Number(postCount) || list.length);
+  const target = String(count).padStart(3, "0");
+  const exact = list.find((f) => new RegExp(`-${target}(?:-|\\.md$)`).test(String(f.name || "")));
+  if (exact) return exact.name;
+  let best = "";
+  let bestSerial = -1;
+  for (const f of list) {
+    const serial = postFileSerial(f.name);
+    if (serial > bestSerial) {
+      bestSerial = serial;
+      best = f.name;
+    }
+  }
+  return best;
 }
 
 function findDuplicateByTitleSlug(files, markdown) {
