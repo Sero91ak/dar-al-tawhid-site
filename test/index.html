@@ -29,6 +29,7 @@
 <meta name="theme-color" content="#080806">
 <script>(function(){try{var p=new URLSearchParams(location.search);var wantStaging=p.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(wantStaging&&!underTest){location.replace("/test/"+location.search+location.hash);return}}catch(e){}})();</script>
 <script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";var stagingHost=location.hostname.indexOf("staging.")===0;var staging=params.get("env")==="staging"||stagingHost||underTest;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest-staging.json?v=dar-test-v2";if(staging&&touch)touch.href="/test-apple-touch-icon.png?v=dar-test-v2";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="Dar Test";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="Dar Test"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem(key,t)}catch(e){}}else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=underTest||stagingHost}catch(e){}})();</script>
+<script>(function(){try{var app=localStorage.getItem("darAppFontSize")||"standard";if(app!=="compact"&&app!=="large")app="standard";var read=localStorage.getItem("darReadingFontSize")||"medium";if(read!=="small"&&read!=="large")read="medium";document.documentElement.setAttribute("data-app-font",app);document.documentElement.setAttribute("data-reading-font",read)}catch(e){document.documentElement.setAttribute("data-app-font","standard");document.documentElement.setAttribute("data-reading-font","medium")}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -6151,6 +6152,120 @@ html[data-theme="soft"] body.image-editor-mode .image-editor-touch-hint{border-t
 .quran-ayah-num{display:flex;align-items:center;justify-content:space-between;gap:8px}
   .quran-ayah-share-btn{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:2px 6px;border-radius:8px;opacity:.55;transition:opacity .2s;line-height:1;margin-left:auto;flex-shrink:0}
   .quran-ayah-share-btn:hover{opacity:1;background:rgba(239,215,142,.12)}
+/* Lesbarkeit und Schriftgroessen: zentrale Tokens fuer Besucher-App und Lesebereiche. */
+:root{
+  --font-scale:1;
+  --text-xs:10px;
+  --text-sm:12px;
+  --text-base:16px;
+  --text-lg:18px;
+  --text-xl:22px;
+  --title-size:30px;
+  --bottom-nav-text:11px;
+  --reading-scale:1;
+  --quran-size:28px;
+  --dua-size:27px;
+  --arabic-size:26px;
+  --reading-latin-size:19px;
+  --reading-de-size:19px;
+}
+html[data-app-font="compact"]{--font-scale:.94;--text-xs:9.5px;--text-sm:11.3px;--text-base:15px;--text-lg:17px;--text-xl:20.5px;--title-size:28px;--bottom-nav-text:10.4px}
+html[data-app-font="standard"]{--font-scale:1}
+html[data-app-font="large"]{--font-scale:1.10;--text-xs:10.8px;--text-sm:13px;--text-base:18px;--text-lg:19.8px;--text-xl:24px;--title-size:33px;--bottom-nav-text:11.4px}
+html[data-reading-font="small"]{--reading-scale:.88;--quran-size:24px;--dua-size:23px;--arabic-size:23px;--reading-latin-size:17px;--reading-de-size:17px}
+html[data-reading-font="medium"]{--reading-scale:1}
+html[data-reading-font="large"]{--reading-scale:1.14;--quran-size:32px;--dua-size:31px;--arabic-size:31px;--reading-latin-size:21px;--reading-de-size:21px}
+body{font-size:var(--text-base)}
+.view-desc,.intro,.folder-card p,.info-card p,.dua-card p,.source-preview,.quran-meta-note,.share-help,.event-note,.calendar-note{font-size:var(--text-sm)!important}
+.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3,.section-head h3{font-size:var(--text-xl)!important}
+.badge,.folder-meta span,.quran-ayah-num,.dua-label,.eyebrow{font-size:var(--text-xs)!important}
+.action-btn,.prayer-action-btn,.quran-jump-btn,.quran-popular-btn,.quran-tafsir-tab,.quran-tr-btn,.nav-posts button,.link-row a{font-size:var(--text-sm)!important;white-space:normal;overflow-wrap:anywhere}
+.bottom-nav-btn span{font-size:var(--bottom-nav-text)!important}
+.reading-font-panel,.app-font-panel{border:1px solid var(--line2);border-radius:20px;background:rgba(239,215,142,.055);padding:12px 13px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.reading-font-panel{margin:0 0 12px}
+.font-panel-copy{min-width:0}.font-panel-copy b{display:block;color:var(--gold2);font-family:var(--serif);font-size:20px;line-height:1.1}.font-panel-copy span{display:block;color:var(--muted);font-size:var(--text-sm);line-height:1.35;margin-top:3px}
+.font-size-row{display:flex;gap:7px;flex-wrap:wrap}.font-size-btn{border:1px solid var(--line2);border-radius:999px;background:rgba(239,215,142,.075);color:var(--cream);min-height:36px;padding:8px 12px;font-size:var(--text-sm);font-weight:950;cursor:pointer}.font-size-btn.is-active{background:linear-gradient(135deg,rgba(239,215,142,.24),rgba(155,122,60,.18));border-color:rgba(239,215,142,.42);color:var(--gold2)}
+.statement{font-size:clamp(18px,var(--arabic-size),34px)!important;line-height:1.78!important;overflow-wrap:anywhere}
+.dua-arabic{font-size:clamp(23px,var(--dua-size),34px)!important;line-height:1.85!important;overflow-wrap:anywhere}
+.dua-trans,.quran-ayah-tr,.quran-result-tr{font-size:clamp(17px,var(--reading-latin-size),22px)!important;line-height:1.68!important}
+.dua-de,.quran-ayah-de,.quran-result-de,.source-row,.quran-athar-text,.quran-tafsir-panel{font-size:clamp(17px,var(--reading-de-size),22px)!important;line-height:1.72!important}
+.quran-ayah-ar{font-size:clamp(24px,var(--quran-size),34px)!important;line-height:1.9!important;overflow-wrap:anywhere}
+.article,.statement,.dua-detail-box,.source-strong,.quran-ayah,.quran-result-card{overflow-wrap:anywhere;max-width:100%}
+html[data-theme="bordeaux"]{
+  --text:#FFF4DF;
+  --cream:#FFF4DF;
+  --muted:rgba(255,244,223,.82);
+  --muted2:rgba(255,244,223,.68);
+  --gold2:#E7D59D;
+  --premium-title:#E7D59D;
+  --premium-body:#FFF4DF;
+  --premium-label:rgba(255,244,223,.82);
+  --premium-pill-text:#FFF4DF;
+}
+html[data-theme="bordeaux"] .view-desc,
+html[data-theme="bordeaux"] .intro,
+html[data-theme="bordeaux"] .folder-card p,
+html[data-theme="bordeaux"] .info-card p,
+html[data-theme="bordeaux"] .dua-card p,
+html[data-theme="bordeaux"] .source-preview,
+html[data-theme="bordeaux"] .quran-meta-note,
+html[data-theme="bordeaux"] .share-help,
+html[data-theme="bordeaux"] .event-note,
+html[data-theme="bordeaux"] .calendar-note,
+html[data-theme="bordeaux"] .quran-surah-head-meta,
+html[data-theme="bordeaux"] .quran-surah-card small{color:rgba(255,244,223,.82)!important}
+html[data-theme="bordeaux"] .statement,
+html[data-theme="bordeaux"] .statement strong,
+html[data-theme="bordeaux"] .dua-detail-box,
+html[data-theme="bordeaux"] .dua-arabic,
+html[data-theme="bordeaux"] .dua-de,
+html[data-theme="bordeaux"] .source-row,
+html[data-theme="bordeaux"] .source-row b,
+html[data-theme="bordeaux"] .quran-ayah-ar,
+html[data-theme="bordeaux"] .quran-ayah-de,
+html[data-theme="bordeaux"] .quran-result-de,
+html[data-theme="bordeaux"] .quran-tafsir-panel,
+html[data-theme="bordeaux"] .quran-athar-text,
+html[data-theme="bordeaux"] .post-card h3,
+html[data-theme="bordeaux"] .quran-surah-card h3{color:#FFF4DF!important}
+html[data-theme="bordeaux"] .dua-trans,
+html[data-theme="bordeaux"] .quran-ayah-tr,
+html[data-theme="bordeaux"] .quran-result-tr{color:rgba(255,244,223,.84)!important}
+html[data-theme="bordeaux"] .dua-label,
+html[data-theme="bordeaux"] .quran-ayah-tr-label,
+html[data-theme="bordeaux"] .source-note,
+html[data-theme="bordeaux"] .quran-athar-source{color:rgba(255,244,223,.68)!important}
+html[data-theme="bordeaux"] .source-strong h3,
+html[data-theme="bordeaux"] .view h2,
+html[data-theme="bordeaux"] .section-head h3,
+html[data-theme="bordeaux"] .folder-card h3,
+html[data-theme="bordeaux"] .dua-card h3,
+html[data-theme="bordeaux"] .quran-surah-head h2,
+html[data-theme="bordeaux"] .quran-surah-head-ar,
+html[data-theme="bordeaux"] .quran-surah-card .quran-ar-name,
+html[data-theme="bordeaux"] .quran-ayah-num{color:#E7D59D!important}
+html[data-theme="bordeaux"] .statement em{color:#E7D59D!important}
+html[data-theme="bordeaux"] .badge,
+html[data-theme="bordeaux"] .folder-meta span,
+html[data-theme="bordeaux"] .status-chip,
+html[data-theme="bordeaux"] .search-match,
+html[data-theme="bordeaux"] .prayer-calculation-tags span{color:#F8EED8!important}
+html[data-theme="bordeaux"] .current-focus-row,
+html[data-theme="bordeaux"] .home-refresh-btn{color:#21170D!important}
+html[data-theme="bordeaux"] .current-focus-row p,
+html[data-theme="bordeaux"] .current-focus-row small{color:rgba(33,23,13,.74)!important}
+html[data-theme="bordeaux"] .bottom-nav-btn{color:rgba(255,244,223,.76)!important}
+html[data-theme="bordeaux"] .bottom-nav-btn.active,
+html[data-theme="bordeaux"] .bottom-nav-btn.is-pressed,
+html[data-theme="bordeaux"] .bottom-nav-btn:active{color:#E7D59D!important}
+html[data-theme="bordeaux"] .font-size-btn{color:#FFF4DF!important;border-color:rgba(214,190,132,.24)!important}
+html[data-theme="bordeaux"] .font-size-btn.is-active{color:#21170D!important;background:linear-gradient(135deg,#D8BE84,#FFF4DF)!important}
+@media(max-width:700px){
+  .app-font-panel,.reading-font-panel{align-items:flex-start}
+  .font-size-row{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .font-size-btn{padding:8px 6px;min-width:0}
+  .quran-surah-head{flex-direction:column}
+}
 .new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
 </style>
 
@@ -6309,6 +6424,19 @@ function initTheme(){applyTheme(getTheme())}
 function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{applyTheme(btn.getAttribute("data-theme-select"))}})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
 function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("bordeaux")}</div></section>`}
+const APP_FONT_KEY="darAppFontSize";
+const READING_FONT_KEY="darReadingFontSize";
+function normalizeAppFont(v){return v==="compact"||v==="large"?v:"standard"}
+function normalizeReadingFont(v){return v==="small"||v==="large"?v:"medium"}
+function getAppFont(){try{return normalizeAppFont(localStorage.getItem(APP_FONT_KEY))}catch(e){return"standard"}}
+function getReadingFont(){try{return normalizeReadingFont(localStorage.getItem(READING_FONT_KEY))}catch(e){return"medium"}}
+function applyAppFont(v){const next=normalizeAppFont(v);document.documentElement.setAttribute("data-app-font",next);try{localStorage.setItem(APP_FONT_KEY,next)}catch(e){}document.querySelectorAll("[data-app-font-select]").forEach(btn=>{const on=btn.getAttribute("data-app-font-select")===next;btn.classList.toggle("is-active",on);btn.setAttribute("aria-pressed",on?"true":"false")})}
+function applyReadingFont(v){const next=normalizeReadingFont(v);document.documentElement.setAttribute("data-reading-font",next);try{localStorage.setItem(READING_FONT_KEY,next)}catch(e){}document.querySelectorAll("[data-reading-font-select]").forEach(btn=>{const on=btn.getAttribute("data-reading-font-select")===next;btn.classList.toggle("is-active",on);btn.setAttribute("aria-pressed",on?"true":"false")})}
+function initFontSettings(){applyAppFont(getAppFont());applyReadingFont(getReadingFont())}
+function fontButton(kind,value,label,current){return `<button type="button" class="font-size-btn${current===value?" is-active":""}" data-${kind}-font-select="${value}" aria-pressed="${current===value?"true":"false"}">${label}</button>`}
+function renderFontSettingsPanel(){const cur=getAppFont();return `<section class="app-font-panel premium-surface"><div class="font-panel-copy"><b>Schriftgröße</b><span>Gilt für die gesamte Besucher-App.</span></div><div class="font-size-row">${fontButton("app","compact","Kompakt",cur)}${fontButton("app","standard","Standard",cur)}${fontButton("app","large","Groß",cur)}</div></section>`}
+function renderReadingFontControl(){const cur=getReadingFont();return `<section class="reading-font-panel"><div class="font-panel-copy"><b>Aa</b><span>Leseschrift für Qurʾān, Duʿāʾ und Beiträge.</span></div><div class="font-size-row">${fontButton("reading","small","Klein",cur)}${fontButton("reading","medium","Mittel",cur)}${fontButton("reading","large","Groß",cur)}</div></section>`}
+function bindFontControls(){document.querySelectorAll("[data-app-font-select]").forEach(btn=>{btn.onclick=()=>applyAppFont(btn.getAttribute("data-app-font-select"))});document.querySelectorAll("[data-reading-font-select]").forEach(btn=>{btn.onclick=()=>applyReadingFont(btn.getAttribute("data-reading-font-select"))})}
 
 const DUAS=[
 {id:"quran-001",type:"Qurʾān",cat:"Vergebung",title:"Duʿāʾ von Ādam und Ḥawwāʾ nach dem Fehler",occasion:"Reue und Vergebung",ar:"رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",tr:"Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā lanakūnanna mina-l-khāsirīn.",de:"Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",src:"📝 Qurʾān, al-Aʿrāf 7:23."},
@@ -6509,7 +6637,7 @@ function syncQuranWakeLock(route){if(isQuranSurahRoute(route)){acquireQuranWakeL
 function initQuranWakeLock(){document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&isQuranSurahRoute(readRoute())&&!quranWakeUserOff)acquireQuranWakeLock()});window.addEventListener("pagehide",()=>releaseQuranWakeLock())}
 function renderQuranWakeBtn(){if(!quranWakeSupported())return `<div class="quran-reader-tools"><button id="quranWakeBtn" class="quran-wake-btn is-off" type="button" disabled title="Auf diesem Gerät nicht verfügbar">🌙 Nicht verfügbar</button></div>`;return `<div class="quran-reader-tools"><button id="quranWakeBtn" class="quran-wake-btn is-on" type="button" aria-pressed="true" title="Verhindert Abdunkeln und Sperre beim Lesen">☀️ Bildschirm bleibt an</button></div>`}
 function renderQuranSurahHead(id,meta){return `<section class="quran-surah-head"><div class="quran-surah-head-text"><h2>${esc(meta.transliteration)}</h2><div class="quran-surah-head-ar">${esc(meta.name)}</div><div class="quran-surah-head-meta">${id} · ${meta.total_verses} Ayāt · ${quranTypeLabel(meta.type)}</div></div><div class="quran-surah-head-tools">${renderQuranWakeBtn()}</div></section>`}
-function renderQuranSurah(rawValue){const parts=String(rawValue||"").split("/");const id=Number(parts[0]);const selectedAyah=Number(parts[1])||0;const meta=quranSurahMeta(id);const surah=quranSurahCache.get(id);showTafsirBlocks=getShowTafsirBlocks();const tafsir=tafsirSurahCache.get(id)||null;const athar=quranAtharCache.get(id)||null;if(!meta)return `${setHeader("Qurʾān","Sure nicht gefunden.","Fehler")}<div class="empty">Ungültige Sure.</div>`;if(!surah)return `${renderQuranSurahHead(id,meta)}<div class="loading">Sure ${id} wird geladen…</div>`;const prev=id>1?quranSurahMeta(id-1):null;const next=id<114?quranSurahMeta(id+1):null;return `${renderQuranSurahHead(id,meta)}${renderQuranJumpBar(id,meta.total_verses,selectedAyah)}${renderQuranTransliterationPicker()}${renderQuranTafsirBar(id,tafsir,athar)}<section class="quran-ayah-list">${surah.verses.map(v=>{const entry=ayahTafsirEntry(tafsir,v.id);const atharEntry=ayahAtharEntry(athar,v.id);const ayahData=encodeURIComponent(JSON.stringify({s:id,a:v.id,ar:v.ar,de:v.de,name:meta?.transliteration||""}));return `<article class="quran-ayah" id="ayah-${v.id}"><div class="quran-ayah-num">Ayah ${v.id}<button class="quran-ayah-share-btn" type="button" title="Vers als Bild teilen" data-image-ayah-open="${ayahData}">🖼</button></div><div class="quran-ayah-ar">${esc(v.ar)}</div>${renderQuranAyahTr(v)}<div class="quran-ayah-de">${esc(v.de)}</div>${renderAyahTafsir(v,entry,meta,atharEntry)}</article>`}).join("")}</section><div class="quran-surah-nav"><button type="button" data-nav="quran-surah" data-value="${prev?prev.id:""}" ${prev?"":"disabled"}>← ${prev?esc(prev.transliteration):"—"}</button><button type="button" data-nav="quran-surah" data-value="${next?next.id:""}" ${next?"":"disabled"}>${next?esc(next.transliteration):"—"} →</button></div><div class="quran-surah-nav"><button type="button" data-nav="quran">Alle Suren</button><button type="button" data-nav="duas">Duʿāʾ-Sammlung</button></div>`}
+function renderQuranSurah(rawValue){const parts=String(rawValue||"").split("/");const id=Number(parts[0]);const selectedAyah=Number(parts[1])||0;const meta=quranSurahMeta(id);const surah=quranSurahCache.get(id);showTafsirBlocks=getShowTafsirBlocks();const tafsir=tafsirSurahCache.get(id)||null;const athar=quranAtharCache.get(id)||null;if(!meta)return `${setHeader("Qurʾān","Sure nicht gefunden.","Fehler")}<div class="empty">Ungültige Sure.</div>`;if(!surah)return `${renderQuranSurahHead(id,meta)}<div class="loading">Sure ${id} wird geladen…</div>`;const prev=id>1?quranSurahMeta(id-1):null;const next=id<114?quranSurahMeta(id+1):null;return `${renderQuranSurahHead(id,meta)}${renderReadingFontControl()}${renderQuranJumpBar(id,meta.total_verses,selectedAyah)}${renderQuranTransliterationPicker()}${renderQuranTafsirBar(id,tafsir,athar)}<section class="quran-ayah-list">${surah.verses.map(v=>{const entry=ayahTafsirEntry(tafsir,v.id);const atharEntry=ayahAtharEntry(athar,v.id);const ayahData=encodeURIComponent(JSON.stringify({s:id,a:v.id,ar:v.ar,de:v.de,name:meta?.transliteration||""}));return `<article class="quran-ayah" id="ayah-${v.id}"><div class="quran-ayah-num">Ayah ${v.id}<button class="quran-ayah-share-btn" type="button" title="Vers als Bild teilen" data-image-ayah-open="${ayahData}">🖼</button></div><div class="quran-ayah-ar">${esc(v.ar)}</div>${renderQuranAyahTr(v)}<div class="quran-ayah-de">${esc(v.de)}</div>${renderAyahTafsir(v,entry,meta,atharEntry)}</article>`}).join("")}</section><div class="quran-surah-nav"><button type="button" data-nav="quran-surah" data-value="${prev?prev.id:""}" ${prev?"":"disabled"}>← ${prev?esc(prev.transliteration):"—"}</button><button type="button" data-nav="quran-surah" data-value="${next?next.id:""}" ${next?"":"disabled"}>${next?esc(next.transliteration):"—"} →</button></div><div class="quran-surah-nav"><button type="button" data-nav="quran">Alle Suren</button><button type="button" data-nav="duas">Duʿāʾ-Sammlung</button></div>`}
 function quranSearchNormalize(value){return String(value||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿ‘’`´ʼ]/g,"").replace(/[āâ]/g,"a").replace(/[īî]/g,"i").replace(/[ūû]/g,"u").replace(/[ä]/g,"a").replace(/[ö]/g,"o").replace(/[ü]/g,"u").replace(/ß/g,"ss").replace(/[ḥḫḍṣṭẓ]/g,m=>({ḥ:"h",ḫ:"kh",ḍ:"d",ṣ:"s",ṭ:"t",ẓ:"z"}[m]||m)).replace(/[^a-z0-9\u0600-\u06ff]+/g," ").replace(/\s+/g," ").trim()}
 const QURAN_SEARCH_SYNONYMS={
   iman:["iman","iiman","glaube","glauben","glaubig","glaubige","muemin","mumin","mu'min","amanu","aamanu","yu'min","yuminoon"],
@@ -8376,7 +8504,7 @@ function bindImageEditor(){if(!["image-editor","image-editor-test"].includes(cur
 function openImageEditorTextExpand(block){ensureImageEditorTextModal();imageEditorEnsurePremiumState();imageEditorState.textExpandBlock=IMAGE_EDITOR_PREMIUM_BLOCKS.some(b=>b.id===block)?block:"body";setImageEditorActiveBlock(imageEditorState.textExpandBlock);const modal=$("imageEditorTextModal"),title=$("imageEditorTextModalTitle"),area=$("imageEditorTextModalArea");if(!modal||!title||!area)return;title.textContent=imageEditorBlockLabel(imageEditorState.textExpandBlock)+" bearbeiten";area.value=imageEditorBlockText(imageEditorState.textExpandBlock);updateImageEditorTextModalHint();modal.hidden=false;requestAnimationFrame(()=>{try{area.focus();area.setSelectionRange(area.value.length,area.value.length)}catch(e){}})}
 function closeImageEditorTextExpand(save){const modal=$("imageEditorTextModal"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!modal)return;if(save&&area&&block){setImageEditorBlockText(block,area.value||"");syncImageEditorInputsFromState();renderImageEditorCanvas().then(()=>downloadImageEditor())}imageEditorState.textExpandBlock="";modal.hidden=true}
 function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!hint||!area||!block)return;const lines=String(area.value||"").split(/\n/).length;hint.textContent=`${lines} Zeile${lines===1?"":"n"} · Speichern übernimmt den Text direkt in die Vorschau.`;const canvas=$("imageEditorCanvas"),ctx=canvas?.getContext("2d");if(!ctx)return;const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const fit=fitImageEditorText(ctx,area.value,imageEditorInnerBox(imageEditorBlockBox(block)),font,imageEditorBlockSize(block),block==="source"?1.16:imageEditorState.lineHeight,block==="source"?12:16);if(!fit.ok)hint.textContent+=" Der Text ist zu lang. Bitte kürzen oder Schrift kleiner wählen."}
-function renderMore(){const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const ramadan=seasonalIslamicContext()?listCard("Ramaḍān & ʿĪd","Saisonale Beiträge & Zeiten","ramadan","","🌙"):"";const account=accountSession()?`${accountSession().username} · Sync aktiv`:"Anmeldename + PIN";return `${setHeader("Mehr","Gelehrte, Bücher, Kalender und persönliche Bereiche.","Menü")}${renderThemeSwitchPanel()}<section class="grid-list">${listCard("Mein Bereich",account,"account","","🔐")}${ramadan}${listCard("Bild-Beitrag","Vorlage wählen, Text setzen, teilen","image-editor","","🖼️")}${listCard("Qurʾān","114 Suren · Arabisch & Lautschrift","quran","","📖")}${listCard("Gelehrte",scholarCount+" Namen","scholars","","👤")}${listCard("Bücher",bookCount+" Werke","books","","📖")}${listCard("Islamischer Kalender","Hijrī-Termine","calendar","","🗓️")}${listCard("Favoriten",savedIds().length+" gespeichert","saved","","♡")}${listCard("Über die App","Maßstab & Quellen","about","","ℹ️")}</section>`}
+function renderMore(){const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const ramadan=seasonalIslamicContext()?listCard("Ramaḍān & ʿĪd","Saisonale Beiträge & Zeiten","ramadan","","🌙"):"";const account=accountSession()?`${accountSession().username} · Sync aktiv`:"Anmeldename + PIN";return `${setHeader("Mehr","Gelehrte, Bücher, Kalender und persönliche Bereiche.","Menü")}${renderThemeSwitchPanel()}${renderFontSettingsPanel()}<section class="grid-list">${listCard("Mein Bereich",account,"account","","🔐")}${ramadan}${listCard("Bild-Beitrag","Vorlage wählen, Text setzen, teilen","image-editor","","🖼️")}${listCard("Qurʾān","114 Suren · Arabisch & Lautschrift","quran","","📖")}${listCard("Gelehrte",scholarCount+" Namen","scholars","","👤")}${listCard("Bücher",bookCount+" Werke","books","","📖")}${listCard("Islamischer Kalender","Hijrī-Termine","calendar","","🗓️")}${listCard("Favoriten",savedIds().length+" gespeichert","saved","","♡")}${listCard("Über die App","Maßstab & Quellen","about","","ℹ️")}</section>`}
 function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
 function dailyDua(){const d=dailyContentToday();if(d?.dua?.id){const match=DUAS.find(x=>String(x.id)===String(d.dua.id));if(match)return match}if(!DUAS.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return DUAS[Math.abs(day)%DUAS.length]}
 function renderDailyDua(){const d=dailyDua();if(!d)return"";return`<section class="daily-box premium-surface" data-nav="dua" data-value="${esc(d.id)}"><div class="daily-label">Duʿāʾ des Tages</div><h3 class="daily-title">${esc(d.title)}</h3><div class="daily-text">${esc(d.de||d.occasion||"")}</div><div class="folder-meta"><span>${esc(d.cat)}</span><span>${esc(d.type)}</span></div></section>`}
@@ -8458,7 +8586,7 @@ function renderDua(id){
   const d=DUAS.find(x=>x.id===id);
   if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;
   const imageAction=`<button class="share-btn image-post" data-image-dua-open="${esc(d.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Als Bild teilen</span></button>`;
-  return `<article class="article"><div id="duaReadStart" class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div><section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.",imageAction)}</article>`;
+  return `<article class="article"><div id="duaReadStart" class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div>${renderReadingFontControl()}<section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.",imageAction)}</article>`;
 }
 
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
@@ -8519,7 +8647,7 @@ function renderPost(id){
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   const related=getRelatedPosts(post);
-  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div><section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}${renderSourceStatus(post)}${shareLinksForPost(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
+  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderReadingFontControl()}<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}${renderSourceStatus(post)}${shareLinksForPost(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
 }
 function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");updateBottomNav(route);if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",topics:"Kategorien",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",ramadan:"Ramaḍān & ʿĪd",series:"Serie",statistik:"Statistik",more:"Mehr","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
@@ -8658,6 +8786,7 @@ function bindEvents(){
   bindPrayerEvents();
   bindHighlightDailyPush();
   bindThemeControls();
+  bindFontControls();
   bindImageEditor();
   const accountLoginBtn=$("accountLoginBtn");if(accountLoginBtn)accountLoginBtn.onclick=()=>loginAccount();
   const accountCreateBtn=$("accountCreateBtn");if(accountCreateBtn)accountCreateBtn.onclick=()=>createAccount();
@@ -8852,10 +8981,12 @@ window.addEventListener("DOMContentLoaded",()=>{
     if(!appBootHydrated){
       appBootHydrated=true;
       try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
+      initFontSettings();
       render();
     }
     restoreStatsAuth();
     initTheme();
+    initFontSettings();
     applyStandalonePwaClass();
     trackStandaloneInstallIfNeeded();
     initAndroidTapCleanup();
@@ -8888,6 +9019,7 @@ window.addEventListener("load",()=>{
       appBootHydrated=true;
       try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
     }
+    initFontSettings();
     render();
     if("serviceWorker" in navigator&&!window.__darSwMessageBound){
       window.__darSwMessageBound=true;
