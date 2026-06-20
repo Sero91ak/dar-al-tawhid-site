@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-20T05:10:24.595Z",
+  "updatedAt": "2026-06-20T05:15:24.992Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-20T05:10:24.595Z",
+  "lastCronRun": "2026-06-20T05:15:24.992Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-06-20T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-20T04:55:10.978Z",
-  "windowEnd": "2026-06-21T07:10:10.978Z",
+  "windowStart": "2026-06-20T05:00:10.982Z",
+  "windowEnd": "2026-06-21T07:15:10.982Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 22,
@@ -979,7 +979,7 @@
       "subscriptionId": "2c445e0f-e9f0-4534-ac56-00cf1ea2bdad",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T04:46:28.837+00:00"
+      "lastSyncedAt": "2026-06-20T05:12:28.83+00:00"
     },
     {
       "subscriptionId": "9a7881c4-2744-4b95-9f3e-92486b09c600",
