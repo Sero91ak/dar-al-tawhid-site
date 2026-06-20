@@ -390,10 +390,12 @@ async function fetchPostNumberInfo(env) {
   const files = listPostFiles(indexData.files);
   const postCount = files.length;
   const nextNumber = nextPostNumber(files);
+  const sorted = files.slice().sort((a, b) => String(a.name).localeCompare(String(b.name), "de"));
   return {
     postCount,
     nextNumber,
     maxSerial: maxPostNumber(files),
+    lastFilename: sorted.length ? sorted[sorted.length - 1].name : "",
     indexPath: `${trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR)}/posts-index.json`
   };
 }
@@ -1087,9 +1089,44 @@ function trimSlashes(value) {
   return String(value || "").replace(/^\/+|\/+$/g, "");
 }
 
+function sanitizeMarkdownQuotes(value) {
+  return String(value || "")
+    .replace(/\uFEFF/g, "")
+    .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"')
+    .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'")
+    .replace(/\u2e3b/g, "---");
+}
+
+function stripYamlQuotes(value) {
+  let val = sanitizeMarkdownQuotes(String(value || "").trim());
+  if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+    val = val.slice(1, -1).trim();
+  }
+  return val.replace(/^["']+|["']+$/g, "").trim();
+}
+
 function frontmatterValue(text, key) {
-  const match = String(text || "").match(new RegExp(`^${key}:\\s*["']?(.*?)["']?\\s*$`, "m"));
-  return match ? match[1].trim() : "";
+  const match = String(text || "").match(new RegExp(`^${key}:\\s*(.*)$`, "m"));
+  return match ? stripYamlQuotes(match[1]) : "";
+}
+
+function repairMarkdownStructure(markdown) {
+  let out = sanitizeMarkdownQuotes(String(markdown || "").trim());
+  if (!out) return "";
+  out = out.replace(/^\s*[\u2e3b\u2014-]{1,3}\s*$/gm, "---");
+  if (/^---\s*\n[\s\S]*?\n---\s*\n?/.test(out)) return out;
+  if (/^---\s*\n[\s\S]*?\n---/.test(out)) return out.replace(/\n---\s*$/m, "\n---\n");
+  const sepMatch = out.match(/^(?:---|[\u2e3b\u2014-]{1,3})\s*\n([\s\S]*?)\n(?:---|[\u2e3b\u2014-]{1,3})\s*\n?([\s\S]*)$/);
+  if (sepMatch) return `---\n${sepMatch[1].trim()}\n---\n\n${(sepMatch[2] || "").trim()}`;
+  if (/^id:\s/m.test(out) || /^title:\s/m.test(out)) {
+    const bodySplit = out.search(/\n\n(?=[^\s:#-])/);
+    if (bodySplit > 0) {
+      const head = out.slice(0, bodySplit).trim();
+      const body = out.slice(bodySplit).trim();
+      if (/^id:\s/m.test(head)) return `---\n${head}\n---\n\n${body}`;
+    }
+  }
+  return out;
 }
 
 function slugify(value) {
@@ -1149,14 +1186,15 @@ function sanitizeUpdateId(value) {
 }
 
 function normalizeMarkdownForUpload(markdown, nextNumber) {
-  let out = String(markdown || "").trim();
+  let out = repairMarkdownStructure(markdown);
   const iso = new Date().toISOString().replace(/\.\d{3}Z$/, ".000Z");
-  if (/^date:\s*["']?.*?["']?\s*$/m.test(out)) out = out.replace(/^date:\s*["']?.*?["']?\s*$/m, `date: "${iso}"`);
-  const id = frontmatterValue(out, "id");
+  if (/^date:\s*.*$/m.test(out)) out = out.replace(/^date:\s*.*$/m, `date: "${iso}"`);
+  let id = stripYamlQuotes(frontmatterValue(out, "id"));
+  const next = String(nextNumber).padStart(3, "0");
   if (id) {
-    const next = String(nextNumber).padStart(3, "0");
-    const updated = /-\d{3}$/.test(id) ? id.replace(/-\d{3}$/, `-${next}`) : `${id}-${next}`;
-    out = out.replace(/^id:\s*["']?.*?["']?\s*$/m, `id: "${updated}"`);
+    id = stripYamlQuotes(id.replace(/-\d{3}$/, `-${next}`).replace(/["""]+/g, ""));
+    if (!/-\d{3}$/.test(id)) id = `${slugify(id) || "beitrag"}-${next}`;
+    out = out.replace(/^id:\s*.*$/m, `id: "${id}"`);
   }
   return `${out}\n`;
 }
