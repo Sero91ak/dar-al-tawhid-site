@@ -54,6 +54,17 @@ function runBottomNavGuard() {
     } else {
       ok(`${file}: Dock-Parent-Prüfung vorhanden`);
     }
+    if (!html.includes('id="appChromeDock"') || !html.includes('</nav>\n</div>\n<script>!function(){try{var n=document.getElementById("bottomNav")')) {
+      fail(`${file}: HTML-Dock-Struktur fehlt (#appChromeDock + Inline-Boot)`);
+    } else {
+      ok(`${file}: HTML-Dock-Struktur korrekt`);
+    }
+    const dockChunk = html.match(/<div id="appChromeDock"[\s\S]*?<\/nav>/)?.[0] || "";
+    if (!dockChunk.includes('id="bottomNav"')) {
+      fail(`${file}: #bottomNav muss innerhalb von #appChromeDock liegen`);
+    } else {
+      ok(`${file}: Tab-Leiste in #appChromeDock`);
+    }
   }
 
   const version = JSON.parse(read("version.json"));
