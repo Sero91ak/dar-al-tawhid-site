@@ -131,7 +131,9 @@ function runPushSystemGuard() {
 
   mustInclude("daily-push-scheduler.js", read("cloudflare/daily-push-scheduler.js"), [
     "export async function runDailyPushScheduler",
-    "regenerateDailyContent"
+    "regenerateDailyContent",
+    "sendDailyPushBatch",
+    "include_subscription_ids"
   ]);
 
   mustInclude("jummah-push-scheduler.js", read("cloudflare/jummah-push-scheduler.js"), [
