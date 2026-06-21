@@ -3,6 +3,8 @@
  * Nutzerquelle: Supabase prayer_push_registrations
  */
 
+import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
@@ -12,8 +14,9 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const DUA_HOUR = 9;
 const REC_HOUR = 12;
 const SEND_WINDOW_MINUTES = 15;
-const DUA_CATCHUP_UNTIL_HOUR = 12;
-const REC_CATCHUP_UNTIL_HOUR = 18;
+const DUA_CATCHUP_UNTIL_HOUR = 14;
+const REC_CATCHUP_UNTIL_HOUR = 20;
+const BATCH_CHUNK_SIZE = 200;
 
 let lastDailyStatusReport = null;
 
@@ -114,7 +117,7 @@ async function loadDailyRegistrations(env) {
     "last_recommendation_push_date",
     "push_opted_in"
   ].join(",");
-  const query = `prayer_push_registrations?subscription_id=not.is.null&or=(daily_dua_enabled.eq.true,daily_recommendation_enabled.eq.true)&select=${select}`;
+  const query = `prayer_push_registrations?subscription_id=not.is.null&push_opted_in=eq.true&or=(daily_dua_enabled.eq.true,daily_recommendation_enabled.eq.true)&select=${select}`;
   const res = await supabaseFetch(env, query);
   if (!res.ok) {
     if (res.status === 400 && /column/i.test(res.text)) {
@@ -305,11 +308,9 @@ async function markSent(env, deviceId, fields) {
   return res.ok;
 }
 
-async function sendDailyPush(env, row, kind, item, config, dateKey, stats) {
+function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionIds, idSeed) {
   const isDua = kind === "dua";
   const section = isDua ? config.dailyDua : config.recommendation;
-  if (section?.enabled === false || !item?.id) return;
-
   const title = String(section?.title || (isDua ? "Duʿāʾ des Tages" : "Heute empfohlen"));
   const itemTitle = String(item.title || "").trim();
   const snippet = String(item.snippet || "").trim();
@@ -320,43 +321,85 @@ async function sendDailyPush(env, row, kind, item, config, dateKey, stats) {
     ? `${origin}/#dua/${encodeURIComponent(item.id)}`
     : `${origin}/#post/${encodeURIComponent(item.id)}`;
 
-  const idSeed = `daily-${kind}-${row.device_id}-${dateKey}`;
-  const payload = withIcons({
+  return withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
-    include_subscription_ids: [String(row.subscription_id)],
+    include_subscription_ids: subscriptionIds,
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
     isAnyWeb: true,
-    idempotency_key: await uuidFrom(idSeed),
+    idempotency_key: idSeed,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
       content_id: item.id,
       date: dateKey,
-      source: "dar-daily-push-scheduler"
+      source: "dar-daily-push-scheduler-batch"
     }
   }, env);
+}
 
-  try {
-    const result = await postOneSignal(env, payload);
-    const patch = isDua
-      ? { last_dua_push_date: dateKey, last_dua_content_id: item.id, daily_push_error: null }
-      : { last_recommendation_push_date: dateKey, last_recommendation_content_id: item.id, daily_push_error: null };
-    await markSent(env, row.device_id, patch);
-    stats.sent += 1;
-    stats.responses.push({
-      kind,
-      deviceId: row.device_id,
-      contentId: item.id,
-      recipients: result.recipients,
-      ok: true
-    });
-  } catch (err) {
-    stats.errors += 1;
-    const msg = err.message || String(err);
-    await markSent(env, row.device_id, { daily_push_error: msg.slice(0, 240) });
-    stats.responses.push({ kind, deviceId: row.device_id, ok: false, error: msg });
+async function sendDailyPushBatch(env, rows, kind, item, config, dateKey, stats) {
+  const isDua = kind === "dua";
+  const section = isDua ? config.dailyDua : config.recommendation;
+  if (section?.enabled === false || !item?.id || !rows.length) return;
+
+  const patch = isDua
+    ? { last_dua_push_date: dateKey, last_dua_content_id: item.id, daily_push_error: null }
+    : { last_recommendation_push_date: dateKey, last_recommendation_content_id: item.id, daily_push_error: null };
+
+  for (let offset = 0; offset < rows.length; offset += BATCH_CHUNK_SIZE) {
+    const chunk = rows.slice(offset, offset + BATCH_CHUNK_SIZE);
+    const subscriptionIds = chunk.map((row) => String(row.subscription_id)).filter(Boolean);
+    if (!subscriptionIds.length) continue;
+
+    const idSeed = await uuidFrom(`daily-${kind}-batch-${dateKey}-${offset}`);
+    const payload = buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionIds, idSeed);
+
+    try {
+      const result = await postOneSignal(env, payload);
+      const delivery = evaluateOneSignalDelivery(result.parsed || {});
+      const invalidRaw = delivery.invalidSubscriptionIds ||
+        result.parsed?.errors?.invalid_subscription_ids ||
+        [];
+      const invalidSet = new Set((Array.isArray(invalidRaw) ? invalidRaw : []).map(String));
+
+      await Promise.all(chunk.map(async (row) => {
+        if (invalidSet.has(String(row.subscription_id))) {
+          stats.errors += 1;
+          await markSent(env, row.device_id, {
+            daily_push_error: "Push-Gerät bei OneSignal ungültig – bitte in der App erneut aktivieren."
+          });
+          return;
+        }
+        if (delivery.delivered) {
+          await markSent(env, row.device_id, patch);
+          stats.sent += 1;
+          return;
+        }
+        stats.errors += 1;
+        await markSent(env, row.device_id, {
+          daily_push_error: String(delivery.reason || "Push nicht zugestellt").slice(0, 240)
+        });
+      }));
+
+      stats.responses.push({
+        kind,
+        batch: true,
+        count: chunk.length,
+        contentId: item.id,
+        recipients: result.recipients,
+        ok: delivery.delivered,
+        invalid: invalidSet.size
+      });
+    } catch (err) {
+      const msg = err.message || String(err);
+      stats.errors += chunk.length;
+      await Promise.all(chunk.map((row) =>
+        markSent(env, row.device_id, { daily_push_error: msg.slice(0, 240) })
+      ));
+      stats.responses.push({ kind, batch: true, count: chunk.length, ok: false, error: msg });
+    }
   }
 }
 
@@ -418,7 +461,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   } catch (err) {
     const status = {
       ok: false,
-      schedulerEngine: "cloudflare-worker-daily-v1",
+      schedulerEngine: "cloudflare-worker-daily-v2-batch",
       schedulerStatus: "error",
       updatedAt: now.toISOString(),
       lastError: err.message || String(err),
@@ -435,7 +478,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   if (!duaItem && !recItem) {
     const status = {
       ok: false,
-      schedulerEngine: "cloudflare-worker-daily-v1",
+      schedulerEngine: "cloudflare-worker-daily-v2-batch",
       schedulerStatus: "warning",
       updatedAt: now.toISOString(),
       lastError: "Kein aktiver Tagesinhalt in content/updates/daily.json für heute – Push nicht gesendet (keine Zufallsauswahl)",
@@ -447,11 +490,19 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     return { ok: false, triggered: true, reason: status.lastError, status };
   }
 
+  const duaQueue = [];
+  const recQueue = [];
+
   for (const row of rows) {
     stats.checked += 1;
     const tz = String(row.timezone || "Europe/Berlin");
     const local = getLocalParts(now, tz);
     const dateKey = canonicalDateKey;
+
+    if (row.push_opted_in === false) {
+      stats.skipped += 1;
+      continue;
+    }
 
     const duaOn = row.daily_dua_enabled !== false;
     const recOn = row.daily_recommendation_enabled !== false;
@@ -466,7 +517,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
         stats.duplicates += 1;
       } else {
         stats.duaCandidates += 1;
-        await sendDailyPush(env, row, "dua", duaItem, config, dateKey, stats);
+        duaQueue.push(row);
       }
     }
 
@@ -475,14 +526,17 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
         stats.duplicates += 1;
       } else {
         stats.recCandidates += 1;
-        await sendDailyPush(env, row, "recommendation", recItem, config, dateKey, stats);
+        recQueue.push(row);
       }
     }
   }
 
+  await sendDailyPushBatch(env, duaQueue, "dua", duaItem, config, canonicalDateKey, stats);
+  await sendDailyPushBatch(env, recQueue, "recommendation", recItem, config, canonicalDateKey, stats);
+
   const status = {
     ok: stats.errors === 0,
-    schedulerEngine: "cloudflare-worker-daily-v1",
+    schedulerEngine: "cloudflare-worker-daily-v2-batch",
     schedulerStatus: stats.errors ? "error" : "success",
     updatedAt: now.toISOString(),
     usersChecked: stats.checked,
