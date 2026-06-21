@@ -6377,58 +6377,64 @@ html[data-theme="bordeaux"] .post-intro-dialog{background:linear-gradient(180deg
 @media(max-width:700px){.post-intro-head h3{font-size:22px}.post-intro-body{font-size:14.5px;line-height:1.62}.post-intro-dialog{padding:16px;border-radius:20px}}
 
 /* TEST APP: Premium einziehbares Bottom-App-Dock */
-:root{--bottom-dock-delay:7000ms}
 body.has-bottom-nav{padding-bottom:calc(42px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))!important}
 .bottom-nav{
   will-change:transform,opacity!important;
-  transform:translate3d(0,0,0)!important;
-  opacity:1!important;
+  transform:translate3d(0,calc(100% + 18px),0) scale(.98)!important;
+  opacity:0!important;
+  pointer-events:none!important;
   transition:transform .34s cubic-bezier(.22,.78,.22,1),opacity .24s ease,filter .24s ease!important;
 }
 .bottom-dock-handle{
   position:fixed;
-  left:50%;
-  bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 4px);
-  z-index:39;
-  width:78px;
-  height:18px;
+  right:max(12px,env(safe-area-inset-right,0px));
+  bottom:calc(max(12px,env(safe-area-inset-bottom,0px)) + 8px);
+  z-index:41;
+  min-width:66px;
+  height:38px;
   border:1px solid rgba(239,215,142,.34);
   border-radius:999px;
   background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.035));
   -webkit-backdrop-filter:blur(14px) saturate(1.12);
   backdrop-filter:blur(14px) saturate(1.12);
   box-shadow:0 10px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16);
-  transform:translate3d(-50%,120%,0);
-  opacity:0;
-  pointer-events:none;
+  transform:translate3d(0,0,0);
+  opacity:1;
+  pointer-events:auto;
   cursor:pointer;
   touch-action:manipulation;
+  color:var(--gold2);
+  font:950 12px/1 var(--sans);
+  letter-spacing:.04em;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 13px;
+  text-shadow:0 1px 10px rgba(0,0,0,.46);
   transition:transform .30s cubic-bezier(.22,.78,.22,1),opacity .22s ease,box-shadow .22s ease;
 }
 .bottom-dock-handle:before{
   content:"";
   position:absolute;
-  left:16px;
-  right:16px;
-  top:7px;
-  height:3px;
+  left:12px;
+  right:12px;
+  bottom:6px;
+  height:2px;
   border-radius:999px;
   background:linear-gradient(90deg,transparent,rgba(239,215,142,.82),transparent);
   box-shadow:0 0 12px rgba(239,215,142,.22);
 }
-body.bottom-dock-collapsed .bottom-nav,
-body.bottom-dock-collapsed #appChromeDock .bottom-nav{
-  transform:translate3d(0,calc(100% + 18px),0)!important;
-  opacity:.04!important;
-  pointer-events:none;
-}
-body.bottom-dock-collapsed .bottom-dock-handle{
-  transform:translate3d(-50%,0,0);
-  opacity:1;
-  pointer-events:auto;
-}
+body.bottom-dock-collapsed .bottom-dock-handle{opacity:1;pointer-events:auto}
 body.bottom-dock-active .bottom-nav,
-body.bottom-dock-active #appChromeDock .bottom-nav{transform:translate3d(0,0,0)!important;opacity:1!important;pointer-events:auto}
+body.bottom-dock-active #appChromeDock .bottom-nav{
+  transform:translate3d(0,0,0) scale(1)!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+body.bottom-dock-active .bottom-dock-handle{
+  transform:translate3d(0,-4px,0);
+  box-shadow:0 14px 34px rgba(0,0,0,.30),0 0 0 1px rgba(239,215,142,.12),inset 0 1px 0 rgba(255,255,255,.18);
+}
 body.bottom-dock-modal-open .bottom-nav,
 body.bottom-dock-modal-open .bottom-dock-handle,
 body.image-editor-mode .bottom-nav,
@@ -6438,7 +6444,8 @@ body.image-editor-test-mode .bottom-dock-handle{display:none!important}
 body.bottom-dock-modal-open .float-actions,
 body.image-editor-mode .float-actions,
 body.image-editor-test-mode .float-actions{display:none!important}
-body.bottom-dock-collapsed.has-bottom-nav .float-actions{bottom:calc(34px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
+body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
+body.bottom-dock-collapsed.has-bottom-nav .float-actions{bottom:calc(54px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
 html[data-theme="light"] .bottom-dock-handle,
 html[data-theme="soft"] .bottom-dock-handle{
   background:linear-gradient(180deg,rgba(255,252,242,.82),rgba(255,246,229,.52));
@@ -6450,7 +6457,9 @@ html[data-theme="aurora"] .bottom-dock-handle{background:linear-gradient(180deg,
 html[data-theme="bordeaux"] .bottom-dock-handle{background:linear-gradient(180deg,rgba(76,18,32,.80),rgba(24,7,12,.58));border-color:rgba(214,190,132,.38)}
 @media(prefers-reduced-motion:reduce){
   .bottom-nav,.bottom-dock-handle{transition:opacity .12s linear!important}
-  body.bottom-dock-collapsed .bottom-nav{transform:translate3d(0,calc(100% + 18px),0)!important}
+  .bottom-nav{transform:translate3d(0,calc(100% + 18px),0)!important}
+  body.bottom-dock-active .bottom-nav,
+  body.bottom-dock-active #appChromeDock .bottom-nav{transform:translate3d(0,0,0)!important}
 }
 </style>
 
@@ -6557,7 +6566,7 @@ window.DAR_ANALYTICS_CONFIG={
   <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān"><span class="nav-icon" aria-hidden="true">📖</span><span>Qurʾān</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Weitere Bereiche"><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
-<button id="bottomDockHandle" class="bottom-dock-handle" type="button" aria-label="Navigation öffnen" title="Navigation öffnen"></button>
+<button id="bottomDockHandle" class="bottom-dock-handle" type="button" aria-label="Navigation öffnen" title="Navigation öffnen">Mehr</button>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
 <div class="float-actions is-expanded" id="floatActions" aria-label="Schnellzugriff">
@@ -7085,15 +7094,13 @@ function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage
 function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;clearNavStack();navigate(tab,"",{skipPush:true})}
 function updateBottomNavPill(){}
 function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route.view))})}
-const BOTTOM_DOCK_AUTO_HIDE_DELAY=7000;
-let bottomDockTimer=0,bottomDockLastY=0,bottomDockSwipe=null,bottomDockObserver=null;
+let bottomDockSwipe=null,bottomDockObserver=null;
 function isBottomDockSuppressed(){return document.documentElement.classList.contains("reader-mode")||document.body.classList.contains("image-editor-mode")||document.body.classList.contains("image-editor-test-mode")||!!document.querySelector(".post-intro-modal:not([hidden]),.pwa-modal-overlay:not([hidden]),.ie-text-modal-overlay:not([hidden]),.font-sheet:not([hidden]),.font-panel-modal:not([hidden])")}
 function updateBottomDockModalState(){document.body.classList.toggle("bottom-dock-modal-open",isBottomDockSuppressed())}
-function scheduleBottomDockCollapse(){clearTimeout(bottomDockTimer);updateBottomDockModalState();if(isBottomDockSuppressed())return;bottomDockTimer=setTimeout(()=>collapseBottomDock(),BOTTOM_DOCK_AUTO_HIDE_DELAY)}
-function showBottomDock(){updateBottomDockModalState();if(isBottomDockSuppressed())return;document.body.classList.add("bottom-dock-active");document.body.classList.remove("bottom-dock-collapsed");scheduleBottomDockCollapse()}
+function showBottomDock(){updateBottomDockModalState();if(isBottomDockSuppressed())return;document.body.classList.add("bottom-dock-active");document.body.classList.remove("bottom-dock-collapsed")}
 function collapseBottomDock(){updateBottomDockModalState();if(isBottomDockSuppressed())return;document.body.classList.remove("bottom-dock-active");document.body.classList.add("bottom-dock-collapsed")}
-function initBottomDock(){if(window.__bottomDockBound)return;window.__bottomDockBound=true;const handle=$("bottomDockHandle");if(handle){bindFastAction(handle,()=>showBottomDock())}document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;bottomDockSwipe={x:e.clientX,y:e.clientY,t:Date.now(),edge:e.clientY>(window.innerHeight-38)}},{passive:true});document.addEventListener("pointerup",e=>{if(!bottomDockSwipe)return;const s=bottomDockSwipe;bottomDockSwipe=null;if(!s.edge)return;if(s.y-e.clientY>18&&Date.now()-s.t<650)showBottomDock()},{passive:true});window.addEventListener("scroll",()=>{const y=window.scrollY||0;if(Math.abs(y-bottomDockLastY)<12)return;if(y>bottomDockLastY)collapseBottomDock();else showBottomDock();bottomDockLastY=y},{passive:true});["pointerdown","keydown"].forEach(type=>document.addEventListener(type,e=>{if(e.target?.closest?.(".bottom-nav,.bottom-dock-handle"))return;scheduleBottomDockCollapse()},{passive:true}));bottomDockObserver=new MutationObserver(()=>updateBottomDockModalState());bottomDockObserver.observe(document.body,{attributes:true,subtree:true,attributeFilter:["hidden","class","style"]});showBottomDock()}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>{btn.classList.add("is-pressed");showBottomDock()};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab);showBottomDock()}})}
+function initBottomDock(){if(window.__bottomDockBound)return;window.__bottomDockBound=true;const handle=$("bottomDockHandle");if(handle){bindFastAction(handle,()=>document.body.classList.contains("bottom-dock-active")?collapseBottomDock():showBottomDock())}document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;bottomDockSwipe={x:e.clientX,y:e.clientY,t:Date.now(),edge:e.clientY>(window.innerHeight-38)}},{passive:true});document.addEventListener("pointerup",e=>{if(!bottomDockSwipe)return;const s=bottomDockSwipe;bottomDockSwipe=null;if(!s.edge)return;if(s.y-e.clientY>18&&Date.now()-s.t<650)showBottomDock()},{passive:true});window.addEventListener("scroll",()=>collapseBottomDock(),{passive:true});["pointerdown","keydown"].forEach(type=>document.addEventListener(type,e=>{if(e.target?.closest?.(".bottom-nav,.bottom-dock-handle"))return;collapseBottomDock()},{passive:true}));bottomDockObserver=new MutationObserver(()=>updateBottomDockModalState());bottomDockObserver.observe(document.body,{attributes:true,subtree:true,attributeFilter:["hidden","class","style"]});collapseBottomDock()}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab);collapseBottomDock()}})}
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
