@@ -133,7 +133,22 @@ function runPushSystemGuard() {
     "export async function runDailyPushScheduler",
     "regenerateDailyContent",
     "sendDailyPushBatch",
-    "include_subscription_ids"
+    "include_subscription_ids",
+    "onesignal-timezone",
+    "duaDeliveryWindow"
+  ]);
+
+  mustInclude("daily-push.json", read("content/admin/daily-push.json"), [
+    '"deliveryMode": "onesignal-timezone"'
+  ]);
+
+  mustExist(".github/workflows/daily-push-schedule.yml");
+  mustExist("scripts/send-daily-content-push.js");
+
+  mustInclude("send-daily-content-push.js", read("scripts/send-daily-content-push.js"), [
+    "delayed_option",
+    "delivery_time_of_day",
+    "runDailyContentPushSchedule"
   ]);
 
   mustInclude("jummah-push-scheduler.js", read("cloudflare/jummah-push-scheduler.js"), [

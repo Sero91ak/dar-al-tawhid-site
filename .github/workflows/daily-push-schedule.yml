@@ -1,0 +1,30 @@
+name: Daily Push Schedule (09:00 + 12:00)
+
+# Einfachster Weg: 1× nachts bei OneSignal einplanen – OneSignal liefert um 09:00/12:00 Ortszeit.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 22 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  schedule-onesignal-daily:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Plan Duʿāʾ (09:00) and Empfehlung (12:00) via OneSignal timezone
+        env:
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+        run: node scripts/send-daily-content-push.js

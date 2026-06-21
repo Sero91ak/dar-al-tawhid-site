@@ -89,6 +89,25 @@ function isCatchupWindow(localParts, hour, untilHour) {
   return true;
 }
 
+function deliveryMode(config) {
+  return String(config?.deliveryMode || "onesignal-timezone").trim();
+}
+
+/** OneSignal plant 09:00/12:00 – Worker sendet nur Nachhol-Pushs, keine Duplikate. */
+function duaDeliveryWindow(localParts, duaHour, config) {
+  if (deliveryMode(config) === "onesignal-timezone") {
+    return isCatchupWindow(localParts, duaHour + 1, DUA_CATCHUP_UNTIL_HOUR);
+  }
+  return isSendWindow(localParts, duaHour) || isCatchupWindow(localParts, duaHour, DUA_CATCHUP_UNTIL_HOUR);
+}
+
+function recDeliveryWindow(localParts, recHour, config) {
+  if (deliveryMode(config) === "onesignal-timezone") {
+    return isCatchupWindow(localParts, recHour + 1, REC_CATCHUP_UNTIL_HOUR);
+  }
+  return isSendWindow(localParts, recHour) || isCatchupWindow(localParts, recHour, REC_CATCHUP_UNTIL_HOUR);
+}
+
 async function supabaseFetch(env, path, options = {}) {
   const key = supabaseKey(env);
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
@@ -461,7 +480,8 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   } catch (err) {
     const status = {
       ok: false,
-      schedulerEngine: "cloudflare-worker-daily-v2-batch",
+      schedulerEngine: "cloudflare-worker-daily-v3-catchup",
+      deliveryMode: deliveryMode(config),
       schedulerStatus: "error",
       updatedAt: now.toISOString(),
       lastError: err.message || String(err),
@@ -478,7 +498,8 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   if (!duaItem && !recItem) {
     const status = {
       ok: false,
-      schedulerEngine: "cloudflare-worker-daily-v2-batch",
+      schedulerEngine: "cloudflare-worker-daily-v3-catchup",
+      deliveryMode: deliveryMode(config),
       schedulerStatus: "warning",
       updatedAt: now.toISOString(),
       lastError: "Kein aktiver Tagesinhalt in content/updates/daily.json für heute – Push nicht gesendet (keine Zufallsauswahl)",
@@ -509,8 +530,8 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
     const recHour = Number(config?.recommendation?.hour ?? REC_HOUR);
 
-    const duaWindow = isSendWindow(local, duaHour) || isCatchupWindow(local, duaHour, DUA_CATCHUP_UNTIL_HOUR);
-    const recWindow = isSendWindow(local, recHour) || isCatchupWindow(local, recHour, REC_CATCHUP_UNTIL_HOUR);
+    const duaWindow = duaDeliveryWindow(local, duaHour, config);
+    const recWindow = recDeliveryWindow(local, recHour, config);
 
     if (duaOn && duaItem && config?.dailyDua?.enabled !== false && duaWindow) {
       if (row.last_dua_push_date === dateKey) {
@@ -536,7 +557,8 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
 
   const status = {
     ok: stats.errors === 0,
-    schedulerEngine: "cloudflare-worker-daily-v2-batch",
+    schedulerEngine: "cloudflare-worker-daily-v3-catchup",
+    deliveryMode: deliveryMode(config),
     schedulerStatus: stats.errors ? "error" : "success",
     updatedAt: now.toISOString(),
     usersChecked: stats.checked,

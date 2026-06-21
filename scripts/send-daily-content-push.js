@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-/* DAR AL TAWḤID – tägliche Inhalts-Pushs
-   Plant Duʿāʾ/Empfehlung über OneSignal-Zeitzone-Zustellung ohne Player-API. */
+/* DAR AL TAWḤID – tägliche Pushs (09:00 Duʿāʾ · 12:00 Empfehlung)
+   Einfachster Weg: 1× nachts bei OneSignal einplanen → jeder Nutzer bekommt
+   Push zur Ortszeit (delayed_option: timezone). Kein 5-Minuten-Cron nötig. */
 
 const fs = require("node:fs");
 const path = require("node:path");
@@ -13,10 +14,10 @@ const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc
 const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_APP_API_KEY || process.env.ONESIGNAL_API_KEY;
 const SITE_ORIGIN = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/#.*$/, "").replace(/\/$/, "");
 const DRY_RUN = process.env.DRY_RUN === "1" || process.env.DRY_RUN === "true";
-const DEFAULT_DUA_HOUR = Number(process.env.DAILY_DUA_HOUR || 9);
-const DEFAULT_RECOMMENDATION_HOUR = Number(process.env.DAILY_RECOMMENDATION_HOUR || 12);
+const TZ = "Europe/Berlin";
 const ROOT = path.resolve(__dirname, "..");
 const CONFIG_PATH = path.join(ROOT, "content/admin/daily-push.json");
+const DAILY_JSON_PATH = path.join(ROOT, "content/updates/daily.json");
 
 if (!API_KEY && !DRY_RUN) {
   console.error("Fehlt: GitHub Secret ONESIGNAL_APP_API_KEY");
@@ -31,58 +32,7 @@ function readJson(file, fallback) {
   }
 }
 
-function stripMarkdown(text) {
-  return String(text || "")
-    .replace(/^---[\s\S]*?---\s*/m, "")
-    .replace(/[`*_>#-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function parseFrontMatter(markdown, filename) {
-  const text = String(markdown || "");
-  const data = { id: filename.replace(/\.md$/i, ""), title: "", statement: "", category: "", scholar: "" };
-  const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
-
-  if (match) {
-    match[1].split(/\r?\n/).forEach((line) => {
-      const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-      if (!m) return;
-      data[m[1]] = m[2].trim().replace(/^["']|["']$/g, "");
-    });
-  }
-
-  data.statement = stripMarkdown(text.slice(match ? match[0].length : 0));
-  if (!data.title) data.title = filename.replace(/[-_]+/g, " ").replace(/\.md$/i, "");
-  if (!data.id) data.id = filename.replace(/\.md$/i, "");
-
-  return data;
-}
-
-function loadDuas() {
-  const duas = readJson(path.join(ROOT, "content/duas/duas.json"), []);
-  return Array.isArray(duas)
-    ? duas.filter((d) => d && d.id && d.title && (d.de || d.occasion))
-    : [];
-}
-
-function loadPosts() {
-  const index = readJson(path.join(ROOT, "content/posts/posts-index.json"), { files: [] });
-  const files = Array.isArray(index.files) ? index.files : [];
-  const posts = [];
-
-  for (const file of files) {
-    const name = typeof file === "string" ? file : file && file.name;
-    if (!name || !name.endsWith(".md")) continue;
-    const full = path.join(ROOT, "content/posts", name);
-    if (!fs.existsSync(full)) continue;
-    posts.push(parseFrontMatter(fs.readFileSync(full, "utf8"), name));
-  }
-
-  return posts.filter((p) => p.id && p.title && p.statement);
-}
-
-function dayKey(date, timeZone) {
+function dayKey(date, timeZone = TZ) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone,
     year: "numeric",
@@ -91,43 +41,14 @@ function dayKey(date, timeZone) {
   }).format(date);
 }
 
-function stablePick(items, dateKey, multiplier) {
-  if (!items.length) return null;
-  const n = Number(dateKey.replaceAll("-", ""));
-  return items[Math.abs(n * multiplier) % items.length];
-}
-
 function dailyConfig() {
   const fallback = {
     automatic: true,
-    dailyDua: { enabled: true, hour: DEFAULT_DUA_HOUR },
-    recommendation: { enabled: true, hour: DEFAULT_RECOMMENDATION_HOUR }
+    deliveryMode: "onesignal-timezone",
+    dailyDua: { enabled: true, hour: 9, title: "Duʿāʾ des Tages" },
+    recommendation: { enabled: true, hour: 12, title: "Heute empfohlen" }
   };
   return { ...fallback, ...readJson(CONFIG_PATH, {}) };
-}
-
-function pickDailyDua(duas, config, dateKey, timeZone) {
-  const manualId = config?.dailyDua?.id;
-  const manual = manualId ? duas.find((d) => String(d.id) === String(manualId)) : null;
-  if (manual) return manual;
-  if (!duas.length) return null;
-  const parts = dateKey.split("-");
-  const start = Date.UTC(Number(parts[0]), 0, 0);
-  const current = Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-  const day = Math.floor((current - start) / 86400000);
-  return duas[Math.abs(day) % duas.length];
-}
-
-function pickRecommendation(posts, config, dateKey) {
-  const manualId = config?.recommendation?.id;
-  const manual = manualId ? posts.find((p) => String(p.id) === String(manualId)) : null;
-  if (manual) return manual;
-  if (!posts.length) return null;
-  const parts = dateKey.split("-");
-  const start = Date.UTC(Number(parts[0]), 0, 0);
-  const current = Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-  const day = Math.floor((current - start) / 86400000);
-  return posts[Math.abs(day * 7) % posts.length];
 }
 
 function formatDeliveryTime(hour24) {
@@ -138,30 +59,40 @@ function formatDeliveryTime(hour24) {
   return `${hour - 12}:00PM`;
 }
 
-function shouldScheduleDailyNotifications(now) {
-  if (process.env.FORCE_DAILY_SCHEDULE === "1") return true;
-  const hour = now.getUTCHours();
-  const minute = now.getUTCMinutes();
-  return hour === 0 && minute < 30;
+function buildBody(item, fallback) {
+  const title = String(item?.title || "").trim();
+  const snippet = String(item?.snippet || item?.statement || item?.de || "").trim();
+  const line = [title, snippet].filter(Boolean).join(snippet ? " – " : "");
+  return line || fallback;
 }
 
-async function scheduleDailyNotification(kind, item, config, now) {
+function loadDailyItems(dateKey) {
+  const daily = readJson(DAILY_JSON_PATH, null);
+  if (daily?.date === dateKey) {
+    return {
+      dua: daily.dua?.id ? daily.dua : null,
+      recommendation: daily.recommendation?.id ? daily.recommendation : null
+    };
+  }
+  return { dua: null, recommendation: null };
+}
+
+async function scheduleDailyNotification(kind, item, config, dateKey) {
   const isDua = kind === "dua";
   const section = isDua ? config.dailyDua : config.recommendation;
-  if (section?.enabled === false || !item) return;
+  if (section?.enabled === false || !item?.id) return { ok: false, skipped: true, kind };
 
   const tagName = isDua ? "daily_dua_notifications" : "daily_recommendation_notifications";
-  const title = isDua ? "Duʿāʾ des Tages" : "Heute empfohlen";
-  const body = isDua
-    ? String(section?.body || "Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ.")
-    : String(section?.body || "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.");
-  const hour = Number(section?.hour || (isDua ? DEFAULT_DUA_HOUR : DEFAULT_RECOMMENDATION_HOUR));
+  const title = String(section?.title || (isDua ? "Duʿāʾ des Tages" : "Heute empfohlen"));
+  const fallbackBody = isDua
+    ? "Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ."
+    : "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.";
+  const body = buildBody(item, fallbackBody);
+  const hour = Number(section?.hour ?? (isDua ? 9 : 12));
   const deliveryTime = formatDeliveryTime(hour);
-  const date = dayKey(now, "UTC");
   const url = isDua
     ? `${SITE_ORIGIN}/#dua/${encodeURIComponent(item.id)}`
     : `${SITE_ORIGIN}/#post/${encodeURIComponent(item.id)}`;
-  const idempotency = `dar-${kind}-${date}`;
 
   const payload = withNotificationIcons({
     app_id: APP_ID,
@@ -173,54 +104,59 @@ async function scheduleDailyNotification(kind, item, config, now) {
     isAnyWeb: true,
     delayed_option: "timezone",
     delivery_time_of_day: deliveryTime,
-    idempotency_key: idempotency,
+    idempotency_key: `dar-${kind}-${dateKey}`,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
-      date,
+      date: dateKey,
       content_id: item.id,
-      source: "dar-daily-content-push"
+      source: "dar-daily-onesignal-timezone"
     }
   }, SITE_ORIGIN);
 
   if (DRY_RUN) {
-    console.log(`[DRY_RUN] geplant: ${title} | ${deliveryTime} Ortszeit | ${item.id}`);
-    return;
+    console.log(`[DRY_RUN] ${title} · ${deliveryTime} Ortszeit · ${item.id}`);
+    return { ok: true, dryRun: true, kind, deliveryTime, contentId: item.id };
   }
 
-  try {
-    const result = await postOneSignalNotification(payload, API_KEY, { retries: 3 });
-    console.log(`Geplant: ${title} | ${deliveryTime} Ortszeit | ${item.id} → ${result.text}`);
-  } catch (error) {
-    console.warn(`Planung fehlgeschlagen (${title}): ${error.message || error}`);
-  }
+  const result = await postOneSignalNotification(payload, API_KEY, { retries: 3 });
+  console.log(`Geplant: ${title} · ${deliveryTime} Ortszeit · ${item.id} → ${result.text}`);
+  return { ok: true, kind, deliveryTime, contentId: item.id, result: result.text };
 }
 
-(async function main() {
-  const now = process.env.NOW ? new Date(process.env.NOW) : new Date();
+async function runDailyContentPushSchedule(options = {}) {
+  const now = options.now ? new Date(options.now) : new Date();
   const config = dailyConfig();
-  const duas = loadDuas();
-  const posts = loadPosts();
-  const berlinDate = dayKey(now, "Europe/Berlin");
-  const dailyDua = pickDailyDua(duas, config, berlinDate, "Europe/Berlin");
-  const recommendation = pickRecommendation(posts, config, berlinDate);
+  const dateKey = dayKey(now, TZ);
+  const { dua, recommendation } = loadDailyItems(dateKey);
+  const results = [];
 
-  console.log(`Tägliche Push-Prüfung: ${now.toISOString()} | Duʿāʾ=${duas.length} | Beiträge=${posts.length}`);
+  console.log(`OneSignal-Tagesplanung: ${now.toISOString()} · Datum ${dateKey} · Modus ${config.deliveryMode || "onesignal-timezone"}`);
 
-  if (!shouldScheduleDailyNotifications(now)) {
-    console.log(`Tages-Push-Planung übersprungen (${now.toISOString()} – Planung nur 00:00 UTC).`);
-    return;
+  if (!dua) console.warn("Hinweis: Kein Duʿāʾ in content/updates/daily.json für heute – Planung übersprungen.");
+  if (!recommendation) console.warn("Hinweis: Keine Empfehlung in daily.json für heute – Planung übersprungen.");
+
+  if (config.dailyDua?.enabled !== false && dua) {
+    results.push(await scheduleDailyNotification("dua", dua, config, dateKey));
   }
-
-  if (!dailyDua) console.log("Keine gültige Duʿāʾ gefunden.");
-  if (!recommendation) console.log("Kein gültiger Empfehlungs-Beitrag gefunden.");
-
-  if (config.dailyDua?.enabled !== false && dailyDua) {
-    await scheduleDailyNotification("dua", dailyDua, config, now);
-  }
-
   if (config.recommendation?.enabled !== false && recommendation) {
-    await scheduleDailyNotification("recommendation", recommendation, config, now);
+    results.push(await scheduleDailyNotification("recommendation", recommendation, config, dateKey));
   }
-})().catch((error) => {
-  console.error(error.message || error);
-});
+
+  return { ok: results.some((r) => r.ok), dateKey, results };
+}
+
+if (require.main === module) {
+  runDailyContentPushSchedule()
+    .then((out) => {
+      if (!out.ok) {
+        console.error("Keine Pushs geplant – daily.json für heute prüfen.");
+        process.exit(1);
+      }
+    })
+    .catch((error) => {
+      console.error(error.message || error);
+      process.exit(1);
+    });
+}
+
+module.exports = { runDailyContentPushSchedule };
