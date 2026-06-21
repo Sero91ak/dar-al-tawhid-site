@@ -6376,7 +6376,7 @@ html[data-theme="royal"] .post-intro-dialog{background:linear-gradient(180deg,rg
 html[data-theme="bordeaux"] .post-intro-dialog{background:linear-gradient(180deg,rgba(48,12,24,.98),rgba(18,6,12,.98))}
 @media(max-width:700px){.post-intro-head h3{font-size:22px}.post-intro-body{font-size:14.5px;line-height:1.62}.post-intro-dialog{padding:16px;border-radius:20px}}
 
-/* TEST APP: Premium einziehbares Bottom-App-Dock */
+/* TEST APP: Premium einziehbares Bottom-App-Dock über den vorhandenen Mehr-Tab */
 body.has-bottom-nav{padding-bottom:calc(42px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))!important}
 .bottom-nav{
   will-change:transform,opacity!important;
@@ -6385,78 +6385,69 @@ body.has-bottom-nav{padding-bottom:calc(42px + max(0px,calc(env(safe-area-inset-
   pointer-events:none!important;
   transition:transform .34s cubic-bezier(.22,.78,.22,1),opacity .24s ease,filter .24s ease!important;
 }
-.bottom-dock-handle{
-  position:fixed;
-  right:max(12px,env(safe-area-inset-right,0px));
-  bottom:calc(max(12px,env(safe-area-inset-bottom,0px)) + 8px);
-  z-index:41;
-  min-width:66px;
-  height:38px;
-  border:1px solid rgba(239,215,142,.34);
-  border-radius:999px;
-  background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.035));
-  -webkit-backdrop-filter:blur(14px) saturate(1.12);
-  backdrop-filter:blur(14px) saturate(1.12);
-  box-shadow:0 10px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16);
-  transform:translate3d(0,0,0);
+body.bottom-dock-collapsed #appChromeDock .bottom-nav{
+  width:76px!important;
+  min-width:76px!important;
+  margin-left:auto!important;
+  margin-right:max(12px,env(safe-area-inset-right,0px))!important;
+  margin-bottom:calc(max(10px,env(safe-area-inset-bottom,0px)) + 8px)!important;
+  padding:4px!important;
+  border-radius:999px!important;
+  transform:translate3d(0,0,0) scale(1)!important;
   opacity:1;
-  pointer-events:auto;
-  cursor:pointer;
-  touch-action:manipulation;
-  color:var(--gold2);
-  font:950 12px/1 var(--sans);
-  letter-spacing:.04em;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:0 13px;
-  text-shadow:0 1px 10px rgba(0,0,0,.46);
-  transition:transform .30s cubic-bezier(.22,.78,.22,1),opacity .22s ease,box-shadow .22s ease;
+  pointer-events:auto!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
 }
-.bottom-dock-handle:before{
+body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn:not([data-bottom-nav="more"]){
+  display:none!important;
+}
+body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]{
+  display:flex!important;
+  min-height:42px!important;
+  max-width:none!important;
+  width:100%!important;
+  border-radius:999px!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  color:var(--gold2)!important;
+  text-shadow:0 1px 10px rgba(0,0,0,.50)!important;
+}
+body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]:after{
   content:"";
   position:absolute;
-  left:12px;
-  right:12px;
+  left:14px;
+  right:14px;
   bottom:6px;
   height:2px;
   border-radius:999px;
-  background:linear-gradient(90deg,transparent,rgba(239,215,142,.82),transparent);
+  background:linear-gradient(90deg,transparent,rgba(239,215,142,.86),transparent);
   box-shadow:0 0 12px rgba(239,215,142,.22);
 }
-body.bottom-dock-collapsed .bottom-dock-handle{opacity:1;pointer-events:auto}
 body.bottom-dock-active .bottom-nav,
 body.bottom-dock-active #appChromeDock .bottom-nav{
   transform:translate3d(0,0,0) scale(1)!important;
   opacity:1!important;
   pointer-events:auto!important;
 }
-body.bottom-dock-active .bottom-dock-handle{
-  transform:translate3d(0,-4px,0);
-  box-shadow:0 14px 34px rgba(0,0,0,.30),0 0 0 1px rgba(239,215,142,.12),inset 0 1px 0 rgba(255,255,255,.18);
-}
 body.bottom-dock-modal-open .bottom-nav,
-body.bottom-dock-modal-open .bottom-dock-handle,
 body.image-editor-mode .bottom-nav,
-body.image-editor-mode .bottom-dock-handle,
-body.image-editor-test-mode .bottom-nav,
-body.image-editor-test-mode .bottom-dock-handle{display:none!important}
+body.image-editor-test-mode .bottom-nav{display:none!important}
 body.bottom-dock-modal-open .float-actions,
 body.image-editor-mode .float-actions,
 body.image-editor-test-mode .float-actions{display:none!important}
 body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
 body.bottom-dock-collapsed.has-bottom-nav .float-actions{bottom:calc(54px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
-html[data-theme="light"] .bottom-dock-handle,
-html[data-theme="soft"] .bottom-dock-handle{
+html[data-theme="light"] body.bottom-dock-collapsed #appChromeDock .bottom-nav,
+html[data-theme="soft"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{
   background:linear-gradient(180deg,rgba(255,252,242,.82),rgba(255,246,229,.52));
   border-color:rgba(120,90,40,.22);
   box-shadow:0 10px 24px rgba(120,90,40,.12),inset 0 1px 0 rgba(255,255,255,.60);
 }
-html[data-theme="royal"] .bottom-dock-handle{background:linear-gradient(180deg,rgba(14,34,64,.78),rgba(6,14,30,.52));border-color:rgba(239,215,142,.38)}
-html[data-theme="aurora"] .bottom-dock-handle{background:linear-gradient(180deg,rgba(9,44,39,.78),rgba(4,18,18,.56));border-color:rgba(231,213,157,.36)}
-html[data-theme="bordeaux"] .bottom-dock-handle{background:linear-gradient(180deg,rgba(76,18,32,.80),rgba(24,7,12,.58));border-color:rgba(214,190,132,.38)}
+html[data-theme="royal"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{background:linear-gradient(180deg,rgba(14,34,64,.78),rgba(6,14,30,.52));border-color:rgba(239,215,142,.38)}
+html[data-theme="aurora"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{background:linear-gradient(180deg,rgba(9,44,39,.78),rgba(4,18,18,.56));border-color:rgba(231,213,157,.36)}
+html[data-theme="bordeaux"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{background:linear-gradient(180deg,rgba(76,18,32,.80),rgba(24,7,12,.58));border-color:rgba(214,190,132,.38)}
 @media(prefers-reduced-motion:reduce){
-  .bottom-nav,.bottom-dock-handle{transition:opacity .12s linear!important}
+  .bottom-nav{transition:opacity .12s linear!important}
   .bottom-nav{transform:translate3d(0,calc(100% + 18px),0)!important}
   body.bottom-dock-active .bottom-nav,
   body.bottom-dock-active #appChromeDock .bottom-nav{transform:translate3d(0,0,0)!important}
@@ -6566,7 +6557,6 @@ window.DAR_ANALYTICS_CONFIG={
   <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān"><span class="nav-icon" aria-hidden="true">📖</span><span>Qurʾān</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Weitere Bereiche"><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
-<button id="bottomDockHandle" class="bottom-dock-handle" type="button" aria-label="Navigation öffnen" title="Navigation öffnen">Mehr</button>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
 <div class="float-actions is-expanded" id="floatActions" aria-label="Schnellzugriff">
@@ -7081,7 +7071,7 @@ function tabSwipeBlockedTarget(t){return!!(t&&t.closest("input,textarea,select,b
 function lerpTabSwipe(a,b,t){return a+(b-a)*t}
 function tabSwipeEdgeDx(dx,cur){if(cur===0&&dx>0)return dx*.22;if(cur===BOTTOM_NAV_TABS.length-1&&dx<0)return dx*.22;return dx}
 function applyTabSwipePreview(curIdx,targetIdx,progress){const metrics=bottomNavMetrics();if(!metrics.length)return;const from=metrics[curIdx],to=metrics[targetIdx];if(!from||!to)return;const p=Math.max(0,Math.min(1,Math.abs(progress)));setBottomNavPill(lerpTabSwipe(from.left,to.left,p),lerpTabSwipe(from.width,to.width,p),true);highlightBottomNavIndex(p>=.5?targetIdx:curIdx)}
-function ensureBottomNavDock(){const nav=$("bottomNav");if(!nav)return;let dock=$("appChromeDock");if(!dock){dock=document.createElement("div");dock.id="appChromeDock";dock.className="app-chrome-dock";dock.setAttribute("data-nav-dock","bottom");document.body.appendChild(dock)}if(dock.parentElement!==document.body)document.body.appendChild(dock);if(nav.parentElement!==dock)dock.appendChild(nav);const handle=$("bottomDockHandle");if(handle&&handle.parentElement!==dock)dock.appendChild(handle);nav.classList.remove("is-pill-dragging");nav.style.removeProperty("top");nav.style.removeProperty("transform");nav.style.removeProperty("position");document.body.classList.add("has-bottom-nav")}
+function ensureBottomNavDock(){const nav=$("bottomNav");if(!nav)return;let dock=$("appChromeDock");if(!dock){dock=document.createElement("div");dock.id="appChromeDock";dock.className="app-chrome-dock";dock.setAttribute("data-nav-dock","bottom");document.body.appendChild(dock)}if(dock.parentElement!==document.body)document.body.appendChild(dock);if(nav.parentElement!==dock)dock.appendChild(nav);nav.classList.remove("is-pill-dragging");nav.style.removeProperty("top");nav.style.removeProperty("transform");nav.style.removeProperty("position");document.body.classList.add("has-bottom-nav")}
 function verifyBottomNavDock(){const nav=$("bottomNav");const dock=$("appChromeDock");if(!nav||!dock||document.documentElement.classList.contains("reader-mode"))return;if(nav.parentElement!==dock){ensureBottomNavDock();return}const rect=nav.getBoundingClientRect();const vh=window.visualViewport?.height||window.innerHeight||0;if(vh>0&&rect.height>0&&rect.bottom>0&&rect.bottom<vh-24){ensureBottomNavDock()}}
 function initBottomNavGuard(){if(window.__bottomNavGuardBound)return;window.__bottomNavGuardBound=true;ensureBottomNavDock();let scrollTimer=0;const check=()=>{ensureBottomNavDock();verifyBottomNavDock()};window.addEventListener("scroll",()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(check,40)},{passive:true});window.addEventListener("resize",check,{passive:true});if(window.visualViewport){window.visualViewport.addEventListener("resize",check,{passive:true});window.visualViewport.addEventListener("scroll",check,{passive:true})}try{const obs=new MutationObserver(muts=>{if(muts.some(m=>Array.from(m.addedNodes).some(n=>n.id==="bottomNav"||n.querySelector?.("#bottomNav"))||Array.from(m.removedNodes).some(n=>n.id==="bottomNav"||n.querySelector?.("#bottomNav"))))check()});obs.observe(document.body,{childList:true,subtree:true})}catch(e){}}
 function resetTabSwipePreview(){const view=$("appView");if(view){view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}const nav=$("bottomNav");if(nav){nav.classList.remove("is-pill-dragging");nav.style.removeProperty("--nav-pill-left");nav.style.removeProperty("--nav-pill-width")}ensureBottomNavDock();updateBottomNav(currentRoute)}
@@ -7099,8 +7089,8 @@ function isBottomDockSuppressed(){return document.documentElement.classList.cont
 function updateBottomDockModalState(){document.body.classList.toggle("bottom-dock-modal-open",isBottomDockSuppressed())}
 function showBottomDock(){updateBottomDockModalState();if(isBottomDockSuppressed())return;document.body.classList.add("bottom-dock-active");document.body.classList.remove("bottom-dock-collapsed")}
 function collapseBottomDock(){updateBottomDockModalState();if(isBottomDockSuppressed())return;document.body.classList.remove("bottom-dock-active");document.body.classList.add("bottom-dock-collapsed")}
-function initBottomDock(){if(window.__bottomDockBound)return;window.__bottomDockBound=true;const handle=$("bottomDockHandle");if(handle){bindFastAction(handle,()=>document.body.classList.contains("bottom-dock-active")?collapseBottomDock():showBottomDock())}document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;bottomDockSwipe={x:e.clientX,y:e.clientY,t:Date.now(),edge:e.clientY>(window.innerHeight-38)}},{passive:true});document.addEventListener("pointerup",e=>{if(!bottomDockSwipe)return;const s=bottomDockSwipe;bottomDockSwipe=null;if(!s.edge)return;if(s.y-e.clientY>18&&Date.now()-s.t<650)showBottomDock()},{passive:true});window.addEventListener("scroll",()=>collapseBottomDock(),{passive:true});["pointerdown","keydown"].forEach(type=>document.addEventListener(type,e=>{if(e.target?.closest?.(".bottom-nav,.bottom-dock-handle"))return;collapseBottomDock()},{passive:true}));bottomDockObserver=new MutationObserver(()=>updateBottomDockModalState());bottomDockObserver.observe(document.body,{attributes:true,subtree:true,attributeFilter:["hidden","class","style"]});collapseBottomDock()}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab);collapseBottomDock()}})}
+function initBottomDock(){if(window.__bottomDockBound)return;window.__bottomDockBound=true;document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;bottomDockSwipe={x:e.clientX,y:e.clientY,t:Date.now(),edge:e.clientY>(window.innerHeight-38)}},{passive:true});document.addEventListener("pointerup",e=>{if(!bottomDockSwipe)return;const s=bottomDockSwipe;bottomDockSwipe=null;if(!s.edge)return;if(s.y-e.clientY>18&&Date.now()-s.t<650)showBottomDock()},{passive:true});window.addEventListener("scroll",()=>collapseBottomDock(),{passive:true});["pointerdown","keydown"].forEach(type=>document.addEventListener(type,e=>{if(e.target?.closest?.(".bottom-nav"))return;collapseBottomDock()},{passive:true}));bottomDockObserver=new MutationObserver(()=>updateBottomDockModalState());bottomDockObserver.observe(document.body,{attributes:true,subtree:true,attributeFilter:["hidden","class","style"]});collapseBottomDock()}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;if(document.body.classList.contains("bottom-dock-collapsed")&&tab==="more"){showBottomDock();return}navigateBottomNavTab(tab);collapseBottomDock()}})}
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
