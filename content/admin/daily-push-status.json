@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-21T12:20:06.557Z",
+  "updatedAt": "2026-06-21T12:35:06.564Z",
   "usersChecked": 16,
   "duaCandidates": 0,
-  "recCandidates": 16,
-  "sent": 16,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 16,
   "errors": 0,
   "dailyContentDate": "2026-06-21",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Wissen"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 16,
-      "contentId": "tawhid-341-allah-allein-wird-angebetet",
-      "recipients": "f5896dc1-0028-4128-b89f-77fb116ad14d",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
