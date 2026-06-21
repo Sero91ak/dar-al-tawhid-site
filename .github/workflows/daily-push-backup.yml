@@ -1,0 +1,38 @@
+name: Daily Push Backup
+
+# Backup für Duʿāʾ (09:00) & Empfehlung (12:00) – falls Cloudflare-Cron hängen bleibt.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 7 * * *"
+    - cron: "15 7 * * *"
+    - cron: "5 10 * * *"
+    - cron: "15 10 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  run-daily-push-scheduler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger daily push scheduler on worker
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Backup kann nicht laufen"
+            exit 1
+          fi
+          echo "Starte täglichen Push-Scheduler (Batch)…"
+          curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/daily/run" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{}' | tee daily-push-result.json
+          node -e "
+            const fs = require('fs');
+            const data = JSON.parse(fs.readFileSync('daily-push-result.json','utf8'));
+            const st = data.status || {};
+            console.log('sent=', st.sent, 'duaCandidates=', st.duaCandidates, 'recCandidates=', st.recCandidates, 'errors=', st.errors);
+            if (data.ok === false && !st.sent) process.exit(1);
+          "
