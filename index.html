@@ -5923,6 +5923,89 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 .pinned-card.has-icon p,.series-card.has-icon p{font-size:10.5px!important;line-height:1.25!important;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;white-space:normal!important}
 .home-more-body .pinned-box,.home-more-body .series-box{padding:10px!important;margin-bottom:8px!important}
 .home-more-body .pinned-title,.home-more-body .series-title{font-size:18px!important}
+/* LIVE: Startseite Bild-1-Bereiche deutlich kompakter, Text bleibt erhalten. */
+.direct-pick-panel.home-direct-pick{padding:9px 10px!important;margin:0 0 8px!important;border-radius:17px!important}
+.direct-pick-panel.home-direct-pick .direct-pick-title{margin-bottom:7px!important}
+.direct-pick-panel.home-direct-pick .direct-pick-title h3{font-size:20px!important;line-height:1!important}
+.direct-pick-panel.home-direct-pick .direct-pick-title span{display:none!important}
+.direct-pick-panel.home-direct-pick .direct-pick-grid{gap:6px!important}
+.direct-pick-panel.home-direct-pick .direct-pick{height:36px!important;min-height:36px!important;border-radius:13px!important;font-size:11.5px!important;padding:0 8px!important}
+.search-pro-panel{padding:9px 10px!important;margin-bottom:8px!important;border-radius:17px!important}
+.search-pro-panel .search-line{gap:7px!important}
+.search-input-icon{left:11px!important;width:16px!important;height:16px!important}
+.search-input-icon svg{width:16px!important;height:16px!important}
+.search-input-shell .search{height:40px!important;min-height:40px!important;border-radius:14px!important;padding-left:35px!important;font-size:13.5px!important}
+.advanced-toggle{min-height:40px!important;height:40px!important;border-radius:14px!important;padding:0 12px!important;font-size:11px!important}
+.search-helper{display:none!important}
+.section-block:has(#latestGrid){margin-top:10px!important}
+.section-block:has(#latestGrid) .section-head{margin-bottom:7px!important}
+.section-block:has(#latestGrid) .section-head h3{font-size:21px!important;line-height:1.05!important}
+.section-block:has(#latestGrid) .section-head span{font-size:9.5px!important;line-height:1.1!important}
+.section-block:has(#latestGrid) .collapse-toggle{min-height:34px!important;padding:6px 10px!important;font-size:10.5px!important}
+#latestGrid{gap:7px!important}
+#latestGrid .post-card{min-height:86px!important;padding:8px 9px!important;border-radius:15px!important;box-shadow:0 8px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.03)!important}
+#latestGrid .post-card h3{font-size:15.2px!important;line-height:1.05!important;margin:0 0 3px!important;-webkit-line-clamp:1!important}
+#latestGrid .post-meta{margin:2px 0 4px!important;gap:3px!important}
+#latestGrid .post-meta .badge{font-size:8.3px!important;padding:3px 5px!important;line-height:1!important}
+#latestGrid .excerpt{font-size:12px!important;line-height:1.18!important;-webkit-line-clamp:2!important;margin:0!important}
+#latestGrid .source-preview{font-size:8.7px!important;line-height:1.12!important;margin-top:4px!important;padding-top:4px!important;-webkit-line-clamp:1!important}
+@media(max-width:390px){
+  .direct-pick-panel.home-direct-pick .direct-pick-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .direct-pick-panel.home-direct-pick .direct-pick{font-size:10.8px!important;padding:0 6px!important}
+  .search-pro-panel .search-line{grid-template-columns:1fr!important}
+  .advanced-toggle{width:100%!important}
+}
+/* LIVE: Obere Startseite aus Bild 1 sichtbar dichter ziehen. */
+.current-focus{padding:9px 10px!important;margin:0 0 8px!important;border-radius:17px!important}
+.current-focus-head{margin-bottom:7px!important;align-items:center!important}
+.current-focus-head span{font-size:8px!important;margin-bottom:2px!important}
+.current-focus-head h3{font-size:21px!important;line-height:1!important}
+.current-focus-all{min-height:32px!important;padding:5px 10px!important;font-size:9.5px!important}
+.current-focus-list{gap:6px!important}
+.current-focus-row{grid-template-columns:32px minmax(0,1fr) auto!important;gap:8px!important;padding:8px!important;border-radius:14px!important;min-height:66px!important}
+.current-focus-icon{width:32px!important;height:32px!important;border-radius:11px!important;font-size:16px!important}
+.current-focus-text b{font-size:15.5px!important;line-height:1.08!important;-webkit-line-clamp:1;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.current-focus-text p{font-size:10.5px!important;line-height:1.22!important;margin:2px 0 3px!important;-webkit-line-clamp:1!important}
+.current-focus-text small{font-size:8.2px!important;line-height:1!important}
+.current-focus-arrow{font-size:16px!important}
+.quran-home-teaser{padding:10px 11px!important;margin:0 0 8px!important;border-radius:17px!important}
+.quran-home-teaser-head{margin-bottom:7px!important}
+.quran-home-teaser-label{font-size:8.8px!important;margin-bottom:4px!important}
+.quran-home-teaser h3{font-size:23px!important;line-height:1.02!important}
+.quran-home-teaser-note{font-size:11px!important;line-height:1.34!important;margin:6px 0 0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.quran-home-teaser-btn{min-height:34px!important;padding:6px 12px!important;font-size:10.5px!important;margin-top:7px!important}
+.prayer-quick-card.premium-surface{padding:10px 11px!important;margin-bottom:8px!important;border-radius:17px!important}
+.prayer-quick-card .prayer-quick-head{margin-bottom:7px!important}
+.prayer-quick-label{font-size:8.8px!important;margin-bottom:3px!important}
+.prayer-quick-title{font-size:22px!important;line-height:1.02!important}
+.prayer-quick-card .prayer-compact-summary{gap:7px!important;margin-top:7px!important}
+.prayer-quick-card .prayer-summary-card{min-height:58px!important;padding:8px!important;border-radius:14px!important}
+.prayer-quick-card .prayer-summary-card b{font-size:8.3px!important;margin-bottom:4px!important;letter-spacing:.11em!important}
+.prayer-quick-card .prayer-summary-card span{font-size:16px!important;line-height:1.04!important}
+.prayer-quick-card .prayer-summary-card small{font-size:9.5px!important;margin-top:4px!important}
+.prayer-quick-card .prayer-detail-toggle{min-height:36px!important;border-radius:14px!important;padding:7px 10px!important;font-size:11px!important;margin-top:8px!important}
+.prayer-quick-card .prayer-push-accordion{margin-top:8px!important}
+.prayer-quick-card .prayer-push-accordion-toggle{min-height:38px!important;padding:7px 9px!important;border-radius:14px!important}
+.prayer-quick-card .prayer-push-accordion-title{font-size:11.5px!important}
+.prayer-quick-card .prayer-push-accordion-summary{font-size:9.3px!important;max-width:42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.popular-panel{padding:10px 11px!important;margin:0 0 8px!important;border-radius:17px!important}
+.popular-panel .section-head{margin-bottom:7px!important}
+.popular-panel .section-head h3{font-size:21px!important;line-height:1.05!important}
+.quran-home-teaser{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;column-gap:10px!important}
+.quran-home-teaser-head{margin:0!important;min-width:0!important}
+.quran-home-teaser-btn{margin:0!important;align-self:center!important;white-space:nowrap!important}
+.prayer-quick-card .prayer-detail-toggle{display:none!important}
+.prayer-quick-card .prayer-push-accordion-toggle{display:grid!important;grid-template-columns:auto minmax(0,1fr) minmax(84px,auto)!important;gap:7px!important;align-items:center!important}
+.popular-list{gap:6px!important}
+.popular-row{padding:8px 9px!important;border-radius:14px!important;gap:9px!important;align-items:center!important}
+.popular-rank{width:28px!important;height:28px!important;flex:0 0 28px!important;font-size:11px!important}
+.popular-row-text h4{font-size:15px!important;line-height:1.08!important;margin:0 0 2px!important;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.popular-row-text span{font-size:9.5px!important;line-height:1.1!important}
+.popular-toggle{min-height:34px!important;margin-top:7px!important;border-radius:14px!important;font-size:10.5px!important}
+@media(max-width:360px){
+  .quran-home-teaser{grid-template-columns:1fr!important}
+  .quran-home-teaser-btn{margin-top:7px!important;justify-self:start!important}
+}
 /* BOTTOM NAV GUARD FINAL: Tab-Leiste bleibt am Viewport, scrollt nie mit dem Inhalt */
 #appChromeDock.app-chrome-dock{position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;z-index:40!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;pointer-events:none!important;transform:none!important;will-change:auto!important;contain:layout style!important;isolation:isolate!important}
 #appChromeDock .bottom-nav,#appChromeDock #bottomNav.bottom-nav{position:relative!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;pointer-events:auto!important;margin:0 max(14px,env(safe-area-inset-left)) calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm) max(14px,env(safe-area-inset-right))!important;width:auto!important;max-width:none!important}
@@ -8244,7 +8327,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v150";
+const APP_BUILD_ID="app-shell-v151";
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${setHeader("Startseite","","App-Übersicht")}${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
