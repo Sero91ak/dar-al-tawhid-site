@@ -6388,15 +6388,15 @@ body.has-bottom-nav{padding-bottom:calc(42px + max(0px,calc(env(safe-area-inset-
 body.bottom-dock-collapsed #appChromeDock .bottom-nav{
   position:fixed!important;
   left:auto!important;
-  right:max(12px,env(safe-area-inset-right,0px))!important;
-  bottom:calc(max(10px,env(safe-area-inset-bottom,0px)) + 8px)!important;
-  width:76px!important;
-  min-width:76px!important;
+  right:max(18px,env(safe-area-inset-right,0px))!important;
+  bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 3mm)!important;
+  width:118px!important;
+  min-width:118px!important;
   margin-left:auto!important;
-  margin-right:max(12px,env(safe-area-inset-right,0px))!important;
-  margin-bottom:calc(max(10px,env(safe-area-inset-bottom,0px)) + 8px)!important;
-  padding:4px!important;
-  border-radius:999px!important;
+  margin-right:max(18px,env(safe-area-inset-right,0px))!important;
+  margin-bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 3mm)!important;
+  padding:5px 7px!important;
+  border-radius:24px!important;
   transform:translate3d(0,0,0) scale(1)!important;
   opacity:1!important;
   pointer-events:auto!important;
@@ -6407,20 +6407,24 @@ body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn:not([data-bottom-nav="
 }
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]{
   display:flex!important;
-  min-height:42px!important;
+  min-height:54px!important;
   max-width:none!important;
   width:100%!important;
-  border-radius:999px!important;
+  border-radius:20px!important;
   opacity:1!important;
   pointer-events:auto!important;
   color:var(--gold2)!important;
   text-shadow:0 1px 10px rgba(0,0,0,.50)!important;
+  gap:3px!important;
+  padding:6px 8px!important;
 }
+body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"] .nav-icon{font-size:20px!important}
+body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"] span:not(.nav-icon){font-size:11px!important;line-height:1.05!important}
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]:after{
   content:"";
   position:absolute;
-  left:14px;
-  right:14px;
+  left:22px;
+  right:22px;
   bottom:6px;
   height:2px;
   border-radius:999px;
