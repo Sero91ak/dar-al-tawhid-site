@@ -6476,6 +6476,9 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
 }
 .post-after-kicker{font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
 .post-after-source{color:var(--cream);font-size:12.5px;line-height:1.35;font-weight:850;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-after-panel :is(.post-after-source,.post-after-row,.post-after-share .share-btn,.post-after-actions .action-btn,.post-after-nav button){color:#fff4df!important}
+.post-after-panel :is(.post-after-kicker,.post-after-details summary,.post-after-share-title,.post-after-row b){color:#e7d59d!important}
+.post-after-panel :is(.post-after-row,.source-note){color:rgba(255,244,223,.76)!important}
 .post-after-state{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line2);border-radius:999px;padding:6px 8px;color:var(--gold2);font-size:10px;font-weight:950;white-space:nowrap;background:rgba(239,215,142,.055)}
 .post-after-details{border-bottom:1px solid var(--line2);padding:8px 0}
 .post-after-details summary{list-style:none;cursor:pointer;color:var(--gold2);font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
@@ -6493,13 +6496,47 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
 .post-after-share{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
 .post-after-share .share-btn{min-height:40px!important;border-radius:15px!important;padding:7px 8px!important;font-size:11px!important;gap:7px!important}
 .post-after-share .share-btn svg{width:20px!important;height:20px!important;flex:0 0 20px!important}
+.post-after-share .share-btn span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.post-after-share .share-btn.tg svg,.post-after-share .share-btn.wa svg,.post-after-share .share-btn.ig svg{filter:drop-shadow(0 2px 8px rgba(0,0,0,.28))}
 .post-after-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
 .post-after-actions .action-btn{min-height:38px!important;padding:8px 10px!important;font-size:11px!important}
 .post-after-nav{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
 .post-after-nav button{min-height:38px!important;border-radius:15px!important;padding:8px 9px!important;font-size:11px!important}
+.post-after-nav button:disabled{opacity:.5!important;color:rgba(255,244,223,.58)!important}
+.related-block{margin-top:14px!important;padding-top:12px!important}
+.related-block h3{font-size:22px!important;margin-bottom:8px!important}
+.related-compact-list{display:grid;gap:8px}
+.related-compact-card{
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:radial-gradient(circle at 16% 0%,rgba(239,215,142,.08),transparent 36%),linear-gradient(145deg,rgba(18,16,12,.92),rgba(7,7,6,.95));
+  padding:10px 11px;
+  cursor:pointer;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  gap:9px;
+  align-items:center;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);
+}
+.related-compact-icon{width:34px;height:34px;border:1px solid var(--line2);border-radius:13px;display:grid;place-items:center;background:rgba(239,215,142,.075);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);font-size:17px}
+.related-compact-card h4{font-family:var(--serif);color:#fff4df;font-size:17px;line-height:1.08;margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.related-compact-card p{color:rgba(255,244,223,.74);font-size:11px;line-height:1.28;margin:0;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.related-compact-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.related-compact-meta span{border:1px solid var(--line2);border-radius:999px;padding:3px 6px;font-size:9px;font-weight:900;color:#fff4df;background:rgba(239,215,142,.055);white-space:nowrap}
+.related-compact-open{color:#e7d59d;font-size:18px;line-height:1}
+.article>.share-panel-v11{
+  border-radius:21px!important;
+  padding:12px!important;
+  margin-top:14px!important;
+}
+.article>.share-panel-v11 .share-row-v11{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.article>.share-panel-v11 .share-btn{min-height:42px!important;border-radius:15px!important;padding:7px 8px!important;font-size:11px!important;gap:7px!important}
+.article>.share-panel-v11 .share-btn svg{width:20px!important;height:20px!important;flex-basis:20px!important}
+.article>.share-panel-v11 .share-help{font-size:10.5px!important;line-height:1.35!important;margin-top:8px!important}
 @media(max-width:390px){
   .post-after-panel{padding:10px;border-radius:19px}
   .post-after-share{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .article>.share-panel-v11 .share-row-v11{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 </style>
 
@@ -8815,7 +8852,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v146";
+const APP_BUILD_ID="app-shell-v147";
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${setHeader("Startseite","","App-Übersicht")}${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
@@ -8834,7 +8871,7 @@ function renderDua(id){
   const d=DUAS.find(x=>x.id===id);
   if(!d)return`${setHeader("Duʿāʾ nicht gefunden","Diese Duʿāʾ konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe den Eintrag.</div>`;
   const imageAction=`<button class="share-btn image-post" data-image-dua-open="${esc(d.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Als Bild teilen</span></button>`;
-  return `<article class="article"><div id="duaReadStart" class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div>${renderReadingFontControl()}<section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.",imageAction)}</article>`;
+  return `<article class="article"><div id="duaReadStart" class="article-title"><div class="eyebrow">${esc(d.type)} · ${esc(d.cat)}</div><h2>${esc(d.title)}</h2></div><div class="article-meta"><span class="badge">${esc(d.occasion)}</span><span class="badge">${esc(d.type)}</span><span class="badge">${esc(d.cat)}</span></div>${renderReadingFontControl()}<section class="dua-detail-box"><div class="dua-label">Arabisch</div><div class="dua-arabic">${esc(d.ar)}</div><div class="dua-label">Lautschrift</div><div class="dua-trans">${esc(d.tr)}</div><div class="dua-label">Deutsch</div><div class="dua-de">${esc(d.de)}</div></section><div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(d.src)}</div><div class="source-note">Hinweis: Bitte Quelle und Wortlaut vor Veröffentlichung prüfen.</div></div>${sharePanel("Duʿāʾ weitergeben",d.title,buildDuaShareText(d),duaUrl(d),"Duʿāʾ kopieren","Diese Duʿāʾ kann direkt per Telegram, WhatsApp, Instagram oder Link geteilt werden.",imageAction)}${renderDuaRelatedCompact(d)}</article>`;
 }
 
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
@@ -8852,6 +8889,12 @@ function buildShareText(post){
 
 function buildAreaShareText(title,description,url){return `${title}\n\n${description||""}\n\n🔗 Öffnen:\n${url}\n\nDAR AL TAWḤID`}
 function buildDuaShareText(d){const url=duaUrl(d);return `${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}\n\n🔗 Duʿāʾ öffnen:\n${url}\n\nDAR AL TAWḤID`}
+function compactShareIcon(kind){
+  if(kind==="telegram")return`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>`;
+  if(kind==="whatsapp")return`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg>`;
+  if(kind==="instagram")return`<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareCompact" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareCompact)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg>`;
+  return"";
+}
 function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText="Beim Teilen wird der Text mit Quelle und Link übernommen.",extraAction=""){
   const shareText=encodeURIComponent(text||"");
   const shareTitle=encodeURIComponent(title||"DAR AL TAWḤID");
@@ -8870,6 +8913,32 @@ function renderSourceStrong(post){
 }
 function getRelatedPosts(post){
   return posts.filter(p=>p.id!==post.id && (p.category===post.category || p.scholar===post.scholar || p.book===post.book)).slice(0,3);
+}
+function compactRelatedTags(...values){
+  return values.filter(Boolean).slice(0,2).map(v=>`<span>${esc(v)}</span>`).join("");
+}
+function relatedCompactCard(post){
+  const quote=findQuote(post)||post.source||"Beitrag öffnen";
+  const tags=compactRelatedTags(normalizePostCategory(post.category),post.scholar||post.book);
+  return `<article class="related-compact-card" data-nav="post" data-value="${esc(post.id)}"><div class="related-compact-icon">📖</div><div><h4>${esc(post.title)}</h4><p>${esc(quote)}</p>${tags?`<div class="related-compact-meta">${tags}</div>`:""}</div><div class="related-compact-open">›</div></article>`;
+}
+function renderRelatedCompact(items,title){
+  if(!items||!items.length)return"";
+  return `<section class="related-block"><h3>${esc(title||"Ähnliche Beiträge")}</h3><div class="related-compact-list">${items.map(relatedCompactCard).join("")}</div></section>`;
+}
+function getRelatedDuas(dua){
+  const baseCat=normalizeDuaCategory(dua);
+  const theme=duaTheme(baseCat);
+  return DUAS.filter(d=>String(d.id)!==String(dua.id)&&(normalizeDuaCategory(d)===baseCat||duaTheme(normalizeDuaCategory(d))===theme)).slice(0,3);
+}
+function duaRelatedCompactCard(dua){
+  const tags=compactRelatedTags(dua.type,normalizeDuaCategory(dua));
+  return `<article class="related-compact-card" data-nav="dua" data-value="${esc(dua.id)}"><div class="related-compact-icon">🙌</div><div><h4>${esc(dua.title)}</h4><p>${esc(dua.occasion||dua.de||dua.src||"Duʿāʾ öffnen")}</p>${tags?`<div class="related-compact-meta">${tags}</div>`:""}</div><div class="related-compact-open">›</div></article>`;
+}
+function renderDuaRelatedCompact(dua){
+  const related=getRelatedDuas(dua);
+  if(!related.length)return"";
+  return `<section class="related-block"><h3>Ähnliche Duʿāʾ</h3><div class="related-compact-list">${related.map(duaRelatedCompactCard).join("")}</div></section>`;
 }
 function renderPostNavigation(post){
   const browseIds=getPostBrowseIds();
@@ -8895,7 +8964,7 @@ function renderPostAfterPanel(post){
   const shareText=encodeURIComponent(text);
   const imageAction=`<button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Bild</span></button>`;
   const nav=renderPostNavigation(post).replace('class="nav-posts"','class="post-after-nav"');
-  return `<section class="post-after-panel"><div class="post-after-head"><div><div class="post-after-kicker">Quellenbereich</div><div class="post-after-source">${esc(post.source||"Keine Quelle hinterlegt.")}</div></div><span class="post-after-state">${s.sourceOk?"✅":"⚠️"} Quelle</span></div><details class="post-after-details"><summary>Details öffnen</summary><div class="post-after-details-body"><div class="post-after-row"><b>Direktlink</b><div class="post-after-links">${links||"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="post-after-row"><b>Scan/PDF</b>${hasScan?"Scan/PDF-Link ist hinterlegt.":"Noch kein Scan/PDF-Link hinterlegt."}</div><div class="source-note">Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></div></details><div class="post-after-checks"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Link</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Markierung</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung</span></div><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(text)}" type="button"><span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(text)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
+  return `<section class="post-after-panel"><div class="post-after-head"><div><div class="post-after-kicker">Quellenbereich</div><div class="post-after-source">${esc(post.source||"Keine Quelle hinterlegt.")}</div></div><span class="post-after-state">${s.sourceOk?"✅":"⚠️"} Quelle</span></div><details class="post-after-details"><summary>Details öffnen</summary><div class="post-after-details-body"><div class="post-after-row"><b>Direktlink</b><div class="post-after-links">${links||"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="post-after-row"><b>Scan/PDF</b>${hasScan?"Scan/PDF-Link ist hinterlegt.":"Noch kein Scan/PDF-Link hinterlegt."}</div><div class="source-note">Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></div></details><div class="post-after-checks"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Link</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Markierung</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung</span></div><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("telegram")}<span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("whatsapp")}<span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(text)}" type="button">${compactShareIcon("instagram")}<span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(text)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -8918,7 +8987,7 @@ function renderPost(id){
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   const related=getRelatedPosts(post);
-  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderPostAfterPanel(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
+  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");updateBottomNav(route);if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",topics:"Kategorien",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",ramadan:"Ramaḍān & ʿĪd",series:"Serie",statistik:"Statistik",more:"Mehr","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
