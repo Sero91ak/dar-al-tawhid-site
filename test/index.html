@@ -6385,6 +6385,7 @@ body.has-bottom-nav{padding-bottom:calc(42px + max(0px,calc(env(safe-area-inset-
   pointer-events:none!important;
   transition:transform .34s cubic-bezier(.22,.78,.22,1),opacity .24s ease,filter .24s ease!important;
 }
+body:not(.bottom-dock-active) #appChromeDock .bottom-nav,
 body.bottom-dock-collapsed #appChromeDock .bottom-nav{
   position:fixed!important;
   left:auto!important;
@@ -6402,9 +6403,11 @@ body.bottom-dock-collapsed #appChromeDock .bottom-nav{
   pointer-events:auto!important;
   box-shadow:0 12px 30px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
 }
+body:not(.bottom-dock-active) #appChromeDock .bottom-nav-btn:not([data-bottom-nav="more"]),
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn:not([data-bottom-nav="more"]){
   display:none!important;
 }
+body:not(.bottom-dock-active) #appChromeDock .bottom-nav-btn[data-bottom-nav="more"],
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]{
   display:flex!important;
   min-height:54px!important;
@@ -6418,8 +6421,11 @@ body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"
   gap:3px!important;
   padding:6px 8px!important;
 }
+body:not(.bottom-dock-active) #appChromeDock .bottom-nav-btn[data-bottom-nav="more"] .nav-icon,
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"] .nav-icon{font-size:20px!important}
+body:not(.bottom-dock-active) #appChromeDock .bottom-nav-btn[data-bottom-nav="more"] span:not(.nav-icon),
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"] span:not(.nav-icon){font-size:11px!important;line-height:1.05!important}
+body:not(.bottom-dock-active) #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]:after,
 body.bottom-dock-collapsed #appChromeDock .bottom-nav-btn[data-bottom-nav="more"]:after{
   content:"";
   position:absolute;
@@ -6445,14 +6451,19 @@ body.image-editor-mode .float-actions,
 body.image-editor-test-mode .float-actions{display:none!important}
 body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
 body.bottom-dock-collapsed.has-bottom-nav .float-actions{bottom:calc(54px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
+html[data-theme="light"] body:not(.bottom-dock-active) #appChromeDock .bottom-nav,
 html[data-theme="light"] body.bottom-dock-collapsed #appChromeDock .bottom-nav,
+html[data-theme="soft"] body:not(.bottom-dock-active) #appChromeDock .bottom-nav,
 html[data-theme="soft"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{
   background:linear-gradient(180deg,rgba(255,252,242,.82),rgba(255,246,229,.52));
   border-color:rgba(120,90,40,.22);
   box-shadow:0 10px 24px rgba(120,90,40,.12),inset 0 1px 0 rgba(255,255,255,.60);
 }
+html[data-theme="royal"] body:not(.bottom-dock-active) #appChromeDock .bottom-nav,
 html[data-theme="royal"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{background:linear-gradient(180deg,rgba(14,34,64,.78),rgba(6,14,30,.52));border-color:rgba(239,215,142,.38)}
+html[data-theme="aurora"] body:not(.bottom-dock-active) #appChromeDock .bottom-nav,
 html[data-theme="aurora"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{background:linear-gradient(180deg,rgba(9,44,39,.78),rgba(4,18,18,.56));border-color:rgba(231,213,157,.36)}
+html[data-theme="bordeaux"] body:not(.bottom-dock-active) #appChromeDock .bottom-nav,
 html[data-theme="bordeaux"] body.bottom-dock-collapsed #appChromeDock .bottom-nav{background:linear-gradient(180deg,rgba(76,18,32,.80),rgba(24,7,12,.58));border-color:rgba(214,190,132,.38)}
 @media(prefers-reduced-motion:reduce){
   .bottom-nav{transition:opacity .12s linear!important}
