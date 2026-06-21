@@ -1,14 +1,15 @@
 {
   "ok": true,
-  "schedulerEngine": "cloudflare-worker-daily-v2-batch",
+  "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
+  "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-21T09:30:06.582Z",
+  "updatedAt": "2026-06-21T09:50:06.538Z",
   "usersChecked": 16,
-  "duaCandidates": 12,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 12,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 4,
+  "duplicates": 16,
   "errors": 0,
   "dailyContentDate": "2026-06-21",
   "currentRecommendation": {
@@ -23,15 +24,5 @@
     "category": "Wissen"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 12,
-      "contentId": "quran-004",
-      "recipients": "04fe4bc5-47e5-4ce5-a078-8d0c73f1c6e8",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
