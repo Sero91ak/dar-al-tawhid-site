@@ -6386,6 +6386,10 @@ body.has-bottom-nav{padding-bottom:calc(42px + max(0px,calc(env(safe-area-inset-
   transition:transform .34s cubic-bezier(.22,.78,.22,1),opacity .24s ease,filter .24s ease!important;
 }
 body.bottom-dock-collapsed #appChromeDock .bottom-nav{
+  position:fixed!important;
+  left:auto!important;
+  right:max(12px,env(safe-area-inset-right,0px))!important;
+  bottom:calc(max(10px,env(safe-area-inset-bottom,0px)) + 8px)!important;
   width:76px!important;
   min-width:76px!important;
   margin-left:auto!important;
@@ -6394,7 +6398,7 @@ body.bottom-dock-collapsed #appChromeDock .bottom-nav{
   padding:4px!important;
   border-radius:999px!important;
   transform:translate3d(0,0,0) scale(1)!important;
-  opacity:1;
+  opacity:1!important;
   pointer-events:auto!important;
   box-shadow:0 12px 30px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
 }
