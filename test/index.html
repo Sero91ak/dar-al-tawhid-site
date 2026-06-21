@@ -6457,6 +6457,50 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
 @media(max-width:700px){
   .quran-surah-card{min-height:76px!important;padding:9px 10px!important}
 }
+/* TEST APP: Beitrags-Nachbereich kompakt und strukturiert */
+.post-after-panel{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.08),transparent 38%),linear-gradient(180deg,rgba(18,16,12,.94),rgba(7,7,6,.96));
+  box-shadow:0 14px 38px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.035);
+  margin-top:14px;
+  padding:12px;
+}
+.post-after-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  align-items:start;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line2);
+}
+.post-after-kicker{font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+.post-after-source{color:var(--cream);font-size:12.5px;line-height:1.35;font-weight:850;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-after-state{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line2);border-radius:999px;padding:6px 8px;color:var(--gold2);font-size:10px;font-weight:950;white-space:nowrap;background:rgba(239,215,142,.055)}
+.post-after-details{border-bottom:1px solid var(--line2);padding:8px 0}
+.post-after-details summary{list-style:none;cursor:pointer;color:var(--gold2);font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
+.post-after-details summary::-webkit-details-marker{display:none}
+.post-after-details summary:after{content:"+";font-size:15px;line-height:1;color:var(--muted)}
+.post-after-details[open] summary:after{content:"-"}
+.post-after-details-body{display:grid;gap:8px;margin-top:9px}
+.post-after-row{display:grid;gap:5px;color:var(--muted);font-size:11px;line-height:1.35}
+.post-after-row b{color:var(--cream);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase}
+.post-after-links{display:flex;flex-wrap:wrap;gap:6px}
+.post-after-links a{border:1px solid var(--line2);border-radius:999px;background:rgba(239,215,142,.06);color:var(--cream);text-decoration:none;padding:7px 10px;font-size:11px;font-weight:900}
+.post-after-checks{display:flex;flex-wrap:wrap;gap:6px;padding:9px 0;border-bottom:1px solid var(--line2)}
+.post-after-checks .status-chip{min-height:28px;border-radius:999px;padding:6px 9px;font-size:10px;line-height:1;font-weight:950;flex:0 1 auto;white-space:nowrap}
+.post-after-share-title{font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);text-align:center;margin:10px 0 8px}
+.post-after-share{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.post-after-share .share-btn{min-height:40px!important;border-radius:15px!important;padding:7px 8px!important;font-size:11px!important;gap:7px!important}
+.post-after-share .share-btn svg{width:20px!important;height:20px!important;flex:0 0 20px!important}
+.post-after-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+.post-after-actions .action-btn{min-height:38px!important;padding:8px 10px!important;font-size:11px!important}
+.post-after-nav{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.post-after-nav button{min-height:38px!important;border-radius:15px!important;padding:8px 9px!important;font-size:11px!important}
+@media(max-width:390px){
+  .post-after-panel{padding:10px;border-radius:19px}
+  .post-after-share{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -8771,7 +8815,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v145";
+const APP_BUILD_ID="app-shell-v146";
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${setHeader("Startseite","","App-Übersicht")}${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const url=routeUrl("topics");const desc="Kategorien auf DAR AL TAWḤID: Beiträge geordnet nach Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.";const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${setHeader("Kategorien","Professionell geordnet nach zentralen Bereichen: Aqīdah, Tawḥīd, Sunnah, Adab, Akhlaq, Fiqh, Qurʾān & Tafsīr, Hadith, Manhaj, Duʿāʾ und Widerlegungen.","Ordner")}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
@@ -8836,6 +8880,23 @@ function renderPostNavigation(post){
   const next=index>=0&&index<ids.length-1?ids[index+1]:null;
   return `<div class="nav-posts"><button type="button" ${prev?`data-nav="post" data-value="${esc(prev)}"`:"disabled"}>← ${prev?"Vorheriger Beitrag":"Kein vorheriger Beitrag"}</button><button type="button" ${next?`data-nav="post" data-value="${esc(next)}"`:"disabled"}>${next?"Nächster Beitrag":"Kein nächster Beitrag"} →</button></div>`;
 }
+function renderPostAfterPanel(post){
+  const links=(post.links||[]).map(link=>{
+    const label=link.label||"Quelle";
+    const url=link.url||link;
+    return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  }).join("");
+  const hasScan=(post.links||[]).some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
+  const s=sourceStatus(post);
+  const url=postUrl(post);
+  const text=buildShareText(post);
+  const shareTitle=post.title||"DAR AL TAWḤID";
+  const shareUrl=encodeURIComponent(url);
+  const shareText=encodeURIComponent(text);
+  const imageAction=`<button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Bild</span></button>`;
+  const nav=renderPostNavigation(post).replace('class="nav-posts"','class="post-after-nav"');
+  return `<section class="post-after-panel"><div class="post-after-head"><div><div class="post-after-kicker">Quellenbereich</div><div class="post-after-source">${esc(post.source||"Keine Quelle hinterlegt.")}</div></div><span class="post-after-state">${s.sourceOk?"✅":"⚠️"} Quelle</span></div><details class="post-after-details"><summary>Details öffnen</summary><div class="post-after-details-body"><div class="post-after-row"><b>Direktlink</b><div class="post-after-links">${links||"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="post-after-row"><b>Scan/PDF</b>${hasScan?"Scan/PDF-Link ist hinterlegt.":"Noch kein Scan/PDF-Link hinterlegt."}</div><div class="source-note">Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></div></details><div class="post-after-checks"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Link</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Markierung</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung</span></div><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(text)}" type="button"><span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(text)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
+}
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
   const url=postUrl(post);
@@ -8857,7 +8918,7 @@ function renderPost(id){
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   const related=getRelatedPosts(post);
-  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderSourceStrong(post)}${renderSourceStatus(post)}${shareLinksForPost(post)}<div class="article-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${renderPostNavigation(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
+  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">Beitrag</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>${renderPostAfterPanel(post)}${related.length?`<section class="related-block"><h3>Ähnliche Beiträge</h3><div class="post-grid">${related.map(postCard).join("")}</div></section>`:""}</article>`;
 }
 function applyHomeFilters(){const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");updateBottomNav(route);if(route.view==="home"){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",topics:"Kategorien",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",ramadan:"Ramaḍān & ʿĪd",series:"Serie",statistik:"Statistik",more:"Mehr","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
