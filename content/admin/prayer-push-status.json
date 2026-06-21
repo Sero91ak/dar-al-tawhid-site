@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-06-21T03:15:16.085Z",
+  "updatedAt": "2026-06-21T12:25:12.077Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-06-21T03:15:16.085Z",
+  "lastCronRun": "2026-06-21T12:25:12.077Z",
   "nextPlannedPush": {
-    "prayer": "Dhuhr",
-    "key": "dhuhr",
+    "prayer": "ʿAṣr",
+    "key": "asr",
     "mode": "advance",
-    "sendAfter": "2026-06-21T11:18:00.000Z",
+    "sendAfter": "2026-06-21T15:39:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-06-21T03:00:04.534Z",
-  "windowEnd": "2026-06-22T05:15:04.534Z",
+  "windowStart": "2026-06-21T12:10:06.567Z",
+  "windowEnd": "2026-06-22T14:25:06.567Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 22,
@@ -30,8 +30,8 @@
   "locationGroups": 4,
   "scheduled": 35,
   "recipients": 215,
-  "skippedPast": 48,
-  "skippedWindow": 72,
+  "skippedPast": 56,
+  "skippedWindow": 64,
   "duplicates": 5,
   "errors": 0,
   "lastError": null,
@@ -201,24 +201,6 @@
   },
   "planned": [
     {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "entry",
-      "time": "13:34",
-      "sendAfter": "2026-06-21T11:34:00.000Z",
-      "recipients": 13,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:34",
-      "sendAfter": "2026-06-21T11:19:00.000Z",
-      "recipients": 13,
-      "timeZone": "Europe/Berlin"
-    },
-    {
       "prayer": "ʿAṣr",
       "key": "asr",
       "mode": "entry",
@@ -295,8 +277,8 @@
       "key": "dhuhr",
       "mode": "entry",
       "time": "13:34",
-      "sendAfter": "2026-06-21T11:34:00.000Z",
-      "recipients": 7,
+      "sendAfter": "2026-06-22T11:34:00.000Z",
+      "recipients": 13,
       "timeZone": "Europe/Berlin"
     },
     {
@@ -304,8 +286,53 @@
       "key": "dhuhr",
       "mode": "advance",
       "time": "13:34",
-      "sendAfter": "2026-06-21T11:19:00.000Z",
-      "recipients": 7,
+      "sendAfter": "2026-06-22T11:19:00.000Z",
+      "recipients": 13,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
+      "mode": "advance",
+      "time": "17:55",
+      "sendAfter": "2026-06-21T15:50:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
+      "mode": "advance",
+      "time": "21:48",
+      "sendAfter": "2026-06-21T19:43:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿIshāʾ",
+      "key": "isha",
+      "mode": "advance",
+      "time": "23:43",
+      "sendAfter": "2026-06-21T21:38:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Fajr",
+      "key": "fajr",
+      "mode": "advance",
+      "time": "03:25",
+      "sendAfter": "2026-06-22T01:20:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:34",
+      "sendAfter": "2026-06-22T11:29:00.000Z",
+      "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
     {
@@ -383,64 +410,19 @@
     {
       "prayer": "Dhuhr",
       "key": "dhuhr",
+      "mode": "entry",
+      "time": "13:34",
+      "sendAfter": "2026-06-22T11:34:00.000Z",
+      "recipients": 7,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
       "mode": "advance",
       "time": "13:34",
-      "sendAfter": "2026-06-21T11:29:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "ʿAṣr",
-      "key": "asr",
-      "mode": "advance",
-      "time": "17:55",
-      "sendAfter": "2026-06-21T15:50:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Maghrib",
-      "key": "maghrib",
-      "mode": "advance",
-      "time": "21:48",
-      "sendAfter": "2026-06-21T19:43:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "ʿIshāʾ",
-      "key": "isha",
-      "mode": "advance",
-      "time": "23:43",
-      "sendAfter": "2026-06-21T21:38:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Fajr",
-      "key": "fajr",
-      "mode": "advance",
-      "time": "03:25",
-      "sendAfter": "2026-06-22T01:20:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "entry",
-      "time": "13:33",
-      "sendAfter": "2026-06-21T11:33:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:33",
-      "sendAfter": "2026-06-21T11:18:00.000Z",
-      "recipients": 1,
+      "sendAfter": "2026-06-22T11:19:00.000Z",
+      "recipients": 7,
       "timeZone": "Europe/Berlin"
     },
     {
@@ -512,6 +494,24 @@
       "mode": "advance",
       "time": "03:23",
       "sendAfter": "2026-06-22T01:08:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "entry",
+      "time": "13:33",
+      "sendAfter": "2026-06-22T11:33:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:33",
+      "sendAfter": "2026-06-22T11:18:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     }
@@ -602,87 +602,17 @@
       "timeZone": "Europe/Berlin"
     },
     {
-      "key": "fajr",
-      "mode": "entry",
-      "sendAfter": "2026-06-20T01:24:00.000Z",
-      "time": "03:24",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "fajr",
-      "mode": "advance",
-      "sendAfter": "2026-06-20T01:09:00.000Z",
-      "time": "03:24",
-      "timeZone": "Europe/Berlin"
-    },
-    {
       "key": "dhuhr",
       "mode": "entry",
-      "sendAfter": "2026-06-20T11:33:00.000Z",
-      "time": "13:33",
+      "sendAfter": "2026-06-21T11:34:00.000Z",
+      "time": "13:34",
       "timeZone": "Europe/Berlin"
     },
     {
       "key": "dhuhr",
       "mode": "advance",
-      "sendAfter": "2026-06-20T11:18:00.000Z",
-      "time": "13:33",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "asr",
-      "mode": "entry",
-      "sendAfter": "2026-06-20T15:54:00.000Z",
-      "time": "17:54",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "asr",
-      "mode": "advance",
-      "sendAfter": "2026-06-20T15:39:00.000Z",
-      "time": "17:54",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "maghrib",
-      "mode": "entry",
-      "sendAfter": "2026-06-20T19:48:00.000Z",
-      "time": "21:48",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "maghrib",
-      "mode": "advance",
-      "sendAfter": "2026-06-20T19:33:00.000Z",
-      "time": "21:48",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "isha",
-      "mode": "entry",
-      "sendAfter": "2026-06-20T21:43:00.000Z",
-      "time": "23:43",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "isha",
-      "mode": "advance",
-      "sendAfter": "2026-06-20T21:28:00.000Z",
-      "time": "23:43",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "fajr",
-      "mode": "entry",
-      "sendAfter": "2026-06-21T01:24:00.000Z",
-      "time": "03:24",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "fajr",
-      "mode": "advance",
-      "sendAfter": "2026-06-21T01:09:00.000Z",
-      "time": "03:24",
+      "sendAfter": "2026-06-21T11:19:00.000Z",
+      "time": "13:34",
       "timeZone": "Europe/Berlin"
     },
     {
@@ -770,17 +700,31 @@
       "timeZone": "Europe/Berlin"
     },
     {
+      "key": "dhuhr",
+      "mode": "entry",
+      "sendAfter": "2026-06-21T11:34:00.000Z",
+      "time": "13:34",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "dhuhr",
+      "mode": "advance",
+      "sendAfter": "2026-06-21T11:29:00.000Z",
+      "time": "13:34",
+      "timeZone": "Europe/Berlin"
+    },
+    {
       "key": "fajr",
       "mode": "entry",
-      "sendAfter": "2026-06-20T01:22:00.000Z",
-      "time": "03:22",
+      "sendAfter": "2026-06-20T01:24:00.000Z",
+      "time": "03:24",
       "timeZone": "Europe/Berlin"
     },
     {
       "key": "fajr",
       "mode": "advance",
-      "sendAfter": "2026-06-20T01:07:00.000Z",
-      "time": "03:22",
+      "sendAfter": "2026-06-20T01:09:00.000Z",
+      "time": "03:24",
       "timeZone": "Europe/Berlin"
     },
     {
@@ -796,21 +740,65 @@
       "sendAfter": "2026-06-20T11:18:00.000Z",
       "time": "13:33",
       "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "asr",
+      "mode": "entry",
+      "sendAfter": "2026-06-20T15:54:00.000Z",
+      "time": "17:54",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "asr",
+      "mode": "advance",
+      "sendAfter": "2026-06-20T15:39:00.000Z",
+      "time": "17:54",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "maghrib",
+      "mode": "entry",
+      "sendAfter": "2026-06-20T19:48:00.000Z",
+      "time": "21:48",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "maghrib",
+      "mode": "advance",
+      "sendAfter": "2026-06-20T19:33:00.000Z",
+      "time": "21:48",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "isha",
+      "mode": "entry",
+      "sendAfter": "2026-06-20T21:43:00.000Z",
+      "time": "23:43",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "isha",
+      "mode": "advance",
+      "sendAfter": "2026-06-20T21:28:00.000Z",
+      "time": "23:43",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "fajr",
+      "mode": "entry",
+      "sendAfter": "2026-06-21T01:24:00.000Z",
+      "time": "03:24",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "fajr",
+      "mode": "advance",
+      "sendAfter": "2026-06-21T01:09:00.000Z",
+      "time": "03:24",
+      "timeZone": "Europe/Berlin"
     }
   ],
   "oneSignalResponses": [
-    {
-      "prayer": "dhuhr",
-      "mode": "entry",
-      "recipients": 13,
-      "response": "{\"id\":\"bec1397b-61f8-469f-b87b-e20da2177403\",\"external_id\":\"53412bdc-d831-4e07-8982-f5c18ea15a71\"}"
-    },
-    {
-      "prayer": "dhuhr",
-      "mode": "advance",
-      "recipients": 13,
-      "response": "{\"id\":\"970b55b1-da75-4938-bfdc-e5f358bbf961\",\"external_id\":\"dceaff64-47d2-4c81-affc-5294f93f5263\"}"
-    },
     {
       "prayer": "asr",
       "mode": "entry",
@@ -862,14 +850,44 @@
     {
       "prayer": "dhuhr",
       "mode": "entry",
-      "recipients": 7,
-      "response": "{\"id\":\"6d405969-abbc-441e-a8ea-6cd16657ac12\",\"external_id\":\"e03794c6-4740-4c12-9b58-570df79e260e\"}"
+      "recipients": 13,
+      "response": "{\"id\":\"165187f8-f7c9-418b-80d1-b64cb0f4728f\",\"external_id\":\"d1e11216-bb6b-46e6-8afe-c38ad45e3846\"}"
     },
     {
       "prayer": "dhuhr",
       "mode": "advance",
-      "recipients": 7,
-      "response": "{\"id\":\"f02765be-d615-4290-b8d2-9de23a44d282\",\"external_id\":\"6f548cde-4395-46f9-b0f9-32d150a72bc4\"}"
+      "recipients": 13,
+      "response": "{\"id\":\"84b1853b-4256-4ad9-8906-e7b183c4d2e6\",\"external_id\":\"ad4f0401-eaca-48d3-a807-9a7f0ae326f1\"}"
+    },
+    {
+      "prayer": "asr",
+      "mode": "advance",
+      "recipients": 1,
+      "response": "{\"id\":\"e770cb65-c8ce-44fb-863c-aee048339f9d\",\"external_id\":\"41f9b01d-66c6-46a3-8f7e-b9355eac0adc\"}"
+    },
+    {
+      "prayer": "maghrib",
+      "mode": "advance",
+      "recipients": 1,
+      "response": "{\"id\":\"864d6600-d351-4f9d-948f-1af67dca18a3\",\"external_id\":\"6653f99e-de0f-4c65-9779-bfd4a92cf451\"}"
+    },
+    {
+      "prayer": "isha",
+      "mode": "advance",
+      "recipients": 1,
+      "response": "{\"id\":\"3b39770d-3e0b-421a-8577-ea03814810cd\",\"external_id\":\"c92a6de1-6f59-4422-94a5-30d29201f573\"}"
+    },
+    {
+      "prayer": "fajr",
+      "mode": "advance",
+      "recipients": 1,
+      "response": "{\"id\":\"8c8f76f7-0563-4df7-9525-e399f9c51afc\",\"external_id\":\"dee2bbf9-4f8a-4670-80b8-ec455bf342de\"}"
+    },
+    {
+      "prayer": "dhuhr",
+      "mode": "advance",
+      "recipients": 1,
+      "response": "{\"id\":\"44297dd7-9b74-43ca-a904-5b772cde095a\",\"external_id\":\"0732795f-abfa-4d67-8b58-6c16e537014d\"}"
     },
     {
       "prayer": "asr",
@@ -900,56 +918,32 @@
       "mode": "entry",
       "recipients": 7,
       "response": "{\"id\":\"f654007b-caf2-41eb-a5c2-8a71a4f720a1\",\"external_id\":\"ece40259-4102-416d-855f-bd030709c090\"}"
-    },
-    {
-      "prayer": "isha",
-      "mode": "advance",
-      "recipients": 7,
-      "response": "{\"id\":\"99c41eca-a131-490a-bf2a-9c8d83798300\",\"external_id\":\"dc9e2b84-84bb-4e9d-9e23-1407eff9fc7d\"}"
-    },
-    {
-      "prayer": "fajr",
-      "mode": "entry",
-      "recipients": 7,
-      "response": "{\"id\":\"004ae0eb-218a-4077-ba23-919baf035dbd\",\"external_id\":\"707a2731-38cf-4c6c-87a5-7158d2b41437\"}"
-    },
-    {
-      "prayer": "fajr",
-      "mode": "advance",
-      "recipients": 7,
-      "response": "{\"id\":\"95a5a9a0-8b13-49c4-89bc-f5273c4cc316\",\"external_id\":\"5c59bf33-9794-43bb-bfdc-6595d025cf0e\"}"
     }
   ],
   "userRegistry": [
     {
+      "subscriptionId": "2c445e0f-e9f0-4534-ac56-00cf1ea2bdad",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-21T12:03:51.271+00:00"
+    },
+    {
       "subscriptionId": "9a7881c4-2744-4b95-9f3e-92486b09c600",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T10:05:16.823+00:00"
-    },
-    {
-      "subscriptionId": "bc789eca-ada5-4694-ab60-78ab89e59433",
-      "timezone": "Europe/Berlin",
-      "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-20T10:00:17.201+00:00"
-    },
-    {
-      "subscriptionId": "8fe3c8c1-f070-40a9-a9c4-1ecf5806d0ed",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T10:00:17.632+00:00"
-    },
-    {
-      "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
-      "timezone": "Europe/Berlin",
-      "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-20T10:00:18.099+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "19ab451c-bf40-4b43-a99e-2cef488cd734",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T10:00:18.615+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
+    },
+    {
+      "subscriptionId": "8fe3c8c1-f070-40a9-a9c4-1ecf5806d0ed",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "f7ff6759-35cb-4850-9e26-b62c80eae715",
@@ -970,10 +964,16 @@
       "lastSyncedAt": "2026-06-20T10:00:19.92+00:00"
     },
     {
-      "subscriptionId": "2c445e0f-e9f0-4534-ac56-00cf1ea2bdad",
+      "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-21T03:03:51.212+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
+    },
+    {
+      "subscriptionId": "bc789eca-ada5-4694-ab60-78ab89e59433",
+      "timezone": "Europe/Berlin",
+      "city": "Meckenheim",
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "2aa85538-0952-473d-a191-7474cef36c80",
@@ -982,22 +982,22 @@
       "lastSyncedAt": "2026-06-20T10:00:20.845+00:00"
     },
     {
-      "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T19:42:05.148+00:00"
-    },
-    {
-      "subscriptionId": "bdd836d7-d282-4369-ac2a-eaf97c4ccc20",
+      "subscriptionId": "97d1fe6f-b5fb-4e0d-830d-2a438254d706",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-20T20:34:25.385+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "ba329b3a-e5e6-4f7b-b01d-e8d6125aa6b5",
       "timezone": "Europe/Berlin",
       "city": "Bonn",
-      "lastSyncedAt": "2026-06-20T10:05:17.293+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
+    },
+    {
+      "subscriptionId": "bdd836d7-d282-4369-ac2a-eaf97c4ccc20",
+      "timezone": "Europe/Berlin",
+      "city": "Meckenheim",
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "a0fe1365-4fbd-431e-a46c-21049b5e7ca9",
@@ -1006,52 +1006,52 @@
       "lastSyncedAt": "2026-06-20T10:05:18.198+00:00"
     },
     {
-      "subscriptionId": "187b4bf7-9cb5-4ef3-8a2b-986b792a43c4",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T10:05:19.142+00:00"
-    },
-    {
       "subscriptionId": "7fe8041e-fb2b-488c-9596-e0b4a9daeb38",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T10:05:19.564+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
-      "subscriptionId": "10fc63c1-bad4-4f09-a0c0-9cc45b6cae1f",
+      "subscriptionId": "187b4bf7-9cb5-4ef3-8a2b-986b792a43c4",
       "timezone": "Europe/Berlin",
-      "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-20T10:05:20.034+00:00"
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "81bd67f9-1adb-4a61-8358-32b317355e62",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-20T10:05:20.488+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "ea1b5873-995f-43f9-85ff-156420a03ae8",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-20T23:33:29.243+00:00"
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
-      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
+      "subscriptionId": "10fc63c1-bad4-4f09-a0c0-9cc45b6cae1f",
       "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-20T20:25:05.04+00:00"
+      "city": "Meckenheim",
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "c41bce09-bdd0-473b-89d8-5d783fcc59bc",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-06-21T00:25:18.286+00:00"
+      "lastSyncedAt": "2026-06-21T12:24:44.439+00:00"
+    },
+    {
+      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-06-21T12:20:07.24+00:00"
     },
     {
       "subscriptionId": "e67e4b16-6faf-4f42-9569-38e915259e79",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-06-21T00:32:42.273+00:00"
+      "lastSyncedAt": "2026-06-21T12:23:19.236+00:00"
     }
   ]
 }
