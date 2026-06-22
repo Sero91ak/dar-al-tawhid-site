@@ -858,6 +858,8 @@ async function updatePostCategory(env, input) {
   };
 }
 
+const RENAME_CATEGORY_BATCH = 10;
+
 async function renameCategoryLabel(env, input) {
   const fromLabel = String(input.fromLabel || "").trim();
   const toLabel = String(input.toLabel || "").trim();
@@ -871,39 +873,48 @@ async function renameCategoryLabel(env, input) {
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
   const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
   const layoutPath = trimSlashes(env.CATEGORY_LAYOUT_PATH || "content/admin/category-layout.json");
-
-  const layoutFile = await githubGet(env, owner, repo, layoutPath, branch);
-  const layoutData = layoutFile?.content ? JSON.parse(base64ToUtf8(layoutFile.content)) : { version: 1, main: [], order: [] };
+  const offset = Math.max(0, Number(input.offset || 0) || 0);
   const fromKey = categoryLabelKey(fromLabel);
+
+  let targetNames = Array.isArray(input.filenames)
+    ? input.filenames.map((name) => sanitizeFilename(String(name || "").trim())).filter(Boolean)
+    : [];
+  if (!targetNames.length && offset === 0) {
+    targetNames = await githubSearchPostFilenamesByCategory(env, owner, repo, fromLabel, postsDir);
+  }
+  const batchNames = targetNames.slice(offset, offset + RENAME_CATEGORY_BATCH);
+
+  const layoutFile = offset === 0 ? await githubGet(env, owner, repo, layoutPath, branch) : null;
+  const layoutData = layoutFile?.content
+    ? JSON.parse(base64ToUtf8(layoutFile.content))
+    : { version: 1, main: [], order: [] };
   const mapLabel = (label) => (categoryLabelKey(label) === fromKey ? toLabel : label);
   const main = (Array.isArray(layoutData.main) ? layoutData.main : []).map(mapLabel);
   let order = (Array.isArray(layoutData.order) ? layoutData.order : []).map(mapLabel);
   if (!order.some((x) => categoryLabelKey(x) === categoryLabelKey(toLabel))) order.push(toLabel);
 
-  const layoutPayload = {
-    version: 1,
-    updatedAt: new Date().toISOString(),
-    main,
-    order
-  };
-  const layoutContent = `${JSON.stringify(layoutPayload, null, 2)}\n`;
+  const commitEntries = [];
+  if (offset === 0) {
+    commitEntries.push({
+      path: layoutPath,
+      content: `${JSON.stringify({ version: 1, updatedAt: new Date().toISOString(), main, order }, null, 2)}\n`
+    });
+  }
 
-  const indexData = await readPostsIndex(env);
-  const files = listPostFiles(indexData.files);
   let updatedPosts = 0;
-  const commitEntries = [{ path: layoutPath, content: layoutContent }];
-  for (const file of files) {
-    const name = String(file.name || "").trim();
-    if (!name) continue;
+  for (const name of batchNames) {
     const postPath = `${postsDir}/${name}`;
     const postFile = await githubGet(env, owner, repo, postPath, branch);
     if (!postFile?.content) continue;
     const markdown = base64ToUtf8(postFile.content);
     const current = frontmatterValue(markdown, "category");
     if (categoryLabelKey(current) !== fromKey) continue;
-    const nextMarkdown = applyCategoryToMarkdown(markdown, toLabel);
-    commitEntries.push({ path: postPath, content: nextMarkdown });
+    commitEntries.push({ path: postPath, content: applyCategoryToMarkdown(markdown, toLabel) });
     updatedPosts += 1;
+  }
+
+  if (!commitEntries.length) {
+    throw httpError(offset === 0 && !batchNames.length ? "Keine Beiträge für diesen Ordner gefunden" : "Keine Änderungen in diesem Batch", 400);
   }
 
   const batchCommit = await githubCommitBatch(
@@ -912,17 +923,48 @@ async function renameCategoryLabel(env, input) {
     repo,
     branch,
     commitEntries,
-    `Rename category ${fromLabel} -> ${toLabel} (${updatedPosts} posts)`
+    offset === 0
+      ? `Rename category ${fromLabel} -> ${toLabel} (batch ${updatedPosts})`
+      : `Rename category ${fromLabel} -> ${toLabel} (continued +${updatedPosts})`
   );
+
+  const nextOffset = offset + batchNames.length;
+  const done = nextOffset >= targetNames.length;
 
   return {
     ok: true,
     fromLabel,
     toLabel,
     updatedPosts,
+    updatedThisBatch: updatedPosts,
+    totalTargets: targetNames.length,
+    processed: nextOffset,
+    nextOffset: done ? null : nextOffset,
+    done,
     layoutPath,
     commitSha: batchCommit.commitSha
   };
+}
+
+async function githubSearchPostFilenamesByCategory(env, owner, repo, categoryLabel, postsDir) {
+  const safe = String(categoryLabel || "").replace(/"/g, "");
+  const queries = [
+    `category: ${safe}`,
+    `category: "${safe}"`,
+    `category: '${safe}'`
+  ];
+  const found = new Set();
+  for (const needle of queries) {
+    const q = encodeURIComponent(`repo:${owner}/${repo} ${needle} in:file path:${postsDir}`);
+    const res = await fetch(`https://api.github.com/search/code?q=${q}&per_page=100`, { headers: githubHeaders(env) });
+    if (!res.ok) continue;
+    const data = await res.json().catch(() => ({}));
+    for (const item of data.items || []) {
+      const name = String(item.path || "").split("/").pop();
+      if (name.endsWith(".md")) found.add(name);
+    }
+  }
+  return [...found].sort((a, b) => a.localeCompare(b, "de"));
 }
 
 async function publishNewsUpdate(env, input) {

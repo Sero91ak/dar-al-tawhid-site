@@ -2153,11 +2153,22 @@ function bindOrdnerUi(){
     if(!confirm(`Ordner „${from}“ in „${to}“ umbenennen?\n\nAlle Beiträge in diesem Ordner werden angepasst.`))return;
     renameBtn.disabled=true;setOrdnerStatus("Benenne um…");
     try{
-      const result=await workerPostRequest("category/rename",{fromLabel:from,toLabel:to});
-      addAdminLog("Ordner","Ordner umbenannt",`${from} → ${to} · ${result.updatedPosts||0} Beiträge`);
+      await ensureOrdnerCatalog(false);
+      const filenames=ordnerCatalog.filter(p=>categoryKeyAdmin(p.category)===categoryKeyAdmin(from)).map(p=>p.filename);
+      let offset=0;
+      let totalUpdated=0;
+      let lastResult=null;
+      while(true){
+        setOrdnerStatus(`Benenne um… ${Math.min(offset,filenames.length)}/${filenames.length} verarbeitet`);
+        lastResult=await workerPostRequest("category/rename",{fromLabel:from,toLabel:to,filenames,offset});
+        totalUpdated+=Number(lastResult.updatedThisBatch||lastResult.updatedPosts||0);
+        if(lastResult.done||lastResult.nextOffset==null)break;
+        offset=Number(lastResult.nextOffset)||filenames.length;
+      }
+      addAdminLog("Ordner","Ordner umbenannt",`${from} → ${to} · ${totalUpdated} Beiträge`);
       ordnerSelectedCat=to;ordnerRenameValue="";categoryLayoutLoaded=false;ordnerCatalogLoaded=false;
       await ensureOrdnerData(true);
-      setOrdnerStatus(`Umbenannt: ${result.updatedPosts||0} Beiträge aktualisiert.`);
+      setOrdnerStatus(`Umbenannt: ${totalUpdated} Beiträge aktualisiert.`);
       toast("Ordner umbenannt");
       renderShell();
     }catch(e){setOrdnerStatus(`Fehler: ${e.message||e}`);toast(e.message||"Umbenennen fehlgeschlagen")}
