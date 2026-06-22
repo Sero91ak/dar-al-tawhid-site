@@ -497,12 +497,15 @@ async function listSourceFiles(env) {
     .map((path) => {
       const parts = path.split("/");
       const name = parts.pop() || path;
-      const scholar = parts.length > 2 ? parts[parts.length - 2] : "";
+      const rel = parts.slice(2);
+      const scholar = rel.length >= 2 ? rel[0] : "";
+      const book = rel.length >= 3 ? rel[1] : "";
       const ext = sourceExtension(name);
       return {
         path,
         name,
         scholar: scholar && scholar !== "sources" ? scholar : "",
+        book: book || "",
         type: ext === "pdf" ? "PDF" : "Bild",
         url: `/${path}`
       };

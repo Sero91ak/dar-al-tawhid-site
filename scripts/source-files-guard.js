@@ -1,0 +1,96 @@
+#!/usr/bin/env node
+/**
+ * SOURCE FILES GUARD: blockiert Deploy wenn Quellen-Upload in Admin/Worker fehlt.
+ *
+ * Usage: node scripts/source-files-guard.js
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.join(__dirname, "..");
+
+function read(file) {
+  return fs.readFileSync(path.join(ROOT, file), "utf8");
+}
+
+function runSourceFilesGuard() {
+  let failed = 0;
+
+  function fail(msg) {
+    console.error("SOURCE-FILES-GUARD FAIL:", msg);
+    failed += 1;
+  }
+
+  function ok(msg) {
+    console.log("SOURCE-FILES-GUARD OK:", msg);
+  }
+
+  function mustInclude(label, content, needles) {
+    for (const needle of needles) {
+      if (!content.includes(needle)) {
+        fail(`${label}: fehlt „${needle}“`);
+        return false;
+      }
+    }
+    ok(`${label}: alle Pflicht-Marker (${needles.length})`);
+    return true;
+  }
+
+  const admin = read("admin/index.html");
+  const worker = read("cloudflare/worker.js");
+
+  mustInclude("admin/index.html", admin, [
+    "SOURCE FILES GUARD FINAL",
+    "renderSourceFilesPanel",
+    "appendLinkToMarkdown",
+    "buildSourceStoragePath",
+    "assets/sources/",
+    "SOURCE_MAX_BYTES",
+    "Quellen-Dateien",
+    "Zum Markdown hinzufügen",
+    "Speichern und Markdown aktualisieren",
+    "Diese Datei zum Beitrag hinzufügen",
+    "sources/list"
+  ]);
+
+  mustInclude("worker.js", worker, [
+    "SOURCE FILES GUARD FINAL",
+    "DEFAULT_SOURCES_DIR",
+    "githubCreateBinaryBlob",
+    "/api/admin/sources/list",
+    "normalizeSourceFilesInput",
+    "listSourceFiles",
+    "prepareSourceCommitEntries"
+  ]);
+
+  if (!fs.existsSync(path.join(ROOT, "assets/sources/.gitkeep"))) {
+    fail("assets/sources/.gitkeep fehlt");
+  } else {
+    ok("assets/sources/.gitkeep vorhanden");
+  }
+
+  if (!admin.includes('renderSourceFilesPanel("draft")') || !admin.includes('renderSourceFilesPanel("ordner")')) {
+    fail("admin: Quellen-Panel fehlt im Einzelbeitrag oder Ordner-Editor");
+  } else {
+    ok("admin: Quellen-Panel in Einzelbeitrag + Ordner-Editor");
+  }
+
+  if (!admin.includes("collectSourceFilesForWorker()") || !worker.includes("input.sourceFiles")) {
+    fail("Publish/Update muss sourceFiles an Worker senden");
+  } else {
+    ok("sourceFiles in Publish/Update-Flow");
+  }
+
+  return failed;
+}
+
+if (require.main === module) {
+  const failed = runSourceFilesGuard();
+  if (failed) {
+    console.error(`\n${failed} Source-Files-Guard-Prüfung(en) fehlgeschlagen – Deploy blockiert.`);
+    process.exit(1);
+  }
+  console.log("\nSource-Files-Schutz: alle Prüfungen bestanden.");
+}
+
+module.exports = { runSourceFilesGuard };
