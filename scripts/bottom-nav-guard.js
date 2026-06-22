@@ -34,7 +34,27 @@ function runBottomNavGuard() {
     "function ensureBottomNavDock",
     "function initBottomNavGuard",
     "function verifyBottomNavDock",
+    "function bottomNavDockMisplaced",
     "initBottomNavGuard()"
+  ];
+
+  const forbidden = [
+    {
+      pattern: /#appChromeDock\s+#bottomNav\.bottom-nav[\s\S]{0,220}position:relative!important/,
+      msg: "#appChromeDock #bottomNav darf nicht position:relative haben"
+    },
+    {
+      pattern: /html\[data-theme\]\s+#appChromeDock\s+\.bottom-nav\{left:auto!important;right:auto!important\}/,
+      msg: "Theme-Override left:auto/right:auto auf Dock-Nav ist verboten"
+    },
+    {
+      pattern: /clearBottomDockInlineSize/,
+      msg: "Alte clearBottomDockInlineSize-Logik darf Positionierung nicht mehr löschen"
+    },
+    {
+      pattern: /initBottomDock\(\)/,
+      msg: "initBottomDock() darf Boot nicht mehr vor initBottomNavGuard() stören"
+    }
   ];
 
   for (const file of VISITOR_FILES) {
@@ -42,6 +62,13 @@ function runBottomNavGuard() {
     for (const needle of needles) {
       if (!html.includes(needle)) {
         fail(`${file}: fehlt „${needle}“`);
+      }
+    }
+    for (const rule of forbidden) {
+      if (rule.pattern.test(html)) {
+        fail(`${file}: ${rule.msg}`);
+      } else {
+        ok(`${file}: ${rule.msg}`);
       }
     }
     if (html.includes('if(nav.parentElement!==document.body)document.body.appendChild(nav)')) {
@@ -64,6 +91,16 @@ function runBottomNavGuard() {
       fail(`${file}: #bottomNav muss innerhalb von #appChromeDock liegen`);
     } else {
       ok(`${file}: Tab-Leiste in #appChromeDock`);
+    }
+    if (!html.includes("getComputedStyle(nav).position!==\"fixed\"")) {
+      fail(`${file}: verifyBottomNavDock muss position:fixed prüfen`);
+    } else {
+      ok(`${file}: position:fixed-Verifikation vorhanden`);
+    }
+    if (!html.includes("__bottomNavGuardRef")) {
+      fail(`${file}: Scroll-Drift-Erkennung fehlt`);
+    } else {
+      ok(`${file}: Scroll-Drift-Erkennung vorhanden`);
     }
   }
 
