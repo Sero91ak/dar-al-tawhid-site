@@ -683,7 +683,8 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     publishedAt,
     liveCheck,
     push,
-    telegram
+    telegram,
+    sourceFiles: uploadedSources
   };
 }
 
