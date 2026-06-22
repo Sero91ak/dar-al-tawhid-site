@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-22T11:20:06.193Z",
+  "updatedAt": "2026-06-22T11:45:06.536Z",
   "usersChecked": 16,
   "duaCandidates": 0,
-  "recCandidates": 16,
-  "sent": 16,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 16,
+  "duplicates": 32,
   "errors": 0,
   "dailyContentDate": "2026-06-22",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Eltern"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 16,
-      "contentId": "tawhid-345-fuersprecher-werden-nicht-angebetet",
-      "recipients": "70293460-882c-41d0-bc36-5e0b6b6cc13b",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
