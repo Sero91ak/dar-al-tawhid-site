@@ -682,7 +682,14 @@ async function checkVisitorAppHealth(){
 }
 function workerEndpoint(path){
   const url=new URL(resolveWorkerUrl(workerPublishUrl()));
-  const clean=String(path||"").replace(/^\/+/,"");
+  const raw=String(path||"").replace(/^\/+/,"");
+  const qIdx=raw.indexOf("?");
+  const pathOnly=qIdx>=0?raw.slice(0,qIdx):raw;
+  const queryPart=qIdx>=0?raw.slice(qIdx+1):"";
+  if(queryPart){
+    new URLSearchParams(queryPart).forEach((value,key)=>{url.searchParams.set(key,value)});
+  }
+  const clean=pathOnly;
   if(/^api\//i.test(clean)){
     url.pathname="/"+clean;
     return url.toString();
