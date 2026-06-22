@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-22T08:20:06.559Z",
+  "updatedAt": "2026-06-22T08:25:06.537Z",
   "usersChecked": 16,
-  "duaCandidates": 16,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 16,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 16,
   "errors": 0,
   "dailyContentDate": "2026-06-22",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Eltern"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 16,
-      "contentId": "quran-005",
-      "recipients": "1c1167a0-ce87-4aa8-a68c-1d23654b201a",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
