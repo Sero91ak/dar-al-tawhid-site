@@ -45,6 +45,10 @@ function isPostDataRequest(url) {
   return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json');
 }
 
+function navigationShellKey(url) {
+  return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
+}
+
 function parsePostIdFromUrl(rawUrl) {
   try {
     const url = new URL(rawUrl);
@@ -119,6 +123,17 @@ self.addEventListener('message', (event) => {
     );
     return;
   }
+  if (data.type === 'APP_REPAIR') {
+    hardRefreshUntil = Date.now() + 15 * 60 * 1000;
+    bypassPostCacheUntil = Math.max(bypassPostCacheUntil, hardRefreshUntil);
+    event.waitUntil(
+      caches.keys()
+        .then((keys) => Promise.all(keys.filter((key) => key.startsWith('dar-al-tawhid-offline-light-')).map((key) => caches.delete(key))))
+        .then(() => self.skipWaiting())
+        .catch(() => null)
+    );
+    return;
+  }
   if (data.type !== 'PRECACHE' || !Array.isArray(data.urls) || !data.urls.length) return;
   event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => Promise.allSettled(
@@ -182,14 +197,15 @@ self.addEventListener('fetch', (event) => {
 
   // Navigation: online frisch laden, offline gecachte index.html anzeigen.
   if (request.mode === 'navigate') {
+    const shellKey = navigationShellKey(url);
     event.respondWith(
       fetch(request, { cache: refreshBypassActive() ? 'no-store' : 'no-cache' })
         .then((response) => {
           const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put('/index.html', copy)).catch(() => null);
+          caches.open(CACHE_VERSION).then((cache) => cache.put(shellKey, copy)).catch(() => null);
           return response;
         })
-        .catch(() => caches.match('/index.html'))
+        .catch(() => caches.match(shellKey).then((cached) => cached || caches.match('/index.html')))
     );
     return;
   }
