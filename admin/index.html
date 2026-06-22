@@ -823,6 +823,38 @@ async function loadPostsIndexForUpload(){
   if(!files.length)throw new Error("posts-index.json konnte nicht geladen werden");
   return{data:{files,count:files.length,generated:new Date().toISOString()}};
 }
+function repairYamlFrontmatter(markdown){
+  const raw=String(markdown||"");
+  const match=raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if(!match)return raw;
+  const body=match[2]||"";
+  const topKey="source|links|logo|layout|slides|intro|introTitle|date|id|title|category|topic|scholar|book|author|tags|type";
+  const fixed=match[1].split("\n").map(line=>{
+    if(/^\*\s+/.test(line))return line.replace(/^\*\s+/,"- ");
+    if(/^\*\s*label:/.test(line))return line.replace(/^\*\s*/,"  - ");
+    const nested=line.match(new RegExp(`^(\\s{2,})(${topKey}:\\s*.*)$`));
+    if(nested&&!/^\s+-/.test(line))return nested[2];
+    return line;
+  }).join("\n").replace(/^\* /gm,"- ").replace(new RegExp(`^\\s{4}(${topKey}):`,"gm"),"$1:").replace(/^\*\s*label:/gm,"  - label:");
+  return `---\n${fixed}\n---\n\n${body.trim()}`.trimEnd()+"\n";
+}
+function normalizeMarkdownForStorage(markdown){
+  let out=repairYamlFrontmatter(repairMarkdownStructure(String(markdown||"").trim()));
+  if(!out)return "";
+  return out.endsWith("\n")?out:out+"\n";
+}
+function auditPostMarkdown(markdown){
+  const text=String(markdown||"");
+  const fm=text.match(/^---\s*\n([\s\S]*?)\n---/);
+  const warnings=[];
+  if(fm&&/^\*\s/m.test(fm[1]))warnings.push("Frontmatter hatte *-Listen (automatisch repariert)");
+  if(fm&&/^\s{2,}(source|links|logo):/m.test(fm[1]))warnings.push("Quelle/Links waren falsch eingerückt (automatisch repariert)");
+  const source=frontmatterValue(text,"source")||frontmatterValue(text,"quelle");
+  const linksBlock=fm&&fm[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);
+  let hasLink=false;
+  if(linksBlock){let item=null;linksBlock[1].split(/\r?\n/).forEach(line=>{const lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={url:""};return}const um=line.match(/^\s*url:\s*(.*)$/);if(um&&item)hasLink=String(um[1]||"").replace(/^["']|["']$/g,"").startsWith("http")})}
+  return{sourceOk:Boolean(source&&String(source).trim().length>8),hasLink,warnings};
+}
 function repairMarkdownStructure(markdown){
   let out=sanitizeMarkdownQuotes(String(markdown||"").trim());
   if(!out)return "";
@@ -842,7 +874,7 @@ function repairMarkdownStructure(markdown){
   return out;
 }
 function normalizeMarkdownForUpload(markdown,nextNumber){
-  let out=repairMarkdownStructure(markdown);
+  let out=repairYamlFrontmatter(repairMarkdownStructure(markdown));
   if(!out)return out;
   const iso=new Date().toISOString().replace(/\.\d{3}Z$/,".000Z");
   if(/^date:\s*.*$/m.test(out))out=out.replace(/^date:\s*.*$/m,`date: "${iso}"`);
@@ -2201,7 +2233,7 @@ function bindOrdnerUi(){
   };
   const saveBtn=document.getElementById("ordnerSaveBtn");if(saveBtn)saveBtn.onclick=async()=>{
     if(!ordnerEdit.filename)return;
-    const markdown=document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown;
+    const markdown=normalizeMarkdownForStorage(document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown);
     if(!markdown.trim()){toast("Markdown ist leer");return}
     if(!confirm(`Beitrag „${ordnerEdit.filename}“ live speichern?\n\nKein Push — nur Korrektur für Besucher.`))return;
     saveBtn.disabled=true;setOrdnerEditorStatus("Speichere live…");
@@ -2476,6 +2508,10 @@ async function uploadPostViaWorker(){
     updatePublishStep("filename","ok",draftFilename);
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    const audit=auditPostMarkdown(markdown);
+    if(audit.warnings.length)addAdminLog("Frontmatter","Automatisch repariert",audit.warnings.join(" · "));
+    if(!audit.sourceOk)updatePublishStep("created","warn","Quelle fehlt im Frontmatter – bitte prüfen");
+    else if(!audit.hasLink)updatePublishStep("created","warn","Direktlink fehlt – bitte prüfen");
     updatePublishMeta({filename:draftFilename,number:next,title:preview.title});
     updatePublishStep("created","run","Sende an Worker");
     setUploadStatus("Sende Beitrag an Cloudflare Worker...");
