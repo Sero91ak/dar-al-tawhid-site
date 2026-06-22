@@ -203,8 +203,9 @@ export default {
       const postCategoryPaths = new Set(["/api/admin/post/category"]);
       const postUpdatePaths = new Set(["/api/admin/post/update"]);
       const categoryRenamePaths = new Set(["/api/admin/category/rename"]);
+      const bulkPublishPaths = new Set(["/api/admin/publish/bulk"]);
 
-      if (![...publishPaths, ...stagingPaths, ...newsPaths, ...newsDeletePaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths, ...categoryLayoutPaths, ...postCategoryPaths, ...postUpdatePaths, ...categoryRenamePaths].includes(url.pathname)) {
+      if (![...publishPaths, ...stagingPaths, ...bulkPublishPaths, ...newsPaths, ...newsDeletePaths, ...schedulePaths, ...schedulerPaths, ...telegramPaths, ...pushPaths, ...prayerPaths, ...dailyPaths, ...jummahPaths, ...categoryLayoutPaths, ...postCategoryPaths, ...postUpdatePaths, ...categoryRenamePaths].includes(url.pathname)) {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
@@ -335,6 +336,10 @@ export default {
         return json(await publishPostFromMarkdown(env, input, ctx), cors);
       }
 
+      if (bulkPublishPaths.has(url.pathname)) {
+        return json(await publishBulkPostsFromMarkdown(env, input, ctx), cors);
+      }
+
       if (stagingPaths.has(url.pathname)) {
         return json(await publishPostFromMarkdown(env, input, ctx, { staging: true }), cors);
       }
@@ -433,7 +438,7 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   if (!staging) {
     const health = await checkVisitorSiteHealth(env);
     if (!health.ok) {
-      throw httpError(`Live blockiert – Besucher-App nicht startklar: ${health.issues.join(" · ")}`, 503);
+      console.warn("Visitor site degraded during publish:", health.issues.join(" · "));
     }
   }
 
@@ -460,9 +465,9 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   const existing = await githubGet(env, owner, repo, postPath, branch);
   if (existing) throw httpError(`Diese Datei existiert schon: ${filename}`, 409);
 
-  const created = await githubPut(env, owner, repo, postPath, markdown, `Add post ${filename}`, branch);
+  const postBlobSha = await githubCreateBlob(env, owner, repo, markdown);
   const nextFiles = files.filter((file) => file.name !== filename);
-  nextFiles.push({ name: filename, sha: created.content.sha });
+  nextFiles.push({ name: filename, sha: postBlobSha });
   nextFiles.sort((a, b) => String(a.name).localeCompare(String(b.name), "de"));
 
   const payload = {
@@ -471,21 +476,24 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     count: nextFiles.length,
     files: nextFiles
   };
-  const updatedIndex = await githubPut(
+  const indexContent = `${JSON.stringify(payload, null, 2)}\n`;
+  const batchCommit = await githubCommitBatch(
     env,
     owner,
     repo,
-    indexPath,
-    `${JSON.stringify(payload, null, 2)}\n`,
-    `Update posts index for ${filename}`,
     branch,
-    indexFile?.sha
+    [
+      { path: postPath, content: markdown, sha: postBlobSha },
+      { path: indexPath, content: indexContent }
+    ],
+    `Add post ${filename}`
   );
+  const created = { content: { sha: postBlobSha }, commit: { sha: batchCommit.commitSha } };
+  const updatedIndex = { commit: { sha: batchCommit.commitSha } };
 
   const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
   const postId = frontmatterValue(markdown, "id");
   const publishedAt = new Date().toISOString();
-  const githubSteps = { postCreated: true, indexUpdated: true };
   if (staging) {
     return {
       ok: true,
@@ -503,11 +511,13 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       telegram: { sent: false, skipped: true, staging: true }
     };
   }
-  const liveCheck = await verifyPostLiveAvailability(
-    env,
-    { filename, postId, postPath, githubSteps },
-    { schedule: "quick" }
-  );
+  const liveCheck = {
+    ok: false,
+    pending: true,
+    deferred: true,
+    diagnosis: "Live-Prüfung läuft im Hintergrund",
+    attempts: 0
+  };
   let push;
   const skipPush = Boolean(input.skipPush || options.skipPush);
   if (skipPush) {
@@ -526,15 +536,13 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       postPath,
       status: "pending",
       createdAt: publishedAt,
-      lastError: liveCheck.diagnosis || "Push wartet auf Live-Verfügbarkeit"
+      lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     if (postId) await writePendingPushStatus(env, postId, pendingRecord);
     push = {
       sent: false,
       pending: true,
-      reason: liveCheck.ok
-        ? "Push wird erst nach stabiler Live-Prüfung gesendet."
-        : "Push wartet auf Live-Verfügbarkeit",
+      reason: "Push wird im Hintergrund nach Live-Prüfung gesendet.",
       waitingForLive: true,
       liveCheck,
       targetUrl: buildPostPushUrl(env, postId, Date.now())
@@ -568,6 +576,131 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     liveCheck,
     push,
     telegram
+  };
+}
+
+async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
+  const rawPosts = Array.isArray(input.posts) ? input.posts : [];
+  if (!rawPosts.length) throw httpError("Keine Beiträge im Sammel-Paket", 400);
+  if (rawPosts.length > 25) throw httpError("Maximal 25 Beiträge pro Sammel-Paket", 400);
+
+  const staging = Boolean(options.staging || input.staging);
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(staging ? (env.STAGING_POSTS_DIR || DEFAULT_STAGING_POSTS_DIR) : (env.POSTS_DIR || DEFAULT_POSTS_DIR));
+  const indexPath = `${postsDir}/posts-index.json`;
+
+  const indexFile = await githubGet(env, owner, repo, indexPath, branch);
+  const indexData = indexFile?.content ? JSON.parse(base64ToUtf8(indexFile.content)) : { version: 1, files: [] };
+  let files = listPostFiles(indexData.files);
+  let nextNumber = nextPostNumber(files);
+  const existingNames = new Set(files.map((f) => String(f.name || "").trim()).filter(Boolean));
+  const published = [];
+  const commitEntries = [];
+  const blobEntries = [];
+
+  for (let i = 0; i < rawPosts.length; i++) {
+    const item = rawPosts[i];
+    const markdownRaw = String((item && item.markdown) || item || "").trim();
+    if (!markdownRaw) throw httpError(`Beitrag ${i + 1}: Markdown fehlt`, 400);
+    const duplicate = findDuplicateByTitleSlug(files, markdownRaw);
+    if (duplicate) throw httpError(`Beitrag ${i + 1}: mögliches Duplikat „${duplicate}“`, 409);
+
+    let filename = String(item?.filename || "").trim();
+    if (filename) {
+      filename = sanitizeFilename(filename);
+    } else {
+      filename = suggestFilename(markdownRaw, nextNumber);
+    }
+    if (existingNames.has(filename)) throw httpError(`Beitrag ${i + 1}: Datei existiert bereits (${filename})`, 409);
+
+    const markdown = normalizeMarkdownForUpload(markdownRaw, nextNumber);
+    const postPath = `${postsDir}/${filename}`;
+    const postBlobSha = await githubCreateBlob(env, owner, repo, markdown);
+    const postId = frontmatterValue(markdown, "id");
+    const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
+
+    blobEntries.push({ path: postPath, content: markdown, sha: postBlobSha });
+    files = files.filter((file) => file.name !== filename);
+    files.push({ name: filename, sha: postBlobSha });
+    existingNames.add(filename);
+    published.push({
+      filename,
+      number: nextNumber,
+      postId,
+      postTitle,
+      postPath
+    });
+    nextNumber += 1;
+  }
+
+  files.sort((a, b) => String(a.name).localeCompare(String(b.name), "de"));
+  const indexContent = `${JSON.stringify({
+    version: Number(indexData.version || 1),
+    generated: new Date().toISOString(),
+    count: files.length,
+    files
+  }, null, 2)}\n`;
+  commitEntries.push(...blobEntries, { path: indexPath, content: indexContent });
+
+  const batchCommit = await githubCommitBatch(
+    env,
+    owner,
+    repo,
+    branch,
+    commitEntries,
+    `Bulk publish ${published.length} posts`
+  );
+
+  const publishedAt = new Date().toISOString();
+  const lastPost = published[published.length - 1];
+  const liveCheck = {
+    ok: false,
+    pending: true,
+    deferred: true,
+    diagnosis: "Live-Prüfung läuft im Hintergrund",
+    attempts: 0
+  };
+
+  let push = { sent: false, skipped: true, reason: "Kein Push angefordert", liveCheck };
+  const skipPush = Boolean(input.skipPush || options.skipPush);
+  if (!staging && !skipPush && lastPost?.postId) {
+    const pendingRecord = {
+      postId: lastPost.postId,
+      filename: lastPost.filename,
+      postTitle: lastPost.postTitle,
+      publishedAt,
+      postPath: lastPost.postPath,
+      status: "pending",
+      createdAt: publishedAt,
+      lastError: "Push wartet auf Live-Verfügbarkeit"
+    };
+    await writePendingPushStatus(env, lastPost.postId, pendingRecord);
+    push = {
+      sent: false,
+      pending: true,
+      reason: `Push für letzten Beitrag (${published.length} gesamt) wird im Hintergrund gesendet.`,
+      waitingForLive: true,
+      liveCheck,
+      targetUrl: buildPostPushUrl(env, lastPost.postId, Date.now())
+    };
+    if (ctx) ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
+  } else if (skipPush) {
+    push = { sent: false, skipped: true, reason: "Push übersprungen", liveCheck };
+  }
+
+  return {
+    ok: true,
+    bulk: true,
+    count: published.length,
+    published,
+    postCount: files.length,
+    indexPath,
+    commitSha: batchCommit.commitSha,
+    publishedAt,
+    liveCheck,
+    push
   };
 }
 
@@ -745,20 +878,18 @@ async function renameCategoryLabel(env, input) {
   let order = (Array.isArray(layoutData.order) ? layoutData.order : []).map(mapLabel);
   if (!order.some((x) => categoryLabelKey(x) === categoryLabelKey(toLabel))) order.push(toLabel);
 
-  await githubPut(
-    env,
-    owner,
-    repo,
-    layoutPath,
-    `${JSON.stringify({ version: 1, updatedAt: new Date().toISOString(), main, order }, null, 2)}\n`,
-    `Rename category ${fromLabel} -> ${toLabel}`,
-    branch,
-    layoutFile?.sha
-  );
+  const layoutPayload = {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    main,
+    order
+  };
+  const layoutContent = `${JSON.stringify(layoutPayload, null, 2)}\n`;
 
   const indexData = await readPostsIndex(env);
   const files = listPostFiles(indexData.files);
   let updatedPosts = 0;
+  const commitEntries = [{ path: layoutPath, content: layoutContent }];
   for (const file of files) {
     const name = String(file.name || "").trim();
     if (!name) continue;
@@ -769,25 +900,26 @@ async function renameCategoryLabel(env, input) {
     const current = frontmatterValue(markdown, "category");
     if (categoryLabelKey(current) !== fromKey) continue;
     const nextMarkdown = applyCategoryToMarkdown(markdown, toLabel);
-    await githubPut(
-      env,
-      owner,
-      repo,
-      postPath,
-      nextMarkdown,
-      `Rename category in ${name}`,
-      branch,
-      postFile.sha
-    );
+    commitEntries.push({ path: postPath, content: nextMarkdown });
     updatedPosts += 1;
   }
+
+  const batchCommit = await githubCommitBatch(
+    env,
+    owner,
+    repo,
+    branch,
+    commitEntries,
+    `Rename category ${fromLabel} -> ${toLabel} (${updatedPosts} posts)`
+  );
 
   return {
     ok: true,
     fromLabel,
     toLabel,
     updatedPosts,
-    layoutPath
+    layoutPath,
+    commitSha: batchCommit.commitSha
   };
 }
 
@@ -1058,6 +1190,71 @@ async function githubPut(env, owner, repo, path, content, message, branch, sha) 
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw httpError(data.message || `GitHub PUT Fehler ${res.status}`, res.status);
   return data;
+}
+
+async function githubGetRefSha(env, owner, repo, branch) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/ref/heads/${encodeURIComponent(branch)}`, {
+    headers: githubHeaders(env)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw httpError(data.message || `GitHub ref Fehler ${res.status}`, res.status);
+  return data.object?.sha || "";
+}
+
+async function githubGetCommitTreeSha(env, owner, repo, commitSha) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/commits/${commitSha}`, {
+    headers: githubHeaders(env)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw httpError(data.message || `GitHub commit Fehler ${res.status}`, res.status);
+  return data.tree?.sha || "";
+}
+
+async function githubCreateBlob(env, owner, repo, content) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs`, {
+    method: "POST",
+    headers: { ...githubHeaders(env), "Content-Type": "application/json" },
+    body: JSON.stringify({ content: String(content ?? ""), encoding: "utf-8" })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw httpError(data.message || `GitHub blob Fehler ${res.status}`, res.status);
+  return data.sha || "";
+}
+
+async function githubCommitBatch(env, owner, repo, branch, fileEntries, message) {
+  const parentSha = await githubGetRefSha(env, owner, repo, branch);
+  const baseTreeSha = await githubGetCommitTreeSha(env, owner, repo, parentSha);
+  const blobs = new Map();
+  const treeItems = [];
+  for (const entry of fileEntries) {
+    const path = trimSlashes(entry.path);
+    const content = String(entry.content ?? "");
+    const blobSha = entry.sha || await githubCreateBlob(env, owner, repo, content);
+    blobs.set(path, blobSha);
+    treeItems.push({ path, mode: "100644", type: "blob", sha: blobSha });
+  }
+  const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees`, {
+    method: "POST",
+    headers: { ...githubHeaders(env), "Content-Type": "application/json" },
+    body: JSON.stringify({ base_tree: baseTreeSha, tree: treeItems })
+  });
+  const treeData = await treeRes.json().catch(() => ({}));
+  if (!treeRes.ok) throw httpError(treeData.message || `GitHub tree Fehler ${treeRes.status}`, treeRes.status);
+  const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/commits`, {
+    method: "POST",
+    headers: { ...githubHeaders(env), "Content-Type": "application/json" },
+    body: JSON.stringify({ message, tree: treeData.sha, parents: [parentSha] })
+  });
+  const commitData = await commitRes.json().catch(() => ({}));
+  if (!commitRes.ok) throw httpError(commitData.message || `GitHub commit Fehler ${commitRes.status}`, commitRes.status);
+  const refRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, {
+    method: "PATCH",
+    headers: { ...githubHeaders(env), "Content-Type": "application/json" },
+    body: JSON.stringify({ sha: commitData.sha, force: false })
+  });
+  const refData = await refRes.json().catch(() => ({}));
+  if (!refRes.ok) throw httpError(refData.message || `GitHub ref update Fehler ${refRes.status}`, refRes.status);
+  return { commitSha: commitData.sha, blobs };
 }
 
 function githubHeaders(env) {

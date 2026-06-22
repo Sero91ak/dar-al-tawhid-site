@@ -874,6 +874,23 @@ async function publishPostViaWorkerRequest(markdown,filename,options={}){
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
+async function publishBulkViaWorkerRequest(preparedPosts,options={}){
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl());
+  if(remember)setSavedWorkerSecret(secret);else setSavedWorkerSecret("");
+  const body={posts:preparedPosts.map(p=>({markdown:p.markdown,filename:p.filename}))};
+  if(options.skipPush)body.skipPush=true;
+  const res=await fetch(workerEndpoint("publish/bulk"),{
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+    body:JSON.stringify(body)
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  return data;
+}
 function isBulkZipEntryIgnored(path){
   const p=String(path||"").replace(/\\/g,"/");
   if(!p||p.endsWith("/")||/(^|\/)(__MACOSX|\.)/.test(p)||/^\._/.test(p.split("/").pop()||""))return true;
@@ -2511,38 +2528,47 @@ async function uploadBulkPackViaWorker(){
   updatePublishStep("valid","ok","Markdown-Blöcke erkannt");
   if(category&&!posts.every(md=>frontmatterValue(md,"category")===category)){/* applied above */}
   const previewTitles=posts.slice(0,4).map(md=>frontmatterValue(md,"title")||"Ohne Titel").join("\n· ");
-  const ok=confirm(`Ganzes Paket live veröffentlichen?\n\n${posts.length} einzelne Beiträge werden nacheinander online gestellt.\nJeder erscheint wie gewohnt in Neueste / Kategorie / Einzelansicht.\n\n${category?`Kategorie: ${category}\n\n`:""}${previewTitles}${posts.length>4?"\n…":""}`);
+  const ok=confirm(`Ganzes Paket live veröffentlichen?\n\n${posts.length} Beiträge werden in einem Schritt online gestellt (nur 1 Deploy).\nJeder erscheint wie gewohnt in Neueste / Kategorie / Einzelansicht.\n\n${category?`Kategorie: ${category}\n\n`:""}${previewTitles}${posts.length>4?"\n…":""}`);
   if(!ok){finishPublishTrack("error","Sammel-Veröffentlichung abgebrochen");setBulkPackStatus("Sammel-Veröffentlichung abgebrochen.");return}
   bulkPackBusy=true;
   const bulkBtn=document.getElementById("bulkPublishBtn");if(bulkBtn){bulkBtn.disabled=true;bulkBtn.textContent="Veröffentliche Paket…"}
   const published=[];
   let lastResult=null;
   try{
-    updatePublishStep("created","run","Veröffentliche Beiträge nacheinander");
-    for(let i=0;i<posts.length;i++){
-      const md=posts[i];
+    updatePublishStep("created","run","Sende Sammel-Paket (1 Deploy)");
+    const startInfo=await resolveNextPostNumberInfo();
+    let nextNum=startInfo.nextNumber;
+    const prepared=posts.map((md,i)=>{
       const title=frontmatterValue(md,"title")||`Beitrag ${i+1}`;
-      setBulkPackStatus(`Veröffentliche <strong>${i+1}/${posts.length}</strong>: ${esc(title)} …`);
-      const next=await resolveNextPostNumber();
-      const filename=suggestFilename(md,next);
-      const normalized=normalizeMarkdownForUpload(md,next);
-      const isLast=i===posts.length-1;
-      lastResult=await publishPostViaWorkerRequest(normalized,filename,{skipPush:!isLast});
-      published.push({filename:lastResult.filename||filename,title,number:lastResult.number||next});
-      const track=readPublishTrack();if(track){track.items=[...(track.items||[]),{filename:lastResult.filename||filename,title,status:"erstellt"}];savePublishTrack(track)}
+      const filename=suggestFilename(md,nextNum);
+      const normalized=normalizeMarkdownForUpload(md,nextNum);
+      nextNum+=1;
+      return {markdown:normalized,filename,title,number:nextNum-1};
+    });
+    setBulkPackStatus(`Veröffentliche <strong>${prepared.length} Beiträge</strong> in einem Schritt …`);
+    lastResult=await publishBulkViaWorkerRequest(prepared);
+    prepared.forEach((p,i)=>{
+      published.push({filename:p.filename,title:p.title,number:p.number});
+      const track=readPublishTrack();if(track){track.items=[...(track.items||[]),{filename:p.filename,title:p.title,status:"erstellt"}];savePublishTrack(track)}
+    });
+    if(lastResult?.published?.length){
+      lastResult.published.forEach((p,i)=>{published[i]={filename:p.filename||prepared[i].filename,title:prepared[i].title,number:p.number||prepared[i].number}});
+    }
+    if(published.length){
+      const last=published[published.length-1];
       saveLastPublishPushContext({
-        filename:lastResult.filename||filename,
-        number:lastResult.number||next,
-        postId:lastResult.postId||frontmatterValue(normalized,"id")||filename.replace(/\.md$/i,""),
-        postTitle:title,
-        markdown:normalized,
-        commitSha:lastResult.commitSha||"",
-        push:lastResult.push||null
+        filename:last.filename,
+        number:last.number,
+        postId:lastResult?.published?.[published.length-1]?.postId||last.filename.replace(/\.md$/i,""),
+        postTitle:last.title,
+        markdown:prepared[prepared.length-1]?.markdown||"",
+        commitSha:lastResult?.commitSha||"",
+        push:lastResult?.push||null
       });
     }
     updatePublishStep("created","ok",`${published.length}/${posts.length} erstellt`);
-    updatePublishStep("index","ok","Index je Beitrag aktualisiert");
-    updatePublishStep("deploy","ok","Worker-Antworten erhalten");
+    updatePublishStep("index","ok","Index einmal aktualisiert");
+    updatePublishStep("deploy","ok","Ein Deploy ausgelöst");
     updatePublishStep("live","run","Prüfe letzte Beitragsdatei");
     if(published.length){
       const last=published[published.length-1];
