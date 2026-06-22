@@ -171,7 +171,8 @@ export default {
       if (url.pathname === "/api/admin/sources/list" && request.method === "GET") {
         assertConfigured(env);
         assertAuthorized(request, env);
-        return json(await listSourceFiles(env), cors);
+        const withUsage = String(url.searchParams.get("usage") || "") === "1";
+        return json(await listSourceFiles(env, { withUsage }), cors);
       }
 
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
@@ -481,7 +482,48 @@ async function githubListRepoTreePaths(env, owner, repo, branch) {
     .map((item) => String(item.path));
 }
 
-async function listSourceFiles(env) {
+async function scanSourceUsageInPosts(env) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const sourcesDir = trimSlashes(env.SOURCES_DIR || DEFAULT_SOURCES_DIR);
+  let paths = [];
+  try {
+    paths = await githubListRepoTreePaths(env, owner, repo, branch);
+  } catch (error) {
+    return { map: {}, warning: String(error.message || error) };
+  }
+  const postPaths = paths.filter((p) => p.startsWith(`${postsDir}/`) && p.endsWith(".md"));
+  const usageMap = {};
+  const sourceRe = new RegExp(`(?:/|\\b)(${sourcesDir.replace(/\//g, "\\/")}\\/[^"'\\s#]+\\.(?:pdf|png|jpe?g|webp))`, "gi");
+  for (const postPath of postPaths) {
+    try {
+      const file = await githubGet(env, owner, repo, postPath, branch);
+      if (!file?.content) continue;
+      const markdown = base64ToUtf8(file.content);
+      const filename = postPath.split("/").pop() || postPath;
+      const postId = frontmatterValue(markdown, "id") || filename.replace(/\.md$/i, "");
+      let match;
+      while ((match = sourceRe.exec(markdown))) {
+        const path = match[1].replace(/^\/+/, "");
+        if (!usageMap[path]) usageMap[path] = [];
+        const slideMatch = markdown.slice(0, match.index).match(/^\s{2,}-\s/gm);
+        const slideIndex = slideMatch ? Math.max(0, slideMatch.length - 1) : null;
+        usageMap[path].push({
+          filename,
+          postId,
+          slide: slideIndex != null && /slides:/i.test(markdown) ? slideIndex + 1 : null
+        });
+      }
+    } catch (e) {
+      /* skip single post */
+    }
+  }
+  return { map: usageMap };
+}
+
+async function listSourceFiles(env, options = {}) {
   const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
@@ -492,6 +534,11 @@ async function listSourceFiles(env) {
   } catch (error) {
     return { ok: true, files: [], sourcesDir, warning: String(error.message || error) };
   }
+  let usageMap = {};
+  if (options.withUsage) {
+    const scanned = await scanSourceUsageInPosts(env);
+    usageMap = scanned.map || {};
+  }
   const files = paths
     .filter((path) => path.startsWith(`${sourcesDir}/`) && isAllowedSourceExtension(sourceExtension(path)))
     .map((path) => {
@@ -501,13 +548,16 @@ async function listSourceFiles(env) {
       const scholar = rel.length >= 2 ? rel[0] : "";
       const book = rel.length >= 3 ? rel[1] : "";
       const ext = sourceExtension(name);
+      const usage = usageMap[path] || [];
       return {
         path,
         name,
         scholar: scholar && scholar !== "sources" ? scholar : "",
         book: book || "",
         type: ext === "pdf" ? "PDF" : "Bild",
-        url: `/${path}`
+        url: `/${path}`,
+        usage,
+        usedInPosts: [...new Set(usage.map((u) => u.filename))].length
       };
     })
     .sort((a, b) => a.path.localeCompare(b.path, "de"));

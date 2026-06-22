@@ -258,6 +258,22 @@ button{cursor:pointer}
 .source-library-item b{color:var(--ink);font-size:11px}
 .source-library-item span{color:var(--muted);line-height:1.35}
 .source-library-item .btn{min-height:32px;padding:6px 10px;font-size:10px}
+.quellen-studio{display:grid;gap:12px}
+.quellen-grid{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);gap:12px;align-items:start}
+.quellen-search-panel,.quellen-editor-panel{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:8px}
+.quellen-result-list{display:flex;flex-direction:column;gap:6px;flex:1;max-height:min(52vh,440px);overflow:auto}
+.quellen-result-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
+.quellen-result-row.is-active{border-color:rgba(140,190,255,.5);background:rgba(90,140,220,.08)}
+.quellen-result-title{font-size:11px;font-weight:900;color:var(--ink);line-height:1.35}
+.quellen-result-meta{font-size:9px;color:var(--soft);margin-top:2px;line-height:1.4}
+.quellen-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:2px 6px;font-size:8px;font-weight:900;color:var(--gold);background:rgba(239,215,142,.06)}
+.quellen-overview{border:1px solid rgba(140,190,255,.16);border-radius:14px;padding:10px;background:rgba(0,0,0,.18);font-size:10.5px;line-height:1.45;color:var(--soft);max-height:min(28vh,220px);overflow:auto;white-space:pre-wrap;word-break:break-word}
+.quellen-link-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;padding:6px 8px;border:1px solid rgba(239,215,142,.12);border-radius:10px;background:rgba(0,0,0,.12);font-size:10px;margin-bottom:6px}
+.quellen-link-row b{color:var(--ink);display:block;font-size:10.5px}
+.quellen-link-row span{color:var(--muted);word-break:break-all}
+.quellen-slide-block{border:1px dashed rgba(140,190,255,.22);border-radius:12px;padding:8px;margin-bottom:8px}
+.quellen-slide-block h5{margin:0 0 6px;font-size:11px;color:var(--gold)}
 .paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
 .upload-stack{display:grid;gap:9px;align-content:start}
 .upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.055)}
@@ -430,6 +446,7 @@ main#panel.panel{
   <main class="panel" id="panel"></main>
 </div>
 <div class="toast" id="toast"></div>
+<script src="/admin/quellen-manager.js?v=1"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -459,6 +476,7 @@ const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
   ["besucher","Besucher"],
   ["ordner","Ordner"],
+  ["quellen","Quellen"],
   ["actions","Aktionen"],
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
@@ -478,6 +496,9 @@ let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayou
 let ordnerCatalog=[],ordnerCatalogBusy=false,ordnerCatalogLoaded=false;
 let ordnerSelectedCat="",ordnerPostQuery="",ordnerCatSearch="",ordnerRenameValue="",ordnerStatus="",ordnerEditorStatus="",ordnerBusy=false;
 let ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
+let quellenSearchQuery="",quellenCatalogMeta=[],quellenCatalogBusy=false,quellenCatalogLoaded=false,quellenEditorStatus="";
+let quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
+let sourceLinkTarget="post",sourceCustomLabel="",sourceManualUrl="",sourceSetSlideImage=false;
 let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 
@@ -873,36 +894,49 @@ function auditPostMarkdown(markdown){
 }
 /* SOURCE FILES GUARD FINAL: PDF/Bild-Upload → assets/sources/ + links:-Block */
 const SOURCE_MAX_BYTES=20*1024*1024;
-const SOURCE_LABEL_OPTIONS=["→ Scan/PDF","→ Bildscan","→ Manuskript","→ Eigene Quelle"];
+const SOURCE_LABEL_OPTIONS=(window.DARQuellen&&DARQuellen.SOURCE_LABEL_PRESETS)||["→ PDF/Scan","→ Bild-Scan","→ Scan/PDF","→ Bildscan","→ Manuskript","→ Eigene Quelle"];
 function sourceFileExtension(name){const base=String(name||"").split("/").pop()||"";return base.includes(".")?base.split(".").pop().toLowerCase():""}
 function isAllowedSourceMimeOrExt(file){const ext=sourceFileExtension(file?.name||"");const mime=String(file?.type||"").toLowerCase();if(["pdf","png","jpg","jpeg","webp"].includes(ext))return true;return /^(application\/pdf|image\/(png|jpeg|webp))$/i.test(mime)}
-function slugifySourceFilename(originalName,pageNum){const ext=(String(originalName||"").match(/\.([a-z0-9]+)$/i)||["","bin"])[1].toLowerCase();let base=String(originalName||"").replace(/\.[^.]+$/i,"");base=base.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʻʼ'`]/g,"").replace(/[^\x00-\x7F]/g," ").toLowerCase().replace(/\bseite\s+(\d+)\b/gi," s$1 ").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);if(pageNum&&ext==="pdf"&&!/-s\d+$/.test(base))base=`${base||"quelle"}-s${pageNum}`;return `${base||"quelle"}.${ext||"bin"}`}
-function buildSourceStoragePath(markdown,originalName,pageNum){const scholar=slugify(frontmatterValue(markdown,"scholar")||"");const book=slugify(frontmatterValue(markdown,"book")||"");const safeName=slugifySourceFilename(originalName,pageNum);const folder=scholar?(book?`${scholar}/${book}`:scholar):(book||"allgemein");return `assets/sources/${folder}/${safeName}`}
+function slugifySourceFilename(originalName,pageNum,markdown){const ext=(String(originalName||"").match(/\.([a-z0-9]+)$/i)||["","bin"])[1].toLowerCase();const id=slugify(frontmatterValue(markdown||"","id")||"");const topic=slugify(frontmatterValue(markdown||"","topic")||frontmatterValue(markdown||"","book")||"");let base=String(originalName||"").replace(/\.[^.]+$/i,"");base=base.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʻʼ'`]/g,"").replace(/[^\x00-\x7F]/g," ").toLowerCase().replace(/\bseite\s+(\d+)\b/gi," s$1 ").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,50);const prefix=[id,topic].filter(Boolean).join("-").replace(/-+/g,"-").slice(0,60)||"quelle";if(pageNum&&ext==="pdf"&&!/-s\d+$/.test(base))base=`${base||prefix}-s${pageNum}`;const merged=`${prefix}-${base||"datei"}`.replace(/-+/g,"-").replace(/^-+|-+$/g,"").slice(0,90);return `${merged||"quelle"}.${ext||"bin"}`}
+function buildSourceStoragePath(markdown,originalName,pageNum){const scholar=slugify(frontmatterValue(markdown,"scholar")||"");const book=slugify(frontmatterValue(markdown,"book")||"");const safeName=slugifySourceFilename(originalName,pageNum,markdown);const folder=scholar?(book?`${scholar}/${book}`:scholar):(book||"allgemein");return `assets/sources/${folder}/${safeName}`}
 function buildSourceLinkUrl(path,pageNum,isPdf){const clean=String(path||"").replace(/^\/+/,"");const url=`/${clean}`;if(isPdf&&pageNum)return `${url}#page=${pageNum}`;return url}
-function defaultSourceLabelForExt(ext){return ext==="pdf"?"→ Scan/PDF":"→ Bildscan"}
+function defaultSourceLabelForExt(ext){return ext==="pdf"?"→ PDF/Scan":"→ Bild-Scan"}
 function extractLinksYamlBlock(yaml){const m=String(yaml||"").match(/^links:\s*\n([\s\S]*?)(?=\n[A-Za-z0-9_-]+:|$)/m);return m?m[0]:""}
-function appendLinkToMarkdown(markdown,label,url){const repaired=repairYamlFrontmatter(String(markdown||""));const m=repaired.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(!m)return repaired;let yaml=m[1];const body=m[2]||"";const safeLabel=String(label||"→ Quelle").replace(/"/g,'\\"');const safeUrl=String(url||"").replace(/"/g,'\\"');const entry=`  - label: "${safeLabel}"\n    url: "${safeUrl}"`;const linksBlock=extractLinksYamlBlock(yaml);if(linksBlock){yaml=yaml.replace(linksBlock,`${linksBlock.trimEnd()}\n${entry}`)}else if(/^logo:\s/m.test(yaml)){yaml=yaml.replace(/^logo:\s/m,`links:\n${entry}\nlogo: `)}else{yaml=`${yaml.trimEnd()}\nlinks:\n${entry}`}return `---\n${yaml}\n---\n\n${body.trim()}`.trimEnd()+"\n"}
+function appendLinkToMarkdown(markdown,label,url,target){if(window.DARQuellen)return DARQuellen.appendLinkToMarkdownTarget(markdown,label,url,target||"post");const repaired=repairYamlFrontmatter(String(markdown||""));const m=repaired.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(!m)return repaired;let yaml=m[1];const body=m[2]||"";const safeLabel=String(label||"→ Quelle").replace(/"/g,'\\"');const safeUrl=String(url||"").replace(/"/g,'\\"');const entry=`  - label: "${safeLabel}"\n    url: "${safeUrl}"`;const linksBlock=extractLinksYamlBlock(yaml);if(linksBlock){yaml=yaml.replace(linksBlock,`${linksBlock.trimEnd()}\n${entry}`)}else if(/^logo:\s/m.test(yaml)){yaml=yaml.replace(/^logo:\s/m,`links:\n${entry}\nlogo: `)}else{yaml=`${yaml.trimEnd()}\nlinks:\n${entry}`}return `---\n${yaml}\n---\n\n${body.trim()}`.trimEnd()+"\n"}
+function getSourceLinkTargetFromUi(){const multi=document.getElementById("sourceTargetMulti");if(multi&&multi.selectedOptions&&multi.selectedOptions.length){const selected=[...multi.selectedOptions].map(o=>parseInt(o.value,10)).filter(n=>!isNaN(n));if(selected.length)return{scope:"slide",indices:selected}}const raw=String(sourceLinkTarget||document.getElementById("sourceTargetSelect")?.value||"post");if(raw==="post")return"post";if(raw.startsWith("slide:")){const parts=raw.slice(6).split(",").map(x=>parseInt(x,10)).filter(n=>!isNaN(n)&&n>=0);return parts.length?{scope:"slide",indices:parts}:"post"}return"post"}
+function renderSourceTargetSelect(context,info){const md=getMarkdownForSourceContext(context);const analyzed=window.DARQuellen?DARQuellen.analyzePostSources(md):{isSlide:false,slides:[]};if(!analyzed.isSlide||!analyzed.slides.length)return `<label>Ziel<select class="field" id="sourceTargetSelect"><option value="post" selected>Gesamtbeitrag (links:)</option></select></label>`;const opts=[`<option value="post" ${sourceLinkTarget==="post"?"selected":""}>Gesamtbeitrag (links:)</option>`];analyzed.slides.forEach((s,i)=>{const val=`slide:${i}`;opts.push(`<option value="${esc(val)}" ${sourceLinkTarget===val?"selected":""}>Slide ${i+1}${s.title?`: ${esc(s.title.slice(0,40))}`:""}</option>`)});return `<label>Ziel<select class="field" id="sourceTargetSelect">${opts.join("")}</select></label><label class="quellen-multi-hint" style="font-size:10px;color:var(--soft)">Mehrere Slides: Strg/Cmd + Klick in Mehrfachauswahl unten</label><select class="field" id="sourceTargetMulti" multiple size="${Math.min(6,analyzed.slides.length+1)}">${analyzed.slides.map((s,i)=>`<option value="${i}" ${String(sourceLinkTarget||"").includes("slide:")&&String(sourceLinkTarget).includes(String(i))?"selected":""}>Slide ${i+1}: ${esc((s.title||"Ohne Titel").slice(0,50))}</option>`).join("")}</select>`}
+function renderExistingSourcesOverview(context){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return"";const info=DARQuellen.analyzePostSources(md);let html=`<div class="quellen-overview"><strong>Frontmatter-Quelle:</strong> ${esc(info.source||"—")}\n\n<strong>Beitrag links:</strong>\n`;info.postLinks.forEach((l,i)=>{html+=`  ${i+1}. ${esc(l.label)} → ${esc(l.url)}\n`});if(info.isSlide&&info.slides.length){html+=`\n<strong>Slides (${info.slides.length}):</strong>\n`;info.slides.forEach((s,i)=>{html+=`\n— Slide ${i+1}: ${esc(s.title||"Ohne Titel")}\n`;if(s.image)html+=`  image: ${esc(s.image)}\n`;if(s.pdf)html+=`  pdf: ${esc(s.pdf)}\n`;if(s.source)html+=`  source: ${esc(s.source.slice(0,120))}${s.source.length>120?"…":""}\n`;(s.links||[]).forEach((l,j)=>{html+=`  link ${j+1}: ${esc(l.label)} → ${esc(l.url)}\n`})})}html+=`${info.attachments?`\n${esc(info.attachments)}`:""}${info.media?`\n${esc(info.media)}`:""}</div>`;return html}
+function renderExistingSourceLinkRows(context){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return"";const info=DARQuellen.analyzePostSources(md);const rows=[];info.postLinks.forEach((l,i)=>{rows.push({where:"post",whereLabel:"Gesamtbeitrag",index:i,label:l.label,url:l.url})});info.slides.forEach((s,si)=>{(s.links||[]).forEach((l,i)=>rows.push({where:"slide",whereLabel:`Slide ${si+1}`,slideIndex:si,index:i,label:l.label,url:l.url}))});if(!rows.length)return `<div class="empty" style="padding:8px">Noch keine Quellenlinks.</div>`;return rows.map(r=>`<div class="quellen-link-row" data-link-where="${esc(r.where)}" data-link-index="${r.index}" data-slide-index="${r.slideIndex??""}"><div><b>${esc(r.whereLabel)} · ${esc(r.label||"Quelle")}</b><span>${esc(r.url||"")}</span></div><div style="display:flex;gap:4px;flex-wrap:wrap"><a class="btn" href="${esc(r.url.startsWith("http")?r.url:SITE_ORIGIN+r.url.replace(/^\//,""))}" target="_blank" rel="noopener" data-source-test="${esc(r.url)}">Test</a><button class="btn" type="button" data-link-edit="${esc(r.where)}:${r.slideIndex??""}:${r.index}">Bearbeiten</button><button class="btn danger" type="button" data-link-remove="${esc(r.where)}:${r.slideIndex??""}:${r.index}">Entfernen</button></div></div>`).join("")}
 function readFileAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>{const result=String(reader.result||"");const idx=result.indexOf(",");resolve(idx>=0?result.slice(idx+1):result)};reader.onerror=()=>reject(reader.error||new Error("Datei konnte nicht gelesen werden"));reader.readAsDataURL(file)})}
 function validateSourceFile(file){if(!file)throw new Error("Keine Datei gewählt");if(!isAllowedSourceMimeOrExt(file))throw new Error("Nur PDF, PNG, JPG, JPEG oder WEBP erlaubt");if(Number(file.size||0)>SOURCE_MAX_BYTES)throw new Error("Maximal 20 MB pro Datei");return true}
-async function loadSourceLibrary(force){if(sourceLibraryBusy)return sourceLibraryCache||{files:[]};if(sourceLibraryCache&&!force)return sourceLibraryCache;sourceLibraryBusy=true;try{const data=await workerGetRequest("sources/list",{admin:true});sourceLibraryCache={files:Array.isArray(data.files)?data.files:[],sourcesDir:data.sourcesDir||"assets/sources"};return sourceLibraryCache}catch(e){sourceLibraryCache={files:[],error:String(e.message||e)};return sourceLibraryCache}finally{sourceLibraryBusy=false}}
-function renderSourceLibraryRows(files){if(!files?.length)return `<div class="empty" style="padding:12px">Noch keine Quellen-Dateien im Repository.</div>`;return files.map((file,idx)=>`<div class="source-library-item"><div><b>${esc(file.name||file.path)}</b><span>${esc(file.scholar||"—")}${file.book?` · ${esc(file.book)}`:""} · ${esc(file.type||"")}<br>${esc(file.path||"")}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="btn" href="${SITE_ORIGIN}${esc(file.url||("/"+file.path))}" target="_blank" rel="noopener">Öffnen</a><button class="btn primary" type="button" data-source-pick="${idx}">Diese Datei zum Beitrag hinzufügen</button></div></div>`).join("")}
-function previewLinksBlockAfterAdd(markdown,label,url){try{return extractLinksYamlBlock((appendLinkToMarkdown(String(markdown||""),label,url).match(/^---\s*\n([\s\S]*?)\n---/)||[])[1]||"")||"(links:-Block wird neu angelegt)"}catch(e){return `links:\n  - label: "${label}"\n    url: "${url}"`}}
-function renderSourcePreviewBox(pending,context){if(!pending)return `<div class="source-preview-box">Noch keine Quelle vorbereitet. Datei hochladen oder aus Bibliothek wählen.</div>`;const md=getMarkdownForSourceContext(context||pending.context||"draft");const linksPreview=previewLinksBlockAfterAdd(md,pending.label,pending.url);return `<div class="source-preview-box"><strong>Vorschau</strong>\nDatei: ${esc(pending.originalName||pending.name||"")}\nSpeicherort: ${esc(pending.path||"")}\nNeuer Link:\n  - label: "${esc(pending.label||"")}"\n    url: "${esc(pending.url||"")}"\n\n<strong>links:-Block danach:</strong>\n${esc(linksPreview)}${pending.existing?"\n\n(Hinweis: Datei existiert bereits — nur Link wird ergänzt)":""}</div>`}
+async function loadSourceLibrary(force){if(sourceLibraryBusy)return sourceLibraryCache||{files:[]};if(sourceLibraryCache&&!force)return sourceLibraryCache;sourceLibraryBusy=true;try{const data=await workerGetRequest("sources/list?usage=1",{admin:true});sourceLibraryCache={files:Array.isArray(data.files)?data.files:[],sourcesDir:data.sourcesDir||"assets/sources"};return sourceLibraryCache}catch(e){sourceLibraryCache={files:[],error:String(e.message||e)};return sourceLibraryCache}finally{sourceLibraryBusy=false}}
+function renderSourceLibraryRows(files){if(!files?.length)return `<div class="empty" style="padding:12px">Noch keine Quellen-Dateien im Repository.</div>`;return files.map((file,idx)=>{const usage=file.usage||[];const usageText=usage.length?`${usage.length} Beitrag/Slide`: "Nicht referenziert";return `<div class="source-library-item"><div><b>${esc(file.name||file.path)}</b><span>${esc(file.scholar||"—")}${file.book?` · ${esc(file.book)}`:""} · ${esc(file.type||"")} · ${esc(usageText)}<br>${esc(file.path||"")}${file.size?`<br>${esc(file.size)}`:""}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="btn" href="${SITE_ORIGIN}${esc(file.url||("/"+file.path))}" target="_blank" rel="noopener">Öffnen</a><button class="btn primary" type="button" data-source-pick="${idx}">Zum Beitrag hinzufügen</button></div></div>`}).join("")}
+function previewLinksBlockAfterAdd(markdown,label,url,target){try{const updated=appendLinkToMarkdown(String(markdown||""),label,url,target||"post");const info=window.DARQuellen?DARQuellen.analyzePostSources(updated):null;if(info?.isSlide&&target&&target!=="post")return `Slide-Ziel aktualisiert (${info.slides.length} Slides)`;return extractLinksYamlBlock((updated.match(/^---\s*\n([\s\S]*?)\n---/)||[])[1]||"")||"(links:-Block wird neu angelegt)"}catch(e){return `links:\n  - label: "${label}"\n    url: "${url}"`}}
+function renderSourcePreviewBox(pending,context){if(!pending)return `<div class="source-preview-box">Noch keine Quelle vorbereitet. Datei hochladen, manuellen Link setzen oder aus Bibliothek wählen.</div>`;const md=getMarkdownForSourceContext(context||pending.context||"draft");const target=getSourceLinkTargetFromUi();const linksPreview=previewLinksBlockAfterAdd(md,pending.label,pending.url,target);const testUrl=pending.url.startsWith("http")?pending.url:SITE_ORIGIN+pending.url.replace(/^\//,"");return `<div class="source-preview-box"><strong>Vorschau vor dem Speichern</strong>\nDatei: ${esc(pending.originalName||pending.name||"")}\nSpeicherort: ${esc(pending.path||"")}\nLabel: ${esc(pending.label||"")}\nURL: ${esc(pending.url||"")}\nZiel: ${esc(String(sourceLinkTarget||"post"))}\n\n<strong>YAML-Vorschau:</strong>\n${esc(linksPreview)}${pending.existing?"\n\n(Hinweis: Datei existiert bereits — nur Link wird ergänzt)":""}\n\n<a class="btn primary" href="${esc(testUrl)}" target="_blank" rel="noopener" id="sourceTestLinkBtn">Quelle testen</a></div>`}
 function renderSourceFilesPanel(context){const pending=sourceDraftPending;const lib=sourceLibraryCache;return `<div class="source-files-panel" id="sourceFilesPanel" data-source-context="${esc(context)}">
-  <div class="section-head" style="margin-bottom:0"><h4>Quellen-Dateien</h4><span>PDF / Bild → links:</span></div>
-  <p class="source-files-lead">Datei hochladen oder aus vorhandenen Quellen wählen. Die App erzeugt automatisch den passenden Eintrag im <code>links:</code>-Block.</p>
+  <div class="section-head" style="margin-bottom:0"><h4>Quellen-Dateien</h4><span>PDF / Bild / Scan → links:</span></div>
+  <p class="source-files-lead">Bestehende Beiträge: Datei hochladen, Label &amp; Ziel wählen (Gesamtbeitrag oder einzelne Slide). Links bearbeiten/entfernen unten.</p>
+  ${renderExistingSourcesOverview(context)}
+  <details open><summary>Bestehende Links bearbeiten</summary>${renderExistingSourceLinkRows(context)}</details>
   <div class="source-dropzone" id="sourceDropzone">PDF oder Bild per Drag &amp; Drop hierher · max. 20 MB</div>
   <div class="source-files-toolbar">
     <input type="file" id="sourcePdfInput" accept=".pdf,application/pdf" hidden>
     <input type="file" id="sourceImageInput" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" hidden>
     <button class="btn" type="button" id="sourcePickPdfBtn">PDF hochladen</button>
-    <button class="btn" type="button" id="sourcePickImageBtn">Bild hochladen</button>
+    <button class="btn" type="button" id="sourcePickImageBtn">Bild/Scan hochladen</button>
     <button class="btn" type="button" id="sourceReloadLibBtn">Bibliothek laden</button>
   </div>
   <div class="source-files-row">
-    <label>Label<select class="field" id="sourceLabelSelect">${SOURCE_LABEL_OPTIONS.map(opt=>`<option value="${esc(opt)}" ${pending?.label===opt?"selected":""}>${esc(opt)}</option>`).join("")}</select></label>
-    <label>Seite (PDF)<input class="field" id="sourcePageInput" type="number" min="1" step="1" placeholder="z. B. 43" value="${esc(pending?.page||"")}"></label>
+    <label>Label<select class="field" id="sourceLabelSelect"><option value="__custom__">Eigenes Label…</option>${SOURCE_LABEL_OPTIONS.map(opt=>`<option value="${esc(opt)}" ${pending?.label===opt?"selected":""}>${esc(opt)}</option>`).join("")}</select></label>
+    <label>Eigenes Label<input class="field" id="sourceCustomLabelInput" placeholder="z. B. → Shamela" value="${esc(sourceCustomLabel||"")}"></label>
+    <label>Seite (PDF)<input class="field" id="sourcePageInput" type="number" min="1" step="1" placeholder="z. B. 152" value="${esc(pending?.page||"")}"></label>
+    ${renderSourceTargetSelect(context)}
   </div>
+  <div class="source-files-row">
+    <label>Eigener Link (URL)<input class="field" id="sourceManualUrlInput" placeholder="https://… oder /assets/sources/…" value="${esc(sourceManualUrl||"")}"></label>
+    <label style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--soft)"><input type="checkbox" id="sourceSetSlideImageCb" ${sourceSetSlideImage?"checked":""}> Bei Bild-Upload auch slide.image setzen</label>
+  </div>
+  <div class="source-files-toolbar"><button class="btn" type="button" id="sourceManualLinkBtn">Manuellen Link hinzufügen</button></div>
   ${renderSourcePreviewBox(pending,context)}
   <div class="source-files-toolbar">
     <button class="btn primary" type="button" id="sourceAddMarkdownBtn" ${pending?"":"disabled"}>Zum Markdown hinzufügen</button>
@@ -912,11 +946,17 @@ function renderSourceFilesPanel(context){const pending=sourceDraftPending;const 
   <div class="upload-status" id="sourcePanelStatus">${sourceUploadQueue.length?`<strong>${sourceUploadQueue.length}</strong> Datei(en) werden beim Veröffentlichen mit hochgeladen.`:""}</div>
   <details ${lib?.files?.length?"open":""}><summary>Quellen-Bibliothek (${lib?.files?.length||0})</summary><div class="source-library" id="sourceLibraryList">${renderSourceLibraryRows(lib?.files||[])}</div></details>
 </div>`}
-function getMarkdownForSourceContext(context){if(context==="ordner")return document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown||"";return document.getElementById("postMarkdownInput")?.value||draftMarkdown||""}
-function setMarkdownForSourceContext(context,markdown){if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown,dirty:true};const el=document.getElementById("ordnerEditor");if(el)el.value=markdown}else{draftMarkdown=markdown;const el=document.getElementById("postMarkdownInput");if(el)el.value=markdown;updateDraftPreview()}}
-async function prepareSourceDraftFromFile(file,context){validateSourceFile(file);const markdown=getMarkdownForSourceContext(context);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const ext=sourceFileExtension(file.name);const label=document.getElementById("sourceLabelSelect")?.value||defaultSourceLabelForExt(ext);const path=buildSourceStoragePath(markdown,file.name,ext==="pdf"?pageNum:0);const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");const base64=await readFileAsBase64(file);sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,ext==="pdf"?pageNum:0),path,url,label,page:ext==="pdf"?pageNum:"",ext,base64,existing:false,context};return sourceDraftPending}
-function prepareSourceDraftFromLibrary(file,context){const ext=sourceFileExtension(file.path||file.name);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const label=document.getElementById("sourceLabelSelect")?.value||defaultSourceLabelForExt(ext);const path=String(file.path||"").replace(/^\/+/,"");const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");sourceDraftPending={originalName:file.name||path.split("/").pop(),name:file.name,path,url,label,page:ext==="pdf"?pageNum:"",ext,existing:true,context};return sourceDraftPending}
-function applySourceDraftToMarkdown(context){if(!sourceDraftPending)return;const md=getMarkdownForSourceContext(context);const updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url);setMarkdownForSourceContext(context,updated);if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null;return updated}
+function getMarkdownForSourceContext(context){if(context==="ordner")return document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown||"";if(context==="quellen")return document.getElementById("quellenEditor")?.value||quellenEdit.markdown||"";return document.getElementById("postMarkdownInput")?.value||draftMarkdown||""}
+function setMarkdownForSourceContext(context,markdown){if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown,dirty:true};const el=document.getElementById("ordnerEditor");if(el)el.value=markdown}else if(context==="quellen"){quellenEdit={...quellenEdit,markdown,dirty:true};const el=document.getElementById("quellenEditor");if(el)el.value=markdown}else{draftMarkdown=markdown;const el=document.getElementById("postMarkdownInput");if(el)el.value=markdown;updateDraftPreview()}}
+function resolveSourceLabelFromUi(){const sel=document.getElementById("sourceLabelSelect")?.value||"";if(sel==="__custom__")return (document.getElementById("sourceCustomLabelInput")?.value||sourceCustomLabel||"→ Quelle").trim()||"→ Quelle";return sel||"→ Quelle"}
+async function prepareSourceDraftFromFile(file,context){validateSourceFile(file);const markdown=getMarkdownForSourceContext(context);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const ext=sourceFileExtension(file.name);const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=buildSourceStoragePath(markdown,file.name,ext==="pdf"?pageNum:0);const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");const base64=await readFileAsBase64(file);sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,ext==="pdf"?pageNum:0,markdown),path,url,label,page:ext==="pdf"?pageNum:"",ext,base64,existing:false,context};return sourceDraftPending}
+function prepareSourceDraftFromLibrary(file,context){const ext=sourceFileExtension(file.path||file.name);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=String(file.path||"").replace(/^\/+/,"");const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");sourceDraftPending={originalName:file.name||path.split("/").pop(),name:file.name,path,url,label,page:ext==="pdf"?pageNum:"",ext,existing:true,context};return sourceDraftPending}
+function applySourceDraftToMarkdown(context){if(!sourceDraftPending&&!sourceManualUrl)return;const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();let updated=md;if(sourceDraftPending){updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url,target);if(sourceSetSlideImage&&sourceDraftPending.ext!=="pdf"&&target&&target!=="post"&&window.DARQuellen){const indices=target.indices||[];indices.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"image",sourceDraftPending.url)})}if(sourceDraftPending.ext==="pdf"&&target&&target!=="post"&&window.DARQuellen){const indices=target.indices||[];indices.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"pdf",sourceDraftPending.url)})}if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null}else if(sourceManualUrl){const label=resolveSourceLabelFromUi();updated=appendLinkToMarkdown(md,label,sourceManualUrl.trim(),target);sourceManualUrl=""}
+setMarkdownForSourceContext(context,updated);return updated}
+function applyManualSourceLink(context){const url=(document.getElementById("sourceManualUrlInput")?.value||sourceManualUrl||"").trim();if(!url){toast("URL fehlt");return}sourceManualUrl=url;const label=resolveSourceLabelFromUi();const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();const updated=appendLinkToMarkdown(md,label,url,target);setMarkdownForSourceContext(context,updated);sourceManualUrl="";toast("Manueller Link ergänzt");return updated}
+function removeSourceLinkFromContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return md;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.removeLinkFromMarkdownTarget(md,target,linkIndex);setMarkdownForSourceContext(context,updated);return updated}
+function editSourceLinkInContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return;const info=DARQuellen.analyzePostSources(md);let link;if(where==="slide")link=info.slides[Number(slideIndex)]?.links?.[linkIndex];else link=info.postLinks[linkIndex];if(!link)return;const newLabel=prompt("Label:",link.label||"→ Quelle");if(newLabel===null)return;const newUrl=prompt("URL:",link.url||"");if(newUrl===null)return;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.updateLinkInMarkdownTarget(md,target,linkIndex,newLabel,newUrl);setMarkdownForSourceContext(context,updated);toast("Link aktualisiert")}
+function validateBeforeSourceSave(context){const md=normalizeMarkdownForStorage(getMarkdownForSourceContext(context));if(!window.DARQuellen)return{ok:true,errors:[],warnings:[]};return DARQuellen.validateSourceSave(md,sourceUploadQueue)}
 function collectSourceFilesForWorker(){return sourceUploadQueue.map(item=>({path:item.path,contentBase64:item.contentBase64}))}
 function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const panel=document.getElementById("sourceFilesPanel");if(!panel)return;const drop=document.getElementById("sourceDropzone");const handleFiles=async files=>{const file=files&&files[0];if(!file)return;try{await prepareSourceDraftFromFile(file,sourceEditorContext);renderShell()}catch(e){toast(e.message||String(e))}};if(drop){drop.ondragover=e=>{e.preventDefault();drop.classList.add("is-dragover")};drop.ondragleave=()=>drop.classList.remove("is-dragover");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("is-dragover");handleFiles(e.dataTransfer?.files)}}
   const pdfBtn=document.getElementById("sourcePickPdfBtn");if(pdfBtn)pdfBtn.onclick=()=>document.getElementById("sourcePdfInput")?.click();
@@ -924,12 +964,20 @@ function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const p
   const pdfInput=document.getElementById("sourcePdfInput");if(pdfInput)pdfInput.onchange=e=>handleFiles(e.target.files);
   const imgInput=document.getElementById("sourceImageInput");if(imgInput)imgInput.onchange=e=>handleFiles(e.target.files);
   const reloadBtn=document.getElementById("sourceReloadLibBtn");if(reloadBtn)reloadBtn.onclick=async()=>{await loadSourceLibrary(true);renderShell()};
-  const labelSelect=document.getElementById("sourceLabelSelect");if(labelSelect)labelSelect.onchange=()=>{if(sourceDraftPending)sourceDraftPending.label=labelSelect.value};
+  const labelSelect=document.getElementById("sourceLabelSelect");if(labelSelect)labelSelect.onchange=()=>{if(sourceDraftPending)sourceDraftPending.label=resolveSourceLabelFromUi()};
+  const customLabel=document.getElementById("sourceCustomLabelInput");if(customLabel)customLabel.oninput=e=>{sourceCustomLabel=e.target.value;if(sourceDraftPending)sourceDraftPending.label=resolveSourceLabelFromUi()};
+  const targetSelect=document.getElementById("sourceTargetSelect");if(targetSelect)targetSelect.onchange=e=>{sourceLinkTarget=e.target.value;renderShellPreserveField("sourceTargetSelect",()=>{})};
+  const targetMulti=document.getElementById("sourceTargetMulti");if(targetMulti)targetMulti.onchange=()=>{const selected=[...targetMulti.selectedOptions].map(o=>o.value);sourceLinkTarget=selected.length?`slide:${selected.join(",")}`:"post";renderShell()};
+  const slideImgCb=document.getElementById("sourceSetSlideImageCb");if(slideImgCb)slideImgCb.onchange=e=>{sourceSetSlideImage=!!e.target.checked};
+  const manualUrl=document.getElementById("sourceManualUrlInput");if(manualUrl)manualUrl.oninput=e=>{sourceManualUrl=e.target.value};
+  const manualBtn=document.getElementById("sourceManualLinkBtn");if(manualBtn)manualBtn.onclick=()=>{try{applyManualSourceLink(sourceEditorContext);renderShell()}catch(e){toast(e.message||String(e))}};
   const pageInput=document.getElementById("sourcePageInput");if(pageInput)pageInput.oninput=()=>{if(!sourceDraftPending)return;const ext=sourceDraftPending.ext;const pageNum=pageInput.value?Math.max(1,parseInt(pageInput.value,10)||0):0;sourceDraftPending.page=ext==="pdf"?pageNum:"";if(sourceDraftPending.existing){sourceDraftPending.url=buildSourceLinkUrl(sourceDraftPending.path,ext==="pdf"?pageNum:0,ext==="pdf")}else{sourceDraftPending.path=buildSourceStoragePath(getMarkdownForSourceContext(sourceEditorContext),sourceDraftPending.originalName,ext==="pdf"?pageNum:0);sourceDraftPending.url=buildSourceLinkUrl(sourceDraftPending.path,ext==="pdf"?pageNum:0,ext==="pdf")}const prev=document.querySelector(".source-preview-box");if(prev)prev.outerHTML=renderSourcePreviewBox(sourceDraftPending,sourceEditorContext)};
   const addBtn=document.getElementById("sourceAddMarkdownBtn");if(addBtn)addBtn.onclick=()=>{try{applySourceDraftToMarkdown(sourceEditorContext);toast("Quellen-Link im Markdown ergänzt");renderShell()}catch(e){toast(e.message||String(e))}};
   const applyBtn=document.getElementById("sourceApplyMarkdownBtn");if(applyBtn)applyBtn.onclick=()=>{try{applySourceDraftToMarkdown(sourceEditorContext);toast("Markdown mit Quellen-Link aktualisiert");renderShell()}catch(e){toast(e.message||String(e))}};
   const queueBtn=document.getElementById("sourceQueueUploadBtn");if(queueBtn)queueBtn.onclick=()=>{if(sourceDraftPending&&!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});toast("Für Upload vorgemerkt");renderShell()};
   panel.querySelectorAll("[data-source-pick]").forEach(btn=>btn.onclick=()=>{const idx=Number(btn.getAttribute("data-source-pick"));const file=sourceLibraryCache?.files?.[idx];if(!file)return;prepareSourceDraftFromLibrary(file,sourceEditorContext);renderShell()});
+  panel.querySelectorAll("[data-link-remove]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-remove")||"").split(":");const where=parts[0];const slideIndex=parts[1];const linkIndex=parts[2];if(!confirm("Quellenlink wirklich entfernen?"))return;try{removeSourceLinkFromContext(sourceEditorContext,where,slideIndex,linkIndex);toast("Link entfernt");renderShell()}catch(e){toast(e.message||String(e))}});
+  panel.querySelectorAll("[data-link-edit]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-edit")||"").split(":");editSourceLinkInContext(sourceEditorContext,parts[0],parts[1],parts[2]);renderShell()});
   if(!sourceLibraryCache&&!sourceLibraryBusy)loadSourceLibrary(false).then(()=>renderShell()).catch(()=>{})}
 function repairMarkdownStructure(markdown){
   let out=sanitizeMarkdownQuotes(String(markdown||"").trim());
@@ -1406,6 +1454,40 @@ async function loadOrdnerPost(filename){
     toast(e.message||"Beitrag konnte nicht geladen werden");
   }
 }
+function setQuellenEditorStatus(msg){quellenEditorStatus=msg;const el=document.getElementById("quellenEditorStatus");if(el)el.textContent=msg}
+async function ensureQuellenCatalog(force){
+  if(quellenCatalogLoaded&&!force)return quellenCatalogMeta;
+  quellenCatalogBusy=true;
+  try{
+    const files=await fetchPostsIndexFiles();
+    const catalog=[];
+    for(let i=0;i<files.length;i+=8){
+      const batch=files.slice(i,i+8);
+      await Promise.all(batch.map(async file=>{
+        const name=file.name||file;if(!name||!String(name).endsWith(".md"))return;
+        const urls=[`${SITE_ORIGIN}/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(file.sha||Date.now())}`];
+        for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const head=await r.text();const entry=window.DARQuellen?DARQuellen.parseQuellenCatalogHead(head,name):{filename:name,title:name.replace(/\.md$/,""),category:"",id:"",date:"",tags:[],isSlide:false,hasLinks:false,hasPdfImage:false,hasLocalSources:false};catalog.push(entry);break}catch(e){}}
+      }));
+    }
+    quellenCatalogMeta=catalog.sort((a,b)=>(b.date||"").localeCompare(a.date||"")||String(a.title).localeCompare(String(b.title),"de"));
+    quellenCatalogLoaded=true;
+    return quellenCatalogMeta;
+  }finally{quellenCatalogBusy=false}
+}
+async function loadQuellenPost(filename){
+  if(!filename)return;
+  setQuellenEditorStatus("Lade Beitrag…");
+  try{
+    const data=await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
+    quellenEdit={filename:data.filename||filename,markdown:data.markdown||"",sha:data.sha||"",postId:data.postId||"",title:data.title||filename,dirty:false};
+    sourceLinkTarget="post";
+    setQuellenEditorStatus("Bereit — Quellen hinzufügen, bearbeiten oder entfernen.");
+  }catch(e){
+    quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
+    setQuellenEditorStatus(`Fehler: ${e.message||e}`);
+    toast(e.message||"Beitrag konnte nicht geladen werden");
+  }
+}
 function formatJummahPushTime(iso){if(!iso)return"—";try{return new Date(iso).toLocaleString("de-DE")}catch(e){return String(iso)}}
 function renderJummahPushStatusBox(payload){
   const st=payload?.status||payload||{};
@@ -1491,7 +1573,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -1505,6 +1587,7 @@ function renderShell(){
   enhanceAdminCollapsibles();
   updateAdminBackButton();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
+  if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -1514,8 +1597,9 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
+    if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -1562,6 +1646,7 @@ function renderStart(ctx){
     ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
     ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
+    ${folderCard("③b","Quellen","PDF/Bild/Scan nachträglich — auch pro Slide.","quellen","Quellen-Manager")}
     ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
@@ -1655,6 +1740,36 @@ function renderVisitors(ctx){
     <div class="visitor-foot">
       <span>Vollständige Rangliste mit Suche &amp; Filter im Bereich <strong>Inhalte</strong>.</span>
       <button class="btn" data-tab="content" type="button">Inhalte öffnen</button>
+    </div>
+  </section>`;
+}
+function renderQuellen(){
+  const busy=quellenCatalogBusy;
+  const list=window.DARQuellen?DARQuellen.filterQuellenCatalog(quellenCatalogMeta,quellenSearchQuery):quellenCatalogMeta.filter(p=>!quellenSearchQuery.trim()||JSON.stringify(p).toLowerCase().includes(quellenSearchQuery.trim().toLowerCase()));
+  const rows=list.slice(0,120).map(p=>`<button class="quellen-result-row ${quellenEdit.filename===p.filename?"is-active":""}" data-quellen-post="${esc(p.filename)}" type="button"><span><span class="quellen-result-title">${esc(cleanTitle(p.title))}</span><span class="quellen-result-meta">${esc(p.filename)} · ${esc(p.category||"")} · ${esc(p.id||"")}${p.date?` · ${esc(String(p.date).slice(0,10))}`:""}</span></span><span class="quellen-badges">${p.isSlide?`<span class="quellen-badge">Slide</span>`:""}${p.hasLinks?`<span class="quellen-badge">Links</span>`:""}${p.hasPdfImage?`<span class="quellen-badge">PDF/Bild</span>`:""}${p.hasLocalSources?`<span class="quellen-badge">Lokal</span>`:""}</span></button>`).join("");
+  const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
+  return `<section class="quellen-studio">
+    <div class="panel">
+      <div class="section-head"><h3>Bestehende Beiträge bearbeiten / Quellen-Dateien verwalten</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
+      <p class="ordner-lead">Suche nach ID, Dateiname, Titel, Kategorie, Thema, Gelehrter, Buch, Tags oder Datum. Beitrag öffnen → PDF/Bild/Scan hochladen → Ziel wählen (Gesamt oder Slide) → Vorschau → speichern &amp; veröffentlichen.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}</p>
+    </div>
+    <div class="quellen-grid">
+      <aside class="panel quellen-search-panel">
+        <input class="field" id="quellenSearchInput" type="search" placeholder="z. B. 351, ibn-abd-al-barr, Nuzūl, Aqidah, al-Istidhkār…" value="${esc(quellenSearchQuery)}">
+        <div class="quellen-result-list">${rows||`<div class="empty">${busy?"Lade Beiträge…":"Keine Treffer."}</div>`}</div>
+        <button class="btn" id="quellenReloadBtn" type="button">Katalog neu laden</button>
+      </aside>
+      <div class="panel quellen-editor-panel">
+        <div class="section-head"><h3>Quellen-Editor</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
+        ${quellenEdit.filename?`<textarea class="paste-area ordner-editor-area" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
+        ${renderSourceFilesPanel("quellen")}
+        <div class="ordner-editor-actions">
+          <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
+          <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">Live-Vorschau</a>
+          <button class="btn primary" id="quellenSaveBtn" type="button">Speichern &amp; veröffentlichen</button>
+        </div>
+        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Quellen-Dateien werden gemeinsam hochgeladen.")}</div>`:`<div class="empty">Links einen Beitrag aus der Suche wählen.</div>`}
+      </div>
     </div>
   </section>`;
 }
@@ -2315,6 +2430,9 @@ function bindOrdnerUi(){
     if(!ordnerEdit.filename)return;
     const markdown=normalizeMarkdownForStorage(document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown);
     if(!markdown.trim()){toast("Markdown ist leer");return}
+    const check=validateBeforeSourceSave("ordner");
+    if(!check.ok){toast(check.errors[0]||"Validierung fehlgeschlagen");setOrdnerEditorStatus(`Blockiert: ${check.errors.join(" · ")}`);return}
+    if(check.warnings?.length)setOrdnerEditorStatus(`Hinweis: ${check.warnings.join(" · ")}`);
     if(!confirm(`Beitrag „${ordnerEdit.filename}“ live speichern?\n\nKein Push — nur Korrektur für Besucher.`))return;
     saveBtn.disabled=true;setOrdnerEditorStatus("Speichere live…");
     try{
@@ -2324,13 +2442,59 @@ function bindOrdnerUi(){
       sourceDraftPending=null;
       sourceUploadQueue=[];
       ordnerCatalogLoaded=false;
+      quellenCatalogLoaded=false;
       await ensureOrdnerCatalog(true);
       addAdminLog("Korrektur","Beitrag live ohne Push",ordnerEdit.filename);
-      setOrdnerEditorStatus(`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)} · ohne Push`);
+      setOrdnerEditorStatus(`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)} · ${sourceFiles.length?sourceFiles.length+" Quellen-Datei(en)": "ohne Push"}`);
       toast("Live gespeichert (ohne Push)");
       renderShell();
     }catch(e){
       setOrdnerEditorStatus(`Fehler: ${e.message||e}`);
+      toast(e.message||"Speichern fehlgeschlagen");
+    }finally{saveBtn.disabled=false}
+  };
+}
+function bindQuellenUi(){
+  const search=document.getElementById("quellenSearchInput");if(search)search.oninput=e=>{quellenSearchQuery=e.target.value;renderShellPreserveField("quellenSearchInput",()=>{})};
+  const reload=document.getElementById("quellenReloadBtn");if(reload)reload.onclick=async()=>{quellenCatalogLoaded=false;setQuellenEditorStatus("Lade Katalog…");await ensureQuellenCatalog(true);setQuellenEditorStatus("Katalog aktualisiert.");renderShell()};
+  document.querySelectorAll("[data-quellen-post]").forEach(btn=>btn.onclick=async()=>{
+    const filename=btn.getAttribute("data-quellen-post");
+    if(!filename)return;
+    if(quellenEdit.dirty&&!confirm("Ungespeicherte Änderungen verwerfen?"))return;
+    await loadQuellenPost(filename);
+    renderShell();
+  });
+  const editor=document.getElementById("quellenEditor");if(editor)editor.oninput=e=>{quellenEdit={...quellenEdit,markdown:e.target.value,dirty:true}};
+  const editorReload=document.getElementById("quellenEditorReloadBtn");if(editorReload)editorReload.onclick=async()=>{
+    if(!quellenEdit.filename)return;
+    if(quellenEdit.dirty&&!confirm("Ungespeicherte Änderungen verwerfen?"))return;
+    await loadQuellenPost(quellenEdit.filename);
+    renderShell();
+  };
+  const saveBtn=document.getElementById("quellenSaveBtn");if(saveBtn)saveBtn.onclick=async()=>{
+    if(!quellenEdit.filename)return;
+    const markdown=normalizeMarkdownForStorage(document.getElementById("quellenEditor")?.value||quellenEdit.markdown);
+    if(!markdown.trim()){toast("Markdown ist leer");return}
+    const check=validateBeforeSourceSave("quellen");
+    if(!check.ok){toast(check.errors[0]||"Validierung fehlgeschlagen");setQuellenEditorStatus(`Blockiert: ${check.errors.join(" · ")}`);return}
+    const sourceFiles=collectSourceFilesForWorker();
+    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen\n• Kein Push an Besucher`;
+    if(!confirm(msg))return;
+    saveBtn.disabled=true;setQuellenEditorStatus("Speichere Markdown + Quellen…");
+    try{
+      const result=await workerPostRequest("post/update",{filename:quellenEdit.filename,markdown,sha:quellenEdit.sha,skipPush:true,sourceFiles});
+      quellenEdit={...quellenEdit,markdown,sha:"",dirty:false};
+      sourceDraftPending=null;
+      sourceUploadQueue=[];
+      sourceLibraryCache=null;
+      quellenCatalogLoaded=false;
+      await ensureQuellenCatalog(true);
+      addAdminLog("Quellen","Beitrag + Quellen gespeichert",`${quellenEdit.filename}${sourceFiles.length?` · ${sourceFiles.length} Datei(en)`:""}`);
+      setQuellenEditorStatus(`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)}${sourceFiles.length?` · ${sourceFiles.length} Quellen-Datei(en) online`:""}`);
+      toast("Quellen gespeichert & veröffentlicht");
+      renderShell();
+    }catch(e){
+      setQuellenEditorStatus(`Fehler: ${e.message||e}`);
       toast(e.message||"Speichern fehlgeschlagen");
     }finally{saveBtn.disabled=false}
   };
@@ -2370,6 +2534,7 @@ function bindUi(){
   bindCommandCenterForms();
   bindRankCards();
   bindOrdnerUi();
+  bindQuellenUi();
   bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
 }
 function bindCommandCenterForms(){

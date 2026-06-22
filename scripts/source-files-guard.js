@@ -49,8 +49,21 @@ function runSourceFilesGuard() {
     "Quellen-Dateien",
     "Zum Markdown hinzufügen",
     "Speichern und Markdown aktualisieren",
-    "Diese Datei zum Beitrag hinzufügen",
-    "sources/list"
+    "Zum Beitrag hinzufügen",
+    "sources/list",
+    "renderQuellen",
+    "Bestehende Beiträge bearbeiten",
+    "quellen-manager.js",
+    "Quelle testen",
+    "validateBeforeSourceSave"
+  ]);
+
+  mustInclude("admin/quellen-manager.js", read("admin/quellen-manager.js"), [
+    "appendLinkToMarkdownTarget",
+    "removeLinkFromMarkdownTarget",
+    "setSlideMediaField",
+    "validateSourceSave",
+    "parseQuellenCatalogHead"
   ]);
 
   mustInclude("worker.js", worker, [
@@ -60,7 +73,8 @@ function runSourceFilesGuard() {
     "/api/admin/sources/list",
     "normalizeSourceFilesInput",
     "listSourceFiles",
-    "prepareSourceCommitEntries"
+    "prepareSourceCommitEntries",
+    "scanSourceUsageInPosts"
   ]);
 
   if (!fs.existsSync(path.join(ROOT, "assets/sources/.gitkeep"))) {
@@ -69,10 +83,10 @@ function runSourceFilesGuard() {
     ok("assets/sources/.gitkeep vorhanden");
   }
 
-  if (!admin.includes('renderSourceFilesPanel("draft")') || !admin.includes('renderSourceFilesPanel("ordner")')) {
-    fail("admin: Quellen-Panel fehlt im Einzelbeitrag oder Ordner-Editor");
+  if (!admin.includes('renderSourceFilesPanel("draft")') || !admin.includes('renderSourceFilesPanel("ordner")') || !admin.includes('renderSourceFilesPanel("quellen")')) {
+    fail("admin: Quellen-Panel fehlt im Einzelbeitrag, Ordner- oder Quellen-Editor");
   } else {
-    ok("admin: Quellen-Panel in Einzelbeitrag + Ordner-Editor");
+    ok("admin: Quellen-Panel in Einzelbeitrag + Ordner-Editor + Quellen-Tab");
   }
 
   if (!admin.includes("collectSourceFilesForWorker()") || !worker.includes("input.sourceFiles")) {

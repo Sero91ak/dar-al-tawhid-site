@@ -93,6 +93,9 @@ jobs:
       - name: Source files guard (Admin Quellen-Upload PDF/Bild)
         run: node scripts/source-files-guard.js
 
+      - name: Quellen manager tests (Slide/Link YAML)
+        run: node scripts/quellen-manager-test.js
+
       - name: Slide post guard (Carousel + Parser + Theme-Tokens)
         run: node scripts/slide-post-guard.js
 
