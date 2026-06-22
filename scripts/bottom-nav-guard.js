@@ -107,15 +107,25 @@ function runBottomNavGuard() {
     } else {
       ok(`${file}: #bottomNav Viewport-Fix vorhanden`);
     }
+    if (!html.includes("__bottomNavDockBusy")) {
+      fail(`${file}: Bottom-Nav-Guard muss Re-Entrancy-Schutz haben`);
+    } else {
+      ok(`${file}: Re-Entrancy-Schutz vorhanden`);
+    }
+    if (/setInterval\(check,\s*700\)/.test(html)) {
+      fail(`${file}: setInterval(700) im Bottom-Nav-Guard verboten (Safari-Crash)`);
+    } else {
+      ok(`${file}: kein aggressives setInterval im Bottom-Nav-Guard`);
+    }
     if (!html.includes("getComputedStyle(nav).position!==\"fixed\"")) {
       fail(`${file}: verifyBottomNavDock muss position:fixed prüfen`);
     } else {
       ok(`${file}: position:fixed-Verifikation vorhanden`);
     }
-    if (!html.includes("__bottomNavGuardRef")) {
-      fail(`${file}: Scroll-Drift-Erkennung fehlt`);
+    if (!html.includes("lastCheck")) {
+      fail(`${file}: Bottom-Nav-Guard Throttle fehlt`);
     } else {
-      ok(`${file}: Scroll-Drift-Erkennung vorhanden`);
+      ok(`${file}: Bottom-Nav-Guard Throttle vorhanden`);
     }
   }
 
