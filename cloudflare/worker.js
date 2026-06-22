@@ -422,6 +422,8 @@ function listPostFiles(files) {
   return (Array.isArray(files) ? files : []).filter((file) => file && (file.name || typeof file === "string"));
 }
 
+/* PUBLISH ISOLATION GUARD FINAL: atomic Git commits, bulk publish, deferred live checks */
+
 async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   const markdownRaw = String(input.markdown || "").trim();
   let filename = String(input.filename || "").trim();

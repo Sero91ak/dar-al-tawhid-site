@@ -39,6 +39,9 @@ jobs:
       - name: Push system guard (block deploy if scheduler missing)
         run: node ../scripts/push-system-guard.js
 
+      - name: Publish isolation guard (Admin darf Besucher nicht überlasten)
+        run: node ../scripts/publish-isolation-guard.js
+
       - name: Deploy worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
