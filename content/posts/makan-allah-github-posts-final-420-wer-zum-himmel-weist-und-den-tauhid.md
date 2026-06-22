@@ -2,7 +2,7 @@
 id: "makan-ibn-mandah-himmel-tauhid-420"
 date: "2026-06-22T07:19:19.000Z"
 title: "📖 Wer zum Himmel weist und den Tauḥīd bekräftigt"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und ʿUluww"
 scholar: "Ibn Mandah"
 book: "Kitāb al-Īmān"

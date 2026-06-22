@@ -2,7 +2,7 @@
 id: "makan-hammad-bin-zayd-nuzul-416"
 date: "2026-06-22T07:18:27.000Z"
 title: "📖 Er ist an Seinem Ort"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und Nuzūl"
 scholar: "Ḥammād b. Zayd"
 book: "Sharḥ Ḥadīth an-Nuzūl"

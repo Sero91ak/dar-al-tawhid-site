@@ -2,7 +2,7 @@
 id: "makan-fudayl-ibn-iyad-rabb-yafal-ma-yasha-415"
 date: "2026-06-22T07:18:14.000Z"
 title: "📖 Ich glaube an einen Herrn, der tut, was Er will"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und Nuzūl"
 scholar: "al-Fuḍayl b. ʿIyāḍ"
 book: "Khalq Afʿāl al-ʿIbād; Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah"

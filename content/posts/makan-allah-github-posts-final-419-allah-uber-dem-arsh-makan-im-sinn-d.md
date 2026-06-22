@@ -2,7 +2,7 @@
 id: "makan-ibn-battah-aala-makan-419"
 date: "2026-06-22T07:19:06.000Z"
 title: "📖 Allah über dem ʿArsh – Makān im Sinn der Erhabenheit"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und ʿUluww"
 scholar: "Ibn Baṭṭah al-ʿUkbarī"
 book: "al-Ibānah al-Kubrā"

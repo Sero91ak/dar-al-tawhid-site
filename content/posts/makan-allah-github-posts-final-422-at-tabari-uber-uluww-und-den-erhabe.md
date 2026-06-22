@@ -2,7 +2,7 @@
 id: "makan-tabari-uluw-makan-422"
 date: "2026-06-22T07:19:45.000Z"
 title: "📖 at-Ṭabarī über ʿUluww und den erhabenen Makān"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und ʿUluww"
 scholar: "at-Ṭabarī"
 book: "Jāmiʿ al-Bayān"

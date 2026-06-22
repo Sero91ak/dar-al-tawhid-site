@@ -2,7 +2,7 @@
 id: "makan-abdullah-ahmad-jahmiyyah-nicht-ueberall-414"
 date: "2026-06-22T07:18:01.000Z"
 title: "📖 Allah ist über dem Thron – nicht überall"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und ʿUluww"
 scholar: "ʿAbdullāh ibn Aḥmad ibn Ḥanbal"
 book: "ar-Radd ʿalā az-Zanādiqah wa-l-Jahmiyyah"

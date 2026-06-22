@@ -2,7 +2,7 @@
 id: "makan-mujmal-al-barrak-421"
 date: "2026-06-22T07:19:32.000Z"
 title: "📖 Makān ist ein mujmaler Begriff"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und ʿUluww"
 scholar: "ʿAbd ar-Raḥmān b. Nāṣir al-Barrāk"
 book: "Taʿlīqāt ʿalā al-Mukhālafāt al-ʿAqdiyyah fī Fatḥ al-Bārī"

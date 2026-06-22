@@ -2,7 +2,7 @@
 id: "makan-harb-kirmani-jahmiyyah-417"
 date: "2026-06-22T07:18:40.000Z"
 title: "📖 Jahmiyyah: Feinde Allahs"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und Jahmiyyah"
 scholar: "Ḥarb al-Kirmānī"
 book: "al-ʿUluw lil-ʿAliyy al-Ghaffār"

@@ -2,7 +2,7 @@
 id: "makan-ibn-abi-zayd-fawq-arsh-bi-dhatih-418"
 date: "2026-06-22T07:18:53.000Z"
 title: "📖 Allah über dem Thron – mit Seinem Wesen"
-category: "makan allah github posts final"
+category: "Makan الله"
 topic: "Makān und ʿUluww"
 scholar: "Ibn Abī Zayd al-Qayrawānī"
 book: "ar-Risālah"
