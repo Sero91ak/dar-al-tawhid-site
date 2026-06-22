@@ -874,6 +874,8 @@ async function publishPostViaWorkerRequest(markdown,filename,options={}){
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
+/* PUBLISH ISOLATION GUARD FINAL: Sammel-Paket = 1 Deploy via publish/bulk */
+
 async function publishBulkViaWorkerRequest(preparedPosts,options={}){
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
   const remember=!!document.getElementById("rememberWorkerSecret")?.checked;
