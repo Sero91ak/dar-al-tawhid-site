@@ -31,6 +31,7 @@ function runBottomNavGuard() {
     'id="appChromeDock"',
     "app-chrome-dock",
     'data-nav-dock="bottom"',
+    "display:contents!important",
     "function ensureBottomNavDock",
     "function initBottomNavGuard",
     "function verifyBottomNavDock",
@@ -39,6 +40,10 @@ function runBottomNavGuard() {
   ];
 
   const forbidden = [
+    {
+      pattern: /#appChromeDock\.app-chrome-dock\{[^}]*contain:layout style!important/,
+      msg: "#appChromeDock darf kein contain:layout style haben (bricht position:fixed am Viewport)"
+    },
     {
       pattern: /#appChromeDock\s+#bottomNav\.bottom-nav[\s\S]{0,220}position:relative!important/,
       msg: "#appChromeDock #bottomNav darf nicht position:relative haben"
@@ -91,6 +96,16 @@ function runBottomNavGuard() {
       fail(`${file}: #bottomNav muss innerhalb von #appChromeDock liegen`);
     } else {
       ok(`${file}: Tab-Leiste in #appChromeDock`);
+    }
+    if (!html.includes('setProperty("display","contents","important")')) {
+      fail(`${file}: ensureBottomNavDock muss Dock auf display:contents setzen`);
+    } else {
+      ok(`${file}: Dock display:contents vorhanden`);
+    }
+    if (!html.includes("#bottomNav.bottom-nav{position:fixed!important")) {
+      fail(`${file}: #bottomNav muss direkt am Viewport position:fixed haben`);
+    } else {
+      ok(`${file}: #bottomNav Viewport-Fix vorhanden`);
     }
     if (!html.includes("getComputedStyle(nav).position!==\"fixed\"")) {
       fail(`${file}: verifyBottomNavDock muss position:fixed prüfen`);
