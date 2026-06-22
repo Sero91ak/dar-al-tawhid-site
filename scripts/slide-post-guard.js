@@ -12,6 +12,10 @@ const FIXTURE = path.join(
   ROOT,
   "content/posts/makan-allah-github-posts-final-423-makan-und-nuzul-bei-den-fruhen-imam.md"
 );
+const FIXTURE_426 = path.join(
+  ROOT,
+  "content/posts/aqidah-426-ibn-abd-al-barr-ahlus-sunnah-bejahen-die-sifat-ohne-kayf.md"
+);
 
 function parseValue(v) {
   v = String(v || "").trim();
@@ -198,6 +202,17 @@ function runSlidePostGuard() {
   if (!fixtureSlides[0]?.links?.length) fail("Slide 1 ohne Links");
   if (!fixtureSlides[1]?.source) fail("Slide 2 ohne Quelle");
   if (!fixtureSlides[2]?.explanation) fail("Slide 3 ohne Erklärung");
+
+  if (!fs.existsSync(FIXTURE_426)) {
+    fail("Fixture 426 fehlt: " + FIXTURE_426);
+  } else {
+    const slides426 = parseSlidesFromYaml(extractYaml(fs.readFileSync(FIXTURE_426, "utf8")));
+    if (slides426.length !== 4) {
+      fail(`Post 426 erwartet 4 Slides, bekam ${slides426.length}`);
+    } else {
+      ok(`Post 426 parsed ${slides426.length} slides`);
+    }
+  }
 
   const fourSpaceYaml = [
     "slides:",
