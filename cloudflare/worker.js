@@ -1339,6 +1339,16 @@ function frontmatterValue(text, key) {
   return match ? stripYamlQuotes(match[1]) : "";
 }
 
+function repairYamlFrontmatter(markdown) {
+  return String(markdown || "").replace(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/, (_, fm, body) => {
+    const fixed = fm
+      .replace(/^\* /gm, "- ")
+      .replace(/^\s{4}(source|links|logo):/gm, "$1:")
+      .replace(/^\* label:/gm, "  - label:");
+    return `---\n${fixed}\n---\n\n${body || ""}`.trimEnd() + (body ? "\n" : "");
+  });
+}
+
 function repairMarkdownStructure(markdown) {
   let out = sanitizeMarkdownQuotes(String(markdown || "").trim());
   if (!out) return "";
@@ -1439,7 +1449,7 @@ function sanitizeUpdateId(value) {
 }
 
 function normalizeMarkdownForUpload(markdown, nextNumber) {
-  let out = repairMarkdownStructure(markdown);
+  let out = repairYamlFrontmatter(repairMarkdownStructure(markdown));
   const iso = new Date().toISOString().replace(/\.\d{3}Z$/, ".000Z");
   if (/^date:\s*.*$/m.test(out)) out = out.replace(/^date:\s*.*$/m, `date: "${iso}"`);
   let id = stripYamlQuotes(frontmatterValue(out, "id"));
