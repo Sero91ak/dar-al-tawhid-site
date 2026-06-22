@@ -2260,6 +2260,7 @@ function bindOrdnerUi(){
     const from=ordnerSelectedCat;
     const to=(document.getElementById("ordnerRenameInput")?.value||ordnerRenameValue||"").trim();
     if(!from||!to){toast("Ordner und neuer Name nötig");return}
+    if(categoryKeyAdmin(from)===categoryKeyAdmin(to)){setOrdnerStatus(`Der Ordner heißt auf dem Server bereits „${from}“. Wenn in der Besucher-App noch „makan allah github posts final“ steht: Seite mit ?refresh=1 öffnen oder App aktualisieren.`);toast("Bereits umbenannt — Besucher-App aktualisieren");return}
     if(!confirm(`Ordner „${from}“ in „${to}“ umbenennen?\n\nAlle Beiträge in diesem Ordner werden angepasst.`))return;
     renameBtn.disabled=true;setOrdnerStatus("Benenne um…");
     try{

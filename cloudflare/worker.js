@@ -948,6 +948,20 @@ function categoryLabelKey(name) {
     .trim();
 }
 
+function categoryMatchesRenameFrom(current, fromLabel) {
+  const fromKey = categoryLabelKey(fromLabel);
+  const currentKey = categoryLabelKey(current);
+  if (currentKey === fromKey) return true;
+  const legacyByTarget = {
+    [categoryLabelKey("Makan الله")]: [
+      categoryLabelKey("makan allah github posts final"),
+      categoryLabelKey("makan allah github post final")
+    ]
+  };
+  const legacy = legacyByTarget[fromKey];
+  return Array.isArray(legacy) && legacy.includes(currentKey);
+}
+
 async function updatePostCategory(env, input) {
   const filename = sanitizeFilename(String(input.filename || "").trim());
   const category = String(input.category || "").trim();
@@ -1032,7 +1046,7 @@ async function renameCategoryLabel(env, input) {
     if (!postFile?.content) continue;
     const markdown = base64ToUtf8(postFile.content);
     const current = frontmatterValue(markdown, "category");
-    if (categoryLabelKey(current) !== fromKey) continue;
+    if (!categoryMatchesRenameFrom(current, fromLabel)) continue;
     commitEntries.push({ path: postPath, content: applyCategoryToMarkdown(markdown, toLabel) });
     updatedPosts += 1;
   }
