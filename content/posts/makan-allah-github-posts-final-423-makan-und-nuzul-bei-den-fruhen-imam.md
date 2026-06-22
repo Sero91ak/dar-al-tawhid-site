@@ -50,6 +50,15 @@ slides:
         url: "https://shamela.ws/book/11258/38#:~:text=%D8%A3%D9%86%D8%A7%20%D8%A3%D8%A4%D9%85%D9%86%20%D8%A8%D8%B1%D8%A8%20%D9%8A%D9%81%D8%B9%D9%84%20%D9%85%D8%A7%20%D9%8A%D8%B4%D8%A7%D8%A1"
       - label: "→ PDF/Scan"
         url: "https://archive.org/download/alfirdwsiy2018_gmail_684/%D8%A7%D8%A8%D9%86%20%D8%AA%D9%8A%D9%85%D9%8A%D8%A9-%D8%B3%D8%A4%D8%A7%D9%84%20%D9%81%D9%8A%20%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A7%D9%84%D9%86%D8%B2%D9%88%D9%84%20%D9%88%D8%AC%D9%88%D8%A7%D8%A8%D9%87%20%D8%A3%D9%88%20%D8%B4%D8%B1%D8%AD%20%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A7%D9%84%D9%86%D8%B2%D9%88%D9%84%20%20%D9%83%D8%AA%D8%A7%D8%A8%20%20%20%D8%A7%D9%82%D8%B1%D8%A7%20%20%D8%A7%D9%88%D9%86%D9%84%D8%A7%D9%8A%D9%86%20%20684.pdf#page=41"
+  - title: "Fazit"
+    text: "Die Salaf bestätigten den Ḥadīth des Nuzūl ohne Tashbīh und ohne Taʿṭīl."
+    explanation: "Der falsche Denkrahmen der Jahmiyyah wird zurückgewiesen, nicht die Offenbarung. Bestätigt wird, was überliefert wurde, und das Wie bleibt Allah überlassen."
+    source: "Ibn Taymiyyah, Sharḥ Ḥadīth an-Nuzūl, S. 40–41; Gesamtfazit der frühen Imām-Aussagen."
+    links:
+      - label: "→ Shamela – Übersicht"
+        url: "https://shamela.ws/book/11258"
+      - label: "→ PDF/Scan"
+        url: "https://archive.org/download/alfirdwsiy2018_gmail_684/%D8%A7%D8%A8%D9%86%20%D8%AA%D9%8A%D9%85%D9%8A%D8%A9-%D8%B3%D8%A4%D8%A7%D9%84%20%D9%81%D9%8A%20%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A7%D9%84%D9%86%D8%B2%D9%88%D9%84%20%D9%88%D8%AC%D9%88%D8%A7%D8%A8%D9%87%20%D8%A3%D9%88%20%D8%B4%D8%B1%D8%AD%20%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A7%D9%84%D9%86%D8%B2%D9%88%D9%84%20%20%D9%83%D8%AA%D8%A7%D8%A8%20%20%20%D8%A7%D9%82%D8%B1%D8%A7%20%20%D8%A7%D9%88%D9%86%D9%84%D8%A7%D9%8A%D9%86%20%20684.pdf#page=41"
 ---
 🖋️ **Ḥammād b. Zayd** wurde zum Ḥadīth des **Nuzūl** gefragt, ob dies bedeute, dass Allah von Ort zu Ort wechsle. Er sagte:
 
