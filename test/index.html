@@ -7286,7 +7286,7 @@ function trimPostsCacheForQuota(list,max=POSTS_CACHE_QUOTA_MAX){return [...(Arra
 function postFileSortRank(name){return postSeriesRank({id:name,_sourceFile:name,title:name})}
 function compactPostFileMapEntry(entry){if(!entry)return null;return{sha:String(entry.sha||""),parseVersion:entry.parseVersion||POST_PARSE_VERSION}}
 function persistPostFileMap(fileMap){const compact={};Object.keys(fileMap||{}).forEach(name=>{compact[name]=compactPostFileMapEntry(fileMap[name])});setJson(POST_FILE_MAP_KEY,compact)}
-function persistPostsCache(){if(!posts.length)return;if(!setJson(CACHE_KEY,posts))setJson(CACHE_KEY,trimPostsCacheForQuota(posts))}
+function persistPostsCache(){if(!posts.length)return;if(!setJson(CACHE_KEY,posts))setJson(CACHE_KEY,trimPostsCacheForQuota(posts));else{try{localStorage.removeItem(CACHE_KEY_LEGACY)}catch(e){}}}
 function postFromCachedFile(cached,fileName){if(!Array.isArray(cached)||!fileName)return null;const base=fileName.replace(/\.md$/,"");return cached.find(p=>p._sourceFile===fileName||String(p.id)===base)||null}
 function postFileIsFresh(file,fileMap,cached){const e=fileMap[file.name];if(!e||e.sha!==(file.sha||"")||e.parseVersion!==POST_PARSE_VERSION)return false;return!!postFromCachedFile(cached,file.name)}
 function schedulePostsRender(immediate=false){if(immediate){if(postsRenderTimer){clearTimeout(postsRenderTimer);postsRenderTimer=null}try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}return}if(postsRenderTimer)return;postsRenderTimer=setTimeout(()=>{postsRenderTimer=null;try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}},140)}
@@ -7799,7 +7799,6 @@ const DAR_SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?loca
 const DAR_NOTIFICATION_ICON_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_ICON}`;
 const DAR_NOTIFICATION_BADGE_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_BADGE}`;
 const PUSH_HEALTH_INTERVAL_MS=20*60*1000;
-const LEGACY_PRAYER_TAGS=["prayer_location_mode","prayer_site","prayer_source","prayer_version","push_site"];
 let pushHealthTimer=null;
 let pushHealthRunning=false;
 function darNotificationPayload(options={}){const base={icon:options.icon||DAR_NOTIFICATION_ICON,badge:options.badge||DAR_NOTIFICATION_BADGE,...options};if(isAndroidDevice()){delete base.image;delete base.largeIcon}return base}

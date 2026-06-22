@@ -1589,7 +1589,6 @@ function renderShell(){
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
 }
-function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   tab=normalizeAdminTab(tab);
   if(tab==="actions-bulk"){tab="actions";scrollToBulk=true}
