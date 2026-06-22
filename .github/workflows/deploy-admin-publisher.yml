@@ -12,7 +12,7 @@ on:
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
       - cloudflare/onesignal-delivery.js
-      - cloudflare/post-push-admin.js
+      - cloudflare/kurzlink-admin.js
       - .github/workflows/deploy-admin-publisher.yml
 
 permissions:

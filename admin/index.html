@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v34";
+  var ADMIN_SW_CACHE="dar-admin-stats-v35";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -273,7 +273,11 @@ button{cursor:pointer}
 .quellen-link-row b{color:var(--ink);display:block;font-size:10.5px}
 .quellen-link-row span{color:var(--muted);word-break:break-all}
 .quellen-slide-block{border:1px dashed rgba(140,190,255,.22);border-radius:12px;padding:8px;margin-bottom:8px}
-.quellen-slide-block h5{margin:0 0 6px;font-size:11px;color:var(--gold)}
+.quellen-kurzlink-panel{border:1px solid rgba(140,190,255,.28);border-radius:14px;padding:12px;background:rgba(20,30,45,.35);display:grid;gap:10px}
+.quellen-kurzlink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.quellen-kurzlink-preview{border:1px solid rgba(239,215,142,.22);border-radius:10px;padding:8px;background:rgba(0,0,0,.15);font-size:10.5px;line-height:1.45}
+.quellen-kurzlink-warn{border:1px solid rgba(255,160,80,.35);border-radius:10px;padding:8px;background:rgba(255,120,40,.08);color:#ffc89a;font-size:10px;line-height:1.4}
+.quellen-kurzlink-actions{display:flex;flex-wrap:wrap;gap:6px}
 .paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
 .upload-stack{display:grid;gap:9px;align-content:start}
 .upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.055)}
@@ -447,6 +451,7 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/admin/quellen-manager.js?v=1"></script>
+<script src="/admin/kurzlink-manager.js?v=1"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -498,6 +503,8 @@ let ordnerSelectedCat="",ordnerPostQuery="",ordnerCatSearch="",ordnerRenameValue
 let ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let quellenSearchQuery="",quellenCatalogMeta=[],quellenCatalogBusy=false,quellenCatalogLoaded=false,quellenEditorStatus="";
 let quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
+let shortlinksRegistry={version:1,nextSerial:1,entries:{}},shortlinksRegistrySha="",shortlinksRegistryLoaded=false,shortlinksRegistryBusy=false;
+let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="";
 let sourceLinkTarget="post",sourceCustomLabel="",sourceManualUrl="",sourceSetSlideImage=false;
 let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 let newsSearchQuery="",newsFilter="live",editingNewsId=null;
@@ -1481,6 +1488,101 @@ async function ensureQuellenCatalog(force){
     return quellenCatalogMeta;
   }finally{quellenCatalogBusy=false}
 }
+async function ensureShortlinksRegistry(force){
+  if(shortlinksRegistryLoaded&&!force)return shortlinksRegistry;
+  shortlinksRegistryBusy=true;
+  try{
+    const data=await workerGetRequest("shortlinks",{admin:true});
+    shortlinksRegistry=window.DARKurzlink?DARKurzlink.normalizeRegistry(data.registry||{}):{version:1,nextSerial:1,entries:{}};
+    shortlinksRegistrySha=data.sha||"";
+    shortlinksRegistryLoaded=true;
+    return shortlinksRegistry;
+  }catch(e){
+    shortlinksRegistryLoaded=false;
+    throw e;
+  }finally{shortlinksRegistryBusy=false}
+}
+function buildKurzlinkDraftForQuellen(){
+  if(!quellenEdit.filename||!window.DARKurzlink)return null;
+  const md=quellenEdit.markdown||"";
+  const fm=md.match(/^---\s*\n([\s\S]*?)\n---/);
+  const scholar=(fm&&fm[1].match(/^scholar:\s*["']?(.*?)["']?\s*$/m)||[])[1]||"";
+  const book=(fm&&fm[1].match(/^book:\s*["']?(.*?)["']?\s*$/m)||[])[1]||"";
+  const existing=DARKurzlink.findEntryForPost(shortlinksRegistry,quellenEdit.filename);
+  const codeFromMd=DARKurzlink.extractShortlinkFromMarkdown(md);
+  if(existing)return {...existing};
+  if(codeFromMd&&DARKurzlink.findEntry(shortlinksRegistry,codeFromMd))return {...DARKurzlink.findEntry(shortlinksRegistry,codeFromMd)};
+  const next=DARKurzlink.getNextCode(shortlinksRegistry);
+  return DARKurzlink.emptyDraft({code:next,postFilename:quellenEdit.filename,postId:quellenEdit.postId,scholar,book});
+}
+function refreshKurzlinkDraft(){
+  kurzlinkDraft=buildKurzlinkDraftForQuellen();
+  if(kurzlinkDraft&&window.DARKurzlink){
+    const check=DARKurzlink.validateEntry(kurzlinkDraft,shortlinksRegistry,{existingCode:kurzlinkDraft.code});
+    kurzlinkWarnings=check.warnings||[];
+  }else kurzlinkWarnings=[];
+}
+function readKurzlinkDraftFromUi(){
+  if(!kurzlinkDraft)return null;
+  const th=document.getElementById("kurzlinkTextHighlight")?.value||kurzlinkDraft.textHighlight;
+  return{
+    ...kurzlinkDraft,
+    code:String(document.getElementById("kurzlinkCode")?.value||kurzlinkDraft.code||"").trim().toLowerCase(),
+    targetUrl:String(document.getElementById("kurzlinkTargetUrl")?.value||"").trim(),
+    platform:String(document.getElementById("kurzlinkPlatform")?.value||"").trim(),
+    work:String(document.getElementById("kurzlinkWork")?.value||"").trim(),
+    citation:String(document.getElementById("kurzlinkCitation")?.value||"").trim(),
+    quote:String(document.getElementById("kurzlinkQuote")?.value||"").trim(),
+    textHighlight:th,
+    textHighlightNote:th==="not_possible"?String(document.getElementById("kurzlinkTextHighlightNote")?.value||"").trim():String(kurzlinkDraft.textHighlightNote||"").trim(),
+    adminNote:String(document.getElementById("kurzlinkAdminNote")?.value||"").trim(),
+    status:String(kurzlinkDraft.status||"unverified"),
+    postFilename:quellenEdit.filename,
+    postId:quellenEdit.postId,
+    scholar:String(document.getElementById("kurzlinkScholar")?.value||kurzlinkDraft.scholar||"").trim()
+  };
+}
+function renderKurzlinkPanel(){
+  if(!quellenEdit.filename||!window.DARKurzlink)return "";
+  if(!kurzlinkDraft)kurzlinkDraft=buildKurzlinkDraftForQuellen();
+  const d=kurzlinkDraft||DARKurzlink.emptyDraft({postFilename:quellenEdit.filename});
+  const code=d.code||DARKurzlink.getNextCode(shortlinksRegistry);
+  const normal=DARKurzlink.shortUrlNormal(code);
+  const https=DARKurzlink.shortUrlHttps(code);
+  const statusLabel=DARKurzlink.STATUS_LABELS[d.status]||d.status||"Ungeprüft";
+  const verifiedAt=d.verifiedAt?new Date(d.verifiedAt).toLocaleString("de-DE"):"—";
+  const platformOpts=DARKurzlink.PLATFORM_OPTIONS.map(p=>`<option value="${esc(p)}" ${d.platform===p?"selected":""}>${esc(p)}</option>`).join("");
+  const warnHtml=kurzlinkWarnings.length?`<div class="quellen-kurzlink-warn">${kurzlinkWarnings.map(w=>esc(w)).join("<br>")}</div>`:"";
+  const thNote=d.textHighlight==="not_possible"?`<label>Ausnahme-Bestätigung<textarea class="field" id="kurzlinkTextHighlightNote" rows="2" placeholder="Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft.">${esc(d.textHighlightNote||"")}</textarea></label>`:"";
+  return `<div class="quellen-kurzlink-panel" id="kurzlinkPanel">
+    <div class="section-head" style="margin-bottom:0"><h4>Geschützter Kurzlink</h4><span>${esc(statusLabel)}</span></div>
+    <p class="source-files-lead">Fortlaufende Kurzlinks (a1, a2, a3 …) leiten nur auf geprüfte Originalquellen weiter — keine offene Weiterleitung.</p>
+    ${warnHtml}
+    <div class="quellen-kurzlink-preview"><strong>Normaler Beitragslink:</strong> ${esc(normal||"—")}<br><strong>Instagram-/Channel-Link:</strong> ${esc(https||"—")}<br><strong>Prüfstatus:</strong> ${esc(statusLabel)} · <strong>Geprüft am:</strong> ${esc(verifiedAt)}</div>
+    <div class="quellen-kurzlink-grid">
+      <label>Kurzcode<input class="field" id="kurzlinkCode" value="${esc(code)}" readonly></label>
+      <label>Quellenplattform<select class="field" id="kurzlinkPlatform"><option value="">— wählen —</option>${platformOpts}</select></label>
+      <label>Gelehrter<input class="field" id="kurzlinkScholar" value="${esc(d.scholar||"")}"></label>
+      <label>Werk<input class="field" id="kurzlinkWork" value="${esc(d.work||"")}"></label>
+    </div>
+    <label>Ziel-Link (Originalquelle)<input class="field" id="kurzlinkTargetUrl" type="url" value="${esc(d.targetUrl||"")}" placeholder="https://www.islamweb.net/…#:~:text=…"></label>
+    <label>Exakte Quellenangabe<input class="field" id="kurzlinkCitation" value="${esc(d.citation||"")}" placeholder="Band, Seite, Hadithnummer …"></label>
+    <label>Zitierte Aussage<textarea class="field" id="kurzlinkQuote" rows="3">${esc(d.quote||"")}</textarea></label>
+    <label>Textmarkierung<select class="field" id="kurzlinkTextHighlight"><option value="yes" ${d.textHighlight==="yes"?"selected":""}>Ja</option><option value="no" ${d.textHighlight==="no"||!d.textHighlight?"selected":""}>Nein</option><option value="not_possible" ${d.textHighlight==="not_possible"?"selected":""}>technisch nicht möglich</option></select></label>
+    ${thNote}
+    <label>Admin-Notiz<textarea class="field" id="kurzlinkAdminNote" rows="2">${esc(d.adminNote||"")}</textarea></label>
+    <div class="quellen-kurzlink-actions">
+      ${https?`<a class="btn" href="${esc(https)}" target="_blank" rel="noopener">Kurzlink öffnen</a>`:""}
+      ${d.targetUrl?`<a class="btn" href="${esc(d.targetUrl)}" target="_blank" rel="noopener">Zielquelle öffnen</a>`:""}
+      <button class="btn primary" type="button" id="kurzlinkSaveBtn">Kurzlink speichern</button>
+      <button class="btn" type="button" id="kurzlinkMarkVerifiedBtn">Als geprüft markieren</button>
+      <button class="btn" type="button" id="kurzlinkMarkErrorBtn">Als fehlerhaft markieren</button>
+      <button class="btn danger" type="button" id="kurzlinkDisableBtn">Deaktivieren</button>
+      <button class="btn" type="button" id="kurzlinkInjectBtn">In Beitrag einfügen</button>
+    </div>
+    <div class="upload-status" id="kurzlinkPanelStatus">${esc(kurzlinkPanelStatus||"Kurzlink muss geprüft sein, bevor der Beitrag veröffentlicht werden kann.")}</div>
+  </div>`;
+}
 async function loadQuellenPost(filename){
   if(!filename)return;
   setQuellenEditorStatus("Lade Beitrag…");
@@ -1488,6 +1590,7 @@ async function loadQuellenPost(filename){
     const data=await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
     quellenEdit={filename:data.filename||filename,markdown:data.markdown||"",sha:data.sha||"",postId:data.postId||"",title:data.title||filename,dirty:false};
     sourceLinkTarget="post";
+    try{await ensureShortlinksRegistry(false);refreshKurzlinkDraft()}catch(e){kurzlinkDraft=null}
     setQuellenEditorStatus("Bereit — Quellen hinzufügen, bearbeiten oder entfernen.");
   }catch(e){
     quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
@@ -1595,6 +1698,7 @@ function renderShell(){
   updateAdminBackButton();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
+  if(currentTab==="quellen"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="quellen"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -1607,6 +1711,7 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
+    if(tab==="quellen")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -1770,6 +1875,8 @@ function renderQuellen(){
         <div class="section-head"><h3>Quellen-Editor</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
         ${quellenEdit.filename?`<textarea class="paste-area ordner-editor-area" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
         ${renderSourceFilesPanel("quellen")}
+        /* KURZLINK GUARD: geschützte Kurzlinks a1/a2 — Registry + Redirect */
+        ${renderKurzlinkPanel()}
         <div class="ordner-editor-actions">
           <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
           <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">Live-Vorschau</a>
@@ -2480,16 +2587,22 @@ function bindQuellenUi(){
   };
   const saveBtn=document.getElementById("quellenSaveBtn");if(saveBtn)saveBtn.onclick=async()=>{
     if(!quellenEdit.filename)return;
-    const markdown=normalizeMarkdownForStorage(document.getElementById("quellenEditor")?.value||quellenEdit.markdown);
+    let markdown=normalizeMarkdownForStorage(document.getElementById("quellenEditor")?.value||quellenEdit.markdown);
     if(!markdown.trim()){toast("Markdown ist leer");return}
     const check=validateBeforeSourceSave("quellen");
     if(!check.ok){toast(check.errors[0]||"Validierung fehlgeschlagen");setQuellenEditorStatus(`Blockiert: ${check.errors.join(" · ")}`);return}
+    try{await ensureShortlinksRegistry(false)}catch(e){toast("Kurzlink-Registry nicht ladbar");return}
+    if(window.DARKurzlink){
+      const shortCheck=DARKurzlink.validatePostForPublish(markdown,shortlinksRegistry);
+      if(!shortCheck.ok){toast(shortCheck.errors[0]||DARKurzlink.PUBLISH_BLOCK_MSG);setQuellenEditorStatus(shortCheck.errors.join(" · "));return}
+      if(shortCheck.warnings?.length)kurzlinkWarnings=shortCheck.warnings;
+    }
     const sourceFiles=collectSourceFilesForWorker();
-    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen\n• Kein Push an Besucher`;
+    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen\n• Kurzlink muss geprüft sein\n• Kein Push an Besucher`;
     if(!confirm(msg))return;
     saveBtn.disabled=true;setQuellenEditorStatus("Speichere Markdown + Quellen…");
     try{
-      const result=await workerPostRequest("post/update",{filename:quellenEdit.filename,markdown,sha:quellenEdit.sha,skipPush:true,sourceFiles});
+      const result=await workerPostRequest("post/update",{filename:quellenEdit.filename,markdown,sha:quellenEdit.sha,skipPush:true,enforceShortlink:true,sourceFiles});
       quellenEdit={...quellenEdit,markdown,sha:"",dirty:false};
       sourceDraftPending=null;
       sourceUploadQueue=[];
@@ -2504,6 +2617,49 @@ function bindQuellenUi(){
       setQuellenEditorStatus(`Fehler: ${e.message||e}`);
       toast(e.message||"Speichern fehlgeschlagen");
     }finally{saveBtn.disabled=false}
+  };
+  async function persistKurzlinkDraft(statusOverride){
+    if(!window.DARKurzlink||!quellenEdit.filename)return;
+    let draft=readKurzlinkDraftFromUi();
+    if(!draft)return;
+    if(statusOverride){
+      draft.status=statusOverride;
+      if(statusOverride==="verified")draft.verifiedAt=new Date().toISOString();
+    }
+    const check=DARKurzlink.validateEntry(draft,shortlinksRegistry,{existingCode:draft.code,forPublish:statusOverride==="verified"});
+    kurzlinkWarnings=check.warnings||[];
+    if(!check.ok&&statusOverride!=="error"){kurzlinkPanelStatus=check.errors.join(" · ");toast(check.errors[0]||"Kurzlink unvollständig");renderShell();return}
+    kurzlinkPanelStatus="Speichere Kurzlink…";
+    try{
+      const result=await workerPostRequest("shortlinks/save",{entry:draft,registrySha:shortlinksRegistrySha});
+      shortlinksRegistry=window.DARKurzlink.normalizeRegistry(result.registry||shortlinksRegistry);
+      shortlinksRegistryLoaded=true;
+      kurzlinkDraft=result.entry||draft;
+      kurzlinkPanelStatus=`Kurzlink ${kurzlinkDraft.code} gespeichert · Commit ${String(result.commitSha||"").slice(0,7)}`;
+      toast(`Kurzlink ${kurzlinkDraft.code} gespeichert`);
+      addAdminLog("Kurzlink","Registry aktualisiert",kurzlinkDraft.code);
+      renderShell();
+    }catch(e){
+      kurzlinkPanelStatus=`Fehler: ${e.message||e}`;
+      toast(e.message||"Kurzlink speichern fehlgeschlagen");
+      renderShell();
+    }
+  }
+  const kurzlinkTarget=document.getElementById("kurzlinkTargetUrl");if(kurzlinkTarget)kurzlinkTarget.onchange=()=>{const p=DARKurzlink?.detectPlatform(kurzlinkTarget.value);const sel=document.getElementById("kurzlinkPlatform");if(p&&sel&&!sel.value)sel.value=p};
+  const kurzlinkTh=document.getElementById("kurzlinkTextHighlight");if(kurzlinkTh)kurzlinkTh.onchange=()=>{kurzlinkDraft=readKurzlinkDraftFromUi();renderShellPreserveField("kurzlinkTextHighlight",()=>{})};
+  const kurzlinkSave=document.getElementById("kurzlinkSaveBtn");if(kurzlinkSave)kurzlinkSave.onclick=()=>persistKurzlinkDraft(null);
+  const kurzlinkVerified=document.getElementById("kurzlinkMarkVerifiedBtn");if(kurzlinkVerified)kurzlinkVerified.onclick=async()=>{await persistKurzlinkDraft("verified")};
+  const kurzlinkError=document.getElementById("kurzlinkMarkErrorBtn");if(kurzlinkError)kurzlinkError.onclick=async()=>{await persistKurzlinkDraft("error")};
+  const kurzlinkDisable=document.getElementById("kurzlinkDisableBtn");if(kurzlinkDisable)kurzlinkDisable.onclick=async()=>{if(!confirm("Kurzlink wirklich deaktivieren?"))return;await persistKurzlinkDraft("disabled")};
+  const kurzlinkInject=document.getElementById("kurzlinkInjectBtn");if(kurzlinkInject)kurzlinkInject.onclick=()=>{
+    const draft=readKurzlinkDraftFromUi();if(!draft?.code)return;
+    const updated=DARKurzlink.injectShortlinkIntoMarkdown(document.getElementById("quellenEditor")?.value||quellenEdit.markdown,draft.code);
+    quellenEdit={...quellenEdit,markdown:updated,dirty:true};
+    const el=document.getElementById("quellenEditor");if(el)el.value=updated;
+    kurzlinkDraft=draft;
+    kurzlinkPanelStatus=`Kurzlink ${draft.code} in Markdown eingefügt (noch speichern).`;
+    toast("Kurzlink in Beitrag eingefügt");
+    renderShell();
   };
 }
 function bindUi(){
@@ -2766,6 +2922,11 @@ async function uploadPostViaWorker(){
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
     const audit=auditPostMarkdown(markdown);
     if(audit.warnings.length)addAdminLog("Frontmatter","Automatisch repariert",audit.warnings.join(" · "));
+    try{await ensureShortlinksRegistry(false)}catch(e){finishPublishTrack("error","Kurzlink-Registry nicht ladbar");setUploadStatus("Kurzlink-Registry nicht ladbar.");uploadBusy=false;return}
+    if(window.DARKurzlink){
+      const shortCheck=DARKurzlink.validatePostForPublish(markdown,shortlinksRegistry);
+      if(!shortCheck.ok){updatePublishStep("created","error",shortCheck.errors[0]||DARKurzlink.PUBLISH_BLOCK_MSG);finishPublishTrack("error",shortCheck.errors[0]||DARKurzlink.PUBLISH_BLOCK_MSG);setUploadStatus(shortCheck.errors.join("<br>"));uploadBusy=false;return}
+    }
     if(!audit.sourceOk)updatePublishStep("created","warn","Quelle fehlt im Frontmatter – bitte prüfen");
     else if(!audit.hasLink)updatePublishStep("created","warn","Direktlink fehlt – bitte prüfen");
     updatePublishMeta({filename:draftFilename,number:next,title:preview.title});

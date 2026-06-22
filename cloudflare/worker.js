@@ -27,6 +27,11 @@ import {
   ensureJummahPushSchedulerFresh,
   sendJummahTestPush
 } from "./jummah-push-admin.js";
+import {
+  readShortlinksRegistry,
+  saveShortlinkEntry,
+  validatePostShortlinkForPublish
+} from "./kurzlink-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -173,6 +178,26 @@ export default {
         assertAuthorized(request, env);
         const withUsage = String(url.searchParams.get("usage") || "") === "1";
         return json(await listSourceFiles(env, { withUsage }), cors);
+      }
+
+      if (url.pathname === "/api/admin/shortlinks" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const { registry, sha, path } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
+        return json({ ok: true, registry, sha, path, count: Object.keys(registry.entries || {}).length }, cors);
+      }
+
+      if (url.pathname === "/api/admin/shortlinks/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await saveShortlinkEntry(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8
+        });
+        return json(result, cors);
       }
 
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
@@ -582,6 +607,13 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
 
   if (!markdownRaw) throw httpError("Markdown fehlt", 400);
 
+  const enforceShortlink = input.enforceShortlink !== false && !staging;
+  if (enforceShortlink) {
+    const { registry } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
+    const shortCheck = validatePostShortlinkForPublish(markdownRaw, registry);
+    if (!shortCheck.ok) throw httpError(shortCheck.message || shortCheck.errors?.[0] || "Quellenlink unvollständig", 400);
+  }
+
   const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
@@ -896,6 +928,13 @@ async function updateExistingPost(env, input) {
 
   if (!filename) throw httpError("Dateiname fehlt", 400);
   if (!markdown) throw httpError("Markdown fehlt", 400);
+
+  const enforceShortlink = input.enforceShortlink === true;
+  if (enforceShortlink) {
+    const { registry } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
+    const shortCheck = validatePostShortlinkForPublish(markdown, registry);
+    if (!shortCheck.ok) throw httpError(shortCheck.message || shortCheck.errors?.[0] || "Quellenlink unvollständig", 400);
+  }
 
   const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
