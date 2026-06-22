@@ -87,8 +87,12 @@ function runPublishIsolationGuard() {
     fail("worker.js: renameCategoryLabel nicht gefunden");
   } else if (!renameFn.includes("githubCommitBatch(")) {
     fail("renameCategoryLabel: muss githubCommitBatch nutzen (kein Commit pro Beitrag)");
+  } else if (!renameFn.includes("RENAME_CATEGORY_BATCH")) {
+    fail("renameCategoryLabel: Batch-Limit fehlt (Cloudflare Subrequest-Schutz)");
+  } else if (/for\s*\(\s*const\s+file\s+of\s+files\s*\)/.test(renameFn)) {
+    fail("renameCategoryLabel: darf nicht alle Beiträge in einem Worker-Aufruf laden");
   } else {
-    ok("renameCategoryLabel: Batch-Commit");
+    ok("renameCategoryLabel: Batch-Commit mit Subrequest-Limit");
   }
 
   const bulkWorker = extractFunction(worker, "publishBulkPostsFromMarkdown");
