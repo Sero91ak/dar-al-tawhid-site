@@ -95,3 +95,6 @@ jobs:
 
       - name: Slide post guard (Carousel + Parser + Theme-Tokens)
         run: node scripts/slide-post-guard.js
+
+      - name: Posts load guard (kein blockierendes Voll-Reload beim App-Start)
+        run: node scripts/posts-load-guard.js
