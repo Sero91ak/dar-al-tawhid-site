@@ -167,6 +167,95 @@ export function redirectPathForCode(code) {
   return c ? `${c}/index.html` : "";
 }
 
+export async function saveAutoShortlinkEntry(env, input, deps) {
+  const { githubGet, githubPut, githubCommitBatch, base64ToUtf8 } = deps;
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const { registry, sha, path } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
+  const incoming = { ...(input.entry || input) };
+  let code = normalizeCode(incoming.code);
+  const postFilename = String(incoming.postFilename || "").trim();
+  if (!postFilename) throw new Error("Beitrag fehlt");
+
+  const byPost = Object.values(registry.entries || {}).find((e) => String(e.postFilename || "") === postFilename);
+  if (byPost) code = normalizeCode(byPost.code);
+  if (!code) code = `a${registry.nextSerial || 1}`;
+
+  const now = new Date().toISOString();
+  const merged = {
+    ...(registry.entries[code] || {}),
+    ...incoming,
+    code,
+    postFilename,
+    status: registry.entries[code]?.status || "unverified",
+    updatedAt: now,
+    createdAt: registry.entries[code]?.createdAt || now,
+    reserved: true
+  };
+
+  const check = validateAutoShortlinkEntry(merged, registry, { existingCode: code });
+  if (!check.ok) throw new Error(check.errors.join(" · "));
+
+  const nextRegistry = normalizeShortlinksRegistry(registry);
+  nextRegistry.entries[code] = check.entry;
+  nextRegistry.nextSerial = Math.max(nextRegistry.nextSerial, parseInt(code.slice(1), 10) + 1);
+  nextRegistry.updatedAt = now;
+
+  const registryContent = `${JSON.stringify(
+    {
+      version: nextRegistry.version,
+      updatedAt: nextRegistry.updatedAt,
+      nextSerial: nextRegistry.nextSerial,
+      entries: nextRegistry.entries
+    },
+    null,
+    2
+  )}\n`;
+
+  const redirectPath = redirectPathForCode(code);
+  const redirectHtml = buildShortlinkRedirectHtml(check.entry);
+  const registrySha = String(input.registrySha || sha || "").trim();
+  if (registrySha && sha && registrySha !== sha) {
+    throw new Error("Registry wurde zwischenzeitlich geändert — bitte neu laden");
+  }
+
+  const batch = await githubCommitBatch(env, owner, repo, branch, [
+    { path, content: registryContent },
+    { path: redirectPath, content: redirectHtml }
+  ], `Kurzlink ${code} automatisch verknüpft (${postFilename})`);
+
+  return {
+    ok: true,
+    code,
+    entry: nextRegistry.entries[code],
+    registry: nextRegistry,
+    redirectPath,
+    commitSha: batch.commitSha || "",
+    auto: true
+  };
+}
+
+function validateAutoShortlinkEntry(entry, registry, { existingCode = "" } = {}) {
+  const errors = [];
+  const e = { ...(entry || {}) };
+  const code = normalizeCode(e.code);
+  const reg = normalizeShortlinksRegistry(registry);
+  if (!code) errors.push("Kurzcode fehlt");
+  if (!String(e.postFilename || "").trim()) errors.push("Beitrag fehlt");
+  const taken = reg.entries[code];
+  if (
+    taken &&
+    normalizeCode(existingCode) !== code &&
+    String(taken.postFilename || "") !== String(e.postFilename || "")
+  ) {
+    errors.push(`Kurzcode ${code} ist bereits vergeben`);
+  }
+  const targetUrl = String(e.targetUrl || "").trim();
+  if (targetUrl && !isAllowedTargetUrl(targetUrl)) errors.push("Quelle nicht erlaubt");
+  return { ok: !errors.length, errors, entry: { ...e, code, targetUrl, status: e.status || "unverified" } };
+}
+
 export async function saveShortlinkEntry(env, input, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }) {
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";

@@ -30,6 +30,7 @@ import {
 import {
   readShortlinksRegistry,
   saveShortlinkEntry,
+  saveAutoShortlinkEntry,
   validatePostShortlinkForPublish
 } from "./kurzlink-admin.js";
 
@@ -192,6 +193,19 @@ export default {
         assertAuthorized(request, env);
         const input = await request.json().catch(() => ({}));
         const result = await saveShortlinkEntry(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8
+        });
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/shortlinks/auto" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await saveAutoShortlinkEntry(env, input, {
           githubGet,
           githubPut,
           githubCommitBatch,
@@ -607,7 +621,7 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
 
   if (!markdownRaw) throw httpError("Markdown fehlt", 400);
 
-  const enforceShortlink = input.enforceShortlink !== false && !staging;
+  const enforceShortlink = input.enforceShortlink === true && !staging;
   if (enforceShortlink) {
     const { registry } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
     const shortCheck = validatePostShortlinkForPublish(markdownRaw, registry);

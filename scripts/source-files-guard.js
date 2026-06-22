@@ -70,14 +70,16 @@ function runSourceFilesGuard() {
     "KURZLINK GUARD",
     "kurzlink-manager.js",
     "renderKurzlinkPanel",
-    "Geschützter Kurzlink",
+    "Dein Kurzlink für diesen Beitrag",
     "shortlinks/save",
-    "enforceShortlink",
-    "Als geprüft markieren"
+    "shortlinks/auto",
+    "Instagram-Channel-Beitrag kopieren",
+    "shortlinks/auto"
   ]);
 
   mustInclude("admin/kurzlink-manager.js", read("admin/kurzlink-manager.js"), [
-    "validatePostForPublish",
+    "deriveKurzlinkFromPost",
+    "buildChannelShareText",
     "injectShortlinkIntoMarkdown",
     "isAllowedTargetUrl",
     "buildRedirectHtml"
@@ -93,6 +95,7 @@ function runSourceFilesGuard() {
     "prepareSourceCommitEntries",
     "scanSourceUsageInPosts",
     "/api/admin/shortlinks",
+    "/api/admin/shortlinks/auto",
     "validatePostShortlinkForPublish",
     "kurzlink-admin.js"
   ]);

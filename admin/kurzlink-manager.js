@@ -229,6 +229,126 @@
     return `---\n${yaml.trimEnd()}\n---\n\n${body.trim()}`.trimEnd() + "\n";
   }
 
+  function parseValue(v) {
+    v = String(v || "").trim();
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) return v.slice(1, -1);
+    return v;
+  }
+
+  function parseYamlScalarSimple(yaml, key) {
+    const m = String(yaml || "").match(new RegExp(`^${key}:\\s*["']?(.*?)["']?\\s*$`, "m"));
+    return m ? m[1].trim().replace(/^["']|["']$/g, "") : "";
+  }
+
+  function parseLinksFromYaml(yaml) {
+    const links = [];
+    const block = String(yaml || "").match(/^links:\s*\n([\s\S]*?)(?=\n[A-Za-z0-9_-]+:|$)/m);
+    if (!block) return links;
+    let item = null;
+    block[1].split(/\r?\n/).forEach((line) => {
+      const lm = line.match(/^\s*-\s*label:\s*(.*)$/);
+      if (lm) {
+        item = { label: parseValue(lm[1]), url: "" };
+        links.push(item);
+        return;
+      }
+      const um = line.match(/^\s*url:\s*(.*)$/);
+      if (um && item) item.url = parseValue(um[1]);
+    });
+    return links;
+  }
+
+  function firstAllowedTargetFromMarkdown(markdown) {
+    const text = String(markdown || "");
+    const fm = text.match(/^---\s*\n([\s\S]*?)\n---/);
+    const yaml = fm ? fm[1] : "";
+    const urls = [];
+    parseLinksFromYaml(yaml).forEach((l) => urls.push(l.url));
+    const slideUrls = yaml.match(/^\s*url:\s*(.+)$/gm) || [];
+    slideUrls.forEach((line) => {
+      const u = parseValue(String(line).replace(/^\s*url:\s*/, ""));
+      urls.push(u);
+    });
+    for (const raw of urls) {
+      const u = String(raw || "").trim();
+      if (!u || isShortlinkUrl(u)) continue;
+      if (isAllowedTargetUrl(u)) return u;
+    }
+    return "";
+  }
+
+  function deriveKurzlinkFromPost(markdown, meta) {
+    const text = String(markdown || "");
+    const fm = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+    const yaml = fm ? fm[1] : "";
+    const body = fm ? (fm[2] || "").trim() : text.trim();
+    const scholar = parseYamlScalarSimple(yaml, "scholar");
+    const book = parseYamlScalarSimple(yaml, "book");
+    const source = parseYamlScalarSimple(yaml, "source");
+    const title = String(meta?.title || parseYamlScalarSimple(yaml, "title") || "").replace(/^📖\s*/, "").trim();
+    const quote =
+      body
+        .replace(/^#+\s+/gm, "")
+        .split(/\n{2,}/)[0]
+        ?.trim()
+        .slice(0, 600) || title;
+    const targetUrl = firstAllowedTargetFromMarkdown(text);
+    const citation = source.replace(/🔗\s*Quelle:.*/gi, "").trim().slice(0, 240);
+    const platform = targetUrl ? detectPlatform(targetUrl) : "";
+    const textHighlight = targetUrl && hasTextFragment(targetUrl) ? "yes" : targetUrl ? "no" : "not_possible";
+    const draft = emptyDraft({
+      code: meta?.code || extractShortlinkFromMarkdown(text),
+      postFilename: meta?.filename || "",
+      postId: meta?.postId || "",
+      scholar,
+      book,
+      quote: quote || title
+    });
+    return {
+      ...draft,
+      targetUrl,
+      platform,
+      work: book || draft.work,
+      citation: citation || source.slice(0, 240),
+      textHighlight,
+      textHighlightNote:
+        textHighlight === "not_possible" && !targetUrl
+          ? "Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft."
+          : draft.textHighlightNote
+    };
+  }
+
+  function buildChannelShareText({ title, statement, quote, code, sourceShortlink } = {}) {
+    const c = normalizeCode(code || sourceShortlink);
+    const titleClean = String(title || "")
+      .replace(/^📖\s*/, "")
+      .trim();
+    const body = String(statement || quote || "").trim();
+    const sourceLine = c ? formatSourceLine(c, true) : "";
+    return `${titleClean}${body ? `\n\n${body}` : ""}${sourceLine ? `\n\n${sourceLine}` : ""}\n\nDAR AL TAWHID`.trim();
+  }
+
+  function buildNormalShareSourceLine(code) {
+    const c = normalizeCode(code);
+    return c ? formatSourceLine(c, false) : "";
+  }
+
+  function validateAutoEntry(entry, registry, { existingCode = "" } = {}) {
+    const errors = [];
+    const e = { ...(entry || {}) };
+    const code = normalizeCode(e.code);
+    const reg = normalizeRegistry(registry);
+    if (!code) errors.push("Kurzcode fehlt");
+    if (!String(e.postFilename || "").trim()) errors.push("Beitrag fehlt");
+    const taken = reg.entries[code];
+    if (taken && normalizeCode(existingCode) !== code && String(taken.postFilename || "") !== String(e.postFilename || "")) {
+      errors.push(`Kurzcode ${code} ist bereits vergeben`);
+    }
+    const targetUrl = String(e.targetUrl || "").trim();
+    if (targetUrl && !isAllowedTargetUrl(targetUrl)) errors.push("Quelle nicht erlaubt");
+    return { ok: !errors.length, errors, entry: { ...e, code, targetUrl, status: e.status || "unverified" } };
+  }
+
   function emptyDraft({ code, postFilename, postId, scholar, book, quote } = {}) {
     return {
       code: normalizeCode(code) || "",
@@ -399,6 +519,10 @@
     extractShortlinkFromMarkdown,
     formatSourceLine,
     injectShortlinkIntoMarkdown,
+    deriveKurzlinkFromPost,
+    buildChannelShareText,
+    buildNormalShareSourceLine,
+    validateAutoEntry,
     emptyDraft,
     validateEntry,
     findDuplicateWarnings,
