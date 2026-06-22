@@ -86,3 +86,6 @@ jobs:
 
       - name: Publish isolation guard (Admin darf Besucher nicht überlasten)
         run: node scripts/publish-isolation-guard.js
+
+      - name: Post markdown guard (Admin-YAML reparieren vor Upload)
+        run: node scripts/post-markdown-guard.js

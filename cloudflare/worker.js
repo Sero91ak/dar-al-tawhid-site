@@ -729,7 +729,7 @@ async function fetchPostMarkdown(env, filename) {
 
 async function updateExistingPost(env, input) {
   const filename = sanitizeFilename(String(input.filename || "").trim());
-  const markdown = String(input.markdown || "").trim();
+  const markdown = normalizeMarkdownForStorage(String(input.markdown || "").trim());
   const sha = String(input.sha || "").trim();
   const skipPush = input.skipPush !== false;
 
@@ -752,7 +752,7 @@ async function updateExistingPost(env, input) {
     owner,
     repo,
     postPath,
-    markdown.endsWith("\n") ? markdown : markdown + "\n",
+    markdown,
     `Update post ${filename}`,
     branch,
     existing.sha
@@ -1339,6 +1339,35 @@ function frontmatterValue(text, key) {
   return match ? stripYamlQuotes(match[1]) : "";
 }
 
+function repairYamlFrontmatter(markdown) {
+  const raw = String(markdown || "");
+  const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!match) return raw;
+  const body = match[2] || "";
+  const topKey =
+    "source|links|logo|layout|slides|intro|introTitle|date|id|title|category|topic|scholar|book|author|tags|type";
+  const fixed = match[1]
+    .split("\n")
+    .map((line) => {
+      if (/^\*\s+/.test(line)) return line.replace(/^\*\s+/, "- ");
+      if (/^\*\s*label:/.test(line)) return line.replace(/^\*\s*/, "  - ");
+      const nested = line.match(new RegExp(`^(\\s{2,})(${topKey}:\\s*.*)$`));
+      if (nested && !/^\s+-/.test(line)) return nested[2];
+      return line;
+    })
+    .join("\n")
+    .replace(/^\* /gm, "- ")
+    .replace(new RegExp(`^\\s{4}(${topKey}):`, "gm"), "$1:")
+    .replace(/^\*\s*label:/gm, "  - label:");
+  return `---\n${fixed}\n---\n\n${body.trim()}`.trimEnd() + "\n";
+}
+
+function normalizeMarkdownForStorage(markdown) {
+  let out = repairYamlFrontmatter(repairMarkdownStructure(String(markdown || "").trim()));
+  if (!out) return "";
+  return out.endsWith("\n") ? out : out + "\n";
+}
+
 function repairMarkdownStructure(markdown) {
   let out = sanitizeMarkdownQuotes(String(markdown || "").trim());
   if (!out) return "";
@@ -1439,7 +1468,7 @@ function sanitizeUpdateId(value) {
 }
 
 function normalizeMarkdownForUpload(markdown, nextNumber) {
-  let out = repairMarkdownStructure(markdown);
+  let out = repairYamlFrontmatter(repairMarkdownStructure(markdown));
   const iso = new Date().toISOString().replace(/\.\d{3}Z$/, ".000Z");
   if (/^date:\s*.*$/m.test(out)) out = out.replace(/^date:\s*.*$/m, `date: "${iso}"`);
   let id = stripYamlQuotes(frontmatterValue(out, "id"));
