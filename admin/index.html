@@ -243,6 +243,21 @@ button{cursor:pointer}
 .controls{display:grid;grid-template-columns:minmax(220px,1fr) 150px 150px auto;gap:9px;margin-bottom:12px}
 .field{width:100%;max-width:100%;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.24);color:var(--ink);padding:9px 11px}
 .upload-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.45fr);gap:10px;margin-top:12px}
+.source-files-panel{border:1px solid rgba(239,215,142,.18);border-radius:16px;background:linear-gradient(160deg,rgba(16,24,36,.88),rgba(6,8,12,.94));padding:12px;margin-top:12px;display:grid;gap:10px}
+.source-files-panel h4{margin:0;font-family:var(--serif);font-size:17px;color:#fff0c8}
+.source-files-lead{margin:0;color:var(--soft);font-size:10.5px;line-height:1.45}
+.source-files-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.source-dropzone{border:1px dashed rgba(239,215,142,.28);border-radius:14px;padding:14px;text-align:center;color:var(--soft);font-size:11px;line-height:1.45;background:rgba(255,255,255,.02);transition:border-color .2s,background .2s}
+.source-dropzone.is-dragover{border-color:rgba(140,190,255,.55);background:rgba(90,140,220,.08);color:#eef4ff}
+.source-files-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.source-preview-box{border:1px solid rgba(239,215,142,.16);border-radius:14px;padding:10px;background:rgba(0,0,0,.22);font-size:10.5px;line-height:1.5;color:var(--soft);white-space:pre-wrap;word-break:break-word}
+.source-preview-box strong{color:var(--gold)}
+.source-library{max-height:220px;overflow:auto;border:1px solid rgba(239,215,142,.12);border-radius:12px}
+.source-library-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border-bottom:1px solid rgba(239,215,142,.08);font-size:10.5px}
+.source-library-item:last-child{border-bottom:none}
+.source-library-item b{color:var(--ink);font-size:11px}
+.source-library-item span{color:var(--muted);line-height:1.35}
+.source-library-item .btn{min-height:32px;padding:6px 10px;font-size:10px}
 .paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
 .upload-stack{display:grid;gap:9px;align-content:start}
 .upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.055)}
@@ -458,6 +473,7 @@ const VISITOR_REFRESH_MS=15000;
 const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
+let sourceLibraryCache=null,sourceLibraryBusy=false,sourceDraftPending=null,sourceUploadQueue=[],sourceEditorContext="draft";
 let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayoutBusy=false,categoryLayoutLoaded=false;
 let ordnerCatalog=[],ordnerCatalogBusy=false,ordnerCatalogLoaded=false;
 let ordnerSelectedCat="",ordnerPostQuery="",ordnerCatSearch="",ordnerRenameValue="",ordnerStatus="",ordnerEditorStatus="",ordnerBusy=false;
@@ -852,9 +868,68 @@ function auditPostMarkdown(markdown){
   const source=frontmatterValue(text,"source")||frontmatterValue(text,"quelle");
   const linksBlock=fm&&fm[1].match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);
   let hasLink=false;
-  if(linksBlock){let item=null;linksBlock[1].split(/\r?\n/).forEach(line=>{const lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={url:""};return}const um=line.match(/^\s*url:\s*(.*)$/);if(um&&item)hasLink=String(um[1]||"").replace(/^["']|["']$/g,"").startsWith("http")})}
+  if(linksBlock){let item=null;linksBlock[1].split(/\r?\n/).forEach(line=>{const lm=line.match(/^\s*-\s*label:\s*(.*)$/);if(lm){item={url:""};return}const um=line.match(/^\s*url:\s*(.*)$/);if(um&&item){const urlVal=String(um[1]||"").replace(/^["']|["']$/g,"").trim();hasLink=hasLink||/^https?:\/\//i.test(urlVal)||/^\/assets\/sources\//i.test(urlVal)||/^assets\/sources\//i.test(urlVal)||/^sources\//i.test(urlVal)||/\.(pdf|png|jpe?g|webp)(\#|$)/i.test(urlVal)}})}
   return{sourceOk:Boolean(source&&String(source).trim().length>8),hasLink,warnings};
 }
+/* SOURCE FILES GUARD FINAL: PDF/Bild-Upload → assets/sources/ + links:-Block */
+const SOURCE_MAX_BYTES=20*1024*1024;
+const SOURCE_LABEL_OPTIONS=["→ Scan/PDF","→ Bildscan","→ Manuskript","→ Eigene Quelle"];
+function sourceFileExtension(name){const base=String(name||"").split("/").pop()||"";return base.includes(".")?base.split(".").pop().toLowerCase():""}
+function isAllowedSourceMimeOrExt(file){const ext=sourceFileExtension(file?.name||"");const mime=String(file?.type||"").toLowerCase();if(["pdf","png","jpg","jpeg","webp"].includes(ext))return true;return /^(application\/pdf|image\/(png|jpeg|webp))$/i.test(mime)}
+function slugifySourceFilename(originalName,pageNum){const ext=(String(originalName||"").match(/\.([a-z0-9]+)$/i)||["","bin"])[1].toLowerCase();let base=String(originalName||"").replace(/\.[^.]+$/i,"");base=base.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʻʼ'`]/g,"").replace(/[^\x00-\x7F]/g," ").toLowerCase().replace(/\bseite\s+(\d+)\b/gi," s$1 ").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);if(pageNum&&ext==="pdf"&&!/-s\d+$/.test(base))base=`${base||"quelle"}-s${pageNum}`;return `${base||"quelle"}.${ext||"bin"}`}
+function buildSourceStoragePath(markdown,originalName,pageNum){const scholar=slugify(frontmatterValue(markdown,"scholar")||"");const book=slugify(frontmatterValue(markdown,"book")||"");const safeName=slugifySourceFilename(originalName,pageNum);const folder=scholar?(book?`${scholar}/${book}`:scholar):(book||"allgemein");return `assets/sources/${folder}/${safeName}`}
+function buildSourceLinkUrl(path,pageNum,isPdf){const clean=String(path||"").replace(/^\/+/,"");const url=`/${clean}`;if(isPdf&&pageNum)return `${url}#page=${pageNum}`;return url}
+function defaultSourceLabelForExt(ext){return ext==="pdf"?"→ Scan/PDF":"→ Bildscan"}
+function extractLinksYamlBlock(yaml){const m=String(yaml||"").match(/^links:\s*\n([\s\S]*?)(?=\n[A-Za-z0-9_-]+:|$)/m);return m?m[0]:""}
+function appendLinkToMarkdown(markdown,label,url){const repaired=repairYamlFrontmatter(String(markdown||""));const m=repaired.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(!m)return repaired;let yaml=m[1];const body=m[2]||"";const safeLabel=String(label||"→ Quelle").replace(/"/g,'\\"');const safeUrl=String(url||"").replace(/"/g,'\\"');const entry=`  - label: "${safeLabel}"\n    url: "${safeUrl}"`;const linksBlock=extractLinksYamlBlock(yaml);if(linksBlock){yaml=yaml.replace(linksBlock,`${linksBlock.trimEnd()}\n${entry}`)}else if(/^logo:\s/m.test(yaml)){yaml=yaml.replace(/^logo:\s/m,`links:\n${entry}\nlogo: `)}else{yaml=`${yaml.trimEnd()}\nlinks:\n${entry}`}return `---\n${yaml}\n---\n\n${body.trim()}`.trimEnd()+"\n"}
+function readFileAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>{const result=String(reader.result||"");const idx=result.indexOf(",");resolve(idx>=0?result.slice(idx+1):result)};reader.onerror=()=>reject(reader.error||new Error("Datei konnte nicht gelesen werden"));reader.readAsDataURL(file)})}
+function validateSourceFile(file){if(!file)throw new Error("Keine Datei gewählt");if(!isAllowedSourceMimeOrExt(file))throw new Error("Nur PDF, PNG, JPG, JPEG oder WEBP erlaubt");if(Number(file.size||0)>SOURCE_MAX_BYTES)throw new Error("Maximal 20 MB pro Datei");return true}
+async function loadSourceLibrary(force){if(sourceLibraryBusy)return sourceLibraryCache||{files:[]};if(sourceLibraryCache&&!force)return sourceLibraryCache;sourceLibraryBusy=true;try{const data=await workerGetRequest("sources/list",{admin:true});sourceLibraryCache={files:Array.isArray(data.files)?data.files:[],sourcesDir:data.sourcesDir||"assets/sources"};return sourceLibraryCache}catch(e){sourceLibraryCache={files:[],error:String(e.message||e)};return sourceLibraryCache}finally{sourceLibraryBusy=false}}
+function renderSourceLibraryRows(files){if(!files?.length)return `<div class="empty" style="padding:12px">Noch keine Quellen-Dateien im Repository.</div>`;return files.map((file,idx)=>`<div class="source-library-item"><div><b>${esc(file.name||file.path)}</b><span>${esc(file.scholar||"—")} · ${esc(file.type||"")}<br>${esc(file.path||"")}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="btn" href="${SITE_ORIGIN}${esc(file.url||("/"+file.path))}" target="_blank" rel="noopener">Öffnen</a><button class="btn primary" type="button" data-source-pick="${idx}">Zum Beitrag</button></div></div>`).join("")}
+function renderSourcePreviewBox(pending){if(!pending)return `<div class="source-preview-box">Noch keine Quelle vorbereitet. Datei hochladen oder aus Bibliothek wählen.</div>`;return `<div class="source-preview-box"><strong>Vorschau</strong>\nDatei: ${esc(pending.originalName||pending.name||"")}\nSpeicherort: ${esc(pending.path||"")}\nLink:\n  - label: "${esc(pending.label||"")}"\n    url: "${esc(pending.url||"")}"${pending.existing?"\n(Hinweis: Datei existiert bereits — nur Link wird ergänzt)":""}</div>`}
+function renderSourceFilesPanel(context){const pending=sourceDraftPending;const lib=sourceLibraryCache;return `<div class="source-files-panel" id="sourceFilesPanel" data-source-context="${esc(context)}">
+  <div class="section-head" style="margin-bottom:0"><h4>Quellen-Dateien</h4><span>PDF / Bild → links:</span></div>
+  <p class="source-files-lead">Datei hochladen oder aus vorhandenen Quellen wählen. Die App erzeugt automatisch den passenden Eintrag im <code>links:</code>-Block.</p>
+  <div class="source-dropzone" id="sourceDropzone">PDF oder Bild per Drag &amp; Drop hierher · max. 20 MB</div>
+  <div class="source-files-toolbar">
+    <input type="file" id="sourcePdfInput" accept=".pdf,application/pdf" hidden>
+    <input type="file" id="sourceImageInput" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" hidden>
+    <button class="btn" type="button" id="sourcePickPdfBtn">PDF hochladen</button>
+    <button class="btn" type="button" id="sourcePickImageBtn">Bild hochladen</button>
+    <button class="btn" type="button" id="sourceReloadLibBtn">Bibliothek laden</button>
+  </div>
+  <div class="source-files-row">
+    <label>Label<select class="field" id="sourceLabelSelect">${SOURCE_LABEL_OPTIONS.map(opt=>`<option value="${esc(opt)}" ${pending?.label===opt?"selected":""}>${esc(opt)}</option>`).join("")}</select></label>
+    <label>Seite (PDF)<input class="field" id="sourcePageInput" type="number" min="1" step="1" placeholder="z. B. 43" value="${esc(pending?.page||"")}"></label>
+  </div>
+  ${renderSourcePreviewBox(pending)}
+  <div class="source-files-toolbar">
+    <button class="btn primary" type="button" id="sourceAddMarkdownBtn" ${pending?"":"disabled"}>Zum Markdown hinzufügen</button>
+    <button class="btn" type="button" id="sourceApplyMarkdownBtn" ${pending?"":"disabled"}>Speichern und Markdown aktualisieren</button>
+    <button class="btn" type="button" id="sourceQueueUploadBtn" ${pending&&!pending.existing?"":"disabled"}>Für GitHub-Upload merken</button>
+  </div>
+  <div class="upload-status" id="sourcePanelStatus">${sourceUploadQueue.length?`<strong>${sourceUploadQueue.length}</strong> Datei(en) werden beim Veröffentlichen mit hochgeladen.`:""}</div>
+  <details ${lib?.files?.length?"open":""}><summary>Quellen-Bibliothek (${lib?.files?.length||0})</summary><div class="source-library" id="sourceLibraryList">${renderSourceLibraryRows(lib?.files||[])}</div></details>
+</div>`}
+function getMarkdownForSourceContext(context){if(context==="ordner")return document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown||"";return document.getElementById("postMarkdownInput")?.value||draftMarkdown||""}
+function setMarkdownForSourceContext(context,markdown){if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown,dirty:true};const el=document.getElementById("ordnerEditor");if(el)el.value=markdown}else{draftMarkdown=markdown;const el=document.getElementById("postMarkdownInput");if(el)el.value=markdown;updateDraftPreview()}}
+async function prepareSourceDraftFromFile(file,context){validateSourceFile(file);const markdown=getMarkdownForSourceContext(context);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const ext=sourceFileExtension(file.name);const label=document.getElementById("sourceLabelSelect")?.value||defaultSourceLabelForExt(ext);const path=buildSourceStoragePath(markdown,file.name,ext==="pdf"?pageNum:0);const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");const base64=await readFileAsBase64(file);sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,ext==="pdf"?pageNum:0),path,url,label,page:ext==="pdf"?pageNum:"",ext,base64,existing:false,context};return sourceDraftPending}
+function prepareSourceDraftFromLibrary(file,context){const ext=sourceFileExtension(file.path||file.name);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const label=document.getElementById("sourceLabelSelect")?.value||defaultSourceLabelForExt(ext);const path=String(file.path||"").replace(/^\/+/,"");const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");sourceDraftPending={originalName:file.name||path.split("/").pop(),name:file.name,path,url,label,page:ext==="pdf"?pageNum:"",ext,existing:true,context};return sourceDraftPending}
+function applySourceDraftToMarkdown(context){if(!sourceDraftPending)return;const md=getMarkdownForSourceContext(context);const updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url);setMarkdownForSourceContext(context,updated);if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null;return updated}
+function collectSourceFilesForWorker(){return sourceUploadQueue.map(item=>({path:item.path,contentBase64:item.contentBase64}))}
+function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const panel=document.getElementById("sourceFilesPanel");if(!panel)return;const drop=document.getElementById("sourceDropzone");const handleFiles=async files=>{const file=files&&files[0];if(!file)return;try{await prepareSourceDraftFromFile(file,sourceEditorContext);renderShell()}catch(e){toast(e.message||String(e))}};if(drop){drop.ondragover=e=>{e.preventDefault();drop.classList.add("is-dragover")};drop.ondragleave=()=>drop.classList.remove("is-dragover");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("is-dragover");handleFiles(e.dataTransfer?.files)}}
+  const pdfBtn=document.getElementById("sourcePickPdfBtn");if(pdfBtn)pdfBtn.onclick=()=>document.getElementById("sourcePdfInput")?.click();
+  const imgBtn=document.getElementById("sourcePickImageBtn");if(imgBtn)imgBtn.onclick=()=>document.getElementById("sourceImageInput")?.click();
+  const pdfInput=document.getElementById("sourcePdfInput");if(pdfInput)pdfInput.onchange=e=>handleFiles(e.target.files);
+  const imgInput=document.getElementById("sourceImageInput");if(imgInput)imgInput.onchange=e=>handleFiles(e.target.files);
+  const reloadBtn=document.getElementById("sourceReloadLibBtn");if(reloadBtn)reloadBtn.onclick=async()=>{await loadSourceLibrary(true);renderShell()};
+  const labelSelect=document.getElementById("sourceLabelSelect");if(labelSelect)labelSelect.onchange=()=>{if(sourceDraftPending)sourceDraftPending.label=labelSelect.value};
+  const pageInput=document.getElementById("sourcePageInput");if(pageInput)pageInput.oninput=()=>{if(!sourceDraftPending)return;const ext=sourceDraftPending.ext;const pageNum=pageInput.value?Math.max(1,parseInt(pageInput.value,10)||0):0;sourceDraftPending.page=ext==="pdf"?pageNum:"";if(sourceDraftPending.existing){sourceDraftPending.url=buildSourceLinkUrl(sourceDraftPending.path,ext==="pdf"?pageNum:0,ext==="pdf")}else{sourceDraftPending.path=buildSourceStoragePath(getMarkdownForSourceContext(sourceEditorContext),sourceDraftPending.originalName,ext==="pdf"?pageNum:0);sourceDraftPending.url=buildSourceLinkUrl(sourceDraftPending.path,ext==="pdf"?pageNum:0,ext==="pdf")}const prev=document.querySelector(".source-preview-box");if(prev)prev.outerHTML=renderSourcePreviewBox(sourceDraftPending)};
+  const addBtn=document.getElementById("sourceAddMarkdownBtn");if(addBtn)addBtn.onclick=()=>{try{applySourceDraftToMarkdown(sourceEditorContext);toast("Quellen-Link im Markdown ergänzt");renderShell()}catch(e){toast(e.message||String(e))}};
+  const applyBtn=document.getElementById("sourceApplyMarkdownBtn");if(applyBtn)applyBtn.onclick=()=>{try{applySourceDraftToMarkdown(sourceEditorContext);toast("Markdown mit Quellen-Link aktualisiert");renderShell()}catch(e){toast(e.message||String(e))}};
+  const queueBtn=document.getElementById("sourceQueueUploadBtn");if(queueBtn)queueBtn.onclick=()=>{if(sourceDraftPending&&!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});toast("Für Upload vorgemerkt");renderShell()};
+  panel.querySelectorAll("[data-source-pick]").forEach(btn=>btn.onclick=()=>{const idx=Number(btn.getAttribute("data-source-pick"));const file=sourceLibraryCache?.files?.[idx];if(!file)return;prepareSourceDraftFromLibrary(file,sourceEditorContext);renderShell()});
+  if(!sourceLibraryCache&&!sourceLibraryBusy)loadSourceLibrary(false).then(()=>renderShell()).catch(()=>{})}
 function repairMarkdownStructure(markdown){
   let out=sanitizeMarkdownQuotes(String(markdown||"").trim());
   if(!out)return "";
@@ -897,6 +972,7 @@ async function publishPostViaWorkerRequest(markdown,filename,options={}){
   if(remember)setSavedWorkerSecret(secret);else setSavedWorkerSecret("");
   const body={markdown,filename};
   if(options.skipPush)body.skipPush=true;
+  if(Array.isArray(options.sourceFiles)&&options.sourceFiles.length)body.sourceFiles=options.sourceFiles;
   const res=await fetch(resolveWorkerUrl(publishUrl),{
     method:"POST",
     headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
@@ -1635,6 +1711,7 @@ function renderOrdner(){
       <div class="panel ordner-editor">
         <div class="section-head"><h3>Editor</h3><span>${ordnerEdit.filename?esc(ordnerEdit.filename):"Beitrag wählen"}</span></div>
         ${ordnerEdit.filename?`<textarea class="paste-area ordner-editor-area" id="ordnerEditor" spellcheck="false">${esc(ordnerEdit.markdown)}</textarea>
+        ${renderSourceFilesPanel("ordner")}
         <div class="ordner-editor-actions">
           <button class="btn" id="ordnerEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
           <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(ordnerEdit.postId||ordnerEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">Live öffnen</a>
@@ -1979,6 +2056,7 @@ function renderActions(rows){
               <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
             </div>
           </div>
+          ${renderSourceFilesPanel("draft")}
           <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown öffnen, Nummer prüfen, Vorschau ansehen und bewusst veröffentlichen."}</div>
           ${renderPublishTracker("single")}
           ${renderDraftPreview()}
@@ -2238,8 +2316,11 @@ function bindOrdnerUi(){
     if(!confirm(`Beitrag „${ordnerEdit.filename}“ live speichern?\n\nKein Push — nur Korrektur für Besucher.`))return;
     saveBtn.disabled=true;setOrdnerEditorStatus("Speichere live…");
     try{
-      const result=await workerPostRequest("post/update",{filename:ordnerEdit.filename,markdown,sha:ordnerEdit.sha,skipPush:true});
+      const sourceFiles=collectSourceFilesForWorker();
+      const result=await workerPostRequest("post/update",{filename:ordnerEdit.filename,markdown,sha:ordnerEdit.sha,skipPush:true,sourceFiles});
       ordnerEdit={...ordnerEdit,markdown,sha:"",dirty:false};
+      sourceDraftPending=null;
+      sourceUploadQueue=[];
       ordnerCatalogLoaded=false;
       await ensureOrdnerCatalog(true);
       addAdminLog("Korrektur","Beitrag live ohne Push",ordnerEdit.filename);
@@ -2287,6 +2368,7 @@ function bindUi(){
   bindCommandCenterForms();
   bindRankCards();
   bindOrdnerUi();
+  bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
 }
 function bindCommandCenterForms(){
   function applyPreview(width,height,mode){
@@ -2515,7 +2597,8 @@ async function uploadPostViaWorker(){
     updatePublishMeta({filename:draftFilename,number:next,title:preview.title});
     updatePublishStep("created","run","Sende an Worker");
     setUploadStatus("Sende Beitrag an Cloudflare Worker...");
-    const result=await publishPostViaWorkerRequest(markdown,draftFilename);
+    const sourceFiles=collectSourceFilesForWorker();
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename,{sourceFiles});
     const uploadedFilename=result.filename||draftFilename;
     const uploadedNumber=result.number||next;
     const postId=result.postId||frontmatterValue(markdown,"id")||uploadedFilename.replace(/\.md$/i,"");
@@ -2551,6 +2634,8 @@ async function uploadPostViaWorker(){
     draftMarkdown="";
     draftFilename="";
     draftNextNumber=null;
+    sourceDraftPending=null;
+    sourceUploadQueue=[];
     try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}
     const text=document.getElementById("postMarkdownInput");if(text)text.value="";
     if(filenameInput)filenameInput.value="";

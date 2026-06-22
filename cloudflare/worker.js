@@ -34,6 +34,9 @@ const DEFAULT_BRANCH = "main";
 // Deployed via GitHub Actions (.github/workflows/deploy-admin-publisher.yml)
 const DEFAULT_POSTS_DIR = "content/posts";
 const DEFAULT_STAGING_POSTS_DIR = "content/staging/posts";
+const DEFAULT_SOURCES_DIR = "assets/sources";
+const SOURCE_MAX_BYTES = 20 * 1024 * 1024;
+const SOURCE_ALLOWED_EXT = new Set(["pdf", "png", "jpg", "jpeg", "webp"]);
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
@@ -163,6 +166,12 @@ export default {
         const filename = sanitizeFilename(String(url.searchParams.get("filename") || "").trim());
         if (!filename) return json({ ok: false, error: "filename fehlt" }, cors, 400);
         return json(await fetchPostMarkdown(env, filename), cors);
+      }
+
+      if (url.pathname === "/api/admin/sources/list" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        return json(await listSourceFiles(env), cors);
       }
 
       const publishPaths = new Set(["/publish", "/api/admin/publish"]);
@@ -422,6 +431,96 @@ function listPostFiles(files) {
   return (Array.isArray(files) ? files : []).filter((file) => file && (file.name || typeof file === "string"));
 }
 
+/* SOURCE FILES GUARD FINAL: PDF/Bild-Upload nach assets/sources/ mit Markdown-Links */
+
+function sourceExtension(pathOrName) {
+  const base = String(pathOrName || "").split("/").pop() || "";
+  const ext = base.includes(".") ? base.split(".").pop().toLowerCase() : "";
+  return ext;
+}
+
+function isAllowedSourceExtension(ext) {
+  return SOURCE_ALLOWED_EXT.has(String(ext || "").toLowerCase());
+}
+
+function estimateBase64Bytes(base64) {
+  const clean = String(base64 || "").replace(/\s+/g, "");
+  if (!clean) return 0;
+  const padding = clean.endsWith("==") ? 2 : clean.endsWith("=") ? 1 : 0;
+  return Math.floor((clean.length * 3) / 4) - padding;
+}
+
+function normalizeSourceFilesInput(raw) {
+  const list = Array.isArray(raw) ? raw : [];
+  const out = [];
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i] || {};
+    const path = trimSlashes(String(item.path || "").trim());
+    const contentBase64 = String(item.contentBase64 || item.base64 || "").replace(/\s+/g, "");
+    if (!path || !contentBase64) throw httpError(`Quellen-Datei ${i + 1}: Pfad oder Inhalt fehlt`, 400);
+    if (!path.startsWith("assets/sources/")) throw httpError(`Quellen-Datei ${i + 1}: Pfad muss mit assets/sources/ beginnen`, 400);
+    const ext = sourceExtension(path);
+    if (!isAllowedSourceExtension(ext)) throw httpError(`Quellen-Datei ${i + 1}: Dateityp .${ext} nicht erlaubt`, 400);
+    const bytes = estimateBase64Bytes(contentBase64);
+    if (bytes <= 0) throw httpError(`Quellen-Datei ${i + 1}: leer oder ungültig`, 400);
+    if (bytes > SOURCE_MAX_BYTES) throw httpError(`Quellen-Datei ${i + 1}: maximal ${Math.round(SOURCE_MAX_BYTES / (1024 * 1024))} MB`, 400);
+    out.push({ path, contentBase64, binary: true });
+  }
+  return out;
+}
+
+async function githubListRepoTreePaths(env, owner, repo, branch) {
+  const refSha = await githubGetRefSha(env, owner, repo, branch);
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${refSha}?recursive=1`, {
+    headers: githubHeaders(env)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw httpError(data.message || `GitHub tree Fehler ${res.status}`, res.status);
+  return (Array.isArray(data.tree) ? data.tree : [])
+    .filter((item) => item.type === "blob" && item.path)
+    .map((item) => String(item.path));
+}
+
+async function listSourceFiles(env) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const sourcesDir = trimSlashes(env.SOURCES_DIR || DEFAULT_SOURCES_DIR);
+  let paths = [];
+  try {
+    paths = await githubListRepoTreePaths(env, owner, repo, branch);
+  } catch (error) {
+    return { ok: true, files: [], sourcesDir, warning: String(error.message || error) };
+  }
+  const files = paths
+    .filter((path) => path.startsWith(`${sourcesDir}/`) && isAllowedSourceExtension(sourceExtension(path)))
+    .map((path) => {
+      const parts = path.split("/");
+      const name = parts.pop() || path;
+      const scholar = parts.length > 2 ? parts[parts.length - 2] : "";
+      const ext = sourceExtension(name);
+      return {
+        path,
+        name,
+        scholar: scholar && scholar !== "sources" ? scholar : "",
+        type: ext === "pdf" ? "PDF" : "Bild",
+        url: `/${path}`
+      };
+    })
+    .sort((a, b) => a.path.localeCompare(b.path, "de"));
+  return { ok: true, files, sourcesDir, count: files.length };
+}
+
+async function prepareSourceCommitEntries(env, owner, repo, branch, sourceFiles) {
+  const entries = [];
+  for (const file of sourceFiles) {
+    const existing = await githubGet(env, owner, repo, file.path, branch);
+    if (existing?.content) throw httpError(`Quellen-Datei existiert bereits: ${file.path}`, 409);
+    entries.push({ path: file.path, contentBase64: file.contentBase64, binary: true });
+  }
+  return entries;
+}
+
 /* PUBLISH ISOLATION GUARD FINAL: atomic Git commits, bulk publish, deferred live checks */
 
 async function publishPostFromMarkdown(env, input, ctx, options = {}) {
@@ -463,6 +562,7 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   filename = sanitizeFilename(filename);
   const markdown = normalizeMarkdownForUpload(markdownRaw, nextNumber);
   const postPath = `${postsDir}/${filename}`;
+  const sourceFiles = normalizeSourceFilesInput(input.sourceFiles);
 
   const existing = await githubGet(env, owner, repo, postPath, branch);
   if (existing) throw httpError(`Diese Datei existiert schon: ${filename}`, 409);
@@ -479,6 +579,9 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     files: nextFiles
   };
   const indexContent = `${JSON.stringify(payload, null, 2)}\n`;
+  const sourceEntries = sourceFiles.length
+    ? await prepareSourceCommitEntries(env, owner, repo, branch, sourceFiles)
+    : [];
   const batchCommit = await githubCommitBatch(
     env,
     owner,
@@ -486,12 +589,14 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     branch,
     [
       { path: postPath, content: markdown, sha: postBlobSha },
+      ...sourceEntries,
       { path: indexPath, content: indexContent }
     ],
-    `Add post ${filename}`
+    sourceEntries.length ? `Add post ${filename} + ${sourceEntries.length} source file(s)` : `Add post ${filename}`
   );
   const created = { content: { sha: postBlobSha }, commit: { sha: batchCommit.commitSha } };
   const updatedIndex = { commit: { sha: batchCommit.commitSha } };
+  const uploadedSources = sourceEntries.map((entry) => entry.path);
 
   const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
   const postId = frontmatterValue(markdown, "id");
@@ -510,7 +615,8 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       publishedAt,
       previewUrl: `${siteOrigin(env)}/?env=staging&refresh=${Date.now()}#post/${encodeURIComponent(postId || filename.replace(/\.md$/i, ""))}`,
       push: { sent: false, skipped: true, staging: true, reason: "Staging sendet keine Besucher-Pushs." },
-      telegram: { sent: false, skipped: true, staging: true }
+      telegram: { sent: false, skipped: true, staging: true },
+      sourceFiles: uploadedSources
     };
   }
   const liveCheck = {
@@ -732,6 +838,7 @@ async function updateExistingPost(env, input) {
   const markdown = normalizeMarkdownForStorage(String(input.markdown || "").trim());
   const sha = String(input.sha || "").trim();
   const skipPush = input.skipPush !== false;
+  const sourceFiles = normalizeSourceFilesInput(input.sourceFiles || []);
 
   if (!filename) throw httpError("Dateiname fehlt", 400);
   if (!markdown) throw httpError("Markdown fehlt", 400);
@@ -747,22 +854,38 @@ async function updateExistingPost(env, input) {
     throw httpError("Datei wurde zwischenzeitlich geändert — bitte neu laden", 409);
   }
 
-  const saved = await githubPut(
-    env,
-    owner,
-    repo,
-    postPath,
-    markdown,
-    `Update post ${filename}`,
-    branch,
-    existing.sha
-  );
+  let commitSha = "";
+  if (sourceFiles.length) {
+    const sourceEntries = await prepareSourceCommitEntries(env, owner, repo, branch, sourceFiles);
+    const batch = await githubCommitBatch(
+      env,
+      owner,
+      repo,
+      branch,
+      [{ path: postPath, content: markdown }, ...sourceEntries],
+      `Update post ${filename} + ${sourceEntries.length} source file(s)`
+    );
+    commitSha = batch.commitSha || "";
+  } else {
+    const saved = await githubPut(
+      env,
+      owner,
+      repo,
+      postPath,
+      markdown,
+      `Update post ${filename}`,
+      branch,
+      existing.sha
+    );
+    commitSha = saved.commit?.sha || "";
+  }
 
   return {
     ok: true,
     filename,
     postPath,
-    commitSha: saved.commit?.sha || "",
+    commitSha,
+    sourceFiles: sourceFiles.map((file) => file.path),
     postId: frontmatterValue(markdown, "id") || "",
     push: { sent: false, skipped: skipPush, reason: skipPush ? "Korrektur ohne Push" : "Push nicht angefordert" }
   };
@@ -1265,6 +1388,18 @@ async function githubCreateBlob(env, owner, repo, content) {
   return data.sha || "";
 }
 
+async function githubCreateBinaryBlob(env, owner, repo, base64Content) {
+  const content = String(base64Content || "").replace(/\s+/g, "");
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs`, {
+    method: "POST",
+    headers: { ...githubHeaders(env), "Content-Type": "application/json" },
+    body: JSON.stringify({ content, encoding: "base64" })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw httpError(data.message || `GitHub binary blob Fehler ${res.status}`, res.status);
+  return data.sha || "";
+}
+
 async function githubCommitBatch(env, owner, repo, branch, fileEntries, message) {
   const parentSha = await githubGetRefSha(env, owner, repo, branch);
   const baseTreeSha = await githubGetCommitTreeSha(env, owner, repo, parentSha);
@@ -1273,7 +1408,10 @@ async function githubCommitBatch(env, owner, repo, branch, fileEntries, message)
   for (const entry of fileEntries) {
     const path = trimSlashes(entry.path);
     const content = String(entry.content ?? "");
-    const blobSha = entry.sha || await githubCreateBlob(env, owner, repo, content);
+    const blobSha = entry.sha
+      || (entry.binary
+        ? await githubCreateBinaryBlob(env, owner, repo, String(entry.contentBase64 ?? entry.content ?? ""))
+        : await githubCreateBlob(env, owner, repo, content));
     blobs.set(path, blobSha);
     treeItems.push({ path, mode: "100644", type: "blob", sha: blobSha });
   }
