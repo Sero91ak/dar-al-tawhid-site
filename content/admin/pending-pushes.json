@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-06-22T13:51:12.925Z",
+  "generated": "2026-06-22T13:51:44.632Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -254,8 +254,32 @@
       "postPath": "content/posts/aqidah-424-das-nuzul-allahs-ist-haqq.md",
       "status": "pending",
       "createdAt": "2026-06-22T13:38:48.974Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-06-22T13:51:12.925Z"
+      "lastError": "",
+      "updatedAt": "2026-06-22T13:51:44.632Z",
+      "lastCheckAt": "2026-06-22T13:51:44.352Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "nuzul-allahs-ist-haqq-424",
+        "indexGenerated": "2026-06-22T13:38:46.175Z",
+        "indexCount": 424,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=nuzul-allahs-ist-haqq-424&v=1782136304116#post/nuzul-allahs-ist-haqq-424"
+      },
+      "attempts": 1
     }
   }
 }
