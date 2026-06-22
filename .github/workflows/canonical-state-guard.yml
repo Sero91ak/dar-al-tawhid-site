@@ -92,3 +92,6 @@ jobs:
 
       - name: Source files guard (Admin Quellen-Upload PDF/Bild)
         run: node scripts/source-files-guard.js
+
+      - name: Slide post guard (Carousel + Parser + Theme-Tokens)
+        run: node scripts/slide-post-guard.js
