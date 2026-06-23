@@ -74,7 +74,8 @@ function runSourceFilesGuard() {
     "shortlinks/save",
     "shortlinks/import",
     "shortlinks/create",
-    "Instagram Channel — automatischer Kurzlink",
+    "Custom GPT Action — vollautomatisch",
+    "gpt-instagram-channel-openapi.yaml",
     "parseChatGptImport",
     "Links automatisch anlegen",
     "bindKurzlinksUi",
@@ -88,7 +89,9 @@ function runSourceFilesGuard() {
     "buildRedirectHtml",
     "validateCreateInput",
     "buildCreatePayload",
-    "buildChannelShareText"
+    "buildChannelShareText",
+    "GPT_ACTION_INSTRUCTIONS",
+    "GPT_ACTION_OPENAPI_URL"
   ]);
 
   mustInclude("worker.js", worker, [
@@ -103,7 +106,9 @@ function runSourceFilesGuard() {
     "/api/admin/shortlinks",
     "/api/admin/shortlinks/import",
     "/api/admin/shortlinks/create",
+    "/api/admin/shortlinks/channel-create",
     "createShortlinkEntry",
+    "createInstagramChannelPost",
     "validatePostShortlinkForPublish",
     "kurzlink-admin.js"
   ]);

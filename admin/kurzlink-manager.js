@@ -408,8 +408,13 @@
     const textHighlightException = input?.textHighlightException === true;
     return {
       targetUrl,
-      adminNote: String(input?.adminNote || "").trim(),
-      quote: String(input?.quote || "").trim(),
+      title: String(input?.title || "").trim(),
+      hashtags: String(input?.hashtags || "").trim(),
+      statement: String(input?.statement || "").trim(),
+      sourceCitation: String(input?.sourceCitation || "").trim(),
+      fazit: String(input?.fazit || "").trim(),
+      adminNote: String(input?.adminNote || input?.sourceCitation || "").trim(),
+      quote: String(input?.quote || input?.statement || "").trim(),
       sourcePlatform: String(input?.sourcePlatform || input?.platform || detectPlatform(targetUrl) || "").trim(),
       contentType: String(input?.contentType || "instagram_channel").trim(),
       textHighlightException,
@@ -468,6 +473,36 @@ Regeln:
 - Jeder Link braucht Textmarkierung #:~:text=Start,Ende wenn möglich
 - Im Instagram-Text KEIN langer Quellenlink — nur: 🔗 https://dar-al-tawhid.de/aX (wird automatisch erzeugt)
 - KEIN Platzhalter [QUELLE] — die Admin-App erzeugt den fertigen Kurzlink direkt`;
+
+  const GPT_ACTION_OPENAPI_URL = "https://dar-al-tawhid.de/content/admin/gpt-instagram-channel-openapi.yaml";
+
+  const GPT_ACTION_INSTRUCTIONS = `Du bist der Instagram-Channel-Autor für DAR AL TAWHID.
+
+WICHTIG — AUTOMATISCHER KURZLINK:
+Wenn der Nutzer einen Instagram-Channel-Beitrag will, rufe IMMER die Action createInstagramChannelPost auf.
+Erfinde NIEMALS einen Kurzlink. Gib NIEMALS [QUELLE] oder einen Platzhalter aus.
+Die Action liefert instagramPost — gib diesen Text 1:1 an den Nutzer zurück (kopierbereit).
+
+Ablauf bei jeder Anfrage „Instagram-Channel-Beitrag“:
+1. Recherchiere die Originalquelle (nur erlaubte Domains)
+2. Baue targetUrl mit Textmarkierung #:~:text=Start,Ende
+3. Rufe createInstagramChannelPost mit allen Pflichtfeldern auf
+4. Gib nur result.instagramPost aus — fertig, nichts manuell ergänzen
+
+Pflichtfelder für die Action:
+- title, hashtags, statement, sourceCitation, targetUrl, adminNote, quote, fazit
+- adminNote = gleiche Info wie sourceCitation (Buch, Band, Seite, Gelehrter)
+- quote = exakt zitierte Aussage
+
+Erlaubte Domains für targetUrl:
+islamweb.net, shamela.ws, al-maktaba.org, ketabonline.com, dorar.net, quran.ksu.edu.sa, archive.org, waqfeya.net
+
+Regeln für den Beitrag:
+- Kein langer Quellenlink im Text — nur der Kurzlink 🔗 https://dar-al-tawhid.de/aX aus der API
+- Textmarkierung im targetUrl ist Pflicht (Ausnahme nur mit textHighlightException + textHighlightNote)
+- Bei API-Fehler: ehrlich melden „Kurzlink konnte nicht erstellt werden“ — keinen falschen Link erfinden
+
+OpenAPI-Schema: ${GPT_ACTION_OPENAPI_URL}`;
 
   function normalizeImportLink(raw) {
     if (typeof raw === "string") {
@@ -759,6 +794,8 @@ Regeln:
     formatSourceLine,
     formatInstagramLine,
     CHATGPT_IMPORT_PROMPT,
+    GPT_ACTION_OPENAPI_URL,
+    GPT_ACTION_INSTRUCTIONS,
     parseChatGptImport,
     buildImportPreviewBlock,
     normalizeImportLink,

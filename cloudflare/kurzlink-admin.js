@@ -141,6 +141,36 @@ function formatInstagramLine(code) {
   return c ? `🔗 https://${SHORT_DOMAIN}/${c}` : "";
 }
 
+export function buildChannelShareText(input = {}) {
+  const code = normalizeCode(input.code || input.sourceShortlink || "");
+  const titleClean = String(input.title || "")
+    .replace(/^📖\s*/, "")
+    .trim();
+  const titleLine = titleClean ? `📖 ${titleClean}` : "";
+  const tags = String(input.hashtags || "")
+    .trim()
+    .replace(/^#/, "");
+  const tagLine = tags
+    ? tags
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((t) => (t.startsWith("#") ? t : `#${t}`))
+        .join(" ")
+    : "";
+  const body = String(input.statement || input.quote || "").trim();
+  const citation = String(input.sourceCitation || input.adminNote || "").trim();
+  const shortLink = code ? formatInstagramLine(code) : "";
+  const fazitLine = String(input.fazit || "").trim();
+  const parts = [];
+  if (titleLine) parts.push(titleLine);
+  if (tagLine) parts.push(tagLine);
+  if (body) parts.push("", body);
+  if (citation) parts.push("", `📝 ${citation}`);
+  if (shortLink) parts.push("", shortLink);
+  if (fazitLine) parts.push("", `🌙 **Fazit:** ${fazitLine}`);
+  return parts.join("\n").trim();
+}
+
 export function normalizeShortlinksRegistry(raw) {
   const data = raw && typeof raw === "object" ? raw : {};
   const entries = {};
@@ -662,6 +692,7 @@ export async function createShortlinkEntry(env, input, { githubGet, githubPut, g
         at: now,
         action: "create",
         contentType: check.entry.contentType,
+        client: String(logMeta.client || ""),
         ip: String(logMeta.ip || ""),
         userAgent: String(logMeta.userAgent || "").slice(0, 200)
       }
@@ -712,6 +743,17 @@ export async function createShortlinkEntry(env, input, { githubGet, githubPut, g
   }
 
   const shortUrl = `https://${SHORT_DOMAIN}/${code}`;
+  const channelFields = input?.title || input?.statement || input?.hashtags || input?.fazit || input?.sourceCitation;
+  const instagramPost = channelFields
+    ? buildChannelShareText({
+        title: input?.title,
+        hashtags: input?.hashtags,
+        statement: input?.statement,
+        sourceCitation: input?.sourceCitation || input?.adminNote,
+        fazit: input?.fazit,
+        code
+      })
+    : "";
   return {
     ok: true,
     success: true,
@@ -722,6 +764,62 @@ export async function createShortlinkEntry(env, input, { githubGet, githubPut, g
     entry: nextRegistry.entries[code],
     registry: nextRegistry,
     commitSha,
-    instagramLine: formatInstagramLine(code)
+    instagramLine: formatInstagramLine(code),
+    instagramPost
+  };
+}
+
+export function validateInstagramChannelInput(input) {
+  const errors = [];
+  const title = String(input?.title || "").trim();
+  const statement = String(input?.statement || "").trim();
+  const sourceCitation = String(input?.sourceCitation || "").trim();
+  const fazit = String(input?.fazit || "").trim();
+  if (!title) errors.push("Titel fehlt");
+  if (!statement) errors.push("Beitragstext fehlt");
+  if (!sourceCitation) errors.push("Kurze Quellenangabe fehlt");
+  if (!fazit) errors.push("Fazit fehlt");
+  return { ok: !errors.length, errors };
+}
+
+export async function createInstagramChannelPost(env, input, deps) {
+  const channelCheck = validateInstagramChannelInput(input);
+  if (!channelCheck.ok) {
+    return { ok: false, success: false, error: channelCheck.errors[0] || "Beitragsdaten unvollständig" };
+  }
+
+  const payload = {
+    ...input,
+    adminNote: String(input?.adminNote || input?.sourceCitation || "").trim(),
+    quote: String(input?.quote || input?.statement || "").trim(),
+    contentType: "instagram_channel_gpt",
+    sourcePlatform: String(input?.sourcePlatform || "").trim()
+  };
+
+  const result = await createShortlinkEntry(env, payload, {
+    ...deps,
+    logMeta: {
+      ...(deps?.logMeta || {}),
+      client: String(input?.client || deps?.logMeta?.client || "gpt-action")
+    }
+  });
+
+  if (!result.ok) return result;
+
+  const instagramPost =
+    result.instagramPost ||
+    buildChannelShareText({
+      title: input?.title,
+      hashtags: input?.hashtags,
+      statement: input?.statement,
+      sourceCitation: input?.sourceCitation || input?.adminNote,
+      fazit: input?.fazit,
+      code: result.code
+    });
+
+  return {
+    ...result,
+    instagramPost,
+    message: "Instagram-Channel-Beitrag mit echtem Kurzlink erstellt. instagramPost ist kopierbereit."
   };
 }

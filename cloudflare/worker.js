@@ -33,6 +33,7 @@ import {
   saveAutoShortlinkEntry,
   importShortlinkBatch,
   createShortlinkEntry,
+  createInstagramChannelPost,
   validatePostShortlinkForPublish
 } from "./kurzlink-admin.js";
 import { readZakatConfig, saveZakatPrices } from "./zakat-admin.js";
@@ -254,6 +255,28 @@ export default {
         });
         if (!result.ok) {
           return json({ ok: false, success: false, error: result.error || "Kurzlink konnte nicht erstellt werden" }, cors, 400);
+        }
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/shortlinks/channel-create" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        assertShortlinkCreateRateLimit(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await createInstagramChannelPost(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8,
+          logMeta: {
+            client: "gpt-action",
+            ip: request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "",
+            userAgent: request.headers.get("User-Agent") || ""
+          }
+        });
+        if (!result.ok) {
+          return json({ ok: false, success: false, error: result.error || "Kurzlink konnte nicht erstellt werden. Bitte Quelle prüfen." }, cors, 400);
         }
         return json(result, cors);
       }

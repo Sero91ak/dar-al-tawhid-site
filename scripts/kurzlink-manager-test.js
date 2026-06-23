@@ -128,6 +128,9 @@ assert(channelText.includes("📖 Titel") && channelText.includes("#Tag1") && ch
 const htmlActive = K.buildRedirectHtml({ code: "a3", status: "active", targetUrl: "https://www.islamweb.net/x" });
 assert(/location\.replace/i.test(htmlActive), "Test 17: active status redirects");
 
+assert(typeof K.GPT_ACTION_INSTRUCTIONS === "string" && K.GPT_ACTION_INSTRUCTIONS.includes("createInstagramChannelPost"), "Test 18: GPT Action instructions present");
+assert(String(K.GPT_ACTION_OPENAPI_URL || "").includes("gpt-instagram-channel-openapi.yaml"), "Test 19: GPT OpenAPI URL");
+
 if (failed) {
   console.error(`\n${failed} Kurzlink-Test(s) fehlgeschlagen.`);
   process.exit(1);
