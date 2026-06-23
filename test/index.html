@@ -529,6 +529,13 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .quran-home-teaser h3{font-family:var(--serif);color:var(--premium-title);font-size:25px;margin:0;line-height:1.08}
 .quran-home-teaser-note{color:var(--premium-body);font-size:11.5px;line-height:1.48;margin:8px 0 0}
 .quran-home-teaser-btn{min-height:39px;padding:8px 15px;font-size:11px;font-weight:950;cursor:pointer;margin-top:8px}
+.zakat-home-teaser{border-radius:22px;padding:16px;margin:0 0 13px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px;border:1px solid rgba(140,50,50,.28)}
+.zakat-home-teaser-main{min-width:0}
+.zakat-home-teaser-label{display:inline-block;color:var(--premium-label);font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.zakat-home-teaser h3{font-family:var(--serif);color:var(--premium-title);font-size:25px;margin:0;line-height:1.08;display:flex;align-items:center;gap:8px}
+.zakat-home-teaser-icon{font-size:1.35rem;line-height:1}
+.zakat-home-teaser-note{color:var(--premium-body);font-size:11.5px;line-height:1.48;margin:8px 0 0}
+.zakat-home-teaser-btn{min-height:39px;padding:8px 15px;font-size:11px;font-weight:950;cursor:pointer;white-space:nowrap;align-self:center}
 .suhur-iftar-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .suhur-iftar-row>div{border:1px solid rgba(180,220,255,.22);border-radius:14px;padding:10px;background:rgba(255,255,255,.04)}
 .suhur-iftar-row b{display:block;color:#dbe8ff;font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
@@ -2749,6 +2756,7 @@ html[data-theme="bordeaux"] .zakat-form-grid .field,html[data-theme="bordeaux"] 
   .search-pro-panel,
   .popular-panel,
   .quran-home-teaser,
+  .zakat-home-teaser,
   .ramadan-teaser,
   .daily-box,
   .recommended-box{
@@ -2848,7 +2856,7 @@ html[data-theme="bordeaux"] .zakat-form-grid .field,html[data-theme="bordeaux"] 
 :where(
   button,a,input,select,textarea,label,[data-nav],[role="button"],
   .folder-card,.post-card,.list-card,.dua-card,.series-card,.pinned-card,
-  .daily-box,.recommended-box,.popular-row,.ramadan-teaser,.quran-home-teaser,
+  .daily-box,.recommended-box,.popular-row,.ramadan-teaser,.quran-home-teaser,.zakat-home-teaser,
   .quran-surah-card,.prayer-time-card,.hijri-header-pill,.share-btn,.nav-posts button
 ){
   -webkit-tap-highlight-color:transparent!important;
@@ -6760,6 +6768,11 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 .quran-home-teaser h3{font-size:23px!important;line-height:1.02!important}
 .quran-home-teaser-note{font-size:11px!important;line-height:1.34!important;margin:6px 0 0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .quran-home-teaser-btn{min-height:34px!important;padding:6px 12px!important;font-size:10.5px!important;margin:0!important;align-self:center!important;white-space:nowrap!important}
+.zakat-home-teaser{padding:10px 11px!important;margin:0 0 8px!important;border-radius:17px!important;column-gap:10px!important}
+.zakat-home-teaser-label{font-size:8.8px!important;margin-bottom:4px!important}
+.zakat-home-teaser h3{font-size:23px!important;line-height:1.02!important}
+.zakat-home-teaser-note{font-size:11px!important;line-height:1.34!important;margin:6px 0 0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.zakat-home-teaser-btn{min-height:34px!important;padding:6px 12px!important;font-size:10.5px!important}
 .prayer-quick-card.premium-surface{padding:10px 11px!important;margin-bottom:8px!important;border-radius:17px!important}
 .prayer-quick-card .prayer-quick-head{margin-bottom:7px!important}
 .prayer-quick-label{font-size:8.8px!important;margin-bottom:3px!important}
@@ -8511,7 +8524,7 @@ function stopQiblaCompass(){
 }
 function prayerCalculationTags(settings=getPrayerSettings()){return `<div class="prayer-calculation-tags"><span>Fajr 12°</span><span>ʿIshāʾ 12° nautisch</span><span>Maghrib Sonnenuntergang</span><span>Taḥajjud · ${esc(tahajjudModeLabel(settings.tahajjudMode))}</span><span>ʿAṣr ${settings.asrFactor===2?"Ḥanafī":"Standard"}</span></div>`}
 function renderZakatHomeTeaser(){
-  return `<section class="premium-surface" data-nav="zakat" style="margin-bottom:13px;padding:14px 16px;border:1px solid rgba(140,50,50,.28);cursor:pointer"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:1.6rem">🕌</span><div><div style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em">Dar Test</div><b style="font-family:var(--serif);font-size:1.15rem;color:var(--gold2)">Zakāt-Rechner</b><div style="font-size:11px;color:var(--muted);margin-top:2px">Qurʾān · Sunnah · live &amp; anonym</div></div></div></section>`;
+  return `<section class="zakat-home-teaser premium-surface" data-nav="zakat"><div class="zakat-home-teaser-main"><span class="zakat-home-teaser-label">Dar Test · Amānah</span><h3><span class="zakat-home-teaser-icon" aria-hidden="true">🕌</span> Zakāt-Rechner</h3><p class="zakat-home-teaser-note">Qurʾān · Sunnah · Salaf · live &amp; anonym berechnet</p></div><button class="zakat-home-teaser-btn premium-pill" type="button" data-nav="zakat">Öffnen →</button></section>`;
 }
 function renderPrayerQuickCard(){
   const settings=getPrayerSettings();
