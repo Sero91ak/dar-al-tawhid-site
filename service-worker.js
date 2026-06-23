@@ -42,7 +42,7 @@ function refreshBypassActive() {
 }
 
 function isPostDataRequest(url) {
-  return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json');
+  return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json') || url.pathname.includes('/content/staging/posts/') || url.pathname.includes('/content/stories/') || url.pathname.includes('/content/staging/stories/');
 }
 
 function navigationShellKey(url) {

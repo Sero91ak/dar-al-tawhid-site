@@ -461,6 +461,7 @@ main#panel.panel{
 <div class="toast" id="toast"></div>
 <script src="/admin/quellen-manager.js?v=1"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
+<script src="/admin/stories-manager.js?v=1"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -477,7 +478,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-06-23-gpt5";
+const ADMIN_BUILD="2026-06-18-stories";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -497,6 +498,7 @@ const DEFAULT_ADMIN_TABS=[
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
   ["news","News"],
+  ["stories","Storys"],
   ["reports","Fehler"],
   ["users","Benutzer"],
   ["tech","Technik"],
@@ -1981,7 +1983,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="stories"&&window.DARStoriesAdmin?window.DARStoriesAdmin.renderStoriesTab():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -1998,6 +2000,13 @@ function renderShell(){
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
+  if(currentTab==="stories"&&window.DARStoriesAdmin&&!storiesLoadedFlag())ensureStoriesAdminData(false).then(()=>{if(currentTab==="stories")renderShell()}).catch(()=>{});
+}
+function storiesLoadedFlag(){return window.__darStoriesAdminLoaded===true}
+async function ensureStoriesAdminData(force){
+  if(!window.DARStoriesAdmin)return;
+  await window.DARStoriesAdmin.ensureStoriesLoaded(!!force);
+  window.__darStoriesAdminLoaded=true;
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -2007,11 +2016,12 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="stories"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
+    if(tab==="stories")ensureStoriesAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -2064,6 +2074,7 @@ function renderStart(ctx){
     ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
+    ${folderCard("⑥b","Storys","NEU: Story-Leiste auf der Startseite — Kurzhinweise in edlen Kreisen.","stories","Verwalten")}
     ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
     ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
     ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
@@ -3124,6 +3135,7 @@ function bindUi(){
   bindQuellenUi();
   bindKurzlinksUi();
   bindZakatAdminUi();
+  if(window.DARStoriesAdmin)window.DARStoriesAdmin.bindStoriesUi();
   bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
 }
 function bindCommandCenterForms(){
