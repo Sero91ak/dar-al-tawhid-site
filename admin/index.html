@@ -509,6 +509,7 @@ let shortlinksRegistry={version:1,nextSerial:1,entries:{}},shortlinksRegistrySha
 let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="",kurzlinkSelectedCode="",kurzlinkImportText="",kurzlinkImportResult="",kurzlinkImportVerify=false;
 let zakatAdminConfig=null,zakatAdminSha="",zakatAdminStatus="",zakatAdminLoaded=false;
 let zakatAdminPriceStatus=null,zakatAdminPriceLoaded=false;
+let zakatAdminPublicPrices=null;
 let sourceLinkTarget="post",sourceCustomLabel="",sourceManualUrl="",sourceSetSlideImage=false;
 let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 let newsSearchQuery="",newsFilter="live",editingNewsId=null;
@@ -1606,64 +1607,133 @@ function renderKurzlinks(){
   </section>`;
 }
 /* ZAKAT ADMIN GUARD: Preise & Quellen — keine privaten Nutzer-Beträge */
-async function ensureZakatAdminPriceStatus(force){
-  if(zakatAdminPriceLoaded&&!force)return zakatAdminPriceStatus;
+async function ensureZakatAdminPublicPrices(force){
+  if(zakatAdminPublicPrices&&!force)return zakatAdminPublicPrices;
   try{
-    const data=await workerGetRequest("zakat/prices/status",{admin:true});
-    zakatAdminPriceStatus=data;
-    zakatAdminPriceLoaded=true;
+    const data=await workerGetRequest("api/zakat/prices");
+    zakatAdminPublicPrices=data;
     return data;
   }catch(e){
-    zakatAdminPriceStatus={ok:false,error:e.message||String(e)};
-    return zakatAdminPriceStatus;
+    zakatAdminPublicPrices={ok:false,error:e.message||String(e)};
+    return zakatAdminPublicPrices;
   }
+}
+async function loadZakatAdminConfigFromRepo(){
+  const bust=Date.now();
+  const urls=[`${SITE_ORIGIN}/content/admin/zakat-config.json?v=${bust}`,`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/admin/zakat-config.json?v=${bust}`];
+  for(const url of urls){
+    try{
+      const r=await fetch(url,{cache:"no-store"});
+      if(!r.ok)continue;
+      return await r.json();
+    }catch(e){}
+  }
+  return null;
+}
+async function ensureZakatAdminPriceStatus(force){
+  if(zakatAdminPriceLoaded&&!force)return zakatAdminPriceStatus;
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  if(secret){
+    try{
+      const data=await workerGetRequest("zakat/prices/status",{admin:true});
+      zakatAdminPriceStatus={...data,adminLimited:false};
+      zakatAdminPriceLoaded=true;
+      return zakatAdminPriceStatus;
+    }catch(e){
+      zakatAdminPriceStatus={ok:false,error:e.message||String(e),adminLimited:false};
+    }
+  }
+  const pub=await ensureZakatAdminPublicPrices(force);
+  zakatAdminPriceStatus={
+    ok:Boolean(pub?.ok),
+    public:pub,
+    cache:{
+      gold:pub?.gold||null,
+      silver:pub?.silver||null,
+      lastSuccessAt:pub?.lastSuccessAt||pub?.fetchedAt||"",
+      lastError:pub?.lastError||pub?.error||"",
+      provider:pub?.provider||"",
+      fetchLogs:[]
+    },
+    apiConfigured:true,
+    apiProvider:pub?.provider||"aurumrates.com",
+    apiTier:"realtime",
+    requiresUserKey:false,
+    adminLimited:!secret,
+    error:pub?.error||(!secret?"Admin-Secret nur für Testabruf/Speichern nötig — Live-Preise unten":""),
+    fetchLogs:[]
+  };
+  zakatAdminPriceLoaded=true;
+  return zakatAdminPriceStatus;
 }
 async function ensureZakatAdminConfig(force){
   if(zakatAdminLoaded&&!force)return zakatAdminConfig;
-  try{
-    const data=await workerGetRequest("zakat/config",{admin:true});
-    zakatAdminConfig=data.config||{};
-    zakatAdminSha=data.sha||"";
-    zakatAdminLoaded=true;
-    return zakatAdminConfig;
-  }catch(e){
-    zakatAdminStatus=`Fehler: ${e.message||e}`;
-    throw e;
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  if(secret){
+    try{
+      const data=await workerGetRequest("zakat/config",{admin:true});
+      zakatAdminConfig=data.config||{};
+      zakatAdminSha=data.sha||"";
+      zakatAdminLoaded=true;
+      return zakatAdminConfig;
+    }catch(e){}
   }
+  const cfg=await loadZakatAdminConfigFromRepo();
+  zakatAdminConfig=cfg||{};
+  zakatAdminSha="";
+  zakatAdminLoaded=true;
+  if(!secret&&!zakatAdminStatus)zakatAdminStatus="Quellen aus Repository geladen. Für Testabruf/Speichern: Admin Worker Secret in Einstellungen.";
+  return zakatAdminConfig;
 }
 function renderZakatAdmin(){
   const cfg=zakatAdminConfig||{};
   const p=cfg.prices||{};
   const ps=zakatAdminPriceStatus||{};
   const cache=ps.cache||{};
-  const pub=ps.public||{};
+  const pub=ps.public||zakatAdminPublicPrices||{};
   const fresh=pub.freshness||{};
   const logs=(ps.fetchLogs||cache.fetchLogs||[]).slice(0,8);
   const sources=(cfg.sources||[]).filter(s=>s.active!==false);
   const rules=(cfg.rules||[]).filter(r=>r.active!==false);
-  const apiBadge=ps.requiresUserKey===false?(pub.freshness?.level==="realtime"||pub.active?"✅ Echtzeit aktiv (COMEX Spot, kein Key)":"⚠️ Echtzeit-Quelle, Cache leer"):ps.apiConfigured?(pub.active?"✅ Premium-Echtzeit aktiv":"⚠️ API konfiguriert, Cache leer"):"✅ Echtzeit";
+  const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
   const cacheGold=cache.gold||pub.gold||{};
   const cacheSilver=cache.silver||pub.silver||{};
+  const hasLivePrices=Boolean(cacheGold.pricePerGram>0&&cacheSilver.pricePerGram>0);
+  let apiBadge;
+  if(!hasLivePrices&&ps.error&&!workerReady){
+    apiBadge="⚠️ Admin-Secret fehlt — Live-Preise werden trotzdem geladen";
+  }else if(!hasLivePrices){
+    apiBadge=ps.error?`❌ ${ps.error}`:"⚠️ Noch keine Preise — Worker startet beim ersten Aufruf";
+  }else if(fresh.level==="realtime"){
+    apiBadge="✅ Echtzeit aktiv (COMEX Spot)";
+  }else if(pub.active||hasLivePrices){
+    apiBadge="✅ Preise geladen";
+  }else{
+    apiBadge="⚠️ Preise mit Hinweis";
+  }
+  const statusHead=fresh.label||(hasLivePrices?apiBadge.replace(/^[^\s]+\s/,""):apiBadge);
+  const secretHint=!workerReady?`<div class="upload-status" style="margin-bottom:10px;border-color:rgba(255,160,80,.35);color:#ffc89a">ℹ️ <strong>Admin Worker Secret fehlt</strong> — nur für Testabruf &amp; manuelles Speichern nötig. Der Rechner in Dar Test nutzt die öffentliche API automatisch. Secret unter <b>Einstellungen → Worker-Verbindung</b> eintragen.</div>`:"";
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Zakāt Preisquellen</h3><span>${sources.length} Quellen · ${rules.length} Regeln</span></div>
-      <p class="ordner-lead">Echtzeit Gold/Silber (COMEX Spot, ~60 Sek.) über Cloudflare Worker — <strong>kein API-Key nötig</strong>. Aktualisierung alle 15 Min. Optional: <code>GOLDAPI_KEY</code> für Premium-Echtzeit in EUR.</p>
+      <p class="ordner-lead">Echtzeit Gold/Silber (COMEX Spot, ~60 Sek.) über Cloudflare Worker — <strong>kein Gold-API-Key nötig</strong>. Aktualisierung alle 15 Min.</p>
     </div>
+    ${secretHint}
     <div class="panel quellen-editor-panel">
-      <div class="section-head"><h4>Preis-Engine Status</h4><span>${esc(fresh.label||apiBadge)}</span></div>
-      <p class="source-files-lead">${esc(apiBadge)} · Anbieter: ${esc(ps.apiProvider||cache.provider||"—")} · ${esc(fresh.label||"")}</p>
+      <div class="section-head"><h4>Preis-Engine Status</h4><span>${esc(statusHead)}</span></div>
+      <p class="source-files-lead">${esc(apiBadge)} · Anbieter: ${esc(ps.apiProvider||cache.provider||pub.provider||"—")}${fresh.label?` · ${esc(fresh.label)}`:""}</p>
       <div class="quellen-result-list">
         <div class="quellen-result-row"><span><span class="quellen-result-title">Gold</span><span class="quellen-result-meta">${cacheGold.pricePerGram?`${cacheGold.pricePerGram} €/g · Niṣāb 85 g: ${cacheGold.nisabEur} €`:"—"}</span></span><span class="quellen-badge">${cacheGold.pricePerGram?"✓":"—"}</span></div>
         <div class="quellen-result-row"><span><span class="quellen-result-title">Silber</span><span class="quellen-result-meta">${cacheSilver.pricePerGram?`${cacheSilver.pricePerGram} €/g · Niṣāb 595 g: ${cacheSilver.nisabEur} €`:"—"}</span></span><span class="quellen-badge">${cacheSilver.pricePerGram?"✓":"—"}</span></div>
-        <div class="quellen-result-row"><span><span class="quellen-result-title">Letzter Erfolg</span><span class="quellen-result-meta">${esc(cache.lastSuccessAt||pub.lastSuccessAt||"—")}</span></span><span class="quellen-badge">${cache.lastSuccessAt?"✓":"—"}</span></div>
-        <div class="quellen-result-row"><span><span class="quellen-result-title">Letzter Fehler</span><span class="quellen-result-meta">${esc(cache.lastError||pub.lastError||"—")}</span></span><span class="quellen-badge">${cache.lastError?"!":"—"}</span></div>
+        <div class="quellen-result-row"><span><span class="quellen-result-title">Letzter Erfolg</span><span class="quellen-result-meta">${esc(cache.lastSuccessAt||pub.lastSuccessAt||pub.fetchedAt||"—")}</span></span><span class="quellen-badge">${(cache.lastSuccessAt||pub.lastSuccessAt||pub.fetchedAt)?"✓":"—"}</span></div>
+        <div class="quellen-result-row"><span><span class="quellen-result-title">Letzter Fehler</span><span class="quellen-result-meta">${esc(cache.lastError||pub.lastError||"—")}</span></span><span class="quellen-badge">${(cache.lastError||pub.lastError)?"!":"—"}</span></div>
       </div>
       <div class="quellen-kurzlink-actions">
-        <button class="btn primary" type="button" id="zakatAdminFetchPrices">Testabruf starten</button>
+        <button class="btn primary" type="button" id="zakatAdminFetchPrices" ${workerReady?"":"title=\"Admin Worker Secret in Einstellungen eintragen\""}>Testabruf starten</button>
         <button class="btn" type="button" id="zakatAdminReload">Neu laden</button>
         <a class="btn" href="/test/#zakat" target="_blank" rel="noopener">Rechner in Dar Test</a>
       </div>
-      <div class="upload-status" id="zakatAdminStatus">${esc(zakatAdminStatus||"Preise werden automatisch stündlich aktualisiert. Notfall: manuell bestätigen.")}</div>
+      <div class="upload-status" id="zakatAdminStatus">${esc(zakatAdminStatus||(hasLivePrices?"Echtzeit-Preise aktiv.":"Preise werden geladen …"))}</div>
     </div>
     <div class="panel quellen-editor-panel">
       <div class="section-head"><h4>Manuelle Preisbestätigung (Notfall)</h4><span>${p.active?"Aktiv":"Inaktiv"}</span></div>
@@ -1687,6 +1757,8 @@ function renderZakatAdmin(){
 function bindZakatAdminUi(){
   const fetchBtn=document.getElementById("zakatAdminFetchPrices");
   if(fetchBtn)fetchBtn.onclick=async()=>{
+    const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+    if(!secret){toast("Admin Worker Secret fehlt — Einstellungen → Worker-Verbindung");zakatAdminStatus="Admin Worker Secret fehlt — unter Einstellungen → Worker-Verbindung eintragen.";renderShell();return}
     fetchBtn.disabled=true;zakatAdminStatus="Starte Testabruf…";renderShell();
     try{
       const result=await workerPostRequest("zakat/prices/fetch",{force:true});
@@ -1705,6 +1777,8 @@ function bindZakatAdminUi(){
   };
   const save=document.getElementById("zakatAdminSavePrices");
   if(save)save.onclick=async()=>{
+    const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+    if(!secret){toast("Admin Worker Secret fehlt — Einstellungen → Worker-Verbindung");zakatAdminStatus="Admin Worker Secret fehlt — unter Einstellungen → Worker-Verbindung eintragen.";renderShell();return}
     const gold=Number(document.getElementById("zakatAdminGold")?.value||0);
     const silver=Number(document.getElementById("zakatAdminSilver")?.value||0);
     const source=String(document.getElementById("zakatAdminPriceSource")?.value||"Admin manuell bestätigt").trim();
@@ -1728,7 +1802,10 @@ function bindZakatAdminUi(){
     }finally{save.disabled=false}
   };
   const reload=document.getElementById("zakatAdminReload");
-  if(reload)reload.onclick=async()=>{zakatAdminLoaded=false;zakatAdminPriceLoaded=false;await ensureZakatAdminConfig(true);await ensureZakatAdminPriceStatus(true);zakatAdminStatus="Neu geladen.";renderShell()};
+  if(reload)reload.onclick=async()=>{zakatAdminLoaded=false;zakatAdminPriceLoaded=false;zakatAdminPublicPrices=null;zakatAdminStatus="";await ensureZakatAdminConfig(true);await ensureZakatAdminPriceStatus(true);zakatAdminStatus="Neu geladen.";renderShell()};
+}
+async function ensureZakatAdminReady(){
+  await Promise.all([ensureZakatAdminConfig(false),ensureZakatAdminPriceStatus(false)]);
 }
 async function loadQuellenPost(filename){
   if(!filename)return;
@@ -1845,7 +1922,7 @@ function renderShell(){
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
-  if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminConfig(false).then(()=>ensureZakatAdminPriceStatus(false)).then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
+  if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -1859,7 +1936,7 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
-    if(tab==="zakat")ensureZakatAdminConfig(false).then(()=>ensureZakatAdminPriceStatus(false)).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
+    if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
