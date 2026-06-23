@@ -1641,13 +1641,13 @@ function renderZakatAdmin(){
   const logs=(ps.fetchLogs||cache.fetchLogs||[]).slice(0,8);
   const sources=(cfg.sources||[]).filter(s=>s.active!==false);
   const rules=(cfg.rules||[]).filter(r=>r.active!==false);
-  const apiBadge=ps.requiresUserKey===false?"✅ Automatisch über Cloudflare (kein Key nötig)":ps.apiConfigured?(pub.active?"✅ Premium-API aktiv":"⚠️ API konfiguriert, Cache leer"):"✅ Automatisch (LBMA + EUR)";
+  const apiBadge=ps.requiresUserKey===false?(pub.freshness?.level==="realtime"||pub.active?"✅ Echtzeit aktiv (COMEX Spot, kein Key)":"⚠️ Echtzeit-Quelle, Cache leer"):ps.apiConfigured?(pub.active?"✅ Premium-Echtzeit aktiv":"⚠️ API konfiguriert, Cache leer"):"✅ Echtzeit";
   const cacheGold=cache.gold||pub.gold||{};
   const cacheSilver=cache.silver||pub.silver||{};
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Zakāt Preisquellen</h3><span>${sources.length} Quellen · ${rules.length} Regeln</span></div>
-      <p class="ordner-lead">Automatischer Gold-/Silberpreis für Niṣāb — läuft über den Cloudflare Worker <strong>ohne eigenen API-Key</strong> (LBMA-Daten + EUR-Umrechnung). Optional später: <code>GOLDAPI_KEY</code> für Premium-Echtzeit.</p>
+      <p class="ordner-lead">Echtzeit Gold/Silber (COMEX Spot, ~60 Sek.) über Cloudflare Worker — <strong>kein API-Key nötig</strong>. Aktualisierung alle 15 Min. Optional: <code>GOLDAPI_KEY</code> für Premium-Echtzeit in EUR.</p>
     </div>
     <div class="panel quellen-editor-panel">
       <div class="section-head"><h4>Preis-Engine Status</h4><span>${esc(fresh.label||apiBadge)}</span></div>

@@ -56,6 +56,10 @@
       return { level: "missing", badge: "error", label: "❌ Keine geprüfte Preisquelle", canFinalize: false };
     }
     const ageHours = (Date.now() - ts) / 3600000;
+    const ageMinutes = ageHours * 60;
+    if (ageMinutes <= 15) {
+      return { level: "realtime", badge: "ok", label: "✅ Echtzeit geprüft", canFinalize: true, ageHours };
+    }
     if (ageHours <= 6) {
       return { level: "current", badge: "ok", label: "✅ Preisquelle aktuell geprüft", canFinalize: true, ageHours };
     }

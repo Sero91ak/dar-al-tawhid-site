@@ -8,7 +8,9 @@ export const TROY_OZ_TO_GRAM = 31.1034768;
 export const NISAB_GOLD_GRAMS = 85;
 export const NISAB_SILVER_GRAMS = 595;
 export const DEFAULT_CACHE_PATH = "content/admin/zakat-prices-cache.json";
-export const FETCH_MIN_INTERVAL_MS = 60 * 60 * 1000;
+/** Echtzeit: mindestens alle 15 Minuten neu abrufen (Cron alle 5 Min). */
+export const FETCH_MIN_INTERVAL_MS = 15 * 60 * 1000;
+export const REALTIME_STALE_MS = 15 * 60 * 1000;
 
 function nowIso() {
   return new Date().toISOString();
@@ -54,6 +56,16 @@ export function priceFreshnessStatus(fetchedAt) {
     };
   }
   const ageHours = (Date.now() - ts) / 3600000;
+  const ageMinutes = ageHours * 60;
+  if (ageMinutes <= 15) {
+    return {
+      level: "realtime",
+      badge: "ok",
+      label: "✅ Echtzeit geprüft",
+      canFinalize: true,
+      ageHours
+    };
+  }
   if (ageHours <= 6) {
     return {
       level: "current",
@@ -148,11 +160,41 @@ function resolveProvider(env) {
     return { id: "metals-api.com", name: "Metals-API", type: "metals-api", tier: "premium", requiresKey: true };
   }
   return {
-    id: "mintedmetal.com",
-    name: "Minted Metal (LBMA) + Frankfurter EUR",
-    type: "lbma-free",
-    tier: "auto",
+    id: "aurumrates.com",
+    name: "AURUM Echtzeit (COMEX) + Frankfurter EUR",
+    type: "realtime-free",
+    tier: "realtime",
     requiresKey: false
+  };
+}
+
+async function fetchAurumSpotPrices() {
+  const res = await fetch("https://aurumrates.com/api/v1/spot?metals=gold,silver", {
+    headers: { Accept: "application/json", "User-Agent": "DAR-AL-TAWHID-Zakat-Engine/1.0" }
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.status !== "ok") {
+    throw new Error(data.error || `AURUM Echtzeit HTTP ${res.status}`);
+  }
+  const goldUsd = Number(data?.data?.gold?.price);
+  const silverUsd = Number(data?.data?.silver?.price);
+  if (!Number.isFinite(goldUsd) || goldUsd <= 0 || !Number.isFinite(silverUsd) || silverUsd <= 0) {
+    throw new Error("AURUM: Gold/Silber Spot fehlen");
+  }
+  const usdEur = await fetchUsdEurRate();
+  const marketTs = Number(data.ts || data?.data?.gold?.timestamp || 0);
+  return {
+    provider: {
+      id: "aurumrates.com",
+      name: "AURUM Echtzeit (COMEX) + Frankfurter EUR",
+      type: "realtime-free",
+      tier: "realtime",
+      requiresKey: false
+    },
+    goldOunceEur: roundMoney(goldUsd * usdEur),
+    silverOunceEur: roundMoney(silverUsd * usdEur),
+    sourceLabel: "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
+    marketUpdatedAt: marketTs > 0 ? new Date(marketTs * 1000).toISOString() : nowIso()
   };
 }
 
@@ -182,10 +224,16 @@ async function fetchMintedMetalLbmaPrices() {
   const goldLabel = data?.metals?.gold?.sourceLabel || "LBMA Gold Fix";
   const silverLabel = data?.metals?.silver?.sourceLabel || "LBMA Silver Fix";
   return {
-    provider: resolveProvider({}),
+    provider: {
+      id: "mintedmetal.com",
+      name: "Minted Metal (LBMA) + Frankfurter EUR",
+      type: "lbma-free",
+      tier: "fallback",
+      requiresKey: false
+    },
     goldOunceEur: roundMoney(goldUsd * usdEur),
     silverOunceEur: roundMoney(silverUsd * usdEur),
-    sourceLabel: `${goldLabel} / ${silverLabel} · Minted Metal (LBMA) · EUR via Frankfurter/ECB`,
+    sourceLabel: `${goldLabel} / ${silverLabel} · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB`,
     marketUpdatedAt: data.updatedAt || data?.metals?.gold?.fixedAt || ""
   };
 }
@@ -232,7 +280,8 @@ async function fetchLiveMetalPrices(env) {
       provider,
       goldOunceEur,
       silverOunceEur,
-      sourceLabel: `${provider.name} · LBMA-basierte Marktdaten (EUR/Feinunze)`
+      sourceLabel: `${provider.name} · Echtzeit EUR/Feinunze`,
+      marketUpdatedAt: nowIso()
     };
   }
 
@@ -243,18 +292,20 @@ async function fetchLiveMetalPrices(env) {
       provider,
       goldOunceEur,
       silverOunceEur,
-      sourceLabel: `${provider.name} · Marktdaten (EUR/Feinunze)`
+      sourceLabel: `${provider.name} · Echtzeit EUR/Feinunze`,
+      marketUpdatedAt: nowIso()
     };
   }
 
-  const lbma = await fetchMintedMetalLbmaPrices();
-  return {
-    provider: lbma.provider,
-    goldOunceEur: lbma.goldOunceEur,
-    silverOunceEur: lbma.silverOunceEur,
-    sourceLabel: lbma.sourceLabel,
-    marketUpdatedAt: lbma.marketUpdatedAt
-  };
+  try {
+    return await fetchAurumSpotPrices();
+  } catch (aurumErr) {
+    const lbma = await fetchMintedMetalLbmaPrices();
+    return {
+      ...lbma,
+      sourceLabel: `${lbma.sourceLabel} · Echtzeit-Fallback (${aurumErr.message || "AURUM ausgefallen"})`
+    };
+  }
 }
 
 function buildPublicPayload(cache) {
@@ -315,7 +366,9 @@ function buildPublicPayload(cache) {
 export async function getPublicZakatPrices(env, deps, options = {}) {
   const { cache } = await readPriceCache(env, deps.githubGet, deps.base64ToUtf8);
   const hasPrices = Boolean(cache.gold?.pricePerGram > 0 && cache.silver?.pricePerGram > 0);
-  if (!hasPrices && options.fetchIfEmpty && deps.githubPut) {
+  const lastFetch = Date.parse(cache.lastFetchAt || cache.lastSuccessAt || "");
+  const isStale = !Number.isFinite(lastFetch) || Date.now() - lastFetch >= REALTIME_STALE_MS;
+  if ((!hasPrices || isStale) && options.fetchIfEmpty && deps.githubPut) {
     const fetched = await fetchAndStoreZakatPrices(env, deps, { force: true });
     return fetched.public || buildPublicPayload(cache);
   }
@@ -334,8 +387,8 @@ export async function getAdminZakatPriceStatus(env, deps) {
     path,
     public: payload,
     apiConfigured: true,
-    apiProvider: provider?.name || "Minted Metal (LBMA) + Frankfurter EUR",
-    apiTier: provider?.tier || "auto",
+    apiProvider: provider?.name || "AURUM Echtzeit (COMEX) + Frankfurter EUR",
+    apiTier: provider?.tier || "realtime",
     requiresUserKey: Boolean(provider?.requiresKey),
     lastLog,
     fetchLogs: (cache.fetchLogs || []).slice(0, 20)
@@ -380,6 +433,7 @@ export async function fetchAndStoreZakatPrices(env, deps, options = {}) {
   let providerInfo = null;
   let goldOunceEur = 0;
   let silverOunceEur = 0;
+  let sourceLabel = "";
   let errorMessage = "";
 
   try {
@@ -387,6 +441,7 @@ export async function fetchAndStoreZakatPrices(env, deps, options = {}) {
     providerInfo = live.provider;
     goldOunceEur = live.goldOunceEur;
     silverOunceEur = live.silverOunceEur;
+    sourceLabel = live.sourceLabel || `${providerInfo.name} · Echtzeit EUR/Feinunze`;
   } catch (err) {
     errorMessage = err.message || String(err);
     appendFetchLog(cache, {
@@ -412,7 +467,6 @@ export async function fetchAndStoreZakatPrices(env, deps, options = {}) {
   }
 
   const fetchedAt = nowIso();
-  const sourceLabel = live.sourceLabel || `${providerInfo.name} · Marktdaten (EUR/Feinunze)`;
   const gold = buildMetalEntry("gold", goldOunceEur, {
     source: sourceLabel,
     provider: providerInfo.id,

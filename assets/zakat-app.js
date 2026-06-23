@@ -73,7 +73,11 @@
   }
 
   async function loadZakatPrices(force) {
-    if (zakatLivePrices && !force) return zakatLivePrices;
+    if (zakatLivePrices && !force) {
+      const fetchedAt = Date.parse(zakatLivePrices.fetchedAt || "");
+      const stale = !Number.isFinite(fetchedAt) || Date.now() - fetchedAt >= 15 * 60 * 1000;
+      if (!stale) return zakatLivePrices;
+    }
     zakatPricesLoading = true;
     zakatPricesError = "";
     try {
@@ -231,7 +235,9 @@
         : "";
 
     const pricePanelIntro = zakatPricesLoading
-      ? `<p class="zakat-muted zakat-loading-msg">Aktuelle Niṣāb-Werte werden geladen …</p>`
+      ? `<p class="zakat-muted zakat-loading-msg">Echtzeit-Niṣāb-Werte werden geladen …</p>`
+      : prices.freshness?.level === "realtime"
+        ? `<p class="zakat-muted zakat-loading-msg ok">✅ Echtzeit geprüft (COMEX Spot, alle ~15 Min.)</p>`
       : prices.hasVerified
         ? `<p class="zakat-muted zakat-loading-msg ok">Niṣāb-Werte aktuell geprüft</p>`
         : zakatPricesError
