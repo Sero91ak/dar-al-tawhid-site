@@ -35,6 +35,13 @@ import {
   validatePostShortlinkForPublish
 } from "./kurzlink-admin.js";
 import { readZakatConfig, saveZakatPrices } from "./zakat-admin.js";
+import {
+  getPublicZakatPrices,
+  getAdminZakatPriceStatus,
+  fetchAndStoreZakatPrices,
+  confirmManualZakatPrices,
+  ensureZakatPricesFresh
+} from "./zakat-prices.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -236,11 +243,49 @@ export default {
         return json({ ok: true, config, sha, path }, cors);
       }
 
+      if (url.pathname === "/api/zakat/prices" && request.method === "GET") {
+        const result = await getPublicZakatPrices(env, { githubGet, base64ToUtf8 });
+        return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/zakat/prices/status" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const result = await getAdminZakatPriceStatus(env, { githubGet, base64ToUtf8 });
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/zakat/prices/fetch" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await fetchAndStoreZakatPrices(env, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8
+        }, { force: Boolean(input.force) });
+        return json(result, cors, result.ok ? 200 : 503);
+      }
+
+      if (url.pathname === "/api/admin/zakat/prices/confirm" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await confirmManualZakatPrices(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8
+        });
+        return json(result, cors);
+      }
+
       if (url.pathname === "/api/admin/zakat/prices" && request.method === "POST") {
         assertConfigured(env);
         assertAuthorized(request, env);
         const input = await request.json().catch(() => ({}));
-        const result = await saveZakatPrices(env, input, {
+        const result = await confirmManualZakatPrices(env, input, {
           githubGet,
           githubPut,
           githubCommitBatch,
@@ -471,6 +516,7 @@ export default {
     ctx.waitUntil(processAllPendingPushes(env));
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
+    ctx.waitUntil(ensureZakatPricesFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }));
   }
 };
 

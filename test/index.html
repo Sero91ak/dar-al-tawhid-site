@@ -1681,6 +1681,16 @@ body:before{
 .zakat-btn.ghost{background:transparent;font-size:11px;padding:6px 10px}
 .zakat-history-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:12px}
 .zakat-footer{margin:16px 0 24px;padding-top:12px;border-top:1px solid var(--line2)}
+.zakat-skeleton{padding:4px 0}
+.zakat-skel-line{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.14),rgba(255,255,255,.04));background-size:200% 100%;animation:zakatSkel 1.2s ease infinite;margin:4px 0}
+.zakat-skel-line.short{width:58%}
+@keyframes zakatSkel{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.zakat-price-row{margin:10px 0;padding:10px;border-radius:12px;background:rgba(0,0,0,.12);border:1px solid var(--line2);font-size:11px;line-height:1.45}
+.zakat-price-row b{color:var(--gold2)}
+.zakat-manual-prices{margin-top:10px;font-size:11px;color:var(--muted)}
+.zakat-manual-prices summary{cursor:pointer;color:var(--gold);padding:6px 0;font-weight:700}
+.zakat-status-msg{font-size:12px;color:var(--gold2);margin:0 0 10px;line-height:1.45}
+.zakat-loading-msg.ok{color:#9fd4a8}
 @media (max-width:520px){.zakat-kpi-grid,.zakat-nisab-compare{grid-template-columns:1fr}}
 .prayer-quick-card.premium-surface{cursor:pointer}
 .prayer-quick-head,.prayer-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
@@ -7059,8 +7069,8 @@ window.DAR_ANALYTICS_CONFIG={
 };
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
-<script src="/assets/zakat-engine.js?v=2" defer></script>
-<script src="/assets/zakat-app.js?v=2" defer></script>
+<script src="/assets/zakat-engine.js?v=3" defer></script>
+<script src="/assets/zakat-app.js?v=3" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -8002,6 +8012,7 @@ function nextPlannedPrayerNotification(settings=getPrayerSettings()){
   return candidates[0]||null;
 }
 const PRAYER_PUSH_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev";
+window.PRAYER_PUSH_WORKER_URL=PRAYER_PUSH_WORKER_URL;
 const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
 async function sendWelcomePushIfNeeded(OS){
   try{

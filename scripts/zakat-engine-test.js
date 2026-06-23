@@ -4,7 +4,7 @@ const path = require("path");
 const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
-const sandbox = { window: {}, URL };
+const sandbox = { window: {}, URL, Date };
 sandbox.globalThis = sandbox.window;
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(ROOT, "assets/zakat-engine.js"), "utf8"), sandbox);
@@ -19,8 +19,16 @@ function assert(cond, msg) {
   }
 }
 
+const now = new Date().toISOString();
 const config = Z.normalizeConfig(JSON.parse(fs.readFileSync(path.join(ROOT, "content/admin/zakat-config.json"), "utf8")));
-config.prices = { ...config.prices, goldPerGramEur: 75, silverPerGramEur: 0.95, active: true, verifiedAt: "2026-06-18T12:00:00.000Z" };
+config.prices = {
+  ...config.prices,
+  goldPerGramEur: 75,
+  silverPerGramEur: 0.95,
+  active: true,
+  verifiedAt: now
+};
+config.priceFreshness = Z.priceFreshnessFromAge(now);
 
 const result = Z.computeZakat(
   {
@@ -39,10 +47,34 @@ assert(result.nisab.reached === true, "nisab reached with test prices");
 assert(result.hawl.fulfilled === true, "hawl fulfilled");
 assert(Math.abs(result.zakatDue - 218.75) < 0.01, "zakat due 218.75 EUR");
 assert(result.sources.length > 0, "sources attached");
+assert(result.resultCase === "C", "case C zakat due");
 
-const noPrice = Z.computeZakat({ cash: 10000, nisabSinceDate: "2024-01-01", todayDate: "2026-06-18" }, { ...config, prices: { active: false } });
+const noPrice = Z.computeZakat(
+  { cash: 10000, nisabSinceDate: "2024-01-01", todayDate: "2026-06-18" },
+  { ...config, prices: { active: false }, priceFreshness: null }
+);
 assert(noPrice.priceMissing === true, "blocks final without prices");
-assert(noPrice.previewOnly === true, "preview when price missing");
+assert(noPrice.zakatableWealth === 10000, "cash still counted without prices");
+assert(noPrice.liquidWealth === 10000, "liquid wealth tracked");
+
+const liquidBug = Z.computeZakat(
+  { cash: 200, bank: 1000, digital: 100, debtsDue: 5000 },
+  { ...config, prices: { active: false }, priceFreshness: null }
+);
+assert(liquidBug.liquidWealth === 1300, "liquid 1300 EUR");
+assert(liquidBug.zakatableWealth === 0, "zakatable 0 after debts");
+assert(liquidBug.priceMissing === true, "price missing flag");
+
+const goldUnvalued = Z.computeZakat(
+  { cash: 200, bank: 1000, digital: 100, goldGrams: 50, debtsDue: 5000 },
+  { ...config, prices: { active: false }, priceFreshness: null }
+);
+assert(goldUnvalued.goldUnvalued === true, "gold marked unvalued");
+assert(goldUnvalued.liquidWealth === 1300, "liquid still 1300 with gold input");
+
+const fresh = Z.priceFreshnessFromAge(now);
+assert(fresh.canFinalize === true, "fresh prices can finalize");
+assert(fresh.badge === "ok", "fresh badge ok");
 
 if (failed) process.exit(1);
 console.log("\nAlle Zakāt-Engine-Tests bestanden.");
