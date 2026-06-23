@@ -24,8 +24,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v40";
-  var MIG_KEY="darAdminSwFixV22";
+  var ADMIN_SW_CACHE="dar-admin-stats-v41";
+  var MIG_KEY="darAdminSwFixV23";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -458,7 +458,7 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/admin/quellen-manager.js?v=1"></script>
-<script src="/admin/kurzlink-manager.js?v=2"></script>
+<script src="/admin/kurzlink-manager.js?v=3"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
