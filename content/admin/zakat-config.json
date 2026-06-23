@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-23T10:20:39.602Z",
+  "updatedAt": "2026-06-23T10:20:49.886Z",
   "nisab": {
     "goldGrams": 85,
     "silverGrams": 595,
@@ -10,16 +10,23 @@
   "zakatRate": 0.025,
   "hawlDaysLunar": 354,
   "prices": {
-    "goldPerGramEur": 116.35,
-    "silverPerGramEur": 1.76,
+    "goldPerGramEur": 116.49,
+    "silverPerGramEur": 1.81,
     "currency": "EUR",
-    "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
-    "verifiedAt": "2026-06-23T10:20:39.602Z",
+    "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (AURUM Echtzeit HTTP 502)",
+    "verifiedAt": "2026-06-23T10:20:49.886Z",
     "verifiedBy": "price-engine",
     "active": true,
     "apiFallback": false
   },
-  "priceHistory": [],
+  "priceHistory": [
+    {
+      "goldPerGramEur": 116.35,
+      "silverPerGramEur": 1.76,
+      "verifiedAt": "2026-06-23T10:20:39.602Z",
+      "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB"
+    }
+  ],
   "warnings": {
     "privacy": "Ohne Account bleiben deine Eingaben anonym und werden nicht gespeichert. Erst wenn du dich anmeldest und aktiv speicherst, wird deine Berechnung in deinem privaten Bereich abgelegt.",
     "footer": "Dieser Rechner berechnet die Zakāt anhand der hinterlegten Quellen aus Qurʾān, authentischer Sunnah, gesicherten Āthār und geprüfter Fiqh-Anwendung. Sonderfälle mit bekanntem Ikhtilāf werden gekennzeichnet. Ohne Account bleiben deine Eingaben anonym und werden nicht gespeichert.",
