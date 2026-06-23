@@ -278,6 +278,13 @@ button{cursor:pointer}
 .quellen-kurzlink-preview{border:1px solid rgba(239,215,142,.22);border-radius:10px;padding:8px;background:rgba(0,0,0,.15);font-size:10.5px;line-height:1.45}
 .quellen-kurzlink-warn{border:1px solid rgba(255,160,80,.35);border-radius:10px;padding:8px;background:rgba(255,120,40,.08);color:#ffc89a;font-size:10px;line-height:1.4}
 .quellen-kurzlink-actions{display:flex;flex-wrap:wrap;gap:6px}
+.kurzlink-overview-wrap{overflow:auto;max-height:320px;border:1px solid rgba(140,190,255,.18);border-radius:10px}
+.kurzlink-overview-table{width:100%;border-collapse:collapse;font-size:10px;line-height:1.35}
+.kurzlink-overview-table th,.kurzlink-overview-table td{padding:6px 8px;border-bottom:1px solid rgba(140,190,255,.12);text-align:left;vertical-align:top}
+.kurzlink-overview-table th{color:#9fb0c3;font-weight:600;position:sticky;top:0;background:rgba(15,20,30,.95)}
+.kurzlink-overview-table tr[data-kurzlink-row]{cursor:pointer}
+.kurzlink-overview-table tr[data-kurzlink-row]:hover{background:rgba(140,190,255,.08)}
+.ig-channel-result{border:1px solid rgba(120,220,160,.28);border-radius:10px;padding:10px;background:rgba(20,40,30,.25)}
 .paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
 .upload-stack{display:grid;gap:9px;align-content:start}
 .upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.055)}
@@ -451,7 +458,7 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/admin/quellen-manager.js?v=1"></script>
-<script src="/admin/kurzlink-manager.js?v=1"></script>
+<script src="/admin/kurzlink-manager.js?v=2"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -507,6 +514,7 @@ let quellenSearchQuery="",quellenCatalogMeta=[],quellenCatalogBusy=false,quellen
 let quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let shortlinksRegistry={version:1,nextSerial:1,entries:{}},shortlinksRegistrySha="",shortlinksRegistryLoaded=false,shortlinksRegistryBusy=false;
 let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="",kurzlinkSelectedCode="",kurzlinkImportText="",kurzlinkImportResult="",kurzlinkImportVerify=false;
+let igChannelDraft={title:"",hashtags:"",statement:"",sourceCitation:"",targetUrl:"",adminNote:"",quote:"",fazit:"",textHighlightException:false,textHighlightNote:""},igChannelResult="",igChannelStatus="";
 let zakatAdminConfig=null,zakatAdminSha="",zakatAdminStatus="",zakatAdminLoaded=false;
 let zakatAdminPriceStatus=null,zakatAdminPriceLoaded=false;
 let zakatAdminPublicPrices=null;
@@ -1541,6 +1549,21 @@ function readKurzlinkDraftFromUi(){
   };
 }
 function hasTextFragmentAdmin(url){return /#:~:text=/i.test(String(url||""))}
+function readIgChannelFromUi(){
+  return{
+    title:String(document.getElementById("igChannelTitle")?.value||igChannelDraft.title||"").trim(),
+    hashtags:String(document.getElementById("igChannelHashtags")?.value||igChannelDraft.hashtags||"").trim(),
+    statement:String(document.getElementById("igChannelStatement")?.value||igChannelDraft.statement||"").trim(),
+    sourceCitation:String(document.getElementById("igChannelSourceCitation")?.value||igChannelDraft.sourceCitation||"").trim(),
+    targetUrl:String(document.getElementById("igChannelTargetUrl")?.value||igChannelDraft.targetUrl||"").trim(),
+    adminNote:String(document.getElementById("igChannelAdminNote")?.value||igChannelDraft.adminNote||"").trim(),
+    quote:String(document.getElementById("igChannelQuote")?.value||igChannelDraft.quote||"").trim(),
+    fazit:String(document.getElementById("igChannelFazit")?.value||igChannelDraft.fazit||"").trim(),
+    textHighlightException:!!document.getElementById("igChannelTextException")?.checked,
+    textHighlightNote:String(document.getElementById("igChannelTextExceptionNote")?.value||igChannelDraft.textHighlightNote||"").trim()
+  };
+}
+function formatKurzlinkDate(iso){if(!iso)return "—";try{return new Date(iso).toLocaleString("de-DE",{dateStyle:"short",timeStyle:"short"})}catch(e){return String(iso).slice(0,16)}}
 /* KURZLINK GUARD: eigener Tab — nur Weiterleitung zur Originalquelle, nicht an App-Beiträge gekoppelt */
 function renderKurzlinks(){
   if(!window.DARKurzlink)return `<section class="empty">Kurzlink-Modul lädt…</section>`;
@@ -1553,12 +1576,38 @@ function renderKurzlinks(){
   const entries=DARKurzlink.listEntries(shortlinksRegistry);
   const platformOpts=DARKurzlink.PLATFORM_OPTIONS.map(p=>`<option value="${esc(p)}" ${d.platform===p?"selected":""}>${esc(p)}</option>`).join("");
   const listRows=entries.length?entries.map(e=>`<button class="quellen-result-row ${kurzlinkSelectedCode===e.code?"is-active":""}" data-kurzlink-pick="${esc(e.code)}" type="button"><span><span class="quellen-result-title">${esc(e.code)} · ${esc(DARKurzlink.STATUS_LABELS[e.status]||"")}</span><span class="quellen-result-meta">${esc(String(e.targetUrl||"").slice(0,72))}${String(e.targetUrl||"").length>72?"…":""}</span></span><span class="quellen-badges"><span class="quellen-badge">${esc(e.platform||"—")}</span></span></button>`).join(""):`<div class="empty" style="padding:12px">Noch keine Weiterleitungen. Unten den ersten Kurzlink anlegen.</div>`;
+  const overviewRows=entries.length?entries.map(e=>`<tr data-kurzlink-row="${esc(e.code)}"><td>${esc(e.code)}</td><td>${esc(DARKurzlink.shortUrlHttps(e.code))}</td><td title="${esc(e.targetUrl||"")}">${esc(String(e.targetUrl||"").slice(0,48))}${String(e.targetUrl||"").length>48?"…":""}</td><td>${esc(e.work||e.adminNote||"—")}</td><td>${esc(e.scholar||"—")}</td><td title="${esc(e.quote||"")}">${esc(String(e.quote||"").slice(0,40))}${String(e.quote||"").length>40?"…":""}</td><td>${esc(e.platform||"—")}</td><td>${esc(DARKurzlink.STATUS_LABELS[e.status]||e.status||"—")}</td><td>${esc(formatKurzlinkDate(e.createdAt))}</td><td>${esc(formatKurzlinkDate(e.verifiedAt))}</td><td>${esc(formatKurzlinkDate(e.updatedAt))}</td></tr>`).join(""):"";
+  const igEx=igChannelDraft.textHighlightException||(!hasTextFragmentAdmin(igChannelDraft.targetUrl)&&igChannelDraft.targetUrl);
+  const igExNote=igEx?`<label class="hint" style="display:flex;align-items:flex-start;gap:8px;margin:0"><input type="checkbox" id="igChannelTextException" ${igChannelDraft.textHighlightException?"checked":""}> Textmarkierung technisch nicht möglich (Ausnahme)</label><label>Ausnahme bestätigen<textarea class="field" id="igChannelTextExceptionNote" rows="2" placeholder="Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft.">${esc(igChannelDraft.textHighlightNote||"")}</textarea></label>`:"";
   const thNote=d.textHighlight==="not_possible"||(!hasTextFragmentAdmin(d.targetUrl)&&d.status!=="verified")?`<label>Ausnahme (ohne Textmarkierung)<textarea class="field" id="kurzlinkTextHighlightNote" rows="2" placeholder="Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft.">${esc(d.textHighlightNote||"")}</textarea></label>`:"";
   const importResultBlock=kurzlinkImportResult?`<label>Fertige Instagram-Zeilen<textarea class="field" id="kurzlinkImportResult" rows="5" readonly>${esc(kurzlinkImportResult)}</textarea></label>`:"";
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Kurzlinks — nur Weiterleitung</h3><span>${entries.length} aktiv</span></div>
       <p class="ordner-lead">Deine Website ist die <strong>kurze Tür</strong> zur Originalquelle. Die Aussage steht <strong>nicht</strong> auf dar-al-tawhid.de — nur der Link. Für Instagram: <strong>${esc(igLine||"🔗 https://dar-al-tawhid.de/a1")}</strong></p>
+    </div>
+    <div class="panel quellen-kurzlink-panel">
+      <div class="section-head"><h4>Instagram Channel — automatischer Kurzlink</h4><span>API</span></div>
+      <p class="source-files-lead">Beitrag ausfüllen → Kurzlink wird automatisch erzeugt (<strong>a${shortlinksRegistry.nextSerial||1}</strong> …) → fertiger Text zum Kopieren. Kein [QUELLE], kein manuelles Nummerieren.</p>
+      <div class="quellen-kurzlink-grid">
+        <label>Titel<input class="field" id="igChannelTitle" value="${esc(igChannelDraft.title||"")}" placeholder="📖 Titel des Beitrags"></label>
+        <label>Hashtags<input class="field" id="igChannelHashtags" value="${esc(igChannelDraft.hashtags||"")}" placeholder="#Hashtag1 #Hashtag2"></label>
+      </div>
+      <label>Beitragstext<textarea class="field" id="igChannelStatement" rows="4" placeholder="Text des Beitrags …">${esc(igChannelDraft.statement||"")}</textarea></label>
+      <label>Kurze Quellenangabe (ohne Link)<input class="field" id="igChannelSourceCitation" value="${esc(igChannelDraft.sourceCitation||"")}" placeholder="al-Lālakāʾī, Band 1, S. 176"></label>
+      <label>Originalquelle (mit Textmarkierung)<input class="field" id="igChannelTargetUrl" type="url" value="${esc(igChannelDraft.targetUrl||"")}" placeholder="https://www.islamweb.net/…#:~:text=Start,Ende"></label>
+      <div class="quellen-kurzlink-grid">
+        <label>Admin-Notiz (Werk, Band, Seite, Gelehrter)<input class="field" id="igChannelAdminNote" value="${esc(igChannelDraft.adminNote||"")}" placeholder="Buch, Band, Seite, Gelehrter"></label>
+        <label>Zitierte Aussage<input class="field" id="igChannelQuote" value="${esc(igChannelDraft.quote||"")}" placeholder="Exakte Aussage"></label>
+      </div>
+      <label>Fazit<input class="field" id="igChannelFazit" value="${esc(igChannelDraft.fazit||"")}" placeholder="Kurzer Fazit-Satz"></label>
+      ${igExNote}
+      <div class="quellen-kurzlink-actions">
+        <button class="btn primary" type="button" id="igChannelCreateBtn">Beitrag mit Kurzlink erstellen</button>
+        ${igChannelResult?`<button class="btn" type="button" id="igChannelCopyBtn">Beitrag kopieren</button>`:""}
+      </div>
+      ${igChannelResult?`<div class="ig-channel-result"><label>Fertiger Instagram-Beitrag<textarea class="field" id="igChannelResult" rows="12" readonly>${esc(igChannelResult)}</textarea></label></div>`:""}
+      <div class="upload-status" id="igChannelStatus">${esc(igChannelStatus||"Originalquelle + Zitat + Quellenangabe eingeben → Kurzlink wird automatisch erstellt.")}</div>
     </div>
     <div class="panel quellen-kurzlink-panel">
       <div class="section-head"><h4>ChatGPT — ein Weg</h4><span>Automatisch</span></div>
@@ -1576,6 +1625,7 @@ function renderKurzlinks(){
       </div>
       ${importResultBlock}
     </div>
+    ${entries.length?`<div class="panel"><div class="section-head"><h4>Kurzlinks / Quellenlinks — Übersicht</h4><span>${entries.length} Einträge</span></div><div class="kurzlink-overview-wrap"><table class="kurzlink-overview-table"><thead><tr><th>Code</th><th>Kurzlink</th><th>Originalquelle</th><th>Werk</th><th>Gelehrter</th><th>Zitat</th><th>Plattform</th><th>Status</th><th>Erstellt</th><th>Geprüft</th><th>Geändert</th></tr></thead><tbody>${overviewRows}</tbody></table></div></div>`:""}
     <div class="quellen-grid">
       <aside class="panel quellen-search-panel">
         <div class="section-head"><h4>Alle Kurzlinks</h4></div>
@@ -2847,10 +2897,10 @@ function bindKurzlinksUi(){
     let draft=readKurzlinkDraftFromUi();
     if(!draft)return;
     if(statusOverride){
-      draft.status=statusOverride;
-      if(statusOverride==="verified")draft.verifiedAt=new Date().toISOString();
+      draft.status=statusOverride==="verified"?"active":statusOverride;
+      if(statusOverride==="verified"||statusOverride==="active")draft.verifiedAt=new Date().toISOString();
     }
-    const forVerified=statusOverride==="verified"||draft.status==="verified";
+    const forVerified=statusOverride==="verified"||statusOverride==="active"||draft.status==="verified"||draft.status==="active";
     const skipStrict=statusOverride==="disabled"||statusOverride==="error";
     const check=DARKurzlink.validateRedirectSave(draft,shortlinksRegistry,{existingCode:draft.code,forVerified:skipStrict?false:forVerified});
     kurzlinkWarnings=[...(check.warnings||[]),...(check.errors||[])];
@@ -2948,6 +2998,56 @@ function bindKurzlinksUi(){
     }finally{kurzlinkImportBtn.disabled=false}
   };
   const kurzlinkImportCopyIg=document.getElementById("kurzlinkImportCopyIgBtn");if(kurzlinkImportCopyIg)kurzlinkImportCopyIg.onclick=()=>copyKurzlinkText(kurzlinkImportResult||document.getElementById("kurzlinkImportResult")?.value||"","Instagram-Zeilen kopiert");
+  document.querySelectorAll("[data-kurzlink-row]").forEach(row=>row.onclick=()=>{
+    const code=row.getAttribute("data-kurzlink-row");
+    if(!code)return;
+    kurzlinkDraft=loadKurzlinkDraftByCode(code);
+    kurzlinkPanelStatus="";
+    renderShell();
+  });
+  const igTarget=document.getElementById("igChannelTargetUrl");
+  if(igTarget)igTarget.onchange=()=>{igChannelDraft=readIgChannelFromUi();renderShellPreserveField("igChannelTargetUrl",()=>{})};
+  const igCreate=document.getElementById("igChannelCreateBtn");
+  if(igCreate)igCreate.onclick=async()=>{
+    if(!window.DARKurzlink)return;
+    igChannelDraft=readIgChannelFromUi();
+    const payload=DARKurzlink.buildCreatePayload({...igChannelDraft,registrySha:shortlinksRegistrySha});
+    const check=DARKurzlink.validateCreateInput(payload,shortlinksRegistry);
+    if(!check.ok){
+      igChannelStatus=check.errors.join(" · ");
+      igChannelResult="";
+      toast(check.errors[0]||"Quelle prüfen");
+      renderShell();
+      return;
+    }
+    igCreate.disabled=true;
+    igChannelStatus="Erstelle Kurzlink …";
+    renderShell();
+    try{
+      const result=await workerPostRequest("shortlinks/create",payload);
+      shortlinksRegistry=DARKurzlink.normalizeRegistry(result.registry||shortlinksRegistry);
+      try{await ensureShortlinksRegistry(true)}catch(e){}
+      igChannelResult=DARKurzlink.buildChannelShareText({
+        title:igChannelDraft.title,
+        hashtags:igChannelDraft.hashtags,
+        statement:igChannelDraft.statement,
+        sourceCitation:igChannelDraft.sourceCitation||igChannelDraft.adminNote,
+        code:result.code,
+        fazit:igChannelDraft.fazit
+      });
+      igChannelStatus=`Kurzlink ${result.code} erstellt · ${result.shortUrl||DARKurzlink.shortUrlHttps(result.code)} · Commit ${String(result.commitSha||"").slice(0,7)}`;
+      toast(`Kurzlink ${result.code} erstellt`);
+      addAdminLog("Kurzlink","Instagram-Channel automatisch",result.code);
+      renderShell();
+    }catch(e){
+      igChannelResult="";
+      igChannelStatus=`Kurzlink konnte nicht erstellt werden. Bitte Quelle prüfen. (${e.message||e})`;
+      toast("Kurzlink konnte nicht erstellt werden");
+      renderShell();
+    }finally{igCreate.disabled=false}
+  };
+  const igCopy=document.getElementById("igChannelCopyBtn");
+  if(igCopy)igCopy.onclick=()=>copyKurzlinkText(igChannelResult||document.getElementById("igChannelResult")?.value||"","Instagram-Beitrag kopiert");
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));

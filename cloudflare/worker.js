@@ -32,6 +32,7 @@ import {
   saveShortlinkEntry,
   saveAutoShortlinkEntry,
   importShortlinkBatch,
+  createShortlinkEntry,
   validatePostShortlinkForPublish
 } from "./kurzlink-admin.js";
 import { readZakatConfig, saveZakatPrices } from "./zakat-admin.js";
@@ -233,6 +234,27 @@ export default {
           githubCommitBatch,
           base64ToUtf8
         });
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/shortlinks/create" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        assertShortlinkCreateRateLimit(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await createShortlinkEntry(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8,
+          logMeta: {
+            ip: request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "",
+            userAgent: request.headers.get("User-Agent") || ""
+          }
+        });
+        if (!result.ok) {
+          return json({ ok: false, success: false, error: result.error || "Kurzlink konnte nicht erstellt werden" }, cors, 400);
+        }
         return json(result, cors);
       }
 
@@ -1529,6 +1551,31 @@ function assertAuthorized(request, env) {
   const bearer = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   if (headerSecret !== env.ADMIN_PUBLISH_SECRET && bearer !== env.ADMIN_PUBLISH_SECRET) {
     throw httpError("Nicht autorisiert", 401);
+  }
+}
+
+const shortlinkCreateRateBuckets = new Map();
+const SHORTLINK_CREATE_RATE_MAX = 30;
+const SHORTLINK_CREATE_RATE_WINDOW_MS = 60_000;
+
+function assertShortlinkCreateRateLimit(request, env) {
+  const max = Number(env.SHORTLINK_CREATE_RATE_MAX || SHORTLINK_CREATE_RATE_MAX);
+  const windowMs = Number(env.SHORTLINK_CREATE_RATE_WINDOW_MS || SHORTLINK_CREATE_RATE_WINDOW_MS);
+  const key =
+    request.headers.get("CF-Connecting-IP") ||
+    request.headers.get("X-Forwarded-For") ||
+    request.headers.get("X-Admin-Secret")?.slice(0, 12) ||
+    "unknown";
+  const now = Date.now();
+  const bucket = shortlinkCreateRateBuckets.get(key) || { count: 0, resetAt: now + windowMs };
+  if (now >= bucket.resetAt) {
+    bucket.count = 0;
+    bucket.resetAt = now + windowMs;
+  }
+  bucket.count += 1;
+  shortlinkCreateRateBuckets.set(key, bucket);
+  if (bucket.count > max) {
+    throw httpError("Rate-Limit: Zu viele Kurzlink-Erstellungen — bitte kurz warten", 429);
   }
 }
 
