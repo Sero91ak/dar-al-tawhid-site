@@ -165,7 +165,12 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
     storiesLoading = true;
     storiesError = "";
     const path = storiesIndexPath();
-    const urls = [`${path}?t=${Date.now()}`, `${location.origin}${path}?t=${Date.now()}`];
+    const bust = Date.now();
+    const urls = [
+      `${path}?t=${bust}`,
+      `${location.origin}${path}?t=${bust}`,
+      `https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main${path}?t=${bust}`
+    ];
     try {
       let parsed = null;
       for (const url of urls) {
@@ -530,13 +535,18 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
 
   function init() {
     injectStyles();
+    refresh({ force: true }).catch(() => {});
+  }
+
+  function onAppReady() {
     if (document.getElementById("storyStripMount")) {
-      refresh({ force: true }).catch(() => {});
+      refresh({ force: false }).catch(() => {});
     }
   }
 
   global.DAR_STORIES = {
     init,
+    onAppReady,
     refresh,
     fetchStories,
     renderHomeStoryMount,
