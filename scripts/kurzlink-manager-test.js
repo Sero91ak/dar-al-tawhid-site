@@ -93,6 +93,41 @@ const redirectEntry = {
 const rv = K.validateRedirectSave(redirectEntry, registry, { existingCode: "a2", forVerified: true });
 assert(rv.ok, "Test 12: redirect-only verified entry passes");
 
+const createOk = K.validateCreateInput(
+  {
+    targetUrl: "https://www.islamweb.net/x#:~:text=Start,Ende",
+    adminNote: "Band 1, S. 176",
+    quote: "Testaussage"
+  },
+  registry
+);
+assert(createOk.ok, "Test 13: create input with text fragment passes");
+
+const createBad = K.validateCreateInput(
+  { targetUrl: "https://evil.example.com/x", adminNote: "x", quote: "y" },
+  registry
+);
+assert(!createBad.ok && createBad.errors.some((e) => /Domain nicht erlaubt/i.test(e)), "Test 14: create blocks bad domain");
+
+const createNoFrag = K.validateCreateInput(
+  { targetUrl: "https://www.islamweb.net/x", adminNote: "Band 1", quote: "Test" },
+  registry
+);
+assert(!createNoFrag.ok && createNoFrag.errors.some((e) => /Textmarkierung fehlt/i.test(e)), "Test 15: create blocks missing text fragment");
+
+const channelText = K.buildChannelShareText({
+  title: "Titel",
+  hashtags: "Tag1 Tag2",
+  statement: "Beitragstext",
+  sourceCitation: "al-Lālakāʾī, Band 1",
+  code: "a17",
+  fazit: "Kurzer Fazit-Satz."
+});
+assert(channelText.includes("📖 Titel") && channelText.includes("#Tag1") && channelText.includes("🔗 https://dar-al-tawhid.de/a17") && channelText.includes("🌙 **Fazit:**"), "Test 16: Instagram channel share text format");
+
+const htmlActive = K.buildRedirectHtml({ code: "a3", status: "active", targetUrl: "https://www.islamweb.net/x" });
+assert(/location\.replace/i.test(htmlActive), "Test 17: active status redirects");
+
 if (failed) {
   console.error(`\n${failed} Kurzlink-Test(s) fehlgeschlagen.`);
   process.exit(1);

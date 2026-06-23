@@ -59,6 +59,46 @@ function hasTextFragment(url) {
   return /#:~:text=/i.test(String(url || ""));
 }
 
+function isHttpsUrl(url) {
+  try {
+    return new URL(String(url || "").trim()).protocol === "https:";
+  } catch (e) {
+    return false;
+  }
+}
+
+function isPublicRedirectStatus(status) {
+  const s = String(status || "").toLowerCase();
+  return s === "active" || s === "verified";
+}
+
+function normalizeForCompare(text) {
+  return String(text || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function findDuplicateEntry(registry, { targetUrl = "", quote = "", selfCode = "" } = {}) {
+  const reg = normalizeShortlinksRegistry(registry);
+  const target = String(targetUrl || "").trim();
+  const quoteNorm = normalizeForCompare(quote);
+  const self = normalizeCode(selfCode);
+  for (const other of Object.values(reg.entries || {})) {
+    const code = normalizeCode(other.code);
+    if (!code || code === self) continue;
+    if (target && String(other.targetUrl || "").trim() === target) {
+      return { code, reason: "Doppelter Originalquellenlink" };
+    }
+    if (quoteNorm && normalizeForCompare(other.quote) === quoteNorm) {
+      return { code, reason: "Doppelte Aussage" };
+    }
+  }
+  return null;
+}
+
 function isShortlinkUrl(url) {
   const u = String(url || "").trim();
   if (!u) return false;
@@ -164,8 +204,8 @@ export function validateRedirectShortlinkEntry(entry, registry, { forVerified = 
   }
 
   const status = String(e.status || "unverified");
-  if (forVerified && status !== "verified") {
-    errors.push("Erst als geprüft markieren, dann leitet der Link zur Quelle weiter");
+  if (forVerified && !isPublicRedirectStatus(status)) {
+    errors.push("Erst als geprüft/aktiv markieren, dann leitet der Link zur Quelle weiter");
   }
 
   return {
@@ -204,7 +244,7 @@ export function validateShortlinkEntry(entry, registry, { forPublish = false, ex
   }
 
   const status = String(e.status || "unverified");
-  if (forPublish && status !== "verified") errors.push("Prüfstatus muss Geprüft sein");
+  if (forPublish && !isPublicRedirectStatus(status)) errors.push("Prüfstatus muss Aktiv oder Geprüft sein");
   if (forPublish && errors.length) errors.unshift(PUBLISH_BLOCK_MSG);
 
   return { ok: !errors.length, errors, entry: { ...e, code, targetUrl, status } };
@@ -228,7 +268,7 @@ export function buildShortlinkRedirectHtml(entry) {
   const status = String(entry?.status || "unverified");
   const target = String(entry?.targetUrl || "").trim();
   const esc = (s) => String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-  if (status === "disabled" || status !== "verified" || !target) {
+  if (status === "disabled" || status === "error" || !isPublicRedirectStatus(status) || !target) {
     return `<!DOCTYPE html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Quellenlink deaktiviert</title>
@@ -360,10 +400,10 @@ export async function saveShortlinkEntry(env, input, { githubGet, githubPut, git
     reserved: true
   };
 
-  if (merged.status === "verified" && !merged.verifiedAt) merged.verifiedAt = now;
-  if (merged.status !== "verified") merged.verifiedAt = merged.status === "verified" ? merged.verifiedAt || now : "";
+  if (isPublicRedirectStatus(merged.status) && !merged.verifiedAt) merged.verifiedAt = now;
+  if (!isPublicRedirectStatus(merged.status)) merged.verifiedAt = "";
 
-  const forVerified = merged.status === "verified";
+  const forVerified = isPublicRedirectStatus(merged.status);
   const skipStrict = merged.status === "disabled" || merged.status === "error";
   const check = skipStrict
     ? { ok: Boolean(code), errors: code ? [] : ["Kurzcode fehlt"], entry: merged }
@@ -463,7 +503,7 @@ export async function importShortlinkBatch(env, input, { githubGet, githubPut, g
       textHighlight: th,
       textHighlightNote: th === "not_possible" ? String(link.textHighlightNote || "").trim() : "",
       adminNote: link.adminNote || "",
-      status: verify ? "verified" : "unverified",
+      status: verify ? "active" : "unverified",
       verifiedAt: verify ? now : "",
       createdAt: now,
       updatedAt: now,
@@ -535,5 +575,153 @@ export async function importShortlinkBatch(env, input, { githubGet, githubPut, g
     registry: nextRegistry,
     commitSha,
     instagramBlock: created.map((c) => c.instagramLine).join("\n")
+  };
+}
+
+export function validateCreateShortlinkInput(input, registry) {
+  const errors = [];
+  const targetUrl = String(input?.targetUrl || "").trim();
+  const quote = String(input?.quote || "").trim();
+  const adminNote = String(input?.adminNote || "").trim();
+  const platform = String(input?.sourcePlatform || input?.platform || "").trim();
+  const textHighlightException = input?.textHighlightException === true;
+  const textHighlightNote = String(input?.textHighlightNote || "").trim();
+
+  if (!targetUrl) errors.push("Ziel-Link fehlt");
+  else if (!isHttpsUrl(targetUrl) && !isLocalSourcePath(targetUrl)) errors.push("Ziel-Link muss HTTPS sein");
+  else if (!isAllowedTargetUrl(targetUrl)) errors.push("Domain nicht erlaubt");
+
+  if (!quote) errors.push("Zitierte Aussage fehlt");
+  if (!adminNote) errors.push("Quellenangabe fehlt");
+
+  const hasFragment = hasTextFragment(targetUrl);
+  if (targetUrl && !isLocalSourcePath(targetUrl)) {
+    if (!hasFragment && !textHighlightException) errors.push("Textmarkierung fehlt");
+    if (!hasFragment && textHighlightException && !textHighlightNote) {
+      errors.push("Ausnahme für fehlende Textmarkierung muss bestätigt werden");
+    }
+  }
+
+  const dup = findDuplicateEntry(registry, { targetUrl, quote });
+  if (dup) errors.push(`${dup.reason} (${dup.code})`);
+
+  const th = hasFragment ? "yes" : textHighlightException ? "not_possible" : "no";
+  return {
+    ok: !errors.length,
+    errors,
+    entry: {
+      targetUrl,
+      quote,
+      adminNote,
+      platform: platform || detectPlatform(targetUrl),
+      work: adminNote,
+      citation: adminNote,
+      textHighlight: th,
+      textHighlightNote: th === "not_possible" ? textHighlightNote : "",
+      contentType: String(input?.contentType || "instagram_channel").trim(),
+      source: "api-create"
+    }
+  };
+}
+
+export async function createShortlinkEntry(env, input, { githubGet, githubPut, githubCommitBatch, base64ToUtf8, logMeta = {} } = {}) {
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const { registry, sha, path } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
+  const registrySha = String(input?.registrySha || sha || "").trim();
+  if (registrySha && sha && registrySha !== sha) {
+    return { ok: false, success: false, error: "Registry wurde zwischenzeitlich geändert — bitte neu laden" };
+  }
+
+  const check = validateCreateShortlinkInput(input, registry);
+  if (!check.ok) {
+    return { ok: false, success: false, error: check.errors[0] || "Kurzlink konnte nicht erstellt werden" };
+  }
+
+  const nextRegistry = normalizeShortlinksRegistry(registry);
+  const code = `a${nextRegistry.nextSerial || 1}`;
+  if (nextRegistry.entries[code]) {
+    return { ok: false, success: false, error: `Kurzcode ${code} ist bereits vergeben` };
+  }
+
+  const now = new Date().toISOString();
+  const hasFragment = hasTextFragment(check.entry.targetUrl);
+  const status = hasFragment || check.entry.textHighlight === "not_possible" ? "active" : "draft";
+  const entry = {
+    ...check.entry,
+    code,
+    status,
+    verifiedAt: status === "active" ? now : "",
+    createdAt: now,
+    updatedAt: now,
+    reserved: true,
+    redirectType: "302",
+    creationLog: [
+      {
+        at: now,
+        action: "create",
+        contentType: check.entry.contentType,
+        ip: String(logMeta.ip || ""),
+        userAgent: String(logMeta.userAgent || "").slice(0, 200)
+      }
+    ]
+  };
+
+  const redirectCheck = validateRedirectShortlinkEntry(entry, nextRegistry, { existingCode: code, forVerified: status === "active" });
+  if (!redirectCheck.ok) {
+    return { ok: false, success: false, error: redirectCheck.errors.join(" · ") };
+  }
+
+  nextRegistry.entries[code] = redirectCheck.entry;
+  nextRegistry.nextSerial = Math.max(nextRegistry.nextSerial, parseInt(code.slice(1), 10) + 1);
+  nextRegistry.updatedAt = now;
+
+  const registryContent = `${JSON.stringify(
+    {
+      version: nextRegistry.version,
+      updatedAt: nextRegistry.updatedAt,
+      nextSerial: nextRegistry.nextSerial,
+      entries: nextRegistry.entries
+    },
+    null,
+    2
+  )}\n`;
+
+  const redirectPath = redirectPathForCode(code);
+  const redirectHtml = buildShortlinkRedirectHtml(redirectCheck.entry);
+
+  let commitSha = "";
+  if (githubCommitBatch) {
+    const batch = await githubCommitBatch(
+      env,
+      owner,
+      repo,
+      branch,
+      [
+        { path, content: registryContent },
+        { path: redirectPath, content: redirectHtml }
+      ],
+      `Kurzlink ${code} automatisch erstellt (${check.entry.contentType})`
+    );
+    commitSha = batch.commitSha || "";
+  } else {
+    const saved = await githubPut(env, owner, repo, path, registryContent, `Kurzlink ${code} erstellt`, branch, sha);
+    commitSha = saved.commit?.sha || "";
+    await githubPut(env, owner, repo, redirectPath, redirectHtml, `Redirect ${code}`, branch, null);
+  }
+
+  const shortUrl = `https://${SHORT_DOMAIN}/${code}`;
+  return {
+    ok: true,
+    success: true,
+    code,
+    shortUrl,
+    targetUrl: check.entry.targetUrl,
+    status: "created",
+    entry: nextRegistry.entries[code],
+    registry: nextRegistry,
+    commitSha,
+    instagramLine: formatInstagramLine(code)
   };
 }

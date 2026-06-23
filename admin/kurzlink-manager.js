@@ -44,8 +44,10 @@
   ];
 
   const STATUS_LABELS = {
-    unverified: "Ungeprüft",
+    draft: "Entwurf",
+    unverified: "Entwurf",
     verified: "Geprüft",
+    active: "Aktiv",
     error: "Fehlerhaft",
     disabled: "Deaktiviert"
   };
@@ -120,6 +122,19 @@
 
   function hasTextFragment(url) {
     return /#:~:text=/i.test(String(url || ""));
+  }
+
+  function isHttpsUrl(url) {
+    try {
+      return new URL(String(url || "").trim()).protocol === "https:";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function isPublicRedirectStatus(status) {
+    const s = String(status || "").toLowerCase();
+    return s === "active" || s === "verified";
   }
 
   function normalizeRegistry(raw) {
@@ -318,16 +333,90 @@
     };
   }
 
-  function buildChannelShareText({ title, statement, quote, code, sourceShortlink } = {}) {
+  function buildChannelShareText({
+    title,
+    hashtags,
+    statement,
+    quote,
+    sourceCitation,
+    code,
+    sourceShortlink,
+    fazit
+  } = {}) {
     const c = normalizeCode(code || sourceShortlink);
     const titleClean = String(title || "")
       .replace(/^📖\s*/, "")
       .trim();
+    const titleLine = titleClean ? `📖 ${titleClean}` : "";
+    const tags = String(hashtags || "")
+      .trim()
+      .replace(/^#/, "");
+    const tagLine = tags
+      ? tags
+          .split(/\s+/)
+          .filter(Boolean)
+          .map((t) => (t.startsWith("#") ? t : `#${t}`))
+          .join(" ")
+      : "";
     const body = String(statement || quote || "").trim();
-    const sourceLine = c ? formatSourceLine(c, true) : "";
-    return `${titleClean}${body ? `\n\n${body}` : ""}${sourceLine ? `\n\n${sourceLine}` : ""}\n\nDAR AL TAWHID`.trim();
+    const citation = String(sourceCitation || "").trim();
+    const shortLink = c ? formatInstagramLine(c) : "";
+    const fazitLine = String(fazit || "").trim();
+    const parts = [];
+    if (titleLine) parts.push(titleLine);
+    if (tagLine) parts.push(tagLine);
+    if (body) parts.push("", body);
+    if (citation) parts.push("", `📝 ${citation}`);
+    if (shortLink) parts.push("", shortLink);
+    if (fazitLine) parts.push("", `🌙 **Fazit:** ${fazitLine}`);
+    return parts.join("\n").trim();
   }
 
+  function validateCreateInput(input, registry) {
+    const errors = [];
+    const targetUrl = String(input?.targetUrl || "").trim();
+    const quote = String(input?.quote || "").trim();
+    const adminNote = String(input?.adminNote || "").trim();
+    const textHighlightException = input?.textHighlightException === true;
+    const textHighlightNote = String(input?.textHighlightNote || "").trim();
+
+    if (!targetUrl) errors.push("Ziel-Link fehlt");
+    else if (!isHttpsUrl(targetUrl) && !isLocalSourcePath(targetUrl)) errors.push("Ziel-Link muss HTTPS sein");
+    else if (!isAllowedTargetUrl(targetUrl)) errors.push("Domain nicht erlaubt");
+
+    if (!quote) errors.push("Zitierte Aussage fehlt");
+    if (!adminNote) errors.push("Quellenangabe fehlt");
+
+    const hasFragment = hasTextFragment(targetUrl);
+    if (targetUrl && !isLocalSourcePath(targetUrl)) {
+      if (!hasFragment && !textHighlightException) errors.push("Textmarkierung fehlt");
+      if (!hasFragment && textHighlightException && !textHighlightNote) {
+        errors.push("Ausnahme für fehlende Textmarkierung muss bestätigt werden");
+      }
+    }
+
+    const dupWarnings = findDuplicateWarnings({ targetUrl, quote }, registry, "");
+    dupWarnings.forEach((w) => {
+      if (/möglicherweise bereits verwendet/i.test(w)) errors.push(w.replace(/^Achtung:\s*/i, ""));
+    });
+
+    return { ok: !errors.length, errors };
+  }
+
+  function buildCreatePayload(input) {
+    const targetUrl = String(input?.targetUrl || "").trim();
+    const textHighlightException = input?.textHighlightException === true;
+    return {
+      targetUrl,
+      adminNote: String(input?.adminNote || "").trim(),
+      quote: String(input?.quote || "").trim(),
+      sourcePlatform: String(input?.sourcePlatform || input?.platform || detectPlatform(targetUrl) || "").trim(),
+      contentType: String(input?.contentType || "instagram_channel").trim(),
+      textHighlightException,
+      textHighlightNote: textHighlightException ? String(input?.textHighlightNote || "").trim() : "",
+      registrySha: String(input?.registrySha || "").trim()
+    };
+  }
   function buildNormalShareSourceLine(code) {
     const c = normalizeCode(code);
     return c ? formatSourceLine(c, false) : "";
@@ -354,7 +443,12 @@
     return c ? `🔗 ${shortUrlHttps(c)}` : "";
   }
 
-  const CHATGPT_IMPORT_PROMPT = `Am Ende jedes Beitrags füge diesen Block an (nur Original-Quellenlinks, keine dar-al-tawhid.de-Links):
+  const CHATGPT_IMPORT_PROMPT = `Erstelle Instagram-Channel-Beiträge mit automatischem Kurzlink über die Admin-API.
+
+Für jeden Beitrag liefere:
+1. Titel, Hashtags, Beitragstext, kurze Quellenangabe (ohne langen Link), Zitat, Fazit
+2. Originalquellenlink mit Textmarkierung #:~:text=Start,Ende
+3. Diesen API-Block (wird von der Admin-App automatisch verarbeitet):
 
 QUELLEN_IMPORT
 \`\`\`json
@@ -362,7 +456,8 @@ QUELLEN_IMPORT
   "links": [
     {
       "targetUrl": "https://www.islamweb.net/…#:~:text=Start,Ende",
-      "adminNote": "Buch, Band, Seite, Gelehrter"
+      "adminNote": "Buch, Band, Seite, Gelehrter",
+      "quote": "zitierte Aussage"
     }
   ]
 }
@@ -371,8 +466,8 @@ QUELLEN_IMPORT
 Regeln:
 - Nur erlaubte Domains: islamweb.net, shamela.ws, al-maktaba.org, ketabonline.com, dorar.net, quran.ksu.edu.sa, archive.org, waqfeya.net
 - Jeder Link braucht Textmarkierung #:~:text=Start,Ende wenn möglich
-- Im Instagram-Text KEIN langer Quellenlink — nur später: 🔗 https://dar-al-tawhid.de/aX (vergibt die Admin-App automatisch)
-- Gib im Beitragstext Platzhalter [QUELLE] — nach dem Import in der Admin-App ersetzt du durch die fertigen 🔗-Zeilen`;
+- Im Instagram-Text KEIN langer Quellenlink — nur: 🔗 https://dar-al-tawhid.de/aX (wird automatisch erzeugt)
+- KEIN Platzhalter [QUELLE] — die Admin-App erzeugt den fertigen Kurzlink direkt`;
 
   function normalizeImportLink(raw) {
     if (typeof raw === "string") {
@@ -479,8 +574,8 @@ Regeln:
       }
     }
 
-    if (forVerified && String(e.status || "unverified") !== "verified") {
-      errors.push("Erst als geprüft markieren, dann leitet der Link zur Quelle weiter");
+    if (forVerified && !isPublicRedirectStatus(String(e.status || "unverified"))) {
+      errors.push("Erst als geprüft/aktiv markieren, dann leitet der Link zur Quelle weiter");
     }
 
     warnings.push(...findDuplicateWarnings(e, reg, code));
@@ -550,7 +645,7 @@ Regeln:
     }
 
     const status = String(e.status || "unverified");
-    if (forPublish && status !== "verified") errors.push("Prüfstatus muss „Geprüft“ sein");
+    if (forPublish && !isPublicRedirectStatus(status)) errors.push("Prüfstatus muss Aktiv oder Geprüft sein");
 
     if (forPublish && errors.length) {
       errors.unshift(PUBLISH_BLOCK_MSG);
@@ -621,7 +716,7 @@ Regeln:
 <style>body{font-family:system-ui,sans-serif;background:#0f1419;color:#e8eef5;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:24px;text-align:center}main{max-width:420px}h1{font-size:1.25rem}p{color:#9fb0c3;line-height:1.5}</style></head>
 <body><main><h1>Quellenlink deaktiviert</h1><p>Dieser Quellenlink (${code}) wurde deaktiviert oder wird aktuell geprüft.</p><p><a href="https://${SHORT_DOMAIN}/" style="color:#8cb4ff">Zur Startseite</a></p></main></body></html>`;
     }
-    if (status !== "verified" || !target) {
+    if (!isPublicRedirectStatus(status) || !target) {
       return `<!DOCTYPE html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Quellenlink in Prüfung</title>
@@ -672,6 +767,9 @@ Regeln:
     deriveKurzlinkFromPost,
     buildChannelShareText,
     buildNormalShareSourceLine,
+    validateCreateInput,
+    buildCreatePayload,
+    isPublicRedirectStatus,
     validateAutoEntry,
     emptyDraft,
     validateEntry,
