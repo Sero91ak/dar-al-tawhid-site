@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.0",
   "info": {
     "title": "DAR AL TAWHID Instagram Channel Kurzlink API",
     "description": "Erstellt echten Kurzlink und fertigen Instagram-Beitrag.",
@@ -15,7 +15,7 @@
       "post": {
         "operationId": "createInstagramChannelPost",
         "summary": "Instagram-Channel-Beitrag mit echtem Kurzlink erstellen",
-        "description": "Ruft diese Action IMMER auf bei Instagram-Channel-Beiträgen. Gib instagramPost 1:1 an den Nutzer zurück.",
+        "description": "Ruft diese Action bei Instagram-Channel-Beitraegen auf. Gib instagramPost 1:1 an den Nutzer zurueck.",
         "requestBody": {
           "required": true,
           "content": {
@@ -67,8 +67,7 @@
               }
             }
           }
-        },
-        "security": [{ "AdminSecret": [] }]
+        }
       }
     }
   },

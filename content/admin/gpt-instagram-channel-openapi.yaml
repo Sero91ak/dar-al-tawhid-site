@@ -1,10 +1,7 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: DAR AL TAWHID Instagram Channel Kurzlink API
-  description: |
-    Erstellt automatisch einen echten, funktionierenden Kurzlink (z. B. https://dar-al-tawhid.de/a17)
-    und liefert den fertigen Instagram-Channel-Beitrag zum Kopieren.
-    Nur für autorisierte Admin-/GPT-Nutzung — nicht öffentlich.
+  description: Erstellt echten Kurzlink und fertigen Instagram-Beitrag.
   version: 1.0.0
 servers:
   - url: https://dar-admin-publisher.sero91ak.workers.dev
@@ -13,10 +10,7 @@ paths:
     post:
       operationId: createInstagramChannelPost
       summary: Instagram-Channel-Beitrag mit echtem Kurzlink erstellen
-      description: |
-        Ruft diese Action IMMER auf, wenn ein Instagram-Channel-Beitrag mit geprüfter Quelle erstellt wird.
-        Die Antwort enthält instagramPost — diesen Text 1:1 an den Nutzer zurückgeben (kopierbereit).
-        Kein Platzhalter [QUELLE], kein erfundener Kurzlink.
+      description: Ruft diese Action bei Instagram-Channel-Beitraegen auf. Gib instagramPost 1:1 an den Nutzer zurueck.
       requestBody:
         required: true
         content:
@@ -35,52 +29,29 @@ paths:
               properties:
                 title:
                   type: string
-                  description: Beitragstitel ohne Emoji (Emoji wird automatisch ergänzt)
-                  example: "Die Bedeutung der Sunnah"
                 hashtags:
                   type: string
-                  description: Hashtags getrennt durch Leerzeichen, mit oder ohne #
-                  example: "#Sunnah #Islam #Wissen"
                 statement:
                   type: string
-                  description: Haupttext des Instagram-Beitrags
                 sourceCitation:
                   type: string
-                  description: Kurze Quellenangabe OHNE langen URL (Buch, Band, Seite, Gelehrter)
-                  example: "al-Lālakāʾī, Band 1, S. 176"
                 targetUrl:
                   type: string
-                  format: uri
-                  description: |
-                    Originalquellenlink mit Textmarkierung #:~:text=Start,Ende
-                    Nur erlaubte Domains: islamweb.net, shamela.ws, al-maktaba.org,
-                    ketabonline.com, dorar.net, quran.ksu.edu.sa, archive.org, waqfeya.net
-                  example: "https://www.islamweb.net/ar/library/…#:~:text=Start,Ende"
                 adminNote:
                   type: string
-                  description: Interne Quellennotiz (meist gleich sourceCitation)
-                  example: "al-Lālakāʾī, Band 1, S. 176"
                 quote:
                   type: string
-                  description: Exakt zitierte Aussage aus der Quelle
                 fazit:
                   type: string
-                  description: Kurzer Fazit-Satz am Ende des Beitrags
                 sourcePlatform:
                   type: string
-                  description: Quellenplattform (Islamweb, Shamela, …)
-                  example: "Islamweb"
                 textHighlightException:
                   type: boolean
-                  description: Nur true wenn Textmarkierung technisch unmöglich
-                  default: false
                 textHighlightNote:
                   type: string
-                  description: Pflicht wenn textHighlightException true
-                  example: "Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft."
       responses:
         "200":
-          description: Kurzlink erstellt — instagramPost an Nutzer ausgeben
+          description: Erfolg
           content:
             application/json:
               schema:
@@ -90,42 +61,12 @@ paths:
                     type: boolean
                   code:
                     type: string
-                    example: a17
                   shortUrl:
-                    type: string
-                    example: https://dar-al-tawhid.de/a17
-                  targetUrl:
                     type: string
                   instagramPost:
                     type: string
-                    description: Fertiger kopierbarer Instagram-Beitrag — 1:1 ausgeben
                   instagramLine:
                     type: string
-                    example: "🔗 https://dar-al-tawhid.de/a17"
-                  status:
-                    type: string
-                    example: created
-                  message:
-                    type: string
-        "400":
-          description: Validierungsfehler — kein Kurzlink erstellt
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: Textmarkierung fehlt
-        "401":
-          description: Nicht autorisiert — Admin Secret prüfen
-        "429":
-          description: Rate-Limit — kurz warten
-      security:
-        - AdminSecret: []
 components:
   schemas: {}
   securitySchemes:
@@ -133,4 +74,3 @@ components:
       type: apiKey
       in: header
       name: X-Admin-Secret
-      description: Gleiches Secret wie in der DAR Admin-App (Worker Secret)
