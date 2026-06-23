@@ -1636,106 +1636,112 @@ body:before{
   box-shadow:0 14px 34px rgba(0,0,0,.24);
 }
 
-/* ZAKĀT-RECHNER — theme-aware, abgerundet, smartphone-first */
-.zakat-shell{max-width:720px;margin:0 auto;padding:0 2px 8px;display:grid;gap:12px}
+/* ZAKĀT-RECHNER — theme-aware Typografie, Deckblatt premium, alle Erscheinungsbilder */
+.zakat-view{color:var(--text)}
+.zakat-view .view-head{margin-bottom:12px;padding:4px 2px 14px;border-bottom:1px solid var(--line2)}
+.zakat-view .view-head .eyebrow{color:var(--premium-label);font-size:9.5px;letter-spacing:.16em;margin-bottom:6px}
+.zakat-view .view-head h2{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1.75rem,4.8vw,2.15rem);line-height:1.08;margin:0;font-weight:800;text-shadow:none}
+.zakat-view .view-desc{color:var(--premium-body);font-size:12.5px;line-height:1.55;margin-top:6px;max-width:100%}
+.zakat-shell{max-width:720px;margin:0 auto;padding:0 2px 8px;display:grid;gap:12px;color:var(--text)}
 .zakat-shell .zakat-hero,.zakat-shell .zakat-panel,.zakat-shell .zakat-sources-hub{border-radius:22px;margin-bottom:0}
-.zakat-hero{text-align:center;padding:24px 18px 20px}
-.zakat-hero-badge{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--premium-pill-border);padding:5px 12px;border-radius:999px;margin-bottom:10px;background:var(--premium-pill-bg)}
-.zakat-hero-icon{font-size:2rem;margin-bottom:6px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.18))}
-.zakat-hero-title{font-family:var(--serif);font-size:clamp(1.65rem,4vw,2.05rem);color:var(--gold2);margin:0 0 6px;font-weight:800;letter-spacing:.02em}
-.zakat-hero-sub{color:var(--cream);font-size:13px;margin:0 0 10px;opacity:.92}
-.zakat-trust-note{font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 10px;padding:0 8px}
-.zakat-privacy,.zakat-muted,.zakat-footer{font-size:11.5px;line-height:1.5;color:var(--muted2)}
-.zakat-privacy{margin:0;padding:12px 14px;border-radius:16px;background:rgba(239,215,142,.045);border:1px solid var(--line2);color:var(--cream)}
-.zakat-flow-label{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin:2px 6px 0;font-weight:800}
+.zakat-hero{text-align:center;padding:26px 18px 22px;position:relative}
+.zakat-hero:after{content:"";position:absolute;inset:9px;border:1px solid var(--line2);border-radius:18px;pointer-events:none;opacity:.45}
+.zakat-hero-badge{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--premium-pill-text);border:1px solid var(--premium-pill-border);padding:5px 12px;border-radius:999px;margin-bottom:10px;background:var(--premium-pill-bg);position:relative;z-index:1}
+.zakat-hero-icon{font-size:2rem;margin-bottom:6px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));position:relative;z-index:1}
+.zakat-hero-title{font-family:var(--serif);font-size:clamp(1.65rem,4vw,2.05rem);color:var(--premium-title);margin:0 0 6px;font-weight:800;letter-spacing:.02em;position:relative;z-index:1;text-shadow:none}
+.zakat-hero-sub{color:var(--text);font-size:13.5px;margin:0 0 10px;font-weight:600;line-height:1.45;position:relative;z-index:1}
+.zakat-trust-note{font-size:11.5px;line-height:1.55;color:var(--premium-body);margin:0 0 10px;padding:0 8px;position:relative;z-index:1}
+.zakat-privacy,.zakat-muted,.zakat-footer{font-size:11.5px;line-height:1.55;color:var(--muted)}
+.zakat-privacy{margin:0;padding:12px 14px;border-radius:16px;background:rgba(239,215,142,.045);border:1px solid var(--line2);color:var(--text);position:relative;z-index:1;text-align:left}
+.zakat-flow-label{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--premium-label);margin:2px 6px 0;font-weight:800}
 .zakat-input-stack{display:grid;gap:12px}
 .zakat-panel{border-radius:22px;padding:16px 15px}
 .zakat-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line2)}
-.zakat-panel-head h3{font-family:var(--serif);color:var(--gold2);font-size:1.12rem;margin:0;font-weight:700}
+.zakat-panel-head h3{font-family:var(--serif);color:var(--premium-title);font-size:1.12rem;margin:0;font-weight:700}
 .zakat-head-badges{display:flex;gap:6px;flex-wrap:wrap}
 .zakat-form-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:8px}
 .zakat-form-grid-3{grid-template-columns:1fr}
-.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--cream);font-weight:600;letter-spacing:.02em}
-.zakat-form-grid .field,.zakat-panel>.field{background:rgba(255,255,255,.035);border:1px solid var(--line2);border-radius:16px;color:var(--cream);font-size:16px;padding:12px 13px;min-height:48px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
+.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--text);font-weight:600;letter-spacing:.02em}
+.zakat-form-grid .field,.zakat-panel>.field{background:rgba(255,255,255,.035);border:1px solid var(--line2);border-radius:16px;color:var(--text);font-size:16px;padding:12px 13px;min-height:48px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
 .zakat-form-grid .field:focus,.zakat-panel>.field:focus{border-color:rgba(239,215,142,.55);box-shadow:0 0 0 1px rgba(239,215,142,.18)}
-.zakat-subsection-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin:14px 0 8px;font-weight:800}
+.zakat-form-grid .field::placeholder,.zakat-panel>.field::placeholder{color:var(--muted2);opacity:1}
+.zakat-subsection-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--premium-label);margin:14px 0 8px;font-weight:800}
 .zakat-banner{padding:11px 13px;border-radius:16px;margin-bottom:12px;font-size:11.5px;line-height:1.45;border:1px solid transparent}
 .zakat-banner.ok{background:rgba(40,100,60,.18);border-color:rgba(120,200,140,.28);color:#b8e8c4}
 .zakat-banner.preview{background:rgba(80,60,120,.16);border-color:rgba(180,160,255,.22);color:#d8ccf8}
 .zakat-banner.warn{background:rgba(120,70,20,.16);border-color:rgba(255,160,80,.25);color:#ffd4b0}
 .zakat-banner.calm{background:rgba(60,80,100,.16);border-color:rgba(140,170,200,.22);color:#c8d8ea}
-.zakat-banner.neutral{background:rgba(239,215,142,.045);border-color:var(--line2);color:var(--muted)}
+.zakat-banner.neutral{background:rgba(239,215,142,.045);border-color:var(--line2);color:var(--premium-body)}
 .zakat-result-hero{text-align:center;padding:16px 12px 18px;margin-bottom:12px;border-radius:18px;background:rgba(239,215,142,.045);border:1px solid var(--line2)}
 .zakat-result-label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
-.zakat-result-amount{font-family:var(--serif);font-size:clamp(2rem,7vw,2.5rem);font-weight:800;color:var(--gold2);line-height:1.1}
-.zakat-result-sub{display:block;margin-top:6px;font-size:11px;color:var(--muted)}
+.zakat-result-amount{font-family:var(--serif);font-size:clamp(2rem,7vw,2.5rem);font-weight:800;color:var(--premium-title);line-height:1.1}
+.zakat-result-sub{display:block;margin-top:6px;font-size:11px;color:var(--premium-body)}
 .zakat-kpi-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
 .zakat-kpi{padding:13px 10px;border-radius:16px;background:rgba(239,215,142,.045);border:1px solid var(--line2);text-align:center}
 .zakat-kpi.accent{border-color:rgba(180,80,80,.35);background:rgba(120,40,40,.08)}
 .zakat-kpi span{display:block;font-size:9px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
-.zakat-kpi b{font-size:15px;color:var(--cream);font-weight:800}
+.zakat-kpi b{font-size:15px;color:var(--text);font-weight:800}
 .zakat-liquid-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
 .zakat-liquid-item{padding:10px 11px;border-radius:14px;background:rgba(239,215,142,.035);border:1px solid var(--line2);font-size:10px}
 .zakat-liquid-item span{display:block;color:var(--muted);margin-bottom:3px}
-.zakat-liquid-item b{color:var(--cream);font-size:12px}
+.zakat-liquid-item b{color:var(--text);font-size:12px}
 .zakat-liquid-item.total{grid-column:1/-1;border-color:rgba(239,215,142,.42);background:rgba(239,215,142,.08)}
-.zakat-liquid-item.total b{color:var(--gold2)}
+.zakat-liquid-item.total b{color:var(--premium-title)}
 .zakat-status-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.zakat-pill{display:inline-block;padding:6px 12px;border-radius:999px;font-size:10px;font-weight:700;border:1px solid var(--line2);line-height:1.2;background:rgba(239,215,142,.045);color:var(--cream)}
+.zakat-pill{display:inline-block;padding:6px 12px;border-radius:999px;font-size:10px;font-weight:700;border:1px solid var(--line2);line-height:1.2;background:rgba(239,215,142,.045);color:var(--text)}
 .zakat-pill.ok{background:rgba(40,100,60,.22);color:#b8e8c4;border-color:rgba(120,200,140,.35)}
 .zakat-pill.warn{background:rgba(120,70,20,.22);color:#ffd4b0;border-color:rgba(255,160,80,.35)}
 .zakat-pill.preview{background:rgba(80,60,120,.18);color:#d8ccf8;border-color:rgba(180,160,255,.28)}
 .zakat-pill.muted{color:var(--muted)}
 .zakat-nisab-compare{display:grid;grid-template-columns:1fr;gap:8px;font-size:10px;padding:12px;border-radius:16px;background:rgba(239,215,142,.035);border:1px solid var(--line2)}
 .zakat-nisab-compare span{display:block;color:var(--muted);margin-bottom:3px;line-height:1.3}
-.zakat-nisab-compare b{color:var(--cream);font-size:13px;font-weight:800}
-.zakat-nisab-compare .standard b{color:var(--gold2)}
+.zakat-nisab-compare b{color:var(--text);font-size:13px;font-weight:800}
+.zakat-nisab-compare .standard b{color:var(--premium-title)}
 .zakat-warn{margin-top:8px;padding:10px 12px;border-radius:14px;background:rgba(255,120,40,.1);border:1px solid rgba(255,160,80,.28);color:#ffd4b0;font-size:10.5px;line-height:1.45}
 .zakat-steps{display:grid;gap:8px}
 .zakat-step{display:grid;grid-template-columns:26px 1fr;gap:2px 10px;padding:12px 13px;border-radius:16px;background:rgba(239,215,142,.035);border:1px solid var(--line2);font-size:11.5px;align-items:start}
-.zakat-step-num{grid-row:1/span 2;width:24px;height:24px;border-radius:999px;background:rgba(239,215,142,.10);color:var(--gold2);font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2)}
-.zakat-step-label{grid-column:2;color:var(--cream);font-weight:600;line-height:1.35}
+.zakat-step-num{grid-row:1/span 2;width:24px;height:24px;border-radius:999px;background:rgba(239,215,142,.10);color:var(--premium-title);font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2)}
+.zakat-step-label{grid-column:2;color:var(--text);font-weight:600;line-height:1.35}
 .zakat-step.highlight{border-color:rgba(239,215,142,.55);background:rgba(239,215,142,.10)}
 .zakat-step.preview{opacity:.92;border-style:dashed}
-.zakat-step strong{grid-column:2;grid-row:2;color:var(--gold2);font-size:13px;text-align:left;margin-top:4px;white-space:normal}
-.zakat-step small{grid-column:2;grid-row:3;color:var(--muted2);font-size:10px;line-height:1.35}
-.zakat-rate-tag{font-size:11px;color:var(--gold);font-weight:800;padding:5px 10px;border-radius:999px;background:rgba(239,215,142,.08);border:1px solid var(--line2)}
-/* Authentische Quellen */
+.zakat-step strong{grid-column:2;grid-row:2;color:var(--premium-title);font-size:13px;text-align:left;margin-top:4px;white-space:normal}
+.zakat-step small{grid-column:2;grid-row:3;color:var(--muted);font-size:10px;line-height:1.35}
+.zakat-rate-tag{font-size:11px;color:var(--premium-label);font-weight:800;padding:5px 10px;border-radius:999px;background:rgba(239,215,142,.08);border:1px solid var(--line2)}
 .zakat-sources-hub{padding:0!important;margin-bottom:0!important}
 .zakat-sources-hub-head{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:16px 15px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:72px;border-radius:22px 22px 0 0}
 .zakat-sources-hub-copy{flex:1;min-width:0}
-.zakat-sources-hub-kicker{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:4px}
-.zakat-sources-hub-head h3{font-family:var(--serif);color:var(--gold2);font-size:clamp(1.15rem,3.5vw,1.35rem);margin:0 0 4px;font-weight:800;line-height:1.15}
-.zakat-sources-hub-head p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.4}
-.zakat-sources-chevron{flex:0 0 36px;width:36px;height:36px;border-radius:999px;border:1px solid var(--line2);background:rgba(239,215,142,.08);position:relative;transition:transform .2s ease,background .2s ease}
-.zakat-sources-chevron:before,.zakat-sources-chevron:after{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-right:2px solid var(--gold2);border-bottom:2px solid var(--gold2);transform:translate(-65%,-35%) rotate(45deg);transition:transform .2s ease}
+.zakat-sources-hub-kicker{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--premium-label);font-weight:800;margin-bottom:4px}
+.zakat-sources-hub-head h3{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1.15rem,3.5vw,1.35rem);margin:0 0 4px;font-weight:800;line-height:1.15}
+.zakat-sources-hub-head p{margin:0;font-size:11.5px;color:var(--premium-body);line-height:1.4}
+.zakat-sources-chevron{flex:0 0 36px;width:36px;height:36px;border-radius:999px;border:1px solid var(--line2);background:rgba(239,215,142,.08);position:relative;transition:transform .2s ease}
+.zakat-sources-chevron:before,.zakat-sources-chevron:after{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-right:2px solid var(--premium-title);border-bottom:2px solid var(--premium-title);transform:translate(-65%,-35%) rotate(45deg)}
 .zakat-sources-chevron.open{transform:rotate(180deg)}
 .zakat-sources-preview{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 15px 16px}
-.zakat-source-preview-pill{padding:5px 10px;border-radius:999px;font-size:10px;font-weight:700;color:var(--gold2);border:1px solid var(--line2);background:rgba(239,215,142,.08)}
+.zakat-source-preview-pill{padding:5px 10px;border-radius:999px;font-size:10px;font-weight:700;color:var(--premium-title);border:1px solid var(--line2);background:rgba(239,215,142,.08)}
 .zakat-sources-body{padding:0 12px 14px;border-top:1px solid var(--line2)}
 .zakat-source-tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 2px 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .zakat-source-tabs::-webkit-scrollbar{display:none}
-.zakat-source-tab{flex:0 0 auto;border:1px solid var(--line2);border-radius:999px;padding:10px 14px;background:rgba(239,215,142,.045);color:var(--cream);font-size:11px;font-weight:800;cursor:pointer;min-height:44px;white-space:nowrap;transition:border-color .15s ease,background .15s ease,color .15s ease}
-.zakat-source-tab.active{border-color:rgba(239,215,142,.62);background:rgba(239,215,142,.14);color:var(--gold2);box-shadow:0 0 0 1px rgba(239,215,142,.10)}
-.zakat-source-intro{font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 10px;padding:0 4px}
+.zakat-source-tab{flex:0 0 auto;border:1px solid var(--line2);border-radius:999px;padding:10px 14px;background:rgba(239,215,142,.045);color:var(--text);font-size:11px;font-weight:800;cursor:pointer;min-height:44px;white-space:nowrap;transition:border-color .15s ease,background .15s ease,color .15s ease}
+.zakat-source-tab.active{border-color:rgba(239,215,142,.62);background:rgba(239,215,142,.14);color:var(--premium-title);box-shadow:0 0 0 1px rgba(239,215,142,.10)}
+.zakat-source-intro{font-size:11px;line-height:1.5;color:var(--premium-body);margin:0 0 10px;padding:0 4px}
 .zakat-source-list{display:grid;gap:10px;max-height:min(62vh,520px);overflow-y:auto;padding-right:2px;-webkit-overflow-scrolling:touch}
 .zakat-source-card{padding:13px 14px;border-radius:18px;border:1px solid var(--line2);border-left:3px solid var(--gold);background:rgba(239,215,142,.035);font-size:11.5px;line-height:1.5}
 .zakat-source-meta{display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:8px;font-size:10px;color:var(--muted);align-items:center}
-.zakat-source-cat{color:var(--gold2);font-weight:800}
+.zakat-source-cat{color:var(--premium-title);font-weight:800}
 .zakat-source-trust{padding:2px 8px;border-radius:999px;background:rgba(40,100,60,.18);color:#b8e8c4;font-weight:700;font-size:9px;border:1px solid rgba(120,200,140,.25)}
 .zakat-source-trust.fiqh{background:rgba(80,60,120,.16);color:#d8ccf8;border-color:rgba(180,160,255,.22)}
-.zakat-source-trust.manhaj{background:rgba(239,215,142,.12);color:var(--gold2);border-color:var(--line2)}
+.zakat-source-trust.manhaj{background:rgba(239,215,142,.12);color:var(--premium-title);border-color:var(--line2)}
 .zakat-source-ref{color:var(--muted)}
-.zakat-ar{font-family:var(--serif);direction:rtl;text-align:right;font-size:clamp(17px,4.5vw,19px);color:var(--cream);margin:8px 0;line-height:1.75;padding:10px 12px;border-radius:14px;background:rgba(239,215,142,.04);border:1px solid var(--line2)}
-.zakat-source-text{color:var(--cream);margin:0 0 6px}
-.zakat-source-note{color:var(--muted);font-size:10.5px;margin:0 0 8px}
-.zakat-source-link{display:inline-flex;align-items:center;gap:4px;margin-top:4px;color:var(--gold2);font-size:11px;font-weight:700;text-decoration:none}
+.zakat-ar{font-family:var(--serif);direction:rtl;text-align:right;font-size:clamp(17px,4.5vw,19px);color:var(--text);margin:8px 0;line-height:1.75;padding:10px 12px;border-radius:14px;background:rgba(239,215,142,.04);border:1px solid var(--line2)}
+.zakat-source-text{color:var(--text);margin:0 0 6px}
+.zakat-source-note{color:var(--premium-body);font-size:10.5px;margin:0 0 8px}
+.zakat-source-link{display:inline-flex;align-items:center;gap:4px;margin-top:4px;color:var(--premium-title);font-size:11px;font-weight:700;text-decoration:none}
 .zakat-actions{display:grid;grid-template-columns:1fr;gap:8px;margin:4px 0 8px}
-.zakat-btn,.zakat-mini-btn{border:1px solid var(--line2);border-radius:999px;padding:13px 16px;background:rgba(239,215,142,.075);color:var(--cream);font-size:13px;font-weight:700;cursor:pointer;transition:transform .12s ease,opacity .12s ease,border-color .15s ease;min-height:48px;width:100%}
+.zakat-btn,.zakat-mini-btn{border:1px solid var(--line2);border-radius:999px;padding:13px 16px;background:rgba(239,215,142,.075);color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:transform .12s ease,opacity .12s ease,border-color .15s ease;min-height:48px;width:100%}
 .zakat-btn:active,.zakat-mini-btn:active{transform:scale(.98);opacity:.92}
 .zakat-btn.primary,.zakat-mini-btn.primary{background:linear-gradient(180deg,rgba(140,50,50,.6),rgba(90,30,30,.82));border-color:rgba(200,120,120,.4);color:#fff}
-.zakat-history-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:12px}
-.zakat-footer{margin:8px 0 24px;padding-top:12px;border-top:1px solid var(--line2);color:var(--muted)}
+.zakat-history-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:12px;color:var(--text)}
+.zakat-footer{margin:8px 0 24px;padding-top:12px;border-top:1px solid var(--line2);color:var(--premium-body)}
 .zakat-skeleton{padding:4px 0}
 .zakat-skel-line{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,rgba(239,215,142,.04),rgba(239,215,142,.14),rgba(239,215,142,.04));background-size:200% 100%;animation:zakatSkel 1.2s ease infinite;margin:4px 0}
 .zakat-skel-line.short{width:58%}
@@ -1743,25 +1749,105 @@ body:before{
 .zakat-price-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px}
 .zakat-price-row{padding:13px;border-radius:18px;background:rgba(239,215,142,.035);border:1px solid var(--line2);font-size:11px;line-height:1.45}
 .zakat-price-row.muted-row{opacity:.75}
-.zakat-price-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-weight:700;color:var(--cream)}
+.zakat-price-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-weight:700;color:var(--text)}
 .zakat-price-tag{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .zakat-price-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
 .zakat-price-metrics div{padding:8px 10px;border-radius:14px;background:rgba(239,215,142,.035);border:1px solid var(--line2)}
 .zakat-price-metrics span{display:block;font-size:9px;color:var(--muted);margin-bottom:2px}
-.zakat-price-metrics b{color:var(--gold2);font-size:14px}
-.zakat-standard-line{font-size:11px;color:var(--muted);margin:8px 0 0;padding:10px 12px;border-radius:14px;background:rgba(239,215,142,.06);border:1px solid var(--line2)}
-.zakat-standard-line b{color:var(--gold2)}
-.zakat-manual-prices{margin-top:10px;font-size:11px;color:var(--muted)}
-.zakat-manual-prices summary{cursor:pointer;color:var(--gold);padding:10px 0;font-weight:700;list-style:none;min-height:44px;display:flex;align-items:center}
+.zakat-price-metrics b{color:var(--premium-title);font-size:14px}
+.zakat-standard-line{font-size:11px;color:var(--premium-body);margin:8px 0 0;padding:10px 12px;border-radius:14px;background:rgba(239,215,142,.06);border:1px solid var(--line2)}
+.zakat-standard-line b{color:var(--premium-title)}
+.zakat-manual-prices{margin-top:10px;font-size:11px;color:var(--premium-body)}
+.zakat-manual-prices summary{cursor:pointer;color:var(--premium-label);padding:10px 0;font-weight:700;list-style:none;min-height:44px;display:flex;align-items:center}
 .zakat-manual-prices summary::-webkit-details-marker{display:none}
 .zakat-loading-msg.ok{color:#b8e8c4}
-html[data-theme="light"] .zakat-banner.ok,html[data-theme="soft"] .zakat-banner.ok{color:#1f6b34;background:rgba(40,120,60,.12);border-color:rgba(40,120,60,.22)}
-html[data-theme="light"] .zakat-pill.ok,html[data-theme="soft"] .zakat-pill.ok{color:#1f6b34}
-html[data-theme="light"] .zakat-source-trust,html[data-theme="soft"] .zakat-source-trust{color:#1f6b34;background:rgba(40,120,60,.10);border-color:rgba(40,120,60,.18)}
-html[data-theme="light"] .zakat-warn,html[data-theme="soft"] .zakat-warn{color:#9a4e12;background:rgba(255,160,80,.10);border-color:rgba(200,120,40,.22)}
-html[data-theme="light"] .zakat-form-grid .field,html[data-theme="light"] .zakat-panel>.field,
-html[data-theme="soft"] .zakat-form-grid .field,html[data-theme="soft"] .zakat-panel>.field{background:rgba(255,255,255,.50)!important;color:var(--text)!important;border-color:var(--line2)!important}
-html[data-theme="light"] .zakat-ar,html[data-theme="soft"] .zakat-ar{color:var(--text)!important}
+/* Dunkel / Klassisch — Deckblatt-Lesbarkeit */
+html[data-theme="dark"] .zakat-view .view-head h2,
+html[data-theme="dark"] .zakat-hero-title{color:var(--gold2);text-shadow:0 2px 12px rgba(0,0,0,.22)}
+html[data-theme="dark"] .zakat-view .view-desc,
+html[data-theme="dark"] .zakat-hero-sub,
+html[data-theme="dark"] .zakat-privacy{color:var(--cream)}
+html[data-theme="dark"] .zakat-trust-note{color:var(--muted)}
+/* Hell — hoher Kontrast */
+html[data-theme="light"] .zakat-view .view-head h2,
+html[data-theme="light"] .zakat-hero-title,
+html[data-theme="light"] .zakat-panel-head h3,
+html[data-theme="light"] .zakat-sources-hub-head h3,
+html[data-theme="light"] .zakat-result-amount{color:#3d2a12!important;text-shadow:none!important}
+html[data-theme="light"] .zakat-view .view-desc,
+html[data-theme="light"] .zakat-hero-sub,
+html[data-theme="light"] .zakat-privacy,
+html[data-theme="light"] .zakat-source-text,
+html[data-theme="light"] .zakat-kpi b,
+html[data-theme="light"] .zakat-step-label{color:#2a2218!important}
+html[data-theme="light"] .zakat-view .eyebrow,
+html[data-theme="light"] .zakat-hero-badge,
+html[data-theme="light"] .zakat-flow-label,
+html[data-theme="light"] .zakat-sources-hub-kicker{color:#8a6530!important}
+html[data-theme="light"] .zakat-trust-note,
+html[data-theme="light"] .zakat-footer,
+html[data-theme="light"] .zakat-muted,
+html[data-theme="light"] .zakat-source-intro,
+html[data-theme="light"] .zakat-source-note{color:#5c4e3c!important}
+html[data-theme="light"] .zakat-ar{color:#2a2218!important;background:rgba(255,255,255,.55)!important}
+html[data-theme="light"] .zakat-privacy{background:rgba(255,255,255,.48)!important;border-color:rgba(155,122,60,.18)!important}
+html[data-theme="light"] .zakat-hero:after{border-color:rgba(155,122,60,.16)!important}
+html[data-theme="light"] .zakat-banner.ok,html[data-theme="light"] .zakat-pill.ok{color:#1f6b34!important;background:rgba(40,120,60,.12)!important;border-color:rgba(40,120,60,.22)!important}
+html[data-theme="light"] .zakat-source-trust{color:#1f6b34!important;background:rgba(40,120,60,.10)!important;border-color:rgba(40,120,60,.18)!important}
+html[data-theme="light"] .zakat-warn{color:#9a4e12!important;background:rgba(255,160,80,.10)!important;border-color:rgba(200,120,40,.22)!important}
+html[data-theme="light"] .zakat-form-grid .field,html[data-theme="light"] .zakat-panel>.field{background:rgba(255,255,255,.58)!important;color:#2a2218!important;border-color:rgba(155,122,60,.18)!important}
+html[data-theme="light"] .zakat-source-tab.active{color:#3d2a12!important}
+html[data-theme="light"] .zakat-btn:not(.primary){color:#2a2218!important;background:rgba(255,248,228,.88)!important}
+/* Sanft Elegant */
+html[data-theme="soft"] .zakat-view .view-head h2,
+html[data-theme="soft"] .zakat-hero-title,
+html[data-theme="soft"] .zakat-panel-head h3,
+html[data-theme="soft"] .zakat-sources-hub-head h3,
+html[data-theme="soft"] .zakat-result-amount{color:#32212b!important;text-shadow:none!important}
+html[data-theme="soft"] .zakat-view .view-desc,
+html[data-theme="soft"] .zakat-hero-sub,
+html[data-theme="soft"] .zakat-privacy,
+html[data-theme="soft"] .zakat-source-text{color:#291d24!important}
+html[data-theme="soft"] .zakat-view .eyebrow,
+html[data-theme="soft"] .zakat-hero-badge{color:#7d5368!important}
+html[data-theme="soft"] .zakat-trust-note,
+html[data-theme="soft"] .zakat-muted,
+html[data-theme="soft"] .zakat-footer{color:#5d4c54!important}
+html[data-theme="soft"] .zakat-ar{color:#291d24!important;background:rgba(255,255,255,.50)!important}
+html[data-theme="soft"] .zakat-privacy{background:rgba(255,255,255,.44)!important}
+html[data-theme="soft"] .zakat-form-grid .field,html[data-theme="soft"] .zakat-panel>.field{background:rgba(255,255,255,.54)!important;color:#291d24!important}
+html[data-theme="soft"] .zakat-banner.ok,html[data-theme="soft"] .zakat-pill.ok{color:#1f6b34!important}
+html[data-theme="soft"] .zakat-source-trust{color:#1f6b34!important;background:rgba(40,120,60,.10)!important}
+html[data-theme="soft"] .zakat-warn{color:#9a4e12!important}
+/* Royal Nachtblau */
+html[data-theme="royal"] .zakat-view .view-head h2,
+html[data-theme="royal"] .zakat-hero-title,
+html[data-theme="royal"] .zakat-panel-head h3,
+html[data-theme="royal"] .zakat-result-amount{color:#f1d992!important;text-shadow:0 1px 10px rgba(0,0,0,.28)!important}
+html[data-theme="royal"] .zakat-view .view-desc,
+html[data-theme="royal"] .zakat-hero-sub,
+html[data-theme="royal"] .zakat-privacy{color:#fff3cf!important}
+html[data-theme="royal"] .zakat-trust-note,
+html[data-theme="royal"] .zakat-muted{color:#c7bb9f!important}
+html[data-theme="royal"] .zakat-view .eyebrow,
+html[data-theme="royal"] .zakat-hero-badge{color:#9fb0c3!important}
+html[data-theme="royal"] .zakat-ar{color:#fff3cf!important}
+html[data-theme="royal"] .zakat-form-grid .field,html[data-theme="royal"] .zakat-panel>.field{color:#fff2c6!important;background:rgba(7,22,44,.42)!important}
+/* Bordeaux Royal */
+html[data-theme="bordeaux"] .zakat-view .view-head h2,
+html[data-theme="bordeaux"] .zakat-hero-title,
+html[data-theme="bordeaux"] .zakat-panel-head h3,
+html[data-theme="bordeaux"] .zakat-result-amount{color:#E7D59D!important;text-shadow:0 1px 12px rgba(0,0,0,.32)!important}
+html[data-theme="bordeaux"] .zakat-view .view-desc,
+html[data-theme="bordeaux"] .zakat-hero-sub,
+html[data-theme="bordeaux"] .zakat-privacy{color:#FFF4DF!important}
+html[data-theme="bordeaux"] .zakat-trust-note,
+html[data-theme="bordeaux"] .zakat-muted,
+html[data-theme="bordeaux"] .zakat-footer{color:rgba(255,244,223,.78)!important}
+html[data-theme="bordeaux"] .zakat-view .eyebrow,
+html[data-theme="bordeaux"] .zakat-hero-badge{color:rgba(255,244,223,.72)!important}
+html[data-theme="bordeaux"] .zakat-ar{color:#FFF4DF!important}
+html[data-theme="bordeaux"] .zakat-form-grid .field,html[data-theme="bordeaux"] .zakat-panel>.field{color:#FFF4DF!important;background:rgba(20,11,12,.38)!important}
 @media (min-width:640px){
 .zakat-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .zakat-form-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -7154,8 +7240,8 @@ window.DAR_ANALYTICS_CONFIG={
 };
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
-<script src="/assets/zakat-engine.js?v=7" defer></script>
-<script src="/assets/zakat-app.js?v=7" defer></script>
+<script src="/assets/zakat-engine.js?v=8" defer></script>
+<script src="/assets/zakat-app.js?v=8" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">

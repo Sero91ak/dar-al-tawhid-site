@@ -357,7 +357,7 @@
             ? `<p class="zakat-warn">Preisabruf: ${esc(zakatPricesError)} — liquide Mittel werden trotzdem exakt berechnet.</p>`
             : "";
 
-    return `${global.setHeader("Zakāt-Rechner", "Berechnung nach Qurʾān, Sunnah und gesicherten Āthār", "Zakāt")}
+    return `<div class="zakat-view">${global.setHeader("Zakāt-Rechner", "Berechnung nach Qurʾān, Sunnah und gesicherten Āthār", "Zakāt")}
     <div class="zakat-shell">
     <section class="zakat-hero premium-surface">
       <div class="zakat-hero-badge">Amānah · vertraulich &amp; transparent</div>
@@ -421,6 +421,7 @@
     </section>
     ${historyBlock}
     <p class="zakat-footer">${esc(w.footer || "")}</p>
+    </div>
     </div>`;
   }
 
