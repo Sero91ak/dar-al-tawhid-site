@@ -1,0 +1,13 @@
+/admin/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
+/admin/index.html
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
+/admin/*.js
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/content/admin/gpt-instagram-channel-openapi.yaml
+  Cache-Control: public, max-age=300

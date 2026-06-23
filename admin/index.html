@@ -11,6 +11,8 @@
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
 <meta name="theme-color" content="#07111d">
 <meta name="description" content="DAR Admin Command Center fuer Inhalte, News, Statistik und Live-Vorschau.">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DAR AL TAWḤID">
 <meta property="og:title" content="DAR Admin">
@@ -24,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v42";
-  var MIG_KEY="darAdminSwFixV24";
+  var ADMIN_SW_CACHE="dar-admin-stats-v43";
+  var MIG_KEY="darAdminSwFixV25";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -458,7 +460,7 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/admin/quellen-manager.js?v=1"></script>
-<script src="/admin/kurzlink-manager.js?v=4"></script>
+<script src="/admin/kurzlink-manager.js?v=5"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -475,7 +477,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_LOG_KEY="darAdminChangeLogV1";
+const ADMIN_BUILD="2026-06-23-gpt5";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -1582,6 +1584,10 @@ function renderKurzlinks(){
   const thNote=d.textHighlight==="not_possible"||(!hasTextFragmentAdmin(d.targetUrl)&&d.status!=="verified")?`<label>Ausnahme (ohne Textmarkierung)<textarea class="field" id="kurzlinkTextHighlightNote" rows="2" placeholder="Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft.">${esc(d.textHighlightNote||"")}</textarea></label>`:"";
   const importResultBlock=kurzlinkImportResult?`<label>Fertige Instagram-Zeilen<textarea class="field" id="kurzlinkImportResult" rows="5" readonly>${esc(kurzlinkImportResult)}</textarea></label>`:"";
   return `<section class="quellen-studio">
+    <div class="panel" style="border-color:rgba(120,220,160,.4);background:rgba(20,40,28,.35)">
+      <div class="section-head"><h3>Kurzlinks · GPT Action</h3><span>Build ${esc(ADMIN_BUILD||"—")}</span></div>
+      <p class="ordner-lead">Tab <strong>Kurzlinks</strong> aktiv? Dann siehst du unten <strong>„Custom GPT Action — vollautomatisch“</strong>. Hard-Refresh: <strong>Strg+Shift+R</strong>.</p>
+    </div>
     <div class="panel">
       <div class="section-head"><h3>Kurzlinks — nur Weiterleitung</h3><span>${entries.length} aktiv</span></div>
       <p class="ordner-lead">Deine Website ist die <strong>kurze Tür</strong> zur Originalquelle. Die Aussage steht <strong>nicht</strong> auf dar-al-tawhid.de — nur der Link. Für Instagram: <strong>${esc(igLine||"🔗 https://dar-al-tawhid.de/a1")}</strong></p>
@@ -2053,7 +2059,7 @@ function renderStart(ctx){
     ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
     ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
     ${folderCard("③b","Quellen","PDF/Bild/Scan an Beiträgen — ohne Kurzlink.","quellen","Quellen-Dateien")}
-    ${folderCard("③c","Kurzlinks","a1 → Islamweb/Shamela — nur Weiterleitung für Instagram.","kurzlinks","Weiterleitung")}
+    ${folderCard("③c","Kurzlinks","NEU: Custom GPT Action + Kurzlinks a1→Quelle für Instagram.","kurzlinks","GPT + Links")}
     ${folderCard("③d","Zakāt-Rechner","Niṣāb-Preise prüfen — keine Besucher-Beträge.","zakat","Verwaltung")}
     ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
