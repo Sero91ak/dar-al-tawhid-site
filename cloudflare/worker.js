@@ -34,6 +34,7 @@ import {
   importShortlinkBatch,
   validatePostShortlinkForPublish
 } from "./kurzlink-admin.js";
+import { readZakatConfig, saveZakatPrices } from "./zakat-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -220,6 +221,26 @@ export default {
         assertAuthorized(request, env);
         const input = await request.json().catch(() => ({}));
         const result = await importShortlinkBatch(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8
+        });
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/zakat/config" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const { config, sha, path } = await readZakatConfig(env, githubGet, base64ToUtf8);
+        return json({ ok: true, config, sha, path }, cors);
+      }
+
+      if (url.pathname === "/api/admin/zakat/prices" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await saveZakatPrices(env, input, {
           githubGet,
           githubPut,
           githubCommitBatch,
