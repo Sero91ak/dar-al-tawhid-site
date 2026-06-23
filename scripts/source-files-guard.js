@@ -66,6 +66,26 @@ function runSourceFilesGuard() {
     "parseQuellenCatalogHead"
   ]);
 
+  mustInclude("admin/index.html kurzlink", admin, [
+    "KURZLINK GUARD",
+    "kurzlink-manager.js",
+    "renderKurzlinks",
+    "Kurzlinks — nur Weiterleitung",
+    "shortlinks/save",
+    "formatInstagramLine",
+    "validateRedirectSave",
+    "Instagram-Zeile kopieren",
+    "bindKurzlinksUi",
+  ]);
+
+  mustInclude("admin/kurzlink-manager.js", read("admin/kurzlink-manager.js"), [
+    "deriveKurzlinkFromPost",
+    "buildChannelShareText",
+    "injectShortlinkIntoMarkdown",
+    "isAllowedTargetUrl",
+    "buildRedirectHtml"
+  ]);
+
   mustInclude("worker.js", worker, [
     "SOURCE FILES GUARD FINAL",
     "DEFAULT_SOURCES_DIR",
@@ -74,7 +94,11 @@ function runSourceFilesGuard() {
     "normalizeSourceFilesInput",
     "listSourceFiles",
     "prepareSourceCommitEntries",
-    "scanSourceUsageInPosts"
+    "scanSourceUsageInPosts",
+    "/api/admin/shortlinks",
+    "/api/admin/shortlinks/auto",
+    "validatePostShortlinkForPublish",
+    "kurzlink-admin.js"
   ]);
 
   if (!fs.existsSync(path.join(ROOT, "assets/sources/.gitkeep"))) {
@@ -93,6 +117,12 @@ function runSourceFilesGuard() {
     fail("Publish/Update muss sourceFiles an Worker senden");
   } else {
     ok("sourceFiles in Publish/Update-Flow");
+  }
+
+  if (!fs.existsSync(path.join(ROOT, "content/admin/source-shortlinks.json"))) {
+    fail("content/admin/source-shortlinks.json fehlt");
+  } else {
+    ok("content/admin/source-shortlinks.json vorhanden");
   }
 
   return failed;

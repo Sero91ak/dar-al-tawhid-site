@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v34";
+  var ADMIN_SW_CACHE="dar-admin-stats-v37";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -273,7 +273,11 @@ button{cursor:pointer}
 .quellen-link-row b{color:var(--ink);display:block;font-size:10.5px}
 .quellen-link-row span{color:var(--muted);word-break:break-all}
 .quellen-slide-block{border:1px dashed rgba(140,190,255,.22);border-radius:12px;padding:8px;margin-bottom:8px}
-.quellen-slide-block h5{margin:0 0 6px;font-size:11px;color:var(--gold)}
+.quellen-kurzlink-panel{border:1px solid rgba(140,190,255,.28);border-radius:14px;padding:12px;background:rgba(20,30,45,.35);display:grid;gap:10px}
+.quellen-kurzlink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.quellen-kurzlink-preview{border:1px solid rgba(239,215,142,.22);border-radius:10px;padding:8px;background:rgba(0,0,0,.15);font-size:10.5px;line-height:1.45}
+.quellen-kurzlink-warn{border:1px solid rgba(255,160,80,.35);border-radius:10px;padding:8px;background:rgba(255,120,40,.08);color:#ffc89a;font-size:10px;line-height:1.4}
+.quellen-kurzlink-actions{display:flex;flex-wrap:wrap;gap:6px}
 .paste-area{width:100%;min-height:280px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.26);color:var(--ink);padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.55}
 .upload-stack{display:grid;gap:9px;align-content:start}
 .upload-status{border:1px dashed var(--line);border-radius:14px;padding:11px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.055)}
@@ -447,6 +451,7 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/admin/quellen-manager.js?v=1"></script>
+<script src="/admin/kurzlink-manager.js?v=1"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -477,6 +482,7 @@ const DEFAULT_ADMIN_TABS=[
   ["besucher","Besucher"],
   ["ordner","Ordner"],
   ["quellen","Quellen"],
+  ["kurzlinks","Kurzlinks"],
   ["actions","Aktionen"],
   ["preview","Live-Vorschau"],
   ["content","Inhalte"],
@@ -498,6 +504,8 @@ let ordnerSelectedCat="",ordnerPostQuery="",ordnerCatSearch="",ordnerRenameValue
 let ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let quellenSearchQuery="",quellenCatalogMeta=[],quellenCatalogBusy=false,quellenCatalogLoaded=false,quellenEditorStatus="";
 let quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
+let shortlinksRegistry={version:1,nextSerial:1,entries:{}},shortlinksRegistrySha="",shortlinksRegistryLoaded=false,shortlinksRegistryBusy=false;
+let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="",kurzlinkSelectedCode="";
 let sourceLinkTarget="post",sourceCustomLabel="",sourceManualUrl="",sourceSetSlideImage=false;
 let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 let newsSearchQuery="",newsFilter="live",editingNewsId=null;
@@ -1481,6 +1489,102 @@ async function ensureQuellenCatalog(force){
     return quellenCatalogMeta;
   }finally{quellenCatalogBusy=false}
 }
+async function ensureShortlinksRegistry(force){
+  if(shortlinksRegistryLoaded&&!force)return shortlinksRegistry;
+  shortlinksRegistryBusy=true;
+  try{
+    const data=await workerGetRequest("shortlinks",{admin:true});
+    shortlinksRegistry=window.DARKurzlink?DARKurzlink.normalizeRegistry(data.registry||{}):{version:1,nextSerial:1,entries:{}};
+    shortlinksRegistrySha=data.sha||"";
+    shortlinksRegistryLoaded=true;
+    return shortlinksRegistry;
+  }catch(e){
+    shortlinksRegistryLoaded=false;
+    throw e;
+  }finally{shortlinksRegistryBusy=false}
+}
+function newKurzlinkDraft(){
+  if(!window.DARKurzlink)return null;
+  kurzlinkSelectedCode="";
+  return DARKurzlink.emptyDraft({code:DARKurzlink.getNextCode(shortlinksRegistry)});
+}
+function loadKurzlinkDraftByCode(code){
+  if(!window.DARKurzlink||!code)return null;
+  kurzlinkSelectedCode=code;
+  return {...(DARKurzlink.findEntry(shortlinksRegistry,code)||{}),code};
+}
+function refreshKurzlinkDraft(){
+  if(kurzlinkSelectedCode)kurzlinkDraft=loadKurzlinkDraftByCode(kurzlinkSelectedCode);
+  else if(!kurzlinkDraft)kurzlinkDraft=newKurzlinkDraft();
+  if(kurzlinkDraft&&window.DARKurzlink){
+    const check=DARKurzlink.validateRedirectSave(kurzlinkDraft,shortlinksRegistry,{existingCode:kurzlinkDraft.code});
+    kurzlinkWarnings=[...(check.warnings||[]),...(check.errors||[])];
+  }else kurzlinkWarnings=[];
+}
+function readKurzlinkDraftFromUi(){
+  if(!kurzlinkDraft)return null;
+  const targetUrl=String(document.getElementById("kurzlinkTargetUrl")?.value||"").trim();
+  const th=hasTextFragmentAdmin(targetUrl)?"yes":String(document.getElementById("kurzlinkTextHighlight")?.value||kurzlinkDraft.textHighlight||"no");
+  return{
+    ...kurzlinkDraft,
+    code:String(document.getElementById("kurzlinkCode")?.value||kurzlinkDraft.code||"").trim().toLowerCase(),
+    targetUrl,
+    platform:String(document.getElementById("kurzlinkPlatform")?.value||"").trim()||DARKurzlink?.detectPlatform(targetUrl)||"",
+    textHighlight:th,
+    textHighlightNote:th==="not_possible"?String(document.getElementById("kurzlinkTextHighlightNote")?.value||"").trim():"",
+    adminNote:String(document.getElementById("kurzlinkAdminNote")?.value||"").trim(),
+    status:String(kurzlinkDraft.status||"unverified")
+  };
+}
+function hasTextFragmentAdmin(url){return /#:~:text=/i.test(String(url||""))}
+/* KURZLINK GUARD: eigener Tab — nur Weiterleitung zur Originalquelle, nicht an App-Beiträge gekoppelt */
+function renderKurzlinks(){
+  if(!window.DARKurzlink)return `<section class="empty">Kurzlink-Modul lädt…</section>`;
+  if(!kurzlinkDraft)kurzlinkDraft=newKurzlinkDraft();
+  const d=kurzlinkDraft||{};
+  const code=d.code||DARKurzlink.getNextCode(shortlinksRegistry);
+  const https=DARKurzlink.shortUrlHttps(code);
+  const igLine=DARKurzlink.formatInstagramLine(code);
+  const statusLabel=DARKurzlink.STATUS_LABELS[d.status]||"Ungeprüft";
+  const entries=DARKurzlink.listEntries(shortlinksRegistry);
+  const platformOpts=DARKurzlink.PLATFORM_OPTIONS.map(p=>`<option value="${esc(p)}" ${d.platform===p?"selected":""}>${esc(p)}</option>`).join("");
+  const listRows=entries.length?entries.map(e=>`<button class="quellen-result-row ${kurzlinkSelectedCode===e.code?"is-active":""}" data-kurzlink-pick="${esc(e.code)}" type="button"><span><span class="quellen-result-title">${esc(e.code)} · ${esc(DARKurzlink.STATUS_LABELS[e.status]||"")}</span><span class="quellen-result-meta">${esc(String(e.targetUrl||"").slice(0,72))}${String(e.targetUrl||"").length>72?"…":""}</span></span><span class="quellen-badges"><span class="quellen-badge">${esc(e.platform||"—")}</span></span></button>`).join(""):`<div class="empty" style="padding:12px">Noch keine Weiterleitungen. Unten den ersten Kurzlink anlegen.</div>`;
+  const thNote=d.textHighlight==="not_possible"||(!hasTextFragmentAdmin(d.targetUrl)&&d.status!=="verified")?`<label>Ausnahme (ohne Textmarkierung)<textarea class="field" id="kurzlinkTextHighlightNote" rows="2" placeholder="Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft.">${esc(d.textHighlightNote||"")}</textarea></label>`:"";
+  return `<section class="quellen-studio">
+    <div class="panel">
+      <div class="section-head"><h3>Kurzlinks — nur Weiterleitung</h3><span>${entries.length} aktiv</span></div>
+      <p class="ordner-lead">Deine Website ist die <strong>kurze Tür</strong> zur Originalquelle. Die Aussage steht <strong>nicht</strong> auf dar-al-tawhid.de — nur der Link. Für Instagram: <strong>${esc(igLine||"🔗 https://dar-al-tawhid.de/a1")}</strong></p>
+    </div>
+    <div class="quellen-grid">
+      <aside class="panel quellen-search-panel">
+        <div class="section-head"><h4>Alle Kurzlinks</h4></div>
+        <div class="quellen-result-list">${listRows}</div>
+        <button class="btn primary" id="kurzlinkNewBtn" type="button">+ Neuer Kurzlink (a${shortlinksRegistry.nextSerial||1})</button>
+        <button class="btn" id="kurzlinkReloadRegistryBtn" type="button">Liste neu laden</button>
+      </aside>
+      <div class="panel quellen-editor-panel">
+        <div class="section-head"><h4>${kurzlinkSelectedCode?`Bearbeiten: ${esc(code)}`:`Neu: ${esc(code)}`}</h4><span>${esc(statusLabel)}</span></div>
+        <div class="quellen-kurzlink-preview"><strong>Instagram / Channel:</strong> ${esc(igLine||"—")}<br><strong>Weiterleitung nach Prüfung:</strong> Islamweb · Shamela · al-Maktaba … mit Textmarkierung</div>
+        <label>Kurzcode<input class="field" id="kurzlinkCode" value="${esc(code)}" readonly></label>
+        <label>Ziel-Link (Originalquelle mit Textmarkierung)<input class="field" id="kurzlinkTargetUrl" type="url" value="${esc(d.targetUrl||"")}" placeholder="https://www.islamweb.net/…#:~:text=Start,Ende"></label>
+        <label>Quellenplattform<select class="field" id="kurzlinkPlatform"><option value="">— automatisch —</option>${platformOpts}</select></label>
+        ${thNote}
+        <label>Admin-Notiz (intern)<textarea class="field" id="kurzlinkAdminNote" rows="2" placeholder="Optional: Buch, Seite, Gelehrter …">${esc(d.adminNote||"")}</textarea></label>
+        <input type="hidden" id="kurzlinkTextHighlight" value="${esc(hasTextFragmentAdmin(d.targetUrl)?"yes":d.textHighlight||"no")}">
+        <div class="quellen-kurzlink-actions">
+          <button class="btn primary" type="button" id="kurzlinkCopyIgBtn">Instagram-Zeile kopieren</button>
+          <button class="btn" type="button" id="kurzlinkCopyHttpsBtn">Link kopieren</button>
+          <button class="btn" type="button" id="kurzlinkSaveBtn">Weiterleitung speichern</button>
+          <button class="btn" type="button" id="kurzlinkMarkVerifiedBtn">Als geprüft markieren &amp; aktivieren</button>
+          ${https?`<a class="btn" href="${esc(https)}" target="_blank" rel="noopener">Testen</a>`:""}
+          ${d.targetUrl?`<a class="btn" href="${esc(d.targetUrl)}" target="_blank" rel="noopener">Zielquelle</a>`:""}
+          <button class="btn danger" type="button" id="kurzlinkDisableBtn">Deaktivieren</button>
+        </div>
+        <div class="upload-status" id="kurzlinkPanelStatus">${esc(kurzlinkPanelStatus||"Ziel-Link einfügen → speichern → für Instagram kopieren.")}</div>
+      </div>
+    </div>
+  </section>`;
+}
 async function loadQuellenPost(filename){
   if(!filename)return;
   setQuellenEditorStatus("Lade Beitrag…");
@@ -1580,7 +1684,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -1595,6 +1699,7 @@ function renderShell(){
   updateAdminBackButton();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
+  if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -1604,9 +1709,10 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
+    if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -1653,7 +1759,8 @@ function renderStart(ctx){
     ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
     ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
-    ${folderCard("③b","Quellen","PDF/Bild/Scan nachträglich — auch pro Slide.","quellen","Quellen-Manager")}
+    ${folderCard("③b","Quellen","PDF/Bild/Scan an Beiträgen — ohne Kurzlink.","quellen","Quellen-Dateien")}
+    ${folderCard("③c","Kurzlinks","a1 → Islamweb/Shamela — nur Weiterleitung für Instagram.","kurzlinks","Weiterleitung")}
     ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
@@ -2480,7 +2587,7 @@ function bindQuellenUi(){
   };
   const saveBtn=document.getElementById("quellenSaveBtn");if(saveBtn)saveBtn.onclick=async()=>{
     if(!quellenEdit.filename)return;
-    const markdown=normalizeMarkdownForStorage(document.getElementById("quellenEditor")?.value||quellenEdit.markdown);
+    let markdown=normalizeMarkdownForStorage(document.getElementById("quellenEditor")?.value||quellenEdit.markdown);
     if(!markdown.trim()){toast("Markdown ist leer");return}
     const check=validateBeforeSourceSave("quellen");
     if(!check.ok){toast(check.errors[0]||"Validierung fehlgeschlagen");setQuellenEditorStatus(`Blockiert: ${check.errors.join(" · ")}`);return}
@@ -2505,6 +2612,73 @@ function bindQuellenUi(){
       toast(e.message||"Speichern fehlgeschlagen");
     }finally{saveBtn.disabled=false}
   };
+}
+function bindKurzlinksUi(){
+  async function copyKurzlinkText(text,label){
+    try{await navigator.clipboard.writeText(String(text||""));toast(label||"Kopiert")}catch(e){toast("Kopieren fehlgeschlagen")}
+  }
+  async function persistKurzlinkDraft(statusOverride){
+    if(!window.DARKurzlink)return;
+    let draft=readKurzlinkDraftFromUi();
+    if(!draft)return;
+    if(statusOverride){
+      draft.status=statusOverride;
+      if(statusOverride==="verified")draft.verifiedAt=new Date().toISOString();
+    }
+    const forVerified=statusOverride==="verified"||draft.status==="verified";
+    const skipStrict=statusOverride==="disabled"||statusOverride==="error";
+    const check=DARKurzlink.validateRedirectSave(draft,shortlinksRegistry,{existingCode:draft.code,forVerified:skipStrict?false:forVerified});
+    kurzlinkWarnings=[...(check.warnings||[]),...(check.errors||[])];
+    if(!skipStrict&&!check.ok&&statusOverride!=="error"){kurzlinkPanelStatus=check.errors.join(" · ");toast(check.errors[0]||"Weiterleitung unvollständig");renderShell();return}
+    if(skipStrict&&!draft.code){toast("Kurzcode fehlt");return}
+    kurzlinkPanelStatus="Speichere Weiterleitung…";
+    try{
+      const result=await workerPostRequest("shortlinks/save",{entry:draft,registrySha:shortlinksRegistrySha});
+      shortlinksRegistry=window.DARKurzlink.normalizeRegistry(result.registry||shortlinksRegistry);
+      shortlinksRegistryLoaded=true;
+      kurzlinkDraft=result.entry||draft;
+      kurzlinkSelectedCode=kurzlinkDraft.code||kurzlinkSelectedCode;
+      kurzlinkPanelStatus=`${kurzlinkDraft.code} gespeichert · Commit ${String(result.commitSha||"").slice(0,7)}`;
+      toast(`Kurzlink ${kurzlinkDraft.code} gespeichert`);
+      addAdminLog("Kurzlink","Weiterleitung gespeichert",kurzlinkDraft.code);
+      renderShell();
+    }catch(e){
+      kurzlinkPanelStatus=`Fehler: ${e.message||e}`;
+      toast(e.message||"Speichern fehlgeschlagen");
+      renderShell();
+    }
+  }
+  document.querySelectorAll("[data-kurzlink-pick]").forEach(btn=>btn.onclick=()=>{
+    const code=btn.getAttribute("data-kurzlink-pick");
+    if(!code)return;
+    kurzlinkDraft=loadKurzlinkDraftByCode(code);
+    kurzlinkPanelStatus="";
+    renderShell();
+  });
+  const kurzlinkNew=document.getElementById("kurzlinkNewBtn");if(kurzlinkNew)kurzlinkNew.onclick=()=>{kurzlinkDraft=newKurzlinkDraft();kurzlinkPanelStatus="Neuer Kurzlink — Ziel-URL einfügen und speichern.";renderShell()};
+  const kurzlinkReload=document.getElementById("kurzlinkReloadRegistryBtn");if(kurzlinkReload)kurzlinkReload.onclick=async()=>{
+    shortlinksRegistryLoaded=false;kurzlinkPanelStatus="Lade Liste…";
+    try{await ensureShortlinksRegistry(true);refreshKurzlinkDraft();kurzlinkPanelStatus="Liste aktualisiert."}catch(e){kurzlinkPanelStatus=`Fehler: ${e.message||e}`}
+    renderShell();
+  };
+  const kurzlinkCopyIg=document.getElementById("kurzlinkCopyIgBtn");if(kurzlinkCopyIg)kurzlinkCopyIg.onclick=()=>{
+    const d=readKurzlinkDraftFromUi()||kurzlinkDraft;
+    copyKurzlinkText(DARKurzlink.formatInstagramLine(d?.code||""),"Instagram-Zeile kopiert");
+  };
+  const kurzlinkCopyHttps=document.getElementById("kurzlinkCopyHttpsBtn");if(kurzlinkCopyHttps)kurzlinkCopyHttps.onclick=()=>{
+    const d=readKurzlinkDraftFromUi()||kurzlinkDraft;
+    copyKurzlinkText(d?.code?DARKurzlink.shortUrlHttps(d.code):"","Link kopiert");
+  };
+  const kurzlinkTarget=document.getElementById("kurzlinkTargetUrl");if(kurzlinkTarget)kurzlinkTarget.onchange=()=>{
+    const p=DARKurzlink?.detectPlatform(kurzlinkTarget.value);
+    const sel=document.getElementById("kurzlinkPlatform");
+    if(p&&sel&&!sel.value)sel.value=p;
+    kurzlinkDraft=readKurzlinkDraftFromUi();
+    renderShellPreserveField("kurzlinkTargetUrl",()=>{});
+  };
+  const kurzlinkSave=document.getElementById("kurzlinkSaveBtn");if(kurzlinkSave)kurzlinkSave.onclick=()=>persistKurzlinkDraft(null);
+  const kurzlinkVerified=document.getElementById("kurzlinkMarkVerifiedBtn");if(kurzlinkVerified)kurzlinkVerified.onclick=async()=>{await persistKurzlinkDraft("verified")};
+  const kurzlinkDisable=document.getElementById("kurzlinkDisableBtn");if(kurzlinkDisable)kurzlinkDisable.onclick=async()=>{if(!confirm("Kurzlink wirklich deaktivieren?"))return;await persistKurzlinkDraft("disabled")};
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));
@@ -2542,6 +2716,7 @@ function bindUi(){
   bindRankCards();
   bindOrdnerUi();
   bindQuellenUi();
+  bindKurzlinksUi();
   bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
 }
 function bindCommandCenterForms(){

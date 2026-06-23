@@ -372,6 +372,8 @@
   function urlLooksBroken(url) {
     const u = String(url || "").trim();
     if (!u) return true;
+    if (/^https?:\/\/(www\.)?dar-al-tawhid\.de\/a\d+\/?$/i.test(u)) return false;
+    if (/^dar-al-tawhid\.de\/a\d+\/?$/i.test(u)) return false;
     if (/^https?:\/\//i.test(u)) return false;
     if (/^\/assets\/sources\//i.test(u) || /^assets\/sources\//i.test(u)) return false;
     if (/^\/sources\//i.test(u)) return false;
