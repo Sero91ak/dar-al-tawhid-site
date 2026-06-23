@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-18T12:00:00.000Z",
+  "updatedAt": "2026-06-23T10:20:39.602Z",
   "nisab": {
     "goldGrams": 85,
     "silverGrams": 595,
@@ -10,13 +10,13 @@
   "zakatRate": 0.025,
   "hawlDaysLunar": 354,
   "prices": {
-    "goldPerGramEur": null,
-    "silverPerGramEur": null,
+    "goldPerGramEur": 116.35,
+    "silverPerGramEur": 1.76,
     "currency": "EUR",
-    "source": "",
-    "verifiedAt": "",
-    "verifiedBy": "",
-    "active": false,
+    "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
+    "verifiedAt": "2026-06-23T10:20:39.602Z",
+    "verifiedBy": "price-engine",
+    "active": true,
     "apiFallback": false
   },
   "priceHistory": [],
@@ -43,7 +43,10 @@
       "trust": "mutawatir",
       "verified": true,
       "active": true,
-      "ruleIds": ["zakat-rate", "zakat-wealth"]
+      "ruleIds": [
+        "zakat-rate",
+        "zakat-wealth"
+      ]
     },
     {
       "id": "sunnah-nisab-gold",
@@ -57,7 +60,9 @@
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": ["nisab-gold"]
+      "ruleIds": [
+        "nisab-gold"
+      ]
     },
     {
       "id": "sunnah-nisab-silver",
@@ -71,7 +76,9 @@
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": ["nisab-silver"]
+      "ruleIds": [
+        "nisab-silver"
+      ]
     },
     {
       "id": "sunnah-zakat-rate",
@@ -85,7 +92,9 @@
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": ["zakat-rate"]
+      "ruleIds": [
+        "zakat-rate"
+      ]
     },
     {
       "id": "sunnah-hawl",
@@ -99,7 +108,9 @@
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": ["hawl"]
+      "ruleIds": [
+        "hawl"
+      ]
     },
     {
       "id": "fiqh-jewelry-ikhtilaf",
@@ -113,7 +124,9 @@
       "trust": "fiqh",
       "verified": true,
       "active": true,
-      "ruleIds": ["gold-jewelry"]
+      "ruleIds": [
+        "gold-jewelry"
+      ]
     },
     {
       "id": "fiqh-debts-short",
@@ -127,7 +140,9 @@
       "trust": "fiqh",
       "verified": true,
       "active": true,
-      "ruleIds": ["debts-deductible"]
+      "ruleIds": [
+        "debts-deductible"
+      ]
     }
   ],
   "rules": [
@@ -136,7 +151,10 @@
       "name": "Zakāt-Satz 2,5 %",
       "module": "core",
       "formula": "zakātpflichtiges Vermögen × 0,025",
-      "sourceIds": ["quran-zakat-obligation", "sunnah-zakat-rate"],
+      "sourceIds": [
+        "quran-zakat-obligation",
+        "sunnah-zakat-rate"
+      ],
       "active": true,
       "verified": true
     },
@@ -145,7 +163,9 @@
       "name": "Niṣāb Gold 85 g",
       "module": "nisab",
       "formula": "85 g × Goldpreis/g",
-      "sourceIds": ["sunnah-nisab-gold"],
+      "sourceIds": [
+        "sunnah-nisab-gold"
+      ],
       "active": true,
       "verified": true
     },
@@ -154,7 +174,9 @@
       "name": "Niṣāb Silber 595 g",
       "module": "nisab",
       "formula": "595 g × Silberpreis/g",
-      "sourceIds": ["sunnah-nisab-silver"],
+      "sourceIds": [
+        "sunnah-nisab-silver"
+      ],
       "active": true,
       "verified": true
     },
@@ -163,7 +185,9 @@
       "name": "Ḥawl (Mondjahr)",
       "module": "hawl",
       "formula": "354 Tage seit Niṣāb-Erreichen",
-      "sourceIds": ["sunnah-hawl"],
+      "sourceIds": [
+        "sunnah-hawl"
+      ],
       "active": true,
       "verified": true
     },
@@ -172,7 +196,9 @@
       "name": "Gold / Schmuck",
       "module": "gold",
       "formula": "Goldwert zum Marktwert",
-      "sourceIds": ["fiqh-jewelry-ikhtilaf"],
+      "sourceIds": [
+        "fiqh-jewelry-ikhtilaf"
+      ],
       "active": true,
       "verified": true,
       "ikhtilaf": true
@@ -182,7 +208,9 @@
       "name": "Abzugsfähige Schulden",
       "module": "debts",
       "formula": "Vermögen − fällige kurzfristige Schulden",
-      "sourceIds": ["fiqh-debts-short"],
+      "sourceIds": [
+        "fiqh-debts-short"
+      ],
       "active": true,
       "verified": true
     }
