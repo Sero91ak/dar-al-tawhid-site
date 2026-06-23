@@ -96,6 +96,44 @@ export function extractShortlinkFromMarkdown(markdown) {
   return m ? normalizeCode(m[1]) : "";
 }
 
+export function validateRedirectShortlinkEntry(entry, registry, { forVerified = false, existingCode = "" } = {}) {
+  const errors = [];
+  const warnings = [];
+  const e = { ...(entry || {}) };
+  const code = normalizeCode(e.code);
+  const reg = normalizeShortlinksRegistry(registry);
+
+  if (!code) errors.push("Kurzcode fehlt");
+  else if (!CODE_RE.test(code)) errors.push("Kurzcode ungültig");
+  else if (reg.entries[code] && normalizeCode(existingCode) !== code) errors.push(`Kurzcode ${code} ist bereits vergeben`);
+
+  const targetUrl = String(e.targetUrl || "").trim();
+  if (!targetUrl) errors.push("Ziel-Link fehlt");
+  else if (!isAllowedTargetUrl(targetUrl)) errors.push("Quelle nicht erlaubt");
+
+  const platform = String(e.platform || "").trim();
+  if (!platform) warnings.push("Quellenplattform fehlt — bitte wählen");
+
+  const th = hasTextFragment(targetUrl) ? "yes" : String(e.textHighlight || "no");
+  if (forVerified && targetUrl && !hasTextFragment(targetUrl) && !isLocalSourcePath(targetUrl)) {
+    if (th !== "not_possible" || !String(e.textHighlightNote || "").trim()) {
+      errors.push("Ziel-Link braucht Textmarkierung (#:~:text=…) oder bestätigte Ausnahme");
+    }
+  }
+
+  const status = String(e.status || "unverified");
+  if (forVerified && status !== "verified") {
+    errors.push("Erst als geprüft markieren, dann leitet der Link zur Quelle weiter");
+  }
+
+  return {
+    ok: !errors.length,
+    errors,
+    warnings,
+    entry: { ...e, code, targetUrl, platform, textHighlight: th, status }
+  };
+}
+
 export function validateShortlinkEntry(entry, registry, { forPublish = false, existingCode = "" } = {}) {
   const errors = [];
   const e = { ...(entry || {}) };
@@ -283,7 +321,11 @@ export async function saveShortlinkEntry(env, input, { githubGet, githubPut, git
   if (merged.status === "verified" && !merged.verifiedAt) merged.verifiedAt = now;
   if (merged.status !== "verified") merged.verifiedAt = merged.status === "verified" ? merged.verifiedAt || now : "";
 
-  const check = validateShortlinkEntry(merged, registry, { existingCode: code });
+  const forVerified = merged.status === "verified";
+  const skipStrict = merged.status === "disabled" || merged.status === "error";
+  const check = skipStrict
+    ? { ok: Boolean(code), errors: code ? [] : ["Kurzcode fehlt"], entry: merged }
+    : validateRedirectShortlinkEntry(merged, registry, { existingCode: code, forVerified });
   if (!check.ok) throw new Error(check.errors.join(" · "));
 
   const nextRegistry = normalizeShortlinksRegistry(registry);

@@ -73,6 +73,18 @@ assert(/deaktiviert/i.test(html), "Test 7: disabled page text");
 const htmlOk = K.buildRedirectHtml({ code: "a1", status: "verified", targetUrl: "https://www.islamweb.net/x" });
 assert(/location\.replace/i.test(htmlOk), "Test 8: verified redirect html");
 
+assert(K.formatInstagramLine("a1") === "🔗 https://dar-al-tawhid.de/a1", "Test 9: Instagram line format");
+
+const redirectEntry = {
+  code: "a2",
+  targetUrl: "https://www.shamela.ws/book/1#:~:text=Start,Ende",
+  platform: "Shamela",
+  textHighlight: "yes",
+  status: "verified"
+};
+const rv = K.validateRedirectSave(redirectEntry, registry, { existingCode: "a2", forVerified: true });
+assert(rv.ok, "Test 10: redirect-only verified entry passes");
+
 if (failed) {
   console.error(`\n${failed} Kurzlink-Test(s) fehlgeschlagen.`);
   process.exit(1);

@@ -349,6 +349,53 @@
     return { ok: !errors.length, errors, entry: { ...e, code, targetUrl, status: e.status || "unverified" } };
   }
 
+  function formatInstagramLine(code) {
+    const c = normalizeCode(code);
+    return c ? `🔗 ${shortUrlHttps(c)}` : "";
+  }
+
+  function validateRedirectSave(entry, registry, { existingCode = "", forVerified = false } = {}) {
+    const errors = [];
+    const warnings = [];
+    const e = { ...(entry || {}) };
+    const code = normalizeCode(e.code);
+    const reg = normalizeRegistry(registry);
+
+    if (!code) errors.push("Kurzcode fehlt");
+    else if (!CODE_RE.test(code)) errors.push("Kurzcode ungültig");
+    else {
+      const taken = reg.entries[code];
+      if (taken && normalizeCode(existingCode) !== code) errors.push(`Kurzcode ${code} ist bereits vergeben`);
+    }
+
+    const targetUrl = String(e.targetUrl || "").trim();
+    if (!targetUrl) errors.push("Ziel-Link fehlt (Islamweb, Shamela, al-Maktaba …)");
+    else if (!isAllowedTargetUrl(targetUrl)) errors.push("Quelle nicht erlaubt — nur geprüfte Domains");
+
+    const platform = String(e.platform || "").trim() || detectPlatform(targetUrl);
+    if (!platform) warnings.push("Quellenplattform konnte nicht erkannt werden — bitte wählen");
+
+    const th = hasTextFragment(targetUrl) ? "yes" : String(e.textHighlight || "no");
+    if (forVerified && targetUrl && !hasTextFragment(targetUrl) && !isLocalSourcePath(targetUrl)) {
+      if (th !== "not_possible" || !String(e.textHighlightNote || "").trim()) {
+        errors.push("Für Instagram: Ziel-Link braucht Textmarkierung (#:~:text=…) oder bestätigte Ausnahme");
+      }
+    }
+
+    if (forVerified && String(e.status || "unverified") !== "verified") {
+      errors.push("Erst als geprüft markieren, dann leitet der Link zur Quelle weiter");
+    }
+
+    warnings.push(...findDuplicateWarnings(e, reg, code));
+
+    return {
+      ok: !errors.length,
+      errors,
+      warnings,
+      entry: { ...e, code, targetUrl, platform, textHighlight: th, status: e.status || "unverified" }
+    };
+  }
+
   function emptyDraft({ code, postFilename, postId, scholar, book, quote } = {}) {
     return {
       code: normalizeCode(code) || "",
@@ -518,6 +565,8 @@
     findEntryForPost,
     extractShortlinkFromMarkdown,
     formatSourceLine,
+    formatInstagramLine,
+    validateRedirectSave,
     injectShortlinkIntoMarkdown,
     deriveKurzlinkFromPost,
     buildChannelShareText,

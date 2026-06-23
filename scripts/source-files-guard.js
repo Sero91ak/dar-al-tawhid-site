@@ -69,12 +69,13 @@ function runSourceFilesGuard() {
   mustInclude("admin/index.html kurzlink", admin, [
     "KURZLINK GUARD",
     "kurzlink-manager.js",
-    "renderKurzlinkPanel",
-    "Dein Kurzlink für diesen Beitrag",
+    "renderKurzlinks",
+    "Kurzlinks — nur Weiterleitung",
     "shortlinks/save",
-    "shortlinks/auto",
-    "Instagram-Channel-Beitrag kopieren",
-    "shortlinks/auto"
+    "formatInstagramLine",
+    "validateRedirectSave",
+    "Instagram-Zeile kopieren",
+    "bindKurzlinksUi",
   ]);
 
   mustInclude("admin/kurzlink-manager.js", read("admin/kurzlink-manager.js"), [
