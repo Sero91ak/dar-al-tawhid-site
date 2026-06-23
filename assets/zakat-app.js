@@ -188,46 +188,54 @@
     return (cfg?.sources || []).filter((s) => s && s.active !== false && s.verified !== false);
   }
 
+  function sourceTabsOf(s) {
+    if (Array.isArray(s.sourceTabs) && s.sourceTabs.length) return s.sourceTabs;
+    if (s.category === "Qurʾān") return ["quran"];
+    if (s.category === "Salaf") return ["salaf"];
+    if (s.category === "Āthār") return ["athar"];
+    if (s.category === "Fiqh-Anwendung") return ["fiqh"];
+    if (s.category === "Sunnah") return s.arabic ? ["sunnah", "athar", "salaf"] : ["sunnah", "salaf"];
+    return ["sunnah"];
+  }
+
   function sourcesForTab(sources, tab) {
-    switch (tab) {
-      case "quran":
-        return sources.filter((s) => s.category === "Qurʾān");
-      case "sunnah":
-        return sources.filter((s) => s.category === "Sunnah");
-      case "salaf":
-        return sources.filter((s) => s.category === "Sunnah");
-      case "athar":
-        return sources.filter((s) => s.category === "Sunnah" && s.arabic);
-      case "fiqh":
-        return sources.filter((s) => s.category === "Fiqh-Anwendung");
-      default:
-        return sources;
-    }
+    return sources.filter((s) => sourceTabsOf(s).includes(tab));
   }
 
   function sourceTabIntro(tab) {
     const intros = {
-      quran: "Grundlage aus dem Qurʾān — die Pflicht zur Zakāt aus dem Vermögen.",
-      sunnah: "Authentische Überlieferungen des Propheten ﷺ zu Niṣāb, Satz und Ḥawl.",
-      salaf: "So verstanden und lehrten die Salaf as-Ṣāliḥīn diese Sunnah — gesichert in Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim.",
-      athar: "Arabische Texte der gesicherten Āthār — zum direkten Lesen der Überlieferung.",
+      quran: "Grundlage aus dem Qurʾān — die Pflicht zur Zakāt und Reinigung des Vermögens.",
+      sunnah: "Authentische Sunnah des Propheten ﷺ — Niṣāb, Satz von 2,5 % und Ḥawl.",
+      salaf: "Verständnis und Praxis der Salaf as-Ṣāliḥīn nach Qurʾān und Ṣaḥīḥ-Sunnah.",
+      athar: "Gesicherte Āthār in arabischer Überlieferung — Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim.",
       fiqh: "Vorsichtige Fiqh-Anwendung bei bekanntem Ikhtilāf — transparent gekennzeichnet."
     };
     return intros[tab] || "";
   }
 
+  function trustLabel(s) {
+    if (s.trust === "sahih") return "Ṣaḥīḥ";
+    if (s.trust === "mutawatir") return "Mutawātir";
+    if (s.trust === "fiqh") return "Fiqh";
+    if (s.trust === "manhaj") return "Manhaj";
+    if (s.trust === "ijma") return "Ijmāʿ";
+    return "";
+  }
+
   function renderSourceCard(s, tab) {
-    const trust = s.trust === "sahih" ? "Ṣaḥīḥ" : s.trust === "mutawatir" ? "Mutawātir" : s.trust === "fiqh" ? "Fiqh" : "";
-    const showArabic = tab === "athar" || tab === "quran" || tab === "sunnah" || tab === "salaf";
+    const trust = trustLabel(s);
+    const trustCls = s.trust === "fiqh" ? "fiqh" : s.trust === "manhaj" || s.trust === "ijma" ? "manhaj" : "";
+    const showArabic = tab === "athar" || tab === "quran" || (tab === "sunnah" && s.arabic) || (tab === "salaf" && s.arabic);
+    const note = s.explanation && s.german && s.explanation !== s.german ? s.explanation : "";
     return `<article class="zakat-source-card">
       <div class="zakat-source-meta">
         <span class="zakat-source-cat">${esc(s.work || s.category)}</span>
-        ${trust ? `<span class="zakat-source-trust">${esc(trust)}</span>` : ""}
+        ${trust ? `<span class="zakat-source-trust ${trustCls}">${esc(trust)}</span>` : ""}
         <span class="zakat-source-ref">${esc(s.reference || "")}</span>
       </div>
       ${showArabic && s.arabic ? `<div class="zakat-ar">${esc(s.arabic)}</div>` : ""}
       <p class="zakat-source-text">${esc(s.german || s.explanation || "")}</p>
-      ${s.explanation && s.german ? `<p class="zakat-source-note">${esc(s.explanation)}</p>` : ""}
+      ${note ? `<p class="zakat-source-note">${esc(note)}</p>` : ""}
       ${s.link ? `<a class="zakat-source-link" href="${esc(s.link)}" target="_blank" rel="noopener">Quelle öffnen ↗</a>` : ""}
     </article>`;
   }
@@ -251,14 +259,14 @@
       <span class="zakat-muted">Tippen zum Lesen</span>
     </div>`;
 
-    return `<section class="zakat-panel zakat-sources-hub">
+    return `<section class="zakat-panel zakat-sources-hub premium-surface">
       <button type="button" class="zakat-sources-hub-head" id="zakatToggleSources" aria-expanded="${zakatSourcesOpen}">
         <div class="zakat-sources-hub-copy">
           <span class="zakat-sources-hub-kicker">Authentische Quellen</span>
           <h3>Qurʾān · Sunnah · Salaf · Āthār</h3>
           <p>Geprüfte Belege — zum Lesen antippen</p>
         </div>
-        <span class="zakat-sources-chevron ${zakatSourcesOpen ? "open" : ""}" aria-hidden="true">›</span>
+        <span class="zakat-sources-chevron ${zakatSourcesOpen ? "open" : ""}" aria-hidden="true"></span>
       </button>
       ${body}
     </section>`;
@@ -301,7 +309,7 @@
       : "";
 
     const resultBlock = result
-      ? `<section class="zakat-panel zakat-result zakat-panel-accent">
+      ? `<section class="zakat-panel zakat-result premium-surface">
       <div class="zakat-panel-head"><h3>Ergebnis</h3><div class="zakat-head-badges">${result.previewOnly ? `<span class="zakat-pill preview">Vorschau</span>` : ""}${result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}</div></div>
       ${resultBanner(result)}
       ${resultHero}
@@ -323,7 +331,7 @@
       </div>
       ${warnings}
     </section>
-    <section class="zakat-panel">
+    <section class="zakat-panel premium-surface">
       <div class="zakat-panel-head"><h3>Rechenweg</h3><span class="zakat-rate-tag">${global.DARZakat.formatNumber(result.ratePercent, 2)} %</span></div>
       <div class="zakat-steps">${renderZakatSteps(result)}</div>
     </section>`
@@ -331,7 +339,7 @@
 
     const historyBlock =
       session && zakatHistory.length
-        ? `<section class="zakat-panel"><div class="zakat-panel-head"><h3>Mein Verlauf</h3><span>${zakatHistory.length}</span></div>
+        ? `<section class="zakat-panel premium-surface"><div class="zakat-panel-head"><h3>Mein Verlauf</h3><span>${zakatHistory.length}</span></div>
       <div class="zakat-history">${zakatHistory
           .map(
             (h) => `<div class="zakat-history-row"><span>${esc(h.zakat_year || h.calculated_at?.slice(0, 10) || "")}</span><b>${global.DARZakat.formatMoney(h.zakat_due, result?.currency || "EUR")}</b><button type="button" class="zakat-mini-btn" data-zakat-delete="${esc(h.id)}">Löschen</button></div>`
@@ -363,7 +371,7 @@
     ${resultBlock}
     <div class="zakat-flow-label">Eingaben</div>
     <div class="zakat-input-stack">
-    <section class="zakat-panel">
+    <section class="zakat-panel premium-surface">
       <div class="zakat-panel-head"><h3>1 · Liquide Mittel</h3></div>
       <div class="zakat-form-grid">
         <label>Bargeld<input class="field zakat-field" id="zakatCash" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(zakatInput.cash)}" placeholder="0,00"></label>
@@ -384,7 +392,7 @@
       <div class="zakat-subsection-label">Schulden</div>
       <label>Kurzfristig fällige Schulden<input class="field zakat-field" id="zakatDebts" type="number" min="0" step="0.01" value="${esc(zakatInput.debtsDue)}" placeholder="0,00"></label>
     </section>
-    <section class="zakat-panel">
+    <section class="zakat-panel premium-surface">
       <div class="zakat-panel-head"><h3>2 · Niṣāb &amp; Echtzeitpreise</h3>${priceBadge(prices)}</div>
       ${pricePanelIntro}
       <div class="zakat-price-grid">${renderPriceRow("Gold", goldMeta, 85, "EUR")}${renderPriceRow("Silber", silverMeta, 595, "EUR")}</div>
@@ -397,7 +405,7 @@
         </div>
       </details>
     </section>
-    <section class="zakat-panel">
+    <section class="zakat-panel premium-surface">
       <div class="zakat-panel-head"><h3>3 · Ḥawl</h3></div>
       <div class="zakat-form-grid">
         <label>Niṣāb erreicht seit<input class="field zakat-field" id="zakatNisabSince" type="date" value="${esc(zakatInput.nisabSinceDate)}"></label>
