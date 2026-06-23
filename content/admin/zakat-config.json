@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "updatedAt": "2026-06-18T12:00:00.000Z",
+  "version": 4,
+  "updatedAt": "2026-06-18T14:00:00.000Z",
   "nisab": {
     "goldGrams": 85,
     "silverGrams": 595,
@@ -93,9 +93,7 @@
       "id": "sunnah-nisab-gold",
       "category": "Sunnah",
       "sourceTabs": [
-        "sunnah",
-        "athar",
-        "salaf"
+        "sunnah"
       ],
       "arabic": "لَيْسَ فِي أَقَلَّ مِنْ عِشْرِينَ دِينَارًا صَدَقَةٌ",
       "german": "Bei weniger als zwanzig Dīnār ist keine Sadaqa fällig.",
@@ -114,9 +112,7 @@
       "id": "sunnah-nisab-silver",
       "category": "Sunnah",
       "sourceTabs": [
-        "sunnah",
-        "athar",
-        "salaf"
+        "sunnah"
       ],
       "arabic": "فِي أَرْبَعِينَ دِرْهَمًا",
       "german": "Bei vierzig Dirham … (Niṣāb Silber — vollständig: keine Zakāt unter 200 Dirham ≈ 595 g Silber).",
@@ -135,9 +131,7 @@
       "id": "sunnah-zakat-rate",
       "category": "Sunnah",
       "sourceTabs": [
-        "sunnah",
-        "athar",
-        "salaf"
+        "sunnah"
       ],
       "arabic": "فِي كُلِّ أَرْبَعِينَ دِرْهَمًا دِرْهَمٌ",
       "german": "Bei vierzig Dirham ist ein Dirham (2,5 %) fällig.",
@@ -156,9 +150,7 @@
       "id": "sunnah-hawl",
       "category": "Sunnah",
       "sourceTabs": [
-        "sunnah",
-        "athar",
-        "salaf"
+        "sunnah"
       ],
       "arabic": "لَيْسَ فِي مَالٍ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ",
       "german": "An Vermögen ist keine Zakāt fällig, bis ein Jahr darüber vergangen ist (Ḥawl).",
@@ -177,8 +169,7 @@
       "id": "athar-abu-bakr-zakat",
       "category": "Āthār",
       "sourceTabs": [
-        "athar",
-        "salaf"
+        "athar"
       ],
       "arabic": "وَاللَّهِ لأُقَاتِلَنَّ مَنْ فَرَّقَ بَيْنَ الصَّلاَةِ وَالزَّكَاةِ، فَإِنَّ الزَّكَاةَ حَقُّ الْمَالِ",
       "german": "Bei Allah, ich werde bekämpfen, wer zwischen Gebet und Zakāt unterscheidet — denn die Zakāt ist das rechtmäßige Recht am Vermögen.",
@@ -217,8 +208,7 @@
       "id": "athar-ibn-umar-zakat-purifier",
       "category": "Āthār",
       "sourceTabs": [
-        "athar",
-        "salaf"
+        "athar"
       ],
       "arabic": "فَلَمَّا أُنْزِلَتْ جَعَلَهَا اللَّهُ طُهْرًا لِلأَمْوَالِ",
       "german": "Als die Zakāt offenbart wurde, machte Allah sie zu einer Reinigung für die Vermögen.",
@@ -234,33 +224,13 @@
       ]
     },
     {
-      "id": "salaf-ibn-abbas-tafsir-zakat",
-      "category": "Salaf",
-      "sourceTabs": [
-        "salaf"
-      ],
-      "arabic": "أَنَّ اللَّهَ افْتَرَضَ عَلَيْهِمْ صَدَقَةً فِي أَمْوَالِهِمْ، تُؤْخَذُ مِنْ أَغْنِيَائِهِمْ وَتُرَدُّ عَلَى فُقَرَائِهِمْ",
-      "german": "Allah hat ihnen eine Sadaqa (Zakāt) auf ihrem Besitz verpflichtet, die von den Reichen genommen und den Armen zurückgegeben wird.",
-      "explanation": "Der Salaf Ibn ʿAbbās (رضي الله عنه) überliefert die Anordnung des Propheten ﷺ an Muʿādh: Im Qurʾān und in der Sunnah meint „Sadaqa“ hier die gesetzliche Zakāt.",
-      "reference": "Ṣaḥīḥ al-Bukhārī 1395",
-      "work": "Ibn ʿAbbās · Salaf",
-      "link": "https://sunnah.com/bukhari:1395",
-      "trust": "sahih",
-      "verified": true,
-      "active": true,
-      "ruleIds": [
-        "zakat-wealth"
-      ]
-    },
-    {
       "id": "salaf-ibn-qudamah-hawl",
-      "category": "Salaf",
+      "category": "Fiqh-Anwendung",
       "sourceTabs": [
-        "salaf",
         "fiqh"
       ],
-      "arabic": "لَيْسَ فِي الْمَالِ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ",
-      "german": "An Vermögen ist keine Zakāt fällig, bis ein Jahr (Ḥawl) darüber vergangen ist — dies ist Konsens (Ijmāʿ) der Gelehrten.",
+      "arabic": "",
+      "german": "An Vermögen ist keine Zakāt fällig, bis ein Jahr (Ḥawl) darüber vergangen ist — Ibn Qudāmah fasst dies als Ijmāʿ der Gelehrten zusammen.",
       "explanation": "Ibn Qudāmah (رحمه الله) führt den Ḥawl als verbindliche Regel aus Qurʾān, Sunnah und Ijmāʿ an — Grundlage der Jahresberechnung in dieser App.",
       "reference": "Ibn Qudāmah · al-Mughnī 4/234",
       "work": "Ibn Qudāmah al-Maqdisī",
@@ -276,8 +246,7 @@
       "id": "salaf-nisab-silver-preference",
       "category": "Salaf",
       "sourceTabs": [
-        "salaf",
-        "fiqh"
+        "salaf"
       ],
       "arabic": "",
       "german": "Wenn Gold- und Silber-Niṣāb in ihrem Geldwert auseinanderliegen, ist der niedrigere Niṣāb (Silber) sicherer — so lehrten viele Gelehrten der Salaf und der späteren Madhāhib.",

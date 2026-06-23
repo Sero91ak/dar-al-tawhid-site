@@ -25,6 +25,20 @@
     { id: "athar", label: "Āthār", short: "Āthār" },
     { id: "fiqh", label: "Fiqh", short: "Fiqh" }
   ];
+
+  const TAB_SOURCE_ORDER = {
+    quran: ["quran-zakat-obligation", "quran-zakat-righteous"],
+    sunnah: ["sunnah-nisab-gold", "sunnah-nisab-silver", "sunnah-zakat-rate", "sunnah-hawl"],
+    athar: ["athar-abu-bakr-zakat", "athar-ibn-abbas-zakat-yemen", "athar-ibn-umar-zakat-purifier"],
+    salaf: ["salaf-ahmad-sahihayn", "salaf-nisab-silver-preference"],
+    fiqh: [
+      "fiqh-nisab-standard-kasani",
+      "salaf-ibn-qudamah-hawl",
+      "fiqh-debts-deductible",
+      "fiqh-jewelry-hanafi",
+      "fiqh-jewelry-majority"
+    ]
+  };
   let zakatHistory = [];
   let zakatDebounceTimer = null;
 
@@ -211,12 +225,21 @@
     if (s.category === "Salaf") return ["salaf"];
     if (s.category === "Āthār") return ["athar"];
     if (s.category === "Fiqh-Anwendung") return ["fiqh"];
-    if (s.category === "Sunnah") return s.arabic ? ["sunnah", "athar", "salaf"] : ["sunnah", "salaf"];
+    if (s.category === "Sunnah") return ["sunnah"];
     return ["sunnah"];
   }
 
   function sourcesForTab(sources, tab) {
-    return sources.filter((s) => sourceTabsOf(s).includes(tab));
+    const list = sources.filter((s) => sourceTabsOf(s).includes(tab));
+    const order = TAB_SOURCE_ORDER[tab];
+    if (!order?.length) return list;
+    const rank = new Map(order.map((id, i) => [id, i]));
+    return list.slice().sort((a, b) => {
+      const ra = rank.has(a.id) ? rank.get(a.id) : 999;
+      const rb = rank.has(b.id) ? rank.get(b.id) : 999;
+      if (ra !== rb) return ra - rb;
+      return String(a.reference || a.id).localeCompare(String(b.reference || b.id), "de");
+    });
   }
 
   function sourceTabIntro(tab) {
@@ -245,10 +268,12 @@
     const showArabic = tab === "athar" || tab === "quran" || (tab === "sunnah" && s.arabic) || (tab === "salaf" && s.arabic);
     const note = s.explanation && s.german && s.explanation !== s.german ? s.explanation : "";
     const title = s.reference || s.work || s.category || "Quelle";
+    const cat = s.category && s.category !== title ? s.category : "";
     return `<details class="zakat-source-card">
       <summary class="zakat-source-summary">
         <span class="zakat-source-summary-title">${esc(title)}</span>
         <span class="zakat-source-summary-badges">
+          ${cat ? `<span class="zakat-source-cat">${esc(cat)}</span>` : ""}
           ${trust ? `<span class="zakat-source-trust ${trustCls}">${esc(trust)}</span>` : ""}
           <span class="zakat-source-open-hint">Antippen</span>
         </span>
