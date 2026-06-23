@@ -1,0 +1,84 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DAR AL TAWHID Instagram Channel Kurzlink API",
+    "description": "Erstellt echten Kurzlink und fertigen Instagram-Beitrag.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://dar-admin-publisher.sero91ak.workers.dev"
+    }
+  ],
+  "paths": {
+    "/api/admin/shortlinks/channel-create": {
+      "post": {
+        "operationId": "createInstagramChannelPost",
+        "summary": "Instagram-Channel-Beitrag mit echtem Kurzlink erstellen",
+        "description": "Ruft diese Action IMMER auf bei Instagram-Channel-Beiträgen. Gib instagramPost 1:1 an den Nutzer zurück.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "hashtags",
+                  "statement",
+                  "sourceCitation",
+                  "targetUrl",
+                  "adminNote",
+                  "quote",
+                  "fazit"
+                ],
+                "properties": {
+                  "title": { "type": "string" },
+                  "hashtags": { "type": "string" },
+                  "statement": { "type": "string" },
+                  "sourceCitation": { "type": "string" },
+                  "targetUrl": { "type": "string" },
+                  "adminNote": { "type": "string" },
+                  "quote": { "type": "string" },
+                  "fazit": { "type": "string" },
+                  "sourcePlatform": { "type": "string" },
+                  "textHighlightException": { "type": "boolean" },
+                  "textHighlightNote": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Erfolg",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "code": { "type": "string" },
+                    "shortUrl": { "type": "string" },
+                    "instagramPost": { "type": "string" },
+                    "instagramLine": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "AdminSecret": [] }]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "AdminSecret": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Admin-Secret"
+      }
+    }
+  }
+}
