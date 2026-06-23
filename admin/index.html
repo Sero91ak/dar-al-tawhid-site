@@ -508,6 +508,7 @@ let quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let shortlinksRegistry={version:1,nextSerial:1,entries:{}},shortlinksRegistrySha="",shortlinksRegistryLoaded=false,shortlinksRegistryBusy=false;
 let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="",kurzlinkSelectedCode="",kurzlinkImportText="",kurzlinkImportResult="",kurzlinkImportVerify=false;
 let zakatAdminConfig=null,zakatAdminSha="",zakatAdminStatus="",zakatAdminLoaded=false;
+let zakatAdminPriceStatus=null,zakatAdminPriceLoaded=false;
 let sourceLinkTarget="post",sourceCustomLabel="",sourceManualUrl="",sourceSetSlideImage=false;
 let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 let newsSearchQuery="",newsFilter="live",editingNewsId=null;
@@ -1605,6 +1606,18 @@ function renderKurzlinks(){
   </section>`;
 }
 /* ZAKAT ADMIN GUARD: Preise & Quellen — keine privaten Nutzer-Beträge */
+async function ensureZakatAdminPriceStatus(force){
+  if(zakatAdminPriceLoaded&&!force)return zakatAdminPriceStatus;
+  try{
+    const data=await workerGetRequest("zakat/prices/status",{admin:true});
+    zakatAdminPriceStatus=data;
+    zakatAdminPriceLoaded=true;
+    return data;
+  }catch(e){
+    zakatAdminPriceStatus={ok:false,error:e.message||String(e)};
+    return zakatAdminPriceStatus;
+  }
+}
 async function ensureZakatAdminConfig(force){
   if(zakatAdminLoaded&&!force)return zakatAdminConfig;
   try{
@@ -1621,25 +1634,49 @@ async function ensureZakatAdminConfig(force){
 function renderZakatAdmin(){
   const cfg=zakatAdminConfig||{};
   const p=cfg.prices||{};
+  const ps=zakatAdminPriceStatus||{};
+  const cache=ps.cache||{};
+  const pub=ps.public||{};
+  const fresh=pub.freshness||{};
+  const logs=(ps.fetchLogs||cache.fetchLogs||[]).slice(0,8);
   const sources=(cfg.sources||[]).filter(s=>s.active!==false);
   const rules=(cfg.rules||[]).filter(r=>r.active!==false);
+  const apiBadge=ps.apiConfigured?(pub.active?"✅ API funktioniert":"⚠️ API konfiguriert, Cache leer"):"❌ Kein API-Key (GOLDAPI_KEY oder METALS_API_KEY am Worker)";
+  const cacheGold=cache.gold||pub.gold||{};
+  const cacheSilver=cache.silver||pub.silver||{};
   return `<section class="quellen-studio">
     <div class="panel">
-      <div class="section-head"><h3>Zakāt-Rechner Verwaltung</h3><span>${sources.length} Quellen · ${rules.length} Regeln</span></div>
-      <p class="ordner-lead">Gold- und Silberpreise für Niṣāb. <strong>Keine privaten Besucher-Beträge</strong> — nur geprüfte Preise und Quellen.</p>
+      <div class="section-head"><h3>Zakāt Preisquellen</h3><span>${sources.length} Quellen · ${rules.length} Regeln</span></div>
+      <p class="ordner-lead">Automatischer Gold-/Silberpreis für Niṣāb. API-Keys nur serverseitig am Worker. <strong>Keine privaten Besucher-Beträge.</strong></p>
     </div>
     <div class="panel quellen-editor-panel">
-      <div class="section-head"><h4>Preisverwaltung</h4><span>${p.active?"Aktiv":"Inaktiv"}</span></div>
-      <label>Goldpreis pro Gramm (€)<input class="field" id="zakatAdminGold" type="number" step="0.01" min="0" value="${esc(p.goldPerGramEur??"")}" placeholder="z. B. 75.00"></label>
-      <label>Silberpreis pro Gramm (€)<input class="field" id="zakatAdminSilver" type="number" step="0.01" min="0" value="${esc(p.silverPerGramEur??"")}" placeholder="z. B. 0.95"></label>
-      <label>Quelle / Hinweis<input class="field" id="zakatAdminPriceSource" value="${esc(p.source||"Admin geprüft")}" placeholder="Admin geprüft"></label>
-      <p class="source-files-lead">Zuletzt geprüft: ${esc(p.verifiedAt||"—")} · Niṣāb: 85 g Gold / 595 g Silber</p>
+      <div class="section-head"><h4>Preis-Engine Status</h4><span>${esc(fresh.label||apiBadge)}</span></div>
+      <p class="source-files-lead">${esc(apiBadge)} · Anbieter: ${esc(ps.apiProvider||cache.provider||"—")} · ${esc(fresh.label||"")}</p>
+      <div class="quellen-result-list">
+        <div class="quellen-result-row"><span><span class="quellen-result-title">Gold</span><span class="quellen-result-meta">${cacheGold.pricePerGram?`${cacheGold.pricePerGram} €/g · Niṣāb 85 g: ${cacheGold.nisabEur} €`:"—"}</span></span><span class="quellen-badge">${cacheGold.pricePerGram?"✓":"—"}</span></div>
+        <div class="quellen-result-row"><span><span class="quellen-result-title">Silber</span><span class="quellen-result-meta">${cacheSilver.pricePerGram?`${cacheSilver.pricePerGram} €/g · Niṣāb 595 g: ${cacheSilver.nisabEur} €`:"—"}</span></span><span class="quellen-badge">${cacheSilver.pricePerGram?"✓":"—"}</span></div>
+        <div class="quellen-result-row"><span><span class="quellen-result-title">Letzter Erfolg</span><span class="quellen-result-meta">${esc(cache.lastSuccessAt||pub.lastSuccessAt||"—")}</span></span><span class="quellen-badge">${cache.lastSuccessAt?"✓":"—"}</span></div>
+        <div class="quellen-result-row"><span><span class="quellen-result-title">Letzter Fehler</span><span class="quellen-result-meta">${esc(cache.lastError||pub.lastError||"—")}</span></span><span class="quellen-badge">${cache.lastError?"!":"—"}</span></div>
+      </div>
       <div class="quellen-kurzlink-actions">
-        <button class="btn primary" type="button" id="zakatAdminSavePrices">Preise speichern &amp; aktivieren</button>
+        <button class="btn primary" type="button" id="zakatAdminFetchPrices">Testabruf starten</button>
         <button class="btn" type="button" id="zakatAdminReload">Neu laden</button>
         <a class="btn" href="/test/#zakat" target="_blank" rel="noopener">Rechner in Dar Test</a>
       </div>
-      <div class="upload-status" id="zakatAdminStatus">${esc(zakatAdminStatus||"Gold- und Silberpreis eintragen → speichern.")}</div>
+      <div class="upload-status" id="zakatAdminStatus">${esc(zakatAdminStatus||"Preise werden automatisch stündlich aktualisiert. Notfall: manuell bestätigen.")}</div>
+    </div>
+    <div class="panel quellen-editor-panel">
+      <div class="section-head"><h4>Manuelle Preisbestätigung (Notfall)</h4><span>${p.active?"Aktiv":"Inaktiv"}</span></div>
+      <label>Goldpreis pro Gramm (€)<input class="field" id="zakatAdminGold" type="number" step="0.01" min="0" value="${esc(p.goldPerGramEur??cacheGold.pricePerGram??"")}" placeholder="z. B. 75.00"></label>
+      <label>Silberpreis pro Gramm (€)<input class="field" id="zakatAdminSilver" type="number" step="0.01" min="0" value="${esc(p.silverPerGramEur??cacheSilver.pricePerGram??"")}" placeholder="z. B. 0.95"></label>
+      <label>Quelle / Hinweis<input class="field" id="zakatAdminPriceSource" value="${esc(p.source||"Admin manuell bestätigt")}" placeholder="Admin manuell bestätigt"></label>
+      <div class="quellen-kurzlink-actions">
+        <button class="btn" type="button" id="zakatAdminSavePrices">Manuell bestätigen &amp; speichern</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="section-head"><h4>Abruf-Protokoll</h4><span>${logs.length} Einträge</span></div>
+      <div class="quellen-result-list">${logs.length?logs.map(l=>`<div class="quellen-result-row"><span><span class="quellen-result-title">${esc(l.status||"?")} · ${esc(l.provider||"")}</span><span class="quellen-result-meta">${esc(l.fetchedAt||"")}${l.errorMessage?" · "+esc(l.errorMessage):""}${l.durationMs!=null?" · "+l.durationMs+" ms":""}</span></span><span class="quellen-badge">${l.status==="ok"||l.status==="manual"?"✓":"!"}</span></div>`).join(""):`<div class="empty">Noch keine Abrufe protokolliert.</div>`}</div>
     </div>
     <div class="panel">
       <div class="section-head"><h4>Geprüfte Quellen (${sources.length})</h4></div>
@@ -1648,21 +1685,41 @@ function renderZakatAdmin(){
   </section>`;
 }
 function bindZakatAdminUi(){
+  const fetchBtn=document.getElementById("zakatAdminFetchPrices");
+  if(fetchBtn)fetchBtn.onclick=async()=>{
+    fetchBtn.disabled=true;zakatAdminStatus="Starte Testabruf…";renderShell();
+    try{
+      const result=await workerPostRequest("zakat/prices/fetch",{force:true});
+      zakatAdminPriceLoaded=false;
+      await ensureZakatAdminPriceStatus(true);
+      await ensureZakatAdminConfig(true);
+      zakatAdminStatus=result.fetched?`API-Abruf OK · ${result.provider||""}`:(result.skipped?`Übersprungen: ${result.reason||""}`:`Fallback: ${result.error||"Fehler"}`);
+      toast(result.ok?"Preisabruf erfolgreich":"Preisabruf mit Hinweis");
+      addAdminLog("Zakāt","Preis-Testabruf",zakatAdminStatus);
+      renderShell();
+    }catch(e){
+      zakatAdminStatus=`Fehler: ${e.message||e}`;
+      toast(e.message||"Abruf fehlgeschlagen");
+      renderShell();
+    }finally{fetchBtn.disabled=false}
+  };
   const save=document.getElementById("zakatAdminSavePrices");
   if(save)save.onclick=async()=>{
     const gold=Number(document.getElementById("zakatAdminGold")?.value||0);
     const silver=Number(document.getElementById("zakatAdminSilver")?.value||0);
-    const source=String(document.getElementById("zakatAdminPriceSource")?.value||"Admin geprüft").trim();
+    const source=String(document.getElementById("zakatAdminPriceSource")?.value||"Admin manuell bestätigt").trim();
     if(!gold||!silver){toast("Gold- und Silberpreis eintragen");return}
-    if(!confirm(`Preise speichern?\n\nGold: ${gold} €/g\nSilber: ${silver} €/g`))return;
+    if(!confirm(`Preise manuell bestätigen?\n\nGold: ${gold} €/g\nSilber: ${silver} €/g`))return;
     save.disabled=true;zakatAdminStatus="Speichere…";
     try{
-      const result=await workerPostRequest("zakat/prices",{goldPerGramEur:gold,silverPerGramEur:silver,source,configSha:zakatAdminSha});
+      const result=await workerPostRequest("zakat/prices/confirm",{goldPerGramEur:gold,silverPerGramEur:silver,source,configSha:zakatAdminSha});
       zakatAdminConfig=result.config||zakatAdminConfig;
       zakatAdminSha=result.commitSha||zakatAdminSha;
-      zakatAdminStatus=`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)}`;
+      zakatAdminPriceLoaded=false;
+      await ensureZakatAdminPriceStatus(true);
+      zakatAdminStatus=`Manuell bestätigt · Commit ${String(result.commitSha||"").slice(0,7)}`;
       toast("Zakāt-Preise gespeichert");
-      addAdminLog("Zakāt","Preise geprüft",`${gold}/${silver} EUR/g`);
+      addAdminLog("Zakāt","Preise manuell bestätigt",`${gold}/${silver} EUR/g`);
       renderShell();
     }catch(e){
       zakatAdminStatus=`Fehler: ${e.message||e}`;
@@ -1670,7 +1727,8 @@ function bindZakatAdminUi(){
       renderShell();
     }finally{save.disabled=false}
   };
-  const reload=document.getElementById("zakatAdminReload");if(reload)reload.onclick=async()=>{zakatAdminLoaded=false;await ensureZakatAdminConfig(true);zakatAdminStatus="Neu geladen.";renderShell()};
+  const reload=document.getElementById("zakatAdminReload");
+  if(reload)reload.onclick=async()=>{zakatAdminLoaded=false;zakatAdminPriceLoaded=false;await ensureZakatAdminConfig(true);await ensureZakatAdminPriceStatus(true);zakatAdminStatus="Neu geladen.";renderShell()};
 }
 async function loadQuellenPost(filename){
   if(!filename)return;
@@ -1787,7 +1845,7 @@ function renderShell(){
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
-  if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminConfig(false).then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
+  if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminConfig(false).then(()=>ensureZakatAdminPriceStatus(false)).then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
 }
 function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
@@ -1801,7 +1859,7 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
-    if(tab==="zakat")ensureZakatAdminConfig(false).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
+    if(tab==="zakat")ensureZakatAdminConfig(false).then(()=>ensureZakatAdminPriceStatus(false)).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();

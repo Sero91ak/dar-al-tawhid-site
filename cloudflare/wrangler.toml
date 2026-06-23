@@ -21,3 +21,5 @@ crons = ["*/5 * * * *"]
 #   wrangler secret put ADMIN_PUBLISH_SECRET
 #   wrangler secret put ONESIGNAL_API_KEY_NEW
 #   wrangler secret put ONESIGNAL_APP_ID   (optional, Standard ist gesetzt)
+#   wrangler secret put GOLDAPI_KEY        (Zakāt Gold/Silber — GoldAPI.io)
+#   wrangler secret put METALS_API_KEY     (Alternative: metals-api.com)
