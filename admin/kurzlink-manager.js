@@ -354,6 +354,103 @@
     return c ? `🔗 ${shortUrlHttps(c)}` : "";
   }
 
+  const CHATGPT_IMPORT_PROMPT = `Am Ende jedes Beitrags füge diesen Block an (nur Original-Quellenlinks, keine dar-al-tawhid.de-Links):
+
+QUELLEN_IMPORT
+\`\`\`json
+{
+  "links": [
+    {
+      "targetUrl": "https://www.islamweb.net/…#:~:text=Start,Ende",
+      "adminNote": "Buch, Band, Seite, Gelehrter"
+    }
+  ]
+}
+\`\`\`
+
+Regeln:
+- Nur erlaubte Domains: islamweb.net, shamela.ws, al-maktaba.org, ketabonline.com, dorar.net, quran.ksu.edu.sa, archive.org, waqfeya.net
+- Jeder Link braucht Textmarkierung #:~:text=Start,Ende wenn möglich
+- Im Instagram-Text KEIN langer Quellenlink — nur später: 🔗 https://dar-al-tawhid.de/aX (vergibt die Admin-App automatisch)
+- Gib im Beitragstext Platzhalter [QUELLE] — nach dem Import in der Admin-App ersetzt du durch die fertigen 🔗-Zeilen`;
+
+  function normalizeImportLink(raw) {
+    if (typeof raw === "string") {
+      const targetUrl = String(raw || "").trim();
+      return targetUrl ? { targetUrl, adminNote: "", platform: "" } : null;
+    }
+    if (!raw || typeof raw !== "object") return null;
+    const targetUrl = String(raw.targetUrl || raw.url || raw.quelle || raw.source || "").trim();
+    if (!targetUrl) return null;
+    return {
+      targetUrl,
+      adminNote: String(raw.adminNote || raw.note || raw.bemerkung || raw.citation || "").trim(),
+      platform: String(raw.platform || "").trim(),
+      textHighlightNote: String(raw.textHighlightNote || "").trim()
+    };
+  }
+
+  function parseJsonImportBlock(text) {
+    try {
+      const data = JSON.parse(String(text || "").trim());
+      if (Array.isArray(data)) return data.map(normalizeImportLink).filter(Boolean);
+      if (Array.isArray(data?.links)) return data.links.map(normalizeImportLink).filter(Boolean);
+      const one = normalizeImportLink(data);
+      return one ? [one] : [];
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function extractUrlsFromText(text) {
+    const re = /https?:\/\/[^\s)\]"'<>]+/gi;
+    const seen = new Set();
+    const links = [];
+    for (const match of String(text || "").matchAll(re)) {
+      let url = match[0].replace(/[.,;:!?)]+$/, "");
+      if (isShortlinkUrl(url)) continue;
+      if (seen.has(url)) continue;
+      seen.add(url);
+      links.push({ targetUrl: url, adminNote: "", platform: detectPlatform(url) });
+    }
+    return links;
+  }
+
+  function parseChatGptImport(text) {
+    const raw = String(text || "").trim();
+    if (!raw) return { links: [], errors: ["Kein Text zum Importieren"] };
+
+    const codeBlock = raw.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (codeBlock) {
+      const parsed = parseJsonImportBlock(codeBlock[1].trim());
+      if (parsed?.length) return { links: parsed, errors: [] };
+    }
+
+    const marker = raw.match(/QUELLEN_IMPORT\s*([\s\S]*?)$/i);
+    if (marker) {
+      const block = marker[1].trim();
+      const parsed = parseJsonImportBlock(block);
+      if (parsed?.length) return { links: parsed, errors: [] };
+      const fromUrls = extractUrlsFromText(block);
+      if (fromUrls.length) return { links: fromUrls, errors: [] };
+    }
+
+    const parsed = parseJsonImportBlock(raw);
+    if (parsed?.length) return { links: parsed, errors: [] };
+
+    const fromUrls = extractUrlsFromText(raw);
+    if (fromUrls.length) return { links: fromUrls, errors: [] };
+
+    return { links: [], errors: ["Keine Quellen-URLs erkannt — QUELLEN_IMPORT-JSON oder https://-Links einfügen"] };
+  }
+
+  function buildImportPreviewBlock(created) {
+    return (created || [])
+      .map((item) => item.instagramLine || formatInstagramLine(item.code))
+      .filter(Boolean)
+      .join("\n");
+  }
+
   function validateRedirectSave(entry, registry, { existingCode = "", forVerified = false } = {}) {
     const errors = [];
     const warnings = [];
@@ -566,6 +663,10 @@
     extractShortlinkFromMarkdown,
     formatSourceLine,
     formatInstagramLine,
+    CHATGPT_IMPORT_PROMPT,
+    parseChatGptImport,
+    buildImportPreviewBlock,
+    normalizeImportLink,
     validateRedirectSave,
     injectShortlinkIntoMarkdown,
     deriveKurzlinkFromPost,

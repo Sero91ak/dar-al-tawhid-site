@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v37";
+  var ADMIN_SW_CACHE="dar-admin-stats-v38";
   var MIG_KEY="darAdminSwFixV22";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -505,7 +505,7 @@ let ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let quellenSearchQuery="",quellenCatalogMeta=[],quellenCatalogBusy=false,quellenCatalogLoaded=false,quellenEditorStatus="";
 let quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
 let shortlinksRegistry={version:1,nextSerial:1,entries:{}},shortlinksRegistrySha="",shortlinksRegistryLoaded=false,shortlinksRegistryBusy=false;
-let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="",kurzlinkSelectedCode="";
+let kurzlinkDraft=null,kurzlinkWarnings=[],kurzlinkPanelStatus="",kurzlinkSelectedCode="",kurzlinkImportText="",kurzlinkImportResult="",kurzlinkImportVerify=false;
 let sourceLinkTarget="post",sourceCustomLabel="",sourceManualUrl="",sourceSetSlideImage=false;
 let liveNewsItems=[],liveNewsAllItems=[],liveNewsFetchedAt=null,liveNewsLoading=false,liveNewsError="";
 let newsSearchQuery="",newsFilter="live",editingNewsId=null;
@@ -1550,10 +1550,27 @@ function renderKurzlinks(){
   const platformOpts=DARKurzlink.PLATFORM_OPTIONS.map(p=>`<option value="${esc(p)}" ${d.platform===p?"selected":""}>${esc(p)}</option>`).join("");
   const listRows=entries.length?entries.map(e=>`<button class="quellen-result-row ${kurzlinkSelectedCode===e.code?"is-active":""}" data-kurzlink-pick="${esc(e.code)}" type="button"><span><span class="quellen-result-title">${esc(e.code)} · ${esc(DARKurzlink.STATUS_LABELS[e.status]||"")}</span><span class="quellen-result-meta">${esc(String(e.targetUrl||"").slice(0,72))}${String(e.targetUrl||"").length>72?"…":""}</span></span><span class="quellen-badges"><span class="quellen-badge">${esc(e.platform||"—")}</span></span></button>`).join(""):`<div class="empty" style="padding:12px">Noch keine Weiterleitungen. Unten den ersten Kurzlink anlegen.</div>`;
   const thNote=d.textHighlight==="not_possible"||(!hasTextFragmentAdmin(d.targetUrl)&&d.status!=="verified")?`<label>Ausnahme (ohne Textmarkierung)<textarea class="field" id="kurzlinkTextHighlightNote" rows="2" placeholder="Textmarkierung technisch nicht möglich, Quelle wurde manuell geprüft.">${esc(d.textHighlightNote||"")}</textarea></label>`:"";
+  const importResultBlock=kurzlinkImportResult?`<label>Fertige Instagram-Zeilen<textarea class="field" id="kurzlinkImportResult" rows="5" readonly>${esc(kurzlinkImportResult)}</textarea></label>`:"";
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Kurzlinks — nur Weiterleitung</h3><span>${entries.length} aktiv</span></div>
       <p class="ordner-lead">Deine Website ist die <strong>kurze Tür</strong> zur Originalquelle. Die Aussage steht <strong>nicht</strong> auf dar-al-tawhid.de — nur der Link. Für Instagram: <strong>${esc(igLine||"🔗 https://dar-al-tawhid.de/a1")}</strong></p>
+    </div>
+    <div class="panel quellen-kurzlink-panel">
+      <div class="section-head"><h4>ChatGPT — ein Weg</h4><span>Automatisch</span></div>
+      <p class="source-files-lead">ChatGPT-Ausgabe hier einfügen → Admin legt die nächsten Kurzlinks (<strong>a${shortlinksRegistry.nextSerial||1}</strong> …) automatisch an. Kein zweiter Weg nötig.</p>
+      <details><summary>ChatGPT-Anweisung kopieren (einmal in deinem GPT einrichten)</summary>
+        <textarea class="field" id="kurzlinkChatGptPrompt" rows="10" readonly>${esc(DARKurzlink.CHATGPT_IMPORT_PROMPT||"")}</textarea>
+        <button class="btn" type="button" id="kurzlinkCopyPromptBtn">Anweisung kopieren</button>
+      </details>
+      <label>ChatGPT-Ausgabe einfügen<textarea class="field" id="kurzlinkImportInput" rows="8" placeholder="QUELLEN_IMPORT JSON oder Original-URLs aus ChatGPT …">${esc(kurzlinkImportText||"")}</textarea></label>
+      <label class="hint" style="display:flex;align-items:center;gap:8px;margin:0"><input type="checkbox" id="kurzlinkImportVerify" ${kurzlinkImportVerify?"checked":""}> Direkt als geprüft aktivieren (Weiterleitung sofort live)</label>
+      <div class="quellen-kurzlink-actions">
+        <button class="btn primary" type="button" id="kurzlinkImportBtn">Links automatisch anlegen</button>
+        <button class="btn" type="button" id="kurzlinkImportPreviewBtn">Vorschau</button>
+        ${kurzlinkImportResult?`<button class="btn" type="button" id="kurzlinkImportCopyIgBtn">Instagram-Zeilen kopieren</button>`:""}
+      </div>
+      ${importResultBlock}
     </div>
     <div class="quellen-grid">
       <aside class="panel quellen-search-panel">
@@ -2679,6 +2696,50 @@ function bindKurzlinksUi(){
   const kurzlinkSave=document.getElementById("kurzlinkSaveBtn");if(kurzlinkSave)kurzlinkSave.onclick=()=>persistKurzlinkDraft(null);
   const kurzlinkVerified=document.getElementById("kurzlinkMarkVerifiedBtn");if(kurzlinkVerified)kurzlinkVerified.onclick=async()=>{await persistKurzlinkDraft("verified")};
   const kurzlinkDisable=document.getElementById("kurzlinkDisableBtn");if(kurzlinkDisable)kurzlinkDisable.onclick=async()=>{if(!confirm("Kurzlink wirklich deaktivieren?"))return;await persistKurzlinkDraft("disabled")};
+  const kurzlinkImportInput=document.getElementById("kurzlinkImportInput");if(kurzlinkImportInput)kurzlinkImportInput.oninput=e=>{kurzlinkImportText=e.target.value};
+  const kurzlinkImportVerifyEl=document.getElementById("kurzlinkImportVerify");if(kurzlinkImportVerifyEl)kurzlinkImportVerifyEl.onchange=e=>{kurzlinkImportVerify=!!e.target.checked};
+  const kurzlinkCopyPrompt=document.getElementById("kurzlinkCopyPromptBtn");if(kurzlinkCopyPrompt)kurzlinkCopyPrompt.onclick=()=>copyKurzlinkText(DARKurzlink.CHATGPT_IMPORT_PROMPT||"","ChatGPT-Anweisung kopiert");
+  const kurzlinkImportPreview=document.getElementById("kurzlinkImportPreviewBtn");if(kurzlinkImportPreview)kurzlinkImportPreview.onclick=()=>{
+    const text=document.getElementById("kurzlinkImportInput")?.value||kurzlinkImportText||"";
+    kurzlinkImportText=text;
+    const parsed=DARKurzlink.parseChatGptImport(text);
+    if(!parsed.links.length){toast(parsed.errors[0]||"Keine Links");kurzlinkPanelStatus=parsed.errors.join(" · ");renderShell();return}
+    let serial=shortlinksRegistry.nextSerial||1;
+    const lines=parsed.links.map((link,i)=>{
+      const code=`a${serial+i}`;
+      const ok=DARKurzlink.isAllowedTargetUrl(link.targetUrl);
+      return `${code}${ok?"":" ⚠️"} → ${String(link.targetUrl||"").slice(0,72)}${String(link.targetUrl||"").length>72?"…":""}`;
+    });
+    const igLines=parsed.links.map((_,i)=>DARKurzlink.formatInstagramLine(`a${serial+i}`)).join("\n");
+    kurzlinkImportResult=`Vorschau (${parsed.links.length} Link(s)):\n${lines.join("\n")}\n\nInstagram nach Import:\n${igLines}`;
+    kurzlinkPanelStatus="Vorschau — noch nicht gespeichert.";
+    renderShellPreserveField("kurzlinkImportInput",()=>{});
+  };
+  const kurzlinkImportBtn=document.getElementById("kurzlinkImportBtn");if(kurzlinkImportBtn)kurzlinkImportBtn.onclick=async()=>{
+    const text=document.getElementById("kurzlinkImportInput")?.value||kurzlinkImportText||"";
+    kurzlinkImportText=text;
+    kurzlinkImportVerify=!!document.getElementById("kurzlinkImportVerify")?.checked;
+    const parsed=DARKurzlink.parseChatGptImport(text);
+    if(!parsed.links.length){toast(parsed.errors[0]||"Keine Links");kurzlinkPanelStatus=parsed.errors.join(" · ");renderShell();return}
+    if(!confirm(`${parsed.links.length} Kurzlink(s) automatisch anlegen?\n\nNächster Code: a${shortlinksRegistry.nextSerial||1}${kurzlinkImportVerify?"\n\nDirekt als geprüft = Weiterleitung sofort aktiv.":""}`))return;
+    kurzlinkImportBtn.disabled=true;kurzlinkPanelStatus=`Lege ${parsed.links.length} Kurzlink(s) an …`;
+    try{
+      const result=await workerPostRequest("shortlinks/import",{links:parsed.links,verify:kurzlinkImportVerify,registrySha:shortlinksRegistrySha});
+      shortlinksRegistry=DARKurzlink.normalizeRegistry(result.registry||shortlinksRegistry);
+      shortlinksRegistryLoaded=true;
+      kurzlinkImportResult=result.instagramBlock||DARKurzlink.buildImportPreviewBlock(result.created||[]);
+      const skipped=(result.skipped||[]).length;
+      kurzlinkPanelStatus=`${result.count} Kurzlink(s): ${(result.created||[]).map(c=>c.code).join(", ")}${skipped?` · ${skipped} übersprungen`:""} · Commit ${String(result.commitSha||"").slice(0,7)}`;
+      toast(`${result.count} Kurzlink(s) automatisch angelegt`);
+      addAdminLog("Kurzlink","ChatGPT-Import",(result.created||[]).map(c=>c.code).join(", "));
+      renderShell();
+    }catch(e){
+      kurzlinkPanelStatus=`Import-Fehler: ${e.message||e}`;
+      toast(e.message||"Import fehlgeschlagen");
+      renderShell();
+    }finally{kurzlinkImportBtn.disabled=false}
+  };
+  const kurzlinkImportCopyIg=document.getElementById("kurzlinkImportCopyIgBtn");if(kurzlinkImportCopyIg)kurzlinkImportCopyIg.onclick=()=>copyKurzlinkText(kurzlinkImportResult||document.getElementById("kurzlinkImportResult")?.value||"","Instagram-Zeilen kopiert");
 }
 function bindUi(){
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>navigateAdmin(btn.dataset.tab));

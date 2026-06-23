@@ -75,6 +75,14 @@ assert(/location\.replace/i.test(htmlOk), "Test 8: verified redirect html");
 
 assert(K.formatInstagramLine("a1") === "🔗 https://dar-al-tawhid.de/a1", "Test 9: Instagram line format");
 
+const parsed = K.parseChatGptImport(
+  'QUELLEN_IMPORT\n```json\n{"links":[{"targetUrl":"https://www.islamweb.net/x#:~:text=A,B"}]}\n```'
+);
+assert(parsed.links.length === 1 && parsed.links[0].targetUrl.includes("islamweb"), "Test 10: ChatGPT JSON import parse");
+
+const parsedUrls = K.parseChatGptImport("Siehe https://www.shamela.ws/book/1#:~:text=Start,Ende");
+assert(parsedUrls.links.length === 1, "Test 11: URL extraction from text");
+
 const redirectEntry = {
   code: "a2",
   targetUrl: "https://www.shamela.ws/book/1#:~:text=Start,Ende",
@@ -83,7 +91,7 @@ const redirectEntry = {
   status: "verified"
 };
 const rv = K.validateRedirectSave(redirectEntry, registry, { existingCode: "a2", forVerified: true });
-assert(rv.ok, "Test 10: redirect-only verified entry passes");
+assert(rv.ok, "Test 12: redirect-only verified entry passes");
 
 if (failed) {
   console.error(`\n${failed} Kurzlink-Test(s) fehlgeschlagen.`);
