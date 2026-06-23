@@ -1650,7 +1650,40 @@ body:before{
 .zakat-view .view-head h2{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1.75rem,4.8vw,2.15rem);line-height:1.08;margin:0;font-weight:800;text-shadow:none}
 .zakat-view .view-desc{color:var(--premium-body);font-size:12.5px;line-height:1.55;margin-top:6px;max-width:100%}
 .zakat-shell{max-width:720px;margin:0 auto;padding:0 2px 8px;display:grid;gap:12px;color:var(--text)}
-.zakat-shell .zakat-hero,.zakat-shell .zakat-panel,.zakat-shell .zakat-sources-hub{border-radius:22px;margin-bottom:0}
+.zakat-shell .zakat-hero,.zakat-shell .zakat-panel,.zakat-shell .zakat-acc,.zakat-shell .zakat-result-strip{border-radius:22px;margin-bottom:0}
+.zakat-hero-compact{padding:14px 16px 12px!important;text-align:left!important}
+.zakat-hero-compact:after{display:none!important}
+.zakat-hero-compact .zakat-hero-badge{margin-bottom:6px;padding:4px 10px;font-size:8.5px}
+.zakat-hero-compact .zakat-hero-title{font-size:clamp(1.15rem,3.6vw,1.42rem)!important;margin:0 0 4px!important;text-align:left}
+.zakat-hero-compact .zakat-hero-sub{font-size:12px;margin:0;text-align:left}
+.zakat-result-strip{padding:14px 16px;text-align:center}
+.zakat-result-strip .zakat-banner{margin-bottom:10px;text-align:left}
+.zakat-result-strip-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:4px}
+.zakat-acc{padding:0!important;overflow:hidden}
+.zakat-acc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 15px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:56px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.zakat-acc-head:active{opacity:.92}
+.zakat-acc-copy{flex:1;min-width:0}
+.zakat-acc-kicker{display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--premium-label);font-weight:800;margin-bottom:3px}
+.zakat-acc-head h3{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1rem,3.2vw,1.18rem);margin:0;font-weight:800;line-height:1.2}
+.zakat-acc-chevron{flex:0 0 32px;width:32px;height:32px;border-radius:999px;border:1px solid var(--line2);background:rgba(239,215,142,.08);position:relative;transition:transform .2s ease}
+.zakat-acc-chevron:before,.zakat-acc-chevron:after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-right:2px solid var(--premium-title);border-bottom:2px solid var(--premium-title);transform:translate(-65%,-35%) rotate(45deg)}
+.zakat-acc-chevron.open{transform:rotate(180deg)}
+.zakat-acc-body{padding:0 14px 14px;border-top:1px solid var(--line2)}
+.zakat-acc-preview{padding:0 15px 14px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:11px;line-height:1.4;color:var(--premium-body)}
+.zakat-acc.is-open .zakat-acc-preview{display:none}
+.zakat-source-card{border-radius:16px;border:1px solid var(--line2);border-left:3px solid var(--gold);background:rgba(239,215,142,.035);overflow:hidden}
+.zakat-source-summary{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:11px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.zakat-source-summary::-webkit-details-marker{display:none}
+.zakat-source-summary::marker{display:none}
+.zakat-source-summary-title{flex:1 1 100%;font-size:12px;font-weight:700;color:var(--text);line-height:1.35}
+.zakat-source-summary-badges{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%}
+.zakat-source-open-hint{font-size:10px;font-weight:700;color:var(--premium-label);margin-left:auto}
+.zakat-source-card[open] .zakat-source-open-hint{display:none}
+.zakat-source-card[open] .zakat-source-summary{border-bottom:1px solid var(--line2);padding-bottom:10px;margin-bottom:0}
+.zakat-source-body{padding:10px 12px 12px}
+.zakat-actions-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:2px 0 8px}
+.zakat-actions-compact .zakat-btn{padding:11px 12px;font-size:12px;min-height:44px}
+.zakat-actions-compact .zakat-btn.primary{grid-column:1/-1}
 .zakat-hero{text-align:center;padding:26px 18px 22px;position:relative}
 .zakat-hero:after{content:"";position:absolute;inset:9px;border:1px solid var(--line2);border-radius:18px;pointer-events:none;opacity:.45}
 .zakat-hero-badge{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--premium-pill-text);border:1px solid var(--premium-pill-border);padding:5px 12px;border-radius:999px;margin-bottom:10px;background:var(--premium-pill-bg);position:relative;z-index:1}
@@ -1728,10 +1761,10 @@ body:before{
 .zakat-sources-body{padding:0 12px 14px;border-top:1px solid var(--line2)}
 .zakat-source-tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 2px 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .zakat-source-tabs::-webkit-scrollbar{display:none}
-.zakat-source-tab{flex:0 0 auto;border:1px solid var(--line2);border-radius:999px;padding:10px 14px;background:rgba(239,215,142,.045);color:var(--text);font-size:11px;font-weight:800;cursor:pointer;min-height:44px;white-space:nowrap;transition:border-color .15s ease,background .15s ease,color .15s ease}
+.zakat-source-tab{flex:0 0 auto;border:1px solid var(--line2);border-radius:999px;padding:8px 12px;background:rgba(239,215,142,.045);color:var(--text);font-size:11px;font-weight:800;cursor:pointer;min-height:40px;white-space:nowrap;transition:border-color .15s ease,background .15s ease,color .15s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .zakat-source-tab.active{border-color:rgba(239,215,142,.62);background:rgba(239,215,142,.14);color:var(--premium-title);box-shadow:0 0 0 1px rgba(239,215,142,.10)}
 .zakat-source-intro{font-size:11px;line-height:1.5;color:var(--premium-body);margin:0 0 10px;padding:0 4px}
-.zakat-source-list{display:grid;gap:10px;max-height:min(62vh,520px);overflow-y:auto;padding-right:2px;-webkit-overflow-scrolling:touch}
+.zakat-source-list{display:grid;gap:8px;max-height:min(52vh,440px);overflow-y:auto;padding-right:2px;-webkit-overflow-scrolling:touch}
 .zakat-source-card{padding:13px 14px;border-radius:18px;border:1px solid var(--line2);border-left:3px solid var(--gold);background:rgba(239,215,142,.035);font-size:11.5px;line-height:1.5}
 .zakat-source-meta{display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:8px;font-size:10px;color:var(--muted);align-items:center}
 .zakat-source-cat{color:var(--premium-title);font-weight:800}
@@ -1780,6 +1813,7 @@ html[data-theme="dark"] .zakat-trust-note{color:var(--muted)!important}
 html[data-theme="light"] .zakat-view .view-head h2,
 html[data-theme="light"] .zakat-hero-title,
 html[data-theme="light"] .zakat-panel-head h3,
+html[data-theme="light"] .zakat-acc-head h3,
 html[data-theme="light"] .zakat-sources-hub-head h3,
 html[data-theme="light"] .zakat-result-amount{color:#3d2a12!important;text-shadow:none!important}
 html[data-theme="light"] .zakat-view .view-desc,
@@ -1791,6 +1825,7 @@ html[data-theme="light"] .zakat-step-label{color:#2a2218!important}
 html[data-theme="light"] .zakat-view .eyebrow,
 html[data-theme="light"] .zakat-hero-badge,
 html[data-theme="light"] .zakat-flow-label,
+html[data-theme="light"] .zakat-acc-kicker,
 html[data-theme="light"] .zakat-sources-hub-kicker{color:#8a6530!important}
 html[data-theme="light"] .zakat-trust-note,
 html[data-theme="light"] .zakat-footer,
@@ -1810,6 +1845,7 @@ html[data-theme="light"] .zakat-btn:not(.primary){color:#2a2218!important;backgr
 html[data-theme="soft"] .zakat-view .view-head h2,
 html[data-theme="soft"] .zakat-hero-title,
 html[data-theme="soft"] .zakat-panel-head h3,
+html[data-theme="soft"] .zakat-acc-head h3,
 html[data-theme="soft"] .zakat-sources-hub-head h3,
 html[data-theme="soft"] .zakat-result-amount{color:#32212b!important;text-shadow:none!important}
 html[data-theme="soft"] .zakat-view .view-desc,
@@ -7255,7 +7291,7 @@ window.DAR_ANALYTICS_CONFIG={
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
 <script src="/assets/zakat-engine.js?v=8" defer></script>
-<script src="/assets/zakat-app.js?v=8" defer></script>
+<script src="/assets/zakat-app.js?v=9" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">

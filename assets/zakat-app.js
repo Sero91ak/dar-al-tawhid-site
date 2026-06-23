@@ -14,9 +14,9 @@
   let zakatPricesLoading = false;
   let zakatPricesError = "";
   let zakatInput = defaultInput();
-  let zakatSourcesOpen = true;
   let zakatSourceTab = "quran";
   let zakatManualOpen = false;
+  let zakatSections = defaultSections();
 
   const SOURCE_TABS = [
     { id: "quran", label: "Qurʾān", short: "Qurʾān" },
@@ -27,6 +27,18 @@
   ];
   let zakatHistory = [];
   let zakatDebounceTimer = null;
+
+  function defaultSections() {
+    return {
+      liquids: true,
+      metals: false,
+      prices: false,
+      hawl: false,
+      sources: false,
+      details: false,
+      steps: false
+    };
+  }
 
   function defaultInput() {
     return {
@@ -58,6 +70,11 @@
     const worker = global.PRAYER_PUSH_WORKER_URL || global.DAR_WORKER_URL || "";
     if (worker) return `${String(worker).replace(/\/$/, "")}/api/zakat/prices`;
     return global.DAR_ZAKAT_PRICES_URL || DEFAULT_PRICES_URL;
+  }
+
+  function isZakatRoute() {
+    const route = global.readRoute?.() || global.currentRoute;
+    return route?.view === "zakat";
   }
 
   async function loadZakatConfig(force) {
@@ -204,11 +221,11 @@
 
   function sourceTabIntro(tab) {
     const intros = {
-      quran: "Grundlage aus dem Qurʾān — die Pflicht zur Zakāt und Reinigung des Vermögens.",
-      sunnah: "Authentische Sunnah des Propheten ﷺ — Niṣāb, Satz von 2,5 % und Ḥawl.",
-      salaf: "Verständnis und Praxis der Salaf as-Ṣāliḥīn nach Qurʾān und Ṣaḥīḥ-Sunnah.",
-      athar: "Gesicherte Āthār in arabischer Überlieferung — Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim.",
-      fiqh: "Vorsichtige Fiqh-Anwendung bei bekanntem Ikhtilāf — transparent gekennzeichnet."
+      quran: "Grundlage aus dem Qurʾān.",
+      sunnah: "Authentische Sunnah — Niṣāb, Satz, Ḥawl.",
+      salaf: "Verständnis der Salaf as-Ṣāliḥīn.",
+      athar: "Gesicherte Āthār — arabische Texte.",
+      fiqh: "Vorsichtige Fiqh-Anwendung bei Ikhtilāf."
     };
     return intros[tab] || "";
   }
@@ -227,17 +244,37 @@
     const trustCls = s.trust === "fiqh" ? "fiqh" : s.trust === "manhaj" || s.trust === "ijma" ? "manhaj" : "";
     const showArabic = tab === "athar" || tab === "quran" || (tab === "sunnah" && s.arabic) || (tab === "salaf" && s.arabic);
     const note = s.explanation && s.german && s.explanation !== s.german ? s.explanation : "";
-    return `<article class="zakat-source-card">
-      <div class="zakat-source-meta">
-        <span class="zakat-source-cat">${esc(s.work || s.category)}</span>
-        ${trust ? `<span class="zakat-source-trust ${trustCls}">${esc(trust)}</span>` : ""}
-        <span class="zakat-source-ref">${esc(s.reference || "")}</span>
+    const title = s.reference || s.work || s.category || "Quelle";
+    return `<details class="zakat-source-card">
+      <summary class="zakat-source-summary">
+        <span class="zakat-source-summary-title">${esc(title)}</span>
+        <span class="zakat-source-summary-badges">
+          ${trust ? `<span class="zakat-source-trust ${trustCls}">${esc(trust)}</span>` : ""}
+          <span class="zakat-source-open-hint">Antippen</span>
+        </span>
+      </summary>
+      <div class="zakat-source-body">
+        <div class="zakat-source-meta"><span class="zakat-source-cat">${esc(s.work || s.category)}</span></div>
+        ${showArabic && s.arabic ? `<div class="zakat-ar">${esc(s.arabic)}</div>` : ""}
+        <p class="zakat-source-text">${esc(s.german || s.explanation || "")}</p>
+        ${note ? `<p class="zakat-source-note">${esc(note)}</p>` : ""}
+        ${s.link ? `<a class="zakat-source-link" href="${esc(s.link)}" target="_blank" rel="noopener">Quelle öffnen ↗</a>` : ""}
       </div>
-      ${showArabic && s.arabic ? `<div class="zakat-ar">${esc(s.arabic)}</div>` : ""}
-      <p class="zakat-source-text">${esc(s.german || s.explanation || "")}</p>
-      ${note ? `<p class="zakat-source-note">${esc(note)}</p>` : ""}
-      ${s.link ? `<a class="zakat-source-link" href="${esc(s.link)}" target="_blank" rel="noopener">Quelle öffnen ↗</a>` : ""}
-    </article>`;
+    </details>`;
+  }
+
+  function renderAccordion(id, title, kicker, body, preview) {
+    const open = !!zakatSections[id];
+    return `<section class="zakat-acc premium-surface ${open ? "is-open" : "is-closed"}" data-zakat-acc="${esc(id)}">
+      <button type="button" class="zakat-acc-head" data-zakat-section="${esc(id)}" aria-expanded="${open}">
+        <div class="zakat-acc-copy">
+          ${kicker ? `<span class="zakat-acc-kicker">${esc(kicker)}</span>` : ""}
+          <h3>${esc(title)}</h3>
+        </div>
+        <span class="zakat-acc-chevron ${open ? "open" : ""}" aria-hidden="true"></span>
+      </button>
+      ${open ? `<div class="zakat-acc-body">${body}</div>` : preview ? `<div class="zakat-acc-preview">${preview}</div>` : ""}
+    </section>`;
   }
 
   function renderSourceHub(cfg) {
@@ -248,32 +285,17 @@
         `<button type="button" class="zakat-source-tab ${zakatSourceTab === t.id ? "active" : ""}" data-zakat-source-tab="${esc(t.id)}" aria-pressed="${zakatSourceTab === t.id}">${esc(t.label)}</button>`
     ).join("");
 
-    const body = zakatSourcesOpen
-      ? `<div class="zakat-sources-body" id="zakatSourcesBox">
-      <div class="zakat-source-tabs" role="tablist">${tabs}</div>
+    const body = `<div class="zakat-source-tabs" role="tablist">${tabs}</div>
       <p class="zakat-source-intro">${esc(sourceTabIntro(zakatSourceTab))}</p>
-      <div class="zakat-source-list">${tabSources.length ? tabSources.map((s) => renderSourceCard(s, zakatSourceTab)).join("") : `<p class="zakat-muted">Keine Belege in dieser Kategorie geladen.</p>`}</div>
-    </div>`
-      : `<div class="zakat-sources-preview">
-      ${SOURCE_TABS.map((t) => `<span class="zakat-source-preview-pill">${esc(t.short)}</span>`).join("")}
-      <span class="zakat-muted">Tippen zum Lesen</span>
-    </div>`;
+      <div class="zakat-source-list">${tabSources.length ? tabSources.map((s) => renderSourceCard(s, zakatSourceTab)).join("") : `<p class="zakat-muted">Keine Belege in dieser Kategorie.</p>`}</div>`;
 
-    return `<section class="zakat-panel zakat-sources-hub premium-surface">
-      <button type="button" class="zakat-sources-hub-head" id="zakatToggleSources" aria-expanded="${zakatSourcesOpen}">
-        <div class="zakat-sources-hub-copy">
-          <span class="zakat-sources-hub-kicker">Authentische Quellen</span>
-          <h3>Qurʾān · Sunnah · Salaf · Āthār</h3>
-          <p>Geprüfte Belege — zum Lesen antippen</p>
-        </div>
-        <span class="zakat-sources-chevron ${zakatSourcesOpen ? "open" : ""}" aria-hidden="true"></span>
-      </button>
-      ${body}
-    </section>`;
+    const preview = `${SOURCE_TABS.map((t) => `<span class="zakat-source-preview-pill">${esc(t.short)}</span>`).join("")}<span class="zakat-muted">Antippen zum Lesen</span>`;
+
+    return renderAccordion("sources", "Authentische Quellen", "Qurʾān · Sunnah · Salaf · Āthār", body, preview);
   }
 
   function renderZakatSteps(result) {
-    if (!result?.steps?.length) return `<p class="zakat-muted">Noch keine Eingaben — Zahlen eingeben, Ergebnis aktualisiert sich live.</p>`;
+    if (!result?.steps?.length) return `<p class="zakat-muted">Noch keine Eingaben.</p>`;
     return result.steps
       .map(
         (s, i) => `<div class="zakat-step ${s.highlight ? "highlight" : ""} ${s.preview ? "preview" : ""}">
@@ -284,6 +306,22 @@
     </div>`
       )
       .join("");
+  }
+
+  function renderResultStrip(result) {
+    const amount = result ? global.DARZakat.formatMoney(result.zakatDue, result.currency) : "0,00 €";
+    const sub = result
+      ? result.previewOnly ? "Vorschau" : result.zakatObligatory ? "Zakāt fällig" : result.resultCase === "A" ? "Keine Zakāt fällig" : "Live berechnet"
+      : "Zahlen eingeben — Ergebnis live";
+    const badges = result
+      ? `${result.previewOnly ? `<span class="zakat-pill preview">Vorschau</span>` : ""}${result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}`
+      : "";
+    return `<section class="zakat-result-strip premium-surface">
+      ${result ? resultBanner(result) : ""}
+      <span class="zakat-result-label">Pflichtbetrag</span>
+      <div class="zakat-result-amount">${amount}</div>
+      <div class="zakat-result-strip-meta"><span class="zakat-result-sub">${esc(sub)}</span>${badges ? `<div class="zakat-head-badges">${badges}</div>` : ""}</div>
+    </section>`;
   }
 
   function renderZakat() {
@@ -300,23 +338,67 @@
       .map((x) => `<div class="zakat-warn">${esc(x.text)}</div>`)
       .join("");
 
-    const resultHero = result
-      ? `<div class="zakat-result-hero">
-      <span class="zakat-result-label">Pflichtbetrag</span>
-      <div class="zakat-result-amount">${global.DARZakat.formatMoney(result.zakatDue, result.currency)}</div>
-      <span class="zakat-result-sub">${result.previewOnly ? "Vorschau — keine endgültige Fatwa" : result.zakatObligatory ? "Zakāt fällig nach Berechnung" : result.resultCase === "A" ? "Keine Zakāt fällig" : "Transparent berechnet"}</span>
-    </div>`
-      : "";
+    const liquidsBody = `<div class="zakat-form-grid">
+        <label>Bargeld<input class="field zakat-field" id="zakatCash" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(zakatInput.cash)}" placeholder="0,00"></label>
+        <label>Bank<input class="field zakat-field" id="zakatBank" type="number" min="0" step="0.01" value="${esc(zakatInput.bank)}" placeholder="0,00"></label>
+        <label>PayPal / digital<input class="field zakat-field" id="zakatDigital" type="number" min="0" step="0.01" value="${esc(zakatInput.digital)}" placeholder="0,00"></label>
+        <label>Sonstige liquide<input class="field zakat-field" id="zakatOtherLiquid" type="number" min="0" step="0.01" value="${esc(zakatInput.otherLiquid)}" placeholder="0,00"></label>
+      </div>`;
 
-    const resultBlock = result
-      ? `<section class="zakat-panel zakat-result premium-surface">
-      <div class="zakat-panel-head"><h3>Ergebnis</h3><div class="zakat-head-badges">${result.previewOnly ? `<span class="zakat-pill preview">Vorschau</span>` : ""}${result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}</div></div>
-      ${resultBanner(result)}
-      ${resultHero}
-      <div class="zakat-kpi-grid">
-        <div class="zakat-kpi"><span>Gesamtvermögen</span><b>${global.DARZakat.formatMoney(result.totalWealth, result.currency)}</b></div>
-        <div class="zakat-kpi"><span>Zakātpflichtig</span><b>${global.DARZakat.formatMoney(result.zakatableWealth, result.currency)}</b></div>
-        <div class="zakat-kpi accent"><span>Abzüge (Schulden)</span><b>${global.DARZakat.formatMoney(result.debtsDue, result.currency)}</b></div>
+    const metalsBody = `<div class="zakat-form-grid zakat-form-grid-3">
+        <label>Gold (g)<input class="field zakat-field" id="zakatGoldGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.goldGrams)}" placeholder="0"></label>
+        <label>Silber (g)<input class="field zakat-field" id="zakatSilverGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.silverGrams)}" placeholder="0"></label>
+        <label>Gold-Art<select class="field zakat-field" id="zakatGoldType"><option value="investment" ${zakatInput.goldType === "investment" ? "selected" : ""}>Anlage</option><option value="jewelry" ${zakatInput.goldType === "jewelry" ? "selected" : ""}>Schmuck</option><option value="other" ${zakatInput.goldType === "other" ? "selected" : ""}>Sonstiges</option></select></label>
+      </div>
+      <div class="zakat-form-grid">
+        <label>Gold manuell (optional)<input class="field zakat-field" id="zakatGoldManual" type="number" min="0" step="0.01" value="${esc(zakatInput.goldValueManual)}" placeholder="€"></label>
+        <label>Silber manuell (optional)<input class="field zakat-field" id="zakatSilverManual" type="number" min="0" step="0.01" value="${esc(zakatInput.silverValueManual)}" placeholder="€"></label>
+      </div>
+      <div class="zakat-subsection-label">Schulden</div>
+      <label>Kurzfristig fällig<input class="field zakat-field" id="zakatDebts" type="number" min="0" step="0.01" value="${esc(zakatInput.debtsDue)}" placeholder="0,00"></label>`;
+
+    const metalsPreview = `<span class="zakat-muted">Gold · Silber · Schulden — optional</span>`;
+
+    const pricePanelIntro = zakatPricesLoading
+      ? `<p class="zakat-muted zakat-loading-msg">Niṣāb-Werte laden …</p>`
+      : prices.freshness?.level === "realtime"
+        ? `<p class="zakat-muted zakat-loading-msg ok">Echtzeit geprüft</p>`
+        : zakatPricesError
+          ? `<p class="zakat-warn">Preisabruf: ${esc(zakatPricesError)}</p>`
+          : "";
+
+    const pricesBody = `${pricePanelIntro}
+      <div class="zakat-price-grid">${renderPriceRow("Gold", goldMeta, 85, "EUR")}${renderPriceRow("Silber", silverMeta, 595, "EUR")}</div>
+      <p class="zakat-standard-line">Standard-Niṣāb: <b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result?.nisab?.standardEur || live.standardNisabEur || 0, "EUR") : "—"}</b></p>
+      <details class="zakat-manual-prices" ${zakatManualOpen ? "open" : ""}>
+        <summary>Notfall: Preise manuell</summary>
+        <div class="zakat-form-grid">
+          <label>Gold €/g<input class="field zakat-field" id="zakatManualGoldPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.goldPerGramEur)}" placeholder="Notfall"></label>
+          <label>Silber €/g<input class="field zakat-field" id="zakatManualSilverPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.silverPerGramEur)}" placeholder="Notfall"></label>
+        </div>
+      </details>`;
+
+    const pricesPreview = prices.hasAnyPrice
+      ? `<span class="zakat-muted">Niṣāb ${global.DARZakat.formatMoney(result?.nisab?.standardEur || live.standardNisabEur || 0, "EUR")}</span> ${priceBadge(prices)}`
+      : `<span class="zakat-muted">Echtzeit-Niṣāb — antippen</span>`;
+
+    const hawlBody = `<div class="zakat-form-grid">
+        <label>Niṣāb seit<input class="field zakat-field" id="zakatNisabSince" type="date" value="${esc(zakatInput.nisabSinceDate)}"></label>
+        <label>Stichtag<input class="field zakat-field" id="zakatToday" type="date" value="${esc(zakatInput.todayDate)}"></label>
+      </div>
+      ${result?.hawl?.nextDueDate ? `<p class="zakat-muted">Nächster Termin: ${esc(result.hawl.nextDueDate)}${result.hawl.daysRemaining != null && !result.hawl.fulfilled ? ` · ${esc(String(result.hawl.daysRemaining))} Tage` : ""}</p>` : `<p class="zakat-muted">Optional — ohne Datum nur Vorschau.</p>`}`;
+
+    const hawlPreview = result?.hawl?.fulfilled
+      ? `<span class="zakat-pill ok">Ḥawl erfüllt</span>`
+      : result?.hawl?.fulfilled === false
+        ? `<span class="zakat-pill warn">Ḥawl offen</span>`
+        : `<span class="zakat-muted">Ḥawl optional</span>`;
+
+    const detailsBody = result
+      ? `<div class="zakat-kpi-grid">
+        <div class="zakat-kpi"><span>Gesamt</span><b>${global.DARZakat.formatMoney(result.totalWealth, result.currency)}</b></div>
+        <div class="zakat-kpi"><span>Pflichtig</span><b>${global.DARZakat.formatMoney(result.zakatableWealth, result.currency)}</b></div>
+        <div class="zakat-kpi accent"><span>Schulden</span><b>${global.DARZakat.formatMoney(result.debtsDue, result.currency)}</b></div>
       </div>
       ${renderLiquidBreakdown(result)}
       <div class="zakat-status-row">
@@ -325,102 +407,57 @@
         ${priceBadge(prices)}
       </div>
       <div class="zakat-nisab-compare">
-        <div><span>Niṣāb Silber · 595 g</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.silverEur, result.currency) : "—"}</b></div>
-        <div><span>Niṣāb Gold · 85 g</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.goldEur, result.currency) : "—"}</b></div>
-        <div class="standard"><span>Standard (vorsichtig)</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.standardEur, result.currency) : "—"}</b></div>
+        <div><span>Silber 595 g</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.silverEur, result.currency) : "—"}</b></div>
+        <div><span>Gold 85 g</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.goldEur, result.currency) : "—"}</b></div>
+        <div class="standard"><span>Standard</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.standardEur, result.currency) : "—"}</b></div>
       </div>
-      ${warnings}
-    </section>
-    <section class="zakat-panel premium-surface">
-      <div class="zakat-panel-head"><h3>Rechenweg</h3><span class="zakat-rate-tag">${global.DARZakat.formatNumber(result.ratePercent, 2)} %</span></div>
-      <div class="zakat-steps">${renderZakatSteps(result)}</div>
-    </section>`
-      : "";
+      ${warnings}`
+      : `<p class="zakat-muted">Details erscheinen nach Eingabe.</p>`;
+
+    const detailsPreview = result && hasAnyInput()
+      ? `<span class="zakat-muted">Vermögen ${global.DARZakat.formatMoney(result.totalWealth, result.currency)}</span>`
+      : `<span class="zakat-muted">KPI · Niṣāb · Aufschlüsselung</span>`;
+
+    const stepsBody = result
+      ? `<div class="zakat-steps">${renderZakatSteps(result)}</div>`
+      : `<p class="zakat-muted">Rechenweg nach Eingabe.</p>`;
+
+    const stepsPreview = result?.steps?.length
+      ? `<span class="zakat-muted">${result.steps.length} Schritte · ${global.DARZakat.formatNumber(result.ratePercent, 2)} %</span>`
+      : `<span class="zakat-muted">Transparente Schritte</span>`;
 
     const historyBlock =
       session && zakatHistory.length
-        ? `<section class="zakat-panel premium-surface"><div class="zakat-panel-head"><h3>Mein Verlauf</h3><span>${zakatHistory.length}</span></div>
+        ? `<section class="zakat-acc premium-surface is-open"><div class="zakat-acc-body" style="border-top:0;padding-top:14px"><div class="zakat-panel-head"><h3>Mein Verlauf</h3><span>${zakatHistory.length}</span></div>
       <div class="zakat-history">${zakatHistory
           .map(
             (h) => `<div class="zakat-history-row"><span>${esc(h.zakat_year || h.calculated_at?.slice(0, 10) || "")}</span><b>${global.DARZakat.formatMoney(h.zakat_due, result?.currency || "EUR")}</b><button type="button" class="zakat-mini-btn" data-zakat-delete="${esc(h.id)}">Löschen</button></div>`
           )
-          .join("")}</div></section>`
+          .join("")}</div></div></section>`
         : "";
 
-    const pricePanelIntro = zakatPricesLoading
-      ? `<p class="zakat-muted zakat-loading-msg">Echtzeit-Niṣāb-Werte werden geladen …</p>`
-      : prices.freshness?.level === "realtime"
-        ? `<p class="zakat-muted zakat-loading-msg ok">Echtzeit geprüft · Aktualisierung alle ~15 Min.</p>`
-        : prices.hasVerified
-          ? `<p class="zakat-muted zakat-loading-msg ok">Niṣāb-Werte aktuell geprüft</p>`
-          : zakatPricesError
-            ? `<p class="zakat-warn">Preisabruf: ${esc(zakatPricesError)} — liquide Mittel werden trotzdem exakt berechnet.</p>`
-            : "";
-
-    return `<div class="zakat-view">${global.setHeader("Zakāt-Rechner", "Berechnung nach Qurʾān, Sunnah und gesicherten Āthār", "Zakāt")}
+    return `<div class="zakat-view">
     <div class="zakat-shell">
-    <section class="zakat-hero premium-surface">
-      <div class="zakat-hero-badge">Amānah · vertraulich &amp; transparent</div>
-      <div class="zakat-hero-icon">🕌</div>
+    <section class="zakat-hero premium-surface zakat-hero-compact">
+      <div class="zakat-hero-badge">Amānah · vertraulich</div>
       <h2 class="zakat-hero-title">Zakāt-Rechner</h2>
-      <p class="zakat-hero-sub">Qurʾān · Sunnah · Salaf · gesicherte Āthār</p>
-      <p class="zakat-trust-note">Religiöse Grundlage und Marktdaten sind getrennt. Gold-/Silberpreise dienen nur der Niṣāb-Umrechnung — keine Fatwa.</p>
-      <p class="zakat-privacy">${esc(w.privacy || "")}</p>
+      <p class="zakat-hero-sub">Qurʾān · Sunnah · Salaf · Āthār · live</p>
     </section>
+    ${renderResultStrip(result)}
+    ${renderAccordion("liquids", "Liquide Mittel", "1 · Eingabe", liquidsBody, "")}
+    ${renderAccordion("metals", "Edelmetalle & Schulden", "2 · optional", metalsBody, metalsPreview)}
+    ${renderAccordion("prices", "Niṣāb & Echtzeitpreise", "3 · Marktdaten", pricesBody, pricesPreview)}
+    ${renderAccordion("hawl", "Ḥawl", "4 · Mondjahr", hawlBody, hawlPreview)}
     ${renderSourceHub(cfg)}
-    ${resultBlock}
-    <div class="zakat-flow-label">Eingaben</div>
-    <div class="zakat-input-stack">
-    <section class="zakat-panel premium-surface">
-      <div class="zakat-panel-head"><h3>1 · Liquide Mittel</h3></div>
-      <div class="zakat-form-grid">
-        <label>Bargeld<input class="field zakat-field" id="zakatCash" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(zakatInput.cash)}" placeholder="0,00"></label>
-        <label>Bankguthaben<input class="field zakat-field" id="zakatBank" type="number" min="0" step="0.01" value="${esc(zakatInput.bank)}" placeholder="0,00"></label>
-        <label>PayPal / digital<input class="field zakat-field" id="zakatDigital" type="number" min="0" step="0.01" value="${esc(zakatInput.digital)}" placeholder="0,00"></label>
-        <label>Sonstige liquide<input class="field zakat-field" id="zakatOtherLiquid" type="number" min="0" step="0.01" value="${esc(zakatInput.otherLiquid)}" placeholder="0,00"></label>
-      </div>
-      <div class="zakat-subsection-label">Edelmetalle</div>
-      <div class="zakat-form-grid zakat-form-grid-3">
-        <label>Gold (Gramm)<input class="field zakat-field" id="zakatGoldGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.goldGrams)}" placeholder="0"></label>
-        <label>Silber (Gramm)<input class="field zakat-field" id="zakatSilverGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.silverGrams)}" placeholder="0"></label>
-        <label>Gold-Art<select class="field zakat-field" id="zakatGoldType"><option value="investment" ${zakatInput.goldType === "investment" ? "selected" : ""}>Anlagegold</option><option value="jewelry" ${zakatInput.goldType === "jewelry" ? "selected" : ""}>Schmuck</option><option value="other" ${zakatInput.goldType === "other" ? "selected" : ""}>Sonstiges</option></select></label>
-      </div>
-      <div class="zakat-form-grid">
-        <label>Goldwert manuell (optional)<input class="field zakat-field" id="zakatGoldManual" type="number" min="0" step="0.01" value="${esc(zakatInput.goldValueManual)}" placeholder="nur wenn kein Preis"></label>
-        <label>Silberwert manuell (optional)<input class="field zakat-field" id="zakatSilverManual" type="number" min="0" step="0.01" value="${esc(zakatInput.silverValueManual)}" placeholder="nur wenn kein Preis"></label>
-      </div>
-      <div class="zakat-subsection-label">Schulden</div>
-      <label>Kurzfristig fällige Schulden<input class="field zakat-field" id="zakatDebts" type="number" min="0" step="0.01" value="${esc(zakatInput.debtsDue)}" placeholder="0,00"></label>
-    </section>
-    <section class="zakat-panel premium-surface">
-      <div class="zakat-panel-head"><h3>2 · Niṣāb &amp; Echtzeitpreise</h3>${priceBadge(prices)}</div>
-      ${pricePanelIntro}
-      <div class="zakat-price-grid">${renderPriceRow("Gold", goldMeta, 85, "EUR")}${renderPriceRow("Silber", silverMeta, 595, "EUR")}</div>
-      <p class="zakat-standard-line">Standard-Niṣāb (vorsichtig, niedrigerer Wert): <b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result?.nisab?.standardEur || live.standardNisabEur || 0, "EUR") : "—"}</b></p>
-      <details class="zakat-manual-prices" ${zakatManualOpen ? "open" : ""}>
-        <summary>Notfall: Preise manuell (nur wenn API ausfällt)</summary>
-        <div class="zakat-form-grid">
-          <label>Gold €/g<input class="field zakat-field" id="zakatManualGoldPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.goldPerGramEur)}" placeholder="Notfall"></label>
-          <label>Silber €/g<input class="field zakat-field" id="zakatManualSilverPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.silverPerGramEur)}" placeholder="Notfall"></label>
-        </div>
-      </details>
-    </section>
-    <section class="zakat-panel premium-surface">
-      <div class="zakat-panel-head"><h3>3 · Ḥawl</h3></div>
-      <div class="zakat-form-grid">
-        <label>Niṣāb erreicht seit<input class="field zakat-field" id="zakatNisabSince" type="date" value="${esc(zakatInput.nisabSinceDate)}"></label>
-        <label>Stichtag (heute)<input class="field zakat-field" id="zakatToday" type="date" value="${esc(zakatInput.todayDate)}"></label>
-      </div>
-      ${result?.hawl?.nextDueDate ? `<p class="zakat-muted">Nächster Termin (Vorschau): ${esc(result.hawl.nextDueDate)}${result.hawl.daysRemaining != null && !result.hawl.fulfilled ? ` · ${esc(String(result.hawl.daysRemaining))} Tage verbleibend` : ""}</p>` : `<p class="zakat-muted">Datum optional — ohne Ḥawl-Datum nur Vorschau.</p>`}
-    </section>
-    </div>
-    <section class="zakat-actions">
-      <button type="button" class="zakat-btn" id="zakatClearBtn">Alle Eingaben löschen</button>
-      <button type="button" class="zakat-btn" id="zakatPdfBtn">PDF exportieren</button>
-      ${session ? `<button type="button" class="zakat-btn primary" id="zakatSaveBtn">Im Account speichern</button>` : `<button type="button" class="zakat-btn" data-nav="account">Anmelden zum Speichern</button>`}
+    ${hasAnyInput() ? renderAccordion("details", "Ergebnis-Details", "Aufschlüsselung", detailsBody, detailsPreview) : ""}
+    ${renderAccordion("steps", "Rechenweg", result ? `${global.DARZakat.formatNumber(result.ratePercent, 2)} %` : "Schritte", stepsBody, stepsPreview)}
+    <section class="zakat-actions zakat-actions-compact">
+      <button type="button" class="zakat-btn" id="zakatClearBtn">Zurücksetzen</button>
+      <button type="button" class="zakat-btn" id="zakatPdfBtn">PDF</button>
+      ${session ? `<button type="button" class="zakat-btn primary" id="zakatSaveBtn">Speichern</button>` : `<button type="button" class="zakat-btn" data-nav="account">Anmelden</button>`}
     </section>
     ${historyBlock}
-    <p class="zakat-footer">${esc(w.footer || "")}</p>
+    <p class="zakat-footer">${esc(w.footer || w.privacy || "")}</p>
     </div>
     </div>`;
   }
@@ -464,39 +501,64 @@
       zakatDebounceTimer = null;
     }
     zakatInput = defaultInput();
-    zakatSourcesOpen = true;
+    zakatSections = defaultSections();
     zakatSourceTab = "quran";
     zakatManualOpen = false;
   }
 
-  function bindZakat() {
-    if (global.currentRoute?.view !== "zakat") return;
-    document.querySelectorAll(".zakat-field").forEach((el) => {
-      el.oninput = scheduleRender;
-      el.onchange = scheduleRender;
+  function installZakatDelegation() {
+    if (installZakatDelegation.done) return;
+    installZakatDelegation.done = true;
+
+    document.addEventListener("click", (e) => {
+      if (!isZakatRoute()) return;
+      if (!e.target.closest(".zakat-view")) return;
+
+      const secBtn = e.target.closest("[data-zakat-section]");
+      if (secBtn) {
+        e.preventDefault();
+        readInputFromDom();
+        const id = secBtn.getAttribute("data-zakat-section");
+        if (id && Object.prototype.hasOwnProperty.call(zakatSections, id)) {
+          zakatSections[id] = !zakatSections[id];
+          global.render?.();
+        }
+        return;
+      }
+
+      const tabBtn = e.target.closest("[data-zakat-source-tab]");
+      if (tabBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        readInputFromDom();
+        zakatSourceTab = tabBtn.getAttribute("data-zakat-source-tab") || "quran";
+        zakatSections.sources = true;
+        global.render?.();
+      }
     });
+
+    document.addEventListener("input", (e) => {
+      if (!isZakatRoute()) return;
+      if (e.target?.classList?.contains("zakat-field")) scheduleRender();
+    });
+    document.addEventListener("change", (e) => {
+      if (!isZakatRoute()) return;
+      if (e.target?.classList?.contains("zakat-field")) scheduleRender();
+    });
+  }
+
+  function bindZakat() {
+    if (!isZakatRoute()) return;
+    installZakatDelegation();
+
     const clear = $("zakatClearBtn");
     if (clear)
       clear.onclick = () => {
-        if (!hasAnyInput() || confirm("Alle Eingaben zurücksetzen und neu berechnen?")) {
+        if (!hasAnyInput() || confirm("Alle Eingaben zurücksetzen?")) {
           resetZakatInput();
           global.render();
         }
       };
-    const toggle = $("zakatToggleSources");
-    if (toggle)
-      toggle.onclick = () => {
-        zakatSourcesOpen = !zakatSourcesOpen;
-        global.render();
-      };
-    document.querySelectorAll("[data-zakat-source-tab]").forEach((btn) => {
-      btn.onclick = (e) => {
-        e.stopPropagation();
-        zakatSourceTab = btn.getAttribute("data-zakat-source-tab") || "quran";
-        zakatSourcesOpen = true;
-        global.render();
-      };
-    });
     const pdf = $("zakatPdfBtn");
     if (pdf)
       pdf.onclick = () => {
@@ -558,17 +620,17 @@
         }
       });
       zakatHistory = await fetchZakatHistory(session.id);
-      alert("Berechnung in deinem privaten Bereich gespeichert.");
+      alert("Berechnung gespeichert.");
       global.render();
     } catch (e) {
-      alert(e.message || "Speichern fehlgeschlagen. Ist die Zakāt-Tabelle in Supabase eingerichtet?");
+      alert(e.message || "Speichern fehlgeschlagen.");
     }
   }
 
   async function deleteZakatRecord(id) {
     const session = global.accountSession?.();
     if (!session?.id || !id) return;
-    if (!confirm("Diese Berechnung endgültig löschen?")) return;
+    if (!confirm("Diese Berechnung löschen?")) return;
     try {
       await global.supabaseRest(`user_zakat_calculations?id=eq.${encodeURIComponent(id)}&user_id=eq.${encodeURIComponent(session.id)}`, {
         method: "DELETE",
@@ -587,10 +649,10 @@
     const session = global.accountSession?.();
     if (session?.id) zakatHistory = await fetchZakatHistory(session.id);
     await pricePromise;
-    if (global.currentRoute?.view === "zakat" || global.readRoute?.()?.view === "zakat") {
-      global.render?.();
-    }
+    if (isZakatRoute()) global.render?.();
   }
+
+  installZakatDelegation();
 
   global.DARZakatApp = {
     renderZakat,
