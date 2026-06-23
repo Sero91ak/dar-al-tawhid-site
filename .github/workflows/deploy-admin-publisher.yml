@@ -13,6 +13,8 @@ on:
       - cloudflare/jummah-push-*.js
       - cloudflare/onesignal-delivery.js
       - cloudflare/kurzlink-admin.js
+      - cloudflare/zakat-prices.js
+      - cloudflare/zakat-admin.js
       - .github/workflows/deploy-admin-publisher.yml
 
 permissions:

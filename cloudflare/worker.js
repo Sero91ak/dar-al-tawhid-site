@@ -244,7 +244,7 @@ export default {
       }
 
       if (url.pathname === "/api/zakat/prices" && request.method === "GET") {
-        const result = await getPublicZakatPrices(env, { githubGet, base64ToUtf8 });
+        const result = await getPublicZakatPrices(env, { githubGet, base64ToUtf8, githubPut, githubCommitBatch }, { fetchIfEmpty: true });
         return json(result, cors, 200);
       }
 

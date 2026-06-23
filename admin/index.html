@@ -1641,13 +1641,13 @@ function renderZakatAdmin(){
   const logs=(ps.fetchLogs||cache.fetchLogs||[]).slice(0,8);
   const sources=(cfg.sources||[]).filter(s=>s.active!==false);
   const rules=(cfg.rules||[]).filter(r=>r.active!==false);
-  const apiBadge=ps.apiConfigured?(pub.active?"✅ API funktioniert":"⚠️ API konfiguriert, Cache leer"):"❌ Kein API-Key (GOLDAPI_KEY oder METALS_API_KEY am Worker)";
+  const apiBadge=ps.requiresUserKey===false?"✅ Automatisch über Cloudflare (kein Key nötig)":ps.apiConfigured?(pub.active?"✅ Premium-API aktiv":"⚠️ API konfiguriert, Cache leer"):"✅ Automatisch (LBMA + EUR)";
   const cacheGold=cache.gold||pub.gold||{};
   const cacheSilver=cache.silver||pub.silver||{};
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Zakāt Preisquellen</h3><span>${sources.length} Quellen · ${rules.length} Regeln</span></div>
-      <p class="ordner-lead">Automatischer Gold-/Silberpreis für Niṣāb. API-Keys nur serverseitig am Worker. <strong>Keine privaten Besucher-Beträge.</strong></p>
+      <p class="ordner-lead">Automatischer Gold-/Silberpreis für Niṣāb — läuft über den Cloudflare Worker <strong>ohne eigenen API-Key</strong> (LBMA-Daten + EUR-Umrechnung). Optional später: <code>GOLDAPI_KEY</code> für Premium-Echtzeit.</p>
     </div>
     <div class="panel quellen-editor-panel">
       <div class="section-head"><h4>Preis-Engine Status</h4><span>${esc(fresh.label||apiBadge)}</span></div>

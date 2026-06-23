@@ -142,12 +142,52 @@ function appendFetchLog(cache, entry) {
 
 function resolveProvider(env) {
   if (String(env.GOLDAPI_KEY || "").trim()) {
-    return { id: "goldapi.io", name: "GoldAPI.io", type: "goldapi" };
+    return { id: "goldapi.io", name: "GoldAPI.io", type: "goldapi", tier: "premium", requiresKey: true };
   }
   if (String(env.METALS_API_KEY || "").trim()) {
-    return { id: "metals-api.com", name: "Metals-API", type: "metals-api" };
+    return { id: "metals-api.com", name: "Metals-API", type: "metals-api", tier: "premium", requiresKey: true };
   }
-  return null;
+  return {
+    id: "mintedmetal.com",
+    name: "Minted Metal (LBMA) + Frankfurter EUR",
+    type: "lbma-free",
+    tier: "auto",
+    requiresKey: false
+  };
+}
+
+async function fetchUsdEurRate() {
+  const res = await fetch("https://api.frankfurter.app/latest?from=USD&to=EUR", {
+    headers: { Accept: "application/json" }
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !Number.isFinite(Number(data?.rates?.EUR))) {
+    throw new Error("EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB)");
+  }
+  return Number(data.rates.EUR);
+}
+
+async function fetchMintedMetalLbmaPrices() {
+  const res = await fetch("https://mintedmetal.com/api/prices.json", {
+    headers: { Accept: "application/json", "User-Agent": "DAR-AL-TAWHID-Zakat-Engine/1.0" }
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`Minted Metal HTTP ${res.status}`);
+  const goldUsd = Number(data?.metals?.gold?.price);
+  const silverUsd = Number(data?.metals?.silver?.price);
+  if (!Number.isFinite(goldUsd) || goldUsd <= 0 || !Number.isFinite(silverUsd) || silverUsd <= 0) {
+    throw new Error("Minted Metal: Gold/Silber fehlen");
+  }
+  const usdEur = await fetchUsdEurRate();
+  const goldLabel = data?.metals?.gold?.sourceLabel || "LBMA Gold Fix";
+  const silverLabel = data?.metals?.silver?.sourceLabel || "LBMA Silver Fix";
+  return {
+    provider: resolveProvider({}),
+    goldOunceEur: roundMoney(goldUsd * usdEur),
+    silverOunceEur: roundMoney(silverUsd * usdEur),
+    sourceLabel: `${goldLabel} / ${silverLabel} · Minted Metal (LBMA) · EUR via Frankfurter/ECB`,
+    marketUpdatedAt: data.updatedAt || data?.metals?.gold?.fixedAt || ""
+  };
 }
 
 async function fetchGoldApiMetal(key, symbol) {
@@ -181,7 +221,6 @@ async function fetchMetalsApiPrices(key) {
 
 async function fetchLiveMetalPrices(env) {
   const provider = resolveProvider(env);
-  if (!provider) throw new Error("Kein API-Key konfiguriert (GOLDAPI_KEY oder METALS_API_KEY)");
 
   if (provider.type === "goldapi") {
     const key = String(env.GOLDAPI_KEY).trim();
@@ -189,12 +228,33 @@ async function fetchLiveMetalPrices(env) {
       fetchGoldApiMetal(key, "XAU"),
       fetchGoldApiMetal(key, "XAG")
     ]);
-    return { provider, goldOunceEur, silverOunceEur };
+    return {
+      provider,
+      goldOunceEur,
+      silverOunceEur,
+      sourceLabel: `${provider.name} · LBMA-basierte Marktdaten (EUR/Feinunze)`
+    };
   }
 
-  const key = String(env.METALS_API_KEY).trim();
-  const { goldOunceEur, silverOunceEur } = await fetchMetalsApiPrices(key);
-  return { provider, goldOunceEur, silverOunceEur };
+  if (provider.type === "metals-api") {
+    const key = String(env.METALS_API_KEY).trim();
+    const { goldOunceEur, silverOunceEur } = await fetchMetalsApiPrices(key);
+    return {
+      provider,
+      goldOunceEur,
+      silverOunceEur,
+      sourceLabel: `${provider.name} · Marktdaten (EUR/Feinunze)`
+    };
+  }
+
+  const lbma = await fetchMintedMetalLbmaPrices();
+  return {
+    provider: lbma.provider,
+    goldOunceEur: lbma.goldOunceEur,
+    silverOunceEur: lbma.silverOunceEur,
+    sourceLabel: lbma.sourceLabel,
+    marketUpdatedAt: lbma.marketUpdatedAt
+  };
 }
 
 function buildPublicPayload(cache) {
@@ -252,8 +312,13 @@ function buildPublicPayload(cache) {
   };
 }
 
-export async function getPublicZakatPrices(env, deps) {
+export async function getPublicZakatPrices(env, deps, options = {}) {
   const { cache } = await readPriceCache(env, deps.githubGet, deps.base64ToUtf8);
+  const hasPrices = Boolean(cache.gold?.pricePerGram > 0 && cache.silver?.pricePerGram > 0);
+  if (!hasPrices && options.fetchIfEmpty && deps.githubPut) {
+    const fetched = await fetchAndStoreZakatPrices(env, deps, { force: true });
+    return fetched.public || buildPublicPayload(cache);
+  }
   return buildPublicPayload(cache);
 }
 
@@ -268,8 +333,10 @@ export async function getAdminZakatPriceStatus(env, deps) {
     sha,
     path,
     public: payload,
-    apiConfigured: Boolean(provider),
-    apiProvider: provider?.name || "",
+    apiConfigured: true,
+    apiProvider: provider?.name || "Minted Metal (LBMA) + Frankfurter EUR",
+    apiTier: provider?.tier || "auto",
+    requiresUserKey: Boolean(provider?.requiresKey),
     lastLog,
     fetchLogs: (cache.fetchLogs || []).slice(0, 20)
   };
@@ -345,7 +412,7 @@ export async function fetchAndStoreZakatPrices(env, deps, options = {}) {
   }
 
   const fetchedAt = nowIso();
-  const sourceLabel = `${providerInfo.name} · LBMA-basierte Marktdaten (EUR/Feinunze)`;
+  const sourceLabel = live.sourceLabel || `${providerInfo.name} · Marktdaten (EUR/Feinunze)`;
   const gold = buildMetalEntry("gold", goldOunceEur, {
     source: sourceLabel,
     provider: providerInfo.id,
@@ -462,11 +529,8 @@ export async function confirmManualZakatPrices(env, input, deps) {
 export async function ensureZakatPricesFresh(env, deps, options = {}) {
   const { cache } = await readPriceCache(env, deps.githubGet, deps.base64ToUtf8);
   const hasPrices = Boolean(cache.gold?.pricePerGram > 0 && cache.silver?.pricePerGram > 0);
-  const provider = resolveProvider(env);
-
-  if (!provider) {
-    return { ok: hasPrices, skipped: true, reason: "no_api_key", public: buildPublicPayload(cache) };
+  if (!hasPrices) {
+    return fetchAndStoreZakatPrices(env, deps, { force: true });
   }
-
   return fetchAndStoreZakatPrices(env, deps, { force: Boolean(options.force) });
 }
