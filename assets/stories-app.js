@@ -6,7 +6,7 @@
   "use strict";
 
   const SEEN_KEY = "darSeenStoriesV1";
-  const STYLES_ID = "darStoriesStylesV2";
+  const STYLES_ID = "darStoriesStylesV3";
   const FONTS_ID = "darStoriesFontsV1";
   const STORIES_PER_CATEGORY = 4;
 
@@ -162,24 +162,24 @@
   }
 
   function injectStyles() {
-    if (document.getElementById(STYLES_ID)) return;
     injectFonts();
-    const style = document.createElement("style");
-    style.id = STYLES_ID;
+    let style = document.getElementById(STYLES_ID);
+    if (!style) {
+      style = document.createElement("style");
+      style.id = STYLES_ID;
+      document.head.appendChild(style);
+    }
     style.textContent = `
-.story-strip-section{margin:0 0 14px;padding:0}
-.story-strip-head{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin:0 0 8px 2px}
-.story-strip-head span{display:block;color:var(--premium-label,#b8a878);font-size:9px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
-.story-strip-head h3{font-family:'Playfair Display',Georgia,serif;font-size:18px;line-height:1.05;color:var(--premium-title,#f5ecd4);margin:0}
-.story-strip-scroller{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 8px;margin:0 -2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x}
-.story-strip-scroller::-webkit-scrollbar{height:0;width:0}
-.story-ring-item{flex:0 0 auto;width:72px;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
-.story-ring-btn{width:64px;height:64px;margin:0 auto;border-radius:50%;padding:3px;background:transparent;border:none;display:grid;place-items:center;position:relative;cursor:pointer}
-.story-ring-btn::before{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(145deg,rgba(212,184,106,.9),rgba(150,115,55,.5));opacity:.95}
-.story-ring-btn.is-seen::before{background:linear-gradient(145deg,rgba(130,130,130,.32),rgba(80,80,80,.16));opacity:.72}
-.story-ring-inner{position:relative;width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid rgba(8,12,10,.92);background:linear-gradient(145deg,#243040,#101820);display:grid;place-items:center;z-index:1}
-.story-ring-icon{font-size:21px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-.story-ring-label{margin-top:6px;font-size:9px;font-weight:800;line-height:1.2;color:var(--premium-body,#d8cdb0);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.2em;font-family:'Lora',Georgia,serif}
+.story-strip-section{margin:12px 0 16px;padding:0;background:transparent;border:0;box-shadow:none}
+.story-strip-scroller{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:14px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 6px;margin:0;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scroll-snap-type:x proximity;scrollbar-width:none}
+.story-strip-scroller::-webkit-scrollbar{display:none;height:0;width:0}
+.story-ring-item{flex:0 0 auto;scroll-snap-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.story-ring-btn{width:68px;height:68px;border-radius:50%;padding:2.5px;background:transparent;border:none;display:grid;place-items:center;position:relative;cursor:pointer;transition:transform .18s ease,opacity .18s ease}
+.story-ring-btn:active{transform:scale(.96)}
+.story-ring-btn::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,#e8c878,#c9a24a,#f0dfa0,#b8893a,#e8c878);opacity:.92}
+.story-ring-btn.is-seen::before{background:conic-gradient(from 210deg,rgba(150,150,150,.45),rgba(100,100,100,.28),rgba(130,130,130,.38),rgba(90,90,90,.22),rgba(150,150,150,.45));opacity:.65}
+.story-ring-inner{position:relative;width:60px;height:60px;border-radius:50%;overflow:hidden;border:2px solid rgba(6,8,7,.88);display:grid;place-items:center;z-index:1;box-shadow:inset 0 1px 8px rgba(0,0,0,.28)}
+.story-ring-icon{font-size:24px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))}
 .story-viewer{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .story-viewer.is-open{display:flex}
 .story-viewer-card{position:relative;width:min(100vw,430px);height:min(100dvh,920px);max-height:100dvh;border-radius:0;background:#0a0e0c;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.55);touch-action:none;user-select:none}
@@ -211,7 +211,6 @@ html.story-viewer-open,html.story-viewer-open body{overflow:hidden!important}
 html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.story-viewer-open #appChromeDock #bottomNav{display:none!important;visibility:hidden!important;pointer-events:none!important}
 @media(prefers-reduced-motion:reduce){.story-viewer-progress span i{transition:none}}
 `;
-    document.head.appendChild(style);
   }
 
   /** App-Daten kommen aus test/index.html (let posts — nicht auf window) */
@@ -439,15 +438,13 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
     if (!bundles.length) return "";
     const items = bundles.map((bundle) => {
       const seen = bundleFullySeen(bundle);
-      return `<div class="story-ring-item" data-story-bundle="${esc(bundle.id)}" role="button" tabindex="0" aria-label="${esc(bundle.category)} — ${bundle.slides.length} Storys heute">
-        <button class="story-ring-btn${seen ? " is-seen" : ""}" type="button" tabindex="-1"><span class="story-ring-inner"><span class="story-ring-icon" aria-hidden="true">${esc(iconForBundle(bundle))}</span></span></button>
-        <div class="story-ring-label">${esc(bundle.category)}</div>
+      const theme = pickTheme(bundle.category);
+      const bg = `linear-gradient(145deg, ${theme.gradientFrom} 0%, ${theme.gradientTo} 100%)`;
+      return `<div class="story-ring-item" data-story-bundle="${esc(bundle.id)}" role="button" tabindex="0" aria-label="${esc(bundle.category)}">
+        <button class="story-ring-btn${seen ? " is-seen" : ""}" type="button" tabindex="-1"><span class="story-ring-inner" style="background:${bg}"><span class="story-ring-icon" aria-hidden="true">${esc(iconForBundle(bundle))}</span></span></button>
       </div>`;
     }).join("");
-    return `<section class="story-strip-section premium-surface" id="storyStripSection" aria-label="Storys nach Kategorien">
-      <div class="story-strip-head"><div><span>Täglich neu</span><h3>Ordner-Storys</h3></div><span class="story-strip-head" style="font-size:9px;color:var(--premium-label,#b8a878)">${bundles.length} Kategorien</span></div>
-      <div class="story-strip-scroller" id="storyStripScroller">${items}</div>
-    </section>`;
+    return `<section class="story-strip-section" id="storyStripSection" aria-label="Storys"><div class="story-strip-scroller" id="storyStripScroller">${items}</div></section>`;
   }
 
   function ensureViewerDom() {
