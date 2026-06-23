@@ -17,6 +17,10 @@
     warnings: {}
   };
 
+  function roundMoney(n) {
+    return Math.round((Number(n) || 0) * 100) / 100;
+  }
+
   function parseAmount(value) {
     const n = parseFloat(String(value ?? "").replace(/\s/g, "").replace(",", "."));
     return Number.isFinite(n) && n > 0 ? n : 0;
@@ -208,7 +212,7 @@
           "Keine endgültige Berechnung möglich, da Gold-/Silberpreis fehlt. Liquide Mittel werden trotzdem berechnet."
       };
     }
-    if (priceMissing && !hasMetalInput && zakatableWealth > 0) {
+    if (priceMissing && !hasMetalInput && zakatableWealth > 0 && !prices.hasAnyPrice) {
       return {
         caseId: "E",
         statusMessage: prices.freshness?.level === "missing"
@@ -242,10 +246,15 @@
       parseAmount(input.digital) +
       parseAmount(input.otherLiquid);
     if (cash > 0) {
+      const parts = [];
+      if (parseAmount(input.cash) > 0) parts.push(`Bargeld ${formatMoney(parseAmount(input.cash), currency)}`);
+      if (parseAmount(input.bank) > 0) parts.push(`Bank ${formatMoney(parseAmount(input.bank), currency)}`);
+      if (parseAmount(input.digital) > 0) parts.push(`Digital ${formatMoney(parseAmount(input.digital), currency)}`);
+      if (parseAmount(input.otherLiquid) > 0) parts.push(`Sonstige ${formatMoney(parseAmount(input.otherLiquid), currency)}`);
       steps.push({
-        label: "Liquide Mittel (Bargeld, Bank, digital)",
-        value: cash,
-        detail: `Bargeld ${formatMoney(parseAmount(input.cash), currency)} + Bank ${formatMoney(parseAmount(input.bank), currency)} + Digital ${formatMoney(parseAmount(input.digital), currency)}`
+        label: "Liquide Mittel",
+        value: roundMoney(cash),
+        detail: parts.join(" · ")
       });
     }
 
@@ -255,7 +264,7 @@
     let goldUnvalued = false;
 
     if (goldGrams > 0 && prices.goldPerGramEur > 0) {
-      goldValue = goldGrams * prices.goldPerGramEur;
+      goldValue = roundMoney(goldGrams * prices.goldPerGramEur);
       steps.push({
         label: "Gold",
         value: goldValue,
@@ -286,7 +295,7 @@
     let silverUnvalued = false;
 
     if (silverGrams > 0 && prices.silverPerGramEur > 0) {
-      silverValue = silverGrams * prices.silverPerGramEur;
+      silverValue = roundMoney(silverGrams * prices.silverPerGramEur);
       steps.push({
         label: "Silber",
         value: silverValue,
@@ -304,7 +313,7 @@
     }
 
     const liquidWealth = cash;
-    const totalWealth = cash + goldValue + silverValue;
+    const totalWealth = roundMoney(cash + goldValue + silverValue);
     steps.push({
       label: "Gesamtvermögen",
       value: totalWealth,
@@ -325,7 +334,7 @@
       activeSourcesForRule(config, "debts-deductible").forEach((s) => sourceIds.add(s.id));
     }
 
-    const zakatableWealth = Math.max(0, totalWealth - debtsDue);
+    const zakatableWealth = roundMoney(Math.max(0, totalWealth - debtsDue));
     steps.push({
       label: "Zakātpflichtiges Vermögen",
       value: zakatableWealth,
@@ -341,9 +350,9 @@
     const hasMetalInput = goldGrams > 0 || silverGrams > 0 || goldValue > 0 || silverValue > 0;
 
     if (prices.goldPerGramEur > 0 && prices.silverPerGramEur > 0) {
-      nisabGoldEur = (config.nisab?.goldGrams || 85) * prices.goldPerGramEur;
-      nisabSilverEur = (config.nisab?.silverGrams || 595) * prices.silverPerGramEur;
-      nisabStandardEur = Math.min(nisabGoldEur, nisabSilverEur);
+      nisabGoldEur = roundMoney((config.nisab?.goldGrams || 85) * prices.goldPerGramEur);
+      nisabSilverEur = roundMoney((config.nisab?.silverGrams || 595) * prices.silverPerGramEur);
+      nisabStandardEur = roundMoney(Math.min(nisabGoldEur, nisabSilverEur));
       nisabReached = zakatableWealth >= nisabStandardEur;
       activeSourcesForRule(config, "nisab-gold").forEach((s) => sourceIds.add(s.id));
       activeSourcesForRule(config, "nisab-silver").forEach((s) => sourceIds.add(s.id));
@@ -397,7 +406,7 @@
       });
     } else if (resultCase.caseId === "B") {
       previewOnly = true;
-      zakatDue = zakatableWealth * rate;
+      zakatDue = roundMoney(zakatableWealth * rate);
       steps.push({
         label: "Vorschau Pflichtbetrag (Ḥawl noch nicht erfüllt)",
         value: zakatDue,
@@ -406,9 +415,9 @@
       });
     } else if (resultCase.caseId === "C") {
       finalResult = true;
-      zakatDue = zakatableWealth * rate;
+      zakatDue = roundMoney(zakatableWealth * rate);
       steps.push({
-        label: "Rechenweg",
+        label: "Zakāt-Pflichtbetrag",
         value: zakatDue,
         detail: `${formatMoney(zakatableWealth, currency)} × ${formatNumber(rate * 100, 2)} % = ${formatMoney(zakatDue, currency)}`,
         highlight: true
@@ -416,7 +425,7 @@
     } else {
       previewOnly = true;
       if (prices.hasAnyPrice && nisabReached && zakatableWealth > 0) {
-        zakatDue = zakatableWealth * rate;
+        zakatDue = roundMoney(zakatableWealth * rate);
         steps.push({
           label: "Vorschau Pflichtbetrag (Preisquelle mit Hinweis)",
           value: zakatDue,
@@ -424,7 +433,7 @@
           preview: true
         });
       } else if (zakatableWealth > 0 && !hasMetalInput && !priceMissing) {
-        zakatDue = zakatableWealth * rate;
+        zakatDue = roundMoney(zakatableWealth * rate);
         steps.push({
           label: "Vorschau Pflichtbetrag (liquide Mittel)",
           value: zakatDue,
@@ -481,7 +490,13 @@
       warnings,
       sources,
       modules: {
-        cash,
+        cash: roundMoney(cash),
+        cashBreakdown: {
+          physical: parseAmount(input.cash),
+          bank: parseAmount(input.bank),
+          digital: parseAmount(input.digital),
+          other: parseAmount(input.otherLiquid)
+        },
         goldValue,
         goldGrams,
         goldType,
@@ -523,6 +538,7 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:14px}th{backgr
 
   global.DARZakat = {
     parseAmount,
+    roundMoney,
     formatMoney,
     formatNumber,
     formatDateTime,

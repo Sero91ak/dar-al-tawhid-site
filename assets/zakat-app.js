@@ -6,7 +6,7 @@
 
   const CONFIG_PATH = "/content/admin/zakat-config.json";
   const DEFAULT_PRICES_URL = "https://dar-admin-publisher.sero91ak.workers.dev/api/zakat/prices";
-  const DEBOUNCE_MS = 200;
+  const DEBOUNCE_MS = 250;
 
   let zakatConfig = null;
   let zakatConfigLoaded = false;
@@ -111,41 +111,68 @@
     return global.DARZakat.computeZakat(zakatInput, cfg);
   }
 
+  function hasAnyInput() {
+    const i = zakatInput;
+    return [
+      i.cash, i.bank, i.digital, i.otherLiquid,
+      i.goldGrams, i.goldValueManual, i.silverGrams, i.silverValueManual, i.debtsDue
+    ].some((v) => global.DARZakat?.parseAmount(v) > 0);
+  }
+
   function statusPill(ok, yes, no) {
     const cls = ok ? "zakat-pill ok" : ok === false ? "zakat-pill warn" : "zakat-pill muted";
     return `<span class="${cls}">${esc(ok ? yes : ok === false ? no : "—")}</span>`;
   }
 
+  function resultBanner(result) {
+    if (!result) return "";
+    const cls =
+      result.zakatObligatory ? "zakat-banner ok"
+        : result.previewOnly ? "zakat-banner preview"
+          : result.resultCase === "A" ? "zakat-banner calm"
+            : result.resultCase === "D" ? "zakat-banner warn"
+              : "zakat-banner neutral";
+    return `<div class="zakat-banner ${cls}"><span class="zakat-banner-label">${esc(result.statusMessage || "Berechnung bereit")}</span></div>`;
+  }
+
   function priceBadge(prices) {
-    if (zakatPricesLoading) {
-      return `<span class="zakat-pill muted">Preise werden geladen …</span>`;
-    }
+    if (zakatPricesLoading) return `<span class="zakat-pill muted">Preise laden …</span>`;
     const fresh = prices?.freshness;
-    if (fresh?.badge === "ok") {
-      return `<span class="zakat-pill ok">${esc(fresh.label || "✅ Preisquelle aktuell geprüft")}</span>`;
-    }
-    if (fresh?.badge === "warn") {
-      return `<span class="zakat-pill warn">${esc(fresh.label || "⚠️ Preis älter als 24 Stunden")}</span>`;
-    }
-    if (prices?.hasAnyPrice) {
-      return `<span class="zakat-pill warn">${esc(fresh?.label || "Preisquelle mit Hinweis")}</span>`;
-    }
-    return `<span class="zakat-pill warn">❌ Keine geprüfte Preisquelle</span>`;
+    if (fresh?.level === "realtime") return `<span class="zakat-pill ok">${esc(fresh.label || "Echtzeit geprüft")}</span>`;
+    if (fresh?.badge === "ok") return `<span class="zakat-pill ok">${esc(fresh.label || "Preisquelle geprüft")}</span>`;
+    if (fresh?.badge === "warn") return `<span class="zakat-pill warn">${esc(fresh.label || "Preis mit Hinweis")}</span>`;
+    if (prices?.hasAnyPrice) return `<span class="zakat-pill warn">Preisquelle mit Hinweis</span>`;
+    return `<span class="zakat-pill warn">Preisquelle wird geladen</span>`;
   }
 
   function renderPriceRow(label, meta, grams, currency) {
     if (zakatPricesLoading) {
-      return `<div class="zakat-price-row"><span>${esc(label)}</span><div class="zakat-skeleton"><span class="zakat-skel-line"></span><span class="zakat-skel-line short"></span></div></div>`;
+      return `<div class="zakat-price-row"><div class="zakat-price-head"><span>${esc(label)}</span><span class="zakat-price-tag">Niṣāb ${grams} g</span></div><div class="zakat-skeleton"><span class="zakat-skel-line"></span><span class="zakat-skel-line short"></span></div></div>`;
     }
     if (!meta?.pricePerGram) {
-      return `<div class="zakat-price-row"><span>${esc(label)}</span><p class="zakat-muted">Noch nicht geladen</p></div>`;
+      return `<div class="zakat-price-row muted-row"><div class="zakat-price-head"><span>${esc(label)}</span><span class="zakat-price-tag">Niṣāb ${grams} g</span></div><p class="zakat-muted">Wird geladen …</p></div>`;
     }
     return `<div class="zakat-price-row">
-      <span>${esc(label)} (${grams} g)</span>
-      <p>Preis pro Gramm: <b>${global.DARZakat.formatMoney(meta.pricePerGram, currency)}</b></p>
-      <p>Niṣāb ${grams} g: <b>${global.DARZakat.formatMoney(meta.nisabEur, currency)}</b></p>
-      <p class="zakat-muted">Quelle: ${esc(meta.source || "—")} · Stand: ${esc(global.DARZakat.formatDateTime(meta.fetchedAt))}</p>
+      <div class="zakat-price-head"><span>${esc(label)}</span><span class="zakat-price-tag">Niṣāb ${grams} g</span></div>
+      <div class="zakat-price-metrics">
+        <div><span>€/g</span><b>${global.DARZakat.formatMoney(meta.pricePerGram, currency)}</b></div>
+        <div><span>Niṣāb</span><b>${global.DARZakat.formatMoney(meta.nisabEur, currency)}</b></div>
+      </div>
+      <p class="zakat-muted">${esc(meta.source || "—")} · ${esc(global.DARZakat.formatDateTime(meta.fetchedAt))}</p>
     </div>`;
+  }
+
+  function renderLiquidBreakdown(result) {
+    const b = result?.modules?.cashBreakdown;
+    if (!b || !result.liquidWealth) return "";
+    const rows = [
+      ["Bargeld", b.physical],
+      ["Bank", b.bank],
+      ["Digital", b.digital],
+      ["Sonstige", b.other]
+    ].filter(([, v]) => v > 0);
+    if (!rows.length) return "";
+    return `<div class="zakat-liquid-grid">${rows.map(([l, v]) => `<div class="zakat-liquid-item"><span>${esc(l)}</span><b>${global.DARZakat.formatMoney(v, result.currency)}</b></div>`).join("")}<div class="zakat-liquid-item total"><span>Summe liquide</span><b>${global.DARZakat.formatMoney(result.liquidWealth, result.currency)}</b></div></div>`;
   }
 
   function renderZakatSources(result) {
@@ -164,10 +191,12 @@
   }
 
   function renderZakatSteps(result) {
-    return (result?.steps || [])
+    if (!result?.steps?.length) return `<p class="zakat-muted">Noch keine Eingaben — Zahlen eingeben, Ergebnis aktualisiert sich live.</p>`;
+    return result.steps
       .map(
-        (s) => `<div class="zakat-step ${s.highlight ? "highlight" : ""} ${s.preview ? "preview" : ""}">
-      <span>${esc(s.label)}</span>
+        (s, i) => `<div class="zakat-step ${s.highlight ? "highlight" : ""} ${s.preview ? "preview" : ""}">
+      <span class="zakat-step-num">${i + 1}</span>
+      <span class="zakat-step-label">${esc(s.label)}</span>
       <strong>${global.DARZakat.formatMoney(s.value, result.currency)}</strong>
       <small>${esc(s.detail || "")}</small>
     </div>`
@@ -189,40 +218,42 @@
       .map((x) => `<div class="zakat-warn">${esc(x.text)}</div>`)
       .join("");
 
-    const statusMsg = result?.statusMessage
-      ? `<p class="zakat-status-msg">${esc(result.statusMessage)}</p>`
-      : "";
-
-    const kpiSkeleton = zakatPricesLoading && !result?.liquidWealth
-      ? `<div class="zakat-kpi"><span>Gesamtvermögen</span><div class="zakat-skel-line"></div></div>`
+    const resultHero = result
+      ? `<div class="zakat-result-hero">
+      <span class="zakat-result-label">Pflichtbetrag</span>
+      <div class="zakat-result-amount">${global.DARZakat.formatMoney(result.zakatDue, result.currency)}</div>
+      <span class="zakat-result-sub">${result.previewOnly ? "Vorschau — keine endgültige Fatwa" : result.zakatObligatory ? "Zakāt fällig nach Berechnung" : result.resultCase === "A" ? "Keine Zakāt fällig" : "Transparent berechnet"}</span>
+    </div>`
       : "";
 
     const resultBlock = result
-      ? `<section class="zakat-panel zakat-result">
-      <div class="zakat-panel-head"><h3>Ergebnis</h3>${result.previewOnly ? `<span class="zakat-pill preview">Nur Vorschau</span>` : ""}${result.finalResult && result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}</div>
-      ${statusMsg}
+      ? `<section class="zakat-panel zakat-result zakat-panel-accent">
+      <div class="zakat-panel-head"><h3>Ergebnis</h3><div class="zakat-head-badges">${result.previewOnly ? `<span class="zakat-pill preview">Vorschau</span>` : ""}${result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}</div></div>
+      ${resultBanner(result)}
+      ${resultHero}
       <div class="zakat-kpi-grid">
         <div class="zakat-kpi"><span>Gesamtvermögen</span><b>${global.DARZakat.formatMoney(result.totalWealth, result.currency)}</b></div>
         <div class="zakat-kpi"><span>Zakātpflichtig</span><b>${global.DARZakat.formatMoney(result.zakatableWealth, result.currency)}</b></div>
-        <div class="zakat-kpi"><span>Pflichtbetrag</span><b class="zakat-gold">${global.DARZakat.formatMoney(result.zakatDue, result.currency)}</b></div>
+        <div class="zakat-kpi accent"><span>Abzüge (Schulden)</span><b>${global.DARZakat.formatMoney(result.debtsDue, result.currency)}</b></div>
       </div>
+      ${renderLiquidBreakdown(result)}
       <div class="zakat-status-row">
         ${statusPill(prices.hasAnyPrice ? result.nisab.reached : null, "Niṣāb erreicht", "Niṣāb nicht erreicht")}
-        ${statusPill(result.hawl.fulfilled, "Ḥawl erfüllt", result.hawl.fulfilled === false ? "Ḥawl nicht erfüllt" : "Ḥawl —")}
+        ${statusPill(result.hawl.fulfilled, "Ḥawl erfüllt", result.hawl.fulfilled === false ? "Ḥawl offen" : "Ḥawl —")}
         ${priceBadge(prices)}
       </div>
       <div class="zakat-nisab-compare">
-        <div><span>Niṣāb Silber (595 g)</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.silverEur, result.currency) : "—"}</b></div>
-        <div><span>Niṣāb Gold (85 g)</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.goldEur, result.currency) : "—"}</b></div>
+        <div><span>Niṣāb Silber · 595 g</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.silverEur, result.currency) : "—"}</b></div>
+        <div><span>Niṣāb Gold · 85 g</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.goldEur, result.currency) : "—"}</b></div>
         <div class="standard"><span>Standard (vorsichtig)</span><b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result.nisab.standardEur, result.currency) : "—"}</b></div>
       </div>
       ${warnings}
     </section>
     <section class="zakat-panel">
-      <div class="zakat-panel-head"><h3>Rechenweg</h3><span>${global.DARZakat.formatNumber(result.ratePercent, 2)} %</span></div>
+      <div class="zakat-panel-head"><h3>Rechenweg</h3><span class="zakat-rate-tag">${global.DARZakat.formatNumber(result.ratePercent, 2)} %</span></div>
       <div class="zakat-steps">${renderZakatSteps(result)}</div>
     </section>`
-      : kpiSkeleton;
+      : "";
 
     const historyBlock =
       session && zakatHistory.length
@@ -237,75 +268,74 @@
     const pricePanelIntro = zakatPricesLoading
       ? `<p class="zakat-muted zakat-loading-msg">Echtzeit-Niṣāb-Werte werden geladen …</p>`
       : prices.freshness?.level === "realtime"
-        ? `<p class="zakat-muted zakat-loading-msg ok">✅ Echtzeit geprüft (COMEX Spot, alle ~15 Min.)</p>`
-      : prices.hasVerified
-        ? `<p class="zakat-muted zakat-loading-msg ok">Niṣāb-Werte aktuell geprüft</p>`
-        : zakatPricesError
-          ? `<p class="zakat-warn">Preisabruf: ${esc(zakatPricesError)} — liquide Mittel werden trotzdem berechnet.</p>`
-          : "";
+        ? `<p class="zakat-muted zakat-loading-msg ok">Echtzeit geprüft · Aktualisierung alle ~15 Min.</p>`
+        : prices.hasVerified
+          ? `<p class="zakat-muted zakat-loading-msg ok">Niṣāb-Werte aktuell geprüft</p>`
+          : zakatPricesError
+            ? `<p class="zakat-warn">Preisabruf: ${esc(zakatPricesError)} — liquide Mittel werden trotzdem exakt berechnet.</p>`
+            : "";
 
     return `${global.setHeader("Zakāt-Rechner", "Berechnung nach Qurʾān, Sunnah und gesicherten Āthār", "Zakāt")}
     <section class="zakat-hero premium-surface">
+      <div class="zakat-hero-badge">Amānah · vertraulich &amp; transparent</div>
       <div class="zakat-hero-icon">🕌</div>
       <h2 class="zakat-hero-title">Zakāt-Rechner</h2>
-      <p class="zakat-hero-sub">Berechnung nach Qurʾān, Sunnah und gesicherten Āthār</p>
+      <p class="zakat-hero-sub">Qurʾān · Sunnah · gesicherte Āthār · live berechnet</p>
+      <p class="zakat-trust-note">Religiöse Grundlage und Marktdaten sind getrennt. Gold-/Silberpreise dienen nur der Niṣāb-Umrechnung — keine Fatwa.</p>
       <p class="zakat-privacy">${esc(w.privacy || "")}</p>
-      <p class="zakat-muted" style="margin-top:8px;font-size:11px;line-height:1.45">Die religiöse Grundlage der Zakāt stammt aus Qurʾān, authentischer Sunnah und gesicherten Āthār. Die Gold- und Silberpreise dienen nur zur aktuellen Umrechnung des Niṣāb.</p>
     </section>
+    ${resultBlock}
+    <div class="zakat-flow-label">Eingaben</div>
     <section class="zakat-panel">
-      <div class="zakat-panel-head"><h3>1 · Vermögen eingeben</h3></div>
+      <div class="zakat-panel-head"><h3>1 · Liquide Mittel</h3></div>
       <div class="zakat-form-grid">
-        <label>Bargeld<input class="field zakat-field" id="zakatCash" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(zakatInput.cash)}" placeholder="0"></label>
-        <label>Bankguthaben<input class="field zakat-field" id="zakatBank" type="number" min="0" step="0.01" value="${esc(zakatInput.bank)}" placeholder="0"></label>
-        <label>PayPal / digital<input class="field zakat-field" id="zakatDigital" type="number" min="0" step="0.01" value="${esc(zakatInput.digital)}" placeholder="0"></label>
-        <label>Sonstige liquide Mittel<input class="field zakat-field" id="zakatOtherLiquid" type="number" min="0" step="0.01" value="${esc(zakatInput.otherLiquid)}" placeholder="0"></label>
+        <label>Bargeld<input class="field zakat-field" id="zakatCash" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(zakatInput.cash)}" placeholder="0,00"></label>
+        <label>Bankguthaben<input class="field zakat-field" id="zakatBank" type="number" min="0" step="0.01" value="${esc(zakatInput.bank)}" placeholder="0,00"></label>
+        <label>PayPal / digital<input class="field zakat-field" id="zakatDigital" type="number" min="0" step="0.01" value="${esc(zakatInput.digital)}" placeholder="0,00"></label>
+        <label>Sonstige liquide<input class="field zakat-field" id="zakatOtherLiquid" type="number" min="0" step="0.01" value="${esc(zakatInput.otherLiquid)}" placeholder="0,00"></label>
       </div>
-      <div class="zakat-subsection-label">Gold</div>
-      <div class="zakat-form-grid">
+      <div class="zakat-subsection-label">Edelmetalle</div>
+      <div class="zakat-form-grid zakat-form-grid-3">
         <label>Gold (Gramm)<input class="field zakat-field" id="zakatGoldGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.goldGrams)}" placeholder="0"></label>
-        <label>Goldwert manuell<input class="field zakat-field" id="zakatGoldManual" type="number" min="0" step="0.01" value="${esc(zakatInput.goldValueManual)}" placeholder="optional"></label>
-        <label>Art<select class="field zakat-field" id="zakatGoldType"><option value="investment" ${zakatInput.goldType === "investment" ? "selected" : ""}>Anlagegold</option><option value="jewelry" ${zakatInput.goldType === "jewelry" ? "selected" : ""}>Schmuck</option><option value="other" ${zakatInput.goldType === "other" ? "selected" : ""}>Sonstiges</option></select></label>
-      </div>
-      <div class="zakat-subsection-label">Silber</div>
-      <div class="zakat-form-grid">
         <label>Silber (Gramm)<input class="field zakat-field" id="zakatSilverGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.silverGrams)}" placeholder="0"></label>
-        <label>Silberwert manuell<input class="field zakat-field" id="zakatSilverManual" type="number" min="0" step="0.01" value="${esc(zakatInput.silverValueManual)}" placeholder="optional"></label>
+        <label>Gold-Art<select class="field zakat-field" id="zakatGoldType"><option value="investment" ${zakatInput.goldType === "investment" ? "selected" : ""}>Anlagegold</option><option value="jewelry" ${zakatInput.goldType === "jewelry" ? "selected" : ""}>Schmuck</option><option value="other" ${zakatInput.goldType === "other" ? "selected" : ""}>Sonstiges</option></select></label>
       </div>
-      <div class="zakat-subsection-label">Schulden (kurzfristig fällig)</div>
-      <label>Abzugsfähige fällige Schulden<input class="field zakat-field" id="zakatDebts" type="number" min="0" step="0.01" value="${esc(zakatInput.debtsDue)}" placeholder="0"></label>
+      <div class="zakat-form-grid">
+        <label>Goldwert manuell (optional)<input class="field zakat-field" id="zakatGoldManual" type="number" min="0" step="0.01" value="${esc(zakatInput.goldValueManual)}" placeholder="nur wenn kein Preis"></label>
+        <label>Silberwert manuell (optional)<input class="field zakat-field" id="zakatSilverManual" type="number" min="0" step="0.01" value="${esc(zakatInput.silverValueManual)}" placeholder="nur wenn kein Preis"></label>
+      </div>
+      <div class="zakat-subsection-label">Schulden</div>
+      <label>Kurzfristig fällige Schulden<input class="field zakat-field" id="zakatDebts" type="number" min="0" step="0.01" value="${esc(zakatInput.debtsDue)}" placeholder="0,00"></label>
     </section>
     <section class="zakat-panel">
-      <div class="zakat-panel-head"><h3>2 · Niṣāb &amp; Preise</h3>${priceBadge(prices)}</div>
+      <div class="zakat-panel-head"><h3>2 · Niṣāb &amp; Echtzeitpreise</h3>${priceBadge(prices)}</div>
       ${pricePanelIntro}
-      ${renderPriceRow("Gold", goldMeta, 85, "EUR")}
-      ${renderPriceRow("Silber", silverMeta, 595, "EUR")}
-      <p class="zakat-muted">Standard: Vorsichtige Berechnung nach niedrigerem Niṣāb: <b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result?.nisab?.standardEur || live.standardNisabEur || 0, "EUR") : "—"}</b></p>
+      <div class="zakat-price-grid">${renderPriceRow("Gold", goldMeta, 85, "EUR")}${renderPriceRow("Silber", silverMeta, 595, "EUR")}</div>
+      <p class="zakat-standard-line">Standard-Niṣāb (vorsichtig, niedrigerer Wert): <b>${prices.hasAnyPrice ? global.DARZakat.formatMoney(result?.nisab?.standardEur || live.standardNisabEur || 0, "EUR") : "—"}</b></p>
       <details class="zakat-manual-prices" ${zakatManualOpen ? "open" : ""}>
         <summary>Notfall: Preise manuell (nur wenn API ausfällt)</summary>
         <div class="zakat-form-grid">
-          <label>Goldpreis/g (€)<input class="field zakat-field" id="zakatManualGoldPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.goldPerGramEur)}" placeholder="nur Notfall"></label>
-          <label>Silberpreis/g (€)<input class="field zakat-field" id="zakatManualSilverPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.silverPerGramEur)}" placeholder="nur Notfall"></label>
+          <label>Gold €/g<input class="field zakat-field" id="zakatManualGoldPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.goldPerGramEur)}" placeholder="Notfall"></label>
+          <label>Silber €/g<input class="field zakat-field" id="zakatManualSilverPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.silverPerGramEur)}" placeholder="Notfall"></label>
         </div>
       </details>
     </section>
     <section class="zakat-panel">
-      <div class="zakat-panel-head"><h3>3 · Ḥawl prüfen</h3></div>
+      <div class="zakat-panel-head"><h3>3 · Ḥawl</h3></div>
       <div class="zakat-form-grid">
         <label>Niṣāb erreicht seit<input class="field zakat-field" id="zakatNisabSince" type="date" value="${esc(zakatInput.nisabSinceDate)}"></label>
-        <label>Heute<input class="field zakat-field" id="zakatToday" type="date" value="${esc(zakatInput.todayDate)}"></label>
+        <label>Stichtag (heute)<input class="field zakat-field" id="zakatToday" type="date" value="${esc(zakatInput.todayDate)}"></label>
       </div>
-      ${result?.hawl?.nextDueDate ? `<p class="zakat-muted">Nächster Zakāt-Termin (Vorschau): ${esc(result.hawl.nextDueDate)} · ${result.hawl.daysRemaining != null && !result.hawl.fulfilled ? esc(String(result.hawl.daysRemaining) + " Tage verbleibend") : ""}</p>` : ""}
+      ${result?.hawl?.nextDueDate ? `<p class="zakat-muted">Nächster Termin (Vorschau): ${esc(result.hawl.nextDueDate)}${result.hawl.daysRemaining != null && !result.hawl.fulfilled ? ` · ${esc(String(result.hawl.daysRemaining))} Tage verbleibend` : ""}</p>` : `<p class="zakat-muted">Datum optional — ohne Ḥawl-Datum nur Vorschau.</p>`}
     </section>
-    ${resultBlock}
-    <section class="zakat-panel">
-      <div class="zakat-panel-head"><h3>Belege</h3><button type="button" class="zakat-btn ghost" id="zakatToggleSources">${zakatSourcesOpen ? "Belege ausblenden" : "📚 Belege anzeigen"}</button></div>
+    <section class="zakat-panel zakat-panel-soft">
+      <div class="zakat-panel-head"><h3>Belege &amp; Quellen</h3><button type="button" class="zakat-btn ghost" id="zakatToggleSources">${zakatSourcesOpen ? "Ausblenden" : "Anzeigen"}</button></div>
       <div id="zakatSourcesBox" ${zakatSourcesOpen ? "" : 'hidden'}>${result ? renderZakatSources(result) : ""}</div>
     </section>
     <section class="zakat-actions">
-      <button type="button" class="zakat-btn primary" id="zakatRecalcBtn">Berechnen</button>
-      <button type="button" class="zakat-btn" id="zakatClearBtn">Eingaben löschen</button>
+      <button type="button" class="zakat-btn" id="zakatClearBtn">Alle Eingaben löschen</button>
       <button type="button" class="zakat-btn" id="zakatPdfBtn">PDF exportieren</button>
-      ${session ? `<button type="button" class="zakat-btn" id="zakatSaveBtn">Im Account speichern</button>` : `<button type="button" class="zakat-btn" data-nav="account">Anmelden zum Speichern</button>`}
+      ${session ? `<button type="button" class="zakat-btn primary" id="zakatSaveBtn">Im Account speichern</button>` : `<button type="button" class="zakat-btn" data-nav="account">Anmelden zum Speichern</button>`}
     </section>
     ${historyBlock}
     <p class="zakat-footer">${esc(w.footer || "")}</p>`;
@@ -344,19 +374,29 @@
     }, DEBOUNCE_MS);
   }
 
+  function resetZakatInput() {
+    if (zakatDebounceTimer) {
+      clearTimeout(zakatDebounceTimer);
+      zakatDebounceTimer = null;
+    }
+    zakatInput = defaultInput();
+    zakatSourcesOpen = false;
+    zakatManualOpen = false;
+  }
+
   function bindZakat() {
     if (global.currentRoute?.view !== "zakat") return;
     document.querySelectorAll(".zakat-field").forEach((el) => {
       el.oninput = scheduleRender;
+      el.onchange = scheduleRender;
     });
-    const recalc = $("zakatRecalcBtn");
-    if (recalc) recalc.onclick = () => { readInputFromDom(); global.render(); };
     const clear = $("zakatClearBtn");
     if (clear)
       clear.onclick = () => {
-        zakatInput = defaultInput();
-        zakatSourcesOpen = false;
-        global.render();
+        if (!hasAnyInput() || confirm("Alle Eingaben zurücksetzen und neu berechnen?")) {
+          resetZakatInput();
+          global.render();
+        }
       };
     const toggle = $("zakatToggleSources");
     if (toggle) toggle.onclick = () => { zakatSourcesOpen = !zakatSourcesOpen; global.render(); };
@@ -431,7 +471,7 @@
   async function deleteZakatRecord(id) {
     const session = global.accountSession?.();
     if (!session?.id || !id) return;
-    if (!confirm("Diese Berechnung löschen?")) return;
+    if (!confirm("Diese Berechnung endgültig löschen?")) return;
     try {
       await global.supabaseRest(`user_zakat_calculations?id=eq.${encodeURIComponent(id)}&user_id=eq.${encodeURIComponent(session.id)}`, {
         method: "DELETE",
@@ -462,8 +502,6 @@
     loadZakatConfig,
     loadZakatPrices,
     getConfig: () => effectiveConfig(),
-    resetInput: () => {
-      zakatInput = defaultInput();
-    }
+    resetInput: resetZakatInput
   };
 })(typeof window !== "undefined" ? window : global);

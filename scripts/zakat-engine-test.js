@@ -72,9 +72,23 @@ const goldUnvalued = Z.computeZakat(
 assert(goldUnvalued.goldUnvalued === true, "gold marked unvalued");
 assert(goldUnvalued.liquidWealth === 1300, "liquid still 1300 with gold input");
 
+const otherLiquid = Z.computeZakat(
+  { cash: 100, bank: 200, digital: 50, otherLiquid: 150, debtsDue: 0 },
+  config
+);
+assert(otherLiquid.liquidWealth === 500, "otherLiquid included in liquid sum");
+assert(otherLiquid.modules.cashBreakdown.other === 150, "otherLiquid breakdown");
+
+const belowNisab = Z.computeZakat({ cash: 100, bank: 100 }, config);
+assert(belowNisab.resultCase === "A", "below nisab case A");
+assert(belowNisab.zakatDue === 0, "zero zakat below nisab");
+assert(belowNisab.nisab.reached === false, "nisab not reached");
+
+assert(Z.roundMoney(218.749) === 218.75, "roundMoney half up");
+
 const fresh = Z.priceFreshnessFromAge(now);
 assert(fresh.canFinalize === true, "fresh prices can finalize");
-assert(fresh.badge === "ok", "fresh badge ok");
+assert(fresh.level === "realtime", "realtime within 15 min");
 
 if (failed) process.exit(1);
 console.log("\nAlle Zakāt-Engine-Tests bestanden.");
