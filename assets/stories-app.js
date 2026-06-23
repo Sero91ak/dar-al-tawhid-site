@@ -214,15 +214,41 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
     document.head.appendChild(style);
   }
 
+  /** App-Daten kommen aus test/index.html (let posts — nicht auf window) */
+  function getAppContext() {
+    if (typeof global.darStoriesAppContext === "function") {
+      try {
+        return global.darStoriesAppContext() || {};
+      } catch (e) {}
+    }
+    return {
+      posts: global.posts || [],
+      duas: global.DUAS || [],
+      categoryLayout: global.CATEGORY_LAYOUT || null,
+      quranMeta: global.quranMeta || null
+    };
+  }
+
+  function countPostsByCategory(allPosts) {
+    const norm = global.normalizePostCategory || ((x) => x);
+    const map = new Map();
+    (allPosts || []).forEach((post) => {
+      let value = post?.category || "Unbekannt";
+      value = norm(value);
+      map.set(value, (map.get(value) || 0) + 1);
+    });
+    return map;
+  }
+
   function getCategoryList() {
-    const g = global;
-    const layout = g.CATEGORY_LAYOUT;
+    const ctx = getAppContext();
+    const layout = ctx.categoryLayout;
     const fromLayout = layout?.main?.length ? layout.main.slice() : layout?.order?.length ? layout.order.slice() : [];
-    const postCats = g.countBy && g.posts?.length ? [...g.countBy("category").keys()].filter((c) => c && c !== "Unbekannt") : [];
+    const postCats = ctx.posts?.length ? [...countPostsByCategory(ctx.posts).keys()].filter((c) => c && c !== "Unbekannt") : [];
     const merged = [...new Set([...fromLayout, ...postCats])];
     merged.sort((a, b) => {
-      const ra = typeof g.categoryRank === "function" ? g.categoryRank(a) : 999;
-      const rb = typeof g.categoryRank === "function" ? g.categoryRank(b) : 999;
+      const ra = typeof global.categoryRank === "function" ? global.categoryRank(a) : 999;
+      const rb = typeof global.categoryRank === "function" ? global.categoryRank(b) : 999;
       return ra - rb;
     });
     if (!merged.includes("Gebetszeiten")) merged.unshift("Gebetszeiten");
@@ -232,7 +258,7 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
   function postsInCategory(category) {
     const norm = global.normalizePostCategory || ((x) => x);
     const cat = norm(category);
-    return (global.posts || []).filter((p) => norm(p.category) === cat);
+    return (getAppContext().posts || []).filter((p) => norm(p.category) === cat);
   }
 
   function buildPostSlide(post, category, dayKey, index) {
@@ -336,20 +362,23 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
   function generateCategorySlides(category, dayKey) {
     const seed = hashSeed(`${dayKey}-${category}`);
     const norm = global.normalizePostCategory || ((x) => x);
+    const ctx = getAppContext();
+    const duas = ctx.duas || [];
+    const quranMeta = ctx.quranMeta;
 
     if (category === "Gebetszeiten") {
       return generatePrayerSlides(dayKey, STORIES_PER_CATEGORY);
     }
 
-    if (norm(category) === norm("Duʿāʾ") && global.DUAS?.length) {
-      const duas = global.DUAS.filter((d) => d && d.id);
-      if (duas.length >= 2) {
-        return pickN(duas, STORIES_PER_CATEGORY, seed).map((d, i) => buildDuaSlide(d, category, dayKey, i));
+    if (norm(category) === norm("Duʿāʾ") && duas.length) {
+      const pool = duas.filter((d) => d && d.id);
+      if (pool.length >= 1) {
+        return pickN(pool, STORIES_PER_CATEGORY, seed).map((d, i) => buildDuaSlide(d, category, dayKey, i));
       }
     }
 
-    if (/qur/i.test(category) && global.quranMeta?.surahs?.length) {
-      const surahs = global.quranMeta.surahs.filter((s) => s && s.id);
+    if (/qur/i.test(category) && quranMeta?.surahs?.length) {
+      const surahs = quranMeta.surahs.filter((s) => s && s.id);
       const popular = global.QURAN_POPULAR_SURAHS || [];
       const boosted = [...popular.map((p) => surahs.find((s) => s.id === p.id)).filter(Boolean), ...surahs];
       const unique = [...new Map(boosted.map((s) => [s.id, s])).values()];
@@ -363,12 +392,12 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
       return pickN(catPosts, STORIES_PER_CATEGORY, seed).map((p, i) => buildPostSlide(p, category, dayKey, i));
     }
 
-    if (global.DUAS?.length && /dua|duʿ|bitt|adhkar/i.test(category)) {
-      const themed = global.DUAS.filter((d) => {
+    if (duas.length && /dua|duʿ|bitt|adhkar/i.test(category)) {
+      const themed = duas.filter((d) => {
         const cat = String(d.cat || d.category || "");
         return cat.toLowerCase().includes(category.toLowerCase().slice(0, 4));
       });
-      const pool = themed.length ? themed : global.DUAS;
+      const pool = themed.length ? themed : duas;
       return pickN(pool, STORIES_PER_CATEGORY, seed).map((d, i) => buildDuaSlide(d, category, dayKey, i));
     }
 
@@ -760,7 +789,6 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
 
   function onAppReady() {
     if (!document.getElementById("storyStripMount")) return;
-    if (!(global.posts?.length > 0) && !(global.DUAS?.length > 0)) return;
     refresh({ force: true }).catch(() => {});
   }
 
