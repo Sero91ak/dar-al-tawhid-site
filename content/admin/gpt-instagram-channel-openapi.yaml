@@ -127,6 +127,7 @@ paths:
       security:
         - AdminSecret: []
 components:
+  schemas: {}
   securitySchemes:
     AdminSecret:
       type: apiKey

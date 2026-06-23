@@ -474,7 +474,7 @@ Regeln:
 - Im Instagram-Text KEIN langer Quellenlink — nur: 🔗 https://dar-al-tawhid.de/aX (wird automatisch erzeugt)
 - KEIN Platzhalter [QUELLE] — die Admin-App erzeugt den fertigen Kurzlink direkt`;
 
-  const GPT_ACTION_OPENAPI_URL = "https://dar-al-tawhid.de/content/admin/gpt-instagram-channel-openapi.yaml";
+  const GPT_ACTION_OPENAPI_URL = "https://dar-al-tawhid.de/content/admin/gpt-instagram-channel-openapi.json";
 
   const GPT_ACTION_INSTRUCTIONS = `Du bist der Instagram-Channel-Autor für DAR AL TAWHID.
 

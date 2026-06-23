@@ -73,6 +73,7 @@
     }
   },
   "components": {
+    "schemas": {},
     "securitySchemes": {
       "AdminSecret": {
         "type": "apiKey",
