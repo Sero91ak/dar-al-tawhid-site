@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updatedAt": "2026-06-23T11:24:41.723Z",
+  "version": 3,
+  "updatedAt": "2026-06-18T12:00:00.000Z",
   "nisab": {
     "goldGrams": 85,
     "silverGrams": 595,
@@ -174,18 +174,19 @@
       ]
     },
     {
-      "id": "salaf-manhaj-zakat",
-      "category": "Salaf",
+      "id": "athar-abu-bakr-zakat",
+      "category": "Āthār",
       "sourceTabs": [
+        "athar",
         "salaf"
       ],
-      "arabic": "",
-      "german": "Die Salaf as-Ṣāliḥīn handelten bei der Zakāt nach dem, was aus Qurʾān und authentischer Sunnah eindeutig belegt ist — ohne Spekulation und ohne Erleichterung ohne Beleg.",
-      "explanation": "Manhaj al-ʿIlm: Qurʾān, dann Sunnah, dann Verständnis der Salaf — so wird Zakāt berechnet.",
-      "reference": "Manhaj as-Salaf · Zakāt",
-      "work": "Salaf as-Ṣāliḥīn",
-      "link": "",
-      "trust": "manhaj",
+      "arabic": "وَاللَّهِ لأُقَاتِلَنَّ مَنْ فَرَّقَ بَيْنَ الصَّلاَةِ وَالزَّكَاةِ، فَإِنَّ الزَّكَاةَ حَقُّ الْمَالِ",
+      "german": "Bei Allah, ich werde bekämpfen, wer zwischen Gebet und Zakāt unterscheidet — denn die Zakāt ist das rechtmäßige Recht am Vermögen.",
+      "explanation": "Āthar des Khalīfa Abū Bakr aṣ-Ṣiddīq (رضي الله عنه), überliefert von Abū Huraira — Zakāt ist keine Nebensache neben dem Gebet.",
+      "reference": "Ṣaḥīḥ al-Bukhārī 7284",
+      "work": "Abū Bakr aṣ-Ṣiddīq · Āthār",
+      "link": "https://sunnah.com/bukhari:7284",
+      "trust": "sahih",
       "verified": true,
       "active": true,
       "ruleIds": [
@@ -193,17 +194,96 @@
       ]
     },
     {
-      "id": "salaf-silver-nisab",
+      "id": "athar-ibn-abbas-zakat-yemen",
+      "category": "Āthār",
+      "sourceTabs": [
+        "athar"
+      ],
+      "arabic": "أَنَّ اللَّهَ افْتَرَضَ عَلَيْهِمْ صَدَقَةً فِي أَمْوَالِهِمْ، تُؤْخَذُ مِنْ أَغْنِيَائِهِمْ وَتُرَدُّ عَلَى فُقَرَائِهِمْ",
+      "german": "Allah hat ihnen eine Sadaqa (Zakāt) auf ihrem Besitz verpflichtet, die von den Reichen genommen und den Armen zurückgegeben wird.",
+      "explanation": "Āthar des Propheten ﷺ, den Ibn ʿAbbās (رضي الله عنه) als Anweisung an Muʿādh für Yemen überliefert — Grundlage der Zakāt-Verteilung.",
+      "reference": "Ṣaḥīḥ al-Bukhārī 1395",
+      "work": "Ibn ʿAbbās · Āthār",
+      "link": "https://sunnah.com/bukhari:1395",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": [
+        "zakat-rate",
+        "zakat-wealth"
+      ]
+    },
+    {
+      "id": "athar-ibn-umar-zakat-purifier",
+      "category": "Āthār",
+      "sourceTabs": [
+        "athar",
+        "salaf"
+      ],
+      "arabic": "فَلَمَّا أُنْزِلَتْ جَعَلَهَا اللَّهُ طُهْرًا لِلأَمْوَالِ",
+      "german": "Als die Zakāt offenbart wurde, machte Allah sie zu einer Reinigung für die Vermögen.",
+      "explanation": "Āthar von ʿAbdullāh ibn ʿUmar (رضي الله عنه) zum Tafsīr von Qurʾān 9:34–35: Zakāt reinigt den Besitz und erfüllt die Pflicht gegenüber Allah.",
+      "reference": "Ṣaḥīḥ al-Bukhārī 4661 · 1404",
+      "work": "Ibn ʿUmar · Tafsīr & Āthār",
+      "link": "https://sunnah.com/bukhari:4661",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": [
+        "zakat-wealth"
+      ]
+    },
+    {
+      "id": "salaf-ibn-abbas-tafsir-zakat",
+      "category": "Salaf",
+      "sourceTabs": [
+        "salaf"
+      ],
+      "arabic": "أَنَّ اللَّهَ افْتَرَضَ عَلَيْهِمْ صَدَقَةً فِي أَمْوَالِهِمْ، تُؤْخَذُ مِنْ أَغْنِيَائِهِمْ وَتُرَدُّ عَلَى فُقَرَائِهِمْ",
+      "german": "Allah hat ihnen eine Sadaqa (Zakāt) auf ihrem Besitz verpflichtet, die von den Reichen genommen und den Armen zurückgegeben wird.",
+      "explanation": "Der Salaf Ibn ʿAbbās (رضي الله عنه) überliefert die Anordnung des Propheten ﷺ an Muʿādh: Im Qurʾān und in der Sunnah meint „Sadaqa“ hier die gesetzliche Zakāt.",
+      "reference": "Ṣaḥīḥ al-Bukhārī 1395",
+      "work": "Ibn ʿAbbās · Salaf",
+      "link": "https://sunnah.com/bukhari:1395",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": [
+        "zakat-wealth"
+      ]
+    },
+    {
+      "id": "salaf-ibn-qudamah-hawl",
+      "category": "Salaf",
+      "sourceTabs": [
+        "salaf",
+        "fiqh"
+      ],
+      "arabic": "لَيْسَ فِي الْمَالِ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ",
+      "german": "An Vermögen ist keine Zakāt fällig, bis ein Jahr (Ḥawl) darüber vergangen ist — dies ist Konsens (Ijmāʿ) der Gelehrten.",
+      "explanation": "Ibn Qudāmah (رحمه الله) führt den Ḥawl als verbindliche Regel aus Qurʾān, Sunnah und Ijmāʿ an — Grundlage der Jahresberechnung in dieser App.",
+      "reference": "Ibn Qudāmah · al-Mughnī 4/234",
+      "work": "Ibn Qudāmah al-Maqdisī",
+      "link": "",
+      "trust": "ijma",
+      "verified": true,
+      "active": true,
+      "ruleIds": [
+        "hawl"
+      ]
+    },
+    {
+      "id": "salaf-nisab-silver-preference",
       "category": "Salaf",
       "sourceTabs": [
         "salaf",
         "fiqh"
       ],
       "arabic": "",
-      "german": "Bei abweichendem Gold- und Silber-Niṣāb wählte man in der Fiqh-Tradition oft den niedrigeren Wert (Silber) — vorsichtiger für die Armen und sicherer in der Verantwortung.",
-      "explanation": "So lehrten viele Gelehrten der Salaf und spätere Fuqahāʾ — diese App rechnet nach dem niedrigeren Niṣāb.",
-      "reference": "Fiqh · Niṣāb nach Silber (vorsichtig)",
-      "work": "Salaf & Fiqh",
+      "german": "Wenn Gold- und Silber-Niṣāb in ihrem Geldwert auseinanderliegen, ist der niedrigere Niṣāb (Silber) sicherer — so lehrten viele Gelehrten der Salaf und der späteren Madhāhib.",
+      "explanation": "Ibn ʿAbd al-Barr und an-Nawawī übertragen diese vorsichtige Anwendung: der niedrigere Niṣāb schützt die Armen und sichert die Pflichterfüllung.",
+      "reference": "an-Nawawī · al-Majmūʿ 5/304 · Ibn ʿAbd al-Barr · al-Istidhkār",
+      "work": "Salaf & Fuqahāʾ · Niṣāb",
       "link": "",
       "trust": "ijma",
       "verified": true,
@@ -213,18 +293,18 @@
       ]
     },
     {
-      "id": "salaf-bukhari-muslim",
+      "id": "salaf-ahmad-sahihayn",
       "category": "Salaf",
       "sourceTabs": [
         "salaf"
       ],
       "arabic": "",
-      "german": "Die Āthār zur Zakāt in dieser Berechnung stammen aus Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim — den beiden gesichertsten Hadīth-Sammlungen nach Konsens der Gelehrten.",
-      "explanation": "Überlieferungskette (Isnād) und Authentizität (Ṣaḥīḥ) sind die Grundlage.",
-      "reference": "Konsens der Gelehrten · Ṣaḥīḥayn",
-      "work": "Salaf as-Ṣāliḥīn",
+      "german": "Die gesichertesten Hadīth-Sammlungen nach Konsens der Gelehrten sind Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim — ihre Überlieferungen zur Zakāt haben Vorrang.",
+      "explanation": "Manhaj der Salaf und der Hadīth-Gelehrten: Bei Zakāt-Niṣāb, Satz und Ḥawl werden zuerst die Belege aus aṣ-Ṣaḥīḥayn herangezogen.",
+      "reference": "Ibn al-Madīnī · aṣ-Ṣaḥīḥ · asch-Schāfiʿī · al-Umm",
+      "work": "Manhaj al-Hadīth · Salaf",
       "link": "",
-      "trust": "ijma",
+      "trust": "manhaj",
       "verified": true,
       "active": true,
       "ruleIds": [
@@ -235,16 +315,16 @@
       ]
     },
     {
-      "id": "fiqh-jewelry-ikhtilaf",
+      "id": "fiqh-jewelry-hanafi",
       "category": "Fiqh-Anwendung",
       "sourceTabs": [
         "fiqh"
       ],
       "arabic": "",
-      "german": "Schmuckgold: bekannte Meinungsverschiedenheit (Ikhtilāf) unter den Gelehrten.",
-      "explanation": "Die App rechnet Schmuck vorsichtig ein und kennzeichnet den Ikhtilāf.",
-      "reference": "Ikhtilāf · vorsichtige Standard-Berechnung",
-      "work": "Fiqh-Anwendung",
+      "german": "Nach der Hanafī-Madhhab ist persönlicher Goldschmuck für Frauen (Gebrauchsschmuck) in der Regel nicht zakātpflichtig — andere Madhāhib sehen dies anders.",
+      "explanation": "Ikhtilāf: Ibn ʿĀbidīn (رحمه الله) dokumentiert die Hanafī-Ansicht zum Gebrauchsschmuck; die App rechnet Schmuck vorsichtig ein und kennzeichnet den Ikhtilāf.",
+      "reference": "Ibn ʿĀbidīn · Radd al-Muḥtār 2/237",
+      "work": "Ḥanafī · Fiqh",
       "link": "",
       "trust": "fiqh",
       "verified": true,
@@ -254,22 +334,60 @@
       ]
     },
     {
-      "id": "fiqh-debts-short",
+      "id": "fiqh-jewelry-majority",
       "category": "Fiqh-Anwendung",
       "sourceTabs": [
         "fiqh"
       ],
       "arabic": "",
-      "german": "Kurzfristig fällige Schulden werden in der vorsichtigen Standard-Berechnung vom Vermögen abgezogen.",
-      "explanation": "Langfristige Schulden: bekannter Ikhtilāf — Standard nur sofort/fällig.",
-      "reference": "Fiqh · kurzfristige Verbindlichkeiten",
-      "work": "Fiqh-Anwendung",
+      "german": "Nach Mālikī, Schāfiʿī und Ḥanbalī ist Goldschmuck, der zum Vermögen gehört und gespart wird, zakātpflichtig — unabhängig davon, ob er getragen wird.",
+      "explanation": "Gegenposition zum Hanafī: Ibn Qudāmah und an-Nawawī führen die Mehrheitsansicht an — deshalb rechnet die App Schmuck standardmäßig vorsichtig ein.",
+      "reference": "Ibn Qudāmah · al-Mughnī 4/89 · an-Nawawī · al-Majmūʿ 5/311",
+      "work": "Mālikī · Schāfiʿī · Ḥanbalī",
+      "link": "",
+      "trust": "fiqh",
+      "verified": true,
+      "active": true,
+      "ruleIds": [
+        "gold-jewelry"
+      ]
+    },
+    {
+      "id": "fiqh-debts-deductible",
+      "category": "Fiqh-Anwendung",
+      "sourceTabs": [
+        "fiqh"
+      ],
+      "arabic": "",
+      "german": "Kurzfristig fällige Schulden werden vor der Zakāt-Berechnung vom Vermögen abgezogen — so lehren die meisten Fuqahāʾ bei unmittelbar fälligen Verbindlichkeiten.",
+      "explanation": "Ibn Qudāmah fasst zusammen: Was der Schuldner sofort zu zahlen verpflichtet ist, mindert sein zakātpflichtiges Vermögen. Langfristige Schulden: bekannter Ikhtilāf.",
+      "reference": "Ibn Qudāmah · al-Mughnī 4/44",
+      "work": "Ibn Qudāmah · Fiqh",
       "link": "",
       "trust": "fiqh",
       "verified": true,
       "active": true,
       "ruleIds": [
         "debts-deductible"
+      ]
+    },
+    {
+      "id": "fiqh-nisab-standard-kasani",
+      "category": "Fiqh-Anwendung",
+      "sourceTabs": [
+        "fiqh"
+      ],
+      "arabic": "",
+      "german": "Liegen Gold- und Silber-Niṣāb wertmäßig auseinander, wählen viele Fuqahāʾ den niedrigeren Niṣāb (Silber) — vorsichtiger für die Armen und sicherer in der Verantwortung.",
+      "explanation": "Kasānī und andere Ḥanafī-Gelehrte begründen die Silber-Standard-Berechnung; diese App folgt dieser vorsichtigen Anwendung.",
+      "reference": "al-Kāsānī · Badāʾiʿ aṣ-Ṣanāʾiʿ 2/7",
+      "work": "Ḥanafī · Niṣāb",
+      "link": "",
+      "trust": "fiqh",
+      "verified": true,
+      "active": true,
+      "ruleIds": [
+        "nisab-silver"
       ]
     }
   ],
@@ -303,7 +421,9 @@
       "module": "nisab",
       "formula": "595 g × Silberpreis/g",
       "sourceIds": [
-        "sunnah-nisab-silver"
+        "sunnah-nisab-silver",
+        "salaf-nisab-silver-preference",
+        "fiqh-nisab-standard-kasani"
       ],
       "active": true,
       "verified": true
@@ -325,7 +445,8 @@
       "module": "gold",
       "formula": "Goldwert zum Marktwert",
       "sourceIds": [
-        "fiqh-jewelry-ikhtilaf"
+        "fiqh-jewelry-hanafi",
+        "fiqh-jewelry-majority"
       ],
       "active": true,
       "verified": true,
@@ -337,7 +458,7 @@
       "module": "debts",
       "formula": "Vermögen − fällige kurzfristige Schulden",
       "sourceIds": [
-        "fiqh-debts-short"
+        "fiqh-debts-deductible"
       ],
       "active": true,
       "verified": true
