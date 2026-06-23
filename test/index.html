@@ -1644,13 +1644,26 @@ body:before{
 }
 
 /* ZAKĀT-RECHNER — theme-aware Typografie, Deckblatt premium, alle Erscheinungsbilder */
-.zakat-view{color:var(--text)}
+.zakat-view{color:var(--text);--zakat-r:18px;--zakat-r-lg:22px;--zakat-r-pill:999px}
+.zakat-view :where(input,select,textarea,button,.field,.zakat-btn,.zakat-mini-btn,.zakat-banner,.zakat-kpi,.zakat-step,.zakat-price-row,.zakat-liquid-item,.zakat-warn,.zakat-ar,.zakat-privacy,.zakat-nisab-compare,.zakat-source-card,.zakat-acc-preview-inner,.zakat-manual-prices){border-radius:var(--zakat-r)!important}
+.zakat-view :where(.zakat-pill,.zakat-hero-badge,.zakat-source-tab,.zakat-source-trust,.zakat-step-num,.zakat-acc-chevron,.zakat-source-cat,.zakat-source-preview-pill){border-radius:var(--zakat-r-pill)!important}
+.zakat-view :where(input,select,textarea){-webkit-appearance:none!important;appearance:none!important}
+.zakat-form-grid label,.zakat-panel>label{padding:12px 14px 14px;border-radius:var(--zakat-r)!important;background:color-mix(in srgb,var(--gold) 4%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));box-sizing:border-box}
+.zakat-acc.is-open .zakat-acc-body-inner{background:transparent!important;border:0!important;padding:10px 2px 2px!important;overflow:visible!important;border-radius:0!important}
+.zakat-acc.is-closed .zakat-acc-preview-inner{border-radius:var(--zakat-r)!important}
+.zakat-source-card{border-left:1px solid color-mix(in srgb,var(--gold) 28%,var(--line2))!important;box-shadow:inset 3px 0 0 var(--gold)}
+.zakat-manual-prices{border:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));border-radius:var(--zakat-r)!important;padding:4px 12px 12px;background:color-mix(in srgb,var(--gold) 3%,transparent)}
+.zakat-manual-prices summary{border-radius:var(--zakat-r-pill);padding:10px 12px!important}
+.zakat-history-row{border:1px solid var(--line2);border-radius:var(--zakat-r)!important;padding:10px 12px!important;margin-bottom:8px;background:color-mix(in srgb,var(--gold) 3%,transparent)}
+.zakat-history-row:last-child{margin-bottom:0}
+.zakat-skel-line{border-radius:var(--zakat-r-pill)!important}
+.zakat-price-metrics div{border-radius:14px!important}
 .zakat-view .view-head{margin-bottom:12px;padding:4px 2px 14px;border-bottom:1px solid var(--line2)}
 .zakat-view .view-head .eyebrow{color:var(--premium-label);font-size:9.5px;letter-spacing:.16em;margin-bottom:6px}
 .zakat-view .view-head h2{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1.75rem,4.8vw,2.15rem);line-height:1.08;margin:0;font-weight:800;text-shadow:none}
 .zakat-view .view-desc{color:var(--premium-body);font-size:12.5px;line-height:1.55;margin-top:6px;max-width:100%}
 .zakat-shell{max-width:720px;margin:0 auto;padding:0 8px 12px;display:grid;gap:11px;color:var(--text)}
-.zakat-shell .zakat-hero,.zakat-shell .zakat-panel,.zakat-shell .zakat-acc,.zakat-shell .zakat-result-strip{border-radius:20px;margin-bottom:0;overflow:hidden}
+.zakat-shell .zakat-hero,.zakat-shell .zakat-panel,.zakat-shell .zakat-acc,.zakat-shell .zakat-result-strip{border-radius:var(--zakat-r-lg)!important;margin-bottom:0;overflow:hidden}
 .zakat-hero-compact{padding:16px 18px 14px!important;text-align:left!important}
 .zakat-hero-compact:after{display:none!important}
 .zakat-hero-compact .zakat-hero-badge{margin-bottom:8px;padding:5px 11px;font-size:8.5px;border-radius:999px}
@@ -1680,7 +1693,7 @@ body:before{
 .zakat-acc.is-open .zakat-acc-preview{display:none}
 .zakat-acc-preview-inner .zakat-pill,.zakat-acc-preview-inner .zakat-muted{margin:0;line-height:1.4}
 .zakat-acc-preview-inner .zakat-pill{border-radius:999px;padding:6px 11px}
-.zakat-source-card{border-radius:14px;border:1px solid color-mix(in srgb,var(--gold) 14%,var(--line2));border-left:3px solid var(--gold);background:color-mix(in srgb,var(--gold) 4%,var(--card));overflow:hidden;padding:0}
+.zakat-source-card{border-radius:var(--zakat-r)!important;border:1px solid color-mix(in srgb,var(--gold) 14%,var(--line2));background:color-mix(in srgb,var(--gold) 4%,var(--card));overflow:hidden;padding:0}
 .zakat-source-summary{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:11px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;margin:0}
 .zakat-source-summary::-webkit-details-marker{display:none}
 .zakat-source-summary::marker{display:none}
@@ -1709,10 +1722,10 @@ body:before{
 .zakat-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line2)}
 .zakat-panel-head h3{font-family:var(--serif);color:var(--premium-title);font-size:1.12rem;margin:0;font-weight:700}
 .zakat-head-badges{display:flex;gap:6px;flex-wrap:wrap}
-.zakat-form-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:8px}
+.zakat-form-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:0}
 .zakat-form-grid-3{grid-template-columns:1fr}
-.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--text);font-weight:600;letter-spacing:.02em}
-.zakat-form-grid .field,.zakat-panel>.field{background:rgba(255,255,255,.035);border:1px solid var(--line2);border-radius:14px;color:var(--text);font-size:16px;padding:12px 14px;min-height:48px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
+.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:8px;font-size:11px;color:var(--text);font-weight:600;letter-spacing:.02em}
+.zakat-form-grid .field,.zakat-panel>.field{background:color-mix(in srgb,var(--gold) 3%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 16%,var(--line2));border-radius:16px!important;color:var(--text);font-size:16px;padding:13px 15px;min-height:50px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
 .zakat-form-grid .field:focus,.zakat-panel>.field:focus{border-color:rgba(239,215,142,.55);box-shadow:0 0 0 1px rgba(239,215,142,.18)}
 .zakat-form-grid .field::placeholder,.zakat-panel>.field::placeholder{color:var(--muted2);opacity:1}
 .zakat-subsection-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--premium-label);margin:14px 0 8px;font-weight:800}
@@ -1787,7 +1800,7 @@ body:before{
 .zakat-source-note{color:var(--premium-body);font-size:10.5px;margin:0 0 8px}
 .zakat-source-link{display:inline-flex;align-items:center;gap:4px;margin-top:4px;color:var(--premium-title);font-size:11px;font-weight:700;text-decoration:none}
 .zakat-actions{display:grid;grid-template-columns:1fr;gap:8px;margin:4px 0 8px}
-.zakat-btn,.zakat-mini-btn{border:1px solid var(--line2);border-radius:14px;padding:13px 16px;background:rgba(239,215,142,.075);color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:transform .12s ease,opacity .12s ease,border-color .15s ease;min-height:48px;width:100%;box-sizing:border-box}
+.zakat-btn,.zakat-mini-btn{border:1px solid var(--line2);border-radius:var(--zakat-r)!important;padding:13px 16px;background:rgba(239,215,142,.075);color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:transform .12s ease,opacity .12s ease,border-color .15s ease;min-height:48px;width:100%;box-sizing:border-box}
 .zakat-btn:active,.zakat-mini-btn:active{transform:scale(.98);opacity:.92}
 .zakat-btn.primary,.zakat-mini-btn.primary{background:linear-gradient(180deg,rgba(140,50,50,.6),rgba(90,30,30,.82));border-color:rgba(200,120,120,.4);color:#fff}
 .zakat-history-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:12px;color:var(--text)}
@@ -7301,7 +7314,7 @@ window.DAR_ANALYTICS_CONFIG={
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
 <script src="/assets/zakat-engine.js?v=8" defer></script>
-<script src="/assets/zakat-app.js?v=12" defer></script>
+<script src="/assets/zakat-app.js?v=13" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
