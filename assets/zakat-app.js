@@ -14,8 +14,17 @@
   let zakatPricesLoading = false;
   let zakatPricesError = "";
   let zakatInput = defaultInput();
-  let zakatSourcesOpen = false;
+  let zakatSourcesOpen = true;
+  let zakatSourceTab = "quran";
   let zakatManualOpen = false;
+
+  const SOURCE_TABS = [
+    { id: "quran", label: "Qurʾān", short: "Qurʾān" },
+    { id: "sunnah", label: "Sunnah", short: "Sunnah" },
+    { id: "salaf", label: "Salaf", short: "Salaf" },
+    { id: "athar", label: "Āthār", short: "Āthār" },
+    { id: "fiqh", label: "Fiqh", short: "Fiqh" }
+  ];
   let zakatHistory = [];
   let zakatDebounceTimer = null;
 
@@ -175,19 +184,84 @@
     return `<div class="zakat-liquid-grid">${rows.map(([l, v]) => `<div class="zakat-liquid-item"><span>${esc(l)}</span><b>${global.DARZakat.formatMoney(v, result.currency)}</b></div>`).join("")}<div class="zakat-liquid-item total"><span>Summe liquide</span><b>${global.DARZakat.formatMoney(result.liquidWealth, result.currency)}</b></div></div>`;
   }
 
-  function renderZakatSources(result) {
-    const sources = result?.sources || [];
-    if (!sources.length) return `<p class="zakat-muted">Keine geprüften Belege für diese Berechnung geladen.</p>`;
-    return sources
-      .map(
-        (s) => `<article class="zakat-source-card">
-      <div class="zakat-source-meta"><span class="zakat-source-cat">${esc(s.category)}</span><span>${esc(s.reference || "")}</span></div>
-      ${s.arabic ? `<div class="zakat-ar">${esc(s.arabic)}</div>` : ""}
-      <p>${esc(s.german || s.explanation || "")}</p>
-      ${s.link ? `<a href="${esc(s.link)}" target="_blank" rel="noopener">Quelle öffnen</a>` : ""}
-    </article>`
-      )
-      .join("");
+  function configSources(cfg) {
+    return (cfg?.sources || []).filter((s) => s && s.active !== false && s.verified !== false);
+  }
+
+  function sourcesForTab(sources, tab) {
+    switch (tab) {
+      case "quran":
+        return sources.filter((s) => s.category === "Qurʾān");
+      case "sunnah":
+        return sources.filter((s) => s.category === "Sunnah");
+      case "salaf":
+        return sources.filter((s) => s.category === "Sunnah");
+      case "athar":
+        return sources.filter((s) => s.category === "Sunnah" && s.arabic);
+      case "fiqh":
+        return sources.filter((s) => s.category === "Fiqh-Anwendung");
+      default:
+        return sources;
+    }
+  }
+
+  function sourceTabIntro(tab) {
+    const intros = {
+      quran: "Grundlage aus dem Qurʾān — die Pflicht zur Zakāt aus dem Vermögen.",
+      sunnah: "Authentische Überlieferungen des Propheten ﷺ zu Niṣāb, Satz und Ḥawl.",
+      salaf: "So verstanden und lehrten die Salaf as-Ṣāliḥīn diese Sunnah — gesichert in Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim.",
+      athar: "Arabische Texte der gesicherten Āthār — zum direkten Lesen der Überlieferung.",
+      fiqh: "Vorsichtige Fiqh-Anwendung bei bekanntem Ikhtilāf — transparent gekennzeichnet."
+    };
+    return intros[tab] || "";
+  }
+
+  function renderSourceCard(s, tab) {
+    const trust = s.trust === "sahih" ? "Ṣaḥīḥ" : s.trust === "mutawatir" ? "Mutawātir" : s.trust === "fiqh" ? "Fiqh" : "";
+    const showArabic = tab === "athar" || tab === "quran" || tab === "sunnah" || tab === "salaf";
+    return `<article class="zakat-source-card">
+      <div class="zakat-source-meta">
+        <span class="zakat-source-cat">${esc(s.work || s.category)}</span>
+        ${trust ? `<span class="zakat-source-trust">${esc(trust)}</span>` : ""}
+        <span class="zakat-source-ref">${esc(s.reference || "")}</span>
+      </div>
+      ${showArabic && s.arabic ? `<div class="zakat-ar">${esc(s.arabic)}</div>` : ""}
+      <p class="zakat-source-text">${esc(s.german || s.explanation || "")}</p>
+      ${s.explanation && s.german ? `<p class="zakat-source-note">${esc(s.explanation)}</p>` : ""}
+      ${s.link ? `<a class="zakat-source-link" href="${esc(s.link)}" target="_blank" rel="noopener">Quelle öffnen ↗</a>` : ""}
+    </article>`;
+  }
+
+  function renderSourceHub(cfg) {
+    const sources = configSources(cfg);
+    const tabSources = sourcesForTab(sources, zakatSourceTab);
+    const tabs = SOURCE_TABS.map(
+      (t) =>
+        `<button type="button" class="zakat-source-tab ${zakatSourceTab === t.id ? "active" : ""}" data-zakat-source-tab="${esc(t.id)}" aria-pressed="${zakatSourceTab === t.id}">${esc(t.label)}</button>`
+    ).join("");
+
+    const body = zakatSourcesOpen
+      ? `<div class="zakat-sources-body" id="zakatSourcesBox">
+      <div class="zakat-source-tabs" role="tablist">${tabs}</div>
+      <p class="zakat-source-intro">${esc(sourceTabIntro(zakatSourceTab))}</p>
+      <div class="zakat-source-list">${tabSources.length ? tabSources.map((s) => renderSourceCard(s, zakatSourceTab)).join("") : `<p class="zakat-muted">Keine Belege in dieser Kategorie geladen.</p>`}</div>
+    </div>`
+      : `<div class="zakat-sources-preview">
+      ${SOURCE_TABS.map((t) => `<span class="zakat-source-preview-pill">${esc(t.short)}</span>`).join("")}
+      <span class="zakat-muted">Tippen zum Lesen</span>
+    </div>`;
+
+    return `<section class="zakat-panel zakat-sources-hub">
+      <button type="button" class="zakat-sources-hub-head" id="zakatToggleSources" aria-expanded="${zakatSourcesOpen}">
+        <div class="zakat-sources-hub-copy">
+          <span class="zakat-sources-hub-kicker">Authentische Quellen</span>
+          <h3>Qurʾān · Sunnah · Salaf · Āthār</h3>
+          <p>Geprüfte Belege — zum Lesen antippen</p>
+        </div>
+        <span class="zakat-sources-chevron ${zakatSourcesOpen ? "open" : ""}" aria-hidden="true">›</span>
+      </button>
+      ${body}
+    </section>`;
   }
 
   function renderZakatSteps(result) {
@@ -276,16 +350,19 @@
             : "";
 
     return `${global.setHeader("Zakāt-Rechner", "Berechnung nach Qurʾān, Sunnah und gesicherten Āthār", "Zakāt")}
+    <div class="zakat-shell">
     <section class="zakat-hero premium-surface">
       <div class="zakat-hero-badge">Amānah · vertraulich &amp; transparent</div>
       <div class="zakat-hero-icon">🕌</div>
       <h2 class="zakat-hero-title">Zakāt-Rechner</h2>
-      <p class="zakat-hero-sub">Qurʾān · Sunnah · gesicherte Āthār · live berechnet</p>
+      <p class="zakat-hero-sub">Qurʾān · Sunnah · Salaf · gesicherte Āthār</p>
       <p class="zakat-trust-note">Religiöse Grundlage und Marktdaten sind getrennt. Gold-/Silberpreise dienen nur der Niṣāb-Umrechnung — keine Fatwa.</p>
       <p class="zakat-privacy">${esc(w.privacy || "")}</p>
     </section>
+    ${renderSourceHub(cfg)}
     ${resultBlock}
     <div class="zakat-flow-label">Eingaben</div>
+    <div class="zakat-input-stack">
     <section class="zakat-panel">
       <div class="zakat-panel-head"><h3>1 · Liquide Mittel</h3></div>
       <div class="zakat-form-grid">
@@ -328,17 +405,15 @@
       </div>
       ${result?.hawl?.nextDueDate ? `<p class="zakat-muted">Nächster Termin (Vorschau): ${esc(result.hawl.nextDueDate)}${result.hawl.daysRemaining != null && !result.hawl.fulfilled ? ` · ${esc(String(result.hawl.daysRemaining))} Tage verbleibend` : ""}</p>` : `<p class="zakat-muted">Datum optional — ohne Ḥawl-Datum nur Vorschau.</p>`}
     </section>
-    <section class="zakat-panel zakat-panel-soft">
-      <div class="zakat-panel-head"><h3>Belege &amp; Quellen</h3><button type="button" class="zakat-btn ghost" id="zakatToggleSources">${zakatSourcesOpen ? "Ausblenden" : "Anzeigen"}</button></div>
-      <div id="zakatSourcesBox" ${zakatSourcesOpen ? "" : 'hidden'}>${result ? renderZakatSources(result) : ""}</div>
-    </section>
+    </div>
     <section class="zakat-actions">
       <button type="button" class="zakat-btn" id="zakatClearBtn">Alle Eingaben löschen</button>
       <button type="button" class="zakat-btn" id="zakatPdfBtn">PDF exportieren</button>
       ${session ? `<button type="button" class="zakat-btn primary" id="zakatSaveBtn">Im Account speichern</button>` : `<button type="button" class="zakat-btn" data-nav="account">Anmelden zum Speichern</button>`}
     </section>
     ${historyBlock}
-    <p class="zakat-footer">${esc(w.footer || "")}</p>`;
+    <p class="zakat-footer">${esc(w.footer || "")}</p>
+    </div>`;
   }
 
   function readInputFromDom() {
@@ -380,7 +455,8 @@
       zakatDebounceTimer = null;
     }
     zakatInput = defaultInput();
-    zakatSourcesOpen = false;
+    zakatSourcesOpen = true;
+    zakatSourceTab = "quran";
     zakatManualOpen = false;
   }
 
@@ -399,7 +475,19 @@
         }
       };
     const toggle = $("zakatToggleSources");
-    if (toggle) toggle.onclick = () => { zakatSourcesOpen = !zakatSourcesOpen; global.render(); };
+    if (toggle)
+      toggle.onclick = () => {
+        zakatSourcesOpen = !zakatSourcesOpen;
+        global.render();
+      };
+    document.querySelectorAll("[data-zakat-source-tab]").forEach((btn) => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        zakatSourceTab = btn.getAttribute("data-zakat-source-tab") || "quran";
+        zakatSourcesOpen = true;
+        global.render();
+      };
+    });
     const pdf = $("zakatPdfBtn");
     if (pdf)
       pdf.onclick = () => {
