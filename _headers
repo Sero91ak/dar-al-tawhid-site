@@ -11,3 +11,9 @@
 
 /content/admin/gpt-instagram-channel-openapi.yaml
   Cache-Control: public, max-age=300
+
+/content/stories/*
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/content/staging/stories/*
+  Cache-Control: no-cache, must-revalidate, max-age=0

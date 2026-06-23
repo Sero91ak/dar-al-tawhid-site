@@ -38,6 +38,13 @@ import {
 } from "./kurzlink-admin.js";
 import { readZakatConfig, saveZakatPrices } from "./zakat-admin.js";
 import {
+  readStoriesIndex,
+  saveStoryEntry,
+  deleteStoryEntry,
+  reorderStories,
+  buildPublicStoriesResponse
+} from "./stories-admin.js";
+import {
   getPublicZakatPrices,
   getAdminZakatPriceStatus,
   fetchAndStoreZakatPrices,
@@ -281,6 +288,38 @@ export default {
         return json(result, cors);
       }
 
+      if (url.pathname === "/api/admin/stories" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index, sha, path } = await readStoriesIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({ ok: true, index, sha, path, staging, count: (index.items || []).length }, cors);
+      }
+
+      if (url.pathname === "/api/admin/stories/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await saveStoryEntry(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/stories/delete" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await deleteStoryEntry(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/stories/reorder" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await reorderStories(env, input, helpers), cors);
+      }
+
       if (url.pathname === "/api/admin/zakat/config" && request.method === "GET") {
         assertConfigured(env);
         assertAuthorized(request, env);
@@ -291,6 +330,12 @@ export default {
       if (url.pathname === "/api/zakat/prices" && request.method === "GET") {
         const result = await getPublicZakatPrices(env, { githubGet, base64ToUtf8, githubPut, githubCommitBatch }, { fetchIfEmpty: true });
         return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/stories" && request.method === "GET") {
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index, path } = await readStoriesIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({ ...buildPublicStoriesResponse(index), path, staging }, cors, 200);
       }
 
       if (url.pathname === "/api/admin/zakat/prices/status" && request.method === "GET") {
