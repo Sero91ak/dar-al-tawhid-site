@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-18T12:00:00.000Z",
+  "nisab": {
+    "goldGrams": 85,
+    "silverGrams": 595,
+    "standard": "silver",
+    "note": "Vorsichtige Standard-Berechnung nach dem niedrigeren Niṣāb (Silber), weil dies sicherer für die Verantwortung und vorteilhafter für die Armen ist."
+  },
+  "zakatRate": 0.025,
+  "hawlDaysLunar": 354,
+  "prices": {
+    "goldPerGramEur": null,
+    "silverPerGramEur": null,
+    "currency": "EUR",
+    "source": "",
+    "verifiedAt": "",
+    "verifiedBy": "",
+    "active": false,
+    "apiFallback": false
+  },
+  "priceHistory": [],
+  "warnings": {
+    "privacy": "Ohne Account bleiben deine Eingaben anonym und werden nicht gespeichert. Erst wenn du dich anmeldest und aktiv speicherst, wird deine Berechnung in deinem privaten Bereich abgelegt.",
+    "footer": "Dieser Rechner berechnet die Zakāt anhand der hinterlegten Quellen aus Qurʾān, authentischer Sunnah, gesicherten Āthār und geprüfter Fiqh-Anwendung. Sonderfälle mit bekanntem Ikhtilāf werden gekennzeichnet. Ohne Account bleiben deine Eingaben anonym und werden nicht gespeichert.",
+    "disclaimer": "Diese Berechnung basiert auf den in der App angezeigten Quellen und ersetzt keine persönliche Prüfung bei Sonderfällen.",
+    "noPrice": "Heute liegt kein geprüfter Niṣāb-Wert vor. Bitte später erneut prüfen oder einen geprüften Preis manuell eintragen.",
+    "hawlPreview": "Der Niṣāb wurde noch kein vollständiges islamisches Jahr gehalten. Das Ergebnis ist nur eine Vorschau.",
+    "jewelryIkhtilaf": "Bei Schmuck gibt es bekannten Ikhtilāf. Die App zeigt die vorsichtige Berechnung und nennt die Quelle.",
+    "uncertainReceivable": "Unsichere Forderungen sind in der Standard-Berechnung nicht enthalten. Bitte Quellenlage prüfen.",
+    "ikhtilafGeneral": "Diese Detailfrage enthält bekannten Ikhtilāf. Die App zeigt die vorsichtige Berechnung und nennt die zugrunde gelegten Belege."
+  },
+  "sources": [
+    {
+      "id": "quran-zakat-obligation",
+      "category": "Qurʾān",
+      "arabic": "خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً",
+      "german": "Nimm von ihrem Besitz eine Sadaqa (Zakāt) …",
+      "explanation": "Grundlage der Pflicht zur Entnahme eines Anteils vom Vermögen.",
+      "reference": "Qurʾān 9:103",
+      "work": "Qurʾān",
+      "link": "https://quran.com/9/103",
+      "trust": "mutawatir",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["zakat-rate", "zakat-wealth"]
+    },
+    {
+      "id": "sunnah-nisab-gold",
+      "category": "Sunnah",
+      "arabic": "لَيْسَ فِي أَقَلَّ مِنْ عِشْرِينَ دِينَارًا صَدَقَةٌ",
+      "german": "Bei weniger als zwanzig Dīnār ist keine Sadaqa fällig.",
+      "explanation": "Niṣāb-Gold wird in der Sunnah mit ca. 20 Dīnār (≈ 85 g Gold) überliefert.",
+      "reference": "Ṣaḥīḥ al-Bukhārī 1454",
+      "work": "Ṣaḥīḥ al-Bukhārī",
+      "link": "",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["nisab-gold"]
+    },
+    {
+      "id": "sunnah-nisab-silver",
+      "category": "Sunnah",
+      "arabic": "فِي أَرْبَعِينَ دِرْهَمًا",
+      "german": "Bei vierzig Dirham … (Niṣāb Silber)",
+      "explanation": "Niṣāb-Silber wird mit 200 Dirham (≈ 595 g Silber) überliefert.",
+      "reference": "Ṣaḥīḥ Muslim 979",
+      "work": "Ṣaḥīḥ Muslim",
+      "link": "",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["nisab-silver"]
+    },
+    {
+      "id": "sunnah-zakat-rate",
+      "category": "Sunnah",
+      "arabic": "فِي كُلِّ أَرْبَعِينَ دِرْهَمًا دِرْهَمٌ",
+      "german": "Bei vierzig Dirham ist ein Dirham (2,5 %) fällig.",
+      "explanation": "Der Zakāt-Satz von 2,5 % auf zakātpflichtiges Vermögen.",
+      "reference": "Ṣaḥīḥ Muslim 979",
+      "work": "Ṣaḥīḥ Muslim",
+      "link": "",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["zakat-rate"]
+    },
+    {
+      "id": "sunnah-hawl",
+      "category": "Sunnah",
+      "arabic": "لَيْسَ فِي مَالٍ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ",
+      "german": "An Vermögen ist keine Zakāt fällig, bis ein Jahr darüber vergangen ist (Ḥawl).",
+      "explanation": "Vermögen muss ein vollständiges Mondjahr (Ḥawl) den Niṣāb halten.",
+      "reference": "Ṣaḥīḥ al-Bukhārī 1454",
+      "work": "Ṣaḥīḥ al-Bukhārī",
+      "link": "",
+      "trust": "sahih",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["hawl"]
+    },
+    {
+      "id": "fiqh-jewelry-ikhtilaf",
+      "category": "Fiqh-Anwendung",
+      "arabic": "",
+      "german": "Schmuckgold: bekannte Meinungsverschiedenheit (Ikhtilāf) unter den Gelehrten.",
+      "explanation": "Die App rechnet Schmuck vorsichtig ein und kennzeichnet den Ikhtilāf.",
+      "reference": "Ikhtilāf · vorsichtige Standard-Berechnung",
+      "work": "Fiqh-Anwendung",
+      "link": "",
+      "trust": "fiqh",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["gold-jewelry"]
+    },
+    {
+      "id": "fiqh-debts-short",
+      "category": "Fiqh-Anwendung",
+      "arabic": "",
+      "german": "Kurzfristig fällige Schulden werden in der vorsichtigen Standard-Berechnung vom Vermögen abgezogen.",
+      "explanation": "Langfristige Schulden: bekannter Ikhtilāf — Standard nur sofort/fällig.",
+      "reference": "Fiqh · kurzfristige Verbindlichkeiten",
+      "work": "Fiqh-Anwendung",
+      "link": "",
+      "trust": "fiqh",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["debts-deductible"]
+    }
+  ],
+  "rules": [
+    {
+      "id": "zakat-rate",
+      "name": "Zakāt-Satz 2,5 %",
+      "module": "core",
+      "formula": "zakātpflichtiges Vermögen × 0,025",
+      "sourceIds": ["quran-zakat-obligation", "sunnah-zakat-rate"],
+      "active": true,
+      "verified": true
+    },
+    {
+      "id": "nisab-gold",
+      "name": "Niṣāb Gold 85 g",
+      "module": "nisab",
+      "formula": "85 g × Goldpreis/g",
+      "sourceIds": ["sunnah-nisab-gold"],
+      "active": true,
+      "verified": true
+    },
+    {
+      "id": "nisab-silver",
+      "name": "Niṣāb Silber 595 g",
+      "module": "nisab",
+      "formula": "595 g × Silberpreis/g",
+      "sourceIds": ["sunnah-nisab-silver"],
+      "active": true,
+      "verified": true
+    },
+    {
+      "id": "hawl",
+      "name": "Ḥawl (Mondjahr)",
+      "module": "hawl",
+      "formula": "354 Tage seit Niṣāb-Erreichen",
+      "sourceIds": ["sunnah-hawl"],
+      "active": true,
+      "verified": true
+    },
+    {
+      "id": "gold-jewelry",
+      "name": "Gold / Schmuck",
+      "module": "gold",
+      "formula": "Goldwert zum Marktwert",
+      "sourceIds": ["fiqh-jewelry-ikhtilaf"],
+      "active": true,
+      "verified": true,
+      "ikhtilaf": true
+    },
+    {
+      "id": "debts-deductible",
+      "name": "Abzugsfähige Schulden",
+      "module": "debts",
+      "formula": "Vermögen − fällige kurzfristige Schulden",
+      "sourceIds": ["fiqh-debts-short"],
+      "active": true,
+      "verified": true
+    }
+  ]
+}
