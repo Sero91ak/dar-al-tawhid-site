@@ -17,3 +17,9 @@
 
 /content/staging/stories/*
   Cache-Control: no-cache, must-revalidate, max-age=0
+
+/content/focus-feed/*
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/content/staging/focus-feed/*
+  Cache-Control: no-cache, must-revalidate, max-age=0
