@@ -90,6 +90,7 @@ function runSourceFilesGuard() {
     "validateCreateInput",
     "buildCreatePayload",
     "buildChannelShareText",
+    "buildImageShareText",
     "GPT_ACTION_INSTRUCTIONS",
     "GPT_ACTION_OPENAPI_URL"
   ]);

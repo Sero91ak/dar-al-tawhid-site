@@ -333,6 +333,20 @@
     };
   }
 
+  function buildImageShareText({ scholar, quote, statement, sourceCitation, code, sourceShortlink, adminNote } = {}) {
+    const c = normalizeCode(code || sourceShortlink);
+    const name = String(scholar || "").trim();
+    const q = String(quote || statement || "").trim();
+    const citation = String(sourceCitation || adminNote || "").trim();
+    const shortLink = c ? formatInstagramLine(c) : "";
+    const parts = [];
+    if (name) parts.push(`${name} sagte:`, "", q);
+    else if (q) parts.push(q);
+    if (citation) parts.push("", `📝 ${citation}`);
+    if (shortLink) parts.push("", shortLink);
+    return parts.join("\n").trim();
+  }
+
   function buildChannelShareText({
     title,
     hashtags,
@@ -341,8 +355,16 @@
     sourceCitation,
     code,
     sourceShortlink,
-    fazit
+    fazit,
+    scholar,
+    postType,
+    contentType,
+    adminNote
   } = {}) {
+    const pt = String(postType || contentType || "channel").toLowerCase();
+    if (pt.includes("image") || pt === "instagram_image") {
+      return buildImageShareText({ scholar, quote, statement, sourceCitation, code, sourceShortlink, adminNote });
+    }
     const c = normalizeCode(code || sourceShortlink);
     const titleClean = String(title || "")
       .replace(/^📖\s*/, "")
@@ -413,6 +435,8 @@
       statement: String(input?.statement || "").trim(),
       sourceCitation: String(input?.sourceCitation || "").trim(),
       fazit: String(input?.fazit || "").trim(),
+      scholar: String(input?.scholar || "").trim(),
+      postType: String(input?.postType || input?.contentType || "channel").trim(),
       adminNote: String(input?.adminNote || input?.sourceCitation || "").trim(),
       quote: String(input?.quote || input?.statement || "").trim(),
       sourcePlatform: String(input?.sourcePlatform || input?.platform || detectPlatform(targetUrl) || "").trim(),
@@ -476,31 +500,32 @@ Regeln:
 
   const GPT_ACTION_OPENAPI_URL = "https://dar-al-tawhid.de/content/admin/gpt-instagram-channel-openapi.json";
 
-  const GPT_ACTION_INSTRUCTIONS = `Du bist der Instagram-Channel-Autor für DAR AL TAWHID.
+  const GPT_ACTION_INSTRUCTIONS = `Du bist der Instagram-Autor für DAR AL TAWHID.
 
 WICHTIG — AUTOMATISCHER KURZLINK:
-Wenn der Nutzer einen Instagram-Channel-Beitrag will, rufe IMMER die Action createInstagramChannelPost auf.
-Erfinde NIEMALS einen Kurzlink. Gib NIEMALS [QUELLE] oder einen Platzhalter aus.
-Die Action liefert instagramPost — gib diesen Text 1:1 an den Nutzer zurück (kopierbereit).
+Wenn der Nutzer einen Beitrag will, rufe IMMER createInstagramChannelPost auf.
+Erfinde NIEMALS einen Kurzlink. Gib NIEMALS [QUELLE] aus.
+Gib result.instagramPost 1:1 zurück — kopierbereit.
 
-Ablauf bei jeder Anfrage „Instagram-Channel-Beitrag“:
-1. Recherchiere die Originalquelle (nur erlaubte Domains)
-2. Baue targetUrl mit Textmarkierung #:~:text=Start,Ende
-3. Rufe createInstagramChannelPost mit allen Pflichtfeldern auf
-4. Gib nur result.instagramPost aus — fertig, nichts manuell ergänzen
+ZWEI BEITRAGSTYPEN — strikt trennen:
 
-Pflichtfelder für die Action:
-- title, hashtags, statement, sourceCitation, targetUrl, adminNote, quote, fazit
-- adminNote = gleiche Info wie sourceCitation (Buch, Band, Seite, Gelehrter)
-- quote = exakt zitierte Aussage
+1) BILD-BEITRAG (postType: "image") — wenn Nutzer Bild, Grafik, Zitat-Bild will:
+   Nur: Gelehrter + direkte Aussage (Originalwortlaut) + Quellenangabe + Kurzlink.
+   VERBOTEN auf dem Bild / im Text: Erklärung, Fazit, Einordnung, 👉, "zum Hadīth", Kontext, Deutung, Zusammenfassung.
+   Pflichtfelder: postType="image", scholar, quote (nur wörtliche Aussage), sourceCitation, targetUrl, adminNote, sourcePlatform
+   quote = NUR die direkte Aussage des Gelehrten — kein Rahmentext davor oder danach.
 
-Erlaubte Domains für targetUrl:
-islamweb.net, shamela.ws, al-maktaba.org, ketabonline.com, dorar.net, quran.ksu.edu.sa, archive.org, waqfeya.net
+2) CHANNEL-BEITRAG (postType: "channel") — längerer Instagram-Text:
+   Pflicht: title, hashtags, statement, sourceCitation, targetUrl, adminNote, quote, fazit
 
-Regeln für den Beitrag:
-- Kein langer Quellenlink im Text — nur der Kurzlink 🔗 https://dar-al-tawhid.de/aX aus der API
-- Textmarkierung im targetUrl ist Pflicht (Ausnahme nur mit textHighlightException + textHighlightNote)
-- Bei API-Fehler: ehrlich melden „Kurzlink konnte nicht erstellt werden“ — keinen falschen Link erfinden
+Ablauf:
+1. Originalquelle (nur erlaubte Domains) mit #:~:text=Start,Ende
+2. createInstagramChannelPost aufrufen
+3. Nur instagramPost ausgeben
+
+Erlaubte Domains: islamweb.net, shamela.ws, al-maktaba.org, ketabonline.com, dorar.net, quran.ksu.edu.sa, archive.org, waqfeya.net
+
+Bei API-Fehler: „Kurzlink konnte nicht erstellt werden“ — keinen falschen Link erfinden.
 
 OpenAPI-Schema: ${GPT_ACTION_OPENAPI_URL}`;
 
@@ -803,6 +828,7 @@ OpenAPI-Schema: ${GPT_ACTION_OPENAPI_URL}`;
     injectShortlinkIntoMarkdown,
     deriveKurzlinkFromPost,
     buildChannelShareText,
+    buildImageShareText,
     buildNormalShareSourceLine,
     validateCreateInput,
     buildCreatePayload,

@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "DAR AL TAWHID Instagram Channel Kurzlink API",
-    "description": "Erstellt echten Kurzlink und fertigen Instagram-Beitrag.",
-    "version": "1.0.0"
+    "title": "DAR AL TAWHID Instagram Kurzlink API",
+    "description": "Erstellt echten Kurzlink und fertigen Instagram-Text. postType image = nur Aussage+Quelle.",
+    "version": "1.1.0"
   },
   "servers": [
     {
@@ -14,8 +14,8 @@
     "/api/admin/shortlinks/channel-create": {
       "post": {
         "operationId": "createInstagramChannelPost",
-        "summary": "Instagram-Channel-Beitrag mit echtem Kurzlink erstellen",
-        "description": "Ruft diese Action bei Instagram-Channel-Beitraegen auf. Gib instagramPost 1:1 an den Nutzer zurueck.",
+        "summary": "Instagram-Beitrag mit echtem Kurzlink erstellen",
+        "description": "postType image: nur Gelehrter, direkte Aussage, Quelle, Kurzlink — KEIN Fazit/Erklaerung. postType channel: voller Channel-Text.",
         "requestBody": {
           "required": true,
           "content": {
@@ -23,23 +23,32 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "title",
-                  "hashtags",
-                  "statement",
+                  "postType",
                   "sourceCitation",
                   "targetUrl",
                   "adminNote",
-                  "quote",
-                  "fazit"
+                  "quote"
                 ],
                 "properties": {
+                  "postType": {
+                    "type": "string",
+                    "enum": ["image", "channel"],
+                    "description": "image = Bild-Beitrag nur Aussage+Quelle; channel = voller Instagram-Text"
+                  },
+                  "scholar": {
+                    "type": "string",
+                    "description": "Pflicht bei postType image — Name des Gelehrten"
+                  },
                   "title": { "type": "string" },
                   "hashtags": { "type": "string" },
                   "statement": { "type": "string" },
                   "sourceCitation": { "type": "string" },
                   "targetUrl": { "type": "string" },
                   "adminNote": { "type": "string" },
-                  "quote": { "type": "string" },
+                  "quote": {
+                    "type": "string",
+                    "description": "Nur direkte wörtliche Aussage — bei image ohne Erklaerung/Einordnung"
+                  },
                   "fazit": { "type": "string" },
                   "sourcePlatform": { "type": "string" },
                   "textHighlightException": { "type": "boolean" },

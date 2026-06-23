@@ -8947,19 +8947,35 @@ function extractNameLineCandidate(line){
   const m=t.match(/^(?:🖋️\s*)?(.+?)\s+sagte\s*:?\s*$/i);
   return m?normalizeImageEditorSpeaker(m[1]):null;
 }
+function isImageEditorSkipLine(t){
+  const s=String(t||"").trim();
+  if(!s)return false;
+  if(/^👉/.test(s))return true;
+  if(/^🌙/.test(s)||/^Fazit:/i.test(s))return true;
+  if(/^Erklärung/i.test(s))return true;
+  if(/^Einordnung/i.test(s))return true;
+  if(/^Das bedeutet/i.test(s))return true;
+  if(/^zum Had/i.test(s)||/^zur Had/i.test(s)||/^Zum Had/i.test(s))return true;
+  if(/^Hier (wird|bedeutet)/i.test(s))return true;
+  if(/^Diese Aussage/i.test(s))return true;
+  if(/^Im Bild/i.test(s))return true;
+  return false;
+}
 function parseImageEditorBodySource(text,fallbackScholar){
   const lines=stripImageEditorMarkdown(text).split("\n");
-  let nameSpeaker="",body=[],fazit="",phase="scan";
+  let nameSpeaker="",body=[],fazit="",phase="scan",skipBlock=false;
   const pushBody=line=>{
     let t=String(line||"").replace(/^>\s?/,"").trim();
-    if(!t)return;
+    if(!t||isImageEditorSkipLine(t))return;
     if(extractNameLineCandidate(t))return;
     if(/^🖋️/.test(t)&&/sagte/i.test(t))return;
     body.push(t);
   };
   lines.forEach(line=>{
     const t=line.trim();
-    if(!t){if(body.length&&phase==="body")body.push("");return}
+    if(!t){if(body.length&&phase==="body"&&!skipBlock)body.push("");return}
+    if(isImageEditorSkipLine(t)){skipBlock=true;phase="skip";return}
+    if(phase==="skip"){if(!t)phase="body";return}
     const inline=t.match(/^(?:🖋️\s*)?(.+?)\s+sagte\s*:\s*(.*)$/i);
     if(inline&&!nameSpeaker){
       nameSpeaker=normalizeImageEditorSpeaker(inline[1]);
@@ -9032,7 +9048,6 @@ function imageEditorMainSegments(parsed,baseSize){
     segments.push({text:nameText,size:nameSize,lineHeight:1.12,weight:"700",kind:"name",align:"center",minSize:16});
   }
   if(parsed.bodyText)segments.push({text:parsed.bodyText,size,lineHeight:1.22,weight:"700",kind:"body"});
-  if(parsed.fazit)segments.push({text:"🌙 Fazit: "+parsed.fazit,size:Math.max(24,Math.round(size*0.9)),lineHeight:1.18,weight:"700",kind:"fazit"});
   return segments;
 }
 function imageEditorSegmentDrawHeight(seg){return(seg.fontSize||32)+((seg.lines?.length||0)*seg.lineHeightPx)}

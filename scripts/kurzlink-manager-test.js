@@ -129,7 +129,15 @@ const htmlActive = K.buildRedirectHtml({ code: "a3", status: "active", targetUrl
 assert(/location\.replace/i.test(htmlActive), "Test 17: active status redirects");
 
 assert(typeof K.GPT_ACTION_INSTRUCTIONS === "string" && K.GPT_ACTION_INSTRUCTIONS.includes("createInstagramChannelPost"), "Test 18: GPT Action instructions present");
-assert(String(K.GPT_ACTION_OPENAPI_URL || "").includes("gpt-instagram-channel-openapi.yaml"), "Test 19: GPT OpenAPI URL");
+assert(String(K.GPT_ACTION_OPENAPI_URL || "").includes("gpt-instagram-channel-openapi"), "Test 19: GPT OpenAPI URL");
+
+const imageText = K.buildImageShareText({
+  scholar: "Ibn 'Abd al-Barr",
+  quote: "Der Weg der Gelehrten von Ahlus-Sunnah ist, an solche Texte zu glauben – ohne Wie-Beschreibung.",
+  sourceCitation: "al-Istidhkār, Bd. 8, S. 152",
+  code: "a5"
+});
+assert(imageText.includes("Ibn 'Abd al-Barr sagte:") && !imageText.includes("Fazit") && imageText.includes("🔗 https://dar-al-tawhid.de/a5"), "Test 20: image post = only quote + source + link");
 
 if (failed) {
   console.error(`\n${failed} Kurzlink-Test(s) fehlgeschlagen.`);

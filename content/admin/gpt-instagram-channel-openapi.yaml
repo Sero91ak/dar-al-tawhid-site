@@ -1,16 +1,16 @@
 openapi: 3.1.0
 info:
-  title: DAR AL TAWHID Instagram Channel Kurzlink API
-  description: Erstellt echten Kurzlink und fertigen Instagram-Beitrag.
-  version: 1.0.0
+  title: DAR AL TAWHID Instagram Kurzlink API
+  description: postType image = nur Aussage+Quelle. postType channel = voller Text.
+  version: 1.1.0
 servers:
   - url: https://dar-admin-publisher.sero91ak.workers.dev
 paths:
   /api/admin/shortlinks/channel-create:
     post:
       operationId: createInstagramChannelPost
-      summary: Instagram-Channel-Beitrag mit echtem Kurzlink erstellen
-      description: Ruft diese Action bei Instagram-Channel-Beitraegen auf. Gib instagramPost 1:1 an den Nutzer zurueck.
+      summary: Instagram-Beitrag mit echtem Kurzlink erstellen
+      description: postType image = Bild-Beitrag nur Aussage und Quelle. Kein Fazit, keine Erklaerung.
       requestBody:
         required: true
         content:
@@ -18,15 +18,17 @@ paths:
             schema:
               type: object
               required:
-                - title
-                - hashtags
-                - statement
+                - postType
                 - sourceCitation
                 - targetUrl
                 - adminNote
                 - quote
-                - fazit
               properties:
+                postType:
+                  type: string
+                  enum: [image, channel]
+                scholar:
+                  type: string
                 title:
                   type: string
                 hashtags:

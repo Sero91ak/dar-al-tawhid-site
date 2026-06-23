@@ -141,7 +141,25 @@ function formatInstagramLine(code) {
   return c ? `🔗 https://${SHORT_DOMAIN}/${c}` : "";
 }
 
+export function buildImageShareText(input = {}) {
+  const code = normalizeCode(input.code || input.sourceShortlink || "");
+  const scholar = String(input.scholar || input.title || "").trim();
+  const quote = String(input.quote || input.statement || "").trim();
+  const citation = String(input.sourceCitation || input.adminNote || "").trim();
+  const shortLink = code ? formatInstagramLine(code) : "";
+  const parts = [];
+  if (scholar) parts.push(`${scholar} sagte:`, "", quote);
+  else if (quote) parts.push(quote);
+  if (citation) parts.push("", `📝 ${citation}`);
+  if (shortLink) parts.push("", shortLink);
+  return parts.join("\n").trim();
+}
+
 export function buildChannelShareText(input = {}) {
+  const postType = String(input.postType || input.contentType || "channel").toLowerCase();
+  if (postType.includes("image") || postType === "instagram_image") {
+    return buildImageShareText(input);
+  }
   const code = normalizeCode(input.code || input.sourceShortlink || "");
   const titleClean = String(input.title || "")
     .replace(/^📖\s*/, "")
@@ -743,12 +761,16 @@ export async function createShortlinkEntry(env, input, { githubGet, githubPut, g
   }
 
   const shortUrl = `https://${SHORT_DOMAIN}/${code}`;
-  const channelFields = input?.title || input?.statement || input?.hashtags || input?.fazit || input?.sourceCitation;
+  const channelFields = input?.title || input?.statement || input?.hashtags || input?.fazit || input?.sourceCitation || input?.quote;
+  const postType = String(input?.postType || input?.contentType || "channel").toLowerCase();
   const instagramPost = channelFields
     ? buildChannelShareText({
+        postType,
         title: input?.title,
+        scholar: input?.scholar,
         hashtags: input?.hashtags,
         statement: input?.statement,
+        quote: input?.quote,
         sourceCitation: input?.sourceCitation || input?.adminNote,
         fazit: input?.fazit,
         code
@@ -771,15 +793,27 @@ export async function createShortlinkEntry(env, input, { githubGet, githubPut, g
 
 export function validateInstagramChannelInput(input) {
   const errors = [];
+  const postType = String(input?.postType || input?.contentType || "channel").toLowerCase();
+  const isImage = postType.includes("image") || postType === "instagram_image";
+  const quote = String(input?.quote || input?.statement || "").trim();
+  const sourceCitation = String(input?.sourceCitation || input?.adminNote || "").trim();
+  const scholar = String(input?.scholar || "").trim();
+
+  if (isImage) {
+    if (!quote) errors.push("Zitierte Aussage fehlt");
+    if (!sourceCitation) errors.push("Quellenangabe fehlt");
+    if (!scholar) errors.push("Gelehrter fehlt");
+    return { ok: !errors.length, errors, postType: "image" };
+  }
+
   const title = String(input?.title || "").trim();
   const statement = String(input?.statement || "").trim();
-  const sourceCitation = String(input?.sourceCitation || "").trim();
   const fazit = String(input?.fazit || "").trim();
   if (!title) errors.push("Titel fehlt");
   if (!statement) errors.push("Beitragstext fehlt");
   if (!sourceCitation) errors.push("Kurze Quellenangabe fehlt");
   if (!fazit) errors.push("Fazit fehlt");
-  return { ok: !errors.length, errors };
+  return { ok: !errors.length, errors, postType: "channel" };
 }
 
 export async function createInstagramChannelPost(env, input, deps) {
@@ -809,9 +843,12 @@ export async function createInstagramChannelPost(env, input, deps) {
   const instagramPost =
     result.instagramPost ||
     buildChannelShareText({
+      postType: input?.postType || input?.contentType || "channel",
       title: input?.title,
+      scholar: input?.scholar,
       hashtags: input?.hashtags,
       statement: input?.statement,
+      quote: input?.quote,
       sourceCitation: input?.sourceCitation || input?.adminNote,
       fazit: input?.fazit,
       code: result.code
