@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-06-23T08:30:54.544Z",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-06-23T08:35:54.542Z",
   "usersChecked": 16,
   "duaCandidates": 16,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 16,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 16,
+  "errors": 0,
   "dailyContentDate": "2026-06-23",
   "currentRecommendation": {
     "id": "takfir-auf-imam-ahmad-und-imam-ash-shafii-120",
@@ -31,8 +31,8 @@
       "count": 16,
       "contentId": "quran-006",
       "recipients": "58557af4-8e60-4597-af95-3b7ce562730c",
-      "ok": false,
-      "invalid": 1
+      "ok": true,
+      "invalid": 0
     }
   ]
 }
