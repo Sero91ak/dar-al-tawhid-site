@@ -475,7 +475,7 @@
     ${renderAccordion("hawl", "Ḥawl", "4 · Mondjahr", hawlBody, hawlPreview)}
     ${renderSourceHub(cfg)}
     ${hasAnyInput() ? renderAccordion("details", "Ergebnis-Details", "Aufschlüsselung", detailsBody, detailsPreview) : ""}
-    ${renderAccordion("steps", "Rechenweg", result ? `${global.DARZakat.formatNumber(result.ratePercent, 2)} %` : "Schritte", stepsBody, stepsPreview)}
+    ${renderAccordion("steps", "Rechenweg", "5 · Transparenz", stepsBody, stepsPreview)}
     <section class="zakat-actions zakat-actions-compact">
       <button type="button" class="zakat-btn" id="zakatClearBtn">Zurücksetzen</button>
       <button type="button" class="zakat-btn" id="zakatPdfBtn">PDF</button>
