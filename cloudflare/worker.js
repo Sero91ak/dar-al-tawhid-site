@@ -31,6 +31,7 @@ import {
   readShortlinksRegistry,
   saveShortlinkEntry,
   saveAutoShortlinkEntry,
+  importShortlinkBatch,
   validatePostShortlinkForPublish
 } from "./kurzlink-admin.js";
 
@@ -206,6 +207,19 @@ export default {
         assertAuthorized(request, env);
         const input = await request.json().catch(() => ({}));
         const result = await saveAutoShortlinkEntry(env, input, {
+          githubGet,
+          githubPut,
+          githubCommitBatch,
+          base64ToUtf8
+        });
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/shortlinks/import" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await importShortlinkBatch(env, input, {
           githubGet,
           githubPut,
           githubCommitBatch,

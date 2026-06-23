@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v37';
+const CACHE_VERSION = 'dar-admin-stats-v38';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',

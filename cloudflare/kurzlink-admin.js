@@ -59,6 +59,48 @@ function hasTextFragment(url) {
   return /#:~:text=/i.test(String(url || ""));
 }
 
+function isShortlinkUrl(url) {
+  const u = String(url || "").trim();
+  if (!u) return false;
+  return new RegExp(`^(https?:\\/\\/)?(www\\.)?${SHORT_DOMAIN.replace(/\./g, "\\.")}\\/a\\d+\\/?$`, "i").test(u);
+}
+
+function detectPlatform(url) {
+  if (isLocalSourcePath(url)) return "PDF/Scan (lokal)";
+  const host = domainFromUrl(url);
+  if (!host) return "";
+  if (host.includes("islamweb")) return "Islamweb";
+  if (host.includes("shamela")) return "Shamela";
+  if (host.includes("maktaba")) return "al-Maktaba";
+  if (host.includes("ketabonline")) return "Ketabonline";
+  if (host.includes("dorar")) return "Dorar";
+  if (host.includes("quran.ksu")) return "quran.ksu.edu.sa";
+  if (host.includes("archive.org")) return "Archive";
+  if (host.includes("waqfeya")) return "Waqfeya";
+  return "";
+}
+
+function normalizeImportLink(raw) {
+  if (typeof raw === "string") {
+    const targetUrl = String(raw || "").trim();
+    return targetUrl ? { targetUrl, adminNote: "", platform: "" } : null;
+  }
+  if (!raw || typeof raw !== "object") return null;
+  const targetUrl = String(raw.targetUrl || raw.url || raw.quelle || raw.source || "").trim();
+  if (!targetUrl) return null;
+  return {
+    targetUrl,
+    adminNote: String(raw.adminNote || raw.note || raw.bemerkung || "").trim(),
+    platform: String(raw.platform || "").trim(),
+    textHighlightNote: String(raw.textHighlightNote || "").trim()
+  };
+}
+
+function formatInstagramLine(code) {
+  const c = normalizeCode(code);
+  return c ? `🔗 https://${SHORT_DOMAIN}/${c}` : "";
+}
+
 export function normalizeShortlinksRegistry(raw) {
   const data = raw && typeof raw === "object" ? raw : {};
   const entries = {};
@@ -374,5 +416,124 @@ export async function saveShortlinkEntry(env, input, { githubGet, githubPut, git
     registry: nextRegistry,
     redirectPath,
     commitSha
+  };
+}
+
+export async function importShortlinkBatch(env, input, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }) {
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const rawLinks = Array.isArray(input.links) ? input.links : [];
+  if (!rawLinks.length) throw new Error("Keine Links zum Importieren");
+
+  const { registry, sha, path } = await readShortlinksRegistry(env, githubGet, base64ToUtf8);
+  const registrySha = String(input.registrySha || sha || "").trim();
+  if (registrySha && sha && registrySha !== sha) {
+    throw new Error("Registry wurde zwischenzeitlich geändert — bitte neu laden");
+  }
+
+  const verify = input.verify === true;
+  const now = new Date().toISOString();
+  let nextRegistry = normalizeShortlinksRegistry(registry);
+  let serial = nextRegistry.nextSerial || 1;
+  const created = [];
+  const skipped = [];
+  const batchEntries = [];
+
+  for (const raw of rawLinks) {
+    const link = normalizeImportLink(raw);
+    if (!link?.targetUrl) continue;
+    if (isShortlinkUrl(link.targetUrl)) {
+      skipped.push({ targetUrl: link.targetUrl, reason: "Bereits Kurzlink" });
+      continue;
+    }
+    if (!isAllowedTargetUrl(link.targetUrl)) {
+      skipped.push({ targetUrl: link.targetUrl, reason: "Domain nicht erlaubt" });
+      continue;
+    }
+
+    const code = `a${serial}`;
+    serial += 1;
+    const targetUrl = link.targetUrl;
+    const th = hasTextFragment(targetUrl) ? "yes" : link.textHighlightNote ? "not_possible" : "no";
+    const entry = {
+      code,
+      targetUrl,
+      platform: link.platform || detectPlatform(targetUrl),
+      textHighlight: th,
+      textHighlightNote: th === "not_possible" ? String(link.textHighlightNote || "").trim() : "",
+      adminNote: link.adminNote || "",
+      status: verify ? "verified" : "unverified",
+      verifiedAt: verify ? now : "",
+      createdAt: now,
+      updatedAt: now,
+      source: "chatgpt-import"
+    };
+
+    const check = validateRedirectShortlinkEntry(entry, nextRegistry, { existingCode: code, forVerified: verify });
+    if (!check.ok) {
+      skipped.push({ targetUrl, reason: check.errors.join("; ") });
+      serial -= 1;
+      continue;
+    }
+
+    nextRegistry.entries[code] = check.entry;
+    batchEntries.push({ path: redirectPathForCode(code), content: buildShortlinkRedirectHtml(check.entry) });
+    created.push({
+      code,
+      targetUrl,
+      platform: check.entry.platform,
+      instagramLine: formatInstagramLine(code),
+      status: check.entry.status
+    });
+  }
+
+  if (!created.length) {
+    const detail = skipped.map((s) => `${String(s.targetUrl || "").slice(0, 48)}: ${s.reason}`).join(" · ");
+    throw new Error(detail || "Import fehlgeschlagen — keine gültigen Links");
+  }
+
+  nextRegistry.nextSerial = serial;
+  nextRegistry.updatedAt = now;
+
+  const registryContent = `${JSON.stringify(
+    {
+      version: nextRegistry.version,
+      updatedAt: nextRegistry.updatedAt,
+      nextSerial: nextRegistry.nextSerial,
+      entries: nextRegistry.entries
+    },
+    null,
+    2
+  )}\n`;
+
+  const commitFiles = [{ path, content: registryContent }, ...batchEntries];
+  let commitSha = "";
+  if (githubCommitBatch) {
+    const batch = await githubCommitBatch(
+      env,
+      owner,
+      repo,
+      branch,
+      commitFiles,
+      `Kurzlink-Import: ${created.map((c) => c.code).join(", ")} (ChatGPT)`
+    );
+    commitSha = batch.commitSha || "";
+  } else {
+    const saved = await githubPut(env, owner, repo, path, registryContent, `Kurzlink-Import ${created.length}`, branch, sha);
+    commitSha = saved.commit?.sha || "";
+    for (const file of batchEntries) {
+      await githubPut(env, owner, repo, file.path, file.content, `Redirect ${file.path}`, branch, null);
+    }
+  }
+
+  return {
+    ok: true,
+    created,
+    skipped,
+    count: created.length,
+    registry: nextRegistry,
+    commitSha,
+    instagramBlock: created.map((c) => c.instagramLine).join("\n")
   };
 }

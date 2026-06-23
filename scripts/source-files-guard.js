@@ -72,16 +72,17 @@ function runSourceFilesGuard() {
     "renderKurzlinks",
     "Kurzlinks — nur Weiterleitung",
     "shortlinks/save",
-    "formatInstagramLine",
-    "validateRedirectSave",
-    "Instagram-Zeile kopieren",
+    "shortlinks/import",
+    "ChatGPT — ein Weg",
+    "parseChatGptImport",
+    "Links automatisch anlegen",
     "bindKurzlinksUi",
   ]);
 
   mustInclude("admin/kurzlink-manager.js", read("admin/kurzlink-manager.js"), [
-    "deriveKurzlinkFromPost",
-    "buildChannelShareText",
-    "injectShortlinkIntoMarkdown",
+    "parseChatGptImport",
+    "buildImportPreviewBlock",
+    "CHATGPT_IMPORT_PROMPT",
     "isAllowedTargetUrl",
     "buildRedirectHtml"
   ]);
@@ -96,7 +97,7 @@ function runSourceFilesGuard() {
     "prepareSourceCommitEntries",
     "scanSourceUsageInPosts",
     "/api/admin/shortlinks",
-    "/api/admin/shortlinks/auto",
+    "/api/admin/shortlinks/import",
     "validatePostShortlinkForPublish",
     "kurzlink-admin.js"
   ]);
