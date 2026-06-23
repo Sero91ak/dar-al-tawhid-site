@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updatedAt": "2026-06-23T10:20:49.886Z",
+  "version": 2,
+  "updatedAt": "2026-06-18T12:00:00.000Z",
   "nisab": {
     "goldGrams": 85,
     "silverGrams": 595,
@@ -41,87 +41,142 @@
     {
       "id": "quran-zakat-obligation",
       "category": "Qurʾān",
-      "arabic": "خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً",
-      "german": "Nimm von ihrem Besitz eine Sadaqa (Zakāt) …",
-      "explanation": "Grundlage der Pflicht zur Entnahme eines Anteils vom Vermögen.",
+      "sourceTabs": ["quran"],
+      "arabic": "خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيْهِمْ ۖ إِنَّ صَلَاتَكَ سَكَنٌ لَّهُمْ ۗ وَاللَّهُ سَمِيعٌ عَلِيمٌ",
+      "german": "Nimm von ihrem Besitz eine Sadaqa (Zakāt), die sie reinigt und sie damit läutert …",
+      "explanation": "Grundlage der Pflicht zur Entnahme eines Anteils vom Vermögen — Zakāt reinigt Besitz und Seele.",
       "reference": "Qurʾān 9:103",
       "work": "Qurʾān",
       "link": "https://quran.com/9/103",
       "trust": "mutawatir",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "zakat-rate",
-        "zakat-wealth"
-      ]
+      "ruleIds": ["zakat-rate", "zakat-wealth"]
+    },
+    {
+      "id": "quran-zakat-righteous",
+      "category": "Qurʾān",
+      "sourceTabs": ["quran"],
+      "arabic": "لَن تَنَالُوا الْبِرَّ حَتَّىٰ تُنفِقُوا مِمَّا تُحِبُّونَ",
+      "german": "Ihr werdet die Güte (al-Birr) nicht erreichen, bis ihr von dem ausgebt, was ihr liebt.",
+      "explanation": "Ausgabe vom eigenen Besitz — spiritueller Bezug zur Großzügigkeit und Zakāt.",
+      "reference": "Qurʾān 3:92",
+      "work": "Qurʾān",
+      "link": "https://quran.com/3/92",
+      "trust": "mutawatir",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["zakat-wealth"]
     },
     {
       "id": "sunnah-nisab-gold",
       "category": "Sunnah",
+      "sourceTabs": ["sunnah", "athar", "salaf"],
       "arabic": "لَيْسَ فِي أَقَلَّ مِنْ عِشْرِينَ دِينَارًا صَدَقَةٌ",
       "german": "Bei weniger als zwanzig Dīnār ist keine Sadaqa fällig.",
       "explanation": "Niṣāb-Gold wird in der Sunnah mit ca. 20 Dīnār (≈ 85 g Gold) überliefert.",
       "reference": "Ṣaḥīḥ al-Bukhārī 1454",
       "work": "Ṣaḥīḥ al-Bukhārī",
-      "link": "",
+      "link": "https://sunnah.com/bukhari:1454",
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "nisab-gold"
-      ]
+      "ruleIds": ["nisab-gold"]
     },
     {
       "id": "sunnah-nisab-silver",
       "category": "Sunnah",
+      "sourceTabs": ["sunnah", "athar", "salaf"],
       "arabic": "فِي أَرْبَعِينَ دِرْهَمًا",
-      "german": "Bei vierzig Dirham … (Niṣāb Silber)",
+      "german": "Bei vierzig Dirham … (Niṣāb Silber — vollständig: keine Zakāt unter 200 Dirham ≈ 595 g Silber).",
       "explanation": "Niṣāb-Silber wird mit 200 Dirham (≈ 595 g Silber) überliefert.",
       "reference": "Ṣaḥīḥ Muslim 979",
       "work": "Ṣaḥīḥ Muslim",
-      "link": "",
+      "link": "https://sunnah.com/muslim:979",
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "nisab-silver"
-      ]
+      "ruleIds": ["nisab-silver"]
     },
     {
       "id": "sunnah-zakat-rate",
       "category": "Sunnah",
+      "sourceTabs": ["sunnah", "athar", "salaf"],
       "arabic": "فِي كُلِّ أَرْبَعِينَ دِرْهَمًا دِرْهَمٌ",
       "german": "Bei vierzig Dirham ist ein Dirham (2,5 %) fällig.",
       "explanation": "Der Zakāt-Satz von 2,5 % auf zakātpflichtiges Vermögen.",
       "reference": "Ṣaḥīḥ Muslim 979",
       "work": "Ṣaḥīḥ Muslim",
-      "link": "",
+      "link": "https://sunnah.com/muslim:979",
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "zakat-rate"
-      ]
+      "ruleIds": ["zakat-rate"]
     },
     {
       "id": "sunnah-hawl",
       "category": "Sunnah",
+      "sourceTabs": ["sunnah", "athar", "salaf"],
       "arabic": "لَيْسَ فِي مَالٍ زَكَاةٌ حَتَّى يَحُولَ عَلَيْهِ الْحَوْلُ",
       "german": "An Vermögen ist keine Zakāt fällig, bis ein Jahr darüber vergangen ist (Ḥawl).",
       "explanation": "Vermögen muss ein vollständiges Mondjahr (Ḥawl) den Niṣāb halten.",
       "reference": "Ṣaḥīḥ al-Bukhārī 1454",
       "work": "Ṣaḥīḥ al-Bukhārī",
-      "link": "",
+      "link": "https://sunnah.com/bukhari:1454",
       "trust": "sahih",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "hawl"
-      ]
+      "ruleIds": ["hawl"]
+    },
+    {
+      "id": "salaf-manhaj-zakat",
+      "category": "Salaf",
+      "sourceTabs": ["salaf"],
+      "arabic": "",
+      "german": "Die Salaf as-Ṣāliḥīn handelten bei der Zakāt nach dem, was aus Qurʾān und authentischer Sunnah eindeutig belegt ist — ohne Spekulation und ohne Erleichterung ohne Beleg.",
+      "explanation": "Manhaj al-ʿIlm: Qurʾān, dann Sunnah, dann Verständnis der Salaf — so wird Zakāt berechnet.",
+      "reference": "Manhaj as-Salaf · Zakāt",
+      "work": "Salaf as-Ṣāliḥīn",
+      "link": "",
+      "trust": "manhaj",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["zakat-wealth"]
+    },
+    {
+      "id": "salaf-silver-nisab",
+      "category": "Salaf",
+      "sourceTabs": ["salaf", "fiqh"],
+      "arabic": "",
+      "german": "Bei abweichendem Gold- und Silber-Niṣāb wählte man in der Fiqh-Tradition oft den niedrigeren Wert (Silber) — vorsichtiger für die Armen und sicherer in der Verantwortung.",
+      "explanation": "So lehrten viele Gelehrten der Salaf und spätere Fuqahāʾ — diese App rechnet nach dem niedrigeren Niṣāb.",
+      "reference": "Fiqh · Niṣāb nach Silber (vorsichtig)",
+      "work": "Salaf & Fiqh",
+      "link": "",
+      "trust": "ijma",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["nisab-silver"]
+    },
+    {
+      "id": "salaf-bukhari-muslim",
+      "category": "Salaf",
+      "sourceTabs": ["salaf"],
+      "arabic": "",
+      "german": "Die Āthār zur Zakāt in dieser Berechnung stammen aus Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim — den beiden gesichertsten Hadīth-Sammlungen nach Konsens der Gelehrten.",
+      "explanation": "Überlieferungskette (Isnād) und Authentizität (Ṣaḥīḥ) sind die Grundlage.",
+      "reference": "Konsens der Gelehrten · Ṣaḥīḥayn",
+      "work": "Salaf as-Ṣāliḥīn",
+      "link": "",
+      "trust": "ijma",
+      "verified": true,
+      "active": true,
+      "ruleIds": ["nisab-gold", "nisab-silver", "zakat-rate", "hawl"]
     },
     {
       "id": "fiqh-jewelry-ikhtilaf",
       "category": "Fiqh-Anwendung",
+      "sourceTabs": ["fiqh"],
       "arabic": "",
       "german": "Schmuckgold: bekannte Meinungsverschiedenheit (Ikhtilāf) unter den Gelehrten.",
       "explanation": "Die App rechnet Schmuck vorsichtig ein und kennzeichnet den Ikhtilāf.",
@@ -131,13 +186,12 @@
       "trust": "fiqh",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "gold-jewelry"
-      ]
+      "ruleIds": ["gold-jewelry"]
     },
     {
       "id": "fiqh-debts-short",
       "category": "Fiqh-Anwendung",
+      "sourceTabs": ["fiqh"],
       "arabic": "",
       "german": "Kurzfristig fällige Schulden werden in der vorsichtigen Standard-Berechnung vom Vermögen abgezogen.",
       "explanation": "Langfristige Schulden: bekannter Ikhtilāf — Standard nur sofort/fällig.",
@@ -147,9 +201,7 @@
       "trust": "fiqh",
       "verified": true,
       "active": true,
-      "ruleIds": [
-        "debts-deductible"
-      ]
+      "ruleIds": ["debts-deductible"]
     }
   ],
   "rules": [
