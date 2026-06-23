@@ -298,7 +298,7 @@
         </div>
         <span class="zakat-acc-chevron ${open ? "open" : ""}" aria-hidden="true"></span>
       </button>
-      ${open ? `<div class="zakat-acc-body">${body}</div>` : preview ? `<div class="zakat-acc-preview">${preview}</div>` : ""}
+      ${open ? `<div class="zakat-acc-body"><div class="zakat-acc-body-inner">${body}</div></div>` : preview ? `<div class="zakat-acc-preview"><div class="zakat-acc-preview-inner">${preview}</div></div>` : ""}
     </section>`;
   }
 
@@ -314,9 +314,9 @@
       <p class="zakat-source-intro">${esc(sourceTabIntro(zakatSourceTab))}</p>
       <div class="zakat-source-list">${tabSources.length ? tabSources.map((s) => renderSourceCard(s, zakatSourceTab)).join("") : `<p class="zakat-muted">Keine Belege in dieser Kategorie.</p>`}</div>`;
 
-    const preview = `${SOURCE_TABS.map((t) => `<span class="zakat-source-preview-pill">${esc(t.short)}</span>`).join("")}<span class="zakat-muted">Antippen zum Lesen</span>`;
+    const preview = `<span class="zakat-muted">Qurʾān · Sunnah · Salaf · Āthār · Fiqh — mit Referenzen</span>`;
 
-    return renderAccordion("sources", "Authentische Quellen", "Qurʾān · Sunnah · Salaf · Āthār", body, preview);
+    return renderAccordion("sources", "Authentische Quellen", "Geprüfte Belege", body, preview);
   }
 
   function renderZakatSteps(result) {
@@ -453,12 +453,12 @@
 
     const historyBlock =
       session && zakatHistory.length
-        ? `<section class="zakat-acc premium-surface is-open"><div class="zakat-acc-body" style="border-top:0;padding-top:14px"><div class="zakat-panel-head"><h3>Mein Verlauf</h3><span>${zakatHistory.length}</span></div>
+        ? `<section class="zakat-acc premium-surface is-open"><div class="zakat-acc-head" style="pointer-events:none"><div class="zakat-acc-copy"><span class="zakat-acc-kicker">Account</span><h3>Mein Verlauf</h3></div><span class="zakat-acc-chevron open" aria-hidden="true"></span></div><div class="zakat-acc-body"><div class="zakat-acc-body-inner"><div class="zakat-panel-head" style="border:0;padding:0;margin:0 0 10px"><h3 style="font-size:1rem">Einträge</h3><span>${zakatHistory.length}</span></div>
       <div class="zakat-history">${zakatHistory
           .map(
             (h) => `<div class="zakat-history-row"><span>${esc(h.zakat_year || h.calculated_at?.slice(0, 10) || "")}</span><b>${global.DARZakat.formatMoney(h.zakat_due, result?.currency || "EUR")}</b><button type="button" class="zakat-mini-btn" data-zakat-delete="${esc(h.id)}">Löschen</button></div>`
           )
-          .join("")}</div></div></section>`
+          .join("")}</div></div></div></section>`
         : "";
 
     return `<div class="zakat-view">
