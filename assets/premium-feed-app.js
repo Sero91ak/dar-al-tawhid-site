@@ -787,6 +787,8 @@
     if (isFullscreen) return 0;
     try {
       var rootCs = global.getComputedStyle(document.documentElement);
+      var inset = parseFloat(rootCs.getPropertyValue('--content-inset'));
+      if (Number.isFinite(inset) && inset >= 0) return Math.round(inset);
       var px = parseFloat(rootCs.getPropertyValue('--page-padding-x'));
       if (Number.isFinite(px) && px >= 0) return Math.round(px);
     } catch (e) {}
