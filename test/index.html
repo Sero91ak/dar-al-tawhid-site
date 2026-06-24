@@ -7420,6 +7420,125 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
   .post-after-share{grid-template-columns:repeat(2,minmax(0,1fr))}
   .article>.share-panel-v11 .share-row-v11{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+/* CARD WIDTH FINAL — symmetrischer Seitenrand, alle Themes, Feed + Karten */
+:root{
+  --app-card-gutter:clamp(12px,3.8vw,16px);
+  --page-gutter-left:max(var(--app-card-gutter),env(safe-area-inset-left,0px));
+  --page-gutter-right:max(var(--app-card-gutter),env(safe-area-inset-right,0px));
+}
+html[data-theme] .app,
+html[data-theme] #appView,
+html[data-theme] #appView.view,
+html[data-theme] .view,
+html[data-theme] #premiumFeedMount,
+html[data-theme] .pf-mount-root{
+  box-sizing:border-box;
+  max-width:100%;
+  min-width:0;
+}
+html[data-theme] .folder-grid,
+html[data-theme] .latest-grid,
+html[data-theme] .grid-list,
+html[data-theme] .post-grid,
+html[data-theme] .series-grid,
+html[data-theme] .pinned-grid,
+html[data-theme] .folder-card,
+html[data-theme] .post-card,
+html[data-theme] .list-card,
+html[data-theme] .info-card,
+html[data-theme] .dua-card,
+html[data-theme] .series-card,
+html[data-theme] .pinned-card,
+html[data-theme] .event-card,
+html[data-theme] .statement,
+html[data-theme] .dua-detail-box,
+html[data-theme] .overview-panel,
+html[data-theme] .direct-pick-panel,
+html[data-theme] .calendar-panel,
+html[data-theme] .daily-box,
+html[data-theme] .recommended-box{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+@media(max-width:700px){
+  html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode){
+    padding-left:var(--page-gutter-left)!important;
+    padding-right:var(--page-gutter-right)!important;
+  }
+  html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode) .view{
+    padding-left:var(--app-card-gutter)!important;
+    padding-right:var(--app-card-gutter)!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    box-sizing:border-box!important;
+  }
+}
+html[data-theme] body.is-feed-fullscreen,
+html[data-theme] body.is-feed-fullscreen.has-bottom-nav{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html[data-theme] body.is-feed-fullscreen .app,
+html[data-theme] body.is-feed-fullscreen #appView,
+html[data-theme] body.is-feed-fullscreen #appView.view,
+html[data-theme] body.is-feed-fullscreen .view,
+html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
+html[data-theme] body.is-feed-fullscreen .pf-mount-root,
+html[data-theme] body.is-feed-fullscreen .sf-app{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-feed-fullscreen .view{
+  border:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-feed,
+html[data-theme] body.is-feed-fullscreen .sf-post,
+html[data-theme] body.is-feed-fullscreen .sf-post__media,
+html[data-theme] body.is-feed-fullscreen .sf-post__scene,
+html[data-theme] body.is-feed-fullscreen .sf-post__bg,
+html[data-theme] body.is-feed-fullscreen .sf-post__bg--grad,
+html[data-theme] body.is-feed-fullscreen .sf-post__img{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-post__bg,
+html[data-theme] body.is-feed-fullscreen .sf-post__bg--grad,
+html[data-theme] body.is-feed-fullscreen .sf-post__img{
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+@media(min-width:768px){
+  html[data-theme] body.is-feed-fullscreen .sf-feed,
+  html[data-theme] body.is-feed-fullscreen .sf-top,
+  html[data-theme] body.is-feed-fullscreen .sf-filters{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  html[data-theme] .app{
+    width:min(1320px,100%)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -7476,7 +7595,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-engine.js?v=8" defer></script>
 <script src="/assets/zakat-app.js?v=13" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
-<script src="/assets/premium-feed-app.js?v=26" defer></script>
+<script src="/assets/premium-feed-app.js?v=27" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
