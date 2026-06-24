@@ -7638,9 +7638,23 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
   min-width:0!important;
   box-sizing:border-box!important;
 }
-html[data-theme] body.is-feed-fullscreen .sf-feed{
-  padding-left:max(0px,env(safe-area-inset-left,0px))!important;
-  padding-right:max(0px,env(safe-area-inset-right,0px))!important;
+html[data-theme] body.is-feed-fullscreen .sf-feed,
+html[data-theme] body.is-feed-fullscreen .sf-top,
+html[data-theme] body.is-feed-fullscreen .sf-filters{
+  padding-left:max(var(--page-gutter-x,4px),env(safe-area-inset-left,0px))!important;
+  padding-right:max(var(--page-gutter-y,4px),env(safe-area-inset-right,0px))!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-post,
+html[data-theme] body.is-feed-fullscreen .sf-post__media,
+html[data-theme] body.is-feed-fullscreen .sf-post__scene{
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-post__textpanel{
+  width:100%!important;
+  max-width:100%!important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-post__bg,
 html[data-theme] body.is-feed-fullscreen .sf-post__bg--grad,
@@ -7720,7 +7734,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-engine.js?v=8" defer></script>
 <script src="/assets/zakat-app.js?v=13" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
-<script src="/assets/premium-feed-app.js?v=30" defer></script>
+<script src="/assets/premium-feed-app.js?v=31" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
