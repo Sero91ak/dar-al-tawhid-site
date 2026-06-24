@@ -5,9 +5,16 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV8';
-  var FONTS_ID = 'darPremiumFeedFontsV8';
+  var STYLES_ID = 'darPremiumFeedStylesV9';
+  var FONTS_ID = 'darPremiumFeedFontsV9';
   var APP_LOGO = '/watermark-my-logo-full.png';
+  var SHARE_CANVAS_W = 1080;
+  var SHARE_CANVAS_H = 1350;
+  var BRAND = {
+    site: 'dar-al-tawhid.de',
+    instagram: '@dar_at_tawhid',
+    telegram: '@dar_al_tauhid'
+  };
   var BG_VERIFIED = {
     islamic: [
       '1512632578888-169bbbc64f33', '1542816417-0983c9c9ad53', '1519817650390-64a93db51149',
@@ -136,13 +143,46 @@
     return { css: f.css, size: f.size, color: colors[tone], align: align };
   }
 
+  function postSourceDetail(post) {
+    if (!post) return '';
+    try {
+      if (global && typeof global.sourceTextFromPost === 'function') {
+        var s = global.sourceTextFromPost(post);
+        if (s) return clamp(String(s).replace(/\s+/g, ' ').trim(), 140);
+      }
+    } catch (e) {}
+    var direct = String(post.source || '').replace(/\s+/g, ' ').trim();
+    if (direct) return clamp(direct, 140);
+    var parts = [post.book, post.scholar].filter(Boolean);
+    return clamp(parts.join(' · '), 140);
+  }
+
+  function sourceLinesFor(item) {
+    if (!item) return { scholar: '', detail: '' };
+    if (item.type === 'dua') {
+      return { scholar: '', detail: item.ref || item.source || 'Duʿāʾ' };
+    }
+    var scholar = '';
+    var raw = item.statement || item.preview || '';
+    try {
+      if (global && typeof global.parseImageEditorBodySource === 'function') {
+        var parsed = global.parseImageEditorBodySource(String(raw), item.scholar || '');
+        if (parsed.nameLine) scholar = String(parsed.nameLine).trim();
+      }
+    } catch (e) {}
+    if (!scholar && item.scholar) scholar = String(item.scholar).trim();
+    var detail = item.sourceDetail || item.source || '';
+    if (!detail && item.book) detail = String(item.book);
+    detail = String(detail).replace(/\s+/g, ' ').trim();
+    return { scholar: clamp(scholar, 90), detail: clamp(detail, 140) };
+  }
+
   function sourceLineFor(item) {
-    if (!item) return '';
-    if (item.source) return clamp(String(item.source).replace(/\s+/g, ' ').trim(), 90);
-    if (item.scholar) return clamp(String(item.scholar).trim(), 90);
-    if (item.type === 'dua') return item.ref ? clamp(String(item.ref), 90) : 'Duʿāʾ';
-    if (item.category) return clamp(String(item.category), 60);
-    return '';
+    var lines = sourceLinesFor(item);
+    if (lines.scholar && lines.detail && lines.detail.indexOf(lines.scholar) < 0) {
+      return lines.scholar + ' · ' + lines.detail;
+    }
+    return lines.detail || lines.scholar || '';
   }
 
   function feedOverlayBundle(item) {
@@ -163,13 +203,17 @@
         parsed.fazit = '';
         var body = String(parsed.bodyText || '').trim();
         if (!body && item.preview) body = stripMd(item.preview);
-        var src = parsed.nameLine || scholar || sourceLineFor(item);
-        if (body) return { text: clamp(stripMd(body), 320), source: clamp(String(src || ''), 90) };
+        var srcLine = sourceLinesFor(item);
+        var src = srcLine.detail || srcLine.scholar || '';
+        if (body) return { text: clamp(stripMd(body), 320), source: src, scholar: srcLine.scholar, detail: srcLine.detail };
       }
     } catch (e) {}
+    var srcLine = sourceLinesFor(item);
     return {
       text: feedStatementOnly(raw, scholar) || clamp(stripMd(item.preview || item.title || ''), 280),
-      source: sourceLineFor(item)
+      source: srcLine.detail || srcLine.scholar || '',
+      scholar: srcLine.scholar,
+      detail: srcLine.detail
     };
   }
 
@@ -599,6 +643,8 @@
         category: normCat(p.category),
         scholar: p.scholar || p.author || '',
         source: p.source || '',
+        sourceDetail: postSourceDetail(p),
+        book: p.book || '',
         date: p.date || '',
         hijriDate: i < 3 ? hijri : '',
         badges: i === 0 ? ['Neu', 'Heute'] : i < 3 ? ['Neu'] : [],
@@ -621,6 +667,8 @@
         category: normCat(p.category),
         scholar: p.scholar || '',
         source: p.source || '',
+        sourceDetail: postSourceDetail(p),
+        book: p.book || '',
         date: p.date || '',
         badges: ['Aus dem Archiv'],
         image: postImage(p),
@@ -873,27 +921,36 @@
       '.sf-filters::-webkit-scrollbar{display:none}' +
       '.sf-filter{flex:0 0 auto;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(248,239,212,.82);border-radius:999px;padding:7px 13px;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}' +
       '.sf-filter.is-active{border-color:rgba(214,190,132,.5);background:linear-gradient(135deg,rgba(214,190,132,.18),rgba(90,70,30,.12));color:#fff9e5}' +
-      '.sf-feed{display:flex;flex-direction:column;gap:14px;padding:0 10px calc(12px + env(safe-area-inset-bottom))}' +
+      '.sf-feed{display:flex;flex-direction:column;gap:10px;padding:0 10px calc(10px + env(safe-area-inset-bottom))}' +
       '.sf-post{margin:0;border-radius:22px;overflow:hidden;cursor:pointer;background:linear-gradient(180deg,rgba(18,16,12,.96),rgba(8,8,6,.98));border:1px solid rgba(214,190,132,.18);box-shadow:0 16px 40px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.04)}' +
       '.sf-post--demo{border-color:rgba(214,190,132,.32);box-shadow:0 18px 44px rgba(0,0,0,.34),0 0 0 1px rgba(239,215,142,.08) inset}' +
-      '.sf-post__head{display:flex;align-items:center;gap:10px;padding:13px 14px 11px}' +
+      '.sf-post__head{display:flex;align-items:center;gap:10px;padding:10px 12px 8px}' +
       '.sf-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(145deg,rgba(239,215,142,.42),rgba(90,70,30,.62));border:1.5px solid rgba(239,215,142,.42);display:grid;place-items:center;font-size:14px;font-weight:900;color:#fff8e8;flex:0 0 40px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.24)}' +
       '.sf-avatar img{width:100%;height:100%;object-fit:cover;display:block}' +
       '.sf-post__meta{flex:1;min-width:0}' +
       '.sf-user{display:block;font-size:13px;font-weight:800;color:#fff9e5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.sf-sub{display:block;font-size:10px;opacity:.62;margin-top:1px}' +
       '.sf-more{border:0;background:rgba(255,255,255,.05);color:inherit;font-size:16px;line-height:1;padding:6px 8px;border-radius:999px;cursor:pointer;opacity:.82}' +
-      '.sf-post__media{position:relative;background:#1a1814;min-height:220px;overflow:hidden}' +
-      '.sf-post__scene{position:relative;min-height:min(58vh,460px);display:flex;align-items:center;justify-content:center;padding:24px 12px;overflow:hidden}' +
+      '.sf-post__media{position:relative;background:#1a1814;min-height:180px;overflow:hidden}' +
+      '.sf-post__scene{position:relative;min-height:min(36vh,320px);max-height:360px;display:flex;align-items:center;justify-content:center;padding:12px 10px 54px;overflow:hidden;aspect-ratio:4/5;max-width:100%;margin:0 auto}' +
       '.sf-post__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:#2a2418}' +
-      '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.42) 55%,rgba(0,0,0,.22) 100%);pointer-events:none}' +
-      '.sf-post__scene-inner{position:relative;z-index:2;width:100%;display:flex;align-items:center;padding:8px 6px}' +
-      '.sf-post__textpanel{max-width:min(92%,36em);padding:18px 16px;border-radius:18px;background:rgba(8,7,5,.48);backdrop-filter:blur(8px) saturate(1.08);border:1px solid rgba(239,215,142,.14);box-shadow:0 12px 36px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.05)}' +
+      '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.14) 0%,rgba(0,0,0,.38) 58%,rgba(0,0,0,.52) 100%);pointer-events:none}' +
+      '.sf-scene-logo{position:absolute;top:10px;right:10px;z-index:4;width:34px;height:34px;border-radius:50%;overflow:hidden;border:1px solid rgba(239,215,142,.32);box-shadow:0 4px 14px rgba(0,0,0,.38);background:rgba(8,7,5,.55);backdrop-filter:blur(4px)}' +
+      '.sf-scene-logo img{width:100%;height:100%;object-fit:cover;display:block}' +
+      '.sf-scene-brand{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:8px 10px 10px;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.48) 38%,rgba(0,0,0,.72) 100%);display:flex;flex-direction:column;gap:4px;align-items:center;pointer-events:none}' +
+      '.sf-scene-brand-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:100%}' +
+      '.sf-brand-chip{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:800;color:rgba(248,239,212,.9);background:rgba(8,7,5,.42);border:1px solid rgba(239,215,142,.14);border-radius:999px;padding:3px 7px;line-height:1;white-space:nowrap}' +
+      '.sf-brand-chip svg{width:13px;height:13px;flex:0 0 13px;display:block}' +
+      '.sf-brand-site{display:inline-flex;align-items:center;gap:4px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(214,190,132,.78);font-weight:800;line-height:1}' +
+      '.sf-brand-site svg{width:11px;height:11px;flex:0 0 11px}' +
+      '.sf-post__scene-inner{position:relative;z-index:2;width:100%;display:flex;align-items:center;padding:4px 4px 8px;max-height:calc(100% - 48px)}' +
+      '.sf-post__textpanel{max-width:min(94%,34em);padding:14px 13px;border-radius:16px;background:rgba(8,7,5,.5);backdrop-filter:blur(8px) saturate(1.08);border:1px solid rgba(239,215,142,.16);box-shadow:0 10px 28px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)}' +
       '.sf-post__img{width:100%;max-height:min(72vh,520px);object-fit:cover;display:block;aspect-ratio:4/5;background:#1a1814}' +
       '.sf-post__quote{margin:0;line-height:1.62;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
       '.sf-quote-mark{display:block;font-size:24px;line-height:1;color:rgba(239,215,142,.58);font-family:Georgia,serif;margin-bottom:6px}' +
       '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere}' +
-      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid rgba(239,215,142,.12);font-size:11px;line-height:1.45;opacity:.78;font-style:italic;color:rgba(248,239,212,.88)}' +
+      '.sf-quote-source{margin-top:6px;padding-top:6px;border-top:1px solid rgba(239,215,142,.1);font-size:10px;line-height:1.4;opacity:.82;font-style:italic;color:rgba(248,239,212,.88)}' +
+      '.sf-quote-scholar{margin-top:8px;font-size:11px;line-height:1.35;opacity:.88;font-weight:700;color:rgba(239,215,142,.92)}' +
       '.sf-post__dua{margin:0;padding:0;background:transparent}' +
       '.sf-post__dua-ar{direction:rtl;font-size:clamp(22px,5vw,28px);line-height:1.75;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
       '.sf-post__dua-de{font-size:clamp(14px,3.5vw,17px);line-height:1.55;text-shadow:0 2px 10px rgba(0,0,0,.38)}' +
@@ -903,6 +960,7 @@
       '.sf-act:active{transform:scale(.94)}' +
       '.sf-act.is-liked{color:#ff6b81;background:rgba(255,107,129,.12);border-color:rgba(255,107,129,.28)}' +
       '.sf-act.is-saved{color:#f0dfa0;background:rgba(239,215,142,.1);border-color:rgba(239,215,142,.24)}' +
+      '.sf-act.is-busy{opacity:.55;pointer-events:none}' +
       '.sf-like-count{font-size:12px;font-weight:800;color:rgba(248,239,212,.78);min-width:1.2em}' +
       '.sf-act-label{font-size:11px;font-weight:700;letter-spacing:.02em}' +
       '.sf-post__body{padding:0 14px 16px}' +
@@ -918,7 +976,8 @@
       'html[data-theme="light"] .sf-user,html[data-theme="soft"] .sf-user{color:var(--text,#3e2b17)}' +
       'html[data-theme="light"] .sf-post__quote,html[data-theme="soft"] .sf-post__quote{color:var(--text,#3e2b17)}' +
       'body.is-premium-feed-view .float-actions{opacity:.45;pointer-events:none}' +
-      '@media(min-width:768px){.sf-feed,.sf-top-inner{max-width:500px;margin-left:auto;margin-right:auto;width:100%}.sf-filters{max-width:500px;margin:0 auto}}';
+      '@media(max-width:700px){.sf-post__scene{min-height:260px;max-height:320px;aspect-ratio:4/5}.sf-post__textpanel{padding:12px 11px}.sf-post__dua-ar{font-size:clamp(18px,4.6vw,24px)!important}.sf-quote-text{font-size:clamp(13px,3.6vw,16px)!important}}' +
+      '@media(min-width:768px){.sf-feed,.sf-top-inner{max-width:500px;margin-left:auto;margin-right:auto;width:100%}.sf-filters{max-width:500px;margin:0 auto}.sf-post__scene{max-height:400px}}';
 
     var el = document.createElement('style');
     el.id = STYLES_ID;
@@ -926,11 +985,47 @@
     document.head.appendChild(el);
   }
 
+  function brandIconSvg(kind) {
+    if (kind === 'telegram') {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg>';
+    }
+    if (kind === 'instagram') {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="sfIg" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#sfIg)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg>';
+    }
+    if (kind === 'web') {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="rgba(239,215,142,.85)" stroke-width="1.6"/><path d="M4 12h16M12 4c2.8 2.8 4 6 4 8s-1.2 5.2-4 8M12 4c-2.8 2.8-4 6-4 8s1.2 5.2 4 8" fill="none" stroke="rgba(239,215,142,.85)" stroke-width="1.4"/></svg>';
+    }
+    return '';
+  }
+
+  function brandStripHtml() {
+    return (
+      '<div class="sf-scene-brand" aria-hidden="true">' +
+        '<div class="sf-scene-brand-row">' +
+          '<span class="sf-brand-chip">' + brandIconSvg('instagram') + esc(BRAND.instagram) + '</span>' +
+          '<span class="sf-brand-chip">' + brandIconSvg('telegram') + esc(BRAND.telegram) + '</span>' +
+        '</div>' +
+        '<span class="sf-brand-site">' + brandIconSvg('web') + esc(BRAND.site) + '</span>' +
+      '</div>'
+    );
+  }
+
+  function sceneLogoHtml() {
+    return '<div class="sf-scene-logo" aria-hidden="true"><img src="' + APP_LOGO + '" alt="" loading="lazy" decoding="async"></div>';
+  }
+
   function sourceHtml(item, fs) {
-    var src = overlaySourceFor(item);
-    if (!src) return '';
+    var lines = sourceLinesFor(item);
+    if (!lines.scholar && !lines.detail) return '';
     var style = 'font-family:' + (fs && fs.css ? fs.css : 'Georgia,serif') + ';color:' + (fs && fs.color ? fs.color : '#f5ecd4');
-    return '<div class="sf-quote-source" style="' + style + '">' + esc(src) + '</div>';
+    var html = '';
+    if (lines.scholar && item.type !== 'dua') {
+      html += '<div class="sf-quote-scholar" style="' + style + '">' + esc(lines.scholar) + '</div>';
+    }
+    if (lines.detail) {
+      html += '<div class="sf-quote-source" style="' + style + '">' + esc(lines.detail) + '</div>';
+    }
+    return html;
   }
 
   function sceneBlock(item, inner, style) {
@@ -943,9 +1038,11 @@
       '<div class="sf-post__scene">' +
         '<img class="sf-post__bg" src="' + esc(bg) + '" alt="" decoding="async" loading="eager" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0">' +
         '<div class="sf-post__scene-shade"></div>' +
+        sceneLogoHtml() +
         '<div class="sf-post__scene-inner" style="' + innerStyle + '">' +
           '<div class="sf-post__textpanel" style="' + panelStyle + '">' + inner + '</div>' +
         '</div>' +
+        brandStripHtml() +
       '</div>'
     );
   }
@@ -1063,17 +1160,237 @@
     if (t === 'prayer') { navigate('prayer'); return; }
   }
 
+  function loadShareImage(url, fallbacks) {
+    var urls = [url].concat(fallbacks || []).filter(Boolean);
+    function tryAt(i) {
+      if (i >= urls.length) return Promise.reject(new Error('bg'));
+      return new Promise(function (resolve, reject) {
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function () { resolve(img); };
+        img.onerror = function () { reject(new Error('bg')); };
+        img.src = urls[i];
+      }).catch(function () { return tryAt(i + 1); });
+    }
+    return tryAt(0);
+  }
+
+  function canvasWrapText(ctx, text, x, y, maxW, lineH, maxLines) {
+    var words = String(text || '').split(/\s+/);
+    var line = '';
+    var lines = [];
+    var n = 0;
+    words.forEach(function (w) {
+      var test = line ? line + ' ' + w : w;
+      if (ctx.measureText(test).width > maxW && line) {
+        lines.push(line);
+        line = w;
+      } else line = test;
+    });
+    if (line) lines.push(line);
+    if (maxLines && lines.length > maxLines) {
+      lines = lines.slice(0, maxLines);
+      lines[maxLines - 1] = lines[maxLines - 1].replace(/\s+\S*$/, '') + '…';
+    }
+    lines.forEach(function (ln) {
+      ctx.fillText(ln, x, y + n * lineH);
+      n++;
+    });
+    return n * lineH;
+  }
+
+  function canvasFontFamily(css) {
+    var m = String(css || '').match(/"([^"]+)"/);
+    return m ? m[1] + ', Georgia, serif' : 'Georgia, serif';
+  }
+
+  function renderShareCardCanvas(item) {
+    var W = SHARE_CANVAS_W;
+    var H = SHARE_CANVAS_H;
+    var canvas = document.createElement('canvas');
+    canvas.width = W;
+    canvas.height = H;
+    var ctx = canvas.getContext('2d');
+    var bundle = feedOverlayBundle(item);
+    var fs = fontStyleFor(item);
+    var lines = sourceLinesFor(item);
+    var bgUrl = item.image || islamicBgFor(item);
+    var fallbacks = allBgFallbacks(item).slice(1);
+
+    return loadShareImage(bgUrl, fallbacks).then(function (bg) {
+      var sc = Math.max(W / bg.width, H / bg.height);
+      var dw = bg.width * sc;
+      var dh = bg.height * sc;
+      ctx.drawImage(bg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      var grad = ctx.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, 'rgba(0,0,0,0.18)');
+      grad.addColorStop(0.55, 'rgba(0,0,0,0.42)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.72)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      return loadShareImage(APP_LOGO, []).then(function (logo) {
+        var lx = W - 120;
+        var ly = 48;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(lx + 42, ly + 42, 42, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(logo, lx, ly, 84, 84);
+        ctx.restore();
+        ctx.strokeStyle = 'rgba(239,215,142,0.35)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(lx + 42, ly + 42, 42, 0, Math.PI * 2);
+        ctx.stroke();
+
+        var panelX = 72;
+        var panelY = 180;
+        var panelW = W - 144;
+        var panelH = H - 430;
+        ctx.fillStyle = 'rgba(8,7,5,0.52)';
+        roundRect(ctx, panelX, panelY, panelW, panelH, 28);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(239,215,142,0.18)';
+        ctx.lineWidth = 2;
+        roundRect(ctx, panelX, panelY, panelW, panelH, 28);
+        ctx.stroke();
+
+        var align = fs.align || 'center';
+        var tx = align === 'left' ? panelX + 36 : align === 'right' ? panelX + panelW - 36 : panelX + panelW / 2;
+        ctx.textAlign = align;
+        ctx.fillStyle = fs.color || '#fff9e8';
+        ctx.font = '700 52px ' + canvasFontFamily(fs.css);
+        ctx.fillText('❝', tx, panelY + 56);
+
+        var quoteSize = Math.max(34, Math.min(48, Math.floor(920 / Math.max(1, bundle.text.length / 3))));
+        ctx.font = quoteSize + 'px ' + canvasFontFamily(fs.css);
+        var used = canvasWrapText(ctx, bundle.text, tx, panelY + 110, panelW - 72, quoteSize * 1.45, 8);
+
+        var sy = panelY + 110 + used + 18;
+        ctx.textAlign = align;
+        if (lines.scholar && item.type !== 'dua') {
+          ctx.font = '700 28px ' + canvasFontFamily(fs.css);
+          ctx.fillStyle = 'rgba(239,215,142,0.92)';
+          canvasWrapText(ctx, lines.scholar, tx, sy, panelW - 72, 34, 2);
+          sy += 42;
+        }
+        if (lines.detail) {
+          ctx.font = 'italic 24px ' + canvasFontFamily(fs.css);
+          ctx.fillStyle = 'rgba(248,239,212,0.82)';
+          canvasWrapText(ctx, lines.detail, tx, sy, panelW - 72, 30, 3);
+        }
+
+        var brandY = H - 120;
+        ctx.textAlign = 'center';
+        ctx.font = '800 26px Cinzel, Georgia, serif';
+        ctx.fillStyle = 'rgba(214,190,132,0.88)';
+        ctx.fillText(BRAND.instagram + '   ·   ' + BRAND.telegram, W / 2, brandY);
+        ctx.font = '800 22px Cinzel, Georgia, serif';
+        ctx.fillStyle = 'rgba(248,239,212,0.72)';
+        ctx.fillText(BRAND.site, W / 2, brandY + 38);
+        ctx.font = '700 20px Cinzel, Georgia, serif';
+        ctx.fillStyle = 'rgba(214,190,132,0.65)';
+        ctx.fillText('DAR AL TAWḤID', W / 2, brandY + 72);
+
+        return canvas;
+      }).catch(function () {
+        ctx.font = '700 28px Cinzel, Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#f0dfa0';
+        ctx.fillText('DAR AL TAWḤID', W / 2, H - 80);
+        return canvas;
+      });
+    }).catch(function () {
+      ctx.fillStyle = '#1a1814';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff9e8';
+      ctx.font = '42px Georgia, serif';
+      ctx.textAlign = 'center';
+      canvasWrapText(ctx, bundle.text, W / 2, H / 2 - 40, W - 120, 52, 10);
+      return canvas;
+    });
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function canvasToBlob(canvas) {
+    return new Promise(function (resolve) {
+      if (canvas.toBlob) {
+        canvas.toBlob(function (b) { resolve(b); }, 'image/png', 0.92);
+        return;
+      }
+      try {
+        var bin = atob(canvas.toDataURL('image/png').split(',')[1]);
+        var arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        resolve(new Blob([arr], { type: 'image/png' }));
+      } catch (e) {
+        resolve(null);
+      }
+    });
+  }
+
+  function downloadShareBlob(blob, name) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = name || 'dar-al-tawhid-beitrag.png';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 8000);
+  }
+
   function shareItem(item, ev) {
     if (ev) { ev.stopPropagation(); ev.preventDefault(); }
-    var statement = overlayTextFor(item) || item.preview || '';
-    var text = (item.title || '') + (statement ? '\n\n' + statement : '') + '\n\nDAR AL TAWḤID';
-    if (global && global.navigator && global.navigator.share) {
-      global.navigator.share({ title: item.title, text: text }).catch(function () {});
-      return;
+    var btn = ev && ev.currentTarget;
+    if (btn) {
+      btn.disabled = true;
+      btn.classList.add('is-busy');
     }
-    try {
-      if (global && global.navigator && global.navigator.clipboard) global.navigator.clipboard.writeText(text);
-    } catch (e) {}
+    renderShareCardCanvas(item).then(function (canvas) {
+      return canvasToBlob(canvas).then(function (blob) {
+        if (!blob) throw new Error('blob');
+        var file = new File([blob], 'dar-al-tawhid-beitrag.png', { type: 'image/png' });
+        if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
+          return global.navigator.share({
+            files: [file],
+            title: item.title || 'DAR AL TAWḤID',
+            text: 'DAR AL TAWḤID · ' + BRAND.site
+          });
+        }
+        downloadShareBlob(blob);
+        try {
+          alert('Beitragsbild wurde gespeichert. Öffne WhatsApp, Instagram oder Facebook und wähle das Bild zum Teilen.');
+        } catch (e) {}
+      });
+    }).catch(function () {
+      var statement = overlayTextFor(item) || item.preview || '';
+      var text = (item.title || '') + (statement ? '\n\n' + statement : '') + '\n\n' + BRAND.site + '\n' + BRAND.instagram + ' · ' + BRAND.telegram;
+      if (global.navigator && global.navigator.share) {
+        global.navigator.share({ title: item.title, text: text }).catch(function () {});
+        return;
+      }
+      try {
+        if (global.navigator && global.navigator.clipboard) global.navigator.clipboard.writeText(text);
+      } catch (e) {}
+    }).finally(function () {
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.remove('is-busy');
+      }
+    });
   }
 
   function bindList(root) {
