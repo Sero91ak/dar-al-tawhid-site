@@ -49,7 +49,7 @@
   --sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --page-cover:#060604;--page-cover-mid:#0b0a07;
-  --page-padding-x:16px;--page-padding-left:max(var(--page-padding-x),env(safe-area-inset-left,0px));--page-padding-right:max(var(--page-padding-x),env(safe-area-inset-right,0px));--section-gap:13px;--card-padding-x:15px;--card-padding-y:15px;--content-max-width:min(1320px,100%);--panel-radius:20px;--card-radius:22px;--view-padding-y:16px;--page-gutter-x:var(--page-padding-x);--page-gutter-left:var(--page-padding-left);--page-gutter-right:var(--page-padding-right);--content-inset:0px;
+  --page-gutter-x:max(4px,env(safe-area-inset-left,0px));--page-gutter-y:max(4px,env(safe-area-inset-right,0px));--page-padding-x:4px;--page-padding-left:var(--page-gutter-x);--page-padding-right:var(--page-gutter-y);--content-inset:12px;--section-gap:13px;--card-padding-x:15px;--card-padding-y:15px;--content-max-width:min(1420px,100%);--panel-radius:20px;--card-radius:22px;--view-padding-y:16px;
   --card-cols:3;--card-gap:16px;--pick-cols:3;--pick-gap:8px;--filter-cols:4;
   --premium-border:rgba(239,215,142,.46);
   --premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),transparent 34%),linear-gradient(145deg,rgba(24,20,14,.97),rgba(7,7,5,.95));
@@ -7421,36 +7421,50 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
   .article>.share-panel-v11 .share-row-v11{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 
-/* APP LAYOUT SYSTEM FINAL — ein Seitenrand, volle Breite, alle Themes/Seiten */
+/* APP LAYOUT PROPORTION FINAL — Seitenverhältnis wie Live/Bild 2, alle Themes */
 :root{
-  --page-padding-x:clamp(14px,3.8vw,16px);
-  --page-padding-left:max(var(--page-padding-x),env(safe-area-inset-left,0px));
-  --page-padding-right:max(var(--page-padding-x),env(safe-area-inset-right,0px));
   --section-gap:13px;
   --card-padding-x:15px;
   --card-padding-y:15px;
-  --content-max-width:min(1320px,100%);
+  --content-max-width:min(1420px,100%);
   --panel-radius:20px;
   --card-radius:22px;
   --view-padding-y:16px;
-  --app-card-gutter:var(--page-padding-x);
-  --page-gutter-x:var(--page-padding-x);
-  --page-gutter-left:var(--page-padding-left);
-  --page-gutter-right:var(--page-padding-right);
-  --content-inset:0px;
   --card-gap:var(--section-gap);
 }
-html[data-theme] *,
-html[data-theme] *::before,
-html[data-theme] *::after{
-  box-sizing:border-box;
+@media(max-width:700px){
+  :root{
+    --page-gutter-x:max(4px,env(safe-area-inset-left,0px));
+    --page-gutter-y:max(4px,env(safe-area-inset-right,0px));
+    --page-padding-left:var(--page-gutter-x);
+    --page-padding-right:var(--page-gutter-y);
+    --page-padding-x:4px;
+    --content-inset:12px;
+    --view-padding-y:14px;
+  }
+}
+@media(max-width:390px){
+  :root{
+    --page-gutter-x:max(4px,env(safe-area-inset-left,0px));
+    --page-gutter-y:max(4px,env(safe-area-inset-right,0px));
+    --content-inset:12px;
+  }
 }
 html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode),
 html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode).has-bottom-nav{
-  padding-left:var(--page-padding-left)!important;
-  padding-right:var(--page-padding-right)!important;
+  padding-left:var(--page-gutter-x,max(4px,env(safe-area-inset-left,0px)))!important;
+  padding-right:var(--page-gutter-y,max(4px,env(safe-area-inset-right,0px)))!important;
   overflow-x:hidden!important;
   max-width:100vw!important;
+}
+html[data-theme] .app{
+  width:min(1420px,100%)!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
 }
 html[data-theme] .app,
 html[data-theme] #appView,
@@ -7466,25 +7480,23 @@ html[data-theme] .top-shell{
   margin-right:0!important;
   box-sizing:border-box!important;
 }
-html[data-theme] .app{
-  max-width:var(--content-max-width)!important;
-  margin-left:auto!important;
-  margin-right:auto!important;
-  padding-left:0!important;
-  padding-right:0!important;
-}
 html[data-theme] .view,
-html[data-theme] #appView.view{
-  padding-top:var(--view-padding-y)!important;
-  padding-bottom:var(--view-padding-y)!important;
-  padding-left:0!important;
-  padding-right:0!important;
+html[data-theme] #appView.view,
+html[data-theme="light"] .view,
+html[data-theme="soft"] .view,
+html[data-theme="royal"] .view,
+html[data-theme="aurora"] .view,
+html[data-theme="bordeaux"] .view{
+  padding-top:var(--view-padding-y,16px)!important;
+  padding-bottom:var(--view-padding-y,16px)!important;
+  padding-left:var(--content-inset,12px)!important;
+  padding-right:var(--content-inset,12px)!important;
 }
 html[data-theme] .header,
 html[data-theme] .isnad,
 html[data-theme] .footer{
-  padding-left:var(--card-padding-x)!important;
-  padding-right:var(--card-padding-x)!important;
+  padding-left:var(--content-inset,12px)!important;
+  padding-right:var(--content-inset,12px)!important;
 }
 html[data-theme] .app-bar,
 html[data-theme="light"] .app-bar,
@@ -7494,8 +7506,8 @@ html[data-theme="aurora"] .app-bar,
 html[data-theme="bordeaux"] .app-bar{
   margin-left:0!important;
   margin-right:0!important;
-  padding-left:var(--card-padding-x)!important;
-  padding-right:var(--card-padding-x)!important;
+  padding-left:0!important;
+  padding-right:0!important;
   max-width:100%!important;
 }
 html[data-theme] .view-head,
@@ -7503,23 +7515,14 @@ html[data-theme] .main-search,
 html[data-theme] .section-head,
 html[data-theme] .search-helper,
 html[data-theme] .view-desc,
+html[data-theme] .section-block,
 html[data-theme] .article{
   width:100%!important;
   max-width:100%!important;
   margin-left:0!important;
   margin-right:0!important;
-  box-sizing:border-box!important;
-}
-html[data-theme] .view-head{
-  padding-left:var(--card-padding-x)!important;
-  padding-right:var(--card-padding-x)!important;
-}
-html[data-theme] .main-search,
-html[data-theme] .section-head,
-html[data-theme] .search-helper,
-html[data-theme] .view-desc{
-  padding-left:var(--card-padding-x)!important;
-  padding-right:var(--card-padding-x)!important;
+  padding-left:0!important;
+  padding-right:0!important;
   box-sizing:border-box!important;
 }
 html[data-theme] .folder-grid,
@@ -7555,15 +7558,6 @@ html[data-theme] :is(
   min-width:0!important;
   box-sizing:border-box!important;
 }
-html[data-theme] :is(
-  .folder-card,.post-card,.list-card,.info-card,.dua-card,.series-card,.pinned-card,
-  .event-card,.overview-panel,.direct-pick-panel,.search-pro-panel,.filter-panel,
-  .theme-switch-panel,.account-panel,.font-slider-panel,.home-more-section,.quran-surah-card
-){
-  padding-left:var(--card-padding-x)!important;
-  padding-right:var(--card-padding-x)!important;
-  border-radius:var(--card-radius)!important;
-}
 html[data-theme] .theme-switch-row,
 html[data-theme] .theme-switch-panel,
 html[data-theme] .font-range-shell,
@@ -7587,6 +7581,7 @@ html[data-theme] .float-actions{
   position:fixed!important;
   z-index:35!important;
   pointer-events:none!important;
+  right:max(4px,env(safe-area-inset-right,0px))!important;
 }
 html[data-theme] .float-actions-panel,
 html[data-theme] .float-touch-handle,
@@ -7596,8 +7591,8 @@ html[data-theme] .float-btn{
 html[data-theme] .bottom-nav,
 html[data-theme] #bottomNav.bottom-nav{
   position:fixed!important;
-  left:var(--page-padding-left)!important;
-  right:var(--page-padding-right)!important;
+  left:max(10px,env(safe-area-inset-left,0px))!important;
+  right:max(10px,env(safe-area-inset-right,0px))!important;
   width:auto!important;
   max-width:none!important;
   box-sizing:border-box!important;
@@ -7654,29 +7649,12 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
   object-fit:cover!important;
   object-position:center!important;
 }
-html[data-theme] body.is-feed-fullscreen .bottom-nav,
-html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav{
-  left:max(10px,env(safe-area-inset-left,0px))!important;
-  right:max(10px,env(safe-area-inset-right,0px))!important;
-}
-@media(max-width:700px){
-  :root{--view-padding-y:14px;--card-padding-x:14px}
-  html[data-theme] .view,
-  html[data-theme] #appView.view,
-  html[data-theme="light"] .view,
-  html[data-theme="soft"] .view,
-  html[data-theme="royal"] .view,
-  html[data-theme="aurora"] .view,
-  html[data-theme="bordeaux"] .view{
-    padding-left:0!important;
-    padding-right:0!important;
-  }
-}
-@media(max-width:390px){
-  :root{--page-padding-x:14px;--card-padding-x:13px;--view-padding-y:13px}
-}
 @media(min-width:768px){
-  :root{--page-padding-x:18px;--content-max-width:min(1320px,100%)}
+  :root{
+    --page-gutter-x:max(8px,env(safe-area-inset-left,0px));
+    --page-gutter-y:max(8px,env(safe-area-inset-right,0px));
+    --content-inset:13px;
+  }
   html[data-theme] body.is-feed-fullscreen .sf-feed,
   html[data-theme] body.is-feed-fullscreen .sf-top,
   html[data-theme] body.is-feed-fullscreen .sf-filters{
@@ -7742,7 +7720,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-engine.js?v=8" defer></script>
 <script src="/assets/zakat-app.js?v=13" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
-<script src="/assets/premium-feed-app.js?v=29" defer></script>
+<script src="/assets/premium-feed-app.js?v=30" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
