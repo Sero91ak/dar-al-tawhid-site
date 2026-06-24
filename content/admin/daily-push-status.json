@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-24T07:55:44.497Z",
+  "updatedAt": "2026-06-24T16:50:44.499Z",
   "usersChecked": 16,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 16,
+  "sent": 16,
   "skipped": 0,
   "duplicates": 0,
   "errors": 0,
@@ -24,5 +24,15 @@
     "category": "Rizq"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 16,
+      "contentId": "takfir-bil-umum-399",
+      "recipients": "c22907db-0a88-43b1-9213-56cfd577433e",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
