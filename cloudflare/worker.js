@@ -45,6 +45,13 @@ import {
   buildPublicStoriesResponse
 } from "./stories-admin.js";
 import {
+  readFeedIndex,
+  saveFeedEntry,
+  deleteFeedEntry,
+  reorderFeedItems,
+  buildPublicFeedResponse
+} from "./focus-feed-admin.js";
+import {
   getPublicZakatPrices,
   getAdminZakatPriceStatus,
   fetchAndStoreZakatPrices,
@@ -336,6 +343,44 @@ export default {
         const staging = String(url.searchParams.get("staging") || "") === "1";
         const { index, path } = await readStoriesIndex(env, { staging }, { githubGet, base64ToUtf8 });
         return json({ ...buildPublicStoriesResponse(index), path, staging }, cors, 200);
+      }
+
+      if (url.pathname === "/api/feed" && request.method === "GET") {
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index, path } = await readFeedIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({ ...buildPublicFeedResponse(index), path, staging }, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/feed" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index, sha, path } = await readFeedIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({ ok: true, index, sha, path, staging, count: (index.items || []).length }, cors);
+      }
+
+      if (url.pathname === "/api/admin/feed/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await saveFeedEntry(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/feed/delete" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await deleteFeedEntry(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/feed/reorder" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await reorderFeedItems(env, input, helpers), cors);
       }
 
       if (url.pathname === "/api/admin/zakat/prices/status" && request.method === "GET") {
