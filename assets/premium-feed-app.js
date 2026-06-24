@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV14';
-  var FONTS_ID = 'darPremiumFeedFontsV14';
+  var STYLES_ID = 'darPremiumFeedStylesV15';
+  var FONTS_ID = 'darPremiumFeedFontsV15';
   var APP_LOGO = '/watermark-my-logo-full.png';
   var SCENE_WATERMARK = '/watermark-my-logo-full.png';
   var BRAND = {
@@ -165,19 +165,46 @@
     return unsplashUrl(pool[hashNum(key) % pool.length]);
   }
 
-  function adaptiveFontSize(baseSize, textLen) {
-    var len = textLen || 0;
-    if (len > 220) return 'clamp(11px,2.9vw,14px)';
-    if (len > 160) return 'clamp(12px,3.1vw,15px)';
-    if (len > 110) return 'clamp(13px,3.3vw,16px)';
-    if (len > 70) return 'clamp(14px,3.5vw,17px)';
-    return baseSize;
+  function contentWeight(ar, main, extra) {
+    return (ar ? ar.length * 1.35 : 0) + String(main || '').length + (extra ? extra.length * 0.55 : 0);
   }
 
-  function panelStyleFor(item, text) {
+  function computeTypeSizes(item, ar, main, hasScholar, hasSource) {
+    var w = contentWeight(ar, main, '');
+    if (hasScholar) w += 28;
+    if (hasSource) w += 32;
+    var mainPx;
+    var arPx;
+    if (item && item.type === 'dua') {
+      arPx = w > 210 ? 16 : w > 160 ? 18 : w > 115 ? 20 : w > 75 ? 22 : 24;
+      mainPx = w > 210 ? 11.5 : w > 160 ? 12.5 : w > 115 ? 13.5 : w > 75 ? 14.5 : 15.5;
+    } else {
+      mainPx = w > 240 ? 11.5 : w > 180 ? 12.5 : w > 130 ? 13.5 : w > 85 ? 14.5 : w > 50 ? 15.5 : 16.5;
+      arPx = 22;
+    }
+    return {
+      main: mainPx,
+      ar: arPx,
+      scholar: Math.max(8.5, mainPx * 0.74),
+      source: Math.max(7.5, mainPx * 0.66),
+      mark: Math.max(15, mainPx * 1.35)
+    };
+  }
+
+  function typeVarsStyle(sizes) {
+    return '--sf-main-size:' + sizes.main + 'px;--sf-ar-size:' + sizes.ar + 'px;--sf-scholar-size:' + sizes.scholar + 'px;--sf-src-size:' + sizes.source + 'px;--sf-mark-size:' + sizes.mark + 'px;';
+  }
+
+  function layoutAlignFor(item, textLen) {
+    if (item && (item.type === 'dua' || item.type === 'quran')) return 'center';
+    if (textLen > 85) return 'center';
+    return fontStyleFor(item).align;
+  }
+
+  function panelStyleFor(item, text, alignOverride) {
     var fs = fontStyleFor(item);
-    var size = adaptiveFontSize(fs.size, String(text || '').length);
-    return 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:' + size + ';text-align:' + fs.align;
+    var align = alignOverride || layoutAlignFor(item, String(text || '').length);
+    return 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + align + ';';
   }
 
   function fontStyleFor(item) {
@@ -382,27 +409,63 @@
     return liked ? '<span class="sf-like-count">1</span>' : '';
   }
 
+  function applyPanelScale(panel, scale, bases) {
+    panel.style.setProperty('--sf-main-size', Math.max(9, bases.main * scale) + 'px');
+    panel.style.setProperty('--sf-ar-size', Math.max(11, bases.ar * scale) + 'px');
+    panel.style.setProperty('--sf-scholar-size', Math.max(7.5, bases.scholar * scale) + 'px');
+    panel.style.setProperty('--sf-src-size', Math.max(7, bases.src * scale) + 'px');
+    panel.style.setProperty('--sf-mark-size', Math.max(12, bases.mark * scale) + 'px');
+  }
+
+  function readPanelBases(panel) {
+    var cs = global.getComputedStyle(panel);
+    return {
+      main: parseFloat(cs.getPropertyValue('--sf-main-size')) || 15,
+      ar: parseFloat(cs.getPropertyValue('--sf-ar-size')) || 22,
+      scholar: parseFloat(cs.getPropertyValue('--sf-scholar-size')) || 11,
+      src: parseFloat(cs.getPropertyValue('--sf-src-size')) || 10,
+      mark: parseFloat(cs.getPropertyValue('--sf-mark-size')) || 20
+    };
+  }
+
   function tuneScenePanels(root) {
     if (!root) return;
     root.querySelectorAll('.sf-post__scene').forEach(function (scene) {
       var panel = scene.querySelector('.sf-post__textpanel');
       var inner = scene.querySelector('.sf-post__scene-inner');
       if (!panel || !inner) return;
-      var footerReserve = 50;
-      var topReserve = 10;
-      var maxInner = Math.max(80, scene.clientHeight - footerReserve - topReserve);
-      inner.style.maxHeight = maxInner + 'px';
-      inner.style.paddingBottom = '8px';
-      panel.style.maxHeight = (maxInner - 8) + 'px';
+
+      inner.style.justifyContent = 'center';
+      inner.style.alignItems = 'center';
+
+      var footerReserve = 52;
+      var maxPanelH = Math.max(76, scene.clientHeight - footerReserve - 14);
+      panel.style.maxHeight = maxPanelH + 'px';
       panel.style.overflow = 'hidden';
-      var px = parseFloat(global.getComputedStyle(panel).fontSize) || 15;
-      for (var i = 0; i < 10 && panel.scrollHeight > maxInner - 4; i++) {
-        px = Math.max(10, px - 0.75);
-        panel.style.fontSize = px + 'px';
-        panel.querySelectorAll('.sf-quote-scholar, .sf-quote-source').forEach(function (el) {
-          el.style.fontSize = Math.max(8, px * 0.72) + 'px';
-        });
+
+      var bases = readPanelBases(panel);
+      panel.dataset.sfMainBase = String(bases.main);
+      panel.dataset.sfArBase = String(bases.ar);
+      panel.dataset.sfSchBase = String(bases.scholar);
+      panel.dataset.sfSrcBase = String(bases.src);
+      panel.dataset.sfMarkBase = String(bases.mark);
+
+      var scale = 1;
+      applyPanelScale(panel, scale, bases);
+      for (var i = 0; i < 32; i++) {
+        if (panel.scrollHeight <= maxPanelH - 2) break;
+        scale = Math.max(0.55, scale - 0.032);
+        applyPanelScale(panel, scale, bases);
       }
+    });
+  }
+
+  var tuneResizeTimer = null;
+  function scheduleTunePanels(root) {
+    global.requestAnimationFrame(function () {
+      tuneScenePanels(root);
+      global.clearTimeout(tuneResizeTimer);
+      tuneResizeTimer = global.setTimeout(function () { tuneScenePanels(root); }, 320);
     });
   }
 
@@ -1016,17 +1079,17 @@
       '.sf-brand-site{display:inline-flex;align-items:center;gap:3px;font-size:clamp(6px,1.7vw,7px);letter-spacing:.1em;text-transform:uppercase;color:rgba(214,190,132,.72);font-weight:800;line-height:1}' +
       '.sf-brand-site svg{width:clamp(8px,2.2vw,10px);height:clamp(8px,2.2vw,10px);flex:0 0 auto}' +
       '.sf-brand-signature{font-family:"Allura","Brush Script MT",cursive;font-size:clamp(10px,2.8vw,12px);color:rgba(214,190,132,.68);line-height:1;letter-spacing:.01em;flex:0 1 auto;min-width:0;text-align:center;white-space:nowrap}' +
-      '.sf-post__scene-inner{position:relative;z-index:3;width:100%;display:flex;align-items:center;padding:8px 12px 6px;max-height:calc(100% - 52px);box-sizing:border-box}' +
-      '.sf-post__textpanel{max-width:min(88%,32em);padding:15px 14px;border-radius:16px;background:rgba(8,7,5,.68);border:1px solid rgba(239,215,142,.16);box-shadow:0 6px 20px rgba(0,0,0,.28);box-sizing:border-box}' +
+      '.sf-post__scene-inner{position:relative;z-index:3;width:100%;display:flex;align-items:center;justify-content:center;padding:10px 12px 8px;max-height:calc(100% - 52px);box-sizing:border-box}' +
+      '.sf-post__textpanel{max-width:min(90%,32em);padding:16px 15px;border-radius:16px;background:rgba(8,7,5,.68);border:1px solid rgba(239,215,142,.16);box-shadow:0 6px 20px rgba(0,0,0,.28);box-sizing:border-box;text-align:center}' +
       '.sf-post__img{width:100%;max-height:min(72vh,520px);object-fit:cover;display:block;aspect-ratio:4/5;background:#1a1814}' +
-      '.sf-post__quote{margin:0;line-height:1.62;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
-      '.sf-quote-mark{display:block;font-size:22px;line-height:1;color:rgba(239,215,142,.58);font-family:Georgia,serif;margin-bottom:8px}' +
-      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;line-height:1.58}' +
-      '.sf-quote-source{margin-top:8px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);font-size:10px;line-height:1.45;opacity:.82;font-style:italic;color:rgba(248,239,212,.88)}' +
-      '.sf-quote-scholar{margin-top:10px;font-size:11px;line-height:1.4;opacity:.88;font-weight:700;color:rgba(239,215,142,.92)}' +
-      '.sf-post__dua{margin:0;padding:0;background:transparent}' +
-      '.sf-post__dua-ar{direction:rtl;font-size:clamp(22px,5vw,28px);line-height:1.75;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
-      '.sf-post__dua-de{font-size:clamp(14px,3.5vw,17px);line-height:1.55;text-shadow:0 2px 10px rgba(0,0,0,.38)}' +
+      '.sf-post__quote{margin:0;line-height:1.55;text-shadow:none;width:100%}' +
+      '.sf-quote-mark{display:block;font-size:var(--sf-mark-size,20px);line-height:1;color:rgba(239,215,142,.58);font-family:Georgia,serif;margin-bottom:8px}' +
+      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;line-height:1.55;font-size:var(--sf-main-size,15px)}' +
+      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);font-size:var(--sf-src-size,10px);line-height:1.45;opacity:.82;font-style:italic;color:rgba(248,239,212,.88)}' +
+      '.sf-quote-scholar{margin-top:10px;font-size:var(--sf-scholar-size,11px);line-height:1.42;opacity:.88;font-weight:700;color:rgba(239,215,142,.92)}' +
+      '.sf-post__dua{margin:0;padding:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;text-align:center}' +
+      '.sf-post__dua-ar{direction:rtl;font-family:"Noto Naskh Arabic",serif;font-size:var(--sf-ar-size,22px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none}' +
+      '.sf-post__dua-de{font-size:var(--sf-main-size,15px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none}' +
       '.sf-post__actions{display:flex;align-items:center;padding:8px 12px 10px;gap:8px}' +
       '.sf-actions-left{display:flex;align-items:center;gap:4px;flex:1}' +
       '.sf-act{border:0;background:rgba(255,255,255,.04);color:rgba(248,239,212,.92);min-width:42px;height:38px;border-radius:12px;cursor:pointer;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 10px;border:1px solid rgba(255,255,255,.06);transition:transform .15s ease,background .15s ease,color .15s ease}' +
@@ -1049,7 +1112,7 @@
       'html[data-theme="light"] .sf-user,html[data-theme="soft"] .sf-user{color:var(--text,#3e2b17)}' +
       'html[data-theme="light"] .sf-post__quote,html[data-theme="soft"] .sf-post__quote{color:var(--text,#3e2b17)}' +
       'body.is-premium-feed-view .float-actions{opacity:.45;pointer-events:none}' +
-      '@media(max-width:700px){.sf-post__scene{min-height:260px;max-height:320px;aspect-ratio:4/5;padding-bottom:48px}.sf-post__textpanel{padding:13px 12px}.sf-post__scene-inner{padding:6px 10px 4px;max-height:calc(100% - 46px)}.sf-post__dua-ar{font-size:clamp(18px,4.6vw,24px)!important}.sf-quote-text{font-size:clamp(13px,3.6vw,16px)!important}}' +
+      '@media(max-width:700px){.sf-post__scene{min-height:260px;max-height:320px;aspect-ratio:4/5;padding-bottom:48px}.sf-post__textpanel{padding:14px 13px}.sf-post__scene-inner{padding:8px 10px 6px;max-height:calc(100% - 46px)}}' +
       '@media(max-width:360px){.sf-brand-signature{font-size:9px}.sf-brand-chip{font-size:6px;padding:1px 4px}.sf-post__textpanel{padding:11px 10px}}' +
       '@media(min-width:768px){.sf-feed,.sf-top-inner{max-width:500px;margin-left:auto;margin-right:auto;width:100%}.sf-filters{max-width:500px;margin:0 auto}.sf-post__scene{max-height:400px}}';
 
@@ -1092,7 +1155,7 @@
   function sourceHtml(item, fs) {
     var lines = sourceLinesFor(item);
     if (!lines.scholar && !lines.detail) return '';
-    var style = 'font-family:' + (fs && fs.css ? fs.css : 'Georgia,serif') + ';color:' + (fs && fs.color ? fs.color : '#f5ecd4');
+    var style = 'font-family:' + (fs && fs.css ? fs.css : 'Georgia,serif') + ';color:' + (fs && fs.color ? fs.color : '#f5ecd4') + ';text-align:center';
     var html = '';
     if (lines.scholar && item.type !== 'dua') {
       html += '<div class="sf-quote-scholar" style="' + style + '">' + esc(lines.scholar) + '</div>';
@@ -1103,12 +1166,16 @@
     return html;
   }
 
-  function sceneBlock(item, inner, style, textForSize) {
+  function sceneBlock(item, inner, style, textForSize, typeSizes) {
     var bg = item.image || islamicBgFor(item);
     var fs = style || fontStyleFor(item);
     var fallbacks = allBgFallbacks(item).join('|');
-    var panelStyle = panelStyleFor(item, textForSize || overlayTextFor(item) || '');
-    var innerStyle = 'justify-content:' + (fs.align === 'left' ? 'flex-start' : fs.align === 'right' ? 'flex-end' : 'center');
+    var mainText = textForSize || overlayTextFor(item) || '';
+    var lines = sourceLinesFor(item);
+    var sizes = typeSizes || computeTypeSizes(item, '', mainText, !!lines.scholar, !!lines.detail);
+    var align = layoutAlignFor(item, mainText.length);
+    var panelStyle = panelStyleFor(item, mainText, align) + typeVarsStyle(sizes);
+    var innerStyle = 'justify-content:center;align-items:center';
     return (
       '<div class="sf-post__scene">' +
         '<img class="sf-post__bg" src="' + esc(bg) + '" alt="" decoding="async" loading="eager" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0">' +
@@ -1127,6 +1194,9 @@
     root.querySelectorAll('.sf-post__bg').forEach(function (img) {
       if (img.dataset.sfBgBound === '1') return;
       img.dataset.sfBgBound = '1';
+      img.addEventListener('load', function () {
+        scheduleTunePanels(root.closest('.sf-app') || root);
+      });
       img.addEventListener('error', function () {
         var list = String(img.getAttribute('data-sf-bg-fallbacks') || '').split('|').filter(Boolean);
         var idx = (parseInt(img.getAttribute('data-sf-bg-idx') || '0', 10) || 0) + 1;
@@ -1148,27 +1218,30 @@
       var dash = txt.indexOf(' — ');
       var ar = dash > 0 ? txt.slice(0, dash).trim() : '';
       var de = overlayTextFor(item) || item.title || '';
-      var arAlign = fs.align === 'right' ? 'right' : fs.align === 'left' ? 'left' : 'center';
-      var arStyle = 'font-family:"Noto Naskh Arabic",serif;color:' + fs.color + ';font-size:clamp(22px,5vw,28px);text-align:' + arAlign;
-      var deStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:clamp(14px,3.5vw,17px);text-align:' + fs.align;
+      var duaLines = sourceLinesFor(item);
+      var duaSizes = computeTypeSizes(item, ar, de, false, !!duaLines.detail);
       return sceneBlock(item,
         '<div class="sf-post__dua">' +
-          (ar ? '<div class="sf-post__dua-ar" style="' + arStyle + '">' + esc(ar) + '</div>' : '') +
-          '<div class="sf-post__dua-de" style="' + deStyle + '">' + esc(de) + '</div>' +
+          (ar ? '<div class="sf-post__dua-ar">' + esc(ar) + '</div>' : '') +
+          '<div class="sf-post__dua-de">' + esc(de) + '</div>' +
           sourceHtml(item, fs) +
         '</div>',
         fs,
-        ar + de
+        ar + de,
+        duaSizes
       );
     }
     var bundle = feedOverlayBundle(item);
     var quote = bundle.text;
-    if (!quote) return sceneBlock(item, '', fs, '');
-    var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + fs.align;
+    if (!quote) return sceneBlock(item, '', fs, '', null);
+    var srcLines = sourceLinesFor(item);
+    var quoteSizes = computeTypeSizes(item, '', quote, !!srcLines.scholar, !!srcLines.detail);
+    var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + layoutAlignFor(item, quote.length);
     return sceneBlock(item,
       '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + esc(quote) + '</span>' + sourceHtml(item, fs) + '</blockquote>',
       fs,
-      quote
+      quote,
+      quoteSizes
     );
   }
 
@@ -1593,10 +1666,7 @@
     bindList(mount);
     bindSceneBackgrounds(mount);
     setupInfinite(mount);
-    global.requestAnimationFrame(function () {
-      tuneScenePanels(mount);
-      global.setTimeout(function () { tuneScenePanels(mount); }, 280);
-    });
+    scheduleTunePanels(mount);
   }
 
   var observer = null;
@@ -1619,6 +1689,13 @@
     if (!mount) return;
     injectStyles();
     document.body.classList.add('is-premium-feed-view');
+    if (!global.__darFeedTuneBound) {
+      global.__darFeedTuneBound = true;
+      global.addEventListener('resize', function () {
+        var m = document.getElementById(MOUNT_ID);
+        if (m) scheduleTunePanels(m);
+      });
+    }
 
     mount.innerHTML =
       '<div class="sf-app">' +
