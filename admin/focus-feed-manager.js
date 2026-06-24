@@ -43,6 +43,16 @@
     ["mini", "Mini / Chip"]
   ];
 
+  const BG_TYPES = [
+    ["", "Automatisch (sichere Auswahl)"],
+    ["nature", "Natur"],
+    ["books", "Bücher / Mushaf"],
+    ["mosque", "Moschee / Ornament"],
+    ["pattern", "Muster / Abstrakt"],
+    ["gradient", "Gradient / ohne Bild"],
+    ["image", "Bildbeitrag / URL"]
+  ];
+
   const TARGETS = [
     ["none", "Kein Link"],
     ["post", "Beitrag öffnen"],
@@ -205,6 +215,8 @@
       cardSize: formValue("feedCardSize", base.cardSize),
       imageUrl: formValue("feedImageUrl", base.imageUrl).trim(),
       thumbnailUrl: formValue("feedThumbUrl", base.thumbnailUrl).trim(),
+      bgType: formValue("feedBgType", base.bgType || ""),
+      imageSafe: document.getElementById("feedImageSafe")?.checked !== false,
       gradientFrom: formValue("feedGradFrom", base.gradientFrom).trim(),
       gradientTo: formValue("feedGradTo", base.gradientTo).trim(),
       icon: formValue("feedIcon", base.icon).trim(),
@@ -251,8 +263,11 @@
       <label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="feedBadgeImp"${item.badgeWichtig ? " checked" : ""}> Badge „Wichtig“</label>
       <textarea class="admin-textarea wide" id="feedPreview" placeholder="Kurztext / Vorschau">${esc(item.preview || "")}</textarea>
       <input class="field" id="feedScholar" placeholder="Gelehrter / Thema (optional)" value="${esc(item.scholar || "")}">
-      <input class="field wide" id="feedImageUrl" placeholder="Hintergrundbild-URL (optional)" value="${esc(item.imageUrl || "")}">
+      <select class="field" id="feedBgType">${BG_TYPES.map(([v, l]) => `<option value="${esc(v)}"${v === (item.bgType || "") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
+      <input class="field wide" id="feedImageUrl" placeholder="Hintergrundbild-URL (optional, nur islamisch passend)" value="${esc(item.imageUrl || "")}">
       <input class="field wide" id="feedThumbUrl" placeholder="Thumbnail-URL (empfohlen, kleiner)" value="${esc(item.thumbnailUrl || "")}">
+      <label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="feedImageSafe"${item.imageSafe !== false ? " checked" : ""}> Bild als sicher markieren (imageSafe)</label>
+      <div class="notice-note wide" style="grid-column:1/-1;font-size:12px;line-height:1.45">Bitte nur islamisch passende Bilder, Naturbilder oder neutrale Hintergründe verwenden. Keine Menschen- oder Tierbilder. Feed zeigt nur Bilder mit imageSafe=true live an.</div>
       <input class="field" id="feedGradFrom" placeholder="Verlauf von (#hex)" value="${esc(item.gradientFrom || "#243628")}">
       <input class="field" id="feedGradTo" placeholder="Verlauf bis (#hex)" value="${esc(item.gradientTo || "#0a100c")}">
       <select class="field" id="feedTargetType">${TARGETS.map(([v, l]) => `<option value="${esc(v)}"${v === (item.targetType || "none") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>

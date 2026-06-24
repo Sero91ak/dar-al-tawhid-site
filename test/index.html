@@ -681,18 +681,18 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 body.has-bottom-nav{padding-bottom:calc(70px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
 body.has-bottom-nav .float-actions{bottom:calc(76px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
+body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important;background:#050504!important;overflow-x:hidden!important}
 body.is-feed-fullscreen .top-shell,body.is-feed-fullscreen .isnad,body.is-feed-fullscreen .app-bar,body.is-feed-fullscreen .footer,body.is-feed-fullscreen .float-actions,body.is-feed-fullscreen .new-posts-banner,body.is-feed-fullscreen .top-edge-fade,body.is-feed-fullscreen .top-swim-aura{display:none!important}
 body.is-feed-fullscreen .app{width:100%;max-width:100%;padding-left:0;padding-right:0;margin:0}
-body.is-feed-fullscreen .view{border:none;border-radius:22px 22px 0 0;margin:0;padding:0;background:var(--page-bg,#070707);box-shadow:none;min-height:calc(100dvh - 70px - env(safe-area-inset-bottom,0px));overflow:hidden}
+body.is-feed-fullscreen .view{border:none;border-radius:0;margin:0;padding:0;background:#050504!important;box-shadow:none;min-height:calc(100dvh - 70px - env(safe-area-inset-bottom,0px));overflow:hidden;width:100%;max-width:100%}
 body.is-feed-fullscreen{padding:max(0px,env(safe-area-inset-top,0px)) 0 calc(70px + max(0px,calc(env(safe-area-inset-bottom) - 22px))) 0}
 body.is-feed-fullscreen .staging-app-banner{font-size:10px;padding:6px 12px}
 body.is-feed-fullscreen .staging-app-banner{margin:0;border-radius:0;border-left:0;border-right:0}
 body.is-feed-fullscreen #premiumFeedMount{min-height:calc(100dvh - 70px - env(safe-area-inset-bottom,0px))}
 body.is-feed-fullscreen #premiumFeedMount,body.is-feed-fullscreen .pf-mount-root{width:100%;max-width:100%;margin:0;padding:0}
-body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important;background:#050504!important}
-html[data-theme="light"] body.is-feed-fullscreen,html[data-theme="soft"] body.is-feed-fullscreen{background:#050504!important}
-html[data-theme="light"] body.is-feed-fullscreen .view,html[data-theme="soft"] body.is-feed-fullscreen .view{background:#050504!important}
-@media(max-width:700px){body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important}}
+html[data-theme="light"] body.is-feed-fullscreen,html[data-theme="soft"] body.is-feed-fullscreen,html[data-theme="royal"] body.is-feed-fullscreen,html[data-theme="aurora"] body.is-feed-fullscreen,html[data-theme="bordeaux"] body.is-feed-fullscreen{background:#050504!important}
+html[data-theme="light"] body.is-feed-fullscreen .view,html[data-theme="soft"] body.is-feed-fullscreen .view,html[data-theme="royal"] body.is-feed-fullscreen .view,html[data-theme="aurora"] body.is-feed-fullscreen .view,html[data-theme="bordeaux"] body.is-feed-fullscreen .view{background:#050504!important;padding:0!important;width:100%;max-width:100%}
+@media(max-width:700px){body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important}body.is-feed-fullscreen .view{border-radius:0;padding:0!important}}
 .top-edge-fade{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 14px);background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 38%),radial-gradient(circle at 88% 4%,rgba(155,122,60,.08),transparent 34%),linear-gradient(180deg,var(--page-cover) 0%,var(--page-cover-mid) 100%)}.top-swim-aura{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 34px);overflow:hidden}.top-swim-aura:before{content:"";position:absolute;left:4%;right:4%;top:calc(env(safe-area-inset-top,0px) + 2px);height:30px;background:radial-gradient(ellipse 96% 100% at 50% 100%,rgba(239,215,142,.10) 0%,rgba(18,16,12,.38) 50%,rgba(6,6,4,.72) 82%,transparent 100%);filter:blur(8px);opacity:.9}.reader-mode .top-edge-fade,.reader-mode .top-swim-aura{display:none!important}
 .reader-mode .bottom-nav{display:none!important}
 html.is-standalone-pwa{background:var(--page-cover)}
@@ -7328,7 +7328,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-engine.js?v=8" defer></script>
 <script src="/assets/zakat-app.js?v=13" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
-<script src="/assets/premium-feed-app.js?v=23" defer></script>
+<script src="/assets/premium-feed-app.js?v=24" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
