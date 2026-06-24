@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV15';
-  var FONTS_ID = 'darPremiumFeedFontsV15';
+  var STYLES_ID = 'darPremiumFeedStylesV16';
+  var FONTS_ID = 'darPremiumFeedFontsV16';
   var APP_LOGO = '/watermark-my-logo-full.png';
   var SCENE_WATERMARK = '/watermark-my-logo-full.png';
   var BRAND = {
@@ -169,30 +169,95 @@
     return (ar ? ar.length * 1.35 : 0) + String(main || '').length + (extra ? extra.length * 0.55 : 0);
   }
 
-  function computeTypeSizes(item, ar, main, hasScholar, hasSource) {
-    var w = contentWeight(ar, main, '');
+  function readAppDuaSizes() {
+    try {
+      var cs = global.getComputedStyle(document.documentElement);
+      return {
+        ar: parseFloat(cs.getPropertyValue('--dua-arabic-size')) || 23,
+        tr: parseFloat(cs.getPropertyValue('--dua-trans-size')) || 16.5,
+        de: parseFloat(cs.getPropertyValue('--dua-de-size')) || 16.5,
+        src: parseFloat(cs.getPropertyValue('--post-source-size')) || 13.5
+      };
+    } catch (e) {
+      return { ar: 23, tr: 16.5, de: 16.5, src: 13.5 };
+    }
+  }
+
+  function resolveDuaFields(item) {
+    var out = { ar: '', tr: '', de: '', cat: '', sourceLabel: 'Duʿāʾ' };
+    if (!item) return out;
+    var d = null;
+    try {
+      var list = [];
+      if (item.duaId && global.DUAS && global.DUAS.length) list = global.DUAS;
+      else if (item.duaId) {
+        var ctx = getCtx();
+        if (ctx && ctx.duas && ctx.duas.length) list = ctx.duas;
+      }
+      for (var i = 0; i < list.length; i++) {
+        if (String(list[i].id) === String(item.duaId)) { d = list[i]; break; }
+      }
+    } catch (e) {}
+    if (d) {
+      out.ar = String(d.ar || '').trim();
+      out.tr = String(d.tr || '').trim();
+      out.de = String(d.de || '').trim();
+      out.cat = String(d.cat || '').trim();
+    } else {
+      out.ar = String(item.ar || '').trim();
+      out.tr = String(item.tr || '').trim();
+      out.de = String(item.de || '').trim();
+      out.cat = String(item.duaCat || item.cat || '').trim();
+    }
+    if (!out.ar && !out.de) {
+      var txt = String(item.preview || '');
+      var dash = txt.indexOf(' — ');
+      if (dash > 0) {
+        out.ar = txt.slice(0, dash).trim();
+        out.de = txt.slice(dash + 3).trim();
+      } else {
+        out.de = txt.trim();
+      }
+    }
+    if (!out.de && item.title) out.de = String(item.title).trim();
+    out.sourceLabel = out.cat ? ('Duʿāʾ · ' + out.cat) : String(item.source || item.ref || 'Duʿāʾ').trim();
+    return out;
+  }
+
+  function computeTypeSizes(item, ar, main, tr, hasScholar, hasSource) {
+    var trText = String(tr || '');
+    var w = contentWeight(ar, main, trText);
     if (hasScholar) w += 28;
     if (hasSource) w += 32;
     var mainPx;
     var arPx;
+    var trPx;
+    var srcPx;
     if (item && item.type === 'dua') {
-      arPx = w > 210 ? 16 : w > 160 ? 18 : w > 115 ? 20 : w > 75 ? 22 : 24;
-      mainPx = w > 210 ? 11.5 : w > 160 ? 12.5 : w > 115 ? 13.5 : w > 75 ? 14.5 : 15.5;
+      var app = readAppDuaSizes();
+      var factor = w > 240 ? 0.52 : w > 190 ? 0.6 : w > 140 ? 0.68 : w > 95 ? 0.78 : w > 60 ? 0.88 : 0.96;
+      mainPx = app.de * factor;
+      arPx = app.ar * factor;
+      trPx = app.tr * factor;
+      srcPx = app.src * factor;
     } else {
       mainPx = w > 240 ? 11.5 : w > 180 ? 12.5 : w > 130 ? 13.5 : w > 85 ? 14.5 : w > 50 ? 15.5 : 16.5;
       arPx = 22;
+      trPx = 0;
+      srcPx = Math.max(7.5, mainPx * 0.66);
     }
     return {
       main: mainPx,
       ar: arPx,
+      tr: trPx || Math.max(9, mainPx * 0.92),
       scholar: Math.max(8.5, mainPx * 0.74),
-      source: Math.max(7.5, mainPx * 0.66),
+      source: srcPx,
       mark: Math.max(15, mainPx * 1.35)
     };
   }
 
   function typeVarsStyle(sizes) {
-    return '--sf-main-size:' + sizes.main + 'px;--sf-ar-size:' + sizes.ar + 'px;--sf-scholar-size:' + sizes.scholar + 'px;--sf-src-size:' + sizes.source + 'px;--sf-mark-size:' + sizes.mark + 'px;';
+    return '--sf-main-size:' + sizes.main + 'px;--sf-ar-size:' + sizes.ar + 'px;--sf-tr-size:' + sizes.tr + 'px;--sf-scholar-size:' + sizes.scholar + 'px;--sf-src-size:' + sizes.source + 'px;--sf-mark-size:' + sizes.mark + 'px;';
   }
 
   function layoutAlignFor(item, textLen) {
@@ -202,6 +267,9 @@
   }
 
   function panelStyleFor(item, text, alignOverride) {
+    if (item && item.type === 'dua') {
+      return 'font-family:"EB Garamond",Georgia,serif;color:#fff9e8;text-align:center;';
+    }
     var fs = fontStyleFor(item);
     var align = alignOverride || layoutAlignFor(item, String(text || '').length);
     return 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + align + ';';
@@ -236,7 +304,8 @@
   function sourceLinesFor(item) {
     if (!item) return { scholar: '', detail: '' };
     if (item.type === 'dua') {
-      return { scholar: '', detail: item.ref || item.source || 'Duʿāʾ' };
+      var dua = resolveDuaFields(item);
+      return { scholar: '', detail: dua.sourceLabel };
     }
     var scholar = '';
     var raw = item.statement || item.preview || '';
@@ -264,12 +333,8 @@
   function feedOverlayBundle(item) {
     if (!item) return { text: '', source: '' };
     if (item.type === 'dua') {
-      var txt = String(item.preview || '');
-      var dash = txt.indexOf(' — ');
-      return {
-        text: clamp(dash > 0 ? txt.slice(dash + 3).trim() : txt, 280),
-        source: sourceLineFor(item)
-      };
+      var dua = resolveDuaFields(item);
+      return { text: dua.de, source: dua.sourceLabel };
     }
     var raw = item.statement || item.preview || '';
     var scholar = item.scholar || '';
@@ -410,8 +475,9 @@
   }
 
   function applyPanelScale(panel, scale, bases) {
-    panel.style.setProperty('--sf-main-size', Math.max(9, bases.main * scale) + 'px');
-    panel.style.setProperty('--sf-ar-size', Math.max(11, bases.ar * scale) + 'px');
+    panel.style.setProperty('--sf-main-size', Math.max(8.5, bases.main * scale) + 'px');
+    panel.style.setProperty('--sf-ar-size', Math.max(10, bases.ar * scale) + 'px');
+    panel.style.setProperty('--sf-tr-size', Math.max(8, bases.tr * scale) + 'px');
     panel.style.setProperty('--sf-scholar-size', Math.max(7.5, bases.scholar * scale) + 'px');
     panel.style.setProperty('--sf-src-size', Math.max(7, bases.src * scale) + 'px');
     panel.style.setProperty('--sf-mark-size', Math.max(12, bases.mark * scale) + 'px');
@@ -422,6 +488,7 @@
     return {
       main: parseFloat(cs.getPropertyValue('--sf-main-size')) || 15,
       ar: parseFloat(cs.getPropertyValue('--sf-ar-size')) || 22,
+      tr: parseFloat(cs.getPropertyValue('--sf-tr-size')) || 14,
       scholar: parseFloat(cs.getPropertyValue('--sf-scholar-size')) || 11,
       src: parseFloat(cs.getPropertyValue('--sf-src-size')) || 10,
       mark: parseFloat(cs.getPropertyValue('--sf-mark-size')) || 20
@@ -446,15 +513,16 @@
       var bases = readPanelBases(panel);
       panel.dataset.sfMainBase = String(bases.main);
       panel.dataset.sfArBase = String(bases.ar);
+      panel.dataset.sfTrBase = String(bases.tr);
       panel.dataset.sfSchBase = String(bases.scholar);
       panel.dataset.sfSrcBase = String(bases.src);
       panel.dataset.sfMarkBase = String(bases.mark);
 
       var scale = 1;
       applyPanelScale(panel, scale, bases);
-      for (var i = 0; i < 32; i++) {
+      for (var i = 0; i < 42; i++) {
         if (panel.scrollHeight <= maxPanelH - 2) break;
-        scale = Math.max(0.55, scale - 0.032);
+        scale = Math.max(0.48, scale - 0.028);
         applyPanelScale(panel, scale, bases);
       }
     });
@@ -821,8 +889,12 @@
             type: 'dua',
             cardType: 'md',
             title: dd.title || 'Duʿāʾ des Tages',
-            preview: (dd.ar ? dd.ar + ' — ' : '') + clamp(dd.de || dd.tr || '', 140),
-            source: dd.ref || dd.source || 'Duʿāʾ des Tages',
+            preview: (dd.ar ? dd.ar + ' — ' : '') + (dd.de || dd.tr || ''),
+            ar: dd.ar || '',
+            tr: dd.tr || '',
+            de: dd.de || '',
+            duaCat: dd.cat || '',
+            source: dd.cat ? 'Duʿāʾ · ' + dd.cat : (dd.ref || dd.source || 'Duʿāʾ des Tages'),
             category: 'Duʿāʾ',
             date: todayKey(),
             hijriDate: hijri,
@@ -841,8 +913,12 @@
         type: 'dua',
         cardType: 'sm',
         title: d.title || 'Duʿāʾ',
-        preview: (d.ar ? d.ar + ' — ' : '') + clamp(d.de || d.tr || d.ar || '', 120),
-        source: d.ref || d.source || (d.cat ? 'Duʿāʾ · ' + d.cat : 'Duʿāʾ'),
+        preview: (d.ar ? d.ar + ' — ' : '') + (d.de || d.tr || d.ar || ''),
+        ar: d.ar || '',
+        tr: d.tr || '',
+        de: d.de || '',
+        duaCat: d.cat || '',
+        source: d.cat ? 'Duʿāʾ · ' + d.cat : (d.ref || d.source || 'Duʿāʾ'),
         category: 'Duʿāʾ',
         badges: ['Duʿāʾ'],
         target: 'dua:' + d.id,
@@ -1087,9 +1163,11 @@
       '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;line-height:1.55;font-size:var(--sf-main-size,15px)}' +
       '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);font-size:var(--sf-src-size,10px);line-height:1.45;opacity:.82;font-style:italic;color:rgba(248,239,212,.88)}' +
       '.sf-quote-scholar{margin-top:10px;font-size:var(--sf-scholar-size,11px);line-height:1.42;opacity:.88;font-weight:700;color:rgba(239,215,142,.92)}' +
-      '.sf-post__dua{margin:0;padding:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;text-align:center}' +
-      '.sf-post__dua-ar{direction:rtl;font-family:"Noto Naskh Arabic",serif;font-size:var(--sf-ar-size,22px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none}' +
-      '.sf-post__dua-de{font-size:var(--sf-main-size,15px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none}' +
+      '.sf-post__dua{margin:0;padding:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;text-align:center}' +
+      '.sf-post__dua-ar{direction:rtl;font-family:"Noto Naskh Arabic",serif;font-size:var(--sf-ar-size,22px);line-height:1.55;margin:0;width:100%;text-align:center;text-shadow:none}' +
+      '.sf-post__dua-tr{font-family:"Allura","Brush Script MT",cursive;font-size:var(--sf-tr-size,15px);line-height:1.38;color:rgba(222,192,120,.94);width:100%;text-align:center;text-shadow:none}' +
+      '.sf-post__dua-de{font-family:"EB Garamond",Georgia,serif;font-size:var(--sf-main-size,15px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none;color:#fff9e8}' +
+      '.sf-dua-source{margin-top:8px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);font-size:var(--sf-src-size,10px);line-height:1.45;font-style:italic;opacity:.88;color:rgba(248,239,212,.88);width:100%;text-align:center}' +
       '.sf-post__actions{display:flex;align-items:center;padding:8px 12px 10px;gap:8px}' +
       '.sf-actions-left{display:flex;align-items:center;gap:4px;flex:1}' +
       '.sf-act{border:0;background:rgba(255,255,255,.04);color:rgba(248,239,212,.92);min-width:42px;height:38px;border-radius:12px;cursor:pointer;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 10px;border:1px solid rgba(255,255,255,.06);transition:transform .15s ease,background .15s ease,color .15s ease}' +
@@ -1172,7 +1250,7 @@
     var fallbacks = allBgFallbacks(item).join('|');
     var mainText = textForSize || overlayTextFor(item) || '';
     var lines = sourceLinesFor(item);
-    var sizes = typeSizes || computeTypeSizes(item, '', mainText, !!lines.scholar, !!lines.detail);
+    var sizes = typeSizes || computeTypeSizes(item, '', mainText, '', !!lines.scholar, !!lines.detail);
     var align = layoutAlignFor(item, mainText.length);
     var panelStyle = panelStyleFor(item, mainText, align) + typeVarsStyle(sizes);
     var innerStyle = 'justify-content:center;align-items:center';
@@ -1214,20 +1292,17 @@
     }
     var fs = fontStyleFor(item);
     if (item.type === 'dua') {
-      var txt = String(item.preview || '');
-      var dash = txt.indexOf(' — ');
-      var ar = dash > 0 ? txt.slice(0, dash).trim() : '';
-      var de = overlayTextFor(item) || item.title || '';
-      var duaLines = sourceLinesFor(item);
-      var duaSizes = computeTypeSizes(item, ar, de, false, !!duaLines.detail);
+      var dua = resolveDuaFields(item);
+      var duaSizes = computeTypeSizes(item, dua.ar, dua.de, dua.tr, false, true);
       return sceneBlock(item,
         '<div class="sf-post__dua">' +
-          (ar ? '<div class="sf-post__dua-ar">' + esc(ar) + '</div>' : '') +
-          '<div class="sf-post__dua-de">' + esc(de) + '</div>' +
-          sourceHtml(item, fs) +
+          (dua.ar ? '<div class="sf-post__dua-ar">' + esc(dua.ar) + '</div>' : '') +
+          (dua.tr ? '<div class="sf-post__dua-tr">' + esc(dua.tr) + '</div>' : '') +
+          (dua.de ? '<div class="sf-post__dua-de">' + esc(dua.de) + '</div>' : '') +
+          '<div class="sf-dua-source">' + esc(dua.sourceLabel) + '</div>' +
         '</div>',
-        fs,
-        ar + de,
+        null,
+        dua.ar + dua.tr + dua.de,
         duaSizes
       );
     }
@@ -1235,7 +1310,7 @@
     var quote = bundle.text;
     if (!quote) return sceneBlock(item, '', fs, '', null);
     var srcLines = sourceLinesFor(item);
-    var quoteSizes = computeTypeSizes(item, '', quote, !!srcLines.scholar, !!srcLines.detail);
+    var quoteSizes = computeTypeSizes(item, '', quote, '', !!srcLines.scholar, !!srcLines.detail);
     var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + layoutAlignFor(item, quote.length);
     return sceneBlock(item,
       '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + esc(quote) + '</span>' + sourceHtml(item, fs) + '</blockquote>',
