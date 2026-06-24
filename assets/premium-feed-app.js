@@ -5,11 +5,9 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV10';
-  var FONTS_ID = 'darPremiumFeedFontsV10';
+  var STYLES_ID = 'darPremiumFeedStylesV11';
+  var FONTS_ID = 'darPremiumFeedFontsV11';
   var APP_LOGO = '/watermark-my-logo-full.png';
-  var SHARE_CANVAS_W = 1080;
-  var SHARE_CANVAS_H = 1350;
   var BRAND = {
     site: 'dar-al-tawhid.de',
     instagram: '@dar_at_tawhid',
@@ -1197,73 +1195,133 @@
     });
   }
 
-  function captureSceneForShare(card) {
-    var scene = card && card.querySelector('.sf-post__scene');
-    if (!scene) return Promise.reject(new Error('no scene'));
-    var rect = scene.getBoundingClientRect();
-    var W = SHARE_CANVAS_W;
-    var H = Math.max(SHARE_CANVAS_H, Math.round(W * (rect.height / Math.max(rect.width, 1))));
+  function waitForImages(root) {
+    var imgs = Array.prototype.slice.call((root || document).querySelectorAll('img'));
+    return Promise.all(imgs.map(function (img) {
+      if (img.complete && img.naturalWidth) return Promise.resolve();
+      return new Promise(function (resolve) {
+        img.onload = resolve;
+        img.onerror = resolve;
+        setTimeout(resolve, 6000);
+      });
+    }));
+  }
 
-    var host = document.createElement('div');
-    host.className = 'sf-share-capture-host';
-    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + W + 'px;height:' + H + 'px;overflow:hidden;z-index:-1;pointer-events:none;background:#1a1814;';
-
-    var clone = scene.cloneNode(true);
-    clone.style.width = W + 'px';
-    clone.style.height = H + 'px';
-    clone.style.minHeight = H + 'px';
-    clone.style.maxHeight = H + 'px';
-    clone.style.margin = '0';
-    clone.style.aspectRatio = 'auto';
-
-    clone.querySelectorAll('img').forEach(function (img) {
+  function prepareImagesCors(root) {
+    Array.prototype.forEach.call((root || document).querySelectorAll('img'), function (img) {
       try {
-        var src = img.getAttribute('src') || img.src || '';
+        var src = img.currentSrc || img.getAttribute('src') || img.src || '';
+        if (!src) return;
         if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
         if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) {
           img.crossOrigin = 'anonymous';
+          img.src = src;
         }
-        img.src = src;
       } catch (e) {}
     });
+  }
 
+  function shareExportScale() {
+    var dpr = global.devicePixelRatio || 1;
+    return Math.max(2, Math.min(4, Math.round(dpr * 2)));
+  }
+
+  function captureCloneExact(el) {
+    var rect = el.getBoundingClientRect();
+    var w = Math.max(1, Math.round(rect.width));
+    var h = Math.max(1, Math.round(rect.height));
+    var scale = shareExportScale();
+    var host = document.createElement('div');
+    host.className = 'sf-share-capture-host';
+    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
+
+    var clone = el.cloneNode(true);
+    clone.style.width = w + 'px';
+    clone.style.height = h + 'px';
+    clone.style.minHeight = '0';
+    clone.style.maxHeight = 'none';
+    clone.style.maxWidth = '100%';
+    clone.style.margin = '0';
+    clone.style.aspectRatio = 'auto';
+
+    prepareImagesCors(clone);
     host.appendChild(clone);
     document.body.appendChild(host);
 
-    function waitForCloneImages(root) {
-      var imgs = Array.prototype.slice.call(root.querySelectorAll('img'));
-      return Promise.all(imgs.map(function (img) {
-        if (img.complete && img.naturalWidth) return Promise.resolve();
-        return new Promise(function (resolve) {
-          img.onload = resolve;
-          img.onerror = resolve;
-          setTimeout(resolve, 4000);
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    return fontsReady
+      .then(function () { return waitForImages(clone); })
+      .then(function () { return new Promise(function (r) { setTimeout(r, 200); }); })
+      .then(function () { return loadHtml2Canvas(); })
+      .then(function (h2c) {
+        return h2c(clone, {
+          scale: scale,
+          width: w,
+          height: h,
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: null,
+          logging: false,
+          imageTimeout: 25000
         });
-      }));
-    }
+      })
+      .finally(function () {
+        try { host.remove(); } catch (e) {}
+      });
+  }
+
+  function captureElementWysiwyg(el) {
+    if (!el) return Promise.reject(new Error('no el'));
+    try {
+      el.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'auto' });
+    } catch (e) {}
+
+    prepareImagesCors(el);
 
     var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    var scale = shareExportScale();
 
-    return fontsReady.then(function () {
-      return waitForCloneImages(clone);
-    }).then(function () {
-      return new Promise(function (r) { setTimeout(r, 120); });
-    }).then(function () {
-      return loadHtml2Canvas();
-    }).then(function (h2c) {
-      return h2c(clone, {
-        scale: 2,
-        width: W,
-        height: H,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: null,
-        logging: false,
-        imageTimeout: 20000
+    return new Promise(function (r) { setTimeout(r, 120); })
+      .then(function () { return fontsReady; })
+      .then(function () { return waitForImages(el); })
+      .then(function () { return new Promise(function (r) { setTimeout(r, 180); }); })
+      .then(function () { return loadHtml2Canvas(); })
+      .then(function (h2c) {
+        var rect = el.getBoundingClientRect();
+        var w = Math.max(1, Math.round(rect.width));
+        var h = Math.max(1, Math.round(rect.height));
+        return h2c(el, {
+          scale: scale,
+          width: w,
+          height: h,
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: null,
+          logging: false,
+          imageTimeout: 25000,
+          scrollX: -global.scrollX,
+          scrollY: -global.scrollY,
+          windowWidth: document.documentElement.clientWidth,
+          windowHeight: document.documentElement.clientHeight
+        });
+      })
+      .catch(function () {
+        return captureCloneExact(el);
       });
-    }).finally(function () {
-      try { host.remove(); } catch (e) {}
-    });
+  }
+
+  function captureSceneForShare(card) {
+    var scene = card && card.querySelector('.sf-post__scene');
+    if (!scene) return Promise.reject(new Error('no scene'));
+    return captureElementWysiwyg(scene);
+  }
+
+  function captureMediaForShare(card) {
+    var scene = card && card.querySelector('.sf-post__scene');
+    if (scene) return captureSceneForShare(card);
+    var img = card && card.querySelector('.sf-post__img');
+    if (img) return captureElementWysiwyg(img.closest('.sf-post__media') || img);
+    return Promise.reject(new Error('no media'));
   }
   function canvasToBlob(canvas) {
     return new Promise(function (resolve) {
@@ -1301,7 +1359,7 @@
       btn.disabled = true;
       btn.classList.add('is-busy');
     }
-    var capture = card ? captureSceneForShare(card) : Promise.reject(new Error('no card'));
+    var capture = card ? captureMediaForShare(card) : Promise.reject(new Error('no card'));
     capture.then(function (canvas) {
       return canvasToBlob(canvas).then(function (blob) {
         if (!blob) throw new Error('blob');
