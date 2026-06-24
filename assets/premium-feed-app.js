@@ -5,8 +5,9 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV20';
-  var FONTS_ID = 'darPremiumFeedFontsV20';
+  var STYLES_ID = 'darPremiumFeedStylesV21';
+  var FONTS_ID = 'darPremiumFeedFontsV21';
+  var EMPHASIS_SCRIPT = '"Allura","Brush Script MT",cursive';
   var APP_LOGO = '/watermark-my-logo-full.png';
   var SCENE_WATERMARK = '/watermark-my-logo-full.png';
   var BRAND = {
@@ -221,7 +222,7 @@
   }
 
   function resolveDuaFields(item) {
-    var out = { ar: '', tr: '', de: '', cat: '', sourceLabel: 'Duʿāʾ' };
+    var out = { ar: '', tr: '', de: '', cat: '', sourceLabel: 'Duʿāʾ', bookRef: '' };
     if (!item) return out;
     var d = null;
     try {
@@ -240,11 +241,17 @@
       out.tr = String(d.tr || '').trim();
       out.de = String(d.de || '').trim();
       out.cat = String(d.cat || '').trim();
+      out.bookRef = String(d.src || d.ref || '').replace(/^📝\s*/, '').trim();
     } else {
       out.ar = String(item.ar || '').trim();
       out.tr = String(item.tr || '').trim();
       out.de = String(item.de || '').trim();
       out.cat = String(item.duaCat || item.cat || '').trim();
+      out.bookRef = String(item.bookRef || '').replace(/^📝\s*/, '').trim();
+    }
+    if (!out.bookRef) {
+      var rawSrc = String(item.sourceDetail || item.ref || '').replace(/^📝\s*/, '').trim();
+      if (rawSrc && rawSrc.indexOf('Duʿāʾ ·') !== 0) out.bookRef = rawSrc;
     }
     if (!out.ar && !out.de) {
       var txt = String(item.preview || '');
@@ -272,24 +279,23 @@
     var srcPx;
     if (item && item.type === 'dua') {
       var app = readAppDuaSizes();
-      var factor = w > 240 ? 0.52 : w > 190 ? 0.6 : w > 140 ? 0.68 : w > 95 ? 0.78 : w > 60 ? 0.88 : 0.96;
-      mainPx = app.de * factor;
-      arPx = app.ar * factor;
-      trPx = app.tr * factor;
-      srcPx = app.src * factor;
+      mainPx = app.de;
+      arPx = app.ar;
+      trPx = app.tr;
+      srcPx = Math.max(11, app.src);
     } else {
-      mainPx = w > 240 ? 11.5 : w > 180 ? 12.5 : w > 130 ? 13.5 : w > 85 ? 14.5 : w > 50 ? 15.5 : 16.5;
+      mainPx = w > 240 ? 14 : w > 180 ? 15 : w > 130 ? 16 : w > 85 ? 17 : w > 50 ? 17.5 : 18;
       arPx = 22;
       trPx = 0;
-      srcPx = Math.max(7.5, mainPx * 0.66);
+      srcPx = Math.max(11, mainPx * 0.72);
     }
     return {
       main: mainPx,
       ar: arPx,
-      tr: trPx || Math.max(9, mainPx * 0.92),
-      scholar: Math.max(8.5, mainPx * 0.74),
+      tr: trPx || Math.max(12, mainPx * 0.95),
+      scholar: Math.max(11, mainPx * 0.82),
       source: srcPx,
-      mark: Math.max(15, mainPx * 1.35)
+      mark: Math.max(17, mainPx * 1.3)
     };
   }
 
@@ -306,16 +312,13 @@
   function duaTypographyFor(item) {
     var uid = String(item && item.uid || '');
     var trIdx = hashNum(uid + '|dua-tr') % DUA_READABLE_FONTS.length;
-    var deIdx = hashNum(uid + '|dua-de') % DUA_STYLISH_FONTS.length;
-    var emIdx = hashNum(uid + '|dua-em') % DUA_STYLISH_FONTS.length;
-    if (emIdx === deIdx) emIdx = (emIdx + 1) % DUA_STYLISH_FONTS.length;
+    var deIdx = hashNum(uid + '|dua-de') % DUA_READABLE_FONTS.length;
     var tr = DUA_READABLE_FONTS[trIdx];
-    var de = DUA_STYLISH_FONTS[deIdx];
-    var em = DUA_STYLISH_FONTS[emIdx];
+    var de = DUA_READABLE_FONTS[deIdx];
     return {
       trStyle: 'font-family:' + tr.css + ';font-style:normal;font-weight:500;',
-      deStyle: 'font-family:' + de.css + ';' + (de.extra || ''),
-      emStyle: 'font-family:' + em.css + ';' + (em.extra || '')
+      deStyle: 'font-family:' + de.css + ';font-style:normal;font-weight:500;',
+      emStyle: 'font-family:' + EMPHASIS_SCRIPT + ';font-size:1.14em;line-height:1.12;'
     };
   }
 
@@ -349,12 +352,13 @@
     return picked;
   }
 
-  function formatDuaGerman(text, uid, typo) {
+  function formatEmphasizedText(text, uid, salt) {
     if (!text) return '';
     var words = String(text).split(/\s+/).filter(Boolean);
-    var emph = pickDuaEmphasisSet(words, uid);
+    var emph = pickDuaEmphasisSet(words, uid + '|' + (salt || 'em'));
     var tokens = String(text).split(/(\s+)/);
     var wIdx = 0;
+    var emStyle = 'font-family:' + EMPHASIS_SCRIPT + ';font-size:1.14em;line-height:1.12;';
     var out = '';
     for (var i = 0; i < tokens.length; i++) {
       var t = tokens[i];
@@ -362,13 +366,17 @@
       var m = t.match(/^([^\wäöüÄÖÜß]*)([\wäöüÄÖÜß]+)([^\wäöüÄÖÜß]*)$/i);
       if (!m) { out += esc(t); wIdx++; continue; }
       if (emph[wIdx]) {
-        out += esc(m[1]) + '<span class="sf-dua-em" style="' + typo.emStyle + '">' + esc(m[2]) + '</span>' + esc(m[3]);
+        out += esc(m[1]) + '<span class="sf-text-em" style="' + emStyle + '">' + esc(m[2]) + '</span>' + esc(m[3]);
       } else {
         out += esc(t);
       }
       wIdx++;
     }
     return out;
+  }
+
+  function formatDuaGerman(text, uid, typo) {
+    return formatEmphasizedText(text, uid, 'dua-de');
   }
 
   function panelStyleFor(item, text, alignOverride) {
@@ -410,7 +418,7 @@
     if (!item) return { scholar: '', detail: '' };
     if (item.type === 'dua') {
       var dua = resolveDuaFields(item);
-      return { scholar: '', detail: dua.sourceLabel };
+      return { scholar: dua.sourceLabel, detail: dua.bookRef };
     }
     var scholar = '';
     var raw = item.statement || item.preview || '';
@@ -646,12 +654,12 @@
   }
 
   function applyPanelScale(panel, scale, bases) {
-    panel.style.setProperty('--sf-main-size', Math.max(8.5, bases.main * scale) + 'px');
-    panel.style.setProperty('--sf-ar-size', Math.max(10, bases.ar * scale) + 'px');
-    panel.style.setProperty('--sf-tr-size', Math.max(8, bases.tr * scale) + 'px');
-    panel.style.setProperty('--sf-scholar-size', Math.max(7.5, bases.scholar * scale) + 'px');
-    panel.style.setProperty('--sf-src-size', Math.max(7, bases.src * scale) + 'px');
-    panel.style.setProperty('--sf-mark-size', Math.max(12, bases.mark * scale) + 'px');
+    panel.style.setProperty('--sf-main-size', Math.max(13, bases.main * scale) + 'px');
+    panel.style.setProperty('--sf-ar-size', Math.max(18, bases.ar * scale) + 'px');
+    panel.style.setProperty('--sf-tr-size', Math.max(12, bases.tr * scale) + 'px');
+    panel.style.setProperty('--sf-scholar-size', Math.max(10.5, bases.scholar * scale) + 'px');
+    panel.style.setProperty('--sf-src-size', Math.max(10.5, bases.src * scale) + 'px');
+    panel.style.setProperty('--sf-mark-size', Math.max(16, bases.mark * scale) + 'px');
   }
 
   function readPanelBases(panel) {
@@ -700,11 +708,11 @@
       var bases = readPanelBases(panel);
       var scale = 1;
       applyPanelScale(panel, scale, bases);
-      for (var i = 0; i < 52; i++) {
-        var fitsH = panel.scrollHeight <= maxPanelH - 4;
-        var fitsW = panel.scrollWidth <= maxPanelW - 4;
+      for (var i = 0; i < 18; i++) {
+        var fitsH = panel.scrollHeight <= maxPanelH - 2;
+        var fitsW = panel.scrollWidth <= maxPanelW - 2;
         if (fitsH && fitsW) break;
-        scale = Math.max(0.42, scale - 0.022);
+        scale = Math.max(0.9, scale - 0.012);
         applyPanelScale(panel, scale, bases);
       }
     });
@@ -1080,6 +1088,7 @@
             tr: dd.tr || '',
             de: dd.de || '',
             duaCat: dd.cat || '',
+            bookRef: String(dd.src || dd.ref || '').replace(/^📝\s*/, '').trim(),
             source: dd.cat ? 'Duʿāʾ · ' + dd.cat : (dd.ref || dd.source || 'Duʿāʾ des Tages'),
             category: 'Duʿāʾ',
             date: todayKey(),
@@ -1104,6 +1113,7 @@
         tr: d.tr || '',
         de: d.de || '',
         duaCat: d.cat || '',
+        bookRef: String(d.src || d.ref || '').replace(/^📝\s*/, '').trim(),
         source: d.cat ? 'Duʿāʾ · ' + d.cat : (d.ref || d.source || 'Duʿāʾ'),
         category: 'Duʿāʾ',
         badges: ['Duʿāʾ'],
@@ -1326,8 +1336,8 @@
       '.sf-filters::-webkit-scrollbar{display:none}' +
       '.sf-filter{flex:0 0 auto;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(248,239,212,.82);border-radius:999px;padding:7px 13px;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}' +
       '.sf-filter.is-active{border-color:rgba(214,190,132,.5);background:linear-gradient(135deg,rgba(214,190,132,.18),rgba(90,70,30,.12));color:#fff9e5}' +
-      '.sf-feed{display:flex;flex-direction:column;gap:2px;padding:0 0 calc(8px + env(safe-area-inset-bottom))}' +
-      '.sf-post{margin:0;border-radius:0;overflow:hidden;cursor:pointer;background:#050504;border:none;border-bottom:1px solid rgba(214,190,132,.1);box-shadow:none}' +
+      '.sf-feed{display:flex;flex-direction:column;gap:8px;padding:0 4px calc(8px + env(safe-area-inset-bottom))}' +
+      '.sf-post{margin:0;border-radius:20px;overflow:hidden;cursor:pointer;background:linear-gradient(180deg,rgba(18,16,12,.96),rgba(8,8,6,.98));border:1px solid rgba(214,190,132,.14);box-shadow:0 8px 28px rgba(0,0,0,.28)}' +
       '.sf-post--demo{border-color:rgba(214,190,132,.32);box-shadow:0 18px 44px rgba(0,0,0,.34),0 0 0 1px rgba(239,215,142,.08) inset}' +
       '.sf-post__head{display:flex;align-items:center;gap:10px;padding:10px 12px 8px}' +
       '.sf-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(145deg,rgba(239,215,142,.42),rgba(90,70,30,.62));border:1.5px solid rgba(239,215,142,.42);display:grid;place-items:center;font-size:14px;font-weight:900;color:#fff8e8;flex:0 0 40px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.24)}' +
@@ -1336,7 +1346,7 @@
       '.sf-user{display:block;font-size:13px;font-weight:800;color:#fff9e5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.sf-sub{display:block;font-size:10px;opacity:.62;margin-top:1px}' +
       '.sf-more{border:0;background:rgba(255,255,255,.05);color:inherit;font-size:16px;line-height:1;padding:6px 8px;border-radius:999px;cursor:pointer;opacity:.82}' +
-      '.sf-post__media{position:relative;background:#12100e;min-height:180px;overflow:hidden}' +
+      '.sf-post__media{position:relative;background:#12100e;min-height:180px;overflow:hidden;border-radius:18px}' +
       '.sf-post__scene{position:relative;width:100%;height:var(--sf-scene-h,auto);min-height:280px;display:flex;align-items:center;justify-content:center;padding:12px var(--sf-side-pad,12px) var(--sf-footer-h,50px);overflow:hidden;max-width:100%;margin:0 auto;isolation:isolate;transform:translateZ(0);-webkit-transform:translateZ(0)}' +
       '.sf-post__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:#1e1a14;image-rendering:auto}' +
       '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.32) 45%,rgba(0,0,0,.5) 100%);pointer-events:none}' +
@@ -1361,10 +1371,12 @@
       '.sf-post__dua-ar{direction:rtl;font-family:"Noto Naskh Arabic",serif;font-size:var(--sf-ar-size,22px);line-height:1.55;margin:0;width:100%;text-align:center;text-shadow:none}' +
       '.sf-post__dua-tr{font-size:var(--sf-tr-size,15px);line-height:1.5;letter-spacing:.015em;color:rgba(241,217,143,.94);width:100%;text-align:center;text-shadow:none;font-style:normal;font-weight:500}' +
       '.sf-post__dua-de{font-size:var(--sf-main-size,15px);line-height:1.48;margin:0;width:100%;text-align:center;text-shadow:none;color:#fff9e8}' +
-      '.sf-dua-em{text-decoration:underline;text-decoration-color:rgba(239,215,142,.78);text-underline-offset:4px;text-decoration-thickness:1px;color:rgba(240,217,143,.98);font-weight:400}' +
-      '.sf-post__textpanel--dua{max-width:100%!important;width:100%;border-radius:clamp(8px,2vw,12px)}' +
-      '.sf-post__scene-inner--full{padding:3px 4px!important;width:100%;max-width:100%}' +
-      '.sf-dua-source{margin-top:8px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);font-size:var(--sf-src-size,10px);line-height:1.45;font-style:italic;opacity:.88;color:rgba(248,239,212,.88);width:100%;text-align:center}' +
+      '.sf-dua-em,.sf-text-em{text-decoration:underline;text-decoration-color:rgba(239,215,142,.82);text-underline-offset:5px;text-decoration-thickness:1px;color:rgba(240,217,143,.98);font-weight:400}' +
+      '.sf-dua-source{margin-top:8px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);width:100%;text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center}' +
+      '.sf-dua-cat{font-size:var(--sf-src-size,11px);line-height:1.35;font-weight:800;color:rgba(239,215,142,.92);letter-spacing:.02em}' +
+      '.sf-dua-book{font-size:max(10.5px,var(--sf-src-size,11px));line-height:1.42;font-style:italic;opacity:.9;color:rgba(248,239,212,.88);max-width:100%;word-wrap:break-word}' +
+      '.sf-post__textpanel--dua{max-width:100%!important;width:100%;border-radius:clamp(10px,2.4vw,14px)}' +
+      '.sf-post__scene-inner--full{padding:4px 5px!important;width:100%;max-width:100%}' +
       '.sf-post__actions{display:flex;align-items:center;padding:8px 12px 10px;gap:8px}' +
       '.sf-actions-left{display:flex;align-items:center;gap:4px;flex:1}' +
       '.sf-act{border:0;background:rgba(255,255,255,.04);color:rgba(248,239,212,.92);min-width:42px;height:38px;border-radius:12px;cursor:pointer;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 10px;border:1px solid rgba(255,255,255,.06);transition:transform .15s ease,background .15s ease,color .15s ease}' +
@@ -1390,10 +1402,10 @@
       'html[data-theme="light"] .sf-post__textpanel .sf-quote-scholar,html[data-theme="soft"] .sf-post__textpanel .sf-quote-scholar{color:rgba(239,215,142,.94)!important}' +
       'html[data-theme="light"] .sf-post__textpanel .sf-quote-source,html[data-theme="soft"] .sf-post__textpanel .sf-quote-source{color:rgba(248,239,212,.9)!important}' +
       'body.is-feed-fullscreen .sf-app{width:100%;max-width:100%;background:#050504}' +
-      'body.is-feed-fullscreen .sf-feed{padding:0 0 calc(6px + env(safe-area-inset-bottom));gap:0;max-width:100%!important;margin:0!important}' +
-      'body.is-feed-fullscreen .sf-post{border-radius:0;margin:0 0 1px;border-left:0;border-right:0;background:#050504;box-shadow:none}' +
-      'body.is-feed-fullscreen .sf-post__media{border-radius:0}' +
-      'body.is-feed-fullscreen .sf-post__scene{width:100%;max-width:100%;border-radius:0}' +
+      'body.is-feed-fullscreen .sf-feed{padding:0 4px calc(8px + env(safe-area-inset-bottom));gap:8px;max-width:100%!important;margin:0!important}' +
+      'body.is-feed-fullscreen .sf-post{border-radius:20px;margin:0 0 6px;border:1px solid rgba(214,190,132,.12);background:linear-gradient(180deg,rgba(18,16,12,.96),rgba(8,8,6,.98));box-shadow:0 8px 28px rgba(0,0,0,.28)}' +
+      'body.is-feed-fullscreen .sf-post__media{border-radius:18px}' +
+      'body.is-feed-fullscreen .sf-post__scene{width:100%;max-width:100%}' +
       'body.is-feed-fullscreen .sf-user{color:#fff9e5!important}' +
       'body.is-feed-fullscreen .sf-top,body.is-feed-fullscreen .sf-filters{max-width:100%!important;margin:0!important}' +
       'body.is-feed-fullscreen .sf-top{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))}' +
@@ -1513,7 +1525,10 @@
           (dua.ar ? '<div class="sf-post__dua-ar">' + esc(dua.ar) + '</div>' : '') +
           (dua.tr ? '<div class="sf-post__dua-tr" style="' + typo.trStyle + '">' + esc(dua.tr) + '</div>' : '') +
           (dua.de ? '<div class="sf-post__dua-de" style="' + typo.deStyle + '">' + formatDuaGerman(dua.de, item.uid, typo) + '</div>' : '') +
-          '<div class="sf-dua-source">' + esc(dua.sourceLabel) + '</div>' +
+          '<div class="sf-dua-source">' +
+            '<div class="sf-dua-cat">' + esc(dua.sourceLabel) + '</div>' +
+            (dua.bookRef ? '<div class="sf-dua-book">' + esc(dua.bookRef) + '</div>' : '') +
+          '</div>' +
         '</div>',
         null,
         dua.ar + dua.tr + dua.de,
@@ -1528,7 +1543,7 @@
     var quoteSizes = computeTypeSizes(item, '', quote, '', !!srcLines.scholar, !!srcLines.detail);
     var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + layoutAlignFor(item, quote.length);
     return sceneBlock(item,
-      '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + esc(quote) + '</span>' + sourceHtml(item, fs) + '</blockquote>',
+      '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + formatEmphasizedText(quote, item.uid, 'quote') + '</span>' + sourceHtml(item, fs) + '</blockquote>',
       fs,
       quote,
       quoteSizes
