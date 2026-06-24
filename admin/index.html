@@ -10,7 +10,7 @@
 <meta name="application-name" content="DAR Admin">
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
 <meta name="theme-color" content="#07111d">
-<meta name="description" content="DAR Admin Command Center fuer Inhalte, News, Statistik und Live-Vorschau.">
+<meta name="description" content="DAR Admin Command Center fuer Inhalte, News und Statistik.">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta property="og:type" content="website">
@@ -246,6 +246,10 @@ button{cursor:pointer}
 .field{width:100%;max-width:100%;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.24);color:var(--ink);padding:9px 11px}
 .upload-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.45fr);gap:10px;margin-top:12px}
 .source-files-panel{border:1px solid rgba(239,215,142,.18);border-radius:16px;background:linear-gradient(160deg,rgba(16,24,36,.88),rgba(6,8,12,.94));padding:12px;margin-top:12px;display:grid;gap:10px}
+.source-files-panel.is-compact{margin-top:8px;padding:10px;gap:8px}
+.source-files-panel.is-compact .source-dropzone{padding:20px 12px;cursor:pointer}
+.source-files-queue{font-size:10.5px;color:#b8e6c0;line-height:1.45;padding:6px 8px;border:1px solid rgba(120,220,160,.22);border-radius:10px;background:rgba(20,40,30,.2)}
+.markdown-upload-col{display:grid;gap:0;min-width:0}
 .source-files-panel h4{margin:0;font-family:var(--serif);font-size:17px;color:#fff0c8}
 .source-files-lead{margin:0;color:var(--soft);font-size:10.5px;line-height:1.45}
 .source-files-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -479,7 +483,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-06-18-stories";
+const ADMIN_BUILD="2026-06-18-source-upload-simple";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -496,7 +500,6 @@ const DEFAULT_ADMIN_TABS=[
   ["kurzlinks","Kurzlinks"],
   ["zakat","Zakāt-Rechner"],
   ["actions","Aktionen"],
-  ["preview","Live-Vorschau"],
   ["content","Inhalte"],
   ["news","News"],
   ["stories","Storys"],
@@ -641,6 +644,7 @@ function userItems(){return readStore(ADMIN_USERS_KEY)}
 function normalizeAdminTab(tab){
   const id=String(tab||"").trim();
   if(id==="stats"||id==="overview")return"besucher";
+  if(id==="preview")return"actions";
   if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
   return id||"start";
 }
@@ -946,72 +950,79 @@ async function loadSourceLibrary(force){if(sourceLibraryBusy)return sourceLibrar
 function renderSourceLibraryRows(files){if(!files?.length)return `<div class="empty" style="padding:12px">Noch keine Quellen-Dateien im Repository.</div>`;return files.map((file,idx)=>{const usage=file.usage||[];const usageText=usage.length?`${usage.length} Beitrag/Slide`: "Nicht referenziert";return `<div class="source-library-item"><div><b>${esc(file.name||file.path)}</b><span>${esc(file.scholar||"—")}${file.book?` · ${esc(file.book)}`:""} · ${esc(file.type||"")} · ${esc(usageText)}<br>${esc(file.path||"")}${file.size?`<br>${esc(file.size)}`:""}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="btn" href="${SITE_ORIGIN}${esc(file.url||("/"+file.path))}" target="_blank" rel="noopener">Öffnen</a><button class="btn primary" type="button" data-source-pick="${idx}">Zum Beitrag hinzufügen</button></div></div>`}).join("")}
 function previewLinksBlockAfterAdd(markdown,label,url,target){try{const updated=appendLinkToMarkdown(String(markdown||""),label,url,target||"post");const info=window.DARQuellen?DARQuellen.analyzePostSources(updated):null;if(info?.isSlide&&target&&target!=="post")return `Slide-Ziel aktualisiert (${info.slides.length} Slides)`;return extractLinksYamlBlock((updated.match(/^---\s*\n([\s\S]*?)\n---/)||[])[1]||"")||"(links:-Block wird neu angelegt)"}catch(e){return `links:\n  - label: "${label}"\n    url: "${url}"`}}
 function renderSourcePreviewBox(pending,context){if(!pending)return `<div class="source-preview-box">Noch keine Quelle vorbereitet. Datei hochladen, manuellen Link setzen oder aus Bibliothek wählen.</div>`;const md=getMarkdownForSourceContext(context||pending.context||"draft");const target=getSourceLinkTargetFromUi();const linksPreview=previewLinksBlockAfterAdd(md,pending.label,pending.url,target);const testUrl=pending.url.startsWith("http")?pending.url:SITE_ORIGIN+pending.url.replace(/^\//,"");return `<div class="source-preview-box"><strong>Vorschau vor dem Speichern</strong>\nDatei: ${esc(pending.originalName||pending.name||"")}\nSpeicherort: ${esc(pending.path||"")}\nLabel: ${esc(pending.label||"")}\nURL: ${esc(pending.url||"")}\nZiel: ${esc(String(sourceLinkTarget||"post"))}\n\n<strong>YAML-Vorschau:</strong>\n${esc(linksPreview)}${pending.existing?"\n\n(Hinweis: Datei existiert bereits — nur Link wird ergänzt)":""}\n\n<a class="btn primary" href="${esc(testUrl)}" target="_blank" rel="noopener" id="sourceTestLinkBtn">Quelle testen</a></div>`}
-function renderSourceFilesPanel(context){const pending=sourceDraftPending;const lib=sourceLibraryCache;return `<div class="source-files-panel" id="sourceFilesPanel" data-source-context="${esc(context)}">
-  <div class="section-head" style="margin-bottom:0"><h4>Quellen-Dateien</h4><span>PDF / Bild / Scan → links:</span></div>
-  <p class="source-files-lead">Bestehende Beiträge: Datei hochladen, Label &amp; Ziel wählen (Gesamtbeitrag oder einzelne Slide). Links bearbeiten/entfernen unten.</p>
-  ${renderExistingSourcesOverview(context)}
-  <details open><summary>Bestehende Links bearbeiten</summary>${renderExistingSourceLinkRows(context)}</details>
-  <div class="source-dropzone" id="sourceDropzone">PDF oder Bild per Drag &amp; Drop hierher · max. 20 MB</div>
+function renderSimpleSourceUpload(context){
+  const queued=sourceUploadQueue||[];
+  const last=queued[queued.length-1];
+  return `<div class="source-files-panel is-compact" id="sourceFilesPanel" data-source-context="${esc(context)}" data-source-mode="simple">
+  <div class="source-dropzone" id="sourceDropzone" role="button" tabindex="0" aria-label="PDF oder Bild hochladen">
+    <strong style="color:var(--gold);font-size:12px">PDF oder Bild hier ablegen</strong><br>
+    <span>wird sofort in den Beitrag eingefügt · max. 20 MB</span>
+  </div>
   <div class="source-files-toolbar">
-    <input type="file" id="sourcePdfInput" accept=".pdf,application/pdf" hidden>
-    <input type="file" id="sourceImageInput" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" hidden>
-    <button class="btn" type="button" id="sourcePickPdfBtn">PDF hochladen</button>
-    <button class="btn" type="button" id="sourcePickImageBtn">Bild/Scan hochladen</button>
-    <button class="btn" type="button" id="sourceReloadLibBtn">Bibliothek laden</button>
+    <input type="file" id="sourceFileInput" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" hidden>
+    <button class="btn primary" type="button" id="sourcePickFileBtn">Datei wählen</button>
   </div>
-  <div class="source-files-row">
-    <label>Label<select class="field" id="sourceLabelSelect"><option value="__custom__">Eigenes Label…</option>${SOURCE_LABEL_OPTIONS.map(opt=>`<option value="${esc(opt)}" ${pending?.label===opt?"selected":""}>${esc(opt)}</option>`).join("")}</select></label>
-    <label>Eigenes Label<input class="field" id="sourceCustomLabelInput" placeholder="z. B. → Shamela" value="${esc(sourceCustomLabel||"")}"></label>
-    <label>Seite (PDF)<input class="field" id="sourcePageInput" type="number" min="1" step="1" placeholder="z. B. 152" value="${esc(pending?.page||"")}"></label>
-    ${renderSourceTargetSelect(context)}
-  </div>
-  <div class="source-files-row">
-    <label>Eigener Link (URL)<input class="field" id="sourceManualUrlInput" placeholder="https://… oder /assets/sources/…" value="${esc(sourceManualUrl||"")}"></label>
-    <label style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--soft)"><input type="checkbox" id="sourceSetSlideImageCb" ${sourceSetSlideImage?"checked":""}> Bei Bild-Upload auch slide.image setzen</label>
-  </div>
-  <div class="source-files-toolbar"><button class="btn" type="button" id="sourceManualLinkBtn">Manuellen Link hinzufügen</button></div>
-  ${renderSourcePreviewBox(pending,context)}
+  ${queued.length?`<div class="source-files-queue">✓ ${queued.length} Datei(en) bereit${last?.name?` · zuletzt: ${esc(last.name)}`:""} — werden beim Veröffentlichen mit hochgeladen.</div>`:""}
+</div>`}
+function renderSourceFilesPanel(context){
+  if(context==="draft")return renderSimpleSourceUpload(context);
+  const pending=sourceDraftPending;
+  const lib=sourceLibraryCache;
+  const linkRows=renderExistingSourceLinkRows(context);
+  const hasLinks=linkRows.includes("quellen-link-row");
+  return `<div class="source-files-panel" id="sourceFilesPanel" data-source-context="${esc(context)}" data-source-mode="full">
+  <div class="section-head" style="margin-bottom:0"><h4>Quellen-Datei</h4><span>PDF / Bild → Beitrag</span></div>
+  <div class="source-dropzone" id="sourceDropzone">PDF oder Bild per Drag &amp; Drop · max. 20 MB · wird automatisch eingefügt</div>
   <div class="source-files-toolbar">
-    <button class="btn primary" type="button" id="sourceAddMarkdownBtn" ${pending?"":"disabled"}>Zum Markdown hinzufügen</button>
-    <button class="btn" type="button" id="sourceApplyMarkdownBtn" ${pending?"":"disabled"}>Speichern und Markdown aktualisieren</button>
-    <button class="btn" type="button" id="sourceQueueUploadBtn" ${pending&&!pending.existing?"":"disabled"}>Für GitHub-Upload merken</button>
+    <input type="file" id="sourceFileInput" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" hidden>
+    <button class="btn primary" type="button" id="sourcePickFileBtn">Datei wählen</button>
   </div>
-  <div class="upload-status" id="sourcePanelStatus">${sourceUploadQueue.length?`<strong>${sourceUploadQueue.length}</strong> Datei(en) werden beim Veröffentlichen mit hochgeladen.`:""}</div>
-  <details ${lib?.files?.length?"open":""}><summary>Quellen-Bibliothek (${lib?.files?.length||0})</summary><div class="source-library" id="sourceLibraryList">${renderSourceLibraryRows(lib?.files||[])}</div></details>
+  ${hasLinks?`<details open><summary>Bestehende Links</summary>${linkRows}</details>`:""}
+  ${pending?renderSourcePreviewBox(pending,context):""}
+  <div class="upload-status" id="sourcePanelStatus">${sourceUploadQueue.length?`<strong>${sourceUploadQueue.length}</strong> Datei(en) werden beim Speichern mit hochgeladen.`:""}</div>
+  <details ${lib?.files?.length?"open":""}><summary>Bibliothek (${lib?.files?.length||0})</summary><div class="source-library" id="sourceLibraryList">${renderSourceLibraryRows(lib?.files||[])}</div></details>
 </div>`}
 function getMarkdownForSourceContext(context){if(context==="ordner")return document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown||"";if(context==="quellen")return document.getElementById("quellenEditor")?.value||quellenEdit.markdown||"";return document.getElementById("postMarkdownInput")?.value||draftMarkdown||""}
-function setMarkdownForSourceContext(context,markdown){if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown,dirty:true};const el=document.getElementById("ordnerEditor");if(el)el.value=markdown}else if(context==="quellen"){quellenEdit={...quellenEdit,markdown,dirty:true};const el=document.getElementById("quellenEditor");if(el)el.value=markdown}else{draftMarkdown=markdown;const el=document.getElementById("postMarkdownInput");if(el)el.value=markdown;updateDraftPreview()}}
+function setMarkdownForSourceContext(context,markdown){if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown,dirty:true};const el=document.getElementById("ordnerEditor");if(el)el.value=markdown}else if(context==="quellen"){quellenEdit={...quellenEdit,markdown,dirty:true};const el=document.getElementById("quellenEditor");if(el)el.value=markdown}else{draftMarkdown=markdown;const el=document.getElementById("postMarkdownInput");if(el)el.value=markdown}}
+function slideIndicesForSourceUpload(md,target){
+  if(target&&target!=="post"&&target.scope==="slide"&&Array.isArray(target.indices)&&target.indices.length)return target.indices;
+  if(window.DARQuellen){const info=DARQuellen.analyzePostSources(md);if(info.isSlide&&info.slides.length)return[0]}
+  return[];
+}
+async function autoIngestSourceFile(file,context){
+  validateSourceFile(file);
+  const markdown=getMarkdownForSourceContext(context);
+  if(!String(markdown||"").trim())throw new Error("Bitte zuerst Markdown einfügen, dann PDF oder Bild anhängen.");
+  const ext=sourceFileExtension(file.name);
+  const label=defaultSourceLabelForExt(ext);
+  const path=buildSourceStoragePath(markdown,file.name,0);
+  const url=buildSourceLinkUrl(path,0,ext==="pdf");
+  const base64=await readFileAsBase64(file);
+  sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,0,markdown),path,url,label,page:"",ext,base64,existing:false,context};
+  applySourceDraftToMarkdown(context);
+  sourceDraftPending=null;
+  toast(ext==="pdf"?"PDF eingefügt — wird beim Veröffentlichen hochgeladen":"Bild eingefügt — wird beim Veröffentlichen hochgeladen");
+  renderShell();
+}
 function resolveSourceLabelFromUi(){const sel=document.getElementById("sourceLabelSelect")?.value||"";if(sel==="__custom__")return (document.getElementById("sourceCustomLabelInput")?.value||sourceCustomLabel||"→ Quelle").trim()||"→ Quelle";return sel||"→ Quelle"}
 async function prepareSourceDraftFromFile(file,context){validateSourceFile(file);const markdown=getMarkdownForSourceContext(context);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const ext=sourceFileExtension(file.name);const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=buildSourceStoragePath(markdown,file.name,ext==="pdf"?pageNum:0);const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");const base64=await readFileAsBase64(file);sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,ext==="pdf"?pageNum:0,markdown),path,url,label,page:ext==="pdf"?pageNum:"",ext,base64,existing:false,context};return sourceDraftPending}
 function prepareSourceDraftFromLibrary(file,context){const ext=sourceFileExtension(file.path||file.name);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=String(file.path||"").replace(/^\/+/,"");const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");sourceDraftPending={originalName:file.name||path.split("/").pop(),name:file.name,path,url,label,page:ext==="pdf"?pageNum:"",ext,existing:true,context};return sourceDraftPending}
-function applySourceDraftToMarkdown(context){if(!sourceDraftPending&&!sourceManualUrl)return;const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();let updated=md;if(sourceDraftPending){updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url,target);if(sourceSetSlideImage&&sourceDraftPending.ext!=="pdf"&&target&&target!=="post"&&window.DARQuellen){const indices=target.indices||[];indices.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"image",sourceDraftPending.url)})}if(sourceDraftPending.ext==="pdf"&&target&&target!=="post"&&window.DARQuellen){const indices=target.indices||[];indices.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"pdf",sourceDraftPending.url)})}if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null}else if(sourceManualUrl){const label=resolveSourceLabelFromUi();updated=appendLinkToMarkdown(md,label,sourceManualUrl.trim(),target);sourceManualUrl=""}
+function applySourceDraftToMarkdown(context){if(!sourceDraftPending&&!sourceManualUrl)return;const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();let updated=md;if(sourceDraftPending){updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url,target);const slideIdx=slideIndicesForSourceUpload(updated,target);if(slideIdx.length&&window.DARQuellen){if(sourceDraftPending.ext==="pdf")slideIdx.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"pdf",sourceDraftPending.url)});else slideIdx.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"image",sourceDraftPending.url)})}if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null}else if(sourceManualUrl){const label=resolveSourceLabelFromUi();updated=appendLinkToMarkdown(md,label,sourceManualUrl.trim(),target);sourceManualUrl=""}
 setMarkdownForSourceContext(context,updated);return updated}
 function applyManualSourceLink(context){const url=(document.getElementById("sourceManualUrlInput")?.value||sourceManualUrl||"").trim();if(!url){toast("URL fehlt");return}sourceManualUrl=url;const label=resolveSourceLabelFromUi();const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();const updated=appendLinkToMarkdown(md,label,url,target);setMarkdownForSourceContext(context,updated);sourceManualUrl="";toast("Manueller Link ergänzt");return updated}
 function removeSourceLinkFromContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return md;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.removeLinkFromMarkdownTarget(md,target,linkIndex);setMarkdownForSourceContext(context,updated);return updated}
 function editSourceLinkInContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return;const info=DARQuellen.analyzePostSources(md);let link;if(where==="slide")link=info.slides[Number(slideIndex)]?.links?.[linkIndex];else link=info.postLinks[linkIndex];if(!link)return;const newLabel=prompt("Label:",link.label||"→ Quelle");if(newLabel===null)return;const newUrl=prompt("URL:",link.url||"");if(newUrl===null)return;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.updateLinkInMarkdownTarget(md,target,linkIndex,newLabel,newUrl);setMarkdownForSourceContext(context,updated);toast("Link aktualisiert")}
 function validateBeforeSourceSave(context){const md=normalizeMarkdownForStorage(getMarkdownForSourceContext(context));if(!window.DARQuellen)return{ok:true,errors:[],warnings:[]};return DARQuellen.validateSourceSave(md,sourceUploadQueue)}
 function collectSourceFilesForWorker(){return sourceUploadQueue.map(item=>({path:item.path,contentBase64:item.contentBase64}))}
-function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const panel=document.getElementById("sourceFilesPanel");if(!panel)return;const drop=document.getElementById("sourceDropzone");const handleFiles=async files=>{const file=files&&files[0];if(!file)return;try{await prepareSourceDraftFromFile(file,sourceEditorContext);renderShell()}catch(e){toast(e.message||String(e))}};if(drop){drop.ondragover=e=>{e.preventDefault();drop.classList.add("is-dragover")};drop.ondragleave=()=>drop.classList.remove("is-dragover");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("is-dragover");handleFiles(e.dataTransfer?.files)}}
-  const pdfBtn=document.getElementById("sourcePickPdfBtn");if(pdfBtn)pdfBtn.onclick=()=>document.getElementById("sourcePdfInput")?.click();
-  const imgBtn=document.getElementById("sourcePickImageBtn");if(imgBtn)imgBtn.onclick=()=>document.getElementById("sourceImageInput")?.click();
-  const pdfInput=document.getElementById("sourcePdfInput");if(pdfInput)pdfInput.onchange=e=>handleFiles(e.target.files);
-  const imgInput=document.getElementById("sourceImageInput");if(imgInput)imgInput.onchange=e=>handleFiles(e.target.files);
-  const reloadBtn=document.getElementById("sourceReloadLibBtn");if(reloadBtn)reloadBtn.onclick=async()=>{await loadSourceLibrary(true);renderShell()};
-  const labelSelect=document.getElementById("sourceLabelSelect");if(labelSelect)labelSelect.onchange=()=>{if(sourceDraftPending)sourceDraftPending.label=resolveSourceLabelFromUi()};
-  const customLabel=document.getElementById("sourceCustomLabelInput");if(customLabel)customLabel.oninput=e=>{sourceCustomLabel=e.target.value;if(sourceDraftPending)sourceDraftPending.label=resolveSourceLabelFromUi()};
-  const targetSelect=document.getElementById("sourceTargetSelect");if(targetSelect)targetSelect.onchange=e=>{sourceLinkTarget=e.target.value;renderShellPreserveField("sourceTargetSelect",()=>{})};
-  const targetMulti=document.getElementById("sourceTargetMulti");if(targetMulti)targetMulti.onchange=()=>{const selected=[...targetMulti.selectedOptions].map(o=>o.value);sourceLinkTarget=selected.length?`slide:${selected.join(",")}`:"post";renderShell()};
-  const slideImgCb=document.getElementById("sourceSetSlideImageCb");if(slideImgCb)slideImgCb.onchange=e=>{sourceSetSlideImage=!!e.target.checked};
-  const manualUrl=document.getElementById("sourceManualUrlInput");if(manualUrl)manualUrl.oninput=e=>{sourceManualUrl=e.target.value};
-  const manualBtn=document.getElementById("sourceManualLinkBtn");if(manualBtn)manualBtn.onclick=()=>{try{applyManualSourceLink(sourceEditorContext);renderShell()}catch(e){toast(e.message||String(e))}};
-  const pageInput=document.getElementById("sourcePageInput");if(pageInput)pageInput.oninput=()=>{if(!sourceDraftPending)return;const ext=sourceDraftPending.ext;const pageNum=pageInput.value?Math.max(1,parseInt(pageInput.value,10)||0):0;sourceDraftPending.page=ext==="pdf"?pageNum:"";if(sourceDraftPending.existing){sourceDraftPending.url=buildSourceLinkUrl(sourceDraftPending.path,ext==="pdf"?pageNum:0,ext==="pdf")}else{sourceDraftPending.path=buildSourceStoragePath(getMarkdownForSourceContext(sourceEditorContext),sourceDraftPending.originalName,ext==="pdf"?pageNum:0);sourceDraftPending.url=buildSourceLinkUrl(sourceDraftPending.path,ext==="pdf"?pageNum:0,ext==="pdf")}const prev=document.querySelector(".source-preview-box");if(prev)prev.outerHTML=renderSourcePreviewBox(sourceDraftPending,sourceEditorContext)};
-  const addBtn=document.getElementById("sourceAddMarkdownBtn");if(addBtn)addBtn.onclick=()=>{try{applySourceDraftToMarkdown(sourceEditorContext);toast("Quellen-Link im Markdown ergänzt");renderShell()}catch(e){toast(e.message||String(e))}};
-  const applyBtn=document.getElementById("sourceApplyMarkdownBtn");if(applyBtn)applyBtn.onclick=()=>{try{applySourceDraftToMarkdown(sourceEditorContext);toast("Markdown mit Quellen-Link aktualisiert");renderShell()}catch(e){toast(e.message||String(e))}};
-  const queueBtn=document.getElementById("sourceQueueUploadBtn");if(queueBtn)queueBtn.onclick=()=>{if(sourceDraftPending&&!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});toast("Für Upload vorgemerkt");renderShell()};
-  panel.querySelectorAll("[data-source-pick]").forEach(btn=>btn.onclick=()=>{const idx=Number(btn.getAttribute("data-source-pick"));const file=sourceLibraryCache?.files?.[idx];if(!file)return;prepareSourceDraftFromLibrary(file,sourceEditorContext);renderShell()});
-  panel.querySelectorAll("[data-link-remove]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-remove")||"").split(":");const where=parts[0];const slideIndex=parts[1];const linkIndex=parts[2];if(!confirm("Quellenlink wirklich entfernen?"))return;try{removeSourceLinkFromContext(sourceEditorContext,where,slideIndex,linkIndex);toast("Link entfernt");renderShell()}catch(e){toast(e.message||String(e))}});
-  panel.querySelectorAll("[data-link-edit]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-edit")||"").split(":");editSourceLinkInContext(sourceEditorContext,parts[0],parts[1],parts[2]);renderShell()});
-  if(!sourceLibraryCache&&!sourceLibraryBusy)loadSourceLibrary(false).then(()=>renderShell()).catch(()=>{})}
+function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const panel=document.getElementById("sourceFilesPanel");if(!panel)return;const drop=document.getElementById("sourceDropzone");const handleFiles=async files=>{const file=files&&files[0];if(!file)return;try{await autoIngestSourceFile(file,sourceEditorContext)}catch(e){toast(e.message||String(e))}};if(drop){drop.ondragover=e=>{e.preventDefault();drop.classList.add("is-dragover")};drop.ondragleave=()=>drop.classList.remove("is-dragover");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("is-dragover");handleFiles(e.dataTransfer?.files)};drop.onclick=()=>document.getElementById("sourceFileInput")?.click();drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" ") {e.preventDefault();document.getElementById("sourceFileInput")?.click()}}}
+  const pickBtn=document.getElementById("sourcePickFileBtn");if(pickBtn)pickBtn.onclick=e=>{e.stopPropagation();document.getElementById("sourceFileInput")?.click()};
+  const fileInput=document.getElementById("sourceFileInput");if(fileInput)fileInput.onchange=e=>{handleFiles(e.target.files);e.target.value=""};
+  if(panel.dataset.sourceMode==="full"){
+    panel.querySelectorAll("[data-source-pick]").forEach(btn=>btn.onclick=()=>{const idx=Number(btn.getAttribute("data-source-pick"));const file=sourceLibraryCache?.files?.[idx];if(!file)return;prepareSourceDraftFromLibrary(file,sourceEditorContext);applySourceDraftToMarkdown(sourceEditorContext);sourceDraftPending=null;toast("Aus Bibliothek eingefügt");renderShell()});
+    panel.querySelectorAll("[data-link-remove]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-remove")||"").split(":");if(!confirm("Quellenlink wirklich entfernen?"))return;try{removeSourceLinkFromContext(sourceEditorContext,parts[0],parts[1],parts[2]);toast("Link entfernt");renderShell()}catch(e){toast(e.message||String(e))}});
+    panel.querySelectorAll("[data-link-edit]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-edit")||"").split(":");editSourceLinkInContext(sourceEditorContext,parts[0],parts[1],parts[2]);renderShell()});
+    if(!sourceLibraryCache&&!sourceLibraryBusy)loadSourceLibrary(false).then(()=>renderShell()).catch(()=>{})
+  }}
 function repairMarkdownStructure(markdown){
   let out=sanitizeMarkdownQuotes(String(markdown||"").trim());
   if(!out)return "";
@@ -1985,7 +1996,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="preview"?renderLivePreview(ctx):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="stories"&&window.DARStoriesAdmin?window.DARStoriesAdmin.renderStoriesTab():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="stories"&&window.DARStoriesAdmin?window.DARStoriesAdmin.renderStoriesTab():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2081,7 +2092,6 @@ function renderStart(ctx){
     ${folderCard("③b","Quellen","PDF/Bild/Scan an Beiträgen — ohne Kurzlink.","quellen","Quellen-Dateien")}
     ${folderCard("③c","Kurzlinks","NEU: Custom GPT Action + Kurzlinks a1→Quelle für Instagram.","kurzlinks","GPT + Links")}
     ${folderCard("③d","Zakāt-Rechner","Niṣāb-Preise prüfen — keine Besucher-Beträge.","zakat","Verwaltung")}
-    ${folderCard("④","Vorschau","Echte Besucher-App mobil, Tablet oder Desktop vor dem Veröffentlichen öffnen.","preview","Live prüfen")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
     ${folderCard("⑥b","Storys","NEU: Story-Leiste auf der Startseite — Kurzhinweise in edlen Kreisen.","stories","Verwalten")}
@@ -2271,43 +2281,6 @@ function renderOrdner(){
         </div>
         <div class="upload-status" id="ordnerEditorStatus">${esc(ordnerEditorStatus||"Korrekturen gehen direkt live — ohne Benachrichtigung an Besucher.")}</div>`:`<div class="empty">Links einen Beitrag wählen. Der Markdown-Text erscheint hier zum Bearbeiten.</div>`}
       </div>
-    </div>
-  </section>`;
-}
-function renderLivePreview(ctx){
-  const url=`${SITE_ORIGIN}/?adminPreview=${Date.now()}#home`;
-  const size=previewSize();
-  return `<section class="live-preview-shell">
-    <aside class="side-stack">
-      <div class="panel">
-        <div class="section-head"><h3>Live-Vorschau</h3><span>echte App</span></div>
-        <div class="status-list">
-          <div class="status-row"><span><b>iPhone Pro Max</b><br>Große PWA-Vorschau mit realistischer Höhe.</span><strong class="status-pill">Standard</strong></div>
-          <div class="status-row"><span><b>Flexible Größe</b><br>Breite und Höhe manuell prüfen.</span><strong class="status-pill">${size.width} × ${size.height}</strong></div>
-          <div class="status-row"><span><b>Veröffentlichung</b><br>Änderungen werden erst durch den Upload live.</span><strong class="status-pill">gesichert</strong></div>
-        </div>
-        <div class="live-preview-toolbar" style="margin-top:12px">
-          <button class="btn primary" id="previewProMaxBtn" type="button">iPhone Pro Max</button>
-          <button class="btn primary" id="previewMobileBtn" type="button">Mobile</button>
-          <button class="btn" id="previewTabletBtn" type="button">Tablet</button>
-          <button class="btn" id="previewDesktopBtn" type="button">Desktop</button>
-          <button class="btn" id="previewFullscreenBtn" type="button">Vollbild</button>
-          <button class="btn" id="previewResetBtn" type="button">Reset</button>
-          <a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Extern öffnen</a>
-        </div>
-        <div class="preview-size-row">
-          <label>Breite <input class="field" id="previewWidthInput" type="number" min="320" max="1400" step="10" value="${esc(size.width)}"></label>
-          <label>Höhe <input class="field" id="previewHeightInput" type="number" min="520" max="1600" step="10" value="${esc(size.height)}"></label>
-        </div>
-        <div class="notice-note" style="margin-top:10px">Der Rahmen ist im Browser zusätzlich an der Ecke ziehbar. Der Inhalt bleibt die echte Besucher-App als Live-iframe.</div>
-      </div>
-      <div class="panel">
-        <div class="section-head"><h3>Prüfliste</h3><span>vor Live</span></div>
-        ${validationList(draftMarkdown)}
-      </div>
-    </aside>
-    <div class="live-preview-device ${esc(size.mode)}" id="livePreviewDevice" style="--preview-w:${esc(size.width)}px;--preview-h:${esc(size.height)}px">
-      <iframe class="live-preview-frame" id="livePreviewFrame" src="${esc(url)}" title="DAR AL TAWḤID Live-Vorschau"></iframe>
     </div>
   </section>`;
 }
@@ -2548,25 +2521,6 @@ function validationList(markdown){
   ];
   return `<div class="status-list">${checks.map(([label,ok])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${ok?"Vorhanden":"Bitte prüfen oder ergänzen"}</span><strong class="status-pill">${ok?"OK":"Offen"}</strong></div>`).join("")}</div>`;
 }
-function renderDraftPreview(){
-  const p=markdownPreviewData(draftMarkdown);
-  return `<div class="preview-box" id="draftPreviewBox">
-    <div class="section-head"><h3>Live-Vorschau</h3><span>Admin-Entwurf</span></div>
-    <div class="preview-frame">
-      <h4>${esc(p.title)}</h4>
-      <p>${esc(p.category)} · ${esc(p.scholar)} · ${esc(p.book)}</p>
-      <blockquote>${esc(p.quote)}</blockquote>
-      <p><strong>Quelle:</strong> ${esc(p.source)}</p>
-    </div>
-    <div class="preview-tools">
-      <button class="btn primary" id="refreshPreviewBtn" type="button">Vorschau öffnen</button>
-      <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
-      <button class="btn" id="checkDraftBtn" type="button">Änderungen prüfen</button>
-      <button class="btn primary" id="publishReadyBtn" type="button">Bereit markieren</button>
-    </div>
-    ${validationList(draftMarkdown)}
-  </div>`;
-}
 function renderContent(){
   const rows=filteredRows();
   return `<section class="panel">
@@ -2596,22 +2550,23 @@ function renderActions(rows){
       <div class="section-head admin-actions-head"><h3>Aktionen</h3><span>Veröffentlichen</span></div>
       <p class="admin-actions-lead">Einzelbeitrag oder Sammel-Paket per ZIP. Alle bestehenden Funktionen bleiben erhalten — nur übersichtlicher geordnet.</p>
       <details class="admin-action-card" id="singlePostAction" ${draftMarkdown?"open":""}>
-        <summary class="admin-action-summary"><div><h4>Einzelbeitrag · Markdown</h4><p>Hauptfunktion: Entwurf öffnen, Vorschau prüfen, online veröffentlichen.</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
+        <summary class="admin-action-summary"><div><h4>Einzelbeitrag · Markdown</h4><p>Markdown einfügen, PDF/Bild per Drag &amp; Drop anhängen, online veröffentlichen.</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
         <div class="admin-action-body">
           <div class="upload-grid">
-            <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+            <div class="markdown-upload-col">
+              <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+              ${renderSourceFilesPanel("draft")}
+            </div>
             <div class="upload-stack">
               <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
-              <button class="btn primary" id="previewDraftBtn" type="button">Vorschau öffnen</button>
+              <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
               <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
               <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
               <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
             </div>
           </div>
-          ${renderSourceFilesPanel("draft")}
-          <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown öffnen, Nummer prüfen, Vorschau ansehen und bewusst veröffentlichen."}</div>
+          <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown einfügen, optional PDF/Bild anhängen, dann bewusst veröffentlichen."}</div>
           ${renderPublishTracker("single")}
-          ${renderDraftPreview()}
         </div>
       </details>
       ${renderBulkPackPanel()}
@@ -3115,13 +3070,9 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
-  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateDraftPreview()};
-  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim();updateDraftPreview()};
-  const previewDraftBtn=document.getElementById("previewDraftBtn");if(previewDraftBtn)previewDraftBtn.onclick=()=>{updateDraftPreview();document.getElementById("draftPreviewBox")?.scrollIntoView({behavior:"smooth",block:"start"})};
-  const refreshPreviewBtn=document.getElementById("refreshPreviewBtn");if(refreshPreviewBtn)refreshPreviewBtn.onclick=()=>{updateDraftPreview();toast("Vorschau aktualisiert")};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value};
+  const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim()};
   const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
-  const checkDraftBtn=document.getElementById("checkDraftBtn");if(checkDraftBtn)checkDraftBtn.onclick=()=>{addAdminLog("Prüfung","Änderungen geprüft",draftFilename||"Entwurf");setUploadStatus("Prüfung markiert. Bitte Vorschau, Quelle, Titel, Kategorie und Links kontrollieren.");renderShell()};
-  const publishReadyBtn=document.getElementById("publishReadyBtn");if(publishReadyBtn)publishReadyBtn.onclick=()=>{addAdminLog("Bereit","Entwurf als bereit zur Veröffentlichung markiert",draftFilename||"Entwurf");setUploadStatus("Bereit zur Veröffentlichung markiert. Online sichtbar wird es erst nach bewusstem Upload.");renderShell()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const bulkCountBtn=document.getElementById("bulkCountBtn");if(bulkCountBtn)bulkCountBtn.onclick=()=>{const n=countBulkMarkdownPosts(document.getElementById("bulkPackMarkdownInput")?.value||"");const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";setBulkPackStatus(n?`${n} Beiträge im Paket erkannt.`:"Keine Beiträge erkannt — mit === trennen oder Frontmatter-Blöcke nutzen.")};
@@ -3256,15 +3207,6 @@ function bindCommandCenterForms(){
   document.querySelectorAll("[data-user-disable]").forEach(btn=>btn.onclick=()=>{if(confirm("Diesen Nutzer wirklich deaktivieren?")){updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userDisable,{status:"deaktiviert"});addAdminLog("Benutzer","Benutzer deaktiviert","");renderShell()}});
   document.querySelectorAll("[data-user-active]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_USERS_KEY,btn.dataset.userActive,{status:"aktiv"});renderShell()});
 }
-function updateDraftPreview(){
-  const box=document.getElementById("draftPreviewBox");
-  if(!box)return;
-  const fresh=renderDraftPreview();
-  const tmp=document.createElement("div");
-  tmp.innerHTML=fresh;
-  box.replaceWith(tmp.firstElementChild);
-  bindUi();
-}
 function setAdminPushTestStatus(text){const el=document.getElementById("adminPushTestStatus");if(el)el.textContent=text}
 async function sendAdminLocalPushTest(){
   if(!("Notification" in window)){setAdminPushTestStatus("Dieses Gerät unterstützt keine Browser-Benachrichtigungen.");return}
@@ -3370,6 +3312,10 @@ async function uploadPostViaWorker(){
     updatePublishStep("filename","ok",draftFilename);
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
     const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    const sourceCheck=validateBeforeSourceSave("draft");
+    if(sourceCheck.warnings?.length)addAdminLog("Quellen","Hinweise",sourceCheck.warnings.join(" · "));
+    if(!sourceCheck.ok){finishPublishTrack("error",sourceCheck.errors.join(" · "));setUploadStatus(`Quellen-Fehler: ${esc(sourceCheck.errors.join(" · "))}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
+    if(sourceUploadQueue.length)updatePublishStep("created","ok",`${sourceUploadQueue.length} Quellen-Datei(en) bereit`);
     const audit=auditPostMarkdown(markdown);
     if(audit.warnings.length)addAdminLog("Frontmatter","Automatisch repariert",audit.warnings.join(" · "));
     if(!audit.sourceOk)updatePublishStep("created","warn","Quelle fehlt im Frontmatter – bitte prüfen");
@@ -3419,7 +3365,6 @@ async function uploadPostViaWorker(){
     try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}
     const text=document.getElementById("postMarkdownInput");if(text)text.value="";
     if(filenameInput)filenameInput.value="";
-    updateDraftPreview();
     toast("Beitrag hochgeladen");
   }catch(e){
     addAdminLog("Fehler",String(e.message||e),draftFilename||"Upload");
