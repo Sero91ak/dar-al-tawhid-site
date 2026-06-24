@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV25';
-  var FONTS_ID = 'darPremiumFeedFontsV25';
+  var STYLES_ID = 'darPremiumFeedStylesV26';
+  var FONTS_ID = 'darPremiumFeedFontsV26';
   var FEED_SHELL_PAD = 14;
   var FEED_CARD_GAP = 20;
   var FEED_CARD_RADIUS = 26;
@@ -19,15 +19,21 @@
     telegram: '@dar_al_tauhid',
     signature: 'by Serhat Abu Malik'
   };
+  var UNSAFE_UNSPLASH_IDS = {
+    '1578662996442-48f60103fc96': 1,
+    '1519741497674-611481863552': 1,
+    '1558618666-fcd25c85cd64': 1,
+    '1540959733332-eab4deabeeaf': 1,
+    '1600814832809-579119f47045': 1,
+    '1590075865003-e48277faa558': 1,
+    '1553755088-ef1973c7b4a1': 1
+  };
   var BG_VERIFIED = {
     islamic: [
       '1512632578888-169bbbc64f33', '1542816417-0983c9c9ad53', '1519817650390-64a93db51149',
       '1519818187420-8e49de7adeef', '1513072064285-240f87fa81e8', '1596163177973-aa0e47c735dc',
       '1580418827493-f2b22c0a76cb', '1574246604907-db69e30ddb97', '1590273089302-ebbc53986b6e',
-      '1631432526080-5abd83dafc8a', '1587617425953-9075d28b8c46', '1537181534458-45dcee76ae90',
-      '1578662996442-48f60103fc96', '1519741497674-611481863552', '1558618666-fcd25c85cd64',
-      '1540959733332-eab4deabeeaf', '1600814832809-579119f47045', '1590075865003-e48277faa558',
-      '1553755088-ef1973c7b4a1'
+      '1631432526080-5abd83dafc8a', '1587617425953-9075d28b8c46', '1537181534458-45dcee76ae90'
     ],
     nature: [
       '1506905925346-21bda4d32df4', '1469474968028-56623f02e42e', '1470071459604-3b5ec3a7fe05',
@@ -64,11 +70,9 @@
     ]
   };
   var ISLAMIC_BG = {
-    dua: BG_VERIFIED.islamic.concat(BG_VERIFIED.nature.slice(0, 4)),
-    quran: ['1542816417-0983c9c9ad53', '1590075865003-e48277faa558', '1580418827493-f2b22c0a76cb',
-      '1574246604907-db69e30ddb97', '1631432526080-5abd83dafc8a', '1537181534458-45dcee76ae90'].concat(BG_VERIFIED.nature.slice(0, 3)),
-    knowledge: ['1542816417-0983c9c9ad53', '1631432526080-5abd83dafc8a', '1519741497674-611481863552',
-      '1578662996442-48f60103fc96', '1512632578888-169bbbc64f33'].concat(BG_VERIFIED.nature),
+    dua: BG_VERIFIED.nature.slice(0, 4),
+    quran: BG_VERIFIED.islamic.slice(0, 6).concat(BG_VERIFIED.nature.slice(0, 3)),
+    knowledge: BG_VERIFIED.islamic.slice(0, 8).concat(BG_VERIFIED.nature),
     default: BG_VERIFIED.islamic.concat(BG_VERIFIED.nature)
   };
   var DUA_READABLE_FONTS = [
@@ -176,6 +180,37 @@
     return 'https://images.unsplash.com/photo-' + pid + '?auto=format&fit=crop&w=3840&q=85';
   }
 
+  function filterSafeUnsplashIds(ids) {
+    return (ids || []).filter(function (pid) {
+      return pid && !UNSAFE_UNSPLASH_IDS[pid];
+    });
+  }
+
+  function isSacredFeedItem(item) {
+    if (!item) return false;
+    var type = String(item.type || '').toLowerCase();
+    if (type === 'dua' || type === 'quran') return true;
+    var cat = String(item.category || '').toLowerCase();
+    return cat.indexOf('du') >= 0 || cat.indexOf('duʿ') >= 0 || cat.indexOf('qur') >= 0;
+  }
+
+  function explicitScenePhotoBg(item) {
+    var bgType = String(item && item.bgType || '').toLowerCase();
+    return bgType === 'nature' || bgType === 'mosque' || bgType === 'pattern' || bgType === 'books';
+  }
+
+  function manualSceneImage(item) {
+    if (!item || !item.manual || !item.image || !itemImageAllowed(item)) return '';
+    if (itemBgIsGradient(item)) return '';
+    return String(item.image);
+  }
+
+  function autoPostSceneImage(item) {
+    if (!item || item.manual || !item.image || !itemImageAllowed(item)) return '';
+    if (item.imageSafe !== true) return '';
+    return String(item.image);
+  }
+
   function fetchCustomBackgrounds() {
     var staging = isStaging();
     var path = staging ? '/content/staging/feed-backgrounds/backgrounds-index.json' : '/content/feed-backgrounds/backgrounds-index.json';
@@ -238,12 +273,20 @@
     if (itemBgIsGradient(item)) {
       return { kind: 'gradient', value: gradientStyleFor(item) };
     }
-    if (item && item.image && itemImageAllowed(item)) {
-      return { kind: 'image', value: String(item.image) };
+    if (isSacredFeedItem(item) && !explicitScenePhotoBg(item)) {
+      return { kind: 'gradient', value: gradientStyleFor(item) };
     }
-    var custom = customBgFor(item);
-    if (custom) return { kind: 'image', value: custom };
-    return { kind: 'image', value: islamicBgFor(item) };
+    var manualImg = manualSceneImage(item);
+    if (manualImg) return { kind: 'image', value: manualImg };
+    var postImg = autoPostSceneImage(item);
+    if (postImg) return { kind: 'image', value: postImg };
+    if (explicitScenePhotoBg(item)) {
+      var custom = customBgFor(item);
+      if (custom) return { kind: 'image', value: custom };
+      var unsplash = islamicBgFor(item);
+      if (unsplash) return { kind: 'image', value: unsplash };
+    }
+    return { kind: 'gradient', value: gradientStyleFor(item) };
   }
 
   function customBgFor(item) {
@@ -253,9 +296,10 @@
   }
 
   function allBgFallbacks(item) {
-    var primary = islamicBgPoolFor(item) || ISLAMIC_BG.default;
+    if (isSacredFeedItem(item) && !explicitScenePhotoBg(item)) return [];
+    var primary = filterSafeUnsplashIds(islamicBgPoolFor(item) || ISLAMIC_BG.default);
     var merged = primary.map(unsplashUrl);
-    ISLAMIC_BG.default.forEach(function (pid) {
+    filterSafeUnsplashIds(ISLAMIC_BG.default).forEach(function (pid) {
       var u = unsplashUrl(pid);
       if (merged.indexOf(u) < 0) merged.push(u);
     });
@@ -268,21 +312,21 @@
   function islamicBgPoolFor(item) {
     var bgType = String(item && item.bgType || '').toLowerCase();
     if (bgType === 'nature') return BG_VERIFIED.nature;
-    if (bgType === 'books') return BG_VERIFIED.islamic.slice(0, 10);
+    if (bgType === 'books') return BG_VERIFIED.islamic.slice(0, 8);
     if (bgType === 'mosque' || bgType === 'pattern') return BG_VERIFIED.islamic;
     var type = item && item.type || 'post';
     var cat = String(item && item.category || '').toLowerCase();
     if (type === 'dua' || cat.indexOf('du') >= 0 || cat.indexOf('duʿ') >= 0) return ISLAMIC_BG.dua;
     if (type === 'quran' || cat.indexOf('qur') >= 0 || cat.indexOf('tafs') >= 0) return ISLAMIC_BG.quran;
-    if (cat.indexOf('aqid') >= 0 || cat.indexOf('athar') >= 0 || cat.indexOf('hadith') >= 0 || cat.indexOf('sunnah') >= 0 || cat.indexOf('fiqh') >= 0) return ISLAMIC_BG.knowledge;
+    if (cat.indexOf('aqid') >= 0 || cat.indexOf('athar') >= 0 || cat.indexOf('hadith') >= 0 || cat.indexOf('sunnah') >= 0 || cat.indexOf('fiqh') >= 0 || cat.indexOf('wiss') >= 0) return ISLAMIC_BG.knowledge;
     return ISLAMIC_BG.default;
   }
 
   function islamicBgFor(item) {
     var custom = customBgFor(item);
-    if (custom && hashNum(String(item && item.uid || '') + '|cbg') % 4 === 0) return custom;
-    var pool = islamicBgPoolFor(item);
-    if (!pool || !pool.length) return custom || unsplashUrl(ISLAMIC_BG.default[0]);
+    if (custom && explicitScenePhotoBg(item)) return custom;
+    var pool = filterSafeUnsplashIds(islamicBgPoolFor(item));
+    if (!pool || !pool.length) return custom || '';
     var key = String(item && item.uid || '') + '|' + String(item && item.type || '') + '|' + todayKey();
     return unsplashUrl(pool[hashNum(key) % pool.length]);
   }
@@ -921,6 +965,7 @@
 
   function postImage(post) {
     if (!post) return '';
+    if (post.imageSafe === false || post.safeImage === false) return '';
     return post.thumbnail || post.image || post.cover || '';
   }
 
@@ -1125,6 +1170,7 @@
         hijriDate: i < 3 ? hijri : '',
         badges: i === 0 ? ['Neu', 'Heute'] : i < 3 ? ['Neu'] : [],
         image: postImage(p),
+        imageSafe: p.imageSafe === true,
         target: 'post:' + p.id,
         sort: 10 + i,
         postId: String(p.id)
@@ -1148,6 +1194,7 @@
         date: p.date || '',
         badges: ['Aus dem Archiv'],
         image: postImage(p),
+        imageSafe: p.imageSafe === true,
         target: 'post:' + p.id,
         sort: 200 + i,
         postId: String(p.id)
@@ -1639,7 +1686,7 @@
   }
 
   function mediaHtml(item) {
-    if (item.image && itemImageAllowed(item) && (item.type === 'post' || item.type === 'archive' || item.type === 'custom')) {
+    if (item.image && item.imageSafe === true && itemImageAllowed(item) && (item.type === 'post' || item.type === 'archive' || item.type === 'custom')) {
       return (
         '<img class="sf-post__img" src="' + esc(item.image) + '" alt="" loading="lazy" decoding="async" ' +
         'data-sf-grad="' + esc(gradientStyleFor(item)) + '">'
