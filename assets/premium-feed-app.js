@@ -5,9 +5,10 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV11';
-  var FONTS_ID = 'darPremiumFeedFontsV11';
+  var STYLES_ID = 'darPremiumFeedStylesV12';
+  var FONTS_ID = 'darPremiumFeedFontsV12';
   var APP_LOGO = '/watermark-my-logo-full.png';
+  var SCENE_WATERMARK = '/watermark-my-logo-full.png';
   var BRAND = {
     site: 'dar-al-tawhid.de',
     instagram: '@dar_at_tawhid',
@@ -967,16 +968,16 @@
       '.sf-post__scene{position:relative;min-height:min(36vh,320px);max-height:360px;display:flex;align-items:center;justify-content:center;padding:12px 10px 54px;overflow:hidden;aspect-ratio:4/5;max-width:100%;margin:0 auto}' +
       '.sf-post__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:#2a2418}' +
       '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.14) 0%,rgba(0,0,0,.38) 58%,rgba(0,0,0,.52) 100%);pointer-events:none}' +
-      '.sf-scene-logo{position:absolute;left:20px;top:20px;right:auto;z-index:4;width:34px;height:34px;border-radius:50%;overflow:hidden;border:1px solid rgba(239,215,142,.32);box-shadow:0 4px 14px rgba(0,0,0,.38);background:rgba(8,7,5,.55);backdrop-filter:blur(4px)}' +
-      '.sf-scene-logo img{width:100%;height:100%;object-fit:cover;display:block}' +
+      '.sf-scene-watermark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:min(48%,210px);max-width:240px;opacity:.1;pointer-events:none}' +
+      '.sf-scene-watermark img{width:100%;height:auto;display:block;object-fit:contain}' +
       '.sf-scene-brand{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:8px 10px 10px;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.48) 38%,rgba(0,0,0,.72) 100%);display:flex;flex-direction:column;gap:4px;align-items:center;pointer-events:none}' +
       '.sf-scene-brand-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:100%}' +
       '.sf-brand-chip{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:800;color:rgba(248,239,212,.9);background:rgba(8,7,5,.42);border:1px solid rgba(239,215,142,.14);border-radius:999px;padding:3px 7px;line-height:1;white-space:nowrap}' +
       '.sf-brand-chip svg{width:13px;height:13px;flex:0 0 13px;display:block}' +
       '.sf-brand-site{display:inline-flex;align-items:center;gap:4px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(214,190,132,.78);font-weight:800;line-height:1}' +
       '.sf-brand-site svg{width:11px;height:11px;flex:0 0 11px}' +
-      '.sf-post__scene-inner{position:relative;z-index:2;width:100%;display:flex;align-items:center;padding:44px 10px 10px;max-height:calc(100% - 48px)}' +
-      '.sf-post__textpanel{max-width:min(94%,34em);padding:14px 13px;border-radius:16px;background:rgba(8,7,5,.5);backdrop-filter:blur(8px) saturate(1.08);border:1px solid rgba(239,215,142,.16);box-shadow:0 10px 28px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)}' +
+      '.sf-post__scene-inner{position:relative;z-index:3;width:100%;display:flex;align-items:center;padding:12px 10px 10px;max-height:calc(100% - 48px)}' +
+      '.sf-post__textpanel{max-width:min(94%,34em);padding:14px 13px;border-radius:16px;background:rgba(8,7,5,.68);border:1px solid rgba(239,215,142,.16);box-shadow:0 6px 20px rgba(0,0,0,.28)}' +
       '.sf-post__img{width:100%;max-height:min(72vh,520px);object-fit:cover;display:block;aspect-ratio:4/5;background:#1a1814}' +
       '.sf-post__quote{margin:0;line-height:1.62;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
       '.sf-quote-mark{display:block;font-size:24px;line-height:1;color:rgba(239,215,142,.58);font-family:Georgia,serif;margin-bottom:6px}' +
@@ -1042,8 +1043,8 @@
     );
   }
 
-  function sceneLogoHtml() {
-    return '<div class="sf-scene-logo" aria-hidden="true"><img src="' + APP_LOGO + '" alt="" loading="lazy" decoding="async"></div>';
+  function sceneWatermarkHtml() {
+    return '<div class="sf-scene-watermark" aria-hidden="true"><img src="' + SCENE_WATERMARK + '" alt="" loading="lazy" decoding="async"></div>';
   }
 
   function sourceHtml(item, fs) {
@@ -1070,7 +1071,7 @@
       '<div class="sf-post__scene">' +
         '<img class="sf-post__bg" src="' + esc(bg) + '" alt="" decoding="async" loading="eager" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0">' +
         '<div class="sf-post__scene-shade"></div>' +
-        sceneLogoHtml() +
+        sceneWatermarkHtml() +
         '<div class="sf-post__scene-inner" style="' + innerStyle + '">' +
           '<div class="sf-post__textpanel" style="' + panelStyle + '">' + inner + '</div>' +
         '</div>' +
@@ -1226,6 +1227,34 @@
     return Math.max(2, Math.min(4, Math.round(dpr * 2)));
   }
 
+  function applyCaptureSafeStyles(root) {
+    if (!root) return;
+    root.querySelectorAll('.sf-post__textpanel, .sf-brand-chip').forEach(function (el) {
+      el.style.backdropFilter = 'none';
+      el.style.webkitBackdropFilter = 'none';
+    });
+  }
+
+  function html2canvasOpts(el, w, h, scale) {
+    return {
+      scale: scale,
+      width: w,
+      height: h,
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: null,
+      logging: false,
+      imageTimeout: 25000,
+      scrollX: -global.scrollX,
+      scrollY: -global.scrollY,
+      windowWidth: document.documentElement.clientWidth,
+      windowHeight: document.documentElement.clientHeight,
+      onclone: function (doc, node) {
+        applyCaptureSafeStyles(node);
+      }
+    };
+  }
+
   function captureCloneExact(el) {
     var rect = el.getBoundingClientRect();
     var w = Math.max(1, Math.round(rect.width));
@@ -1245,6 +1274,7 @@
     clone.style.aspectRatio = 'auto';
 
     prepareImagesCors(clone);
+    applyCaptureSafeStyles(clone);
     host.appendChild(clone);
     document.body.appendChild(host);
 
@@ -1262,7 +1292,10 @@
           allowTaint: false,
           backgroundColor: null,
           logging: false,
-          imageTimeout: 25000
+          imageTimeout: 25000,
+          onclone: function (doc, node) {
+            applyCaptureSafeStyles(node);
+          }
         });
       })
       .finally(function () {
@@ -1290,20 +1323,7 @@
         var rect = el.getBoundingClientRect();
         var w = Math.max(1, Math.round(rect.width));
         var h = Math.max(1, Math.round(rect.height));
-        return h2c(el, {
-          scale: scale,
-          width: w,
-          height: h,
-          useCORS: true,
-          allowTaint: false,
-          backgroundColor: null,
-          logging: false,
-          imageTimeout: 25000,
-          scrollX: -global.scrollX,
-          scrollY: -global.scrollY,
-          windowWidth: document.documentElement.clientWidth,
-          windowHeight: document.documentElement.clientHeight
-        });
+        return h2c(el, html2canvasOpts(el, w, h, scale));
       })
       .catch(function () {
         return captureCloneExact(el);
