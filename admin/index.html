@@ -249,6 +249,9 @@ button{cursor:pointer}
 .source-files-panel.is-compact{margin-top:8px;padding:10px;gap:8px}
 .source-files-panel.is-compact .source-dropzone{padding:20px 12px;cursor:pointer}
 .source-files-queue{font-size:10.5px;color:#b8e6c0;line-height:1.45;padding:6px 8px;border:1px solid rgba(120,220,160,.22);border-radius:10px;background:rgba(20,40,30,.2)}
+.source-attachments-head{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.source-attachments-list{display:grid;gap:6px;max-height:220px;overflow:auto}
+.source-files-panel.is-drag-active .source-dropzone{border-color:rgba(140,190,255,.65);background:rgba(90,140,220,.12);color:#eef4ff;transform:scale(1.01)}
 .markdown-upload-col{display:grid;gap:0;min-width:0}
 .source-files-panel h4{margin:0;font-family:var(--serif);font-size:17px;color:#fff0c8}
 .source-files-lead{margin:0;color:var(--soft);font-size:10.5px;line-height:1.45}
@@ -483,7 +486,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-06-18-source-upload-simple";
+const ADMIN_BUILD="2026-06-18-beitrag-quellen";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -496,7 +499,7 @@ const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
   ["besucher","Besucher"],
   ["ordner","Ordner"],
-  ["quellen","Quellen"],
+  ["quellen","Beiträge bearbeiten"],
   ["kurzlinks","Kurzlinks"],
   ["zakat","Zakāt-Rechner"],
   ["actions","Aktionen"],
@@ -950,40 +953,43 @@ async function loadSourceLibrary(force){if(sourceLibraryBusy)return sourceLibrar
 function renderSourceLibraryRows(files){if(!files?.length)return `<div class="empty" style="padding:12px">Noch keine Quellen-Dateien im Repository.</div>`;return files.map((file,idx)=>{const usage=file.usage||[];const usageText=usage.length?`${usage.length} Beitrag/Slide`: "Nicht referenziert";return `<div class="source-library-item"><div><b>${esc(file.name||file.path)}</b><span>${esc(file.scholar||"—")}${file.book?` · ${esc(file.book)}`:""} · ${esc(file.type||"")} · ${esc(usageText)}<br>${esc(file.path||"")}${file.size?`<br>${esc(file.size)}`:""}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="btn" href="${SITE_ORIGIN}${esc(file.url||("/"+file.path))}" target="_blank" rel="noopener">Öffnen</a><button class="btn primary" type="button" data-source-pick="${idx}">Zum Beitrag hinzufügen</button></div></div>`}).join("")}
 function previewLinksBlockAfterAdd(markdown,label,url,target){try{const updated=appendLinkToMarkdown(String(markdown||""),label,url,target||"post");const info=window.DARQuellen?DARQuellen.analyzePostSources(updated):null;if(info?.isSlide&&target&&target!=="post")return `Slide-Ziel aktualisiert (${info.slides.length} Slides)`;return extractLinksYamlBlock((updated.match(/^---\s*\n([\s\S]*?)\n---/)||[])[1]||"")||"(links:-Block wird neu angelegt)"}catch(e){return `links:\n  - label: "${label}"\n    url: "${url}"`}}
 function renderSourcePreviewBox(pending,context){if(!pending)return `<div class="source-preview-box">Noch keine Quelle vorbereitet. Datei hochladen, manuellen Link setzen oder aus Bibliothek wählen.</div>`;const md=getMarkdownForSourceContext(context||pending.context||"draft");const target=getSourceLinkTargetFromUi();const linksPreview=previewLinksBlockAfterAdd(md,pending.label,pending.url,target);const testUrl=pending.url.startsWith("http")?pending.url:SITE_ORIGIN+pending.url.replace(/^\//,"");return `<div class="source-preview-box"><strong>Vorschau vor dem Speichern</strong>\nDatei: ${esc(pending.originalName||pending.name||"")}\nSpeicherort: ${esc(pending.path||"")}\nLabel: ${esc(pending.label||"")}\nURL: ${esc(pending.url||"")}\nZiel: ${esc(String(sourceLinkTarget||"post"))}\n\n<strong>YAML-Vorschau:</strong>\n${esc(linksPreview)}${pending.existing?"\n\n(Hinweis: Datei existiert bereits — nur Link wird ergänzt)":""}\n\n<a class="btn primary" href="${esc(testUrl)}" target="_blank" rel="noopener" id="sourceTestLinkBtn">Quelle testen</a></div>`}
+function renderExistingSlideMediaRows(context){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return"";const info=DARQuellen.analyzePostSources(md);const rows=[];(info.slides||[]).forEach((s,si)=>{if(s.image)rows.push({slideIndex:si,field:"image",url:s.image,label:`Slide ${si+1} · Bild`});if(s.pdf)rows.push({slideIndex:si,field:"pdf",url:s.pdf,label:`Slide ${si+1} · PDF`})});if(!rows.length)return"";return rows.map(r=>{const href=r.url.startsWith("http")?r.url:SITE_ORIGIN+r.url.replace(/^\//,"");return `<div class="quellen-link-row"><div><b>${esc(r.label)}</b><span>${esc(r.url||"")}</span></div><div style="display:flex;gap:4px;flex-wrap:wrap"><a class="btn" href="${esc(href)}" target="_blank" rel="noopener">Öffnen</a><button class="btn danger" type="button" data-slide-media-remove="${r.slideIndex}:${r.field}">Entfernen</button></div></div>`}).join("")}
+function renderSourceAttachmentsHtml(context){const links=renderExistingSourceLinkRows(context);const media=renderExistingSlideMediaRows(context);const has=links.includes("quellen-link-row")||media.includes("quellen-link-row");if(!has)return `<div class="empty" style="padding:8px;font-size:10px">Noch keine PDF/Bild-Anhänge in diesem Beitrag.</div>`;return links+media}
 function renderSimpleSourceUpload(context){
   const queued=sourceUploadQueue||[];
   const last=queued[queued.length-1];
   return `<div class="source-files-panel is-compact" id="sourceFilesPanel" data-source-context="${esc(context)}" data-source-mode="simple">
   <div class="source-dropzone" id="sourceDropzone" role="button" tabindex="0" aria-label="PDF oder Bild hochladen">
     <strong style="color:var(--gold);font-size:12px">PDF oder Bild hier ablegen</strong><br>
-    <span>wird sofort in den Beitrag eingefügt · max. 20 MB</span>
+    <span>Drag &amp; Drop oder Datei wählen · wird sofort eingefügt · max. 20 MB</span>
   </div>
   <div class="source-files-toolbar">
     <input type="file" id="sourceFileInput" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" hidden>
     <button class="btn primary" type="button" id="sourcePickFileBtn">Datei wählen</button>
   </div>
-  ${queued.length?`<div class="source-files-queue">✓ ${queued.length} Datei(en) bereit${last?.name?` · zuletzt: ${esc(last.name)}`:""} — werden beim Veröffentlichen mit hochgeladen.</div>`:""}
+  <div id="sourceQueueStatus" class="source-files-queue"${queued.length?"":` style="display:none"`}>${queued.length?`✓ ${queued.length} Datei(en) bereit${last?.name?` · zuletzt: ${esc(last.name)}`:""} — werden beim Speichern mit hochgeladen.`:""}</div>
+  <div class="source-attachments-head">Anhänge in diesem Beitrag</div>
+  <div id="sourceAttachmentsList" class="source-attachments-list">${renderSourceAttachmentsHtml(context)}</div>
 </div>`}
-function renderSourceFilesPanel(context){
-  if(context==="draft")return renderSimpleSourceUpload(context);
-  const pending=sourceDraftPending;
-  const lib=sourceLibraryCache;
-  const linkRows=renderExistingSourceLinkRows(context);
-  const hasLinks=linkRows.includes("quellen-link-row");
-  return `<div class="source-files-panel" id="sourceFilesPanel" data-source-context="${esc(context)}" data-source-mode="full">
-  <div class="section-head" style="margin-bottom:0"><h4>Quellen-Datei</h4><span>PDF / Bild → Beitrag</span></div>
-  <div class="source-dropzone" id="sourceDropzone">PDF oder Bild per Drag &amp; Drop · max. 20 MB · wird automatisch eingefügt</div>
-  <div class="source-files-toolbar">
-    <input type="file" id="sourceFileInput" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" hidden>
-    <button class="btn primary" type="button" id="sourcePickFileBtn">Datei wählen</button>
-  </div>
-  ${hasLinks?`<details open><summary>Bestehende Links</summary>${linkRows}</details>`:""}
-  ${pending?renderSourcePreviewBox(pending,context):""}
-  <div class="upload-status" id="sourcePanelStatus">${sourceUploadQueue.length?`<strong>${sourceUploadQueue.length}</strong> Datei(en) werden beim Speichern mit hochgeladen.`:""}</div>
-  <details ${lib?.files?.length?"open":""}><summary>Bibliothek (${lib?.files?.length||0})</summary><div class="source-library" id="sourceLibraryList">${renderSourceLibraryRows(lib?.files||[])}</div></details>
-</div>`}
+function renderSourceFilesPanel(context){return renderSimpleSourceUpload(context)}
 function getMarkdownForSourceContext(context){if(context==="ordner")return document.getElementById("ordnerEditor")?.value||ordnerEdit.markdown||"";if(context==="quellen")return document.getElementById("quellenEditor")?.value||quellenEdit.markdown||"";return document.getElementById("postMarkdownInput")?.value||draftMarkdown||""}
 function setMarkdownForSourceContext(context,markdown){if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown,dirty:true};const el=document.getElementById("ordnerEditor");if(el)el.value=markdown}else if(context==="quellen"){quellenEdit={...quellenEdit,markdown,dirty:true};const el=document.getElementById("quellenEditor");if(el)el.value=markdown}else{draftMarkdown=markdown;const el=document.getElementById("postMarkdownInput");if(el)el.value=markdown}}
+function markSourceContextDirty(context){if(context==="quellen")quellenEdit={...quellenEdit,dirty:true};if(context==="ordner")ordnerEdit={...ordnerEdit,dirty:true}}
+function updateSourceUploadUi(context){
+  const md=getMarkdownForSourceContext(context);
+  if(context==="draft"){draftMarkdown=md;const el=document.getElementById("postMarkdownInput");if(el)el.value=md}
+  else if(context==="quellen"){quellenEdit={...quellenEdit,markdown:md};const el=document.getElementById("quellenEditor");if(el)el.value=md}
+  else if(context==="ordner"){ordnerEdit={...ordnerEdit,markdown:md};const el=document.getElementById("ordnerEditor");if(el)el.value=md}
+  const attach=document.getElementById("sourceAttachmentsList");if(attach)attach.innerHTML=renderSourceAttachmentsHtml(context);
+  const queue=document.getElementById("sourceQueueStatus");
+  if(queue){const n=sourceUploadQueue.length;const last=sourceUploadQueue[n-1];if(n){queue.style.display="";queue.innerHTML=`✓ ${n} Datei(en) bereit${last?.name?` · zuletzt: ${esc(last.name)}`:""} — werden beim Speichern mit hochgeladen.`}else{queue.style.display="none";queue.innerHTML=""}}
+  bindSourceAttachmentActions(context);
+}
+function bindSourceAttachmentActions(context){
+  const panel=document.getElementById("sourceFilesPanel");if(!panel)return;
+  panel.querySelectorAll("[data-link-remove]").forEach(btn=>{btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-remove")||"").split(":");if(!confirm("Quellenlink wirklich entfernen?"))return;try{removeSourceLinkFromContext(context,parts[0],parts[1],parts[2]);markSourceContextDirty(context);toast("Link entfernt");updateSourceUploadUi(context)}catch(e){toast(e.message||String(e))}}});
+  panel.querySelectorAll("[data-slide-media-remove]").forEach(btn=>{btn.onclick=()=>{const parts=String(btn.getAttribute("data-slide-media-remove")||"").split(":");if(!confirm("Anhang wirklich aus dem Beitrag entfernen?"))return;try{removeSlideMediaFromContext(context,parts[0],parts[1]);markSourceContextDirty(context);toast("Anhang entfernt");updateSourceUploadUi(context)}catch(e){toast(e.message||String(e))}}});
+}
 function slideIndicesForSourceUpload(md,target){
   if(target&&target!=="post"&&target.scope==="slide"&&Array.isArray(target.indices)&&target.indices.length)return target.indices;
   if(window.DARQuellen){const info=DARQuellen.analyzePostSources(md);if(info.isSlide&&info.slides.length)return[0]}
@@ -1001,8 +1007,8 @@ async function autoIngestSourceFile(file,context){
   sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,0,markdown),path,url,label,page:"",ext,base64,existing:false,context};
   applySourceDraftToMarkdown(context);
   sourceDraftPending=null;
-  toast(ext==="pdf"?"PDF eingefügt — wird beim Veröffentlichen hochgeladen":"Bild eingefügt — wird beim Veröffentlichen hochgeladen");
-  renderShell();
+  updateSourceUploadUi(context);
+  toast(ext==="pdf"?"PDF eingefügt — wird beim Speichern hochgeladen":"Bild eingefügt — wird beim Speichern hochgeladen");
 }
 function resolveSourceLabelFromUi(){const sel=document.getElementById("sourceLabelSelect")?.value||"";if(sel==="__custom__")return (document.getElementById("sourceCustomLabelInput")?.value||sourceCustomLabel||"→ Quelle").trim()||"→ Quelle";return sel||"→ Quelle"}
 async function prepareSourceDraftFromFile(file,context){validateSourceFile(file);const markdown=getMarkdownForSourceContext(context);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const ext=sourceFileExtension(file.name);const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=buildSourceStoragePath(markdown,file.name,ext==="pdf"?pageNum:0);const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");const base64=await readFileAsBase64(file);sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,ext==="pdf"?pageNum:0,markdown),path,url,label,page:ext==="pdf"?pageNum:"",ext,base64,existing:false,context};return sourceDraftPending}
@@ -1011,18 +1017,15 @@ function applySourceDraftToMarkdown(context){if(!sourceDraftPending&&!sourceManu
 setMarkdownForSourceContext(context,updated);return updated}
 function applyManualSourceLink(context){const url=(document.getElementById("sourceManualUrlInput")?.value||sourceManualUrl||"").trim();if(!url){toast("URL fehlt");return}sourceManualUrl=url;const label=resolveSourceLabelFromUi();const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();const updated=appendLinkToMarkdown(md,label,url,target);setMarkdownForSourceContext(context,updated);sourceManualUrl="";toast("Manueller Link ergänzt");return updated}
 function removeSourceLinkFromContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return md;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.removeLinkFromMarkdownTarget(md,target,linkIndex);setMarkdownForSourceContext(context,updated);return updated}
+function removeSlideMediaFromContext(context,slideIndex,field){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return md;const updated=DARQuellen.clearSlideMediaField(md,Number(slideIndex),field);setMarkdownForSourceContext(context,updated);return updated}
 function editSourceLinkInContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return;const info=DARQuellen.analyzePostSources(md);let link;if(where==="slide")link=info.slides[Number(slideIndex)]?.links?.[linkIndex];else link=info.postLinks[linkIndex];if(!link)return;const newLabel=prompt("Label:",link.label||"→ Quelle");if(newLabel===null)return;const newUrl=prompt("URL:",link.url||"");if(newUrl===null)return;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.updateLinkInMarkdownTarget(md,target,linkIndex,newLabel,newUrl);setMarkdownForSourceContext(context,updated);toast("Link aktualisiert")}
 function validateBeforeSourceSave(context){const md=normalizeMarkdownForStorage(getMarkdownForSourceContext(context));if(!window.DARQuellen)return{ok:true,errors:[],warnings:[]};return DARQuellen.validateSourceSave(md,sourceUploadQueue)}
 function collectSourceFilesForWorker(){return sourceUploadQueue.map(item=>({path:item.path,contentBase64:item.contentBase64}))}
-function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const panel=document.getElementById("sourceFilesPanel");if(!panel)return;const drop=document.getElementById("sourceDropzone");const handleFiles=async files=>{const file=files&&files[0];if(!file)return;try{await autoIngestSourceFile(file,sourceEditorContext)}catch(e){toast(e.message||String(e))}};if(drop){drop.ondragover=e=>{e.preventDefault();drop.classList.add("is-dragover")};drop.ondragleave=()=>drop.classList.remove("is-dragover");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("is-dragover");handleFiles(e.dataTransfer?.files)};drop.onclick=()=>document.getElementById("sourceFileInput")?.click();drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" ") {e.preventDefault();document.getElementById("sourceFileInput")?.click()}}}
+function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const panel=document.getElementById("sourceFilesPanel");if(!panel)return;const drop=document.getElementById("sourceDropzone");let dragDepth=0;const handleFiles=async files=>{const file=files&&files[0];if(!file)return;try{await autoIngestSourceFile(file,sourceEditorContext)}catch(e){toast(e.message||String(e))}};const setDragActive=on=>{panel.classList.toggle("is-drag-active",!!on);if(drop)drop.classList.toggle("is-dragover",!!on)};const prevent=e=>{e.preventDefault();e.stopPropagation()};panel.addEventListener("dragenter",e=>{prevent(e);dragDepth++;setDragActive(true)},{passive:false});panel.addEventListener("dragover",e=>{prevent(e);setDragActive(true)},{passive:false});panel.addEventListener("dragleave",e=>{prevent(e);dragDepth=Math.max(0,dragDepth-1);if(dragDepth===0)setDragActive(false)},{passive:false});panel.addEventListener("drop",e=>{prevent(e);dragDepth=0;setDragActive(false);handleFiles(e.dataTransfer?.files)},{passive:false});if(drop){drop.onclick=e=>{if(e.target.closest("#sourcePickFileBtn"))return;document.getElementById("sourceFileInput")?.click()};drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" ") {e.preventDefault();document.getElementById("sourceFileInput")?.click()}}}
   const pickBtn=document.getElementById("sourcePickFileBtn");if(pickBtn)pickBtn.onclick=e=>{e.stopPropagation();document.getElementById("sourceFileInput")?.click()};
   const fileInput=document.getElementById("sourceFileInput");if(fileInput)fileInput.onchange=e=>{handleFiles(e.target.files);e.target.value=""};
-  if(panel.dataset.sourceMode==="full"){
-    panel.querySelectorAll("[data-source-pick]").forEach(btn=>btn.onclick=()=>{const idx=Number(btn.getAttribute("data-source-pick"));const file=sourceLibraryCache?.files?.[idx];if(!file)return;prepareSourceDraftFromLibrary(file,sourceEditorContext);applySourceDraftToMarkdown(sourceEditorContext);sourceDraftPending=null;toast("Aus Bibliothek eingefügt");renderShell()});
-    panel.querySelectorAll("[data-link-remove]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-remove")||"").split(":");if(!confirm("Quellenlink wirklich entfernen?"))return;try{removeSourceLinkFromContext(sourceEditorContext,parts[0],parts[1],parts[2]);toast("Link entfernt");renderShell()}catch(e){toast(e.message||String(e))}});
-    panel.querySelectorAll("[data-link-edit]").forEach(btn=>btn.onclick=()=>{const parts=String(btn.getAttribute("data-link-edit")||"").split(":");editSourceLinkInContext(sourceEditorContext,parts[0],parts[1],parts[2]);renderShell()});
-    if(!sourceLibraryCache&&!sourceLibraryBusy)loadSourceLibrary(false).then(()=>renderShell()).catch(()=>{})
-  }}
+  bindSourceAttachmentActions(sourceEditorContext);
+}
 function repairMarkdownStructure(markdown){
   let out=sanitizeMarkdownQuotes(String(markdown||"").trim());
   if(!out)return "";
@@ -1904,7 +1907,9 @@ async function loadQuellenPost(filename){
     const data=await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
     quellenEdit={filename:data.filename||filename,markdown:data.markdown||"",sha:data.sha||"",postId:data.postId||"",title:data.title||filename,dirty:false};
     sourceLinkTarget="post";
-    setQuellenEditorStatus("Bereit — Quellen hinzufügen, bearbeiten oder entfernen.");
+    sourceDraftPending=null;
+    sourceUploadQueue=[];
+    setQuellenEditorStatus("Bereit — PDF/Bild per Drag & Drop hinzufügen oder Anhänge entfernen.");
   }catch(e){
     quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
     setQuellenEditorStatus(`Fehler: ${e.message||e}`);
@@ -2089,7 +2094,7 @@ function renderStart(ctx){
     ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
     ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
     ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
-    ${folderCard("③b","Quellen","PDF/Bild/Scan an Beiträgen — ohne Kurzlink.","quellen","Quellen-Dateien")}
+    ${folderCard("③b","Beiträge bearbeiten","Bestehende Beiträge öffnen · PDF/Bild hochladen oder entfernen.","quellen","PDF · Bild")}
     ${folderCard("③c","Kurzlinks","NEU: Custom GPT Action + Kurzlinks a1→Quelle für Instagram.","kurzlinks","GPT + Links")}
     ${folderCard("③d","Zakāt-Rechner","Niṣāb-Preise prüfen — keine Besucher-Beträge.","zakat","Verwaltung")}
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
@@ -2196,8 +2201,8 @@ function renderQuellen(){
   const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
   return `<section class="quellen-studio">
     <div class="panel">
-      <div class="section-head"><h3>Bestehende Beiträge bearbeiten / Quellen-Dateien verwalten</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
-      <p class="ordner-lead">Suche nach ID, Dateiname, Titel, Kategorie, Thema, Gelehrter, Buch, Tags oder Datum. Beitrag öffnen → PDF/Bild/Scan hochladen → Ziel wählen (Gesamt oder Slide) → Vorschau → speichern &amp; veröffentlichen.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}</p>
+      <div class="section-head"><h3>Beiträge bearbeiten · PDF &amp; Bild</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
+      <p class="ordner-lead">Links Beitrag suchen und öffnen. Rechts Markdown ansehen, <strong>PDF oder Bild per Drag &amp; Drop</strong> hinzufügen, bestehende Anhänge mit <strong>Entfernen</strong> löschen, dann <strong>Speichern &amp; veröffentlichen</strong>.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}</p>
     </div>
     <div class="quellen-grid">
       <aside class="panel quellen-search-panel">
@@ -2206,12 +2211,12 @@ function renderQuellen(){
         <button class="btn" id="quellenReloadBtn" type="button">Katalog neu laden</button>
       </aside>
       <div class="panel quellen-editor-panel">
-        <div class="section-head"><h3>Quellen-Editor</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
+        <div class="section-head"><h3>Beitrag</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
         ${quellenEdit.filename?`<textarea class="paste-area ordner-editor-area" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
         ${renderSourceFilesPanel("quellen")}
         <div class="ordner-editor-actions">
           <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
-          <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">Live-Vorschau</a>
+          <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">In App öffnen</a>
           <button class="btn primary" id="quellenSaveBtn" type="button">Speichern &amp; veröffentlichen</button>
         </div>
         <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Quellen-Dateien werden gemeinsam hochgeladen.")}</div>`:`<div class="empty">Links einen Beitrag aus der Suche wählen.</div>`}
@@ -2548,7 +2553,10 @@ function renderActions(rows){
   return `<section class="split admin-actions-layout">
     <div class="panel admin-actions-main">
       <div class="section-head admin-actions-head"><h3>Aktionen</h3><span>Veröffentlichen</span></div>
-      <p class="admin-actions-lead">Einzelbeitrag oder Sammel-Paket per ZIP. Alle bestehenden Funktionen bleiben erhalten — nur übersichtlicher geordnet.</p>
+      <p class="admin-actions-lead">Neuen Beitrag erstellen oder bestehenden Beitrag nachträglich bearbeiten (PDF/Bild hinzufügen oder entfernen).</p>
+      <div class="admin-actions-quick" style="display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 12px">
+        <button class="btn primary" type="button" data-tab="quellen">Bestehenden Beitrag bearbeiten →</button>
+      </div>
       <details class="admin-action-card" id="singlePostAction" ${draftMarkdown?"open":""}>
         <summary class="admin-action-summary"><div><h4>Einzelbeitrag · Markdown</h4><p>Markdown einfügen, PDF/Bild per Drag &amp; Drop anhängen, online veröffentlichen.</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
         <div class="admin-action-body">
