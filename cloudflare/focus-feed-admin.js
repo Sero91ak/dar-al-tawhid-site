@@ -111,6 +111,15 @@ export async function saveFeedEntry(env, input, helpers) {
   if (!incoming?.title) throw feedError("Titel fehlt", 400);
   if (input?.status && FEED_STATUSES.has(String(input.status))) incoming.status = String(input.status);
   if (!incoming.createdAt) incoming.createdAt = nowIso;
+  if (incoming.status === "live") {
+    if (!incoming.title) throw feedError("Titel fehlt für Live-Karte", 400);
+    const tt = incoming.targetType || "none";
+    const hasTarget =
+      tt === "prayer" ||
+      (tt === "external" && incoming.targetUrl) ||
+      (tt !== "none" && tt !== "external" && incoming.targetId);
+    if (!hasTarget) throw feedError("Live-Karte braucht ein gültiges Ziel (targetType + targetId/URL)", 400);
+  }
   const items = (index.items || []).filter((x) => x && x.id !== incoming.id);
   items.push(incoming);
   const payload = { version: 1, updatedAt: nowIso, items: sortFeedItems(items) };

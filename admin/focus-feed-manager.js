@@ -54,8 +54,32 @@
     ["external", "Externer Link"]
   ];
 
+  const VISIBILITY = [
+    ["24h", "24 Stunden"],
+    ["48h", "48 Stunden"],
+    ["7d", "7 Tage"],
+    ["permanent", "Dauerhaft"],
+    ["manual", "Manuell bis Datum"]
+  ];
+
   function esc(s) {
     return global.esc ? global.esc(s) : String(s ?? "");
+  }
+
+  function visibilityExpiresAt(visibility, startsAt, manualExpires) {
+    const startMs = Date.parse(startsAt || "") || Date.now();
+    if (visibility === "manual") return manualExpires || null;
+    if (visibility === "permanent") return null;
+    const hours = visibility === "48h" ? 48 : visibility === "7d" ? 168 : 24;
+    return new Date(startMs + hours * 60 * 60 * 1000).toISOString();
+  }
+
+  function hasValidTarget(draft) {
+    const tt = draft.targetType || "none";
+    if (tt === "none") return false;
+    if (tt === "prayer") return true;
+    if (tt === "external") return !!String(draft.targetUrl || "").trim();
+    return !!String(draft.targetId || "").trim();
   }
 
   function toast(msg) {
@@ -135,6 +159,7 @@
       badgeEmpfohlen: false,
       badgeWichtig: false,
       dateLabel: "",
+      visibility: "24h",
       startsAt: new Date().toISOString().slice(0, 16),
       expiresAt: "",
       status: "draft",
@@ -190,6 +215,7 @@
       badgeEmpfohlen: !!document.getElementById("feedBadgeRec")?.checked,
       badgeWichtig: !!document.getElementById("feedBadgeImp")?.checked,
       dateLabel: formValue("feedDateLabel", base.dateLabel).trim(),
+      visibility: formValue("feedVisibility", base.visibility || "24h"),
       startsAt: formValue("feedStartsAt", base.startsAt || "").trim(),
       expiresAt: formValue("feedExpiresAt", base.expiresAt || "").trim(),
       status: formValue("feedStatus", base.status || "draft"),
@@ -208,6 +234,7 @@
       <select class="field" id="feedCategory">${CATEGORIES.map((c) => `<option${c === (item.category || "Empfehlung") ? " selected" : ""}>${esc(c)}</option>`).join("")}</select>
       <select class="field" id="feedType">${TYPES.map(([v, l]) => `<option value="${esc(v)}"${v === (item.type || "manual") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
       <select class="field" id="feedCardSize">${CARD_SIZES.map(([v, l]) => `<option value="${esc(v)}"${v === (item.cardSize || "medium") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
+      <select class="field" id="feedVisibility">${VISIBILITY.map(([v, l]) => `<option value="${esc(v)}"${v === (item.visibility || "24h") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
       <select class="field" id="feedStatus">
         <option value="draft"${item.status === "draft" ? " selected" : ""}>Entwurf</option>
         <option value="live"${item.status === "live" ? " selected" : ""}>Live</option>
@@ -301,6 +328,11 @@
       return;
     }
     if (statusOverride) draft.status = statusOverride;
+    if (draft.status === "live" && !hasValidTarget(draft)) {
+      toast("Live-Karte braucht ein gültiges Ziel (Typ + ID oder URL)");
+      return;
+    }
+    draft.expiresAt = visibilityExpiresAt(draft.visibility, draft.startsAt, draft.expiresAt);
     if (!draft.id) draft.id = `feed-${Date.now().toString(36)}`;
     draft.staging = feedStaging;
     const btn = document.getElementById("feedSaveBtn");
