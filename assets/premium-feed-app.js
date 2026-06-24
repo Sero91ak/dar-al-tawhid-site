@@ -5,46 +5,34 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV7';
-  var FONTS_ID = 'darPremiumFeedFontsV7';
+  var STYLES_ID = 'darPremiumFeedStylesV8';
+  var FONTS_ID = 'darPremiumFeedFontsV8';
   var APP_LOGO = '/watermark-my-logo-full.png';
-  var ISLAMIC_BG = {
-    dua: [
-      'https://images.unsplash.com/photo-1585032226651-759b368d8cb6?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1609599006347-fe519eec4e3a?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1564128991867-c74ec226a86d?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1604871000631-74312289c2f3?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1564769625900-9600259030c2?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1591604466107-be97fabb2941?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1542816417-0983c9c9a09c?auto=format&fit=crop&w=960&q=80'
+  var BG_VERIFIED = {
+    islamic: [
+      '1512632578888-169bbbc64f33', '1542816417-0983c9c9ad53', '1519817650390-64a93db51149',
+      '1519818187420-8e49de7adeef', '1513072064285-240f87fa81e8', '1596163177973-aa0e47c735dc',
+      '1580418827493-f2b22c0a76cb', '1574246604907-db69e30ddb97', '1590273089302-ebbc53986b6e',
+      '1631432526080-5abd83dafc8a', '1587617425953-9075d28b8c46', '1537181534458-45dcee76ae90',
+      '1578662996442-48f60103fc96', '1519741497674-611481863552', '1558618666-fcd25c85cd64',
+      '1540959733332-eab4deabeeaf', '1600814832809-579119f47045', '1590075865003-e48277faa558',
+      '1553755088-ef1973c7b4a1'
     ],
-    quran: [
-      'https://images.unsplash.com/photo-1609599006347-fe519eec4e3a?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1585032226651-759b368d8cb6?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1590073242677-48fb1b5607aa?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1616362233669-5c69a35a3a9e?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1548628499-0c0890e2f9d0?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1542816417-0983c9c9a09c?auto=format&fit=crop&w=960&q=80'
-    ],
-    knowledge: [
-      'https://images.unsplash.com/photo-1542816417-0983c9c9a09c?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1591604466107-be97fabb2941?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1564769625900-9600259030c2?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1616362233669-5c69a35a3a9e?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1584551240439-0a521179381a?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1548628499-0c0890e2f9d0?auto=format&fit=crop&w=960&q=80'
-    ],
-    default: [
-      'https://images.unsplash.com/photo-1564769625900-9600259030c2?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1616362233669-5c69a35a3a9e?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1542816417-0983c9c9a09c?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1591604466107-be97fabb2941?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1604871000631-74312289c2f3?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1585032226651-759b368d8cb6?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1548628499-0c0890e2f9d0?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1590073242677-48fb1b5607aa?auto=format&fit=crop&w=960&q=80'
+    nature: [
+      '1506905925346-21bda4d32df4', '1469474968028-56623f02e42e', '1470071459604-3b5ec3a7fe05',
+      '1439066615861-d1af74d74000', '1501785888041-af3ef285b470', '1519682337058-a94d519337bc',
+      '1441974231531-c6227db76b6e', '1472214103451-9374bd1c798e', '1518837695005-2083093ee35b',
+      '1507525428034-b723cf961d3e', '1511593358241-7eea1f3c84e5', '1465146633011-14f8e0781093',
+      '1507003211169-0a1dd7228f2d'
     ]
+  };
+  var ISLAMIC_BG = {
+    dua: BG_VERIFIED.islamic.concat(BG_VERIFIED.nature.slice(0, 4)),
+    quran: ['1542816417-0983c9c9ad53', '1590075865003-e48277faa558', '1580418827493-f2b22c0a76cb',
+      '1574246604907-db69e30ddb97', '1631432526080-5abd83dafc8a', '1537181534458-45dcee76ae90'].concat(BG_VERIFIED.nature.slice(0, 3)),
+    knowledge: ['1542816417-0983c9c9ad53', '1631432526080-5abd83dafc8a', '1519741497674-611481863552',
+      '1578662996442-48f60103fc96', '1512632578888-169bbbc64f33'].concat(BG_VERIFIED.nature),
+    default: BG_VERIFIED.islamic.concat(BG_VERIFIED.nature)
   };
   var FEED_FONTS = [
     { id: 'amiri', css: '"Amiri", serif', size: 'clamp(17px,4.1vw,21px)' },
@@ -107,6 +95,19 @@
     return item.category ? item.category + ' · ' + kind : kind;
   }
 
+  function unsplashUrl(pid) {
+    return 'https://images.unsplash.com/photo-' + pid + '?auto=format&fit=crop&w=960&q=80';
+  }
+
+  function allBgFallbacks(item) {
+    var primary = islamicBgPoolFor(item) || ISLAMIC_BG.default;
+    var merged = primary.slice();
+    ISLAMIC_BG.default.forEach(function (pid) {
+      if (merged.indexOf(pid) < 0) merged.push(pid);
+    });
+    return merged.map(unsplashUrl);
+  }
+
   function islamicBgPoolFor(item) {
     var type = item && item.type || 'post';
     var cat = String(item && item.category || '').toLowerCase();
@@ -118,19 +119,58 @@
 
   function islamicBgFor(item) {
     var pool = islamicBgPoolFor(item);
-    if (!pool || !pool.length) return '';
+    if (!pool || !pool.length) return unsplashUrl(ISLAMIC_BG.default[0]);
     var key = String(item && item.uid || '') + '|' + String(item && item.type || '') + '|' + todayKey();
-    return pool[hashNum(key) % pool.length];
+    return unsplashUrl(pool[hashNum(key) % pool.length]);
   }
 
   function fontStyleFor(item) {
     var fonts = FEED_FONTS;
-    if (!fonts.length) return { css: 'Georgia, serif', size: 'clamp(16px,3.9vw,19px)', tone: 'light' };
-    var idx = hashNum(String(item && item.uid || '') + '|font') % fonts.length;
+    if (!fonts.length) return { css: 'Georgia, serif', size: 'clamp(16px,3.9vw,19px)', color: '#fff9e8', align: 'center' };
+    var idx = hashNum(String(item && item.uid || '') + '|font|' + todayKey()) % fonts.length;
     var f = fonts[idx];
-    var tone = hashNum(String(item && item.uid || '') + '|tone') % 3;
-    var colors = ['#fff9e8', '#f5ecd4', '#efe2c4'];
-    return { css: f.css, size: f.size, color: colors[tone] };
+    var tone = hashNum(String(item && item.uid || '') + '|tone') % 4;
+    var colors = ['#fff9e8', '#f5ecd4', '#efe2c4', '#fdf6e3'];
+    var aligns = ['left', 'center', 'right', 'left'];
+    var align = aligns[hashNum(String(item && item.uid || '') + '|align') % aligns.length];
+    return { css: f.css, size: f.size, color: colors[tone], align: align };
+  }
+
+  function sourceLineFor(item) {
+    if (!item) return '';
+    if (item.source) return clamp(String(item.source).replace(/\s+/g, ' ').trim(), 90);
+    if (item.scholar) return clamp(String(item.scholar).trim(), 90);
+    if (item.type === 'dua') return item.ref ? clamp(String(item.ref), 90) : 'Duʿāʾ';
+    if (item.category) return clamp(String(item.category), 60);
+    return '';
+  }
+
+  function feedOverlayBundle(item) {
+    if (!item) return { text: '', source: '' };
+    if (item.type === 'dua') {
+      var txt = String(item.preview || '');
+      var dash = txt.indexOf(' — ');
+      return {
+        text: clamp(dash > 0 ? txt.slice(dash + 3).trim() : txt, 280),
+        source: sourceLineFor(item)
+      };
+    }
+    var raw = item.statement || item.preview || '';
+    var scholar = item.scholar || '';
+    try {
+      if (global && typeof global.parseImageEditorBodySource === 'function') {
+        var parsed = global.parseImageEditorBodySource(String(raw), scholar);
+        parsed.fazit = '';
+        var body = String(parsed.bodyText || '').trim();
+        if (!body && item.preview) body = stripMd(item.preview);
+        var src = parsed.nameLine || scholar || sourceLineFor(item);
+        if (body) return { text: clamp(stripMd(body), 320), source: clamp(String(src || ''), 90) };
+      }
+    } catch (e) {}
+    return {
+      text: feedStatementOnly(raw, scholar) || clamp(stripMd(item.preview || item.title || ''), 280),
+      source: sourceLineFor(item)
+    };
   }
 
   function isFeedSkipLine(t) {
@@ -187,15 +227,11 @@
   }
 
   function overlayTextFor(item) {
-    if (!item) return '';
-    if (item.type === 'dua') {
-      var txt = String(item.preview || '');
-      var dash = txt.indexOf(' — ');
-      return clamp(dash > 0 ? txt.slice(dash + 3).trim() : txt, 280);
-    }
-    if (item.statement) return feedStatementOnly(item.statement, item.scholar || '');
-    if (item.preview) return clamp(stripMd(item.preview), 280);
-    return clamp(item.title || '', 120);
+    return feedOverlayBundle(item).text;
+  }
+
+  function overlaySourceFor(item) {
+    return feedOverlayBundle(item).source;
   }
 
   function readLikes() {
@@ -562,6 +598,7 @@
         statement: postStatementText(p),
         category: normCat(p.category),
         scholar: p.scholar || p.author || '',
+        source: p.source || '',
         date: p.date || '',
         hijriDate: i < 3 ? hijri : '',
         badges: i === 0 ? ['Neu', 'Heute'] : i < 3 ? ['Neu'] : [],
@@ -583,6 +620,7 @@
         statement: postStatementText(p),
         category: normCat(p.category),
         scholar: p.scholar || '',
+        source: p.source || '',
         date: p.date || '',
         badges: ['Aus dem Archiv'],
         image: postImage(p),
@@ -601,7 +639,8 @@
             type: 'dua',
             cardType: 'md',
             title: dd.title || 'Duʿāʾ des Tages',
-            preview: clamp(dd.de || dd.tr || dd.ar || '', 140),
+            preview: (dd.ar ? dd.ar + ' — ' : '') + clamp(dd.de || dd.tr || '', 140),
+            source: dd.ref || dd.source || 'Duʿāʾ des Tages',
             category: 'Duʿāʾ',
             date: todayKey(),
             hijriDate: hijri,
@@ -620,7 +659,8 @@
         type: 'dua',
         cardType: 'sm',
         title: d.title || 'Duʿāʾ',
-        preview: clamp(d.de || d.tr || d.ar || '', 120),
+        preview: (d.ar ? d.ar + ' — ' : '') + clamp(d.de || d.tr || d.ar || '', 120),
+        source: d.ref || d.source || (d.cat ? 'Duʿāʾ · ' + d.cat : 'Duʿāʾ'),
         category: 'Duʿāʾ',
         badges: ['Duʿāʾ'],
         target: 'dua:' + d.id,
@@ -843,18 +883,20 @@
       '.sf-user{display:block;font-size:13px;font-weight:800;color:#fff9e5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.sf-sub{display:block;font-size:10px;opacity:.62;margin-top:1px}' +
       '.sf-more{border:0;background:rgba(255,255,255,.05);color:inherit;font-size:16px;line-height:1;padding:6px 8px;border-radius:999px;cursor:pointer;opacity:.82}' +
-      '.sf-post__media{position:relative;background:#0c0c0a;min-height:220px}' +
-      '.sf-post__scene{position:relative;min-height:min(58vh,460px);background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;justify-content:center;padding:24px 12px}' +
-      '.sf-post__scene-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,.52) 50%,rgba(0,0,0,.28) 100%)}' +
-      '.sf-post__scene-inner{position:relative;z-index:1;width:100%;display:flex;align-items:center;justify-content:center;padding:8px 6px}' +
-      '.sf-post__textpanel{max-width:min(92%,36em);margin:0 auto;padding:20px 18px;border-radius:18px;background:rgba(6,6,5,.62);backdrop-filter:blur(10px) saturate(1.05);border:1px solid rgba(239,215,142,.16);box-shadow:0 14px 44px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06)}' +
-      '.sf-post__img{width:100%;max-height:min(72vh,520px);object-fit:cover;display:block;aspect-ratio:4/5;background:#111}' +
-      '.sf-post__quote{margin:0;line-height:1.62;text-align:center;text-shadow:0 2px 14px rgba(0,0,0,.45)}' +
-      '.sf-quote-mark{display:block;font-size:26px;line-height:1;color:rgba(239,215,142,.55);font-family:Georgia,serif;margin-bottom:6px}' +
-      '.sf-quote-text{display:block;margin:0 auto;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere}' +
-      '.sf-post__dua{margin:0;padding:0;background:transparent;text-align:center}' +
-      '.sf-post__dua-ar{direction:rtl;text-align:center;font-size:clamp(22px,5vw,28px);line-height:1.75;margin-bottom:10px;text-shadow:0 2px 14px rgba(0,0,0,.45)}' +
-      '.sf-post__dua-de{font-size:clamp(14px,3.5vw,17px);line-height:1.55;text-shadow:0 2px 12px rgba(0,0,0,.4)}' +
+      '.sf-post__media{position:relative;background:#1a1814;min-height:220px;overflow:hidden}' +
+      '.sf-post__scene{position:relative;min-height:min(58vh,460px);display:flex;align-items:center;justify-content:center;padding:24px 12px;overflow:hidden}' +
+      '.sf-post__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:#2a2418}' +
+      '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.42) 55%,rgba(0,0,0,.22) 100%);pointer-events:none}' +
+      '.sf-post__scene-inner{position:relative;z-index:2;width:100%;display:flex;align-items:center;padding:8px 6px}' +
+      '.sf-post__textpanel{max-width:min(92%,36em);padding:18px 16px;border-radius:18px;background:rgba(8,7,5,.48);backdrop-filter:blur(8px) saturate(1.08);border:1px solid rgba(239,215,142,.14);box-shadow:0 12px 36px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.05)}' +
+      '.sf-post__img{width:100%;max-height:min(72vh,520px);object-fit:cover;display:block;aspect-ratio:4/5;background:#1a1814}' +
+      '.sf-post__quote{margin:0;line-height:1.62;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
+      '.sf-quote-mark{display:block;font-size:24px;line-height:1;color:rgba(239,215,142,.58);font-family:Georgia,serif;margin-bottom:6px}' +
+      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere}' +
+      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid rgba(239,215,142,.12);font-size:11px;line-height:1.45;opacity:.78;font-style:italic;color:rgba(248,239,212,.88)}' +
+      '.sf-post__dua{margin:0;padding:0;background:transparent}' +
+      '.sf-post__dua-ar{direction:rtl;font-size:clamp(22px,5vw,28px);line-height:1.75;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.42)}' +
+      '.sf-post__dua-de{font-size:clamp(14px,3.5vw,17px);line-height:1.55;text-shadow:0 2px 10px rgba(0,0,0,.38)}' +
       '.sf-post__actions{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 6px;gap:8px}' +
       '.sf-actions-left,.sf-actions-right{display:flex;align-items:center;gap:4px}' +
       '.sf-act{border:0;background:rgba(255,255,255,.04);color:rgba(248,239,212,.92);min-width:42px;height:38px;border-radius:12px;cursor:pointer;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 10px;border:1px solid rgba(255,255,255,.06);transition:transform .15s ease,background .15s ease,color .15s ease}' +
@@ -884,18 +926,44 @@
     document.head.appendChild(el);
   }
 
+  function sourceHtml(item, fs) {
+    var src = overlaySourceFor(item);
+    if (!src) return '';
+    var style = 'font-family:' + (fs && fs.css ? fs.css : 'Georgia,serif') + ';color:' + (fs && fs.color ? fs.color : '#f5ecd4');
+    return '<div class="sf-quote-source" style="' + style + '">' + esc(src) + '</div>';
+  }
+
   function sceneBlock(item, inner, style) {
     var bg = item.image || islamicBgFor(item);
     var fs = style || fontStyleFor(item);
-    var panelStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:' + fs.size;
+    var fallbacks = allBgFallbacks(item).join('|');
+    var panelStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:' + fs.size + ';text-align:' + fs.align;
+    var innerStyle = 'justify-content:' + (fs.align === 'left' ? 'flex-start' : fs.align === 'right' ? 'flex-end' : 'center');
     return (
-      '<div class="sf-post__scene" style="background-image:url(' + esc(bg) + ')">' +
+      '<div class="sf-post__scene">' +
+        '<img class="sf-post__bg" src="' + esc(bg) + '" alt="" decoding="async" loading="eager" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0">' +
         '<div class="sf-post__scene-shade"></div>' +
-        '<div class="sf-post__scene-inner">' +
+        '<div class="sf-post__scene-inner" style="' + innerStyle + '">' +
           '<div class="sf-post__textpanel" style="' + panelStyle + '">' + inner + '</div>' +
         '</div>' +
       '</div>'
     );
+  }
+
+  function bindSceneBackgrounds(root) {
+    if (!root) return;
+    root.querySelectorAll('.sf-post__bg').forEach(function (img) {
+      if (img.dataset.sfBgBound === '1') return;
+      img.dataset.sfBgBound = '1';
+      img.addEventListener('error', function () {
+        var list = String(img.getAttribute('data-sf-bg-fallbacks') || '').split('|').filter(Boolean);
+        var idx = (parseInt(img.getAttribute('data-sf-bg-idx') || '0', 10) || 0) + 1;
+        if (idx < list.length) {
+          img.setAttribute('data-sf-bg-idx', String(idx));
+          img.src = list[idx];
+        }
+      });
+    });
   }
 
   function mediaHtml(item) {
@@ -908,21 +976,24 @@
       var dash = txt.indexOf(' — ');
       var ar = dash > 0 ? txt.slice(0, dash).trim() : '';
       var de = overlayTextFor(item) || item.title || '';
-      var arStyle = 'font-family:"Noto Naskh Arabic",serif;color:' + fs.color + ';font-size:clamp(22px,5vw,28px)';
-      var deStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:clamp(14px,3.5vw,17px)';
+      var arAlign = fs.align === 'right' ? 'right' : fs.align === 'left' ? 'left' : 'center';
+      var arStyle = 'font-family:"Noto Naskh Arabic",serif;color:' + fs.color + ';font-size:clamp(22px,5vw,28px);text-align:' + arAlign;
+      var deStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:clamp(14px,3.5vw,17px);text-align:' + fs.align;
       return sceneBlock(item,
         '<div class="sf-post__dua">' +
           (ar ? '<div class="sf-post__dua-ar" style="' + arStyle + '">' + esc(ar) + '</div>' : '') +
           '<div class="sf-post__dua-de" style="' + deStyle + '">' + esc(de) + '</div>' +
+          sourceHtml(item, fs) +
         '</div>',
         fs
       );
     }
-    var quote = overlayTextFor(item);
+    var bundle = feedOverlayBundle(item);
+    var quote = bundle.text;
     if (!quote) return sceneBlock(item, '', fs);
-    var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:' + fs.size;
+    var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';font-size:' + fs.size + ';text-align:' + fs.align;
     return sceneBlock(item,
-      '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + esc(quote) + '</span></blockquote>',
+      '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + esc(quote) + '</span>' + sourceHtml(item, fs) + '</blockquote>',
       fs
     );
   }
@@ -1154,6 +1225,7 @@
     list.innerHTML = state.visible.map(cardHtml).join('') +
       (state.done ? '' : '<div class="sf-loader" id="pfLoader">Weitere Beiträge laden…</div>');
     bindList(mount);
+    bindSceneBackgrounds(mount);
     setupInfinite(mount);
   }
 
