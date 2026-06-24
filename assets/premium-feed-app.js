@@ -782,6 +782,17 @@
     return liked ? '<span class="sf-like-count">1</span>' : '';
   }
 
+  function feedShellPad() {
+    var isFullscreen = document.body && document.body.classList.contains('is-feed-fullscreen');
+    if (isFullscreen) return 0;
+    try {
+      var rootCs = global.getComputedStyle(document.documentElement);
+      var px = parseFloat(rootCs.getPropertyValue('--page-padding-x'));
+      if (Number.isFinite(px) && px >= 0) return Math.round(px);
+    } catch (e) {}
+    return FEED_SHELL_PAD;
+  }
+
   function feedSceneWidth(root) {
     var host = root && root.querySelector ? root : document.getElementById(MOUNT_ID);
     if (host) {
@@ -797,7 +808,7 @@
       }
       if (host.clientWidth > 0) {
         var app = host.querySelector('.sf-app');
-        var shellPad = FEED_SHELL_PAD;
+        var shellPad = feedShellPad();
         if (app) {
           var appCs = global.getComputedStyle(app);
           var gl = parseFloat(appCs.getPropertyValue('--sf-gutter-left')) || 0;
@@ -809,7 +820,8 @@
     }
     var vv = global.visualViewport;
     var vw = (vv && vv.width) ? vv.width : (global.innerWidth || 390);
-    return Math.max(280, Math.round(vw - FEED_SHELL_PAD * 2));
+    var shell = feedShellPad();
+    return Math.max(280, Math.round(vw - shell * 2));
   }
 
   function feedSceneHeight(root) {
@@ -828,7 +840,7 @@
     var host = root && root.querySelector ? root : document;
     var app = host.querySelector ? (host.querySelector('.sf-app') || host) : document;
     if (app && app.style) {
-      var shell = FEED_SHELL_PAD;
+      var shell = feedShellPad();
       app.style.setProperty('--sf-scene-w', w + 'px');
       app.style.setProperty('--sf-scene-h', h + 'px');
       app.style.setProperty('--sf-footer-h', footerH + 'px');
