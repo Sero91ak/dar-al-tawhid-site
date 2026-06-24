@@ -5,11 +5,15 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV31';
-  var FONTS_ID = 'darPremiumFeedFontsV31';
+  var STYLES_ID = 'darPremiumFeedStylesV32';
+  var FONTS_ID = 'darPremiumFeedFontsV32';
   var FEED_SHELL_PAD = 4;
-  var FEED_CARD_GAP = 20;
-  var FEED_CARD_RADIUS = 26;
+  var FEED_CARD_GAP = 14;
+  var FEED_CARD_RADIUS = 22;
+  var FEED_SCENE_RATIO = 1.05;
+  var FEED_SCENE_RATIO_FULL = 0.92;
+  var FEED_SCENE_MIN_H = 210;
+  var FEED_SCENE_MAX_VH = 0.50;
   var EMPHASIS_SCRIPT = '"Allura","Brush Script MT",cursive';
   var APP_LOGO = '/watermark-my-logo-full.png';
   var SCENE_WATERMARK = '/watermark-my-logo-full.png';
@@ -841,7 +845,16 @@
   }
 
   function feedSceneHeight(root) {
-    return Math.round(feedSceneWidth(root) * 1.25);
+    var w = feedSceneWidth(root);
+    var fullscreen = isFeedFullscreen();
+    var ratio = fullscreen ? FEED_SCENE_RATIO_FULL : FEED_SCENE_RATIO;
+    var h = Math.round(w * ratio);
+    if (fullscreen) {
+      var vv = global.visualViewport;
+      var vh = (vv && vv.height) ? vv.height : (global.innerHeight || 800);
+      h = Math.min(h, Math.round(vh * FEED_SCENE_MAX_VH));
+    }
+    return Math.max(FEED_SCENE_MIN_H, h);
   }
 
   function syncSceneLayout(root) {
@@ -849,12 +862,14 @@
     var h = feedSceneHeight(root);
     var fullscreen = isFeedFullscreen();
     var shell = feedShellPad();
-    var footerH = Math.max(44, Math.round(h * 0.115));
-    var topPad = Math.max(6, Math.round(h * 0.018));
+    var footerH = fullscreen ? Math.max(32, Math.round(h * 0.088)) : Math.max(40, Math.round(h * 0.105));
+    var topPad = fullscreen ? Math.max(4, Math.round(h * 0.012)) : Math.max(6, Math.round(h * 0.018));
     var sidePad = 0;
-    var panelPad = fullscreen ? Math.max(12, Math.round(w * 0.032)) : Math.max(13, Math.round(w * 0.036));
-    var panelInset = fullscreen ? Math.max(4, Math.round(w * 0.012)) : Math.max(10, Math.round(w * 0.028));
-    var badgeSize = Math.min(56, Math.max(42, Math.round(w * 0.118)));
+    var panelPad = fullscreen ? Math.max(11, Math.round(w * 0.028)) : Math.max(13, Math.round(w * 0.036));
+    var panelInset = fullscreen ? Math.max(4, Math.round(w * 0.010)) : Math.max(10, Math.round(w * 0.028));
+    var badgeSize = fullscreen
+      ? Math.min(44, Math.max(34, Math.round(w * 0.095)))
+      : Math.min(56, Math.max(42, Math.round(w * 0.118)));
     var host = root && root.querySelector ? root : document;
     var app = host.querySelector ? (host.querySelector('.sf-app') || host) : document;
     if (app && app.style) {
@@ -868,11 +883,11 @@
       app.style.setProperty('--sf-shell-pad', shell + 'px');
       app.style.setProperty('--sf-gutter-left', 'max(' + shell + 'px, env(safe-area-inset-left, 0px))');
       app.style.setProperty('--sf-gutter-right', 'max(' + shell + 'px, env(safe-area-inset-right, 0px))');
-      app.style.setProperty('--sf-card-gap', FEED_CARD_GAP + 'px');
-      app.style.setProperty('--sf-card-radius', FEED_CARD_RADIUS + 'px');
+      app.style.setProperty('--sf-card-gap', (fullscreen ? '12px' : (FEED_CARD_GAP + 'px')));
+      app.style.setProperty('--sf-card-radius', (fullscreen ? '20px' : (FEED_CARD_RADIUS + 'px')));
       app.style.setProperty('--sf-badge-size', badgeSize + 'px');
-      app.style.setProperty('--sf-badge-top', '18px');
-      app.style.setProperty('--sf-badge-left', '18px');
+      app.style.setProperty('--sf-badge-top', (fullscreen ? '12px' : '18px'));
+      app.style.setProperty('--sf-badge-left', (fullscreen ? '12px' : '18px'));
     }
     var scenes = (host.querySelectorAll ? host.querySelectorAll('.sf-post__scene') : []);
     Array.prototype.forEach.call(scenes, function (scene) {
@@ -1598,7 +1613,7 @@
       '.sf-sub{display:block;font-size:10px;color:var(--theme-muted,var(--muted));margin-top:1px}' +
       '.sf-more{border:0;background:var(--theme-feed-act-bg,rgba(255,255,255,.05));color:var(--theme-text,var(--text));font-size:16px;line-height:1;padding:6px 8px;border-radius:999px;cursor:pointer;opacity:.82}' +
       '.sf-post__media{position:relative;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));min-height:180px;overflow:hidden;border-radius:0;width:100%;max-width:100%;min-width:0;box-sizing:border-box;line-height:0;font-size:0}' +
-      '.sf-post__scene{position:relative;width:100%;height:var(--sf-scene-h,auto);min-height:280px;display:flex;align-items:stretch;justify-content:center;padding:12px 0 var(--sf-footer-h,50px);overflow:hidden;max-width:100%;min-width:0;margin:0;isolation:isolate;transform:translateZ(0);-webkit-transform:translateZ(0);background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));box-sizing:border-box}' +
+      '.sf-post__scene{position:relative;width:100%;height:var(--sf-scene-h,auto);min-height:210px;display:flex;align-items:stretch;justify-content:center;padding:8px 0 var(--sf-footer-h,42px);overflow:hidden;max-width:100%;min-width:0;margin:0;isolation:isolate;transform:translateZ(0);-webkit-transform:translateZ(0);background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));box-sizing:border-box}' +
       '.sf-post__bg,.sf-post__bg--grad{position:absolute;inset:0;left:0;right:0;top:0;bottom:0;width:100%;height:100%;min-width:100%;min-height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));image-rendering:auto;box-sizing:border-box}' +
       '.sf-post__bg--grad{background-size:cover;background-position:center;background-repeat:no-repeat}' +
       '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:var(--theme-feed-overlay,linear-gradient(180deg,rgba(0,0,0,.14),rgba(0,0,0,.52)));pointer-events:none}' +
@@ -1613,7 +1628,7 @@
       '.sf-brand-signature{font-family:"Allura","Brush Script MT",cursive;font-size:clamp(11px,3vw,13px);color:var(--theme-feed-signature,var(--theme-accent,var(--gold2)));line-height:1;letter-spacing:.015em;flex:0 1 auto;min-width:0;text-align:center;white-space:nowrap}' +
       '.sf-post__scene-inner{position:relative;z-index:3;width:100%;max-width:100%;min-width:0;display:flex;align-items:center;justify-content:center;padding:var(--sf-panel-inset-top,4px) var(--sf-panel-inset-x,var(--sf-panel-inset,12px)) var(--sf-panel-inset-bottom,4px);max-height:calc(100% - var(--sf-footer-h,50px));box-sizing:border-box;margin:0}' +
       '.sf-post__textpanel{max-width:100%;width:100%;padding:var(--sf-panel-pad,15px);border-radius:clamp(14px,3.6vw,18px);background:var(--theme-feed-panel,var(--theme-glass,rgba(12,10,8,.88)));border:1px solid var(--theme-feed-panel-border,var(--theme-border,var(--line)));box-shadow:none;box-sizing:border-box;text-align:center;overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;backface-visibility:hidden;-webkit-backface-visibility:hidden;color:var(--theme-feed-panel-text,var(--theme-text,var(--text)))}' +
-      '.sf-post__img{width:100%;max-width:100%;min-width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));border-radius:0;vertical-align:top}' +
+      '.sf-post__img{width:100%;max-width:100%;min-width:100%;height:auto;display:block;aspect-ratio:5/4;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));border-radius:0;vertical-align:top}' +
       '.sf-post__quote{margin:0;line-height:1.55;text-shadow:none;width:100%;color:var(--theme-feed-panel-text,var(--theme-text,var(--text)))}' +
       '.sf-quote-mark{display:block;font-size:var(--sf-mark-size,20px);line-height:1;color:var(--theme-feed-mark,var(--theme-accent,var(--gold2)));font-family:Georgia,serif;margin-bottom:8px}' +
       '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;line-height:1.55;font-size:var(--sf-main-size,15px);color:var(--theme-feed-panel-text,var(--theme-text,var(--text)))}' +
@@ -1813,7 +1828,7 @@
         var div = document.createElement('div');
         div.className = 'sf-post__bg sf-post__bg--grad';
         div.setAttribute('aria-hidden', 'true');
-        div.style.cssText = 'position:relative;inset:auto;width:100%;aspect-ratio:4/5;display:block;background:' +
+        div.style.cssText = 'position:relative;inset:auto;width:100%;aspect-ratio:5/4;display:block;background:' +
           (img.getAttribute('data-sf-grad') || gradientStyleFor({}));
         media.appendChild(div);
       }, { once: true });
