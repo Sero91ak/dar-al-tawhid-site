@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-24T20:55:34.430Z",
+  "updatedAt": "2026-06-24T21:15:34.451Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3541.87,
+    "pricePerOunce": 3541.78,
     "pricePerGram": 113.87,
     "nisabGrams": 85,
     "nisabEur": 9678.95,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-06-24T20:55:34.430Z",
+    "fetchedAt": "2026-06-24T21:15:34.451Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 50.74,
+    "pricePerOunce": 50.69,
     "pricePerGram": 1.63,
     "nisabGrams": 595,
     "nisabEur": 969.85,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-06-24T20:55:34.430Z",
+    "fetchedAt": "2026-06-24T21:15:34.451Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 969.85,
-  "lastSuccessAt": "2026-06-24T20:55:34.430Z",
+  "lastSuccessAt": "2026-06-24T21:15:34.451Z",
   "lastError": "",
-  "lastFetchAt": "2026-06-24T20:55:34.430Z",
+  "lastFetchAt": "2026-06-24T21:15:34.451Z",
   "fetchLogs": [
+    {
+      "id": "log-1782335734451",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-06-24T21:15:34.451Z",
+      "durationMs": 1186,
+      "goldPerGram": 113.87,
+      "silverPerGram": 1.63
+    },
     {
       "id": "log-1782334534430",
       "provider": "aurumrates.com",
@@ -525,16 +535,6 @@
       "durationMs": 554,
       "goldPerGram": 116.31,
       "silverPerGram": 1.75
-    },
-    {
-      "id": "log-1782210955931",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-06-23T10:35:55.931Z",
-      "durationMs": 1071,
-      "goldPerGram": 116.36,
-      "silverPerGram": 1.76
     }
   ]
 }
