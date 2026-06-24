@@ -5,14 +5,16 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV12';
-  var FONTS_ID = 'darPremiumFeedFontsV12';
+  var STYLES_ID = 'darPremiumFeedStylesV13';
+  var FONTS_ID = 'darPremiumFeedFontsV13';
   var APP_LOGO = '/watermark-my-logo-full.png';
   var SCENE_WATERMARK = '/watermark-my-logo-full.png';
   var BRAND = {
     site: 'dar-al-tawhid.de',
     instagram: '@dar_at_tawhid',
-    telegram: '@dar_al_tauhid'
+    telegram: '@dar_al_tauhid',
+    tagline: 'Folgt für mehr Wissen aus Qurʾān & Sunnah',
+    signature: 'by Serhat Abu Makıl'
   };
   var BG_VERIFIED = {
     islamic: [
@@ -921,7 +923,8 @@
       'Raleway:wght@400;500;600;700',
       'Montserrat:wght@400;500;600;700',
       'Cinzel:wght@400;500;600;700',
-      'Noto+Naskh+Arabic:wght@400;500;600;700'
+      'Noto+Naskh+Arabic:wght@400;500;600;700',
+      'Allura'
     ];
     var link = document.createElement('link');
     link.id = FONTS_ID;
@@ -965,17 +968,19 @@
       '.sf-sub{display:block;font-size:10px;opacity:.62;margin-top:1px}' +
       '.sf-more{border:0;background:rgba(255,255,255,.05);color:inherit;font-size:16px;line-height:1;padding:6px 8px;border-radius:999px;cursor:pointer;opacity:.82}' +
       '.sf-post__media{position:relative;background:#1a1814;min-height:180px;overflow:hidden}' +
-      '.sf-post__scene{position:relative;min-height:min(36vh,320px);max-height:360px;display:flex;align-items:center;justify-content:center;padding:12px 10px 54px;overflow:hidden;aspect-ratio:4/5;max-width:100%;margin:0 auto}' +
+      '.sf-post__scene{position:relative;min-height:min(36vh,320px);max-height:360px;display:flex;align-items:center;justify-content:center;padding:12px 10px 62px;overflow:hidden;aspect-ratio:4/5;max-width:100%;margin:0 auto}' +
       '.sf-post__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:#2a2418}' +
       '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.14) 0%,rgba(0,0,0,.38) 58%,rgba(0,0,0,.52) 100%);pointer-events:none}' +
       '.sf-scene-watermark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:min(48%,210px);max-width:240px;opacity:.1;pointer-events:none}' +
       '.sf-scene-watermark img{width:100%;height:auto;display:block;object-fit:contain}' +
-      '.sf-scene-brand{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:8px 10px 10px;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.48) 38%,rgba(0,0,0,.72) 100%);display:flex;flex-direction:column;gap:4px;align-items:center;pointer-events:none}' +
-      '.sf-scene-brand-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:100%}' +
-      '.sf-brand-chip{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:800;color:rgba(248,239,212,.9);background:rgba(8,7,5,.42);border:1px solid rgba(239,215,142,.14);border-radius:999px;padding:3px 7px;line-height:1;white-space:nowrap}' +
-      '.sf-brand-chip svg{width:13px;height:13px;flex:0 0 13px;display:block}' +
-      '.sf-brand-site{display:inline-flex;align-items:center;gap:4px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(214,190,132,.78);font-weight:800;line-height:1}' +
-      '.sf-brand-site svg{width:11px;height:11px;flex:0 0 11px}' +
+      '.sf-scene-brand{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:7px 8px 8px;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.42) 32%,rgba(0,0,0,.74) 100%);display:flex;flex-direction:column;gap:4px;align-items:center;pointer-events:none}' +
+      '.sf-brand-tagline{font-size:7.5px;font-weight:700;letter-spacing:.04em;color:rgba(248,239,212,.76);text-align:center;line-height:1.35;max-width:94%;text-wrap:balance}' +
+      '.sf-scene-brand-row{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:5px;max-width:100%}' +
+      '.sf-brand-chip{display:inline-flex;align-items:center;gap:3px;font-size:7.5px;font-weight:800;color:rgba(248,239,212,.88);background:rgba(8,7,5,.42);border:1px solid rgba(239,215,142,.14);border-radius:999px;padding:2px 6px;line-height:1;white-space:nowrap;flex:0 0 auto}' +
+      '.sf-brand-chip svg{width:11px;height:11px;flex:0 0 11px;display:block}' +
+      '.sf-brand-site{display:inline-flex;align-items:center;gap:3px;font-size:7px;letter-spacing:.11em;text-transform:uppercase;color:rgba(214,190,132,.72);font-weight:800;line-height:1}' +
+      '.sf-brand-site svg{width:10px;height:10px;flex:0 0 10px}' +
+      '.sf-brand-signature{font-family:"Allura","Brush Script MT",cursive;font-size:12px;color:rgba(214,190,132,.68);line-height:1;letter-spacing:.01em;margin-top:1px}' +
       '.sf-post__scene-inner{position:relative;z-index:3;width:100%;display:flex;align-items:center;padding:12px 10px 10px;max-height:calc(100% - 48px)}' +
       '.sf-post__textpanel{max-width:min(94%,34em);padding:14px 13px;border-radius:16px;background:rgba(8,7,5,.68);border:1px solid rgba(239,215,142,.16);box-shadow:0 6px 20px rgba(0,0,0,.28)}' +
       '.sf-post__img{width:100%;max-height:min(72vh,520px);object-fit:cover;display:block;aspect-ratio:4/5;background:#1a1814}' +
@@ -1034,11 +1039,13 @@
   function brandStripHtml() {
     return (
       '<div class="sf-scene-brand" aria-hidden="true">' +
+        '<span class="sf-brand-tagline">' + esc(BRAND.tagline) + '</span>' +
         '<div class="sf-scene-brand-row">' +
           '<span class="sf-brand-chip">' + brandIconSvg('instagram') + esc(BRAND.instagram) + '</span>' +
           '<span class="sf-brand-chip">' + brandIconSvg('telegram') + esc(BRAND.telegram) + '</span>' +
         '</div>' +
         '<span class="sf-brand-site">' + brandIconSvg('web') + esc(BRAND.site) + '</span>' +
+        '<span class="sf-brand-signature">' + esc(BRAND.signature) + '</span>' +
       '</div>'
     );
   }
