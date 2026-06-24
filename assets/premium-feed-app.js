@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV18';
-  var FONTS_ID = 'darPremiumFeedFontsV18';
+  var STYLES_ID = 'darPremiumFeedStylesV19';
+  var FONTS_ID = 'darPremiumFeedFontsV19';
   var APP_LOGO = '/watermark-my-logo-full.png';
   var SCENE_WATERMARK = '/watermark-my-logo-full.png';
   var BRAND = {
@@ -40,6 +40,43 @@
     knowledge: ['1542816417-0983c9c9ad53', '1631432526080-5abd83dafc8a', '1519741497674-611481863552',
       '1578662996442-48f60103fc96', '1512632578888-169bbbc64f33'].concat(BG_VERIFIED.nature),
     default: BG_VERIFIED.islamic.concat(BG_VERIFIED.nature)
+  };
+  var DUA_READABLE_FONTS = [
+    { css: '"Source Serif 4", Georgia, serif' },
+    { css: '"EB Garamond", Georgia, serif' },
+    { css: '"Lora", Georgia, serif' },
+    { css: '"Merriweather", Georgia, serif' },
+    { css: '"Libre Baskerville", Georgia, serif' },
+    { css: '"Crimson Pro", Georgia, serif' },
+    { css: '"Spectral", Georgia, serif' },
+    { css: '"Raleway", sans-serif' },
+    { css: '"Inter", sans-serif' },
+    { css: '"Amiri", serif' },
+    { css: '"Cormorant Garamond", serif' },
+    { css: '"Playfair Display", serif' },
+    { css: '"Montserrat", sans-serif' }
+  ];
+  var DUA_STYLISH_FONTS = [
+    { css: '"Allura", cursive' },
+    { css: '"Dancing Script", cursive' },
+    { css: '"Great Vibes", cursive' },
+    { css: '"Pinyon Script", cursive' },
+    { css: '"Sacramento", cursive' },
+    { css: '"Italianno", cursive' },
+    { css: '"Parisienne", cursive' },
+    { css: '"Tangerine", cursive' },
+    { css: '"Cormorant Garamond", serif', extra: 'font-style:italic' },
+    { css: '"Playfair Display", serif', extra: 'font-style:italic' },
+    { css: '"EB Garamond", serif', extra: 'font-style:italic;font-weight:600' },
+    { css: '"Crimson Pro", serif', extra: 'font-style:italic' },
+    { css: '"Spectral", serif', extra: 'font-style:italic' },
+    { css: '"Libre Baskerville", serif', extra: 'font-style:italic' },
+    { css: '"Amiri", serif', extra: 'font-style:italic' }
+  ];
+  var DUA_SACRED_TERMS = {
+    allah: 1, allāh: 1, herr: 1, gott: 1, paradies: 1, jannah: 1, vergebung: 1,
+    reue: 1, rizq: 1, geduld: 1, barmherzigkeit: 1, gnade: 1, frieden: 1,
+    schutz: 1, leitung: 1, führung: 1, wissen: 1, bedürftig: 1, beduerftig: 1
   };
   var FEED_FONTS = [
     { id: 'amiri', css: '"Amiri", serif', size: 'clamp(17px,4.1vw,21px)' },
@@ -266,9 +303,77 @@
     return fontStyleFor(item).align;
   }
 
+  function duaTypographyFor(item) {
+    var uid = String(item && item.uid || '');
+    var trIdx = hashNum(uid + '|dua-tr') % DUA_READABLE_FONTS.length;
+    var deIdx = hashNum(uid + '|dua-de') % DUA_STYLISH_FONTS.length;
+    var emIdx = hashNum(uid + '|dua-em') % DUA_STYLISH_FONTS.length;
+    if (emIdx === deIdx) emIdx = (emIdx + 1) % DUA_STYLISH_FONTS.length;
+    var tr = DUA_READABLE_FONTS[trIdx];
+    var de = DUA_STYLISH_FONTS[deIdx];
+    var em = DUA_STYLISH_FONTS[emIdx];
+    return {
+      trStyle: 'font-family:' + tr.css + ';font-style:normal;font-weight:500;',
+      deStyle: 'font-family:' + de.css + ';' + (de.extra || ''),
+      emStyle: 'font-family:' + em.css + ';' + (em.extra || '')
+    };
+  }
+
+  function pickDuaEmphasisSet(words, uid) {
+    var candidates = [];
+    var stop = {
+      der: 1, die: 1, das: 1, den: 1, dem: 1, des: 1, ein: 1, eine: 1, und: 1,
+      ich: 1, du: 1, mir: 1, mich: 1, dir: 1, dich: 1, in: 1, im: 1, an: 1, auf: 1,
+      aus: 1, von: 1, zu: 1, mit: 1, für: 1, ist: 1, sind: 1, war: 1, bin: 1, bist: 1,
+      hat: 1, haben: 1, sein: 1, mein: 1, meine: 1, dein: 1, deine: 1, wir: 1, uns: 1,
+      nicht: 1, aber: 1, oder: 1, als: 1, auch: 1, nur: 1, noch: 1, so: 1, sehr: 1,
+      bei: 1, nach: 1, über: 1, unter: 1, was: 1, wer: 1, wie: 1, wenn: 1, dass: 1,
+      es: 1, er: 1, sie: 1, es: 1, an: 1, um: 1, am: 1, zum: 1, zur: 1, vom: 1, ans: 1
+    };
+    words.forEach(function (w, i) {
+      var bare = w.replace(/[^\wäöüÄÖÜß]/gi, '');
+      if (bare.length < 4) return;
+      var low = bare.toLowerCase();
+      if (stop[low]) return;
+      var score = bare.length + (DUA_SACRED_TERMS[low] ? 24 : 0);
+      candidates.push({ i: i, score: score });
+    });
+    candidates.sort(function (a, b) { return b.score - a.score; });
+    var count = Math.min(4, Math.max(1, Math.floor(words.length / 7) + 1));
+    var picked = {};
+    var seed = hashNum(uid + '|emph');
+    for (var j = 0; j < count && j < candidates.length; j++) {
+      var c = candidates[(seed + j * 5) % candidates.length];
+      picked[c.i] = true;
+    }
+    return picked;
+  }
+
+  function formatDuaGerman(text, uid, typo) {
+    if (!text) return '';
+    var words = String(text).split(/\s+/).filter(Boolean);
+    var emph = pickDuaEmphasisSet(words, uid);
+    var tokens = String(text).split(/(\s+)/);
+    var wIdx = 0;
+    var out = '';
+    for (var i = 0; i < tokens.length; i++) {
+      var t = tokens[i];
+      if (/^\s+$/.test(t)) { out += t; continue; }
+      var m = t.match(/^([^\wäöüÄÖÜß]*)([\wäöüÄÖÜß]+)([^\wäöüÄÖÜß]*)$/i);
+      if (!m) { out += esc(t); wIdx++; continue; }
+      if (emph[wIdx]) {
+        out += esc(m[1]) + '<span class="sf-dua-em" style="' + typo.emStyle + '">' + esc(m[2]) + '</span>' + esc(m[3]);
+      } else {
+        out += esc(t);
+      }
+      wIdx++;
+    }
+    return out;
+  }
+
   function panelStyleFor(item, text, alignOverride) {
     if (item && item.type === 'dua') {
-      return 'font-family:"EB Garamond",Georgia,serif;color:#fff9e8;text-align:center;';
+      return 'color:#fff9e8;text-align:center;';
     }
     var fs = fontStyleFor(item);
     var align = alignOverride || layoutAlignFor(item, String(text || '').length);
@@ -522,12 +627,15 @@
     }
     var scenes = (host.querySelectorAll ? host.querySelectorAll('.sf-post__scene') : []);
     Array.prototype.forEach.call(scenes, function (scene) {
+      var isDua = scene.getAttribute('data-sf-dua') === '1';
+      var padSide = isDua ? Math.max(4, Math.round(sidePad * 0.45)) : sidePad;
+      var padTop = isDua ? Math.max(4, Math.round(topPad * 0.55)) : topPad;
       scene.style.width = '100%';
       scene.style.height = h + 'px';
       scene.style.minHeight = h + 'px';
       scene.style.maxHeight = h + 'px';
       scene.style.aspectRatio = 'auto';
-      scene.style.padding = topPad + 'px ' + sidePad + 'px ' + footerH + 'px';
+      scene.style.padding = padTop + 'px ' + padSide + 'px ' + footerH + 'px';
     });
   }
 
@@ -566,8 +674,9 @@
       var cs = global.getComputedStyle(scene);
       var footerReserve = parseFloat(cs.paddingBottom) || 50;
       var topReserve = parseFloat(cs.paddingTop) || 10;
-      var inset = Math.max(10, Math.round(scene.clientWidth * 0.034));
-      var safeGap = Math.max(6, Math.round(scene.clientWidth * 0.018));
+      var isDuaPanel = panel.classList.contains('sf-post__textpanel--dua');
+      var inset = isDuaPanel ? Math.max(3, Math.round(scene.clientWidth * 0.01)) : Math.max(10, Math.round(scene.clientWidth * 0.034));
+      var safeGap = isDuaPanel ? 2 : Math.max(6, Math.round(scene.clientWidth * 0.018));
       var maxPanelW = Math.max(150, scene.clientWidth - inset * 2 - safeGap * 2);
       var maxPanelH = Math.max(68, scene.clientHeight - footerReserve - topReserve - inset * 2 - safeGap * 2);
 
@@ -1166,7 +1275,15 @@
       'Montserrat:wght@400;500;600;700',
       'Cinzel:wght@400;500;600;700',
       'Noto+Naskh+Arabic:wght@400;500;600;700',
-      'Allura'
+      'Allura',
+      'Dancing+Script',
+      'Great+Vibes',
+      'Pinyon+Script',
+      'Sacramento',
+      'Italianno',
+      'Parisienne',
+      'Tangerine',
+      'Inter:wght@400;500;600'
     ];
     var link = document.createElement('link');
     link.id = FONTS_ID;
@@ -1232,8 +1349,11 @@
       '.sf-quote-scholar{margin-top:10px;font-size:var(--sf-scholar-size,11px);line-height:1.42;opacity:.88;font-weight:700;color:rgba(239,215,142,.92)}' +
       '.sf-post__dua{margin:0;padding:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;text-align:center}' +
       '.sf-post__dua-ar{direction:rtl;font-family:"Noto Naskh Arabic",serif;font-size:var(--sf-ar-size,22px);line-height:1.55;margin:0;width:100%;text-align:center;text-shadow:none}' +
-      '.sf-post__dua-tr{font-family:"Allura","Brush Script MT",cursive;font-size:var(--sf-tr-size,15px);line-height:1.38;color:rgba(222,192,120,.94);width:100%;text-align:center;text-shadow:none}' +
-      '.sf-post__dua-de{font-family:"EB Garamond",Georgia,serif;font-size:var(--sf-main-size,15px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none;color:#fff9e8}' +
+      '.sf-post__dua-tr{font-size:var(--sf-tr-size,15px);line-height:1.5;letter-spacing:.015em;color:rgba(241,217,143,.94);width:100%;text-align:center;text-shadow:none;font-style:normal;font-weight:500}' +
+      '.sf-post__dua-de{font-size:var(--sf-main-size,15px);line-height:1.48;margin:0;width:100%;text-align:center;text-shadow:none;color:#fff9e8}' +
+      '.sf-dua-em{text-decoration:underline;text-decoration-color:rgba(239,215,142,.78);text-underline-offset:4px;text-decoration-thickness:1px;color:rgba(240,217,143,.98);font-weight:400}' +
+      '.sf-post__textpanel--dua{max-width:100%!important;width:100%;border-radius:clamp(8px,2vw,12px)}' +
+      '.sf-post__scene-inner--full{padding:3px 4px!important;width:100%;max-width:100%}' +
       '.sf-dua-source{margin-top:8px;padding-top:8px;border-top:1px solid rgba(239,215,142,.1);font-size:var(--sf-src-size,10px);line-height:1.45;font-style:italic;opacity:.88;color:rgba(248,239,212,.88);width:100%;text-align:center}' +
       '.sf-post__actions{display:flex;align-items:center;padding:8px 12px 10px;gap:8px}' +
       '.sf-actions-left{display:flex;align-items:center;gap:4px;flex:1}' +
@@ -1314,7 +1434,8 @@
     return html;
   }
 
-  function sceneBlock(item, inner, style, textForSize, typeSizes) {
+  function sceneBlock(item, inner, style, textForSize, typeSizes, opts) {
+    opts = opts || {};
     var bg = item.image || islamicBgFor(item);
     var fs = style || fontStyleFor(item);
     var fallbacks = allBgFallbacks(item).join('|');
@@ -1324,13 +1445,16 @@
     var align = layoutAlignFor(item, mainText.length);
     var panelStyle = panelStyleFor(item, mainText, align) + typeVarsStyle(sizes);
     var innerStyle = 'justify-content:center;align-items:center';
+    var innerClass = 'sf-post__scene-inner' + (opts.innerExtra ? ' ' + opts.innerExtra : '');
+    var panelClass = 'sf-post__textpanel' + (opts.panelExtra ? ' ' + opts.panelExtra : '');
+    var sceneExtra = opts.isDua ? ' data-sf-dua="1"' : '';
     return (
-      '<div class="sf-post__scene">' +
+      '<div class="sf-post__scene"' + sceneExtra + '>' +
         '<img class="sf-post__bg" src="' + esc(bg) + '" alt="" decoding="async" loading="eager" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0">' +
         '<div class="sf-post__scene-shade"></div>' +
         sceneWatermarkHtml() +
-        '<div class="sf-post__scene-inner" style="' + innerStyle + '">' +
-          '<div class="sf-post__textpanel" style="' + panelStyle + '">' + inner + '</div>' +
+        '<div class="' + innerClass + '" style="' + innerStyle + '">' +
+          '<div class="' + panelClass + '" style="' + panelStyle + '">' + inner + '</div>' +
         '</div>' +
         brandStripHtml() +
       '</div>'
@@ -1363,17 +1487,19 @@
     var fs = fontStyleFor(item);
     if (item.type === 'dua') {
       var dua = resolveDuaFields(item);
+      var typo = duaTypographyFor(item);
       var duaSizes = computeTypeSizes(item, dua.ar, dua.de, dua.tr, false, true);
       return sceneBlock(item,
         '<div class="sf-post__dua">' +
           (dua.ar ? '<div class="sf-post__dua-ar">' + esc(dua.ar) + '</div>' : '') +
-          (dua.tr ? '<div class="sf-post__dua-tr">' + esc(dua.tr) + '</div>' : '') +
-          (dua.de ? '<div class="sf-post__dua-de">' + esc(dua.de) + '</div>' : '') +
+          (dua.tr ? '<div class="sf-post__dua-tr" style="' + typo.trStyle + '">' + esc(dua.tr) + '</div>' : '') +
+          (dua.de ? '<div class="sf-post__dua-de" style="' + typo.deStyle + '">' + formatDuaGerman(dua.de, item.uid, typo) + '</div>' : '') +
           '<div class="sf-dua-source">' + esc(dua.sourceLabel) + '</div>' +
         '</div>',
         null,
         dua.ar + dua.tr + dua.de,
-        duaSizes
+        duaSizes,
+        { panelExtra: 'sf-post__textpanel--dua', innerExtra: 'sf-post__scene-inner--full', isDua: true }
       );
     }
     var bundle = feedOverlayBundle(item);
