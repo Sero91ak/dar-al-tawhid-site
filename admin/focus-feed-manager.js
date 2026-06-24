@@ -302,6 +302,7 @@
           <button class="btn" id="feedRefreshBtn" type="button"${feedLoading ? " disabled" : ""}>${feedLoading ? "Lädt…" : "Aktualisieren"}</button>
         </div>
         ${feedError ? `<div class="notice-note" style="color:#ffc9c3">${esc(feedError)}</div>` : ""}
+        <div class="notice-note wide" style="grid-column:1/-1;margin-bottom:10px">Automatisch im Premium-Feed: neue Beiträge, News, Duʿāʾ, Qurʾān, Archiv-Mix (täglicher Seed). Manuelle Karten haben Vorrang.</div>
         ${renderForm()}
       </div>
       <div class="panel news-panel">
