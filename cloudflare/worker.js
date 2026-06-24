@@ -52,6 +52,12 @@ import {
   buildPublicFeedResponse
 } from "./focus-feed-admin.js";
 import {
+  readFeedBackgroundsIndex,
+  saveFeedBackgroundEntry,
+  deleteFeedBackgroundEntry,
+  buildPublicFeedBackgroundsResponse
+} from "./feed-backgrounds-admin.js";
+import {
   getPublicZakatPrices,
   getAdminZakatPriceStatus,
   fetchAndStoreZakatPrices,
@@ -381,6 +387,44 @@ export default {
         const input = await request.json().catch(() => ({}));
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         return json(await reorderFeedItems(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/feed-backgrounds" && request.method === "GET") {
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index, path } = await readFeedBackgroundsIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({ ...buildPublicFeedBackgroundsResponse(index), path, staging }, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/feed-backgrounds" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index, sha, path } = await readFeedBackgroundsIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({
+          ok: true,
+          index,
+          sha,
+          path,
+          staging,
+          count: (index.items || []).length,
+          approved: (index.items || []).filter((x) => x.approved && x.status === "active").length
+        }, cors);
+      }
+
+      if (url.pathname === "/api/admin/feed-backgrounds/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await saveFeedBackgroundEntry(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/feed-backgrounds/delete" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await deleteFeedBackgroundEntry(env, input, helpers), cors);
       }
 
       if (url.pathname === "/api/admin/zakat/prices/status" && request.method === "GET") {

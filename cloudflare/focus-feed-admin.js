@@ -57,9 +57,16 @@ function normalizeFeedItem(raw, nowIso) {
     createdAt: String(raw?.createdAt || now).trim(),
     updatedAt: String(raw?.updatedAt || now).trim(),
     order: Number.isFinite(Number(raw?.order)) ? Number(raw.order) : 0,
-    pinned: Boolean(raw?.pinned)
-  };
-}
+      pinned: Boolean(raw?.pinned),
+      bgType: String(raw?.bgType || "").trim(),
+      imageSafe: raw?.imageSafe !== false,
+      imageGradient: raw?.bgType === "gradient" || raw?.imageGradient === true,
+      backgroundId: String(raw?.backgroundId || "").trim(),
+      backgroundMode: String(raw?.backgroundMode || (raw?.bgType === "gradient" ? "gradient" : "auto")).trim(),
+      backgroundSafe: raw?.backgroundSafe !== false,
+      topic: String(raw?.topic || "").trim()
+    };
+  }
 
 function isFeedPublic(item, nowMs) {
   if (!item || item.status !== "live") return false;

@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV27';
-  var FONTS_ID = 'darPremiumFeedFontsV27';
+  var STYLES_ID = 'darPremiumFeedStylesV28';
+  var FONTS_ID = 'darPremiumFeedFontsV28';
   var FEED_SHELL_PAD = 14;
   var FEED_CARD_GAP = 20;
   var FEED_CARD_RADIUS = 26;
@@ -19,29 +19,24 @@
     telegram: '@dar_al_tauhid',
     signature: 'by Serhat Abu Malik'
   };
-  var UNSAFE_UNSPLASH_IDS = {
-    '1578662996442-48f60103fc96': 1,
-    '1519741497674-611481863552': 1,
-    '1558618666-fcd25c85cd64': 1,
-    '1540959733332-eab4deabeeaf': 1,
-    '1600814832809-579119f47045': 1,
-    '1590075865003-e48277faa558': 1,
-    '1553755088-ef1973c7b4a1': 1
+  var FEED_BG_POOL = [];
+  var FEED_BG_CACHE_VER = 0;
+  var FEED_BG_PREFS = {
+    quran: { categories: ['quran', 'nature', 'abstract'], tags: ['himmel', 'licht', 'berge', 'wolken', 'mushaf', 'kalligraphie', 'quran'] },
+    dua: { categories: ['dua', 'nature', 'abstract'], tags: ['himmel', 'regen', 'wolken', 'nebel', 'ruhe', 'pflanzen', 'dua'] },
+    tawhid: { categories: ['tawhid', 'aqidah', 'nature', 'mosque', 'abstract'], tags: ['berge', 'wüste', 'himmel', 'stark', 'klarheit', 'tawhid', 'aqidah'] },
+    knowledge: { categories: ['knowledge', 'books', 'abstract'], tags: ['bücher', 'pergament', 'feder', 'tinte', 'ilm', 'hadith', 'sunnah', 'adab'] },
+    akhirah: { categories: ['nature', 'abstract', 'dua', 'akhirah'], tags: ['nebel', 'abend', 'ruhe', 'wüste', 'berge', 'akhirah', 'zuhd', 'tazkiyah', 'sabr'] },
+    default: { categories: ['abstract', 'nature', 'gradients'], tags: [] }
   };
-  var BG_VERIFIED = {
-    islamic: [
-      '1512632578888-169bbbc64f33', '1542816417-0983c9c9ad53', '1519817650390-64a93db51149',
-      '1519818187420-8e49de7adeef', '1513072064285-240f87fa81e8', '1596163177973-aa0e47c735dc',
-      '1580418827493-f2b22c0a76cb', '1574246604907-db69e30ddb97', '1590273089302-ebbc53986b6e',
-      '1631432526080-5abd83dafc8a', '1587617425953-9075d28b8c46', '1537181534458-45dcee76ae90'
-    ],
-    nature: [
-      '1506905925346-21bda4d32df4', '1469474968028-56623f02e42e', '1470071459604-3b5ec3a7fe05',
-      '1439066615861-d1af74d74000', '1501785888041-af3ef285b470', '1519682337058-a94d519337bc',
-      '1441974231531-c6227db76b6e', '1472214103451-9374bd1c798e', '1518837695005-2083093ee35b',
-      '1507525428034-b723cf961d3e', '1465146633011-14f8e0781093'
-    ]
+  var THEME_OVERLAYS = {
+    dark: 'linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.62) 100%)',
+    light: 'linear-gradient(180deg,rgba(255,248,235,.20) 0%,rgba(255,248,235,.60) 100%)',
+    soft: 'linear-gradient(180deg,rgba(255,248,241,.22) 0%,rgba(80,48,60,.48) 100%)',
+    royal: 'linear-gradient(180deg,rgba(7,17,29,.18) 0%,rgba(7,17,29,.72) 100%)',
+    bordeaux: 'linear-gradient(180deg,rgba(74,31,36,.18) 0%,rgba(20,11,12,.72) 100%)'
   };
+  var H2C_URL = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
   var GRADIENT_BGS = {
     dark: [
       'radial-gradient(circle at 18% 14%,rgba(239,215,142,.14),transparent 38%),linear-gradient(165deg,#1a150f 0%,#0a0908 52%,#080806 100%)',
@@ -68,12 +63,6 @@
       'radial-gradient(circle at 82% 18%,rgba(120,42,50,.18),transparent 40%),linear-gradient(180deg,#4A1F24 0%,#321317 55%,#140B0C 100%)',
       'radial-gradient(circle at 50% 88%,rgba(91,35,42,.16),transparent 46%),linear-gradient(200deg,#5B232A,#321317,#140B0C)'
     ]
-  };
-  var ISLAMIC_BG = {
-    dua: BG_VERIFIED.nature.slice(0, 4),
-    quran: BG_VERIFIED.islamic.slice(0, 6).concat(BG_VERIFIED.nature.slice(0, 3)),
-    knowledge: BG_VERIFIED.islamic.slice(0, 8).concat(BG_VERIFIED.nature),
-    default: BG_VERIFIED.islamic.concat(BG_VERIFIED.nature)
   };
   var DUA_READABLE_FONTS = [
     { css: '"Source Serif 4", Georgia, serif' },
@@ -135,8 +124,6 @@
   var BATCH = 10;
   var INITIAL = 12;
 
-  var CUSTOM_BG = [];
-  var H2C_URL = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
 
   var state = {
     allItems: [],
@@ -176,60 +163,185 @@
     return item.category ? item.category + ' · ' + kind : kind;
   }
 
-  function unsplashUrl(pid) {
-    return 'https://images.unsplash.com/photo-' + pid + '?auto=format&fit=crop&w=3840&q=85';
+  function itemBackgroundMode(item) {
+    var mode = String(item && item.backgroundMode || '').toLowerCase();
+    if (mode === 'manual' || mode === 'auto' || mode === 'gradient' || mode === 'none') return mode;
+    if (itemBgIsGradient(item) || item && item.bgType === 'gradient') return 'gradient';
+    return 'auto';
   }
 
-  function filterSafeUnsplashIds(ids) {
-    return (ids || []).filter(function (pid) {
-      return pid && !UNSAFE_UNSPLASH_IDS[pid];
+  function isFeedBgSafe(bg) {
+    if (!bg || !bg.src) return false;
+    if (bg.status !== 'active' || bg.active === false) return false;
+    if (!bg.approved || bg.securityStatus !== 'approved') return false;
+    if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
+    var allowed = bg.allowedFor || ['feed'];
+    if (typeof allowed === 'string') allowed = allowed.split(/[,;|]+/);
+    return allowed.indexOf('feed') >= 0;
+  }
+
+  function findFeedBgById(id) {
+    if (!id) return null;
+    for (var i = 0; i < FEED_BG_POOL.length; i++) {
+      if (String(FEED_BG_POOL[i].id) === String(id)) return FEED_BG_POOL[i];
+    }
+    return null;
+  }
+
+  function bgImageUrl(bg, mobile) {
+    if (!bg) return '';
+    var u = mobile ? (bg.srcMobile || bg.thumbnail || bg.src) : (bg.src || bg.srcMobile || bg.thumbnail);
+    return String(u || '').trim();
+  }
+
+  function overlayForTheme(theme, hint) {
+    if (hint === 'light') return THEME_OVERLAYS.light;
+    if (hint === 'royal') return THEME_OVERLAYS.royal;
+    if (hint === 'bordeaux') return THEME_OVERLAYS.bordeaux;
+    if (hint === 'warm-dark') return 'linear-gradient(180deg,rgba(42,30,18,.18) 0%,rgba(12,8,6,.68) 100%)';
+    if (theme === 'light') return THEME_OVERLAYS.light;
+    if (theme === 'soft') return THEME_OVERLAYS.soft;
+    if (theme === 'royal') return THEME_OVERLAYS.royal;
+    if (theme === 'bordeaux') return THEME_OVERLAYS.bordeaux;
+    return THEME_OVERLAYS.dark;
+  }
+
+  function itemBgPreferences(item) {
+    var type = String(item && item.type || '').toLowerCase();
+    var cat = String(item && item.category || '').toLowerCase();
+    var topic = String(item && item.topic || item.duaCat || '').toLowerCase();
+    var hay = (cat + ' ' + topic + ' ' + String(item && item.title || '') + ' ' + String(item && item.scholar || '')).toLowerCase();
+    if (type === 'quran' || cat.indexOf('qur') >= 0 || cat.indexOf('tafs') >= 0) return FEED_BG_PREFS.quran;
+    if (type === 'dua' || cat.indexOf('du') >= 0 || cat.indexOf('duʿ') >= 0) return FEED_BG_PREFS.dua;
+    if (cat.indexOf('taw') >= 0 || cat.indexOf('aqid') >= 0 || hay.indexOf('tawhid') >= 0 || hay.indexOf('tawḥ') >= 0) return FEED_BG_PREFS.tawhid;
+    if (cat.indexOf('wiss') >= 0 || cat.indexOf('adab') >= 0 || cat.indexOf('hadith') >= 0 || cat.indexOf('sunnah') >= 0 || cat.indexOf('athar') >= 0 || cat.indexOf('fiqh') >= 0 || hay.indexOf('ilm') >= 0) return FEED_BG_PREFS.knowledge;
+    if (cat.indexOf('akhir') >= 0 || hay.indexOf('zuhd') >= 0 || hay.indexOf('tazkiy') >= 0 || hay.indexOf('sabr') >= 0) return FEED_BG_PREFS.akhirah;
+    return FEED_BG_PREFS.default;
+  }
+
+  function scoreFeedBgCandidate(bg, prefs, item) {
+    var score = Number(bg.priority || 0) * 10;
+    var i;
+    if (prefs.categories.indexOf(bg.category) >= 0) score += 40 - prefs.categories.indexOf(bg.category) * 5;
+    var tags = bg.tags || [];
+    var topics = bg.topics || [];
+    for (i = 0; i < prefs.tags.length; i++) {
+      if (tags.indexOf(prefs.tags[i]) >= 0) score += 8;
+      if (topics.indexOf(prefs.tags[i]) >= 0) score += 6;
+    }
+    var cat = String(item && item.category || '').toLowerCase();
+    if (tags.indexOf(cat) >= 0 || topics.indexOf(cat) >= 0) score += 12;
+    return score;
+  }
+
+  function selectFeedBackground(item, theme) {
+    theme = theme || getThemeKey();
+    var mode = itemBackgroundMode(item);
+    if (mode === 'gradient' || mode === 'none') {
+      return { kind: 'gradient', value: gradientStyleFor(item), reason: 'mode-gradient' };
+    }
+    if (mode === 'manual' && item && item.backgroundId) {
+      var manual = findFeedBgById(item.backgroundId);
+      if (isFeedBgSafe(manual)) {
+        return bgToScene(manual, item, theme, 'manual');
+      }
+    }
+    if (mode === 'auto' || mode === 'manual') {
+      var prefs = itemBgPreferences(item);
+      var candidates = FEED_BG_POOL.filter(isFeedBgSafe);
+      var scored = candidates.map(function (bg) {
+        return { bg: bg, score: scoreFeedBgCandidate(bg, prefs, item) };
+      }).filter(function (row) { return row.score > 0; });
+      if (!scored.length) {
+        scored = candidates.map(function (bg) {
+          return { bg: bg, score: Number(bg.priority || 0) };
+        });
+      }
+      scored.sort(function (a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        return String(a.bg.id).localeCompare(String(b.bg.id));
+      });
+      if (scored.length) {
+        var seed = String(item && item.uid || item && item.id || '') + '|' + String(item && item.category || '') + '|bg';
+        var pick = scored[hashNum(seed) % scored.length].bg;
+        return bgToScene(pick, item, theme, 'auto');
+      }
+    }
+    return { kind: 'gradient', value: gradientStyleFor(item), reason: 'fallback-no-match' };
+  }
+
+  function bgToScene(bg, item, theme, reason) {
+    var mobile = false;
+    try { mobile = global.innerWidth > 0 && global.innerWidth <= 700; } catch (e) {}
+    var url = bgImageUrl(bg, mobile);
+    var fp = bg.focusPoint || { x: 50, y: 50 };
+    return {
+      kind: 'image',
+      value: url,
+      bgId: bg.id,
+      overlay: overlayForTheme(theme, bg.overlayHint),
+      focusX: fp.x,
+      focusY: fp.y,
+      alt: bg.alt || bg.title || '',
+      reason: reason || 'auto'
+    };
+  }
+
+  function fetchFeedBackgrounds() {
+    var staging = isStaging();
+    var jsonPath = staging ? '/content/staging/feed-backgrounds/feed-backgrounds.json' : '/content/feed-backgrounds/feed-backgrounds.json';
+    var apiPath = '/api/feed-backgrounds?staging=' + (staging ? '1' : '0');
+    function loadJson(path) {
+      return fetch(path + '?v=' + encodeURIComponent(String(FEED_BG_CACHE_VER || todayKey())), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    }
+    return loadJson(apiPath).then(function (data) {
+      if (data && data.items) return data;
+      return loadJson(jsonPath);
+    }).then(function (data) {
+      FEED_BG_CACHE_VER = Number(data && data.cacheVersion) || 1;
+      FEED_BG_POOL = (data && data.items || []).filter(function (it) {
+        return it && it.src;
+      }).map(function (it) {
+        return {
+          id: it.id,
+          title: it.title,
+          category: it.category,
+          tags: it.tags || [],
+          topics: it.topics || [],
+          allowedFor: it.allowedFor || ['feed'],
+          src: it.src,
+          srcMobile: it.srcMobile,
+          thumbnail: it.thumbnail,
+          alt: it.alt,
+          priority: it.priority,
+          active: it.active !== false && it.status === 'active',
+          approved: it.approved === true,
+          status: it.status || 'draft',
+          securityStatus: it.securityStatus || 'unchecked',
+          containsHumans: !!it.containsHumans,
+          containsAnimals: !!it.containsAnimals,
+          containsFaces: !!it.containsFaces,
+          overlayHint: it.overlayHint || 'dark',
+          focusPoint: it.focusPoint || { x: 50, y: 50 }
+        };
+      });
     });
   }
 
-  function isSacredFeedItem(item) {
-    if (!item) return false;
-    var type = String(item.type || '').toLowerCase();
-    if (type === 'dua' || type === 'quran') return true;
-    var cat = String(item.category || '').toLowerCase();
-    return cat.indexOf('du') >= 0 || cat.indexOf('duʿ') >= 0 || cat.indexOf('qur') >= 0;
-  }
-
-  function explicitScenePhotoBg(item) {
-    var bgType = String(item && item.bgType || '').toLowerCase();
-    return bgType === 'nature' || bgType === 'mosque' || bgType === 'pattern' || bgType === 'books';
-  }
-
-  function manualSceneImage(item) {
-    if (!item || !item.manual || !item.image || !itemImageAllowed(item)) return '';
-    if (itemBgIsGradient(item)) return '';
-    return String(item.image);
-  }
-
-  function autoPostSceneImage(item) {
-    if (!item || item.manual || !item.image || !itemImageAllowed(item)) return '';
-    if (item.imageSafe !== true) return '';
-    return String(item.image);
-  }
-
-  function fetchCustomBackgrounds() {
-    var staging = isStaging();
-    var path = staging ? '/content/staging/feed-backgrounds/backgrounds-index.json' : '/content/feed-backgrounds/backgrounds-index.json';
-    return fetch(path + '?v=' + encodeURIComponent(todayKey()), { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : { items: [] }; })
-      .catch(function () { return { items: [] }; })
-      .then(function (data) {
-        CUSTOM_BG = (data && data.items || []).filter(function (it) {
-          if (!it || !(it.url || it.src)) return false;
-          if (it.imageSafe === false || it.safe === false) return false;
-          return true;
-        }).map(function (it) {
-          var u = String(it.url || it.src || '').trim();
-          if (u.indexOf('/') === 0) {
-            try { u = new URL(u, global.location.origin).href; } catch (e) {}
-          }
-          return u;
-        }).filter(Boolean);
-      });
+  function preloadFeedImages(items, limit) {
+    var n = limit || 3;
+    var urls = [];
+    items.slice(0, n).forEach(function (item) {
+      var bg = selectFeedBackground(item, getThemeKey());
+      if (bg.kind === 'image' && bg.value && urls.indexOf(bg.value) < 0) urls.push(bg.value);
+    });
+    urls.forEach(function (u) {
+      var img = new Image();
+      img.decoding = 'async';
+      img.src = u;
+    });
   }
 
   function getThemeKey() {
@@ -270,65 +382,25 @@
   }
 
   function resolveSceneBg(item) {
-    if (itemBgIsGradient(item)) {
-      return { kind: 'gradient', value: gradientStyleFor(item) };
-    }
-    if (isSacredFeedItem(item) && !explicitScenePhotoBg(item)) {
-      return { kind: 'gradient', value: gradientStyleFor(item) };
-    }
-    var manualImg = manualSceneImage(item);
-    if (manualImg) return { kind: 'image', value: manualImg };
-    var postImg = autoPostSceneImage(item);
-    if (postImg) return { kind: 'image', value: postImg };
-    if (explicitScenePhotoBg(item)) {
-      var custom = customBgFor(item);
-      if (custom) return { kind: 'image', value: custom };
-      var unsplash = islamicBgFor(item);
-      if (unsplash) return { kind: 'image', value: unsplash };
-    }
-    return { kind: 'gradient', value: gradientStyleFor(item) };
-  }
-
-  function customBgFor(item) {
-    if (!CUSTOM_BG.length) return '';
-    var key = String(item && item.uid || '') + '|custom|' + todayKey();
-    return CUSTOM_BG[hashNum(key) % CUSTOM_BG.length];
+    return selectFeedBackground(item, getThemeKey());
   }
 
   function allBgFallbacks(item) {
-    if (isSacredFeedItem(item) && !explicitScenePhotoBg(item)) return [];
-    var primary = filterSafeUnsplashIds(islamicBgPoolFor(item) || ISLAMIC_BG.default);
-    var merged = primary.map(unsplashUrl);
-    filterSafeUnsplashIds(ISLAMIC_BG.default).forEach(function (pid) {
-      var u = unsplashUrl(pid);
-      if (merged.indexOf(u) < 0) merged.push(u);
+    var prefs = itemBgPreferences(item);
+    var urls = [];
+    FEED_BG_POOL.filter(isFeedBgSafe).forEach(function (bg) {
+      if (scoreFeedBgCandidate(bg, prefs, item) > 0) {
+        var u = bgImageUrl(bg, false);
+        if (u && urls.indexOf(u) < 0) urls.push(u);
+      }
     });
-    CUSTOM_BG.forEach(function (url) {
-      if (merged.indexOf(url) < 0) merged.unshift(url);
-    });
-    return merged;
-  }
-
-  function islamicBgPoolFor(item) {
-    var bgType = String(item && item.bgType || '').toLowerCase();
-    if (bgType === 'nature') return BG_VERIFIED.nature;
-    if (bgType === 'books') return BG_VERIFIED.islamic.slice(0, 8);
-    if (bgType === 'mosque' || bgType === 'pattern') return BG_VERIFIED.islamic;
-    var type = item && item.type || 'post';
-    var cat = String(item && item.category || '').toLowerCase();
-    if (type === 'dua' || cat.indexOf('du') >= 0 || cat.indexOf('duʿ') >= 0) return ISLAMIC_BG.dua;
-    if (type === 'quran' || cat.indexOf('qur') >= 0 || cat.indexOf('tafs') >= 0) return ISLAMIC_BG.quran;
-    if (cat.indexOf('aqid') >= 0 || cat.indexOf('athar') >= 0 || cat.indexOf('hadith') >= 0 || cat.indexOf('sunnah') >= 0 || cat.indexOf('fiqh') >= 0 || cat.indexOf('wiss') >= 0) return ISLAMIC_BG.knowledge;
-    return ISLAMIC_BG.default;
-  }
-
-  function islamicBgFor(item) {
-    var custom = customBgFor(item);
-    if (custom && explicitScenePhotoBg(item)) return custom;
-    var pool = filterSafeUnsplashIds(islamicBgPoolFor(item));
-    if (!pool || !pool.length) return custom || '';
-    var key = String(item && item.uid || '') + '|' + String(item && item.type || '') + '|' + todayKey();
-    return unsplashUrl(pool[hashNum(key) % pool.length]);
+    if (!urls.length) {
+      FEED_BG_POOL.filter(isFeedBgSafe).slice(0, 6).forEach(function (bg) {
+        var u2 = bgImageUrl(bg, false);
+        if (u2 && urls.indexOf(u2) < 0) urls.push(u2);
+      });
+    }
+    return urls;
   }
 
   function contentWeight(ar, main, extra) {
@@ -1090,6 +1162,10 @@
       imageGradient: raw.bgType === 'gradient' || raw.imageGradient === true,
       gradientFrom: raw.gradientFrom,
       gradientTo: raw.gradientTo,
+      backgroundId: raw.backgroundId || '',
+      backgroundMode: raw.backgroundMode || (raw.bgType === 'gradient' ? 'gradient' : 'auto'),
+      backgroundSafe: raw.backgroundSafe !== false,
+      topic: raw.topic || '',
       target: target,
       sort: typeof raw.order === 'number' ? raw.order - 1000 : -500,
       pinned: !!raw.pinned,
@@ -1598,13 +1674,18 @@
     );
   }
 
-  function sceneBgHtml(item, fallbacks) {
+  function sceneBgHtml(item, fallbacks, eager) {
     var bg = resolveSceneBg(item);
+    item._sceneBg = bg;
     if (bg.kind === 'gradient') {
       return '<div class="sf-post__bg sf-post__bg--grad" style="background:' + bg.value + '" aria-hidden="true"></div>';
     }
+    var loadMode = eager ? 'eager' : 'lazy';
+    var fpX = bg.focusX != null ? bg.focusX : 50;
+    var fpY = bg.focusY != null ? bg.focusY : 50;
     return (
-      '<img class="sf-post__bg" src="' + esc(bg.value) + '" alt="" decoding="async" loading="eager" ' +
+      '<img class="sf-post__bg" src="' + esc(bg.value) + '" alt="' + esc(bg.alt || '') + '" decoding="async" loading="' + loadMode + '" ' +
+      'style="object-position:' + fpX + '% ' + fpY + '%" ' +
       'data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0" ' +
       'data-sf-grad="' + esc(gradientStyleFor(item)) + '">'
     );
@@ -1628,6 +1709,11 @@
     opts = opts || {};
     var fs = style || fontStyleFor(item);
     var fallbacks = allBgFallbacks(item).join('|');
+    var bgPreview = resolveSceneBg(item);
+    var shadeStyle = bgPreview.overlay ? 'background:' + bgPreview.overlay : '';
+    var fpX = bgPreview.focusX != null ? bgPreview.focusX : 50;
+    var fpY = bgPreview.focusY != null ? bgPreview.focusY : 50;
+    var sceneStyle = '--sf-focus-x:' + fpX + '%;--sf-focus-y:' + fpY + '%';
     var mainText = textForSize || overlayTextFor(item) || '';
     var lines = sourceLinesFor(item);
     var sizes = typeSizes || computeTypeSizes(item, '', mainText, '', !!lines.scholar, !!lines.detail);
@@ -1637,10 +1723,11 @@
     var innerClass = 'sf-post__scene-inner' + (opts.innerExtra ? ' ' + opts.innerExtra : '');
     var panelClass = 'sf-post__textpanel' + (opts.panelExtra ? ' ' + opts.panelExtra : '');
     var sceneExtra = opts.isDua ? ' data-sf-dua="1"' : '';
+    var eager = !!opts.eagerBg;
     return (
-      '<div class="sf-post__scene"' + sceneExtra + '>' +
-        sceneBgHtml(item, fallbacks) +
-        '<div class="sf-post__scene-shade"></div>' +
+      '<div class="sf-post__scene"' + sceneExtra + ' style="' + sceneStyle + '">' +
+        sceneBgHtml(item, fallbacks, eager) +
+        '<div class="sf-post__scene-shade"' + (shadeStyle ? ' style="' + shadeStyle + '"' : '') + '></div>' +
         sceneBadgeHtml() +
         '<div class="' + innerClass + '" style="' + innerStyle + '">' +
           '<div class="' + panelClass + '" style="' + panelStyle + '">' + inner + '</div>' +
@@ -1704,7 +1791,8 @@
     });
   }
 
-  function mediaHtml(item) {
+  function mediaHtml(item, eager) {
+    var sceneOpts = { eagerBg: !!eager };
     if (item.image && item.imageSafe === true && itemImageAllowed(item) && (item.type === 'post' || item.type === 'archive' || item.type === 'custom')) {
       return (
         '<img class="sf-post__img" src="' + esc(item.image) + '" alt="" loading="lazy" decoding="async" ' +
@@ -1729,12 +1817,12 @@
         null,
         dua.ar + dua.tr + dua.de,
         duaSizes,
-        { panelExtra: 'sf-post__textpanel--dua', innerExtra: 'sf-post__scene-inner--full', isDua: true }
+        { panelExtra: 'sf-post__textpanel--dua', innerExtra: 'sf-post__scene-inner--full', isDua: true, eagerBg: !!eager }
       );
     }
     var bundle = feedOverlayBundle(item);
     var quote = bundle.text;
-    if (!quote) return sceneBlock(item, '', fs, '', null);
+    if (!quote) return sceneBlock(item, '', fs, '', null, sceneOpts);
     var srcLines = sourceLinesFor(item);
     var quoteSizes = computeTypeSizes(item, '', quote, '', !!srcLines.scholar, !!srcLines.detail);
     var qStyle = 'font-family:' + fs.css + ';color:' + fs.color + ';text-align:' + layoutAlignFor(item, quote.length);
@@ -1742,11 +1830,12 @@
       '<blockquote class="sf-post__quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + formatEmphasizedText(quote, item.uid, 'quote') + '</span>' + sourceHtml(item, fs) + '</blockquote>',
       fs,
       quote,
-      quoteSizes
+      quoteSizes,
+      sceneOpts
     );
   }
 
-  function cardHtml(item) {
+  function cardHtml(item, cardIdx) {
     var liked = isLiked(item.uid);
 
     return (
@@ -1757,7 +1846,7 @@
             '<span class="sf-user">' + esc(publisherLabel()) + '</span>' +
           '</div>' +
         '</header>' +
-        '<div class="sf-post__media">' + mediaHtml(item) + '</div>' +
+        '<div class="sf-post__media">' + mediaHtml(item, cardIdx < 3) + '</div>' +
         '<div class="sf-post__actions">' +
           '<div class="sf-actions-left">' +
             '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span>' + likeCountHtml(liked) + '</button>' +
@@ -2173,7 +2262,7 @@
       list.innerHTML = '<div class="sf-empty">Noch keine Beiträge im Feed. Sobald Inhalte geladen sind, erscheinen sie hier automatisch.</div>';
       return;
     }
-    list.innerHTML = state.visible.map(cardHtml).join('') +
+    list.innerHTML = state.visible.map(function (item, idx) { return cardHtml(item, idx); }).join('') +
       (state.done ? '' : '<div class="sf-loader" id="pfLoader">Weitere Beiträge laden…</div>');
     bindList(mount);
     bindSceneBackgrounds(mount);
@@ -2254,6 +2343,7 @@
     }
     appendBatch(true);
     renderListMount(mount);
+    preloadFeedImages(state.visible, 3);
   }
 
   function rebuild(force) {
@@ -2263,7 +2353,7 @@
       return;
     }
     state.seed = feedSeed();
-    fetchCustomBackgrounds().finally(function () {
+    fetchFeedBackgrounds().finally(function () {
       applyFeedData(mount, []);
       fetchManual().then(function (data) {
         var mount2 = document.getElementById(MOUNT_ID);
@@ -2291,6 +2381,8 @@
     rebuild: rebuild,
     refresh: refreshMix,
     destroy: destroy,
+    selectFeedBackground: selectFeedBackground,
+    getFeedBackgroundPool: function () { return FEED_BG_POOL.slice(); },
     onAppReady: function (opts) {
       rebuild(opts && opts.force);
     }

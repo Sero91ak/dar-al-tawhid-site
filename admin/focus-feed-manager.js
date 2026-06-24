@@ -44,13 +44,20 @@
   ];
 
   const BG_TYPES = [
-    ["", "Automatisch (sichere Auswahl)"],
+    ["", "Automatisch (kuratierter Pool)"],
     ["nature", "Natur"],
     ["books", "Bücher / Mushaf"],
     ["mosque", "Moschee / Ornament"],
     ["pattern", "Muster / Abstrakt"],
     ["gradient", "Gradient / ohne Bild"],
     ["image", "Bildbeitrag / URL"]
+  ];
+
+  const BACKGROUND_MODES = [
+    ["auto", "Automatisch auswählen"],
+    ["manual", "Manuell auswählen"],
+    ["gradient", "Nur Gradient"],
+    ["none", "Kein Bild"]
   ];
 
   const TARGETS = [
@@ -174,7 +181,11 @@
       expiresAt: "",
       status: "draft",
       pinned: false,
-      order: (feedIndex.items || []).length
+      order: (feedIndex.items || []).length,
+      backgroundMode: "auto",
+      backgroundId: "",
+      backgroundSafe: true,
+      topic: ""
     };
   }
 
@@ -217,6 +228,10 @@
       thumbnailUrl: formValue("feedThumbUrl", base.thumbnailUrl).trim(),
       bgType: formValue("feedBgType", base.bgType || ""),
       imageSafe: document.getElementById("feedImageSafe")?.checked !== false,
+      backgroundMode: formValue("feedBackgroundMode", base.backgroundMode || "auto"),
+      backgroundId: formValue("feedBackgroundId", base.backgroundId || "").trim(),
+      backgroundSafe: document.getElementById("feedBackgroundSafe")?.checked !== false,
+      topic: formValue("feedTopic", base.topic || "").trim(),
       gradientFrom: formValue("feedGradFrom", base.gradientFrom).trim(),
       gradientTo: formValue("feedGradTo", base.gradientTo).trim(),
       icon: formValue("feedIcon", base.icon).trim(),
@@ -241,6 +256,10 @@
     const item = editingItem() || defaultDraft();
     const startsVal = item.startsAt ? String(item.startsAt).slice(0, 16) : "";
     const expiresVal = item.expiresAt ? String(item.expiresAt).slice(0, 16) : "";
+    const approvedBgs = (global.DARFeedBgAdmin && typeof global.DARFeedBgAdmin.approvedForFeedSelect === "function")
+      ? global.DARFeedBgAdmin.approvedForFeedSelect()
+      : [];
+    const bgMode = item.backgroundMode || (item.bgType === "gradient" ? "gradient" : "auto");
     return `<div class="admin-form-grid news-form-grid">
       <input class="field" id="feedTitle" placeholder="Titel" value="${esc(item.title || "")}">
       <select class="field" id="feedCategory">${CATEGORIES.map((c) => `<option${c === (item.category || "Empfehlung") ? " selected" : ""}>${esc(c)}</option>`).join("")}</select>
@@ -264,10 +283,17 @@
       <textarea class="admin-textarea wide" id="feedPreview" placeholder="Kurztext / Vorschau">${esc(item.preview || "")}</textarea>
       <input class="field" id="feedScholar" placeholder="Gelehrter / Thema (optional)" value="${esc(item.scholar || "")}">
       <select class="field" id="feedBgType">${BG_TYPES.map(([v, l]) => `<option value="${esc(v)}"${v === (item.bgType || "") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
+      <select class="field" id="feedBackgroundMode">${BACKGROUND_MODES.map(([v, l]) => `<option value="${esc(v)}"${v === bgMode ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
+      <select class="field wide" id="feedBackgroundId">
+        <option value="">— Freigegebenes Bild wählen —</option>
+        ${approvedBgs.map((bg) => `<option value="${esc(bg.id)}"${bg.id === (item.backgroundId || "") ? " selected" : ""}>${esc(bg.title || bg.id)} (${esc(bg.category)})</option>`).join("")}
+      </select>
+      <input class="field" id="feedTopic" placeholder="Thema / Topic (optional, z. B. Wissen, Sabr)" value="${esc(item.topic || "")}">
       <input class="field wide" id="feedImageUrl" placeholder="Hintergrundbild-URL (optional, nur islamisch passend)" value="${esc(item.imageUrl || "")}">
       <input class="field wide" id="feedThumbUrl" placeholder="Thumbnail-URL (empfohlen, kleiner)" value="${esc(item.thumbnailUrl || "")}">
       <label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="feedImageSafe"${item.imageSafe !== false ? " checked" : ""}> Bild als sicher markieren (imageSafe)</label>
-      <div class="notice-note wide" style="grid-column:1/-1;font-size:12px;line-height:1.45">Bitte nur islamisch passende Bilder, Naturbilder oder neutrale Hintergründe verwenden. Keine Menschen- oder Tierbilder. Feed zeigt nur Bilder mit imageSafe=true live an.</div>
+      <label class="field" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="feedBackgroundSafe"${item.backgroundSafe !== false ? " checked" : ""}> Hintergrund als sicher (backgroundSafe)</label>
+      <div class="notice-note wide" style="grid-column:1/-1;font-size:12px;line-height:1.45">Hintergrundbilder kommen aus dem kuratierten Pool (Admin → Feed-Hintergründe). Keine externen URLs. Automatisch = passendes freigegebenes Bild. Nur freigegebene Bilder erscheinen live.</div>
       <input class="field" id="feedGradFrom" placeholder="Verlauf von (#hex)" value="${esc(item.gradientFrom || "#243628")}">
       <input class="field" id="feedGradTo" placeholder="Verlauf bis (#hex)" value="${esc(item.gradientTo || "#0a100c")}">
       <select class="field" id="feedTargetType">${TARGETS.map(([v, l]) => `<option value="${esc(v)}"${v === (item.targetType || "none") ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>

@@ -1,39 +1,40 @@
-# Feed-Hintergrundbilder (eigene Uploads)
+# Feed-Hintergrundbilder (kuratiert)
 
-Hier kannst du **eigene Hintergrundbilder** für den Premium-Feed ablegen.
+## Struktur
 
-## Ordner
+- **JSON-Index:** `content/staging/feed-backgrounds/feed-backgrounds.json` (Dar Test) · `content/feed-backgrounds/feed-backgrounds.json` (Live)
+- **Bilddateien:** `/assets/feed-backgrounds/{kategorie}/`
+  - Kategorien: `nature`, `quran`, `dua`, `knowledge`, `tawhid`, `aqidah`, `adab`, `akhirah`, `mosque`, `books`, `abstract`, `gradients`
 
-- `content/feed-backgrounds/` — Live (Besucher-App, erst nach Freigabe)
-- `content/staging/feed-backgrounds/` — Dar Test / Staging
+## Admin
 
-Lade Bilder in den jeweiligen Ordner hoch (z. B. `moschee-01.jpg`) und trage sie in `backgrounds-index.json` ein.
+Tab **Feed-Hintergründe** in der DAR Admin-App:
 
-## backgrounds-index.json
+1. Bild hochladen (erzeugt WebP: Voll, Mobile 720×960, Thumb 400×400)
+2. Kategorie & Tags setzen
+3. Sicherheit bestätigen (keine Menschen/Tiere/Gesichter)
+4. **Freigeben & aktivieren** — erst dann im Feed sichtbar
 
-```json
-{
-  "version": 1,
-  "items": [
-    {
-      "id": "moschee-01",
-      "url": "/content/staging/feed-backgrounds/moschee-01.jpg",
-      "label": "Moschee Innenraum"
-    }
-  ]
-}
-```
+## Sicherheit
 
-- **url** oder **src**: Pfad zum Bild (relativ zur App-Root, z. B. `/content/staging/feed-backgrounds/mein-bild.jpg`)
-- **label**: optional, nur zur Übersicht
+Ein Bild erscheint im Feed nur wenn:
 
-## Regeln
+- `status: active`
+- `approved: true`
+- `securityStatus: approved`
+- `containsHumans/Animals/Faces: false`
+- `allowedFor` enthält `feed`
 
-1. **Automatisch generierte Hintergründe** bleiben Standard: islamisch-konforme **4K-Unsplash-Bilder** (Natur, Moschee, Qurʾān, Bibliothek — keine Menschen, Tiere, westliche Bücher).
-2. **Eigene Uploads** werden **zusätzlich** gemischt (ca. jeder vierte Beitrag kann ein Upload-Hintergrund nutzen, wenn Einträge vorhanden sind).
-3. Bilder idealerweise **hochauflösend** (mind. 1920×2400, besser 4K), Quer- oder Hochformat 4:5.
-4. Nur Inhalte, die zur App passen (islamisch, ohne verbotene Motive).
+## Feed-Auswahl
 
-## Testen
+`selectFeedBackground(item, theme)` in `assets/premium-feed-app.js`:
 
-Änderungen zuerst unter **Dar Test** (`/test/`) in `content/staging/feed-backgrounds/` prüfen.
+- Manuell: `backgroundId` + `backgroundMode: manual`
+- Automatisch: Kategorie/Thema/Tags → Priorität → deterministischer Seed (`item.uid`)
+- Fallback: Theme-Gradient
+
+Keine externen Hotlinks, kein Unsplash, kein Pinterest.
+
+## Legacy
+
+`backgrounds-index.json` bleibt für Abwärtskompatibilität, wird aber nicht mehr für neue Feed-Hintergründe verwendet.
