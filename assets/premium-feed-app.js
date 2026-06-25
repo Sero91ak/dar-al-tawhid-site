@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV42';
-  var FONTS_ID = 'darPremiumFeedFontsV42';
+  var STYLES_ID = 'darPremiumFeedStylesV43';
+  var FONTS_ID = 'darPremiumFeedFontsV43';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
   var FEED_COL_TABLET = 540;
@@ -1607,7 +1607,7 @@
     var link = document.createElement('link');
     link.id = FONTS_ID;
     link.rel = 'stylesheet';
-    link.href = '/assets/fonts/feed-fonts.css?v=42';
+    link.href = '/assets/fonts/feed-fonts.css?v=43';
     document.head.appendChild(link);
   }
 
