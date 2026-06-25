@@ -344,6 +344,10 @@
         </div>
         ${feedError ? `<div class="notice-note" style="color:#ffc9c3">${esc(feedError)}</div>` : ""}
         <div class="notice-note wide" style="grid-column:1/-1;margin-bottom:10px">Automatisch im Premium-Feed: neue Beiträge, News, Duʿāʾ, Qurʾān, Archiv-Mix (täglicher Seed). Manuelle Karten haben Vorrang.</div>
+        <div class="notice-note wide" style="grid-column:1/-1;margin-bottom:10px;border-color:rgba(239,215,142,.35)">
+          <strong>Hintergrundbilder:</strong> Automatischer Bild-Pool (Pexels/Unsplash/Pixabay) — Status &amp; Sync unter
+          <button class="btn" type="button" data-tab="feed-bg" style="margin-left:8px">Feed · Auto-Hintergründe</button>
+        </div>
         ${renderForm()}
       </div>
       <div class="panel news-panel">

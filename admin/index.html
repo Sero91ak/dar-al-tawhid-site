@@ -469,7 +469,7 @@ main#panel.panel{
 <script src="/admin/quellen-manager.js?v=1"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=3"></script>
-<script src="/admin/feed-backgrounds-manager.js?v=2"></script>
+<script src="/admin/feed-backgrounds-manager.js?v=3"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -506,7 +506,7 @@ const DEFAULT_ADMIN_TABS=[
   ["content","Inhalte"],
   ["news","News"],
   ["feed","Feed / Im Fokus"],
-  ["feed-bg","Feed-Hintergründe"],
+  ["feed-bg","Feed · Auto-Hintergründe"],
   ["reports","Fehler"],
   ["users","Benutzer"],
   ["tech","Technik"],
@@ -1990,6 +1990,10 @@ function renderLogin(){
   if(repair)repair.onclick=()=>{if(window.__DAR_ADMIN_REPAIR__)window.__DAR_ADMIN_REPAIR__();else location.reload(true)};
   setTimeout(()=>{try{input.focus()}catch(e){}},80);
 }
+function renderFeedBgAdminPanel(){
+  if(window.DARFeedBgAdmin&&typeof window.DARFeedBgAdmin.renderFeedBgTab==="function")return window.DARFeedBgAdmin.renderFeedBgTab();
+  return `<section class="news-workspace"><div class="panel news-panel"><div class="section-head"><h3>Feed · Auto-Hintergründe</h3></div><div class="notice-note wide" style="color:#ffc9c3">Modul konnte nicht geladen werden. Bitte Seite mit <b>Strg+F5</b> neu laden. Skript: <code>/admin/feed-backgrounds-manager.js?v=3</code></div></div></section>`;
+}
 function renderShell(){
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -2002,7 +2006,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"&&window.DARFeedBgAdmin?window.DARFeedBgAdmin.renderFeedBgTab():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2095,6 +2099,7 @@ function renderStart(ctx){
     ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
     ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
     ${folderCard("⑥c","Feed / Im Fokus","NEU: Moderner Feed-Slider — Karten für Beiträge, Duʿāʾ, Qurʾān & News.","feed","Verwalten")}
+    ${folderCard("⑥d","Feed · Auto-Hintergründe","Automatische islamische Hintergrundbilder — Sync, Pool, Freigabe.","feed-bg","Auto-Sync")}
     ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
     ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
     ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
