@@ -785,18 +785,42 @@ export async function blockFeedBackgroundImage(env, helpers, input) {
   return { ok: true, id, status: getFeedBackgroundSyncStatus({ ...index, items }, env) };
 }
 
-export async function ensureFeedBackgroundsFresh(env, helpers, options = {}) {
-  const staging = Boolean(options.staging);
+export async function maybeAutoSyncFeedBackgrounds(env, helpers, options = {}) {
+  const staging = options.staging !== false;
   const { index } = await readFeedBackgroundsIndex(env, { staging }, helpers);
   const settings = mergeSettings(index?.settings);
+  if (!settings.autoDownloadEnabled) return { ok: true, skipped: true, reason: "disabled" };
+
   const approved = countApprovedPool(index?.items || []);
+  if (approved >= settings.minPoolSize) {
+    return { ok: true, skipped: true, reason: "pool-full", approved };
+  }
+
   const syncState = mergeSyncState(index?.syncState);
   const lastSyncTs = Date.parse(syncState.lastSyncAt || "");
-  const dueDaily = !Number.isFinite(lastSyncTs) || Date.now() - lastSyncTs >= DAILY_SYNC_MS;
   const needsRefill = approved < settings.refillBelow;
+  const dueDaily = !Number.isFinite(lastSyncTs) || Date.now() - lastSyncTs >= DAILY_SYNC_MS;
+  const cooldownMs = needsRefill
+    ? (approved < 10 ? 10 * 60 * 1000 : 30 * 60 * 1000)
+    : 60 * 60 * 1000;
 
-  if (!settings.autoDownloadEnabled) return { ok: true, skipped: true, reason: "disabled" };
-  if (!dueDaily && !needsRefill && !options.force) return { ok: true, skipped: true, reason: "not-due" };
+  if (!needsRefill && !dueDaily) {
+    return { ok: true, skipped: true, reason: "not-due", approved };
+  }
+  if (Number.isFinite(lastSyncTs) && Date.now() - lastSyncTs < cooldownMs && !options.force) {
+    return { ok: true, skipped: true, reason: "cooldown", approved };
+  }
 
-  return syncFeedBackgroundImages(env, helpers, { staging, force: Boolean(options.force) });
+  return syncFeedBackgroundImages(env, helpers, {
+    staging,
+    force: Boolean(options.force || needsRefill)
+  });
+}
+
+export async function ensureFeedBackgroundsFresh(env, helpers, options = {}) {
+  const staging = options.staging !== false;
+  return maybeAutoSyncFeedBackgrounds(env, helpers, {
+    staging,
+    force: Boolean(options.force)
+  });
 }

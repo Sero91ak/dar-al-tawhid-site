@@ -469,7 +469,7 @@ main#panel.panel{
 <script src="/admin/quellen-manager.js?v=1"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=3"></script>
-<script src="/admin/feed-backgrounds-manager.js?v=3"></script>
+<script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -2025,6 +2025,7 @@ function renderShell(){
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
   if(currentTab==="feed-bg"&&window.DARFeedBgAdmin&&!window.__darFeedBgAdminLoaded)window.DARFeedBgAdmin.ensureBgLoaded(false).then(()=>{if(currentTab==="feed-bg")renderShell()}).catch(()=>{});
+  if(window.DARFeedBgAdmin&&!window.__darFeedBgAutoInit){window.__darFeedBgAutoInit=true;window.DARFeedBgAdmin.ensureBgLoaded(false).catch(()=>{});}
 }
 function feedLoadedFlag(){return window.__darFeedAdminLoaded===true}
 async function ensureFeedAdminData(force){

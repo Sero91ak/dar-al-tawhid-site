@@ -11,11 +11,13 @@ on:
       - cloudflare/prayer-push-*.js
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
+      - cloudflare/feed-backgrounds-*.js
       - cloudflare/onesignal-delivery.js
       - cloudflare/kurzlink-admin.js
       - cloudflare/zakat-prices.js
       - cloudflare/zakat-admin.js
       - .github/workflows/deploy-admin-publisher.yml
+      - .github/workflows/feed-bg-auto-sync.yml
 
 permissions:
   contents: read
@@ -52,6 +54,39 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: wrangler deploy
+
+      - name: Sync optional feed image API secrets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+        run: |
+          put_secret() {
+            local name="$1"
+            local val="$2"
+            if [ -n "$val" ]; then
+              echo "$val" | wrangler secret put "$name"
+              echo "Secret gesetzt: $name"
+            fi
+          }
+          put_secret PEXELS_API_KEY "$PEXELS_API_KEY"
+          put_secret UNSPLASH_ACCESS_KEY "$UNSPLASH_ACCESS_KEY"
+          put_secret PIXABAY_API_KEY "$PIXABAY_API_KEY"
+
+      - name: Trigger feed background sync (staging)
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Post-Deploy Sync übersprungen"
+            exit 0
+          fi
+          curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/feed-backgrounds/sync" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{"staging":true,"force":false,"maxDownloads":20}' || echo "::warning::Feed-BG Sync nach Deploy fehlgeschlagen (Bootstrap-Seed bleibt aktiv)"
 
       - name: Health check
         run: |

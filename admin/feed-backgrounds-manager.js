@@ -16,6 +16,7 @@
   let bgSearch = "";
   let bgSyncStatus = null;
   let bgSyncLoading = false;
+  let bgAutoSyncStarted = false;
 
   const CATEGORIES = [
     ["nature", "Natur"],
@@ -208,6 +209,32 @@
     return bgSyncStatus;
   }
 
+  async function maybeAutoSyncInBackground() {
+    if (bgAutoSyncStarted) return;
+    const st = bgSyncStatus || {};
+    const pool = st.pool || {};
+    const settings = st.settings || {};
+    const refillBelow = Number(settings.refillBelow) || 40;
+    const approved = Number(pool.approved) || 0;
+    if (approved >= refillBelow) return;
+    if (st.apiConfigured === false) return;
+    bgAutoSyncStarted = true;
+    try {
+      await workerPost("api/admin/feed-backgrounds/sync", {
+        staging: bgStaging,
+        force: false,
+        maxDownloads: 20
+      });
+      await ensureSyncStatus(true);
+      await ensureBgLoaded(true);
+      if (typeof global.renderShell === "function" && global.currentTab === "feed-bg") {
+        global.renderShell();
+      }
+    } catch (e) {
+      /* stiller Hintergrund-Lauf — kein Toast */
+    }
+  }
+
   async function ensureBgLoaded(force) {
     if (bgLoading && !force) return bgIndex;
     bgLoading = true;
@@ -220,6 +247,7 @@
       bgLoaded = true;
       global.__darFeedBgAdminLoaded = true;
       await ensureSyncStatus(true);
+      maybeAutoSyncInBackground();
     } catch (e) {
       bgError = e.message || String(e);
     } finally {
@@ -379,7 +407,7 @@
     const err = sync.lastSyncError || st.error || "";
     return `<div class="panel news-panel" style="margin-bottom:12px">
       <div class="section-head"><h3>Automatische Feed-Bilder</h3><span>${pool.approved ?? 0} freigegeben</span></div>
-      <div class="notice-note wide" style="margin-bottom:10px">Vollautomatischer Pool aus Pexels / Unsplash / Pixabay — Download, Prüfung, lokale Speicherung. Keine Hotlinks im Feed. Bei Unsicherheit: Gradient.</div>
+      <div class="notice-note wide" style="margin-bottom:10px">Läuft <strong>vollautomatisch</strong> — Cron alle 5 Min., täglicher GitHub-Sync, Hintergrund-Nachfüllen wenn Pool &lt; 40. Kein manueller Klick nötig.</div>
       <div class="news-manage-toolbar" style="flex-wrap:wrap">
         <button class="btn primary" id="bgSyncNowBtn" type="button"${bgSyncLoading ? " disabled" : ""}>Bilder jetzt synchronisieren</button>
         <button class="btn" id="bgShowActiveBtn" type="button">Aktive anzeigen</button>

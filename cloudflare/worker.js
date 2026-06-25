@@ -67,6 +67,7 @@ import {
 import {
   syncFeedBackgroundImages,
   ensureFeedBackgroundsFresh,
+  maybeAutoSyncFeedBackgrounds,
   getFeedBackgroundSyncStatus,
   cleanupFeedBackgroundPool,
   blockFeedBackgroundImage
@@ -398,7 +399,9 @@ export default {
 
       if (url.pathname === "/api/feed-backgrounds" && request.method === "GET") {
         const staging = String(url.searchParams.get("staging") || "") === "1";
-        const { index, path } = await readFeedBackgroundsIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        ctx.waitUntil(maybeAutoSyncFeedBackgrounds(env, helpers, { staging }));
+        const { index, path } = await readFeedBackgroundsIndex(env, { staging }, helpers);
         return json({ ...buildPublicFeedBackgroundsResponse(index), path, staging }, cors, 200);
       }
 
