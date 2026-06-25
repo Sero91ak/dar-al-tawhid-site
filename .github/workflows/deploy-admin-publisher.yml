@@ -12,6 +12,7 @@ on:
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
       - cloudflare/feed-backgrounds-*.js
+      - .github/workflows/setup-feed-api-keys.yml
       - cloudflare/onesignal-delivery.js
       - cloudflare/kurzlink-admin.js
       - cloudflare/zakat-prices.js
