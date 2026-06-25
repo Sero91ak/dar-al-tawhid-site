@@ -1,5 +1,5 @@
 /**
- * Automatische Feed-Hintergrundbilder — Pexels / Unsplash / Pixabay
+ * Automatische Feed-Hintergrundbilder — Wikimedia (ohne Key) + Pexels / Unsplash / Pixabay
  * Download → Prüfung → lokale Speicherung (GitHub Assets). Keine Hotlinks im Feed.
  */
 import {
@@ -61,8 +61,43 @@ const DEFAULT_SETTINGS = {
   minPoolSize: 80,
   refillBelow: 40,
   dailyDownloadLimit: 20,
-  allowedSources: ["pexels", "unsplash", "pixabay"]
+  allowedSources: ["wikimedia", "pexels", "unsplash", "pixabay"]
 };
+
+const WIKI_FORBIDDEN_CATEGORIES = [
+  "people", "portrait", "nude", "nudity", "animal", "bird", "mammal", "dog", "cat",
+  "church", "cross", "statue", "sculptures of people", "selfie", "wedding"
+];
+
+function wikiSearchQuery(query) {
+  return String(query || "")
+    .replace(/\s+no people/gi, "")
+    .replace(/\s+no animals/gi, "")
+    .replace(/\s+empty\s+/gi, " ")
+    .trim();
+}
+
+function wikiFilePathUrl(fileTitle, width) {
+  const name = String(fileTitle || "").replace(/^File:/i, "");
+  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(name)}?width=${width}`;
+}
+
+function isWikiLicenseOk(meta) {
+  const license = String(meta?.LicenseShortName?.value || meta?.License?.value || "").toLowerCase();
+  const url = String(meta?.LicenseUrl?.value || "").toLowerCase();
+  const hay = `${license} ${url}`;
+  if (!hay.trim()) return false;
+  if (hay.includes("nc") || hay.includes("nd")) return false;
+  if (hay.includes("cc0") || hay.includes("cc-zero") || hay.includes("public domain") || hay.includes("pd")) return true;
+  if (hay.includes("cc-by-sa") || hay.includes("cc by-sa")) return true;
+  if (hay.includes("cc-by") || hay.includes("cc by")) return true;
+  return false;
+}
+
+function wikiCategoriesBlocked(categoriesValue) {
+  const hay = String(categoriesValue || "").toLowerCase();
+  return WIKI_FORBIDDEN_CATEGORIES.some((c) => hay.includes(c));
+}
 
 function nowIso() {
   return new Date().toISOString();
@@ -293,6 +328,17 @@ function buildVariantUrls(source, photoId, raw) {
       ext: "jpg"
     };
   }
+  if (source === "wikimedia") {
+    const fileTitle = raw.fileTitle || "";
+    if (!fileTitle) return null;
+    const ext = String(raw.ext || "jpg").toLowerCase();
+    return {
+      full: wikiFilePathUrl(fileTitle, 1080),
+      mobile: wikiFilePathUrl(fileTitle, 720),
+      thumb: wikiFilePathUrl(fileTitle, 400),
+      ext: ext === "jpeg" ? "jpg" : ext
+    };
+  }
   return null;
 }
 
@@ -358,6 +404,49 @@ async function searchUnsplash(env, query, perPage) {
   }));
 }
 
+async function searchWikimedia(query, perPage) {
+  const wikiQuery = wikiSearchQuery(query);
+  if (!wikiQuery) return [];
+  const url =
+    "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&formatversion=2" +
+    `&generator=search&gsrsearch=${encodeURIComponent(wikiQuery)}&gsrnamespace=6&gsrlimit=${perPage}` +
+    "&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=1080";
+  const data = await fetchJson(url);
+  const pages = data?.query?.pages || [];
+  const out = [];
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i];
+    const info = (page?.imageinfo || [])[0];
+    if (!info?.url) continue;
+    const mime = String(info.mime || "").toLowerCase();
+    if (!mime.startsWith("image/")) continue;
+    const meta = info.extmetadata || {};
+    if (!isWikiLicenseOk(meta)) continue;
+    if (wikiCategoriesBlocked(meta?.Categories?.value)) continue;
+    const title = String(page.title || "");
+    const desc = String(meta?.ImageDescription?.value || meta?.ObjectName?.value || title)
+      .replace(/<[^>]+>/g, " ")
+      .trim();
+    const artist = String(meta?.Artist?.value || "").replace(/<[^>]+>/g, " ").trim();
+    const license = String(meta?.LicenseShortName?.value || meta?.License?.value || "Wikimedia Commons").trim();
+    const ext = (mime.split("/")[1] || "jpg").split("+")[0];
+    out.push({
+      source: "wikimedia",
+      sourcePhotoId: String(page.pageid || page.title || i),
+      sourceUrl: info.descriptionurl || page.canonicalurl || "",
+      alt: desc || title,
+      description: desc,
+      photographer: artist,
+      tags: String(meta?.Categories?.value || "").split("|").slice(0, 8),
+      width: info.width,
+      height: info.height,
+      license,
+      raw: { fileTitle: title, ext }
+    });
+  }
+  return out;
+}
+
 async function searchPixabay(env, query, perPage) {
   const key = env.PIXABAY_API_KEY;
   if (!key) return [];
@@ -385,11 +474,21 @@ async function searchPixabay(env, query, perPage) {
 async function searchAllSources(env, queryEntry, perPage, allowedSources) {
   const tasks = [];
   const q = queryEntry.query;
+  if (allowedSources.includes("wikimedia")) tasks.push(searchWikimedia(q, perPage).catch(() => []));
   if (allowedSources.includes("pexels")) tasks.push(searchPexels(env, q, perPage).catch(() => []));
   if (allowedSources.includes("unsplash")) tasks.push(searchUnsplash(env, q, perPage).catch(() => []));
   if (allowedSources.includes("pixabay")) tasks.push(searchPixabay(env, q, perPage).catch(() => []));
   const batches = await Promise.all(tasks);
   return batches.flat().map((c) => ({ ...c, query: q, category: queryEntry.category, queryTags: queryEntry.tags || [] }));
+}
+
+function hasAnyPhotoSource(env, settings) {
+  const allowed = settings?.allowedSources || DEFAULT_SETTINGS.allowedSources;
+  if (allowed.includes("wikimedia")) return true;
+  if (allowed.includes("pexels") && env.PEXELS_API_KEY) return true;
+  if (allowed.includes("unsplash") && env.UNSPLASH_ACCESS_KEY) return true;
+  if (allowed.includes("pixabay") && env.PIXABAY_API_KEY) return true;
+  return false;
 }
 
 function makeAutoId(source, photoId, category) {
@@ -453,6 +552,7 @@ export function getFeedBackgroundSyncStatus(index, env) {
   const approved = countApprovedPool(items);
   const blocked = countBlockedPool(items);
   const sources = {
+    wikimedia: true,
     pexels: Boolean(env?.PEXELS_API_KEY),
     unsplash: Boolean(env?.UNSPLASH_ACCESS_KEY),
     pixabay: Boolean(env?.PIXABAY_API_KEY)
@@ -472,7 +572,7 @@ export function getFeedBackgroundSyncStatus(index, env) {
     },
     sources,
     remainingDailyDownloads: remainingDailyDownloads(settings, syncState),
-    apiConfigured: Object.values(sources).some(Boolean)
+    apiConfigured: sources.wikimedia || sources.pexels || sources.unsplash || sources.pixabay
   };
 }
 
@@ -520,10 +620,10 @@ export async function syncFeedBackgroundImages(env, helpers, options = {}) {
     };
   }
 
-  if (!env.PEXELS_API_KEY && !env.UNSPLASH_ACCESS_KEY && !env.PIXABAY_API_KEY) {
+  if (!hasAnyPhotoSource(env, settings)) {
     syncState.lastSyncAt = now;
     syncState.lastSyncStatus = "error";
-    syncState.lastSyncError = "Keine Bild-API-Keys konfiguriert (PEXELS_API_KEY, UNSPLASH_ACCESS_KEY, PIXABAY_API_KEY)";
+    syncState.lastSyncError = "Keine Bildquelle verfügbar (Wikimedia deaktiviert, API-Keys fehlen)";
     syncState.nextSyncAt = new Date(Date.now() + DAILY_SYNC_MS).toISOString();
     await writeSyncIndex(env, helpersBag, { index, sha, path, settings, syncState, items, staging });
     return {
@@ -535,6 +635,7 @@ export async function syncFeedBackgroundImages(env, helpers, options = {}) {
 
   resetDailyCounter(syncState);
   const allowedSources = (settings.allowedSources || []).filter((s) => {
+    if (s === "wikimedia") return true;
     if (s === "pexels") return Boolean(env.PEXELS_API_KEY);
     if (s === "unsplash") return Boolean(env.UNSPLASH_ACCESS_KEY);
     if (s === "pixabay") return Boolean(env.PIXABAY_API_KEY);

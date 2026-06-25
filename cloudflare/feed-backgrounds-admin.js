@@ -39,7 +39,7 @@ const DEFAULT_BG_SETTINGS = {
   minPoolSize: 80,
   refillBelow: 40,
   dailyDownloadLimit: 20,
-  allowedSources: ["pexels", "unsplash", "pixabay"]
+  allowedSources: ["wikimedia", "pexels", "unsplash", "pixabay"]
 };
 
 function emptyBgIndex() {

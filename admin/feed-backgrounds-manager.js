@@ -403,7 +403,10 @@
     const pool = st.pool || {};
     const sync = st.syncState || {};
     const sources = st.sources || {};
-    const srcList = ["pexels", "unsplash", "pixabay"].map((s) => `${s}: ${sources[s] ? "✓" : "—"}`).join(" · ");
+    const srcList = ["wikimedia", "pexels", "unsplash", "pixabay"].map((s) => {
+      if (s === "wikimedia") return `${s}: ${sources[s] !== false ? "✓" : "—"}`;
+      return `${s}: ${sources[s] ? "✓" : "—"}`;
+    }).join(" · ");
     const err = sync.lastSyncError || st.error || "";
     return `<div class="panel news-panel" style="margin-bottom:12px">
       <div class="section-head"><h3>Automatische Feed-Bilder</h3><span>${pool.approved ?? 0} freigegeben</span></div>
