@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-25T08:20:32.800Z",
+  "updatedAt": "2026-06-25T08:25:32.801Z",
   "usersChecked": 16,
-  "duaCandidates": 16,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 16,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 16,
   "errors": 0,
   "dailyContentDate": "2026-06-25",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Tawakkul"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 16,
-      "contentId": "quran-010",
-      "recipients": "5da60c0f-d6c4-4876-98b2-42ad83da392c",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
