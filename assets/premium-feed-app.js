@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV40';
-  var FONTS_ID = 'darPremiumFeedFontsV40';
+  var STYLES_ID = 'darPremiumFeedStylesV41';
+  var FONTS_ID = 'darPremiumFeedFontsV41';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
   var FEED_COL_TABLET = 540;
@@ -29,6 +29,8 @@
   };
   var FEED_BG_POOL = [];
   var FEED_BG_CACHE_VER = 0;
+  var FEED_BG_RECENT = [];
+  var FEED_BG_RECENT_MAX = 15;
   var FEED_BG_PREFS = {
     quran: { categories: ['quran', 'nature', 'abstract'], tags: ['himmel', 'licht', 'berge', 'wolken', 'mushaf', 'kalligraphie', 'quran'] },
     dua: { categories: ['dua', 'nature', 'abstract'], tags: ['himmel', 'regen', 'wolken', 'nebel', 'ruhe', 'pflanzen', 'dua'] },
@@ -182,10 +184,23 @@
     if (!bg || !bg.src) return false;
     if (bg.status !== 'active' || bg.active === false) return false;
     if (!bg.approved || bg.securityStatus !== 'approved') return false;
+    if (bg.isIslamicallySafe === false) return false;
     if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
+    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var allowed = bg.allowedFor || ['feed'];
     if (typeof allowed === 'string') allowed = allowed.split(/[,;|]+/);
     return allowed.indexOf('feed') >= 0;
+  }
+
+  function trackRecentBg(id) {
+    if (!id) return;
+    FEED_BG_RECENT = FEED_BG_RECENT.filter(function (x) { return x !== id; });
+    FEED_BG_RECENT.unshift(id);
+    if (FEED_BG_RECENT.length > FEED_BG_RECENT_MAX) FEED_BG_RECENT.length = FEED_BG_RECENT_MAX;
+  }
+
+  function isRecentlyUsedBg(id) {
+    return FEED_BG_RECENT.indexOf(id) >= 0;
   }
 
   function findFeedBgById(id) {
@@ -245,12 +260,16 @@
   function selectFeedBackground(item, theme) {
     theme = theme || getThemeKey();
     var mode = itemBackgroundMode(item);
+    if (item && item.backgroundSafe === false) {
+      return { kind: 'gradient', value: gradientStyleFor(item), reason: 'background-unsafe' };
+    }
     if (mode === 'gradient' || mode === 'none') {
       return { kind: 'gradient', value: gradientStyleFor(item), reason: 'mode-gradient' };
     }
     if (mode === 'manual' && item && item.backgroundId) {
       var manual = findFeedBgById(item.backgroundId);
       if (isFeedBgSafe(manual)) {
+        trackRecentBg(manual.id);
         return bgToScene(manual, item, theme, 'manual');
       }
     }
@@ -258,11 +277,15 @@
       var prefs = itemBgPreferences(item);
       var candidates = FEED_BG_POOL.filter(isFeedBgSafe);
       var scored = candidates.map(function (bg) {
-        return { bg: bg, score: scoreFeedBgCandidate(bg, prefs, item) };
-      }).filter(function (row) { return row.score > 0; });
+        var score = scoreFeedBgCandidate(bg, prefs, item);
+        if (isRecentlyUsedBg(bg.id)) score -= 120;
+        return { bg: bg, score: score };
+      }).filter(function (row) { return row.score > -100; });
       if (!scored.length) {
         scored = candidates.map(function (bg) {
-          return { bg: bg, score: Number(bg.priority || 0) };
+          var score = Number(bg.priority || 0);
+          if (isRecentlyUsedBg(bg.id)) score -= 50;
+          return { bg: bg, score: score };
         });
       }
       scored.sort(function (a, b) {
@@ -270,8 +293,10 @@
         return String(a.bg.id).localeCompare(String(b.bg.id));
       });
       if (scored.length) {
-        var seed = String(item && item.uid || item && item.id || '') + '|' + String(item && item.category || '') + '|bg';
-        var pick = scored[hashNum(seed) % scored.length].bg;
+        var seedBase = String(item && item.uid || item && item.id || '') + '|' + String(item && item.category || '') + '|bg';
+        var top = scored.slice(0, Math.min(12, scored.length));
+        var pick = top[hashNum(seedBase) % top.length].bg;
+        trackRecentBg(pick.id);
         return bgToScene(pick, item, theme, 'auto');
       }
     }
@@ -328,9 +353,14 @@
           approved: it.approved === true,
           status: it.status || 'draft',
           securityStatus: it.securityStatus || 'unchecked',
+          isIslamicallySafe: it.isIslamicallySafe !== false,
           containsHumans: !!it.containsHumans,
           containsAnimals: !!it.containsAnimals,
           containsFaces: !!it.containsFaces,
+          hasWatermark: !!it.hasWatermark,
+          hasLogo: !!it.hasLogo,
+          hasTextOverlay: !!it.hasTextOverlay,
+          qualityScore: Number(it.qualityScore) || 0,
           overlayHint: it.overlayHint || 'dark',
           focusPoint: it.focusPoint || { x: 50, y: 50 }
         };
@@ -1765,7 +1795,7 @@
       '.sf-post__bg,.sf-post__bg--grad{position:absolute;inset:0;left:0;right:0;top:0;bottom:0;width:100%;height:100%;min-width:100%;min-height:100%;object-fit:cover;object-position:center;z-index:0;display:block;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));image-rendering:auto;box-sizing:border-box}' +
       '.sf-post__bg--grad{background-size:cover;background-position:center;background-repeat:no-repeat}' +
       '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:var(--theme-feed-overlay,linear-gradient(180deg,rgba(0,0,0,.14),rgba(0,0,0,.52)));pointer-events:none}' +
-      '.sf-scene-badge{position:absolute;top:var(--sf-badge-top,18px);left:var(--sf-badge-left,18px);z-index:5;width:var(--sf-badge-size,46px);height:var(--sf-badge-size,46px);border-radius:50%;padding:3px;background:var(--theme-feed-badge-bg,var(--theme-glass,rgba(8,7,5,.48)));backdrop-filter:blur(10px) saturate(1.1);-webkit-backdrop-filter:blur(10px) saturate(1.1);border:1px solid var(--theme-feed-badge-border,var(--theme-border,var(--line)));box-shadow:0 4px 16px rgba(0,0,0,.22);pointer-events:none;display:grid;place-items:center}' +
+      '.sf-scene-badge{position:absolute;top:var(--sf-badge-top,18px);left:var(--sf-badge-left,18px);z-index:5;width:var(--sf-badge-size,clamp(40px,11vw,52px));height:var(--sf-badge-size,clamp(40px,11vw,52px));border-radius:50%;padding:3px;background:var(--theme-feed-badge-bg,var(--theme-glass,rgba(8,7,5,.48)));backdrop-filter:blur(10px) saturate(1.1);-webkit-backdrop-filter:blur(10px) saturate(1.1);border:1px solid var(--theme-feed-badge-border,var(--theme-border,var(--line)));box-shadow:0 4px 16px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.04);pointer-events:none;display:grid;place-items:center}' +
       '.sf-scene-badge .sf-badge-logo{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}' +
       '.sf-scene-brand{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:6px 8px 7px;background:var(--theme-feed-brand-bar,linear-gradient(180deg,transparent,rgba(0,0,0,.76)));display:flex;flex-direction:column;gap:3px;align-items:center;pointer-events:none}' +
       '.sf-brand-signature-row{display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;gap:clamp(3px,1vw,7px);max-width:100%;padding:0 2px}' +

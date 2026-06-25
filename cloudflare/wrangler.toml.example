@@ -12,3 +12,6 @@ ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
 # Required Cloudflare secrets:
 # wrangler secret put GITHUB_TOKEN
 # wrangler secret put ADMIN_PUBLISH_SECRET
+# wrangler secret put PEXELS_API_KEY
+# wrangler secret put UNSPLASH_ACCESS_KEY
+# wrangler secret put PIXABAY_API_KEY

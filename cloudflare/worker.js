@@ -64,6 +64,13 @@ import {
   confirmManualZakatPrices,
   ensureZakatPricesFresh
 } from "./zakat-prices.js";
+import {
+  syncFeedBackgroundImages,
+  ensureFeedBackgroundsFresh,
+  getFeedBackgroundSyncStatus,
+  cleanupFeedBackgroundPool,
+  blockFeedBackgroundImage
+} from "./feed-backgrounds-sync.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -427,6 +434,44 @@ export default {
         return json(await deleteFeedBackgroundEntry(env, input, helpers), cors);
       }
 
+      if (url.pathname === "/api/admin/feed-backgrounds/sync/status" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const { index } = await readFeedBackgroundsIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json(getFeedBackgroundSyncStatus(index, env), cors);
+      }
+
+      if (url.pathname === "/api/admin/feed-backgrounds/sync" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        const staging = Boolean(input?.staging);
+        const result = await syncFeedBackgroundImages(env, helpers, {
+          staging,
+          force: Boolean(input?.force),
+          maxDownloads: Number(input?.maxDownloads) || 0
+        });
+        return json(result, cors);
+      }
+
+      if (url.pathname === "/api/admin/feed-backgrounds/block" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await blockFeedBackgroundImage(env, helpers, input), cors);
+      }
+
+      if (url.pathname === "/api/admin/feed-backgrounds/cleanup" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await cleanupFeedBackgroundPool(env, helpers, { staging: Boolean(input?.staging) }), cors);
+      }
+
       if (url.pathname === "/api/admin/zakat/prices/status" && request.method === "GET") {
         assertConfigured(env);
         assertAuthorized(request, env);
@@ -696,6 +741,7 @@ export default {
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureZakatPricesFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }));
+    ctx.waitUntil(ensureFeedBackgroundsFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }, { staging: true }));
   }
 };
 

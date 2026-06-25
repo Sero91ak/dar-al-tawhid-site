@@ -23,3 +23,6 @@ crons = ["*/5 * * * *"]
 #   wrangler secret put ONESIGNAL_APP_ID   (optional, Standard ist gesetzt)
 #   wrangler secret put GOLDAPI_KEY        (optional Premium — sonst Auto LBMA+EUR)
 #   wrangler secret put METALS_API_KEY     (optional Alternative)
+#   wrangler secret put PEXELS_API_KEY     (Feed-Hintergrund Auto-Sync)
+#   wrangler secret put UNSPLASH_ACCESS_KEY
+#   wrangler secret put PIXABAY_API_KEY
