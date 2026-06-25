@@ -28,9 +28,10 @@ gen_set() {
   gen_variant "${base}.webp" 1080 1350 "$c0" "$c1"
   gen_variant "${base}-mobile.webp" 720 960 "$c0" "$c1"
   gen_variant "${base}-thumb.webp" 400 400 "$c0" "$c1"
-  node - "$id" "$cat" "$tags" "$overlay" "$NOW" "$base" <<'NODE'
-const [id, cat, tags, overlay, now, base] = process.argv.slice(2);
+  node - "$id" "$cat" "$tags" "$overlay" "$NOW" "$base" "$ROOT" <<'NODE'
+const [id, cat, tags, overlay, now, base, root] = process.argv.slice(2);
 const tagList = tags.split("|").filter(Boolean);
+const webBase = base.replace(root, "").replace(/\\/g, "/");
 process.stdout.write(JSON.stringify({
   id,
   title: `Seed · ${cat} · ${id}`,
@@ -39,9 +40,9 @@ process.stdout.write(JSON.stringify({
   tags: tagList,
   topics: tagList,
   allowedFor: ["feed"],
-  src: `/${base}.webp`.replace(/\\/g, "/"),
-  srcMobile: `/${base}-mobile.webp`.replace(/\\/g, "/"),
-  thumbnail: `/${base}-thumb.webp`.replace(/\\/g, "/"),
+  src: `${webBase}.webp`,
+  srcMobile: `${webBase}-mobile.webp`,
+  thumbnail: `${webBase}-thumb.webp`,
   alt: `Edler ${cat}-Hintergrund`,
   priority: 7,
   active: true,
