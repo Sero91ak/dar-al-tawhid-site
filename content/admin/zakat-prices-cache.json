@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-25T19:40:33.633Z",
+  "updatedAt": "2026-06-25T20:00:34.773Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3571.95,
-    "pricePerGram": 114.84,
+    "pricePerOunce": 3564.1,
+    "pricePerGram": 114.59,
     "nisabGrams": 85,
-    "nisabEur": 9761.4,
+    "nisabEur": 9740.15,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-06-25T19:40:33.633Z",
+    "fetchedAt": "2026-06-25T20:00:34.773Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 51.23,
-    "pricePerGram": 1.65,
+    "pricePerOunce": 51.01,
+    "pricePerGram": 1.64,
     "nisabGrams": 595,
-    "nisabEur": 981.75,
+    "nisabEur": 975.8,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-06-25T19:40:33.633Z",
+    "fetchedAt": "2026-06-25T20:00:34.773Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
-  "standardNisabEur": 981.75,
-  "lastSuccessAt": "2026-06-25T19:40:33.633Z",
+  "standardNisabEur": 975.8,
+  "lastSuccessAt": "2026-06-25T20:00:34.773Z",
   "lastError": "",
-  "lastFetchAt": "2026-06-25T19:40:33.633Z",
+  "lastFetchAt": "2026-06-25T20:00:34.773Z",
   "fetchLogs": [
+    {
+      "id": "log-1782417634773",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-06-25T20:00:34.773Z",
+      "durationMs": 1661,
+      "goldPerGram": 114.59,
+      "silverPerGram": 1.64
+    },
     {
       "id": "log-1782416433633",
       "provider": "aurumrates.com",
@@ -527,14 +537,6 @@
       "durationMs": 1532,
       "goldPerGram": 115.01,
       "silverPerGram": 1.73
-    },
-    {
-      "id": "log-1782270057833",
-      "provider": "aurumrates.com",
-      "status": "error",
-      "errorMessage": "EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB)",
-      "fetchedAt": "2026-06-24T03:00:57.833Z",
-      "durationMs": 6386
     }
   ]
 }
