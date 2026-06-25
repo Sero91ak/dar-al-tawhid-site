@@ -48,6 +48,7 @@ function makeItem(id, spec) {
   genVariant(`${base}-mobile.webp`, 720, 960, spec.c0, spec.c1);
   genVariant(`${base}-thumb.webp`, 400, 400, spec.c0, spec.c1);
   const rel = base.replace(ROOT, "").replace(/\\/g, "/");
+  const webBase = rel.startsWith("/") ? rel : `/${rel.replace(/^\/+/, "")}`;
   return {
     id,
     title: `Seed · ${spec.cat} · ${id}`,
@@ -56,9 +57,9 @@ function makeItem(id, spec) {
     tags: spec.tags,
     topics: spec.tags,
     allowedFor: ["feed"],
-    src: `${rel}.webp`,
-    srcMobile: `${rel}-mobile.webp`,
-    thumbnail: `${rel}-thumb.webp`,
+    src: `${webBase}.webp`,
+    srcMobile: `${webBase}-mobile.webp`,
+    thumbnail: `${webBase}-thumb.webp`,
     alt: `Edler ${spec.cat}-Hintergrund`,
     priority: 7,
     active: true,

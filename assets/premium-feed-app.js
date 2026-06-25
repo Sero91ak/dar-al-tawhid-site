@@ -162,10 +162,18 @@
     return null;
   }
 
+  function normalizeBgAssetUrl(u) {
+    var s = String(u || '').trim();
+    if (!s) return '';
+    s = s.replace(/^\/\/workspace\//, '/');
+    s = s.replace(/^\/workspace\//, '/');
+    return s;
+  }
+
   function bgImageUrl(bg, mobile) {
     if (!bg) return '';
     var u = mobile ? (bg.srcMobile || bg.thumbnail || bg.src) : (bg.src || bg.srcMobile || bg.thumbnail);
-    return String(u || '').trim();
+    return normalizeBgAssetUrl(u);
   }
 
   function overlayForTheme(theme, hint) {
