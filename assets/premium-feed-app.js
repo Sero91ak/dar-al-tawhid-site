@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV39';
-  var FONTS_ID = 'darPremiumFeedFontsV39';
+  var STYLES_ID = 'darPremiumFeedStylesV40';
+  var FONTS_ID = 'darPremiumFeedFontsV40';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
   var FEED_COL_TABLET = 540;
@@ -561,6 +561,12 @@
 
   function formatEmphasizedText(text, uid, salt) {
     if (!text) return '';
+    if (/\*\*[^*]+\*\*|\*\*\*[^*]+\*\*\*|\*[^*\n]+\*/.test(text)) {
+      return formatMarkedEmphasis(text);
+    }
+    if (salt === 'quote') {
+      return formatQuotePlainEmphasis(text);
+    }
     var words = String(text).split(/\s+/).filter(Boolean);
     var emph = pickDuaEmphasisSet(words, uid + '|' + (salt || 'em'));
     var tokens = String(text).split(/(\s+)/);
@@ -606,13 +612,109 @@
     try {
       if (global && typeof global.sourceTextFromPost === 'function') {
         var s = global.sourceTextFromPost(post);
-        if (s) return clamp(String(s).replace(/\s+/g, ' ').trim(), 140);
+        if (s) return String(s).trim();
       }
     } catch (e) {}
-    var direct = String(post.source || '').replace(/\s+/g, ' ').trim();
-    if (direct) return clamp(direct, 140);
+    var direct = String(post.source || '').replace(/^📝\s*/, '').trim();
+    if (direct) return direct;
     var parts = [post.book, post.scholar].filter(Boolean);
-    return clamp(parts.join(' · '), 140);
+    return parts.join(' · ');
+  }
+
+  function exactSourceFromItem(item) {
+    if (!item) return '';
+    var raw = String(item.source || '').trim();
+    if (!raw && item.sourceDetail) raw = String(item.sourceDetail).trim();
+    if (!raw && item.book) raw = String(item.book).trim();
+    return raw.replace(/^📝\s*/, '').trim();
+  }
+
+  function cleanQuoteBody(bodyText, scholar) {
+    var t = String(bodyText || '').trim();
+    if (!t) return '';
+    t = t.replace(/^>\s?/gm, '').trim();
+    t = t.replace(/^[*_~`]+|[*_~`]+$/g, '').trim();
+    t = t.replace(/^[„"«]\s*/, '').replace(/\s*[""»„]$/g, '').trim();
+    var speakers = [];
+    if (scholar) speakers.push(String(scholar).trim());
+    speakers.forEach(function (sp) {
+      if (!sp) return;
+      var escSp = sp.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      t = t.replace(new RegExp('^' + escSp + '\\s+sagte(?:\\s+sinngemäß)?\\s*:\\s*', 'i'), '');
+    });
+    t = t.replace(/^[^\n„""]{0,120}?\s+sagte\s+sinngemäß\s*:\s*/i, '');
+    t = t.replace(/^[^\n„""]{0,120}?\s+sagte\s*:\s*/i, '');
+    return t.trim();
+  }
+
+  function feedQuoteBody(item) {
+    if (!item) return '';
+    if (item.type === 'dua') return '';
+    var raw = item.statement || item.preview || '';
+    var scholar = item.scholar || '';
+    try {
+      if (global && typeof global.parseImageEditorBodySource === 'function') {
+        var parsed = global.parseImageEditorBodySource(String(raw), scholar);
+        var body = String(parsed.bodyText || '').trim();
+        if (body) return cleanQuoteBody(body, scholar || parsed.nameLine || '');
+      }
+    } catch (e) {}
+    return cleanQuoteBody(feedStatementOnly(raw, scholar), scholar);
+  }
+
+  function formatMarkedEmphasis(text) {
+    if (!text) return '';
+    var raw = String(text);
+    var out = '';
+    var i = 0;
+    while (i < raw.length) {
+      if (raw.charAt(i) === '\n') { out += '\n'; i++; continue; }
+      if (raw.substr(i, 3) === '***') {
+        var end3 = raw.indexOf('***', i + 3);
+        if (end3 > i) {
+          out += '<span class="sf-text-em">' + esc(raw.slice(i + 3, end3)) + '</span>';
+          i = end3 + 3;
+          continue;
+        }
+      }
+      if (raw.substr(i, 2) === '**') {
+        var end2 = raw.indexOf('**', i + 2);
+        if (end2 > i) {
+          out += '<span class="sf-text-em">' + esc(raw.slice(i + 2, end2)) + '</span>';
+          i = end2 + 2;
+          continue;
+        }
+      }
+      if (raw.charAt(i) === '*') {
+        var end1 = raw.indexOf('*', i + 1);
+        if (end1 > i) {
+          out += '<span class="sf-text-em">' + esc(raw.slice(i + 1, end1)) + '</span>';
+          i = end1 + 1;
+          continue;
+        }
+      }
+      var next = raw.slice(i).search(/[\n*]/);
+      var chunk = next < 0 ? raw.slice(i) : raw.slice(i, i + next);
+      out += esc(chunk);
+      i += chunk.length;
+    }
+    return out;
+  }
+
+  function formatQuotePlainEmphasis(text) {
+    if (!text) return '';
+    var tokens = String(text).split(/(\s+)/);
+    var out = '';
+    tokens.forEach(function (t) {
+      if (/^\s+$/.test(t)) { out += t; return; }
+      var bare = t.replace(/^[^\wäöüÄÖÜß]+|[^\wäöüÄÖÜß:,]+$/gi, '');
+      var em = /^sinngemäß:$/i.test(bare) ||
+        /^[A-ZÄÖÜ][\wäöüÄÖÜß-]+,$/.test(t.trim()) ||
+        (/^[A-ZÄÖÜ][\wäöüÄÖÜß-]{5,}$/.test(bare) && /Gerechtigkeit|Barmherzigkeit|Weisheit|Nutzen|Sharī|Shariah|Sunnah|Tawhid|Tawḥīd/i.test(bare));
+      if (em) out += '<span class="sf-text-em">' + esc(t) + '</span>';
+      else out += esc(t);
+    });
+    return out;
   }
 
   function sourceLinesFor(item) {
@@ -621,19 +723,18 @@
       var dua = resolveDuaFields(item);
       return { scholar: dua.sourceLabel, detail: dua.bookRef };
     }
-    var scholar = '';
-    var raw = item.statement || item.preview || '';
-    try {
-      if (global && typeof global.parseImageEditorBodySource === 'function') {
-        var parsed = global.parseImageEditorBodySource(String(raw), item.scholar || '');
-        if (parsed.nameLine) scholar = String(parsed.nameLine).trim();
-      }
-    } catch (e) {}
-    if (!scholar && item.scholar) scholar = String(item.scholar).trim();
-    var detail = item.sourceDetail || item.source || '';
-    if (!detail && item.book) detail = String(item.book);
-    detail = String(detail).replace(/\s+/g, ' ').trim();
-    return { scholar: clamp(scholar, 90), detail: clamp(detail, 140) };
+    var scholar = String(item.scholar || '').trim();
+    if (!scholar) {
+      var raw = item.statement || item.preview || '';
+      try {
+        if (global && typeof global.parseImageEditorBodySource === 'function') {
+          var parsed = global.parseImageEditorBodySource(String(raw), '');
+          if (parsed.nameLine) scholar = String(parsed.nameLine).trim();
+        }
+      } catch (e) {}
+    }
+    var detail = exactSourceFromItem(item);
+    return { scholar: scholar, detail: detail };
   }
 
   function sourceLineFor(item) {
@@ -650,22 +751,11 @@
       var dua = resolveDuaFields(item);
       return { text: dua.de, source: dua.sourceLabel };
     }
-    var raw = item.statement || item.preview || '';
-    var scholar = item.scholar || '';
-    try {
-      if (global && typeof global.parseImageEditorBodySource === 'function') {
-        var parsed = global.parseImageEditorBodySource(String(raw), scholar);
-        parsed.fazit = '';
-        var body = String(parsed.bodyText || '').trim();
-        if (!body && item.preview) body = stripMd(item.preview);
-        var srcLine = sourceLinesFor(item);
-        var src = srcLine.detail || srcLine.scholar || '';
-        if (body) return { text: clamp(stripMd(body), 320), source: src, scholar: srcLine.scholar, detail: srcLine.detail };
-      }
-    } catch (e) {}
     var srcLine = sourceLinesFor(item);
+    var quote = feedQuoteBody(item);
+    if (!quote) quote = String(item.preview || item.title || '').trim();
     return {
-      text: feedStatementOnly(raw, scholar) || clamp(stripMd(item.preview || item.title || ''), 280),
+      text: quote,
       source: srcLine.detail || srcLine.scholar || '',
       scholar: srcLine.scholar,
       detail: srcLine.detail
@@ -1689,8 +1779,8 @@
       '.sf-post__img{width:100%;max-width:100%;min-width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));border-radius:0;vertical-align:top}' +
       '.sf-post__quote{margin:0;line-height:1.55;text-shadow:none;width:100%;color:var(--theme-feed-panel-text,var(--theme-text,var(--text)))}' +
       '.sf-quote-mark{display:block;font-size:var(--sf-mark-size,20px);line-height:1;color:var(--theme-feed-mark,var(--theme-accent,var(--gold2)));font-family:Georgia,serif;margin-bottom:8px}' +
-      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;line-height:1.55;font-size:var(--sf-main-size,15px);color:var(--theme-feed-panel-text,var(--theme-text,var(--text)))}' +
-      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid var(--theme-feed-dua-divider,var(--theme-border,var(--line)));font-size:var(--sf-src-size,10px);line-height:1.45;opacity:.88;font-style:italic;color:var(--theme-muted,var(--muted))}' +
+      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;line-height:1.5;font-size:var(--sf-main-size,15px);color:var(--theme-accent,var(--gold2));font-weight:700}' +
+      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid var(--theme-feed-dua-divider,var(--theme-border,var(--line)));font-size:var(--sf-src-size,10px);line-height:1.45;opacity:.88;font-style:italic;color:var(--theme-muted,var(--muted));word-wrap:break-word;overflow-wrap:anywhere;white-space:normal}' +
       '.sf-quote-scholar{margin-top:10px;font-size:var(--sf-scholar-size,11px);line-height:1.42;opacity:.92;font-weight:700;color:var(--theme-accent,var(--gold2))}' +
       '.sf-post__dua{margin:0;padding:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:clamp(9px,2.2vw,12px);width:100%;text-align:center}' +
       '.sf-post__dua-ar{direction:rtl;font-family:"Noto Naskh Arabic",serif;font-size:var(--sf-ar-size,22px);line-height:1.52;margin:0;width:100%;text-align:center;text-shadow:none;color:var(--theme-feed-panel-text,var(--theme-text,var(--text)));opacity:1;font-weight:500;letter-spacing:.01em}' +
@@ -1924,7 +2014,7 @@
       );
     }
     var bundle = feedOverlayBundle(item);
-    var quote = bundle.text;
+    var quote = feedQuoteBody(item) || bundle.text;
     if (!quote) return sceneBlock(item, '', fs, '', null, sceneOpts);
     var srcLines = sourceLinesFor(item);
     var quoteSizes = computeTypeSizes(item, '', quote, '', !!srcLines.scholar, !!srcLines.detail);
