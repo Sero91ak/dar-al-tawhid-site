@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-06-25T08:05:32.801Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-06-25T08:15:32.800Z",
   "usersChecked": 16,
-  "duaCandidates": 0,
+  "duaCandidates": 16,
   "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 0,
+  "errors": 16,
   "dailyContentDate": "2026-06-25",
   "currentRecommendation": {
     "id": "takfir-bil-umum-406",
@@ -24,5 +24,15 @@
     "category": "Tawakkul"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "batch": true,
+      "count": 16,
+      "contentId": "quran-010",
+      "recipients": "5da60c0f-d6c4-4876-98b2-42ad83da392c",
+      "ok": false,
+      "invalid": 1
+    }
+  ]
 }
