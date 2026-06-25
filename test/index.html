@@ -7686,8 +7686,9 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
   box-sizing:border-box!important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-post__textpanel{
-  width:100%!important;
-  max-width:100%!important;
+  width:auto!important;
+  max-width:min(100%,var(--sf-panel-fit-max,88%))!important;
+  min-width:min(52%,10.5rem)!important;
   background:var(--theme-feed-panel,rgba(255,248,240,.09))!important;
   backdrop-filter:blur(20px) saturate(1.22)!important;
   -webkit-backdrop-filter:blur(20px) saturate(1.22)!important;
@@ -7800,7 +7801,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-engine.js?v=8" defer></script>
 <script src="/assets/zakat-app.js?v=13" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
-<script src="/assets/premium-feed-app.js?v=37" defer></script>
+<script src="/assets/premium-feed-app.js?v=38" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
