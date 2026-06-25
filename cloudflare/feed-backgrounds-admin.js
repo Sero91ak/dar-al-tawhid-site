@@ -26,8 +26,43 @@ function trimPath(path) {
   return String(path || "").replace(/^\/+/, "").replace(/\/+$/, "");
 }
 
+const DEFAULT_BG_SETTINGS = {
+  autoDownloadEnabled: true,
+  strictSafetyMode: true,
+  blockHumans: true,
+  blockFaces: true,
+  blockAnimals: true,
+  blockWatermarks: true,
+  blockLogos: true,
+  blockTextOverlays: true,
+  fallbackToGradient: true,
+  minPoolSize: 80,
+  refillBelow: 40,
+  dailyDownloadLimit: 20,
+  allowedSources: ["pexels", "unsplash", "pixabay"]
+};
+
 function emptyBgIndex() {
-  return { version: 1, updatedAt: new Date().toISOString(), cacheVersion: 1, items: [] };
+  return {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    cacheVersion: 1,
+    settings: { ...DEFAULT_BG_SETTINGS },
+    syncState: {
+      lastSyncAt: "",
+      lastSyncStatus: "idle",
+      lastSyncError: "",
+      nextSyncAt: "",
+      dailyDownloadDate: "",
+      dailyDownloadCount: 0,
+      lastRunDownloads: 0,
+      lastRunRejected: 0,
+      lastRunErrors: [],
+      totalDownloads: 0,
+      totalRejected: 0
+    },
+    items: []
+  };
 }
 
 function slugify(s) {
@@ -66,6 +101,11 @@ function normalizeBgItem(raw, nowIso) {
   const containsHumans = raw?.containsHumans === true;
   const containsAnimals = raw?.containsAnimals === true;
   const containsFaces = raw?.containsFaces === true;
+  const hasWatermark = raw?.hasWatermark === true;
+  const hasLogo = raw?.hasLogo === true;
+  const hasTextOverlay = raw?.hasTextOverlay === true;
+  const baseSafe = !containsHumans && !containsAnimals && !containsFaces && !hasWatermark && !hasLogo && !hasTextOverlay;
+  const isIslamicallySafe = raw?.isIslamicallySafe === false ? false : approved && baseSafe;
   const fp = raw?.focusPoint && typeof raw.focusPoint === "object" ? raw.focusPoint : {};
   return {
     id,
@@ -87,6 +127,18 @@ function normalizeBgItem(raw, nowIso) {
     containsHumans,
     containsAnimals,
     containsFaces,
+    hasWatermark,
+    hasLogo,
+    hasTextOverlay,
+    isIslamicallySafe,
+    qualityScore: Number.isFinite(Number(raw?.qualityScore)) ? Number(raw.qualityScore) : 0,
+    source: String(raw?.source || "").trim(),
+    sourcePhotoId: String(raw?.sourcePhotoId || "").trim(),
+    sourceUrl: String(raw?.sourceUrl || "").trim(),
+    license: String(raw?.license || "").trim(),
+    downloadedAt: String(raw?.downloadedAt || "").trim(),
+    autoSynced: raw?.autoSynced === true,
+    rejectionReasons: Array.isArray(raw?.rejectionReasons) ? raw.rejectionReasons : [],
     dominantColor: String(raw?.dominantColor || "").trim(),
     overlayHint: String(raw?.overlayHint || "dark").trim(),
     focusPoint: {
@@ -103,10 +155,28 @@ export function isFeedBgSelectable(item) {
   if (!item) return false;
   if (item.status !== "active" || !item.active) return false;
   if (!item.approved || item.securityStatus !== "approved") return false;
+  if (item.isIslamicallySafe === false) return false;
   if (item.containsHumans || item.containsAnimals || item.containsFaces) return false;
+  if (item.hasWatermark || item.hasLogo || item.hasTextOverlay) return false;
   if (!item.src) return false;
   const allowed = normalizeAllowedFor(item.allowedFor);
   return allowed.includes("feed");
+}
+
+function sanitizePublicBgItem(item) {
+  if (!item) return null;
+  const {
+    sourceUrl,
+    sourcePhotoId,
+    source,
+    license,
+    adminNote,
+    rejectionReasons,
+    autoSynced,
+    downloadedAt,
+    ...rest
+  } = item;
+  return rest;
 }
 
 export async function readFeedBackgroundsIndex(env, options, helpers) {
@@ -125,11 +195,14 @@ export async function readFeedBackgroundsIndex(env, options, helpers) {
   const items = (Array.isArray(parsed?.items) ? parsed.items : [])
     .map((x) => normalizeBgItem(x))
     .filter(Boolean);
+  const defaults = emptyBgIndex();
   return {
     index: {
       version: Number(parsed?.version) || 1,
       updatedAt: parsed?.updatedAt || new Date().toISOString(),
       cacheVersion: Number(parsed?.cacheVersion) || 1,
+      settings: { ...defaults.settings, ...(parsed?.settings && typeof parsed.settings === "object" ? parsed.settings : {}) },
+      syncState: { ...defaults.syncState, ...(parsed?.syncState && typeof parsed.syncState === "object" ? parsed.syncState : {}) },
       items
     },
     sha: file?.sha || "",
@@ -140,7 +213,8 @@ export async function readFeedBackgroundsIndex(env, options, helpers) {
 export function buildPublicFeedBackgroundsResponse(index, { admin = false } = {}) {
   const items = (index?.items || [])
     .filter((item) => (admin ? item.status !== "deleted" : isFeedBgSelectable(item)))
-    .map((item) => ({ ...item }));
+    .map((item) => (admin ? { ...item } : sanitizePublicBgItem(item)))
+    .filter(Boolean);
   return {
     ok: true,
     version: index?.version || 1,
@@ -231,6 +305,8 @@ export async function saveFeedBackgroundEntry(env, input, helpers) {
     version: 1,
     updatedAt: nowIso,
     cacheVersion,
+    settings: index.settings || emptyBgIndex().settings,
+    syncState: index.syncState || emptyBgIndex().syncState,
     items: items.sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0))
   };
 
@@ -293,7 +369,14 @@ export async function deleteFeedBackgroundEntry(env, input, helpers) {
           : x
       );
   const cacheVersion = (Number(index.cacheVersion) || 1) + 1;
-  const payload = { version: 1, updatedAt: nowIso, cacheVersion, items: nextItems };
+  const payload = {
+    version: 1,
+    updatedAt: nowIso,
+    cacheVersion,
+    settings: index.settings || emptyBgIndex().settings,
+    syncState: index.syncState || emptyBgIndex().syncState,
+    items: nextItems
+  };
   const saved = await helpers.githubPut(
     env,
     env.GITHUB_OWNER || "Sero91ak",

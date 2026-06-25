@@ -14,6 +14,8 @@
   let editingBgId = null;
   let bgFilter = "all";
   let bgSearch = "";
+  let bgSyncStatus = null;
+  let bgSyncLoading = false;
 
   const CATEGORIES = [
     ["nature", "Natur"],
@@ -152,6 +154,8 @@
       .filter((item) => {
         if (!item || item.status === "deleted") return bgFilter === "deleted";
         if (bgFilter === "approved" && !(item.approved && item.status === "active")) return false;
+        if (bgFilter === "blocked" && item.securityStatus !== "blocked") return false;
+        if (bgFilter === "auto" && !item.autoSynced) return false;
         if (bgFilter === "draft" && item.status !== "draft") return false;
         if (bgFilter === "disabled" && item.status !== "disabled") return false;
         if (bgFilter === "all" && item.status === "deleted") return false;
@@ -191,6 +195,19 @@
     };
   }
 
+  async function ensureSyncStatus(force) {
+    if (bgSyncLoading && !force) return bgSyncStatus;
+    bgSyncLoading = true;
+    try {
+      bgSyncStatus = await workerGet(`api/admin/feed-backgrounds/sync/status?staging=${bgStaging ? "1" : "0"}`);
+    } catch (e) {
+      bgSyncStatus = { ok: false, error: e.message || String(e) };
+    } finally {
+      bgSyncLoading = false;
+    }
+    return bgSyncStatus;
+  }
+
   async function ensureBgLoaded(force) {
     if (bgLoading && !force) return bgIndex;
     bgLoading = true;
@@ -202,6 +219,7 @@
       bgPath = data.path || "";
       bgLoaded = true;
       global.__darFeedBgAdminLoaded = true;
+      await ensureSyncStatus(true);
     } catch (e) {
       bgError = e.message || String(e);
     } finally {
@@ -345,15 +363,43 @@
         <div class="news-row-actions">
           <button class="btn" data-bg-edit="${esc(item.id)}" type="button">Bearbeiten</button>
           <button class="btn primary" data-bg-approve="${esc(item.id)}" type="button">Freigeben</button>
+          <button class="btn danger" data-bg-block="${esc(item.id)}" type="button">Sperren</button>
           <button class="btn danger" data-bg-delete="${esc(item.id)}" type="button">Deaktivieren</button>
         </div>
       </div>
     </details>`;
   }
 
+  function renderAutoSyncPanel() {
+    const st = bgSyncStatus || {};
+    const pool = st.pool || {};
+    const sync = st.syncState || {};
+    const sources = st.sources || {};
+    const srcList = ["pexels", "unsplash", "pixabay"].map((s) => `${s}: ${sources[s] ? "✓" : "—"}`).join(" · ");
+    const err = sync.lastSyncError || st.error || "";
+    return `<div class="panel news-panel" style="margin-bottom:12px">
+      <div class="section-head"><h3>Automatische Feed-Bilder</h3><span>${pool.approved ?? 0} freigegeben</span></div>
+      <div class="notice-note wide" style="margin-bottom:10px">Vollautomatischer Pool aus Pexels / Unsplash / Pixabay — Download, Prüfung, lokale Speicherung. Keine Hotlinks im Feed. Bei Unsicherheit: Gradient.</div>
+      <div class="news-manage-toolbar" style="flex-wrap:wrap">
+        <button class="btn primary" id="bgSyncNowBtn" type="button"${bgSyncLoading ? " disabled" : ""}>Bilder jetzt synchronisieren</button>
+        <button class="btn" id="bgShowActiveBtn" type="button">Aktive anzeigen</button>
+        <button class="btn" id="bgShowBlockedBtn" type="button">Gesperrte anzeigen</button>
+        <button class="btn" id="bgPoolCleanupBtn" type="button">Pool bereinigen</button>
+        <button class="btn" id="bgSyncRefreshBtn" type="button">Status anzeigen</button>
+      </div>
+      <div class="notice-note wide" style="margin-top:10px;line-height:1.55">
+        <strong>Pool:</strong> ${esc(pool.approved ?? 0)} freigegeben · ${esc(pool.blocked ?? 0)} gesperrt · ${esc(pool.auto ?? 0)} auto · Ziel ${esc(pool.target ?? 80)}<br>
+        <strong>Letzte Sync:</strong> ${esc(sync.lastSyncAt || "—")} (${esc(sync.lastSyncStatus || "idle")}) · Downloads: ${esc(sync.lastRunDownloads ?? 0)} · Abgelehnt: ${esc(sync.lastRunRejected ?? 0)}<br>
+        <strong>Nächste Sync:</strong> ${esc(sync.nextSyncAt || "täglich / bei Pool &lt; 40")} · Heute noch: ${esc(st.remainingDailyDownloads ?? "—")} Downloads<br>
+        <strong>Quellen:</strong> ${esc(srcList)} · API: ${st.apiConfigured ? "konfiguriert" : "Keys fehlen"}<br>
+        ${err ? `<span style="color:#ffc9c3">Fehler: ${esc(err)}</span>` : ""}
+      </div>
+    </div>`;
+  }
+
   function renderFeedBgTab() {
     const rows = filteredItems();
-    return `<section class="news-workspace">
+    return `${renderAutoSyncPanel()}<section class="news-workspace">
       <div class="panel news-panel">
         <div class="section-head"><h3>Feed-Hintergrundbilder</h3><span>${rows.length} · ${bgStaging ? "Staging" : "Live"}</span></div>
         <div class="notice-note wide" style="margin-bottom:10px">Kuratierte islamische Hintergründe — keine Menschen/Tiere/Gesichter. Upload → prüfen → freigeben → automatische Feed-Auswahl.</div>
@@ -375,6 +421,8 @@
           <select class="field" id="bgFilterSelect">
             <option value="all"${bgFilter === "all" ? " selected" : ""}>Alle</option>
             <option value="approved"${bgFilter === "approved" ? " selected" : ""}>Freigegeben</option>
+            <option value="auto"${bgFilter === "auto" ? " selected" : ""}>Automatisch</option>
+            <option value="blocked"${bgFilter === "blocked" ? " selected" : ""}>Gesperrt</option>
             <option value="draft"${bgFilter === "draft" ? " selected" : ""}>Entwurf</option>
             <option value="disabled"${bgFilter === "disabled" ? " selected" : ""}>Deaktiviert</option>
           </select>
@@ -458,7 +506,61 @@
     }
   }
 
+  async function runBgSync(force) {
+    toast("Synchronisation läuft…");
+    try {
+      const result = await workerPost("api/admin/feed-backgrounds/sync", {
+        staging: bgStaging,
+        force: !!force,
+        maxDownloads: 20
+      });
+      bgSyncStatus = result.status || result;
+      toast(`Sync: ${result.downloaded || 0} neu · ${result.rejected || 0} abgelehnt`);
+      await ensureBgLoaded(true);
+      global.renderShell && global.renderShell();
+    } catch (e) {
+      toast(e.message || "Sync fehlgeschlagen");
+    }
+  }
+
+  async function blockBg(id) {
+    if (!confirm("Bild wirklich sperren?")) return;
+    try {
+      await workerPost("api/admin/feed-backgrounds/block", { id, staging: bgStaging, reason: "Manuell gesperrt" });
+      toast("Gesperrt");
+      await ensureBgLoaded(true);
+      global.renderShell && global.renderShell();
+    } catch (e) {
+      toast(e.message || "Sperren fehlgeschlagen");
+    }
+  }
+
+  async function cleanupBgPool() {
+    if (!confirm("Gesperrte Auto-Bilder aus dem Pool entfernen?")) return;
+    try {
+      const result = await workerPost("api/admin/feed-backgrounds/cleanup", { staging: bgStaging });
+      toast(`Bereinigt: ${result.removed || 0}`);
+      await ensureBgLoaded(true);
+      global.renderShell && global.renderShell();
+    } catch (e) {
+      toast(e.message || "Bereinigung fehlgeschlagen");
+    }
+  }
+
   function bindFeedBgUi() {
+    document.getElementById("bgSyncNowBtn")?.addEventListener("click", () => runBgSync(true));
+    document.getElementById("bgSyncRefreshBtn")?.addEventListener("click", () => {
+      ensureSyncStatus(true).then(() => global.renderShell && global.renderShell());
+    });
+    document.getElementById("bgShowActiveBtn")?.addEventListener("click", () => {
+      bgFilter = "approved";
+      global.renderShell && global.renderShell();
+    });
+    document.getElementById("bgShowBlockedBtn")?.addEventListener("click", () => {
+      bgFilter = "blocked";
+      global.renderShell && global.renderShell();
+    });
+    document.getElementById("bgPoolCleanupBtn")?.addEventListener("click", () => cleanupBgPool());
     document.getElementById("bgEnvSelect")?.addEventListener("change", (e) => {
       bgStaging = e.target.value !== "live";
       editingBgId = null;
@@ -536,6 +638,9 @@
           toast(e.message || "Freigabe fehlgeschlagen");
         }
       });
+    });
+    document.querySelectorAll("[data-bg-block]").forEach((btn) => {
+      btn.addEventListener("click", () => blockBg(btn.getAttribute("data-bg-block")));
     });
     document.querySelectorAll("[data-bg-delete]").forEach((btn) => {
       btn.addEventListener("click", () => deleteBg(btn.getAttribute("data-bg-delete")));
