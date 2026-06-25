@@ -3054,8 +3054,8 @@ html[data-theme="light"]{
   --theme-feed-bg:var(--premium-bg)!important;
   --theme-feed-overlay:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(42,34,24,.20) 45%,rgba(42,34,24,.46) 100%)!important;
   --theme-feed-top:linear-gradient(180deg,rgba(255,250,238,.96),rgba(247,236,210,.82) 72%,transparent)!important;
-  --theme-feed-panel:rgba(255,252,245,.56)!important;
-  --theme-feed-panel-capture:rgba(255,252,245,.90)!important;
+  --theme-feed-panel:rgba(255,252,245,.48)!important;
+  --theme-feed-panel-capture:rgba(255,252,245,.86)!important;
   --theme-feed-panel-text:#2a2218!important;
   --theme-feed-panel-border:rgba(155,122,60,.20)!important;
   --theme-feed-chip:rgba(255,248,235,.78)!important;
@@ -3635,8 +3635,8 @@ html[data-theme="soft"]{
   --theme-feed-bg:var(--premium-bg)!important;
   --theme-feed-overlay:linear-gradient(180deg,rgba(255,255,255,.10) 0%,rgba(52,35,44,.18) 45%,rgba(52,35,44,.42) 100%)!important;
   --theme-feed-top:linear-gradient(180deg,rgba(255,251,247,.96),rgba(240,222,228,.82) 72%,transparent)!important;
-  --theme-feed-panel:rgba(255,251,247,.54)!important;
-  --theme-feed-panel-capture:rgba(255,251,247,.90)!important;
+  --theme-feed-panel:rgba(255,251,247,.46)!important;
+  --theme-feed-panel-capture:rgba(255,251,247,.86)!important;
   --theme-feed-panel-text:#291d24!important;
   --theme-feed-panel-border:rgba(116,76,98,.20)!important;
   --theme-feed-chip:rgba(255,251,247,.78)!important;
@@ -7632,6 +7632,40 @@ html[data-theme] body.is-feed-fullscreen .view{
   overflow:hidden!important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-feed,
+html[data-theme] body.is-feed-fullscreen .sf-top,
+html[data-theme] body.is-feed-fullscreen .sf-filters{
+  width:100%!important;
+  max-width:var(--sf-feed-col-max,var(--feed-col-max,100%))!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:599px){
+  html[data-theme] body.is-feed-fullscreen .sf-feed,
+  html[data-theme] body.is-feed-fullscreen .sf-top,
+  html[data-theme] body.is-feed-fullscreen .sf-filters{
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:var(--app-frame-inset-left,max(10px,env(safe-area-inset-left,0px)))!important;
+    padding-right:var(--app-frame-inset-right,max(10px,env(safe-area-inset-right,0px)))!important;
+  }
+}
+@media(min-width:600px){
+  html[data-theme] body.is-feed-fullscreen .sf-feed,
+  html[data-theme] body.is-feed-fullscreen .sf-top,
+  html[data-theme] body.is-feed-fullscreen .sf-filters{
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+  html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav{
+    left:50%!important;
+    right:auto!important;
+    width:min(var(--sf-feed-col-max,var(--feed-col-max,520px)),calc(100% - 16px))!important;
+    max-width:calc(100% - 16px)!important;
+    transform:translateX(-50%)!important;
+  }
+}
 html[data-theme] body.is-feed-fullscreen .sf-post,
 html[data-theme] body.is-feed-fullscreen .sf-post__media,
 html[data-theme] body.is-feed-fullscreen .sf-post__scene,
@@ -7643,23 +7677,21 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
   min-width:0!important;
   box-sizing:border-box!important;
 }
-html[data-theme] body.is-feed-fullscreen .sf-feed,
-html[data-theme] body.is-feed-fullscreen .sf-top,
-html[data-theme] body.is-feed-fullscreen .sf-filters{
-  padding-left:var(--app-frame-inset-left,max(10px,env(safe-area-inset-left,0px)))!important;
-  padding-right:var(--app-frame-inset-right,max(10px,env(safe-area-inset-right,0px)))!important;
-}
-html[data-theme] body.is-feed-fullscreen .sf-post,
-html[data-theme] body.is-feed-fullscreen .sf-post__media,
-html[data-theme] body.is-feed-fullscreen .sf-post__scene{
-  width:100%!important;
-  max-width:100%!important;
-  margin-left:0!important;
-  margin-right:0!important;
-}
 html[data-theme] body.is-feed-fullscreen .sf-post__textpanel{
   width:100%!important;
   max-width:100%!important;
+}
+:root{
+  --feed-col-max:100%;
+}
+@media(min-width:600px) and (max-width:767px){
+  :root{--feed-col-max:min(100%,520px);}
+}
+@media(min-width:768px) and (max-width:1023px){
+  :root{--feed-col-max:min(100%,540px);}
+}
+@media(min-width:1024px){
+  :root{--feed-col-max:460px;}
 }
 html[data-theme] body.is-feed-fullscreen .sf-feed{
   gap:12px!important;
@@ -7694,14 +7726,6 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
     --page-gutter-x:max(8px,env(safe-area-inset-left,0px));
     --page-gutter-y:max(8px,env(safe-area-inset-right,0px));
     --content-inset:13px;
-  }
-  html[data-theme] body.is-feed-fullscreen .sf-feed,
-  html[data-theme] body.is-feed-fullscreen .sf-top,
-  html[data-theme] body.is-feed-fullscreen .sf-filters{
-    width:100%!important;
-    max-width:100%!important;
-    margin-left:0!important;
-    margin-right:0!important;
   }
 }
 </style>
@@ -7760,7 +7784,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-engine.js?v=8" defer></script>
 <script src="/assets/zakat-app.js?v=13" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
-<script src="/assets/premium-feed-app.js?v=35" defer></script>
+<script src="/assets/premium-feed-app.js?v=36" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
