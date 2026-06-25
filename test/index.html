@@ -215,7 +215,7 @@ h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px)
 .view.tab-swipe-left{animation:tabSwipeFromRight .44s cubic-bezier(.25,.82,.22,1) both}
 .view.tab-swipe-right{animation:tabSwipeFromLeft .44s cubic-bezier(.25,.82,.22,1) both}
 @keyframes tabSwipeFromRight{from{opacity:.86;transform:translate3d(16%,0,0) scale(.994)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
-@keyframes tabSwipeFromLeft{from{opacity:.86;transform:translate3d(-16%,0,0) scale(.994)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}.view-head{padding:4px 2px 16px;border-bottom:1px solid var(--line2);margin-bottom:18px}.eyebrow{color:var(--muted2);text-transform:uppercase;letter-spacing:.18em;font-weight:950;font-size:10px;margin-bottom:7px}.view h2{font-family:var(--serif);color:var(--gold2);font-size:clamp(30px,4.5vw,54px);line-height:1.02;margin:0}.view-desc{color:var(--muted);font-size:13px;line-height:1.6;max-width:850px;margin-top:8px}
+@keyframes tabSwipeFromLeft{from{opacity:.86;transform:translate3d(-16%,0,0) scale(.994)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}.view-head{margin-bottom:18px;border-bottom:1px solid var(--line2)}.eyebrow{color:var(--muted2);text-transform:uppercase;letter-spacing:.18em;font-weight:950;font-size:10px;margin-bottom:7px}.view h2{font-family:var(--serif);color:var(--gold2);font-size:clamp(30px,4.5vw,54px);line-height:1.02;margin:0}.view-desc{color:var(--muted);font-size:13px;line-height:1.6;max-width:850px;margin-top:8px}
 .overview-panel{border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 20% 0%,rgba(239,215,142,.09),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94));padding:16px;margin-bottom:16px}.overview-title h3{font-family:var(--serif);color:var(--gold2);margin:0 0 10px;font-size:24px;line-height:1.1}.stats-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.stat-card{border:1px solid var(--line2);border-radius:16px;background:rgba(239,215,142,.045);padding:10px}.stat-card b{display:block;color:var(--gold2);font-size:22px;line-height:1}.stat-card span{display:block;margin-top:5px;color:var(--muted);font-size:11px;font-weight:850}
 .main-search{margin-bottom:13px}.search{width:100%;height:48px;border:1px solid var(--line);border-radius:16px;background:#090907;color:var(--cream);padding:0 15px;outline:none;font-size:16px}.search:focus,.direct-pick:focus,.filter-select:focus{border-color:rgba(239,215,142,.58);box-shadow:0 0 0 4px rgba(239,215,142,.09)}
 .direct-pick-panel{border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.10),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));padding:13px;margin:0 0 13px}.direct-pick-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.direct-pick-title h3{font-family:var(--serif);color:var(--gold2);font-size:23px;line-height:1.08;margin:0}.direct-pick-title span{color:var(--muted);font-size:11px;font-weight:850}.direct-pick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pick-gap)}.direct-pick,.filter-select{height:44px;border:1px solid var(--line);border-radius:15px;background:#090907;color:var(--cream);padding:0 11px;outline:none;font-size:13px;font-weight:850;width:100%}
@@ -1702,7 +1702,7 @@ body:before{
 .zakat-view :where(.zakat-pill,.zakat-hero-badge,.zakat-source-tab,.zakat-source-trust,.zakat-step-num,.zakat-acc-chevron,.zakat-source-cat,.zakat-source-preview-pill){border-radius:var(--zakat-r-pill)!important}
 .zakat-view :where(input,select,textarea){-webkit-appearance:none!important;appearance:none!important}
 .zakat-form-grid label,.zakat-panel>label{padding:12px 14px 14px;border-radius:var(--zakat-r)!important;background:color-mix(in srgb,var(--gold) 4%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));box-sizing:border-box}
-.zakat-acc.is-open .zakat-acc-body-inner{background:transparent!important;border:0!important;padding:10px 2px 2px!important;overflow:visible!important;border-radius:0!important}
+.zakat-acc.is-open .zakat-acc-body-inner{background:transparent!important;border:0!important;padding:0!important;overflow:visible!important;border-radius:0!important}
 .zakat-acc.is-closed .zakat-acc-preview-inner{border-radius:var(--zakat-r)!important}
 .zakat-source-card{border-left:1px solid color-mix(in srgb,var(--gold) 28%,var(--line2))!important;box-shadow:inset 3px 0 0 var(--gold)}
 .zakat-manual-prices{border:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));border-radius:var(--zakat-r)!important;padding:4px 12px 12px;background:color-mix(in srgb,var(--gold) 3%,transparent)}
@@ -1711,7 +1711,7 @@ body:before{
 .zakat-history-row:last-child{margin-bottom:0}
 .zakat-skel-line{border-radius:var(--zakat-r-pill)!important}
 .zakat-price-metrics div{border-radius:14px!important}
-.zakat-view .view-head{margin-bottom:12px;padding:4px 2px 14px;border-bottom:1px solid var(--line2)}
+.zakat-view .view-head{margin-bottom:12px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
 .zakat-view .view-head .eyebrow{color:var(--premium-label);font-size:9.5px;letter-spacing:.16em;margin-bottom:6px}
 .zakat-view .view-head h2{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1.75rem,4.8vw,2.15rem);line-height:1.08;margin:0;font-weight:800;text-shadow:none}
 .zakat-view .view-desc{color:var(--premium-body);font-size:12.5px;line-height:1.55;margin-top:6px;max-width:100%}
@@ -1725,18 +1725,18 @@ body:before{
 .zakat-result-strip{padding:18px 18px 16px;text-align:center;box-sizing:border-box}
 .zakat-result-strip .zakat-banner{margin:0 0 14px;text-align:left;border-radius:14px}
 .zakat-result-strip-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:10px}
-.zakat-acc{padding:16px 16px 14px!important;overflow:hidden;display:flex;flex-direction:column;gap:0;box-sizing:border-box}
-.zakat-acc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;padding:2px 2px 0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;box-sizing:border-box}
+.zakat-acc{overflow:hidden;display:flex;flex-direction:column;gap:0;box-sizing:border-box}
+.zakat-acc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;box-sizing:border-box}
 .zakat-acc-head:active{opacity:.92}
-.zakat-acc-copy{flex:1;min-width:0;padding:0 6px 0 2px}
-.zakat-acc-kicker{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--premium-label);font-weight:800;margin:0 0 7px;line-height:1.35;padding:0}
-.zakat-acc-head h3{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1rem,3.2vw,1.16rem);margin:0;padding:0;font-weight:800;line-height:1.3}
+.zakat-acc-copy{flex:1;min-width:0}
+.zakat-acc-kicker{display:block;color:var(--premium-label);font-weight:800;margin:0;padding:0}
+.zakat-acc-head h3{font-family:var(--serif);color:var(--premium-title);font-weight:800;margin:0;padding:0}
 .zakat-acc-chevron{flex:0 0 34px;width:34px;height:34px;margin-top:2px;border-radius:999px;border:1px solid color-mix(in srgb,var(--gold) 22%,var(--line2));background:color-mix(in srgb,var(--gold) 8%,transparent);position:relative;transition:transform .22s ease;box-sizing:border-box}
 .zakat-acc-chevron:before{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-right:2px solid var(--premium-title);border-bottom:2px solid var(--premium-title);transform:translate(-50%,-60%) rotate(45deg)}
 .zakat-acc-chevron:after{display:none}
 .zakat-acc-chevron.open{transform:rotate(180deg)}
-.zakat-acc-preview,.zakat-acc-body{margin:13px 0 0;padding:0;border:0;background:transparent;box-sizing:border-box}
-.zakat-acc-preview-inner,.zakat-acc-body-inner{box-sizing:border-box;padding:14px 15px;border-radius:16px;background:color-mix(in srgb,var(--gold) 5%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 14%,var(--line2));font-size:11px;line-height:1.5;color:var(--premium-body);overflow:hidden}
+.zakat-acc-preview,.zakat-acc-body{margin:0;padding:0;border:0;background:transparent;box-sizing:border-box}
+.zakat-acc-preview-inner,.zakat-acc-body-inner{box-sizing:border-box;border-radius:16px;background:color-mix(in srgb,var(--gold) 5%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 14%,var(--line2));font-size:11px;color:var(--premium-body)}
 .zakat-acc-preview-inner{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .zakat-acc-body-inner{display:block}
 .zakat-acc-body-inner .zakat-source-tabs{margin:0 0 10px;padding:0 0 8px;border:0;background:transparent}
@@ -7799,12 +7799,13 @@ window.DAR_ANALYTICS_CONFIG={
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
 <script src="/assets/zakat-engine.js?v=8" defer></script>
-<script src="/assets/zakat-app.js?v=13" defer></script>
+<script src="/assets/zakat-app.js?v=14" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
 <script src="/assets/premium-feed-app.js?v=43" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/app-card-layout.css?v=1">
 
 </head>
 <body class="has-bottom-nav">

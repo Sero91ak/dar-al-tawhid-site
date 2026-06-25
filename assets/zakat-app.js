@@ -290,11 +290,11 @@
 
   function renderAccordion(id, title, kicker, body, preview) {
     const open = !!zakatSections[id];
-    return `<section class="zakat-acc premium-surface ${open ? "is-open" : "is-closed"}" data-zakat-acc="${esc(id)}">
-      <button type="button" class="zakat-acc-head" data-zakat-section="${esc(id)}" aria-expanded="${open}">
-        <div class="zakat-acc-copy">
-          ${kicker ? `<span class="zakat-acc-kicker">${esc(kicker)}</span>` : ""}
-          <h3>${esc(title)}</h3>
+    return `<section class="zakat-acc app-card app-card--zakat premium-surface ${open ? "is-open" : "is-closed"}" data-zakat-acc="${esc(id)}">
+      <button type="button" class="zakat-acc-head card-header card-header--row" data-zakat-section="${esc(id)}" aria-expanded="${open}">
+        <div class="zakat-acc-copy card-header__copy">
+          ${kicker ? `<span class="zakat-acc-kicker card-label">${esc(kicker)}</span>` : ""}
+          <h3 class="card-title">${esc(title)}</h3>
         </div>
         <span class="zakat-acc-chevron ${open ? "open" : ""}" aria-hidden="true"></span>
       </button>
@@ -453,7 +453,7 @@
 
     const historyBlock =
       session && zakatHistory.length
-        ? `<section class="zakat-acc premium-surface is-open"><div class="zakat-acc-head" style="pointer-events:none"><div class="zakat-acc-copy"><span class="zakat-acc-kicker">Account</span><h3>Mein Verlauf</h3></div><span class="zakat-acc-chevron open" aria-hidden="true"></span></div><div class="zakat-acc-body"><div class="zakat-acc-body-inner"><div class="zakat-panel-head" style="border:0;padding:0;margin:0 0 10px"><h3 style="font-size:1rem">Einträge</h3><span>${zakatHistory.length}</span></div>
+        ? `<section class="zakat-acc app-card app-card--zakat premium-surface is-open"><div class="zakat-acc-head card-header card-header--row" style="pointer-events:none"><div class="zakat-acc-copy card-header__copy"><span class="zakat-acc-kicker card-label">Account</span><h3 class="card-title">Mein Verlauf</h3></div><span class="zakat-acc-chevron open" aria-hidden="true"></span></div><div class="zakat-acc-body"><div class="zakat-acc-body-inner"><div class="zakat-panel-head" style="border:0;padding:0;margin:0 0 10px"><h3 style="font-size:1rem">Einträge</h3><span>${zakatHistory.length}</span></div>
       <div class="zakat-history">${zakatHistory
           .map(
             (h) => `<div class="zakat-history-row"><span>${esc(h.zakat_year || h.calculated_at?.slice(0, 10) || "")}</span><b>${global.DARZakat.formatMoney(h.zakat_due, result?.currency || "EUR")}</b><button type="button" class="zakat-mini-btn" data-zakat-delete="${esc(h.id)}">Löschen</button></div>`
