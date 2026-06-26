@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-06-26T13:13:36.834Z",
+  "generated": "2026-06-26T13:15:17.040Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -337,7 +337,32 @@
       "publishedAt": "2026-06-26T13:10:14.637Z",
       "postPath": "content/posts/beitrag-429-neuer-beitrag.md",
       "status": "pending",
-      "updatedAt": "2026-06-26T13:10:15.047Z"
+      "updatedAt": "2026-06-26T13:15:17.040Z",
+      "lastCheckAt": "2026-06-26T13:15:16.832Z",
+      "liveCheck": {
+        "ok": false,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": false,
+          "postFilePublic": false,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": false
+        },
+        "diagnosis": "Beitrag ist nicht im öffentlichen Index enthalten.",
+        "indexOk": false,
+        "postOk": false,
+        "visitorUrlOk": true,
+        "attempts": 6,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "beitrag-429-neuer-beitrag",
+        "indexGenerated": "2026-06-26T13:13:34.105Z",
+        "indexCount": 429,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=beitrag-429-neuer-beitrag&v=1782479716727#post/beitrag-429-neuer-beitrag"
+      },
+      "attempts": 6,
+      "lastError": "Beitrag ist nicht im öffentlichen Index enthalten."
     },
     "yahya-bin-main-dunya-kein-ort-der-ruhe-429": {
       "postId": "yahya-bin-main-dunya-kein-ort-der-ruhe-429",
