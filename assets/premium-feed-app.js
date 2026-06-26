@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV44';
-  var FONTS_ID = 'darPremiumFeedFontsV44';
+  var STYLES_ID = 'darPremiumFeedStylesV45';
+  var FONTS_ID = 'darPremiumFeedFontsV45';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
   var FEED_COL_TABLET = 540;
@@ -290,7 +290,7 @@
         .catch(function () { return null; });
     }
     return loadJson(apiPath).then(function (data) {
-      if (data && data.items) return data;
+      if (data && Array.isArray(data.items) && data.items.length) return data;
       return loadJson(jsonPath);
     }).then(function (data) {
       FEED_BG_CACHE_VER = Number(data && data.cacheVersion) || 1;
@@ -1085,7 +1085,7 @@
   }
 
   function saveFeedState() {
-    if (!isFeedRoute() && !state.visible.length) return;
+    if (!state.visible.length) return;
     try {
       global.sessionStorage.setItem(
         FEED_STATE_KEY,
@@ -1156,6 +1156,28 @@
       });
     }
     return true;
+  }
+
+  function startFeedMount(opts) {
+    opts = opts || {};
+    var mount = global.document.getElementById(MOUNT_ID);
+    if (!mount) {
+      document.body.classList.remove('is-premium-feed-view');
+      return;
+    }
+    fetchFeedBackgrounds().finally(function () {
+      if (!opts.force && tryRestoreFeedState()) return;
+      if (opts.force || !state.allItems.length) state.seed = feedSeed();
+      applyFeedData(mount, []);
+      fetchManual()
+        .then(function (data) {
+          var mount2 = global.document.getElementById(MOUNT_ID);
+          if (!mount2) return;
+          var manual = (data && data.items) || [];
+          if (manual.length) applyFeedData(mount2, manual);
+        })
+        .catch(function () {});
+    });
   }
 
   function feedSeed() {
@@ -2515,21 +2537,7 @@
   }
 
   function rebuild(force) {
-    var mount = document.getElementById(MOUNT_ID);
-    if (!mount) {
-      document.body.classList.remove('is-premium-feed-view');
-      return;
-    }
-    state.seed = feedSeed();
-    fetchFeedBackgrounds().finally(function () {
-      applyFeedData(mount, []);
-      fetchManual().then(function (data) {
-        var mount2 = document.getElementById(MOUNT_ID);
-        if (!mount2) return;
-        var manual = (data && data.items) || [];
-        if (manual.length) applyFeedData(mount2, manual);
-      }).catch(function () {});
-    });
+    startFeedMount({ force: !!force });
   }
 
   function refreshMix() {
@@ -2557,8 +2565,7 @@
     selectFeedBackground: selectFeedBackground,
     getFeedBackgroundPool: function () { return FEED_BG_POOL.slice(); },
     onAppReady: function (opts) {
-      if (!(opts && opts.force) && tryRestoreFeedState()) return;
-      rebuild(opts && opts.force);
+      startFeedMount({ force: opts && opts.force });
     }
   };
 
