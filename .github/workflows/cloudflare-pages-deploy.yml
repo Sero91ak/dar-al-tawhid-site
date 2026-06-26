@@ -1,4 +1,4 @@
-name: Deploy Besucher-App (Cloudflare Pages)
+name: Deploy Besucher-App (Cloudflare Workers)
 
 on:
   workflow_dispatch:
@@ -14,6 +14,7 @@ on:
       - content/**
       - admin/index.html
       - wrangler.toml
+      - .assetsignore
       - package.json
       - _headers
       - scripts/cf-pages-build.js
@@ -39,12 +40,12 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
 
-      - name: Deploy statische App zu Cloudflare Pages
+      - name: Deploy statische App (Workers Static Assets)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=dar-al-tawhid-site --branch=main
+          command: deploy
 
       - name: Cloudflare CDN Cache leeren
         env:
