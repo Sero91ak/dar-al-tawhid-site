@@ -511,12 +511,18 @@
     if (details) zakatManualOpen = details.open;
   }
 
+  function zakatRenderPreserve() {
+    if (global.DARScrollManager?.preserveNextRender) global.DARScrollManager.preserveNextRender();
+    else global.__preserveScrollOnRender = true;
+    global.render?.();
+  }
+
   function scheduleRender() {
     if (zakatDebounceTimer) clearTimeout(zakatDebounceTimer);
     zakatDebounceTimer = setTimeout(() => {
       zakatDebounceTimer = null;
       readInputFromDom();
-      global.render();
+      zakatRenderPreserve();
     }, DEBOUNCE_MS);
   }
 
@@ -546,7 +552,7 @@
         const id = secBtn.getAttribute("data-zakat-section");
         if (id && Object.prototype.hasOwnProperty.call(zakatSections, id)) {
           zakatSections[id] = !zakatSections[id];
-          global.render?.();
+          zakatRenderPreserve();
         }
         return;
       }
@@ -558,7 +564,7 @@
         readInputFromDom();
         zakatSourceTab = tabBtn.getAttribute("data-zakat-source-tab") || "quran";
         zakatSections.sources = true;
-        global.render?.();
+        zakatRenderPreserve();
       }
     });
 
@@ -581,7 +587,7 @@
       clear.onclick = () => {
         if (!hasAnyInput() || confirm("Alle Eingaben zurücksetzen?")) {
           resetZakatInput();
-          global.render();
+          zakatRenderPreserve();
         }
       };
     const pdf = $("zakatPdfBtn");
@@ -595,7 +601,7 @@
         if (w) {
           w.document.write(html);
           w.document.close();
-          w.focus();
+          w.focus({ preventScroll: true });
           w.print();
         }
       };
@@ -646,7 +652,7 @@
       });
       zakatHistory = await fetchZakatHistory(session.id);
       alert("Berechnung gespeichert.");
-      global.render();
+      zakatRenderPreserve();
     } catch (e) {
       alert(e.message || "Speichern fehlgeschlagen.");
     }
@@ -662,7 +668,7 @@
         prefer: "return=minimal"
       });
       zakatHistory = await fetchZakatHistory(session.id);
-      global.render();
+      zakatRenderPreserve();
     } catch (e) {
       alert(e.message || "Löschen fehlgeschlagen");
     }
@@ -674,7 +680,7 @@
     const session = global.accountSession?.();
     if (session?.id) zakatHistory = await fetchZakatHistory(session.id);
     await pricePromise;
-    if (isZakatRoute()) global.render?.();
+    if (isZakatRoute()) zakatRenderPreserve();
   }
 
   installZakatDelegation();

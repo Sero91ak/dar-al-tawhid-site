@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV43';
-  var FONTS_ID = 'darPremiumFeedFontsV43';
+  var STYLES_ID = 'darPremiumFeedStylesV44';
+  var FONTS_ID = 'darPremiumFeedFontsV44';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
   var FEED_COL_TABLET = 540;
@@ -82,6 +82,7 @@
   var LIKES_KEY = 'darPremiumFeedLikesV1';
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
+  var FEED_STATE_KEY = 'darPremiumFeedStateV1';
   var BATCH = 10;
   var INITIAL = 12;
 
@@ -1081,6 +1082,80 @@
     } catch (e) {
       return 'dev';
     }
+  }
+
+  function saveFeedState() {
+    if (!isFeedRoute() && !state.visible.length) return;
+    try {
+      global.sessionStorage.setItem(
+        FEED_STATE_KEY,
+        JSON.stringify({
+          scrollY: global.scrollY || 0,
+          filter: state.filter,
+          seed: state.seed,
+          offset: state.offset,
+          done: state.done,
+          visibleIds: state.visible.map(function (x) {
+            return x.uid;
+          }),
+          ts: Date.now()
+        })
+      );
+    } catch (e) {}
+  }
+
+  function loadFeedState() {
+    try {
+      var raw = global.sessionStorage.getItem(FEED_STATE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearFeedState() {
+    try {
+      global.sessionStorage.removeItem(FEED_STATE_KEY);
+    } catch (e) {}
+  }
+
+  function tryRestoreFeedState() {
+    var saved = loadFeedState();
+    if (!saved || !Array.isArray(saved.visibleIds) || !saved.visibleIds.length) return false;
+    if (!state.allItems.length) return false;
+    var mount = global.document.getElementById(MOUNT_ID);
+    if (!mount) return false;
+
+    state.filter = saved.filter || 'all';
+    state.seed = saved.seed || state.seed || feedSeed();
+    state.offset = Math.max(0, Number(saved.offset) || 0);
+    state.done = !!saved.done;
+    state.visible = saved.visibleIds
+      .map(function (id) {
+        return state.allItems.find(function (x) {
+          return x.uid === id;
+        });
+      })
+      .filter(Boolean);
+    if (!state.visible.length) return false;
+
+    if (!mount.querySelector('.sf-app')) {
+      renderPage(mount);
+    } else {
+      renderFilters(mount);
+      renderListMount(mount);
+      syncSceneLayout(mount);
+    }
+
+    var y = Math.max(0, Number(saved.scrollY) || 0);
+    if (global.DARScrollManager && global.DARScrollManager.stableScrollTo) {
+      global.DARScrollManager.stableScrollTo(y);
+    } else {
+      global.requestAnimationFrame(function () {
+        global.scrollTo({ top: y, behavior: 'auto' });
+      });
+    }
+    return true;
   }
 
   function feedSeed() {
@@ -2461,10 +2536,12 @@
     try {
       sessionStorage.setItem(REFRESH_KEY, String(Date.now()));
     } catch (e) {}
+    clearFeedState();
     rebuild(true);
   }
 
   function destroy() {
+    saveFeedState();
     document.body.classList.remove('is-premium-feed-view');
     if (observer) observer.disconnect();
   }
@@ -2474,9 +2551,13 @@
     rebuild: rebuild,
     refresh: refreshMix,
     destroy: destroy,
+    saveState: saveFeedState,
+    tryRestore: tryRestoreFeedState,
+    clearState: clearFeedState,
     selectFeedBackground: selectFeedBackground,
     getFeedBackgroundPool: function () { return FEED_BG_POOL.slice(); },
     onAppReady: function (opts) {
+      if (!(opts && opts.force) && tryRestoreFeedState()) return;
       rebuild(opts && opts.force);
     }
   };
