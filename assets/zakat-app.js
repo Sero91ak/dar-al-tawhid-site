@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Zakāt-Rechner UI (Staging / test)
+ * DAR AL TAWḤĪD — Zakāt-Rechner UI (Besucher-App)
  */
 (function (global) {
   "use strict";

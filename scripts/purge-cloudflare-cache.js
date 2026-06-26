@@ -3,14 +3,29 @@
 
 const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\/$/, "");
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
+const GLOBAL_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY || process.env.CLOUDFLARE_API_KEY || "";
+const GLOBAL_EMAIL = process.env.CLOUDFLARE_EMAIL || "";
 const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "";
+
+function authHeaders() {
+  if (API_TOKEN) {
+    return { Authorization: `Bearer ${API_TOKEN}`, "Content-Type": "application/json" };
+  }
+  if (GLOBAL_EMAIL && GLOBAL_API_KEY) {
+    return {
+      "X-Auth-Email": GLOBAL_EMAIL,
+      "X-Auth-Key": GLOBAL_API_KEY,
+      "Content-Type": "application/json"
+    };
+  }
+  throw new Error("Cloudflare Auth fehlt (CLOUDFLARE_API_TOKEN oder CLOUDFLARE_EMAIL + CLOUDFLARE_GLOBAL_API_KEY)");
+}
 
 async function cfApi(path, options = {}) {
   const res = await fetch(`https://api.cloudflare.com/client/v4${path}`, {
     ...options,
     headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
-      "Content-Type": "application/json",
+      ...authHeaders(),
       ...(options.headers || {})
     }
   });
@@ -35,6 +50,7 @@ async function purgeSite(zoneId) {
   const files = [
     `${SITE_URL}/`,
     `${SITE_URL}/index.html`,
+    `${SITE_URL}/test/index.html`,
     `${SITE_URL}/version.json`,
     `${SITE_URL}/service-worker.js`,
     `${SITE_URL}/content/updates/current.json`,
@@ -42,7 +58,8 @@ async function purgeSite(zoneId) {
     `${SITE_URL}/assets/zakat-app.js`,
     `${SITE_URL}/assets/app-card-layout.css`,
     `${SITE_URL}/assets/app-scroll-manager.js`,
-    `${SITE_URL}/assets/focus-feed-app.js`
+    `${SITE_URL}/assets/focus-feed-app.js`,
+    `${SITE_URL}/assets/live-boot.js`
   ];
   try {
     const result = await cfApi(`/zones/${zoneId}/purge_cache`, {
@@ -63,7 +80,6 @@ async function purgeSite(zoneId) {
 }
 
 (async function main() {
-  if (!API_TOKEN) throw new Error("CLOUDFLARE_API_TOKEN fehlt");
   const hostname = new URL(SITE_URL).hostname;
   const zoneId = await resolveZoneId(hostname);
   console.log("Zone:", zoneId, "für", hostname);

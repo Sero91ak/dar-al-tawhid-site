@@ -1,0 +1,45 @@
+name: Live Zakāt deploy (Besucher)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-live:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Purge Cloudflare cache
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+        run: node scripts/purge-cloudflare-cache.js
+
+      - name: Send Zakāt focus push to visitors
+        continue-on-error: true
+        env:
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          SITE_URL: "https://dar-al-tawhid.de"
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/send-zakat-focus-push.js
+
+      - name: Verify live origin (GitHub Pages)
+        run: |
+          curl -fsS --resolve dar-al-tawhid.de:443:185.199.108.153 "https://dar-al-tawhid.de/index.html" | rg "zakat-app.js\?v=18|app-shell-v171"
+          curl -fsS --resolve dar-al-tawhid.de:443:185.199.108.153 "https://dar-al-tawhid.de/content/updates/current.json" | rg "zakat-rechner-live-kompakt-2026"
