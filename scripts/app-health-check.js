@@ -23,8 +23,12 @@ function read(file) {
 }
 
 function extractMainScript(html) {
-  const m = html.match(/<script>\nconst REPO_OWNER[\s\S]*?<\/script>/);
-  return m ? m[0].replace(/^<script>\n/, "").replace(/<\/script>$/, "") : "";
+  const re = /<script>\s*\n([\s\S]*?)<\/script>/g;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    if (m[1].includes("const REPO_OWNER")) return m[1];
+  }
+  return "";
 }
 
 function extractAdminMainScript(html) {
