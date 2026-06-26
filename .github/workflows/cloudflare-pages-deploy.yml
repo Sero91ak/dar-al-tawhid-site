@@ -1,4 +1,4 @@
-name: Besucher-App GitHub Pages Live
+name: Deploy Besucher-App (Cloudflare Pages)
 
 on:
   workflow_dispatch:
@@ -11,29 +11,19 @@ on:
       - version.json
       - service-worker.js
       - assets/**
-      - content/updates/**
-      - content/focus-feed/**
-      - CNAME
-      - .nojekyll
-      - scripts/verify-live-visitor-app.js
-      - .github/workflows/visitor-app-github-pages.yml
-  workflow_run:
-    workflows:
-      - pages build and deployment
-    types:
-      - completed
-    branches:
-      - main
+      - content/**
+      - admin/index.html
+      - wrangler.toml
+      - package.json
+      - _headers
+      - scripts/cf-pages-build.js
+      - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
   contents: read
 
 jobs:
-  verify-github-pages:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'push' ||
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,22 +38,21 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
 
-      - name: Warte auf GitHub Pages Propagation
-        run: sleep 45
+      - name: Deploy statische App zu Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=dar-al-tawhid-site --branch=main
 
-      - name: Prüfe GitHub Pages Origin (direkt)
-        run: |
-          curl -fsS --resolve dar-al-tawhid.de:443:185.199.108.153 \
-            "https://dar-al-tawhid.de/index.html" | rg "zakat-app\.js\?v=1[78]|app-shell-v171"
-
-      - name: Cloudflare Cache leeren (CDN vor GitHub Pages)
+      - name: Cloudflare CDN Cache leeren
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v172"
+          EXPECT_BUILD: "app-shell-v173"
           CLOUDFLARE_DEV_MODE: "1"
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
@@ -71,6 +60,6 @@ jobs:
       - name: Live-Besucher-App verifizieren
         env:
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v172"
+          EXPECT_BUILD: "app-shell-v173"
           EXPECT_ZAKAT_VERSION: "18"
         run: node scripts/verify-live-visitor-app.js
