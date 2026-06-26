@@ -19,6 +19,7 @@ Deploy: GitHub Action **Deploy Besucher-App (Cloudflare Pages)** — **nicht** `
 | 3 | Build command | leer **oder** `npm run build` |
 | 4 | Build output | **`.`** (Root) |
 | 5 | GitHub Secrets | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (`e92f457fab8e54aed1b4eddb3bf28dc2`) |
+| 5b | API-Token Rechte | **Account → Cloudflare Pages → Edit** (Deploy), **Zone → Cache Purge → Purge** (CDN leeren). Nur Cache-Purge reicht **nicht** für `wrangler pages deploy`. Vorlage: *Edit Cloudflare Workers* oder Custom mit Pages Edit. |
 | 6 | GitHub Pages | Custom Domain **deaktivieren** (nur Cloudflare hosten) |
 
 Repo-Root: `wrangler.toml` (Pages), `package.json` → `npm run build` (No-Op für statische Dateien).
