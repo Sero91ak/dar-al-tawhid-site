@@ -6,7 +6,21 @@
 |--------|--------|--------------|
 | `stable-last-working` | `5154cfb` | Notfall-Fix Besucher-App (hardRefreshApp Syntax) – App startet wieder |
 
-Aktueller Live-Stand: Branch `main` auf GitHub → Cloudflare Pages.
+Aktueller Live-Stand: Branch **`main`** → **GitHub Pages** (`CNAME`: dar-al-tawhid.de).  
+Cloudflare davor nur **CDN/DNS** + Worker **`dar-admin-publisher`** (Admin/Push).  
+**Nicht** Cloudflare Pages/Worker `dar-al-tawhid-site` mit `wrangler deploy` — das blockiert Updates.
+
+## GitHub Pages (Besucher-App) – Einrichtung
+
+| Schritt | Wo | Einstellung |
+|--------|-----|-------------|
+| 1 | GitHub → Repo → **Settings → Pages** | Source: **Deploy from branch** → `main` → **`/` (root)** |
+| 2 | Custom domain | **dar-al-tawhid.de** (HTTPS enforced) |
+| 3 | Cloudflare **DNS** | `CNAME` `@` → **`sero91ak.github.io`** (Proxied orange) |
+| 4 | Cloudflare **Workers & Pages** | Projekt **`dar-al-tawhid-site`** mit `npx wrangler deploy`: **Custom Domain entfernen** oder Projekt löschen |
+| 5 | Nach Deploy | Workflow **Besucher-App GitHub Pages Live** oder **Purge live site cache** |
+
+GitHub liefert die App; Cloudflare darf sie nur cachen, nicht als Worker neu bauen.
 
 ## Rollback (Notfall)
 
@@ -19,10 +33,15 @@ git checkout stable-last-working
 git checkout stable-last-working -- index.html admin/index.html service-worker.js
 ```
 
-### Cloudflare Pages
+### GitHub Pages (Besucher)
 
-1. Cloudflare Dashboard → Pages → Projekt → **Deployments**
-2. Letztes grünes Deployment vor dem Fehler → **Rollback to this deployment**
+1. GitHub → Repo → **Actions** → **pages build and deployment** → letztes grünes Deploy
+2. Oder: Commit auf `main` zurücksetzen und erneut pushen
+
+### Cloudflare CDN
+
+1. Dashboard → **Caching** → **Purge Everything**
+2. Optional: **Development Mode** 3 h (Cache-Bypass)
 
 ### Cloudflare Worker (Admin Publisher)
 
