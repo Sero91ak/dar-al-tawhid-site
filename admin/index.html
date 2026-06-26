@@ -580,13 +580,13 @@ function newsItemExpiresAt(item){
   return created+ttl*60*60*1000;
 }
 function newsDurationHours(value){
-  const v=String(value||"24 Stunden");
+  const v=String(value||"72 Stunden");
   if(v.includes("manuell"))return 720;
   if(v.includes("72"))return 72;
   return 24;
 }
 function newsDurationFromItem(item){
-  if(!item)return "24 Stunden";
+  if(!item)return "72 Stunden";
   if(Number(item.ttlHours||0)>=168||String(item.until||"").includes("manuell"))return "bis manuell deaktiviert";
   if(Number(item.ttlHours||24)===72)return "72 Stunden";
   return "24 Stunden";
@@ -2389,7 +2389,7 @@ function renderNewsFormFields(compact){
   const editing=editingNewsId?` · Bearbeitung ${esc(editingNewsId)}`:"";
   return `<div class="admin-form-grid news-form-grid${compact?" news-compose-compact":""}">
       <input class="field" id="newsTitle" placeholder="Kurzer Titel" value="${esc(editItem?.title||"")}">
-      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"?" selected":""}>72 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
+      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"||!editItem?" selected":""}>72 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
       <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher">${esc(editItem?.text||"")}</textarea>
       <button class="btn primary wide" id="publishNewsLiveBtn" type="button">${editingNewsId?"Änderung live speichern (ohne Push)":"Live posten"}</button>
       ${editingNewsId?`<button class="btn" id="cancelNewsEditBtn" type="button">Bearbeitung abbrechen</button>`:""}
@@ -3147,7 +3147,7 @@ function bindCommandCenterForms(){
   if(publishNewsLive)publishNewsLive.onclick=async()=>{
     const title=(document.getElementById("newsTitle")?.value||"").trim();
     const text=(document.getElementById("newsText")?.value||"").trim();
-    const duration=document.getElementById("newsDuration")?.value||"24 Stunden";
+    const duration=document.getElementById("newsDuration")?.value||"72 Stunden";
     if(!title||!text){toast("Titel und Text fehlen");return}
     const hours=newsDurationHours(duration);
     const isEdit=!!editingNewsId;

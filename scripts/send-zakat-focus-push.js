@@ -95,7 +95,7 @@ async function sendWithFallbacks(basePayload) {
 (async function main() {
   const url = buildZakatPushUrl();
   const title = "🕌 Zakāt-Rechner jetzt online";
-  const message = "72 Std. im Fokus · Live-Goldpreise · Nisāb · anonym berechnet. Tippe hier zum Öffnen.";
+  const message = "72 Std. im Fokus · Live-Goldpreise · Nisāb · kompakt & anonym. Tippe hier zum Öffnen.";
 
   const payload = withNotificationIcons({
     app_id: APP_ID,
