@@ -2,6 +2,18 @@ name: Purge live site cache
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+      - version.json
+      - service-worker.js
+      - _headers
+      - content/**
+      - assets/**
+      - scripts/purge-cloudflare-cache.js
+      - .github/workflows/purge-live-cache.yml
   workflow_run:
     workflows:
       - pages build and deployment
