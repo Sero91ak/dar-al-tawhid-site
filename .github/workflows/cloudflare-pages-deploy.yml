@@ -17,6 +17,7 @@ on:
       - package.json
       - _headers
       - scripts/cf-pages-build.js
+      - scripts/app-health-check.js
       - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
