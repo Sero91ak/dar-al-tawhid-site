@@ -275,6 +275,14 @@
 /* —— ZAKĀT: Safe-Zones für stark gerundete Akkordeon-Karten —— */
 .zakat-view {
   --zakat-r-lg: var(--card-radius-md);
+  --zakat-shell-gap: 8px;
+  --zakat-acc-px: 14px;
+  --zakat-acc-pt: 12px;
+  --zakat-acc-pb: 7px;
+}
+
+.zakat-shell {
+  gap: var(--zakat-shell-gap) !important;
 }
 
 .zakat-shell .zakat-hero,
@@ -293,10 +301,10 @@
 .zakat-acc .zakat-acc-head.card-header {
   width: 100%;
   padding:
-    var(--card-safe-top-lg)
-    var(--card-safe-left-lg)
-    var(--card-padding-y-sm)
-    var(--card-safe-left-lg);
+    var(--zakat-acc-pt, var(--card-safe-top-lg))
+    var(--zakat-acc-px, var(--card-safe-left-lg))
+    var(--zakat-acc-pb, var(--card-padding-y-sm))
+    var(--zakat-acc-px, var(--card-safe-left-lg));
   margin: 0;
   border: 0;
   background: transparent;
@@ -312,9 +320,9 @@
 }
 
 .zakat-acc .zakat-acc-kicker.card-label {
-  font-size: var(--card-label-size);
+  font-size: clamp(0.66rem, 2.4vw, 0.78rem);
   line-height: var(--card-label-line-height);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   margin: 0;
   padding: 0;
   overflow-wrap: anywhere;
@@ -322,37 +330,70 @@
 }
 
 .zakat-acc .zakat-acc-head h3.card-title {
-  font-size: clamp(1.05rem, 3.4vw, 1.28rem);
-  line-height: var(--card-title-line-height);
+  font-size: clamp(0.96rem, 3vw, 1.12rem);
+  line-height: 1.15;
   margin: 0;
   padding: 0;
   overflow-wrap: anywhere;
 }
 
 .zakat-acc .zakat-acc-chevron {
-  margin-top: calc(var(--card-safe-top-lg) - 6px);
+  margin-top: calc(var(--zakat-acc-pt, var(--card-safe-top-lg)) - 5px);
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
 }
 
 .zakat-acc .zakat-acc-preview,
 .zakat-acc .zakat-acc-body {
   margin: 0;
-  padding: 0 var(--card-safe-left-lg) var(--card-padding-y-md);
+  padding: 0 var(--zakat-acc-px, var(--card-safe-left-lg)) 10px;
   box-sizing: border-box;
 }
 
 .zakat-acc .zakat-acc-preview-inner,
 .zakat-acc .zakat-acc-body-inner {
-  padding: var(--card-padding-y-sm) var(--card-padding-x-sm);
+  padding: 8px 10px;
   overflow: visible;
-  line-height: var(--card-body-line-height);
+  line-height: 1.4;
+  font-size: 10.5px;
 }
 
 .zakat-panel,
 .zakat-result-strip,
 .zakat-hero-compact {
-  padding: var(--card-safe-top-md) var(--card-safe-left-md) var(--card-padding-y-md) !important;
+  padding: 11px var(--zakat-acc-px, var(--card-safe-left-md)) 10px !important;
   box-sizing: border-box;
+}
+
+.zakat-view .zakat-hero-compact .zakat-hero-title {
+  font-size: clamp(1.05rem, 3.2vw, 1.22rem) !important;
+  margin-bottom: 4px !important;
+}
+
+.zakat-view .zakat-hero-compact .zakat-hero-sub {
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}
+
+.zakat-view .zakat-hero-compact .zakat-hero-badge {
+  margin-bottom: 6px !important;
+  padding: 4px 9px !important;
+  font-size: 8px !important;
+}
+
+.zakat-view .zakat-result-amount {
+  font-size: clamp(1.55rem, 5.2vw, 1.85rem) !important;
+}
+
+.zakat-view .zakat-result-strip .zakat-banner {
+  margin-bottom: 8px !important;
+  font-size: 11px !important;
+}
+
+.zakat-view .zakat-num {
+  font-variant-numeric: tabular-nums;
 }
 
 .zakat-panel-head {
