@@ -35,7 +35,7 @@ function checkHtml(label, html, res) {
   if (!ok) {
     throw new Error(
       `Besucher-App noch nicht live (${EXPECT_BUILD}, zakat>=v${EXPECT_ZAKAT}). ` +
-        "Cloudflare: altes Pages/Worker-Projekt trennen, Purge Everything, DNS → GitHub Pages."
+        "Cloudflare Pages: Deploy command leeren, neues Deployment, Purge Everything."
     );
   }
   console.log("Besucher-App live OK.");
