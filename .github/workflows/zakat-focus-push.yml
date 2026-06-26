@@ -2,6 +2,11 @@ name: Send Zakāt focus push (live)
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - content/admin/push-triggers/zakat-fokus-live.json
 
 jobs:
   notify:
