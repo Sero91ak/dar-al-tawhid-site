@@ -1,0 +1,6 @@
+# Cloudflare Pages — Besucher-App (statisch, dar-al-tawhid.de)
+# Admin-Worker: cloudflare/wrangler.toml → dar-admin-publisher
+
+name = "dar-al-tawhid-site"
+compatibility_date = "2026-06-14"
+pages_build_output_dir = "."

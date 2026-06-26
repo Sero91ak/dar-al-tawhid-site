@@ -17,6 +17,7 @@ on:
   workflow_run:
     workflows:
       - pages build and deployment
+      - Deploy Besucher-App (Cloudflare Pages)
     types:
       - completed
     branches:
@@ -45,6 +46,6 @@ jobs:
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v172"
+          EXPECT_BUILD: "app-shell-v173"
           CLOUDFLARE_DEV_MODE: "1"
         run: node scripts/purge-cloudflare-cache.js
