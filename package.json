@@ -3,5 +3,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/cf-pages-build.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.86.0"
   }
 }

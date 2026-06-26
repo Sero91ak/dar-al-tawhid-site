@@ -6,23 +6,23 @@
 |--------|--------|--------------|
 | `stable-last-working` | `5154cfb` | Notfall-Fix Besucher-App (hardRefreshApp Syntax) – App startet wieder |
 
-Aktueller Live-Stand: Branch **`main`** → **Cloudflare Pages** (`dar-al-tawhid-site`, statisch).  
+Aktueller Live-Stand: Branch **`main`** → **Cloudflare Workers Static Assets** (`dar-al-tawhid-site`, statisch).  
 Admin/Push: Cloudflare Worker **`dar-admin-publisher`** (`cloudflare/wrangler.toml`).  
-Deploy: GitHub Action **Deploy Besucher-App (Cloudflare Pages)** — **nicht** `npx wrangler deploy`.
+Deploy: Cloudflare Git-Build **`npx wrangler deploy`** (Root-`wrangler.toml` mit `[assets]`) oder GitHub Action **Deploy Besucher-App (Cloudflare Workers)**.
 
-## Cloudflare Pages (Besucher-App) – Einrichtung
+## Cloudflare Workers Static Assets (Besucher-App) – Einrichtung
 
 | Schritt | Wo | Einstellung |
 |--------|-----|-------------|
-| 1 | Cloudflare → **Workers & Pages** → **dar-al-tawhid-site** | Typ: **Pages** (statisch), Domain **dar-al-tawhid.de** |
-| 2 | **Settings → Builds** | **Deploy command leeren** (kein `npx wrangler deploy`) |
-| 3 | Build command | leer **oder** `npm run build` |
-| 4 | Build output | **`.`** (Root) |
-| 5 | GitHub Secrets | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (`e92f457fab8e54aed1b4eddb3bf28dc2`) |
-| 5b | API-Token Rechte | **Account → Cloudflare Pages → Edit** (Deploy), **Zone → Cache Purge → Purge** (CDN leeren). Nur Cache-Purge reicht **nicht** für `wrangler pages deploy`. Vorlage: *Edit Cloudflare Workers* oder Custom mit Pages Edit. |
+| 1 | Cloudflare → **Workers & Pages** → **dar-al-tawhid-site** | Git: `Sero91ak/dar-al-tawhid-site`, Branch **main** |
+| 2 | **Settings → Build** | **Deploy command:** `npx wrangler deploy` (korrekt für statische App) |
+| 3 | Build command | **None** oder `npm run build` |
+| 4 | Root directory | `/` |
+| 5 | Repo-Root | `wrangler.toml` mit `[assets] directory = "."`, `.assetsignore` |
+| 5b | API-Token (GitHub Actions) | **Account → Workers Scripts → Edit** + **Cache Purge** |
 | 6 | GitHub Pages | Custom Domain **deaktivieren** (nur Cloudflare hosten) |
 
-Repo-Root: `wrangler.toml` (Pages), `package.json` → `npm run build` (No-Op für statische Dateien).
+Nach fehlgeschlagenem Build: **View build** → Log prüfen, dann **Retry deployment**.
 
 ## Rollback (Notfall)
 
