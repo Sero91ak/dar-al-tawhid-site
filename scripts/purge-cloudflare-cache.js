@@ -5,7 +5,7 @@ const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
 const GLOBAL_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY || process.env.CLOUDFLARE_API_KEY || "";
 const GLOBAL_EMAIL = process.env.CLOUDFLARE_EMAIL || "";
-const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "";
+const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "0e4c0fdfaca4f3fa137de3a67ac8a68b";
 
 function authHeaders() {
   if (API_TOKEN) {
@@ -32,6 +32,12 @@ async function cfApi(path, options = {}) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok || data.success === false) {
     const msg = data.errors?.map((e) => e.message).join("; ") || res.statusText;
+    if (/authentication/i.test(msg)) {
+      throw new Error(
+        `${msg} — Cloudflare-Token braucht: Zone → Zone → Read, Zone → Cache Purge → Purge. ` +
+          "Alternativ CLOUDFLARE_EMAIL + CLOUDFLARE_GLOBAL_API_KEY in GitHub Secrets."
+      );
+    }
     throw new Error(msg || "Cloudflare API Fehler");
   }
   return data;
