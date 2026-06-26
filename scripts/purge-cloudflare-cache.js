@@ -6,6 +6,8 @@ const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
 const GLOBAL_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY || process.env.CLOUDFLARE_API_KEY || "";
 const GLOBAL_EMAIL = process.env.CLOUDFLARE_EMAIL || "";
 const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "0e4c0fdfaca4f3fa137de3a67ac8a68b";
+const EXPECT_BUILD = process.env.EXPECT_BUILD || "app-shell-v171";
+const ENABLE_DEV_MODE = String(process.env.CLOUDFLARE_DEV_MODE || "1").trim() !== "0";
 
 function authHeaders() {
   if (API_TOKEN) {
@@ -34,8 +36,7 @@ async function cfApi(path, options = {}) {
     const msg = data.errors?.map((e) => e.message).join("; ") || res.statusText;
     if (/authentication/i.test(msg)) {
       throw new Error(
-        `${msg} — Cloudflare-Token braucht: Zone → Zone → Read, Zone → Cache Purge → Purge. ` +
-          "Alternativ CLOUDFLARE_EMAIL + CLOUDFLARE_GLOBAL_API_KEY in GitHub Secrets."
+        `${msg} — Token braucht: Zone → Cache Purge → Purge (+ optional Zone Settings → Edit für Dev-Mode).`
       );
     }
     throw new Error(msg || "Cloudflare API Fehler");
@@ -52,7 +53,68 @@ async function resolveZoneId(hostname) {
   return zone.id;
 }
 
-async function purgeSite(zoneId) {
+async function purgeEverything(zoneId) {
+  const result = await cfApi(`/zones/${zoneId}/purge_cache`, {
+    method: "POST",
+    body: JSON.stringify({ purge_everything: true })
+  });
+  console.log("Cloudflare purge_everything:", result.result?.id || "ok");
+  return result;
+}
+
+async function purgeFiles(zoneId, files) {
+  const result = await cfApi(`/zones/${zoneId}/purge_cache`, {
+    method: "POST",
+    body: JSON.stringify({ files })
+  });
+  console.log("Cloudflare Datei-Purge:", files.length, result.result?.id || "ok");
+  return result;
+}
+
+async function setDevelopmentMode(zoneId, on) {
+  const result = await cfApi(`/zones/${zoneId}/settings/development_mode`, {
+    method: "PATCH",
+    body: JSON.stringify({ value: on ? "on" : "off" })
+  });
+  console.log("Development Mode:", on ? "AN (3h Cache-Bypass)" : "aus", result.result?.value || "");
+  return result;
+}
+
+async function verifyLiveHtml() {
+  const urls = [`${SITE_URL}/`, `${SITE_URL}/index.html`];
+  for (const url of urls) {
+    const res = await fetch(url, {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+    });
+    const html = await res.text();
+    const cf = res.headers.get("cf-cache-status") || "?";
+    const hasBuild = html.includes(EXPECT_BUILD);
+    const hasZakat = /zakat-app\.js\?v=1[78]/.test(html);
+    console.log(`Verify ${url} → cf-cache=${cf}, build=${hasBuild}, zakat=${hasZakat}`);
+    if (hasBuild && hasZakat) return true;
+  }
+  return false;
+}
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+(async function main() {
+  const hostname = new URL(SITE_URL).hostname;
+  const zoneId = await resolveZoneId(hostname);
+  console.log("Zone:", zoneId, "für", hostname);
+
+  await purgeEverything(zoneId);
+  await sleep(2500);
+
+  if (await verifyLiveHtml()) {
+    console.log("Live-Check OK — Besucher-App ist aktuell.");
+    return;
+  }
+
+  console.warn("Nach purge_everything noch alte Version — versuche Datei-Purge + Dev-Mode…");
   const files = [
     `${SITE_URL}/`,
     `${SITE_URL}/index.html`,
@@ -67,29 +129,30 @@ async function purgeSite(zoneId) {
     `${SITE_URL}/assets/focus-feed-app.js`,
     `${SITE_URL}/assets/live-boot.js`
   ];
-  try {
-    const result = await cfApi(`/zones/${zoneId}/purge_cache`, {
-      method: "POST",
-      body: JSON.stringify({ files })
-    });
-    console.log("Cloudflare Cache geleert (Dateien):", files.length, result.result?.id || "ok");
-    return result;
-  } catch (err) {
-    console.warn("Selektiver Purge fehlgeschlagen, versuche purge_everything:", err.message || err);
-    const result = await cfApi(`/zones/${zoneId}/purge_cache`, {
-      method: "POST",
-      body: JSON.stringify({ purge_everything: true })
-    });
-    console.log("Cloudflare Cache geleert (alles):", result.result?.id || "ok");
-    return result;
-  }
-}
+  await purgeFiles(zoneId, files);
+  await sleep(2500);
 
-(async function main() {
-  const hostname = new URL(SITE_URL).hostname;
-  const zoneId = await resolveZoneId(hostname);
-  console.log("Zone:", zoneId, "für", hostname);
-  await purgeSite(zoneId);
+  if (await verifyLiveHtml()) {
+    console.log("Live-Check OK nach Datei-Purge.");
+    return;
+  }
+
+  if (ENABLE_DEV_MODE) {
+    try {
+      await setDevelopmentMode(zoneId, true);
+      await sleep(2000);
+      if (await verifyLiveHtml()) {
+        console.log("Live-Check OK mit Development Mode (bleibt ~3h aktiv, dann automatisch aus).");
+        return;
+      }
+    } catch (err) {
+      console.warn("Development Mode nicht möglich:", err.message || err);
+    }
+  }
+
+  throw new Error(
+    "Cloudflare liefert nach Purge noch alte index.html. Bitte im Dashboard: Caching → Purge Everything + Development Mode 3h aktivieren."
+  );
 })().catch((err) => {
   console.error("Purge fehlgeschlagen:", err.message || err);
   process.exit(1);
