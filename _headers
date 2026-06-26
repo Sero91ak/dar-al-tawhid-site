@@ -1,3 +1,21 @@
+/
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/index.html
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/content/updates/*
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/assets/*
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/service-worker.js
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/version.json
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
 /admin/*
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   Pragma: no-cache

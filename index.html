@@ -7333,7 +7333,7 @@ async function fetchGithubPostFileList(){const response=await fetch(`https://api
 async function resolvePostFileList(){const fromIndex=await fetchPostsIndexMeta();if(fromIndex&&fromIndex.length)return fromIndex;try{return await fetchGithubPostFileList()}catch(e){console.warn("Post-Liste:",e);return null}}
 async function loadPostsFromFileList(markdownFiles,cached){const fileMap=getJson(POST_FILE_MAP_KEY,{});const names=new Set(markdownFiles.map(f=>f.name));Object.keys(fileMap).forEach(name=>{if(!names.has(name))delete fileMap[name]});const freshFromCache=markdownFiles.filter(f=>postFileIsFresh(f,fileMap,cached)).map(f=>postFromCachedFile(cached,f.name)).filter(Boolean);let needsFetch=markdownFiles.filter(f=>!postFileIsFresh(f,fileMap,cached));needsFetch.sort((a,b)=>postFileSortRank(b.name)-postFileSortRank(a.name));const baseList=mergePostsLists(cached,freshFromCache);const hadImmediatePosts=baseList.length>0;if(hadImmediatePosts){applyPostsList(baseList);persistPostsCache()}else if(cached.length){applyPostsList(cached)}if(!needsFetch.length){postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";return posts.length}postsSyncSilent=hadImmediatePosts;if(!postsSyncSilent){postsSyncBusy=true;postsSyncLabel=needsFetch.length>12?`Neue Inhalte werden geladen (${needsFetch.length})…`:needsFetch.length>1?`Neue Beiträge werden geladen (${needsFetch.length})…`:"Neuer Beitrag wird geladen…";schedulePostsRender(true)}else{postsSyncBusy=false;postsSyncLabel=""}try{for(let i=0;i<needsFetch.length;i+=POSTS_FETCH_BATCH){const batch=needsFetch.slice(i,i+POSTS_FETCH_BATCH);const results=await Promise.allSettled(batch.map(fetchPostFile));const batchNew=[];results.forEach(r=>{if(r.status==="fulfilled"){const sha=r.value.sha||markdownFiles.find(x=>x.name===r.value.name)?.sha||"";fileMap[r.value.name]={sha,post:r.value.post,parseVersion:POST_PARSE_VERSION};batchNew.push(r.value.post)}});if(batchNew.length){applyPostsList(mergePostsLists(posts,batchNew));persistPostFileMap(fileMap);persistPostsCache();schedulePostsRender(postsSyncSilent?false:true)}if(i+POSTS_FETCH_BATCH<needsFetch.length)await new Promise(r=>setTimeout(r,postsSyncSilent?12:0))}}finally{postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";persistPostFileMap(fileMap);persistPostsCache();persistOfflineLibrary();schedulePostsRender(true)}return posts.length}
 async function loadPosts(){const cached=getCachedPosts();if(!navigator.onLine){if(cached.length)applyPostsList(cached);return posts.length}try{const markdownFiles=await resolvePostFileList();if(!markdownFiles||!markdownFiles.length){if(cached.length)applyPostsList(cached);return posts.length}return await loadPostsFromFileList(markdownFiles,cached)}catch(error){console.warn(error);if(cached.length)applyPostsList(cached);return posts.length}}
-async function loadCurrentUpdates(){try{const cached=getJson(CURRENT_UPDATES_CACHE_KEY,[]);if(Array.isArray(cached))currentUpdates=cached}catch(e){}if(!navigator.onLine)return currentUpdates;try{const r=await fetch(`${CURRENT_UPDATES_PATH}?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)return currentUpdates;const data=await r.json();const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];currentUpdates=items.filter(Boolean);try{setJson(CURRENT_UPDATES_CACHE_KEY,currentUpdates)}catch(e){}return currentUpdates}catch(e){console.warn("Aktuell-Hinweise:",e);return currentUpdates}}
+async function loadCurrentUpdates(){try{const cached=getJson(CURRENT_UPDATES_CACHE_KEY,[]);if(Array.isArray(cached))currentUpdates=cached}catch(e){}if(!navigator.onLine)return currentUpdates;const bust=Date.now();const updatesFile=CURRENT_UPDATES_PATH.replace(/^\//,"");const urls=[`${CURRENT_UPDATES_PATH}?v=${bust}`,`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${updatesFile}?v=${bust}`];for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];currentUpdates=items.filter(Boolean);try{setJson(CURRENT_UPDATES_CACHE_KEY,currentUpdates)}catch(e){}return currentUpdates}catch(e){}}console.warn("Aktuell-Hinweise konnten nicht geladen werden");return currentUpdates}
 function activeCurrentUpdates(){const now=Date.now();const BLOCKED_STATUSES=["removed","archived","failed","expired","draft"];return(Array.isArray(currentUpdates)?currentUpdates:[]).filter(item=>{if(!item)return false;if(item.status&&BLOCKED_STATUSES.includes(item.status))return false;if(item.visible===false)return false;const created=Date.parse(item.createdAt||item.date||item.publishedAt||"");const expires=Date.parse(item.expiresAt||"");if(Number.isFinite(expires))return expires>now;if(Number.isFinite(created)){const ttl=Number(item.ttlHours||24);return now-created>=0&&now-created<=ttl*60*60*1000}return false}).sort((a,b)=>Date.parse(b.createdAt||b.date||0)-Date.parse(a.createdAt||a.date||0))}
 function postsSignature(){return posts.map(p=>`${p.id}:${p.date||""}:${p.title||""}:${p._sourceFile||""}:${String(p.intro||"").length}`).join("|")}
 async function refreshContent({forceRender=false}={}){
@@ -9328,7 +9328,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v169";
+const APP_BUILD_ID="app-shell-v170";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderHome(){const latest=posts.slice(0,4);return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite","","App-Übersicht")}<div id="focusFeedMount" style="display:none"></div>${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section><section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>${renderHomeMoreSection()}`}
@@ -10031,13 +10031,15 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         if (typeof APP_BUILD_ID === 'string') {
           try {
             var vr = await fetch('/version.json?v=' + Date.now(), { cache: 'no-store' });
-            if (vr.ok) {
-              var remote = await vr.json();
-              if (remote && remote.buildId && String(remote.buildId) !== String(APP_BUILD_ID)) {
-                versionMismatch = true;
-                remoteBuildId = String(remote.buildId);
-                window.__darRemoteBuildId = remoteBuildId;
-              }
+            var remote = vr.ok ? await vr.json() : null;
+            if (!remote || !remote.buildId) {
+              var rawVr = await fetch('https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/version.json?v=' + Date.now(), { cache: 'no-store' });
+              if (rawVr.ok) remote = await rawVr.json();
+            }
+            if (remote && remote.buildId && String(remote.buildId) !== String(APP_BUILD_ID)) {
+              versionMismatch = true;
+              remoteBuildId = String(remote.buildId);
+              window.__darRemoteBuildId = remoteBuildId;
             }
           } catch (e) {}
         }
