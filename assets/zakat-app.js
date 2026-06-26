@@ -596,17 +596,44 @@
       };
     const pdf = $("zakatPdfBtn");
     if (pdf)
-      pdf.onclick = () => {
+      pdf.onclick = async () => {
         readInputFromDom();
         const result = currentResult();
-        if (!result || !global.DARZakat) return;
-        const html = global.DARZakat.buildPdfHtml(result, effectiveConfig() || {}, {});
-        const w = global.open("", "_blank", "noopener");
-        if (w) {
-          w.document.write(html);
-          w.document.close();
-          w.focus({ preventScroll: true });
-          w.print();
+        if (!result || !global.DARZakat) {
+          alert("Bitte zuerst Werte eingeben.");
+          return;
+        }
+        const oldLabel = pdf.textContent;
+        pdf.disabled = true;
+        pdf.textContent = "PDF…";
+        try {
+          const meta = {
+            siteOrigin: global.location?.origin || "https://dar-al-tawhid.de",
+            savedForVisitor: Boolean(global.accountSession?.()),
+            input: zakatInput,
+            exportedAt: new Date().toISOString()
+          };
+          const html = global.DARZakat.buildPdfHtml(result, effectiveConfig() || {}, meta);
+          const fname = global.DARZakat.buildPdfFilename(meta);
+          if (global.DARZakatPdf?.exportZakatPdf) {
+            const out = await global.DARZakatPdf.exportZakatPdf(html, fname);
+            if (out.method === "print") {
+              alert("PDF-Download nicht möglich — Druckdialog geöffnet. „Als PDF speichern“ wählen.");
+            }
+          } else {
+            const w = global.open("", "_blank", "noopener");
+            if (w) {
+              w.document.write(html);
+              w.document.close();
+              w.focus({ preventScroll: true });
+              w.print();
+            }
+          }
+        } catch (e) {
+          alert(e.message || "PDF-Export fehlgeschlagen.");
+        } finally {
+          pdf.disabled = false;
+          pdf.textContent = oldLabel;
         }
       };
     const save = $("zakatSaveBtn");
