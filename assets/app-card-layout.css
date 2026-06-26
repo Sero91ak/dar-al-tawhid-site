@@ -274,15 +274,16 @@
 
 /* —— ZAKĀT: Safe-Zones für stark gerundete Akkordeon-Karten —— */
 .zakat-view {
-  --zakat-r-lg: var(--card-radius-md);
-  --zakat-shell-gap: 8px;
-  --zakat-acc-px: 14px;
-  --zakat-acc-pt: 12px;
-  --zakat-acc-pb: 7px;
+  --zakat-r-lg: var(--card-radius-sm);
+  --zakat-shell-gap: 5px;
+  --zakat-acc-px: 11px;
+  --zakat-acc-pt: 7px;
+  --zakat-acc-pb: 6px;
 }
 
 .zakat-shell {
   gap: var(--zakat-shell-gap) !important;
+  padding-bottom: 6px !important;
 }
 
 .zakat-shell .zakat-hero,
@@ -316,13 +317,19 @@
 
 .zakat-acc .zakat-acc-copy.card-header__copy {
   padding: 0;
-  gap: var(--card-title-gap);
+  gap: 2px;
+  min-width: 0;
+}
+
+.zakat-acc.is-closed .zakat-acc-head.card-header {
+  align-items: center;
+  padding-bottom: var(--zakat-acc-pb) !important;
 }
 
 .zakat-acc .zakat-acc-kicker.card-label {
-  font-size: clamp(0.66rem, 2.4vw, 0.78rem);
-  line-height: var(--card-label-line-height);
-  letter-spacing: 0.1em;
+  font-size: clamp(0.58rem, 2.1vw, 0.68rem);
+  line-height: 1.1;
+  letter-spacing: 0.08em;
   margin: 0;
   padding: 0;
   overflow-wrap: anywhere;
@@ -330,19 +337,53 @@
 }
 
 .zakat-acc .zakat-acc-head h3.card-title {
-  font-size: clamp(0.96rem, 3vw, 1.12rem);
-  line-height: 1.15;
+  font-size: clamp(0.88rem, 2.7vw, 1rem);
+  line-height: 1.12;
   margin: 0;
   padding: 0;
   overflow-wrap: anywhere;
 }
 
+.zakat-acc .zakat-acc-preview-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin: 2px 0 0;
+  padding: 0;
+  font-size: 10px;
+  line-height: 1.3;
+  color: var(--premium-body, var(--muted));
+}
+
+.zakat-acc .zakat-acc-preview-line .zakat-pill {
+  padding: 2px 7px;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.zakat-acc .zakat-acc-preview-line .zakat-muted {
+  font-size: 10px;
+  line-height: 1.3;
+}
+
 .zakat-acc .zakat-acc-chevron {
-  margin-top: calc(var(--zakat-acc-pt, var(--card-safe-top-lg)) - 5px);
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
+  margin-top: 0;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.zakat-acc.is-closed .zakat-acc-chevron {
+  align-self: center;
+  margin-top: 0;
+}
+
+.zakat-acc .zakat-acc-chevron:before {
+  width: 6px;
+  height: 6px;
 }
 
 .zakat-acc .zakat-acc-preview,
@@ -354,42 +395,79 @@
 
 .zakat-acc .zakat-acc-preview-inner,
 .zakat-acc .zakat-acc-body-inner {
-  padding: 8px 10px;
+  padding: 6px 8px;
   overflow: visible;
-  line-height: 1.4;
-  font-size: 10.5px;
+  line-height: 1.35;
+  font-size: 10px;
 }
 
 .zakat-panel,
 .zakat-result-strip,
 .zakat-hero-compact {
-  padding: 11px var(--zakat-acc-px, var(--card-safe-left-md)) 10px !important;
+  padding: 8px var(--zakat-acc-px, var(--card-safe-left-md)) 7px !important;
   box-sizing: border-box;
 }
 
-.zakat-view .zakat-hero-compact .zakat-hero-title {
-  font-size: clamp(1.05rem, 3.2vw, 1.22rem) !important;
-  margin-bottom: 4px !important;
+.zakat-view .zakat-strip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 10%, var(--line2));
 }
 
-.zakat-view .zakat-hero-compact .zakat-hero-sub {
-  font-size: 11px !important;
-  line-height: 1.35 !important;
+.zakat-view .zakat-strip-kicker {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--premium-label);
+  font-weight: 800;
 }
 
-.zakat-view .zakat-hero-compact .zakat-hero-badge {
-  margin-bottom: 6px !important;
-  padding: 4px 9px !important;
+.zakat-view .zakat-strip-title {
+  font-family: var(--serif);
+  font-size: clamp(0.98rem, 3vw, 1.12rem) !important;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 800;
+  color: var(--premium-title);
+}
+
+.zakat-view .zakat-strip-sub {
+  font-size: 9.5px;
+  color: var(--premium-body);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.zakat-view .zakat-result-label {
   font-size: 8px !important;
+  margin-bottom: 3px !important;
+  letter-spacing: 0.12em;
 }
 
 .zakat-view .zakat-result-amount {
-  font-size: clamp(1.55rem, 5.2vw, 1.85rem) !important;
+  font-size: clamp(1.35rem, 4.6vw, 1.62rem) !important;
+  line-height: 1.05 !important;
 }
 
 .zakat-view .zakat-result-strip .zakat-banner {
-  margin-bottom: 8px !important;
-  font-size: 11px !important;
+  margin-bottom: 6px !important;
+  padding: 7px 9px !important;
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+.zakat-view .zakat-result-strip-meta {
+  gap: 4px !important;
+  margin-top: 4px !important;
+}
+
+.zakat-view .zakat-result-sub {
+  font-size: 10px !important;
+  margin-top: 0 !important;
 }
 
 .zakat-view .zakat-num {

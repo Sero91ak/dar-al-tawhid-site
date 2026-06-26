@@ -295,15 +295,17 @@
 
   function renderAccordion(id, title, kicker, body, preview) {
     const open = !!zakatSections[id];
+    const previewLine = !open && preview ? `<div class="zakat-acc-preview-line">${preview}</div>` : "";
     return `<section class="zakat-acc app-card app-card--zakat premium-surface ${open ? "is-open" : "is-closed"}" data-zakat-acc="${esc(id)}">
       <button type="button" class="zakat-acc-head card-header card-header--row" data-zakat-section="${esc(id)}" aria-expanded="${open}">
         <div class="zakat-acc-copy card-header__copy">
           ${kicker ? `<span class="zakat-acc-kicker card-label">${esc(kicker)}</span>` : ""}
           <h3 class="card-title">${esc(title)}</h3>
+          ${previewLine}
         </div>
         <span class="zakat-acc-chevron ${open ? "open" : ""}" aria-hidden="true"></span>
       </button>
-      ${open ? `<div class="zakat-acc-body"><div class="zakat-acc-body-inner">${body}</div></div>` : preview ? `<div class="zakat-acc-preview"><div class="zakat-acc-preview-inner">${preview}</div></div>` : ""}
+      ${open ? `<div class="zakat-acc-body"><div class="zakat-acc-body-inner">${body}</div></div>` : ""}
     </section>`;
   }
 
@@ -347,6 +349,7 @@
       ? `${result.previewOnly ? `<span class="zakat-pill preview">Vorschau</span>` : ""}${result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}`
       : "";
     return `<section class="zakat-result-strip premium-surface">
+      <div class="zakat-strip-head"><span class="zakat-strip-kicker">Amānah · vertraulich</span><h2 class="zakat-strip-title">Zakāt-Rechner</h2><span class="zakat-strip-sub">Qurʾān · Sunnah · live</span></div>
       ${result ? resultBanner(result) : ""}
       <span class="zakat-result-label">Pflichtbetrag</span>
       <div class="zakat-result-amount">${amount}</div>
@@ -469,11 +472,6 @@
 
     return `<div class="zakat-view">
     <div class="zakat-shell">
-    <section class="zakat-hero premium-surface zakat-hero-compact">
-      <div class="zakat-hero-badge">Amānah · vertraulich</div>
-      <h2 class="zakat-hero-title">Zakāt-Rechner</h2>
-      <p class="zakat-hero-sub">Qurʾān · Sunnah · Salaf · Āthār · live</p>
-    </section>
     ${renderResultStrip(result)}
     ${renderAccordion("liquids", "Liquide Mittel", "1 · Eingabe", liquidsBody, "")}
     ${renderAccordion("metals", "Edelmetalle & Schulden", "2 · optional", metalsBody, metalsPreview)}
