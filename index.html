@@ -1603,11 +1603,11 @@ body:before{
 .prayer-quick-card.premium-surface{cursor:pointer}
 .prayer-quick-head,.prayer-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
 /* ZAKĀT-RECHNER — theme-aware Typografie, Deckblatt premium, alle Erscheinungsbilder */
-.zakat-view{color:var(--text);--zakat-r:18px;--zakat-r-lg:22px;--zakat-r-pill:999px}
+.zakat-view{color:var(--text);--zakat-r:14px;--zakat-r-lg:16px;--zakat-r-pill:999px}
 .zakat-view :where(input,select,textarea,button,.field,.zakat-btn,.zakat-mini-btn,.zakat-banner,.zakat-kpi,.zakat-step,.zakat-price-row,.zakat-liquid-item,.zakat-warn,.zakat-ar,.zakat-privacy,.zakat-nisab-compare,.zakat-source-card,.zakat-acc-preview-inner,.zakat-manual-prices){border-radius:var(--zakat-r)!important}
 .zakat-view :where(.zakat-pill,.zakat-hero-badge,.zakat-source-tab,.zakat-source-trust,.zakat-step-num,.zakat-acc-chevron,.zakat-source-cat,.zakat-source-preview-pill){border-radius:var(--zakat-r-pill)!important}
 .zakat-view :where(input,select,textarea){-webkit-appearance:none!important;appearance:none!important}
-.zakat-form-grid label,.zakat-panel>label{padding:12px 14px 14px;border-radius:var(--zakat-r)!important;background:color-mix(in srgb,var(--gold) 4%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));box-sizing:border-box}
+.zakat-form-grid label,.zakat-panel>label{padding:6px 8px 8px;border-radius:var(--zakat-r)!important;background:color-mix(in srgb,var(--gold) 4%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));box-sizing:border-box}
 .zakat-acc.is-open .zakat-acc-body-inner{background:transparent!important;border:0!important;padding:0!important;overflow:visible!important;border-radius:0!important}
 .zakat-acc.is-closed .zakat-acc-preview-inner{border-radius:var(--zakat-r)!important}
 .zakat-source-card{border-left:1px solid color-mix(in srgb,var(--gold) 28%,var(--line2))!important;box-shadow:inset 3px 0 0 var(--gold)}
@@ -1621,23 +1621,25 @@ body:before{
 .zakat-view .view-head .eyebrow{color:var(--premium-label);font-size:9.5px;letter-spacing:.16em;margin-bottom:6px}
 .zakat-view .view-head h2{font-family:var(--serif);color:var(--premium-title);font-size:clamp(1.75rem,4.8vw,2.15rem);line-height:1.08;margin:0;font-weight:800;text-shadow:none}
 .zakat-view .view-desc{color:var(--premium-body);font-size:12.5px;line-height:1.55;margin-top:6px;max-width:100%}
-.zakat-shell{max-width:720px;margin:0 auto;padding:0 8px 12px;display:grid;gap:11px;color:var(--text)}
+.zakat-shell{max-width:720px;margin:0 auto;padding:0 6px 6px;display:grid;gap:5px;color:var(--text)}
 .zakat-shell .zakat-hero,.zakat-shell .zakat-panel,.zakat-shell .zakat-acc,.zakat-shell .zakat-result-strip{border-radius:var(--zakat-r-lg)!important;margin-bottom:0;overflow:hidden}
-.zakat-hero-compact{padding:16px 18px 14px!important;text-align:left!important}
+.zakat-hero-compact{padding:11px 14px 10px!important;text-align:left!important}
 .zakat-hero-compact:after{display:none!important}
-.zakat-hero-compact .zakat-hero-badge{margin-bottom:8px;padding:5px 11px;font-size:8.5px;border-radius:999px}
-.zakat-hero-compact .zakat-hero-title{font-size:clamp(1.15rem,3.6vw,1.42rem)!important;margin:0 0 6px!important;text-align:left}
-.zakat-hero-compact .zakat-hero-sub{font-size:12px;margin:0;text-align:left;line-height:1.45}
-.zakat-result-strip{padding:18px 18px 16px;text-align:center;box-sizing:border-box}
-.zakat-result-strip .zakat-banner{margin:0 0 14px;text-align:left;border-radius:14px}
-.zakat-result-strip-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:10px}
+.zakat-hero-compact .zakat-hero-badge{margin-bottom:6px;padding:4px 9px;font-size:8px;border-radius:999px}
+.zakat-hero-compact .zakat-hero-title{font-size:clamp(1.05rem,3.2vw,1.22rem)!important;margin:0 0 4px!important;text-align:left}
+.zakat-hero-compact .zakat-hero-sub{font-size:11px;margin:0;text-align:left;line-height:1.35}
+.zakat-result-strip{padding:8px 11px 7px;text-align:center;box-sizing:border-box}
+.zakat-result-strip .zakat-banner{margin:0 0 8px;text-align:left;border-radius:14px;font-size:11px}
+.zakat-result-strip-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:8px}
 .zakat-acc{overflow:hidden;display:flex;flex-direction:column;gap:0;box-sizing:border-box}
-.zakat-acc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;box-sizing:border-box}
+.zakat-acc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;width:100%;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;box-sizing:border-box}
+.zakat-acc.is-closed .zakat-acc-head{align-items:center}
 .zakat-acc-head:active{opacity:.92}
 .zakat-acc-copy{flex:1;min-width:0}
 .zakat-acc-kicker{display:block;color:var(--premium-label);font-weight:800;margin:0;padding:0}
 .zakat-acc-head h3{font-family:var(--serif);color:var(--premium-title);font-weight:800;margin:0;padding:0}
-.zakat-acc-chevron{flex:0 0 34px;width:34px;height:34px;margin-top:2px;border-radius:999px;border:1px solid color-mix(in srgb,var(--gold) 22%,var(--line2));background:color-mix(in srgb,var(--gold) 8%,transparent);position:relative;transition:transform .22s ease;box-sizing:border-box}
+.zakat-acc-chevron{flex:0 0 24px;width:24px;height:24px;margin-top:0;border-radius:999px;border:1px solid color-mix(in srgb,var(--gold) 22%,var(--line2));background:color-mix(in srgb,var(--gold) 8%,transparent);position:relative;transition:transform .22s ease;box-sizing:border-box}
+.zakat-acc-chevron:before{width:6px;height:6px}
 .zakat-acc-chevron:before{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-right:2px solid var(--premium-title);border-bottom:2px solid var(--premium-title);transform:translate(-50%,-60%) rotate(45deg)}
 .zakat-acc-chevron:after{display:none}
 .zakat-acc-chevron.open{transform:rotate(180deg)}
@@ -1663,8 +1665,8 @@ body:before{
 .zakat-source-card[open] .zakat-source-open-hint{display:none}
 .zakat-source-card[open] .zakat-source-summary{border-bottom:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));padding-bottom:10px}
 .zakat-source-body{padding:10px 12px 12px}
-.zakat-actions-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:2px 0 8px}
-.zakat-actions-compact .zakat-btn{padding:11px 12px;font-size:12px;min-height:44px}
+.zakat-actions-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0 0 6px}
+.zakat-actions-compact .zakat-btn{padding:8px 10px;font-size:11px;min-height:36px}
 .zakat-actions-compact .zakat-btn.primary{grid-column:1/-1}
 .zakat-hero{text-align:center;padding:26px 18px 22px;position:relative}
 .zakat-hero:after{content:"";position:absolute;inset:9px;border:1px solid var(--line2);border-radius:18px;pointer-events:none;opacity:.45}
@@ -1681,12 +1683,13 @@ body:before{
 .zakat-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line2)}
 .zakat-panel-head h3{font-family:var(--serif);color:var(--premium-title);font-size:1.12rem;margin:0;font-weight:700}
 .zakat-head-badges{display:flex;gap:6px;flex-wrap:wrap}
-.zakat-form-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:0}
+.zakat-form-grid{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:0}
 .zakat-form-grid-3{grid-template-columns:1fr}
-.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:8px;font-size:11px;color:var(--text);font-weight:600;letter-spacing:.02em}
-.zakat-form-grid .field,.zakat-panel>.field{background:color-mix(in srgb,var(--gold) 3%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 16%,var(--line2));border-radius:16px!important;color:var(--text);font-size:16px;padding:13px 15px;min-height:50px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
+.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--text);font-weight:600;letter-spacing:.02em}
+.zakat-form-grid .field,.zakat-panel>.field{background:color-mix(in srgb,var(--gold) 3%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 16%,var(--line2));border-radius:12px!important;color:var(--text);font-size:16px;padding:8px 10px;min-height:38px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
 .zakat-form-grid .field:focus,.zakat-panel>.field:focus{border-color:rgba(239,215,142,.55);box-shadow:0 0 0 1px rgba(239,215,142,.18)}
 .zakat-form-grid .field::placeholder,.zakat-panel>.field::placeholder{color:var(--muted2);opacity:1}
+.zakat-form-grid .zakat-num,.zakat-panel>.zakat-num{font-variant-numeric:tabular-nums}
 .zakat-subsection-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--premium-label);margin:14px 0 8px;font-weight:800}
 .zakat-banner{padding:12px 14px;border-radius:14px;margin-bottom:0;font-size:11.5px;line-height:1.45;border:1px solid transparent;box-sizing:border-box}
 .zakat-banner.ok{background:rgba(40,100,60,.18);border-color:rgba(120,200,140,.28);color:#b8e8c4}
@@ -1696,8 +1699,9 @@ body:before{
 .zakat-banner.neutral{background:rgba(239,215,142,.045);border-color:var(--line2);color:var(--premium-body)}
 .zakat-result-hero{text-align:center;padding:16px 12px 18px;margin-bottom:12px;border-radius:18px;background:rgba(239,215,142,.045);border:1px solid var(--line2)}
 .zakat-result-label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
-.zakat-result-amount{font-family:var(--serif);font-size:clamp(2rem,7vw,2.5rem);font-weight:800;color:var(--premium-title);line-height:1.1}
-.zakat-result-sub{display:block;margin-top:6px;font-size:11px;color:var(--premium-body)}
+.zakat-result-amount{font-family:var(--serif);font-size:clamp(1.35rem,4.6vw,1.62rem);font-weight:800;color:var(--premium-title);line-height:1.05}
+.zakat-result-sub{display:block;margin-top:4px;font-size:10px;color:var(--premium-body)}
+.zakat-acc-preview-line .zakat-pill{padding:2px 7px;font-size:9px}
 .zakat-kpi-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
 .zakat-kpi{padding:14px 12px;border-radius:16px;background:rgba(239,215,142,.045);border:1px solid var(--line2);text-align:center;box-sizing:border-box}
 .zakat-kpi.accent{border-color:rgba(180,80,80,.35);background:rgba(120,40,40,.08)}
@@ -6865,6 +6869,27 @@ html[data-theme="light"] .post-intro-body,html[data-theme="soft"] .post-intro-bo
 html[data-theme="royal"] .post-intro-dialog{background:linear-gradient(180deg,rgba(14,34,64,.98),rgba(6,14,30,.98))}
 html[data-theme="bordeaux"] .post-intro-dialog{background:linear-gradient(180deg,rgba(48,12,24,.98),rgba(18,6,12,.98))}
 @media(max-width:700px){.post-intro-head h3{font-size:22px}.post-intro-body{font-size:14.5px;line-height:1.62}.post-intro-dialog{padding:16px;border-radius:20px}}
+
+html[data-theme] .zakat-shell{
+  max-width:100%!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html[data-theme] .float-actions{
+  position:fixed!important;
+  z-index:35!important;
+  pointer-events:none!important;
+  right:max(4px,env(safe-area-inset-right,0px))!important;
+}
+html[data-theme] .float-actions-panel,
+html[data-theme] .float-touch-handle,
+html[data-theme] .float-btn{
+  pointer-events:auto!important;
+}
+body.has-bottom-nav{padding-bottom:calc(84px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))!important}
+body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important}
 </style>
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -6920,11 +6945,14 @@ window.DAR_ANALYTICS_CONFIG={
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
 <script src="/assets/zakat-engine.js?v=8" defer></script>
-<script src="/assets/zakat-app.js?v=15" defer></script>
+<script src="/assets/zakat-app.js?v=17" defer></script>
 <script src="/assets/focus-feed-app.js?v=2" defer></script>
+<script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/app-card-layout.css?v=3">
+<link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
 
 </head>
 <body class="has-bottom-nav">
@@ -7028,7 +7056,7 @@ function normalizeTheme(theme){return theme==="light"||theme==="soft"||theme==="
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="bordeaux")root.style.backgroundColor=""}))}
 function initTheme(){applyTheme(getTheme())}
-function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{applyTheme(btn.getAttribute("data-theme-select"))}})}
+function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{const apply=()=>applyTheme(btn.getAttribute("data-theme-select"));if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(apply);else apply()}})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
 function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("bordeaux")}</div></section>`}
 const FONT_SCALE_DEFAULTS={appFontScale:5,quranArabicScale:5,quranTransliterationScale:5,quranGermanScale:5,duaArabicScale:5,duaTransliterationScale:5,duaGermanScale:5,postTextScale:5,postSourceScale:5};
@@ -7042,7 +7070,7 @@ function fontSlider(key,title,description){const value=getFontScale(key);return 
 function renderFontSettingsPanel(){return `<section class="app-font-panel premium-surface"><div class="font-panel-copy"><b>Schriftgröße</b><span>Passe die allgemeine Schriftgröße der App an.</span></div>${fontSlider("appFontScale","App-Schriftgröße","Menüs, Buttons, Karten, Gebetszeiten, Listen und allgemeine Texte.")}</section>`}
 function readingFontConfig(){if(currentRoute.view==="quran-surah")return{title:"Schrift anpassen",items:[["quranArabicScale","Arabisch","Qurʾān-Arabisch separat einstellen."],["quranTransliterationScale","Lautschrift","Lautschrift separat einstellen."],["quranGermanScale","Deutsch","Deutsche Übersetzung separat einstellen."]]};if(currentRoute.view==="dua")return{title:"Schrift anpassen",items:[["duaArabicScale","Arabisch","Duʿāʾ-Arabisch separat einstellen."],["duaTransliterationScale","Lautschrift","Lautschrift separat einstellen."],["duaGermanScale","Deutsch","Deutsche Übersetzung separat einstellen."]]};return{title:"Schrift anpassen",items:[["postTextScale","Beitragstext","Aussagen und längere Beitragstexte einstellen."],["postSourceScale","Quellenbereich","Quellen lesbar halten, aber dezenter als den Haupttext."]]}}
 function renderReadingFontControl(){const cfg=readingFontConfig();return `<section class="reading-font-panel"><button class="reading-font-toggle" type="button" data-reading-panel-toggle aria-expanded="false"><span>Aa</span><small>${esc(cfg.title)}</small></button><div class="reading-font-sheet" hidden>${cfg.items.map(item=>fontSlider(item[0],item[1],item[2])).join("")}<div class="reading-font-actions"><button class="font-reset-btn" type="button" data-font-reset>Zurücksetzen</button><button class="font-close-btn" type="button" data-reading-panel-close>Schließen</button></div></div></section>`}
-function bindFontControls(){document.querySelectorAll("[data-font-scale]").forEach(input=>{const update=()=>applyFontScale(input.getAttribute("data-font-scale"),input.value);input.oninput=update;input.onchange=update;input.style.setProperty("--slider-fill",(clampFontScale(input.value)*10)+"%")});document.querySelectorAll("[data-reading-panel-toggle]").forEach(btn=>{btn.onclick=()=>{const panel=btn.closest(".reading-font-panel");const sheet=panel?.querySelector(".reading-font-sheet");if(!sheet)return;const open=sheet.hidden;sheet.hidden=!open;btn.setAttribute("aria-expanded",open?"true":"false")}});document.querySelectorAll("[data-reading-panel-close]").forEach(btn=>{btn.onclick=()=>{const panel=btn.closest(".reading-font-panel");const sheet=panel?.querySelector(".reading-font-sheet");const toggle=panel?.querySelector("[data-reading-panel-toggle]");if(sheet)sheet.hidden=true;if(toggle)toggle.setAttribute("aria-expanded","false")}});document.querySelectorAll("[data-font-reset]").forEach(btn=>{btn.onclick=()=>{btn.closest(".reading-font-panel")?.querySelectorAll("[data-font-scale]").forEach(input=>applyFontScale(input.getAttribute("data-font-scale"),5))}})}
+function bindFontControls(){document.querySelectorAll("[data-font-scale]").forEach(input=>{const update=()=>{const run=()=>applyFontScale(input.getAttribute("data-font-scale"),input.value);if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()};input.oninput=update;input.onchange=update;input.style.setProperty("--slider-fill",(clampFontScale(input.value)*10)+"%")});document.querySelectorAll("[data-reading-panel-toggle]").forEach(btn=>{btn.onclick=()=>{const panel=btn.closest(".reading-font-panel");const sheet=panel?.querySelector(".reading-font-sheet");if(!sheet)return;const open=sheet.hidden;sheet.hidden=!open;btn.setAttribute("aria-expanded",open?"true":"false")}});document.querySelectorAll("[data-reading-panel-close]").forEach(btn=>{btn.onclick=()=>{const panel=btn.closest(".reading-font-panel");const sheet=panel?.querySelector(".reading-font-sheet");const toggle=panel?.querySelector("[data-reading-panel-toggle]");if(sheet)sheet.hidden=true;if(toggle)toggle.setAttribute("aria-expanded","false")}});document.querySelectorAll("[data-font-reset]").forEach(btn=>{btn.onclick=()=>{btn.closest(".reading-font-panel")?.querySelectorAll("[data-font-scale]").forEach(input=>applyFontScale(input.getAttribute("data-font-scale"),5))}})}
 
 const DUAS=[
 {id:"quran-001",type:"Qurʾān",cat:"Vergebung",title:"Duʿāʾ von Ādam und Ḥawwāʾ nach dem Fehler",occasion:"Reue und Vergebung",ar:"رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",tr:"Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā lanakūnanna mina-l-khāsirīn.",de:"Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",src:"📝 Qurʾān, al-Aʿrāf 7:23."},
@@ -7425,11 +7453,7 @@ function statsTypeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":"Sei
 function cleanStatsTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
 function statsRankCard(row,idx){const nav=row.content_type==="post"?"post":row.content_type==="dua"?"dua":"";const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);const title=cleanStatsTitle(row.content_title||row.content_id);const attrs=nav?` data-nav="${nav}" data-value="${esc(row.content_id)}" role="button" tabindex="0"`:"";return`<article class="stats-rank-card"${attrs}><div class="stats-rank-num">${idx+1}</div><div class="stats-rank-body"><div class="stats-rank-top"><span class="stats-type-badge">${esc(statsTypeLabel(row.content_type))}</span>${nav?`<span class="stats-open-hint">Tippen zum Öffnen →</span>`:""}</div><h3 class="stats-rank-title">${esc(title)}</h3><div class="stats-rank-metrics"><span class="stats-metric-pill">👁 ${views} gelesen</span><span class="stats-metric-pill">↗ ${shares} geteilt</span><span class="stats-metric-pill">♡ ${saves} gespeichert</span></div></div></article>`}
 async function loadStatsPanel(){const el=$("statsDashboard");if(!el)return;if(!hasSupabaseCfg()){el.innerHTML=`<div class="stats-empty">Supabase ist noch nicht eingerichtet.</div>`;return}try{const data=await fetchAnalyticsDashboard();const live=data.live||{};const totals=(data.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua").sort((a,b)=>(Number(b.views||0)+Number(b.shares||0)+Number(b.saves||0))-(Number(a.views||0)+Number(a.shares||0)+Number(a.saves||0)));el.innerHTML=`<div class="stats-dashboard"><div class="stats-hero-grid"><div class="stats-hero-card accent"><b>Jetzt online</b><span>${Number(live.live_now||0)}</span><small>letzte 5 Minuten</small></div><div class="stats-hero-card"><b>Heute Besucher</b><span>${Number(live.today_sessions||0)}</span><small>einzigartige Sitzungen</small></div></div><div class="stats-kpi-grid"><div class="stats-kpi-card"><b>Heute Aufrufe</b><span>${Number(live.today_views||0)}</span><small>Seiten + Beiträge</small></div><div class="stats-kpi-card"><b>Heute geteilt</b><span>${Number(live.today_shares||0)}</span><small>Beiträge + Duʿāʾ</small></div><div class="stats-kpi-card"><b>Heute gespeichert</b><span>${Number(live.today_saves||0)}</span><small>Beiträge</small></div><div class="stats-kpi-card"><b>Einträge gesamt</b><span>${totals.length}</span><small>in der Liste</small></div></div><section class="stats-list-section"><div class="stats-section-head"><h3>Top Inhalte</h3><span>${totals.length} Einträge · tippen zum Öffnen</span></div><div class="stats-rank-list">${totals.length?totals.map((r,i)=>statsRankCard(r,i)).join(""):`<div class="stats-empty">Noch keine Beitrags-Daten. Öffne Beiträge und tippe teilen oder speichern.</div>`}</div></section><div class="stats-meta">Aktualisiert: ${esc(new Date().toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div></div>`;bindEvents()}catch(e){el.innerHTML=`<div class="stats-empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}}
-function startStatsRefresh(){if(currentRoute.view==="zakat"&&window.DARZakatApp){
-      window.DARZakatApp.bindZakat();
-      if(!window.__zakatConfigReady){window.DARZakatApp.ensureZakatReady().then(()=>{window.__zakatConfigReady=true;if(readRoute().view==="zakat")render()})}
-    }
-    stopStatsRefresh();loadStatsPanel();statsRefreshTimer=setInterval(loadStatsPanel,30000)}
+function startStatsRefresh(){stopStatsRefresh();loadStatsPanel();statsRefreshTimer=setInterval(loadStatsPanel,30000)}
 function renderStats(){if(!isStatsAuthed()){return`${setHeader("Statistik","Nur für Admin-Zugang.","🔒")}<section class="stats-login"><input id="statsPinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort"><button id="statsPinBtn" type="button">Statistik öffnen</button><div class="stats-meta">Direktlink: <strong>#statistik</strong> · Login bleibt gespeichert.</div></section>`}return`${setHeader("Live-Statistik","Übersichtliche Auswertung – jeder Eintrag ist antippbar und öffnet den Beitrag oder die Duʿāʾ.","📊")}<div id="statsDashboard"><div class="stats-empty">Statistik wird geladen…</div></div><div class="stats-meta"><button id="statsLogoutBtn" type="button" class="premium-pill">Admin abmelden</button></div>`}
 function postUrl(post){const url=new URL(location.origin+location.pathname);url.searchParams.set("post",String(post.id));url.searchParams.set("v",String(Date.now()));url.hash=`post/${encodeURIComponent(post.id)}`;return url.toString()}
 function buildPostPushUrl(postId,cacheVersion){const slug=String(postId||"").trim();const v=cacheVersion||Date.now();const base=(location.origin&&location.origin.startsWith("http"))?location.origin:DAR_SITE_ORIGIN;return `${base}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`}
@@ -7532,7 +7556,7 @@ function bottomNavMetrics(){const nav=$("bottomNav");if(!nav)return[];const navR
 function setBottomNavPill(left,width,dragging){const nav=$("bottomNav");if(!nav)return;nav.classList.toggle("is-pill-dragging",!!dragging);nav.style.setProperty("--nav-pill-left",`${left}px`);nav.style.setProperty("--nav-pill-width",`${width}px`)}
 function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-nav]").forEach((btn,i)=>btn.classList.toggle("active",i===idx))}
 function nearestBottomNavIndex(pillCenter,metrics){let best=0,d=Infinity;metrics.forEach((m,i)=>{const dist=Math.abs(m.center-pillCenter);if(dist<d){d=dist;best=i}});return best}
-function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:0,behavior:"auto"})))}
+function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.DARScrollManager?.stableScrollTo?.(0)||window.scrollTo({top:0,behavior:"auto"})))}
 function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;clearNavStack();navigate(tab,"",{skipPush:true})}
 function updateBottomNavPill(){}
 function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route.view))})}
@@ -7869,6 +7893,7 @@ function nextPlannedPrayerNotification(settings=getPrayerSettings()){
   return candidates[0]||null;
 }
 const PRAYER_PUSH_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev";
+window.PRAYER_PUSH_WORKER_URL=PRAYER_PUSH_WORKER_URL;
 const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
 async function sendWelcomePushIfNeeded(OS){
   try{
@@ -9534,6 +9559,10 @@ function render(){
     updateOfflineBox();
     if(currentRoute.view==="home")loadPopularPostsBlock();
     if(currentRoute.view==="home"&&window.DAR_FOCUS_FEED){(window.DAR_FOCUS_FEED.onAppReady||window.DAR_FOCUS_FEED.refresh).call(window.DAR_FOCUS_FEED,{force:true})}
+    if(currentRoute.view==="zakat"&&window.DARZakatApp){
+      window.DARZakatApp.bindZakat();
+      if(!window.__zakatConfigReady){window.DARZakatApp.ensureZakatReady().then(()=>{window.__zakatConfigReady=true;if(readRoute().view==="zakat")render()})}
+    }
     stopStatsRefresh();
     if(qiblaAutoStart&&currentRoute.view==="prayer"){
       setTimeout(()=>runQiblaAutoStart(),200);
@@ -9646,7 +9675,7 @@ function bindEvents(){
   const accountSyncBtn=$("accountSyncBtn");if(accountSyncBtn)accountSyncBtn.onclick=()=>syncAccountSaved({silent:false});
   const accountLogoutBtn=$("accountLogoutBtn");if(accountLogoutBtn)accountLogoutBtn.onclick=()=>logoutAccount();
   const accountPin=$("accountPin");if(accountPin)accountPin.onkeydown=e=>{if(e.key==="Enter")$("accountLoginBtn")?.click()};
-  document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const collapsed=grid.classList.toggle("collapsed");const closedLabel=btn.getAttribute("data-collapse-closed")||"Alle anzeigen";const openLabel=btn.getAttribute("data-collapse-open")||"Zuklappen";btn.textContent=collapsed?closedLabel:openLabel;}});
+  document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const run=()=>{const collapsed=grid.classList.toggle("collapsed");const closedLabel=btn.getAttribute("data-collapse-closed")||"Alle anzeigen";const openLabel=btn.getAttribute("data-collapse-open")||"Zuklappen";btn.textContent=collapsed?closedLabel:openLabel};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}});
   document.querySelectorAll("[data-nav]").forEach(bindNavActivation);
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
   if(advancedFilterBtn&&homeFilterPanel){advancedFilterBtn.onclick=()=>{const open=homeFilterPanel.classList.contains("advanced-visible");homeFilterPanel.classList.toggle("advanced-visible",!open);homeFilterPanel.classList.toggle("advanced-hidden",open);advancedFilterBtn.classList.toggle("active",!open);advancedFilterBtn.textContent=open?"Filter anzeigen":"Filter ausblenden"}}
@@ -9657,7 +9686,7 @@ function bindEvents(){
   const quranSearchInput=$("quranSearchInput");if(quranSearchInput)quranSearchInput.oninput=()=>{clearTimeout(quranSearchTimer);quranSearchTimer=setTimeout(()=>applyQuranSearch(),180)};
   if(currentRoute.view==="quran-surah"){
     document.querySelectorAll(".quran-tafsir-tab").forEach(btn=>{btn.onclick=()=>{const block=btn.closest(".quran-tafsir-block");if(!block)return;const target=btn.getAttribute("data-tafsir-target");block.querySelectorAll(".quran-tafsir-tab").forEach(x=>x.classList.toggle("active",x===btn));block.querySelectorAll(".quran-tafsir-panel").forEach(panel=>panel.classList.toggle("active",panel.getAttribute("data-tafsir-panel")===target));try{localStorage.setItem(TAFSIR_ACTIVE_KEY,target||"meaning")}catch(e){}}});
-    const tafsirToggle=$("quranTafsirToggle");if(tafsirToggle){tafsirToggle.onchange=async()=>{setShowTafsirBlocks(tafsirToggle.checked);const surahId=Number(String(currentRoute.value||"").split("/")[0]);if(tafsirToggle.checked&&Number.isFinite(surahId))await Promise.all([loadTafsirSurah(surahId),loadQuranAtharSurah(surahId)]);render()}}
+    const tafsirToggle=$("quranTafsirToggle");if(tafsirToggle){tafsirToggle.onchange=async()=>{setShowTafsirBlocks(tafsirToggle.checked);const surahId=Number(String(currentRoute.value||"").split("/")[0]);if(tafsirToggle.checked&&Number.isFinite(surahId))await Promise.all([loadTafsirSurah(surahId),loadQuranAtharSurah(surahId)]);window.DARScrollManager?.preserveNextRender?.();render()}}
     const wakeBtn=$("quranWakeBtn");if(wakeBtn&&!wakeBtn.disabled){wakeBtn.onclick=async()=>{if(isQuranWakeActive()){quranWakeUserOff=true;await releaseQuranWakeLock()}else{quranWakeUserOff=false;await acquireQuranWakeLock()}}}
     updateQuranWakeBtn();
   }
@@ -9848,6 +9877,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     initBottomNavSwipe();
     initBottomNavContentSwipe();
     initBottomNavGuard();
+    window.DARScrollManager?.init?.({saveNavScroll,getNavScroll,getCurrentRoute:()=>currentRoute});
     initFloatTouchbar();
     initQuranWakeLock();
     updateHijriHeaderDate();

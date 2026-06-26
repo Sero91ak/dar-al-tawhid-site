@@ -80,6 +80,11 @@
     return global.esc ? global.esc(s) : String(s ?? "");
   }
 
+  /** Mobile: Zahlentastatur (nicht Buchstaben) — Komma/Punkt für Dezimalwerte */
+  function zakatNumInputAttrs() {
+    return 'type="text" inputmode="decimal" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"';
+  }
+
   function pricesApiUrl() {
     const worker = global.PRAYER_PUSH_WORKER_URL || global.DAR_WORKER_URL || "";
     if (worker) return `${String(worker).replace(/\/$/, "")}/api/zakat/prices`;
@@ -290,15 +295,17 @@
 
   function renderAccordion(id, title, kicker, body, preview) {
     const open = !!zakatSections[id];
+    const previewLine = !open && preview ? `<div class="zakat-acc-preview-line">${preview}</div>` : "";
     return `<section class="zakat-acc app-card app-card--zakat premium-surface ${open ? "is-open" : "is-closed"}" data-zakat-acc="${esc(id)}">
       <button type="button" class="zakat-acc-head card-header card-header--row" data-zakat-section="${esc(id)}" aria-expanded="${open}">
         <div class="zakat-acc-copy card-header__copy">
           ${kicker ? `<span class="zakat-acc-kicker card-label">${esc(kicker)}</span>` : ""}
           <h3 class="card-title">${esc(title)}</h3>
+          ${previewLine}
         </div>
         <span class="zakat-acc-chevron ${open ? "open" : ""}" aria-hidden="true"></span>
       </button>
-      ${open ? `<div class="zakat-acc-body"><div class="zakat-acc-body-inner">${body}</div></div>` : preview ? `<div class="zakat-acc-preview"><div class="zakat-acc-preview-inner">${preview}</div></div>` : ""}
+      ${open ? `<div class="zakat-acc-body"><div class="zakat-acc-body-inner">${body}</div></div>` : ""}
     </section>`;
   }
 
@@ -342,6 +349,7 @@
       ? `${result.previewOnly ? `<span class="zakat-pill preview">Vorschau</span>` : ""}${result.zakatObligatory ? `<span class="zakat-pill ok">Zakāt fällig</span>` : ""}`
       : "";
     return `<section class="zakat-result-strip premium-surface">
+      <div class="zakat-strip-head"><span class="zakat-strip-kicker">Amānah · vertraulich</span><h2 class="zakat-strip-title">Zakāt-Rechner</h2><span class="zakat-strip-sub">Qurʾān · Sunnah · live</span></div>
       ${result ? resultBanner(result) : ""}
       <span class="zakat-result-label">Pflichtbetrag</span>
       <div class="zakat-result-amount">${amount}</div>
@@ -363,24 +371,25 @@
       .map((x) => `<div class="zakat-warn">${esc(x.text)}</div>`)
       .join("");
 
+    const num = zakatNumInputAttrs();
     const liquidsBody = `<div class="zakat-form-grid">
-        <label>Bargeld<input class="field zakat-field" id="zakatCash" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(zakatInput.cash)}" placeholder="0,00"></label>
-        <label>Bank<input class="field zakat-field" id="zakatBank" type="number" min="0" step="0.01" value="${esc(zakatInput.bank)}" placeholder="0,00"></label>
-        <label>PayPal / digital<input class="field zakat-field" id="zakatDigital" type="number" min="0" step="0.01" value="${esc(zakatInput.digital)}" placeholder="0,00"></label>
-        <label>Sonstige liquide<input class="field zakat-field" id="zakatOtherLiquid" type="number" min="0" step="0.01" value="${esc(zakatInput.otherLiquid)}" placeholder="0,00"></label>
+        <label>Bargeld<input class="field zakat-field zakat-num" id="zakatCash" ${num} value="${esc(zakatInput.cash)}" placeholder="0,00"></label>
+        <label>Bank<input class="field zakat-field zakat-num" id="zakatBank" ${num} value="${esc(zakatInput.bank)}" placeholder="0,00"></label>
+        <label>PayPal / digital<input class="field zakat-field zakat-num" id="zakatDigital" ${num} value="${esc(zakatInput.digital)}" placeholder="0,00"></label>
+        <label>Sonstige liquide<input class="field zakat-field zakat-num" id="zakatOtherLiquid" ${num} value="${esc(zakatInput.otherLiquid)}" placeholder="0,00"></label>
       </div>`;
 
     const metalsBody = `<div class="zakat-form-grid zakat-form-grid-3">
-        <label>Gold (g)<input class="field zakat-field" id="zakatGoldGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.goldGrams)}" placeholder="0"></label>
-        <label>Silber (g)<input class="field zakat-field" id="zakatSilverGrams" type="number" min="0" step="0.01" value="${esc(zakatInput.silverGrams)}" placeholder="0"></label>
+        <label>Gold (g)<input class="field zakat-field zakat-num" id="zakatGoldGrams" ${num} value="${esc(zakatInput.goldGrams)}" placeholder="0"></label>
+        <label>Silber (g)<input class="field zakat-field zakat-num" id="zakatSilverGrams" ${num} value="${esc(zakatInput.silverGrams)}" placeholder="0"></label>
         <label>Gold-Art<select class="field zakat-field" id="zakatGoldType"><option value="investment" ${zakatInput.goldType === "investment" ? "selected" : ""}>Anlage</option><option value="jewelry" ${zakatInput.goldType === "jewelry" ? "selected" : ""}>Schmuck</option><option value="other" ${zakatInput.goldType === "other" ? "selected" : ""}>Sonstiges</option></select></label>
       </div>
       <div class="zakat-form-grid">
-        <label>Gold manuell (optional)<input class="field zakat-field" id="zakatGoldManual" type="number" min="0" step="0.01" value="${esc(zakatInput.goldValueManual)}" placeholder="€"></label>
-        <label>Silber manuell (optional)<input class="field zakat-field" id="zakatSilverManual" type="number" min="0" step="0.01" value="${esc(zakatInput.silverValueManual)}" placeholder="€"></label>
+        <label>Gold manuell (optional)<input class="field zakat-field zakat-num" id="zakatGoldManual" ${num} value="${esc(zakatInput.goldValueManual)}" placeholder="€"></label>
+        <label>Silber manuell (optional)<input class="field zakat-field zakat-num" id="zakatSilverManual" ${num} value="${esc(zakatInput.silverValueManual)}" placeholder="€"></label>
       </div>
       <div class="zakat-subsection-label">Schulden</div>
-      <label>Kurzfristig fällig<input class="field zakat-field" id="zakatDebts" type="number" min="0" step="0.01" value="${esc(zakatInput.debtsDue)}" placeholder="0,00"></label>`;
+      <label>Kurzfristig fällig<input class="field zakat-field zakat-num" id="zakatDebts" ${num} value="${esc(zakatInput.debtsDue)}" placeholder="0,00"></label>`;
 
     const metalsPreview = `<span class="zakat-muted">Gold · Silber · Schulden — optional</span>`;
 
@@ -398,8 +407,8 @@
       <details class="zakat-manual-prices" ${zakatManualOpen ? "open" : ""}>
         <summary>Notfall: Preise manuell</summary>
         <div class="zakat-form-grid">
-          <label>Gold €/g<input class="field zakat-field" id="zakatManualGoldPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.goldPerGramEur)}" placeholder="Notfall"></label>
-          <label>Silber €/g<input class="field zakat-field" id="zakatManualSilverPrice" type="number" min="0" step="0.01" value="${esc(zakatInput.manualPrices.silverPerGramEur)}" placeholder="Notfall"></label>
+          <label>Gold €/g<input class="field zakat-field zakat-num" id="zakatManualGoldPrice" ${num} value="${esc(zakatInput.manualPrices.goldPerGramEur)}" placeholder="Notfall"></label>
+          <label>Silber €/g<input class="field zakat-field zakat-num" id="zakatManualSilverPrice" ${num} value="${esc(zakatInput.manualPrices.silverPerGramEur)}" placeholder="Notfall"></label>
         </div>
       </details>`;
 
@@ -463,11 +472,6 @@
 
     return `<div class="zakat-view">
     <div class="zakat-shell">
-    <section class="zakat-hero premium-surface zakat-hero-compact">
-      <div class="zakat-hero-badge">Amānah · vertraulich</div>
-      <h2 class="zakat-hero-title">Zakāt-Rechner</h2>
-      <p class="zakat-hero-sub">Qurʾān · Sunnah · Salaf · Āthār · live</p>
-    </section>
     ${renderResultStrip(result)}
     ${renderAccordion("liquids", "Liquide Mittel", "1 · Eingabe", liquidsBody, "")}
     ${renderAccordion("metals", "Edelmetalle & Schulden", "2 · optional", metalsBody, metalsPreview)}
