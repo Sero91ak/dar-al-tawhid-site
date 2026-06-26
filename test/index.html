@@ -10214,7 +10214,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v169";
+const APP_BUILD_ID="app-shell-v173";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeedModeNav(){const isTopics=currentRoute.view==="topics"||currentRoute.value==="topics";return `<nav class="feed-mode-nav" aria-label="Feed-Ansicht" style="display:flex;gap:8px;margin:0 0 14px;padding:4px;background:rgba(255,255,255,.04);border-radius:999px;border:1px solid rgba(255,255,255,.08);width:fit-content"><button type="button" class="feed-mode-btn${!isTopics?" active":""}" data-feed-mode="">Feed</button><button type="button" class="feed-mode-btn${isTopics?" active":""}" data-feed-mode="topics">Alle Beiträge</button></nav>`}
