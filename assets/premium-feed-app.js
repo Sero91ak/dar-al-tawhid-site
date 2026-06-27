@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV57';
-  var FONTS_ID = 'darPremiumFeedFontsV57';
+  var STYLES_ID = 'darPremiumFeedStylesV58';
+  var FONTS_ID = 'darPremiumFeedFontsV58';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -51,7 +51,7 @@
     royal: 'linear-gradient(180deg,rgba(7,17,29,.08) 0%,rgba(7,17,29,.42) 100%)',
     bordeaux: 'linear-gradient(180deg,rgba(74,31,36,.08) 0%,rgba(20,11,12,.42) 100%)'
   };
-  var H2C_URL = '/assets/html2canvas.min.js?v=1';
+  var H2C_URL = '/assets/html2canvas.min.js?v=2';
   var GRADIENT_BGS = {
     dark: [
       'radial-gradient(circle at 18% 14%,rgba(239,215,142,.14),transparent 38%),linear-gradient(165deg,#1a150f 0%,#0a0908 52%,#080806 100%)',
@@ -2477,8 +2477,8 @@
       try {
         var src = img.currentSrc || img.getAttribute('src') || img.src || '';
         if (!src) return;
-        if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
-        if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) {
+        src = absoluteAssetUrl(src);
+        if (isCrossOriginAssetUrl(src)) {
           img.crossOrigin = 'anonymous';
           img.src = src;
         }
@@ -2489,6 +2489,77 @@
   function shareExportScale() {
     var dpr = global.devicePixelRatio || 1;
     return Math.max(2, Math.min(4, Math.round(dpr * 2)));
+  }
+
+  function absoluteAssetUrl(src) {
+    try {
+      if (!src) return '';
+      if (src.indexOf('//') === 0) return global.location.protocol + src;
+      if (src.indexOf('/') === 0) return new URL(src, global.location.origin).href;
+      return src;
+    } catch (e) {
+      return src || '';
+    }
+  }
+
+  function isCrossOriginAssetUrl(src) {
+    try {
+      var u = new URL(absoluteAssetUrl(src));
+      return u.origin !== global.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function loadShareImage(src) {
+    src = absoluteAssetUrl(src);
+    return new Promise(function (resolve, reject) {
+      if (!src) { reject(new Error('img-src')); return; }
+      var img = new Image();
+      if (isCrossOriginAssetUrl(src)) img.crossOrigin = 'anonymous';
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { reject(new Error('img-load')); };
+      img.src = src;
+    });
+  }
+
+  function drawImageCover(ctx, img, dx, dy, dw, dh) {
+    var iw = img.naturalWidth || img.width;
+    var ih = img.naturalHeight || img.height;
+    if (!iw || !ih) return;
+    var ir = iw / ih;
+    var dr = dw / dh;
+    var sx = 0;
+    var sy = 0;
+    var sw = iw;
+    var sh = ih;
+    if (ir > dr) {
+      sw = ih * dr;
+      sx = (iw - sw) / 2;
+    } else {
+      sh = iw / dr;
+      sy = (ih - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+  }
+
+  function drawSceneShade(ctx, w, h) {
+    var g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, 'rgba(0,0,0,.24)');
+    g.addColorStop(0.52, 'rgba(0,0,0,.46)');
+    g.addColorStop(1, 'rgba(0,0,0,.62)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  function mountOffscreenCapture(node, w, h) {
+    var host = document.createElement('div');
+    host.className = 'sf-share-capture-host';
+    host.setAttribute('aria-hidden', 'true');
+    host.style.cssText = 'position:fixed;left:0;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;z-index:2147483646;pointer-events:none;background:transparent;transform:translateX(-200vw);opacity:1;';
+    host.appendChild(node);
+    document.body.appendChild(host);
+    return host;
   }
 
   function captureToneStyles(tone) {
@@ -2581,13 +2652,11 @@
       if (!img) return;
       var src = (photo && photo.getAttribute('data-sf-bg-src')) || img.getAttribute('src') || img.src || '';
       if (!src) return;
+      src = absoluteAssetUrl(src);
       var pos = 'center';
       if (photo && photo.style.backgroundPosition) pos = photo.style.backgroundPosition;
       else if (img.style.objectPosition) pos = img.style.objectPosition;
-      try {
-        if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
-        img.crossOrigin = 'anonymous';
-      } catch (e) {}
+      if (isCrossOriginAssetUrl(src)) img.crossOrigin = 'anonymous';
       var prev = {
         img: img,
         isNewImg: isNewImg,
@@ -2617,6 +2686,104 @@
     return function undoCapturePrep() {
       undos.forEach(function (fn) { try { fn(); } catch (e) {} });
     };
+  }
+
+  function captureSceneLayers(scene) {
+    if (!scene) return Promise.reject(new Error('no scene'));
+    var rect = scene.getBoundingClientRect();
+    var w = Math.max(1, Math.round(rect.width));
+    var h = Math.max(1, Math.round(rect.height));
+    var scale = shareExportScale();
+    var cw = w * scale;
+    var ch = h * scale;
+    var canvas = document.createElement('canvas');
+    canvas.width = cw;
+    canvas.height = ch;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return Promise.reject(new Error('no-ctx'));
+    var photo = scene.querySelector('.sf-post__bg--photo');
+    var gradEl = scene.querySelector('.sf-post__bg--grad');
+    var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
+
+    function paintBackground() {
+      if (bgSrc) {
+        return loadShareImage(bgSrc).then(function (img) {
+          ctx.fillStyle = '#1a1814';
+          ctx.fillRect(0, 0, cw, ch);
+          drawImageCover(ctx, img, 0, 0, cw, ch);
+          drawSceneShade(ctx, cw, ch);
+        });
+      }
+      if (gradEl) {
+        var gclone = gradEl.cloneNode(true);
+        gclone.style.width = w + 'px';
+        gclone.style.height = h + 'px';
+        gclone.style.position = 'absolute';
+        gclone.style.inset = '0';
+        var ghost = mountOffscreenCapture(gclone, w, h);
+        return loadHtml2Canvas().then(function (h2c) {
+          return h2c(gclone, {
+            scale: scale,
+            width: w,
+            height: h,
+            backgroundColor: '#1a1814',
+            logging: false,
+            useCORS: true,
+            allowTaint: false
+          });
+        }).then(function (gcv) {
+          ctx.drawImage(gcv, 0, 0);
+          drawSceneShade(ctx, cw, ch);
+        }).finally(function () {
+          try { ghost.remove(); } catch (e) {}
+        });
+      }
+      ctx.fillStyle = '#1a1814';
+      ctx.fillRect(0, 0, cw, ch);
+      return Promise.resolve();
+    }
+
+    function paintForeground() {
+      var clone = scene.cloneNode(true);
+      clone.style.width = w + 'px';
+      clone.style.height = h + 'px';
+      clone.style.margin = '0';
+      clone.style.minHeight = '0';
+      clone.style.maxHeight = 'none';
+      clone.style.maxWidth = '100%';
+      clone.querySelectorAll('.sf-post__bg,.sf-post__bg--photo,.sf-post__bg--grad,.sf-post__bg--img,.sf-post__bg--capture').forEach(function (el) {
+        el.remove();
+      });
+      applyCaptureSafeStyles(clone);
+      prepareImagesCors(clone);
+      var host = mountOffscreenCapture(clone, w, h);
+      var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      return fontsReady
+        .then(function () { return waitForImages(clone); })
+        .then(function () { return new Promise(function (r) { setTimeout(r, 280); }); })
+        .then(function () { return loadHtml2Canvas(); })
+        .then(function (h2c) {
+          return h2c(clone, {
+            scale: scale,
+            width: w,
+            height: h,
+            backgroundColor: null,
+            logging: false,
+            useCORS: true,
+            allowTaint: false,
+            imageTimeout: 25000
+          });
+        })
+        .then(function (fgCanvas) {
+          ctx.drawImage(fgCanvas, 0, 0);
+          return canvas;
+        })
+        .finally(function () {
+          try { host.remove(); } catch (e) {}
+        });
+    }
+
+    return paintBackground().then(paintForeground);
   }
 
   function waitForSceneCaptureAssets(root) {
@@ -2681,7 +2848,7 @@
     var scale = shareExportScale();
     var host = document.createElement('div');
     host.className = 'sf-share-capture-host';
-    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
+    host.style.cssText = 'position:fixed;left:0;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;z-index:2147483646;pointer-events:none;background:#1a1814;transform:translateX(-200vw);opacity:1;';
 
     var clone = el.cloneNode(true);
     clone.style.width = w + 'px';
@@ -2738,7 +2905,9 @@
   function captureSceneForShare(card) {
     var scene = card && card.querySelector('.sf-post__scene');
     if (!scene) return Promise.reject(new Error('no scene'));
-    return captureElementWysiwyg(scene);
+    return captureSceneLayers(scene)
+      .catch(function () { return captureCloneExact(scene); })
+      .catch(function () { return renderSceneToCanvas(scene, true); });
   }
 
   function captureMediaForShare(card) {
@@ -2748,19 +2917,23 @@
     if (img) return captureElementWysiwyg(img.closest('.sf-post__media') || img);
     return Promise.reject(new Error('no media'));
   }
+
   function canvasToBlob(canvas) {
-    return new Promise(function (resolve) {
-      if (canvas.toBlob) {
-        canvas.toBlob(function (b) { resolve(b); }, 'image/png', 0.92);
-        return;
-      }
+    return new Promise(function (resolve, reject) {
       try {
+        if (canvas.toBlob) {
+          canvas.toBlob(function (b) {
+            if (b) resolve(b);
+            else reject(new Error('blob-empty'));
+          }, 'image/png', 0.92);
+          return;
+        }
         var bin = atob(canvas.toDataURL('image/png').split(',')[1]);
         var arr = new Uint8Array(bin.length);
         for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
         resolve(new Blob([arr], { type: 'image/png' }));
       } catch (e) {
-        resolve(null);
+        reject(new Error('blob-fail'));
       }
     });
   }
@@ -2776,6 +2949,23 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 8000);
   }
 
+  function shareBlobAsImage(blob, title) {
+    var file = new File([blob], 'dar-al-tawhid-beitrag.png', { type: 'image/png' });
+    if (global.navigator && global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
+      return global.navigator.share({
+        files: [file],
+        title: title || 'DAR AL TAWḤID'
+      }).catch(function () {
+        downloadShareBlob(blob);
+      });
+    }
+    downloadShareBlob(blob);
+    try {
+      alert('Beitragsbild wurde gespeichert. Öffne WhatsApp, Instagram oder Facebook und wähle das Bild zum Teilen.');
+    } catch (e) {}
+    return Promise.resolve();
+  }
+
   function shareItem(item, ev) {
     if (ev) { ev.stopPropagation(); ev.preventDefault(); }
     var btn = ev && ev.currentTarget;
@@ -2784,38 +2974,28 @@
       btn.disabled = true;
       btn.classList.add('is-busy');
     }
-    var capture = card ? captureMediaForShare(card) : Promise.reject(new Error('no card'));
-    capture.then(function (canvas) {
-      return canvasToBlob(canvas).then(function (blob) {
-        if (!blob) throw new Error('blob');
-        var file = new File([blob], 'dar-al-tawhid-beitrag.png', { type: 'image/png' });
-        if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
-          return global.navigator.share({
-            files: [file],
-            title: item.title || 'DAR AL TAWḤID'
-          });
-        }
-        downloadShareBlob(blob);
+    var captureOk = false;
+    (card ? captureMediaForShare(card) : Promise.reject(new Error('no-card')))
+      .then(function (canvas) {
+        if (!canvas || !canvas.width || !canvas.height) throw new Error('capture-empty');
+        return canvasToBlob(canvas);
+      })
+      .then(function (blob) {
+        captureOk = true;
+        return shareBlobAsImage(blob, item && item.title);
+      })
+      .catch(function () {
+        if (captureOk) return;
         try {
-          alert('Beitragsbild wurde gespeichert. Öffne WhatsApp, Instagram oder Facebook und wähle das Bild zum Teilen.');
-        } catch (e) {}
+          alert('Bild konnte nicht erstellt werden. Bitte Seite neu laden und erneut versuchen.');
+        } catch (e2) {}
+      })
+      .finally(function () {
+        if (btn) {
+          btn.disabled = false;
+          btn.classList.remove('is-busy');
+        }
       });
-    }).catch(function () {
-      var statement = overlayTextFor(item) || item.preview || '';
-      var text = (statement || item.title || '') + '\n\n' + BRAND.site + '\n' + BRAND.instagram + ' · ' + BRAND.telegram;
-      if (global.navigator && global.navigator.share) {
-        global.navigator.share({ title: item.title, text: text }).catch(function () {});
-        return;
-      }
-      try {
-        if (global.navigator && global.navigator.clipboard) global.navigator.clipboard.writeText(text);
-      } catch (e) {}
-    }).finally(function () {
-      if (btn) {
-        btn.disabled = false;
-        btn.classList.remove('is-busy');
-      }
-    });
   }
 
   function bindList(root) {
