@@ -617,17 +617,15 @@
           const fname = global.DARZakat.buildPdfFilename(meta);
           if (global.DARZakatPdf?.exportZakatPdf) {
             const out = await global.DARZakatPdf.exportZakatPdf(html, fname);
-            if (out.method === "print") {
-              alert("PDF-Download nicht möglich — Druckdialog geöffnet. „Als PDF speichern“ wählen.");
+            if (out.method === "share") {
+              /* iOS/Android Share Sheet geöffnet */
+            } else if (out.method === "overlay") {
+              /* Vorschau mit „Als PDF speichern“ — kein about:blank */
+            } else if (out.method === "cancelled") {
+              /* Nutzer hat Teilen abgebrochen */
             }
           } else {
-            const w = global.open("", "_blank", "noopener");
-            if (w) {
-              w.document.write(html);
-              w.document.close();
-              w.focus({ preventScroll: true });
-              w.print();
-            }
+            alert("PDF-Modul nicht geladen. Bitte Seite neu laden.");
           }
         } catch (e) {
           alert(e.message || "PDF-Export fehlgeschlagen.");
