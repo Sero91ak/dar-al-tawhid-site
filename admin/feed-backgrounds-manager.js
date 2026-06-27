@@ -384,7 +384,7 @@
           ${thumb ? `<img src="${esc(thumb)}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:10px">` : `<span class="rank-num" style="width:44px;height:44px">—</span>`}
           <div><div class="news-row-title">${esc(item.title || item.id)}</div><div class="news-row-meta">${esc(item.category)} · P${esc(item.priority)} · ${esc(st)}</div></div>
         </div>
-        <div class="news-row-badges">${statusPill(st)}${item.containsHumans || item.containsAnimals || item.containsFaces ? `<span class="news-pill removed">⚠</span>` : ""}</div>
+        <div class="news-row-badges">${statusPill(st)}${item.recommendedTextTone ? `<span class="news-pill">Schrift ${esc(item.recommendedTextTone)}</span>` : ""}${item.averageLuminance != null ? `<span class="news-pill">${item.averageLuminance >= 0.56 ? "hell" : item.averageLuminance <= 0.44 ? "dunkel" : "mittel"}</span>` : ""}${item.containsHumans || item.containsAnimals || item.containsFaces ? `<span class="news-pill removed">⚠</span>` : ""}</div>
       </summary>
       <div class="news-row-body">
         <p class="news-row-preview">${esc((item.tags || []).slice(0, 8).join(", "))}</p>

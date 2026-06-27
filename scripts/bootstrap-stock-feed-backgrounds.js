@@ -14,6 +14,7 @@ const {
   validateCandidate,
   sortQueriesNatureFirst
 } = require("./lib/feed-background-safety.cjs");
+const { analyzeImageFile } = require("./lib/feed-bg-image-analysis.cjs");
 
 const ROOT = path.join(__dirname, "..");
 const ASSETS = path.join(ROOT, "assets/feed-backgrounds/auto");
@@ -238,6 +239,8 @@ async function main() {
         toWebp(tmp, `${base}-mobile.webp`, MOBILE.w, MOBILE.h);
         toWebp(tmp, `${base}-thumb.webp`, THUMB.w, THUMB.h);
         stock.push(makeItem(id, spec.category, spec, c, webBase, check));
+        const lum = analyzeImageFile(`${base}.webp`);
+        if (lum) Object.assign(stock[stock.length - 1], lum);
         used.add(dedupe);
         n += 1;
         if (spec.category === "nature") natureCount += 1;
