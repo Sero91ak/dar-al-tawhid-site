@@ -11,6 +11,8 @@
   var RETURN_KEY = 'darFocusFeedReturnV1';
   var MAX_AUTO = 14;
   var MAX_TOTAL = 24;
+  var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
+  var ALLOWED_IMG_PREFIXES = ['/assets/', '/content/', '/logo', '/favicon', '/apple-touch', '/notification-icon'];
 
   var CARD = {
     premium: { w: 'min(84vw, 360px)', h: 'min(52vw, 210px)' },
@@ -31,6 +33,7 @@
 
   var state = {
     items: [],
+    backgrounds: [],
     filter: 'all',
     loading: false,
     scrollLeft: 0
@@ -77,17 +80,141 @@
 
   function feedJsonUrl() {
     var staging = isStaging();
-    if (typeof location !== 'undefined') {
-      var api = '/api/feed?staging=' + (staging ? '1' : '0') + '&v=' + encodeURIComponent(todayKey());
-      return api;
-    }
-    var base = staging ? '/content/staging/focus-feed/feed-index.json' : '/content/focus-feed/feed-index.json';
-    return base + '?v=' + encodeURIComponent(todayKey());
+    var v = encodeURIComponent(todayKey());
+    return FEED_API_ORIGIN + '/api/feed?staging=' + (staging ? '1' : '0') + '&v=' + v;
   }
 
   function feedJsonFallbackUrl() {
     var base = isStaging() ? '/content/staging/focus-feed/feed-index.json' : '/content/focus-feed/feed-index.json';
     return base + '?v=' + encodeURIComponent(todayKey());
+  }
+
+  function feedBgApiUrl() {
+    var v = encodeURIComponent(todayKey());
+    return FEED_API_ORIGIN + '/api/feed-backgrounds?staging=' + (isStaging() ? '1' : '0') + '&v=' + v;
+  }
+
+  function feedBgFallbackUrl() {
+    var base = isStaging() ? '/content/staging/feed-backgrounds/feed-backgrounds.json' : '/content/feed-backgrounds/feed-backgrounds.json';
+    return base + '?v=' + encodeURIComponent(todayKey());
+  }
+
+  function sanitizeImageUrl(raw) {
+    var u = String(raw || '').trim();
+    if (!u) return '';
+    if (/^(javascript|data|vbscript|blob):/i.test(u)) return '';
+    if (u.startsWith('//')) return '';
+    if (u.startsWith('/')) {
+      if (ALLOWED_IMG_PREFIXES.some(function (p) { return u.indexOf(p) === 0; })) return u;
+      if (/^\/assets\/feed-backgrounds\//.test(u)) return u;
+      return '';
+    }
+    if (/^https:\/\/dar-al-tawhid\.de\//i.test(u)) {
+      return u.replace(/^https:\/\/dar-al-tawhid\.de/i, '');
+    }
+    return '';
+  }
+
+  function isSelectableBg(bg) {
+    if (!bg) return false;
+    if (bg.status !== 'active' || !bg.approved) return false;
+    if (bg.securityStatus && bg.securityStatus !== 'approved') return false;
+    if (bg.isIslamicallySafe === false) return false;
+    if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
+    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
+    var allowed = bg.allowedFor || ['feed'];
+    if (Array.isArray(allowed) && allowed.indexOf('feed') < 0) return false;
+    return !!(bg.src || bg.srcMobile || bg.thumbnail);
+  }
+
+  function bgCategoryForItem(item) {
+    var hay = [item.tag, item.category, item.type, item.topic, item.title].join(' ').toLowerCase();
+    if (/zakat|zakāt|gold|nisab/.test(hay)) return 'abstract';
+    if (/dua|duʿ|duʿā/.test(hay)) return 'dua';
+    if (/quran|qurʾ|sure|sura/.test(hay)) return 'quran';
+    if (/moschee|mosque|jumu|gebet|prayer|salah/.test(hay)) return 'mosque';
+    if (/buch|book|ilm|hadith|sunnah|wissen/.test(hay)) return 'books';
+    if (/aqidah|tauhid|tawhid|glaube/.test(hay)) return 'tawhid';
+    if (/adab|charakter|akhlaq/.test(hay)) return 'adab';
+    if (/akhirah|jenseits|grab/.test(hay)) return 'akhirah';
+    if (/natur|berg|himmel|meer|wüste/.test(hay)) return 'nature';
+    return 'abstract';
+  }
+
+  function pickBgImageUrl(bg) {
+    var mobile = false;
+    try {
+      mobile = window.matchMedia && window.matchMedia('(max-width:767px)').matches;
+    } catch (e) {}
+    var src = mobile ? (bg.srcMobile || bg.thumbnail || bg.src) : (bg.src || bg.srcMobile || bg.thumbnail);
+    return sanitizeImageUrl(src);
+  }
+
+  function resolveCardVisual(item, backgrounds) {
+    var mode = String(item.backgroundMode || item.bgType || 'auto').toLowerCase();
+    if (item.imageSafe === false || item.backgroundSafe === false) mode = 'gradient';
+    if (mode === 'gradient' || item.bgType === 'gradient') {
+      return {
+        image: '',
+        gradientFrom: item.gradientFrom || '',
+        gradientTo: item.gradientTo || ''
+      };
+    }
+    var direct = sanitizeImageUrl(item.image || item.thumbnailUrl || item.imageUrl || item.thumbnail);
+    if (direct && mode === 'url') {
+      return { image: direct, gradientFrom: item.gradientFrom || '', gradientTo: item.gradientTo || '' };
+    }
+    if (mode === 'manual' && item.backgroundId) {
+      var manualBg = (backgrounds || []).find(function (b) { return b && b.id === item.backgroundId; });
+      if (isSelectableBg(manualBg)) {
+        var manualImg = pickBgImageUrl(manualBg);
+        if (manualImg) return { image: manualImg, gradientFrom: item.gradientFrom || '', gradientTo: item.gradientTo || '' };
+      }
+    }
+    var pool = (backgrounds || []).filter(isSelectableBg);
+    if (pool.length && (mode === 'auto' || mode === 'manual' || !direct)) {
+      var cat = bgCategoryForItem(item);
+      var matched = pool.filter(function (b) { return b.category === cat; });
+      if (!matched.length) matched = pool.filter(function (b) { return b.category === 'abstract' || b.category === 'nature'; });
+      if (!matched.length) matched = pool;
+      var picked = hashPick(matched, todayKey() + '|' + (item.id || item.title || item.type || ''), 1)[0];
+      if (picked) {
+        var autoImg = pickBgImageUrl(picked);
+        if (autoImg) return { image: autoImg, gradientFrom: item.gradientFrom || '', gradientTo: item.gradientTo || '' };
+      }
+    }
+    if (direct) return { image: direct, gradientFrom: item.gradientFrom || '', gradientTo: item.gradientTo || '' };
+    return { image: '', gradientFrom: item.gradientFrom || '', gradientTo: item.gradientTo || '' };
+  }
+
+  function enrichItemsVisuals(items, backgrounds) {
+    return (items || []).map(function (item) {
+      var vis = resolveCardVisual(item, backgrounds);
+      return Object.assign({}, item, {
+        image: vis.image || '',
+        gradientFrom: vis.gradientFrom || item.gradientFrom || '',
+        gradientTo: vis.gradientTo || item.gradientTo || ''
+      });
+    });
+  }
+
+  function fetchBackgrounds() {
+    var primary = feedBgApiUrl();
+    var fallback = feedBgFallbackUrl();
+    return fetch(primary, { cache: 'no-store', mode: 'cors' })
+      .then(function (r) {
+        if (r.ok) return r.json();
+        return fetch(fallback, { cache: 'no-store' }).then(function (r2) {
+          if (!r2.ok) return { items: [] };
+          return r2.json();
+        });
+      })
+      .catch(function () {
+        return fetch(fallback, { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : { items: [] }; })
+          .catch(function () { return { items: [] }; });
+      })
+      .then(function (data) { return (data && data.items) || []; });
   }
 
   function getCtx() {
@@ -180,7 +307,7 @@
       else if (targetType === 'prayer') target = 'prayer';
       else target = targetType + (targetId ? ':' + targetId : '');
     }
-    var image = String(raw.thumbnailUrl || raw.imageUrl || raw.image || raw.backgroundImage || '').trim();
+    var image = sanitizeImageUrl(raw.thumbnailUrl || raw.imageUrl || raw.image || raw.backgroundImage || '');
     if (!image && raw.gradientFrom) {
       image = '';
     }
@@ -191,12 +318,21 @@
       title: raw.title || '',
       preview: raw.preview || raw.subtitle || raw.shortText || raw.text || '',
       tag: raw.category || raw.tag || raw.topic || '',
+      category: raw.category || raw.tag || '',
+      topic: raw.topic || '',
       scholar: raw.scholar || raw.theme || raw.book || '',
       date: raw.dateLabel || raw.date || '',
       hijriDate: raw.hijriDate || '',
       image: image,
+      imageUrl: sanitizeImageUrl(raw.imageUrl || ''),
+      thumbnailUrl: sanitizeImageUrl(raw.thumbnailUrl || raw.imageUrl || ''),
       gradientFrom: raw.gradientFrom || '',
       gradientTo: raw.gradientTo || '',
+      backgroundMode: raw.backgroundMode || (raw.bgType === 'gradient' ? 'gradient' : 'auto'),
+      backgroundId: raw.backgroundId || '',
+      bgType: raw.bgType || '',
+      imageSafe: raw.imageSafe !== false,
+      backgroundSafe: raw.backgroundSafe !== false,
       target: target,
       badges: badges,
       sort: typeof raw.order === 'number' ? raw.order : (typeof raw.sort === 'number' ? raw.sort : 999),
@@ -261,7 +397,8 @@
             tag: normalizeCategory(rec.category),
             scholar: rec.author || rec.scholar || '',
             date: rec.date || '',
-            image: postImage(rec),
+            image: sanitizeImageUrl(postImage(rec)),
+            backgroundMode: 'auto',
             target: 'post:' + rec.id,
             badges: ['empfohlen', 'heute'],
             sort: 10
@@ -283,7 +420,8 @@
             preview: clampText(dd.text || dd.arabic || '', 100),
             tag: 'Duʿāʾ',
             date: hijri || seed,
-            image: dd.image || '',
+            image: sanitizeImageUrl(dd.image || ''),
+            backgroundMode: 'auto',
             target: 'dua:' + (dd.id || ''),
             badges: ['heute'],
             sort: 20
@@ -306,7 +444,8 @@
               preview: clampText(n.text || n.body || '', 90),
               tag: 'News',
               date: n.date || '',
-              image: n.image || '',
+              image: sanitizeImageUrl(n.image || ''),
+              backgroundMode: 'auto',
               target: n.link || n.href || ('news-detail:' + (n.id || i)),
               badges: ['neu'],
               sort: 30 + i
@@ -329,6 +468,7 @@
           tag: 'Jumuʿah',
           date: hijri || seed,
           target: 'prayer',
+          backgroundMode: 'auto',
           badges: ['heute', 'empfohlen'],
           sort: 25
         });
@@ -341,6 +481,7 @@
           preview: 'Zeiten für heute',
           tag: 'Gebetszeiten',
           target: 'prayer',
+          backgroundMode: 'auto',
           badges: ['heute'],
           sort: 90
         });
@@ -360,6 +501,7 @@
             preview: clampText(q.note || q.ayah || '', 80),
             tag: 'Qurʾān',
             target: 'quran:' + (q.surah || '') + (q.ayah ? ':' + q.ayah : ''),
+            backgroundMode: 'auto',
             badges: ['empfohlen'],
             sort: 40 + i
           });
@@ -379,6 +521,7 @@
           preview: 'Ordner öffnen',
           tag: catName,
           target: 'topic:' + catName,
+          backgroundMode: 'auto',
           badges: [],
           sort: 50 + i
         });
@@ -396,7 +539,8 @@
         tag: normalizeCategory(p.category),
         scholar: p.author || '',
         date: p.date || '',
-        image: postImage(p),
+        image: sanitizeImageUrl(postImage(p)),
+        backgroundMode: 'auto',
         target: 'post:' + p.id,
         badges: i === 0 ? ['neu'] : [],
         sort: 60 + i
@@ -455,7 +599,7 @@
   function fetchManual() {
     var primary = feedJsonUrl();
     var fallback = feedJsonFallbackUrl();
-    return fetch(primary, { cache: 'no-store' })
+    return fetch(primary, { cache: 'no-store', mode: 'cors' })
       .then(function (r) {
         if (r.ok) return r.json();
         return fetch(fallback, { cache: 'no-store' }).then(function (r2) {
@@ -509,9 +653,9 @@
     var cardDate = item.date || '';
     var bgStyle = '';
     var imgHtml = '';
-    var imgSrc = item.image || '';
+    var imgSrc = sanitizeImageUrl(item.image || '');
     if (imgSrc) {
-      imgHtml = '<img class="ff-card__img" src="' + esc(imgSrc) + '" alt="" loading="lazy" decoding="async" draggable="false">';
+      imgHtml = '<img class="ff-card__img" src="' + esc(imgSrc) + '" alt="" loading="lazy" decoding="async" draggable="false" onerror="this.style.display=\'none\'">';
     } else if (item.gradientFrom && item.gradientTo) {
       bgStyle = 'background:linear-gradient(145deg,' + esc(item.gradientFrom) + ',' + esc(item.gradientTo) + ');';
     } else {
@@ -683,6 +827,10 @@
         navigate('news-detail', t.slice(12));
         return;
       }
+      if (t === 'zakat' || type === 'zakat') {
+        navigate('zakat');
+        return;
+      }
       if (t === 'prayer' || type === 'prayer') {
         navigate('prayer');
         return;
@@ -810,13 +958,21 @@
     state.loading = true;
 
     var ctx = getCtx();
-    fetchManual().then(function (data) {
-      var manual = (data && data.items) || [];
-      var auto = buildAutoCards(ctx);
-      state.items = mergeItems(manual, auto);
-      state.loading = false;
-      render(mount);
-    });
+    Promise.all([fetchManual(), fetchBackgrounds()])
+      .then(function (results) {
+        var data = results[0];
+        var backgrounds = results[1] || [];
+        state.backgrounds = backgrounds;
+        var manual = (data && data.items) || [];
+        var auto = buildAutoCards(ctx);
+        state.items = enrichItemsVisuals(mergeItems(manual, auto), backgrounds);
+        state.loading = false;
+        render(mount);
+      })
+      .catch(function () {
+        state.loading = false;
+        render(mount);
+      });
   }
 
   window.DAR_FOCUS_FEED = {
