@@ -66,7 +66,7 @@
     host.id = "zakat-pdf-export-host";
     host.setAttribute("aria-hidden", "true");
     host.style.cssText =
-      "position:fixed;left:0;top:0;width:794px;opacity:0.01;pointer-events:none;z-index:-1;overflow:hidden;height:auto;max-height:1px";
+      "position:fixed;left:-9999px;top:0;width:794px;height:1123px;opacity:0;pointer-events:none;z-index:-1;overflow:hidden";
 
     const parsed = new DOMParser().parseFromString(html, "text/html");
     parsed.querySelectorAll("style").forEach((node) => host.appendChild(node.cloneNode(true)));
@@ -127,7 +127,7 @@
       body.zakat-pdf-print-mode #zakat-pdf-overlay,#zakat-pdf-overlay *{visibility:visible}
       body.zakat-pdf-print-mode #zakat-pdf-overlay{position:absolute;inset:0;background:#fff;overflow:visible}
       body.zakat-pdf-print-mode #zakat-pdf-toolbar{display:none!important}
-      body.zakat-pdf-print-mode .zakat-pdf-page{page-break-after:always;border:none}
+      body.zakat-pdf-print-mode .zakat-pdf-page{page-break-after:auto;border:none}
     }`;
     global.document.head.appendChild(style);
   }
@@ -215,12 +215,14 @@
             backgroundColor: "#f6f1e8",
             logging: false,
             width: 794,
+            height: 1123,
             windowWidth: 794,
+            windowHeight: 1123,
             scrollX: 0,
-            scrollY: -global.window.scrollY
+            scrollY: 0
           },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          pagebreak: { mode: ["css", "legacy"] }
+          pagebreak: { mode: ["avoid-all"] }
         })
         .from(target)
         .outputPdf("blob");

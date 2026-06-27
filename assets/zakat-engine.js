@@ -547,48 +547,48 @@
   function pdfStyles() {
     return `@page{size:A4 portrait;margin:0}
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#e8e0d0}
-.zakat-pdf-root{font-family:"Segoe UI",system-ui,sans-serif;color:#1a2f35}
-.zakat-pdf-page{width:794px;min-height:1123px;margin:0 auto;padding:22px 24px 18px;background:#f6f1e8;border:3px double #c5a059;position:relative;page-break-after:always;break-after:page;overflow:hidden}
-.zakat-pdf-page:last-child{page-break-after:auto}
-.zakat-pdf-head{display:grid;grid-template-columns:92px 1fr 190px;gap:12px;align-items:start;margin-bottom:14px}
-.zakat-pdf-logo{width:84px;height:84px;border-radius:50%;border:2px solid #c5a059;background:#fff;object-fit:cover}
-.zakat-pdf-brand{text-align:center;padding-top:2px}
-.zakat-pdf-brand h1{margin:0;font:700 28px/1.1 Georgia,"Times New Roman",serif;letter-spacing:.06em;color:#173843}
-.zakat-pdf-brand .script{margin:6px 0 0;font:italic 22px/1.2 "Palatino Linotype","Book Antiqua",Palatino,serif;color:#173843}
-.zakat-pdf-brand .rule{height:2px;background:linear-gradient(90deg,transparent,#c5a059,transparent);margin:8px auto 0;width:72%}
-.zakat-pdf-meta{font-size:11px;line-height:1.55;color:#173843}
+html,body{margin:0;padding:0;background:#f6f1e8}
+.zakat-pdf-root{font-family:"Segoe UI",system-ui,sans-serif;color:#1a2f35;width:794px;height:1123px;overflow:hidden}
+.zakat-pdf-page{width:794px;height:1123px;max-height:1123px;margin:0;padding:14px 18px 10px;background:#f6f1e8;border:3px double #c5a059;position:relative;page-break-after:auto;break-after:auto;overflow:hidden;display:flex;flex-direction:column}
+.zakat-pdf-head{display:grid;grid-template-columns:72px 1fr 170px;gap:10px;align-items:start;margin-bottom:8px;flex:0 0 auto}
+.zakat-pdf-logo{width:64px;height:64px;border-radius:50%;border:2px solid #c5a059;background:#fff;object-fit:cover}
+.zakat-pdf-brand{text-align:center;padding-top:0}
+.zakat-pdf-brand h1{margin:0;font:700 22px/1.1 Georgia,"Times New Roman",serif;letter-spacing:.06em;color:#173843}
+.zakat-pdf-brand .script{margin:4px 0 0;font:italic 16px/1.2 "Palatino Linotype","Book Antiqua",Palatino,serif;color:#173843}
+.zakat-pdf-brand .rule{height:2px;background:linear-gradient(90deg,transparent,#c5a059,transparent);margin:6px auto 0;width:64%}
+.zakat-pdf-meta{font-size:9.5px;line-height:1.45;color:#173843}
 .zakat-pdf-meta b{color:#0f252c;font-weight:700}
-.zakat-pdf-sec{margin-top:12px;border:2px solid #c5a059;background:rgba(255,255,255,.35)}
-.zakat-pdf-sec-head{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#1f4f5d,#173843);color:#f6f1e8;font:700 13px/1.2 Georgia,serif;padding:8px 12px;text-align:center}
-.zakat-pdf-spark{color:#d4b56a;font-size:11px}
-.zakat-pdf-sec-body{padding:12px 14px}
-.zakat-pdf-cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.zakat-pdf-kv{font-size:12px;line-height:1.65;color:#1a2f35}
-.zakat-pdf-kv b{display:block;font-size:13px;color:#173843;margin-bottom:4px;font-family:Georgia,serif}
-.zakat-pdf-highlight{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding:10px 12px;background:#e8dcc4;border:1px solid #c5a059;font-weight:700;font-size:13px;color:#173843}
-.zakat-pdf-hawl{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
-.zakat-pdf-hawl .cell{border:1px solid #c5a059;background:rgba(255,255,255,.45);padding:8px 10px;font-size:11px;line-height:1.45}
-.zakat-pdf-hawl .cell b{display:block;font-size:11px;color:#173843;margin-bottom:4px}
-.zakat-pdf-calc{position:relative;margin-top:12px;border:2px solid #c5a059;background:rgba(255,255,255,.42);padding:12px 14px}
-.zakat-pdf-calc .wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.06;pointer-events:none}
-.zakat-pdf-calc .wm img{width:320px;height:320px;object-fit:contain}
-.zakat-pdf-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(23,56,67,.12);font-size:12px;position:relative;z-index:1}
+.zakat-pdf-body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:6px}
+.zakat-pdf-sec{border:2px solid #c5a059;background:rgba(255,255,255,.35);flex:0 0 auto}
+.zakat-pdf-sec-head{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#1f4f5d,#173843);color:#f6f1e8;font:700 11px/1.2 Georgia,serif;padding:5px 10px;text-align:center}
+.zakat-pdf-spark{color:#d4b56a;font-size:10px}
+.zakat-pdf-sec-body{padding:8px 10px}
+.zakat-pdf-cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.zakat-pdf-kv{font-size:10px;line-height:1.45;color:#1a2f35}
+.zakat-pdf-kv b{display:block;font-size:10.5px;color:#173843;margin-bottom:2px;font-family:Georgia,serif}
+.zakat-pdf-highlight{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:6px 8px;background:#e8dcc4;border:1px solid #c5a059;font-weight:700;font-size:11px;color:#173843}
+.zakat-pdf-hawl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.zakat-pdf-hawl .cell{border:1px solid #c5a059;background:rgba(255,255,255,.45);padding:5px 6px;font-size:9.5px;line-height:1.35}
+.zakat-pdf-hawl .cell b{display:block;font-size:9.5px;color:#173843;margin-bottom:2px}
+.zakat-pdf-calc{position:relative;border:2px solid #c5a059;background:rgba(255,255,255,.42);padding:8px 10px}
+.zakat-pdf-calc .wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.05;pointer-events:none}
+.zakat-pdf-calc .wm img{width:220px;height:220px;object-fit:contain}
+.zakat-pdf-row{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid rgba(23,56,67,.12);font-size:10px;position:relative;z-index:1}
 .zakat-pdf-row:last-child{border-bottom:0}
-.zakat-pdf-row.total{margin-top:6px;padding:10px 12px;background:#e8dcc4;border:1px solid #c5a059;font-weight:800;font-size:14px;color:#173843}
+.zakat-pdf-row.total{margin-top:4px;padding:7px 8px;background:#e8dcc4;border:1px solid #c5a059;font-weight:800;font-size:11.5px;color:#173843}
 .zakat-pdf-row.debt span:last-child{color:#7a2e2e}
-.zakat-pdf-sources .zakat-pdf-kv ul{margin:6px 0 0;padding:0;list-style:none}
-.zakat-pdf-sources .zakat-pdf-kv li{padding:3px 0 3px 14px;position:relative}
-.zakat-pdf-sources .zakat-pdf-kv li:before{content:"◆";position:absolute;left:0;color:#c5a059;font-size:9px;top:5px}
-.zakat-pdf-foot{margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;background:linear-gradient(180deg,#1f4f5d,#173843);color:#f6f1e8;padding:10px 12px;font-size:10px;line-height:1.4}
-.zakat-pdf-foot span{display:flex;align-items:center;gap:6px;justify-content:center;text-align:center}
-.zakat-pdf-cover-main{text-align:center;padding:28px 16px 18px;border:2px solid #c5a059;background:rgba(255,255,255,.42);margin:18px 0 14px}
-.zakat-pdf-cover-main .amount{font:700 42px/1.1 Georgia,serif;color:#173843;margin:8px 0}
-.zakat-pdf-cover-main .status{font-size:13px;color:#1a2f35;max-width:520px;margin:0 auto;line-height:1.55}
-.zakat-pdf-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.zakat-pdf-badge{border:1px solid #c5a059;background:rgba(255,255,255,.5);padding:10px;font-size:11px;line-height:1.45;text-align:center}
-.zakat-pdf-badge b{display:block;font-size:12px;color:#173843;margin-bottom:4px}
-.zakat-pdf-note{margin-top:12px;font-size:10px;line-height:1.55;color:#42565c;border-top:1px solid rgba(197,160,89,.45);padding-top:10px}`;
+.zakat-pdf-sources .zakat-pdf-kv ul{margin:4px 0 0;padding:0;list-style:none}
+.zakat-pdf-sources .zakat-pdf-kv li{padding:2px 0 2px 12px;position:relative;font-size:9.5px}
+.zakat-pdf-sources .zakat-pdf-kv li:before{content:"◆";position:absolute;left:0;color:#c5a059;font-size:8px;top:4px}
+.zakat-pdf-foot{margin-top:auto;flex:0 0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:linear-gradient(180deg,#1f4f5d,#173843);color:#f6f1e8;padding:7px 10px;font-size:9px;line-height:1.35}
+.zakat-pdf-foot span{display:flex;align-items:center;gap:4px;justify-content:center;text-align:center}
+.zakat-pdf-cover-main{text-align:center;padding:10px 12px 8px;border:2px solid #c5a059;background:rgba(255,255,255,.42)}
+.zakat-pdf-cover-main .amount{font:700 30px/1.05 Georgia,serif;color:#173843;margin:4px 0}
+.zakat-pdf-cover-main .status{font-size:10.5px;color:#1a2f35;max-width:100%;margin:0 auto;line-height:1.4}
+.zakat-pdf-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.zakat-pdf-badge{border:1px solid #c5a059;background:rgba(255,255,255,.5);padding:6px;font-size:9.5px;line-height:1.35;text-align:center}
+.zakat-pdf-badge b{display:block;font-size:10px;color:#173843;margin-bottom:2px}
+.zakat-pdf-note{margin-top:6px;font-size:9px;line-height:1.4;color:#42565c;border-top:1px solid rgba(197,160,89,.45);padding-top:6px}`;
   }
 
   function renderPdfHeader(meta, page, totalPages, origin) {
@@ -649,89 +649,71 @@ html,body{margin:0;padding:0;background:#e8e0d0}
     const wm = `${origin}/watermark-circle.png`;
     const disclaimer = w.disclaimer || w.privacy || "";
 
-    const page1 = `<section class="zakat-pdf-page">
-      ${renderPdfHeader(reportMeta, 1, 2, origin)}
+    const page = `<section class="zakat-pdf-page">
+      ${renderPdfHeader(reportMeta, 1, 1, origin)}
+      <div class="zakat-pdf-body">
       <div class="zakat-pdf-sec">
         <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Ergebnis &amp; Übersicht</span><span class="zakat-pdf-spark">✦</span></div>
         <div class="zakat-pdf-sec-body">
           <div class="zakat-pdf-cover-main">
-            <div style="font-size:12px;color:#173843;font-weight:700;letter-spacing:.04em">Pflichtbetrag</div>
+            <div style="font-size:10px;color:#173843;font-weight:700;letter-spacing:.04em">Pflichtbetrag</div>
             <div class="amount">${escapeHtml(formatMoney(result.zakatDue, currency))}${result.previewOnly ? " *" : ""}</div>
             <p class="status">${escapeHtml(result.statusMessage || "Persönliche Zakāt-Berechnung nach Qurʾān &amp; Sunnah.")}</p>
           </div>
           <div class="zakat-pdf-badges">
             <div class="zakat-pdf-badge"><b>Niṣāb</b>${nisab.reached ? "Erreicht" : "Nicht erreicht"}<br>${escapeHtml(formatMoney(nisab.standardEur || 0, currency))}</div>
-            <div class="zakat-pdf-badge"><b>Ḥawl</b>${escapeHtml(hawlYes)}<br>${escapeHtml(hawl.nextDueDate ? `Nächster Stichtag ${formatPdfDate(hawl.nextDueDate)}` : "Mondjahr prüfen")}</div>
+            <div class="zakat-pdf-badge"><b>Ḥawl</b>${escapeHtml(hawlYes)}<br>${escapeHtml(hawl.nextDueDate ? `Stichtag ${formatPdfDate(hawl.nextDueDate)}` : "Mondjahr prüfen")}</div>
             <div class="zakat-pdf-badge"><b>Vermögen</b>${escapeHtml(formatMoney(result.zakatableWealth || 0, currency))}<br>zakātpflichtig</div>
           </div>
-          <p class="zakat-pdf-note">${escapeHtml(disclaimer)}${result.previewOnly ? " · * Vorschau — keine rechtsverbindliche Feststellung." : ""}</p>
         </div>
       </div>
-      ${renderPdfFooter(reportMeta, 1, 2)}
-    </section>`;
-
-    const page2 = `<section class="zakat-pdf-page">
-      ${renderPdfHeader(reportMeta, 2, 2, origin)}
       <div class="zakat-pdf-sec">
         <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Marktdaten &amp; Niṣāb</span><span class="zakat-pdf-spark">✦</span></div>
         <div class="zakat-pdf-sec-body">
           <div class="zakat-pdf-cols2">
             <div class="zakat-pdf-kv"><b>Gold</b>
-              Preis je Gramm: ${escapeHtml(formatMoney(prices.goldPerGramEur || 0, currency))}<br>
-              Niṣāb ${nisab.goldGrams || 85} g: ${escapeHtml(formatMoney(nisab.goldEur || 0, currency))}<br>
-              Preisquelle: ${escapeHtml(priceSource)}<br>
-              Aktualisiert am: ${escapeHtml(priceUpdated)}
+              Preis/g: ${escapeHtml(formatMoney(prices.goldPerGramEur || 0, currency))} · Niṣāb ${nisab.goldGrams || 85} g: ${escapeHtml(formatMoney(nisab.goldEur || 0, currency))}<br>
+              Quelle: ${escapeHtml(priceSource)} · ${escapeHtml(priceUpdated)}
             </div>
             <div class="zakat-pdf-kv"><b>Silber</b>
-              Preis je Gramm: ${escapeHtml(formatMoney(prices.silverPerGramEur || 0, currency))}<br>
-              Niṣāb ${nisab.silverGrams || 595} g: ${escapeHtml(formatMoney(nisab.silverEur || 0, currency))}<br>
-              Preisquelle: ${escapeHtml(priceSource)}<br>
-              Aktualisiert am: ${escapeHtml(priceUpdated)}
+              Preis/g: ${escapeHtml(formatMoney(prices.silverPerGramEur || 0, currency))} · Niṣāb ${nisab.silverGrams || 595} g: ${escapeHtml(formatMoney(nisab.silverEur || 0, currency))}<br>
+              Standard-Niṣāb: ${escapeHtml(formatMoney(nisab.standardEur || 0, currency))}
             </div>
           </div>
-          <div class="zakat-pdf-highlight"><span>Standard-Niṣāb (vorsichtiger Wert)</span><span>${escapeHtml(formatMoney(nisab.standardEur || 0, currency))}</span></div>
         </div>
       </div>
       <div class="zakat-pdf-sec">
-        <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Ḥawl &amp; Zeitbezug</span><span class="zakat-pdf-spark">✦</span></div>
-        <div class="zakat-pdf-hawl">
-          <div class="cell"><b>Niṣāb erreicht seit</b>${escapeHtml(nisabSince)}</div>
-          <div class="cell"><b>Stichtag heute</b>${escapeHtml(todayLabel)}</div>
-          <div class="cell"><b>Mondjahr erfüllt</b>${escapeHtml(hawlYes)}</div>
-          <div class="cell"><b>Status</b>${escapeHtml(statusLabel)}</div>
-        </div>
-      </div>
-      <div class="zakat-pdf-sec">
-        <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Rechenweg im Detail</span><span class="zakat-pdf-spark">✦</span></div>
-        <div class="zakat-pdf-calc">
-          <div class="wm"><img src="${escapeHtml(wm)}" alt=""></div>
-          <div class="zakat-pdf-row"><span>Summe liquide Mittel</span><span>${escapeHtml(formatMoney(liquid, currency))}</span></div>
-          <div class="zakat-pdf-row"><span>Gold</span><span>${escapeHtml(formatMoney(goldVal, currency))}</span></div>
-          <div class="zakat-pdf-row"><span>Silber</span><span>${escapeHtml(formatMoney(silverVal, currency))}</span></div>
-          <div class="zakat-pdf-row"><span>Zwischensumme Vermögen</span><span>${escapeHtml(formatMoney(result.totalWealth || 0, currency))}</span></div>
-          <div class="zakat-pdf-row debt"><span>Kurzfristig fällige Schulden</span><span>-${escapeHtml(formatMoney(result.debtsDue || 0, currency))}</span></div>
-          <div class="zakat-pdf-row"><span>Zakātpflichtiges Vermögen</span><span>${escapeHtml(formatMoney(result.zakatableWealth || 0, currency))}</span></div>
-          <div class="zakat-pdf-row"><span>Satz ${ratePct} %</span><span>${escapeHtml(formatMoney(result.zakatDue || 0, currency))}</span></div>
-          <div class="zakat-pdf-row total"><span>Pflichtbetrag</span><span>${escapeHtml(formatMoney(result.zakatDue || 0, currency))}</span></div>
+        <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Ḥawl &amp; Rechenweg</span><span class="zakat-pdf-spark">✦</span></div>
+        <div class="zakat-pdf-sec-body">
+          <div class="zakat-pdf-hawl">
+            <div class="cell"><b>Niṣāb seit</b>${escapeHtml(nisabSince)}</div>
+            <div class="cell"><b>Heute</b>${escapeHtml(todayLabel)}</div>
+            <div class="cell"><b>Ḥawl</b>${escapeHtml(hawlYes)}</div>
+            <div class="cell"><b>Status</b>${escapeHtml(statusLabel)}</div>
+          </div>
+          <div class="zakat-pdf-calc">
+            <div class="wm"><img src="${escapeHtml(wm)}" alt=""></div>
+            <div class="zakat-pdf-row"><span>Liquide Mittel</span><span>${escapeHtml(formatMoney(liquid, currency))}</span></div>
+            <div class="zakat-pdf-row"><span>Gold / Silber</span><span>${escapeHtml(formatMoney(goldVal, currency))} / ${escapeHtml(formatMoney(silverVal, currency))}</span></div>
+            <div class="zakat-pdf-row"><span>Vermögen gesamt</span><span>${escapeHtml(formatMoney(result.totalWealth || 0, currency))}</span></div>
+            <div class="zakat-pdf-row debt"><span>Schulden</span><span>-${escapeHtml(formatMoney(result.debtsDue || 0, currency))}</span></div>
+            <div class="zakat-pdf-row"><span>Zakātpflichtig · ${ratePct} %</span><span>${escapeHtml(formatMoney(result.zakatDue || 0, currency))}</span></div>
+            <div class="zakat-pdf-row total"><span>Pflichtbetrag</span><span>${escapeHtml(formatMoney(result.zakatDue || 0, currency))}</span></div>
+          </div>
         </div>
       </div>
       <div class="zakat-pdf-sec zakat-pdf-sources">
-        <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Authentische Quellen &amp; Belegübersicht</span><span class="zakat-pdf-spark">✦</span></div>
+        <div class="zakat-pdf-sec-head"><span class="zakat-pdf-spark">✦</span><span>Quellen &amp; Hinweise</span><span class="zakat-pdf-spark">✦</span></div>
         <div class="zakat-pdf-sec-body zakat-pdf-cols2">
-          <div class="zakat-pdf-kv"><b>Quellenrahmen</b><ul>
-            <li>Qurʾān</li><li>Sunnah</li><li>Salaf</li><li>Āthār</li><li>Fiqh-Referenzen</li>
-          </ul></div>
-          <div class="zakat-pdf-kv"><b>Belege / Export</b>
-            Exportformat: PDF<br>
-            Gespeichert für Besucher: ${escapeHtml(savedLabel)}<br>
-            Berichtsstatus: ${escapeHtml(statusLabel)}
-          </div>
+          <div class="zakat-pdf-kv"><b>Quellenrahmen</b><ul><li>Qurʾān</li><li>Sunnah</li><li>Salaf &amp; Fiqh</li></ul></div>
+          <div class="zakat-pdf-kv"><b>Export</b>PDF · ID ${escapeHtml(reportMeta.reportId)} · Gespeichert: ${escapeHtml(savedLabel)}<p class="zakat-pdf-note">${escapeHtml(disclaimer)}${result.previewOnly ? " · * Vorschau." : ""}</p></div>
         </div>
       </div>
-      ${renderPdfFooter(reportMeta, 2, 2)}
+      </div>
+      ${renderPdfFooter(reportMeta, 1, 1)}
     </section>`;
 
-    return `<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><title>Zakāt-Rechner Bericht — ${escapeHtml(reportMeta.reportId)}</title><style>${pdfStyles()}</style></head><body><div class="zakat-pdf-root">${page1}${page2}</div></body></html>`;
+    return `<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><title>Zakāt-Rechner Bericht — ${escapeHtml(reportMeta.reportId)}</title><style>${pdfStyles()}</style></head><body><div class="zakat-pdf-root">${page}</div></body></html>`;
   }
 
   global.DARZakat = {

@@ -96,8 +96,10 @@ const pdfHtml = Z.buildPdfHtml(result, config, {
 });
 assert(pdfHtml.includes("Zakāt-Rechner Bericht"), "pdf title");
 assert(pdfHtml.includes("Marktdaten"), "pdf market section");
-assert(pdfHtml.includes("Rechenweg im Detail"), "pdf calculation section");
-assert(pdfHtml.includes("Standard-Niṣāb"), "pdf nisab row");
+assert(pdfHtml.includes("Rechenweg"), "pdf calculation section");
+assert(pdfHtml.includes("Seite:</b> 1 / 1"), "pdf single page");
+assert((pdfHtml.match(/class="zakat-pdf-page"/g) || []).length === 1, "pdf one page section");
+assert(!pdfHtml.includes("Seite:</b> 2 /"), "pdf no second page");
 assert(Z.buildPdfFilename({ reportId: "ZK-2026-000001" }) === "zakat-bericht-ZK-2026-000001.pdf", "pdf filename");
 
 if (failed) process.exit(1);
