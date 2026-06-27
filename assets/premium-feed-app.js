@@ -5,9 +5,11 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV60';
-  var FONTS_ID = 'darPremiumFeedFontsV60';
+  var STYLES_ID = 'darPremiumFeedStylesV61';
+  var FONTS_ID = 'darPremiumFeedFontsV61';
   var FEED_SHARE_SITE_URL = 'https://dar-al-tawhid.de';
+  var FEED_SHARE_CACHE = Object.create(null);
+  var FEED_SHARE_PREFETCHING = Object.create(null);
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -376,75 +378,53 @@
     return numOr(meta.middleLuminance, meta.averageLuminance);
   }
 
-  function getAdaptiveFeedTextStyle(backgroundMeta, textZone, theme) {
-    theme = theme || getThemeKey();
-    textZone = textZone || 'middle';
-    var meta = backgroundMeta || {};
-    var lum = zoneLuminance(meta, textZone);
-    var busy = numOr(meta.busyScore, 0.25);
-    var dataTone = lum >= 0.56 ? 'light-bg' : 'dark-bg';
-    var textVariant = dataTone === 'light-bg' ? 'dark' : 'light';
-    if (meta.recommendedTextTone === 'dark') { dataTone = 'light-bg'; textVariant = 'dark'; }
-    if (meta.recommendedTextTone === 'light') { dataTone = 'dark-bg'; textVariant = 'light'; }
-    if (meta.isGradient) {
-      dataTone = lum >= 0.56 ? 'light-bg' : 'dark-bg';
-      textVariant = dataTone === 'light-bg' ? 'dark' : 'light';
-    }
-    var protection = 'soft';
-    if (busy >= 0.48 || Math.abs(lum - 0.5) < 0.09) protection = 'strong';
-    else if (meta.isGradient) protection = 'soft';
-    var palettes = {
-      dark: {
-        light: { primary: '#fff6df', secondary: '#f3e3c0', accent: '#e8c878', source: 'rgba(255,244,220,.78)', stroke: 'rgba(0,0,0,.28)' },
-        dark: { primary: '#17130f', secondary: '#312820', accent: '#8a6a2c', source: 'rgba(35,27,20,.82)', stroke: 'rgba(255,255,255,.35)' }
-      },
-      light: {
-        light: { primary: '#fff8ef', secondary: '#f5ebd3', accent: '#d4b86a', source: 'rgba(255,248,235,.82)', stroke: 'rgba(0,0,0,.25)' },
-        dark: { primary: '#1b1714', secondary: '#3a3028', accent: '#7a5c24', source: 'rgba(35,27,20,.84)', stroke: 'rgba(255,255,255,.5)' }
-      },
-      soft: {
-        light: { primary: '#fff8f1', secondary: '#efe0d8', accent: '#e0c890', source: 'rgba(255,248,241,.78)', stroke: 'rgba(0,0,0,.22)' },
-        dark: { primary: '#24181e', secondary: '#4a3640', accent: '#9a7848', source: 'rgba(36,24,30,.82)', stroke: 'rgba(255,255,255,.45)' }
-      },
-      royal: {
-        light: { primary: '#fff4dc', secondary: '#e8dcc4', accent: '#e8c878', source: 'rgba(255,244,220,.76)', stroke: 'rgba(0,0,0,.35)' },
-        dark: { primary: '#0f1a28', secondary: '#1a2a3f', accent: '#6a5420', source: 'rgba(15,26,40,.84)', stroke: 'rgba(255,255,255,.42)' }
-      },
-      bordeaux: {
-        light: { primary: '#fff1df', secondary: '#ecd8c4', accent: '#e0c070', source: 'rgba(255,241,223,.76)', stroke: 'rgba(0,0,0,.35)' },
-        dark: { primary: '#2a1218', secondary: '#4a2430', accent: '#9a7030', source: 'rgba(42,18,24,.84)', stroke: 'rgba(255,255,255,.4)' }
-      }
-    };
-    var pal = (palettes[theme] || palettes.dark)[textVariant];
-    var shadow = textVariant === 'light'
-      ? '0 2px 8px rgba(0,0,0,.65),0 0 18px rgba(0,0,0,.45)'
-      : '0 1px 2px rgba(255,255,255,.65),0 0 14px rgba(255,255,255,.45)';
-    if (protection === 'strong') {
-      shadow += textVariant === 'light' ? ',0 0 2px rgba(0,0,0,.85)' : ',0 0 2px rgba(255,255,255,.8)';
-    }
-    var protBg = textVariant === 'light'
-      ? 'radial-gradient(ellipse at center,rgba(0,0,0,.42) 0%,rgba(0,0,0,.18) 58%,rgba(0,0,0,0) 88%)'
-      : 'radial-gradient(ellipse at center,rgba(255,255,255,.34) 0%,rgba(255,255,255,.14) 58%,rgba(255,255,255,0) 88%)';
-    var protOpacity = protection === 'strong' ? 0.46 : 0.32;
-    var panelScrim = textVariant === 'light'
-      ? (protection === 'strong' ? 'rgba(8,10,14,.48)' : 'rgba(8,10,14,.34)')
-      : (protection === 'strong' ? 'rgba(255,252,245,.56)' : 'rgba(255,252,245,.42)');
+  function getSafeReadableFeedStyle() {
     return {
-      dataTone: dataTone,
-      protection: protection,
+      dataTone: 'dark-bg',
+      protection: 'strong',
       cssVars: {
-        '--feed-text-primary': pal.primary,
-        '--feed-text-secondary': pal.secondary,
-        '--feed-text-accent': pal.accent,
-        '--feed-text-source': pal.source,
-        '--feed-text-shadow': shadow,
-        '--feed-text-stroke': protection === 'strong' ? pal.stroke : 'transparent',
-        '--feed-panel-scrim': panelScrim,
-        '--feed-protection-bg': protBg,
-        '--feed-protection-opacity': String(protOpacity),
-        '--feed-overlay-strength': String(protOpacity)
+        '--feed-text-primary': '#fff4dc',
+        '--feed-text-secondary': '#f3e3c0',
+        '--feed-text-accent': '#e6c26f',
+        '--feed-text-source': 'rgba(255,244,220,0.88)',
+        '--feed-text-shadow': '0 2px 8px rgba(0,0,0,0.75)',
+        '--feed-text-stroke': 'transparent',
+        '--feed-panel-scrim': 'transparent',
+        '--feed-protection-bg': 'none',
+        '--feed-protection-opacity': '0',
+        '--feed-overlay-strength': '0'
       }
     };
+  }
+
+  function getAdaptiveFeedTextStyle(backgroundMeta, textZone, theme) {
+    return getSafeReadableFeedStyle();
+  }
+
+  function enforceReadablePanels(root) {
+    if (!root) return;
+    root.querySelectorAll('.sf-post__textpanel').forEach(function (panel) {
+      panel.classList.add('feed-quote-panel');
+      panel.setAttribute('data-tone', 'dark-bg');
+      panel.setAttribute('data-protection', 'strong');
+      var style = getSafeReadableFeedStyle();
+      Object.keys(style.cssVars).forEach(function (k) {
+        panel.style.setProperty(k, style.cssVars[k]);
+      });
+    });
+  }
+
+  function enforceReadableExportMode(root) {
+    if (!root) return;
+    root.classList.add('feed-export-mode');
+    enforceReadablePanels(root);
+    root.querySelectorAll('.sf-post__textpanel').forEach(function (panel) {
+      panel.style.background = 'linear-gradient(180deg, rgba(12,14,16,0.88), rgba(10,11,13,0.80))';
+      panel.style.backdropFilter = 'none';
+      panel.style.webkitBackdropFilter = 'none';
+      panel.style.border = '1px solid rgba(230,200,130,0.28)';
+      panel.style.boxShadow = '0 18px 55px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08)';
+    });
   }
 
   function adaptiveStyleToString(style) {
@@ -1324,6 +1304,7 @@
       var snugW = Math.max(132, Math.min(maxPanelW, naturalW));
       panel.style.width = snugW + 'px';
     });
+    enforceReadablePanels(root);
   }
 
   var tuneResizeTimer = null;
@@ -2079,12 +2060,19 @@
       '.sf-brand-site svg{width:clamp(8px,2.2vw,10px);height:clamp(8px,2.2vw,10px);flex:0 0 auto}' +
       '.sf-brand-signature{font-family:var(--font-accent);font-size:clamp(11px,3vw,13px);color:var(--theme-feed-signature,var(--theme-accent,var(--gold2)));line-height:1;letter-spacing:.015em;flex:0 1 auto;min-width:0;text-align:center;white-space:nowrap}' +
       '.sf-post__scene-inner{position:relative;z-index:3;width:100%;max-width:100%;min-width:0;display:flex;align-items:center;justify-content:center;padding:var(--sf-panel-inset-top,4px) var(--sf-panel-inset-x,var(--sf-panel-inset,12px)) var(--sf-panel-inset-bottom,4px);max-height:calc(100% - var(--sf-footer-h,50px));box-sizing:border-box;margin:0}' +
-      '.sf-post__textpanel{position:relative;width:auto;max-width:min(100%,var(--sf-panel-fit-max,92%));min-width:min(48%,9.5rem);padding:var(--sf-panel-pad,clamp(10px,2.8vw,14px));border-radius:18px;background:var(--feed-panel-scrim,rgba(8,10,14,.34));border:none;box-shadow:none;backdrop-filter:blur(6px) saturate(1.05);-webkit-backdrop-filter:blur(6px) saturate(1.05);box-sizing:border-box;text-align:center;overflow:visible;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))))}' +
-      '.sf-post__textpanel::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--feed-protection-bg,none);opacity:var(--feed-protection-opacity,.32);pointer-events:none;transition:opacity .25s ease,background .25s ease}' +
-      '.sf-post__textpanel[data-protection=soft]::before{opacity:var(--feed-protection-opacity,.32)}' +
-      '.sf-post__textpanel[data-protection=strong]::before{opacity:var(--feed-protection-opacity,.46)}' +
-      '.sf-post__textpanel[data-tone=light-bg]{--feed-text-primary:#17130f;--feed-text-secondary:#312820;--feed-text-accent:#8a6a2c;--feed-text-source:rgba(35,27,20,.82)}' +
-      '.sf-post__textpanel[data-tone=dark-bg]{--feed-text-primary:#fff4dc;--feed-text-secondary:#f3e3c0;--feed-text-accent:#e8c878;--feed-text-source:rgba(255,244,220,.78)}' +
+      '.sf-post__textpanel{position:relative;width:auto;max-width:min(100%,var(--sf-panel-fit-max,92%));min-width:min(48%,9.5rem);padding:var(--sf-panel-pad,clamp(12px,3vw,18px));border-radius:28px;background:linear-gradient(180deg,rgba(12,14,16,.86),rgba(10,11,13,.78));border:1px solid rgba(230,200,130,.28);box-shadow:0 18px 55px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px) saturate(115%);-webkit-backdrop-filter:blur(10px) saturate(115%);box-sizing:border-box;text-align:center;overflow:visible;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#fff4dc}' +
+      '.sf-post__textpanel.feed-quote-panel,.feed-quote-panel{background:linear-gradient(180deg,rgba(12,14,16,.86),rgba(10,11,13,.78))!important;border:1px solid rgba(230,200,130,.28)!important;box-shadow:0 18px 55px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.08)!important;border-radius:28px!important;backdrop-filter:blur(10px) saturate(115%)!important;-webkit-backdrop-filter:blur(10px) saturate(115%)!important}' +
+      '.sf-post__textpanel::before,.feed-quote-panel::before{display:none!important}' +
+      '.sf-post__textpanel[data-tone=light-bg],.sf-post__textpanel[data-tone=dark-bg]{--feed-text-primary:#fff4dc;--feed-text-secondary:#f3e3c0;--feed-text-accent:#e6c26f;--feed-text-source:rgba(255,244,220,.88)}' +
+      '.feed-quote-main,.sf-quote-text,.sf-post__dua-de.feed-quote-main{color:#fff4dc!important;text-shadow:0 2px 8px rgba(0,0,0,.75)!important;font-weight:600!important;-webkit-text-stroke:0!important}' +
+      '.feed-quote-scholar,.sf-quote-scholar{color:#e6c26f!important;text-shadow:0 2px 8px rgba(0,0,0,.8)!important;font-weight:800!important}' +
+      '.feed-quote-source,.sf-quote-source,.sf-dua-book.feed-quote-source,.sf-dua-cat.feed-quote-source{color:rgba(255,244,220,.88)!important;text-shadow:0 2px 7px rgba(0,0,0,.85)!important;font-weight:500!important}' +
+      '.sf-post__dua-ar{color:#fff4dc!important;text-shadow:0 2px 8px rgba(0,0,0,.75)!important;font-weight:600!important;-webkit-text-stroke:0!important}' +
+      '.sf-post__dua-tr{color:#e6c26f!important;text-shadow:0 2px 8px rgba(0,0,0,.78)!important;font-weight:500!important}' +
+      '.sf-quote-mark{color:#e6c26f!important;text-shadow:0 2px 8px rgba(0,0,0,.75)!important;opacity:.95}' +
+      '.feed-export-mode .feed-quote-panel,.feed-export-mode .sf-post__textpanel{background:linear-gradient(180deg,rgba(12,14,16,.88),rgba(10,11,13,.80))!important}' +
+      '.feed-export-mode .feed-quote-main,.feed-export-mode .feed-quote-source,.feed-export-mode .sf-quote-text,.feed-export-mode .sf-post__dua-de,.feed-export-mode .sf-post__dua-ar{color:#fff4dc!important;text-shadow:0 2px 8px rgba(0,0,0,.85)!important}' +
+      '.feed-export-mode .feed-quote-scholar,.feed-export-mode .sf-quote-scholar,.feed-export-mode .sf-post__dua-tr{color:#e6c26f!important;text-shadow:0 2px 8px rgba(0,0,0,.9)!important}' +
       '.sf-post__img{width:100%;max-width:100%;min-width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));border-radius:0;vertical-align:top}' +
       '.sf-post__quote{margin:0;line-height:1.22;text-shadow:var(--feed-text-shadow,none);width:100%;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))))}' +
       '.sf-quote-mark{display:block;font-size:var(--sf-mark-size,20px);line-height:1;color:var(--feed-text-accent,var(--theme-feed-mark,var(--theme-accent,var(--gold2))));font-family:var(--font-feed-quote);margin-bottom:8px;text-shadow:var(--feed-text-shadow,none)}' +
@@ -2101,7 +2089,9 @@
       '.sf-dua-book{font-size:max(10.5px,var(--sf-src-size,11px));opacity:.92;color:var(--feed-text-source,var(--theme-muted,var(--muted)));max-width:100%;word-wrap:break-word;text-shadow:var(--feed-text-shadow,none)}' +
       '.sf-post__textpanel--dua{max-width:min(100%,var(--sf-panel-fit-max,94%))!important;width:auto;border-radius:18px}' +
       '.sf-post__scene-inner--full{padding-top:4px!important;padding-bottom:4px!important;padding-left:var(--sf-panel-inset-x,var(--sf-panel-inset,12px))!important;padding-right:var(--sf-panel-inset-x,var(--sf-panel-inset,12px))!important;width:100%;max-width:100%;min-width:0;margin:0!important}' +
-      '.sf-post__actions{display:flex;align-items:center;padding:8px 12px 10px;gap:8px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
+      '.sf-post__actions{display:flex;align-items:center;padding:8px 12px 10px;gap:8px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));position:relative;z-index:20;pointer-events:auto}' +
+      '.feed-actions,.feed-share-button{pointer-events:auto;position:relative;z-index:20;cursor:pointer}' +
+      '.feed-share-button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}' +
       '.sf-actions-left{display:flex;align-items:center;gap:4px;flex:1}' +
       '.sf-act{border:0;background:var(--theme-feed-act-bg,rgba(255,255,255,.04));color:var(--theme-text,var(--text));min-width:42px;height:38px;border-radius:12px;cursor:pointer;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 10px;border:1px solid var(--theme-feed-act-border,var(--theme-border,var(--line)));transition:transform .15s ease,background .15s ease,color .15s ease}' +
       '.sf-act:active{transform:scale(.94)}' +
@@ -2203,10 +2193,10 @@
     if (!lines.scholar && !lines.detail) return '';
     var html = '';
     if (lines.scholar && item.type !== 'dua') {
-      html += '<div class="sf-quote-scholar">' + esc(lines.scholar) + '</div>';
+      html += '<div class="sf-quote-scholar feed-quote-scholar">' + esc(lines.scholar) + '</div>';
     }
     if (lines.detail) {
-      html += '<div class="sf-quote-source feed-source">' + esc(lines.detail) + '</div>';
+      html += '<div class="sf-quote-source feed-source feed-quote-source">' + esc(lines.detail) + '</div>';
     }
     return html;
   }
@@ -2228,7 +2218,7 @@
     var panelStyle = panelStyleFor(item, mainText, align) + typeVarsStyle(sizes) + adaptiveStyleToString(adaptInit);
     var innerStyle = 'justify-content:center;align-items:center';
     var innerClass = 'sf-post__scene-inner' + (opts.innerExtra ? ' ' + opts.innerExtra : '');
-    var panelClass = 'sf-post__textpanel' + (opts.panelExtra ? ' ' + opts.panelExtra : '');
+    var panelClass = 'sf-post__textpanel feed-quote-panel' + (opts.panelExtra ? ' ' + opts.panelExtra : '');
     var sceneExtra = opts.isDua ? ' data-sf-dua="1"' : '';
     var metaJson = '';
     try {
@@ -2366,10 +2356,10 @@
         '<div class="sf-post__dua">' +
           (dua.ar ? '<div class="sf-post__dua-ar">' + esc(dua.ar) + '</div>' : '') +
           (dua.tr ? '<div class="sf-post__dua-tr" style="' + typo.trStyle + '">' + esc(dua.tr) + '</div>' : '') +
-          (dua.de ? '<div class="sf-post__dua-de" style="' + typo.deStyle + '">' + formatDuaGerman(dua.de, item.uid, typo) + '</div>' : '') +
+          (dua.de ? '<div class="sf-post__dua-de feed-quote-main" style="' + typo.deStyle + '">' + formatDuaGerman(dua.de, item.uid, typo) + '</div>' : '') +
           '<div class="sf-dua-source">' +
-            '<div class="sf-dua-cat">' + esc(dua.sourceLabel) + '</div>' +
-            (dua.bookRef ? '<div class="sf-dua-book">' + esc(dua.bookRef) + '</div>' : '') +
+            '<div class="sf-dua-cat feed-quote-source">' + esc(dua.sourceLabel) + '</div>' +
+            (dua.bookRef ? '<div class="sf-dua-book feed-quote-source">' + esc(dua.bookRef) + '</div>' : '') +
           '</div>' +
         '</div>',
         null,
@@ -2383,9 +2373,9 @@
     if (!quote) return sceneBlock(item, '', fs, '', null, sceneOpts);
     var srcLines = sourceLinesFor(item);
     var quoteSizes = computeTypeSizes(item, '', quote, '', !!srcLines.scholar, !!srcLines.detail);
-    var qStyle = 'color:' + fs.color + ';text-align:' + layoutAlignFor(item, quote.length);
+    var qStyle = 'text-align:' + layoutAlignFor(item, quote.length);
     return sceneBlock(item,
-      '<blockquote class="sf-post__quote feed-quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text">' + formatEmphasizedText(quote, item.uid, 'quote') + '</span>' + sourceHtml(item) + '</blockquote>',
+      '<blockquote class="sf-post__quote feed-quote" style="' + qStyle + '"><span class="sf-quote-mark" aria-hidden="true">❝</span><span class="sf-quote-text feed-quote-main">' + formatEmphasizedText(quote, item.uid, 'quote') + '</span>' + sourceHtml(item) + '</blockquote>',
       fs,
       quote,
       quoteSizes,
@@ -2512,38 +2502,41 @@
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
 
     prepareImagesCors(cardElement);
-    applyCaptureSafeStyles(cardElement);
+    enforceReadableExportMode(cardElement);
 
     var rect = cardElement.getBoundingClientRect();
     var w = Math.max(1, Math.round(rect.width));
-    var h = Math.max(1, Math.round(rect.height));
     var scale = shareExportScale();
     var minExportW = 1080;
     if (w * scale < minExportW) scale = Math.ceil(minExportW / w);
 
     var host = document.createElement('div');
     host.className = 'sf-share-capture-host';
-    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
+    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
 
     var clone = cardElement.cloneNode(true);
+    clone.classList.add('feed-export-mode');
     clone.style.width = w + 'px';
     clone.style.height = 'auto';
     clone.style.minHeight = '0';
     clone.style.maxHeight = 'none';
     clone.style.maxWidth = '100%';
     clone.style.margin = '0';
-    clone.style.aspectRatio = 'auto';
     clone.style.cursor = 'default';
     clone.removeAttribute('tabindex');
     clone.removeAttribute('role');
     stripNoShareExport(clone);
     prepareImagesCors(clone);
-    applyCaptureSafeStyles(clone);
+    enforceReadableExportMode(clone);
     host.appendChild(clone);
     document.body.appendChild(host);
 
+    var h = Math.max(1, Math.round(clone.getBoundingClientRect().height || clone.scrollHeight || rect.height));
+    host.style.height = h + 'px';
+    clone.style.height = 'auto';
+
     try {
-      await new Promise(function (r) { setTimeout(r, 180); });
+      await new Promise(function (r) { setTimeout(r, 200); });
       var h2c = await loadHtml2Canvas();
       var canvas = await h2c(clone, {
         scale: scale,
@@ -2556,15 +2549,35 @@
         imageTimeout: 25000,
         onclone: function (doc, node) {
           stripNoShareExport(node);
-          applyCaptureSafeStyles(node);
+          enforceReadableExportMode(node);
         }
       });
       var blob = await canvasToBlob(canvas);
-      if (!blob) throw new Error('Feed card image blob could not be created.');
+      if (!blob) throw new Error('Kein Bild-Blob erzeugt.');
       return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
     } finally {
       try { host.remove(); } catch (e) {}
     }
+  }
+
+  function prefetchFeedShareBlob(feedItemId) {
+    if (!feedItemId || FEED_SHARE_CACHE[feedItemId] || FEED_SHARE_PREFETCHING[feedItemId]) return;
+    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
+    if (!card) return;
+    FEED_SHARE_PREFETCHING[feedItemId] = true;
+    renderFeedCardToFile(card, feedItemId)
+      .then(function (file) { FEED_SHARE_CACHE[feedItemId] = file; })
+      .catch(function () {})
+      .finally(function () { delete FEED_SHARE_PREFETCHING[feedItemId]; });
+  }
+
+  function prefetchVisibleFeedShares(root) {
+    if (!root) return;
+    root.querySelectorAll('[data-feed-card-id]').forEach(function (card, idx) {
+      if (idx > 5) return;
+      var id = card.getAttribute('data-feed-card-id');
+      if (id) global.setTimeout(function () { prefetchFeedShareBlob(id); }, 400 + idx * 120);
+    });
   }
 
   async function downloadFeedImage(file, feedItemId) {
@@ -2578,65 +2591,69 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
   }
 
+  var FEED_SHARE_IN_FLIGHT = Object.create(null);
+
   async function shareFeedCardAsImage(feedItemId) {
+    console.log('Feed share clicked:', feedItemId);
+    if (FEED_SHARE_IN_FLIGHT[feedItemId]) return;
+    FEED_SHARE_IN_FLIGHT[feedItemId] = true;
     var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
     if (!card) {
       showToast('Feed-Bild konnte nicht gefunden werden.');
+      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
       return;
     }
     try {
       setFeedShareLoading(feedItemId, true);
-      var file = await renderFeedCardToFile(card, feedItemId);
-      if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
+      var file = FEED_SHARE_CACHE[feedItemId];
+      if (!file) {
+        file = await renderFeedCardToFile(card, feedItemId);
+        FEED_SHARE_CACHE[feedItemId] = file;
+      }
+      var canShareFiles =
+        global.navigator &&
+        global.navigator.share &&
+        global.navigator.canShare &&
+        global.navigator.canShare({ files: [file] });
+      if (canShareFiles) {
         await global.navigator.share({
           files: [file],
-          title: 'DAR AL TAWḤID',
-          text: FEED_SHARE_SITE_URL
+          title: 'DAR AL TAWḤID'
         });
         return;
       }
       await downloadFeedImage(file, feedItemId);
-      showToast('Direktes Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde zum Teilen gespeichert.');
+      showToast('Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde gespeichert.');
     } catch (error) {
       if (error && error.name === 'AbortError') return;
-      console.error('Feed image share failed:', error);
-      try {
-        var fallbackCanvas = await captureMediaForShare(card);
-        var fallbackBlob = await canvasToBlob(fallbackCanvas);
-        if (!fallbackBlob) throw new Error('capture-fallback-empty');
-        var fallbackFile = new File([fallbackBlob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
-        if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [fallbackFile] })) {
-          await global.navigator.share({
-            files: [fallbackFile],
-            title: 'DAR AL TAWḤID',
-            text: FEED_SHARE_SITE_URL
-          });
-          return;
-        }
-        await downloadFeedImage(fallbackFile, feedItemId);
-        showToast('Direktes Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde zum Teilen gespeichert.');
-      } catch (fallbackErr) {
-        if (fallbackErr && fallbackErr.name === 'AbortError') return;
-        console.error('Feed image share fallback failed:', fallbackErr);
-        showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
-      }
+      console.error('Feed-Bild teilen fehlgeschlagen:', error);
+      delete FEED_SHARE_CACHE[feedItemId];
+      showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
     } finally {
       setFeedShareLoading(feedItemId, false);
+      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
     }
+  }
+
+  function handleFeedShareClick(event) {
+    var button = event.target.closest('[data-feed-share-id]');
+    if (!button || button.disabled) return false;
+    event.preventDefault();
+    event.stopPropagation();
+    var feedItemId = button.getAttribute('data-feed-share-id');
+    if (!feedItemId) return false;
+    shareFeedCardAsImage(feedItemId).catch(function (err) {
+      console.error('Feed share handler failed:', err);
+    });
+    return true;
   }
 
   function bindFeedShareDelegate() {
     if (global.__darFeedShareBound) return;
     global.__darFeedShareBound = true;
     document.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-feed-share-id]');
-      if (!button) return;
-      event.preventDefault();
-      event.stopPropagation();
-      var feedItemId = button.getAttribute('data-feed-share-id');
-      if (!feedItemId) return;
-      shareFeedCardAsImage(feedItemId);
-    }, true);
+      handleFeedShareClick(event);
+    }, false);
   }
 
   function prepareImagesCors(root) {
@@ -2655,29 +2672,20 @@
 
   function applyCaptureSafeStyles(root) {
     if (!root) return;
-    var captureBg = 'rgba(22, 18, 14, 0.74)';
-    var captureBorder = 'rgba(239, 215, 142, 0.22)';
-    try {
-      var cs = global.getComputedStyle(document.documentElement);
-      var bgVar = cs.getPropertyValue('--theme-feed-panel-capture').trim();
-      var borderVar = cs.getPropertyValue('--theme-feed-panel-border').trim();
-      if (bgVar) captureBg = bgVar;
-      if (borderVar) captureBorder = borderVar;
-    } catch (e) {}
+    enforceReadableExportMode(root);
     root.querySelectorAll('.sf-post__textpanel').forEach(function (el) {
       el.style.backdropFilter = 'none';
       el.style.webkitBackdropFilter = 'none';
-      el.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.06)';
-      el.style.background = captureBg;
-      el.style.border = '1px solid ' + captureBorder;
-      el.style.textShadow = 'none';
+      el.style.background = 'linear-gradient(180deg, rgba(12,14,16,0.88), rgba(10,11,13,0.80))';
+      el.style.border = '1px solid rgba(230,200,130,0.28)';
+      el.style.boxShadow = '0 18px 55px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08)';
     });
     root.querySelectorAll('.sf-brand-chip').forEach(function (el) {
       el.style.backdropFilter = 'none';
       el.style.webkitBackdropFilter = 'none';
     });
-    root.querySelectorAll('.sf-post__quote, .sf-post__dua-ar, .sf-post__dua-tr, .sf-post__dua-de, .sf-quote-scholar, .sf-quote-source, .sf-dua-source').forEach(function (el) {
-      el.style.textShadow = 'none';
+    root.querySelectorAll('.sf-post__quote, .sf-post__dua-ar, .sf-post__dua-tr, .sf-post__dua-de, .sf-quote-scholar, .sf-quote-source, .sf-dua-source, .feed-quote-main').forEach(function (el) {
+      el.style.webkitTextStroke = '0';
     });
   }
 
@@ -2817,7 +2825,7 @@
         if (item) navigateTarget(item);
       }
       card.addEventListener('click', function (ev) {
-        if (ev.target.closest('.sf-act')) return;
+        if (ev.target.closest('.sf-act') || ev.target.closest('[data-feed-share-id]') || ev.target.closest('.feed-share-button')) return;
         open();
       });
       card.addEventListener('keydown', function (ev) {
@@ -2844,6 +2852,13 @@
         } else if (countEl) {
           countEl.remove();
         }
+      });
+    });
+    root.querySelectorAll('[data-feed-share-id]').forEach(function (btn) {
+      if (btn.dataset.sfShareBound === '1') return;
+      btn.dataset.sfShareBound = '1';
+      btn.addEventListener('click', function (ev) {
+        handleFeedShareClick(ev);
       });
     });
     root.querySelectorAll('.sf-filter').forEach(function (btn) {
@@ -2940,6 +2955,10 @@
     bindSceneBackgrounds(mount);
     setupInfinite(mount);
     scheduleTunePanels(mount);
+    global.setTimeout(function () {
+      enforceReadablePanels(mount);
+      prefetchVisibleFeedShares(mount);
+    }, 480);
   }
 
   var observer = null;
