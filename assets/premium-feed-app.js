@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV48';
-  var FONTS_ID = 'darPremiumFeedFontsV48';
+  var STYLES_ID = 'darPremiumFeedStylesV49';
+  var FONTS_ID = 'darPremiumFeedFontsV49';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -215,6 +215,8 @@
     }
     var cat = String(item && item.category || '').toLowerCase();
     if (tags.indexOf(cat) >= 0 || topics.indexOf(cat) >= 0) score += 12;
+    if (bg.source === 'wikimedia' || bg.autoSynced) score += 25;
+    if (Number(bg.qualityScore || 0) >= 90) score += 8;
     return score;
   }
 
@@ -326,6 +328,8 @@
           hasLogo: !!it.hasLogo,
           hasTextOverlay: !!it.hasTextOverlay,
           qualityScore: Number(it.qualityScore) || 0,
+          source: it.source || '',
+          autoSynced: !!it.autoSynced,
           overlayHint: it.overlayHint || 'dark',
           focusPoint: it.focusPoint || { x: 50, y: 50 }
         };
@@ -366,8 +370,6 @@
   }
 
   function gradientStyleFor(item) {
-    var fromCss = readThemeVar('--theme-feed-grad', '');
-    if (fromCss) return fromCss;
     var theme = getThemeKey();
     var pool = GRADIENT_BGS[theme] || GRADIENT_BGS.dark;
     var idx = hashNum(String(item && item.uid || '') + '|grad|' + todayKey()) % pool.length;
