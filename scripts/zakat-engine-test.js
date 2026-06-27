@@ -90,5 +90,15 @@ const fresh = Z.priceFreshnessFromAge(now);
 assert(fresh.canFinalize === true, "fresh prices can finalize");
 assert(fresh.level === "realtime", "realtime within 15 min");
 
+const pdfHtml = Z.buildPdfHtml(result, config, {
+  siteOrigin: "https://dar-al-tawhid.de",
+  input: { nisabSinceDate: "2024-01-01", todayDate: "2026-06-18" }
+});
+assert(pdfHtml.includes("Zakāt-Rechner Bericht"), "pdf title");
+assert(pdfHtml.includes("Marktdaten"), "pdf market section");
+assert(pdfHtml.includes("Rechenweg im Detail"), "pdf calculation section");
+assert(pdfHtml.includes("Standard-Niṣāb"), "pdf nisab row");
+assert(Z.buildPdfFilename({ reportId: "ZK-2026-000001" }) === "zakat-bericht-ZK-2026-000001.pdf", "pdf filename");
+
 if (failed) process.exit(1);
 console.log("\nAlle Zakāt-Engine-Tests bestanden.");

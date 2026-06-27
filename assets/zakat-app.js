@@ -596,17 +596,42 @@
       };
     const pdf = $("zakatPdfBtn");
     if (pdf)
-      pdf.onclick = () => {
+      pdf.onclick = async () => {
         readInputFromDom();
         const result = currentResult();
-        if (!result || !global.DARZakat) return;
-        const html = global.DARZakat.buildPdfHtml(result, effectiveConfig() || {}, {});
-        const w = global.open("", "_blank", "noopener");
-        if (w) {
-          w.document.write(html);
-          w.document.close();
-          w.focus({ preventScroll: true });
-          w.print();
+        if (!result || !global.DARZakat) {
+          alert("Bitte zuerst Werte eingeben.");
+          return;
+        }
+        const oldLabel = pdf.textContent;
+        pdf.disabled = true;
+        pdf.textContent = "PDF…";
+        try {
+          const meta = {
+            siteOrigin: global.location?.origin || "https://dar-al-tawhid.de",
+            savedForVisitor: Boolean(global.accountSession?.()),
+            input: zakatInput,
+            exportedAt: new Date().toISOString()
+          };
+          const html = global.DARZakat.buildPdfHtml(result, effectiveConfig() || {}, meta);
+          const fname = global.DARZakat.buildPdfFilename(meta);
+          if (global.DARZakatPdf?.exportZakatPdf) {
+            const out = await global.DARZakatPdf.exportZakatPdf(html, fname);
+            if (out.method === "share") {
+              /* iOS/Android Share Sheet geöffnet */
+            } else if (out.method === "overlay") {
+              /* Vorschau mit „Als PDF speichern“ — kein about:blank */
+            } else if (out.method === "cancelled") {
+              /* Nutzer hat Teilen abgebrochen */
+            }
+          } else {
+            alert("PDF-Modul nicht geladen. Bitte Seite neu laden.");
+          }
+        } catch (e) {
+          alert(e.message || "PDF-Export fehlgeschlagen.");
+        } finally {
+          pdf.disabled = false;
+          pdf.textContent = oldLabel;
         }
       };
     const save = $("zakatSaveBtn");
