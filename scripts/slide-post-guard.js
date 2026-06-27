@@ -6,6 +6,7 @@
  */
 const fs = require("fs");
 const path = require("path");
+const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
 const FIXTURE = path.join(
@@ -247,8 +248,35 @@ function runSlidePostGuard() {
   if (!indexHtml.includes("updatePostAfterSlidePanel")) {
     fail("index.html ohne Slide-Quellen-Sync");
   }
-  if (indexHtml.includes("POST_PARSE_VERSION=4")) {
-    fail("POST_PARSE_VERSION nicht erhöht");
+  if (indexHtml.includes("POST_PARSE_VERSION=5")) {
+    fail("POST_PARSE_VERSION nicht erhöht (erwartet 6)");
+  }
+  if (!indexHtml.includes("slide-post-parser.js")) {
+    fail("index.html lädt slide-post-parser.js nicht");
+  }
+
+  const parserJs = fs.readFileSync(path.join(ROOT, "assets/slide-post-parser.js"), "utf8");
+  const sandbox = { window: {}, global: {} };
+  sandbox.global = sandbox.window;
+  vm.createContext(sandbox);
+  vm.runInContext(parserJs, sandbox);
+  const P = sandbox.window.DARSlidePostParser;
+
+  const qiyasPath = path.join(
+    ROOT,
+    "content/posts/beitrag-430-was-ist-qiyas-und-wann-ist-er-uberhaupt-gultig.md"
+  );
+  if (fs.existsSync(qiyasPath)) {
+    const qiyasAudit = P.analyzeSlideMarkdown(fs.readFileSync(qiyasPath, "utf8"));
+    if (!qiyasAudit.isSlide) fail("Qiyās-Beitrag nicht als Slide erkannt");
+    else ok(`Qiyās-Beitrag: ${qiyasAudit.slideCount} Slides`);
+    if (qiyasAudit.slideCount !== 10) fail(`Qiyās erwartet 10 Slides, bekam ${qiyasAudit.slideCount}`);
+    if (!qiyasAudit.slides[0]?.title?.includes("Qiy")) fail("Qiyās Slide 1 Titel fehlt");
+    if (String(qiyasAudit.slides[0]?.text || "").includes("<!-- slide")) {
+      fail("Slide-Marker sichtbar im geparsten Text");
+    }
+  } else {
+    fail("Qiyās-Fixture fehlt");
   }
 
   const testHtml = fs.readFileSync(path.join(ROOT, "test/index.html"), "utf8");

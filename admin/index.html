@@ -466,7 +466,8 @@ main#panel.panel{
   <main class="panel" id="panel"></main>
 </div>
 <div class="toast" id="toast"></div>
-<script src="/admin/quellen-manager.js?v=1"></script>
+<script src="/assets/slide-post-parser.js?v=1"></script>
+<script src="/admin/quellen-manager.js?v=2"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=3"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
@@ -1030,6 +1031,7 @@ function bindSourceFilesUi(context){sourceEditorContext=context||"draft";const p
 function repairMarkdownStructure(markdown){
   let out=sanitizeMarkdownQuotes(String(markdown||"").trim());
   if(!out)return "";
+  out=out.replace(/^```(?:markdown|md)?\s*\n([\s\S]*?)\n```\s*$/im,"$1");
   out=out.replace(/^\s*[\u2e3b\u2014-]{1,3}\s*$/gm,"---");
   if(/^---\s*\n[\s\S]*?\n---\s*\n?/.test(out))return out;
   if(/^---\s*\n[\s\S]*?\n---/.test(out))return out.replace(/\n---\s*$/m,"\n---\n");
@@ -2510,9 +2512,10 @@ function markdownPreviewData(markdown){
   const scholar=frontmatterValue(text,"scholar")||frontmatterValue(text,"gelehrter")||"Gelehrter offen";
   const book=frontmatterValue(text,"book")||frontmatterValue(text,"werk")||"Werk offen";
   const source=frontmatterValue(text,"source")||frontmatterValue(text,"quelle")||"Quelle prüfen";
+  const slideAudit=window.DARSlidePostParser?window.DARSlidePostParser.analyzeSlideMarkdown(text):null;
   const body=text.replace(/^---[\s\S]*?---/,"").trim();
   const quote=(body.match(/>+\s*(.+)/)||body.match(/(?:quote|aussage):\s*[\"']?(.+?)[\"']?\s*$/mi)||[])[1]||body.split(/\n\s*\n/).find(Boolean)||"Markdown einfügen, dann erscheint hier die Vorschau.";
-  return{title,category,scholar,book,source,quote:String(quote).replace(/^#+\s*/,"").trim().slice(0,420)};
+  return{title,category,scholar,book,source,quote:String(quote).replace(/^#+\s*/,"").trim().slice(0,420),slideRecognized:!!slideAudit?.isSlide,slideCount:slideAudit?.slideCount||0,slideWarnings:slideAudit?.warnings||[],slideErrors:slideAudit?.errors||[]};
 }
 function validationList(markdown){
   const p=markdownPreviewData(markdown);
@@ -2522,9 +2525,11 @@ function validationList(markdown){
     ["Gelehrter",p.scholar!=="Gelehrter offen"],
     ["Werk",p.book!=="Werk offen"],
     ["Quelle",p.source!=="Quelle prüfen"],
-    ["Dateiname",!!draftFilename]
+    ["Dateiname",!!draftFilename],
+    ["Slide erkannt",!p.slideRecognized||p.slideCount>0]
   ];
-  return `<div class="status-list">${checks.map(([label,ok])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${ok?"Vorhanden":"Bitte prüfen oder ergänzen"}</span><strong class="status-pill">${ok?"OK":"Offen"}</strong></div>`).join("")}</div>`;
+  if(p.slideRecognized)checks.push(["Anzahl Slides",p.slideCount>0]);
+  return `<div class="status-list">${checks.map(([label,ok])=>`<div class="status-row"><span><b>${esc(label)}</b><br>${ok?"Vorhanden":"Bitte prüfen oder ergänzen"}${label==="Slide erkannt"&&p.slideRecognized?`<br><small>${p.slideCount} Slide(s) erkannt</small>`:""}${label==="Anzahl Slides"&&p.slideCount?`<br><small>${p.slideCount} Slides</small>`:""}</span><strong class="status-pill">${ok?"OK":"Offen"}</strong></div>`).join("")}${p.slideErrors?.length?`<div class="status-row"><span><b>Slide-Fehler</b><br>${esc(p.slideErrors.join(" · "))}</span><strong class="status-pill">!</strong></div>`:""}${p.slideWarnings?.length?`<div class="status-row"><span><b>Slide-Hinweis</b><br>${esc(p.slideWarnings.join(" · "))}</span><strong class="status-pill">~</strong></div>`:""}</div>`;
 }
 function renderContent(){
   const rows=filteredRows();
@@ -3305,6 +3310,9 @@ async function uploadPostViaWorker(){
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
+  const slideCheck=window.DARSlidePostParser?window.DARSlidePostParser.validateSlideMarkdown(draftMarkdown):{ok:true,errors:[],warnings:[]};
+  if(slideCheck.errors?.length){setUploadStatus(`Slide-Fehler: ${esc(slideCheck.errors.join(" · "))}`);finishPublishTrack("error",slideCheck.errors.join(" · "));return}
+  if(slideCheck.warnings?.length)addAdminLog("Slide","Hinweise",slideCheck.warnings.join(" · "));
   const preview=markdownPreviewData(draftMarkdown);
   startPublishTrack("single",{title:preview.title,filename:draftFilename||"wird automatisch erzeugt"});
   const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nDiese Änderung wird für Besucher sichtbar.\n\nTitel: ${preview.title}\nDatei: ${draftFilename||"wird automatisch erzeugt"}`);
