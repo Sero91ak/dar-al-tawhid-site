@@ -1957,6 +1957,19 @@ function repairYamlFrontmatter(markdown) {
 
 function normalizeMarkdownForStorage(markdown) {
   let out = repairYamlFrontmatter(repairMarkdownStructure(String(markdown || "").trim()));
+  const fm = out.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (fm) {
+    let body = String(fm[2] || "")
+      .replace(/^\s*```(?:markdown|md)?\s*\n/i, "")
+      .replace(/\n```\s*$/i, "")
+      .trim();
+    out = `---\n${fm[1]}\n---\n\n${body}`.trimEnd() + "\n";
+  } else {
+    out = out
+      .replace(/^\s*```(?:markdown|md)?\s*\n/i, "")
+      .replace(/\n```\s*$/i, "")
+      .trim();
+  }
   if (!out) return "";
   return out.endsWith("\n") ? out : out + "\n";
 }

@@ -248,8 +248,14 @@ function runSlidePostGuard() {
   if (!indexHtml.includes("updatePostAfterSlidePanel")) {
     fail("index.html ohne Slide-Quellen-Sync");
   }
-  if (indexHtml.includes("POST_PARSE_VERSION=5")) {
-    fail("POST_PARSE_VERSION nicht erhöht (erwartet 6)");
+  if (indexHtml.includes("POST_PARSE_VERSION=6")) {
+    fail("POST_PARSE_VERSION nicht erhöht (erwartet 7)");
+  }
+  if (!indexHtml.includes("ensurePostSlidesHydrated")) {
+    fail("index.html ohne ensurePostSlidesHydrated");
+  }
+  if (!indexHtml.includes("_rawBody:body")) {
+    fail("index.html speichert _rawBody nicht in parseFrontMatter");
   }
   if (!indexHtml.includes("slide-post-parser.js")) {
     fail("index.html lädt slide-post-parser.js nicht");
@@ -284,6 +290,21 @@ function runSlidePostGuard() {
   if (!bodySlideAudit.slides[0]?.title?.includes("Erster")) fail("Body-Slide Slide 1 Titel fehlt");
   if (String(bodySlideAudit.slides[0]?.text || "").includes("<!-- slide")) {
     fail("Slide-Marker sichtbar im geparsten Text");
+  }
+
+  const qiyasFixture = path.join(ROOT, "scripts/fixtures/qiyas-slide-post.md");
+  if (!fs.existsSync(qiyasFixture)) {
+    fail("Qiyās-Fixture fehlt: " + qiyasFixture);
+  } else {
+    const qiyasAudit = P.analyzeSlideMarkdown(fs.readFileSync(qiyasFixture, "utf8"));
+    if (!qiyasAudit.isSlide) fail("Qiyās-Beitrag nicht als Slide erkannt");
+    else ok(`Qiyās-Beitrag: ${qiyasAudit.slideCount} Slides`);
+    if (qiyasAudit.slideCount !== 10) fail(`Qiyās erwartet 10 Slides, bekam ${qiyasAudit.slideCount}`);
+    if (!qiyasAudit.slides[0]?.title?.includes("Qiy")) fail("Qiyās Slide 1 Titel fehlt");
+    if (!qiyasAudit.slides[1]?.title?.includes("Laien")) fail("Qiyās Slide 2 Titel fehlt");
+    if (String(qiyasAudit.slides[0]?.text || "").includes("<!-- slide")) {
+      fail("Qiyās: Slide-Marker sichtbar im geparsten Text");
+    }
   }
 
   const testHtml = fs.readFileSync(path.join(ROOT, "test/index.html"), "utf8");
