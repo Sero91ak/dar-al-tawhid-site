@@ -5,8 +5,9 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV46';
-  var FONTS_ID = 'darPremiumFeedFontsV46';
+  var STYLES_ID = 'darPremiumFeedStylesV47';
+  var FONTS_ID = 'darPremiumFeedFontsV47';
+  var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
   var FEED_COL_TABLET = 540;
@@ -283,16 +284,19 @@
   function fetchFeedBackgrounds() {
     var staging = isStaging();
     var jsonPath = staging ? '/content/staging/feed-backgrounds/feed-backgrounds.json' : '/content/feed-backgrounds/feed-backgrounds.json';
-    var apiPath = '/api/feed-backgrounds?staging=' + (staging ? '1' : '0');
-    function loadJson(path) {
+    var apiPath = FEED_API_ORIGIN + '/api/feed-backgrounds?staging=' + (staging ? '1' : '0');
+    var cacheVer = encodeURIComponent(String(FEED_BG_CACHE_VER || todayKey()));
+    function loadJson(path, cors) {
       var sep = path.indexOf('?') >= 0 ? '&' : '?';
-      return fetch(path + sep + 'v=' + encodeURIComponent(String(FEED_BG_CACHE_VER || todayKey())), { cache: 'no-store' })
+      var opts = { cache: 'no-store' };
+      if (cors) opts.mode = 'cors';
+      return fetch(path + sep + 'v=' + cacheVer, opts)
         .then(function (r) { return r.ok ? r.json() : null; })
         .catch(function () { return null; });
     }
-    return loadJson(apiPath).then(function (data) {
+    return loadJson(apiPath, true).then(function (data) {
       if (data && Array.isArray(data.items) && data.items.length) return data;
-      return loadJson(jsonPath);
+      return loadJson(jsonPath, false);
     }).then(function (data) {
       FEED_BG_CACHE_VER = Number(data && data.cacheVersion) || 1;
       FEED_BG_POOL = (data && data.items || []).filter(function (it) {
@@ -1161,8 +1165,10 @@
 
   function rerenderFeedPhotosIfNeeded(mount) {
     if (!mount || !FEED_BG_POOL.filter(isFeedBgSafe).length) return;
-    var gradOnly = mount.querySelector('.sf-post__bg--grad') && !mount.querySelector('.sf-post__bg--photo');
-    if (gradOnly) renderListMount(mount);
+    if (!mount.querySelector('.sf-feed')) return;
+    renderListMount(mount);
+    bindSceneBackgrounds(mount);
+    syncSceneLayout(mount);
   }
 
   function startFeedMount(opts) {
@@ -1319,7 +1325,7 @@
   function fetchManual() {
     var staging = isStaging();
     var urls = [
-      '/api/feed?staging=' + (staging ? '1' : '0') + '&v=' + encodeURIComponent(todayKey()),
+      FEED_API_ORIGIN + '/api/feed?staging=' + (staging ? '1' : '0') + '&v=' + encodeURIComponent(todayKey()),
       (staging ? '/content/staging/focus-feed/feed-index.json' : '/content/focus-feed/feed-index.json') + '?v=' + encodeURIComponent(todayKey())
     ];
     function tryNext(i) {
