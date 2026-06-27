@@ -894,11 +894,15 @@ async function resolveNextPostNumberInfo(){
   const lastFilename=resolveLastPostFilename(files,postCount);
   const lastSerial=postFileSerial(lastFilename);
   const globalSerial=globalPostSerial(lastFilename);
-  const duplicateGlobal=files.filter(f=>globalPostSerial(typeof f==="string"?f:f.name)===postCount).length>1;
-  const serialWarning=duplicateGlobal?`Hinweis: Mehrere Dateien tragen globale Nr. ${postCount}. Serie/Folgennummern zählen nicht als globaler Zähler.`:(lastFilename&&globalSerial>0&&globalSerial!==postCount?`Warnung: Letzter Beitrag hat globale Nr. ${globalSerial}, Index zählt ${postCount} Beiträge.`:(lastFilename&&lastSerial>0&&lastSerial!==postCount&&globalSerial===0?`Hinweis: ${lastFilename} endet auf Folgen-Nr. ${lastSerial}; globaler Zähler ist ${postCount}.`:""));
-  return{postCount,nextNumber,maxSerial:maxPostNumber(files),lastFilename,lastSerial,serialWarning,source:workerInfo?"worker+index":"index",workerPostCount:workerInfo?.postCount||null};
+  const duplicateGlobal=workerInfo?.duplicateGlobal===true||files.filter(f=>globalPostSerial(typeof f==="string"?f:f.name)===postCount).length>1;
+  const serialWarning=duplicateGlobal?`BLOCKIERT: Mehrere Dateien tragen globale Nr. ${postCount}. Bitte Duplikat löschen, bevor ein neuer Beitrag veröffentlicht wird.`:(lastFilename&&globalSerial>0&&globalSerial!==postCount?`Warnung: Letzter Beitrag hat globale Nr. ${globalSerial}, Index zählt ${postCount} Beiträge.`:(lastFilename&&lastSerial>0&&lastSerial!==postCount&&globalSerial===0?`Hinweis: ${lastFilename} endet auf Folgen-Nr. ${lastSerial}; globaler Zähler ist ${postCount}.`:""));
+  return{postCount,nextNumber,maxSerial:maxPostNumber(files),lastFilename,lastSerial,duplicateGlobal,serialWarning,source:workerInfo?"worker+index":"index",workerPostCount:workerInfo?.postCount||null};
 }
 async function resolveNextPostNumber(){return (await resolveNextPostNumberInfo()).nextNumber}
+let deletedPostsRegistryCache=null;
+async function loadDeletedPostsRegistry(){if(deletedPostsRegistryCache)return deletedPostsRegistryCache;try{const res=await fetch(`${SITE_ORIGIN}/content/admin/deleted-posts.json?t=${Date.now()}`,{cache:"no-store"});const data=await res.json();deletedPostsRegistryCache={slugs:Array.isArray(data.slugs)?data.slugs:[],titles:Array.isArray(data.titles)?data.titles:[]}}catch(e){deletedPostsRegistryCache={slugs:[],titles:[]}}return deletedPostsRegistryCache}
+function matchesDeletedPost(markdown,registry){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"").trim();const titleSlug=slugify(title);if(!titleSlug)return null;const blocked=[...(registry.slugs||[]).map(slugify),...(registry.titles||[]).map(slugify)];for(const entry of blocked){if(!entry||entry.length<8)continue;if(titleSlug===entry||titleSlug.includes(entry)||entry.includes(titleSlug))return title||entry}return null}
+async function assertNotDeletedDraft(markdown){return matchesDeletedPost(markdown,await loadDeletedPostsRegistry())}
 function suggestFilename(markdown,nextNumber){const title=frontmatterValue(markdown,"title").replace(/^📖\s*/,"")||"neuer Beitrag";const category=frontmatterValue(markdown,"category")||"beitrag";return `${slugify(category)}-${String(nextNumber).padStart(3,"0")}-${slugify(title)}.md`}
 async function loadPostsIndexForUpload(){
   const files=await fetchPostsIndexFiles();
@@ -3342,7 +3346,11 @@ async function uploadPostViaWorker(){
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
     updatePublishStep("markdown","ok","Markdown vorhanden");
-    const next=await resolveNextPostNumber();
+    const info=await resolveNextPostNumberInfo();
+    if(info.duplicateGlobal){updatePublishStep("number","error",`Nr. ${info.postCount} doppelt`);finishPublishTrack("error","Doppelte Beitragsnummer im Index");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> Beitrags-Nr. ${info.postCount} ist mehrfach im Index. Bitte zuerst das Duplikat löschen.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
+    const blockedTitle=await assertNotDeletedDraft(draftMarkdown);
+    if(blockedTitle){updatePublishStep("number","error","Gelöschter Beitrag");finishPublishTrack("error","Gelöschter Beitrag");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> „${esc(blockedTitle)}“ wurde gelöscht und darf nicht erneut online gestellt werden.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
+    const next=info.nextNumber;
     updatePublishStep("number","ok",`Nr. ${next}`);
     if(!draftFilename)draftFilename=suggestFilename(draftMarkdown,next);
     else if(/(?:^|-)\d{3}(?=-|\.md$)/.test(draftFilename))draftFilename=draftFilename.replace(/(^|-)\d{3}(?=-|\.md$)/,`$1${String(next).padStart(3,"0")}`);
