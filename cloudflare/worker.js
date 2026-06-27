@@ -85,6 +85,7 @@ const SOURCE_ALLOWED_EXT = new Set(["pdf", "png", "jpg", "jpeg", "webp"]);
 const DEFAULT_ALLOWED_ORIGIN = "https://dar-al-tawhid.de";
 const DEFAULT_UPDATES_PATH = "content/updates/current.json";
 const DEFAULT_SCHEDULE_PATH = "content/admin/planned-posts.json";
+const DEFAULT_DELETED_POSTS_PATH = "content/admin/deleted-posts.json";
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
@@ -755,12 +756,14 @@ async function fetchPostNumberInfo(env) {
   const nextNumber = nextPostNumber(files);
   const lastFilename = resolveLastPostFilename(files, postCount);
   const lastSerial = postFileSerial(lastFilename);
+  const duplicateGlobal = files.filter((f) => globalPostSerial(typeof f === "string" ? f : f.name) === postCount).length > 1;
   return {
     postCount,
     nextNumber,
     maxSerial: maxPostNumber(files),
     lastFilename,
     lastSerial,
+    duplicateGlobal,
     serialMismatch: Boolean(lastFilename && lastSerial > 0 && lastSerial !== postCount),
     indexPath: `${trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR)}/posts-index.json`
   };
@@ -959,6 +962,9 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     throw httpError(`Möglicher Duplikat-Beitrag: „${duplicate}“ hat bereits einen ähnlichen Titel.`, 409);
   }
 
+  const deletedRegistry = await readDeletedPostsRegistry(env);
+  assertNotDeletedPost(markdownRaw, deletedRegistry);
+
   const nextNumber = nextPostNumber(files);
 
   if (!filename) {
@@ -1112,6 +1118,7 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
   const indexData = indexFile?.content ? JSON.parse(base64ToUtf8(indexFile.content)) : { version: 1, files: [] };
   let files = listPostFiles(indexData.files);
   let nextNumber = nextPostNumber(files);
+  const deletedRegistry = await readDeletedPostsRegistry(env);
   const existingNames = new Set(files.map((f) => String(f.name || "").trim()).filter(Boolean));
   const published = [];
   const commitEntries = [];
@@ -1123,6 +1130,7 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
     if (!markdownRaw) throw httpError(`Beitrag ${i + 1}: Markdown fehlt`, 400);
     const duplicate = findDuplicateByTitleSlug(files, markdownRaw);
     if (duplicate) throw httpError(`Beitrag ${i + 1}: mögliches Duplikat „${duplicate}“`, 409);
+    assertNotDeletedPost(markdownRaw, deletedRegistry);
 
     let filename = String(item?.filename || "").trim();
     if (filename) {
@@ -2063,6 +2071,41 @@ function findDuplicateByTitleSlug(files, markdown) {
     if (String(name || "").includes(titleSlug)) return name;
   }
   return null;
+}
+
+async function readDeletedPostsRegistry(env) {
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const path = trimSlashes(env.DELETED_POSTS_PATH || DEFAULT_DELETED_POSTS_PATH);
+
+  try {
+    const file = await githubGet(env, owner, repo, path, branch);
+    if (!file?.content) return { slugs: [], titleSlugs: [] };
+    const data = JSON.parse(base64ToUtf8(file.content));
+    const slugs = Array.isArray(data.slugs) ? data.slugs.map((entry) => slugify(String(entry))) : [];
+    const titleSlugs = Array.isArray(data.titles) ? data.titles.map((entry) => slugify(String(entry))) : [];
+    return {
+      slugs: [...new Set(slugs.filter(Boolean))],
+      titleSlugs: [...new Set(titleSlugs.filter(Boolean))]
+    };
+  } catch {
+    return { slugs: [], titleSlugs: [] };
+  }
+}
+
+function assertNotDeletedPost(markdown, registry) {
+  const title = frontmatterValue(markdown, "title").replace(/^📖\s*/, "").trim();
+  const titleSlug = slugify(title);
+  if (!titleSlug) return;
+
+  const blocked = new Set([...(registry?.slugs || []), ...(registry?.titleSlugs || [])]);
+  for (const entry of blocked) {
+    if (!entry || entry.length < 8) continue;
+    if (titleSlug === entry || titleSlug.includes(entry) || entry.includes(titleSlug)) {
+      throw httpError(`Dieser Beitrag wurde gelöscht und darf nicht erneut veröffentlicht werden: „${title || entry}“`, 403);
+    }
+  }
 }
 
 function suggestFilename(markdown, nextNumber) {
