@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV50';
-  var FONTS_ID = 'darPremiumFeedFontsV50';
+  var STYLES_ID = 'darPremiumFeedStylesV51';
+  var FONTS_ID = 'darPremiumFeedFontsV51';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -141,7 +141,7 @@
     if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
     if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var src = String(bg.source || '').toLowerCase();
-    if (src === 'wikimedia' || src === 'pexels' || src === 'unsplash' || src === 'pixabay') return false;
+    if (src === 'wikimedia') return false;
     if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var allowed = bg.allowedFor || ['feed'];
     if (typeof allowed === 'string') allowed = allowed.split(/[,;|]+/);
@@ -218,7 +218,8 @@
     }
     var cat = String(item && item.category || '').toLowerCase();
     if (tags.indexOf(cat) >= 0 || topics.indexOf(cat) >= 0) score += 12;
-    if (bg.studioGenerated || bg.source === 'studio') score += 20;
+    if (bg.studioGenerated || bg.source === 'studio') score += 12;
+    if (bg.source === 'pexels' || bg.source === 'unsplash') score += 18;
     if (Number(bg.qualityScore || 0) >= 95) score += 10;
     return score;
   }

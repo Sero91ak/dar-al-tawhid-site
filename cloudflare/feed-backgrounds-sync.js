@@ -303,9 +303,9 @@ function buildVariantUrls(source, photoId, raw) {
   if (source === "pexels") {
     const base = `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg`;
     return {
-      full: `${base}?auto=compress&cs=tinysrgb&w=1080&h=1350&fit=crop`,
-      mobile: `${base}?auto=compress&cs=tinysrgb&w=720&h=960&fit=crop`,
-      thumb: `${base}?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop`,
+      full: `${base}?auto=compress&cs=tinysrgb&w=2160&h=2700&fit=crop`,
+      mobile: `${base}?auto=compress&cs=tinysrgb&w=1440&h=1920&fit=crop`,
+      thumb: `${base}?auto=compress&cs=tinysrgb&w=512&h=512&fit=crop`,
       ext: "jpg"
     };
   }
@@ -314,9 +314,9 @@ function buildVariantUrls(source, photoId, raw) {
     if (!base) return null;
     const join = base.includes("?") ? "&" : "?";
     return {
-      full: `${base}${join}w=1080&h=1350&fit=crop&fm=webp&q=85`,
-      mobile: `${base}${join}w=720&h=960&fit=crop&fm=webp&q=82`,
-      thumb: `${base}${join}w=400&h=400&fit=crop&fm=webp&q=80`,
+      full: `${base}${join}w=2160&h=2700&fit=crop&fm=webp&q=88`,
+      mobile: `${base}${join}w=1440&h=1920&fit=crop&fm=webp&q=85`,
+      thumb: `${base}${join}w=512&h=512&fit=crop&fm=webp&q=82`,
       ext: "webp"
     };
   }
