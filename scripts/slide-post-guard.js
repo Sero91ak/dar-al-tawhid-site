@@ -262,21 +262,28 @@ function runSlidePostGuard() {
   vm.runInContext(parserJs, sandbox);
   const P = sandbox.window.DARSlidePostParser;
 
-  const qiyasPath = path.join(
-    ROOT,
-    "content/posts/beitrag-430-was-ist-qiyas-und-wann-ist-er-uberhaupt-gultig.md"
-  );
-  if (fs.existsSync(qiyasPath)) {
-    const qiyasAudit = P.analyzeSlideMarkdown(fs.readFileSync(qiyasPath, "utf8"));
-    if (!qiyasAudit.isSlide) fail("Qiyās-Beitrag nicht als Slide erkannt");
-    else ok(`Qiyās-Beitrag: ${qiyasAudit.slideCount} Slides`);
-    if (qiyasAudit.slideCount !== 10) fail(`Qiyās erwartet 10 Slides, bekam ${qiyasAudit.slideCount}`);
-    if (!qiyasAudit.slides[0]?.title?.includes("Qiy")) fail("Qiyās Slide 1 Titel fehlt");
-    if (String(qiyasAudit.slides[0]?.text || "").includes("<!-- slide")) {
-      fail("Slide-Marker sichtbar im geparsten Text");
-    }
-  } else {
-    fail("Qiyās-Fixture fehlt");
+  const bodySlideMarkdown = [
+    "---",
+    'id: "guard-body-slide-fixture"',
+    "type: slide",
+    "---",
+    "",
+    "<!-- slide: 1 -->",
+    "# Erster Slide",
+    "Inhalt eins",
+    "<!-- slide: 2 -->",
+    "# Zweiter Slide",
+    "Inhalt zwei",
+  ].join("\n");
+  const bodySlideAudit = P.analyzeSlideMarkdown(bodySlideMarkdown);
+  if (!bodySlideAudit.isSlide) fail("Body-Slide-Marker nicht als Slide erkannt");
+  else ok(`Body-Slide-Marker: ${bodySlideAudit.slideCount} Slides`);
+  if (bodySlideAudit.slideCount !== 2) {
+    fail(`Body-Slide-Marker erwartet 2 Slides, bekam ${bodySlideAudit.slideCount}`);
+  }
+  if (!bodySlideAudit.slides[0]?.title?.includes("Erster")) fail("Body-Slide Slide 1 Titel fehlt");
+  if (String(bodySlideAudit.slides[0]?.text || "").includes("<!-- slide")) {
+    fail("Slide-Marker sichtbar im geparsten Text");
   }
 
   const testHtml = fs.readFileSync(path.join(ROOT, "test/index.html"), "utf8");
