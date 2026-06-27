@@ -241,17 +241,30 @@
     return [...before, ...String(newBlock).split("\n"), ...after].join("\n").replace(/\n{3,}/g, "\n\n");
   }
 
-  function isSlidePostYaml(yaml) {
+  function isSlidePostYaml(yaml, body) {
     const layout = String(yaml || "").match(/^layout:\s*["']?(.*?)["']?\s*$/m);
-    if (layout && /slides/i.test(layout[1])) return true;
-    return /^slides:\s*$/m.test(yaml);
+    const type = String(yaml || "").match(/^type:\s*["']?(.*?)["']?\s*$/m);
+    if (layout && /slides?/i.test(layout[1])) return true;
+    if (type && /slides?/i.test(type[1])) return true;
+    if (/^slides:\s*$/m.test(yaml)) return true;
+    const parser = global.DARSlidePostParser;
+    if (parser && parser.bodyHasSlideMarkers(body)) return true;
+    return false;
+  }
+
+  function resolveSlidesFromMarkdown(yaml, body) {
+    const yamlSlides = parseSlidesFromYaml(yaml);
+    if (yamlSlides.length) return yamlSlides;
+    const parser = global.DARSlidePostParser;
+    if (parser) return parser.parseSlidesFromBody(body);
+    return [];
   }
 
   function analyzePostSources(markdown) {
     const { yaml, body } = splitFrontmatter(markdown);
     const postLinks = parsePostLinksFromYaml(yaml);
-    const slides = parseSlidesFromYaml(yaml);
-    const isSlide = isSlidePostYaml(yaml);
+    const slides = resolveSlidesFromMarkdown(yaml, body);
+    const isSlide = isSlidePostYaml(yaml, body) || slides.length > 0;
     const attachments = String(yaml || "").match(/^attachments:\s*\n([\s\S]*?)(?=\n[A-Za-z0-9_-]+:|$)/m);
     const media = String(yaml || "").match(/^media:\s*\n([\s\S]*?)(?=\n[A-Za-z0-9_-]+:|$)/m);
     return {
@@ -388,7 +401,14 @@
 
     try {
       if (!/^---\s*\n[\s\S]*?\n---/m.test(String(markdown || ""))) errors.push("Frontmatter fehlt oder ist ungültig");
-      if (info.isSlide && !info.slides.length) errors.push("Slide-Beitrag ohne gültigen slides:-Block");
+      if (info.isSlide && !info.slides.length) {
+        errors.push("Slide-Beitrag ohne erkannte Slides (slides:-Block oder <!-- slide: N -->)");
+      }
+      if (info.isSlide && global.DARSlidePostParser) {
+        const audit = global.DARSlidePostParser.validateSlideMarkdown(String(markdown || ""));
+        audit.errors.forEach((e) => errors.push(e));
+        audit.warnings.forEach((w) => warnings.push(w));
+      }
       const allLinks = [
         ...info.postLinks.map((l, i) => ({ ...l, where: "Beitrag", index: i })),
         ...info.slides.flatMap((s, si) => (s.links || []).map((l, i) => ({ ...l, where: `Slide ${si + 1}`, index: i })))
@@ -437,7 +457,13 @@
     }
     const id = (head.match(/^id:\s*["']?(.*?)["']?\s*$/m) || [])[1] || filename.replace(/\.md$/i, "");
     const layout = (head.match(/^layout:\s*["']?(.*?)["']?\s*$/m) || [])[1] || "";
-    const isSlide = /slides/i.test(layout) || /^slides:\s*$/m.test(head);
+    const type = (head.match(/^type:\s*["']?(.*?)["']?\s*$/m) || [])[1] || "";
+    const body = String(text || "").replace(/^---[\s\S]*?---\s*\n?/, "");
+    const isSlide =
+      /slides?/i.test(layout) ||
+      /slides?/i.test(type) ||
+      /^slides:\s*$/m.test(head) ||
+      (global.DARSlidePostParser && global.DARSlidePostParser.bodyHasSlideMarkers(body));
     return {
       filename,
       title: (head.match(/^title:\s*["']?(.*?)["']?\s*$/m) || [])[1]?.replace(/^📖\s*/, "").trim() || filename.replace(/\.md$/i, ""),
