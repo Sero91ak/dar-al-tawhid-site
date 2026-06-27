@@ -5,8 +5,9 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV54';
-  var FONTS_ID = 'darPremiumFeedFontsV54';
+  var STYLES_ID = 'darPremiumFeedStylesV60';
+  var FONTS_ID = 'darPremiumFeedFontsV60';
+  var FEED_SHARE_SITE_URL = 'https://dar-al-tawhid.de';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -2106,7 +2107,9 @@
       '.sf-act:active{transform:scale(.94)}' +
       '.sf-act.is-liked{color:#ff6b81;background:rgba(255,107,129,.12);border-color:rgba(255,107,129,.28)}' +
       '.sf-act.is-saved{color:var(--theme-accent,var(--gold2));background:rgba(239,215,142,.1);border-color:var(--theme-border,var(--line))}' +
-      '.sf-act.is-busy{opacity:.55;pointer-events:none}' +
+      '.sf-act.is-busy,.feed-share-button.is-loading{opacity:.55;pointer-events:none}' +
+      '.app-toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);max-width:min(92vw,420px);padding:12px 16px;border-radius:999px;background:rgba(12,18,24,.92);color:#fff4dc;font-weight:700;font-size:14px;line-height:1.35;opacity:0;z-index:99999;pointer-events:none;transition:opacity .25s ease,transform .25s ease;box-shadow:0 18px 45px rgba(0,0,0,.35)}' +
+      '.app-toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}' +
       '.sf-like-count{font-size:12px;font-weight:800;color:var(--theme-muted,var(--muted));min-width:1.2em}' +
       '.sf-act-label{font-size:11px;font-weight:700;letter-spacing:.02em}' +
       '.sf-post__body{padding:0 14px 16px}' +
@@ -2189,7 +2192,7 @@
       '<div class="sf-post__bg sf-post__bg--photo" data-sf-bg-src="' + url + '" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0" ' +
       'data-sf-grad="' + esc(gradientStyleFor(item)) + '" ' +
       'style="background-image:url(' + url + ');background-size:cover;background-position:' + pos + ';" aria-hidden="true"></div>' +
-      '<img class="sf-post__bg sf-post__bg--img" src="' + url + '" alt="' + esc(bg.alt || '') + '" decoding="async" loading="' + (eager ? 'eager' : 'lazy') + '" ' +
+      '<img class="sf-post__bg sf-post__bg--img" src="' + url + '" alt="' + esc(bg.alt || '') + '" decoding="async" loading="' + (eager ? 'eager' : 'lazy') + '" crossorigin="anonymous" ' +
       'style="object-position:' + pos + '" data-sf-bg-fallbacks="' + esc(fallbacks) + '" data-sf-bg-idx="0" ' +
       'data-sf-grad="' + esc(gradientStyleFor(item)) + '" aria-hidden="true">'
     );
@@ -2394,7 +2397,7 @@
     var liked = isLiked(item.uid);
 
     return (
-      '<article class="sf-post' + (item.demo ? ' sf-post--demo' : '') + '" data-pf-id="' + esc(item.uid) + '" data-pf-target="' + esc(item.target || '') + '" data-pf-type="' + esc(item.type) + '" data-pf-post="' + esc(item.postId || '') + '" tabindex="0" role="button">' +
+      '<article class="sf-post feed-card' + (item.demo ? ' sf-post--demo' : '') + '" data-feed-card-id="' + esc(item.uid) + '" data-pf-id="' + esc(item.uid) + '" data-pf-target="' + esc(item.target || '') + '" data-pf-type="' + esc(item.type) + '" data-pf-post="' + esc(item.postId || '') + '" tabindex="0" role="button">' +
         '<header class="sf-post__head">' +
           '<div class="sf-avatar" aria-hidden="true">' + logoImgHtml() + '</div>' +
           '<div class="sf-post__meta">' +
@@ -2402,10 +2405,10 @@
           '</div>' +
         '</header>' +
         '<div class="sf-post__media">' + mediaHtml(item, cardIdx < 3) + '</div>' +
-        '<div class="sf-post__actions">' +
+        '<div class="sf-post__actions feed-actions no-share-export">' +
           '<div class="sf-actions-left">' +
             '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span>' + likeCountHtml(liked) + '</button>' +
-            '<button type="button" class="sf-act sf-share" aria-label="Teilen"><span aria-hidden="true">↗</span><span class="sf-act-label">Teilen</span></button>' +
+            '<button type="button" class="sf-act sf-share feed-share-button" data-feed-share-id="' + esc(item.uid) + '" aria-label="Teilen"><span aria-hidden="true">↗</span><span class="sf-act-label">Teilen</span></button>' +
           '</div>' +
         '</div>' +
       '</article>'
@@ -2456,16 +2459,184 @@
     });
   }
 
-  function waitForImages(root) {
-    var imgs = Array.prototype.slice.call((root || document).querySelectorAll('img'));
-    return Promise.all(imgs.map(function (img) {
-      if (img.complete && img.naturalWidth) return Promise.resolve();
-      return new Promise(function (resolve) {
+  function waitForImages(rootElement) {
+    var images = Array.prototype.slice.call((rootElement || document).querySelectorAll('img'));
+    return Promise.all(images.map(function (img) {
+      if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+      return new Promise(function (resolve, reject) {
         img.onload = resolve;
-        img.onerror = resolve;
-        setTimeout(resolve, 6000);
-      });
+        img.onerror = reject;
+        setTimeout(function () { reject(new Error('img-timeout')); }, 8000);
+      }).catch(function () {});
     }));
+  }
+
+  function showToast(message) {
+    var toast = document.createElement('div');
+    toast.className = 'app-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    requestAnimationFrame(function () {
+      toast.classList.add('is-visible');
+    });
+    setTimeout(function () {
+      toast.classList.remove('is-visible');
+      setTimeout(function () { try { toast.remove(); } catch (e) {} }, 300);
+    }, 3000);
+  }
+
+  function setFeedShareLoading(feedItemId, isLoading) {
+    var button = document.querySelector('[data-feed-share-id="' + feedItemId + '"]');
+    if (!button) return;
+    button.disabled = isLoading;
+    button.classList.toggle('is-loading', isLoading);
+    button.classList.toggle('is-busy', isLoading);
+    var label = button.querySelector('.sf-act-label');
+    if (label) label.textContent = isLoading ? 'Bild wird vorbereitet…' : 'Teilen';
+    else button.textContent = isLoading ? 'Bild wird vorbereitet…' : 'Teilen';
+  }
+
+  function stripNoShareExport(root) {
+    if (!root) return;
+    root.querySelectorAll('.no-share-export').forEach(function (el) {
+      try { el.remove(); } catch (e) {}
+    });
+  }
+
+  function shareExportScale() {
+    return 3;
+  }
+
+  async function renderFeedCardToFile(cardElement, feedItemId) {
+    await waitForImages(cardElement);
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+    prepareImagesCors(cardElement);
+    applyCaptureSafeStyles(cardElement);
+
+    var rect = cardElement.getBoundingClientRect();
+    var w = Math.max(1, Math.round(rect.width));
+    var h = Math.max(1, Math.round(rect.height));
+    var scale = shareExportScale();
+    var minExportW = 1080;
+    if (w * scale < minExportW) scale = Math.ceil(minExportW / w);
+
+    var host = document.createElement('div');
+    host.className = 'sf-share-capture-host';
+    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
+
+    var clone = cardElement.cloneNode(true);
+    clone.style.width = w + 'px';
+    clone.style.height = 'auto';
+    clone.style.minHeight = '0';
+    clone.style.maxHeight = 'none';
+    clone.style.maxWidth = '100%';
+    clone.style.margin = '0';
+    clone.style.aspectRatio = 'auto';
+    clone.style.cursor = 'default';
+    clone.removeAttribute('tabindex');
+    clone.removeAttribute('role');
+    stripNoShareExport(clone);
+    prepareImagesCors(clone);
+    applyCaptureSafeStyles(clone);
+    host.appendChild(clone);
+    document.body.appendChild(host);
+
+    try {
+      await new Promise(function (r) { setTimeout(r, 180); });
+      var h2c = await loadHtml2Canvas();
+      var canvas = await h2c(clone, {
+        scale: scale,
+        width: w,
+        height: h,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: null,
+        logging: false,
+        imageTimeout: 25000,
+        onclone: function (doc, node) {
+          stripNoShareExport(node);
+          applyCaptureSafeStyles(node);
+        }
+      });
+      var blob = await canvasToBlob(canvas);
+      if (!blob) throw new Error('Feed card image blob could not be created.');
+      return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
+    } finally {
+      try { host.remove(); } catch (e) {}
+    }
+  }
+
+  async function downloadFeedImage(file, feedItemId) {
+    var url = URL.createObjectURL(file);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = file.name || ('dar-al-tawhid-feed-' + feedItemId + '.png');
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
+  }
+
+  async function shareFeedCardAsImage(feedItemId) {
+    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
+    if (!card) {
+      showToast('Feed-Bild konnte nicht gefunden werden.');
+      return;
+    }
+    try {
+      setFeedShareLoading(feedItemId, true);
+      var file = await renderFeedCardToFile(card, feedItemId);
+      if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
+        await global.navigator.share({
+          files: [file],
+          title: 'DAR AL TAWḤID',
+          text: FEED_SHARE_SITE_URL
+        });
+        return;
+      }
+      await downloadFeedImage(file, feedItemId);
+      showToast('Direktes Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde zum Teilen gespeichert.');
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      console.error('Feed image share failed:', error);
+      try {
+        var fallbackCanvas = await captureMediaForShare(card);
+        var fallbackBlob = await canvasToBlob(fallbackCanvas);
+        if (!fallbackBlob) throw new Error('capture-fallback-empty');
+        var fallbackFile = new File([fallbackBlob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
+        if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [fallbackFile] })) {
+          await global.navigator.share({
+            files: [fallbackFile],
+            title: 'DAR AL TAWḤID',
+            text: FEED_SHARE_SITE_URL
+          });
+          return;
+        }
+        await downloadFeedImage(fallbackFile, feedItemId);
+        showToast('Direktes Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde zum Teilen gespeichert.');
+      } catch (fallbackErr) {
+        if (fallbackErr && fallbackErr.name === 'AbortError') return;
+        console.error('Feed image share fallback failed:', fallbackErr);
+        showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
+      }
+    } finally {
+      setFeedShareLoading(feedItemId, false);
+    }
+  }
+
+  function bindFeedShareDelegate() {
+    if (global.__darFeedShareBound) return;
+    global.__darFeedShareBound = true;
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-feed-share-id]');
+      if (!button) return;
+      event.preventDefault();
+      event.stopPropagation();
+      var feedItemId = button.getAttribute('data-feed-share-id');
+      if (!feedItemId) return;
+      shareFeedCardAsImage(feedItemId);
+    }, true);
   }
 
   function prepareImagesCors(root) {
@@ -2480,11 +2651,6 @@
         }
       } catch (e) {}
     });
-  }
-
-  function shareExportScale() {
-    var dpr = global.devicePixelRatio || 1;
-    return Math.max(2, Math.min(4, Math.round(dpr * 2)));
   }
 
   function applyCaptureSafeStyles(root) {
@@ -2624,9 +2790,12 @@
     return Promise.reject(new Error('no media'));
   }
   function canvasToBlob(canvas) {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
       if (canvas.toBlob) {
-        canvas.toBlob(function (b) { resolve(b); }, 'image/png', 0.92);
+        canvas.toBlob(function (b) {
+          if (b) resolve(b);
+          else reject(new Error('Canvas blob could not be created.'));
+        }, 'image/png', 1);
         return;
       }
       try {
@@ -2635,60 +2804,7 @@
         for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
         resolve(new Blob([arr], { type: 'image/png' }));
       } catch (e) {
-        resolve(null);
-      }
-    });
-  }
-
-  function downloadShareBlob(blob, name) {
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = name || 'dar-al-tawhid-beitrag.png';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 8000);
-  }
-
-  function shareItem(item, ev) {
-    if (ev) { ev.stopPropagation(); ev.preventDefault(); }
-    var btn = ev && ev.currentTarget;
-    var card = btn && btn.closest('.sf-post');
-    if (btn) {
-      btn.disabled = true;
-      btn.classList.add('is-busy');
-    }
-    var capture = card ? captureMediaForShare(card) : Promise.reject(new Error('no card'));
-    capture.then(function (canvas) {
-      return canvasToBlob(canvas).then(function (blob) {
-        if (!blob) throw new Error('blob');
-        var file = new File([blob], 'dar-al-tawhid-beitrag.png', { type: 'image/png' });
-        if (global.navigator && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
-          return global.navigator.share({
-            files: [file],
-            title: item.title || 'DAR AL TAWḤID'
-          });
-        }
-        downloadShareBlob(blob);
-        try {
-          alert('Beitragsbild wurde gespeichert. Öffne WhatsApp, Instagram oder Facebook und wähle das Bild zum Teilen.');
-        } catch (e) {}
-      });
-    }).catch(function () {
-      var statement = overlayTextFor(item) || item.preview || '';
-      var text = (statement || item.title || '') + '\n\n' + BRAND.site + '\n' + BRAND.instagram + ' · ' + BRAND.telegram;
-      if (global.navigator && global.navigator.share) {
-        global.navigator.share({ title: item.title, text: text }).catch(function () {});
-        return;
-      }
-      try {
-        if (global.navigator && global.navigator.clipboard) global.navigator.clipboard.writeText(text);
-      } catch (e) {}
-    }).finally(function () {
-      if (btn) {
-        btn.disabled = false;
-        btn.classList.remove('is-busy');
+        reject(new Error('Canvas blob could not be created.'));
       }
     });
   }
@@ -2728,14 +2844,6 @@
         } else if (countEl) {
           countEl.remove();
         }
-      });
-    });
-    root.querySelectorAll('.sf-share').forEach(function (btn) {
-      btn.addEventListener('click', function (ev) {
-        var card = btn.closest('.sf-post');
-        var uid = card && card.getAttribute('data-pf-id');
-        var item = state.visible.find(function (x) { return x.uid === uid; });
-        if (item) shareItem(item, ev);
       });
     });
     root.querySelectorAll('.sf-filter').forEach(function (btn) {
@@ -2853,6 +2961,7 @@
   function renderPage(mount) {
     if (!mount) return;
     injectStyles();
+    bindFeedShareDelegate();
     document.body.classList.add('is-premium-feed-view');
     if (!global.__darFeedThemeBound) {
       global.__darFeedThemeBound = true;
@@ -2939,6 +3048,8 @@
     selectFeedBackground: selectFeedBackground,
     getAdaptiveFeedTextStyle: getAdaptiveFeedTextStyle,
     getFeedBackgroundPool: function () { return FEED_BG_POOL.slice(); },
+    shareFeedCardAsImage: shareFeedCardAsImage,
+    renderFeedCardToFile: renderFeedCardToFile,
     onAppReady: function (opts) {
       startFeedMount({ force: opts && opts.force });
     }
@@ -2961,6 +3072,7 @@
   }
 
   if (global && global.addEventListener) {
+    bindFeedShareDelegate();
     global.addEventListener('hashchange', autoMountFeed);
     global.addEventListener('load', autoMountFeed);
   }
