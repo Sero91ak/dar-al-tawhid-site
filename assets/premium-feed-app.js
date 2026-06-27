@@ -5,8 +5,10 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV58';
-  var FONTS_ID = 'darPremiumFeedFontsV58';
+  var STYLES_ID = 'darPremiumFeedStylesV59';
+  var FONTS_ID = 'darPremiumFeedFontsV59';
+  var FEED_EXPORT_MIN_W = 1080;
+  var FEED_EXPORT_RATIO = 1.08;
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -398,39 +400,81 @@
     };
   }
 
-  function getAdaptiveFeedTextStyle(backgroundMeta, textZone, theme) {
-    theme = theme || getThemeKey();
+  function zoneBusyScore(buf, w, h, y0, y1) {
+    var sum = 0;
+    var sumSq = 0;
+    var n = 0;
+    for (var y = y0; y < y1; y++) {
+      for (var x = 0; x < w; x++) {
+        var v = buf[y * w + x];
+        sum += v;
+        sumSq += v * v;
+        n++;
+      }
+    }
+    if (!n) return 0.25;
+    var mean = sum / n;
+    var variance = sumSq / n - mean * mean;
+    return Math.min(1, Math.max(0.08, Math.sqrt(Math.max(0, variance)) / 72));
+  }
+
+  function computeFeedReadability(meta, textZone) {
+    meta = meta || {};
     textZone = textZone || 'middle';
-    var meta = backgroundMeta || {};
     var topLum = zoneLuminance(meta, 'top');
     var midLum = zoneLuminance(meta, 'middle');
     var botLum = zoneLuminance(meta, 'bottom');
-    var lum = zoneLuminance(meta, textZone);
+    var textLum = zoneLuminance(meta, textZone);
     var avgLum = (topLum + midLum + botLum) / 3;
     var lumSpread = Math.max(topLum, midLum, botLum) - Math.min(topLum, midLum, botLum);
     var busy = numOr(meta.busyScore, 0.25);
-    var dataTone = lum >= 0.56 ? 'light-bg' : 'dark-bg';
+    var dataTone = textLum >= 0.56 ? 'light-bg' : 'dark-bg';
     var textVariant = dataTone === 'light-bg' ? 'dark' : 'light';
     if (meta.recommendedTextTone === 'dark') { dataTone = 'light-bg'; textVariant = 'dark'; }
     if (meta.recommendedTextTone === 'light') { dataTone = 'dark-bg'; textVariant = 'light'; }
     if (meta.isGradient) {
-      lum = avgLum;
-      dataTone = lum >= 0.56 ? 'light-bg' : 'dark-bg';
+      textLum = avgLum;
+      dataTone = avgLum >= 0.56 ? 'light-bg' : 'dark-bg';
       textVariant = dataTone === 'light-bg' ? 'dark' : 'light';
-    } else if (lumSpread >= 0.18 || busy >= 0.28 || Math.abs(avgLum - 0.5) < 0.11) {
-      dataTone = 'light-bg';
-      textVariant = 'dark';
+    } else if (busy >= 0.42 || lumSpread >= 0.22 || Math.abs(avgLum - 0.5) < 0.1) {
+      dataTone = textVariant === 'dark' ? 'light-bg' : 'dark-bg';
+      if (textLum >= 0.5 && textLum <= 0.62) {
+        dataTone = 'light-bg';
+        textVariant = 'dark';
+      }
     } else {
-      lum = avgLum;
-      dataTone = lum >= 0.44 ? 'light-bg' : 'dark-bg';
+      textLum = avgLum;
+      dataTone = textLum >= 0.46 ? 'light-bg' : 'dark-bg';
       textVariant = dataTone === 'light-bg' ? 'dark' : 'light';
     }
-    var protection = 'strong';
+    var protection = 'soft';
+    if (busy >= 0.38 || lumSpread >= 0.18) protection = 'medium';
+    if (busy >= 0.52 || lumSpread >= 0.26 || (textLum > 0.42 && textLum < 0.58)) protection = 'strong';
     var pal = readableFeedPalette(textVariant);
-    var panelScrim = textVariant === 'light' ? '#0a0c10' : '#faf6ee';
+    var tier = protection === 'soft' ? 'good' : (protection === 'medium' ? 'optimized' : 'fallback');
+    var panelAlpha = protection === 'strong' ? 0.9 : (protection === 'medium' ? 0.84 : 0.78);
+    var panelBlur = protection === 'strong' ? 10 : (protection === 'medium' ? 8 : 6);
+    var panelScrim = textVariant === 'light'
+      ? 'rgba(10,12,16,' + panelAlpha + ')'
+      : 'rgba(250,246,238,' + panelAlpha + ')';
+    var panelBorder = textVariant === 'light'
+      ? 'rgba(239,215,142,0.18)'
+      : 'rgba(90,69,40,0.16)';
+    var panelShadow = textVariant === 'light'
+      ? '0 12px 36px rgba(0,0,0,0.34)'
+      : '0 12px 36px rgba(0,0,0,0.22)';
+    var protBg = textVariant === 'light'
+      ? 'radial-gradient(ellipse 120% 90% at 50% 50%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.12) 58%, rgba(0,0,0,0) 88%)'
+      : 'radial-gradient(ellipse 120% 90% at 50% 50%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.1) 58%, rgba(255,255,255,0) 88%)';
+    var protOpacity = protection === 'strong' ? 0.72 : (protection === 'medium' ? 0.56 : 0.42);
+    var textShadow = textVariant === 'light'
+      ? '0 1px 2px rgba(0,0,0,0.42)'
+      : '0 1px 2px rgba(255,255,255,0.38)';
+    var sceneShade = protection === 'strong' ? 0.58 : (protection === 'medium' ? 0.48 : 0.38);
     return {
       dataTone: dataTone,
       protection: protection,
+      tier: tier,
       cssVars: {
         '--feed-text-primary': pal.primary,
         '--feed-text-secondary': pal.secondary,
@@ -438,14 +482,24 @@
         '--feed-text-em': pal.em,
         '--feed-text-source': pal.source,
         '--feed-text-divider': pal.divider,
-        '--feed-text-shadow': 'none',
+        '--feed-text-shadow': textShadow,
         '--feed-text-stroke': 'transparent',
         '--feed-panel-scrim': panelScrim,
-        '--feed-protection-bg': 'none',
-        '--feed-protection-opacity': '0',
-        '--feed-overlay-strength': '0'
+        '--feed-panel-blur': panelBlur + 'px',
+        '--feed-panel-border': panelBorder,
+        '--feed-panel-shadow': panelShadow,
+        '--feed-protection-bg': protBg,
+        '--feed-protection-opacity': String(protOpacity),
+        '--feed-overlay-strength': String(sceneShade),
+        '--feed-scene-shade-top': String(0.16 + sceneShade * 0.14),
+        '--feed-scene-shade-mid': String(0.32 + sceneShade * 0.18),
+        '--feed-scene-shade-bot': String(0.46 + sceneShade * 0.2)
       }
     };
+  }
+
+  function getAdaptiveFeedTextStyle(backgroundMeta, textZone, theme) {
+    return computeFeedReadability(backgroundMeta, textZone);
   }
 
   function adaptiveStyleToString(style) {
@@ -461,10 +515,12 @@
       var style = getAdaptiveFeedTextStyle(backgroundMeta, textZone || 'middle', getThemeKey());
       scene.setAttribute('data-tone', style.dataTone);
       scene.setAttribute('data-protection', style.protection);
+      if (style.tier) scene.setAttribute('data-readability', style.tier);
       var panel = scene.querySelector('.sf-post__textpanel');
       if (panel) {
         panel.setAttribute('data-tone', style.dataTone);
         panel.setAttribute('data-protection', style.protection);
+        if (style.tier) panel.setAttribute('data-readability', style.tier);
         Object.keys(style.cssVars).forEach(function (k) {
           panel.style.setProperty(k, style.cssVars[k]);
         });
@@ -477,7 +533,8 @@
     if (FEED_LUM_CACHE[url]) { cb(FEED_LUM_CACHE[url]); return; }
     try {
       var img = new Image();
-      img.crossOrigin = 'anonymous';
+      var abs = absoluteAssetUrl(url);
+      if (isCrossOriginAssetUrl(abs)) img.crossOrigin = 'anonymous';
       img.onload = function () {
         try {
           var w = 32;
@@ -502,17 +559,20 @@
             }
             return n ? sum / n / 255 : 0.5;
           }
-          var top = zoneAvg(0, Math.floor(h / 3));
-          var mid = zoneAvg(Math.floor(h / 3), Math.floor(2 * h / 3));
-          var bot = zoneAvg(Math.floor(2 * h / 3), h);
+          var y1 = Math.floor(h / 3);
+          var y2 = Math.floor(2 * h / 3);
+          var top = zoneAvg(0, y1);
+          var mid = zoneAvg(y1, y2);
+          var bot = zoneAvg(y2, h);
           var avg = (top + mid + bot) / 3;
+          var busy = zoneBusyScore(buf, w, h, y1, y2);
           var meta = {
             averageLuminance: avg,
             topLuminance: top,
             middleLuminance: mid,
             bottomLuminance: bot,
-            busyScore: 0.3,
-            recommendedTextTone: avg >= 0.56 ? 'dark' : 'light',
+            busyScore: busy,
+            recommendedTextTone: mid >= 0.56 ? 'dark' : 'light',
             safeTextZones: ['middle', 'bottom']
           };
           FEED_LUM_CACHE[url] = meta;
@@ -520,7 +580,7 @@
         } catch (e) { cb(null); }
       };
       img.onerror = function () { cb(null); };
-      img.src = url;
+      img.src = abs;
     } catch (e2) { cb(null); }
   }
 
@@ -2070,7 +2130,7 @@
       '.sf-post__bg--photo{background-repeat:no-repeat;background-color:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));filter:brightness(1.08) saturate(1.14) contrast(1.04)}' +
       '.sf-post__bg--img{opacity:0;pointer-events:none;width:1px;height:1px;overflow:hidden}' +
       '.sf-post__bg--grad{background-size:cover;background-position:center;background-repeat:no-repeat}' +
-      '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.24) 0%,rgba(0,0,0,.46) 52%,rgba(0,0,0,.62) 100%);pointer-events:none;opacity:1}' +
+      '.sf-post__scene-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,var(--feed-scene-shade-top,0.22)) 0%,rgba(0,0,0,var(--feed-scene-shade-mid,0.42)) 52%,rgba(0,0,0,var(--feed-scene-shade-bot,0.58)) 100%);pointer-events:none;opacity:1}' +
       '.sf-scene-badge{position:absolute;top:var(--sf-badge-top,18px);left:var(--sf-badge-left,18px);z-index:5;width:var(--sf-badge-size,clamp(40px,11vw,52px));height:var(--sf-badge-size,clamp(40px,11vw,52px));border-radius:50%;padding:3px;background:var(--theme-feed-badge-bg,var(--theme-glass,rgba(8,7,5,.48)));backdrop-filter:blur(10px) saturate(1.1);-webkit-backdrop-filter:blur(10px) saturate(1.1);border:1px solid var(--theme-feed-badge-border,var(--theme-border,var(--line)));box-shadow:0 4px 16px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.04);pointer-events:none;display:grid;place-items:center}' +
       '.sf-scene-badge .sf-badge-logo{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}' +
       '.sf-scene-brand{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:6px 8px 7px;background:var(--theme-feed-brand-bar,linear-gradient(180deg,transparent,rgba(0,0,0,.76)));display:flex;flex-direction:column;gap:3px;align-items:center;pointer-events:none}' +
@@ -2081,24 +2141,27 @@
       '.sf-brand-site svg{width:clamp(8px,2.2vw,10px);height:clamp(8px,2.2vw,10px);flex:0 0 auto}' +
       '.sf-brand-signature{font-family:var(--font-accent);font-size:clamp(11px,3vw,13px);color:var(--theme-feed-signature,var(--theme-accent,var(--gold2)));line-height:1;letter-spacing:.015em;flex:0 1 auto;min-width:0;text-align:center;white-space:nowrap}' +
       '.sf-post__scene-inner{position:relative;z-index:3;width:100%;max-width:100%;min-width:0;display:flex;align-items:center;justify-content:center;padding:var(--sf-panel-inset-top,4px) var(--sf-panel-inset-x,var(--sf-panel-inset,12px)) var(--sf-panel-inset-bottom,4px);max-height:calc(100% - var(--sf-footer-h,50px));box-sizing:border-box;margin:0}' +
-      '.sf-post__textpanel{position:relative;width:auto;max-width:min(100%,var(--sf-panel-fit-max,92%));min-width:min(48%,9.5rem);padding:var(--sf-panel-pad,clamp(10px,2.8vw,14px));border-radius:18px;background:var(--feed-panel-scrim,#faf6ee);border:1px solid rgba(90,69,40,.14);box-shadow:0 10px 34px rgba(0,0,0,.32);backdrop-filter:none;-webkit-backdrop-filter:none;box-sizing:border-box;text-align:center;overflow:visible;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))))}' +
-      '.sf-post__textpanel::before{display:none}' +
-      '.sf-post__textpanel[data-tone=light-bg]{background:#faf6ee!important;border-color:rgba(90,69,40,.16)!important;--feed-text-primary:#12100e;--feed-text-secondary:#2a241c;--feed-text-accent:#5a4528;--feed-text-em:#3a2808;--feed-text-source:rgba(30,24,18,.88);--feed-text-divider:rgba(90,69,40,.28)}' +
-      '.sf-post__textpanel[data-tone=dark-bg]{background:#0a0c10!important;border-color:rgba(239,215,142,.18)!important;--feed-text-primary:#fff6e8;--feed-text-secondary:#ede0c8;--feed-text-accent:#e0c070;--feed-text-em:#f0d080;--feed-text-source:rgba(255,244,220,.82);--feed-text-divider:rgba(224,192,112,.28)}' +
+      '.sf-post__textpanel{position:relative;width:auto;max-width:min(100%,var(--sf-panel-fit-max,92%));min-width:min(48%,9.5rem);padding:var(--sf-panel-pad,clamp(10px,2.8vw,14px));border-radius:20px;background:var(--feed-panel-scrim,rgba(250,246,238,.84));border:1px solid var(--feed-panel-border,rgba(90,69,40,.14));box-shadow:var(--feed-panel-shadow,0 12px 36px rgba(0,0,0,.22));backdrop-filter:blur(var(--feed-panel-blur,8px)) saturate(1.08);-webkit-backdrop-filter:blur(var(--feed-panel-blur,8px)) saturate(1.08);box-sizing:border-box;text-align:center;overflow:visible;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))))}' +
+      '.sf-post__textpanel::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--feed-protection-bg,none);opacity:var(--feed-protection-opacity,.5);pointer-events:none}' +
+      '.sf-post__textpanel[data-protection=medium]::before{opacity:var(--feed-protection-opacity,.56)}' +
+      '.sf-post__textpanel[data-protection=strong]::before{opacity:var(--feed-protection-opacity,.72)}' +
+      '.sf-post__textpanel[data-tone=light-bg]{--feed-text-primary:#12100e;--feed-text-secondary:#2a241c;--feed-text-accent:#5a4528;--feed-text-em:#3a2808;--feed-text-source:rgba(30,24,18,.88);--feed-text-divider:rgba(90,69,40,.28)}' +
+      '.sf-post__textpanel[data-tone=dark-bg]{--feed-text-primary:#fff6e8;--feed-text-secondary:#ede0c8;--feed-text-accent:#e0c070;--feed-text-em:#f0d080;--feed-text-source:rgba(255,244,220,.82);--feed-text-divider:rgba(224,192,112,.28)}' +
       '.sf-post__img{width:100%;max-width:100%;min-width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,var(--theme-feed-bg,var(--bg)));border-radius:0;vertical-align:top}' +
-      '.sf-post__quote{margin:0;line-height:1.22;text-shadow:none;width:100%;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))))}' +
-      '.sf-quote-mark{display:block;font-size:var(--sf-mark-size,20px);line-height:1;color:var(--feed-text-accent,var(--theme-feed-mark,var(--theme-accent,var(--gold2))));font-family:var(--font-feed-quote);margin-bottom:8px;text-shadow:none}' +
-      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;font-size:var(--sf-main-size,15px);color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))));text-shadow:none;-webkit-text-stroke:0 transparent}' +
-      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid var(--feed-text-divider,rgba(90,69,40,.28));font-size:var(--sf-src-size,10px);opacity:.92;color:var(--feed-text-source,var(--theme-muted,var(--muted)));word-wrap:break-word;overflow-wrap:anywhere;white-space:normal;text-shadow:none}' +
-      '.sf-quote-scholar{margin-top:10px;font-size:var(--sf-scholar-size,11px);line-height:1.42;opacity:.94;color:var(--feed-text-accent,var(--theme-accent,var(--gold2)));text-shadow:none}' +
+      '.sf-post__quote{margin:0;line-height:1.22;text-shadow:var(--feed-text-shadow,none);width:100%;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))))}' +
+      '.sf-quote-mark{display:block;font-size:var(--sf-mark-size,20px);line-height:1;color:var(--feed-text-accent,var(--theme-feed-mark,var(--theme-accent,var(--gold2))));font-family:var(--font-feed-quote);margin-bottom:8px;text-shadow:var(--feed-text-shadow,none)}' +
+      '.sf-quote-text{display:block;margin:0;max-width:100%;word-wrap:break-word;overflow-wrap:anywhere;font-size:var(--sf-main-size,15px);color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))));text-shadow:var(--feed-text-shadow,none);-webkit-text-stroke:0 transparent}' +
+      '.sf-quote-source{margin-top:10px;padding-top:8px;border-top:1px solid var(--feed-text-divider,rgba(90,69,40,.28));font-size:var(--sf-src-size,10px);opacity:.94;color:var(--feed-text-source,var(--theme-muted,var(--muted)));word-wrap:break-word;overflow-wrap:anywhere;white-space:normal;text-shadow:var(--feed-text-shadow,none)}' +
+      '.sf-quote-scholar{margin-top:10px;font-size:var(--sf-scholar-size,11px);line-height:1.42;opacity:.96;color:var(--feed-text-accent,var(--theme-accent,var(--gold2)));text-shadow:var(--feed-text-shadow,none)}' +
       '.sf-post__dua{margin:0;padding:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:clamp(9px,2.2vw,12px);width:100%;text-align:center}' +
-      '.sf-post__dua-ar{direction:rtl;font-size:var(--sf-ar-size,22px);margin:0;width:100%;text-align:center;text-shadow:none;color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))));opacity:1;font-weight:600;letter-spacing:.01em;-webkit-text-stroke:0 transparent}' +
-      '.sf-post__dua-tr{font-size:var(--sf-tr-size,15px);letter-spacing:.02em;color:var(--feed-text-secondary,var(--feed-text-accent,var(--theme-feed-trans,var(--theme-accent,var(--gold2)))));width:100%;text-align:center;text-shadow:none;opacity:1;font-weight:600}' +
+      '.sf-post__dua-ar{direction:rtl;font-size:var(--sf-ar-size,22px);margin:0;width:100%;text-align:center;text-shadow:var(--feed-text-shadow,none);color:var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text))));opacity:1;font-weight:600;letter-spacing:.01em;-webkit-text-stroke:0 transparent}' +
+      '.sf-post__dua-tr{font-size:var(--sf-tr-size,15px);letter-spacing:.02em;color:var(--feed-text-secondary,var(--feed-text-accent,var(--theme-feed-trans,var(--theme-accent,var(--gold2)))));width:100%;text-align:center;text-shadow:var(--feed-text-shadow,none);opacity:1;font-weight:600}' +
       '.sf-post__textpanel[data-tone=light-bg] .sf-post__dua-tr{color:#3a2e1c}' +
-      '.sf-post__dua-de{font-size:var(--sf-main-size,15px);margin:0;width:100%;text-align:center;text-shadow:none;color:var(--feed-text-secondary,var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text)))));opacity:.98}' +
-      '.sf-dua-em,.sf-text-em{display:inline;font-family:var(--font-accent);font-size:1.08em;line-height:1.25;font-weight:600;font-style:normal;color:var(--feed-text-em,var(--feed-text-accent,var(--theme-feed-em,var(--theme-accent,var(--gold2)))));text-decoration:underline;text-decoration-color:var(--feed-text-accent,var(--theme-accent,var(--gold2)));text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone;text-shadow:none;padding:0 3px;border-radius:3px;background:rgba(90,69,40,.1)}' +
-      '.sf-post__textpanel[data-tone=dark-bg] .sf-dua-em,.sf-post__textpanel[data-tone=dark-bg] .sf-text-em{color:var(--feed-text-em,#f0d080);background:rgba(224,192,112,.12);text-decoration-color:#e0c070}' +
-      '.sf-post__textpanel[data-tone=light-bg] .sf-dua-em,.sf-post__textpanel[data-tone=light-bg] .sf-text-em{color:var(--feed-text-em,#3a2808);background:rgba(90,69,40,.1);text-decoration-color:#5a4528}' +
+      '.sf-post__dua-de{font-size:var(--sf-main-size,15px);margin:0;width:100%;text-align:center;text-shadow:var(--feed-text-shadow,none);color:var(--feed-text-secondary,var(--feed-text-primary,var(--theme-feed-panel-text,var(--theme-text,var(--text)))));opacity:.98}' +
+      '.sf-dua-em,.sf-text-em{display:inline;font-family:var(--font-accent);font-size:1.08em;line-height:1.25;font-weight:600;font-style:normal;color:var(--feed-text-em,var(--feed-text-accent,var(--theme-feed-em,var(--theme-accent,var(--gold2)))));text-decoration:underline;text-decoration-color:var(--feed-text-accent,var(--theme-accent,var(--gold2)));text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone;text-shadow:var(--feed-text-shadow,none);padding:0 3px;border-radius:3px;background:rgba(90,69,40,.08)}' +
+      '.sf-post__textpanel[data-tone=dark-bg] .sf-dua-em,.sf-post__textpanel[data-tone=dark-bg] .sf-text-em{color:var(--feed-text-em,#f0d080);background:rgba(224,192,112,.1);text-decoration-color:#e0c070}' +
+      '.sf-post__textpanel[data-tone=light-bg] .sf-dua-em,.sf-post__textpanel[data-tone=light-bg] .sf-text-em{color:var(--feed-text-em,#3a2808);background:rgba(90,69,40,.08);text-decoration-color:#5a4528}' +
+      '.sf-act.is-busy .sf-act-label{opacity:.85;font-size:10px}' +
       '.sf-dua-source{margin-top:8px;padding-top:8px;border-top:1px solid var(--feed-text-divider,rgba(90,69,40,.24));width:100%;text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center}' +
       '.sf-dua-cat{font-size:var(--sf-src-size,11px);line-height:1.35;color:var(--feed-text-accent,var(--theme-accent,var(--gold2)));letter-spacing:.02em;text-shadow:none}' +
       '.sf-dua-book{font-size:max(10.5px,var(--sf-src-size,11px));opacity:.92;color:var(--feed-text-source,var(--theme-muted,var(--muted)));max-width:100%;word-wrap:break-word;text-shadow:none}' +
@@ -2238,13 +2301,16 @@
     var eager = !!opts.eagerBg;
     return (
       '<div class="sf-post__scene"' + sceneExtra + ' data-tone="' + esc(adaptInit.dataTone) + '" data-protection="' + esc(adaptInit.protection) + '"' +
+        (adaptInit.tier ? ' data-readability="' + esc(adaptInit.tier) + '"' : '') +
         (metaJson ? ' data-sf-bg-meta="' + metaJson + '"' : '') +
         ' style="' + sceneStyle + '">' +
         sceneBgHtml(item, fallbacks, eager) +
         '<div class="sf-post__scene-shade"' + (shadeStyle ? ' style="' + shadeStyle + '"' : '') + '></div>' +
         sceneBadgeHtml() +
         '<div class="' + innerClass + '" style="' + innerStyle + '">' +
-          '<div class="' + panelClass + '" data-tone="' + esc(adaptInit.dataTone) + '" data-protection="' + esc(adaptInit.protection) + '" style="' + panelStyle + '">' + inner + '</div>' +
+          '<div class="' + panelClass + '" data-tone="' + esc(adaptInit.dataTone) + '" data-protection="' + esc(adaptInit.protection) + '"' +
+            (adaptInit.tier ? ' data-readability="' + esc(adaptInit.tier) + '"' : '') +
+            ' style="' + panelStyle + '">' + inner + '</div>' +
         '</div>' +
         brandStripHtml() +
       '</div>'
@@ -2543,11 +2609,21 @@
     ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
   }
 
-  function drawSceneShade(ctx, w, h) {
+  function feedExportDimensions(scene) {
+    var rect = scene.getBoundingClientRect();
+    var srcW = Math.max(1, Math.round(rect.width));
+    var srcH = Math.max(1, Math.round(rect.height));
+    var outW = Math.max(FEED_EXPORT_MIN_W, Math.round(srcW * shareExportScale()));
+    var outH = Math.max(Math.round(outW * FEED_EXPORT_RATIO), Math.round(outW * (srcH / srcW)));
+    return { srcW: srcW, srcH: srcH, outW: outW, outH: outH, scale: outW / srcW };
+  }
+
+  function drawSceneShade(ctx, w, h, strength) {
+    strength = strength || 0.48;
     var g = ctx.createLinearGradient(0, 0, 0, h);
-    g.addColorStop(0, 'rgba(0,0,0,.24)');
-    g.addColorStop(0.52, 'rgba(0,0,0,.46)');
-    g.addColorStop(1, 'rgba(0,0,0,.62)');
+    g.addColorStop(0, 'rgba(0,0,0,' + (0.16 + strength * 0.14).toFixed(3) + ')');
+    g.addColorStop(0.52, 'rgba(0,0,0,' + (0.32 + strength * 0.18).toFixed(3) + ')');
+    g.addColorStop(1, 'rgba(0,0,0,' + (0.46 + strength * 0.2).toFixed(3) + ')');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
   }
@@ -2591,22 +2667,26 @@
     if (!root) return;
     root.querySelectorAll('.sf-post__textpanel').forEach(function (panel) {
       var tone = panel.getAttribute('data-tone') || 'light-bg';
+      var prot = panel.getAttribute('data-protection') || 'medium';
       var pal = captureToneStyles(tone);
+      var alpha = prot === 'strong' ? 0.94 : (prot === 'medium' ? 0.9 : 0.86);
       panel.style.backdropFilter = 'none';
       panel.style.webkitBackdropFilter = 'none';
       panel.style.boxShadow = 'none';
-      panel.style.background = pal.panelBg;
+      panel.style.background = tone === 'dark-bg'
+        ? 'rgba(10,12,16,' + alpha + ')'
+        : 'rgba(250,246,238,' + alpha + ')';
       panel.style.border = '1px solid ' + pal.panelBorder;
       panel.style.textShadow = 'none';
       panel.style.color = pal.primary;
       panel.querySelectorAll('.sf-quote-text,.sf-post__dua-ar,.sf-post__dua-de,.sf-post__quote').forEach(function (el) {
         el.style.color = pal.primary;
-        el.style.textShadow = 'none';
+        el.style.textShadow = tone === 'dark-bg' ? '0 1px 2px rgba(0,0,0,0.42)' : '0 1px 2px rgba(255,255,255,0.38)';
         el.style.webkitTextStroke = '0 transparent';
       });
       panel.querySelectorAll('.sf-post__dua-tr,.sf-quote-scholar,.sf-dua-cat,.sf-quote-mark').forEach(function (el) {
         el.style.color = el.classList.contains('sf-post__dua-tr') ? (tone === 'dark-bg' ? pal.secondary : pal.em) : pal.accent;
-        el.style.textShadow = 'none';
+        el.style.textShadow = tone === 'dark-bg' ? '0 1px 2px rgba(0,0,0,0.35)' : '0 1px 2px rgba(255,255,255,0.35)';
       });
       panel.querySelectorAll('.sf-quote-source,.sf-dua-book').forEach(function (el) {
         el.style.color = pal.source;
@@ -2625,12 +2705,9 @@
         el.style.textShadow = 'none';
       });
     });
-    root.querySelectorAll('.sf-brand-chip').forEach(function (el) {
+    root.querySelectorAll('.sf-brand-chip,.sf-scene-badge').forEach(function (el) {
       el.style.backdropFilter = 'none';
       el.style.webkitBackdropFilter = 'none';
-    });
-    root.querySelectorAll('.sf-post__quote, .sf-post__dua-ar, .sf-post__dua-tr, .sf-post__dua-de, .sf-quote-scholar, .sf-quote-source, .sf-dua-source').forEach(function (el) {
-      el.style.textShadow = 'none';
     });
   }
 
@@ -2690,63 +2767,68 @@
 
   function captureSceneLayers(scene) {
     if (!scene) return Promise.reject(new Error('no scene'));
-    var rect = scene.getBoundingClientRect();
-    var w = Math.max(1, Math.round(rect.width));
-    var h = Math.max(1, Math.round(rect.height));
-    var scale = shareExportScale();
-    var cw = w * scale;
-    var ch = h * scale;
+    var dims = feedExportDimensions(scene);
+    var srcW = dims.srcW;
+    var srcH = dims.srcH;
+    var outW = dims.outW;
+    var outH = dims.outH;
+    var h2cScale = dims.scale;
     var canvas = document.createElement('canvas');
-    canvas.width = cw;
-    canvas.height = ch;
+    canvas.width = outW;
+    canvas.height = outH;
     var ctx = canvas.getContext('2d');
     if (!ctx) return Promise.reject(new Error('no-ctx'));
     var photo = scene.querySelector('.sf-post__bg--photo');
     var gradEl = scene.querySelector('.sf-post__bg--grad');
     var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
+    var shadeStrength = 0.48;
+    try {
+      var prot = scene.getAttribute('data-protection');
+      shadeStrength = prot === 'strong' ? 0.58 : (prot === 'medium' ? 0.48 : 0.38);
+    } catch (eS) {}
 
     function paintBackground() {
       if (bgSrc) {
         return loadShareImage(bgSrc).then(function (img) {
           ctx.fillStyle = '#1a1814';
-          ctx.fillRect(0, 0, cw, ch);
-          drawImageCover(ctx, img, 0, 0, cw, ch);
-          drawSceneShade(ctx, cw, ch);
+          ctx.fillRect(0, 0, outW, outH);
+          drawImageCover(ctx, img, 0, 0, outW, outH);
+          drawSceneShade(ctx, outW, outH, shadeStrength);
         });
       }
       if (gradEl) {
         var gclone = gradEl.cloneNode(true);
-        gclone.style.width = w + 'px';
-        gclone.style.height = h + 'px';
+        gclone.style.width = srcW + 'px';
+        gclone.style.height = srcH + 'px';
         gclone.style.position = 'absolute';
         gclone.style.inset = '0';
-        var ghost = mountOffscreenCapture(gclone, w, h);
+        var ghost = mountOffscreenCapture(gclone, srcW, srcH);
         return loadHtml2Canvas().then(function (h2c) {
           return h2c(gclone, {
-            scale: scale,
-            width: w,
-            height: h,
+            scale: h2cScale,
+            width: srcW,
+            height: srcH,
             backgroundColor: '#1a1814',
             logging: false,
             useCORS: true,
             allowTaint: false
           });
         }).then(function (gcv) {
-          ctx.drawImage(gcv, 0, 0);
-          drawSceneShade(ctx, cw, ch);
+          ctx.drawImage(gcv, 0, 0, outW, outH);
+          drawSceneShade(ctx, outW, outH, shadeStrength);
         }).finally(function () {
           try { ghost.remove(); } catch (e) {}
         });
       }
       ctx.fillStyle = '#1a1814';
-      ctx.fillRect(0, 0, cw, ch);
+      ctx.fillRect(0, 0, outW, outH);
       return Promise.resolve();
     }
 
     function paintForeground() {
       var clone = scene.cloneNode(true);
-      clone.style.width = w + 'px';
-      clone.style.height = h + 'px';
+      clone.style.width = srcW + 'px';
+      clone.style.height = srcH + 'px';
       clone.style.margin = '0';
       clone.style.minHeight = '0';
       clone.style.maxHeight = 'none';
@@ -2756,17 +2838,17 @@
       });
       applyCaptureSafeStyles(clone);
       prepareImagesCors(clone);
-      var host = mountOffscreenCapture(clone, w, h);
+      var host = mountOffscreenCapture(clone, srcW, srcH);
       var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
       return fontsReady
         .then(function () { return waitForImages(clone); })
-        .then(function () { return new Promise(function (r) { setTimeout(r, 280); }); })
+        .then(function () { return new Promise(function (r) { setTimeout(r, 320); }); })
         .then(function () { return loadHtml2Canvas(); })
         .then(function (h2c) {
           return h2c(clone, {
-            scale: scale,
-            width: w,
-            height: h,
+            scale: h2cScale,
+            width: srcW,
+            height: srcH,
             backgroundColor: null,
             logging: false,
             useCORS: true,
@@ -2775,7 +2857,7 @@
           });
         })
         .then(function (fgCanvas) {
-          ctx.drawImage(fgCanvas, 0, 0);
+          ctx.drawImage(fgCanvas, 0, 0, outW, outH);
           return canvas;
         })
         .finally(function () {
@@ -2784,6 +2866,27 @@
     }
 
     return paintBackground().then(paintForeground);
+  }
+
+  function renderFeedCardToCanvas(card) {
+    var scene = card && card.querySelector('.sf-post__scene');
+    if (scene) {
+      return captureSceneLayers(scene)
+        .catch(function () { return captureCloneExact(scene); })
+        .catch(function () { return renderSceneToCanvas(scene, true); });
+    }
+    var img = card && card.querySelector('.sf-post__img');
+    if (img) return captureElementWysiwyg(img.closest('.sf-post__media') || img);
+    return Promise.reject(new Error('no-media'));
+  }
+
+  function renderFeedCardToBlob(card, item) {
+    return renderFeedCardToCanvas(card).then(function (canvas) {
+      return canvasToBlob(canvas).then(function (blob) {
+        if (!blob) throw new Error('blob-empty');
+        return blob;
+      });
+    });
   }
 
   function waitForSceneCaptureAssets(root) {
@@ -2903,19 +3006,11 @@
   }
 
   function captureSceneForShare(card) {
-    var scene = card && card.querySelector('.sf-post__scene');
-    if (!scene) return Promise.reject(new Error('no scene'));
-    return captureSceneLayers(scene)
-      .catch(function () { return captureCloneExact(scene); })
-      .catch(function () { return renderSceneToCanvas(scene, true); });
+    return renderFeedCardToCanvas(card);
   }
 
   function captureMediaForShare(card) {
-    var scene = card && card.querySelector('.sf-post__scene');
-    if (scene) return captureSceneForShare(card);
-    var img = card && card.querySelector('.sf-post__img');
-    if (img) return captureElementWysiwyg(img.closest('.sf-post__media') || img);
-    return Promise.reject(new Error('no media'));
+    return renderFeedCardToCanvas(card);
   }
 
   function canvasToBlob(canvas) {
@@ -2949,19 +3044,21 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 8000);
   }
 
-  function shareBlobAsImage(blob, title) {
-    var file = new File([blob], 'dar-al-tawhid-beitrag.png', { type: 'image/png' });
+  function shareBlobAsImage(blob, item) {
+    var id = (item && (item.uid || item.id || item.postId)) || Date.now();
+    var file = new File([blob], 'dar-al-tawhid-feed-' + id + '.png', { type: 'image/png' });
     if (global.navigator && global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
-      return global.navigator.share({
-        files: [file],
-        title: title || 'DAR AL TAWḤID'
-      }).catch(function () {
-        downloadShareBlob(blob);
+      return global.navigator.share({ files: [file] }).catch(function (err) {
+        if (err && err.name === 'AbortError') return;
+        downloadShareBlob(blob, file.name);
+        try {
+          alert('Bild-Teilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde zum Herunterladen vorbereitet.');
+        } catch (e) {}
       });
     }
-    downloadShareBlob(blob);
+    downloadShareBlob(blob, file.name);
     try {
-      alert('Beitragsbild wurde gespeichert. Öffne WhatsApp, Instagram oder Facebook und wähle das Bild zum Teilen.');
+      alert('Bild-Teilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde zum Herunterladen vorbereitet.');
     } catch (e) {}
     return Promise.resolve();
   }
@@ -2970,19 +3067,18 @@
     if (ev) { ev.stopPropagation(); ev.preventDefault(); }
     var btn = ev && ev.currentTarget;
     var card = btn && btn.closest('.sf-post');
+    var labelEl = btn && btn.querySelector('.sf-act-label');
+    var labelPrev = labelEl ? labelEl.textContent : '';
     if (btn) {
       btn.disabled = true;
       btn.classList.add('is-busy');
     }
+    if (labelEl) labelEl.textContent = 'Bild wird vorbereitet…';
     var captureOk = false;
-    (card ? captureMediaForShare(card) : Promise.reject(new Error('no-card')))
-      .then(function (canvas) {
-        if (!canvas || !canvas.width || !canvas.height) throw new Error('capture-empty');
-        return canvasToBlob(canvas);
-      })
+    (card ? renderFeedCardToBlob(card, item) : Promise.reject(new Error('no-card')))
       .then(function (blob) {
         captureOk = true;
-        return shareBlobAsImage(blob, item && item.title);
+        return shareBlobAsImage(blob, item);
       })
       .catch(function () {
         if (captureOk) return;
@@ -2991,6 +3087,7 @@
         } catch (e2) {}
       })
       .finally(function () {
+        if (labelEl) labelEl.textContent = labelPrev || 'Teilen';
         if (btn) {
           btn.disabled = false;
           btn.classList.remove('is-busy');
@@ -3243,6 +3340,9 @@
     clearState: clearFeedState,
     selectFeedBackground: selectFeedBackground,
     getAdaptiveFeedTextStyle: getAdaptiveFeedTextStyle,
+    computeFeedReadability: computeFeedReadability,
+    renderFeedCardToBlob: renderFeedCardToBlob,
+    renderFeedCardToCanvas: renderFeedCardToCanvas,
     getFeedBackgroundPool: function () { return FEED_BG_POOL.slice(); },
     onAppReady: function (opts) {
       startFeedMount({ force: opts && opts.force });
