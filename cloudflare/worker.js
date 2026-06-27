@@ -2010,13 +2010,24 @@ function postFileSerial(name) {
   return matches.length ? Number(matches[matches.length - 1][1]) : 0;
 }
 
+function globalPostSerial(name) {
+  const n = String(name || "");
+  const beitrag = n.match(/^beitrag-(\d{3})-/i);
+  if (beitrag) return Number(beitrag[1]);
+  const early = n.match(/^[a-z0-9][a-z0-9-]*-(\d{3})-/i);
+  if (early) return Number(early[1]);
+  return 0;
+}
+
 function resolveLastPostFilename(files, postCount) {
   const list = listPostFiles(files).map((f) => (typeof f === "string" ? { name: f } : f)).filter((f) => f?.name);
   if (!list.length) return "";
   const count = Math.max(1, Number(postCount) || list.length);
+  const globalMatches = list.filter((f) => globalPostSerial(f.name) === count);
+  if (globalMatches.length) return globalMatches[globalMatches.length - 1].name;
   const target = String(count).padStart(3, "0");
-  const exact = list.find((f) => new RegExp(`-${target}(?:-|\\.md$)`).test(String(f.name || "")));
-  if (exact) return exact.name;
+  const suffixMatches = list.filter((f) => new RegExp(`-${target}(?:-|\\.md$)`).test(String(f.name || "")));
+  if (suffixMatches.length) return suffixMatches[suffixMatches.length - 1].name;
   let best = "";
   let bestSerial = -1;
   for (const f of list) {
