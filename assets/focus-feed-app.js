@@ -122,6 +122,9 @@
     if (bg.isIslamicallySafe === false) return false;
     if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
     if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
+    var src = String(bg.source || '').toLowerCase();
+    if (src === 'wikimedia' || src === 'pexels' || src === 'unsplash' || src === 'pixabay') return false;
+    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var allowed = bg.allowedFor || ['feed'];
     if (Array.isArray(allowed) && allowed.indexOf('feed') < 0) return false;
     return !!(bg.src || bg.srcMobile || bg.thumbnail);

@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV49';
-  var FONTS_ID = 'darPremiumFeedFontsV49';
+  var STYLES_ID = 'darPremiumFeedStylesV50';
+  var FONTS_ID = 'darPremiumFeedFontsV50';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -140,6 +140,9 @@
     if (bg.isIslamicallySafe === false) return false;
     if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
     if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
+    var src = String(bg.source || '').toLowerCase();
+    if (src === 'wikimedia' || src === 'pexels' || src === 'unsplash' || src === 'pixabay') return false;
+    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var allowed = bg.allowedFor || ['feed'];
     if (typeof allowed === 'string') allowed = allowed.split(/[,;|]+/);
     return allowed.indexOf('feed') >= 0;
@@ -215,8 +218,8 @@
     }
     var cat = String(item && item.category || '').toLowerCase();
     if (tags.indexOf(cat) >= 0 || topics.indexOf(cat) >= 0) score += 12;
-    if (bg.source === 'wikimedia' || bg.autoSynced) score += 25;
-    if (Number(bg.qualityScore || 0) >= 90) score += 8;
+    if (bg.studioGenerated || bg.source === 'studio') score += 20;
+    if (Number(bg.qualityScore || 0) >= 95) score += 10;
     return score;
   }
 
@@ -329,6 +332,7 @@
           hasTextOverlay: !!it.hasTextOverlay,
           qualityScore: Number(it.qualityScore) || 0,
           source: it.source || '',
+          studioGenerated: !!it.studioGenerated,
           autoSynced: !!it.autoSynced,
           overlayHint: it.overlayHint || 'dark',
           focusPoint: it.focusPoint || { x: 50, y: 50 }
