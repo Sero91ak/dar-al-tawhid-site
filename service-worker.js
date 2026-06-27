@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v182';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v183';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -40,6 +40,10 @@ let hardRefreshUntil = 0;
 
 function refreshBypassActive() {
   return Date.now() < hardRefreshUntil || Date.now() < bypassPostCacheUntil;
+}
+
+function isFeedAssetRequest(url) {
+  return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js';
 }
 
 function isPostDataRequest(url) {
@@ -231,7 +235,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
-  if (isPostDataRequest(url) || Date.now() < bypassPostCacheUntil) {
+  if (isPostDataRequest(url) || isFeedAssetRequest(url) || Date.now() < bypassPostCacheUntil) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {

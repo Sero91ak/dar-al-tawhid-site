@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV47';
-  var FONTS_ID = 'darPremiumFeedFontsV47';
+  var STYLES_ID = 'darPremiumFeedStylesV48';
+  var FONTS_ID = 'darPremiumFeedFontsV48';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -1181,6 +1181,14 @@
     fetchFeedBackgrounds().finally(function () {
       if (!opts.force && tryRestoreFeedState()) {
         rerenderFeedPhotosIfNeeded(mount);
+        fetchManual()
+          .then(function (data) {
+            var mount2 = global.document.getElementById(MOUNT_ID);
+            if (!mount2) return;
+            var manual = (data && data.items) || [];
+            if (manual.length) applyFeedData(mount2, manual);
+          })
+          .catch(function () {});
         return;
       }
       if (opts.force || !state.allItems.length) state.seed = feedSeed();

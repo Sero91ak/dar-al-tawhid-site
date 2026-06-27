@@ -7815,7 +7815,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-pdf.js?v=2" defer></script>
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=3" defer></script>
-<script src="/assets/premium-feed-app.js?v=47" defer></script>
+<script src="/assets/premium-feed-app.js?v=48" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10496,7 +10496,7 @@ function render(){
     updateOfflineBox();
     if(currentRoute.view==="home")loadPopularPostsBlock();
     if(currentRoute.view==="home"&&window.DAR_FOCUS_FEED){(window.DAR_FOCUS_FEED.onAppReady||window.DAR_FOCUS_FEED.refresh).call(window.DAR_FOCUS_FEED,{force:true})}
-    if(currentRoute.view==="feed"&&currentRoute.value!=="topics")initPremiumFeedTab(false);
+    if(currentRoute.view==="feed"&&currentRoute.value!=="topics")initPremiumFeedTab(true);
     else if(window.DAR_PREMIUM_FEED&&typeof window.DAR_PREMIUM_FEED.destroy==="function")window.DAR_PREMIUM_FEED.destroy();
     if(currentRoute.view==="zakat"&&window.DARZakatApp){
       window.DARZakatApp.bindZakat();
