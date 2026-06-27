@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-27T08:55:32.559Z",
+  "updatedAt": "2026-06-27T09:02:42.179Z",
   "usersChecked": 17,
-  "duaCandidates": 9,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 9,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 8,
+  "duplicates": 17,
   "errors": 0,
   "dailyContentDate": "2026-06-27",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Morgen & Abend"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 9,
-      "contentId": "sunnah-001",
-      "recipients": "6a2323d6-934d-4c6b-8ca0-4df268beaa26",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
