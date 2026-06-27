@@ -1,5 +1,5 @@
 /**
- * Automatische Feed-Hintergrundbilder — Wikimedia (ohne Key) + Pexels / Unsplash / Pixabay
+ * Automatische Feed-Hintergrundbilder — Pexels / Unsplash / Pixabay (Natur-Fokus).
  * Download → Prüfung → lokale Speicherung (GitHub Assets). Keine Hotlinks im Feed.
  */
 import {
@@ -9,60 +9,17 @@ import {
   isFeedBgSelectable,
   ASSETS_BG_ROOT
 } from "./feed-backgrounds-admin.js";
+import {
+  WHITELIST_QUERIES,
+  DEFAULT_SETTINGS,
+  mergeSettings,
+  validateCandidate,
+  sortQueriesNatureFirst
+} from "./feed-background-safety.js";
 
 const AUTO_BG_ROOT = `${ASSETS_BG_ROOT}/auto`;
 const DAILY_SYNC_MS = 24 * 60 * 60 * 1000;
 const MIN_SYNC_INTERVAL_MS = 5 * 60 * 1000;
-
-const FORBIDDEN_KEYWORDS = [
-  "people", "person", "child", "children", "kid", "kids", "baby", "babies", "boy", "girl",
-  "man", "woman", "men", "women", "human", "humans", "face", "faces", "portrait", "selfie",
-  "crowd", "group of people", "family", "wedding", "couple", "model", "fashion", "celebrity",
-  "animal", "animals", "bird", "birds", "dog", "cat", "pet", "pets", "wildlife", "horse",
-  "church", "cross", "crucifix", "christian", "statue", "sculpture", "monument figure",
-  "logo", "brand", "watermark", "instagram", "facebook", "pinterest", "tiktok", "snapchat",
-  "concert", "festival", "nightlife", "party", "car", "vehicle", "motorcycle", "sport player",
-  "cartoon", "comic", "anime", "illustration character", "mascot", "emoji"
-];
-
-const WHITELIST_QUERIES = [
-  { query: "mountains no people", category: "nature", tags: ["berge", "himmel", "ruhe", "tawhid"], overlayHint: "dark" },
-  { query: "desert landscape no people", category: "nature", tags: ["wüste", "sand", "ruhe", "aqidah"], overlayHint: "warm-dark" },
-  { query: "sand dunes no people", category: "nature", tags: ["wüste", "sand", "stark", "tawhid"], overlayHint: "warm-dark" },
-  { query: "night sky stars", category: "nature", tags: ["himmel", "licht", "quran", "ruhe"], overlayHint: "royal" },
-  { query: "clouds sunset", category: "nature", tags: ["himmel", "wolken", "dua", "ruhe"], overlayHint: "warm-dark" },
-  { query: "sunrise mountains no people", category: "nature", tags: ["berge", "sonnenaufgang", "licht", "quran"], overlayHint: "light" },
-  { query: "forest mist no animals", category: "nature", tags: ["nebel", "pflanzen", "ruhe", "akhirah"], overlayHint: "dark" },
-  { query: "calm ocean no people", category: "nature", tags: ["wasser", "ruhe", "dua", "tazkiyah"], overlayHint: "royal" },
-  { query: "empty mosque interior no people", category: "mosque", tags: ["moschee", "muster", "tawhid", "aqidah"], overlayHint: "dark" },
-  { query: "mosque architecture no people", category: "mosque", tags: ["moschee", "minarett", "kuppel", "tawhid"], overlayHint: "royal" },
-  { query: "minaret silhouette no people", category: "mosque", tags: ["minarett", "moschee", "himmel", "tawhid"], overlayHint: "royal" },
-  { query: "mihrab architecture no people", category: "mosque", tags: ["moschee", "muster", "quran"], overlayHint: "dark" },
-  { query: "islamic geometric pattern", category: "abstract", tags: ["muster", "kalligraphie", "quran", "tawhid"], overlayHint: "dark" },
-  { query: "arabesque pattern", category: "abstract", tags: ["muster", "kalligraphie", "ilm"], overlayHint: "dark" },
-  { query: "old books", category: "books", tags: ["bücher", "ilm", "hadith", "sunnah"], overlayHint: "warm-dark" },
-  { query: "parchment texture", category: "books", tags: ["pergament", "bücher", "ilm", "adab"], overlayHint: "light" },
-  { query: "ink pen paper", category: "books", tags: ["tinte", "feder", "bücher", "ilm"], overlayHint: "warm-dark" },
-  { query: "dark abstract background", category: "abstract", tags: ["ruhe", "tawhid", "aqidah"], overlayHint: "dark" },
-  { query: "gold texture background", category: "abstract", tags: ["licht", "tawhid", "quran"], overlayHint: "warm-dark" },
-  { query: "paper texture", category: "books", tags: ["pergament", "bücher", "ilm"], overlayHint: "light" }
-];
-
-const DEFAULT_SETTINGS = {
-  autoDownloadEnabled: true,
-  strictSafetyMode: true,
-  blockHumans: true,
-  blockFaces: true,
-  blockAnimals: true,
-  blockWatermarks: true,
-  blockLogos: true,
-  blockTextOverlays: true,
-  fallbackToGradient: true,
-  minPoolSize: 80,
-  refillBelow: 40,
-  dailyDownloadLimit: 20,
-  allowedSources: ["wikimedia", "pexels", "unsplash", "pixabay"]
-};
 
 const WIKI_FORBIDDEN_CATEGORIES = [
   "people", "portrait", "nude", "nudity", "animal", "bird", "mammal", "dog", "cat",
@@ -125,34 +82,6 @@ function arrayBufferToBase64(buffer) {
   return btoa(binary);
 }
 
-function normalizeHaystack(parts) {
-  return parts
-    .flat()
-    .filter(Boolean)
-    .map((x) => String(x).toLowerCase())
-    .join(" ");
-}
-
-function containsForbiddenKeyword(text) {
-  const hay = normalizeHaystack([text]);
-  for (let i = 0; i < FORBIDDEN_KEYWORDS.length; i++) {
-    const kw = FORBIDDEN_KEYWORDS[i];
-    if (hay.includes(kw)) return kw;
-  }
-  return "";
-}
-
-function mergeSettings(raw) {
-  const s = raw && typeof raw === "object" ? raw : {};
-  return {
-    ...DEFAULT_SETTINGS,
-    ...s,
-    allowedSources: Array.isArray(s.allowedSources) && s.allowedSources.length
-      ? s.allowedSources.map((x) => String(x).toLowerCase())
-      : DEFAULT_SETTINGS.allowedSources
-  };
-}
-
 function emptySyncState() {
   return {
     lastSyncAt: "",
@@ -213,66 +142,6 @@ function existingSourceIds(items) {
     if (x.source && x.sourcePhotoId) set.add(`${x.source}:${x.sourcePhotoId}`);
   });
   return set;
-}
-
-function validateMetadata(candidate, settings) {
-  const reasons = [];
-  const strict = settings.strictSafetyMode !== false;
-  const hay = normalizeHaystack([
-    candidate.query,
-    candidate.alt,
-    candidate.description,
-    candidate.photographer,
-    ...(candidate.tags || []),
-    ...(candidate.categories || [])
-  ]);
-
-  const forbidden = containsForbiddenKeyword(hay);
-  if (forbidden) reasons.push(`forbidden-keyword:${forbidden}`);
-
-  if (settings.blockHumans !== false) {
-    if (/\b(people|person|portrait|face|human|man\b|woman\b|child)\b/i.test(hay)) {
-      reasons.push("possible-humans");
-    }
-  }
-  if (settings.blockAnimals !== false) {
-    if (/\b(animal|bird|dog|cat|pet|wildlife|horse)\b/i.test(hay)) {
-      reasons.push("possible-animals");
-    }
-  }
-  if (settings.blockWatermarks !== false) {
-    if (/\b(watermark|stock photo|shutterstock|getty|alamy|istock)\b/i.test(hay)) {
-      reasons.push("possible-watermark");
-    }
-  }
-  if (settings.blockLogos !== false) {
-    if (/\b(logo|brand mark|trademark|company)\b/i.test(hay)) {
-      reasons.push("possible-logo");
-    }
-  }
-  if (settings.blockTextOverlays !== false) {
-    if (/\b(text overlay|typography|quote poster|signage|banner text|headline)\b/i.test(hay)) {
-      reasons.push("possible-text-overlay");
-    }
-  }
-
-  const w = Number(candidate.width) || 0;
-  const h = Number(candidate.height) || 0;
-  if (w > 0 && h > 0) {
-    if (w < 800 || h < 600) reasons.push("resolution-too-low");
-    const ratio = w / h;
-    if (ratio < 0.45 || ratio > 2.4) reasons.push("aspect-unusual");
-  } else if (strict) {
-    reasons.push("dimensions-unknown");
-  }
-
-  if (strict && reasons.length) {
-    return { ok: false, reasons, uncertain: true };
-  }
-  if (reasons.some((r) => r.startsWith("forbidden-keyword"))) {
-    return { ok: false, reasons, uncertain: false };
-  }
-  return { ok: true, reasons: [], uncertain: false };
 }
 
 function validateBinary(bytes, contentType) {
@@ -484,11 +353,18 @@ async function searchAllSources(env, queryEntry, perPage, allowedSources) {
 
 function hasAnyPhotoSource(env, settings) {
   const allowed = settings?.allowedSources || DEFAULT_SETTINGS.allowedSources;
-  if (allowed.includes("wikimedia")) return true;
   if (allowed.includes("pexels") && env.PEXELS_API_KEY) return true;
   if (allowed.includes("unsplash") && env.UNSPLASH_ACCESS_KEY) return true;
   if (allowed.includes("pixabay") && env.PIXABAY_API_KEY) return true;
   return false;
+}
+
+function missingApiKeys(env) {
+  const missing = [];
+  if (!env?.PEXELS_API_KEY) missing.push("PEXELS_API_KEY");
+  if (!env?.UNSPLASH_ACCESS_KEY) missing.push("UNSPLASH_ACCESS_KEY");
+  if (!env?.PIXABAY_API_KEY) missing.push("PIXABAY_API_KEY");
+  return missing;
 }
 
 function makeAutoId(source, photoId, category) {
@@ -502,7 +378,8 @@ function buildApprovedItem(candidate, variants, queryEntry, settings) {
   const ext = variants.ext || "webp";
   const basePath = `${AUTO_BG_ROOT}/${cat}/${id}`;
   const tags = [...new Set([...(queryEntry.tags || []), ...(candidate.tags || []).slice(0, 6)].map((x) => String(x).toLowerCase()))];
-  const metaCheck = validateMetadata(candidate, settings);
+  const metaCheck = validateCandidate(candidate, settings);
+  const flags = metaCheck.flags || {};
   const approved = metaCheck.ok;
   return {
     id,
@@ -516,18 +393,33 @@ function buildApprovedItem(candidate, variants, queryEntry, settings) {
     srcMobile: `/${basePath}-mobile.${ext}`,
     thumbnail: `/${basePath}-thumb.${ext}`,
     alt: candidate.alt || queryEntry.query,
-    priority: Math.min(10, Math.max(5, Math.floor(qualityScoreFromMeta(candidate, variants.fullBytes) / 10))),
+    priority: cat === "nature" ? 10 : Math.min(8, Math.max(5, Math.floor(qualityScoreFromMeta(candidate, variants.fullBytes) / 10))),
     active: approved,
     approved,
     status: approved ? "active" : "disabled",
     securityStatus: approved ? "approved" : "blocked",
     isIslamicallySafe: approved,
-    containsHumans: false,
-    containsFaces: false,
-    containsAnimals: false,
-    hasWatermark: metaCheck.reasons.includes("possible-watermark"),
-    hasLogo: metaCheck.reasons.includes("possible-logo"),
-    hasTextOverlay: metaCheck.reasons.includes("possible-text-overlay"),
+    containsHumans: flags.containsHumans === true,
+    containsFaces: flags.containsFaces === true,
+    containsBodyParts: flags.containsBodyParts === true,
+    containsNudity: flags.containsNudity === true,
+    containsAnimals: flags.containsAnimals === true,
+    containsBirds: flags.containsBirds === true,
+    containsWildlife: flags.containsWildlife === true,
+    containsPets: flags.containsPets === true,
+    containsInsects: flags.containsInsects === true,
+    containsFish: flags.containsFish === true,
+    containsWatermark: flags.containsWatermark === true,
+    containsLogo: flags.containsLogo === true,
+    containsTextOverlay: flags.containsTextOverlay === true,
+    containsCross: flags.containsCross === true,
+    containsChurch: flags.containsChurch === true,
+    isLowQuality: flags.isLowQuality === true,
+    isBlurred: flags.isBlurred === true,
+    isTooBusy: flags.isTooBusy === true,
+    hasWatermark: flags.containsWatermark === true,
+    hasLogo: flags.containsLogo === true,
+    hasTextOverlay: flags.containsTextOverlay === true,
     qualityScore: qualityScoreFromMeta(candidate, variants.fullBytes),
     overlayHint: overlayFromQuery(queryEntry),
     focusPoint: { x: 50, y: 50 },
@@ -539,7 +431,7 @@ function buildApprovedItem(candidate, variants, queryEntry, settings) {
     downloadedAt: now,
     createdAt: now,
     updatedAt: now,
-    adminNote: approved ? "auto-sync approved" : `auto-sync rejected: ${metaCheck.reasons.join(", ")}`,
+    adminNote: approved ? "auto-sync nature-safe approved" : `auto-sync rejected: ${metaCheck.reasons.join(", ")}`,
     autoSynced: true,
     rejectionReasons: approved ? [] : metaCheck.reasons
   };
@@ -552,11 +444,11 @@ export function getFeedBackgroundSyncStatus(index, env) {
   const approved = countApprovedPool(items);
   const blocked = countBlockedPool(items);
   const sources = {
-    wikimedia: true,
     pexels: Boolean(env?.PEXELS_API_KEY),
     unsplash: Boolean(env?.UNSPLASH_ACCESS_KEY),
     pixabay: Boolean(env?.PIXABAY_API_KEY)
   };
+  const missingKeys = missingApiKeys(env);
   resetDailyCounter(syncState);
   return {
     ok: true,
@@ -567,12 +459,14 @@ export function getFeedBackgroundSyncStatus(index, env) {
       approved,
       blocked,
       auto: items.filter((x) => x?.autoSynced).length,
+      nature: items.filter((x) => isFeedBgSelectable(x) && x?.category === "nature").length,
       needsRefill: approved < settings.refillBelow,
       target: settings.minPoolSize
     },
     sources,
+    missingKeys,
     remainingDailyDownloads: remainingDailyDownloads(settings, syncState),
-    apiConfigured: sources.wikimedia || sources.pexels || sources.unsplash || sources.pixabay
+    apiConfigured: sources.pexels || sources.unsplash || sources.pixabay
   };
 }
 
@@ -623,7 +517,7 @@ export async function syncFeedBackgroundImages(env, helpers, options = {}) {
   if (!hasAnyPhotoSource(env, settings)) {
     syncState.lastSyncAt = now;
     syncState.lastSyncStatus = "error";
-    syncState.lastSyncError = "Keine Bildquelle verfügbar (Wikimedia deaktiviert, API-Keys fehlen)";
+    syncState.lastSyncError = `API-Keys fehlen: ${missingApiKeys(env).join(", ") || "PEXELS/UNSPLASH/PIXABAY"}`;
     syncState.nextSyncAt = new Date(Date.now() + DAILY_SYNC_MS).toISOString();
     await writeSyncIndex(env, helpersBag, { index, sha, path, settings, syncState, items, staging });
     return {
@@ -635,7 +529,6 @@ export async function syncFeedBackgroundImages(env, helpers, options = {}) {
 
   resetDailyCounter(syncState);
   const allowedSources = (settings.allowedSources || []).filter((s) => {
-    if (s === "wikimedia") return true;
     if (s === "pexels") return Boolean(env.PEXELS_API_KEY);
     if (s === "unsplash") return Boolean(env.UNSPLASH_ACCESS_KEY);
     if (s === "pixabay") return Boolean(env.PIXABAY_API_KEY);
@@ -667,10 +560,10 @@ export async function syncFeedBackgroundImages(env, helpers, options = {}) {
   let downloaded = 0;
   let rejected = 0;
   const errors = [];
-  const shuffledQueries = [...WHITELIST_QUERIES].sort(() => Math.random() - 0.5);
+  const orderedQueries = sortQueriesNatureFirst(WHITELIST_QUERIES);
 
-  for (let qi = 0; qi < shuffledQueries.length && downloaded < runLimit; qi++) {
-    const queryEntry = shuffledQueries[qi];
+  for (let qi = 0; qi < orderedQueries.length && downloaded < runLimit; qi++) {
+    const queryEntry = orderedQueries[qi];
     let candidates = [];
     try {
       candidates = await searchAllSources(env, queryEntry, 8, allowedSources);
@@ -684,7 +577,7 @@ export async function syncFeedBackgroundImages(env, helpers, options = {}) {
       const dedupeKey = `${candidate.source}:${candidate.sourcePhotoId}`;
       if (existingIds.has(dedupeKey)) continue;
 
-      const metaCheck = validateMetadata(candidate, settings);
+      const metaCheck = validateCandidate(candidate, settings);
       if (!metaCheck.ok) {
         rejected += 1;
         syncState.totalRejected = (Number(syncState.totalRejected) || 0) + 1;

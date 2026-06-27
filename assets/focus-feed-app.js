@@ -120,14 +120,24 @@
     if (bg.status !== 'active' || !bg.approved) return false;
     if (bg.securityStatus && bg.securityStatus !== 'approved') return false;
     if (bg.isIslamicallySafe === false) return false;
-    if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
-    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var src = String(bg.source || '').toLowerCase();
     if (src === 'wikimedia') return false;
-    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var allowed = bg.allowedFor || ['feed'];
     if (Array.isArray(allowed) && allowed.indexOf('feed') < 0) return false;
-    return !!(bg.src || bg.srcMobile || bg.thumbnail);
+    if (!(bg.src || bg.srcMobile || bg.thumbnail)) return false;
+    var strictFields = [
+      'containsHumans', 'containsFaces', 'containsBodyParts', 'containsNudity',
+      'containsAnimals', 'containsBirds', 'containsWildlife', 'containsPets',
+      'containsInsects', 'containsFish', 'containsWatermark', 'containsLogo',
+      'containsTextOverlay', 'containsCross', 'containsChurch',
+      'isLowQuality', 'isBlurred', 'isTooBusy'
+    ];
+    var i;
+    for (i = 0; i < strictFields.length; i++) {
+      if (bg[strictFields[i]] !== false) return false;
+    }
+    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
+    return true;
   }
 
   function bgCategoryForItem(item) {

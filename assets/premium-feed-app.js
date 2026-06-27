@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV51';
-  var FONTS_ID = 'darPremiumFeedFontsV51';
+  var STYLES_ID = 'darPremiumFeedStylesV52';
+  var FONTS_ID = 'darPremiumFeedFontsV52';
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -138,14 +138,25 @@
     if (bg.status !== 'active' || bg.active === false) return false;
     if (!bg.approved || bg.securityStatus !== 'approved') return false;
     if (bg.isIslamicallySafe === false) return false;
-    if (bg.containsHumans || bg.containsAnimals || bg.containsFaces) return false;
-    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var src = String(bg.source || '').toLowerCase();
     if (src === 'wikimedia') return false;
-    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
     var allowed = bg.allowedFor || ['feed'];
     if (typeof allowed === 'string') allowed = allowed.split(/[,;|]+/);
-    return allowed.indexOf('feed') >= 0;
+    if (allowed.indexOf('feed') < 0) return false;
+    var strictFields = [
+      'containsHumans', 'containsFaces', 'containsBodyParts', 'containsNudity',
+      'containsAnimals', 'containsBirds', 'containsWildlife', 'containsPets',
+      'containsInsects', 'containsFish', 'containsWatermark', 'containsLogo',
+      'containsTextOverlay', 'containsCross', 'containsChurch',
+      'isLowQuality', 'isBlurred', 'isTooBusy'
+    ];
+    var i;
+    for (i = 0; i < strictFields.length; i++) {
+      if (bg[strictFields[i]] !== false) return false;
+    }
+    if (bg.containsHumans === true || bg.containsAnimals === true || bg.containsFaces === true) return false;
+    if (bg.hasWatermark || bg.hasLogo || bg.hasTextOverlay) return false;
+    return true;
   }
 
   function trackRecentBg(id) {
@@ -218,8 +229,9 @@
     }
     var cat = String(item && item.category || '').toLowerCase();
     if (tags.indexOf(cat) >= 0 || topics.indexOf(cat) >= 0) score += 12;
-    if (bg.studioGenerated || bg.source === 'studio') score += 12;
-    if (bg.source === 'pexels' || bg.source === 'unsplash') score += 18;
+    if (bg.category === 'nature') score += 22;
+    if (bg.studioGenerated || bg.source === 'studio') score += 8;
+    if (bg.source === 'pexels' || bg.source === 'unsplash' || bg.source === 'pixabay') score += 16;
     if (Number(bg.qualityScore || 0) >= 95) score += 10;
     return score;
   }

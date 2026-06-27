@@ -403,26 +403,31 @@
     const pool = st.pool || {};
     const sync = st.syncState || {};
     const sources = st.sources || {};
-    const srcList = ["wikimedia", "pexels", "unsplash", "pixabay"].map((s) => {
-      if (s === "wikimedia") return `${s}: ${sources[s] !== false ? "✓" : "—"}`;
-      return `${s}: ${sources[s] ? "✓" : "—"}`;
+    const missing = st.missingKeys || [];
+    const srcList = ["pexels", "unsplash", "pixabay"].map((s) => {
+      const ok = sources[s];
+      const label = s.charAt(0).toUpperCase() + s.slice(1);
+      return `${label}: ${ok ? "✓ verbunden" : "✗ Key fehlt"}`;
     }).join(" · ");
     const err = sync.lastSyncError || st.error || "";
+    const mode = st.settings?.natureFocus ? "Natur-Fokus" : "Standard";
+    const strict = st.settings?.strictIslamicMode !== false ? "strictIslamicMode aktiv" : "locker";
     return `<div class="panel news-panel" style="margin-bottom:12px">
-      <div class="section-head"><h3>Automatische Feed-Bilder</h3><span>${pool.approved ?? 0} freigegeben</span></div>
-      <div class="notice-note wide" style="margin-bottom:10px">Läuft <strong>vollautomatisch</strong> — Cron alle 5 Min., täglicher GitHub-Sync, Hintergrund-Nachfüllen wenn Pool &lt; 40. Kein manueller Klick nötig.</div>
+      <div class="section-head"><h3>Automatische Feed-Bilder</h3><span>${pool.approved ?? 0} freigegeben · ${pool.nature ?? 0} Natur</span></div>
+      <div class="notice-note wide" style="margin-bottom:10px">Vollautomatisch — täglich, bei Pool &lt; 40, Cron. <strong>${esc(mode)}</strong>, ${esc(strict)}: keine Menschen, keine Tiere, keine Vögel, bei Unsicherheit Gradient.</div>
       <div class="news-manage-toolbar" style="flex-wrap:wrap">
         <button class="btn primary" id="bgSyncNowBtn" type="button"${bgSyncLoading ? " disabled" : ""}>Bilder jetzt synchronisieren</button>
         <button class="btn" id="bgShowActiveBtn" type="button">Aktive anzeigen</button>
         <button class="btn" id="bgShowBlockedBtn" type="button">Gesperrte anzeigen</button>
         <button class="btn" id="bgPoolCleanupBtn" type="button">Pool bereinigen</button>
-        <button class="btn" id="bgSyncRefreshBtn" type="button">Status anzeigen</button>
+        <button class="btn" id="bgSyncRefreshBtn" type="button">API-Status anzeigen</button>
       </div>
       <div class="notice-note wide" style="margin-top:10px;line-height:1.55">
-        <strong>Pool:</strong> ${esc(pool.approved ?? 0)} freigegeben · ${esc(pool.blocked ?? 0)} gesperrt · ${esc(pool.auto ?? 0)} auto · Ziel ${esc(pool.target ?? 80)}<br>
+        <strong>API:</strong> ${esc(srcList)}<br>
+        ${missing.length ? `<span style="color:#ffc9c3">Fehlende Secrets: ${esc(missing.join(", "))}</span><br>` : ""}
+        <strong>Pool:</strong> ${esc(pool.approved ?? 0)} freigegeben · ${esc(pool.blocked ?? 0)} gesperrt · ${esc(pool.nature ?? 0)} Natur · Ziel ${esc(pool.target ?? 80)}<br>
         <strong>Letzte Sync:</strong> ${esc(sync.lastSyncAt || "—")} (${esc(sync.lastSyncStatus || "idle")}) · Downloads: ${esc(sync.lastRunDownloads ?? 0)} · Abgelehnt: ${esc(sync.lastRunRejected ?? 0)}<br>
         <strong>Nächste Sync:</strong> ${esc(sync.nextSyncAt || "täglich / bei Pool &lt; 40")} · Heute noch: ${esc(st.remainingDailyDownloads ?? "—")} Downloads<br>
-        <strong>Quellen:</strong> ${esc(srcList)} · API: ${st.apiConfigured ? "konfiguriert" : "Keys fehlen"}<br>
         ${err ? `<span style="color:#ffc9c3">Fehler: ${esc(err)}</span>` : ""}
       </div>
     </div>`;

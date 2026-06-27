@@ -1,13 +1,19 @@
 #!/usr/bin/env node
 /**
- * Lädt professionelle Feed-Hintergründe von Pexels/Unsplash (Keys nur via ENV).
- * Streng: keine Menschen/Tiere, min. 2000px Breite, 4K-Ziel.
+ * Lädt professionelle Feed-Hintergründe (Natur-Fokus, keine Menschen/Tiere).
+ * Keys nur via ENV — niemals ins Repo.
  *
  *   PEXELS_API_KEY=... UNSPLASH_ACCESS_KEY=... PIXABAY_API_KEY=... node scripts/bootstrap-stock-feed-backgrounds.js
  */
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const {
+  WHITELIST_QUERIES,
+  DEFAULT_SETTINGS,
+  validateCandidate,
+  sortQueriesNatureFirst
+} = require("./lib/feed-background-safety.cjs");
 
 const ROOT = path.join(__dirname, "..");
 const ASSETS = path.join(ROOT, "assets/feed-backgrounds/auto");
@@ -18,28 +24,13 @@ const JSON_PATHS = [
 const PEXELS_KEY = process.env.PEXELS_API_KEY || "";
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY || "";
 const PIXABAY_KEY = process.env.PIXABAY_API_KEY || "";
-const TARGET = Number(process.env.STOCK_BG_TARGET || 40);
+const TARGET = Number(process.env.STOCK_BG_TARGET || 56);
+const NATURE_MIN = Number(process.env.NATURE_BG_MIN || 44);
 const NOW = new Date().toISOString();
 const FULL = { w: 2160, h: 2700 };
 const MOBILE = { w: 1440, h: 1920 };
 const THUMB = { w: 512, h: 512 };
-
-const QUERIES = [
-  { q: "mountain landscape empty no people", category: "nature", tags: ["berge", "himmel", "ruhe"], overlay: "dark" },
-  { q: "desert dunes empty landscape", category: "nature", tags: ["wüste", "sand", "aqidah"], overlay: "warm-dark" },
-  { q: "night sky stars milky way", category: "nature", tags: ["himmel", "licht", "quran"], overlay: "royal" },
-  { q: "ocean horizon calm empty", category: "nature", tags: ["wasser", "ruhe", "dua"], overlay: "royal" },
-  { q: "forest mist empty landscape", category: "nature", tags: ["nebel", "akhirah", "zuhd"], overlay: "dark" },
-  { q: "sunset clouds sky empty", category: "nature", tags: ["himmel", "wolken", "dua"], overlay: "warm-dark" },
-  { q: "mosque architecture exterior empty", category: "mosque", tags: ["moschee", "tawhid", "muster"], overlay: "dark" },
-  { q: "islamic geometric pattern texture", category: "abstract", tags: ["muster", "kalligraphie", "quran"], overlay: "dark" },
-  { q: "arabesque pattern gold", category: "abstract", tags: ["muster", "licht", "tawhid"], overlay: "warm-dark" },
-  { q: "old books parchment texture", category: "books", tags: ["bücher", "ilm", "hadith"], overlay: "warm-dark" },
-  { q: "marble gold texture abstract", category: "abstract", tags: ["gold", "ruhe", "tawhid"], overlay: "warm-dark" },
-  { q: "minimal dark gradient texture", category: "abstract", tags: ["ruhe", "stark", "aqidah"], overlay: "dark" }
-];
-
-const FORBIDDEN = /\b(people|person|portrait|face|faces|human|humans|man\b|woman\b|child|children|boy|girl|selfie|crowd|family|wedding|model|animal|animals|bird|dog|cat|pet|wildlife|horse|church|cross|statue|nude)\b/i;
+const SETTINGS = { ...DEFAULT_SETTINGS };
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
@@ -47,18 +38,6 @@ function sleep(ms) {
 
 function slug(s) {
   return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 24);
-}
-
-function haystack(c) {
-  return [c.alt, c.description, c.photographer, c.query, ...(c.tags || [])].join(" ").toLowerCase();
-}
-
-function isSafe(c) {
-  if (FORBIDDEN.test(haystack(c))) return false;
-  const w = Number(c.width) || 0;
-  const h = Number(c.height) || 0;
-  if (w > 0 && h > 0 && (w < 2000 || h < 2500)) return false;
-  return true;
 }
 
 async function searchPexels(query, perPage) {
@@ -107,7 +86,7 @@ async function searchUnsplash(query, perPage) {
 
 async function searchPixabay(query, perPage) {
   if (!PIXABAY_KEY) return [];
-  const url = `https://pixabay.com/api/?key=${encodeURIComponent(PIXABAY_KEY)}&q=${encodeURIComponent(query)}&image_type=photo&orientation=vertical&safesearch=true&per_page=${perPage}`;
+  const url = `https://pixabay.com/api/?key=${encodeURIComponent(PIXABAY_KEY)}&q=${encodeURIComponent(query)}&image_type=photo&orientation=vertical&safesearch=true&per_page=${Math.max(3, perPage)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Pixabay ${res.status}`);
   const data = await res.json();
@@ -145,10 +124,12 @@ function toWebp(inPath, outPath, w, h) {
   );
 }
 
-function makeItem(id, cat, spec, c, webBase) {
-  return {
+function makeItem(id, cat, spec, c, webBase, check) {
+  const flags = check.flags || {};
+  const safe = check.ok;
+  const item = {
     id,
-    title: `Stock · ${cat} · ${spec.q.split(" ").slice(0, 3).join(" ")}`,
+    title: `Stock · ${cat} · ${spec.q.split(" ").slice(0, 4).join(" ")}`,
     filename: `${id}.webp`,
     category: cat,
     tags: spec.tags,
@@ -157,21 +138,15 @@ function makeItem(id, cat, spec, c, webBase) {
     src: `${webBase}.webp`,
     srcMobile: `${webBase}-mobile.webp`,
     thumbnail: `${webBase}-thumb.webp`,
-    alt: (c.alt || "Professioneller Hintergrund ohne Personen").slice(0, 180),
-    priority: 10,
-    active: true,
-    approved: true,
-    status: "active",
-    securityStatus: "approved",
-    isIslamicallySafe: true,
-    containsHumans: false,
-    containsAnimals: false,
-    containsFaces: false,
-    hasWatermark: false,
-    hasLogo: false,
-    hasTextOverlay: false,
-    qualityScore: 96,
-    overlayHint: spec.overlay,
+    alt: (c.alt || "Ruhige Natur ohne Menschen und Tiere").slice(0, 180),
+    priority: cat === "nature" ? 10 : 7,
+    active: safe,
+    approved: safe,
+    status: safe ? "active" : "disabled",
+    securityStatus: safe ? "approved" : "blocked",
+    isIslamicallySafe: safe,
+    qualityScore: safe ? 96 : 0,
+    overlayHint: spec.overlayHint || spec.overlay || "dark",
     focusPoint: { x: 50, y: 45 },
     source: c.source,
     sourcePhotoId: c.sourcePhotoId,
@@ -183,11 +158,26 @@ function makeItem(id, cat, spec, c, webBase) {
     height: FULL.h,
     autoSynced: true,
     studioGenerated: false,
-    adminNote: `stock-curated ${c.source} — no people filter`,
+    adminNote: safe ? `nature-safe ${c.source}` : `rejected: ${(check.reasons || []).join(", ")}`,
     downloadedAt: NOW,
     createdAt: NOW,
-    updatedAt: NOW
+    updatedAt: NOW,
+    rejectionReasons: safe ? [] : check.reasons || []
   };
+  const keys = [
+    "containsHumans", "containsFaces", "containsBodyParts", "containsNudity",
+    "containsAnimals", "containsBirds", "containsWildlife", "containsPets",
+    "containsInsects", "containsFish", "containsWatermark", "containsLogo",
+    "containsTextOverlay", "containsCross", "containsChurch",
+    "isLowQuality", "isBlurred", "isTooBusy"
+  ];
+  keys.forEach((k) => {
+    item[k] = safe ? false : (flags[k] === true);
+  });
+  item.hasWatermark = item.containsWatermark;
+  item.hasLogo = item.containsLogo;
+  item.hasTextOverlay = item.containsTextOverlay;
+  return item;
 }
 
 async function main() {
@@ -205,9 +195,20 @@ async function main() {
   const stock = [];
   const used = new Set();
   let n = 0;
+  let natureCount = 0;
+  const allQueries = sortQueriesNatureFirst(
+    WHITELIST_QUERIES.map((q) => ({ ...q, q: q.query, overlay: q.overlayHint }))
+  );
+  const natureQueries = allQueries.filter((q) => q.category === "nature");
+  const secondaryQueries = allQueries.filter((q) => q.category !== "nature");
+  const phases = [
+    { label: "nature", queries: natureQueries, until: () => natureCount < NATURE_MIN && stock.length < TARGET },
+    { label: "secondary", queries: secondaryQueries, until: () => stock.length < TARGET }
+  ];
 
-  for (const spec of QUERIES) {
-    if (stock.length >= TARGET) break;
+  for (const phase of phases) {
+    for (const spec of phase.queries) {
+      if (!phase.until()) break;
     let batch = [];
     try {
       const [px, us, pb] = await Promise.all([
@@ -215,7 +216,7 @@ async function main() {
         searchUnsplash(spec.q, 6).catch(() => []),
         searchPixabay(spec.q, 6).catch(() => [])
       ]);
-      batch = [...px, ...us, ...pb].filter(isSafe);
+      batch = [...px, ...us, ...pb];
     } catch (e) {
       console.warn("search fail", spec.q, e.message);
       await sleep(800);
@@ -223,9 +224,11 @@ async function main() {
     }
     for (const c of batch) {
       if (stock.length >= TARGET) break;
+      const check = validateCandidate(c, SETTINGS);
+      if (!check.ok || !c.downloadUrl) continue;
       const dedupe = `${c.source}:${c.sourcePhotoId}`;
-      if (used.has(dedupe) || !c.downloadUrl) continue;
-      const id = `bg-stock-${spec.category}-${slug(c.source)}-${String(n + 1).padStart(2, "0")}`;
+      if (used.has(dedupe)) continue;
+      const id = `bg-nature-${spec.category}-${slug(c.source)}-${String(n + 1).padStart(2, "0")}`;
       const base = path.join(ASSETS, spec.category, id);
       const webBase = base.replace(ROOT, "").replace(/\\/g, "/");
       let tmp = "";
@@ -234,10 +237,11 @@ async function main() {
         toWebp(tmp, `${base}.webp`, FULL.w, FULL.h);
         toWebp(tmp, `${base}-mobile.webp`, MOBILE.w, MOBILE.h);
         toWebp(tmp, `${base}-thumb.webp`, THUMB.w, THUMB.h);
-        stock.push(makeItem(id, spec.category, spec, c, webBase));
+        stock.push(makeItem(id, spec.category, spec, c, webBase, check));
         used.add(dedupe);
         n += 1;
-        console.log(`OK ${stock.length}/${TARGET}`, id, c.source, c.width + "x" + c.height);
+        if (spec.category === "nature") natureCount += 1;
+        console.log(`OK ${stock.length}/${TARGET} (nature ${natureCount})`, id, c.source, spec.category);
       } catch (e) {
         console.warn("skip", c.sourcePhotoId, e.message);
       } finally {
@@ -246,10 +250,11 @@ async function main() {
       await sleep(400);
     }
     await sleep(600);
+    }
   }
 
-  if (stock.length < 8) {
-    console.error("Zu wenige Stock-Bilder:", stock.length);
+  if (stock.length < 12) {
+    console.error("Zu wenige sichere Natur-Bilder:", stock.length);
     process.exit(1);
   }
 
@@ -260,13 +265,15 @@ async function main() {
     while (merged.length < 80 && studio.length) {
       merged.push(studio[merged.length % studio.length]);
     }
+    data.version = 3;
+    data.settings = { ...DEFAULT_SETTINGS, ...(data.settings || {}), ...SETTINGS };
     data.items = merged.slice(0, 80);
     data.updatedAt = NOW;
     data.cacheVersion = (Number(data.cacheVersion) || 0) + 1;
     data.syncState = {
       ...(data.syncState || {}),
       lastSyncAt: NOW,
-      lastSyncStatus: `stock-local-${stock.length}-pexels-unsplash-pixabay`,
+      lastSyncStatus: `nature-safe-${stock.length}-pexels-unsplash-pixabay`,
       lastRunDownloads: stock.length
     };
     fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2) + "\n");

@@ -1,6 +1,8 @@
 /**
  * Feed-Hintergrundbilder — kuratiert, Admin + öffentliche Auswahl
  */
+import { DEFAULT_SETTINGS, isStrictFeedBgSafe } from "./feed-background-safety.js";
+
 const DEFAULT_BG_JSON = "content/feed-backgrounds/feed-backgrounds.json";
 const DEFAULT_STAGING_BG_JSON = "content/staging/feed-backgrounds/feed-backgrounds.json";
 const ASSETS_BG_ROOT = "assets/feed-backgrounds";
@@ -26,21 +28,15 @@ function trimPath(path) {
   return String(path || "").replace(/^\/+/, "").replace(/\/+$/, "");
 }
 
-const DEFAULT_BG_SETTINGS = {
-  autoDownloadEnabled: true,
-  strictSafetyMode: true,
-  blockHumans: true,
-  blockFaces: true,
-  blockAnimals: true,
-  blockWatermarks: true,
-  blockLogos: true,
-  blockTextOverlays: true,
-  fallbackToGradient: true,
-  minPoolSize: 80,
-  refillBelow: 40,
-  dailyDownloadLimit: 20,
-  allowedSources: ["wikimedia", "pexels", "unsplash", "pixabay"]
-};
+const DEFAULT_BG_SETTINGS = { ...DEFAULT_SETTINGS };
+
+function explicitSafety(raw, key, legacyKey) {
+  if (raw?.[key] === false) return false;
+  if (raw?.[key] === true) return true;
+  if (legacyKey && raw?.[legacyKey] === false) return false;
+  if (legacyKey && raw?.[legacyKey] === true) return true;
+  return null;
+}
 
 function emptyBgIndex() {
   return {
@@ -98,13 +94,17 @@ function normalizeBgItem(raw, nowIso) {
     : "unchecked";
   const approved = raw?.approved === true && securityStatus === "approved";
   const active = status === "active";
-  const containsHumans = raw?.containsHumans === true;
-  const containsAnimals = raw?.containsAnimals === true;
-  const containsFaces = raw?.containsFaces === true;
-  const hasWatermark = raw?.hasWatermark === true;
-  const hasLogo = raw?.hasLogo === true;
-  const hasTextOverlay = raw?.hasTextOverlay === true;
-  const baseSafe = !containsHumans && !containsAnimals && !containsFaces && !hasWatermark && !hasLogo && !hasTextOverlay;
+  const containsHumans = explicitSafety(raw, "containsHumans");
+  const containsAnimals = explicitSafety(raw, "containsAnimals");
+  const containsFaces = explicitSafety(raw, "containsFaces");
+  const containsWatermark = explicitSafety(raw, "containsWatermark", "hasWatermark");
+  const containsLogo = explicitSafety(raw, "containsLogo", "hasLogo");
+  const containsTextOverlay = explicitSafety(raw, "containsTextOverlay", "hasTextOverlay");
+  const hasWatermark = containsWatermark === true;
+  const hasLogo = containsLogo === true;
+  const hasTextOverlay = containsTextOverlay === true;
+  const baseSafe = containsHumans === false && containsAnimals === false && containsFaces === false
+    && containsWatermark === false && containsLogo === false && containsTextOverlay === false;
   const isIslamicallySafe = raw?.isIslamicallySafe === false ? false : approved && baseSafe;
   const fp = raw?.focusPoint && typeof raw.focusPoint === "object" ? raw.focusPoint : {};
   return {
@@ -127,6 +127,21 @@ function normalizeBgItem(raw, nowIso) {
     containsHumans,
     containsAnimals,
     containsFaces,
+    containsBodyParts: explicitSafety(raw, "containsBodyParts"),
+    containsNudity: explicitSafety(raw, "containsNudity"),
+    containsBirds: explicitSafety(raw, "containsBirds"),
+    containsWildlife: explicitSafety(raw, "containsWildlife"),
+    containsPets: explicitSafety(raw, "containsPets"),
+    containsInsects: explicitSafety(raw, "containsInsects"),
+    containsFish: explicitSafety(raw, "containsFish"),
+    containsWatermark,
+    containsLogo,
+    containsTextOverlay,
+    containsCross: explicitSafety(raw, "containsCross"),
+    containsChurch: explicitSafety(raw, "containsChurch"),
+    isLowQuality: explicitSafety(raw, "isLowQuality"),
+    isBlurred: explicitSafety(raw, "isBlurred"),
+    isTooBusy: explicitSafety(raw, "isTooBusy"),
     hasWatermark,
     hasLogo,
     hasTextOverlay,
@@ -152,15 +167,7 @@ function normalizeBgItem(raw, nowIso) {
 }
 
 export function isFeedBgSelectable(item) {
-  if (!item) return false;
-  if (item.status !== "active" || !item.active) return false;
-  if (!item.approved || item.securityStatus !== "approved") return false;
-  if (item.isIslamicallySafe === false) return false;
-  if (item.containsHumans || item.containsAnimals || item.containsFaces) return false;
-  if (item.hasWatermark || item.hasLogo || item.hasTextOverlay) return false;
-  if (!item.src) return false;
-  const allowed = normalizeAllowedFor(item.allowedFor);
-  return allowed.includes("feed");
+  return isStrictFeedBgSafe(item, DEFAULT_BG_SETTINGS);
 }
 
 function sanitizePublicBgItem(item) {
