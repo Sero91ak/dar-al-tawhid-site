@@ -3,7 +3,7 @@
  * Lädt professionelle Feed-Hintergründe von Pexels/Unsplash (Keys nur via ENV).
  * Streng: keine Menschen/Tiere, min. 2000px Breite, 4K-Ziel.
  *
- *   PEXELS_API_KEY=... UNSPLASH_ACCESS_KEY=... node scripts/bootstrap-stock-feed-backgrounds.js
+ *   PEXELS_API_KEY=... UNSPLASH_ACCESS_KEY=... PIXABAY_API_KEY=... node scripts/bootstrap-stock-feed-backgrounds.js
  */
 const fs = require("fs");
 const path = require("path");
@@ -17,6 +17,7 @@ const JSON_PATHS = [
 ];
 const PEXELS_KEY = process.env.PEXELS_API_KEY || "";
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY || "";
+const PIXABAY_KEY = process.env.PIXABAY_API_KEY || "";
 const TARGET = Number(process.env.STOCK_BG_TARGET || 40);
 const NOW = new Date().toISOString();
 const FULL = { w: 2160, h: 2700 };
@@ -104,6 +105,28 @@ async function searchUnsplash(query, perPage) {
   }));
 }
 
+async function searchPixabay(query, perPage) {
+  if (!PIXABAY_KEY) return [];
+  const url = `https://pixabay.com/api/?key=${encodeURIComponent(PIXABAY_KEY)}&q=${encodeURIComponent(query)}&image_type=photo&orientation=vertical&safesearch=true&per_page=${perPage}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Pixabay ${res.status}`);
+  const data = await res.json();
+  return (data.hits || []).map((p) => ({
+    source: "pixabay",
+    sourcePhotoId: String(p.id),
+    sourceUrl: p.pageURL || "",
+    alt: p.tags || query,
+    description: p.tags || "",
+    photographer: p.user || "",
+    tags: String(p.tags || "").split(",").map((x) => x.trim()).filter(Boolean),
+    width: p.imageWidth,
+    height: p.imageHeight,
+    license: "Pixabay License",
+    query,
+    downloadUrl: p.largeImageURL || p.webformatURL
+  }));
+}
+
 async function downloadToTemp(url) {
   const res = await fetch(url, { redirect: "follow" });
   if (!res.ok) throw new Error(`DL ${res.status}`);
@@ -168,8 +191,8 @@ function makeItem(id, cat, spec, c, webBase) {
 }
 
 async function main() {
-  if (!PEXELS_KEY && !UNSPLASH_KEY) {
-    console.error("PEXELS_API_KEY oder UNSPLASH_ACCESS_KEY in ENV setzen");
+  if (!PEXELS_KEY && !UNSPLASH_KEY && !PIXABAY_KEY) {
+    console.error("PEXELS_API_KEY, UNSPLASH_ACCESS_KEY oder PIXABAY_API_KEY in ENV setzen");
     process.exit(1);
   }
   try {
@@ -187,11 +210,12 @@ async function main() {
     if (stock.length >= TARGET) break;
     let batch = [];
     try {
-      const [px, us] = await Promise.all([
+      const [px, us, pb] = await Promise.all([
         searchPexels(spec.q, 6).catch(() => []),
-        searchUnsplash(spec.q, 6).catch(() => [])
+        searchUnsplash(spec.q, 6).catch(() => []),
+        searchPixabay(spec.q, 6).catch(() => [])
       ]);
-      batch = [...px, ...us].filter(isSafe);
+      batch = [...px, ...us, ...pb].filter(isSafe);
     } catch (e) {
       console.warn("search fail", spec.q, e.message);
       await sleep(800);
@@ -242,7 +266,7 @@ async function main() {
     data.syncState = {
       ...(data.syncState || {}),
       lastSyncAt: NOW,
-      lastSyncStatus: `stock-local-${stock.length}-pexels-unsplash`,
+      lastSyncStatus: `stock-local-${stock.length}-pexels-unsplash-pixabay`,
       lastRunDownloads: stock.length
     };
     fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2) + "\n");
