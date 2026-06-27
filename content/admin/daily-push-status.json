@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-27T11:20:32.546Z",
+  "updatedAt": "2026-06-27T11:30:32.544Z",
   "usersChecked": 17,
   "duaCandidates": 0,
-  "recCandidates": 17,
-  "sent": 17,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 17,
+  "duplicates": 34,
   "errors": 0,
   "dailyContentDate": "2026-06-27",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Morgen & Abend"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 17,
-      "contentId": "tawhid-082-la-ilaha-illa-allah-um-allahs-angesicht",
-      "recipients": "d2c0fecd-4c64-4c14-8474-7036f35ac40e",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
