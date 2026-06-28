@@ -95,9 +95,14 @@ const pdfHtml = Z.buildPdfHtml(result, config, {
   input: { nisabSinceDate: "2024-01-01", todayDate: "2026-06-18" }
 });
 assert(pdfHtml.includes("Zakāt-Rechner Bericht"), "pdf title");
-assert(pdfHtml.includes("Marktdaten"), "pdf market section");
-assert(pdfHtml.includes("Rechenweg"), "pdf calculation section");
-assert(pdfHtml.includes("Seite:</b> 1 / 1"), "pdf single page");
+assert(pdfHtml.includes("Übersicht"), "pdf overview section");
+assert(pdfHtml.includes("Niṣāb &amp; Marktdaten"), "pdf nisab section");
+assert(pdfHtml.includes("Berechnung"), "pdf calculation section");
+assert(pdfHtml.includes("Pflichtbetrag"), "pdf obligation section");
+assert(pdfHtml.includes("Notizen"), "pdf notes section");
+assert(pdfHtml.includes("dar-al-tawhid.de"), "pdf footer url");
+assert(pdfHtml.includes("Gesamtvermögen (Brutto)"), "pdf gross wealth field");
+assert(pdfHtml.includes("Zakat-Pflichtbetrag"), "pdf final amount field");
 assert((pdfHtml.match(/class="zakat-pdf-page"/g) || []).length === 1, "pdf one page section");
 assert(!pdfHtml.includes("Seite:</b> 2 /"), "pdf no second page");
 assert(Z.buildPdfFilename({ reportId: "ZK-2026-000001" }) === "zakat-bericht-ZK-2026-000001.pdf", "pdf filename");
