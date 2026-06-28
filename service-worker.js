@@ -43,7 +43,7 @@ function refreshBypassActive() {
 }
 
 function isFeedAssetRequest(url) {
-  return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js';
+  return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js' || url.pathname === '/assets/html2canvas.min.js';
 }
 
 function isPostDataRequest(url) {

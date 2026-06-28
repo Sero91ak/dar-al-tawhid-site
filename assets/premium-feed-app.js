@@ -5,11 +5,13 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV61';
-  var FONTS_ID = 'darPremiumFeedFontsV61';
+  var STYLES_ID = 'darPremiumFeedStylesV62';
+  var FONTS_ID = 'darPremiumFeedFontsV62';
   var FEED_SHARE_SITE_URL = 'https://dar-al-tawhid.de';
   var FEED_SHARE_CACHE = Object.create(null);
   var FEED_SHARE_PREFETCHING = Object.create(null);
+  var FEED_SHARE_IN_FLIGHT = Object.create(null);
+  var sharePrefetchObs = null;
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -54,7 +56,7 @@
     royal: 'linear-gradient(180deg,rgba(7,17,29,.08) 0%,rgba(7,17,29,.42) 100%)',
     bordeaux: 'linear-gradient(180deg,rgba(74,31,36,.08) 0%,rgba(20,11,12,.42) 100%)'
   };
-  var H2C_URL = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+  var H2C_URL = '/assets/html2canvas.min.js';
   var GRADIENT_BGS = {
     dark: [
       'radial-gradient(circle at 18% 14%,rgba(239,215,142,.14),transparent 38%),linear-gradient(165deg,#1a150f 0%,#0a0908 52%,#080806 100%)',
@@ -2097,7 +2099,7 @@
       '.sf-act:active{transform:scale(.94)}' +
       '.sf-act.is-liked{color:#ff6b81;background:rgba(255,107,129,.12);border-color:rgba(255,107,129,.28)}' +
       '.sf-act.is-saved{color:var(--theme-accent,var(--gold2));background:rgba(239,215,142,.1);border-color:var(--theme-border,var(--line))}' +
-      '.sf-act.is-busy,.feed-share-button.is-loading{opacity:.55;pointer-events:none}' +
+      '.sf-act.is-busy,.feed-share-button.is-loading{opacity:.72}' +
       '.app-toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);max-width:min(92vw,420px);padding:12px 16px;border-radius:999px;background:rgba(12,18,24,.92);color:#fff4dc;font-weight:700;font-size:14px;line-height:1.35;opacity:0;z-index:99999;pointer-events:none;transition:opacity .25s ease,transform .25s ease;box-shadow:0 18px 45px rgba(0,0,0,.35)}' +
       '.app-toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}' +
       '.sf-like-count{font-size:12px;font-weight:800;color:var(--theme-muted,var(--muted));min-width:1.2em}' +
@@ -2449,16 +2451,33 @@
     });
   }
 
-  function waitForImages(rootElement) {
-    var images = Array.prototype.slice.call((rootElement || document).querySelectorAll('img'));
-    return Promise.all(images.map(function (img) {
-      if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-      return new Promise(function (resolve, reject) {
-        img.onload = resolve;
-        img.onerror = reject;
-        setTimeout(function () { reject(new Error('img-timeout')); }, 8000);
-      }).catch(function () {});
-    }));
+  function warmShareEngine() {
+    loadHtml2Canvas().catch(function () {});
+  }
+
+  function getShareCaptureTarget(card) {
+    if (!card) return null;
+    return card.querySelector('.sf-post__scene') || card.querySelector('.sf-post__media') || card;
+  }
+
+  function waitForImagesFast(rootElement, maxMs) {
+    maxMs = maxMs || 1800;
+    var images = Array.prototype.slice.call((rootElement || document).querySelectorAll('img')).filter(function (img) {
+      if (img.classList.contains('sf-post__bg--img')) return false;
+      var r = img.getBoundingClientRect();
+      return r.width > 2 && r.height > 2;
+    });
+    if (!images.length) return Promise.resolve();
+    return Promise.race([
+      Promise.all(images.map(function (img) {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise(function (resolve) {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })),
+      new Promise(function (resolve) { setTimeout(resolve, maxMs); })
+    ]);
   }
 
   function showToast(message) {
@@ -2478,9 +2497,9 @@
   function setFeedShareLoading(feedItemId, isLoading) {
     var button = document.querySelector('[data-feed-share-id="' + feedItemId + '"]');
     if (!button) return;
-    button.disabled = isLoading;
     button.classList.toggle('is-loading', isLoading);
     button.classList.toggle('is-busy', isLoading);
+    button.setAttribute('aria-busy', isLoading ? 'true' : 'false');
     var label = button.querySelector('.sf-act-label');
     if (label) label.textContent = isLoading ? 'Bild wird vorbereitet…' : 'Teilen';
     else button.textContent = isLoading ? 'Bild wird vorbereitet…' : 'Teilen';
@@ -2493,70 +2512,63 @@
     });
   }
 
-  function shareExportScale() {
-    return 3;
+  function shareExportScale(width) {
+    var w = Math.max(1, Number(width) || 360);
+    return Math.min(2.5, Math.max(2, Math.ceil(1080 / w)));
+  }
+
+  function canvasToShareFile(canvas, feedItemId) {
+    return canvasToBlob(canvas).then(function (blob) {
+      if (!blob) throw new Error('Kein Bild-Blob erzeugt.');
+      return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
+    });
   }
 
   async function renderFeedCardToFile(cardElement, feedItemId) {
-    await waitForImages(cardElement);
-    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    var target = getShareCaptureTarget(cardElement);
+    if (!target) throw new Error('Kein Feed-Bildbereich');
 
-    prepareImagesCors(cardElement);
+    var h2cPromise = loadHtml2Canvas();
     enforceReadableExportMode(cardElement);
 
-    var rect = cardElement.getBoundingClientRect();
+    await Promise.all([
+      waitForImagesFast(target, 1500),
+      document.fonts && document.fonts.ready
+        ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 600); })])
+        : Promise.resolve()
+    ]);
+
+    var rect = target.getBoundingClientRect();
     var w = Math.max(1, Math.round(rect.width));
-    var scale = shareExportScale();
-    var minExportW = 1080;
-    if (w * scale < minExportW) scale = Math.ceil(minExportW / w);
+    var h = Math.max(1, Math.round(rect.height));
+    var scale = shareExportScale(w);
+    var h2c = await h2cPromise;
 
-    var host = document.createElement('div');
-    host.className = 'sf-share-capture-host';
-    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
-
-    var clone = cardElement.cloneNode(true);
-    clone.classList.add('feed-export-mode');
-    clone.style.width = w + 'px';
-    clone.style.height = 'auto';
-    clone.style.minHeight = '0';
-    clone.style.maxHeight = 'none';
-    clone.style.maxWidth = '100%';
-    clone.style.margin = '0';
-    clone.style.cursor = 'default';
-    clone.removeAttribute('tabindex');
-    clone.removeAttribute('role');
-    stripNoShareExport(clone);
-    prepareImagesCors(clone);
-    enforceReadableExportMode(clone);
-    host.appendChild(clone);
-    document.body.appendChild(host);
-
-    var h = Math.max(1, Math.round(clone.getBoundingClientRect().height || clone.scrollHeight || rect.height));
-    host.style.height = h + 'px';
-    clone.style.height = 'auto';
+    enforceReadableExportMode(target);
+    applyCaptureSafeStyles(target);
 
     try {
-      await new Promise(function (r) { setTimeout(r, 200); });
-      var h2c = await loadHtml2Canvas();
-      var canvas = await h2c(clone, {
+      var canvas = await h2c(target, {
         scale: scale,
         width: w,
         height: h,
         useCORS: true,
         allowTaint: false,
-        backgroundColor: null,
+        backgroundColor: '#1a1814',
         logging: false,
-        imageTimeout: 25000,
+        imageTimeout: 6000,
+        scrollX: 0,
+        scrollY: 0,
         onclone: function (doc, node) {
-          stripNoShareExport(node);
           enforceReadableExportMode(node);
+          applyCaptureSafeStyles(node);
         }
       });
-      var blob = await canvasToBlob(canvas);
-      if (!blob) throw new Error('Kein Bild-Blob erzeugt.');
-      return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
-    } finally {
-      try { host.remove(); } catch (e) {}
+      return canvasToShareFile(canvas, feedItemId);
+    } catch (directErr) {
+      return captureCloneExact(target).then(function (canvas) {
+        return canvasToShareFile(canvas, feedItemId);
+      });
     }
   }
 
@@ -2574,10 +2586,112 @@
   function prefetchVisibleFeedShares(root) {
     if (!root) return;
     root.querySelectorAll('[data-feed-card-id]').forEach(function (card, idx) {
-      if (idx > 5) return;
+      if (idx > 2) return;
       var id = card.getAttribute('data-feed-card-id');
-      if (id) global.setTimeout(function () { prefetchFeedShareBlob(id); }, 400 + idx * 120);
+      if (id) prefetchFeedShareBlob(id);
     });
+  }
+
+  function setupSharePrefetchObserver(root) {
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+    if (sharePrefetchObs) sharePrefetchObs.disconnect();
+    sharePrefetchObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.getAttribute('data-feed-card-id');
+        if (id) prefetchFeedShareBlob(id);
+      });
+    }, { rootMargin: '80px 0px', threshold: 0.2 });
+    root.querySelectorAll('[data-feed-card-id]').forEach(function (card) {
+      sharePrefetchObs.observe(card);
+    });
+  }
+
+  async function deliverShareFile(file, feedItemId) {
+    var canShareFiles =
+      global.navigator &&
+      global.navigator.share &&
+      global.navigator.canShare &&
+      global.navigator.canShare({ files: [file] });
+    if (canShareFiles) {
+      await global.navigator.share({
+        files: [file],
+        title: 'DAR AL TAWḤID'
+      });
+      return;
+    }
+    await downloadFeedImage(file, feedItemId);
+    showToast('Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde gespeichert.');
+  }
+
+  async function shareFeedCardAsImage(feedItemId) {
+    if (FEED_SHARE_IN_FLIGHT[feedItemId]) return;
+    FEED_SHARE_IN_FLIGHT[feedItemId] = true;
+    var resetTimer = global.setTimeout(function () {
+      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
+      setFeedShareLoading(feedItemId, false);
+    }, 45000);
+
+    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
+    if (!card) {
+      showToast('Feed-Bild konnte nicht gefunden werden.');
+      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
+      global.clearTimeout(resetTimer);
+      setFeedShareLoading(feedItemId, false);
+      return;
+    }
+
+    try {
+      var file = FEED_SHARE_CACHE[feedItemId];
+      if (!file) {
+        file = await renderFeedCardToFile(card, feedItemId);
+        FEED_SHARE_CACHE[feedItemId] = file;
+      }
+      await deliverShareFile(file, feedItemId);
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      console.error('Feed-Bild teilen fehlgeschlagen:', error);
+      delete FEED_SHARE_CACHE[feedItemId];
+      showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
+    } finally {
+      global.clearTimeout(resetTimer);
+      setFeedShareLoading(feedItemId, false);
+      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
+    }
+  }
+
+  function handleFeedShareClick(event) {
+    var button = event.target.closest('[data-feed-share-id]');
+    if (!button || button.classList.contains('is-loading')) return false;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+
+    var feedItemId = button.getAttribute('data-feed-share-id');
+    if (!feedItemId) return false;
+
+    setFeedShareLoading(feedItemId, true);
+
+    if (FEED_SHARE_CACHE[feedItemId]) {
+      deliverShareFile(FEED_SHARE_CACHE[feedItemId], feedItemId)
+        .catch(function (err) {
+          if (err && err.name === 'AbortError') return;
+          console.error('Feed share cached failed:', err);
+          showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
+        })
+        .finally(function () { setFeedShareLoading(feedItemId, false); });
+      return true;
+    }
+
+    shareFeedCardAsImage(feedItemId).catch(function (err) {
+      console.error('Feed share handler failed:', err);
+    });
+    return true;
+  }
+
+  function bindFeedShareDelegate() {
+    if (global.__darFeedShareBound) return;
+    global.__darFeedShareBound = true;
   }
 
   async function downloadFeedImage(file, feedItemId) {
@@ -2591,71 +2705,6 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
   }
 
-  var FEED_SHARE_IN_FLIGHT = Object.create(null);
-
-  async function shareFeedCardAsImage(feedItemId) {
-    console.log('Feed share clicked:', feedItemId);
-    if (FEED_SHARE_IN_FLIGHT[feedItemId]) return;
-    FEED_SHARE_IN_FLIGHT[feedItemId] = true;
-    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
-    if (!card) {
-      showToast('Feed-Bild konnte nicht gefunden werden.');
-      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
-      return;
-    }
-    try {
-      setFeedShareLoading(feedItemId, true);
-      var file = FEED_SHARE_CACHE[feedItemId];
-      if (!file) {
-        file = await renderFeedCardToFile(card, feedItemId);
-        FEED_SHARE_CACHE[feedItemId] = file;
-      }
-      var canShareFiles =
-        global.navigator &&
-        global.navigator.share &&
-        global.navigator.canShare &&
-        global.navigator.canShare({ files: [file] });
-      if (canShareFiles) {
-        await global.navigator.share({
-          files: [file],
-          title: 'DAR AL TAWḤID'
-        });
-        return;
-      }
-      await downloadFeedImage(file, feedItemId);
-      showToast('Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde gespeichert.');
-    } catch (error) {
-      if (error && error.name === 'AbortError') return;
-      console.error('Feed-Bild teilen fehlgeschlagen:', error);
-      delete FEED_SHARE_CACHE[feedItemId];
-      showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
-    } finally {
-      setFeedShareLoading(feedItemId, false);
-      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
-    }
-  }
-
-  function handleFeedShareClick(event) {
-    var button = event.target.closest('[data-feed-share-id]');
-    if (!button || button.disabled) return false;
-    event.preventDefault();
-    event.stopPropagation();
-    var feedItemId = button.getAttribute('data-feed-share-id');
-    if (!feedItemId) return false;
-    shareFeedCardAsImage(feedItemId).catch(function (err) {
-      console.error('Feed share handler failed:', err);
-    });
-    return true;
-  }
-
-  function bindFeedShareDelegate() {
-    if (global.__darFeedShareBound) return;
-    global.__darFeedShareBound = true;
-    document.addEventListener('click', function (event) {
-      handleFeedShareClick(event);
-    }, false);
-  }
-
   function prepareImagesCors(root) {
     Array.prototype.forEach.call((root || document).querySelectorAll('img'), function (img) {
       try {
@@ -2663,8 +2712,7 @@
         if (!src) return;
         if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
         if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) {
-          img.crossOrigin = 'anonymous';
-          img.src = src;
+          if (img.crossOrigin !== 'anonymous') img.crossOrigin = 'anonymous';
         }
       } catch (e) {}
     });
@@ -2713,7 +2761,7 @@
     var rect = el.getBoundingClientRect();
     var w = Math.max(1, Math.round(rect.width));
     var h = Math.max(1, Math.round(rect.height));
-    var scale = shareExportScale();
+    var scale = shareExportScale(w);
     var host = document.createElement('div');
     host.className = 'sf-share-capture-host';
     host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
@@ -2734,8 +2782,8 @@
 
     var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
     return fontsReady
-      .then(function () { return waitForImages(clone); })
-      .then(function () { return new Promise(function (r) { setTimeout(r, 200); }); })
+      .then(function () { return waitForImagesFast(clone, 1200); })
+      .then(function () { return new Promise(function (r) { setTimeout(r, 60); }); })
       .then(function () { return loadHtml2Canvas(); })
       .then(function (h2c) {
         return h2c(clone, {
@@ -2746,7 +2794,7 @@
           allowTaint: false,
           backgroundColor: null,
           logging: false,
-          imageTimeout: 25000,
+          imageTimeout: 6000,
           onclone: function (doc, node) {
             applyCaptureSafeStyles(node);
           }
@@ -2766,12 +2814,12 @@
     prepareImagesCors(el);
 
     var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-    var scale = shareExportScale();
+    var scale = shareExportScale(Math.max(1, Math.round(el.getBoundingClientRect().width)));
 
-    return new Promise(function (r) { setTimeout(r, 120); })
+    return new Promise(function (r) { setTimeout(r, 40); })
       .then(function () { return fontsReady; })
-      .then(function () { return waitForImages(el); })
-      .then(function () { return new Promise(function (r) { setTimeout(r, 180); }); })
+      .then(function () { return waitForImagesFast(el, 1200); })
+      .then(function () { return new Promise(function (r) { setTimeout(r, 60); }); })
       .then(function () { return loadHtml2Canvas(); })
       .then(function (h2c) {
         var rect = el.getBoundingClientRect();
@@ -2859,7 +2907,7 @@
       btn.dataset.sfShareBound = '1';
       btn.addEventListener('click', function (ev) {
         handleFeedShareClick(ev);
-      });
+      }, true);
     });
     root.querySelectorAll('.sf-filter').forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -2958,7 +3006,8 @@
     global.setTimeout(function () {
       enforceReadablePanels(mount);
       prefetchVisibleFeedShares(mount);
-    }, 480);
+      setupSharePrefetchObserver(mount);
+    }, 180);
   }
 
   var observer = null;
@@ -2981,6 +3030,7 @@
     if (!mount) return;
     injectStyles();
     bindFeedShareDelegate();
+    warmShareEngine();
     document.body.classList.add('is-premium-feed-view');
     if (!global.__darFeedThemeBound) {
       global.__darFeedThemeBound = true;
@@ -3092,6 +3142,7 @@
 
   if (global && global.addEventListener) {
     bindFeedShareDelegate();
+    warmShareEngine();
     global.addEventListener('hashchange', autoMountFeed);
     global.addEventListener('load', autoMountFeed);
   }
