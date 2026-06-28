@@ -5,8 +5,10 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV62';
-  var FONTS_ID = 'darPremiumFeedFontsV62';
+  var STYLES_ID = 'darPremiumFeedStylesV63';
+  var FONTS_ID = 'darPremiumFeedFontsV63';
+  var FEED_EXPORT_MIN_W = 1080;
+  var FEED_EXPORT_RATIO = 1.08;
   var FEED_SHARE_SITE_URL = 'https://dar-al-tawhid.de';
   var FEED_SHARE_CACHE = Object.create(null);
   var FEED_SHARE_PREFETCHING = Object.create(null);
@@ -2514,7 +2516,201 @@
 
   function shareExportScale(width) {
     var w = Math.max(1, Number(width) || 360);
-    return Math.min(2.5, Math.max(2, Math.ceil(1080 / w)));
+    return Math.min(2.5, Math.max(2, Math.ceil(FEED_EXPORT_MIN_W / w)));
+  }
+
+  function absoluteAssetUrl(src) {
+    try {
+      if (!src) return '';
+      if (src.indexOf('//') === 0) return global.location.protocol + src;
+      if (src.indexOf('/') === 0) return new URL(src, global.location.origin).href;
+      return src;
+    } catch (e) {
+      return src || '';
+    }
+  }
+
+  function isCrossOriginAssetUrl(src) {
+    try {
+      return new URL(absoluteAssetUrl(src)).origin !== global.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function loadShareImage(src) {
+    src = absoluteAssetUrl(src);
+    return new Promise(function (resolve, reject) {
+      if (!src) { reject(new Error('img-src')); return; }
+      var img = new Image();
+      if (isCrossOriginAssetUrl(src)) img.crossOrigin = 'anonymous';
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { reject(new Error('img-load')); };
+      img.src = src;
+    });
+  }
+
+  function drawImageCover(ctx, img, dx, dy, dw, dh) {
+    var iw = img.naturalWidth || img.width;
+    var ih = img.naturalHeight || img.height;
+    if (!iw || !ih) return;
+    var ir = iw / ih;
+    var dr = dw / dh;
+    var sx = 0;
+    var sy = 0;
+    var sw = iw;
+    var sh = ih;
+    if (ir > dr) {
+      sw = ih * dr;
+      sx = (iw - sw) / 2;
+    } else {
+      sh = iw / dr;
+      sy = (ih - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+  }
+
+  function feedExportDimensions(scene) {
+    var rect = scene.getBoundingClientRect();
+    var srcW = Math.max(1, Math.round(rect.width));
+    var srcH = Math.max(1, Math.round(rect.height));
+    var scale = shareExportScale(srcW);
+    var outW = Math.max(FEED_EXPORT_MIN_W, Math.round(srcW * scale));
+    var outH = Math.max(Math.round(outW * FEED_EXPORT_RATIO), Math.round(outW * (srcH / srcW)));
+    return { srcW: srcW, srcH: srcH, outW: outW, outH: outH, scale: outW / srcW };
+  }
+
+  function drawSceneShade(ctx, w, h, strength) {
+    strength = strength || 0.48;
+    var g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, 'rgba(0,0,0,' + (0.16 + strength * 0.14).toFixed(3) + ')');
+    g.addColorStop(0.52, 'rgba(0,0,0,' + (0.32 + strength * 0.18).toFixed(3) + ')');
+    g.addColorStop(1, 'rgba(0,0,0,' + (0.46 + strength * 0.2).toFixed(3) + ')');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  function mountOffscreenCapture(node, w, h) {
+    var host = document.createElement('div');
+    host.className = 'sf-share-capture-host';
+    host.setAttribute('aria-hidden', 'true');
+    host.style.cssText = 'position:fixed;left:0;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;z-index:2147483646;pointer-events:none;background:transparent;transform:translateX(-200vw);opacity:1;';
+    host.appendChild(node);
+    document.body.appendChild(host);
+    return host;
+  }
+
+  function captureSceneLayers(scene) {
+    if (!scene) return Promise.reject(new Error('no scene'));
+    var dims = feedExportDimensions(scene);
+    var srcW = dims.srcW;
+    var srcH = dims.srcH;
+    var outW = dims.outW;
+    var outH = dims.outH;
+    var h2cScale = dims.scale;
+    var canvas = document.createElement('canvas');
+    canvas.width = outW;
+    canvas.height = outH;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return Promise.reject(new Error('no-ctx'));
+
+    var photo = scene.querySelector('.sf-post__bg--photo');
+    var gradEl = scene.querySelector('.sf-post__bg--grad');
+    var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
+    var shadeStrength = 0.48;
+    try {
+      var prot = scene.getAttribute('data-protection');
+      shadeStrength = prot === 'strong' ? 0.58 : (prot === 'medium' ? 0.48 : 0.38);
+    } catch (eS) {}
+
+    function paintBackground() {
+      if (bgSrc) {
+        return loadShareImage(bgSrc).then(function (img) {
+          ctx.fillStyle = '#1a1814';
+          ctx.fillRect(0, 0, outW, outH);
+          drawImageCover(ctx, img, 0, 0, outW, outH);
+          drawSceneShade(ctx, outW, outH, shadeStrength);
+        });
+      }
+      if (gradEl) {
+        var gclone = gradEl.cloneNode(true);
+        gclone.style.width = srcW + 'px';
+        gclone.style.height = srcH + 'px';
+        gclone.style.position = 'absolute';
+        gclone.style.inset = '0';
+        var ghost = mountOffscreenCapture(gclone, srcW, srcH);
+        return loadHtml2Canvas().then(function (h2c) {
+          return h2c(gclone, {
+            scale: h2cScale,
+            width: srcW,
+            height: srcH,
+            backgroundColor: '#1a1814',
+            logging: false,
+            useCORS: true,
+            allowTaint: false,
+            imageTimeout: 4000
+          });
+        }).then(function (gcv) {
+          ctx.drawImage(gcv, 0, 0, outW, outH);
+          drawSceneShade(ctx, outW, outH, shadeStrength);
+        }).finally(function () {
+          try { ghost.remove(); } catch (e) {}
+        });
+      }
+      ctx.fillStyle = '#1a1814';
+      ctx.fillRect(0, 0, outW, outH);
+      return Promise.resolve();
+    }
+
+    function paintForeground() {
+      var clone = scene.cloneNode(true);
+      clone.style.width = srcW + 'px';
+      clone.style.height = srcH + 'px';
+      clone.style.margin = '0';
+      clone.style.minHeight = '0';
+      clone.style.maxHeight = 'none';
+      clone.style.maxWidth = '100%';
+      clone.querySelectorAll('.sf-post__bg,.sf-post__bg--photo,.sf-post__bg--grad,.sf-post__bg--img,.sf-post__bg--capture').forEach(function (el) {
+        el.remove();
+      });
+      enforceReadableExportMode(clone);
+      applyCaptureSafeStyles(clone);
+      prepareImagesCors(clone);
+      var host = mountOffscreenCapture(clone, srcW, srcH);
+      var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      return Promise.race([
+        fontsReady,
+        new Promise(function (r) { setTimeout(r, 500); })
+      ])
+        .then(function () { return waitForImagesFast(clone, 900); })
+        .then(function () { return new Promise(function (r) { setTimeout(r, 40); }); })
+        .then(function () { return loadHtml2Canvas(); })
+        .then(function (h2c) {
+          return h2c(clone, {
+            scale: h2cScale,
+            width: srcW,
+            height: srcH,
+            backgroundColor: null,
+            logging: false,
+            useCORS: true,
+            allowTaint: false,
+            imageTimeout: 8000,
+            onclone: function (doc, node) {
+              enforceReadableExportMode(node);
+              applyCaptureSafeStyles(node);
+            }
+          });
+        })
+        .then(function (fgCanvas) {
+          ctx.drawImage(fgCanvas, 0, 0, outW, outH);
+          return canvas;
+        })
+        .finally(function () {
+          try { host.remove(); } catch (e) {}
+        });
+    }
+
+    return paintBackground().then(paintForeground);
   }
 
   function canvasToShareFile(canvas, feedItemId) {
@@ -2525,16 +2721,31 @@
   }
 
   async function renderFeedCardToFile(cardElement, feedItemId) {
+    var scene = cardElement && cardElement.querySelector('.sf-post__scene');
+    enforceReadableExportMode(cardElement);
+
+    if (scene) {
+      var photo = scene.querySelector('.sf-post__bg--photo');
+      var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
+      if (bgSrc) {
+        try { await Promise.race([loadShareImage(bgSrc), new Promise(function (r) { setTimeout(r, 1200); })]); } catch (eBg) {}
+      }
+      try {
+        var layered = await captureSceneLayers(scene);
+        return canvasToShareFile(layered, feedItemId);
+      } catch (layerErr) {
+        console.warn('Feed layer capture fallback:', layerErr);
+      }
+    }
+
     var target = getShareCaptureTarget(cardElement);
     if (!target) throw new Error('Kein Feed-Bildbereich');
 
     var h2cPromise = loadHtml2Canvas();
-    enforceReadableExportMode(cardElement);
-
     await Promise.all([
-      waitForImagesFast(target, 1500),
+      waitForImagesFast(target, 900),
       document.fonts && document.fonts.ready
-        ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 600); })])
+        ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 400); })])
         : Promise.resolve()
     ]);
 
@@ -2556,7 +2767,7 @@
         allowTaint: false,
         backgroundColor: '#1a1814',
         logging: false,
-        imageTimeout: 6000,
+        imageTimeout: 5000,
         scrollX: 0,
         scrollY: 0,
         onclone: function (doc, node) {
@@ -2566,8 +2777,8 @@
       });
       return canvasToShareFile(canvas, feedItemId);
     } catch (directErr) {
-      return captureCloneExact(target).then(function (canvas) {
-        return canvasToShareFile(canvas, feedItemId);
+      return captureCloneExact(target).then(function (fallbackCanvas) {
+        return canvasToShareFile(fallbackCanvas, feedItemId);
       });
     }
   }
@@ -2586,7 +2797,7 @@
   function prefetchVisibleFeedShares(root) {
     if (!root) return;
     root.querySelectorAll('[data-feed-card-id]').forEach(function (card, idx) {
-      if (idx > 2) return;
+      if (idx > 4) return;
       var id = card.getAttribute('data-feed-card-id');
       if (id) prefetchFeedShareBlob(id);
     });
@@ -2601,7 +2812,7 @@
         var id = en.target.getAttribute('data-feed-card-id');
         if (id) prefetchFeedShareBlob(id);
       });
-    }, { rootMargin: '80px 0px', threshold: 0.2 });
+    }, { rootMargin: '240px 0px', threshold: 0.08 });
     root.querySelectorAll('[data-feed-card-id]').forEach(function (card) {
       sharePrefetchObs.observe(card);
     });
