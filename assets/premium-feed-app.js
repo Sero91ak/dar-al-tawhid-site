@@ -5,15 +5,14 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV63';
-  var FONTS_ID = 'darPremiumFeedFontsV63';
+  var STYLES_ID = 'darPremiumFeedStylesV64';
+  var FONTS_ID = 'darPremiumFeedFontsV64';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
-  var FEED_SHARE_SITE_URL = 'https://dar-al-tawhid.de';
   var FEED_SHARE_CACHE = Object.create(null);
-  var FEED_SHARE_PREFETCHING = Object.create(null);
-  var FEED_SHARE_IN_FLIGHT = Object.create(null);
-  var sharePrefetchObs = null;
+  var FEED_SHARE_WARMING = Object.create(null);
+  var FEED_SHARE_BUSY = Object.create(null);
+  var FEED_SHARE_IO = null;
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 520;
@@ -2399,7 +2398,7 @@
           '</div>' +
         '</header>' +
         '<div class="sf-post__media">' + mediaHtml(item, cardIdx < 3) + '</div>' +
-        '<div class="sf-post__actions feed-actions no-share-export">' +
+        '<div class="sf-post__actions feed-actions">' +
           '<div class="sf-actions-left">' +
             '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span>' + likeCountHtml(liked) + '</button>' +
             '<button type="button" class="sf-act sf-share feed-share-button" data-feed-share-id="' + esc(item.uid) + '" aria-label="Teilen"><span aria-hidden="true">↗</span><span class="sf-act-label">Teilen</span></button>' +
@@ -2432,54 +2431,298 @@
     if (t === 'prayer') { navigate('prayer'); return; }
   }
 
-  function loadHtml2Canvas() {
+  /* ── Feed Teilen (neu): nur PNG, kein Text-Fallback ── */
+
+  function feedShareLoadH2c() {
     if (global.html2canvas) return Promise.resolve(global.html2canvas);
     return new Promise(function (resolve, reject) {
-      if (document.getElementById('darHtml2Canvas')) {
-        var n = 0;
-        var t = setInterval(function () {
-          n++;
-          if (global.html2canvas) { clearInterval(t); resolve(global.html2canvas); }
-          if (n > 160) { clearInterval(t); reject(new Error('h2c')); }
-        }, 50);
+      var started = Date.now();
+      function poll() {
+        if (global.html2canvas) { resolve(global.html2canvas); return; }
+        if (Date.now() - started > 8000) { reject(new Error('h2c-timeout')); return; }
+        setTimeout(poll, 40);
+      }
+      if (!document.getElementById('darHtml2Canvas')) {
+        var s = document.createElement('script');
+        s.id = 'darHtml2Canvas';
+        s.src = H2C_URL;
+        s.onerror = function () { reject(new Error('h2c-load')); };
+        document.head.appendChild(s);
+      }
+      poll();
+    });
+  }
+
+  function feedShareInit() {
+    feedShareLoadH2c().catch(function () {});
+  }
+
+  function feedShareAbsUrl(src) {
+    try {
+      if (!src) return '';
+      if (src.indexOf('//') === 0) return global.location.protocol + src;
+      if (src.indexOf('/') === 0) return new URL(src, global.location.origin).href;
+      return src;
+    } catch (e) {
+      return src || '';
+    }
+  }
+
+  function feedShareLoadImg(src) {
+    src = feedShareAbsUrl(src);
+    return new Promise(function (resolve, reject) {
+      if (!src) { reject(new Error('img-src')); return; }
+      var img = new Image();
+      try {
+        if (new URL(src).origin !== global.location.origin) img.crossOrigin = 'anonymous';
+      } catch (eC) {}
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { reject(new Error('img-load')); };
+      img.src = src;
+    });
+  }
+
+  function feedShareDrawCover(ctx, img, w, h) {
+    var iw = img.naturalWidth || img.width;
+    var ih = img.naturalHeight || img.height;
+    if (!iw || !ih) return;
+    var ir = iw / ih;
+    var dr = w / h;
+    var sx = 0;
+    var sy = 0;
+    var sw = iw;
+    var sh = ih;
+    if (ir > dr) {
+      sw = ih * dr;
+      sx = (iw - sw) / 2;
+    } else {
+      sh = iw / dr;
+      sy = (ih - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+  }
+
+  function feedShareDims(scene) {
+    var rect = scene.getBoundingClientRect();
+    var srcW = Math.max(1, Math.round(rect.width));
+    var srcH = Math.max(1, Math.round(rect.height));
+    var scale = Math.min(2.5, Math.max(2, Math.ceil(FEED_EXPORT_MIN_W / srcW)));
+    var outW = Math.max(FEED_EXPORT_MIN_W, Math.round(srcW * scale));
+    var outH = Math.max(Math.round(outW * FEED_EXPORT_RATIO), Math.round(outW * (srcH / srcW)));
+    return { srcW: srcW, srcH: srcH, outW: outW, outH: outH, scale: outW / srcW };
+  }
+
+  function feedShareShade(ctx, w, h) {
+    var g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, 'rgba(0,0,0,0.22)');
+    g.addColorStop(0.55, 'rgba(0,0,0,0.42)');
+    g.addColorStop(1, 'rgba(0,0,0,0.58)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  function feedShareOffscreen(node, w, h) {
+    var host = document.createElement('div');
+    host.setAttribute('aria-hidden', 'true');
+    host.style.cssText = 'position:fixed;left:0;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;pointer-events:none;transform:translateX(-200vw);opacity:1;z-index:-1;';
+    host.appendChild(node);
+    document.body.appendChild(host);
+    return host;
+  }
+
+  function feedSharePrepOverlay(root) {
+    if (!root) return;
+    enforceReadableExportMode(root);
+    root.querySelectorAll('.sf-post__textpanel').forEach(function (el) {
+      el.style.backdropFilter = 'none';
+      el.style.webkitBackdropFilter = 'none';
+      el.style.background = 'linear-gradient(180deg, rgba(12,14,16,0.88), rgba(10,11,13,0.80))';
+      el.style.border = '1px solid rgba(230,200,130,0.28)';
+      el.style.boxShadow = '0 18px 55px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08)';
+    });
+    root.querySelectorAll('.sf-brand-chip,.sf-scene-badge').forEach(function (el) {
+      el.style.backdropFilter = 'none';
+      el.style.webkitBackdropFilter = 'none';
+    });
+    Array.prototype.forEach.call(root.querySelectorAll('img'), function (img) {
+      try {
+        var src = img.currentSrc || img.getAttribute('src') || img.src || '';
+        if (!src) return;
+        if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
+        if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) {
+          img.crossOrigin = 'anonymous';
+        }
+      } catch (e) {}
+    });
+  }
+
+  function feedShareCanvasBlob(canvas) {
+    return new Promise(function (resolve, reject) {
+      if (canvas.toBlob) {
+        canvas.toBlob(function (b) {
+          if (b) resolve(b);
+          else reject(new Error('blob-fail'));
+        }, 'image/png', 1);
         return;
       }
-      var s = document.createElement('script');
-      s.id = 'darHtml2Canvas';
-      s.src = H2C_URL;
-      s.onload = function () { resolve(global.html2canvas); };
-      s.onerror = function () { reject(new Error('h2c')); };
-      document.head.appendChild(s);
+      try {
+        var bin = atob(canvas.toDataURL('image/png').split(',')[1]);
+        var arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        resolve(new Blob([arr], { type: 'image/png' }));
+      } catch (e) {
+        reject(new Error('blob-fail'));
+      }
     });
   }
 
-  function warmShareEngine() {
-    loadHtml2Canvas().catch(function () {});
-  }
-
-  function getShareCaptureTarget(card) {
-    if (!card) return null;
-    return card.querySelector('.sf-post__scene') || card.querySelector('.sf-post__media') || card;
-  }
-
-  function waitForImagesFast(rootElement, maxMs) {
-    maxMs = maxMs || 1800;
-    var images = Array.prototype.slice.call((rootElement || document).querySelectorAll('img')).filter(function (img) {
-      if (img.classList.contains('sf-post__bg--img')) return false;
-      var r = img.getBoundingClientRect();
-      return r.width > 2 && r.height > 2;
-    });
-    if (!images.length) return Promise.resolve();
-    return Promise.race([
-      Promise.all(images.map(function (img) {
-        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-        return new Promise(function (resolve) {
-          img.onload = resolve;
-          img.onerror = resolve;
+  async function feedSharePaintBg(ctx, scene, dims) {
+    var photo = scene.querySelector('.sf-post__bg--photo');
+    var gradEl = scene.querySelector('.sf-post__bg--grad');
+    var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
+    if (bgSrc) {
+      try {
+        var img = await Promise.race([
+          feedShareLoadImg(bgSrc),
+          new Promise(function (_, rej) { setTimeout(function () { rej(new Error('bg-timeout')); }, 3500); })
+        ]);
+        ctx.fillStyle = '#1a1814';
+        ctx.fillRect(0, 0, dims.outW, dims.outH);
+        feedShareDrawCover(ctx, img, dims.outW, dims.outH);
+      } catch (eBg) {
+        ctx.fillStyle = '#1a1814';
+        ctx.fillRect(0, 0, dims.outW, dims.outH);
+      }
+    } else if (gradEl) {
+      var gclone = gradEl.cloneNode(true);
+      gclone.style.cssText = 'position:absolute;inset:0;width:' + dims.srcW + 'px;height:' + dims.srcH + 'px;';
+      var ghost = feedShareOffscreen(gclone, dims.srcW, dims.srcH);
+      try {
+        var h2c = await feedShareLoadH2c();
+        var gcv = await h2c(gclone, {
+          scale: dims.scale,
+          width: dims.srcW,
+          height: dims.srcH,
+          backgroundColor: '#1a1814',
+          logging: false,
+          useCORS: true,
+          allowTaint: false
         });
-      })),
-      new Promise(function (resolve) { setTimeout(resolve, maxMs); })
-    ]);
+        ctx.drawImage(gcv, 0, 0, dims.outW, dims.outH);
+      } finally {
+        try { ghost.remove(); } catch (eG) {}
+      }
+    } else {
+      ctx.fillStyle = '#1a1814';
+      ctx.fillRect(0, 0, dims.outW, dims.outH);
+    }
+    feedShareShade(ctx, dims.outW, dims.outH);
+  }
+
+  async function feedSharePaintFg(ctx, scene, dims) {
+    var clone = scene.cloneNode(true);
+    clone.style.width = dims.srcW + 'px';
+    clone.style.height = dims.srcH + 'px';
+    clone.style.margin = '0';
+    clone.style.minHeight = '0';
+    clone.style.maxHeight = 'none';
+    clone.style.background = 'transparent';
+    clone.querySelectorAll('.sf-post__bg,.sf-post__bg--photo,.sf-post__bg--grad,.sf-post__bg--img,.sf-post__scene-shade').forEach(function (el) {
+      el.remove();
+    });
+    feedSharePrepOverlay(clone);
+    var host = feedShareOffscreen(clone, dims.srcW, dims.srcH);
+    try {
+      if (document.fonts && document.fonts.ready) {
+        await Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 350); })]);
+      }
+      var h2c = await feedShareLoadH2c();
+      var fg = await h2c(clone, {
+        scale: dims.scale,
+        width: dims.srcW,
+        height: dims.srcH,
+        backgroundColor: null,
+        logging: false,
+        useCORS: true,
+        allowTaint: false,
+        imageTimeout: 6000,
+        onclone: function (doc, node) { feedSharePrepOverlay(node); }
+      });
+      ctx.drawImage(fg, 0, 0, dims.outW, dims.outH);
+    } finally {
+      try { host.remove(); } catch (eH) {}
+    }
+  }
+
+  async function feedShareBuild(card, feedItemId) {
+    var scene = card && card.querySelector('.sf-post__scene');
+    if (!scene) throw new Error('Kein Feed-Bildbereich');
+    var dims = feedShareDims(scene);
+    var canvas = document.createElement('canvas');
+    canvas.width = dims.outW;
+    canvas.height = dims.outH;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas nicht verfügbar');
+    await feedSharePaintBg(ctx, scene, dims);
+    await feedSharePaintFg(ctx, scene, dims);
+    var blob = await feedShareCanvasBlob(canvas);
+    return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
+  }
+
+  async function feedSharePresent(file, feedItemId) {
+    if (
+      global.navigator &&
+      global.navigator.share &&
+      global.navigator.canShare &&
+      global.navigator.canShare({ files: [file] })
+    ) {
+      await global.navigator.share({ files: [file] });
+      return;
+    }
+    var url = URL.createObjectURL(file);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = file.name || ('dar-al-tawhid-feed-' + feedItemId + '.png');
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
+    showToast('Teilen als Bild wird hier nicht unterstützt. Das Bild wurde gespeichert.');
+  }
+
+  function feedShareWarm(feedItemId) {
+    if (!feedItemId || FEED_SHARE_CACHE[feedItemId] || FEED_SHARE_WARMING[feedItemId]) return;
+    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
+    if (!card) return;
+    FEED_SHARE_WARMING[feedItemId] = true;
+    feedShareBuild(card, feedItemId)
+      .then(function (file) { FEED_SHARE_CACHE[feedItemId] = file; })
+      .catch(function () {})
+      .finally(function () { delete FEED_SHARE_WARMING[feedItemId]; });
+  }
+
+  function feedShareWarmVisible(root) {
+    if (!root) return;
+    root.querySelectorAll('[data-feed-card-id]').forEach(function (card, idx) {
+      if (idx > 5) return;
+      var id = card.getAttribute('data-feed-card-id');
+      if (id) feedShareWarm(id);
+    });
+  }
+
+  function feedShareObserve(root) {
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+    if (FEED_SHARE_IO) FEED_SHARE_IO.disconnect();
+    FEED_SHARE_IO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.getAttribute('data-feed-card-id');
+        if (id) feedShareWarm(id);
+      });
+    }, { rootMargin: '300px 0px', threshold: 0.05 });
+    root.querySelectorAll('[data-feed-card-id]').forEach(function (card) {
+      FEED_SHARE_IO.observe(card);
+    });
   }
 
   function showToast(message) {
@@ -2507,573 +2750,47 @@
     else button.textContent = isLoading ? 'Bild wird vorbereitet…' : 'Teilen';
   }
 
-  function stripNoShareExport(root) {
-    if (!root) return;
-    root.querySelectorAll('.no-share-export').forEach(function (el) {
-      try { el.remove(); } catch (e) {}
-    });
-  }
-
-  function shareExportScale(width) {
-    var w = Math.max(1, Number(width) || 360);
-    return Math.min(2.5, Math.max(2, Math.ceil(FEED_EXPORT_MIN_W / w)));
-  }
-
-  function absoluteAssetUrl(src) {
+  async function feedShareRun(feedItemId) {
+    if (FEED_SHARE_BUSY[feedItemId]) return;
+    FEED_SHARE_BUSY[feedItemId] = true;
+    setFeedShareLoading(feedItemId, true);
     try {
-      if (!src) return '';
-      if (src.indexOf('//') === 0) return global.location.protocol + src;
-      if (src.indexOf('/') === 0) return new URL(src, global.location.origin).href;
-      return src;
-    } catch (e) {
-      return src || '';
-    }
-  }
-
-  function isCrossOriginAssetUrl(src) {
-    try {
-      return new URL(absoluteAssetUrl(src)).origin !== global.location.origin;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function loadShareImage(src) {
-    src = absoluteAssetUrl(src);
-    return new Promise(function (resolve, reject) {
-      if (!src) { reject(new Error('img-src')); return; }
-      var img = new Image();
-      if (isCrossOriginAssetUrl(src)) img.crossOrigin = 'anonymous';
-      img.onload = function () { resolve(img); };
-      img.onerror = function () { reject(new Error('img-load')); };
-      img.src = src;
-    });
-  }
-
-  function drawImageCover(ctx, img, dx, dy, dw, dh) {
-    var iw = img.naturalWidth || img.width;
-    var ih = img.naturalHeight || img.height;
-    if (!iw || !ih) return;
-    var ir = iw / ih;
-    var dr = dw / dh;
-    var sx = 0;
-    var sy = 0;
-    var sw = iw;
-    var sh = ih;
-    if (ir > dr) {
-      sw = ih * dr;
-      sx = (iw - sw) / 2;
-    } else {
-      sh = iw / dr;
-      sy = (ih - sh) / 2;
-    }
-    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
-  }
-
-  function feedExportDimensions(scene) {
-    var rect = scene.getBoundingClientRect();
-    var srcW = Math.max(1, Math.round(rect.width));
-    var srcH = Math.max(1, Math.round(rect.height));
-    var scale = shareExportScale(srcW);
-    var outW = Math.max(FEED_EXPORT_MIN_W, Math.round(srcW * scale));
-    var outH = Math.max(Math.round(outW * FEED_EXPORT_RATIO), Math.round(outW * (srcH / srcW)));
-    return { srcW: srcW, srcH: srcH, outW: outW, outH: outH, scale: outW / srcW };
-  }
-
-  function drawSceneShade(ctx, w, h, strength) {
-    strength = strength || 0.48;
-    var g = ctx.createLinearGradient(0, 0, 0, h);
-    g.addColorStop(0, 'rgba(0,0,0,' + (0.16 + strength * 0.14).toFixed(3) + ')');
-    g.addColorStop(0.52, 'rgba(0,0,0,' + (0.32 + strength * 0.18).toFixed(3) + ')');
-    g.addColorStop(1, 'rgba(0,0,0,' + (0.46 + strength * 0.2).toFixed(3) + ')');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-  }
-
-  function mountOffscreenCapture(node, w, h) {
-    var host = document.createElement('div');
-    host.className = 'sf-share-capture-host';
-    host.setAttribute('aria-hidden', 'true');
-    host.style.cssText = 'position:fixed;left:0;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;z-index:2147483646;pointer-events:none;background:transparent;transform:translateX(-200vw);opacity:1;';
-    host.appendChild(node);
-    document.body.appendChild(host);
-    return host;
-  }
-
-  function captureSceneLayers(scene) {
-    if (!scene) return Promise.reject(new Error('no scene'));
-    var dims = feedExportDimensions(scene);
-    var srcW = dims.srcW;
-    var srcH = dims.srcH;
-    var outW = dims.outW;
-    var outH = dims.outH;
-    var h2cScale = dims.scale;
-    var canvas = document.createElement('canvas');
-    canvas.width = outW;
-    canvas.height = outH;
-    var ctx = canvas.getContext('2d');
-    if (!ctx) return Promise.reject(new Error('no-ctx'));
-
-    var photo = scene.querySelector('.sf-post__bg--photo');
-    var gradEl = scene.querySelector('.sf-post__bg--grad');
-    var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
-    var shadeStrength = 0.48;
-    try {
-      var prot = scene.getAttribute('data-protection');
-      shadeStrength = prot === 'strong' ? 0.58 : (prot === 'medium' ? 0.48 : 0.38);
-    } catch (eS) {}
-
-    function paintBackground() {
-      if (bgSrc) {
-        return loadShareImage(bgSrc).then(function (img) {
-          ctx.fillStyle = '#1a1814';
-          ctx.fillRect(0, 0, outW, outH);
-          drawImageCover(ctx, img, 0, 0, outW, outH);
-          drawSceneShade(ctx, outW, outH, shadeStrength);
-        });
-      }
-      if (gradEl) {
-        var gclone = gradEl.cloneNode(true);
-        gclone.style.width = srcW + 'px';
-        gclone.style.height = srcH + 'px';
-        gclone.style.position = 'absolute';
-        gclone.style.inset = '0';
-        var ghost = mountOffscreenCapture(gclone, srcW, srcH);
-        return loadHtml2Canvas().then(function (h2c) {
-          return h2c(gclone, {
-            scale: h2cScale,
-            width: srcW,
-            height: srcH,
-            backgroundColor: '#1a1814',
-            logging: false,
-            useCORS: true,
-            allowTaint: false,
-            imageTimeout: 4000
-          });
-        }).then(function (gcv) {
-          ctx.drawImage(gcv, 0, 0, outW, outH);
-          drawSceneShade(ctx, outW, outH, shadeStrength);
-        }).finally(function () {
-          try { ghost.remove(); } catch (e) {}
-        });
-      }
-      ctx.fillStyle = '#1a1814';
-      ctx.fillRect(0, 0, outW, outH);
-      return Promise.resolve();
-    }
-
-    function paintForeground() {
-      var clone = scene.cloneNode(true);
-      clone.style.width = srcW + 'px';
-      clone.style.height = srcH + 'px';
-      clone.style.margin = '0';
-      clone.style.minHeight = '0';
-      clone.style.maxHeight = 'none';
-      clone.style.maxWidth = '100%';
-      clone.querySelectorAll('.sf-post__bg,.sf-post__bg--photo,.sf-post__bg--grad,.sf-post__bg--img,.sf-post__bg--capture').forEach(function (el) {
-        el.remove();
-      });
-      enforceReadableExportMode(clone);
-      applyCaptureSafeStyles(clone);
-      prepareImagesCors(clone);
-      var host = mountOffscreenCapture(clone, srcW, srcH);
-      var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-      return Promise.race([
-        fontsReady,
-        new Promise(function (r) { setTimeout(r, 500); })
-      ])
-        .then(function () { return waitForImagesFast(clone, 900); })
-        .then(function () { return new Promise(function (r) { setTimeout(r, 40); }); })
-        .then(function () { return loadHtml2Canvas(); })
-        .then(function (h2c) {
-          return h2c(clone, {
-            scale: h2cScale,
-            width: srcW,
-            height: srcH,
-            backgroundColor: null,
-            logging: false,
-            useCORS: true,
-            allowTaint: false,
-            imageTimeout: 8000,
-            onclone: function (doc, node) {
-              enforceReadableExportMode(node);
-              applyCaptureSafeStyles(node);
-            }
-          });
-        })
-        .then(function (fgCanvas) {
-          ctx.drawImage(fgCanvas, 0, 0, outW, outH);
-          return canvas;
-        })
-        .finally(function () {
-          try { host.remove(); } catch (e) {}
-        });
-    }
-
-    return paintBackground().then(paintForeground);
-  }
-
-  function canvasToShareFile(canvas, feedItemId) {
-    return canvasToBlob(canvas).then(function (blob) {
-      if (!blob) throw new Error('Kein Bild-Blob erzeugt.');
-      return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
-    });
-  }
-
-  async function renderFeedCardToFile(cardElement, feedItemId) {
-    var scene = cardElement && cardElement.querySelector('.sf-post__scene');
-    enforceReadableExportMode(cardElement);
-
-    if (scene) {
-      var photo = scene.querySelector('.sf-post__bg--photo');
-      var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
-      if (bgSrc) {
-        try { await Promise.race([loadShareImage(bgSrc), new Promise(function (r) { setTimeout(r, 1200); })]); } catch (eBg) {}
-      }
-      try {
-        var layered = await captureSceneLayers(scene);
-        return canvasToShareFile(layered, feedItemId);
-      } catch (layerErr) {
-        console.warn('Feed layer capture fallback:', layerErr);
-      }
-    }
-
-    var target = getShareCaptureTarget(cardElement);
-    if (!target) throw new Error('Kein Feed-Bildbereich');
-
-    var h2cPromise = loadHtml2Canvas();
-    await Promise.all([
-      waitForImagesFast(target, 900),
-      document.fonts && document.fonts.ready
-        ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 400); })])
-        : Promise.resolve()
-    ]);
-
-    var rect = target.getBoundingClientRect();
-    var w = Math.max(1, Math.round(rect.width));
-    var h = Math.max(1, Math.round(rect.height));
-    var scale = shareExportScale(w);
-    var h2c = await h2cPromise;
-
-    enforceReadableExportMode(target);
-    applyCaptureSafeStyles(target);
-
-    try {
-      var canvas = await h2c(target, {
-        scale: scale,
-        width: w,
-        height: h,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: '#1a1814',
-        logging: false,
-        imageTimeout: 5000,
-        scrollX: 0,
-        scrollY: 0,
-        onclone: function (doc, node) {
-          enforceReadableExportMode(node);
-          applyCaptureSafeStyles(node);
-        }
-      });
-      return canvasToShareFile(canvas, feedItemId);
-    } catch (directErr) {
-      return captureCloneExact(target).then(function (fallbackCanvas) {
-        return canvasToShareFile(fallbackCanvas, feedItemId);
-      });
-    }
-  }
-
-  function prefetchFeedShareBlob(feedItemId) {
-    if (!feedItemId || FEED_SHARE_CACHE[feedItemId] || FEED_SHARE_PREFETCHING[feedItemId]) return;
-    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
-    if (!card) return;
-    FEED_SHARE_PREFETCHING[feedItemId] = true;
-    renderFeedCardToFile(card, feedItemId)
-      .then(function (file) { FEED_SHARE_CACHE[feedItemId] = file; })
-      .catch(function () {})
-      .finally(function () { delete FEED_SHARE_PREFETCHING[feedItemId]; });
-  }
-
-  function prefetchVisibleFeedShares(root) {
-    if (!root) return;
-    root.querySelectorAll('[data-feed-card-id]').forEach(function (card, idx) {
-      if (idx > 4) return;
-      var id = card.getAttribute('data-feed-card-id');
-      if (id) prefetchFeedShareBlob(id);
-    });
-  }
-
-  function setupSharePrefetchObserver(root) {
-    if (!root || typeof IntersectionObserver === 'undefined') return;
-    if (sharePrefetchObs) sharePrefetchObs.disconnect();
-    sharePrefetchObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var id = en.target.getAttribute('data-feed-card-id');
-        if (id) prefetchFeedShareBlob(id);
-      });
-    }, { rootMargin: '240px 0px', threshold: 0.08 });
-    root.querySelectorAll('[data-feed-card-id]').forEach(function (card) {
-      sharePrefetchObs.observe(card);
-    });
-  }
-
-  async function deliverShareFile(file, feedItemId) {
-    var canShareFiles =
-      global.navigator &&
-      global.navigator.share &&
-      global.navigator.canShare &&
-      global.navigator.canShare({ files: [file] });
-    if (canShareFiles) {
-      await global.navigator.share({
-        files: [file],
-        title: 'DAR AL TAWḤID'
-      });
-      return;
-    }
-    await downloadFeedImage(file, feedItemId);
-    showToast('Bildteilen wird auf diesem Gerät nicht unterstützt. Das Bild wurde gespeichert.');
-  }
-
-  async function shareFeedCardAsImage(feedItemId) {
-    if (FEED_SHARE_IN_FLIGHT[feedItemId]) return;
-    FEED_SHARE_IN_FLIGHT[feedItemId] = true;
-    var resetTimer = global.setTimeout(function () {
-      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
-      setFeedShareLoading(feedItemId, false);
-    }, 45000);
-
-    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
-    if (!card) {
-      showToast('Feed-Bild konnte nicht gefunden werden.');
-      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
-      global.clearTimeout(resetTimer);
-      setFeedShareLoading(feedItemId, false);
-      return;
-    }
-
-    try {
+      var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
+      if (!card) throw new Error('card-missing');
       var file = FEED_SHARE_CACHE[feedItemId];
       if (!file) {
-        file = await renderFeedCardToFile(card, feedItemId);
+        file = await feedShareBuild(card, feedItemId);
         FEED_SHARE_CACHE[feedItemId] = file;
       }
-      await deliverShareFile(file, feedItemId);
-    } catch (error) {
-      if (error && error.name === 'AbortError') return;
-      console.error('Feed-Bild teilen fehlgeschlagen:', error);
+      await feedSharePresent(file, feedItemId);
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
       delete FEED_SHARE_CACHE[feedItemId];
-      showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
+      showToast('Bild konnte nicht geteilt werden. Bitte kurz warten und erneut versuchen.');
     } finally {
-      global.clearTimeout(resetTimer);
       setFeedShareLoading(feedItemId, false);
-      FEED_SHARE_IN_FLIGHT[feedItemId] = false;
+      FEED_SHARE_BUSY[feedItemId] = false;
     }
   }
 
-  function handleFeedShareClick(event) {
+  function feedShareOnClick(event) {
     var button = event.target.closest('[data-feed-share-id]');
     if (!button || button.classList.contains('is-loading')) return false;
     event.preventDefault();
     event.stopImmediatePropagation();
     event.stopPropagation();
-
     var feedItemId = button.getAttribute('data-feed-share-id');
     if (!feedItemId) return false;
-
-    setFeedShareLoading(feedItemId, true);
-
-    if (FEED_SHARE_CACHE[feedItemId]) {
-      deliverShareFile(FEED_SHARE_CACHE[feedItemId], feedItemId)
-        .catch(function (err) {
-          if (err && err.name === 'AbortError') return;
-          console.error('Feed share cached failed:', err);
-          showToast('Bild konnte nicht geteilt werden. Bitte erneut versuchen.');
-        })
-        .finally(function () { setFeedShareLoading(feedItemId, false); });
-      return true;
-    }
-
-    shareFeedCardAsImage(feedItemId).catch(function (err) {
-      console.error('Feed share handler failed:', err);
-    });
+    feedShareRun(feedItemId);
     return true;
   }
 
-  function bindFeedShareDelegate() {
-    if (global.__darFeedShareBound) return;
-    global.__darFeedShareBound = true;
+  function renderFeedCardToFile(cardElement, feedItemId) {
+    return feedShareBuild(cardElement, feedItemId);
   }
 
-  async function downloadFeedImage(file, feedItemId) {
-    var url = URL.createObjectURL(file);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = file.name || ('dar-al-tawhid-feed-' + feedItemId + '.png');
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
-  }
-
-  function prepareImagesCors(root) {
-    Array.prototype.forEach.call((root || document).querySelectorAll('img'), function (img) {
-      try {
-        var src = img.currentSrc || img.getAttribute('src') || img.src || '';
-        if (!src) return;
-        if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
-        if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) {
-          if (img.crossOrigin !== 'anonymous') img.crossOrigin = 'anonymous';
-        }
-      } catch (e) {}
-    });
-  }
-
-  function applyCaptureSafeStyles(root) {
-    if (!root) return;
-    enforceReadableExportMode(root);
-    root.querySelectorAll('.sf-post__textpanel').forEach(function (el) {
-      el.style.backdropFilter = 'none';
-      el.style.webkitBackdropFilter = 'none';
-      el.style.background = 'linear-gradient(180deg, rgba(12,14,16,0.88), rgba(10,11,13,0.80))';
-      el.style.border = '1px solid rgba(230,200,130,0.28)';
-      el.style.boxShadow = '0 18px 55px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08)';
-    });
-    root.querySelectorAll('.sf-brand-chip').forEach(function (el) {
-      el.style.backdropFilter = 'none';
-      el.style.webkitBackdropFilter = 'none';
-    });
-    root.querySelectorAll('.sf-post__quote, .sf-post__dua-ar, .sf-post__dua-tr, .sf-post__dua-de, .sf-quote-scholar, .sf-quote-source, .sf-dua-source, .feed-quote-main').forEach(function (el) {
-      el.style.webkitTextStroke = '0';
-    });
-  }
-
-  function html2canvasOpts(el, w, h, scale) {
-    return {
-      scale: scale,
-      width: w,
-      height: h,
-      useCORS: true,
-      allowTaint: false,
-      backgroundColor: null,
-      logging: false,
-      imageTimeout: 25000,
-      scrollX: -global.scrollX,
-      scrollY: -global.scrollY,
-      windowWidth: document.documentElement.clientWidth,
-      windowHeight: document.documentElement.clientHeight,
-      onclone: function (doc, node) {
-        applyCaptureSafeStyles(node);
-      }
-    };
-  }
-
-  function captureCloneExact(el) {
-    var rect = el.getBoundingClientRect();
-    var w = Math.max(1, Math.round(rect.width));
-    var h = Math.max(1, Math.round(rect.height));
-    var scale = shareExportScale(w);
-    var host = document.createElement('div');
-    host.className = 'sf-share-capture-host';
-    host.style.cssText = 'position:fixed;left:-12000px;top:0;width:' + w + 'px;height:' + h + 'px;overflow:hidden;opacity:0;z-index:-1;pointer-events:none;background:#1a1814;';
-
-    var clone = el.cloneNode(true);
-    clone.style.width = w + 'px';
-    clone.style.height = h + 'px';
-    clone.style.minHeight = '0';
-    clone.style.maxHeight = 'none';
-    clone.style.maxWidth = '100%';
-    clone.style.margin = '0';
-    clone.style.aspectRatio = 'auto';
-
-    prepareImagesCors(clone);
-    applyCaptureSafeStyles(clone);
-    host.appendChild(clone);
-    document.body.appendChild(host);
-
-    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-    return fontsReady
-      .then(function () { return waitForImagesFast(clone, 1200); })
-      .then(function () { return new Promise(function (r) { setTimeout(r, 60); }); })
-      .then(function () { return loadHtml2Canvas(); })
-      .then(function (h2c) {
-        return h2c(clone, {
-          scale: scale,
-          width: w,
-          height: h,
-          useCORS: true,
-          allowTaint: false,
-          backgroundColor: null,
-          logging: false,
-          imageTimeout: 6000,
-          onclone: function (doc, node) {
-            applyCaptureSafeStyles(node);
-          }
-        });
-      })
-      .finally(function () {
-        try { host.remove(); } catch (e) {}
-      });
-  }
-
-  function captureElementWysiwyg(el) {
-    if (!el) return Promise.reject(new Error('no el'));
-    try {
-      el.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'auto' });
-    } catch (e) {}
-
-    prepareImagesCors(el);
-
-    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-    var scale = shareExportScale(Math.max(1, Math.round(el.getBoundingClientRect().width)));
-
-    return new Promise(function (r) { setTimeout(r, 40); })
-      .then(function () { return fontsReady; })
-      .then(function () { return waitForImagesFast(el, 1200); })
-      .then(function () { return new Promise(function (r) { setTimeout(r, 60); }); })
-      .then(function () { return loadHtml2Canvas(); })
-      .then(function (h2c) {
-        var rect = el.getBoundingClientRect();
-        var w = Math.max(1, Math.round(rect.width));
-        var h = Math.max(1, Math.round(rect.height));
-        return h2c(el, html2canvasOpts(el, w, h, scale));
-      })
-      .catch(function () {
-        return captureCloneExact(el);
-      });
-  }
-
-  function captureSceneForShare(card) {
-    var scene = card && card.querySelector('.sf-post__scene');
-    if (!scene) return Promise.reject(new Error('no scene'));
-    return captureElementWysiwyg(scene);
-  }
-
-  function captureMediaForShare(card) {
-    var scene = card && card.querySelector('.sf-post__scene');
-    if (scene) return captureSceneForShare(card);
-    var img = card && card.querySelector('.sf-post__img');
-    if (img) return captureElementWysiwyg(img.closest('.sf-post__media') || img);
-    return Promise.reject(new Error('no media'));
-  }
-  function canvasToBlob(canvas) {
-    return new Promise(function (resolve, reject) {
-      if (canvas.toBlob) {
-        canvas.toBlob(function (b) {
-          if (b) resolve(b);
-          else reject(new Error('Canvas blob could not be created.'));
-        }, 'image/png', 1);
-        return;
-      }
-      try {
-        var bin = atob(canvas.toDataURL('image/png').split(',')[1]);
-        var arr = new Uint8Array(bin.length);
-        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
-        resolve(new Blob([arr], { type: 'image/png' }));
-      } catch (e) {
-        reject(new Error('Canvas blob could not be created.'));
-      }
-    });
+  function shareFeedCardAsImage(feedItemId) {
+    return feedShareRun(feedItemId);
   }
 
   function bindList(root) {
@@ -3116,8 +2833,12 @@
     root.querySelectorAll('[data-feed-share-id]').forEach(function (btn) {
       if (btn.dataset.sfShareBound === '1') return;
       btn.dataset.sfShareBound = '1';
+      btn.addEventListener('pointerdown', function () {
+        var id = btn.getAttribute('data-feed-share-id');
+        if (id) feedShareWarm(id);
+      }, { passive: true });
       btn.addEventListener('click', function (ev) {
-        handleFeedShareClick(ev);
+        feedShareOnClick(ev);
       }, true);
     });
     root.querySelectorAll('.sf-filter').forEach(function (btn) {
@@ -3216,9 +2937,9 @@
     scheduleTunePanels(mount);
     global.setTimeout(function () {
       enforceReadablePanels(mount);
-      prefetchVisibleFeedShares(mount);
-      setupSharePrefetchObserver(mount);
-    }, 180);
+      feedShareWarmVisible(mount);
+      feedShareObserve(mount);
+    }, 120);
   }
 
   var observer = null;
@@ -3240,8 +2961,7 @@
   function renderPage(mount) {
     if (!mount) return;
     injectStyles();
-    bindFeedShareDelegate();
-    warmShareEngine();
+    feedShareInit();
     document.body.classList.add('is-premium-feed-view');
     if (!global.__darFeedThemeBound) {
       global.__darFeedThemeBound = true;
@@ -3352,8 +3072,7 @@
   }
 
   if (global && global.addEventListener) {
-    bindFeedShareDelegate();
-    warmShareEngine();
+    feedShareInit();
     global.addEventListener('hashchange', autoMountFeed);
     global.addEventListener('load', autoMountFeed);
   }
