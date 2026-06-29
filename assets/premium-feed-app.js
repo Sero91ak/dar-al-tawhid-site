@@ -1517,9 +1517,45 @@
 
   function getCtx() {
     try {
+      if (typeof global.darPremiumFeedAppContext === 'function') return global.darPremiumFeedAppContext();
       if (typeof darPremiumFeedAppContext === 'function') return darPremiumFeedAppContext();
     } catch (e) {}
     return {};
+  }
+
+  function feedEnabledFlag(val) {
+    return val === true || val === 'true';
+  }
+
+  function resolvePostFeedMeta(post) {
+    if (!post) return null;
+    var feed = post.feed || {};
+    var image = String(feed.image || '').trim();
+    if (feedEnabledFlag(feed.enabled) && image) {
+      return {
+        enabled: true,
+        image: image,
+        originalImage: String(feed.originalImage || image),
+        alt: feed.alt || ('Bildbeitrag zu: ' + (post.title || 'Beitrag')),
+        shareEnabled: feed.shareEnabled !== false
+      };
+    }
+    var links = post.links || [];
+    for (var i = 0; i < links.length; i++) {
+      var url = String(links[i] && links[i].url || '').trim();
+      var label = String(links[i] && links[i].label || '');
+      if (!url || !/\.(png|jpe?g|webp)$/i.test(url)) continue;
+      if (/Bild-Scan|Bildscan|Scan|feed/i.test(label) || url.indexOf('/assets/') === 0) {
+        return {
+          enabled: true,
+          image: url,
+          originalImage: url,
+          alt: 'Bildbeitrag zu: ' + (post.title || 'Beitrag'),
+          shareEnabled: true
+        };
+      }
+    }
+    return null;
   }
 
   function isStaging() {
@@ -1742,13 +1778,19 @@
 
   function buildPostFeedPool(posts) {
     return (posts || [])
-      .filter(function (p) {
-        return p && p.id && p.feed && p.feed.enabled === true && p.feed.image;
+      .map(function (p) {
+        var meta = resolvePostFeedMeta(p);
+        return meta ? { post: p, meta: meta } : null;
       })
-      .sort(comparePosts)
-      .map(function (p, i) {
-        var preview = String(p.feed.image || '');
-        var original = String(p.feed.originalImage || preview.replace(/feed-preview(\.[a-z0-9]+)?$/i, 'feed-original$1'));
+      .filter(Boolean)
+      .sort(function (a, b) {
+        return comparePosts(a.post, b.post);
+      })
+      .map(function (entry, i) {
+        var p = entry.post;
+        var meta = entry.meta;
+        var preview = String(meta.image || '');
+        var original = String(meta.originalImage || preview.replace(/feed-preview(\.[a-z0-9]+)?$/i, 'feed-original$1'));
         return {
           uid: 'post-feed-' + p.id,
           type: 'postFeed',
@@ -1756,12 +1798,12 @@
           category: normCat(p.category),
           image: preview,
           originalImage: original,
-          alt: p.feed.alt || ('Bildbeitrag zu: ' + (p.title || 'Beitrag')),
-          shareEnabled: p.feed.shareEnabled !== false,
+          alt: meta.alt || ('Bildbeitrag zu: ' + (p.title || 'Beitrag')),
+          shareEnabled: meta.shareEnabled !== false,
           target: 'post:' + p.id,
           postId: String(p.id),
           postUrl: '/#post/' + encodeURIComponent(String(p.id)),
-          sort: -900 - i,
+          sort: -2000 - i,
           date: p.date || ''
         };
       });
@@ -3205,6 +3247,11 @@
     renderFeedCardToFile: renderFeedCardToFile,
     onAppReady: function (opts) {
       startFeedMount({ force: opts && opts.force });
+    },
+    onPostsUpdated: function () {
+      if (!isFeedRoute()) return;
+      clearFeedState();
+      startFeedMount({ force: true });
     }
   };
 
