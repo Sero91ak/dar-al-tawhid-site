@@ -2181,6 +2181,7 @@
       '.sf-logo-img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}' +
       '.sf-brand-text{min-width:0}' +
       '.sf-brand-kicker{display:block;font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--theme-feed-accent-soft,var(--theme-muted,var(--muted)));margin-bottom:2px}' +
+      '.sf-brand-title{font-family:var(--serif,Cinzel,serif);font-size:clamp(13px,3.6vw,15px);font-weight:700;color:var(--theme-accent,var(--gold2));letter-spacing:.08em;text-transform:none;margin-bottom:0;line-height:1.1}' +
       '.sf-brand h1{margin:0;font-family:var(--serif,Cinzel,serif);font-size:18px;font-weight:700;color:var(--theme-accent,var(--gold2));letter-spacing:.06em;line-height:1}' +
       '.sf-refresh{border:1px solid var(--theme-border,var(--line));background:var(--theme-feed-act-bg,rgba(255,255,255,.06));color:var(--theme-accent,var(--gold2));width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:17px;box-shadow:0 4px 14px rgba(0,0,0,.12)}' +
       '.sf-switch{display:flex;gap:4px;padding:4px;background:var(--theme-feed-switch-bg,rgba(255,255,255,.05));border-radius:999px;border:1px solid var(--theme-feed-switch-border,var(--theme-border,var(--line)))}' +
@@ -3293,8 +3294,7 @@
             '<div class="sf-brand">' +
               '<div class="sf-brand-mark" aria-hidden="true">' + logoImgHtml() + '</div>' +
               '<div class="sf-brand-text">' +
-                '<span class="sf-brand-kicker">DAR AL TAWḤID</span>' +
-                '<h1>Feed</h1>' +
+                '<span class="sf-brand-kicker sf-brand-title">DAR AL TAWḤID</span>' +
               '</div>' +
             '</div>' +
             '<button type="button" class="sf-refresh" data-sf-refresh aria-label="Feed aktualisieren">↻</button>' +
