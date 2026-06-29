@@ -491,7 +491,7 @@ main#panel.panel{
 <div class="toast" id="toast"></div>
 <script src="/assets/slide-post-parser.js?v=2"></script>
 <script src="/admin/quellen-manager.js?v=3"></script>
-<script src="/assets/admin-feed-image.js?v=2"></script>
+<script src="/assets/admin-feed-image.js?v=3"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=3"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
@@ -1040,7 +1040,7 @@ async function autoIngestSourceFile(file,context){
 function resolveSourceLabelFromUi(){const sel=document.getElementById("sourceLabelSelect")?.value||"";if(sel==="__custom__")return (document.getElementById("sourceCustomLabelInput")?.value||sourceCustomLabel||"→ Quelle").trim()||"→ Quelle";return sel||"→ Quelle"}
 async function prepareSourceDraftFromFile(file,context){validateSourceFile(file);const markdown=getMarkdownForSourceContext(context);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const ext=sourceFileExtension(file.name);const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=buildSourceStoragePath(markdown,file.name,ext==="pdf"?pageNum:0);const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");const base64=await readFileAsBase64(file);sourceDraftPending={originalName:file.name,name:slugifySourceFilename(file.name,ext==="pdf"?pageNum:0,markdown),path,url,label,page:ext==="pdf"?pageNum:"",ext,base64,existing:false,context};return sourceDraftPending}
 function prepareSourceDraftFromLibrary(file,context){const ext=sourceFileExtension(file.path||file.name);const pageRaw=document.getElementById("sourcePageInput")?.value||"";const pageNum=pageRaw?Math.max(1,parseInt(pageRaw,10)||0):0;const label=resolveSourceLabelFromUi()||defaultSourceLabelForExt(ext);const path=String(file.path||"").replace(/^\/+/,"");const url=buildSourceLinkUrl(path,ext==="pdf"?pageNum:0,ext==="pdf");sourceDraftPending={originalName:file.name||path.split("/").pop(),name:file.name,path,url,label,page:ext==="pdf"?pageNum:"",ext,existing:true,context};return sourceDraftPending}
-function applySourceDraftToMarkdown(context){if(!sourceDraftPending&&!sourceManualUrl)return;const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();let updated=md;if(sourceDraftPending){updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url,target);const slideIdx=slideIndicesForSourceUpload(updated,target);if(slideIdx.length&&window.DARQuellen){if(sourceDraftPending.ext==="pdf")slideIdx.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"pdf",sourceDraftPending.url)});else slideIdx.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"image",sourceDraftPending.url)})}if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null}else if(sourceManualUrl){const label=resolveSourceLabelFromUi();updated=appendLinkToMarkdown(md,label,sourceManualUrl.trim(),target);sourceManualUrl=""}
+function applySourceDraftToMarkdown(context){if(!sourceDraftPending&&!sourceManualUrl)return;const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();let updated=md;if(sourceDraftPending){const pendingUrl=sourceDraftPending.url;const pendingExt=sourceDraftPending.ext;updated=appendLinkToMarkdown(md,sourceDraftPending.label,sourceDraftPending.url,target);const slideIdx=slideIndicesForSourceUpload(updated,target);if(slideIdx.length&&window.DARQuellen){if(sourceDraftPending.ext==="pdf")slideIdx.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"pdf",sourceDraftPending.url)});else slideIdx.forEach(idx=>{updated=DARQuellen.setSlideMediaField(updated,idx,"image",sourceDraftPending.url)})}if(!sourceDraftPending.existing&&sourceDraftPending.base64&&!sourceUploadQueue.some(item=>item.path===sourceDraftPending.path))sourceUploadQueue.push({path:sourceDraftPending.path,contentBase64:sourceDraftPending.base64,name:sourceDraftPending.name});sourceDraftPending=null;if(pendingExt!=="pdf"&&window.DARAdminFeedImage&&pendingUrl)DARAdminFeedImage.adoptSourceImage(context,pendingUrl,SITE_ORIGIN)}else if(sourceManualUrl){const label=resolveSourceLabelFromUi();updated=appendLinkToMarkdown(md,label,sourceManualUrl.trim(),target);sourceManualUrl=""}
 setMarkdownForSourceContext(context,updated);return updated}
 function applyManualSourceLink(context){const url=(document.getElementById("sourceManualUrlInput")?.value||sourceManualUrl||"").trim();if(!url){toast("URL fehlt");return}sourceManualUrl=url;const label=resolveSourceLabelFromUi();const md=getMarkdownForSourceContext(context);const target=getSourceLinkTargetFromUi();const updated=appendLinkToMarkdown(md,label,url,target);setMarkdownForSourceContext(context,updated);sourceManualUrl="";toast("Manueller Link ergänzt");return updated}
 function removeSourceLinkFromContext(context,where,slideIndex,linkIndex){const md=getMarkdownForSourceContext(context);if(!window.DARQuellen)return md;const target=where==="slide"?{scope:"slide",indices:[Number(slideIndex)]}:"post";const updated=DARQuellen.removeLinkFromMarkdownTarget(md,target,linkIndex);setMarkdownForSourceContext(context,updated);return updated}
@@ -2927,14 +2927,15 @@ function bindQuellenUi(){
     const preview=markdownPreviewData(markdown);
     const postId=quellenEdit.postId||frontmatterValue(markdown,"id")||quellenEdit.filename.replace(/\.md$/i,"");
     const title=preview.title||quellenEdit.title||quellenEdit.filename;
-    if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,title,"quellen");
+    if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,title,"quellen",{sourceQueue:sourceUploadQueue});
     const sourceFiles=collectSourceFilesForWorker();
     let feedImageFiles=[];
     if(window.DARAdminFeedImage){
       try{feedImageFiles=await DARAdminFeedImage.collectUploadFiles(postId,"quellen")}catch(e){toast(e.message||"Feed-Bild konnte nicht vorbereitet werden");return}
     }
-    const feedNote=feedImageFiles.length?" · Feed-Bild wird mit hochgeladen":"";
-    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen${feedImageFiles.length?"\n• Feed-Bild wird verknüpft":""}\n• Kein Push an Besucher`;
+    const feedFromSource=window.DARAdminFeedImage&&DARAdminFeedImage.readUi("quellen").enabled&&!feedImageFiles.length&&!!DARAdminFeedImage.pickSourceImageUrl(sourceUploadQueue,markdown);
+    const feedNote=feedImageFiles.length?" · Feed-Bild wird mit hochgeladen":feedFromSource?" · Quellen-Bild wird als Feed verknüpft":"";
+    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen${feedImageFiles.length?"\n• Feed-Bild wird verknüpft":feedFromSource?"\n• Quellen-Bild erscheint im Feed-Tab":""}\n• Kein Push an Besucher`;
     if(!confirm(msg))return;
     saveBtn.disabled=true;setQuellenEditorStatus("Speichere Markdown + Quellen + Feed-Bild…");
     try{
@@ -3398,7 +3399,7 @@ async function uploadPostViaWorker(){
     let markdown=normalizeMarkdownForUpload(draftMarkdown,next);
     const postId=frontmatterValue(markdown,"id")||draftFilename.replace(/\.md$/i,"");
     const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
-    if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,postTitle,"draft");
+    if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,postTitle,"draft",{sourceQueue:sourceUploadQueue});
     const sourceCheck=validateBeforeSourceSave("draft");
     if(sourceCheck.warnings?.length)addAdminLog("Quellen","Hinweise",sourceCheck.warnings.join(" · "));
     if(!sourceCheck.ok){finishPublishTrack("error",sourceCheck.errors.join(" · "));setUploadStatus(`Quellen-Fehler: ${esc(sourceCheck.errors.join(" · "))}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
