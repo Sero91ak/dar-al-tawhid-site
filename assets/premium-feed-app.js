@@ -5,7 +5,7 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV74';
+  var STYLES_ID = 'darPremiumFeedStylesV75';
   var FONTS_ID = 'darPremiumFeedFontsV73';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
@@ -90,7 +90,7 @@
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
   var FEED_STATE_KEY = 'darPremiumFeedStateV2';
-  var FEED_LAYOUT_REV = 6;
+  var FEED_LAYOUT_REV = 7;
   var FEED_MIN_POST_NUM = 431;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
@@ -1108,16 +1108,32 @@
   }
 
   function feedEngagementRowHtml(item, liked) {
+    return postFeedBarHtml(item, liked);
+  }
+
+  function postFeedBarHtml(item, liked) {
+    var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
+    var orig = item.originalImage || item.image || '';
     var stats = feedStatsFor(item.postId);
     var likeTotal = (Number(stats.saves) || 0) + (liked ? 1 : 0);
     var parts = [];
-    if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
     if (stats.views > 0) parts.push('<strong>' + formatStatCount(stats.views) + '</strong> Aufrufe');
-    if (stats.clicks > 0) parts.push('<strong>' + formatStatCount(stats.clicks) + '</strong> Klicks');
     if (stats.shares > 0) parts.push('<strong>' + formatStatCount(stats.shares) + '</strong> geteilt');
-    var statsHtml = parts.length ? '<p class="sf-engagement-line">' + parts.join(' · ') + '</p>' : '<span class="sf-engagement-spacer"></span>';
+    if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+    var statsHtml = parts.length
+      ? '<span class="sf-bar-stats">' + parts.join(' · ') + '</span>'
+      : '<span class="sf-bar-stats sf-bar-stats--empty"></span>';
     var readBtn = '<button type="button" class="sf-read-more" data-pf-open-post="' + esc(item.postId || '') + '" aria-label="Vollständigen Beitrag lesen">Beitrag lesen →</button>';
-    return '<div class="sf-post__engagement">' + statsHtml + readBtn + '</div>';
+    return (
+      '<div class="sf-post__bar feed-bar">' +
+        '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span></button>' +
+        (item.shareEnabled !== false ?
+          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-original-image="' + esc(orig) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Bild teilen"><span aria-hidden="true">↗</span></button>' :
+          '') +
+        statsHtml +
+        readBtn +
+      '</div>'
+    );
   }
 
   function feedEngagementHtml(item, liked) {
@@ -1150,14 +1166,23 @@
       var item = state.visible.find(function (x) { return x.uid === uid; });
       if (!item) return;
       var liked = isLiked(uid);
-      var html = feedEngagementRowHtml(item, liked);
-      var old = card.querySelector('.sf-post__engagement');
-      if (old) {
-        old.outerHTML = html;
-        return;
+      var stats = feedStatsFor(item.postId);
+      var likeTotal = (Number(stats.saves) || 0) + (liked ? 1 : 0);
+      var parts = [];
+      if (stats.views > 0) parts.push('<strong>' + formatStatCount(stats.views) + '</strong> Aufrufe');
+      if (stats.shares > 0) parts.push('<strong>' + formatStatCount(stats.shares) + '</strong> geteilt');
+      if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+      var statsEl = card.querySelector('.sf-bar-stats');
+      if (statsEl) {
+        statsEl.innerHTML = parts.join(' · ');
+        statsEl.classList.toggle('sf-bar-stats--empty', !parts.length);
       }
-      var actions = card.querySelector('.sf-post__actions');
-      if (actions) actions.insertAdjacentHTML('afterend', html);
+      var likeBtn = card.querySelector('[data-pf-like]');
+      if (likeBtn) {
+        likeBtn.classList.toggle('is-liked', liked);
+        var icon = likeBtn.querySelector('span[aria-hidden="true"]');
+        if (icon) icon.textContent = liked ? '♥' : '♡';
+      }
     });
   }
 
@@ -1563,8 +1588,14 @@
         }
       }
       if (opts.force || !state.allItems.length) state.seed = feedSeed();
-      applyFeedData(mount, [], savedScroll);
+      applyFeedData(mount, [], savedScroll, { force: !!opts.force });
     });
+  }
+
+  function feedItemsSignature(items) {
+    return (items || []).map(function (it) {
+      return String(it.uid || '') + '|' + String(it.image || '') + '|' + String(it.date || '') + '|' + String(it.postId || '');
+    }).join(';');
   }
 
   function feedSeed() {
@@ -2140,12 +2171,13 @@
       '.sf-post--image-feed .sf-post__media--feed-img{background:var(--theme-feed-img-fallback,#0a0908);border-top:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);border-bottom:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);line-height:0;overflow:hidden}' +
       '.feed-image-frame{display:block;width:100%;margin:0;padding:0;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;user-select:none;-webkit-user-select:none}' +
       '.feed-image{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;-webkit-user-drag:none;user-drag:none}' +
-      '.sf-post--image-feed .sf-post__actions{padding:10px 12px 6px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
-      '.sf-post--image-feed .sf-post__engagement{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 14px 12px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
-      '.sf-engagement-line{margin:0;font-size:12px;line-height:1.45;color:var(--theme-text,var(--text));opacity:.92;flex:1;min-width:0}' +
-      '.sf-engagement-spacer{flex:1;min-width:0}' +
-      '.sf-engagement-line strong{font-weight:800;color:var(--theme-text,var(--text))}' +
-      '.sf-post--image-feed .sf-read-more{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;padding:0;font-size:12px;font-weight:800;color:var(--theme-accent,var(--gold2));cursor:pointer;font-family:var(--font-ui);flex:0 0 auto;white-space:nowrap}' +
+      '.sf-post--image-feed .sf-post__bar{display:flex;align-items:center;gap:6px;padding:8px 12px 10px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));flex-wrap:nowrap;position:relative;z-index:20;pointer-events:auto}' +
+      '.sf-post--image-feed .sf-post__bar .sf-act{flex:0 0 auto;width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:10px}' +
+      '.sf-post--image-feed .sf-post__bar .sf-act .sf-act-label{display:none}' +
+      '.sf-bar-stats{flex:1 1 auto;min-width:0;margin:0;font-size:11px;line-height:1.35;color:var(--theme-text,var(--text));opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.sf-bar-stats strong{font-weight:800;color:var(--theme-text,var(--text))}' +
+      '.sf-bar-stats--empty{min-height:1px}' +
+      '.sf-post--image-feed .sf-read-more{display:inline-flex;align-items:center;gap:2px;border:0;background:transparent;padding:0;font-size:11px;font-weight:800;color:var(--theme-accent,var(--gold2));cursor:pointer;font-family:var(--font-ui);flex:0 0 auto;white-space:nowrap;margin-left:2px}' +
       '.sf-post--image-feed .sf-read-more:hover{text-decoration:underline}' +
       '.sf-post--demo{border-color:var(--theme-border,var(--line));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.28))}' +
       '.sf-post__head{display:flex;align-items:center;gap:10px;padding:10px 12px 8px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
@@ -2496,8 +2528,6 @@
   }
 
   function postFeedCardHtml(item, cardIdx) {
-    var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
-    var orig = item.originalImage || item.image || '';
     var liked = isLiked(item.uid);
     var eager = cardIdx != null && cardIdx < 3;
     var sub = [item.category, timeAgo(item.date)].filter(Boolean).join(' · ');
@@ -2515,15 +2545,7 @@
             '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false">' +
           '</div>' +
         '</div>' +
-        '<div class="sf-post__actions feed-actions">' +
-          '<div class="sf-actions-left">' +
-            '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span></button>' +
-            (item.shareEnabled !== false ?
-              '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-original-image="' + esc(orig) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Teilen"><span aria-hidden="true">↗</span><span class="sf-act-label">Teilen</span></button>' :
-              '') +
-          '</div>' +
-        '</div>' +
-        feedEngagementRowHtml(item, liked) +
+        postFeedBarHtml(item, liked) +
       '</article>'
     );
   }
@@ -2931,49 +2953,82 @@
     return (cleanTitle || 'dar-al-tawhid-bildbeitrag') + '.' + extension;
   }
 
+  function downloadFeedBlob(blob, fileName) {
+    try {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    } catch (e) {}
+  }
+
+  async function fetchFeedImageBlob(imageUrl) {
+    var abs = feedShareAbsUrl(imageUrl);
+    if (!abs) throw new Error('img-src');
+    try {
+      var response = await fetch(abs, { cache: 'no-store', credentials: 'same-origin' });
+      if (response.ok) return await response.blob();
+    } catch (eFetch) {}
+    var img = await feedShareLoadImg(imageUrl);
+    var canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, img.naturalWidth || img.width || 1);
+    canvas.height = Math.max(1, img.naturalHeight || img.height || 1);
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    return new Promise(function (resolve, reject) {
+      canvas.toBlob(function (blob) {
+        if (blob) resolve(blob);
+        else reject(new Error('blob-fail'));
+      }, 'image/png');
+    });
+  }
+
   async function shareOriginalFeedImage(opts) {
     var imageUrl = opts && opts.imageUrl;
     var postUrl = opts && opts.postUrl;
     var title = (opts && opts.title) || 'DAR AL TAWḤID';
+    if (!imageUrl) {
+      showToast('Kein Bild zum Teilen gefunden.');
+      return;
+    }
     try {
-      var absoluteImageUrl = new URL(imageUrl, global.location.origin).toString();
-      var absolutePostUrl = new URL(postUrl || '/#feed', global.location.origin).toString();
-      var response = await fetch(absoluteImageUrl, { cache: 'no-store' });
-      if (!response.ok) throw new Error('Originalbild konnte nicht geladen werden.');
-      var blob = await response.blob();
+      var blob = await fetchFeedImageBlob(imageUrl);
       var extension = getExtensionFromMime(blob.type);
       var fileName = createSafeFileName(title, extension);
-      var file = new File([blob], fileName, { type: blob.type || 'image/jpeg' });
-      if (global.navigator.canShare && global.navigator.canShare({ files: [file] }) && global.navigator.share) {
-        await global.navigator.share({
-          title: title,
-          text: 'Bildbeitrag von DAR AL TAWḤID',
-          url: absolutePostUrl,
-          files: [file]
-        });
+      var mime = blob.type || ('image/' + (extension === 'jpg' ? 'jpeg' : extension));
+      var file = new File([blob], fileName, { type: mime });
+      if (global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
+        await global.navigator.share({ files: [file] });
         return;
       }
-      global.open(absoluteImageUrl, '_blank', 'noopener,noreferrer');
-      if (global.navigator.clipboard) {
-        await global.navigator.clipboard.writeText(absolutePostUrl);
+      if (global.navigator.share) {
+        try {
+          await global.navigator.share({ title: title, files: [file] });
+          return;
+        } catch (eShare) {
+          if (eShare && eShare.name === 'AbortError') return;
+        }
       }
-      showToast('Das Originalbild wurde geöffnet. Der Beitragslink wurde kopiert.');
+      downloadFeedBlob(blob, fileName);
+      showToast('Bild gespeichert — du kannst es jetzt in deiner Galerie teilen.');
     } catch (error) {
       if (error && error.name === 'AbortError') return;
       console.error(error);
-      if (postUrl) {
-        var fallbackPostUrl = new URL(postUrl, global.location.origin).toString();
-        if (global.navigator.share) {
-          await global.navigator.share({
-            title: title,
-            text: 'Beitrag von DAR AL TAWḤID',
-            url: fallbackPostUrl
-          });
-          return;
-        }
-        if (global.navigator.clipboard) {
+      try {
+        downloadFeedBlob(await fetchFeedImageBlob(imageUrl), createSafeFileName(title, 'png'));
+        showToast('Bild gespeichert — du kannst es jetzt teilen.');
+      } catch (e2) {
+        if (postUrl && global.navigator.clipboard) {
+          var fallbackPostUrl = new URL(postUrl, global.location.origin).toString();
           await global.navigator.clipboard.writeText(fallbackPostUrl);
-          showToast('Teilen wurde nicht unterstützt. Der Beitragslink wurde kopiert.');
+          showToast('Bild konnte nicht geteilt werden. Beitragslink wurde kopiert.');
+        } else {
+          showToast('Bild konnte nicht geteilt werden.');
         }
       }
     }
@@ -3001,6 +3056,8 @@
 
   function bindList(root) {
     root.querySelectorAll('.sf-post').forEach(function (card) {
+      if (card.dataset.pfCardBound === '1') return;
+      card.dataset.pfCardBound = '1';
       var uid = card.getAttribute('data-pf-id');
       var item = state.visible.find(function (x) { return x.uid === uid; });
       function open() {
@@ -3036,6 +3093,8 @@
       });
     });
     root.querySelectorAll('.sf-like').forEach(function (btn) {
+      if (btn.dataset.pfLikeBound === '1') return;
+      btn.dataset.pfLikeBound = '1';
       btn.addEventListener('click', function (ev) {
         ev.stopPropagation();
         var uid = btn.getAttribute('data-pf-like');
@@ -3046,13 +3105,17 @@
         if (icon) icon.textContent = on ? '♥' : '♡';
         var card = btn.closest('.sf-post');
         var item = state.visible.find(function (x) { return x.uid === uid; });
-        if (card && item) {
-          var old = card.querySelector('.sf-post__engagement');
-          var html = feedEngagementRowHtml(item, on);
-          if (old) old.outerHTML = html;
-          else {
-            var actions = card.querySelector('.sf-post__actions');
-            if (actions) actions.insertAdjacentHTML('afterend', html);
+        if (card && item && card.classList.contains('sf-post--image-feed')) {
+          var statsEl = card.querySelector('.sf-bar-stats');
+          if (statsEl) {
+            var st = feedStatsFor(item.postId);
+            var likeTotal = (Number(st.saves) || 0) + (on ? 1 : 0);
+            var parts = [];
+            if (st.views > 0) parts.push('<strong>' + formatStatCount(st.views) + '</strong> Aufrufe');
+            if (st.shares > 0) parts.push('<strong>' + formatStatCount(st.shares) + '</strong> geteilt');
+            if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+            statsEl.innerHTML = parts.join(' · ');
+            statsEl.classList.toggle('sf-bar-stats--empty', !parts.length);
           }
         }
       });
@@ -3074,11 +3137,15 @@
       btn.addEventListener('click', function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
+        if (btn.classList.contains('is-loading')) return;
+        btn.classList.add('is-loading');
         var postId = btn.getAttribute('data-post-id');
         shareOriginalFeedImage({
           imageUrl: btn.getAttribute('data-original-image'),
           postUrl: btn.getAttribute('data-post-url'),
           title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
+        }).finally(function () {
+          btn.classList.remove('is-loading');
         });
         try {
           if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
@@ -3261,11 +3328,30 @@
     renderListMount(mount);
   }
 
-  function applyFeedData(mount, manualItems, restoredScroll) {
+  function applyFeedData(mount, manualItems, restoredScroll, opts) {
+    opts = opts || {};
     var ctx = getCtx();
     var pools = buildPools(ctx, state.seed);
     var merged = mergeFeed(pools, manualItems || [], state.seed);
+    var nextSig = feedItemsSignature(merged);
+    var sameItems = !!state._feedSig && nextSig === state._feedSig;
     state.allItems = merged;
+    state._feedSig = nextSig;
+    if (sameItems && !opts.force && mount.querySelector('.sf-feed') && state.visible.length) {
+      loadFeedStats().finally(function () {
+        refreshFeedEngagement(mount);
+      });
+      if (restoredScroll != null) {
+        if (global.DARScrollManager && global.DARScrollManager.stableScrollTo) {
+          global.DARScrollManager.stableScrollTo(restoredScroll);
+        } else {
+          global.requestAnimationFrame(function () {
+            global.scrollTo({ top: restoredScroll, behavior: 'auto' });
+          });
+        }
+      }
+      return;
+    }
     state.offset = 0;
     state.done = false;
     state.visible = [];
@@ -3327,8 +3413,7 @@
     },
     onPostsUpdated: function () {
       if (!isFeedRoute()) return;
-      clearFeedState();
-      startFeedMount({ force: true });
+      startFeedMount({ force: false });
     }
   };
 

@@ -7816,7 +7816,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<script src="/assets/premium-feed-app.js?v=74" defer></script>
+<script src="/assets/premium-feed-app.js?v=75" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8089,7 +8089,7 @@ function comparePostsNewestFirst(a,b){const da=postSortTimestamp(a),db=postSortT
 function normalizePostDedupeText(text){return String(text||"").replace(/[^\p{L}\p{N}\s]/gu," ").replace(/\s+/g," ").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 function postDedupeSignature(post){const scholar=normalizePostDedupeText(post?.scholar||"");const body=normalizePostDedupeText(stripMd(post?.statement||""));const quoteMatch=body.match(/sagte\s+(.{20,240})/)||body.match(/(.{40,240})/);const core=(quoteMatch?quoteMatch[1]:body).slice(0,220);return scholar+"::"+core}
 function dedupePostsByContent(list){const sorted=[...(Array.isArray(list)?list:[])].sort(comparePostsNewestFirst);const seen=new Map();const out=[];for(const post of sorted){if(!post||!post.id)continue;const sig=postDedupeSignature(post);if(sig.length>25&&seen.has(sig))continue;if(sig.length>25)seen.set(sig,true);out.push(post)}return out.sort(comparePostsNewestFirst)}
-function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?list:[]).map(post=>({...post,statement:cleanBodyText(post.statement)})));normalizeLoadedPosts();if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function"&&document.getElementById("focusFeedMount"))window.DAR_FOCUS_FEED.onAppReady();if(document.getElementById("premiumFeedMount"))initPremiumFeedTab(true);else if(window.DAR_PREMIUM_FEED?.onPostsUpdated)window.DAR_PREMIUM_FEED.onPostsUpdated()}
+function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?list:[]).map(post=>({...post,statement:cleanBodyText(post.statement)})));normalizeLoadedPosts();if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function"&&document.getElementById("focusFeedMount"))window.DAR_FOCUS_FEED.onAppReady();if(window.DAR_PREMIUM_FEED?.onPostsUpdated)window.DAR_PREMIUM_FEED.onPostsUpdated();else if(document.getElementById("premiumFeedMount"))initPremiumFeedTab(false)}
 function darAppContentContext(){return{posts:posts||[],duas:typeof DUAS!=="undefined"?DUAS:[],categoryLayout:CATEGORY_LAYOUT||null,quranMeta:quranMeta||null}}
 function darFocusFeedAppContext(){return darAppContentContext()}
 function darPremiumFeedAppContext(){return darAppContentContext()}
@@ -8233,7 +8233,7 @@ async function refreshContent({forceRender=false}={}){
       const changed=before!==postsSignature()+"::"+DUAS.length+"::"+JSON.stringify(currentUpdates)+"::"+dailySig();
       if(forceRender||changed)schedulePostsRender(true);
       if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function")window.DAR_FOCUS_FEED.onAppReady();
-      if(typeof window.DAR_PREMIUM_FEED?.onAppReady==="function")window.DAR_PREMIUM_FEED.onAppReady();
+      if(typeof window.DAR_PREMIUM_FEED?.onPostsUpdated==="function")window.DAR_PREMIUM_FEED.onPostsUpdated();
       return changed;
     }finally{
       refreshContentPromise=null;
@@ -10499,7 +10499,7 @@ function render(){
     updateOfflineBox();
     if(currentRoute.view==="home")loadPopularPostsBlock();
     if(currentRoute.view==="home"&&window.DAR_FOCUS_FEED){(window.DAR_FOCUS_FEED.onAppReady||window.DAR_FOCUS_FEED.refresh).call(window.DAR_FOCUS_FEED,{force:true})}
-    if(currentRoute.view==="feed"&&currentRoute.value!=="topics")initPremiumFeedTab(true);
+    if(currentRoute.view==="feed"&&currentRoute.value!=="topics"){const pfMount=document.getElementById("premiumFeedMount");if(pfMount&&!pfMount.querySelector(".sf-app"))initPremiumFeedTab(true)}
     else if(window.DAR_PREMIUM_FEED&&typeof window.DAR_PREMIUM_FEED.destroy==="function")window.DAR_PREMIUM_FEED.destroy();
     if(currentRoute.view==="zakat"&&window.DARZakatApp){
       window.DARZakatApp.bindZakat();
