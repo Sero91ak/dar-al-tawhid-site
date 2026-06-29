@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v181";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v182";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true,subtree:true})})();</script>
 
@@ -10343,7 +10343,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v181";
+const APP_BUILD_ID="app-shell-v182";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -10523,6 +10523,41 @@ function renderPost(id){
   return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">${isSlidePost(post)?"Slide-Beitrag":"Beitrag"}</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}${body}${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
+function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
+  const sm=window.DARScrollManager;
+  const stable=(y)=>{if(sm?.stableScrollTo)sm.stableScrollTo(y);else requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(y)||0),behavior:"auto"}))};
+  const flag=sm?.consumePreserveFlag?.();
+  if(flag?.mode==="top"){stable(0);window.__smoothNav=false;return}
+  if(flag?.mode==="preserve"){stable(scrollBefore);window.__smoothNav=false;return}
+  if(flag?.mode==="restore"){stable(flag.y);window.__smoothNav=false;return}
+  if(currentRoute.view==="feed"){
+    window.__smoothNav=false;
+    const restoreFeed=()=>{
+      if(window.DAR_PREMIUM_FEED?.tryRestore?.()){window.__restoreScrollY=null;return true}
+      if(typeof window.__restoreScrollY==="number"&&window.__restoreScrollY>0){stable(window.__restoreScrollY);window.__restoreScrollY=null;return true}
+      const saved=getNavScroll(currentRoute);if(saved>0){stable(saved);return true}
+      return false;
+    };
+    if(!restoreFeed())setTimeout(()=>restoreFeed(),180);
+    return;
+  }
+  if(currentRoute.view==="quran"&&restoreQuranListScroll()){window.__smoothNav=false;return}
+  if(ayahJump>0){setTimeout(()=>scrollToQuranAyah(ayahJump),140);window.__smoothNav=false;return}
+  if(typeof window.__restoreScrollY==="number"){
+    const y=window.__restoreScrollY;window.__restoreScrollY=null;
+    stable(y);window.__smoothNav=false;return;
+  }
+  if(currentRoute.view==="post"){requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToPostStatement()));window.__smoothNav=false;return}
+  if(currentRoute.view==="dua"){requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToViewAnchor("duaReadStart",8)));window.__smoothNav=false;return}
+  if(currentRoute.view==="image-editor"||currentRoute.view==="image-editor-test"){requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToViewAnchor("imageEditorAnchor",6)));window.__smoothNav=false;return}
+  if(currentRoute.view==="news-detail"){requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToViewAnchor("newsReadStart",8)));window.__smoothNav=false;return}
+  if(sameRoute){stable(scrollBefore);window.__smoothNav=false;return}
+  const saved=getNavScroll(currentRoute);
+  if(saved>0){stable(saved);window.__smoothNav=false;return}
+  if(isDetailRoute(currentRoute)){stable(scrollBefore);window.__smoothNav=false;return}
+  if(fromGesture){stable(0);window.__smoothNav=false;return}
+  stable(0);window.__smoothNav=false;
+}
 function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);updateBottomNav(route);if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"Mehr","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
