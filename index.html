@@ -6911,7 +6911,7 @@ OneSignalDeferred.push(async function(OneSignal){
   window.OneSignal=OneSignal;
   window.DAR_ONE_SIGNAL_READY=true;
   try{await ensurePushUserLogin(OneSignal)}catch(e){}
-  try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationAndWelcome().catch(()=>{});maintainPushHealth({silent:true}).catch(()=>{})})}catch(e){}
+  try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationOnly().catch(()=>{});sendWelcomePushIfNeeded().catch(()=>{});maintainPushHealth({silent:true}).catch(()=>{})})}catch(e){}
   try{if(getPrayerSettings().reminder)await syncPrayerPushTags()}catch(e){}
   try{startPushHealthMonitor()}catch(e){}
   try{updatePushFloatButton()}catch(e){}
@@ -6952,7 +6952,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<script src="/assets/premium-feed-app.js?v=75" defer></script>
+<script src="/assets/premium-feed-app.js?v=78" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -7227,7 +7227,8 @@ function comparePostsNewestFirst(a,b){const da=postSortTimestamp(a),db=postSortT
 function normalizePostDedupeText(text){return String(text||"").replace(/[^\p{L}\p{N}\s]/gu," ").replace(/\s+/g," ").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 function postDedupeSignature(post){const scholar=normalizePostDedupeText(post?.scholar||"");const body=normalizePostDedupeText(stripMd(post?.statement||""));const quoteMatch=body.match(/sagte\s+(.{20,240})/)||body.match(/(.{40,240})/);const core=(quoteMatch?quoteMatch[1]:body).slice(0,220);return scholar+"::"+core}
 function dedupePostsByContent(list){const sorted=[...(Array.isArray(list)?list:[])].sort(comparePostsNewestFirst);const seen=new Map();const out=[];for(const post of sorted){if(!post||!post.id)continue;const sig=postDedupeSignature(post);if(sig.length>25&&seen.has(sig))continue;if(sig.length>25)seen.set(sig,true);out.push(post)}return out.sort(comparePostsNewestFirst)}
-function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?list:[]).map(post=>({...post,statement:cleanBodyText(post.statement)})));normalizeLoadedPosts();if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function"&&document.getElementById("focusFeedMount"))window.DAR_FOCUS_FEED.onAppReady();if(window.DAR_PREMIUM_FEED?.onPostsUpdated)window.DAR_PREMIUM_FEED.onPostsUpdated();else if(document.getElementById("premiumFeedMount"))initPremiumFeedTab(false)}
+function notifyFeedPostsUpdated(){if(window.DAR_PREMIUM_FEED?.onPostsUpdated)window.DAR_PREMIUM_FEED.onPostsUpdated();else if(document.getElementById("premiumFeedMount"))initPremiumFeedTab(false)}
+function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?list:[]).map(post=>({...post,statement:cleanBodyText(post.statement)})));normalizeLoadedPosts();if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function"&&document.getElementById("focusFeedMount"))window.DAR_FOCUS_FEED.onAppReady();if(!postsSyncSilent)notifyFeedPostsUpdated()}
 function darAppContentContext(){return{posts:posts||[],duas:typeof DUAS!=="undefined"?DUAS:[],categoryLayout:CATEGORY_LAYOUT||null,quranMeta:quranMeta||null}}
 function darFocusFeedAppContext(){return darAppContentContext()}
 function darPremiumFeedAppContext(){return darAppContentContext()}
@@ -7351,7 +7352,7 @@ async function fetchWithTimeout(url,ms=POSTS_FETCH_TIMEOUT_MS){const ctrl=new Ab
 async function fetchPostsIndexMeta(){const bust=Date.now();const urls=[`${POSTS_INDEX_PATH}?v=${bust}`,`${POSTS_INDEX_RAW}?v=${bust}`];const results=await Promise.allSettled(urls.map(async url=>{try{const r=await fetchWithTimeout(url);if(!r.ok)return[];const data=await r.json();return data&&Array.isArray(data.files)?data.files:[]}catch(e){return[]}}));const merged=mergePostFileLists(...results.map(r=>r.status==="fulfilled"?r.value:[]));if(merged.length){try{setJson(POSTS_INDEX_STALE_KEY,{files:merged,at:Date.now()})}catch(e){}return merged}const stale=getJson(POSTS_INDEX_STALE_KEY,null);if(stale?.files?.length)return stale.files;return null}
 async function fetchGithubPostFileList(){const response=await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_DIR}?ref=${BRANCH}`,{cache:"no-store"});if(!response.ok)throw new Error("GitHub API "+response.status);const files=await response.json();if(!Array.isArray(files))throw new Error("GitHub API unerwartete Antwort");return files.filter(file=>file.type==="file"&&file.name.endsWith(".md")).map(f=>({name:f.name,sha:f.sha||""}))}
 async function resolvePostFileList(){const fromIndex=await fetchPostsIndexMeta();if(fromIndex&&fromIndex.length)return fromIndex;try{return await fetchGithubPostFileList()}catch(e){console.warn("Post-Liste:",e);return null}}
-async function loadPostsFromFileList(markdownFiles,cached){const fileMap=getJson(POST_FILE_MAP_KEY,{});const names=new Set(markdownFiles.map(f=>f.name));Object.keys(fileMap).forEach(name=>{if(!names.has(name))delete fileMap[name]});const cachedActive=filterPostsByFileIndex(cached,names);const freshFromCache=markdownFiles.filter(f=>postFileIsFresh(f,fileMap,cachedActive)).map(f=>postFromCachedFile(cachedActive,f.name)).filter(Boolean);let needsFetch=markdownFiles.filter(f=>!postFileIsFresh(f,fileMap,cachedActive));needsFetch.sort((a,b)=>postFileSortRank(b.name)-postFileSortRank(a.name));const baseList=mergePostsLists(cachedActive,freshFromCache);const hadImmediatePosts=baseList.length>0;if(hadImmediatePosts){applyPostsList(baseList);persistPostsCache()}else if(cachedActive.length){applyPostsList(cachedActive)}if(!needsFetch.length){postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";return posts.length}postsSyncSilent=hadImmediatePosts;if(!postsSyncSilent){postsSyncBusy=true;postsSyncLabel=needsFetch.length>12?`Neue Inhalte werden geladen (${needsFetch.length})…`:needsFetch.length>1?`Neue Beiträge werden geladen (${needsFetch.length})…`:"Neuer Beitrag wird geladen…";schedulePostsRender(true)}else{postsSyncBusy=false;postsSyncLabel=""}try{for(let i=0;i<needsFetch.length;i+=POSTS_FETCH_BATCH){const batch=needsFetch.slice(i,i+POSTS_FETCH_BATCH);const results=await Promise.allSettled(batch.map(fetchPostFile));const batchNew=[];results.forEach(r=>{if(r.status==="fulfilled"){const sha=r.value.sha||markdownFiles.find(x=>x.name===r.value.name)?.sha||"";fileMap[r.value.name]={sha,post:r.value.post,parseVersion:POST_PARSE_VERSION};batchNew.push(r.value.post)}});if(batchNew.length){applyPostsList(mergePostsLists(posts,batchNew));persistPostFileMap(fileMap);persistPostsCache();schedulePostsRender(postsSyncSilent?false:true)}if(i+POSTS_FETCH_BATCH<needsFetch.length)await new Promise(r=>setTimeout(r,postsSyncSilent?12:0))}}finally{postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";persistPostFileMap(fileMap);persistPostsCache();persistOfflineLibrary();schedulePostsRender(true)}return posts.length}
+async function loadPostsFromFileList(markdownFiles,cached){const fileMap=getJson(POST_FILE_MAP_KEY,{});const names=new Set(markdownFiles.map(f=>f.name));Object.keys(fileMap).forEach(name=>{if(!names.has(name))delete fileMap[name]});const cachedActive=filterPostsByFileIndex(cached,names);const freshFromCache=markdownFiles.filter(f=>postFileIsFresh(f,fileMap,cachedActive)).map(f=>postFromCachedFile(cachedActive,f.name)).filter(Boolean);let needsFetch=markdownFiles.filter(f=>!postFileIsFresh(f,fileMap,cachedActive));needsFetch.sort((a,b)=>postFileSortRank(b.name)-postFileSortRank(a.name));const baseList=mergePostsLists(cachedActive,freshFromCache);const hadImmediatePosts=baseList.length>0;if(hadImmediatePosts){applyPostsList(baseList);persistPostsCache()}else if(cachedActive.length){applyPostsList(cachedActive)}if(!needsFetch.length){postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";return posts.length}postsSyncSilent=hadImmediatePosts;if(!postsSyncSilent){postsSyncBusy=true;postsSyncLabel=needsFetch.length>12?`Neue Inhalte werden geladen (${needsFetch.length})…`:needsFetch.length>1?`Neue Beiträge werden geladen (${needsFetch.length})…`:"Neuer Beitrag wird geladen…";schedulePostsRender(true)}else{postsSyncBusy=false;postsSyncLabel=""}try{for(let i=0;i<needsFetch.length;i+=POSTS_FETCH_BATCH){const batch=needsFetch.slice(i,i+POSTS_FETCH_BATCH);const results=await Promise.allSettled(batch.map(fetchPostFile));const batchNew=[];results.forEach(r=>{if(r.status==="fulfilled"){const sha=r.value.sha||markdownFiles.find(x=>x.name===r.value.name)?.sha||"";fileMap[r.value.name]={sha,post:r.value.post,parseVersion:POST_PARSE_VERSION};batchNew.push(r.value.post)}});if(batchNew.length){applyPostsList(mergePostsLists(posts,batchNew));persistPostFileMap(fileMap);persistPostsCache();schedulePostsRender(postsSyncSilent?false:true)}if(i+POSTS_FETCH_BATCH<needsFetch.length)await new Promise(r=>setTimeout(r,postsSyncSilent?12:0))}}finally{const hadSilentSync=postsSyncSilent;postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";persistPostFileMap(fileMap);persistPostsCache();persistOfflineLibrary();if(hadSilentSync)notifyFeedPostsUpdated();schedulePostsRender(true)}return posts.length}
 async function loadPosts(){const cached=getCachedPosts();if(!navigator.onLine){if(cached.length)applyPostsList(cached);return posts.length}try{const markdownFiles=await resolvePostFileList();if(!markdownFiles||!markdownFiles.length){if(cached.length)applyPostsList(cached);return posts.length}return await loadPostsFromFileList(markdownFiles,cached)}catch(error){console.warn(error);if(cached.length)applyPostsList(cached);return posts.length}}
 async function loadCurrentUpdates(){try{const cached=getJson(CURRENT_UPDATES_CACHE_KEY,[]);if(Array.isArray(cached))currentUpdates=cached}catch(e){}if(!navigator.onLine)return currentUpdates;const bust=Date.now();const updatesFile=CURRENT_UPDATES_PATH.replace(/^\//,"");const urls=[`${CURRENT_UPDATES_PATH}?v=${bust}`,`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${updatesFile}?v=${bust}`];for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];currentUpdates=items.filter(Boolean);try{setJson(CURRENT_UPDATES_CACHE_KEY,currentUpdates)}catch(e){}return currentUpdates}catch(e){}}console.warn("Aktuell-Hinweise konnten nicht geladen werden");return currentUpdates}
 function activeCurrentUpdates(){const now=Date.now();const BLOCKED_STATUSES=["removed","archived","failed","expired","draft"];return(Array.isArray(currentUpdates)?currentUpdates:[]).filter(item=>{if(!item)return false;if(item.status&&BLOCKED_STATUSES.includes(item.status))return false;if(item.visible===false)return false;const created=Date.parse(item.createdAt||item.date||item.publishedAt||"");const expires=Date.parse(item.expiresAt||"");if(Number.isFinite(expires))return expires>now;if(Number.isFinite(created)){const ttl=Number(item.ttlHours||24);return now-created>=0&&now-created<=ttl*60*60*1000}return false}).sort((a,b)=>Date.parse(b.createdAt||b.date||0)-Date.parse(a.createdAt||a.date||0))}
@@ -7364,12 +7365,14 @@ async function refreshContent({forceRender=false}={}){
     try{
       const dailySig=()=>{const d=dailyContentToday();return (d?.recommendation?.id||"")+"|"+(d?.dua?.id||"")};
       const before=postsSignature()+"::"+DUAS.length+"::"+JSON.stringify(currentUpdates)+"::"+dailySig();
+      const beforePosts=postsSignature();
       await loadCategoryLayout();
       await loadPosts();
       await loadExternalDuas();
       await loadCurrentUpdates();
       if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function")window.DAR_FOCUS_FEED.onAppReady();
-      if(typeof window.DAR_PREMIUM_FEED?.onPostsUpdated==="function")window.DAR_PREMIUM_FEED.onPostsUpdated();
+      const postsChanged=beforePosts!==postsSignature();
+      if(postsChanged&&typeof window.DAR_PREMIUM_FEED?.onPostsUpdated==="function")window.DAR_PREMIUM_FEED.onPostsUpdated();
       await loadDailyContent();
       normalizeLoadedDuas();
       persistOfflineLibrary();
@@ -7916,16 +7919,22 @@ function nextPlannedPrayerNotification(settings=getPrayerSettings()){
 const PRAYER_PUSH_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev";
 window.PRAYER_PUSH_WORKER_URL=PRAYER_PUSH_WORKER_URL;
 const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
+let welcomePushInFlight=false;
+function welcomePushStorageKey(subId){return "dar_welcome_push_v2_"+String(subId||"").trim()}
+function welcomePushAlreadySent(subId){if(!subId)return true;try{if(localStorage.getItem(welcomePushStorageKey(subId))==="1")return true;if(localStorage.getItem(WELCOME_PUSH_SENT_KEY)==="1")return true}catch(e){}return false}
+function markWelcomePushSent(subId){if(!subId)return;try{localStorage.setItem(welcomePushStorageKey(subId),"1");localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1")}catch(e){}}
 async function sendWelcomePushIfNeeded(OS){
   try{
-    if(localStorage.getItem(WELCOME_PUSH_SENT_KEY)==="1")return false;
-    const os=OS||await waitForOneSignalReady(10000);
+    const os=OS||await waitForOneSignalReady(8000);
     const subId=String(os?.User?.PushSubscription?.id||"").trim();
     if(!subId||!os?.User?.PushSubscription?.optedIn)return false;
+    if(welcomePushAlreadySent(subId))return false;
+    if(welcomePushInFlight)return false;
+    welcomePushInFlight=true;
     const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:subId})});
     const data=await r.json().catch(()=>({}));
-    if(r.ok&&data.sent&&data.delivered!==false){localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1");return true}
-  }catch(e){console.warn("Willkommens-Push:",e)}
+    if(r.ok&&data.sent){markWelcomePushSent(subId);return true}
+  }catch(e){console.warn("Willkommens-Push:",e)}finally{welcomePushInFlight=false}
   return false;
 }
 async function syncPushRegistrationOnly(OS){
@@ -8002,7 +8011,7 @@ async function repairPushConnection({silent=false}={}){
   await ensurePushUserLogin(OS);
   const sub=OS.User?.PushSubscription;
   if(sub?.optedIn&&typeof sub.optOut==="function"){try{await sub.optOut()}catch(e){}await sleep(900);}
-  try{localStorage.removeItem(WELCOME_PUSH_SENT_KEY)}catch(e){}
+  try{localStorage.removeItem(WELCOME_PUSH_SENT_KEY);const repairSub=String(OS?.User?.PushSubscription?.id||"").trim();if(repairSub)localStorage.removeItem(welcomePushStorageKey(repairSub))}catch(e){}
   const subscribed=await ensureOneSignalPushSubscription(OS,{timeoutMs:45000,request:true});
   if(!subscribed)issues.push("Push-Verbindung zum Server konnte nicht hergestellt werden.");
   await ensurePostPushTags(OS);
