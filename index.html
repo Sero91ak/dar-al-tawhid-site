@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v178";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v179";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 
 <title>DAR AL TAWḤID</title>
@@ -735,6 +735,7 @@ body.has-bottom-nav{padding-bottom:calc(70px + max(0px,calc(env(safe-area-inset-
 body.has-bottom-nav .float-actions{bottom:calc(76px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 @media(max-width:700px){body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important}body.is-feed-fullscreen .view{border-radius:0;padding:0!important}}
+body.is-feed-fullscreen #appView .view-head{display:none!important}
 .top-edge-fade{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 14px);background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 38%),radial-gradient(circle at 88% 4%,rgba(155,122,60,.08),transparent 34%),linear-gradient(180deg,var(--page-cover) 0%,var(--page-cover-mid) 100%)}.top-swim-aura{position:fixed;top:0;left:0;right:0;z-index:0;pointer-events:none;height:calc(env(safe-area-inset-top,0px) + 34px);overflow:hidden}.top-swim-aura:before{content:"";position:absolute;left:4%;right:4%;top:calc(env(safe-area-inset-top,0px) + 2px);height:30px;background:radial-gradient(ellipse 96% 100% at 50% 100%,rgba(239,215,142,.10) 0%,rgba(18,16,12,.38) 50%,rgba(6,6,4,.72) 82%,transparent 100%);filter:blur(8px);opacity:.9}.reader-mode .top-edge-fade,.reader-mode .top-swim-aura{display:none!important}
 .reader-mode .bottom-nav{display:none!important}
 html.is-standalone-pwa{background:var(--page-cover)}
@@ -9614,7 +9615,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v178";
+const APP_BUILD_ID="app-shell-v179";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
