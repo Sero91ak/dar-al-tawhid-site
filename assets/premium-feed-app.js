@@ -269,7 +269,7 @@
       value: gradientStyleFor(item),
       reason: reason || 'gradient',
       backgroundMeta: metaForGradient(theme),
-      overlay: overlayForTheme(theme, lightTheme ? 'light' : 'dark')
+      overlay: overlayForTheme(theme, lightTheme ? (theme === 'soft' ? undefined : 'light') : 'dark')
     };
   }
 
