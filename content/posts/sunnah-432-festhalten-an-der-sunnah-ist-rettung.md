@@ -20,7 +20,7 @@ logo: "logo-black.png"
 feed:
   enabled: true
   image: "/assets/posts/az-zuhri-festhalten-an-der-sunnah-rettung-432/feed-preview.jpg"
-  originalImage: "/assets/posts/az-zuhri-festhalten-an-der-sunnah-rettung-432/feed-original.jpg"
+  originalImage: "/assets/posts/az-zuhri-festhalten-an-der-sunnah-rettung-432/feed-original.png"
   alt: "Bildbeitrag zu: 📖 Festhalten an der Sunnah ist Rettung"
   shareEnabled: true
 ---

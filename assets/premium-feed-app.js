@@ -1113,7 +1113,8 @@
 
   function postFeedBarHtml(item, liked) {
     var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
-    var orig = item.originalImage || item.image || '';
+    var preview = item.image || '';
+    var orig = item.originalImage || preview || '';
     var stats = feedStatsFor(item.postId);
     var likeTotal = (Number(stats.saves) || 0) + (liked ? 1 : 0);
     var parts = [];
@@ -1128,7 +1129,7 @@
       '<div class="sf-post__bar feed-bar">' +
         '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span></button>' +
         (item.shareEnabled !== false ?
-          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-original-image="' + esc(orig) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Bild teilen"><span aria-hidden="true">↗</span></button>' :
+          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-original-image="' + esc(orig) + '" data-feed-preview-image="' + esc(preview) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Bild teilen"><span aria-hidden="true">↗</span></button>' :
           '') +
         statsHtml +
         readBtn +
@@ -2967,6 +2968,36 @@
     } catch (e) {}
   }
 
+  function feedShareImageCandidates(original, preview) {
+    var urls = [];
+    var add = function (u) {
+      u = String(u || '').trim();
+      if (!u || urls.indexOf(u) >= 0) return;
+      urls.push(u);
+    };
+    add(original);
+    add(preview);
+    urls.slice().forEach(function (u) {
+      add(u.replace(/\.jpe?g(\?.*)?$/i, '.png$1'));
+      add(u.replace(/\.png(\?.*)?$/i, '.jpg$1'));
+      add(u.replace(/feed-original(\.[a-z0-9]+)?(\?.*)?$/i, 'feed-preview$1$2'));
+      add(u.replace(/feed-preview(\.[a-z0-9]+)?(\?.*)?$/i, 'feed-original$1$2'));
+    });
+    return urls;
+  }
+
+  async function fetchFeedImageBlobFromCandidates(urls) {
+    var lastErr = null;
+    for (var i = 0; i < urls.length; i++) {
+      try {
+        return await fetchFeedImageBlob(urls[i]);
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    throw lastErr || new Error('img-load');
+  }
+
   async function fetchFeedImageBlob(imageUrl) {
     var abs = feedShareAbsUrl(imageUrl);
     if (!abs) throw new Error('img-src');
@@ -2989,15 +3020,17 @@
   }
 
   async function shareOriginalFeedImage(opts) {
-    var imageUrl = opts && opts.imageUrl;
     var postUrl = opts && opts.postUrl;
     var title = (opts && opts.title) || 'DAR AL TAWḤID';
-    if (!imageUrl) {
+    var urls = Array.isArray(opts && opts.imageUrls) && opts.imageUrls.length
+      ? opts.imageUrls.slice()
+      : feedShareImageCandidates(opts && opts.imageUrl, opts && opts.previewUrl);
+    if (!urls.length) {
       showToast('Kein Bild zum Teilen gefunden.');
       return;
     }
     try {
-      var blob = await fetchFeedImageBlob(imageUrl);
+      var blob = await fetchFeedImageBlobFromCandidates(urls);
       var extension = getExtensionFromMime(blob.type);
       var fileName = createSafeFileName(title, extension);
       var mime = blob.type || ('image/' + (extension === 'jpg' ? 'jpeg' : extension));
@@ -3020,7 +3053,7 @@
       if (error && error.name === 'AbortError') return;
       console.error(error);
       try {
-        downloadFeedBlob(await fetchFeedImageBlob(imageUrl), createSafeFileName(title, 'png'));
+        downloadFeedBlob(await fetchFeedImageBlobFromCandidates(urls), createSafeFileName(title, 'png'));
         showToast('Bild gespeichert — du kannst es jetzt teilen.');
       } catch (e2) {
         if (postUrl && global.navigator.clipboard) {
@@ -3052,6 +3085,39 @@
 
   function shareFeedCardAsImage(feedItemId) {
     return feedShareRun(feedItemId);
+  }
+
+  function ensureFeedShareDelegation(root) {
+    var feed = null;
+    if (root && root.querySelector) feed = root.querySelector('.sf-feed');
+    else if (root && root.classList && root.classList.contains('sf-feed')) feed = root;
+    if (!feed || feed.dataset.pfShareDelegated === '1') return;
+    feed.dataset.pfShareDelegated = '1';
+    feed.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('.share-image-btn');
+      if (!btn || !feed.contains(btn)) return;
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      ev.stopPropagation();
+      if (btn.classList.contains('is-loading')) return;
+      btn.classList.add('is-loading');
+      var postId = btn.getAttribute('data-post-id');
+      var urls = feedShareImageCandidates(
+        btn.getAttribute('data-original-image'),
+        btn.getAttribute('data-feed-preview-image')
+      );
+      shareOriginalFeedImage({
+        imageUrls: urls,
+        postUrl: btn.getAttribute('data-post-url'),
+        title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
+      }).then(function () {
+        try {
+          if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+        } catch (e) {}
+      }).finally(function () {
+        btn.classList.remove('is-loading');
+      });
+    }, true);
   }
 
   function bindList(root) {
@@ -3120,6 +3186,7 @@
         }
       });
     });
+    ensureFeedShareDelegation(root);
     root.querySelectorAll('[data-feed-share-id]').forEach(function (btn) {
       if (btn.dataset.sfShareBound === '1') return;
       btn.dataset.sfShareBound = '1';
@@ -3130,27 +3197,6 @@
       btn.addEventListener('click', function (ev) {
         feedShareOnClick(ev);
       }, true);
-    });
-    root.querySelectorAll('.share-image-btn').forEach(function (btn) {
-      if (btn.dataset.sfOrigShareBound === '1') return;
-      btn.dataset.sfOrigShareBound = '1';
-      btn.addEventListener('click', function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        if (btn.classList.contains('is-loading')) return;
-        btn.classList.add('is-loading');
-        var postId = btn.getAttribute('data-post-id');
-        shareOriginalFeedImage({
-          imageUrl: btn.getAttribute('data-original-image'),
-          postUrl: btn.getAttribute('data-post-url'),
-          title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
-        }).finally(function () {
-          btn.classList.remove('is-loading');
-        });
-        try {
-          if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        } catch (e) {}
-      });
     });
     if (typeof IntersectionObserver !== 'undefined') {
       if (!root._sfImpObs) {
