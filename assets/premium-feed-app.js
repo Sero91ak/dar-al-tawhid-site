@@ -5,7 +5,7 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV77';
+  var STYLES_ID = 'darPremiumFeedStylesV79';
   var FONTS_ID = 'darPremiumFeedFontsV73';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
