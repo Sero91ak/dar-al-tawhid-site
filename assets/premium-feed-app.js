@@ -5,7 +5,7 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV73';
+  var STYLES_ID = 'darPremiumFeedStylesV74';
   var FONTS_ID = 'darPremiumFeedFontsV73';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
@@ -90,7 +90,8 @@
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
   var FEED_STATE_KEY = 'darPremiumFeedStateV2';
-  var FEED_LAYOUT_REV = 5;
+  var FEED_LAYOUT_REV = 6;
+  var FEED_MIN_POST_NUM = 431;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
   var INITIAL = 12;
@@ -1610,8 +1611,30 @@
     return val === true || val === 'true';
   }
 
+  function postFeedNumber(post) {
+    if (!post) return 0;
+    var parts = [post.id, post._sourceFile, post.title].filter(Boolean).join(' ');
+    var nums = [];
+    var re = /(?:^|[-_])(\d{2,4})(?:[.\-_]|$)/g;
+    var m;
+    while ((m = re.exec(parts))) {
+      var n = Number(m[1]);
+      if (Number.isFinite(n) && n > 0) nums.push(n);
+    }
+    if (!nums.length) {
+      re = /(\d{2,4})/g;
+      while ((m = re.exec(parts))) {
+        var n2 = Number(m[1]);
+        if (Number.isFinite(n2) && n2 > 10) nums.push(n2);
+      }
+    }
+    return nums.length ? Math.max.apply(null, nums) : 0;
+  }
+
   function resolvePostFeedMeta(post) {
     if (!post) return null;
+    if (post._feedExplicit !== true) return null;
+    if (postFeedNumber(post) < FEED_MIN_POST_NUM) return null;
     var feed = post.feed || {};
     var image = String(feed.image || '').trim();
     if (feedEnabledFlag(feed.enabled) && image) {
