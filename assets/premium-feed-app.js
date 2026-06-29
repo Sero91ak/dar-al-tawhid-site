@@ -5,7 +5,7 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV75';
+  var STYLES_ID = 'darPremiumFeedStylesV77';
   var FONTS_ID = 'darPremiumFeedFontsV73';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
@@ -90,7 +90,7 @@
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
   var FEED_STATE_KEY = 'darPremiumFeedStateV2';
-  var FEED_LAYOUT_REV = 7;
+  var FEED_LAYOUT_REV = 8;
   var FEED_MIN_POST_NUM = 431;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
@@ -1068,35 +1068,82 @@
     return liked ? '<span class="sf-like-count">1</span>' : '';
   }
 
-  var FEED_STATS = Object.create(null);
+  var FEED_POST_STATS = Object.create(null);
+  var FEED_VIEW_STATS = Object.create(null);
   var FEED_STATS_PROMISE = null;
+
+  function bumpFeedViewStat(postId) {
+    var id = String(postId || '');
+    if (!id) return;
+    if (!FEED_VIEW_STATS[id]) FEED_VIEW_STATS[id] = { views: 0 };
+    FEED_VIEW_STATS[id].views += 1;
+  }
+
+  function bumpFeedShareStat(postId) {
+    var id = String(postId || '');
+    if (!id) return;
+    if (!FEED_POST_STATS[id]) FEED_POST_STATS[id] = { shares: 0 };
+    FEED_POST_STATS[id].shares += 1;
+  }
+
+  function resetFeedStatsCache() {
+    FEED_STATS_PROMISE = null;
+    Object.keys(FEED_POST_STATS).forEach(function (k) { delete FEED_POST_STATS[k]; });
+    Object.keys(FEED_VIEW_STATS).forEach(function (k) { delete FEED_VIEW_STATS[k]; });
+  }
 
   function loadFeedStats() {
     if (FEED_STATS_PROMISE) return FEED_STATS_PROMISE;
     FEED_STATS_PROMISE = Promise.resolve().then(function () {
-      if (!global.DarAnalytics || typeof global.DarAnalytics.fetchDashboard !== 'function') return FEED_STATS;
-      if (global.DarAnalytics.hasSupabase && !global.DarAnalytics.hasSupabase()) return FEED_STATS;
+      if (!global.DarAnalytics || typeof global.DarAnalytics.fetchDashboard !== 'function') {
+        return honestFeedStats('');
+      }
+      if (global.DarAnalytics.hasSupabase && !global.DarAnalytics.hasSupabase()) {
+        return honestFeedStats('');
+      }
       return global.DarAnalytics.fetchDashboard().then(function (data) {
         (data && data.totals || []).forEach(function (row) {
           var id = String(row.content_id || '');
           if (!id) return;
-          if (!FEED_STATS[id]) FEED_STATS[id] = { views: 0, shares: 0, saves: 0, clicks: 0 };
           if (row.content_type === 'post') {
-            FEED_STATS[id].views = Math.max(FEED_STATS[id].views, Number(row.views) || 0);
-            FEED_STATS[id].shares = Math.max(FEED_STATS[id].shares, Number(row.shares) || 0);
-            FEED_STATS[id].saves = Math.max(FEED_STATS[id].saves, Number(row.saves) || 0);
+            if (!FEED_POST_STATS[id]) FEED_POST_STATS[id] = { shares: 0 };
+            FEED_POST_STATS[id].shares = Math.max(FEED_POST_STATS[id].shares, Number(row.shares) || 0);
           } else if (row.content_type === 'feed') {
-            FEED_STATS[id].clicks = Math.max(FEED_STATS[id].clicks, Number(row.views) || 0);
+            if (!FEED_VIEW_STATS[id]) FEED_VIEW_STATS[id] = { views: 0 };
+            FEED_VIEW_STATS[id].views = Math.max(FEED_VIEW_STATS[id].views, Number(row.views) || 0);
           }
         });
-        return FEED_STATS;
-      }).catch(function () { return FEED_STATS; });
+        return FEED_VIEW_STATS;
+      }).catch(function () { return FEED_VIEW_STATS; });
     });
     return FEED_STATS_PROMISE;
   }
 
+  function honestFeedStats(postId) {
+    var id = String(postId || '');
+    return {
+      views: Number(FEED_VIEW_STATS[id] && FEED_VIEW_STATS[id].views) || 0,
+      shares: Number(FEED_POST_STATS[id] && FEED_POST_STATS[id].shares) || 0
+    };
+  }
+
   function feedStatsFor(postId) {
-    return FEED_STATS[String(postId || '')] || { views: 0, shares: 0, saves: 0, clicks: 0 };
+    return honestFeedStats(postId);
+  }
+
+  function feedBarStatsParts(postId) {
+    var stats = honestFeedStats(postId);
+    var parts = [];
+    if (stats.views > 0) parts.push('<strong>' + formatStatCount(stats.views) + '</strong> Aufrufe');
+    if (stats.shares > 0) parts.push('<strong>' + formatStatCount(stats.shares) + '</strong> geteilt');
+    return parts;
+  }
+
+  function refreshFeedStatsSoon(mount) {
+    resetFeedStatsCache();
+    loadFeedStats().finally(function () {
+      refreshFeedEngagement(mount || global.document.getElementById(MOUNT_ID));
+    });
   }
 
   function formatStatCount(n) {
@@ -1115,12 +1162,7 @@
     var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
     var preview = item.image || '';
     var orig = item.originalImage || preview || '';
-    var stats = feedStatsFor(item.postId);
-    var likeTotal = (Number(stats.saves) || 0) + (liked ? 1 : 0);
-    var parts = [];
-    if (stats.views > 0) parts.push('<strong>' + formatStatCount(stats.views) + '</strong> Aufrufe');
-    if (stats.shares > 0) parts.push('<strong>' + formatStatCount(stats.shares) + '</strong> geteilt');
-    if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+    var parts = feedBarStatsParts(item.postId);
     var statsHtml = parts.length
       ? '<span class="sf-bar-stats">' + parts.join(' · ') + '</span>'
       : '<span class="sf-bar-stats sf-bar-stats--empty"></span>';
@@ -1143,16 +1185,17 @@
 
   function trackFeedEvent(eventType, item) {
     if (!item || !item.postId) return;
+    var contentType = (eventType === 'feed_click' || eventType === 'feed_view') ? 'feed' : 'post';
     try {
       if (typeof global.trackAnalytics === 'function') {
         global.trackAnalytics(eventType, {
-          contentType: eventType === 'feed_click' ? 'feed' : 'post',
+          contentType: contentType,
           contentId: String(item.postId),
           contentTitle: item.title || ''
         });
       } else if (global.DarAnalytics && global.DarAnalytics.track) {
         global.DarAnalytics.track(eventType, {
-          contentType: eventType === 'feed_click' ? 'feed' : 'post',
+          contentType: contentType,
           contentId: String(item.postId),
           contentTitle: item.title || ''
         });
@@ -1167,12 +1210,7 @@
       var item = state.visible.find(function (x) { return x.uid === uid; });
       if (!item) return;
       var liked = isLiked(uid);
-      var stats = feedStatsFor(item.postId);
-      var likeTotal = (Number(stats.saves) || 0) + (liked ? 1 : 0);
-      var parts = [];
-      if (stats.views > 0) parts.push('<strong>' + formatStatCount(stats.views) + '</strong> Aufrufe');
-      if (stats.shares > 0) parts.push('<strong>' + formatStatCount(stats.shares) + '</strong> geteilt');
-      if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+      var parts = feedBarStatsParts(item.postId);
       var statsEl = card.querySelector('.sf-bar-stats');
       if (statsEl) {
         statsEl.innerHTML = parts.join(' · ');
@@ -3021,13 +3059,14 @@
 
   async function shareOriginalFeedImage(opts) {
     var postUrl = opts && opts.postUrl;
+    var postId = opts && opts.postId;
     var title = (opts && opts.title) || 'DAR AL TAWḤID';
     var urls = Array.isArray(opts && opts.imageUrls) && opts.imageUrls.length
       ? opts.imageUrls.slice()
       : feedShareImageCandidates(opts && opts.imageUrl, opts && opts.previewUrl);
     if (!urls.length) {
       showToast('Kein Bild zum Teilen gefunden.');
-      return;
+      return false;
     }
     try {
       var blob = await fetchFeedImageBlobFromCandidates(urls);
@@ -3037,24 +3076,34 @@
       var file = new File([blob], fileName, { type: mime });
       if (global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
         await global.navigator.share({ files: [file] });
-        return;
+        if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+        bumpFeedShareStat(postId);
+        return true;
       }
       if (global.navigator.share) {
         try {
           await global.navigator.share({ title: title, files: [file] });
-          return;
+          if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+          bumpFeedShareStat(postId);
+          return true;
         } catch (eShare) {
-          if (eShare && eShare.name === 'AbortError') return;
+          if (eShare && eShare.name === 'AbortError') return false;
         }
       }
       downloadFeedBlob(blob, fileName);
       showToast('Bild gespeichert — du kannst es jetzt in deiner Galerie teilen.');
+      if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+      bumpFeedShareStat(postId);
+      return true;
     } catch (error) {
-      if (error && error.name === 'AbortError') return;
+      if (error && error.name === 'AbortError') return false;
       console.error(error);
       try {
         downloadFeedBlob(await fetchFeedImageBlobFromCandidates(urls), createSafeFileName(title, 'png'));
         showToast('Bild gespeichert — du kannst es jetzt teilen.');
+        if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+        bumpFeedShareStat(postId);
+        return true;
       } catch (e2) {
         if (postUrl && global.navigator.clipboard) {
           var fallbackPostUrl = new URL(postUrl, global.location.origin).toString();
@@ -3063,6 +3112,7 @@
         } else {
           showToast('Bild konnte nicht geteilt werden.');
         }
+        return false;
       }
     }
   }
@@ -3108,12 +3158,14 @@
       );
       shareOriginalFeedImage({
         imageUrls: urls,
+        postId: postId,
         postUrl: btn.getAttribute('data-post-url'),
         title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
-      }).then(function () {
-        try {
-          if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        } catch (e) {}
+      }).then(function (shared) {
+        if (shared) {
+          refreshFeedEngagement(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID));
+          global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 2400);
+        }
       }).finally(function () {
         btn.classList.remove('is-loading');
       });
@@ -3174,12 +3226,7 @@
         if (card && item && card.classList.contains('sf-post--image-feed')) {
           var statsEl = card.querySelector('.sf-bar-stats');
           if (statsEl) {
-            var st = feedStatsFor(item.postId);
-            var likeTotal = (Number(st.saves) || 0) + (on ? 1 : 0);
-            var parts = [];
-            if (st.views > 0) parts.push('<strong>' + formatStatCount(st.views) + '</strong> Aufrufe');
-            if (st.shares > 0) parts.push('<strong>' + formatStatCount(st.shares) + '</strong> geteilt');
-            if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+            var parts = feedBarStatsParts(item.postId);
             statsEl.innerHTML = parts.join(' · ');
             statsEl.classList.toggle('sf-bar-stats--empty', !parts.length);
           }
@@ -3208,7 +3255,11 @@
             card.dataset.feedImpression = '1';
             var uid = card.getAttribute('data-pf-id');
             var item = state.visible.find(function (x) { return x.uid === uid; });
-            if (item) trackFeedEvent('feed_view', item);
+            if (item) {
+              trackFeedEvent('feed_view', item);
+              bumpFeedViewStat(item.postId);
+              refreshFeedEngagement(root);
+            }
             root._sfImpObs.unobserve(card);
           });
         }, { threshold: 0.45 });
