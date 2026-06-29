@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV64';
-  var FONTS_ID = 'darPremiumFeedFontsV64';
+  var STYLES_ID = 'darPremiumFeedStylesV69';
+  var FONTS_ID = 'darPremiumFeedFontsV69';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
   var FEED_SHARE_CACHE = Object.create(null);
@@ -98,7 +98,7 @@
   var state = {
     allItems: [],
     visible: [],
-    filter: 'all',
+    filter: 'posts',
     offset: 0,
     loading: false,
     done: false,
@@ -1066,6 +1066,92 @@
     return liked ? '<span class="sf-like-count">1</span>' : '';
   }
 
+  var FEED_STATS = Object.create(null);
+  var FEED_STATS_PROMISE = null;
+
+  function loadFeedStats() {
+    if (FEED_STATS_PROMISE) return FEED_STATS_PROMISE;
+    FEED_STATS_PROMISE = Promise.resolve().then(function () {
+      if (!global.DarAnalytics || typeof global.DarAnalytics.fetchDashboard !== 'function') return FEED_STATS;
+      if (global.DarAnalytics.hasSupabase && !global.DarAnalytics.hasSupabase()) return FEED_STATS;
+      return global.DarAnalytics.fetchDashboard().then(function (data) {
+        (data && data.totals || []).forEach(function (row) {
+          var id = String(row.content_id || '');
+          if (!id) return;
+          if (!FEED_STATS[id]) FEED_STATS[id] = { views: 0, shares: 0, saves: 0, clicks: 0 };
+          if (row.content_type === 'post') {
+            FEED_STATS[id].views = Math.max(FEED_STATS[id].views, Number(row.views) || 0);
+            FEED_STATS[id].shares = Math.max(FEED_STATS[id].shares, Number(row.shares) || 0);
+            FEED_STATS[id].saves = Math.max(FEED_STATS[id].saves, Number(row.saves) || 0);
+          } else if (row.content_type === 'feed') {
+            FEED_STATS[id].clicks = Math.max(FEED_STATS[id].clicks, Number(row.views) || 0);
+          }
+        });
+        return FEED_STATS;
+      }).catch(function () { return FEED_STATS; });
+    });
+    return FEED_STATS_PROMISE;
+  }
+
+  function feedStatsFor(postId) {
+    return FEED_STATS[String(postId || '')] || { views: 0, shares: 0, saves: 0, clicks: 0 };
+  }
+
+  function formatStatCount(n) {
+    n = Number(n) || 0;
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + ' Mio.';
+    if (n >= 10000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + ' Tsd.';
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + ' Tsd.';
+    return String(n);
+  }
+
+  function feedEngagementHtml(item, liked) {
+    var stats = feedStatsFor(item.postId);
+    var likeTotal = (Number(stats.saves) || 0) + (liked ? 1 : 0);
+    var parts = [];
+    if (likeTotal > 0) parts.push('<strong>' + formatStatCount(likeTotal) + '</strong> Gefällt mir');
+    if (stats.views > 0) parts.push('<strong>' + formatStatCount(stats.views) + '</strong> Aufrufe');
+    if (stats.clicks > 0) parts.push('<strong>' + formatStatCount(stats.clicks) + '</strong> Klicks');
+    if (stats.shares > 0) parts.push('<strong>' + formatStatCount(stats.shares) + '</strong> geteilt');
+    if (!parts.length) return '';
+    return '<div class="sf-post__engagement"><p class="sf-engagement-line">' + parts.join(' · ') + '</p></div>';
+  }
+
+  function trackFeedEvent(eventType, item) {
+    if (!item || !item.postId) return;
+    try {
+      if (typeof global.trackAnalytics === 'function') {
+        global.trackAnalytics(eventType, {
+          contentType: eventType === 'feed_click' ? 'feed' : 'post',
+          contentId: String(item.postId),
+          contentTitle: item.title || ''
+        });
+      } else if (global.DarAnalytics && global.DarAnalytics.track) {
+        global.DarAnalytics.track(eventType, {
+          contentType: eventType === 'feed_click' ? 'feed' : 'post',
+          contentId: String(item.postId),
+          contentTitle: item.title || ''
+        });
+      }
+    } catch (e) {}
+  }
+
+  function refreshFeedEngagement(root) {
+    if (!root) return;
+    root.querySelectorAll('.sf-post--image-feed').forEach(function (card) {
+      var uid = card.getAttribute('data-pf-id');
+      var item = state.visible.find(function (x) { return x.uid === uid; });
+      if (!item) return;
+      var liked = isLiked(uid);
+      var old = card.querySelector('.sf-post__engagement');
+      var html = feedEngagementHtml(item, liked);
+      if (old) old.remove();
+      if (!html) return;
+      var actions = card.querySelector('.sf-post__actions');
+      if (actions) actions.insertAdjacentHTML('afterend', html);
+    });
+  }
+
   function feedTabBarInset() {
     try {
       var rootCs = global.getComputedStyle(document.documentElement);
@@ -1958,84 +2044,14 @@
   }
 
   function mergeFeed(pools, manualItems, seed) {
-    var out = [];
-    var seen = {};
-
-    (pools.postFeed || []).forEach(function (item) {
-      if (seen[cardKey(item)]) return;
-      seen[cardKey(item)] = true;
-      out.push(item);
-    });
-
-    manualItems.forEach(function (m) {
-      var n = normalizeManual(m);
-      if (!n) return;
-      seen[cardKey(n)] = true;
-      out.push(n);
-    });
-
+    var out = (pools.postFeed || []).slice();
     out.sort(function (a, b) {
+      var da = Date.parse(a.date || '') || 0;
+      var db = Date.parse(b.date || '') || 0;
+      if (db !== da) return db - da;
       return (a.sort || 0) - (b.sort || 0);
     });
-
-    var head = pools.newest.slice(0, 5);
-    head.forEach(function (item) {
-      if (seen[cardKey(item)]) return;
-      seen[cardKey(item)] = true;
-      out.push(item);
-    });
-
-    var mix = []
-      .concat(pools.dua.slice(0, 3))
-      .concat(pools.archive)
-      .concat(pools.dua.slice(3));
-
-    mix = seededPick(mix.filter(function (it) {
-      return it && !seen[cardKey(it)];
-    }), seed + 'mix', mix.length);
-
-    var weights = { newest: 0.5, archive: 0.3, extra: 0.2 };
-    var ni = 0;
-    var ai = 0;
-    var mi = 0;
-    while (ni < pools.newest.length || ai < mix.length) {
-      var r = (hashNum(seed + 'w' + out.length) % 100) / 100;
-      if (r < weights.newest && ni < pools.newest.length) {
-        var nItem = pools.newest[ni++];
-        if (!seen[cardKey(nItem)]) {
-          seen[cardKey(nItem)] = true;
-          out.push(nItem);
-        }
-      } else if (r < weights.newest + weights.archive && mi < mix.length) {
-        var mItem = mix[mi++];
-        if (!seen[cardKey(mItem)]) {
-          seen[cardKey(mItem)] = true;
-          out.push(mItem);
-        }
-      } else if (ai < pools.archive.length) {
-        var aItem = pools.archive[ai++];
-        if (!seen[cardKey(aItem)]) {
-          seen[cardKey(aItem)] = true;
-          out.push(aItem);
-        }
-      } else if (mi < mix.length) {
-        var x = mix[mi++];
-        if (!seen[cardKey(x)]) {
-          seen[cardKey(x)] = true;
-          out.push(x);
-        }
-      } else break;
-    }
-
-    while (mi < mix.length) {
-      var rest = mix[mi++];
-      if (!seen[cardKey(rest)]) {
-        seen[cardKey(rest)] = true;
-        out.push(rest);
-      }
-    }
-
-    return dedupeAdjacent(out);
+    return out;
   }
 
   function dedupeAdjacent(list) {
@@ -2059,12 +2075,7 @@
   }
 
   function filterItems(items) {
-    var base = items.filter(isFeedContentItem);
-    var f = state.filter;
-    if (f === 'all') return base;
-    if (f === 'posts') return base.filter(function (it) { return it.type === 'post' || it.type === 'archive' || it.type === 'custom' || it.type === 'postFeed'; });
-    if (f === 'duas') return base.filter(function (it) { return it.type === 'dua'; });
-    return base;
+    return items.filter(function (it) { return it && it.type === 'postFeed'; });
   }
 
   function ctaLabel(item) {
@@ -2119,15 +2130,19 @@
       '.sf-filter.is-active{border-color:var(--theme-border,var(--line));background:var(--theme-feed-filter-active,linear-gradient(135deg,rgba(214,190,132,.18),rgba(90,70,30,.12)));color:var(--theme-accent,var(--gold2));opacity:1}' +
       '.sf-feed{display:flex;flex-direction:column;gap:var(--sf-card-gap,20px);padding:0 var(--sf-gutter-right,var(--sf-shell-pad,10px)) calc(24px + env(safe-area-inset-bottom)) var(--sf-gutter-left,var(--sf-shell-pad,10px));width:100%;max-width:var(--sf-feed-col-max,100%);box-sizing:border-box;margin-left:auto;margin-right:auto;min-width:0}' +
       '.sf-post{margin:0;border-radius:var(--sf-card-radius,26px);overflow:hidden;cursor:pointer;background:var(--theme-feed-card,var(--theme-surface,transparent));border:1px solid var(--theme-border,var(--line));box-shadow:var(--premium-shadow,none);width:100%;max-width:100%;min-width:0;box-sizing:border-box;align-self:stretch}' +
-      '.sf-post--image-feed{cursor:default;border:none;background:rgba(0,0,0,.18);box-shadow:0 18px 55px rgba(0,0,0,.22);position:relative;max-width:680px;margin:0 auto}' +
+      '.sf-post--image-feed{cursor:default;border:1px solid var(--theme-border,var(--line));background:var(--theme-feed-card,var(--theme-surface,transparent));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.18));position:relative;max-width:680px;margin:0 auto;overflow:hidden}' +
+      '.sf-post--image-feed .sf-post__head{background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));padding:12px 14px 10px}' +
+      '.sf-post--image-feed .sf-post__media--feed-img{background:var(--theme-feed-img-fallback,#0a0908);border-top:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);border-bottom:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);line-height:0}' +
       '.feed-image-button{display:block;width:100%;border:0;padding:0;margin:0;background:transparent;cursor:pointer}' +
-      '.feed-image{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}' +
-      '.feed-card-meta{position:absolute;left:14px;top:14px;z-index:2;pointer-events:none}' +
-      '.feed-card-cat{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,247,232,.88);background:rgba(12,14,16,.52);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}' +
-      '.feed-card-actions{position:absolute;right:14px;bottom:14px;display:flex;justify-content:flex-end;z-index:3}' +
-      '.share-image-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 14px;color:#fff7e8;background:rgba(12,14,16,.58);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(0,0,0,.24);font-weight:700;cursor:pointer;transition:transform .18s ease,background .18s ease;font-family:var(--font-ui)}' +
-      '.share-image-btn:hover{transform:translateY(-1px);background:rgba(12,14,16,.72)}' +
-      '.share-image-btn span{display:grid;place-items:center;width:24px;height:24px;border-radius:999px;background:linear-gradient(135deg,#d8b968,#a98532);color:#171717}' +
+      '.feed-image{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:var(--theme-feed-img-fallback,#0a0908)}' +
+      '.sf-post--image-feed .sf-post__actions{padding:10px 12px 6px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
+      '.sf-post--image-feed .sf-post__engagement{padding:0 14px 4px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
+      '.sf-engagement-line{margin:0;font-size:12px;line-height:1.45;color:var(--theme-text,var(--text));opacity:.92}' +
+      '.sf-engagement-line strong{font-weight:800;color:var(--theme-text,var(--text))}' +
+      '.sf-post--image-feed .sf-post__body{padding:6px 14px 14px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
+      '.sf-post--image-feed .sf-caption{margin:0 0 8px;font-size:13px;line-height:1.5;color:var(--theme-text,var(--text))}' +
+      '.sf-post--image-feed .sf-read-more{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;padding:0;font-size:12px;font-weight:800;color:var(--theme-accent,var(--gold2));cursor:pointer;font-family:var(--font-ui)}' +
+      '.sf-post--image-feed .sf-read-more:hover{text-decoration:underline}' +
       '.sf-post--demo{border-color:var(--theme-border,var(--line));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.28))}' +
       '.sf-post__head{display:flex;align-items:center;gap:10px;padding:10px 12px 8px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
       '.sf-avatar{width:40px;height:40px;border-radius:50%;background:var(--theme-feed-avatar-bg,linear-gradient(145deg,rgba(239,215,142,.42),rgba(90,70,30,.62)));border:1.5px solid var(--theme-border,var(--line));display:grid;place-items:center;font-size:14px;font-weight:900;color:var(--theme-text,var(--text));flex:0 0 40px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.16)}' +
@@ -2476,19 +2491,39 @@
     );
   }
 
-  function postFeedCardHtml(item) {
+  function postFeedCardHtml(item, cardIdx) {
     var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
     var orig = item.originalImage || item.image || '';
+    var liked = isLiked(item.uid);
+    var eager = cardIdx != null && cardIdx < 3;
+    var sub = [item.category, timeAgo(item.date)].filter(Boolean).join(' · ');
+    var caption = clamp(item.title || 'Beitrag', 180);
     return (
       '<article class="sf-post feed-card sf-post--image-feed" data-feed-card-id="' + esc(item.uid) + '" data-pf-id="' + esc(item.uid) + '" data-post-id="' + esc(item.postId || '') + '" data-pf-target="' + esc(item.target || '') + '" data-pf-type="postFeed" data-pf-post="' + esc(item.postId || '') + '">' +
-        '<button class="feed-image-button" type="button" aria-label="Beitrag öffnen">' +
-          '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="lazy" decoding="async">' +
-        '</button>' +
-        (item.category ? '<div class="feed-card-meta"><span class="feed-card-cat">' + esc(item.category) + '</span></div>' : '') +
-        '<div class="feed-card-actions">' +
-          (item.shareEnabled !== false ?
-            '<button class="share-image-btn" type="button" data-original-image="' + esc(orig) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '"><span>↗</span> Teilen</button>' :
-            '') +
+        '<header class="sf-post__head">' +
+          '<div class="sf-avatar" aria-hidden="true">' + logoImgHtml() + '</div>' +
+          '<div class="sf-post__meta">' +
+            '<span class="sf-user">' + esc(publisherLabel()) + '</span>' +
+            (sub ? '<span class="sf-sub">' + esc(sub) + '</span>' : '') +
+          '</div>' +
+        '</header>' +
+        '<div class="sf-post__media sf-post__media--feed-img">' +
+          '<button class="feed-image-button" type="button" aria-label="Beitrag öffnen: ' + esc(item.title || '') + '">' +
+            '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async">' +
+          '</button>' +
+        '</div>' +
+        '<div class="sf-post__actions feed-actions">' +
+          '<div class="sf-actions-left">' +
+            '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span></button>' +
+            (item.shareEnabled !== false ?
+              '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-original-image="' + esc(orig) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Teilen"><span aria-hidden="true">↗</span><span class="sf-act-label">Teilen</span></button>' :
+              '') +
+          '</div>' +
+        '</div>' +
+        feedEngagementHtml(item, liked) +
+        '<div class="sf-post__body">' +
+          '<p class="sf-caption"><b>' + esc(publisherLabel()) + '</b> ' + esc(caption) + '</p>' +
+          '<button type="button" class="sf-read-more feed-image-button" aria-label="Vollständigen Beitrag lesen">Beitrag lesen →</button>' +
         '</div>' +
       '</article>'
     );
@@ -2974,10 +3009,11 @@
       }
       card.addEventListener('click', function (ev) {
         if (ev.target.closest('.sf-act') || ev.target.closest('[data-feed-share-id]') || ev.target.closest('.feed-share-button') || ev.target.closest('.share-image-btn')) return;
-        if (ev.target.closest('.feed-image-button')) {
+        if (ev.target.closest('.feed-image-button') || ev.target.closest('.sf-read-more')) {
           var postId = card.getAttribute('data-post-id') || (item && item.postId);
           if (postId && typeof navigate === 'function') {
             markSeen(uid);
+            if (item) trackFeedEvent('feed_click', item);
             navigate('post', postId);
           } else {
             open();
@@ -2999,16 +3035,16 @@
         btn.classList.toggle('is-liked', on);
         var icon = btn.querySelector('span[aria-hidden="true"]');
         if (icon) icon.textContent = on ? '♥' : '♡';
-        var countEl = btn.querySelector('.sf-like-count');
-        if (on) {
-          if (!countEl) {
-            countEl = document.createElement('span');
-            countEl.className = 'sf-like-count';
-            btn.appendChild(countEl);
+        var card = btn.closest('.sf-post');
+        var item = state.visible.find(function (x) { return x.uid === uid; });
+        if (card && item) {
+          var old = card.querySelector('.sf-post__engagement');
+          if (old) old.remove();
+          var html = feedEngagementHtml(item, on);
+          if (html) {
+            var actions = card.querySelector('.sf-post__actions');
+            if (actions) actions.insertAdjacentHTML('afterend', html);
           }
-          countEl.textContent = '1';
-        } else if (countEl) {
-          countEl.remove();
         }
       });
     });
@@ -3029,13 +3065,36 @@
       btn.addEventListener('click', function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
+        var postId = btn.getAttribute('data-post-id');
         shareOriginalFeedImage({
           imageUrl: btn.getAttribute('data-original-image'),
           postUrl: btn.getAttribute('data-post-url'),
           title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
         });
+        try {
+          if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+        } catch (e) {}
       });
     });
+    if (typeof IntersectionObserver !== 'undefined') {
+      if (!root._sfImpObs) {
+        root._sfImpObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var card = en.target;
+            if (card.dataset.feedImpression === '1') return;
+            card.dataset.feedImpression = '1';
+            var uid = card.getAttribute('data-pf-id');
+            var item = state.visible.find(function (x) { return x.uid === uid; });
+            if (item) trackFeedEvent('feed_view', item);
+            root._sfImpObs.unobserve(card);
+          });
+        }, { threshold: 0.45 });
+      }
+      root.querySelectorAll('.sf-post--image-feed:not([data-feed-impression])').forEach(function (card) {
+        root._sfImpObs.observe(card);
+      });
+    }
     root.querySelectorAll('.sf-filter').forEach(function (btn) {
       btn.addEventListener('click', function () {
         state.filter = btn.getAttribute('data-pf-filter') || 'all';
@@ -3066,15 +3125,8 @@
     if (!page) return;
     var bar = page.querySelector('.sf-filters');
     if (!bar) return;
-    var filters = [
-      ['all', 'Für dich'],
-      ['posts', 'Beiträge'],
-      ['duas', 'Duʿāʾ']
-    ];
-    bar.innerHTML = filters.map(function (f) {
-      return '<button type="button" class="sf-filter' + (state.filter === f[0] ? ' is-active' : '') + '" data-pf-filter="' + f[0] + '">' + f[1] + '</button>';
-    }).join('');
-    bindList(page);
+    bar.innerHTML = '';
+    bar.style.display = 'none';
   }
 
   function renderTopBar() {
@@ -3121,7 +3173,7 @@
     var list = mount.querySelector('.sf-feed');
     if (!list) return;
     if (!state.visible.length) {
-      list.innerHTML = '<div class="sf-empty">Noch keine Beiträge im Feed. Sobald Inhalte geladen sind, erscheinen sie hier automatisch.</div>';
+      list.innerHTML = '<div class="sf-empty">Noch keine Bildbeiträge im Feed.<br>Sobald du einen Beitrag mit Feed-Bild veröffentlichst, erscheint er hier automatisch.</div>';
       return;
     }
     list.innerHTML = state.visible.map(function (item, idx) { return cardHtml(item, idx); }).join('') +
@@ -3199,19 +3251,20 @@
     var ctx = getCtx();
     var pools = buildPools(ctx, state.seed);
     var merged = mergeFeed(pools, manualItems || [], state.seed);
-    if (!merged.length) merged = buildDemoItems();
-    state.allItems = merged.filter(isFeedContentItem);
+    state.allItems = merged;
     state.offset = 0;
     state.done = false;
     state.visible = [];
     state.loading = false;
     if (!mount.querySelector('.sf-app')) {
       renderPage(mount);
+      loadFeedStats().then(function () { refreshFeedEngagement(mount); });
       return;
     }
     appendBatch(true);
     renderListMount(mount);
     preloadFeedImages(state.visible, 3);
+    loadFeedStats().then(function () { refreshFeedEngagement(mount); });
   }
 
   function rebuild(force) {
