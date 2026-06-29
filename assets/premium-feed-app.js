@@ -1458,9 +1458,12 @@
             var mount2 = global.document.getElementById(MOUNT_ID);
             if (!mount2) return;
             var manual = (data && data.items) || [];
-            if (manual.length) applyFeedData(mount2, manual);
+            applyFeedData(mount2, manual);
           })
-          .catch(function () {});
+          .catch(function () {
+            var mount2 = global.document.getElementById(MOUNT_ID);
+            if (mount2) applyFeedData(mount2, []);
+          });
         return;
       }
       if (opts.force || !state.allItems.length) state.seed = feedSeed();
@@ -1471,9 +1474,12 @@
           var mount2 = global.document.getElementById(MOUNT_ID);
           if (!mount2) return;
           var manual = (data && data.items) || [];
-          if (manual.length) applyFeedData(mount2, manual);
+          applyFeedData(mount2, manual);
         })
-        .catch(function () {});
+        .catch(function () {
+          var mount2 = global.document.getElementById(MOUNT_ID);
+          if (mount2) applyFeedData(mount2, []);
+        });
     });
   }
 
