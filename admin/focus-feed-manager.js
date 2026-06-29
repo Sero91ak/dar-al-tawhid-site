@@ -382,13 +382,15 @@
     if (!filename) return;
     if (!confirm("Diesen Bildbeitrag aus dem Besucher-Feed entfernen?\n\nDer Beitrag selbst bleibt erhalten.")) return;
     try {
-      const data = await workerGet(`api/admin/post?filename=${encodeURIComponent(filename)}`);
+      const data = typeof global.fetchPostMarkdownForAdmin === "function"
+        ? await global.fetchPostMarkdownForAdmin(filename)
+        : await workerGet(`api/admin/post?filename=${encodeURIComponent(filename)}`);
       if (!data || !data.markdown) throw new Error("Beitrag konnte nicht geladen werden");
       const feed = { enabled: false, image: "", originalImage: "", alt: "", shareEnabled: false };
       const markdown = global.DARQuellen
         ? global.DARQuellen.mergeFeedFrontmatter(data.markdown, feed)
         : data.markdown;
-      await workerPost("api/admin/post/update", {
+      await workerPost("post/update", {
         filename,
         markdown,
         sha: data.sha || "",
