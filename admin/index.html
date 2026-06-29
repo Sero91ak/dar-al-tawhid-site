@@ -445,6 +445,29 @@ main#panel.panel{
 .admin-step-chip{border:1px solid rgba(239,215,142,.28);border-radius:999px;padding:4px 9px;font-size:9px;font-weight:950;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;background:rgba(239,215,142,.06)}
 .bulk-pack-panel.is-featured{border-color:rgba(239,215,142,.42);background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.05))}
 @media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}}
+@media(max-width:980px){.admin-editor-grid{grid-template-columns:1fr}.feed-image-card{position:static}}
+.admin-editor-shell{max-width:1440px;margin:0 auto}
+.admin-editor-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+.editor-card{border:1px solid rgba(200,168,90,.22);background:rgba(18,22,24,.72);border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.22);padding:18px}
+.admin-kicker{margin:0 0 6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c8a85a}
+.feed-image-card{position:sticky;top:18px}
+.feed-image-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.feed-image-head h2{margin:0;font-family:Georgia,serif;font-weight:700;font-size:1.15rem}
+.feed-help{margin:12px 0 16px;font-size:13px;line-height:1.55;color:rgba(247,241,223,.72)}
+.feed-image-preview{width:100%;aspect-ratio:4/5;border-radius:18px;overflow:hidden;border:1px dashed rgba(200,168,90,.35);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.16)),rgba(255,255,255,.03);display:grid;place-items:center}
+.feed-image-preview img{width:100%;height:100%;object-fit:cover}
+.feed-image-empty{text-align:center;color:rgba(247,241,223,.6)}
+.feed-image-empty span{display:block;font-size:34px;margin-bottom:8px}
+.feed-image-actions{display:grid;gap:10px;margin-top:14px}
+.feed-meta{margin-top:16px}
+.btn-full{width:100%}
+.btn-ghost{background:transparent;color:rgba(247,241,223,.72);border:1px solid rgba(255,255,255,.1)}
+.switch{position:relative;display:inline-flex;width:48px;height:28px}
+.switch input{display:none}
+.switch span{position:absolute;inset:0;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.14)}
+.switch span::after{content:"";position:absolute;width:22px;height:22px;top:2px;left:3px;border-radius:50%;background:#f7f1df;transition:.2s ease}
+.switch input:checked+span{background:linear-gradient(135deg,#d8b968,#a98532)}
+.switch input:checked+span::after{transform:translateX(19px)}
 </style>
 </head>
 <body>
@@ -467,7 +490,8 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/assets/slide-post-parser.js?v=2"></script>
-<script src="/admin/quellen-manager.js?v=2"></script>
+<script src="/admin/quellen-manager.js?v=3"></script>
+<script src="/assets/admin-feed-image.js?v=2"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=3"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
@@ -498,20 +522,14 @@ const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
-  ["besucher","Besucher"],
-  ["ordner","Ordner"],
-  ["quellen","Beiträge bearbeiten"],
-  ["kurzlinks","Kurzlinks"],
-  ["zakat","Zakāt-Rechner"],
-  ["actions","Aktionen"],
-  ["content","Inhalte"],
+  ["quellen","Beiträge"],
+  ["actions","Neuer Beitrag"],
   ["news","News"],
+  ["besucher","Besucher"],
+  ["settings","Einstellungen"],
+  ["ordner","Ordner (Studio)"],
   ["feed","Feed / Im Fokus"],
-  ["feed-bg","Feed · Auto-Hintergründe"],
-  ["reports","Fehler"],
-  ["users","Benutzer"],
-  ["tech","Technik"],
-  ["settings","Einstellungen"]
+  ["tech","Technik"]
 ];
 const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
@@ -1090,6 +1108,7 @@ async function publishPostViaWorkerRequest(markdown,filename,options={}){
   const body={markdown,filename};
   if(options.skipPush)body.skipPush=true;
   if(Array.isArray(options.sourceFiles)&&options.sourceFiles.length)body.sourceFiles=options.sourceFiles;
+  if(Array.isArray(options.feedImageFiles)&&options.feedImageFiles.length)body.feedImageFiles=options.feedImageFiles;
   const res=await fetch(resolveWorkerUrl(publishUrl),{
     method:"POST",
     headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
@@ -2111,21 +2130,11 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Aktionen","Einzelbeitrag oder Sammel-Paket (mehrere auf einmal).","actions",`${planItems().length} geplant`)}
-    ${folderCard("②","Besucher","Live, Tageswerte, Klicks, Shares, Favoriten und App-Installationen.","besucher",`${Number(ctx.live.live_now||0)} live · ${Number(ctx.live.today_sessions||0)} heute`)}
-    ${folderCard("③","Ordner","Kategorien sortieren, Beiträge verschieben, Texte korrigieren — ohne Push.","ordner","Studio")}
-    ${folderCard("③b","Beiträge bearbeiten","Bestehende Beiträge öffnen · PDF/Bild hochladen oder entfernen.","quellen","PDF · Bild")}
-    ${folderCard("③c","Kurzlinks","NEU: Custom GPT Action + Kurzlinks a1→Quelle für Instagram.","kurzlinks","GPT + Links")}
-    ${folderCard("③d","Zakāt-Rechner","Niṣāb-Preise prüfen — keine Besucher-Beträge.","zakat","Verwaltung")}
-    ${folderCard("⑤","Inhalte","Beiträge und Duʿāʾ filtern, suchen und nach Wirkung sortieren.","content",`${ctx.posts.length+ctx.duas.length} Inhalte`)}
-    ${folderCard("⑥","News","24–72-Stunden-Hinweise für Besucher vorbereiten.","news",newsSummaryLabel())}
-    ${folderCard("⑥c","Feed / Im Fokus","NEU: Moderner Feed-Slider — Karten für Beiträge, Duʿāʾ, Qurʾān & News.","feed","Verwalten")}
-    ${folderCard("⑥d","Feed · Auto-Hintergründe","Automatische islamische Hintergrundbilder — Sync, Pool, Freigabe.","feed-bg","Auto-Sync")}
-    ${folderCard("⑦","Fehler","Meldungen prüfen, beantworten und erledigen.","reports",`${reportItems().length} Meldungen`)}
-    ${folderCard("⑧","Benutzer","Konten, Sync und Missbrauchsschutz überblicken.","users",`${userItems().length} Konten`)}
-    ${folderCard("⑨","Technik","Push, PWA, Scheduler und Datenstatus prüfen.","tech","Status")}
-    ${folderCard("⑩","Einstellungen","Tab-Reihenfolge und Sicherheitsregeln verwalten.","settings","Admin")}
-    ${folderCard("⑪","Sammel-Paket","ZIP hochladen · Thema wählen · Paket live stellen.","actions-bulk","ZIP · Paket")}
+    ${folderCard("①","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
+    ${folderCard("②","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
+    ${folderCard("③","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
+    ${folderCard("④","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑤","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -2232,14 +2241,20 @@ function renderQuellen(){
       </aside>
       <div class="panel quellen-editor-panel">
         <div class="section-head"><h3>Beitrag</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
-        ${quellenEdit.filename?`<textarea class="paste-area ordner-editor-area" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
-        ${renderSourceFilesPanel("quellen")}
+        ${quellenEdit.filename?`<div class="admin-editor-grid">
+          <section class="editor-card editor-card-main">
+            <label class="field-label" for="quellenEditor">Markdown-Beitrag</label>
+            <textarea class="paste-area ordner-editor-area markdown-editor" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
+            ${renderSourceFilesPanel("quellen")}
+          </section>
+          ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("quellen"):""}
+        </div>
         <div class="ordner-editor-actions">
           <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
           <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">In App öffnen</a>
-          <button class="btn primary" id="quellenSaveBtn" type="button">Speichern &amp; veröffentlichen</button>
+          <button class="btn primary" id="quellenSaveBtn" type="button">Beitrag speichern</button>
         </div>
-        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Quellen-Dateien werden gemeinsam hochgeladen.")}</div>`:`<div class="empty">Links einen Beitrag aus der Suche wählen.</div>`}
+        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Feed-Bild werden gemeinsam gespeichert.")}</div>`:`<div class="empty">Links einen Beitrag aus der Suche wählen.</div>`}
       </div>
     </div>
   </section>`;
@@ -2590,12 +2605,14 @@ function renderActions(rows){
       <details class="admin-action-card" id="singlePostAction" ${draftMarkdown?"open":""}>
         <summary class="admin-action-summary"><div><h4>Einzelbeitrag · Markdown</h4><p>Markdown einfügen, PDF/Bild per Drag &amp; Drop anhängen, online veröffentlichen.</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
         <div class="admin-action-body">
-          <div class="upload-grid">
-            <div class="markdown-upload-col">
-              <textarea class="paste-area" id="postMarkdownInput" spellcheck="false" placeholder="GitHub-Markdown hier einfügen...">${esc(draftMarkdown)}</textarea>
+          <div class="upload-grid admin-editor-grid">
+            <div class="markdown-upload-col editor-card editor-card-main">
+              <label class="field-label" for="postMarkdownInput">Markdown-Beitrag</label>
+              <textarea class="paste-area markdown-editor" id="postMarkdownInput" spellcheck="false" placeholder="Markdown-Beitrag hier einfügen...">${esc(draftMarkdown)}</textarea>
               ${renderSlideDraftPreview(draftMarkdown)}
               ${renderSourceFilesPanel("draft")}
             </div>
+            ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("draft"):""}
             <div class="upload-stack">
               <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
               <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
@@ -2907,21 +2924,31 @@ function bindQuellenUi(){
     if(!markdown.trim()){toast("Markdown ist leer");return}
     const check=validateBeforeSourceSave("quellen");
     if(!check.ok){toast(check.errors[0]||"Validierung fehlgeschlagen");setQuellenEditorStatus(`Blockiert: ${check.errors.join(" · ")}`);return}
+    const preview=markdownPreviewData(markdown);
+    const postId=quellenEdit.postId||frontmatterValue(markdown,"id")||quellenEdit.filename.replace(/\.md$/i,"");
+    const title=preview.title||quellenEdit.title||quellenEdit.filename;
+    if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,title,"quellen");
     const sourceFiles=collectSourceFilesForWorker();
-    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen\n• Kein Push an Besucher`;
+    let feedImageFiles=[];
+    if(window.DARAdminFeedImage){
+      try{feedImageFiles=await DARAdminFeedImage.collectUploadFiles(postId,"quellen")}catch(e){toast(e.message||"Feed-Bild konnte nicht vorbereitet werden");return}
+    }
+    const feedNote=feedImageFiles.length?" · Feed-Bild wird mit hochgeladen":"";
+    const msg=`Beitrag „${quellenEdit.filename}“ speichern?\n\n• Markdown wird aktualisiert\n• ${sourceFiles.length} Quellen-Datei(en) werden mit hochgeladen${feedImageFiles.length?"\n• Feed-Bild wird verknüpft":""}\n• Kein Push an Besucher`;
     if(!confirm(msg))return;
-    saveBtn.disabled=true;setQuellenEditorStatus("Speichere Markdown + Quellen…");
+    saveBtn.disabled=true;setQuellenEditorStatus("Speichere Markdown + Quellen + Feed-Bild…");
     try{
-      const result=await workerPostRequest("post/update",{filename:quellenEdit.filename,markdown,sha:quellenEdit.sha,skipPush:true,sourceFiles});
+      const result=await workerPostRequest("post/update",{filename:quellenEdit.filename,markdown,sha:quellenEdit.sha,skipPush:true,sourceFiles,feedImageFiles});
       quellenEdit={...quellenEdit,markdown,sha:"",dirty:false};
       sourceDraftPending=null;
       sourceUploadQueue=[];
+      if(window.DARAdminFeedImage)DARAdminFeedImage.resetState("quellen");
       sourceLibraryCache=null;
       quellenCatalogLoaded=false;
       await ensureQuellenCatalog(true);
-      addAdminLog("Quellen","Beitrag + Quellen gespeichert",`${quellenEdit.filename}${sourceFiles.length?` · ${sourceFiles.length} Datei(en)`:""}`);
-      setQuellenEditorStatus(`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)}${sourceFiles.length?` · ${sourceFiles.length} Quellen-Datei(en) online`:""}`);
-      toast("Quellen gespeichert & veröffentlicht");
+      addAdminLog("Quellen","Beitrag + Quellen gespeichert",`${quellenEdit.filename}${sourceFiles.length?` · ${sourceFiles.length} Datei(en)`:""}${feedNote}`);
+      setQuellenEditorStatus(`Gespeichert · Commit ${String(result.commitSha||"").slice(0,7)}${sourceFiles.length?` · ${sourceFiles.length} Quellen-Datei(en) online`:""}${feedNote}`);
+      toast("Beitrag gespeichert & veröffentlicht");
       renderShell();
     }catch(e){
       setQuellenEditorStatus(`Fehler: ${e.message||e}`);
@@ -3139,6 +3166,17 @@ function bindUi(){
   if(window.DARFeedAdmin)window.DARFeedAdmin.bindFeedUi();
   if(window.DARFeedBgAdmin)window.DARFeedBgAdmin.bindFeedBgUi();
   bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
+  bindFeedImagePanels();
+}
+function bindFeedImagePanels(){
+  if(!window.DARAdminFeedImage)return;
+  document.querySelectorAll("[data-feed-image-context]").forEach(panel=>{
+    const ctx=panel.getAttribute("data-feed-image-context");
+    DARAdminFeedImage.bindRoot(panel,ctx,SITE_ORIGIN);
+    if(ctx==="quellen"&&quellenEdit.filename&&quellenEdit.markdown){
+      DARAdminFeedImage.syncFromMarkdown("quellen",quellenEdit.markdown,SITE_ORIGIN);
+    }
+  });
 }
 function bindCommandCenterForms(){
   function applyPreview(width,height,mode){
@@ -3357,7 +3395,10 @@ async function uploadPostViaWorker(){
     if(!/^[a-z0-9][a-z0-9-]*\.md$/i.test(draftFilename)){updatePublishStep("filename","error","Ungültiger Dateiname");finishPublishTrack("error","Dateiname muss eine .md-Datei ohne Leerzeichen sein.");setUploadStatus("Dateiname muss eine .md-Datei ohne Leerzeichen sein.");return}
     updatePublishStep("filename","ok",draftFilename);
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
-    const markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    let markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    const postId=frontmatterValue(markdown,"id")||draftFilename.replace(/\.md$/i,"");
+    const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
+    if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,postTitle,"draft");
     const sourceCheck=validateBeforeSourceSave("draft");
     if(sourceCheck.warnings?.length)addAdminLog("Quellen","Hinweise",sourceCheck.warnings.join(" · "));
     if(!sourceCheck.ok){finishPublishTrack("error",sourceCheck.errors.join(" · "));setUploadStatus(`Quellen-Fehler: ${esc(sourceCheck.errors.join(" · "))}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
@@ -3370,10 +3411,15 @@ async function uploadPostViaWorker(){
     updatePublishStep("created","run","Sende an Worker");
     setUploadStatus("Sende Beitrag an Cloudflare Worker...");
     const sourceFiles=collectSourceFilesForWorker();
-    const result=await publishPostViaWorkerRequest(markdown,draftFilename,{sourceFiles});
+    let feedImageFiles=[];
+    if(window.DARAdminFeedImage){
+      try{feedImageFiles=await DARAdminFeedImage.collectUploadFiles(postId,"draft")}catch(e){finishPublishTrack("error",e.message||"Feed-Bild");setUploadStatus(`Feed-Bild-Fehler: ${esc(e.message||e)}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
+      if(feedImageFiles.length)updatePublishStep("created","ok",`${sourceFiles.length?sourceFiles.length+" Quellen + ":""}Feed-Bild bereit`);
+    }
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename,{sourceFiles,feedImageFiles});
     const uploadedFilename=result.filename||draftFilename;
     const uploadedNumber=result.number||next;
-    const postId=result.postId||frontmatterValue(markdown,"id")||uploadedFilename.replace(/\.md$/i,"");
+    const uploadedPostId=result.postId||postId||uploadedFilename.replace(/\.md$/i,"");
     updatePublishStep("created","ok",uploadedFilename);
     updatePublishStep("commit",result.commitSha?"ok":"skip",result.commitSha||"Worker meldet keinen Commit");
     updatePublishStep("index","ok","Worker hat Index aktualisiert");
@@ -3408,6 +3454,7 @@ async function uploadPostViaWorker(){
     draftNextNumber=null;
     sourceDraftPending=null;
     sourceUploadQueue=[];
+    if(window.DARAdminFeedImage)DARAdminFeedImage.resetState("draft");
     try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}
     const text=document.getElementById("postMarkdownInput");if(text)text.value="";
     if(filenameInput)filenameInput.value="";

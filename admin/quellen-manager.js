@@ -481,6 +481,80 @@
     };
   }
 
+  function parseFeedFromYaml(yaml) {
+    const lines = yamlTopLevelBlock(yaml, "feed");
+    const empty = { enabled: false, image: "", originalImage: "", alt: "", shareEnabled: false };
+    if (!lines.length) return empty;
+    const feed = { ...empty };
+    lines.forEach((line) => {
+      const m = line.match(/^\s{2}([A-Za-z0-9_-]+):\s*(.*)$/);
+      if (!m) return;
+      const key = m[1];
+      const val = parseValue(m[2]);
+      if (key === "enabled" || key === "shareEnabled") feed[key] = val === true || val === "true";
+      else feed[key] = val;
+    });
+    return feed;
+  }
+
+  function parseFeedFromMarkdown(markdown) {
+    const { yaml } = splitFrontmatter(markdown);
+    return parseFeedFromYaml(yaml);
+  }
+
+  function feedYamlBlock(feed) {
+    const f = feed || {};
+    if (!f.enabled) {
+      return [
+        "feed:",
+        "  enabled: false",
+        '  image: ""',
+        '  originalImage: ""',
+        '  alt: ""',
+        "  shareEnabled: false"
+      ].join("\n");
+    }
+    return [
+      "feed:",
+      "  enabled: true",
+      `  image: "${escYaml(f.image || "")}"`,
+      `  originalImage: "${escYaml(f.originalImage || "")}"`,
+      `  alt: "${escYaml(f.alt || "")}"`,
+      `  shareEnabled: ${f.shareEnabled !== false ? "true" : "false"}`
+    ].join("\n");
+  }
+
+  function mergeFeedFrontmatter(markdown, feed) {
+    const { yaml, body } = splitFrontmatter(markdown);
+    let lines = yaml ? yaml.split("\n") : [];
+    const start = lines.findIndex((line) => /^feed:\s*$/.test(line));
+    if (start >= 0) {
+      let end = start + 1;
+      while (end < lines.length && /^\s/.test(lines[end])) end += 1;
+      lines.splice(start, end - start);
+    }
+    lines = lines.concat(feedYamlBlock(feed).split("\n"));
+    const yamlOut = lines.join("\n").trim();
+    return `---\n${yamlOut}\n---\n${body}`;
+  }
+
+  function buildFeedFrontmatter(postId, title, opts = {}) {
+    const enabled = !!opts.enabled && !!(opts.hasImage || opts.image);
+    if (!enabled) {
+      return { enabled: false, image: "", originalImage: "", alt: "", shareEnabled: false };
+    }
+    const id = String(postId || "").trim() || "beitrag";
+    const image = opts.image || `/assets/posts/${id}/feed-preview.jpg`;
+    const originalImage = opts.originalImage || `/assets/posts/${id}/feed-original.jpg`;
+    return {
+      enabled: true,
+      image,
+      originalImage,
+      alt: opts.alt || `Bildbeitrag zu: ${title || "Beitrag"}`,
+      shareEnabled: opts.shareEnabled !== false
+    };
+  }
+
   function filterQuellenCatalog(catalog, query) {
     const q = String(query || "").trim().toLowerCase();
     if (!q) return catalog;
@@ -505,6 +579,11 @@
     filterQuellenCatalog,
     postHasLocalSourceFiles,
     postHasPdfOrImageLinks,
-    serializeSlidesBlock
+    serializeSlidesBlock,
+    parseFeedFromYaml,
+    parseFeedFromMarkdown,
+    mergeFeedFrontmatter,
+    buildFeedFrontmatter,
+    feedYamlBlock
   };
 })(typeof window !== "undefined" ? window : globalThis);

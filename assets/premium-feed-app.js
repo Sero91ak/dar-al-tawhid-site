@@ -1039,7 +1039,7 @@
   }
 
   function feedContentTypes() {
-    return ['post', 'archive', 'dua', 'custom'];
+    return ['post', 'archive', 'dua', 'custom', 'postFeed'];
   }
 
   function isFeedContentItem(item) {
@@ -1734,13 +1734,40 @@
     ];
   }
 
+  function buildPostFeedPool(posts) {
+    return (posts || [])
+      .filter(function (p) {
+        return p && p.id && p.feed && p.feed.enabled === true && p.feed.image;
+      })
+      .sort(comparePosts)
+      .map(function (p, i) {
+        var preview = String(p.feed.image || '');
+        var original = String(p.feed.originalImage || preview.replace(/feed-preview(\.[a-z0-9]+)?$/i, 'feed-original$1'));
+        return {
+          uid: 'post-feed-' + p.id,
+          type: 'postFeed',
+          title: p.title || 'Beitrag',
+          category: normCat(p.category),
+          image: preview,
+          originalImage: original,
+          alt: p.feed.alt || ('Bildbeitrag zu: ' + (p.title || 'Beitrag')),
+          shareEnabled: p.feed.shareEnabled !== false,
+          target: 'post:' + p.id,
+          postId: String(p.id),
+          postUrl: '/#post/' + encodeURIComponent(String(p.id)),
+          sort: -900 - i,
+          date: p.date || ''
+        };
+      });
+  }
+
   function buildPools(ctx, seed) {
     var hijri = hijriLabel();
     var posts = (ctx.posts || []).slice().sort(comparePosts);
     var duas = ctx.duas || [];
     var newest = posts.slice(0, 8);
     var archive = posts.slice(8);
-    var pools = { newest: [], archive: [], dua: [], quran: [], news: [], hint: [], category: [], manual: [] };
+    var pools = { newest: [], archive: [], dua: [], quran: [], news: [], hint: [], category: [], manual: [], postFeed: buildPostFeedPool(posts) };
 
     newest.forEach(function (p, i) {
       if (!p || !p.id) return;
@@ -1886,6 +1913,12 @@
     var out = [];
     var seen = {};
 
+    (pools.postFeed || []).forEach(function (item) {
+      if (seen[cardKey(item)]) return;
+      seen[cardKey(item)] = true;
+      out.push(item);
+    });
+
     manualItems.forEach(function (m) {
       var n = normalizeManual(m);
       if (!n) return;
@@ -1981,7 +2014,7 @@
     var base = items.filter(isFeedContentItem);
     var f = state.filter;
     if (f === 'all') return base;
-    if (f === 'posts') return base.filter(function (it) { return it.type === 'post' || it.type === 'archive' || it.type === 'custom'; });
+    if (f === 'posts') return base.filter(function (it) { return it.type === 'post' || it.type === 'archive' || it.type === 'custom' || it.type === 'postFeed'; });
     if (f === 'duas') return base.filter(function (it) { return it.type === 'dua'; });
     return base;
   }
@@ -2038,6 +2071,15 @@
       '.sf-filter.is-active{border-color:var(--theme-border,var(--line));background:var(--theme-feed-filter-active,linear-gradient(135deg,rgba(214,190,132,.18),rgba(90,70,30,.12)));color:var(--theme-accent,var(--gold2));opacity:1}' +
       '.sf-feed{display:flex;flex-direction:column;gap:var(--sf-card-gap,20px);padding:0 var(--sf-gutter-right,var(--sf-shell-pad,10px)) calc(24px + env(safe-area-inset-bottom)) var(--sf-gutter-left,var(--sf-shell-pad,10px));width:100%;max-width:var(--sf-feed-col-max,100%);box-sizing:border-box;margin-left:auto;margin-right:auto;min-width:0}' +
       '.sf-post{margin:0;border-radius:var(--sf-card-radius,26px);overflow:hidden;cursor:pointer;background:var(--theme-feed-card,var(--theme-surface,transparent));border:1px solid var(--theme-border,var(--line));box-shadow:var(--premium-shadow,none);width:100%;max-width:100%;min-width:0;box-sizing:border-box;align-self:stretch}' +
+      '.sf-post--image-feed{cursor:default;border:none;background:rgba(0,0,0,.18);box-shadow:0 18px 55px rgba(0,0,0,.22);position:relative;max-width:680px;margin:0 auto}' +
+      '.feed-image-button{display:block;width:100%;border:0;padding:0;margin:0;background:transparent;cursor:pointer}' +
+      '.feed-image{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}' +
+      '.feed-card-meta{position:absolute;left:14px;top:14px;z-index:2;pointer-events:none}' +
+      '.feed-card-cat{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,247,232,.88);background:rgba(12,14,16,.52);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}' +
+      '.feed-card-actions{position:absolute;right:14px;bottom:14px;display:flex;justify-content:flex-end;z-index:3}' +
+      '.share-image-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 14px;color:#fff7e8;background:rgba(12,14,16,.58);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(0,0,0,.24);font-weight:700;cursor:pointer;transition:transform .18s ease,background .18s ease;font-family:var(--font-ui)}' +
+      '.share-image-btn:hover{transform:translateY(-1px);background:rgba(12,14,16,.72)}' +
+      '.share-image-btn span{display:grid;place-items:center;width:24px;height:24px;border-radius:999px;background:linear-gradient(135deg,#d8b968,#a98532);color:#171717}' +
       '.sf-post--demo{border-color:var(--theme-border,var(--line));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.28))}' +
       '.sf-post__head{display:flex;align-items:center;gap:10px;padding:10px 12px 8px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
       '.sf-avatar{width:40px;height:40px;border-radius:50%;background:var(--theme-feed-avatar-bg,linear-gradient(145deg,rgba(239,215,142,.42),rgba(90,70,30,.62)));border:1.5px solid var(--theme-border,var(--line));display:grid;place-items:center;font-size:14px;font-weight:900;color:var(--theme-text,var(--text));flex:0 0 40px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.16)}' +
@@ -2386,7 +2428,26 @@
     );
   }
 
+  function postFeedCardHtml(item) {
+    var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
+    var orig = item.originalImage || item.image || '';
+    return (
+      '<article class="sf-post feed-card sf-post--image-feed" data-feed-card-id="' + esc(item.uid) + '" data-pf-id="' + esc(item.uid) + '" data-post-id="' + esc(item.postId || '') + '" data-pf-target="' + esc(item.target || '') + '" data-pf-type="postFeed" data-pf-post="' + esc(item.postId || '') + '">' +
+        '<button class="feed-image-button" type="button" aria-label="Beitrag öffnen">' +
+          '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="lazy" decoding="async">' +
+        '</button>' +
+        (item.category ? '<div class="feed-card-meta"><span class="feed-card-cat">' + esc(item.category) + '</span></div>' : '') +
+        '<div class="feed-card-actions">' +
+          (item.shareEnabled !== false ?
+            '<button class="share-image-btn" type="button" data-original-image="' + esc(orig) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '"><span>↗</span> Teilen</button>' :
+            '') +
+        '</div>' +
+      '</article>'
+    );
+  }
+
   function cardHtml(item, cardIdx) {
+    if (item.type === 'postFeed') return postFeedCardHtml(item);
     var liked = isLiked(item.uid);
 
     return (
@@ -2773,6 +2834,69 @@
     }
   }
 
+  function getExtensionFromMime(mime) {
+    if (mime === 'image/png') return 'png';
+    if (mime === 'image/webp') return 'webp';
+    return 'jpg';
+  }
+
+  function createSafeFileName(title, extension) {
+    var cleanTitle = String(title || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9äöüß\- ]/gi, '')
+      .replace(/\s+/g, '-')
+      .slice(0, 80);
+    return (cleanTitle || 'dar-al-tawhid-bildbeitrag') + '.' + extension;
+  }
+
+  async function shareOriginalFeedImage(opts) {
+    var imageUrl = opts && opts.imageUrl;
+    var postUrl = opts && opts.postUrl;
+    var title = (opts && opts.title) || 'DAR AL TAWḤID';
+    try {
+      var absoluteImageUrl = new URL(imageUrl, global.location.origin).toString();
+      var absolutePostUrl = new URL(postUrl || '/#feed', global.location.origin).toString();
+      var response = await fetch(absoluteImageUrl, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Originalbild konnte nicht geladen werden.');
+      var blob = await response.blob();
+      var extension = getExtensionFromMime(blob.type);
+      var fileName = createSafeFileName(title, extension);
+      var file = new File([blob], fileName, { type: blob.type || 'image/jpeg' });
+      if (global.navigator.canShare && global.navigator.canShare({ files: [file] }) && global.navigator.share) {
+        await global.navigator.share({
+          title: title,
+          text: 'Bildbeitrag von DAR AL TAWḤID',
+          url: absolutePostUrl,
+          files: [file]
+        });
+        return;
+      }
+      global.open(absoluteImageUrl, '_blank', 'noopener,noreferrer');
+      if (global.navigator.clipboard) {
+        await global.navigator.clipboard.writeText(absolutePostUrl);
+      }
+      showToast('Das Originalbild wurde geöffnet. Der Beitragslink wurde kopiert.');
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      console.error(error);
+      if (postUrl) {
+        var fallbackPostUrl = new URL(postUrl, global.location.origin).toString();
+        if (global.navigator.share) {
+          await global.navigator.share({
+            title: title,
+            text: 'Beitrag von DAR AL TAWḤID',
+            url: fallbackPostUrl
+          });
+          return;
+        }
+        if (global.navigator.clipboard) {
+          await global.navigator.clipboard.writeText(fallbackPostUrl);
+          showToast('Teilen wurde nicht unterstützt. Der Beitragslink wurde kopiert.');
+        }
+      }
+    }
+  }
+
   function feedShareOnClick(event) {
     var button = event.target.closest('[data-feed-share-id]');
     if (!button || button.classList.contains('is-loading')) return false;
@@ -2801,7 +2925,17 @@
         if (item) navigateTarget(item);
       }
       card.addEventListener('click', function (ev) {
-        if (ev.target.closest('.sf-act') || ev.target.closest('[data-feed-share-id]') || ev.target.closest('.feed-share-button')) return;
+        if (ev.target.closest('.sf-act') || ev.target.closest('[data-feed-share-id]') || ev.target.closest('.feed-share-button') || ev.target.closest('.share-image-btn')) return;
+        if (ev.target.closest('.feed-image-button')) {
+          var postId = card.getAttribute('data-post-id') || (item && item.postId);
+          if (postId && typeof navigate === 'function') {
+            markSeen(uid);
+            navigate('post', postId);
+          } else {
+            open();
+          }
+          return;
+        }
         open();
       });
       card.addEventListener('keydown', function (ev) {
@@ -2840,6 +2974,19 @@
       btn.addEventListener('click', function (ev) {
         feedShareOnClick(ev);
       }, true);
+    });
+    root.querySelectorAll('.share-image-btn').forEach(function (btn) {
+      if (btn.dataset.sfOrigShareBound === '1') return;
+      btn.dataset.sfOrigShareBound = '1';
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        shareOriginalFeedImage({
+          imageUrl: btn.getAttribute('data-original-image'),
+          postUrl: btn.getAttribute('data-post-url'),
+          title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
+        });
+      });
     });
     root.querySelectorAll('.sf-filter').forEach(function (btn) {
       btn.addEventListener('click', function () {
