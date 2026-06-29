@@ -1,14 +1,22 @@
 /**
- * DAR Admin — Feed-Bild am Markdown-Beitrag (Original + Preview)
+ * DAR Admin — Feed-Bild am Markdown-Beitrag (kompakt, Drag & Drop)
  */
 (function (global) {
   "use strict";
 
   var stateByContext = Object.create(null);
   var IMAGE_EXT_RE = /\.(png|jpe?g|webp)$/i;
+  var FEED_MAX_BYTES = 20 * 1024 * 1024;
 
   function ctxKey(context) {
     return String(context || "draft");
+  }
+
+  function escHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/"/g, "&quot;");
   }
 
   function getState(context) {
@@ -37,6 +45,7 @@
       existingOriginal: "",
       removePending: false
     };
+    updateFeedStatusUi(context);
   }
 
   function extFromMime(mime, name) {
@@ -106,35 +115,108 @@
   function renderPanel(context) {
     var c = ctxKey(context);
     return (
-      '<aside class="editor-card feed-image-card" data-feed-image-context="' + c + '">' +
+      '<div class="feed-image-panel" data-feed-image-context="' + c + '">' +
         '<div class="feed-image-head">' +
-          '<div><p class="admin-kicker">Feed</p><h2>Bildbeitrag</h2></div>' +
-          '<label class="switch" title="Im Feed anzeigen"><input type="checkbox" id="feedEnabled-' + c + '" data-feed-enabled="' + c + '" checked><span></span></label>' +
+          '<div class="feed-image-head-text">' +
+            '<strong>Feed · Bildbeitrag</strong>' +
+            '<span>Im Feed-Tab sichtbar nach Veröffentlichen</span>' +
+          '</div>' +
+          '<label class="switch switch-compact" title="Im Feed anzeigen">' +
+            '<input type="checkbox" id="feedEnabled-' + c + '" data-feed-enabled="' + c + '" checked><span></span>' +
+          '</label>' +
         '</div>' +
-        '<p class="feed-help">Dieses Bild erscheint im <strong>Feed-Tab</strong> (nicht nur als Quellen-Scan im Text). Bild hier hinzufügen <em>oder</em> beim Quellen-Upload ein Bild anhängen — beides verknüpft automatisch den Feed, wenn „Im Feed anzeigen“ aktiv ist.</p>' +
-        '<div class="feed-image-preview" id="feedImagePreview-' + c + '" data-feed-preview="' + c + '">' +
-          '<div class="feed-image-empty"><span>🖼</span><p>Noch kein Bild hinzugefügt</p></div>' +
+        '<div class="feed-image-dropzone" id="feedImageDropzone-' + c + '" data-feed-dropzone="' + c + '" role="button" tabindex="0" aria-label="Feed-Bild hochladen">' +
+          '<div class="feed-image-preview" id="feedImagePreview-' + c + '" data-feed-preview="' + c + '">' +
+            '<span class="feed-drop-label"><strong>Bild hier ablegen</strong><br>Drag &amp; Drop oder tippen · PNG/JPG · max. 20 MB</span>' +
+          '</div>' +
         '</div>' +
-        '<div class="feed-image-actions">' +
-          '<input type="file" id="feedImageInput-' + c + '" data-feed-input="' + c + '" accept="image/png,image/jpeg,image/webp" hidden>' +
-          '<button type="button" class="btn btn-primary btn-full" data-feed-add="' + c + '">🖼 Bild hinzufügen</button>' +
-          '<button type="button" class="btn btn-ghost btn-full" data-feed-remove="' + c + '">Bild entfernen</button>' +
+        '<input type="file" id="feedImageInput-' + c + '" data-feed-input="' + c + '" accept="image/png,image/jpeg,image/webp" hidden>' +
+        '<div id="feedImageStatus-' + c + '" class="feed-image-status" data-feed-status="' + c + '" hidden></div>' +
+        '<div class="feed-image-toolbar">' +
+          '<button type="button" class="btn" data-feed-pick="' + c + '">Datei wählen</button>' +
+          '<button type="button" class="btn danger" data-feed-remove="' + c + '" hidden>Entfernen</button>' +
         '</div>' +
-        '<div class="feed-meta">' +
-          '<label class="field-label" for="feedAlt-' + c + '">Bildbeschreibung</label>' +
-          '<input type="text" id="feedAlt-' + c + '" class="input" data-feed-alt="' + c + '" placeholder="Bildbeitrag zu: Titel">' +
-        '</div>' +
-      '</aside>'
+      '</div>'
     );
   }
 
   function renderPreviewEl(root, src) {
     if (!root) return;
     if (!src) {
-      root.innerHTML = '<div class="feed-image-empty"><span>🖼</span><p>Noch kein Bild hinzugefügt</p></div>';
+      root.innerHTML = '<span class="feed-drop-label"><strong>Bild hier ablegen</strong><br>Drag &amp; Drop oder tippen · PNG/JPG · max. 20 MB</span>';
       return;
     }
-    root.innerHTML = '<img src="' + src.replace(/"/g, "&quot;") + '" alt="Feed-Bild Vorschau">';
+    root.innerHTML = '<img class="feed-image-thumb" src="' + src.replace(/"/g, "&quot;") + '" alt="Feed-Vorschau">';
+  }
+
+  function updateFeedStatusUi(context) {
+    var c = ctxKey(context);
+    var st = getState(context);
+    var status = document.querySelector('[data-feed-status="' + c + '"]');
+    var removeBtn = document.querySelector('[data-feed-remove="' + c + '"]');
+    var dropzone = document.querySelector('[data-feed-dropzone="' + c + '"]');
+    var has = !st.removePending && (!!st.file || !!st.previewUrl || !!st.existingImage);
+    if (status) {
+      if (has) {
+        var name = st.file ? st.file.name : String(st.existingImage || "Bild").split("/").pop();
+        status.hidden = false;
+        status.innerHTML = '✓ Feed-Bild bereit · <strong>' + escHtml(name) + '</strong> — erscheint im Feed nach Veröffentlichen';
+      } else {
+        status.hidden = true;
+        status.innerHTML = "";
+      }
+    }
+    if (removeBtn) removeBtn.hidden = !has;
+    if (dropzone) dropzone.classList.toggle("has-image", has && !!st.previewUrl);
+  }
+
+  function validateFeedImageFile(file) {
+    if (!file) throw new Error("Keine Datei gewählt");
+    if (!file.type.startsWith("image/") && !IMAGE_EXT_RE.test(file.name || "")) {
+      throw new Error("Nur PNG, JPG oder WEBP für Feed-Bilder");
+    }
+    if (Number(file.size || 0) > FEED_MAX_BYTES) throw new Error("Maximal 20 MB pro Bild");
+    return true;
+  }
+
+  function applyFeedFile(context, file, siteOrigin) {
+    validateFeedImageFile(file);
+    var st = getState(context);
+    var c = ctxKey(context);
+    var preview = document.querySelector('[data-feed-preview="' + c + '"]');
+    var enabled = document.querySelector('[data-feed-enabled="' + c + '"]');
+    var input = document.querySelector('[data-feed-input="' + c + '"]');
+    if (st.previewUrl && st.previewUrl.indexOf("blob:") === 0) {
+      try { URL.revokeObjectURL(st.previewUrl); } catch (e) {}
+    }
+    st.file = file;
+    st.removePending = false;
+    st.previewUrl = URL.createObjectURL(file);
+    if (enabled) enabled.checked = true;
+    renderPreviewEl(preview, st.previewUrl);
+    updateFeedStatusUi(context);
+    if (input) input.value = "";
+    if (typeof global.toast === "function") global.toast("Feed-Bild eingefügt — wird beim Veröffentlichen hochgeladen");
+  }
+
+  function clearFeedFile(context) {
+    var st = getState(context);
+    var c = ctxKey(context);
+    var preview = document.querySelector('[data-feed-preview="' + c + '"]');
+    var enabled = document.querySelector('[data-feed-enabled="' + c + '"]');
+    var input = document.querySelector('[data-feed-input="' + c + '"]');
+    if (st.previewUrl && st.previewUrl.indexOf("blob:") === 0) {
+      try { URL.revokeObjectURL(st.previewUrl); } catch (e) {}
+    }
+    st.file = null;
+    st.previewUrl = "";
+    st.existingImage = "";
+    st.existingOriginal = "";
+    st.removePending = true;
+    if (input) input.value = "";
+    if (enabled) enabled.checked = false;
+    renderPreviewEl(preview, "");
+    updateFeedStatusUi(context);
   }
 
   function hasFeedBlockInMarkdown(markdown) {
@@ -153,16 +235,15 @@
     st.file = null;
     var root = document.querySelector('[data-feed-preview="' + ctxKey(context) + '"]');
     var enabledEl = document.querySelector('[data-feed-enabled="' + ctxKey(context) + '"]');
-    var altEl = document.querySelector('[data-feed-alt="' + ctxKey(context) + '"]');
     if (enabledEl) {
       enabledEl.checked = hasFeedBlockInMarkdown(markdown)
         ? feed.enabled !== false
         : true;
     }
-    if (altEl) altEl.value = feed.alt || "";
     var src = feed.image ? new URL(feed.image, siteOrigin || global.location.origin).href : "";
     st.previewUrl = src;
     renderPreviewEl(root, src);
+    updateFeedStatusUi(context);
   }
 
   function adoptSourceImage(context, imageUrl, siteOrigin) {
@@ -179,6 +260,7 @@
       renderPreviewEl(preview, st.previewUrl);
     }
     if (enabled && !enabled.checked) enabled.checked = true;
+    updateFeedStatusUi(context);
   }
 
   function readUi(context) {
@@ -263,46 +345,88 @@
     if (!root) return;
     var c = ctxKey(context);
     var input = root.querySelector('[data-feed-input="' + c + '"]');
-    var preview = root.querySelector('[data-feed-preview="' + c + '"]');
-    var enabled = root.querySelector('[data-feed-enabled="' + c + '"]');
-    root.querySelectorAll('[data-feed-add="' + c + '"]').forEach(function (btn) {
-      btn.addEventListener("click", function () { if (input) input.click(); });
+    var dropzone = root.querySelector('[data-feed-dropzone="' + c + '"]');
+    var dragDepth = 0;
+
+    function handleFiles(files) {
+      var file = files && files[0];
+      if (!file) return;
+      try {
+        applyFeedFile(context, file, siteOrigin);
+      } catch (e) {
+        alert(e.message || String(e));
+      }
+    }
+
+    function setDragActive(on) {
+      root.classList.toggle("is-drag-active", !!on);
+      if (dropzone) dropzone.classList.toggle("is-dragover", !!on);
+    }
+
+    function prevent(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    root.querySelectorAll('[data-feed-pick="' + c + '"]').forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (input) input.click();
+      });
     });
-    if (input) {
-      input.addEventListener("change", function (ev) {
-        var file = ev.target.files && ev.target.files[0];
-        if (!file) return;
-        if (!file.type.startsWith("image/")) {
-          alert("Bitte nur Bilddateien hochladen.");
-          return;
+
+    if (dropzone) {
+      dropzone.addEventListener("click", function (e) {
+        if (e.target.closest("[data-feed-pick], [data-feed-remove]")) return;
+        if (input) input.click();
+      });
+      dropzone.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (input) input.click();
         }
-        var st = getState(context);
-        if (st.previewUrl && st.previewUrl.indexOf("blob:") === 0) {
-          try { URL.revokeObjectURL(st.previewUrl); } catch (e) {}
-        }
-        st.file = file;
-        st.removePending = false;
-        st.previewUrl = URL.createObjectURL(file);
-        if (enabled) enabled.checked = true;
-        renderPreviewEl(preview, st.previewUrl);
       });
     }
+
+    root.addEventListener("dragenter", function (e) {
+      prevent(e);
+      dragDepth++;
+      setDragActive(true);
+    }, { passive: false });
+
+    root.addEventListener("dragover", function (e) {
+      prevent(e);
+      setDragActive(true);
+    }, { passive: false });
+
+    root.addEventListener("dragleave", function (e) {
+      prevent(e);
+      dragDepth = Math.max(0, dragDepth - 1);
+      if (dragDepth === 0) setDragActive(false);
+    }, { passive: false });
+
+    root.addEventListener("drop", function (e) {
+      prevent(e);
+      dragDepth = 0;
+      setDragActive(false);
+      handleFiles(e.dataTransfer && e.dataTransfer.files);
+    }, { passive: false });
+
+    if (input) {
+      input.addEventListener("change", function (ev) {
+        handleFiles(ev.target.files);
+      });
+    }
+
     root.querySelectorAll('[data-feed-remove="' + c + '"]').forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var st = getState(context);
-        if (st.previewUrl && st.previewUrl.indexOf("blob:") === 0) {
-          try { URL.revokeObjectURL(st.previewUrl); } catch (e) {}
-        }
-        st.file = null;
-        st.previewUrl = "";
-        st.existingImage = "";
-        st.existingOriginal = "";
-        st.removePending = true;
-        if (input) input.value = "";
-        if (enabled) enabled.checked = false;
-        renderPreviewEl(preview, "");
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!confirm("Feed-Bild wirklich entfernen?")) return;
+        clearFeedFile(context);
       });
     });
+
+    updateFeedStatusUi(context);
   }
 
   global.DARAdminFeedImage = {
@@ -314,6 +438,7 @@
     collectUploadFiles: collectUploadFiles,
     readUi: readUi,
     adoptSourceImage: adoptSourceImage,
-    pickSourceImageUrl: pickSourceImageUrl
+    pickSourceImageUrl: pickSourceImageUrl,
+    updateFeedStatusUi: updateFeedStatusUi
   };
 })(typeof window !== "undefined" ? window : globalThis);

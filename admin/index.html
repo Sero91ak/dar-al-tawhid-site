@@ -445,29 +445,45 @@ main#panel.panel{
 .admin-step-chip{border:1px solid rgba(239,215,142,.28);border-radius:999px;padding:4px 9px;font-size:9px;font-weight:950;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;background:rgba(239,215,142,.06)}
 .bulk-pack-panel.is-featured{border-color:rgba(239,215,142,.42);background:linear-gradient(145deg,rgba(90,140,220,.08),rgba(239,215,142,.05))}
 @media(max-width:640px){.bulk-pack-meta{grid-template-columns:1fr}}
-@media(max-width:980px){.admin-editor-grid{grid-template-columns:1fr}.feed-image-card{position:static}}
+@media(max-width:980px){.admin-editor-grid{grid-template-columns:1fr}.quellen-editor-stack{grid-template-columns:1fr}}
 .admin-editor-shell{max-width:1440px;margin:0 auto}
-.admin-editor-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+.admin-editor-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start}
+.quellen-editor-stack{display:grid;gap:12px}
 .editor-card{border:1px solid rgba(200,168,90,.22);background:rgba(18,22,24,.72);border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.22);padding:18px}
+@media(max-width:768px){.editor-card{padding:12px;border-radius:16px}}
 .admin-kicker{margin:0 0 6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c8a85a}
-.feed-image-card{position:sticky;top:18px}
-.feed-image-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.feed-image-head h2{margin:0;font-family:Georgia,serif;font-weight:700;font-size:1.15rem}
-.feed-help{margin:12px 0 16px;font-size:13px;line-height:1.55;color:rgba(247,241,223,.72)}
-.feed-image-preview{width:100%;aspect-ratio:4/5;border-radius:18px;overflow:hidden;border:1px dashed rgba(200,168,90,.35);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.16)),rgba(255,255,255,.03);display:grid;place-items:center}
-.feed-image-preview img{width:100%;height:100%;object-fit:cover}
-.feed-image-empty{text-align:center;color:rgba(247,241,223,.6)}
-.feed-image-empty span{display:block;font-size:34px;margin-bottom:8px}
-.feed-image-actions{display:grid;gap:10px;margin-top:14px}
-.feed-meta{margin-top:16px}
-.btn-full{width:100%}
-.btn-ghost{background:transparent;color:rgba(247,241,223,.72);border:1px solid rgba(255,255,255,.1)}
-.switch{position:relative;display:inline-flex;width:48px;height:28px}
+.feed-image-panel{border:1px solid rgba(239,215,142,.18);border-radius:16px;background:linear-gradient(160deg,rgba(16,24,36,.88),rgba(6,8,12,.94));padding:10px;margin-top:8px;display:grid;gap:8px}
+.feed-image-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.feed-image-head-text{display:grid;gap:2px;min-width:0}
+.feed-image-head-text strong{color:var(--gold);font-size:12px;line-height:1.25}
+.feed-image-head-text span{color:var(--soft);font-size:10px;line-height:1.35}
+.feed-image-dropzone{border:1px dashed rgba(239,215,142,.28);border-radius:14px;padding:14px 12px;text-align:center;color:var(--soft);font-size:11px;line-height:1.45;background:rgba(255,255,255,.02);cursor:pointer;transition:border-color .2s,background .2s,touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.feed-image-dropzone.is-dragover,.feed-image-panel.is-drag-active .feed-image-dropzone{border-color:rgba(140,190,255,.55);background:rgba(90,140,220,.08);color:#eef4ff}
+.feed-image-dropzone.has-image{padding:8px;text-align:left}
+.feed-drop-label{display:block;color:var(--soft);font-size:11px;line-height:1.45}
+.feed-drop-label strong{color:var(--gold);font-size:12px}
+.feed-image-preview{display:grid;place-items:center;min-height:52px}
+.feed-image-thumb{width:100%;max-height:120px;object-fit:contain;border-radius:10px;background:rgba(0,0,0,.22)}
+.feed-image-status{font-size:10.5px;color:#b8e6c0;line-height:1.45;padding:6px 8px;border:1px solid rgba(120,220,160,.22);border-radius:10px;background:rgba(20,40,30,.2)}
+.feed-image-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.feed-image-toolbar .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.switch{position:relative;display:inline-flex;width:48px;height:28px;flex:0 0 auto}
 .switch input{display:none}
 .switch span{position:absolute;inset:0;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.14)}
 .switch span::after{content:"";position:absolute;width:22px;height:22px;top:2px;left:3px;border-radius:50%;background:#f7f1df;transition:.2s ease}
 .switch input:checked+span{background:linear-gradient(135deg,#d8b968,#a98532)}
 .switch input:checked+span::after{transform:translateX(19px)}
+.switch-compact{width:42px;height:26px;flex:0 0 auto}
+.switch-compact span::after{width:20px;height:20px;top:2px;left:2px}
+.switch-compact input:checked+span::after{transform:translateX(16px)}
+@media(max-width:768px){
+.upload-grid{grid-template-columns:1fr;gap:12px}
+.upload-stack{order:2}
+.markdown-upload-col{order:1}
+.paste-area.markdown-editor{min-height:min(38vh,320px);max-height:min(46vh,420px)}
+.feed-image-thumb{max-height:96px}
+.feed-image-dropzone{padding:12px 10px}
+}
 </style>
 </head>
 <body>
@@ -491,7 +507,7 @@ main#panel.panel{
 <div class="toast" id="toast"></div>
 <script src="/assets/slide-post-parser.js?v=2"></script>
 <script src="/admin/quellen-manager.js?v=3"></script>
-<script src="/assets/admin-feed-image.js?v=3"></script>
+<script src="/assets/admin-feed-image.js?v=4"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=3"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
@@ -2241,13 +2257,13 @@ function renderQuellen(){
       </aside>
       <div class="panel quellen-editor-panel">
         <div class="section-head"><h3>Beitrag</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
-        ${quellenEdit.filename?`<div class="admin-editor-grid">
+        ${quellenEdit.filename?`<div class="quellen-editor-stack">
           <section class="editor-card editor-card-main">
             <label class="field-label" for="quellenEditor">Markdown-Beitrag</label>
             <textarea class="paste-area ordner-editor-area markdown-editor" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
             ${renderSourceFilesPanel("quellen")}
+            ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("quellen"):""}
           </section>
-          ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("quellen"):""}
         </div>
         <div class="ordner-editor-actions">
           <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
@@ -2605,14 +2621,14 @@ function renderActions(rows){
       <details class="admin-action-card" id="singlePostAction" ${draftMarkdown?"open":""}>
         <summary class="admin-action-summary"><div><h4>Einzelbeitrag · Markdown</h4><p>Markdown einfügen, PDF/Bild per Drag &amp; Drop anhängen, online veröffentlichen.</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
         <div class="admin-action-body">
-          <div class="upload-grid admin-editor-grid">
+          <div class="upload-grid">
             <div class="markdown-upload-col editor-card editor-card-main">
               <label class="field-label" for="postMarkdownInput">Markdown-Beitrag</label>
               <textarea class="paste-area markdown-editor" id="postMarkdownInput" spellcheck="false" placeholder="Markdown-Beitrag hier einfügen...">${esc(draftMarkdown)}</textarea>
               ${renderSlideDraftPreview(draftMarkdown)}
               ${renderSourceFilesPanel("draft")}
+              ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("draft"):""}
             </div>
-            ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("draft"):""}
             <div class="upload-stack">
               <button class="btn" id="nextNumberBtn" type="button">Aktuelle Nummer holen</button>
               <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
