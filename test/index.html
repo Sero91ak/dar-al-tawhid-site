@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v175";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v176";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 
 <title>Dar Test</title>
@@ -7835,7 +7835,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<script src="/assets/premium-feed-app.js?v=79" defer></script>
+<script src="/assets/premium-feed-app.js?v=80" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8359,8 +8359,8 @@ function startStatsRefresh(){stopStatsRefresh();loadStatsPanel();statsRefreshTim
 function renderStats(){if(!isStatsAuthed()){return`${setHeader("Statistik","Nur für Admin-Zugang.","🔒")}<section class="stats-login"><input id="statsPinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort"><button id="statsPinBtn" type="button">Statistik öffnen</button><div class="stats-meta">Direktlink: <strong>#statistik</strong> · Login bleibt gespeichert.</div></section>`}return`${setHeader("Live-Statistik","Übersichtliche Auswertung – jeder Eintrag ist antippbar und öffnet den Beitrag oder die Duʿāʾ.","📊")}<div id="statsDashboard"><div class="stats-empty">Statistik wird geladen…</div></div><div class="stats-meta"><button id="statsLogoutBtn" type="button" class="premium-pill">Admin abmelden</button></div>`}
 function postUrl(post){const url=new URL(location.origin+location.pathname);url.searchParams.set("post",String(post.id));url.searchParams.set("v",String(Date.now()));url.hash=`post/${encodeURIComponent(post.id)}`;return url.toString()}
 function buildPostPushUrl(postId,cacheVersion){const slug=String(postId||"").trim();const v=cacheVersion||Date.now();const base=(location.origin&&location.origin.startsWith("http"))?location.origin:DAR_SITE_ORIGIN;return `${base}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`}
-function parsePushPostIdFromUrl(urlOrSearch){try{const u=typeof urlOrSearch==="string"?new URL(urlOrSearch,location.origin):urlOrSearch;const fromQuery=u.searchParams.get("post");if(fromQuery)return decodeURIComponent(fromQuery);const path=u.pathname||"";const m=path.match(/^\/post\/([^/?#]+)/i);if(m)return decodeURIComponent(m[1]);const hash=decodeURIComponent((u.hash||"").replace(/^#/,""));const hp=hash.match(/^post\/(.+)$/);if(hp)return hp[1]}catch(e){}return ""}
-function applyPushLaunchRoute(){const postId=parsePushPostIdFromUrl(location.href);if(!postId)return false;const hash=decodeURIComponent((location.hash||"").replace(/^#/,""));if(hash.startsWith("post/")&&decodeURIComponent(hash.slice(5))===postId)return true;location.hash=`post/${encodeURIComponent(postId)}`;return true}
+function parsePushPostIdFromUrl(urlOrSearch){try{const u=typeof urlOrSearch==="string"?new URL(urlOrSearch,location.origin):urlOrSearch;const fromQuery=u.searchParams.get("post");if(fromQuery)return decodeURIComponent(fromQuery);const path=u.pathname||"";const m=path.match(/^\/post\/([^/?#]+)/i);if(m)return decodeURIComponent(m[1]);const hash=decodeURIComponent((u.hash||"").replace(/^#/,"")).replace(/^\/+/,"");const hp=hash.match(/^(?:post|beitrag|beitraege)\/([^/?#]+)/i);if(hp)return decodeURIComponent(hp[1])}catch(e){}return ""}
+function applyPushLaunchRoute(){const postId=parsePushPostIdFromUrl(location.href);if(!postId)return false;const hash=decodeURIComponent((location.hash||"").replace(/^#/,"")).replace(/^\/+/,"");if(/^(?:post|beitrag|beitraege)\//i.test(hash)&&decodeURIComponent(hash.split("/").slice(1).join("/"))===postId)return true;location.hash=`post/${encodeURIComponent(postId)}`;return true}
 function clearPostRouteState(){postRouteLoadingId="";postRouteFailedId="";postRouteError=""}
 async function fetchPostsIndexFresh(){return fetchPostsIndexMeta()}
 async function loadSinglePostFresh(postId){const id=String(postId||"").trim();if(!id)return null;const files=await fetchPostsIndexFresh();if(!files||!files.length)return null;let file=files.find(f=>f.name.replace(/\.md$/,"")===id)||files.find(f=>String(f.name).includes(id));if(!file){for(const f of files){try{const r=await fetchPostFile(f);if(String(r.post?.id)===id){file=f;const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[r.name]={sha:r.sha||f.sha||"",post:r.post,parseVersion:POST_PARSE_VERSION};persistPostFileMap(fileMap);const merged=mergePostsLists(posts,[r.post]);applyPostsList(merged);persistPostsCache();return r.post}}catch(e){}}}if(!file)return null;const result=await fetchPostFile(file);const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[result.name]={sha:result.sha||file.sha||"",post:result.post,parseVersion:POST_PARSE_VERSION};persistPostFileMap(fileMap);const merged=mergePostsLists(posts,[result.post]);applyPostsList(merged);persistPostsCache();return result.post}
@@ -8406,6 +8406,39 @@ function isDetailRoute(route){return ["post","dua","quran-surah","news-detail"].
 function migrateLegacyTopicsRoute(){const hash=decodeURIComponent((location.hash||"").replace(/^#/,""));if(hash==="feed/topics"||hash.startsWith("feed/topics/")){try{history.replaceState(null,"",routeToHash("topics",""))}catch(e){location.replace(routeToHash("topics",""))}return true}return false}
 function migrateTopicsScrollKey(){try{const map=JSON.parse(sessionStorage.getItem(NAV_SCROLL_KEY)||"{}");if(map["feed/topics"]!=null&&map.topics==null){map.topics=map["feed/topics"];sessionStorage.setItem(NAV_SCROLL_KEY,JSON.stringify(map))}}catch(e){}}
 function setPageHeader(title,subtitle="",eyebrow=""){return setHeader(title,subtitle,eyebrow||title)}
+const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",dua:"duas",duas:"duas",mehr:"more",more:"more",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",einstellungen:"more",favoriten:"saved",saved:"saved",beitrag:"post",post:"post"};
+function normalizeRouteSlug(slug){return String(slug||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function looksLikePostId(val){if(!val)return false;const id=String(val).split("/")[0];if(posts.some(p=>String(p.id)===id))return true;if(/^\d+$/.test(id))return true;if(/^[a-z0-9][a-z0-9_-]*-\d{2,}$/i.test(id))return true;return false}
+function isLikelyPostId(val){return looksLikePostId(val)}
+function isQuranSurahPath(val){if(!val)return false;const id=Number(String(val).split("/")[0]);return Number.isFinite(id)&&id>=1&&id<=114}
+function parseRouteFromHash(hashRaw){
+  const hash=decodeURIComponent((hashRaw||"#home").replace(/^#/,""));
+  const parts=hash.split("/").filter(Boolean);
+  if(!parts.length)return{view:"home",value:""};
+  const slug=normalizeRouteSlug(parts[0]);
+  let view=ROUTE_ALIASES[slug]||parts[0]||"home";
+  let rest=parts.slice(1);
+  if(view==="feed"&&rest[0]==="topics"){view="topics";rest=[]}
+  if(view==="quran"&&rest.length&&isQuranSurahPath(rest.join("/")))return{view:"quran-surah",value:rest.join("/")};
+  if(view==="topics"&&rest.length){
+    const pid=rest[0];
+    if(isLikelyPostId(pid))return{view:"post",value:pid};
+    return{view:"topic",value:decodeURIComponent(rest.join("/"))};
+  }
+  if(view==="duas"&&rest.length===1){
+    const v=decodeURIComponent(rest[0]);
+    if(DUAS.some(d=>String(d.id)===v))return{view:"dua",value:v};
+    return{view:"dua-cat",value:v};
+  }
+  const value=rest.length?rest.map(p=>decodeURIComponent(p)).join("/"):"";
+  return{view,value};
+}
+function canonicalizeRouteHash(route){
+  const canon=routeToHash(route.view,route.value||"");
+  if((location.hash||"")===canon)return;
+  try{history.replaceState(null,"",location.pathname+(location.search||"")+canon)}catch(e){}
+}
+function getPostBrowseFrom(){try{const raw=sessionStorage.getItem(POST_BROWSE_KEY);const ctx=raw?JSON.parse(raw):null;return ctx?.from||null}catch(e){return null}}
 function getNavStack(){try{const raw=sessionStorage.getItem(NAV_STACK_KEY);return raw?JSON.parse(raw):[]}catch(e){return[]}}
 function setNavStack(stack){try{sessionStorage.setItem(NAV_STACK_KEY,JSON.stringify((stack||[]).slice(-24)))}catch(e){}}
 function clearNavStack(){setNavStack([])}
@@ -8422,6 +8455,7 @@ function postIdsForBrowseRoute(route){
   if(!route)return[];
   const v=route.value||"";
   if(route.view==="feed"&&!route.value)return posts.slice(0,80).map(p=>String(p.id));
+  if(route.view==="topics")return posts.slice(0,80).map(p=>String(p.id));
   if(route.view==="recent")return posts.slice(0,60).map(p=>String(p.id));
   if(route.view==="topic")return posts.filter(p=>normalizePostCategory(p.category)===normalizePostCategory(v)).map(p=>String(p.id));
   if(route.view==="scholar")return postsForScholarKey(resolveScholarRef(v).key).map(p=>String(p.id));
@@ -8441,8 +8475,47 @@ function getPostBrowseIds(){
 }
 function navigate(view,value="",opts={}){const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home")clearNavStack()}if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
 function goBack(){if(currentRoute.view==="home")return;window.__pageNavDir="back";const stack=getNavStack();if(stack.length){const prev=stack.pop();setNavStack(stack);window.__restoreScrollY=Number(prev?.scroll!=null?prev.scroll:getNavScroll(prev))||0;navigate(prev.view,prev.value||"",{skipPush:true,noAnim:true});return}const parent=parentRoute(currentRoute);window.__restoreScrollY=getNavScroll(parent);navigate(parent.view,parent.value||"",{skipPush:true,noAnim:true})}
-function readRoute(){migrateLegacyTopicsRoute();const hash=decodeURIComponent((location.hash||"#home").replace(/^#/,""));const parts=hash.split("/");if((!parts[0]||parts[0]==="home")&&!parts[1]){const fromQuery=parsePushPostIdFromUrl(location.href);if(fromQuery)return{view:"post",value:fromQuery}}if(parts[0]==="feed"&&parts[1]==="topics")return{view:"topics",value:""};return{view:parts[0]||"home",value:parts.slice(1).join("/")||""}}
-function parentRoute(route){if(route.view==="news-detail")return{view:"home"};if(route.view==="topic")return{view:"topics"};if(route.view==="scholar")return{view:"scholars"};if(route.view==="book")return{view:"books"};if(route.view==="dua-cat")return{view:"duas"};if(route.view==="dua")return{view:"duas"};if(route.view==="quran-surah")return{view:"quran"};if(route.view==="calendar")return{view:"more"};if(route.view==="zakat")return{view:"more"};if(route.view==="saved")return{view:"more"};if(route.view==="account")return{view:"more"};if(route.view==="about")return{view:"more"};if(route.view==="scholars")return{view:"more"};if(route.view==="books")return{view:"more"};if(route.view==="image-editor")return{view:"more"};if(route.view==="image-editor-test")return{view:"more"};if(route.view==="more")return{view:"home"};if(route.view==="prayer")return{view:"home"};if(route.view==="ramadan")return{view:"home"};if(route.view==="quran")return{view:"home"};if(route.view==="series")return{view:"home"};if(route.view==="post")return{view:"recent"};if(route.view==="recent")return{view:"topics"};if(route.view==="topics")return{view:"home"};if(route.view==="feed")return{view:"home"};if(route.view!=="home")return{view:"home"};return{view:"home"}}
+function readRoute(){
+  migrateLegacyTopicsRoute();
+  const rawHash=location.hash||"#home";
+  const bare=decodeURIComponent(rawHash.replace(/^#/,""));
+  const head=bare.split("/")[0]||"";
+  if((!head||head==="home"||head==="start")&&!bare.includes("/")){const fromQuery=parsePushPostIdFromUrl(location.href);if(fromQuery)return{view:"post",value:fromQuery}}
+  const route=parseRouteFromHash(rawHash);
+  const slug=normalizeRouteSlug(head);
+  if(slug&&slug!==normalizeRouteSlug(route.view)&&ROUTE_ALIASES[slug])canonicalizeRouteHash(route);
+  else if(head==="feed"&&bare.startsWith("feed/topics"))canonicalizeRouteHash(route);
+  return route;
+}
+function parentRoute(route){
+  if(route.view==="news-detail")return{view:"home"};
+  if(route.view==="topic")return{view:"topics"};
+  if(route.view==="scholar")return{view:"scholars"};
+  if(route.view==="book")return{view:"books"};
+  if(route.view==="dua-cat")return{view:"duas"};
+  if(route.view==="dua")return{view:"duas"};
+  if(route.view==="quran-surah")return{view:"quran"};
+  if(route.view==="calendar")return{view:"more"};
+  if(route.view==="zakat")return{view:"more"};
+  if(route.view==="saved")return{view:"more"};
+  if(route.view==="account")return{view:"more"};
+  if(route.view==="about")return{view:"more"};
+  if(route.view==="scholars")return{view:"more"};
+  if(route.view==="books")return{view:"more"};
+  if(route.view==="image-editor")return{view:"more"};
+  if(route.view==="image-editor-test")return{view:"more"};
+  if(route.view==="more")return{view:"home"};
+  if(route.view==="prayer")return{view:"home"};
+  if(route.view==="ramadan")return{view:"home"};
+  if(route.view==="quran")return{view:"home"};
+  if(route.view==="series")return{view:"home"};
+  if(route.view==="post"){const from=getPostBrowseFrom();if(from?.view)return{view:from.view,value:from.value||""};return{view:"topics"}}
+  if(route.view==="recent")return{view:"topics"};
+  if(route.view==="topics")return{view:"home"};
+  if(route.view==="feed")return{view:"home"};
+  if(route.view!=="home")return{view:"home"};
+  return{view:"home"};
+}
 function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(view==="feed")return"feed";if(view==="topics"||view==="topic"||view==="recent"||view==="series"||view==="post")return"topics";if(["quran","quran-surah"].includes(view))return"quran";if(["more","scholars","scholar","books","book","calendar","saved","account","about","statistik","prayer","ramadan","zakat","image-editor","image-editor-test","duas","dua-cat","dua"].includes(view))return"more";return""}
 const BOTTOM_NAV_TABS=["home","topics","feed","quran","more"];
 let bottomNavDrag=null;
@@ -10259,7 +10332,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v175";
+const APP_BUILD_ID="app-shell-v176";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}${setPageHeader("Feed","Bildbeiträge und neue Inhalte","Feed")}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -10446,6 +10519,17 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(flag?.mode==="top"){stable(0);window.__smoothNav=false;return}
   if(flag?.mode==="preserve"){stable(scrollBefore);window.__smoothNav=false;return}
   if(flag?.mode==="restore"){stable(flag.y);window.__smoothNav=false;return}
+  if(currentRoute.view==="feed"){
+    window.__smoothNav=false;
+    const restoreFeed=()=>{
+      if(window.DAR_PREMIUM_FEED?.tryRestore?.()){window.__restoreScrollY=null;return true}
+      if(typeof window.__restoreScrollY==="number"&&window.__restoreScrollY>0){stable(window.__restoreScrollY);window.__restoreScrollY=null;return true}
+      const saved=getNavScroll(currentRoute);if(saved>0){stable(saved);return true}
+      return false;
+    };
+    if(!restoreFeed())setTimeout(()=>restoreFeed(),180);
+    return;
+  }
   if(currentRoute.view==="quran"&&restoreQuranListScroll()){window.__smoothNav=false;return}
   if(ayahJump>0){setTimeout(()=>scrollToQuranAyah(ayahJump),140);window.__smoothNav=false;return}
   if(typeof window.__restoreScrollY==="number"){
@@ -10460,6 +10544,7 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   const saved=getNavScroll(currentRoute);
   if(saved>0){stable(saved);window.__smoothNav=false;return}
   if(isDetailRoute(currentRoute)){stable(scrollBefore);window.__smoothNav=false;return}
+  if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false
 }
 function render(){
