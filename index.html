@@ -6952,7 +6952,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<script src="/assets/premium-feed-app.js?v=72" defer></script>
+<script src="/assets/premium-feed-app.js?v=73" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -7220,7 +7220,7 @@ const CATEGORY_CANONICAL={"akhlāq":"Akhlaq","akhlaq":"Akhlaq","widerlegung":"Wi
 function normalizePostCategory(cat){const raw=String(cat||"").trim();if(!raw)return raw;const key=categoryKey(raw);const mapped=CATEGORY_CANONICAL[key];if(mapped)return mapped;for(const c of CATEGORY_ORDER){if(categoryKey(c)===key)return c}return raw}
 function normalizeLoadedPosts(){posts.forEach(p=>{if(p.category)p.category=normalizePostCategory(p.category);ensurePostSlidesHydrated(p);ensurePostFeedMeta(p)})}
 function pickFeedImageFromLinks(links){if(!Array.isArray(links))return "";for(const l of links){const url=String(l?.url||"").trim();const label=String(l?.label||"");if(!url||!/\.(png|jpe?g|webp)$/i.test(url))continue;if(/Bild-Scan|Bildscan|Scan|feed/i.test(label)||url.startsWith("/assets/"))return url}return ""}
-function ensurePostFeedMeta(post){if(!post)return post;const feed=post.feed||{};const enabled=feed.enabled===true||feed.enabled==="true";if(enabled&&feed.image)return post;const fromLinks=pickFeedImageFromLinks(post.links);if(fromLinks){post.feed={enabled:true,image:fromLinks,originalImage:feed.originalImage||fromLinks,alt:feed.alt||(`Bildbeitrag zu: ${post.title||"Beitrag"}`),shareEnabled:feed.shareEnabled!==false}}return post}
+function ensurePostFeedMeta(post){if(!post)return post;const feed=post.feed||{};const enabled=feed.enabled===true||feed.enabled==="true";const image=String(feed.image||"").trim();if(!enabled||!image){post.feed={enabled:false,image:"",originalImage:"",alt:"",shareEnabled:false}}return post}
 function postSeriesRank(post){const parts=[post?.id,post?._sourceFile,post?.title].filter(Boolean).join(" ");const nums=[...String(parts).matchAll(/(?:^|[-_])(\d{2,4})(?:[.\-_]|$)/g)].map(m=>Number(m[1])).filter(n=>Number.isFinite(n)&&n>0);if(!nums.length){const any=[...String(parts).matchAll(/(\d{2,4})/g)].map(m=>Number(m[1])).filter(n=>n>10);nums.push(...any)}return nums.length?Math.max(...nums):0}
 function postSortTimestamp(post){const ts=Date.parse(String(post?.date||""));return Number.isFinite(ts)?ts:0}
 function comparePostsNewestFirst(a,b){const da=postSortTimestamp(a),db=postSortTimestamp(b);if(db!==da)return db-da;const sa=postSeriesRank(a),sb=postSeriesRank(b);if(sb!==sa)return sb-sa;return String(b?._sourceFile||b?.id||"").localeCompare(String(a?._sourceFile||a?.id||""),"de")}
