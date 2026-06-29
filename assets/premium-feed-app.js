@@ -90,7 +90,7 @@
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
   var FEED_STATE_KEY = 'darPremiumFeedStateV2';
-  var FEED_LAYOUT_REV = 8;
+  var FEED_LAYOUT_REV = 9;
   var FEED_MIN_POST_NUM = 431;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
@@ -1072,19 +1072,6 @@
   var FEED_VIEW_STATS = Object.create(null);
   var FEED_STATS_PROMISE = null;
 
-  function bumpFeedViewStat(postId) {
-    var id = String(postId || '');
-    if (!id) return;
-    if (!FEED_VIEW_STATS[id]) FEED_VIEW_STATS[id] = { views: 0 };
-    FEED_VIEW_STATS[id].views += 1;
-  }
-
-  function bumpFeedShareStat(postId) {
-    var id = String(postId || '');
-    if (!id) return;
-    if (!FEED_POST_STATS[id]) FEED_POST_STATS[id] = { shares: 0 };
-    FEED_POST_STATS[id].shares += 1;
-  }
 
   function resetFeedStatsCache() {
     FEED_STATS_PROMISE = null;
@@ -3077,14 +3064,12 @@
       if (global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
         await global.navigator.share({ files: [file] });
         if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        bumpFeedShareStat(postId);
         return true;
       }
       if (global.navigator.share) {
         try {
           await global.navigator.share({ title: title, files: [file] });
           if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-          bumpFeedShareStat(postId);
           return true;
         } catch (eShare) {
           if (eShare && eShare.name === 'AbortError') return false;
@@ -3093,7 +3078,6 @@
       downloadFeedBlob(blob, fileName);
       showToast('Bild gespeichert — du kannst es jetzt in deiner Galerie teilen.');
       if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-      bumpFeedShareStat(postId);
       return true;
     } catch (error) {
       if (error && error.name === 'AbortError') return false;
@@ -3102,7 +3086,6 @@
         downloadFeedBlob(await fetchFeedImageBlobFromCandidates(urls), createSafeFileName(title, 'png'));
         showToast('Bild gespeichert — du kannst es jetzt teilen.');
         if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        bumpFeedShareStat(postId);
         return true;
       } catch (e2) {
         if (postUrl && global.navigator.clipboard) {
@@ -3163,8 +3146,7 @@
         title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
       }).then(function (shared) {
         if (shared) {
-          refreshFeedEngagement(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID));
-          global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 2400);
+          global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 3000);
         }
       }).finally(function () {
         btn.classList.remove('is-loading');
@@ -3255,11 +3237,7 @@
             card.dataset.feedImpression = '1';
             var uid = card.getAttribute('data-pf-id');
             var item = state.visible.find(function (x) { return x.uid === uid; });
-            if (item) {
-              trackFeedEvent('feed_view', item);
-              bumpFeedViewStat(item.postId);
-              refreshFeedEngagement(root);
-            }
+            if (item) trackFeedEvent('feed_view', item);
             root._sfImpObs.unobserve(card);
           });
         }, { threshold: 0.45 });
@@ -3510,6 +3488,13 @@
     },
     onPostsUpdated: function () {
       if (!isFeedRoute()) return;
+      var ctx = getCtx();
+      var pools = buildPools(ctx, state.seed);
+      var merged = mergeFeed(pools, [], state.seed);
+      var nextSig = feedItemsSignature(merged);
+      if (state._feedSig === nextSig && state.visible.length && global.document.querySelector('#' + MOUNT_ID + ' .sf-feed')) {
+        return;
+      }
       startFeedMount({ force: false });
     }
   };
@@ -3526,7 +3511,7 @@
   function autoMountFeed() {
     if (!isFeedRoute()) return;
     var mount = document.getElementById(MOUNT_ID);
-    if (!mount) return;
+    if (!mount || mount.querySelector('.sf-app')) return;
     rebuild(true);
   }
 
