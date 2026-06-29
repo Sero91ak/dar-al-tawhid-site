@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-29T11:20:32.547Z",
+  "updatedAt": "2026-06-29T11:30:32.543Z",
   "usersChecked": 17,
   "duaCandidates": 0,
-  "recCandidates": 17,
-  "sent": 17,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 17,
+  "duplicates": 34,
   "errors": 0,
   "dailyContentDate": "2026-06-29",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Schlaf"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 17,
-      "contentId": "tawhid-345-fuersprecher-werden-nicht-angebetet",
-      "recipients": "f04a1202-1ac8-48c6-8a2a-1b7577d99a11",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
