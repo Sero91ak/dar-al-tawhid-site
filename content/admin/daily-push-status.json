@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-06-29T08:50:32.560Z",
+  "updatedAt": "2026-06-29T09:25:32.546Z",
   "usersChecked": 17,
-  "duaCandidates": 17,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 17,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 17,
   "errors": 0,
   "dailyContentDate": "2026-06-29",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Schlaf"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 17,
-      "contentId": "sunnah-003",
-      "recipients": "5ae5ab5a-d443-40e0-a67e-e635a65b3aeb",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
