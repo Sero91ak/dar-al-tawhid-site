@@ -3179,10 +3179,8 @@
       card.addEventListener('click', function (ev) {
         if (ev.target.closest('.sf-act') || ev.target.closest('[data-feed-share-id]') || ev.target.closest('.feed-share-button') || ev.target.closest('.share-image-btn')) return;
         if (item && item.type === 'postFeed') {
-          if (ev.target.closest('.sf-read-more') || ev.target.closest('[data-pf-open-post]')) {
-            ev.preventDefault();
-            openPostFromFeed();
-          }
+          ev.preventDefault();
+          openPostFromFeed();
           return;
         }
         if (ev.target.closest('.sf-read-more') || ev.target.closest('[data-pf-open-post]')) {
@@ -3192,7 +3190,11 @@
         open();
       });
       card.addEventListener('keydown', function (ev) {
-        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); }
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          if (item && item.type === 'postFeed') openPostFromFeed();
+          else open();
+        }
       });
     });
     root.querySelectorAll('.sf-like').forEach(function (btn) {
