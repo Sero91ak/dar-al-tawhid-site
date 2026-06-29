@@ -81,7 +81,7 @@ async function setDevelopmentMode(zoneId, on) {
 }
 
 async function verifyLiveHtml() {
-  const urls = [`${SITE_URL}/`, `${SITE_URL}/index.html`];
+  const urls = [`${SITE_URL}/`, `${SITE_URL}/index.html`, `${SITE_URL}/test/`, `${SITE_URL}/test/index.html`];
   for (const url of urls) {
     const res = await fetch(url, {
       cache: "no-store",

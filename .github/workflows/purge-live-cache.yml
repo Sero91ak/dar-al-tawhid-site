@@ -6,6 +6,7 @@ on:
     branches:
       - main
     paths:
+      - test/index.html
       - index.html
       - version.json
       - service-worker.js
@@ -46,6 +47,6 @@ jobs:
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v175"
+          EXPECT_BUILD: "app-shell-v181"
           CLOUDFLARE_DEV_MODE: "1"
         run: node scripts/purge-cloudflare-cache.js

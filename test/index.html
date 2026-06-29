@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v180";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v181";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
+<script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true,subtree:true})})();</script>
 
 <title>Dar Test</title>
 
@@ -746,8 +747,8 @@ body.has-bottom-nav .float-actions{bottom:calc(76px + 0.5cm + max(0px,calc(env(s
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))!important;color:var(--theme-text,var(--text))!important;overflow-x:hidden!important}
 body.is-feed-fullscreen .top-shell,body.is-feed-fullscreen .isnad,body.is-feed-fullscreen .app-bar,body.is-feed-fullscreen .footer,body.is-feed-fullscreen .float-actions,body.is-feed-fullscreen .new-posts-banner,body.is-feed-fullscreen .top-edge-fade,body.is-feed-fullscreen .top-swim-aura{display:none!important}
-body.is-feed-fullscreen #appView .view-head{display:none!important}
-#appView:has(#premiumFeedMount)>.view-head{display:none!important}
+body.is-feed-fullscreen #appView .view-head{display:none!important;height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:0!important}
+#appView:has(#premiumFeedMount)>.view-head{display:none!important;height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:0!important}
 body.is-feed-fullscreen .app{width:100%;max-width:100%;padding-left:0;padding-right:0;margin:0;background:transparent!important;border:0!important;box-shadow:none!important}
 body.is-feed-fullscreen .view{border:none;border-radius:0;margin:0;padding:0;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))!important;box-shadow:none;min-height:calc(100dvh - 70px - env(safe-area-inset-bottom,0px));overflow:hidden;width:100%;max-width:100%}
 body.is-feed-fullscreen{padding:max(0px,env(safe-area-inset-top,0px)) 0 calc(70px + max(0px,calc(env(safe-area-inset-bottom) - 22px))) 0}
@@ -7837,7 +7838,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<script src="/assets/premium-feed-app.js?v=82" defer></script>
+<script src="/assets/premium-feed-app.js?v=83" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10342,7 +10343,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v180";
+const APP_BUILD_ID="app-shell-v181";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

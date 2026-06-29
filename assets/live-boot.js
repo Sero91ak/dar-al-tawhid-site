@@ -1,15 +1,50 @@
 /**
- * DAR AL TAWḤID — Live-Boot: erkennt veraltete Cloudflare-Cache-Version und lädt neu.
- * Wird von index.html über jsDelivr geladen (nicht über dar-al-tawhid.de gecacht).
+ * DAR AL TAWḤID — Boot: Cache-Update + Feed-Doppelheader sofort entfernen.
+ * Wird über jsDelivr geladen (nicht über dar-al-tawhid.de gecacht).
  */
 (function () {
   "use strict";
 
   if (typeof location === "undefined") return;
-  if (/\/test(?:\/|$)/.test(location.pathname || "")) return;
   if ((location.pathname || "").indexOf("/admin") === 0) return;
 
-  function run() {
+  var isTest = /\/test(?:\/|$)/.test(location.pathname || "");
+
+  function isFeedRoute() {
+    try {
+      var parts = String(location.hash || "")
+        .replace(/^#\/?/, "")
+        .split("/")
+        .filter(Boolean);
+      if (!parts.length) return false;
+      return parts[0].toLowerCase() === "feed" && parts[1] !== "topics";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function stripFeedDuplicateHeader() {
+    if (!isFeedRoute()) return;
+    try {
+      if (document.body) document.body.classList.add("is-feed-fullscreen");
+      document.querySelectorAll("#appView > .view-head").forEach(function (el) {
+        el.remove();
+      });
+    } catch (e) {}
+  }
+
+  function bindFeedHeaderGuard() {
+    stripFeedDuplicateHeader();
+    window.addEventListener("hashchange", stripFeedDuplicateHeader);
+    if (document.documentElement) {
+      new MutationObserver(stripFeedDuplicateHeader).observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    }
+  }
+
+  function runVersionCheck() {
     var local = String(window.__DAR_EXPECTED_BUILD || "").trim();
     if (!local) return;
 
@@ -29,12 +64,17 @@
             if (reg && reg.active) reg.active.postMessage({ type: "HARD_REFRESH" });
           });
         }
-        var base = location.pathname || "/";
+        var base = isTest ? "/test/" : location.pathname || "/";
         location.replace(base + "?live=" + encodeURIComponent(remote.buildId) + location.hash);
       })
       .catch(function () {});
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
-  else run();
+  function boot() {
+    bindFeedHeaderGuard();
+    runVersionCheck();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();
