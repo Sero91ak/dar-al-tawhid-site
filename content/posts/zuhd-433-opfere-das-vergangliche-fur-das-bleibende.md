@@ -1,6 +1,6 @@
 ---
-id: "ibn-masud-opfere-vergaengliche-fuer-bleibende-34519-433"
-date: "2026-06-29T17:19:15.000Z"
+id: "ibn-masud-opfere-vergaengliche-fuer-bleibende-34519"
+date: "2026-06-29T00:00:00.000Z"
 title: "📖 Opfere das Vergängliche für das Bleibende"
 category: "Zuhd"
 topic: "Ākhirah vor Dunyā"
@@ -19,7 +19,7 @@ feed:
   enabled: true
   image: "/assets/posts/ibn-masud-opfere-vergaengliche-fuer-bleibende-34519-433/feed-preview.jpg"
   originalImage: "/assets/posts/ibn-masud-opfere-vergaengliche-fuer-bleibende-34519-433/feed-original.jpg"
-  alt: "Bildbeitrag zu: 📖 Opfere das Vergängliche für das Bleibende"
+  alt: "Bildbeitrag zu: Opfere das Vergängliche für das Bleibende"
   shareEnabled: true
 ---
 
@@ -29,9 +29,3 @@ feed:
 
 🌙 **Fazit:**  
 Wer die Ākhirah wirklich bevorzugt, ist bereit, weltliche Verluste hinzunehmen. Denn das Vergängliche darf nicht über das Bleibende gestellt werden.
-
-📝 **Quelle:**  
-Ibn Abī Shaybah, *al-Muṣannaf*, Kitāb az-Zuhd, Bd. 7, S. 103, Nr. 34519
-
-[→ Islamweb](https://www.islamweb.net/ar/library/content/10/4993/كلام-ابن-مسعود#:~:text=من%20أراد%20الآخرة%20أضر%20بالدنيا)
-
