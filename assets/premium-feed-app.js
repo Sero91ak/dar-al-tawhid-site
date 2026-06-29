@@ -89,7 +89,8 @@
   var LIKES_KEY = 'darPremiumFeedLikesV1';
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
-  var FEED_STATE_KEY = 'darPremiumFeedStateV1';
+  var FEED_STATE_KEY = 'darPremiumFeedStateV2';
+  var FEED_LAYOUT_REV = 2;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
   var INITIAL = 12;
@@ -1536,6 +1537,15 @@
       document.body.classList.remove('is-premium-feed-view');
       return;
     }
+    try {
+      var revKey = 'darPremiumFeedLayoutRev';
+      var prevRev = Number(localStorage.getItem(revKey) || 0);
+      if (prevRev < FEED_LAYOUT_REV) {
+        localStorage.setItem(revKey, String(FEED_LAYOUT_REV));
+        clearFeedState();
+        opts.force = true;
+      }
+    } catch (eRev) {}
     fetchFeedBackgrounds().finally(function () {
       if (!opts.force && tryRestoreFeedState()) {
         rerenderFeedPhotosIfNeeded(mount);
