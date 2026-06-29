@@ -348,7 +348,7 @@ function ssRenderSeriesOrders(){
       <div class="fr"><label>Serienart</label><select id="ss-o-serie">${SERIE_TYPES.map(s=>`<option value="${s.id}">${s.label}</option>`).join('')}</select></div></div>
       <div class="fr2 fr"><div class="fr"><label>Von</label><input type="date" id="ss-o-start" value="${bounds.start}"/></div>
       <div class="fr"><label>Bis</label><input type="date" id="ss-o-end" value="${bounds.end}"/></div></div>
-      <div class="fr"><label>Wochentage</label><div class="ss-weekdays" id="ss-o-wd">${WD_LABELS.map((l,i)=>`<span class="ss-wd${ssSelectedWd.has(i)?' on':''}" onclick="ssToggleWd(${i})">${l}</span>`).join('')}</div></div>
+      <div class="fr"><label>Wochentage</label><div class="ss-weekdays" id="ss-o-wd">${WD_LABELS.map((l,i)=>`<span class="ss-wd${ssSelectedWd.has(i)?' on':''}" data-wd="${i}" onclick="ssToggleWd(${i})">${l}</span>`).join('')}</div></div>
       <div class="fr2 fr"><div class="fr"><label>Hinfahrt</label><select id="ss-o-out"><option value="1">Ja</option><option value="0">Nein</option></select></div>
       <div class="fr"><label>Rückfahrt</label><select id="ss-o-ret"><option value="1">Ja</option><option value="0">Nein</option></select></div></div>
       <div class="fr2 fr"><div class="fr"><label>Uhrzeit Hin</label><input type="time" id="ss-o-tout" value="08:00"/></div>
