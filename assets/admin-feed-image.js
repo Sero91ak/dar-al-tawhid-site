@@ -134,7 +134,7 @@
         '<div id="feedImageStatus-' + c + '" class="feed-image-status" data-feed-status="' + c + '" hidden></div>' +
         '<div class="feed-image-toolbar">' +
           '<button type="button" class="btn" data-feed-pick="' + c + '">Datei wählen</button>' +
-          '<button type="button" class="btn danger" data-feed-remove="' + c + '" hidden>Entfernen</button>' +
+          '<button type="button" class="btn danger" data-feed-remove="' + c + '" hidden>Aus Feed entfernen</button>' +
         '</div>' +
       '</div>'
     );
@@ -421,7 +421,7 @@
     root.querySelectorAll('[data-feed-remove="' + c + '"]').forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
-        if (!confirm("Feed-Bild wirklich entfernen?")) return;
+        if (!confirm("Diesen Bildbeitrag aus dem Besucher-Feed entfernen?\n\nDer Beitrag selbst bleibt erhalten.")) return;
         clearFeedFile(context);
       });
     });

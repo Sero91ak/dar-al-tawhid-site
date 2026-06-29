@@ -14,6 +14,9 @@
   let editingFeedId = null;
   let feedFilter = "all";
   let feedSearch = "";
+  let postFeedCatalog = [];
+  let postFeedCatalogBusy = false;
+  let postFeedCatalogLoaded = false;
 
   const CATEGORIES = [
     "Aqīdah",
@@ -200,6 +203,7 @@
       feedPath = data.path || "";
       feedLoaded = true;
       global.__darFeedAdminLoaded = true;
+      await ensurePostFeedCatalog(!!force);
     } catch (e) {
       feedError = e.message || String(e);
     } finally {
@@ -309,6 +313,99 @@
     </div>`;
   }
 
+  async function ensurePostFeedCatalog(force) {
+    if (postFeedCatalogLoaded && !force) return postFeedCatalog;
+    postFeedCatalogBusy = true;
+    try {
+      if (typeof global.ensureQuellenCatalog === "function") {
+        const catalog = await global.ensureQuellenCatalog(!!force);
+        postFeedCatalog = (catalog || []).filter((p) => p && p.hasFeedInApp);
+      } else {
+        postFeedCatalog = [];
+      }
+      postFeedCatalogLoaded = true;
+      return postFeedCatalog;
+    } catch (e) {
+      postFeedCatalog = [];
+      throw e;
+    } finally {
+      postFeedCatalogBusy = false;
+    }
+  }
+
+  function postFeedPreviewUrl(image) {
+    const src = String(image || "").trim();
+    if (!src) return "";
+    const origin = global.SITE_ORIGIN || global.location.origin;
+    try {
+      return new URL(src, origin).href;
+    } catch (e) {
+      return src;
+    }
+  }
+
+  function renderPostFeedRow(post) {
+    const img = postFeedPreviewUrl(post.feedImage);
+    const date = post.date ? String(post.date).slice(0, 10) : "";
+    return `<article class="feed-post-row">
+      <div class="feed-post-thumb">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : `<span class="feed-post-thumb-empty">🖼</span>`}</div>
+      <div class="feed-post-main">
+        <div class="feed-post-title">${esc(post.title || post.filename || "Beitrag")}</div>
+        <div class="feed-post-meta">${esc(post.category || "")}${date ? ` · ${esc(date)}` : ""}${post.id ? ` · ${esc(post.id)}` : ""}</div>
+      </div>
+      <div class="feed-post-actions">
+        <button class="btn" type="button" data-feed-post-edit="${esc(post.filename)}" title="Im Beitrags-Editor bearbeiten">Bearbeiten</button>
+        <button class="btn danger" type="button" data-feed-post-remove="${esc(post.filename)}" title="Nur aus dem Besucher-Feed entfernen">Aus Feed entfernen</button>
+      </div>
+    </article>`;
+  }
+
+  function renderPostFeedPanel() {
+    const rows = postFeedCatalog.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+    return `<div class="panel news-panel feed-posts-panel">
+      <div class="section-head"><h3>Bildbeiträge im Besucher-Feed</h3><span>${rows.length} aktiv</span></div>
+      <div class="notice-note wide" style="margin-bottom:10px;line-height:1.5">
+        Hier siehst du alle Beiträge, die aktuell im <strong>Feed-Tab der Besucher-App</strong> erscheinen.
+        <strong>Aus Feed entfernen</strong> blendet nur den Feed-Eintrag aus — der Beitrag bleibt unter Beiträge erhalten.
+        Neuen Bildbeitrag anlegen: <button class="btn" type="button" data-tab="quellen">Beiträge → Feed-Bild</button>
+      </div>
+      <div class="news-manage-toolbar">
+        <button class="btn" id="feedPostRefreshBtn" type="button"${postFeedCatalogBusy ? " disabled" : ""}>${postFeedCatalogBusy ? "Lädt…" : "Liste aktualisieren"}</button>
+        <a class="btn" href="${esc((global.SITE_ORIGIN || location.origin) + "/#feed")}" target="_blank" rel="noopener">Feed in App öffnen</a>
+        <a class="btn" href="${esc((global.SITE_ORIGIN || location.origin) + "/test/#feed")}" target="_blank" rel="noopener">Feed in Test-App</a>
+      </div>
+      <div class="feed-post-list">${rows.length ? rows.map(renderPostFeedRow).join("") : `<div class="empty">${postFeedCatalogBusy ? "Bildbeiträge werden geladen…" : "Kein aktiver Bildbeitrag im Feed. Lege in Beiträge ein Feed-Bild an und veröffentliche."}</div>`}</div>
+    </div>`;
+  }
+
+  async function removePostFromFeed(filename) {
+    if (!filename) return;
+    if (!confirm("Diesen Bildbeitrag aus dem Besucher-Feed entfernen?\n\nDer Beitrag selbst bleibt erhalten.")) return;
+    try {
+      const data = await workerGet(`api/admin/post?filename=${encodeURIComponent(filename)}`);
+      if (!data || !data.markdown) throw new Error("Beitrag konnte nicht geladen werden");
+      const feed = { enabled: false, image: "", originalImage: "", alt: "", shareEnabled: false };
+      const markdown = global.DARQuellen
+        ? global.DARQuellen.mergeFeedFrontmatter(data.markdown, feed)
+        : data.markdown;
+      await workerPost("api/admin/post/update", {
+        filename,
+        markdown,
+        sha: data.sha || "",
+        skipPush: true
+      });
+      if (typeof global.addAdminLog === "function") {
+        global.addAdminLog("Feed", "Bildbeitrag entfernt", filename);
+      }
+      toast("Aus Besucher-Feed entfernt");
+      postFeedCatalogLoaded = false;
+      await ensurePostFeedCatalog(true);
+      if (typeof global.renderShell === "function") global.renderShell();
+    } catch (e) {
+      toast(e.message || "Entfernen fehlgeschlagen");
+    }
+  }
+
   function renderRow(item) {
     const st = feedStatus(item);
     return `<details class="news-row">
@@ -332,9 +429,12 @@
 
   function renderFeedTab() {
     const rows = filteredItems();
-    return `<section class="news-workspace">
-      <div class="panel news-panel">
-        <div class="section-head"><h3>Feed / Im Fokus</h3><span>${rows.length} · ${feedStaging ? "Staging" : "Live"}</span></div>
+    return `<section class="news-workspace feed-admin-workspace">
+      ${renderPostFeedPanel()}
+      <details class="panel news-panel feed-legacy-panel">
+        <summary class="section-head" style="cursor:pointer;list-style:none"><h3>Manuelle Feed-Karten (optional)</h3><span>${rows.length} · ${feedStaging ? "Staging" : "Live"}</span></summary>
+        <div class="feed-legacy-body">
+        <div class="notice-note wide" style="grid-column:1/-1;margin:10px 0;line-height:1.45">Der Besucher-Feed zeigt standardmäßig nur <strong>Bildbeiträge aus Beiträgen</strong>. Manuelle Karten sind optional und meist nicht nötig.</div>
         <div class="news-manage-toolbar">
           <select class="field" id="feedEnvSelect">
             <option value="staging"${feedStaging ? " selected" : ""}>Dar Test (Staging)</option>
@@ -343,15 +443,15 @@
           <button class="btn" id="feedRefreshBtn" type="button"${feedLoading ? " disabled" : ""}>${feedLoading ? "Lädt…" : "Aktualisieren"}</button>
         </div>
         ${feedError ? `<div class="notice-note" style="color:#ffc9c3">${esc(feedError)}</div>` : ""}
-        <div class="notice-note wide" style="grid-column:1/-1;margin-bottom:10px">Automatisch im Premium-Feed: neue Beiträge, News, Duʿāʾ, Qurʾān, Archiv-Mix (täglicher Seed). Manuelle Karten haben Vorrang.</div>
         <div class="notice-note wide" style="grid-column:1/-1;margin-bottom:10px;border-color:rgba(239,215,142,.35)">
-          <strong>Hintergrundbilder:</strong> Automatischer Bild-Pool (Pexels/Unsplash/Pixabay) — Status &amp; Sync unter
+          <strong>Hintergrundbilder:</strong> Automatischer Bild-Pool — Status unter
           <button class="btn" type="button" data-tab="feed-bg" style="margin-left:8px">Feed · Auto-Hintergründe</button>
         </div>
         ${renderForm()}
-      </div>
+        </div>
+      </details>
       <div class="panel news-panel">
-        <div class="section-head"><h3>Übersicht</h3><span>${(feedIndex.items || []).length} gesamt</span></div>
+        <div class="section-head"><h3>Manuelle Karten · Übersicht</h3><span>${(feedIndex.items || []).length} gesamt</span></div>
         <div class="news-manage-toolbar">
           <input class="field" id="feedSearchInput" type="search" placeholder="Karte suchen…" value="${esc(feedSearch)}">
           <select class="field" id="feedFilterSelect">
@@ -542,12 +642,37 @@
     document.querySelectorAll("[data-feed-down]").forEach((btn) => {
       btn.onclick = () => moveFeed(btn.dataset.feedDown, 1);
     });
+    const postRefresh = document.getElementById("feedPostRefreshBtn");
+    if (postRefresh) {
+      postRefresh.onclick = async () => {
+        postFeedCatalogLoaded = false;
+        await ensurePostFeedCatalog(true);
+        toast("Bildbeiträge aktualisiert");
+        if (typeof global.renderShell === "function") global.renderShell();
+      };
+    }
+    document.querySelectorAll("[data-feed-post-edit]").forEach((btn) => {
+      btn.onclick = async () => {
+        const filename = btn.dataset.feedPostEdit;
+        if (!filename) return;
+        if (typeof global.openAdminQuellenPost === "function") {
+          await global.openAdminQuellenPost(filename);
+        } else if (typeof global.renderShell === "function") {
+          toast("Editor konnte nicht geöffnet werden");
+        }
+      };
+    });
+    document.querySelectorAll("[data-feed-post-remove]").forEach((btn) => {
+      btn.onclick = () => removePostFromFeed(btn.dataset.feedPostRemove);
+    });
   }
 
   global.DARFeedAdmin = {
     renderFeedTab,
     bindFeedUi,
     ensureFeedLoaded,
+    ensurePostFeedCatalog,
+    removePostFromFeed,
     resetEdit: () => {
       editingFeedId = null;
     }

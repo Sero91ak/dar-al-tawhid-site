@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV69';
-  var FONTS_ID = 'darPremiumFeedFontsV69';
+  var STYLES_ID = 'darPremiumFeedStylesV71';
+  var FONTS_ID = 'darPremiumFeedFontsV71';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
   var FEED_SHARE_CACHE = Object.create(null);
@@ -90,7 +90,7 @@
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
   var FEED_STATE_KEY = 'darPremiumFeedStateV2';
-  var FEED_LAYOUT_REV = 2;
+  var FEED_LAYOUT_REV = 3;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
   var INITIAL = 12;
@@ -1144,10 +1144,16 @@
       var item = state.visible.find(function (x) { return x.uid === uid; });
       if (!item) return;
       var liked = isLiked(uid);
-      var old = card.querySelector('.sf-post__engagement');
       var html = feedEngagementHtml(item, liked);
-      if (old) old.remove();
-      if (!html) return;
+      var old = card.querySelector('.sf-post__engagement');
+      if (!html) {
+        if (old) old.remove();
+        return;
+      }
+      if (old) {
+        old.innerHTML = html.replace(/^<div class="sf-post__engagement">|<\/div>$/g, '');
+        return;
+      }
       var actions = card.querySelector('.sf-post__actions');
       if (actions) actions.insertAdjacentHTML('afterend', html);
     });
@@ -1547,35 +1553,15 @@
       }
     } catch (eRev) {}
     fetchFeedBackgrounds().finally(function () {
-      if (!opts.force && tryRestoreFeedState()) {
-        rerenderFeedPhotosIfNeeded(mount);
-        fetchManual()
-          .then(function (data) {
-            var mount2 = global.document.getElementById(MOUNT_ID);
-            if (!mount2) return;
-            var manual = (data && data.items) || [];
-            applyFeedData(mount2, manual);
-          })
-          .catch(function () {
-            var mount2 = global.document.getElementById(MOUNT_ID);
-            if (mount2) applyFeedData(mount2, []);
-          });
-        return;
+      var savedScroll = null;
+      if (!opts.force) {
+        var saved = loadFeedState();
+        if (saved && Array.isArray(saved.visibleIds) && saved.visibleIds.length) {
+          savedScroll = Math.max(0, Number(saved.scrollY) || 0);
+        }
       }
       if (opts.force || !state.allItems.length) state.seed = feedSeed();
-      applyFeedData(mount, []);
-      rerenderFeedPhotosIfNeeded(mount);
-      fetchManual()
-        .then(function (data) {
-          var mount2 = global.document.getElementById(MOUNT_ID);
-          if (!mount2) return;
-          var manual = (data && data.items) || [];
-          applyFeedData(mount2, manual);
-        })
-        .catch(function () {
-          var mount2 = global.document.getElementById(MOUNT_ID);
-          if (mount2) applyFeedData(mount2, []);
-        });
+      applyFeedData(mount, [], savedScroll);
     });
   }
 
@@ -2140,11 +2126,11 @@
       '.sf-filter.is-active{border-color:var(--theme-border,var(--line));background:var(--theme-feed-filter-active,linear-gradient(135deg,rgba(214,190,132,.18),rgba(90,70,30,.12)));color:var(--theme-accent,var(--gold2));opacity:1}' +
       '.sf-feed{display:flex;flex-direction:column;gap:var(--sf-card-gap,20px);padding:0 var(--sf-gutter-right,var(--sf-shell-pad,10px)) calc(24px + env(safe-area-inset-bottom)) var(--sf-gutter-left,var(--sf-shell-pad,10px));width:100%;max-width:var(--sf-feed-col-max,100%);box-sizing:border-box;margin-left:auto;margin-right:auto;min-width:0}' +
       '.sf-post{margin:0;border-radius:var(--sf-card-radius,26px);overflow:hidden;cursor:pointer;background:var(--theme-feed-card,var(--theme-surface,transparent));border:1px solid var(--theme-border,var(--line));box-shadow:var(--premium-shadow,none);width:100%;max-width:100%;min-width:0;box-sizing:border-box;align-self:stretch}' +
-      '.sf-post--image-feed{cursor:default;border:1px solid var(--theme-border,var(--line));background:var(--theme-feed-card,var(--theme-surface,transparent));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.18));position:relative;max-width:680px;margin:0 auto;overflow:hidden}' +
-      '.sf-post--image-feed .sf-post__head{background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));padding:12px 14px 10px}' +
-      '.sf-post--image-feed .sf-post__media--feed-img{background:var(--theme-feed-img-fallback,#0a0908);border-top:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);border-bottom:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);line-height:0}' +
-      '.feed-image-button{display:block;width:100%;border:0;padding:0;margin:0;background:transparent;cursor:pointer}' +
-      '.feed-image{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:var(--theme-feed-img-fallback,#0a0908)}' +
+      '.sf-post--image-feed{cursor:default;border:1px solid var(--theme-border,var(--line));background:var(--theme-feed-card,var(--theme-surface,transparent));box-shadow:var(--premium-shadow,0 10px 28px rgba(0,0,0,.16));position:relative;max-width:560px;margin:0 auto;overflow:hidden}' +
+      '.sf-post--image-feed .sf-post__head{background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));padding:10px 12px 8px}' +
+      '.sf-post--image-feed .sf-post__media--feed-img{background:var(--theme-feed-img-fallback,#0a0908);border-top:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);border-bottom:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);line-height:0;overflow:hidden}' +
+      '.feed-image-frame{display:block;width:100%;margin:0;padding:0;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;user-select:none;-webkit-user-select:none}' +
+      '.feed-image{display:block;width:100%;height:auto;max-height:min(56vw,460px);aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;-webkit-user-drag:none;user-drag:none}' +
       '.sf-post--image-feed .sf-post__actions{padding:10px 12px 6px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
       '.sf-post--image-feed .sf-post__engagement{padding:0 14px 4px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
       '.sf-engagement-line{margin:0;font-size:12px;line-height:1.45;color:var(--theme-text,var(--text));opacity:.92}' +
@@ -2518,9 +2504,9 @@
           '</div>' +
         '</header>' +
         '<div class="sf-post__media sf-post__media--feed-img">' +
-          '<button class="feed-image-button" type="button" aria-label="Beitrag öffnen: ' + esc(item.title || '') + '">' +
-            '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async">' +
-          '</button>' +
+          '<div class="feed-image-frame" aria-hidden="true">' +
+            '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false">' +
+          '</div>' +
         '</div>' +
         '<div class="sf-post__actions feed-actions">' +
           '<div class="sf-actions-left">' +
@@ -2533,7 +2519,7 @@
         feedEngagementHtml(item, liked) +
         '<div class="sf-post__body">' +
           '<p class="sf-caption"><b>' + esc(publisherLabel()) + '</b> ' + esc(caption) + '</p>' +
-          '<button type="button" class="sf-read-more feed-image-button" aria-label="Vollständigen Beitrag lesen">Beitrag lesen →</button>' +
+          '<button type="button" class="sf-read-more" data-pf-open-post="' + esc(item.postId || '') + '" aria-label="Vollständigen Beitrag lesen">Beitrag lesen →</button>' +
         '</div>' +
       '</article>'
     );
@@ -3017,17 +3003,27 @@
       function open() {
         if (item) navigateTarget(item);
       }
+      function openPostFromFeed() {
+        var postId = card.getAttribute('data-post-id') || (item && item.postId);
+        if (postId && typeof navigate === 'function') {
+          markSeen(uid);
+          if (item) trackFeedEvent('feed_click', item);
+          navigate('post', postId);
+        } else if (item) {
+          navigateTarget(item);
+        }
+      }
       card.addEventListener('click', function (ev) {
         if (ev.target.closest('.sf-act') || ev.target.closest('[data-feed-share-id]') || ev.target.closest('.feed-share-button') || ev.target.closest('.share-image-btn')) return;
-        if (ev.target.closest('.feed-image-button') || ev.target.closest('.sf-read-more')) {
-          var postId = card.getAttribute('data-post-id') || (item && item.postId);
-          if (postId && typeof navigate === 'function') {
-            markSeen(uid);
-            if (item) trackFeedEvent('feed_click', item);
-            navigate('post', postId);
-          } else {
-            open();
+        if (item && item.type === 'postFeed') {
+          if (ev.target.closest('.sf-read-more') || ev.target.closest('[data-pf-open-post]')) {
+            ev.preventDefault();
+            openPostFromFeed();
           }
+          return;
+        }
+        if (ev.target.closest('.sf-read-more') || ev.target.closest('[data-pf-open-post]')) {
+          openPostFromFeed();
           return;
         }
         open();
@@ -3189,14 +3185,19 @@
     list.innerHTML = state.visible.map(function (item, idx) { return cardHtml(item, idx); }).join('') +
       (state.done ? '' : '<div class="sf-loader" id="pfLoader">Weitere Beiträge laden…</div>');
     bindList(mount);
-    bindSceneBackgrounds(mount);
-    setupInfinite(mount);
-    scheduleTunePanels(mount);
-    global.setTimeout(function () {
-      enforceReadablePanels(mount);
+    var hasSceneCards = state.visible.some(function (it) { return it && it.type !== 'postFeed'; });
+    if (hasSceneCards) {
+      bindSceneBackgrounds(mount);
+      scheduleTunePanels(mount);
+      global.setTimeout(function () {
+        enforceReadablePanels(mount);
+        feedShareWarmVisible(mount);
+        feedShareObserve(mount);
+      }, 120);
+    } else {
       feedShareWarmVisible(mount);
-      feedShareObserve(mount);
-    }, 120);
+    }
+    setupInfinite(mount);
   }
 
   var observer = null;
@@ -3257,7 +3258,7 @@
     renderListMount(mount);
   }
 
-  function applyFeedData(mount, manualItems) {
+  function applyFeedData(mount, manualItems, restoredScroll) {
     var ctx = getCtx();
     var pools = buildPools(ctx, state.seed);
     var merged = mergeFeed(pools, manualItems || [], state.seed);
@@ -3266,15 +3267,25 @@
     state.done = false;
     state.visible = [];
     state.loading = false;
-    if (!mount.querySelector('.sf-app')) {
-      renderPage(mount);
-      loadFeedStats().then(function () { refreshFeedEngagement(mount); });
-      return;
+    function finishRender() {
+      if (!mount.querySelector('.sf-app')) {
+        renderPage(mount);
+      } else {
+        appendBatch(true);
+        renderListMount(mount);
+        preloadFeedImages(state.visible, 3);
+      }
+      if (restoredScroll != null) {
+        if (global.DARScrollManager && global.DARScrollManager.stableScrollTo) {
+          global.DARScrollManager.stableScrollTo(restoredScroll);
+        } else {
+          global.requestAnimationFrame(function () {
+            global.scrollTo({ top: restoredScroll, behavior: 'auto' });
+          });
+        }
+      }
     }
-    appendBatch(true);
-    renderListMount(mount);
-    preloadFeedImages(state.visible, 3);
-    loadFeedStats().then(function () { refreshFeedEngagement(mount); });
+    loadFeedStats().finally(finishRender);
   }
 
   function rebuild(force) {

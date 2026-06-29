@@ -483,6 +483,19 @@ main#panel.panel{
 .paste-area.markdown-editor{min-height:min(38vh,320px);max-height:min(46vh,420px)}
 .feed-image-thumb{max-height:96px}
 .feed-image-dropzone{padding:12px 10px}
+.feed-post-list{display:grid;gap:8px}
+.feed-post-row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px;border:1px solid rgba(239,215,142,.16);border-radius:14px;background:rgba(255,255,255,.03)}
+.feed-post-thumb{width:56px;height:56px;border-radius:10px;overflow:hidden;background:rgba(0,0,0,.24);display:grid;place-items:center}
+.feed-post-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.feed-post-thumb-empty{font-size:22px;opacity:.7}
+.feed-post-main{min-width:0}
+.feed-post-title{font-size:13px;font-weight:700;color:var(--gold);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-post-meta{font-size:10px;color:var(--soft);margin-top:2px;line-height:1.35}
+.feed-post-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.feed-post-actions .btn{min-height:34px;padding:6px 10px;font-size:11px}
+.feed-legacy-panel{margin-top:0}
+.feed-legacy-panel .feed-legacy-body{padding-top:8px}
+@media(max-width:720px){.feed-post-row{grid-template-columns:48px minmax(0,1fr)}.feed-post-actions{grid-column:1/-1;justify-content:flex-start}}
 }
 </style>
 </head>
@@ -506,10 +519,10 @@ main#panel.panel{
 </div>
 <div class="toast" id="toast"></div>
 <script src="/assets/slide-post-parser.js?v=2"></script>
-<script src="/admin/quellen-manager.js?v=3"></script>
-<script src="/assets/admin-feed-image.js?v=4"></script>
+<script src="/admin/quellen-manager.js?v=4"></script>
+<script src="/assets/admin-feed-image.js?v=5"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
-<script src="/admin/focus-feed-manager.js?v=3"></script>
+<script src="/admin/focus-feed-manager.js?v=4"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -1577,6 +1590,14 @@ async function ensureQuellenCatalog(force){
     return quellenCatalogMeta;
   }finally{quellenCatalogBusy=false}
 }
+window.ensureQuellenCatalog=ensureQuellenCatalog;
+window.openAdminQuellenPost=async function(filename){
+  if(!filename)return;
+  currentTab="quellen";
+  await ensureQuellenCatalog(false);
+  await loadQuellenPost(filename);
+  renderShell();
+};
 async function ensureShortlinksRegistry(force){
   if(shortlinksRegistryLoaded&&!force)return shortlinksRegistry;
   shortlinksRegistryBusy=true;
@@ -2242,7 +2263,7 @@ function renderVisitors(ctx){
 function renderQuellen(){
   const busy=quellenCatalogBusy;
   const list=window.DARQuellen?DARQuellen.filterQuellenCatalog(quellenCatalogMeta,quellenSearchQuery):quellenCatalogMeta.filter(p=>!quellenSearchQuery.trim()||JSON.stringify(p).toLowerCase().includes(quellenSearchQuery.trim().toLowerCase()));
-  const rows=list.slice(0,120).map(p=>`<button class="quellen-result-row ${quellenEdit.filename===p.filename?"is-active":""}" data-quellen-post="${esc(p.filename)}" type="button"><span><span class="quellen-result-title">${esc(cleanTitle(p.title))}</span><span class="quellen-result-meta">${esc(p.filename)} · ${esc(p.category||"")} · ${esc(p.id||"")}${p.date?` · ${esc(String(p.date).slice(0,10))}`:""}</span></span><span class="quellen-badges">${p.isSlide?`<span class="quellen-badge">Slide</span>`:""}${p.hasLinks?`<span class="quellen-badge">Links</span>`:""}${p.hasPdfImage?`<span class="quellen-badge">PDF/Bild</span>`:""}${p.hasLocalSources?`<span class="quellen-badge">Lokal</span>`:""}</span></button>`).join("");
+  const rows=list.slice(0,120).map(p=>`<button class="quellen-result-row ${quellenEdit.filename===p.filename?"is-active":""}" data-quellen-post="${esc(p.filename)}" type="button"><span><span class="quellen-result-title">${esc(cleanTitle(p.title))}</span><span class="quellen-result-meta">${esc(p.filename)} · ${esc(p.category||"")} · ${esc(p.id||"")}${p.date?` · ${esc(String(p.date).slice(0,10))}`:""}</span></span><span class="quellen-badges">${p.hasFeedInApp?`<span class="quellen-badge">Feed</span>`:""}${p.isSlide?`<span class="quellen-badge">Slide</span>`:""}${p.hasLinks?`<span class="quellen-badge">Links</span>`:""}${p.hasPdfImage?`<span class="quellen-badge">PDF/Bild</span>`:""}${p.hasLocalSources?`<span class="quellen-badge">Lokal</span>`:""}</span></button>`).join("");
   const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
   return `<section class="quellen-studio">
     <div class="panel">

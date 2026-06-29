@@ -445,6 +445,16 @@
     return /\.(pdf|png|jpe?g|webp)|#page=\d+|PDF\/Scan|Bild-Scan|Bildscan/i.test(String(markdown || ""));
   }
 
+  function catalogFeedMeta(head) {
+    if (!/^feed:\s*$/m.test(String(head || ""))) {
+      return { hasFeedInApp: false, feedImage: "" };
+    }
+    const enabled = /^\s{2}enabled:\s*true\s*$/m.test(head);
+    const imageMatch = head.match(/^\s{2}image:\s*(.+)$/m);
+    const image = imageMatch ? String(parseValue(imageMatch[1]) || "").trim() : "";
+    return { hasFeedInApp: enabled && !!image, feedImage: image };
+  }
+
   function parseQuellenCatalogHead(text, filename) {
     const head = String(text || "").slice(0, 4500);
     const tags = [];
@@ -464,6 +474,7 @@
       /slides?/i.test(type) ||
       /^slides:\s*$/m.test(head) ||
       (global.DARSlidePostParser && global.DARSlidePostParser.bodyHasSlideMarkers(body));
+    const feedMeta = catalogFeedMeta(head);
     return {
       filename,
       title: (head.match(/^title:\s*["']?(.*?)["']?\s*$/m) || [])[1]?.replace(/^📖\s*/, "").trim() || filename.replace(/\.md$/i, ""),
@@ -477,7 +488,9 @@
       isSlide,
       hasLinks: /^links:\s*$/m.test(head),
       hasPdfImage: postHasPdfOrImageLinks(head),
-      hasLocalSources: postHasLocalSourceFiles(head)
+      hasLocalSources: postHasLocalSourceFiles(head),
+      hasFeedInApp: feedMeta.hasFeedInApp,
+      feedImage: feedMeta.feedImage
     };
   }
 
