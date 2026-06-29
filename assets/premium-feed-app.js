@@ -5,8 +5,8 @@
   'use strict';
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV71';
-  var FONTS_ID = 'darPremiumFeedFontsV71';
+  var STYLES_ID = 'darPremiumFeedStylesV72';
+  var FONTS_ID = 'darPremiumFeedFontsV72';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
   var FEED_SHARE_CACHE = Object.create(null);
@@ -90,7 +90,7 @@
   var DEVICE_KEY = 'darFeedDeviceSeedV1';
   var REFRESH_KEY = 'darPremiumFeedRefreshSeedV1';
   var FEED_STATE_KEY = 'darPremiumFeedStateV2';
-  var FEED_LAYOUT_REV = 3;
+  var FEED_LAYOUT_REV = 4;
   var FEED_LUM_CACHE = Object.create(null);
   var BATCH = 10;
   var INITIAL = 12;
@@ -2126,17 +2126,13 @@
       '.sf-filter.is-active{border-color:var(--theme-border,var(--line));background:var(--theme-feed-filter-active,linear-gradient(135deg,rgba(214,190,132,.18),rgba(90,70,30,.12)));color:var(--theme-accent,var(--gold2));opacity:1}' +
       '.sf-feed{display:flex;flex-direction:column;gap:var(--sf-card-gap,20px);padding:0 var(--sf-gutter-right,var(--sf-shell-pad,10px)) calc(24px + env(safe-area-inset-bottom)) var(--sf-gutter-left,var(--sf-shell-pad,10px));width:100%;max-width:var(--sf-feed-col-max,100%);box-sizing:border-box;margin-left:auto;margin-right:auto;min-width:0}' +
       '.sf-post{margin:0;border-radius:var(--sf-card-radius,26px);overflow:hidden;cursor:pointer;background:var(--theme-feed-card,var(--theme-surface,transparent));border:1px solid var(--theme-border,var(--line));box-shadow:var(--premium-shadow,none);width:100%;max-width:100%;min-width:0;box-sizing:border-box;align-self:stretch}' +
-      '.sf-post--image-feed{cursor:default;border:1px solid var(--theme-border,var(--line));background:var(--theme-feed-card,var(--theme-surface,transparent));box-shadow:var(--premium-shadow,0 10px 28px rgba(0,0,0,.16));position:relative;max-width:560px;margin:0 auto;overflow:hidden}' +
-      '.sf-post--image-feed .sf-post__head{background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));padding:10px 12px 8px}' +
-      '.sf-post--image-feed .sf-post__media--feed-img{background:var(--theme-feed-img-fallback,#0a0908);border-top:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);border-bottom:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);line-height:0;overflow:hidden}' +
+      '.sf-post--image-feed{cursor:default;border:1px solid var(--theme-border,var(--line));background:var(--theme-feed-card,var(--theme-surface,transparent));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.18));position:relative;max-width:680px;margin:0 auto;overflow:hidden}' +
+      '.sf-post--image-feed .sf-post__media--feed-img{background:var(--theme-feed-img-fallback,#0a0908);line-height:0;overflow:hidden}' +
       '.feed-image-frame{display:block;width:100%;margin:0;padding:0;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;user-select:none;-webkit-user-select:none}' +
-      '.feed-image{display:block;width:100%;height:auto;max-height:min(56vw,460px);aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;-webkit-user-drag:none;user-drag:none}' +
+      '.feed-image{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;-webkit-user-drag:none;user-drag:none}' +
       '.sf-post--image-feed .sf-post__actions{padding:10px 12px 6px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
       '.sf-post--image-feed .sf-post__engagement{padding:0 14px 4px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
-      '.sf-engagement-line{margin:0;font-size:12px;line-height:1.45;color:var(--theme-text,var(--text));opacity:.92}' +
-      '.sf-engagement-line strong{font-weight:800;color:var(--theme-text,var(--text))}' +
-      '.sf-post--image-feed .sf-post__body{padding:6px 14px 14px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
-      '.sf-post--image-feed .sf-caption{margin:0 0 8px;font-size:13px;line-height:1.5;color:var(--theme-text,var(--text))}' +
+      '.sf-post--image-feed .sf-post__foot{padding:4px 14px 12px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))}' +
       '.sf-post--image-feed .sf-read-more{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;padding:0;font-size:12px;font-weight:800;color:var(--theme-accent,var(--gold2));cursor:pointer;font-family:var(--font-ui)}' +
       '.sf-post--image-feed .sf-read-more:hover{text-decoration:underline}' +
       '.sf-post--demo{border-color:var(--theme-border,var(--line));box-shadow:var(--premium-shadow,0 12px 32px rgba(0,0,0,.28))}' +
@@ -2492,17 +2488,8 @@
     var orig = item.originalImage || item.image || '';
     var liked = isLiked(item.uid);
     var eager = cardIdx != null && cardIdx < 3;
-    var sub = [item.category, timeAgo(item.date)].filter(Boolean).join(' · ');
-    var caption = clamp(item.title || 'Beitrag', 180);
     return (
       '<article class="sf-post feed-card sf-post--image-feed" data-feed-card-id="' + esc(item.uid) + '" data-pf-id="' + esc(item.uid) + '" data-post-id="' + esc(item.postId || '') + '" data-pf-target="' + esc(item.target || '') + '" data-pf-type="postFeed" data-pf-post="' + esc(item.postId || '') + '">' +
-        '<header class="sf-post__head">' +
-          '<div class="sf-avatar" aria-hidden="true">' + logoImgHtml() + '</div>' +
-          '<div class="sf-post__meta">' +
-            '<span class="sf-user">' + esc(publisherLabel()) + '</span>' +
-            (sub ? '<span class="sf-sub">' + esc(sub) + '</span>' : '') +
-          '</div>' +
-        '</header>' +
         '<div class="sf-post__media sf-post__media--feed-img">' +
           '<div class="feed-image-frame" aria-hidden="true">' +
             '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false">' +
@@ -2517,8 +2504,7 @@
           '</div>' +
         '</div>' +
         feedEngagementHtml(item, liked) +
-        '<div class="sf-post__body">' +
-          '<p class="sf-caption"><b>' + esc(publisherLabel()) + '</b> ' + esc(caption) + '</p>' +
+        '<div class="sf-post__foot">' +
           '<button type="button" class="sf-read-more" data-pf-open-post="' + esc(item.postId || '') + '" aria-label="Vollständigen Beitrag lesen">Beitrag lesen →</button>' +
         '</div>' +
       '</article>'
