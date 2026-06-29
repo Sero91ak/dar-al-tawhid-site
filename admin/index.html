@@ -522,7 +522,7 @@ main#panel.panel{
 <script src="/admin/quellen-manager.js?v=4"></script>
 <script src="/assets/admin-feed-image.js?v=5"></script>
 <script src="/admin/kurzlink-manager.js?v=6"></script>
-<script src="/admin/focus-feed-manager.js?v=4"></script>
+<script src="/admin/focus-feed-manager.js?v=5"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -1464,12 +1464,64 @@ async function workerPostRequest(path,payload){
 }
 async function workerGetRequest(path,{admin=false}={}){
   const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  if(admin&&!secret){
+    throw new Error("Admin Worker Secret fehlt — bitte unter Einstellungen eintragen");
+  }
   const headers=admin&&secret?{"X-Admin-Secret":secret}:{};
   const res=await fetch(workerEndpoint(path),{cache:"no-store",headers});
   const data=await res.json().catch(()=>({}));
-  if(!res.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
+  if(!res.ok){
+    const msg=String(data.error||`Worker Fehler ${res.status}`);
+    if(res.status===401)throw new Error("Nicht autorisiert — Admin Worker Secret unter Einstellungen prüfen");
+    throw new Error(msg);
+  }
   return data;
 }
+async function fetchPostMarkdownPublic(filename){
+  const name=String(filename||"").trim();
+  if(!name)throw new Error("Dateiname fehlt");
+  const files=await fetchPostsIndexFiles();
+  const fileMeta=files.find(f=>String(f.name||f)===name);
+  const sha=fileMeta?.sha||Date.now();
+  const urls=[
+    `${SITE_ORIGIN}/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(sha)}`,
+    `https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/content/posts/${encodeURIComponent(name)}?v=${encodeURIComponent(sha)}`
+  ];
+  for(const url of urls){
+    try{
+      const r=await fetch(url,{cache:"no-store"});
+      if(!r.ok)continue;
+      const markdown=await r.text();
+      if(!String(markdown||"").trim())continue;
+      return{
+        ok:true,
+        filename:name,
+        markdown,
+        sha:String(fileMeta?.sha||""),
+        postId:parseIdFromMarkdownHead(markdown)||name.replace(/\.md$/i,""),
+        title:parseTitleFromMarkdownHead(markdown)||name,
+        category:parseCategoryFromMarkdownHead(markdown)||"",
+        loadedVia:"public"
+      };
+    }catch(e){}
+  }
+  throw new Error("Beitrag konnte nicht geladen werden");
+}
+async function fetchPostMarkdownForAdmin(filename){
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  if(secret){
+    try{
+      return await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
+    }catch(e){
+      const msg=String(e.message||e);
+      if(!/autorisiert|401|Secret fehlt/i.test(msg))throw e;
+    }
+  }
+  const data=await fetchPostMarkdownPublic(filename);
+  toast("Beitrag über Live-Quelle geladen — zum Speichern Worker Secret unter Einstellungen prüfen");
+  return data;
+}
+window.fetchPostMarkdownForAdmin=fetchPostMarkdownForAdmin;
 function categoryKeyAdmin(name){return String(name||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[\u02bf\u02be\u2018\u2019'`]/g,"").replace(/\s+/g," ").trim()}
 function parseCategoryFromMarkdownHead(text){const m=String(text||"").match(/^category:\s*["']?(.*?)["']?\s*$/m);return m?m[1].trim():""}
 function parseTitleFromMarkdownHead(text){const m=String(text||"").match(/^title:\s*["']?(.*?)["']?\s*$/m);return m?m[1].trim().replace(/^📖\s*/,""):""}
@@ -1560,10 +1612,10 @@ async function loadOrdnerPost(filename){
   if(!filename)return;
   ordnerEditorStatus="Lade Beitrag…";
   try{
-    const data=await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
+    const data=await fetchPostMarkdownForAdmin(filename);
     ordnerEdit={filename:data.filename||filename,markdown:data.markdown||"",sha:data.sha||"",postId:data.postId||"",title:data.title||filename,dirty:false};
     ordnerSelectedCat=data.category||ordnerSelectedCat;
-    setOrdnerEditorStatus("Bereit zum Bearbeiten.");
+    setOrdnerEditorStatus(data.loadedVia==="public"?"Geladen (Live) — Worker Secret für Speichern prüfen.":"Bereit zum Bearbeiten.");
   }catch(e){
     ordnerEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
     setOrdnerEditorStatus(`Fehler: ${e.message||e}`);
@@ -1981,12 +2033,17 @@ async function loadQuellenPost(filename){
   if(!filename)return;
   setQuellenEditorStatus("Lade Beitrag…");
   try{
-    const data=await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
+    const data=await fetchPostMarkdownForAdmin(filename);
     quellenEdit={filename:data.filename||filename,markdown:data.markdown||"",sha:data.sha||"",postId:data.postId||"",title:data.title||filename,dirty:false};
     sourceLinkTarget="post";
     sourceDraftPending=null;
     sourceUploadQueue=[];
-    setQuellenEditorStatus("Bereit — PDF/Bild per Drag & Drop hinzufügen oder Anhänge entfernen.");
+    if(window.DARAdminFeedImage&&data.markdown){
+      DARAdminFeedImage.syncFromMarkdown("quellen",data.markdown,SITE_ORIGIN);
+      const panel=document.querySelector('[data-feed-image-context="quellen"]');
+      if(panel&&typeof DARAdminFeedImage.bindRoot==="function")DARAdminFeedImage.bindRoot(panel,"quellen",SITE_ORIGIN);
+    }
+    setQuellenEditorStatus(data.loadedVia==="public"?"Geladen (Live) — PDF/Bild & Feed bearbeiten. Zum Speichern Worker Secret prüfen.":"Bereit — PDF/Bild per Drag & Drop hinzufügen oder Anhänge entfernen.");
   }catch(e){
     quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
     setQuellenEditorStatus(`Fehler: ${e.message||e}`);
