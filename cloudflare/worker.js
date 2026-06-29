@@ -821,6 +821,34 @@ function normalizeSourceFilesInput(raw) {
   return out;
 }
 
+function normalizeFeedImageFilesInput(raw) {
+  const list = Array.isArray(raw) ? raw : [];
+  const out = [];
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i] || {};
+    const path = trimSlashes(String(item.path || "").trim());
+    const contentBase64 = String(item.contentBase64 || item.base64 || "").replace(/\s+/g, "");
+    if (!path || !contentBase64) throw httpError(`Feed-Bild ${i + 1}: Pfad oder Inhalt fehlt`, 400);
+    if (!path.startsWith("assets/posts/")) throw httpError(`Feed-Bild ${i + 1}: Pfad muss mit assets/posts/ beginnen`, 400);
+    if (!/\/feed-(original|preview)\.(jpe?g|png|webp)$/i.test(path)) {
+      throw httpError(`Feed-Bild ${i + 1}: nur feed-original.* oder feed-preview.jpg erlaubt`, 400);
+    }
+    const bytes = estimateBase64Bytes(contentBase64);
+    if (bytes <= 0) throw httpError(`Feed-Bild ${i + 1}: leer oder ungültig`, 400);
+    if (bytes > SOURCE_MAX_BYTES) throw httpError(`Feed-Bild ${i + 1}: maximal ${Math.round(SOURCE_MAX_BYTES / (1024 * 1024))} MB`, 400);
+    out.push({ path, contentBase64, binary: true });
+  }
+  return out;
+}
+
+async function prepareFeedImageCommitEntries(env, owner, repo, branch, feedImageFiles) {
+  const entries = [];
+  for (const file of feedImageFiles) {
+    entries.push({ path: file.path, contentBase64: file.contentBase64, binary: true });
+  }
+  return entries;
+}
+
 async function githubListRepoTreePaths(env, owner, repo, branch) {
   const refSha = await githubGetRefSha(env, owner, repo, branch);
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${refSha}?recursive=1`, {
@@ -976,7 +1004,8 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   filename = sanitizeFilename(filename);
   const markdown = normalizeMarkdownForUpload(markdownRaw, nextNumber);
   const postPath = `${postsDir}/${filename}`;
-  const sourceFiles = normalizeSourceFilesInput(input.sourceFiles);
+  const sourceFiles = normalizeSourceFilesInput(input.sourceFiles || []);
+  const feedImageFiles = normalizeFeedImageFilesInput(input.feedImageFiles || []);
 
   const existing = await githubGet(env, owner, repo, postPath, branch);
   if (existing) throw httpError(`Diese Datei existiert schon: ${filename}`, 409);
@@ -996,6 +1025,9 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
   const sourceEntries = sourceFiles.length
     ? await prepareSourceCommitEntries(env, owner, repo, branch, sourceFiles)
     : [];
+  const feedImageEntries = feedImageFiles.length
+    ? await prepareFeedImageCommitEntries(env, owner, repo, branch, feedImageFiles)
+    : [];
   const batchCommit = await githubCommitBatch(
     env,
     owner,
@@ -1004,13 +1036,19 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     [
       { path: postPath, content: markdown, sha: postBlobSha },
       ...sourceEntries,
+      ...feedImageEntries,
       { path: indexPath, content: indexContent }
     ],
-    sourceEntries.length ? `Add post ${filename} + ${sourceEntries.length} source file(s)` : `Add post ${filename}`
+    feedImageEntries.length
+      ? `Add post ${filename} + feed image(s)`
+      : sourceEntries.length
+        ? `Add post ${filename} + ${sourceEntries.length} source file(s)`
+        : `Add post ${filename}`
   );
   const created = { content: { sha: postBlobSha }, commit: { sha: batchCommit.commitSha } };
   const updatedIndex = { commit: { sha: batchCommit.commitSha } };
   const uploadedSources = sourceEntries.map((entry) => entry.path);
+  const uploadedFeedImages = feedImageEntries.map((entry) => entry.path);
 
   const postTitle = frontmatterValue(markdown, "title") || "Neuer Beitrag";
   const postId = frontmatterValue(markdown, "id");
@@ -1256,6 +1294,7 @@ async function updateExistingPost(env, input) {
   const sha = String(input.sha || "").trim();
   const skipPush = input.skipPush !== false;
   const sourceFiles = normalizeSourceFilesInput(input.sourceFiles || []);
+  const feedImageFiles = normalizeFeedImageFilesInput(input.feedImageFiles || []);
 
   if (!filename) throw httpError("Dateiname fehlt", 400);
   if (!markdown) throw httpError("Markdown fehlt", 400);
@@ -1279,15 +1318,23 @@ async function updateExistingPost(env, input) {
   }
 
   let commitSha = "";
-  if (sourceFiles.length) {
-    const sourceEntries = await prepareSourceCommitEntries(env, owner, repo, branch, sourceFiles);
+  const sourceEntries = sourceFiles.length
+    ? await prepareSourceCommitEntries(env, owner, repo, branch, sourceFiles)
+    : [];
+  const feedImageEntries = feedImageFiles.length
+    ? await prepareFeedImageCommitEntries(env, owner, repo, branch, feedImageFiles)
+    : [];
+  const extraEntries = [...sourceEntries, ...feedImageEntries];
+  if (extraEntries.length) {
     const batch = await githubCommitBatch(
       env,
       owner,
       repo,
       branch,
-      [{ path: postPath, content: markdown }, ...sourceEntries],
-      `Update post ${filename} + ${sourceEntries.length} source file(s)`
+      [{ path: postPath, content: markdown }, ...extraEntries],
+      feedImageEntries.length
+        ? `Update post ${filename} + feed image(s)`
+        : `Update post ${filename} + ${sourceEntries.length} source file(s)`
     );
     commitSha = batch.commitSha || "";
   } else {
@@ -1310,6 +1357,7 @@ async function updateExistingPost(env, input) {
     postPath,
     commitSha,
     sourceFiles: sourceFiles.map((file) => file.path),
+    feedImageFiles: feedImageFiles.map((file) => file.path),
     postId: frontmatterValue(markdown, "id") || "",
     push: { sent: false, skipped: skipPush, reason: skipPush ? "Korrektur ohne Push" : "Push nicht angefordert" }
   };

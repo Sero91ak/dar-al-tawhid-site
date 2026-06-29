@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v189';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v192';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -43,7 +43,7 @@ function refreshBypassActive() {
 }
 
 function isFeedAssetRequest(url) {
-  return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js';
+  return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js' || url.pathname === '/assets/html2canvas.min.js';
 }
 
 function isPostDataRequest(url) {
