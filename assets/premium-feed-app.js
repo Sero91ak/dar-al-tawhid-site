@@ -2605,6 +2605,9 @@
       if (typeof saveNavScroll === 'function' && typeof currentRoute !== 'undefined') {
         saveNavScroll(currentRoute, window.scrollY);
       }
+      if (window.DAR_PREMIUM_FEED && typeof window.DAR_PREMIUM_FEED.saveState === 'function') {
+        window.DAR_PREMIUM_FEED.saveState();
+      }
     } catch (e) {}
     markSeen(item.uid);
     var t = String(item.target);
