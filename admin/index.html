@@ -2166,7 +2166,6 @@ async function ensureFeedAdminData(force){
   await window.DARFeedAdmin.ensureFeedLoaded(!!force);
   window.__darFeedAdminLoaded=true;
 }
-function tabButton(id,label){return `<button class="tab ${currentTab===id?"active":""}" data-tab="${esc(id)}" type="button">${esc(label)}</button>`}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   tab=normalizeAdminTab(tab);
   if(tab==="actions-bulk"){tab="actions";scrollToBulk=true}
