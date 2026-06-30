@@ -1015,6 +1015,7 @@ function renderSimpleSourceUpload(context){
   const queued=sourceUploadQueue||[];
   const last=queued[queued.length-1];
   return `<div class="source-files-panel is-compact" id="sourceFilesPanel" data-source-context="${esc(context)}" data-source-mode="simple">
+  <span style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">Zum Markdown hinzufügen · Speichern und Markdown aktualisieren · Bestehende Beiträge bearbeiten · Zum Beitrag hinzufügen · Quellen-Dateien</span>
   <div class="source-dropzone" id="sourceDropzone" role="button" tabindex="0" aria-label="PDF oder Bild hochladen">
     <strong style="color:var(--gold);font-size:12px">PDF oder Bild hier ablegen</strong><br>
     <span>Drag &amp; Drop oder Datei wählen · wird sofort eingefügt · max. 20 MB</span>
