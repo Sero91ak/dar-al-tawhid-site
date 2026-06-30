@@ -2038,7 +2038,8 @@ function buildPostPreviewHtml(env, markdown, postId) {
   const feedImage = yamlBlockValue(markdown, "feed", "image");
   const ogImage = absolutePublicUrl(env, feedImage) || `${siteOrigin(env)}/assets/share/default-og-image.webp`;
   const publicUrl = `${siteOrigin(env)}/p/${encodeURIComponent(id)}`;
-  const appUrl = `${siteOrigin(env)}/#/beitraege/${encodeURIComponent(id)}`;
+  const appUrl = `${siteOrigin(env)}/#post/${encodeURIComponent(id)}`;
+  const logoUrl = `${siteOrigin(env)}/app-icon-512.png`;
   return `<!doctype html>
 <html lang="de">
 <head>
@@ -2075,7 +2076,7 @@ function buildPostPreviewHtml(env, markdown, postId) {
 </head>
 <body>
   <main class="page">
-    <img class="logo" src="${siteOrigin(env)}/logo.png" alt="DAR AL TAWḤID">
+    <img class="logo" src="${htmlAttr(logoUrl)}" alt="DAR AL TAWḤID">
     <h1>${htmlAttr(title)}</h1>
     <p>Der Beitrag wird geöffnet. Falls die Weiterleitung nicht automatisch funktioniert, bitte den Button benutzen.</p>
     <a class="button" href="${htmlAttr(appUrl)}">Beitrag öffnen</a>

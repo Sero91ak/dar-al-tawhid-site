@@ -1950,7 +1950,7 @@
           shareEnabled: meta.shareEnabled !== false,
           target: 'post:' + p.id,
           postId: String(p.id),
-          postUrl: '/#post/' + encodeURIComponent(String(p.id)),
+          postUrl: '/p/' + encodeURIComponent(String(p.id)),
           sort: -2000 - i,
           date: p.date || ''
         };
@@ -3052,6 +3052,8 @@
     var postUrl = opts && opts.postUrl;
     var postId = opts && opts.postId;
     var title = (opts && opts.title) || 'DAR AL TAWḤID';
+    var absolutePostUrl = postUrl ? new URL(postUrl, global.location.origin).toString() : '';
+    var shareText = absolutePostUrl ? 'DAR AL TAWḤID\n\n🔗 Beitrag öffnen:\n' + absolutePostUrl : 'DAR AL TAWḤID';
     var urls = Array.isArray(opts && opts.imageUrls) && opts.imageUrls.length
       ? opts.imageUrls.slice()
       : feedShareImageCandidates(opts && opts.imageUrl, opts && opts.previewUrl);
@@ -3066,13 +3068,13 @@
       var mime = blob.type || ('image/' + (extension === 'jpg' ? 'jpeg' : extension));
       var file = new File([blob], fileName, { type: mime });
       if (global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
-        await global.navigator.share({ files: [file] });
+        await global.navigator.share({ title: title, text: shareText, url: absolutePostUrl || undefined, files: [file] });
         if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
         return true;
       }
       if (global.navigator.share) {
         try {
-          await global.navigator.share({ title: title, files: [file] });
+          await global.navigator.share({ title: title, text: shareText, url: absolutePostUrl || undefined, files: [file] });
           if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
           return true;
         } catch (eShare) {
@@ -3080,7 +3082,10 @@
         }
       }
       downloadFeedBlob(blob, fileName);
-      showToast('Bild gespeichert — du kannst es jetzt in deiner Galerie teilen.');
+      if (absolutePostUrl && global.navigator.clipboard) {
+        try { await global.navigator.clipboard.writeText(absolutePostUrl); } catch (eCopy) {}
+      }
+      showToast(absolutePostUrl ? 'Bild gespeichert — Beitragslink wurde kopiert.' : 'Bild gespeichert — du kannst es jetzt in deiner Galerie teilen.');
       if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
       return true;
     } catch (error) {
