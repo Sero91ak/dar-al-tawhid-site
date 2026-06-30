@@ -35,15 +35,16 @@ for (const [from, to] of replacements) {
   out = out.split(from).join(to);
 }
 
-// loadCurrentUpdates: optional GitHub-Fallback aus altem Live-Stand
+// loadCurrentUpdates: GitHub-Fallback aus altem Live-Stand (volle Funktion bis activeCurrentUpdates)
 const loadLive = liveOld.match(
-  /async function loadCurrentUpdates\(\)\{[\s\S]*?console\.warn\("Aktuell-Hinweise konnten nicht geladen werden"\);return currentUpdates\}/
+  /async function loadCurrentUpdates\(\)\{[\s\S]*?\}(?=function activeCurrentUpdates)/
 );
 const loadTest = out.match(
-  /async function loadCurrentUpdates\(\)\{[\s\S]*?return currentUpdates\}/
+  /async function loadCurrentUpdates\(\)\{[\s\S]*?\}(?=function activeCurrentUpdates)/
 );
 if (loadLive && loadTest) {
-  out = out.replace(loadTest[0], loadLive[0]);
+  const liveFn = loadLive[0].replace(/\}catch\(e\)\{console\.warn\("Aktuell-Hinweise:",e\);return currentUpdates\}$/, "}");
+  out = out.replace(loadTest[0], liveFn.includes("raw.githubusercontent.com") ? liveFn : loadLive[0]);
 }
 
 fs.writeFileSync(path.join(ROOT, "index.html"), out);
