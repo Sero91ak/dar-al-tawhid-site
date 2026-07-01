@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-01T03:10:12.981Z",
+  "updatedAt": "2026-07-01T05:50:13.410Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3503.75,
-    "pricePerGram": 112.65,
+    "pricePerOunce": 3500.33,
+    "pricePerGram": 112.54,
     "nisabGrams": 85,
-    "nisabEur": 9575.25,
+    "nisabEur": 9565.9,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-07-01T03:10:12.981Z",
+    "fetchedAt": "2026-07-01T05:50:13.410Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 975.8,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-07-01T03:10:12.981Z",
+    "fetchedAt": "2026-07-01T05:50:13.410Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 975.8,
-  "lastSuccessAt": "2026-07-01T03:10:12.981Z",
+  "lastSuccessAt": "2026-07-01T05:50:13.410Z",
   "lastError": "",
-  "lastFetchAt": "2026-07-01T03:10:12.981Z",
+  "lastFetchAt": "2026-07-01T05:50:13.410Z",
   "fetchLogs": [
+    {
+      "id": "log-1782885013410",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-07-01T05:50:13.410Z",
+      "durationMs": 2076,
+      "goldPerGram": 112.54,
+      "silverPerGram": 1.64
+    },
     {
       "id": "log-1782875412981",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-06-29T15:45:33.659Z",
       "durationMs": 699,
       "goldPerGram": 113.75,
-      "silverPerGram": 1.64
-    },
-    {
-      "id": "log-1782746733617",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-06-29T15:25:33.617Z",
-      "durationMs": 654,
-      "goldPerGram": 113.79,
       "silverPerGram": 1.64
     }
   ]
