@@ -127,6 +127,20 @@ export default {
         }, cors);
       }
 
+      if (url.pathname === "/api/wasiyyah/pdf" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const pdf = buildWasiyyahPdf(input);
+        return new Response(pdf, {
+          status: 200,
+          headers: {
+            ...cors,
+            "content-type": "application/pdf",
+            "content-disposition": 'attachment; filename="dar-al-tawhid-wasiyyah.pdf"',
+            "cache-control": "no-store, max-age=0"
+          }
+        });
+      }
+
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
         const result = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, result.ok ? 200 : 200);
@@ -1784,6 +1798,351 @@ async function runScheduledPublishes(env) {
   }
 
   return { ok: true, checked: items.length, published };
+}
+
+function buildWasiyyahPdf(input = {}) {
+  const state = input && typeof input === "object" ? input.state || {} : {};
+  const template = String(input.template || "royal-blue");
+  const createdDate = String(input.createdDate || new Date().toLocaleDateString("de-DE"));
+  const palette = wasiyyahPdfPalette(template);
+  const sections = wasiyyahPdfSections(state, input.finalText || state.finalText || "");
+  const name = firstMeaningfulWasiyyahLine(state.personal) || "________________";
+  const pages = [];
+  pages.push(wasiyyahCoverPage({ palette, name, createdDate, templateName: wasiyyahPdfTemplateName(template) }));
+  let content = new WasiyyahPdfPage(palette);
+  content.header("Wasiyyah-Erklaerung");
+  for (const section of sections) {
+    if (!content.canFit(section.body, 86)) {
+      content.footer();
+      pages.push(content.finish());
+      content = new WasiyyahPdfPage(palette);
+      content.header("Wasiyyah-Erklaerung");
+    }
+    content.section(section.title, section.body);
+  }
+  if (!content.canFit("", 170)) {
+    content.footer();
+    pages.push(content.finish());
+    content = new WasiyyahPdfPage(palette);
+    content.header("Wasiyyah-Erklaerung");
+  }
+  content.signature();
+  content.sourceNote();
+  content.footer();
+  pages.push(content.finish());
+  return createSimplePdf(pages);
+}
+
+function wasiyyahPdfPalette(template) {
+  if (template === "sand-olive") {
+    return { paper: [0.969, 0.941, 0.886], soft: [0.937, 0.898, 0.824], gold: [0.722, 0.588, 0.302], line: [0.839, 0.784, 0.698], text: [0.18, 0.15, 0.12], muted: [0.45, 0.42, 0.37], deep: [0.37, 0.41, 0.33] };
+  }
+  if (template === "bordeaux") {
+    return { paper: [0.984, 0.953, 0.906], soft: [0.949, 0.898, 0.843], gold: [0.722, 0.588, 0.302], line: [0.866, 0.796, 0.733], text: [0.18, 0.15, 0.12], muted: [0.46, 0.37, 0.34], deep: [0.431, 0.247, 0.271] };
+  }
+  return { paper: [0.973, 0.957, 0.925], soft: [0.953, 0.929, 0.886], gold: [0.725, 0.592, 0.322], line: [0.847, 0.8, 0.729], text: [0.18, 0.15, 0.12], muted: [0.435, 0.396, 0.349], deep: [0.188, 0.263, 0.22] };
+}
+
+function wasiyyahPdfTemplateName(template) {
+  if (template === "sand-olive") return "Sand & Olive";
+  if (template === "bordeaux") return "Creme & Bordeaux";
+  return "Elfenbein & Gold";
+}
+
+function wasiyyahPdfSections(state, finalText) {
+  const fields = [
+    ["1. Persoenliche Angaben", state.personal],
+    ["2. Glaube und Grundlage", state.faithDeclaration || "Ich bezeuge, dass es keinen anbetungswuerdigen Gott gibt ausser Allah und dass Muhammad Sein Diener und Gesandter ist."],
+    ["3. Familie und moegliche Erben", state.family],
+    ["4. Schulden und offene Rechte", state.debts],
+    ["5. Amanat und anvertraute Dinge", state.amanat],
+    ["6. Vermoegen und wichtige Dokumente", state.assets],
+    ["7. Zakah und religioese Pflichten", state.religiousObligations],
+    ["8. Wasiyyah bis maximal ein Drittel", state.bequests],
+    ["9. Janazah nach Sunnah", state.janazah],
+    ["10. Nicht gewuenschte Neuerungen", state.bidahRestrictions],
+    ["11. Kinder / Vormundschaft / private Wuensche", state.guardianship],
+    ["12. Ansprechpartner / Wasiyy", state.contacts],
+    ["13. Private Hinweise an Angehoerige", state.privateNotes]
+  ];
+  const sections = fields
+    .map(([title, body]) => ({ title, body: cleanWasiyyahPdfText(body) }))
+    .filter((section) => hasWasiyyahPdfContent(section.body));
+  if (Array.isArray(state.reviewFlags) && state.reviewFlags.length) {
+    sections.push({ title: "14. Pruefhinweise", body: state.reviewFlags.map((flag, index) => `${index + 1}. ${cleanWasiyyahPdfText(flag)}`).join("\n") });
+  }
+  if (!sections.length && finalText) return parseWasiyyahFinalText(finalText);
+  return sections;
+}
+
+function parseWasiyyahFinalText(text) {
+  const sections = [];
+  let current = null;
+  for (const raw of String(text || "").replace(/\r/g, "").split("\n")) {
+    const line = raw.trim();
+    if (!line || line === "PRIVATE ISLAMISCHE WASIYYAH-ERKLÄRUNG") continue;
+    if (/^\d+\.\s+/.test(line)) {
+      if (current && hasWasiyyahPdfContent(current.body.join("\n"))) {
+        sections.push({ title: cleanWasiyyahPdfText(current.title), body: cleanWasiyyahPdfText(current.body.join("\n")) });
+      }
+      current = { title: line, body: [] };
+    } else if (current) {
+      current.body.push(line);
+    }
+  }
+  if (current && hasWasiyyahPdfContent(current.body.join("\n"))) {
+    sections.push({ title: cleanWasiyyahPdfText(current.title), body: cleanWasiyyahPdfText(current.body.join("\n")) });
+  }
+  return sections;
+}
+
+function hasWasiyyahPdfContent(value) {
+  const normalized = String(value || "").trim().toLowerCase();
+  if (!normalized || normalized === "-" || normalized === "—") return false;
+  if (normalized.includes("keine angaben erfasst")) return false;
+  if (normalized.includes("keine bekannten")) return false;
+  if (normalized.includes("keine besondere wasiyyah erfasst")) return false;
+  return true;
+}
+
+function firstMeaningfulWasiyyahLine(value) {
+  return String(value || "").split(/\n|,/).map((line) => cleanWasiyyahPdfText(line).trim()).find(Boolean) || "";
+}
+
+function cleanWasiyyahPdfText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[āĀ]/g, "a").replace(/[īĪ]/g, "i").replace(/[ūŪ]/g, "u")
+    .replace(/[ḥḤ]/g, "h").replace(/[ṣṢ]/g, "s").replace(/[ṭṬ]/g, "t")
+    .replace(/[ḍḌ]/g, "d").replace(/[ẓẒ]/g, "z").replace(/[ʿʾ‘’`´]/g, "'")
+    .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue")
+    .replace(/Ä/g, "Ae").replace(/Ö/g, "Oe").replace(/Ü/g, "Ue").replace(/ß/g, "ss")
+    .replace(/ﷺ/g, "(saws)")
+    .replace(/[^\x09\x0A\x0D\x20-\x7E]/g, "")
+    .replace(/\s+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+class WasiyyahPdfPage {
+  constructor(palette) {
+    this.palette = palette;
+    this.commands = [];
+    this.y = 760;
+    this.paintBase();
+  }
+
+  paintBase() {
+    this.fillColor(this.palette.paper);
+    this.rect(0, 0, 595, 842, "f");
+    this.strokeColor(this.palette.line);
+    this.lineWidth(0.8);
+    this.roundRect(34, 34, 527, 774, 10);
+    this.strokeColor(this.palette.gold);
+    this.lineWidth(0.4);
+    this.roundRect(45, 45, 505, 752, 7);
+  }
+
+  header(title) {
+    this.text("DAR AL TAWHID", 58, 770, 8, "F2", this.palette.gold, 2.8);
+    this.text(title, 58, 747, 17, "F2", this.palette.deep);
+    this.strokeColor(this.palette.line);
+    this.lineWidth(0.7);
+    this.line(58, 728, 537, 728);
+    this.y = 706;
+  }
+
+  canFit(body, extra = 0) {
+    const lines = wrapPdfText(cleanWasiyyahPdfText(body), 84);
+    return this.y - (42 + lines.length * 14 + extra) > 115;
+  }
+
+  section(title, body) {
+    const cleanBody = cleanWasiyyahPdfText(body);
+    if (!hasWasiyyahPdfContent(cleanBody)) return;
+    const lines = wrapPdfText(cleanBody, 84);
+    const height = Math.max(58, 34 + lines.length * 14);
+    this.fillColor([1, 1, 1]);
+    this.roundRect(58, this.y - height + 8, 479, height, 8, "f");
+    this.strokeColor(this.palette.line);
+    this.lineWidth(0.5);
+    this.roundRect(58, this.y - height + 8, 479, height, 8);
+    this.text(cleanWasiyyahPdfText(title).toUpperCase(), 76, this.y - 14, 8.5, "F2", this.palette.deep, 1.2);
+    let lineY = this.y - 32;
+    for (const line of lines) {
+      this.text(line, 76, lineY, 10.5, "F1", this.palette.text);
+      lineY -= 14;
+    }
+    this.y -= height + 9;
+  }
+
+  signature() {
+    const top = this.y - 12;
+    this.fillColor([1, 1, 1]);
+    this.roundRect(58, top - 112, 479, 112, 8, "f");
+    this.strokeColor(this.palette.line);
+    this.roundRect(58, top - 112, 479, 112, 8);
+    this.text("ORT, DATUM UND UNTERSCHRIFT", 76, top - 24, 8.5, "F2", this.palette.deep, 1.2);
+    this.strokeColor(this.palette.text);
+    this.line(76, top - 62, 260, top - 62);
+    this.line(335, top - 62, 519, top - 62);
+    this.text("Ort / Datum", 76, top - 76, 8.5, "F1", this.palette.muted);
+    this.text("Unterschrift", 335, top - 76, 8.5, "F1", this.palette.muted);
+    this.strokeColor(this.palette.muted);
+    this.line(76, top - 100, 260, top - 100);
+    this.line(335, top - 100, 519, top - 100);
+    this.text("Zeuge 1 optional", 76, top - 108, 8, "F1", this.palette.muted);
+    this.text("Zeuge 2 optional", 335, top - 108, 8, "F1", this.palette.muted);
+    this.y = top - 126;
+  }
+
+  sourceNote() {
+    const note = "Quellenhinweis: Diese Vorlage beruecksichtigt allgemeine islamische Grundsaetze zu Wasiyyah, Schulden, Amanat, Faraid und Janazah. Die konkrete staatliche Wirksamkeit muss separat geprueft werden. Quran 4:11-12, Sahih al-Bukhari 2738, Sahih al-Bukhari 2742, Sunan Abi Dawud 2870.";
+    const lines = wrapPdfText(note, 92);
+    let y = this.y;
+    this.strokeColor(this.palette.gold);
+    this.lineWidth(1.2);
+    this.line(58, y, 58, y - 46);
+    for (const line of lines.slice(0, 4)) {
+      this.text(line, 69, y - 10, 8.2, "F1", this.palette.muted);
+      y -= 10;
+    }
+    this.y = y - 8;
+  }
+
+  footer() {
+    this.strokeColor(this.palette.line);
+    this.lineWidth(0.5);
+    this.line(58, 58, 537, 58);
+    this.text("Islamische Wasiyyah", 58, 43, 8, "F1", this.palette.muted);
+    this.text("dar-al-tawhid.de", 462, 43, 8, "F1", this.palette.muted);
+  }
+
+  finish() { return this.commands.join("\n"); }
+  text(value, x, y, size, font = "F1", color = [0, 0, 0], tracking = 0) {
+    this.fillColor(color);
+    const tc = tracking ? `${num(tracking)} Tc ` : "";
+    this.commands.push(`BT /${font} ${num(size)} Tf ${tc}${num(x)} ${num(y)} Td (${pdfEscape(cleanWasiyyahPdfText(value))}) Tj ET`);
+  }
+  fillColor(rgb) { this.commands.push(`${rgb.map(num).join(" ")} rg`); }
+  strokeColor(rgb) { this.commands.push(`${rgb.map(num).join(" ")} RG`); }
+  lineWidth(width) { this.commands.push(`${num(width)} w`); }
+  line(x1, y1, x2, y2) { this.commands.push(`${num(x1)} ${num(y1)} m ${num(x2)} ${num(y2)} l S`); }
+  rect(x, y, w, h, op = "S") { this.commands.push(`${num(x)} ${num(y)} ${num(w)} ${num(h)} re ${op}`); }
+  roundRect(x, y, w, h, r, op = "S") {
+    const k = 0.5522847498;
+    const c = r * k;
+    this.commands.push([
+      `${num(x + r)} ${num(y)} m`, `${num(x + w - r)} ${num(y)} l`,
+      `${num(x + w - r + c)} ${num(y)} ${num(x + w)} ${num(y + r - c)} ${num(x + w)} ${num(y + r)} c`,
+      `${num(x + w)} ${num(y + h - r)} l`,
+      `${num(x + w)} ${num(y + h - r + c)} ${num(x + w - r + c)} ${num(y + h)} ${num(x + w - r)} ${num(y + h)} c`,
+      `${num(x + r)} ${num(y + h)} l`,
+      `${num(x + r - c)} ${num(y + h)} ${num(x)} ${num(y + h - r + c)} ${num(x)} ${num(y + h - r)} c`,
+      `${num(x)} ${num(y + r)} l`,
+      `${num(x)} ${num(y + r - c)} ${num(x + r - c)} ${num(y)} ${num(x + r)} ${num(y)} c`, op
+    ].join(" "));
+  }
+}
+
+function wasiyyahCoverPage({ palette, name, createdDate, templateName }) {
+  const page = new WasiyyahPdfPage(palette);
+  page.text("DAR AL TAWHID", 235, 735, 10, "F2", palette.gold, 2.8);
+  page.strokeColor(palette.gold);
+  page.lineWidth(0.7);
+  page.line(218, 716, 377, 716);
+  page.text("Bismillah ar-Rahman ar-Rahim", 212, 660, 15, "F1", palette.gold);
+  page.text("Islamische Wasiyyah", 164, 612, 28, "F2", palette.text);
+  page.text("Private Erklaerung nach Quran und Sunnah", 184, 586, 12, "F1", palette.muted);
+  page.fillColor([1, 1, 1]);
+  page.roundRect(128, 442, 339, 96, 10, "f");
+  page.strokeColor(palette.line);
+  page.roundRect(128, 442, 339, 96, 10);
+  page.text("ERSTELLT FUER", 258, 512, 8.5, "F2", palette.gold, 1.6);
+  page.text(name, 188, 486, 18, "F2", palette.text);
+  page.text("Erstellt am", 172, 458, 8.5, "F1", palette.muted);
+  page.text(createdDate, 172, 444, 10, "F2", palette.text);
+  page.text("Vorlage", 332, 458, 8.5, "F1", palette.muted);
+  page.text(templateName, 332, 444, 10, "F2", palette.text);
+  const note = wrapPdfText("Diese Wasiyyah dient der geordneten Festhaltung von Schulden, Amanat, Ansprechpartnern, Janazah-Wuenschen und persoenlichen Hinweisen.", 72);
+  let y = 372;
+  for (const line of note) {
+    page.text(line, 123, y, 11, "F1", palette.text);
+    y -= 16;
+  }
+  page.text("dar-al-tawhid.de", 253, 74, 9, "F2", palette.gold, 1.2);
+  return page.finish();
+}
+
+function wrapPdfText(text, maxChars) {
+  const lines = [];
+  for (const para of cleanWasiyyahPdfText(text).split(/\n+/)) {
+    const words = para.split(/\s+/).filter(Boolean);
+    let line = "";
+    for (const word of words) {
+      const next = line ? `${line} ${word}` : word;
+      if (next.length > maxChars && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = next;
+      }
+    }
+    if (line) lines.push(line);
+  }
+  return lines.length ? lines : [""];
+}
+
+function createSimplePdf(pageContents) {
+  const objects = [];
+  const add = (body) => {
+    objects.push(body);
+    return objects.length;
+  };
+  const catalogId = add("");
+  const pagesId = add("");
+  const fontRoman = add("<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>");
+  const fontBold = add("<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>");
+  const pageIds = [];
+  for (const content of pageContents) {
+    const stream = `${content}\n`;
+    const contentId = add(`<< /Length ${byteLengthAscii(stream)} >>\nstream\n${stream}endstream`);
+    const pageId = add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRoman} 0 R /F2 ${fontBold} 0 R >> /ExtGState << /GS1 << /ca 0.45 /CA 0.45 >> >> >> /Contents ${contentId} 0 R >>`);
+    pageIds.push(pageId);
+  }
+  objects[catalogId - 1] = `<< /Type /Catalog /Pages ${pagesId} 0 R >>`;
+  objects[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pageIds.length} >>`;
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+  objects.forEach((body, index) => {
+    offsets.push(byteLengthAscii(pdf));
+    pdf += `${index + 1} 0 obj\n${body}\nendobj\n`;
+  });
+  const xref = byteLengthAscii(pdf);
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+  for (let i = 1; i < offsets.length; i += 1) pdf += `${String(offsets[i]).padStart(10, "0")} 00000 n \n`;
+  pdf += `trailer\n<< /Size ${objects.length + 1} /Root ${catalogId} 0 R >>\nstartxref\n${xref}\n%%EOF`;
+  return asciiBytes(pdf);
+}
+
+function pdfEscape(value) {
+  return String(value || "").replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
+}
+
+function num(value) {
+  return Number(value).toFixed(3).replace(/\.?0+$/g, "");
+}
+
+function byteLengthAscii(value) {
+  return asciiBytes(value).length;
+}
+
+function asciiBytes(value) {
+  const text = String(value || "");
+  const bytes = new Uint8Array(text.length);
+  for (let i = 0; i < text.length; i += 1) bytes[i] = text.charCodeAt(i) & 0xff;
+  return bytes;
 }
 
 function corsHeaders(request, env) {
