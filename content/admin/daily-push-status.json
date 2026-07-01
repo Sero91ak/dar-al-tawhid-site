@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-01T10:00:11.273Z",
+  "updatedAt": "2026-07-01T10:05:10.875Z",
   "usersChecked": 17,
-  "duaCandidates": 17,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 17,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 17,
   "errors": 0,
   "dailyContentDate": "2026-07-01",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Krankheit"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 17,
-      "contentId": "sunnah-005",
-      "recipients": "4b22bb6b-5b22-4531-861f-8ae30de85d32",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
