@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex, follow">
-  <title>DAR AL TAWḤID - Wasiyyah-Assistent</title>
+  <title>DAR AL TAWḤID - Wasiyyah-Assistent V2</title>
   <style>
     :root{--bg:#f7f0df;--paper:#fffaf0;--ink:#142f2a;--muted:#655d4d;--gold:#b68b3e;--teal:#0e4038;--teal2:#123f52;--danger:#7f1d1d;--line:rgba(182,139,62,.36);--soft:rgba(14,64,56,.08);--shadow:0 24px 70px rgba(33,27,13,.13)}
     html[data-wa-theme=dark]{--bg:#0b1110;--paper:#141b18;--ink:#fff3d8;--muted:#c9bda2;--gold:#d0b166;--teal:#18241f;--teal2:#293b32;--danger:#f0a8a8;--line:rgba(208,177,102,.30);--soft:rgba(208,177,102,.08);--shadow:0 24px 70px rgba(0,0,0,.36)}
@@ -52,11 +52,11 @@
   <main class="page">
     <header class="header">
       <button class="btn back" type="button" data-action="app-back">← Zurück</button>
-      <div><p class="kicker">DAR AL TAWḤID · Test-App</p><h1>Wasiyyah-Assistent</h1><p>Private islamische Wasiyyah-Erklärung Schritt für Schritt erstellen.</p></div>
+      <div><p class="kicker">DAR AL TAWḤID · Test-App · V2</p><h1>Wasiyyah-Assistent</h1><p>Private islamische Wasiyyah-Erklärung Schritt für Schritt erstellen.</p></div>
     </header>
 
     <section class="panel hero" id="startPanel">
-      <div><p class="kicker">Islamisches Testament</p><h2>Geführter KI-Chat mit Quellen, Prüfung und PDF-Ausgabe</h2><p>Der Assistent fragt alle wichtigen Punkte ab: Schulden, Amānāt, Familie, Wasiyyah bis 1/3, Janāzah nach Sunnah und Ablehnung unbelegter Zeremonien.</p><p>Diese Funktion ist zuerst nur für die Test-App bestimmt. Sie erstellt eine private islamische Wasiyyah-Erklärung und ersetzt keine staatliche Rechtsberatung.</p></div>
+      <div><p class="kicker">Islamisches Testament</p><h2>Geführter Assistent mit Pflichtprüfung, Quellen und PDF-Ausgabe</h2><p>Der Assistent fragt alle wichtigen Punkte ab: Schulden, Amānāt, Familie, Wasiyyah bis 1/3, Janāzah nach Sunnah und Ablehnung unbelegter Zeremonien.</p><p>V2 bleibt zuerst nur in der Test-App. Fehlende Pflichtangaben werden erkannt, bevor der Assistent weitergeht.</p></div>
       <div class="hero-actions"><button class="btn primary" type="button" data-action="start-chat">Wasiyyah beginnen</button><button class="btn secondary" type="button" data-action="show-evidence">Beweise & Hinweise</button><button class="btn secondary" type="button" data-action="load-draft">Entwurf fortsetzen</button></div>
     </section>
 
@@ -93,7 +93,10 @@
       ["Schulden und Rechte anderer Menschen","Schulden, Amānāt und Rechte anderer Menschen müssen besonders sorgfältig erfasst werden.","Jāmiʿ at-Tirmidhī 1078; Ṣaḥīḥ al-Bukhārī 2449."],
       ["Unterschied der Religion","Der Unterschied der Religion wird im islamischen Erbrecht als Erbhindernis behandelt. Praktische Umsetzung muss separat geprüft werden.","Ṣaḥīḥ al-Bukhārī 6764; Ṣaḥīḥ Muslim."],
       ["Stiefkinder erben nicht automatisch","Stiefkinder erben islamisch nicht automatisch über Farāʾiḍ, solange kein anerkannter Erbgrund vorliegt.","Farāʾiḍ-Grundlagen in den Fiqh-Kapiteln."],
-      ["Janāzah nach Sunnah","Waschung, Kafan, Janāzah-Gebet und Beerdigung sollen nach Qurʾān und Sunnah erfolgen. Unbelegte Zeremonien werden abgelehnt.","Ṣaḥīḥ Muslim 970a; Ṣaḥīḥ Muslim 969a; Ṣaḥīḥ al-Bukhārī 1294."]
+      ["Janāzah nach Sunnah","Waschung, Kafan, Janāzah-Gebet und Beerdigung sollen nach Qurʾān und Sunnah erfolgen. Unbelegte Zeremonien werden abgelehnt.","Ṣaḥīḥ Muslim 970a; Ṣaḥīḥ Muslim 969a; Ṣaḥīḥ al-Bukhārī 1294."],
+      ["Zakāh, Nadhr und Kaffārah","Offene religiöse Pflichten mit finanzieller Bedeutung müssen als prüfpflichtig erfasst werden, wenn sie unklar sind.","Fiqh-Prüfpunkt: konkrete Umsetzung fachkundig prüfen lassen."],
+      ["Deutsche Formwirksamkeit","Diese private islamische Erklärung ersetzt keine staatliche Rechtsberatung und keine gesetzliche Formprüfung.","Prüfhinweis: Testament/Erbrecht in Deutschland separat rechtlich prüfen."],
+      ["Vormundschaft und Kinder","Wünsche zur Vormundschaft werden als private islamische Empfehlung formuliert und nicht als verbindliche staatliche Entscheidung ausgegeben.","Prüfhinweis: staatliches Sorgerecht separat beachten."]
     ];
     const phases = [
       ["intro","Einführung",null],["personal","Persönliche Angaben","personal"],["faith","Glaube & Grundlage","faithDeclaration"],["family","Familie & mögliche Erben","family"],["debts","Schulden & offene Rechte","debts"],["amanat","Amānāt","amanat"],["assets","Vermögen & Dokumente","assets"],["religious","Zakāh & religiöse Pflichten","religiousObligations"],["bequests","Wasiyyah bis 1/3","bequests"],["janazah","Janāzah nach Sunnah","janazah"],["bidah","Keine Bidʿah/Zeremonien","bidahRestrictions"],["children","Kinder/Vormundschaft","guardianship"],["contacts","Ansprechpartner/Wasiyy","contacts"],["private","Private Hinweise","privateNotes"],["review","Prüfung",null]
@@ -116,6 +119,15 @@
       review:["Wir sind bei der Prüfung angekommen. Klicke auf Zusammenfassung, prüfe alle Angaben und bearbeite den Entwurf vor der PDF-Erstellung.",""]
     };
     const emptyDraft = () => ({personal:"",faithDeclaration:"",family:"",debts:"",amanat:"",assets:"",religiousObligations:"",bequests:"",janazah:"",bidahRestrictions:"",guardianship:"",contacts:"",privateNotes:"",reviewFlags:[],finalText:"",history:[],phaseIndex:0});
+    const REQUIRED_LABELS = {
+      personal:["vollständiger Name","Geburtsdatum","Geburtsort","Adresse/Wohnort","Ort der Erstellung"],
+      family:["Ehestand","leibliche Kinder oder keine Kinder","Eltern leben oder verstorben","Geschwister/Stiefkinder/Nichtmuslime falls vorhanden"],
+      debts:["klare Angabe zu Schulden/offenen Rechten"],
+      amanat:["klare Angabe zu Amānāt/anvertrauten Dingen"],
+      bequests:["keine Wasiyyah oder Zweck/Empfänger/Anteil"],
+      janazah:["Bestätigung der Janāzah-Wünsche"],
+      bidah:["Bestätigung zu Bidʿah/Zeremonien"]
+    };
     let state = emptyDraft();
     const $ = s => document.querySelector(s);
     const panels = {start:$("#startPanel"),evidence:$("#evidencePanel"),chat:$("#chatPanel"),summary:$("#summaryPanel")};
@@ -146,7 +158,8 @@
     function merge(oldVal,answer){return oldVal?oldVal+"\n\nErgänzung:\n"+answer:answer}
     function flag(text){if(!state.reviewFlags.includes(text))state.reviewFlags.push(text)}
     function applyFlags(key,answer){const low=answer.toLowerCase();if(key==="religious"&&(low.includes("unklar")||low.includes("nicht sicher")))flag("Religiöse Pflichten/Zakāh/Nadhr/Kaffārah prüfen lassen.");if(key==="bequests"&&(low.includes("erbe")||low.includes("ehefrau")||low.includes("kind")||low.includes("sohn")||low.includes("tochter")))flag("Wasiyyah zugunsten eines möglichen Erben prüfen. Grundsatz: keine Wasiyyah für einen Erben ohne nähere Prüfung/Zustimmung.");if(key==="family"&&(low.includes("nichtmuslim")||low.includes("nicht muslim")||low.includes("kafir")||low.includes("kāfir")))flag("Unterschied der Religion im islamischen Erbrecht und praktische Umsetzung separat prüfen.");if(key==="family"&&low.includes("stief"))flag("Stiefkinder erben islamisch nicht automatisch. Versorgung über erlaubte Wasiyyah bis 1/3 oder Schenkung zu Lebzeiten prüfen.");if(key==="children"&&answer.trim())flag("Vormundschaft/Sorgerecht als privater Wunsch formulieren und staatliche Umsetzung separat prüfen.")}
-    function handle(answer){const p=current();addMessage("user",answer,"");if(p[2]){state[p[2]]=merge(state[p[2]],answer);applyFlags(p[0],answer)}if(state.phaseIndex<phases.length-1){state.phaseIndex++;ask();save(false)}else showSummary()}
+    function missingForPhase(key,answer){const low=answer.toLowerCase();const lines=answer.split(/\n|,|;/).map(x=>x.trim()).filter(Boolean);const hasNone=/\b(nein|keine|kein|nichts|nicht vorhanden)\b/.test(low);if(key==="intro"&&!/(beginn|start|ja|weiter)/.test(low))return "Schreibe bitte kurz „beginnen“, damit klar ist, dass wir die private Wasiyyah-Erklärung starten sollen.";if(key==="personal"&&lines.length<4)return "Ich habe noch nicht genug persönliche Angaben erkannt. Bitte ergänze mindestens: "+REQUIRED_LABELS.personal.join(", ")+".";if(key==="family"){const missing=[];if(!/(verheiratet|ledig|ehe|frau|mann|geschieden|verwitwet)/.test(low))missing.push("Ehestand");if(!/(kind|kinder|sohn|söhne|soehne|tochter|töchter|toechter|keine kinder)/.test(low))missing.push("leibliche Kinder oder keine Kinder");if(!/(mutter|vater|eltern|leben|verstorben)/.test(low))missing.push("Eltern leben oder verstorben");if(missing.length)return "Für die spätere Farāʾiḍ-Prüfung fehlen noch: "+missing.join(", ")+". Bitte ergänze diese Angaben."}if((key==="debts"||key==="amanat")&&!hasNone&&answer.length<18)return "Bitte gib eine klare Angabe: entweder „keine bekannt“ oder beschreibe die offenen Punkte genauer.";if(key==="bequests"&&!hasNone&&answer.length<20)return "Bitte nenne Zweck/Empfänger/Anteil oder schreibe klar, dass keine freiwillige Wasiyyah gewünscht ist.";if((key==="janazah"||key==="bidah")&&!/(ja|bestätige|bestaetige|ablehnen|keine|nach sunnah|alles)/.test(low))return "Bitte bestätige diesen Abschnitt ausdrücklich oder schreibe deine Einschränkungen dazu.";return ""}
+    function handle(answer){const p=current();addMessage("user",answer,"");const missing=missingForPhase(p[0],answer);if(missing){addMessage("assistant",missing,"V2-Pflichtprüfung: Der Assistent geht erst weiter, wenn die nötigen Angaben klar sind.");save(false);return}if(p[2]){state[p[2]]=merge(state[p[2]],answer);applyFlags(p[0],answer)}if(state.phaseIndex<phases.length-1){state.phaseIndex++;ask();save(false)}else showSummary()}
     function save(show){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));if(show)toast("Entwurf lokal gespeichert.")}
     function load(){const raw=localStorage.getItem(STORAGE_KEY);if(!raw){toast("Kein lokaler Entwurf gefunden.");return}try{state={...emptyDraft(),...JSON.parse(raw)};showPanel("chat");renderProgress();renderMessages();const p=current();$("#phaseKicker").textContent="Phase "+(state.phaseIndex+1)+" von "+phases.length;$("#phaseTitle").textContent=p[1];toast("Entwurf geladen.")}catch(e){toast("Entwurf konnte nicht geladen werden.")}}
     function clearDraft(){if(!confirm("Lokalen Wasiyyah-Entwurf wirklich löschen?"))return;localStorage.removeItem(STORAGE_KEY);state=emptyDraft();$("#chatMessages").innerHTML="";renderProgress();showPanel("start");toast("Entwurf gelöscht.")}
