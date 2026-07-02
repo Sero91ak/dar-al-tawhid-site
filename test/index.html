@@ -8122,7 +8122,7 @@ function trimPostsCacheForQuota(list,max=POSTS_CACHE_QUOTA_MAX){return [...(Arra
 function postFileSortRank(name){return postSeriesRank({id:name,_sourceFile:name,title:name})}
 function compactPostFileMapEntry(entry){if(!entry)return null;return{sha:String(entry.sha||""),parseVersion:entry.parseVersion||POST_PARSE_VERSION}}
 function persistPostFileMap(fileMap){const compact={};Object.keys(fileMap||{}).forEach(name=>{compact[name]=compactPostFileMapEntry(fileMap[name])});setJson(POST_FILE_MAP_KEY,compact)}
-function persistPostsCache(){if(!posts.length)return;if(!setJson(CACHE_KEY,posts))setJson(CACHE_KEY,trimPostsCacheForQuota(posts))}
+function persistPostsCache(){if(!posts.length)return;if(!setJson(CACHE_KEY,posts))setJson(CACHE_KEY,trimPostsCacheForQuota(posts));else{try{localStorage.removeItem(CACHE_KEY_LEGACY)}catch(e){}}}
 function postFromCachedFile(cached,fileName){if(!Array.isArray(cached)||!fileName)return null;const base=fileName.replace(/\.md$/,"");return cached.find(p=>p._sourceFile===fileName||String(p.id)===base)||null}
 function postStillInIndex(post,names){if(!post||!names||!names.size)return false;const sf=String(post._sourceFile||"");if(sf&&names.has(sf))return true;const id=String(post.id||"");if(!id)return false;for(const n of names){if(n.replace(/\.md$/,"")===id)return true}return false}
 function filterPostsByFileIndex(list,names){return(Array.isArray(list)?list:[]).filter(p=>postStillInIndex(p,names))}
@@ -8729,7 +8729,6 @@ const DAR_SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?loca
 const DAR_NOTIFICATION_ICON_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_ICON}`;
 const DAR_NOTIFICATION_BADGE_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_BADGE}`;
 const PUSH_HEALTH_INTERVAL_MS=20*60*1000;
-const LEGACY_PRAYER_TAGS=["prayer_location_mode","prayer_site","prayer_source","prayer_version","push_site"];
 let pushHealthTimer=null;
 let pushHealthRunning=false;
 function darNotificationPayload(options={}){const base={icon:options.icon||DAR_NOTIFICATION_ICON,badge:options.badge||DAR_NOTIFICATION_BADGE,...options};if(isAndroidDevice()){delete base.image;delete base.largeIcon}return base}
