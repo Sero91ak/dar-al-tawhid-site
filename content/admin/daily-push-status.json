@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-02T10:54:54.492Z",
+  "updatedAt": "2026-07-02T11:20:16.174Z",
   "usersChecked": 17,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 17,
+  "sent": 17,
   "skipped": 0,
   "duplicates": 17,
   "errors": 0,
@@ -24,5 +24,15 @@
     "category": "Reise"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 17,
+      "contentId": "tazkiyyah-beginnt-mit-rechenschaft-224",
+      "recipients": "6e26fa11-5c76-46dc-b2fc-9d7516865214",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
