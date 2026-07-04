@@ -20,12 +20,14 @@ links:
     url: "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%B9%D8%B1%D8%B4_%D9%88%D9%85%D8%A7_%D8%B1%D9%88%D9%8A_%D9%81%D9%8A%D9%87#:~:text=%D9%88%D8%A3%D8%AC%D9%85%D8%B9%20%D8%A7%D9%84%D8%AE%D9%84%D9%82%20%D8%AC%D9%85%D9%8A%D8%B9%D8%A7,%D9%84%D8%A7%20%D9%8A%D8%AE%D8%B1%D8%AC%D9%88%D9%86%20%D9%85%D9%86%20%D8%B9%D9%84%D9%85%D9%87"
   - label: "→ Bild-Scan"
     url: "/assets/sources/abu-ja-far-muhammad-ibn-uthman-ibn-abi-shaybah/kitab-al-arsh/abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-442-uluw-ist-img-4107.jpeg"
+  - label: "→ Bild-Scan"
+    url: "/assets/sources/abu-ja-far-muhammad-ibn-uthman-ibn-abi-shaybah/kitab-al-arsh/abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-439-uluw-ist-img-4107.jpeg"
 logo: "logo-black.png"
 feed:
   enabled: true
-  image: "/assets/sources/abu-ja-far-muhammad-ibn-uthman-ibn-abi-shaybah/kitab-al-arsh/abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-442-uluw-ist-img-4107.jpeg"
-  originalImage: "/assets/sources/abu-ja-far-muhammad-ibn-uthman-ibn-abi-shaybah/kitab-al-arsh/abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-442-uluw-ist-img-4107.jpeg"
-  alt: "Bildbeitrag zu: 📖 الله ist über Seinem Thron"
+  image: "/assets/posts/abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-439/feed-preview.jpg"
+  originalImage: "/assets/posts/abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-439/feed-original.jpg"
+  alt: "Bildbeitrag zu: الله ist über Seinem Thron"
   shareEnabled: true
 ---
 
@@ -41,4 +43,3 @@ feed:
 
 🌙 **Fazit:**  
 Die ʿAqīdah der Salaf bestätigt die Erhabenheit von الله über Seiner Schöpfung: über den Himmeln und über dem Thron, getrennt von der Schöpfung – während Sein Wissen alles umfasst.
-
