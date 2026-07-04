@@ -195,6 +195,20 @@
     return s;
   }
 
+  function safeDomImageUrl(u) {
+    try {
+      var src = normalizeBgAssetUrl(u);
+      if (!src) return '';
+      var url = src.indexOf('/') === 0
+        ? new URL(src, global.location.origin)
+        : new URL(src, global.location.href);
+      if (!/^https?:$/i.test(url.protocol)) return '';
+      return url.href;
+    } catch (e) {
+      return '';
+    }
+  }
+
   function bgImageUrl(bg, mobile) {
     if (!bg) return '';
     var u = mobile ? (bg.srcMobile || bg.thumbnail || bg.src) : (bg.src || bg.srcMobile || bg.thumbnail);
@@ -2465,7 +2479,8 @@
       var idx = (parseInt(el.getAttribute('data-sf-bg-idx') || '0', 10) || 0) + 1;
       if (idx < list.length) {
         el.setAttribute('data-sf-bg-idx', String(idx));
-        var next = list[idx];
+        var next = safeDomImageUrl(list[idx]);
+        if (!next) return '';
         if (el.classList.contains('sf-post__bg--photo')) {
           el.style.backgroundImage = 'url(' + next + ')';
           el.setAttribute('data-sf-bg-src', next);
