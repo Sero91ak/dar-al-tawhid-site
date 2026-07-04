@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v185";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v186";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -10343,7 +10343,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v185";
+const APP_BUILD_ID="app-shell-v186";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -11083,6 +11083,18 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       banner.classList.remove('is-app-version');
       bannerMode = null;
     }
+    function handleBootVersionMismatch(event) {
+      var detail = event && event.detail ? event.detail : {};
+      remoteBuildId = String(detail.buildId || window.__darRemoteBuildId || '').trim();
+      if (!remoteBuildId) return;
+      window.__darRemoteBuildId = remoteBuildId;
+      setHomeRefreshHint(true);
+      if (shouldSuppressVersionBanner(remoteBuildId)) {
+        hideAllBanners();
+        return;
+      }
+      showVersionBanner();
+    }
     async function checkForUpdates() {
       if (isChecking || !navigator.onLine) return;
       isChecking = true;
@@ -11162,6 +11174,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBannerActivate(); }
         });
       }
+      window.addEventListener('dar:version-mismatch', handleBootVersionMismatch);
+      if (window.__darAppVersionAvailable && window.__darRemoteBuildId) handleBootVersionMismatch({ detail: { buildId: window.__darRemoteBuildId } });
       setTimeout(function() { checkForUpdates(); }, 12000);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { checkForUpdates(); });
