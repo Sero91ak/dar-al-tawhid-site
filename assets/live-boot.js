@@ -56,16 +56,22 @@
       })
       .then(function (remote) {
         if (!remote || !remote.buildId || String(remote.buildId) === local) return;
-        var key = "darBootReload" + remote.buildId;
+        var key = "darBootRefresh" + remote.buildId;
         if (sessionStorage.getItem(key)) return;
         sessionStorage.setItem(key, "1");
+        window.__darRemoteBuildId = String(remote.buildId);
+        window.__darAppVersionAvailable = true;
+        try {
+          window.dispatchEvent(new CustomEvent("dar:version-mismatch", {
+            detail: { buildId: String(remote.buildId), localBuildId: local }
+          }));
+        } catch (e) {}
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker.getRegistration("/").then(function (reg) {
             if (reg && reg.active) reg.active.postMessage({ type: "HARD_REFRESH" });
+            if (reg && typeof reg.update === "function") reg.update().catch(function () {});
           });
         }
-        var base = isTest ? "/test/" : location.pathname || "/";
-        location.replace(base + "?live=" + encodeURIComponent(remote.buildId) + location.hash);
       })
       .catch(function () {});
   }
