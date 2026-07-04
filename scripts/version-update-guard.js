@@ -15,6 +15,12 @@ function read(file) {
   return fs.readFileSync(path.join(ROOT, file), "utf8");
 }
 
+function readJsonIfExists(file) {
+  const fullPath = path.join(ROOT, file);
+  if (!fs.existsSync(fullPath)) return null;
+  return JSON.parse(fs.readFileSync(fullPath, "utf8"));
+}
+
 function extractFunctionBody(content, fnName) {
   const startRe = new RegExp(`(?:async )?function ${fnName}\\(`);
   const m = content.match(startRe);
@@ -213,6 +219,7 @@ function runVersionUpdateGuard() {
   const buildMatch = indexHtml.match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
   const testBuildMatch = visitorHtml["test/index.html"].match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
   const version = JSON.parse(read("version.json"));
+  const testVersion = readJsonIfExists("test/version.json") || version;
   if (!buildMatch) {
     fail("index.html: APP_BUILD_ID fehlt");
   } else if (buildMatch[1] !== version.buildId) {
@@ -222,10 +229,10 @@ function runVersionUpdateGuard() {
   }
   if (!testBuildMatch) {
     fail("test/index.html: APP_BUILD_ID fehlt");
-  } else if (testBuildMatch[1] !== version.buildId) {
-    fail(`test/index.html APP_BUILD_ID (${testBuildMatch[1]}) stimmt nicht mit version.json (${version.buildId}) überein`);
+  } else if (testBuildMatch[1] !== testVersion.buildId) {
+    fail(`test/index.html APP_BUILD_ID (${testBuildMatch[1]}) stimmt nicht mit ${testVersion === version ? "version.json" : "test/version.json"} (${testVersion.buildId}) überein`);
   } else {
-    ok(`test/index.html Build-ID synchron: ${version.buildId}`);
+    ok(`test/index.html Build-ID synchron: ${testVersion.buildId}`);
   }
 
   const sw = read("service-worker.js");

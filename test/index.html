@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v185";</script>
-<script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v186";</script>
+<script defer src="/test/assets/live-boot.js?v=186"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
 <title>Dar Test</title>
@@ -7838,7 +7838,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<script src="/assets/premium-feed-app.js?v=83" defer></script>
+<script src="/test/assets/premium-feed-app.js?v=84" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8544,7 +8544,8 @@ function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-na
 function nearestBottomNavIndex(pillCenter,metrics){let best=0,d=Infinity;metrics.forEach((m,i)=>{const dist=Math.abs(m.center-pillCenter);if(dist<d){d=dist;best=i}});return best}
 function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.DARScrollManager?.stableScrollTo?.(0)||window.scrollTo({top:0,behavior:"auto"})))}
 function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;saveNavScroll(currentRoute);const target=tab==="topics"?{view:"topics",value:""}:tab==="feed"?{view:"feed",value:""}:{view:tab,value:""};window.__restoreScrollY=getNavScroll(target);clearNavStack();navigate(target.view,target.value||"",{skipPush:true,noAnim:true})}
-function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route))})}
+function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route))});updateBottomNavPill(route)}
+function updateBottomNavPill(route){const active=bottomNavTabForRoute(route);if(!active)return;const metrics=bottomNavMetrics();const match=metrics.find(item=>item.tab===active);if(!match)return;setBottomNavPill(match.left,match.width,false)}
 function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)}})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
@@ -10343,7 +10344,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v185";
+const APP_BUILD_ID="app-shell-v186";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -11083,6 +11084,18 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       banner.classList.remove('is-app-version');
       bannerMode = null;
     }
+    function handleBootVersionMismatch(event) {
+      var detail = event && event.detail ? event.detail : {};
+      remoteBuildId = String(detail.buildId || window.__darRemoteBuildId || '').trim();
+      if (!remoteBuildId) return;
+      window.__darRemoteBuildId = remoteBuildId;
+      setHomeRefreshHint(true);
+      if (shouldSuppressVersionBanner(remoteBuildId)) {
+        hideAllBanners();
+        return;
+      }
+      showVersionBanner();
+    }
     async function checkForUpdates() {
       if (isChecking || !navigator.onLine) return;
       isChecking = true;
@@ -11162,6 +11175,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBannerActivate(); }
         });
       }
+      window.addEventListener('dar:version-mismatch', handleBootVersionMismatch);
+      if (window.__darAppVersionAvailable && window.__darRemoteBuildId) handleBootVersionMismatch({ detail: { buildId: window.__darRemoteBuildId } });
       setTimeout(function() { checkForUpdates(); }, 12000);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { checkForUpdates(); });
