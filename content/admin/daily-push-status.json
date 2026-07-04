@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-04T08:16:17.526Z",
+  "updatedAt": "2026-07-04T08:20:30.367Z",
   "usersChecked": 17,
-  "duaCandidates": 17,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 17,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 17,
   "errors": 0,
   "dailyContentDate": "2026-07-04",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Moschee"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 17,
-      "contentId": "sunnah-008",
-      "recipients": "6cb598b6-5275-41bc-a335-32ba3890c1d9",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
