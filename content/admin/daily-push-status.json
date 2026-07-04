@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-04T08:20:30.367Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-04T11:15:30.398Z",
   "usersChecked": 17,
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 17,
   "sent": 0,
   "skipped": 0,
   "duplicates": 17,
-  "errors": 0,
+  "errors": 17,
   "dailyContentDate": "2026-07-04",
   "currentRecommendation": {
     "id": "usul-des-manhaj-ahl-al-ahwa-nicht-das-herz-oeffnen-257",
@@ -24,5 +24,15 @@
     "category": "Moschee"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 17,
+      "contentId": "usul-des-manhaj-ahl-al-ahwa-nicht-das-herz-oeffnen-257",
+      "recipients": "7e2a4c5b-777e-4b73-97a4-fcc9134e4f8b",
+      "ok": false,
+      "invalid": 7
+    }
+  ]
 }
