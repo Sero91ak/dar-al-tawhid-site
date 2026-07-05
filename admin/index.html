@@ -1113,6 +1113,14 @@ function stripMarkdownCodeFence(markdown){
   }
   return out;
 }
+function isLikelyFullHtmlDocument(input){
+  const raw=String(input||"").trim();
+  if(!raw)return false;
+  if(/<!doctype\s+html/i.test(raw))return true;
+  if(/^<(html|head|body)\b/i.test(raw))return true;
+  if(/^<html[\s>][\s\S]*<\/html>\s*$/i.test(raw))return true;
+  return false;
+}
 function normalizeMarkdownForUpload(markdown,nextNumber){
   let out=repairYamlFrontmatter(repairMarkdownStructure(stripMarkdownCodeFence(markdown)));
   if(!out)return out;
@@ -3470,6 +3478,7 @@ async function uploadPostViaWorker(){
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
+  if(isLikelyFullHtmlDocument(draftMarkdown)){setUploadStatus("Du hast HTML eingefügt. Bitte hier nur Markdown mit Frontmatter (---) einfügen.");toast("Bitte Markdown statt HTML einfügen");return}
   const slideCheck=window.DARSlidePostParser?window.DARSlidePostParser.validateSlideMarkdown(draftMarkdown):{ok:true,errors:[],warnings:[]};
   if(slideCheck.errors?.length){setUploadStatus(`Slide-Fehler: ${esc(slideCheck.errors.join(" · "))}`);finishPublishTrack("error",slideCheck.errors.join(" · "));return}
   if(slideCheck.warnings?.length)addAdminLog("Slide","Hinweise",slideCheck.warnings.join(" · "));
@@ -3568,6 +3577,7 @@ function setBulkPackStatus(html){const el=document.getElementById("bulkPackStatu
 async function uploadBulkPackViaWorker(){
   if(bulkPackBusy||uploadBusy)return;
   const raw=document.getElementById("bulkPackMarkdownInput")?.value||"";
+  if(isLikelyFullHtmlDocument(raw)){setBulkPackStatus("Du hast HTML eingefügt. Für Sammelpakete bitte nur Markdown-Blöcke verwenden.");toast("Bitte Markdown statt HTML einfügen");return}
   const category=(document.getElementById("bulkCategoryInput")?.value||"").trim();
   const posts=splitBulkMarkdownPostsForPublish(raw).map(md=>applyBulkCategoryToMarkdown(md,category));
   if(!posts.length){setBulkPackStatus("Keine Beiträge erkannt. Prüfberichte/readme werden automatisch übersprungen. Beiträge mit <strong>===</strong> trennen oder Frontmatter nutzen.");toast("Paket leer");return}
