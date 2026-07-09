@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v223';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v225';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -54,6 +54,20 @@ function isPostDataRequest(url) {
 
 function navigationShellKey(url) {
   return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
+}
+
+function storeShellResponse(shellKey, response) {
+  if (!response || !response.ok) return Promise.resolve(response);
+  const copy = response.clone();
+  return caches.open(CACHE_VERSION)
+    .then((cache) => cache.put(shellKey, copy))
+    .catch(() => null)
+    .then(() => response);
+}
+
+function fetchNavigationShell(request, shellKey) {
+  return fetch(request, { cache: 'no-store' })
+    .then((response) => storeShellResponse(shellKey, response));
 }
 
 function parsePostIdFromUrl(rawUrl) {
@@ -202,30 +216,14 @@ self.addEventListener('fetch', (event) => {
   // Admin-App hat eigenen Service Worker unter /admin/ – nicht abfangen.
   if (url.pathname.startsWith('/admin')) return;
 
-  // Navigation: offline-first. Nur echte Shell-Daten aus dem Cache,
-  // Netzwerk dient nur zum stillen Aktualisieren, nicht zum erzwungenen Reload.
+  // Navigation: network-first, damit beim erneuten Oeffnen der App
+  // nicht zuerst eine veraltete App-Huelle angezeigt wird.
   if (request.mode === 'navigate') {
     const shellKey = navigationShellKey(url);
     event.respondWith(
-      caches.match(shellKey).then((cached) => {
-        const updateShell = refreshBypassActive() || !cached;
-        const network = fetch(request, { cache: updateShell ? 'no-store' : 'reload' })
-          .then((response) => {
-            if (response && response.ok) {
-              const copy = response.clone();
-              caches.open(CACHE_VERSION).then((cache) => cache.put(shellKey, copy)).catch(() => null);
-            }
-            return response;
-          })
-          .catch(() => null);
-
-        if (cached) {
-          if (updateShell) network.catch(() => null);
-          return cached;
-        }
-
-        return network.then((response) => response || caches.match('/index.html'));
-      })
+      fetchNavigationShell(request, shellKey)
+        .catch(() => caches.match(shellKey))
+        .then((response) => response || caches.match('/index.html'))
     );
     return;
   }
