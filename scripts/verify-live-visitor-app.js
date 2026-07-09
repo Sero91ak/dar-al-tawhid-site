@@ -2,7 +2,7 @@
 /* Prüft ob die Besucher-App live die erwartete Version ausliefert. */
 
 const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\/$/, "");
-const EXPECT_BUILD = process.env.EXPECT_BUILD || "app-shell-v184";
+const EXPECT_BUILD = process.env.EXPECT_BUILD || "app-shell-v197";
 const EXPECT_ZAKAT = Number(process.env.EXPECT_ZAKAT_VERSION || 18);
 
 async function fetchHtml(url) {

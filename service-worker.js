@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v210';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v223';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -13,6 +13,8 @@ const APP_SHELL = [
   '/manifest-staging.json',
   '/test/manifest.json',
   '/version.json',
+  '/data/quran-search-keywords.json',
+  '/data/quran-search-index.json',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
   '/test-app-icon-512.png',
@@ -200,17 +202,30 @@ self.addEventListener('fetch', (event) => {
   // Admin-App hat eigenen Service Worker unter /admin/ – nicht abfangen.
   if (url.pathname.startsWith('/admin')) return;
 
-  // Navigation: online frisch laden, offline gecachte index.html anzeigen.
+  // Navigation: offline-first. Nur echte Shell-Daten aus dem Cache,
+  // Netzwerk dient nur zum stillen Aktualisieren, nicht zum erzwungenen Reload.
   if (request.mode === 'navigate') {
     const shellKey = navigationShellKey(url);
     event.respondWith(
-      fetch(request, { cache: refreshBypassActive() ? 'no-store' : 'no-cache' })
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(shellKey, copy)).catch(() => null);
-          return response;
-        })
-        .catch(() => caches.match(shellKey).then((cached) => cached || caches.match('/index.html')))
+      caches.match(shellKey).then((cached) => {
+        const updateShell = refreshBypassActive() || !cached;
+        const network = fetch(request, { cache: updateShell ? 'no-store' : 'reload' })
+          .then((response) => {
+            if (response && response.ok) {
+              const copy = response.clone();
+              caches.open(CACHE_VERSION).then((cache) => cache.put(shellKey, copy)).catch(() => null);
+            }
+            return response;
+          })
+          .catch(() => null);
+
+        if (cached) {
+          if (updateShell) network.catch(() => null);
+          return cached;
+        }
+
+        return network.then((response) => response || caches.match('/index.html'));
+      })
     );
     return;
   }
