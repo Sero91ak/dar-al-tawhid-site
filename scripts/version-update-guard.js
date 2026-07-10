@@ -213,6 +213,12 @@ function runVersionUpdateGuard() {
   const buildMatch = indexHtml.match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
   const testBuildMatch = visitorHtml["test/index.html"].match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
   const version = JSON.parse(read("version.json"));
+  let testVersion = version;
+  try {
+    testVersion = JSON.parse(read("test/version.json"));
+  } catch (error) {
+    fail("test/version.json fehlt oder ist ungültig");
+  }
   if (!buildMatch) {
     fail("index.html: APP_BUILD_ID fehlt");
   } else if (buildMatch[1] !== version.buildId) {
@@ -222,10 +228,10 @@ function runVersionUpdateGuard() {
   }
   if (!testBuildMatch) {
     fail("test/index.html: APP_BUILD_ID fehlt");
-  } else if (testBuildMatch[1] !== version.buildId) {
-    fail(`test/index.html APP_BUILD_ID (${testBuildMatch[1]}) stimmt nicht mit version.json (${version.buildId}) überein`);
+  } else if (!testVersion || testBuildMatch[1] !== testVersion.buildId) {
+    fail(`test/index.html APP_BUILD_ID (${testBuildMatch[1]}) stimmt nicht mit test/version.json (${testVersion?.buildId || "unbekannt"}) überein`);
   } else {
-    ok(`test/index.html Build-ID synchron: ${version.buildId}`);
+    ok(`test/index.html Build-ID synchron: ${testVersion.buildId}`);
   }
 
   const sw = read("service-worker.js");
