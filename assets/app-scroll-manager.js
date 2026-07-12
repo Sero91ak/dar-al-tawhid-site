@@ -15,6 +15,7 @@
   var pendingFrame = 0;
   var pendingTimer = 0;
   var pendingToken = 0;
+  var pendingTarget = null;
   var saveTimer = 0;
   var hooks = null;
   var abortBound = false;
@@ -25,6 +26,7 @@
 
   function cancelPendingScroll() {
     pendingToken += 1;
+    pendingTarget = null;
     if (pendingFrame) {
       global.cancelAnimationFrame(pendingFrame);
       pendingFrame = 0;
@@ -50,12 +52,15 @@
     opts = opts || {};
     y = Math.max(0, Number(y) || 0);
     var current = getY();
-    if (Math.abs(current - y) < 1 && !pendingFrame && !pendingTimer && opts.force !== true) return y;
+    if ((pendingFrame || pendingTimer) && pendingTarget != null && Math.abs(pendingTarget - y) < 1) return y;
+    if (opts.force !== true && Math.abs(current - y) < 1 && !pendingFrame && !pendingTimer) return y;
     cancelPendingScroll();
     var token = pendingToken;
+    pendingTarget = y;
     var apply = function () {
       if (token !== pendingToken) return false;
       global.scrollTo({ top: y, behavior: 'auto' });
+      if (!opts.retry) pendingTarget = null;
       return true;
     };
     pendingFrame = global.requestAnimationFrame(function () {
@@ -66,6 +71,7 @@
         pendingTimer = global.setTimeout(function () {
           pendingTimer = 0;
           apply();
+          pendingTarget = null;
         }, delay);
       }
     });

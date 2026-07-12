@@ -136,82 +136,18 @@
     }
   }
 
-  function findHomeMoreSection() {
-    var sections = document.querySelectorAll("section.home-more-section");
-    for (var i = 0; i < sections.length; i += 1) {
-      var section = sections[i];
-      if (section && (section.querySelector("#homeMoreBody") || /Mehr entdecken/i.test(section.textContent || ""))) {
-        return section;
-      }
-    }
-    return null;
-  }
-
-  function findLatestPostsSection() {
-    var sections = document.querySelectorAll("section.section-block");
-    for (var i = 0; i < sections.length; i += 1) {
-      var section = sections[i];
-      if (section && section.querySelector("#latestGrid")) return section;
-    }
-    for (var j = 0; j < sections.length; j += 1) {
-      var candidate = sections[j];
-      var heading = candidate && candidate.querySelector(".section-head h3");
-      if (heading && /Neueste Beiträge/i.test(heading.textContent || "")) return candidate;
-    }
-    return null;
-  }
-
-  function compactHomeMoreSection() {
-    var section = findHomeMoreSection();
-    if (!section) return;
-
-    var latest = findLatestPostsSection();
-    if (latest && latest.parentNode === section.parentNode && latest !== section) {
-      latest.parentNode.insertBefore(section, latest);
-    }
-
-    if (section.dataset.homeMoreBound === "1") return;
-    section.dataset.homeMoreBound = "1";
-    section.setAttribute("role", "button");
-    section.setAttribute("tabindex", "0");
-    section.setAttribute("aria-label", "Mehr entdecken öffnen");
-    section.style.cursor = "pointer";
-    section.style.minHeight = "0";
-    section.style.height = "auto";
-    section.style.maxHeight = "none";
-    section.style.margin = "10px 0";
-    section.style.padding = "10px 11px";
-    section.style.borderRadius = "16px";
-
-    var head = section.querySelector(".collapsible-head");
-    if (head) {
-      head.style.justifyContent = "space-between";
-      head.style.alignItems = "center";
-      head.style.gap = "10px";
-      head.style.flexWrap = "wrap";
-      head.style.marginBottom = "0";
-    }
-
-    var toggle = section.querySelector('[data-collapse-target="homeMoreBody"]');
-    if (toggle) {
-      toggle.style.marginLeft = "auto";
-      toggle.style.minWidth = "104px";
-      toggle.style.flexShrink = "0";
-    }
-
-    var body = section.querySelector("#homeMoreBody");
-    if (body) body.style.marginTop = "9px";
-
-    section.addEventListener("click", function (event) {
-      if (event.target && event.target.closest && event.target.closest("button,a,input,select,textarea,label")) return;
-      if (toggle && typeof toggle.click === "function") toggle.click();
+  function removeHomeMoreSections() {
+    var selectors = ["section.home-more-section", "section.feature-discovery-section"];
+    var removed = false;
+    selectors.forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (section) {
+        if (section) {
+          section.remove();
+          removed = true;
+        }
+      });
     });
-    section.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        if (toggle && typeof toggle.click === "function") toggle.click();
-      }
-    });
+    return removed;
   }
 
   function scheduleHomeMoreFix() {
@@ -220,7 +156,7 @@
     var done = function () {
       homeMoreScheduled = false;
       try {
-        compactHomeMoreSection();
+        removeHomeMoreSections();
       } catch (e) {}
     };
     if (typeof requestAnimationFrame === "function") requestAnimationFrame(done);
