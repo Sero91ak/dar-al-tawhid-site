@@ -769,11 +769,11 @@
       sessionStorage.removeItem(RETURN_KEY);
       var y = parseInt(sessionStorage.getItem(ANCHOR_KEY) || '0', 10);
       if (y > 0) {
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            window.scrollTo({ top: y, behavior: 'auto' });
-          });
-        });
+        if (global.DARScrollManager && global.DARScrollManager.stableScrollTo) {
+          global.DARScrollManager.stableScrollTo(y, { force: true });
+        } else {
+          window.scrollTo({ top: y, behavior: 'auto' });
+        }
       }
     } catch (e) {}
   }

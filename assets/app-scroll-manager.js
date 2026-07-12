@@ -12,29 +12,64 @@
   var preserveNext = false;
   var scrollTopNext = false;
   var pendingRestore = null;
+  var pendingFrame = 0;
+  var pendingTimer = 0;
+  var pendingToken = 0;
   var saveTimer = 0;
   var hooks = null;
+  var abortBound = false;
 
   function getY() {
     return Math.max(0, global.scrollY || global.document.documentElement.scrollTop || 0);
   }
 
+  function cancelPendingScroll() {
+    pendingToken += 1;
+    if (pendingFrame) {
+      global.cancelAnimationFrame(pendingFrame);
+      pendingFrame = 0;
+    }
+    if (pendingTimer) {
+      global.clearTimeout(pendingTimer);
+      pendingTimer = 0;
+    }
+  }
+
+  function bindScrollAbort() {
+    if (abortBound) return;
+    abortBound = true;
+    var abort = function () {
+      cancelPendingScroll();
+    };
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (type) {
+      global.addEventListener(type, abort, { passive: true, capture: true });
+    });
+  }
+
   function stableScrollTo(y, opts) {
     opts = opts || {};
     y = Math.max(0, Number(y) || 0);
+    var current = getY();
+    if (Math.abs(current - y) < 1 && !pendingFrame && !pendingTimer && opts.force !== true) return y;
+    cancelPendingScroll();
+    var token = pendingToken;
     var apply = function () {
+      if (token !== pendingToken) return false;
       global.scrollTo({ top: y, behavior: 'auto' });
+      return true;
     };
-    apply();
-    global.requestAnimationFrame(function () {
-      global.requestAnimationFrame(function () {
-        apply();
-        if (opts.retry !== false) {
-          global.setTimeout(apply, opts.delay == null ? 50 : opts.delay);
-          global.setTimeout(apply, opts.delay2 == null ? 160 : opts.delay2);
-        }
-      });
+    pendingFrame = global.requestAnimationFrame(function () {
+      pendingFrame = 0;
+      apply();
+      if (opts.retry === true) {
+        var delay = opts.delay == null ? 120 : opts.delay;
+        pendingTimer = global.setTimeout(function () {
+          pendingTimer = 0;
+          apply();
+        }, delay);
+      }
     });
+    return y;
   }
 
   function withScrollPreserved(fn) {
@@ -134,6 +169,7 @@
 
   function initScrollHooks(nextHooks) {
     hooks = nextHooks || null;
+    bindScrollAbort();
     bindScrollSave();
     patchInputFocus();
   }
@@ -141,6 +177,7 @@
   global.DARScrollManager = {
     init: initScrollHooks,
     getY: getY,
+    cancelPendingScroll: cancelPendingScroll,
     stableScrollTo: stableScrollTo,
     withScrollPreserved: withScrollPreserved,
     preserveNextRender: preserveNextRender,
