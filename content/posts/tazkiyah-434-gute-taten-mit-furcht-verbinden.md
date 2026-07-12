@@ -20,7 +20,7 @@ logo: "logo-black.png"
 feed:
   enabled: true
   image: "/assets/posts/al-hasan-al-basri-gute-taten-und-furcht-434/feed-preview.jpg"
-  originalImage: "/assets/posts/al-hasan-al-basri-gute-taten-und-furcht-434/feed-original.jpg"
+  originalImage: "/assets/posts/al-hasan-al-basri-gute-taten-und-furcht-434/feed-original.png"
   alt: "Bildbeitrag zu: 📖 Gute Taten mit Furcht verbinden"
   shareEnabled: true
 ---
@@ -31,4 +31,3 @@ feed:
 
 🌙 **Fazit:**  
 Der Gläubige verlässt sich nicht auf seine Taten, sondern bleibt trotz Gehorsam voller Furcht vor Allāh. Sicherheit bei Sünden ist dagegen ein gefährliches Zeichen.
-

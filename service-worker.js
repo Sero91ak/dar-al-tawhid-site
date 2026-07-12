@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v225';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v227';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -46,6 +46,10 @@ function refreshBypassActive() {
 
 function isFeedAssetRequest(url) {
   return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js' || url.pathname === '/assets/html2canvas.min.js';
+}
+
+function isPinnedLiveBootRequest(url) {
+  return url.hostname === 'cdn.jsdelivr.net' && /\/gh\/Sero91ak\/dar-al-tawhid-site@.+\/assets\/live-boot\.js$/i.test(url.pathname);
 }
 
 function isPostDataRequest(url) {
@@ -215,6 +219,19 @@ self.addEventListener('fetch', (event) => {
 
   // Admin-App hat eigenen Service Worker unter /admin/ – nicht abfangen.
   if (url.pathname.startsWith('/admin')) return;
+
+  // Fest gepinnte CDN-Bootdatei auf die aktuelle Origin-Datei umbiegen.
+  if (isPinnedLiveBootRequest(url)) {
+    event.respondWith(
+      fetch('/assets/live-boot.js', { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) return response;
+          return fetch('/assets/live-boot.js', { cache: 'reload' });
+        })
+        .catch(() => fetch('/assets/live-boot.js'))
+    );
+    return;
+  }
 
   // Navigation: network-first, damit beim erneuten Oeffnen der App
   // nicht zuerst eine veraltete App-Huelle angezeigt wird.

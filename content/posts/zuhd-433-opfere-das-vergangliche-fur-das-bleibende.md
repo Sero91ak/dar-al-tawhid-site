@@ -18,7 +18,7 @@ logo: "logo-black.png"
 feed:
   enabled: true
   image: "/assets/posts/ibn-masud-opfere-vergaengliche-fuer-bleibende-34519-433/feed-preview.jpg"
-  originalImage: "/assets/posts/ibn-masud-opfere-vergaengliche-fuer-bleibende-34519-433/feed-original.jpg"
+  originalImage: "/assets/posts/ibn-masud-opfere-vergaengliche-fuer-bleibende-34519-433/feed-original.png"
   alt: "Bildbeitrag zu: Opfere das Vergängliche für das Bleibende"
   shareEnabled: true
 ---
