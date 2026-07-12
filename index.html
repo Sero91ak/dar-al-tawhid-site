@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v220";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v223";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -8052,6 +8052,167 @@ body.is-home-route .view-head h2{font-size:clamp(25px,6vw,36px)!important;line-h
 .quran-save-ayah-btn{flex:0 0 36px!important;width:36px!important;min-height:32px!important}
 @media(max-width:380px){.quran-mode-tab{font-size:12px!important}.quran-topic-card{grid-template-columns:minmax(0,1fr) 70px!important}.quran-topic-card .quran-topic-open-btn{min-width:70px!important;font-size:11px!important;padding-inline:7px!important}}
 </style>
+<style id="shared-layout-v1">
+:root{
+  --layout-nav-gap:8px;
+  --layout-nav-radius:18px;
+  --layout-nav-min-h:32px;
+  --layout-nav-pad-x:11px;
+  --layout-nav-pad-y:6px;
+  --layout-nav-font-size:11px;
+  --layout-nav-font-weight:850;
+  --layout-nav-line-height:1.1;
+  --layout-nav-actions-width:clamp(196px,54vw,258px);
+  --layout-nav-icon-size:20px;
+  --measure-pad-x:18px;
+  --measure-pad-y:12px;
+  --measure-label-size:10px;
+  --measure-label-gap:8px;
+  --measure-quote-size:12.5px;
+  --measure-quote-line:1.34;
+  --measure-source-size:10px;
+  --measure-source-line:1.2;
+  --measure-source-gap:5px;
+}
+.app-bar{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:var(--layout-nav-gap)!important;
+  margin:0 var(--content-inset,14px) 10px!important;
+  padding:0!important;
+  flex-wrap:nowrap!important;
+  overflow:hidden!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+.app-actions{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:var(--layout-nav-gap)!important;
+  flex:0 0 var(--layout-nav-actions-width)!important;
+  width:var(--layout-nav-actions-width)!important;
+  max-width:var(--layout-nav-actions-width)!important;
+  min-width:0!important;
+  align-items:stretch!important;
+}
+.back-btn,.home-btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  min-height:var(--layout-nav-min-h)!important;
+  padding:var(--layout-nav-pad-y) var(--layout-nav-pad-x)!important;
+  border-radius:999px!important;
+  font-size:var(--layout-nav-font-size)!important;
+  font-weight:var(--layout-nav-font-weight)!important;
+  line-height:var(--layout-nav-line-height)!important;
+  white-space:nowrap!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  flex-shrink:0!important;
+}
+.back-btn .nav-icon,.home-btn .nav-icon,
+.back-btn svg,.home-btn svg{
+  width:var(--layout-nav-icon-size)!important;
+  height:var(--layout-nav-icon-size)!important;
+  flex:0 0 var(--layout-nav-icon-size)!important;
+}
+.back-btn.show,.home-btn.show{display:inline-flex!important}
+.crumb{
+  color:var(--muted)!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1.1!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+}
+body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
+  margin-top:max(12px,env(safe-area-inset-top,0px))!important;
+}
+.isnad{
+  border-top:1px solid var(--line2)!important;
+  background:rgba(0,0,0,.18)!important;
+  padding:var(--measure-pad-y) var(--measure-pad-x) 13px!important;
+}
+.isnad-label{
+  display:flex!important;
+  align-items:center!important;
+  gap:var(--measure-label-gap)!important;
+  color:var(--muted2)!important;
+  text-transform:uppercase!important;
+  letter-spacing:.18em!important;
+  font-size:var(--measure-label-size)!important;
+  font-weight:950!important;
+  line-height:1.08!important;
+}
+.isnad-label:after{
+  content:""!important;
+  height:1px!important;
+  flex:1 1 auto!important;
+  background:linear-gradient(90deg,rgba(210,177,91,.48),transparent)!important;
+}
+.isnad-quote{
+  color:var(--cream)!important;
+  margin-top:7px!important;
+  font-size:var(--measure-quote-size)!important;
+  line-height:var(--measure-quote-line)!important;
+  font-weight:800!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+  text-wrap:pretty!important;
+}
+.isnad-speaker{
+  color:var(--gold2)!important;
+  white-space:nowrap!important;
+  display:inline!important;
+}
+.isnad-words{
+  display:inline!important;
+  text-wrap:pretty!important;
+}
+.isnad-source{
+  color:var(--muted)!important;
+  margin-top:var(--measure-source-gap)!important;
+  font-size:var(--measure-source-size)!important;
+  line-height:var(--measure-source-line)!important;
+  display:block!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+@media(max-width:700px){
+  .app-bar{
+    margin:0 var(--content-inset,14px) 9px!important;
+  }
+  .app-actions{
+    flex:0 0 clamp(184px,52vw,238px)!important;
+    width:clamp(184px,52vw,238px)!important;
+    max-width:clamp(184px,52vw,238px)!important;
+  }
+  .back-btn,.home-btn{
+    min-height:30px!important;
+    padding:5px 9px!important;
+    font-size:10.5px!important;
+  }
+  .isnad{
+    padding:10px 14px 12px!important;
+  }
+  .isnad-quote{
+    font-size:11.5px!important;
+    line-height:1.34!important;
+  }
+  .isnad-source{
+    font-size:9px!important;
+  }
+}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -8080,7 +8241,7 @@ body.is-home-route .view-head h2{font-size:clamp(25px,6vw,36px)!important;line-h
       </div>
       <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro">Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</div></div>
     </header>
-    <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
+    <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
   </section>
   <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div></div>
   <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Neue Beiträge anzeigen">
@@ -10634,7 +10795,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v220";
+const APP_BUILD_ID="app-shell-v223";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -11447,7 +11608,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           setHomeRefreshHint(false);
           hideAllBanners();
         } else {
-          if (shouldSuppressVersionBanner(remoteBuildId, hasWaitingWorker)) {
+          var suppressVersionBanner = shouldSuppressVersionBanner(remoteBuildId) || shouldSuppressVersionBanner(remoteBuildId, hasWaitingWorker);
+          if (suppressVersionBanner) {
             setHomeRefreshHint(false);
             hideAllBanners();
             return;
