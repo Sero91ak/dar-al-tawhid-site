@@ -144,6 +144,27 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
   object-fit:cover!important;
   object-position:center!important;
 }
+html[data-theme] body.is-feed-fullscreen .sf-post--image-feed .sf-post__media--feed-img{
+  display:block!important;
+  position:relative!important;
+  min-height:clamp(220px,48vw,420px)!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-feed-fullscreen .feed-image-frame{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  aspect-ratio:4/5!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-feed-fullscreen .feed-image{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
 :root{
   --feed-col-max:100%;
 }
