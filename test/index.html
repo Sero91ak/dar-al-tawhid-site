@@ -884,6 +884,33 @@ html[data-theme="bordeaux"] .hadith-shell{--hadith-bg:#140b0c;--hadith-panel:#21
 .ilm-empty-hint{padding:14px;border:1px dashed var(--line2);border-radius:18px;color:var(--muted);font-size:11.5px;line-height:1.55}
 .ilm-inline-status{color:var(--muted2);font-size:10.8px}
 @media(max-width:980px){.ilm-grid{grid-template-columns:1fr}.ilm-side{order:2}.ilm-chat-panel{order:1;min-height:auto}}
+body.is-ilm-chat-route{overflow:hidden;padding-bottom:0}
+body.is-ilm-chat-route .app-bar,
+body.is-ilm-chat-route .footer,
+body.is-ilm-chat-route .float-actions,
+body.is-ilm-chat-route #newPostsBanner{display:none!important}
+body.is-ilm-chat-route #appShell{min-height:100dvh}
+body.is-ilm-chat-route #appView.view{padding:0!important;margin:0!important;max-width:none!important;height:calc(100dvh - 78px);overflow:hidden}
+.ilm-chat-shell{--ilm-bg:#071629;--ilm-panel:#0a1b30;--ilm-soft:#0d233c;--ilm-user:#173553;--ilm-input:#102a46;--ilm-text:#f5f0e6;--ilm-muted:#b6bfca;--ilm-accent:#d4bc78;--ilm-line:rgba(212,188,120,.16);height:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:radial-gradient(circle at 18% 0%,rgba(212,188,120,.10),transparent 34%),linear-gradient(180deg,var(--ilm-bg),#061224);color:var(--ilm-text);border-radius:24px 24px 0 0;overflow:hidden}
+[data-theme="light"] .ilm-chat-shell,[data-theme="soft"] .ilm-chat-shell{--ilm-bg:#f5ede6;--ilm-panel:#fbf5ef;--ilm-soft:#f2e7df;--ilm-user:#eadbd2;--ilm-input:#fff9f2;--ilm-text:#251b1b;--ilm-muted:#6b5f5e;--ilm-accent:#9b6f35;--ilm-line:rgba(88,58,36,.16);background:linear-gradient(180deg,var(--ilm-bg),#efe0dc)}
+[data-theme="bordeaux"] .ilm-chat-shell{--ilm-bg:#140b0c;--ilm-panel:#211013;--ilm-soft:#2a1418;--ilm-user:#3a1b22;--ilm-input:#2a1418;--ilm-text:#fff1df;--ilm-muted:#d1b8ad;--ilm-accent:#d5b46f;--ilm-line:rgba(213,180,111,.18);background:radial-gradient(circle at 18% 0%,rgba(213,180,111,.10),transparent 34%),linear-gradient(180deg,#170b0e,#0f0708)}
+.ilm-chat-header{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:8px;min-height:64px;padding:calc(8px + env(safe-area-inset-top,0px)) 12px 8px;border-bottom:1px solid var(--ilm-line);background:color-mix(in srgb,var(--ilm-panel) 92%,transparent);backdrop-filter:blur(12px);position:relative;z-index:4}
+.ilm-icon-btn{width:40px;height:40px;border:1px solid var(--ilm-line);border-radius:999px;background:rgba(255,255,255,.035);color:var(--ilm-text);display:grid;place-items:center;font-size:17px;font-weight:900;cursor:pointer}
+.ilm-header-title{text-align:center;min-width:0}.ilm-header-title b{display:block;font-size:18px;line-height:1.05;color:var(--ilm-text)}.ilm-header-title span{display:block;margin-top:2px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ilm-muted);font-weight:850}
+.ilm-header-actions{display:flex;gap:7px;justify-content:flex-end}
+.ilm-message-list{min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:18px min(18px,4vw) 18px;scrollbar-width:thin}
+.ilm-message-inner{width:min(880px,100%);margin:0 auto;display:grid;gap:16px}
+.ilm-welcome{min-height:100%;display:grid;place-items:center;padding:24px 0}.ilm-welcome-card{width:min(560px,100%);text-align:center;display:grid;gap:14px}.ilm-welcome-logo{width:58px;height:58px;margin:0 auto;border-radius:50%;display:grid;place-items:center;border:1px solid var(--ilm-line);background:rgba(212,188,120,.08);font-size:26px}.ilm-welcome h2{margin:0;font-family:var(--serif);font-size:34px;line-height:1;color:var(--ilm-text)}.ilm-welcome p{margin:0 auto;max-width:470px;color:var(--ilm-muted);font-size:15px;line-height:1.55}.ilm-starter-chips{display:grid;gap:9px;margin-top:4px}.ilm-starter-chip{border:1px solid var(--ilm-line);border-radius:16px;background:rgba(255,255,255,.035);color:var(--ilm-text);min-height:46px;padding:11px 13px;font-size:14px;font-weight:800;text-align:left;cursor:pointer}
+.ilm-user-row{display:flex;justify-content:flex-end}.ilm-user-bubble{max-width:min(84%,620px);padding:11px 14px;border:0;border-radius:20px 20px 6px 20px;background:var(--ilm-user);color:var(--ilm-text);font-size:16px;line-height:1.52;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.ilm-assistant-message{max-width:760px;display:grid;gap:8px}.ilm-assistant-name{font-size:12px;font-weight:900;color:var(--ilm-accent);letter-spacing:.02em}.ilm-answer-text{color:var(--ilm-text);font-size:17px;line-height:1.58;display:grid;gap:10px}.ilm-answer-text p{margin:0}.ilm-answer-note{color:var(--ilm-muted);font-size:14px;line-height:1.5}.ilm-citation{color:var(--ilm-accent);font-weight:900;white-space:nowrap}
+.ilm-answer-toolbar{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}.ilm-action-link{border:1px solid var(--ilm-line);border-radius:999px;background:rgba(255,255,255,.035);color:var(--ilm-text);min-height:34px;padding:7px 11px;font-size:12px;font-weight:850;cursor:pointer}.ilm-action-link.primary{color:var(--ilm-accent);background:rgba(212,188,120,.07)}
+.ilm-loading-row{display:flex;align-items:center;gap:8px;color:var(--ilm-muted);font-size:14px}.ilm-dots{display:inline-flex;gap:4px}.ilm-dots i{width:5px;height:5px;border-radius:50%;background:var(--ilm-accent);opacity:.45;animation:ilmDot 1.2s infinite ease-in-out}.ilm-dots i:nth-child(2){animation-delay:.15s}.ilm-dots i:nth-child(3){animation-delay:.3s}@keyframes ilmDot{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-3px);opacity:.9}}
+.ilm-composer-bar{border-top:1px solid var(--ilm-line);background:color-mix(in srgb,var(--ilm-panel) 94%,transparent);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));position:relative;z-index:5}.ilm-composer-inner{width:min(900px,100%);margin:0 auto;display:grid;grid-template-columns:40px minmax(0,1fr) 44px;gap:8px;align-items:end}.ilm-plus-btn,.ilm-send-icon{height:42px;width:42px;border-radius:999px;border:1px solid var(--ilm-line);background:rgba(255,255,255,.035);color:var(--ilm-text);font-weight:950;cursor:pointer}.ilm-chat-input{min-height:42px;max-height:128px;width:100%;resize:none;overflow:auto;border:1px solid var(--ilm-line);border-radius:22px;background:var(--ilm-input);color:var(--ilm-text);padding:11px 14px;font:500 16px/1.42 var(--sans);outline:none}.ilm-chat-input::placeholder{color:var(--ilm-muted)}.ilm-chat-input:focus{border-color:color-mix(in srgb,var(--ilm-accent) 55%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--ilm-accent) 14%,transparent)}
+.ilm-sheet-backdrop[hidden],.ilm-history-drawer[hidden],.ilm-menu-popover[hidden]{display:none!important}.ilm-sheet-backdrop{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.46);display:grid;align-items:end}.ilm-sheet{max-height:min(78dvh,720px);overflow:auto;border:1px solid var(--ilm-line);border-radius:24px 24px 0 0;background:var(--ilm-panel);color:var(--ilm-text);padding:16px;width:100%;box-sizing:border-box}.ilm-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.ilm-sheet-head h3{margin:0;font-size:18px;color:var(--ilm-text)}.ilm-source-list,.ilm-related-list,.ilm-thread-list{display:grid;gap:10px}.ilm-source-row,.ilm-related-row,.ilm-thread-row-new{border:1px solid var(--ilm-line);border-radius:16px;background:rgba(255,255,255,.035);padding:12px;color:var(--ilm-text);text-align:left}.ilm-source-row b,.ilm-related-row b,.ilm-thread-row-new b{display:block;font-size:14px;line-height:1.3}.ilm-source-row span,.ilm-related-row span,.ilm-thread-row-new span{display:block;margin-top:4px;color:var(--ilm-muted);font-size:12px;line-height:1.45}.ilm-source-row p{margin:8px 0 0;color:var(--ilm-text);font-size:13px;line-height:1.55}.ilm-source-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.ilm-source-actions :where(a,button){border:1px solid var(--ilm-line);border-radius:999px;background:rgba(212,188,120,.07);color:var(--ilm-text);min-height:34px;padding:7px 10px;font-size:12px;font-weight:850;text-decoration:none}
+.ilm-history-drawer{position:fixed;inset:0 auto 0 0;z-index:92;width:min(360px,92vw);background:var(--ilm-panel);color:var(--ilm-text);border-right:1px solid var(--ilm-line);box-shadow:18px 0 60px rgba(0,0,0,.30);padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px));display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:12px}.ilm-drawer-head{display:flex;align-items:center;justify-content:space-between}.ilm-drawer-head h3{margin:0;font-size:18px}.ilm-thread-row-new{cursor:pointer}.ilm-thread-row-new.active{border-color:color-mix(in srgb,var(--ilm-accent) 48%,transparent);background:rgba(212,188,120,.08)}
+.ilm-menu-popover{position:fixed;right:14px;top:calc(68px + env(safe-area-inset-top,0px));z-index:93;width:min(280px,calc(100vw - 28px));border:1px solid var(--ilm-line);border-radius:18px;background:var(--ilm-panel);box-shadow:0 22px 55px rgba(0,0,0,.28);padding:8px;display:grid;gap:4px}.ilm-menu-popover button{border:0;background:transparent;color:var(--ilm-text);padding:10px;border-radius:12px;text-align:left;font-size:13px;font-weight:800}
+@media(min-width:900px){body.is-ilm-chat-route #appView.view{height:calc(100dvh - 84px)}.ilm-chat-shell{border-radius:26px;max-width:1120px;margin:0 auto}.ilm-sheet-backdrop{align-items:center;justify-items:end;padding:24px}.ilm-sheet{width:min(420px,38vw);height:min(82dvh,780px);border-radius:22px}}
+@media(max-width:520px){.ilm-message-list{padding:14px 12px}.ilm-answer-text{font-size:16.5px}.ilm-user-bubble{font-size:15.5px}.ilm-composer-inner{grid-template-columns:36px minmax(0,1fr) 40px}.ilm-plus-btn,.ilm-send-icon{width:38px;height:38px}.ilm-chat-input{font-size:16px}}
 .feature-section{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:0 16px 42px rgba(0,0,0,.18);padding:14px;overflow:hidden}.feature-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}.feature-head h3{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(22px,4vw,32px);line-height:1.1}.feature-head span{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:4px}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature-card{position:relative;min-width:0;border:1px solid rgba(214,180,106,.28);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));padding:12px;display:grid;gap:9px;overflow:hidden}.feature-card-top{display:flex;align-items:flex-start;gap:10px}.feature-icon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(214,180,106,.26);background:rgba(214,180,106,.10);font-size:20px}.feature-card h4{margin:0;color:var(--text);font-size:15px;line-height:1.2;overflow-wrap:anywhere}.feature-card p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.42;overflow-wrap:anywhere}.feature-card-actions{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.feature-open,.feature-pin,.feature-dismiss{min-height:38px;border:1px solid rgba(214,180,106,.28);border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);font-size:12px;font-weight:950;padding:8px 10px}.feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:none!important;text-shadow:none!important}.feature-pin{width:38px;padding:0}.feature-badge{position:absolute;right:10px;top:10px;border:1px solid rgba(214,180,106,.30);border-radius:999px;background:rgba(214,180,106,.12);color:var(--gold);font-size:9px;font-weight:950;padding:3px 7px}.feature-hint{border:1px solid rgba(214,180,106,.34);border-radius:20px;background:linear-gradient(135deg,rgba(214,180,106,.13),rgba(255,255,255,.035));padding:13px;margin-bottom:10px}.feature-hint h3{margin:0;color:var(--text);font-size:18px}.feature-hint p{margin:6px 0 10px;color:var(--muted);font-size:13px;line-height:1.5}.feature-hint-actions{display:flex;gap:8px;flex-wrap:wrap}.more-search{width:100%;min-height:46px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.065);color:var(--text);padding:11px 14px;font:inherit;outline:none}.more-group{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:12px;margin-top:12px}.more-group h3{margin:0 0 9px;color:var(--text);font-size:18px}.more-group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.more-group.is-hidden{display:none!important}.more-feature-row{position:relative;border:1px solid rgba(214,180,106,.22);border-radius:17px;background:rgba(255,255,255,.045);padding:10px;display:flex;gap:9px;align-items:center;min-height:62px}.more-feature-row h4{margin:0;color:var(--text);font-size:13px;line-height:1.2}.more-feature-row p{margin:2px 0 0;color:var(--muted);font-size:10px;line-height:1.25}.more-feature-row.is-hidden{display:none!important}@media(max-width:700px){.feature-section,.more-group{margin-right:50px}.feature-open{min-height:40px}}@media(max-width:430px){.feature-grid,.more-group-grid{grid-template-columns:1fr}.feature-card{padding:11px}.feature-head{display:block}.feature-card-actions{grid-template-columns:1fr 38px}}
 .bottom-nav{--nav-pill-left:5px;--nav-pill-width:64px;position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm);z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:0;padding:5px;border:1px solid rgba(255,255,255,.08);border-radius:27px;background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(10px) saturate(1.08);backdrop-filter:blur(10px) saturate(1.08);box-shadow:0 6px 18px rgba(0,0,0,.14);overflow:hidden;isolation:isolate;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
 #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:max(14px,env(safe-area-inset-left))!important;right:max(14px,env(safe-area-inset-right))!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important}
@@ -8000,11 +8027,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
-<<<<<<< HEAD
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
-=======
-<script src="/assets/premium-feed-app.js?v=86" defer></script>
->>>>>>> 6233f2e4 (Fix broken feed image fallback)
 <script src="/assets/app-scroll-manager.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8373,11 +8396,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-<<<<<<< HEAD
 const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=12;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV1";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
-=======
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV2":"darCachedPostsV11";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV2":"darPostFileMapV9";const POST_PARSE_VERSION=11;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV1";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV1":"darPostsIndexStaleV1";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
->>>>>>> 6233f2e4 (Fix broken feed image fallback)
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV1":"darCurrentUpdatesV1";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -9250,6 +9269,8 @@ function ilmQueryIntent(question,profile){
     wantsSources:/\bquelle\b|\bquellen\b|\bbeleg\b|\bbeweise\b|\bnur quellen\b/.test(raw),
     wantsEarliest:/\bfruh\b|\bfrueh\b|\baltest|\bältest|\bzuerst\b|\bzeitlich\b/.test(raw),
     wantsSimple:/\beinfach\b|\bkurz\b/.test(raw),
+    wantsDefinition:/\bwas bedeutet\b|\bbedeutung\b|\bdefinition\b|\berklar\b|\berklaer\b/.test(raw),
+    tawhidFocus:/\btawhid\b|\btauhid\b/.test(raw),
     minTokenHits:profile.tokens.length>=5?2:1
   };
 }
@@ -9446,7 +9467,15 @@ async function searchIlmKnowledge(question,conversation,options={}){
   const matches=[];
   const pushMatch=(item,match,extraScore=0)=>{
     if(!ilmCanUseMatch(match,intent))return;
-    const score=match.score+extraScore+ilmSourceStrength(item)+ilmPreferredKindBonus(item,intent);
+    const itemHay=normalizeIlmText([item.title,item.speaker,item.work,item.reference,item.excerpt,item.body,(item.contextHints||[]).join(" ")].join(" "));
+    let relevanceAdjust=0;
+    if(intent.tawhidFocus&&intent.wantsDefinition){
+      if(item.kind==="quran")relevanceAdjust-=5.5;
+      if(item.kind==="posts"||item.kind==="athar"||item.kind==="sunnah")relevanceAdjust+=3.2;
+      if(/\btawhid\b|\btauhid\b/.test(itemHay))relevanceAdjust+=4.8;
+      if(/\bbedeutet\b|\bdefinition\b|\ballein\b|\banbetung\b|\bherrschaft\b|\bnamen\b|\beigenschaften\b/.test(itemHay))relevanceAdjust+=3.6;
+    }
+    const score=match.score+extraScore+relevanceAdjust+ilmSourceStrength(item)+ilmPreferredKindBonus(item,intent);
     if(score<ILM_MIN_SCORE)return;
     matches.push({...item,score,_match:match});
   };
@@ -9592,130 +9621,105 @@ function buildIlmAssistantReply(question,matches,mode="normal"){
     sourceHints:matches.slice(0,4).map(item=>[item.speaker,item.work,item.reference,item.title].filter(Boolean).join(" · "))
   };
 }
-function renderIlmSourceLinks(source){
-  const links=[];
-  if(source.route?.view==="post"&&source.postId)links.push(`<button class="ilm-extra-item" type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">→ Beitrag auf DAR AL TAWḤID öffnen</button>`);
-  if(source.route?.view==="dua")links.push(`<button class="ilm-extra-item" type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">→ Duʿāʾ öffnen</button>`);
-  (source.links||[]).forEach(link=>{
-    links.push(`<a class="ilm-extra-item" href="${esc(link.url)}" target="_blank" rel="noopener">→ ${esc(link.label||"Quelle öffnen")}</a>`);
+function ilmFlattenSources(reply){
+  return (reply?.sourceGroups||[]).flatMap(group=>(group.items||[]).map(item=>({...item,groupLabel:group.label})));
+}
+function ilmReferenceMarkers(count){
+  return Array.from({length:Math.min(count,3)},(_,idx)=>`<span class="ilm-citation">[${idx+1}]</span>`).join(" ");
+}
+function renderIlmAnswerText(reply,isFirstAssistant){
+  const parts=[];
+  if(reply?.status==="unavailable"){
+    parts.push(`<p>${esc(reply.intro||"Zu dieser Frage liegt keine ausreichend belegte Fundstelle vor.")}</p>`);
+    if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    return parts.join("");
+  }
+  if(isFirstAssistant&&reply?.intro)parts.push(`<p>${esc(reply.intro)}</p>`);
+  String(reply?.directAnswer||"").split(/\n{2,}/).filter(Boolean).forEach((text,idx)=>{
+    parts.push(`<p>${esc(text)} ${idx<3?`<span class="ilm-citation">[${idx+1}]</span>`:""}</p>`);
   });
-  return links.join("");
+  if(reply?.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+  return parts.join("")||`<p>${esc(reply?.intro||"Keine Antwort vorhanden.")}</p>`;
 }
-function renderIlmSourceCard(source,messageId){
-  const isOpen=Array.isArray(source._openFor)&&source._openFor.includes(messageId);
-  return `<details class="ilm-source-card" data-ilm-source-card="${esc(source.id)}" data-ilm-message="${esc(messageId)}"${isOpen?" open":""}>
-    <summary class="ilm-source-top">
-      <div>
-        <div class="ilm-source-flag">✓ Fundstelle auf DAR AL TAWḤID hinterlegt</div>
-        <strong>${esc(source.speaker||source.title)}</strong>
-        ${source.work?`<div class="ilm-source-ref">${esc(source.work)}</div>`:""}
-      </div>
-      <span class="ilm-source-ref">${esc(source.reference||ilmKindLabel(source.kind))}</span>
-    </summary>
-    <div class="ilm-source-body">
-      ${source.excerpt?`<div class="ilm-source-quote">${esc(ilmQuote(source.excerpt,260))}</div>`:""}
-      ${source.body?`<div class="ilm-source-full">${esc(ilmClip(source.body,720)).replace(/\n/g,"<br>")}</div>`:""}
-      <div class="ilm-source-links">${renderIlmSourceLinks(source)}</div>
-    </div>
-  </details>`;
-}
-function renderIlmAssistantMessage(message){
+function renderIlmAssistantMessage(message,isFirstAssistant=false){
   const reply=message.reply||{};
-  return `<article class="ilm-message-card">
-    <div class="ilm-message-kicker">DAR AL TAWḤID · ʿIlm</div>
-    <h3 class="ilm-answer-title">${esc(reply.title||"Antwort")}</h3>
-    ${reply.intro?`<div class="ilm-answer-block">${esc(reply.intro)}</div>`:""}
-    ${reply.directAnswer?`<div class="ilm-answer-block">${esc(reply.directAnswer).replace(/\n/g,"<br><br>")}</div>`:""}
-    ${reply.explanation?`<div class="ilm-answer-meta">${esc(reply.explanation)}</div>`:""}
-    ${Array.isArray(reply.sourceGroups)&&reply.sourceGroups.length?`<div class="ilm-source-groups">${reply.sourceGroups.map(group=>`<section class="ilm-source-group"><h5>${esc(group.label)}</h5>${group.items.map(source=>renderIlmSourceCard(source,message.id)).join("")}</section>`).join("")}</div>`:""}
-    ${Array.isArray(reply.related)&&reply.related.length?`<div class="ilm-related"><div class="ilm-related-head">Weitere passende Inhalte</div><div class="ilm-related-list">${reply.related.slice(0,4).map(item=>`<button class="ilm-related-btn" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}">${esc(item.title)}</button>`).join("")}</div></div>`:""}
-    <div class="ilm-actions">
-      <div class="ilm-actions-main">
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:short">Kürzer</button>
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:simple">Einfacher</button>
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:long">Ausführlicher</button>
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:proofs">Weitere Beweise</button>
-      </div>
-      <div class="ilm-actions-extra">
-        <button class="ilm-menu-btn" type="button" data-ilm-menu="${esc(message.id)}">⋯</button>
-        <div class="ilm-extra-panel" hidden data-ilm-extra-panel="${esc(message.id)}">
-          <button class="ilm-extra-item" type="button" data-ilm-copy-answer="${esc(message.id)}">Antwort kopieren</button>
-          <button class="ilm-extra-item" type="button" data-ilm-copy-sources="${esc(message.id)}">Quellen kopieren</button>
-          <button class="ilm-extra-item" type="button" data-ilm-share="${esc(message.id)}">Gespräch teilen</button>
-        </div>
-      </div>
+  const sourceCount=ilmFlattenSources(reply).length;
+  const relatedCount=Array.isArray(reply.related)?reply.related.length:0;
+  return `<article class="ilm-assistant-message" data-ilm-assistant="${esc(message.id)}">
+    <div class="ilm-assistant-name">ʿIlm</div>
+    <div class="ilm-answer-text">${renderIlmAnswerText(reply,isFirstAssistant)}</div>
+    <div class="ilm-answer-toolbar">
+      ${sourceCount?`<button class="ilm-action-link primary" type="button" data-ilm-show-sources="${esc(message.id)}">${sourceCount} Quellen · Quellen anzeigen</button>`:""}
+      ${relatedCount?`<button class="ilm-action-link" type="button" data-ilm-show-related="${esc(message.id)}">Verwandte Inhalte anzeigen</button>`:""}
+      <button class="ilm-action-link" type="button" data-ilm-copy-answer="${esc(message.id)}">Kopieren</button>
+      <button class="ilm-action-link" type="button" data-ilm-action="${esc(message.id)}:simple">Einfacher</button>
+      <button class="ilm-action-link" type="button" data-ilm-action="${esc(message.id)}:proofs">Weitere Beweise</button>
+      <button class="ilm-action-link" type="button" data-ilm-share="${esc(message.id)}">Teilen</button>
     </div>
   </article>`;
 }
 function renderIlmMessages(conversation){
   const messages=Array.isArray(conversation?.messages)?conversation.messages:[];
-  if(!messages.length)return `<div class="ilm-empty-state"><div class="ilm-empty-copy">As-salāmu ʿalaikum.<br><br>Stelle deine Frage zu den veröffentlichten Inhalten von DAR AL TAWḤID. Ich durchsuche die vorhandenen Beiträge, Aussagen, Beweise und Quellen und stelle daraus eine nachvollziehbare Antwort zusammen.</div></div>`;
+  if(!messages.length)return renderIlmWelcomeState();
+  let assistantSeen=false;
   return messages.map(message=>{
     if(message.role==="user")return `<div class="ilm-user-row"><div class="ilm-user-bubble">${esc(message.content||"")}</div></div>`;
-    if(message.role==="loading")return `<article class="ilm-loading-card"><div class="ilm-message-kicker">DAR AL TAWḤID · ʿIlm</div><div>Beiträge und Quellen werden durchsucht …</div><div class="ilm-inline-status">Die belegte Antwort wird zusammengestellt …</div></article>`;
-    return renderIlmAssistantMessage(message);
+    if(message.role==="loading")return `<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span><span>Quellen werden geprüft …</span></div>`;
+    const html=renderIlmAssistantMessage(message,!assistantSeen);
+    assistantSeen=true;
+    return html;
   }).join("");
 }
-function renderIlmSidebar(store,conversation){
+function renderIlmWelcomeState(){
   const admin=loadIlmAdminState();
+  return `<div class="ilm-welcome"><section class="ilm-welcome-card">
+    <div class="ilm-welcome-logo" aria-hidden="true">📘</div>
+    <h2>ʿIlm</h2>
+    <p>Frage die veröffentlichten Inhalte, Beweise und Quellen von DAR AL TAWḤĪD.</p>
+    <div class="ilm-starter-chips">${admin.starters.slice(0,3).map(item=>`<button class="ilm-starter-chip" type="button" data-ilm-starter="${esc(item.prompt)}">${esc(item.prompt)}</button>`).join("")}</div>
+  </section></div>`;
+}
+function renderIlmHistoryDrawer(store){
   const threads=store.conversations.slice().sort((a,b)=>Date.parse(b.updatedAt||0)-Date.parse(a.updatedAt||0));
-  return `<aside class="ilm-side">
-    <div class="ilm-thread-row">
-      <button class="ilm-thread-btn" type="button" data-ilm-new>Neues Gespräch</button>
-      <div class="ilm-thread-tools">
-        <button class="ilm-thread-tool" type="button" data-ilm-rename="${esc(conversation?.id||"")}">Umbenennen</button>
-        <button class="ilm-thread-tool" type="button" data-ilm-delete="${esc(conversation?.id||"")}">Löschen</button>
-      </div>
-    </div>
-    <div class="ilm-starters">
-      <h4>Beispielfragen</h4>
-      <div class="ilm-starter-list">${admin.starters.slice(0,3).map(item=>`<button class="ilm-starter-btn" type="button" data-ilm-starter="${esc(item.prompt)}"><b>${esc(item.title)}</b><span>${esc(item.prompt)}</span></button>`).join("")}</div>
-    </div>
-    <div class="ilm-starters">
-      <h4>Gespeicherte Gespräche</h4>
-      <div class="ilm-starter-list">${threads.map(item=>`<button class="ilm-starter-btn${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(new Date(item.updatedAt||item.createdAt||Date.now()).toLocaleString("de-DE"))}</span></button>`).join("")}</div>
-    </div>
+  return `<aside class="ilm-history-drawer" id="ilmHistoryDrawer" hidden>
+    <div class="ilm-drawer-head"><h3>Gespräche</h3><button class="ilm-icon-btn" type="button" data-ilm-close-history>×</button></div>
+    <button class="ilm-action-link primary" type="button" data-ilm-new>Neues Gespräch</button>
+    <div class="ilm-thread-list">${threads.map(item=>`<button class="ilm-thread-row-new${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(new Date(item.updatedAt||item.createdAt||Date.now()).toLocaleString("de-DE"))}</span></button>`).join("")}</div>
   </aside>`;
+}
+function renderIlmMenu(conversation){
+  const id=conversation?.id||"";
+  return `<div class="ilm-menu-popover" id="ilmMenuPopover" hidden>
+    <button type="button" data-ilm-new>Neues Gespräch</button>
+    <button type="button" data-ilm-rename="${esc(id)}">Gespräch umbenennen</button>
+    <button type="button" data-ilm-delete="${esc(id)}">Gespräch löschen</button>
+    <button type="button" data-ilm-share="">Gespräch teilen</button>
+    <button type="button" data-ilm-menu-close>Schließen</button>
+  </div>`;
 }
 function renderIlm(){
   const store=getIlmStore();
   const conversation=getActiveIlmConversation(store);
-  return `${setPageHeader("DAR AL TAWḤID Wissensassistent","Stelle deine Frage zu unseren veröffentlichten Inhalten, Beweisen und Quellen.","ʿIlm")}
-  <section class="ilm-shell">
-    <div class="ilm-hero premium-surface">
-      <div class="ilm-hero-head">
-        <div class="ilm-brand">
-          <div class="ilm-logo">📘</div>
-          <div class="ilm-brand-text">
-            <h3>ʿIlm</h3>
-            <p>DAR AL TAWḤĪD Wissensassistent</p>
-          </div>
-        </div>
-        <div class="ilm-note">Die Antworten werden ausschließlich aus den freigegebenen Inhalten und Quellen von DAR AL TAWḤĪD zusammengestellt.</div>
+  return `<section class="ilm-chat-shell" aria-label="DAR AL TAWḤĪD Wissensassistent">
+    <header class="ilm-chat-header">
+      <button class="ilm-icon-btn" type="button" data-ilm-back aria-label="Zurück">←</button>
+      <div class="ilm-header-title"><b>ʿIlm</b><span>DAR AL TAWḤĪD</span></div>
+      <div class="ilm-header-actions">
+        <button class="ilm-icon-btn" type="button" data-ilm-open-history aria-label="Gesprächsverlauf">☰</button>
+        <button class="ilm-icon-btn" type="button" data-ilm-open-menu aria-label="Menü">⋯</button>
       </div>
-      <div class="ilm-grid">
-        ${renderIlmSidebar(store,conversation)}
-        <section class="ilm-chat-panel">
-          <div class="ilm-chat-head">
-            <div>
-              <strong>${esc(conversation?.title||"Neues Gespräch")}</strong>
-              <div class="ilm-inline-status">Der Verlauf, offene Quellenkarten und dein Entwurf bleiben erhalten.</div>
-            </div>
-          </div>
-          <div class="ilm-chat-log" id="ilmChatLog">${renderIlmMessages(conversation)}</div>
-          <form class="ilm-composer" id="ilmComposer">
-            <div class="ilm-compose-shell">
-              <textarea id="ilmInput" class="ilm-input" rows="3" placeholder="Stelle deine Frage …" spellcheck="true">${esc(conversation?.draft||"")}</textarea>
-              <button class="ilm-send-btn" id="ilmSendBtn" type="submit">Senden</button>
-            </div>
-            <div class="ilm-compose-meta">
-              <span>Nur freigegebene Inhalte und belegte Fundstellen werden verwendet.</span>
-              <button class="ilm-stop-btn" id="ilmStopBtn" type="button" hidden>Antwort stoppen</button>
-            </div>
-          </form>
-        </section>
+    </header>
+    <main class="ilm-message-list" id="ilmChatLog"><div class="ilm-message-inner">${renderIlmMessages(conversation)}</div></main>
+    <form class="ilm-composer-bar" id="ilmComposer">
+      <div class="ilm-composer-inner">
+        <button class="ilm-plus-btn" type="button" aria-label="Weitere Funktionen">+</button>
+        <textarea id="ilmInput" class="ilm-chat-input" rows="1" placeholder="Stelle deine Frage …" spellcheck="true">${esc(conversation?.draft||"")}</textarea>
+        <button class="ilm-send-icon" id="ilmSendBtn" type="submit" aria-label="Senden">↑</button>
       </div>
-    </div>
+    </form>
+    <div class="ilm-sheet-backdrop" id="ilmSheetBackdrop" hidden></div>
+    ${renderIlmHistoryDrawer(store)}
+    ${renderIlmMenu(conversation)}
   </section>`;
 }
 let ilmPendingToken=0;
@@ -9864,30 +9868,87 @@ function openIlmRoute(payload){
     if(route?.view)navigate(route.view,route.value||"");
   }catch(e){}
 }
+function closeIlmSheet(){const host=$("ilmSheetBackdrop");if(host){host.hidden=true;host.innerHTML=""}}
+function renderIlmSourceActions(source){
+  const actions=[];
+  if(source.route?.view)actions.push(`<button type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">Öffnen</button>`);
+  (source.links||[]).forEach(link=>{if(link?.url)actions.push(`<a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.label||"Quelle öffnen")}</a>`)});
+  return actions.length?`<div class="ilm-source-actions">${actions.join("")}</div>`:"";
+}
+function showIlmSources(messageId){
+  const {message}=findIlmMessage(messageId);
+  const sources=ilmFlattenSources(message?.reply||{});
+  const host=$("ilmSheetBackdrop");
+  if(!host)return;
+  host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Quellen">
+    <div class="ilm-sheet-head"><h3>${sources.length} Quellen</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
+    <div class="ilm-source-list">${sources.map((source,idx)=>`<article class="ilm-source-row"><b>${idx+1}. ${esc(source.speaker||source.title||"Fundstelle")}</b><span>${esc([source.groupLabel,source.work,source.reference].filter(Boolean).join(" · "))}</span>${source.excerpt?`<p>${esc(ilmQuote(source.excerpt,360))}</p>`:""}${source.body?`<p>${esc(ilmClip(source.body,520))}</p>`:""}${renderIlmSourceActions(source)}</article>`).join("")||`<div class="ilm-source-row"><b>Keine Quellen</b><span>Für diese Antwort wurden keine Quellenkarten hinterlegt.</span></div>`}</div>
+  </section>`;
+  host.hidden=false;
+  bindIlmSheetEvents();
+}
+function showIlmRelated(messageId){
+  const {message}=findIlmMessage(messageId);
+  const related=Array.isArray(message?.reply?.related)?message.reply.related:[];
+  const host=$("ilmSheetBackdrop");
+  if(!host)return;
+  host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Verwandte Inhalte">
+    <div class="ilm-sheet-head"><h3>Verwandte Inhalte</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
+    <div class="ilm-related-list">${related.map(item=>`<button class="ilm-related-row" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}"><b>${esc(item.title||"Inhalt öffnen")}</b><span>${esc(ilmKindLabel(item.kind))}</span></button>`).join("")||`<div class="ilm-related-row"><b>Keine verwandten Inhalte</b><span>Zu dieser Antwort wurden keine weiteren Inhalte hinterlegt.</span></div>`}</div>
+  </section>`;
+  host.hidden=false;
+  bindIlmSheetEvents();
+}
+function bindIlmSheetEvents(){
+  document.querySelectorAll("[data-ilm-close-sheet]").forEach(btn=>btn.onclick=closeIlmSheet);
+  const host=$("ilmSheetBackdrop");
+  if(host)host.onclick=ev=>{if(ev.target===host)closeIlmSheet()};
+  document.querySelectorAll("[data-ilm-open-route]").forEach(btn=>btn.onclick=ev=>{ev.preventDefault();openIlmRoute(btn.getAttribute("data-ilm-open-route")||"")});
+}
+function autoSizeIlmInput(input){
+  if(!input)return;
+  input.style.height="auto";
+  input.style.height=Math.min(input.scrollHeight,128)+"px";
+}
+function scrollIlmToBottom(force=false){
+  const log=$("ilmChatLog");
+  if(!log)return;
+  const nearBottom=log.scrollHeight-log.scrollTop-log.clientHeight<160;
+  if(force||nearBottom)requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight});
+}
 function bindIlmEvents(){
   if(currentRoute.view!=="ilm")return;
   const input=$("ilmInput");
   if(input){
-    input.oninput=()=>saveIlmDraft(input.value);
-    setTimeout(()=>{const convo=getActiveIlmConversation(getIlmStore());if(convo&&typeof convo.scrollTop==="number"){$("ilmChatLog").scrollTop=convo.scrollTop||0}},0);
+    autoSizeIlmInput(input);
+    input.oninput=()=>{autoSizeIlmInput(input);saveIlmDraft(input.value)};
+    setTimeout(()=>{const convo=getActiveIlmConversation(getIlmStore());const log=$("ilmChatLog");if(convo&&log&&typeof convo.scrollTop==="number")log.scrollTop=convo.scrollTop||0},0);
   }
   const form=$("ilmComposer");
   if(form)form.onsubmit=ev=>{ev.preventDefault();submitIlmQuestion($("ilmInput")?.value||"")};
-  $("ilmStopBtn")&&( $("ilmStopBtn").onclick=()=>stopIlmAnswer() );
+  const hasLoading=Boolean(getActiveIlmConversation(getIlmStore())?.messages?.some(msg=>msg.role==="loading"));
+  const sendBtn=$("ilmSendBtn");
+  if(sendBtn&&hasLoading){sendBtn.textContent="■";sendBtn.onclick=ev=>{ev.preventDefault();stopIlmAnswer()}}
   const log=$("ilmChatLog");
   if(log)log.onscroll=()=>{const convo=getActiveIlmConversation(getIlmStore());if(!convo)return;updateIlmConversation(convo.id,item=>({...item,scrollTop:log.scrollTop}))};
+  document.querySelectorAll("[data-ilm-back]").forEach(btn=>btn.onclick=()=>goBack());
+  document.querySelectorAll("[data-ilm-open-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.removeAttribute("hidden")});
+  document.querySelectorAll("[data-ilm-close-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.setAttribute("hidden","hidden")});
+  document.querySelectorAll("[data-ilm-open-menu]").forEach(btn=>btn.onclick=()=>{const menu=$("ilmMenuPopover");if(menu)menu.hidden=!menu.hidden});
+  document.querySelectorAll("[data-ilm-menu-close]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden")});
   document.querySelectorAll("[data-ilm-starter]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-starter")||""));
   document.querySelectorAll("[data-ilm-thread]").forEach(btn=>btn.onclick=()=>switchIlmConversation(btn.getAttribute("data-ilm-thread")||""));
   document.querySelectorAll("[data-ilm-new]").forEach(btn=>btn.onclick=()=>newIlmConversation());
   document.querySelectorAll("[data-ilm-rename]").forEach(btn=>btn.onclick=()=>renameIlmConversation(btn.getAttribute("data-ilm-rename")||""));
   document.querySelectorAll("[data-ilm-delete]").forEach(btn=>btn.onclick=()=>deleteIlmConversation(btn.getAttribute("data-ilm-delete")||""));
   document.querySelectorAll("[data-ilm-action]").forEach(btn=>btn.onclick=()=>{const [id,mode]=String(btn.getAttribute("data-ilm-action")||"").split(":");submitIlmAction(id,mode)});
+  document.querySelectorAll("[data-ilm-show-sources]").forEach(btn=>btn.onclick=()=>showIlmSources(btn.getAttribute("data-ilm-show-sources")||""));
+  document.querySelectorAll("[data-ilm-show-related]").forEach(btn=>btn.onclick=()=>showIlmRelated(btn.getAttribute("data-ilm-show-related")||""));
   document.querySelectorAll("[data-ilm-open-route]").forEach(btn=>btn.onclick=ev=>{ev.preventDefault();openIlmRoute(btn.getAttribute("data-ilm-open-route")||"")});
   document.querySelectorAll("[data-ilm-copy-answer]").forEach(btn=>btn.onclick=()=>copyIlmAnswer(btn.getAttribute("data-ilm-copy-answer")||""));
   document.querySelectorAll("[data-ilm-copy-sources]").forEach(btn=>btn.onclick=()=>copyIlmSources(btn.getAttribute("data-ilm-copy-sources")||""));
   document.querySelectorAll("[data-ilm-share]").forEach(btn=>btn.onclick=()=>shareIlmConversation(btn.getAttribute("data-ilm-share")||""));
-  document.querySelectorAll("[data-ilm-menu]").forEach(btn=>btn.onclick=()=>{const panel=document.querySelector(`[data-ilm-extra-panel="${btn.getAttribute("data-ilm-menu")}"]`);if(panel)panel.hidden=!panel.hidden});
-  document.querySelectorAll("[data-ilm-source-card]").forEach(card=>card.ontoggle=()=>toggleIlmSourceOpen(card.getAttribute("data-ilm-message")||"",card.getAttribute("data-ilm-source-card")||"",card.open));
+  scrollIlmToBottom(false);
 }
 function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const premium=extraClass.includes("home-direct-pick")?" premium-surface":"";return`<section class="direct-pick-panel ${extraClass}${premium}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch</option>${books}</select></div></section>`}
 function bindDirectPickPanel(){const c=$("directCategory"),s=$("directScholar"),b=$("directBook");if(c){c.onchange=()=>{if(c.value){navigate("topic",c.value);c.selectedIndex=0}}};if(s){s.onchange=()=>{if(s.value){navigate("scholar",s.value);s.selectedIndex=0}}};if(b){b.onchange=()=>{if(b.value){navigate("book",b.value);b.selectedIndex=0}}}}
@@ -11929,7 +11990,7 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false;
 }
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
+function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";const isIlm=route.view==="ilm";document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("is-ilm-chat-route",isIlm);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isIlm){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
     const routeBefore=readRoute();
