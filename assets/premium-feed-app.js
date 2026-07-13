@@ -2198,6 +2198,9 @@
       '.sf-post--image-feed .sf-post__media--feed-img{display:block;position:relative;background:var(--theme-feed-img-fallback,#0a0908);border-top:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);border-bottom:1px solid color-mix(in srgb,var(--theme-border,var(--line)) 65%,transparent);line-height:0;overflow:hidden;min-height:clamp(220px,48vw,420px)}' +
       '.feed-image-frame{position:relative;display:block;width:100%;aspect-ratio:4/5;margin:0;padding:0;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;user-select:none;-webkit-user-select:none;overflow:hidden}' +
       '.feed-image{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:var(--theme-feed-img-fallback,#0a0908);pointer-events:none;-webkit-user-drag:none;user-drag:none}' +
+      '.feed-image-frame.is-broken .feed-image{display:none!important}' +
+      '.feed-image-frame-fallback{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.26));pointer-events:none}' +
+      '.feed-image-frame.is-gradient-fallback .feed-image-frame-fallback,.feed-image-frame.is-broken .feed-image-frame-fallback{background:var(--theme-feed-overlay,linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.26)))}' +
       '.sf-post--image-feed .sf-post__bar{display:flex;align-items:center;gap:6px;padding:8px 12px 10px;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)));flex-wrap:nowrap;position:relative;z-index:20;pointer-events:auto}' +
       '.sf-post--image-feed .sf-post__bar .sf-act{flex:0 0 auto;width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:10px}' +
       '.sf-post--image-feed .sf-post__bar .sf-act .sf-act-label{display:none}' +
@@ -2558,6 +2561,16 @@
     var liked = isLiked(item.uid);
     var eager = cardIdx != null && cardIdx < 3;
     var sub = [item.category, timeAgo(item.date)].filter(Boolean).join(' · ');
+    var bg = selectFeedBackground(item, getThemeKey());
+    var frameStyle = '';
+    if (bg && bg.value) {
+      if (bg.kind === 'image') {
+        frameStyle = 'background-image:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.24)),' + 'url("' + esc(bg.value) + '")';
+        frameStyle += ';background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat';
+      } else {
+        frameStyle = 'background:' + bg.value;
+      }
+    }
     return (
       '<article class="sf-post feed-card sf-post--image-feed" data-feed-card-id="' + esc(item.uid) + '" data-pf-id="' + esc(item.uid) + '" data-post-id="' + esc(item.postId || '') + '" data-pf-target="' + esc(item.target || '') + '" data-pf-type="postFeed" data-pf-post="' + esc(item.postId || '') + '">' +
         '<header class="sf-post__head">' +
@@ -2568,8 +2581,9 @@
           '</div>' +
         '</header>' +
         '<div class="sf-post__media sf-post__media--feed-img">' +
-          '<div class="feed-image-frame" aria-hidden="true">' +
-            '<img class="feed-image" src="' + esc(item.image) + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false">' +
+          '<div class="feed-image-frame' + (bg && bg.kind === 'gradient' ? ' is-gradient-fallback' : '') + '" aria-hidden="true" style="' + esc(frameStyle) + '">' +
+            '<img class="feed-image" src="' + esc(item.image) + '" data-feed-original="' + esc(item.originalImage || item.image || '') + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false" onerror="var img=this;if(img.dataset.feedErrored){img.style.display=\'none\';var frame=img.closest(\'.feed-image-frame\');if(frame)frame.classList.add(\'is-broken\');return;}img.dataset.feedErrored=\'1\';var fallback=img.getAttribute(\'data-feed-original\')||\'\';if(fallback&&fallback!==img.src){img.src=fallback;return;}img.style.display=\'none\';var frame=img.closest(\'.feed-image-frame\');if(frame)frame.classList.add(\'is-broken\');">' +
+            '<div class="feed-image-frame-fallback" aria-hidden="true"></div>' +
           '</div>' +
         '</div>' +
         postFeedBarHtml(item, liked) +
