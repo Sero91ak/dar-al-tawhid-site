@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v228';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v229';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -15,7 +15,6 @@ const APP_SHELL = [
   '/version.json',
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
-  '/data/ilm-knowledge-index.json',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
   '/test-app-icon-512.png',
@@ -46,7 +45,10 @@ function refreshBypassActive() {
 }
 
 function isFeedAssetRequest(url) {
-  return url.pathname === '/assets/premium-feed-app.js' || url.pathname === '/assets/focus-feed-app.js' || url.pathname === '/assets/html2canvas.min.js';
+  return url.pathname === '/assets/premium-feed-app.js'
+    || url.pathname === '/assets/focus-feed-app.js'
+    || url.pathname === '/assets/html2canvas.min.js'
+    || url.pathname.startsWith('/assets/posts/');
 }
 
 function isPinnedLiveBootRequest(url) {
