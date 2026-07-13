@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-13T11:10:47.322Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-13T11:15:47.361Z",
   "usersChecked": 17,
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 17,
   "sent": 0,
   "skipped": 0,
   "duplicates": 17,
-  "errors": 0,
+  "errors": 17,
   "dailyContentDate": "2026-07-13",
   "currentRecommendation": {
     "id": "sifat-allah-yad-adam-001",
@@ -24,5 +24,15 @@
     "category": "Schutz"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 17,
+      "contentId": "sifat-allah-yad-adam-001",
+      "recipients": "af437994-9e4d-410b-b2b4-11e34db9eb9e",
+      "ok": false,
+      "invalid": 8
+    }
+  ]
 }
