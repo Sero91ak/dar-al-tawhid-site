@@ -4,6 +4,12 @@
  */
 import fs from 'fs';
 
+if (String(process.env.CODEX_LIVE_APPROVED || "").trim() !== "1") {
+  throw new Error(
+    "patch-live-feed blockiert: Live-Patch braucht ausdruecklich CODEX_LIVE_APPROVED=1."
+  );
+}
+
 const livePath = 'index.html';
 const testPath = 'test/index.html';
 let live = fs.readFileSync(livePath, 'utf8');
