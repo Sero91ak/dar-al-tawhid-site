@@ -99,6 +99,7 @@
 
   var state = {
     allItems: [],
+    manualItems: [],
     visible: [],
     filter: 'posts',
     offset: 0,
@@ -1614,7 +1615,19 @@
         }
       }
       if (opts.force || !state.allItems.length) state.seed = feedSeed();
-      applyFeedData(mount, [], savedScroll, { force: !!opts.force });
+      fetchManual()
+        .then(function (payload) {
+          var items = Array.isArray(payload && payload.items) ? payload.items : [];
+          state.manualItems = items.map(normalizeManual).filter(Boolean);
+          state.manualLoaded = true;
+        })
+        .catch(function () {
+          state.manualItems = [];
+          state.manualLoaded = true;
+        })
+        .finally(function () {
+          applyFeedData(mount, state.manualItems || [], savedScroll, { force: !!opts.force });
+        });
     });
   }
 
@@ -2115,8 +2128,11 @@
   }
 
   function mergeFeed(pools, manualItems, seed) {
-    var out = (pools.postFeed || []).slice();
+    var out = (pools.postFeed || []).slice().concat(Array.isArray(manualItems) ? manualItems : []);
     out.sort(function (a, b) {
+      var ap = a && a.pinned ? 1 : 0;
+      var bp = b && b.pinned ? 1 : 0;
+      if (bp !== ap) return bp - ap;
       var da = Date.parse(a.date || '') || 0;
       var db = Date.parse(b.date || '') || 0;
       if (db !== da) return db - da;
@@ -3530,7 +3546,7 @@
       if (!isFeedRoute()) return;
       var ctx = getCtx();
       var pools = buildPools(ctx, state.seed);
-      var merged = mergeFeed(pools, [], state.seed);
+      var merged = mergeFeed(pools, state.manualItems || [], state.seed);
       var nextSig = feedItemsSignature(merged);
       if (state._feedSig === nextSig && state.visible.length && global.document.querySelector('#' + MOUNT_ID + ' .sf-feed')) {
         return;
