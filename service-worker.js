@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v227';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v228';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -15,6 +15,7 @@ const APP_SHELL = [
   '/version.json',
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
+  '/data/ilm-knowledge-index.json',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
   '/test-app-icon-512.png',

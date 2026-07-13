@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v227";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v228";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -8369,7 +8369,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV2":"darCachedPostsV11";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV2":"darPostFileMapV9";const POST_PARSE_VERSION=11;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV1";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV1":"darPostsIndexStaleV1";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV2":"darCachedPostsV11";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV2":"darPostFileMapV9";const POST_PARSE_VERSION=11;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV1";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV1":"darPostsIndexStaleV1";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV1":"darCurrentUpdatesV1";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -9139,6 +9139,7 @@ function ilmGuessTitle(text){
   const raw=String(text||"").trim().replace(/\s+/g," ");
   return raw?raw.slice(0,54):"Neues Gespräch";
 }
+const ILM_STOP_WORDS=new Set(["a","ab","aber","als","also","am","an","and","auch","auf","aus","bei","bin","bis","bzw","das","dass","deine","deiner","deinem","deinen","deines","dem","den","der","des","dessen","die","dies","diese","diesem","diesen","dieser","dieses","doch","du","ein","eine","einem","einen","einer","eines","er","es","etwa","euch","euer","fuer","für","gibt","hat","hinter","ich","ihm","ihn","ihr","ihre","ihrem","ihren","ihres","im","in","ist","ja","kein","keine","kann","koennen","können","mit","nach","nicht","noch","nur","oder","sei","seine","seinem","seinen","seiner","seines","sich","sie","sind","so","ueber","über","um","und","uns","unter","vom","von","vor","was","weil","wenn","wer","wie","wir","wird","wo","zu","zum","zur"]);
 function normalizeIlmText(text){
   return String(text||"")
     .toLowerCase()
@@ -9152,11 +9153,23 @@ function normalizeIlmText(text){
     .replace(/shirk/g,"shirk")
     .replace(/taghut|taghoot/g,"taghut")
     .replace(/sahaba/g,"sahabah")
+    .replace(/salaf as salih|salafussalih|salaf us salih/g,"salaf")
+    .replace(/ahlus sunnah|ahl al sunnah|ahl as sunnah/g,"ahlussunnah")
+    .replace(/fiqh/g,"fiqh")
+    .replace(/dua|du'a|duaa/g,"dua")
+    .replace(/athar|athaar|aathar/g,"athar")
+    .replace(/aqidah|aqeedah/g,"aqidah")
+    .replace(/ṣaḥabah|sahabah/g,"sahabah")
     .replace(/[^a-z0-9äöüß\s-]/g," ")
     .replace(/\s+/g," ")
     .trim();
 }
-function ilmTokenize(text){return normalizeIlmText(text).split(/\s+/).filter(Boolean)}
+function ilmTokenize(text){
+  return normalizeIlmText(text)
+    .split(/\s+/)
+    .map(token=>token.trim())
+    .filter(token=>token&&(token.length>1||/\d/.test(token))&&!ILM_STOP_WORDS.has(token));
+}
 function ilmClip(text,max=280){
   const value=String(text||"").replace(/\s+/g," ").trim();
   if(value.length<=max)return value;
@@ -9174,6 +9187,82 @@ function ilmScoreText(query,haystack,weight=1){
   const tokens=ilmTokenize(query);
   tokens.forEach(token=>{if(token&&text.includes(token))score+=2*weight});
   return score;
+}
+function ilmExpandQueryToken(token){
+  const variants=new Set([token]);
+  if(token==="quran")variants.add("koran");
+  if(token==="hadith"){variants.add("hadeeth");variants.add("sunnah")}
+  if(token==="sunnah")variants.add("hadith");
+  if(token==="athar"){variants.add("salaf");variants.add("sahabah")}
+  if(token==="dua")variants.add("bittgebet");
+  if(token==="aqidah"){variants.add("iman");variants.add("glaube")}
+  if(token==="tawhid")variants.add("tauhid");
+  return [...variants];
+}
+function ilmBuildQueryProfile(question){
+  const raw=String(question||"").trim();
+  const normalized=normalizeIlmText(raw);
+  const tokens=ilmTokenize(raw);
+  return {
+    raw,
+    normalized,
+    tokens,
+    variants:[...new Set(tokens.flatMap(ilmExpandQueryToken))]
+  };
+}
+function ilmAnalyzeMatch(profile,haystack,weight=1){
+  const text=normalizeIlmText(haystack);
+  if(!text||!profile?.normalized)return {score:0,matchedTokens:[],phraseHit:false,variantHits:0};
+  const phraseHit=profile.normalized.length>3&&text.includes(profile.normalized);
+  const matchedTokens=[];
+  let variantHits=0;
+  profile.tokens.forEach(token=>{
+    if(token&&text.includes(token))matchedTokens.push(token);
+  });
+  profile.variants.forEach(token=>{
+    if(token&&!matchedTokens.includes(token)&&text.includes(token))variantHits++;
+  });
+  let score=0;
+  if(phraseHit)score+=8.5*weight;
+  score+=matchedTokens.length*2.4*weight;
+  score+=variantHits*0.9*weight;
+  if(profile.tokens.length&&matchedTokens.length===profile.tokens.length)score+=2*weight;
+  return {score,matchedTokens:[...new Set(matchedTokens)],phraseHit,variantHits};
+}
+function ilmQueryIntent(question,profile){
+  const raw=normalizeIlmText(question);
+  const preferredKinds=new Set();
+  if(/\bquran\b|\bvers\b|\bayah\b|\bsurah\b/.test(raw))preferredKinds.add("quran");
+  if(/\bhadith\b|\bsunnah\b|\bbukhari\b|\bmuslim\b/.test(raw))preferredKinds.add("sunnah");
+  if(/\bsahabah\b|\bgefahrt|\bgefahrten\b|\bsalaf\b|\bathar\b|\btabiin\b/.test(raw))preferredKinds.add("athar");
+  if(/\bdua\b|\bbittgebet\b/.test(raw))preferredKinds.add("dua");
+  if(/\bquiz\b/.test(raw))preferredKinds.add("quiz");
+  return {
+    preferredKinds,
+    wantsSources:/\bquelle\b|\bquellen\b|\bbeleg\b|\bbeweise\b|\bnur quellen\b/.test(raw),
+    wantsEarliest:/\bfruh\b|\bfrueh\b|\baltest|\bältest|\bzuerst\b|\bzeitlich\b/.test(raw),
+    wantsSimple:/\beinfach\b|\bkurz\b/.test(raw),
+    minTokenHits:profile.tokens.length>=5?2:1
+  };
+}
+function ilmSourceStrength(item){
+  let score=0;
+  if(item.reference)score+=2.2;
+  if(item.speaker)score+=1;
+  if(item.work)score+=1;
+  if(Array.isArray(item.links)&&item.links.length)score+=0.8;
+  if(item.kind==="quran")score+=2.4;
+  if(item.kind==="sunnah")score+=2;
+  if(item.kind==="athar")score+=1.7;
+  return score;
+}
+function ilmPreferredKindBonus(item,intent){
+  if(!intent?.preferredKinds?.size)return 0;
+  return intent.preferredKinds.has(item.kind)?3.4:-1.1;
+}
+function ilmCanUseMatch(match,intent){
+  if(match.phraseHit)return true;
+  return match.matchedTokens.length>=Math.max(1,intent?.minTokenHits||1);
 }
 function ilmPronounFollowup(text){
   return /\b(dazu|diese|dieser|dieses|ihn|ihm|ihnen|sie|zweite|erste|letzte|quelle|aussage|einfacher|kürzer|ausführlicher|mehr|beweise?)\b/i.test(String(text||""));
@@ -9214,6 +9303,38 @@ async function loadIlmQuizIndex(){
   })();
   return ilmKnowledgeState.quizLoading;
 }
+async function loadIlmKnowledgeIndex(){
+  if(ilmKnowledgeState.serverIndex)return ilmKnowledgeState.serverIndex;
+  if(ilmKnowledgeState.serverLoading)return ilmKnowledgeState.serverLoading;
+  ilmKnowledgeState.serverLoading=(async()=>{
+    try{
+      const response=await fetch(`${ILM_KNOWLEDGE_INDEX_PATH}?v=${Date.now()}`,{cache:"no-store"});
+      if(!response.ok)throw new Error("ʿIlm-Wissensindex konnte nicht geladen werden");
+      const data=await response.json();
+      const entries=Array.isArray(data?.entries)?data.entries:[];
+      const payload={generatedAt:data?.generatedAt||"",entries};
+      ilmKnowledgeState.serverIndex=payload;
+      setJson(ILM_KNOWLEDGE_CACHE_KEY,payload);
+      return payload;
+    }catch(e){
+      const cached=getJson(ILM_KNOWLEDGE_CACHE_KEY,null);
+      ilmKnowledgeState.serverIndex=cached&&Array.isArray(cached.entries)?cached:{generatedAt:"",entries:[]};
+      return ilmKnowledgeState.serverIndex;
+    }finally{
+      ilmKnowledgeState.serverLoading=null;
+    }
+  })();
+  return ilmKnowledgeState.serverLoading;
+}
+function ilmPostKind(post){
+  const inferred=sourceType(post);
+  if(inferred==="quran"||inferred==="sunnah"||inferred==="athar")return inferred;
+  const hay=normalizeIlmText([post.category,post.topic,post.book,post.source,(post.tags||[]).join(" "),post.title].join(" "));
+  if(/\bsahabah\b|\bsalaf\b|\bathar\b|\btabi/.test(hay))return "athar";
+  if(/\bsunnah\b|\bhadith\b|\bbukhari\b|\bmuslim\b/.test(hay))return "sunnah";
+  if(/\bquran\b|\btafsir\b/.test(hay))return "quran";
+  return "posts";
+}
 function ilmPostSource(post,score){
   const links=(Array.isArray(post.links)?post.links:[]).map((entry,idx)=>({
     id:`link-${post.id}-${idx}`,
@@ -9223,7 +9344,7 @@ function ilmPostSource(post,score){
   })).filter(link=>/^https?:/i.test(link.url));
   return {
     id:`post-${post.id}`,
-    kind:sourceType(post)==="quran"?"quran":sourceType(post)==="sunnah"?"sunnah":sourceType(post)==="athar"?"athar":"posts",
+    kind:ilmPostKind(post),
     title:post.title||"Beitrag",
     speaker:post.scholar||post.author||"",
     work:post.book||"",
@@ -9310,51 +9431,85 @@ function ilmQuizSource(row,score){
 async function searchIlmKnowledge(question,conversation,options={}){
   const admin=loadIlmAdminState();
   const query=buildIlmEffectiveQuery(question,conversation);
-  const queryTokens=ilmTokenize(query);
-  if(!queryTokens.length)return [];
+  const profile=ilmBuildQueryProfile(query);
+  if(!profile.tokens.length)return [];
+  const intent=ilmQueryIntent(question,profile);
   const excludedDocs=new Set(admin.excludedDocIds||[]);
   const matches=[];
-  posts.forEach(post=>{
-    if(!post||excludedDocs.has(String(post.id)))return;
-    const haystack=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ");
-    const score=ilmScoreText(query,haystack,1.25)+ilmScoreText(query,[post.title,post.source].join(" "),1.5);
-    if(score>=ILM_MIN_SCORE)matches.push(ilmPostSource(post,score));
-  });
-  DUAS.forEach(dua=>{
-    const haystack=[dua.title,dua.cat,dua.occasion,dua.de,dua.src,dua.type].join(" ");
-    const score=ilmScoreText(query,haystack,1.1)+ilmScoreText(query,dua.title,1.6);
-    if(score>=ILM_MIN_SCORE)matches.push(ilmDuaSource(dua,score));
-  });
+  const pushMatch=(item,match,extraScore=0)=>{
+    if(!ilmCanUseMatch(match,intent))return;
+    const score=match.score+extraScore+ilmSourceStrength(item)+ilmPreferredKindBonus(item,intent);
+    if(score<ILM_MIN_SCORE)return;
+    matches.push({...item,score,_match:match});
+  };
   try{
-    const quranIndex=await loadQuranSearchIndex();
-    (quranIndex?.verses||[]).forEach(row=>{
-      const haystack=[row.surahName,row.ar,row.tr,row.de,(row.keywordLabels||[]).join(" ")].join(" ");
-      const score=ilmScoreText(query,haystack,1.15)+ilmScoreText(query,[row.surahName,row.de].join(" "),1.35);
-      if(score>=ILM_MIN_SCORE)matches.push(ilmQuranSource(row,score));
-    });
+    const prebuilt=await loadIlmKnowledgeIndex();
+    if(Array.isArray(prebuilt?.entries)&&prebuilt.entries.length){
+      prebuilt.entries.forEach(entry=>{
+        if(!entry||excludedDocs.has(String(entry.documentId||entry.postId||entry.id||"")))return;
+        const haystack=[entry.title,entry.speaker,entry.work,entry.reference,entry.excerpt,entry.body,(entry.contextHints||[]).join(" ")].join(" ");
+        const match=ilmAnalyzeMatch(profile,haystack,1.15);
+        pushMatch({
+          ...entry,
+          links:Array.isArray(entry.links)?entry.links:[],
+          contextHints:Array.isArray(entry.contextHints)?entry.contextHints:[]
+        },match,Number(entry.sourceQuality||0));
+      });
+    }
   }catch(e){}
-  try{
-    await ensureHadithLibrary();
-    (Array.isArray(hadithSearchIndex)?hadithSearchIndex:[]).forEach(row=>{
-      const haystack=[row.bookTitle,row.chapterTitle,row.sectionTitle,row.german,row.searchText,(row.tags||[]).join(" ")].join(" ");
-      const score=ilmScoreText(query,haystack,1.1)+ilmScoreText(query,row.german,1.3);
-      if(score>=ILM_MIN_SCORE)matches.push(ilmHadithSource(row,score));
+  if(!matches.length){
+    posts.forEach(post=>{
+      if(!post||excludedDocs.has(String(post.id)))return;
+      const item=ilmPostSource(post,0);
+      const haystack=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ");
+      const match=ilmAnalyzeMatch(profile,haystack,1.25);
+      const focus=ilmAnalyzeMatch(profile,[post.title,post.source].join(" "),1.3);
+      pushMatch(item,{score:match.score+focus.score,matchedTokens:[...new Set(match.matchedTokens.concat(focus.matchedTokens))],phraseHit:match.phraseHit||focus.phraseHit,variantHits:match.variantHits+focus.variantHits},0.9);
     });
-  }catch(e){}
-  try{
-    const quizRows=await loadIlmQuizIndex();
-    quizRows.forEach(row=>{
-      const haystack=[row.question,(row.answers||[]).join(" "),row.explanation,row.source,row.category,row.topic,row.level].join(" ");
-      const score=ilmScoreText(query,haystack,0.9)+ilmScoreText(query,row.question,1.2);
-      if(score>=ILM_MIN_SCORE)matches.push(ilmQuizSource(row,score));
+    DUAS.forEach(dua=>{
+      const item=ilmDuaSource(dua,0);
+      const haystack=[dua.title,dua.cat,dua.occasion,dua.de,dua.src,dua.type].join(" ");
+      const match=ilmAnalyzeMatch(profile,haystack,1.1);
+      const focus=ilmAnalyzeMatch(profile,dua.title,1.45);
+      pushMatch(item,{score:match.score+focus.score,matchedTokens:[...new Set(match.matchedTokens.concat(focus.matchedTokens))],phraseHit:match.phraseHit||focus.phraseHit,variantHits:match.variantHits+focus.variantHits},0.3);
     });
-  }catch(e){}
+    try{
+      const quranIndex=await loadQuranSearchIndex();
+      (quranIndex?.verses||[]).forEach(row=>{
+        const item=ilmQuranSource(row,0);
+        const haystack=[row.surahName,row.ar,row.tr,row.de,(row.keywordLabels||[]).join(" ")].join(" ");
+        const match=ilmAnalyzeMatch(profile,haystack,1.15);
+        const focus=ilmAnalyzeMatch(profile,[row.surahName,row.de].join(" "),1.2);
+        pushMatch(item,{score:match.score+focus.score,matchedTokens:[...new Set(match.matchedTokens.concat(focus.matchedTokens))],phraseHit:match.phraseHit||focus.phraseHit,variantHits:match.variantHits+focus.variantHits},0.8);
+      });
+    }catch(e){}
+    try{
+      await ensureHadithLibrary();
+      (Array.isArray(hadithSearchIndex)?hadithSearchIndex:[]).forEach(row=>{
+        const item=ilmHadithSource(row,0);
+        const haystack=[row.bookTitle,row.chapterTitle,row.sectionTitle,row.german,row.searchText,(row.tags||[]).join(" ")].join(" ");
+        const match=ilmAnalyzeMatch(profile,haystack,1.1);
+        const focus=ilmAnalyzeMatch(profile,row.german,1.25);
+        pushMatch(item,{score:match.score+focus.score,matchedTokens:[...new Set(match.matchedTokens.concat(focus.matchedTokens))],phraseHit:match.phraseHit||focus.phraseHit,variantHits:match.variantHits+focus.variantHits},0.7);
+      });
+    }catch(e){}
+    try{
+      const quizRows=await loadIlmQuizIndex();
+      quizRows.forEach(row=>{
+        const item=ilmQuizSource(row,0);
+        const haystack=[row.question,(row.answers||[]).join(" "),row.explanation,row.source,row.category,row.topic,row.level].join(" ");
+        const match=ilmAnalyzeMatch(profile,haystack,0.9);
+        const focus=ilmAnalyzeMatch(profile,row.question,1.15);
+        pushMatch(item,{score:match.score+focus.score,matchedTokens:[...new Set(match.matchedTokens.concat(focus.matchedTokens))],phraseHit:match.phraseHit||focus.phraseHit,variantHits:match.variantHits+focus.variantHits},0.2);
+      });
+    }catch(e){}
+  }
   const deduped=new Map();
   matches.forEach(item=>{
     const prev=deduped.get(item.id);
     if(!prev||item.score>prev.score)deduped.set(item.id,item);
   });
-  const list=[...deduped.values()].sort((a,b)=>b.score-a.score||String(a.title).localeCompare(String(b.title),"de"));
+  const list=[...deduped.values()].sort((a,b)=>b.score-a.score||ilmGroupRank(a.kind)-ilmGroupRank(b.kind)||String(a.title).localeCompare(String(b.title),"de"));
   const filtered=list.filter(item=>(admin.excludedSourceIds||[]).includes(item.id)!==true);
   return filtered.slice(0,options.limit||ILM_MAX_MATCHES);
 }
@@ -9400,11 +9555,17 @@ function buildIlmFallbackReply(question,matches){
     sourceHints:[]
   };
 }
+function ilmAnswerLeadLine(source,mode="normal"){
+  const head=[source.speaker,source.work].filter(Boolean).join(" · ")||source.title;
+  const quote=ilmClip(source.excerpt||source.body,mode==="long"?240:160);
+  return quote?`${head}: ${quote}`:head;
+}
 function buildIlmAssistantReply(question,matches,mode="normal"){
   if(!matches.length)return buildIlmFallbackReply(question,[]);
+  if(Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches);
   const groups=buildIlmSourceGroups(matches);
   const directSources=matches.slice(0,Math.min(mode==="long"?4:3,matches.length));
-  const directAnswer=directSources.map(source=>`${source.speaker?`${source.speaker}${source.work?` · ${source.work}`:""}`:source.title}: ${ilmClip(source.excerpt||source.body,mode==="long"?260:170)}`).join("\n\n");
+  const directAnswer=directSources.map(source=>ilmAnswerLeadLine(source,mode)).join("\n\n");
   const explanation=mode==="simple"
     ?"Die vorhandenen Fundstellen zeigen denselben Kernpunkt aus den bereits veröffentlichten Inhalten von DAR AL TAWḤID."
     :mode==="long"
@@ -11541,7 +11702,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v227";
+const APP_BUILD_ID="app-shell-v228";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
