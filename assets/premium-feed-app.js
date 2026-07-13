@@ -1937,8 +1937,8 @@
       .map(function (entry, i) {
         var p = entry.post;
         var meta = entry.meta;
-        var preview = String(meta.image || '');
-        var original = String(meta.originalImage || preview.replace(/feed-preview(\.[a-z0-9]+)?$/i, 'feed-original$1'));
+        var preview = feedImageUrl(String(meta.image || ''), p);
+        var original = feedImageUrl(String(meta.originalImage || String(meta.image || '').replace(/feed-preview(\.[a-z0-9]+)?$/i, 'feed-original$1')), p);
         return {
           uid: 'post-feed-' + p.id,
           type: 'postFeed',
@@ -1955,6 +1955,15 @@
           date: p.date || ''
         };
       });
+  }
+
+  function feedImageUrl(url, post) {
+    var raw = String(url || '').trim();
+    if (!raw) return '';
+    if (!/^\/assets\//i.test(raw)) return raw;
+    var stamp = String(post && (post.date || post.id || post._sourceFile || '') || '').trim();
+    if (!stamp) return raw;
+    return raw + (raw.indexOf('?') >= 0 ? '&' : '?') + 'v=' + encodeURIComponent(stamp);
   }
 
   function buildPools(ctx, seed) {
@@ -2570,12 +2579,42 @@
         '</header>' +
         '<div class="sf-post__media sf-post__media--feed-img">' +
           '<div class="feed-image-frame" aria-hidden="true">' +
-            '<img class="feed-image" src="' + esc(item.image) + '" data-feed-original="' + esc(item.originalImage || item.image || '') + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false" onerror="var img=this;if(img.dataset.feedErrored){img.style.display=\'none\';var frame=img.closest(\'.feed-image-frame\');if(frame)frame.classList.add(\'is-broken\');return;}img.dataset.feedErrored=\'1\';var fallback=img.getAttribute(\'data-feed-original\')||\'\';if(fallback&&fallback!==img.src){img.src=fallback;return;}img.style.display=\'none\';var frame=img.closest(\'.feed-image-frame\');if(frame)frame.classList.add(\'is-broken\');">' +
+            '<img class="feed-image" src="' + esc(item.image) + '" data-feed-preview="' + esc(item.image || '') + '" data-feed-original="' + esc(item.originalImage || item.image || '') + '" alt="' + esc(item.alt || item.title || '') + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" draggable="false">' +
           '</div>' +
         '</div>' +
         postFeedBarHtml(item, liked) +
       '</article>'
     );
+  }
+
+  function bindFeedImageFallbacks(mount) {
+    if (!mount) return;
+    mount.querySelectorAll('.feed-image').forEach(function (img) {
+      if (!img || img.dataset.feedBound === '1') return;
+      img.dataset.feedBound = '1';
+      var markBroken = function () {
+        img.style.display = 'none';
+        var frame = img.closest('.feed-image-frame');
+        if (frame) frame.classList.add('is-broken');
+      };
+      var clearBroken = function () {
+        img.style.display = '';
+        var frame = img.closest('.feed-image-frame');
+        if (frame) frame.classList.remove('is-broken');
+      };
+      img.addEventListener('load', clearBroken, { passive: true });
+      img.addEventListener('error', function () {
+        var preview = String(img.getAttribute('data-feed-preview') || '').trim();
+        var original = String(img.getAttribute('data-feed-original') || '').trim();
+        var current = String(img.getAttribute('src') || '').trim();
+        if (preview && original && current === preview && original !== preview) {
+          img.setAttribute('src', original);
+          return;
+        }
+        markBroken();
+      });
+      if (img.complete && img.naturalWidth > 0) clearBroken();
+    });
   }
 
   function cardHtml(item, cardIdx) {
@@ -3330,6 +3369,7 @@
     list.innerHTML = state.visible.map(function (item, idx) { return cardHtml(item, idx); }).join('') +
       (state.done ? '' : '<div class="sf-loader" id="pfLoader">Weitere Beiträge laden…</div>');
     bindList(mount);
+    bindFeedImageFallbacks(mount);
     var hasSceneCards = state.visible.some(function (it) { return it && it.type !== 'postFeed'; });
     if (hasSceneCards) {
       bindSceneBackgrounds(mount);
