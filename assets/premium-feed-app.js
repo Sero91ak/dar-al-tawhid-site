@@ -38,6 +38,7 @@
     telegram: '@dar_al_tauhid',
     signature: 'by Serhat Abu Malik'
   };
+  var FEED_GITHUB_RAW_ROOT = 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main';
   var FEED_BG_POOL = [];
   var FEED_BG_CACHE_VER = 0;
   var FEED_BG_RECENT = [];
@@ -99,7 +100,6 @@
 
   var state = {
     allItems: [],
-    manualItems: [],
     visible: [],
     filter: 'posts',
     offset: 0,
@@ -1615,19 +1615,7 @@
         }
       }
       if (opts.force || !state.allItems.length) state.seed = feedSeed();
-      fetchManual()
-        .then(function (payload) {
-          var items = Array.isArray(payload && payload.items) ? payload.items : [];
-          state.manualItems = items.map(normalizeManual).filter(Boolean);
-          state.manualLoaded = true;
-        })
-        .catch(function () {
-          state.manualItems = [];
-          state.manualLoaded = true;
-        })
-        .finally(function () {
-          applyFeedData(mount, state.manualItems || [], savedScroll, { force: !!opts.force });
-        });
+      applyFeedData(mount, [], savedScroll, { force: !!opts.force });
     });
   }
 
@@ -1979,6 +1967,14 @@
     return raw + (raw.indexOf('?') >= 0 ? '&' : '?') + 'v=' + encodeURIComponent(stamp);
   }
 
+  function feedImageRawFallback(url) {
+    var raw = String(url || '').trim();
+    if (!raw) return '';
+    var clean = raw.replace(/[?#].*$/, '');
+    if (!/^\/assets\//i.test(clean)) return '';
+    return FEED_GITHUB_RAW_ROOT + clean;
+  }
+
   function buildPools(ctx, seed) {
     var hijri = hijriLabel();
     var posts = (ctx.posts || []).slice().sort(comparePosts);
@@ -2128,11 +2124,8 @@
   }
 
   function mergeFeed(pools, manualItems, seed) {
-    var out = (pools.postFeed || []).slice().concat(Array.isArray(manualItems) ? manualItems : []);
+    var out = (pools.postFeed || []).slice();
     out.sort(function (a, b) {
-      var ap = a && a.pinned ? 1 : 0;
-      var bp = b && b.pinned ? 1 : 0;
-      if (bp !== ap) return bp - ap;
       var da = Date.parse(a.date || '') || 0;
       var db = Date.parse(b.date || '') || 0;
       if (db !== da) return db - da;
@@ -2623,8 +2616,24 @@
         var preview = String(img.getAttribute('data-feed-preview') || '').trim();
         var original = String(img.getAttribute('data-feed-original') || '').trim();
         var current = String(img.getAttribute('src') || '').trim();
+        var previewClean = preview.replace(/[?#].*$/, '');
+        var originalClean = original.replace(/[?#].*$/, '');
+        var currentClean = current.replace(/[?#].*$/, '');
         if (preview && original && current === preview && original !== preview) {
           img.setAttribute('src', original);
+          return;
+        }
+        if (current && /[?#]/.test(current) && (/^\/assets\//i.test(currentClean) || /^https?:\/\/[^/]+\/assets\//i.test(currentClean))) {
+          img.setAttribute('src', currentClean);
+          return;
+        }
+        var rawFallback = '';
+        if (currentClean === previewClean && previewClean) rawFallback = feedImageRawFallback(previewClean);
+        if (!rawFallback && currentClean === originalClean && originalClean) rawFallback = feedImageRawFallback(originalClean);
+        if (!rawFallback) rawFallback = feedImageRawFallback(currentClean);
+        if (rawFallback && current !== rawFallback && img.dataset.feedRawTried !== rawFallback) {
+          img.dataset.feedRawTried = rawFallback;
+          img.setAttribute('src', rawFallback);
           return;
         }
         markBroken();
@@ -3546,7 +3555,7 @@
       if (!isFeedRoute()) return;
       var ctx = getCtx();
       var pools = buildPools(ctx, state.seed);
-      var merged = mergeFeed(pools, state.manualItems || [], state.seed);
+      var merged = mergeFeed(pools, [], state.seed);
       var nextSig = feedItemsSignature(merged);
       if (state._feedSig === nextSig && state.visible.length && global.document.querySelector('#' + MOUNT_ID + ' .sf-feed')) {
         return;
