@@ -6,6 +6,12 @@
 const fs = require("fs");
 const path = require("path");
 
+if (String(process.env.CODEX_LIVE_APPROVED || "").trim() !== "1") {
+  throw new Error(
+    "sync-live-from-test blockiert: Live-Sync braucht ausdruecklich CODEX_LIVE_APPROVED=1."
+  );
+}
+
 const ROOT = path.join(__dirname, "..");
 const liveOld = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
 let out = fs.readFileSync(path.join(ROOT, "test/index.html"), "utf8");
