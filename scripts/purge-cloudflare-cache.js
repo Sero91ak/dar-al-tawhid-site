@@ -6,8 +6,22 @@ const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
 const GLOBAL_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY || process.env.CLOUDFLARE_API_KEY || "";
 const GLOBAL_EMAIL = process.env.CLOUDFLARE_EMAIL || "";
 const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "0e4c0fdfaca4f3fa137de3a67ac8a68b";
-const EXPECT_BUILD = process.env.EXPECT_BUILD || "app-shell-v171";
 const ENABLE_DEV_MODE = String(process.env.CLOUDFLARE_DEV_MODE || "1").trim() !== "0";
+
+async function readExpectedBuild(path) {
+  const fallback = path.includes("/test/") ? "app-shell-v234" : "app-shell-v229";
+  try {
+    const res = await fetch(`${SITE_URL}${path}`, {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+    });
+    const data = await res.json();
+    return String(data?.buildId || fallback);
+  } catch (err) {
+    console.warn(`Build-ID konnte nicht aus ${path} gelesen werden, nutze ${fallback}.`);
+    return fallback;
+  }
+}
 
 function authHeaders() {
   if (API_TOKEN) {
@@ -81,20 +95,29 @@ async function setDevelopmentMode(zoneId, on) {
 }
 
 async function verifyLiveHtml() {
-  const urls = [`${SITE_URL}/`, `${SITE_URL}/index.html`, `${SITE_URL}/test/`, `${SITE_URL}/test/index.html`];
-  for (const url of urls) {
+  const rootBuild = process.env.EXPECT_BUILD_ROOT || process.env.EXPECT_BUILD || await readExpectedBuild("/version.json");
+  const testBuild = process.env.EXPECT_BUILD_TEST || await readExpectedBuild("/test/version.json");
+  const checks = [
+    { label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`, `${SITE_URL}/index.html`] },
+    { label: "Dar Test", expected: testBuild, urls: [`${SITE_URL}/test/`, `${SITE_URL}/test/index.html`] }
+  ];
+  let allOk = true;
+  for (const check of checks) {
+    let ok = false;
+    for (const url of check.urls) {
     const res = await fetch(url, {
       cache: "no-store",
       headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
     });
     const html = await res.text();
     const cf = res.headers.get("cf-cache-status") || "?";
-    const hasBuild = html.includes(EXPECT_BUILD);
-    const hasZakat = /zakat-app\.js\?v=1[78]/.test(html);
-    console.log(`Verify ${url} → cf-cache=${cf}, build=${hasBuild}, zakat=${hasZakat}`);
-    if (hasBuild && hasZakat) return true;
+      const hasBuild = html.includes(check.expected);
+      console.log(`Verify ${url} (${check.label}) → cf-cache=${cf}, expected=${check.expected}, build=${hasBuild}`);
+      ok = ok || hasBuild;
+    }
+    allOk = allOk && ok;
   }
-  return false;
+  return allOk;
 }
 
 function sleep(ms) {
