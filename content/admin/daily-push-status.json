@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-14T11:00:13.031Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-14T12:25:13.053Z",
   "usersChecked": 17,
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 17,
   "sent": 0,
   "skipped": 0,
-  "duplicates": 17,
-  "errors": 0,
+  "duplicates": 0,
+  "errors": 17,
   "dailyContentDate": "2026-07-14",
   "currentRecommendation": {
     "id": "fiqh-takwa-nach-vermogen-001",
@@ -24,5 +24,15 @@
     "category": "Morgen & Abend"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 17,
+      "contentId": "fiqh-takwa-nach-vermogen-001",
+      "recipients": "30e0db00-7397-449f-941b-d55190334915",
+      "ok": false,
+      "invalid": 8
+    }
+  ]
 }
