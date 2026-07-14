@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-07-14T12:25:13.053Z",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-07-14T12:30:13.026Z",
   "usersChecked": 17,
   "duaCandidates": 0,
   "recCandidates": 17,
-  "sent": 0,
+  "sent": 17,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 17,
+  "errors": 0,
   "dailyContentDate": "2026-07-14",
   "currentRecommendation": {
     "id": "fiqh-takwa-nach-vermogen-001",
@@ -31,8 +31,8 @@
       "count": 17,
       "contentId": "fiqh-takwa-nach-vermogen-001",
       "recipients": "30e0db00-7397-449f-941b-d55190334915",
-      "ok": false,
-      "invalid": 8
+      "ok": true,
+      "invalid": 0
     }
   ]
 }
