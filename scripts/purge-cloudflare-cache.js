@@ -95,7 +95,7 @@ async function setDevelopmentMode(zoneId, on) {
 }
 
 async function verifyLiveHtml() {
-  const rootBuild = process.env.EXPECT_BUILD_ROOT || process.env.EXPECT_BUILD || await readExpectedBuild("/version.json");
+  const rootBuild = process.env.EXPECT_BUILD_ROOT || await readExpectedBuild("/version.json");
   const testBuild = process.env.EXPECT_BUILD_TEST || await readExpectedBuild("/test/version.json");
   const checks = [
     { label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`, `${SITE_URL}/index.html`] },
