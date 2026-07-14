@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v232";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v233";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -886,11 +886,14 @@ html[data-theme="bordeaux"] .hadith-shell{--hadith-bg:#140b0c;--hadith-panel:#21
 @media(max-width:980px){.ilm-grid{grid-template-columns:1fr}.ilm-side{order:2}.ilm-chat-panel{order:1;min-height:auto}}
 body.is-ilm-chat-route{overflow:hidden!important;padding:0!important}
 body.is-ilm-chat-route .app-bar,
+body.is-ilm-chat-route .top-shell,
+body.is-ilm-chat-route .isnad,
 body.is-ilm-chat-route .footer,
 body.is-ilm-chat-route .float-actions,
 body.is-ilm-chat-route #newPostsBanner,
 body.is-ilm-chat-route #appChromeDock,
 body.is-ilm-chat-route #bottomNav{display:none!important}
+body.is-ilm-chat-route .app{width:100vw!important;max-width:none!important;min-height:100dvh!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
 body.is-ilm-chat-route #appShell{min-height:100dvh;background:var(--ilm-page-bg,#071629)}
 body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:0!important;overflow:hidden!important;background:var(--ilm-page-bg,#071629)}
 body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-message-bg:#1d1b16;--ilm-assistant-bg:transparent;--ilm-composer-bg:#11100d;--ilm-primary-text:#f7efdf;--ilm-secondary-text:#c6bba7;--ilm-accent:#d6b46a;--ilm-border:rgba(214,180,106,.16);--ilm-sheet-bg:#12110e;--ilm-overlay:rgba(0,0,0,.52)}
@@ -9712,8 +9715,8 @@ function renderIlmWelcomeState(){
   const admin=loadIlmAdminState();
   return `<div class="ilm-welcome"><section class="ilm-welcome-card">
     <div class="ilm-welcome-logo" aria-hidden="true">📘</div>
-    <h2>ʿIlm</h2>
-    <p>Frage die veröffentlichten Inhalte, Beweise und Quellen von DAR AL TAWḤĪD.</p>
+    <h2>Majlis al-ʿIlm</h2>
+    <p>As-Salāmu ʿalaykum. Stelle deine Frage zu den veröffentlichten Inhalten, Beweisen und Quellen von DAR AL TAWḤĪD.</p>
     <div class="ilm-starter-chips">${admin.starters.slice(0,3).map(item=>`<button class="ilm-starter-chip" type="button" data-ilm-starter="${esc(item.prompt)}">${esc(item.prompt)}</button>`).join("")}</div>
   </section></div>`;
 }
@@ -9741,7 +9744,7 @@ function renderIlm(){
   return `<section class="ilm-chat-shell" aria-label="DAR AL TAWḤĪD Wissensassistent">
     <header class="ilm-chat-header">
       <button class="ilm-icon-btn" type="button" data-ilm-back aria-label="Zurück">←</button>
-      <div class="ilm-header-title"><b>ʿIlm</b><span>DAR AL TAWḤĪD</span></div>
+      <div class="ilm-header-title"><b>Majlis al-ʿIlm</b><span>DAR AL TAWḤĪD</span></div>
       <div class="ilm-header-actions">
         <button class="ilm-icon-btn" type="button" data-ilm-open-history aria-label="Gesprächsverlauf">☰</button>
         <button class="ilm-icon-btn" type="button" data-ilm-close aria-label="Chat schließen">×</button>
@@ -11820,7 +11823,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v232";
+const APP_BUILD_ID="app-shell-v233";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
