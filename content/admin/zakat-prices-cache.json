@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-14T09:40:14.528Z",
+  "updatedAt": "2026-07-14T13:00:15.694Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
@@ -35,9 +35,17 @@
   },
   "standardNisabEur": 975.8,
   "lastSuccessAt": "2026-07-14T09:40:14.528Z",
-  "lastError": "",
-  "lastFetchAt": "2026-07-14T09:40:14.528Z",
+  "lastError": "EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB)",
+  "lastFetchAt": "2026-07-14T13:00:15.694Z",
   "fetchLogs": [
+    {
+      "id": "log-1784034015694",
+      "provider": "aurumrates.com",
+      "status": "error",
+      "errorMessage": "EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB)",
+      "fetchedAt": "2026-07-14T13:00:15.694Z",
+      "durationMs": 2324
+    },
     {
       "id": "log-1784022014528",
       "provider": "aurumrates.com",
@@ -526,16 +534,6 @@
       "fetchedAt": "2026-06-29T07:55:33.831Z",
       "durationMs": 890,
       "goldPerGram": 114.96,
-      "silverPerGram": 1.66
-    },
-    {
-      "id": "log-1782718533706",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-06-29T07:35:33.706Z",
-      "durationMs": 750,
-      "goldPerGram": 114.87,
       "silverPerGram": 1.66
     }
   ]
