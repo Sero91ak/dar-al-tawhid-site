@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v229";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v230";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -872,11 +872,12 @@ html[data-theme="bordeaux"] .hadith-shell{--hadith-bg:#140b0c;--hadith-panel:#21
 .ilm-extra-panel[hidden]{display:none}
 .ilm-extra-item{border:0;background:transparent;color:var(--cream);text-align:left;padding:9px 10px;border-radius:12px;font-size:11.5px;font-weight:800;cursor:pointer}
 .ilm-extra-item:hover{background:rgba(239,215,142,.09)}
-.ilm-composer{padding:14px;display:grid;gap:12px}
-.ilm-compose-shell{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end}
-.ilm-input{width:100%;min-height:108px;border:1px solid var(--line2);border-radius:18px;background:rgba(255,255,255,.02);color:var(--cream);padding:13px 14px;font:inherit;line-height:1.6;resize:vertical}
+.ilm-composer{padding:8px 0 0;display:grid;gap:8px;border:0!important;background:transparent!important}
+.ilm-compose-shell{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:7px;align-items:end;border:1px solid var(--line2);border-radius:999px;background:rgba(255,255,255,.035);padding:5px 5px 5px 15px;box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.ilm-input{width:100%;min-height:36px;max-height:104px;border:0;border-radius:18px;background:transparent;color:var(--cream);padding:8px 0;font:500 16px/1.42 var(--sans);resize:none;outline:none;overflow:auto}
 .ilm-input::placeholder{color:var(--muted)}
-.ilm-compose-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ilm-send-btn{width:36px;min-width:36px;height:36px;min-height:36px;padding:0;border-radius:999px}
+.ilm-compose-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 2px}
 .ilm-compose-meta span{color:var(--muted);font-size:11px;line-height:1.45}
 .ilm-loading-card{padding:14px;display:grid;gap:8px}
 .ilm-loading-card b{color:var(--cream);font-size:13px}
@@ -9697,7 +9698,7 @@ function renderIlm(){
           <form class="ilm-composer" id="ilmComposer">
             <div class="ilm-compose-shell">
               <textarea id="ilmInput" class="ilm-input" rows="3" placeholder="Stelle deine Frage …" spellcheck="true">${esc(conversation?.draft||"")}</textarea>
-              <button class="ilm-send-btn" id="ilmSendBtn" type="submit">Senden</button>
+              <button class="ilm-send-btn" id="ilmSendBtn" type="submit" aria-label="Senden">↑</button>
             </div>
             <div class="ilm-compose-meta">
               <span>Nur freigegebene Inhalte und belegte Fundstellen werden verwendet.</span>
@@ -11701,7 +11702,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v229";
+const APP_BUILD_ID="app-shell-v230";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
