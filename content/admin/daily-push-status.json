@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-07-15T13:25:13.059Z",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-07-15T13:30:13.025Z",
   "usersChecked": 18,
   "duaCandidates": 0,
   "recCandidates": 18,
-  "sent": 0,
+  "sent": 18,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 18,
+  "errors": 0,
   "dailyContentDate": "2026-07-15",
   "currentRecommendation": {
     "id": "herzen-und-taten-001",
@@ -31,8 +31,8 @@
       "count": 18,
       "contentId": "herzen-und-taten-001",
       "recipients": "e3bdd4bc-01ab-46dc-9d34-274c518c5676",
-      "ok": false,
-      "invalid": 8
+      "ok": true,
+      "invalid": 0
     }
   ]
 }
