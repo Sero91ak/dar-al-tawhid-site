@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v236";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v237";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -7974,7 +7974,6 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
 }
 
 /* v202 feature-discovery final overrides */
-body.is-home-route .float-actions,body.is-area-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:0 10px 24px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin,.feature-card .feature-dismiss{color:var(--text)!important}
 </style>
@@ -8046,14 +8045,12 @@ window.DAR_ANALYTICS_CONFIG={
 
 
 <style id="feature-final-v202">
-body.is-home-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{color:var(--text)!important;border-color:rgba(214,180,106,.42)!important;background:linear-gradient(135deg,rgba(214,180,106,.18),rgba(255,255,255,.08))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 22px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin{color:var(--text)!important}
 </style>
 
 <style id="feature-layout-v204">
 /* v203: compact full-width feature discovery, no overlap */
-body.is-home-route .float-actions{display:none!important}
 .feature-section,.more-group{width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important;box-sizing:border-box!important}
 .feature-section{padding:12px!important;border-radius:22px!important}
 .feature-head{margin-bottom:9px!important}
@@ -11844,7 +11841,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v236";
+const APP_BUILD_ID="app-shell-v237";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
