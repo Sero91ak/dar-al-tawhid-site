@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v231";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v232";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -8046,7 +8046,9 @@ window.DAR_ANALYTICS_CONFIG={
 
 <style id="home-compact-v205">
 /* v204: compact start dashboard, one recommended block only */
-body.is-home-route .view-head{padding-bottom:8px!important;margin-bottom:10px!important}
+body.is-home-route .app-bar{display:none!important;margin:0!important;min-height:0!important;padding:0!important;overflow:hidden!important}
+body.is-home-route #appView.view{padding-top:2px!important;margin-top:0!important}
+body.is-home-route .view-head{padding-bottom:8px!important;margin-bottom:10px!important;margin-top:0!important}
 body.is-home-route .view-head .eyebrow{font-size:8px!important;letter-spacing:.16em!important;margin-bottom:3px!important}
 body.is-home-route .view-head h2{font-size:clamp(25px,6vw,36px)!important;line-height:1!important}
 .home-refresh-panel{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important;padding:8px 10px!important;margin:0 0 8px!important;border-radius:16px!important;box-shadow:none!important}
@@ -8177,7 +8179,7 @@ body.is-home-route .view-head h2{font-size:clamp(25px,6vw,36px)!important;line-h
   align-items:stretch!important;
 }
 .back-btn,.home-btn{
-  display:inline-flex!important;
+  display:none!important;
   align-items:center!important;
   justify-content:center!important;
   gap:5px!important;
@@ -11699,7 +11701,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v231";
+const APP_BUILD_ID="app-shell-v232";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
