@@ -5,37 +5,11 @@
  *
  * Usage: node scripts/push-system-guard.js
  */
-const fs = require("fs");
-const path = require("path");
-
-const ROOT = path.join(__dirname, "..");
-
-function read(file) {
-  return fs.readFileSync(path.join(ROOT, file), "utf8");
-}
+const { read, createReporter } = require("./lib/guard-report.cjs");
 
 function runPushSystemGuard() {
-  let failed = 0;
-
-  function fail(msg) {
-    console.error("PUSH-GUARD FAIL:", msg);
-    failed += 1;
-  }
-
-  function ok(msg) {
-    console.log("PUSH-GUARD OK:", msg);
-  }
-
-  function mustInclude(label, content, needles) {
-    for (const needle of needles) {
-      if (!content.includes(needle)) {
-        fail(`${label}: fehlt „${needle}“`);
-        return false;
-      }
-    }
-    ok(`${label}: alle Pflicht-Marker (${needles.length})`);
-    return true;
-  }
+  const report = createReporter("PUSH-GUARD");
+  const { fail, ok, mustInclude, mustExist } = report;
 
   function mustNotMatch(label, content, pattern, reason) {
     if (pattern.test(content)) {
@@ -43,16 +17,6 @@ function runPushSystemGuard() {
       return false;
     }
     ok(`${label}: Verbotsmuster nicht gefunden`);
-    return true;
-  }
-
-  function mustExist(file) {
-    const full = path.join(ROOT, file);
-    if (!fs.existsSync(full)) {
-      fail(`Datei fehlt: ${file}`);
-      return false;
-    }
-    ok(`Datei vorhanden: ${file}`);
     return true;
   }
 
@@ -203,7 +167,7 @@ function runPushSystemGuard() {
     "cloudflare/jummah-push-*.js"
   ]);
 
-  return failed;
+  return report.failed;
 }
 
 if (require.main === module) {

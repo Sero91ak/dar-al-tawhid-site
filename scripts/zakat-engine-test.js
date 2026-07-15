@@ -1,26 +1,13 @@
 #!/usr/bin/env node
-const fs = require("fs");
-const path = require("path");
-const vm = require("vm");
+const { read, loadSandboxModule, createAssert } = require("./lib/module-sandbox.cjs");
 
-const ROOT = path.join(__dirname, "..");
-const sandbox = { window: {}, URL, Date };
-sandbox.globalThis = sandbox.window;
-vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(ROOT, "assets/zakat-engine.js"), "utf8"), sandbox);
-const Z = sandbox.window.DARZakat;
+const Z = loadSandboxModule("assets/zakat-engine.js", "DARZakat", { URL, Date });
 
-let failed = 0;
-function assert(cond, msg) {
-  if (cond) console.log("OK:", msg);
-  else {
-    console.error("FAIL:", msg);
-    failed += 1;
-  }
-}
+const asserter = createAssert();
+const { assert } = asserter;
 
 const now = new Date().toISOString();
-const config = Z.normalizeConfig(JSON.parse(fs.readFileSync(path.join(ROOT, "content/admin/zakat-config.json"), "utf8")));
+const config = Z.normalizeConfig(JSON.parse(read("content/admin/zakat-config.json")));
 config.prices = {
   ...config.prices,
   goldPerGramEur: 75,
@@ -107,5 +94,5 @@ assert((pdfHtml.match(/class="zakat-pdf-page"/g) || []).length === 1, "pdf one p
 assert(!pdfHtml.includes("Seite:</b> 2 /"), "pdf no second page");
 assert(Z.buildPdfFilename({ reportId: "ZK-2026-000001" }) === "zakat-bericht-ZK-2026-000001.pdf", "pdf filename");
 
-if (failed) process.exit(1);
+if (asserter.failed) process.exit(1);
 console.log("\nAlle Zakāt-Engine-Tests bestanden.");

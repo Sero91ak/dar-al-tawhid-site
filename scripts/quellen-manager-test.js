@@ -2,34 +2,16 @@
 /**
  * Pflicht-Tests für Quellen-Manager (Markdown/YAML)
  */
-const fs = require("fs");
-const path = require("path");
-const vm = require("vm");
+const { read, loadSandboxModule, createAssert } = require("./lib/module-sandbox.cjs");
 
-const ROOT = path.join(__dirname, "..");
-const sampleSlide = fs.readFileSync(
-  path.join(ROOT, "content/posts/aqidah-426-ibn-abd-al-barr-ahlus-sunnah-bejahen-die-sifat-ohne-kayf.md"),
-  "utf8"
+const sampleSlide = read(
+  "content/posts/aqidah-426-ibn-abd-al-barr-ahlus-sunnah-bejahen-die-sifat-ohne-kayf.md"
 );
 
-const sandbox = { window: {} };
-sandbox.globalThis = sandbox.window;
-vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(ROOT, "admin/quellen-manager.js"), "utf8"), sandbox);
-const Q = sandbox.window.DARQuellen;
+const Q = loadSandboxModule("admin/quellen-manager.js", "DARQuellen");
 
-let failed = 0;
-function ok(msg) {
-  console.log("OK:", msg);
-}
-function fail(msg) {
-  console.error("FAIL:", msg);
-  failed += 1;
-}
-function assert(cond, msg) {
-  if (cond) ok(msg);
-  else fail(msg);
-}
+const asserter = createAssert();
+const { assert } = asserter;
 
 // Test 1: Normal post link append
 const normalMd = `---\nid: "test-137"\ntitle: "Test"\ncategory: "Aqidah"\nsource: "Testquelle"\n---\n\nBody`;
@@ -73,8 +55,8 @@ assert(info7.slides[1].image.includes("hammad-scan.png"), "Test 7: slide.image s
 const val = Q.validateSourceSave(t1, [{ path: "assets/sources/test/test.pdf" }]);
 assert(val.ok, "Validation passes for valid post");
 
-if (failed) {
-  console.error(`\n${failed} Test(s) fehlgeschlagen`);
+if (asserter.failed) {
+  console.error(`\n${asserter.failed} Test(s) fehlgeschlagen`);
   process.exit(1);
 }
 console.log("\nAlle Quellen-Manager-Tests bestanden.");

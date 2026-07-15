@@ -5,10 +5,8 @@
  *
  * Usage: node scripts/post-markdown-guard.js
  */
-const fs = require("fs");
-const path = require("path");
+const { read, createReporter } = require("./lib/guard-report.cjs");
 
-const ROOT = path.join(__dirname, "..");
 const FM_TOP_KEY =
   "source|links|logo|layout|slides|intro|introTitle|date|id|title|category|topic|scholar|book|author|tags|type";
 
@@ -61,16 +59,8 @@ function frontmatterHasLinks(markdown) {
 }
 
 function runPostMarkdownGuard() {
-  let failed = 0;
-
-  function fail(msg) {
-    console.error("POST-MARKDOWN-GUARD FAIL:", msg);
-    failed += 1;
-  }
-
-  function ok(msg) {
-    console.log("POST-MARKDOWN-GUARD OK:", msg);
-  }
+  const report = createReporter("POST-MARKDOWN-GUARD");
+  const { fail, ok } = report;
 
   const broken = `---
 id: "test-424"
@@ -99,7 +89,7 @@ Body text
   else ok("Repair: source-Wert vorhanden");
 
   for (const file of ["cloudflare/worker.js", "admin/index.html"]) {
-    const src = fs.readFileSync(path.join(ROOT, file), "utf8");
+    const src = read(file);
     if (!src.includes("function repairYamlFrontmatter")) {
       fail(`${file}: repairYamlFrontmatter fehlt`);
     } else {
@@ -112,7 +102,7 @@ Body text
     }
   }
 
-  const worker = fs.readFileSync(path.join(ROOT, "cloudflare/worker.js"), "utf8");
+  const worker = read("cloudflare/worker.js");
   if (!worker.includes("function normalizeMarkdownForStorage")) {
     fail("worker.js: normalizeMarkdownForStorage für post/update fehlt");
   } else {
@@ -124,7 +114,7 @@ Body text
     ok("worker.js: updateExistingPost normalisiert Markdown");
   }
 
-  return failed;
+  return report.failed;
 }
 
 if (require.main === module) {
