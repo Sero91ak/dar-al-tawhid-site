@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v238";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v239";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -884,7 +884,8 @@ html[data-theme="bordeaux"] .hadith-shell{--hadith-bg:#140b0c;--hadith-panel:#21
 .ilm-empty-hint{padding:14px;border:1px dashed var(--line2);border-radius:18px;color:var(--muted);font-size:11.5px;line-height:1.55}
 .ilm-inline-status{color:var(--muted2);font-size:10.8px}
 @media(max-width:980px){.ilm-grid{grid-template-columns:1fr}.ilm-side{order:2}.ilm-chat-panel{order:1;min-height:auto}}
-body.is-ilm-chat-route{overflow:hidden!important;padding:0!important}
+html:has(body.is-ilm-chat-route){background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
+body.is-ilm-chat-route{overflow:hidden!important;padding:0!important;margin:0!important;background:var(--ilm-page-bg,#071629)!important}
 body.is-ilm-chat-route .app-bar,
 body.is-ilm-chat-route .top-shell,
 body.is-ilm-chat-route .isnad,
@@ -893,9 +894,9 @@ body.is-ilm-chat-route .float-actions,
 body.is-ilm-chat-route #newPostsBanner,
 body.is-ilm-chat-route #appChromeDock,
 body.is-ilm-chat-route #bottomNav{display:none!important}
-body.is-ilm-chat-route .app{width:100vw!important;max-width:none!important;min-height:100dvh!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
-body.is-ilm-chat-route #appShell{min-height:100dvh;background:var(--ilm-page-bg,#071629)}
-body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:0!important;overflow:hidden!important;background:var(--ilm-page-bg,#071629)}
+body.is-ilm-chat-route .app{position:fixed!important;inset:0!important;width:100vw!important;max-width:none!important;height:100dvh!important;min-height:100dvh!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;clip-path:none!important;box-shadow:none!important;background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
+body.is-ilm-chat-route #appShell{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
+body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;clip-path:none!important;box-shadow:none!important;overflow:hidden!important;background:var(--ilm-page-bg,#071629)!important}
 body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-message-bg:#1d1b16;--ilm-assistant-bg:transparent;--ilm-composer-bg:#11100d;--ilm-primary-text:#f7efdf;--ilm-secondary-text:#c6bba7;--ilm-accent:#d6b46a;--ilm-border:rgba(214,180,106,.16);--ilm-sheet-bg:#12110e;--ilm-overlay:rgba(0,0,0,.52)}
 [data-theme="light"] body.is-ilm-chat-route{--ilm-page-bg:#f7f0df;--ilm-header-bg:#fff8eb;--ilm-user-message-bg:#eadfca;--ilm-assistant-bg:transparent;--ilm-composer-bg:#fff9ee;--ilm-primary-text:#241c16;--ilm-secondary-text:#6f6255;--ilm-accent:#9d7132;--ilm-border:rgba(103,72,35,.18);--ilm-sheet-bg:#fff8eb;--ilm-overlay:rgba(44,31,22,.24)}
 [data-theme="soft"] body.is-ilm-chat-route{--ilm-page-bg:#f2e6e2;--ilm-header-bg:#fbf1ee;--ilm-user-message-bg:#ead8d2;--ilm-assistant-bg:transparent;--ilm-composer-bg:#fff5f1;--ilm-primary-text:#281b1c;--ilm-secondary-text:#725f60;--ilm-accent:#9f6e4a;--ilm-border:rgba(106,70,59,.16);--ilm-sheet-bg:#fbf1ee;--ilm-overlay:rgba(48,27,30,.24)}
@@ -9290,6 +9291,7 @@ function classifyIlmPrompt(text){
   const raw=String(text||"").trim();
   const norm=normalizeIlmText(raw);
   if(!raw)return {type:"empty"};
+  if(/\b(wie geht es dir|wie gehts dir|wie geht's dir|wie geht es euch|wie gehts|salam|salamu|assalamu|as salamu|hallo|guten morgen|guten abend)\b/i.test(norm))return {type:"conversation"};
   const known=/\b(tawhid|tauhid|shirk|sunnah|quran|koran|hadith|iman|aqidah|dua|zakat|qibla|gebet|feed|beitrag|quiz|tafsir|athar|salaf|sahaba|allah|prophet)\b/i.test(norm);
   const hasQuestion=/[?؟]|\b(was|wer|wie|wo|wann|warum|welche|welcher|welches|zeige|gibt|erklär|erklaer|bedeutet|finde|suche|nenne)\b/i.test(norm);
   if(/^[^a-zA-ZäöüÄÖÜßḥḤṣṢṭṬġĠʿʾآ-ي0-9]+$/.test(raw))return {type:"unclear"};
@@ -9297,6 +9299,23 @@ function classifyIlmPrompt(text){
   if(!/\s/.test(raw)&&raw.length<7&&!known)return {type:"unclear"};
   if(!hasQuestion&&!known&&ilmTokenize(raw).length<=2)return {type:"unclear"};
   return {type:"question"};
+}
+function buildIlmConversationReply(text){
+  const norm=normalizeIlmText(text);
+  const greeting=/\b(salam|salamu|assalamu|as salamu)\b/.test(norm);
+  return {
+    title:"Gespräch",
+    status:"conversation",
+    intro:"",
+    directAnswer:greeting
+      ?"Wa ʿalaykum as-salām wa raḥmatullāh. Stelle mir gern deine Frage zu den veröffentlichten Inhalten, Beweisen oder Quellen."
+      :"Al-ḥamdu lillāh, ich bin bereit. Stelle mir gern deine Frage zu den Inhalten, Gelehrten, Beweisen oder Funktionen von DAR AL TAWḤĪD.",
+    explanation:"",
+    sourceGroups:[],
+    related:[],
+    contextHints:[],
+    sourceHints:[]
+  };
 }
 function buildIlmClarificationReply(){
   return {
@@ -9735,6 +9754,10 @@ function ilmReferenceMarkers(count){
 }
 function renderIlmAnswerText(reply,isFirstAssistant){
   const parts=[];
+  if(reply?.status==="conversation"){
+    parts.push(`<p>${esc(reply.directAnswer||"Ich bin bereit. Stelle mir gern deine Frage.")}</p>`);
+    return parts.join("");
+  }
   if(reply?.status==="clarification"){
     parts.push(`<p>${esc(reply.directAnswer||"Ich konnte noch keine konkrete Frage erkennen.")}</p>`);
     return parts.join("");
@@ -9859,6 +9882,16 @@ async function submitIlmQuestion(text,options={}){
   const convo=getActiveIlmConversation(store);
   if(!convo)return;
   const promptClass=classifyIlmPrompt(content);
+  if(promptClass.type==="conversation"){
+    updateIlmConversation(convo.id,item=>{
+      const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
+      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmConversationReply(content),question:content,sourceHints:[],contextHints:[]};
+      const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
+      return {...item,title:(item.messages||[]).length?item.title:"Gespräch",draft:"",messages};
+    });
+    render();
+    return;
+  }
   if(promptClass.type==="unclear"){
     updateIlmConversation(convo.id,item=>{
       const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
@@ -11917,7 +11950,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v238";
+const APP_BUILD_ID="app-shell-v239";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
