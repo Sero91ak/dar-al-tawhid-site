@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-15T03:25:13.029Z",
-  "usersChecked": 17,
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-15T13:25:13.059Z",
+  "usersChecked": 18,
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 18,
   "sent": 0,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 0,
+  "errors": 18,
   "dailyContentDate": "2026-07-15",
   "currentRecommendation": {
     "id": "herzen-und-taten-001",
@@ -24,5 +24,15 @@
     "category": "Schutz"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 18,
+      "contentId": "herzen-und-taten-001",
+      "recipients": "e3bdd4bc-01ab-46dc-9d34-274c518c5676",
+      "ok": false,
+      "invalid": 8
+    }
+  ]
 }
