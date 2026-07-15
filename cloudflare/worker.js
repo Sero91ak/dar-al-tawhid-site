@@ -93,6 +93,17 @@ const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
 const LIVE_CHECK_SCHEDULE_FULL_MS = [30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
+const ILM_EXTERNAL_RESEARCH_SOURCES = [
+  { id: "dorar", label: "Dorar", host: "dorar.net", searchUrl: (q) => `https://dorar.net/search?q=${encodeURIComponent(q)}` },
+  { id: "shamela", label: "Shamela", host: "shamela.ws", searchUrl: (q) => `https://shamela.ws/search?term=${encodeURIComponent(q)}` },
+  { id: "almaktaba", label: "al-Maktaba", host: "al-maktaba.org", searchUrl: (q) => `https://al-maktaba.org/search?q=${encodeURIComponent(q)}` },
+  { id: "ketabonline", label: "Ketab Online", host: "ketabonline.com", searchUrl: (q) => `https://ketabonline.com/ar/search?q=${encodeURIComponent(q)}` },
+  { id: "turath", label: "Turāth", host: "app.turath.io", searchUrl: (q) => `https://app.turath.io/search?query=${encodeURIComponent(q)}` },
+  { id: "waqfeya", label: "Waqfeya", host: "waqfeya.net", searchUrl: (q) => `https://waqfeya.net/search.php?search=${encodeURIComponent(q)}` },
+  { id: "archive", label: "Archive.org", host: "archive.org", searchUrl: (q) => `https://archive.org/search?query=${encodeURIComponent(q)}` },
+  { id: "quran-ksu", label: "Quran KSU", host: "quran.ksu.edu.sa", searchUrl: (q) => `https://quran.ksu.edu.sa/#:~:text=${encodeURIComponent(q.slice(0, 80))}` }
+];
+const ilmResearchRateBuckets = new Map();
 
 export default {
   async fetch(request, env, ctx) {
@@ -125,6 +136,13 @@ export default {
           jummahPushCron: "*/5 * * * *",
           scheduler: "ready"
         }, cors);
+      }
+
+      if (url.pathname === "/api/ilm/research" && request.method === "POST") {
+        assertIlmResearchRateLimit(request, env);
+        const input = await request.json().catch(() => ({}));
+        const result = await handleIlmExternalResearch(input, env);
+        return json(result, cors, result.ok ? 200 : 400);
       }
 
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
@@ -1804,6 +1822,157 @@ function json(data, headers, status = 200) {
     status,
     headers: { ...headers, "Content-Type": "application/json; charset=utf-8" }
   });
+}
+
+function assertIlmResearchRateLimit(request, env) {
+  const max = Number(env.ILM_RESEARCH_RATE_MAX || 18);
+  const windowMs = Number(env.ILM_RESEARCH_RATE_WINDOW_MS || 60_000);
+  const key =
+    request.headers.get("CF-Connecting-IP") ||
+    request.headers.get("X-Forwarded-For") ||
+    request.headers.get("Origin") ||
+    "unknown";
+  const now = Date.now();
+  const bucket = ilmResearchRateBuckets.get(key) || { count: 0, resetAt: now + windowMs };
+  if (now > bucket.resetAt) {
+    bucket.count = 0;
+    bucket.resetAt = now + windowMs;
+  }
+  bucket.count += 1;
+  ilmResearchRateBuckets.set(key, bucket);
+  if (bucket.count > max) throw httpError("Zu viele Recherche-Anfragen. Bitte kurz warten.", 429);
+}
+
+function normalizeIlmResearchQuery(value) {
+  return String(value || "")
+    .replace(/[\u0000-\u001f<>`{}]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 180);
+}
+
+function decodeHtmlEntities(value) {
+  return String(value || "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&#(\d+);/g, (_, n) => {
+      const code = Number(n);
+      return Number.isFinite(code) ? String.fromCharCode(code) : "";
+    });
+}
+
+function htmlToPlainText(html) {
+  return decodeHtmlEntities(String(html || "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<noscript[\s\S]*?<\/noscript>/gi, " ")
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim());
+}
+
+function ilmResearchTokens(query) {
+  return normalizeIlmResearchQuery(query)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .split(/[^a-z0-9\u0600-\u06ff]+/i)
+    .filter((token) => token.length >= 3)
+    .slice(0, 8);
+}
+
+function buildIlmSnippet(text, query) {
+  const clean = String(text || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  const lower = clean.toLowerCase();
+  const tokens = ilmResearchTokens(query);
+  const first = tokens.map((token) => lower.indexOf(token)).filter((idx) => idx >= 0).sort((a, b) => a - b)[0] ?? 0;
+  const start = Math.max(0, first - 110);
+  const snippet = clean.slice(start, start + 360).trim();
+  return `${start > 0 ? "… " : ""}${snippet}${start + 360 < clean.length ? " …" : ""}`;
+}
+
+function buildTextFragmentUrl(url, snippet) {
+  const text = String(snippet || "").replace(/^…\s*/, "").slice(0, 90).trim();
+  if (!text) return url;
+  return `${url}#:~:text=${encodeURIComponent(text)}`;
+}
+
+async function fetchIlmAllowedSource(source, query) {
+  const url = source.searchUrl(query);
+  const parsed = new URL(url);
+  if (parsed.hostname !== source.host) throw new Error("Domain nicht erlaubt");
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 4200);
+  try {
+    const res = await fetch(url, {
+      redirect: "follow",
+      signal: controller.signal,
+      headers: {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "User-Agent": "DAR-AL-TAWHID-Ilm-Research/1.0 (+https://dar-al-tawhid.de)"
+      }
+    });
+    const finalUrl = res.url || url;
+    const finalHost = new URL(finalUrl).hostname;
+    if (finalHost !== source.host && !finalHost.endsWith(`.${source.host}`)) throw new Error("Weiterleitung auf nicht erlaubte Domain");
+    const contentType = res.headers.get("Content-Type") || "";
+    const body = contentType.includes("text") || contentType.includes("html") ? await res.text() : "";
+    const plain = htmlToPlainText(body).slice(0, 12000);
+    const snippet = buildIlmSnippet(plain, query);
+    return {
+      id: `external-${source.id}`,
+      label: source.label,
+      host: source.host,
+      url,
+      finalUrl,
+      markedUrl: buildTextFragmentUrl(finalUrl, snippet || query),
+      reachable: res.ok,
+      status: res.status,
+      snippet,
+      verified: false,
+      note: "Externe Fundstelle zur Prüfung. Nicht automatisch als geprüfter religiöser Beleg übernommen."
+    };
+  } catch (error) {
+    return {
+      id: `external-${source.id}`,
+      label: source.label,
+      host: source.host,
+      url,
+      finalUrl: url,
+      markedUrl: url,
+      reachable: false,
+      status: 0,
+      snippet: "",
+      verified: false,
+      note: error?.name === "AbortError" ? "Quelle hat nicht rechtzeitig geantwortet." : "Quelle konnte nicht automatisch gelesen werden."
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function handleIlmExternalResearch(input, env) {
+  const query = normalizeIlmResearchQuery(input?.query);
+  if (query.length < 3) return { ok: false, error: "query fehlt oder ist zu kurz" };
+  const requested = Array.isArray(input?.sources) ? new Set(input.sources.map((item) => String(item))) : null;
+  const sources = ILM_EXTERNAL_RESEARCH_SOURCES
+    .filter((source) => !requested || requested.has(source.id) || requested.has(source.host))
+    .slice(0, Math.min(Number(input?.limit || env.ILM_RESEARCH_SOURCE_LIMIT || 6), 8));
+  const results = await Promise.all(sources.map((source) => fetchIlmAllowedSource(source, query)));
+  return {
+    ok: true,
+    query,
+    mode: "allowlisted-server-research",
+    generatedAt: new Date().toISOString(),
+    sourcePolicy: "Nur serverseitig erlaubte Domains; externe Treffer bleiben ungeprüft, bis sie administrativ bestätigt werden.",
+    results
+  };
 }
 
 function assertConfigured(env) {
