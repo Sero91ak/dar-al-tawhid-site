@@ -10061,6 +10061,12 @@ let qiblaCompassActive=false;
 let qiblaSensorTimeout=null;
 let qiblaStaticMode=false;
 let qiblaAutoStart=false;
+let prayerGpsWatchId=null;
+let prayerGpsApplyInFlight=false;
+let prayerGpsLastApplied={lat:null,lon:null,ts:0};
+let prayerGpsCityCache={lat:null,lon:null,city:null};
+const PRAYER_GPS_MOVE_THRESHOLD_M=800;
+const PRAYER_GPS_MIN_UPDATE_MS=30000;
 function prayerDefaultSettings(){return{city:"Standort freigeben",lat:null,lon:null,angle:12,asrFactor:1,advanceMinutes:15,tahajjudMode:"off",reminder:false,dailyDua:true,dailyRecommendation:true,jummahNotifications:false,jummahUseManualTime:false,jummahManualTime:"13:30",jummahMorningTime:"09:00",jummahAdvanceMinutes:30,locationGranted:false}}
 function hasPrayerLocation(settings=getPrayerSettings()){return Number.isFinite(Number(settings.lat))&&Number.isFinite(Number(settings.lon))&&settings.locationGranted===true}
 function getPrayerSettings(){const saved=getJson(PRAYER_SETTINGS_KEY,null);const base=prayerDefaultSettings();const merged=saved?{...base,...saved}:base;if(!merged.locationGranted&&String(merged.city||"").toLowerCase()==="rheinbach"){merged.city=base.city;merged.lat=null;merged.lon=null}return merged}
@@ -10414,8 +10420,16 @@ function qiblaBearing(lat,lon){if(!Number.isFinite(Number(lat))||!Number.isFinit
 function formatQiblaDegrees(bearing){const b=fixAngle(Number(bearing)||0);return Math.min(359,Math.max(0,Math.floor(b+1e-6)))}
 async function reversePrayerCity(lat,lon){try{const url=`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=de`;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("reverse failed");const j=await r.json();return j.city||j.locality||j.principalSubdivision||j.countryName||"Aktueller Standort"}catch(e){return`Aktueller Standort (${Number(lat).toFixed(3)}, ${Number(lon).toFixed(3)})`}}
 async function geocodePrayerCity(city){const q=String(city||"").trim();if(!q)throw new Error("Ort fehlt");const url=`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&accept-language=de&q=${encodeURIComponent(q)}`;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("Ort konnte nicht gesucht werden");const data=await r.json();if(!Array.isArray(data)||!data[0])throw new Error("Ort nicht gefunden");const item=data[0];const name=item.name||String(item.display_name||q).split(",")[0]||q;return{city:name,lat:Number(item.lat),lon:Number(item.lon),locationGranted:true}}
-function requestBrowserPosition(){return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:true,timeout:12000,maximumAge:600000}))}
-async function requestPrayerLocation(button){if(!navigator.geolocation){alert("Standort wird von diesem Browser nicht unterstützt.");return}const oldText=button?button.textContent:"";if(button)button.textContent="Standort wird angefragt…";try{const pos=await requestBrowserPosition();const lat=pos.coords.latitude,lon=pos.coords.longitude;const city=await reversePrayerCity(lat,lon);setPrayerSettings({lat,lon,city,locationGranted:true});render()}catch(err){if(button)button.textContent=oldText||"📍 Standort freigeben";alert("Standort konnte nicht geladen werden. Bitte Standortzugriff erlauben, damit die Gebetszeiten für deine Gegend angezeigt werden.")}}
+function requestBrowserPosition({fresh=false}={}){return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:true,timeout:fresh?15000:12000,maximumAge:fresh?0:60000}))}
+function prayerLocationDistanceM(lat1,lon1,lat2,lon2){const R=6371000;const φ1=toRad(Number(lat1)),φ2=toRad(Number(lat2));const Δφ=toRad(Number(lat2)-Number(lat1));const Δλ=toRad(Number(lon2)-Number(lon1));const a=Math.sin(Δφ/2)**2+Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(a)))}
+function shouldApplyPrayerGpsMove(lat,lon){const prev=prayerGpsLastApplied;if(!Number.isFinite(prev.lat)||!Number.isFinite(prev.lon))return true;return prayerLocationDistanceM(prev.lat,prev.lon,lat,lon)>=PRAYER_GPS_MOVE_THRESHOLD_M}
+async function resolvePrayerCityForGps(lat,lon,prevCity){const cache=prayerGpsCityCache;if(Number.isFinite(cache.lat)&&prayerLocationDistanceM(cache.lat,cache.lon,lat,lon)<1800)return cache.city||prevCity||"Aktueller Standort";const city=await reversePrayerCity(lat,lon);prayerGpsCityCache={lat,lon,city};return city}
+function updatePrayerTimesDisplayFromSettings(){const settings=getPrayerSettings();if(!hasPrayerLocation(settings))return;const city=settings.city||"deinem Ort";const current=currentPrayerInfo(settings);const next=nextPrayerInfo(settings);const times=calculatePrayerTimes(new Date(),settings);const now=new Date();updateHeaderPrayerStatus();updatePrayerCountdowns();updateQiblaBearingUi(qiblaBearing(settings.lat,settings.lon));document.querySelectorAll(".prayer-quick-title").forEach(el=>{if(String(el.textContent||"").includes("Heute in"))el.textContent=`🕌 Heute in ${city}`});document.querySelectorAll(".prayer-small-label").forEach(el=>{if(String(el.textContent||"").startsWith("Heute ·"))el.textContent=`Heute · ${city}`});document.querySelectorAll(".prayer-compact-summary").forEach(sum=>{const cards=sum.querySelectorAll(".prayer-summary-card");if(cards[0]){const span=cards[0].querySelector("span");if(span&&current)span.textContent=`${current.name} · ${formatPrayerTimeDisplay(current)}`;const sm=cards[0].querySelector("small");if(sm&&!sm.id)sm.textContent=city}if(cards[1]){const span=cards[1].querySelector("span");if(span)span.textContent=`${next.name} · ${next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time)}`}});document.querySelectorAll(".prayer-time-grid").forEach(grid=>{grid.innerHTML=renderPrayerTimeCards(times,next,now)});document.querySelectorAll(".qibla-data-grid .qibla-data-item").forEach(item=>{if(item.querySelector("b")?.textContent==="Standort"){const span=item.querySelector("span");if(span)span.textContent=city}})}
+async function applyPrayerGpsPosition(pos,{force=false,silent=true}={}){if(prayerGpsApplyInFlight&&!force)return false;if(!navigator.geolocation)return false;prayerGpsApplyInFlight=true;try{let position=pos;if(!position)position=await requestBrowserPosition({fresh:force});const lat=position.coords.latitude,lon=position.coords.longitude;const now=Date.now();if(!force){if(now-prayerGpsLastApplied.ts<PRAYER_GPS_MIN_UPDATE_MS&&!shouldApplyPrayerGpsMove(lat,lon))return false;if(!shouldApplyPrayerGpsMove(lat,lon))return false}const prev=getPrayerSettings();const city=await resolvePrayerCityForGps(lat,lon,prev.city);setPrayerSettings({lat,lon,city,locationGranted:true});prayerGpsLastApplied={lat,lon,ts:now};updatePrayerTimesDisplayFromSettings();const s=getPrayerSettings();if(s.reminder){syncPrayerPushTags(s).catch(()=>{});scheduleLocalPrayerRemindersIfNeeded({silent:true}).catch(()=>{})}return true}catch(e){if(!silent)console.warn("GPS-Standort:",e);return false}finally{prayerGpsApplyInFlight=false}}
+function startPrayerGpsWatch(){if(!navigator.geolocation||prayerGpsWatchId!=null)return;prayerGpsWatchId=navigator.geolocation.watchPosition(pos=>{applyPrayerGpsPosition(pos,{silent:true}).catch(()=>{})},()=>{},{enableHighAccuracy:true,maximumAge:15000,timeout:20000})}
+function stopPrayerGpsWatch(){if(prayerGpsWatchId!=null&&navigator.geolocation){navigator.geolocation.clearWatch(prayerGpsWatchId);prayerGpsWatchId=null}}
+function syncPrayerGpsWatchState(){if(!navigator.geolocation)return;const s=getPrayerSettings();const onPrayer=readRoute().view==="prayer";const shouldWatch=(qiblaCompassActive||onPrayer||(s.reminder&&hasPrayerLocation(s)))&&s.locationGranted;if(shouldWatch)startPrayerGpsWatch();else stopPrayerGpsWatch()}
+async function requestPrayerLocation(button){if(!navigator.geolocation){alert("Standort wird von diesem Browser nicht unterstützt.");return}const oldText=button?button.textContent:"";if(button)button.textContent="Standort wird angefragt…";try{const pos=await requestBrowserPosition({fresh:true});const lat=pos.coords.latitude,lon=pos.coords.longitude;const city=await reversePrayerCity(lat,lon);prayerGpsCityCache={lat,lon,city};prayerGpsLastApplied={lat,lon,ts:Date.now()};setPrayerSettings({lat,lon,city,locationGranted:true});syncPrayerGpsWatchState();render()}catch(err){if(button)button.textContent=oldText||"📍 Standort freigeben";alert("Standort konnte nicht geladen werden. Bitte Standortzugriff erlauben, damit die Gebetszeiten für deine Gegend angezeigt werden.")}}
 function qiblaCompassMarkup(bearing=0){
   const b=formatQiblaDegrees(bearing);
   const dir=qiblaDirectionNameDe(bearing);
@@ -10450,18 +10464,7 @@ function updateQiblaBearingUi(bearing){
   const bl=$("qiblaBearingLive");if(bl)bl.textContent=b+"° · "+dir;
   const br=$("qiblaBearingReadout");if(br)br.textContent=dir;
 }
-async function refreshQiblaGps(settings){
-  if(!navigator.geolocation)return settings;
-  try{
-    const pos=await requestBrowserPosition();
-    const lat=pos.coords.latitude,lon=pos.coords.longitude;
-    const city=await reversePrayerCity(lat,lon);
-    setPrayerSettings({lat,lon,city,locationGranted:true});
-    const next=getPrayerSettings();
-    updateQiblaBearingUi(qiblaBearing(next.lat,next.lon));
-    return next;
-  }catch(e){return settings}
-}
+async function refreshQiblaGps(settings){try{await applyPrayerGpsPosition(null,{force:true,silent:true});return getPrayerSettings()}catch(e){return settings}}
 function enableQiblaStaticFallback(bearing,settings,status,startBtn,stopBtn){
   qiblaStaticMode=true;
   qiblaCompassActive=true;
@@ -10539,6 +10542,7 @@ function stopQiblaCompass(){
   if(status){status.textContent="Kompass gestoppt. Tippe erneut auf „Kompass starten“.";status.classList.remove("qibla-status-ok")}
   const hl=$("qiblaHeadingLive");if(hl)hl.textContent="—";
   const dl=$("qiblaDeltaLive");if(dl)dl.textContent="—";
+  syncPrayerGpsWatchState();
 }
 function prayerCalculationTags(settings=getPrayerSettings()){return `<div class="prayer-calculation-tags"><span>Fajr 12°</span><span>ʿIshāʾ 12° nautisch</span><span>Maghrib Sonnenuntergang</span><span>Taḥajjud · ${esc(tahajjudModeLabel(settings.tahajjudMode))}</span><span>ʿAṣr ${settings.asrFactor===2?"Ḥanafī":"Standard"}</span></div>`}
 const ZAKAT_FOCUS_START="2026-06-18T12:00:00.000Z";
@@ -10730,9 +10734,11 @@ async function startQiblaCompass(){
   const getBearing=()=>qiblaBearing(getPrayerSettings().lat,getPrayerSettings().lon);
   if(sensorGranted||!(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==="function")){
     attachQiblaOrientationListener(getBearing,status,wrap,rose,settings,startBtn,stopBtn);
+    syncPrayerGpsWatchState();
     return;
   }
   enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
+  syncPrayerGpsWatchState();
 }
 function openQiblaFromFloat(){
   qiblaAutoStart=true;
@@ -10747,10 +10753,12 @@ async function runQiblaAutoStart(){
     if(status)status.textContent="Standort wird für den Kompass angefragt…";
     try{
       if(!navigator.geolocation)throw new Error("no geo");
-      const pos=await requestBrowserPosition();
+      const pos=await requestBrowserPosition({fresh:true});
       const lat=pos.coords.latitude,lon=pos.coords.longitude;
       const city=await reversePrayerCity(lat,lon);
       setPrayerSettings({lat,lon,city,locationGranted:true});
+      prayerGpsCityCache={lat,lon,city};
+      prayerGpsLastApplied={lat,lon,ts:Date.now()};
       qiblaAutoStart=true;
       render();
       return;
@@ -12064,6 +12072,7 @@ function render(){
     }
     window.__lastRenderSig=routeSig(currentRoute);
     ensureBottomNavDock();
+    syncPrayerGpsWatchState();
   }catch(error){
     console.error(error);
     renderAppRecovery(error,"Darstellung");
@@ -12403,7 +12412,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 window.addEventListener("online",function(){updateOfflineBox();refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
 window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")scheduleRefreshContent({forceRender:false},900)});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"){scheduleRefreshContent({forceRender:false},900);if(hasPrayerLocation(getPrayerSettings()))applyPrayerGpsPosition(null,{force:true,silent:true}).then(()=>syncPrayerGpsWatchState()).catch(()=>{})}});
 </script>
 <script>
   /* VERSION_UPDATE_GUARD: Banner nur bei echtem Update; Schleifen-Schutz + HARD_REFRESH + Willkommens-Push */
