@@ -96,6 +96,12 @@ jobs:
       - name: Quellen manager tests (Slide/Link YAML)
         run: node scripts/quellen-manager-test.js
 
+      - name: Slide post parser unit tests (Frontmatter/Marker/Slides)
+        run: node scripts/slide-post-parser-test.js
+
+      - name: Feed background safety unit tests (Natur-Fokus/Filter)
+        run: node scripts/feed-background-safety-test.js
+
       - name: Slide post guard (Carousel + Parser + Theme-Tokens)
         run: node scripts/slide-post-guard.js
 
