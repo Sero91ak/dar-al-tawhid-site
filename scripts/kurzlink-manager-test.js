@@ -3,29 +3,12 @@
  * Kurzlink-Manager Tests (Pflicht)
  * Usage: node scripts/kurzlink-manager-test.js
  */
-const fs = require("fs");
-const path = require("path");
-const vm = require("vm");
+const { loadSandboxModule, createAssert } = require("./lib/module-sandbox.cjs");
 
-const ROOT = path.join(__dirname, "..");
-const sandbox = { window: {}, URL };
-sandbox.globalThis = sandbox.window;
-vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(ROOT, "admin/kurzlink-manager.js"), "utf8"), sandbox);
-const K = sandbox.window.DARKurzlink;
+const K = loadSandboxModule("admin/kurzlink-manager.js", "DARKurzlink", { URL });
 
-let failed = 0;
-function ok(msg) {
-  console.log("OK:", msg);
-}
-function fail(msg) {
-  console.error("FAIL:", msg);
-  failed += 1;
-}
-function assert(cond, msg) {
-  if (cond) ok(msg);
-  else fail(msg);
-}
+const asserter = createAssert();
+const { assert } = asserter;
 
 const registry = K.normalizeRegistry({ version: 1, nextSerial: 1, entries: {} });
 
@@ -139,8 +122,8 @@ const imageText = K.buildImageShareText({
 });
 assert(imageText.includes("Ibn 'Abd al-Barr sagte:") && !imageText.includes("Fazit") && imageText.includes("🔗 https://dar-al-tawhid.de/a5"), "Test 20: image post = only quote + source + link");
 
-if (failed) {
-  console.error(`\n${failed} Kurzlink-Test(s) fehlgeschlagen.`);
+if (asserter.failed) {
+  console.error(`\n${asserter.failed} Kurzlink-Test(s) fehlgeschlagen.`);
   process.exit(1);
 }
 console.log("\nAlle Kurzlink-Manager-Tests bestanden.");

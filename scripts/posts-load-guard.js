@@ -5,22 +5,11 @@
  *
  * Usage: node scripts/posts-load-guard.js
  */
-const fs = require("fs");
-const path = require("path");
-
-const ROOT = path.join(__dirname, "..");
-
-function read(rel) {
-  return fs.readFileSync(path.join(ROOT, rel), "utf8");
-}
+const { read, createReporter } = require("./lib/guard-report.cjs");
 
 function runPostsLoadGuard() {
-  let failed = 0;
-  const fail = (msg) => {
-    console.error("POSTS-LOAD-GUARD FAIL:", msg);
-    failed += 1;
-  };
-  const ok = (msg) => console.log("POSTS-LOAD-GUARD OK:", msg);
+  const report = createReporter("POSTS-LOAD-GUARD");
+  const { fail, ok } = report;
 
   for (const rel of ["index.html", "test/index.html"]) {
     const html = read(rel);
@@ -38,7 +27,7 @@ function runPostsLoadGuard() {
     }
   }
 
-  if (failed) process.exit(1);
+  if (report.failed) process.exit(1);
   ok("Sofort-Anzeige aus Cache + stilles Nachladen gesichert");
 }
 

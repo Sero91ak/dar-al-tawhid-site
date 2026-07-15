@@ -3,24 +3,10 @@
  * Pre-deploy health check – stoppt Deploy bei kaputtem Kern.
  * Usage: node scripts/app-health-check.js
  */
-const fs = require("fs");
-const path = require("path");
+const { read, exists, createReporter } = require("./lib/guard-report.cjs");
 
-const ROOT = path.join(__dirname, "..");
-let failed = 0;
-
-function fail(msg) {
-  console.error("FAIL:", msg);
-  failed += 1;
-}
-
-function ok(msg) {
-  console.log("OK:", msg);
-}
-
-function read(file) {
-  return fs.readFileSync(path.join(ROOT, file), "utf8");
-}
+const report = createReporter("");
+const { fail, ok } = report;
 
 function extractMainScript(html) {
   const re = /<script>\s*\n([\s\S]*?)<\/script>/g;
@@ -118,16 +104,15 @@ if (!worker.includes("sendNewPostPush")) fail("worker.js: post push fehlt");
 
 // Push-System (streng – blockiert Deploy bei fehlendem Scheduler)
 const pushGuardFails = require("./push-system-guard.js").runPushSystemGuard();
-if (pushGuardFails) failed += pushGuardFails;
 
 // App-Update + Willkommens-Push-Schutz (Versions-Banner-Schleife)
 const versionGuardFails = require("./version-update-guard.js").runVersionUpdateGuard();
-if (versionGuardFails) failed += versionGuardFails;
 
 // Push scripts
-if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-prayer-push.js fehlt");
-if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");
+if (!exists("scripts/send-prayer-push.js")) fail("send-prayer-push.js fehlt");
+if (!exists("scripts/send-post-push.js")) fail("send-post-push.js fehlt");
 
+const failed = report.failed + pushGuardFails + versionGuardFails;
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);

@@ -7,8 +7,8 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const { ROOT, createReporter } = require("./lib/guard-report.cjs");
 
-const ROOT = path.join(__dirname, "..");
 const FIXTURE = path.join(
   ROOT,
   "content/posts/makan-allah-github-posts-final-423-makan-und-nuzul-bei-den-fruhen-imam.md"
@@ -181,12 +181,8 @@ function extractYaml(markdown) {
 }
 
 function runSlidePostGuard() {
-  let failed = 0;
-  const fail = (msg) => {
-    console.error("SLIDE-POST-GUARD FAIL:", msg);
-    failed += 1;
-  };
-  const ok = (msg) => console.log("SLIDE-POST-GUARD OK:", msg);
+  const report = createReporter("SLIDE-POST-GUARD");
+  const { fail, ok } = report;
 
   if (!fs.existsSync(FIXTURE)) {
     fail("Fixture fehlt: " + FIXTURE);
@@ -312,7 +308,7 @@ function runSlidePostGuard() {
     fail("test/index.html ohne parseSlidesFromYaml");
   }
 
-  if (failed) {
+  if (report.failed) {
     process.exit(1);
   }
   ok("Alle Slide-Post-Checks bestanden");

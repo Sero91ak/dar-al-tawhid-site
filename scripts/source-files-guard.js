@@ -4,37 +4,11 @@
  *
  * Usage: node scripts/source-files-guard.js
  */
-const fs = require("fs");
-const path = require("path");
-
-const ROOT = path.join(__dirname, "..");
-
-function read(file) {
-  return fs.readFileSync(path.join(ROOT, file), "utf8");
-}
+const { read, exists, createReporter } = require("./lib/guard-report.cjs");
 
 function runSourceFilesGuard() {
-  let failed = 0;
-
-  function fail(msg) {
-    console.error("SOURCE-FILES-GUARD FAIL:", msg);
-    failed += 1;
-  }
-
-  function ok(msg) {
-    console.log("SOURCE-FILES-GUARD OK:", msg);
-  }
-
-  function mustInclude(label, content, needles) {
-    for (const needle of needles) {
-      if (!content.includes(needle)) {
-        fail(`${label}: fehlt „${needle}“`);
-        return false;
-      }
-    }
-    ok(`${label}: alle Pflicht-Marker (${needles.length})`);
-    return true;
-  }
+  const report = createReporter("SOURCE-FILES-GUARD");
+  const { fail, ok, mustInclude } = report;
 
   const admin = read("admin/index.html");
   const worker = read("cloudflare/worker.js");
@@ -114,7 +88,7 @@ function runSourceFilesGuard() {
     "kurzlink-admin.js"
   ]);
 
-  if (!fs.existsSync(path.join(ROOT, "assets/sources/.gitkeep"))) {
+  if (!exists("assets/sources/.gitkeep")) {
     fail("assets/sources/.gitkeep fehlt");
   } else {
     ok("assets/sources/.gitkeep vorhanden");
@@ -132,13 +106,13 @@ function runSourceFilesGuard() {
     ok("sourceFiles in Publish/Update-Flow");
   }
 
-  if (!fs.existsSync(path.join(ROOT, "content/admin/source-shortlinks.json"))) {
+  if (!exists("content/admin/source-shortlinks.json")) {
     fail("content/admin/source-shortlinks.json fehlt");
   } else {
     ok("content/admin/source-shortlinks.json vorhanden");
   }
 
-  return failed;
+  return report.failed;
 }
 
 if (require.main === module) {

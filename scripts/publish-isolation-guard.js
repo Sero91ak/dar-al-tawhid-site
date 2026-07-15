@@ -5,15 +5,9 @@
  *
  * Usage: node scripts/publish-isolation-guard.js
  */
-const fs = require("fs");
-const path = require("path");
+const { read, exists, createReporter } = require("./lib/guard-report.cjs");
 
-const ROOT = path.join(__dirname, "..");
 const VISITOR_FILES = ["index.html", "test/index.html"];
-
-function read(file) {
-  return fs.readFileSync(path.join(ROOT, file), "utf8");
-}
 
 function extractFunction(source, name) {
   const re = new RegExp(`async function ${name}[\\s\\S]*?(?=\\nasync function |\\nfunction [a-zA-Z_$])`);
@@ -22,38 +16,8 @@ function extractFunction(source, name) {
 }
 
 function runPublishIsolationGuard() {
-  let failed = 0;
-
-  function fail(msg) {
-    console.error("PUBLISH-ISOLATION-GUARD FAIL:", msg);
-    failed += 1;
-  }
-
-  function ok(msg) {
-    console.log("PUBLISH-ISOLATION-GUARD OK:", msg);
-  }
-
-  function mustInclude(label, content, needles) {
-    for (const needle of needles) {
-      if (!content.includes(needle)) {
-        fail(`${label}: fehlt „${needle}“`);
-        return false;
-      }
-    }
-    ok(`${label}: alle Pflicht-Marker (${needles.length})`);
-    return true;
-  }
-
-  function mustNotInclude(label, content, needles) {
-    for (const needle of needles) {
-      if (content.includes(needle)) {
-        fail(`${label}: verboten – „${needle}“`);
-        return false;
-      }
-    }
-    ok(`${label}: keine verbotenen Muster (${needles.length})`);
-    return true;
-  }
+  const report = createReporter("PUBLISH-ISOLATION-GUARD");
+  const { fail, ok, mustInclude, mustNotInclude } = report;
 
   const worker = read("cloudflare/worker.js");
   const admin = read("admin/index.html");
@@ -148,13 +112,13 @@ function runPublishIsolationGuard() {
     ]);
   }
 
-  if (!fs.existsSync(path.join(ROOT, "scripts/publish-isolation-guard.js"))) {
+  if (!exists("scripts/publish-isolation-guard.js")) {
     fail("scripts/publish-isolation-guard.js fehlt");
   } else {
     ok("Guard-Skript vorhanden");
   }
 
-  return failed;
+  return report.failed;
 }
 
 if (require.main === module) {

@@ -5,15 +5,9 @@
  *
  * Usage: node scripts/bottom-nav-guard.js
  */
-const fs = require("fs");
-const path = require("path");
+const { read, createReporter } = require("./lib/guard-report.cjs");
 
-const ROOT = path.join(__dirname, "..");
 const VISITOR_FILES = ["index.html", "test/index.html"];
-
-function read(file) {
-  return fs.readFileSync(path.join(ROOT, file), "utf8");
-}
 
 function extractFunction(source, name) {
   const start = source.indexOf(`function ${name}(`);
@@ -39,38 +33,8 @@ function extractInlineBoot(html) {
 }
 
 function runBottomNavGuard() {
-  let failed = 0;
-
-  function fail(msg) {
-    console.error("BOTTOM-NAV-GUARD FAIL:", msg);
-    failed += 1;
-  }
-
-  function ok(msg) {
-    console.log("BOTTOM-NAV-GUARD OK:", msg);
-  }
-
-  function mustInclude(label, content, needles) {
-    for (const needle of needles) {
-      if (!content.includes(needle)) {
-        fail(`${label}: fehlt „${needle}“`);
-        return false;
-      }
-    }
-    ok(`${label}: alle Pflicht-Marker (${needles.length})`);
-    return true;
-  }
-
-  function mustNotInclude(label, content, needles) {
-    for (const needle of needles) {
-      if (content.includes(needle)) {
-        fail(`${label}: verboten – „${needle}“`);
-        return false;
-      }
-    }
-    ok(`${label}: keine verbotenen Muster (${needles.length})`);
-    return true;
-  }
+  const report = createReporter("BOTTOM-NAV-GUARD");
+  const { fail, ok, mustInclude, mustNotInclude } = report;
 
   function mustNotMatch(label, content, rules) {
     for (const rule of rules) {
@@ -291,7 +255,7 @@ function runBottomNavGuard() {
     ok(`Build-ID synchron: ${version.buildId}`);
   }
 
-  return failed;
+  return report.failed;
 }
 
 if (require.main === module) {
