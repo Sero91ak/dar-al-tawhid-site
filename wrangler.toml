@@ -1,9 +1,0 @@
-# Cloudflare Workers Static Assets — Besucher-App (dar-al-tawhid.de)
-# Admin-Worker: cloudflare/wrangler.toml → dar-admin-publisher
-
-name = "dar-al-tawhid-site"
-compatibility_date = "2026-06-14"
-compatibility_flags = ["nodejs_compat"]
-
-[assets]
-directory = "."
