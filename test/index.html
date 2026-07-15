@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v239";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v240";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -9858,6 +9858,7 @@ function renderIlm(){
   </section>`;
 }
 let ilmPendingToken=0;
+let ilmForceBottomOnce=false;
 function updateIlmConversation(conversationId,mutator){
   return updateIlmStore(store=>{
     store.conversations=store.conversations.map(item=>{
@@ -9875,6 +9876,10 @@ function saveIlmDraft(value){
   if(!convo)return;
   updateIlmConversation(convo.id,item=>({...item,draft:String(value||"")}));
 }
+function markIlmScrollToLatest(){
+  ilmForceBottomOnce=true;
+  try{sessionStorage.setItem("darIlmForceBottomOnce","1")}catch(e){}
+}
 async function submitIlmQuestion(text,options={}){
   const content=String(text||"").trim();
   if(!content)return;
@@ -9889,7 +9894,9 @@ async function submitIlmQuestion(text,options={}){
       const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
       return {...item,title:(item.messages||[]).length?item.title:"Gespräch",draft:"",messages};
     });
+    markIlmScrollToLatest();
     render();
+    setTimeout(()=>scrollIlmToBottom(true),80);
     return;
   }
   if(promptClass.type==="unclear"){
@@ -9899,7 +9906,9 @@ async function submitIlmQuestion(text,options={}){
       const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
       return {...item,title:(item.messages||[]).length?item.title:"Neue Frage",draft:"",messages};
     });
+    markIlmScrollToLatest();
     render();
+    setTimeout(()=>scrollIlmToBottom(true),80);
     return;
   }
   const token=++ilmPendingToken;
@@ -9909,7 +9918,9 @@ async function submitIlmQuestion(text,options={}){
     const messages=[...(item.messages||[]),userMsg,loadingMsg].slice(-ILM_MAX_CHAT_MESSAGES);
     return {...item,title:(item.messages||[]).length?item.title:ilmGuessTitle(content),draft:"",messages};
   });
+  markIlmScrollToLatest();
   render();
+  setTimeout(()=>scrollIlmToBottom(true),80);
   $("ilmStopBtn")?.removeAttribute("hidden");
   await new Promise(r=>setTimeout(r,120));
   if(token!==ilmPendingToken)return;
@@ -9935,7 +9946,9 @@ async function submitIlmQuestion(text,options={}){
     return {...item,messages:messages.slice(-ILM_MAX_CHAT_MESSAGES)};
   });
   $("ilmStopBtn")?.setAttribute("hidden","hidden");
+  markIlmScrollToLatest();
   render();
+  setTimeout(()=>scrollIlmToBottom(true),80);
 }
 function stopIlmAnswer(){ilmPendingToken++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
 function findIlmMessage(messageId){
@@ -10081,16 +10094,22 @@ function syncIlmViewport(){
   if(currentRoute.view!=="ilm")return;
   const vv=window.visualViewport;
   const layoutHeight=Math.max(320,Math.round(window.innerHeight||document.documentElement.clientHeight||0));
-  const keyboardOffset=vv?Math.max(0,Math.round(layoutHeight-vv.height-vv.offsetTop)):0;
+  const rawKeyboardOffset=vv?Math.max(0,Math.round(layoutHeight-vv.height-vv.offsetTop)):0;
+  const keyboardOffset=rawKeyboardOffset>90?Math.max(0,rawKeyboardOffset-54):rawKeyboardOffset;
   document.documentElement.style.setProperty("--ilm-viewport-height",`${layoutHeight}px`);
   document.documentElement.style.setProperty("--ilm-keyboard-offset",`${keyboardOffset}px`);
+  document.documentElement.style.setProperty("--ilm-keyboard-raw-offset",`${rawKeyboardOffset}px`);
   requestAnimationFrame(syncIlmComposerLayout);
 }
 function scrollIlmToBottom(force=false){
   const log=$("ilmChatLog");
   if(!log)return;
   const nearBottom=log.scrollHeight-log.scrollTop-log.clientHeight<160;
-  if(force||nearBottom)requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight});
+  if(force||nearBottom)requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    log.scrollTop=log.scrollHeight;
+    const convo=getActiveIlmConversation(getIlmStore());
+    if(convo)updateIlmConversation(convo.id,item=>({...item,scrollTop:log.scrollHeight}));
+  }));
 }
 function bindIlmEvents(){
   if(currentRoute.view!=="ilm")return;
@@ -10100,7 +10119,15 @@ function bindIlmEvents(){
     autoSizeIlmInput(input);
     input.onfocus=()=>{syncIlmViewport();setTimeout(()=>scrollIlmToBottom(true),120)};
     input.oninput=()=>{autoSizeIlmInput(input);saveIlmDraft(input.value);syncIlmViewport()};
-    setTimeout(()=>{const convo=getActiveIlmConversation(getIlmStore());const log=$("ilmChatLog");if(convo&&log&&typeof convo.scrollTop==="number")log.scrollTop=convo.scrollTop||0},0);
+    setTimeout(()=>{
+      const convo=getActiveIlmConversation(getIlmStore());
+      const log=$("ilmChatLog");
+      let force=ilmForceBottomOnce;
+      try{force=force||sessionStorage.getItem("darIlmForceBottomOnce")==="1";sessionStorage.removeItem("darIlmForceBottomOnce")}catch(e){}
+      ilmForceBottomOnce=false;
+      if(force)scrollIlmToBottom(true);
+      else if(convo&&log&&typeof convo.scrollTop==="number")log.scrollTop=convo.scrollTop||0;
+    },0);
   }
   const form=$("ilmComposer");
   if(form)form.onsubmit=ev=>{ev.preventDefault();submitIlmQuestion($("ilmInput")?.value||"")};
@@ -11950,7 +11977,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v239";
+const APP_BUILD_ID="app-shell-v240";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
