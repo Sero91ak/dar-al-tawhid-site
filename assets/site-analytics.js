@@ -33,9 +33,15 @@
     document.head.appendChild(s);
   }
 
+  function diag(context, err) {
+    try {
+      if (typeof console !== "undefined" && console.debug) console.debug("[dar-analytics] " + context, err);
+    } catch (e) {}
+  }
+
   function gaEvent(name, params) {
     if (!GA4_ID || !window.gtag) return;
-    try { gtag("event", name, params || {}); } catch (e) {}
+    try { gtag("event", name, params || {}); } catch (e) { diag("gtag event failed: " + name, e); }
   }
 
   async function supabaseInsert(eventType, meta) {
@@ -57,7 +63,7 @@
           session_id: sessionId()
         })
       });
-    } catch (e) {}
+    } catch (e) { diag("supabase insert failed: " + eventType, e); }
   }
 
   function track(eventType, meta) {

@@ -5,6 +5,12 @@
 (function () {
   "use strict";
 
+  function darDiag(context, err) {
+    try {
+      if (typeof console !== "undefined" && console.debug) console.debug("[dar-live-boot] " + context, err);
+    } catch (_e) {}
+  }
+
   if (typeof location === "undefined") return;
   if ((location.pathname || "").indexOf("/admin") === 0) return;
 
@@ -195,7 +201,9 @@
           }));
         } catch (e) {}
       })
-      .catch(function () {});
+      .catch(function (err) {
+        darDiag("version check fetch failed", err);
+      });
   }
 
   function boot() {
