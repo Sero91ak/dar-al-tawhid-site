@@ -4,6 +4,12 @@
 (function (global) {
   'use strict';
 
+  function darDiag(context, err) {
+    try {
+      if (typeof console !== 'undefined' && console.debug) console.debug('[dar-premium-feed] ' + context, err);
+    } catch (_e) {}
+  }
+
   var MOUNT_ID = 'premiumFeedMount';
   var STYLES_ID = 'darPremiumFeedStylesV79';
   var FONTS_ID = 'darPremiumFeedFontsV73';
@@ -539,7 +545,10 @@
       if (cors) opts.mode = 'cors';
       return fetch(path + sep + 'v=' + cacheVer, opts)
         .then(function (r) { return r.ok ? r.json() : null; })
-        .catch(function () { return null; });
+        .catch(function (err) {
+          darDiag('feed-backgrounds fetch failed for ' + path, err);
+          return null;
+        });
     }
     return loadJson(apiPath, true).then(function (data) {
       if (data && Array.isArray(data.items) && data.items.length) return data;
@@ -1102,7 +1111,10 @@
           }
         });
         return FEED_VIEW_STATS;
-      }).catch(function () { return FEED_VIEW_STATS; });
+      }).catch(function (err) {
+        darDiag('analytics dashboard fetch failed, using cached view stats', err);
+        return FEED_VIEW_STATS;
+      });
     });
     return FEED_STATS_PROMISE;
   }
@@ -1806,7 +1818,8 @@
           if (!r.ok) return tryNext(i + 1);
           return r.json();
         })
-        .catch(function () {
+        .catch(function (err) {
+          darDiag('manual feed fetch failed for ' + urls[i] + ', trying next source', err);
           return tryNext(i + 1);
         });
     }

@@ -110,7 +110,11 @@
         zakatConfig = global.DARZakat?.normalizeConfig(await r.json()) || null;
         zakatConfigLoaded = !!zakatConfig;
         return zakatConfig;
-      } catch (e) {}
+      } catch (e) {
+        if (typeof console !== "undefined" && console.debug) {
+          console.debug("[dar-zakat] config fetch failed for " + url + ", trying next source", e);
+        }
+      }
     }
     zakatConfig = global.DARZakat?.normalizeConfig({}) || null;
     zakatConfigLoaded = true;

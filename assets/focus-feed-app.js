@@ -5,6 +5,12 @@
 (function () {
   'use strict';
 
+  function darDiag(context, err) {
+    try {
+      if (typeof console !== 'undefined' && console.debug) console.debug('[dar-focus-feed] ' + context, err);
+    } catch (_e) {}
+  }
+
   var MOUNT_ID = 'focusFeedMount';
   var SCROLL_KEY = 'darFocusFeedScrollV1';
   var ANCHOR_KEY = 'darFocusFeedAnchorY';
@@ -222,10 +228,14 @@
           return r2.json();
         });
       })
-      .catch(function () {
+      .catch(function (err) {
+        darDiag('background primary fetch failed, trying fallback', err);
         return fetch(fallback, { cache: 'no-store' })
           .then(function (r) { return r.ok ? r.json() : { items: [] }; })
-          .catch(function () { return { items: [] }; });
+          .catch(function (fallbackErr) {
+            darDiag('background fallback fetch failed', fallbackErr);
+            return { items: [] };
+          });
       })
       .then(function (data) { return (data && data.items) || []; });
   }
@@ -620,10 +630,14 @@
           return r2.json();
         });
       })
-      .catch(function () {
+      .catch(function (err) {
+        darDiag('manual feed primary fetch failed, trying fallback', err);
         return fetch(fallback, { cache: 'no-store' })
           .then(function (r) { return r.ok ? r.json() : { items: [] }; })
-          .catch(function () { return { items: [] }; });
+          .catch(function (fallbackErr) {
+            darDiag('manual feed fallback fetch failed', fallbackErr);
+            return { items: [] };
+          });
       });
   }
 
@@ -982,7 +996,8 @@
         state.loading = false;
         render(mount);
       })
-      .catch(function () {
+      .catch(function (err) {
+        console.error('[dar-focus-feed] load/render pipeline failed', err);
         state.loading = false;
         render(mount);
       });

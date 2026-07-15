@@ -5,6 +5,12 @@
 (function (global) {
   "use strict";
 
+  function darDiag(context, err) {
+    try {
+      if (typeof console !== "undefined" && console.debug) console.debug("[dar-stories] " + context, err);
+    } catch (_e) {}
+  }
+
   const SEEN_KEY = "darSeenStoriesV1";
   const STYLES_ID = "darStoriesStylesV5";
   const FONTS_ID = "darStoriesFontsV1";
@@ -787,10 +793,10 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
     storiesLoading = true;
     try {
       if (typeof global.loadCategoryLayout === "function") {
-        await global.loadCategoryLayout().catch(() => {});
+        await global.loadCategoryLayout().catch((err) => darDiag("loadCategoryLayout failed", err));
       }
       if (!global.quranMeta && typeof global.loadQuranIndex === "function") {
-        await global.loadQuranIndex().catch(() => {});
+        await global.loadQuranIndex().catch((err) => darDiag("loadQuranIndex failed", err));
       }
       generateStories();
     } finally {
@@ -802,7 +808,7 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
 
   function onAppReady() {
     if (!document.getElementById("storyStripMount")) return;
-    refresh({ force: true }).catch(() => {});
+    refresh({ force: true }).catch((err) => darDiag("refresh on app ready failed", err));
   }
 
   global.DAR_STORIES = {
