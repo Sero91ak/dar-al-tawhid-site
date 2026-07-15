@@ -40,5 +40,6 @@ publicDir = "."
 
 [userenv]
 
-[userenv.shared]
-ONESIGNAL_API_KEY_NEW = "os_v2_app_pbwxzvqekvcdjkyubqikppdldzvwbzklwvnuwgusxkicld3xxqs3tmftkuwa6xg2fqkczk75oxp76ecb5u6zpyzbismjlzh2qluckrq"
+# Secrets must NOT be committed here. Set ONESIGNAL_API_KEY_NEW (and any other
+# secrets) in the Replit "Secrets" pane, and set the Cloudflare Worker secrets via
+# `wrangler secret put ONESIGNAL_API_KEY_NEW`. Never store live keys in this file.
