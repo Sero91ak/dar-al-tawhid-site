@@ -1,0 +1,37 @@
+name: App Health Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run app health check
+        run: node scripts/app-health-check.js
+
+      - name: Push system guard
+        run: node scripts/push-system-guard.js
+
+      - name: Version update guard (Banner-Schleife + Willkommens-Push)
+        run: node scripts/version-update-guard.js
+
+      - name: Visitor SW must not touch admin
+        run: |
+          if grep -E "'/admin|\"/admin" service-worker.js | grep -q APP_SHELL; then
+            echo "::error::service-worker.js must not cache /admin paths in APP_SHELL"
+            exit 1
+          fi
+          echo "SW isolation OK"

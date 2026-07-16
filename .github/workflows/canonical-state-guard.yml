@@ -1,0 +1,109 @@
+name: Canonical State Guard
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Visitor app must stay complete
+        run: |
+          lines=$(wc -l < index.html)
+          if [ "$lines" -lt 6000 ]; then
+            echo "::error::index.html has $lines lines; expected at least 6000 (full visitor app)."
+            exit 1
+          fi
+          echo "Visitor index.html OK ($lines lines)."
+
+      - name: Admin must stay Command Center
+        run: |
+          if grep -qE 'Admin-Zentrale|Blaue Admin' admin/index.html; then
+            echo "::error::admin/index.html contains the forbidden blue Admin-Zentrale layout."
+            exit 1
+          fi
+          if ! grep -q 'Command Center' admin/index.html; then
+            echo "::error::admin/index.html must contain the Command Center UI."
+            exit 1
+          fi
+          admin_lines=$(wc -l < admin/index.html)
+          if [ "$admin_lines" -lt 1000 ]; then
+            echo "::error::admin/index.html has $admin_lines lines; expected at least 1000."
+            exit 1
+          fi
+          echo "Admin Command Center OK ($admin_lines lines)."
+
+      - name: Posts index must stay populated
+        run: |
+          count=$(python3 -c "import json; print(len(json.load(open('content/posts/posts-index.json'))['files']))")
+          if [ "$count" -lt 350 ]; then
+            echo "::error::posts-index.json has $count entries; expected at least 350."
+            exit 1
+          fi
+          echo "posts-index.json OK ($count entries)."
+
+      - name: Bild-Beitrag templates must exist
+        run: |
+          missing=0
+          for name in bibliothek-braun gruen-moschee nachtblau-buecher sanft-rose schwarz-buecher bordeaux petrol-pflanze olive-pflanze royal-blau sand-buecher buecher-teal olive-mihrab petrol-ornament schwarz-welle nacht-mond schwarz-rahmen; do
+            if [ ! -s "assets/post-templates/${name}.jpg" ]; then
+              echo "::error::Missing assets/post-templates/${name}.jpg"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then exit 1; fi
+          echo "Bild-Beitrag templates OK (16 files)."
+
+      - name: Daily push toggles must exist
+        run: |
+          grep -q 'syncDailyPushTags' index.html || { echo "::error::Daily push sync missing from index.html"; exit 1; }
+          grep -q 'daily-push-panel' index.html || { echo "::error::Daily push panel missing from index.html"; exit 1; }
+          grep -q 'data-daily-push' index.html || { echo "::error::Home push buttons missing from index.html"; exit 1; }
+          echo "Daily push feature OK."
+
+      - name: Push system guard (Worker Cron + API + App-Sync)
+        run: node scripts/push-system-guard.js
+
+      - name: App health check script
+        run: node scripts/app-health-check.js
+
+      - name: Version update guard (Banner-Schleife + Willkommens-Push)
+        run: node scripts/version-update-guard.js
+
+      - name: Bottom nav guard (Tab-Leiste fix am Viewport)
+        run: node scripts/bottom-nav-guard.js
+
+      - name: Publish isolation guard (Admin darf Besucher nicht überlasten)
+        run: node scripts/publish-isolation-guard.js
+
+      - name: Post markdown guard (Admin-YAML reparieren vor Upload)
+        run: node scripts/post-markdown-guard.js
+
+      - name: Source files guard (Admin Quellen-Upload PDF/Bild)
+        run: node scripts/source-files-guard.js
+
+      - name: Quellen manager tests (Slide/Link YAML)
+        run: node scripts/quellen-manager-test.js
+
+      - name: Slide post parser unit tests (Frontmatter/Marker/Slides)
+        run: node scripts/slide-post-parser-test.js
+
+      - name: Feed background safety unit tests (Natur-Fokus/Filter)
+        run: node scripts/feed-background-safety-test.js
+
+      - name: Slide post guard (Carousel + Parser + Theme-Tokens)
+        run: node scripts/slide-post-guard.js
+
+      - name: Posts load guard (kein blockierendes Voll-Reload beim App-Start)
+        run: node scripts/posts-load-guard.js

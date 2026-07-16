@@ -1,0 +1,17 @@
+name = "dar-admin-publisher"
+main = "worker.js"
+compatibility_date = "2026-06-14"
+
+[vars]
+GITHUB_OWNER = "Sero91ak"
+GITHUB_REPO = "dar-al-tawhid-site"
+GITHUB_BRANCH = "main"
+POSTS_DIR = "content/posts"
+ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
+
+# Required Cloudflare secrets:
+# wrangler secret put GITHUB_TOKEN
+# wrangler secret put ADMIN_PUBLISH_SECRET
+# wrangler secret put PEXELS_API_KEY
+# wrangler secret put UNSPLASH_ACCESS_KEY
+# wrangler secret put PIXABAY_API_KEY

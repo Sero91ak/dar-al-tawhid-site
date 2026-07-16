@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: DAR AL TAWHID Instagram Kurzlink API
+  description: postType image = nur Aussage+Quelle. postType channel = voller Text.
+  version: 1.1.0
+servers:
+  - url: https://dar-admin-publisher.sero91ak.workers.dev
+paths:
+  /api/admin/shortlinks/channel-create:
+    post:
+      operationId: createInstagramChannelPost
+      summary: Instagram-Beitrag mit echtem Kurzlink erstellen
+      description: postType image = Bild-Beitrag nur Aussage und Quelle. Kein Fazit, keine Erklaerung.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - postType
+                - sourceCitation
+                - targetUrl
+                - adminNote
+                - quote
+              properties:
+                postType:
+                  type: string
+                  enum: [image, channel]
+                scholar:
+                  type: string
+                title:
+                  type: string
+                hashtags:
+                  type: string
+                statement:
+                  type: string
+                sourceCitation:
+                  type: string
+                targetUrl:
+                  type: string
+                adminNote:
+                  type: string
+                quote:
+                  type: string
+                fazit:
+                  type: string
+                sourcePlatform:
+                  type: string
+                textHighlightException:
+                  type: boolean
+                textHighlightNote:
+                  type: string
+      responses:
+        "200":
+          description: Erfolg
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  code:
+                    type: string
+                  shortUrl:
+                    type: string
+                  instagramPost:
+                    type: string
+                  instagramLine:
+                    type: string
+components:
+  schemas: {}
+  securitySchemes:
+    AdminSecret:
+      type: apiKey
+      in: header
+      name: X-Admin-Secret

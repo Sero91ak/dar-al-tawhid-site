@@ -1,0 +1,69 @@
+name: Send OneSignal push for new posts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/posts/*.md'
+      - 'content/posts/**/*.md'
+  workflow_dispatch:
+
+jobs:
+  notify:
+    name: Send push notification
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      SITE_URL: "https://dar-al-tawhid.de"
+      ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Detect changed post files
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > changed-posts.txt
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "manual" > changed-posts.txt
+            exit 0
+          fi
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            git ls-tree -r --name-only "$AFTER" content/posts | grep -E '^content/posts/.*\.md$' > changed-posts.txt || true
+          else
+            git diff --name-only "$BEFORE" "$AFTER" -- 'content/posts/*.md' 'content/posts/**/*.md' > changed-posts.txt || true
+          fi
+
+          echo "Changed posts:"
+          cat changed-posts.txt || true
+
+      - name: Send OneSignal notification
+        env:
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          if [ -z "${ONESIGNAL_API_KEY_NEW:-}" ] && [ -z "${ONESIGNAL_API_KEY:-}" ] && [ -z "${ONESIGNAL_APP_API_KEY:-}" ]; then
+            echo "Hinweis: Kein OneSignal API-Key in GitHub Secrets gesetzt."
+            echo "Der Cloudflare Worker kann Push trotzdem senden, wenn ONESIGNAL_API_KEY_NEW dort gesetzt ist."
+          fi
+          node scripts/send-post-push.js

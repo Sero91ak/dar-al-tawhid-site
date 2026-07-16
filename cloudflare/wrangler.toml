@@ -1,0 +1,28 @@
+name = "dar-admin-publisher"
+main = "worker.js"
+compatibility_date = "2026-06-14"
+
+[vars]
+GITHUB_OWNER = "Sero91ak"
+GITHUB_REPO = "dar-al-tawhid-site"
+GITHUB_BRANCH = "main"
+POSTS_DIR = "content/posts"
+ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
+UPDATES_PATH = "content/updates/current.json"
+SCHEDULE_PATH = "content/admin/planned-posts.json"
+PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json"
+DAILY_PUSH_STATUS_PATH = "content/admin/daily-push-status.json"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Secrets (einmalig setzen, bleiben am Worker gespeichert):
+#   wrangler secret put GITHUB_TOKEN
+#   wrangler secret put ADMIN_PUBLISH_SECRET
+#   wrangler secret put ONESIGNAL_API_KEY_NEW
+#   wrangler secret put ONESIGNAL_APP_ID   (optional, Standard ist gesetzt)
+#   wrangler secret put GOLDAPI_KEY        (optional Premium — sonst Auto LBMA+EUR)
+#   wrangler secret put METALS_API_KEY     (optional Alternative)
+#   wrangler secret put PEXELS_API_KEY     (Feed-Hintergrund Auto-Sync)
+#   wrangler secret put UNSPLASH_ACCESS_KEY
+#   wrangler secret put PIXABAY_API_KEY

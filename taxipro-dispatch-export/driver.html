@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#0a1628"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Fahrer"/>
+<meta name="apple-mobile-web-app-starturl" content="driver.html?source=pwa"/>
+<link rel="manifest" href="manifest-driver.json"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<title>TaxiPro Fahrer</title>
+<style>
+:root{--bg:#0a1628;--text:#e8f4fc;--teal:#14b8a6;--blue:#38bdf8;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + var(--safe-top));padding-bottom:calc(24px + var(--safe-bottom))}
+.logo{font-size:24px;font-weight:800;margin-bottom:8px;color:var(--blue)}
+.logo em{color:var(--teal);font-style:normal}
+.sub{font-size:14px;opacity:.8;text-align:center;line-height:1.5;margin-bottom:24px;color:#94b8d4;max-width:320px}
+.spinner{width:40px;height:40px;border:3px solid rgba(20,184,166,.2);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.install-box{background:#122338;border:1px solid #14b8a6;border-radius:14px;padding:18px;max-width:340px;width:100%;text-align:left}
+.install-box h2{font-size:16px;color:#5eead4;margin-bottom:10px}
+.install-box ol{margin:10px 0 16px 18px;font-size:13px;line-height:1.55;color:#94b8d4}
+.install-box li{margin-bottom:8px}
+.btn{display:inline-block;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;text-align:center}
+.btn-teal{background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;margin-bottom:10px}
+.btn-ghost{background:transparent;border:1px solid #334155;color:#94b8d4}
+a{color:var(--teal)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div id="boot-screen">
+  <div class="spinner" aria-hidden="true"></div>
+  <div class="logo">TaxiPro <em>Fahrer</em></div>
+  <p class="sub">Wird geladen…</p>
+</div>
+<div id="install-screen" class="hidden">
+  <div class="logo">TaxiPro <em>Fahrer</em></div>
+  <div class="install-box">
+    <h2>📲 Fahrer-App installieren</h2>
+    <p class="sub" style="margin-bottom:12px;text-align:left">Wichtig: Von <strong>dieser Seite</strong> installieren – dann startet die Fahrer-App, nicht die Zentrale.</p>
+    <ol id="install-steps-ios">
+      <li>Safari: unten <strong>Teilen</strong> (□↑)</li>
+      <li><strong>Zum Home-Bildschirm</strong> wählen</li>
+      <li><strong>Hinzufügen</strong> tippen</li>
+    </ol>
+    <ol id="install-steps-android" class="hidden">
+      <li>Unten auf <strong>App installieren</strong> tippen</li>
+      <li>Im Dialog bestätigen</li>
+    </ol>
+    <button type="button" class="btn btn-teal" id="btn-android-install" style="display:none">App installieren</button>
+    <button type="button" class="btn btn-ghost" onclick="openDriverApp()">App öffnen (ohne Install)</button>
+  </div>
+</div>
+<script>
+(function(){
+  var p=new URLSearchParams(location.search);
+  if(location.hash.length>1){new URLSearchParams(location.hash.slice(1)).forEach(function(v,k){if(!p.has(k))p.set(k,v);});}
+  var installMode=p.get('install')==='1';
+  var boot=p.get('boot'),token=p.get('t')||p.get('token'),id=p.get('d'),pin=p.get('p');
+  var sy=p.get('sy'),pu=p.get('pu'),gd=p.get('gd');
+  try{
+    localStorage.setItem('tp_app_role','driver');
+    if(boot){localStorage.setItem('tp_driver_boot',boot);sessionStorage.setItem('tp_driver_boot',boot);}
+    if(token){localStorage.setItem('tp_driver_token',token);sessionStorage.setItem('tp_driver_token',token);}
+    if(id) localStorage.setItem('tp_driver_id',id);
+    if(pin) localStorage.setItem('tp_driver_pin',pin);
+    if(p.get('fn')) localStorage.setItem('tp_driver_fn',p.get('fn'));
+    if(p.get('ln')) localStorage.setItem('tp_driver_ln',p.get('ln'));
+    if(sy) localStorage.setItem('tp_sync_folder_url',sy);
+    if(pu) localStorage.setItem('tp_public_sync_url',pu);
+    if(gd){
+      localStorage.setItem('tp_gdrv_file_id',gd);
+      localStorage.setItem('tp_gdrv_public_url','https://drive.google.com/uc?export=download&id='+gd);
+      localStorage.setItem('tp_public_sync_url','https://drive.google.com/uc?export=download&id='+gd);
+      localStorage.setItem('tp_gdrv_sync','1');
+    }
+    if(!token) token=localStorage.getItem('tp_driver_token');
+    if(!id) id=localStorage.getItem('tp_driver_id');
+    if(!pin) pin=localStorage.getItem('tp_driver_pin');
+    if(!boot) boot=localStorage.getItem('tp_driver_boot');
+  }catch(e){}
+  var qs=new URLSearchParams();
+  qs.set('mode','driver');
+  if(p.get('source')) qs.set('source',p.get('source'));
+  if(id) qs.set('d',id);
+  if(token) qs.set('t',token);
+  if(pin) qs.set('p',pin);
+  if(p.get('fn')) qs.set('fn',p.get('fn'));
+  if(p.get('ln')) qs.set('ln',p.get('ln'));
+  if(sy) qs.set('sy',sy);
+  if(pu) qs.set('pu',pu);
+  if(gd) qs.set('gd',gd);
+  if(boot) qs.set('boot',boot);
+  window.openDriverApp=function(){
+    location.replace('index.html?'+qs.toString());
+  };
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./service-worker.js',{scope:'./'}).catch(function(){});
+  }
+  var isIOS=/iPad|iPhone|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  var isAndroid=/Android/i.test(navigator.userAgent);
+  var deferredPrompt=null;
+  if(installMode){
+    document.getElementById('boot-screen').classList.add('hidden');
+    document.getElementById('install-screen').classList.remove('hidden');
+    if(isAndroid){
+      document.getElementById('install-steps-ios').classList.add('hidden');
+      document.getElementById('install-steps-android').classList.remove('hidden');
+      var btn=document.getElementById('btn-android-install');
+      btn.style.display='block';
+      window.addEventListener('beforeinstallprompt',function(e){
+        e.preventDefault();
+        deferredPrompt=e;
+        btn.textContent='App installieren';
+      });
+      btn.onclick=function(){
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function(r){
+            deferredPrompt=null;
+            if(r.outcome==='accepted') setTimeout(openDriverApp,800);
+          });
+        }else{
+          alert('Menü ⋮ → App installieren / Zum Startbildschirm');
+        }
+      };
+    }
+    return;
+  }
+  setTimeout(function(){ openDriverApp(); }, 80);
+})();
+</script>
+<noscript><p><a href="index.html?mode=driver">TaxiPro Fahrer-App öffnen</a></p></noscript>
+</body>
+</html>

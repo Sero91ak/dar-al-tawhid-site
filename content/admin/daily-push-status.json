@@ -1,17 +1,28 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "warning",
-  "updatedAt": "2026-07-16T11:20:04.835Z",
-  "lastError": "Kein aktiver Tagesinhalt in content/updates/daily.json für heute – Push nicht gesendet (keine Zufallsauswahl)",
-  "dailyContentDate": null,
-  "checked": 0,
+  "schedulerStatus": "success",
+  "updatedAt": "2026-07-15T20:50:04.834Z",
+  "usersChecked": 18,
   "duaCandidates": 0,
   "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
-  "errors": 0,
   "duplicates": 0,
+  "errors": 0,
+  "dailyContentDate": "2026-07-15",
+  "currentRecommendation": {
+    "id": "herzen-und-taten-001",
+    "title": "Allah schaut auf Herzen und Taten",
+    "category": "Tazkiyah",
+    "scholar": "Prophet ﷺ"
+  },
+  "currentDua": {
+    "id": "sunnah-002",
+    "title": "Schutz durch Allahs vollkommene Worte",
+    "category": "Schutz"
+  },
+  "configAutomatic": true,
   "responses": []
 }

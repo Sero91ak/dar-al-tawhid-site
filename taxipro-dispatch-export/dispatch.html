@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#0a1628"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Zentrale"/>
+<meta name="apple-mobile-web-app-starturl" content="dispatch.html?source=pwa"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<title>TaxiPro Zentrale</title>
+<style>
+:root{--bg:#0a1628;--gold:#f5a623;--gold2:#e8941a;--text:#f2f6fa;--muted:#94a8be;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(ellipse 120% 80% at 50% -20%,rgba(245,166,35,.12),transparent),var(--bg);color:var(--text);min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + var(--safe-top));padding-bottom:calc(24px + var(--safe-bottom))}
+.brand{font-size:26px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+.brand em{color:var(--gold);font-style:normal}
+.sub{font-size:14px;color:var(--muted);text-align:center;line-height:1.55;margin-bottom:22px;max-width:320px}
+.spinner{width:42px;height:42px;border:3px solid rgba(245,166,35,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .75s linear infinite;margin-bottom:18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.install-box{background:rgba(34,46,63,.95);border:1px solid rgba(245,166,35,.35);border-radius:18px;padding:20px;max-width:360px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.install-box h2{font-size:17px;color:var(--gold);margin-bottom:10px;font-weight:700}
+.install-box ol{margin:10px 0 16px 18px;font-size:13px;line-height:1.55;color:var(--muted)}
+.install-box li{margin-bottom:8px}
+.btn{display:inline-block;width:100%;padding:15px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;text-align:center}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1628;margin-bottom:10px}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--muted)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div id="boot-screen">
+  <div class="spinner" aria-hidden="true"></div>
+  <div class="brand">TaxiPro <em>Zentrale</em></div>
+  <p class="sub">Disposition wird geladen…</p>
+</div>
+<div id="install-screen" class="hidden">
+  <div class="brand">TaxiPro <em>Zentrale</em></div>
+  <p class="sub" style="margin-bottom:16px">Disponenten-App – Kalender, Kunden, Fahrer-Vermittlung</p>
+  <div class="install-box">
+    <h2>📲 Zentrale installieren</h2>
+    <p class="sub" style="text-align:left;margin-bottom:12px;font-size:12px">Wichtig: Von <strong>dispatch.html</strong> installieren – dann startet die Zentrale, nicht die Fahrer-App.</p>
+    <ol id="install-steps-ios">
+      <li>Safari: <strong>Teilen</strong> (□↑) → <strong>Zum Home-Bildschirm</strong></li>
+      <li>Name: <strong>Zentrale</strong> → <strong>Hinzufügen</strong></li>
+    </ol>
+    <ol id="install-steps-android" class="hidden">
+      <li><strong>App installieren</strong> tippen und bestätigen</li>
+    </ol>
+    <button type="button" class="btn btn-gold" id="btn-android-install" style="display:none">App installieren</button>
+    <button type="button" class="btn btn-ghost" onclick="openDispatchApp()">App öffnen (ohne Install)</button>
+  </div>
+</div>
+<script>
+(function(){
+  try{localStorage.setItem('tp_app_role','dispatch');}catch(e){}
+  var installMode=new URLSearchParams(location.search).get('install')==='1';
+  window.openDispatchApp=function(){
+    location.replace('index.html?mode=dispatch&source=pwa');
+  };
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./service-worker.js',{scope:'./'}).catch(function(){});
+  }
+  if(installMode){
+    document.getElementById('boot-screen').classList.add('hidden');
+    document.getElementById('install-screen').classList.remove('hidden');
+    if(/Android/i.test(navigator.userAgent)){
+      document.getElementById('install-steps-ios').classList.add('hidden');
+      document.getElementById('install-steps-android').classList.remove('hidden');
+      var btn=document.getElementById('btn-android-install');
+      btn.style.display='block';
+      var deferredPrompt=null;
+      window.addEventListener('beforeinstallprompt',function(e){
+        e.preventDefault();deferredPrompt=e;
+      });
+      btn.onclick=function(){
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function(r){
+            if(r.outcome==='accepted') setTimeout(openDispatchApp,600);
+          });
+        }else alert('Menü ⋮ → App installieren');
+      };
+    }
+    return;
+  }
+  setTimeout(openDispatchApp,80);
+})();
+</script>
+</body>
+</html>

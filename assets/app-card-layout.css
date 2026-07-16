@@ -1,0 +1,528 @@
+/* DAR AL TAWḤID — Appweites Card-/Panel-Layout-System (Safe-Zones, Tokens) */
+:root {
+  --app-page-padding-x: clamp(14px, 4vw, 22px);
+  --app-section-gap: clamp(18px, 4vw, 28px);
+  --card-radius-sm: 16px;
+  --card-radius-md: 22px;
+  --card-radius-lg: 28px;
+  --card-radius-xl: 34px;
+  --card-padding-x-sm: clamp(14px, 4vw, 20px);
+  --card-padding-x-md: clamp(18px, 4.5vw, 26px);
+  --card-padding-x-lg: clamp(22px, 5vw, 34px);
+  --card-padding-y-sm: 14px;
+  --card-padding-y-md: 18px;
+  --card-padding-y-lg: 24px;
+  --card-safe-top-sm: 16px;
+  --card-safe-top-md: 22px;
+  --card-safe-top-lg: 30px;
+  --card-safe-left-sm: 16px;
+  --card-safe-left-md: 22px;
+  --card-safe-left-lg: 30px;
+  --card-header-gap: 8px;
+  --card-title-gap: 10px;
+  --card-meta-gap: 6px;
+  --card-label-size: clamp(0.72rem, 2.7vw, 0.86rem);
+  --card-title-size: clamp(1.45rem, 6vw, 2.4rem);
+  --card-subtitle-size: clamp(0.96rem, 3.8vw, 1.12rem);
+  --card-label-line-height: 1.22;
+  --card-title-line-height: 1.12;
+  --card-body-line-height: 1.45;
+  --card-arabic-line-height: 1.85;
+}
+
+/* —— Basis-Karte —— */
+.app-card,
+.premium-surface.app-card {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: var(--card-radius-lg);
+  overflow: hidden;
+}
+
+.app-card--compact { border-radius: var(--card-radius-sm); }
+.app-card--standard { border-radius: var(--card-radius-md); }
+.app-card--hero { border-radius: var(--card-radius-xl); }
+.app-card--feed { border-radius: var(--card-radius-md); }
+.app-card--zakat { border-radius: var(--card-radius-md); }
+
+/* Variante A: Karte mit Innenpadding, Header ohne Extra-Rand */
+.app-card--padded {
+  padding: var(--card-padding-y-md) var(--card-padding-x-md);
+}
+
+.app-card--radius-xl .card-header,
+.app-card--hero .card-header {
+  padding-top: max(var(--card-safe-top-lg), 2px);
+  padding-inline: max(var(--card-safe-left-lg), 2px);
+}
+
+/* —— Card-Header-System —— */
+.card-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-header-gap);
+  padding-top: max(var(--card-safe-top-md), 1px);
+  padding-inline: var(--card-safe-left-md);
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.card-header--row {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-header__copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-title-gap);
+}
+
+.card-label,
+.card-header .card-label {
+  display: block;
+  font-size: var(--card-label-size);
+  line-height: var(--card-label-line-height);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--premium-label, var(--muted2));
+  margin: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.card-title,
+.card-header .card-title,
+.card-header h2.card-title,
+.card-header h3.card-title {
+  font-family: var(--serif);
+  font-size: var(--card-title-size);
+  line-height: var(--card-title-line-height);
+  font-weight: 800;
+  color: var(--premium-title, var(--gold2));
+  margin: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+  text-shadow: none;
+}
+
+.card-subtitle,
+.card-header .card-subtitle {
+  font-size: var(--card-subtitle-size);
+  line-height: var(--card-body-line-height);
+  color: var(--premium-body, var(--muted));
+  margin: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+}
+
+.card-meta {
+  font-size: clamp(0.68rem, 2.4vw, 0.78rem);
+  line-height: var(--card-label-line-height);
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Serif-/Label-Sicherheit: nicht abschneiden */
+.card-header,
+.card-header .card-title,
+.card-header .card-label,
+.card-header h2,
+.card-header h3 {
+  overflow: visible;
+}
+
+/* —— Bestehende Karten an Tokens binden —— */
+.folder-card,
+.post-card,
+.list-card,
+.info-card,
+.dua-card,
+.overview-panel,
+.direct-pick-panel,
+.search-pro-panel,
+.filter-panel,
+.profile-box,
+.book-profile-box,
+.series-box,
+.pinned-box,
+.daily-box,
+.recommended-box,
+.theme-switch-panel,
+.account-panel,
+.first-visit-panel,
+.calendar-panel,
+.prayer-quick-card,
+.prayer-panel,
+.qibla-panel,
+.statement,
+.dua-detail-box {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+.folder-card,
+.post-card,
+.list-card,
+.info-card,
+.dua-card {
+  padding: var(--card-padding-y-md) var(--card-padding-x-md);
+  border-radius: var(--card-radius-md);
+}
+
+.overview-panel,
+.direct-pick-panel,
+.search-pro-panel,
+.profile-box,
+.book-profile-box,
+.series-box,
+.pinned-box,
+.calendar-panel,
+.prayer-panel,
+.qibla-panel {
+  padding: var(--card-padding-y-md) var(--card-padding-x-md);
+  border-radius: var(--card-radius-md);
+}
+
+.stat-card,
+.event-card,
+.series-card,
+.pinned-card,
+.account-summary-card {
+  padding: var(--card-padding-y-sm) var(--card-padding-x-sm);
+  border-radius: var(--card-radius-sm);
+  box-sizing: border-box;
+}
+
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.info-card h3,
+.dua-card h3,
+.overview-title h3,
+.direct-pick-title h3,
+.section-head h3,
+.calendar-title h3 {
+  line-height: var(--card-title-line-height);
+  overflow-wrap: anywhere;
+}
+
+.daily-label,
+.recommended-label,
+.eyebrow,
+.view-head .eyebrow,
+.zakat-home-teaser-label {
+  font-size: var(--card-label-size);
+  line-height: var(--card-label-line-height);
+  overflow-wrap: anywhere;
+}
+
+.view-head {
+  padding: var(--card-safe-top-sm) var(--card-safe-left-sm) var(--card-padding-y-md);
+  box-sizing: border-box;
+}
+
+.view-head h2 {
+  line-height: var(--card-title-line-height);
+  overflow-wrap: anywhere;
+}
+
+.view-desc {
+  line-height: var(--card-body-line-height);
+}
+
+.section-head {
+  padding-inline: 2px;
+  margin-bottom: var(--card-title-gap);
+}
+
+.section-head h3 {
+  line-height: var(--card-title-line-height);
+}
+
+.badge,
+.folder-meta span {
+  line-height: var(--card-label-line-height);
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+.dua-arabic,
+.quran-arabic,
+.zakat-ar {
+  line-height: var(--card-arabic-line-height);
+}
+
+.statement,
+.dua-detail-box,
+.excerpt {
+  line-height: var(--card-body-line-height);
+}
+
+/* —— ZAKĀT: Safe-Zones für stark gerundete Akkordeon-Karten —— */
+.zakat-view {
+  --zakat-r-lg: var(--card-radius-sm);
+  --zakat-shell-gap: 5px;
+  --zakat-acc-px: 11px;
+  --zakat-acc-pt: 7px;
+  --zakat-acc-pb: 6px;
+}
+
+.zakat-shell {
+  gap: var(--zakat-shell-gap) !important;
+  padding-bottom: 6px !important;
+}
+
+.zakat-shell .zakat-hero,
+.zakat-shell .zakat-panel,
+.zakat-shell .zakat-acc,
+.zakat-shell .zakat-result-strip {
+  border-radius: var(--card-radius-md) !important;
+  box-sizing: border-box;
+}
+
+.zakat-acc.app-card--zakat {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.zakat-acc .zakat-acc-head.card-header {
+  width: 100%;
+  padding:
+    var(--zakat-acc-pt, var(--card-safe-top-lg))
+    var(--zakat-acc-px, var(--card-safe-left-lg))
+    var(--zakat-acc-pb, var(--card-padding-y-sm))
+    var(--zakat-acc-px, var(--card-safe-left-lg));
+  margin: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.zakat-acc .zakat-acc-copy.card-header__copy {
+  padding: 0;
+  gap: 2px;
+  min-width: 0;
+}
+
+.zakat-acc.is-closed .zakat-acc-head.card-header {
+  align-items: center;
+  padding-bottom: var(--zakat-acc-pb) !important;
+}
+
+.zakat-acc .zakat-acc-kicker.card-label {
+  font-size: clamp(0.58rem, 2.1vw, 0.68rem);
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+.zakat-acc .zakat-acc-head h3.card-title {
+  font-size: clamp(0.88rem, 2.7vw, 1rem);
+  line-height: 1.12;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+}
+
+.zakat-acc .zakat-acc-preview-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin: 2px 0 0;
+  padding: 0;
+  font-size: 10px;
+  line-height: 1.3;
+  color: var(--premium-body, var(--muted));
+}
+
+.zakat-acc .zakat-acc-preview-line .zakat-pill {
+  padding: 2px 7px;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.zakat-acc .zakat-acc-preview-line .zakat-muted {
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.zakat-acc .zakat-acc-chevron {
+  margin-top: 0;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.zakat-acc.is-closed .zakat-acc-chevron {
+  align-self: center;
+  margin-top: 0;
+}
+
+.zakat-acc .zakat-acc-chevron:before {
+  width: 6px;
+  height: 6px;
+}
+
+.zakat-acc .zakat-acc-preview,
+.zakat-acc .zakat-acc-body {
+  margin: 0;
+  padding: 0 var(--zakat-acc-px, var(--card-safe-left-lg)) 10px;
+  box-sizing: border-box;
+}
+
+.zakat-acc .zakat-acc-preview-inner,
+.zakat-acc .zakat-acc-body-inner {
+  padding: 6px 8px;
+  overflow: visible;
+  line-height: 1.35;
+  font-size: 10px;
+}
+
+.zakat-panel,
+.zakat-result-strip,
+.zakat-hero-compact {
+  padding: 8px var(--zakat-acc-px, var(--card-safe-left-md)) 7px !important;
+  box-sizing: border-box;
+}
+
+.zakat-view .zakat-strip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 10%, var(--line2));
+}
+
+.zakat-view .zakat-strip-kicker {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--premium-label);
+  font-weight: 800;
+}
+
+.zakat-view .zakat-strip-title {
+  font-family: var(--serif);
+  font-size: clamp(0.98rem, 3vw, 1.12rem) !important;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 800;
+  color: var(--premium-title);
+}
+
+.zakat-view .zakat-strip-sub {
+  font-size: 9.5px;
+  color: var(--premium-body);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.zakat-view .zakat-result-label {
+  font-size: 8px !important;
+  margin-bottom: 3px !important;
+  letter-spacing: 0.12em;
+}
+
+.zakat-view .zakat-result-amount {
+  font-size: clamp(1.35rem, 4.6vw, 1.62rem) !important;
+  line-height: 1.05 !important;
+}
+
+.zakat-view .zakat-result-strip .zakat-banner {
+  margin-bottom: 6px !important;
+  padding: 7px 9px !important;
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+.zakat-view .zakat-result-strip-meta {
+  gap: 4px !important;
+  margin-top: 4px !important;
+}
+
+.zakat-view .zakat-result-sub {
+  font-size: 10px !important;
+  margin-top: 0 !important;
+}
+
+.zakat-view .zakat-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.zakat-panel-head {
+  padding-top: 2px;
+  margin-bottom: var(--card-title-gap);
+}
+
+.zakat-panel-head h3 {
+  line-height: var(--card-title-line-height);
+}
+
+.zakat-home-teaser {
+  padding: var(--card-safe-top-md) var(--card-safe-left-md) var(--card-padding-y-md);
+  border-radius: var(--card-radius-md);
+  box-sizing: border-box;
+}
+
+.zakat-home-teaser h3 {
+  line-height: var(--card-title-line-height);
+}
+
+/* Themes dürfen Farben ändern — Layout-Tokens bleiben */
+html[data-theme] .card-header,
+html[data-theme] .zakat-acc .zakat-acc-head.card-header,
+html[data-theme] .folder-card,
+html[data-theme] .post-card,
+html[data-theme] .overview-panel,
+html[data-theme] .zakat-acc.app-card--zakat {
+  /* keine theme-spezifischen Padding-Overrides */
+}
+
+@media (max-width: 390px) {
+  :root {
+    --card-safe-top-lg: 26px;
+    --card-safe-left-lg: 20px;
+    --card-padding-x-md: clamp(16px, 4.2vw, 22px);
+  }
+
+  .folder-card,
+  .post-card,
+  .list-card {
+    padding: var(--card-padding-y-md) var(--card-padding-x-sm);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 980px) {
+  .folder-card,
+  .post-card,
+  .list-card,
+  .info-card,
+  .dua-card {
+    padding: var(--card-padding-y-md) var(--card-padding-x-md);
+  }
+}

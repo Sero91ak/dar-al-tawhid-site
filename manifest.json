@@ -1,0 +1,45 @@
+{
+  "name": "DAR AL TAWḤID",
+  "short_name": "DAR AL TAWḤID",
+  "start_url": "/?source=pwa&v=header-nav-collapse-fix",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#06110b",
+  "theme_color": "#06110b",
+  "description": "Beiträge aus Qurʾān, Sunnah und Āthār.",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon-16.png?v=onesignal-clean-reset",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32.png?v=onesignal-clean-reset",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48.png?v=onesignal-clean-reset",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/app-icon-192.png?v=onesignal-clean-reset",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/app-icon-512.png?v=onesignal-clean-reset",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "/",
+  "display_override": [
+    "standalone",
+    "fullscreen"
+  ]
+}

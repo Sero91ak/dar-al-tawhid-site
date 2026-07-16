@@ -1,0 +1,46 @@
+{
+  "name": "TaxiPro Zentrale",
+  "short_name": "Zentrale",
+  "description": "Disposition für Taxi Meckenheim – Kalender, Kunden, Fahrer-Vermittlung",
+  "prefer_related_applications": false,
+  "start_url": "./dispatch.html?source=pwa",
+  "shortcuts": [
+    {
+      "name": "Neue Fahrt",
+      "short_name": "Fahrt",
+      "description": "Neue Fahrt anlegen",
+      "url": "./dispatch.html?source=pwa&action=ride",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Fahrer-App",
+      "short_name": "Fahrer",
+      "description": "Separate Fahrer-App öffnen",
+      "url": "./driver.html?source=pwa",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "scope": "./",
+  "id": "./dispatch.html",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "orientation": "any",
+  "background_color": "#0a1628",
+  "theme_color": "#0a1628",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"]
+}
