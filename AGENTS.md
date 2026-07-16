@@ -28,4 +28,15 @@ Das Push-System ist geschützt durch `scripts/push-system-guard.js` und CI (Cano
 - Entfernen von `syncPrayerPushTags`, `syncDailyPushTags`, `savePushRegistration`, Tages-Push-Panel in `index.html`/`test/index.html`
 - Admin-Rollbacks die den Worker auf reine Publish-Logik reduzieren
 
-**Vor jedem Merge auf `main`:** `node scripts/push-system-guard.js` muss grün sein. Bei Worker-Änderungen deployt die GitHub Action nur, wenn der Guard besteht.
+**Vor jedem Merge auf `main`:** `node scripts/push-system-guard.js` und `node scripts/repo-integrity-guard.js` müssen grün sein. Bei Worker-Änderungen deployt die GitHub Action nur, wenn der Guard besteht.
+
+## Repo-Integritäts-Schutz (streng – nicht verletzen)
+
+Geschützt durch `scripts/repo-integrity-guard.js` und CI (Canonical State Guard, App Health Check, Deploy).
+
+**Verboten ohne ausdrückliche Freigabe des Nutzers:**
+- Löschen oder Ausdünnen von Kern-Ordnern: `assets/`, `content/`, `admin/`, `cloudflare/`, `scripts/`
+- Massen-Löschung (>80 Dateien in einem Commit)
+- Entfernen von `assets/live-boot.js`, `manifest.json`, `wrangler.toml`, `content/posts/`, `admin/index.html`
+
+**CI blockiert** Push/Merge/Deploy wenn zu wenige Dateien im Repo sind oder geschützte Pfade gelöscht würden.

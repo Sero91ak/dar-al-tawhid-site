@@ -22,6 +22,11 @@ jobs:
       - name: Run app health check
         run: node scripts/app-health-check.js
 
+      - name: Repo integrity guard (Massen-Löschung blockieren)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/repo-integrity-guard.js
+
       - name: Push system guard
         run: node scripts/push-system-guard.js
 

@@ -128,6 +128,10 @@ if (versionGuardFails) failed += versionGuardFails;
 if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-prayer-push.js fehlt");
 if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");
 
+// Repo-Integrität (Massen-Lösch-Schutz)
+const repoIntegrityFails = require("./repo-integrity-guard.js").runRepoIntegrityGuard();
+if (repoIntegrityFails) failed += repoIntegrityFails;
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);

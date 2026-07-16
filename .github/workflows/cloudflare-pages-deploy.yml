@@ -19,6 +19,7 @@ on:
       - _headers
       - scripts/cf-pages-build.js
       - scripts/app-health-check.js
+      - scripts/repo-integrity-guard.js
       - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:

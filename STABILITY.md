@@ -69,9 +69,10 @@ git checkout stable-last-working -- index.html admin/index.html service-worker.j
 ## Deploy-Regeln
 
 1. **Kein direkter Push auf `main`** ohne grünen CI-Check (`Canonical State Guard` + `App Health Check`)
-2. Neue Features zuerst in **Test-App** (`/?env=staging`) prüfen
-3. **Live-Veröffentlichung** nur wenn Besucher-App-Schutz im Admin **startklar** zeigt
-4. Keine Bild-Editor-/Design-Änderungen während Push-/Kern-Reparaturen
+2. **Massen-Lösch-Schutz:** `node scripts/repo-integrity-guard.js` blockiert Deploy/Merge wenn Kern-Ordner fehlen oder zu viele Dateien auf einmal gelöscht werden (Schutz gegen Vorfall `07a66819`)
+3. Neue Features zuerst in **Test-App** (`/?env=staging`) prüfen
+4. **Live-Veröffentlichung** nur wenn Besucher-App-Schutz im Admin **startklar** zeigt
+5. Keine Bild-Editor-/Design-Änderungen während Push-/Kern-Reparaturen
 
 ## Healthcheck
 
@@ -79,6 +80,7 @@ git checkout stable-last-working -- index.html admin/index.html service-worker.j
 - Admin Upload: **Besucher-App Schutz** Panel
 - Worker: `GET /api/admin/visitor-health` (mit Admin Secret)
 - CI: `node scripts/app-health-check.js`
+- **Repo-Integrität:** `node scripts/repo-integrity-guard.js` (Kern-Dateien, Mindestanzahl, Massen-Lösch-Limit)
 - **Version-Update-Schutz:** `node scripts/version-update-guard.js` (Banner-Schleife, HARD_REFRESH, Willkommens-Push)
 - **Push-Schutz:** `node scripts/push-system-guard.js`
 

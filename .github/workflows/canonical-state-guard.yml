@@ -72,6 +72,11 @@ jobs:
           grep -q 'data-daily-push' index.html || { echo "::error::Home push buttons missing from index.html"; exit 1; }
           echo "Daily push feature OK."
 
+      - name: Repo integrity guard (Massen-Löschung blockieren)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/repo-integrity-guard.js
+
       - name: Push system guard (Worker Cron + API + App-Sync)
         run: node scripts/push-system-guard.js
 
