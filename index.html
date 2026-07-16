@@ -12338,6 +12338,21 @@ function initFloatTouchbar(){
   document.addEventListener("touchmove",onDragMove,{passive:false});
   document.addEventListener("touchend",onDragEnd,{passive:true});
   document.addEventListener("touchcancel",onDragEnd,{passive:true});
+  if(!window.__floatTouchbarScrollCollapseBound){
+    window.__floatTouchbarScrollCollapseBound=true;
+    let lastScrollY=window.scrollY||0;
+    let scrollTicking=false;
+    window.addEventListener("scroll",()=>{
+      if(scrollTicking)return;
+      scrollTicking=true;
+      requestAnimationFrame(()=>{
+        const nextY=window.scrollY||0;
+        if(Math.abs(nextY-lastScrollY)>6)collapseFloatTouchbar();
+        lastScrollY=nextY;
+        scrollTicking=false;
+      });
+    },{passive:true});
+  }
 }
 window.addEventListener("DOMContentLoaded",()=>{
   try{
