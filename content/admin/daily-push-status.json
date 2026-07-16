@@ -3,26 +3,36 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-15T20:50:04.834Z",
+  "updatedAt": "2026-07-16T14:15:04.838Z",
   "usersChecked": 18,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 18,
+  "sent": 18,
   "skipped": 0,
   "duplicates": 0,
   "errors": 0,
-  "dailyContentDate": "2026-07-15",
+  "dailyContentDate": "2026-07-16",
   "currentRecommendation": {
-    "id": "herzen-und-taten-001",
-    "title": "Allah schaut auf Herzen und Taten",
-    "category": "Tazkiyah",
-    "scholar": "Prophet ﷺ"
+    "id": "malik-adab-vor-wissen-001",
+    "title": "Adab vor Wissen",
+    "category": "Adab",
+    "scholar": "Mālik ibn Anas"
   },
   "currentDua": {
-    "id": "sunnah-002",
-    "title": "Schutz durch Allahs vollkommene Worte",
-    "category": "Schutz"
+    "id": "sunnah-003",
+    "title": "Duʿāʾ vor dem Schlafen",
+    "category": "Schlaf"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 18,
+      "contentId": "malik-adab-vor-wissen-001",
+      "recipients": "03c6335a-46eb-4325-96fa-cc617df448e3",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
