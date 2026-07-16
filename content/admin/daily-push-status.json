@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-16T14:15:04.838Z",
+  "updatedAt": "2026-07-16T14:40:04.837Z",
   "usersChecked": 18,
   "duaCandidates": 0,
-  "recCandidates": 18,
-  "sent": 18,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 18,
   "errors": 0,
   "dailyContentDate": "2026-07-16",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Schlaf"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 18,
-      "contentId": "malik-adab-vor-wissen-001",
-      "recipients": "03c6335a-46eb-4325-96fa-cc617df448e3",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
