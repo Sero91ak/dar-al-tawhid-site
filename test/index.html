@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v253";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v254";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -921,6 +921,23 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 .ilm-menu-popover{position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:calc(64px + env(safe-area-inset-top,0px));z-index:93;width:min(300px,calc(100vw - 24px));border:1px solid var(--ilm-border);border-radius:22px;background:var(--ilm-sheet-bg);box-shadow:0 22px 55px rgba(0,0,0,.28);padding:8px;display:grid;gap:4px;box-sizing:border-box}.ilm-menu-popover button{border:0;background:transparent;color:var(--ilm-primary-text);padding:11px 12px;border-radius:14px;text-align:left;font-size:13px;font-weight:850}.ilm-menu-popover button:hover{background:color-mix(in srgb,var(--ilm-accent) 9%,transparent)}
 @media(min-width:900px){.ilm-message-inner,.ilm-composer-inner{width:min(900px,calc(100vw - 56px))}.ilm-sheet-backdrop{align-items:center;justify-items:end;padding:24px}.ilm-sheet{width:min(420px,38vw);height:min(82dvh,780px);border-radius:22px}}
 @media(max-width:520px){.ilm-chat-shell{--ilm-composer-reserve:72px}.ilm-chat-header{grid-template-columns:42px minmax(0,1fr) auto}.ilm-message-list{padding:14px max(10px,env(safe-area-inset-right,0px)) calc(var(--ilm-composer-reserve) + var(--ilm-keyboard-offset,0px) + 10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}.ilm-answer-text{font-size:16.5px}.ilm-user-bubble{font-size:15.5px;max-width:min(86%,620px)}.ilm-composer-bar{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}.ilm-composer-inner{grid-template-columns:minmax(0,1fr) 38px;padding-left:15px}.ilm-send-icon{width:34px;height:34px}.ilm-chat-input{font-size:16px}}
+/* Ilm compact drawer/composer overrides */
+.ilm-message-inner{gap:12px}
+.ilm-thread-list{gap:8px}
+.ilm-thread-row-new{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  min-height:0;
+  height:auto;
+  padding:10px 12px;
+  border-radius:14px;
+}
+.ilm-thread-row-new b{margin:0;font-size:15px;line-height:1.28}
+.ilm-thread-row-new span{margin-top:0;font-size:12px;line-height:1.35}
+.ilm-composer-bar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
+.ilm-composer-inner{padding-top:4px;padding-bottom:4px}
 .feature-section{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:0 16px 42px rgba(0,0,0,.18);padding:14px;overflow:hidden}.feature-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}.feature-head h3{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(22px,4vw,32px);line-height:1.1}.feature-head span{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:4px}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature-card{position:relative;min-width:0;border:1px solid rgba(214,180,106,.28);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));padding:12px;display:grid;gap:9px;overflow:hidden}.feature-card-top{display:flex;align-items:flex-start;gap:10px}.feature-icon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(214,180,106,.26);background:rgba(214,180,106,.10);font-size:20px}.feature-card h4{margin:0;color:var(--text);font-size:15px;line-height:1.2;overflow-wrap:anywhere}.feature-card p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.42;overflow-wrap:anywhere}.feature-card-actions{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.feature-open,.feature-pin,.feature-dismiss{min-height:38px;border:1px solid rgba(214,180,106,.28);border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);font-size:12px;font-weight:950;padding:8px 10px}.feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:none!important;text-shadow:none!important}.feature-pin{width:38px;padding:0}.feature-badge{position:absolute;right:10px;top:10px;border:1px solid rgba(214,180,106,.30);border-radius:999px;background:rgba(214,180,106,.12);color:var(--gold);font-size:9px;font-weight:950;padding:3px 7px}.feature-hint{border:1px solid rgba(214,180,106,.34);border-radius:20px;background:linear-gradient(135deg,rgba(214,180,106,.13),rgba(255,255,255,.035));padding:13px;margin-bottom:10px}.feature-hint h3{margin:0;color:var(--text);font-size:18px}.feature-hint p{margin:6px 0 10px;color:var(--muted);font-size:13px;line-height:1.5}.feature-hint-actions{display:flex;gap:8px;flex-wrap:wrap}.more-search{width:100%;min-height:46px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.065);color:var(--text);padding:11px 14px;font:inherit;outline:none}.more-group{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:12px;margin-top:12px}.more-group h3{margin:0 0 9px;color:var(--text);font-size:18px}.more-group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.more-group.is-hidden{display:none!important}.more-feature-row{position:relative;border:1px solid rgba(214,180,106,.22);border-radius:17px;background:rgba(255,255,255,.045);padding:10px;display:flex;gap:9px;align-items:center;min-height:62px}.more-feature-row h4{margin:0;color:var(--text);font-size:13px;line-height:1.2}.more-feature-row p{margin:2px 0 0;color:var(--muted);font-size:10px;line-height:1.25}.more-feature-row.is-hidden{display:none!important}@media(max-width:700px){.feature-section,.more-group{margin-right:50px}.feature-open{min-height:40px}}@media(max-width:430px){.feature-grid,.more-group-grid{grid-template-columns:1fr}.feature-card{padding:11px}.feature-head{display:block}.feature-card-actions{grid-template-columns:1fr 38px}}
 .bottom-nav{--nav-pill-left:5px;--nav-pill-width:64px;position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm);z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:0;padding:5px;border:1px solid rgba(255,255,255,.08);border-radius:27px;background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(10px) saturate(1.08);backdrop-filter:blur(10px) saturate(1.08);box-shadow:0 6px 18px rgba(0,0,0,.14);overflow:hidden;isolation:isolate;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
 #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:max(14px,env(safe-area-inset-left))!important;right:max(14px,env(safe-area-inset-right))!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important}
@@ -8227,6 +8244,24 @@ body.is-hadith-route .view-desc{color:var(--muted)}
   0%,100%{box-shadow:0 0 0 2px rgba(255,158,165,.22),0 0 16px rgba(255,158,165,.13)}
   50%{box-shadow:0 0 0 2px rgba(255,158,165,.34),0 0 30px rgba(255,158,165,.22)}
 }
+/* Quiz result/readability + compact polish */
+.quiz-shell.quiz-shell-pro .quiz-result-grid{gap:8px;margin:8px 0}
+.quiz-shell.quiz-shell-pro .quiz-result-box{padding:10px;border-radius:14px}
+.quiz-shell.quiz-shell-pro .quiz-result-box b{
+  color:color-mix(in srgb,var(--quiz-accent) 86%,#ffffff 14%);
+  text-shadow:none;
+}
+.quiz-shell.quiz-shell-pro .quiz-session-actions{margin-top:8px;gap:8px}
+.quiz-shell.quiz-shell-pro .quiz-actions{margin-top:8px;gap:8px}
+.quiz-shell.quiz-shell-pro .quiz-answer-list{gap:8px}
+.quiz-shell.quiz-shell-pro .quiz-answer{min-height:54px;padding:10px 12px}
+.quiz-shell.quiz-shell-pro .quiz-answer.selected,
+.quiz-shell.quiz-shell-pro .quiz-answer.correct,
+.quiz-shell.quiz-shell-pro .quiz-answer.wrong{animation-duration:.9s}
+html[data-theme="light"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#5f3f12}
+html[data-theme="soft"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#5f2f48}
+html[data-theme="royal"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#ffe6a0}
+html[data-theme="bordeaux"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#f2d497}
 .quiz-shell.quiz-shell-pro .quiz-app-nav-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -9999,12 +10034,25 @@ function ilmGroupRank(kind){
   if(kind==="quiz")return 6;
   return 9;
 }
+function ilmSourceSignature(item){
+  const base=[
+    item?.kind||"",
+    item?.speaker||"",
+    item?.work||"",
+    item?.reference||"",
+    ilmClip(item?.excerpt||"",220),
+    ilmClip(item?.body||"",220)
+  ].join("|");
+  return normalizeIlmText(base).slice(0,520);
+}
 function buildIlmSourceGroups(matches){
   const grouped=new Map();
   matches.forEach(item=>{
     const label=ilmKindLabel(item.kind);
     if(!grouped.has(label))grouped.set(label,[]);
-    grouped.get(label).push(item);
+    const list=grouped.get(label);
+    const signature=ilmSourceSignature(item);
+    if(!list.some(existing=>ilmSourceSignature(existing)===signature))list.push(item);
   });
   return [...grouped.entries()]
     .sort((a,b)=>ilmGroupRank(a[1][0]?.kind)-ilmGroupRank(b[1][0]?.kind))
@@ -10123,6 +10171,15 @@ function buildIlmAssistantReply(question,matches,mode="normal"){
 function ilmFlattenSources(reply){
   return (reply?.sourceGroups||[]).flatMap(group=>(group.items||[]).map(item=>({...item,groupLabel:group.label})));
 }
+function ilmUniqueSources(list){
+  const unique=[];const seen=new Set();
+  (Array.isArray(list)?list:[]).forEach(item=>{
+    const sig=ilmSourceSignature(item);
+    if(!sig||seen.has(sig))return;
+    seen.add(sig);unique.push(item);
+  });
+  return unique;
+}
 function ilmReferenceMarkers(count){
   return Array.from({length:Math.min(count,3)},(_,idx)=>`<span class="ilm-citation">[${idx+1}]</span>`).join(" ");
 }
@@ -10150,7 +10207,7 @@ function renderIlmAnswerText(reply,isFirstAssistant){
 }
 function renderIlmAssistantMessage(message,isFirstAssistant=false){
   const reply=message.reply||{};
-  const sourceCount=ilmFlattenSources(reply).length;
+  const sourceCount=ilmUniqueSources(ilmFlattenSources(reply)).length;
   const relatedCount=Array.isArray(reply.related)?reply.related.length:0;
   const canRefine=reply.status==="ok";
   return `<article class="ilm-assistant-message" data-ilm-assistant="${esc(message.id)}">
@@ -10422,7 +10479,7 @@ function renderIlmSourceActions(source){
 }
 function showIlmSources(messageId){
   const {message}=findIlmMessage(messageId);
-  const sources=ilmFlattenSources(message?.reply||{});
+  const sources=ilmUniqueSources(ilmFlattenSources(message?.reply||{}));
   const host=$("ilmSheetBackdrop");
   if(!host)return;
   host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Quellen">
@@ -10469,7 +10526,7 @@ function syncIlmViewport(){
   const vv=window.visualViewport;
   const layoutHeight=Math.max(320,Math.round(window.innerHeight||document.documentElement.clientHeight||0));
   const rawKeyboardOffset=vv?Math.max(0,Math.round(layoutHeight-vv.height-vv.offsetTop)):0;
-  const keyboardOffset=rawKeyboardOffset>90?Math.max(0,rawKeyboardOffset-54):rawKeyboardOffset;
+  const keyboardOffset=rawKeyboardOffset>130?Math.max(0,rawKeyboardOffset-92):rawKeyboardOffset>78?Math.max(0,rawKeyboardOffset-62):rawKeyboardOffset;
   document.documentElement.style.setProperty("--ilm-viewport-height",`${layoutHeight}px`);
   document.documentElement.style.setProperty("--ilm-keyboard-offset",`${keyboardOffset}px`);
   document.documentElement.style.setProperty("--ilm-keyboard-raw-offset",`${rawKeyboardOffset}px`);
@@ -12191,9 +12248,9 @@ function quizNormalizeLevel(v){return String(v||"").toLowerCase().replace("anfä
 function quizQuestionById(id){return (quizQuestionsCache||[]).find(q=>String(q.id)===String(id))}
 function quizBuildSession(config){let pool=[...(quizQuestionsCache||[])];if(config.topic&&config.topic!=="all")pool=pool.filter(q=>String(q.category||q.topic||"")===config.topic);if(config.level&&config.level!=="all")pool=pool.filter(q=>quizNormalizeLevel(q.level)===quizNormalizeLevel(config.level));if(!pool.length)pool=[...(quizQuestionsCache||[])];const picked=quizShuffle(pool).slice(0,Math.min(config.count,pool.length));return{id:`quiz-${Date.now()}`,questionIds:picked.map(q=>q.id),index:0,answers:{},retries:{},bookmarked:{},config,startedAt:Date.now(),updatedAt:Date.now(),finished:false}}
 function renderQuiz(){if(!Array.isArray(quizQuestionsCache)){loadQuizQuestions().then(()=>{if(readRoute().view==="quiz")render()});return `${setPageHeader("Din-Quiz","Fragen werden geladen.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Quizfragen werden geladen …</div></section>`}const session=quizSession();if(session&&!session.finished)return renderQuizSession(session);if(session&&session.finished)return renderQuizResult(session);const cats=[...new Set(quizQuestionsCache.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(quizQuestionsCache.map(q=>q.level).filter(Boolean))].sort();return `${setPageHeader("Din-Quiz","Kompakte Wissensprüfung mit klaren Quellen.","Quiz")}<section class="quiz-shell quiz-shell-pro"><div class="quiz-hero"><span class="quiz-kicker">Wissensprüfung</span><h2>Din-Quiz</h2><p>Klar · kompakt · professionell</p></div><div class="quiz-card"><div class="quiz-config-grid"><div class="quiz-field"><label for="quizTopic">Thema</label><select id="quizTopic"><option value="all">Gemischt</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><select id="quizLevel"><option value="all">Gemischt</option>${levels.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizCount">Fragen</label><select id="quizCount">${[5,10,15,20].map(n=>`<option value="${n}">${n}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizDuration">Dauer</label><select id="quizDuration"><option>Ohne Timer</option><option>10 Min.</option><option>20 Min.</option></select></div><div class="quiz-field full"><label for="quizMode">Modus</label><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn" type="button" id="quizQuickBtn">Schnellquiz</button></div></div><div class="quiz-menu-grid"><button class="quiz-menu-card" type="button" data-nav="topics"><span>🔎</span><span><b>Fragen suchen</b><span>über Beiträge</span></span></button><button class="quiz-menu-card" type="button" id="quizResumeBtn" ${session?"":"hidden"}><span>↩</span><span><b>Fortsetzen</b><span>Laufende Runde</span></span></button><button class="quiz-menu-card" type="button" id="quizMistakesBtn"><span>↻</span><span><b>Fehlertraining</b><span>Falsche Fragen</span></span></button><button class="quiz-menu-card" type="button" data-nav="statistik"><span>◷</span><span><b>Statistik</b><span>Fortschritt</span></span></button></div></section>`}
-function renderQuizSession(session){const q=quizQuestionById(session.questionIds[session.index]);if(!q)return `${setPageHeader("Din-Quiz","Keine aktive Frage gefunden.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Diese Frage konnte nicht geladen werden.<div class="quiz-actions"><button class="quiz-btn primary" id="quizNewBtn">Neues Quiz starten</button><button class="quiz-btn" data-nav="more">Zurück</button></div></div></section>`;const selected=session.answers?.[q.id]?.selectedIndex;const evaluated=session.answers?.[q.id]?.evaluated;const correct=Number(q.correctIndex);const progress=((session.index+1)/session.questionIds.length)*100;return `${setPageHeader("Din-Quiz","Aktive Wissensrunde","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-session"><div class="quiz-status"><div class="quiz-status-top"><span>Frage ${session.index+1}/${session.questionIds.length}</span><button class="quiz-btn danger" type="button" id="quizEndBtn">Beenden</button></div><div class="quiz-status-meta">${esc(q.category||q.topic||"Quiz")} · ${esc(q.level||"")}</div><div class="quiz-progress"><span style="width:${progress}%"></span></div></div><div class="quiz-question-panel"><h2 class="quiz-question">${esc(q.question||"Frage")}</h2></div><div class="quiz-answer-list">${(q.answers||[]).map((a,i)=>{const state=evaluated?(i===correct?" correct":i===selected&&i!==correct?" wrong":""):i===selected?" selected":"";const icon=evaluated&&i===correct?"✓":evaluated&&i===selected&&i!==correct?"×":"";return `<button type="button" class="quiz-answer${state}" data-quiz-answer="${i}" ${evaluated?"disabled":""}><span class="quiz-letter">${"ABCD"[i]||i+1}</span><span>${esc(a)}</span><span>${icon}</span></button>`}).join("")}</div>${evaluated?`<div class="quiz-feedback"><b>${selected===correct?"Richtig beantwortet.":"Nicht richtig beantwortet."}</b><p>${esc(q.explanation||"")}</p><small>${esc(q.source||"Quelle wird geprüft.")}</small></div>`:""}<div class="quiz-session-actions"><button class="quiz-btn" type="button" id="quizPrevBtn">← Zurück</button>${evaluated?`<button class="quiz-btn primary" type="button" id="quizNextBtn">${session.index>=session.questionIds.length-1?"Ergebnis":"Weiter →"}</button>`:`<button class="quiz-btn primary" type="button" id="quizCheckBtn" ${selected==null?"disabled":""}>Antwort prüfen</button>`}</div></article></section>`}
+function renderQuizSession(session){const q=quizQuestionById(session.questionIds[session.index]);if(!q)return `${setPageHeader("Din-Quiz","Keine aktive Frage gefunden.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Diese Frage konnte nicht geladen werden.<div class="quiz-actions"><button class="quiz-btn primary" id="quizNewBtn">Neues Quiz starten</button><button class="quiz-btn" data-nav="more">Zurück</button></div></div></section>`;const selected=session.answers?.[q.id]?.selectedIndex;const evaluated=session.answers?.[q.id]?.evaluated;const correct=Number(q.correctIndex);const progress=((session.index+1)/session.questionIds.length)*100;return `${setPageHeader("Din-Quiz","Aktive Wissensrunde","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-session"><div class="quiz-status"><div class="quiz-status-top"><span>Frage ${session.index+1}/${session.questionIds.length}</span><button class="quiz-btn danger" type="button" id="quizEndBtn">Beenden</button></div><div class="quiz-status-meta">${esc(q.category||q.topic||"Quiz")} · ${esc(q.level||"")}</div><div class="quiz-progress"><span style="width:${progress}%"></span></div></div><div class="quiz-question-panel"><h2 class="quiz-question">${esc(q.question||"Frage")}</h2></div><div class="quiz-answer-list">${(q.answers||[]).map((a,i)=>{const state=evaluated?(i===correct?" correct":i===selected&&i!==correct?" wrong":""):i===selected?" selected":"";const icon=evaluated&&i===correct?"✓":evaluated&&i===selected&&i!==correct?"×":"";return `<button type="button" class="quiz-answer${state}" data-quiz-answer="${i}" ${evaluated?"disabled":""}><span class="quiz-letter">${"ABCD"[i]||i+1}</span><span>${esc(a)}</span><span>${icon}</span></button>`}).join("")}</div>${evaluated?`<div class="quiz-feedback"><b>${selected===correct?"Richtig beantwortet.":"Nicht richtig beantwortet."}</b><p>${esc(q.explanation||"")}</p><small>${esc(q.source||"Quelle wird geprüft.")}</small></div>`:""}<div class="quiz-session-actions"><button class="quiz-btn" type="button" id="quizPrevBtn">← Zurück</button><button class="quiz-btn primary" type="button" id="quizNextBtn" ${selected==null?"disabled":""}>${session.index>=session.questionIds.length-1?"Ergebnis":"Nächste Frage →"}</button></div></article></section>`}
 function renderQuizResult(session){const total=session.questionIds.length;const values=session.questionIds.map(id=>session.answers?.[id]).filter(Boolean);const right=values.filter(a=>a.correct).length;const wrong=values.filter(a=>a.evaluated&&!a.correct).length;const skipped=Math.max(0,total-right-wrong);const percent=total?Math.round((right/total)*100):0;const answered=right+wrong;const accuracy=answered?Math.round((right/answered)*100):0;return `${setPageHeader("Quiz abgeschlossen",`${right}/${total} richtig`,"Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Abschluss</span><h2 class="quiz-question">${right} / ${total}</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${percent}%</b><span>Quiz-Ergebnis</span></div><div class="quiz-result-box"><b>${accuracy}%</b><span>Antwortgenauigkeit</span></div><div class="quiz-result-box"><b>${right}</b><span>Richtig</span></div><div class="quiz-result-box"><b>${wrong}</b><span>Falsch</span></div><div class="quiz-result-box"><b>${skipped}</b><span>Übersprungen</span></div><div class="quiz-result-box"><b>${total}</b><span>Fragen</span></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizNewBtn">Neues Quiz</button><button class="quiz-btn" type="button" data-nav="more">Mehr</button></div></article></section>`}
-function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:10,mode:"standard"}:quizConfig();saveQuizSession(quizBuildSession(cfg));render()};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>render();const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();render()};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizSession(s)}render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.answers=s.answers||{};s.answers[q.id]={selectedIndex:Number(btn.getAttribute("data-quiz-answer")),evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()}});const checkBtn=$("quizCheckBtn");if(checkBtn)checkBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const a=s.answers?.[q?.id];if(!q||!a)return;a.evaluated=true;a.correct=Number(a.selectedIndex)===Number(q.correctIndex);s.updatedAt=Date.now();saveQuizSession(s);render()};const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;if(s.index>=s.questionIds.length-1)s.finished=true;else s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()};const mistakesBtn=$("quizMistakesBtn");if(mistakesBtn)mistakesBtn.onclick=()=>{alert("Fehlertraining nutzt die falsch beantworteten Fragen deiner Quiz-Runden. Starte zuerst eine Runde und beantworte Fragen.")}}
+function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:10,mode:"standard"}:quizConfig();saveQuizSession(quizBuildSession(cfg));render()};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>render();const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();render()};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizSession(s)}render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;const idx=Number(btn.getAttribute("data-quiz-answer"));const isCorrect=idx===Number(q.correctIndex);s.answers=s.answers||{};s.answers[q.id]={selectedIndex:idx,evaluated:true,correct:isCorrect};s.updatedAt=Date.now();saveQuizSession(s);render();if(s.index<s.questionIds.length-1){clearTimeout(window.__quizAutoNextTimer);window.__quizAutoNextTimer=setTimeout(()=>{const fresh=quizSession();if(!fresh)return;if(fresh.index===s.index){fresh.index=Math.min(fresh.questionIds.length-1,fresh.index+1);fresh.updatedAt=Date.now();saveQuizSession(fresh);render()}},700)}}});const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const answer=s.answers?.[q?.id];if(!answer)return;if(s.index>=s.questionIds.length-1)s.finished=true;else s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()};const mistakesBtn=$("quizMistakesBtn");if(mistakesBtn)mistakesBtn.onclick=()=>{alert("Fehlertraining nutzt die falsch beantworteten Fragen deiner Quiz-Runden. Starte zuerst eine Runde und beantworte Fragen.")}}
 
 const FEATURE_PIN_KEY="darFeaturePinsV1";
 function featureCatalog(){
@@ -12373,7 +12430,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v253";
+const APP_BUILD_ID="app-shell-v254";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
