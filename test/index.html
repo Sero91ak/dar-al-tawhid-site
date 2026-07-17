@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v263";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v264";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -332,17 +332,29 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   font-size:1em;
 }
 .post-reader-main{
+  position:relative;
+  overflow:hidden;
   border:1px solid color-mix(in srgb,var(--line2) 80%,rgba(217,190,114,.25));
   border-radius:24px;
   padding:clamp(22px,5vw,26px);
-  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 92%,#000 8%),color-mix(in srgb,var(--bg) 88%,#000 12%));
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 90%,#000 10%),color-mix(in srgb,var(--bg) 84%,#000 16%));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 36px rgba(0,0,0,.25);
 }
+.post-reader-main::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at 18% -2%,rgba(255,255,255,.06),transparent 36%),radial-gradient(circle at 86% 102%,rgba(217,190,114,.09),transparent 42%);
+}
 .post-reader .statement{
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  padding:0!important;
+  position:relative;
+  z-index:1;
+  border:1px solid color-mix(in srgb,var(--line2) 78%,rgba(217,190,114,.22))!important;
+  border-radius:18px!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 88%,#000 12%),color-mix(in srgb,var(--bg) 82%,#000 18%))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 -20px 30px rgba(0,0,0,.14);
+  padding:clamp(16px,4vw,22px)!important;
   margin:0!important;
   text-align:left!important;
   color:var(--text)!important;
@@ -352,6 +364,8 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   line-height:1.62!important;
   white-space:pre-line!important;
 }
+.post-reader .statement p{margin:0 0 .72em}
+.post-reader .statement p:last-child{margin-bottom:0}
 .post-reader .statement em,
 .post-reader .statement strong em{
   color:color-mix(in srgb,var(--gold2) 76%,var(--text) 24%)!important;
@@ -396,6 +410,13 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   justify-content:space-between;
   gap:8px;
 }
+.post-source-state{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+}
 .post-source-head b{
   color:var(--premium-label);
   letter-spacing:.14em;
@@ -403,6 +424,21 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   font-size:11px;
 }
 .post-source-verify{font-size:11px;color:var(--premium-body)}
+.post-source-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:22px;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--line2) 78%,rgba(217,190,114,.35));
+  background:color-mix(in srgb,var(--card) 86%,transparent);
+  color:var(--cream);
+  font-size:10.5px;
+  font-weight:760;
+  letter-spacing:.02em;
+}
+.post-source-chip.scan{border-color:rgba(123,198,255,.56);color:color-mix(in srgb,#9ed6ff 65%,var(--cream) 35%)}
 .post-source-main{color:var(--text);font-size:clamp(14px,3.7vw,16px);line-height:1.55}
 .post-source-actions{display:flex;flex-wrap:wrap;gap:8px}
 .post-source-actions button,.post-source-actions a{
@@ -470,6 +506,27 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   font-size:12px;
   font-weight:820;
   padding:8px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+.post-share-quick-btn svg{width:16px;height:16px;display:block;flex:0 0 16px}
+.post-share-quick-btn.telegram{
+  border-color:rgba(130,195,255,.56);
+  background:linear-gradient(180deg,rgba(46,140,255,.24),rgba(19,50,102,.24));
+}
+.post-share-quick-btn.whatsapp{
+  border-color:rgba(116,232,163,.56);
+  background:linear-gradient(180deg,rgba(44,191,99,.22),rgba(12,72,43,.24));
+}
+.post-share-quick-btn.instagram{
+  border-color:rgba(255,154,193,.56);
+  background:linear-gradient(180deg,rgba(244,95,143,.2),rgba(93,47,168,.25));
+}
+.post-share-quick-btn.link{
+  border-color:rgba(226,202,142,.55);
+  background:linear-gradient(180deg,rgba(217,190,114,.2),rgba(103,84,37,.24));
 }
 .post-share-quick-btn:active{transform:translateY(1px)}
 .post-nav-preview{
@@ -12900,7 +12957,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v263";
+const APP_BUILD_ID="app-shell-v264";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -13024,7 +13081,8 @@ function renderPostAfterPanel(post,{slideIndex=0}={}){
   const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
   const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
   const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><span class="post-source-verify">geprüfte Angaben</span></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}${hasScan?`<div class="source-note">Scan/PDF vorhanden.</div>`:""}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div><div class="post-share-quick"><div class="post-share-quick-label">Schnell teilen</div><div class="post-share-quick-grid"><button class="post-share-quick-btn" type="button" data-post-share-channel="telegram">Telegram</button><button class="post-share-quick-btn" type="button" data-post-share-channel="whatsapp">WhatsApp</button><button class="post-share-quick-btn" type="button" data-post-share-channel="instagram">Instagram</button><button class="post-share-quick-btn" type="button" data-post-share-channel="copy">Link</button></div></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>`;
+  const scanChip=hasScan?`<span class="post-source-chip scan">Scan/PDF ✓</span>`:"";
+  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><div class="post-source-state"><span class="post-source-verify">geprüfte Angaben</span>${scanChip}</div></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div><div class="post-share-quick"><div class="post-share-quick-label">Schnell teilen</div><div class="post-share-quick-grid"><button class="post-share-quick-btn telegram" type="button" data-post-share-channel="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.4 4.6a1.2 1.2 0 0 0-1.2-.2L3.9 10.7a1.1 1.1 0 0 0 .1 2.1l4.4 1.4 1.7 5.1a1.1 1.1 0 0 0 2 .2l2.5-3 4.2 3.1a1.1 1.1 0 0 0 1.7-.7l2-13a1.2 1.2 0 0 0-.4-1.3Zm-10.1 8.6 7-5.2-5.7 6.5-.8 2.6-.5-3.1Z"/></svg><span>Telegram</span></button><button class="post-share-quick-btn whatsapp" type="button" data-post-share-channel="whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.3A9.7 9.7 0 0 0 3.6 17l-1.3 4.5 4.7-1.2A9.7 9.7 0 1 0 12 2.3Zm0 17.6a7.9 7.9 0 0 1-4-1.1l-.3-.2-2.7.7.7-2.6-.2-.3A7.9 7.9 0 1 1 12 19.9Zm4.3-5.8-.8-.4c-.3-.1-.5-.2-.7.1l-.4.5c-.2.2-.3.2-.6.1a6.6 6.6 0 0 1-3.1-2.8c-.2-.3 0-.4.1-.6l.3-.3c.2-.1.2-.3.3-.5.1-.2 0-.4 0-.5l-.4-.9c-.1-.2-.3-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.6.5-.8 1.3-.8 2.1 0 .8.5 1.6.6 1.8a8.6 8.6 0 0 0 3.6 3.2c.5.2 1 .4 1.3.5.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3Z"/></svg><span>WhatsApp</span></button><button class="post-share-quick-btn instagram" type="button" data-post-share-channel="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.2 2.7h9.6a4.5 4.5 0 0 1 4.5 4.5v9.6a4.5 4.5 0 0 1-4.5 4.5H7.2a4.5 4.5 0 0 1-4.5-4.5V7.2a4.5 4.5 0 0 1 4.5-4.5Zm0 1.8a2.7 2.7 0 0 0-2.7 2.7v9.6a2.7 2.7 0 0 0 2.7 2.7h9.6a2.7 2.7 0 0 0 2.7-2.7V7.2a2.7 2.7 0 0 0-2.7-2.7H7.2Zm10 1.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/></svg><span>Instagram</span></button><button class="post-share-quick-btn link" type="button" data-post-share-channel="copy"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a1 1 0 0 0 1.4 1.4l4.2-4.2a3.8 3.8 0 0 0-5.4-5.4L8.6 7.4a1 1 0 1 0 1.4 1.4l2.2-2.2a1.8 1.8 0 1 1 2.6 2.6L10.6 13.4Zm2.8-2.8a1 1 0 0 0-1.4-1.4L7.8 13.4a3.8 3.8 0 0 0 5.4 5.4l2.2-2.2a1 1 0 1 0-1.4-1.4l-2.2 2.2a1.8 1.8 0 1 1-2.6-2.6l4.2-4.2Z"/></svg><span>Link</span></button></div></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
