@@ -8020,10 +8020,32 @@ body.is-home-route .float-actions,body.is-area-route .float-actions{display:none
 <style>
 /* QUIZ + HADITH PREMIUM TEST LAYOUT */
 .quiz-shell.quiz-shell-pro,.hadith-shell.hadith-shell-pro{max-width:100%;min-width:0}
+body.is-quiz-route .view{
+  background:
+    radial-gradient(circle at 16% 0%,rgba(173,156,255,.19),transparent 38%),
+    radial-gradient(circle at 86% 10%,rgba(120,215,203,.15),transparent 36%),
+    linear-gradient(180deg,#080b17,#12132a 56%,#0d1120);
+}
+body.is-hadith-route .view{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(239,208,138,.14),transparent 42%),
+    radial-gradient(circle at 90% 12%,rgba(123,186,255,.16),transparent 38%),
+    linear-gradient(180deg,#051422,#0d2136 54%,#09182a);
+}
+body.is-quiz-route .view-head h2,
+body.is-hadith-route .view-head h2{color:#f8eed2}
+body.is-quiz-route .view-desc,
+body.is-hadith-route .view-desc{color:#d6d5e6}
 .quiz-shell.quiz-shell-pro{
-  --quiz-glass:color-mix(in srgb,var(--card) 88%,rgba(255,255,255,.04));
-  --quiz-line:color-mix(in srgb,var(--line) 74%,rgba(255,255,255,.12));
-  --quiz-accent:color-mix(in srgb,var(--gold2) 78%,#f6dfaa 22%);
+  --quiz-line:rgba(182,167,255,.30);
+  --quiz-card:#14182d;
+  --quiz-soft:#1b2140;
+  --quiz-text:#f6f2e7;
+  --quiz-muted:#c5c5de;
+  --quiz-accent:#d8c37f;
+  --quiz-accent-2:#a89cff;
+  --quiz-ok:#7de3b6;
+  --quiz-bad:#ff9ea5;
   gap:16px;
 }
 .quiz-shell.quiz-shell-pro .quiz-hero,
@@ -8032,54 +8054,110 @@ body.is-home-route .float-actions,body.is-area-route .float-actions{display:none
 .quiz-shell.quiz-shell-pro .quiz-result{
   border:1px solid var(--quiz-line);
   background:
-    radial-gradient(circle at 12% 0%,color-mix(in srgb,var(--quiz-accent) 16%,transparent),transparent 42%),
-    linear-gradient(145deg,color-mix(in srgb,var(--quiz-glass) 95%,transparent),color-mix(in srgb,var(--quiz-glass) 78%,transparent));
+    radial-gradient(circle at 8% 0%,rgba(216,195,127,.16),transparent 38%),
+    linear-gradient(152deg,color-mix(in srgb,var(--quiz-card) 95%,#fff 5%),color-mix(in srgb,var(--quiz-soft) 86%,#fff 14%));
   border-radius:24px;
-  box-shadow:0 18px 48px rgba(0,0,0,.24);
+  box-shadow:0 20px 52px rgba(0,0,0,.33);
 }
-.quiz-shell.quiz-shell-pro .quiz-kicker,
-.quiz-shell.quiz-shell-pro .quiz-field label{letter-spacing:.17em;color:var(--quiz-accent)}
+.quiz-shell.quiz-shell-pro :is(.quiz-kicker,.quiz-field label){letter-spacing:.17em;color:var(--quiz-accent)}
 .quiz-shell.quiz-shell-pro .quiz-hero h2{
+  color:var(--quiz-text);
   line-height:1.06;
   letter-spacing:-.02em;
   overflow-wrap:anywhere;
 }
-.quiz-shell.quiz-shell-pro :is(.quiz-question,.quiz-status-meta,.quiz-feedback p,.quiz-result-box span,.quiz-menu-card span,.quiz-answer){
+.quiz-shell.quiz-shell-pro .quiz-hero p,.quiz-shell.quiz-shell-pro .quiz-status-meta{color:var(--quiz-muted)}
+.quiz-shell.quiz-shell-pro :is(.quiz-question,.quiz-feedback p,.quiz-result-box span,.quiz-menu-card span,.quiz-answer){
   overflow-wrap:anywhere;
   word-break:normal;
   line-height:1.55;
+  color:var(--quiz-text);
 }
+.quiz-shell.quiz-shell-pro .quiz-field,
+.quiz-shell.quiz-shell-pro .quiz-answer,
+.quiz-shell.quiz-shell-pro .quiz-feedback,
+.quiz-shell.quiz-shell-pro .quiz-result-box,
+.quiz-shell.quiz-shell-pro .quiz-menu-card{
+  border:1px solid color-mix(in srgb,var(--quiz-line) 88%,#fff 12%);
+  background:color-mix(in srgb,var(--quiz-soft) 88%,#fff 12%);
+}
+.quiz-shell.quiz-shell-pro .quiz-field select{color:var(--quiz-text)}
 .quiz-shell.quiz-shell-pro .quiz-question{font-size:clamp(25px,6.2vw,39px)}
 .quiz-shell.quiz-shell-pro .quiz-answer{
-  border-radius:17px;
+  border-radius:18px;
   grid-template-columns:34px minmax(0,1fr) auto;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;
 }
+.quiz-shell.quiz-shell-pro .quiz-answer:hover{transform:translateY(-1px)}
 .quiz-shell.quiz-shell-pro .quiz-answer span:nth-child(2){
   min-width:0;
   font-size:14px;
   font-weight:850;
 }
-.quiz-shell.quiz-shell-pro .quiz-btn{font-weight:900;letter-spacing:.01em}
+.quiz-shell.quiz-shell-pro .quiz-letter{color:var(--quiz-accent)}
+.quiz-shell.quiz-shell-pro .quiz-answer.selected{
+  border-color:var(--quiz-accent);
+  box-shadow:0 0 0 2px rgba(216,195,127,.28),0 0 28px rgba(216,195,127,.22);
+  background:linear-gradient(135deg,rgba(216,195,127,.18),rgba(168,156,255,.20));
+}
+.quiz-shell.quiz-shell-pro .quiz-answer.selected .quiz-letter{
+  color:#fff9e8;
+  text-shadow:0 0 10px rgba(216,195,127,.55);
+}
+.quiz-shell.quiz-shell-pro .quiz-answer.correct{
+  border-color:var(--quiz-ok);
+  box-shadow:0 0 0 2px rgba(125,227,182,.25),0 0 24px rgba(125,227,182,.16);
+}
+.quiz-shell.quiz-shell-pro .quiz-answer.wrong{
+  border-color:var(--quiz-bad);
+  box-shadow:0 0 0 2px rgba(255,158,165,.24),0 0 24px rgba(255,158,165,.16);
+}
+.quiz-shell.quiz-shell-pro .quiz-btn{
+  border:1px solid color-mix(in srgb,var(--quiz-line) 88%,#fff 12%);
+  background:color-mix(in srgb,var(--quiz-soft) 92%,#fff 8%);
+  color:var(--quiz-text);
+  font-weight:900;
+  letter-spacing:.01em;
+  transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+}
+.quiz-shell.quiz-shell-pro .quiz-btn:hover{transform:translateY(-1px)}
+.quiz-shell.quiz-shell-pro .quiz-btn:active{transform:translateY(0) scale(.985)}
 .quiz-shell.quiz-shell-pro .quiz-btn.primary{
   color:#1b1308;
-  background:linear-gradient(135deg,var(--quiz-accent),color-mix(in srgb,var(--quiz-accent) 72%,#fff2cb 28%));
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--quiz-accent),color-mix(in srgb,var(--quiz-accent) 70%,#fff2cc 30%));
+  box-shadow:0 12px 28px rgba(216,195,127,.30);
 }
+.quiz-shell.quiz-shell-pro .quiz-session-actions .quiz-btn.primary{
+  position:relative;
+}
+.quiz-shell.quiz-shell-pro .quiz-session-actions .quiz-btn.primary::after{
+  content:"➜";
+  margin-left:8px;
+  display:inline-block;
+  transition:transform .16s ease,text-shadow .16s ease;
+}
+.quiz-shell.quiz-shell-pro .quiz-session-actions .quiz-btn.primary:hover::after{
+  transform:translateX(2px);
+  text-shadow:0 0 8px rgba(255,247,222,.65);
+}
+.quiz-shell.quiz-shell-pro .quiz-result-box b{color:#fff7df}
 .hadith-shell.hadith-shell-pro{
-  --hadith-bg:#071521;
-  --hadith-panel:#0f1f31;
-  --hadith-panel-2:#16314b;
-  --hadith-emerald:#112f47;
-  --hadith-accent:#efd08a;
-  --hadith-text:#f7edd6;
-  --hadith-muted:#d5c4a7;
-  --hadith-line:rgba(239,208,138,.34);
-  gap:13px;
+  --hadith-bg:#061529;
+  --hadith-panel:#0d2038;
+  --hadith-panel-2:#173455;
+  --hadith-emerald:#12304e;
+  --hadith-accent:#f0d08a;
+  --hadith-text:#f8eed8;
+  --hadith-muted:#d4c5a9;
+  --hadith-line:rgba(240,208,138,.36);
+  gap:14px;
 }
 .hadith-shell.hadith-shell-pro :is(.hadith-hero,.hadith-books-panel,.hadith-panel,.hadith-book-card,.hadith-card,.hadith-chapter-card,.hadith-section-row){
   border-radius:20px;
-  box-shadow:0 14px 36px rgba(0,0,0,.22);
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
 }
-.hadith-shell.hadith-shell-pro :is(.hadith-panel-head h3,.hadith-card-title,.hadith-section-row b,.hadith-chapter-card b,.hadith-card-de,.hadith-source-line,.hadith-chip){
+.hadith-shell.hadith-shell-pro :is(.hadith-panel-head h3,.hadith-card-title,.hadith-section-row b,.hadith-chapter-card b,.hadith-card-de,.hadith-source-line,.hadith-chip,.hadith-warning){
   overflow-wrap:anywhere;
   word-break:normal;
 }
@@ -8087,6 +8165,20 @@ body.is-home-route .float-actions,body.is-area-route .float-actions{display:none
 .hadith-shell.hadith-shell-pro .hadith-card-ar{
   line-height:1.95;
   text-wrap:pretty;
+}
+.hadith-shell.hadith-shell-pro .hadith-book-card,
+.hadith-shell.hadith-shell-pro .hadith-section-row,
+.hadith-shell.hadith-shell-pro .hadith-chapter-card,
+.hadith-shell.hadith-shell-pro .hadith-card{
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,filter .16s ease;
+}
+.hadith-shell.hadith-shell-pro :is(.hadith-book-card:hover,.hadith-section-row:hover,.hadith-chapter-card:hover,.hadith-card:hover){
+  transform:translateY(-1px);
+  filter:brightness(1.04);
+}
+.hadith-shell.hadith-shell-pro .hadith-book-card.active{
+  border-color:rgba(240,208,138,.74);
+  box-shadow:0 0 0 2px rgba(240,208,138,.25),0 18px 46px rgba(0,0,0,.32);
 }
 .hadith-shell.hadith-shell-pro .hadith-actions{
   display:grid;
@@ -8096,6 +8188,12 @@ body.is-home-route .float-actions,body.is-area-route .float-actions{display:none
   min-height:40px;
   text-align:center;
   white-space:normal;
+  transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease;
+}
+.hadith-shell.hadith-shell-pro .hadith-action:hover{transform:translateY(-1px)}
+.hadith-shell.hadith-shell-pro .hadith-action.is-active,
+.hadith-shell.hadith-shell-pro .hadith-action.active{
+  box-shadow:0 0 0 2px rgba(240,208,138,.24),0 0 22px rgba(240,208,138,.14);
 }
 @media(max-width:900px){
   .quiz-shell.quiz-shell-pro .quiz-config-grid{grid-template-columns:1fr}
@@ -12343,7 +12441,7 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false;
 }
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";const isIlm=route.view==="ilm";if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("is-ilm-chat-route",isIlm);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isIlm){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
+function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";const isIlm=route.view==="ilm";if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("is-ilm-chat-route",isIlm);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);document.body.classList.toggle("is-quiz-route",route.view==="quiz");document.body.classList.toggle("is-hadith-route",route.view==="hadith");if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isIlm){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
     const routeBefore=readRoute();
