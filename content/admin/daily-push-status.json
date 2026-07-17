@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-17T11:10:04.834Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-17T11:15:04.844Z",
   "usersChecked": 18,
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 18,
   "sent": 0,
   "skipped": 0,
   "duplicates": 18,
-  "errors": 0,
+  "errors": 18,
   "dailyContentDate": "2026-07-17",
   "currentRecommendation": {
     "id": "shafii-debatte-als-nasiha-001",
@@ -24,5 +24,15 @@
     "category": "Aufwachen"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 18,
+      "contentId": "shafii-debatte-als-nasiha-001",
+      "recipients": "f68db920-24ae-43a1-8e9b-4d22192b0212",
+      "ok": false,
+      "invalid": 8
+    }
+  ]
 }
