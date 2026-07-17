@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-17T11:05:04.855Z",
+  "updatedAt": "2026-07-17T11:10:04.834Z",
   "usersChecked": 18,
-  "duaCandidates": 18,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 18,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 18,
   "errors": 0,
   "dailyContentDate": "2026-07-17",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Aufwachen"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 18,
-      "contentId": "sunnah-004",
-      "recipients": "a032072c-a79d-41df-9e1a-44ab4db80bb1",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
