@@ -8368,7 +8368,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=12;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV1";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_READ_PROGRESS_KEY="darQuranReadProgressV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=12;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_READ_PROGRESS_KEY="darQuranReadProgressV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV1":"darCurrentUpdatesV1";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -8624,7 +8624,123 @@ function renderQuranQuickPick(){if(!quranMeta)return "";const options=quranMeta.
 function renderQuranJumpBar(surahId,totalVerses,selectedAyah=0){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${s.id===surahId?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="quran-jump-bar"><select id="quranJumpSurah" class="direct-pick">${options}</select><select id="quranJumpAyah" class="direct-pick">${quranAyahOptions(totalVerses,selectedAyah)}</select><button id="quranJumpBtn" class="quran-jump-btn" type="button">Öffnen</button></section>`}
 
 function quranModeTabs(active){const tabs=[['read','Lesen','quran',''],['topics','Themen','quran-topic',''],['font','Ansicht','','font'],['saved','Merkliste','quran-topic','saved']];return '<nav class="quran-mode-tabs" aria-label="Qurʾān Bereich">'+tabs.map(function(t){const is=t[0]===active;const attrs=t[3]==='font'?' data-quran-open-font="1"':'';const nav=t[2]?(' data-nav="'+t[2]+'"'):'';const value=t[2]==='quran-topic'?(t[3]||''):'';return '<button type="button" class="quran-mode-tab'+(is?' active':'')+'"'+nav+' data-value="'+esc(value)+'"'+attrs+'>'+esc(t[1])+'</button>'}).join('')+'</nav>'}
-function defaultQuranTopics(){return [{id:'tawhid',title:'Tawḥīd',group:'ʿAqīdah & Tawḥīd',description:'Āyāt über die alleinige Anbetung von Allah.',status:'published',reviewStatus:'approved',items:[{id:'tawhid-51-56',surah:51,ayah:56,range:'51:56',title:'Zweck der Erschaffung',note:'Allah erschuf Jinn und Menschen zur Anbetung.',tags:['Tawḥīd','ʿIbādah']},{id:'tawhid-16-36',surah:16,ayah:36,range:'16:36',title:'Botschaft aller Gesandten',note:'Dient Allah und meidet den Ṭāghūt.',tags:['Tawḥīd','Gesandte','Ṭāghūt']},{id:'tawhid-21-25',surah:21,ayah:25,range:'21:25',title:'Kein Gott außer Ihm',note:'Alle Gesandten riefen zur alleinigen Anbetung Allahs.',tags:['Tawḥīd','Offenbarung']}]},{id:'iman',title:'Īmān',group:'Īmān & Grundlagen',description:'Āyāt über Glauben, Rechtleitung und Gewissheit.',status:'published',reviewStatus:'approved',items:[{id:'iman-2-3',surah:2,ayah:3,range:'2:3',title:'Glaube an das Verborgene',note:'Eigenschaften der Gottesfürchtigen.',tags:['Īmān','Taqwā']},{id:'iman-49-15',surah:49,ayah:15,range:'49:15',title:'Wahrer Glaube',note:'Glaube ohne Zweifel und Einsatz auf Allahs Weg.',tags:['Īmān','Gewissheit']}]},{id:'salah',title:'Ṣalāh / Gebet',group:'ʿIbādah',description:'Āyāt über das Gebet und seine Bewahrung.',status:'published',reviewStatus:'approved',items:[{id:'salah-2-43',surah:2,ayah:43,range:'2:43',title:'Gebet verrichten',note:'Gebet und Zakāh als klare Pflichten.',tags:['Ṣalāh','Zakāh']},{id:'salah-29-45',surah:29,ayah:45,range:'29:45',title:'Gebet hält ab',note:'Das Gebet hält von Schändlichem und Verwerflichem ab.',tags:['Ṣalāh','Tazkiyah']}]},{id:'tawbah',title:'Tawbah',group:'Adab & Tazkiyah',description:'Āyāt über Reue, Rückkehr und Allahs Barmherzigkeit.',status:'published',reviewStatus:'approved',items:[{id:'tawbah-39-53',surah:39,ayah:53,range:'39:53',title:'Nicht verzweifeln',note:'Allah vergibt die Sünden alle, wenn der Diener bereut.',tags:['Tawbah','Barmherzigkeit']},{id:'tawbah-66-8',surah:66,ayah:8,range:'66:8',title:'Aufrichtige Reue',note:'Aufruf zu ehrlicher Rückkehr zu Allah.',tags:['Tawbah','Ikhlāṣ']}]},{id:'akhirah',title:'Ākhirah',group:'Ākhirah',description:'Āyāt über Jenseits, Rechenschaft, Jannah und Jahannam.',status:'published',reviewStatus:'approved',items:[{id:'akhirah-3-185',surah:3,ayah:185,range:'3:185',title:'Jede Seele kostet den Tod',note:'Der volle Lohn wird am Tag der Auferstehung gegeben.',tags:['Tod','Ākhirah']},{id:'akhirah-99-7',surah:99,ayah:7,range:'99:7',title:'Kleinste gute Tat',note:'Jede Tat wird sichtbar.',tags:['Rechenschaft','Taten']}]},{id:'parents',title:'Eltern',group:'Familie & Gesellschaft',description:'Āyāt über Güte zu den Eltern.',status:'published',reviewStatus:'approved',items:[{id:'parents-17-23',surah:17,ayah:23,range:'17:23',title:'Güte zu den Eltern',note:'Allah befiehlt Ihm allein zu dienen und den Eltern Gutes zu tun.',tags:['Eltern','Adab']},{id:'parents-31-14',surah:31,ayah:14,range:'31:14',title:'Dankbarkeit',note:'Dankbarkeit gegenüber Allah und den Eltern.',tags:['Eltern','Shukr']}]}]}
+function defaultQuranTopics(){return [
+  {id:'tawhid',title:'Tawḥīd',group:'ʿAqīdah & Tawḥīd',description:'Āyāt über die alleinige Anbetung von Allah.',status:'published',reviewStatus:'approved',items:[
+    {id:'tawhid-51-56',surah:51,ayah:56,range:'51:56',title:'Zweck der Erschaffung',note:'Allah erschuf Jinn und Menschen zur Anbetung.',tags:['Tawḥīd','ʿIbādah']},
+    {id:'tawhid-16-36',surah:16,ayah:36,range:'16:36',title:'Botschaft aller Gesandten',note:'Dient Allah und meidet den Ṭāghūt.',tags:['Tawḥīd','Gesandte']},
+    {id:'tawhid-21-25',surah:21,ayah:25,range:'21:25',title:'Kein Gott außer Ihm',note:'Alle Gesandten riefen zur alleinigen Anbetung Allahs.',tags:['Tawḥīd','Offenbarung']}
+  ]},
+  {id:'rububiyyah',title:'Rubūbiyyah',group:'ʿAqīdah & Tawḥīd',description:'Allah als Schöpfer, Erhalter und Lenker.',status:'published',reviewStatus:'approved',items:[
+    {id:'rub-7-54',surah:7,ayah:54,range:'7:54',title:'Schöpfung und Befehl',note:'Schöpfung und Entscheidung gehören Allah allein.',tags:['Rubūbiyyah']},
+    {id:'rub-10-31',surah:10,ayah:31,range:'10:31',title:'Wer versorgt euch?',note:'Allah allein versorgt und lenkt.',tags:['Rubūbiyyah','Rizq']},
+    {id:'rub-23-84',surah:23,ayah:84,range:'23:84',title:'Wem gehört die Erde?',note:'Alles gehört Allah.',tags:['Rubūbiyyah']}
+  ]},
+  {id:'asma-sifat',title:'Namen & Eigenschaften',group:'ʿAqīdah & Tawḥīd',description:'Āyāt über Allāhs schönsten Namen und Eigenschaften.',status:'published',reviewStatus:'approved',items:[
+    {id:'asma-7-180',surah:7,ayah:180,range:'7:180',title:'Die schönsten Namen',note:'Ruft Allah mit Seinen schönsten Namen an.',tags:['Asmāʾ wa Ṣifāt']},
+    {id:'asma-59-22',surah:59,ayah:22,range:'59:22',title:'Er ist Allah',note:'Aufzählung gewaltiger Namen Allahs.',tags:['Asmāʾ wa Ṣifāt']},
+    {id:'asma-2-255',surah:2,ayah:255,range:'2:255',title:'Āyat al-Kursī',note:'Allahs Größe, Wissen und Herrschaft.',tags:['Tauḥīd','Asmāʾ wa Ṣifāt']}
+  ]},
+
+  {id:'iman',title:'Īmān',group:'Īmān & Grundlagen',description:'Āyāt über Glauben, Rechtleitung und Gewissheit.',status:'published',reviewStatus:'approved',items:[
+    {id:'iman-2-3',surah:2,ayah:3,range:'2:3',title:'Glaube an das Verborgene',note:'Eigenschaften der Gottesfürchtigen.',tags:['Īmān','Taqwā']},
+    {id:'iman-49-15',surah:49,ayah:15,range:'49:15',title:'Wahrer Glaube',note:'Glaube ohne Zweifel und Einsatz auf Allahs Weg.',tags:['Īmān','Gewissheit']},
+    {id:'iman-8-2',surah:8,ayah:2,range:'8:2',title:'Zeichen des Glaubens',note:'Wenn Allah erwähnt wird, erbeben ihre Herzen.',tags:['Īmān']}
+  ]},
+  {id:'taqwa',title:'Taqwā',group:'Īmān & Grundlagen',description:'Gottesfurcht als Schutz und Orientierung.',status:'published',reviewStatus:'approved',items:[
+    {id:'taqwa-2-197',surah:2,ayah:197,range:'2:197',title:'Beste Wegzehrung',note:'Die beste Wegzehrung ist Taqwā.',tags:['Taqwā']},
+    {id:'taqwa-65-2',surah:65,ayah:2,range:'65:2',title:'Ausweg für die Gottesfürchtigen',note:'Allah gibt dem Gottesfürchtigen einen Ausweg.',tags:['Taqwā','Hoffnung']},
+    {id:'taqwa-3-102',surah:3,ayah:102,range:'3:102',title:'Fürchtet Allah',note:'Fürchtet Allah, wie es Ihm gebührt.',tags:['Taqwā']}
+  ]},
+  {id:'sabr',title:'Ṣabr',group:'Īmān & Grundlagen',description:'Geduld bei Prüfungen und im Gehorsam.',status:'published',reviewStatus:'approved',items:[
+    {id:'sabr-2-153',surah:2,ayah:153,range:'2:153',title:'Hilfe durch Geduld',note:'Sucht Hilfe in Geduld und Gebet.',tags:['Ṣabr','Ṣalāh']},
+    {id:'sabr-39-10',surah:39,ayah:10,range:'39:10',title:'Lohn ohne Maß',note:'Geduldige erhalten ihren Lohn ohne Berechnung.',tags:['Ṣabr']},
+    {id:'sabr-3-200',surah:3,ayah:200,range:'3:200',title:'Standhaft bleiben',note:'Seid geduldig und standhaft.',tags:['Ṣabr']}
+  ]},
+
+  {id:'salah',title:'Ṣalāh / Gebet',group:'ʿIbādah',description:'Āyāt über das Gebet und seine Bewahrung.',status:'published',reviewStatus:'approved',items:[
+    {id:'salah-2-43',surah:2,ayah:43,range:'2:43',title:'Gebet verrichten',note:'Gebet und Zakāh als klare Pflichten.',tags:['Ṣalāh','Zakāh']},
+    {id:'salah-29-45',surah:29,ayah:45,range:'29:45',title:'Gebet hält ab',note:'Das Gebet hält von Schändlichem und Verwerflichem ab.',tags:['Ṣalāh','Tazkiyah']},
+    {id:'salah-23-1',surah:23,ayah:1,range:'23:1-2',title:'Erfolg der Gläubigen',note:'Sie sind demütig in ihrem Gebet.',tags:['Ṣalāh']}
+  ]},
+  {id:'zakat',title:'Zakāh',group:'ʿIbādah',description:'Āyāt über Reinigung des Vermögens und soziale Verantwortung.',status:'published',reviewStatus:'approved',items:[
+    {id:'zakat-2-110',surah:2,ayah:110,range:'2:110',title:'Gebet und Zakāh',note:'Verrichtet das Gebet und entrichtet Zakāh.',tags:['Zakāh']},
+    {id:'zakat-9-103',surah:9,ayah:103,range:'9:103',title:'Nimm Almosen',note:'Zakāh reinigt und läutert.',tags:['Zakāh','Reinigung']},
+    {id:'zakat-98-5',surah:98,ayah:5,range:'98:5',title:'Aufrichtigkeit',note:'Sie wurden nur befohlen, Allah aufrichtig zu dienen.',tags:['Ikhlāṣ','Zakāh']}
+  ]},
+  {id:'sawm',title:'Ṣawm / Fasten',group:'ʿIbādah',description:'Āyāt zum Fasten im Ramaḍān.',status:'published',reviewStatus:'approved',items:[
+    {id:'sawm-2-183',surah:2,ayah:183,range:'2:183',title:'Fasten ist vorgeschrieben',note:'Fasten wurde vorgeschrieben, damit ihr gottesfürchtig werdet.',tags:['Ṣawm','Ramaḍān']},
+    {id:'sawm-2-185',surah:2,ayah:185,range:'2:185',title:'Monat Ramaḍān',note:'Ramaḍān ist der Monat des Qurʾān.',tags:['Ramaḍān','Qurʾān']},
+    {id:'sawm-2-187',surah:2,ayah:187,range:'2:187',title:'Regeln des Fastens',note:'Details zum Fasten und zu den Nächten.',tags:['Ṣawm']}
+  ]},
+  {id:'hajj',title:'Ḥajj & ʿUmrah',group:'ʿIbādah',description:'Āyāt zur Pilgerfahrt und ihren Adab.',status:'published',reviewStatus:'approved',items:[
+    {id:'hajj-2-196',surah:2,ayah:196,range:'2:196',title:'Ḥajj und ʿUmrah vollenden',note:'Vollendet die Pilgerfahrt für Allah.',tags:['Ḥajj','ʿUmrah']},
+    {id:'hajj-22-27',surah:22,ayah:27,range:'22:27',title:'Ruf zum Ḥajj',note:'Ibrāhīm ruft die Menschen zum Ḥajj.',tags:['Ḥajj']},
+    {id:'hajj-3-97',surah:3,ayah:97,range:'3:97',title:'Pflicht zur Pilgerfahrt',note:'Der Ḥajj ist Pflicht für den, der dazu fähig ist.',tags:['Ḥajj']}
+  ]},
+
+  {id:'tawbah',title:'Tawbah',group:'Adab & Tazkiyah',description:'Āyāt über Reue, Rückkehr und Allahs Barmherzigkeit.',status:'published',reviewStatus:'approved',items:[
+    {id:'tawbah-39-53',surah:39,ayah:53,range:'39:53',title:'Nicht verzweifeln',note:'Allah vergibt die Sünden alle, wenn der Diener bereut.',tags:['Tawbah','Barmherzigkeit']},
+    {id:'tawbah-66-8',surah:66,ayah:8,range:'66:8',title:'Aufrichtige Reue',note:'Aufruf zu ehrlicher Rückkehr zu Allah.',tags:['Tawbah','Ikhlāṣ']},
+    {id:'tawbah-25-70',surah:25,ayah:70,range:'25:70',title:'Schlechtes wird zu Gutem',note:'Allah ersetzt Sünden durch gute Taten.',tags:['Tawbah']}
+  ]},
+  {id:'ikhlas',title:'Ikhlāṣ',group:'Adab & Tazkiyah',description:'Aufrichtigkeit in Absicht und Handlung.',status:'published',reviewStatus:'approved',items:[
+    {id:'ikhlas-98-5',surah:98,ayah:5,range:'98:5',title:'Aufrichtig dienen',note:'Dient Allah in reiner Aufrichtigkeit.',tags:['Ikhlāṣ']},
+    {id:'ikhlas-39-11',surah:39,ayah:11,range:'39:11',title:'Befehl zur Aufrichtigkeit',note:'Ich wurde befohlen, Allah aufrichtig zu dienen.',tags:['Ikhlāṣ']},
+    {id:'ikhlas-6-162',surah:6,ayah:162,range:'6:162',title:'Leben und Sterben für Allah',note:'Alles gehört Allah allein.',tags:['Ikhlāṣ','Tawḥīd']}
+  ]},
+  {id:'adab-speech',title:'Sprache & Verhalten',group:'Adab & Tazkiyah',description:'Rechte Worte, gute Haltung, kein Spott.',status:'published',reviewStatus:'approved',items:[
+    {id:'adab-49-11',surah:49,ayah:11,range:'49:11',title:'Kein Spott',note:'Die Gläubigen sollen einander nicht verspotten.',tags:['Adab']},
+    {id:'adab-49-12',surah:49,ayah:12,range:'49:12',title:'Kein Verdacht, keine üble Nachrede',note:'Wahrung der Ehre des Muslims.',tags:['Adab','Akhlāq']},
+    {id:'adab-17-53',surah:17,ayah:53,range:'17:53',title:'Sprecht das Beste',note:'Der Satan stiftet sonst Zwietracht.',tags:['Adab','Sprache']}
+  ]},
+
+  {id:'akhirah',title:'Ākhirah',group:'Ākhirah',description:'Āyāt über Jenseits, Rechenschaft, Jannah und Jahannam.',status:'published',reviewStatus:'approved',items:[
+    {id:'akhirah-3-185',surah:3,ayah:185,range:'3:185',title:'Jede Seele kostet den Tod',note:'Der volle Lohn wird am Tag der Auferstehung gegeben.',tags:['Tod','Ākhirah']},
+    {id:'akhirah-99-7',surah:99,ayah:7,range:'99:7',title:'Kleinste gute Tat',note:'Jede Tat wird sichtbar.',tags:['Rechenschaft','Taten']},
+    {id:'akhirah-101-6',surah:101,ayah:6,range:'101:6-9',title:'Die Waage der Taten',note:'Schwer oder leicht auf der Waage.',tags:['Rechenschaft']}
+  ]},
+  {id:'jannah',title:'Jannah',group:'Ākhirah',description:'Verheißung des Paradieses für die Gläubigen.',status:'published',reviewStatus:'approved',items:[
+    {id:'jannah-3-133',surah:3,ayah:133,range:'3:133',title:'Eilt zum Paradies',note:'Breit wie Himmel und Erde.',tags:['Jannah']},
+    {id:'jannah-13-35',surah:13,ayah:35,range:'13:35',title:'Beschreibung des Paradieses',note:'Ströme und ewige Versorgung.',tags:['Jannah']},
+    {id:'jannah-47-15',surah:47,ayah:15,range:'47:15',title:'Flüsse im Paradies',note:'Wasser, Milch, Wein und Honig.',tags:['Jannah']}
+  ]},
+  {id:'jahannam',title:'Warnung vor Jahannam',group:'Ākhirah',description:'Warnende Āyāt über Strafe und Verlust.',status:'published',reviewStatus:'approved',items:[
+    {id:'nar-67-6',surah:67,ayah:6,range:'67:6',title:'Schlimmer Ausgang',note:'Für die Leugner ist die Strafe der Hölle.',tags:['Jahannam']},
+    {id:'nar-74-26',surah:74,ayah:26,range:'74:26-30',title:'Saqar',note:'Beschreibung der Hölle Saqar.',tags:['Jahannam']},
+    {id:'nar-32-20',surah:32,ayah:20,range:'32:20',title:'Kein Entkommen',note:'Immer wieder werden sie zurückgebracht.',tags:['Jahannam']}
+  ]},
+
+  {id:'parents',title:'Eltern',group:'Familie & Gesellschaft',description:'Āyāt über Güte zu den Eltern.',status:'published',reviewStatus:'approved',items:[
+    {id:'parents-17-23',surah:17,ayah:23,range:'17:23',title:'Güte zu den Eltern',note:'Allah befiehlt Ihm allein zu dienen und den Eltern Gutes zu tun.',tags:['Eltern','Adab']},
+    {id:'parents-31-14',surah:31,ayah:14,range:'31:14',title:'Dankbarkeit',note:'Dankbarkeit gegenüber Allah und den Eltern.',tags:['Eltern','Shukr']},
+    {id:'parents-46-15',surah:46,ayah:15,range:'46:15',title:'Für Eltern bitten',note:'Duʿāʾ für Eltern und eigene Rechtschaffenheit.',tags:['Eltern','Duʿāʾ']}
+  ]},
+  {id:'family-marriage',title:'Ehe & Familie',group:'Familie & Gesellschaft',description:'Āyāt zu Ehe, Barmherzigkeit und Schutz.',status:'published',reviewStatus:'approved',items:[
+    {id:'fam-30-21',surah:30,ayah:21,range:'30:21',title:'Liebe und Barmherzigkeit',note:'Ehe als Zeichen Allahs.',tags:['Ehe','Familie']},
+    {id:'fam-4-1',surah:4,ayah:1,range:'4:1',title:'Aus einer Seele erschaffen',note:'Menschliche Würde und Verwandtschaft.',tags:['Familie']},
+    {id:'fam-66-6',surah:66,ayah:6,range:'66:6',title:'Schützt euch und eure Familien',note:'Verantwortung in der Familie.',tags:['Erziehung','Familie']}
+  ]},
+  {id:'justice',title:'Gerechtigkeit',group:'Familie & Gesellschaft',description:'Gerechtes Urteil, Wahrheit und Vertrauenswürdigkeit.',status:'published',reviewStatus:'approved',items:[
+    {id:'adl-4-58',surah:4,ayah:58,range:'4:58',title:'Vertrautes zurückgeben',note:'Und unter Menschen gerecht urteilen.',tags:['Gerechtigkeit']},
+    {id:'adl-5-8',surah:5,ayah:8,range:'5:8',title:'Seid gerecht',note:'Hass darf nicht zur Ungerechtigkeit führen.',tags:['Gerechtigkeit','Taqwā']},
+    {id:'adl-16-90',surah:16,ayah:90,range:'16:90',title:'Allah gebietet Gerechtigkeit',note:'Kernvers zu Recht und Ethik.',tags:['Gerechtigkeit','Adab']}
+  ]},
+  {id:'brotherhood',title:'Brüderlichkeit',group:'Familie & Gesellschaft',description:'Einheit der Gläubigen und Versöhnung.',status:'published',reviewStatus:'approved',items:[
+    {id:'ukhuwwah-49-10',surah:49,ayah:10,range:'49:10',title:'Die Gläubigen sind Brüder',note:'Stiftet Frieden zwischen euren Brüdern.',tags:['Ukhuwwah']},
+    {id:'ukhuwwah-3-103',surah:3,ayah:103,range:'3:103',title:'Haltet fest am Seil Allahs',note:'Nicht spalten, sondern vereinen.',tags:['Einheit']},
+    {id:'ukhuwwah-8-46',surah:8,ayah:46,range:'8:46',title:'Nicht streiten',note:'Sonst schwindet eure Kraft.',tags:['Einheit','Adab']}
+  ]},
+  {id:'dawah',title:'Daʿwah & Wissen',group:'Familie & Gesellschaft',description:'Einladen zu Allah mit Weisheit und Klarheit.',status:'published',reviewStatus:'approved',items:[
+    {id:'dawah-16-125',surah:16,ayah:125,range:'16:125',title:'Mit Weisheit einladen',note:'Daʿwah mit guter Ermahnung.',tags:['Daʿwah']},
+    {id:'dawah-3-104',surah:3,ayah:104,range:'3:104',title:'Gemeinschaft zum Guten',note:'Eine Gruppe ruft zum Guten.',tags:['Daʿwah','Amr bil Maʿrūf']},
+    {id:'ilm-20-114',surah:20,ayah:114,range:'20:114',title:'Mehr Wissen erbitten',note:'„Mein Herr, mehre mich an Wissen.“',tags:['Wissen','Duʿāʾ']}
+  ]},
+  {id:'quran-reflection',title:'Qurʾān & Tadabbur',group:'Qurʾān & Reflexion',description:'Āyāt über Nachdenken über den Qurʾān.',status:'published',reviewStatus:'approved',items:[
+    {id:'quran-47-24',surah:47,ayah:24,range:'47:24',title:'Denken sie nicht nach?',note:'Tadabbur über den Qurʾān ist Pflicht.',tags:['Qurʾān','Tadabbur']},
+    {id:'quran-38-29',surah:38,ayah:29,range:'38:29',title:'Gesegnetes Buch',note:'Damit man über seine Verse nachdenkt.',tags:['Qurʾān']},
+    {id:'quran-17-9',surah:17,ayah:9,range:'17:9',title:'Leitet zum Geradesten',note:'Der Qurʾān weist den rechten Weg.',tags:['Qurʾān','Hidāyah']}
+  ]}
+]}
 function approvedQuranTopics(){const list=Array.isArray(quranTopicsCache)?quranTopicsCache:defaultQuranTopics();return list.filter(function(t){return t&&t.status==='published'&&t.reviewStatus==='approved'})}
 async function loadQuranTopics(){if(quranTopicsCache)return quranTopicsCache;try{const cached=getJson(QURAN_TOPICS_CACHE_KEY,null);if(Array.isArray(cached)){quranTopicsCache=cached;return quranTopicsCache}}catch(e){}try{const r=await fetch(QURAN_TOPICS_PATH,{cache:'no-store'});if(r.ok){quranTopicsCache=await r.json();try{setJson(QURAN_TOPICS_CACHE_KEY,quranTopicsCache)}catch(e){}return quranTopicsCache}}catch(e){console.warn('Qurʾān-Themen:',e)}quranTopicsCache=defaultQuranTopics();return quranTopicsCache}
 function normalizeQuranTopicText(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ʿʾ‘’'´]/g,'').replace(/\x60/g,'').replace(/ḥ/g,'h').replace(/ṣ/g,'s').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u')}
