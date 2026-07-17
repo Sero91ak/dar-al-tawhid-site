@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v254";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v258";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -245,6 +245,250 @@ body.is-area-route .view-desc{font-size:12px;line-height:1.55;margin-top:6px}
 .post-intro-modal[hidden]{display:none}.post-intro-modal{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;padding:max(18px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) max(18px,env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));background:rgba(0,0,0,.58);backdrop-filter:blur(12px)}.post-intro-dialog{width:min(560px,100%);max-height:min(76vh,720px);overflow:auto;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 24% 0%,rgba(239,215,142,.14),transparent 42%),linear-gradient(180deg,rgba(27,24,18,.98),rgba(7,7,6,.98));box-shadow:0 28px 90px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06);padding:18px}.post-intro-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;border-bottom:1px solid var(--line2);padding-bottom:12px;margin-bottom:12px}.post-intro-head h3{font-family:var(--serif);font-size:26px;line-height:1.12;color:var(--gold2);margin:0}.post-intro-close{width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:rgba(239,215,142,.08);color:var(--cream);font-size:21px;line-height:1;cursor:pointer}.post-intro-body{color:var(--cream);font-size:15px;line-height:1.68;white-space:normal}.post-intro-body strong{color:var(--gold2);font-weight:950}.post-intro-body em{color:var(--gold2);font-style:italic}.post-intro-actions{margin:0 0 16px}.post-intro-btn{border-color:rgba(239,215,142,.48)!important;background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.10))!important;color:var(--gold2)!important;min-height:44px}.html.post-intro-open{overflow:hidden}
 .about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:var(--muted);padding:22px 0 calc(26px + var(--safe-bottom))}.footer strong{color:var(--gold2)}.footer-socials{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}.footer-socials span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:850}.footer-socials svg{width:19px;height:19px}.signature{display:block;color:var(--gold2);font-family:cursive;font-size:25px;margin-top:8px}.float-actions{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:calc(14px + 0.5cm + env(safe-area-inset-bottom));top:auto;z-index:35;display:flex;flex-direction:row-reverse;align-items:flex-end;gap:0;padding:0;pointer-events:auto;touch-action:none;transition:right .46s cubic-bezier(.22,.8,.2,1)}.float-actions.is-collapsed{right:0}.float-actions-panel{display:flex;flex-direction:column;gap:12px;align-items:flex-end;padding-right:8px;transform:translateX(calc(100% + 16px));opacity:0;will-change:transform,opacity;transition:transform .46s cubic-bezier(.22,.8,.2,1),opacity .36s ease;pointer-events:none}.float-actions.is-expanded .float-actions-panel{transform:translateX(0);opacity:1;pointer-events:auto}.float-actions.is-dragging .float-actions-panel{transition:none}.float-touch-handle{position:relative;width:18px;min-height:78px;border:1px solid rgba(239,215,142,.42);border-right:0;border-radius:14px 0 0 14px;background:linear-gradient(180deg,rgba(22,19,14,.97),rgba(7,7,6,.97));color:var(--gold2);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:-10px 0 24px rgba(0,0,0,.32);padding:8px 0;margin-right:0;flex:0 0 auto;transition:min-height .34s ease;touch-action:none}.float-actions.is-collapsed .float-touch-handle{margin-right:0;min-height:108px;padding:14px 0}.float-actions.is-expanded .float-touch-handle{min-height:54px;padding:8px 0}.float-handle-icons{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:9px;line-height:1;pointer-events:none}.float-actions.is-collapsed .float-handle-icons{gap:12px}.float-handle-icons span{display:block;opacity:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}.float-touch-handle:active{filter:brightness(1.08)}.float-item{display:flex;flex-direction:row;align-items:center;gap:9px}.float-tip{border:1px solid rgba(239,215,142,.45);background:rgba(18,16,12,.96);color:var(--cream);font-size:11px;font-weight:850;line-height:1.25;padding:8px 11px;border-radius:14px;white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.34);animation:floatTipIn .35s ease}.float-tip.hide{animation:floatTipOut .28s ease forwards}@keyframes floatTipIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}@keyframes floatTipOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(8px)}}.float-actions.is-intro .float-btn{animation:floatIntroPulse 2.1s ease-in-out 3}@keyframes floatIntroPulse{0%,100%{box-shadow:0 18px 44px rgba(0,0,0,.35)}50%{box-shadow:0 18px 44px rgba(0,0,0,.35),0 0 0 3px rgba(239,215,142,.34)}}.float-btn{width:54px;height:54px;border-radius:18px;border:1px solid rgba(239,215,142,.58);background:radial-gradient(circle at top left,rgba(239,215,142,.18),transparent 42%),linear-gradient(180deg,rgba(22,19,14,.98),rgba(7,7,6,.98));color:var(--gold2);box-shadow:0 18px 44px rgba(0,0,0,.35);cursor:pointer;font-size:20px;display:grid;place-items:center;padding:0;flex:0 0 54px}.qibla-float{border-color:rgba(140,255,154,.55);background:radial-gradient(circle at top left,rgba(140,255,154,.16),transparent 42%),linear-gradient(180deg,rgba(22,19,14,.98),rgba(7,7,6,.98))}.float-btn:active{transform:scale(.96)}
 .reader-mode .top-shell,.reader-mode .app-bar,.reader-mode .footer,.reader-mode .float-actions{display:none!important}.reader-mode body,.reader-mode{background:#050504!important}.reader-mode .app{width:min(880px,100%)}.reader-mode .view{border-color:transparent;box-shadow:none;background:transparent}.reader-mode .statement{font-size:clamp(26px,3.4vw,38px);line-height:1.95;background:rgba(18,16,12,.88)}
+
+/* Premium Post Reader */
+body.is-post-route .float-actions{display:none!important}
+body.is-post-route .app-bar{
+  position:sticky;
+  top:max(6px,env(safe-area-inset-top,0px));
+  z-index:41;
+  margin-bottom:10px;
+  padding:6px 9px;
+  border:1px solid color-mix(in srgb,var(--line2) 80%,transparent);
+  border-radius:16px;
+  background:color-mix(in srgb,var(--bg-elev,#100f0c) 88%,transparent);
+  -webkit-backdrop-filter:blur(10px) saturate(1.05);
+  backdrop-filter:blur(10px) saturate(1.05);
+}
+body.is-post-route .app-bar .home-btn{display:none!important}
+body.is-post-route .app-bar .crumb{
+  text-align:center;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:10px;
+  color:var(--premium-label);
+  font-weight:900;
+}
+.post-reader-actions{display:flex;align-items:center;gap:6px;margin-left:auto}
+.post-reader-top-btn{
+  min-height:34px;
+  min-width:34px;
+  border:1px solid var(--line2);
+  border-radius:12px;
+  background:color-mix(in srgb,var(--card) 86%,transparent);
+  color:var(--cream);
+  font-size:12px;
+  font-weight:850;
+  padding:6px 8px;
+}
+.post-reader-top-btn[data-post-save].is-saved{color:#f4deb0;border-color:rgba(217,190,114,.45)}
+body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset-bottom,0px))}
+.post-reader{
+  max-width:860px;
+  margin:0 auto;
+  display:grid;
+  gap:14px;
+}
+.post-reader-title{
+  display:grid;
+  gap:8px;
+  padding:6px 4px 2px;
+}
+.post-reader-title .kicker{
+  color:var(--premium-label);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:10px;
+  font-weight:900;
+}
+.post-reader-title h2{
+  margin:0;
+  color:var(--premium-title);
+  font-family:var(--serif);
+  font-size:clamp(34px,7.6vw,42px);
+  line-height:1.07;
+  text-wrap:pretty;
+}
+.post-reader-speaker{
+  color:var(--cream);
+  font-size:clamp(17px,3.8vw,20px);
+  line-height:1.45;
+  font-weight:700;
+  unicode-bidi:plaintext;
+}
+.post-reader-speaker small{
+  display:block;
+  color:var(--premium-label);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:10px;
+  margin-bottom:4px;
+  font-weight:850;
+}
+.post-reader-speaker .honorific{
+  font-family:"Noto Naskh Arabic","Amiri",serif;
+  direction:rtl;
+  unicode-bidi:isolate;
+  margin-inline-start:4px;
+  font-size:1em;
+}
+.post-reader-main{
+  border:1px solid color-mix(in srgb,var(--line2) 80%,rgba(217,190,114,.25));
+  border-radius:24px;
+  padding:clamp(22px,5vw,26px);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 92%,#000 8%),color-mix(in srgb,var(--bg) 88%,#000 12%));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 36px rgba(0,0,0,.25);
+}
+.post-reader .statement{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:0!important;
+  margin:0!important;
+  text-align:left!important;
+  color:var(--text)!important;
+  font-style:normal!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(21px,var(--post-text-size),25px)!important;
+  line-height:1.62!important;
+  white-space:pre-line!important;
+}
+.post-reader .statement em,
+.post-reader .statement strong em{
+  color:color-mix(in srgb,var(--gold2) 76%,var(--text) 24%)!important;
+  text-decoration:none!important;
+  font-style:normal!important;
+  font-weight:760!important;
+}
+.post-reader .statement strong{
+  color:var(--text)!important;
+  font-weight:800!important;
+}
+.post-key-message{
+  margin-top:14px;
+  padding:10px 0 0 12px;
+  border-left:2px solid color-mix(in srgb,var(--gold2) 58%,transparent);
+}
+.post-key-message h3{
+  margin:0 0 6px;
+  color:var(--premium-label);
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.post-key-message p{
+  margin:0;
+  color:var(--premium-body);
+  font-size:clamp(18px,var(--post-source-size),20px);
+  line-height:1.56;
+}
+.post-source{
+  border-top:1px solid color-mix(in srgb,var(--line2) 76%,transparent);
+  padding-top:10px;
+  display:grid;
+  gap:8px;
+}
+.post-source-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.post-source-head b{
+  color:var(--premium-label);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.post-source-verify{font-size:11px;color:var(--premium-body)}
+.post-source-main{color:var(--text);font-size:clamp(14px,var(--post-source-size),16px);line-height:1.55}
+.post-source-actions{display:flex;flex-wrap:wrap;gap:8px}
+.post-source-actions button,.post-source-actions a{
+  min-height:36px;
+  border:1px solid var(--line2);
+  border-radius:11px;
+  background:color-mix(in srgb,var(--card) 86%,transparent);
+  color:var(--cream);
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:750;
+  text-decoration:none;
+}
+.post-source-details[hidden],.post-reader-sheet[hidden]{display:none!important}
+.post-source-details{
+  margin-top:8px;
+  border-top:1px solid var(--line2);
+  padding-top:8px;
+  color:var(--premium-body);
+  font-size:13px;
+  line-height:1.5;
+}
+.post-actions{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.post-actions .action-btn{
+  min-height:42px;
+  border-radius:12px!important;
+  min-width:0!important;
+  width:100%;
+}
+.post-nav-preview{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.post-nav-card{
+  border:1px solid var(--line2);
+  border-radius:14px;
+  background:color-mix(in srgb,var(--card) 90%,transparent);
+  padding:10px 12px;
+  text-align:left;
+}
+.post-nav-card b{display:block;color:var(--premium-label);font-size:11px;letter-spacing:.08em;margin-bottom:5px}
+.post-nav-card span{display:block;color:var(--cream);font-size:14px;line-height:1.35}
+.related-compact-card{gap:10px}
+.related-compact-card .related-compact-meta{display:none!important}
+.related-compact-card p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+.post-share-sheet-backdrop,.post-reader-sheet-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:95;
+  background:rgba(0,0,0,.5);
+  display:grid;
+  align-items:end;
+}
+.post-share-sheet,.post-reader-sheet{
+  width:100%;
+  border-radius:22px 22px 0 0;
+  border:1px solid var(--line2);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 95%,#000 5%),color-mix(in srgb,var(--bg) 90%,#000 10%));
+  padding:14px;
+  max-height:min(74dvh,760px);
+  overflow:auto;
+}
+.post-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.post-sheet-head h3{margin:0;color:var(--premium-title);font-size:15px}
+.post-sheet-close{min-height:34px;min-width:34px;border:1px solid var(--line2);border-radius:10px;background:transparent;color:var(--cream)}
+body.is-post-route .bottom-nav{transition:transform .22s ease,opacity .22s ease}
+body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacity:.02;pointer-events:none}
+body.post-focus-mode .bottom-nav,
+body.post-focus-mode .post-reader-actions [data-post-save],
+body.post-focus-mode .post-reader-actions [data-post-share-open],
+body.post-focus-mode .post-reader-actions [data-post-more-open],
+body.post-focus-mode .post-key-message,
+body.post-focus-mode .post-source-wrap,
+body.post-focus-mode .post-actions-wrap,
+body.post-focus-mode .post-nav-wrap,
+body.post-focus-mode .related-block{display:none!important}
+body.post-focus-mode .post-reader .statement{font-size:clamp(24px,var(--post-text-size),31px)!important;line-height:1.68!important}
+@media(max-width:760px){
+  .post-reader-actions{gap:4px}
+  .post-reader-top-btn{padding:6px 7px;font-size:11px}
+  .post-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .post-nav-preview{grid-template-columns:1fr}
+}
 
 .search-pro-panel{
   border:1px solid var(--line);
@@ -1972,7 +2216,7 @@ body:before{
 .zakat-acc-chevron:after{display:none}
 .zakat-acc-chevron.open{transform:rotate(180deg)}
 .zakat-acc-preview,.zakat-acc-body{margin:0;padding:0;border:0;background:transparent;box-sizing:border-box}
-.zakat-acc-preview-inner,.zakat-acc-body-inner{box-sizing:border-box;border-radius:16px;background:color-mix(in srgb,var(--gold) 5%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 14%,var(--line2));font-size:11px;color:var(--premium-body)}
+.zakat-acc-preview-inner,.zakat-acc-body-inner{box-sizing:border-box;border-radius:16px;background:color-mix(in srgb,var(--gold) 5%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 14%,var(--line2));font-size:12.5px;color:var(--premium-body);font-weight:600}
 .zakat-acc-preview-inner{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .zakat-acc-body-inner{display:block}
 .zakat-acc-body-inner .zakat-source-tabs{margin:0 0 10px;padding:0 0 8px;border:0;background:transparent}
@@ -1986,10 +2230,10 @@ body:before{
 .zakat-source-summary{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:11px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;margin:0}
 .zakat-source-summary::-webkit-details-marker{display:none}
 .zakat-source-summary::marker{display:none}
-.zakat-source-summary-title{flex:1 1 100%;font-size:12px;font-weight:700;color:var(--text);line-height:1.35;margin:0}
+.zakat-source-summary-title{flex:1 1 100%;font-size:13px;font-weight:800;color:var(--text);line-height:1.4;margin:0}
 .zakat-source-summary-badges{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%}
 .zakat-source-summary-badges .zakat-source-cat{font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--premium-label);padding:3px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--gold) 18%,var(--line2));background:color-mix(in srgb,var(--gold) 6%,transparent)}
-.zakat-source-open-hint{font-size:10px;font-weight:700;color:var(--premium-label);margin-left:auto}
+.zakat-source-open-hint{font-size:11px;font-weight:800;color:var(--premium-label);margin-left:auto}
 .zakat-source-card[open] .zakat-source-open-hint{display:none}
 .zakat-source-card[open] .zakat-source-summary{border-bottom:1px solid color-mix(in srgb,var(--gold) 12%,var(--line2));padding-bottom:10px}
 .zakat-source-body{padding:10px 12px 12px}
@@ -2001,25 +2245,25 @@ body:before{
 .zakat-hero-badge{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--premium-pill-text);border:1px solid var(--premium-pill-border);padding:5px 12px;border-radius:999px;margin-bottom:10px;background:var(--premium-pill-bg);position:relative;z-index:1}
 .zakat-hero-icon{font-size:2rem;margin-bottom:6px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));position:relative;z-index:1}
 .zakat-hero-title{font-family:var(--serif);font-size:clamp(1.65rem,4vw,2.05rem);color:var(--premium-title);margin:0 0 6px;font-weight:800;letter-spacing:.02em;position:relative;z-index:1;text-shadow:none}
-.zakat-hero-sub{color:var(--text);font-size:13.5px;margin:0 0 10px;font-weight:600;line-height:1.45;position:relative;z-index:1}
-.zakat-trust-note{font-size:11.5px;line-height:1.55;color:var(--premium-body);margin:0 0 10px;padding:0 8px;position:relative;z-index:1}
-.zakat-privacy,.zakat-muted,.zakat-footer{font-size:11.5px;line-height:1.55;color:var(--muted)}
+.zakat-hero-sub{color:var(--text);font-size:14.5px;margin:0 0 10px;font-weight:700;line-height:1.5;position:relative;z-index:1}
+.zakat-trust-note{font-size:12.5px;line-height:1.6;color:var(--premium-body);margin:0 0 10px;padding:0 8px;position:relative;z-index:1;font-weight:600}
+.zakat-privacy,.zakat-muted,.zakat-footer{font-size:12.5px;line-height:1.6;color:var(--muted);font-weight:600}
 .zakat-privacy{margin:0;padding:12px 14px;border-radius:16px;background:rgba(239,215,142,.045);border:1px solid var(--line2);color:var(--text);position:relative;z-index:1;text-align:left}
-.zakat-flow-label{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--premium-label);margin:2px 6px 0;font-weight:800}
+.zakat-flow-label{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--premium-label);margin:2px 6px 0;font-weight:900}
 .zakat-input-stack{display:grid;gap:12px}
 .zakat-panel{border-radius:22px;padding:16px 15px}
 .zakat-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line2)}
-.zakat-panel-head h3{font-family:var(--serif);color:var(--premium-title);font-size:1.12rem;margin:0;font-weight:700}
+.zakat-panel-head h3{font-family:var(--serif);color:var(--premium-title);font-size:1.2rem;margin:0;font-weight:800}
 .zakat-head-badges{display:flex;gap:6px;flex-wrap:wrap}
 .zakat-form-grid{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:0}
 .zakat-form-grid-3{grid-template-columns:1fr}
-.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--text);font-weight:600;letter-spacing:.02em}
-.zakat-form-grid .field,.zakat-panel>.field{background:color-mix(in srgb,var(--gold) 3%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 16%,var(--line2));border-radius:12px!important;color:var(--text);font-size:16px;padding:8px 10px;min-height:38px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
+.zakat-form-grid label,.zakat-panel>label{display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--text);font-weight:700;letter-spacing:.02em}
+.zakat-form-grid .field,.zakat-panel>.field{background:color-mix(in srgb,var(--gold) 3%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 16%,var(--line2));border-radius:12px!important;color:var(--text);font-size:17px;font-weight:700;padding:9px 11px;min-height:40px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
 .zakat-form-grid .field:focus,.zakat-panel>.field:focus{border-color:rgba(239,215,142,.55);box-shadow:0 0 0 1px rgba(239,215,142,.18)}
 .zakat-form-grid .field::placeholder,.zakat-panel>.field::placeholder{color:var(--muted2);opacity:1}
 .zakat-form-grid .zakat-num,.zakat-panel>.zakat-num{font-variant-numeric:tabular-nums}
-.zakat-subsection-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--premium-label);margin:14px 0 8px;font-weight:800}
-.zakat-banner{padding:12px 14px;border-radius:14px;margin-bottom:0;font-size:11.5px;line-height:1.45;border:1px solid transparent;box-sizing:border-box}
+.zakat-subsection-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--premium-label);margin:14px 0 8px;font-weight:900}
+.zakat-banner{padding:12px 14px;border-radius:14px;margin-bottom:0;font-size:12.5px;line-height:1.5;border:1px solid transparent;box-sizing:border-box;font-weight:700}
 .zakat-banner.ok{background:rgba(40,100,60,.18);border-color:rgba(120,200,140,.28);color:#b8e8c4}
 .zakat-banner.preview{background:rgba(80,60,120,.16);border-color:rgba(180,160,255,.22);color:#d8ccf8}
 .zakat-banner.warn{background:rgba(120,70,20,.16);border-color:rgba(255,160,80,.25);color:#ffd4b0}
@@ -8252,12 +8496,73 @@ body.is-hadith-route .view-desc{color:var(--muted)}
   text-shadow:none;
 }
 .quiz-shell.quiz-shell-pro .quiz-session-actions{margin-top:8px;gap:8px}
+.quiz-shell.quiz-shell-pro .quiz-session-actions{grid-template-columns:repeat(auto-fit,minmax(148px,1fr))}
 .quiz-shell.quiz-shell-pro .quiz-actions{margin-top:8px;gap:8px}
 .quiz-shell.quiz-shell-pro .quiz-answer-list{gap:8px}
 .quiz-shell.quiz-shell-pro .quiz-answer{min-height:54px;padding:10px 12px}
 .quiz-shell.quiz-shell-pro .quiz-answer.selected,
 .quiz-shell.quiz-shell-pro .quiz-answer.correct,
 .quiz-shell.quiz-shell-pro .quiz-answer.wrong{animation-duration:.9s}
+.quiz-shell.quiz-shell-pro .quiz-session-actions .quiz-btn.next-ready{
+  color:#081f13;
+  border-color:rgba(117,226,175,.45);
+  background:linear-gradient(135deg,#7de3b6,#5fcf98);
+  box-shadow:0 0 0 2px rgba(125,227,182,.36),0 0 24px rgba(125,227,182,.3);
+}
+.quiz-shell.quiz-shell-pro .quiz-session-actions .quiz-btn.remember-active{
+  border-color:rgba(216,195,127,.7);
+  background:color-mix(in srgb,var(--quiz-soft) 70%,var(--quiz-accent) 30%);
+  box-shadow:0 0 0 2px rgba(216,195,127,.22),0 0 20px rgba(216,195,127,.2);
+}
+.quiz-shell.quiz-shell-pro .quiz-result-section{
+  margin-top:10px;
+  border:1px solid color-mix(in srgb,var(--quiz-line) 88%,#fff 12%);
+  border-radius:14px;
+  background:color-mix(in srgb,var(--quiz-card) 84%,var(--quiz-soft) 16%);
+  padding:10px;
+}
+.quiz-shell.quiz-shell-pro .quiz-result-section h3{
+  margin:0 0 8px;
+  font-size:14px;
+}
+.quiz-shell.quiz-shell-pro .quiz-topic-stats,
+.quiz-shell.quiz-shell-pro .quiz-audit-list{
+  display:grid;
+  gap:8px;
+}
+.quiz-shell.quiz-shell-pro .quiz-topic-row,
+.quiz-shell.quiz-shell-pro .quiz-audit-row{
+  border:1px solid color-mix(in srgb,var(--quiz-line) 88%,#fff 12%);
+  border-radius:12px;
+  padding:9px 10px;
+  background:color-mix(in srgb,var(--quiz-soft) 84%,var(--quiz-card) 16%);
+}
+.quiz-shell.quiz-shell-pro .quiz-topic-row b,
+.quiz-shell.quiz-shell-pro .quiz-audit-row b{
+  display:block;
+  font-size:13px;
+  margin-bottom:3px;
+}
+.quiz-shell.quiz-shell-pro .quiz-topic-row span,
+.quiz-shell.quiz-shell-pro .quiz-audit-row span{
+  color:var(--quiz-muted);
+  font-size:12px;
+}
+.quiz-shell.quiz-shell-pro .quiz-audit-row div{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+}
+.quiz-shell.quiz-shell-pro .quiz-audit-row strong{
+  font-size:12px;
+  text-align:right;
+}
+.quiz-shell.quiz-shell-pro .quiz-audit-row.ok{border-color:rgba(125,227,182,.4)}
+.quiz-shell.quiz-shell-pro .quiz-audit-row.bad{border-color:rgba(255,158,165,.4)}
+.quiz-shell.quiz-shell-pro .quiz-result-empty{
+  font-size:12px;
+  color:var(--quiz-muted);
+}
 html[data-theme="light"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#5f3f12}
 html[data-theme="soft"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#5f2f48}
 html[data-theme="royal"] .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#ffe6a0}
@@ -8771,7 +9076,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
     </header>
     <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
   </section>
-  <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div></div>
+  <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-aa-open aria-label="Lesemodus und Schrift öffnen">Aa</button><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
   <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Neue Beiträge anzeigen">
     <span class="new-posts-icon">&#x23F3;</span>
     <span class="new-posts-text">Neue Beiträge verfügbar</span>
@@ -8815,7 +9120,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=12;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV1";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=12;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV1":"darCurrentUpdatesV1";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -9067,7 +9372,123 @@ function renderQuranQuickPick(){if(!quranMeta)return "";const options=quranMeta.
 function renderQuranJumpBar(surahId,totalVerses,selectedAyah=0){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${s.id===surahId?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="quran-jump-bar"><select id="quranJumpSurah" class="direct-pick">${options}</select><select id="quranJumpAyah" class="direct-pick">${quranAyahOptions(totalVerses,selectedAyah)}</select><button id="quranJumpBtn" class="quran-jump-btn" type="button">Öffnen</button></section>`}
 
 function quranModeTabs(active){const tabs=[['read','Lesen','quran',''],['topics','Themen','quran-topic',''],['font','Ansicht','','font'],['saved','Merkliste','quran-topic','saved']];return '<nav class="quran-mode-tabs" aria-label="Qurʾān Bereich">'+tabs.map(function(t){const is=t[0]===active;const attrs=t[3]==='font'?' data-quran-open-font="1"':'';const nav=t[2]?(' data-nav="'+t[2]+'"'):'';const value=t[2]==='quran-topic'?(t[3]||''):'';return '<button type="button" class="quran-mode-tab'+(is?' active':'')+'"'+nav+' data-value="'+esc(value)+'"'+attrs+'>'+esc(t[1])+'</button>'}).join('')+'</nav>'}
-function defaultQuranTopics(){return [{id:'tawhid',title:'Tawḥīd',group:'ʿAqīdah & Tawḥīd',description:'Āyāt über die alleinige Anbetung von Allah.',status:'published',reviewStatus:'approved',items:[{id:'tawhid-51-56',surah:51,ayah:56,range:'51:56',title:'Zweck der Erschaffung',note:'Allah erschuf Jinn und Menschen zur Anbetung.',tags:['Tawḥīd','ʿIbādah']},{id:'tawhid-16-36',surah:16,ayah:36,range:'16:36',title:'Botschaft aller Gesandten',note:'Dient Allah und meidet den Ṭāghūt.',tags:['Tawḥīd','Gesandte','Ṭāghūt']},{id:'tawhid-21-25',surah:21,ayah:25,range:'21:25',title:'Kein Gott außer Ihm',note:'Alle Gesandten riefen zur alleinigen Anbetung Allahs.',tags:['Tawḥīd','Offenbarung']}]},{id:'iman',title:'Īmān',group:'Īmān & Grundlagen',description:'Āyāt über Glauben, Rechtleitung und Gewissheit.',status:'published',reviewStatus:'approved',items:[{id:'iman-2-3',surah:2,ayah:3,range:'2:3',title:'Glaube an das Verborgene',note:'Eigenschaften der Gottesfürchtigen.',tags:['Īmān','Taqwā']},{id:'iman-49-15',surah:49,ayah:15,range:'49:15',title:'Wahrer Glaube',note:'Glaube ohne Zweifel und Einsatz auf Allahs Weg.',tags:['Īmān','Gewissheit']}]},{id:'salah',title:'Ṣalāh / Gebet',group:'ʿIbādah',description:'Āyāt über das Gebet und seine Bewahrung.',status:'published',reviewStatus:'approved',items:[{id:'salah-2-43',surah:2,ayah:43,range:'2:43',title:'Gebet verrichten',note:'Gebet und Zakāh als klare Pflichten.',tags:['Ṣalāh','Zakāh']},{id:'salah-29-45',surah:29,ayah:45,range:'29:45',title:'Gebet hält ab',note:'Das Gebet hält von Schändlichem und Verwerflichem ab.',tags:['Ṣalāh','Tazkiyah']}]},{id:'tawbah',title:'Tawbah',group:'Adab & Tazkiyah',description:'Āyāt über Reue, Rückkehr und Allahs Barmherzigkeit.',status:'published',reviewStatus:'approved',items:[{id:'tawbah-39-53',surah:39,ayah:53,range:'39:53',title:'Nicht verzweifeln',note:'Allah vergibt die Sünden alle, wenn der Diener bereut.',tags:['Tawbah','Barmherzigkeit']},{id:'tawbah-66-8',surah:66,ayah:8,range:'66:8',title:'Aufrichtige Reue',note:'Aufruf zu ehrlicher Rückkehr zu Allah.',tags:['Tawbah','Ikhlāṣ']}]},{id:'akhirah',title:'Ākhirah',group:'Ākhirah',description:'Āyāt über Jenseits, Rechenschaft, Jannah und Jahannam.',status:'published',reviewStatus:'approved',items:[{id:'akhirah-3-185',surah:3,ayah:185,range:'3:185',title:'Jede Seele kostet den Tod',note:'Der volle Lohn wird am Tag der Auferstehung gegeben.',tags:['Tod','Ākhirah']},{id:'akhirah-99-7',surah:99,ayah:7,range:'99:7',title:'Kleinste gute Tat',note:'Jede Tat wird sichtbar.',tags:['Rechenschaft','Taten']}]},{id:'parents',title:'Eltern',group:'Familie & Gesellschaft',description:'Āyāt über Güte zu den Eltern.',status:'published',reviewStatus:'approved',items:[{id:'parents-17-23',surah:17,ayah:23,range:'17:23',title:'Güte zu den Eltern',note:'Allah befiehlt Ihm allein zu dienen und den Eltern Gutes zu tun.',tags:['Eltern','Adab']},{id:'parents-31-14',surah:31,ayah:14,range:'31:14',title:'Dankbarkeit',note:'Dankbarkeit gegenüber Allah und den Eltern.',tags:['Eltern','Shukr']}]}]}
+function defaultQuranTopics(){return [
+  {id:'tawhid',title:'Tawḥīd',group:'ʿAqīdah & Tawḥīd',description:'Āyāt über die alleinige Anbetung von Allah.',status:'published',reviewStatus:'approved',items:[
+    {id:'tawhid-51-56',surah:51,ayah:56,range:'51:56',title:'Zweck der Erschaffung',note:'Allah erschuf Jinn und Menschen zur Anbetung.',tags:['Tawḥīd','ʿIbādah']},
+    {id:'tawhid-16-36',surah:16,ayah:36,range:'16:36',title:'Botschaft aller Gesandten',note:'Dient Allah und meidet den Ṭāghūt.',tags:['Tawḥīd','Gesandte']},
+    {id:'tawhid-21-25',surah:21,ayah:25,range:'21:25',title:'Kein Gott außer Ihm',note:'Alle Gesandten riefen zur alleinigen Anbetung Allahs.',tags:['Tawḥīd','Offenbarung']}
+  ]},
+  {id:'rububiyyah',title:'Rubūbiyyah',group:'ʿAqīdah & Tawḥīd',description:'Allah als Schöpfer, Erhalter und Lenker.',status:'published',reviewStatus:'approved',items:[
+    {id:'rub-7-54',surah:7,ayah:54,range:'7:54',title:'Schöpfung und Befehl',note:'Schöpfung und Entscheidung gehören Allah allein.',tags:['Rubūbiyyah']},
+    {id:'rub-10-31',surah:10,ayah:31,range:'10:31',title:'Wer versorgt euch?',note:'Allah allein versorgt und lenkt.',tags:['Rubūbiyyah','Rizq']},
+    {id:'rub-23-84',surah:23,ayah:84,range:'23:84',title:'Wem gehört die Erde?',note:'Alles gehört Allah.',tags:['Rubūbiyyah']}
+  ]},
+  {id:'asma-sifat',title:'Namen & Eigenschaften',group:'ʿAqīdah & Tawḥīd',description:'Āyāt über Allāhs schönsten Namen und Eigenschaften.',status:'published',reviewStatus:'approved',items:[
+    {id:'asma-7-180',surah:7,ayah:180,range:'7:180',title:'Die schönsten Namen',note:'Ruft Allah mit Seinen schönsten Namen an.',tags:['Asmāʾ wa Ṣifāt']},
+    {id:'asma-59-22',surah:59,ayah:22,range:'59:22',title:'Er ist Allah',note:'Aufzählung gewaltiger Namen Allahs.',tags:['Asmāʾ wa Ṣifāt']},
+    {id:'asma-2-255',surah:2,ayah:255,range:'2:255',title:'Āyat al-Kursī',note:'Allahs Größe, Wissen und Herrschaft.',tags:['Tauḥīd','Asmāʾ wa Ṣifāt']}
+  ]},
+
+  {id:'iman',title:'Īmān',group:'Īmān & Grundlagen',description:'Āyāt über Glauben, Rechtleitung und Gewissheit.',status:'published',reviewStatus:'approved',items:[
+    {id:'iman-2-3',surah:2,ayah:3,range:'2:3',title:'Glaube an das Verborgene',note:'Eigenschaften der Gottesfürchtigen.',tags:['Īmān','Taqwā']},
+    {id:'iman-49-15',surah:49,ayah:15,range:'49:15',title:'Wahrer Glaube',note:'Glaube ohne Zweifel und Einsatz auf Allahs Weg.',tags:['Īmān','Gewissheit']},
+    {id:'iman-8-2',surah:8,ayah:2,range:'8:2',title:'Zeichen des Glaubens',note:'Wenn Allah erwähnt wird, erbeben ihre Herzen.',tags:['Īmān']}
+  ]},
+  {id:'taqwa',title:'Taqwā',group:'Īmān & Grundlagen',description:'Gottesfurcht als Schutz und Orientierung.',status:'published',reviewStatus:'approved',items:[
+    {id:'taqwa-2-197',surah:2,ayah:197,range:'2:197',title:'Beste Wegzehrung',note:'Die beste Wegzehrung ist Taqwā.',tags:['Taqwā']},
+    {id:'taqwa-65-2',surah:65,ayah:2,range:'65:2',title:'Ausweg für die Gottesfürchtigen',note:'Allah gibt dem Gottesfürchtigen einen Ausweg.',tags:['Taqwā','Hoffnung']},
+    {id:'taqwa-3-102',surah:3,ayah:102,range:'3:102',title:'Fürchtet Allah',note:'Fürchtet Allah, wie es Ihm gebührt.',tags:['Taqwā']}
+  ]},
+  {id:'sabr',title:'Ṣabr',group:'Īmān & Grundlagen',description:'Geduld bei Prüfungen und im Gehorsam.',status:'published',reviewStatus:'approved',items:[
+    {id:'sabr-2-153',surah:2,ayah:153,range:'2:153',title:'Hilfe durch Geduld',note:'Sucht Hilfe in Geduld und Gebet.',tags:['Ṣabr','Ṣalāh']},
+    {id:'sabr-39-10',surah:39,ayah:10,range:'39:10',title:'Lohn ohne Maß',note:'Geduldige erhalten ihren Lohn ohne Berechnung.',tags:['Ṣabr']},
+    {id:'sabr-3-200',surah:3,ayah:200,range:'3:200',title:'Standhaft bleiben',note:'Seid geduldig und standhaft.',tags:['Ṣabr']}
+  ]},
+
+  {id:'salah',title:'Ṣalāh / Gebet',group:'ʿIbādah',description:'Āyāt über das Gebet und seine Bewahrung.',status:'published',reviewStatus:'approved',items:[
+    {id:'salah-2-43',surah:2,ayah:43,range:'2:43',title:'Gebet verrichten',note:'Gebet und Zakāh als klare Pflichten.',tags:['Ṣalāh','Zakāh']},
+    {id:'salah-29-45',surah:29,ayah:45,range:'29:45',title:'Gebet hält ab',note:'Das Gebet hält von Schändlichem und Verwerflichem ab.',tags:['Ṣalāh','Tazkiyah']},
+    {id:'salah-23-1',surah:23,ayah:1,range:'23:1-2',title:'Erfolg der Gläubigen',note:'Sie sind demütig in ihrem Gebet.',tags:['Ṣalāh']}
+  ]},
+  {id:'zakat',title:'Zakāh',group:'ʿIbādah',description:'Āyāt über Reinigung des Vermögens und soziale Verantwortung.',status:'published',reviewStatus:'approved',items:[
+    {id:'zakat-2-110',surah:2,ayah:110,range:'2:110',title:'Gebet und Zakāh',note:'Verrichtet das Gebet und entrichtet Zakāh.',tags:['Zakāh']},
+    {id:'zakat-9-103',surah:9,ayah:103,range:'9:103',title:'Nimm Almosen',note:'Zakāh reinigt und läutert.',tags:['Zakāh','Reinigung']},
+    {id:'zakat-98-5',surah:98,ayah:5,range:'98:5',title:'Aufrichtigkeit',note:'Sie wurden nur befohlen, Allah aufrichtig zu dienen.',tags:['Ikhlāṣ','Zakāh']}
+  ]},
+  {id:'sawm',title:'Ṣawm / Fasten',group:'ʿIbādah',description:'Āyāt zum Fasten im Ramaḍān.',status:'published',reviewStatus:'approved',items:[
+    {id:'sawm-2-183',surah:2,ayah:183,range:'2:183',title:'Fasten ist vorgeschrieben',note:'Fasten wurde vorgeschrieben, damit ihr gottesfürchtig werdet.',tags:['Ṣawm','Ramaḍān']},
+    {id:'sawm-2-185',surah:2,ayah:185,range:'2:185',title:'Monat Ramaḍān',note:'Ramaḍān ist der Monat des Qurʾān.',tags:['Ramaḍān','Qurʾān']},
+    {id:'sawm-2-187',surah:2,ayah:187,range:'2:187',title:'Regeln des Fastens',note:'Details zum Fasten und zu den Nächten.',tags:['Ṣawm']}
+  ]},
+  {id:'hajj',title:'Ḥajj & ʿUmrah',group:'ʿIbādah',description:'Āyāt zur Pilgerfahrt und ihren Adab.',status:'published',reviewStatus:'approved',items:[
+    {id:'hajj-2-196',surah:2,ayah:196,range:'2:196',title:'Ḥajj und ʿUmrah vollenden',note:'Vollendet die Pilgerfahrt für Allah.',tags:['Ḥajj','ʿUmrah']},
+    {id:'hajj-22-27',surah:22,ayah:27,range:'22:27',title:'Ruf zum Ḥajj',note:'Ibrāhīm ruft die Menschen zum Ḥajj.',tags:['Ḥajj']},
+    {id:'hajj-3-97',surah:3,ayah:97,range:'3:97',title:'Pflicht zur Pilgerfahrt',note:'Der Ḥajj ist Pflicht für den, der dazu fähig ist.',tags:['Ḥajj']}
+  ]},
+
+  {id:'tawbah',title:'Tawbah',group:'Adab & Tazkiyah',description:'Āyāt über Reue, Rückkehr und Allahs Barmherzigkeit.',status:'published',reviewStatus:'approved',items:[
+    {id:'tawbah-39-53',surah:39,ayah:53,range:'39:53',title:'Nicht verzweifeln',note:'Allah vergibt die Sünden alle, wenn der Diener bereut.',tags:['Tawbah','Barmherzigkeit']},
+    {id:'tawbah-66-8',surah:66,ayah:8,range:'66:8',title:'Aufrichtige Reue',note:'Aufruf zu ehrlicher Rückkehr zu Allah.',tags:['Tawbah','Ikhlāṣ']},
+    {id:'tawbah-25-70',surah:25,ayah:70,range:'25:70',title:'Schlechtes wird zu Gutem',note:'Allah ersetzt Sünden durch gute Taten.',tags:['Tawbah']}
+  ]},
+  {id:'ikhlas',title:'Ikhlāṣ',group:'Adab & Tazkiyah',description:'Aufrichtigkeit in Absicht und Handlung.',status:'published',reviewStatus:'approved',items:[
+    {id:'ikhlas-98-5',surah:98,ayah:5,range:'98:5',title:'Aufrichtig dienen',note:'Dient Allah in reiner Aufrichtigkeit.',tags:['Ikhlāṣ']},
+    {id:'ikhlas-39-11',surah:39,ayah:11,range:'39:11',title:'Befehl zur Aufrichtigkeit',note:'Ich wurde befohlen, Allah aufrichtig zu dienen.',tags:['Ikhlāṣ']},
+    {id:'ikhlas-6-162',surah:6,ayah:162,range:'6:162',title:'Leben und Sterben für Allah',note:'Alles gehört Allah allein.',tags:['Ikhlāṣ','Tawḥīd']}
+  ]},
+  {id:'adab-speech',title:'Sprache & Verhalten',group:'Adab & Tazkiyah',description:'Rechte Worte, gute Haltung, kein Spott.',status:'published',reviewStatus:'approved',items:[
+    {id:'adab-49-11',surah:49,ayah:11,range:'49:11',title:'Kein Spott',note:'Die Gläubigen sollen einander nicht verspotten.',tags:['Adab']},
+    {id:'adab-49-12',surah:49,ayah:12,range:'49:12',title:'Kein Verdacht, keine üble Nachrede',note:'Wahrung der Ehre des Muslims.',tags:['Adab','Akhlāq']},
+    {id:'adab-17-53',surah:17,ayah:53,range:'17:53',title:'Sprecht das Beste',note:'Der Satan stiftet sonst Zwietracht.',tags:['Adab','Sprache']}
+  ]},
+
+  {id:'akhirah',title:'Ākhirah',group:'Ākhirah',description:'Āyāt über Jenseits, Rechenschaft, Jannah und Jahannam.',status:'published',reviewStatus:'approved',items:[
+    {id:'akhirah-3-185',surah:3,ayah:185,range:'3:185',title:'Jede Seele kostet den Tod',note:'Der volle Lohn wird am Tag der Auferstehung gegeben.',tags:['Tod','Ākhirah']},
+    {id:'akhirah-99-7',surah:99,ayah:7,range:'99:7',title:'Kleinste gute Tat',note:'Jede Tat wird sichtbar.',tags:['Rechenschaft','Taten']},
+    {id:'akhirah-101-6',surah:101,ayah:6,range:'101:6-9',title:'Die Waage der Taten',note:'Schwer oder leicht auf der Waage.',tags:['Rechenschaft']}
+  ]},
+  {id:'jannah',title:'Jannah',group:'Ākhirah',description:'Verheißung des Paradieses für die Gläubigen.',status:'published',reviewStatus:'approved',items:[
+    {id:'jannah-3-133',surah:3,ayah:133,range:'3:133',title:'Eilt zum Paradies',note:'Breit wie Himmel und Erde.',tags:['Jannah']},
+    {id:'jannah-13-35',surah:13,ayah:35,range:'13:35',title:'Beschreibung des Paradieses',note:'Ströme und ewige Versorgung.',tags:['Jannah']},
+    {id:'jannah-47-15',surah:47,ayah:15,range:'47:15',title:'Flüsse im Paradies',note:'Wasser, Milch, Wein und Honig.',tags:['Jannah']}
+  ]},
+  {id:'jahannam',title:'Warnung vor Jahannam',group:'Ākhirah',description:'Warnende Āyāt über Strafe und Verlust.',status:'published',reviewStatus:'approved',items:[
+    {id:'nar-67-6',surah:67,ayah:6,range:'67:6',title:'Schlimmer Ausgang',note:'Für die Leugner ist die Strafe der Hölle.',tags:['Jahannam']},
+    {id:'nar-74-26',surah:74,ayah:26,range:'74:26-30',title:'Saqar',note:'Beschreibung der Hölle Saqar.',tags:['Jahannam']},
+    {id:'nar-32-20',surah:32,ayah:20,range:'32:20',title:'Kein Entkommen',note:'Immer wieder werden sie zurückgebracht.',tags:['Jahannam']}
+  ]},
+
+  {id:'parents',title:'Eltern',group:'Familie & Gesellschaft',description:'Āyāt über Güte zu den Eltern.',status:'published',reviewStatus:'approved',items:[
+    {id:'parents-17-23',surah:17,ayah:23,range:'17:23',title:'Güte zu den Eltern',note:'Allah befiehlt Ihm allein zu dienen und den Eltern Gutes zu tun.',tags:['Eltern','Adab']},
+    {id:'parents-31-14',surah:31,ayah:14,range:'31:14',title:'Dankbarkeit',note:'Dankbarkeit gegenüber Allah und den Eltern.',tags:['Eltern','Shukr']},
+    {id:'parents-46-15',surah:46,ayah:15,range:'46:15',title:'Für Eltern bitten',note:'Duʿāʾ für Eltern und eigene Rechtschaffenheit.',tags:['Eltern','Duʿāʾ']}
+  ]},
+  {id:'family-marriage',title:'Ehe & Familie',group:'Familie & Gesellschaft',description:'Āyāt zu Ehe, Barmherzigkeit und Schutz.',status:'published',reviewStatus:'approved',items:[
+    {id:'fam-30-21',surah:30,ayah:21,range:'30:21',title:'Liebe und Barmherzigkeit',note:'Ehe als Zeichen Allahs.',tags:['Ehe','Familie']},
+    {id:'fam-4-1',surah:4,ayah:1,range:'4:1',title:'Aus einer Seele erschaffen',note:'Menschliche Würde und Verwandtschaft.',tags:['Familie']},
+    {id:'fam-66-6',surah:66,ayah:6,range:'66:6',title:'Schützt euch und eure Familien',note:'Verantwortung in der Familie.',tags:['Erziehung','Familie']}
+  ]},
+  {id:'justice',title:'Gerechtigkeit',group:'Familie & Gesellschaft',description:'Gerechtes Urteil, Wahrheit und Vertrauenswürdigkeit.',status:'published',reviewStatus:'approved',items:[
+    {id:'adl-4-58',surah:4,ayah:58,range:'4:58',title:'Vertrautes zurückgeben',note:'Und unter Menschen gerecht urteilen.',tags:['Gerechtigkeit']},
+    {id:'adl-5-8',surah:5,ayah:8,range:'5:8',title:'Seid gerecht',note:'Hass darf nicht zur Ungerechtigkeit führen.',tags:['Gerechtigkeit','Taqwā']},
+    {id:'adl-16-90',surah:16,ayah:90,range:'16:90',title:'Allah gebietet Gerechtigkeit',note:'Kernvers zu Recht und Ethik.',tags:['Gerechtigkeit','Adab']}
+  ]},
+  {id:'brotherhood',title:'Brüderlichkeit',group:'Familie & Gesellschaft',description:'Einheit der Gläubigen und Versöhnung.',status:'published',reviewStatus:'approved',items:[
+    {id:'ukhuwwah-49-10',surah:49,ayah:10,range:'49:10',title:'Die Gläubigen sind Brüder',note:'Stiftet Frieden zwischen euren Brüdern.',tags:['Ukhuwwah']},
+    {id:'ukhuwwah-3-103',surah:3,ayah:103,range:'3:103',title:'Haltet fest am Seil Allahs',note:'Nicht spalten, sondern vereinen.',tags:['Einheit']},
+    {id:'ukhuwwah-8-46',surah:8,ayah:46,range:'8:46',title:'Nicht streiten',note:'Sonst schwindet eure Kraft.',tags:['Einheit','Adab']}
+  ]},
+  {id:'dawah',title:'Daʿwah & Wissen',group:'Familie & Gesellschaft',description:'Einladen zu Allah mit Weisheit und Klarheit.',status:'published',reviewStatus:'approved',items:[
+    {id:'dawah-16-125',surah:16,ayah:125,range:'16:125',title:'Mit Weisheit einladen',note:'Daʿwah mit guter Ermahnung.',tags:['Daʿwah']},
+    {id:'dawah-3-104',surah:3,ayah:104,range:'3:104',title:'Gemeinschaft zum Guten',note:'Eine Gruppe ruft zum Guten.',tags:['Daʿwah','Amr bil Maʿrūf']},
+    {id:'ilm-20-114',surah:20,ayah:114,range:'20:114',title:'Mehr Wissen erbitten',note:'„Mein Herr, mehre mich an Wissen.“',tags:['Wissen','Duʿāʾ']}
+  ]},
+  {id:'quran-reflection',title:'Qurʾān & Tadabbur',group:'Qurʾān & Reflexion',description:'Āyāt über Nachdenken über den Qurʾān.',status:'published',reviewStatus:'approved',items:[
+    {id:'quran-47-24',surah:47,ayah:24,range:'47:24',title:'Denken sie nicht nach?',note:'Tadabbur über den Qurʾān ist Pflicht.',tags:['Qurʾān','Tadabbur']},
+    {id:'quran-38-29',surah:38,ayah:29,range:'38:29',title:'Gesegnetes Buch',note:'Damit man über seine Verse nachdenkt.',tags:['Qurʾān']},
+    {id:'quran-17-9',surah:17,ayah:9,range:'17:9',title:'Leitet zum Geradesten',note:'Der Qurʾān weist den rechten Weg.',tags:['Qurʾān','Hidāyah']}
+  ]}
+]}
 function approvedQuranTopics(){const list=Array.isArray(quranTopicsCache)?quranTopicsCache:defaultQuranTopics();return list.filter(function(t){return t&&t.status==='published'&&t.reviewStatus==='approved'})}
 async function loadQuranTopics(){if(quranTopicsCache)return quranTopicsCache;try{const cached=getJson(QURAN_TOPICS_CACHE_KEY,null);if(Array.isArray(cached)){quranTopicsCache=cached;return quranTopicsCache}}catch(e){}try{const r=await fetch(QURAN_TOPICS_PATH,{cache:'no-store'});if(r.ok){quranTopicsCache=await r.json();try{setJson(QURAN_TOPICS_CACHE_KEY,quranTopicsCache)}catch(e){}return quranTopicsCache}}catch(e){console.warn('Qurʾān-Themen:',e)}quranTopicsCache=defaultQuranTopics();return quranTopicsCache}
 function normalizeQuranTopicText(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ʿʾ‘’'´]/g,'').replace(/\x60/g,'').replace(/ḥ/g,'h').replace(/ṣ/g,'s').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u')}
@@ -9444,7 +9865,7 @@ function applyTabSwipePreview(curIdx,targetIdx,progress){const metrics=bottomNav
 function bottomNavDockMisplaced(el){return!!(el&&el.closest&&el.closest(".app,#appView,.view"))}
 function ensureBottomNavDock(){if(window.__bottomNavDockBusy)return;if(document.body.classList.contains("is-ilm-chat-route"))return;const nav=$("bottomNav");if(!nav)return;window.__bottomNavDockBusy=true;try{let dock=$("appChromeDock");if(!dock){dock=document.createElement("div");dock.id="appChromeDock";dock.className="app-chrome-dock";dock.setAttribute("data-nav-dock","bottom")}if(nav.parentElement!==dock||bottomNavDockMisplaced(nav))dock.appendChild(nav);if(dock.parentElement!==document.body||bottomNavDockMisplaced(dock))document.body.appendChild(dock);dock.style.setProperty("display","contents","important");dock.style.setProperty("position","static","important");dock.style.setProperty("contain","none","important");dock.style.setProperty("transform","none","important");dock.style.removeProperty("left");dock.style.removeProperty("right");dock.style.removeProperty("bottom");dock.style.removeProperty("top");dock.style.removeProperty("z-index");nav.classList.remove("is-pill-dragging");nav.style.setProperty("position","fixed","important");nav.style.setProperty("top","auto","important");nav.style.setProperty("left","max(14px,env(safe-area-inset-left))","important");nav.style.setProperty("right","max(14px,env(safe-area-inset-right))","important");nav.style.setProperty("bottom","calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)","important");nav.style.setProperty("transform","none","important");nav.style.setProperty("-webkit-transform","none","important");nav.style.setProperty("pointer-events","auto","important");nav.style.setProperty("margin","0","important");nav.style.setProperty("z-index","40","important");nav.style.setProperty("contain","none","important");document.body.classList.add("has-bottom-nav")}finally{window.__bottomNavDockBusy=false}}
 function verifyBottomNavDock(){if(document.body.classList.contains("is-ilm-chat-route"))return;const nav=$("bottomNav");const dock=$("appChromeDock");if(!nav||!dock||document.documentElement.classList.contains("reader-mode"))return;if(dock.parentElement!==document.body||nav.parentElement!==dock||bottomNavDockMisplaced(dock)||bottomNavDockMisplaced(nav)){ensureBottomNavDock();return}if(getComputedStyle(nav).position!=="fixed"){ensureBottomNavDock();return}const rect=nav.getBoundingClientRect();const vh=window.innerHeight||0;if(rect.height>0&&vh>0&&(rect.top>vh||rect.bottom<40))ensureBottomNavDock()}
-function initBottomNavGuard(){if(window.__bottomNavGuardBound)return;window.__bottomNavGuardBound=true;ensureBottomNavDock();let scrollTimer=0,mutTimer=0,lastCheck=0;const check=(force)=>{if(window.__bottomNavDockBusy)return;const now=Date.now();if(!force&&now-lastCheck<500)return;lastCheck=now;verifyBottomNavDock()};const onScroll=()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>check(false),120)};window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",()=>check(true),{passive:true});if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>check(true),{passive:true})}try{const obs=new MutationObserver(muts=>{if(window.__bottomNavDockBusy)return;if(!muts.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))||Array.from(m.removedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))))return;clearTimeout(mutTimer);mutTimer=setTimeout(()=>check(true),180)});obs.observe(document.body,{childList:true})}catch(e){}setTimeout(()=>check(true),1200)}
+function initBottomNavGuard(){if(window.__bottomNavGuardBound)return;window.__bottomNavGuardBound=true;ensureBottomNavDock();let scrollTimer=0,mutTimer=0,lastCheck=0;const check=(force)=>{if(window.__bottomNavDockBusy)return;const now=Date.now();if(!force&&now-lastCheck<500)return;lastCheck=now;verifyBottomNavDock();updatePostNavVisibility()};const onScroll=()=>{updatePostNavVisibility();clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>check(false),120)};window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",()=>check(true),{passive:true});if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>check(true),{passive:true})}try{const obs=new MutationObserver(muts=>{if(window.__bottomNavDockBusy)return;if(!muts.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))||Array.from(m.removedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))))return;clearTimeout(mutTimer);mutTimer=setTimeout(()=>check(true),180)});obs.observe(document.body,{childList:true})}catch(e){}setTimeout(()=>check(true),1200)}
 function resetTabSwipePreview(){const view=$("appView");if(view){view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}const nav=$("bottomNav");if(nav){nav.classList.remove("is-pill-dragging");nav.style.removeProperty("--nav-pill-left");nav.style.removeProperty("--nav-pill-width")}if(!document.body.classList.contains("is-ilm-chat-route"))ensureBottomNavDock();updateBottomNav(currentRoute)}
 function cleanRefreshQueryParam(){try{if(!/[?&]r=/.test(location.search))return;const u=new URL(location.href);u.searchParams.delete("r");history.replaceState(null,"",u.pathname+(u.search||"")+(location.hash||""))}catch(e){}}
 function bottomNavMetrics(){const nav=$("bottomNav");if(!nav)return[];const navRect=nav.getBoundingClientRect();return[...nav.querySelectorAll("[data-bottom-nav]")].map(btn=>{const r=btn.getBoundingClientRect();return{left:r.left-navRect.left,width:r.width,center:r.left-navRect.left+r.width/2,tab:btn.getAttribute("data-bottom-nav")}})}
@@ -9457,6 +9878,21 @@ function getIlmReturnRoute(){try{const saved=JSON.parse(sessionStorage.getItem("
 function exitIlmChat(){const saved=getIlmReturnRoute();const target=saved.route||{view:"home",value:""};const y=Number(saved.scroll)||0;window.__restoreScrollY=y;navigate(target.view,target.value||"",{skipPush:true,noAnim:true});requestAnimationFrame(()=>requestAnimationFrame(()=>{try{window.DARScrollManager?.stableScrollTo?.(y,{force:true})}catch(e){window.scrollTo({top:y,behavior:"auto"})}}))}
 function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;saveNavScroll(currentRoute);if(tab==="ilm")rememberIlmReturnRoute(currentRoute,window.scrollY||0);const target=tab==="ilm"?{view:"ilm",value:""}:tab==="feed"?{view:"feed",value:""}:{view:tab,value:""};window.__restoreScrollY=getNavScroll(target);clearNavStack();navigate(target.view,target.value||"",{skipPush:true,noAnim:true})}
 function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route))});updateBottomNavPill()}
+let postNavLastY=0;
+function updatePostNavVisibility(){
+  const nav=$("bottomNav");
+  if(!nav)return;
+  if(currentRoute.view!=="post"||document.body.classList.contains("post-focus-mode")){nav.classList.remove("post-nav-hidden");postNavLastY=window.scrollY||0;return}
+  const y=window.scrollY||0;
+  const max=Math.max(0,(document.documentElement.scrollHeight||0)-(window.innerHeight||0));
+  const nearTop=y<28;
+  const nearBottom=(max-y)<88;
+  const goingDown=y>postNavLastY+8;
+  const goingUp=y<postNavLastY-8;
+  if(nearTop||nearBottom||goingUp)nav.classList.remove("post-nav-hidden");
+  else if(goingDown)nav.classList.add("post-nav-hidden");
+  postNavLastY=y;
+}
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
 function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)}})}
 const navigateToPage=navigate;
@@ -12234,6 +12670,7 @@ function hadithShareText(h){return `${h.arabic||""}\n\n${h.german||"Noch keine g
 function bindHadithLibraryEvents(){if(currentRoute.view!=="hadith")return;const rerenderHadith=()=>{window.DARScrollManager?.preserveNextRender?.();render()};const search=$("hadithSearchInput");if(search){search.oninput=()=>{try{localStorage.setItem("darHadithSearchQueryV1",search.value||"")}catch(e){}clearTimeout(window.__hadithSearchRenderTimer);window.__hadithSearchRenderTimer=setTimeout(rerenderHadith,140)}}const status=$("hadithStatusFilter"),grade=$("hadithGradeFilter"),language=$("hadithLanguageFilter");if(status)status.onchange=()=>{hadithFilters.status=status.value||"";hadithActiveChapter="";hadithActiveSection="";const visible=hadithVisibleBooks();if(visible.length&&!visible.some(b=>String(b.id)===String(hadithActiveBook)))hadithActiveBook=visible[0].id;saveHadithFilters();rerenderHadith()};if(grade)grade.onchange=()=>{hadithFilters.grade=grade.value||"";saveHadithFilters();rerenderHadith()};if(language)language.onchange=()=>{hadithFilters.language=language.value||"german";saveHadithFilters();rerenderHadith()};const dailySave=$("hadithDailySave");if(dailySave)dailySave.onclick=()=>{const data={enabled:$("hadithDailyEnabled")?.value==="1",time:$("hadithDailyTime")?.value||"08:00",scope:$("hadithDailyScope")?.value||"sahih"};try{localStorage.setItem(HADITH_DAILY_KEY,JSON.stringify(data))}catch(e){}alert("Hadith-des-Tages Einstellung gespeichert.")};document.querySelectorAll("[data-hadith-level]").forEach(btn=>{btn.onclick=()=>{const level=btn.getAttribute("data-hadith-level");if(level==="books"){hadithActiveChapter="";hadithActiveSection=""}if(level==="chapters"){hadithActiveChapter="";hadithActiveSection=""}if(level==="sections"){hadithActiveSection=""}rerenderHadith()}});document.querySelectorAll("[data-hadith-book]").forEach(btn=>{btn.onclick=async()=>{const id=btn.getAttribute("data-hadith-book")||"";hadithActiveBook=id;hadithActiveChapter="";hadithActiveSection="";try{localStorage.removeItem("darHadithSearchQueryV1")}catch(e){}const book=hadithBooks.find(b=>String(b.id)===id);if(book?.status==="imported")await ensureHadithCollection(id);window.DARScrollManager?.preserveNextRender?.();navigate("hadith",id,{skipPush:false,noAnim:true});render()}});document.querySelectorAll("[data-hadith-chapter]").forEach(btn=>{btn.onclick=()=>{hadithActiveChapter=btn.getAttribute("data-hadith-chapter")||"";hadithActiveSection="";rerenderHadith()}});document.querySelectorAll("[data-hadith-section]").forEach(btn=>{btn.onclick=()=>{hadithActiveSection=btn.getAttribute("data-hadith-section")||"";rerenderHadith()}});document.querySelectorAll("[data-hadith-arabic]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const id=btn.getAttribute("data-hadith-arabic");const box=document.getElementById("hadithArabic-"+id);if(!box)return;box.classList.toggle("is-hidden");btn.classList.toggle("is-active",!box.classList.contains("is-hidden"))}});document.querySelectorAll("[data-hadith-favorite]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const id=btn.getAttribute("data-hadith-favorite");toggleHadithFavorite(id);rerenderHadith()}});document.querySelectorAll("[data-hadith-copy]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const h=findHadithById(btn.getAttribute("data-hadith-copy"));if(!h)return;const text=hadithShareText(h);try{await navigator.clipboard.writeText(text);alert("Hadith wurde kopiert.")}catch(e){prompt("Kopiere den Hadith:",text)}}});document.querySelectorAll("[data-hadith-share]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const h=findHadithById(btn.getAttribute("data-hadith-share"));if(!h)return;const text=hadithShareText(h);if(navigator.share){try{await navigator.share({title:h.bookTitle||"Hadith",text});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Hadith wurde kopiert.")}catch(e){prompt("Kopiere den Hadith:",text)}}});document.querySelectorAll("[data-hadith-translate]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const h=findHadithById(btn.getAttribute("data-hadith-translate"));if(!h)return;let payload=null;try{const res=await fetch("/api/hadith/translate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({source:"ar",target:"de",text:h.arabic||"",bookId:h.bookId||h.collection||hadithActiveBook,hadithId:h.id,sourceLabel:h.source||""})});if(res.ok)payload=await res.json()}catch(e){}if(!payload?.translation)payload=saveHadithMachineTranslation(h.id,fallbackHadithTranslation(h));else saveHadithMachineTranslation(h.id,payload.translation);const box=document.getElementById("hadithMachine-"+h.id);if(box){box.classList.remove("is-hidden");const span=box.querySelector("span");if(span)span.textContent=payload.translation||fallbackHadithTranslation(h)}btn.textContent="Hilfsübersetzung ✓";btn.classList.add("is-active")}})}
 
 const QUIZ_SESSION_KEY="darQuizSessionTestV2";
+const QUIZ_MARKED_KEY="darQuizMarkedQuestionIdsV1";
 const QUIZ_QUESTIONS_PATH="/data/quiz-questions.json";
 let quizQuestionsCache=null;
 let quizLoadPromise=null;
@@ -12242,15 +12679,20 @@ async function loadQuizQuestions(){if(Array.isArray(quizQuestionsCache))return q
 function quizSession(){return getJson(QUIZ_SESSION_KEY,null)}
 function saveQuizSession(s){setJson(QUIZ_SESSION_KEY,s)}
 function clearQuizSession(){try{localStorage.removeItem(QUIZ_SESSION_KEY)}catch(e){}}
+function getQuizMarkedIds(){return new Set(getJson(QUIZ_MARKED_KEY,[]).map(String))}
+function saveQuizMarkedIds(ids){setJson(QUIZ_MARKED_KEY,[...(ids||new Set())].map(String).slice(0,500))}
+function toggleQuizMarkedId(id){const marked=getQuizMarkedIds();const key=String(id||"");if(!key)return false;if(marked.has(key))marked.delete(key);else marked.add(key);saveQuizMarkedIds(marked);return marked.has(key)}
 function quizConfig(){return{topic:$("quizTopic")?.value||"all",level:$("quizLevel")?.value||"all",count:Number($("quizCount")?.value||10)||10,mode:$("quizMode")?.value||"standard"}}
 function quizShuffle(items){const arr=[...items];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function quizNormalizeLevel(v){return String(v||"").toLowerCase().replace("anfänger","anfanger")}
 function quizQuestionById(id){return (quizQuestionsCache||[]).find(q=>String(q.id)===String(id))}
-function quizBuildSession(config){let pool=[...(quizQuestionsCache||[])];if(config.topic&&config.topic!=="all")pool=pool.filter(q=>String(q.category||q.topic||"")===config.topic);if(config.level&&config.level!=="all")pool=pool.filter(q=>quizNormalizeLevel(q.level)===quizNormalizeLevel(config.level));if(!pool.length)pool=[...(quizQuestionsCache||[])];const picked=quizShuffle(pool).slice(0,Math.min(config.count,pool.length));return{id:`quiz-${Date.now()}`,questionIds:picked.map(q=>q.id),index:0,answers:{},retries:{},bookmarked:{},config,startedAt:Date.now(),updatedAt:Date.now(),finished:false}}
-function renderQuiz(){if(!Array.isArray(quizQuestionsCache)){loadQuizQuestions().then(()=>{if(readRoute().view==="quiz")render()});return `${setPageHeader("Din-Quiz","Fragen werden geladen.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Quizfragen werden geladen …</div></section>`}const session=quizSession();if(session&&!session.finished)return renderQuizSession(session);if(session&&session.finished)return renderQuizResult(session);const cats=[...new Set(quizQuestionsCache.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(quizQuestionsCache.map(q=>q.level).filter(Boolean))].sort();return `${setPageHeader("Din-Quiz","Kompakte Wissensprüfung mit klaren Quellen.","Quiz")}<section class="quiz-shell quiz-shell-pro"><div class="quiz-hero"><span class="quiz-kicker">Wissensprüfung</span><h2>Din-Quiz</h2><p>Klar · kompakt · professionell</p></div><div class="quiz-card"><div class="quiz-config-grid"><div class="quiz-field"><label for="quizTopic">Thema</label><select id="quizTopic"><option value="all">Gemischt</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><select id="quizLevel"><option value="all">Gemischt</option>${levels.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizCount">Fragen</label><select id="quizCount">${[5,10,15,20].map(n=>`<option value="${n}">${n}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizDuration">Dauer</label><select id="quizDuration"><option>Ohne Timer</option><option>10 Min.</option><option>20 Min.</option></select></div><div class="quiz-field full"><label for="quizMode">Modus</label><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn" type="button" id="quizQuickBtn">Schnellquiz</button></div></div><div class="quiz-menu-grid"><button class="quiz-menu-card" type="button" data-nav="topics"><span>🔎</span><span><b>Fragen suchen</b><span>über Beiträge</span></span></button><button class="quiz-menu-card" type="button" id="quizResumeBtn" ${session?"":"hidden"}><span>↩</span><span><b>Fortsetzen</b><span>Laufende Runde</span></span></button><button class="quiz-menu-card" type="button" id="quizMistakesBtn"><span>↻</span><span><b>Fehlertraining</b><span>Falsche Fragen</span></span></button><button class="quiz-menu-card" type="button" data-nav="statistik"><span>◷</span><span><b>Statistik</b><span>Fortschritt</span></span></button></div></section>`}
-function renderQuizSession(session){const q=quizQuestionById(session.questionIds[session.index]);if(!q)return `${setPageHeader("Din-Quiz","Keine aktive Frage gefunden.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Diese Frage konnte nicht geladen werden.<div class="quiz-actions"><button class="quiz-btn primary" id="quizNewBtn">Neues Quiz starten</button><button class="quiz-btn" data-nav="more">Zurück</button></div></div></section>`;const selected=session.answers?.[q.id]?.selectedIndex;const evaluated=session.answers?.[q.id]?.evaluated;const correct=Number(q.correctIndex);const progress=((session.index+1)/session.questionIds.length)*100;return `${setPageHeader("Din-Quiz","Aktive Wissensrunde","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-session"><div class="quiz-status"><div class="quiz-status-top"><span>Frage ${session.index+1}/${session.questionIds.length}</span><button class="quiz-btn danger" type="button" id="quizEndBtn">Beenden</button></div><div class="quiz-status-meta">${esc(q.category||q.topic||"Quiz")} · ${esc(q.level||"")}</div><div class="quiz-progress"><span style="width:${progress}%"></span></div></div><div class="quiz-question-panel"><h2 class="quiz-question">${esc(q.question||"Frage")}</h2></div><div class="quiz-answer-list">${(q.answers||[]).map((a,i)=>{const state=evaluated?(i===correct?" correct":i===selected&&i!==correct?" wrong":""):i===selected?" selected":"";const icon=evaluated&&i===correct?"✓":evaluated&&i===selected&&i!==correct?"×":"";return `<button type="button" class="quiz-answer${state}" data-quiz-answer="${i}" ${evaluated?"disabled":""}><span class="quiz-letter">${"ABCD"[i]||i+1}</span><span>${esc(a)}</span><span>${icon}</span></button>`}).join("")}</div>${evaluated?`<div class="quiz-feedback"><b>${selected===correct?"Richtig beantwortet.":"Nicht richtig beantwortet."}</b><p>${esc(q.explanation||"")}</p><small>${esc(q.source||"Quelle wird geprüft.")}</small></div>`:""}<div class="quiz-session-actions"><button class="quiz-btn" type="button" id="quizPrevBtn">← Zurück</button><button class="quiz-btn primary" type="button" id="quizNextBtn" ${selected==null?"disabled":""}>${session.index>=session.questionIds.length-1?"Ergebnis":"Nächste Frage →"}</button></div></article></section>`}
-function renderQuizResult(session){const total=session.questionIds.length;const values=session.questionIds.map(id=>session.answers?.[id]).filter(Boolean);const right=values.filter(a=>a.correct).length;const wrong=values.filter(a=>a.evaluated&&!a.correct).length;const skipped=Math.max(0,total-right-wrong);const percent=total?Math.round((right/total)*100):0;const answered=right+wrong;const accuracy=answered?Math.round((right/answered)*100):0;return `${setPageHeader("Quiz abgeschlossen",`${right}/${total} richtig`,"Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Abschluss</span><h2 class="quiz-question">${right} / ${total}</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${percent}%</b><span>Quiz-Ergebnis</span></div><div class="quiz-result-box"><b>${accuracy}%</b><span>Antwortgenauigkeit</span></div><div class="quiz-result-box"><b>${right}</b><span>Richtig</span></div><div class="quiz-result-box"><b>${wrong}</b><span>Falsch</span></div><div class="quiz-result-box"><b>${skipped}</b><span>Übersprungen</span></div><div class="quiz-result-box"><b>${total}</b><span>Fragen</span></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizNewBtn">Neues Quiz</button><button class="quiz-btn" type="button" data-nav="more">Mehr</button></div></article></section>`}
-function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:10,mode:"standard"}:quizConfig();saveQuizSession(quizBuildSession(cfg));render()};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>render();const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();render()};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizSession(s)}render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;const idx=Number(btn.getAttribute("data-quiz-answer"));const isCorrect=idx===Number(q.correctIndex);s.answers=s.answers||{};s.answers[q.id]={selectedIndex:idx,evaluated:true,correct:isCorrect};s.updatedAt=Date.now();saveQuizSession(s);render();if(s.index<s.questionIds.length-1){clearTimeout(window.__quizAutoNextTimer);window.__quizAutoNextTimer=setTimeout(()=>{const fresh=quizSession();if(!fresh)return;if(fresh.index===s.index){fresh.index=Math.min(fresh.questionIds.length-1,fresh.index+1);fresh.updatedAt=Date.now();saveQuizSession(fresh);render()}},700)}}});const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const answer=s.answers?.[q?.id];if(!answer)return;if(s.index>=s.questionIds.length-1)s.finished=true;else s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()};const mistakesBtn=$("quizMistakesBtn");if(mistakesBtn)mistakesBtn.onclick=()=>{alert("Fehlertraining nutzt die falsch beantworteten Fragen deiner Quiz-Runden. Starte zuerst eine Runde und beantworte Fragen.")}}
+function quizBuildSession(config,questionIdsOverride=null){let picked=[];if(Array.isArray(questionIdsOverride)&&questionIdsOverride.length){picked=questionIdsOverride.map(id=>quizQuestionById(id)).filter(Boolean)}else{let pool=[...(quizQuestionsCache||[])];if(config.topic&&config.topic!=="all")pool=pool.filter(q=>String(q.category||q.topic||"")===config.topic);if(config.level&&config.level!=="all")pool=pool.filter(q=>quizNormalizeLevel(q.level)===quizNormalizeLevel(config.level));if(!pool.length)pool=[...(quizQuestionsCache||[])];picked=quizShuffle(pool).slice(0,Math.min(config.count,pool.length))}return{id:`quiz-${Date.now()}`,questionIds:picked.map(q=>q.id),index:0,answers:{},retries:{},bookmarked:{},config,startedAt:Date.now(),updatedAt:Date.now(),finished:false}}
+function renderQuiz(){if(!Array.isArray(quizQuestionsCache)){loadQuizQuestions().then(()=>{if(readRoute().view==="quiz")render()});return `${setPageHeader("Din-Quiz","Fragen werden geladen.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Quizfragen werden geladen …</div></section>`}const session=quizSession();if(session&&!session.finished)return renderQuizSession(session);if(session&&session.finished)return renderQuizResult(session);const cats=[...new Set(quizQuestionsCache.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(quizQuestionsCache.map(q=>q.level).filter(Boolean))].sort();return `${setPageHeader("Din-Quiz","Kompakte Wissensprüfung mit klaren Quellen.","Quiz")}<section class="quiz-shell quiz-shell-pro"><div class="quiz-hero"><span class="quiz-kicker">Wissensprüfung</span><h2>Din-Quiz</h2><p>Klar · kompakt · professionell</p></div><div class="quiz-card"><div class="quiz-config-grid"><div class="quiz-field"><label for="quizTopic">Thema</label><select id="quizTopic"><option value="all">Gemischt</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><select id="quizLevel"><option value="all">Gemischt</option>${levels.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizCount">Fragen</label><select id="quizCount">${[5,10,15,20].map(n=>`<option value="${n}">${n}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizDuration">Dauer</label><select id="quizDuration"><option>Ohne Timer</option><option>10 Min.</option><option>20 Min.</option></select></div><div class="quiz-field full"><label for="quizMode">Modus</label><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn" type="button" id="quizQuickBtn">Schnellquiz</button></div></div><div class="quiz-menu-grid"><button class="quiz-menu-card" type="button" data-nav="topics"><span>🔎</span><span><b>Fragen suchen</b><span>über Beiträge</span></span></button><button class="quiz-menu-card" type="button" id="quizResumeBtn" ${session?"":"hidden"}><span>↩</span><span><b>Fortsetzen</b><span>Laufende Runde</span></span></button><button class="quiz-menu-card" type="button" id="quizMistakesBtn"><span>↻</span><span><b>Fehlertraining</b><span>Gemerkte Fragen trainieren</span></span></button><button class="quiz-menu-card" type="button" data-nav="statistik"><span>◷</span><span><b>Statistik</b><span>Fortschritt</span></span></button></div></section>`}
+function renderQuizSession(session){const q=quizQuestionById(session.questionIds[session.index]);if(!q)return `${setPageHeader("Din-Quiz","Keine aktive Frage gefunden.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Diese Frage konnte nicht geladen werden.<div class="quiz-actions"><button class="quiz-btn primary" id="quizNewBtn">Neues Quiz starten</button><button class="quiz-btn" data-nav="more">Zurück</button></div></div></section>`;const answer=session.answers?.[q.id]||null;const selected=answer?.selectedIndex;const evaluated=!!answer?.evaluated;const correct=Number(q.correctIndex);const isCorrect=evaluated&&Number(selected)===correct;const isWrong=evaluated&&!isCorrect;const isMarked=!!session.bookmarked?.[q.id]||getQuizMarkedIds().has(String(q.id));const progress=((session.index+1)/session.questionIds.length)*100;return `${setPageHeader("Din-Quiz","Aktive Wissensrunde","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-session"><div class="quiz-status"><div class="quiz-status-top"><span>Frage ${session.index+1}/${session.questionIds.length}</span><button class="quiz-btn danger" type="button" id="quizEndBtn">Beenden</button></div><div class="quiz-status-meta">${esc(q.category||q.topic||"Quiz")} · ${esc(q.level||"")}</div><div class="quiz-progress"><span style="width:${progress}%"></span></div></div><div class="quiz-question-panel"><h2 class="quiz-question">${esc(q.question||"Frage")}</h2></div><div class="quiz-answer-list">${(q.answers||[]).map((a,i)=>{const state=evaluated?(i===correct?" correct":i===selected&&i!==correct?" wrong":""):i===selected?" selected":"";const icon=evaluated&&i===correct?"✓":evaluated&&i===selected&&i!==correct?"×":"";return `<button type="button" class="quiz-answer${state}" data-quiz-answer="${i}" ${evaluated?"disabled":""}><span class="quiz-letter">${"ABCD"[i]||i+1}</span><span>${esc(a)}</span><span>${icon}</span></button>`}).join("")}</div>${evaluated?`<div class="quiz-feedback"><b>${isCorrect?"Richtig beantwortet.":"Nicht richtig beantwortet."}</b><p>${esc(q.explanation||"")}</p><small>${esc(q.source||"Quelle wird geprüft.")}</small></div>`:""}<div class="quiz-session-actions"><button class="quiz-btn" type="button" id="quizPrevBtn">← Zurück</button>${isWrong?`<button class="quiz-btn" type="button" id="quizRetryBtn">Wiederholen</button><button class="quiz-btn ${isMarked?"remember-active":""}" type="button" id="quizRememberBtn">${isMarked?"Gemerkt ✓":"Merken"}</button><button class="quiz-btn" type="button" id="quizNextBtn">Trotzdem weiter →</button>`:`<button class="quiz-btn primary ${isCorrect?"next-ready":""}" type="button" id="quizNextBtn" ${selected==null?"disabled":""}>${session.index>=session.questionIds.length-1?"Ergebnis":"Nächste Frage →"}</button>`}</div></article></section>`}
+function renderQuizTopicStats(session){const topicMap=new Map();session.questionIds.forEach(id=>{const q=quizQuestionById(id);if(!q)return;const key=String(q.category||q.topic||"Allgemein").trim()||"Allgemein";const row=topicMap.get(key)||{total:0,right:0,wrong:0,sources:new Set()};row.total+=1;const ans=session.answers?.[id];if(ans?.evaluated){if(ans.correct)row.right+=1;else row.wrong+=1}if(q.source)row.sources.add(String(q.source));topicMap.set(key,row)});const rows=[...topicMap.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));if(!rows.length)return"";return `<div class="quiz-topic-stats">${rows.map(([topic,row])=>`<article class="quiz-topic-row"><b>${esc(topic)}</b><span>${row.right}/${row.total} richtig · ${row.wrong} falsch</span><small>${esc([...row.sources].slice(0,2).join(" · ")||"Quelle wird geprüft.")}</small></article>`).join("")}</div>`}
+function renderQuizAnswerAudit(session){const rows=session.questionIds.map(id=>{const q=quizQuestionById(id);if(!q)return"";const answer=session.answers?.[id];const selectedIdx=Number(answer?.selectedIndex);const selectedText=Number.isFinite(selectedIdx)&&Array.isArray(q.answers)?q.answers[selectedIdx]:"—";const correctText=Array.isArray(q.answers)?q.answers[Number(q.correctIndex)]:"";const state=answer?.evaluated?(answer.correct?"ok":"bad"):"skip";return `<article class="quiz-audit-row ${state}"><b>${esc(q.category||q.topic||"Allgemein")} · ${esc(q.question||"Frage")}</b><div><span>Deine Antwort:</span><strong>${esc(selectedText||"—")}</strong></div><div><span>Korrekt:</span><strong>${esc(correctText||"—")}</strong></div><small>${esc(q.source||"Quelle wird geprüft.")}</small></article>`}).filter(Boolean);if(!rows.length)return"";return `<div class="quiz-audit-list">${rows.join("")}</div>`}
+function renderQuizResult(session){const total=session.questionIds.length;const values=session.questionIds.map(id=>session.answers?.[id]).filter(Boolean);const right=values.filter(a=>a.correct).length;const wrong=values.filter(a=>a.evaluated&&!a.correct).length;const skipped=Math.max(0,total-right-wrong);const percent=total?Math.round((right/total)*100):0;const answered=right+wrong;const accuracy=answered?Math.round((right/answered)*100):0;const topicStats=renderQuizTopicStats(session);const audit=renderQuizAnswerAudit(session);return `${setPageHeader("Quiz abgeschlossen",`${right}/${total} richtig`,"Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Abschluss</span><h2 class="quiz-question">${right} / ${total}</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${percent}%</b><span>Quiz-Ergebnis</span></div><div class="quiz-result-box"><b>${accuracy}%</b><span>Antwortgenauigkeit</span></div><div class="quiz-result-box"><b>${right}</b><span>Richtig</span></div><div class="quiz-result-box"><b>${wrong}</b><span>Falsch</span></div><div class="quiz-result-box"><b>${skipped}</b><span>Übersprungen</span></div><div class="quiz-result-box"><b>${total}</b><span>Fragen</span></div></div><section class="quiz-result-section"><h3>Themen-Statistik</h3>${topicStats||"<div class='quiz-result-empty'>Keine Themenstatistik vorhanden.</div>"}</section><section class="quiz-result-section"><h3>Antworten & Quellen</h3>${audit||"<div class='quiz-result-empty'>Kein Protokoll vorhanden.</div>"}</section><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizNewBtn">Neues Quiz</button><button class="quiz-btn" type="button" id="quizMistakesTrainBtn">Gemerkte trainieren</button><button class="quiz-btn" type="button" data-nav="more">Mehr</button></div></article></section>`}
+function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:10,mode:"standard"}:quizConfig();saveQuizSession(quizBuildSession(cfg));render()};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>render();const startMarkedTraining=()=>{const ids=[...getQuizMarkedIds()].filter(id=>quizQuestionById(id));if(!ids.length){alert("Noch keine gemerkten Fragen vorhanden.");return}saveQuizSession(quizBuildSession({topic:"all",level:"all",count:ids.length,mode:"lernen"},ids));render()};const mistakesBtn=$("quizMistakesBtn");if(mistakesBtn)mistakesBtn.onclick=startMarkedTraining;const mistakesTrainBtn=$("quizMistakesTrainBtn");if(mistakesTrainBtn)mistakesTrainBtn.onclick=startMarkedTraining;const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();render()};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizSession(s)}render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;const existing=s.answers?.[q.id];if(existing?.evaluated)return;const idx=Number(btn.getAttribute("data-quiz-answer"));const isCorrect=idx===Number(q.correctIndex);s.answers=s.answers||{};s.answers[q.id]={selectedIndex:idx,evaluated:true,correct:isCorrect};if(!isCorrect){s.retries=s.retries||{};s.retries[q.id]=(Number(s.retries[q.id]||0)+1)}s.updatedAt=Date.now();saveQuizSession(s);render()}});const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const retryBtn=$("quizRetryBtn");if(retryBtn)retryBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;if(s.answers)s.answers[q.id]={selectedIndex:null,evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()};const rememberBtn=$("quizRememberBtn");if(rememberBtn)rememberBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.bookmarked=s.bookmarked||{};const key=String(q.id);const active=toggleQuizMarkedId(key);if(active)s.bookmarked[key]=true;else delete s.bookmarked[key];s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const answer=s.answers?.[q?.id];if(!answer?.evaluated)return;if(s.index>=s.questionIds.length-1)s.finished=true;else s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()}}
 
 const FEATURE_PIN_KEY="darFeaturePinsV1";
 function featureCatalog(){
@@ -12430,7 +12872,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v254";
+const APP_BUILD_ID="app-shell-v258";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -12488,25 +12930,58 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
   return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button>${extraAction}<button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button></div><div class="share-help">${esc(helpText)}</div></section>`;
 }
 
-function renderSourceStrong(post){
-  const links=(post.links||[]).map(link=>{
-    const label=link.label||"Quelle";
-    const url=link.url||link;
-    return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
-  }).join("");
-  const hasScan=(post.links||[]).some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  return `<div class="source-strong"><h3>Quellenbereich</h3><div class="source-row"><b>Quelle</b>${esc(post.source||"Keine Quelle hinterlegt.")}</div><div class="source-row"><b>Direktlink</b><div class="link-row">${links||"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="source-row"><b>Scan/PDF falls vorhanden</b>${hasScan?"Scan/PDF-Link ist hinterlegt.":"Noch kein Scan/PDF-Link hinterlegt."}</div><div class="source-note">Hinweis: Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></div>`;
+const POST_READER_PREF_KEY="darPostReaderPrefsV1";
+function postReaderPrefs(){
+  const defaults={lineHeight:5,fontMode:"serif",surface:"dark",focus:false};
+  try{return {...defaults,...(getJson(POST_READER_PREF_KEY,{})||{})}}catch(e){return defaults}
+}
+function setPostReaderPrefs(next){
+  const merged={...postReaderPrefs(),...(next||{})};
+  setJson(POST_READER_PREF_KEY,merged);
+  document.body.classList.toggle("post-focus-mode",!!merged.focus&&currentRoute.view==="post");
+  document.documentElement.setAttribute("data-post-font-mode",merged.fontMode||"serif");
+  document.documentElement.setAttribute("data-post-surface",merged.surface||"dark");
+  document.documentElement.style.setProperty("--post-extra-line-height",String(1.5+((Number(merged.lineHeight)||5)*.03)));
+  return merged;
+}
+function applyPostReaderPrefs(){return setPostReaderPrefs({})}
+function postNarratorLine(post){
+  const raw=String(post?.scholar||post?.speaker||"").trim();
+  if(!raw)return "";
+  const honorific=/رضي الله عنه|رضي الله عنها|رحمه الله|حفظه الله/.test(raw)?"":"<span class='honorific'>رضي الله عنه</span>";
+  return `<div class="post-reader-speaker"><small>Überliefert von</small><span>${esc(raw)} ${honorific}</span> sagte:</div>`;
+}
+function normalizeStatementText(value){
+  return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
+}
+function renderReaderSettingsSheet(){
+  const prefs=postReaderPrefs();
+  const line=Number(prefs.lineHeight)||5;
+  const isFocus=!!prefs.focus;
+  return `<div class="post-reader-sheet-backdrop post-reader-sheet-wrap" id="postReaderSheetWrap" hidden><section class="post-reader-sheet" role="dialog" aria-modal="true" aria-labelledby="postReaderSheetTitle"><div class="post-sheet-head"><h3 id="postReaderSheetTitle">Lesemodus & Schrift</h3><button class="post-sheet-close" type="button" data-post-aa-close aria-label="Schließen">×</button></div>${fontSlider("postTextScale","Textgröße","Aussage und Haupttext.").replace("<section class=\"font-slider-panel\">","<section class=\"font-slider-panel\"><div class='post-reader-inline-note'>Die Einstellung gilt für alle Beiträge.</div>")}${fontSlider("postSourceScale","Quellen-Text","Quellen und Nachweise.")}<section class="font-slider-panel"><div class="font-slider-head"><div class="font-slider-title"><b>Zeilenabstand</b><span>Ruhiger Lesefluss im Aussagebereich.</span></div><span class="font-slider-value" data-post-lh-value>${line} / 10</span></div><div class="font-range-shell"><input class="font-range" type="range" min="0" max="10" step="1" value="${line}" data-post-line-height style="--slider-fill:${line*10}%"><div class="font-range-labels"><span>kompakt</span><span>luftig</span></div></div></section><section class="font-slider-panel"><div class="font-slider-head"><div class="font-slider-title"><b>Lesefokus</b><span>Nur Titel, Sprecher und Aussage anzeigen.</span></div></div><div class="post-source-actions"><button type="button" data-post-focus-toggle>${isFocus?"Fokusmodus verlassen":"Fokusmodus aktivieren"}</button><button type="button" data-post-reader-reset>Zurücksetzen</button></div></section></section></div>`;
+}
+function renderPostSourceDetails(post,links){
+  const rows=[
+    ["Werk",post.book||""],
+    ["Autor",post.scholar||""],
+    ["Kategorie",normalizePostCategory(post.category||"")],
+    ["Thema",post.topic||""],
+    ["Arabischer Originaltext",post.sourceArabic||post.arabic||post.arabicText||""],
+    ["Band",post.volume||post.band||""],
+    ["Seite",post.page||post.seite||""],
+    ["Nummer",post.number||post.nr||""],
+    ["Bewertung",post.grade||post.authenticity||""],
+    ["Tags",(post.tags||[]).join(" · ")]
+  ].filter(row=>String(row[1]||"").trim());
+  const linksHtml=links.length?links.map(link=>`<a href="${esc(link.url||link)}" target="_blank" rel="noopener">${esc(link.label||"Externer Link")}</a>`).join(" · "):"Keine externen Links hinterlegt.";
+  return `<div class="post-source-details" id="postSourceDetails" hidden>${rows.map(row=>`<div><b>${esc(row[0])}:</b> ${esc(row[1])}</div>`).join("")}<div><b>Externe Quellenlinks:</b> ${linksHtml}</div></div>`;
 }
 function getRelatedPosts(post){
   return posts.filter(p=>p.id!==post.id && (p.category===post.category || p.scholar===post.scholar || p.book===post.book)).slice(0,3);
 }
-function compactRelatedTags(...values){
-  return values.filter(Boolean).slice(0,2).map(v=>`<span>${esc(v)}</span>`).join("");
-}
 function relatedCompactCard(post){
-  const quote=findQuote(post)||post.source||"Beitrag öffnen";
-  const tags=compactRelatedTags(normalizePostCategory(post.category),post.scholar||post.book);
-  return `<article class="related-compact-card" data-nav="post" data-value="${esc(post.id)}"><div class="related-compact-icon">📖</div><div><h4>${esc(post.title)}</h4><p>${esc(quote)}</p>${tags?`<div class="related-compact-meta">${tags}</div>`:""}</div><div class="related-compact-open">›</div></article>`;
+  const meta=[post.scholar,post.book].filter(Boolean).join(" · ");
+  return `<article class="related-compact-card" data-nav="post" data-value="${esc(post.id)}"><div class="related-compact-icon">📖</div><div><h4>${esc(post.title)}</h4><p>${esc(meta||findQuote(post)||"Beitrag öffnen")}</p></div><div class="related-compact-open">›</div></article>`;
 }
 function renderRelatedCompact(items,title){
   if(!items||!items.length)return"";
@@ -12533,24 +13008,20 @@ function renderPostNavigation(post){
   const index=ids.indexOf(curId);
   const prev=index>0?ids[index-1]:null;
   const next=index>=0&&index<ids.length-1?ids[index+1]:null;
-  return `<div class="nav-posts"><button type="button" ${prev?`data-nav="post" data-value="${esc(prev)}"`:"disabled"}>← ${prev?"Vorheriger Beitrag":"Kein vorheriger Beitrag"}</button><button type="button" ${next?`data-nav="post" data-value="${esc(next)}"`:"disabled"}>${next?"Nächster Beitrag":"Kein nächster Beitrag"} →</button></div>`;
+  const prevPost=posts.find(p=>String(p.id)===String(prev));
+  const nextPost=posts.find(p=>String(p.id)===String(next));
+  return `<div class="post-nav-preview"><button type="button" class="post-nav-card" ${prevPost?`data-nav="post" data-value="${esc(prevPost.id)}"`:"disabled"}><b>← Vorheriger Beitrag</b><span>${esc(prevPost?.title||"Kein vorheriger Beitrag")}</span></button><button type="button" class="post-nav-card" ${nextPost?`data-nav="post" data-value="${esc(nextPost.id)}"`:"disabled"}><b>Nächster Beitrag →</b><span>${esc(nextPost?.title||"Kein nächster Beitrag")}</span></button></div>`;
 }
 function renderPostAfterPanel(post,{slideIndex=0}={}){
   const slide=isSlidePost(post)?activeSlideForPost(post,slideIndex):null;
   const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
   const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
   const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  const s=sourceStatus(post);
-  const url=postUrl(post);
-  const text=buildShareText(post);
-  const message=buildPostShareMessage(post);
-  const shareTitle=post.title||"DAR AL TAWḤID";
-  const shareUrl=encodeURIComponent(url);
-  const shareText=encodeURIComponent(message);
-  const imageAction=`<button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Bild</span></button>`;
-  const nav=renderPostNavigation(post).replace('class="nav-posts"','class="post-after-nav"');
-  const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="${slideIndex}"`:"";
-  return `<section class="post-after-panel"${slideAttrs}><div class="post-after-head"><div><div class="post-after-kicker">Quellenbereich</div><div class="post-after-source" data-post-after-source>${esc(sourceText)}</div></div><span class="post-after-state">${s.sourceOk?"✅":"⚠️"} Quelle</span></div><details class="post-after-details"><summary>Details öffnen</summary><div class="post-after-details-body"><div class="post-after-row"><b>Direktlink</b><div class="post-after-links" data-post-after-links>${links.length?renderAfterPanelLinks(links):"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="post-after-row"><b>Scan/PDF</b><span data-post-after-scan>${hasScan?"Scan/PDF-Link ist hinterlegt.":"Noch kein Scan/PDF-Link hinterlegt."}</span></div><div class="source-note">Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></div></details><div class="post-after-checks"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Link</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Markierung</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung</span></div><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("telegram")}<span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("whatsapp")}<span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(message)}" type="button">${compactShareIcon("instagram")}<span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(url)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
+  const shareText=buildPostShareMessage(post);
+  const shareUrl=postUrl(post);
+  const settingsSheet=renderReaderSettingsSheet();
+  const shareSheet=`<div class="post-share-sheet-backdrop post-share-sheet-wrap" id="postShareSheetWrap" hidden><section class="post-share-sheet" role="dialog" aria-modal="true" aria-labelledby="postShareSheetTitle"><div class="post-sheet-head"><h3 id="postShareSheetTitle">Beitrag teilen</h3><button class="post-sheet-close" type="button" data-post-share-close aria-label="Schließen">×</button></div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(post.title||"Beitrag")}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button">Teilen</button><a class="share-btn tg" href="https://t.me/share/url?url=${esc(encodeURIComponent(shareUrl))}&text=${esc(encodeURIComponent(shareText))}" target="_blank" rel="noopener">Telegram</a><a class="share-btn wa" href="https://wa.me/?text=${esc(encodeURIComponent(shareText))}" target="_blank" rel="noopener">WhatsApp</a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button">Instagram</button><button class="share-btn link" data-share-copy data-share-text="${esc(shareUrl)}" type="button">Link kopieren</button><button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button">Bild erstellen</button></div></section></div>`;
+  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><span class="post-source-verify">geprüfte Angaben</span></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}${hasScan?`<div class="source-note">Scan/PDF vorhanden.</div>`:""}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>${shareSheet}${settingsSheet}`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -12609,9 +13080,14 @@ function renderPost(id){
   if(!post&&postRouteLoadingId===String(id))return `${setHeader("Beitrag wird geladen","Der neue Beitrag wird direkt aus dem aktuellen Index geladen.","Laden")}<div class="loading">Beitrag wird aktualisiert…</div>`;
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
+  applyPostReaderPrefs();
   const related=getRelatedPosts(post);
-  const body=isSlidePost(post)?renderPostSlides(post):`<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>`;
-  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">${isSlidePost(post)?"Slide-Beitrag":"Beitrag"}</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}${body}${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  const narrator=postNarratorLine(post);
+  const body=isSlidePost(post)?renderPostSlides(post):`<section id="postStatement" class="statement">${formatText(normalizeStatementText(post.statement||""))}</section>`;
+  const keyMessage=String(post.summary||post.fazit||post.fazitText||post.conclusion||"").trim();
+  const keyBlock=keyMessage?`<section class="post-key-message"><h3>Kerngedanke</h3><p>${esc(keyMessage)}</p></section>`:"";
+  const intro=renderPostIntroButton(post);
+  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2>${narrator}</header>${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
@@ -12649,7 +13125,61 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false;
 }
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";const isIlm=route.view==="ilm";if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("is-ilm-chat-route",isIlm);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);document.body.classList.toggle("is-quiz-route",route.view==="quiz");document.body.classList.toggle("is-hadith-route",route.view==="hadith");if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isIlm){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
+function updateChrome(route){
+  const backBtn=$("backBtn");
+  const homeBtn=$("homeBtn");
+  const crumb=$("crumb");
+  const appBar=document.querySelector(".app-bar");
+  const postReaderActions=$("postReaderActions");
+  const isHome=isHomeRoute(route);
+  const isFeedFull=route.view==="feed";
+  const isMore=route.view==="more";
+  const isIlm=route.view==="ilm";
+  const isPost=route.view==="post";
+  if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);
+  document.body.classList.toggle("is-home-route",isHome);
+  document.body.classList.toggle("is-area-route",!isHome);
+  document.body.classList.toggle("is-ilm-chat-route",isIlm);
+  document.body.classList.toggle("image-editor-mode",route.view==="image-editor");
+  document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");
+  document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
+  document.body.classList.toggle("is-quiz-route",route.view==="quiz");
+  document.body.classList.toggle("is-hadith-route",route.view==="hadith");
+  document.body.classList.toggle("is-post-route",isPost);
+  if(appBar)appBar.classList.toggle("is-more-route",isMore);
+  if(postReaderActions)postReaderActions.hidden=!isPost;
+  updateBottomNav(route);
+  updatePostNavVisibility();
+  if(isIlm){
+    backBtn.classList.remove("show");
+    if(homeBtn)homeBtn.classList.remove("show");
+    if(appBar)appBar.classList.add("is-home");
+    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
+    return;
+  }
+  if(isFeedFull){
+    backBtn.classList.remove("show");
+    if(homeBtn)homeBtn.classList.remove("show");
+    if(appBar)appBar.classList.add("is-home");
+    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
+    return;
+  }
+  if(isHome){
+    backBtn.classList.remove("show");
+    if(homeBtn)homeBtn.classList.remove("show");
+    if(appBar)appBar.classList.add("is-home");
+    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
+    return;
+  }
+  if(appBar)appBar.classList.remove("is-home");
+  backBtn.classList.add("show");
+  if(homeBtn)homeBtn.classList.toggle("show",!isPost);
+  const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"BEITRAG"};
+  let crumbLabel=labels[route.view]||"";
+  if(isMore)crumbLabel="";
+  if(route.view==="quran-surah")crumbLabel="";
+  if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}
+}
 function render(){
   try{
     const routeBefore=readRoute();
@@ -12849,13 +13379,29 @@ function bindEvents(){
     const wakeBtn=$("quranWakeBtn");if(wakeBtn&&!wakeBtn.disabled){wakeBtn.onclick=async()=>{if(isQuranWakeActive()){quranWakeUserOff=true;await releaseQuranWakeLock()}else{quranWakeUserOff=false;await acquireQuranWakeLock()}}}
     updateQuranWakeBtn();
   }
-  const saveBtn=$("saveBtn");if(saveBtn&&currentRoute.view==="post"){saveBtn.onclick=()=>{toggleSaved(currentRoute.value);render()}}
-  const shareBtn=$("shareBtn");if(shareBtn&&currentRoute.view==="post"){shareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=buildShareText(post);const message=buildPostShareMessage(post);if(navigator.share){try{await navigator.share({title:post.title,text,url});trackPostShare(post.id);return}catch(e){}}try{await navigator.clipboard.writeText(message);trackPostShare(post.id);alert("Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",message)}}}
+  if(currentRoute.view==="post"){
+    const post=posts.find(p=>String(p.id)===String(currentRoute.value));
+    document.querySelectorAll("[data-post-save]").forEach(btn=>{btn.classList.toggle("is-saved",!!post&&isSaved(post.id));btn.onclick=()=>{if(!post)return;toggleSaved(post.id);render()}});
+    document.querySelectorAll("[data-post-copy]").forEach(btn=>{btn.onclick=async()=>{if(!post)return;const text=buildPostShareMessage(post);try{await navigator.clipboard.writeText(text);trackPostShare(post.id);alert("Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",text)}}});
+    const shareWrap=$("postShareSheetWrap");
+    const readerWrap=$("postReaderSheetWrap");
+    const closeShare=()=>{if(shareWrap)shareWrap.hidden=true};
+    const closeReader=()=>{if(readerWrap)readerWrap.hidden=true};
+    document.querySelectorAll("[data-post-share-open]").forEach(btn=>{btn.onclick=()=>{if(shareWrap)shareWrap.hidden=false}});
+    document.querySelectorAll("[data-post-share-close]").forEach(btn=>{btn.onclick=closeShare});
+    if(shareWrap)shareWrap.onclick=e=>{if(e.target===shareWrap)closeShare()};
+    document.querySelectorAll("[data-post-aa-open]").forEach(btn=>{btn.onclick=()=>{if(readerWrap)readerWrap.hidden=false}});
+    document.querySelectorAll("[data-post-aa-close]").forEach(btn=>{btn.onclick=closeReader});
+    if(readerWrap)readerWrap.onclick=e=>{if(e.target===readerWrap)closeReader()};
+    document.querySelectorAll("[data-post-more-open]").forEach(btn=>{btn.onclick=()=>{const report=$("[data-post-report]");if(report)report.click()}});
+    document.querySelectorAll("[data-post-source-toggle]").forEach(btn=>{btn.onclick=()=>{const box=$("postSourceDetails");if(!box)return;box.hidden=!box.hidden;btn.textContent=box.hidden?"Details":"Details schließen"}});
+    document.querySelectorAll("[data-post-report]").forEach(btn=>{btn.onclick=()=>{if(!post)return;const subject=encodeURIComponent("Fehler melden: "+post.title);const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+post.title+"\n"+postUrl(post)+"\n\nHinweis:\n");location.href=`mailto:${REPORT_EMAIL}?subject=${subject}&body=${body}`}});
+    document.querySelectorAll("[data-post-line-height]").forEach(input=>{input.oninput=()=>{const value=Number(input.value)||5;const label=document.querySelector("[data-post-lh-value]");if(label)label.textContent=`${value} / 10`;setPostReaderPrefs({lineHeight:value});input.style.setProperty("--slider-fill",(value*10)+"%")};input.onchange=input.oninput});
+    document.querySelectorAll("[data-post-focus-toggle]").forEach(btn=>{btn.onclick=()=>{const prefs=postReaderPrefs();const nextFocus=!prefs.focus;window.__postFocusRestoreY=window.scrollY||0;setPostReaderPrefs({focus:nextFocus});btn.textContent=nextFocus?"Fokusmodus verlassen":"Fokusmodus aktivieren";if(!nextFocus&&typeof window.__postFocusRestoreY==="number"){requestAnimationFrame(()=>window.scrollTo({top:window.__postFocusRestoreY,behavior:"auto"}))}render()}});
+    document.querySelectorAll("[data-post-reader-reset]").forEach(btn=>{btn.onclick=()=>{setPostReaderPrefs({lineHeight:5,fontMode:"serif",surface:"dark",focus:false});applyFontScale("postTextScale",5);applyFontScale("postSourceScale",5);render()}});
+  }
   const popularToggle=$("popularPostsToggle");if(popularToggle){popularToggle.onclick=ev=>{ev.stopPropagation();const list=$("popularPostsContent");if(!list)return;const collapsed=list.classList.toggle("collapsed");popularToggle.textContent=collapsed?"Mehr anzeigen":"Zuklappen"}}
-  const reportBtn=$("reportBtn");if(reportBtn&&currentRoute.view==="post"){reportBtn.onclick=()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const subject=encodeURIComponent("Fehler melden: "+post.title);const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+post.title+"\n"+postUrl(post)+"\n\nHinweis:\n");location.href=`mailto:${REPORT_EMAIL}?subject=${subject}&body=${body}`}}
   const nativeShareBtn=$("nativeShareBtn");if(nativeShareBtn&&currentRoute.view==="post"){nativeShareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=buildShareText(post);const message=buildPostShareMessage(post);if(navigator.share){try{await navigator.share({title:post.title,text,url});trackPostShare(post.id);return}catch(e){}}try{await navigator.clipboard.writeText(message);trackPostShare(post.id);alert("Beitrag wurde kopiert, weil direktes Teilen hier nicht unterstützt wird.")}catch(e){prompt("Kopiere den Beitrag:",message)}}}
-  const instagramShareBtn=$("instagramShareBtn");if(instagramShareBtn&&currentRoute.view==="post"){instagramShareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const text=buildPostShareMessage(post);try{await navigator.clipboard.writeText(text)}catch(e){}trackPostShare(post.id);window.open("https://www.instagram.com/","_blank","noopener");setTimeout(()=>alert("Beitrag wurde kopiert. Öffne Instagram und füge ihn ein."),250)}}
-  const copyFullPostBtn=$("copyFullPostBtn");if(copyFullPostBtn&&currentRoute.view==="post"){copyFullPostBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const text=buildPostShareMessage(post);try{await navigator.clipboard.writeText(text);trackPostShare(post.id);alert("Kompletter Beitrag mit Quelle und Link wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",text)}}}
   const shareDuaBtn=$("shareDuaBtn");if(shareDuaBtn&&currentRoute.view==="dua"){shareDuaBtn.onclick=async()=>{const d=DUAS.find(x=>String(x.id)===String(currentRoute.value));if(!d)return;const text=`${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}`;if(navigator.share){try{await navigator.share({title:d.title,text});trackDuaShare(d.id);return}catch(e){}}try{await navigator.clipboard.writeText(text);trackDuaShare(d.id);alert("Duʿāʾ wurde kopiert.")}catch(e){prompt("Kopiere die Duʿāʾ:",text)}}}
   const copyDuaBtn=$("copyDuaBtn");if(copyDuaBtn&&currentRoute.view==="dua"){copyDuaBtn.onclick=async()=>{const d=DUAS.find(x=>String(x.id)===String(currentRoute.value));if(!d)return;const text=`${d.title}\n\n${d.ar}\n\n${d.tr}\n\n${d.de}\n\n${d.src}`;try{await navigator.clipboard.writeText(text);alert("Duʿāʾ wurde kopiert.")}catch(e){prompt("Kopiere die Duʿāʾ:",text)}}}
   const footerAppSave=$("footerAppSave");if(footerAppSave){footerAppSave.onclick=()=>{if(isStandalonePwa()){alert("Die App ist bereits gespeichert.");return}showPwaInstallModalIfNeeded(true);const modal=$("pwaInstallModal");if(modal&&!modal.hidden)return;const isiOS=isIOSDevice();alert(isiOS?"iPhone/iPad: In Safari auf Teilen tippen und „Zum Home-Bildschirm“ wählen.":"Android/Desktop: Browser-Menü öffnen und „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.")}}
