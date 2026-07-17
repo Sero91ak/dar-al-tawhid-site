@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v261";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v262";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -451,26 +451,6 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
 .related-compact-card{gap:10px}
 .related-compact-card .related-compact-meta{display:none!important}
 .related-compact-card p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
-.post-share-sheet-backdrop{
-  position:fixed;
-  inset:0;
-  z-index:95;
-  background:rgba(0,0,0,.5);
-  display:grid;
-  align-items:end;
-}
-.post-share-sheet{
-  width:100%;
-  border-radius:22px 22px 0 0;
-  border:1px solid var(--line2);
-  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 95%,#000 5%),color-mix(in srgb,var(--bg) 90%,#000 10%));
-  padding:14px;
-  max-height:min(74dvh,760px);
-  overflow:auto;
-}
-.post-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
-.post-sheet-head h3{margin:0;color:var(--premium-title);font-size:15px}
-.post-sheet-close{min-height:34px;min-width:34px;border:1px solid var(--line2);border-radius:10px;background:transparent;color:var(--cream)}
 body.is-post-route .bottom-nav{transition:transform .22s ease,opacity .22s ease}
 body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacity:.02;pointer-events:none}
 @media(max-width:760px){
@@ -12881,7 +12861,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v261";
+const APP_BUILD_ID="app-shell-v262";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -13005,10 +12985,7 @@ function renderPostAfterPanel(post,{slideIndex=0}={}){
   const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
   const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
   const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  const shareText=buildPostShareMessage(post);
-  const shareUrl=postUrl(post);
-  const shareSheet=`<div class="post-share-sheet-backdrop post-share-sheet-wrap" id="postShareSheetWrap" hidden><section class="post-share-sheet" role="dialog" aria-modal="true" aria-labelledby="postShareSheetTitle"><div class="post-sheet-head"><h3 id="postShareSheetTitle">Beitrag teilen</h3><button class="post-sheet-close" type="button" data-post-share-close aria-label="Schließen">×</button></div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(post.title||"Beitrag")}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button">Teilen</button><a class="share-btn tg" href="https://t.me/share/url?url=${esc(encodeURIComponent(shareUrl))}&text=${esc(encodeURIComponent(shareText))}" target="_blank" rel="noopener">Telegram</a><a class="share-btn wa" href="https://wa.me/?text=${esc(encodeURIComponent(shareText))}" target="_blank" rel="noopener">WhatsApp</a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button">Instagram</button><button class="share-btn link" data-share-copy data-share-text="${esc(shareUrl)}" type="button">Link kopieren</button><button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button">Bild erstellen</button></div></section></div>`;
-  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><span class="post-source-verify">geprüfte Angaben</span></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}${hasScan?`<div class="source-note">Scan/PDF vorhanden.</div>`:""}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>${shareSheet}`;
+  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><span class="post-source-verify">geprüfte Angaben</span></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}${hasScan?`<div class="source-note">Scan/PDF vorhanden.</div>`:""}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -13369,11 +13346,7 @@ function bindEvents(){
     const post=posts.find(p=>String(p.id)===String(currentRoute.value));
     document.querySelectorAll("[data-post-save]").forEach(btn=>{btn.classList.toggle("is-saved",!!post&&isSaved(post.id));btn.onclick=()=>{if(!post)return;toggleSaved(post.id);render()}});
     document.querySelectorAll("[data-post-copy]").forEach(btn=>{btn.onclick=async()=>{if(!post)return;const text=buildPostShareMessage(post);try{await navigator.clipboard.writeText(text);trackPostShare(post.id);alert("Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",text)}}});
-    const shareWrap=$("postShareSheetWrap");
-    const closeShare=()=>{if(shareWrap)shareWrap.hidden=true};
-    document.querySelectorAll("[data-post-share-open]").forEach(btn=>{btn.onclick=()=>{if(shareWrap)shareWrap.hidden=false}});
-    document.querySelectorAll("[data-post-share-close]").forEach(btn=>{btn.onclick=closeShare});
-    if(shareWrap)shareWrap.onclick=e=>{if(e.target===shareWrap)closeShare()};
+    document.querySelectorAll("[data-post-share-open]").forEach(btn=>{btn.onclick=async()=>{if(!post)return;const url=postUrl(post);const text=buildShareText(post);const message=buildPostShareMessage(post);if(navigator.share){try{await navigator.share({title:post.title,text,url});trackPostShare(post.id);return}catch(e){}}try{await navigator.clipboard.writeText(message);trackPostShare(post.id);alert("Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",message)}}});
     document.querySelectorAll("[data-post-more-open]").forEach(btn=>{btn.onclick=()=>{const report=$("[data-post-report]");if(report)report.click()}});
     document.querySelectorAll("[data-post-source-toggle]").forEach(btn=>{btn.onclick=()=>{const box=$("postSourceDetails");if(!box)return;box.hidden=!box.hidden;btn.textContent=box.hidden?"Details":"Details schließen"}});
     document.querySelectorAll("[data-post-report]").forEach(btn=>{btn.onclick=()=>{if(!post)return;const subject=encodeURIComponent("Fehler melden: "+post.title);const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+post.title+"\n"+postUrl(post)+"\n\nHinweis:\n");location.href=`mailto:${REPORT_EMAIL}?subject=${subject}&body=${body}`}});
