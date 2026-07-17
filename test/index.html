@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v259";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v260";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -349,7 +349,7 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   color:var(--text)!important;
   font-style:normal!important;
   font-family:var(--serif)!important;
-  font-size:clamp(21px,var(--post-text-size),25px)!important;
+  font-size:clamp(21px,4.9vw,26px)!important;
   line-height:1.62!important;
   white-space:pre-line!important;
 }
@@ -379,7 +379,7 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
 .post-key-message p{
   margin:0;
   color:var(--premium-body);
-  font-size:clamp(18px,var(--post-source-size),20px);
+  font-size:clamp(18px,4.1vw,20px);
   line-height:1.56;
 }
 .post-source{
@@ -401,7 +401,7 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   font-size:11px;
 }
 .post-source-verify{font-size:11px;color:var(--premium-body)}
-.post-source-main{color:var(--text);font-size:clamp(14px,var(--post-source-size),16px);line-height:1.55}
+.post-source-main{color:var(--text);font-size:clamp(14px,3.7vw,16px);line-height:1.55}
 .post-source-actions{display:flex;flex-wrap:wrap;gap:8px}
 .post-source-actions button,.post-source-actions a{
   min-height:36px;
@@ -414,7 +414,7 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   font-weight:750;
   text-decoration:none;
 }
-.post-source-details[hidden],.post-reader-sheet[hidden]{display:none!important}
+.post-source-details[hidden]{display:none!important}
 .post-source-details{
   margin-top:8px;
   border-top:1px solid var(--line2);
@@ -451,7 +451,7 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
 .related-compact-card{gap:10px}
 .related-compact-card .related-compact-meta{display:none!important}
 .related-compact-card p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
-.post-share-sheet-backdrop,.post-reader-sheet-backdrop{
+.post-share-sheet-backdrop{
   position:fixed;
   inset:0;
   z-index:95;
@@ -459,7 +459,7 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
   display:grid;
   align-items:end;
 }
-.post-share-sheet,.post-reader-sheet{
+.post-share-sheet{
   width:100%;
   border-radius:22px 22px 0 0;
   border:1px solid var(--line2);
@@ -473,16 +473,6 @@ body.is-post-route #appView.view{padding-bottom:calc(116px + env(safe-area-inset
 .post-sheet-close{min-height:34px;min-width:34px;border:1px solid var(--line2);border-radius:10px;background:transparent;color:var(--cream)}
 body.is-post-route .bottom-nav{transition:transform .22s ease,opacity .22s ease}
 body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacity:.02;pointer-events:none}
-body.post-focus-mode .bottom-nav,
-body.post-focus-mode .post-reader-actions [data-post-save],
-body.post-focus-mode .post-reader-actions [data-post-share-open],
-body.post-focus-mode .post-reader-actions [data-post-more-open],
-body.post-focus-mode .post-key-message,
-body.post-focus-mode .post-source-wrap,
-body.post-focus-mode .post-actions-wrap,
-body.post-focus-mode .post-nav-wrap,
-body.post-focus-mode .related-block{display:none!important}
-body.post-focus-mode .post-reader .statement{font-size:clamp(24px,var(--post-text-size),31px)!important;line-height:1.68!important}
 @media(max-width:760px){
   .post-reader-actions{gap:4px}
   .post-reader-top-btn{padding:6px 7px;font-size:11px}
@@ -9086,7 +9076,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
     </header>
     <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
   </section>
-  <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div></div>
+  <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Beitrag teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
   <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Neue Beiträge anzeigen">
     <span class="new-posts-icon">&#x23F3;</span>
     <span class="new-posts-text">Neue Beiträge verfügbar</span>
@@ -9892,7 +9882,7 @@ let postNavLastY=0;
 function updatePostNavVisibility(){
   const nav=$("bottomNav");
   if(!nav)return;
-  if(currentRoute.view!=="post"||document.body.classList.contains("post-focus-mode")){nav.classList.remove("post-nav-hidden");postNavLastY=window.scrollY||0;return}
+  if(currentRoute.view!=="post"){nav.classList.remove("post-nav-hidden");postNavLastY=window.scrollY||0;return}
   const y=window.scrollY||0;
   const max=Math.max(0,(document.documentElement.scrollHeight||0)-(window.innerHeight||0));
   const nearTop=y<28;
@@ -12889,7 +12879,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v259";
+const APP_BUILD_ID="app-shell-v260";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -12947,21 +12937,6 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
   return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button>${extraAction}<button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button></div><div class="share-help">${esc(helpText)}</div></section>`;
 }
 
-const POST_READER_PREF_KEY="darPostReaderPrefsV1";
-function postReaderPrefs(){
-  const defaults={lineHeight:5,fontMode:"serif",surface:"dark",focus:false};
-  try{return {...defaults,...(getJson(POST_READER_PREF_KEY,{})||{})}}catch(e){return defaults}
-}
-function setPostReaderPrefs(next){
-  const merged={...postReaderPrefs(),...(next||{})};
-  setJson(POST_READER_PREF_KEY,merged);
-  document.body.classList.toggle("post-focus-mode",!!merged.focus&&currentRoute.view==="post");
-  document.documentElement.setAttribute("data-post-font-mode",merged.fontMode||"serif");
-  document.documentElement.setAttribute("data-post-surface",merged.surface||"dark");
-  document.documentElement.style.setProperty("--post-extra-line-height",String(1.5+((Number(merged.lineHeight)||5)*.03)));
-  return merged;
-}
-function applyPostReaderPrefs(){return setPostReaderPrefs({})}
 function postNarratorLine(post){
   const raw=String(post?.scholar||post?.speaker||"").trim();
   if(!raw)return "";
@@ -12970,12 +12945,6 @@ function postNarratorLine(post){
 }
 function normalizeStatementText(value){
   return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
-}
-function renderReaderSettingsSheet(){
-  const prefs=postReaderPrefs();
-  const line=Number(prefs.lineHeight)||5;
-  const isFocus=!!prefs.focus;
-  return `<div class="post-reader-sheet-backdrop post-reader-sheet-wrap" id="postReaderSheetWrap" hidden><section class="post-reader-sheet" role="dialog" aria-modal="true" aria-labelledby="postReaderSheetTitle"><div class="post-sheet-head"><h3 id="postReaderSheetTitle">Lesemodus & Schrift</h3><button class="post-sheet-close" type="button" data-post-aa-close aria-label="Schließen">×</button></div>${fontSlider("postTextScale","Textgröße","Aussage und Haupttext.").replace("<section class=\"font-slider-panel\">","<section class=\"font-slider-panel\"><div class='post-reader-inline-note'>Die Einstellung gilt für alle Beiträge.</div>")}${fontSlider("postSourceScale","Quellen-Text","Quellen und Nachweise.")}<section class="font-slider-panel"><div class="font-slider-head"><div class="font-slider-title"><b>Zeilenabstand</b><span>Ruhiger Lesefluss im Aussagebereich.</span></div><span class="font-slider-value" data-post-lh-value>${line} / 10</span></div><div class="font-range-shell"><input class="font-range" type="range" min="0" max="10" step="1" value="${line}" data-post-line-height style="--slider-fill:${line*10}%"><div class="font-range-labels"><span>kompakt</span><span>luftig</span></div></div></section><section class="font-slider-panel"><div class="font-slider-head"><div class="font-slider-title"><b>Lesefokus</b><span>Nur Titel, Sprecher und Aussage anzeigen.</span></div></div><div class="post-source-actions"><button type="button" data-post-focus-toggle>${isFocus?"Fokusmodus verlassen":"Fokusmodus aktivieren"}</button><button type="button" data-post-reader-reset>Zurücksetzen</button></div></section></section></div>`;
 }
 function renderPostSourceDetails(post,links){
   const rows=[
@@ -13036,9 +13005,8 @@ function renderPostAfterPanel(post,{slideIndex=0}={}){
   const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
   const shareText=buildPostShareMessage(post);
   const shareUrl=postUrl(post);
-  const settingsSheet=renderReaderSettingsSheet();
   const shareSheet=`<div class="post-share-sheet-backdrop post-share-sheet-wrap" id="postShareSheetWrap" hidden><section class="post-share-sheet" role="dialog" aria-modal="true" aria-labelledby="postShareSheetTitle"><div class="post-sheet-head"><h3 id="postShareSheetTitle">Beitrag teilen</h3><button class="post-sheet-close" type="button" data-post-share-close aria-label="Schließen">×</button></div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(post.title||"Beitrag")}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button">Teilen</button><a class="share-btn tg" href="https://t.me/share/url?url=${esc(encodeURIComponent(shareUrl))}&text=${esc(encodeURIComponent(shareText))}" target="_blank" rel="noopener">Telegram</a><a class="share-btn wa" href="https://wa.me/?text=${esc(encodeURIComponent(shareText))}" target="_blank" rel="noopener">WhatsApp</a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button">Instagram</button><button class="share-btn link" data-share-copy data-share-text="${esc(shareUrl)}" type="button">Link kopieren</button><button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button">Bild erstellen</button></div></section></div>`;
-  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><span class="post-source-verify">geprüfte Angaben</span></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}${hasScan?`<div class="source-note">Scan/PDF vorhanden.</div>`:""}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>${shareSheet}${settingsSheet}`;
+  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><span class="post-source-verify">geprüfte Angaben</span></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}${hasScan?`<div class="source-note">Scan/PDF vorhanden.</div>`:""}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>${shareSheet}`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -13097,7 +13065,6 @@ function renderPost(id){
   if(!post&&postRouteLoadingId===String(id))return `${setHeader("Beitrag wird geladen","Der neue Beitrag wird direkt aus dem aktuellen Index geladen.","Laden")}<div class="loading">Beitrag wird aktualisiert…</div>`;
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
-  applyPostReaderPrefs();
   const related=getRelatedPosts(post);
   const narrator=postNarratorLine(post);
   const body=isSlidePost(post)?renderPostSlides(post):`<section id="postStatement" class="statement">${formatText(normalizeStatementText(post.statement||""))}</section>`;
@@ -13401,21 +13368,13 @@ function bindEvents(){
     document.querySelectorAll("[data-post-save]").forEach(btn=>{btn.classList.toggle("is-saved",!!post&&isSaved(post.id));btn.onclick=()=>{if(!post)return;toggleSaved(post.id);render()}});
     document.querySelectorAll("[data-post-copy]").forEach(btn=>{btn.onclick=async()=>{if(!post)return;const text=buildPostShareMessage(post);try{await navigator.clipboard.writeText(text);trackPostShare(post.id);alert("Beitrag wurde kopiert.")}catch(e){prompt("Kopiere den Beitrag:",text)}}});
     const shareWrap=$("postShareSheetWrap");
-    const readerWrap=$("postReaderSheetWrap");
     const closeShare=()=>{if(shareWrap)shareWrap.hidden=true};
-    const closeReader=()=>{if(readerWrap)readerWrap.hidden=true};
     document.querySelectorAll("[data-post-share-open]").forEach(btn=>{btn.onclick=()=>{if(shareWrap)shareWrap.hidden=false}});
     document.querySelectorAll("[data-post-share-close]").forEach(btn=>{btn.onclick=closeShare});
     if(shareWrap)shareWrap.onclick=e=>{if(e.target===shareWrap)closeShare()};
-    document.querySelectorAll("[data-post-aa-open]").forEach(btn=>{btn.onclick=()=>{if(readerWrap)readerWrap.hidden=false}});
-    document.querySelectorAll("[data-post-aa-close]").forEach(btn=>{btn.onclick=closeReader});
-    if(readerWrap)readerWrap.onclick=e=>{if(e.target===readerWrap)closeReader()};
     document.querySelectorAll("[data-post-more-open]").forEach(btn=>{btn.onclick=()=>{const report=$("[data-post-report]");if(report)report.click()}});
     document.querySelectorAll("[data-post-source-toggle]").forEach(btn=>{btn.onclick=()=>{const box=$("postSourceDetails");if(!box)return;box.hidden=!box.hidden;btn.textContent=box.hidden?"Details":"Details schließen"}});
     document.querySelectorAll("[data-post-report]").forEach(btn=>{btn.onclick=()=>{if(!post)return;const subject=encodeURIComponent("Fehler melden: "+post.title);const body=encodeURIComponent("As-Salāmu ʿalaykum,\n\nich möchte bei diesem Beitrag etwas melden:\n\n"+post.title+"\n"+postUrl(post)+"\n\nHinweis:\n");location.href=`mailto:${REPORT_EMAIL}?subject=${subject}&body=${body}`}});
-    document.querySelectorAll("[data-post-line-height]").forEach(input=>{input.oninput=()=>{const value=Number(input.value)||5;const label=document.querySelector("[data-post-lh-value]");if(label)label.textContent=`${value} / 10`;setPostReaderPrefs({lineHeight:value});input.style.setProperty("--slider-fill",(value*10)+"%")};input.onchange=input.oninput});
-    document.querySelectorAll("[data-post-focus-toggle]").forEach(btn=>{btn.onclick=()=>{const prefs=postReaderPrefs();const nextFocus=!prefs.focus;window.__postFocusRestoreY=window.scrollY||0;setPostReaderPrefs({focus:nextFocus});btn.textContent=nextFocus?"Fokusmodus verlassen":"Fokusmodus aktivieren";if(!nextFocus&&typeof window.__postFocusRestoreY==="number"){requestAnimationFrame(()=>window.scrollTo({top:window.__postFocusRestoreY,behavior:"auto"}))}render()}});
-    document.querySelectorAll("[data-post-reader-reset]").forEach(btn=>{btn.onclick=()=>{setPostReaderPrefs({lineHeight:5,fontMode:"serif",surface:"dark",focus:false});applyFontScale("postTextScale",5);applyFontScale("postSourceScale",5);render()}});
   }
   const popularToggle=$("popularPostsToggle");if(popularToggle){popularToggle.onclick=ev=>{ev.stopPropagation();const list=$("popularPostsContent");if(!list)return;const collapsed=list.classList.toggle("collapsed");popularToggle.textContent=collapsed?"Mehr anzeigen":"Zuklappen"}}
   const nativeShareBtn=$("nativeShareBtn");if(nativeShareBtn&&currentRoute.view==="post"){nativeShareBtn.onclick=async()=>{const post=posts.find(p=>String(p.id)===String(currentRoute.value));if(!post)return;const url=postUrl(post);const text=buildShareText(post);const message=buildPostShareMessage(post);if(navigator.share){try{await navigator.share({title:post.title,text,url});trackPostShare(post.id);return}catch(e){}}try{await navigator.clipboard.writeText(message);trackPostShare(post.id);alert("Beitrag wurde kopiert, weil direktes Teilen hier nicht unterstützt wird.")}catch(e){prompt("Kopiere den Beitrag:",message)}}}
