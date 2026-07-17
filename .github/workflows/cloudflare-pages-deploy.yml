@@ -8,6 +8,8 @@ on:
     paths:
       - index.html
       - test/index.html
+      - wasiyyah/**
+      - test/wasiyyah/**
       - version.json
       - service-worker.js
       - assets/**
