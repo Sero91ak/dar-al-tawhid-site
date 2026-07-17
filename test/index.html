@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v260";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v261";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -12676,7 +12676,9 @@ const QUIZ_QUESTIONS_PATH="/data/quiz-questions.json";
 let quizQuestionsCache=null;
 let quizLoadPromise=null;
 function quizFallbackQuestions(){return[{id:"fallback-1",category:"Tawḥīd",topic:"Grundlagen",level:"Anfänger",type:"multiple_choice",question:"Welche Aussage beschreibt Tawḥīd richtig?",answers:["Allah allein wird angebetet.","Jede Gewohnheit ist Gottesdienst.","Quellenprüfung ist unwichtig.","Tawḥīd betrifft nur Sprache."],correctIndex:0,explanation:"Tawḥīd bedeutet, Allah in der Anbetung allein zu stellen.",source:"Grundlage der veröffentlichten Inhalte"}]}
-async function loadQuizQuestions(){if(Array.isArray(quizQuestionsCache))return quizQuestionsCache;if(quizLoadPromise)return quizLoadPromise;quizLoadPromise=(async()=>{try{const res=await fetch(`${QUIZ_QUESTIONS_PATH}?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)throw new Error("Quizdaten nicht erreichbar");const rows=await res.json();quizQuestionsCache=Array.isArray(rows)?rows.filter(q=>q&&q.status!=="draft"&&Array.isArray(q.answers)&&q.answers.length>=2):[];if(!quizQuestionsCache.length)quizQuestionsCache=quizFallbackQuestions();return quizQuestionsCache}catch(e){quizQuestionsCache=quizFallbackQuestions();return quizQuestionsCache}finally{quizLoadPromise=null}})();return quizLoadPromise}
+function quizStableHash(value){let h=0;const text=String(value||"");for(let i=0;i<text.length;i++)h=((h<<5)-h)+text.charCodeAt(i)|0;return Math.abs(h)}
+function quizNormalizeQuestion(raw){const q={...(raw||{})};const answers=Array.isArray(q.answers)?q.answers.map(a=>String(a||"")):[];if(answers.length<2)return null;let correct=Number(q.correctIndex);if(!Number.isFinite(correct)||correct<0||correct>=answers.length)correct=0;const offset=answers.length>1?quizStableHash(`${q.id||""}|${q.question||""}|dar-quiz`)%(answers.length):0;if(offset>0){const rotated=answers.slice(offset).concat(answers.slice(0,offset));q.answers=rotated;correct=(correct-offset+answers.length)%answers.length}else q.answers=answers;q.correctIndex=correct;return q}
+async function loadQuizQuestions(){if(Array.isArray(quizQuestionsCache))return quizQuestionsCache;if(quizLoadPromise)return quizLoadPromise;quizLoadPromise=(async()=>{try{const res=await fetch(`${QUIZ_QUESTIONS_PATH}?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)throw new Error("Quizdaten nicht erreichbar");const rows=await res.json();quizQuestionsCache=Array.isArray(rows)?rows.filter(q=>q&&q.status!=="draft"&&Array.isArray(q.answers)&&q.answers.length>=2).map(quizNormalizeQuestion).filter(Boolean):[];if(!quizQuestionsCache.length)quizQuestionsCache=quizFallbackQuestions().map(quizNormalizeQuestion).filter(Boolean);return quizQuestionsCache}catch(e){quizQuestionsCache=quizFallbackQuestions().map(quizNormalizeQuestion).filter(Boolean);return quizQuestionsCache}finally{quizLoadPromise=null}})();return quizLoadPromise}
 function quizSession(){return getJson(QUIZ_SESSION_KEY,null)}
 function saveQuizSession(s){setJson(QUIZ_SESSION_KEY,s)}
 function clearQuizSession(){try{localStorage.removeItem(QUIZ_SESSION_KEY)}catch(e){}}
@@ -12879,7 +12881,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v260";
+const APP_BUILD_ID="app-shell-v261";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
