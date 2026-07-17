@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v248";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v250";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -8022,9 +8022,9 @@ body.is-home-route .float-actions,body.is-area-route .float-actions{display:none
 .quiz-shell.quiz-shell-pro,.hadith-shell.hadith-shell-pro{max-width:100%;min-width:0}
 body.is-quiz-route .view{
   background:
-    radial-gradient(circle at 16% 0%,rgba(173,156,255,.19),transparent 38%),
-    radial-gradient(circle at 86% 10%,rgba(120,215,203,.15),transparent 36%),
-    linear-gradient(180deg,#080b17,#12132a 56%,#0d1120);
+    radial-gradient(circle at 16% 0%,color-mix(in srgb,var(--accent2) 24%,transparent),transparent 38%),
+    radial-gradient(circle at 86% 10%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 36%),
+    linear-gradient(180deg,color-mix(in srgb,var(--bg) 90%,#050607 10%),color-mix(in srgb,var(--bg2) 88%,#050607 12%) 56%,color-mix(in srgb,var(--bg) 92%,#000 8%));
 }
 body.is-hadith-route .view{
   background:
@@ -8033,19 +8033,19 @@ body.is-hadith-route .view{
     linear-gradient(180deg,#051422,#0d2136 54%,#09182a);
 }
 body.is-quiz-route .view-head h2,
-body.is-hadith-route .view-head h2{color:#f8eed2}
+body.is-hadith-route .view-head h2{color:var(--gold2)}
 body.is-quiz-route .view-desc,
-body.is-hadith-route .view-desc{color:#d6d5e6}
+body.is-hadith-route .view-desc{color:var(--muted)}
 .quiz-shell.quiz-shell-pro{
-  --quiz-line:rgba(182,167,255,.30);
-  --quiz-card:#14182d;
-  --quiz-soft:#1b2140;
-  --quiz-text:#f6f2e7;
-  --quiz-muted:#c5c5de;
-  --quiz-accent:#d8c37f;
-  --quiz-accent-2:#a89cff;
-  --quiz-ok:#7de3b6;
-  --quiz-bad:#ff9ea5;
+  --quiz-line:color-mix(in srgb,var(--line) 84%,var(--accent2) 16%);
+  --quiz-card:color-mix(in srgb,var(--card) 94%,transparent);
+  --quiz-soft:color-mix(in srgb,var(--soft) 86%,var(--card) 14%);
+  --quiz-text:var(--text);
+  --quiz-muted:var(--muted);
+  --quiz-accent:color-mix(in srgb,var(--accent) 74%,var(--accent2) 26%);
+  --quiz-accent-2:var(--accent2);
+  --quiz-ok:#43c987;
+  --quiz-bad:#e56a7a;
   gap:16px;
 }
 .quiz-shell.quiz-shell-pro .quiz-hero,
@@ -8054,8 +8054,8 @@ body.is-hadith-route .view-desc{color:#d6d5e6}
 .quiz-shell.quiz-shell-pro .quiz-result{
   border:1px solid var(--quiz-line);
   background:
-    radial-gradient(circle at 8% 0%,rgba(216,195,127,.16),transparent 38%),
-    linear-gradient(152deg,color-mix(in srgb,var(--quiz-card) 95%,#fff 5%),color-mix(in srgb,var(--quiz-soft) 86%,#fff 14%));
+    radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--quiz-accent) 18%,transparent),transparent 38%),
+    linear-gradient(152deg,color-mix(in srgb,var(--quiz-card) 96%,#fff 4%),color-mix(in srgb,var(--quiz-soft) 88%,#fff 12%));
   border-radius:24px;
   box-shadow:0 20px 52px rgba(0,0,0,.33);
 }
@@ -8100,6 +8100,11 @@ body.is-hadith-route .view-desc{color:#d6d5e6}
   box-shadow:0 0 0 2px rgba(216,195,127,.28),0 0 28px rgba(216,195,127,.22);
   background:linear-gradient(135deg,rgba(216,195,127,.18),rgba(168,156,255,.20));
 }
+.quiz-shell.quiz-shell-pro .quiz-answer:active{
+  border-color:var(--quiz-accent);
+  box-shadow:0 0 0 2px rgba(216,195,127,.30),0 0 24px rgba(216,195,127,.20);
+  background:linear-gradient(135deg,rgba(216,195,127,.22),rgba(168,156,255,.17));
+}
 .quiz-shell.quiz-shell-pro .quiz-answer.selected .quiz-letter{
   color:#fff9e8;
   text-shadow:0 0 10px rgba(216,195,127,.55);
@@ -8122,6 +8127,11 @@ body.is-hadith-route .view-desc{color:#d6d5e6}
 }
 .quiz-shell.quiz-shell-pro .quiz-btn:hover{transform:translateY(-1px)}
 .quiz-shell.quiz-shell-pro .quiz-btn:active{transform:translateY(0) scale(.985)}
+.quiz-shell.quiz-shell-pro .quiz-btn:focus-visible{
+  outline:2px solid rgba(216,195,127,.85);
+  outline-offset:1px;
+  box-shadow:0 0 0 3px rgba(216,195,127,.24),0 0 24px rgba(216,195,127,.18);
+}
 .quiz-shell.quiz-shell-pro .quiz-btn.primary{
   color:#1b1308;
   border-color:transparent;
@@ -8142,6 +8152,34 @@ body.is-hadith-route .view-desc{color:#d6d5e6}
   text-shadow:0 0 8px rgba(255,247,222,.65);
 }
 .quiz-shell.quiz-shell-pro .quiz-result-box b{color:#fff7df}
+.quiz-shell.quiz-shell-pro .quiz-app-nav-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+.quiz-shell.quiz-shell-pro .quiz-app-nav-card{
+  border:1px solid color-mix(in srgb,var(--quiz-line) 88%,#fff 12%);
+  background:linear-gradient(140deg,rgba(216,195,127,.14),rgba(27,33,64,.88));
+  color:var(--quiz-text);
+  border-radius:18px;
+  min-height:84px;
+  padding:14px;
+  text-align:left;
+  font-weight:800;
+  display:grid;
+  gap:4px;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,filter .16s ease;
+}
+.quiz-shell.quiz-shell-pro .quiz-app-nav-card b{display:block;color:#fff7de}
+.quiz-shell.quiz-shell-pro .quiz-app-nav-card span{display:block;color:var(--quiz-muted);font-size:13px}
+.quiz-shell.quiz-shell-pro .quiz-app-nav-card:hover{transform:translateY(-1px)}
+.quiz-shell.quiz-shell-pro .quiz-app-nav-card:active,
+.quiz-shell.quiz-shell-pro .quiz-app-nav-card.is-active{
+  border-color:var(--quiz-accent);
+  box-shadow:0 0 0 2px rgba(216,195,127,.26),0 0 28px rgba(216,195,127,.18);
+  filter:brightness(1.03);
+}
 .hadith-shell.hadith-shell-pro{
   --hadith-bg:#061529;
   --hadith-panel:#0d2038;
@@ -8197,6 +8235,7 @@ body.is-hadith-route .view-desc{color:#d6d5e6}
 }
 @media(max-width:900px){
   .quiz-shell.quiz-shell-pro .quiz-config-grid{grid-template-columns:1fr}
+  .quiz-shell.quiz-shell-pro .quiz-app-nav-grid{grid-template-columns:1fr}
   .quiz-shell.quiz-shell-pro .quiz-actions,
   .quiz-shell.quiz-shell-pro .quiz-menu-grid,
   .quiz-shell.quiz-shell-pro .quiz-session-actions,
@@ -9281,7 +9320,7 @@ const restoreScrollPosition=getNavScroll;
 const setActiveTab=updateBottomNav;
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
-function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
+function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
 function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){return`<div class="view-head${headClass?` ${headClass}`:""}"><div class="eyebrow">${esc(eyebrow)}</div><h2>${esc(title)}</h2>${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
@@ -12040,10 +12079,10 @@ function quizShuffle(items){const arr=[...items];for(let i=arr.length-1;i>0;i--)
 function quizNormalizeLevel(v){return String(v||"").toLowerCase().replace("anfänger","anfanger")}
 function quizQuestionById(id){return (quizQuestionsCache||[]).find(q=>String(q.id)===String(id))}
 function quizBuildSession(config){let pool=[...(quizQuestionsCache||[])];if(config.topic&&config.topic!=="all")pool=pool.filter(q=>String(q.category||q.topic||"")===config.topic);if(config.level&&config.level!=="all")pool=pool.filter(q=>quizNormalizeLevel(q.level)===quizNormalizeLevel(config.level));if(!pool.length)pool=[...(quizQuestionsCache||[])];const picked=quizShuffle(pool).slice(0,Math.min(config.count,pool.length));return{id:`quiz-${Date.now()}`,questionIds:picked.map(q=>q.id),index:0,answers:{},retries:{},bookmarked:{},config,startedAt:Date.now(),updatedAt:Date.now(),finished:false}}
-function renderQuiz(){if(!Array.isArray(quizQuestionsCache)){loadQuizQuestions().then(()=>{if(readRoute().view==="quiz")render()});return `${setPageHeader("Din-Quiz","Fragen werden geladen.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Quizfragen werden geladen …</div></section>`}const session=quizSession();if(session&&!session.finished)return renderQuizSession(session);if(session&&session.finished)return renderQuizResult(session);const cats=[...new Set(quizQuestionsCache.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(quizQuestionsCache.map(q=>q.level).filter(Boolean))].sort();return `${setPageHeader("Din-Quiz","Strukturierte Wissensprüfung mit klaren Quellen.","Quiz")}<section class="quiz-shell quiz-shell-pro"><div class="quiz-hero"><span class="quiz-kicker">Wissensprüfung</span><h2>Din-Quiz</h2><p>Qurʾān · Sunnah · Tawḥīd · Fiqh · Salaf · klare Auswertung</p></div><div class="quiz-card"><div class="quiz-config-grid"><div class="quiz-field"><label for="quizTopic">Thema</label><select id="quizTopic"><option value="all">Gemischt</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><select id="quizLevel"><option value="all">Gemischt</option>${levels.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizCount">Fragen</label><select id="quizCount">${[5,10,15,20].map(n=>`<option value="${n}">${n}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizDuration">Dauer</label><select id="quizDuration"><option>Ohne Timer</option><option>10 Min.</option><option>20 Min.</option></select></div><div class="quiz-field full"><label for="quizMode">Modus</label><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn" type="button" id="quizQuickBtn">Schnellquiz</button></div></div><div class="quiz-menu-grid"><button class="quiz-menu-card" type="button" data-nav="topics"><span>🔎</span><span><b>Fragen suchen</b><span>über Beiträge</span></span></button><button class="quiz-menu-card" type="button" id="quizResumeBtn" ${session?"":"hidden"}><span>↩</span><span><b>Fortsetzen</b><span>Laufende Runde</span></span></button><button class="quiz-menu-card" type="button" id="quizMistakesBtn"><span>↻</span><span><b>Fehlertraining</b><span>Falsche Fragen</span></span></button><button class="quiz-menu-card" type="button" data-nav="statistik"><span>◷</span><span><b>Statistik</b><span>Fortschritt</span></span></button></div></section>`}
+function renderQuiz(){if(!Array.isArray(quizQuestionsCache)){loadQuizQuestions().then(()=>{if(readRoute().view==="quiz")render()});return `${setPageHeader("Din-Quiz","Fragen werden geladen.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Quizfragen werden geladen …</div></section>`}const session=quizSession();if(session&&!session.finished)return renderQuizSession(session);if(session&&session.finished)return renderQuizResult(session);const cats=[...new Set(quizQuestionsCache.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(quizQuestionsCache.map(q=>q.level).filter(Boolean))].sort();return `${setPageHeader("Din-Quiz","Strukturierte Wissensprüfung mit klaren Quellen.","Quiz")}<section class="quiz-shell quiz-shell-pro"><div class="quiz-hero"><span class="quiz-kicker">Wissensprüfung</span><h2>Din-Quiz</h2><p>Qurʾān · Sunnah · Tawḥīd · Fiqh · Salaf · klare Auswertung</p></div><div class="quiz-card"><div class="quiz-app-nav-grid"><button class="quiz-app-nav-card" type="button" id="quizHomeStartBtn"><b>Quiz-Runde starten</b><span>Direkt mit deinem Modus und Themenwahl beginnen</span></button><button class="quiz-app-nav-card" type="button" data-nav="hadith"><b>Hadith-Bibliothek</b><span>Eigene Hadith-Seite mit Büchern und Werken öffnen</span></button></div></div><div class="quiz-card"><div class="quiz-config-grid"><div class="quiz-field"><label for="quizTopic">Thema</label><select id="quizTopic"><option value="all">Gemischt</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><select id="quizLevel"><option value="all">Gemischt</option>${levels.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizCount">Fragen</label><select id="quizCount">${[5,10,15,20].map(n=>`<option value="${n}">${n}</option>`).join("")}</select></div><div class="quiz-field"><label for="quizDuration">Dauer</label><select id="quizDuration"><option>Ohne Timer</option><option>10 Min.</option><option>20 Min.</option></select></div><div class="quiz-field full"><label for="quizMode">Modus</label><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn" type="button" id="quizQuickBtn">Schnellquiz</button></div></div><div class="quiz-menu-grid"><button class="quiz-menu-card" type="button" data-nav="topics"><span>🔎</span><span><b>Fragen suchen</b><span>über Beiträge</span></span></button><button class="quiz-menu-card" type="button" id="quizResumeBtn" ${session?"":"hidden"}><span>↩</span><span><b>Fortsetzen</b><span>Laufende Runde</span></span></button><button class="quiz-menu-card" type="button" id="quizMistakesBtn"><span>↻</span><span><b>Fehlertraining</b><span>Falsche Fragen</span></span></button><button class="quiz-menu-card" type="button" data-nav="statistik"><span>◷</span><span><b>Statistik</b><span>Fortschritt</span></span></button></div></section>`}
 function renderQuizSession(session){const q=quizQuestionById(session.questionIds[session.index]);if(!q)return `${setPageHeader("Din-Quiz","Keine aktive Frage gefunden.","Quiz")}<section class="quiz-shell"><div class="quiz-card">Diese Frage konnte nicht geladen werden.<div class="quiz-actions"><button class="quiz-btn primary" id="quizNewBtn">Neues Quiz starten</button><button class="quiz-btn" data-nav="more">Zurück</button></div></div></section>`;const selected=session.answers?.[q.id]?.selectedIndex;const evaluated=session.answers?.[q.id]?.evaluated;const correct=Number(q.correctIndex);const progress=((session.index+1)/session.questionIds.length)*100;return `${setPageHeader("Din-Quiz","Aktive Wissensrunde","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-session"><div class="quiz-status"><div class="quiz-status-top"><span>Frage ${session.index+1}/${session.questionIds.length}</span><button class="quiz-btn danger" type="button" id="quizEndBtn">Beenden</button></div><div class="quiz-status-meta">${esc(q.category||q.topic||"Quiz")} · ${esc(q.level||"")}</div><div class="quiz-progress"><span style="width:${progress}%"></span></div></div><h2 class="quiz-question">${esc(q.question||"Frage")}</h2><div class="quiz-answer-list">${(q.answers||[]).map((a,i)=>{const state=evaluated?(i===correct?" correct":i===selected&&i!==correct?" wrong":""):i===selected?" selected":"";const icon=evaluated&&i===correct?"✓":evaluated&&i===selected&&i!==correct?"×":"";return `<button type="button" class="quiz-answer${state}" data-quiz-answer="${i}" ${evaluated?"disabled":""}><span class="quiz-letter">${"ABCD"[i]||i+1}</span><span>${esc(a)}</span><span>${icon}</span></button>`}).join("")}</div>${evaluated?`<div class="quiz-feedback"><b>${selected===correct?"Richtig beantwortet.":"Nicht richtig beantwortet."}</b><p>${esc(q.explanation||"")}</p><small>${esc(q.source||"Quelle wird geprüft.")}</small></div>`:""}<div class="quiz-session-actions"><button class="quiz-btn" type="button" id="quizPrevBtn">← Zurück</button>${evaluated?`<button class="quiz-btn primary" type="button" id="quizNextBtn">${session.index>=session.questionIds.length-1?"Ergebnis":"Weiter →"}</button>`:`<button class="quiz-btn primary" type="button" id="quizCheckBtn" ${selected==null?"disabled":""}>Antwort prüfen</button>`}</div></article></section>`}
 function renderQuizResult(session){const total=session.questionIds.length;const values=session.questionIds.map(id=>session.answers?.[id]).filter(Boolean);const right=values.filter(a=>a.correct).length;const wrong=values.filter(a=>a.evaluated&&!a.correct).length;const skipped=Math.max(0,total-right-wrong);const percent=total?Math.round((right/total)*100):0;const answered=right+wrong;const accuracy=answered?Math.round((right/answered)*100):0;return `${setPageHeader("Quiz abgeschlossen",`${right}/${total} richtig`,"Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Abschluss</span><h2 class="quiz-question">${right} / ${total}</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${percent}%</b><span>Quiz-Ergebnis</span></div><div class="quiz-result-box"><b>${accuracy}%</b><span>Antwortgenauigkeit</span></div><div class="quiz-result-box"><b>${right}</b><span>Richtig</span></div><div class="quiz-result-box"><b>${wrong}</b><span>Falsch</span></div><div class="quiz-result-box"><b>${skipped}</b><span>Übersprungen</span></div><div class="quiz-result-box"><b>${total}</b><span>Fragen</span></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizNewBtn">Neues Quiz</button><button class="quiz-btn" type="button" data-nav="more">Mehr</button></div></article></section>`}
-function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:10,mode:"standard"}:quizConfig();saveQuizSession(quizBuildSession(cfg));render()};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>render();const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();render()};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizSession(s)}render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.answers=s.answers||{};s.answers[q.id]={selectedIndex:Number(btn.getAttribute("data-quiz-answer")),evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()}});const checkBtn=$("quizCheckBtn");if(checkBtn)checkBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const a=s.answers?.[q?.id];if(!q||!a)return;a.evaluated=true;a.correct=Number(a.selectedIndex)===Number(q.correctIndex);s.updatedAt=Date.now();saveQuizSession(s);render()};const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;if(s.index>=s.questionIds.length-1)s.finished=true;else s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()};const mistakesBtn=$("quizMistakesBtn");if(mistakesBtn)mistakesBtn.onclick=()=>{alert("Fehlertraining nutzt die falsch beantworteten Fragen deiner Quiz-Runden. Starte zuerst eine Runde und beantworte Fragen.")}}
+function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:10,mode:"standard"}:quizConfig();saveQuizSession(quizBuildSession(cfg));render()};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const homeStartBtn=$("quizHomeStartBtn");if(homeStartBtn)homeStartBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>render();const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();render()};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizSession(s)}render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.answers=s.answers||{};s.answers[q.id]={selectedIndex:Number(btn.getAttribute("data-quiz-answer")),evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()}});const checkBtn=$("quizCheckBtn");if(checkBtn)checkBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const a=s.answers?.[q?.id];if(!q||!a)return;a.evaluated=true;a.correct=Number(a.selectedIndex)===Number(q.correctIndex);s.updatedAt=Date.now();saveQuizSession(s);render()};const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;if(s.index>=s.questionIds.length-1)s.finished=true;else s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()};const mistakesBtn=$("quizMistakesBtn");if(mistakesBtn)mistakesBtn.onclick=()=>{alert("Fehlertraining nutzt die falsch beantworteten Fragen deiner Quiz-Runden. Starte zuerst eine Runde und beantworte Fragen.")}}
 
 const FEATURE_PIN_KEY="darFeaturePinsV1";
 function featureCatalog(){
@@ -12222,7 +12261,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v248";
+const APP_BUILD_ID="app-shell-v250";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -12441,7 +12480,7 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false;
 }
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";const isIlm=route.view==="ilm";if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("is-ilm-chat-route",isIlm);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);document.body.classList.toggle("is-quiz-route",route.view==="quiz");document.body.classList.toggle("is-hadith-route",route.view==="hadith");if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isIlm){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
+function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";const isIlm=route.view==="ilm";if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("is-ilm-chat-route",isIlm);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);document.body.classList.toggle("is-quiz-route",route.view==="quiz");document.body.classList.toggle("is-hadith-route",route.view==="hadith");if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isIlm){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
     const routeBefore=readRoute();
