@@ -17,6 +17,12 @@ Bei jeder Aufgabe:
 10. Live-Veröffentlichung auf `main` oder in die Besucher-App nur nach ausdrücklicher Freigabe des Nutzers, z. B. „push live“, „live veröffentlichen“ oder „freigeben“.
 11. Push-Benachrichtigungen aus Test/Staging dürfen niemals an alle Besucher gehen; dort nur Admin-/Test-Pushs nutzen.
 
+## Quiz-Fragen (Sonderregel – immer live)
+
+12. **Neue geprüfte Quiz-Fragen** werden **ohne Rückfrage direkt live** in die Besucher-App übernommen: Batch erzeugen, in `data/quiz-questions.json` und `data/quiz-questions-test.json` einpflegen, auf `main` mergen und deployen. Keine Freigabe mit „push live“ abwarten.
+13. Besucher-App lädt `data/quiz-questions.json`; Test lädt `data/quiz-questions-test.json`. Beide Dateien bei jedem neuen Quiz-Block aktualisieren.
+14. Diese Sonderregel gilt nur für Quiz-Inhalte (Fragen/JSON), nicht für Push-Kampagnen, Fokus-Banner oder App-Shell-Änderungen.
+
 ## Push-System-Schutz (streng – nicht verletzen)
 
 Das Push-System ist geschützt durch `scripts/push-system-guard.js` und CI (Canonical State Guard, App Health Check, Worker-Deploy).
