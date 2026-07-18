@@ -171,7 +171,7 @@
 .theme-switch-btn[data-theme-select="soft"]{--theme-card-bg:linear-gradient(145deg,#fff9f4,#ead5dd);--theme-card-border:rgba(116,76,98,.28);--theme-card-text:#34232c;--theme-card-shine:rgba(255,255,255,.70);--theme-preview-ring:rgba(116,76,98,.34);--theme-preview-logo:radial-gradient(circle,#fff8f1 0 32%,#e7cfd5 35% 100%);--theme-preview-shadow:rgba(96,62,78,.13);--theme-preview-line:linear-gradient(90deg,#7d5368,#d7b9c5)}
 .theme-switch-btn[data-theme-select="royal"]{--theme-card-bg:linear-gradient(145deg,#0d2b55,#041126);--theme-card-border:rgba(239,215,142,.44);--theme-card-text:#fff2c6;--theme-card-shine:rgba(255,255,255,.055);--theme-preview-ring:rgba(239,215,142,.58);--theme-preview-logo:radial-gradient(circle,#f8e9b7 0 30%,#0a1f3d 34% 100%);--theme-preview-shadow:rgba(4,12,28,.40);--theme-preview-line:linear-gradient(90deg,#efd78e,#2b6fa3)}
 .theme-switch-btn[data-theme-select="bordeaux"]{--theme-card-bg:linear-gradient(145deg,#5B232A,#140B0C);--theme-card-border:rgba(214,190,132,.44);--theme-card-text:#F7EED8;--theme-card-shine:rgba(255,255,255,.05);--theme-preview-ring:rgba(214,190,132,.58);--theme-preview-logo:radial-gradient(circle,#D6BE84 0 28%,#6A2B33 34%,#321317 100%);--theme-preview-shadow:rgba(20,11,12,.42);--theme-preview-line:linear-gradient(90deg,#CDAE6D,#5B232A)}
-.theme-switch-btn[data-theme-select="dar-al-layl"]{--theme-card-bg:linear-gradient(145deg,#1A3029,#0B1210);--theme-card-border:rgba(123,215,186,.38);--theme-card-text:#F4F1E8;--theme-card-shine:rgba(255,255,255,.05);--theme-preview-ring:rgba(201,170,102,.42);--theme-preview-logo:radial-gradient(circle,#E2C98F 0 30%,#11201B 35% 100%);--theme-preview-shadow:rgba(0,0,0,.36);--theme-preview-line:linear-gradient(90deg,#7BD7BA,#21463C)}
+.theme-switch-btn[data-theme-select="dar-al-layl"]{--theme-card-bg:linear-gradient(145deg,#141916,#080B0A);--theme-card-border:rgba(168,139,79,.30);--theme-card-text:#F1EDE3;--theme-card-shine:rgba(255,255,255,.04);--theme-preview-ring:rgba(216,193,139,.34);--theme-preview-logo:radial-gradient(circle,#E8D7B3 0 30%,#141916 35% 100%);--theme-preview-shadow:rgba(0,0,0,.40);--theme-preview-line:linear-gradient(90deg,#A88B4F,#303328)}
 .theme-switch-btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .theme-switch-btn.is-active{border-color:rgba(239,215,142,.78)!important;box-shadow:0 0 0 1px rgba(239,215,142,.28),0 10px 24px rgba(0,0,0,.18),inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.06))!important}
 .theme-switch-btn.is-active:after{content:"✓";position:absolute;right:8px;top:8px;width:19px;height:19px;border-radius:999px;display:grid;place-items:center;background:rgba(239,215,142,.92);color:#21170a;font-size:12px;font-weight:950;box-shadow:0 3px 10px rgba(0,0,0,.18)}
@@ -4987,81 +4987,133 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
 /* DĀR AL-LAYL — zentrales Premium-Dark-Theme */
 html[data-theme="dar-al-layl"]{
   color-scheme:dark!important;
-  --layl-bg-deep:#080C0B!important;
-  --layl-bg-base:#0B1210!important;
-  --layl-bg-elevated:#0E1714!important;
-  --layl-bg-header:#101C18!important;
-  --layl-bg-overlay:rgba(5,10,8,.82)!important;
-  --layl-surface-1:#101A17!important;
-  --layl-surface-2:#13201C!important;
-  --layl-surface-3:#172722!important;
-  --layl-surface-4:#1B3029!important;
-  --layl-surface-soft:rgba(23,39,34,.82)!important;
-  --layl-emerald-base:#245044!important;
-  --layl-emerald-soft:#7BD7BA!important;
-  --layl-petrol:#21463C!important;
-  --layl-gold-base:#C9AA66!important;
-  --layl-gold-soft:#E2C98F!important;
-  --layl-text-primary:#F4F1E8!important;
-  --layl-text-body:#D7DCD7!important;
-  --layl-text-secondary:#BDC6C0!important;
-  --layl-text-muted:#929E98!important;
-  --layl-success:#75D6A9!important;
-  --layl-warning:#E6C477!important;
-  --layl-danger:#E89B95!important;
+  --layl-bg-deep:#050706!important;
+  --layl-bg-base:#080B0A!important;
+  --layl-bg-secondary:#0B0F0D!important;
+  --layl-bg-elevated:#0E1210!important;
+  --layl-bg-header:#101410!important;
+  --layl-bg-overlay:rgba(4,6,5,.87)!important;
 
-  --bg:var(--layl-bg-base)!important;--bg2:var(--layl-bg-elevated)!important;--panel:var(--layl-surface-1)!important;--card:var(--layl-surface-2)!important;
-  --page-cover:var(--layl-bg-deep)!important;--page-cover-mid:var(--layl-bg-base)!important;
-  --gold:#9F8147!important;--gold2:var(--layl-gold-soft)!important;--bronze:var(--layl-gold-base)!important;
-  --cream:var(--layl-text-primary)!important;--text:var(--layl-text-primary)!important;--muted:var(--layl-text-secondary)!important;--muted2:var(--layl-text-muted)!important;
-  --line:rgba(123,215,186,.17)!important;--line2:rgba(123,215,186,.10)!important;
-  --shadow:0 22px 52px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.045)!important;
+  --layl-surface-1:#0E1310!important;
+  --layl-surface-2:#121713!important;
+  --layl-surface-3:#171D18!important;
+  --layl-surface-4:#1C231D!important;
+  --layl-surface-active:#252A21!important;
+  --layl-surface-input:#0A0E0C!important;
+  --layl-surface-glass:rgba(16,20,17,.94)!important;
+
+  --layl-olive-deep:#24271E!important;
+  --layl-olive-base:#303328!important;
+  --layl-olive-medium:#3A3D30!important;
+  --layl-olive-soft:#474936!important;
+  --layl-olive-gold:#56543A!important;
+
+  --layl-petrol-deep:#171E1C!important;
+  --layl-petrol-soft:#1C2522!important;
+
+  --layl-gold-deep:#806A3C!important;
+  --layl-gold-base:#A88B4F!important;
+  --layl-gold-medium:#C0A263!important;
+  --layl-gold-soft:#D8C18B!important;
+  --layl-cream-gold:#E8D7B3!important;
+  --layl-ivory-warm:#F1EBDE!important;
+
+  --layl-text-primary:#F1EDE3!important;
+  --layl-text-body:#D5D6CF!important;
+  --layl-text-secondary:#B8BCB5!important;
+  --layl-text-muted:#8C938C!important;
+  --layl-text-subtle:#6F766F!important;
+  --layl-text-gold:#D8C18B!important;
+  --layl-text-cream:#E8D7B3!important;
+  --layl-text-link:#C0A263!important;
+
+  --layl-accent-active:#969978!important;
+  --layl-accent-active-soft:#AAA98A!important;
+  --layl-accent-focus:rgba(192,162,99,.26)!important;
+  --layl-accent-hover:rgba(216,193,139,.09)!important;
+
+  --layl-border-subtle:rgba(168,139,79,.075)!important;
+  --layl-border-default:rgba(168,139,79,.13)!important;
+  --layl-border-active:rgba(216,193,139,.22)!important;
+  --layl-border-neutral:rgba(241,237,227,.065)!important;
+  --layl-divider:rgba(241,237,227,.07)!important;
+
+  --layl-shadow-card:0 14px 34px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.025)!important;
+  --layl-shadow-elevated:0 20px 46px rgba(0,0,0,.37),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  --layl-shadow-control:0 8px 20px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.025)!important;
+
+  --layl-success:#91B694!important;
+  --layl-warning:#D5B76E!important;
+  --layl-danger:#DF958F!important;
+  --layl-info:#9CB4AD!important;
+
+  --bg:var(--layl-bg-base)!important;
+  --bg2:var(--layl-bg-elevated)!important;
+  --panel:var(--layl-surface-1)!important;
+  --card:var(--layl-surface-2)!important;
+  --page-cover:var(--layl-bg-deep)!important;
+  --page-cover-mid:var(--layl-bg-base)!important;
+  --gold:var(--layl-gold-base)!important;
+  --gold2:var(--layl-gold-soft)!important;
+  --bronze:var(--layl-gold-deep)!important;
+  --cream:var(--layl-text-primary)!important;
+  --text:var(--layl-text-primary)!important;
+  --muted:var(--layl-text-secondary)!important;
+  --muted2:var(--layl-text-muted)!important;
+  --line:var(--layl-border-default)!important;
+  --line2:var(--layl-border-subtle)!important;
+  --shadow:var(--layl-shadow-elevated)!important;
   --danger:var(--layl-danger)!important;
-  --premium-border:rgba(123,215,186,.17)!important;
-  --premium-bg:radial-gradient(circle at 14% 0%,rgba(50,111,91,.17),transparent 34%),radial-gradient(circle at 88% 12%,rgba(33,70,60,.11),transparent 30%),linear-gradient(165deg,#101A17 0%,#0B1210 48%,#080C0B 100%)!important;
-  --premium-shadow:0 16px 38px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.035)!important;
-  --premium-label:var(--layl-gold-soft)!important;
-  --premium-title:var(--layl-text-primary)!important;
-  --premium-body:var(--layl-text-secondary)!important;
-  --premium-pill-border:rgba(123,215,186,.30)!important;
-  --premium-pill-bg:linear-gradient(135deg,#2A5A4C,#1B3D34)!important;
-  --premium-pill-text:var(--layl-text-primary)!important;
-  --theme-logo-ring:rgba(201,170,102,.20)!important;
-  --theme-logo-glow:rgba(105,201,170,.12)!important;
-  --theme-deck-aura:radial-gradient(circle at 14% 0%,rgba(105,201,170,.12),transparent 38%),radial-gradient(circle at 86% 12%,rgba(33,70,60,.14),transparent 36%)!important;
+
+  --premium-border:var(--layl-border-default)!important;
+  --premium-line:var(--layl-divider)!important;
+  --premium-panel:linear-gradient(145deg,rgba(22,28,24,.98),rgba(13,17,15,.98))!important;
+  --premium-bg:radial-gradient(circle at 14% 0%,rgba(168,139,79,.065),transparent 29%),radial-gradient(circle at 86% 10%,rgba(28,37,34,.055),transparent 25%),linear-gradient(168deg,#101310 0%,#090D0B 48%,#050706 100%)!important;
+  --premium-shadow:var(--layl-shadow-card)!important;
+  --premium-label:var(--layl-text-gold)!important;
+  --premium-title:var(--layl-text-cream)!important;
+  --premium-body:var(--layl-text-body)!important;
+  --premium-pill-border:rgba(216,193,139,.20)!important;
+  --premium-pill-bg:rgba(168,139,79,.095)!important;
+  --premium-pill-text:var(--layl-text-gold)!important;
+
+  --theme-logo-ring:rgba(168,139,79,.15)!important;
+  --theme-logo-glow:rgba(168,139,79,.10)!important;
+  --theme-deck-aura:radial-gradient(circle at 14% 0%,rgba(168,139,79,.08),transparent 34%),radial-gradient(circle at 86% 10%,rgba(28,37,34,.06),transparent 28%)!important;
+
   --theme-feed-bg:var(--premium-bg)!important;
-  --theme-feed-panel:rgba(16,26,23,.88)!important;
-  --theme-feed-panel-capture:rgba(8,12,11,.68)!important;
+  --theme-feed-panel:rgba(14,19,16,.92)!important;
+  --theme-feed-panel-capture:rgba(5,7,6,.70)!important;
   --theme-feed-panel-text:var(--layl-text-primary)!important;
-  --theme-feed-panel-border:rgba(123,215,186,.16)!important;
-  --theme-feed-chip:rgba(16,26,23,.68)!important;
-  --theme-feed-badge-bg:rgba(16,26,23,.72)!important;
-  --theme-feed-badge-border:rgba(123,215,186,.24)!important;
-  --theme-feed-overlay:linear-gradient(180deg,rgba(5,10,8,.06) 0%,rgba(5,10,8,.24) 45%,rgba(5,10,8,.44) 100%)!important;
-  --theme-feed-top:linear-gradient(180deg,rgba(16,26,23,.96),rgba(11,18,16,.84) 72%,transparent)!important;
-  --theme-feed-grad:radial-gradient(circle at 18% 14%,rgba(105,201,170,.12),transparent 38%),linear-gradient(165deg,#101A17 0%,#0B1210 48%,#080C0B 100%)!important;
-  --theme-feed-img-fallback:#0B1210!important;
-  --theme-feed-switch-bg:rgba(23,39,34,.42)!important;
-  --theme-feed-switch-border:rgba(123,215,186,.18)!important;
-  --theme-feed-filter-bg:rgba(23,39,34,.36)!important;
-  --theme-feed-filter-border:rgba(123,215,186,.14)!important;
-  --theme-feed-filter-active:linear-gradient(135deg,rgba(105,201,170,.18),rgba(36,80,68,.22))!important;
-  --theme-feed-act-bg:rgba(23,39,34,.34)!important;
-  --theme-feed-act-border:rgba(123,215,186,.12)!important;
+  --theme-feed-panel-border:var(--layl-border-default)!important;
+  --theme-feed-chip:rgba(17,22,19,.90)!important;
+  --theme-feed-badge-bg:rgba(17,22,19,.90)!important;
+  --theme-feed-badge-border:var(--layl-border-default)!important;
+  --theme-feed-overlay:linear-gradient(180deg,rgba(5,7,6,.08) 0%,rgba(5,7,6,.30) 45%,rgba(5,7,6,.50) 100%)!important;
+  --theme-feed-top:linear-gradient(180deg,rgba(16,20,17,.96),rgba(8,11,10,.86) 72%,transparent)!important;
+  --theme-feed-grad:var(--premium-bg)!important;
+  --theme-feed-img-fallback:#080B0A!important;
+  --theme-feed-switch-bg:rgba(36,39,30,.62)!important;
+  --theme-feed-switch-border:var(--layl-border-default)!important;
+  --theme-feed-filter-bg:rgba(17,22,19,.90)!important;
+  --theme-feed-filter-border:var(--layl-border-subtle)!important;
+  --theme-feed-filter-active:linear-gradient(135deg,#393B2D,#222720)!important;
+  --theme-feed-act-bg:rgba(20,26,22,.86)!important;
+  --theme-feed-act-border:var(--layl-border-default)!important;
   --theme-feed-trans:var(--layl-gold-soft)!important;
-  --theme-feed-mark:rgba(201,170,102,.58)!important;
-  --theme-feed-signature:rgba(201,170,102,.82)!important;
-  --theme-feed-switch-active:linear-gradient(135deg,rgba(105,201,170,.24),rgba(36,80,68,.24))!important;
-  --theme-feed-head-border:rgba(123,215,186,.14)!important;
-  --theme-feed-avatar-bg:linear-gradient(145deg,rgba(105,201,170,.36),rgba(36,80,68,.48))!important;
-  --theme-feed-dua-divider:rgba(123,215,186,.12)!important;
+  --theme-feed-mark:rgba(168,139,79,.58)!important;
+  --theme-feed-signature:rgba(216,193,139,.82)!important;
+  --theme-feed-switch-active:rgba(168,139,79,.08)!important;
+  --theme-feed-head-border:var(--layl-border-subtle)!important;
+  --theme-feed-avatar-bg:linear-gradient(145deg,rgba(86,84,58,.52),rgba(36,39,30,.62))!important;
+  --theme-feed-dua-divider:var(--layl-divider)!important;
 }
 html[data-theme="dar-al-layl"],
 html[data-theme="dar-al-layl"] body{
   background:var(--premium-bg)!important;
   color:var(--text)!important;
 }
-html[data-theme="dar-al-layl"] body:before{opacity:.04!important;filter:hue-rotate(14deg) saturate(.92)!important}
+html[data-theme="dar-al-layl"] body:before{opacity:.03!important;filter:none!important}
 html[data-theme="dar-al-layl"] .top-shell,
 html[data-theme="dar-al-layl"] .view,
 html[data-theme="dar-al-layl"] .premium-surface,
@@ -5106,16 +5158,18 @@ html[data-theme="dar-al-layl"] .ilm-composer,
 html[data-theme="dar-al-layl"] .ilm-message-card,
 html[data-theme="dar-al-layl"] .ilm-loading-card,
 html[data-theme="dar-al-layl"] .ilm-empty-state{
-  background:linear-gradient(145deg,rgba(24,41,35,.98),rgba(14,24,20,.98))!important;
-  border-color:rgba(123,215,186,.17)!important;
-  box-shadow:0 16px 38px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.035)!important;
-  color:var(--text)!important;
+  background:linear-gradient(145deg,rgba(22,28,24,.98),rgba(13,17,15,.98))!important;
+  border-color:var(--layl-border-default)!important;
+  box-shadow:var(--layl-shadow-card)!important;
+  color:var(--layl-text-primary)!important;
 }
 html[data-theme="dar-al-layl"] .app-bar,
 html[data-theme="dar-al-layl"] .header-prayer-status,
-html[data-theme="dar-al-layl"] .crumb{
-  background:rgba(23,39,34,.94)!important;
-  border-color:rgba(201,170,102,.16)!important;
+html[data-theme="dar-al-layl"] .crumb,
+html[data-theme="dar-al-layl"] .chat-head,
+html[data-theme="dar-al-layl"] .ilm-chat-head{
+  background:#0D120F!important;
+  border-color:rgba(168,139,79,.15)!important;
   color:var(--layl-text-primary)!important;
 }
 html[data-theme="dar-al-layl"] .social-link,
@@ -5138,10 +5192,12 @@ html[data-theme="dar-al-layl"] .quran-jump-btn,
 html[data-theme="dar-al-layl"] .quran-tafsir-tab,
 html[data-theme="dar-al-layl"] .quran-wake-btn,
 html[data-theme="dar-al-layl"] .quran-tr-btn,
-html[data-theme="dar-al-layl"] .account-actions button{
-  background:linear-gradient(135deg,#2A5A4C,#1B3D34)!important;
-  border-color:rgba(123,215,186,.30)!important;
-  color:var(--layl-text-primary)!important;
+html[data-theme="dar-al-layl"] .account-actions button,
+html[data-theme="dar-al-layl"] .hint-btn,
+html[data-theme="dar-al-layl"] .chat-send-btn{
+  background:linear-gradient(135deg,#393B2D,#222720)!important;
+  border-color:rgba(216,193,139,.19)!important;
+  color:#F1EDE3!important;
 }
 html[data-theme="dar-al-layl"] .action-btn.active,
 html[data-theme="dar-al-layl"] .prayer-action-btn.active,
@@ -5149,10 +5205,13 @@ html[data-theme="dar-al-layl"] .float-btn.push-active,
 html[data-theme="dar-al-layl"] .quran-tafsir-tab.active,
 html[data-theme="dar-al-layl"] .quran-wake-btn.is-on,
 html[data-theme="dar-al-layl"] .quran-tr-btn.active,
-html[data-theme="dar-al-layl"] .theme-switch-btn.is-active{
-  background:radial-gradient(circle at 18% 0%,rgba(105,201,170,.11),transparent 42%),linear-gradient(145deg,#1A3029,#11201B)!important;
-  border-color:rgba(123,215,186,.31)!important;
-  color:var(--layl-text-primary)!important;
+html[data-theme="dar-al-layl"] .theme-switch-btn.is-active,
+html[data-theme="dar-al-layl"] .chip.active,
+html[data-theme="dar-al-layl"] .filter-chip.active,
+html[data-theme="dar-al-layl"] .tab.active{
+  background:#252A21!important;
+  border-color:rgba(216,193,139,.21)!important;
+  color:#E8D7B3!important;
 }
 html[data-theme="dar-al-layl"] .search,
 html[data-theme="dar-al-layl"] .direct-pick,
@@ -5160,63 +5219,80 @@ html[data-theme="dar-al-layl"] .filter-select,
 html[data-theme="dar-al-layl"] .account-form input,
 html[data-theme="dar-al-layl"] input,
 html[data-theme="dar-al-layl"] textarea,
-html[data-theme="dar-al-layl"] select{
-  background:#101A17!important;
-  border-color:rgba(123,215,186,.15)!important;
-  color:#F4F1E8!important;
-  caret-color:#7BD7BA!important;
+html[data-theme="dar-al-layl"] select,
+html[data-theme="dar-al-layl"] .ilm-composer-input{
+  background:#090D0B!important;
+  border-color:rgba(168,139,79,.10)!important;
+  color:#F1EDE3!important;
+  caret-color:#D8C18B!important;
 }
 html[data-theme="dar-al-layl"] input::placeholder,
 html[data-theme="dar-al-layl"] textarea::placeholder,
-html[data-theme="dar-al-layl"] .search::placeholder{color:#929E98!important}
+html[data-theme="dar-al-layl"] .search::placeholder{color:#8C938C!important}
+html[data-theme="dar-al-layl"] .search:focus,
+html[data-theme="dar-al-layl"] .direct-pick:focus,
+html[data-theme="dar-al-layl"] .filter-select:focus,
+html[data-theme="dar-al-layl"] input:focus,
+html[data-theme="dar-al-layl"] textarea:focus,
+html[data-theme="dar-al-layl"] select:focus{box-shadow:0 0 0 3px rgba(192,162,99,.26)!important;border-color:rgba(216,193,139,.25)!important}
 html[data-theme="dar-al-layl"] .bottom-nav{
-  background:rgba(13,24,21,.96)!important;
-  border-color:rgba(123,215,186,.16)!important;
+  background:linear-gradient(180deg,rgba(18,23,20,.96),rgba(7,11,9,.98))!important;
+  border-color:rgba(168,139,79,.12)!important;
   box-shadow:0 8px 22px rgba(0,0,0,.32)!important;
 }
-html[data-theme="dar-al-layl"] .bottom-nav-btn{color:#929E98!important;text-shadow:none!important}
+html[data-theme="dar-al-layl"] .bottom-nav-btn{color:#8C938C!important;text-shadow:none!important}
 html[data-theme="dar-al-layl"] .bottom-nav-btn.active,
 html[data-theme="dar-al-layl"] .bottom-nav-btn.is-pressed,
-html[data-theme="dar-al-layl"] .bottom-nav-btn:active{color:#F0DFC0!important}
-html[data-theme="dar-al-layl"] .bottom-nav-pill{background:linear-gradient(135deg,rgba(105,201,170,.24),rgba(36,80,68,.24))!important;box-shadow:0 4px 16px rgba(0,0,0,.26)!important}
-html[data-theme="dar-al-layl"] .theme-switch-btn.is-active:after{background:#7BD7BA!important;color:#0b1a16!important}
+html[data-theme="dar-al-layl"] .bottom-nav-btn:active{color:#E8D7B3!important}
+html[data-theme="dar-al-layl"] .bottom-nav-pill{background:rgba(168,139,79,.08)!important;box-shadow:0 4px 16px rgba(0,0,0,.26)!important}
+html[data-theme="dar-al-layl"] .theme-switch-btn.is-active:after{background:#A88B4F!important;color:#1a170f!important}
 html[data-theme="dar-al-layl"] .badge,
 html[data-theme="dar-al-layl"] .folder-meta span,
 html[data-theme="dar-al-layl"] .status-chip,
 html[data-theme="dar-al-layl"] .search-match,
-html[data-theme="dar-al-layl"] .quran-surah-card .quran-num{background:rgba(27,48,41,.92)!important;border-color:rgba(123,215,186,.24)!important;color:#E2C98F!important}
-html[data-theme="dar-al-layl"] .quran-ayah{
-  border-color:rgba(216,191,134,.34)!important;
-  box-shadow:inset 0 0 0 1px rgba(216,191,134,.08)!important;
-  background:radial-gradient(circle at 18% 0%,rgba(216,191,134,.07),transparent 44%),linear-gradient(145deg,rgba(23,31,28,.98),rgba(13,18,17,.98))!important;
+html[data-theme="dar-al-layl"] .chip,
+html[data-theme="dar-al-layl"] .filter-chip{
+  background:rgba(17,22,19,.90)!important;
+  border-color:rgba(168,139,79,.09)!important;
+  color:#B8BCB5!important;
 }
+html[data-theme="dar-al-layl"] .quran-surah-card .quran-num{background:#1A201B!important;border-color:rgba(168,139,79,.18)!important;color:#D8C18B!important}
+html[data-theme="dar-al-layl"] .quran-ayah{border-color:rgba(216,193,139,.22)!important;background:#0E1310!important;box-shadow:inset 0 0 0 1px rgba(216,193,139,.06)!important}
 html[data-theme="dar-al-layl"] .quran-ayah-ar,
 html[data-theme="dar-al-layl"] .quran-surah-head-ar,
-html[data-theme="dar-al-layl"] .dua-arabic{
-  color:#F2E7CF!important;
-  text-shadow:0 1px 0 rgba(0,0,0,.32);
-}
+html[data-theme="dar-al-layl"] .dua-arabic{color:#EFE5D2!important}
 html[data-theme="dar-al-layl"] .quran-ayah-tr,
 html[data-theme="dar-al-layl"] .quran-result-tr,
-html[data-theme="dar-al-layl"] .dua-trans{color:#BBC7BF!important}
+html[data-theme="dar-al-layl"] .dua-trans{color:#BFC5BD!important}
 html[data-theme="dar-al-layl"] .quran-ayah-de,
 html[data-theme="dar-al-layl"] .quran-result-de,
 html[data-theme="dar-al-layl"] .dua-de,
 html[data-theme="dar-al-layl"] .statement,
 html[data-theme="dar-al-layl"] .source-row,
-html[data-theme="dar-al-layl"] .source-row b{color:#E2E6E0!important}
-html[data-theme="dar-al-layl"] .quran-ayah-tr-wrap{
-  border-top:1px solid rgba(216,191,134,.18)!important;
-  padding-top:8px!important;
-}
+html[data-theme="dar-al-layl"] .source-row b,
+html[data-theme="dar-al-layl"] .ilm-message-text,
+html[data-theme="dar-al-layl"] .chat-msg-text{color:#D5D6CF!important}
 html[data-theme="dar-al-layl"] .event-date,
 html[data-theme="dar-al-layl"] .statement em,
 html[data-theme="dar-al-layl"] .script-accent,
-html[data-theme="dar-al-layl"] .quran-ayah-num{color:#E2C98F!important}
-html[data-theme="dar-al-layl"] .error{color:#E89B95!important}
+html[data-theme="dar-al-layl"] .quran-ayah-num,
+html[data-theme="dar-al-layl"] .header-prayer-item span,
+html[data-theme="dar-al-layl"] .qibla-angle,
+html[data-theme="dar-al-layl"] .qibla-direction{color:#D8C18B!important}
+html[data-theme="dar-al-layl"] .header-prayer-item b,
+html[data-theme="dar-al-layl"] .header-prayer-item small,
+html[data-theme="dar-al-layl"] .quran-meta-note,
+html[data-theme="dar-al-layl"] .source-preview,
+html[data-theme="dar-al-layl"] .quran-ayah-tr-label,
+html[data-theme="dar-al-layl"] .quran-ayah-num small{color:#8C938C!important}
+html[data-theme="dar-al-layl"] .ilm-message-user,
+html[data-theme="dar-al-layl"] .chat-msg-user{background:#252A21!important;border-color:rgba(216,193,139,.18)!important}
+html[data-theme="dar-al-layl"] .ilm-message-assistant,
+html[data-theme="dar-al-layl"] .chat-msg-assistant{background:#0E1310!important;border-color:rgba(168,139,79,.12)!important}
+html[data-theme="dar-al-layl"] .error{color:#DF958F!important}
 html[data-theme="dar-al-layl"] .theme-switch-btn,
 html[data-theme="dar-al-layl"] .float-touch-handle,
-html[data-theme="dar-al-layl"] .float-btn{box-shadow:0 10px 26px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.04)!important}
+html[data-theme="dar-al-layl"] .float-btn{box-shadow:var(--layl-shadow-control)!important}
 
 /* IMPERIAL AURORA PREMIUM — Referenz-Look: Schwarz-Grün, Champagner-Gold, Creme-News */
 html[data-theme="aurora"]{
@@ -9632,7 +9708,7 @@ function isFormEditingNow(){
 document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFormPointerAt=Date.now()},{capture:true,passive:true});
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#0B1210",status:"black",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="bordeaux")root.style.backgroundColor=""}))}
