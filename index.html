@@ -8549,16 +8549,24 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
   justify-content:space-between!important;
   gap:10px!important;
   margin:0 0 clamp(20px,4vw,28px)!important;
+  flex-wrap:nowrap!important;
 }
 .top-shell.theme-hero-shell .brand small{
   margin:0!important;
   line-height:1.25!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
 }
 .top-shell.theme-hero-shell .hijri-header-pill{
   min-height:34px!important;
   padding:6px 10px!important;
   font-size:10px!important;
   letter-spacing:.01em!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+  min-width:136px!important;
 }
 .top-shell.theme-hero-shell .brand-main{
   display:grid!important;
@@ -8617,6 +8625,8 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
   padding-top:clamp(20px,3.6vw,24px)!important;
 }
 @media(max-width:700px){
+  .top-shell.theme-hero-shell .brand-kicker-row{gap:8px!important}
+  .top-shell.theme-hero-shell .hijri-header-pill{min-width:128px!important;font-size:9.5px!important;padding:6px 9px!important}
   .top-shell.theme-hero-shell .header{
     padding-top:max(24px,calc(env(safe-area-inset-top,0px) + 12px))!important;
     padding-right:clamp(20px,6vw,24px)!important;
@@ -8642,6 +8652,9 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
   }
 }
 @media(max-width:360px){
+  .top-shell.theme-hero-shell .brand-kicker-row{flex-wrap:wrap!important}
+  .top-shell.theme-hero-shell .brand small{flex-basis:100%!important}
+  .top-shell.theme-hero-shell .hijri-header-pill{min-width:0!important;width:max-content!important;max-width:100%!important}
   .top-shell.theme-hero-shell .header-tools{
     grid-template-columns:1fr!important;
     gap:10px!important;
@@ -8687,7 +8700,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
         <div class="brand">
           <div class="brand-kicker-row">
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
-            <button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Datum wird geladen…</button>
+            <button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Islamisches Datum</button>
           </div>
           <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
         </div>
