@@ -1257,6 +1257,19 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 .ilm-thread-row-new span{margin-top:0;font-size:12px;line-height:1.35}
 .ilm-composer-bar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
 .ilm-composer-inner{padding-top:4px;padding-bottom:4px}
+.ilm-confidence{display:inline-flex;align-items:center;border:1px solid var(--ilm-border);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:850;color:var(--ilm-accent);margin-bottom:4px}
+.ilm-section-title{margin:10px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ilm-accent);font-weight:900}
+.ilm-source-cards{display:grid;gap:10px;margin-top:6px}
+.ilm-source-card-v2{border:1px solid var(--ilm-border);border-radius:16px;background:color-mix(in srgb,var(--ilm-header-bg) 72%,white 3%);padding:12px;display:grid;gap:6px}
+.ilm-source-card-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ilm-source-type,.ilm-source-origin{font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ilm-secondary-text)}
+.ilm-source-origin{color:var(--ilm-accent)}
+.ilm-source-card-v2 b{font-size:14px;line-height:1.35;color:var(--ilm-primary-text)}
+.ilm-source-ref{font-size:12px;color:var(--ilm-secondary-text);line-height:1.4}
+.ilm-source-card-v2 p{margin:0;font-size:13px;line-height:1.5;color:var(--ilm-primary-text)}
+.ilm-source-open{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 12px;border-radius:999px;border:1px solid var(--ilm-border);background:color-mix(in srgb,var(--ilm-accent) 12%,transparent);color:var(--ilm-primary-text);font-size:12px;font-weight:900;text-decoration:none;width:max-content}
+.ilm-clarify-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.ilm-clarify-chip{border:1px solid var(--ilm-border);border-radius:999px;background:color-mix(in srgb,var(--ilm-header-bg) 70%,white 4%);color:var(--ilm-primary-text);min-height:34px;padding:7px 11px;font-size:12px;font-weight:850;cursor:pointer;text-align:left}
 .feature-section{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:0 16px 42px rgba(0,0,0,.18);padding:14px;overflow:hidden}.feature-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}.feature-head h3{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(22px,4vw,32px);line-height:1.1}.feature-head span{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:4px}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature-card{position:relative;min-width:0;border:1px solid rgba(214,180,106,.28);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));padding:12px;display:grid;gap:9px;overflow:hidden}.feature-card-top{display:flex;align-items:flex-start;gap:10px}.feature-icon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(214,180,106,.26);background:rgba(214,180,106,.10);font-size:20px}.feature-card h4{margin:0;color:var(--text);font-size:15px;line-height:1.2;overflow-wrap:anywhere}.feature-card p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.42;overflow-wrap:anywhere}.feature-card-actions{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.feature-open,.feature-pin,.feature-dismiss{min-height:38px;border:1px solid rgba(214,180,106,.28);border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);font-size:12px;font-weight:950;padding:8px 10px}.feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:none!important;text-shadow:none!important}.feature-pin{width:38px;padding:0}.feature-badge{position:absolute;right:10px;top:10px;border:1px solid rgba(214,180,106,.30);border-radius:999px;background:rgba(214,180,106,.12);color:var(--gold);font-size:9px;font-weight:950;padding:3px 7px}.feature-hint{border:1px solid rgba(214,180,106,.34);border-radius:20px;background:linear-gradient(135deg,rgba(214,180,106,.13),rgba(255,255,255,.035));padding:13px;margin-bottom:10px}.feature-hint h3{margin:0;color:var(--text);font-size:18px}.feature-hint p{margin:6px 0 10px;color:var(--muted);font-size:13px;line-height:1.5}.feature-hint-actions{display:flex;gap:8px;flex-wrap:wrap}.more-search{width:100%;min-height:46px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.065);color:var(--text);padding:11px 14px;font:inherit;outline:none}.more-group{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:12px;margin-top:12px}.more-group h3{margin:0 0 9px;color:var(--text);font-size:18px}.more-group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.more-group.is-hidden{display:none!important}.more-feature-row{position:relative;border:1px solid rgba(214,180,106,.22);border-radius:17px;background:rgba(255,255,255,.045);padding:10px;display:flex;gap:9px;align-items:center;min-height:62px}.more-feature-row h4{margin:0;color:var(--text);font-size:13px;line-height:1.2}.more-feature-row p{margin:2px 0 0;color:var(--muted);font-size:10px;line-height:1.25}.more-feature-row.is-hidden{display:none!important}@media(max-width:700px){.feature-section,.more-group{margin-right:50px}.feature-open{min-height:40px}}@media(max-width:430px){.feature-grid,.more-group-grid{grid-template-columns:1fr}.feature-card{padding:11px}.feature-head{display:block}.feature-card-actions{grid-template-columns:1fr 38px}}
 .bottom-nav{--nav-pill-left:5px;--nav-pill-width:64px;position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm);z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:0;padding:5px;border:1px solid rgba(255,255,255,.08);border-radius:27px;background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(10px) saturate(1.08);backdrop-filter:blur(10px) saturate(1.08);box-shadow:0 6px 18px rgba(0,0,0,.14);overflow:hidden;isolation:isolate;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
 #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:max(14px,env(safe-area-inset-left))!important;right:max(14px,env(safe-area-inset-right))!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important}
@@ -10149,6 +10162,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 </div>
 
 <script src="/assets/slide-post-parser.js?v=2"></script>
+<script src="/assets/ilm-majlis-v2.js?v=1"></script>
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
@@ -11074,8 +11088,14 @@ function newIlmConversationRecord(seedTitle="Neues Gespräch"){
     updatedAt:ilmNowIso(),
     draft:"",
     scrollTop:0,
+    answerMode:"detailed",
     messages:[]
   };
+}
+function getIlmAnswerMode(conversation){
+  const mode=String(conversation?.answerMode||"detailed");
+  if(mode==="short"||mode==="sources"||mode==="detailed")return mode;
+  return "detailed";
 }
 function getIlmStore(){
   const store=loadIlmStore();
@@ -11162,6 +11182,11 @@ function ilmExpandQueryToken(token){
   if(token==="dua")variants.add("bittgebet");
   if(token==="aqidah"){variants.add("iman");variants.add("glaube")}
   if(token==="tawhid")variants.add("tauhid");
+  if(window.IlmMajlisV2){
+    window.IlmMajlisV2.expandSynonyms([token]).forEach(item=>{
+      item.split(" ").forEach(part=>{if(part)variants.add(part)});
+    });
+  }
   return [...variants];
 }
 function ilmBuildQueryProfile(question){
@@ -11242,7 +11267,8 @@ function buildIlmConversationReply(text){
     sourceHints:[]
   };
 }
-function buildIlmClarificationReply(){
+function buildIlmClarificationReply(question){
+  if(window.IlmMajlisV2)return window.IlmMajlisV2.buildSmartClarificationReply(question);
   return {
     title:"Rückfrage",
     status:"clarification",
@@ -11637,6 +11663,14 @@ function ilmNeedsExternalResearch(matches){
   return !Array.isArray(matches)||!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2;
 }
 function buildIlmFallbackReply(question,matches,externalResults=null){
+  if(window.IlmMajlisV2){
+    const reply=window.IlmMajlisV2.buildInsufficientReply(question,matches,externalResults,{
+      lastFallbackHash:ilmLastFallbackHash,
+      buildExternalSource:buildIlmExternalResearchSource
+    });
+    ilmLastFallbackHash=reply._fallbackHash||ilmLastFallbackHash;
+    return reply;
+  }
   const related=(matches||[]).slice(0,3).map(item=>({title:item.title,route:item.route,kind:item.kind}));
   const external=buildIlmExternalResearchSource(question,externalResults||[]);
   const hasServerResults=Array.isArray(externalResults)&&externalResults.some(item=>item.snippet||item.reachable);
@@ -11659,8 +11693,17 @@ function ilmAnswerLeadLine(source,mode="normal"){
   const quote=ilmClip(source.excerpt||source.body,mode==="long"?240:160);
   return quote?`${head}: ${quote}`:head;
 }
-function buildIlmAssistantReply(question,matches,mode="normal"){
-  const externalResults=Array.isArray(arguments[3])?arguments[3]:null;
+function buildIlmAssistantReply(question,matches,mode="normal",externalResults=null){
+  const answerMode=mode==="proofs"?"detailed":mode==="simple"?"short":mode==="sources"?"sources":mode==="short"?"short":mode==="detailed"?"detailed":"detailed";
+  if(window.IlmMajlisV2){
+    if(!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches,externalResults);
+    return window.IlmMajlisV2.buildSourcedReply(question,matches,{
+      mode:answerMode,
+      externalResults,
+      language:window.IlmMajlisV2.detectLanguage(question),
+      buildSourceGroups:buildIlmSourceGroups
+    });
+  }
   if(!matches.length)return buildIlmFallbackReply(question,[],externalResults);
   if(Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches,externalResults);
   const groups=buildIlmSourceGroups(matches);
@@ -11699,26 +11742,60 @@ function ilmUniqueSources(list){
 function ilmReferenceMarkers(count){
   return Array.from({length:Math.min(count,3)},(_,idx)=>`<span class="ilm-citation">[${idx+1}]</span>`).join(" ");
 }
+function renderIlmSourceCards(reply){
+  const sources=Array.isArray(reply?.sources)?reply.sources:(reply?.sourceGroups||[]).flatMap(g=>(g.items||[]).map(item=>({type:item.kind||"Scholar",author:item.speaker||"",work:item.work||item.title||"",reference:item.reference||"",url:(item.links||[]).find(l=>/^https?:/i.test(l.url))?.url||"",origin:item.kind==="external"?"external":"internal",excerpt:item.excerpt||"",note:item.sourceTag||""})));
+  if(!sources.length)return "";
+  return `<div class="ilm-source-cards">${sources.slice(0,8).map((src,idx)=>`<article class="ilm-source-card-v2">
+    <div class="ilm-source-card-head"><span class="ilm-source-type">${esc(src.type||"Quelle")}</span><span class="ilm-source-origin">${esc(src.origin==="external"?"Externe Recherche":"Intern geprüft")}</span></div>
+    <b>${esc([src.author,src.work].filter(Boolean).join(" · ")||"Fundstelle")}</b>
+    ${src.reference?`<div class="ilm-source-ref">${esc(src.reference)}</div>`:""}
+    ${src.excerpt?`<p>${esc(ilmClip(src.excerpt,180))}</p>`:""}
+    ${src.url?`<a class="ilm-source-open" href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">Quelle öffnen</a>`:""}
+  </article>`).join("")}</div>`;
+}
 function renderIlmAnswerText(reply,isFirstAssistant){
   const parts=[];
+  const confidence=reply?.confidence?.label?`<div class="ilm-confidence">${esc(reply.confidence.label)}</div>`:"";
   if(reply?.status==="conversation"){
     parts.push(`<p>${esc(reply.directAnswer||"Ich bin bereit. Stelle mir gern deine Frage.")}</p>`);
     return parts.join("");
   }
   if(reply?.status==="clarification"){
     parts.push(`<p>${esc(reply.directAnswer||"Ich konnte noch keine konkrete Frage erkennen.")}</p>`);
-    return parts.join("");
-  }
-  if(reply?.status==="unavailable"){
-    parts.push(`<p>${esc(reply.intro||"Zu dieser Frage liegt keine ausreichend belegte Fundstelle vor.")}</p>`);
+    const opts=Array.isArray(reply.clarificationOptions)?reply.clarificationOptions:(reply.followUpQuestions||[]);
+    if(opts.length)parts.push(`<div class="ilm-clarify-chips">${opts.map((opt,i)=>`<button type="button" class="ilm-clarify-chip" data-ilm-clarify="${esc(opt)}">${i+1}. ${esc(opt)}</button>`).join("")}</div>`);
     if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
     return parts.join("");
   }
+  if(reply?.status==="personal_case"){
+    parts.push(confidence);
+    parts.push(`<h4 class="ilm-section-title">Direkte Antwort</h4><p>${esc(reply.directAnswer||"")}</p>`);
+    if(reply.explanation)parts.push(`<h4 class="ilm-section-title">Einordnung</h4><p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    if(reply.summary)parts.push(`<h4 class="ilm-section-title">Kurzes Ergebnis</h4><p>${esc(reply.summary)}</p>`);
+    parts.push(renderIlmSourceCards(reply));
+    return parts.join("");
+  }
+  if(reply?.status==="unavailable"){
+    parts.push(confidence);
+    parts.push(`<p>${esc(reply.intro||"Zu dieser Frage liegt keine ausreichend belegte Fundstelle vor.")}</p>`);
+    if(reply.directAnswer)parts.push(`<p><strong>${esc(reply.directAnswer)}</strong></p>`);
+    if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    const follow=Array.isArray(reply.followUpQuestions)?reply.followUpQuestions:[];
+    if(follow.length)parts.push(`<div class="ilm-clarify-chips">${follow.map(opt=>`<button type="button" class="ilm-clarify-chip" data-ilm-clarify="${esc(opt)}">${esc(opt)}</button>`).join("")}</div>`);
+    parts.push(renderIlmSourceCards(reply));
+    return parts.join("");
+  }
+  parts.push(confidence);
   if(isFirstAssistant&&reply?.intro)parts.push(`<p>${esc(reply.intro)}</p>`);
+  parts.push(`<h4 class="ilm-section-title">Direkte Antwort</h4>`);
   String(reply?.directAnswer||"").split(/\n{2,}/).filter(Boolean).forEach((text,idx)=>{
     parts.push(`<p>${esc(text)} ${idx<3?`<span class="ilm-citation">[${idx+1}]</span>`:""}</p>`);
   });
-  if(reply?.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+  if(reply?.explanation)parts.push(`<h4 class="ilm-section-title">Einordnung</h4><p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+  if(Array.isArray(reply?.differencesOfOpinion)&&reply.differencesOfOpinion.length)parts.push(`<h4 class="ilm-section-title">Meinungsunterschiede</h4><p class="ilm-answer-note">${esc(reply.differencesOfOpinion.join(" "))}</p>`);
+  if(reply?.summary)parts.push(`<h4 class="ilm-section-title">Kurzes Ergebnis</h4><p>${esc(reply.summary)}</p>`);
+  parts.push(`<h4 class="ilm-section-title">Quellen</h4>`);
+  parts.push(renderIlmSourceCards(reply));
   return parts.join("")||`<p>${esc(reply?.intro||"Keine Antwort vorhanden.")}</p>`;
 }
 function renderIlmAssistantMessage(message,isFirstAssistant=false){
@@ -11727,7 +11804,7 @@ function renderIlmAssistantMessage(message,isFirstAssistant=false){
   const relatedCount=Array.isArray(reply.related)?reply.related.length:0;
   const canRefine=reply.status==="ok";
   return `<article class="ilm-assistant-message" data-ilm-assistant="${esc(message.id)}">
-    <div class="ilm-assistant-name">ʿIlm</div>
+    <div class="ilm-assistant-name">Majlis al-ʿIlm</div>
     <div class="ilm-answer-text">${renderIlmAnswerText(reply,isFirstAssistant)}</div>
     <div class="ilm-answer-toolbar">
       ${sourceCount?`<button class="ilm-action-link primary" type="button" data-ilm-show-sources="${esc(message.id)}">${sourceCount} Quellen · Quellen anzeigen</button>`:""}
@@ -11745,7 +11822,11 @@ function renderIlmMessages(conversation){
   let assistantSeen=false;
   return messages.map(message=>{
     if(message.role==="user")return `<div class="ilm-user-row"><div class="ilm-user-bubble">${esc(message.content||"")}</div></div>`;
-    if(message.role==="loading")return `<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span><span>Quellen werden geprüft …</span></div>`;
+    if(message.role==="loading"){
+      const phase=message.phase||"internal";
+      const label=window.IlmMajlisV2?.loadingPhaseText?.(phase,!navigator.onLine)||"Quellen werden geprüft …";
+      return `<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span><span>${esc(label)}</span></div>`;
+    }
     const html=renderIlmAssistantMessage(message,!assistantSeen);
     assistantSeen=true;
     return html;
@@ -11770,12 +11851,16 @@ function renderIlmHistoryDrawer(store){
 }
 function renderIlmMenu(conversation){
   const id=conversation?.id||"";
+  const mode=getIlmAnswerMode(conversation);
   return `<div class="ilm-menu-popover" id="ilmMenuPopover" hidden>
     <button type="button" data-ilm-new>Neues Gespräch</button>
     <button type="button" data-ilm-menu-history>Chatverlauf öffnen</button>
     <button type="button" data-ilm-rename="${esc(id)}">Gespräch umbenennen</button>
     <button type="button" data-ilm-share="">Gespräch teilen</button>
     <button type="button" data-ilm-delete="${esc(id)}">Gespräch löschen</button>
+    <button type="button" data-ilm-answer-mode="detailed"${mode==="detailed"?" aria-current=\"true\"":""}>Antwortmodus: Ausführlich</button>
+    <button type="button" data-ilm-answer-mode="short"${mode==="short"?" aria-current=\"true\"":""}>Antwortmodus: Kurz</button>
+    <button type="button" data-ilm-answer-mode="sources"${mode==="sources"?" aria-current=\"true\"":""}>Antwortmodus: Nur Quellen</button>
     <button type="button" data-ilm-close>Chat schließen</button>
     <button type="button" data-ilm-menu-close>Schließen</button>
   </div>`;
@@ -11806,6 +11891,8 @@ function renderIlm(){
 }
 let ilmPendingToken=0;
 let ilmForceBottomOnce=false;
+let ilmLastFallbackHash="";
+let ilmActiveRequestId=0;
 function updateIlmConversation(conversationId,mutator){
   return updateIlmStore(store=>{
     store.conversations=store.conversations.map(item=>{
@@ -11849,7 +11936,7 @@ async function submitIlmQuestion(text,options={}){
   if(promptClass.type==="unclear"){
     updateIlmConversation(convo.id,item=>{
       const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
-      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmClarificationReply(),question:content,sourceHints:[],contextHints:[]};
+      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmClarificationReply(content),question:content,sourceHints:[],contextHints:[]};
       const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
       return {...item,title:(item.messages||[]).length?item.title:"Neue Frage",draft:"",messages};
     });
@@ -11859,9 +11946,12 @@ async function submitIlmQuestion(text,options={}){
     return;
   }
   const token=++ilmPendingToken;
+  const requestId=++ilmActiveRequestId;
+  const answerMode=getIlmAnswerMode(convo);
+  const modeMap={detailed:"normal",short:"simple",sources:"sources"};
   updateIlmConversation(convo.id,item=>{
     const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
-    const loadingMsg={id:"l-"+Date.now(),role:"loading",createdAt:ilmNowIso()};
+    const loadingMsg={id:"l-"+Date.now(),role:"loading",createdAt:ilmNowIso(),phase:"internal"};
     const messages=[...(item.messages||[]),userMsg,loadingMsg].slice(-ILM_MAX_CHAT_MESSAGES);
     return {...item,title:(item.messages||[]).length?item.title:ilmGuessTitle(content),draft:"",messages};
   });
@@ -11870,14 +11960,36 @@ async function submitIlmQuestion(text,options={}){
   setTimeout(()=>scrollIlmToBottom(true),80);
   $("ilmStopBtn")?.removeAttribute("hidden");
   await new Promise(r=>setTimeout(r,120));
-  if(token!==ilmPendingToken)return;
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  if(window.IlmMajlisV2?.detectPersonalCase?.(content)){
+    const freshStore=getIlmStore();
+    const freshConvo=getActiveIlmConversation(freshStore);
+    const matches=await searchIlmKnowledge(content,freshConvo,{limit:6});
+    if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+    const reply=window.IlmMajlisV2.buildPersonalCaseReply(content,matches);
+    updateIlmConversation(convo.id,item=>{
+      const messages=(item.messages||[]).filter(msg=>msg.role!=="loading");
+      messages.push({id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply,question:content,sourceHints:reply.sourceHints||[],contextHints:reply.contextHints||[]});
+      return {...item,messages:messages.slice(-ILM_MAX_CHAT_MESSAGES)};
+    });
+    $("ilmStopBtn")?.setAttribute("hidden","hidden");
+    markIlmScrollToLatest();render();setTimeout(()=>scrollIlmToBottom(true),80);
+    return;
+  }
   const freshStore=getIlmStore();
   const freshConvo=getActiveIlmConversation(freshStore);
   const matches=await searchIlmKnowledge(content,freshConvo,{limit:options.mode==="proofs"?12:ILM_MAX_MATCHES});
-  if(token!==ilmPendingToken)return;
-  const externalResults=ilmNeedsExternalResearch(matches)?await fetchIlmExternalResearch(content):null;
-  if(token!==ilmPendingToken)return;
-  const reply=buildIlmAssistantReply(content,matches,options.mode==="proofs"?"long":(options.mode||"normal"),externalResults);
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  let externalResults=null;
+  if(ilmNeedsExternalResearch(matches)&&navigator.onLine){
+    updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).map(msg=>msg.role==="loading"?{...msg,phase:"external"}:msg)}));
+    render();
+    externalResults=await fetchIlmExternalResearch(content);
+  }
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).map(msg=>msg.role==="loading"?{...msg,phase:"compose"}:msg)}));
+  const replyMode=options.mode==="proofs"?"proofs":modeMap[answerMode]||"normal";
+  const reply=buildIlmAssistantReply(content,matches,replyMode,externalResults);
   updateIlmConversation(convo.id,item=>{
     const messages=(item.messages||[]).filter(msg=>msg.role!=="loading");
     messages.push({
@@ -11897,7 +12009,15 @@ async function submitIlmQuestion(text,options={}){
   render();
   setTimeout(()=>scrollIlmToBottom(true),80);
 }
-function stopIlmAnswer(){ilmPendingToken++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
+function stopIlmAnswer(){ilmPendingToken++;ilmActiveRequestId++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
+function setIlmAnswerMode(mode){
+  const store=getIlmStore();
+  const convo=getActiveIlmConversation(store);
+  if(!convo)return;
+  const next=mode==="short"||mode==="sources"||mode==="detailed"?mode:"detailed";
+  updateIlmConversation(convo.id,item=>({...item,answerMode:next}));
+  render();
+}
 function findIlmMessage(messageId){
   const store=getIlmStore();
   const convo=getActiveIlmConversation(store);
@@ -12101,6 +12221,8 @@ function bindIlmEvents(){
   document.querySelectorAll("[data-ilm-copy-answer]").forEach(btn=>btn.onclick=()=>copyIlmAnswer(btn.getAttribute("data-ilm-copy-answer")||""));
   document.querySelectorAll("[data-ilm-copy-sources]").forEach(btn=>btn.onclick=()=>copyIlmSources(btn.getAttribute("data-ilm-copy-sources")||""));
   document.querySelectorAll("[data-ilm-share]").forEach(btn=>btn.onclick=()=>shareIlmConversation(btn.getAttribute("data-ilm-share")||""));
+  document.querySelectorAll("[data-ilm-answer-mode]").forEach(btn=>btn.onclick=()=>{setIlmAnswerMode(btn.getAttribute("data-ilm-answer-mode")||"detailed");$("ilmMenuPopover")?.setAttribute("hidden","hidden")});
+  document.querySelectorAll("[data-ilm-clarify]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-clarify")||""));
   scrollIlmToBottom(false);
 }
 function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const premium=extraClass.includes("home-direct-pick")?" premium-surface":"";return`<section class="direct-pick-panel ${extraClass}${premium}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch</option>${books}</select></div></section>`}
