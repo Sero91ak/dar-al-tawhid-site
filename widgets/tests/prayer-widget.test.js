@@ -40,12 +40,13 @@ function loadScript(rel) {
 
 const mathBox = loadScript("shared/prayer-math.js");
 const storageBox = loadScript("storage/prayer-cache.js");
-// share globals
 storageBox.DarPrayerMath = mathBox.DarPrayerMath;
 const themeBox = loadScript("theme/widget-theme.js");
+const sizesBox = loadScript("shared/widget-sizes.js");
 const math = mathBox.DarPrayerMath;
 const storage = storageBox.DarWidgetStorage;
 const theme = themeBox.DarWidgetTheme;
+const sizes = sizesBox.DarWidgetSizes;
 
 function test(name, fn) {
   try {
@@ -166,6 +167,32 @@ test("widget reset clears only widget keys", () => {
   assert.equal(cfg.enabled, false);
   assert.equal(cfg.themeMode, "auto");
   assert.ok(storageBox.localStorage.getItem("darPrayerSettingsV1"));
+});
+
+test("apple-small normalize", () => {
+  assert.equal(sizes.normalizeSize("apple-small"), "apple-small");
+  assert.equal(sizes.normalizeSize("ios-small"), "apple-small");
+  assert.equal(sizes.normalizeSize("small"), "apple-small");
+});
+
+test("android density bands", () => {
+  assert.equal(sizes.densityFromBox(150, 150), "xs");
+  assert.equal(sizes.densityFromBox(200, 170), "sm");
+  assert.equal(sizes.densityFromBox(320, 200), "md");
+  assert.equal(sizes.densityFromBox(320, 320), "lg");
+});
+
+test("layout priority for xs hides list", () => {
+  const layout = sizes.layoutForDensity("xs");
+  assert.equal(layout.showList, false);
+  assert.equal(layout.showCountdown, true);
+});
+
+test("layout lg shows list and meta", () => {
+  const layout = sizes.layoutForDensity("lg");
+  assert.equal(layout.showList, true);
+  assert.equal(layout.showMeta, true);
+  assert.equal(layout.showSunrise, true);
 });
 
 console.log("\nDone.");

@@ -37,7 +37,10 @@
     return {
       enabled: false,
       themeMode: "auto", // auto | light | dark | royal
-      size: "medium", // compact | medium | large
+      size: "medium", // compact | medium | large | apple-small | android
+      androidWidth: 180,
+      androidHeight: 180,
+      androidDensity: "sm",
       version: VERSION,
       lastResetAt: null
     };
