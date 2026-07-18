@@ -1,0 +1,231 @@
+/* DAR AL TAWḤĪD – Prayer widget styles (Phase 2: clear typography, no backgrounds) */
+.dar-prayer-widget{
+  --pw-bg:#0c0c0c;
+  --pw-surface:#161616;
+  --pw-text:#f3efe5;
+  --pw-muted:#b9b5ac;
+  --pw-accent:#c8a85a;
+  --pw-border:rgba(255,255,255,.12);
+  --pw-highlight:#24211a;
+  --pw-error:#e8a0a0;
+  box-sizing:border-box;
+  width:100%;
+  max-width:100%;
+  background:var(--pw-surface);
+  color:var(--pw-text);
+  border:1px solid var(--pw-border);
+  border-radius:16px;
+  padding:14px 16px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  overflow:hidden;
+}
+.dar-prayer-widget *,.dar-prayer-widget *::before,.dar-prayer-widget *::after{box-sizing:border-box}
+.dar-prayer-widget .pw-brand{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--pw-accent);
+  margin-bottom:8px;
+}
+.dar-prayer-widget .pw-label{
+  font-size:12px;
+  font-weight:700;
+  color:var(--pw-muted);
+  margin-bottom:2px;
+}
+.dar-prayer-widget .pw-next-name{
+  font-size:22px;
+  font-weight:800;
+  line-height:1.2;
+  color:var(--pw-text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.dar-prayer-widget .pw-next-time{
+  font-size:28px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;
+  color:var(--pw-accent);
+  white-space:nowrap;
+  line-height:1.15;
+  margin:2px 0 4px;
+}
+.dar-prayer-widget .pw-countdown{
+  font-size:14px;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  color:var(--pw-muted);
+  white-space:nowrap;
+}
+.dar-prayer-widget .pw-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  color:var(--pw-muted);
+  font-weight:600;
+  margin-bottom:10px;
+}
+.dar-prayer-widget .pw-meta span{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.dar-prayer-widget .pw-next-block{
+  background:var(--pw-highlight);
+  border:1px solid var(--pw-border);
+  border-radius:12px;
+  padding:10px 12px;
+  margin-bottom:10px;
+}
+.dar-prayer-widget .pw-next-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:12px;
+}
+.dar-prayer-widget .pw-next-line b{
+  font-size:18px;
+  font-weight:800;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.dar-prayer-widget .pw-next-line span{
+  font-size:20px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:var(--pw-accent);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.dar-prayer-widget .pw-list{
+  display:grid;
+  gap:0;
+}
+.dar-prayer-widget .pw-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  min-height:34px;
+  padding:6px 0;
+  border-bottom:1px solid var(--pw-border);
+}
+.dar-prayer-widget .pw-row:last-child{border-bottom:0}
+.dar-prayer-widget .pw-row .pw-name{
+  font-size:14px;
+  font-weight:700;
+  color:var(--pw-text);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.dar-prayer-widget .pw-row .pw-time{
+  font-size:14px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:var(--pw-text);
+  white-space:nowrap;
+  text-align:right;
+}
+.dar-prayer-widget .pw-row.is-next{
+  background:var(--pw-highlight);
+  margin:0 -8px;
+  padding-left:8px;
+  padding-right:8px;
+  border-radius:8px;
+  border-bottom-color:transparent;
+}
+.dar-prayer-widget .pw-row.is-next .pw-name,
+.dar-prayer-widget .pw-row.is-next .pw-time{color:var(--pw-accent)}
+.dar-prayer-widget .pw-stale-hint{
+  margin-top:8px;
+  font-size:11px;
+  color:var(--pw-muted);
+  font-weight:600;
+}
+.dar-prayer-widget .pw-fallback{
+  display:grid;
+  gap:8px;
+  padding:4px 0;
+}
+.dar-prayer-widget .pw-fallback b{
+  font-size:15px;
+  color:var(--pw-text);
+}
+.dar-prayer-widget .pw-fallback p{
+  margin:0;
+  font-size:13px;
+  color:var(--pw-muted);
+  line-height:1.4;
+}
+.dar-prayer-widget .pw-fallback-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:8px 12px;
+  border-radius:12px;
+  border:1px solid var(--pw-border);
+  background:var(--pw-highlight);
+  color:var(--pw-accent);
+  font-weight:800;
+  text-decoration:none;
+  font-size:14px;
+}
+
+/* Control page shell */
+.pw-page{
+  max-width:720px;
+  margin:0 auto;
+  padding:20px 16px 80px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:#0a0a0a;
+  color:#f3efe5;
+  min-height:100vh;
+}
+.pw-page h1{font-size:24px;margin:0 0 6px;color:#dfc77f}
+.pw-page .pw-lead{margin:0 0 18px;color:#b9b5ac;font-size:14px;line-height:1.45}
+.pw-card{
+  background:#141414;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:14px;
+}
+.pw-card h2{margin:0 0 10px;font-size:15px}
+.pw-actions{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+.pw-actions button,.pw-field select{
+  min-height:44px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#1c1c1c;
+  color:#f3efe5;
+  font-weight:700;
+  font-size:14px;
+  padding:8px 12px;
+}
+.pw-actions button.primary{background:linear-gradient(135deg,#433a25,#282217);color:#f7f1e2}
+.pw-field{display:grid;gap:6px;margin-bottom:10px}
+.pw-field label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#cbb78a}
+.pw-preview-grid{display:grid;gap:14px}
+.pw-preview-label{font-size:12px;color:#b9b5ac;margin:0 0 6px;font-weight:700}
+.pw-status{font-size:13px;color:#b9b5ac;margin-top:8px}
+.pw-back{
+  display:inline-flex;
+  margin-bottom:14px;
+  color:#c8a85a;
+  font-weight:800;
+  text-decoration:none;
+  font-size:14px;
+}
+@media(min-width:640px){
+  .pw-preview-grid{grid-template-columns:1fr 1fr}
+  .pw-preview-grid .pw-preview-large{grid-column:1/-1}
+}

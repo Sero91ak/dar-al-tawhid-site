@@ -23,7 +23,16 @@
     "/notification-icon-256.png",
     "/notification-badge-96.png",
     "/notification-badge-72.png",
-    "/assets/site-analytics.js"
+    "/assets/site-analytics.js",
+    "/widgets/",
+    "/widgets/index.html",
+    "/widgets/prayer-times/prayer-widget.css",
+    "/widgets/prayer-times/prayer-widget.js",
+    "/widgets/shared/prayer-math.js",
+    "/widgets/shared/widget-log.js",
+    "/widgets/storage/prayer-cache.js",
+    "/widgets/theme/widget-theme.js",
+    "/widgets/fallback/fallback-ui.js"
   ],
   "requiredData": [
     "/content/duas/duas.json",
