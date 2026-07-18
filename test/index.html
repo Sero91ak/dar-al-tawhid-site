@@ -12740,29 +12740,54 @@ async function activatePrayerReminder(){
   const reminder=$("enablePrayerReminderBtn");
   const old=reminder?reminder.textContent:"";
   if(reminder){reminder.textContent="Wird aktiviert…";reminder.disabled=true}
-  let permission=getNotificationPermission();
-  if(permission!=="granted")permission=await requestNotificationPermission();
-  if(permission!=="granted"){
-    if(reminder){reminder.textContent=old;reminder.disabled=false}
-    alert("Benachrichtigungen wurden nicht erlaubt. Bitte erlaube sie für diese Seite in den Browser-/Geräteeinstellungen und versuche es erneut.");
-    return
-  }
-  setPrayerSettings({reminder:true});
   const wasInactive=!s.reminder;
-  const OS=await waitForOneSignalReady();
-  if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});await savePushRegistration(getPrayerSettings(),OS)}
-  const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
-  await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:ok});
-  updatePrayerReminderButtons();
-  updatePushFloatButton();
-  if(reminder)reminder.disabled=false;
-  if(getPrayerSettings().reminder){
-    if(!ok){
-      maintainPushHealth({silent:true}).catch(()=>{});
-      alert("Erinnerung ist gespeichert. Push wird im Hintergrund erneut verbunden – bitte kurz warten und ggf. mit „Test senden“ prüfen.")
-    }else if(wasInactive){
-      alert("✓ Gebets-Erinnerung ist dauerhaft aktiv. Du bekommst 15 Min vorher und zur Gebetszeit eine Meldung – auch auf dem Sperrbildschirm.")
+  try{
+    await ensureOneSignalServiceWorkerReady();
+    let permission=getNotificationPermission();
+    if(permission!=="granted")permission=await requestNotificationPermission();
+    if(permission!=="granted"){
+      alert("Benachrichtigungen wurden nicht erlaubt. Bitte erlaube sie für diese Seite in den Browser-/Geräteeinstellungen und versuche es erneut.");
+      return;
     }
+    setPrayerSettings({reminder:true});
+    let OS=await waitForOneSignalReady(30000);
+    let subscribed=false;
+    if(OS){
+      await ensurePushUserLogin(OS);
+      subscribed=await waitForPushOptIn(OS,30000);
+      if(!subscribed){
+        await repairPushConnection({silent:true}).catch(()=>{});
+        OS=await waitForOneSignalReady(15000);
+        if(OS){
+          await ensurePushUserLogin(OS);
+          subscribed=await waitForPushOptIn(OS,30000);
+        }
+      }
+      if(OS&&subscribed){
+        await ensurePostPushTags(OS);
+        await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
+        await savePushRegistration(getPrayerSettings(),OS);
+      }
+    }
+    const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
+    await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:ok});
+    if(getPrayerSettings().reminder){
+      if(!ok){
+        maintainPushHealth({silent:true}).catch(()=>{});
+        alert("Erinnerung ist gespeichert. Push wird im Hintergrund erneut verbunden – bitte kurz warten und ggf. mit „Test senden“ prüfen.");
+      }else if(wasInactive){
+        alert("✓ Gebets-Erinnerung ist dauerhaft aktiv. Du bekommst 15 Min vorher und zur Gebetszeit eine Meldung – auch auf dem Sperrbildschirm.");
+      }
+    }
+  }catch(e){
+    console.warn("Gebets-Erinnerung Aktivierung:",e);
+    if(wasInactive)setPrayerSettings({reminder:false});
+    alert("Die Aktivierung konnte nicht abgeschlossen werden. Bitte Startseite → Aktualisieren antippen und danach erneut aktivieren.");
+  }finally{
+    if(reminder){reminder.textContent=old||"🔔 Erinnerung aktivieren";reminder.disabled=false}
+    updatePrayerReminderButtons();
+    updatePushFloatButton();
+    updateHighlightPushButtons();
   }
 }
 function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
