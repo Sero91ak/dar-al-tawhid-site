@@ -8531,6 +8531,151 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
   }
 }
 </style>
+
+<style id="home-header-compact-v3">
+/* Startseiten-Kopfbereich: kompakt + responsiv, alle Themes gleich */
+.top-shell.theme-hero-shell .header{
+  padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 12px))!important;
+  padding-right:clamp(20px,4.8vw,24px)!important;
+  padding-left:clamp(20px,4.8vw,24px)!important;
+  padding-bottom:clamp(22px,4.5vw,26px)!important;
+}
+.top-shell.theme-hero-shell .header-row{
+  display:block!important;
+}
+.top-shell.theme-hero-shell .brand-kicker-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin:0 0 clamp(20px,4vw,28px)!important;
+}
+.top-shell.theme-hero-shell .brand small{
+  margin:0!important;
+  line-height:1.25!important;
+}
+.top-shell.theme-hero-shell .hijri-header-pill{
+  min-height:34px!important;
+  padding:6px 10px!important;
+  font-size:10px!important;
+  letter-spacing:.01em!important;
+}
+.top-shell.theme-hero-shell .brand-main{
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr)!important;
+  align-items:center!important;
+  column-gap:18px!important;
+  padding-top:0!important;
+  margin:0!important;
+}
+.top-shell.theme-hero-shell .logo{
+  width:clamp(92px,24vw,112px)!important;
+  height:clamp(92px,24vw,112px)!important;
+  flex:0 0 clamp(92px,24vw,112px)!important;
+  aspect-ratio:1/1;
+}
+.top-shell.theme-hero-shell h1{
+  font-size:clamp(42px,8vw,58px)!important;
+  line-height:.94!important;
+  letter-spacing:clamp(.02em,.06em,.095em)!important;
+}
+.top-shell.theme-hero-shell .header-tools{
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:10px!important;
+  margin-top:clamp(18px,3.8vw,24px)!important;
+}
+.top-shell.theme-hero-shell .header .socials{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(58px,68px))!important;
+  gap:10px!important;
+  width:auto!important;
+  margin:0!important;
+}
+.top-shell.theme-hero-shell .header .social-link{
+  min-width:58px!important;
+  width:100%!important;
+  height:48px!important;
+  min-height:48px!important;
+  padding:0!important;
+  border-radius:16px!important;
+  justify-content:center!important;
+}
+.top-shell.theme-hero-shell .header .social-link span{display:none!important}
+.top-shell.theme-hero-shell .header-prayer-status{
+  min-height:48px!important;
+  padding:12px 14px!important;
+  border-radius:16px!important;
+  gap:8px!important;
+}
+.top-shell.theme-hero-shell .header-prayer-item b{font-size:8px!important;margin-bottom:3px!important}
+.top-shell.theme-hero-shell .header-prayer-item span{font-size:11.5px!important}
+.top-shell.theme-hero-shell .header-prayer-item small{font-size:8.5px!important;margin-top:2px!important}
+.top-shell.theme-hero-shell .hero-text{
+  margin-top:clamp(18px,3.4vw,22px)!important;
+  padding-top:clamp(20px,3.6vw,24px)!important;
+}
+@media(max-width:700px){
+  .top-shell.theme-hero-shell .header{
+    padding-top:max(24px,calc(env(safe-area-inset-top,0px) + 12px))!important;
+    padding-right:clamp(20px,6vw,24px)!important;
+    padding-left:clamp(20px,6vw,24px)!important;
+    padding-bottom:clamp(22px,5vw,26px)!important;
+  }
+  .top-shell.theme-hero-shell .brand-kicker-row{
+    margin-bottom:clamp(20px,6.2vw,28px)!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{column-gap:16px!important}
+  .top-shell.theme-hero-shell .logo{
+    width:clamp(92px,28vw,112px)!important;
+    height:clamp(92px,28vw,112px)!important;
+    flex-basis:clamp(92px,28vw,112px)!important;
+  }
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(42px,11vw,58px)!important;
+    letter-spacing:clamp(.015em,.045em,.08em)!important;
+  }
+  .top-shell.theme-hero-shell .header-tools{
+    margin-top:clamp(18px,5vw,24px)!important;
+    gap:10px!important;
+  }
+}
+@media(max-width:360px){
+  .top-shell.theme-hero-shell .header-tools{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  .top-shell.theme-hero-shell .header .socials{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .top-shell.theme-hero-shell .header .social-link{
+    min-width:0!important;
+    height:44px!important;
+    min-height:44px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-status{
+    min-height:44px!important;
+    padding:10px 12px!important;
+  }
+}
+@media(min-width:981px){
+  .top-shell.theme-hero-shell .header{
+    padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 12px))!important;
+    padding-bottom:24px!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{column-gap:20px!important}
+  .top-shell.theme-hero-shell .logo{
+    width:clamp(110px,10vw,126px)!important;
+    height:clamp(110px,10vw,126px)!important;
+    flex-basis:clamp(110px,10vw,126px)!important;
+  }
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(52px,4.2vw,68px)!important;
+  }
+}
+</style>
+
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -8542,8 +8687,9 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
         <div class="brand">
           <div class="brand-kicker-row">
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
+            <button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Datum wird geladen…</button>
           </div>
-          <div class="brand-main"><button id="hijriHeaderDate" class="hijri-header-pill hijri-header-pill-inline" type="button" aria-label="Islamischer Kalender">🗓️ Datum wird geladen…</button><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
+          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
         </div>
         <div class="header-tools">
           <nav class="socials" aria-label="Social Media">
@@ -9416,7 +9562,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/wasiyyah/";return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}"><div class="eyebrow">${esc(eyebrow)}</div>${isHome?`<div class="view-head-home-row"><h2>${esc(title)}</h2><button id="homeHijriDayBtn" class="home-hijri-day-btn" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen">🗓️ Lädt…</button></div>`:`<h2>${esc(title)}</h2>`}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){return`<div class="view-head${headClass?` ${headClass}`:""}"><div class="eyebrow">${esc(eyebrow)}</div><h2>${esc(title)}</h2>${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
