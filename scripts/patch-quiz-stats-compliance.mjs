@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Patch test/index.html: remove visitor quiz stats UI, add test-isolated telemetry.
+ * Patch test/index.html: ensure test-isolated quiz telemetry (stats UI stays in app).
  */
 import fs from "fs";
 
@@ -31,19 +31,6 @@ if (!html.includes("quizTelemetryMeta")) {
     telemetryBlock
   );
 }
-
-html = html.replace(/if\(mode==="stats"\)return renderQuizStatsPage\(session\);/g, "");
-
-const homeRe =
-  /function renderQuizHome\(session\)\{const qs=quizQuestions\(\);[\s\S]*?quiz-home-quick-card" type="button" data-nav="quiz" data-value="repeat">[\s\S]*?<\/section>`\}/g;
-const homeNew = `function renderQuizHome(session){const qs=quizQuestions();const cats=[...new Set(qs.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(qs.map(q=>q.level).filter(Boolean))].sort();const marked=getQuizMarkedIds().size;const sessionLabel=session?\\`Frage \\${Number(session.index||0)+1}/\\${session.questionIds.length}\\`:"Keine Runde";return \\`\\${setPageHeader("Din-Quiz","Thema, Schwierigkeit und Modus wählen","Quiz")}<section class="quiz-shell quiz-shell-pro quiz-shell-home"><article class="quiz-home-panel"><header class="quiz-home-head"><div class="quiz-home-head-main"><span class="quiz-kicker">Quiz</span><h2 class="quiz-home-title">Din-Quiz</h2><p class="quiz-section-note">\\${qs.length} geprüfte Fragen verfügbar</p></div></header><div><h3 class="quiz-section-title">Auswahl</h3><p class="quiz-section-note">Thema, Schwierigkeit, Anzahl und Modus.</p></div><div class="quiz-config-grid quiz-config-grid-compact"><div class="quiz-field"><label for="quizTopic">Thema</label><div class="quiz-control"><select id="quizTopic"><option value="all">Gemischt</option>\\${cats.map(c=>\\`<option value="\\${esc(c)}">\\${esc(c)}</option>\\`).join("")}</select><span class="quiz-chevron">⌄</span></div></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><div class="quiz-control"><select id="quizLevel"><option value="all">Gemischt</option>\\${levels.map(l=>\\`<option value="\\${esc(l)}">\\${esc(l)}</option>\\`).join("")}</select><span class="quiz-chevron">⌄</span></div></div><div class="quiz-field"><label for="quizCount">Fragenanzahl</label><div class="quiz-control"><select id="quizCount">\\${[5,10,15,20].map(n=>\\`<option value="\\${n}" \\${n===10?"selected":""}>\\${n}</option>\\`).join("")}</select><span class="quiz-chevron">⌄</span></div></div><div class="quiz-field"><label for="quizMode">Modus</label><div class="quiz-control"><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select><span class="quiz-chevron">⌄</span></div></div></div><div class="quiz-actions quiz-actions-compact"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn secondary" type="button" id="quizQuickBtn">Schnellrunde</button></div><div class="quiz-start-hint" id="quizStartHint" hidden>Bitte zuerst eine Auswahl treffen.</div></article><div class="quiz-home-quick-nav"><button class="quiz-home-quick-card" type="button" data-nav="quiz" data-value="session"><span class="quiz-quick-icon">📝</span><b>Fragen</b><span>\\${esc(sessionLabel)}</span></button><button class="quiz-home-quick-card" type="button" data-nav="quiz" data-value="repeat"><span class="quiz-quick-icon">↻</span><b>Wiederholen</b><span>\\${marked} gemerkt</span></button></div>\\${session?\\`<button class="quiz-btn primary quiz-home-resume" type="button" id="quizResumeBtn">Laufende Runde fortsetzen</button>\\`:""}</section>\\`}`;
-
-html = html.replace(homeRe, homeNew);
-
-html = html.replace(
-  /<button class="quiz-btn secondary" type="button" data-nav="quiz" data-value="stats">Statistik öffnen<\/button>/g,
-  ""
-);
 
 html = html.replace(
   /function bindQuizEvents\(\)\{if\(currentRoute\.view!=="quiz"\)return;const start=/g,
