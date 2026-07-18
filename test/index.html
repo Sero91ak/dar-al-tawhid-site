@@ -1242,21 +1242,48 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 @media(max-width:520px){.ilm-chat-shell{--ilm-composer-reserve:72px}.ilm-chat-header{grid-template-columns:42px minmax(0,1fr) auto}.ilm-message-list{padding:14px max(10px,env(safe-area-inset-right,0px)) calc(var(--ilm-composer-reserve) + var(--ilm-keyboard-offset,0px) + 10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}.ilm-answer-text{font-size:16.5px}.ilm-user-bubble{font-size:15.5px;max-width:min(86%,620px)}.ilm-composer-bar{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}.ilm-composer-inner{grid-template-columns:minmax(0,1fr) 38px;padding-left:15px}.ilm-send-icon{width:34px;height:34px}.ilm-chat-input{font-size:16px}}
 /* Ilm compact drawer/composer overrides */
 .ilm-message-inner{gap:12px}
-.ilm-thread-list{gap:8px}
+.ilm-history-drawer{padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px));gap:8px}
+.ilm-drawer-head h3{font-size:16px}
+.ilm-history-drawer>.ilm-action-link.primary{width:100%;min-height:32px;padding:6px 10px;font-size:12px;justify-content:center}
+.ilm-thread-list{display:flex;flex-direction:column;align-content:flex-start;gap:5px;overflow-y:auto;min-height:0;align-self:stretch}
 .ilm-thread-row-new{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:4px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  flex:0 0 auto;
   min-height:0;
   height:auto;
-  padding:10px 12px;
-  border-radius:14px;
+  padding:7px 10px;
+  border-radius:12px;
 }
-.ilm-thread-row-new b{margin:0;font-size:15px;line-height:1.28}
-.ilm-thread-row-new span{margin-top:0;font-size:12px;line-height:1.35}
+.ilm-thread-row-new b{margin:0;font-size:13.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ilm-thread-row-new span{margin:0;font-size:10.5px;line-height:1.2;color:var(--ilm-secondary-text);white-space:nowrap}
+/* Ilm overlays must sit above the fixed composer and scroll internally */
+.ilm-sheet-backdrop{z-index:100}
+.ilm-history-drawer{z-index:100}
+.ilm-menu-popover{z-index:101}
+.ilm-sheet{display:flex;flex-direction:column;max-height:min(86dvh,calc(100dvh - env(safe-area-inset-top,0px) - 8px));overflow:hidden;padding:0;box-sizing:border-box}
+.ilm-sheet-head{flex:0 0 auto;margin-bottom:0;padding:14px 14px 10px;border-bottom:1px solid color-mix(in srgb,var(--ilm-border) 85%,transparent)}
+.ilm-sheet-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px))}
+.ilm-sheet-body .ilm-source-list,.ilm-sheet-body .ilm-related-list{display:grid;gap:8px}
+@media(min-width:900px){.ilm-sheet{height:min(82dvh,780px);max-height:min(82dvh,780px)}}
 .ilm-composer-bar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
 .ilm-composer-inner{padding-top:4px;padding-bottom:4px}
+.ilm-confidence{display:inline-flex;align-items:center;border:1px solid var(--ilm-border);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:850;color:var(--ilm-accent);margin-bottom:4px}
+.ilm-section-title{margin:10px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ilm-accent);font-weight:900}
+.ilm-source-cards{display:grid;gap:10px;margin-top:6px}
+.ilm-source-card-v2{border:1px solid var(--ilm-border);border-radius:16px;background:color-mix(in srgb,var(--ilm-header-bg) 72%,white 3%);padding:12px;display:grid;gap:6px}
+.ilm-source-card-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ilm-source-type,.ilm-source-origin{font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ilm-secondary-text)}
+.ilm-source-origin{color:var(--ilm-accent)}
+.ilm-source-card-v2 b{font-size:14px;line-height:1.35;color:var(--ilm-primary-text)}
+.ilm-source-ref{font-size:12px;color:var(--ilm-secondary-text);line-height:1.4}
+.ilm-source-card-v2 p{margin:0;font-size:13px;line-height:1.5;color:var(--ilm-primary-text)}
+.ilm-source-open{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 12px;border-radius:999px;border:1px solid var(--ilm-border);background:color-mix(in srgb,var(--ilm-accent) 12%,transparent);color:var(--ilm-primary-text);font-size:12px;font-weight:900;text-decoration:none;width:max-content}
+.ilm-clarify-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.ilm-clarify-chip{border:1px solid var(--ilm-border);border-radius:999px;background:color-mix(in srgb,var(--ilm-header-bg) 70%,white 4%);color:var(--ilm-primary-text);min-height:34px;padding:7px 11px;font-size:12px;font-weight:850;cursor:pointer;text-align:left}
 .feature-section{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:0 16px 42px rgba(0,0,0,.18);padding:14px;overflow:hidden}.feature-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}.feature-head h3{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(22px,4vw,32px);line-height:1.1}.feature-head span{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:4px}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature-card{position:relative;min-width:0;border:1px solid rgba(214,180,106,.28);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));padding:12px;display:grid;gap:9px;overflow:hidden}.feature-card-top{display:flex;align-items:flex-start;gap:10px}.feature-icon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(214,180,106,.26);background:rgba(214,180,106,.10);font-size:20px}.feature-card h4{margin:0;color:var(--text);font-size:15px;line-height:1.2;overflow-wrap:anywhere}.feature-card p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.42;overflow-wrap:anywhere}.feature-card-actions{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.feature-open,.feature-pin,.feature-dismiss{min-height:38px;border:1px solid rgba(214,180,106,.28);border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);font-size:12px;font-weight:950;padding:8px 10px}.feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:none!important;text-shadow:none!important}.feature-pin{width:38px;padding:0}.feature-badge{position:absolute;right:10px;top:10px;border:1px solid rgba(214,180,106,.30);border-radius:999px;background:rgba(214,180,106,.12);color:var(--gold);font-size:9px;font-weight:950;padding:3px 7px}.feature-hint{border:1px solid rgba(214,180,106,.34);border-radius:20px;background:linear-gradient(135deg,rgba(214,180,106,.13),rgba(255,255,255,.035));padding:13px;margin-bottom:10px}.feature-hint h3{margin:0;color:var(--text);font-size:18px}.feature-hint p{margin:6px 0 10px;color:var(--muted);font-size:13px;line-height:1.5}.feature-hint-actions{display:flex;gap:8px;flex-wrap:wrap}.more-search{width:100%;min-height:46px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.065);color:var(--text);padding:11px 14px;font:inherit;outline:none}.more-group{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:12px;margin-top:12px}.more-group h3{margin:0 0 9px;color:var(--text);font-size:18px}.more-group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.more-group.is-hidden{display:none!important}.more-feature-row{position:relative;border:1px solid rgba(214,180,106,.22);border-radius:17px;background:rgba(255,255,255,.045);padding:10px;display:flex;gap:9px;align-items:center;min-height:62px}.more-feature-row h4{margin:0;color:var(--text);font-size:13px;line-height:1.2}.more-feature-row p{margin:2px 0 0;color:var(--muted);font-size:10px;line-height:1.25}.more-feature-row.is-hidden{display:none!important}@media(max-width:700px){.feature-section,.more-group{margin-right:50px}.feature-open{min-height:40px}}@media(max-width:430px){.feature-grid,.more-group-grid{grid-template-columns:1fr}.feature-card{padding:11px}.feature-head{display:block}.feature-card-actions{grid-template-columns:1fr 38px}}
 .bottom-nav{--nav-pill-left:5px;--nav-pill-width:64px;position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm);z-index:40;display:flex;justify-content:space-around;align-items:stretch;gap:0;padding:5px;border:1px solid rgba(255,255,255,.08);border-radius:27px;background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(10px) saturate(1.08);backdrop-filter:blur(10px) saturate(1.08);box-shadow:0 6px 18px rgba(0,0,0,.14);overflow:hidden;isolation:isolate;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
 #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:max(14px,env(safe-area-inset-left))!important;right:max(14px,env(safe-area-inset-right))!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important}
@@ -7306,7 +7333,7 @@ html[data-theme="soft"] .theme-hero-shell::after{
 .image-editor-guides{position:absolute;inset:0;pointer-events:none;z-index:2}
 .image-editor-guide{position:absolute;border:none;outline:1.5px dashed var(--editor-guide);outline-offset:8px;border-radius:8px;box-sizing:content-box;opacity:0;transition:opacity .15s ease,outline-color .15s ease;pointer-events:none}
 .image-editor-guide.is-active{opacity:1;outline:2px solid var(--editor-guide-active);outline-offset:7px;box-shadow:0 0 0 4px var(--editor-guide-ring)}
-#imageEditorCanvas{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;border-radius:12px;box-shadow:var(--editor-canvas-shadow);background:var(--editor-preview-bg);touch-action:pan-y}
+#imageEditorCanvas{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;min-height:min(62vw,420px);border-radius:12px;box-shadow:var(--editor-canvas-shadow);background:var(--editor-preview-bg);touch-action:pan-y}
 .image-editor-touch-wrap.is-dragging #imageEditorCanvas,.image-editor-touch-wrap.is-pinch-active #imageEditorCanvas{touch-action:none}
 .image-editor-retry-btn{margin-left:6px;border:1px solid var(--editor-border);border-radius:999px;background:var(--editor-button-bg);color:var(--editor-button-text);min-height:28px;padding:4px 10px;font-size:10px;font-weight:950;cursor:pointer;touch-action:manipulation;vertical-align:middle}
 .image-editor-block-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
@@ -10329,6 +10356,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 </div>
 
 <script src="/assets/slide-post-parser.js?v=2"></script>
+<script src="/assets/ilm-majlis-v2.js?v=1"></script>
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
@@ -11246,6 +11274,7 @@ function loadIlmStore(){
 }
 function saveIlmStore(store){setJson(ILM_CHAT_STORE_KEY,{...defaultIlmStore(),...(store||{})})}
 function ilmNowIso(){return new Date().toISOString()}
+function formatIlmThreadDate(value){const d=new Date(value||Date.now());if(Number.isNaN(d.getTime()))return"";return d.toLocaleString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}
 function newIlmConversationRecord(seedTitle="Neues Gespräch"){
   return {
     id:"ilm-"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
@@ -11254,8 +11283,14 @@ function newIlmConversationRecord(seedTitle="Neues Gespräch"){
     updatedAt:ilmNowIso(),
     draft:"",
     scrollTop:0,
+    answerMode:"detailed",
     messages:[]
   };
+}
+function getIlmAnswerMode(conversation){
+  const mode=String(conversation?.answerMode||"detailed");
+  if(mode==="short"||mode==="sources"||mode==="detailed")return mode;
+  return "detailed";
 }
 function getIlmStore(){
   const store=loadIlmStore();
@@ -11342,6 +11377,11 @@ function ilmExpandQueryToken(token){
   if(token==="dua")variants.add("bittgebet");
   if(token==="aqidah"){variants.add("iman");variants.add("glaube")}
   if(token==="tawhid")variants.add("tauhid");
+  if(window.IlmMajlisV2){
+    window.IlmMajlisV2.expandSynonyms([token]).forEach(item=>{
+      item.split(" ").forEach(part=>{if(part)variants.add(part)});
+    });
+  }
   return [...variants];
 }
 function ilmBuildQueryProfile(question){
@@ -11422,7 +11462,8 @@ function buildIlmConversationReply(text){
     sourceHints:[]
   };
 }
-function buildIlmClarificationReply(){
+function buildIlmClarificationReply(question){
+  if(window.IlmMajlisV2)return window.IlmMajlisV2.buildSmartClarificationReply(question);
   return {
     title:"Rückfrage",
     status:"clarification",
@@ -11817,6 +11858,14 @@ function ilmNeedsExternalResearch(matches){
   return !Array.isArray(matches)||!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2;
 }
 function buildIlmFallbackReply(question,matches,externalResults=null){
+  if(window.IlmMajlisV2){
+    const reply=window.IlmMajlisV2.buildInsufficientReply(question,matches,externalResults,{
+      lastFallbackHash:ilmLastFallbackHash,
+      buildExternalSource:buildIlmExternalResearchSource
+    });
+    ilmLastFallbackHash=reply._fallbackHash||ilmLastFallbackHash;
+    return reply;
+  }
   const related=(matches||[]).slice(0,3).map(item=>({title:item.title,route:item.route,kind:item.kind}));
   const external=buildIlmExternalResearchSource(question,externalResults||[]);
   const hasServerResults=Array.isArray(externalResults)&&externalResults.some(item=>item.snippet||item.reachable);
@@ -11839,8 +11888,17 @@ function ilmAnswerLeadLine(source,mode="normal"){
   const quote=ilmClip(source.excerpt||source.body,mode==="long"?240:160);
   return quote?`${head}: ${quote}`:head;
 }
-function buildIlmAssistantReply(question,matches,mode="normal"){
-  const externalResults=Array.isArray(arguments[3])?arguments[3]:null;
+function buildIlmAssistantReply(question,matches,mode="normal",externalResults=null){
+  const answerMode=mode==="proofs"?"detailed":mode==="simple"?"short":mode==="sources"?"sources":mode==="short"?"short":mode==="detailed"?"detailed":"detailed";
+  if(window.IlmMajlisV2){
+    if(!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches,externalResults);
+    return window.IlmMajlisV2.buildSourcedReply(question,matches,{
+      mode:answerMode,
+      externalResults,
+      language:window.IlmMajlisV2.detectLanguage(question),
+      buildSourceGroups:buildIlmSourceGroups
+    });
+  }
   if(!matches.length)return buildIlmFallbackReply(question,[],externalResults);
   if(Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches,externalResults);
   const groups=buildIlmSourceGroups(matches);
@@ -11879,26 +11937,60 @@ function ilmUniqueSources(list){
 function ilmReferenceMarkers(count){
   return Array.from({length:Math.min(count,3)},(_,idx)=>`<span class="ilm-citation">[${idx+1}]</span>`).join(" ");
 }
+function renderIlmSourceCards(reply){
+  const sources=Array.isArray(reply?.sources)?reply.sources:(reply?.sourceGroups||[]).flatMap(g=>(g.items||[]).map(item=>({type:item.kind||"Scholar",author:item.speaker||"",work:item.work||item.title||"",reference:item.reference||"",url:(item.links||[]).find(l=>/^https?:/i.test(l.url))?.url||"",origin:item.kind==="external"?"external":"internal",excerpt:item.excerpt||"",note:item.sourceTag||""})));
+  if(!sources.length)return "";
+  return `<div class="ilm-source-cards">${sources.slice(0,8).map((src,idx)=>`<article class="ilm-source-card-v2">
+    <div class="ilm-source-card-head"><span class="ilm-source-type">${esc(src.type||"Quelle")}</span><span class="ilm-source-origin">${esc(src.origin==="external"?"Externe Recherche":"Intern geprüft")}</span></div>
+    <b>${esc([src.author,src.work].filter(Boolean).join(" · ")||"Fundstelle")}</b>
+    ${src.reference?`<div class="ilm-source-ref">${esc(src.reference)}</div>`:""}
+    ${src.excerpt?`<p>${esc(ilmClip(src.excerpt,180))}</p>`:""}
+    ${src.url?`<a class="ilm-source-open" href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">Quelle öffnen</a>`:""}
+  </article>`).join("")}</div>`;
+}
 function renderIlmAnswerText(reply,isFirstAssistant){
   const parts=[];
+  const confidence=reply?.confidence?.label?`<div class="ilm-confidence">${esc(reply.confidence.label)}</div>`:"";
   if(reply?.status==="conversation"){
     parts.push(`<p>${esc(reply.directAnswer||"Ich bin bereit. Stelle mir gern deine Frage.")}</p>`);
     return parts.join("");
   }
   if(reply?.status==="clarification"){
     parts.push(`<p>${esc(reply.directAnswer||"Ich konnte noch keine konkrete Frage erkennen.")}</p>`);
-    return parts.join("");
-  }
-  if(reply?.status==="unavailable"){
-    parts.push(`<p>${esc(reply.intro||"Zu dieser Frage liegt keine ausreichend belegte Fundstelle vor.")}</p>`);
+    const opts=Array.isArray(reply.clarificationOptions)?reply.clarificationOptions:(reply.followUpQuestions||[]);
+    if(opts.length)parts.push(`<div class="ilm-clarify-chips">${opts.map((opt,i)=>`<button type="button" class="ilm-clarify-chip" data-ilm-clarify="${esc(opt)}">${i+1}. ${esc(opt)}</button>`).join("")}</div>`);
     if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
     return parts.join("");
   }
+  if(reply?.status==="personal_case"){
+    parts.push(confidence);
+    parts.push(`<h4 class="ilm-section-title">Direkte Antwort</h4><p>${esc(reply.directAnswer||"")}</p>`);
+    if(reply.explanation)parts.push(`<h4 class="ilm-section-title">Einordnung</h4><p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    if(reply.summary)parts.push(`<h4 class="ilm-section-title">Kurzes Ergebnis</h4><p>${esc(reply.summary)}</p>`);
+    parts.push(renderIlmSourceCards(reply));
+    return parts.join("");
+  }
+  if(reply?.status==="unavailable"){
+    parts.push(confidence);
+    parts.push(`<p>${esc(reply.intro||"Zu dieser Frage liegt keine ausreichend belegte Fundstelle vor.")}</p>`);
+    if(reply.directAnswer)parts.push(`<p><strong>${esc(reply.directAnswer)}</strong></p>`);
+    if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    const follow=Array.isArray(reply.followUpQuestions)?reply.followUpQuestions:[];
+    if(follow.length)parts.push(`<div class="ilm-clarify-chips">${follow.map(opt=>`<button type="button" class="ilm-clarify-chip" data-ilm-clarify="${esc(opt)}">${esc(opt)}</button>`).join("")}</div>`);
+    parts.push(renderIlmSourceCards(reply));
+    return parts.join("");
+  }
+  parts.push(confidence);
   if(isFirstAssistant&&reply?.intro)parts.push(`<p>${esc(reply.intro)}</p>`);
+  parts.push(`<h4 class="ilm-section-title">Direkte Antwort</h4>`);
   String(reply?.directAnswer||"").split(/\n{2,}/).filter(Boolean).forEach((text,idx)=>{
     parts.push(`<p>${esc(text)} ${idx<3?`<span class="ilm-citation">[${idx+1}]</span>`:""}</p>`);
   });
-  if(reply?.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+  if(reply?.explanation)parts.push(`<h4 class="ilm-section-title">Einordnung</h4><p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+  if(Array.isArray(reply?.differencesOfOpinion)&&reply.differencesOfOpinion.length)parts.push(`<h4 class="ilm-section-title">Meinungsunterschiede</h4><p class="ilm-answer-note">${esc(reply.differencesOfOpinion.join(" "))}</p>`);
+  if(reply?.summary)parts.push(`<h4 class="ilm-section-title">Kurzes Ergebnis</h4><p>${esc(reply.summary)}</p>`);
+  parts.push(`<h4 class="ilm-section-title">Quellen</h4>`);
+  parts.push(renderIlmSourceCards(reply));
   return parts.join("")||`<p>${esc(reply?.intro||"Keine Antwort vorhanden.")}</p>`;
 }
 function renderIlmAssistantMessage(message,isFirstAssistant=false){
@@ -11907,7 +11999,7 @@ function renderIlmAssistantMessage(message,isFirstAssistant=false){
   const relatedCount=Array.isArray(reply.related)?reply.related.length:0;
   const canRefine=reply.status==="ok";
   return `<article class="ilm-assistant-message" data-ilm-assistant="${esc(message.id)}">
-    <div class="ilm-assistant-name">ʿIlm</div>
+    <div class="ilm-assistant-name">Majlis al-ʿIlm</div>
     <div class="ilm-answer-text">${renderIlmAnswerText(reply,isFirstAssistant)}</div>
     <div class="ilm-answer-toolbar">
       ${sourceCount?`<button class="ilm-action-link primary" type="button" data-ilm-show-sources="${esc(message.id)}">${sourceCount} Quellen · Quellen anzeigen</button>`:""}
@@ -11925,7 +12017,11 @@ function renderIlmMessages(conversation){
   let assistantSeen=false;
   return messages.map(message=>{
     if(message.role==="user")return `<div class="ilm-user-row"><div class="ilm-user-bubble">${esc(message.content||"")}</div></div>`;
-    if(message.role==="loading")return `<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span><span>Quellen werden geprüft …</span></div>`;
+    if(message.role==="loading"){
+      const phase=message.phase||"internal";
+      const label=window.IlmMajlisV2?.loadingPhaseText?.(phase,!navigator.onLine)||"Quellen werden geprüft …";
+      return `<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span><span>${esc(label)}</span></div>`;
+    }
     const html=renderIlmAssistantMessage(message,!assistantSeen);
     assistantSeen=true;
     return html;
@@ -11945,17 +12041,21 @@ function renderIlmHistoryDrawer(store){
   return `<aside class="ilm-history-drawer" id="ilmHistoryDrawer" hidden>
     <div class="ilm-drawer-head"><h3>Gespräche</h3><button class="ilm-icon-btn" type="button" data-ilm-close-history>×</button></div>
     <button class="ilm-action-link primary" type="button" data-ilm-new>Neues Gespräch</button>
-    <div class="ilm-thread-list">${threads.map(item=>`<button class="ilm-thread-row-new${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(new Date(item.updatedAt||item.createdAt||Date.now()).toLocaleString("de-DE"))}</span></button>`).join("")}</div>
+    <div class="ilm-thread-list">${threads.map(item=>`<button class="ilm-thread-row-new${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(formatIlmThreadDate(item.updatedAt||item.createdAt))}</span></button>`).join("")}</div>
   </aside>`;
 }
 function renderIlmMenu(conversation){
   const id=conversation?.id||"";
+  const mode=getIlmAnswerMode(conversation);
   return `<div class="ilm-menu-popover" id="ilmMenuPopover" hidden>
     <button type="button" data-ilm-new>Neues Gespräch</button>
     <button type="button" data-ilm-menu-history>Chatverlauf öffnen</button>
     <button type="button" data-ilm-rename="${esc(id)}">Gespräch umbenennen</button>
     <button type="button" data-ilm-share="">Gespräch teilen</button>
     <button type="button" data-ilm-delete="${esc(id)}">Gespräch löschen</button>
+    <button type="button" data-ilm-answer-mode="detailed"${mode==="detailed"?" aria-current=\"true\"":""}>Antwortmodus: Ausführlich</button>
+    <button type="button" data-ilm-answer-mode="short"${mode==="short"?" aria-current=\"true\"":""}>Antwortmodus: Kurz</button>
+    <button type="button" data-ilm-answer-mode="sources"${mode==="sources"?" aria-current=\"true\"":""}>Antwortmodus: Nur Quellen</button>
     <button type="button" data-ilm-close>Chat schließen</button>
     <button type="button" data-ilm-menu-close>Schließen</button>
   </div>`;
@@ -11986,6 +12086,8 @@ function renderIlm(){
 }
 let ilmPendingToken=0;
 let ilmForceBottomOnce=false;
+let ilmLastFallbackHash="";
+let ilmActiveRequestId=0;
 function updateIlmConversation(conversationId,mutator){
   return updateIlmStore(store=>{
     store.conversations=store.conversations.map(item=>{
@@ -12029,7 +12131,7 @@ async function submitIlmQuestion(text,options={}){
   if(promptClass.type==="unclear"){
     updateIlmConversation(convo.id,item=>{
       const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
-      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmClarificationReply(),question:content,sourceHints:[],contextHints:[]};
+      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmClarificationReply(content),question:content,sourceHints:[],contextHints:[]};
       const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
       return {...item,title:(item.messages||[]).length?item.title:"Neue Frage",draft:"",messages};
     });
@@ -12039,9 +12141,12 @@ async function submitIlmQuestion(text,options={}){
     return;
   }
   const token=++ilmPendingToken;
+  const requestId=++ilmActiveRequestId;
+  const answerMode=getIlmAnswerMode(convo);
+  const modeMap={detailed:"normal",short:"simple",sources:"sources"};
   updateIlmConversation(convo.id,item=>{
     const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
-    const loadingMsg={id:"l-"+Date.now(),role:"loading",createdAt:ilmNowIso()};
+    const loadingMsg={id:"l-"+Date.now(),role:"loading",createdAt:ilmNowIso(),phase:"internal"};
     const messages=[...(item.messages||[]),userMsg,loadingMsg].slice(-ILM_MAX_CHAT_MESSAGES);
     return {...item,title:(item.messages||[]).length?item.title:ilmGuessTitle(content),draft:"",messages};
   });
@@ -12050,14 +12155,36 @@ async function submitIlmQuestion(text,options={}){
   setTimeout(()=>scrollIlmToBottom(true),80);
   $("ilmStopBtn")?.removeAttribute("hidden");
   await new Promise(r=>setTimeout(r,120));
-  if(token!==ilmPendingToken)return;
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  if(window.IlmMajlisV2?.detectPersonalCase?.(content)){
+    const freshStore=getIlmStore();
+    const freshConvo=getActiveIlmConversation(freshStore);
+    const matches=await searchIlmKnowledge(content,freshConvo,{limit:6});
+    if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+    const reply=window.IlmMajlisV2.buildPersonalCaseReply(content,matches);
+    updateIlmConversation(convo.id,item=>{
+      const messages=(item.messages||[]).filter(msg=>msg.role!=="loading");
+      messages.push({id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply,question:content,sourceHints:reply.sourceHints||[],contextHints:reply.contextHints||[]});
+      return {...item,messages:messages.slice(-ILM_MAX_CHAT_MESSAGES)};
+    });
+    $("ilmStopBtn")?.setAttribute("hidden","hidden");
+    markIlmScrollToLatest();render();setTimeout(()=>scrollIlmToBottom(true),80);
+    return;
+  }
   const freshStore=getIlmStore();
   const freshConvo=getActiveIlmConversation(freshStore);
   const matches=await searchIlmKnowledge(content,freshConvo,{limit:options.mode==="proofs"?12:ILM_MAX_MATCHES});
-  if(token!==ilmPendingToken)return;
-  const externalResults=ilmNeedsExternalResearch(matches)?await fetchIlmExternalResearch(content):null;
-  if(token!==ilmPendingToken)return;
-  const reply=buildIlmAssistantReply(content,matches,options.mode==="proofs"?"long":(options.mode||"normal"),externalResults);
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  let externalResults=null;
+  if(ilmNeedsExternalResearch(matches)&&navigator.onLine){
+    updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).map(msg=>msg.role==="loading"?{...msg,phase:"external"}:msg)}));
+    render();
+    externalResults=await fetchIlmExternalResearch(content);
+  }
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).map(msg=>msg.role==="loading"?{...msg,phase:"compose"}:msg)}));
+  const replyMode=options.mode==="proofs"?"proofs":modeMap[answerMode]||"normal";
+  const reply=buildIlmAssistantReply(content,matches,replyMode,externalResults);
   updateIlmConversation(convo.id,item=>{
     const messages=(item.messages||[]).filter(msg=>msg.role!=="loading");
     messages.push({
@@ -12077,7 +12204,15 @@ async function submitIlmQuestion(text,options={}){
   render();
   setTimeout(()=>scrollIlmToBottom(true),80);
 }
-function stopIlmAnswer(){ilmPendingToken++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
+function stopIlmAnswer(){ilmPendingToken++;ilmActiveRequestId++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
+function setIlmAnswerMode(mode){
+  const store=getIlmStore();
+  const convo=getActiveIlmConversation(store);
+  if(!convo)return;
+  const next=mode==="short"||mode==="sources"||mode==="detailed"?mode:"detailed";
+  updateIlmConversation(convo.id,item=>({...item,answerMode:next}));
+  render();
+}
 function findIlmMessage(messageId){
   const store=getIlmStore();
   const convo=getActiveIlmConversation(store);
@@ -12166,7 +12301,8 @@ function openIlmRoute(payload){
     if(route?.view)navigate(route.view,route.value||"");
   }catch(e){}
 }
-function closeIlmSheet(){const host=$("ilmSheetBackdrop");if(host){host.hidden=true;host.innerHTML=""}}
+function closeIlmSheet(){const host=$("ilmSheetBackdrop");if(host){host.hidden=true;host.innerHTML=""}syncIlmOverlayState()}
+function syncIlmOverlayState(){const sheetOpen=Boolean($("ilmSheetBackdrop")&&!$("ilmSheetBackdrop").hidden);const historyOpen=Boolean($("ilmHistoryDrawer")&&!$("ilmHistoryDrawer").hidden);const menuOpen=Boolean($("ilmMenuPopover")&&!$("ilmMenuPopover").hidden);document.body.classList.toggle("ilm-overlay-open",sheetOpen||historyOpen||menuOpen)}
 function renderIlmSourceActions(source){
   const actions=[];
   if(source.route?.view)actions.push(`<button type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">Öffnen</button>`);
@@ -12180,9 +12316,10 @@ function showIlmSources(messageId){
   if(!host)return;
   host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Quellen">
     <div class="ilm-sheet-head"><h3>${sources.length} Quellen</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
-    <div class="ilm-source-list">${sources.map((source,idx)=>`<article class="ilm-source-row"><b>${idx+1}. ${esc(source.speaker||source.title||"Fundstelle")}</b><span>${esc([source.groupLabel,source.work,source.reference].filter(Boolean).join(" · "))}</span>${source.excerpt?`<p>${esc(ilmQuote(source.excerpt,360))}</p>`:""}${source.body?`<p>${esc(ilmClip(source.body,520))}</p>`:""}${renderIlmSourceActions(source)}</article>`).join("")||`<div class="ilm-source-row"><b>Keine Quellen</b><span>Für diese Antwort wurden keine Quellenkarten hinterlegt.</span></div>`}</div>
+    <div class="ilm-sheet-body"><div class="ilm-source-list">${sources.map((source,idx)=>`<article class="ilm-source-row"><b>${idx+1}. ${esc(source.speaker||source.title||"Fundstelle")}</b><span>${esc([source.groupLabel,source.work,source.reference].filter(Boolean).join(" · "))}</span>${source.excerpt?`<p>${esc(ilmQuote(source.excerpt,360))}</p>`:""}${source.body?`<p>${esc(ilmClip(source.body,520))}</p>`:""}${renderIlmSourceActions(source)}</article>`).join("")||`<div class="ilm-source-row"><b>Keine Quellen</b><span>Für diese Antwort wurden keine Quellenkarten hinterlegt.</span></div>`}</div></div>
   </section>`;
   host.hidden=false;
+  syncIlmOverlayState();
   bindIlmSheetEvents();
 }
 function showIlmRelated(messageId){
@@ -12192,9 +12329,10 @@ function showIlmRelated(messageId){
   if(!host)return;
   host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Verwandte Inhalte">
     <div class="ilm-sheet-head"><h3>Verwandte Inhalte</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
-    <div class="ilm-related-list">${related.map(item=>`<button class="ilm-related-row" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}"><b>${esc(item.title||"Inhalt öffnen")}</b><span>${esc(ilmKindLabel(item.kind))}</span></button>`).join("")||`<div class="ilm-related-row"><b>Keine verwandten Inhalte</b><span>Zu dieser Antwort wurden keine weiteren Inhalte hinterlegt.</span></div>`}</div>
+    <div class="ilm-sheet-body"><div class="ilm-related-list">${related.map(item=>`<button class="ilm-related-row" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}"><b>${esc(item.title||"Inhalt öffnen")}</b><span>${esc(ilmKindLabel(item.kind))}</span></button>`).join("")||`<div class="ilm-related-row"><b>Keine verwandten Inhalte</b><span>Zu dieser Antwort wurden keine weiteren Inhalte hinterlegt.</span></div>`}</div></div>
   </section>`;
   host.hidden=false;
+  syncIlmOverlayState();
   bindIlmSheetEvents();
 }
 function bindIlmSheetEvents(){
@@ -12264,11 +12402,11 @@ function bindIlmEvents(){
   const log=$("ilmChatLog");
   if(log)log.onscroll=()=>{const convo=getActiveIlmConversation(getIlmStore());if(!convo)return;updateIlmConversation(convo.id,item=>({...item,scrollTop:log.scrollTop}))};
   document.querySelectorAll("[data-ilm-back],[data-ilm-close]").forEach(btn=>btn.onclick=()=>exitIlmChat());
-  document.querySelectorAll("[data-ilm-open-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.removeAttribute("hidden")});
-  document.querySelectorAll("[data-ilm-close-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.setAttribute("hidden","hidden")});
-  document.querySelectorAll("[data-ilm-open-menu]").forEach(btn=>btn.onclick=()=>{const menu=$("ilmMenuPopover");if(menu)menu.hidden=!menu.hidden});
-  document.querySelectorAll("[data-ilm-menu-history]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");$("ilmHistoryDrawer")?.removeAttribute("hidden")});
-  document.querySelectorAll("[data-ilm-menu-close]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden")});
+  document.querySelectorAll("[data-ilm-open-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.removeAttribute("hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-close-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.setAttribute("hidden","hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-open-menu]").forEach(btn=>btn.onclick=()=>{const menu=$("ilmMenuPopover");if(menu)menu.hidden=!menu.hidden;syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-menu-history]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");$("ilmHistoryDrawer")?.removeAttribute("hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-menu-close]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");syncIlmOverlayState()});
   document.querySelectorAll("[data-ilm-starter]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-starter")||""));
   document.querySelectorAll("[data-ilm-thread]").forEach(btn=>btn.onclick=()=>switchIlmConversation(btn.getAttribute("data-ilm-thread")||""));
   document.querySelectorAll("[data-ilm-new]").forEach(btn=>btn.onclick=()=>newIlmConversation());
@@ -12281,6 +12419,8 @@ function bindIlmEvents(){
   document.querySelectorAll("[data-ilm-copy-answer]").forEach(btn=>btn.onclick=()=>copyIlmAnswer(btn.getAttribute("data-ilm-copy-answer")||""));
   document.querySelectorAll("[data-ilm-copy-sources]").forEach(btn=>btn.onclick=()=>copyIlmSources(btn.getAttribute("data-ilm-copy-sources")||""));
   document.querySelectorAll("[data-ilm-share]").forEach(btn=>btn.onclick=()=>shareIlmConversation(btn.getAttribute("data-ilm-share")||""));
+  document.querySelectorAll("[data-ilm-answer-mode]").forEach(btn=>btn.onclick=()=>{setIlmAnswerMode(btn.getAttribute("data-ilm-answer-mode")||"detailed");$("ilmMenuPopover")?.setAttribute("hidden","hidden")});
+  document.querySelectorAll("[data-ilm-clarify]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-clarify")||""));
   scrollIlmToBottom(false);
 }
 function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const premium=extraClass.includes("home-direct-pick")?" premium-surface":"";return`<section class="direct-pick-panel ${extraClass}${premium}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch</option>${books}</select></div></section>`}
@@ -13695,7 +13835,8 @@ function loadImageEditorTemplate(src){
       try{
         const img=await new Promise((resolve,reject)=>{
           const el=new Image();
-          el.crossOrigin="anonymous";
+          const resolved=new URL(url,location.href);
+          if(resolved.origin!==location.origin)el.crossOrigin="anonymous";
           el.decoding="async";
           el.onload=()=>resolve(el);
           el.onerror=()=>reject(new Error("Template load failed: "+url));
@@ -13759,7 +13900,7 @@ function drawImageEditorMainText(ctx,text,box,opts){
 function drawImageEditorText(ctx,text,box,opts){return opts.kind==="main"?drawImageEditorMainText(ctx,text,box,opts):drawImageEditorSimpleText(ctx,text,box,opts)}
 function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/IMAGE_EDITOR_CANVAS_W,sy=rect.height/IMAGE_EDITOR_CANVAS_H;const active=imageEditorState.activeBlock;const guideFor=(kind)=>{if(kind!==active)return"";const guideRect=kind==="source"?imageEditorState.sourceGuideRect:imageEditorState.mainGuideRect;const box=guideRect||imageEditorInnerBox(imageEditorBlockBox(kind));const left=box.x*sx,top=box.y*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide is-active" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`};layer.innerHTML=guideFor("main")+guideFor("source")}
 function setImageEditorWarning(text,withRetry,mode){const warning=$("imageEditorWarning");if(!warning)return;warning.classList.remove("is-success","is-error");if(mode==="success")warning.classList.add("is-success");else if(mode==="error"||withRetry)warning.classList.add("is-error");if(withRetry)warning.innerHTML=`${esc(text)} <button type="button" class="image-editor-retry-btn" id="imageEditorRetryTemplate">Erneut versuchen</button>`;else warning.textContent=text||"";const retry=$("imageEditorRetryTemplate");if(retry&&!retry.dataset.bound){retry.dataset.bound="1";retry.onclick=()=>{const t=imageTemplateById(imageEditorState.templateId);invalidateImageEditorTemplateCache(t.src);imageEditorState.templateLoadFailed=false;renderImageEditorCanvas()}}}
-function imageEditorCanExport(){if(imageEditorState.templateLoadFailed||!imageEditorState.templateReady)return false;if(!String(imageEditorState.mainText||"").trim())return false;return true}
+function imageEditorCanExport(){if(imageEditorState.templateLoadFailed||!imageEditorState.templateReady)return false;const body=typeof imageEditorBlockText==="function"?imageEditorBlockText("body"):imageEditorState.mainText;return!!String(body||imageEditorState.mainText||"").trim()}
 function updateImageEditorExportButtons(){const ok=imageEditorCanExport(),hint=ok?"":imageEditorExportBlockedMessage();["imageEditorShare","imageEditorSaveTop","imageEditorCopy"].forEach(id=>{const btn=$(id);if(btn){btn.disabled=!ok;btn.title=hint}});const dl=$("imageEditorDownload");if(dl){dl.classList.toggle("is-disabled",!ok);dl.setAttribute("aria-disabled",ok?"false":"true");dl.title=hint}}
 async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");const fontCss=imageEditorFontCss(imageEditorState.font);let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){const main=drawImageEditorText(ctx,imageEditorState.mainText,t.text,{kind:"main",font:fontCss,color:imageEditorState.color,size:imageEditorState.fontSize,lineHeight:imageEditorState.lineHeight,align:imageEditorState.align,offsetX:imageEditorState.offsetX,offsetY:imageEditorState.offsetY,minSize:26});const source=drawImageEditorText(ctx,imageEditorState.sourceText,t.source,{kind:"source",font:fontCss,color:imageEditorState.color,size:imageEditorState.sourceSize,lineHeight:1.12,align:"center",offsetX:imageEditorState.sourceOffsetX,offsetY:imageEditorState.sourceOffsetY,minSize:8});imageEditorState.mainMetrics=main.metrics||null;imageEditorState.sourceMetrics=source.metrics||null;imageEditorState.mainGuideRect=main.guideRect||null;imageEditorState.sourceGuideRect=source.guideRect||null;applyImageEditorClampedOffset("main",main.clamped);applyImageEditorClampedOffset("source",source.clamped);const tooLong=(!main.ok||!source.ok);if(imageEditorState.templateLoadFailed)setImageEditorWarning("Vorlage konnte nicht geladen werden – erneut versuchen",true);else if(tooLong)setImageEditorWarning("Text ist zu lang – bitte kürzen oder Schrift kleiner wählen.",false);else setImageEditorWarning("",false)}else setImageEditorWarning("Vorlage konnte nicht geladen werden – erneut versuchen",true);updateImageEditorGuides();updateImageEditorExportButtons();syncImageEditorOffsetSliderLimits()}
 function syncImageEditorOffsetSliderLimits(){
@@ -14008,7 +14149,7 @@ function renderImageEditorColorChips(){return IMAGE_EDITOR_COLORS.map(c=>{const 
 function renderImageEditorPositionControls(){imageEditorEnsurePremiumState();const b=imageEditorState.activeBlock,off=imageEditorBlockOffsets(b),sc=imageEditorState.blockScales[b]||{w:1,h:1};return `<div class="ie-power-action-grid"><button type="button" data-editor-align="left">Links</button><button type="button" data-editor-align="center">Zentriert</button><button type="button" data-editor-align="right">Rechts</button><button type="button" data-editor-nudge="center-x">Horizontal zentrieren</button><button type="button" data-editor-nudge="center-y">Vertikal zentrieren</button><button type="button" data-editor-nudge="center-safe">In Safe-Area zentrieren</button><button type="button" data-editor-nudge="reset">Standardposition</button><button type="button" data-editor-nudge="up">Text nach oben</button><button type="button" data-editor-nudge="down">Text nach unten</button><button type="button" data-editor-nudge="reset-all">Alles zurücksetzen</button></div><div class="image-editor-fine-grid"><div class="image-editor-range"><span>${esc(imageEditorBlockLabel(b))} L/R</span><output id="imageEditorActiveOffsetXOut">${Math.round(off.x)}</output><input id="imageEditorActiveOffsetX" type="range" min="-160" max="160" value="${Math.round(off.x)}"></div><div class="image-editor-range"><span>${esc(imageEditorBlockLabel(b))} hoch/tief</span><output id="imageEditorActiveOffsetYOut">${Math.round(off.y)}</output><input id="imageEditorActiveOffsetY" type="range" min="-160" max="160" value="${Math.round(off.y)}"></div><div class="image-editor-range"><span>Textbox Breite</span><output id="imageEditorBlockWidthOut">${Math.round((sc.w||1)*100)}%</output><input id="imageEditorBlockWidth" type="range" min="55" max="100" value="${Math.round((sc.w||1)*100)}"></div><div class="image-editor-range"><span>Textbox Höhe</span><output id="imageEditorBlockHeightOut">${Math.round((sc.h||1)*100)}%</output><input id="imageEditorBlockHeight" type="range" min="55" max="100" value="${Math.round((sc.h||1)*100)}"></div></div>`}
 function renderImageEditorSizeControls(){return `<div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="24" max="88" value="${imageEditorState.fontSize}"></div></div><p class="ie-power-note">Haupttext, Quelle und Abstände passen sich automatisch perfekt an.</p>`}
 function renderImageEditorSheet(){imageEditorEnsurePremiumState();const tab=imageEditorState.sheetTab||"font";const panels={font:`<div class="image-editor-form"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><button id="imageEditorResetFont" type="button">Schrift zurücksetzen</button></div>`,color:`<div class="ie-power-color-grid">${renderImageEditorColorChips()}<select id="imageEditorColor" hidden>${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></div>`,size:renderImageEditorSizeControls(),export:`<div class="image-editor-actions"><button id="imageEditorShare" class="primary" type="button">Bild teilen</button><button id="imageEditorCopy" type="button">Bild kopieren</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Download PNG</a></div><p class="ie-power-export-note">Export: 1080 × 1350 px · Layout automatisch perfekt gesetzt.</p>`};return `<aside class="ie-power-sheet ${imageEditorState.sheetOpen?"":"is-collapsed"}" id="imageEditorSheet"><button type="button" class="ie-power-sheet-handle" id="imageEditorSheetToggle" aria-expanded="${imageEditorState.sheetOpen?"true":"false"}"><span></span></button><div class="ie-power-sheet-tabs">${IMAGE_EDITOR_PREMIUM_TABS.map(x=>`<button type="button" data-editor-sheet-tab="${esc(x.id)}" class="${tab===x.id?"active":""}">${esc(x.label)}</button>`).join("")}</div><div class="ie-power-sheet-body">${IMAGE_EDITOR_PREMIUM_TABS.map(x=>`<div class="ie-power-sheet-panel ${tab===x.id?"active":""}" data-editor-sheet-panel="${esc(x.id)}">${panels[x.id]||""}</div>`).join("")}</div></aside>`}
-function renderImageEditor(){seedImageEditorFromRoute(currentRoute.value);imageEditorEnsurePremiumState();const t=imageTemplateById(imageEditorState.templateId);const templates=`<div class="ie-power-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="eager" decoding="async"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div>`;const stage=`<div class="ie-power-stage"><div class="ie-power-preview"><div class="ie-power-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-touch-hint">Deckblatt wählen · Schrift &amp; Farbe anpassen · alles andere wird automatisch perfekt gesetzt</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div>`;return `<div class="ie-power-app" id="imageEditorAnchor"><header class="ie-power-toolbar"><button type="button" id="imageEditorBack">← Zurück</button><span class="ie-power-toolbar-title">Bild-Beitrag</span><button type="button" id="imageEditorSaveTop" class="primary">Teilen</button></header><div class="ie-power-layout">${templates}${stage}${renderImageEditorSheet()}</div></div>`}
+function renderImageEditor(){seedImageEditorFromRoute(currentRoute.value);imageEditorEnsurePremiumState();if(imageEditorState.needsLayout&&window.matchMedia("(max-width:900px)").matches)imageEditorState.sheetOpen=false;const t=imageTemplateById(imageEditorState.templateId);const templates=`<div class="ie-power-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="eager" decoding="async"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div>`;const stage=`<div class="ie-power-stage"><div class="ie-power-preview"><div class="ie-power-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-touch-hint">Deckblatt wählen · Schrift &amp; Farbe anpassen · alles andere wird automatisch perfekt gesetzt</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div>`;return `<div class="ie-power-app" id="imageEditorAnchor"><header class="ie-power-toolbar"><button type="button" id="imageEditorBack">← Zurück</button><span class="ie-power-toolbar-title">Bild-Beitrag</span><button type="button" id="imageEditorSaveTop" class="primary">Teilen</button></header><div class="ie-power-layout">${templates}${stage}${renderImageEditorSheet()}</div></div>`}
 function renderImageEditorTest(){return `<div class="ie-power-test-badge">🧪 Test-Vorschau · noch nicht live</div>`+renderImageEditor()}
 function drawImageEditorPremiumBlock(ctx,block,text,box){if(!String(text||"").trim())return{ok:true,metrics:null,guideRect:null,clamped:{x:0,y:0}};const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const size=imageEditorBlockSize(block);const align=(block==="name"||block==="source")?"center":(imageEditorState.align||"center");const min=block==="source"?12:(block==="name"?15:18);return drawImageEditorSimpleText(ctx,text,box,{font,color:imageEditorState.color,size,lineHeight:block==="source"?1.16:imageEditorState.lineHeight,align,offsetX:0,offsetY:0,minSize:min})}
 async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;imageEditorEnsurePremiumState();const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){imageEditorEnforceAutoLayout({maxBodySize:imageEditorState.fontSize});imageEditorState.blockMetrics={};imageEditorState.blockGuideRects={};imageEditorState.blockTextTooLong={};IMAGE_EDITOR_PREMIUM_BLOCKS.forEach(b=>{const text=imageEditorBlockText(b.id);const result=drawImageEditorPremiumBlock(ctx,b.id,text,imageEditorBlockBox(b.id));imageEditorState.blockMetrics[b.id]=result.metrics||{blockW:result.blockW||0,blockH:result.blockH||0};imageEditorState.blockGuideRects[b.id]=result.guideRect||null;if(b.id==="body"){imageEditorState.mainMetrics=result.metrics||null;imageEditorState.mainGuideRect=result.guideRect||null}else if(b.id==="source"){imageEditorState.sourceMetrics=result.metrics||null;imageEditorState.sourceGuideRect=result.guideRect||null}});applyImageEditorLayoutFeedback()}else{setImageEditorWarning("Vorlage konnte nicht geladen werden. Bitte erneut versuchen.",true);updateImageEditorGuides();updateImageEditorExportButtons()}}
@@ -14016,7 +14157,7 @@ function applyImageEditorClampedOffset(){}
 function imageEditorMoveActive(block,startOff,dxC,dyC){const safe=imageEditorSafeBoxFor(block);const sc=imageEditorState.blockScales?.[block]||{w:1,h:1};const w=Math.max(80,Math.min(safe.w,safe.w*(Number(sc.w)||1))),h=Math.max(50,Math.min(safe.h,safe.h*(Number(sc.h)||1)));const maxX=Math.max(0,(safe.w-w)/2),maxY=Math.max(0,(safe.h-h)/2);let nx=Math.max(-maxX,Math.min(maxX,startOff.x+dxC)),ny=Math.max(-maxY,Math.min(maxY,startOff.y+dyC));const SNAP=14,cx=safe.x+(safe.w-w)/2+nx+w/2,cy=safe.y+(safe.h-h)/2+ny+h/2;const snapGuides={h:false,v:false};if(Math.abs(cx-IMAGE_EDITOR_CANVAS_W/2)<=SNAP){nx+=IMAGE_EDITOR_CANVAS_W/2-cx;snapGuides.v=true;snapGuides.vx=IMAGE_EDITOR_CANVAS_W/2}if(Math.abs(cy-IMAGE_EDITOR_CANVAS_H/2)<=SNAP){ny+=IMAGE_EDITOR_CANVAS_H/2-cy;snapGuides.h=true;snapGuides.hy=IMAGE_EDITOR_CANVAS_H/2}const safeCx=safe.x+safe.w/2,safeCy=safe.y+safe.h/2;if(Math.abs(safe.x+(safe.w-w)/2+nx+w/2-safeCx)<=SNAP){nx=0;snapGuides.v=true;snapGuides.vx=safeCx}if(Math.abs(safe.y+(safe.h-h)/2+ny+h/2-safeCy)<=SNAP){ny=0;snapGuides.h=true;snapGuides.hy=safeCy}nx=Math.max(-maxX,Math.min(maxX,nx));ny=Math.max(-maxY,Math.min(maxY,ny));imageEditorState.snapGuides=snapGuides;setImageEditorBlockOffsets(block,nx,ny)}
 function imageEditorApplyResize(block,startBox,edge,dxC,dyC){const safe=imageEditorSafeBoxFor(block);let left=startBox.x,top=startBox.y,right=startBox.x+startBox.w,bottom=startBox.y+startBox.h;if(edge.indexOf("e")>=0)right=startBox.x+startBox.w+dxC;if(edge.indexOf("w")>=0)left=startBox.x+dxC;if(edge.indexOf("s")>=0)bottom=startBox.y+startBox.h+dyC;if(edge.indexOf("n")>=0)top=startBox.y+dyC;left=Math.max(safe.x,left);top=Math.max(safe.y,top);right=Math.min(safe.x+safe.w,right);bottom=Math.min(safe.y+safe.h,bottom);const minW=170,minH=72;if(right-left<minW){if(edge.indexOf("w")>=0)left=right-minW;else right=left+minW}if(bottom-top<minH){if(edge.indexOf("n")>=0)top=bottom-minH;else bottom=top+minH}const w=Math.max(minW,right-left),h=Math.max(minH,bottom-top);const scW=Math.max(0.2,Math.min(1,w/safe.w)),scH=Math.max(0.2,Math.min(1,h/safe.h));imageEditorState.blockScales[block]={w:scW,h:scH};const offX=left-(safe.x+(safe.w-safe.w*scW)/2);const offY=top-(safe.y+(safe.h-safe.h*scH)/2);setImageEditorBlockOffsets(block,offX,offY)}
 function imageEditorActiveHandleAt(clientX,clientY,canvas){const p=screenToImageEditorCanvas(clientX,clientY,canvas);const box=imageEditorBlockBox(imageEditorState.activeBlock);const bx=Math.max(30,box.w*0.12),by=Math.max(30,box.h*0.14);const inside=p.x>=box.x-bx&&p.x<=box.x+box.w+bx&&p.y>=box.y-by&&p.y<=box.y+box.h+by;if(!inside)return null;const nearL=Math.abs(p.x-box.x)<=bx,nearR=Math.abs(p.x-(box.x+box.w))<=bx,nearT=Math.abs(p.y-box.y)<=by,nearB=Math.abs(p.y-(box.y+box.h))<=by;let edge="";if(nearT)edge+="n";if(nearB)edge+="s";if(nearL)edge+="w";if(nearR)edge+="e";if(edge)return{type:"resize",edge};return{type:"move"}}
-function updateImageEditorGuides(){const layer=$("imageEditorGuides");if(layer)layer.innerHTML=""}
+function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/IMAGE_EDITOR_CANVAS_W,sy=rect.height/IMAGE_EDITOR_CANVAS_H;const active=imageEditorState.activeBlock;const guideFor=(kind)=>{if(kind!==active)return"";const guideRect=imageEditorBlockGuideRect(kind);const box=guideRect||imageEditorInnerBox(imageEditorBlockBox(kind));const left=box.x*sx,top=box.y*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide is-active" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`};layer.innerHTML=guideFor("body")+guideFor("source")}
 function bindImageEditorTestTouch(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas");if(!wrap||!canvas||wrap.dataset.testTouchBound==="1")return;wrap.dataset.testTouchBound="1";let rafId=0;const refresh=()=>{if(rafId)return;rafId=requestAnimationFrame(()=>{rafId=0;syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()})};const release=()=>{imageEditorTouch=null;imageEditorState.snapGuides=null;wrap.classList.remove("is-dragging","is-pinch-active")};const onStart=e=>{if(!e.touches)return;if(imageEditorState.interactionMode!=="edit"){if(e.touches.length===1){imageEditorTouch={mode:"tap",block:imageEditorPickBlock(e.touches[0].clientX,e.touches[0].clientY,canvas),x:e.touches[0].clientX,y:e.touches[0].clientY,moved:false}}return}if(e.touches.length===2){e.preventDefault();imageEditorTouch={mode:"pinch",block:imageEditorState.activeBlock,startDist:imageEditorTouchDistance(e.touches),startSize:imageEditorBlockSize(imageEditorState.activeBlock)};wrap.classList.add("is-dragging","is-pinch-active");return}if(e.touches.length!==1)return;const handle=imageEditorActiveHandleAt(e.touches[0].clientX,e.touches[0].clientY,canvas);if(!handle){imageEditorTouch={mode:"tap",block:imageEditorPickBlock(e.touches[0].clientX,e.touches[0].clientY,canvas),x:e.touches[0].clientX,y:e.touches[0].clientY,moved:false};return}e.preventDefault();wrap.classList.add("is-dragging");if(handle.type==="resize")imageEditorTouch={mode:"resize",edge:handle.edge,block:imageEditorState.activeBlock,startBox:imageEditorBlockBox(imageEditorState.activeBlock),startX:e.touches[0].clientX,startY:e.touches[0].clientY};else imageEditorTouch={mode:"move",block:imageEditorState.activeBlock,startOff:imageEditorBlockOffsets(imageEditorState.activeBlock),startX:e.touches[0].clientX,startY:e.touches[0].clientY}};const onMove=e=>{if(!imageEditorTouch||!e.touches)return;const t=imageEditorTouch;if(t.mode==="tap"){const dx=e.touches[0].clientX-t.x,dy=e.touches[0].clientY-t.y;if(Math.hypot(dx,dy)>12)t.moved=true;return}e.preventDefault();const scale=imageEditorCanvasScale(canvas);if(t.mode==="move"){imageEditorMoveActive(t.block,t.startOff,(e.touches[0].clientX-t.startX)*scale.width,(e.touches[0].clientY-t.startY)*scale.height);refresh()}else if(t.mode==="resize"){imageEditorApplyResize(t.block,t.startBox,t.edge,(e.touches[0].clientX-t.startX)*scale.width,(e.touches[0].clientY-t.startY)*scale.height);refresh()}else if(t.mode==="pinch"&&e.touches.length===2){const dist=imageEditorTouchDistance(e.touches);if(!t.startDist)return;const next=Math.round(t.startSize*(dist/t.startDist));const b=t.block;if(b==="source")imageEditorState.sourceSize=Math.max(8,Math.min(30,next));else if(b==="name")imageEditorState.nameSize=Math.max(16,Math.min(60,next));else if(b==="fazit")imageEditorState.fazitSize=Math.max(18,Math.min(70,next));else imageEditorState.fontSize=Math.max(24,Math.min(88,next));refresh()}};const onEnd=()=>{if(imageEditorTouch&&imageEditorTouch.mode==="tap"&&!imageEditorTouch.moved&&imageEditorTouch.block)setImageEditorActiveBlock(imageEditorTouch.block);release()};wrap.addEventListener("touchstart",onStart,{passive:false});wrap.addEventListener("touchmove",onMove,{passive:false});wrap.addEventListener("touchend",onEnd,{passive:true});wrap.addEventListener("touchcancel",onEnd,{passive:true});let drag=null;wrap.onmousedown=e=>{if(e.button!==0||imageEditorState.interactionMode!=="edit")return;const handle=imageEditorActiveHandleAt(e.clientX,e.clientY,canvas);if(!handle){setImageEditorActiveBlock(imageEditorPickBlock(e.clientX,e.clientY,canvas));return}e.preventDefault();if(handle.type==="resize")drag={mode:"resize",edge:handle.edge,block:imageEditorState.activeBlock,startBox:imageEditorBlockBox(imageEditorState.activeBlock),startX:e.clientX,startY:e.clientY};else drag={mode:"move",block:imageEditorState.activeBlock,startOff:imageEditorBlockOffsets(imageEditorState.activeBlock),startX:e.clientX,startY:e.clientY};wrap.classList.add("is-dragging")};window.addEventListener("mousemove",e=>{if(!drag)return;const scale=imageEditorCanvasScale(canvas);const dx=(e.clientX-drag.startX)*scale.width,dy=(e.clientY-drag.startY)*scale.height;if(drag.mode==="move")imageEditorMoveActive(drag.block,drag.startOff,dx,dy);else imageEditorApplyResize(drag.block,drag.startBox,drag.edge,dx,dy);syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()});window.addEventListener("mouseup",()=>{drag=null;imageEditorState.snapGuides=null;wrap.classList.remove("is-dragging")})}
 function syncImageEditorOffsetSliderLimits(){const b=imageEditorState.activeBlock,box=imageEditorSafeBoxFor(b);const maxX=Math.max(30,Math.round(box.w/3)),maxY=Math.max(30,Math.round(box.h/3));[["imageEditorActiveOffsetX",imageEditorBlockOffsets(b).x,maxX],["imageEditorActiveOffsetY",imageEditorBlockOffsets(b).y,maxY]].forEach(([id,val,max])=>{const el=$(id);if(!el)return;el.min=String(-max);el.max=String(max);const clamped=Math.max(-max,Math.min(max,Number(val)||0));if(Number(el.value)!==clamped)el.value=String(clamped)})}
 function setImageEditorStateFromInputs(){imageEditorEnsurePremiumState();imageEditorState.font=$("imageEditorFont")?.value||imageEditorState.font||"serif";imageEditorState.color=$("imageEditorColor")?.value||imageEditorState.color||imageTemplateById(imageEditorState.templateId).color;if($("imageEditorFontSize"))imageEditorState.fontSize=Number($("imageEditorFontSize").value||58)}
@@ -14029,7 +14170,7 @@ function applyImageEditorNudge(action){imageEditorEnsurePremiumState();const b=i
 function bindImageEditorInputs(){["imageEditorFont","imageEditorColor","imageEditorFontSize"].forEach(id=>{const el=$(id);if(!el||el.dataset.premiumBound==="1")return;el.dataset.premiumBound="1";el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();autoFitImageEditor()};el.onchange=el.oninput})}
 function refreshImageEditorSheetPreserveScroll(){const sheet=$("imageEditorSheet");if(!sheet)return;const winY=window.scrollY||document.documentElement.scrollTop||0;const bodyScroll=sheet.querySelector(".ie-power-sheet-body")?.scrollTop||0;const tmp=document.createElement("div");tmp.innerHTML=renderImageEditorSheet();const fresh=tmp.firstElementChild;if(!fresh)return;sheet.replaceWith(fresh);const body=fresh.querySelector(".ie-power-sheet-body");if(body)body.scrollTop=bodyScroll;bindImageEditor();requestAnimationFrame(()=>window.scrollTo({top:winY,behavior:"auto"}))}
 function setImageEditorSheetTab(tab){const winY=window.scrollY||document.documentElement.scrollTop||0;imageEditorState.sheetTab=IMAGE_EDITOR_PREMIUM_TABS.some(x=>x.id===tab)?tab:"font";imageEditorState.sheetOpen=true;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.remove("is-collapsed");const toggle=$("imageEditorSheetToggle");if(toggle)toggle.setAttribute("aria-expanded","true");document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-editor-sheet-tab")===imageEditorState.sheetTab));document.querySelectorAll("[data-editor-sheet-panel]").forEach(panel=>panel.classList.toggle("active",panel.getAttribute("data-editor-sheet-panel")===imageEditorState.sheetTab));requestAnimationFrame(()=>window.scrollTo({top:winY,behavior:"auto"}))}
-function bindImageEditor(){if(!["image-editor","image-editor-test"].includes(currentRoute.view))return;imageEditorEnsurePremiumState();const back=$("imageEditorBack");if(back)back.onclick=()=>goBack();const saveTop=$("imageEditorSaveTop");if(saveTop)saveTop.onclick=()=>shareImageEditor();const sheetToggle=$("imageEditorSheetToggle");if(sheetToggle)sheetToggle.onclick=()=>{imageEditorState.sheetOpen=!imageEditorState.sheetOpen;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.toggle("is-collapsed",!imageEditorState.sheetOpen);sheetToggle.setAttribute("aria-expanded",imageEditorState.sheetOpen?"true":"false")};document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();setImageEditorSheetTab(btn.getAttribute("data-editor-sheet-tab")||"font")}});document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();document.querySelectorAll("[data-image-template]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-template")===imageEditorState.templateId))}});document.querySelectorAll("[data-image-color]").forEach(btn=>{btn.onclick=()=>{imageEditorState.color=btn.getAttribute("data-image-color")||imageEditorState.color;const hidden=$("imageEditorColor");if(hidden)hidden.value=imageEditorState.color;document.querySelectorAll("[data-image-color]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-color")===imageEditorState.color));autoFitImageEditor()}});bindImageEditorInputs();const resetFont=$("imageEditorResetFont");if(resetFont)resetFont.onclick=()=>{imageEditorState.font="serif";imageEditorState.fontSize=58;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;autoFitImageEditor()};const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert(imageEditorExportBlockedMessage());return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();const copy=$("imageEditorCopy");if(copy)copy.onclick=()=>copyImageEditor();if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}}
+function bindImageEditor(){if(!["image-editor","image-editor-test"].includes(currentRoute.view))return;imageEditorEnsurePremiumState();const back=$("imageEditorBack");if(back)back.onclick=()=>goBack();const saveTop=$("imageEditorSaveTop");if(saveTop)saveTop.onclick=()=>shareImageEditor();const sheetToggle=$("imageEditorSheetToggle");if(sheetToggle)sheetToggle.onclick=()=>{imageEditorState.sheetOpen=!imageEditorState.sheetOpen;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.toggle("is-collapsed",!imageEditorState.sheetOpen);sheetToggle.setAttribute("aria-expanded",imageEditorState.sheetOpen?"true":"false")};document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();setImageEditorSheetTab(btn.getAttribute("data-editor-sheet-tab")||"font")}});document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();document.querySelectorAll("[data-image-template]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-template")===imageEditorState.templateId))}});document.querySelectorAll("[data-image-color]").forEach(btn=>{btn.onclick=()=>{imageEditorState.color=btn.getAttribute("data-image-color")||imageEditorState.color;const hidden=$("imageEditorColor");if(hidden)hidden.value=imageEditorState.color;document.querySelectorAll("[data-image-color]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-color")===imageEditorState.color));autoFitImageEditor()}});bindImageEditorInputs();const resetFont=$("imageEditorResetFont");if(resetFont)resetFont.onclick=()=>{imageEditorState.font="serif";imageEditorState.fontSize=58;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;autoFitImageEditor()};const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert(imageEditorExportBlockedMessage());return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();const copy=$("imageEditorCopy");if(copy)copy.onclick=()=>copyImageEditor();loadImageEditorTemplate(imageTemplateById(imageEditorState.templateId).src).catch(()=>{});bindImageEditorTouch();bindImageEditorTextExpand();const bootImageEditorCanvas=()=>{if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas().then(()=>downloadImageEditor())}};requestAnimationFrame(()=>requestAnimationFrame(bootImageEditorCanvas))}
 function openImageEditorTextExpand(block){ensureImageEditorTextModal();imageEditorEnsurePremiumState();imageEditorState.textExpandBlock=IMAGE_EDITOR_PREMIUM_BLOCKS.some(b=>b.id===block)?block:"body";setImageEditorActiveBlock(imageEditorState.textExpandBlock);const modal=$("imageEditorTextModal"),title=$("imageEditorTextModalTitle"),area=$("imageEditorTextModalArea");if(!modal||!title||!area)return;title.textContent=imageEditorBlockLabel(imageEditorState.textExpandBlock)+" bearbeiten";area.value=imageEditorBlockText(imageEditorState.textExpandBlock);updateImageEditorTextModalHint();modal.hidden=false;requestAnimationFrame(()=>{try{area.focus();area.setSelectionRange(area.value.length,area.value.length)}catch(e){}})}
 function closeImageEditorTextExpand(save){const modal=$("imageEditorTextModal"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!modal)return;if(save&&area&&block){setImageEditorBlockText(block,area.value||"");syncImageEditorInputsFromState();renderImageEditorCanvas().then(()=>downloadImageEditor())}imageEditorState.textExpandBlock="";modal.hidden=true}
 function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!hint||!area||!block)return;const lines=String(area.value||"").split(/\n/).length;hint.textContent=`${lines} Zeile${lines===1?"":"n"} · Speichern übernimmt den Text direkt in die Vorschau.`;const canvas=$("imageEditorCanvas"),ctx=canvas?.getContext("2d");if(!ctx)return;const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const fit=fitImageEditorText(ctx,area.value,imageEditorInnerBox(imageEditorBlockBox(block)),font,imageEditorBlockSize(block),block==="source"?1.16:imageEditorState.lineHeight,block==="source"?12:16);}

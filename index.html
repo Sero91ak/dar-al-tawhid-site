@@ -892,6 +892,87 @@ html[data-theme="bordeaux"] .hadith-shell{--hadith-bg:#140b0c;--hadith-panel:#21
 .ilm-loading-card b{color:var(--cream);font-size:13px}
 .ilm-loading-card span{color:var(--muted);font-size:11.5px;line-height:1.5}
 .ilm-empty-hint{padding:14px;border:1px dashed var(--line2);border-radius:18px;color:var(--muted);font-size:11.5px;line-height:1.55}
+html:has(body.is-ilm-chat-route){background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
+body.is-ilm-chat-route{overflow:hidden!important;padding:0!important;margin:0!important;background:var(--ilm-page-bg,#071629)!important}
+body.is-ilm-chat-route .app-bar,
+body.is-ilm-chat-route .top-shell,
+body.is-ilm-chat-route .isnad,
+body.is-ilm-chat-route .footer,
+body.is-ilm-chat-route .float-actions,
+body.is-ilm-chat-route #newPostsBanner,
+body.is-ilm-chat-route #appChromeDock,
+body.is-ilm-chat-route #bottomNav{display:none!important}
+body.is-ilm-chat-route .app{position:fixed!important;inset:0!important;width:100vw!important;max-width:none!important;height:100dvh!important;min-height:100dvh!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;clip-path:none!important;box-shadow:none!important;background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
+body.is-ilm-chat-route #appShell{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;background:var(--ilm-page-bg,#071629)!important;overflow:hidden!important}
+body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;clip-path:none!important;box-shadow:none!important;overflow:hidden!important;background:var(--ilm-page-bg,#071629)!important}
+body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-message-bg:#1d1b16;--ilm-assistant-bg:transparent;--ilm-composer-bg:#11100d;--ilm-primary-text:#f7efdf;--ilm-secondary-text:#c6bba7;--ilm-accent:#d6b46a;--ilm-border:rgba(214,180,106,.16);--ilm-sheet-bg:#12110e;--ilm-overlay:rgba(0,0,0,.52)}
+[data-theme="light"] body.is-ilm-chat-route{--ilm-page-bg:#f7f0df;--ilm-header-bg:#fff8eb;--ilm-user-message-bg:#eadfca;--ilm-assistant-bg:transparent;--ilm-composer-bg:#fff9ee;--ilm-primary-text:#241c16;--ilm-secondary-text:#6f6255;--ilm-accent:#9d7132;--ilm-border:rgba(103,72,35,.18);--ilm-sheet-bg:#fff8eb;--ilm-overlay:rgba(44,31,22,.24)}
+[data-theme="soft"] body.is-ilm-chat-route{--ilm-page-bg:#f2e6e2;--ilm-header-bg:#fbf1ee;--ilm-user-message-bg:#ead8d2;--ilm-assistant-bg:transparent;--ilm-composer-bg:#fff5f1;--ilm-primary-text:#281b1c;--ilm-secondary-text:#725f60;--ilm-accent:#9f6e4a;--ilm-border:rgba(106,70,59,.16);--ilm-sheet-bg:#fbf1ee;--ilm-overlay:rgba(48,27,30,.24)}
+[data-theme="royal"] body.is-ilm-chat-route{--ilm-page-bg:#071629;--ilm-header-bg:#0a1b30;--ilm-user-message-bg:#173553;--ilm-assistant-bg:transparent;--ilm-composer-bg:#102a46;--ilm-primary-text:#f5f0e6;--ilm-secondary-text:#b6bfca;--ilm-accent:#d4bc78;--ilm-border:rgba(212,188,120,.16);--ilm-sheet-bg:#0a1b30;--ilm-overlay:rgba(0,0,0,.46)}
+[data-theme="bordeaux"] body.is-ilm-chat-route{--ilm-page-bg:#140b0c;--ilm-header-bg:#211013;--ilm-user-message-bg:#3a1b22;--ilm-assistant-bg:transparent;--ilm-composer-bg:#2a1418;--ilm-primary-text:#fff1df;--ilm-secondary-text:#d1b8ad;--ilm-accent:#d5b46f;--ilm-border:rgba(213,180,111,.18);--ilm-sheet-bg:#211013;--ilm-overlay:rgba(0,0,0,.50)}
+.ilm-chat-shell{height:100dvh;width:100%;min-width:0;min-height:0;box-sizing:border-box;display:grid;grid-template-rows:auto minmax(0,1fr);position:relative;background:radial-gradient(circle at 50% -10%,color-mix(in srgb,var(--ilm-accent) 9%,transparent),transparent 34%),var(--ilm-page-bg);color:var(--ilm-primary-text);border-radius:0;overflow:hidden;overscroll-behavior:none;--ilm-composer-reserve:76px}
+.ilm-chat-header{display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:8px;min-height:64px;padding:calc(11px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) 10px max(14px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--ilm-border);background:linear-gradient(180deg,color-mix(in srgb,var(--ilm-header-bg) 99%,var(--ilm-page-bg) 1%),color-mix(in srgb,var(--ilm-header-bg) 92%,var(--ilm-page-bg) 8%));backdrop-filter:blur(14px) saturate(1.05);position:relative;z-index:4;box-sizing:border-box;border-radius:0 0 22px 22px;box-shadow:0 10px 26px rgba(0,0,0,.08)}
+.ilm-icon-btn{width:39px;height:39px;border:1px solid var(--ilm-border);border-radius:999px;background:color-mix(in srgb,var(--ilm-header-bg) 76%,white 5%);color:var(--ilm-primary-text);display:grid;place-items:center;font-size:17px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.10);-webkit-tap-highlight-color:transparent}
+.ilm-icon-btn:active{transform:scale(.97)}
+.ilm-header-title{text-align:center;min-width:0;padding:0 2px}.ilm-header-title b{display:block;font-size:clamp(16px,4.4vw,19px);line-height:1.08;color:var(--ilm-primary-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ilm-header-title span{display:block;margin-top:2px;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ilm-secondary-text);font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ilm-header-actions{display:flex;gap:7px;justify-content:flex-end;min-width:0}
+.ilm-message-list{min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:18px max(12px,env(safe-area-inset-right,0px)) calc(var(--ilm-composer-reserve) + var(--ilm-keyboard-offset,0px) + 12px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));scrollbar-width:thin;box-sizing:border-box;overscroll-behavior:contain}
+.ilm-message-inner{width:min(860px,100%);max-width:100%;margin:0 auto;display:grid;gap:17px;box-sizing:border-box}
+.ilm-welcome{min-height:100%;display:grid;place-items:center;padding:20px 0}.ilm-welcome-card{width:min(540px,100%);text-align:center;display:grid;gap:13px;padding:0 4px;box-sizing:border-box}.ilm-welcome-logo{width:56px;height:56px;margin:0 auto;border-radius:50%;display:grid;place-items:center;border:1px solid var(--ilm-border);background:color-mix(in srgb,var(--ilm-accent) 12%,transparent);font-size:25px}.ilm-welcome h2{margin:0;font-family:var(--serif);font-size:clamp(27px,8vw,38px);line-height:1.04;color:var(--ilm-primary-text)}.ilm-welcome p{margin:0 auto;max-width:480px;color:var(--ilm-secondary-text);font-size:15px;line-height:1.55}.ilm-starter-chips{display:grid;gap:9px;margin-top:5px}.ilm-starter-chip{border:1px solid var(--ilm-border);border-radius:18px;background:color-mix(in srgb,var(--ilm-header-bg) 76%,white 4%);color:var(--ilm-primary-text);min-height:46px;padding:11px 14px;font-size:14px;font-weight:800;text-align:left;cursor:pointer;box-shadow:0 10px 22px rgba(0,0,0,.08)}
+.ilm-user-row{display:flex;justify-content:flex-end;min-width:0}.ilm-user-bubble{max-width:min(84%,620px);min-width:0;padding:11px 14px;border:1px solid color-mix(in srgb,var(--ilm-accent) 14%,transparent);border-radius:20px 20px 7px 20px;background:var(--ilm-user-message-bg);color:var(--ilm-primary-text);font-size:16px;line-height:1.5;box-shadow:0 10px 24px rgba(0,0,0,.12);overflow-wrap:anywhere}
+.ilm-assistant-message{max-width:min(760px,100%);min-width:0;display:grid;gap:8px}.ilm-assistant-name{font-size:12px;font-weight:900;color:var(--ilm-accent);letter-spacing:.02em}.ilm-answer-text{color:var(--ilm-primary-text);font-size:17px;line-height:1.58;display:grid;gap:10px;overflow-wrap:anywhere}.ilm-answer-text p{margin:0}.ilm-answer-note{color:var(--ilm-secondary-text);font-size:14px;line-height:1.5}.ilm-citation{color:var(--ilm-accent);font-weight:900;white-space:nowrap}
+.ilm-answer-toolbar{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}.ilm-action-link{border:1px solid var(--ilm-border);border-radius:999px;background:color-mix(in srgb,var(--ilm-header-bg) 70%,white 4%);color:var(--ilm-primary-text);min-height:34px;padding:7px 11px;font-size:12px;font-weight:850;cursor:pointer}.ilm-action-link.primary{color:var(--ilm-accent);background:color-mix(in srgb,var(--ilm-accent) 10%,transparent)}
+.ilm-loading-row{display:flex;align-items:center;gap:8px;color:var(--ilm-secondary-text);font-size:14px}.ilm-dots{display:inline-flex;gap:4px}.ilm-dots i{width:5px;height:5px;border-radius:50%;background:var(--ilm-accent);opacity:.45;animation:ilmDot 1.2s infinite ease-in-out}.ilm-dots i:nth-child(2){animation-delay:.15s}.ilm-dots i:nth-child(3){animation-delay:.3s}@keyframes ilmDot{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-3px);opacity:.9}}
+.ilm-composer-bar{border-top:0;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--ilm-page-bg) 86%,transparent) 28%,var(--ilm-page-bg));padding:6px max(12px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));position:fixed;left:0;right:0;bottom:var(--ilm-keyboard-offset,0px);z-index:96;box-sizing:border-box;pointer-events:none;transform:translateZ(0);will-change:bottom}.ilm-composer-inner{width:min(880px,100%);max-width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:7px;align-items:end;border:1px solid color-mix(in srgb,var(--ilm-border) 82%,white 10%);border-radius:999px;background:color-mix(in srgb,var(--ilm-composer-bg) 92%,white 5%);padding:5px 5px 5px 16px;box-sizing:border-box;box-shadow:0 12px 34px rgba(0,0,0,.18);pointer-events:auto}.ilm-send-icon{height:36px;width:36px;border-radius:999px;border:0;background:var(--ilm-accent);color:var(--ilm-page-bg);font-weight:950;cursor:pointer;box-shadow:0 7px 18px color-mix(in srgb,var(--ilm-accent) 18%,transparent);display:grid;place-items:center;line-height:1}.ilm-chat-input{min-height:36px;max-height:96px;width:100%;resize:none;overflow:auto;border:0;border-radius:18px;background:transparent;color:var(--ilm-primary-text);padding:8px 0;font:500 16px/1.42 var(--sans);outline:none;box-sizing:border-box}.ilm-chat-input::placeholder{color:var(--ilm-secondary-text)}.ilm-chat-input:focus{box-shadow:none}
+.ilm-sheet-backdrop[hidden],.ilm-history-drawer[hidden],.ilm-menu-popover[hidden]{display:none!important}.ilm-sheet-backdrop{position:fixed;inset:0;z-index:90;background:var(--ilm-overlay);display:grid;align-items:end}.ilm-sheet{max-height:min(78dvh,720px);overflow:auto;border:1px solid var(--ilm-border);border-radius:24px 24px 0 0;background:var(--ilm-sheet-bg);color:var(--ilm-primary-text);padding:16px;width:100%;box-sizing:border-box}.ilm-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.ilm-sheet-head h3{margin:0;font-size:18px;color:var(--ilm-primary-text)}.ilm-source-list,.ilm-related-list,.ilm-thread-list{display:grid;gap:10px}.ilm-source-row,.ilm-related-row,.ilm-thread-row-new{border:1px solid var(--ilm-border);border-radius:16px;background:rgba(255,255,255,.035);padding:12px;color:var(--ilm-primary-text);text-align:left}.ilm-source-row b,.ilm-related-row b,.ilm-thread-row-new b{display:block;font-size:14px;line-height:1.3}.ilm-source-row span,.ilm-related-row span,.ilm-thread-row-new span{display:block;margin-top:4px;color:var(--ilm-secondary-text);font-size:12px;line-height:1.45}.ilm-source-row p{margin:8px 0 0;color:var(--ilm-primary-text);font-size:13px;line-height:1.55}.ilm-source-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.ilm-source-actions :where(a,button){border:1px solid var(--ilm-border);border-radius:999px;background:color-mix(in srgb,var(--ilm-accent) 10%,transparent);color:var(--ilm-primary-text);min-height:34px;padding:7px 10px;font-size:12px;font-weight:850;text-decoration:none}
+.ilm-history-drawer{position:fixed;inset:0 auto 0 0;z-index:92;width:min(380px,92vw);background:var(--ilm-sheet-bg);color:var(--ilm-primary-text);border-right:1px solid var(--ilm-border);box-shadow:18px 0 60px rgba(0,0,0,.30);padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px));display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:12px;box-sizing:border-box}.ilm-drawer-head{display:flex;align-items:center;justify-content:space-between}.ilm-drawer-head h3{margin:0;font-size:18px}.ilm-thread-row-new{cursor:pointer}.ilm-thread-row-new.active{border-color:color-mix(in srgb,var(--ilm-accent) 48%,transparent);background:color-mix(in srgb,var(--ilm-accent) 10%,transparent)}
+.ilm-menu-popover{position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:calc(64px + env(safe-area-inset-top,0px));z-index:93;width:min(300px,calc(100vw - 24px));border:1px solid var(--ilm-border);border-radius:22px;background:var(--ilm-sheet-bg);box-shadow:0 22px 55px rgba(0,0,0,.28);padding:8px;display:grid;gap:4px;box-sizing:border-box}.ilm-menu-popover button{border:0;background:transparent;color:var(--ilm-primary-text);padding:11px 12px;border-radius:14px;text-align:left;font-size:13px;font-weight:850}.ilm-menu-popover button:hover{background:color-mix(in srgb,var(--ilm-accent) 9%,transparent)}
+@media(min-width:900px){.ilm-message-inner,.ilm-composer-inner{width:min(900px,calc(100vw - 56px))}.ilm-sheet-backdrop{align-items:center;justify-items:end;padding:24px}.ilm-sheet{width:min(420px,38vw);height:min(82dvh,780px);border-radius:22px}}
+@media(max-width:520px){.ilm-chat-shell{--ilm-composer-reserve:72px}.ilm-chat-header{grid-template-columns:42px minmax(0,1fr) auto}.ilm-message-list{padding:14px max(10px,env(safe-area-inset-right,0px)) calc(var(--ilm-composer-reserve) + var(--ilm-keyboard-offset,0px) + 10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}.ilm-answer-text{font-size:16.5px}.ilm-user-bubble{font-size:15.5px;max-width:min(86%,620px)}.ilm-composer-bar{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}.ilm-composer-inner{grid-template-columns:minmax(0,1fr) 38px;padding-left:15px}.ilm-send-icon{width:34px;height:34px}.ilm-chat-input{font-size:16px}}
+/* Ilm compact drawer/composer overrides */
+.ilm-message-inner{gap:12px}
+.ilm-history-drawer{padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px));gap:8px}
+.ilm-drawer-head h3{font-size:16px}
+.ilm-history-drawer>.ilm-action-link.primary{width:100%;min-height:32px;padding:6px 10px;font-size:12px;justify-content:center}
+.ilm-thread-list{display:flex;flex-direction:column;align-content:flex-start;gap:5px;overflow-y:auto;min-height:0;align-self:stretch}
+.ilm-thread-row-new{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  flex:0 0 auto;
+  min-height:0;
+  height:auto;
+  padding:7px 10px;
+  border-radius:12px;
+}
+.ilm-thread-row-new b{margin:0;font-size:13.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ilm-thread-row-new span{margin:0;font-size:10.5px;line-height:1.2;color:var(--ilm-secondary-text);white-space:nowrap}
+/* Ilm overlays must sit above the fixed composer and scroll internally */
+.ilm-sheet-backdrop{z-index:100}
+.ilm-history-drawer{z-index:100}
+.ilm-menu-popover{z-index:101}
+.ilm-sheet{display:flex;flex-direction:column;max-height:min(86dvh,calc(100dvh - env(safe-area-inset-top,0px) - 8px));overflow:hidden;padding:0;box-sizing:border-box}
+.ilm-sheet-head{flex:0 0 auto;margin-bottom:0;padding:14px 14px 10px;border-bottom:1px solid color-mix(in srgb,var(--ilm-border) 85%,transparent)}
+.ilm-sheet-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px))}
+.ilm-sheet-body .ilm-source-list,.ilm-sheet-body .ilm-related-list{display:grid;gap:8px}
+@media(min-width:900px){.ilm-sheet{height:min(82dvh,780px);max-height:min(82dvh,780px)}}
+.ilm-composer-bar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
+.ilm-composer-inner{padding-top:4px;padding-bottom:4px}
+.ilm-confidence{display:inline-flex;align-items:center;border:1px solid var(--ilm-border);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:850;color:var(--ilm-accent);margin-bottom:4px}
+.ilm-section-title{margin:10px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ilm-accent);font-weight:900}
+.ilm-source-cards{display:grid;gap:10px;margin-top:6px}
+.ilm-source-card-v2{border:1px solid var(--ilm-border);border-radius:16px;background:color-mix(in srgb,var(--ilm-header-bg) 72%,white 3%);padding:12px;display:grid;gap:6px}
+.ilm-source-card-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ilm-source-type,.ilm-source-origin{font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ilm-secondary-text)}
+.ilm-source-origin{color:var(--ilm-accent)}
+.ilm-source-card-v2 b{font-size:14px;line-height:1.35;color:var(--ilm-primary-text)}
+.ilm-source-ref{font-size:12px;color:var(--ilm-secondary-text);line-height:1.4}
+.ilm-source-card-v2 p{margin:0;font-size:13px;line-height:1.5;color:var(--ilm-primary-text)}
+.ilm-source-open{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 12px;border-radius:999px;border:1px solid var(--ilm-border);background:color-mix(in srgb,var(--ilm-accent) 12%,transparent);color:var(--ilm-primary-text);font-size:12px;font-weight:900;text-decoration:none;width:max-content}
+.ilm-clarify-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.ilm-clarify-chip{border:1px solid var(--ilm-border);border-radius:999px;background:color-mix(in srgb,var(--ilm-header-bg) 70%,white 4%);color:var(--ilm-primary-text);min-height:34px;padding:7px 11px;font-size:12px;font-weight:850;cursor:pointer;text-align:left}
 .ilm-inline-status{color:var(--muted2);font-size:10.8px}
 @media(max-width:980px){.ilm-grid{grid-template-columns:1fr}.ilm-side{order:2}.ilm-chat-panel{order:1;min-height:auto}}
 .feature-section{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:0 16px 42px rgba(0,0,0,.18);padding:14px;overflow:hidden}.feature-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}.feature-head h3{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(22px,4vw,32px);line-height:1.1}.feature-head span{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:4px}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature-card{position:relative;min-width:0;border:1px solid rgba(214,180,106,.28);border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));padding:12px;display:grid;gap:9px;overflow:hidden}.feature-card-top{display:flex;align-items:flex-start;gap:10px}.feature-icon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(214,180,106,.26);background:rgba(214,180,106,.10);font-size:20px}.feature-card h4{margin:0;color:var(--text);font-size:15px;line-height:1.2;overflow-wrap:anywhere}.feature-card p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.42;overflow-wrap:anywhere}.feature-card-actions{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.feature-open,.feature-pin,.feature-dismiss{min-height:38px;border:1px solid rgba(214,180,106,.28);border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);font-size:12px;font-weight:950;padding:8px 10px}.feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:none!important;text-shadow:none!important}.feature-pin{width:38px;padding:0}.feature-badge{position:absolute;right:10px;top:10px;border:1px solid rgba(214,180,106,.30);border-radius:999px;background:rgba(214,180,106,.12);color:var(--gold);font-size:9px;font-weight:950;padding:3px 7px}.feature-hint{border:1px solid rgba(214,180,106,.34);border-radius:20px;background:linear-gradient(135deg,rgba(214,180,106,.13),rgba(255,255,255,.035));padding:13px;margin-bottom:10px}.feature-hint h3{margin:0;color:var(--text);font-size:18px}.feature-hint p{margin:6px 0 10px;color:var(--muted);font-size:13px;line-height:1.5}.feature-hint-actions{display:flex;gap:8px;flex-wrap:wrap}.more-search{width:100%;min-height:46px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.065);color:var(--text);padding:11px 14px;font:inherit;outline:none}.more-group{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:12px;margin-top:12px}.more-group h3{margin:0 0 9px;color:var(--text);font-size:18px}.more-group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.more-group.is-hidden{display:none!important}.more-feature-row{position:relative;border:1px solid rgba(214,180,106,.22);border-radius:17px;background:rgba(255,255,255,.045);padding:10px;display:flex;gap:9px;align-items:center;min-height:62px}.more-feature-row h4{margin:0;color:var(--text);font-size:13px;line-height:1.2}.more-feature-row p{margin:2px 0 0;color:var(--muted);font-size:10px;line-height:1.25}.more-feature-row.is-hidden{display:none!important}@media(max-width:700px){.feature-section,.more-group{margin-right:50px}.feature-open{min-height:40px}}@media(max-width:430px){.feature-grid,.more-group-grid{grid-template-columns:1fr}.feature-card{padding:11px}.feature-head{display:block}.feature-card-actions{grid-template-columns:1fr 38px}}
@@ -6943,7 +7024,7 @@ html[data-theme="soft"] .theme-hero-shell::after{
 .image-editor-guides{position:absolute;inset:0;pointer-events:none;z-index:2}
 .image-editor-guide{position:absolute;border:none;outline:1.5px dashed var(--editor-guide);outline-offset:8px;border-radius:8px;box-sizing:content-box;opacity:0;transition:opacity .15s ease,outline-color .15s ease;pointer-events:none}
 .image-editor-guide.is-active{opacity:1;outline:2px solid var(--editor-guide-active);outline-offset:7px;box-shadow:0 0 0 4px var(--editor-guide-ring)}
-#imageEditorCanvas{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;border-radius:12px;box-shadow:var(--editor-canvas-shadow);background:var(--editor-preview-bg);touch-action:pan-y}
+#imageEditorCanvas{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;min-height:min(62vw,420px);border-radius:12px;box-shadow:var(--editor-canvas-shadow);background:var(--editor-preview-bg);touch-action:pan-y}
 .image-editor-touch-wrap.is-dragging #imageEditorCanvas,.image-editor-touch-wrap.is-pinch-active #imageEditorCanvas{touch-action:none}
 .image-editor-retry-btn{margin-left:6px;border:1px solid var(--editor-border);border-radius:999px;background:var(--editor-button-bg);color:var(--editor-button-text);min-height:28px;padding:4px 10px;font-size:10px;font-weight:950;cursor:pointer;touch-action:manipulation;vertical-align:middle}
 .image-editor-block-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
@@ -9474,6 +9555,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 <div id="appChromeDock" class="app-chrome-dock" data-nav-dock="bottom">
 <nav id="bottomNav" class="bottom-nav" aria-label="Hauptnavigation">
   <button class="bottom-nav-btn" type="button" data-bottom-nav="home" aria-label="Startseite"><span class="nav-icon" aria-hidden="true">⌂</span><span>Start</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon" aria-hidden="true">📘</span><span>ʿIlm</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="feed" aria-label="Feed"><span class="nav-icon" aria-hidden="true">✦</span><span>Feed</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān"><span class="nav-icon" aria-hidden="true">📖</span><span>Qurʾān</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Weitere Bereiche"><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
@@ -9501,6 +9583,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 </div>
 
 <script src="/assets/slide-post-parser.js?v=2"></script>
+<script src="/assets/ilm-majlis-v2.js?v=1"></script>
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
@@ -10286,8 +10369,8 @@ function parentRoute(route){
   if(route.view!=="home")return{view:"home"};
   return{view:"home"};
 }
-function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","calendar","saved","account","about","hadith","statistik","prayer","ramadan","zakat","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news","ilm"].includes(view))return"more";return""}
-const BOTTOM_NAV_TABS=["home","feed","quran","more"];
+function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(view==="ilm")return"ilm";if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","calendar","saved","account","about","hadith","statistik","prayer","ramadan","zakat","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news"].includes(view))return"more";return""}
+const BOTTOM_NAV_TABS=["home","ilm","feed","quran","more"];
 let bottomNavDrag=null;
 function bottomNavTabIndex(tab){const i=BOTTOM_NAV_TABS.indexOf(tab);return i>=0?i:0}
 function isBottomNavSwipeableRoute(route){if(!route||document.documentElement.classList.contains("reader-mode"))return false;if(["quran-surah","post","dua","statistik"].includes(route.view))return false;return Boolean(bottomNavTabForRoute(route))}
@@ -10305,8 +10388,13 @@ function bottomNavMetrics(){const nav=$("bottomNav");if(!nav)return[];const navR
 function setBottomNavPill(left,width,dragging){const nav=$("bottomNav");if(!nav)return;nav.classList.toggle("is-pill-dragging",!!dragging);nav.style.setProperty("--nav-pill-left",`${left}px`);nav.style.setProperty("--nav-pill-width",`${width}px`)}
 function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-nav]").forEach((btn,i)=>btn.classList.toggle("active",i===idx))}
 function nearestBottomNavIndex(pillCenter,metrics){let best=0,d=Infinity;metrics.forEach((m,i)=>{const dist=Math.abs(m.center-pillCenter);if(dist<d){d=dist;best=i}});return best}
+
+function rememberIlmReturnRoute(route=currentRoute,scroll=window.scrollY||0){try{if(route&&route.view&&route.view!=="ilm")sessionStorage.setItem("darIlmReturnRouteV1",JSON.stringify({route,scroll:Number(scroll)||0,at:Date.now()}))}catch(e){}}
+function getIlmReturnRoute(){try{const saved=JSON.parse(sessionStorage.getItem("darIlmReturnRouteV1")||"null");if(saved&&saved.route&&saved.route.view&&saved.route.view!=="ilm")return saved}catch(e){}return {route:{view:"home",value:""},scroll:0}}
+function exitIlmChat(){const saved=getIlmReturnRoute();const target=saved.route||{view:"home",value:""};const y=Number(saved.scroll)||0;window.__restoreScrollY=y;navigate(target.view,target.value||"",{skipPush:true,noAnim:true});requestAnimationFrame(()=>requestAnimationFrame(()=>{try{window.DARScrollManager?.stableScrollTo?.(y,{force:true})}catch(e){window.scrollTo({top:y,behavior:"auto"})}}))}
+
 function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.DARScrollManager?.stableScrollTo?.(0)||window.scrollTo({top:0,behavior:"auto"})))}
-function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;saveNavScroll(currentRoute);const target=tab==="ilm"?{view:"ilm",value:""}:tab==="feed"?{view:"feed",value:""}:{view:tab,value:""};window.__restoreScrollY=getNavScroll(target);clearNavStack();navigate(target.view,target.value||"",{skipPush:true,noAnim:true})}
+function navigateBottomNavTab(tab,swipeDir){if(!tab)return;if(tab==="home"){hardGoHome();return}if(tab===bottomNavTabForRoute(currentRoute))return;if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir;saveNavScroll(currentRoute);if(tab==="ilm")rememberIlmReturnRoute(currentRoute,window.scrollY||0);const target=tab==="ilm"?{view:"ilm",value:""}:tab==="feed"?{view:"feed",value:""}:{view:tab,value:""};window.__restoreScrollY=getNavScroll(target);clearNavStack();navigate(target.view,target.value||"",{skipPush:true,noAnim:true})}
 function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");btn.classList.toggle("active",tab===bottomNavTabForRoute(route))});updateBottomNavPill()}
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
 function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)}})}
@@ -10401,6 +10489,7 @@ function loadIlmStore(){
 }
 function saveIlmStore(store){setJson(ILM_CHAT_STORE_KEY,{...defaultIlmStore(),...(store||{})})}
 function ilmNowIso(){return new Date().toISOString()}
+function formatIlmThreadDate(value){const d=new Date(value||Date.now());if(Number.isNaN(d.getTime()))return"";return d.toLocaleString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}
 function newIlmConversationRecord(seedTitle="Neues Gespräch"){
   return {
     id:"ilm-"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
@@ -10409,8 +10498,14 @@ function newIlmConversationRecord(seedTitle="Neues Gespräch"){
     updatedAt:ilmNowIso(),
     draft:"",
     scrollTop:0,
+    answerMode:"detailed",
     messages:[]
   };
+}
+function getIlmAnswerMode(conversation){
+  const mode=String(conversation?.answerMode||"detailed");
+  if(mode==="short"||mode==="sources"||mode==="detailed")return mode;
+  return "detailed";
 }
 function getIlmStore(){
   const store=loadIlmStore();
@@ -10497,6 +10592,11 @@ function ilmExpandQueryToken(token){
   if(token==="dua")variants.add("bittgebet");
   if(token==="aqidah"){variants.add("iman");variants.add("glaube")}
   if(token==="tawhid")variants.add("tauhid");
+  if(window.IlmMajlisV2){
+    window.IlmMajlisV2.expandSynonyms([token]).forEach(item=>{
+      item.split(" ").forEach(part=>{if(part)variants.add(part)});
+    });
+  }
   return [...variants];
 }
 function ilmBuildQueryProfile(question){
@@ -10542,7 +10642,53 @@ function ilmQueryIntent(question,profile){
     wantsSources:/\bquelle\b|\bquellen\b|\bbeleg\b|\bbeweise\b|\bnur quellen\b/.test(raw),
     wantsEarliest:/\bfruh\b|\bfrueh\b|\baltest|\bältest|\bzuerst\b|\bzeitlich\b/.test(raw),
     wantsSimple:/\beinfach\b|\bkurz\b/.test(raw),
+    wantsDefinition:/\bwas bedeutet\b|\bbedeutung\b|\bdefinition\b|\berklar\b|\berklaer\b/.test(raw),
+    tawhidFocus:/\btawhid\b|\btauhid\b/.test(raw),
     minTokenHits:profile.tokens.length>=5?2:1
+  };
+}
+function classifyIlmPrompt(text){
+  const raw=String(text||"").trim();
+  const norm=normalizeIlmText(raw);
+  if(!raw)return {type:"empty"};
+  if(/\b(wie geht es dir|wie gehts dir|wie geht's dir|wie geht es euch|wie gehts|salam|salamu|assalamu|as salamu|hallo|guten morgen|guten abend)\b/i.test(norm))return {type:"conversation"};
+  const known=/\b(tawhid|tauhid|shirk|sunnah|quran|koran|hadith|iman|aqidah|dua|zakat|qibla|gebet|feed|beitrag|quiz|tafsir|athar|salaf|sahaba|allah|prophet)\b/i.test(norm);
+  const hasQuestion=/[?؟]|\b(was|wer|wie|wo|wann|warum|welche|welcher|welches|zeige|gibt|erklär|erklaer|bedeutet|finde|suche|nenne)\b/i.test(norm);
+  if(/^[^a-zA-ZäöüÄÖÜßḥḤṣṢṭṬġĠʿʾآ-ي0-9]+$/.test(raw))return {type:"unclear"};
+  if(raw.length<3)return {type:"unclear"};
+  if(!/\s/.test(raw)&&raw.length<7&&!known)return {type:"unclear"};
+  if(!hasQuestion&&!known&&ilmTokenize(raw).length<=2)return {type:"unclear"};
+  return {type:"question"};
+}
+function buildIlmConversationReply(text){
+  const norm=normalizeIlmText(text);
+  const greeting=/\b(salam|salamu|assalamu|as salamu)\b/.test(norm);
+  return {
+    title:"Gespräch",
+    status:"conversation",
+    intro:"",
+    directAnswer:greeting
+      ?"Wa ʿalaykum as-salām wa raḥmatullāh. Stelle mir gern deine Frage zu den veröffentlichten Inhalten, Beweisen oder Quellen."
+      :"Al-ḥamdu lillāh, ich bin bereit. Stelle mir gern deine Frage zu den Inhalten, Gelehrten, Beweisen oder Funktionen von DAR AL TAWḤĪD.",
+    explanation:"",
+    sourceGroups:[],
+    related:[],
+    contextHints:[],
+    sourceHints:[]
+  };
+}
+function buildIlmClarificationReply(question){
+  if(window.IlmMajlisV2)return window.IlmMajlisV2.buildSmartClarificationReply(question);
+  return {
+    title:"Rückfrage",
+    status:"clarification",
+    intro:"",
+    directAnswer:"Ich konnte darin noch keine konkrete Frage erkennen. Meinst du einen bestimmten Begriff oder war das eine Testeingabe?",
+    explanation:"",
+    sourceGroups:[],
+    related:[],
+    contextHints:[],
+    sourceHints:[]
   };
 }
 function ilmSourceStrength(item){
@@ -10738,7 +10884,15 @@ async function searchIlmKnowledge(question,conversation,options={}){
   const matches=[];
   const pushMatch=(item,match,extraScore=0)=>{
     if(!ilmCanUseMatch(match,intent))return;
-    const score=match.score+extraScore+ilmSourceStrength(item)+ilmPreferredKindBonus(item,intent);
+    const itemHay=normalizeIlmText([item.title,item.speaker,item.work,item.reference,item.excerpt,item.body,(item.contextHints||[]).join(" ")].join(" "));
+    let relevanceAdjust=0;
+    if(intent.tawhidFocus&&intent.wantsDefinition){
+      if(item.kind==="quran")relevanceAdjust-=5.5;
+      if(item.kind==="posts"||item.kind==="athar"||item.kind==="sunnah")relevanceAdjust+=3.2;
+      if(/\btawhid\b|\btauhid\b/.test(itemHay))relevanceAdjust+=4.8;
+      if(/\bbedeutet\b|\bdefinition\b|\ballein\b|\banbetung\b|\bherrschaft\b|\bnamen\b|\beigenschaften\b/.test(itemHay))relevanceAdjust+=3.6;
+    }
+    const score=match.score+extraScore+relevanceAdjust+ilmSourceStrength(item)+ilmPreferredKindBonus(item,intent);
     if(score<ILM_MIN_SCORE)return;
     matches.push({...item,score,_match:match});
   };
@@ -10814,6 +10968,7 @@ async function searchIlmKnowledge(question,conversation,options={}){
   return filtered.slice(0,options.limit||ILM_MAX_MATCHES);
 }
 function ilmKindLabel(kind){
+  if(kind==="external")return "Externe Recherche";
   if(kind==="quran")return "Qurʾān";
   if(kind==="sunnah")return "Sunnah";
   if(kind==="athar")return "Āṯār";
@@ -10822,6 +10977,7 @@ function ilmKindLabel(kind){
   return "Beiträge";
 }
 function ilmGroupRank(kind){
+  if(kind==="external")return 8;
   if(kind==="quran")return 1;
   if(kind==="sunnah")return 2;
   if(kind==="athar")return 3;
@@ -10830,29 +10986,116 @@ function ilmGroupRank(kind){
   if(kind==="quiz")return 6;
   return 9;
 }
+function ilmSourceSignature(item){
+  const base=[
+    item?.kind||"",
+    item?.speaker||"",
+    item?.work||"",
+    item?.reference||"",
+    ilmClip(item?.excerpt||"",220),
+    ilmClip(item?.body||"",220)
+  ].join("|");
+  return normalizeIlmText(base).slice(0,520);
+}
 function buildIlmSourceGroups(matches){
   const grouped=new Map();
   matches.forEach(item=>{
     const label=ilmKindLabel(item.kind);
     if(!grouped.has(label))grouped.set(label,[]);
-    grouped.get(label).push(item);
+    const list=grouped.get(label);
+    const signature=ilmSourceSignature(item);
+    if(!list.some(existing=>ilmSourceSignature(existing)===signature))list.push(item);
   });
   return [...grouped.entries()]
     .sort((a,b)=>ilmGroupRank(a[1][0]?.kind)-ilmGroupRank(b[1][0]?.kind))
-    .map(([label,items])=>({label,items:items.slice(0,4)}));
+    .map(([label,items])=>({label,items:items.slice(0,6)}));
 }
-function buildIlmFallbackReply(question,matches){
-  const related=(matches||[]).slice(0,3).map(item=>({title:item.title,route:item.route,kind:item.kind}));
+const ILM_RESEARCH_WORKER_URL="https://dar-admin-publisher.sero91ak.workers.dev";
+function ilmExternalResearchLinks(question){
+  const q=String(question||"").trim().replace(/\s+/g," ");
+  const encoded=encodeURIComponent(q||"ahlus sunnah");
+  const textFragment=q&&q.length<90?`#:~:text=${encoded}`:"";
+  return [
+    {label:"Dorar durchsuchen",url:`https://dorar.net/search?q=${encoded}`},
+    {label:"Shamela durchsuchen",url:`https://shamela.ws/search?term=${encoded}`},
+    {label:"al-Maktaba durchsuchen",url:`https://al-maktaba.org/search?q=${encoded}`},
+    {label:"Ketab Online durchsuchen",url:`https://ketabonline.com/ar/search?q=${encoded}`},
+    {label:"Turāth durchsuchen",url:`https://app.turath.io/search?query=${encoded}`},
+    {label:"Waqfeya durchsuchen",url:`https://waqfeya.net/search.php?search=${encoded}`},
+    {label:"Archive.org durchsuchen",url:`https://archive.org/search?query=${encoded}`},
+    {label:"Quran KSU öffnen",url:`https://quran.ksu.edu.sa/${textFragment}`}
+  ];
+}
+function buildIlmExternalResearchSource(question,serverResults=[]){
+  const serverLinks=(Array.isArray(serverResults)?serverResults:[]).map(result=>({
+    label:`${result.label||result.host||"Quelle"} ${result.reachable?"öffnen":"direkt öffnen"}`.trim(),
+    url:result.markedUrl||result.finalUrl||result.url||"#"
+  })).filter(link=>link.url&&link.url!=="#");
+  const readable=(Array.isArray(serverResults)?serverResults:[]).filter(result=>result.snippet).slice(0,4);
   return {
-    title:"Keine ausreichend belegte Antwort",
+    id:"external-research-"+Date.now(),
+    kind:"external",
+    title:"Kontrollierte externe Recherche",
+    speaker:"Freigegebene externe Quellen",
+    work:"Dorar · Shamela · al-Maktaba · Ketab Online · Turāth · Waqfeya · Archive.org · Quran KSU",
+    reference:"Externe Fundstellensuche",
+    excerpt:readable.length
+      ? readable.map(item=>`${item.label}: ${item.snippet}`).join("\n\n")
+      :"Diese Links öffnen ausschließlich freigegebene Rechercheorte. Ein Treffer gilt erst nach Prüfung als Beleg.",
+    body:readable.length
+      ? readable.map(item=>`${item.label} (${item.host}):\n${item.snippet}\n${item.markedUrl||item.finalUrl||item.url}`).join("\n\n")
+      :"Wenn in DAR AL TAWḤĪD noch keine ausreichende interne Fundstelle vorhanden ist, kannst du diese erlaubten Quellen gezielt öffnen. Der Chat übernimmt externe Treffer nicht automatisch als religiösen Beweis.",
+    links:serverLinks.length?serverLinks:ilmExternalResearchLinks(question),
+    score:0,
+    sourceTag:"Externe Originalquellen · nicht automatisch als geprüfter Beleg gespeichert",
+    contextHints:[question].filter(Boolean)
+  };
+}
+async function fetchIlmExternalResearch(question){
+  const q=String(question||"").trim();
+  if(q.length<3)return null;
+  try{
+    const res=await fetch(`${ILM_RESEARCH_WORKER_URL}/api/ilm/research`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({query:q,limit:6})
+    });
+    if(!res.ok)return null;
+    const data=await res.json();
+    if(!data?.ok||!Array.isArray(data.results))return null;
+    return data.results;
+  }catch(e){
+    console.warn("ʿIlm externe Recherche:",e);
+    return null;
+  }
+}
+function ilmNeedsExternalResearch(matches){
+  return !Array.isArray(matches)||!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2;
+}
+function buildIlmFallbackReply(question,matches,externalResults=null){
+  if(window.IlmMajlisV2){
+    const reply=window.IlmMajlisV2.buildInsufficientReply(question,matches,externalResults,{
+      lastFallbackHash:ilmLastFallbackHash,
+      buildExternalSource:buildIlmExternalResearchSource
+    });
+    ilmLastFallbackHash=reply._fallbackHash||ilmLastFallbackHash;
+    return reply;
+  }
+  const related=(matches||[]).slice(0,3).map(item=>({title:item.title,route:item.route,kind:item.kind}));
+  const external=buildIlmExternalResearchSource(question,externalResults||[]);
+  const hasServerResults=Array.isArray(externalResults)&&externalResults.some(item=>item.snippet||item.reachable);
+  return {
+    title:"Fundstelle prüfen",
     status:"unavailable",
-    intro:"Zu dieser konkreten Frage befindet sich derzeit kein ausreichend belegter und freigegebener Inhalt in der Wissensdatenbank von DAR AL TAWḤID. Deshalb erstelle ich hierzu keine unbelegte religiöse Antwort.",
+    intro:"Zu dieser konkreten Frage habe ich in den freigegebenen DAR-AL-TAWḤĪD-Inhalten noch keine ausreichend belastbare Fundstelle gefunden.",
     directAnswer:"",
-    explanation:"Du kannst die Frage allgemeiner formulieren oder einen nahe liegenden Bereich öffnen.",
-    sourceGroups:[],
+    explanation:hasServerResults
+      ?"Ich habe zusätzlich serverseitig auf erlaubten externen Quellenseiten gesucht. Die Treffer sind als externe Fundstellen markiert und müssen geprüft werden, bevor sie als fester religiöser Beleg gelten."
+      :"Ich erfinde deshalb keine religiöse Antwort. Du kannst die erlaubten externen Quellen öffnen; gefundene Stellen müssen klar geprüft werden, bevor sie als Beleg gelten.",
+    sourceGroups:[{label:"Externe Recherche",items:[external]}],
     related,
     contextHints:[question].filter(Boolean),
-    sourceHints:[]
+    sourceHints:[external.work]
   };
 }
 function ilmAnswerLeadLine(source,mode="normal"){
@@ -10860,11 +11103,21 @@ function ilmAnswerLeadLine(source,mode="normal"){
   const quote=ilmClip(source.excerpt||source.body,mode==="long"?240:160);
   return quote?`${head}: ${quote}`:head;
 }
-function buildIlmAssistantReply(question,matches,mode="normal"){
-  if(!matches.length)return buildIlmFallbackReply(question,[]);
-  if(Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches);
+function buildIlmAssistantReply(question,matches,mode="normal",externalResults=null){
+  const answerMode=mode==="proofs"?"detailed":mode==="simple"?"short":mode==="sources"?"sources":mode==="short"?"short":mode==="detailed"?"detailed":"detailed";
+  if(window.IlmMajlisV2){
+    if(!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches,externalResults);
+    return window.IlmMajlisV2.buildSourcedReply(question,matches,{
+      mode:answerMode,
+      externalResults,
+      language:window.IlmMajlisV2.detectLanguage(question),
+      buildSourceGroups:buildIlmSourceGroups
+    });
+  }
+  if(!matches.length)return buildIlmFallbackReply(question,[],externalResults);
+  if(Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2)return buildIlmFallbackReply(question,matches,externalResults);
   const groups=buildIlmSourceGroups(matches);
-  const directSources=matches.slice(0,Math.min(mode==="long"?4:3,matches.length));
+  const directSources=matches.slice(0,Math.min(mode==="long"||mode==="proofs"?6:4,matches.length));
   const directAnswer=directSources.map(source=>ilmAnswerLeadLine(source,mode)).join("\n\n");
   const explanation=mode==="simple"
     ?"Die vorhandenen Fundstellen zeigen denselben Kernpunkt aus den bereits veröffentlichten Inhalten von DAR AL TAWḤID."
@@ -10873,7 +11126,7 @@ function buildIlmAssistantReply(question,matches,mode="normal"){
       :"Die Antwort fasst die am besten passenden veröffentlichten Fundstellen zusammen. Für jede Kernaussage kannst du unten die konkrete Quelle öffnen.";
   const related=matches.slice(0,5).map(item=>({title:item.title,route:item.route,kind:item.kind}));
   return {
-    title:"Belegte Antwort aus DAR AL TAWḤID",
+    title:"Antwort mit Quellen",
     status:"ok",
     intro:"As-salāmu ʿalaikum. Zu deiner Frage finden sich auf DAR AL TAWḤID passende veröffentlichte Inhalte und Quellen.",
     directAnswer,
@@ -10884,133 +11137,172 @@ function buildIlmAssistantReply(question,matches,mode="normal"){
     sourceHints:matches.slice(0,4).map(item=>[item.speaker,item.work,item.reference,item.title].filter(Boolean).join(" · "))
   };
 }
-function renderIlmSourceLinks(source){
-  const links=[];
-  if(source.route?.view==="post"&&source.postId)links.push(`<button class="ilm-extra-item" type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">→ Beitrag auf DAR AL TAWḤID öffnen</button>`);
-  if(source.route?.view==="dua")links.push(`<button class="ilm-extra-item" type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">→ Duʿāʾ öffnen</button>`);
-  (source.links||[]).forEach(link=>{
-    links.push(`<a class="ilm-extra-item" href="${esc(link.url)}" target="_blank" rel="noopener">→ ${esc(link.label||"Quelle öffnen")}</a>`);
+function ilmFlattenSources(reply){
+  return (reply?.sourceGroups||[]).flatMap(group=>(group.items||[]).map(item=>({...item,groupLabel:group.label})));
+}
+function ilmUniqueSources(list){
+  const unique=[];const seen=new Set();
+  (Array.isArray(list)?list:[]).forEach(item=>{
+    const sig=ilmSourceSignature(item);
+    if(!sig||seen.has(sig))return;
+    seen.add(sig);unique.push(item);
   });
-  return links.join("");
+  return unique;
 }
-function renderIlmSourceCard(source,messageId){
-  const isOpen=Array.isArray(source._openFor)&&source._openFor.includes(messageId);
-  return `<details class="ilm-source-card" data-ilm-source-card="${esc(source.id)}" data-ilm-message="${esc(messageId)}"${isOpen?" open":""}>
-    <summary class="ilm-source-top">
-      <div>
-        <div class="ilm-source-flag">✓ Fundstelle auf DAR AL TAWḤID hinterlegt</div>
-        <strong>${esc(source.speaker||source.title)}</strong>
-        ${source.work?`<div class="ilm-source-ref">${esc(source.work)}</div>`:""}
-      </div>
-      <span class="ilm-source-ref">${esc(source.reference||ilmKindLabel(source.kind))}</span>
-    </summary>
-    <div class="ilm-source-body">
-      ${source.excerpt?`<div class="ilm-source-quote">${esc(ilmQuote(source.excerpt,260))}</div>`:""}
-      ${source.body?`<div class="ilm-source-full">${esc(ilmClip(source.body,720)).replace(/\n/g,"<br>")}</div>`:""}
-      <div class="ilm-source-links">${renderIlmSourceLinks(source)}</div>
-    </div>
-  </details>`;
+function ilmReferenceMarkers(count){
+  return Array.from({length:Math.min(count,3)},(_,idx)=>`<span class="ilm-citation">[${idx+1}]</span>`).join(" ");
 }
-function renderIlmAssistantMessage(message){
+function renderIlmSourceCards(reply){
+  const sources=Array.isArray(reply?.sources)?reply.sources:(reply?.sourceGroups||[]).flatMap(g=>(g.items||[]).map(item=>({type:item.kind||"Scholar",author:item.speaker||"",work:item.work||item.title||"",reference:item.reference||"",url:(item.links||[]).find(l=>/^https?:/i.test(l.url))?.url||"",origin:item.kind==="external"?"external":"internal",excerpt:item.excerpt||"",note:item.sourceTag||""})));
+  if(!sources.length)return "";
+  return `<div class="ilm-source-cards">${sources.slice(0,8).map((src,idx)=>`<article class="ilm-source-card-v2">
+    <div class="ilm-source-card-head"><span class="ilm-source-type">${esc(src.type||"Quelle")}</span><span class="ilm-source-origin">${esc(src.origin==="external"?"Externe Recherche":"Intern geprüft")}</span></div>
+    <b>${esc([src.author,src.work].filter(Boolean).join(" · ")||"Fundstelle")}</b>
+    ${src.reference?`<div class="ilm-source-ref">${esc(src.reference)}</div>`:""}
+    ${src.excerpt?`<p>${esc(ilmClip(src.excerpt,180))}</p>`:""}
+    ${src.url?`<a class="ilm-source-open" href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">Quelle öffnen</a>`:""}
+  </article>`).join("")}</div>`;
+}
+function renderIlmAnswerText(reply,isFirstAssistant){
+  const parts=[];
+  const confidence=reply?.confidence?.label?`<div class="ilm-confidence">${esc(reply.confidence.label)}</div>`:"";
+  if(reply?.status==="conversation"){
+    parts.push(`<p>${esc(reply.directAnswer||"Ich bin bereit. Stelle mir gern deine Frage.")}</p>`);
+    return parts.join("");
+  }
+  if(reply?.status==="clarification"){
+    parts.push(`<p>${esc(reply.directAnswer||"Ich konnte noch keine konkrete Frage erkennen.")}</p>`);
+    const opts=Array.isArray(reply.clarificationOptions)?reply.clarificationOptions:(reply.followUpQuestions||[]);
+    if(opts.length)parts.push(`<div class="ilm-clarify-chips">${opts.map((opt,i)=>`<button type="button" class="ilm-clarify-chip" data-ilm-clarify="${esc(opt)}">${i+1}. ${esc(opt)}</button>`).join("")}</div>`);
+    if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    return parts.join("");
+  }
+  if(reply?.status==="personal_case"){
+    parts.push(confidence);
+    parts.push(`<h4 class="ilm-section-title">Direkte Antwort</h4><p>${esc(reply.directAnswer||"")}</p>`);
+    if(reply.explanation)parts.push(`<h4 class="ilm-section-title">Einordnung</h4><p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    if(reply.summary)parts.push(`<h4 class="ilm-section-title">Kurzes Ergebnis</h4><p>${esc(reply.summary)}</p>`);
+    parts.push(renderIlmSourceCards(reply));
+    return parts.join("");
+  }
+  if(reply?.status==="unavailable"){
+    parts.push(confidence);
+    parts.push(`<p>${esc(reply.intro||"Zu dieser Frage liegt keine ausreichend belegte Fundstelle vor.")}</p>`);
+    if(reply.directAnswer)parts.push(`<p><strong>${esc(reply.directAnswer)}</strong></p>`);
+    if(reply.explanation)parts.push(`<p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+    const follow=Array.isArray(reply.followUpQuestions)?reply.followUpQuestions:[];
+    if(follow.length)parts.push(`<div class="ilm-clarify-chips">${follow.map(opt=>`<button type="button" class="ilm-clarify-chip" data-ilm-clarify="${esc(opt)}">${esc(opt)}</button>`).join("")}</div>`);
+    parts.push(renderIlmSourceCards(reply));
+    return parts.join("");
+  }
+  parts.push(confidence);
+  if(isFirstAssistant&&reply?.intro)parts.push(`<p>${esc(reply.intro)}</p>`);
+  parts.push(`<h4 class="ilm-section-title">Direkte Antwort</h4>`);
+  String(reply?.directAnswer||"").split(/\n{2,}/).filter(Boolean).forEach((text,idx)=>{
+    parts.push(`<p>${esc(text)} ${idx<3?`<span class="ilm-citation">[${idx+1}]</span>`:""}</p>`);
+  });
+  if(reply?.explanation)parts.push(`<h4 class="ilm-section-title">Einordnung</h4><p class="ilm-answer-note">${esc(reply.explanation)}</p>`);
+  if(Array.isArray(reply?.differencesOfOpinion)&&reply.differencesOfOpinion.length)parts.push(`<h4 class="ilm-section-title">Meinungsunterschiede</h4><p class="ilm-answer-note">${esc(reply.differencesOfOpinion.join(" "))}</p>`);
+  if(reply?.summary)parts.push(`<h4 class="ilm-section-title">Kurzes Ergebnis</h4><p>${esc(reply.summary)}</p>`);
+  parts.push(`<h4 class="ilm-section-title">Quellen</h4>`);
+  parts.push(renderIlmSourceCards(reply));
+  return parts.join("")||`<p>${esc(reply?.intro||"Keine Antwort vorhanden.")}</p>`;
+}
+function renderIlmAssistantMessage(message,isFirstAssistant=false){
   const reply=message.reply||{};
-  return `<article class="ilm-message-card">
-    <div class="ilm-message-kicker">DAR AL TAWḤID · ʿIlm</div>
-    <h3 class="ilm-answer-title">${esc(reply.title||"Antwort")}</h3>
-    ${reply.intro?`<div class="ilm-answer-block">${esc(reply.intro)}</div>`:""}
-    ${reply.directAnswer?`<div class="ilm-answer-block">${esc(reply.directAnswer).replace(/\n/g,"<br><br>")}</div>`:""}
-    ${reply.explanation?`<div class="ilm-answer-meta">${esc(reply.explanation)}</div>`:""}
-    ${Array.isArray(reply.sourceGroups)&&reply.sourceGroups.length?`<div class="ilm-source-groups">${reply.sourceGroups.map(group=>`<section class="ilm-source-group"><h5>${esc(group.label)}</h5>${group.items.map(source=>renderIlmSourceCard(source,message.id)).join("")}</section>`).join("")}</div>`:""}
-    ${Array.isArray(reply.related)&&reply.related.length?`<div class="ilm-related"><div class="ilm-related-head">Weitere passende Inhalte</div><div class="ilm-related-list">${reply.related.slice(0,4).map(item=>`<button class="ilm-related-btn" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}">${esc(item.title)}</button>`).join("")}</div></div>`:""}
-    <div class="ilm-actions">
-      <div class="ilm-actions-main">
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:short">Kürzer</button>
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:simple">Einfacher</button>
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:long">Ausführlicher</button>
-        <button class="ilm-pill-btn" type="button" data-ilm-action="${esc(message.id)}:proofs">Weitere Beweise</button>
-      </div>
-      <div class="ilm-actions-extra">
-        <button class="ilm-menu-btn" type="button" data-ilm-menu="${esc(message.id)}">⋯</button>
-        <div class="ilm-extra-panel" hidden data-ilm-extra-panel="${esc(message.id)}">
-          <button class="ilm-extra-item" type="button" data-ilm-copy-answer="${esc(message.id)}">Antwort kopieren</button>
-          <button class="ilm-extra-item" type="button" data-ilm-copy-sources="${esc(message.id)}">Quellen kopieren</button>
-          <button class="ilm-extra-item" type="button" data-ilm-share="${esc(message.id)}">Gespräch teilen</button>
-        </div>
-      </div>
+  const sourceCount=ilmUniqueSources(ilmFlattenSources(reply)).length;
+  const relatedCount=Array.isArray(reply.related)?reply.related.length:0;
+  const canRefine=reply.status==="ok";
+  return `<article class="ilm-assistant-message" data-ilm-assistant="${esc(message.id)}">
+    <div class="ilm-assistant-name">Majlis al-ʿIlm</div>
+    <div class="ilm-answer-text">${renderIlmAnswerText(reply,isFirstAssistant)}</div>
+    <div class="ilm-answer-toolbar">
+      ${sourceCount?`<button class="ilm-action-link primary" type="button" data-ilm-show-sources="${esc(message.id)}">${sourceCount} Quellen · Quellen anzeigen</button>`:""}
+      ${relatedCount?`<button class="ilm-action-link" type="button" data-ilm-show-related="${esc(message.id)}">Verwandte Inhalte anzeigen</button>`:""}
+      <button class="ilm-action-link" type="button" data-ilm-copy-answer="${esc(message.id)}">Kopieren</button>
+      ${canRefine?`<button class="ilm-action-link" type="button" data-ilm-action="${esc(message.id)}:simple">Einfacher</button>`:""}
+      ${canRefine?`<button class="ilm-action-link" type="button" data-ilm-action="${esc(message.id)}:proofs">Weitere Beweise</button>`:""}
+      <button class="ilm-action-link" type="button" data-ilm-share="${esc(message.id)}">Teilen</button>
     </div>
   </article>`;
 }
 function renderIlmMessages(conversation){
   const messages=Array.isArray(conversation?.messages)?conversation.messages:[];
-  if(!messages.length)return `<div class="ilm-empty-state"><div class="ilm-empty-copy">As-salāmu ʿalaikum.<br><br>Stelle deine Frage zu den veröffentlichten Inhalten von DAR AL TAWḤID. Ich durchsuche die vorhandenen Beiträge, Aussagen, Beweise und Quellen und stelle daraus eine nachvollziehbare Antwort zusammen.</div></div>`;
+  if(!messages.length)return renderIlmWelcomeState();
+  let assistantSeen=false;
   return messages.map(message=>{
     if(message.role==="user")return `<div class="ilm-user-row"><div class="ilm-user-bubble">${esc(message.content||"")}</div></div>`;
-    if(message.role==="loading")return `<article class="ilm-loading-card"><div class="ilm-message-kicker">DAR AL TAWḤID · ʿIlm</div><div>Beiträge und Quellen werden durchsucht …</div><div class="ilm-inline-status">Die belegte Antwort wird zusammengestellt …</div></article>`;
-    return renderIlmAssistantMessage(message);
+    if(message.role==="loading"){
+      const phase=message.phase||"internal";
+      const label=window.IlmMajlisV2?.loadingPhaseText?.(phase,!navigator.onLine)||"Quellen werden geprüft …";
+      return `<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span><span>${esc(label)}</span></div>`;
+    }
+    const html=renderIlmAssistantMessage(message,!assistantSeen);
+    assistantSeen=true;
+    return html;
   }).join("");
 }
-function renderIlmSidebar(store,conversation){
+function renderIlmWelcomeState(){
   const admin=loadIlmAdminState();
+  return `<div class="ilm-welcome"><section class="ilm-welcome-card">
+    <div class="ilm-welcome-logo" aria-hidden="true">📘</div>
+    <h2>Majlis al-ʿIlm</h2>
+    <p>As-Salāmu ʿalaykum. Stelle deine Frage zu den veröffentlichten Inhalten, Beweisen und Quellen von DAR AL TAWḤĪD.</p>
+    <div class="ilm-starter-chips">${admin.starters.slice(0,3).map(item=>`<button class="ilm-starter-chip" type="button" data-ilm-starter="${esc(item.prompt)}">${esc(item.prompt)}</button>`).join("")}</div>
+  </section></div>`;
+}
+function renderIlmHistoryDrawer(store){
   const threads=store.conversations.slice().sort((a,b)=>Date.parse(b.updatedAt||0)-Date.parse(a.updatedAt||0));
-  return `<aside class="ilm-side">
-    <div class="ilm-thread-row">
-      <button class="ilm-thread-btn" type="button" data-ilm-new>Neues Gespräch</button>
-      <div class="ilm-thread-tools">
-        <button class="ilm-thread-tool" type="button" data-ilm-rename="${esc(conversation?.id||"")}">Umbenennen</button>
-        <button class="ilm-thread-tool" type="button" data-ilm-delete="${esc(conversation?.id||"")}">Löschen</button>
-      </div>
-    </div>
-    <div class="ilm-starters">
-      <h4>Beispielfragen</h4>
-      <div class="ilm-starter-list">${admin.starters.slice(0,3).map(item=>`<button class="ilm-starter-btn" type="button" data-ilm-starter="${esc(item.prompt)}"><b>${esc(item.title)}</b><span>${esc(item.prompt)}</span></button>`).join("")}</div>
-    </div>
-    <div class="ilm-starters">
-      <h4>Gespeicherte Gespräche</h4>
-      <div class="ilm-starter-list">${threads.map(item=>`<button class="ilm-starter-btn${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(new Date(item.updatedAt||item.createdAt||Date.now()).toLocaleString("de-DE"))}</span></button>`).join("")}</div>
-    </div>
+  return `<aside class="ilm-history-drawer" id="ilmHistoryDrawer" hidden>
+    <div class="ilm-drawer-head"><h3>Gespräche</h3><button class="ilm-icon-btn" type="button" data-ilm-close-history>×</button></div>
+    <button class="ilm-action-link primary" type="button" data-ilm-new>Neues Gespräch</button>
+    <div class="ilm-thread-list">${threads.map(item=>`<button class="ilm-thread-row-new${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(formatIlmThreadDate(item.updatedAt||item.createdAt))}</span></button>`).join("")}</div>
   </aside>`;
+}
+function renderIlmMenu(conversation){
+  const id=conversation?.id||"";
+  const mode=getIlmAnswerMode(conversation);
+  return `<div class="ilm-menu-popover" id="ilmMenuPopover" hidden>
+    <button type="button" data-ilm-new>Neues Gespräch</button>
+    <button type="button" data-ilm-menu-history>Chatverlauf öffnen</button>
+    <button type="button" data-ilm-rename="${esc(id)}">Gespräch umbenennen</button>
+    <button type="button" data-ilm-share="">Gespräch teilen</button>
+    <button type="button" data-ilm-delete="${esc(id)}">Gespräch löschen</button>
+    <button type="button" data-ilm-answer-mode="detailed"${mode==="detailed"?" aria-current=\"true\"":""}>Antwortmodus: Ausführlich</button>
+    <button type="button" data-ilm-answer-mode="short"${mode==="short"?" aria-current=\"true\"":""}>Antwortmodus: Kurz</button>
+    <button type="button" data-ilm-answer-mode="sources"${mode==="sources"?" aria-current=\"true\"":""}>Antwortmodus: Nur Quellen</button>
+    <button type="button" data-ilm-close>Chat schließen</button>
+    <button type="button" data-ilm-menu-close>Schließen</button>
+  </div>`;
 }
 function renderIlm(){
   const store=getIlmStore();
   const conversation=getActiveIlmConversation(store);
-  return `${setPageHeader("DAR AL TAWḤID Wissensassistent","Stelle deine Frage zu unseren veröffentlichten Inhalten, Beweisen und Quellen.","ʿIlm")}
-  <section class="ilm-shell">
-    <div class="ilm-hero premium-surface">
-      <div class="ilm-hero-head">
-        <div class="ilm-brand">
-          <div class="ilm-logo">📘</div>
-          <div class="ilm-brand-text">
-            <h3>ʿIlm</h3>
-            <p>DAR AL TAWḤĪD Wissensassistent</p>
-          </div>
-        </div>
-        <div class="ilm-note">Die Antworten werden ausschließlich aus den freigegebenen Inhalten und Quellen von DAR AL TAWḤĪD zusammengestellt.</div>
+  return `<section class="ilm-chat-shell" aria-label="DAR AL TAWḤĪD Wissensassistent">
+    <header class="ilm-chat-header">
+      <button class="ilm-icon-btn" type="button" data-ilm-back aria-label="Zurück">←</button>
+      <div class="ilm-header-title"><b>Majlis al-ʿIlm</b><span>DAR AL TAWḤĪD</span></div>
+      <div class="ilm-header-actions">
+        <button class="ilm-icon-btn" type="button" data-ilm-open-history aria-label="Gesprächsverlauf">◷</button>
+        <button class="ilm-icon-btn" type="button" data-ilm-open-menu aria-label="Chat-Menü">⋯</button>
       </div>
-      <div class="ilm-grid">
-        ${renderIlmSidebar(store,conversation)}
-        <section class="ilm-chat-panel">
-          <div class="ilm-chat-head">
-            <div>
-              <strong>${esc(conversation?.title||"Neues Gespräch")}</strong>
-              <div class="ilm-inline-status">Der Verlauf, offene Quellenkarten und dein Entwurf bleiben erhalten.</div>
-            </div>
-          </div>
-          <div class="ilm-chat-log" id="ilmChatLog">${renderIlmMessages(conversation)}</div>
-          <form class="ilm-composer" id="ilmComposer">
-            <div class="ilm-compose-shell">
-              <textarea id="ilmInput" class="ilm-input" rows="3" placeholder="Stelle deine Frage …" spellcheck="true">${esc(conversation?.draft||"")}</textarea>
-              <button class="ilm-send-btn" id="ilmSendBtn" type="submit" aria-label="Senden">↑</button>
-            </div>
-            <div class="ilm-compose-meta">
-              <span>Nur freigegebene Inhalte und belegte Fundstellen werden verwendet.</span>
-              <button class="ilm-stop-btn" id="ilmStopBtn" type="button" hidden>Antwort stoppen</button>
-            </div>
-          </form>
-        </section>
+    </header>
+    <main class="ilm-message-list" id="ilmChatLog"><div class="ilm-message-inner">${renderIlmMessages(conversation)}</div></main>
+    <form class="ilm-composer-bar" id="ilmComposer">
+      <div class="ilm-composer-inner">
+        <textarea id="ilmInput" class="ilm-chat-input" rows="1" placeholder="Stelle deine Frage …" spellcheck="true">${esc(conversation?.draft||"")}</textarea>
+        <button class="ilm-send-icon" id="ilmSendBtn" type="submit" aria-label="Senden">↑</button>
       </div>
-    </div>
+    </form>
+    <div class="ilm-sheet-backdrop" id="ilmSheetBackdrop" hidden></div>
+    ${renderIlmHistoryDrawer(store)}
+    ${renderIlmMenu(conversation)}
   </section>`;
 }
 let ilmPendingToken=0;
+let ilmForceBottomOnce=false;
+let ilmLastFallbackHash="";
+let ilmActiveRequestId=0;
 function updateIlmConversation(conversationId,mutator){
   return updateIlmStore(store=>{
     store.conversations=store.conversations.map(item=>{
@@ -11028,28 +11320,86 @@ function saveIlmDraft(value){
   if(!convo)return;
   updateIlmConversation(convo.id,item=>({...item,draft:String(value||"")}));
 }
+function markIlmScrollToLatest(){
+  ilmForceBottomOnce=true;
+  try{sessionStorage.setItem("darIlmForceBottomOnce","1")}catch(e){}
+}
 async function submitIlmQuestion(text,options={}){
   const content=String(text||"").trim();
   if(!content)return;
   const store=getIlmStore();
   const convo=getActiveIlmConversation(store);
   if(!convo)return;
+  const promptClass=classifyIlmPrompt(content);
+  if(promptClass.type==="conversation"){
+    updateIlmConversation(convo.id,item=>{
+      const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
+      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmConversationReply(content),question:content,sourceHints:[],contextHints:[]};
+      const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
+      return {...item,title:(item.messages||[]).length?item.title:"Gespräch",draft:"",messages};
+    });
+    markIlmScrollToLatest();
+    render();
+    setTimeout(()=>scrollIlmToBottom(true),80);
+    return;
+  }
+  if(promptClass.type==="unclear"){
+    updateIlmConversation(convo.id,item=>{
+      const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
+      const assistantMsg={id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply:buildIlmClarificationReply(content),question:content,sourceHints:[],contextHints:[]};
+      const messages=[...(item.messages||[]),userMsg,assistantMsg].slice(-ILM_MAX_CHAT_MESSAGES);
+      return {...item,title:(item.messages||[]).length?item.title:"Neue Frage",draft:"",messages};
+    });
+    markIlmScrollToLatest();
+    render();
+    setTimeout(()=>scrollIlmToBottom(true),80);
+    return;
+  }
   const token=++ilmPendingToken;
+  const requestId=++ilmActiveRequestId;
+  const answerMode=getIlmAnswerMode(convo);
+  const modeMap={detailed:"normal",short:"simple",sources:"sources"};
   updateIlmConversation(convo.id,item=>{
     const userMsg={id:"u-"+Date.now(),role:"user",content,createdAt:ilmNowIso()};
-    const loadingMsg={id:"l-"+Date.now(),role:"loading",createdAt:ilmNowIso()};
+    const loadingMsg={id:"l-"+Date.now(),role:"loading",createdAt:ilmNowIso(),phase:"internal"};
     const messages=[...(item.messages||[]),userMsg,loadingMsg].slice(-ILM_MAX_CHAT_MESSAGES);
     return {...item,title:(item.messages||[]).length?item.title:ilmGuessTitle(content),draft:"",messages};
   });
+  markIlmScrollToLatest();
   render();
+  setTimeout(()=>scrollIlmToBottom(true),80);
   $("ilmStopBtn")?.removeAttribute("hidden");
   await new Promise(r=>setTimeout(r,120));
-  if(token!==ilmPendingToken)return;
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  if(window.IlmMajlisV2?.detectPersonalCase?.(content)){
+    const freshStore=getIlmStore();
+    const freshConvo=getActiveIlmConversation(freshStore);
+    const matches=await searchIlmKnowledge(content,freshConvo,{limit:6});
+    if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+    const reply=window.IlmMajlisV2.buildPersonalCaseReply(content,matches);
+    updateIlmConversation(convo.id,item=>{
+      const messages=(item.messages||[]).filter(msg=>msg.role!=="loading");
+      messages.push({id:"a-"+Date.now(),role:"assistant",content:"",createdAt:ilmNowIso(),reply,question:content,sourceHints:reply.sourceHints||[],contextHints:reply.contextHints||[]});
+      return {...item,messages:messages.slice(-ILM_MAX_CHAT_MESSAGES)};
+    });
+    $("ilmStopBtn")?.setAttribute("hidden","hidden");
+    markIlmScrollToLatest();render();setTimeout(()=>scrollIlmToBottom(true),80);
+    return;
+  }
   const freshStore=getIlmStore();
   const freshConvo=getActiveIlmConversation(freshStore);
   const matches=await searchIlmKnowledge(content,freshConvo,{limit:options.mode==="proofs"?12:ILM_MAX_MATCHES});
-  if(token!==ilmPendingToken)return;
-  const reply=buildIlmAssistantReply(content,matches,options.mode==="proofs"?"long":(options.mode||"normal"));
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  let externalResults=null;
+  if(ilmNeedsExternalResearch(matches)&&navigator.onLine){
+    updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).map(msg=>msg.role==="loading"?{...msg,phase:"external"}:msg)}));
+    render();
+    externalResults=await fetchIlmExternalResearch(content);
+  }
+  if(token!==ilmPendingToken||requestId!==ilmActiveRequestId)return;
+  updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).map(msg=>msg.role==="loading"?{...msg,phase:"compose"}:msg)}));
+  const replyMode=options.mode==="proofs"?"proofs":modeMap[answerMode]||"normal";
+  const reply=buildIlmAssistantReply(content,matches,replyMode,externalResults);
   updateIlmConversation(convo.id,item=>{
     const messages=(item.messages||[]).filter(msg=>msg.role!=="loading");
     messages.push({
@@ -11065,9 +11415,19 @@ async function submitIlmQuestion(text,options={}){
     return {...item,messages:messages.slice(-ILM_MAX_CHAT_MESSAGES)};
   });
   $("ilmStopBtn")?.setAttribute("hidden","hidden");
+  markIlmScrollToLatest();
+  render();
+  setTimeout(()=>scrollIlmToBottom(true),80);
+}
+function stopIlmAnswer(){ilmPendingToken++;ilmActiveRequestId++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
+function setIlmAnswerMode(mode){
+  const store=getIlmStore();
+  const convo=getActiveIlmConversation(store);
+  if(!convo)return;
+  const next=mode==="short"||mode==="sources"||mode==="detailed"?mode:"detailed";
+  updateIlmConversation(convo.id,item=>({...item,answerMode:next}));
   render();
 }
-function stopIlmAnswer(){ilmPendingToken++;$("ilmStopBtn")?.setAttribute("hidden","hidden");const store=getIlmStore();const convo=getActiveIlmConversation(store);if(!convo)return;updateIlmConversation(convo.id,item=>({...item,messages:(item.messages||[]).filter(msg=>msg.role!=="loading")}));render()}
 function findIlmMessage(messageId){
   const store=getIlmStore();
   const convo=getActiveIlmConversation(store);
@@ -11156,30 +11516,127 @@ function openIlmRoute(payload){
     if(route?.view)navigate(route.view,route.value||"");
   }catch(e){}
 }
+function closeIlmSheet(){const host=$("ilmSheetBackdrop");if(host){host.hidden=true;host.innerHTML=""}syncIlmOverlayState()}
+function syncIlmOverlayState(){const sheetOpen=Boolean($("ilmSheetBackdrop")&&!$("ilmSheetBackdrop").hidden);const historyOpen=Boolean($("ilmHistoryDrawer")&&!$("ilmHistoryDrawer").hidden);const menuOpen=Boolean($("ilmMenuPopover")&&!$("ilmMenuPopover").hidden);document.body.classList.toggle("ilm-overlay-open",sheetOpen||historyOpen||menuOpen)}
+function renderIlmSourceActions(source){
+  const actions=[];
+  if(source.route?.view)actions.push(`<button type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">Öffnen</button>`);
+  (source.links||[]).forEach(link=>{if(link?.url)actions.push(`<a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.label||"Quelle öffnen")}</a>`)});
+  return actions.length?`<div class="ilm-source-actions">${actions.join("")}</div>`:"";
+}
+function showIlmSources(messageId){
+  const {message}=findIlmMessage(messageId);
+  const sources=ilmUniqueSources(ilmFlattenSources(message?.reply||{}));
+  const host=$("ilmSheetBackdrop");
+  if(!host)return;
+  host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Quellen">
+    <div class="ilm-sheet-head"><h3>${sources.length} Quellen</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
+    <div class="ilm-sheet-body"><div class="ilm-source-list">${sources.map((source,idx)=>`<article class="ilm-source-row"><b>${idx+1}. ${esc(source.speaker||source.title||"Fundstelle")}</b><span>${esc([source.groupLabel,source.work,source.reference].filter(Boolean).join(" · "))}</span>${source.excerpt?`<p>${esc(ilmQuote(source.excerpt,360))}</p>`:""}${source.body?`<p>${esc(ilmClip(source.body,520))}</p>`:""}${renderIlmSourceActions(source)}</article>`).join("")||`<div class="ilm-source-row"><b>Keine Quellen</b><span>Für diese Antwort wurden keine Quellenkarten hinterlegt.</span></div>`}</div></div>
+  </section>`;
+  host.hidden=false;
+  syncIlmOverlayState();
+  bindIlmSheetEvents();
+}
+function showIlmRelated(messageId){
+  const {message}=findIlmMessage(messageId);
+  const related=Array.isArray(message?.reply?.related)?message.reply.related:[];
+  const host=$("ilmSheetBackdrop");
+  if(!host)return;
+  host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Verwandte Inhalte">
+    <div class="ilm-sheet-head"><h3>Verwandte Inhalte</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
+    <div class="ilm-sheet-body"><div class="ilm-related-list">${related.map(item=>`<button class="ilm-related-row" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}"><b>${esc(item.title||"Inhalt öffnen")}</b><span>${esc(ilmKindLabel(item.kind))}</span></button>`).join("")||`<div class="ilm-related-row"><b>Keine verwandten Inhalte</b><span>Zu dieser Antwort wurden keine weiteren Inhalte hinterlegt.</span></div>`}</div></div>
+  </section>`;
+  host.hidden=false;
+  syncIlmOverlayState();
+  bindIlmSheetEvents();
+}
+function bindIlmSheetEvents(){
+  document.querySelectorAll("[data-ilm-close-sheet]").forEach(btn=>btn.onclick=closeIlmSheet);
+  const host=$("ilmSheetBackdrop");
+  if(host)host.onclick=ev=>{if(ev.target===host)closeIlmSheet()};
+  document.querySelectorAll("[data-ilm-open-route]").forEach(btn=>btn.onclick=ev=>{ev.preventDefault();openIlmRoute(btn.getAttribute("data-ilm-open-route")||"")});
+}
+function autoSizeIlmInput(input){
+  if(!input)return;
+  input.style.height="auto";
+  input.style.height=Math.min(input.scrollHeight,96)+"px";
+  syncIlmComposerLayout();
+}
+function syncIlmComposerLayout(){
+  if(currentRoute.view!=="ilm")return;
+  const shell=document.querySelector(".ilm-chat-shell");
+  const composer=$("ilmComposer");
+  if(!shell||!composer)return;
+  const h=Math.ceil(composer.getBoundingClientRect().height||72);
+  shell.style.setProperty("--ilm-composer-reserve",`${Math.max(70,h+10)}px`);
+}
+function syncIlmViewport(){
+  if(currentRoute.view!=="ilm")return;
+  const vv=window.visualViewport;
+  const layoutHeight=Math.max(320,Math.round(window.innerHeight||document.documentElement.clientHeight||0));
+  const rawKeyboardOffset=vv?Math.max(0,Math.round(layoutHeight-vv.height-vv.offsetTop)):0;
+  const keyboardOffset=rawKeyboardOffset>130?Math.max(0,rawKeyboardOffset-92):rawKeyboardOffset>78?Math.max(0,rawKeyboardOffset-62):rawKeyboardOffset;
+  document.documentElement.style.setProperty("--ilm-viewport-height",`${layoutHeight}px`);
+  document.documentElement.style.setProperty("--ilm-keyboard-offset",`${keyboardOffset}px`);
+  document.documentElement.style.setProperty("--ilm-keyboard-raw-offset",`${rawKeyboardOffset}px`);
+  requestAnimationFrame(syncIlmComposerLayout);
+}
+function scrollIlmToBottom(force=false){
+  const log=$("ilmChatLog");
+  if(!log)return;
+  const nearBottom=log.scrollHeight-log.scrollTop-log.clientHeight<160;
+  if(force||nearBottom)requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    log.scrollTop=log.scrollHeight;
+    const convo=getActiveIlmConversation(getIlmStore());
+    if(convo)updateIlmConversation(convo.id,item=>({...item,scrollTop:log.scrollHeight}));
+  }));
+}
 function bindIlmEvents(){
   if(currentRoute.view!=="ilm")return;
+  syncIlmViewport();
   const input=$("ilmInput");
   if(input){
-    input.oninput=()=>saveIlmDraft(input.value);
-    setTimeout(()=>{const convo=getActiveIlmConversation(getIlmStore());if(convo&&typeof convo.scrollTop==="number"){$("ilmChatLog").scrollTop=convo.scrollTop||0}},0);
+    autoSizeIlmInput(input);
+    input.onfocus=()=>{syncIlmViewport();setTimeout(()=>scrollIlmToBottom(true),120)};
+    input.oninput=()=>{autoSizeIlmInput(input);saveIlmDraft(input.value);syncIlmViewport()};
+    setTimeout(()=>{
+      const convo=getActiveIlmConversation(getIlmStore());
+      const log=$("ilmChatLog");
+      let force=ilmForceBottomOnce;
+      try{force=force||sessionStorage.getItem("darIlmForceBottomOnce")==="1";sessionStorage.removeItem("darIlmForceBottomOnce")}catch(e){}
+      ilmForceBottomOnce=false;
+      if(force)scrollIlmToBottom(true);
+      else if(convo&&log&&typeof convo.scrollTop==="number")log.scrollTop=convo.scrollTop||0;
+    },0);
   }
   const form=$("ilmComposer");
   if(form)form.onsubmit=ev=>{ev.preventDefault();submitIlmQuestion($("ilmInput")?.value||"")};
-  $("ilmStopBtn")&&( $("ilmStopBtn").onclick=()=>stopIlmAnswer() );
+  const hasLoading=Boolean(getActiveIlmConversation(getIlmStore())?.messages?.some(msg=>msg.role==="loading"));
+  const sendBtn=$("ilmSendBtn");
+  if(sendBtn&&hasLoading){sendBtn.textContent="■";sendBtn.onclick=ev=>{ev.preventDefault();stopIlmAnswer()}}
   const log=$("ilmChatLog");
   if(log)log.onscroll=()=>{const convo=getActiveIlmConversation(getIlmStore());if(!convo)return;updateIlmConversation(convo.id,item=>({...item,scrollTop:log.scrollTop}))};
+  document.querySelectorAll("[data-ilm-back],[data-ilm-close]").forEach(btn=>btn.onclick=()=>exitIlmChat());
+  document.querySelectorAll("[data-ilm-open-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.removeAttribute("hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-close-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.setAttribute("hidden","hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-open-menu]").forEach(btn=>btn.onclick=()=>{const menu=$("ilmMenuPopover");if(menu)menu.hidden=!menu.hidden;syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-menu-history]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");$("ilmHistoryDrawer")?.removeAttribute("hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-menu-close]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");syncIlmOverlayState()});
   document.querySelectorAll("[data-ilm-starter]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-starter")||""));
   document.querySelectorAll("[data-ilm-thread]").forEach(btn=>btn.onclick=()=>switchIlmConversation(btn.getAttribute("data-ilm-thread")||""));
   document.querySelectorAll("[data-ilm-new]").forEach(btn=>btn.onclick=()=>newIlmConversation());
   document.querySelectorAll("[data-ilm-rename]").forEach(btn=>btn.onclick=()=>renameIlmConversation(btn.getAttribute("data-ilm-rename")||""));
   document.querySelectorAll("[data-ilm-delete]").forEach(btn=>btn.onclick=()=>deleteIlmConversation(btn.getAttribute("data-ilm-delete")||""));
   document.querySelectorAll("[data-ilm-action]").forEach(btn=>btn.onclick=()=>{const [id,mode]=String(btn.getAttribute("data-ilm-action")||"").split(":");submitIlmAction(id,mode)});
+  document.querySelectorAll("[data-ilm-show-sources]").forEach(btn=>btn.onclick=()=>showIlmSources(btn.getAttribute("data-ilm-show-sources")||""));
+  document.querySelectorAll("[data-ilm-show-related]").forEach(btn=>btn.onclick=()=>showIlmRelated(btn.getAttribute("data-ilm-show-related")||""));
   document.querySelectorAll("[data-ilm-open-route]").forEach(btn=>btn.onclick=ev=>{ev.preventDefault();openIlmRoute(btn.getAttribute("data-ilm-open-route")||"")});
   document.querySelectorAll("[data-ilm-copy-answer]").forEach(btn=>btn.onclick=()=>copyIlmAnswer(btn.getAttribute("data-ilm-copy-answer")||""));
   document.querySelectorAll("[data-ilm-copy-sources]").forEach(btn=>btn.onclick=()=>copyIlmSources(btn.getAttribute("data-ilm-copy-sources")||""));
   document.querySelectorAll("[data-ilm-share]").forEach(btn=>btn.onclick=()=>shareIlmConversation(btn.getAttribute("data-ilm-share")||""));
-  document.querySelectorAll("[data-ilm-menu]").forEach(btn=>btn.onclick=()=>{const panel=document.querySelector(`[data-ilm-extra-panel="${btn.getAttribute("data-ilm-menu")}"]`);if(panel)panel.hidden=!panel.hidden});
-  document.querySelectorAll("[data-ilm-source-card]").forEach(card=>card.ontoggle=()=>toggleIlmSourceOpen(card.getAttribute("data-ilm-message")||"",card.getAttribute("data-ilm-source-card")||"",card.open));
+  document.querySelectorAll("[data-ilm-answer-mode]").forEach(btn=>btn.onclick=()=>{setIlmAnswerMode(btn.getAttribute("data-ilm-answer-mode")||"detailed");$("ilmMenuPopover")?.setAttribute("hidden","hidden")});
+  document.querySelectorAll("[data-ilm-clarify]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-clarify")||""));
+  scrollIlmToBottom(false);
 }
 function renderDirectPickPanel(extraClass=""){const categories=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const premium=extraClass.includes("home-direct-pick")?" premium-surface":"";return`<section class="direct-pick-panel ${extraClass}${premium}"><div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div><div class="direct-pick-grid"><select id="directCategory" class="direct-pick"><option value="">📚 Thema</option>${categories}</select><select id="directScholar" class="direct-pick"><option value="">👤 Gelehrter</option>${scholars}</select><select id="directBook" class="direct-pick"><option value="">📖 Buch</option>${books}</select></div></section>`}
 function bindDirectPickPanel(){const c=$("directCategory"),s=$("directScholar"),b=$("directBook");if(c){c.onchange=()=>{if(c.value){navigate("topic",c.value);c.selectedIndex=0}}};if(s){s.onchange=()=>{if(s.value){navigate("scholar",s.value);s.selectedIndex=0}}};if(b){b.onchange=()=>{if(b.value){navigate("book",b.value);b.selectedIndex=0}}}}
@@ -12641,7 +13098,8 @@ function loadImageEditorTemplate(src){
       try{
         const img=await new Promise((resolve,reject)=>{
           const el=new Image();
-          el.crossOrigin="anonymous";
+          const resolved=new URL(url,location.href);
+          if(resolved.origin!==location.origin)el.crossOrigin="anonymous";
           el.decoding="async";
           el.onload=()=>resolve(el);
           el.onerror=()=>reject(new Error("Template load failed: "+url));
@@ -12705,7 +13163,7 @@ function drawImageEditorMainText(ctx,text,box,opts){
 function drawImageEditorText(ctx,text,box,opts){return opts.kind==="main"?drawImageEditorMainText(ctx,text,box,opts):drawImageEditorSimpleText(ctx,text,box,opts)}
 function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/IMAGE_EDITOR_CANVAS_W,sy=rect.height/IMAGE_EDITOR_CANVAS_H;const active=imageEditorState.activeBlock;const guideFor=(kind)=>{if(kind!==active)return"";const guideRect=kind==="source"?imageEditorState.sourceGuideRect:imageEditorState.mainGuideRect;const box=guideRect||imageEditorInnerBox(imageEditorBlockBox(kind));const left=box.x*sx,top=box.y*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide is-active" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`};layer.innerHTML=guideFor("main")+guideFor("source")}
 function setImageEditorWarning(text,withRetry,mode){const warning=$("imageEditorWarning");if(!warning)return;warning.classList.remove("is-success","is-error");if(mode==="success")warning.classList.add("is-success");else if(mode==="error"||withRetry)warning.classList.add("is-error");if(withRetry)warning.innerHTML=`${esc(text)} <button type="button" class="image-editor-retry-btn" id="imageEditorRetryTemplate">Erneut versuchen</button>`;else warning.textContent=text||"";const retry=$("imageEditorRetryTemplate");if(retry&&!retry.dataset.bound){retry.dataset.bound="1";retry.onclick=()=>{const t=imageTemplateById(imageEditorState.templateId);invalidateImageEditorTemplateCache(t.src);imageEditorState.templateLoadFailed=false;renderImageEditorCanvas()}}}
-function imageEditorCanExport(){if(imageEditorState.templateLoadFailed||!imageEditorState.templateReady)return false;if(!String(imageEditorState.mainText||"").trim())return false;return true}
+function imageEditorCanExport(){if(imageEditorState.templateLoadFailed||!imageEditorState.templateReady)return false;const body=typeof imageEditorBlockText==="function"?imageEditorBlockText("body"):imageEditorState.mainText;return!!String(body||imageEditorState.mainText||"").trim()}
 function updateImageEditorExportButtons(){const ok=imageEditorCanExport(),hint=ok?"":imageEditorExportBlockedMessage();["imageEditorShare","imageEditorSaveTop","imageEditorCopy"].forEach(id=>{const btn=$(id);if(btn){btn.disabled=!ok;btn.title=hint}});const dl=$("imageEditorDownload");if(dl){dl.classList.toggle("is-disabled",!ok);dl.setAttribute("aria-disabled",ok?"false":"true");dl.title=hint}}
 async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");const fontCss=imageEditorFontCss(imageEditorState.font);let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){const main=drawImageEditorText(ctx,imageEditorState.mainText,t.text,{kind:"main",font:fontCss,color:imageEditorState.color,size:imageEditorState.fontSize,lineHeight:imageEditorState.lineHeight,align:imageEditorState.align,offsetX:imageEditorState.offsetX,offsetY:imageEditorState.offsetY,minSize:26});const source=drawImageEditorText(ctx,imageEditorState.sourceText,t.source,{kind:"source",font:fontCss,color:imageEditorState.color,size:imageEditorState.sourceSize,lineHeight:1.12,align:"center",offsetX:imageEditorState.sourceOffsetX,offsetY:imageEditorState.sourceOffsetY,minSize:8});imageEditorState.mainMetrics=main.metrics||null;imageEditorState.sourceMetrics=source.metrics||null;imageEditorState.mainGuideRect=main.guideRect||null;imageEditorState.sourceGuideRect=source.guideRect||null;applyImageEditorClampedOffset("main",main.clamped);applyImageEditorClampedOffset("source",source.clamped);const tooLong=(!main.ok||!source.ok);if(imageEditorState.templateLoadFailed)setImageEditorWarning("Vorlage konnte nicht geladen werden – erneut versuchen",true);else if(tooLong)setImageEditorWarning("Text ist zu lang – bitte kürzen oder Schrift kleiner wählen.",false);else setImageEditorWarning("",false)}else setImageEditorWarning("Vorlage konnte nicht geladen werden – erneut versuchen",true);updateImageEditorGuides();updateImageEditorExportButtons();syncImageEditorOffsetSliderLimits()}
 function syncImageEditorOffsetSliderLimits(){
@@ -12954,7 +13412,7 @@ function renderImageEditorColorChips(){return IMAGE_EDITOR_COLORS.map(c=>{const 
 function renderImageEditorPositionControls(){imageEditorEnsurePremiumState();const b=imageEditorState.activeBlock,off=imageEditorBlockOffsets(b),sc=imageEditorState.blockScales[b]||{w:1,h:1};return `<div class="ie-power-action-grid"><button type="button" data-editor-align="left">Links</button><button type="button" data-editor-align="center">Zentriert</button><button type="button" data-editor-align="right">Rechts</button><button type="button" data-editor-nudge="center-x">Horizontal zentrieren</button><button type="button" data-editor-nudge="center-y">Vertikal zentrieren</button><button type="button" data-editor-nudge="center-safe">In Safe-Area zentrieren</button><button type="button" data-editor-nudge="reset">Standardposition</button><button type="button" data-editor-nudge="up">Text nach oben</button><button type="button" data-editor-nudge="down">Text nach unten</button><button type="button" data-editor-nudge="reset-all">Alles zurücksetzen</button></div><div class="image-editor-fine-grid"><div class="image-editor-range"><span>${esc(imageEditorBlockLabel(b))} L/R</span><output id="imageEditorActiveOffsetXOut">${Math.round(off.x)}</output><input id="imageEditorActiveOffsetX" type="range" min="-160" max="160" value="${Math.round(off.x)}"></div><div class="image-editor-range"><span>${esc(imageEditorBlockLabel(b))} hoch/tief</span><output id="imageEditorActiveOffsetYOut">${Math.round(off.y)}</output><input id="imageEditorActiveOffsetY" type="range" min="-160" max="160" value="${Math.round(off.y)}"></div><div class="image-editor-range"><span>Textbox Breite</span><output id="imageEditorBlockWidthOut">${Math.round((sc.w||1)*100)}%</output><input id="imageEditorBlockWidth" type="range" min="55" max="100" value="${Math.round((sc.w||1)*100)}"></div><div class="image-editor-range"><span>Textbox Höhe</span><output id="imageEditorBlockHeightOut">${Math.round((sc.h||1)*100)}%</output><input id="imageEditorBlockHeight" type="range" min="55" max="100" value="${Math.round((sc.h||1)*100)}"></div></div>`}
 function renderImageEditorSizeControls(){return `<div class="image-editor-fine-grid"><div class="image-editor-range"><span>Schriftgröße</span><output id="imageEditorFontSizeOut">${imageEditorState.fontSize}</output><input id="imageEditorFontSize" type="range" min="24" max="88" value="${imageEditorState.fontSize}"></div></div><p class="ie-power-note">Haupttext, Quelle und Abstände passen sich automatisch perfekt an.</p>`}
 function renderImageEditorSheet(){imageEditorEnsurePremiumState();const tab=imageEditorState.sheetTab||"font";const panels={font:`<div class="image-editor-form"><label>Schriftart<select id="imageEditorFont">${IMAGE_EDITOR_FONTS.map(f=>`<option value="${esc(f.id)}" ${f.id===imageEditorState.font?"selected":""}>${esc(f.label)}</option>`).join("")}</select></label><button id="imageEditorResetFont" type="button">Schrift zurücksetzen</button></div>`,color:`<div class="ie-power-color-grid">${renderImageEditorColorChips()}<select id="imageEditorColor" hidden>${IMAGE_EDITOR_COLORS.map(c=>`<option value="${esc(c.value)}" ${c.value===imageEditorState.color?"selected":""}>${esc(c.label)}</option>`).join("")}</select></div>`,size:renderImageEditorSizeControls(),export:`<div class="image-editor-actions"><button id="imageEditorShare" class="primary" type="button">Bild teilen</button><button id="imageEditorCopy" type="button">Bild kopieren</button><a id="imageEditorDownload" href="#" download="dar-al-tawhid-bildbeitrag.png">Download PNG</a></div><p class="ie-power-export-note">Export: 1080 × 1350 px · Layout automatisch perfekt gesetzt.</p>`};return `<aside class="ie-power-sheet ${imageEditorState.sheetOpen?"":"is-collapsed"}" id="imageEditorSheet"><button type="button" class="ie-power-sheet-handle" id="imageEditorSheetToggle" aria-expanded="${imageEditorState.sheetOpen?"true":"false"}"><span></span></button><div class="ie-power-sheet-tabs">${IMAGE_EDITOR_PREMIUM_TABS.map(x=>`<button type="button" data-editor-sheet-tab="${esc(x.id)}" class="${tab===x.id?"active":""}">${esc(x.label)}</button>`).join("")}</div><div class="ie-power-sheet-body">${IMAGE_EDITOR_PREMIUM_TABS.map(x=>`<div class="ie-power-sheet-panel ${tab===x.id?"active":""}" data-editor-sheet-panel="${esc(x.id)}">${panels[x.id]||""}</div>`).join("")}</div></aside>`}
-function renderImageEditor(){seedImageEditorFromRoute(currentRoute.value);imageEditorEnsurePremiumState();const t=imageTemplateById(imageEditorState.templateId);const templates=`<div class="ie-power-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="eager" decoding="async"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div>`;const stage=`<div class="ie-power-stage"><div class="ie-power-preview"><div class="ie-power-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-touch-hint">Deckblatt wählen · Schrift &amp; Farbe anpassen · alles andere wird automatisch perfekt gesetzt</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div>`;return `<div class="ie-power-app" id="imageEditorAnchor"><header class="ie-power-toolbar"><button type="button" id="imageEditorBack">← Zurück</button><span class="ie-power-toolbar-title">Bild-Beitrag</span><button type="button" id="imageEditorSaveTop" class="primary">Teilen</button></header><div class="ie-power-layout">${templates}${stage}${renderImageEditorSheet()}</div></div>`}
+function renderImageEditor(){seedImageEditorFromRoute(currentRoute.value);imageEditorEnsurePremiumState();if(imageEditorState.needsLayout&&window.matchMedia("(max-width:900px)").matches)imageEditorState.sheetOpen=false;const t=imageTemplateById(imageEditorState.templateId);const templates=`<div class="ie-power-top"><div class="image-template-strip">${IMAGE_EDITOR_TEMPLATES.map(x=>`<button class="image-template-card ${x.id===t.id?"active":""}" type="button" data-image-template="${esc(x.id)}"><img src="${esc(imageTemplateUrl(x.src))}" alt="${esc(x.name)}" loading="eager" decoding="async"><b>${esc(x.name)}</b><small>${esc(x.tone)}</small></button>`).join("")}</div></div>`;const stage=`<div class="ie-power-stage"><div class="ie-power-preview"><div class="ie-power-touch-wrap" id="imageEditorTouchWrap"><canvas id="imageEditorCanvas" width="1080" height="1350"></canvas><div class="image-editor-guides" id="imageEditorGuides" aria-hidden="true"></div></div><div class="image-editor-touch-hint">Deckblatt wählen · Schrift &amp; Farbe anpassen · alles andere wird automatisch perfekt gesetzt</div><div id="imageEditorWarning" class="image-editor-warning"></div></div></div>`;return `<div class="ie-power-app" id="imageEditorAnchor"><header class="ie-power-toolbar"><button type="button" id="imageEditorBack">← Zurück</button><span class="ie-power-toolbar-title">Bild-Beitrag</span><button type="button" id="imageEditorSaveTop" class="primary">Teilen</button></header><div class="ie-power-layout">${templates}${stage}${renderImageEditorSheet()}</div></div>`}
 function renderImageEditorTest(){return `<div class="ie-power-test-badge">🧪 Test-Vorschau · noch nicht live</div>`+renderImageEditor()}
 function drawImageEditorPremiumBlock(ctx,block,text,box){if(!String(text||"").trim())return{ok:true,metrics:null,guideRect:null,clamped:{x:0,y:0}};const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const size=imageEditorBlockSize(block);const align=(block==="name"||block==="source")?"center":(imageEditorState.align||"center");const min=block==="source"?12:(block==="name"?15:18);return drawImageEditorSimpleText(ctx,text,box,{font,color:imageEditorState.color,size,lineHeight:block==="source"?1.16:imageEditorState.lineHeight,align,offsetX:0,offsetY:0,minSize:min})}
 async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;imageEditorEnsurePremiumState();const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){imageEditorEnforceAutoLayout({maxBodySize:imageEditorState.fontSize});imageEditorState.blockMetrics={};imageEditorState.blockGuideRects={};imageEditorState.blockTextTooLong={};IMAGE_EDITOR_PREMIUM_BLOCKS.forEach(b=>{const text=imageEditorBlockText(b.id);const result=drawImageEditorPremiumBlock(ctx,b.id,text,imageEditorBlockBox(b.id));imageEditorState.blockMetrics[b.id]=result.metrics||{blockW:result.blockW||0,blockH:result.blockH||0};imageEditorState.blockGuideRects[b.id]=result.guideRect||null;if(b.id==="body"){imageEditorState.mainMetrics=result.metrics||null;imageEditorState.mainGuideRect=result.guideRect||null}else if(b.id==="source"){imageEditorState.sourceMetrics=result.metrics||null;imageEditorState.sourceGuideRect=result.guideRect||null}});applyImageEditorLayoutFeedback()}else{setImageEditorWarning("Vorlage konnte nicht geladen werden. Bitte erneut versuchen.",true);updateImageEditorGuides();updateImageEditorExportButtons()}}
@@ -12962,7 +13420,7 @@ function applyImageEditorClampedOffset(){}
 function imageEditorMoveActive(block,startOff,dxC,dyC){const safe=imageEditorSafeBoxFor(block);const sc=imageEditorState.blockScales?.[block]||{w:1,h:1};const w=Math.max(80,Math.min(safe.w,safe.w*(Number(sc.w)||1))),h=Math.max(50,Math.min(safe.h,safe.h*(Number(sc.h)||1)));const maxX=Math.max(0,(safe.w-w)/2),maxY=Math.max(0,(safe.h-h)/2);let nx=Math.max(-maxX,Math.min(maxX,startOff.x+dxC)),ny=Math.max(-maxY,Math.min(maxY,startOff.y+dyC));const SNAP=14,cx=safe.x+(safe.w-w)/2+nx+w/2,cy=safe.y+(safe.h-h)/2+ny+h/2;const snapGuides={h:false,v:false};if(Math.abs(cx-IMAGE_EDITOR_CANVAS_W/2)<=SNAP){nx+=IMAGE_EDITOR_CANVAS_W/2-cx;snapGuides.v=true;snapGuides.vx=IMAGE_EDITOR_CANVAS_W/2}if(Math.abs(cy-IMAGE_EDITOR_CANVAS_H/2)<=SNAP){ny+=IMAGE_EDITOR_CANVAS_H/2-cy;snapGuides.h=true;snapGuides.hy=IMAGE_EDITOR_CANVAS_H/2}const safeCx=safe.x+safe.w/2,safeCy=safe.y+safe.h/2;if(Math.abs(safe.x+(safe.w-w)/2+nx+w/2-safeCx)<=SNAP){nx=0;snapGuides.v=true;snapGuides.vx=safeCx}if(Math.abs(safe.y+(safe.h-h)/2+ny+h/2-safeCy)<=SNAP){ny=0;snapGuides.h=true;snapGuides.hy=safeCy}nx=Math.max(-maxX,Math.min(maxX,nx));ny=Math.max(-maxY,Math.min(maxY,ny));imageEditorState.snapGuides=snapGuides;setImageEditorBlockOffsets(block,nx,ny)}
 function imageEditorApplyResize(block,startBox,edge,dxC,dyC){const safe=imageEditorSafeBoxFor(block);let left=startBox.x,top=startBox.y,right=startBox.x+startBox.w,bottom=startBox.y+startBox.h;if(edge.indexOf("e")>=0)right=startBox.x+startBox.w+dxC;if(edge.indexOf("w")>=0)left=startBox.x+dxC;if(edge.indexOf("s")>=0)bottom=startBox.y+startBox.h+dyC;if(edge.indexOf("n")>=0)top=startBox.y+dyC;left=Math.max(safe.x,left);top=Math.max(safe.y,top);right=Math.min(safe.x+safe.w,right);bottom=Math.min(safe.y+safe.h,bottom);const minW=170,minH=72;if(right-left<minW){if(edge.indexOf("w")>=0)left=right-minW;else right=left+minW}if(bottom-top<minH){if(edge.indexOf("n")>=0)top=bottom-minH;else bottom=top+minH}const w=Math.max(minW,right-left),h=Math.max(minH,bottom-top);const scW=Math.max(0.2,Math.min(1,w/safe.w)),scH=Math.max(0.2,Math.min(1,h/safe.h));imageEditorState.blockScales[block]={w:scW,h:scH};const offX=left-(safe.x+(safe.w-safe.w*scW)/2);const offY=top-(safe.y+(safe.h-safe.h*scH)/2);setImageEditorBlockOffsets(block,offX,offY)}
 function imageEditorActiveHandleAt(clientX,clientY,canvas){const p=screenToImageEditorCanvas(clientX,clientY,canvas);const box=imageEditorBlockBox(imageEditorState.activeBlock);const bx=Math.max(30,box.w*0.12),by=Math.max(30,box.h*0.14);const inside=p.x>=box.x-bx&&p.x<=box.x+box.w+bx&&p.y>=box.y-by&&p.y<=box.y+box.h+by;if(!inside)return null;const nearL=Math.abs(p.x-box.x)<=bx,nearR=Math.abs(p.x-(box.x+box.w))<=bx,nearT=Math.abs(p.y-box.y)<=by,nearB=Math.abs(p.y-(box.y+box.h))<=by;let edge="";if(nearT)edge+="n";if(nearB)edge+="s";if(nearL)edge+="w";if(nearR)edge+="e";if(edge)return{type:"resize",edge};return{type:"move"}}
-function updateImageEditorGuides(){const layer=$("imageEditorGuides");if(layer)layer.innerHTML=""}
+function updateImageEditorGuides(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas"),layer=$("imageEditorGuides");if(!wrap||!canvas||!layer)return;const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height){layer.innerHTML="";return}const sx=rect.width/IMAGE_EDITOR_CANVAS_W,sy=rect.height/IMAGE_EDITOR_CANVAS_H;const active=imageEditorState.activeBlock;const guideFor=(kind)=>{if(kind!==active)return"";const guideRect=imageEditorBlockGuideRect(kind);const box=guideRect||imageEditorInnerBox(imageEditorBlockBox(kind));const left=box.x*sx,top=box.y*sy,w=Math.max(8,box.w*sx),h=Math.max(8,box.h*sy);return `<div class="image-editor-guide is-active" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px"></div>`};layer.innerHTML=guideFor("body")+guideFor("source")}
 function bindImageEditorTestTouch(){const wrap=$("imageEditorTouchWrap"),canvas=$("imageEditorCanvas");if(!wrap||!canvas||wrap.dataset.testTouchBound==="1")return;wrap.dataset.testTouchBound="1";let rafId=0;const refresh=()=>{if(rafId)return;rafId=requestAnimationFrame(()=>{rafId=0;syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()})};const release=()=>{imageEditorTouch=null;imageEditorState.snapGuides=null;wrap.classList.remove("is-dragging","is-pinch-active")};const onStart=e=>{if(!e.touches)return;if(imageEditorState.interactionMode!=="edit"){if(e.touches.length===1){imageEditorTouch={mode:"tap",block:imageEditorPickBlock(e.touches[0].clientX,e.touches[0].clientY,canvas),x:e.touches[0].clientX,y:e.touches[0].clientY,moved:false}}return}if(e.touches.length===2){e.preventDefault();imageEditorTouch={mode:"pinch",block:imageEditorState.activeBlock,startDist:imageEditorTouchDistance(e.touches),startSize:imageEditorBlockSize(imageEditorState.activeBlock)};wrap.classList.add("is-dragging","is-pinch-active");return}if(e.touches.length!==1)return;const handle=imageEditorActiveHandleAt(e.touches[0].clientX,e.touches[0].clientY,canvas);if(!handle){imageEditorTouch={mode:"tap",block:imageEditorPickBlock(e.touches[0].clientX,e.touches[0].clientY,canvas),x:e.touches[0].clientX,y:e.touches[0].clientY,moved:false};return}e.preventDefault();wrap.classList.add("is-dragging");if(handle.type==="resize")imageEditorTouch={mode:"resize",edge:handle.edge,block:imageEditorState.activeBlock,startBox:imageEditorBlockBox(imageEditorState.activeBlock),startX:e.touches[0].clientX,startY:e.touches[0].clientY};else imageEditorTouch={mode:"move",block:imageEditorState.activeBlock,startOff:imageEditorBlockOffsets(imageEditorState.activeBlock),startX:e.touches[0].clientX,startY:e.touches[0].clientY}};const onMove=e=>{if(!imageEditorTouch||!e.touches)return;const t=imageEditorTouch;if(t.mode==="tap"){const dx=e.touches[0].clientX-t.x,dy=e.touches[0].clientY-t.y;if(Math.hypot(dx,dy)>12)t.moved=true;return}e.preventDefault();const scale=imageEditorCanvasScale(canvas);if(t.mode==="move"){imageEditorMoveActive(t.block,t.startOff,(e.touches[0].clientX-t.startX)*scale.width,(e.touches[0].clientY-t.startY)*scale.height);refresh()}else if(t.mode==="resize"){imageEditorApplyResize(t.block,t.startBox,t.edge,(e.touches[0].clientX-t.startX)*scale.width,(e.touches[0].clientY-t.startY)*scale.height);refresh()}else if(t.mode==="pinch"&&e.touches.length===2){const dist=imageEditorTouchDistance(e.touches);if(!t.startDist)return;const next=Math.round(t.startSize*(dist/t.startDist));const b=t.block;if(b==="source")imageEditorState.sourceSize=Math.max(8,Math.min(30,next));else if(b==="name")imageEditorState.nameSize=Math.max(16,Math.min(60,next));else if(b==="fazit")imageEditorState.fazitSize=Math.max(18,Math.min(70,next));else imageEditorState.fontSize=Math.max(24,Math.min(88,next));refresh()}};const onEnd=()=>{if(imageEditorTouch&&imageEditorTouch.mode==="tap"&&!imageEditorTouch.moved&&imageEditorTouch.block)setImageEditorActiveBlock(imageEditorTouch.block);release()};wrap.addEventListener("touchstart",onStart,{passive:false});wrap.addEventListener("touchmove",onMove,{passive:false});wrap.addEventListener("touchend",onEnd,{passive:true});wrap.addEventListener("touchcancel",onEnd,{passive:true});let drag=null;wrap.onmousedown=e=>{if(e.button!==0||imageEditorState.interactionMode!=="edit")return;const handle=imageEditorActiveHandleAt(e.clientX,e.clientY,canvas);if(!handle){setImageEditorActiveBlock(imageEditorPickBlock(e.clientX,e.clientY,canvas));return}e.preventDefault();if(handle.type==="resize")drag={mode:"resize",edge:handle.edge,block:imageEditorState.activeBlock,startBox:imageEditorBlockBox(imageEditorState.activeBlock),startX:e.clientX,startY:e.clientY};else drag={mode:"move",block:imageEditorState.activeBlock,startOff:imageEditorBlockOffsets(imageEditorState.activeBlock),startX:e.clientX,startY:e.clientY};wrap.classList.add("is-dragging")};window.addEventListener("mousemove",e=>{if(!drag)return;const scale=imageEditorCanvasScale(canvas);const dx=(e.clientX-drag.startX)*scale.width,dy=(e.clientY-drag.startY)*scale.height;if(drag.mode==="move")imageEditorMoveActive(drag.block,drag.startOff,dx,dy);else imageEditorApplyResize(drag.block,drag.startBox,drag.edge,dx,dy);syncImageEditorInputsFromState();renderImageEditorCanvas();downloadImageEditor()});window.addEventListener("mouseup",()=>{drag=null;imageEditorState.snapGuides=null;wrap.classList.remove("is-dragging")})}
 function syncImageEditorOffsetSliderLimits(){const b=imageEditorState.activeBlock,box=imageEditorSafeBoxFor(b);const maxX=Math.max(30,Math.round(box.w/3)),maxY=Math.max(30,Math.round(box.h/3));[["imageEditorActiveOffsetX",imageEditorBlockOffsets(b).x,maxX],["imageEditorActiveOffsetY",imageEditorBlockOffsets(b).y,maxY]].forEach(([id,val,max])=>{const el=$(id);if(!el)return;el.min=String(-max);el.max=String(max);const clamped=Math.max(-max,Math.min(max,Number(val)||0));if(Number(el.value)!==clamped)el.value=String(clamped)})}
 function setImageEditorStateFromInputs(){imageEditorEnsurePremiumState();imageEditorState.font=$("imageEditorFont")?.value||imageEditorState.font||"serif";imageEditorState.color=$("imageEditorColor")?.value||imageEditorState.color||imageTemplateById(imageEditorState.templateId).color;if($("imageEditorFontSize"))imageEditorState.fontSize=Number($("imageEditorFontSize").value||58)}
@@ -12975,7 +13433,7 @@ function applyImageEditorNudge(action){imageEditorEnsurePremiumState();const b=i
 function bindImageEditorInputs(){["imageEditorFont","imageEditorColor","imageEditorFontSize"].forEach(id=>{const el=$(id);if(!el||el.dataset.premiumBound==="1")return;el.dataset.premiumBound="1";el.oninput=()=>{setImageEditorStateFromInputs();updateImageEditorOutputs();autoFitImageEditor()};el.onchange=el.oninput})}
 function refreshImageEditorSheetPreserveScroll(){const sheet=$("imageEditorSheet");if(!sheet)return;const winY=window.scrollY||document.documentElement.scrollTop||0;const bodyScroll=sheet.querySelector(".ie-power-sheet-body")?.scrollTop||0;const tmp=document.createElement("div");tmp.innerHTML=renderImageEditorSheet();const fresh=tmp.firstElementChild;if(!fresh)return;sheet.replaceWith(fresh);const body=fresh.querySelector(".ie-power-sheet-body");if(body)body.scrollTop=bodyScroll;bindImageEditor();requestAnimationFrame(()=>window.scrollTo({top:winY,behavior:"auto"}))}
 function setImageEditorSheetTab(tab){const winY=window.scrollY||document.documentElement.scrollTop||0;imageEditorState.sheetTab=IMAGE_EDITOR_PREMIUM_TABS.some(x=>x.id===tab)?tab:"font";imageEditorState.sheetOpen=true;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.remove("is-collapsed");const toggle=$("imageEditorSheetToggle");if(toggle)toggle.setAttribute("aria-expanded","true");document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-editor-sheet-tab")===imageEditorState.sheetTab));document.querySelectorAll("[data-editor-sheet-panel]").forEach(panel=>panel.classList.toggle("active",panel.getAttribute("data-editor-sheet-panel")===imageEditorState.sheetTab));requestAnimationFrame(()=>window.scrollTo({top:winY,behavior:"auto"}))}
-function bindImageEditor(){if(!["image-editor","image-editor-test"].includes(currentRoute.view))return;imageEditorEnsurePremiumState();const back=$("imageEditorBack");if(back)back.onclick=()=>goBack();const saveTop=$("imageEditorSaveTop");if(saveTop)saveTop.onclick=()=>shareImageEditor();const sheetToggle=$("imageEditorSheetToggle");if(sheetToggle)sheetToggle.onclick=()=>{imageEditorState.sheetOpen=!imageEditorState.sheetOpen;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.toggle("is-collapsed",!imageEditorState.sheetOpen);sheetToggle.setAttribute("aria-expanded",imageEditorState.sheetOpen?"true":"false")};document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();setImageEditorSheetTab(btn.getAttribute("data-editor-sheet-tab")||"font")}});document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();document.querySelectorAll("[data-image-template]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-template")===imageEditorState.templateId))}});document.querySelectorAll("[data-image-color]").forEach(btn=>{btn.onclick=()=>{imageEditorState.color=btn.getAttribute("data-image-color")||imageEditorState.color;const hidden=$("imageEditorColor");if(hidden)hidden.value=imageEditorState.color;document.querySelectorAll("[data-image-color]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-color")===imageEditorState.color));autoFitImageEditor()}});bindImageEditorInputs();const resetFont=$("imageEditorResetFont");if(resetFont)resetFont.onclick=()=>{imageEditorState.font="serif";imageEditorState.fontSize=58;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;autoFitImageEditor()};const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert(imageEditorExportBlockedMessage());return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();const copy=$("imageEditorCopy");if(copy)copy.onclick=()=>copyImageEditor();if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas();downloadImageEditor()}}
+function bindImageEditor(){if(!["image-editor","image-editor-test"].includes(currentRoute.view))return;imageEditorEnsurePremiumState();const back=$("imageEditorBack");if(back)back.onclick=()=>goBack();const saveTop=$("imageEditorSaveTop");if(saveTop)saveTop.onclick=()=>shareImageEditor();const sheetToggle=$("imageEditorSheetToggle");if(sheetToggle)sheetToggle.onclick=()=>{imageEditorState.sheetOpen=!imageEditorState.sheetOpen;const sheet=$("imageEditorSheet");if(sheet)sheet.classList.toggle("is-collapsed",!imageEditorState.sheetOpen);sheetToggle.setAttribute("aria-expanded",imageEditorState.sheetOpen?"true":"false")};document.querySelectorAll("[data-editor-sheet-tab]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();setImageEditorSheetTab(btn.getAttribute("data-editor-sheet-tab")||"font")}});document.querySelectorAll("[data-image-template]").forEach(btn=>{btn.onclick=()=>{imageEditorState.templateId=btn.getAttribute("data-image-template")||imageEditorState.templateId;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;layoutImageEditorForTemplate();document.querySelectorAll("[data-image-template]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-template")===imageEditorState.templateId))}});document.querySelectorAll("[data-image-color]").forEach(btn=>{btn.onclick=()=>{imageEditorState.color=btn.getAttribute("data-image-color")||imageEditorState.color;const hidden=$("imageEditorColor");if(hidden)hidden.value=imageEditorState.color;document.querySelectorAll("[data-image-color]").forEach(x=>x.classList.toggle("active",x.getAttribute("data-image-color")===imageEditorState.color));autoFitImageEditor()}});bindImageEditorInputs();const resetFont=$("imageEditorResetFont");if(resetFont)resetFont.onclick=()=>{imageEditorState.font="serif";imageEditorState.fontSize=58;imageEditorState.color=imageTemplateById(imageEditorState.templateId).color;autoFitImageEditor()};const dl=$("imageEditorDownload");if(dl)dl.onclick=ev=>{ev.preventDefault();if(!imageEditorCanExport()){alert(imageEditorExportBlockedMessage());return}downloadImageEditor(true)};const share=$("imageEditorShare");if(share)share.onclick=()=>shareImageEditor();const copy=$("imageEditorCopy");if(copy)copy.onclick=()=>copyImageEditor();loadImageEditorTemplate(imageTemplateById(imageEditorState.templateId).src).catch(()=>{});bindImageEditorTouch();bindImageEditorTextExpand();const bootImageEditorCanvas=()=>{if(imageEditorState.needsLayout){imageEditorState.needsLayout=false;autoFitImageEditor()}else{renderImageEditorCanvas().then(()=>downloadImageEditor())}};requestAnimationFrame(()=>requestAnimationFrame(bootImageEditorCanvas))}
 function openImageEditorTextExpand(block){ensureImageEditorTextModal();imageEditorEnsurePremiumState();imageEditorState.textExpandBlock=IMAGE_EDITOR_PREMIUM_BLOCKS.some(b=>b.id===block)?block:"body";setImageEditorActiveBlock(imageEditorState.textExpandBlock);const modal=$("imageEditorTextModal"),title=$("imageEditorTextModalTitle"),area=$("imageEditorTextModalArea");if(!modal||!title||!area)return;title.textContent=imageEditorBlockLabel(imageEditorState.textExpandBlock)+" bearbeiten";area.value=imageEditorBlockText(imageEditorState.textExpandBlock);updateImageEditorTextModalHint();modal.hidden=false;requestAnimationFrame(()=>{try{area.focus();area.setSelectionRange(area.value.length,area.value.length)}catch(e){}})}
 function closeImageEditorTextExpand(save){const modal=$("imageEditorTextModal"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!modal)return;if(save&&area&&block){setImageEditorBlockText(block,area.value||"");syncImageEditorInputsFromState();renderImageEditorCanvas().then(()=>downloadImageEditor())}imageEditorState.textExpandBlock="";modal.hidden=true}
 function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!hint||!area||!block)return;const lines=String(area.value||"").split(/\n/).length;hint.textContent=`${lines} Zeile${lines===1?"":"n"} · Speichern übernimmt den Text direkt in die Vorschau.`;const canvas=$("imageEditorCanvas"),ctx=canvas?.getContext("2d");if(!ctx)return;const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const fit=fitImageEditorText(ctx,area.value,imageEditorInnerBox(imageEditorBlockBox(block)),font,imageEditorBlockSize(block),block==="source"?1.16:imageEditorState.lineHeight,block==="source"?12:16);}
@@ -13465,7 +13923,62 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false;
 }
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);document.body.classList.toggle("is-quiz-route",route.view==="quiz");document.body.classList.toggle("is-hadith-route",route.view==="hadith");if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",hadith:"Hadith",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
+function updateChrome(route){
+  const backBtn=$("backBtn");
+  const homeBtn=$("homeBtn");
+  const crumb=$("crumb");
+  const appBar=document.querySelector(".app-bar");
+  const postReaderActions=$("postReaderActions");
+  const isHome=isHomeRoute(route);
+  const isFeedFull=route.view==="feed";
+  const isMore=route.view==="more";
+  const isIlm=route.view==="ilm";
+  const isPost=route.view==="post";
+  if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);
+  document.body.classList.toggle("is-home-route",isHome);
+  document.body.classList.toggle("is-area-route",!isHome);
+  document.body.classList.toggle("is-ilm-chat-route",isIlm);
+  document.body.classList.toggle("image-editor-mode",route.view==="image-editor");
+  document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");
+  document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
+  document.body.classList.toggle("is-quiz-route",route.view==="quiz");
+  document.body.classList.toggle("is-hadith-route",route.view==="hadith");
+  document.body.classList.toggle("is-post-route",isPost);
+  if(appBar)appBar.classList.toggle("is-more-route",isMore);
+  if(postReaderActions)postReaderActions.hidden=!isPost;
+  updateBottomNav(route);
+  updatePostNavVisibility();
+  if(isIlm){
+    backBtn.classList.remove("show");
+    if(homeBtn)homeBtn.classList.remove("show");
+    if(appBar)appBar.classList.add("is-home");
+    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
+    return;
+  }
+  if(isFeedFull){
+    backBtn.classList.remove("show");
+    if(homeBtn)homeBtn.classList.remove("show");
+    if(appBar)appBar.classList.add("is-home");
+    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
+    return;
+  }
+  if(isHome){
+    backBtn.classList.remove("show");
+    if(homeBtn)homeBtn.classList.remove("show");
+    if(appBar)appBar.classList.add("is-home");
+    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
+    return;
+  }
+  if(appBar)appBar.classList.remove("is-home");
+  backBtn.classList.add("show");
+  if(homeBtn)homeBtn.classList.add("show");
+  const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:""};
+  let crumbLabel=labels[route.view]||"";
+  if(isMore)crumbLabel="";
+  if(isPost)crumbLabel="";
+  if(route.view==="quran-surah")crumbLabel="";
+  if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}
+}
 function render(){
   try{
     const routeBefore=readRoute();
@@ -13497,7 +14010,7 @@ function render(){
     let html="";
     if(currentRoute.view==="home")html=renderHome();
     else if(currentRoute.view==="feed")html=renderFeed();
-    else if(currentRoute.view==="ilm")html=renderHome();
+    else if(currentRoute.view==="ilm")html=renderIlm();
     else if(currentRoute.view==="quiz")html=renderQuiz();
     else if(currentRoute.view==="topics")html=renderTopics();
     else if(currentRoute.view==="scholars")html=renderScholars();
@@ -13890,6 +14403,9 @@ window.addEventListener("DOMContentLoaded",()=>{
     updateHeaderPrayerStatus();
     requestAnimationFrame(updateBottomNavPill);
     window.addEventListener("resize",updateBottomNavPill,{passive:true});
+    window.addEventListener("resize",syncIlmViewport,{passive:true});
+    if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
+    if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
     const qiblaFloatBtn=$("qiblaFloat");
     if(qiblaFloatBtn)qiblaFloatBtn.onclick=()=>{markFloatTouchbarActivated();openQiblaFromFloat()};
     const savedFloatBtn=$("savedFloat");
