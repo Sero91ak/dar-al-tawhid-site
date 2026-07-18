@@ -177,11 +177,11 @@ function runVersionUpdateGuard() {
     if (!maintainPush) {
       fail(`${htmlFile}: maintainPushHealth() fehlt`);
     } else {
-      mustInclude(`${htmlFile} maintainPushHealth`, maintainPush, ["syncPushRegistrationAndWelcome"]);
-      if (/syncPushRegistrationOnly\s*\(/.test(maintainPush)) {
-        fail(`${htmlFile} maintainPushHealth: darf syncPushRegistrationOnly nicht statt syncPushRegistrationAndWelcome nutzen`);
+      mustInclude(`${htmlFile} maintainPushHealth`, maintainPush, ["syncPushRegistrationOnly"]);
+      if (/syncPushRegistrationAndWelcome\s*\(/.test(maintainPush)) {
+        fail(`${htmlFile} maintainPushHealth: darf syncPushRegistrationAndWelcome nicht nutzen (Willkommens-Push-Schleife)`);
       } else {
-        ok(`${htmlFile} maintainPushHealth: kein syncPushRegistrationOnly`);
+        ok(`${htmlFile} maintainPushHealth: kein syncPushRegistrationAndWelcome`);
       }
     }
 
