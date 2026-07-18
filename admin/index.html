@@ -2243,6 +2243,7 @@ function renderStart(ctx){
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
         <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
+        <button class="btn" data-tab="quiz-stats" type="button">Quiz-Statistik</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
       </div>
     </div>
@@ -2252,6 +2253,7 @@ function renderStart(ctx){
     ${folderCard("②","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
     ${folderCard("③","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
     ${folderCard("④","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
     ${folderCard("⑤","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
   </section>
   <section class="command-grid">

@@ -6,6 +6,7 @@ on:
     branches:
       - main
     paths:
+      - cloudflare/quiz-stats-admin.js
       - cloudflare/worker.js
       - cloudflare/wrangler.toml
       - cloudflare/prayer-push-*.js
