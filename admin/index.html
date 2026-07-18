@@ -497,6 +497,7 @@ main#panel.panel{
 .feed-legacy-panel .feed-legacy-body{padding-top:8px}
 @media(max-width:720px){.feed-post-row{grid-template-columns:48px minmax(0,1fr)}.feed-post-actions{grid-column:1/-1;justify-content:flex-start}}
 }
+.quiz-admin-root{display:block;position:relative}
 .quiz-admin-subnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
 .quiz-admin-subtab{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
 .quiz-admin-subtab.active{background:rgba(212,175,55,.18);border-color:rgba(212,175,55,.45);color:var(--gold)}
@@ -540,7 +541,7 @@ main#panel.panel{
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=5"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
-<script src="/admin/quiz-stats-manager.js?v=1"></script>
+<script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -2178,12 +2179,12 @@ function renderShell(){
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
   if(currentTab==="feed-bg"&&window.DARFeedBgAdmin&&!window.__darFeedBgAdminLoaded)window.DARFeedBgAdmin.ensureBgLoaded(false).then(()=>{if(currentTab==="feed-bg")renderShell()}).catch(()=>{});
   if(window.DARFeedBgAdmin&&!window.__darFeedBgAutoInit){window.__darFeedBgAutoInit=true;window.DARFeedBgAdmin.ensureBgLoaded(false).catch(()=>{});}
-  if(currentTab==="quiz-stats"&&window.DARQuizStatsAdmin){
-    window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{if(currentTab==="quiz-stats"){renderShell();window.DARQuizStatsAdmin.bindQuizStatsTab(document.getElementById("panel"))}}).catch(()=>{});
-    window.DARQuizStatsAdmin.bindQuizStatsTab(document.getElementById("panel"));
+  if(currentTab==="quiz-stats"&&window.DARQuizStatsAdmin&&!quizStatsLoadedFlag()){
+    window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{window.__darQuizStatsLoaded=true;if(currentTab==="quiz-stats")renderShell()}).catch(()=>{});
   }
 }
 function feedLoadedFlag(){return window.__darFeedAdminLoaded===true}
+function quizStatsLoadedFlag(){return window.__darQuizStatsLoaded===true||Boolean(window.DARQuizStatsAdmin?.isQuizStatsInitialLoaded?.())}
 async function ensureFeedAdminData(force){
   if(!window.DARFeedAdmin)return;
   await window.DARFeedAdmin.ensureFeedLoaded(!!force);
@@ -2204,7 +2205,7 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed")ensureFeedAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed-bg"&&window.DARFeedBgAdmin)window.DARFeedBgAdmin.ensureBgLoaded(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
-    if(tab==="quiz-stats"&&window.DARQuizStatsAdmin)window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
+    if(tab==="quiz-stats"&&window.DARQuizStatsAdmin&&!quizStatsLoadedFlag())window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{window.__darQuizStatsLoaded=true;if(currentTab===tab)renderShell()}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();

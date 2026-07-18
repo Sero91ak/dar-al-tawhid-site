@@ -23,6 +23,8 @@
     selectedUser: null,
     role: "admin"
   };
+  const loadedTabs = new Set();
+  let loadToken = 0;
 
   function esc(s) {
     return String(s ?? "")
@@ -285,9 +287,25 @@
   }
 
   function renderSubNav() {
-    return `<nav class="quiz-admin-subnav">${subTabs()
+    return `<nav class="quiz-admin-subnav" id="quizStatsSubnav">${subTabs()
       .map(([id, label]) => `<button type="button" class="quiz-admin-subtab ${state.subTab === id ? "active" : ""}" data-quiz-subtab="${id}">${esc(label)}</button>`)
       .join("")}</nav>`;
+  }
+
+  function renderBody() {
+    if (state.subTab === "users") return renderUsers();
+    if (state.subTab === "questions") return renderQuestions();
+    if (state.subTab === "categories") return renderCategories();
+    if (state.subTab === "sessions") return renderSessions();
+    if (state.subTab === "alerts") return renderAlerts();
+    if (state.subTab === "export") return renderExport();
+    return renderOverview();
+  }
+
+  function renderStatus() {
+    if (state.loading) return `<div class="notice-note" id="quizStatsLoading">Lade Quiz-Statistik …</div>`;
+    if (state.error) return `<div class="notice-note wide" id="quizStatsError" style="color:#ffc9c3">${esc(state.error)}</div>`;
+    return "";
   }
 
   function renderTab() {
@@ -296,46 +314,70 @@
       const saved = localStorage.getItem(SUBTAB_KEY);
       if (saved && subTabs().some(([id]) => id === saved)) state.subTab = saved;
     } catch (e) {}
-    const body =
-      state.subTab === "users"
-        ? renderUsers()
-        : state.subTab === "questions"
-          ? renderQuestions()
-          : state.subTab === "categories"
-            ? renderCategories()
-            : state.subTab === "sessions"
-              ? renderSessions()
-              : state.subTab === "alerts"
-                ? renderAlerts()
-                : state.subTab === "export"
-                  ? renderExport()
-                  : renderOverview();
-    return `${renderSubNav()}${state.loading ? `<div class="notice-note">Lade Quiz-Statistik …</div>` : ""}${state.error ? `<div class="notice-note wide" style="color:#ffc9c3">${esc(state.error)}</div>` : ""}${body}`;
+    return `<div id="quizStatsRoot" class="quiz-admin-root">
+      ${renderSubNav()}
+      <div id="quizStatsStatus">${renderStatus()}</div>
+      <div id="quizStatsBody">${renderBody()}</div>
+    </div>`;
   }
 
-  async function loadSubTab() {
+  function findRoot(panel) {
+    return panel ? panel.querySelector("#quizStatsRoot") : document.getElementById("quizStatsRoot");
+  }
+
+  function patchPanel(panel) {
+    const root = findRoot(panel);
+    if (!root) {
+      if (typeof global.renderShell === "function") global.renderShell();
+      return false;
+    }
+    const subnav = root.querySelector("#quizStatsSubnav");
+    if (subnav) subnav.outerHTML = renderSubNav();
+    const status = root.querySelector("#quizStatsStatus");
+    if (status) status.innerHTML = renderStatus();
+    const body = root.querySelector("#quizStatsBody");
+    if (body) body.innerHTML = renderBody();
+    bind(panel);
+    return true;
+  }
+
+  async function loadSubTab({ force = false } = {}) {
+    if (state.subTab === "export") return;
+    if (!force && loadedTabs.has(state.subTab)) return;
+    const token = ++loadToken;
     state.loading = true;
     state.error = "";
+    patchPanel(document.getElementById("panel"));
     try {
       if (state.subTab === "overview") state.overview = await api("/overview");
-      else if (state.subTab === "users") state.users = await api("/users");
-      else if (state.subTab === "questions") state.questions = await api("/questions");
+      else if (state.subTab === "users") {
+        state.users = await api("/users");
+        state.selectedUser = null;
+      } else if (state.subTab === "questions") state.questions = await api("/questions");
       else if (state.subTab === "categories") state.categories = await api("/categories");
       else if (state.subTab === "sessions") state.sessions = await api("/sessions");
       else if (state.subTab === "alerts") state.alerts = await api("/alerts");
+      if (token !== loadToken) return;
+      loadedTabs.add(state.subTab);
     } catch (e) {
+      if (token !== loadToken) return;
       state.error = e.message || String(e);
     } finally {
-      state.loading = false;
+      if (token === loadToken) {
+        state.loading = false;
+        patchPanel(document.getElementById("panel"));
+      }
     }
   }
 
   async function loadUserDetail(userId) {
     try {
       state.selectedUser = await api(`/users/${encodeURIComponent(userId)}`);
+      state.error = "";
     } catch (e) {
       state.error = e.message || String(e);
     }
+    patchPanel(document.getElementById("panel"));
   }
 
   async function downloadExport(type) {
@@ -353,57 +395,83 @@
     URL.revokeObjectURL(a.href);
   }
 
+  async function switchSubTab(id, panel) {
+    if (!id || id === state.subTab) return;
+    state.subTab = id;
+    state.selectedUser = null;
+    try {
+      localStorage.setItem(SUBTAB_KEY, state.subTab);
+    } catch (e) {}
+    if (state.subTab === "export") {
+      patchPanel(panel);
+      return;
+    }
+    await loadSubTab();
+  }
+
   function bind(panel) {
-    if (!panel) return;
-    panel.querySelectorAll("[data-quiz-subtab]").forEach((btn) => {
-      btn.onclick = async () => {
-        state.subTab = btn.getAttribute("data-quiz-subtab");
-        try {
-          localStorage.setItem(SUBTAB_KEY, state.subTab);
-        } catch (e) {}
-        await loadSubTab();
-        if (typeof global.renderShell === "function") global.renderShell();
+    const root = findRoot(panel);
+    if (!root) return;
+    root.querySelectorAll("[data-quiz-subtab]").forEach((btn) => {
+      btn.onclick = () => {
+        switchSubTab(btn.getAttribute("data-quiz-subtab"), panel).catch((e) => {
+          state.error = e.message || String(e);
+          patchPanel(panel);
+        });
       };
     });
-    const days = panel.querySelector("#quizStatsDays");
-    if (days)
+    const days = root.querySelector("#quizStatsDays");
+    if (days) {
+      days.value = String(state.days);
       days.onchange = () => {
         state.days = Number(days.value) || 30;
       };
-    const role = panel.querySelector("#quizStatsRole");
-    if (role)
+    }
+    const role = root.querySelector("#quizStatsRole");
+    if (role) {
+      role.value = state.role;
       role.onchange = () => {
         state.role = role.value;
         try {
           localStorage.setItem(ROLE_KEY, state.role);
         } catch (e) {}
       };
-    const refresh = panel.querySelector("#quizStatsRefreshBtn");
-    if (refresh)
+    }
+    const refresh = root.querySelector("#quizStatsRefreshBtn");
+    if (refresh) {
       refresh.onclick = async () => {
-        await loadSubTab();
-        if (typeof global.renderShell === "function") global.renderShell();
+        loadedTabs.delete(state.subTab);
+        await loadSubTab({ force: true });
       };
-    panel.querySelectorAll("[data-quiz-user]").forEach((row) => {
-      row.onclick = async () => {
-        await loadUserDetail(row.getAttribute("data-quiz-user"));
-        if (typeof global.renderShell === "function") global.renderShell();
+    }
+    root.querySelectorAll("[data-quiz-user]").forEach((row) => {
+      row.onclick = () => {
+        loadUserDetail(row.getAttribute("data-quiz-user")).catch((e) => {
+          state.error = e.message || String(e);
+          patchPanel(panel);
+        });
       };
     });
-    panel.querySelectorAll("[data-quiz-export]").forEach((btn) => {
+    root.querySelectorAll("[data-quiz-export]").forEach((btn) => {
       btn.onclick = () => downloadExport(btn.getAttribute("data-quiz-export")).catch((e) => alert(e.message));
     });
   }
 
-  async function ensureLoaded() {
-    if (!state.overview && state.subTab === "overview") await loadSubTab();
-    else if (state.subTab !== "overview" && state.subTab !== "export") await loadSubTab();
+  async function ensureLoaded({ force = false } = {}) {
+    if (state.subTab === "export") return;
+    if (!force && loadedTabs.has(state.subTab)) return;
+    await loadSubTab({ force });
+  }
+
+  function isInitialLoaded() {
+    return loadedTabs.has("overview") || loadedTabs.has(state.subTab);
   }
 
   global.DARQuizStatsAdmin = {
     renderQuizStatsTab: renderTab,
     bindQuizStatsTab: bind,
     ensureQuizStatsLoaded: ensureLoaded,
+    isQuizStatsInitialLoaded: isInitialLoaded,
     resetQuizStatsState() {
       state.overview = null;
       state.users = [];
@@ -412,6 +480,11 @@
       state.sessions = [];
       state.alerts = [];
       state.selectedUser = null;
+      state.loading = false;
+      state.error = "";
+      loadedTabs.clear();
+      loadToken = 0;
+      global.__darQuizStatsLoaded = false;
     }
   };
 })(window);
