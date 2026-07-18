@@ -9852,6 +9852,231 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
   .quiz-shell.quiz-shell-pro{padding-left:14px;padding-right:14px}
   .quiz-card,.quiz-session,.quiz-result,.quiz-compact-intro{padding:16px}
 }
+@media(max-width:430px){
+  .quiz-shell.quiz-shell-pro{
+    --quiz-page-padding-x:12px;
+    --quiz-page-padding-top:12px;
+    --quiz-section-gap:14px;
+    --quiz-card-padding:14px;
+    --quiz-control-height:50px;
+    --quiz-button-height:50px;
+    --quiz-option-min-height:50px;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  .quiz-main-title{font-size:clamp(24px,6.5vw,32px)!important}
+  .quiz-question{font-size:clamp(20px,5.5vw,28px)!important;line-height:1.32!important}
+  .quiz-answer{grid-template-columns:26px minmax(0,1fr)!important;padding:10px 12px!important;font-size:14px!important}
+  .quiz-answer-note{display:none}
+  .quiz-app-nav-card{grid-template-columns:auto minmax(0,1fr)!important;padding:12px!important;min-height:68px!important}
+  .quiz-status-meta{font-size:12px!important}
+  .quiz-result-box b{font-size:22px!important}
+}
+</style>
+
+<style id="iphone-compact-v4">
+/* iPhone 13/14/15 (390–430px) + schmale Split-View: Text lesbar, nicht abgeschnitten */
+@media(max-width:430px){
+  .top-shell.theme-hero-shell .header{
+    padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+    padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  }
+  .top-shell.theme-hero-shell .brand-kicker-row{
+    flex-wrap:wrap!important;
+    gap:6px!important;
+    margin-bottom:14px!important;
+  }
+  .top-shell.theme-hero-shell .brand small{
+    flex-basis:100%!important;
+    font-size:8.5px!important;
+    letter-spacing:.1em!important;
+    white-space:normal!important;
+    line-height:1.3!important;
+  }
+  .top-shell.theme-hero-shell .hijri-header-pill{
+    min-width:0!important;
+    max-width:100%!important;
+    width:auto!important;
+    font-size:8.5px!important;
+    padding:5px 8px!important;
+    min-height:30px!important;
+    white-space:normal!important;
+    text-align:center!important;
+    line-height:1.2!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:56px minmax(0,1fr)!important;
+    column-gap:10px!important;
+  }
+  .top-shell.theme-hero-shell .logo{
+    width:56px!important;
+    height:56px!important;
+    flex-basis:56px!important;
+  }
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(22px,5.8vw,30px)!important;
+    letter-spacing:.01em!important;
+    line-height:1.02!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    word-break:break-word!important;
+  }
+  .top-shell.theme-hero-shell .header-tools{
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+    margin-top:14px!important;
+  }
+  .top-shell.theme-hero-shell .header .socials{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+  }
+  .top-shell.theme-hero-shell .header .social-link{
+    min-width:0!important;
+    width:100%!important;
+    height:42px!important;
+    min-height:42px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-status{
+    min-height:42px!important;
+    padding:8px 10px!important;
+    gap:6px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item b{
+    font-size:7px!important;
+    letter-spacing:.1em!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item span{
+    font-size:10px!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item small{
+    font-size:7.5px!important;
+    white-space:normal!important;
+  }
+  .top-shell.theme-hero-shell .hero-text{
+    margin-top:14px!important;
+    padding-top:14px!important;
+  }
+  .top-shell.theme-hero-shell .salam{
+    font-size:clamp(15px,4.2vw,20px)!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    line-height:1.25!important;
+  }
+  .top-shell.theme-hero-shell .intro{
+    font-size:13px!important;
+    line-height:1.55!important;
+  }
+  .brand-main h1{
+    transform:none!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+  }
+  .prayer-push-accordion-toggle{
+    flex-wrap:wrap!important;
+    align-items:flex-start!important;
+    row-gap:4px!important;
+    padding:10px 12px!important;
+  }
+  .prayer-push-accordion-title{
+    flex:1 1 100%!important;
+    font-size:11.5px!important;
+    line-height:1.25!important;
+  }
+  .prayer-push-accordion-summary{
+    flex:1 1 100%!important;
+    max-width:100%!important;
+    text-align:left!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    font-size:10px!important;
+    line-height:1.3!important;
+    opacity:.88!important;
+  }
+  .view-head-home-row{
+    flex-wrap:wrap!important;
+    gap:6px!important;
+    align-items:flex-start!important;
+  }
+  .view-head-home-row h2{
+    flex:1 1 100%!important;
+    font-size:clamp(22px,5.5vw,28px)!important;
+  }
+  .home-hijri-day-btn{
+    max-width:100%!important;
+    width:100%!important;
+    white-space:normal!important;
+    text-align:center!important;
+    font-size:9.5px!important;
+    line-height:1.25!important;
+    min-height:30px!important;
+    padding:6px 8px!important;
+  }
+  .header-prayer-item b,
+  .header-prayer-item span,
+  .header-prayer-item small{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    word-break:break-word!important;
+  }
+  .prayer-push-status summary{
+    flex-wrap:wrap!important;
+    white-space:normal!important;
+    line-height:1.3!important;
+    min-height:42px!important;
+    height:auto!important;
+  }
+  .prayer-action-btn{
+    font-size:10.5px!important;
+    line-height:1.2!important;
+    white-space:normal!important;
+    padding:8px 7px!important;
+  }
+  .isnad-quote{
+    font-size:11px!important;
+    line-height:1.38!important;
+  }
+  .isnad-source{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    font-size:8.5px!important;
+    line-height:1.35!important;
+  }
+}
+@media(max-width:390px){
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:50px minmax(0,1fr)!important;
+    column-gap:8px!important;
+  }
+  .top-shell.theme-hero-shell .logo{
+    width:50px!important;
+    height:50px!important;
+    flex-basis:50px!important;
+  }
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(20px,5.4vw,27px)!important;
+  }
+  .header-prayer-item span{font-size:9.5px!important}
+  .header-prayer-item b{font-size:6.8px!important}
+  .prayer-action-row{grid-template-columns:1fr!important}
+  .prayer-action-row .prayer-action-btn:nth-child(3){grid-column:auto}
+}
+@media(max-width:360px){
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(18px,5.2vw,24px)!important;
+  }
+}
 </style>
 </head>
 <body class="has-bottom-nav">
