@@ -949,6 +949,15 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 }
 .ilm-thread-row-new b{margin:0;font-size:13.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ilm-thread-row-new span{margin:0;font-size:10.5px;line-height:1.2;color:var(--ilm-secondary-text);white-space:nowrap}
+/* Ilm overlays must sit above the fixed composer and scroll internally */
+.ilm-sheet-backdrop{z-index:100}
+.ilm-history-drawer{z-index:100}
+.ilm-menu-popover{z-index:101}
+.ilm-sheet{display:flex;flex-direction:column;max-height:min(86dvh,calc(100dvh - env(safe-area-inset-top,0px) - 8px));overflow:hidden;padding:0;box-sizing:border-box}
+.ilm-sheet-head{flex:0 0 auto;margin-bottom:0;padding:14px 14px 10px;border-bottom:1px solid color-mix(in srgb,var(--ilm-border) 85%,transparent)}
+.ilm-sheet-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px))}
+.ilm-sheet-body .ilm-source-list,.ilm-sheet-body .ilm-related-list{display:grid;gap:8px}
+@media(min-width:900px){.ilm-sheet{height:min(82dvh,780px);max-height:min(82dvh,780px)}}
 .ilm-composer-bar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
 .ilm-composer-inner{padding-top:4px;padding-bottom:4px}
 .ilm-confidence{display:inline-flex;align-items:center;border:1px solid var(--ilm-border);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:850;color:var(--ilm-accent);margin-bottom:4px}
@@ -11327,7 +11336,8 @@ function openIlmRoute(payload){
     if(route?.view)navigate(route.view,route.value||"");
   }catch(e){}
 }
-function closeIlmSheet(){const host=$("ilmSheetBackdrop");if(host){host.hidden=true;host.innerHTML=""}}
+function closeIlmSheet(){const host=$("ilmSheetBackdrop");if(host){host.hidden=true;host.innerHTML=""}syncIlmOverlayState()}
+function syncIlmOverlayState(){const sheetOpen=Boolean($("ilmSheetBackdrop")&&!$("ilmSheetBackdrop").hidden);const historyOpen=Boolean($("ilmHistoryDrawer")&&!$("ilmHistoryDrawer").hidden);const menuOpen=Boolean($("ilmMenuPopover")&&!$("ilmMenuPopover").hidden);document.body.classList.toggle("ilm-overlay-open",sheetOpen||historyOpen||menuOpen)}
 function renderIlmSourceActions(source){
   const actions=[];
   if(source.route?.view)actions.push(`<button type="button" data-ilm-open-route="${esc(JSON.stringify(source.route))}">Öffnen</button>`);
@@ -11341,9 +11351,10 @@ function showIlmSources(messageId){
   if(!host)return;
   host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Quellen">
     <div class="ilm-sheet-head"><h3>${sources.length} Quellen</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
-    <div class="ilm-source-list">${sources.map((source,idx)=>`<article class="ilm-source-row"><b>${idx+1}. ${esc(source.speaker||source.title||"Fundstelle")}</b><span>${esc([source.groupLabel,source.work,source.reference].filter(Boolean).join(" · "))}</span>${source.excerpt?`<p>${esc(ilmQuote(source.excerpt,360))}</p>`:""}${source.body?`<p>${esc(ilmClip(source.body,520))}</p>`:""}${renderIlmSourceActions(source)}</article>`).join("")||`<div class="ilm-source-row"><b>Keine Quellen</b><span>Für diese Antwort wurden keine Quellenkarten hinterlegt.</span></div>`}</div>
+    <div class="ilm-sheet-body"><div class="ilm-source-list">${sources.map((source,idx)=>`<article class="ilm-source-row"><b>${idx+1}. ${esc(source.speaker||source.title||"Fundstelle")}</b><span>${esc([source.groupLabel,source.work,source.reference].filter(Boolean).join(" · "))}</span>${source.excerpt?`<p>${esc(ilmQuote(source.excerpt,360))}</p>`:""}${source.body?`<p>${esc(ilmClip(source.body,520))}</p>`:""}${renderIlmSourceActions(source)}</article>`).join("")||`<div class="ilm-source-row"><b>Keine Quellen</b><span>Für diese Antwort wurden keine Quellenkarten hinterlegt.</span></div>`}</div></div>
   </section>`;
   host.hidden=false;
+  syncIlmOverlayState();
   bindIlmSheetEvents();
 }
 function showIlmRelated(messageId){
@@ -11353,9 +11364,10 @@ function showIlmRelated(messageId){
   if(!host)return;
   host.innerHTML=`<section class="ilm-sheet" role="dialog" aria-modal="true" aria-label="Verwandte Inhalte">
     <div class="ilm-sheet-head"><h3>Verwandte Inhalte</h3><button class="ilm-icon-btn" type="button" data-ilm-close-sheet>×</button></div>
-    <div class="ilm-related-list">${related.map(item=>`<button class="ilm-related-row" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}"><b>${esc(item.title||"Inhalt öffnen")}</b><span>${esc(ilmKindLabel(item.kind))}</span></button>`).join("")||`<div class="ilm-related-row"><b>Keine verwandten Inhalte</b><span>Zu dieser Antwort wurden keine weiteren Inhalte hinterlegt.</span></div>`}</div>
+    <div class="ilm-sheet-body"><div class="ilm-related-list">${related.map(item=>`<button class="ilm-related-row" type="button" data-ilm-open-route="${esc(JSON.stringify(item.route||{view:"home",value:""}))}"><b>${esc(item.title||"Inhalt öffnen")}</b><span>${esc(ilmKindLabel(item.kind))}</span></button>`).join("")||`<div class="ilm-related-row"><b>Keine verwandten Inhalte</b><span>Zu dieser Antwort wurden keine weiteren Inhalte hinterlegt.</span></div>`}</div></div>
   </section>`;
   host.hidden=false;
+  syncIlmOverlayState();
   bindIlmSheetEvents();
 }
 function bindIlmSheetEvents(){
@@ -11425,11 +11437,11 @@ function bindIlmEvents(){
   const log=$("ilmChatLog");
   if(log)log.onscroll=()=>{const convo=getActiveIlmConversation(getIlmStore());if(!convo)return;updateIlmConversation(convo.id,item=>({...item,scrollTop:log.scrollTop}))};
   document.querySelectorAll("[data-ilm-back],[data-ilm-close]").forEach(btn=>btn.onclick=()=>exitIlmChat());
-  document.querySelectorAll("[data-ilm-open-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.removeAttribute("hidden")});
-  document.querySelectorAll("[data-ilm-close-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.setAttribute("hidden","hidden")});
-  document.querySelectorAll("[data-ilm-open-menu]").forEach(btn=>btn.onclick=()=>{const menu=$("ilmMenuPopover");if(menu)menu.hidden=!menu.hidden});
-  document.querySelectorAll("[data-ilm-menu-history]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");$("ilmHistoryDrawer")?.removeAttribute("hidden")});
-  document.querySelectorAll("[data-ilm-menu-close]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden")});
+  document.querySelectorAll("[data-ilm-open-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.removeAttribute("hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-close-history]").forEach(btn=>btn.onclick=()=>{$("ilmHistoryDrawer")?.setAttribute("hidden","hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-open-menu]").forEach(btn=>btn.onclick=()=>{const menu=$("ilmMenuPopover");if(menu)menu.hidden=!menu.hidden;syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-menu-history]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");$("ilmHistoryDrawer")?.removeAttribute("hidden");syncIlmOverlayState()});
+  document.querySelectorAll("[data-ilm-menu-close]").forEach(btn=>btn.onclick=()=>{$("ilmMenuPopover")?.setAttribute("hidden","hidden");syncIlmOverlayState()});
   document.querySelectorAll("[data-ilm-starter]").forEach(btn=>btn.onclick=()=>submitIlmQuestion(btn.getAttribute("data-ilm-starter")||""));
   document.querySelectorAll("[data-ilm-thread]").forEach(btn=>btn.onclick=()=>switchIlmConversation(btn.getAttribute("data-ilm-thread")||""));
   document.querySelectorAll("[data-ilm-new]").forEach(btn=>btn.onclick=()=>newIlmConversation());
