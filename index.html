@@ -931,19 +931,24 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 @media(max-width:520px){.ilm-chat-shell{--ilm-composer-reserve:72px}.ilm-chat-header{grid-template-columns:42px minmax(0,1fr) auto}.ilm-message-list{padding:14px max(10px,env(safe-area-inset-right,0px)) calc(var(--ilm-composer-reserve) + var(--ilm-keyboard-offset,0px) + 10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}.ilm-answer-text{font-size:16.5px}.ilm-user-bubble{font-size:15.5px;max-width:min(86%,620px)}.ilm-composer-bar{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}.ilm-composer-inner{grid-template-columns:minmax(0,1fr) 38px;padding-left:15px}.ilm-send-icon{width:34px;height:34px}.ilm-chat-input{font-size:16px}}
 /* Ilm compact drawer/composer overrides */
 .ilm-message-inner{gap:12px}
-.ilm-thread-list{gap:8px}
+.ilm-history-drawer{padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px));gap:8px}
+.ilm-drawer-head h3{font-size:16px}
+.ilm-history-drawer>.ilm-action-link.primary{width:100%;min-height:32px;padding:6px 10px;font-size:12px;justify-content:center}
+.ilm-thread-list{display:flex;flex-direction:column;align-content:flex-start;gap:5px;overflow-y:auto;min-height:0;align-self:stretch}
 .ilm-thread-row-new{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:4px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  flex:0 0 auto;
   min-height:0;
   height:auto;
-  padding:10px 12px;
-  border-radius:14px;
+  padding:7px 10px;
+  border-radius:12px;
 }
-.ilm-thread-row-new b{margin:0;font-size:15px;line-height:1.28}
-.ilm-thread-row-new span{margin-top:0;font-size:12px;line-height:1.35}
+.ilm-thread-row-new b{margin:0;font-size:13.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ilm-thread-row-new span{margin:0;font-size:10.5px;line-height:1.2;color:var(--ilm-secondary-text);white-space:nowrap}
 .ilm-composer-bar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
 .ilm-composer-inner{padding-top:4px;padding-bottom:4px}
 .ilm-confidence{display:inline-flex;align-items:center;border:1px solid var(--ilm-border);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:850;color:var(--ilm-accent);margin-bottom:4px}
@@ -10295,6 +10300,7 @@ function loadIlmStore(){
 }
 function saveIlmStore(store){setJson(ILM_CHAT_STORE_KEY,{...defaultIlmStore(),...(store||{})})}
 function ilmNowIso(){return new Date().toISOString()}
+function formatIlmThreadDate(value){const d=new Date(value||Date.now());if(Number.isNaN(d.getTime()))return"";return d.toLocaleString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}
 function newIlmConversationRecord(seedTitle="Neues Gespräch"){
   return {
     id:"ilm-"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
@@ -11061,7 +11067,7 @@ function renderIlmHistoryDrawer(store){
   return `<aside class="ilm-history-drawer" id="ilmHistoryDrawer" hidden>
     <div class="ilm-drawer-head"><h3>Gespräche</h3><button class="ilm-icon-btn" type="button" data-ilm-close-history>×</button></div>
     <button class="ilm-action-link primary" type="button" data-ilm-new>Neues Gespräch</button>
-    <div class="ilm-thread-list">${threads.map(item=>`<button class="ilm-thread-row-new${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(new Date(item.updatedAt||item.createdAt||Date.now()).toLocaleString("de-DE"))}</span></button>`).join("")}</div>
+    <div class="ilm-thread-list">${threads.map(item=>`<button class="ilm-thread-row-new${item.id===store.activeConversationId?" active":""}" type="button" data-ilm-thread="${esc(item.id)}"><b>${esc(item.title||"Gespräch")}</b><span>${esc(formatIlmThreadDate(item.updatedAt||item.createdAt))}</span></button>`).join("")}</div>
   </aside>`;
 }
 function renderIlmMenu(conversation){
