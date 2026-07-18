@@ -1,11 +1,12 @@
 /**
  * DAR AL TAWḤĪD – Prayer times widget adapter + renderer
  * Isolated from main app. Errors stay inside this module.
+ * Phase 3: Apple small + Android resizable density layouts.
  */
 (function (global) {
   "use strict";
 
-  const VERSION = "prayer-widget-v1";
+  const VERSION = "prayer-widget-v2";
 
   function esc(s) {
     return String(s == null ? "" : s)
@@ -53,7 +54,6 @@
         return { key: p.key, name: p.name, display: p.display, date: d, tomorrow: false };
       }
     }
-    // After ʿIshāʾ → tomorrow Fajr from cache or live math
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
     const tKey = (global.DarWidgetStorage && global.DarWidgetStorage.dateKey)
@@ -97,7 +97,6 @@
 
     let dayResult = storage.getDay(n);
     if (!dayResult.ok) {
-      // Try live calc + sync (no network needed for times)
       try {
         storage.syncCache(math);
         dayResult = storage.getDay(n);
@@ -107,7 +106,6 @@
     }
 
     if (!dayResult.ok || !dayResult.day) {
-      // Last resort: compute today live without writing
       try {
         const times = math.calculateDayTimes(n, Number(settings.lat), Number(settings.lon), {
           angle: Number(settings.angle || 12),
@@ -157,74 +155,134 @@
     }
   }
 
-  function renderCompact(snap, fallback, appPath) {
+  function getLayout(size, density) {
+    const sizes = global.DarWidgetSizes;
+    if (sizes && density) return sizes.layoutForDensity(density);
+    const s = sizes ? sizes.normalizeSize(size) : String(size || "medium");
+    if (s === "apple-small" || s === "compact") {
+      return sizes ? sizes.layoutForDensity("xs") : {
+        showBrand: false, showBrandShort: true, showNextLabel: false,
+        showCountdown: true, showList: false, showSunrise: false, showMeta: false, showStale: false
+      };
+    }
+    if (s === "apple-medium") {
+      return sizes ? sizes.layoutForDensity("sm") : {
+        showBrand: true, showBrandShort: true, showNextLabel: true,
+        showCountdown: true, showList: false, showSunrise: false, showMeta: false, showStale: false
+      };
+    }
+    if (s === "large" || s === "apple-large") {
+      return sizes ? sizes.layoutForDensity("lg") : {
+        showBrand: true, showList: true, showMeta: true, showSunrise: true,
+        showCountdown: true, showNextLabel: true, showStale: true, showBrandShort: false, compactRows: false
+      };
+    }
+    return sizes ? sizes.layoutForDensity("md") : {
+      showBrand: true, showList: true, showCountdown: true, showNextLabel: true,
+      showSunrise: false, showMeta: false, showStale: false, showBrandShort: false, compactRows: true
+    };
+  }
+
+  function renderRows(snap, layout) {
+    let times = snap.times || [];
+    if (!layout.showSunrise) times = times.filter((t) => t.key !== "sunrise");
+    return times.map((t) => {
+      const active = t.key === snap.next.key ? " is-next" : "";
+      return `<div class="pw-row${active}"><span class="pw-name">${esc(t.name)}</span><span class="pw-time">${esc(t.display)}</span></div>`;
+    }).join("");
+  }
+
+  function renderAppleSmall(snap, fallback, appPath) {
     if (snap.state === "no_location") return fallback.locationNeeded(appPath);
     if (snap.state !== "ready") return fallback.setupNeeded(appPath);
-    return `<div class="pw-size-compact" aria-live="polite">
-      <div class="pw-brand">DAR AL TAWḤĪD</div>
-      <div class="pw-label">Nächstes Gebet</div>
+    return `<div class="pw-size-apple-small" aria-live="polite">
+      <div class="pw-brand pw-brand-mini">DAR</div>
       <div class="pw-next-name">${esc(snap.next.name)}</div>
       <div class="pw-next-time">${esc(snap.next.display)}</div>
       <div class="pw-countdown">noch ${esc(snap.countdown)}</div>
     </div>`;
   }
 
-  function renderMedium(snap, fallback, appPath) {
+  function renderByLayout(snap, fallback, appPath, layout, sizeClass) {
     if (snap.state === "no_location") return fallback.locationNeeded(appPath);
     if (snap.state !== "ready") return fallback.setupNeeded(appPath);
-    const rows = snap.times.map((t) => {
-      const active = t.key === snap.next.key ? " is-next" : "";
-      return `<div class="pw-row${active}"><span class="pw-name">${esc(t.name)}</span><span class="pw-time">${esc(t.display)}</span></div>`;
-    }).join("");
-    return `<div class="pw-size-medium" aria-live="polite">
-      <div class="pw-brand">DAR AL TAWḤĪD</div>
-      <div class="pw-next-block">
-        <div class="pw-label">Nächstes Gebet</div>
-        <div class="pw-next-line"><b>${esc(snap.next.name)}</b><span>${esc(snap.next.display)}</span></div>
-        <div class="pw-countdown">noch ${esc(snap.countdown)}</div>
-      </div>
-      <div class="pw-list">${rows}</div>
-    </div>`;
-  }
 
-  function renderLarge(snap, fallback, appPath) {
-    if (snap.state === "no_location") return fallback.locationNeeded(appPath);
-    if (snap.state !== "ready") return fallback.setupNeeded(appPath);
-    const rows = snap.times.map((t) => {
-      const active = t.key === snap.next.key ? " is-next" : "";
-      return `<div class="pw-row${active}"><span class="pw-name">${esc(t.name)}</span><span class="pw-time">${esc(t.display)}</span></div>`;
-    }).join("");
-    const stale = fallback.staleHint(snap.lastSyncAt);
-    return `<div class="pw-size-large" aria-live="polite">
-      <div class="pw-brand">DAR AL TAWḤĪD</div>
-      <div class="pw-meta"><span>${esc(formatDateDe(snap.now))}</span><span>${esc(snap.city)}</span></div>
+    const brand = layout.showBrandShort && !layout.showBrand
+      ? `<div class="pw-brand pw-brand-mini">DAR</div>`
+      : (layout.showBrand ? `<div class="pw-brand">DAR AL TAWḤĪD</div>` : "");
+    const label = layout.showNextLabel ? `<div class="pw-label">Nächstes Gebet</div>` : "";
+    const meta = layout.showMeta
+      ? `<div class="pw-meta"><span>${esc(formatDateDe(snap.now))}</span><span>${esc(snap.city)}</span></div>`
+      : "";
+    const list = layout.showList
+      ? `<div class="pw-list${layout.compactRows ? " is-compact" : ""}">${renderRows(snap, layout)}</div>`
+      : "";
+    const stale = layout.showStale ? fallback.staleHint(snap.lastSyncAt) : "";
+    const countdown = layout.showCountdown
+      ? `<div class="pw-countdown">noch ${esc(snap.countdown)}</div>`
+      : "";
+
+    if (!layout.showList) {
+      return `<div class="${esc(sizeClass)}" aria-live="polite">
+        ${brand}${meta}${label}
+        <div class="pw-next-name">${esc(snap.next.name)}</div>
+        <div class="pw-next-time">${esc(snap.next.display)}</div>
+        ${countdown}
+      </div>`;
+    }
+
+    return `<div class="${esc(sizeClass)}" aria-live="polite">
+      ${brand}${meta}
       <div class="pw-next-block">
-        <div class="pw-label">Nächstes Gebet</div>
+        ${label}
         <div class="pw-next-line"><b>${esc(snap.next.name)}</b><span>${esc(snap.next.display)}</span></div>
-        <div class="pw-countdown">noch ${esc(snap.countdown)}</div>
+        ${countdown}
       </div>
-      <div class="pw-list">${rows}</div>
+      ${list}
       ${stale}
     </div>`;
   }
 
-  function render(size, snap, fallback, appPath) {
-    const s = String(size || "medium").toLowerCase();
-    if (s === "compact") return renderCompact(snap, fallback, appPath);
-    if (s === "large") return renderLarge(snap, fallback, appPath);
-    return renderMedium(snap, fallback, appPath);
+  function render(size, snap, fallback, appPath, density) {
+    const sizes = global.DarWidgetSizes;
+    const s = sizes ? sizes.normalizeSize(size) : String(size || "medium").toLowerCase();
+    if (s === "apple-small") return renderAppleSmall(snap, fallback, appPath);
+    if (s === "apple-medium") {
+      return renderByLayout(snap, fallback, appPath, getLayout("apple-medium"), "pw-size-apple-medium");
+    }
+    if (s === "apple-large") {
+      return renderByLayout(snap, fallback, appPath, getLayout("apple-large"), "pw-size-apple-large");
+    }
+    if (s === "android" || density) {
+      const d = density || (sizes ? sizes.densityFromBox(180, 180) : "sm");
+      return renderByLayout(snap, fallback, appPath, getLayout("android", d), "pw-size-android pw-density-" + d);
+    }
+    if (s === "compact") {
+      return renderByLayout(snap, fallback, appPath, getLayout("compact"), "pw-size-compact");
+    }
+    if (s === "large") {
+      return renderByLayout(snap, fallback, appPath, getLayout("large"), "pw-size-large");
+    }
+    return renderByLayout(snap, fallback, appPath, getLayout("medium"), "pw-size-medium");
   }
 
-  /**
-   * Mount widget into a host element. Returns a controller with destroy().
-   * Never throws to the caller.
-   */
+  function ensureCache() {
+    const storage = global.DarWidgetStorage;
+    const math = global.DarPrayerMath;
+    if (!storage || !math) return;
+    if (!storage.hasLocation(storage.readAppPrayerSettings())) return;
+    const cache = storage.getCache();
+    const todayKey = storage.dateKey(new Date());
+    if (!cache.days || !cache.days[todayKey]) storage.syncCache(math);
+  }
+
   function mount(host, options) {
     const opts = options || {};
     const storage = global.DarWidgetStorage;
     const themeApi = global.DarWidgetTheme;
     const fallback = global.DarWidgetFallback;
     const math = global.DarPrayerMath;
+    const sizes = global.DarWidgetSizes;
 
     if (!host || !storage || !themeApi || !fallback || !math) {
       return { destroy() {}, refresh() {} };
@@ -232,42 +290,79 @@
 
     let destroyed = false;
     let timer = null;
-    const size = opts.size || storage.getConfig().size || "medium";
+    let unsub = null;
+    let observer = null;
+    let currentDensity = opts.density || null;
+    const size = sizes ? sizes.normalizeSize(opts.size || storage.getConfig().size || "medium") : (opts.size || "medium");
     const appPath = opts.appPath || "/#prayer";
+    const resizable = !!opts.resizable || size === "android";
+
+    function applyTheme() {
+      const cfg = storage.getConfig();
+      const appTheme = storage.readAppTheme();
+      const theme = themeApi.getTheme(cfg.themeMode, appTheme);
+      themeApi.applyCssVars(host, theme);
+    }
 
     function paint() {
       if (destroyed) return;
       safeCall(() => {
-        const cfg = storage.getConfig();
-        const appTheme = storage.readAppTheme();
-        const theme = themeApi.getTheme(cfg.themeMode, appTheme);
-        themeApi.applyCssVars(host, theme);
+        applyTheme();
         host.classList.add("dar-prayer-widget");
         host.setAttribute("data-pw-size", size);
-
-        // Ensure cache exists (local calc, no GPS)
-        if (storage.hasLocation(storage.readAppPrayerSettings())) {
-          const cache = storage.getCache();
-          const todayKey = storage.dateKey(new Date());
-          if (!cache.days || !cache.days[todayKey]) {
-            storage.syncCache(math);
-          }
-        }
-
+        if (currentDensity) host.setAttribute("data-pw-density", currentDensity);
+        else host.removeAttribute("data-pw-density");
+        ensureCache();
         const snap = buildSnapshot(new Date());
-        host.innerHTML = render(size, snap, fallback, appPath);
+        host.innerHTML = render(size, snap, fallback, appPath, currentDensity);
       }, () => {
         host.innerHTML = fallback.setupNeeded(appPath);
       });
     }
 
+    function updateDensityFromHost() {
+      if (!sizes || !resizable) return;
+      const rect = host.getBoundingClientRect();
+      const next = sizes.densityFromBox(rect.width, rect.height);
+      if (next !== currentDensity) {
+        currentDensity = next;
+        paint();
+      }
+    }
+
     function tick() {
       if (destroyed) return;
       paint();
-      timer = setTimeout(tick, 30000); // 30s local countdown refresh – no network
+      timer = setTimeout(tick, 30000);
+    }
+
+    if (resizable) {
+      host.classList.add("is-resizable");
+      const cfg = storage.getConfig();
+      if (!currentDensity) currentDensity = cfg.androidDensity || "sm";
+      if (cfg.androidWidth) host.style.width = cfg.androidWidth + "px";
+      else if (!host.style.width) host.style.width = "180px";
+      if (cfg.androidHeight) host.style.height = cfg.androidHeight + "px";
+      else if (!host.style.height) host.style.height = "180px";
+      try {
+        observer = new ResizeObserver(() => {
+          if (destroyed) return;
+          const rect = host.getBoundingClientRect();
+          storage.setConfig({
+            androidWidth: Math.round(rect.width),
+            androidHeight: Math.round(rect.height),
+            androidDensity: sizes ? sizes.densityFromBox(rect.width, rect.height) : "sm"
+          });
+          updateDensityFromHost();
+        });
+        observer.observe(host);
+      } catch (e) {
+        observer = null;
+      }
     }
 
     paint();
+    if (resizable) updateDensityFromHost();
     timer = setTimeout(tick, 30000);
 
     const onTheme = () => { if (!destroyed) paint(); };
@@ -276,17 +371,24 @@
       window.addEventListener("storage", onTheme);
     } catch (e) {}
 
+    if (global.DarWidgetBridge) {
+      unsub = global.DarWidgetBridge.subscribe(() => { if (!destroyed) paint(); });
+    }
+
     return {
       refresh: paint,
       destroy() {
         destroyed = true;
         if (timer) clearTimeout(timer);
+        if (observer) try { observer.disconnect(); } catch (e) {}
+        if (typeof unsub === "function") try { unsub(); } catch (e) {}
         try {
           document.removeEventListener("dar-theme-change", onTheme);
           window.removeEventListener("storage", onTheme);
         } catch (e) {}
       },
-      version: VERSION
+      version: VERSION,
+      getDensity() { return currentDensity; }
     };
   }
 
@@ -295,6 +397,7 @@
     buildSnapshot,
     render,
     mount,
-    esc
+    esc,
+    getLayout
   };
 })(typeof window !== "undefined" ? window : globalThis);

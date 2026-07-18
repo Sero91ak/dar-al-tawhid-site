@@ -11,7 +11,7 @@
   <main class="pw-page" id="pwPage">
     <a class="pw-back" id="pwBack" href="/#more">← Zurück zur App</a>
     <h1>Widgets</h1>
-    <p class="pw-lead">Eigenständiges Gebetszeiten-Widget · Phase 1–2 (stabile Grundversion ohne Hintergrundbilder).</p>
+    <p class="pw-lead">Gebetszeiten-Widget · Phase 3: Apple-Kleinformat und Android ziehbar/variabel. Gleiche Zeiten wie die App, offlinefähig.</p>
 
     <section class="pw-card">
       <h2>Einstellungen</h2>
@@ -34,34 +34,89 @@
     </section>
 
     <section class="pw-card">
-      <h2>Installationshinweis</h2>
-      <p class="pw-lead" style="margin:0">
-        Diese Web-Vorschau zeigt das Widget in drei Größen. Native Home-Screen-Widgets (iOS/Android)
-        folgen in Phase 3. Die Gebetszeiten nutzen dieselbe Berechnung wie die App und funktionieren offline.
-      </p>
-    </section>
+      <h2>Plattform-Vorschau</h2>
+      <div class="pw-tabs" role="tablist">
+        <button type="button" class="is-active" data-pw-tab="apple" aria-selected="true">Apple</button>
+        <button type="button" data-pw-tab="android" aria-selected="false">Android</button>
+        <button type="button" data-pw-tab="generic" aria-selected="false">Allgemein</button>
+        <button type="button" data-pw-tab="install" aria-selected="false">Installation</button>
+      </div>
 
-    <section class="pw-card">
-      <h2>Vorschau</h2>
-      <div class="pw-preview-grid">
-        <div>
-          <p class="pw-preview-label">Kompakt</p>
-          <div id="pwMountCompact" class="dar-prayer-widget" data-pw-size="compact"></div>
+      <div class="pw-platform-panel" id="pwPanelApple" data-pw-panel="apple">
+        <p class="pw-lead">Apple WidgetKit-Formate. <b>Klein</b> zeigt nur nächstes Gebet, Uhrzeit und Countdown.</p>
+        <div class="pw-preview-grid">
+          <div class="pw-device-frame pw-frame-apple-small">
+            <p class="pw-preview-label">Apple · Klein (158×158)</p>
+            <div id="pwMountAppleSmall" class="dar-prayer-widget" data-pw-size="apple-small"></div>
+          </div>
+          <div class="pw-device-frame pw-frame-apple-medium">
+            <p class="pw-preview-label">Apple · Mittel (338×158)</p>
+            <div id="pwMountAppleMedium" class="dar-prayer-widget" data-pw-size="apple-medium"></div>
+          </div>
+          <div class="pw-device-frame pw-frame-apple-large pw-preview-large">
+            <p class="pw-preview-label">Apple · Groß</p>
+            <div id="pwMountAppleLarge" class="dar-prayer-widget" data-pw-size="apple-large"></div>
+          </div>
         </div>
-        <div>
-          <p class="pw-preview-label">Mittel</p>
-          <div id="pwMountMedium" class="dar-prayer-widget" data-pw-size="medium"></div>
+      </div>
+
+      <div class="pw-platform-panel" id="pwPanelAndroid" data-pw-panel="android" hidden>
+        <p class="pw-lead">Android-Widgets sind auf dem Homescreen <b>variabel ziehbar</b>. Ziehe die rechte untere Ecke – Inhalt passt sich automatisch an (klein → Liste → groß).</p>
+        <p class="pw-preview-label">Android · ziehbar (Resize)</p>
+        <div id="pwMountAndroid" class="dar-prayer-widget is-resizable" data-pw-size="android"></div>
+        <p class="pw-android-hint" id="pwAndroidDensity">Dichte: – · Ziehe an der Ecke</p>
+        <div class="pw-chip-row">
+          <button type="button" class="pw-chip" data-android-preset="2x2">2×2</button>
+          <button type="button" class="pw-chip" data-android-preset="4x2">4×2</button>
+          <button type="button" class="pw-chip" data-android-preset="4x4">4×4</button>
         </div>
-        <div class="pw-preview-large">
-          <p class="pw-preview-label">Groß</p>
-          <div id="pwMountLarge" class="dar-prayer-widget" data-pw-size="large"></div>
+      </div>
+
+      <div class="pw-platform-panel" id="pwPanelGeneric" data-pw-panel="generic" hidden>
+        <div class="pw-preview-grid">
+          <div>
+            <p class="pw-preview-label">Kompakt</p>
+            <div id="pwMountCompact" class="dar-prayer-widget" data-pw-size="compact"></div>
+          </div>
+          <div>
+            <p class="pw-preview-label">Mittel</p>
+            <div id="pwMountMedium" class="dar-prayer-widget" data-pw-size="medium"></div>
+          </div>
+          <div class="pw-preview-large">
+            <p class="pw-preview-label">Groß</p>
+            <div id="pwMountLarge" class="dar-prayer-widget" data-pw-size="large"></div>
+          </div>
         </div>
+      </div>
+
+      <div class="pw-platform-panel pw-install" id="pwPanelInstall" data-pw-panel="install" hidden>
+        <h3 style="margin:0 0 8px;font-size:14px">Apple (iPhone / iPad)</h3>
+        <ol>
+          <li>App unter Dar Test / Besucher öffnen und Standort für Gebetszeiten setzen.</li>
+          <li>Hier „Widget aktivieren“ und synchronisieren.</li>
+          <li>Native Homescreen-Widgets (WidgetKit) folgen mit der nativen App-Anbindung – die Vorschau <b>Apple · Klein</b> entspricht dem Small-Format.</li>
+          <li>Deep Link: <code>/widgets/?platform=apple&amp;size=apple-small</code></li>
+        </ol>
+        <h3 style="margin:14px 0 8px;font-size:14px">Android</h3>
+        <ol>
+          <li>Standort in der App setzen, Widget aktivieren und synchronisieren.</li>
+          <li>Auf dem Homescreen sind Android-Widgets typischerweise <b>frei ziehbar</b> – die Vorschau oben simuliert das mit Resize.</li>
+          <li>Presets: 2×2 (nur nächstes Gebet), 4×2 (kompakt), 4×4 (Tagesliste).</li>
+          <li>Deep Link: <code>/widgets/?platform=android</code></li>
+        </ol>
+        <h3 style="margin:14px 0 8px;font-size:14px">PWA / Web</h3>
+        <ol>
+          <li>Seite zum Home-Bildschirm hinzufügen (Safari Teilen → Zum Home-Bildschirm / Chrome Installieren).</li>
+          <li>Über Mehr → Widgets jederzeit Vorschau und Sync öffnen.</li>
+        </ol>
       </div>
     </section>
   </main>
 
   <script src="/widgets/shared/widget-log.js"></script>
   <script src="/widgets/shared/prayer-math.js"></script>
+  <script src="/widgets/shared/widget-sizes.js"></script>
+  <script src="/widgets/shared/widget-bridge.js"></script>
   <script src="/widgets/storage/prayer-cache.js"></script>
   <script src="/widgets/theme/widget-theme.js"></script>
   <script src="/widgets/fallback/fallback-ui.js"></script>
@@ -69,10 +124,12 @@
   <script>
   (function () {
     "use strict";
-    var IS_TEST = location.pathname.indexOf("/test/") === 0 || new URLSearchParams(location.search).get("from") === "test" || new URLSearchParams(location.search).get("env") === "staging";
+    var params = new URLSearchParams(location.search);
+    var IS_TEST = location.pathname.indexOf("/test/") === 0 || params.get("from") === "test" || params.get("env") === "staging";
     var APP_HOME = IS_TEST ? "/test/#more" : "/#more";
     var APP_PRAYER = IS_TEST ? "/test/#prayer" : "/#prayer";
     var mounts = [];
+    var androidMount = null;
 
     document.getElementById("pwBack").href = APP_HOME;
 
@@ -81,25 +138,65 @@
       if (el) el.textContent = msg || "";
     }
 
-    function refreshMounts() {
+    function clearMounts() {
       mounts.forEach(function (m) { try { m.destroy(); } catch (e) {} });
       mounts = [];
+      androidMount = null;
+    }
+
+    function syncIfPossible() {
+      if (DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
+        DarWidgetStorage.syncCache(DarPrayerMath);
+        if (window.DarWidgetBridge) DarWidgetBridge.publish("sync");
+      }
+    }
+
+    function updateAndroidHint() {
+      var hint = document.getElementById("pwAndroidDensity");
+      var host = document.getElementById("pwMountAndroid");
+      if (!hint || !host || !DarWidgetSizes) return;
+      var r = host.getBoundingClientRect();
+      var d = DarWidgetSizes.densityFromBox(r.width, r.height);
+      hint.textContent = "Dichte: " + d.toUpperCase() + " · " + Math.round(r.width) + "×" + Math.round(r.height) + "px · Ecke ziehen zum Vergrößern";
+    }
+
+    function refreshMounts() {
+      clearMounts();
       try {
-        if (window.DarWidgetStorage && window.DarPrayerMath) {
-          var cfg = DarWidgetStorage.getConfig();
-          if (DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
-            DarWidgetStorage.syncCache(DarPrayerMath);
-          }
-          mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountCompact"), { size: "compact", appPath: APP_PRAYER }));
-          mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountMedium"), { size: "medium", appPath: APP_PRAYER }));
-          mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountLarge"), { size: "large", appPath: APP_PRAYER }));
-          setStatus(cfg.enabled
-            ? "Widget aktiv · Theme: " + cfg.themeMode
-            : "Widget noch nicht aktiviert (Vorschau trotzdem sichtbar).");
-        }
+        var cfg = DarWidgetStorage.getConfig();
+        syncIfPossible();
+        mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountAppleSmall"), { size: "apple-small", appPath: APP_PRAYER }));
+        mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountAppleMedium"), { size: "apple-medium", appPath: APP_PRAYER }));
+        mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountAppleLarge"), { size: "apple-large", appPath: APP_PRAYER }));
+        mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountCompact"), { size: "compact", appPath: APP_PRAYER }));
+        mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountMedium"), { size: "medium", appPath: APP_PRAYER }));
+        mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountLarge"), { size: "large", appPath: APP_PRAYER }));
+        androidMount = DarPrayerWidget.mount(document.getElementById("pwMountAndroid"), { size: "android", resizable: true, appPath: APP_PRAYER });
+        mounts.push(androidMount);
+        updateAndroidHint();
+        setStatus(cfg.enabled
+          ? "Widget aktiv · Theme: " + cfg.themeMode + " · v" + DarPrayerWidget.VERSION
+          : "Widget noch nicht aktiviert (Vorschau sichtbar).");
       } catch (e) {
         setStatus("Vorschau konnte nicht geladen werden.");
       }
+    }
+
+    function showTab(name) {
+      document.querySelectorAll("[data-pw-tab]").forEach(function (btn) {
+        var on = btn.getAttribute("data-pw-tab") === name;
+        btn.classList.toggle("is-active", on);
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      document.querySelectorAll("[data-pw-panel]").forEach(function (panel) {
+        panel.hidden = panel.getAttribute("data-pw-panel") !== name;
+      });
+      if (name === "android") setTimeout(updateAndroidHint, 50);
+      try {
+        var url = new URL(location.href);
+        url.searchParams.set("platform", name === "generic" ? "all" : name);
+        history.replaceState(null, "", url.toString());
+      } catch (e) {}
     }
 
     function bind() {
@@ -108,25 +205,24 @@
       themeSel.value = cfg.themeMode || "auto";
       themeSel.onchange = function () {
         DarWidgetStorage.setConfig({ themeMode: themeSel.value });
+        if (window.DarWidgetBridge) DarWidgetBridge.publish("theme");
         refreshMounts();
       };
 
       document.getElementById("pwEnableBtn").onclick = function () {
         DarWidgetStorage.setConfig({ enabled: true });
-        if (DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
-          DarWidgetStorage.syncCache(DarPrayerMath);
-        }
+        syncIfPossible();
         setStatus("Widget aktiviert.");
         refreshMounts();
       };
 
       document.getElementById("pwSyncBtn").onclick = function () {
-        var settings = DarWidgetStorage.readAppPrayerSettings();
-        if (!DarWidgetStorage.hasLocation(settings)) {
+        if (!DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
           setStatus("Bitte zuerst in der App einen Standort wählen.");
           return;
         }
         var res = DarWidgetStorage.syncCache(DarPrayerMath);
+        if (window.DarWidgetBridge) DarWidgetBridge.publish("sync");
         setStatus(res.ok ? "60 Tage Gebetszeiten lokal gespeichert." : "Synchronisierung fehlgeschlagen – alte Daten bleiben.");
         refreshMounts();
       };
@@ -139,13 +235,49 @@
         if (!confirm("Nur Widget-Daten zurücksetzen? App-Einstellungen, Push und Favoriten bleiben erhalten.")) return;
         DarWidgetStorage.resetWidgetOnly();
         themeSel.value = "auto";
+        var android = document.getElementById("pwMountAndroid");
+        if (android) { android.style.width = "180px"; android.style.height = "180px"; }
         setStatus("Widget zurückgesetzt.");
         refreshMounts();
       };
+
+      document.querySelectorAll("[data-pw-tab]").forEach(function (btn) {
+        btn.onclick = function () { showTab(btn.getAttribute("data-pw-tab")); };
+      });
+
+      var presets = { "2x2": [156, 156], "4x2": [320, 156], "4x4": [320, 320] };
+      document.querySelectorAll("[data-android-preset]").forEach(function (chip) {
+        chip.onclick = function () {
+          var key = chip.getAttribute("data-android-preset");
+          var size = presets[key];
+          var host = document.getElementById("pwMountAndroid");
+          if (!size || !host) return;
+          host.style.width = size[0] + "px";
+          host.style.height = size[1] + "px";
+          DarWidgetStorage.setConfig({ androidWidth: size[0], androidHeight: size[1] });
+          if (androidMount) androidMount.refresh();
+          updateAndroidHint();
+        };
+      });
+
+      var androidHost = document.getElementById("pwMountAndroid");
+      if (androidHost && typeof ResizeObserver !== "undefined") {
+        try {
+          new ResizeObserver(function () { updateAndroidHint(); }).observe(androidHost);
+        } catch (e) {}
+      }
     }
 
     try {
       bind();
+      var platform = (params.get("platform") || "").toLowerCase();
+      var size = (params.get("size") || "").toLowerCase();
+      if (platform === "ios") platform = "apple";
+      if (platform === "apple" || platform === "android" || platform === "install") showTab(platform);
+      else if (platform === "all" || platform === "generic") showTab("generic");
+      else if (size.indexOf("apple") === 0) showTab("apple");
+      else if (size === "android") showTab("android");
+      else showTab("apple");
       refreshMounts();
     } catch (e) {
       setStatus("Widget-Seite konnte nicht gestartet werden.");
