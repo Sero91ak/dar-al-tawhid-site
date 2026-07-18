@@ -1,0 +1,206 @@
+{
+  "totalQuestionsChecked": 425,
+  "publicQuestionsBeforeAudit": 409,
+  "publicQuestionsAfterAudit": 409,
+  "metaQuestionsFound": [
+    "quiz-350",
+    "quiz-400",
+    "quiz-449",
+    "quiz-450",
+    "quiz-500"
+  ],
+  "questionAnswerMismatches": [],
+  "invalidSources": [],
+  "duplicateQuestions": [
+    "quiz-117",
+    "quiz-243",
+    "quiz-118",
+    "quiz-242",
+    "quiz-129",
+    "quiz-478",
+    "quiz-131",
+    "quiz-186",
+    "quiz-132",
+    "quiz-214",
+    "quiz-133",
+    "quiz-211",
+    "quiz-140",
+    "quiz-205",
+    "quiz-147",
+    "quiz-241"
+  ],
+  "blockedQuestions": [
+    {
+      "id": "quiz-117",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-118",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-129",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-131",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-132",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-133",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-140",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-147",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-186",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-205",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-211",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-214",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-241",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-242",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-243",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    },
+    {
+      "id": "quiz-478",
+      "reason": [
+        "duplicate_question_text"
+      ],
+      "previousStatus": "draft",
+      "newStatus": "draft",
+      "replacementRequired": false
+    }
+  ],
+  "correctedQuestions": [
+    {
+      "id": "quiz-350",
+      "action": "replaced_with_sourced_islamic_question",
+      "source": "Qurʾān 2:186"
+    },
+    {
+      "id": "quiz-400",
+      "action": "replaced_with_sourced_islamic_question",
+      "source": "Ṣaḥīḥ al-Bukhārī Nr. 1; Ṣaḥīḥ Muslim Nr. 1907"
+    },
+    {
+      "id": "quiz-449",
+      "action": "replaced_with_sourced_islamic_question",
+      "source": "Qurʾān 49:11"
+    },
+    {
+      "id": "quiz-450",
+      "action": "replaced_with_sourced_islamic_question",
+      "source": "Qurʾān 5:6"
+    },
+    {
+      "id": "quiz-500",
+      "action": "replaced_with_sourced_islamic_question",
+      "source": "Ṣaḥīḥ al-Bukhārī Nr. 33; Ṣaḥīḥ Muslim Nr. 59"
+    }
+  ],
+  "remainingManualReviews": []
+}
