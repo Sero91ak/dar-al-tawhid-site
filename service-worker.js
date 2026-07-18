@@ -3,7 +3,8 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v247';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v248';
+const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -15,6 +16,7 @@ const APP_SHELL = [
   '/version.json',
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
+  '/data/offline-content-manifest.json',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
   '/test-app-icon-512.png',
@@ -39,6 +41,107 @@ const APP_SHELL = [
 
 let bypassPostCacheUntil = 0;
 let hardRefreshUntil = 0;
+let offlinePrepareRunning = false;
+
+async function postToClients(payload) {
+  try {
+    const list = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    list.forEach((client) => {
+      try { client.postMessage(payload); } catch (e) {}
+    });
+  } catch (e) {}
+}
+
+function normalizeOfflineUrls(urls) {
+  const out = new Set();
+  (Array.isArray(urls) ? urls : []).forEach((raw) => {
+    const value = String(raw || '').trim();
+    if (!value) return;
+    try {
+      const u = new URL(value, self.location.origin);
+      if (u.origin !== self.location.origin) return;
+      out.add(u.pathname + (u.search || ''));
+    } catch (e) {}
+  });
+  return Array.from(out);
+}
+
+async function cacheOfflineUrl(cache, url) {
+  const req = new Request(url, { cache: 'reload' });
+  const response = await fetch(req);
+  if (!response || !response.ok) throw new Error(`HTTP ${response ? response.status : 0}`);
+  await cache.put(req, response.clone());
+  return Number(response.headers.get('content-length') || 0);
+}
+
+async function prepareOfflineBundle(urls, requestedBy = 'user') {
+  if (offlinePrepareRunning) {
+    await postToClients({ type: 'OFFLINE_PREPARE_BUSY' });
+    return;
+  }
+  offlinePrepareRunning = true;
+  const startedAt = new Date().toISOString();
+  const normalized = normalizeOfflineUrls(urls);
+  const total = normalized.length;
+  let loaded = 0;
+  let bytes = 0;
+  let failed = 0;
+  await postToClients({
+    type: 'OFFLINE_PREPARE_START',
+    total,
+    loaded,
+    failed,
+    bytes,
+    startedAt,
+    requestedBy
+  });
+  try {
+    const cache = await caches.open(CACHE_VERSION);
+    for (const url of normalized) {
+      try {
+        bytes += await cacheOfflineUrl(cache, url);
+      } catch (e) {
+        failed += 1;
+      } finally {
+        loaded += 1;
+        const percent = total ? Math.round((loaded / total) * 100) : 100;
+        await postToClients({
+          type: 'OFFLINE_PREPARE_PROGRESS',
+          total,
+          loaded,
+          failed,
+          bytes,
+          percent,
+          url
+        });
+      }
+    }
+    const completedAt = new Date().toISOString();
+    const meta = {
+      version: CACHE_VERSION,
+      total,
+      loaded,
+      failed,
+      bytes,
+      startedAt,
+      completedAt,
+      requestedBy
+    };
+    await cache.put(
+      OFFLINE_META_KEY,
+      new Response(JSON.stringify(meta), {
+        headers: { 'content-type': 'application/json; charset=utf-8' }
+      })
+    );
+    await postToClients({
+      type: 'OFFLINE_PREPARE_DONE',
+      ok: failed === 0,
+      ...meta
+    });
+  } finally {
+    offlinePrepareRunning = false;
+  }
+}
 
 function refreshBypassActive() {
   return Date.now() < hardRefreshUntil || Date.now() < bypassPostCacheUntil;
@@ -122,6 +225,31 @@ async function focusClientToPost(clientList, targetUrl, postId) {
 
 self.addEventListener('message', (event) => {
   const data = event.data || {};
+  if (data.type === 'OFFLINE_PREPARE') {
+    event.waitUntil(prepareOfflineBundle(data.urls, data.requestedBy || 'user'));
+    return;
+  }
+  if (data.type === 'OFFLINE_PREPARE_STATUS') {
+    event.waitUntil((async () => {
+      try {
+        const cache = await caches.open(CACHE_VERSION);
+        const res = await cache.match(OFFLINE_META_KEY);
+        const json = res ? await res.json() : null;
+        await postToClients({
+          type: 'OFFLINE_PREPARE_STATUS',
+          running: offlinePrepareRunning,
+          meta: json || null
+        });
+      } catch (e) {
+        await postToClients({
+          type: 'OFFLINE_PREPARE_STATUS',
+          running: offlinePrepareRunning,
+          meta: null
+        });
+      }
+    })());
+    return;
+  }
   if (data.type === 'BYPASS_POST_CACHE') {
     bypassPostCacheUntil = Date.now() + 5 * 60 * 1000;
     return;

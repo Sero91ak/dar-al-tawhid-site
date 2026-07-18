@@ -826,6 +826,11 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
 .offline-box{display:none;border-color:rgba(255,230,170,.40);background:linear-gradient(145deg,rgba(255,230,170,.10),rgba(0,0,0,.16))}
 .offline-box.show{display:block}
 .offline-box strong{color:var(--gold2)}
+.offline-prep-progress{margin-top:10px;display:grid;gap:6px}
+.offline-prep-progress div{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.offline-prep-progress span,.offline-prep-progress small{font-size:12px;color:var(--muted)}
+.offline-prep-bar{height:7px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.2);overflow:hidden}
+.offline-prep-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2))}
 .copy-extra-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:8px}
 .app-save-box{font-size:12px;line-height:1.55;color:var(--muted)}
 .app-save-box h3{font-family:var(--serif);color:var(--gold2);font-size:23px;margin:0 0 8px}
@@ -10460,13 +10465,13 @@ function logoutAccount(){setAccountSession(null);render()}
 async function fetchAccountSaved(userId){const rows=await supabaseRest(`user_saved_items?user_id=eq.${encodeURIComponent(userId)}&item_type=eq.post&select=item_id&order=created_at.desc`);return normalizeSavedList((Array.isArray(rows)?rows:[]).map(r=>r.item_id))}
 async function replaceAccountSaved(userId,ids){const clean=normalizeSavedList(ids);await supabaseRest(`user_saved_items?user_id=eq.${encodeURIComponent(userId)}&item_type=eq.post`,{method:"DELETE",prefer:"return=minimal"});if(!clean.length)return true;const rows=clean.map(item_id=>({user_id:userId,item_type:"post",item_id}));await supabaseRest("user_saved_items",{method:"POST",prefer:"return=minimal",body:rows});return true}
 async function mergeAccountSaved(userId){const remote=await fetchAccountSaved(userId);const merged=normalizeSavedList([...savedIds(),...remote]);setSavedIds(merged);await replaceAccountSaved(userId,merged);return merged}
-async function syncAccountSaved({silent=false}={}){const s=accountSession();if(!s)return false;try{await replaceAccountSaved(s.id,savedIds());if(!silent)setAccountStatus("Favoriten wurden synchronisiert.","ok");return true}catch(e){if(!silent)setAccountStatus(e.message||String(e),"warn");return false}}
+async function syncAccountSaved({silent=false}={}){const s=accountSession();if(!s)return false;if(!navigator.onLine){queueOfflineAction({type:"sync-account-saved",payload:{userId:s.id}});if(!silent)setAccountStatus("Offline gespeichert. Wird bei Verbindung synchronisiert.","warn");return false}try{await replaceAccountSaved(s.id,savedIds());if(!silent)setAccountStatus("Favoriten wurden synchronisiert.","ok");return true}catch(e){if(!silent)setAccountStatus(e.message||String(e),"warn");return false}}
 function quranProgressFromRemoteRows(rows){const state=defaultQuranReadingState();(Array.isArray(rows)?rows:[]).forEach(row=>{const type=String(row?.progress_type||row?.progressType||"").toLowerCase();const entry=normalizeQuranProgressEntry({surahNumber:row?.surah_number,surahName:row?.surah_name,ayahNumber:row?.ayah_number,juzNumber:row?.juz_number,translationId:row?.translation_id,language:row?.language,scrollOffset:row?.scroll_offset,updatedAt:row?.updated_at},type==="manual"?"manual":"automatic");if(!entry)return;if(type==="manual")state.manual=entry;else state.automatic=entry});return state}
 async function fetchAccountQuranProgress(userId){const rows=await supabaseRest(`user_quran_progress?user_id=eq.${encodeURIComponent(userId)}&select=progress_type,surah_number,surah_name,ayah_number,juz_number,translation_id,language,scroll_offset,updated_at&order=updated_at.desc`);return quranProgressFromRemoteRows(rows)}
 async function replaceAccountQuranProgress(userId,state){await supabaseRest(`user_quran_progress?user_id=eq.${encodeURIComponent(userId)}`,{method:"DELETE",prefer:"return=minimal"});const rows=[];if(state?.manual)rows.push({user_id:userId,progress_type:"manual",surah_number:state.manual.surahNumber,surah_name:state.manual.surahName,ayah_number:state.manual.ayahNumber,juz_number:state.manual.juzNumber||null,translation_id:state.manual.translationId||null,language:state.manual.language||null,scroll_offset:state.manual.scrollOffset||0,updated_at:state.manual.updatedAt});if(state?.automatic)rows.push({user_id:userId,progress_type:"automatic",surah_number:state.automatic.surahNumber,surah_name:state.automatic.surahName,ayah_number:state.automatic.ayahNumber,juz_number:state.automatic.juzNumber||null,translation_id:state.automatic.translationId||null,language:state.automatic.language||null,scroll_offset:state.automatic.scrollOffset||0,updated_at:state.automatic.updatedAt});if(!rows.length)return true;await supabaseRest("user_quran_progress",{method:"POST",prefer:"return=minimal",body:rows});return true}
 function mergeQuranProgressState(localState,remoteState){const merged=defaultQuranReadingState();const localManual=normalizeQuranProgressEntry(localState?.manual,"manual");const remoteManual=normalizeQuranProgressEntry(remoteState?.manual,"manual");merged.manual=localManual||remoteManual||null;const localAuto=normalizeQuranProgressEntry(localState?.automatic,"automatic");const remoteAuto=normalizeQuranProgressEntry(remoteState?.automatic,"automatic");const localTs=Date.parse(localAuto?.updatedAt||"")||0;const remoteTs=Date.parse(remoteAuto?.updatedAt||"")||0;merged.automatic=localTs>=remoteTs?localAuto:remoteAuto;merged.settings={...getQuranReadingSettings()};return merged}
 async function mergeAccountQuranProgress(userId){const remote=await fetchAccountQuranProgress(userId);const local=getQuranReadingState();const merged=mergeQuranProgressState(local,remote);setQuranReadingState(merged);await replaceAccountQuranProgress(userId,merged);return merged}
-async function syncAccountQuranProgress({silent=true}={}){const s=accountSession();if(!s)return false;try{await replaceAccountQuranProgress(s.id,getQuranReadingState());return true}catch(e){if(!silent&&localStorage.getItem(QURAN_PROGRESS_SYNC_WARN_KEY)!=="1"){alert("Qurʾān-Cloud-Sync ist noch nicht bereit. Lokaler Lesestand bleibt aktiv.");localStorage.setItem(QURAN_PROGRESS_SYNC_WARN_KEY,"1")}return false}}
+async function syncAccountQuranProgress({silent=true}={}){const s=accountSession();if(!s)return false;if(!navigator.onLine){queueOfflineAction({type:"sync-quran-progress",payload:{userId:s.id}});return false}try{await replaceAccountQuranProgress(s.id,getQuranReadingState());return true}catch(e){if(!silent&&localStorage.getItem(QURAN_PROGRESS_SYNC_WARN_KEY)!=="1"){alert("Qurʾān-Cloud-Sync ist noch nicht bereit. Lokaler Lesestand bleibt aktiv.");localStorage.setItem(QURAN_PROGRESS_SYNC_WARN_KEY,"1")}return false}}
 async function sendAnalyticsEvent(eventType,meta){meta=meta||{};if(!hasSupabaseCfg())return false;const url=String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"");try{const res=await fetch(url+"/rest/v1/site_events",{method:"POST",headers:{...supabaseHeaders(),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({event_type:eventType,content_type:meta.contentType||null,content_id:meta.contentId!=null?String(meta.contentId):null,content_title:meta.contentTitle||null,session_id:analyticsSessionId()})});return res.ok}catch(e){return false}}
 async function fetchAnalyticsDashboard(){if(!hasSupabaseCfg())throw new Error("Supabase nicht konfiguriert");const url=String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"");const h=supabaseHeaders();const [liveRes,totalsRes]=await Promise.all([fetch(url+"/rest/v1/rpc/analytics_live",{headers:h}),fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=200",{headers:h})]);if(!liveRes.ok)throw new Error("Live-Statistik Fehler "+liveRes.status);if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);const live=await liveRes.json();const totals=await totalsRes.json();return{live:live||{},totals:Array.isArray(totals)?totals:[]}}
 function trackAnalytics(eventType,meta){meta=meta||{};try{window.DarAnalytics&&DarAnalytics.track(eventType,meta)}catch(e){}sendAnalyticsEvent(eventType,meta)}
@@ -11920,22 +11925,126 @@ function pinnedPostsFor(def){return posts.filter(p=>def.keys.some(k=>[p.title,p.
 function renderPinnedBox(){
   return `<section class="pinned-box collapsible-section"><div class="collapsible-head"><h3 class="pinned-title">Wichtige Beiträge</h3><button class="collapse-toggle premium-pill" type="button" data-collapse-target="pinnedGrid">Alle anzeigen</button></div><div id="pinnedGrid" class="pinned-grid collapsible-grid collapsed">${PINNED_DEFS.map(d=>{const found=pinnedPostsFor(d)[0];return `<article class="pinned-card has-icon" ${found?`data-nav="post" data-value="${esc(found.id)}"`:"data-nav=\"topics\""}><div class="folder-icon">${topicEmblem(d.title)}</div><div class="card-text"><h3>${esc(d.title)}</h3><p>${found?esc(found.title):"Bereich öffnen"}</p></div></article>`}).join("")}</div><div class="collapsible-fade">Es werden zunächst drei Einstiege angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
 }
+const OFFLINE_PREP_STATE_KEY="darOfflinePrepStateV1";
+const OFFLINE_SYNC_META_KEY="darOfflineSyncMetaV1";
+const OFFLINE_DB_NAME="darOfflineStoreV1";
+const OFFLINE_DB_VERSION=1;
+let offlinePrepUiState={running:false,total:0,loaded:0,failed:0,bytes:0,percent:0,updatedAt:null,status:"idle"};
+function storageBytesLabel(bytes){const n=Number(bytes||0);if(!Number.isFinite(n)||n<=0)return"0 MB";const mb=n/1024/1024;if(mb<1)return`${Math.max(1,Math.round(mb*1000))} KB`;return`${mb.toFixed(mb>=100?0:1)} MB`}
+function readOfflinePrepState(){const s=getJson(OFFLINE_PREP_STATE_KEY,null);if(s&&typeof s==="object"){offlinePrepUiState={...offlinePrepUiState,...s};return offlinePrepUiState}return offlinePrepUiState}
+function writeOfflinePrepState(patch){offlinePrepUiState={...readOfflinePrepState(),...(patch||{})};setJson(OFFLINE_PREP_STATE_KEY,offlinePrepUiState);return offlinePrepUiState}
+function renderOfflineStatusLine(){const s=readOfflinePrepState();const stamp=s.updatedAt?new Date(s.updatedAt).toLocaleString("de-DE"):"-";if(!navigator.onLine)return`Offline · Stand vom ${stamp}`;if(s.running)return"Online · Inhalte werden geprüft";if(s.status==="done")return`Aktuell · zuletzt synchronisiert um ${stamp}`;return"Online · Offline-Paket bereit zum Aktualisieren"}
+async function openOfflineDb(){return await new Promise((resolve,reject)=>{try{const req=indexedDB.open(OFFLINE_DB_NAME,OFFLINE_DB_VERSION);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains("meta"))db.createObjectStore("meta",{keyPath:"key"});if(!db.objectStoreNames.contains("queue"))db.createObjectStore("queue",{keyPath:"id"});if(!db.objectStoreNames.contains("progress"))db.createObjectStore("progress",{keyPath:"key"})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)}catch(e){reject(e)}})}
+async function offlineDbSet(store,key,value){try{const db=await openOfflineDb();await new Promise((resolve,reject)=>{const tx=db.transaction(store,"readwrite");tx.objectStore(store).put({key,value,updatedAt:new Date().toISOString()});tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)});db.close();return true}catch(e){return false}}
+async function offlineDbGet(store,key){try{const db=await openOfflineDb();const data=await new Promise((resolve,reject)=>{const tx=db.transaction(store,"readonly");const req=tx.objectStore(store).get(key);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)});db.close();return data?data.value:null}catch(e){return null}}
+async function estimateOfflineStorage(){let estimate=null;let persistent=false;try{if(navigator.storage?.estimate)estimate=await navigator.storage.estimate()}catch(e){}try{if(navigator.storage?.persist)persistent=await navigator.storage.persist()}catch(e){}return{estimate,persistent}}
+async function fetchOfflineContentManifest(){try{const r=await fetch(`/data/offline-content-manifest.json?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)return null;return await r.json()}catch(e){return null}}
+function quranOfflineUrls(){if(!quranMeta||!Array.isArray(quranMeta.surahs))return[];const out=[];quranMeta.surahs.forEach(s=>{const id=Number(s?.id);if(!Number.isFinite(id)||id<1||id>114)return;out.push(quranSurahFile(id));out.push(quranTafsirFile(id));out.push(quranAtharFile(id))});return out}
+function postOfflineUrls(){const names=new Set();(posts||[]).forEach(p=>{const file=String(p?._sourceFile||"").trim();if(file.endsWith(".md"))names.add(file)});return[...names].map(name=>`/${POSTS_DIR}/${encodeURIComponent(name)}`)}
+async function buildOfflinePrepareUrls(){const manifest=await fetchOfflineContentManifest();const core=[];if(manifest){core.push(...(manifest.requiredStatic||[]),...(manifest.requiredData||[]))}else{core.push("/", "/index.html", "/test/", "/test/index.html", "/content/duas/duas.json", "/content/quran/surahs.json", "/data/quran-search-index.json", "/data/quran-search-keywords.json", "/data/quiz-questions.json")}core.push(...quranOfflineUrls(),...postOfflineUrls());return [...new Set(core.map(x=>String(x||"").trim()).filter(Boolean))]}
+function offlineProgressHtml(){const s=readOfflinePrepState();if(!s.running&&s.status!=="done"&&s.status!=="error")return"";const p=Math.max(0,Math.min(100,Number(s.percent||0)));return `<div class="offline-prep-progress"><div><b>${s.running?"Offline-Paket wird vorbereitet":"Offline-Paket Status"}</b><span>${s.loaded||0}/${s.total||0} Dateien · ${p}% · ${storageBytesLabel(s.bytes)}</span></div><div class="offline-prep-bar"><span style="width:${p}%"></span></div>${s.failed?`<small>${s.failed} Dateien konnten nicht geladen werden.</small>`:""}</div>`}
 function renderOfflineBox(){
   const summary=offlineLibrarySummary();
-  const detail=posts.length?` (${summary})`:" – beim ersten Mal bitte einmal online öffnen, danach sind alle Inhalte automatisch offline da";
-  return `<section id="offlineBox" class="offline-box"><strong>Offline-Modus aktiv</strong><br>Alle zuvor geladenen Inhalte sind offline verfügbar${detail}. ♡ ist nur für Favoriten, nicht für Offline nötig.</section>`;
+  return `<section id="offlineBox" class="offline-box"><strong id="offlineStatusLine">${esc(renderOfflineStatusLine())}</strong><br><span id="offlineStatusDetail">Lokaler Inhalt: ${esc(summary)}. Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv.</span>${offlineProgressHtml()}</section>`;
 }
 function updateOfflineBox(){
   const box=$("offlineBox");
   if(!box)return;
-  box.classList.toggle("show",!navigator.onLine);
-  if(navigator.onLine)return;
-  const summary=offlineLibrarySummary();
-  const detail=posts.length?` (${summary})`:" – beim ersten Mal bitte einmal online öffnen, danach sind alle Inhalte automatisch offline da";
-  box.innerHTML=`<strong>Offline-Modus aktiv</strong><br>Alle zuvor geladenen Inhalte sind offline verfügbar${detail}. ♡ ist nur für Favoriten, nicht für Offline nötig.`;
+  const show=!navigator.onLine||readOfflinePrepState().running||readOfflinePrepState().status==="done";
+  box.classList.toggle("show",show);
+  if(!show)return;
+  const line=$("offlineStatusLine"),detail=$("offlineStatusDetail");
+  if(line)line.textContent=renderOfflineStatusLine();
+  if(detail)detail.textContent=`Lokaler Inhalt: ${offlineLibrarySummary()}. Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv.`;
+  const old=box.querySelector(".offline-prep-progress");
+  if(old)old.remove();
+  const wrap=document.createElement("div");
+  wrap.innerHTML=offlineProgressHtml();
+  if(wrap.firstElementChild)box.appendChild(wrap.firstElementChild);
 }
 function renderAppSaveBox(){
-  return `<section class="app-save-box"><h3>App speichern & Offline</h3><p><b>Offline:</b> Nach dem ersten Online-Besuch sind <b>alle Beiträge und Duʿāʾ</b> auf diesem Gerät verfügbar – ohne jeden Beitrag einzeln zu speichern. ♡ Speichern ist nur für Favoriten.</p><p><b>iPhone/iPad:</b> In Safari auf Teilen tippen und „Zum Home-Bildschirm“ wählen.</p><p><b>Android:</b> Browser-Menü öffnen und „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.</p></section>`;
+  return `<section class="app-save-box"><h3>App speichern & Offline</h3><p><b>Offline:</b> Nach der Einrichtung zeigt die App immer den letzten vollständig synchronisierten Stand. Lokale Daten bleiben offline nutzbar und werden später synchronisiert.</p><div class="article-actions"><button id="offlinePrepareBtn" class="action-btn primary" type="button">App für Offline-Nutzung vorbereiten</button><button id="offlineStorageBtn" class="action-btn" type="button">Speicher prüfen</button></div><p id="offlinePrepHint" class="source-note">Beim Start werden Dateien, Qurʾān-Daten, Beiträge, Suchdaten und Quizdaten lokal vorbereitet.</p><p><b>iPhone/iPad:</b> In Safari auf Teilen tippen und „Zum Home-Bildschirm“ wählen.</p><p><b>Android:</b> Browser-Menü öffnen und „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.</p></section>`;
+}
+async function startOfflinePreparation(){
+  if(!("serviceWorker" in navigator)){alert("Service Worker ist auf diesem Gerät nicht verfügbar.");return}
+  if(readOfflinePrepState().running)return;
+  writeOfflinePrepState({running:true,status:"running",failed:0,loaded:0,total:0,percent:0,updatedAt:new Date().toISOString()});
+  updateOfflineBox();
+  const hint=$("offlinePrepHint");if(hint)hint.textContent="Offline-Paket wird vorbereitet ...";
+  const storage=await estimateOfflineStorage();
+  if(storage.estimate&&storage.estimate.quota&&storage.estimate.usage){
+    const free=Math.max(0,Number(storage.estimate.quota)-Number(storage.estimate.usage));
+    if(free<220*1024*1024){if(hint)hint.textContent=`Wenig freier Speicher: ${storageBytesLabel(free)} verfügbar. Vorbereitung läuft trotzdem.`}
+  }
+  const urls=await buildOfflinePrepareUrls();
+  await offlineDbSet("meta","syncStatus",{state:"running",count:urls.length,at:new Date().toISOString()});
+  const reg=await navigator.serviceWorker.ready;
+  reg.active?.postMessage({type:"OFFLINE_PREPARE",urls,requestedBy:"user"});
+}
+async function showOfflineStorageInfo(){
+  const info=await estimateOfflineStorage();
+  const est=info.estimate||{};
+  const usage=storageBytesLabel(est.usage||0);
+  const quota=storageBytesLabel(est.quota||0);
+  alert(`Speicherstand:\nBelegt: ${usage}\nVerfügbar gesamt: ${quota}\nPersistenter Speicher: ${info.persistent?"aktiv":"nicht bestätigt"}`);
+}
+function handleOfflineWorkerMessage(data){
+  if(!data||typeof data!=="object")return;
+  if(data.type==="OFFLINE_PREPARE_START"){
+    writeOfflinePrepState({running:true,status:"running",total:Number(data.total||0),loaded:0,failed:0,bytes:0,percent:0,updatedAt:new Date().toISOString()});
+    updateOfflineBox();
+    return;
+  }
+  if(data.type==="OFFLINE_PREPARE_PROGRESS"){
+    writeOfflinePrepState({running:true,status:"running",total:Number(data.total||0),loaded:Number(data.loaded||0),failed:Number(data.failed||0),bytes:Number(data.bytes||0),percent:Number(data.percent||0),updatedAt:new Date().toISOString()});
+    updateOfflineBox();
+    return;
+  }
+  if(data.type==="OFFLINE_PREPARE_DONE"){
+    const ok=!!data.ok;
+    writeOfflinePrepState({running:false,status:ok?"done":"error",total:Number(data.total||0),loaded:Number(data.loaded||0),failed:Number(data.failed||0),bytes:Number(data.bytes||0),percent:ok?100:Number(data.percent||0),updatedAt:new Date().toISOString()});
+    setJson(OFFLINE_SYNC_META_KEY,{appVersion:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",contentVersion:String(window.__darRemoteBuildId||""),databaseSchemaVersion:OFFLINE_DB_VERSION,lastSuccessfulSync:ok?new Date().toISOString():(getJson(OFFLINE_SYNC_META_KEY,{lastSuccessfulSync:""}).lastSuccessfulSync||""),syncStatus:ok?"done":"error",pendingLocalChanges:getJson("darOfflineQueueCountV1",0),acknowledgedUpdateVersion:String(window.__darRemoteBuildId||"")});
+    offlineDbSet("meta","syncStatus",{state:ok?"done":"error",payload:data,at:new Date().toISOString()});
+    const hint=$("offlinePrepHint");
+    if(hint)hint.textContent=ok?"Offline-Nutzung vollständig eingerichtet":"Offline-Paket unvollständig. Bitte erneut starten.";
+    updateOfflineBox();
+    return;
+  }
+  if(data.type==="OFFLINE_PREPARE_BUSY"){
+    const hint=$("offlinePrepHint");if(hint)hint.textContent="Offline-Vorbereitung läuft bereits im Hintergrund.";
+  }
+}
+function queueOfflineAction(action){
+  const item={id:`q-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,type:String(action?.type||"generic"),payload:action?.payload||{},createdAt:new Date().toISOString()};
+  const list=getJson("darOfflineQueueV1",[]);
+  list.push(item);
+  setJson("darOfflineQueueV1",list.slice(-500));
+  setJson("darOfflineQueueCountV1",list.length);
+  offlineDbSet("queue",item.id,item);
+  return item.id;
+}
+async function flushOfflineQueue(){
+  if(!navigator.onLine)return false;
+  const list=getJson("darOfflineQueueV1",[]);
+  if(!list.length)return true;
+  const keep=[];
+  for(const item of list){
+    if(item.type==="sync-account-saved"){const ok=await syncAccountSaved({silent:true});if(!ok)keep.push(item);continue}
+    if(item.type==="sync-quran-progress"){const ok=await syncAccountQuranProgress({silent:true});if(!ok)keep.push(item);continue}
+  }
+  setJson("darOfflineQueueV1",keep);
+  setJson("darOfflineQueueCountV1",keep.length);
+  return keep.length===0;
+}
+async function initOfflineEngine(){
+  readOfflinePrepState();
+  await offlineDbSet("meta","versions",{appVersion:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",databaseSchemaVersion:OFFLINE_DB_VERSION,updatedAt:new Date().toISOString()});
+  if("serviceWorker" in navigator&&!window.__darOfflineMessageBound){
+    window.__darOfflineMessageBound=true;
+    navigator.serviceWorker.addEventListener("message",(ev)=>handleOfflineWorkerMessage(ev.data||{}));
+    try{const reg=await navigator.serviceWorker.ready;reg.active?.postMessage({type:"OFFLINE_PREPARE_STATUS"})}catch(e){}
+  }
+  if(navigator.onLine)flushOfflineQueue().catch(()=>{});
 }
 function searchMatchLabel(post,q){
   if(!q)return "";
@@ -14167,6 +14276,8 @@ function bindEvents(){
   bindThemeControls();
   bindFontControls();
   bindImageEditor();
+  const offlinePrepareBtn=$("offlinePrepareBtn");if(offlinePrepareBtn)offlinePrepareBtn.onclick=()=>startOfflinePreparation();
+  const offlineStorageBtn=$("offlineStorageBtn");if(offlineStorageBtn)offlineStorageBtn.onclick=()=>showOfflineStorageInfo();
   const postIntroModal=$("postIntroModal"),postIntroOpenBtn=$("postIntroOpenBtn"),postIntroCloseBtn=$("postIntroCloseBtn"),postIntroDialog=postIntroModal?.querySelector(".post-intro-dialog");
   const closePostIntro=()=>{if(postIntroModal){postIntroModal.hidden=true;document.documentElement.classList.remove("post-intro-open")}};
   const openPostIntro=()=>{if(postIntroModal){postIntroModal.hidden=false;document.documentElement.classList.add("post-intro-open");postIntroCloseBtn?.focus()}};
@@ -14429,6 +14540,7 @@ window.addEventListener("load",()=>{
       try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
     }
     initFontSettings();
+    initOfflineEngine().catch(()=>{});
     render();
     if("serviceWorker" in navigator&&!window.__darSwMessageBound){
       window.__darSwMessageBound=true;
@@ -14457,7 +14569,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 </script>
 
 <script>
-window.addEventListener("online",function(){updateOfflineBox();refreshContent({forceRender:true})});
+window.addEventListener("online",function(){updateOfflineBox();flushOfflineQueue().catch(()=>{});refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
 window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")scheduleRefreshContent({forceRender:false},900)});
