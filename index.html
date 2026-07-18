@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v254";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v271";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -9072,11 +9072,58 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 .quiz-answer:hover,.quiz-answer:focus-visible{background:var(--quiz-option-hover);border-color:rgba(216,193,139,.16)}
 .quiz-letter{color:var(--quiz-text-primary);font-weight:900}
 .quiz-answer-note{font-size:12px;color:var(--quiz-text-secondary);font-weight:900}
+@keyframes quizAnswerPulse{
+  0%,100%{transform:translateY(0);box-shadow:0 0 0 2px color-mix(in srgb,var(--quiz-accent) 36%,transparent),0 0 18px color-mix(in srgb,var(--quiz-accent) 20%,transparent)}
+  50%{transform:translateY(-1px);box-shadow:0 0 0 2px color-mix(in srgb,var(--quiz-accent) 52%,transparent),0 0 34px color-mix(in srgb,var(--quiz-accent) 30%,transparent)}
+}
+@keyframes quizAnswerGlow{
+  0%,100%{opacity:.75}
+  50%{opacity:1}
+}
+.quiz-shell.quiz-shell-pro .quiz-answer{
+  position:relative;
+  overflow:hidden;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease;
+}
+.quiz-shell.quiz-shell-pro .quiz-answer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg,rgba(255,232,172,.00),rgba(255,232,172,.00));
+  transition:background .18s ease,opacity .18s ease;
+}
 .quiz-answer.selected{background:var(--quiz-option-selected);border-color:var(--quiz-border-active);box-shadow:0 0 0 2px color-mix(in srgb,var(--quiz-accent) 26%,transparent)}
+.quiz-shell.quiz-shell-pro .quiz-answer.selected{
+  border-color:var(--quiz-accent);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--quiz-accent) 42%,transparent),0 0 30px color-mix(in srgb,var(--quiz-accent) 26%,transparent);
+  background:linear-gradient(135deg,rgba(216,195,127,.18),rgba(168,156,255,.20));
+  animation:quizAnswerPulse 1.08s ease-in-out infinite;
+}
+.quiz-shell.quiz-shell-pro .quiz-answer.selected::before{
+  background:linear-gradient(120deg,color-mix(in srgb,var(--quiz-accent) 22%,transparent),color-mix(in srgb,var(--quiz-accent) 8%,transparent));
+  animation:quizAnswerGlow 1.08s ease-in-out infinite;
+}
+.quiz-shell.quiz-shell-pro .quiz-answer.selected .quiz-letter{
+  color:#fff9e8;
+  text-shadow:0 0 10px rgba(216,195,127,.55);
+}
 .quiz-answer.correct{border-color:rgba(151,196,159,.3);background:var(--quiz-option-correct);color:var(--quiz-text-primary)}
 .quiz-answer.wrong{border-color:rgba(213,149,149,.28);background:var(--quiz-option-wrong);color:var(--quiz-text-primary)}
-.quiz-shell.quiz-shell-pro .quiz-answer.correct{border-color:rgba(151,196,159,.3);background:var(--quiz-option-correct);color:var(--quiz-text-primary)}
-.quiz-shell.quiz-shell-pro .quiz-answer.wrong{border-color:rgba(213,149,149,.28);background:var(--quiz-option-wrong);color:var(--quiz-text-primary)}
+.quiz-shell.quiz-shell-pro .quiz-answer.correct{
+  animation:none!important;
+  border-color:rgba(125,227,182,.75)!important;
+  box-shadow:0 0 0 2px rgba(125,227,182,.34),0 0 24px rgba(125,227,182,.28)!important;
+  background:var(--quiz-option-correct);
+  color:var(--quiz-text-primary);
+}
+.quiz-shell.quiz-shell-pro .quiz-answer.wrong{
+  animation:none!important;
+  border-color:rgba(255,158,165,.78)!important;
+  box-shadow:0 0 0 2px rgba(255,158,165,.34),0 0 24px rgba(255,158,165,.26)!important;
+  background:var(--quiz-option-wrong);
+  color:var(--quiz-text-primary);
+}
 .quiz-feedback,.quiz-explain,.quiz-source-box,.quiz-result-section{border:1px solid var(--quiz-border);border-radius:16px;background:var(--quiz-feedback-bg);padding:12px 14px}
 .quiz-feedback b,.quiz-explain b,.quiz-source-box b{display:block;margin-bottom:6px}
 .quiz-feedback p,.quiz-explain p,.quiz-source-box p{margin:0;color:var(--quiz-text-body);line-height:1.5}
@@ -13819,7 +13866,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v270";
+const APP_BUILD_ID="app-shell-v271";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
