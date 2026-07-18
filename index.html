@@ -516,6 +516,11 @@ body.is-area-route .view-desc{font-size:12px;line-height:1.55;margin-top:6px}
 .offline-box{display:none;border-color:rgba(255,230,170,.40);background:linear-gradient(145deg,rgba(255,230,170,.10),rgba(0,0,0,.16))}
 .offline-box.show{display:block}
 .offline-box strong{color:var(--gold2)}
+.offline-prep-progress{margin-top:10px;display:grid;gap:6px}
+.offline-prep-progress div{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.offline-prep-progress span,.offline-prep-progress small{font-size:12px;color:var(--muted)}
+.offline-prep-bar{height:7px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.2);overflow:hidden}
+.offline-prep-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2))}
 .copy-extra-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:8px}
 .app-save-box{font-size:12px;line-height:1.55;color:var(--muted)}
 .app-save-box h3{font-family:var(--serif);color:var(--gold2);font-size:23px;margin:0 0 8px}
@@ -4900,7 +4905,7 @@ html[data-theme="dar-al-layl"] .quran-surah-head-ar,
 html[data-theme="dar-al-layl"] .dua-arabic{color:#EFE5D2!important}
 html[data-theme="dar-al-layl"] .quran-ayah-tr,
 html[data-theme="dar-al-layl"] .quran-result-tr,
-html[data-theme="dar-al-layl"] .dua-trans{color:#BFC5BD!important}
+html[data-theme="dar-al-layl"] .dua-trans{color:#A8B095!important}
 html[data-theme="dar-al-layl"] .quran-ayah-de,
 html[data-theme="dar-al-layl"] .quran-result-de,
 html[data-theme="dar-al-layl"] .dua-de,
@@ -4908,7 +4913,7 @@ html[data-theme="dar-al-layl"] .statement,
 html[data-theme="dar-al-layl"] .source-row,
 html[data-theme="dar-al-layl"] .source-row b,
 html[data-theme="dar-al-layl"] .ilm-message-text,
-html[data-theme="dar-al-layl"] .chat-msg-text{color:#D5D6CF!important}
+html[data-theme="dar-al-layl"] .chat-msg-text{color:#E6DECD!important}
 html[data-theme="dar-al-layl"] .event-date,
 html[data-theme="dar-al-layl"] .statement em,
 html[data-theme="dar-al-layl"] .script-accent,
@@ -8419,6 +8424,7 @@ body.is-home-route .view-head.view-head-home{padding-bottom:6px!important}
 .quran-meta-note{font-size:13px!important;line-height:1.45!important;margin:8px 0!important}
 .quran-ayah-actions{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;margin-top:10px!important}
 .quran-explain-btn{flex:0 1 auto!important;min-height:34px!important;max-width:238px!important;border-radius:999px!important;padding:6px 13px!important;font-size:14px!important;line-height:1.1!important;letter-spacing:0!important;white-space:nowrap!important}
+.quran-share-ayah-btn{flex:0 0 36px!important;width:36px!important;min-height:34px!important;border-radius:999px!important;padding:0!important;border:1px solid var(--line)!important;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04))!important;color:var(--gold2)!important;font-size:14px!important;font-weight:900!important}
 .quran-save-ayah-btn{flex:0 0 38px!important;width:38px!important;min-height:34px!important;border-radius:999px!important;font-size:16px!important;padding:0!important}
 .quran-topic-page,.quran-topic-detail{gap:9px!important}
 .quran-topic-search{min-height:39px!important;border-radius:15px!important;padding:8px 12px!important;font-size:14px!important}
@@ -8777,6 +8783,474 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
 }
 </style>
 
+<style id="quiz-premium-v3">
+:root{
+  --quiz-page-padding-x:18px;
+  --quiz-page-padding-top:16px;
+  --quiz-section-gap:18px;
+  --quiz-card-gap:12px;
+  --quiz-card-padding:18px;
+  --quiz-control-gap:12px;
+  --quiz-control-height:56px;
+  --quiz-button-height:58px;
+  --quiz-card-radius:22px;
+  --quiz-control-radius:17px;
+  --quiz-button-radius:18px;
+  --quiz-option-min-height:58px;
+}
+body.is-quiz-route .view{padding-bottom:calc(var(--bottom-nav-height,74px) + env(safe-area-inset-bottom,0px) + 24px)!important}
+.quiz-shell.quiz-shell-pro{
+  --quiz-bg:#080808;
+  --quiz-card:#121212;
+  --quiz-elev:#191919;
+  --quiz-surface:#0d0d0d;
+  --quiz-surface-active:#24211a;
+  --quiz-option-bg:var(--quiz-surface);
+  --quiz-option-hover:color-mix(in srgb,var(--quiz-surface) 82%,#ffffff 18%);
+  --quiz-option-selected:var(--quiz-surface-active);
+  --quiz-option-correct:color-mix(in srgb,var(--quiz-surface) 76%,var(--quiz-ok) 24%);
+  --quiz-option-wrong:color-mix(in srgb,var(--quiz-surface) 78%,var(--quiz-bad) 22%);
+  --quiz-feedback-bg:#111712;
+  --quiz-source-bg:#0e1310;
+  --quiz-border:rgba(255,255,255,.1);
+  --quiz-border-active:rgba(207,174,93,.28);
+  --quiz-text:#f3efe5;
+  --quiz-text-primary:#f3efe5;
+  --quiz-text-title:#dfc77f;
+  --quiz-text-body:#d8d8cf;
+  --quiz-text-secondary:#b9b5ac;
+  --quiz-text-muted:#8b9388;
+  --quiz-text-label:#cbb78a;
+  --quiz-text-success:#d9e6c8;
+  --quiz-text-error:#f0c7c2;
+  --quiz-text-warning:#e7d7a4;
+  --quiz-text-source:#cfc6ae;
+  --quiz-muted:var(--quiz-text-secondary);
+  --quiz-title:var(--quiz-text-title);
+  --quiz-accent:#c8a85a;
+  --quiz-ok:#7fd4a6;
+  --quiz-bad:#f08e92;
+  --quiz-warn:#d4b066;
+  --quiz-btn-grad:linear-gradient(135deg,#433a25,#282217);
+  --quiz-btn-text:#f7f1e2;
+  --quiz-btn-disabled:#151814;
+  --quiz-btn-disabled-text:#817d74;
+  display:grid;
+  gap:var(--quiz-section-gap);
+  width:min(980px,100%);
+  margin:0 auto;
+  padding:var(--quiz-page-padding-top) max(14px,var(--quiz-page-padding-x)) calc(var(--bottom-nav-height,74px) + env(safe-area-inset-bottom,0px) + 24px);
+}
+html[data-theme="dar-al-layl"] .quiz-shell.quiz-shell-pro{
+  --quiz-bg:#070a08;
+  --quiz-card:#111611;
+  --quiz-elev:#151b16;
+  --quiz-surface:#0b0f0c;
+  --quiz-surface-active:#20261f;
+  --quiz-option-bg:#121713;
+  --quiz-option-hover:#171d18;
+  --quiz-option-selected:#1e2520;
+  --quiz-option-correct:#1d2a22;
+  --quiz-option-wrong:#2a1e1e;
+  --quiz-feedback-bg:#111712;
+  --quiz-source-bg:#0e1310;
+  --quiz-border:rgba(190,160,94,.14);
+  --quiz-border-active:rgba(216,193,139,.25);
+  --quiz-text:#f2ecdd;
+  --quiz-text-primary:#f2ecdd;
+  --quiz-text-title:#e2c98b;
+  --quiz-text-body:#d6d6cf;
+  --quiz-text-secondary:#b8bcb3;
+  --quiz-text-muted:#8b9388;
+  --quiz-text-label:#cbb78a;
+  --quiz-text-success:#d9e6c8;
+  --quiz-text-error:#f0c7c2;
+  --quiz-text-warning:#e7d7a4;
+  --quiz-text-source:#cfc6ae;
+  --quiz-muted:var(--quiz-text-secondary);
+  --quiz-title:var(--quiz-text-title);
+  --quiz-accent:#b49658;
+  --quiz-btn-grad:linear-gradient(135deg,#434230,#252b22);
+  --quiz-btn-text:#f2ecdd;
+  --quiz-btn-disabled:#161a16;
+  --quiz-btn-disabled-text:#7d847c;
+}
+html[data-theme="royal"] .quiz-shell.quiz-shell-pro{
+  --quiz-bg:#061426;
+  --quiz-card:#0a1c32;
+  --quiz-elev:#102945;
+  --quiz-surface:#132f4d;
+  --quiz-surface-active:#193b5e;
+  --quiz-border:rgba(225,198,126,.2);
+  --quiz-border-active:rgba(225,198,126,.34);
+  --quiz-text:#f5f1e7;
+  --quiz-muted:#c2c8cd;
+  --quiz-title:#e3c97f;
+  --quiz-accent:#d6b963;
+  --quiz-btn-grad:linear-gradient(135deg,#345877,#233d57);
+  --quiz-btn-text:#f5f1e7;
+}
+html[data-theme="bordeaux"] .quiz-shell.quiz-shell-pro{
+  --quiz-bg:#15090c;
+  --quiz-card:#211015;
+  --quiz-elev:#2c161d;
+  --quiz-surface:#180c10;
+  --quiz-surface-active:#382029;
+  --quiz-border:rgba(212,178,103,.18);
+  --quiz-border-active:rgba(228,197,126,.32);
+  --quiz-text:#f4ece5;
+  --quiz-muted:#c8b9b7;
+  --quiz-title:#d9bb78;
+  --quiz-accent:#c8a45e;
+  --quiz-btn-grad:linear-gradient(135deg,#59303a,#321a21);
+  --quiz-btn-text:#f4ece5;
+}
+html[data-theme="soft"] .quiz-shell.quiz-shell-pro{
+  --quiz-bg:#f4eae6;
+  --quiz-card:#fff9f7;
+  --quiz-elev:#f4e6e3;
+  --quiz-surface:#faf2ef;
+  --quiz-surface-active:#eedcd8;
+  --quiz-border:rgba(91,62,70,.16);
+  --quiz-border-active:rgba(130,92,104,.32);
+  --quiz-text:#302329;
+  --quiz-muted:#6d5d62;
+  --quiz-title:#825c68;
+  --quiz-accent:#ac7c84;
+  --quiz-btn-grad:linear-gradient(135deg,#9a707a,#75525d);
+  --quiz-btn-text:#fff9f4;
+  --quiz-btn-disabled:#e8ddda;
+  --quiz-btn-disabled-text:#8f8286;
+}
+html[data-theme="light"] .quiz-shell.quiz-shell-pro{
+  --quiz-bg:#f6f1e6;
+  --quiz-card:#fffdf8;
+  --quiz-elev:#f2eadb;
+  --quiz-surface:#fbf7ee;
+  --quiz-surface-active:#ede1ca;
+  --quiz-border:rgba(82,65,38,.17);
+  --quiz-border-active:rgba(138,110,53,.33);
+  --quiz-text:#2c2820;
+  --quiz-muted:#696157;
+  --quiz-title:#8a6e35;
+  --quiz-accent:#a98642;
+  --quiz-btn-grad:linear-gradient(135deg,#ae8d4d,#80652f);
+  --quiz-btn-text:#fffdf7;
+  --quiz-btn-disabled:#e4dccd;
+  --quiz-btn-disabled-text:#827866;
+}
+.quiz-compact-intro,.quiz-card,.quiz-session,.quiz-result{
+  border:1px solid var(--quiz-border);
+  border-radius:var(--quiz-card-radius);
+  background:linear-gradient(145deg,var(--quiz-card),var(--quiz-elev));
+  padding:var(--quiz-card-padding);
+  box-shadow:0 14px 34px rgba(0,0,0,.2);
+}
+.quiz-compact-intro{display:grid;gap:8px}
+.quiz-kicker{font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--quiz-text-label)}
+.quiz-main-title{margin:0;font-size:clamp(30px,8vw,40px);line-height:1.06;color:var(--quiz-title);font-family:var(--font-serif)}
+.quiz-subtitle{margin:0;color:var(--quiz-text-secondary);font-weight:700}
+.quiz-section-title{margin:0 0 6px;color:var(--quiz-text-primary);font-size:17px}
+.quiz-section-note{margin:0 0 12px;color:var(--quiz-text-secondary);font-size:13px}
+.quiz-config-grid{display:grid;grid-template-columns:1fr;gap:var(--quiz-control-gap)}
+.quiz-field{display:grid;gap:6px}
+.quiz-field label{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--quiz-text-label)}
+.quiz-control{min-height:var(--quiz-control-height);border:1px solid var(--quiz-border);border-radius:var(--quiz-control-radius);background:var(--quiz-surface);padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px}
+.quiz-control:focus-within{border-color:var(--quiz-border-active);box-shadow:0 0 0 2px color-mix(in srgb,var(--quiz-accent) 20%,transparent)}
+.quiz-control select{width:100%;border:0;outline:0;background:transparent;color:var(--quiz-text-primary);font:inherit;font-weight:800;appearance:none;padding-right:0}
+.quiz-chevron{font-size:18px;color:var(--quiz-text-secondary);pointer-events:none}
+.quiz-actions{display:grid;grid-template-columns:1fr;gap:10px}
+.quiz-btn{min-height:var(--quiz-button-height);border-radius:var(--quiz-button-radius);border:1px solid var(--quiz-border);background:var(--quiz-surface);color:var(--quiz-text-primary);font-size:15px;font-weight:900;padding:10px 14px}
+.quiz-btn.primary{background:var(--quiz-btn-grad);color:var(--quiz-btn-text);border-color:color-mix(in srgb,var(--quiz-border-active) 76%,transparent);box-shadow:0 10px 24px rgba(0,0,0,.28)}
+.quiz-btn.secondary{background:linear-gradient(135deg,#242a23,#171c17);color:#f1ede2;border-color:rgba(216,193,139,.12)}
+.quiz-btn:focus-visible{outline:2px solid var(--quiz-border-active);outline-offset:1px}
+.quiz-btn:disabled{background:var(--quiz-btn-disabled);color:var(--quiz-btn-disabled-text);cursor:not-allowed;border-color:var(--quiz-border)}
+.quiz-btn.primary:hover{filter:brightness(1.06)}
+.quiz-btn.primary:active{transform:translateY(1px)}
+.quiz-shell.quiz-shell-pro .quiz-btn.primary{background:var(--quiz-btn-grad);color:var(--quiz-btn-text);border-color:rgba(216,193,139,.18);box-shadow:0 10px 24px rgba(0,0,0,.28)}
+.quiz-shell.quiz-shell-pro .quiz-btn.secondary{background:linear-gradient(135deg,#242a23,#171c17);color:#f1ede2;border-color:rgba(216,193,139,.12)}
+.quiz-shell.quiz-shell-pro .quiz-btn:disabled{background:var(--quiz-btn-disabled);color:var(--quiz-btn-disabled-text);border-color:rgba(255,255,255,.05)}
+.quiz-shell.quiz-shell-pro .quiz-session-actions .quiz-btn.next-ready{color:var(--quiz-btn-text);border-color:rgba(201,224,176,.18);background:#273127;box-shadow:0 0 0 1px rgba(201,224,176,.12)}
+.quiz-start-hint{font-size:12px;color:var(--quiz-muted);margin-top:4px}
+.quiz-app-nav-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.quiz-app-nav-card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;border:1px solid var(--quiz-border);background:#141a16;border-radius:18px;padding:16px;min-height:80px;color:var(--quiz-text-primary);text-align:left}
+.quiz-app-nav-card b{display:block}
+.quiz-app-nav-card span{display:block;color:#c0c3bc;font-size:13px}
+.quiz-status{display:grid;gap:10px}
+.quiz-status-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.quiz-status-title{font-weight:900;color:var(--quiz-text-primary)}
+.quiz-status-meta{color:var(--quiz-text-secondary);font-size:13px}
+.quiz-progress{height:8px;border-radius:999px;background:var(--quiz-surface);overflow:hidden;border:1px solid var(--quiz-border)}
+.quiz-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--quiz-accent),color-mix(in srgb,var(--quiz-accent) 62%,#fff 38%))}
+.quiz-question-panel{border:1px solid var(--quiz-border);border-radius:18px;background:var(--quiz-elev);padding:14px}
+.quiz-question{margin:0;font-size:clamp(24px,6.5vw,34px);line-height:1.3;color:var(--quiz-text-title);font-family:var(--font-serif)}
+.quiz-answer-list{display:grid;gap:10px}
+.quiz-answer{width:100%;min-height:var(--quiz-option-min-height);border-radius:17px;border:1px solid rgba(255,255,255,.06);background:var(--quiz-option-bg);color:var(--quiz-text-primary);display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 14px;text-align:left;font-weight:800}
+.quiz-answer:hover,.quiz-answer:focus-visible{background:var(--quiz-option-hover);border-color:rgba(216,193,139,.16)}
+.quiz-letter{color:var(--quiz-text-primary);font-weight:900}
+.quiz-answer-note{font-size:12px;color:var(--quiz-text-secondary);font-weight:900}
+.quiz-answer.selected{background:var(--quiz-option-selected);border-color:var(--quiz-border-active);box-shadow:0 0 0 2px color-mix(in srgb,var(--quiz-accent) 26%,transparent)}
+.quiz-answer.correct{border-color:rgba(151,196,159,.3);background:var(--quiz-option-correct);color:var(--quiz-text-primary)}
+.quiz-answer.wrong{border-color:rgba(213,149,149,.28);background:var(--quiz-option-wrong);color:var(--quiz-text-primary)}
+.quiz-shell.quiz-shell-pro .quiz-answer.correct{border-color:rgba(151,196,159,.3);background:var(--quiz-option-correct);color:var(--quiz-text-primary)}
+.quiz-shell.quiz-shell-pro .quiz-answer.wrong{border-color:rgba(213,149,149,.28);background:var(--quiz-option-wrong);color:var(--quiz-text-primary)}
+.quiz-feedback,.quiz-explain,.quiz-source-box,.quiz-result-section{border:1px solid var(--quiz-border);border-radius:16px;background:var(--quiz-feedback-bg);padding:12px 14px}
+.quiz-feedback b,.quiz-explain b,.quiz-source-box b{display:block;margin-bottom:6px}
+.quiz-feedback p,.quiz-explain p,.quiz-source-box p{margin:0;color:var(--quiz-text-body);line-height:1.5}
+.quiz-source-box{background:var(--quiz-source-bg)}
+.quiz-source-box p{color:var(--quiz-text-source);font-weight:600}
+.quiz-source-box small{color:var(--quiz-text-muted)}
+.quiz-feedback.is-good b{color:var(--quiz-text-success)}
+.quiz-feedback.is-bad b{color:var(--quiz-text-error)}
+.quiz-status-good{color:var(--quiz-text-success)}
+.quiz-status-bad{color:var(--quiz-text-error)}
+.quiz-status-warn{color:var(--quiz-text-warning)}
+.quiz-session-actions{display:grid;gap:10px;grid-template-columns:1fr}
+.quiz-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.quiz-result-box{border:1px solid var(--quiz-border);border-radius:14px;background:var(--quiz-surface);padding:12px}
+.quiz-result-box b{display:block;font-size:26px;color:var(--quiz-title)}
+.quiz-result-box span{font-size:12px;color:var(--quiz-muted)}
+.quiz-topic-stats,.quiz-audit-list{display:grid;gap:8px}
+.quiz-topic-row,.quiz-audit-row{border:1px solid var(--quiz-border);border-radius:12px;background:var(--quiz-elev);padding:10px}
+.quiz-topic-row b,.quiz-audit-row b{display:block;font-size:13px;margin-bottom:3px}
+.quiz-topic-row span,.quiz-audit-row span,.quiz-audit-row small{color:var(--quiz-muted);font-size:12px}
+.quiz-result-empty{color:var(--quiz-muted);font-size:13px}
+@media(min-width:760px){
+  .quiz-config-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quiz-actions{grid-template-columns:1fr 1fr}
+  .quiz-app-nav-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .quiz-session-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:359px){
+  .quiz-shell.quiz-shell-pro{padding-left:14px;padding-right:14px}
+  .quiz-card,.quiz-session,.quiz-result,.quiz-compact-intro{padding:16px}
+}
+@media(max-width:430px){
+  .quiz-shell.quiz-shell-pro{
+    --quiz-page-padding-x:12px;
+    --quiz-page-padding-top:12px;
+    --quiz-section-gap:14px;
+    --quiz-card-padding:14px;
+    --quiz-control-height:50px;
+    --quiz-button-height:50px;
+    --quiz-option-min-height:50px;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  .quiz-main-title{font-size:clamp(24px,6.5vw,32px)!important}
+  .quiz-question{font-size:clamp(20px,5.5vw,28px)!important;line-height:1.32!important}
+  .quiz-answer{grid-template-columns:26px minmax(0,1fr)!important;padding:10px 12px!important;font-size:14px!important}
+  .quiz-answer-note{display:none}
+  .quiz-app-nav-card{grid-template-columns:auto minmax(0,1fr)!important;padding:12px!important;min-height:68px!important}
+  .quiz-status-meta{font-size:12px!important}
+  .quiz-result-box b{font-size:22px!important}
+}
+</style>
+
+<style id="iphone-compact-v4">
+/* iPhone 13/14/15 (390–430px) + schmale Split-View: Text lesbar, nicht abgeschnitten */
+@media(max-width:430px){
+  .top-shell.theme-hero-shell .header{
+    padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+    padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  }
+  .top-shell.theme-hero-shell .brand-kicker-row{
+    flex-wrap:wrap!important;
+    gap:6px!important;
+    margin-bottom:14px!important;
+  }
+  .top-shell.theme-hero-shell .brand small{
+    flex-basis:100%!important;
+    font-size:8.5px!important;
+    letter-spacing:.1em!important;
+    white-space:normal!important;
+    line-height:1.3!important;
+  }
+  .top-shell.theme-hero-shell .hijri-header-pill{
+    min-width:0!important;
+    max-width:100%!important;
+    width:auto!important;
+    font-size:8.5px!important;
+    padding:5px 8px!important;
+    min-height:30px!important;
+    white-space:normal!important;
+    text-align:center!important;
+    line-height:1.2!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:56px minmax(0,1fr)!important;
+    column-gap:10px!important;
+  }
+  .top-shell.theme-hero-shell .logo{
+    width:56px!important;
+    height:56px!important;
+    flex-basis:56px!important;
+  }
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(22px,5.8vw,30px)!important;
+    letter-spacing:.01em!important;
+    line-height:1.02!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    word-break:break-word!important;
+  }
+  .top-shell.theme-hero-shell .header-tools{
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+    margin-top:14px!important;
+  }
+  .top-shell.theme-hero-shell .header .socials{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+  }
+  .top-shell.theme-hero-shell .header .social-link{
+    min-width:0!important;
+    width:100%!important;
+    height:42px!important;
+    min-height:42px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-status{
+    min-height:42px!important;
+    padding:8px 10px!important;
+    gap:6px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item b{
+    font-size:7px!important;
+    letter-spacing:.1em!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item span{
+    font-size:10px!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item small{
+    font-size:7.5px!important;
+    white-space:normal!important;
+  }
+  .top-shell.theme-hero-shell .hero-text{
+    margin-top:14px!important;
+    padding-top:14px!important;
+  }
+  .top-shell.theme-hero-shell .salam{
+    font-size:clamp(15px,4.2vw,20px)!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    line-height:1.25!important;
+  }
+  .top-shell.theme-hero-shell .intro{
+    font-size:13px!important;
+    line-height:1.55!important;
+  }
+  .brand-main h1{
+    transform:none!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+  }
+  .prayer-push-accordion-toggle{
+    flex-wrap:wrap!important;
+    align-items:flex-start!important;
+    row-gap:4px!important;
+    padding:10px 12px!important;
+  }
+  .prayer-push-accordion-title{
+    flex:1 1 100%!important;
+    font-size:11.5px!important;
+    line-height:1.25!important;
+  }
+  .prayer-push-accordion-summary{
+    flex:1 1 100%!important;
+    max-width:100%!important;
+    text-align:left!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    font-size:10px!important;
+    line-height:1.3!important;
+    opacity:.88!important;
+  }
+  .view-head-home-row{
+    flex-wrap:wrap!important;
+    gap:6px!important;
+    align-items:flex-start!important;
+  }
+  .view-head-home-row h2{
+    flex:1 1 100%!important;
+    font-size:clamp(22px,5.5vw,28px)!important;
+  }
+  .home-hijri-day-btn{
+    max-width:100%!important;
+    width:100%!important;
+    white-space:normal!important;
+    text-align:center!important;
+    font-size:9.5px!important;
+    line-height:1.25!important;
+    min-height:30px!important;
+    padding:6px 8px!important;
+  }
+  .header-prayer-item b,
+  .header-prayer-item span,
+  .header-prayer-item small{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    word-break:break-word!important;
+  }
+  .prayer-push-status summary{
+    flex-wrap:wrap!important;
+    white-space:normal!important;
+    line-height:1.3!important;
+    min-height:42px!important;
+    height:auto!important;
+  }
+  .prayer-action-btn{
+    font-size:10.5px!important;
+    line-height:1.2!important;
+    white-space:normal!important;
+    padding:8px 7px!important;
+  }
+  .isnad-quote{
+    font-size:11px!important;
+    line-height:1.38!important;
+  }
+  .isnad-source{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    font-size:8.5px!important;
+    line-height:1.35!important;
+  }
+}
+@media(max-width:390px){
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:50px minmax(0,1fr)!important;
+    column-gap:8px!important;
+  }
+  .top-shell.theme-hero-shell .logo{
+    width:50px!important;
+    height:50px!important;
+    flex-basis:50px!important;
+  }
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(20px,5.4vw,27px)!important;
+  }
+  .header-prayer-item span{font-size:9.5px!important}
+  .header-prayer-item b{font-size:6.8px!important}
+  .prayer-action-row{grid-template-columns:1fr!important}
+  .prayer-action-row .prayer-action-btn:nth-child(3){grid-column:auto}
+}
+@media(max-width:360px){
+  .top-shell.theme-hero-shell h1{
+    font-size:clamp(18px,5.2vw,24px)!important;
+  }
+}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -9268,7 +9742,10 @@ function quranTopicContext(){try{return getJson('darQuranTopicContextV1',null)}c
 function setQuranTopicContext(data){try{setJson('darQuranTopicContextV1',data)}catch(e){}}
 function clearQuranTopicContext(){try{localStorage.removeItem('darQuranTopicContextV1')}catch(e){}}
 function renderQuranTopicContextBar(surahId,ayah){const ctx=quranTopicContext();if(!ctx||Number(ctx.surah)!==Number(surahId)||Number(ctx.ayah)!==Number(ayah))return '';const topic=quranTopicById(ctx.topicId)||{title:ctx.topicTitle||'Thema'};return '<section class="quran-topic-context"><span>Aus Thema: <strong>'+esc(topic.title)+'</strong></span><button type="button" class="quran-topic-back-btn" data-nav="quran-topic" data-value="'+esc(ctx.topicId||'')+'">← Zurück zum Thema</button></section>'}
-function renderQuranExplainButton(surah,ayah){const manual=getQuranReadingState().manual;const isManual=manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah);const icon=isManual?"★":"☆";return '<div class="quran-ayah-actions"><button type="button" class="quran-explain-btn" data-quran-explain="'+esc(surah)+':'+esc(ayah)+'">📖 Tafsīr & Erklärung</button><button type="button" class="quran-save-ayah-btn'+(isManual?' is-progress':'')+'" data-quran-save-ayah="'+esc(surah)+':'+esc(ayah)+'" title="Merken oder Lesestand speichern">'+icon+'</button></div>'}
+function renderQuranExplainButton(surah,ayah,ayahData){const manual=getQuranReadingState().manual;const isManual=manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah);const icon=isManual?"★":"☆";return '<div class="quran-ayah-actions"><button type="button" class="quran-explain-btn" data-quran-explain="'+esc(surah)+':'+esc(ayah)+'">📖 Tafsīr & Erklärung</button><button type="button" class="quran-share-ayah-btn" data-quran-share-ayah="'+esc(ayahData||"")+'" title="Vers teilen">↗</button><button type="button" class="quran-save-ayah-btn'+(isManual?' is-progress':'')+'" data-quran-save-ayah="'+esc(surah)+':'+esc(ayah)+'" title="Merken oder Lesestand speichern">'+icon+'</button></div>'}
+function parseQuranAyahShareData(value){try{return JSON.parse(decodeURIComponent(String(value||"")))}catch(e){return null}}
+function quranAyahShareUrl(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return location.href;return `${location.origin}${location.pathname}#quran-surah/${sid}/${aid}`}
+function buildQuranAyahShareText(data){const sid=Number(data?.s),aid=Number(data?.a);const ref=(Number.isFinite(sid)&&Number.isFinite(aid))?`Qurʾān ${sid}:${aid}`:"Qurʾān-Vers";const ar=String(data?.ar||"").trim();const de=String(data?.de||"").trim();const surah=String(data?.name||"").trim();return `${ref}${surah?` · ${surah}`:""}\n\n${ar}${de?`\n\n${de}`:""}\n\n${quranAyahShareUrl(sid,aid)}`}
 function quranExplanationSectionList(ayah,entry,meta,atharEntry){const terms=glossaryTermsForAyah(ayah,entry);const period=[entry?.period,entry?.year,entry?.place||quranTypeLabel(meta.type)].filter(Boolean).join(' · ');const sections=[{id:'meaning',title:'Bedeutung',html:esc(entry?.meaning||ayah?.de||'')},{id:'athar',title:'Āthār',html:renderAtharPanel(atharEntry,true)},{id:'ibn-kathir',title:'Ibn Kathīr',html:esc(tafsirBySource(entry,'ibn kath','kathīr','kathir'))},{id:'saadi',title:'as-Saʿdī',html:esc(tafsirBySource(entry,'saʿd','saadi','sadi'))},{id:'ibn-abbas',title:'Ibn ʿAbbās',html:esc(tafsirBySource(entry,'ibn ʿabb','ibn abb','ibn abbas'))},{id:'sabab',title:'Offenbarung',html:esc([entry?.sabab,period?'Einordnung: '+period:''].filter(Boolean).join('\n\n'))},{id:'hadiths',title:'Hadithe',html:esc(tafsirText(entry?.hadiths))},{id:'words',title:'Worte',html:renderWordsPanel(terms,true)}];return sections.filter(function(x){return String(x.html||'').trim().length>0})}
 function renderQuranExplanationSheet(surahId,ayahId,tab){const meta=quranSurahMeta(surahId);const surah=quranSurahCache.get(Number(surahId));const verse=surah?.verses?.find(function(v){return Number(v.id)===Number(ayahId)})||null;if(!meta||!verse)return '<div class="quran-explain-overlay" data-quran-explain-overlay><section class="quran-explain-sheet"><div class="quran-explain-head"><button type="button" data-quran-explain-close>←</button><div class="quran-explain-title"><strong>Erklärung</strong></div><button type="button" data-quran-explain-close>×</button></div><div class="quran-explain-body"><div class="quran-explain-empty">Diese Āyah konnte nicht geladen werden.</div></div></section></div>';const tafsir=tafsirSurahCache.get(Number(surahId))||null;const athar=quranAtharCache.get(Number(surahId))||null;const entry=ayahTafsirEntry(tafsir,ayahId);const atharEntry=ayahAtharEntry(athar,ayahId);const sections=quranExplanationSectionList(verse,entry,meta,atharEntry);const activeId=sections.some(function(s){return s.id===tab})?tab:(sections[0]?.id||'meaning');const active=sections.find(function(s){return s.id===activeId});return '<div class="quran-explain-overlay" data-quran-explain-overlay><section class="quran-explain-sheet" role="dialog" aria-modal="true"><div class="quran-explain-head"><button type="button" data-quran-explain-close>←</button><div class="quran-explain-title"><strong>Sūrat '+esc(meta.transliteration)+' · Āyah '+esc(ayahId)+'</strong><div class="quran-explain-ar">'+esc(verse.ar||'')+'</div></div><button type="button" data-quran-explain-close>×</button></div><div class="quran-explain-tabs">'+sections.map(function(s){return '<button type="button" class="quran-explain-tab '+(s.id===activeId?'active':'')+'" data-quran-explain-tab="'+esc(s.id)+'">'+esc(s.title)+'</button>'}).join('')+'</div><div class="quran-explain-body"><div class="quran-explain-content">'+(active?.html||'<div class="quran-explain-empty">Für diese Āyah ist in dieser Kategorie aktuell kein geprüfter Inhalt hinterlegt.</div>')+'</div><div class="quran-explain-nav"><button type="button" data-quran-explain-prev>← Vorherige Āyah</button><button type="button" data-quran-explain-next>Nächste Āyah →</button></div></div></section></div>'}
 async function openQuranExplanationPanel(surahId,ayahId,tab){const sid=Number(surahId), aid=Number(ayahId);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;quranExplanationState={surah:sid,ayah:aid,tab:tab||'meaning',scrollY:window.scrollY||0};document.documentElement.classList.add('quran-panel-open');document.body.classList.add('quran-panel-open');await Promise.all([loadQuranSurah(sid),loadTafsirSurah(sid),loadQuranAtharSurah(sid)]);document.getElementById('quranExplanationMount')?.remove();const mount=document.createElement('div');mount.id='quranExplanationMount';mount.innerHTML=renderQuranExplanationSheet(sid,aid,quranExplanationState.tab);document.body.appendChild(mount);try{history.pushState({quranPanel:true,surah:sid,ayah:aid},'')}catch(e){}bindQuranExplanationPanel()}
@@ -9303,7 +9780,7 @@ window.addEventListener("pagehide",()=>{if(readRoute().view==="quran-surah")save
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&readRoute().view==="quran-surah")saveQuranAutoFromVisible(true)});
 function renderQuranWakeBtn(){if(!quranWakeSupported())return `<div class="quran-reader-tools"><button id="quranWakeBtn" class="quran-wake-btn is-off" type="button" disabled title="Auf diesem Gerät nicht verfügbar">🌙 Nicht verfügbar</button></div>`;return `<div class="quran-reader-tools"><button id="quranWakeBtn" class="quran-wake-btn is-on" type="button" aria-pressed="true" title="Verhindert Abdunkeln und Sperre beim Lesen">☀️ Bildschirm bleibt an</button></div>`}
 function renderQuranSurahHead(id,meta){return `<section class="quran-surah-head"><div class="quran-surah-head-text"><h2>${esc(meta.transliteration)}</h2><div class="quran-surah-head-ar">${esc(meta.name)}</div></div><div class="quran-surah-head-meta-row"><div class="quran-surah-head-meta">${id} · ${meta.total_verses} Ayāt · ${quranTypeLabel(meta.type)}</div><div class="quran-surah-head-tools">${renderQuranWakeBtn()}</div></div></section>`}
-function renderQuranSurah(rawValue){const parts=String(rawValue||'').split('/');const id=Number(parts[0]);const selectedAyah=Number(parts[1])||0;const meta=quranSurahMeta(id);const surah=quranSurahCache.get(id);if(!meta)return setHeader('Qurʾān','Sure nicht gefunden.','Fehler')+'<div class="empty">Ungültige Sure.</div>';if(!surah)return renderQuranSurahHead(id,meta)+'<div class="loading">Sure '+id+' wird geladen…</div>';const prev=id>1?quranSurahMeta(id-1):null;const next=id<114?quranSurahMeta(id+1):null;return renderQuranSurahHead(id,meta)+quranModeTabs('read')+renderQuranJumpBar(id,meta.total_verses,selectedAyah)+renderQuranTransliterationPicker()+renderReadingFontControl()+renderQuranTopicContextBar(id,selectedAyah)+'<section class="quran-ayah-list">'+surah.verses.map(function(v){const isHit=selectedAyah===Number(v.id);const ayahData=encodeURIComponent(JSON.stringify({s:id,a:v.id,ar:v.ar,de:v.de,name:meta?.transliteration||''}));return '<article class="quran-ayah '+(isHit?'is-topic-highlight':'')+'" id="ayah-'+esc(v.id)+'"><div class="quran-ayah-num">Āyah '+esc(v.id)+'<button class="quran-ayah-share-btn" type="button" title="Vers als Bild teilen" data-image-ayah-open="'+ayahData+'">🖼</button></div><div class="quran-ayah-ar" data-quran-view="showArabic"'+quranViewHiddenAttr("showArabic")+'>'+esc(v.ar)+'</div>'+renderQuranAyahTr(v)+'<div class="quran-ayah-de" data-quran-view="showGerman"'+quranViewHiddenAttr("showGerman")+'>'+esc(v.de)+'</div>'+renderQuranExplainButton(id,v.id)+'</article>'}).join('')+'</section><div class="quran-surah-nav"><button type="button" data-nav="quran-surah" data-value="'+(prev?prev.id:'')+'" '+(prev?'':'disabled')+'>← '+(prev?esc(prev.transliteration):'—')+'</button><button type="button" data-nav="quran-surah" data-value="'+(next?next.id:'')+'" '+(next?'':'disabled')+'>'+(next?esc(next.transliteration):'—')+' →</button></div><div class="quran-surah-nav"><button type="button" data-nav="quran">Alle Suren</button><button type="button" data-nav="quran-topic">Qurʾān nach Themen</button></div>'}
+function renderQuranSurah(rawValue){const parts=String(rawValue||'').split('/');const id=Number(parts[0]);const selectedAyah=Number(parts[1])||0;const meta=quranSurahMeta(id);const surah=quranSurahCache.get(id);if(!meta)return setHeader('Qurʾān','Sure nicht gefunden.','Fehler')+'<div class="empty">Ungültige Sure.</div>';if(!surah)return renderQuranSurahHead(id,meta)+'<div class="loading">Sure '+id+' wird geladen…</div>';const prev=id>1?quranSurahMeta(id-1):null;const next=id<114?quranSurahMeta(id+1):null;return renderQuranSurahHead(id,meta)+quranModeTabs('read')+renderQuranJumpBar(id,meta.total_verses,selectedAyah)+renderQuranTransliterationPicker()+renderReadingFontControl()+renderQuranTopicContextBar(id,selectedAyah)+'<section class="quran-ayah-list">'+surah.verses.map(function(v){const isHit=selectedAyah===Number(v.id);const ayahData=encodeURIComponent(JSON.stringify({s:id,a:v.id,ar:v.ar,de:v.de,name:meta?.transliteration||''}));return '<article class="quran-ayah '+(isHit?'is-topic-highlight':'')+'" id="ayah-'+esc(v.id)+'"><div class="quran-ayah-num">Āyah '+esc(v.id)+'</div><div class="quran-ayah-ar" data-quran-view="showArabic"'+quranViewHiddenAttr("showArabic")+'>'+esc(v.ar)+'</div>'+renderQuranAyahTr(v)+'<div class="quran-ayah-de" data-quran-view="showGerman"'+quranViewHiddenAttr("showGerman")+'>'+esc(v.de)+'</div>'+renderQuranExplainButton(id,v.id,ayahData)+'</article>'}).join('')+'</section><div class="quran-surah-nav"><button type="button" data-nav="quran-surah" data-value="'+(prev?prev.id:'')+'" '+(prev?'':'disabled')+'>← '+(prev?esc(prev.transliteration):'—')+'</button><button type="button" data-nav="quran-surah" data-value="'+(next?next.id:'')+'" '+(next?'':'disabled')+'>'+(next?esc(next.transliteration):'—')+' →</button></div><div class="quran-surah-nav"><button type="button" data-nav="quran">Alle Suren</button><button type="button" data-nav="quran-topic">Qurʾān nach Themen</button></div>'}
 async function ensureQuranRouteData(route){await loadQuranIndex();if(route.view==="quran"){syncQuranOfflinePrecache();return}if(route.view==="quran-topic"){await loadQuranTopics();return}if(route.view==="quran-surah"){const id=Number(String(route.value||"").split("/")[0]);if(Number.isFinite(id)){await loadQuranSurah(id)}}}
 function offlineLibrarySummary(){const live=`${posts.length} Beiträge, ${DUAS.length} Duʿāʾ`;try{const meta=getJson(OFFLINE_LIB_KEY,null);if(meta&&meta.updated&&!posts.length&&!DUAS.length)return `${meta.posts||0} Beiträge, ${meta.duas||0} Duʿāʾ`}catch(e){}return live}
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -9440,13 +9917,13 @@ function logoutAccount(){setAccountSession(null);render()}
 async function fetchAccountSaved(userId){const rows=await supabaseRest(`user_saved_items?user_id=eq.${encodeURIComponent(userId)}&item_type=eq.post&select=item_id&order=created_at.desc`);return normalizeSavedList((Array.isArray(rows)?rows:[]).map(r=>r.item_id))}
 async function replaceAccountSaved(userId,ids){const clean=normalizeSavedList(ids);await supabaseRest(`user_saved_items?user_id=eq.${encodeURIComponent(userId)}&item_type=eq.post`,{method:"DELETE",prefer:"return=minimal"});if(!clean.length)return true;const rows=clean.map(item_id=>({user_id:userId,item_type:"post",item_id}));await supabaseRest("user_saved_items",{method:"POST",prefer:"return=minimal",body:rows});return true}
 async function mergeAccountSaved(userId){const remote=await fetchAccountSaved(userId);const merged=normalizeSavedList([...savedIds(),...remote]);setSavedIds(merged);await replaceAccountSaved(userId,merged);return merged}
-async function syncAccountSaved({silent=false}={}){const s=accountSession();if(!s)return false;try{await replaceAccountSaved(s.id,savedIds());if(!silent)setAccountStatus("Favoriten wurden synchronisiert.","ok");return true}catch(e){if(!silent)setAccountStatus(e.message||String(e),"warn");return false}}
+async function syncAccountSaved({silent=false}={}){const s=accountSession();if(!s)return false;if(!navigator.onLine){queueOfflineAction({type:"sync-account-saved",payload:{userId:s.id}});if(!silent)setAccountStatus("Offline gespeichert. Wird bei Verbindung synchronisiert.","warn");return false}try{await replaceAccountSaved(s.id,savedIds());if(!silent)setAccountStatus("Favoriten wurden synchronisiert.","ok");return true}catch(e){if(!silent)setAccountStatus(e.message||String(e),"warn");return false}}
 function quranProgressFromRemoteRows(rows){const state=defaultQuranReadingState();(Array.isArray(rows)?rows:[]).forEach(row=>{const type=String(row?.progress_type||row?.progressType||"").toLowerCase();const entry=normalizeQuranProgressEntry({surahNumber:row?.surah_number,surahName:row?.surah_name,ayahNumber:row?.ayah_number,juzNumber:row?.juz_number,translationId:row?.translation_id,language:row?.language,scrollOffset:row?.scroll_offset,updatedAt:row?.updated_at},type==="manual"?"manual":"automatic");if(!entry)return;if(type==="manual")state.manual=entry;else state.automatic=entry});return state}
 async function fetchAccountQuranProgress(userId){const rows=await supabaseRest(`user_quran_progress?user_id=eq.${encodeURIComponent(userId)}&select=progress_type,surah_number,surah_name,ayah_number,juz_number,translation_id,language,scroll_offset,updated_at&order=updated_at.desc`);return quranProgressFromRemoteRows(rows)}
 async function replaceAccountQuranProgress(userId,state){await supabaseRest(`user_quran_progress?user_id=eq.${encodeURIComponent(userId)}`,{method:"DELETE",prefer:"return=minimal"});const rows=[];if(state?.manual)rows.push({user_id:userId,progress_type:"manual",surah_number:state.manual.surahNumber,surah_name:state.manual.surahName,ayah_number:state.manual.ayahNumber,juz_number:state.manual.juzNumber||null,translation_id:state.manual.translationId||null,language:state.manual.language||null,scroll_offset:state.manual.scrollOffset||0,updated_at:state.manual.updatedAt});if(state?.automatic)rows.push({user_id:userId,progress_type:"automatic",surah_number:state.automatic.surahNumber,surah_name:state.automatic.surahName,ayah_number:state.automatic.ayahNumber,juz_number:state.automatic.juzNumber||null,translation_id:state.automatic.translationId||null,language:state.automatic.language||null,scroll_offset:state.automatic.scrollOffset||0,updated_at:state.automatic.updatedAt});if(!rows.length)return true;await supabaseRest("user_quran_progress",{method:"POST",prefer:"return=minimal",body:rows});return true}
 function mergeQuranProgressState(localState,remoteState){const merged=defaultQuranReadingState();const localManual=normalizeQuranProgressEntry(localState?.manual,"manual");const remoteManual=normalizeQuranProgressEntry(remoteState?.manual,"manual");merged.manual=localManual||remoteManual||null;const localAuto=normalizeQuranProgressEntry(localState?.automatic,"automatic");const remoteAuto=normalizeQuranProgressEntry(remoteState?.automatic,"automatic");const localTs=Date.parse(localAuto?.updatedAt||"")||0;const remoteTs=Date.parse(remoteAuto?.updatedAt||"")||0;merged.automatic=localTs>=remoteTs?localAuto:remoteAuto;merged.settings={...getQuranReadingSettings()};return merged}
 async function mergeAccountQuranProgress(userId){const remote=await fetchAccountQuranProgress(userId);const local=getQuranReadingState();const merged=mergeQuranProgressState(local,remote);setQuranReadingState(merged);await replaceAccountQuranProgress(userId,merged);return merged}
-async function syncAccountQuranProgress({silent=true}={}){const s=accountSession();if(!s)return false;try{await replaceAccountQuranProgress(s.id,getQuranReadingState());return true}catch(e){if(!silent&&localStorage.getItem(QURAN_PROGRESS_SYNC_WARN_KEY)!=="1"){alert("Qurʾān-Cloud-Sync ist noch nicht bereit. Lokaler Lesestand bleibt aktiv.");localStorage.setItem(QURAN_PROGRESS_SYNC_WARN_KEY,"1")}return false}}
+async function syncAccountQuranProgress({silent=true}={}){const s=accountSession();if(!s)return false;if(!navigator.onLine){queueOfflineAction({type:"sync-quran-progress",payload:{userId:s.id}});return false}try{await replaceAccountQuranProgress(s.id,getQuranReadingState());return true}catch(e){if(!silent&&localStorage.getItem(QURAN_PROGRESS_SYNC_WARN_KEY)!=="1"){alert("Qurʾān-Cloud-Sync ist noch nicht bereit. Lokaler Lesestand bleibt aktiv.");localStorage.setItem(QURAN_PROGRESS_SYNC_WARN_KEY,"1")}return false}}
 async function sendAnalyticsEvent(eventType,meta){meta=meta||{};if(!hasSupabaseCfg())return false;const url=String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"");try{const res=await fetch(url+"/rest/v1/site_events",{method:"POST",headers:{...supabaseHeaders(),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({event_type:eventType,content_type:meta.contentType||null,content_id:meta.contentId!=null?String(meta.contentId):null,content_title:meta.contentTitle||null,session_id:analyticsSessionId()})});return res.ok}catch(e){return false}}
 async function fetchAnalyticsDashboard(){if(!hasSupabaseCfg())throw new Error("Supabase nicht konfiguriert");const url=String(analyticsCfg().supabaseUrl||"").replace(/\/$/,"");const h=supabaseHeaders();const [liveRes,totalsRes]=await Promise.all([fetch(url+"/rest/v1/rpc/analytics_live",{headers:h}),fetch(url+"/rest/v1/stats_totals?select=content_type,content_id,content_title,views,shares,saves&order=views.desc&limit=200",{headers:h})]);if(!liveRes.ok)throw new Error("Live-Statistik Fehler "+liveRes.status);if(!totalsRes.ok)throw new Error("Beitrags-Statistik Fehler "+totalsRes.status);const live=await liveRes.json();const totals=await totalsRes.json();return{live:live||{},totals:Array.isArray(totals)?totals:[]}}
 function trackAnalytics(eventType,meta){meta=meta||{};try{window.DarAnalytics&&DarAnalytics.track(eventType,meta)}catch(e){}sendAnalyticsEvent(eventType,meta)}
@@ -10625,22 +11102,126 @@ function pinnedPostsFor(def){return posts.filter(p=>def.keys.some(k=>[p.title,p.
 function renderPinnedBox(){
   return `<section class="pinned-box collapsible-section"><div class="collapsible-head"><h3 class="pinned-title">Wichtige Beiträge</h3><button class="collapse-toggle premium-pill" type="button" data-collapse-target="pinnedGrid">Alle anzeigen</button></div><div id="pinnedGrid" class="pinned-grid collapsible-grid collapsed">${PINNED_DEFS.map(d=>{const found=pinnedPostsFor(d)[0];return `<article class="pinned-card has-icon" ${found?`data-nav="post" data-value="${esc(found.id)}"`:"data-nav=\"topics\""}><div class="folder-icon">${topicEmblem(d.title)}</div><div class="card-text"><h3>${esc(d.title)}</h3><p>${found?esc(found.title):"Bereich öffnen"}</p></div></article>`}).join("")}</div><div class="collapsible-fade">Es werden zunächst drei Einstiege angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
 }
+const OFFLINE_PREP_STATE_KEY="darOfflinePrepStateV1";
+const OFFLINE_SYNC_META_KEY="darOfflineSyncMetaV1";
+const OFFLINE_DB_NAME="darOfflineStoreV1";
+const OFFLINE_DB_VERSION=1;
+let offlinePrepUiState={running:false,total:0,loaded:0,failed:0,bytes:0,percent:0,updatedAt:null,status:"idle"};
+function storageBytesLabel(bytes){const n=Number(bytes||0);if(!Number.isFinite(n)||n<=0)return"0 MB";const mb=n/1024/1024;if(mb<1)return`${Math.max(1,Math.round(mb*1000))} KB`;return`${mb.toFixed(mb>=100?0:1)} MB`}
+function readOfflinePrepState(){const s=getJson(OFFLINE_PREP_STATE_KEY,null);if(s&&typeof s==="object"){offlinePrepUiState={...offlinePrepUiState,...s};return offlinePrepUiState}return offlinePrepUiState}
+function writeOfflinePrepState(patch){offlinePrepUiState={...readOfflinePrepState(),...(patch||{})};setJson(OFFLINE_PREP_STATE_KEY,offlinePrepUiState);return offlinePrepUiState}
+function renderOfflineStatusLine(){const s=readOfflinePrepState();const stamp=s.updatedAt?new Date(s.updatedAt).toLocaleString("de-DE"):"-";if(!navigator.onLine)return`Offline · Stand vom ${stamp}`;if(s.running)return"Online · Inhalte werden geprüft";if(s.status==="done")return`Aktuell · zuletzt synchronisiert um ${stamp}`;return"Online · Offline-Paket bereit zum Aktualisieren"}
+async function openOfflineDb(){return await new Promise((resolve,reject)=>{try{const req=indexedDB.open(OFFLINE_DB_NAME,OFFLINE_DB_VERSION);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains("meta"))db.createObjectStore("meta",{keyPath:"key"});if(!db.objectStoreNames.contains("queue"))db.createObjectStore("queue",{keyPath:"id"});if(!db.objectStoreNames.contains("progress"))db.createObjectStore("progress",{keyPath:"key"})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)}catch(e){reject(e)}})}
+async function offlineDbSet(store,key,value){try{const db=await openOfflineDb();await new Promise((resolve,reject)=>{const tx=db.transaction(store,"readwrite");tx.objectStore(store).put({key,value,updatedAt:new Date().toISOString()});tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)});db.close();return true}catch(e){return false}}
+async function offlineDbGet(store,key){try{const db=await openOfflineDb();const data=await new Promise((resolve,reject)=>{const tx=db.transaction(store,"readonly");const req=tx.objectStore(store).get(key);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)});db.close();return data?data.value:null}catch(e){return null}}
+async function estimateOfflineStorage(){let estimate=null;let persistent=false;try{if(navigator.storage?.estimate)estimate=await navigator.storage.estimate()}catch(e){}try{if(navigator.storage?.persist)persistent=await navigator.storage.persist()}catch(e){}return{estimate,persistent}}
+async function fetchOfflineContentManifest(){try{const r=await fetch(`/data/offline-content-manifest.json?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)return null;return await r.json()}catch(e){return null}}
+function quranOfflineUrls(){if(!quranMeta||!Array.isArray(quranMeta.surahs))return[];const out=[];quranMeta.surahs.forEach(s=>{const id=Number(s?.id);if(!Number.isFinite(id)||id<1||id>114)return;out.push(quranSurahFile(id));out.push(quranTafsirFile(id));out.push(quranAtharFile(id))});return out}
+function postOfflineUrls(){const names=new Set();(posts||[]).forEach(p=>{const file=String(p?._sourceFile||"").trim();if(file.endsWith(".md"))names.add(file)});return[...names].map(name=>`/${POSTS_DIR}/${encodeURIComponent(name)}`)}
+async function buildOfflinePrepareUrls(){const manifest=await fetchOfflineContentManifest();const core=[];if(manifest){core.push(...(manifest.requiredStatic||[]),...(manifest.requiredData||[]))}else{core.push("/", "/index.html", "/test/", "/test/index.html", "/content/duas/duas.json", "/content/quran/surahs.json", "/data/quran-search-index.json", "/data/quran-search-keywords.json", "/data/quiz-questions.json")}core.push(...quranOfflineUrls(),...postOfflineUrls());return [...new Set(core.map(x=>String(x||"").trim()).filter(Boolean))]}
+function offlineProgressHtml(){const s=readOfflinePrepState();if(!s.running&&s.status!=="done"&&s.status!=="error")return"";const p=Math.max(0,Math.min(100,Number(s.percent||0)));return `<div class="offline-prep-progress"><div><b>${s.running?"Offline-Paket wird vorbereitet":"Offline-Paket Status"}</b><span>${s.loaded||0}/${s.total||0} Dateien · ${p}% · ${storageBytesLabel(s.bytes)}</span></div><div class="offline-prep-bar"><span style="width:${p}%"></span></div>${s.failed?`<small>${s.failed} Dateien konnten nicht geladen werden.</small>`:""}</div>`}
 function renderOfflineBox(){
   const summary=offlineLibrarySummary();
-  const detail=posts.length?` (${summary})`:" – beim ersten Mal bitte einmal online öffnen, danach sind alle Inhalte automatisch offline da";
-  return `<section id="offlineBox" class="offline-box"><strong>Offline-Modus aktiv</strong><br>Alle zuvor geladenen Inhalte sind offline verfügbar${detail}. ♡ ist nur für Favoriten, nicht für Offline nötig.</section>`;
+  return `<section id="offlineBox" class="offline-box"><strong id="offlineStatusLine">${esc(renderOfflineStatusLine())}</strong><br><span id="offlineStatusDetail">Lokaler Inhalt: ${esc(summary)}. Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv.</span>${offlineProgressHtml()}</section>`;
 }
 function updateOfflineBox(){
   const box=$("offlineBox");
   if(!box)return;
-  box.classList.toggle("show",!navigator.onLine);
-  if(navigator.onLine)return;
-  const summary=offlineLibrarySummary();
-  const detail=posts.length?` (${summary})`:" – beim ersten Mal bitte einmal online öffnen, danach sind alle Inhalte automatisch offline da";
-  box.innerHTML=`<strong>Offline-Modus aktiv</strong><br>Alle zuvor geladenen Inhalte sind offline verfügbar${detail}. ♡ ist nur für Favoriten, nicht für Offline nötig.`;
+  const show=!navigator.onLine||readOfflinePrepState().running||readOfflinePrepState().status==="done";
+  box.classList.toggle("show",show);
+  if(!show)return;
+  const line=$("offlineStatusLine"),detail=$("offlineStatusDetail");
+  if(line)line.textContent=renderOfflineStatusLine();
+  if(detail)detail.textContent=`Lokaler Inhalt: ${offlineLibrarySummary()}. Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv.`;
+  const old=box.querySelector(".offline-prep-progress");
+  if(old)old.remove();
+  const wrap=document.createElement("div");
+  wrap.innerHTML=offlineProgressHtml();
+  if(wrap.firstElementChild)box.appendChild(wrap.firstElementChild);
 }
 function renderAppSaveBox(){
-  return `<section class="app-save-box"><h3>App speichern & Offline</h3><p><b>Offline:</b> Nach dem ersten Online-Besuch sind <b>alle Beiträge und Duʿāʾ</b> auf diesem Gerät verfügbar – ohne jeden Beitrag einzeln zu speichern. ♡ Speichern ist nur für Favoriten.</p><p><b>iPhone/iPad:</b> In Safari auf Teilen tippen und „Zum Home-Bildschirm“ wählen.</p><p><b>Android:</b> Browser-Menü öffnen und „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.</p></section>`;
+  return `<section class="app-save-box"><h3>App speichern & Offline</h3><p><b>Offline:</b> Nach der Einrichtung zeigt die App immer den letzten vollständig synchronisierten Stand. Lokale Daten bleiben offline nutzbar und werden später synchronisiert.</p><div class="article-actions"><button id="offlinePrepareBtn" class="action-btn primary" type="button">App für Offline-Nutzung vorbereiten</button><button id="offlineStorageBtn" class="action-btn" type="button">Speicher prüfen</button></div><p id="offlinePrepHint" class="source-note">Beim Start werden Dateien, Qurʾān-Daten, Beiträge, Suchdaten und Quizdaten lokal vorbereitet.</p><p><b>iPhone/iPad:</b> In Safari auf Teilen tippen und „Zum Home-Bildschirm“ wählen.</p><p><b>Android:</b> Browser-Menü öffnen und „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.</p></section>`;
+}
+async function startOfflinePreparation(){
+  if(!("serviceWorker" in navigator)){alert("Service Worker ist auf diesem Gerät nicht verfügbar.");return}
+  if(readOfflinePrepState().running)return;
+  writeOfflinePrepState({running:true,status:"running",failed:0,loaded:0,total:0,percent:0,updatedAt:new Date().toISOString()});
+  updateOfflineBox();
+  const hint=$("offlinePrepHint");if(hint)hint.textContent="Offline-Paket wird vorbereitet ...";
+  const storage=await estimateOfflineStorage();
+  if(storage.estimate&&storage.estimate.quota&&storage.estimate.usage){
+    const free=Math.max(0,Number(storage.estimate.quota)-Number(storage.estimate.usage));
+    if(free<220*1024*1024){if(hint)hint.textContent=`Wenig freier Speicher: ${storageBytesLabel(free)} verfügbar. Vorbereitung läuft trotzdem.`}
+  }
+  const urls=await buildOfflinePrepareUrls();
+  await offlineDbSet("meta","syncStatus",{state:"running",count:urls.length,at:new Date().toISOString()});
+  const reg=await navigator.serviceWorker.ready;
+  reg.active?.postMessage({type:"OFFLINE_PREPARE",urls,requestedBy:"user"});
+}
+async function showOfflineStorageInfo(){
+  const info=await estimateOfflineStorage();
+  const est=info.estimate||{};
+  const usage=storageBytesLabel(est.usage||0);
+  const quota=storageBytesLabel(est.quota||0);
+  alert(`Speicherstand:\nBelegt: ${usage}\nVerfügbar gesamt: ${quota}\nPersistenter Speicher: ${info.persistent?"aktiv":"nicht bestätigt"}`);
+}
+function handleOfflineWorkerMessage(data){
+  if(!data||typeof data!=="object")return;
+  if(data.type==="OFFLINE_PREPARE_START"){
+    writeOfflinePrepState({running:true,status:"running",total:Number(data.total||0),loaded:0,failed:0,bytes:0,percent:0,updatedAt:new Date().toISOString()});
+    updateOfflineBox();
+    return;
+  }
+  if(data.type==="OFFLINE_PREPARE_PROGRESS"){
+    writeOfflinePrepState({running:true,status:"running",total:Number(data.total||0),loaded:Number(data.loaded||0),failed:Number(data.failed||0),bytes:Number(data.bytes||0),percent:Number(data.percent||0),updatedAt:new Date().toISOString()});
+    updateOfflineBox();
+    return;
+  }
+  if(data.type==="OFFLINE_PREPARE_DONE"){
+    const ok=!!data.ok;
+    writeOfflinePrepState({running:false,status:ok?"done":"error",total:Number(data.total||0),loaded:Number(data.loaded||0),failed:Number(data.failed||0),bytes:Number(data.bytes||0),percent:ok?100:Number(data.percent||0),updatedAt:new Date().toISOString()});
+    setJson(OFFLINE_SYNC_META_KEY,{appVersion:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",contentVersion:String(window.__darRemoteBuildId||""),databaseSchemaVersion:OFFLINE_DB_VERSION,lastSuccessfulSync:ok?new Date().toISOString():(getJson(OFFLINE_SYNC_META_KEY,{lastSuccessfulSync:""}).lastSuccessfulSync||""),syncStatus:ok?"done":"error",pendingLocalChanges:getJson("darOfflineQueueCountV1",0),acknowledgedUpdateVersion:String(window.__darRemoteBuildId||"")});
+    offlineDbSet("meta","syncStatus",{state:ok?"done":"error",payload:data,at:new Date().toISOString()});
+    const hint=$("offlinePrepHint");
+    if(hint)hint.textContent=ok?"Offline-Nutzung vollständig eingerichtet":"Offline-Paket unvollständig. Bitte erneut starten.";
+    updateOfflineBox();
+    return;
+  }
+  if(data.type==="OFFLINE_PREPARE_BUSY"){
+    const hint=$("offlinePrepHint");if(hint)hint.textContent="Offline-Vorbereitung läuft bereits im Hintergrund.";
+  }
+}
+function queueOfflineAction(action){
+  const item={id:`q-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,type:String(action?.type||"generic"),payload:action?.payload||{},createdAt:new Date().toISOString()};
+  const list=getJson("darOfflineQueueV1",[]);
+  list.push(item);
+  setJson("darOfflineQueueV1",list.slice(-500));
+  setJson("darOfflineQueueCountV1",list.length);
+  offlineDbSet("queue",item.id,item);
+  return item.id;
+}
+async function flushOfflineQueue(){
+  if(!navigator.onLine)return false;
+  const list=getJson("darOfflineQueueV1",[]);
+  if(!list.length)return true;
+  const keep=[];
+  for(const item of list){
+    if(item.type==="sync-account-saved"){const ok=await syncAccountSaved({silent:true});if(!ok)keep.push(item);continue}
+    if(item.type==="sync-quran-progress"){const ok=await syncAccountQuranProgress({silent:true});if(!ok)keep.push(item);continue}
+  }
+  setJson("darOfflineQueueV1",keep);
+  setJson("darOfflineQueueCountV1",keep.length);
+  return keep.length===0;
+}
+async function initOfflineEngine(){
+  readOfflinePrepState();
+  await offlineDbSet("meta","versions",{appVersion:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",databaseSchemaVersion:OFFLINE_DB_VERSION,updatedAt:new Date().toISOString()});
+  if("serviceWorker" in navigator&&!window.__darOfflineMessageBound){
+    window.__darOfflineMessageBound=true;
+    navigator.serviceWorker.addEventListener("message",(ev)=>handleOfflineWorkerMessage(ev.data||{}));
+    try{const reg=await navigator.serviceWorker.ready;reg.active?.postMessage({type:"OFFLINE_PREPARE_STATUS"})}catch(e){}
+  }
+  if(navigator.onLine)flushOfflineQueue().catch(()=>{});
 }
 function searchMatchLabel(post,q){
   if(!q)return "";
@@ -11326,29 +11907,54 @@ async function activatePrayerReminder(){
   const reminder=$("enablePrayerReminderBtn");
   const old=reminder?reminder.textContent:"";
   if(reminder){reminder.textContent="Wird aktiviert…";reminder.disabled=true}
-  let permission=getNotificationPermission();
-  if(permission!=="granted")permission=await requestNotificationPermission();
-  if(permission!=="granted"){
-    if(reminder){reminder.textContent=old;reminder.disabled=false}
-    alert("Benachrichtigungen wurden nicht erlaubt. Bitte erlaube sie für diese Seite in den Browser-/Geräteeinstellungen und versuche es erneut.");
-    return
-  }
-  setPrayerSettings({reminder:true});
   const wasInactive=!s.reminder;
-  const OS=await waitForOneSignalReady();
-  if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});await savePushRegistration(getPrayerSettings(),OS)}
-  const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
-  await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:ok});
-  updatePrayerReminderButtons();
-  updatePushFloatButton();
-  if(reminder)reminder.disabled=false;
-  if(getPrayerSettings().reminder){
-    if(!ok){
-      maintainPushHealth({silent:true}).catch(()=>{});
-      alert("Erinnerung ist gespeichert. Push wird im Hintergrund erneut verbunden – bitte kurz warten und ggf. mit „Test senden“ prüfen.")
-    }else if(wasInactive){
-      alert("✓ Gebets-Erinnerung ist dauerhaft aktiv. Du bekommst 15 Min vorher und zur Gebetszeit eine Meldung – auch auf dem Sperrbildschirm.")
+  try{
+    await ensureOneSignalServiceWorkerReady();
+    let permission=getNotificationPermission();
+    if(permission!=="granted")permission=await requestNotificationPermission();
+    if(permission!=="granted"){
+      alert("Benachrichtigungen wurden nicht erlaubt. Bitte erlaube sie für diese Seite in den Browser-/Geräteeinstellungen und versuche es erneut.");
+      return;
     }
+    setPrayerSettings({reminder:true});
+    let OS=await waitForOneSignalReady(30000);
+    let subscribed=false;
+    if(OS){
+      await ensurePushUserLogin(OS);
+      subscribed=await waitForPushOptIn(OS,30000);
+      if(!subscribed){
+        await repairPushConnection({silent:true}).catch(()=>{});
+        OS=await waitForOneSignalReady(15000);
+        if(OS){
+          await ensurePushUserLogin(OS);
+          subscribed=await waitForPushOptIn(OS,30000);
+        }
+      }
+      if(OS&&subscribed){
+        await ensurePostPushTags(OS);
+        await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
+        await savePushRegistration(getPrayerSettings(),OS);
+      }
+    }
+    const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
+    await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:ok});
+    if(getPrayerSettings().reminder){
+      if(!ok){
+        maintainPushHealth({silent:true}).catch(()=>{});
+        alert("Erinnerung ist gespeichert. Push wird im Hintergrund erneut verbunden – bitte kurz warten und ggf. mit „Test senden“ prüfen.");
+      }else if(wasInactive){
+        alert("✓ Gebets-Erinnerung ist dauerhaft aktiv. Du bekommst 15 Min vorher und zur Gebetszeit eine Meldung – auch auf dem Sperrbildschirm.");
+      }
+    }
+  }catch(e){
+    console.warn("Gebets-Erinnerung Aktivierung:",e);
+    if(wasInactive)setPrayerSettings({reminder:false});
+    alert("Die Aktivierung konnte nicht abgeschlossen werden. Bitte Startseite → Aktualisieren antippen und danach erneut aktivieren.");
+  }finally{
+    if(reminder){reminder.textContent=old||"🔔 Erinnerung aktivieren";reminder.disabled=false}
+    updatePrayerReminderButtons();
+    updatePushFloatButton();
+    updateHighlightPushButtons();
   }
 }
 function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
@@ -11635,6 +12241,13 @@ function buildImageEditorMainFromPost(post){
     const quote=stripImageEditorMarkdown(findQuote(post)||"");
     if(quote&&!extractNameLineCandidate(quote))parsed.bodyText=quote.replace(/^>\s?/gm,"").trim();
   }
+  if(!parsed.bodyText&&Array.isArray(post?.slides)){
+    for(const slide of post.slides){
+      const fallback=[slide?.quote,slide?.text,slide?.explanation,slide?.title].map(x=>stripImageEditorMarkdown(x||"").trim()).find(Boolean);
+      if(fallback){parsed.bodyText=fallback;break}
+    }
+  }
+  if(!parsed.bodyText)parsed.bodyText=stripImageEditorMarkdown(post?.title||"").trim();
   return composeImageEditorMainText(parsed,{includeFazit:false});
 }
 function normalizeImageEditorMainText(text,fallbackScholar){
@@ -11716,7 +12329,8 @@ function setImageEditorBlockOffsets(block,offsetX,offsetY){if(block==="source"){
   
   function seedImageEditorFromAyah(surahId, ayahId, ar, de, surahName){
     const source=surahName?surahName+" · Ayah "+ayahId:"Sure "+surahId+" · Ayah "+ayahId;
-    imageEditorState.mainText=(ar||"").trim()+(de?(("\n\n")+de.trim()):"");
+    const parts=[String(ar||"").trim(),String(de||"").trim()].filter(Boolean);
+    imageEditorState.mainText=parts.join("\n\n")||`Qurʾān ${surahId}:${ayahId}`;
     imageEditorState.sourceText="Qurʾān | "+source;
   imageEditorState.font="classic";
   imageEditorState.fontSize=42;
@@ -11728,8 +12342,8 @@ function setImageEditorBlockOffsets(block,offsetX,offsetY){if(block==="source"){
 function seedImageEditorFromDua(duaId){
     const d=DUAS.find(x=>String(x.id)===String(duaId));
     if(!d)return;
-    const parts=[d.ar&&d.ar.trim()?d.ar.trim():null,d.tr&&d.tr.trim()?d.tr.trim():null].filter(Boolean);
-    imageEditorState.mainText=parts.join("\n\n");
+    const parts=[d.ar&&d.ar.trim()?d.ar.trim():null,d.tr&&d.tr.trim()?d.tr.trim():null,d.de&&d.de.trim()?d.de.trim():null].filter(Boolean);
+    imageEditorState.mainText=parts.join("\n\n")||String(d.title||"Duʿāʾ");
     imageEditorState.sourceText=[d.title,d.src].filter(Boolean).join(" | ");
     imageEditorState.font="serif";
     imageEditorState.fontSize=48;
@@ -12218,6 +12832,59 @@ function findHadithById(id){for(const col of hadithCollections.values()){const f
 function hadithShareText(h){return `${h.arabic||""}\n\n${h.german||"Noch keine geprüfte deutsche Übersetzung hinterlegt."}\n\nQuelle:\n${h.source||""}\n\nÜbersetzung:\n${h.germanSource||"nicht hinterlegt"} ${h.germanVersion||""}\n\nDAR AL TAWḤID\ndar-al-tawhid.de`.trim()}
 function bindHadithLibraryEvents(){if(currentRoute.view!=="hadith")return;const rerenderHadith=()=>{window.DARScrollManager?.preserveNextRender?.();render()};const search=$("hadithSearchInput");if(search){search.oninput=()=>{try{localStorage.setItem("darHadithSearchQueryV1",search.value||"")}catch(e){}clearTimeout(window.__hadithSearchRenderTimer);window.__hadithSearchRenderTimer=setTimeout(rerenderHadith,140)}}const status=$("hadithStatusFilter"),grade=$("hadithGradeFilter"),language=$("hadithLanguageFilter");if(status)status.onchange=()=>{hadithFilters.status=status.value||"";hadithActiveChapter="";hadithActiveSection="";const visible=hadithVisibleBooks();if(visible.length&&!visible.some(b=>String(b.id)===String(hadithActiveBook)))hadithActiveBook=visible[0].id;saveHadithFilters();rerenderHadith()};if(grade)grade.onchange=()=>{hadithFilters.grade=grade.value||"";saveHadithFilters();rerenderHadith()};if(language)language.onchange=()=>{hadithFilters.language=language.value||"german";saveHadithFilters();rerenderHadith()};const dailySave=$("hadithDailySave");if(dailySave)dailySave.onclick=()=>{const data={enabled:$("hadithDailyEnabled")?.value==="1",time:$("hadithDailyTime")?.value||"08:00",scope:$("hadithDailyScope")?.value||"sahih"};try{localStorage.setItem(HADITH_DAILY_KEY,JSON.stringify(data))}catch(e){}alert("Hadith-des-Tages Einstellung gespeichert.")};document.querySelectorAll("[data-hadith-level]").forEach(btn=>{btn.onclick=()=>{const level=btn.getAttribute("data-hadith-level");if(level==="books"){hadithActiveChapter="";hadithActiveSection=""}if(level==="chapters"){hadithActiveChapter="";hadithActiveSection=""}if(level==="sections"){hadithActiveSection=""}rerenderHadith()}});document.querySelectorAll("[data-hadith-book]").forEach(btn=>{btn.onclick=async()=>{const id=btn.getAttribute("data-hadith-book")||"";hadithActiveBook=id;hadithActiveChapter="";hadithActiveSection="";try{localStorage.removeItem("darHadithSearchQueryV1")}catch(e){}const book=hadithBooks.find(b=>String(b.id)===id);if(book?.status==="imported")await ensureHadithCollection(id);window.DARScrollManager?.preserveNextRender?.();navigate("hadith",id,{skipPush:false,noAnim:true});render()}});document.querySelectorAll("[data-hadith-chapter]").forEach(btn=>{btn.onclick=()=>{hadithActiveChapter=btn.getAttribute("data-hadith-chapter")||"";hadithActiveSection="";rerenderHadith()}});document.querySelectorAll("[data-hadith-section]").forEach(btn=>{btn.onclick=()=>{hadithActiveSection=btn.getAttribute("data-hadith-section")||"";rerenderHadith()}});document.querySelectorAll("[data-hadith-arabic]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const id=btn.getAttribute("data-hadith-arabic");const box=document.getElementById("hadithArabic-"+id);if(!box)return;box.classList.toggle("is-hidden");btn.classList.toggle("is-active",!box.classList.contains("is-hidden"))}});document.querySelectorAll("[data-hadith-favorite]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const id=btn.getAttribute("data-hadith-favorite");toggleHadithFavorite(id);rerenderHadith()}});document.querySelectorAll("[data-hadith-copy]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const h=findHadithById(btn.getAttribute("data-hadith-copy"));if(!h)return;const text=hadithShareText(h);try{await navigator.clipboard.writeText(text);alert("Hadith wurde kopiert.")}catch(e){prompt("Kopiere den Hadith:",text)}}});document.querySelectorAll("[data-hadith-share]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const h=findHadithById(btn.getAttribute("data-hadith-share"));if(!h)return;const text=hadithShareText(h);if(navigator.share){try{await navigator.share({title:h.bookTitle||"Hadith",text});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Hadith wurde kopiert.")}catch(e){prompt("Kopiere den Hadith:",text)}}});document.querySelectorAll("[data-hadith-translate]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const h=findHadithById(btn.getAttribute("data-hadith-translate"));if(!h)return;let payload=null;try{const res=await fetch("/api/hadith/translate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({source:"ar",target:"de",text:h.arabic||"",bookId:h.bookId||h.collection||hadithActiveBook,hadithId:h.id,sourceLabel:h.source||""})});if(res.ok)payload=await res.json()}catch(e){}if(!payload?.translation)payload=saveHadithMachineTranslation(h.id,fallbackHadithTranslation(h));else saveHadithMachineTranslation(h.id,payload.translation);const box=document.getElementById("hadithMachine-"+h.id);if(box){box.classList.remove("is-hidden");const span=box.querySelector("span");if(span)span.textContent=payload.translation||fallbackHadithTranslation(h)}btn.textContent="Hilfsübersetzung ✓";btn.classList.add("is-active")}})}
 
+/* quiz-premium-v3 unified renderer */
+const __QUIZ_SESSION_KEY=typeof QUIZ_SESSION_KEY==="string"?QUIZ_SESSION_KEY:"darQuizSessionV3";
+const __QUIZ_MARKED_KEY=typeof QUIZ_MARKED_KEY==="string"?QUIZ_MARKED_KEY:"darQuizMarkedQuestionIdsV1";
+const __QUIZ_HISTORY_KEY=typeof QUIZ_HISTORY_KEY==="string"?QUIZ_HISTORY_KEY:"darQuizHistoryV1";
+const __QUIZ_QUESTIONS_PATH=typeof QUIZ_QUESTIONS_PATH==="string"?QUIZ_QUESTIONS_PATH:"/data/quiz-questions.json";
+window.__darQuizState=window.__darQuizState||{questions:null,loading:null};
+const __QUIZ_META_PATTERNS=[
+  /\bBlock\s*\d+\s*[–-]\s*\d+\b/i,
+  /\b(dieser|diesem|diesen)\s+Block\b/i,
+  /\bLernpunkt\s+(dieses|dieser)\s+Blocks?\b/i,
+  /\bZusammenfassung\s+(dieses|dieser)\s+Blocks?\b/i,
+  /\bFragen\s+(dieses|dieser)\s+Blocks?\b/i,
+  /\bLern-App\b/i,
+  /\bislamische\s+Lern-App\b/i,
+  /\bQuiz-Bereich(?:s)?\b/i,
+  /\bQuiz-?System\b/i,
+  /\bdiese\s+App\b/i,
+  /\bApp\s+als\s+Lern/i,
+  /\bAbgeleitet\s+aus\s+den\s+Quellen\s+des\s+Blocks\b/i
+];
+function quizFallbackQuestions(){return[{id:"fallback-1",category:"Tawhid",topic:"Grundlagen",level:"Anfaenger",type:"multiple_choice",question:"Welche Aussage beschreibt Tawhid richtig?",answers:["Allah allein wird angebetet.","Jede Gewohnheit ist Gottesdienst.","Quellenpruefung ist unwichtig.","Tawhid betrifft nur Sprache."],correctIndex:0,explanation:"Tawhid bedeutet, Allah in der Anbetung allein zu stellen.",source:"Grundlage der veroeffentlichten Inhalte"}]}
+function quizStableHash(value){let h=0;const text=String(value||"");for(let i=0;i<text.length;i++)h=((h<<5)-h)+text.charCodeAt(i)|0;return Math.abs(h)}
+function detectInvalidMetaQuestion(question){const hay=[question?.question,question?.topic,question?.source,question?.explanation].join("\n");if(__QUIZ_META_PATTERNS.some(pattern=>pattern.test(hay)))return true;if(String(question?.sourceType||"")==="Zusammenfassung")return true;if(/Abgeleitet aus den Quellen des Blocks/i.test(question?.source||""))return true;if(/Lernpunkt dieses Blocks|Lehrreiche Zusammenfassung/i.test(question?.topic||""))return true;return false}
+function hasDuplicateAnswers(answers){if(!Array.isArray(answers))return false;const seen=new Set();for(const entry of answers){const key=String(entry||"").trim().toLowerCase().replace(/\s+/g," ");if(!key)continue;if(seen.has(key))return true;seen.add(key)}return false}
+function hasQuestionAnswerTypeMismatch(question){const q=String(question?.question||"").trim();const answers=Array.isArray(question?.answers)?question.answers.map(a=>String(a||"").trim().toLowerCase()):[];const binary=answers.length>=2&&answers.every(a=>["richtig","falsch","ja","nein"].includes(a));const open=/^(welche|welcher|welches|was|wer|wann|wo|warum|wie)\b/i.test(q);return binary&&open}
+function validateQuestionForPublicQuiz(question){const errors=[];if(!question?.id)errors.push("missing_id");if(!String(question?.question||"").trim())errors.push("missing_question");if(!Array.isArray(question?.answers))errors.push("missing_answers");if((question?.answers||[]).length<2)errors.push("too_few_answers");if(!Number.isInteger(question?.correctIndex)||question.correctIndex<0||question.correctIndex>=((question.answers||[]).length||0))errors.push("invalid_correct_index");if(detectInvalidMetaQuestion(question))errors.push("invalid_meta_question");if(String(question?.sourceType||"")==="Zusammenfassung")errors.push("invalid_summary_source_type");if(/Abgeleitet aus den Quellen des Blocks/i.test(question?.source||""))errors.push("invalid_block_source");if(!String(question?.explanation||"").trim())errors.push("missing_explanation");if(!String(question?.source||"").trim())errors.push("missing_source");if(hasQuestionAnswerTypeMismatch(question))errors.push("question_answer_mismatch");if(hasDuplicateAnswers(question?.answers))errors.push("duplicate_answers");return{valid:errors.length===0,errors}}
+function quizNormalizeQuestion(raw){const q={...(raw||{})};const answers=Array.isArray(q.answers)?q.answers.map(a=>String(a||"")):[];if(answers.length<2)return null;let correct=Number(q.correctIndex);if(!Number.isFinite(correct)||correct<0||correct>=answers.length)correct=0;const offset=answers.length>1?quizStableHash(`${q.id||""}|${q.question||""}|dar-quiz`)%(answers.length):0;if(offset>0){const rotated=answers.slice(offset).concat(answers.slice(0,offset));q.answers=rotated;correct=(correct-offset+answers.length)%answers.length}else q.answers=answers;q.correctIndex=correct;return q}
+async function loadQuizQuestions(){if(Array.isArray(window.__darQuizState.questions))return window.__darQuizState.questions;if(window.__darQuizState.loading)return window.__darQuizState.loading;window.__darQuizState.loading=(async()=>{try{const res=await fetch(`${__QUIZ_QUESTIONS_PATH}?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)throw new Error("Quizdaten nicht erreichbar");const rows=await res.json();const clean=Array.isArray(rows)?rows.filter(q=>{if(!q)return false;const validation=validateQuestionForPublicQuiz(q);return q.status==="published"&&q.reviewStatus==="approved"&&q.sourceChecked===true&&q.wordingChecked===true&&q.metaChecked===true&&q.logicChecked===true&&q.duplicateChecked===true&&validation.valid===true}).map(quizNormalizeQuestion).filter(Boolean):[];window.__darQuizState.questions=clean.length?clean:quizFallbackQuestions().map(quizNormalizeQuestion).filter(Boolean)}catch(e){window.__darQuizState.questions=quizFallbackQuestions().map(quizNormalizeQuestion).filter(Boolean)}finally{window.__darQuizState.loading=null}return window.__darQuizState.questions})();return window.__darQuizState.loading}
+function quizQuestions(){return Array.isArray(window.__darQuizState.questions)?window.__darQuizState.questions:[]}
+function quizSession(){return getJson(__QUIZ_SESSION_KEY,null)}
+function saveQuizSession(s){setJson(__QUIZ_SESSION_KEY,s)}
+function clearQuizSession(){try{localStorage.removeItem(__QUIZ_SESSION_KEY)}catch(e){}}
+function quizHistory(){return getJson(__QUIZ_HISTORY_KEY,[])}
+function saveQuizHistory(list){setJson(__QUIZ_HISTORY_KEY,(list||[]).slice(-40))}
+function getQuizMarkedIds(){return new Set(getJson(__QUIZ_MARKED_KEY,[]).map(String))}
+function saveQuizMarkedIds(ids){setJson(__QUIZ_MARKED_KEY,[...(ids||new Set())].map(String).slice(0,600))}
+function toggleQuizMarkedId(id){const marked=getQuizMarkedIds();const key=String(id||"");if(!key)return false;if(marked.has(key))marked.delete(key);else marked.add(key);saveQuizMarkedIds(marked);return marked.has(key)}
+function quizNormalizeLevel(v){return String(v||"").toLowerCase().replace("ä","a").replace("ö","o").replace("ü","u")}
+function quizQuestionById(id){return quizQuestions().find(q=>String(q.id)===String(id))}
+function quizShuffle(items){const arr=[...items];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+function quizBuildSession(config,questionIdsOverride=null){let picked=[];if(Array.isArray(questionIdsOverride)&&questionIdsOverride.length){picked=questionIdsOverride.map(id=>quizQuestionById(id)).filter(Boolean)}else{let pool=[...quizQuestions()];if(config.topic&&config.topic!=="all")pool=pool.filter(q=>String(q.category||q.topic||"")===config.topic);if(config.level&&config.level!=="all")pool=pool.filter(q=>quizNormalizeLevel(q.level)===quizNormalizeLevel(config.level));if(!pool.length)pool=[...quizQuestions()];picked=quizShuffle(pool).slice(0,Math.min(Number(config.count)||10,pool.length))}return{id:`quiz-${Date.now()}`,questionIds:picked.map(q=>q.id),index:0,answers:{},retries:{},bookmarked:{},config,startedAt:Date.now(),updatedAt:Date.now(),finished:false}}
+function quizConfig(){return{topic:$("quizTopic")?.value||"all",level:$("quizLevel")?.value||"all",count:Number($("quizCount")?.value||10)||10,mode:$("quizMode")?.value||"standard"}}
+function quizRouteMode(){return String(currentRoute.value||"").trim().toLowerCase()||"home"}
+function saveQuizHistoryEntry(session){if(!session||!session.finished)return;const list=quizHistory();if(list.some(x=>String(x.id)===String(session.id)))return;const total=session.questionIds.length;const values=session.questionIds.map(id=>session.answers?.[id]).filter(Boolean);const right=values.filter(a=>a.correct).length;const wrong=values.filter(a=>a.evaluated&&!a.correct).length;const topics={};session.questionIds.forEach(id=>{const q=quizQuestionById(id);if(!q)return;const key=String(q.category||q.topic||"Allgemein");if(!topics[key])topics[key]={topic:key,total:0,right:0,wrong:0};topics[key].total+=1;const ans=session.answers?.[id];if(ans?.evaluated){if(ans.correct)topics[key].right+=1;else topics[key].wrong+=1}});list.push({id:session.id,at:Date.now(),total,right,wrong,mode:session.config?.mode||"standard",durationSec:Math.max(1,Math.round((Date.now()-Number(session.startedAt||Date.now()))/1000)),topics:Object.values(topics)});saveQuizHistory(list)}
+function renderQuiz(){if(!quizQuestions().length){loadQuizQuestions().then(()=>{if(readRoute().view==="quiz")render()});return `${setPageHeader("Din-Quiz","Fragen werden geladen.","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-card">Quizfragen werden geladen ...</article></section>`}const mode=quizRouteMode();const session=quizSession();if(mode==="session")return session?(session.finished?renderQuizResult(session):renderQuizSession(session)):`${setPageHeader("Din-Quiz","Noch keine aktive Runde.","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-card"><h3 class="quiz-section-title">Keine aktive Runde</h3><p class="quiz-section-note">Stelle zuerst ein Quiz zusammen und starte dann deine Runde.</p><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn secondary" data-nav="quiz" data-value="home" type="button">Zurueck</button></div></article></section>`;if(mode==="stats")return renderQuizStatsPage(session);if(mode==="repeat")return renderQuizRepeatPage();return renderQuizHome(session)}
+function renderQuizHome(session){const qs=quizQuestions();const cats=[...new Set(qs.map(q=>q.category||q.topic).filter(Boolean))].sort();const levels=[...new Set(qs.map(q=>q.level).filter(Boolean))].sort();return `${setPageHeader("Din-Quiz","Geordnet nach Fragen, Statistik und Wiederholen","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-compact-intro"><span class="quiz-kicker">QUIZ</span><h2 class="quiz-main-title">Din-Quiz</h2><p class="quiz-subtitle">Geordnet nach Fragen, Statistik und Wiederholen</p></article><article class="quiz-card"><h3 class="quiz-section-title">Quiz zusammenstellen</h3><p class="quiz-section-note">Waehle Thema, Schwierigkeit, Anzahl und Modus.</p><div class="quiz-config-grid"><div class="quiz-field"><label for="quizTopic">Thema</label><div class="quiz-control"><select id="quizTopic"><option value="all">Gemischt</option>${cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select><span class="quiz-chevron">⌄</span></div></div><div class="quiz-field"><label for="quizLevel">Schwierigkeit</label><div class="quiz-control"><select id="quizLevel"><option value="all">Gemischt</option>${levels.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("")}</select><span class="quiz-chevron">⌄</span></div></div><div class="quiz-field"><label for="quizCount">Fragenanzahl</label><div class="quiz-control"><select id="quizCount">${[5,10,15,20].map(n=>`<option value="${n}" ${n===10?"selected":""}>${n}</option>`).join("")}</select><span class="quiz-chevron">⌄</span></div></div><div class="quiz-field"><label for="quizMode">Modus</label><div class="quiz-control"><select id="quizMode"><option value="standard">Standard</option><option value="lernen">Lernen</option></select><span class="quiz-chevron">⌄</span></div></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizStartBtn">Quiz starten</button><button class="quiz-btn secondary" type="button" id="quizQuickBtn">Schnellrunde</button></div><div class="quiz-start-hint" id="quizStartHint" hidden>Bitte zuerst eine Auswahl treffen.</div></article><section class="quiz-app-nav-grid"><button class="quiz-app-nav-card" type="button" data-nav="quiz" data-value="session"><span>📝</span><span><b>Fragenseite</b><span>Aktive Runde fortsetzen</span></span><span>›</span></button><button class="quiz-app-nav-card" type="button" data-nav="quiz" data-value="stats"><span>📊</span><span><b>Statistik</b><span>Ergebnisse und Themen auswerten</span></span><span>›</span></button><button class="quiz-app-nav-card" type="button" data-nav="quiz" data-value="repeat"><span>↻</span><span><b>Wiederholen</b><span>Gemerkte und falsche Fragen trainieren</span></span><span>›</span></button></section>${session?`<button class="quiz-btn primary" type="button" id="quizResumeBtn">Laufende Runde fortsetzen</button>`:""}</section>`}
+function renderQuizSession(session){const q=quizQuestionById(session.questionIds[session.index]);if(!q)return `${setPageHeader("Din-Quiz","Keine aktive Frage gefunden.","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-card"><h3 class="quiz-section-title">Frage nicht gefunden</h3><div class="quiz-actions"><button class="quiz-btn primary" id="quizNewBtn" type="button">Neue Runde</button><button class="quiz-btn secondary" data-nav="quiz" data-value="home" type="button">Zurueck</button></div></article></section>`;const answer=session.answers?.[q.id]||null;const selected=Number.isFinite(Number(answer?.selectedIndex))?Number(answer.selectedIndex):null;const evaluated=!!answer?.evaluated;const correct=Number(q.correctIndex);const isCorrect=evaluated&&selected===correct;const isWrong=evaluated&&!isCorrect;const progress=((session.index+1)/session.questionIds.length)*100;const sourceText=String(q.source||"Quelle wird geprueft.");return `${setPageHeader("Din-Quiz","Fragen, Feedback und Quellen","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-session"><div class="quiz-status"><div class="quiz-status-top"><span class="quiz-status-title">Frage ${session.index+1} von ${session.questionIds.length}</span><button class="quiz-btn secondary" type="button" id="quizEndBtn">Beenden</button></div><div class="quiz-status-meta">${esc(q.category||q.topic||"Allgemein")} · ${esc(q.level||"")}</div><div class="quiz-progress"><span style="width:${progress}%"></span></div></div><div class="quiz-question-panel"><h2 class="quiz-question">${esc(q.question||"Frage")}</h2></div><div class="quiz-answer-list">${(q.answers||[]).map((a,i)=>{const state=evaluated?(i===correct?" correct":i===selected&&i!==correct?" wrong":""):i===selected?" selected":"";const note=evaluated&&i===correct?"Richtig":evaluated&&i===selected&&i!==correct?"Falsch":"";return `<button type="button" class="quiz-answer${state}" data-quiz-answer="${i}" ${evaluated?"disabled":""}><span class="quiz-letter">${"ABCD"[i]||i+1}</span><span>${esc(a)}</span><span class="quiz-answer-note">${esc(note)}</span></button>`}).join("")}</div>${evaluated?`<div class="quiz-feedback ${isCorrect?"is-good":"is-bad"}"><b>${isCorrect?"Richtig beantwortet.":"Falsch beantwortet."}</b><p>${isCorrect?"Du kannst zur naechsten Frage wechseln.":"Du kannst wiederholen, merken oder dennoch zur naechsten Frage gehen."}</p></div><div class="quiz-explain"><b class="quiz-status-warn">Erklaerung</b><p>${esc(q.explanation||"Keine zusaetzliche Erklaerung hinterlegt.")}</p></div><div class="quiz-source-box"><b>Quelle</b><p>${esc(sourceText)}</p></div>`:""}<div class="quiz-session-actions"><button class="quiz-btn secondary" type="button" id="quizPrevBtn">Zurueck</button>${!evaluated?`<button class="quiz-btn primary" type="button" disabled>Antwort auswaehlen</button>`:isWrong?`<button class="quiz-btn secondary" type="button" id="quizRetryBtn">Wiederholen</button><button class="quiz-btn secondary" type="button" id="quizRememberBtn">${(session.bookmarked?.[q.id]||getQuizMarkedIds().has(String(q.id)))?"Gemerkt":"Merken"}</button><button class="quiz-btn primary" type="button" id="quizNextBtn">${session.index>=session.questionIds.length-1?"Ergebnis anzeigen":"Naechste Frage"}</button>`:`<button class="quiz-btn primary" type="button" id="quizNextBtn">${session.index>=session.questionIds.length-1?"Ergebnis anzeigen":"Naechste Frage"}</button>`}</div></article></section>`}
+function renderQuizTopicStats(session){const map=new Map();session.questionIds.forEach(id=>{const q=quizQuestionById(id);if(!q)return;const key=String(q.category||q.topic||"Allgemein");const row=map.get(key)||{total:0,right:0,wrong:0};row.total+=1;const ans=session.answers?.[id];if(ans?.evaluated){if(ans.correct)row.right+=1;else row.wrong+=1}map.set(key,row)});const rows=[...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],"de"));if(!rows.length)return "<div class='quiz-result-empty'>Keine Themenstatistik vorhanden.</div>";return `<div class="quiz-topic-stats">${rows.map(([topic,row])=>`<article class="quiz-topic-row"><b>${esc(topic)}</b><span>${row.right}/${row.total} richtig · ${row.wrong} falsch</span></article>`).join("")}</div>`}
+function renderQuizAnswerAudit(session){const rows=session.questionIds.map(id=>{const q=quizQuestionById(id);if(!q)return"";const answer=session.answers?.[id];const selectedIdx=Number(answer?.selectedIndex);const selectedText=Number.isFinite(selectedIdx)&&Array.isArray(q.answers)?q.answers[selectedIdx]:"-";const correctText=Array.isArray(q.answers)?q.answers[Number(q.correctIndex)]:"";const state=answer?.evaluated?(answer.correct?"ok":"bad"):"skip";return `<article class="quiz-audit-row ${state}"><b>${esc(q.question||"Frage")}</b><span>Deine Antwort: ${esc(selectedText)}</span><span>Korrekt: ${esc(correctText||"-")}</span><small>${esc(q.source||"Quelle wird geprueft.")}</small></article>`}).filter(Boolean);return rows.length?`<div class="quiz-audit-list">${rows.join("")}</div>`:"<div class='quiz-result-empty'>Kein Antwortprotokoll vorhanden.</div>"}
+function renderQuizResult(session){const total=session.questionIds.length;const values=session.questionIds.map(id=>session.answers?.[id]).filter(Boolean);const right=values.filter(a=>a.correct).length;const wrong=values.filter(a=>a.evaluated&&!a.correct).length;const skipped=Math.max(0,total-right-wrong);const percent=total?Math.round((right/total)*100):0;const duration=Math.max(1,Math.round((Date.now()-Number(session.startedAt||Date.now()))/1000));const topicStats=renderQuizTopicStats(session);const audit=renderQuizAnswerAudit(session);const weakTopics=(quizHistory().slice(-8).flatMap(x=>x.topics||[]).filter(t=>t.wrong>0).sort((a,b)=>b.wrong-a.wrong).slice(0,3).map(t=>`${t.topic} (${t.wrong})`).join(" · ")||"Noch keine auffaelligen Themen");return `${setPageHeader("Quiz abgeschlossen",`${right}/${total} richtig`,"Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Ergebnis</span><h2 class="quiz-main-title">${percent}%</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${right}</b><span>Richtig</span></div><div class="quiz-result-box"><b>${wrong}</b><span>Falsch</span></div><div class="quiz-result-box"><b>${skipped}</b><span>Uebersprungen</span></div><div class="quiz-result-box"><b>${duration}s</b><span>Zeitbedarf</span></div><div class="quiz-result-box"><b>${esc(session.config?.topic==="all"?"Gemischt":session.config?.topic||"Gemischt")}</b><span>Thema</span></div><div class="quiz-result-box"><b>${esc(session.config?.level==="all"?"Gemischt":session.config?.level||"Gemischt")}</b><span>Schwierigkeit</span></div></div><div class="quiz-result-section"><h3 class="quiz-section-title">Schwaechere Themen</h3><p class="quiz-section-note">${esc(weakTopics)}</p></div><div class="quiz-result-section"><h3 class="quiz-section-title">Themen-Statistik</h3>${topicStats}</div><div class="quiz-result-section"><h3 class="quiz-section-title">Antworten und Quellen</h3>${audit}</div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizRepeatStartBtn" ${getQuizMarkedIds().size?"":"disabled"}>Fehler wiederholen</button><button class="quiz-btn secondary" type="button" id="quizNewBtn">Neue Runde</button><button class="quiz-btn secondary" type="button" data-nav="quiz" data-value="stats">Statistik oeffnen</button><button class="quiz-btn secondary" type="button" data-nav="quiz" data-value="home">Zur Startseite</button></div></article></section>`}
+function renderQuizStatsPage(session){const list=quizHistory();const recent=[...(list||[])].reverse().slice(0,16);const totalRounds=recent.length;const totalQ=recent.reduce((sum,x)=>sum+Number(x.total||0),0);const totalR=recent.reduce((sum,x)=>sum+Number(x.right||0),0);const totalW=recent.reduce((sum,x)=>sum+Number(x.wrong||0),0);const acc=totalQ?Math.round((totalR/totalQ)*100):0;const topicAgg=new Map();recent.forEach(run=>(run.topics||[]).forEach(t=>{const row=topicAgg.get(t.topic)||{total:0,right:0,wrong:0};row.total+=Number(t.total||0);row.right+=Number(t.right||0);row.wrong+=Number(t.wrong||0);topicAgg.set(t.topic,row)}));const best=[...topicAgg.entries()].sort((a,b)=>(b[1].right/Math.max(1,b[1].total))-(a[1].right/Math.max(1,a[1].total))).slice(0,3);const weak=[...topicAgg.entries()].sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,3);const recentRows=recent.map(run=>`<article class="quiz-topic-row"><b>${new Date(run.at||Date.now()).toLocaleString("de-DE")}</b><span>${run.right}/${run.total} richtig · ${run.wrong} falsch · ${run.mode}</span><small>Dauer: ${Math.max(1,Number(run.durationSec||0))}s</small></article>`).join("");return `${setPageHeader("Quiz-Statistik","Gesamtleistung und Themen","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Statistik</span><h2 class="quiz-main-title">${acc}%</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${totalRounds}</b><span>Runden</span></div><div class="quiz-result-box"><b>${totalQ}</b><span>Gesamtfragen</span></div><div class="quiz-result-box"><b>${totalR}</b><span>Richtig</span></div><div class="quiz-result-box"><b>${totalW}</b><span>Falsch</span></div><div class="quiz-result-box"><b>${best.map(([k])=>k).join(" · ")||"-"}</b><span>Beste Themen</span></div><div class="quiz-result-box"><b>${weak.map(([k])=>k).join(" · ")||"-"}</b><span>Wiederholungsbedarf</span></div></div>${session&&!session.finished?`<div class="quiz-result-section"><h3 class="quiz-section-title">Aktive Runde</h3><p class="quiz-section-note">Frage ${Number(session.index||0)+1} von ${session.questionIds.length}</p></div>`:""}<div class="quiz-result-section"><h3 class="quiz-section-title">Rundenverlauf</h3>${recentRows||"<div class='quiz-result-empty'>Noch keine abgeschlossene Quizrunde.</div>"}</div><div class="quiz-actions"><button class="quiz-btn primary" type="button" data-nav="quiz" data-value="home">Zur Quiz-Startseite</button><button class="quiz-btn secondary" type="button" data-nav="quiz" data-value="repeat">Wiederholen</button></div></article></section>`}
+function renderQuizRepeatPage(){const ids=[...getQuizMarkedIds()].filter(id=>quizQuestionById(id));const weakFromHistory=quizHistory().slice(-10).flatMap(x=>x.topics||[]).sort((a,b)=>b.wrong-a.wrong).slice(0,6);return `${setPageHeader("Wiederholen","Gemerkte und schwierige Fragen trainieren","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Wiederholen</span><h2 class="quiz-main-title">${ids.length}</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${ids.length}</b><span>Gemerkte Fragen</span></div><div class="quiz-result-box"><b>${weakFromHistory.length}</b><span>Schwierige Themen</span></div></div><div class="quiz-result-section"><h3 class="quiz-section-title">Bereiche</h3><div class="quiz-topic-stats"><article class="quiz-topic-row"><b>Falsch beantwortete Fragen</b><span>${ids.length?`${ids.length} fuer Wiederholung bereit`:"Noch leer"}</span></article><article class="quiz-topic-row"><b>Gemerkte Fragen</b><span>${ids.length?`Aktiv markiert: ${ids.length}`:"Noch keine Markierung vorhanden."}</span></article><article class="quiz-topic-row"><b>Schwierige Themen</b><span>${weakFromHistory.map(x=>x.topic).slice(0,3).join(" · ")||"Noch keine Daten"}</span></article><article class="quiz-topic-row"><b>Zuletzt beantwortet</b><span>${quizHistory().length?new Date(quizHistory().slice(-1)[0].at||Date.now()).toLocaleString("de-DE"):"Noch keine Runde abgeschlossen"}</span></article></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizRepeatStartBtn" ${ids.length?"":"disabled"}>Alle Fehler wiederholen</button><button class="quiz-btn secondary" type="button" data-nav="quiz" data-value="home">Zur Quiz-Startseite</button></div><div class="quiz-result-empty">${ids.length?"Du kannst sofort mit einer Wiederholungsrunde starten.":"Noch keine Fragen zum Wiederholen vorhanden."}</div></article></section>`}
+function bindQuizEvents(){if(currentRoute.view!=="quiz")return;const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:5,mode:"standard"}:quizConfig();if(!quizQuestions().length)return;saveQuizSession(quizBuildSession(cfg));navigate("quiz","session")};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>navigate("quiz","session");const repeatBtn=$("quizRepeatStartBtn");if(repeatBtn)repeatBtn.onclick=()=>{const ids=[...getQuizMarkedIds()].filter(id=>quizQuestionById(id));if(!ids.length){alert("Noch keine gemerkten Fragen vorhanden.");return}saveQuizSession(quizBuildSession({topic:"all",level:"all",count:ids.length,mode:"lernen"},ids));navigate("quiz","session")};const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();navigate("quiz","home")};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizHistoryEntry(s);saveQuizSession(s)}navigate("quiz","stats")}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;const existing=s.answers?.[q.id];if(existing?.evaluated)return;const idx=Number(btn.getAttribute("data-quiz-answer"));const isCorrect=idx===Number(q.correctIndex);s.answers=s.answers||{};s.answers[q.id]={selectedIndex:idx,evaluated:true,correct:isCorrect};if(!isCorrect){s.retries=s.retries||{};s.retries[q.id]=(Number(s.retries[q.id]||0)+1)}s.updatedAt=Date.now();saveQuizSession(s);render()}});const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const retryBtn=$("quizRetryBtn");if(retryBtn)retryBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;if(s.answers)s.answers[q.id]={selectedIndex:null,evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()};const rememberBtn=$("quizRememberBtn");if(rememberBtn)rememberBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.bookmarked=s.bookmarked||{};const key=String(q.id);const active=toggleQuizMarkedId(key);if(active)s.bookmarked[key]=true;else delete s.bookmarked[key];s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const answer=s.answers?.[q?.id];if(!answer?.evaluated)return;if(s.index>=s.questionIds.length-1){s.finished=true;s.updatedAt=Date.now();saveQuizHistoryEntry(s);saveQuizSession(s);navigate("quiz","stats");return}s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()}}
 const FEATURE_PIN_KEY="darFeaturePinsV1";
 function featureCatalog(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
@@ -12617,7 +13284,7 @@ function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
   if(fromGesture){stable(0);window.__smoothNav=false;return}
   stable(0);window.__smoothNav=false;
 }
-function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",hadith:"Hadith",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
+function updateChrome(route){const backBtn=$("backBtn");const homeBtn=$("homeBtn");const crumb=$("crumb");const appBar=document.querySelector(".app-bar");const isHome=isHomeRoute(route);const isFeedFull=route.view==="feed";const isMore=route.view==="more";document.body.classList.toggle("is-home-route",isHome);document.body.classList.toggle("is-area-route",!isHome);document.body.classList.toggle("image-editor-mode",route.view==="image-editor");document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");document.body.classList.toggle("is-feed-fullscreen",isFeedFull);document.body.classList.toggle("is-quiz-route",route.view==="quiz");document.body.classList.toggle("is-hadith-route",route.view==="hadith");if(appBar)appBar.classList.toggle("is-more-route",isMore);updateBottomNav(route);if(isFeedFull){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(isHome){backBtn.classList.remove("show");if(homeBtn)homeBtn.classList.remove("show");if(appBar)appBar.classList.add("is-home");if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}return}if(appBar)appBar.classList.remove("is-home");backBtn.classList.add("show");if(homeBtn)homeBtn.classList.add("show");const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",hadith:"Hadith",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:"Beitrag"};let crumbLabel=labels[route.view]||"";if(isMore)crumbLabel="";if(route.view==="quran-surah")crumbLabel="";if(crumb){crumb.textContent=crumbLabel;crumb.classList.toggle("is-hidden",!crumbLabel)}}
 function render(){
   try{
     const routeBefore=readRoute();
@@ -12650,6 +13317,7 @@ function render(){
     if(currentRoute.view==="home")html=renderHome();
     else if(currentRoute.view==="feed")html=renderFeed();
     else if(currentRoute.view==="ilm")html=renderHome();
+    else if(currentRoute.view==="quiz")html=renderQuiz();
     else if(currentRoute.view==="topics")html=renderTopics();
     else if(currentRoute.view==="scholars")html=renderScholars();
     else if(currentRoute.view==="books")html=renderBooks();
@@ -12677,7 +13345,7 @@ function render(){
     else if(currentRoute.view==="duas")html=renderDuas();
     else if(currentRoute.view==="dua-cat")html=renderDuaCat(currentRoute.value);
     else if(currentRoute.view==="dua")html=renderDua(currentRoute.value);
-    else if(currentRoute.view==="hadith")html=renderHome();
+    else if(currentRoute.view==="hadith")html=renderHadith();
     else if(currentRoute.view==="post")html=renderPost(currentRoute.value);
       else if(currentRoute.view==="news-detail")html=renderNewsDetail(currentRoute.value);
     else if(currentRoute.view==="statistik"){location.hash="more";return}
@@ -12740,7 +13408,8 @@ function bindGenericShareButtons(){
   document.querySelectorAll("[data-share-copy]").forEach(btn=>{btn.onclick=async ev=>{ev.stopPropagation();const text=readShareData(btn,"data-share-text");try{await navigator.clipboard.writeText(text);alert("Text wurde kopiert.")}catch(e){prompt("Kopiere den Text:",text)}}});
   document.querySelectorAll("[data-image-post-open]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const postId=btn.getAttribute("data-image-post-open")||"";window.__smoothNav=true;navigate("image-editor",postId)}});
     document.querySelectorAll("[data-image-dua-open]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const duaId=btn.getAttribute("data-image-dua-open")||"";seedImageEditorFromDua(duaId);window.__smoothNav=true;navigate("image-editor","")}});
-    document.querySelectorAll("[data-image-ayah-open]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();try{const data=JSON.parse(decodeURIComponent(btn.getAttribute("data-image-ayah-open")||"{}"));seedImageEditorFromAyah(data.s,data.a,data.ar,data.de,data.name)}catch(e){}window.__smoothNav=true;navigate("image-editor","")}});
+  document.querySelectorAll("[data-image-ayah-open]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();try{const data=JSON.parse(decodeURIComponent(btn.getAttribute("data-image-ayah-open")||"{}"));seedImageEditorFromAyah(data.s,data.a,data.ar,data.de,data.name)}catch(e){}window.__smoothNav=true;navigate("image-editor","")}});
+  document.querySelectorAll("[data-quran-share-ayah]").forEach(btn=>{btn.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();const data=parseQuranAyahShareData(btn.getAttribute("data-quran-share-ayah"));if(!data)return;const text=buildQuranAyahShareText(data);const title=`Qurʾān ${Number(data.s)||""}:${Number(data.a)||""}`.replace(/:$/,"");if(navigator.share){try{await navigator.share({title:title||"Qurʾān-Vers",text,url:quranAyahShareUrl(data.s,data.a)});return}catch(e){}}try{await navigator.clipboard.writeText(text);alert("Vers wurde kopiert.")}catch(e){prompt("Kopiere den Vers:",text)}}});
 }
 function bindHighlightDailyPush(){document.querySelectorAll("[data-daily-push]").forEach(btn=>{btn.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();const key=btn.getAttribute("data-daily-push");if(!key)return;await setDailyPushPreference(key,!dailyPushPref(getPrayerSettings(),key));render()}})}
 function bindPostSlideCarousels(){
@@ -12783,10 +13452,13 @@ function bindEvents(){
   bindPostSlideCarousels();
   bindPrayerEvents();
   bindHadithLibraryEvents();
+  bindQuizEvents();
   bindHighlightDailyPush();
   bindThemeControls();
   bindFontControls();
   bindImageEditor();
+  const offlinePrepareBtn=$("offlinePrepareBtn");if(offlinePrepareBtn)offlinePrepareBtn.onclick=()=>startOfflinePreparation();
+  const offlineStorageBtn=$("offlineStorageBtn");if(offlineStorageBtn)offlineStorageBtn.onclick=()=>showOfflineStorageInfo();
   const postIntroModal=$("postIntroModal"),postIntroOpenBtn=$("postIntroOpenBtn"),postIntroCloseBtn=$("postIntroCloseBtn"),postIntroDialog=postIntroModal?.querySelector(".post-intro-dialog");
   const closePostIntro=()=>{if(postIntroModal){postIntroModal.hidden=true;document.documentElement.classList.remove("post-intro-open")}};
   const openPostIntro=()=>{if(postIntroModal){postIntroModal.hidden=false;document.documentElement.classList.add("post-intro-open");postIntroCloseBtn?.focus()}};
@@ -13056,6 +13728,7 @@ window.addEventListener("load",()=>{
       try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
     }
     initFontSettings();
+    initOfflineEngine().catch(()=>{});
     render();
     if("serviceWorker" in navigator&&!window.__darSwMessageBound){
       window.__darSwMessageBound=true;
@@ -13084,7 +13757,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 </script>
 
 <script>
-window.addEventListener("online",function(){updateOfflineBox();refreshContent({forceRender:true})});
+window.addEventListener("online",function(){updateOfflineBox();flushOfflineQueue().catch(()=>{});refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
 window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"){scheduleRefreshContent({forceRender:false},900);if(hasPrayerLocation(getPrayerSettings()))applyPrayerGpsPosition(null,{force:true,silent:true}).then(()=>syncPrayerGpsWatchState()).catch(()=>{})}});
