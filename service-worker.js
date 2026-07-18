@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v248';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v250';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const APP_SHELL = [
   '/',
@@ -152,6 +152,14 @@ function isFeedAssetRequest(url) {
     || url.pathname === '/assets/focus-feed-app.js'
     || url.pathname === '/assets/html2canvas.min.js'
     || url.pathname.startsWith('/assets/posts/');
+}
+
+function isAppShellRequest(url) {
+  if (url.origin !== self.location.origin) return false;
+  if (url.pathname === '/' || url.pathname === '/index.html') return true;
+  if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
+  if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
+  return false;
 }
 
 function isPinnedLiveBootRequest(url) {
@@ -360,6 +368,18 @@ self.addEventListener('fetch', (event) => {
           return fetch('/assets/live-boot.js', { cache: 'reload' });
         })
         .catch(() => fetch('/assets/live-boot.js'))
+    );
+    return;
+  }
+
+  // App-Hülle und Version: immer zuerst vom Netz (kein veralteter Quiz-Tab/Fokus).
+  if (isAppShellRequest(url)) {
+    const shellKey = navigationShellKey(url);
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => storeShellResponse(shellKey, response))
+        .catch(() => caches.match(shellKey))
+        .then((response) => response || caches.match('/index.html'))
     );
     return;
   }
