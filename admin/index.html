@@ -497,6 +497,22 @@ main#panel.panel{
 .feed-legacy-panel .feed-legacy-body{padding-top:8px}
 @media(max-width:720px){.feed-post-row{grid-template-columns:48px minmax(0,1fr)}.feed-post-actions{grid-column:1/-1;justify-content:flex-start}}
 }
+.quiz-admin-subnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.quiz-admin-subtab{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.quiz-admin-subtab.active{background:rgba(212,175,55,.18);border-color:rgba(212,175,55,.45);color:var(--gold)}
+.quiz-admin-kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:10px 0}
+.quiz-admin-kpi-grid.compact{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.quiz-admin-kpi{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px;background:rgba(0,0,0,.18);display:grid;gap:3px}
+.quiz-admin-kpi b{font-size:18px;color:var(--gold)}
+.quiz-admin-kpi span{font-size:11px;color:var(--muted);font-weight:800}
+.quiz-admin-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:0 0 12px}
+.quiz-admin-filters label{display:grid;gap:4px;font-size:11px;color:var(--muted);font-weight:800}
+.quiz-admin-table{width:100%;border-collapse:collapse;font-size:12px}
+.quiz-admin-table th,.quiz-admin-table td{border-bottom:1px solid rgba(255,255,255,.08);padding:8px 6px;text-align:left;vertical-align:top}
+.quiz-admin-split{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
+.quiz-admin-detail{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;background:rgba(0,0,0,.16)}
+.quiz-admin-export-grid{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:900px){.quiz-admin-split{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -524,6 +540,7 @@ main#panel.panel{
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=5"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
+<script src="/admin/quiz-stats-manager.js?v=1"></script>
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -555,6 +572,7 @@ const DEFAULT_ADMIN_TABS=[
   ["actions","Neuer Beitrag"],
   ["news","News"],
   ["besucher","Besucher"],
+  ["quiz-stats","Quiz-Statistik"],
   ["settings","Einstellungen"],
   ["ordner","Ordner (Studio)"],
   ["feed","Feed / Im Fokus"],
@@ -2140,7 +2158,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2160,6 +2178,10 @@ function renderShell(){
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
   if(currentTab==="feed-bg"&&window.DARFeedBgAdmin&&!window.__darFeedBgAdminLoaded)window.DARFeedBgAdmin.ensureBgLoaded(false).then(()=>{if(currentTab==="feed-bg")renderShell()}).catch(()=>{});
   if(window.DARFeedBgAdmin&&!window.__darFeedBgAutoInit){window.__darFeedBgAutoInit=true;window.DARFeedBgAdmin.ensureBgLoaded(false).catch(()=>{});}
+  if(currentTab==="quiz-stats"&&window.DARQuizStatsAdmin){
+    window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{if(currentTab==="quiz-stats"){renderShell();window.DARQuizStatsAdmin.bindQuizStatsTab(document.getElementById("panel"))}}).catch(()=>{});
+    window.DARQuizStatsAdmin.bindQuizStatsTab(document.getElementById("panel"));
+  }
 }
 function feedLoadedFlag(){return window.__darFeedAdminLoaded===true}
 async function ensureFeedAdminData(force){
@@ -2175,13 +2197,14 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed")ensureFeedAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed-bg"&&window.DARFeedBgAdmin)window.DARFeedBgAdmin.ensureBgLoaded(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
+    if(tab==="quiz-stats"&&window.DARQuizStatsAdmin)window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -2220,6 +2243,7 @@ function renderStart(ctx){
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
         <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
+        <button class="btn" data-tab="quiz-stats" type="button">Quiz-Statistik</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
       </div>
     </div>
@@ -2229,6 +2253,7 @@ function renderStart(ctx){
     ${folderCard("②","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
     ${folderCard("③","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
     ${folderCard("④","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
     ${folderCard("⑤","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
   </section>
   <section class="command-grid">
@@ -3260,6 +3285,7 @@ function bindUi(){
   bindKurzlinksUi();
   bindZakatAdminUi();
   if(window.DARFeedAdmin)window.DARFeedAdmin.bindFeedUi();
+  if(window.DARQuizStatsAdmin)window.DARQuizStatsAdmin.bindQuizStatsTab(document.getElementById("panel"));
   if(window.DARFeedBgAdmin)window.DARFeedBgAdmin.bindFeedBgUi();
   bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
   bindFeedImagePanels();
