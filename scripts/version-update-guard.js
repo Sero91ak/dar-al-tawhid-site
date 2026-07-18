@@ -123,7 +123,8 @@ function runVersionUpdateGuard() {
       "markVersionUpdatePending",
       "requestHardShellRefresh",
       'type:"HARD_REFRESH"',
-      "repairPushConnection({silent:true})",
+      "maybeAutoApplyShellUpdate",
+      "syncPushRegistrationOnly",
       "syncPushRegistrationAndWelcome",
       "WELCOME_PUSH_SENT_KEY",
       "sendWelcomePushIfNeeded"
@@ -138,7 +139,8 @@ function runVersionUpdateGuard() {
         "showVersionBanner()",
         "markVersionUpdatePending:",
         "hideAllBanners:",
-        "hardRefreshApp"
+        "hardRefreshApp",
+        "maybeAutoApplyShellUpdate"
       ]);
     }
 
@@ -146,12 +148,12 @@ function runVersionUpdateGuard() {
     if (!syncAppServices) {
       fail(`${htmlFile}: syncAppServices() fehlt`);
     } else {
-      mustInclude(`${htmlFile} syncAppServices`, syncAppServices, ["repairPushConnection"]);
+      mustInclude(`${htmlFile} syncAppServices`, syncAppServices, ["syncPushRegistrationOnly"]);
       mustNotInclude(
         `${htmlFile} syncAppServices`,
         syncAppServices,
-        ["maintainPushHealth"],
-        "syncAppServices darf nicht maintainPushHealth statt repairPushConnection nutzen (v127-Regression)"
+        ["repairPushConnection", "maintainPushHealth"],
+        "syncAppServices darf kein repairPushConnection/maintainPushHealth nutzen (Willkommens-Push-Schleife)"
       );
     }
 
@@ -160,10 +162,15 @@ function runVersionUpdateGuard() {
       fail(`${htmlFile}: hardRefreshApp() fehlt`);
     } else {
       mustInclude(`${htmlFile} hardRefreshApp`, hardRefresh, [
-        "syncAppServices",
         "requestHardShellRefresh",
         "markVersionUpdatePending"
       ]);
+      mustNotInclude(
+        `${htmlFile} hardRefreshApp`,
+        hardRefresh,
+        ["syncAppServices"],
+        "hardRefreshApp darf syncAppServices nicht vor Reload aufrufen (Willkommens-Push + Verzögerung)"
+      );
     }
 
     const maintainPush = extractFunctionBody(html, "maintainPushHealth");
@@ -182,7 +189,9 @@ function runVersionUpdateGuard() {
     if (!repairPush) {
       fail(`${htmlFile}: repairPushConnection() fehlt`);
     } else if (!/removeItem\s*\(\s*WELCOME_PUSH_SENT_KEY\s*\)/.test(repairPush)) {
-      fail(`${htmlFile} repairPushConnection: WELCOME_PUSH_SENT_KEY muss vor Willkommens-Push gelöscht werden`);
+      fail(`${htmlFile} repairPushConnection: WELCOME_PUSH_SENT_KEY muss bei manueller Reparatur gelöscht werden`);
+    } else if (!/if\s*\(\s*!silent\s*\)/.test(repairPush)) {
+      fail(`${htmlFile} repairPushConnection: Willkommens-Push-Reset nur bei !silent`);
     } else {
       ok(`${htmlFile} repairPushConnection: Willkommens-Push-Reset`);
     }
@@ -196,7 +205,8 @@ function runVersionUpdateGuard() {
     "shouldSuppressVersionBanner",
     "markVersionUpdatePending",
     "showVersionBanner",
-    "hardRefreshApp"
+    "hardRefreshApp",
+    "maybeAutoApplyShellUpdate"
   ];
   for (const key of parityKeys) {
     const inIndex = indexGuard.includes(key);

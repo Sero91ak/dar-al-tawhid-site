@@ -41,12 +41,12 @@ function checkHtml(label, html, res, expectedBuild) {
     { url: `${SITE_URL}/test/`, expected: TEST_EXPECT_BUILD },
     { url: `${SITE_URL}/test/index.html`, expected: TEST_EXPECT_BUILD }
   ];
-  let ok = false;
+  let allOk = true;
   for (const { url, expected } of targets) {
     const { res, html } = await fetchHtml(url);
-    if (checkHtml(url, html, res, expected)) ok = true;
+    if (!checkHtml(url, html, res, expected)) allOk = false;
   }
-  if (!ok) {
+  if (!allOk) {
     throw new Error(
       `Besucher-/Test-App noch nicht live (visitor=${VISITOR_EXPECT_BUILD}, test=${TEST_EXPECT_BUILD}, zakat>=v${EXPECT_ZAKAT}). ` +
         "Cloudflare Pages: Deploy command leeren, neues Deployment, Purge Everything."

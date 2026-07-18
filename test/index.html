@@ -10843,7 +10843,7 @@ async function fetchGithubPostFileList(){const response=await fetch(`https://api
 async function resolvePostFileList(){const fromIndex=await fetchPostsIndexMeta();if(fromIndex&&fromIndex.length)return fromIndex;try{return await fetchGithubPostFileList()}catch(e){console.warn("Post-Liste:",e);return null}}
 async function loadPostsFromFileList(markdownFiles,cached){const fileMap=getJson(POST_FILE_MAP_KEY,{});const names=new Set(markdownFiles.map(f=>f.name));Object.keys(fileMap).forEach(name=>{if(!names.has(name))delete fileMap[name]});const cachedActive=filterPostsByFileIndex(cached,names);const cachedFallback=cachedActive.length?[]:(Array.isArray(cached)?cached.filter(p=>p&&p.id):[]);const displayCache=cachedActive.length?cachedActive:cachedFallback;const freshFromCache=markdownFiles.filter(f=>postFileIsFresh(f,fileMap,displayCache)).map(f=>postFromCachedFile(displayCache,f.name)).filter(Boolean);let needsFetch=markdownFiles.filter(f=>!postFileIsFresh(f,fileMap,displayCache));needsFetch.sort((a,b)=>postFileSortRank(b.name)-postFileSortRank(a.name));const baseList=mergePostsLists(displayCache,freshFromCache);const hadImmediatePosts=baseList.length>0||posts.length>0;if(hadImmediatePosts){applyPostsList(mergePostsLists(posts,baseList));persistPostsCache()}else if(displayCache.length){applyPostsList(displayCache)}if(!needsFetch.length){postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";return posts.length}postsSyncSilent=true;postsSyncBusy=false;postsSyncLabel="";if(!hadImmediatePosts)schedulePostsRender(false);try{for(let i=0;i<needsFetch.length;i+=POSTS_FETCH_BATCH){const batch=needsFetch.slice(i,i+POSTS_FETCH_BATCH);const results=await Promise.allSettled(batch.map(fetchPostFile));const batchNew=[];results.forEach(r=>{if(r.status==="fulfilled"){const sha=r.value.sha||markdownFiles.find(x=>x.name===r.value.name)?.sha||"";fileMap[r.value.name]={sha,post:r.value.post,parseVersion:POST_PARSE_VERSION};batchNew.push(r.value.post)}});if(batchNew.length){applyPostsList(mergePostsLists(posts,batchNew));persistPostFileMap(fileMap);persistPostsCache();if(!postsSyncSilent&&posts.length>0){postsSyncSilent=true;postsSyncBusy=false;postsSyncLabel="";schedulePostsRender(true)}else schedulePostsRender(postsSyncSilent?false:true)}if(i+POSTS_FETCH_BATCH<needsFetch.length)await new Promise(r=>setTimeout(r,postsSyncSilent?12:0))}}finally{const hadSilentSync=postsSyncSilent;postsSyncBusy=false;postsSyncSilent=false;postsSyncLabel="";persistPostFileMap(fileMap);persistPostsCache();persistOfflineLibrary();if(hadSilentSync)notifyFeedPostsUpdated();schedulePostsRender(true)}return posts.length}
 async function loadPosts(){const cached=getCachedPosts();if(!navigator.onLine){if(cached.length)applyPostsList(cached);return posts.length}try{const markdownFiles=await resolvePostFileList();if(!markdownFiles||!markdownFiles.length){if(cached.length)applyPostsList(cached);return posts.length}return await loadPostsFromFileList(markdownFiles,cached)}catch(error){console.warn(error);if(cached.length)applyPostsList(cached);return posts.length}}
-async function loadCurrentUpdates(){try{const cached=getJson(CURRENT_UPDATES_CACHE_KEY,[]);if(Array.isArray(cached))currentUpdates=cached}catch(e){}if(!navigator.onLine)return currentUpdates;const bust=Date.now();const updatesFile=CURRENT_UPDATES_PATH.replace(/^\//,"");const urls=[`${CURRENT_UPDATES_PATH}?v=${bust}`,`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${updatesFile}?v=${bust}`];for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];currentUpdates=items.filter(Boolean);try{setJson(CURRENT_UPDATES_CACHE_KEY,currentUpdates)}catch(e){}return currentUpdates}catch(e){}}console.warn("Aktuell-Hinweise konnten nicht geladen werden");return currentUpdates}
+async function loadCurrentUpdates(){const beforeSig=JSON.stringify(currentUpdates);try{const cached=getJson(CURRENT_UPDATES_CACHE_KEY,[]);if(Array.isArray(cached))currentUpdates=cached}catch(e){}if(!navigator.onLine)return beforeSig!==JSON.stringify(currentUpdates);const bust=Date.now();const updatesFile=CURRENT_UPDATES_PATH.replace(/^\//,"");const urls=[`${CURRENT_UPDATES_PATH}?v=${bust}`,`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${updatesFile}?v=${bust}`];for(const url of urls){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const data=await r.json();const items=Array.isArray(data)?data:Array.isArray(data.items)?data.items:[];currentUpdates=items.filter(Boolean);try{setJson(CURRENT_UPDATES_CACHE_KEY,currentUpdates)}catch(e){}return beforeSig!==JSON.stringify(currentUpdates)}catch(e){}}console.warn("Aktuell-Hinweise konnten nicht geladen werden");return beforeSig!==JSON.stringify(currentUpdates)}
 function activeCurrentUpdates(){const now=Date.now();const BLOCKED_STATUSES=["removed","archived","failed","expired","draft"];return(Array.isArray(currentUpdates)?currentUpdates:[]).filter(item=>{if(!item)return false;if(item.status&&BLOCKED_STATUSES.includes(item.status))return false;if(item.visible===false)return false;const created=Date.parse(item.createdAt||item.date||item.publishedAt||"");const expires=Date.parse(item.expiresAt||"");if(Number.isFinite(expires))return expires>now;if(Number.isFinite(created)){const ttl=Number(item.ttlHours||24);return now-created>=0&&now-created<=ttl*60*60*1000}return false}).sort((a,b)=>Date.parse(b.createdAt||b.date||0)-Date.parse(a.createdAt||a.date||0))}
 function postsSignature(){return posts.map(p=>`${p.id}:${p.date||""}:${p.title||""}:${p._sourceFile||""}:${String(p.intro||"").length}`).join("|")}
 async function refreshContent({forceRender=false}={}){
@@ -10977,7 +10977,7 @@ function renderStats(){if(!isStatsAuthed()){return`${setHeader("Statistik","Nur 
 function postUrl(post){const id=encodeURIComponent(String(post&&post.id?post.id:""));const base=(location.origin&&location.origin.startsWith("http"))?location.origin:DAR_SITE_ORIGIN;return `${base}/p/${id}`}
 function buildPostPushUrl(postId,cacheVersion){const slug=String(postId||"").trim();const v=cacheVersion||Date.now();const base=(location.origin&&location.origin.startsWith("http"))?location.origin:DAR_SITE_ORIGIN;return `${base}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`}
 function parsePushPostIdFromUrl(urlOrSearch){try{const u=typeof urlOrSearch==="string"?new URL(urlOrSearch,location.origin):urlOrSearch;const fromQuery=u.searchParams.get("post");if(fromQuery)return decodeURIComponent(fromQuery);const path=u.pathname||"";const m=path.match(/^\/post\/([^/?#]+)/i);if(m)return decodeURIComponent(m[1]);const hash=decodeURIComponent((u.hash||"").replace(/^#/,"")).replace(/^\/+/,"");const hp=hash.match(/^(?:post|beitrag|beitraege)\/([^/?#]+)/i);if(hp)return decodeURIComponent(hp[1])}catch(e){}return ""}
-function applyPushLaunchRoute(){const postId=parsePushPostIdFromUrl(location.href);if(!postId)return false;const hash=decodeURIComponent((location.hash||"").replace(/^#/,"")).replace(/^\/+/,"");if(/^(?:post|beitrag|beitraege)\//i.test(hash)&&decodeURIComponent(hash.split("/").slice(1).join("/"))===postId)return true;location.hash=`post/${encodeURIComponent(postId)}`;return true}
+function applyPushLaunchRoute(){const postId=parsePushPostIdFromUrl(location.href);if(postId){const hash=decodeURIComponent((location.hash||"").replace(/^#/,"")).replace(/^\/+/,"");if(/^(?:post|beitrag|beitraege)\//i.test(hash)&&decodeURIComponent(hash.split("/").slice(1).join("/"))===postId)return true;location.hash=`post/${encodeURIComponent(postId)}`;return true}try{const focus=String(new URL(location.href).searchParams.get("focus")||"").trim().toLowerCase();if(focus==="quiz"){if(!/^#?\/?quiz/i.test(location.hash||""))location.hash="#quiz";return true}if(focus==="zakat"){if(!/^#?\/?zakat/i.test(location.hash||""))location.hash="#zakat";return true}}catch(e){}return false}
 function clearPostRouteState(){postRouteLoadingId="";postRouteFailedId="";postRouteError=""}
 async function fetchPostsIndexFresh(){return fetchPostsIndexMeta()}
 async function loadSinglePostFresh(postId){const id=String(postId||"").trim();if(!id)return null;const files=await fetchPostsIndexFresh();if(!files||!files.length)return null;let file=files.find(f=>f.name.replace(/\.md$/,"")===id)||files.find(f=>String(f.name).includes(id));if(!file){for(const f of files){try{const r=await fetchPostFile(f);if(String(r.post?.id)===id){file=f;const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[r.name]={sha:r.sha||f.sha||"",post:r.post,parseVersion:POST_PARSE_VERSION};persistPostFileMap(fileMap);const merged=mergePostsLists(posts,[r.post]);applyPostsList(merged);persistPostsCache();return r.post}}catch(e){}}}if(!file)return null;const result=await fetchPostFile(file);const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[result.name]={sha:result.sha||file.sha||"",post:result.post,parseVersion:POST_PARSE_VERSION};persistPostFileMap(fileMap);const merged=mergePostsLists(posts,[result.post]);applyPostsList(merged);persistPostsCache();return result.post}
@@ -12910,7 +12910,7 @@ async function repairPushConnection({silent=false}={}){
   await ensurePushUserLogin(OS);
   const sub=OS.User?.PushSubscription;
   if(sub?.optedIn&&typeof sub.optOut==="function"){try{await sub.optOut()}catch(e){}await sleep(900);}
-  try{localStorage.removeItem(WELCOME_PUSH_SENT_KEY);const repairSub=String(OS?.User?.PushSubscription?.id||"").trim();if(repairSub)localStorage.removeItem(welcomePushStorageKey(repairSub))}catch(e){}
+  if(!silent){try{localStorage.removeItem(WELCOME_PUSH_SENT_KEY);const repairSub=String(OS?.User?.PushSubscription?.id||"").trim();if(repairSub)localStorage.removeItem(welcomePushStorageKey(repairSub))}catch(e){}}
   const subscribed=await ensureOneSignalPushSubscription(OS,{timeoutMs:45000,request:true});
   if(!subscribed)issues.push("Push-Verbindung zum Server konnte nicht hergestellt werden.");
   await ensurePostPushTags(OS);
@@ -14369,7 +14369,8 @@ async function syncAppServices({silent=true}={}){
   try{
     if(hasNotificationApi()&&getNotificationPermission()==="granted"){
       await ensureOneSignalServiceWorkerReady();
-      pushOk=(await repairPushConnection({silent:true})).ok;
+      const OS=await waitForOneSignalReady(8000);
+      if(OS)pushOk=await syncPushRegistrationOnly(OS);
     }
   }catch(e){if(!silent)console.warn("Push-Sync:",e)}
   try{if(typeof refreshContent==="function")await refreshContent({forceRender:false})}catch(e){if(!silent)console.warn("Inhalte-Sync:",e)}
@@ -14395,9 +14396,9 @@ async function requestHardShellRefresh(){
 function appRecoveryEscape(value){return String(value==null?"":value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
 async function clearAppRuntimeCaches(){
   try{
-    const keepKeys=new Set(["darThemeV1","darSavedPostsV5DuaFinal","darPrayerSettingsV1","darStatsAuthV1","darFloatTipsShownV1","darFloatTouchbarActivatedV1","darAppFontScaleV1","darReadingFontScaleV1"]);
-    const stale=/^(darCachedPosts|darPostFileMap|darPostsIndexStale|darCachedDuas|darCachedQuran|darQuranPrecached|darOfflineLibrary|darCurrentUpdates|darDailyContent)/i;
-    Object.keys(localStorage).forEach(key=>{if(!keepKeys.has(key)&&stale.test(key))localStorage.removeItem(key)});
+    const keepKeys=new Set(["darThemeV1","darSavedPostsV5DuaFinal","darPrayerSettingsV1","darStatsAuthV1","darFloatTipsShownV1","darFloatTouchbarActivatedV1","darAppFontScaleV1","darReadingFontScaleV1","dar_app_version_state_v1","dar_welcome_push_sent",CURRENT_UPDATES_CACHE_KEY]);
+    const stale=/^(darCachedPosts|darPostFileMap|darPostsIndexStale|darCachedDuas|darCachedQuran|darQuranPrecached|darOfflineLibrary|darDailyContent)/i;
+    Object.keys(localStorage).forEach(key=>{if(keepKeys.has(key)||key.startsWith("dar_welcome_push_v2_"))return;if(stale.test(key))localStorage.removeItem(key)});
     sessionStorage.removeItem("dar_version_update_pending");
   }catch(e){}
   try{
@@ -14468,7 +14469,6 @@ function hardRefreshApp(){
     try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
     window.__darAppVersionAvailable=false;
     try{await clearAppRuntimeCaches()}catch(e){console.warn("Cache-Reparatur:",e)}
-    try{await syncAppServices({silent:true})}catch(e){console.warn("Aktualisieren:",e)}
     try{await requestHardShellRefresh()}catch(e){console.warn("Shell-Refresh:",e)}
     try{if("serviceWorker" in navigator){const reg=await navigator.serviceWorker.getRegistration("/");reg?.active?.postMessage?.({type:"BYPASS_POST_CACHE"})}}catch(e){}
     const hash=location.hash||"#home";
@@ -15226,7 +15226,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 window.addEventListener("online",function(){updateOfflineBox();flushOfflineQueue().catch(()=>{});refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
 window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")scheduleRefreshContent({forceRender:false},900)});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")scheduleRefreshContent({forceRender:true},150)});
 </script>
 <script>
   /* VERSION_UPDATE_GUARD: Banner nur bei echtem Update; Schleifen-Schutz + HARD_REFRESH + Willkommens-Push */
@@ -15282,6 +15282,44 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function clearVersionUpdatePending() {
       try { sessionStorage.removeItem(VERSION_UPDATE_KEY); } catch (e) {}
       writeVersionState({ pendingBuildId: '' });
+    }
+    function canAutoShellReload(remoteBuildId) {
+      var KEY = 'dar_auto_shell_reload_once';
+      try {
+        var raw = sessionStorage.getItem(KEY);
+        var data = raw ? JSON.parse(raw) : {};
+        if (String(data.buildId || '') !== String(remoteBuildId)) return true;
+        if ((Number(data.count) || 0) >= 2) return false;
+        if (data.at && Date.now() - data.at < 12000) return false;
+        return true;
+      } catch (e) { return true; }
+    }
+    function markAutoShellReload(remoteBuildId) {
+      var KEY = 'dar_auto_shell_reload_once';
+      try {
+        var raw = sessionStorage.getItem(KEY);
+        var data = raw ? JSON.parse(raw) : {};
+        var count = String(data.buildId || '') === String(remoteBuildId) ? (Number(data.count) || 0) + 1 : 1;
+        sessionStorage.setItem(KEY, JSON.stringify({ buildId: String(remoteBuildId), at: Date.now(), count: count }));
+      } catch (e) {}
+    }
+    async function maybeAutoApplyShellUpdate() {
+      if (!navigator.onLine || typeof APP_BUILD_ID !== 'string') return false;
+      try {
+        var vr = await fetch('/test/version.json', { cache: 'no-store' });
+        if (!vr.ok) return false;
+        var remote = await vr.json();
+        var remoteId = String(remote && remote.buildId || '').trim();
+        if (!remoteId || remoteId === String(APP_BUILD_ID)) return false;
+        if (!canAutoShellReload(remoteId)) return false;
+        markAutoShellReload(remoteId);
+        window.__darRemoteBuildId = remoteId;
+        markVersionUpdatePending(remoteId);
+        hideAllBanners();
+        if (typeof hardRefreshApp === 'function') hardRefreshApp();
+        else location.reload();
+        return true;
+      } catch (e) { return false; }
     }
     async function getShellRegistration() {
       if (!("serviceWorker" in navigator)) return null;
@@ -15379,6 +15417,14 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           setHomeRefreshHint(false);
           hideAllBanners();
         } else {
+          if (canAutoShellReload(remoteBuildId)) {
+            markAutoShellReload(remoteBuildId);
+            markVersionUpdatePending(remoteBuildId);
+            hideAllBanners();
+            if (typeof hardRefreshApp === 'function') hardRefreshApp();
+            else location.reload();
+            return;
+          }
           var suppressVersionBanner = shouldSuppressVersionBanner(remoteBuildId) || shouldSuppressVersionBanner(remoteBuildId, hasWaitingWorker);
           if (suppressVersionBanner) {
             setHomeRefreshHint(false);
@@ -15436,7 +15482,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBannerActivate(); }
         });
       }
-      setTimeout(function() { checkForUpdates(); }, 12000);
+      setTimeout(function() {
+        maybeAutoApplyShellUpdate().then(function(did) { if (!did) checkForUpdates(); });
+      }, 1500);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { checkForUpdates(); });
     }
