@@ -1933,7 +1933,6 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
 }
 
 
-
 /* FINAL BUTTON & SORTIERUNG V13: nur Layout-/Button-Sortierung, keine Funktionen geändert */
 .article-actions{
   display:grid!important;
@@ -2150,7 +2149,6 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
     gap:6px!important;
   }
 }
-
 
 
 /* FARBE ZURÜCK V14: nur Farblook zurück auf dunkles Schwarz/Bronze-Gold; Button-Sortierung bleibt unverändert */
@@ -4981,7 +4979,6 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
     padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))!important;
   }
 }
-
 
 
 /* DĀR AL-LAYL — zentrales Premium-Dark-Theme */
@@ -9426,7 +9423,7 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
     </header>
     <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
   </section>
-  <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Beitrag teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
+  <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div></div>
   <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Neue Beiträge anzeigen">
     <span class="new-posts-icon">&#x23F3;</span>
     <span class="new-posts-text">Neue Beiträge verfügbar</span>
@@ -13308,8 +13305,6 @@ function renderDua(id){
 function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String(post.id));return{prev:i>0?posts[i-1]:null,next:i>=0&&i<posts.length-1?posts[i+1]:null}}
 
 
-
-
 function buildShareText(post){
   const title=stripMd(post&&post.title?post.title:"DAR AL TAWḤID").trim();
   const body=stripMd(post&&post.statement?post.statement:"").replace(/\n{3,}/g,"\n\n").trim();
@@ -13336,31 +13331,7 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
   return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-row share-row-v11"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button>${extraAction}<button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button></div><div class="share-help">${esc(helpText)}</div></section>`;
 }
 
-function postNarratorLine(post){
-  const raw=String(post?.scholar||post?.speaker||"").trim();
-  if(!raw)return "";
-  const honorific=/رضي الله عنه|رضي الله عنها|رحمه الله|حفظه الله/.test(raw)?"":"<span class='honorific'>رضي الله عنه</span>";
-  return `<div class="post-reader-speaker"><small>Überliefert von</small><span>${esc(raw)} ${honorific}</span> sagte:</div>`;
-}
-function normalizeStatementText(value){
-  return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
-}
-function renderPostSourceDetails(post,links){
-  const rows=[
-    ["Werk",post.book||""],
-    ["Autor",post.scholar||""],
-    ["Kategorie",normalizePostCategory(post.category||"")],
-    ["Thema",post.topic||""],
-    ["Arabischer Originaltext",post.sourceArabic||post.arabic||post.arabicText||""],
-    ["Band",post.volume||post.band||""],
-    ["Seite",post.page||post.seite||""],
-    ["Nummer",post.number||post.nr||""],
-    ["Bewertung",post.grade||post.authenticity||""],
-    ["Tags",(post.tags||[]).join(" · ")]
-  ].filter(row=>String(row[1]||"").trim());
-  const linksHtml=links.length?links.map(link=>`<a href="${esc(link.url||link)}" target="_blank" rel="noopener">${esc(link.label||"Externer Link")}</a>`).join(" · "):"Keine externen Links hinterlegt.";
-  return `<div class="post-source-details" id="postSourceDetails" hidden>${rows.map(row=>`<div><b>${esc(row[0])}:</b> ${esc(row[1])}</div>`).join("")}<div><b>Externe Quellenlinks:</b> ${linksHtml}</div></div>`;
-}
+
 function getRelatedPosts(post){
   return posts.filter(p=>p.id!==post.id && (p.category===post.category || p.scholar===post.scholar || p.book===post.book)).slice(0,3);
 }
@@ -13393,17 +13364,24 @@ function renderPostNavigation(post){
   const index=ids.indexOf(curId);
   const prev=index>0?ids[index-1]:null;
   const next=index>=0&&index<ids.length-1?ids[index+1]:null;
-  const prevPost=posts.find(p=>String(p.id)===String(prev));
-  const nextPost=posts.find(p=>String(p.id)===String(next));
-  return `<div class="post-nav-preview"><button type="button" class="post-nav-card" ${prevPost?`data-nav="post" data-value="${esc(prevPost.id)}"`:"disabled"}><b>← Vorheriger Beitrag</b><span>${esc(prevPost?.title||"Kein vorheriger Beitrag")}</span></button><button type="button" class="post-nav-card" ${nextPost?`data-nav="post" data-value="${esc(nextPost.id)}"`:"disabled"}><b>Nächster Beitrag →</b><span>${esc(nextPost?.title||"Kein nächster Beitrag")}</span></button></div>`;
+  return `<div class="nav-posts"><button type="button" ${prev?`data-nav="post" data-value="${esc(prev)}"`:"disabled"}>← ${prev?"Vorheriger Beitrag":"Kein vorheriger Beitrag"}</button><button type="button" ${next?`data-nav="post" data-value="${esc(next)}"`:"disabled"}>${next?"Nächster Beitrag":"Kein nächster Beitrag"} →</button></div>`;
 }
 function renderPostAfterPanel(post,{slideIndex=0}={}){
   const slide=isSlidePost(post)?activeSlideForPost(post,slideIndex):null;
   const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
   const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
   const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  const scanChip=hasScan?`<span class="post-source-chip scan">Scan/PDF ✓</span>`:"";
-  return `<section class="post-source-wrap"><div class="post-source"><div class="post-source-head"><b>Quelle ✓</b><div class="post-source-state"><span class="post-source-verify">geprüfte Angaben</span>${scanChip}</div></div><div class="post-source-main">${esc(sourceText)}</div><div class="post-source-actions"><a href="${esc(links?.[0]?.url||"#")}" ${links?.[0]?.url?`target="_blank" rel="noopener"`:"aria-disabled='true'"}>Quelle öffnen</a><button type="button" data-post-source-toggle>Details</button><button type="button" data-post-report>Fehler melden</button></div>${renderPostSourceDetails(post,links)}</div></section><section class="post-actions-wrap"><div class="post-actions"><button class="action-btn ${isSaved(post.id)?"active":""}" type="button" data-post-save>${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button class="action-btn" type="button" data-post-copy>Kopieren</button><button class="action-btn" type="button" data-post-share-open>Teilen</button><button class="action-btn" type="button" data-image-post-open="${esc(post.id)}">Bild erstellen</button></div><div class="post-share-quick"><div class="post-share-quick-label">Schnell teilen</div><div class="post-share-quick-grid"><button class="post-share-quick-btn telegram" type="button" data-post-share-channel="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.4 4.6a1.2 1.2 0 0 0-1.2-.2L3.9 10.7a1.1 1.1 0 0 0 .1 2.1l4.4 1.4 1.7 5.1a1.1 1.1 0 0 0 2 .2l2.5-3 4.2 3.1a1.1 1.1 0 0 0 1.7-.7l2-13a1.2 1.2 0 0 0-.4-1.3Zm-10.1 8.6 7-5.2-5.7 6.5-.8 2.6-.5-3.1Z"/></svg><span>Telegram</span></button><button class="post-share-quick-btn whatsapp" type="button" data-post-share-channel="whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.3A9.7 9.7 0 0 0 3.6 17l-1.3 4.5 4.7-1.2A9.7 9.7 0 1 0 12 2.3Zm0 17.6a7.9 7.9 0 0 1-4-1.1l-.3-.2-2.7.7.7-2.6-.2-.3A7.9 7.9 0 1 1 12 19.9Zm4.3-5.8-.8-.4c-.3-.1-.5-.2-.7.1l-.4.5c-.2.2-.3.2-.6.1a6.6 6.6 0 0 1-3.1-2.8c-.2-.3 0-.4.1-.6l.3-.3c.2-.1.2-.3.3-.5.1-.2 0-.4 0-.5l-.4-.9c-.1-.2-.3-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.6.5-.8 1.3-.8 2.1 0 .8.5 1.6.6 1.8a8.6 8.6 0 0 0 3.6 3.2c.5.2 1 .4 1.3.5.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3Z"/></svg><span>WhatsApp</span></button><button class="post-share-quick-btn instagram" type="button" data-post-share-channel="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.2 2.7h9.6a4.5 4.5 0 0 1 4.5 4.5v9.6a4.5 4.5 0 0 1-4.5 4.5H7.2a4.5 4.5 0 0 1-4.5-4.5V7.2a4.5 4.5 0 0 1 4.5-4.5Zm0 1.8a2.7 2.7 0 0 0-2.7 2.7v9.6a2.7 2.7 0 0 0 2.7 2.7h9.6a2.7 2.7 0 0 0 2.7-2.7V7.2a2.7 2.7 0 0 0-2.7-2.7H7.2Zm10 1.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/></svg><span>Instagram</span></button><button class="post-share-quick-btn link" type="button" data-post-share-channel="copy"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a1 1 0 0 0 1.4 1.4l4.2-4.2a3.8 3.8 0 0 0-5.4-5.4L8.6 7.4a1 1 0 1 0 1.4 1.4l2.2-2.2a1.8 1.8 0 1 1 2.6 2.6L10.6 13.4Zm2.8-2.8a1 1 0 0 0-1.4-1.4L7.8 13.4a3.8 3.8 0 0 0 5.4 5.4l2.2-2.2a1 1 0 1 0-1.4-1.4l-2.2 2.2a1.8 1.8 0 1 1-2.6-2.6l4.2-4.2Z"/></svg><span>Link</span></button></div></div></section><section class="post-nav-wrap">${renderPostNavigation(post)}</section>`;
+  const s=sourceStatus(post);
+  const url=postUrl(post);
+  const text=buildShareText(post);
+  const message=buildPostShareMessage(post);
+  const shareTitle=post.title||"DAR AL TAWḤID";
+  const shareUrl=encodeURIComponent(url);
+  const shareText=encodeURIComponent(message);
+  const imageAction=`<button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Bild</span></button>`;
+  const nav=renderPostNavigation(post).replace('class="nav-posts"','class="post-after-nav"');
+  const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="${slideIndex}"`:"";
+  return `<section class="post-after-panel"${slideAttrs}><div class="post-after-head"><div><div class="post-after-kicker">Quellenbereich</div><div class="post-after-source" data-post-after-source>${esc(sourceText)}</div></div><span class="post-after-state">${s.sourceOk?"✅":"⚠️"} Quelle</span></div><details class="post-after-details"><summary>Details öffnen</summary><div class="post-after-details-body"><div class="post-after-row"><b>Direktlink</b><div class="post-after-links" data-post-after-links>${links.length?renderAfterPanelLinks(links):"<span>Kein Direktlink hinterlegt.</span>"}</div></div><div class="post-after-row"><b>Scan/PDF</b><span data-post-after-scan>${hasScan?"Scan/PDF-Link ist hinterlegt.":"Noch kein Scan/PDF-Link hinterlegt."}</span></div><div class="source-note">Bitte Quelle, Zuschreibung und Textmarkierung vor Veröffentlichung prüfen.</div></div></details><div class="post-after-checks"><span class="status-chip ${s.sourceOk?"ok":"warn"}">${s.sourceOk?"✅":"⚠️"} Quelle</span><span class="status-chip ${s.direct?"ok":"miss"}">${s.direct?"✅":"⚠️"} Link</span><span class="status-chip ${s.marked?"ok":"warn"}">${s.marked?"✅":"⚠️"} Markierung</span><span class="status-chip ${s.scan?"ok":"miss"}">${s.scan?"✅":"📄"} Scan</span><span class="status-chip ${s.attribution?"ok":"warn"}">${s.attribution?"✅":"⚠️"} Zuschreibung</span></div><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("telegram")}<span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("whatsapp")}<span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(message)}" type="button">${compactShareIcon("instagram")}<span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(url)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -13463,12 +13441,8 @@ function renderPost(id){
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   const related=getRelatedPosts(post);
-  const narrator=postNarratorLine(post);
-  const body=isSlidePost(post)?renderPostSlides(post):`<section id="postStatement" class="statement">${formatText(normalizeStatementText(post.statement||""))}</section>`;
-  const keyMessage=String(post.summary||post.fazit||post.fazitText||post.conclusion||"").trim();
-  const keyBlock=keyMessage?`<section class="post-key-message"><h3>Kerngedanke</h3><p>${esc(keyMessage)}</p></section>`:"";
-  const intro=renderPostIntroButton(post);
-  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2>${narrator}</header>${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  const body=isSlidePost(post)?renderPostSlides(post):`<section id="postStatement" class="statement">${formatText(post.statement||"")}</section>`;
+  return `<article class="article"><div id="postReadStart" class="article-title"><div class="eyebrow">${isSlidePost(post)?"Slide-Beitrag":"Beitrag"}</div><h2>${esc(post.title)}</h2></div><div class="article-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}${post.book?`<span class="badge">${esc(post.book)}</span>`:""}${post.topic?`<span class="badge">${esc(post.topic)}</span>`:""}</div>${renderPostIntroButton(post)}${renderReadingFontControl()}${body}${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
@@ -13511,12 +13485,10 @@ function updateChrome(route){
   const homeBtn=$("homeBtn");
   const crumb=$("crumb");
   const appBar=document.querySelector(".app-bar");
-  const postReaderActions=$("postReaderActions");
   const isHome=isHomeRoute(route);
   const isFeedFull=route.view==="feed";
   const isMore=route.view==="more";
   const isIlm=route.view==="ilm";
-  const isPost=route.view==="post";
   if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);
   document.body.classList.toggle("is-home-route",isHome);
   document.body.classList.toggle("is-area-route",!isHome);
@@ -13526,9 +13498,8 @@ function updateChrome(route){
   document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
   document.body.classList.toggle("is-hadith-route",route.view==="hadith");
-  document.body.classList.toggle("is-post-route",isPost);
+  document.body.classList.toggle("is-post-route",route.view==="post");
   if(appBar)appBar.classList.toggle("is-more-route",isMore);
-  if(postReaderActions)postReaderActions.hidden=!isPost;
   updateBottomNav(route);
   updatePostNavVisibility();
   if(isIlm){
