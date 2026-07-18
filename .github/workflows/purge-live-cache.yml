@@ -47,6 +47,6 @@ jobs:
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v247"
+          EXPECT_BUILD: "app-shell-v248"
           CLOUDFLARE_DEV_MODE: "1"
         run: node scripts/purge-cloudflare-cache.js
