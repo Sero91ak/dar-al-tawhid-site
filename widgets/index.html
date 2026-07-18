@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Widgets · DAR AL TAWḤĪD</title>
+  <link rel="stylesheet" href="/widgets/prayer-times/prayer-widget.css">
+</head>
+<body>
+  <main class="pw-page" id="pwPage">
+    <a class="pw-back" id="pwBack" href="/#more">← Zurück zur App</a>
+    <h1>Widgets</h1>
+    <p class="pw-lead">Eigenständiges Gebetszeiten-Widget · Phase 1–2 (stabile Grundversion ohne Hintergrundbilder).</p>
+
+    <section class="pw-card">
+      <h2>Einstellungen</h2>
+      <div class="pw-field">
+        <label for="pwThemeMode">Erscheinungsbild</label>
+        <select id="pwThemeMode">
+          <option value="auto">Automatisch (App-Theme)</option>
+          <option value="light">Hell</option>
+          <option value="dark">Dunkel</option>
+          <option value="royal">Royal Nachtblau</option>
+        </select>
+      </div>
+      <div class="pw-actions">
+        <button type="button" class="primary" id="pwEnableBtn">Widget aktivieren</button>
+        <button type="button" id="pwSyncBtn">Gebetszeiten synchronisieren</button>
+        <button type="button" id="pwLocationBtn">Standort in App prüfen</button>
+        <button type="button" id="pwResetBtn">Widget zurücksetzen</button>
+      </div>
+      <p class="pw-status" id="pwStatus" role="status"></p>
+    </section>
+
+    <section class="pw-card">
+      <h2>Installationshinweis</h2>
+      <p class="pw-lead" style="margin:0">
+        Diese Web-Vorschau zeigt das Widget in drei Größen. Native Home-Screen-Widgets (iOS/Android)
+        folgen in Phase 3. Die Gebetszeiten nutzen dieselbe Berechnung wie die App und funktionieren offline.
+      </p>
+    </section>
+
+    <section class="pw-card">
+      <h2>Vorschau</h2>
+      <div class="pw-preview-grid">
+        <div>
+          <p class="pw-preview-label">Kompakt</p>
+          <div id="pwMountCompact" class="dar-prayer-widget" data-pw-size="compact"></div>
+        </div>
+        <div>
+          <p class="pw-preview-label">Mittel</p>
+          <div id="pwMountMedium" class="dar-prayer-widget" data-pw-size="medium"></div>
+        </div>
+        <div class="pw-preview-large">
+          <p class="pw-preview-label">Groß</p>
+          <div id="pwMountLarge" class="dar-prayer-widget" data-pw-size="large"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/widgets/shared/widget-log.js"></script>
+  <script src="/widgets/shared/prayer-math.js"></script>
+  <script src="/widgets/storage/prayer-cache.js"></script>
+  <script src="/widgets/theme/widget-theme.js"></script>
+  <script src="/widgets/fallback/fallback-ui.js"></script>
+  <script src="/widgets/prayer-times/prayer-widget.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var IS_TEST = location.pathname.indexOf("/test/") === 0 || new URLSearchParams(location.search).get("from") === "test" || new URLSearchParams(location.search).get("env") === "staging";
+    var APP_HOME = IS_TEST ? "/test/#more" : "/#more";
+    var APP_PRAYER = IS_TEST ? "/test/#prayer" : "/#prayer";
+    var mounts = [];
+
+    document.getElementById("pwBack").href = APP_HOME;
+
+    function setStatus(msg) {
+      var el = document.getElementById("pwStatus");
+      if (el) el.textContent = msg || "";
+    }
+
+    function refreshMounts() {
+      mounts.forEach(function (m) { try { m.destroy(); } catch (e) {} });
+      mounts = [];
+      try {
+        if (window.DarWidgetStorage && window.DarPrayerMath) {
+          var cfg = DarWidgetStorage.getConfig();
+          if (DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
+            DarWidgetStorage.syncCache(DarPrayerMath);
+          }
+          mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountCompact"), { size: "compact", appPath: APP_PRAYER }));
+          mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountMedium"), { size: "medium", appPath: APP_PRAYER }));
+          mounts.push(DarPrayerWidget.mount(document.getElementById("pwMountLarge"), { size: "large", appPath: APP_PRAYER }));
+          setStatus(cfg.enabled
+            ? "Widget aktiv · Theme: " + cfg.themeMode
+            : "Widget noch nicht aktiviert (Vorschau trotzdem sichtbar).");
+        }
+      } catch (e) {
+        setStatus("Vorschau konnte nicht geladen werden.");
+      }
+    }
+
+    function bind() {
+      var themeSel = document.getElementById("pwThemeMode");
+      var cfg = DarWidgetStorage.getConfig();
+      themeSel.value = cfg.themeMode || "auto";
+      themeSel.onchange = function () {
+        DarWidgetStorage.setConfig({ themeMode: themeSel.value });
+        refreshMounts();
+      };
+
+      document.getElementById("pwEnableBtn").onclick = function () {
+        DarWidgetStorage.setConfig({ enabled: true });
+        if (DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
+          DarWidgetStorage.syncCache(DarPrayerMath);
+        }
+        setStatus("Widget aktiviert.");
+        refreshMounts();
+      };
+
+      document.getElementById("pwSyncBtn").onclick = function () {
+        var settings = DarWidgetStorage.readAppPrayerSettings();
+        if (!DarWidgetStorage.hasLocation(settings)) {
+          setStatus("Bitte zuerst in der App einen Standort wählen.");
+          return;
+        }
+        var res = DarWidgetStorage.syncCache(DarPrayerMath);
+        setStatus(res.ok ? "60 Tage Gebetszeiten lokal gespeichert." : "Synchronisierung fehlgeschlagen – alte Daten bleiben.");
+        refreshMounts();
+      };
+
+      document.getElementById("pwLocationBtn").onclick = function () {
+        location.href = APP_PRAYER;
+      };
+
+      document.getElementById("pwResetBtn").onclick = function () {
+        if (!confirm("Nur Widget-Daten zurücksetzen? App-Einstellungen, Push und Favoriten bleiben erhalten.")) return;
+        DarWidgetStorage.resetWidgetOnly();
+        themeSel.value = "auto";
+        setStatus("Widget zurückgesetzt.");
+        refreshMounts();
+      };
+    }
+
+    try {
+      bind();
+      refreshMounts();
+    } catch (e) {
+      setStatus("Widget-Seite konnte nicht gestartet werden.");
+    }
+  })();
+  </script>
+</body>
+</html>
