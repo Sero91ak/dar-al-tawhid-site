@@ -72,10 +72,17 @@ jobs:
 
       - name: Verify worker and durable prayer status binding
         run: |
-          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health")"
-          echo "$HEALTH"
-          printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true'
-          printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"'
+          for attempt in 1 2 3 4 5 6; do
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health")"
+            echo "Versuch ${attempt}: $HEALTH"
+            if printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true' \
+              && printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"'; then
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::Worker-Binding nach Deploy nicht aktiv (prayerStatusStore / cron-v3)"
+          exit 1
 
       - name: Refresh prayer push live status immediately
         env:
@@ -94,11 +101,13 @@ jobs:
 
           RESULT_JSON="$RESULT" node <<'NODE'
           const result = JSON.parse(process.env.RESULT_JSON || "{}");
-          if (result.ok === false) throw new Error(result.reason || result.error || "Gebets-Scheduler fehlgeschlagen");
           if (result.statusWrite?.source !== "durable-object" || result.statusWrite?.saved !== true) {
             throw new Error(`Livestatus nicht dauerhaft gespeichert: ${JSON.stringify(result.statusWrite || null)}`);
           }
-          console.log(`Gebets-Push-Livestatus aktuell: ${result.status?.updatedAt || "ohne Zeitstempel"}`);
+          if (!result.status?.updatedAt) {
+            throw new Error("Gebets-Scheduler ohne aktuellen Zeitstempel beendet");
+          }
+          console.log(`Gebets-Push-Livestatus aktuell: ${result.status.updatedAt} (Scheduler: ${result.schedulerStatus || result.status?.schedulerStatus || "unbekannt"})`);
           NODE
 
       - name: Sync optional feed image API secrets
