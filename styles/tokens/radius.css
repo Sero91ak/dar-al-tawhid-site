@@ -1,0 +1,15 @@
+/* DAR AL TAWḤID — Unified radius scale */
+:root {
+  --radius-page: 28px;
+  --radius-feature: 24px;
+  --radius-card: 20px;
+  --radius-control: 18px;
+  --radius-button: 17px;
+  --radius-compact: 14px;
+  --radius-pill: 999px;
+
+  /* Legacy aliases — same geometry, one source */
+  --panel-radius: var(--radius-card);
+  --card-radius: var(--radius-feature);
+  --card-radius-md: var(--radius-feature);
+}

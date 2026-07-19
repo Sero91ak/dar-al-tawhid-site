@@ -38,7 +38,9 @@
     settings: "settings",
     widgets: "widgets",
     qibla: "qibla",
-    quran: "quran"
+    quran: "quran",
+    jummah: "jummah",
+    account: "account"
   };
 
   const BOTTOM_NAV_ICONS = {

@@ -1,0 +1,74 @@
+/* DAR AL TAWḤID — Navigation chrome (TopNav, BottomNav) */
+
+.dar-top-nav,
+.dar-page-header {
+  min-width: 0;
+}
+
+.dar-bottom-nav,
+#bottomNav.bottom-nav.dar-bottom-nav,
+.bottom-nav.dar-bottom-nav {
+  min-height: var(--bottom-nav-height);
+  border-radius: var(--radius-page);
+  border-color: var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: var(--depth-2-shadow);
+}
+
+.dar-bottom-nav .bottom-nav-btn {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.dar-bottom-nav .bottom-nav-btn.active {
+  color: var(--text-primary);
+}
+
+.dar-bottom-nav .bottom-nav-btn .nav-icon img {
+  opacity: 0.82;
+  transition: opacity var(--motion-control) var(--motion-ease), transform var(--motion-card) var(--motion-ease);
+}
+
+.dar-bottom-nav .bottom-nav-btn.active .nav-icon img {
+  opacity: 1;
+}
+
+.dar-page-shell {
+  display: grid;
+  gap: var(--app-section-gap);
+  min-width: 0;
+}
+
+.view .dar-page-shell,
+#appView .dar-page-shell {
+  padding-inline: 0;
+}
+
+.dar-page-shell > * {
+  min-width: 0;
+}
+
+.dar-page-home .section-block,
+.dar-page-more .spatial-more-group,
+.dar-page-quran .quran-meta-note,
+.dar-page-quran .quran-surah-grid {
+  min-width: 0;
+}
+
+/* Pilot: global search panel */
+.dar-search-panel,
+.search-pro-panel.dar-search-panel {
+  min-width: 0;
+}
+
+.dar-search-panel .search-line {
+  min-width: 0;
+}
+
+.dar-search-panel .search-input-shell,
+.dar-search-panel .spatial-glass-toolbar {
+  flex: 1;
+  min-width: 0;
+}

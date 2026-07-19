@@ -1,0 +1,12 @@
+/* DAR AL TAWḤID — Navigation geometry */
+:root {
+  --bottom-nav-height: 58px;
+  --top-nav-height: 48px;
+  --app-chrome-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 20px);
+  --app-chrome-top: calc(var(--top-nav-height) + env(safe-area-inset-top, 0px));
+}
+
+body.has-bottom-nav .view,
+body.has-bottom-nav #appView {
+  padding-bottom: var(--app-chrome-bottom);
+}

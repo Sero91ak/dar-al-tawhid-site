@@ -1,0 +1,82 @@
+/* DAR AL TAWḤID — Input tokens (default / dark) */
+:root {
+  --input-bg: color-mix(in srgb, var(--card) 88%, #000 12%);
+  --input-bg-hover: color-mix(in srgb, var(--card) 82%, #fff 6%);
+  --input-bg-focus: color-mix(in srgb, var(--card) 78%, var(--gold2) 8%);
+  --input-text: var(--text-body);
+  --input-placeholder: var(--text-muted);
+  --input-border: var(--border-default);
+  --input-border-hover: color-mix(in srgb, var(--gold2) 42%, var(--border-default));
+  --input-border-focus: color-mix(in srgb, var(--gold2) 62%, transparent);
+  --input-caret: var(--gold2);
+  --input-focus-ring: 0 0 0 3px color-mix(in srgb, var(--gold2) 22%, transparent);
+  --input-disabled-bg: color-mix(in srgb, var(--card) 70%, transparent);
+  --input-disabled-text: color-mix(in srgb, var(--text-muted) 72%, transparent);
+  --input-error-border: color-mix(in srgb, #ff9ea5 55%, var(--border-default));
+  --input-success-border: color-mix(in srgb, #7de3b6 45%, var(--border-default));
+  --input-min-height: 54px;
+  --input-padding-x: 16px;
+  --input-font-size: 16px;
+  --input-line-height: 1.35;
+  --textarea-min-height: 108px;
+}
+
+html[data-theme="light"] {
+  --input-bg: #fffaf0;
+  --input-bg-hover: #fff6e6;
+  --input-bg-focus: #fff3dc;
+  --input-text: #2a2118;
+  --input-placeholder: #7a6f5f;
+  --input-border: rgba(120, 90, 50, 0.28);
+  --input-border-focus: rgba(150, 110, 45, 0.55);
+  --input-caret: #8a6428;
+  --input-focus-ring: 0 0 0 3px rgba(150, 110, 45, 0.18);
+}
+
+html[data-theme="soft"] {
+  --input-bg: #fff6f2;
+  --input-bg-hover: #fff0ea;
+  --input-bg-focus: #ffe9e2;
+  --input-text: #3a2622;
+  --input-placeholder: #8a6f68;
+  --input-border: rgba(140, 88, 78, 0.24);
+  --input-border-focus: rgba(160, 88, 78, 0.48);
+  --input-caret: #9a4f45;
+  --input-focus-ring: 0 0 0 3px rgba(160, 88, 78, 0.16);
+}
+
+html[data-theme="royal"] {
+  --input-bg: color-mix(in srgb, #0d1e38 92%, #fff 4%);
+  --input-bg-hover: color-mix(in srgb, #102444 92%, #fff 5%);
+  --input-bg-focus: color-mix(in srgb, #12305a 90%, #d8c18a 8%);
+  --input-text: #eef4ff;
+  --input-placeholder: #9eb0cc;
+  --input-border: rgba(132, 178, 255, 0.22);
+  --input-border-focus: rgba(214, 193, 139, 0.52);
+  --input-caret: #d6c18b;
+  --input-focus-ring: 0 0 0 3px rgba(214, 193, 139, 0.18);
+}
+
+html[data-theme="bordeaux"] {
+  --input-bg: color-mix(in srgb, #1c1012 92%, #fff 3%);
+  --input-bg-hover: color-mix(in srgb, #241418 92%, #fff 4%);
+  --input-bg-focus: color-mix(in srgb, #2a1618 90%, #d6b46a 8%);
+  --input-text: #f6ece4;
+  --input-placeholder: #b39a92;
+  --input-border: rgba(214, 150, 132, 0.22);
+  --input-border-focus: rgba(214, 180, 106, 0.5);
+  --input-caret: #d6b46a;
+  --input-focus-ring: 0 0 0 3px rgba(214, 180, 106, 0.16);
+}
+
+html[data-theme="dar-al-layl"] {
+  --input-bg: color-mix(in srgb, #0a0d0b 92%, #fff 3%);
+  --input-bg-hover: color-mix(in srgb, #0f1411 92%, #fff 4%);
+  --input-bg-focus: color-mix(in srgb, #141a16 90%, #c8b878 8%);
+  --input-text: #ece8d8;
+  --input-placeholder: #9a9585;
+  --input-border: rgba(214, 190, 132, 0.18);
+  --input-border-focus: rgba(200, 184, 120, 0.48);
+  --input-caret: #c8b878;
+  --input-focus-ring: 0 0 0 3px rgba(200, 184, 120, 0.14);
+}

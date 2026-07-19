@@ -1,0 +1,65 @@
+{
+  "phase": "3-6-complete",
+  "title": "Global Premium Audit — Dar Test Abschluss",
+  "buildId": "app-shell-v290",
+  "completedAt": "2026-07-19T23:30:00.000Z",
+  "scope": "Dar Test only — visitor app unchanged until explicit live approval",
+  "phases": {
+    "phase3": {
+      "status": "done",
+      "components": [
+        "styles/components/ui-buttons.css",
+        "styles/components/ui-cards.css",
+        "styles/components/ui-navigation.css",
+        "styles/components/ui-overlays.css",
+        "styles/components/ui-states.css",
+        "assets/dar-components.js (DARDesign helpers)"
+      ]
+    },
+    "phase4": {
+      "status": "done",
+      "pilotAreas": [
+        "Startseite (dar-page-home)",
+        "Mehr-Bereich (dar-page-more)",
+        "Bottom Navigation (dar-bottom-nav)",
+        "Qurʾān-Übersicht (dar-page-quran)",
+        "Globale Suchfelder (dar-search-panel)"
+      ]
+    },
+    "phase5": {
+      "status": "done",
+      "pages": [
+        "feed", "topics", "scholars", "books", "saved", "account", "about",
+        "duas", "settings", "jummah", "news", "ramadan", "calendar", "hadith", "prayer"
+      ]
+    },
+    "phase6": {
+      "status": "done",
+      "testMatrix": {
+        "themes": ["default", "light", "soft", "bordeaux", "imperial", "dar-al-layl"],
+        "devices": ["iPhone SE", "iPhone 15", "iPad", "Android compact", "Desktop"],
+        "checks": [
+          "Input focus rings visible in all themes",
+          "Bottom nav contrast + safe-area",
+          "Arabic line-height / overflow-wrap on reading surfaces",
+          "Empty/loading states unified (.dar-empty, .dar-loading)",
+          "Offline shell loads design-system CSS from SW v290",
+          "PWA install modal still functional",
+          "No push/SW manifest regression"
+        ]
+      }
+    },
+    "phase7": {
+      "status": "pending",
+      "note": "Visitor app parity only after user says push live / freigeben"
+    }
+  },
+  "filesChanged": [
+    "test/index.html",
+    "test/version.json",
+    "styles/dar-design-system.css",
+    "styles/components/*",
+    "assets/dar-components.js",
+    "service-worker.js"
+  ]
+}

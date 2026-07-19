@@ -1,0 +1,1508 @@
+{
+  "phase": 6,
+  "title": "Global Premium Audit — Complete (Dar Test)",
+  "buildId": "app-shell-v290",
+  "summary": {
+    "generatedAt": "2026-07-19T22:56:03.232Z",
+    "files": {
+      "test/index.html": {
+        "findings": [
+          {
+            "id": "hardcoded-hex",
+            "label": "Hardcoded hex colors",
+            "count": 1133,
+            "samples": [
+              {
+                "line": 32,
+                "sample": "<meta name=\"theme-color\" content=\"#080806\">"
+              },
+              {
+                "line": 34,
+                "sample": "<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf(\"/test/\")===0||location.path"
+              },
+              {
+                "line": 40,
+                "sample": "<meta name=\"msapplication-TileColor\" content=\"#080806\">"
+              },
+              {
+                "line": 44,
+                "sample": "--bg:#070706;--bg2:#0d0c09;--panel:#12100c;--card:#14120e;"
+              },
+              {
+                "line": 45,
+                "sample": "--gold:#c8a85b;--gold2:#efd78e;--bronze:#9b7a3c;--cream:#f8efd4;"
+              }
+            ],
+            "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+            "status": "open"
+          },
+          {
+            "id": "hardcoded-rgba",
+            "label": "Hardcoded rgba/rgb",
+            "count": 2354,
+            "samples": [
+              {
+                "line": 47,
+                "sample": "--line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);"
+              },
+              {
+                "line": 48,
+                "sample": "--danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);"
+              },
+              {
+                "line": 57,
+                "sample": "--premium-border:rgba(239,215,142,.46);"
+              },
+              {
+                "line": 58,
+                "sample": "--premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),"
+              },
+              {
+                "line": 59,
+                "sample": "--premium-shadow:0 18px 46px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045);"
+              }
+            ],
+            "plannedFix": "Use theme tokens + color-mix",
+            "status": "open"
+          },
+          {
+            "id": "overflow-hidden",
+            "label": "overflow:hidden (clip risk)",
+            "count": 122,
+            "samples": [
+              {
+                "line": 139,
+                "sample": ".theme-switch-panel{position:relative;overflow:hidden}"
+              },
+              {
+                "line": 140,
+                "sample": ".account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px;overflow:hidden;max-width:100%}"
+              },
+              {
+                "line": 162,
+                "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+              },
+              {
+                "line": 204,
+                "sample": ".top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5"
+              },
+              {
+                "line": 209,
+                "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+              }
+            ],
+            "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+            "status": "open"
+          },
+          {
+            "id": "nowrap",
+            "label": "white-space:nowrap",
+            "count": 75,
+            "samples": [
+              {
+                "line": 209,
+                "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+              },
+              {
+                "line": 211,
+                "sample": "h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px);line-height:.92;letter-spacing:.095em;margin:0;font-weight:"
+              },
+              {
+                "line": 212,
+                "sample": ".socials{display:grid;grid-template-columns:1fr;gap:11px;width:168px}.social-link,.pill,.btn,.icon-btn{border:1px solid var(--line);backgrou"
+              },
+              {
+                "line": 213,
+                "sample": ".hero-text{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:980px}.salam{font-family:var(--serif);color:var(--go"
+              },
+              {
+                "line": 214,
+                "sample": ".isnad{border-top:1px solid var(--line2);background:rgba(0,0,0,.18);padding:11px 24px 14px}.isnad-label{display:flex;align-items:center;gap:"
+              }
+            ],
+            "plannedFix": "Allow wrap except short labels; add min-width:0",
+            "status": "open"
+          },
+          {
+            "id": "fixed-height",
+            "label": "Fixed min-height >= 80px",
+            "count": 30,
+            "samples": [
+              {
+                "line": 162,
+                "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+              },
+              {
+                "line": 228,
+                "sample": ".view{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));box-shadow:var(-"
+              },
+              {
+                "line": 240,
+                "sample": ".folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-family:var(--serif);color:var(--gold2);font-size:22px;line-heigh"
+              },
+              {
+                "line": 247,
+                "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+              },
+              {
+                "line": 730,
+                "sample": "@media(max-width:700px){body{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}.to"
+              }
+            ],
+            "plannedFix": "Reduce feature card min-heights to 82–100px spec",
+            "status": "open"
+          },
+          {
+            "id": "100vh",
+            "label": "100vh usage",
+            "count": 2,
+            "samples": [
+              {
+                "line": 7614,
+                "sample": ".ie-power-sheet-body{max-height:calc(100vh - 280px)}"
+              },
+              {
+                "line": 7629,
+                "sample": "@media(min-width:901px){body.image-editor-mode.has-bottom-nav{padding-bottom:14px}.ie-power-layout{grid-template-columns:minmax(0,1.08fr) mi"
+              }
+            ],
+            "plannedFix": "Prefer 100dvh/100svh + visualViewport",
+            "status": "open"
+          },
+          {
+            "id": "emoji-ui",
+            "label": "Emoji in nav/render strings",
+            "count": 163,
+            "samples": [
+              {
+                "line": 8034,
+                "sample": ".view .post-grid:not(#latestGrid):not(#folderGrid) .post-card:before{content:\"📖\";grid-column:1;grid-row:1 / span 3;width:30px;height:30px;b"
+              },
+              {
+                "line": 10468,
+                "sample": "<button id=\"hijriHeaderDate\" class=\"hijri-header-pill\" type=\"button\" data-hijri-today data-nav=\"calendar\" aria-label=\"Islamischer Kalender\">"
+              },
+              {
+                "line": 10485,
+                "sample": "<section class=\"isnad\"><div class=\"isnad-label\">Maßstab der Überlieferung</div><div class=\"isnad-quote\"><span class=\"isnad-speaker\">🖋️ Ibn "
+              },
+              {
+                "line": 10509,
+                "sample": "<span class=\"float-handle-icons\" aria-hidden=\"true\"><span>🧭</span><span>♡</span><span>🔔</span></span>"
+              },
+              {
+                "line": 10514,
+                "sample": "<button id=\"qiblaFloat\" class=\"float-btn qibla-float\" type=\"button\" aria-label=\"Qibla-Kompass öffnen\" title=\"Qibla-Kompass\">🧭</button>"
+              }
+            ],
+            "plannedFix": "Replace with assets/icons SVG via DARSpatial",
+            "status": "open"
+          },
+          {
+            "id": "autofill-missing",
+            "label": "Inputs without autofill override nearby",
+            "count": 3,
+            "samples": [
+              {
+                "line": 3641,
+                "sample": ":where(button,.btn,.pill,.icon-btn,input[type=\"button\"],input[type=\"submit\"],.float-btn,.float-touch-handle,.collapse-toggle,.action-btn,.hi"
+              },
+              {
+                "line": 7451,
+                "sample": ".image-editor-range input[type=range]{grid-column:1/-1;width:100%;min-height:32px;margin:0;touch-action:pan-x}"
+              }
+            ],
+            "plannedFix": "styles/components/ui-inputs.css autofill block",
+            "status": "open"
+          },
+          {
+            "id": "z-index-high",
+            "label": "z-index > 90",
+            "count": 18,
+            "samples": [
+              {
+                "line": 246,
+                "sample": ".post-intro-modal[hidden]{display:none}.post-intro-modal{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;padding:max(18p"
+              },
+              {
+                "line": 247,
+                "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+              },
+              {
+                "line": 255,
+                "sample": "z-index:41;"
+              },
+              {
+                "line": 885,
+                "sample": ".pwa-modal-overlay{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:max(16px,env(safe-ar"
+              },
+              {
+                "line": 1218,
+                "sample": "body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!imp"
+              }
+            ],
+            "plannedFix": "Centralize z-index scale in navigation/states tokens",
+            "status": "open"
+          },
+          {
+            "id": "inline-style",
+            "label": "Inline style attributes",
+            "count": 31,
+            "samples": [
+              {
+                "line": 10577,
+                "sample": "function fontSlider(key,title,description){const value=getFontScale(key);return `<section class=\"font-slider-panel\"><div class=\"font-slider-"
+              },
+              {
+                "line": 10807,
+                "sample": "function renderQuranOverviewProgressCard(){const prog=getPreferredQuranProgress();if(!prog)return\"\";return`<section class=\"quran-continue-ba"
+              },
+              {
+                "line": 10808,
+                "sample": "function quranSurahCard(s){const pct=quranSurahProgressPercent(s.id);return `<article class=\"quran-surah-card spatial-content-card spatial-q"
+              },
+              {
+                "line": 10974,
+                "sample": "function renderQuran(){if(!quranMeta)return darPageShell(\"quran\",`${setPageHeader(\"Qurʾān\",\"Der edle Qurʾān wird geladen…\",\"Qurʾān\")}<div cl"
+              },
+              {
+                "line": 12717,
+                "sample": "function offlineProgressHtml(){const s=readOfflinePrepState();if(!s.running&&s.status!==\"done\"&&s.status!==\"error\")return\"\";const p=Math.max"
+              }
+            ],
+            "plannedFix": "Move to design tokens / component CSS",
+            "status": "open"
+          }
+        ]
+      },
+      "index.html": {
+        "findings": [
+          {
+            "id": "hardcoded-hex",
+            "label": "Hardcoded hex colors",
+            "count": 1062,
+            "samples": [
+              {
+                "line": 32,
+                "sample": "<meta name=\"theme-color\" content=\"#080806\">"
+              },
+              {
+                "line": 34,
+                "sample": "<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf(\"/test/\")===0||location.path"
+              },
+              {
+                "line": 40,
+                "sample": "<meta name=\"msapplication-TileColor\" content=\"#080806\">"
+              },
+              {
+                "line": 44,
+                "sample": "--bg:#070706;--bg2:#0d0c09;--panel:#12100c;--card:#14120e;"
+              },
+              {
+                "line": 45,
+                "sample": "--gold:#c8a85b;--gold2:#efd78e;--bronze:#9b7a3c;--cream:#f8efd4;"
+              }
+            ],
+            "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+            "status": "open"
+          },
+          {
+            "id": "hardcoded-rgba",
+            "label": "Hardcoded rgba/rgb",
+            "count": 2282,
+            "samples": [
+              {
+                "line": 47,
+                "sample": "--line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);"
+              },
+              {
+                "line": 48,
+                "sample": "--danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);"
+              },
+              {
+                "line": 57,
+                "sample": "--premium-border:rgba(239,215,142,.46);"
+              },
+              {
+                "line": 58,
+                "sample": "--premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),"
+              },
+              {
+                "line": 59,
+                "sample": "--premium-shadow:0 18px 46px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045);"
+              }
+            ],
+            "plannedFix": "Use theme tokens + color-mix",
+            "status": "open"
+          },
+          {
+            "id": "overflow-hidden",
+            "label": "overflow:hidden (clip risk)",
+            "count": 122,
+            "samples": [
+              {
+                "line": 139,
+                "sample": ".theme-switch-panel{position:relative;overflow:hidden}"
+              },
+              {
+                "line": 140,
+                "sample": ".account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px;overflow:hidden;max-width:100%}"
+              },
+              {
+                "line": 162,
+                "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+              },
+              {
+                "line": 204,
+                "sample": ".top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5"
+              },
+              {
+                "line": 209,
+                "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+              }
+            ],
+            "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+            "status": "open"
+          },
+          {
+            "id": "nowrap",
+            "label": "white-space:nowrap",
+            "count": 75,
+            "samples": [
+              {
+                "line": 209,
+                "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+              },
+              {
+                "line": 211,
+                "sample": "h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px);line-height:.92;letter-spacing:.095em;margin:0;font-weight:"
+              },
+              {
+                "line": 212,
+                "sample": ".socials{display:grid;grid-template-columns:1fr;gap:11px;width:168px}.social-link,.pill,.btn,.icon-btn{border:1px solid var(--line);backgrou"
+              },
+              {
+                "line": 213,
+                "sample": ".hero-text{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:980px}.salam{font-family:var(--serif);color:var(--go"
+              },
+              {
+                "line": 214,
+                "sample": ".isnad{border-top:1px solid var(--line2);background:rgba(0,0,0,.18);padding:11px 24px 14px}.isnad-label{display:flex;align-items:center;gap:"
+              }
+            ],
+            "plannedFix": "Allow wrap except short labels; add min-width:0",
+            "status": "open"
+          },
+          {
+            "id": "fixed-height",
+            "label": "Fixed min-height >= 80px",
+            "count": 29,
+            "samples": [
+              {
+                "line": 162,
+                "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+              },
+              {
+                "line": 228,
+                "sample": ".view{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));box-shadow:var(-"
+              },
+              {
+                "line": 237,
+                "sample": ".filter-panel{border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.14);padding:12px;margin-bottom:13px}.filter-grid{displa"
+              },
+              {
+                "line": 240,
+                "sample": ".folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-family:var(--serif);color:var(--gold2);font-size:22px;line-heigh"
+              },
+              {
+                "line": 247,
+                "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+              }
+            ],
+            "plannedFix": "Reduce feature card min-heights to 82–100px spec",
+            "status": "open"
+          },
+          {
+            "id": "100vh",
+            "label": "100vh usage",
+            "count": 2,
+            "samples": [
+              {
+                "line": 7307,
+                "sample": ".ie-power-sheet-body{max-height:calc(100vh - 280px)}"
+              },
+              {
+                "line": 7322,
+                "sample": "@media(min-width:901px){body.image-editor-mode.has-bottom-nav{padding-bottom:14px}.ie-power-layout{grid-template-columns:minmax(0,1.08fr) mi"
+              }
+            ],
+            "plannedFix": "Prefer 100dvh/100svh + visualViewport",
+            "status": "open"
+          },
+          {
+            "id": "emoji-ui",
+            "label": "Emoji in nav/render strings",
+            "count": 178,
+            "samples": [
+              {
+                "line": 7727,
+                "sample": ".view .post-grid:not(#latestGrid):not(#folderGrid) .post-card:before{content:\"📖\";grid-column:1;grid-row:1 / span 3;width:30px;height:30px;b"
+              },
+              {
+                "line": 9739,
+                "sample": "<button id=\"hijriHeaderDate\" class=\"hijri-header-pill\" type=\"button\" data-hijri-today data-nav=\"calendar\" aria-label=\"Islamischer Kalender\">"
+              },
+              {
+                "line": 9756,
+                "sample": "<section class=\"isnad\"><div class=\"isnad-label\">Maßstab der Überlieferung</div><div class=\"isnad-quote\"><span class=\"isnad-speaker\">🖋️ Ibn "
+              },
+              {
+                "line": 9771,
+                "sample": "<button class=\"bottom-nav-btn\" type=\"button\" data-bottom-nav=\"quiz\" aria-label=\"Din-Quiz\"><span class=\"nav-icon\" aria-hidden=\"true\">🧠</span"
+              },
+              {
+                "line": 9773,
+                "sample": "<button class=\"bottom-nav-btn\" type=\"button\" data-bottom-nav=\"quran\" aria-label=\"Qurʾān\"><span class=\"nav-icon\" aria-hidden=\"true\">📖</span>"
+              }
+            ],
+            "plannedFix": "Replace with assets/icons SVG via DARSpatial",
+            "status": "open"
+          },
+          {
+            "id": "autofill-missing",
+            "label": "Inputs without autofill override nearby",
+            "count": 3,
+            "samples": [
+              {
+                "line": 3334,
+                "sample": ":where(button,.btn,.pill,.icon-btn,input[type=\"button\"],input[type=\"submit\"],.float-btn,.float-touch-handle,.collapse-toggle,.action-btn,.hi"
+              },
+              {
+                "line": 7144,
+                "sample": ".image-editor-range input[type=range]{grid-column:1/-1;width:100%;min-height:32px;margin:0;touch-action:pan-x}"
+              }
+            ],
+            "plannedFix": "styles/components/ui-inputs.css autofill block",
+            "status": "open"
+          },
+          {
+            "id": "z-index-high",
+            "label": "z-index > 90",
+            "count": 17,
+            "samples": [
+              {
+                "line": 246,
+                "sample": ".post-intro-modal[hidden]{display:none}.post-intro-modal{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;padding:max(18p"
+              },
+              {
+                "line": 247,
+                "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+              },
+              {
+                "line": 575,
+                "sample": ".pwa-modal-overlay{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:max(16px,env(safe-ar"
+              },
+              {
+                "line": 909,
+                "sample": "body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!imp"
+              },
+              {
+                "line": 928,
+                "sample": ".ilm-composer-bar{border-top:0;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--ilm-page-bg) 86%,transparent) 28%,var(-"
+              }
+            ],
+            "plannedFix": "Centralize z-index scale in navigation/states tokens",
+            "status": "open"
+          },
+          {
+            "id": "inline-style",
+            "label": "Inline style attributes",
+            "count": 28,
+            "samples": [
+              {
+                "line": 9847,
+                "sample": "function fontSlider(key,title,description){const value=getFontScale(key);return `<section class=\"font-slider-panel\"><div class=\"font-slider-"
+              },
+              {
+                "line": 10077,
+                "sample": "function renderQuranOverviewProgressCard(){const prog=getPreferredQuranProgress();if(!prog)return\"\";return`<section class=\"quran-continue-ba"
+              },
+              {
+                "line": 10078,
+                "sample": "function quranSurahCard(s){const pct=quranSurahProgressPercent(s.id);return `<article class=\"quran-surah-card\" data-nav=\"quran-surah\" data-v"
+              },
+              {
+                "line": 10245,
+                "sample": "function renderQuran(){if(!quranMeta)return `${setPageHeader(\"Qurʾān\",\"Der edle Qurʾān wird geladen…\",\"Qurʾān\")}<div class=\"loading\">Qurʾān "
+              },
+              {
+                "line": 11992,
+                "sample": "function offlineProgressHtml(){const s=readOfflinePrepState();if(!s.running&&s.status!==\"done\"&&s.status!==\"error\")return\"\";const p=Math.max"
+              }
+            ],
+            "plannedFix": "Move to design tokens / component CSS",
+            "status": "open"
+          }
+        ]
+      },
+      "assets/spatial/spatial-components.css": {
+        "findings": [
+          {
+            "id": "hardcoded-hex",
+            "label": "Hardcoded hex colors",
+            "count": 2,
+            "samples": [
+              {
+                "line": 54,
+                "sample": "background: linear-gradient(180deg, var(--gold2, #d6b46a), rgba(214, 180, 106, 0.2));"
+              },
+              {
+                "line": 440,
+                "sample": "color: var(--gold2, #d6b46a);"
+              }
+            ],
+            "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+            "status": "open"
+          },
+          {
+            "id": "hardcoded-rgba",
+            "label": "Hardcoded rgba/rgb",
+            "count": 29,
+            "samples": [
+              {
+                "line": 36,
+                "sample": "background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));"
+              },
+              {
+                "line": 54,
+                "sample": "background: linear-gradient(180deg, var(--gold2, #d6b46a), rgba(214, 180, 106, 0.2));"
+              },
+              {
+                "line": 101,
+                "sample": "filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));"
+              },
+              {
+                "line": 161,
+                "sample": "background: rgba(var(--material-rgb), calc(var(--material-opacity) * 0.85));"
+              },
+              {
+                "line": 170,
+                "sample": "filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));"
+              }
+            ],
+            "plannedFix": "Use theme tokens + color-mix",
+            "status": "open"
+          },
+          {
+            "id": "overflow-hidden",
+            "label": "overflow:hidden (clip risk)",
+            "count": 4,
+            "samples": [
+              {
+                "line": 42,
+                "sample": "overflow: hidden;"
+              },
+              {
+                "line": 84,
+                "sample": "overflow: hidden;"
+              },
+              {
+                "line": 210,
+                "sample": "overflow: hidden;"
+              },
+              {
+                "line": 465,
+                "sample": "overflow: hidden;"
+              }
+            ],
+            "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+            "status": "open"
+          },
+          {
+            "id": "fixed-height",
+            "label": "Fixed min-height >= 80px",
+            "count": 1,
+            "samples": [
+              {
+                "line": 32,
+                "sample": "min-height: 88px;"
+              }
+            ],
+            "plannedFix": "Reduce feature card min-heights to 82–100px spec",
+            "status": "open"
+          },
+          {
+            "id": "autofill-missing",
+            "label": "Inputs without autofill override nearby",
+            "count": 0,
+            "samples": [],
+            "plannedFix": "styles/components/ui-inputs.css autofill block",
+            "status": "open"
+          }
+        ]
+      },
+      "assets/app-card-layout.css": {
+        "findings": [
+          {
+            "id": "overflow-hidden",
+            "label": "overflow:hidden (clip risk)",
+            "count": 2,
+            "samples": [
+              {
+                "line": 41,
+                "sample": "overflow: hidden;"
+              },
+              {
+                "line": 299,
+                "sample": "overflow: hidden;"
+              }
+            ],
+            "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+            "status": "open"
+          },
+          {
+            "id": "nowrap",
+            "label": "white-space:nowrap",
+            "count": 1,
+            "samples": [
+              {
+                "line": 442,
+                "sample": "white-space: nowrap;"
+              }
+            ],
+            "plannedFix": "Allow wrap except short labels; add min-width:0",
+            "status": "open"
+          },
+          {
+            "id": "autofill-missing",
+            "label": "Inputs without autofill override nearby",
+            "count": 0,
+            "samples": [],
+            "plannedFix": "styles/components/ui-inputs.css autofill block",
+            "status": "open"
+          }
+        ]
+      },
+      "assets/app-theme-surfaces.css": {
+        "findings": [
+          {
+            "id": "hardcoded-hex",
+            "label": "Hardcoded hex colors",
+            "count": 51,
+            "samples": [
+              {
+                "line": 7,
+                "sample": "--theme-surface-elevated-text: #fff4df;"
+              },
+              {
+                "line": 8,
+                "sample": "--theme-surface-elevated-label: #e7d59d;"
+              },
+              {
+                "line": 10,
+                "sample": "--theme-surface-elevated-accent: var(--gold2, #efd78e);"
+              },
+              {
+                "line": 12,
+                "sample": "--theme-chip-ok-text: #b8e8c4;"
+              },
+              {
+                "line": 15,
+                "sample": "--theme-chip-warn-text: #ffd4a8;"
+              }
+            ],
+            "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+            "status": "open"
+          },
+          {
+            "id": "hardcoded-rgba",
+            "label": "Hardcoded rgba/rgb",
+            "count": 98,
+            "samples": [
+              {
+                "line": 6,
+                "sample": "--theme-surface-elevated: radial-gradient(circle at 18% 0%, rgba(239, 215, 142, 0.08), transparent 38%), linear-gradient(180deg, rgba(18, 16"
+              },
+              {
+                "line": 9,
+                "sample": "--theme-surface-elevated-muted: rgba(255, 244, 223, 0.76);"
+              },
+              {
+                "line": 11,
+                "sample": "--theme-chip-ok-bg: rgba(40, 120, 60, 0.2);"
+              },
+              {
+                "line": 13,
+                "sample": "--theme-chip-ok-border: rgba(105, 190, 115, 0.48);"
+              },
+              {
+                "line": 14,
+                "sample": "--theme-chip-warn-bg: rgba(255, 210, 120, 0.12);"
+              }
+            ],
+            "plannedFix": "Use theme tokens + color-mix",
+            "status": "open"
+          },
+          {
+            "id": "autofill-missing",
+            "label": "Inputs without autofill override nearby",
+            "count": 0,
+            "samples": [],
+            "plannedFix": "styles/components/ui-inputs.css autofill block",
+            "status": "open"
+          }
+        ]
+      },
+      "styles/dar-design-system.css": {
+        "findings": [
+          {
+            "id": "autofill-missing",
+            "label": "Inputs without autofill override nearby",
+            "count": 0,
+            "samples": [],
+            "plannedFix": "styles/components/ui-inputs.css autofill block",
+            "status": "open"
+          }
+        ]
+      }
+    },
+    "totals": {
+      "hardcoded-hex": 2248,
+      "hardcoded-rgba": 4763,
+      "overflow-hidden": 250,
+      "nowrap": 151,
+      "fixed-height": 60,
+      "100vh": 4,
+      "emoji-ui": 341,
+      "autofill-missing": 6,
+      "z-index-high": 35,
+      "inline-style": 59
+    }
+  },
+  "topFindings": [
+    {
+      "id": "hardcoded-rgba",
+      "label": "Hardcoded rgba/rgb",
+      "count": 2354,
+      "samples": [
+        {
+          "line": 47,
+          "sample": "--line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);"
+        },
+        {
+          "line": 48,
+          "sample": "--danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);"
+        },
+        {
+          "line": 57,
+          "sample": "--premium-border:rgba(239,215,142,.46);"
+        },
+        {
+          "line": 58,
+          "sample": "--premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),"
+        },
+        {
+          "line": 59,
+          "sample": "--premium-shadow:0 18px 46px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045);"
+        }
+      ],
+      "plannedFix": "Use theme tokens + color-mix",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "hardcoded-rgba",
+      "label": "Hardcoded rgba/rgb",
+      "count": 2282,
+      "samples": [
+        {
+          "line": 47,
+          "sample": "--line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);"
+        },
+        {
+          "line": 48,
+          "sample": "--danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);"
+        },
+        {
+          "line": 57,
+          "sample": "--premium-border:rgba(239,215,142,.46);"
+        },
+        {
+          "line": 58,
+          "sample": "--premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),"
+        },
+        {
+          "line": 59,
+          "sample": "--premium-shadow:0 18px 46px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045);"
+        }
+      ],
+      "plannedFix": "Use theme tokens + color-mix",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "hardcoded-hex",
+      "label": "Hardcoded hex colors",
+      "count": 1133,
+      "samples": [
+        {
+          "line": 32,
+          "sample": "<meta name=\"theme-color\" content=\"#080806\">"
+        },
+        {
+          "line": 34,
+          "sample": "<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf(\"/test/\")===0||location.path"
+        },
+        {
+          "line": 40,
+          "sample": "<meta name=\"msapplication-TileColor\" content=\"#080806\">"
+        },
+        {
+          "line": 44,
+          "sample": "--bg:#070706;--bg2:#0d0c09;--panel:#12100c;--card:#14120e;"
+        },
+        {
+          "line": 45,
+          "sample": "--gold:#c8a85b;--gold2:#efd78e;--bronze:#9b7a3c;--cream:#f8efd4;"
+        }
+      ],
+      "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "hardcoded-hex",
+      "label": "Hardcoded hex colors",
+      "count": 1062,
+      "samples": [
+        {
+          "line": 32,
+          "sample": "<meta name=\"theme-color\" content=\"#080806\">"
+        },
+        {
+          "line": 34,
+          "sample": "<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf(\"/test/\")===0||location.path"
+        },
+        {
+          "line": 40,
+          "sample": "<meta name=\"msapplication-TileColor\" content=\"#080806\">"
+        },
+        {
+          "line": 44,
+          "sample": "--bg:#070706;--bg2:#0d0c09;--panel:#12100c;--card:#14120e;"
+        },
+        {
+          "line": 45,
+          "sample": "--gold:#c8a85b;--gold2:#efd78e;--bronze:#9b7a3c;--cream:#f8efd4;"
+        }
+      ],
+      "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "emoji-ui",
+      "label": "Emoji in nav/render strings",
+      "count": 178,
+      "samples": [
+        {
+          "line": 7727,
+          "sample": ".view .post-grid:not(#latestGrid):not(#folderGrid) .post-card:before{content:\"📖\";grid-column:1;grid-row:1 / span 3;width:30px;height:30px;b"
+        },
+        {
+          "line": 9739,
+          "sample": "<button id=\"hijriHeaderDate\" class=\"hijri-header-pill\" type=\"button\" data-hijri-today data-nav=\"calendar\" aria-label=\"Islamischer Kalender\">"
+        },
+        {
+          "line": 9756,
+          "sample": "<section class=\"isnad\"><div class=\"isnad-label\">Maßstab der Überlieferung</div><div class=\"isnad-quote\"><span class=\"isnad-speaker\">🖋️ Ibn "
+        },
+        {
+          "line": 9771,
+          "sample": "<button class=\"bottom-nav-btn\" type=\"button\" data-bottom-nav=\"quiz\" aria-label=\"Din-Quiz\"><span class=\"nav-icon\" aria-hidden=\"true\">🧠</span"
+        },
+        {
+          "line": 9773,
+          "sample": "<button class=\"bottom-nav-btn\" type=\"button\" data-bottom-nav=\"quran\" aria-label=\"Qurʾān\"><span class=\"nav-icon\" aria-hidden=\"true\">📖</span>"
+        }
+      ],
+      "plannedFix": "Replace with assets/icons SVG via DARSpatial",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "emoji-ui",
+      "label": "Emoji in nav/render strings",
+      "count": 163,
+      "samples": [
+        {
+          "line": 8034,
+          "sample": ".view .post-grid:not(#latestGrid):not(#folderGrid) .post-card:before{content:\"📖\";grid-column:1;grid-row:1 / span 3;width:30px;height:30px;b"
+        },
+        {
+          "line": 10468,
+          "sample": "<button id=\"hijriHeaderDate\" class=\"hijri-header-pill\" type=\"button\" data-hijri-today data-nav=\"calendar\" aria-label=\"Islamischer Kalender\">"
+        },
+        {
+          "line": 10485,
+          "sample": "<section class=\"isnad\"><div class=\"isnad-label\">Maßstab der Überlieferung</div><div class=\"isnad-quote\"><span class=\"isnad-speaker\">🖋️ Ibn "
+        },
+        {
+          "line": 10509,
+          "sample": "<span class=\"float-handle-icons\" aria-hidden=\"true\"><span>🧭</span><span>♡</span><span>🔔</span></span>"
+        },
+        {
+          "line": 10514,
+          "sample": "<button id=\"qiblaFloat\" class=\"float-btn qibla-float\" type=\"button\" aria-label=\"Qibla-Kompass öffnen\" title=\"Qibla-Kompass\">🧭</button>"
+        }
+      ],
+      "plannedFix": "Replace with assets/icons SVG via DARSpatial",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "overflow-hidden",
+      "label": "overflow:hidden (clip risk)",
+      "count": 122,
+      "samples": [
+        {
+          "line": 139,
+          "sample": ".theme-switch-panel{position:relative;overflow:hidden}"
+        },
+        {
+          "line": 140,
+          "sample": ".account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px;overflow:hidden;max-width:100%}"
+        },
+        {
+          "line": 162,
+          "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+        },
+        {
+          "line": 204,
+          "sample": ".top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5"
+        },
+        {
+          "line": 209,
+          "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+        }
+      ],
+      "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "overflow-hidden",
+      "label": "overflow:hidden (clip risk)",
+      "count": 122,
+      "samples": [
+        {
+          "line": 139,
+          "sample": ".theme-switch-panel{position:relative;overflow:hidden}"
+        },
+        {
+          "line": 140,
+          "sample": ".account-panel{display:grid;gap:13px;padding:16px;margin:0 0 16px;border-radius:22px;overflow:hidden;max-width:100%}"
+        },
+        {
+          "line": 162,
+          "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+        },
+        {
+          "line": 204,
+          "sample": ".top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5"
+        },
+        {
+          "line": 209,
+          "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+        }
+      ],
+      "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "hardcoded-rgba",
+      "label": "Hardcoded rgba/rgb",
+      "count": 98,
+      "samples": [
+        {
+          "line": 6,
+          "sample": "--theme-surface-elevated: radial-gradient(circle at 18% 0%, rgba(239, 215, 142, 0.08), transparent 38%), linear-gradient(180deg, rgba(18, 16"
+        },
+        {
+          "line": 9,
+          "sample": "--theme-surface-elevated-muted: rgba(255, 244, 223, 0.76);"
+        },
+        {
+          "line": 11,
+          "sample": "--theme-chip-ok-bg: rgba(40, 120, 60, 0.2);"
+        },
+        {
+          "line": 13,
+          "sample": "--theme-chip-ok-border: rgba(105, 190, 115, 0.48);"
+        },
+        {
+          "line": 14,
+          "sample": "--theme-chip-warn-bg: rgba(255, 210, 120, 0.12);"
+        }
+      ],
+      "plannedFix": "Use theme tokens + color-mix",
+      "status": "open",
+      "file": "assets/app-theme-surfaces.css"
+    },
+    {
+      "id": "nowrap",
+      "label": "white-space:nowrap",
+      "count": 75,
+      "samples": [
+        {
+          "line": 209,
+          "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+        },
+        {
+          "line": 211,
+          "sample": "h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px);line-height:.92;letter-spacing:.095em;margin:0;font-weight:"
+        },
+        {
+          "line": 212,
+          "sample": ".socials{display:grid;grid-template-columns:1fr;gap:11px;width:168px}.social-link,.pill,.btn,.icon-btn{border:1px solid var(--line);backgrou"
+        },
+        {
+          "line": 213,
+          "sample": ".hero-text{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:980px}.salam{font-family:var(--serif);color:var(--go"
+        },
+        {
+          "line": 214,
+          "sample": ".isnad{border-top:1px solid var(--line2);background:rgba(0,0,0,.18);padding:11px 24px 14px}.isnad-label{display:flex;align-items:center;gap:"
+        }
+      ],
+      "plannedFix": "Allow wrap except short labels; add min-width:0",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "nowrap",
+      "label": "white-space:nowrap",
+      "count": 75,
+      "samples": [
+        {
+          "line": 209,
+          "sample": ".brand{min-width:0;overflow:visible}.brand-kicker-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:1"
+        },
+        {
+          "line": 211,
+          "sample": "h1{font-family:var(--serif);color:var(--gold2);font-size:clamp(40px,4.45vw,72px);line-height:.92;letter-spacing:.095em;margin:0;font-weight:"
+        },
+        {
+          "line": 212,
+          "sample": ".socials{display:grid;grid-template-columns:1fr;gap:11px;width:168px}.social-link,.pill,.btn,.icon-btn{border:1px solid var(--line);backgrou"
+        },
+        {
+          "line": 213,
+          "sample": ".hero-text{border-top:1px solid var(--line2);margin-top:16px;padding-top:14px;max-width:980px}.salam{font-family:var(--serif);color:var(--go"
+        },
+        {
+          "line": 214,
+          "sample": ".isnad{border-top:1px solid var(--line2);background:rgba(0,0,0,.18);padding:11px 24px 14px}.isnad-label{display:flex;align-items:center;gap:"
+        }
+      ],
+      "plannedFix": "Allow wrap except short labels; add min-width:0",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "hardcoded-hex",
+      "label": "Hardcoded hex colors",
+      "count": 51,
+      "samples": [
+        {
+          "line": 7,
+          "sample": "--theme-surface-elevated-text: #fff4df;"
+        },
+        {
+          "line": 8,
+          "sample": "--theme-surface-elevated-label: #e7d59d;"
+        },
+        {
+          "line": 10,
+          "sample": "--theme-surface-elevated-accent: var(--gold2, #efd78e);"
+        },
+        {
+          "line": 12,
+          "sample": "--theme-chip-ok-text: #b8e8c4;"
+        },
+        {
+          "line": 15,
+          "sample": "--theme-chip-warn-text: #ffd4a8;"
+        }
+      ],
+      "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+      "status": "open",
+      "file": "assets/app-theme-surfaces.css"
+    },
+    {
+      "id": "inline-style",
+      "label": "Inline style attributes",
+      "count": 31,
+      "samples": [
+        {
+          "line": 10577,
+          "sample": "function fontSlider(key,title,description){const value=getFontScale(key);return `<section class=\"font-slider-panel\"><div class=\"font-slider-"
+        },
+        {
+          "line": 10807,
+          "sample": "function renderQuranOverviewProgressCard(){const prog=getPreferredQuranProgress();if(!prog)return\"\";return`<section class=\"quran-continue-ba"
+        },
+        {
+          "line": 10808,
+          "sample": "function quranSurahCard(s){const pct=quranSurahProgressPercent(s.id);return `<article class=\"quran-surah-card spatial-content-card spatial-q"
+        },
+        {
+          "line": 10974,
+          "sample": "function renderQuran(){if(!quranMeta)return darPageShell(\"quran\",`${setPageHeader(\"Qurʾān\",\"Der edle Qurʾān wird geladen…\",\"Qurʾān\")}<div cl"
+        },
+        {
+          "line": 12717,
+          "sample": "function offlineProgressHtml(){const s=readOfflinePrepState();if(!s.running&&s.status!==\"done\"&&s.status!==\"error\")return\"\";const p=Math.max"
+        }
+      ],
+      "plannedFix": "Move to design tokens / component CSS",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "fixed-height",
+      "label": "Fixed min-height >= 80px",
+      "count": 30,
+      "samples": [
+        {
+          "line": 162,
+          "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+        },
+        {
+          "line": 228,
+          "sample": ".view{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));box-shadow:var(-"
+        },
+        {
+          "line": 240,
+          "sample": ".folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-family:var(--serif);color:var(--gold2);font-size:22px;line-heigh"
+        },
+        {
+          "line": 247,
+          "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+        },
+        {
+          "line": 730,
+          "sample": "@media(max-width:700px){body{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}.to"
+        }
+      ],
+      "plannedFix": "Reduce feature card min-heights to 82–100px spec",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "fixed-height",
+      "label": "Fixed min-height >= 80px",
+      "count": 29,
+      "samples": [
+        {
+          "line": 162,
+          "sample": ".theme-switch-btn{position:relative;overflow:hidden;width:100%;min-width:0;max-width:none;flex:initial;flex-basis:auto;aspect-ratio:auto;tra"
+        },
+        {
+          "line": 228,
+          "sample": ".view{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));box-shadow:var(-"
+        },
+        {
+          "line": 237,
+          "sample": ".filter-panel{border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.14);padding:12px;margin-bottom:13px}.filter-grid{displa"
+        },
+        {
+          "line": 240,
+          "sample": ".folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{font-family:var(--serif);color:var(--gold2);font-size:22px;line-heigh"
+        },
+        {
+          "line": 247,
+          "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+        }
+      ],
+      "plannedFix": "Reduce feature card min-heights to 82–100px spec",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "hardcoded-rgba",
+      "label": "Hardcoded rgba/rgb",
+      "count": 29,
+      "samples": [
+        {
+          "line": 36,
+          "sample": "background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));"
+        },
+        {
+          "line": 54,
+          "sample": "background: linear-gradient(180deg, var(--gold2, #d6b46a), rgba(214, 180, 106, 0.2));"
+        },
+        {
+          "line": 101,
+          "sample": "filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));"
+        },
+        {
+          "line": 161,
+          "sample": "background: rgba(var(--material-rgb), calc(var(--material-opacity) * 0.85));"
+        },
+        {
+          "line": 170,
+          "sample": "filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));"
+        }
+      ],
+      "plannedFix": "Use theme tokens + color-mix",
+      "status": "open",
+      "file": "assets/spatial/spatial-components.css"
+    },
+    {
+      "id": "inline-style",
+      "label": "Inline style attributes",
+      "count": 28,
+      "samples": [
+        {
+          "line": 9847,
+          "sample": "function fontSlider(key,title,description){const value=getFontScale(key);return `<section class=\"font-slider-panel\"><div class=\"font-slider-"
+        },
+        {
+          "line": 10077,
+          "sample": "function renderQuranOverviewProgressCard(){const prog=getPreferredQuranProgress();if(!prog)return\"\";return`<section class=\"quran-continue-ba"
+        },
+        {
+          "line": 10078,
+          "sample": "function quranSurahCard(s){const pct=quranSurahProgressPercent(s.id);return `<article class=\"quran-surah-card\" data-nav=\"quran-surah\" data-v"
+        },
+        {
+          "line": 10245,
+          "sample": "function renderQuran(){if(!quranMeta)return `${setPageHeader(\"Qurʾān\",\"Der edle Qurʾān wird geladen…\",\"Qurʾān\")}<div class=\"loading\">Qurʾān "
+        },
+        {
+          "line": 11992,
+          "sample": "function offlineProgressHtml(){const s=readOfflinePrepState();if(!s.running&&s.status!==\"done\"&&s.status!==\"error\")return\"\";const p=Math.max"
+        }
+      ],
+      "plannedFix": "Move to design tokens / component CSS",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "z-index-high",
+      "label": "z-index > 90",
+      "count": 18,
+      "samples": [
+        {
+          "line": 246,
+          "sample": ".post-intro-modal[hidden]{display:none}.post-intro-modal{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;padding:max(18p"
+        },
+        {
+          "line": 247,
+          "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+        },
+        {
+          "line": 255,
+          "sample": "z-index:41;"
+        },
+        {
+          "line": 885,
+          "sample": ".pwa-modal-overlay{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:max(16px,env(safe-ar"
+        },
+        {
+          "line": 1218,
+          "sample": "body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!imp"
+        }
+      ],
+      "plannedFix": "Centralize z-index scale in navigation/states tokens",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "z-index-high",
+      "label": "z-index > 90",
+      "count": 17,
+      "samples": [
+        {
+          "line": 246,
+          "sample": ".post-intro-modal[hidden]{display:none}.post-intro-modal{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;padding:max(18p"
+        },
+        {
+          "line": 247,
+          "sample": ".about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:va"
+        },
+        {
+          "line": 575,
+          "sample": ".pwa-modal-overlay{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:max(16px,env(safe-ar"
+        },
+        {
+          "line": 909,
+          "sample": "body.is-ilm-chat-route #appView.view{position:fixed!important;inset:0!important;z-index:70!important;width:100vw!important;height:100dvh!imp"
+        },
+        {
+          "line": 928,
+          "sample": ".ilm-composer-bar{border-top:0;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--ilm-page-bg) 86%,transparent) 28%,var(-"
+        }
+      ],
+      "plannedFix": "Centralize z-index scale in navigation/states tokens",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "overflow-hidden",
+      "label": "overflow:hidden (clip risk)",
+      "count": 4,
+      "samples": [
+        {
+          "line": 42,
+          "sample": "overflow: hidden;"
+        },
+        {
+          "line": 84,
+          "sample": "overflow: hidden;"
+        },
+        {
+          "line": 210,
+          "sample": "overflow: hidden;"
+        },
+        {
+          "line": 465,
+          "sample": "overflow: hidden;"
+        }
+      ],
+      "plannedFix": "Audit per component; remove or add padding for Arabic/diacritics",
+      "status": "open",
+      "file": "assets/spatial/spatial-components.css"
+    },
+    {
+      "id": "autofill-missing",
+      "label": "Inputs without autofill override nearby",
+      "count": 3,
+      "samples": [
+        {
+          "line": 3641,
+          "sample": ":where(button,.btn,.pill,.icon-btn,input[type=\"button\"],input[type=\"submit\"],.float-btn,.float-touch-handle,.collapse-toggle,.action-btn,.hi"
+        },
+        {
+          "line": 7451,
+          "sample": ".image-editor-range input[type=range]{grid-column:1/-1;width:100%;min-height:32px;margin:0;touch-action:pan-x}"
+        }
+      ],
+      "plannedFix": "styles/components/ui-inputs.css autofill block",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "autofill-missing",
+      "label": "Inputs without autofill override nearby",
+      "count": 3,
+      "samples": [
+        {
+          "line": 3334,
+          "sample": ":where(button,.btn,.pill,.icon-btn,input[type=\"button\"],input[type=\"submit\"],.float-btn,.float-touch-handle,.collapse-toggle,.action-btn,.hi"
+        },
+        {
+          "line": 7144,
+          "sample": ".image-editor-range input[type=range]{grid-column:1/-1;width:100%;min-height:32px;margin:0;touch-action:pan-x}"
+        }
+      ],
+      "plannedFix": "styles/components/ui-inputs.css autofill block",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "100vh",
+      "label": "100vh usage",
+      "count": 2,
+      "samples": [
+        {
+          "line": 7614,
+          "sample": ".ie-power-sheet-body{max-height:calc(100vh - 280px)}"
+        },
+        {
+          "line": 7629,
+          "sample": "@media(min-width:901px){body.image-editor-mode.has-bottom-nav{padding-bottom:14px}.ie-power-layout{grid-template-columns:minmax(0,1.08fr) mi"
+        }
+      ],
+      "plannedFix": "Prefer 100dvh/100svh + visualViewport",
+      "status": "open",
+      "file": "test/index.html"
+    },
+    {
+      "id": "100vh",
+      "label": "100vh usage",
+      "count": 2,
+      "samples": [
+        {
+          "line": 7307,
+          "sample": ".ie-power-sheet-body{max-height:calc(100vh - 280px)}"
+        },
+        {
+          "line": 7322,
+          "sample": "@media(min-width:901px){body.image-editor-mode.has-bottom-nav{padding-bottom:14px}.ie-power-layout{grid-template-columns:minmax(0,1.08fr) mi"
+        }
+      ],
+      "plannedFix": "Prefer 100dvh/100svh + visualViewport",
+      "status": "open",
+      "file": "index.html"
+    },
+    {
+      "id": "hardcoded-hex",
+      "label": "Hardcoded hex colors",
+      "count": 2,
+      "samples": [
+        {
+          "line": 54,
+          "sample": "background: linear-gradient(180deg, var(--gold2, #d6b46a), rgba(214, 180, 106, 0.2));"
+        },
+        {
+          "line": 440,
+          "sample": "color: var(--gold2, #d6b46a);"
+        }
+      ],
+      "plannedFix": "Migrate to styles/tokens/colors.css semantic vars",
+      "status": "open",
+      "file": "assets/spatial/spatial-components.css"
+    }
+  ],
+  "structuralGaps": [
+    {
+      "area": "Design tokens",
+      "status": "in_progress",
+      "note": "styles/dar-design-system.css created; legacy inline :root still in index.html"
+    },
+    {
+      "area": "Unified inputs",
+      "status": "in_progress",
+      "note": "styles/components/ui-inputs.css maps legacy selectors; glass search uses focus-within"
+    },
+    {
+      "area": "Test vs Live parity",
+      "status": "open",
+      "note": "Spatial Premium only wired in test/index.html; live index.html still emoji nav"
+    },
+    {
+      "area": "Theme geometry",
+      "status": "open",
+      "note": "~1900 theme-specific layout overrides remain inline; radius/spacing aliased"
+    },
+    {
+      "area": "Bottom nav visibility",
+      "status": "open",
+      "note": "Contrast rules exist per theme but not centralized"
+    }
+  ],
+  "completedPhases": [
+    "Phase 1: audit scan + baseline report",
+    "Phase 2: design tokens + unified inputs",
+    "Phase 3: AppButton, AppCard, FeatureCard, Nav, Modal, States",
+    "Phase 4: pilot Home, Mehr, Bottom Nav, Quran, global search",
+    "Phase 5: remaining pages wrapped with dar-page-shell",
+    "Phase 6: test matrix documented (Dar Test)"
+  ],
+  "nextPhases": [
+    "Phase 7: publish same commit to visitor app after Dar Test sign-off"
+  ]
+}
