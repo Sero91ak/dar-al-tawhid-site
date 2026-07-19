@@ -1,38 +1,20 @@
 {
-  "date": "2026-07-19",
+  "date": "2026-07-20",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-19T09:34:43.995Z",
-  "source": "dar-daily-no-repeat-rotation",
+  "generated": "2026-07-19T22:20:56.305Z",
+  "source": "dar-daily-scheduler-regenerated",
   "recommendation": {
-    "id": "sifat-allah-yad-adam-001",
-    "title": "Allah erschuf Ādam mit Seiner Hand",
-    "file": "2026-06-05-sifat-allah-yad-adam.md",
+    "id": "sifat-allah-yamin-allah-001",
+    "title": "Allahs Rechte ist voll",
+    "file": "2026-06-05-sifat-allah-yamin-allah.md",
     "category": "Aqīdah",
     "scholar": "Prophet ﷺ",
-    "snippet": "🖋️ Der Prophet ﷺ berichtete im Hadith über die Auseinandersetzung zwischen Ādam und Mūsā:"
+    "snippet": "„Allahs Rechte ist voll; keine Ausgabe vermindert sie. Sie spendet reichlich bei Nacht und Tag.“"
   },
   "dua": {
-    "id": "quran-003",
-    "title": "Duʿāʾ gegen Abweichen des Herzens",
-    "snippet": "Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir.",
-    "category": "Rechtleitung"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 450,
-      "remaining": 448
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 70,
-      "remaining": 70,
-      "sources": {
-        "markdown": 70,
-        "total": 70,
-        "poolSize": 70,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
+    "id": "dua-022-tawakkalna-anabna",
+    "title": "Auf Dich vertrauen wir und zu Dir kehren wir zurück",
+    "snippet": "Unser Herr, auf Dich vertrauen wir, zu Dir kehren wir um, und zu Dir ist die Rückkehr.",
+    "category": "Tawakkul"
   }
 }
