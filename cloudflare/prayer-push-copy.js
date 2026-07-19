@@ -1,5 +1,7 @@
 /** Shared Gebets-Push-Texte – Vorab kurz, zur Gebetszeit mit Wechsel-Varianten. */
 
+export const PRAYER_PUSH_COPY_VERSION = "v3";
+
 export const PRAYER_ENTRY_PUSH_VARIANTS = {
   fajr: [
     { title: "✨ Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah." },
