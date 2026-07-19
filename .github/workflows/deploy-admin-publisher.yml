@@ -10,6 +10,7 @@ on:
       - cloudflare/worker.js
       - cloudflare/wrangler.toml
       - cloudflare/prayer-push-*.js
+      - cloudflare/prayer-status-store.js
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
       - cloudflare/feed-backgrounds-*.js
@@ -43,11 +44,13 @@ jobs:
       - name: Apply prayer push runtime migration
         run: node ../scripts/patch-prayer-push-runtime.js
 
-      - name: Validate patched prayer push modules
+      - name: Validate patched worker modules
         run: |
           node --check prayer-push-copy.js
           node --check prayer-push-scheduler.js
           node --check prayer-push-admin.js
+          node --check prayer-status-store.js
+          node --check worker.js
 
       - name: Install Wrangler
         run: npm install -g wrangler
@@ -66,6 +69,37 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: wrangler deploy
+
+      - name: Verify worker and durable prayer status binding
+        run: |
+          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health")"
+          echo "$HEALTH"
+          printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true'
+          printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"'
+
+      - name: Refresh prayer push live status immediately
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Livestatus wird spätestens durch den nächsten 5-Minuten-Cron aktualisiert"
+            exit 0
+          fi
+
+          RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/prayer/run" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{}')"
+          echo "$RESULT"
+
+          RESULT_JSON="$RESULT" node <<'NODE'
+          const result = JSON.parse(process.env.RESULT_JSON || "{}");
+          if (result.ok === false) throw new Error(result.reason || result.error || "Gebets-Scheduler fehlgeschlagen");
+          if (result.statusWrite?.source !== "durable-object" || result.statusWrite?.saved !== true) {
+            throw new Error(`Livestatus nicht dauerhaft gespeichert: ${JSON.stringify(result.statusWrite || null)}`);
+          }
+          console.log(`Gebets-Push-Livestatus aktuell: ${result.status?.updatedAt || "ohne Zeitstempel"}`);
+          NODE
 
       - name: Sync optional feed image API secrets
         env:
@@ -99,8 +133,3 @@ jobs:
             -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
             -H "Content-Type: application/json" \
             -d '{"staging":true,"force":false,"maxDownloads":20}' || echo "::warning::Feed-BG Sync nach Deploy fehlgeschlagen (Bootstrap-Seed bleibt aktiv)"
-
-      - name: Health check
-        run: |
-          curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" | head -c 500
-          echo ""
