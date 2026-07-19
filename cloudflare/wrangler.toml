@@ -13,6 +13,14 @@ SCHEDULE_PATH = "content/admin/planned-posts.json"
 PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json"
 DAILY_PUSH_STATUS_PATH = "content/admin/daily-push-status.json"
 
+[[durable_objects.bindings]]
+name = "PRAYER_STATUS_STORE"
+class_name = "PrayerStatusStore"
+
+[[migrations]]
+tag = "v1_prayer_status_store"
+new_sqlite_classes = ["PrayerStatusStore"]
+
 [triggers]
 crons = ["*/5 * * * *"]
 
