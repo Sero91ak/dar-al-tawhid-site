@@ -14683,7 +14683,7 @@ function hardRefreshApp(){
 }
 const APP_BUILD_ID="app-shell-v290";
 initAppCrashGuard();
-function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner" id="stagingAppBanner"><b>DAR Test-App</b> · Build <code>${APP_BUILD_ID}</code> · Global Premium Audit Phase 1+2. Wenn das Design alt wirkt: unten „Aktualisieren“ tippen.</div>`:""}
+function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner" id="stagingAppBanner"><b>DAR Test-App</b> · Build <code>${APP_BUILD_ID}</code> · Global Premium Audit Phase 3–6. Wenn das Design alt wirkt: unten „Aktualisieren“ tippen.</div>`:""}
 function ensureTestSpatialReady(){
   if(!IS_STAGING_APP||window.__darSpatialRepairAttempted)return;
   if(window.DARSpatial&&typeof DARSpatial.renderPageAccent==="function")return;

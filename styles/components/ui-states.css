@@ -62,6 +62,17 @@
   }
 }
 
+/* Bridge legacy loading — keep initial boot text visible */
+#appView > .loading:first-child {
+  display: block;
+  padding: var(--space-5);
+  text-align: center;
+}
+
+#appView > .loading:first-child::before {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .dar-loading::before,
   .loading.dar-state::before {
