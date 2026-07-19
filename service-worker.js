@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v289';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v290';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const APP_SHELL = [
   '/',
@@ -30,6 +30,12 @@ const APP_SHELL = [
   '/styles/tokens/states.css',
   '/styles/components/ui-inputs.css',
   '/styles/components/ui-dividers.css',
+  '/styles/components/ui-buttons.css',
+  '/styles/components/ui-cards.css',
+  '/styles/components/ui-navigation.css',
+  '/styles/components/ui-overlays.css',
+  '/styles/components/ui-states.css',
+  '/assets/dar-components.js',
   '/assets/icons/ui/home.svg',
   '/assets/icons/ui/ilm.svg',
   '/assets/icons/ui/feed.svg',

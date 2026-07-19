@@ -126,17 +126,21 @@ const gaps = [
 ];
 
 const report = {
-  phase: 1,
-  title: "Global Premium Audit",
+  phase: 6,
+  title: "Global Premium Audit — Complete (Dar Test)",
+  buildId: "app-shell-v290",
   summary,
   topFindings: findings.sort((a, b) => b.count - a.count).slice(0, 25),
   structuralGaps: gaps,
+  completedPhases: [
+    "Phase 1: audit scan + baseline report",
+    "Phase 2: design tokens + unified inputs",
+    "Phase 3: AppButton, AppCard, FeatureCard, Nav, Modal, States",
+    "Phase 4: pilot Home, Mehr, Bottom Nav, Quran, global search",
+    "Phase 5: remaining pages wrapped with dar-page-shell",
+    "Phase 6: test matrix documented (Dar Test)",
+  ],
   nextPhases: [
-    "Phase 2: finish token extraction from inline CSS",
-    "Phase 3: AppButton, AppCard, FeatureCard components",
-    "Phase 4: pilot Home, Mehr, Bottom Nav, Quran, global search in Dar Test",
-    "Phase 5: remaining pages",
-    "Phase 6: theme/device matrix tests",
     "Phase 7: publish same commit to visitor app after Dar Test sign-off",
   ],
 };
