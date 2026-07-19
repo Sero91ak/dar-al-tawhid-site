@@ -13,6 +13,7 @@ on:
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
       - cloudflare/feed-backgrounds-*.js
+      - scripts/patch-prayer-push-runtime.js
       - .github/workflows/setup-feed-api-keys.yml
       - cloudflare/onesignal-delivery.js
       - cloudflare/kurzlink-admin.js
@@ -38,6 +39,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Apply prayer push runtime migration
+        run: node ../scripts/patch-prayer-push-runtime.js
+
+      - name: Validate patched prayer push modules
+        run: |
+          node --check prayer-push-copy.js
+          node --check prayer-push-scheduler.js
+          node --check prayer-push-admin.js
 
       - name: Install Wrangler
         run: npm install -g wrangler
