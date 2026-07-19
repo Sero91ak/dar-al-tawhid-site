@@ -245,10 +245,15 @@ async function regenerateDailyContent(env, deps, dateKey, tz) {
     }
   } catch (e) {}
   try {
-    const pool = await fetchJsonUrl(`${origin}/content/duas/daily-dua-pool.json?v=${Date.now()}`);
+    const pool = await fetchJsonUrl(`${origin}/content/duas/duas.json?v=${Date.now()}`);
     if (Array.isArray(pool) && pool.length) {
       const d = pool[Math.abs(doy) % pool.length];
-      dua = { id: d.id, title: d.title, snippet: d.snippet || "", category: d.cat || "" };
+      dua = {
+        id: d.id,
+        title: d.title,
+        snippet: String(d.de || d.snippet || "").trim(),
+        category: d.cat || ""
+      };
     }
   } catch (e) {}
   if (!recommendation && !dua) return null;

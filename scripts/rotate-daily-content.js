@@ -3,13 +3,12 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { buildDuaIndex } = require("./build-dua-index");
 
 const ROOT = path.resolve(__dirname, "..");
 const TZ = "Europe/Berlin";
 const POSTS_DIR = path.join(ROOT, "content/posts");
 const POSTS_INDEX = path.join(POSTS_DIR, "posts-index.json");
-const DUA_DIR = path.join(ROOT, "content/duas");
-const DUA_INDEX = path.join(DUA_DIR, "duas.json");
 const DAILY_FILE = path.join(ROOT, "content/updates/daily.json");
 const STATE_FILE = path.join(ROOT, "content/admin/daily-content-rotation.json");
 
@@ -62,48 +61,17 @@ function clean(text, max = 300) {
     .slice(0, max);
 }
 
-function section(markdown, heading) {
-  const escaped = String(heading).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return (String(markdown).match(new RegExp(`#{2,3}\\s*${escaped}\\s*\\n+([\\s\\S]*?)(?=\\n#{2,3}\\s|$)`, "i")) || [])[1] || "";
-}
-
-function parseDuaFile(file) {
-  const markdown = fs.readFileSync(path.join(DUA_DIR, file), "utf8");
-  const meta = frontmatter(markdown);
-  const body = markdown.replace(/^---[\s\S]*?---/, "").trim();
-  const fallback = body.split(/\n\s*\n/).find((part) => {
-    const text = part.trim();
-    return text && !/^#{1,3}\s/.test(text) && !/^\*\*Anlass:/i.test(text);
-  }) || "";
-  const de = clean(section(markdown, "Deutsch") || fallback, 600);
-
-  return {
-    id: meta.id || file.replace(/\.md$/i, ""),
-    type: meta.type || "",
-    cat: meta.cat || meta.category || "",
-    title: meta.title || meta.id || file.replace(/\.md$/i, ""),
-    occasion: meta.occasion || "",
-    ar: clean(section(markdown, "Arabisch"), 2000),
-    tr: clean(section(markdown, "Lautschrift"), 2000),
-    de,
-    src: meta.src || clean(section(markdown, "Quelle"), 500),
-    snippet: de.slice(0, 300),
-    file
-  };
-}
-
 function loadDuaPool() {
-  const files = fs.existsSync(DUA_DIR)
-    ? fs.readdirSync(DUA_DIR)
-        .filter((name) => /^dua-.*\.md$/i.test(name))
-        .sort((a, b) => a.localeCompare(b, "de", { numeric: true }))
-    : [];
-  const items = unique(files.map(parseDuaFile), (item) => item.id);
-  writeJson(DUA_INDEX, items);
+  const { items } = buildDuaIndex();
+  const enriched = items.map((item) => ({
+    ...item,
+    snippet: String(item.de || "").slice(0, 300)
+  }));
   return {
-    items,
-    markdown: items.length,
-    total: items.length,
+    items: enriched,
+    markdown: enriched.length,
+    total: enriched.length,
+    poolSize: enriched.length,
     canonicalSource: "content/duas/dua-*.md"
   };
 }
@@ -200,6 +168,7 @@ function run() {
   const sourceStats = {
     markdown: duaSources.markdown,
     total: duaSources.total,
+    poolSize: duaSources.poolSize,
     canonicalSource: duaSources.canonicalSource
   };
 

@@ -20,16 +20,17 @@
   "rotation": {
     "recommendation": {
       "cycle": 0,
-      "poolSize": 449,
-      "remaining": 447
+      "poolSize": 450,
+      "remaining": 448
     },
     "dua": {
       "cycle": 0,
-      "poolSize": 60,
-      "remaining": 60,
+      "poolSize": 61,
+      "remaining": 61,
       "sources": {
-        "markdown": 60,
-        "total": 60,
+        "markdown": 61,
+        "total": 61,
+        "poolSize": 61,
         "canonicalSource": "content/duas/dua-*.md"
       }
     }
