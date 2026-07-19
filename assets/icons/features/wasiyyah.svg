@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8e8"/>
+      <stop offset="100%" stop-color="#c9a85c"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.22"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <ellipse cx="256" cy="430" rx="150" ry="28" fill="url(#shadow)"/>
+
+    <g filter="url(#soft)">
+      <path d="M150 140c0-20 16-36 36-36h140c20 0 36 16 36 36v220c0 20-16 36-36 36H186c-20 0-36-16-36-36z" fill="#efe0c4"/>
+      <path d="M170 160h172v180H170z" fill="#f8f0de"/>
+      <path d="M330 150l34 18-8 24-26-42z" fill="#8b5a2b"/>
+      <circle cx="330" cy="300" r="34" fill="#8b2f2f"/>
+      <text x="330" y="310" text-anchor="middle" font-size="22" fill="#f5ead0">و</text>
+    </g>
+  </svg>
