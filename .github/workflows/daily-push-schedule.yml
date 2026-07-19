@@ -1,8 +1,8 @@
 name: Daily Content Rotation
 
 # Erstellt jeden Morgen früh den Tagesinhalt für Europe/Berlin.
-# Verwendete Duʿāʾ und Beiträge werden gespeichert und erst nach
-# einem vollständigen Pool-Durchlauf erneut zugelassen.
+# Einzige Duʿāʾ-Quelle: content/duas/dua-*.md
+# content/duas/duas.json wird daraus automatisch erzeugt.
 on:
   workflow_dispatch:
   push:
@@ -10,7 +10,7 @@ on:
       - main
     paths:
       - scripts/rotate-daily-content.js
-      - content/duas/**
+      - content/duas/dua-*.md
       - .github/workflows/daily-push-schedule.yml
   schedule:
     - cron: "5 2 * * *"
@@ -37,14 +37,14 @@ jobs:
       - name: Validate rotation script
         run: node --check scripts/rotate-daily-content.js
 
-      - name: Select fresh daily content without repetition
+      - name: Build canonical Duʿāʾ index and select daily content
         run: node scripts/rotate-daily-content.js
 
-      - name: Commit rotation state, combined pool and daily content
+      - name: Commit index, rotation state and daily content
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/updates/daily.json content/admin/daily-content-rotation.json content/duas/daily-dua-combined-pool.json
+          git add content/duas/duas.json content/updates/daily.json content/admin/daily-content-rotation.json
           if git diff --cached --quiet; then
             echo "Keine Änderung notwendig."
             exit 0
