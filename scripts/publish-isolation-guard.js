@@ -65,7 +65,8 @@ function runPublishIsolationGuard() {
     "/api/admin/publish/bulk",
     "bulkPublishPaths",
     "deferred: true",
-    "ctx.waitUntil(processPendingPushUntilLive"
+    "pushApproved: false",
+    "isPostPushApproved"
   ]);
 
   const publishSingle = extractFunction(worker, "publishPostFromMarkdown");
