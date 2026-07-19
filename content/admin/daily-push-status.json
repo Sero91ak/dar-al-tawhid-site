@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "onesignal-timezone",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-19T08:50:06.155Z",
+  "updatedAt": "2026-07-19T08:55:06.159Z",
   "usersChecked": 19,
-  "duaCandidates": 19,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 19,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 19,
   "errors": 0,
   "dailyContentDate": "2026-07-19",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Reise"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 19,
-      "contentId": "sunnah-006",
-      "recipients": "11a4fc17-cba1-45d6-8177-b3a04dbe3cc4",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
