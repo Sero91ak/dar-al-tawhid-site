@@ -6,6 +6,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const schedulerPath = path.join(root, "cloudflare", "prayer-push-scheduler.js");
 const adminPath = path.join(root, "cloudflare", "prayer-push-admin.js");
+const workerPath = path.join(root, "cloudflare", "worker.js");
 
 function replaceRequired(source, oldText, newText, label) {
   if (source.includes(newText)) return source;
@@ -19,8 +20,8 @@ function patchScheduler(source) {
   out = replaceRequired(
     out,
     'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";',
-    'import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";',
-    "copy version import"
+    'import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";\nimport { writePrayerStatusToStore } from "./prayer-status-store.js";',
+    "copy version and durable status import"
   );
 
   out = replaceRequired(
@@ -72,11 +73,25 @@ function patchScheduler(source) {
     "status version"
   );
 
+  out = replaceRequired(
+    out,
+    '  lastStatusReport = statusReport;\n  const statusWrite = await writeStatusGithub(env, statusReport, deps);',
+    '  lastStatusReport = statusReport;\n  const durableStatusWrite = await writePrayerStatusToStore(env, statusReport);\n  const statusWrite = durableStatusWrite.saved\n    ? durableStatusWrite\n    : await writeStatusGithub(env, statusReport, deps);',
+    "durable status persistence"
+  );
+
   return out;
 }
 
 function patchAdmin(source) {
   let out = source;
+
+  out = replaceRequired(
+    out,
+    'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";',
+    'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";\nimport { readPrayerStatusFromStore } from "./prayer-status-store.js";',
+    "durable status reader import"
+  );
 
   out = replaceRequired(
     out,
@@ -92,15 +107,31 @@ function patchAdmin(source) {
     "test push advance emoji"
   );
 
+  out = replaceRequired(
+    out,
+    'export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {\n  const cached = readPrayerPushStatusFromKv();\n  if (cached?.updatedAt) {\n    return { ok: true, status: cached, source: "worker" };\n  }\n\n  const owner = env.GITHUB_OWNER || "Sero91ak";',
+    'export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {\n  const cached = readPrayerPushStatusFromKv();\n  if (cached?.updatedAt) {\n    return { ok: true, status: cached, source: "worker-memory" };\n  }\n\n  const durable = await readPrayerStatusFromStore(env);\n  if (durable?.status?.updatedAt) {\n    return { ok: true, status: durable.status, source: "durable-object" };\n  }\n\n  const owner = env.GITHUB_OWNER || "Sero91ak";',
+    "durable status read priority"
+  );
+
   return out;
+}
+
+function patchWorker(source) {
+  return replaceRequired(
+    source,
+    'import { handleQuizStatsRequest } from "./quiz-stats-admin.js";',
+    'import { handleQuizStatsRequest } from "./quiz-stats-admin.js";\nexport { PrayerStatusStore } from "./prayer-status-store.js";',
+    "durable object export"
+  );
 }
 
 const schedulerBefore = fs.readFileSync(schedulerPath, "utf8");
 const adminBefore = fs.readFileSync(adminPath, "utf8");
-const schedulerAfter = patchScheduler(schedulerBefore);
-const adminAfter = patchAdmin(adminBefore);
+const workerBefore = fs.readFileSync(workerPath, "utf8");
 
-fs.writeFileSync(schedulerPath, schedulerAfter, "utf8");
-fs.writeFileSync(adminPath, adminAfter, "utf8");
+fs.writeFileSync(schedulerPath, patchScheduler(schedulerBefore), "utf8");
+fs.writeFileSync(adminPath, patchAdmin(adminBefore), "utf8");
+fs.writeFileSync(workerPath, patchWorker(workerBefore), "utf8");
 
-console.log("Gebets-Push-Runtime v3 angewendet: neue Emojis, 90-Minuten-Fenster und Ablösung alter OneSignal-Planungen.");
+console.log("Gebets-Push-Runtime v3 aktiv: Emojis, 90-Minuten-Fenster, OneSignal-Migration und dauerhafter Live-Status.");
