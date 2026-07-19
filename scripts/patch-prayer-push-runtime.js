@@ -89,8 +89,8 @@ function patchAdmin(source) {
   out = replaceRequired(
     out,
     'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";',
-    'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";\nimport { readPrayerStatusFromStore } from "./prayer-status-store.js";',
-    "durable status reader import"
+    'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";\nimport { readPrayerStatusFromStore, writePrayerStatusToStore } from "./prayer-status-store.js";',
+    "durable status helpers import"
   );
 
   out = replaceRequired(
@@ -114,16 +114,32 @@ function patchAdmin(source) {
     "durable status read priority"
   );
 
+  out = replaceRequired(
+    out,
+    'export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {\n  if (options.force) {\n    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });\n  }\n\n  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });\n}',
+    'export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {\n  const result = await runPrayerSchedulerNow(\n    env,\n    { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },\n    { force: true, subscriptionId: options.subscriptionId || "" }\n  );\n\n  if (!result?.status?.updatedAt) {\n    const heartbeat = {\n      updatedAt: new Date().toISOString(),\n      ok: false,\n      schedulerStatus: "error",\n      schedulerEngine: "cloudflare-worker-cron-v3",\n      prayerCopyVersion: "v3",\n      cronIntervalMinutes: 5,\n      lastCronRun: new Date().toISOString(),\n      lastError: result?.lastError || result?.reason || "Gebets-Push-Cron ohne Status beendet",\n      scheduled: Number(result?.scheduled || 0),\n      recipients: Number(result?.recipients || 0),\n      usersWithLocation: Number(result?.usersWithLocation || 0)\n    };\n    await writePrayerStatusToStore(env, heartbeat);\n  }\n\n  return result;\n}',
+    "error heartbeat persistence"
+  );
+
   return out;
 }
 
 function patchWorker(source) {
-  return replaceRequired(
+  let out = replaceRequired(
     source,
     'import { handleQuizStatsRequest } from "./quiz-stats-admin.js";',
     'import { handleQuizStatsRequest } from "./quiz-stats-admin.js";\nexport { PrayerStatusStore } from "./prayer-status-store.js";',
     "durable object export"
   );
+
+  out = replaceRequired(
+    out,
+    '          prayerScheduler: "cloudflare-worker-cron",\n          prayerCron: "*/5 * * * *",',
+    '          prayerScheduler: "cloudflare-worker-cron-v3",\n          prayerCron: "*/5 * * * *",\n          prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),',
+    "health durable status binding"
+  );
+
+  return out;
 }
 
 const schedulerBefore = fs.readFileSync(schedulerPath, "utf8");
@@ -134,4 +150,4 @@ fs.writeFileSync(schedulerPath, patchScheduler(schedulerBefore), "utf8");
 fs.writeFileSync(adminPath, patchAdmin(adminBefore), "utf8");
 fs.writeFileSync(workerPath, patchWorker(workerBefore), "utf8");
 
-console.log("Gebets-Push-Runtime v3 aktiv: Emojis, 90-Minuten-Fenster, OneSignal-Migration und dauerhafter Live-Status.");
+console.log("Gebets-Push-Runtime v3 aktiv: Emojis, 90-Minuten-Fenster, OneSignal-Migration und dauerhafter Live-Status mit Fehler-Heartbeat.");
