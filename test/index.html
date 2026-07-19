@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v276";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v277";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -2750,64 +2750,79 @@ html[data-theme="bordeaux"] .zakat-form-grid .field,html[data-theme="bordeaux"] 
 }
 .prayer-push-accordion-body[hidden]{display:none!important}
 .prayer-push-accordion.is-open .prayer-push-accordion-toggle{background:rgba(239,215,142,.04)}
-/* STARTSEITE GEBETSZEITEN — kompakt, edel, klar strukturiert */
-.prayer-quick-card--compact{padding:12px 13px;margin-bottom:10px}
-.prayer-quick-head--compact{margin-bottom:8px}
-.prayer-quick-toprow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
-.prayer-quick-kicker{color:var(--muted2);font-size:12px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;line-height:1.1}
-.prayer-quick-place{color:var(--muted);font-size:14px;font-weight:850;line-height:1.2;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:52%}
-.prayer-quick-title-row{display:flex;align-items:center;gap:8px;min-width:0}
-.prayer-quick-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--gold2);opacity:.92}
-.prayer-quick-icon-svg{display:block;width:26px;height:26px}
-.prayer-quick-title--compact{font-family:var(--serif);color:var(--gold2);font-size:clamp(28px,7.2vw,34px);font-weight:800;line-height:1.02;margin:0}
-.prayer-compact-summary--equal{align-items:stretch;gap:11px;margin-top:8px}
-.prayer-summary-card--split{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;min-height:0;padding:17px;border-radius:16px}
-.prayer-summary-label{display:block;color:var(--muted2);font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px;line-height:1.1}
-.prayer-summary-name{display:block;color:var(--cream);font-size:clamp(17px,4.2vw,20px);font-weight:700;line-height:1.12;margin:0 0 2px}
-.prayer-summary-time{display:block;color:var(--gold2);font-size:clamp(24px,6vw,30px);font-weight:950;line-height:1;font-variant-numeric:tabular-nums;margin:0}
-.prayer-summary-countdown{display:block;color:var(--muted);font-size:14px;font-weight:800;line-height:1.2;margin-top:5px}
-.prayer-quick-card--compact .prayer-summary-card b,.prayer-quick-card--compact .prayer-summary-card span:not(.prayer-summary-label):not(.prayer-summary-name):not(.prayer-summary-countdown){display:none}
-.prayer-quick-card--compact .prayer-summary-card small{display:none}
-.prayer-push-accordion--compact{margin-top:9px;border:1px solid rgba(239,215,142,.20);border-radius:16px;background:linear-gradient(180deg,rgba(239,215,142,.05),rgba(8,8,6,.02));overflow:hidden}
-.prayer-push-bar-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;border:0;background:transparent;color:var(--cream);min-height:64px;max-height:76px;padding:10px 12px;cursor:pointer;text-align:left}
-.prayer-push-bar-toggle:hover{background:rgba(239,215,142,.04)}
-.prayer-push-bar-main{display:flex;align-items:flex-start;gap:9px;flex:1 1 auto;min-width:0}
-.prayer-push-bar-bell{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:28px;height:28px;border-radius:999px;border:1px solid rgba(239,215,142,.28);color:var(--gold2)}
-.prayer-push-bell-svg{display:block;width:18px;height:18px}
-.prayer-push-bar-copy{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 auto}
-.prayer-push-bar-title{font-size:12.5px;font-weight:950;letter-spacing:.01em;line-height:1.2;color:var(--cream)}
-.prayer-push-bar-status{display:flex;flex-wrap:wrap;gap:5px 7px;align-items:center}
-.prayer-push-chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:999px;border:1px solid rgba(239,215,142,.16);background:rgba(239,215,142,.05);color:var(--gold2);font-size:11px;font-weight:800;line-height:1.25;white-space:nowrap}
-.prayer-push-bar-action{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:5px 11px;border-radius:999px;border:1px solid rgba(239,215,142,.30);background:rgba(239,215,142,.08);color:var(--gold2);font-size:11px;font-weight:950;line-height:1;white-space:nowrap}
-.prayer-push-accordion--compact.is-open .prayer-push-bar-toggle{background:rgba(239,215,142,.04)}
-.prayer-push-accordion--compact .prayer-push-accordion-body{border-top:1px solid var(--line2);padding:10px 10px 4px}
-@media(max-width:359px){
-  .prayer-compact-summary--equal{grid-template-columns:1fr}
-  .prayer-push-bar-toggle{flex-wrap:wrap;align-items:flex-start;min-height:60px;max-height:none;padding:9px 10px}
-  .prayer-push-bar-action{margin-left:auto}
+/* prayer-overview — kompakte Startseiten-Gebetszeiten-Komponente */
+.prayer-overview.premium-surface{
+  --po-pad-x:17px;--po-pad-top:17px;--po-pad-bottom:15px;
+  --po-gap-kicker-title:9px;--po-gap-title-times:13px;--po-gap-times-push:11px;--po-time-gap:9px;
+  --po-kicker-size:11.5px;--po-title-size:26px;--po-loc-size:13px;
+  --po-label-size:10.5px;--po-name-size:17px;--po-time-size:24px;--po-count-size:12.5px;
+  --po-push-h:46px;--po-radius-card:14px;--po-radius-loc:11px;--po-radius-push:12px;
+  padding:var(--po-pad-top) var(--po-pad-x) var(--po-pad-bottom)!important;
+  margin-bottom:10px;
 }
+.prayer-overview__kicker{display:block;color:var(--muted2);font-size:var(--po-kicker-size);font-weight:800;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;margin:0 0 var(--po-gap-kicker-title)}
+.prayer-overview__title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
+.prayer-overview__today{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 auto}
+.prayer-overview__mosque-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--gold2);width:28px;height:24px}
+.prayer-overview__mosque-svg{display:block;width:28px;height:24px}
+.prayer-overview__today-label{font-family:var(--serif);color:var(--gold2);font-size:clamp(24px,6.2vw,28px);font-weight:800;line-height:1.08;margin:0;white-space:nowrap}
+.prayer-overview__location{display:inline-flex;align-items:center;gap:6px;flex:0 1 auto;max-width:52%;min-height:28px;padding:5px 10px;border-radius:var(--po-radius-loc);border:1px solid rgba(239,215,142,.16);background:rgba(239,215,142,.045);color:var(--cream)}
+.prayer-overview__location-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--gold2);width:14px;height:14px}
+.prayer-overview__location-svg{display:block;width:13px;height:13px}
+.prayer-overview__location-text{font-size:var(--po-loc-size);font-weight:750;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.prayer-overview__times{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--po-time-gap);margin-top:var(--po-gap-title-times)}
+.prayer-overview__time-card{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;border:1px solid var(--line2);border-radius:var(--po-radius-card);background:rgba(239,215,142,.04);padding:13px 15px;min-height:0}
+.prayer-overview__time-label{display:block;color:var(--muted2);font-size:var(--po-label-size);font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.1;margin:0 0 5px}
+.prayer-overview__time-name{display:block;color:var(--cream);font-size:clamp(16px,4vw,18px);font-weight:700;line-height:1.1;margin:0 0 3px}
+.prayer-overview__time-value{display:block;color:var(--gold2);font-size:clamp(22px,5.6vw,26px);font-weight:850;line-height:1;font-variant-numeric:tabular-nums;margin:0}
+.prayer-overview__time-countdown{display:block;color:var(--muted);font-size:var(--po-count-size);font-weight:650;line-height:1.15;margin-top:3px}
+.prayer-overview .prayer-detail-toggle{display:none!important}
+.prayer-overview .prayer-action-row{margin-top:10px}
+.prayer-overview__push.prayer-push-accordion--compact{margin-top:var(--po-gap-times-push);border:1px solid rgba(239,215,142,.16);border-radius:var(--po-radius-push);background:rgba(239,215,142,.03);overflow:hidden}
+.prayer-overview__push-toggle{width:100%;display:flex;align-items:center;gap:9px;border:0;background:transparent;color:var(--cream);min-height:var(--po-push-h);max-height:54px;padding:0 13px;cursor:pointer;text-align:left}
+.prayer-overview__push-toggle:hover{background:rgba(239,215,142,.04)}
+.prayer-overview__push-bell{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:18px;height:18px;color:var(--gold2)}
+.prayer-overview__push-bell-svg{display:block;width:17px;height:17px}
+.prayer-overview__push-copy{display:flex;flex-direction:column;justify-content:center;gap:1px;min-width:0;flex:1 1 auto}
+.prayer-overview__push-title{font-size:13.5px;font-weight:850;line-height:1.15;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prayer-overview__push-status{font-size:11.5px;font-weight:650;line-height:1.2;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prayer-overview__push-chevron{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:18px;height:18px;color:var(--gold2);transition:transform 180ms ease}
+.prayer-overview__push-chevron-svg{display:block;width:16px;height:16px;transition:transform 180ms ease}
+.prayer-overview__push.is-open .prayer-overview__push-chevron-svg{transform:rotate(180deg)}
+.prayer-overview__push-body.prayer-push-accordion-body{border-top:1px solid var(--line2);padding:10px 10px 4px;transition:opacity 180ms ease,transform 180ms ease}
+.prayer-overview__push.is-open .prayer-overview__push-body{animation:prayerOverviewPushIn 180ms ease}
+@keyframes prayerOverviewPushIn{from{opacity:.55;transform:translateY(-3px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:349px){.prayer-overview__times{grid-template-columns:1fr}.prayer-overview__location{max-width:46%}.prayer-overview__location-text{font-size:12px}}
 @media(max-width:390px){
-  .prayer-quick-card--compact{padding:11px}
-  .prayer-summary-card--split{padding:16px}
-  .prayer-compact-summary--equal{gap:10px}
+  .prayer-overview.premium-surface{--po-pad-x:16px;--po-pad-top:16px;--po-pad-bottom:14px;--po-title-size:25px;--po-time-size:23px}
+  .prayer-overview__time-card{padding:12px 14px}
+  .prayer-overview__push-toggle{padding:0 12px}
 }
-html[data-theme="dar-al-layl"] .prayer-quick-card--compact{background:linear-gradient(145deg,rgba(14,18,16,.98),rgba(9,12,10,.98))!important;border-color:rgba(168,139,79,.14)!important;box-shadow:0 10px 26px rgba(0,0,0,.28)!important}
-html[data-theme="dar-al-layl"] .prayer-quick-title--compact{color:#E8D7B3!important}
-html[data-theme="dar-al-layl"] .prayer-quick-kicker,html[data-theme="dar-al-layl"] .prayer-quick-place{color:#8C938C!important}
-html[data-theme="dar-al-layl"] .prayer-quick-icon{color:#D8C18B!important}
-html[data-theme="dar-al-layl"] .prayer-summary-card--split{background:rgba(22,28,24,.72)!important;border-color:rgba(168,139,79,.12)!important;box-shadow:inset 0 0 0 1px rgba(216,193,139,.04)!important}
-html[data-theme="dar-al-layl"] .prayer-summary-label,html[data-theme="dar-al-layl"] .prayer-summary-countdown{color:#8C938C!important}
-html[data-theme="dar-al-layl"] .prayer-summary-name{color:#F1EDE3!important}
-html[data-theme="dar-al-layl"] .prayer-summary-time{color:#EFE5D2!important}
-html[data-theme="dar-al-layl"] .prayer-push-accordion--compact{background:linear-gradient(180deg,rgba(22,28,24,.92),rgba(9,12,10,.96))!important;border-color:rgba(168,139,79,.14)!important}
-html[data-theme="dar-al-layl"] .prayer-push-bar-bell,html[data-theme="dar-al-layl"] .prayer-push-bar-action,html[data-theme="dar-al-layl"] .prayer-push-chip{background:rgba(37,42,33,.88)!important;border-color:rgba(216,193,139,.18)!important;color:#E8D7B3!important}
-html[data-theme="dar-al-layl"] .prayer-push-bar-title{color:#F1EDE3!important}
-html[data-theme="soft"] .prayer-quick-title--compact{color:#32212b!important}
-html[data-theme="soft"] .prayer-summary-name{color:#291d24!important}
-html[data-theme="soft"] .prayer-summary-time{color:#3d2a12!important}
-html[data-theme="light"] .prayer-quick-title--compact{color:#3d2a12!important}
-html[data-theme="light"] .prayer-summary-name{color:#2a2218!important}
-html[data-theme="light"] .prayer-summary-time{color:#3d2a12!important}
+html[data-theme="dar-al-layl"] .prayer-overview.premium-surface{background:linear-gradient(145deg,rgba(14,18,16,.98),rgba(9,12,10,.98))!important;border-color:rgba(168,139,79,.12)!important;box-shadow:0 8px 22px rgba(0,0,0,.24)!important}
+html[data-theme="dar-al-layl"] .prayer-overview__today-label{color:#E8D7B3!important}
+html[data-theme="dar-al-layl"] .prayer-overview__kicker,html[data-theme="dar-al-layl"] .prayer-overview__push-status{color:#8C938C!important}
+html[data-theme="dar-al-layl"] .prayer-overview__mosque-icon,html[data-theme="dar-al-layl"] .prayer-overview__location-icon,html[data-theme="dar-al-layl"] .prayer-overview__push-bell,html[data-theme="dar-al-layl"] .prayer-overview__push-chevron{color:#D8C18B!important}
+html[data-theme="dar-al-layl"] .prayer-overview__location{background:rgba(14,18,16,.88)!important;border-color:rgba(168,139,79,.14)!important;color:#F1EDE3!important}
+html[data-theme="dar-al-layl"] .prayer-overview__time-card{background:rgba(18,23,20,.82)!important;border-color:rgba(168,139,79,.11)!important}
+html[data-theme="dar-al-layl"] .prayer-overview__time-label,html[data-theme="dar-al-layl"] .prayer-overview__time-countdown{color:#8C938C!important}
+html[data-theme="dar-al-layl"] .prayer-overview__time-name{color:#F1EDE3!important}
+html[data-theme="dar-al-layl"] .prayer-overview__time-value{color:#EFE5D2!important}
+html[data-theme="dar-al-layl"] .prayer-overview__push.prayer-push-accordion--compact{background:rgba(16,20,18,.9)!important;border-color:rgba(168,139,79,.12)!important}
+html[data-theme="dar-al-layl"] .prayer-overview__push-title{color:#F1EDE3!important}
+html[data-theme="bordeaux"] .prayer-overview__location{background:rgba(32,14,18,.72)!important;border-color:rgba(231,213,157,.16)!important;color:#FFF4DF!important}
+html[data-theme="bordeaux"] .prayer-overview__today-label,html[data-theme="bordeaux"] .prayer-overview__time-value{color:#E7D59D!important}
+html[data-theme="royal"] .prayer-overview__location{background:rgba(8,18,38,.72)!important;border-color:rgba(180,200,230,.14)!important;color:#fff3cf!important}
+html[data-theme="royal"] .prayer-overview__today-label,html[data-theme="royal"] .prayer-overview__time-value{color:#f1d992!important}
+html[data-theme="soft"] .prayer-overview__today-label{color:#32212b!important}
+html[data-theme="soft"] .prayer-overview__location{background:rgba(255,248,245,.72)!important;border-color:rgba(125,83,104,.14)!important;color:#291d24!important}
+html[data-theme="soft"] .prayer-overview__time-name{color:#291d24!important}
+html[data-theme="soft"] .prayer-overview__time-value{color:#3d2a12!important}
+html[data-theme="light"] .prayer-overview__today-label{color:#3d2a12!important}
+html[data-theme="light"] .prayer-overview__location{background:rgba(255,252,244,.85)!important;border-color:rgba(155,122,60,.16)!important;color:#2a2218!important}
+html[data-theme="light"] .prayer-overview__time-name{color:#2a2218!important}
+html[data-theme="light"] .prayer-overview__time-value{color:#3d2a12!important}
+
+.prayer-calculation-tags .prayer-summary-time{color:#3d2a12!important}
 
 .prayer-calculation-tags{
   display:flex;
@@ -7964,23 +7979,21 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 .zakat-home-teaser h3{font-size:23px!important;line-height:1.02!important}
 .zakat-home-teaser-note{font-size:11px!important;line-height:1.34!important;margin:6px 0 0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .zakat-home-teaser-btn{min-height:34px!important;padding:6px 12px!important;font-size:10.5px!important}
-.prayer-quick-card--compact.premium-surface{padding:10px 11px!important;margin-bottom:8px!important;border-radius:17px!important}
-.prayer-quick-card--compact .prayer-quick-head--compact{margin-bottom:6px!important}
-.prayer-quick-card--compact .prayer-quick-kicker{font-size:11px!important}
-.prayer-quick-card--compact .prayer-quick-place{font-size:13px!important;max-width:48%!important}
-.prayer-quick-card--compact .prayer-quick-title--compact{font-size:30px!important;line-height:1.02!important}
-.prayer-quick-card--compact .prayer-compact-summary--equal{gap:10px!important;margin-top:6px!important}
-.prayer-quick-card--compact .prayer-summary-card--split{min-height:0!important;padding:16px!important;border-radius:14px!important}
-.prayer-quick-card--compact .prayer-summary-label{font-size:9px!important;margin-bottom:4px!important;letter-spacing:.12em!important}
-.prayer-quick-card--compact .prayer-summary-name{font-size:18px!important;line-height:1.08!important}
-.prayer-quick-card--compact .prayer-summary-time{font-size:26px!important;line-height:1!important}
-.prayer-quick-card--compact .prayer-summary-countdown{font-size:13px!important;margin-top:4px!important}
-.prayer-quick-card--compact .prayer-detail-toggle{display:none!important}
-.prayer-quick-card--compact .prayer-push-accordion--compact{margin-top:7px!important}
-.prayer-quick-card--compact .prayer-push-bar-toggle{min-height:62px!important;max-height:72px!important;padding:8px 10px!important}
-.prayer-quick-card--compact .prayer-push-bar-title{font-size:11.5px!important}
-.prayer-quick-card--compact .prayer-push-chip{font-size:10px!important;padding:2px 6px!important}
-.prayer-quick-card--compact .prayer-push-bar-action{font-size:10px!important;min-height:28px!important;padding:4px 9px!important}
+.prayer-overview.premium-surface{padding:14px 15px 13px!important;margin-bottom:8px!important;border-radius:16px!important}
+.prayer-overview__kicker{font-size:11px!important;margin-bottom:8px!important}
+.prayer-overview__today-label{font-size:25px!important}
+.prayer-overview__location{min-height:26px!important;padding:4px 9px!important;max-width:50%!important}
+.prayer-overview__location-text{font-size:12.5px!important}
+.prayer-overview__times{gap:8px!important;margin-top:12px!important}
+.prayer-overview__time-card{padding:12px 13px!important;border-radius:13px!important}
+.prayer-overview__time-label{font-size:10px!important;margin-bottom:4px!important}
+.prayer-overview__time-name{font-size:16.5px!important}
+.prayer-overview__time-value{font-size:23px!important}
+.prayer-overview__time-countdown{font-size:12px!important;margin-top:2px!important}
+.prayer-overview__push.prayer-push-accordion--compact{margin-top:10px!important}
+.prayer-overview__push-toggle{min-height:44px!important;max-height:50px!important;padding:0 11px!important}
+.prayer-overview__push-title{font-size:13px!important}
+.prayer-overview__push-status{font-size:11px!important}
 .popular-panel{padding:10px 11px!important;margin:0 0 8px!important;border-radius:17px!important}
 .popular-panel .section-head{margin-bottom:7px!important}
 .popular-panel .section-head h3{font-size:21px!important;line-height:1.05!important}
@@ -10320,21 +10333,17 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
     overflow:visible!important;
     text-overflow:unset!important;
   }
-  .prayer-push-accordion--compact .prayer-push-bar-toggle{
-    flex-wrap:wrap!important;
-    align-items:flex-start!important;
-    row-gap:5px!important;
-    min-height:60px!important;
-    max-height:none!important;
-    padding:9px 10px!important;
+  .prayer-overview__push-toggle{
+    min-height:44px!important;
+    max-height:52px!important;
+    padding:0 11px!important;
   }
-  .prayer-push-accordion--compact .prayer-push-bar-copy{
-    flex:1 1 calc(100% - 96px)!important;
-    min-width:0!important;
-  }
-  .prayer-push-accordion--compact .prayer-push-bar-action{
-    margin-left:auto!important;
-    flex:0 0 auto!important;
+  .prayer-overview__push-status{
+    white-space:normal!important;
+    display:-webkit-box!important;
+    -webkit-line-clamp:1!important;
+    -webkit-box-orient:vertical!important;
+    overflow:hidden!important;
   }
   .prayer-push-accordion:not(.prayer-push-accordion--compact) .prayer-push-accordion-toggle{
     flex-wrap:wrap!important;
@@ -12840,12 +12849,17 @@ function isPrayerPushAccordionOpen(){try{return localStorage.getItem(PRAYER_PUSH
 function setPrayerPushAccordionOpen(open){try{localStorage.setItem(PRAYER_PUSH_ACCORDION_KEY,open?"1":"0")}catch(e){}}
 function prayerPushSettingsSummary(settings=getPrayerSettings()){const parts=[];if(settings.reminder)parts.push("Gebete aktiv");if(jummahPref(settings,"jummahNotifications"))parts.push("Jumuʿah aktiv");if(dailyPushPref(settings,"dailyDua"))parts.push("Duʿāʾ 09:00");if(dailyPushPref(settings,"dailyRecommendation"))parts.push("Empfehlung 12:00");return parts.length?parts.join(" · "):"Noch nichts aktiv"}
 function prayerPushStatusChips(settings=getPrayerSettings()){return{prayer:settings.reminder?"Gebete aktiv":"Gebete aus",dua:dailyPushPref(settings,"dailyDua")?"Duʿāʾ 09:00":"Duʿāʾ aus",rec:dailyPushPref(settings,"dailyRecommendation")?"Empfehlung 12:00":"Empfehlung aus"}}
+function prayerPushStatusInline(settings=getPrayerSettings()){const c=prayerPushStatusChips(settings);return`${c.prayer} · ${c.dua} · ${c.rec}`}
 function renderPrayerPushStatusChipsHtml(settings=getPrayerSettings()){const c=prayerPushStatusChips(settings);return`<span class="prayer-push-chip">${esc(c.prayer)}</span><span class="prayer-push-chip">${esc(c.dua)}</span><span class="prayer-push-chip">${esc(c.rec)}</span>`}
-function prayerQuickMosqueIconSvg(){return'<svg class="prayer-quick-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2c-.55 0-1 .45-1 1v1.05C9.85 4.32 8.8 5 8 6H5.5A1.5 1.5 0 0 0 4 7.5V9h16V7.5A1.5 1.5 0 0 0 18.5 6H16c-.8-1.2-1.85-2-3-2.45V3c0-.55-.45-1-1-1Zm-5 9v8.5c0 .83.67 1.5 1.5 1.5H9v-5h6v5h.5c.83 0 1.5-.67 1.5-1.5V11H7Zm11 0v8.5c0 .83-.67 1.5-1.5 1.5H16v-5H10v5h-.5c-.83 0-1.5-.67-1.5-1.5V11h7Z"/></svg>'}
-function prayerPushBellIconSvg(){return'<svg class="prayer-push-bell-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3a5 5 0 0 0-5 5v3.4L5.5 14h13L17 11.4V8a5 5 0 0 0-5-5Zm0 17a2.2 2.2 0 0 0 2.1-1.6H9.9A2.2 2.2 0 0 0 12 20Z"/></svg>'}
-function updatePrayerPushAccordionUi(open=isPrayerPushAccordionOpen()){const btn=document.getElementById("prayerPushAccordionToggle");const body=document.getElementById("prayerPushSettingsBody");const wrap=btn?.closest(".prayer-push-accordion");if(!btn||!body)return;const settings=getPrayerSettings();if(open){body.removeAttribute("hidden");btn.setAttribute("aria-expanded","true");wrap?.classList.add("is-open")}else{body.setAttribute("hidden","");btn.setAttribute("aria-expanded","false");wrap?.classList.remove("is-open")}if(wrap?.classList.contains("prayer-push-accordion--compact")){const title=document.getElementById("prayerPushAccordionTitle");if(title)title.textContent="Push-Erinnerungen";const summary=document.getElementById("prayerPushSettingsSummary");if(summary)summary.innerHTML=renderPrayerPushStatusChipsHtml(settings);const action=btn.querySelector(".prayer-push-bar-action");if(action)action.textContent=open?"Schließen":"Öffnen";return}const summary=prayerPushSettingsSummary(settings);const icon=btn.querySelector(".prayer-push-accordion-icon");const title=btn.querySelector(".prayer-push-accordion-title");if(icon)icon.textContent=open?"▾":"▸";if(title)title.textContent=open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen";const sum=btn.querySelector(".prayer-push-accordion-summary");if(sum)sum.textContent=summary}
+function prayerOverviewMosqueIconSvg(){return'<svg class="prayer-overview__mosque-svg" viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.2 7.1V20h1.5V9.1l-.4-1.3 1.2-.7.5 1.2V20h1.5V7.1L8.4 5.9 6.2 7.1zm19.1 0V20h1.5V9.1l-.4-1.3 1.2-.7.5 1.2V20H29V7.1l-1.8-1.2-1.9 1.2z"/><path fill="currentColor" d="M10.2 11.2h11.6v8.8c0 .5-.4.9-.9.9h-9.8c-.5 0-.9-.4-.9-.9v-8.8z"/><path fill="currentColor" d="M16 4.6c-2.5 0-4.6 1.8-5 4.2h10c-.4-2.4-2.5-4.2-5-4.2z"/><path fill="currentColor" d="M16 2.8c-3.4 0-6.1 2.6-6.6 5.9h13.2C22.1 5.4 19.4 2.8 16 2.8z"/></svg>'}
+function prayerOverviewLocationIconSvg(){return'<svg class="prayer-overview__location-svg" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.45" d="M8 1.6a4.4 4.4 0 0 0-4.4 4.4c0 3.3 4.4 8.2 4.4 8.2s4.4-4.9 4.4-8.2A4.4 4.4 0 0 0 8 1.6z"/><circle fill="currentColor" cx="8" cy="6.1" r="1.35"/></svg>'}
+function prayerOverviewBellIconSvg(){return'<svg class="prayer-overview__push-bell-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 3.2a4.8 4.8 0 0 0-4.8 4.8v3.2L5.8 14h12.4L16.8 11.2V8a4.8 4.8 0 0 0-4.8-4.8Zm0 16.2a2 2 0 0 0 1.9-1.5H10.1A2 2 0 0 0 12 19.4Z"/></svg>'}
+function prayerOverviewChevronSvg(){return'<svg class="prayer-overview__push-chevron-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M7 10l5 5 5-5"/></svg>'}
+function prayerQuickMosqueIconSvg(){return prayerOverviewMosqueIconSvg()}
+function prayerPushBellIconSvg(){return prayerOverviewBellIconSvg()}
+function updatePrayerPushAccordionUi(open=isPrayerPushAccordionOpen()){const btn=document.getElementById("prayerPushAccordionToggle");const body=document.getElementById("prayerPushSettingsBody");const wrap=btn?.closest(".prayer-push-accordion");if(!btn||!body)return;const settings=getPrayerSettings();if(open){body.removeAttribute("hidden");btn.setAttribute("aria-expanded","true");wrap?.classList.add("is-open")}else{body.setAttribute("hidden","");btn.setAttribute("aria-expanded","false");wrap?.classList.remove("is-open")}if(wrap?.classList.contains("prayer-push-accordion--compact")){const title=document.getElementById("prayerPushAccordionTitle");if(title)title.textContent="Push-Erinnerungen";const summary=document.getElementById("prayerPushSettingsSummary");if(summary){if(wrap.classList.contains("prayer-overview__push"))summary.textContent=prayerPushStatusInline(settings);else summary.innerHTML=renderPrayerPushStatusChipsHtml(settings)}return}const summary=prayerPushSettingsSummary(settings);const icon=btn.querySelector(".prayer-push-accordion-icon");const title=btn.querySelector(".prayer-push-accordion-title");if(icon)icon.textContent=open?"▾":"▸";if(title)title.textContent=open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen";const sum=btn.querySelector(".prayer-push-accordion-summary");if(sum)sum.textContent=summary}
 function bindPrayerPushAccordion(){const btn=document.getElementById("prayerPushAccordionToggle");if(!btn||btn.dataset.bound==="1")return;btn.dataset.bound="1";btn.onclick=ev=>{ev.stopPropagation();const open=isPrayerPushAccordionOpen();setPrayerPushAccordionOpen(!open);updatePrayerPushAccordionUi(!open)};updatePrayerPushAccordionUi(isPrayerPushAccordionOpen())}
-function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben",compactBar=false}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);const open=isPrayerPushAccordionOpen();const summary=prayerPushSettingsSummary(settings);const inner=`<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderJummahPushPanel()}${renderDailyPushPanel()}${renderPushConnectionStatus()}${renderPrayerPushHints(settings)}`;if(compactBar){return`<div class="prayer-push-accordion prayer-push-accordion--compact ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-bar-toggle" aria-expanded="${open?"true":"false"}" aria-controls="prayerPushSettingsBody"><span class="prayer-push-bar-main"><span class="prayer-push-bar-bell" aria-hidden="true">${prayerPushBellIconSvg()}</span><span class="prayer-push-bar-copy"><span class="prayer-push-accordion-title prayer-push-bar-title" id="prayerPushAccordionTitle">Push-Erinnerungen</span><span class="prayer-push-bar-status" id="prayerPushSettingsSummary">${renderPrayerPushStatusChipsHtml(settings)}</span></span></span><span class="prayer-push-bar-action" aria-hidden="true">${open?"Schließen":"Öffnen"}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}return `<div class="prayer-push-accordion ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-accordion-toggle" aria-expanded="${open?"true":"false"}"><span class="prayer-push-accordion-icon">${open?"▾":"▸"}</span><span class="prayer-push-accordion-title">${open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen"}</span><span class="prayer-push-accordion-summary">${esc(summary)}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}
+function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben",compactBar=false}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);const open=isPrayerPushAccordionOpen();const summary=prayerPushSettingsSummary(settings);const inner=`<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderJummahPushPanel()}${renderDailyPushPanel()}${renderPushConnectionStatus()}${renderPrayerPushHints(settings)}`;if(compactBar){return`<div class="prayer-overview__push prayer-push-accordion prayer-push-accordion--compact ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-overview__push-toggle" aria-expanded="${open?"true":"false"}" aria-controls="prayerPushSettingsBody"><span class="prayer-overview__push-bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="prayer-overview__push-copy"><span class="prayer-overview__push-title" id="prayerPushAccordionTitle">Push-Erinnerungen</span><span class="prayer-overview__push-status" id="prayerPushSettingsSummary">${esc(prayerPushStatusInline(settings))}</span></span><span class="prayer-overview__push-chevron" aria-hidden="true">${prayerOverviewChevronSvg()}</span></button><div id="prayerPushSettingsBody" class="prayer-overview__push-body prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}return `<div class="prayer-push-accordion ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-accordion-toggle" aria-expanded="${open?"true":"false"}"><span class="prayer-push-accordion-icon">${open?"▾":"▸"}</span><span class="prayer-push-accordion-title">${open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen"}</span><span class="prayer-push-accordion-summary">${esc(summary)}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}
 function updatePrayerReminderButtons(){const s=getPrayerSettings();document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(s.reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"});document.querySelectorAll("#enableJummahPushBtn").forEach(btn=>{const active=jummahPref(s,"jummahNotifications");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Jumuʿah-Erinnerung aktivieren"});document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Duʿāʾ des Tages · 09:00"});document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Heute empfohlen · 12:00"});updatePrayerPushAccordionUi()}
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
 function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const optedIn=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn);const subId=String(window.OneSignal?.User?.PushSubscription?.id||"").trim();const active=optedIn&&!!subId;btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}
@@ -13311,15 +13325,17 @@ function renderZakatMoreFocus(){
   const remaining=zakatFocusRemainingLabel();
   return `<section class="zakat-home-teaser premium-surface" data-nav="zakat" role="button" tabindex="0"><div class="zakat-home-teaser-main"><span class="zakat-focus-badge"><span class="zakat-focus-badge-dot" aria-hidden="true"></span> Jetzt online · 72 Std. im Fokus</span><h3><span class="zakat-home-teaser-icon" aria-hidden="true">🕌</span> Zakāt-Rechner</h3><p class="zakat-home-teaser-note">Live-Goldpreise · Nisāb nach Qurʾān &amp; Sunnah · vollständig anonym auf deinem Gerät.</p>${remaining?`<p class="zakat-home-teaser-countdown">${esc(remaining)}</p>`:""}</div><button class="zakat-home-teaser-btn premium-pill" type="button" data-nav="zakat">Jetzt starten →</button></section>`;
 }
+function prayerOverviewHead(cityLabel){return`<span class="prayer-overview__kicker">Gebetszeiten</span><div class="prayer-overview__title-row"><div class="prayer-overview__today"><span class="prayer-overview__mosque-icon" aria-hidden="true">${prayerOverviewMosqueIconSvg()}</span><span class="prayer-overview__today-label" id="prayerQuickTitle">Heute</span></div><div class="prayer-overview__location" id="prayerQuickPlace"><span class="prayer-overview__location-icon" aria-hidden="true">${prayerOverviewLocationIconSvg()}</span><span class="prayer-overview__location-text" id="prayerOverviewLocationText">${esc(cityLabel)}</span></div></div>`}
+function prayerOverviewTimes(currentHtml,nextHtml){return`<div class="prayer-overview__times">${currentHtml}${nextHtml}</div>`}
 function renderPrayerQuickCard(){
   const settings=getPrayerSettings();
   if(!hasPrayerLocation(settings)){
-    return `<section class="prayer-quick-card prayer-quick-card--compact premium-surface"><header class="prayer-quick-head prayer-quick-head--compact"><div class="prayer-quick-toprow"><span class="prayer-quick-kicker">Gebetszeiten</span><span class="prayer-quick-place" id="prayerQuickPlace">Standort</span></div><div class="prayer-quick-title-row"><span class="prayer-quick-icon" aria-hidden="true">${prayerQuickMosqueIconSvg()}</span><h3 class="prayer-quick-title prayer-quick-title--compact" id="prayerQuickTitle">Heute</h3></div></header><div class="prayer-compact-summary prayer-compact-summary--equal"><article class="prayer-summary-card prayer-summary-card--split"><span class="prayer-summary-label">Aktuell</span><span class="prayer-summary-name">Standort</span><strong class="prayer-summary-time">freigeben</strong></article><article class="prayer-summary-card prayer-summary-card--split"><span class="prayer-summary-label">Nächstes Gebet</span><span class="prayer-summary-name">nach Freigabe</span><strong class="prayer-summary-time">–</strong><span class="prayer-summary-countdown">automatisch</span></article></div><div class="prayer-action-row"><button id="quickUseLocationBtn" class="prayer-action-btn" type="button">📍 Standort freigeben</button><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Ordner öffnen</button></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Details öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}</div>${renderPrayerReminderControls({compactBar:true})}</section>`;
+    return `<section class="prayer-quick-card prayer-overview premium-surface" id="prayerQuickCard"><header class="prayer-overview__head">${prayerOverviewHead("Standort")}</header>${prayerOverviewTimes(`<article class="prayer-overview__time-card"><span class="prayer-overview__time-label">Aktuell</span><span class="prayer-overview__time-name">Standort</span><strong class="prayer-overview__time-value">freigeben</strong></article>`,`<article class="prayer-overview__time-card"><span class="prayer-overview__time-label">Nächstes</span><span class="prayer-overview__time-name">nach Freigabe</span><strong class="prayer-overview__time-value">–</strong><span class="prayer-overview__time-countdown">automatisch</span></article>`)}<div class="prayer-action-row"><button id="quickUseLocationBtn" class="prayer-action-btn" type="button">📍 Standort freigeben</button><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Ordner öffnen</button></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Details öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}</div>${renderPrayerReminderControls({compactBar:true})}</section>`;
   }
   const next=nextPrayerInfo(settings);
   const current=currentPrayerInfo(settings);
   const times=calculatePrayerTimes(new Date(),settings);const now=new Date();
-  const city=settings.city||"deinem Ort";const nextTime=next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time);return `<section class="prayer-quick-card prayer-quick-card--compact premium-surface"><header class="prayer-quick-head prayer-quick-head--compact"><div class="prayer-quick-toprow"><span class="prayer-quick-kicker">Gebetszeiten</span><span class="prayer-quick-place" id="prayerQuickPlace">${esc(city)}</span></div><div class="prayer-quick-title-row"><span class="prayer-quick-icon" aria-hidden="true">${prayerQuickMosqueIconSvg()}</span><h3 class="prayer-quick-title prayer-quick-title--compact" id="prayerQuickTitle">Heute</h3></div></header><div class="prayer-compact-summary prayer-compact-summary--equal"><article class="prayer-summary-card prayer-summary-card--split"><span class="prayer-summary-label">Aktuell</span><span class="prayer-summary-name" id="prayerQuickCurrentName">${esc(current?current.name:"Gebet")}</span><strong class="prayer-summary-time" id="prayerQuickCurrentTime">${esc(current?formatPrayerTimeDisplay(current):"--:--")}</strong></article><article class="prayer-summary-card prayer-summary-card--split"><span class="prayer-summary-label">Nächstes Gebet</span><span class="prayer-summary-name" id="prayerQuickNextName">${esc(next.name)}</span><strong class="prayer-summary-time" id="prayerQuickNextTime">${esc(nextTime)}</strong><span class="prayer-summary-countdown" id="prayerQuickCountdown">${esc(formatCountdownShort(next.date-new Date()))}</span></article></div><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Zeiten öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${renderPrayerTimeCards(times,next,now)}</div></div>${renderPrayerReminderControls({compactBar:true})}</section>`;
+  const city=settings.city||"deinem Ort";const nextTime=next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time);return `<section class="prayer-quick-card prayer-overview premium-surface" id="prayerQuickCard"><header class="prayer-overview__head">${prayerOverviewHead(city)}</header>${prayerOverviewTimes(`<article class="prayer-overview__time-card"><span class="prayer-overview__time-label">Aktuell</span><span class="prayer-overview__time-name" id="prayerQuickCurrentName">${esc(current?current.name:"Gebet")}</span><strong class="prayer-overview__time-value" id="prayerQuickCurrentTime">${esc(current?formatPrayerTimeDisplay(current):"--:--")}</strong></article>`,`<article class="prayer-overview__time-card"><span class="prayer-overview__time-label">Nächstes</span><span class="prayer-overview__time-name" id="prayerQuickNextName">${esc(next.name)}</span><strong class="prayer-overview__time-value" id="prayerQuickNextTime">${esc(nextTime)}</strong><span class="prayer-overview__time-countdown" id="prayerQuickCountdown">${esc(formatCountdownShort(next.date-new Date()))}</span></article>`)}<button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Zeiten öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${renderPrayerTimeCards(times,next,now)}</div></div>${renderPrayerReminderControls({compactBar:true})}</section>`;
 }
 function renderPrayerTimes(){
   const settings=getPrayerSettings();
@@ -14646,7 +14662,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v276";
+const APP_BUILD_ID="app-shell-v277";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
