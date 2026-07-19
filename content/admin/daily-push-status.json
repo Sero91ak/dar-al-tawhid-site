@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-19T10:05:06.138Z",
+  "updatedAt": "2026-07-19T10:10:06.139Z",
   "usersChecked": 19,
   "duaCandidates": 0,
-  "recCandidates": 19,
-  "sent": 19,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 19,
+  "duplicates": 38,
   "errors": 0,
   "dailyContentDate": "2026-07-19",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Rechtleitung"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 19,
-      "contentId": "sifat-allah-yad-adam-001",
-      "recipients": "9aec3fe4-7485-48e6-a070-518c9c886d6c",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
