@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v288';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v289';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const APP_SHELL = [
   '/',
@@ -18,6 +18,18 @@ const APP_SHELL = [
   '/assets/spatial/tokens/spatial-tokens.css',
   '/assets/spatial/spatial-components.css',
   '/assets/spatial/spatial-system.js',
+  '/styles/dar-design-system.css',
+  '/styles/tokens/colors.css',
+  '/styles/tokens/spacing.css',
+  '/styles/tokens/radius.css',
+  '/styles/tokens/typography.css',
+  '/styles/tokens/elevation.css',
+  '/styles/tokens/motion.css',
+  '/styles/tokens/navigation.css',
+  '/styles/tokens/inputs.css',
+  '/styles/tokens/states.css',
+  '/styles/components/ui-inputs.css',
+  '/styles/components/ui-dividers.css',
   '/assets/icons/ui/home.svg',
   '/assets/icons/ui/ilm.svg',
   '/assets/icons/ui/feed.svg',

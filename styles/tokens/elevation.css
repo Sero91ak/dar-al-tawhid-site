@@ -1,0 +1,18 @@
+/* DAR AL TAWḤID — Depth / shadow tokens */
+:root {
+  --depth-0-shadow: none;
+  --depth-1-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  --depth-2-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  --depth-3-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.24),
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --depth-4-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+
+  --shadow-legacy: var(--shadow, 0 22px 65px rgba(0, 0, 0, 0.42));
+  --premium-shadow: var(--depth-2-shadow);
+}

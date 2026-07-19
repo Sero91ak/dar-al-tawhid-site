@@ -1,0 +1,19 @@
+/* DAR AL TAWḤID — Motion tokens */
+:root {
+  --motion-press: 120ms;
+  --motion-control: 180ms;
+  --motion-card: 240ms;
+  --motion-page: 300ms;
+  --motion-sheet: 320ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-press: 0ms;
+    --motion-control: 0ms;
+    --motion-card: 0ms;
+    --motion-page: 0ms;
+    --motion-sheet: 0ms;
+  }
+}
