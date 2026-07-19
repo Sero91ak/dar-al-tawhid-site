@@ -2,12 +2,12 @@
 
 export const PRAYER_ENTRY_PUSH_VARIANTS = {
   fajr: [
-    { title: "🌅 Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah." },
-    { title: "🌅 Zeit für Fajr", body: "Lass den Schlaf zurück und antworte dem Ruf zum Gebet." },
-    { title: "🌅 Fajr erinnert dich", body: "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah." },
-    { title: "🌅 Fajr – unter Allahs Schutz", body: "Wer das Fajr-Gebet verrichtet, steht unter Allahs Schutz." },
-    { title: "🌅 Bewahre Fajr", body: "Der Prophet ﷺ verkündete großen Lohn für das Bewahren von Fajr und ʿAṣr." },
-    { title: "🌅 Stehe vor deinem Herrn", body: "Bevor der Tag dich beschäftigt, beginne ihn mit der Niederwerfung vor Allah." }
+    { title: "✨ Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet und dem Gedenken an Allah." },
+    { title: "✨ Zeit für Fajr", body: "Lass den Schlaf zurück und antworte dem Ruf zum Gebet." },
+    { title: "✨ Fajr erinnert dich", body: "Das Gebet zu seiner Zeit gehört zu den liebsten Taten bei Allah." },
+    { title: "✨ Fajr – unter Allahs Schutz", body: "Wer das Fajr-Gebet verrichtet, steht unter Allahs Schutz." },
+    { title: "✨ Bewahre Fajr", body: "Der Prophet ﷺ verkündete großen Lohn für das Bewahren von Fajr und ʿAṣr." },
+    { title: "✨ Stehe vor deinem Herrn", body: "Bevor der Tag dich beschäftigt, beginne ihn mit der Niederwerfung vor Allah." }
   ],
   dhuhr: [
     { title: "☀️ Dhuhr-Zeit ist eingetreten", body: "Unterbrich deine Beschäftigung und antworte dem Ruf Allahs." },
@@ -26,12 +26,12 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "🌤️ ʿAṣr – erfülle deine Pflicht", body: "Das Gebet wurde den Gläubigen zu festgelegten Zeiten vorgeschrieben." }
   ],
   maghrib: [
-    { title: "🌇 Maghrib-Zeit ist eingetreten", body: "Der Tag endet – schließe ihn mit Dankbarkeit und Gebet ab." },
-    { title: "🌇 Zeit für Maghrib", body: "Bevor die Nacht beginnt, kehre mit deinem Herzen zu Allah zurück." },
-    { title: "🌇 Maghrib erinnert dich", body: "Die Sonne ist untergegangen. Vergiss nicht, vor Allah zu stehen." },
-    { title: "🌇 Maghrib – antworte jetzt", body: "Lass die Aufgaben des Abends warten und bete zur vorgeschriebenen Zeit." },
-    { title: "🌇 Beende den Tag im Gebet", body: "Schließe den vergangenen Tag mit Gehorsam und Dankbarkeit ab." },
-    { title: "🌇 Kehre zu deinem Herrn zurück", body: "Wenn der Tag endet, soll dein Gebet nicht zurückbleiben." }
+    { title: "🌥️ Maghrib-Zeit ist eingetreten", body: "Der Tag endet – schließe ihn mit Dankbarkeit und Gebet ab." },
+    { title: "🌥️ Zeit für Maghrib", body: "Bevor die Nacht beginnt, kehre mit deinem Herzen zu Allah zurück." },
+    { title: "🌥️ Maghrib erinnert dich", body: "Die Sonne ist untergegangen. Vergiss nicht, vor Allah zu stehen." },
+    { title: "🌥️ Maghrib – antworte jetzt", body: "Lass die Aufgaben des Abends warten und bete zur vorgeschriebenen Zeit." },
+    { title: "🌥️ Beende den Tag im Gebet", body: "Schließe den vergangenen Tag mit Gehorsam und Dankbarkeit ab." },
+    { title: "🌥️ Kehre zu deinem Herrn zurück", body: "Wenn der Tag endet, soll dein Gebet nicht zurückbleiben." }
   ],
   isha: [
     { title: "🌙 ʿIshāʾ-Zeit ist eingetreten", body: "Beende deinen Tag mit Gehorsam, bevor du dich zur Ruhe legst." },
