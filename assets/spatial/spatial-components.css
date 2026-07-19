@@ -442,6 +442,106 @@ article.spatial-feature-card .feature-card-actions {
   margin-left: 6px;
 }
 
+/* —— Post cards —— */
+.spatial-post-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  border-radius: var(--radius-feature);
+  border-color: var(--material-border);
+  box-shadow: var(--depth-1-shadow);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+}
+
+.spatial-post-card__icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(214, 180, 106, 0.18);
+  overflow: hidden;
+}
+
+.spatial-post-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.spatial-post-card__body {
+  min-width: 0;
+}
+
+/* —— Focus / news rows —— */
+.current-focus-icon .spatial-feature-icon,
+.current-focus-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.current-focus.spatial-focus-panel {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--material-border);
+  box-shadow: var(--depth-2-shadow);
+}
+
+/* —— Hadith shell —— */
+.spatial-hadith-shell .hadith-toolbar-search {
+  grid-column: 1 / -1;
+}
+
+.spatial-hadith-shell .hadith-toolbar-search .spatial-glass-toolbar {
+  width: 100%;
+}
+
+.hadith-book-card.spatial-list-card {
+  display: grid;
+  gap: 6px;
+}
+
+.hadith-book-card .folder-icon {
+  margin-bottom: 2px;
+}
+
+/* —— Feed mount —— */
+.spatial-feed-mount {
+  margin-top: var(--space-2);
+}
+
+/* —— Ramadan / Wasiyyah teasers —— */
+.spatial-ramadan-teaser,
+.spatial-wasiyyah-teaser {
+  border-radius: var(--radius-feature);
+  border: 1px solid var(--material-border);
+  box-shadow: var(--depth-2-shadow);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+}
+
+.spatial-ramadan-teaser__row,
+.wasiyyah-home-teaser-main h3,
+.ramadan-teaser-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* —— About / account panels —— */
+.spatial-about-grid .info-card,
+.spatial-account-panel {
+  border-radius: var(--radius-card);
+  border-color: var(--material-border);
+  box-shadow: var(--depth-1-shadow);
+}
+
+.spatial-quran-topic-search {
+  margin-bottom: var(--space-4);
+}
+
 /* Page padding with bottom nav */
 body.spatial-premium-2026.has-bottom-nav {
   padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 20px);

@@ -66,11 +66,33 @@ html[data-theme="light"],
 html[data-theme="soft"] {
   --material-rgb: 255, 252, 245;
   --material-border: rgba(80, 60, 40, 0.12);
+  --spatial-content-bg: rgba(255, 252, 245, 0.92);
+  --spatial-content-border: rgba(80, 60, 40, 0.1);
+}
+
+html[data-theme="soft"] {
+  --material-rgb: 248, 236, 232;
+  --material-border: rgba(120, 72, 64, 0.14);
+}
+
+html[data-theme="royal"] {
+  --material-rgb: 12, 28, 52;
+  --material-opacity: 0.86;
+  --material-border: rgba(132, 178, 255, 0.16);
+  --spatial-content-border: rgba(132, 178, 255, 0.12);
+}
+
+html[data-theme="bordeaux"] {
+  --material-rgb: 28, 14, 16;
+  --material-opacity: 0.9;
+  --material-border: rgba(214, 150, 132, 0.16);
+  --spatial-content-border: rgba(214, 150, 132, 0.14);
 }
 
 html[data-theme="dar-al-layl"] {
   --material-opacity: 0.88;
   --material-border: rgba(214, 190, 132, 0.14);
+  --spatial-content-border: rgba(214, 190, 132, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {
