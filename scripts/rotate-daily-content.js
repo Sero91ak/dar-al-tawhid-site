@@ -1,29 +1,21 @@
 #!/usr/bin/env node
-/**
- * DAR AL TAWḤĪD – tägliche Inhalte ohne Wiederholung.
- * Jeder Duʿāʾ- und Beitrags-Pool wird vollständig durchlaufen,
- * bevor ein bereits verwendeter Inhalt erneut ausgewählt werden darf.
- */
+/** DAR AL TAWḤĪD – Tagesinhalte ohne Wiederholung. */
 
 const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT = path.resolve(__dirname, "..");
-const TIME_ZONE = "Europe/Berlin";
-const POSTS_INDEX_PATH = path.join(ROOT, "content/posts/posts-index.json");
+const TZ = "Europe/Berlin";
 const POSTS_DIR = path.join(ROOT, "content/posts");
+const POSTS_INDEX = path.join(POSTS_DIR, "posts-index.json");
 const DUA_DIR = path.join(ROOT, "content/duas");
-const DUA_POOL_PATH = path.join(DUA_DIR, "daily-dua-pool.json");
-const DUA_COMBINED_POOL_PATH = path.join(DUA_DIR, "daily-dua-combined-pool.json");
-const DAILY_PATH = path.join(ROOT, "content/updates/daily.json");
-const ROTATION_PATH = path.join(ROOT, "content/admin/daily-content-rotation.json");
+const DUA_SHORT_POOL = path.join(DUA_DIR, "daily-dua-pool.json");
+const DUA_COMBINED_POOL = path.join(DUA_DIR, "daily-dua-combined-pool.json");
+const DAILY_FILE = path.join(ROOT, "content/updates/daily.json");
+const STATE_FILE = path.join(ROOT, "content/admin/daily-content-rotation.json");
 
 function readJson(file, fallback) {
-  try {
-    return JSON.parse(fs.readFileSync(file, "utf8"));
-  } catch {
-    return fallback;
-  }
+  try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return fallback; }
 }
 
 function writeJson(file, value) {
@@ -31,7 +23,7 @@ function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
-function dayKey(date, timeZone = TIME_ZONE) {
+function dayKey(date = new Date(), timeZone = TZ) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone,
     year: "numeric",
@@ -40,47 +32,123 @@ function dayKey(date, timeZone = TIME_ZONE) {
   }).format(date);
 }
 
-function uniqueByKey(items, getKey) {
+function unique(items, keyFn) {
   const seen = new Set();
-  const result = [];
-  for (const item of Array.isArray(items) ? items : []) {
-    const key = String(getKey(item) || "").trim();
-    if (!key || seen.has(key)) continue;
+  return (Array.isArray(items) ? items : []).filter((item) => {
+    const key = String(keyFn(item) || "").trim();
+    if (!key || seen.has(key)) return false;
     seen.add(key);
-    result.push(item);
-  }
-  return result;
+    return true;
+  });
 }
 
-function stableIndex(seed, size) {
+function frontmatter(markdown) {
+  const block = (String(markdown).match(/^---\s*\n([\s\S]*?)\n---/) || [])[1] || "";
+  const out = {};
+  for (const line of block.split("\n")) {
+    const match = line.match(/^([A-Za-z0-9_-]+):\s*["']?([\s\S]*?)["']?\s*$/);
+    if (match) out[match[1]] = match[2].trim();
+  }
+  return out;
+}
+
+function clean(text, max = 220) {
+  return String(text || "")
+    .replace(/^>\s*/gm, "")
+    .replace(/^#+\s*/gm, "")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/[*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, max);
+}
+
+function germanSection(markdown) {
+  return (String(markdown).match(/#{2,3}\s*Deutsch\s*\n+([\s\S]*?)(?=\n#{2,3}\s|$)/i) || [])[1] || "";
+}
+
+function parseDuaFile(file) {
+  const markdown = fs.readFileSync(path.join(DUA_DIR, file), "utf8");
+  const meta = frontmatter(markdown);
+  const body = markdown.replace(/^---[\s\S]*?---/, "").trim();
+  const fallback = body.split(/\n\s*\n/).find((part) => {
+    const text = part.trim();
+    return text && !/^#{1,3}\s/.test(text) && !/^\*\*Anlass:/i.test(text);
+  }) || "";
+  return {
+    id: meta.id || file.replace(/\.md$/i, ""),
+    title: meta.title || meta.id || file.replace(/\.md$/i, ""),
+    snippet: clean(germanSection(markdown) || fallback),
+    cat: meta.cat || meta.category || "",
+    source: "dua-markdown",
+    file
+  };
+}
+
+function loadDuaPool() {
+  const files = fs.existsSync(DUA_DIR)
+    ? fs.readdirSync(DUA_DIR).filter((name) => /^dua-\d+.*\.md$/i.test(name)).sort()
+    : [];
+  const markdown = files.map(parseDuaFile);
+  const shortRaw = readJson(DUA_SHORT_POOL, []);
+  const short = (Array.isArray(shortRaw) ? shortRaw : []).map((item) => ({
+    ...item,
+    snippet: item?.snippet || item?.de || "",
+    cat: item?.cat || item?.category || "",
+    source: item?.source || "daily-dua-pool"
+  }));
+  const items = unique([...markdown, ...short], (item) => item?.id);
+  writeJson(DUA_COMBINED_POOL, items);
+  return { items, markdown: markdown.length, compactPool: short.length, total: items.length };
+}
+
+function loadPostFiles() {
+  const index = readJson(POSTS_INDEX, {});
+  return unique(
+    (Array.isArray(index.files) ? index.files : [])
+      .map((entry) => typeof entry === "string" ? entry : entry?.name)
+      .filter((name) => name && name.endsWith(".md") && fs.existsSync(path.join(POSTS_DIR, name))),
+    (name) => name
+  );
+}
+
+function parsePost(file) {
+  const markdown = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
+  const meta = frontmatter(markdown);
+  const body = markdown.replace(/^---[\s\S]*?---/, "").trim();
+  const first = body.split(/\n\s*\n/).find((part) => part.trim()) || "";
+  return {
+    id: meta.id || file.replace(/\.md$/i, ""),
+    title: String(meta.title || meta.id || file).replace(/^📖\s*/, ""),
+    file,
+    category: meta.category || "",
+    scholar: meta.scholar || "",
+    snippet: clean(first)
+  };
+}
+
+function hashIndex(seed, size) {
   if (size <= 1) return 0;
   let hash = 2166136261;
-  for (const char of String(seed || "")) {
+  for (const char of String(seed)) {
     hash ^= char.codePointAt(0);
     hash = Math.imul(hash, 16777619) >>> 0;
   }
   return hash % size;
 }
 
-function normalizeRotationState(items, getKey, rawState, fallbackLastKey) {
-  const pool = uniqueByKey(items, getKey);
-  const validKeys = new Set(pool.map((item) => String(getKey(item))));
-  const previous = rawState && typeof rawState === "object" ? rawState : {};
-  const cycle = Number.isInteger(previous.cycle) && previous.cycle >= 0 ? previous.cycle : 0;
-  let lastKey = String(previous.lastKey || fallbackLastKey || "").trim();
-  if (!validKeys.has(lastKey)) lastKey = "";
-
-  const usedKeys = uniqueByKey(
-    (Array.isArray(previous.usedKeys) ? previous.usedKeys : []).map((key) => ({ key: String(key) })),
+function normalizeState(items, keyFn, state = {}, fallbackLast = "") {
+  const pool = unique(items, keyFn);
+  const valid = new Set(pool.map((item) => String(keyFn(item))));
+  let lastKey = String(state.lastKey || fallbackLast || "");
+  if (!valid.has(lastKey)) lastKey = "";
+  const usedKeys = unique(
+    (Array.isArray(state.usedKeys) ? state.usedKeys : []).map((key) => ({ key: String(key) })),
     (item) => item.key
-  )
-    .map((item) => item.key)
-    .filter((key) => validKeys.has(key));
-
+  ).map((item) => item.key).filter((key) => valid.has(key));
   if (lastKey && !usedKeys.includes(lastKey)) usedKeys.push(lastKey);
-
   return {
-    cycle,
+    cycle: Number.isInteger(state.cycle) && state.cycle >= 0 ? state.cycle : 0,
     usedKeys,
     lastKey,
     poolSize: pool.length,
@@ -89,301 +157,106 @@ function normalizeRotationState(items, getKey, rawState, fallbackLastKey) {
   };
 }
 
-function pickWithoutRepeat(items, getKey, rawState, fallbackLastKey, seed) {
-  const pool = uniqueByKey(items, getKey);
+function pickWithoutRepeat(items, keyFn, state = {}, fallbackLast = "", seed = "") {
+  const pool = unique(items, keyFn);
   if (!pool.length) return { item: null, state: null };
-
-  const normalized = normalizeRotationState(pool, getKey, rawState, fallbackLastKey);
+  const normalized = normalizeState(pool, keyFn, state, fallbackLast);
   let { cycle, usedKeys, lastKey } = normalized;
-
-  let available = pool.filter((item) => !usedKeys.includes(String(getKey(item))));
+  let available = pool.filter((item) => !usedKeys.includes(String(keyFn(item))));
   if (!available.length) {
     cycle += 1;
     usedKeys = [];
-    available = pool.length > 1
-      ? pool.filter((item) => String(getKey(item)) !== lastKey)
-      : pool.slice();
+    available = pool.length > 1 ? pool.filter((item) => String(keyFn(item)) !== lastKey) : pool;
   }
-
-  const index = stableIndex(`${seed}|${cycle}|${available.length}`, available.length);
-  const item = available[index];
-  const selectedKey = String(getKey(item));
-  if (!usedKeys.includes(selectedKey)) usedKeys.push(selectedKey);
-
+  const item = available[hashIndex(`${seed}|${cycle}|${available.length}`, available.length)];
+  const selected = String(keyFn(item));
+  usedKeys.push(selected);
   return {
     item,
     state: {
       cycle,
       usedKeys,
-      lastKey: selectedKey,
+      lastKey: selected,
       poolSize: pool.length,
-      remaining: Math.max(0, pool.length - usedKeys.length),
+      remaining: pool.length - usedKeys.length,
       updatedAt: new Date().toISOString()
     }
-  };
-}
-
-function parseFrontMatterValue(markdown, key) {
-  const text = String(markdown || "");
-  const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
-  if (!match) return "";
-  const line = match[1].match(new RegExp(`^${key}:\\s*["']?(.+?)["']?\\s*$`, "m"));
-  return line ? line[1].trim() : "";
-}
-
-function cleanSnippet(text, maxLength = 220) {
-  return String(text || "")
-    .replace(/^>\s*/gm, "")
-    .replace(/^#+\s*/gm, "")
-    .replace(/\*\*(.*?)\*\*/g, "$1")
-    .replace(/[*_`]/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, maxLength);
-}
-
-function parsePost(file) {
-  const fullPath = path.join(POSTS_DIR, file);
-  const markdown = fs.readFileSync(fullPath, "utf8");
-  const body = markdown.replace(/^---[\s\S]*?---/, "").trim();
-  const firstParagraph = body.split(/\n\s*\n/).find((part) => part.trim()) || "";
-  const snippet = cleanSnippet(firstParagraph);
-
-  const id = parseFrontMatterValue(markdown, "id") || file.replace(/\.md$/i, "");
-  const title = parseFrontMatterValue(markdown, "title").replace(/^📖\s*/, "") || id;
-  return {
-    id,
-    title,
-    file,
-    category: parseFrontMatterValue(markdown, "category"),
-    scholar: parseFrontMatterValue(markdown, "scholar"),
-    snippet
-  };
-}
-
-function parseDuaMarkdown(file) {
-  const fullPath = path.join(DUA_DIR, file);
-  const markdown = fs.readFileSync(fullPath, "utf8");
-  const id = parseFrontMatterValue(markdown, "id") || file.replace(/\.md$/i, "");
-  const title = parseFrontMatterValue(markdown, "title") || id;
-  const cat = parseFrontMatterValue(markdown, "cat") || parseFrontMatterValue(markdown, "category");
-  const germanSection = (markdown.match(/###\s*Deutsch\s*\n+([\s\S]*?)(?=\n###\s|$)/i) || [])[1] || "";
-  const body = markdown.replace(/^---[\s\S]*?---/, "").trim();
-  const fallbackParagraph = body.split(/\n\s*\n/).find((part) => {
-    const value = part.trim();
-    return value && !/^#{1,3}\s/.test(value) && !/^\*\*Anlass:/i.test(value);
-  }) || "";
-
-  return {
-    id,
-    title,
-    snippet: cleanSnippet(germanSection || fallbackParagraph),
-    cat,
-    source: "dua-markdown",
-    file
-  };
-}
-
-function loadPostFiles() {
-  const index = readJson(POSTS_INDEX_PATH, {});
-  return uniqueByKey(
-    (Array.isArray(index.files) ? index.files : [])
-      .map((entry) => (typeof entry === "string" ? entry : entry?.name))
-      .filter((name) => name && String(name).endsWith(".md"))
-      .filter((name) => fs.existsSync(path.join(POSTS_DIR, name))),
-    (name) => name
-  );
-}
-
-function loadDuaPool() {
-  const markdownFiles = fs.existsSync(DUA_DIR)
-    ? fs.readdirSync(DUA_DIR)
-        .filter((name) => /^dua-\d+.*\.md$/i.test(name))
-        .sort((a, b) => a.localeCompare(b, "de"))
-    : [];
-  const markdownItems = markdownFiles.map(parseDuaMarkdown);
-  const rawCompactItems = readJson(DUA_POOL_PATH, []);
-  const compactItems = (Array.isArray(rawCompactItems) ? rawCompactItems : []).map((item) => ({
-    ...item,
-    snippet: item?.snippet || item?.de || "",
-    cat: item?.cat || item?.category || "",
-    source: item?.source || "daily-dua-pool"
-  }));
-  const items = uniqueByKey([...markdownItems, ...compactItems], (item) => item?.id);
-
-  writeJson(DUA_COMBINED_POOL_PATH, items);
-
-  return {
-    items,
-    markdownCount: markdownItems.length,
-    compactCount: compactItems.length,
-    totalCount: items.length
   };
 }
 
 function run() {
   const now = new Date();
   const date = dayKey(now);
-  const previousDaily = readJson(DAILY_PATH, {});
-  const rotation = readJson(ROTATION_PATH, {
-    version: 2,
-    recommendation: {},
-    dua: {}
-  });
-
-  const postFiles = loadPostFiles();
+  const previous = readJson(DAILY_FILE, {});
+  const state = readJson(STATE_FILE, { version: 2, recommendation: {}, dua: {} });
+  const posts = loadPostFiles();
   const duaSources = loadDuaPool();
-  const duaPool = duaSources.items;
+  const sourceStats = {
+    markdown: duaSources.markdown,
+    compactPool: duaSources.compactPool,
+    total: duaSources.total
+  };
 
-  if (
-    previousDaily?.date === date &&
-    previousDaily?.source === "dar-daily-no-repeat-rotation" &&
-    previousDaily?.recommendation?.id &&
-    previousDaily?.dua?.id
-  ) {
-    const recommendationState = normalizeRotationState(
-      postFiles,
-      (file) => file,
-      rotation.recommendation,
-      previousDaily?.recommendation?.file
-    );
-    const duaState = normalizeRotationState(
-      duaPool,
-      (item) => item?.id,
-      rotation.dua,
-      previousDaily?.dua?.id
-    );
-
-    const nextRotation = {
-      ...rotation,
+  if (previous.date === date && previous.source === "dar-daily-no-repeat-rotation" && previous.recommendation?.id && previous.dua?.id) {
+    const recommendation = normalizeState(posts, (file) => file, state.recommendation, previous.recommendation.file);
+    const dua = normalizeState(duaSources.items, (item) => item.id, state.dua, previous.dua.id);
+    writeJson(STATE_FILE, {
+      ...state,
       version: 2,
       updatedAt: now.toISOString(),
       date,
-      recommendation: recommendationState,
-      dua: duaState,
-      duaSources: {
-        markdown: duaSources.markdownCount,
-        compactPool: duaSources.compactCount,
-        total: duaSources.totalCount
-      }
-    };
-    const daily = {
-      ...previousDaily,
+      recommendation,
+      dua,
+      duaSources: sourceStats
+    });
+    writeJson(DAILY_FILE, {
+      ...previous,
       rotation: {
-        ...(previousDaily.rotation || {}),
-        recommendation: {
-          cycle: recommendationState.cycle,
-          poolSize: recommendationState.poolSize,
-          remaining: recommendationState.remaining
-        },
-        dua: {
-          cycle: duaState.cycle,
-          poolSize: duaState.poolSize,
-          remaining: duaState.remaining,
-          sources: nextRotation.duaSources
-        }
+        recommendation: { cycle: recommendation.cycle, poolSize: recommendation.poolSize, remaining: recommendation.remaining },
+        dua: { cycle: dua.cycle, poolSize: dua.poolSize, remaining: dua.remaining, sources: sourceStats }
       }
-    };
-
-    writeJson(ROTATION_PATH, nextRotation);
-    writeJson(DAILY_PATH, daily);
-    console.log(`Tagesrotation ${date} bleibt bestehen · Duʿāʾ-Pool ${duaSources.totalCount}.`);
+    });
+    console.log(`Tagesauswahl bleibt bestehen · Duʿāʾ-Pool: ${duaSources.total}.`);
     return;
   }
 
-  const recommendationPick = pickWithoutRepeat(
-    postFiles,
-    (file) => file,
-    rotation.recommendation,
-    previousDaily?.recommendation?.file,
-    `${date}|recommendation`
-  );
+  const postPick = pickWithoutRepeat(posts, (file) => file, state.recommendation, previous.recommendation?.file, `${date}|post`);
+  const duaPick = pickWithoutRepeat(duaSources.items, (item) => item.id, state.dua, previous.dua?.id, `${date}|dua`);
+  const recommendation = postPick.item ? parsePost(postPick.item) : null;
+  const selected = duaPick.item;
+  const dua = selected ? {
+    id: selected.id,
+    title: selected.title,
+    snippet: selected.snippet || "",
+    category: selected.cat || selected.category || ""
+  } : null;
+  if (!recommendation && !dua) throw new Error("Keine Tagesinhalte gefunden.");
 
-  const duaPick = pickWithoutRepeat(
-    duaPool,
-    (item) => item?.id,
-    rotation.dua,
-    previousDaily?.dua?.id,
-    `${date}|dua`
-  );
-
-  const recommendation = recommendationPick.item ? parsePost(recommendationPick.item) : null;
-  const selectedDua = duaPick.item;
-  const dua = selectedDua
-    ? {
-        id: selectedDua.id,
-        title: selectedDua.title,
-        snippet: selectedDua.snippet || "",
-        category: selectedDua.cat || selectedDua.category || ""
-      }
-    : null;
-
-  if (!recommendation && !dua) {
-    throw new Error("Weder Beiträge noch Duʿāʾ für die Tagesrotation gefunden.");
-  }
-
-  const duaSourceStats = {
-    markdown: duaSources.markdownCount,
-    compactPool: duaSources.compactCount,
-    total: duaSources.totalCount
-  };
-  const nextRotation = {
+  writeJson(STATE_FILE, {
     version: 2,
     updatedAt: now.toISOString(),
     date,
-    recommendation: recommendationPick.state || rotation.recommendation || {},
-    dua: duaPick.state || rotation.dua || {},
-    duaSources: duaSourceStats
-  };
-
-  const daily = {
+    recommendation: postPick.state || state.recommendation || {},
+    dua: duaPick.state || state.dua || {},
+    duaSources: sourceStats
+  });
+  writeJson(DAILY_FILE, {
     date,
-    timezone: TIME_ZONE,
+    timezone: TZ,
     generated: now.toISOString(),
     source: "dar-daily-no-repeat-rotation",
     recommendation,
     dua,
     rotation: {
-      recommendation: recommendationPick.state
-        ? {
-            cycle: recommendationPick.state.cycle,
-            poolSize: recommendationPick.state.poolSize,
-            remaining: recommendationPick.state.remaining
-          }
-        : null,
-      dua: duaPick.state
-        ? {
-            cycle: duaPick.state.cycle,
-            poolSize: duaPick.state.poolSize,
-            remaining: duaPick.state.remaining,
-            sources: duaSourceStats
-          }
-        : null
+      recommendation: postPick.state ? { cycle: postPick.state.cycle, poolSize: postPick.state.poolSize, remaining: postPick.state.remaining } : null,
+      dua: duaPick.state ? { cycle: duaPick.state.cycle, poolSize: duaPick.state.poolSize, remaining: duaPick.state.remaining, sources: sourceStats } : null
     }
-  };
-
-  writeJson(ROTATION_PATH, nextRotation);
-  writeJson(DAILY_PATH, daily);
-
-  console.log(
-    `Tagesrotation ${date}: Empfehlung ${recommendation?.id || "–"} ` +
-    `(${recommendationPick.state?.remaining ?? "–"} verbleibend) · ` +
-    `Duʿāʾ ${dua?.id || "–"} (${duaPick.state?.remaining ?? "–"} von ${duaSources.totalCount} verbleibend)`
-  );
+  });
+  console.log(`Tagesrotation ${date}: ${dua?.id || "keine Duʿāʾ"} · ${duaPick.state?.remaining ?? 0} von ${duaSources.total} verbleibend.`);
 }
 
 if (require.main === module) {
-  try {
-    run();
-  } catch (error) {
-    console.error(error.stack || error.message || error);
-    process.exit(1);
-  }
+  try { run(); } catch (error) { console.error(error.stack || error); process.exit(1); }
 }
 
-module.exports = {
-  dayKey,
-  pickWithoutRepeat,
-  loadDuaPool,
-  run
-};
+module.exports = { dayKey, pickWithoutRepeat, loadDuaPool, run };
