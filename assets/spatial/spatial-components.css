@@ -190,6 +190,160 @@ article.spatial-feature-card .feature-card-actions {
   min-height: 76px;
 }
 
+/* —— List / folder cards —— */
+.spatial-list-card {
+  border-radius: var(--radius-feature);
+  border-color: var(--material-border);
+  box-shadow: var(--depth-1-shadow);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+}
+
+.spatial-list-card .folder-icon,
+.spatial-folder-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(214, 180, 106, 0.18);
+  overflow: hidden;
+}
+
+.spatial-list-card .folder-icon img,
+.spatial-folder-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* —— Page accent strip —— */
+.spatial-page-accent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin: 0 0 var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--material-border);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--depth-1-shadow);
+}
+
+.spatial-page-accent__icon {
+  flex-shrink: 0;
+}
+
+.spatial-page-accent__copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.spatial-page-accent__copy b {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.spatial-page-accent__copy span {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* —— Quiz hero —— */
+.spatial-quiz-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.spatial-quiz-hero__art img {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.24));
+}
+
+.quiz-menu-card > span:first-child img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.spatial-search-panel .search-input-shell.spatial-glass-toolbar {
+  flex: 1;
+  min-width: 0;
+}
+
+.spatial-search-panel .search-input-icon {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.spatial-search-panel .search-input-icon svg {
+  display: none;
+}
+
+/* —— Ilm welcome —— */
+.spatial-ilm-welcome-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+  display: grid;
+  place-items: center;
+}
+
+.spatial-ilm-welcome-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+}
+
+/* —— Qibla panel —— */
+.spatial-qibla-panel {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--material-border);
+  box-shadow: var(--depth-2-shadow);
+}
+
+.spatial-qibla-panel .qibla-pro-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spatial-qibla-title-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+}
+
+/* —— Quran surah cards / reading —— */
+.quran-surah-card.spatial-content-card,
+.spatial-quran-surah-card {
+  border-radius: var(--radius-feature);
+  border-color: var(--material-border);
+  box-shadow: var(--depth-1-shadow);
+}
+
+.quran-surah-head.spatial-reading-surface {
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.spatial-dua-reading .dua-detail-box {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--spatial-content-border);
+  box-shadow: var(--depth-1-shadow);
+}
+
 /* —— Glass navigation (Ebene 3) —— */
 .spatial-glass-nav,
 .bottom-nav.spatial-glass-nav {

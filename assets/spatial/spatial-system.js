@@ -12,8 +12,11 @@
     prayer: "prayer-times",
     duas: "duas",
     dua: "duas",
+    "dua-cat": "duas",
     posts: "topics",
     topics: "topics",
+    topic: "topics",
+    recent: "topics",
     "din-quiz": "quiz",
     quiz: "quiz",
     ilm: "ilm",
@@ -21,7 +24,21 @@
     "hadith-library": "hadith",
     "image-editor": "image-editor",
     zakat: "zakat",
-    wasiyyah: "wasiyyah"
+    wasiyyah: "wasiyyah",
+    scholars: "scholars",
+    scholar: "scholars",
+    books: "books",
+    book: "books",
+    calendar: "calendar",
+    saved: "saved",
+    about: "about",
+    news: "news",
+    ramadan: "ramadan",
+    feed: "feed",
+    settings: "settings",
+    widgets: "widgets",
+    qibla: "qibla",
+    quran: "quran"
   };
 
   const BOTTOM_NAV_ICONS = {
@@ -77,6 +94,52 @@
     const label = options.label || name || "";
     const className = options.className || "nav-icon-spatial";
     return `<span class="${esc(className)}" role="img" aria-label="${esc(label)}"><img src="${uiIconUrl(name)}" width="${size}" height="${size}" alt="" decoding="async"></span>`;
+  }
+
+  function resolveListIconId(type, value, fallback) {
+    const key = String(`${type} ${value} ${fallback}`).trim().toLowerCase();
+    if (key.includes("hadith") || key.includes("ḥadīth")) return "hadith";
+    if (key.includes("quiz")) return "quiz";
+    if (key.includes("ilm") || key.includes("majlis")) return "ilm";
+    if (key.includes("feed")) return "feed";
+    if (key.includes("zakat")) return "zakat";
+    if (key.includes("wasiyyah") || key.includes("testament")) return "wasiyyah";
+    if (key.includes("widget")) return "widgets";
+    if (key.includes("qibla")) return "qibla";
+    if (key.includes("prayer") || key.includes("gebet") || key.includes("moschee")) return "prayer-times";
+    if (key.includes("ramadan") || key.includes("ʿīd") || key.includes("eid")) return "ramadan";
+    if (key.includes("calendar") || key.includes("kalender")) return "calendar";
+    if (key.includes("settings") || key.includes("einstell")) return "settings";
+    if (key.includes("news") || key.includes("fokus")) return "news";
+    if (key.includes("saved") || key.includes("favorit")) return "saved";
+    if (key.includes("about") || key.includes("maßstab")) return "about";
+    if (key.includes("editor") || key.includes("bild")) return "image-editor";
+    if (key.includes("dua") || key.includes("duʿ") || key.includes("bitt")) return "duas";
+    if (key.includes("scholar") || key.includes("gelehrte")) return "scholars";
+    if (key.includes("book") || key.includes("buch") || key.includes("werk")) return "books";
+    if (key.includes("quran") || key.includes("qur")) return "quran";
+    if (key.includes("topic") || key.includes("themen") || key.includes("kategor") || key.includes("beitrag")) return "topics";
+    const direct = resolveFeatureIconId(String(type || "").trim());
+    if (direct && direct !== "about") return direct;
+    const fromValue = resolveFeatureIconId(String(value || "").trim());
+    if (fromValue && fromValue !== "about") return fromValue;
+    return resolveFeatureIconId(String(fallback || "").trim());
+  }
+
+  function renderListIcon(type, value, fallback, options = {}) {
+    const size = Number(options.size) || 36;
+    const iconId = resolveListIconId(type, value, fallback);
+    return `<span class="spatial-folder-icon folder-icon-spatial">${renderFeatureIcon(iconId, { size, label: String(value || type || fallback || "") })}</span>`;
+  }
+
+  function renderGlassSearch(innerHtml, className) {
+    const extra = className ? ` ${esc(className)}` : "";
+    return `<div class="spatial-glass-toolbar${extra}"><img src="${uiIconUrl("search")}" width="18" height="18" alt="" aria-hidden="true">${innerHtml}</div>`;
+  }
+
+  function renderPageAccent(id, title, options = {}) {
+    const size = Number(options.size) || 44;
+    return `<div class="spatial-page-accent"><span class="spatial-page-accent__icon">${renderFeatureIcon(id, { size, label: title || id })}</span><span class="spatial-page-accent__copy"><b>${esc(title || "")}</b>${options.subtitle ? `<span>${esc(options.subtitle)}</span>` : ""}</span></div>`;
   }
 
   function renderBadge(badge) {
@@ -152,6 +215,10 @@
     uiIconUrl,
     renderFeatureIcon,
     renderUiIcon,
+    resolveListIconId,
+    renderListIcon,
+    renderGlassSearch,
+    renderPageAccent,
     renderFeatureCard,
     renderMoreFeatureRow,
     renderHomeFeatureCard,
