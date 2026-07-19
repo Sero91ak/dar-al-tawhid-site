@@ -9,8 +9,7 @@ const TZ = "Europe/Berlin";
 const POSTS_DIR = path.join(ROOT, "content/posts");
 const POSTS_INDEX = path.join(POSTS_DIR, "posts-index.json");
 const DUA_DIR = path.join(ROOT, "content/duas");
-const DUA_SHORT_POOL = path.join(DUA_DIR, "daily-dua-pool.json");
-const DUA_COMBINED_POOL = path.join(DUA_DIR, "daily-dua-combined-pool.json");
+const DUA_INDEX = path.join(DUA_DIR, "duas.json");
 const DAILY_FILE = path.join(ROOT, "content/updates/daily.json");
 const STATE_FILE = path.join(ROOT, "content/admin/daily-content-rotation.json");
 
@@ -52,7 +51,7 @@ function frontmatter(markdown) {
   return out;
 }
 
-function clean(text, max = 220) {
+function clean(text, max = 300) {
   return String(text || "")
     .replace(/^>\s*/gm, "")
     .replace(/^#+\s*/gm, "")
@@ -63,8 +62,9 @@ function clean(text, max = 220) {
     .slice(0, max);
 }
 
-function germanSection(markdown) {
-  return (String(markdown).match(/#{2,3}\s*Deutsch\s*\n+([\s\S]*?)(?=\n#{2,3}\s|$)/i) || [])[1] || "";
+function section(markdown, heading) {
+  const escaped = String(heading).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return (String(markdown).match(new RegExp(`#{2,3}\\s*${escaped}\\s*\\n+([\\s\\S]*?)(?=\\n#{2,3}\\s|$)`, "i")) || [])[1] || "";
 }
 
 function parseDuaFile(file) {
@@ -75,31 +75,37 @@ function parseDuaFile(file) {
     const text = part.trim();
     return text && !/^#{1,3}\s/.test(text) && !/^\*\*Anlass:/i.test(text);
   }) || "";
+  const de = clean(section(markdown, "Deutsch") || fallback, 600);
+
   return {
     id: meta.id || file.replace(/\.md$/i, ""),
-    title: meta.title || meta.id || file.replace(/\.md$/i, ""),
-    snippet: clean(germanSection(markdown) || fallback),
+    type: meta.type || "",
     cat: meta.cat || meta.category || "",
-    source: "dua-markdown",
+    title: meta.title || meta.id || file.replace(/\.md$/i, ""),
+    occasion: meta.occasion || "",
+    ar: clean(section(markdown, "Arabisch"), 2000),
+    tr: clean(section(markdown, "Lautschrift"), 2000),
+    de,
+    src: meta.src || clean(section(markdown, "Quelle"), 500),
+    snippet: de.slice(0, 300),
     file
   };
 }
 
 function loadDuaPool() {
   const files = fs.existsSync(DUA_DIR)
-    ? fs.readdirSync(DUA_DIR).filter((name) => /^dua-\d+.*\.md$/i.test(name)).sort()
+    ? fs.readdirSync(DUA_DIR)
+        .filter((name) => /^dua-.*\.md$/i.test(name))
+        .sort((a, b) => a.localeCompare(b, "de", { numeric: true }))
     : [];
-  const markdown = files.map(parseDuaFile);
-  const shortRaw = readJson(DUA_SHORT_POOL, []);
-  const short = (Array.isArray(shortRaw) ? shortRaw : []).map((item) => ({
-    ...item,
-    snippet: item?.snippet || item?.de || "",
-    cat: item?.cat || item?.category || "",
-    source: item?.source || "daily-dua-pool"
-  }));
-  const items = unique([...markdown, ...short], (item) => item?.id);
-  writeJson(DUA_COMBINED_POOL, items);
-  return { items, markdown: markdown.length, compactPool: short.length, total: items.length };
+  const items = unique(files.map(parseDuaFile), (item) => item.id);
+  writeJson(DUA_INDEX, items);
+  return {
+    items,
+    markdown: items.length,
+    total: items.length,
+    canonicalSource: "content/duas/dua-*.md"
+  };
 }
 
 function loadPostFiles() {
@@ -123,7 +129,7 @@ function parsePost(file) {
     file,
     category: meta.category || "",
     scholar: meta.scholar || "",
-    snippet: clean(first)
+    snippet: clean(first, 220)
   };
 }
 
@@ -188,13 +194,13 @@ function run() {
   const now = new Date();
   const date = dayKey(now);
   const previous = readJson(DAILY_FILE, {});
-  const state = readJson(STATE_FILE, { version: 2, recommendation: {}, dua: {} });
+  const state = readJson(STATE_FILE, { version: 3, recommendation: {}, dua: {} });
   const posts = loadPostFiles();
   const duaSources = loadDuaPool();
   const sourceStats = {
     markdown: duaSources.markdown,
-    compactPool: duaSources.compactPool,
-    total: duaSources.total
+    total: duaSources.total,
+    canonicalSource: duaSources.canonicalSource
   };
 
   if (previous.date === date && previous.source === "dar-daily-no-repeat-rotation" && previous.recommendation?.id && previous.dua?.id) {
@@ -202,7 +208,7 @@ function run() {
     const dua = normalizeState(duaSources.items, (item) => item.id, state.dua, previous.dua.id);
     writeJson(STATE_FILE, {
       ...state,
-      version: 2,
+      version: 3,
       updatedAt: now.toISOString(),
       date,
       recommendation,
@@ -216,7 +222,7 @@ function run() {
         dua: { cycle: dua.cycle, poolSize: dua.poolSize, remaining: dua.remaining, sources: sourceStats }
       }
     });
-    console.log(`Tagesauswahl bleibt bestehen · Duʿāʾ-Pool: ${duaSources.total}.`);
+    console.log(`Tagesauswahl bleibt bestehen · kanonischer Duʿāʾ-Pool: ${duaSources.total}.`);
     return;
   }
 
@@ -227,13 +233,13 @@ function run() {
   const dua = selected ? {
     id: selected.id,
     title: selected.title,
-    snippet: selected.snippet || "",
-    category: selected.cat || selected.category || ""
+    snippet: selected.snippet || selected.de || "",
+    category: selected.cat || ""
   } : null;
   if (!recommendation && !dua) throw new Error("Keine Tagesinhalte gefunden.");
 
   writeJson(STATE_FILE, {
-    version: 2,
+    version: 3,
     updatedAt: now.toISOString(),
     date,
     recommendation: postPick.state || state.recommendation || {},
