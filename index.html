@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v272";</script>
-<script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v273";</script>
+<script defer src="/assets/live-boot.js?v=app-shell-v273"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
 <title>DAR AL TAWḤID</title>
@@ -10200,7 +10200,7 @@ async function refreshContent({forceRender=false}={}){
   refreshContentPromise=(async()=>{
     try{
       const dailySig=()=>{const d=dailyContentToday();return (d?.recommendation?.id||"")+"|"+(d?.dua?.id||"")};
-      const before=postsSignature()+"::"+DUAS.length+"::"+JSON.stringify(currentUpdates)+"::"+dailySig();
+      const before=postsSignature()+"::"+currentUpdates.length+"::"+dailySig();
       const beforePosts=postsSignature();
       await loadCategoryLayout();
       await loadPosts();
@@ -10209,7 +10209,7 @@ async function refreshContent({forceRender=false}={}){
       await loadDailyContent();
       normalizeLoadedDuas();
       persistOfflineLibrary();
-      const changed=before!==postsSignature()+"::"+DUAS.length+"::"+JSON.stringify(currentUpdates)+"::"+dailySig();
+      const changed=before!==postsSignature()+"::"+currentUpdates.length+"::"+dailySig();
       if(forceRender||changed)schedulePostsRender(true);
       if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function")window.DAR_FOCUS_FEED.onAppReady();
       const postsChanged=beforePosts!==postsSignature();
@@ -13857,6 +13857,14 @@ function hardRefreshApp(){
     try{if(typeof window.DAR_AUTO_REFRESH?.markVersionUpdatePending==="function")window.DAR_AUTO_REFRESH.markVersionUpdatePending(window.__darRemoteBuildId||"")}catch(e){}
     try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
     window.__darAppVersionAvailable=false;
+    try{
+      var appliedId=String(window.__darRemoteBuildId||"").trim();
+      if(appliedId&&typeof localStorage!=="undefined"){
+        var raw=localStorage.getItem("dar_app_version_state_v1");
+        var state=raw?JSON.parse(raw):{};
+        localStorage.setItem("dar_app_version_state_v1",JSON.stringify(Object.assign({},state&&typeof state==="object"?state:{},{appliedBuildId:appliedId,appliedAt:Date.now(),acknowledgedBuildId:appliedId,pendingBuildId:""})));
+      }
+    }catch(e){}
     try{await clearAppRuntimeCaches()}catch(e){console.warn("Cache-Reparatur:",e)}
     try{await requestHardShellRefresh()}catch(e){console.warn("Shell-Refresh:",e)}
     try{if("serviceWorker" in navigator){const reg=await navigator.serviceWorker.getRegistration("/");reg?.active?.postMessage?.({type:"BYPASS_POST_CACHE"})}}catch(e){}
@@ -13866,7 +13874,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v272";
+const APP_BUILD_ID="app-shell-v273";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -14624,9 +14632,9 @@ window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:f
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"){scheduleRefreshContent({forceRender:true},150);if(hasPrayerLocation(getPrayerSettings()))applyPrayerGpsPosition(null,{force:true,silent:true}).then(()=>syncPrayerGpsWatchState()).catch(()=>{})}});
 </script>
 <script>
-  /* VERSION_UPDATE_GUARD: Banner nur bei echtem Update; Schleifen-Schutz + HARD_REFRESH + Willkommens-Push */
+  /* VERSION_UPDATE_GUARD: Banner nur bei echtem Shell-Update; kein Auto-Reload; Push löst kein Update aus */
   (function() {
-    const CHECK_INTERVAL = 60 * 1000;
+    const CHECK_INTERVAL = 30 * 60 * 1000;
     const VERSION_UPDATE_KEY = 'dar_version_update_pending';
     const VERSION_STATE_KEY = 'dar_app_version_state_v1';
     let isChecking = false;
@@ -14678,43 +14686,23 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       try { sessionStorage.removeItem(VERSION_UPDATE_KEY); } catch (e) {}
       writeVersionState({ pendingBuildId: '' });
     }
-    function canAutoShellReload(remoteBuildId) {
-      var KEY = 'dar_auto_shell_reload_once';
-      try {
-        var raw = sessionStorage.getItem(KEY);
-        var data = raw ? JSON.parse(raw) : {};
-        if (String(data.buildId || '') !== String(remoteBuildId)) return true;
-        if ((Number(data.count) || 0) >= 2) return false;
-        if (data.at && Date.now() - data.at < 12000) return false;
-        return true;
-      } catch (e) { return true; }
+    function shouldOfferShellUpdate(remoteBuildId) {
+      var id = String(remoteBuildId || '').trim();
+      if (!id || typeof APP_BUILD_ID !== 'string' || id === String(APP_BUILD_ID)) return false;
+      var state = readVersionState();
+      if (String(state.appliedBuildId || '') === id) return false;
+      if (String(state.acknowledgedBuildId || '') === id) return false;
+      return true;
     }
-    function markAutoShellReload(remoteBuildId) {
-      var KEY = 'dar_auto_shell_reload_once';
-      try {
-        var raw = sessionStorage.getItem(KEY);
-        var data = raw ? JSON.parse(raw) : {};
-        var count = String(data.buildId || '') === String(remoteBuildId) ? (Number(data.count) || 0) + 1 : 1;
-        sessionStorage.setItem(KEY, JSON.stringify({ buildId: String(remoteBuildId), at: Date.now(), count: count }));
-      } catch (e) {}
-    }
-    async function maybeAutoApplyShellUpdate() {
-      if (!navigator.onLine || typeof APP_BUILD_ID !== 'string') return false;
-      try {
-        var vr = await fetch('/version.json', { cache: 'no-store' });
-        if (!vr.ok) return false;
-        var remote = await vr.json();
-        var remoteId = String(remote && remote.buildId || '').trim();
-        if (!remoteId || remoteId === String(APP_BUILD_ID)) return false;
-        if (!canAutoShellReload(remoteId)) return false;
-        markAutoShellReload(remoteId);
-        window.__darRemoteBuildId = remoteId;
-        markVersionUpdatePending(remoteId);
-        hideAllBanners();
-        if (typeof hardRefreshApp === 'function') hardRefreshApp();
-        else location.reload();
-        return true;
-      } catch (e) { return false; }
+    function presentShellUpdate(remoteBuildId) {
+      if (!shouldOfferShellUpdate(remoteBuildId)) return false;
+      remoteBuildId = String(remoteBuildId || '').trim();
+      window.__darRemoteBuildId = remoteBuildId;
+      window.__darAppVersionAvailable = true;
+      writeVersionState({ lastSeenRemoteBuildId: remoteBuildId, lastSeenAt: Date.now() });
+      setHomeRefreshHint(true);
+      showVersionBanner();
+      return true;
     }
     async function getShellRegistration() {
       if (!("serviceWorker" in navigator)) return null;
@@ -14812,22 +14800,13 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           setHomeRefreshHint(false);
           hideAllBanners();
         } else {
-          if (canAutoShellReload(remoteBuildId)) {
-            markAutoShellReload(remoteBuildId);
-            markVersionUpdatePending(remoteBuildId);
-            hideAllBanners();
-            if (typeof hardRefreshApp === 'function') hardRefreshApp();
-            else location.reload();
-            return;
-          }
           var suppressVersionBanner = shouldSuppressVersionBanner(remoteBuildId) || shouldSuppressVersionBanner(remoteBuildId, hasWaitingWorker);
-          if (suppressVersionBanner) {
+          if (suppressVersionBanner || !shouldOfferShellUpdate(remoteBuildId)) {
             setHomeRefreshHint(false);
             hideAllBanners();
             return;
           }
-          setHomeRefreshHint(true);
-          showVersionBanner();
+          presentShellUpdate(remoteBuildId);
           return;
         }
         if (typeof fetchPostsIndexMeta === 'function' && typeof posts !== 'undefined') {
@@ -14877,11 +14856,13 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBannerActivate(); }
         });
       }
-      setTimeout(function() {
-        maybeAutoApplyShellUpdate().then(function(did) { if (!did) checkForUpdates(); });
-      }, 1500);
+      window.addEventListener('dar:version-mismatch', function(ev) {
+        var remoteId = ev && ev.detail && ev.detail.buildId;
+        if (remoteId) presentShellUpdate(remoteId);
+      });
+      setTimeout(function() { checkForUpdates(); }, 2500);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
-      window.addEventListener('online', function() { checkForUpdates(); });
+      window.addEventListener('online', function() { setTimeout(checkForUpdates, 1200); });
     }
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initAutoRefresh);

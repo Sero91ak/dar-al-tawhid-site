@@ -192,8 +192,8 @@
         if (!remote || !remote.buildId || String(remote.buildId) === local) return;
         var state = readVersionState();
         var remoteBuildId = String(remote.buildId);
-        if (state && state.acknowledgedBuildId === remoteBuildId) return;
-        window.__darRemoteBuildId = String(remote.buildId);
+        if (state && (state.appliedBuildId === remoteBuildId || state.acknowledgedBuildId === remoteBuildId)) return;
+        window.__darRemoteBuildId = remoteBuildId;
         window.__darAppVersionAvailable = true;
         try {
           window.dispatchEvent(new CustomEvent("dar:version-mismatch", {
