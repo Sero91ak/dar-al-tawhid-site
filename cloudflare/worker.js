@@ -1135,21 +1135,19 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       publishedAt,
       postPath,
       status: "pending",
+      pushApproved: false,
       createdAt: publishedAt,
-      lastError: "Push wartet auf Live-Verfügbarkeit"
+      lastError: "Push wartet auf Admin-Freigabe"
     };
     if (postId) await writePendingPushStatus(env, postId, pendingRecord);
     push = {
       sent: false,
       pending: true,
-      reason: "Push wird im Hintergrund nach Live-Prüfung gesendet.",
-      waitingForLive: true,
+      waitingForApproval: true,
+      reason: "Push wartet auf deine Freigabe im Admin („Live Push freigeben“).",
       liveCheck,
       targetUrl: buildPostPushUrl(env, postId, Date.now())
     };
-    if (ctx && postId) {
-      ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
-    }
   }
 
   let telegram = { sent: false, skipped: true, status: "not_sent" };
@@ -1278,19 +1276,19 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
       publishedAt,
       postPath: lastPost.postPath,
       status: "pending",
+      pushApproved: false,
       createdAt: publishedAt,
-      lastError: "Push wartet auf Live-Verfügbarkeit"
+      lastError: "Push wartet auf Admin-Freigabe"
     };
     await writePendingPushStatus(env, lastPost.postId, pendingRecord);
     push = {
       sent: false,
       pending: true,
-      reason: `Push für letzten Beitrag (${published.length} gesamt) wird im Hintergrund gesendet.`,
-      waitingForLive: true,
+      waitingForApproval: true,
+      reason: `Push für letzten Beitrag (${published.length} gesamt) wartet auf deine Freigabe im Admin.`,
       liveCheck,
       targetUrl: buildPostPushUrl(env, lastPost.postId, Date.now())
     };
-    if (ctx) ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
   } else if (skipPush) {
     push = { sent: false, skipped: true, reason: "Push übersprungen", liveCheck };
   }
@@ -2517,6 +2515,10 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function isPostPushApproved(record) {
+  return record?.pushApproved === true;
+}
+
 function pendingPushesPath(env) {
   return trimSlashes(env.PENDING_PUSHES_PATH || DEFAULT_PENDING_PUSHES_PATH);
 }
@@ -2696,6 +2698,16 @@ async function processPendingPushUntilLive(env, record) {
     return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
   }
 
+  const current = registry.pushes?.[postId] || record;
+  if (!isPostPushApproved(current)) {
+    return {
+      sent: false,
+      pending: true,
+      waitingForApproval: true,
+      reason: "Push wartet auf Admin-Freigabe."
+    };
+  }
+
   const liveCheck = await verifyPostLiveAvailability(
     env,
     {
@@ -2745,7 +2757,9 @@ async function processPendingPushUntilLive(env, record) {
 
 async function processAllPendingPushes(env) {
   const registry = await readPendingPushesRegistry(env);
-  const pending = Object.values(registry.pushes || {}).filter((item) => item?.status === "pending");
+  const pending = Object.values(registry.pushes || {}).filter(
+    (item) => item?.status === "pending" && isPostPushApproved(item)
+  );
   const results = [];
   for (const record of pending) {
     results.push(await processPendingPushUntilLive(env, record));
@@ -2781,7 +2795,9 @@ async function retryPendingPostPush(env, input) {
     postTitle: existing?.postTitle || postTitle,
     publishedAt: existing?.publishedAt || publishedAt,
     postPath: existing?.postPath || postPath,
-    status: "pending"
+    status: "pending",
+    pushApproved: true,
+    pushApprovedAt: new Date().toISOString()
   };
   await writePendingPushStatus(env, postId, record);
   const push = await processPendingPushUntilLive(env, record);

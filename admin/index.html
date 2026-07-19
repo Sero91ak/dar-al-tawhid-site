@@ -1409,7 +1409,7 @@ function renderPublishTracker(filterType){
     <div class="publish-step-grid">${(track.steps||[]).map(s=>`<div class="publish-step" data-state="${esc(s.state||"wait")}"><span class="publish-step-dot"></span><div><b>${esc(s.label)}</b><small>${esc(publishStateLabel(s.state))}${s.note?` · ${esc(s.note)}`:""}</small></div></div>`).join("")}</div>
     ${(track.items||[]).length?`<div class="upload-status" style="margin-top:9px">${track.items.slice(0,8).map(item=>`${esc(item.title||item.filename)}: <strong>${esc(item.status||"ok")}</strong>`).join("<br>")}${track.items.length>8?`<br>… +${track.items.length-8} weitere`:""}</div>`:""}
     ${track.error?`<div class="upload-status" style="margin-top:9px;color:#ffb8b8">Fehler: ${esc(track.error)}</div>`:""}
-    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button">Live erneut prüfen &amp; Push senden</button></div>
+    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button">Live Push freigeben</button></div>
   </div>`;
 }
 async function verifyPublishedPost(filename,postId){
@@ -2739,10 +2739,11 @@ function renderActions(rows){
               <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
               <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
               <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-              <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
+              <button class="btn primary" id="adminRetryPushBtn" type="button">Live Push freigeben</button>
             </div>
           </div>
           <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown einfügen, optional PDF/Bild anhängen, dann bewusst veröffentlichen."}</div>
+          <div class="upload-status" style="margin-top:8px">Besucher-Pushs werden nicht automatisch gesendet. Erst nach der Veröffentlichung „Live Push freigeben“.</div>
           ${renderPublishTracker("single")}
         </div>
       </details>
@@ -3442,6 +3443,7 @@ function saveLastPublishPushContext(ctx){
 function formatPushStatusLine(push){
   if(!push)return "";
   if(push.sent)return `<br>Push: <strong style="color:#8fd7a8">gesendet</strong>${push.id?` · ID ${esc(String(push.id))}`:""}${push.url?`<br>Push-Ziel: ${esc(push.url)}`:""}`;
+  if(push.waitingForApproval||push.pending&&!push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf deine Freigabe</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
   if(push.pending||push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf stabile Live-Verfügbarkeit</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
   return `<br>Push: <strong style="color:#ff9f9f">fehlgeschlagen</strong> · ${esc(String(push.reason||push.message||"unbekannt"))}`;
 }
@@ -3450,7 +3452,8 @@ async function retryLivePush(){
   const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||ctx?.markdown||"";
   const filename=(ctx?.filename||draftFilename||"").trim();
   const postId=ctx?.postId||frontmatterValue(markdown,"id")||filename.replace(/\.md$/i,"");
-  if(!filename){toast("Kein Beitrag für Push-Retry – zuerst veröffentlichen");return}
+  if(!filename){toast("Kein Beitrag für Push-Freigabe – zuerst veröffentlichen");return}
+  if(!confirm("Live Push freigeben?\n\nDer Beitrags-Push wird jetzt an alle registrierten Besucher gesendet."))return;
   const btn=document.getElementById("adminRetryPushBtn");
   if(btn){btn.disabled=true;btn.textContent="Prüfe Live & Push …"}
   setUploadStatus("Prüfe Index, Beitrag und Live-Verfügbarkeit … Push wird bei Erfolg gesendet.");
@@ -3477,7 +3480,7 @@ async function retryLivePush(){
     setUploadStatus(`Push-Retry fehlgeschlagen: ${esc(e.message||e)}`);
     toast(e.message||"Push-Retry fehlgeschlagen");
   }finally{
-    if(btn){btn.disabled=false;btn.textContent="Live erneut prüfen & Push senden"}
+    if(btn){btn.disabled=false;btn.textContent="Live Push freigeben"}
   }
 }
 async function prepareNextPostNumber(){
@@ -3565,10 +3568,10 @@ async function uploadPostViaWorker(){
     updatePublishStep("urlLive",live.url?"ok":"skip",live.url?"Besucher-Link vorbereitet":"Besucher-Link wartet auf Index/Datei");
     const push=result.push||null;
     updatePublishStep("pushReady",push?"ok":"skip",push?"Push-Antwort vom Worker":"Kein Push-Status vom Worker");
-    updatePublishStep("onesignal",push?.pending?"skip":push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?.pending?"Wartet auf stabile Live-Prüfung":push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
-    updatePublishStep("pushSent",push?.pending?"skip":push&&push.sent?"ok":"error",push?.pending?"Wird automatisch gesendet, sobald der Beitrag stabil online ist":push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
-    updatePublishStep("done",(push&&push.sent||push?.pending)&&live.file?"ok":"skip",push?.pending?"Beitrag erstellt · Push wartet":push&&push.sent&&live.file?"Fertig":"Fertig mit Hinweis");
-    updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live-Verfügbarkeit":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
+    updatePublishStep("onesignal",push?.pending?"skip":push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?.waitingForApproval?"Wartet auf Admin-Freigabe":push?.pending?"Wartet auf stabile Live-Prüfung":push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
+    updatePublishStep("pushSent",push?.pending?"skip":push&&push.sent?"ok":"error",push?.waitingForApproval?"Erst nach „Live Push freigeben“":push?.pending?"Wird nach Freigabe gesendet, sobald der Beitrag stabil online ist":push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
+    updatePublishStep("done",(push&&push.sent||push?.pending)&&live.file?"ok":"skip",push?.waitingForApproval?"Beitrag erstellt · Push wartet auf Freigabe":push?.pending?"Beitrag erstellt · Push wartet":push&&push.sent&&live.file?"Fertig":"Fertig mit Hinweis");
+    updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.waitingForApproval?"wartet auf Freigabe":push?.pending?"wartet auf Live-Verfügbarkeit":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     finishPublishTrack(live.file?"ok":"error",live.file?"":live.reason||"Live-Datei noch nicht erreichbar");
     setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(result.push)}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
