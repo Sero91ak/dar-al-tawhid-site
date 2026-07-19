@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v287';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v288';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const APP_SHELL = [
   '/',
@@ -24,6 +24,29 @@ const APP_SHELL = [
   '/assets/icons/ui/quran.svg',
   '/assets/icons/ui/menu.svg',
   '/assets/icons/ui/search.svg',
+  '/assets/icons/features/about.svg',
+  '/assets/icons/features/account.svg',
+  '/assets/icons/features/books.svg',
+  '/assets/icons/features/calendar.svg',
+  '/assets/icons/features/duas.svg',
+  '/assets/icons/features/feed.svg',
+  '/assets/icons/features/hadith.svg',
+  '/assets/icons/features/image-editor.svg',
+  '/assets/icons/features/ilm.svg',
+  '/assets/icons/features/jummah.svg',
+  '/assets/icons/features/news.svg',
+  '/assets/icons/features/prayer-times.svg',
+  '/assets/icons/features/qibla.svg',
+  '/assets/icons/features/quran.svg',
+  '/assets/icons/features/quiz.svg',
+  '/assets/icons/features/ramadan.svg',
+  '/assets/icons/features/saved.svg',
+  '/assets/icons/features/scholars.svg',
+  '/assets/icons/features/settings.svg',
+  '/assets/icons/features/topics.svg',
+  '/assets/icons/features/wasiyyah.svg',
+  '/assets/icons/features/widgets.svg',
+  '/assets/icons/features/zakat.svg',
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
   '/data/offline-content-manifest.json',
