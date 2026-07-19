@@ -1,16 +1,22 @@
-name: Daily Push Schedule (09:00 + 12:00)
+name: Daily Content Rotation
 
-# Einfachster Weg: 1× nachts bei OneSignal einplanen – OneSignal liefert um 09:00/12:00 Ortszeit.
+# Erstellt jeden Morgen früh den Tagesinhalt für Europe/Berlin.
+# Verwendete Duʿāʾ und Beiträge werden gespeichert und erst nach
+# einem vollständigen Pool-Durchlauf erneut zugelassen.
 on:
   workflow_dispatch:
   schedule:
-    - cron: "5 22 * * *"
+    - cron: "5 2 * * *"
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: daily-content-rotation
+  cancel-in-progress: false
 
 jobs:
-  schedule-onesignal-daily:
+  rotate-daily-content:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,10 +27,20 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Plan Duʿāʾ (09:00) and Empfehlung (12:00) via OneSignal timezone
-        env:
-          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
-          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
-          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY }}
-          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
-        run: node scripts/send-daily-content-push.js
+      - name: Validate rotation script
+        run: node --check scripts/rotate-daily-content.js
+
+      - name: Select fresh daily content without repetition
+        run: node scripts/rotate-daily-content.js
+
+      - name: Commit rotation state and daily content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/updates/daily.json content/admin/daily-content-rotation.json
+          if git diff --cached --quiet; then
+            echo "Keine Änderung notwendig."
+            exit 0
+          fi
+          git commit -m "Daily content rotation $(TZ=Europe/Berlin date +%F)"
+          git push
