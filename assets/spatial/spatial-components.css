@@ -1,0 +1,251 @@
+/* Spatial Premium 2026 — Component Layer */
+
+/* —— Depth utilities —— */
+.spatial-depth-0 { box-shadow: var(--depth-0-shadow); }
+.spatial-depth-1 { box-shadow: var(--depth-1-shadow); }
+.spatial-depth-2 { box-shadow: var(--depth-2-shadow); }
+.spatial-depth-3 { box-shadow: var(--depth-3-shadow); }
+.spatial-depth-4 { box-shadow: var(--depth-4-shadow); }
+
+/* —— Content / Reading (Ebene 1) —— */
+.spatial-content-card,
+.spatial-reading-surface {
+  position: relative;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--spatial-content-border);
+  background: var(--spatial-content-bg);
+  box-shadow: var(--depth-1-shadow);
+}
+
+.spatial-reading-surface {
+  padding: var(--space-4) var(--space-5);
+  line-height: 1.55;
+}
+
+/* —— Feature cards (Ebene 2) —— */
+.spatial-feature-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 88px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-feature);
+  border: 1px solid var(--material-border);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--depth-2-shadow);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: transform var(--motion-card) var(--motion-ease), box-shadow var(--motion-card) var(--motion-ease);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.spatial-feature-card:active {
+  transform: scale(0.985);
+}
+
+.spatial-feature-card__copy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.spatial-feature-card__copy h4 {
+  margin: 0;
+  font-size: clamp(14px, 3.8vw, 15px);
+  line-height: 1.2;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.spatial-feature-card__copy p {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.32;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.spatial-feature-card__art {
+  flex-shrink: 0;
+  width: var(--spatial-feature-icon-md);
+  height: var(--spatial-feature-icon-md);
+  display: grid;
+  place-items: center;
+}
+
+.spatial-feature-card__art img,
+.spatial-feature-card__art svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));
+}
+
+/* Mehr-Bereich grid */
+.spatial-more-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spatial-card-gap);
+}
+
+@media (min-width: 520px) {
+  .spatial-more-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.spatial-more-row {
+  /* extends spatial-feature-card */
+}
+
+button.spatial-more-row {
+  appearance: none;
+  font: inherit;
+  color: inherit;
+}
+
+article.spatial-feature-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "copy art" "actions actions";
+}
+
+article.spatial-feature-card .spatial-feature-card__copy {
+  grid-area: copy;
+}
+
+article.spatial-feature-card .spatial-feature-card__art {
+  grid-area: art;
+}
+
+article.spatial-feature-card .feature-card-actions {
+  grid-area: actions;
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+}
+
+.spatial-more-group h3 {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(18px, 4.5vw, 22px);
+}
+
+
+/* —— Glass navigation (Ebene 3) —— */
+.spatial-glass-nav,
+.bottom-nav.spatial-glass-nav {
+  background: rgba(var(--material-rgb), var(--material-opacity));
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+  border: 1px solid var(--material-border);
+  box-shadow: var(--depth-3-shadow);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .spatial-glass-nav,
+  .bottom-nav.spatial-glass-nav {
+    background: var(--premium-surface-elevated, rgba(12, 16, 24, 0.94));
+  }
+}
+
+/* Bottom nav UI icons */
+.bottom-nav.spatial-glass-nav .nav-icon-spatial {
+  width: var(--spatial-ui-icon);
+  height: var(--spatial-ui-icon);
+  display: block;
+  margin: 0 auto 2px;
+}
+
+.bottom-nav.spatial-glass-nav .nav-icon-spatial svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* —— Compact action —— */
+.spatial-compact-action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-compact);
+  border: 1px solid var(--spatial-content-border);
+  background: var(--spatial-content-bg);
+  box-shadow: var(--depth-1-shadow);
+}
+
+/* —— Home prayer compact —— */
+.spatial-prayer-home {
+  border-radius: var(--radius-card);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--depth-1-shadow);
+}
+
+.spatial-prayer-home__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.spatial-prayer-home__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* —— Quran overview teaser —— */
+.spatial-quran-teaser {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-feature);
+  border: 1px solid var(--material-border);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  box-shadow: var(--depth-2-shadow);
+}
+
+.spatial-quran-teaser__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* Badge */
+.spatial-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(214, 180, 106, 0.35);
+  background: rgba(214, 180, 106, 0.12);
+  color: var(--gold2, #d6b46a);
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+/* Page padding with bottom nav */
+body.spatial-premium-2026.has-bottom-nav {
+  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spatial-feature-card {
+    transition: none;
+  }
+  .spatial-feature-card:active {
+    transform: none;
+  }
+}

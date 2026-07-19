@@ -1,0 +1,84 @@
+/* DAR AL TAWḤID — Spatial Premium 2026 — Design Tokens */
+:root {
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --spatial-page-padding-x: clamp(16px, 4.2vw, 18px);
+  --spatial-card-gap: clamp(10px, 2.8vw, 14px);
+  --spatial-section-gap: clamp(20px, 4.5vw, 24px);
+
+  /* Radius */
+  --radius-page: 28px;
+  --radius-feature: 24px;
+  --radius-card: 20px;
+  --radius-control: 18px;
+  --radius-button: 17px;
+  --radius-compact: 14px;
+  --radius-pill: 999px;
+
+  /* Depth shadows */
+  --depth-0-shadow: none;
+  --depth-1-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  --depth-2-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  --depth-3-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.24),
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --depth-4-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+
+  /* Material (theme-tinted via --material-rgb in theme surfaces) */
+  --material-rgb: 255, 255, 255;
+  --material-opacity: 0.78;
+  --material-border: rgba(255, 255, 255, 0.1);
+  --material-blur: 18px;
+  --material-saturate: 125%;
+
+  /* Motion */
+  --motion-press: 120ms;
+  --motion-control: 180ms;
+  --motion-card: 240ms;
+  --motion-page: 300ms;
+  --motion-sheet: 320ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Icon sizes */
+  --spatial-feature-icon-sm: 46px;
+  --spatial-feature-icon-md: 56px;
+  --spatial-ui-icon: 22px;
+  --bottom-nav-height: 58px;
+
+  /* Content surfaces */
+  --spatial-content-bg: var(--premium-surface, rgba(255, 255, 255, 0.04));
+  --spatial-content-border: var(--line, rgba(255, 255, 255, 0.08));
+  --spatial-reading-bg: var(--bg, #080806);
+}
+
+html[data-theme="light"],
+html[data-theme="soft"] {
+  --material-rgb: 255, 252, 245;
+  --material-border: rgba(80, 60, 40, 0.12);
+}
+
+html[data-theme="dar-al-layl"] {
+  --material-opacity: 0.88;
+  --material-border: rgba(214, 190, 132, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-press: 0ms;
+    --motion-control: 0ms;
+    --motion-card: 0ms;
+    --motion-page: 0ms;
+    --motion-sheet: 0ms;
+  }
+}
