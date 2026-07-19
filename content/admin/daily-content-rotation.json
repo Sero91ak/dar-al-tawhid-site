@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updatedAt": "2026-07-19T09:51:10.360Z",
+  "version": 3,
+  "updatedAt": "2026-07-19T10:24:04.221Z",
   "date": "2026-07-19",
   "recommendation": {
     "cycle": 0,
@@ -11,22 +11,19 @@
     "lastKey": "2026-06-05-sifat-allah-yad-adam.md",
     "poolSize": 449,
     "remaining": 447,
-    "updatedAt": "2026-07-19T09:51:10.384Z"
+    "updatedAt": "2026-07-19T10:24:04.256Z"
   },
   "dua": {
     "cycle": 0,
-    "usedKeys": [
-      "sunnah-006",
-      "quran-003"
-    ],
-    "lastKey": "quran-003",
-    "poolSize": 77,
-    "remaining": 75,
-    "updatedAt": "2026-07-19T09:51:10.384Z"
+    "usedKeys": [],
+    "lastKey": "",
+    "poolSize": 60,
+    "remaining": 60,
+    "updatedAt": "2026-07-19T10:24:04.256Z"
   },
   "duaSources": {
     "markdown": 60,
-    "compactPool": 17,
-    "total": 77
+    "total": 60,
+    "canonicalSource": "content/duas/dua-*.md"
   }
 }

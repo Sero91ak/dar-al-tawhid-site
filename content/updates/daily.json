@@ -25,12 +25,12 @@
     },
     "dua": {
       "cycle": 0,
-      "poolSize": 77,
-      "remaining": 75,
+      "poolSize": 60,
+      "remaining": 60,
       "sources": {
         "markdown": 60,
-        "compactPool": 17,
-        "total": 77
+        "total": 60,
+        "canonicalSource": "content/duas/dua-*.md"
       }
     }
   }
