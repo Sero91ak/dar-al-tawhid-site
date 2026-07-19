@@ -5,6 +5,12 @@ name: Daily Content Rotation
 # einem vollständigen Pool-Durchlauf erneut zugelassen.
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/rotate-daily-content.js
+      - .github/workflows/daily-push-schedule.yml
   schedule:
     - cron: "5 2 * * *"
 
