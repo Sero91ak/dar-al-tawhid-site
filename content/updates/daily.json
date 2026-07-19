@@ -1,20 +1,32 @@
 {
   "date": "2026-07-19",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-18T23:55:39.457Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-07-19T09:34:43.995Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "shafii-buch-widerspricht-sunnah-001",
-    "title": "Wenn mein Buch der Sunnah widerspricht",
-    "file": "2026-06-05-shafii-wenn-mein-buch-der-sunnah-widerspricht.md",
-    "category": "Hadith",
-    "scholar": "Muḥammad ibn Idrīs ash-Shāfiʿī",
-    "snippet": "„Wenn ihr in meinem Buch etwas findet, das der Sunnah des Gesandten Allahs ﷺ widerspricht, dann folgt ihr und lasst, was ich gesagt habe.“"
+    "id": "sifat-allah-yad-adam-001",
+    "title": "Allah erschuf Ādam mit Seiner Hand",
+    "file": "2026-06-05-sifat-allah-yad-adam.md",
+    "category": "Aqīdah",
+    "scholar": "Prophet ﷺ",
+    "snippet": "🖋️ Der Prophet ﷺ berichtete im Hadith über die Auseinandersetzung zwischen Ādam und Mūsā:"
   },
   "dua": {
-    "id": "sunnah-006",
-    "title": "Duʿāʾ beim Reisen",
-    "snippet": "Gepriesen sei Der, Der uns dies dienstbar gemacht hat...",
-    "category": "Reise"
+    "id": "quran-003",
+    "title": "Duʿāʾ gegen Abweichen des Herzens",
+    "snippet": "Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir.",
+    "category": "Rechtleitung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 449,
+      "remaining": 447
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 17,
+      "remaining": 15
+    }
   }
 }
