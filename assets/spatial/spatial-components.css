@@ -33,7 +33,7 @@
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-feature);
   border: 1px solid var(--material-border);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
   box-shadow: var(--depth-2-shadow);
   text-align: left;
   width: 100%;
@@ -41,6 +41,18 @@
   transition: transform var(--motion-card) var(--motion-ease), box-shadow var(--motion-card) var(--motion-ease);
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
+}
+
+.spatial-feature-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--gold2, #d6b46a), rgba(214, 180, 106, 0.2));
+  opacity: 0.85;
 }
 
 .spatial-feature-card:active {
@@ -137,6 +149,46 @@ article.spatial-feature-card .feature-card-actions {
   font-size: clamp(18px, 4.5vw, 22px);
 }
 
+
+/* —— Glass toolbar (search) —— */
+.spatial-glass-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-compact);
+  border: 1px solid var(--material-border);
+  background: rgba(var(--material-rgb), calc(var(--material-opacity) * 0.85));
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+  box-shadow: var(--depth-1-shadow);
+}
+
+.spatial-glass-toolbar img {
+  flex-shrink: 0;
+  opacity: 0.82;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.spatial-glass-toolbar__input,
+.spatial-glass-toolbar .search,
+.spatial-glass-toolbar .more-search {
+  flex: 1;
+  min-width: 0;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 8px 4px !important;
+  margin: 0 !important;
+}
+
+.spatial-more-search {
+  margin-bottom: var(--space-4);
+}
+
+.spatial-pinned-section .spatial-feature-card {
+  min-height: 76px;
+}
 
 /* —— Glass navigation (Ebene 3) —— */
 .spatial-glass-nav,

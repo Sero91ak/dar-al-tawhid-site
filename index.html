@@ -14794,6 +14794,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       try { sessionStorage.removeItem(VERSION_UPDATE_KEY); } catch (e) {}
       writeVersionState({ pendingBuildId: '' });
     }
+    async function maybeAutoApplyShellUpdate() {
+      return false;
+    }
     function shouldOfferShellUpdate(remoteBuildId) {
       var id = String(remoteBuildId || '').trim();
       if (!id || typeof APP_BUILD_ID !== 'string' || id === String(APP_BUILD_ID)) return false;
