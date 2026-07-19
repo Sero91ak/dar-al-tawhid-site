@@ -73,6 +73,7 @@ import {
   blockFeedBackgroundImage
 } from "./feed-backgrounds-sync.js";
 import { handleQuizStatsRequest } from "./quiz-stats-admin.js";
+export { PrayerStatusStore } from "./prayer-status-store.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -129,8 +130,9 @@ export default {
           telegramChannel: telegramChannelId(env),
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
-          prayerScheduler: "cloudflare-worker-cron",
+          prayerScheduler: "cloudflare-worker-cron-v3",
           prayerCron: "*/5 * * * *",
+          prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
