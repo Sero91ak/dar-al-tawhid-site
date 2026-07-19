@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v286';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v287';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const APP_SHELL = [
   '/',
@@ -155,6 +155,12 @@ async function prepareOfflineBundle(urls, requestedBy = 'user') {
 
 function refreshBypassActive() {
   return Date.now() < hardRefreshUntil || Date.now() < bypassPostCacheUntil;
+}
+
+function isSpatialAssetRequest(url) {
+  return url.pathname.startsWith('/assets/spatial/')
+    || url.pathname.startsWith('/assets/icons/features/')
+    || url.pathname.startsWith('/assets/icons/ui/');
 }
 
 function isFeedAssetRequest(url) {
@@ -426,7 +432,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
-  if (isPostDataRequest(url) || isFeedAssetRequest(url) || Date.now() < bypassPostCacheUntil) {
+  if (isPostDataRequest(url) || isFeedAssetRequest(url) || isSpatialAssetRequest(url) || Date.now() < bypassPostCacheUntil) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {

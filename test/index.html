@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v286";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v287";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -7356,7 +7356,7 @@ html[data-theme="soft"] .theme-hero-shell::after{
 }
 
 
-.staging-app-banner{border:1px solid rgba(255,196,120,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,196,120,.18),rgba(239,215,142,.06));color:var(--cream);padding:10px 12px;margin:0 0 12px;font-size:12px;font-weight:900;line-height:1.35;text-align:center}.staging-app-banner b{color:var(--gold2)}.posts-sync-banner{border:1px solid rgba(239,215,142,.28);border-radius:14px;background:rgba(8,18,14,.72);color:var(--gold2);padding:9px 12px;margin:0 0 12px;font-size:12px;font-weight:850;line-height:1.35;text-align:center}
+.staging-app-banner{border:1px solid rgba(255,196,120,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,196,120,.18),rgba(239,215,142,.06));color:var(--cream);padding:10px 12px;margin:0 0 12px;font-size:12px;font-weight:900;line-height:1.35;text-align:center}.staging-app-banner b{color:var(--gold2)}.staging-app-banner code{font-size:10px;font-weight:950;letter-spacing:.04em;padding:2px 6px;border-radius:8px;background:rgba(0,0,0,.22);border:1px solid rgba(255,196,120,.28)}.posts-sync-banner{border:1px solid rgba(239,215,142,.28);border-radius:14px;background:rgba(8,18,14,.72);color:var(--gold2);padding:9px 12px;margin:0 0 12px;font-size:12px;font-weight:850;line-height:1.35;text-align:center}
 :root{
 --editor-bg:transparent;
 --editor-card-bg:rgba(239,215,142,.06);
@@ -9265,9 +9265,9 @@ window.DAR_ANALYTICS_CONFIG={
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=3">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
-<link rel="stylesheet" href="/assets/spatial/tokens/spatial-tokens.css?v=3">
-<link rel="stylesheet" href="/assets/spatial/spatial-components.css?v=3">
-<script src="/assets/spatial/spatial-system.js?v=3"></script>
+<link rel="stylesheet" href="/assets/spatial/tokens/spatial-tokens.css?v=4">
+<link rel="stylesheet" href="/assets/spatial/spatial-components.css?v=4">
+<script src="/assets/spatial/spatial-system.js?v=4"></script>
 
 
 <style id="feature-final-v202">
@@ -14669,16 +14669,26 @@ function hardRefreshApp(){
     window.__darAppVersionAvailable=false;
     try{await clearAppRuntimeCaches()}catch(e){console.warn("Cache-Reparatur:",e)}
     try{await requestHardShellRefresh()}catch(e){console.warn("Shell-Refresh:",e)}
-    try{if("serviceWorker" in navigator){const reg=await navigator.serviceWorker.getRegistration("/");reg?.active?.postMessage?.({type:"BYPASS_POST_CACHE"})}}catch(e){}
+    try{if("serviceWorker" in navigator){const reg=await navigator.serviceWorker.getRegistration("/");reg?.active?.postMessage?.({type:"HARD_REFRESH"})}}catch(e){}
     const hash=location.hash||"#home";
     let target;
     try{const u=new URL(location.href);u.searchParams.set("r",String(Date.now()));u.hash="";target=u.pathname+u.search+hash}catch(e){target=(location.pathname||"/")+"?r="+Date.now()+hash}
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v286";
+const APP_BUILD_ID="app-shell-v287";
 initAppCrashGuard();
-function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
+function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner" id="stagingAppBanner"><b>DAR Test-App</b> · Build <code>${APP_BUILD_ID}</code> · Spatial Premium aktiv. Wenn das Design alt wirkt: unten „Aktualisieren“ tippen.</div>`:""}
+function ensureTestSpatialReady(){
+  if(!IS_STAGING_APP||window.__darSpatialRepairAttempted)return;
+  if(window.DARSpatial&&typeof DARSpatial.renderPageAccent==="function")return;
+  window.__darSpatialRepairAttempted=true;
+  setTimeout(function(){
+    if(window.DARSpatial&&typeof DARSpatial.renderPageAccent==="function")return;
+    if(typeof hardRefreshApp==="function")hardRefreshApp();
+    else if(typeof window.DAR_AUTO_REFRESH?.check==="function")window.DAR_AUTO_REFRESH.check();
+  },500);
+}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
@@ -15354,6 +15364,7 @@ window.addEventListener("DOMContentLoaded",()=>{
       initFontSettings();
       render();
     }
+    ensureTestSpatialReady();
     restoreStatsAuth();
     initTheme();
     initFontSettings();
@@ -15379,7 +15390,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     const savedFloatBtn=$("savedFloat");
     if(savedFloatBtn)savedFloatBtn.onclick=()=>{markFloatTouchbarActivated();navigate("saved")};
     setTimeout(showFloatTipsOnce,900);
-    window.addEventListener("pageshow",e=>{ensureBottomNavDock();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>ensureBottomNavDock())},{passive:true});
+    window.addEventListener("pageshow",e=>{ensureBottomNavDock();resetTabSwipePreview();if(e.persisted){requestAnimationFrame(()=>ensureBottomNavDock());if(typeof window.DAR_AUTO_REFRESH?.check==="function")window.DAR_AUTO_REFRESH.check()}},{passive:true});
   }catch(e){
     console.error("App-Start fehlgeschlagen:",e);
     renderAppRecovery(e,"App-Start");
@@ -15488,7 +15499,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         var raw = sessionStorage.getItem(KEY);
         var data = raw ? JSON.parse(raw) : {};
         if (String(data.buildId || '') !== String(remoteBuildId)) return true;
-        if ((Number(data.count) || 0) >= 2) return false;
+        if ((Number(data.count) || 0) >= 5) return false;
         if (data.at && Date.now() - data.at < 12000) return false;
         return true;
       } catch (e) { return true; }
@@ -15683,7 +15694,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       setTimeout(function() {
         maybeAutoApplyShellUpdate().then(function(did) { if (!did) checkForUpdates(); });
-      }, 1500);
+      }, 600);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { checkForUpdates(); });
     }
