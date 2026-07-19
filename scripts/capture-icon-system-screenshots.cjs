@@ -22,9 +22,10 @@ async function prepare(page, theme, hash) {
   }, { theme, prayerSettings });
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForTimeout(2800);
-  if (typeof window !== 'undefined' && window.hydrateAppIcons) {
-    await page.evaluate(() => window.hydrateAppIcons(document));
-  }
+  await page.evaluate(() => {
+    if (window.hydrateUiIcons) window.hydrateUiIcons(document);
+    else if (window.hydrateAppIcons) window.hydrateAppIcons(document);
+  });
 }
 
 async function shot(page, name) {
@@ -50,6 +51,21 @@ async function shot(page, name) {
 
   await prepare(page, 'dark', '#more');
   await shot(page, 'icons-more-dark.png');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await shot(page, 'icons-more-lernen-dark.png');
+  await page.evaluate(() => {
+    const g = document.querySelector('[data-more-group] h3');
+    if (g && g.textContent.includes('Alltag')) g.closest('[data-more-group]').scrollIntoView({ block: 'start' });
+  });
+  await page.waitForTimeout(600);
+  await shot(page, 'icons-more-alltag-dark.png');
+  await page.evaluate(() => {
+    const groups = [...document.querySelectorAll('[data-more-group] h3')];
+    const g = groups.find(el => el.textContent.includes('Werkzeuge'));
+    if (g) g.closest('[data-more-group]').scrollIntoView({ block: 'start' });
+  });
+  await page.waitForTimeout(600);
+  await shot(page, 'icons-more-werkzeuge-dark.png');
 
   await prepare(page, 'dark', '#quran');
   await shot(page, 'icons-quran-dark.png');
