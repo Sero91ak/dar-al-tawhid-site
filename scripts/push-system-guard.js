@@ -100,7 +100,7 @@ function runPushSystemGuard() {
   ]);
 
   mustInclude("worker.js Health Push-Metadaten", worker, [
-    'prayerScheduler: "cloudflare-worker-cron"',
+    'prayerScheduler: "cloudflare-worker-cron-v3"',
     'dailyPushScheduler: "cloudflare-worker-daily-v1"',
     'jummahPushScheduler: "cloudflare-worker-jummah-v1"',
     'prayerCron: "*/5 * * * *"',
@@ -138,9 +138,15 @@ function runPushSystemGuard() {
     "duaDeliveryWindow"
   ]);
 
-  mustInclude("daily-push.json", read("content/admin/daily-push.json"), [
-    '"deliveryMode": "onesignal-timezone"'
-  ]);
+  const dailyPushConfig = read("content/admin/daily-push.json");
+  if (
+    !dailyPushConfig.includes('"deliveryMode": "onesignal-timezone"')
+    && !dailyPushConfig.includes('"deliveryMode": "worker-local"')
+  ) {
+    fail('daily-push.json: fehlt gültiger deliveryMode (onesignal-timezone oder worker-local)');
+  } else {
+    ok('daily-push.json: deliveryMode gesetzt');
+  }
 
   mustExist(".github/workflows/daily-push-schedule.yml");
   mustExist("scripts/send-daily-content-push.js");

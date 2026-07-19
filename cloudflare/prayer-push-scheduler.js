@@ -4,7 +4,8 @@
  * Kein OneSignal-User-Scan (verursachte „Too many subrequests“).
  */
 
-import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
+import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
+import { writePrayerStatusToStore } from "./prayer-status-store.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -13,8 +14,10 @@ const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 
 const DEFAULT_PRAYER_ADVANCE_MINUTES = 15;
-const SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60;
+const SCHEDULE_LOOKAHEAD_MINUTES = 90;
 const SCHEDULE_GRACE_MINUTES = 15;
+const PRAYER_COPY_MIGRATION_UNTIL = Date.parse("2026-07-22T00:00:00Z");
+const PRAYER_PUSH_EMOJI = Object.freeze({ fajr: "✨", dhuhr: "☀️", asr: "🌤️", maghrib: "🌥️", isha: "🌙", tahajjud: "🌙" });
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 
 let lastStatusReport = null;
@@ -214,9 +217,10 @@ function groupRegistrations(rows, onlySubId = "") {
 }
 
 function notifyTitle(prayer, mode, group) {
-  if (prayer.key === "tahajjud") return mode === "advance" ? "Taḥajjud-Erinnerung" : "Taḥajjud-Erinnerung";
+  const emoji = PRAYER_PUSH_EMOJI[prayer.key] || "🔔";
+  if (prayer.key === "tahajjud") return `${emoji} Taḥajjud-Erinnerung`;
   const m = normAdvance(group.advanceMinutes);
-  return mode === "advance" ? `${prayer.name} in ${m} Min` : `${prayer.name} ist eingetreten`;
+  return mode === "advance" ? `${emoji} ${prayer.name} in ${m} Min` : `${emoji} ${prayer.name} ist eingetreten`;
 }
 
 function notifyCopy(prayer, mode, group) {
@@ -244,6 +248,10 @@ async function uuidFrom(seed) {
 }
 
 function schedId(group, prayer, sendAfter, mode) {
+  return ["prayer", PRAYER_PUSH_COPY_VERSION, mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");
+}
+
+function legacySchedId(group, prayer, sendAfter, mode) {
   return ["prayer", mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");
 }
 
@@ -265,10 +273,21 @@ async function postOneSignal(env, body) {
   return { text, parsed, recipients: parsed.recipients ?? parsed.id ?? null };
 }
 
+async function cancelOneSignal(env, notificationId, appId) {
+  if (!notificationId) return false;
+  const key = oneSignalApiKey(env);
+  const url = `https://api.onesignal.com/notifications/${encodeURIComponent(notificationId)}?app_id=${encodeURIComponent(appId)}`;
+  const res = await fetch(url, { method: "DELETE", headers: { Authorization: `Key ${key}` } });
+  if (res.ok || res.status === 404) return true;
+  const text = await res.text();
+  throw new Error(`OneSignal cancel ${res.status}: ${text.slice(0, 200)}`);
+}
+
 async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   const ids = group.subscriptionIds.slice(0, 2000);
   if (!ids.length) return;
   const idKey = schedId(group, prayer, sendAfter, mode);
+  const oldIdKey = legacySchedId(group, prayer, sendAfter, mode);
   if (sentInRun.has(idKey)) {
     stats.duplicates += 1;
     return;
@@ -290,6 +309,17 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
 
   if (sendAfter.getTime() - Date.now() > 30 * 1000) {
     body.send_after = sendAfter.toISOString();
+  }
+
+  if (Date.now() < PRAYER_COPY_MIGRATION_UNTIL && body.send_after) {
+    try {
+      const legacyBody = { ...body, idempotency_key: await uuidFrom(oldIdKey) };
+      const legacyResult = await postOneSignal(env, legacyBody);
+      const legacyNotificationId = String(legacyResult.parsed?.id || "").trim();
+      if (legacyNotificationId) await cancelOneSignal(env, legacyNotificationId, body.app_id);
+    } catch (migrationError) {
+      stats.errorDetails.push(`Migration ${prayer.name}: ${migrationError.message || migrationError}`);
+    }
   }
 
   const result = await postOneSignal(env, body);
@@ -398,13 +428,50 @@ export function readPrayerPushStatusFromKv() {
   return lastStatusReport;
 }
 
+function buildPrayerErrorStatus(lastError, extra = {}) {
+  return {
+    updatedAt: new Date().toISOString(),
+    ok: false,
+    schedulerStatus: "error",
+    schedulerEngine: "cloudflare-worker-cron-v3",
+    prayerCopyVersion: PRAYER_PUSH_COPY_VERSION,
+    cronIntervalMinutes: 5,
+    lastCronRun: new Date().toISOString(),
+    lastError: lastError || "Unbekannter Scheduler-Fehler",
+    scheduled: 0,
+    recipients: 0,
+    usersWithLocation: 0,
+    ...extra
+  };
+}
+
+async function persistPrayerStatus(env, statusReport, deps) {
+  lastStatusReport = statusReport;
+  const durableStatusWrite = await writePrayerStatusToStore(env, statusReport);
+  const statusWrite = durableStatusWrite.saved
+    ? durableStatusWrite
+    : await writeStatusGithub(env, statusReport, deps);
+  return statusWrite;
+}
+
 export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   const onlySub = String(options.subscriptionId || options.subscription_id || "").trim();
-  const lookahead = Number(env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || SCHEDULE_LOOKAHEAD_MINUTES);
+  const configuredLookahead = Number(env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || SCHEDULE_LOOKAHEAD_MINUTES);
+  const lookahead = Math.min(90, Math.max(15, Number.isFinite(configuredLookahead) ? configuredLookahead : SCHEDULE_LOOKAHEAD_MINUTES));
   const grace = Number(env.PRAYER_SCHEDULE_GRACE_MINUTES || SCHEDULE_GRACE_MINUTES);
 
   if (!oneSignalApiKey(env)) {
-    return { ok: false, triggered: false, schedulerStatus: "error", reason: "OneSignal API Key fehlt am Worker", lastError: "ONESIGNAL_API_KEY_NEW fehlt" };
+    const statusReport = buildPrayerErrorStatus("ONESIGNAL_API_KEY_NEW fehlt");
+    const statusWrite = await persistPrayerStatus(env, statusReport, deps);
+    return {
+      ok: false,
+      triggered: false,
+      schedulerStatus: "error",
+      reason: "OneSignal API Key fehlt am Worker",
+      lastError: statusReport.lastError,
+      status: statusReport,
+      statusWrite
+    };
   }
 
   const now = new Date();
@@ -422,11 +489,18 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     rows = await loadRegistrations();
   } catch (err) {
     supabaseError = err.message || String(err);
+    const statusReport = buildPrayerErrorStatus(`Supabase nicht lesbar: ${supabaseError}`);
+    const statusWrite = await persistPrayerStatus(env, statusReport, deps);
     return {
-      ok: false, triggered: true, schedulerStatus: "error",
+      ok: false,
+      triggered: true,
+      schedulerStatus: "error",
       reason: `Supabase nicht lesbar: ${supabaseError}`,
       lastError: supabaseError,
-      usersWithLocation: 0, scheduled: 0
+      usersWithLocation: 0,
+      scheduled: 0,
+      status: statusReport,
+      statusWrite
     };
   }
 
@@ -476,7 +550,9 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     updatedAt: new Date().toISOString(),
     ok: stats.errors === 0 && userCount > 0,
     schedulerStatus: stats.errors ? "error" : userCount ? "success" : "warning",
-    schedulerEngine: "cloudflare-worker-cron-v2",
+    schedulerEngine: "cloudflare-worker-cron-v3",
+    prayerCopyVersion: PRAYER_PUSH_COPY_VERSION,
+    migrationActive: Date.now() < PRAYER_COPY_MIGRATION_UNTIL,
     userSource: "supabase-only",
     cronIntervalMinutes: 5,
     lastCronRun: new Date().toISOString(),
@@ -520,8 +596,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     }))
   };
 
-  lastStatusReport = statusReport;
-  const statusWrite = await writeStatusGithub(env, statusReport, deps);
+  const statusWrite = await persistPrayerStatus(env, statusReport, deps);
 
   const reason = stats.errors
     ? `Fehler: ${stats.errorDetails[0]} (${stats.scheduled} geplant, ${stats.errors} Fehler)`

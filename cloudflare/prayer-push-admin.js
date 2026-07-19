@@ -3,6 +3,7 @@ import {
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
 import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
+import { readPrayerStatusFromStore, writePrayerStatusToStore } from "./prayer-status-store.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
@@ -17,6 +18,7 @@ const PRAYER_NAMES = {
   isha: "ʿIshāʾ",
   tahajjud: "Taḥajjud"
 };
+const PRAYER_PUSH_EMOJI = Object.freeze({ fajr: "✨", dhuhr: "☀️", asr: "🌤️", maghrib: "🌥️", isha: "🌙", tahajjud: "🌙" });
 
 export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
@@ -24,7 +26,8 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
   const timeLabel = "21:46";
   if (mode === "advance") {
-    const title = key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`;
+    const emoji = PRAYER_PUSH_EMOJI[key] || "🔔";
+    const title = key === "tahajjud" ? `${emoji} Taḥajjud-Erinnerung` : `${emoji} ${name} in ${minutes} Min`;
     return { title: `[Test] ${title}`, body: buildAdvancePushBody(key, minutes, timeLabel), key, mode };
   }
   const variant = pickPrayerEntryVariant(key, timeLabel);
@@ -34,7 +37,12 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
   const cached = readPrayerPushStatusFromKv();
   if (cached?.updatedAt) {
-    return { ok: true, status: cached, source: "worker" };
+    return { ok: true, status: cached, source: "worker-memory" };
+  }
+
+  const durable = await readPrayerStatusFromStore(env);
+  if (durable?.status?.updatedAt) {
+    return { ok: true, status: durable.status, source: "durable-object" };
   }
 
   const owner = env.GITHUB_OWNER || "Sero91ak";
@@ -175,9 +183,28 @@ export async function runPrayerSchedulerNow(env, deps = {}, options = {}) {
 }
 
 export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {
-  if (options.force) {
-    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
+  const result = await runPrayerSchedulerNow(
+    env,
+    { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },
+    { force: true, subscriptionId: options.subscriptionId || "" }
+  );
+
+  if (!result?.status?.updatedAt) {
+    const heartbeat = {
+      updatedAt: new Date().toISOString(),
+      ok: false,
+      schedulerStatus: "error",
+      schedulerEngine: "cloudflare-worker-cron-v3",
+      prayerCopyVersion: "v3",
+      cronIntervalMinutes: 5,
+      lastCronRun: new Date().toISOString(),
+      lastError: result?.lastError || result?.reason || "Gebets-Push-Cron ohne Status beendet",
+      scheduled: Number(result?.scheduled || 0),
+      recipients: Number(result?.recipients || 0),
+      usersWithLocation: Number(result?.usersWithLocation || 0)
+    };
+    await writePrayerStatusToStore(env, heartbeat);
   }
 
-  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
+  return result;
 }
