@@ -1,0 +1,388 @@
+/* DAR AL TAWḤĪD — Bibliothek verwalten (vereinfacht) */
+.lib-admin {
+  display: grid;
+  gap: 20px;
+  max-width: 1100px;
+}
+
+.lib-admin-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 20px;
+  align-items: start;
+}
+
+.lib-admin-main {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.lib-admin-head h2 {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.lib-admin-head p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.lib-admin-drop {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  min-height: 132px;
+  padding: 18px 14px;
+  border-radius: 16px;
+  border: 1.5px dashed rgba(239, 215, 142, 0.28);
+  background: rgba(255, 255, 255, 0.02);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.lib-admin-drop.is-dragover {
+  border-color: rgba(239, 215, 142, 0.55);
+  background: rgba(239, 215, 142, 0.06);
+}
+
+.lib-admin-drop b {
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.lib-admin-drop span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.lib-admin-drop input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.lib-admin-pdf-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.lib-admin-pdf-meta b {
+  color: var(--ink);
+}
+
+.lib-admin-field {
+  display: grid;
+  gap: 6px;
+}
+
+.lib-admin-field label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.lib-admin-field input,
+.lib-admin-field textarea,
+.lib-admin-field select {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 215, 142, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.lib-admin-cover-options {
+  display: grid;
+  gap: 8px;
+}
+
+.lib-admin-cover-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 215, 142, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  font-size: 0.84rem;
+  color: var(--ink);
+}
+
+.lib-admin-cover-opt input {
+  flex: 0 0 auto;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.lib-admin-cover-opt.is-active {
+  border-color: rgba(239, 215, 142, 0.38);
+  background: rgba(239, 215, 142, 0.07);
+}
+
+.lib-admin-cover-upload {
+  display: none;
+  margin-top: 4px;
+}
+
+.lib-admin-cover-upload.is-visible {
+  display: block;
+}
+
+.lib-admin-category {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.lib-admin-category a {
+  color: var(--gold2, #d8c08e);
+  margin-left: 8px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.lib-admin-category-edit {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.lib-admin-category-edit.is-open {
+  display: grid;
+}
+
+.lib-admin-details {
+  border: 1px solid rgba(239, 215, 142, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lib-admin-details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--muted);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.lib-admin-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.lib-admin-details-body {
+  display: grid;
+  gap: 10px;
+  padding: 0 14px 14px;
+}
+
+.lib-admin-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.lib-admin-checks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  min-height: 44px;
+}
+
+.lib-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lib-admin-btn {
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 215, 142, 0.2);
+  background: rgba(239, 215, 142, 0.08);
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lib-admin-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.lib-admin-btn-primary {
+  background: linear-gradient(180deg, rgba(239, 215, 142, 0.22), rgba(155, 122, 60, 0.12));
+  border-color: rgba(239, 215, 142, 0.38);
+}
+
+.lib-admin-progress {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 215, 142, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.lib-admin-progress ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.lib-admin-progress li.is-done {
+  color: var(--ink);
+}
+
+.lib-admin-progress li.is-active {
+  color: var(--gold2, #d8c08e);
+  font-weight: 800;
+}
+
+.lib-admin-success {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(120, 200, 140, 0.25);
+  background: rgba(40, 90, 60, 0.12);
+  color: var(--ink);
+}
+
+.lib-admin-preview {
+  position: sticky;
+  top: 12px;
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(239, 215, 142, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.lib-admin-preview h3 {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.lib-admin-preview-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(239, 215, 142, 0.1);
+}
+
+.lib-admin-preview-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lib-admin-preview-cover .lib-admin-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.lib-admin-card-preview {
+  display: grid;
+  gap: 6px;
+}
+
+.lib-admin-card-preview h4 {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.lib-admin-card-preview span {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.lib-admin-list {
+  border-top: 1px solid rgba(239, 215, 142, 0.1);
+  padding-top: 16px;
+}
+
+.lib-admin-list h3 {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.lib-admin-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(239, 215, 142, 0.08);
+  font-size: 0.8rem;
+}
+
+.lib-admin-list-item:last-child {
+  border-bottom: 0;
+}
+
+.lib-admin-list-item b {
+  color: var(--ink);
+}
+
+.lib-admin-list-item span {
+  color: var(--muted);
+}
+
+.lib-admin-list-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lib-admin-list-actions button {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 900px) {
+  .lib-admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lib-admin-preview {
+    position: static;
+  }
+}

@@ -1,25 +1,35 @@
 /**
- * DAR AL TAWḤĪD — Bibliotheks-Cover-Generator (Admin)
+ * DAR AL TAWḤĪD — Bibliotheks-Cover-Generator (Premium, Admin)
  */
 (function (global) {
   "use strict";
 
-  const SERIES_STYLES = {
-    Tawḥīd: { bg1: "#122033", bg2: "#1a2a42", accent: "#d6be84" },
-    "ʿAqīdah": { bg1: "#1a2230", bg2: "#243248", accent: "#e8d49a" },
-    "al-Asmāʾ waṣ-Ṣifāt": { bg1: "#101f35", bg2: "#182a45", accent: "#d8c08e" },
-    "Qurʾān": { bg1: "#123628", bg2: "#1a4a38", accent: "#d4c48a" },
-    Sunnah: { bg1: "#1f2430", bg2: "#2a3345", accent: "#dcc992" },
-    Schirk: { bg1: "#2a1820", bg2: "#3a2230", accent: "#d0b884" },
-    "Kufr und Ṭāghūt": { bg1: "#241820", bg2: "#342430", accent: "#d4bc88" },
-    "Sünden und Reue": { bg1: "#1f2028", bg2: "#2b2d38", accent: "#d8c090" },
-    Gebet: { bg1: "#152838", bg2: "#1f3850", accent: "#e0cc96" },
-    Fiqh: { bg1: "#182a28", bg2: "#223a38", accent: "#d2c088" },
-    Familie: { bg1: "#2a2220", bg2: "#3a302c", accent: "#dcc898" },
-    Manhaj: { bg1: "#1c2430", bg2: "#283448", accent: "#d8be84" },
-    Widerlegungen: { bg1: "#281820", bg2: "#382430", accent: "#d4b880" },
-    default: { bg1: "#101f35", bg2: "#182a45", accent: "#d8c08e" }
+  const LOGO_URL = "/app-icon-512.png";
+  const SERIF = "Georgia, 'Times New Roman', 'Cormorant Garamond', serif";
+
+  const THEME_PALETTES = {
+    Tawḥīd: { bg1: "#0f2a22", bg2: "#16352b", accent: "#e8dcc4", ink: "#f4efe4", mood: "green" },
+    "ʿAqīdah": { bg1: "#0f1f35", bg2: "#162a45", accent: "#d8c08e", ink: "#f2ebe0", mood: "navy" },
+    "al-Asmāʾ waṣ-Ṣifāt": { bg1: "#101f35", bg2: "#182a45", accent: "#d8c08e", ink: "#f2ebe0", mood: "navy" },
+    "Qurʾān": { bg1: "#0f2238", bg2: "#16304a", accent: "#e8dcc0", ink: "#f5f0e6", mood: "quran" },
+    Sunnah: { bg1: "#1a2230", bg2: "#243248", accent: "#dcc992", ink: "#efe8da", mood: "navy" },
+    Schirk: { bg1: "#241820", bg2: "#342430", accent: "#d4bc88", ink: "#efe6da", mood: "bordeaux" },
+    "Kufr und Ṭāghūt": { bg1: "#241820", bg2: "#342430", accent: "#d4bc88", ink: "#efe6da", mood: "bordeaux" },
+    "Sünden und Reue": { bg1: "#2a1820", bg2: "#3a2230", accent: "#d8c090", ink: "#f2e8dc", mood: "bordeaux" },
+    Gebet: { bg1: "#152838", bg2: "#1f3850", accent: "#e0cc96", ink: "#f0e8d8", mood: "navy" },
+    Fiqh: { bg1: "#182a28", bg2: "#223a38", accent: "#d2c088", ink: "#efe8da", mood: "green" },
+    Familie: { bg1: "#2a2220", bg2: "#3a302c", accent: "#dcc898", ink: "#f2ebe0", mood: "brown" },
+    Manhaj: { bg1: "#1c2430", bg2: "#283448", accent: "#d8be84", ink: "#efe8da", mood: "navy" },
+    Widerlegungen: { bg1: "#281820", bg2: "#382430", accent: "#d4b880", ink: "#efe6da", mood: "bordeaux" },
+    default: { bg1: "#101f35", bg2: "#182a45", accent: "#d8c08e", ink: "#f2ebe0", mood: "navy" }
   };
+
+  let logoImage = null;
+  let logoLoading = null;
+
+  function paletteFor(options) {
+    return THEME_PALETTES[options?.topic] || THEME_PALETTES[options?.category] || THEME_PALETTES.default;
+  }
 
   function wrapLines(ctx, text, maxWidth, maxLines) {
     const words = String(text || "").split(/\s+/).filter(Boolean);
@@ -46,86 +56,137 @@
     return minSize;
   }
 
-  function drawCoverCanvas(options) {
+  function drawOrnaments(ctx, W, H, palette) {
+    ctx.save();
+    ctx.strokeStyle = palette.accent;
+    ctx.globalAlpha = 0.14;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(72, 96);
+    ctx.lineTo(W - 72, 96);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(96, H - 168);
+    ctx.lineTo(W - 96, H - 168);
+    ctx.stroke();
+    if (palette.mood === "quran") {
+      ctx.globalAlpha = 0.08;
+      for (let i = 0; i < 5; i++) {
+        const y = 220 + i * 42;
+        ctx.beginPath();
+        ctx.moveTo(120, y);
+        ctx.lineTo(W - 120, y);
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  async function loadLogo() {
+    if (logoImage) return logoImage;
+    if (logoLoading) return logoLoading;
+    logoLoading = new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        logoImage = img;
+        resolve(img);
+      };
+      img.onerror = () => reject(new Error("Logo konnte nicht geladen werden"));
+      img.src = LOGO_URL;
+    });
+    return logoLoading;
+  }
+
+  async function drawCoverCanvas(options) {
     const W = 800;
     const H = 1200;
     const canvas = document.createElement("canvas");
     canvas.width = W;
     canvas.height = H;
     const ctx = canvas.getContext("2d");
-    const style = SERIES_STYLES[options.series || options.category] || SERIES_STYLES.default;
+    const palette = paletteFor(options);
 
-    const grad = ctx.createLinearGradient(0, 0, W, H);
-    grad.addColorStop(0, style.bg1);
-    grad.addColorStop(1, style.bg2);
+    const grad = ctx.createLinearGradient(0, 0, W * 0.2, H);
+    grad.addColorStop(0, palette.bg1);
+    grad.addColorStop(1, palette.bg2);
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
-    ctx.strokeStyle = style.accent;
-    ctx.globalAlpha = 0.45;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(36, 36, W - 72, H - 72);
-    ctx.globalAlpha = 0.2;
-    ctx.strokeRect(52, 52, W - 104, H - 104);
-    ctx.globalAlpha = 1;
+    const glow = ctx.createRadialGradient(W * 0.5, H * 0.18, 20, W * 0.5, H * 0.18, 280);
+    glow.addColorStop(0, "rgba(255,255,255,0.05)");
+    glow.addColorStop(1, "transparent");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
 
-    ctx.fillStyle = style.accent;
-    ctx.font = "600 28px Georgia, 'Times New Roman', serif";
+    drawOrnaments(ctx, W, H, palette);
+
     ctx.textAlign = "center";
-    ctx.fillText("DAR AL TAWḤĪD", W / 2, 120);
+    ctx.fillStyle = palette.accent;
+    ctx.font = `600 24px ${SERIF}`;
+    ctx.fillText("DAR AL TAWḤĪD", W / 2, 78);
 
-    const topic = String(options.transliteratedTitle || options.topic || "").trim();
+    const topic = String(options.topic || options.transliteratedTitle || "").trim();
     if (topic) {
-      ctx.font = "italic 24px Georgia, serif";
-      ctx.fillText(topic, W / 2, 170);
+      ctx.fillStyle = "rgba(244, 236, 216, 0.78)";
+      ctx.font = `italic 20px ${SERIF}`;
+      ctx.fillText(topic, W / 2, 118);
     }
 
-    const title = String(options.title || "").trim().toUpperCase();
-    const titleSize = fitFontSize(ctx, title.split("\n")[0] || title, W - 120, 42, 24, "700", "Georgia, serif");
-    ctx.font = `700 ${titleSize}px Georgia, 'Times New Roman', serif`;
-    const titleLines = wrapLines(ctx, title, W - 120, 4);
-    let y = 280;
+    const title = String(options.title || "Neue Veröffentlichung").trim();
+    const titleSize = fitFontSize(ctx, title, W - 120, 40, 22, "700", SERIF);
+    ctx.fillStyle = palette.ink;
+    ctx.font = `700 ${titleSize}px ${SERIF}`;
+    const titleLines = wrapLines(ctx, title, W - 120, 5);
+    let y = 220;
     titleLines.forEach((line) => {
       ctx.fillText(line, W / 2, y);
-      y += titleSize * 1.15;
+      y += titleSize * 1.18;
     });
 
     const subtitle = String(options.subtitle || "").trim();
     if (subtitle) {
-      ctx.fillStyle = "rgba(244, 236, 216, 0.88)";
-      ctx.font = "400 20px Georgia, serif";
+      ctx.fillStyle = "rgba(244, 236, 216, 0.82)";
+      ctx.font = `400 18px ${SERIF}`;
       const subLines = wrapLines(ctx, subtitle, W - 130, 3);
-      y += 18;
+      y += 12;
       subLines.forEach((line) => {
         ctx.fillText(line, W / 2, y);
-        y += 26;
+        y += 24;
       });
     }
 
-    ctx.beginPath();
-    ctx.arc(W / 2, H - 220, 42, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(214, 190, 132, 0.18)";
-    ctx.fill();
-    ctx.strokeStyle = style.accent;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    ctx.fillStyle = style.accent;
-    ctx.font = "700 22px Georgia, serif";
-    ctx.fillText("DAR", W / 2, H - 228);
-    ctx.font = "600 14px Georgia, serif";
-    ctx.fillText("AL TAWḤĪD", W / 2, H - 206);
-
-    const editor = String(options.editor || "Serhat Abu Malik").trim();
-    ctx.fillStyle = "rgba(232, 220, 195, 0.82)";
-    ctx.font = "500 18px Georgia, serif";
-    ctx.fillText(editor, W / 2, H - 120);
-
-    if (options.version) {
-      ctx.font = "500 14px Georgia, serif";
-      ctx.fillStyle = "rgba(200, 184, 150, 0.75)";
-      ctx.fillText(`Version ${options.version}`, W / 2, H - 86);
+    try {
+      const logo = await loadLogo();
+      const logoSize = 108;
+      const logoY = H - 250;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(W / 2, logoY, logoSize / 2 + 6, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,0.06)";
+      ctx.fill();
+      ctx.strokeStyle = palette.accent;
+      ctx.globalAlpha = 0.35;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.beginPath();
+      ctx.arc(W / 2, logoY, logoSize / 2, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(logo, W / 2 - logoSize / 2, logoY - logoSize / 2, logoSize, logoSize);
+      ctx.restore();
+    } catch (e) {
+      /* Logo optional — Cover bleibt nutzbar */
     }
+
+    ctx.fillStyle = palette.accent;
+    ctx.font = `600 13px ${SERIF}`;
+    ctx.fillText("by Serhat Abu Malik", W / 2, H - 168);
+
+    ctx.fillStyle = "rgba(232, 220, 195, 0.86)";
+    ctx.font = `500 17px ${SERIF}`;
+    ctx.fillText("Serhat Abu Malik", W / 2, H - 118);
 
     return canvas;
   }
@@ -145,7 +206,7 @@
   }
 
   async function generateCoverVariants(options) {
-    const canvas = drawCoverCanvas(options || {});
+    const canvas = await drawCoverCanvas(options || {});
     const master = await canvasToBlob(canvas, "image/webp", 0.92);
     const smallCanvas = document.createElement("canvas");
     smallCanvas.width = 400;
@@ -164,7 +225,7 @@
     };
   }
 
-  async function renderPdfFirstPageCover(file, options) {
+  async function renderPdfFirstPageCover(file) {
     if (!global.pdfjsLib) throw new Error("PDF.js nicht geladen");
     const data = await file.arrayBuffer();
     const doc = await global.pdfjsLib.getDocument({ data }).promise;
@@ -210,11 +271,12 @@
   }
 
   global.DARLibraryCoverGen = {
-    SERIES_STYLES,
+    THEME_PALETTES,
     drawCoverCanvas,
     generateCoverVariants,
     renderPdfFirstPageCover,
     generateCoverVariantsFromCanvas,
-    blobToBase64
+    blobToBase64,
+    loadLogo
   };
 })(window);
