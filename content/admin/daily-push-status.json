@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-20T09:50:55.898Z",
+  "updatedAt": "2026-07-20T10:05:55.874Z",
   "usersChecked": 19,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 19,
+  "sent": 19,
   "skipped": 0,
   "duplicates": 19,
   "errors": 0,
@@ -24,5 +24,15 @@
     "category": "Tawakkul"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 19,
+      "contentId": "sifat-allah-yamin-allah-001",
+      "recipients": "9c689058-f18c-4fdb-be36-c65ee7a78da6",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
