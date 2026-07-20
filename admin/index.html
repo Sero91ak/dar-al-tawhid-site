@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v43";
+  var ADMIN_SW_CACHE="dar-admin-stats-v45";
   var MIG_KEY="darAdminSwFixV25";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -542,8 +542,8 @@ main#panel.panel{
 <script src="/admin/focus-feed-manager.js?v=5"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
-<script src="/admin/library-cover-gen.js?v=4"></script>
-<script src="/admin/library-manager.js?v=11"></script>
+<script src="/admin/library-cover-gen.js?v=5"></script>
+<script src="/admin/library-manager.js?v=12"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=6">
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -2168,6 +2168,7 @@ window.renderLibraryAdminPartial=function(){
   return true;
 };
 function renderShell(){
+  if(currentTab==="bibliothek")stopRefresh();
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -2219,7 +2220,8 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!tab||tab===currentTab&&!scrollToBulk)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
-  restartRefreshInterval();
+  if(tab==="bibliothek")stopRefresh();
+  else restartRefreshInterval();
   if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
@@ -2243,6 +2245,7 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
 function adminBack(){
   const prev=adminNavStack.pop();
   if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="start"}else{return}
+  if(currentTab==="bibliothek")stopRefresh();else restartRefreshInterval();
   renderShell();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -3745,7 +3748,12 @@ function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderL
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed&&currentTab!=="bibliothek")setTimeout(()=>renderDashboard(),260)});
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState!=="visible"||!authed)return;
+  if(currentTab==="bibliothek")return;
+  if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
+  setTimeout(()=>renderDashboard(),260);
+});
 let adminSwipe=null;
 document.addEventListener("touchstart",e=>{
   const t=e.touches&&e.touches[0];if(!t)return;

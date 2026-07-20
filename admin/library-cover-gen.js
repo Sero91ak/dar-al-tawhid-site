@@ -284,13 +284,15 @@
     return canvas;
   }
 
-  async function renderPdfFirstPageCover(file) {
+  async function renderPdfFirstPageCover(file, options) {
     if (!global.pdfjsLib) throw new Error("PDF.js nicht geladen");
+    const lowMemory = options?.lowMemory === true;
     const data = await file.arrayBuffer();
     const doc = await global.pdfjsLib.getDocument({ data }).promise;
     const page = await doc.getPage(1);
     const baseViewport = page.getViewport({ scale: 1 });
-    const fitScale = Math.min(COVER_W / baseViewport.width, COVER_H / baseViewport.height) * 2;
+    const scaleMul = lowMemory ? 1 : 2;
+    const fitScale = Math.min(COVER_W / baseViewport.width, COVER_H / baseViewport.height) * scaleMul;
     const scaledViewport = page.getViewport({ scale: fitScale });
     const renderCanvas = document.createElement("canvas");
     renderCanvas.width = Math.ceil(scaledViewport.width);
@@ -309,14 +311,6 @@
     const w = renderCanvas.width * fit;
     const h = renderCanvas.height * fit;
     drawHiResImage(ctx, renderCanvas, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
-    const sample = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    let white = 0;
-    for (let i = 0; i < sample.length; i += 16) {
-      if (sample[i] > 245 && sample[i + 1] > 245 && sample[i + 2] > 245) white++;
-    }
-    if (white / (sample.length / 16) > 0.985) {
-      throw new Error("Die erste Seite konnte nicht als Cover verwendet werden. Bitte lade ein Cover hoch oder verwende die automatische Cover-Vorlage.");
-    }
     return generateCoverVariantsFromCanvas(canvas);
   }
 

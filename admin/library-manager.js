@@ -32,7 +32,6 @@
   let draft = null;
   let pdfFile = null;
   let pdfMeta = null;
-  let coverMode = "template";
   let coverPreviewUrl = "";
   let coverVariants = null;
   let categorySuggestion = null;
@@ -42,7 +41,6 @@
   let successSlug = "";
   let successTarget = "test";
   let editingPublicationId = "";
-  let coverTimer = null;
   let dragActive = false;
   let processingPdf = false;
   let listFoldOpen = false;
@@ -88,6 +86,38 @@
     if (name.endsWith(".pdf")) return true;
     if (!type || type === "application/octet-stream") return true;
     return false;
+  }
+
+  function setProcessingStatus(message) {
+    const mount = document.getElementById("libAdminMount");
+    if (!mount) return;
+    let el = document.getElementById("libAdminProcessing");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "libAdminProcessing";
+      el.className = "lib-admin-progress";
+      el.setAttribute("role", "status");
+      mount.prepend(el);
+    }
+    el.innerHTML = message ? `<b>${esc(message)}</b>` : "";
+    el.style.display = message ? "" : "none";
+  }
+
+  function parsePdfPageCount(data) {
+    try {
+      const bytes = data instanceof ArrayBuffer ? new Uint8Array(data) : data;
+      const scanLen = Math.min(bytes.length, 512 * 1024);
+      const start = Math.max(0, bytes.length - scanLen);
+      const text = new TextDecoder("latin1").decode(bytes.slice(start));
+      const pagesBlock = text.match(/\/Type\s*\/Pages[\s\S]{0,1200}?\/Count\s+(\d+)/);
+      if (pagesBlock) return Number(pagesBlock[1]) || 0;
+      const counts = [...text.matchAll(/\/Count\s+(\d+)/g)].map((m) => Number(m[1])).filter((n) => n > 0 && n < 5000);
+      if (counts.length) return Math.max(...counts);
+      const full = new TextDecoder("latin1").decode(bytes.slice(0, Math.min(bytes.length, 2 * 1024 * 1024)));
+      return (full.match(/\/Type\s*\/Page[^s]/g) || []).length;
+    } catch (e) {
+      return 0;
+    }
   }
 
   function syncVersionField() {
@@ -264,13 +294,25 @@
     return `${(num / (1024 * 1024)).toFixed(1).replace(".", ",")} MB`;
   }
 
-  async function analyzePdfFile(file) {
+  async function analyzePdfFile(file, options) {
+    const opts = options || {};
     if (!file) throw new Error("Keine Datei ausgewählt");
     if (!isAcceptablePdfFile(file)) throw new Error("Nur PDF-Dateien sind erlaubt");
     const data = await file.arrayBuffer();
     if (!data.byteLength) throw new Error("PDF ist leer");
     const head = new Uint8Array(data.slice(0, 5));
     if (String.fromCharCode(...head) !== "%PDF-") throw new Error("Datei ist keine gültige PDF");
+    const lite = opts.lite === true || isAppleTouchDevice();
+    if (lite) {
+      return {
+        fileName: file.name,
+        pageCount: parsePdfPageCount(data) || 0,
+        title: cleanTitle(file.name),
+        author: "",
+        fileSize: formatBytes(file.size),
+        fileHash: opts.withHash ? await hashBuffer(data) : ""
+      };
+    }
     await ensurePdfJs();
     const doc = await global.pdfjsLib.getDocument({ data }).promise;
     if (!doc.numPages) throw new Error("PDF enthält keine Seiten");
@@ -288,10 +330,10 @@
 
   async function ensurePdfMetaForPublish() {
     if (!pdfFile) return;
-    if (pdfMeta && pdfFileKey === pdfSelectionKey(pdfFile)) return;
-    pdfMeta = await analyzePdfFile(pdfFile);
+    if (pdfMeta && pdfFileKey === pdfSelectionKey(pdfFile) && pdfMeta.fileHash) return;
+    pdfMeta = await analyzePdfFile(pdfFile, { lite: isAppleTouchDevice(), withHash: true });
     pdfFileKey = pdfSelectionKey(pdfFile);
-    draft.pageCount = pdfMeta.pageCount;
+    draft.pageCount = pdfMeta.pageCount || draft.pageCount || 0;
     draft.fileSize = pdfMeta.fileSize;
     draft.fileHash = pdfMeta.fileHash;
   }
@@ -351,7 +393,6 @@
       fileSize: pub.fileSize || "",
       title: pub.title
     };
-    coverMode = "template";
     coverVariants = null;
     const coverSrc = pub.coverUrls?.medium || pub.coverUrl || "";
     if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
@@ -360,22 +401,18 @@
     showCategoryEdit = true;
     successSlug = "";
     publishStep = 0;
-    if (global.DARLibraryCoverGen && draft.title && !isAppleTouchDevice()) {
-      try {
-        await refreshCoverPreview();
-      } catch (e) {
-        /* bestehendes Cover bleibt sichtbar */
-      }
-    }
   }
 
   async function onPdfSelected(file, options) {
     processingPdf = true;
-    safeRender({ force: true });
+    setProcessingStatus("PDF wird gelesen …");
     try {
       const replaceMode = options?.replace === true || !!editingPublicationId;
       pdfFile = file;
-      pdfMeta = await analyzePdfFile(file);
+      coverVariants = null;
+      if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
+      coverPreviewUrl = "";
+      pdfMeta = await analyzePdfFile(file, { lite: true });
       pdfFileKey = pdfSelectionKey(file);
       if (!replaceMode) {
         draft = defaultDraft();
@@ -400,44 +437,30 @@
       if (!replaceMode) {
         await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
         applyCategorySuggestion();
-        coverMode = "template";
       }
       successSlug = "";
       successTarget = "test";
       publishStep = 0;
     } finally {
       processingPdf = false;
+      setProcessingStatus("");
     }
   }
 
-  async function refreshCoverPreview() {
-    if (!global.DARLibraryCoverGen || !draft) return;
-    if (coverMode === "template") {
-      coverVariants = await global.DARLibraryCoverGen.generateCoverVariants(draft);
-    } else if (coverMode === "pdf-page") {
-      if (!pdfFile) return;
-      await ensurePdfJs();
-      coverVariants = await global.DARLibraryCoverGen.renderPdfFirstPageCover(pdfFile);
-    } else if (coverMode === "upload" && coverVariants) {
-      return;
-    } else {
-      return;
+  async function generateCoverFromPdf() {
+    if (!pdfFile) {
+      if (draft?.coverUrl) return;
+      throw new Error("PDF fehlt für Cover-Erstellung");
     }
-    const previewBase64 = coverVariants.master || coverVariants.medium;
-    const blob = await (await fetch(`data:image/webp;base64,${previewBase64}`)).blob();
-    if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
-    coverPreviewUrl = URL.createObjectURL(blob);
-  }
-
-  async function onCoverUpload(file) {
-    if (!file || !/^image\/(png|jpeg|jpg|webp|avif)$/i.test(file.type)) throw new Error("Cover: PNG, JPEG, WebP oder AVIF erlaubt");
-    const img = await createImageBitmap(file);
-    const canvas = global.DARLibraryCoverGen.composeImageToCoverCanvas(img, "contain");
-    coverVariants = await global.DARLibraryCoverGen.generateCoverVariantsFromCanvas(canvas);
-    const blob = await (await fetch(`data:image/webp;base64,${coverVariants.master || coverVariants.medium}`)).blob();
-    if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
-    coverPreviewUrl = URL.createObjectURL(blob);
-    coverMode = "upload";
+    if (!global.DARLibraryCoverGen) throw new Error("Cover-Modul nicht geladen");
+    await ensurePdfJs();
+    coverVariants = await global.DARLibraryCoverGen.renderPdfFirstPageCover(pdfFile, { lowMemory: isAppleTouchDevice() });
+    const previewBase64 = coverVariants.medium || coverVariants.master;
+    if (previewBase64) {
+      const blob = await (await fetch(`data:image/webp;base64,${previewBase64}`)).blob();
+      if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
+      coverPreviewUrl = URL.createObjectURL(blob);
+    }
   }
 
   async function buildLibraryFiles(id, target) {
@@ -458,8 +481,7 @@
 
   function canPublish() {
     const hasPdf = !!(pdfFile || draft?.pdfUrl);
-    const hasCover = !!(coverVariants || draft?.coverUrl || (coverMode === "template" && draft?.title?.trim()));
-    return !!(hasPdf && draft?.title?.trim() && hasCover && (draft.category || categorySuggestion?.category));
+    return !!(hasPdf && draft?.title?.trim() && (draft.category || categorySuggestion?.category));
   }
 
   function readMainForm() {
@@ -494,7 +516,10 @@
     publishStep = 3;
     safeRender();
     try {
-      if (pdfFile) await ensurePdfMetaForPublish();
+      if (pdfFile) {
+        await ensurePdfMetaForPublish();
+        if (!coverVariants) await generateCoverFromPdf();
+      }
       const libraryFiles = await buildLibraryFiles(draft.id);
       return await workerPost("api/admin/library/save", {
         publication: { ...draft, status: "draft" },
@@ -519,7 +544,6 @@
       }
     }
     if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
-    if (!coverVariants && !draft.coverUrl) throw new Error("Cover fehlt");
     if (publishTarget === "live") {
       const ok = confirm("Diese Veröffentlichung in der Besucher-App (Live) veröffentlichen?\n\nDie Dateien werden in den Live-Bibliotheks-Pfad geschrieben.");
       if (!ok) throw new Error("Live-Veröffentlichung abgebrochen");
@@ -531,13 +555,12 @@
       if (pdfFile) await ensurePdfMetaForPublish();
       publishStep = 2;
       safeRender();
-      if (coverMode === "template" || !coverVariants) {
-        try {
-          await refreshCoverPreview();
-        } catch (e) {
-          if (!coverVariants && !draft.coverUrl) throw e;
-          console.warn("[Bibliothek Admin] Cover vor Veröffentlichung:", e);
-        }
+      if (pdfFile) {
+        await generateCoverFromPdf();
+      } else if (!coverVariants && draft?.coverUrl) {
+        /* bestehendes Cover bleibt */
+      } else if (!coverVariants) {
+        throw new Error("Cover konnte nicht aus der ersten PDF-Seite erstellt werden");
       }
       publishStep = 3;
       safeRender();
@@ -570,7 +593,6 @@
     pdfFileKey = "";
     pdfReplaceVersion = "";
     pdfMeta = null;
-    coverMode = "template";
     coverVariants = null;
     if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
     coverPreviewUrl = "";
@@ -600,7 +622,7 @@
 
   function renderProgress() {
     if (!busy && !publishStep) return "";
-    const steps = ["PDF wird geprüft", "Cover wird erstellt", "Daten werden gespeichert", "Vorschau wird veröffentlicht"];
+    const steps = ["PDF wird geprüft", "Cover aus Seite 1", "Daten werden gespeichert", "Veröffentlichung abgeschlossen"];
     return `<div class="lib-admin-progress" role="status">
       <b>${publishStep >= 4 ? "Veröffentlichung abgeschlossen" : "Veröffentlichung wird vorbereitet …"}</b>
       <ol>${steps.map((label, i) => `<li class="${publishStep > i + 1 ? "is-done" : publishStep === i + 1 ? "is-active" : ""}">${esc(label)}</li>`).join("")}</ol>
@@ -610,7 +632,7 @@
   function renderPreviewPanel() {
     const cover = coverPreviewUrl
       ? `<img src="${esc(coverPreviewUrl)}" alt="Cover-Vorschau">`
-      : `<div class="lib-admin-cover-placeholder">Cover-Vorschau erscheint nach PDF-Auswahl</div>`;
+      : `<div class="lib-admin-cover-placeholder">Cover: erste PDF-Seite (wird beim Veröffentlichen erstellt)</div>`;
     return `<aside class="lib-admin-preview" aria-label="Live-Vorschau">
       <h3>Live-Vorschau</h3>
       <div class="lib-admin-preview-cover">${cover}</div>
@@ -657,17 +679,7 @@
           <input id="libAdminTitle" type="text" value="${esc(draft.title)}" placeholder="Die Namen und Eigenschaften Allahs">
         </label>
 
-        <section class="lib-admin-field" id="libAdminCoverWrap" style="${pdfReady ? "" : "display:none"}">
-          <span>Cover</span>
-          <div class="lib-admin-cover-options">
-            <label class="lib-admin-cover-opt ${coverMode === "template" ? "is-active" : ""}"><input type="radio" name="libCoverMode" value="template" ${coverMode === "template" ? "checked" : ""}> Automatisch gestalten</label>
-            <label class="lib-admin-cover-opt ${coverMode === "pdf-page" ? "is-active" : ""}"><input type="radio" name="libCoverMode" value="pdf-page" ${coverMode === "pdf-page" ? "checked" : ""} ${pdfFile ? "" : "disabled"}> Erste PDF-Seite verwenden</label>
-            <label class="lib-admin-cover-opt ${coverMode === "upload" ? "is-active" : ""}"><input type="radio" name="libCoverMode" value="upload" ${coverMode === "upload" ? "checked" : ""}> Eigenes Cover hochladen</label>
-          </div>
-          <div class="lib-admin-cover-upload ${coverMode === "upload" ? "is-visible" : ""}">
-            <label class="lib-admin-btn" style="display:inline-flex;align-items:center;cursor:pointer">Cover-Datei wählen<input id="libAdminCoverInput" type="file" accept="image/png,image/jpeg,image/webp,image/avif" hidden></label>
-          </div>
-        </section>
+        ${pdfReady ? `<p class="lib-admin-cover-note">Cover wird automatisch aus der <b>ersten Seite des PDFs</b> erstellt — keine separate Auswahl nötig.</p>` : ""}
 
         ${pdfReady ? renderCategoryLine() : ""}
         ${pdfReady ? renderCategoryEdit() : ""}
@@ -775,21 +787,6 @@
     </section>`;
   }
 
-  function scheduleCoverRefresh() {
-    if (processingPdf || busy || isAppleTouchDevice()) return;
-    if (coverTimer) clearTimeout(coverTimer);
-    coverTimer = setTimeout(async () => {
-      readMainForm();
-      if (coverMode !== "template" || !draft?.title) return;
-      try {
-        await refreshCoverPreview();
-        safeRender();
-      } catch (e) {
-        console.warn("[Bibliothek Admin] Cover-Aktualisierung:", e);
-      }
-    }, 450);
-  }
-
   function bindLibraryTab() {
     const dropZone = document.getElementById("libAdminDropZone");
     const pdfInput = document.getElementById("libAdminPdfInput");
@@ -832,42 +829,8 @@
       }
     });
 
-    document.getElementById("libAdminTitle")?.addEventListener("input", () => {
-      scheduleCoverRefresh();
-    });
-
     document.getElementById("libAdminVersion")?.addEventListener("input", () => {
       pdfReplaceVersion = "";
-    });
-
-    document.querySelectorAll('input[name="libCoverMode"]').forEach((input) => {
-      input.addEventListener("change", async () => {
-        coverMode = input.value;
-        readMainForm();
-        try {
-          if (coverMode === "upload") {
-            safeRender();
-            return;
-          }
-          await refreshCoverPreview();
-          safeRender();
-        } catch (e) {
-          toast(e.message || "Cover konnte nicht erstellt werden");
-          coverMode = "template";
-          safeRender();
-        }
-      });
-    });
-
-    document.getElementById("libAdminCoverInput")?.addEventListener("change", async (ev) => {
-      const file = ev.target.files?.[0];
-      if (!file) return;
-      try {
-        await onCoverUpload(file);
-        safeRender();
-      } catch (e) {
-        toast(e.message || "Cover-Upload fehlgeschlagen");
-      }
     });
 
     document.getElementById("libAdminChangeCategory")?.addEventListener("click", (ev) => {

@@ -103,6 +103,17 @@
   font: inherit;
 }
 
+.lib-admin-cover-note {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line2, rgba(140, 190, 255, 0.24));
+  background: color-mix(in srgb, var(--panel2, #101a29) 70%, transparent);
+  color: var(--soft, #d2c9b7);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
 .lib-admin-cover-options {
   display: grid;
   gap: 8px;
