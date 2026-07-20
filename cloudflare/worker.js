@@ -73,6 +73,7 @@ import {
   blockFeedBackgroundImage
 } from "./feed-backgrounds-sync.js";
 import { handleQuizStatsRequest } from "./quiz-stats-admin.js";
+export { PrayerStatusStore } from "./prayer-status-store.js";
 import {
   readLibraryCatalog,
   saveLibraryPublication,
@@ -80,7 +81,6 @@ import {
   suggestLibraryCategory,
   LIBRARY_ADMIN_META
 } from "./library-admin.js";
-export { PrayerStatusStore } from "./prayer-status-store.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
