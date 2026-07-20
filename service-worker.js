@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v292';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v294';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -321,12 +321,16 @@ async function focusClientToPost(clientList, targetUrl, postId) {
 
 self.addEventListener('message', (event) => {
   const data = event.data || {};
+  if (data.type === 'OFFLINE_PREPARE_RESET') {
+    offlinePrepareRunning = false;
+    return;
+  }
   if (data.type === 'OFFLINE_PREPARE') {
     event.waitUntil(prepareOfflineBundle(data.urls, data.requestedBy || 'user', { resume: data.resume === true }));
     return;
   }
   if (data.type === 'OFFLINE_PREPARE_RESUME') {
-    event.waitUntil(prepareOfflineBundle([], 'resume', { resume: true }));
+    event.waitUntil(prepareOfflineBundle(data.urls || [], data.requestedBy || 'resume', { resume: true }));
     return;
   }
   if (data.type === 'OFFLINE_PREPARE_STATUS') {
