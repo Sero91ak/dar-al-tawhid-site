@@ -1,0 +1,42 @@
+{
+  "title": "Dār al-Layl Geometry Master Reference",
+  "documentedAt": "2026-07-20T22:20:00.000Z",
+  "referenceCommit": "24420181",
+  "implementationCommit": "7fbac2bd",
+  "masterTheme": "dar-al-layl",
+  "scope": "geometry-only — colors remain per theme",
+  "sourceFiles": [
+    "test/index.html (compact card block ~7849, prayer-overview ~2757, more-feature-row ~9301, bottom-nav ~7811)",
+    "assets/dar-premium-depth.css",
+    "assets/app-card-layout.css"
+  ],
+  "masterTokens": {
+    "page": ["--app-page-radius", "--app-view-padding", "--app-content-inset", "--app-section-gap"],
+    "cards": ["--app-card-gap", "--app-card-padding-y", "--app-card-padding-x", "--app-card-radius", "--app-card-icon", "--app-folder-card-min-height"],
+    "buttons": ["--app-button-height", "--app-button-radius", "--app-button-press-scale"],
+    "inputs": ["--app-input-height", "--app-input-radius", "--app-search-height"],
+    "navigation": ["--app-bottom-nav-height", "--app-bottom-nav-icon", "--app-bottom-nav-label", "--app-crumb-size"],
+    "typography": ["--app-section-title-size", "--app-card-title-size", "--app-meta-size", "--app-line-height-title"],
+    "prayer": ["--app-prayer-pad-x", "--app-prayer-push-h", "--app-prayer-radius-card"],
+    "motion": ["--app-motion-fast", "--app-motion-ui", "--app-motion-card"]
+  },
+  "removedThemeGeometry": [
+    "html[data-theme=light] .top-shell border-radius:0 / margin-bottom:0",
+    "html[data-theme=soft|royal] .top-shell border-radius:0",
+    "html[data-theme=light] .crumb pill padding/min-height/font-size",
+    "html[data-theme=light|soft|royal|bordeaux] .app-bar theme-specific padding/margin",
+    "html[data-theme=bordeaux] .theme-switch-btn min-height:58px override",
+    "html[data-theme=bordeaux] .view width/padding overrides",
+    "Per-theme card shadow geometry (replaced by --app-shadow-* color tint only)"
+  ],
+  "unifiedComponents": [
+    "folder-card", "list-card", "post-card", "more-feature-row",
+    "quran-surah-card", "bottom-nav", "app-bar", "crumb",
+    "prayer-overview", "inputs", "buttons", "modals"
+  ],
+  "themes": [
+    "dark", "light", "soft", "royal", "bordeaux", "dar-al-layl"
+  ],
+  "testUrl": "https://dar-al-tawhid.de/test/",
+  "visitorUrl": "https://dar-al-tawhid.de/"
+}
