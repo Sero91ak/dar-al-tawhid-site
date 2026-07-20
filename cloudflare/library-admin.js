@@ -289,7 +289,7 @@ export function suggestLibraryCategory(text) {
   if (/asma|sifat|sifat|eigenschaft|uluw|nuzul|istiw|husna/i.test(blob)) {
     return { category: "ʿAqīdah", topic: "al-Asmāʾ waṣ-Ṣifāt", confidence: "medium" };
   }
-  if (/tawhid|tauhid|tauhīd/i.test(blob)) return { category: "Tawḥīd", topic: "Tawḥīd", confidence: "medium" };
+  if (/tawhid|tauhid/i.test(blob)) return { category: "Tawḥīd", topic: "Tawḥīd", confidence: "medium" };
   if (/schirk|shirk/i.test(blob)) return { category: "Schirk", topic: "Schirk", confidence: "medium" };
   if (/kufr|ṭāghūt|taghut/i.test(blob)) return { category: "Kufr und Ṭāghūt", topic: "Kufr und Ṭāghūt", confidence: "low" };
   if (/sunnah|hadith|ahadith/i.test(blob)) return { category: "Sunnah", topic: "Sunnah", confidence: "low" };

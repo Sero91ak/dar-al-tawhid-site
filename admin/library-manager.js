@@ -1,26 +1,12 @@
 /**
- * DAR AL TAWḤĪD — Bibliothek verwalten (Admin)
+ * DAR AL TAWḤĪD — Bibliothek verwalten (vereinfacht)
  */
 (function (global) {
   "use strict";
 
-  let catalog = { version: 1, publications: [] };
-  let catalogSha = "";
-  let loaded = false;
-  let loading = false;
-  let statusMsg = "";
-  let draft = null;
-  let pdfFile = null;
-  let pdfMeta = null;
-  let coverMode = "template";
-  let coverPreviewUrl = "";
-  let coverVariants = null;
-  let categorySuggestion = null;
-  let previewTheme = "dark";
-  let busy = false;
-
   const PDFJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
   const PDFJS_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const STATIC_CATALOG_URL = "/test/data/library-publications.json";
 
   const CATEGORIES = [
     "Tawḥīd", "ʿAqīdah", "al-Asmāʾ waṣ-Ṣifāt", "Qurʾān", "Sunnah",
@@ -28,12 +14,33 @@
     "Familie", "Manhaj", "Widerlegungen"
   ];
 
+  let catalog = { version: 1, publications: [] };
+  let loaded = false;
+  let loading = false;
+  let draft = null;
+  let pdfFile = null;
+  let pdfMeta = null;
+  let coverMode = "template";
+  let coverPreviewUrl = "";
+  let coverVariants = null;
+  let categorySuggestion = null;
+  let showCategoryEdit = false;
+  let busy = false;
+  let publishStep = 0;
+  let successSlug = "";
+  let coverTimer = null;
+  let dragActive = false;
+
   function esc(s) {
     return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   function slugify(value) {
     return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+  }
+
+  function cleanTitle(value) {
+    return String(value || "").replace(/\.pdf$/i, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
   }
 
   function defaultDraft() {
@@ -75,23 +82,64 @@
     return workerGetRequest(path, { admin: true });
   }
 
+  async function loadStaticCatalog() {
+    const res = await fetch(STATIC_CATALOG_URL, { cache: "no-store" });
+    if (!res.ok) return null;
+    return res.json();
+  }
+
   async function ensureLibraryLoaded(force) {
     if (loaded && !force) return catalog;
     if (loading) return catalog;
     loading = true;
-    statusMsg = "Bibliothek wird geladen…";
     try {
-      const res = await workerGet("library");
+      const res = await workerGet("api/admin/library");
       catalog = res.catalog || { version: 1, publications: [] };
-      catalogSha = res.sha || "";
       loaded = true;
-      statusMsg = `${(catalog.publications || []).length} Veröffentlichungen geladen`;
+      return catalog;
     } catch (e) {
-      statusMsg = `Laden fehlgeschlagen: ${e.message || e}`;
+      console.warn("[Bibliothek Admin] Worker-Laden fehlgeschlagen:", e);
+      if (String(e.message || "").includes("Secret")) throw e;
+      try {
+        const staticCatalog = await loadStaticCatalog();
+        if (staticCatalog) {
+          catalog = staticCatalog;
+          loaded = true;
+          return catalog;
+        }
+      } catch (err) {
+        console.warn("[Bibliothek Admin] Statischer Katalog nicht verfügbar:", err);
+      }
+      catalog = { version: 1, publications: [] };
+      loaded = true;
+      return catalog;
     } finally {
       loading = false;
     }
-    return catalog;
+  }
+
+  function nextPublicationId() {
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const prefix = `pub-${today}-`;
+    let max = 0;
+    (catalog.publications || []).forEach((p) => {
+      if (!String(p.id || "").startsWith(prefix)) return;
+      const n = parseInt(String(p.id).slice(prefix.length), 10);
+      if (n > max) max = n;
+    });
+    return `${prefix}${String(max + 1).padStart(3, "0")}`;
+  }
+
+  function nextUniqueSlug(title, excludeId) {
+    let base = slugify(title) || "publikation";
+    let slug = base;
+    let n = 2;
+    const taken = new Set((catalog.publications || []).filter((p) => p.id !== excludeId).map((p) => p.slug));
+    while (taken.has(slug)) {
+      slug = `${base}-${n}`;
+      n += 1;
+    }
+    return slug;
   }
 
   async function ensurePdfJs() {
@@ -119,12 +167,13 @@
   function formatBytes(n) {
     const num = Number(n) || 0;
     if (num < 1024) return `${num} B`;
-    if (num < 1024 * 1024) return `${(num / 1024).toFixed(1)} KB`;
-    return `${(num / (1024 * 1024)).toFixed(1)} MB`;
+    if (num < 1024 * 1024) return `${(num / 1024).toFixed(1).replace(".", ",")} KB`;
+    return `${(num / (1024 * 1024)).toFixed(1).replace(".", ",")} MB`;
   }
 
   async function analyzePdfFile(file) {
-    if (!file || file.type !== "application/pdf") throw new Error("Nur PDF-Dateien sind erlaubt");
+    if (!file) throw new Error("Keine Datei ausgewählt");
+    if (file.type && file.type !== "application/pdf") throw new Error("Nur PDF-Dateien sind erlaubt");
     if (!file.size) throw new Error("PDF ist leer");
     if (file.size > 80 * 1024 * 1024) throw new Error("PDF ist zu groß (max. 80 MB)");
     const head = new Uint8Array(await file.slice(0, 5).arrayBuffer());
@@ -132,11 +181,13 @@
     await ensurePdfJs();
     const data = await file.arrayBuffer();
     const doc = await global.pdfjsLib.getDocument({ data }).promise;
+    if (!doc.numPages) throw new Error("PDF enthält keine Seiten");
     const meta = await doc.getMetadata().catch(() => ({}));
     const info = meta?.info || {};
     return {
+      fileName: file.name,
       pageCount: doc.numPages,
-      title: String(info.Title || file.name.replace(/\.pdf$/i, "")).trim(),
+      title: cleanTitle(info.Title || file.name),
       author: String(info.Author || "").trim(),
       fileSize: formatBytes(file.size),
       fileHash: await hashFile(file)
@@ -145,7 +196,7 @@
 
   async function suggestCategory(text) {
     try {
-      const res = await workerPost("library/suggest", { text });
+      const res = await workerPost("api/admin/library/suggest", { text });
       categorySuggestion = res.suggestion || null;
     } catch (e) {
       categorySuggestion = null;
@@ -153,70 +204,58 @@
     return categorySuggestion;
   }
 
-  function nextPublicationId(base) {
-    const slug = slugify(base || "publikation");
-    let n = 1;
-    const ids = new Set((catalog.publications || []).map((p) => p.id));
-    while (ids.has(`${slug}-${String(n).padStart(3, "0")}`)) n += 1;
-    return `${slug}-${String(n).padStart(3, "0")}`;
+  function applyCategorySuggestion() {
+    if (!draft) return;
+    if (categorySuggestion?.category && categorySuggestion.confidence !== "none") {
+      draft.category = categorySuggestion.category;
+      draft.topic = categorySuggestion.topic || categorySuggestion.category;
+      draft.series = draft.topic;
+    }
   }
 
-  function bumpVersion(version) {
-    const parts = String(version || "1.0").split(".").map((n) => parseInt(n, 10) || 0);
-    if (parts.length < 2) parts.push(0);
-    parts[parts.length - 1] += 1;
-    return parts.join(".");
-  }
-
-  async function onNewVersionPdf(file) {
-    if (!draft?.id) throw new Error("Zuerst Veröffentlichung auswählen");
-    pdfFile = file;
-    pdfMeta = await analyzePdfFile(file);
-    draft.pageCount = pdfMeta.pageCount;
-    draft.fileSize = pdfMeta.fileSize;
-    draft.fileHash = pdfMeta.fileHash;
-    draft.version = bumpVersion(draft.version);
-    draft.status = "updated";
+  function syncAutoFields() {
+    if (!draft) draft = defaultDraft();
+    if (!draft.id) draft.id = nextPublicationId();
+    if (draft.title) draft.slug = nextUniqueSlug(draft.title, draft.id);
     draft.updatedAt = new Date().toISOString().slice(0, 10);
-    statusMsg = `Neue Version ${draft.version}: ${pdfMeta.pageCount} Seiten`;
+    if (!draft.publishedAt) draft.publishedAt = draft.updatedAt;
+    if (!draft.version) draft.version = "1.0";
   }
 
   async function onPdfSelected(file) {
     pdfFile = file;
     pdfMeta = await analyzePdfFile(file);
-    if (!draft) draft = defaultDraft();
-    if (!draft.id) draft.id = nextPublicationId(slugify(pdfMeta.title));
-    if (!draft.slug) draft.slug = slugify(pdfMeta.title || draft.id);
-    if (!draft.title) draft.title = pdfMeta.title;
+    draft = defaultDraft();
+    draft.id = nextPublicationId();
+    draft.title = pdfMeta.title;
+    draft.slug = nextUniqueSlug(draft.title, draft.id);
     draft.pageCount = pdfMeta.pageCount;
     draft.fileSize = pdfMeta.fileSize;
     draft.fileHash = pdfMeta.fileHash;
-    await suggestCategory([draft.title, draft.description, pdfMeta.title, pdfMeta.author].join(" "));
-    if (categorySuggestion?.category && !draft.category) {
-      draft.category = categorySuggestion.category;
-      draft.topic = categorySuggestion.topic || "";
-      draft.series = categorySuggestion.topic || categorySuggestion.category || "";
-    }
-    if (coverMode === "template") await generateTemplateCover();
-    statusMsg = `PDF analysiert: ${pdfMeta.pageCount} Seiten`;
+    await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
+    applyCategorySuggestion();
+    coverMode = "template";
+    await refreshCoverPreview();
+    successSlug = "";
+    publishStep = 0;
   }
 
-  async function generateTemplateCover() {
+  async function refreshCoverPreview() {
     if (!global.DARLibraryCoverGen || !draft) return;
-    coverVariants = await global.DARLibraryCoverGen.generateCoverVariants(draft);
+    if (coverMode === "template") {
+      coverVariants = await global.DARLibraryCoverGen.generateCoverVariants(draft);
+    } else if (coverMode === "pdf-page") {
+      if (!pdfFile) return;
+      await ensurePdfJs();
+      coverVariants = await global.DARLibraryCoverGen.renderPdfFirstPageCover(pdfFile);
+    } else if (coverMode === "upload" && coverVariants) {
+      return;
+    } else {
+      return;
+    }
     const blob = await (await fetch(`data:image/webp;base64,${coverVariants.medium}`)).blob();
-    if (coverPreviewUrl) URL.revokeObjectURL(coverPreviewUrl);
+    if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
     coverPreviewUrl = URL.createObjectURL(blob);
-  }
-
-  async function usePdfFirstPageCover() {
-    if (!pdfFile || !global.DARLibraryCoverGen) throw new Error("PDF fehlt");
-    await ensurePdfJs();
-    coverVariants = await global.DARLibraryCoverGen.renderPdfFirstPageCover(pdfFile, draft);
-    const blob = await (await fetch(`data:image/webp;base64,${coverVariants.medium}`)).blob();
-    if (coverPreviewUrl) URL.revokeObjectURL(coverPreviewUrl);
-    coverPreviewUrl = URL.createObjectURL(blob);
-    coverMode = "pdf-page";
   }
 
   async function onCoverUpload(file) {
@@ -234,68 +273,106 @@
     ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
     coverVariants = await global.DARLibraryCoverGen.generateCoverVariantsFromCanvas(canvas);
     const blob = await (await fetch(`data:image/webp;base64,${coverVariants.medium}`)).blob();
-    if (coverPreviewUrl) URL.revokeObjectURL(coverPreviewUrl);
+    if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
     coverPreviewUrl = URL.createObjectURL(blob);
     coverMode = "upload";
   }
 
   function buildLibraryFiles(id) {
-    const files = [];
-    if (pdfFile) {
-      return pdfFile.arrayBuffer().then((buf) => {
-        let binary = "";
-        const bytes = new Uint8Array(buf);
-        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-        files.push({
-          path: `test/assets/library/pdfs/${id}-v${String(draft.version || "1.0").replace(/\./g, "-")}.pdf`,
-          contentBase64: btoa(binary)
-        });
-        if (coverVariants) {
-          files.push({ path: `test/assets/library/covers/${id}/cover-small.webp`, contentBase64: coverVariants.small });
-          files.push({ path: `test/assets/library/covers/${id}/cover-medium.webp`, contentBase64: coverVariants.medium });
-          files.push({ path: `test/assets/library/covers/${id}/cover-master.webp`, contentBase64: coverVariants.master });
-        }
-        return files;
+    if (!pdfFile) return Promise.resolve([]);
+    return pdfFile.arrayBuffer().then((buf) => {
+      const files = [];
+      let binary = "";
+      const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      files.push({
+        path: `test/assets/library/pdfs/${id}-v${String(draft.version || "1.0").replace(/\./g, "-")}.pdf`,
+        contentBase64: btoa(binary)
       });
+      if (coverVariants) {
+        files.push({ path: `test/assets/library/covers/${id}/cover-small.webp`, contentBase64: coverVariants.small });
+        files.push({ path: `test/assets/library/covers/${id}/cover-medium.webp`, contentBase64: coverVariants.medium });
+        files.push({ path: `test/assets/library/covers/${id}/cover-master.webp`, contentBase64: coverVariants.master });
+      }
+      return files;
+    });
+  }
+
+  function canPublish() {
+    return !!(pdfFile && draft?.title?.trim() && coverVariants && (draft.category || categorySuggestion?.category));
+  }
+
+  function readMainForm() {
+    if (!draft) draft = defaultDraft();
+    draft.title = document.getElementById("libAdminTitle")?.value?.trim() || "";
+    draft.slug = nextUniqueSlug(draft.title, draft.id);
+    if (showCategoryEdit) {
+      draft.category = document.getElementById("libAdminCategory")?.value || draft.category;
+      draft.topic = document.getElementById("libAdminTopic")?.value || draft.topic;
     }
-    if (coverVariants) {
-      files.push({ path: `test/assets/library/covers/${id}/cover-small.webp`, contentBase64: coverVariants.small });
-      files.push({ path: `test/assets/library/covers/${id}/cover-medium.webp`, contentBase64: coverVariants.medium });
-      files.push({ path: `test/assets/library/covers/${id}/cover-master.webp`, contentBase64: coverVariants.master });
-    }
-    return Promise.resolve(files);
+    draft.subtitle = document.getElementById("libAdminSubtitle")?.value || "";
+    draft.description = document.getElementById("libAdminDescription")?.value || "";
+    draft.tags = String(document.getElementById("libAdminTags")?.value || "").split(",").map((t) => t.trim()).filter(Boolean);
+    draft.version = document.getElementById("libAdminVersion")?.value || draft.version || "1.0";
+    draft.isNew = !!document.getElementById("libAdminIsNew")?.checked;
+    draft.isRecommended = !!document.getElementById("libAdminIsRecommended")?.checked;
+    draft.downloadEnabled = document.getElementById("libAdminDownload") ? !!document.getElementById("libAdminDownload").checked : true;
+    draft.offlineEnabled = document.getElementById("libAdminOffline") ? !!document.getElementById("libAdminOffline").checked : true;
+    syncAutoFields();
   }
 
   async function saveDraft() {
-    if (!draft?.title) throw new Error("Titel fehlt");
-    if (!draft.id) draft.id = nextPublicationId(draft.slug || draft.title);
-    if (!draft.slug) draft.slug = slugify(draft.title);
+    readMainForm();
+    if (!draft.title) throw new Error("Titel fehlt");
+    if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
     busy = true;
+    publishStep = 3;
+    renderShell();
     try {
       const libraryFiles = await buildLibraryFiles(draft.id);
-      const res = await workerPost("library/save", { publication: { ...draft, status: "draft" }, libraryFiles, publish: false });
-      if (res.warnings?.length) statusMsg = res.warnings.join(" · ");
-      else statusMsg = "Entwurf gespeichert";
-      await ensureLibraryLoaded(true);
-      return res;
+      return await workerPost("api/admin/library/save", {
+        publication: { ...draft, status: "draft" },
+        libraryFiles,
+        publish: false
+      });
     } finally {
       busy = false;
+      publishStep = 0;
     }
   }
 
   async function publishDraft() {
-    if (!draft?.title || !draft?.category) throw new Error("Titel und Kategorie sind erforderlich");
-    if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
-    if (!coverVariants && !draft.coverUrl) throw new Error("Cover fehlt");
+    readMainForm();
+    if (!draft.category) {
+      if (categorySuggestion?.category && categorySuggestion.confidence !== "none") {
+        applyCategorySuggestion();
+      } else {
+        showCategoryEdit = true;
+        throw new Error("Bitte wähle eine Kategorie aus");
+      }
+    }
+    if (!pdfFile) throw new Error("PDF fehlt");
+    if (!coverVariants) throw new Error("Cover fehlt");
     busy = true;
+    publishStep = 1;
+    renderShell();
     try {
+      publishStep = 1;
+      renderShell();
+      await analyzePdfFile(pdfFile);
+      publishStep = 2;
+      renderShell();
+      if (coverMode === "template") await refreshCoverPreview();
+      publishStep = 3;
+      renderShell();
       const libraryFiles = await buildLibraryFiles(draft.id);
-      const res = await workerPost("library/save", {
-        publication: { ...draft, status: draft.status === "updated" ? "updated" : "published", isNew: !!draft.isNew },
+      const res = await workerPost("api/admin/library/save", {
+        publication: { ...draft, status: "published", isNew: !!draft.isNew },
         libraryFiles,
         publish: true
       });
-      statusMsg = "In der Test-Bibliothek veröffentlicht";
+      publishStep = 4;
+      successSlug = draft.slug;
       await ensureLibraryLoaded(true);
       return res;
     } finally {
@@ -303,134 +380,234 @@
     }
   }
 
-  function renderPreviewCard() {
-    if (!draft) return "";
-    const cover = coverPreviewUrl ? `<img src="${esc(coverPreviewUrl)}" alt="" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px">` : `<div style="aspect-ratio:2/3;border-radius:10px;background:#1a2230;display:grid;place-items:center;color:#d8c08e;padding:12px;text-align:center">${esc(draft.transliteratedTitle || draft.title)}</div>`;
-    return `<article style="max-width:180px"><div>${cover}</div><h4 style="margin:8px 0 4px;font-size:13px;line-height:1.35">${esc(draft.title)}</h4><div style="font-size:11px;color:#8f856f">${esc(draft.category || "—")}</div></article>`;
+  function resetUploadForm() {
+    draft = defaultDraft();
+    pdfFile = null;
+    pdfMeta = null;
+    coverMode = "template";
+    coverVariants = null;
+    if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
+    coverPreviewUrl = "";
+    categorySuggestion = null;
+    showCategoryEdit = false;
+    successSlug = "";
+    publishStep = 0;
   }
 
-  function renderEditor() {
+  function renderCategoryLine() {
+    if (!draft?.category && (!categorySuggestion || categorySuggestion.confidence === "none")) {
+      return `<p class="lib-admin-category">Kategorie konnte nicht sicher erkannt werden. <a href="#" id="libAdminChangeCategory">Kategorie auswählen</a></p>`;
+    }
+    const cat = draft.category || categorySuggestion?.category || "";
+    const topic = draft.topic || categorySuggestion?.topic || "";
+    if (!cat) return "";
+    return `<p class="lib-admin-category">Erkannt: ${esc(cat)}${topic && topic !== cat ? ` · ${esc(topic)}` : ""} <a href="#" id="libAdminChangeCategory">Ändern</a></p>`;
+  }
+
+  function renderCategoryEdit() {
+    return `<div class="lib-admin-category-edit ${showCategoryEdit ? "is-open" : ""}" id="libAdminCategoryEdit">
+      <label class="lib-admin-field">Kategorie<select id="libAdminCategory">${CATEGORIES.map((c) => `<option value="${esc(c)}" ${draft?.category === c ? "selected" : ""}>${esc(c)}</option>`).join("")}</select></label>
+      <label class="lib-admin-field">Themenbereich<input id="libAdminTopic" value="${esc(draft?.topic || "")}"></label>
+    </div>`;
+  }
+
+  function renderProgress() {
+    if (!busy && !publishStep) return "";
+    const steps = ["PDF wird geprüft", "Cover wird erstellt", "Daten werden gespeichert", "Vorschau wird veröffentlicht"];
+    return `<div class="lib-admin-progress" role="status">
+      <b>${publishStep >= 4 ? "Veröffentlichung abgeschlossen" : "Veröffentlichung wird vorbereitet …"}</b>
+      <ol>${steps.map((label, i) => `<li class="${publishStep > i + 1 ? "is-done" : publishStep === i + 1 ? "is-active" : ""}">${esc(label)}</li>`).join("")}</ol>
+    </div>`;
+  }
+
+  function renderPreviewPanel() {
+    const cover = coverPreviewUrl
+      ? `<img src="${esc(coverPreviewUrl)}" alt="Cover-Vorschau">`
+      : `<div class="lib-admin-cover-placeholder">Cover-Vorschau erscheint nach PDF-Auswahl</div>`;
+    return `<aside class="lib-admin-preview" aria-label="Live-Vorschau">
+      <h3>Live-Vorschau</h3>
+      <div class="lib-admin-preview-cover">${cover}</div>
+      <div class="lib-admin-card-preview">
+        <h4>${esc(draft?.title || "Titel der Veröffentlichung")}</h4>
+        <span>${esc(draft?.category || categorySuggestion?.category || "Kategorie")}</span>
+      </div>
+    </aside>`;
+  }
+
+  function renderUploadForm() {
     if (!draft) draft = defaultDraft();
-    const suggest = categorySuggestion;
-    return `<section class="admin-card">
-      <h3>Neue Veröffentlichung / Bearbeiten</h3>
-      <p class="admin-note">Upload nur für Test-Bibliothek. Keine automatische Live-Veröffentlichung.</p>
-      <div class="admin-form-grid">
-        <label>PDF hochladen<input id="libAdminPdfInput" type="file" accept="application/pdf"></label>
-        <label>Titel<input id="libAdminTitle" value="${esc(draft.title)}"></label>
-        <label>Transliteration<input id="libAdminTransTitle" value="${esc(draft.transliteratedTitle)}"></label>
-        <label>Untertitel<input id="libAdminSubtitle" value="${esc(draft.subtitle)}"></label>
-        <label>Kategorie<select id="libAdminCategory">${CATEGORIES.map((c)=>`<option value="${esc(c)}" ${draft.category===c?"selected":""}>${esc(c)}</option>`).join("")}</select></label>
-        <label>Themenbereich<input id="libAdminTopic" value="${esc(draft.topic)}"></label>
-        <label>Reihe<input id="libAdminSeries" value="${esc(draft.series)}"></label>
-        <label>Version<input id="libAdminVersion" value="${esc(draft.version)}"></label>
-        <label>ID<input id="libAdminId" value="${esc(draft.id)}" placeholder="automatisch"></label>
-        <label>Slug<input id="libAdminSlug" value="${esc(draft.slug)}" placeholder="automatisch"></label>
+    const pdfReady = !!pdfMeta;
+    return `<div class="lib-admin-layout">
+      <div class="lib-admin-main">
+        <header class="lib-admin-head">
+          <h2>Neue Veröffentlichung</h2>
+          <p>PDF hochladen und in der Test-Bibliothek veröffentlichen</p>
+        </header>
+
+        <label class="lib-admin-drop ${dragActive ? "is-dragover" : ""}" id="libAdminDropZone">
+          <input id="libAdminPdfInput" type="file" accept="application/pdf,.pdf">
+          <b>PDF hier hineinziehen</b>
+          <span>oder Datei auswählen</span>
+        </label>
+
+        ${pdfReady ? `<p class="lib-admin-pdf-meta"><b>${esc(pdfMeta.fileName)}</b><br>${esc(String(pdfMeta.pageCount))} Seiten · ${esc(pdfMeta.fileSize)} · PDF geprüft</p>` : ""}
+
+        <label class="lib-admin-field" id="libAdminTitleWrap" style="${pdfReady ? "" : "display:none"}">
+          <span>Titel</span>
+          <input id="libAdminTitle" type="text" value="${esc(draft.title)}" placeholder="Die Namen und Eigenschaften Allahs">
+        </label>
+
+        <section class="lib-admin-field" id="libAdminCoverWrap" style="${pdfReady ? "" : "display:none"}">
+          <span>Cover</span>
+          <div class="lib-admin-cover-options">
+            <label class="lib-admin-cover-opt ${coverMode === "template" ? "is-active" : ""}"><input type="radio" name="libCoverMode" value="template" ${coverMode === "template" ? "checked" : ""}> Automatisch gestalten</label>
+            <label class="lib-admin-cover-opt ${coverMode === "pdf-page" ? "is-active" : ""}"><input type="radio" name="libCoverMode" value="pdf-page" ${coverMode === "pdf-page" ? "checked" : ""} ${pdfFile ? "" : "disabled"}> Erste PDF-Seite verwenden</label>
+            <label class="lib-admin-cover-opt ${coverMode === "upload" ? "is-active" : ""}"><input type="radio" name="libCoverMode" value="upload" ${coverMode === "upload" ? "checked" : ""}> Eigenes Cover hochladen</label>
+          </div>
+          <div class="lib-admin-cover-upload ${coverMode === "upload" ? "is-visible" : ""}">
+            <label class="lib-admin-btn" style="display:inline-flex;align-items:center;cursor:pointer">Cover-Datei wählen<input id="libAdminCoverInput" type="file" accept="image/png,image/jpeg,image/webp,image/avif" hidden></label>
+          </div>
+        </section>
+
+        ${pdfReady ? renderCategoryLine() : ""}
+        ${pdfReady ? renderCategoryEdit() : ""}
+
+        <details class="lib-admin-details" id="libAdminMoreSettings" style="${pdfReady ? "" : "display:none"}">
+          <summary>Weitere Einstellungen</summary>
+          <div class="lib-admin-details-body">
+            <label class="lib-admin-field">Untertitel<input id="libAdminSubtitle" value="${esc(draft.subtitle)}"></label>
+            <label class="lib-admin-field">Beschreibung<textarea id="libAdminDescription" rows="3">${esc(draft.description)}</textarea></label>
+            <label class="lib-admin-field">Schlagwörter<input id="libAdminTags" value="${esc((draft.tags || []).join(", "))}" placeholder="kommagetrennt"></label>
+            <label class="lib-admin-field">Version<input id="libAdminVersion" value="${esc(draft.version || "1.0")}"></label>
+            <div class="lib-admin-checks">
+              <label><input id="libAdminIsNew" type="checkbox" ${draft.isNew ? "checked" : ""}> Neu</label>
+              <label><input id="libAdminIsRecommended" type="checkbox" ${draft.isRecommended ? "checked" : ""}> Empfohlen</label>
+              <label><input id="libAdminDownload" type="checkbox" ${draft.downloadEnabled ? "checked" : ""}> Download erlauben</label>
+              <label><input id="libAdminOffline" type="checkbox" ${draft.offlineEnabled ? "checked" : ""}> Offline erlauben</label>
+            </div>
+          </div>
+        </details>
+
+        ${renderProgress()}
+
+        <div class="lib-admin-actions" id="libAdminActions" style="${pdfReady ? "" : "display:none"}">
+          <button class="lib-admin-btn" type="button" id="libAdminSaveDraft" ${busy ? "disabled" : ""}>Als Entwurf speichern</button>
+          <button class="lib-admin-btn lib-admin-btn-primary" type="button" id="libAdminPublish" ${busy || !canPublish() ? "disabled" : ""}>In Test-Bibliothek veröffentlichen</button>
+        </div>
       </div>
-      ${suggest?.confidence && suggest.confidence !== "none" ? `<p class="admin-note">Vorschlag: ${esc(suggest.category)} · ${esc(suggest.topic)} (${esc(suggest.confidence)})</p>` : suggest?.confidence === "none" ? `<p class="admin-note">Thema konnte nicht sicher bestimmt werden. Bitte Kategorie manuell auswählen.</p>` : ""}
-      <label>Beschreibung<textarea id="libAdminDescription" rows="4">${esc(draft.description)}</textarea></label>
-      <label>Schlagwörter (kommagetrennt)<input id="libAdminTags" value="${esc((draft.tags||[]).join(", "))}"></label>
-      <div class="admin-inline-checks">
-        <label><input id="libAdminIsNew" type="checkbox" ${draft.isNew?"checked":""}> Neu</label>
-        <label><input id="libAdminIsRecommended" type="checkbox" ${draft.isRecommended?"checked":""}> Empfohlen</label>
-        <label><input id="libAdminDownload" type="checkbox" ${draft.downloadEnabled?"checked":""}> Download</label>
-        <label><input id="libAdminOffline" type="checkbox" ${draft.offlineEnabled?"checked":""}> Offline</label>
+      ${renderPreviewPanel()}
+    </div>`;
+  }
+
+  function renderSuccess() {
+    return `<div class="lib-admin-success">
+      <p><b>Die Veröffentlichung wurde erfolgreich in der Test-Bibliothek veröffentlicht.</b></p>
+      <div class="lib-admin-actions" style="margin-top:12px">
+        <a class="lib-admin-btn lib-admin-btn-primary" href="/test/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Bibliothek ansehen</a>
+        <button class="lib-admin-btn" type="button" id="libAdminNewUpload">Weitere PDF hochladen</button>
       </div>
-      <div class="admin-action-row">
-        <button class="admin-btn" type="button" id="libAdminCoverTemplate">Automatische Cover-Vorlage</button>
-        <button class="admin-btn" type="button" id="libAdminCoverPdfPage" ${pdfFile?"":"disabled"}>Erste PDF-Seite</button>
-        <label class="admin-btn" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">Cover hochladen<input id="libAdminCoverInput" type="file" accept="image/png,image/jpeg,image/webp,image/avif" hidden></label>
-        ${draft.id ? `<label class="admin-btn" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">Neue Version hochladen<input id="libAdminVersionPdfInput" type="file" accept="application/pdf" hidden></label>` : ""}
-      </div>
-      ${pdfMeta ? `<p class="admin-note">PDF: ${esc(pdfMeta.pageCount)} Seiten · ${esc(pdfMeta.fileSize)}</p>` : ""}
-      <div class="admin-action-row">
-        <button class="admin-btn" type="button" id="libAdminSaveDraft" ${busy?"disabled":""}>Entwurf speichern</button>
-        <button class="admin-btn admin-btn-primary" type="button" id="libAdminPublish" ${busy?"disabled":""}>In Test-Bibliothek veröffentlichen</button>
-      </div>
-      <h4>Vorschau (Smartphone-Karte)</h4>
-      <div data-theme-preview="${esc(previewTheme)}">${renderPreviewCard()}</div>
-    </section>`;
+    </div>`;
   }
 
   function renderList() {
     const items = (catalog.publications || []).slice().sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
-    if (!items.length) return `<p class="admin-note">Noch keine Veröffentlichungen.</p>`;
-    return `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Titel</th><th>Kategorie</th><th>Status</th><th>Version</th><th></th></tr></thead><tbody>${items.map((p)=>`<tr><td>${esc(p.title)}</td><td>${esc(p.category)}</td><td>${esc(p.status)}</td><td>${esc(p.version||"")}</td><td><button class="admin-btn admin-btn-small" type="button" data-lib-edit="${esc(p.id)}">Bearbeiten</button> <button class="admin-btn admin-btn-small" type="button" data-lib-archive="${esc(p.id)}">Archivieren</button> <button class="admin-btn admin-btn-small" type="button" data-lib-delete="${esc(p.id)}">Löschen</button></td></tr>`).join("")}</tbody></table></div>`;
+    if (!items.length) return `<p class="lib-admin-category">Noch keine Veröffentlichungen vorhanden.</p>`;
+    return items.map((p) => `<div class="lib-admin-list-item">
+      <div><b>${esc(p.title)}</b><br><span>${esc(p.category || "—")} · ${esc(p.status || "")} · v${esc(p.version || "")}</span></div>
+      <div class="lib-admin-list-actions">
+        <button class="lib-admin-btn" type="button" data-lib-archive="${esc(p.id)}">Archivieren</button>
+      </div>
+    </div>`).join("");
   }
 
   function renderLibraryTab() {
-    return `<section class="admin-stack">
-      <header class="admin-head"><div><h2>Bibliothek verwalten</h2><p>PDF-Veröffentlichungen für die Test-Bibliothek hochladen, prüfen und veröffentlichen.</p></div><button class="admin-btn" type="button" id="libAdminReload">Aktualisieren</button></header>
-      <p class="admin-note">${esc(statusMsg || "")}</p>
-      ${renderEditor()}
-      <section class="admin-card"><h3>Veröffentlichungen</h3>${renderList()}</section>
+    if (loading && !loaded) {
+      return `<section class="lib-admin"><p class="lib-admin-category">Bibliothek wird geladen…</p></section>`;
+    }
+    return `<section class="lib-admin">
+      ${successSlug ? renderSuccess() : renderUploadForm()}
+      <section class="lib-admin-list">
+        <h3>Bestehende Veröffentlichungen</h3>
+        ${renderList()}
+      </section>
     </section>`;
   }
 
-  function readForm() {
-    if (!draft) draft = defaultDraft();
-    draft.title = document.getElementById("libAdminTitle")?.value || "";
-    draft.transliteratedTitle = document.getElementById("libAdminTransTitle")?.value || "";
-    draft.subtitle = document.getElementById("libAdminSubtitle")?.value || "";
-    draft.category = document.getElementById("libAdminCategory")?.value || "";
-    draft.topic = document.getElementById("libAdminTopic")?.value || "";
-    draft.series = document.getElementById("libAdminSeries")?.value || "";
-    draft.version = document.getElementById("libAdminVersion")?.value || "1.0";
-    draft.id = document.getElementById("libAdminId")?.value || draft.id;
-    draft.slug = document.getElementById("libAdminSlug")?.value || slugify(draft.title);
-    draft.description = document.getElementById("libAdminDescription")?.value || "";
-    draft.tags = String(document.getElementById("libAdminTags")?.value || "").split(",").map((t)=>t.trim()).filter(Boolean);
-    draft.isNew = !!document.getElementById("libAdminIsNew")?.checked;
-    draft.isRecommended = !!document.getElementById("libAdminIsRecommended")?.checked;
-    draft.downloadEnabled = !!document.getElementById("libAdminDownload")?.checked;
-    draft.offlineEnabled = !!document.getElementById("libAdminOffline")?.checked;
-    draft.updatedAt = new Date().toISOString().slice(0, 10);
+  function scheduleCoverRefresh() {
+    if (coverTimer) clearTimeout(coverTimer);
+    coverTimer = setTimeout(async () => {
+      readMainForm();
+      if (coverMode !== "template" || !draft?.title) return;
+      try {
+        await refreshCoverPreview();
+        renderShell();
+      } catch (e) {
+        console.warn("[Bibliothek Admin] Cover-Aktualisierung:", e);
+      }
+    }, 450);
   }
 
   function bindLibraryTab() {
-    document.getElementById("libAdminReload")?.addEventListener("click", () => ensureLibraryLoaded(true).then(() => renderShell()));
-    document.getElementById("libAdminPdfInput")?.addEventListener("change", async (ev) => {
+    const dropZone = document.getElementById("libAdminDropZone");
+    const pdfInput = document.getElementById("libAdminPdfInput");
+
+    dropZone?.addEventListener("dragover", (ev) => {
+      ev.preventDefault();
+      dragActive = true;
+      dropZone.classList.add("is-dragover");
+    });
+    dropZone?.addEventListener("dragleave", () => {
+      dragActive = false;
+      dropZone.classList.remove("is-dragover");
+    });
+    dropZone?.addEventListener("drop", async (ev) => {
+      ev.preventDefault();
+      dragActive = false;
+      dropZone.classList.remove("is-dragover");
+      const file = ev.dataTransfer?.files?.[0];
+      if (!file) return;
+      try {
+        await onPdfSelected(file);
+        renderShell();
+      } catch (e) {
+        toast(e.message || "PDF konnte nicht gelesen werden");
+      }
+    });
+
+    pdfInput?.addEventListener("change", async (ev) => {
       const file = ev.target.files?.[0];
       if (!file) return;
       try {
         await onPdfSelected(file);
         renderShell();
       } catch (e) {
-        statusMsg = e.message || "PDF-Analyse fehlgeschlagen";
-        renderShell();
+        toast(e.message || "PDF konnte nicht gelesen werden");
       }
     });
-    document.getElementById("libAdminVersionPdfInput")?.addEventListener("change", async (ev) => {
-      const file = ev.target.files?.[0];
-      if (!file) return;
-      try {
-        await onNewVersionPdf(file);
-        renderShell();
-      } catch (e) {
-        statusMsg = e.message || "Versions-Upload fehlgeschlagen";
-        renderShell();
-      }
+
+    document.getElementById("libAdminTitle")?.addEventListener("input", () => {
+      scheduleCoverRefresh();
     });
-    document.getElementById("libAdminCoverTemplate")?.addEventListener("click", async () => {
-      readForm();
-      try {
-        await generateTemplateCover();
-        renderShell();
-      } catch (e) {
-        statusMsg = e.message || "Cover-Erstellung fehlgeschlagen";
-        renderShell();
-      }
+
+    document.querySelectorAll('input[name="libCoverMode"]').forEach((input) => {
+      input.addEventListener("change", async () => {
+        coverMode = input.value;
+        readMainForm();
+        try {
+          if (coverMode === "upload") {
+            renderShell();
+            return;
+          }
+          await refreshCoverPreview();
+          renderShell();
+        } catch (e) {
+          toast(e.message || "Cover konnte nicht erstellt werden");
+          coverMode = "template";
+          renderShell();
+        }
+      });
     });
-    document.getElementById("libAdminCoverPdfPage")?.addEventListener("click", async () => {
-      readForm();
-      try {
-        await usePdfFirstPageCover();
-        renderShell();
-      } catch (e) {
-        statusMsg = e.message || "Erste Seite konnte nicht verwendet werden";
-        renderShell();
-      }
-    });
+
     document.getElementById("libAdminCoverInput")?.addEventListener("change", async (ev) => {
       const file = ev.target.files?.[0];
       if (!file) return;
@@ -438,74 +615,55 @@
         await onCoverUpload(file);
         renderShell();
       } catch (e) {
-        statusMsg = e.message || "Cover-Upload fehlgeschlagen";
-        renderShell();
+        toast(e.message || "Cover-Upload fehlgeschlagen");
       }
     });
+
+    document.getElementById("libAdminChangeCategory")?.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      showCategoryEdit = true;
+      renderShell();
+    });
+
     document.getElementById("libAdminSaveDraft")?.addEventListener("click", async () => {
-      readForm();
       try {
         await saveDraft();
         toast("Entwurf gespeichert");
+        await ensureLibraryLoaded(true);
         renderShell();
       } catch (e) {
-        statusMsg = e.message || "Speichern fehlgeschlagen";
-        toast(statusMsg);
-        renderShell();
+        toast(e.message || "Speichern fehlgeschlagen");
       }
     });
+
     document.getElementById("libAdminPublish")?.addEventListener("click", async () => {
-      readForm();
       try {
         await publishDraft();
         toast("Veröffentlicht (Test)");
         renderShell();
       } catch (e) {
-        statusMsg = e.message || "Veröffentlichung fehlgeschlagen";
-        toast(statusMsg);
+        toast(e.message || "Veröffentlichung fehlgeschlagen");
+        publishStep = 0;
         renderShell();
       }
     });
-    document.querySelectorAll("[data-lib-edit]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-lib-edit");
-        const pub = (catalog.publications || []).find((p) => p.id === id);
-        if (!pub) return;
-        draft = { ...pub };
-        pdfFile = null;
-        pdfMeta = pub.pageCount ? { pageCount: pub.pageCount, fileSize: pub.fileSize || "" } : null;
-        coverVariants = null;
-        coverPreviewUrl = pub.coverUrls?.medium || pub.coverUrl || "";
-        renderShell();
-      });
+
+    document.getElementById("libAdminNewUpload")?.addEventListener("click", () => {
+      resetUploadForm();
+      renderShell();
     });
+
     document.querySelectorAll("[data-lib-archive]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-archive");
         if (!confirm("Veröffentlichung archivieren?")) return;
         try {
-          await workerPost("library/delete", { id });
+          await workerPost("api/admin/library/delete", { id });
           toast("Archiviert");
           await ensureLibraryLoaded(true);
           renderShell();
         } catch (e) {
           toast(e.message || "Archivieren fehlgeschlagen");
-        }
-      });
-    });
-    document.querySelectorAll("[data-lib-delete]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-lib-delete");
-        const pub = (catalog.publications || []).find((p) => p.id === id);
-        if (!confirm(`Veröffentlichung „${pub?.title || id}“ endgültig löschen?\n\nDieser Schritt kann nicht rückgängig gemacht werden.`)) return;
-        if (!confirm("Wirklich endgültig löschen?")) return;
-        try {
-          await workerPost("library/delete", { id, hard: true });
-          toast("Gelöscht");
-          await ensureLibraryLoaded(true);
-          renderShell();
-        } catch (e) {
-          toast(e.message || "Löschen fehlgeschlagen");
         }
       });
     });
