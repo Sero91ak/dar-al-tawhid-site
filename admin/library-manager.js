@@ -46,8 +46,11 @@
   let dragActive = false;
   let processingPdf = false;
   let listFoldOpen = false;
+  let pdfFileKey = "";
+  let pdfReplaceVersion = "";
 
-  function safeRender() {
+  function safeRender(options) {
+    if (processingPdf && !options?.force) return;
     if (typeof global.renderShell === "function") {
       try {
         global.renderShell();
@@ -55,6 +58,27 @@
         console.error("[Bibliothek Admin] renderShell:", e);
       }
     }
+  }
+
+  function pdfSelectionKey(file) {
+    if (!file) return "";
+    return `${file.name}|${file.size}|${file.lastModified}`;
+  }
+
+  function isAcceptablePdfFile(file) {
+    if (!file || !file.size) return false;
+    if (file.size > 80 * 1024 * 1024) return false;
+    const type = String(file.type || "").toLowerCase();
+    const name = String(file.name || "").toLowerCase();
+    if (type === "application/pdf" || type === "application/x-pdf") return true;
+    if (name.endsWith(".pdf")) return true;
+    if (!type || type === "application/octet-stream") return true;
+    return false;
+  }
+
+  function syncVersionField() {
+    const verEl = document.getElementById("libAdminVersion");
+    if (verEl && draft?.version) verEl.value = draft.version;
   }
 
   function isLibraryBusy() {
@@ -214,8 +238,7 @@
     return global.__libAdminPdfLoading;
   }
 
-  async function hashFile(file) {
-    const buf = await file.arrayBuffer();
+  async function hashBuffer(buf) {
     const digest = await crypto.subtle.digest("SHA-256", buf);
     return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
   }
@@ -229,13 +252,12 @@
 
   async function analyzePdfFile(file) {
     if (!file) throw new Error("Keine Datei ausgewählt");
-    if (file.type && file.type !== "application/pdf") throw new Error("Nur PDF-Dateien sind erlaubt");
-    if (!file.size) throw new Error("PDF ist leer");
-    if (file.size > 80 * 1024 * 1024) throw new Error("PDF ist zu groß (max. 80 MB)");
-    const head = new Uint8Array(await file.slice(0, 5).arrayBuffer());
+    if (!isAcceptablePdfFile(file)) throw new Error("Nur PDF-Dateien sind erlaubt");
+    const data = await file.arrayBuffer();
+    if (!data.byteLength) throw new Error("PDF ist leer");
+    const head = new Uint8Array(data.slice(0, 5));
     if (String.fromCharCode(...head) !== "%PDF-") throw new Error("Datei ist keine gültige PDF");
     await ensurePdfJs();
-    const data = await file.arrayBuffer();
     const doc = await global.pdfjsLib.getDocument({ data }).promise;
     if (!doc.numPages) throw new Error("PDF enthält keine Seiten");
     const meta = await doc.getMetadata().catch(() => ({}));
@@ -246,8 +268,18 @@
       title: cleanTitle(info.Title || file.name),
       author: String(info.Author || "").trim(),
       fileSize: formatBytes(file.size),
-      fileHash: await hashFile(file)
+      fileHash: await hashBuffer(data)
     };
+  }
+
+  async function ensurePdfMetaForPublish() {
+    if (!pdfFile) return;
+    if (pdfMeta && pdfFileKey === pdfSelectionKey(pdfFile)) return;
+    pdfMeta = await analyzePdfFile(pdfFile);
+    pdfFileKey = pdfSelectionKey(pdfFile);
+    draft.pageCount = pdfMeta.pageCount;
+    draft.fileSize = pdfMeta.fileSize;
+    draft.fileHash = pdfMeta.fileHash;
   }
 
   async function suggestCategory(text) {
@@ -297,6 +329,8 @@
       coverUrls: pub.coverUrls ? { ...pub.coverUrls } : {}
     };
     pdfFile = null;
+    pdfFileKey = "";
+    pdfReplaceVersion = "";
     pdfMeta = {
       fileName: String(pub.pdfUrl || "").split("/").pop() || "bestehende-datei.pdf",
       pageCount: Number(pub.pageCount) || 0,
@@ -323,32 +357,42 @@
 
   async function onPdfSelected(file, options) {
     processingPdf = true;
+    safeRender({ force: true });
     try {
       const replaceMode = options?.replace === true || !!editingPublicationId;
       pdfFile = file;
       pdfMeta = await analyzePdfFile(file);
+      pdfFileKey = pdfSelectionKey(file);
       if (!replaceMode) {
         draft = defaultDraft();
         draft.id = nextPublicationId();
         draft.title = pdfMeta.title;
         draft.slug = nextUniqueSlug(draft.title, draft.id);
         editingPublicationId = "";
+        pdfReplaceVersion = "";
       } else if (draft) {
         draft.version = bumpVersion(draft.version);
+        pdfReplaceVersion = draft.version;
         if (!draft.title) draft.title = pdfMeta.title;
       } else {
         draft = defaultDraft();
         draft.title = pdfMeta.title;
+        pdfReplaceVersion = "";
       }
       draft.pageCount = pdfMeta.pageCount;
       draft.fileSize = pdfMeta.fileSize;
       draft.fileHash = pdfMeta.fileHash;
+      syncVersionField();
       if (!replaceMode) {
         await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
         applyCategorySuggestion();
         coverMode = "template";
       }
-      await refreshCoverPreview();
+      try {
+        await refreshCoverPreview();
+      } catch (e) {
+        console.warn("[Bibliothek Admin] Cover-Vorschau nach PDF-Auswahl:", e);
+      }
       successSlug = "";
       successTarget = "test";
       publishStep = 0;
@@ -420,7 +464,12 @@
     draft.subtitle = document.getElementById("libAdminSubtitle")?.value || "";
     draft.description = document.getElementById("libAdminDescription")?.value || "";
     draft.tags = String(document.getElementById("libAdminTags")?.value || "").split(",").map((t) => t.trim()).filter(Boolean);
-    draft.version = document.getElementById("libAdminVersion")?.value || draft.version || "1.0";
+    const formVersion = String(document.getElementById("libAdminVersion")?.value || "").trim();
+    if (pdfReplaceVersion && pdfFile) {
+      draft.version = formVersion && formVersion !== pdfReplaceVersion ? formVersion : pdfReplaceVersion;
+    } else {
+      draft.version = formVersion || draft.version || "1.0";
+    }
     draft.isNew = !!document.getElementById("libAdminIsNew")?.checked;
     draft.isRecommended = !!document.getElementById("libAdminIsRecommended")?.checked;
     draft.downloadEnabled = document.getElementById("libAdminDownload") ? !!document.getElementById("libAdminDownload").checked : true;
@@ -436,6 +485,7 @@
     publishStep = 3;
     safeRender();
     try {
+      if (pdfFile) await ensurePdfMetaForPublish();
       const libraryFiles = await buildLibraryFiles(draft.id);
       return await workerPost("api/admin/library/save", {
         publication: { ...draft, status: "draft" },
@@ -469,10 +519,17 @@
     publishStep = 1;
     safeRender();
     try {
-      if (pdfFile) await analyzePdfFile(pdfFile);
+      if (pdfFile) await ensurePdfMetaForPublish();
       publishStep = 2;
       safeRender();
-      if (coverMode === "template" || !coverVariants) await refreshCoverPreview();
+      if (coverMode === "template" || !coverVariants) {
+        try {
+          await refreshCoverPreview();
+        } catch (e) {
+          if (!coverVariants && !draft.coverUrl) throw e;
+          console.warn("[Bibliothek Admin] Cover vor Veröffentlichung:", e);
+        }
+      }
       publishStep = 3;
       safeRender();
       const libraryFiles = await buildLibraryFiles(draft.id, publishTarget);
@@ -488,6 +545,7 @@
       successSlug = draft.slug;
       successTarget = publishTarget;
       editingPublicationId = "";
+      pdfReplaceVersion = "";
       await ensureLibraryLoaded(true);
       return res;
     } finally {
@@ -500,6 +558,8 @@
     editingPublicationId = "";
     draft = defaultDraft();
     pdfFile = null;
+    pdfFileKey = "";
+    pdfReplaceVersion = "";
     pdfMeta = null;
     coverMode = "template";
     coverVariants = null;
@@ -576,7 +636,7 @@
         ${renderEditBanner()}
 
         <label class="lib-admin-drop ${dragActive ? "is-dragover" : ""}" id="libAdminDropZone">
-          <input id="libAdminPdfInput" type="file" accept="application/pdf,.pdf">
+          <input id="libAdminPdfInput" type="file" accept="application/pdf,.pdf,application/octet-stream">
           <b>${isEditing ? "Neues PDF wählen (optional)" : "PDF hier hineinziehen"}</b>
           <span>oder Datei auswählen</span>
         </label>
@@ -619,9 +679,10 @@
           </div>
         </details>
 
+        ${processingPdf ? `<div class="lib-admin-progress" role="status"><b>PDF wird verarbeitet …</b><p class="lib-admin-category">Bitte kurz warten — besonders bei großen Dateien auf dem iPad.</p></div>` : ""}
         ${renderProgress()}
 
-        <div class="lib-admin-actions" id="libAdminActions" style="${pdfReady ? "" : "display:none"}">
+        <div class="lib-admin-actions" id="libAdminActions" style="${pdfReady && !processingPdf ? "" : "display:none"}">
           <button class="lib-admin-btn" type="button" id="libAdminSaveDraft" ${busy ? "disabled" : ""}>Als Entwurf speichern</button>
           <button class="lib-admin-btn lib-admin-btn-primary" type="button" id="libAdminPublish" ${busy || !canPublish() ? "disabled" : ""}>In Test-Bibliothek veröffentlichen</button>
           <button class="lib-admin-btn lib-admin-btn-live" type="button" id="libAdminPublishLive" ${busy || !canPublish() ? "disabled" : ""} title="Veröffentlicht in der Besucher-App (Live-Pfad)">In Besucher-App veröffentlichen</button>
@@ -740,9 +801,10 @@
       if (!file) return;
       try {
         await onPdfSelected(file);
-        safeRender();
+        safeRender({ force: true });
       } catch (e) {
         toast(e.message || "PDF konnte nicht gelesen werden");
+        safeRender({ force: true });
       }
     });
 
@@ -751,9 +813,12 @@
       if (!file) return;
       try {
         await onPdfSelected(file);
-        safeRender();
+        safeRender({ force: true });
       } catch (e) {
         toast(e.message || "PDF konnte nicht gelesen werden");
+        safeRender({ force: true });
+      } finally {
+        ev.target.value = "";
       }
     });
 
