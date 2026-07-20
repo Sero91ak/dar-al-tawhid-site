@@ -20,6 +20,7 @@ on:
       - cloudflare/kurzlink-admin.js
       - cloudflare/zakat-prices.js
       - cloudflare/zakat-admin.js
+      - cloudflare/library-admin.js
       - .github/workflows/deploy-admin-publisher.yml
       - .github/workflows/feed-bg-auto-sync.yml
 
@@ -76,12 +77,13 @@ jobs:
             HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health")"
             echo "Versuch ${attempt}: $HEALTH"
             if printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true' \
-              && printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"'; then
+              && printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"' \
+              && printf '%s' "$HEALTH" | grep -q '"libraryApi":"v1"'; then
               exit 0
             fi
             sleep 15
           done
-          echo "::error::Worker-Binding nach Deploy nicht aktiv (prayerStatusStore / cron-v3)"
+          echo "::error::Worker-Binding nach Deploy nicht aktiv (prayerStatusStore / cron-v3 / libraryApi)"
           exit 1
 
       - name: Refresh prayer push live status immediately

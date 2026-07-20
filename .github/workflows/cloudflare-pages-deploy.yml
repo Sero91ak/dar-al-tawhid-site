@@ -16,6 +16,8 @@ on:
       - content/**
       - data/**
       - admin/index.html
+      - admin/library-*.js
+      - admin/library-admin.css
       - admin/quiz-stats-manager.js
       - wrangler.toml
       - .assetsignore
