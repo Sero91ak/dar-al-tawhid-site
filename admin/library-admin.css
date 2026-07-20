@@ -340,15 +340,75 @@
   color: var(--muted);
 }
 
-.lib-admin-list {
-  border-top: 1px solid rgba(239, 215, 142, 0.1);
-  padding-top: 16px;
+.lib-admin-manage {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(239, 215, 142, 0.22);
+  background: linear-gradient(180deg, rgba(239, 215, 142, 0.07), rgba(255, 255, 255, 0.02));
 }
 
-.lib-admin-list h3 {
-  margin: 0 0 10px;
-  font-size: 0.9rem;
+.lib-admin-manage-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.lib-admin-manage-head h2 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
   color: var(--ink);
+}
+
+.lib-admin-manage-head p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+  max-width: 52ch;
+}
+
+.lib-admin-manage-list {
+  display: grid;
+  gap: 10px;
+}
+
+.lib-admin-manage-empty {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(239, 215, 142, 0.18);
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.lib-admin-edit-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(140, 190, 230, 0.28);
+  background: rgba(40, 90, 140, 0.12);
+}
+
+.lib-admin-edit-banner b {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.lib-admin-edit-banner p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 .lib-admin-list-item {
@@ -356,22 +416,67 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(239, 215, 142, 0.08);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 215, 142, 0.1);
+  background: rgba(255, 255, 255, 0.02);
   font-size: 0.8rem;
 }
 
-.lib-admin-list-item:last-child {
-  border-bottom: 0;
+.lib-admin-list-item.is-online {
+  border-color: rgba(120, 200, 140, 0.22);
+}
+
+.lib-admin-list-item.is-archived {
+  opacity: 0.72;
+}
+
+.lib-admin-list-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 220px;
+}
+
+.lib-admin-list-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .lib-admin-list-item b {
   color: var(--ink);
 }
 
-.lib-admin-list-item span {
+.lib-admin-list-meta {
   color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.lib-admin-status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--muted);
+  border: 1px solid rgba(239, 215, 142, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lib-admin-list-item.is-online .lib-admin-status-pill {
+  color: #b8e8c4;
+  border-color: rgba(120, 200, 140, 0.28);
+  background: rgba(40, 90, 60, 0.18);
+}
+
+.lib-admin-list-item.is-draft .lib-admin-status-pill {
+  color: #ffd9a0;
+  border-color: rgba(255, 196, 120, 0.28);
 }
 
 .lib-admin-list-actions {
