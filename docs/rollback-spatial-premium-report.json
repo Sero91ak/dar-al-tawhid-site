@@ -1,0 +1,48 @@
+{
+  "title": "Rollback Spatial Premium / 3D-Redesign",
+  "completedAt": "2026-07-20T09:50:00.000Z",
+  "originalCommitSha": "b7d4b7ac75b635933665d56d7b59bae98f1492ba",
+  "baselineCommitSha": "7a6ef0f8bcbce45c84281a8b83e61911d6f7e3cc",
+  "firstRedesignCommit": "5f88b9c3",
+  "lastRedesignCommit": "86e87d9e",
+  "mergeRedesignCommit": "249dbd75",
+  "revertedCommits": [
+    "5f88b9c3 feat(test): Spatial Premium 2026 — Designsystem & Pilot Phase 1–4",
+    "5151eae6 fix(test): Spatial Premium sichtbar + Deploy-Guard + Cache v285",
+    "1050baee feat(test): Spatial Premium Phase 5",
+    "3c6155b8 fix(test): v287 Cache-Refresh erzwingen",
+    "a4b099d9 feat(test): Spatial Premium Phase 6+7",
+    "5abfebb1 feat(test): Global Premium Audit Phase 1+2",
+    "561e19ba feat(test): Global Premium Audit Phase 3–6",
+    "86e87d9e fix(test): Deploy-Trigger für styles/",
+    "238ec525 merge: Global Premium Audit Phase 3–6 in Dar Test"
+  ],
+  "method": "Selective file restore from baseline 7a6ef0f8 + delete redesign-only assets (no git reset --hard)",
+  "preservedIndependentChanges": [
+    "index.html: maybeAutoApplyShellUpdate() stub (Version-Guard)",
+    "All content/posts, duas, quran data after baseline",
+    "Push schedules, Zakat cache, admin changes",
+    "Post sahaba-451-gib-jedem-sein-recht.md and feed assets"
+  ],
+  "removedAssets": [
+    "assets/spatial/",
+    "assets/icons/features/",
+    "assets/icons/ui/",
+    "assets/dar-components.js",
+    "styles/",
+    "docs/global-premium-audit-phase1.json",
+    "docs/global-premium-audit-phase6.json",
+    "scripts/global-premium-audit.js",
+    "scripts/generate-spatial-feature-icons.mjs"
+  ],
+  "restoredFiles": [
+    "test/index.html",
+    "test/version.json",
+    "service-worker.js (baseline + CACHE v291 for PWA delivery)",
+    ".github/workflows/cloudflare-pages-deploy.yml"
+  ],
+  "buildId": "app-shell-v283",
+  "swCache": "dar-al-tawhid-offline-light-v291",
+  "testUrl": "https://dar-al-tawhid.de/test/",
+  "visitorUrl": "https://dar-al-tawhid.de/"
+}
