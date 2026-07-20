@@ -41,6 +41,7 @@
   let publishStep = 0;
   let successSlug = "";
   let successTarget = "test";
+  let editingPublicationId = "";
   let coverTimer = null;
   let dragActive = false;
 
@@ -240,19 +241,77 @@
     if (!draft.version) draft.version = "1.0";
   }
 
-  async function onPdfSelected(file) {
+  function bumpVersion(version) {
+    const parts = String(version || "1.0").trim().split(".");
+    const major = Number(parts[0]) || 1;
+    const minor = (Number(parts[1]) || 0) + 1;
+    return `${major}.${minor}`;
+  }
+
+  async function loadPublicationForEdit(id) {
+    await ensureLibraryLoaded(true);
+    const pub = (catalog.publications || []).find((p) => p.id === id);
+    if (!pub) throw new Error("Veröffentlichung nicht gefunden");
+    editingPublicationId = pub.id;
+    draft = {
+      ...pub,
+      tags: Array.isArray(pub.tags) ? [...pub.tags] : [],
+      searchAliases: Array.isArray(pub.searchAliases) ? [...pub.searchAliases] : [],
+      coverUrls: pub.coverUrls ? { ...pub.coverUrls } : {}
+    };
+    pdfFile = null;
+    pdfMeta = {
+      fileName: String(pub.pdfUrl || "").split("/").pop() || "bestehende-datei.pdf",
+      pageCount: Number(pub.pageCount) || 0,
+      fileSize: pub.fileSize || "",
+      title: pub.title
+    };
+    coverMode = "template";
+    coverVariants = null;
+    const coverSrc = pub.coverUrls?.medium || pub.coverUrl || "";
+    if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
+    coverPreviewUrl = coverSrc || "";
+    categorySuggestion = pub.category ? { category: pub.category, topic: pub.topic || pub.category, confidence: "high" } : null;
+    showCategoryEdit = true;
+    successSlug = "";
+    publishStep = 0;
+    if (global.DARLibraryCoverGen && draft.title) {
+      try {
+        await refreshCoverPreview();
+      } catch (e) {
+        /* bestehendes Cover bleibt sichtbar */
+      }
+    }
+    setTimeout(() => {
+      document.getElementById("libAdminEditPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  }
+
+  async function onPdfSelected(file, options) {
+    const replaceMode = options?.replace === true || !!editingPublicationId;
     pdfFile = file;
     pdfMeta = await analyzePdfFile(file);
-    draft = defaultDraft();
-    draft.id = nextPublicationId();
-    draft.title = pdfMeta.title;
-    draft.slug = nextUniqueSlug(draft.title, draft.id);
+    if (!replaceMode) {
+      draft = defaultDraft();
+      draft.id = nextPublicationId();
+      draft.title = pdfMeta.title;
+      draft.slug = nextUniqueSlug(draft.title, draft.id);
+      editingPublicationId = "";
+    } else if (draft) {
+      draft.version = bumpVersion(draft.version);
+      if (!draft.title) draft.title = pdfMeta.title;
+    } else {
+      draft = defaultDraft();
+      draft.title = pdfMeta.title;
+    }
     draft.pageCount = pdfMeta.pageCount;
     draft.fileSize = pdfMeta.fileSize;
     draft.fileHash = pdfMeta.fileHash;
-    await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
-    applyCategorySuggestion();
-    coverMode = "template";
+    if (!replaceMode) {
+      await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
+      applyCategorySuggestion();
+      coverMode = "template";
+    }
     await refreshCoverPreview();
     successSlug = "";
     successTarget = "test";
@@ -311,7 +370,9 @@
   }
 
   function canPublish() {
-    return !!(pdfFile && draft?.title?.trim() && coverVariants && (draft.category || categorySuggestion?.category));
+    const hasPdf = !!(pdfFile || draft?.pdfUrl);
+    const hasCover = !!(coverVariants || draft?.coverUrl);
+    return !!(hasPdf && draft?.title?.trim() && hasCover && (draft.category || categorySuggestion?.category));
   }
 
   function readMainForm() {
@@ -364,8 +425,8 @@
         throw new Error("Bitte wähle eine Kategorie aus");
       }
     }
-    if (!pdfFile) throw new Error("PDF fehlt");
-    if (!coverVariants) throw new Error("Cover fehlt");
+    if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
+    if (!coverVariants && !draft.coverUrl) throw new Error("Cover fehlt");
     if (publishTarget === "live") {
       const ok = confirm("Diese Veröffentlichung in der Besucher-App (Live) veröffentlichen?\n\nDie Dateien werden in den Live-Bibliotheks-Pfad geschrieben.");
       if (!ok) throw new Error("Live-Veröffentlichung abgebrochen");
@@ -376,15 +437,17 @@
     try {
       publishStep = 1;
       renderShell();
-      await analyzePdfFile(pdfFile);
+      if (pdfFile) await analyzePdfFile(pdfFile);
       publishStep = 2;
       renderShell();
-      if (coverMode === "template") await refreshCoverPreview();
+      if (coverMode === "template" || !coverVariants) await refreshCoverPreview();
       publishStep = 3;
       renderShell();
       const libraryFiles = await buildLibraryFiles(draft.id, publishTarget);
+      const wasPublished = draft.status === "published" || draft.status === "updated";
+      const nextStatus = editingPublicationId && wasPublished ? "updated" : "published";
       const res = await workerPost("api/admin/library/save", {
-        publication: { ...draft, status: "published", isNew: !!draft.isNew },
+        publication: { ...draft, status: nextStatus, isNew: !!draft.isNew },
         libraryFiles,
         publish: true,
         target: publishTarget
@@ -392,6 +455,7 @@
       publishStep = 4;
       successSlug = draft.slug;
       successTarget = publishTarget;
+      editingPublicationId = "";
       await ensureLibraryLoaded(true);
       return res;
     } finally {
@@ -400,6 +464,7 @@
   }
 
   function resetUploadForm() {
+    editingPublicationId = "";
     draft = defaultDraft();
     pdfFile = null;
     pdfMeta = null;
@@ -456,21 +521,23 @@
 
   function renderUploadForm() {
     if (!draft) draft = defaultDraft();
-    const pdfReady = !!pdfMeta;
-    return `<div class="lib-admin-layout">
+    const isEditing = !!editingPublicationId;
+    const pdfReady = !!pdfMeta || (isEditing && !!draft.pdfUrl);
+    return `<div class="lib-admin-layout" id="libAdminUploadSection">
       <div class="lib-admin-main">
         <header class="lib-admin-head">
-          <h2>Neue Veröffentlichung</h2>
-          <p>PDF hochladen — Test-Bibliothek oder Besucher-App (Live) veröffentlichen</p>
+          <h2>${isEditing ? "Veröffentlichung bearbeiten" : "Neue Veröffentlichung"}</h2>
+          <p>${isEditing ? "Metadaten anpassen oder PDF ersetzen, dann erneut veröffentlichen." : "PDF hochladen — Test-Bibliothek oder Besucher-App (Live) veröffentlichen."}</p>
         </header>
+        ${renderEditBanner()}
 
         <label class="lib-admin-drop ${dragActive ? "is-dragover" : ""}" id="libAdminDropZone">
           <input id="libAdminPdfInput" type="file" accept="application/pdf,.pdf">
-          <b>PDF hier hineinziehen</b>
-          <span>oder Datei auswählen</span>
+          <b>${isEditing ? "Neues PDF wählen (ersetzt die bestehende Datei)" : "PDF hier hineinziehen"}</b>
+          <span>${isEditing ? "optional — nur bei falschem PDF" : "oder Datei auswählen"}</span>
         </label>
 
-        ${pdfReady ? `<p class="lib-admin-pdf-meta"><b>${esc(pdfMeta.fileName)}</b><br>${esc(String(pdfMeta.pageCount))} Seiten · ${esc(pdfMeta.fileSize)} · PDF geprüft</p>` : ""}
+        ${pdfReady ? `<p class="lib-admin-pdf-meta"><b>${esc(pdfMeta?.fileName || "Bestehende PDF")}</b><br>${pdfMeta?.pageCount ? `${esc(String(pdfMeta.pageCount))} Seiten · ` : ""}${esc(pdfMeta?.fileSize || draft.fileSize || "PDF bereit")}${pdfFile ? " · PDF geprüft" : editingPublicationId ? " · Ersetzen durch neues PDF möglich" : ""}</p>` : ""}
 
         <label class="lib-admin-field" id="libAdminTitleWrap" style="${pdfReady ? "" : "display:none"}">
           <span>Titel</span>
@@ -549,9 +616,18 @@
     return map[String(status || "").trim()] || String(status || "—");
   }
 
+  function statusClassAdmin(status) {
+    const s = String(status || "");
+    if (s === "published" || s === "updated" || s === "preparing") return "is-online";
+    if (s === "archived") return "is-archived";
+    if (s === "draft") return "is-draft";
+    return "";
+  }
+
   function renderListActions(pub) {
     const status = String(pub.status || "");
     const actions = [];
+    actions.push(`<button class="lib-admin-btn lib-admin-btn-primary" type="button" data-lib-edit="${esc(pub.id)}">Bearbeiten</button>`);
     if (status === "published" || status === "updated" || status === "preparing") {
       actions.push(`<button class="lib-admin-btn lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(pub.id)}">Offline nehmen</button>`);
     }
@@ -564,11 +640,45 @@
 
   function renderList() {
     const items = (catalog.publications || []).slice().sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
-    if (!items.length) return `<p class="lib-admin-category">Noch keine Veröffentlichungen vorhanden.</p>`;
-    return items.map((p) => `<div class="lib-admin-list-item">
-      <div><b>${esc(p.title)}</b><br><span>${esc(p.category || "—")} · ${esc(statusLabelAdmin(p.status))} · v${esc(p.version || "")}</span></div>
+    if (!items.length) {
+      return `<p class="lib-admin-manage-empty">Noch keine Veröffentlichungen im Katalog. Nach dem ersten Upload erscheinen PDFs hier zum Bearbeiten, Offline nehmen, Archivieren oder Löschen.</p>`;
+    }
+    return items.map((p) => `<article class="lib-admin-list-item ${statusClassAdmin(p.status)}">
+      <div class="lib-admin-list-main">
+        <div class="lib-admin-list-title-row">
+          <b>${esc(p.title)}</b>
+          <span class="lib-admin-status-pill">${esc(statusLabelAdmin(p.status))}</span>
+        </div>
+        <span class="lib-admin-list-meta">${esc(p.category || "—")} · v${esc(p.version || "")}${p.updatedAt ? ` · ${esc(p.updatedAt)}` : ""}</span>
+      </div>
       <div class="lib-admin-list-actions">${renderListActions(p)}</div>
-    </div>`).join("");
+    </article>`).join("");
+  }
+
+  function renderEditBanner() {
+    if (!editingPublicationId || !draft) return "";
+    return `<div class="lib-admin-edit-banner" id="libAdminEditPanel">
+      <div>
+        <b>Bearbeitung: ${esc(draft.title || "Veröffentlichung")}</b>
+        <p>Metadaten ändern oder unten ein neues PDF wählen, um die Datei zu ersetzen. Anschließend erneut veröffentlichen.</p>
+      </div>
+      <button class="lib-admin-btn" type="button" id="libAdminCancelEdit">Bearbeitung abbrechen</button>
+    </div>`;
+  }
+
+  function renderManagePanel() {
+    const items = catalog.publications || [];
+    const publishedCount = items.filter((p) => ["published", "updated", "preparing"].includes(String(p.status || ""))).length;
+    return `<section class="lib-admin-manage" id="libAdminManagePanel">
+      <header class="lib-admin-manage-head">
+        <div>
+          <h2>Bestehende Veröffentlichungen verwalten</h2>
+          <p>${items.length ? `${items.length} Eintrag${items.length === 1 ? "" : "e"} · ${publishedCount} online` : "Bearbeiten, offline nehmen, archivieren, löschen oder PDF ersetzen."}</p>
+        </div>
+        <button class="lib-admin-btn" type="button" id="libAdminRefreshList">Liste aktualisieren</button>
+      </header>
+      <div class="lib-admin-manage-list">${renderList()}</div>
+    </section>`;
   }
 
   function renderLibraryTab() {
@@ -576,11 +686,9 @@
       return `<section class="lib-admin"><p class="lib-admin-category">Bibliothek wird geladen…</p></section>`;
     }
     return `<section class="lib-admin">
-      ${successSlug ? renderSuccess() : renderUploadForm()}
-      <section class="lib-admin-list">
-        <h3>Bestehende Veröffentlichungen</h3>
-        ${renderList()}
-      </section>
+      ${successSlug ? renderSuccess() : ""}
+      ${renderManagePanel()}
+      ${successSlug ? "" : renderUploadForm()}
     </section>`;
   }
 
@@ -716,12 +824,40 @@
       renderShell();
     });
 
+    document.getElementById("libAdminRefreshList")?.addEventListener("click", async () => {
+      try {
+        await ensureLibraryLoaded(true);
+        toast("Liste aktualisiert");
+        renderShell();
+      } catch (e) {
+        toast(e.message || "Liste konnte nicht geladen werden");
+      }
+    });
+
+    document.getElementById("libAdminCancelEdit")?.addEventListener("click", () => {
+      resetUploadForm();
+      renderShell();
+    });
+
+    document.querySelectorAll("[data-lib-edit]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-lib-edit");
+        try {
+          await loadPublicationForEdit(id);
+          renderShell();
+        } catch (e) {
+          toast(e.message || "Bearbeitung konnte nicht gestartet werden");
+        }
+      });
+    });
+
     document.querySelectorAll("[data-lib-archive]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-archive");
         if (!confirm("Veröffentlichung archivieren? Sie wird für Besucher ausgeblendet, bleibt aber im Admin erhalten.")) return;
         try {
           await workerPost("api/admin/library/delete", { id, action: "archive" });
+          if (editingPublicationId === id) resetUploadForm();
           toast("Archiviert");
           await ensureLibraryLoaded(true);
           renderShell();
@@ -737,6 +873,7 @@
         if (!confirm("Veröffentlichung offline nehmen? Sie verschwindet von der Bibliotheksseite und kann bearbeitet sowie erneut veröffentlicht werden.")) return;
         try {
           await workerPost("api/admin/library/delete", { id, action: "unpublish" });
+          if (editingPublicationId === id) resetUploadForm();
           toast("Offline genommen — Entwurf");
           await ensureLibraryLoaded(true);
           renderShell();
@@ -752,6 +889,7 @@
         if (!confirm("Veröffentlichung endgültig löschen? PDF, Cover und Eintrag werden entfernt.")) return;
         try {
           await workerPost("api/admin/library/delete", { id, action: "delete" });
+          if (editingPublicationId === id) resetUploadForm();
           toast("Gelöscht");
           await ensureLibraryLoaded(true);
           renderShell();
