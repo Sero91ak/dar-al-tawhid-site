@@ -49,6 +49,16 @@
   let manageFilter = "all";
   let manageSearch = "";
   let manageSearchTimer = null;
+  let processingPdf = false;
+
+  function notify(msg) {
+    if (typeof global.toast === "function") global.toast(msg);
+  }
+
+  function isBibliothekTab() {
+    if (typeof global.getAdminCurrentTab === "function") return global.getAdminCurrentTab() === "bibliothek";
+    return true;
+  }
 
   function esc(s) {
     return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -103,8 +113,7 @@
   }
 
   function renderLibraryShell() {
-    if (typeof global.renderShell !== "function") return;
-    if (global.currentTab !== "bibliothek") return;
+    if (typeof global.renderShell !== "function" || !isBibliothekTab()) return;
     try {
       global.renderShell();
     } catch (e) {
@@ -113,7 +122,11 @@
   }
 
   function isLibraryBusy() {
-    return !!busy;
+    return !!(busy || processingPdf);
+  }
+
+  function hasLibraryWork() {
+    return !!(busy || processingPdf || manageModalOpen || pdfFile || pdfMeta || successSlug || editingPublicationId || (draft && (draft.title || draft.pdfUrl)));
   }
 
   function fileToBase64(file) {
@@ -334,34 +347,39 @@
   }
 
   async function onPdfSelected(file, options) {
-    const replaceMode = options?.replace === true || !!editingPublicationId;
-    pdfFile = file;
-    pdfMeta = await analyzePdfFile(file);
-    if (!replaceMode) {
-      draft = defaultDraft();
-      draft.id = nextPublicationId();
-      draft.title = pdfMeta.title;
-      draft.slug = nextUniqueSlug(draft.title, draft.id);
-      editingPublicationId = "";
-    } else if (draft) {
-      draft.version = bumpVersion(draft.version);
-      if (!draft.title) draft.title = pdfMeta.title;
-    } else {
-      draft = defaultDraft();
-      draft.title = pdfMeta.title;
+    processingPdf = true;
+    try {
+      const replaceMode = options?.replace === true || !!editingPublicationId;
+      pdfFile = file;
+      pdfMeta = await analyzePdfFile(file);
+      if (!replaceMode) {
+        draft = defaultDraft();
+        draft.id = nextPublicationId();
+        draft.title = pdfMeta.title;
+        draft.slug = nextUniqueSlug(draft.title, draft.id);
+        editingPublicationId = "";
+      } else if (draft) {
+        draft.version = bumpVersion(draft.version);
+        if (!draft.title) draft.title = pdfMeta.title;
+      } else {
+        draft = defaultDraft();
+        draft.title = pdfMeta.title;
+      }
+      draft.pageCount = pdfMeta.pageCount;
+      draft.fileSize = pdfMeta.fileSize;
+      draft.fileHash = pdfMeta.fileHash;
+      if (!replaceMode) {
+        await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
+        applyCategorySuggestion();
+        coverMode = "template";
+      }
+      await refreshCoverPreview();
+      successSlug = "";
+      successTarget = "test";
+      publishStep = 0;
+    } finally {
+      processingPdf = false;
     }
-    draft.pageCount = pdfMeta.pageCount;
-    draft.fileSize = pdfMeta.fileSize;
-    draft.fileHash = pdfMeta.fileHash;
-    if (!replaceMode) {
-      await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
-      applyCategorySuggestion();
-      coverMode = "template";
-    }
-    await refreshCoverPreview();
-    successSlug = "";
-    successTarget = "test";
-    publishStep = 0;
   }
 
   async function refreshCoverPreview() {
@@ -866,19 +884,30 @@
   }
 
   function bindLibraryTab() {
-    const dropZone = document.getElementById("libAdminDropZone");
-    const pdfInput = document.getElementById("libAdminPdfInput");
+    const panel = document.getElementById("panel");
+    if (!panel || global.__darLibraryPanelDelegation) return;
+    global.__darLibraryPanelDelegation = true;
 
-    dropZone?.addEventListener("dragover", (ev) => {
+    panel.addEventListener("dragover", (ev) => {
+      if (!isBibliothekTab()) return;
+      const dropZone = ev.target.closest("#libAdminDropZone");
+      if (!dropZone) return;
       ev.preventDefault();
       dragActive = true;
       dropZone.classList.add("is-dragover");
     });
-    dropZone?.addEventListener("dragleave", () => {
+
+    panel.addEventListener("dragleave", (ev) => {
+      const dropZone = ev.target.closest("#libAdminDropZone");
+      if (!dropZone) return;
       dragActive = false;
       dropZone.classList.remove("is-dragover");
     });
-    dropZone?.addEventListener("drop", async (ev) => {
+
+    panel.addEventListener("drop", async (ev) => {
+      if (!isBibliothekTab()) return;
+      const dropZone = ev.target.closest("#libAdminDropZone");
+      if (!dropZone) return;
       ev.preventDefault();
       dragActive = false;
       dropZone.classList.remove("is-dragover");
@@ -888,28 +917,29 @@
         await onPdfSelected(file);
         renderLibraryShell();
       } catch (e) {
-        toast(e.message || "PDF konnte nicht gelesen werden");
+        notify(e.message || "PDF konnte nicht gelesen werden");
       }
     });
 
-    pdfInput?.addEventListener("change", async (ev) => {
-      const file = ev.target.files?.[0];
-      if (!file) return;
-      try {
-        await onPdfSelected(file);
-        renderLibraryShell();
-      } catch (e) {
-        toast(e.message || "PDF konnte nicht gelesen werden");
+    panel.addEventListener("change", async (ev) => {
+      if (!isBibliothekTab()) return;
+      const target = ev.target;
+      if (!(target instanceof HTMLElement)) return;
+
+      if (target.id === "libAdminPdfInput") {
+        const file = target.files?.[0];
+        if (!file) return;
+        try {
+          await onPdfSelected(file);
+          renderLibraryShell();
+        } catch (e) {
+          notify(e.message || "PDF konnte nicht gelesen werden");
+        }
+        return;
       }
-    });
 
-    document.getElementById("libAdminTitle")?.addEventListener("input", () => {
-      scheduleCoverRefresh();
-    });
-
-    document.querySelectorAll('input[name="libCoverMode"]').forEach((input) => {
-      input.addEventListener("change", async () => {
-        coverMode = input.value;
+      if (target instanceof HTMLInputElement && target.name === "libCoverMode") {
+        coverMode = target.value;
         readMainForm();
         try {
           if (coverMode === "upload") {
@@ -919,195 +949,210 @@
           await refreshCoverPreview();
           renderLibraryShell();
         } catch (e) {
-          toast(e.message || "Cover konnte nicht erstellt werden");
+          notify(e.message || "Cover konnte nicht erstellt werden");
           coverMode = "template";
           renderLibraryShell();
         }
-      });
-    });
-
-    document.getElementById("libAdminCoverInput")?.addEventListener("change", async (ev) => {
-      const file = ev.target.files?.[0];
-      if (!file) return;
-      try {
-        await onCoverUpload(file);
-        renderLibraryShell();
-      } catch (e) {
-        toast(e.message || "Cover-Upload fehlgeschlagen");
+        return;
       }
-    });
 
-    document.getElementById("libAdminChangeCategory")?.addEventListener("click", (ev) => {
-      ev.preventDefault();
-      showCategoryEdit = true;
-      renderLibraryShell();
-    });
-
-    document.getElementById("libAdminSaveDraft")?.addEventListener("click", async () => {
-      try {
-        await saveDraft();
-        toast("Entwurf gespeichert");
-        await ensureLibraryLoaded(true);
-        renderLibraryShell();
-      } catch (e) {
-        toast(e.message || "Speichern fehlgeschlagen");
-      }
-    });
-
-    document.getElementById("libAdminPublish")?.addEventListener("click", async () => {
-      try {
-        await publishDraft("test");
-        toast("Veröffentlicht (Test)");
-        renderLibraryShell();
-      } catch (e) {
-        toast(e.message || "Veröffentlichung fehlgeschlagen");
-        publishStep = 0;
-        renderLibraryShell();
-      }
-    });
-
-    document.getElementById("libAdminPublishLive")?.addEventListener("click", async () => {
-      try {
-        await publishDraft("live");
-        toast("Veröffentlicht (Besucher-App / Live)");
-        renderLibraryShell();
-      } catch (e) {
-        toast(e.message || "Live-Veröffentlichung fehlgeschlagen");
-        publishStep = 0;
-        renderLibraryShell();
-      }
-    });
-
-    document.getElementById("libAdminNewUpload")?.addEventListener("click", () => {
-      resetUploadForm();
-      renderLibraryShell();
-    });
-
-    document.getElementById("libAdminRefreshList")?.addEventListener("click", async () => {
-      try {
-        await ensureLibraryLoaded(true);
-        toast("Liste aktualisiert");
-        renderLibraryShell();
-      } catch (e) {
-        toast(e.message || "Liste konnte nicht geladen werden");
-      }
-    });
-
-    document.getElementById("libAdminOpenManage")?.addEventListener("click", () => {
-      openManageModal();
-      renderLibraryShell();
-    });
-
-    document.getElementById("libAdminCloseManage")?.addEventListener("click", () => {
-      closeManageModal();
-      renderLibraryShell();
-    });
-
-    document.getElementById("libAdminCloseManageBackdrop")?.addEventListener("click", () => {
-      closeManageModal();
-      renderLibraryShell();
-    });
-
-    document.getElementById("libAdminManageSearch")?.addEventListener("input", (ev) => {
-      manageSearch = ev.target.value || "";
-      if (manageSearchTimer) clearTimeout(manageSearchTimer);
-      manageSearchTimer = setTimeout(() => {
-        ensureManageSelection();
-        renderLibraryShell();
-        const input = document.getElementById("libAdminManageSearch");
-        if (input) {
-          input.focus();
-          const len = input.value.length;
-          input.setSelectionRange(len, len);
-        }
-      }, 180);
-    });
-
-    document.querySelectorAll("[data-lib-filter]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        manageFilter = btn.getAttribute("data-lib-filter") || "all";
-        ensureManageSelection();
-        renderLibraryShell();
-      });
-    });
-
-    document.querySelectorAll("[data-lib-select]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        manageSelectedId = btn.getAttribute("data-lib-select") || "";
-        renderLibraryShell();
-      });
-    });
-
-    document.getElementById("libAdminCancelEdit")?.addEventListener("click", () => {
-      resetUploadForm();
-      renderLibraryShell();
-    });
-
-    document.querySelectorAll("[data-lib-edit]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-lib-edit");
+      if (target.id === "libAdminCoverInput") {
+        const file = target.files?.[0];
+        if (!file) return;
         try {
-          await loadPublicationForEdit(id);
+          await onCoverUpload(file);
+          renderLibraryShell();
+        } catch (e) {
+          notify(e.message || "Cover-Upload fehlgeschlagen");
+        }
+      }
+    });
+
+    panel.addEventListener("input", (ev) => {
+      if (!isBibliothekTab()) return;
+      const target = ev.target;
+      if (!(target instanceof HTMLElement)) return;
+      if (target.id === "libAdminTitle") scheduleCoverRefresh();
+      if (target.id === "libAdminManageSearch") {
+        manageSearch = target.value || "";
+        if (manageSearchTimer) clearTimeout(manageSearchTimer);
+        manageSearchTimer = setTimeout(() => {
+          ensureManageSelection();
+          renderLibraryShell();
+          const input = document.getElementById("libAdminManageSearch");
+          if (input) {
+            input.focus();
+            const len = input.value.length;
+            input.setSelectionRange(len, len);
+          }
+        }, 180);
+      }
+    });
+
+    panel.addEventListener("click", async (ev) => {
+      if (!isBibliothekTab()) return;
+      const target = ev.target instanceof HTMLElement ? ev.target : null;
+      if (!target) return;
+
+      if (target.closest("#libAdminChangeCategory")) {
+        ev.preventDefault();
+        showCategoryEdit = true;
+        renderLibraryShell();
+        return;
+      }
+
+      const btn = target.closest("button");
+      if (!btn) return;
+
+      if (btn.id === "libAdminSaveDraft") {
+        try {
+          await saveDraft();
+          notify("Entwurf gespeichert");
+          await ensureLibraryLoaded(true);
+          renderLibraryShell();
+        } catch (e) {
+          notify(e.message || "Speichern fehlgeschlagen");
+        }
+        return;
+      }
+
+      if (btn.id === "libAdminPublish") {
+        try {
+          await publishDraft("test");
+          notify("Veröffentlicht (Test)");
+          renderLibraryShell();
+        } catch (e) {
+          notify(e.message || "Veröffentlichung fehlgeschlagen");
+          publishStep = 0;
+          renderLibraryShell();
+        }
+        return;
+      }
+
+      if (btn.id === "libAdminPublishLive") {
+        try {
+          await publishDraft("live");
+          notify("Veröffentlicht (Besucher-App / Live)");
+          renderLibraryShell();
+        } catch (e) {
+          notify(e.message || "Live-Veröffentlichung fehlgeschlagen");
+          publishStep = 0;
+          renderLibraryShell();
+        }
+        return;
+      }
+
+      if (btn.id === "libAdminNewUpload") {
+        resetUploadForm();
+        renderLibraryShell();
+        return;
+      }
+
+      if (btn.id === "libAdminRefreshList") {
+        try {
+          await ensureLibraryLoaded(true);
+          notify("Liste aktualisiert");
+          renderLibraryShell();
+        } catch (e) {
+          notify(e.message || "Liste konnte nicht geladen werden");
+        }
+        return;
+      }
+
+      if (btn.id === "libAdminOpenManage") {
+        openManageModal();
+        renderLibraryShell();
+        return;
+      }
+
+      if (btn.id === "libAdminCloseManage" || btn.id === "libAdminCloseManageBackdrop") {
+        closeManageModal();
+        renderLibraryShell();
+        return;
+      }
+
+      if (btn.id === "libAdminCancelEdit") {
+        resetUploadForm();
+        renderLibraryShell();
+        return;
+      }
+
+      const filter = btn.getAttribute("data-lib-filter");
+      if (filter) {
+        manageFilter = filter;
+        ensureManageSelection();
+        renderLibraryShell();
+        return;
+      }
+
+      const selectId = btn.getAttribute("data-lib-select");
+      if (selectId) {
+        manageSelectedId = selectId;
+        renderLibraryShell();
+        return;
+      }
+
+      const editId = btn.getAttribute("data-lib-edit");
+      if (editId) {
+        try {
+          await loadPublicationForEdit(editId);
           closeManageModal();
           renderLibraryShell();
         } catch (e) {
-          toast(e.message || "Bearbeitung konnte nicht gestartet werden");
+          notify(e.message || "Bearbeitung konnte nicht gestartet werden");
         }
-      });
-    });
+        return;
+      }
 
-    document.querySelectorAll("[data-lib-archive]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-lib-archive");
+      const archiveId = btn.getAttribute("data-lib-archive");
+      if (archiveId) {
         if (!confirm("Veröffentlichung archivieren? Sie wird für Besucher ausgeblendet, bleibt aber im Admin erhalten.")) return;
         try {
-          await workerPost("api/admin/library/delete", { id, action: "archive" });
-          if (editingPublicationId === id) resetUploadForm();
-          if (manageSelectedId === id) manageSelectedId = "";
-          toast("Archiviert");
+          await workerPost("api/admin/library/delete", { id: archiveId, action: "archive" });
+          if (editingPublicationId === archiveId) resetUploadForm();
+          if (manageSelectedId === archiveId) manageSelectedId = "";
+          notify("Archiviert");
           await ensureLibraryLoaded(true);
           ensureManageSelection();
           renderLibraryShell();
         } catch (e) {
-          toast(e.message || "Archivieren fehlgeschlagen");
+          notify(e.message || "Archivieren fehlgeschlagen");
         }
-      });
-    });
+        return;
+      }
 
-    document.querySelectorAll("[data-lib-unpublish]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-lib-unpublish");
+      const unpublishId = btn.getAttribute("data-lib-unpublish");
+      if (unpublishId) {
         if (!confirm("Veröffentlichung offline nehmen? Sie verschwindet von der Bibliotheksseite und kann bearbeitet sowie erneut veröffentlicht werden.")) return;
         try {
-          await workerPost("api/admin/library/delete", { id, action: "unpublish" });
-          if (editingPublicationId === id) resetUploadForm();
-          if (manageSelectedId === id) manageSelectedId = "";
-          toast("Offline genommen — Entwurf");
+          await workerPost("api/admin/library/delete", { id: unpublishId, action: "unpublish" });
+          if (editingPublicationId === unpublishId) resetUploadForm();
+          if (manageSelectedId === unpublishId) manageSelectedId = "";
+          notify("Offline genommen — Entwurf");
           await ensureLibraryLoaded(true);
           ensureManageSelection();
           renderLibraryShell();
         } catch (e) {
-          toast(e.message || "Offline nehmen fehlgeschlagen");
+          notify(e.message || "Offline nehmen fehlgeschlagen");
         }
-      });
-    });
+        return;
+      }
 
-    document.querySelectorAll("[data-lib-delete]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-lib-delete");
+      const deleteId = btn.getAttribute("data-lib-delete");
+      if (deleteId) {
         if (!confirm("Veröffentlichung endgültig löschen? PDF, Cover und Eintrag werden entfernt.")) return;
         try {
-          await workerPost("api/admin/library/delete", { id, action: "delete" });
-          if (editingPublicationId === id) resetUploadForm();
-          if (manageSelectedId === id) manageSelectedId = "";
-          toast("Gelöscht");
+          await workerPost("api/admin/library/delete", { id: deleteId, action: "delete" });
+          if (editingPublicationId === deleteId) resetUploadForm();
+          if (manageSelectedId === deleteId) manageSelectedId = "";
+          notify("Gelöscht");
           await ensureLibraryLoaded(true);
           ensureManageSelection();
           renderLibraryShell();
         } catch (e) {
-          toast(e.message || "Löschen fehlgeschlagen");
+          notify(e.message || "Löschen fehlgeschlagen");
         }
-      });
+      }
     });
   }
 
@@ -1122,6 +1167,7 @@
     renderLibraryTab,
     bindLibraryTab,
     isLibraryBusy,
+    hasLibraryWork,
     closeManageModalIfOpen
   };
 })(window);
