@@ -543,7 +543,7 @@ main#panel.panel{
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/library-cover-gen.js?v=4"></script>
-<script src="/admin/library-manager.js?v=6"></script>
+<script src="/admin/library-manager.js?v=7"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=5">
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -610,6 +610,7 @@ function adminEditableTarget(target){return!!(target&&target.closest&&target.clo
 function adminIsEditing(){
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
+  if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
   return tag==="input"||tag==="textarea"||tag==="select"||!!(active&&active.isContentEditable)||Date.now()-lastAdminFormPointerAt<1500;
 }
 document.addEventListener("pointerdown",e=>{if(adminEditableTarget(e.target))lastAdminFormPointerAt=Date.now()},{capture:true,passive:true});
