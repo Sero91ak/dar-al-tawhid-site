@@ -17,6 +17,8 @@
     "86e87d9e fix(test): Deploy-Trigger für styles/",
     "238ec525 merge: Global Premium Audit Phase 3–6 in Dar Test"
   ],
+  "rollbackCommitSha": "c05eeb75a326dce4a7f6f32654fa3a2280dfa243",
+  "rollbackBranchCommit": "fa14c792",
   "method": "Selective file restore from baseline 7a6ef0f8 + delete redesign-only assets (no git reset --hard)",
   "preservedIndependentChanges": [
     "index.html: maybeAutoApplyShellUpdate() stub (Version-Guard)",
