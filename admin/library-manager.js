@@ -44,6 +44,11 @@
   let editingPublicationId = "";
   let coverTimer = null;
   let dragActive = false;
+  let manageModalOpen = false;
+  let manageSelectedId = "";
+  let manageFilter = "all";
+  let manageSearch = "";
+  let manageSearchTimer = null;
 
   function esc(s) {
     return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -253,6 +258,8 @@
     const pub = (catalog.publications || []).find((p) => p.id === id);
     if (!pub) throw new Error("Veröffentlichung nicht gefunden");
     editingPublicationId = pub.id;
+    manageModalOpen = false;
+    manageSelectedId = "";
     draft = {
       ...pub,
       tags: Array.isArray(pub.tags) ? [...pub.tags] : [],
@@ -616,6 +623,55 @@
     return map[String(status || "").trim()] || String(status || "—");
   }
 
+  function publicationFilterMatch(pub, filter) {
+    const status = String(pub.status || "");
+    if (filter === "online") return ["published", "updated", "preparing"].includes(status);
+    if (filter === "offline") return status === "draft";
+    if (filter === "archived") return status === "archived";
+    return true;
+  }
+
+  function getFilteredPublications() {
+    const q = manageSearch.trim().toLowerCase();
+    return (catalog.publications || [])
+      .filter((p) => publicationFilterMatch(p, manageFilter))
+      .filter((p) => {
+        if (!q) return true;
+        return [p.title, p.category, p.topic, p.slug, p.id].some((field) => String(field || "").toLowerCase().includes(q));
+      })
+      .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
+  }
+
+  function countPublicationsByFilter(filter) {
+    return (catalog.publications || []).filter((p) => publicationFilterMatch(p, filter)).length;
+  }
+
+  function openManageModal() {
+    manageModalOpen = true;
+    manageSearch = "";
+    manageFilter = "all";
+    const items = getFilteredPublications();
+    manageSelectedId = items[0]?.id || "";
+  }
+
+  function closeManageModal() {
+    manageModalOpen = false;
+    manageSelectedId = "";
+    manageSearch = "";
+    manageFilter = "all";
+  }
+
+  function ensureManageSelection() {
+    const items = getFilteredPublications();
+    if (!items.length) {
+      manageSelectedId = "";
+      return;
+    }
+    if (!items.some((p) => p.id === manageSelectedId)) {
+      manageSelectedId = items[0].id;
+    }
+  }
+
   function statusClassAdmin(status) {
     const s = String(status || "");
     if (s === "published" || s === "updated" || s === "preparing") return "is-online";
@@ -638,21 +694,75 @@
     return actions.join("");
   }
 
-  function renderList() {
-    const items = (catalog.publications || []).slice().sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
+  function renderManageModalList() {
+    const items = getFilteredPublications();
     if (!items.length) {
-      return `<p class="lib-admin-manage-empty">Noch keine Veröffentlichungen im Katalog. Nach dem ersten Upload erscheinen PDFs hier zum Bearbeiten, Offline nehmen, Archivieren oder Löschen.</p>`;
+      return `<p class="lib-admin-manage-empty">Keine Veröffentlichungen für diesen Filter.</p>`;
     }
-    return items.map((p) => `<article class="lib-admin-list-item ${statusClassAdmin(p.status)}">
-      <div class="lib-admin-list-main">
-        <div class="lib-admin-list-title-row">
-          <b>${esc(p.title)}</b>
-          <span class="lib-admin-status-pill">${esc(statusLabelAdmin(p.status))}</span>
+    return items.map((p) => `<button class="lib-admin-modal-row ${manageSelectedId === p.id ? "is-selected" : ""} ${statusClassAdmin(p.status)}" type="button" data-lib-select="${esc(p.id)}">
+      <span class="lib-admin-modal-row-main">
+        <b>${esc(p.title)}</b>
+        <span>${esc(p.category || "—")} · v${esc(p.version || "")}${p.updatedAt ? ` · ${esc(p.updatedAt)}` : ""}</span>
+      </span>
+      <span class="lib-admin-status-pill">${esc(statusLabelAdmin(p.status))}</span>
+    </button>`).join("");
+  }
+
+  function renderManageModalDetail() {
+    const pub = (catalog.publications || []).find((p) => p.id === manageSelectedId);
+    if (!pub) {
+      return `<div class="lib-admin-modal-detail-empty">
+        <p>Wähle links eine Veröffentlichung aus, um Details und Aktionen zu sehen.</p>
+      </div>`;
+    }
+    const cover = pub.coverUrls?.medium || pub.coverUrl || "";
+    return `<div class="lib-admin-modal-detail">
+      <div class="lib-admin-modal-detail-head">
+        ${cover ? `<div class="lib-admin-modal-cover"><img src="${esc(cover)}" alt=""></div>` : ""}
+        <div class="lib-admin-modal-detail-copy">
+          <h4>${esc(pub.title)}</h4>
+          <p>${esc(pub.category || "—")} · ${esc(statusLabelAdmin(pub.status))} · v${esc(pub.version || "")}</p>
+          <p>${pub.updatedAt ? `Aktualisiert: ${esc(pub.updatedAt)}` : ""}${pub.pageCount ? `${pub.updatedAt ? " · " : ""}${esc(String(pub.pageCount))} Seiten` : ""}${pub.fileSize ? ` · ${esc(pub.fileSize)}` : ""}</p>
         </div>
-        <span class="lib-admin-list-meta">${esc(p.category || "—")} · v${esc(p.version || "")}${p.updatedAt ? ` · ${esc(p.updatedAt)}` : ""}</span>
       </div>
-      <div class="lib-admin-list-actions">${renderListActions(p)}</div>
-    </article>`).join("");
+      <div class="lib-admin-modal-detail-actions">${renderListActions(pub)}</div>
+    </div>`;
+  }
+
+  function renderManageModal() {
+    if (!manageModalOpen) return "";
+    ensureManageSelection();
+    const filters = [
+      { id: "all", label: "Alle", count: countPublicationsByFilter("all") },
+      { id: "online", label: "Online", count: countPublicationsByFilter("online") },
+      { id: "offline", label: "Offline", count: countPublicationsByFilter("offline") },
+      { id: "archived", label: "Archiv", count: countPublicationsByFilter("archived") }
+    ];
+    return `<div class="lib-admin-modal" id="libAdminManageModal" role="dialog" aria-modal="true" aria-labelledby="libAdminManageModalTitle">
+      <button class="lib-admin-modal-backdrop" type="button" id="libAdminCloseManageBackdrop" aria-label="Schließen"></button>
+      <div class="lib-admin-modal-panel">
+        <header class="lib-admin-modal-head">
+          <div>
+            <h3 id="libAdminManageModalTitle">Veröffentlichungen verwalten</h3>
+            <p>PDF auswählen, dann bearbeiten, offline nehmen, archivieren oder löschen.</p>
+          </div>
+          <button class="lib-admin-btn" type="button" id="libAdminCloseManage">Schließen</button>
+        </header>
+        <div class="lib-admin-modal-toolbar">
+          <label class="lib-admin-modal-search">
+            <span>Suchen</span>
+            <input id="libAdminManageSearch" type="search" value="${esc(manageSearch)}" placeholder="Titel, Kategorie, Slug …" autocomplete="off">
+          </label>
+          <div class="lib-admin-filter-tabs" role="tablist" aria-label="Statusfilter">
+            ${filters.map((f) => `<button class="lib-admin-filter-tab ${manageFilter === f.id ? "is-active" : ""}" type="button" data-lib-filter="${f.id}" role="tab" aria-selected="${manageFilter === f.id}">${esc(f.label)} <span>${f.count}</span></button>`).join("")}
+          </div>
+        </div>
+        <div class="lib-admin-modal-body">
+          <div class="lib-admin-modal-list" aria-label="Veröffentlichungsliste">${renderManageModalList()}</div>
+          <div class="lib-admin-modal-detail-wrap" aria-label="Details und Aktionen">${renderManageModalDetail()}</div>
+        </div>
+      </div>
+    </div>`;
   }
 
   function renderEditBanner() {
@@ -668,16 +778,24 @@
 
   function renderManagePanel() {
     const items = catalog.publications || [];
-    const publishedCount = items.filter((p) => ["published", "updated", "preparing"].includes(String(p.status || ""))).length;
+    const publishedCount = countPublicationsByFilter("online");
+    const offlineCount = countPublicationsByFilter("offline");
+    const archivedCount = countPublicationsByFilter("archived");
+    const stats = items.length
+      ? `${items.length} Eintrag${items.length === 1 ? "" : "e"} · ${publishedCount} online${offlineCount ? ` · ${offlineCount} offline` : ""}${archivedCount ? ` · ${archivedCount} archiviert` : ""}`
+      : "Nach dem ersten Upload erscheinen PDFs in einer separaten Verwaltungsliste.";
     return `<section class="lib-admin-manage" id="libAdminManagePanel">
       <header class="lib-admin-manage-head">
         <div>
-          <h2>Bestehende Veröffentlichungen verwalten</h2>
-          <p>${items.length ? `${items.length} Eintrag${items.length === 1 ? "" : "e"} · ${publishedCount} online` : "Bearbeiten, offline nehmen, archivieren, löschen oder PDF ersetzen."}</p>
+          <h2>Bestehende Veröffentlichungen</h2>
+          <p>${stats}</p>
         </div>
-        <button class="lib-admin-btn" type="button" id="libAdminRefreshList">Liste aktualisieren</button>
+        <div class="lib-admin-manage-actions">
+          <button class="lib-admin-btn lib-admin-btn-primary" type="button" id="libAdminOpenManage" ${items.length ? "" : "disabled"}>Veröffentlichungen verwalten</button>
+          <button class="lib-admin-btn" type="button" id="libAdminRefreshList">Aktualisieren</button>
+        </div>
       </header>
-      <div class="lib-admin-manage-list">${renderList()}</div>
+      ${items.length ? `<p class="lib-admin-manage-hint">Die vollständige Liste öffnet sich in einem eigenen Fenster — auch bei vielen PDFs übersichtlich.</p>` : `<p class="lib-admin-manage-empty">Noch keine Veröffentlichungen im Katalog.</p>`}
     </section>`;
   }
 
@@ -688,6 +806,7 @@
     return `<section class="lib-admin">
       ${successSlug ? renderSuccess() : ""}
       ${renderManagePanel()}
+      ${manageModalOpen ? renderManageModal() : ""}
       ${successSlug ? "" : renderUploadForm()}
     </section>`;
   }
@@ -834,6 +953,62 @@
       }
     });
 
+    document.getElementById("libAdminOpenManage")?.addEventListener("click", () => {
+      openManageModal();
+      renderShell();
+    });
+
+    document.getElementById("libAdminCloseManage")?.addEventListener("click", () => {
+      closeManageModal();
+      renderShell();
+    });
+
+    document.getElementById("libAdminCloseManageBackdrop")?.addEventListener("click", () => {
+      closeManageModal();
+      renderShell();
+    });
+
+    document.getElementById("libAdminManageSearch")?.addEventListener("input", (ev) => {
+      manageSearch = ev.target.value || "";
+      if (manageSearchTimer) clearTimeout(manageSearchTimer);
+      manageSearchTimer = setTimeout(() => {
+        ensureManageSelection();
+        renderShell();
+        const input = document.getElementById("libAdminManageSearch");
+        if (input) {
+          input.focus();
+          const len = input.value.length;
+          input.setSelectionRange(len, len);
+        }
+      }, 180);
+    });
+
+    document.querySelectorAll("[data-lib-filter]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        manageFilter = btn.getAttribute("data-lib-filter") || "all";
+        ensureManageSelection();
+        renderShell();
+      });
+    });
+
+    document.querySelectorAll("[data-lib-select]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        manageSelectedId = btn.getAttribute("data-lib-select") || "";
+        renderShell();
+      });
+    });
+
+    if (manageModalOpen) {
+      const onKeyDown = (ev) => {
+        if (ev.key === "Escape") {
+          closeManageModal();
+          renderShell();
+          document.removeEventListener("keydown", onKeyDown);
+        }
+      };
+      document.addEventListener("keydown", onKeyDown);
+    }
+
     document.getElementById("libAdminCancelEdit")?.addEventListener("click", () => {
       resetUploadForm();
       renderShell();
@@ -844,6 +1019,7 @@
         const id = btn.getAttribute("data-lib-edit");
         try {
           await loadPublicationForEdit(id);
+          closeManageModal();
           renderShell();
         } catch (e) {
           toast(e.message || "Bearbeitung konnte nicht gestartet werden");
@@ -858,8 +1034,10 @@
         try {
           await workerPost("api/admin/library/delete", { id, action: "archive" });
           if (editingPublicationId === id) resetUploadForm();
+          if (manageSelectedId === id) manageSelectedId = "";
           toast("Archiviert");
           await ensureLibraryLoaded(true);
+          ensureManageSelection();
           renderShell();
         } catch (e) {
           toast(e.message || "Archivieren fehlgeschlagen");
@@ -874,8 +1052,10 @@
         try {
           await workerPost("api/admin/library/delete", { id, action: "unpublish" });
           if (editingPublicationId === id) resetUploadForm();
+          if (manageSelectedId === id) manageSelectedId = "";
           toast("Offline genommen — Entwurf");
           await ensureLibraryLoaded(true);
+          ensureManageSelection();
           renderShell();
         } catch (e) {
           toast(e.message || "Offline nehmen fehlgeschlagen");
@@ -890,8 +1070,10 @@
         try {
           await workerPost("api/admin/library/delete", { id, action: "delete" });
           if (editingPublicationId === id) resetUploadForm();
+          if (manageSelectedId === id) manageSelectedId = "";
           toast("Gelöscht");
           await ensureLibraryLoaded(true);
+          ensureManageSelection();
           renderShell();
         } catch (e) {
           toast(e.message || "Löschen fehlgeschlagen");
