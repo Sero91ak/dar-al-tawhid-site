@@ -447,8 +447,9 @@ export default {
         assertConfigured(env);
         assertAuthorized(request, env);
         const helpers = { githubGet, base64ToUtf8 };
-        const { catalog, sha, path } = await readLibraryCatalog(env, helpers);
-        return json({ ok: true, catalog, sha, path, meta: LIBRARY_ADMIN_META, count: (catalog.publications || []).length }, cors);
+        const target = String(url.searchParams.get("target") || "test");
+        const { catalog, sha, path } = await readLibraryCatalog(env, helpers, { target });
+        return json({ ok: true, catalog, sha, path, target, meta: LIBRARY_ADMIN_META, count: (catalog.publications || []).length }, cors);
       }
 
       if (url.pathname === "/api/admin/library/save" && request.method === "POST") {

@@ -7,6 +7,18 @@
   const PDFJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
   const PDFJS_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   const STATIC_CATALOG_URL = "/test/data/library-publications.json";
+  const LIBRARY_TARGETS = {
+    test: {
+      catalogPath: "test/data/library-publications.json",
+      pdfPrefix: "test/assets/library/pdfs/",
+      coverPrefix: "test/assets/library/covers/"
+    },
+    live: {
+      catalogPath: "data/library-publications.json",
+      pdfPrefix: "assets/library/pdfs/",
+      coverPrefix: "assets/library/covers/"
+    }
+  };
 
   const CATEGORIES = [
     "Tawḥīd", "ʿAqīdah", "al-Asmāʾ waṣ-Ṣifāt", "Qurʾān", "Sunnah",
@@ -28,6 +40,7 @@
   let busy = false;
   let publishStep = 0;
   let successSlug = "";
+  let successTarget = "test";
   let coverTimer = null;
   let dragActive = false;
 
@@ -78,8 +91,13 @@
     return workerPostRequest(path, body);
   }
 
-  function workerGet(path) {
-    return workerGetRequest(path, { admin: true });
+  function workerGet(path, query) {
+    const qs = query ? `?${new URLSearchParams(query).toString()}` : "";
+    return workerGetRequest(`${path}${qs}`, { admin: true });
+  }
+
+  function libraryPathsFor(target) {
+    return LIBRARY_TARGETS[target === "live" ? "live" : "test"];
   }
 
   async function loadStaticCatalog() {
@@ -237,6 +255,7 @@
     coverMode = "template";
     await refreshCoverPreview();
     successSlug = "";
+    successTarget = "test";
     publishStep = 0;
   }
 
@@ -253,7 +272,8 @@
     } else {
       return;
     }
-    const blob = await (await fetch(`data:image/webp;base64,${coverVariants.medium}`)).blob();
+    const previewBase64 = coverVariants.master || coverVariants.medium;
+    const blob = await (await fetch(`data:image/webp;base64,${previewBase64}`)).blob();
     if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
     coverPreviewUrl = URL.createObjectURL(blob);
   }
@@ -261,24 +281,16 @@
   async function onCoverUpload(file) {
     if (!file || !/^image\/(png|jpeg|jpg|webp|avif)$/i.test(file.type)) throw new Error("Cover: PNG, JPEG, WebP oder AVIF erlaubt");
     const img = await createImageBitmap(file);
-    const canvas = document.createElement("canvas");
-    canvas.width = 800;
-    canvas.height = 1200;
-    const ctx = canvas.getContext("2d");
-    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-    const w = img.width * scale;
-    const h = img.height * scale;
-    ctx.fillStyle = "#101820";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+    const canvas = global.DARLibraryCoverGen.composeImageToCoverCanvas(img, "contain");
     coverVariants = await global.DARLibraryCoverGen.generateCoverVariantsFromCanvas(canvas);
-    const blob = await (await fetch(`data:image/webp;base64,${coverVariants.medium}`)).blob();
+    const blob = await (await fetch(`data:image/webp;base64,${coverVariants.master || coverVariants.medium}`)).blob();
     if (coverPreviewUrl && coverPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(coverPreviewUrl);
     coverPreviewUrl = URL.createObjectURL(blob);
     coverMode = "upload";
   }
 
-  function buildLibraryFiles(id) {
+  function buildLibraryFiles(id, target) {
+    const paths = libraryPathsFor(target);
     if (!pdfFile) return Promise.resolve([]);
     return pdfFile.arrayBuffer().then((buf) => {
       const files = [];
@@ -286,13 +298,13 @@
       const bytes = new Uint8Array(buf);
       for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
       files.push({
-        path: `test/assets/library/pdfs/${id}-v${String(draft.version || "1.0").replace(/\./g, "-")}.pdf`,
+        path: `${paths.pdfPrefix}${id}-v${String(draft.version || "1.0").replace(/\./g, "-")}.pdf`,
         contentBase64: btoa(binary)
       });
       if (coverVariants) {
-        files.push({ path: `test/assets/library/covers/${id}/cover-small.webp`, contentBase64: coverVariants.small });
-        files.push({ path: `test/assets/library/covers/${id}/cover-medium.webp`, contentBase64: coverVariants.medium });
-        files.push({ path: `test/assets/library/covers/${id}/cover-master.webp`, contentBase64: coverVariants.master });
+        files.push({ path: `${paths.coverPrefix}${id}/cover-small.webp`, contentBase64: coverVariants.small });
+        files.push({ path: `${paths.coverPrefix}${id}/cover-medium.webp`, contentBase64: coverVariants.medium });
+        files.push({ path: `${paths.coverPrefix}${id}/cover-master.webp`, contentBase64: coverVariants.master });
       }
       return files;
     });
@@ -341,7 +353,8 @@
     }
   }
 
-  async function publishDraft() {
+  async function publishDraft(target) {
+    const publishTarget = target === "live" ? "live" : "test";
     readMainForm();
     if (!draft.category) {
       if (categorySuggestion?.category && categorySuggestion.confidence !== "none") {
@@ -353,6 +366,10 @@
     }
     if (!pdfFile) throw new Error("PDF fehlt");
     if (!coverVariants) throw new Error("Cover fehlt");
+    if (publishTarget === "live") {
+      const ok = confirm("Diese Veröffentlichung in der Besucher-App (Live) veröffentlichen?\n\nDie Dateien werden in den Live-Bibliotheks-Pfad geschrieben.");
+      if (!ok) throw new Error("Live-Veröffentlichung abgebrochen");
+    }
     busy = true;
     publishStep = 1;
     renderShell();
@@ -365,14 +382,16 @@
       if (coverMode === "template") await refreshCoverPreview();
       publishStep = 3;
       renderShell();
-      const libraryFiles = await buildLibraryFiles(draft.id);
+      const libraryFiles = await buildLibraryFiles(draft.id, publishTarget);
       const res = await workerPost("api/admin/library/save", {
         publication: { ...draft, status: "published", isNew: !!draft.isNew },
         libraryFiles,
-        publish: true
+        publish: true,
+        target: publishTarget
       });
       publishStep = 4;
       successSlug = draft.slug;
+      successTarget = publishTarget;
       await ensureLibraryLoaded(true);
       return res;
     } finally {
@@ -391,6 +410,7 @@
     categorySuggestion = null;
     showCategoryEdit = false;
     successSlug = "";
+    successTarget = "test";
     publishStep = 0;
   }
 
@@ -441,7 +461,7 @@
       <div class="lib-admin-main">
         <header class="lib-admin-head">
           <h2>Neue Veröffentlichung</h2>
-          <p>PDF hochladen und in der Test-Bibliothek veröffentlichen</p>
+          <p>PDF hochladen — Test-Bibliothek oder Besucher-App (Live) veröffentlichen</p>
         </header>
 
         <label class="lib-admin-drop ${dragActive ? "is-dragover" : ""}" id="libAdminDropZone">
@@ -493,6 +513,7 @@
         <div class="lib-admin-actions" id="libAdminActions" style="${pdfReady ? "" : "display:none"}">
           <button class="lib-admin-btn" type="button" id="libAdminSaveDraft" ${busy ? "disabled" : ""}>Als Entwurf speichern</button>
           <button class="lib-admin-btn lib-admin-btn-primary" type="button" id="libAdminPublish" ${busy || !canPublish() ? "disabled" : ""}>In Test-Bibliothek veröffentlichen</button>
+          <button class="lib-admin-btn lib-admin-btn-live" type="button" id="libAdminPublishLive" ${busy || !canPublish() ? "disabled" : ""} title="Veröffentlicht in der Besucher-App (Live-Pfad)">In Besucher-App veröffentlichen</button>
         </div>
       </div>
       ${renderPreviewPanel()}
@@ -500,10 +521,17 @@
   }
 
   function renderSuccess() {
+    const isLive = successTarget === "live";
+    const headline = isLive
+      ? "Die Veröffentlichung wurde erfolgreich für die Besucher-App (Live) veröffentlicht."
+      : "Die Veröffentlichung wurde erfolgreich in der Test-Bibliothek veröffentlicht.";
+    const viewBtn = isLive
+      ? `<span class="lib-admin-btn lib-admin-btn-live" style="opacity:.72;cursor:default">Live-Katalog aktualisiert</span>`
+      : `<a class="lib-admin-btn lib-admin-btn-primary" href="/test/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Test-Bibliothek ansehen</a>`;
     return `<div class="lib-admin-success">
-      <p><b>Die Veröffentlichung wurde erfolgreich in der Test-Bibliothek veröffentlicht.</b></p>
+      <p><b>${esc(headline)}</b></p>
       <div class="lib-admin-actions" style="margin-top:12px">
-        <a class="lib-admin-btn lib-admin-btn-primary" href="/test/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Bibliothek ansehen</a>
+        ${viewBtn}
         <button class="lib-admin-btn" type="button" id="libAdminNewUpload">Weitere PDF hochladen</button>
       </div>
     </div>`;
@@ -638,11 +666,23 @@
 
     document.getElementById("libAdminPublish")?.addEventListener("click", async () => {
       try {
-        await publishDraft();
+        await publishDraft("test");
         toast("Veröffentlicht (Test)");
         renderShell();
       } catch (e) {
         toast(e.message || "Veröffentlichung fehlgeschlagen");
+        publishStep = 0;
+        renderShell();
+      }
+    });
+
+    document.getElementById("libAdminPublishLive")?.addEventListener("click", async () => {
+      try {
+        await publishDraft("live");
+        toast("Veröffentlicht (Besucher-App / Live)");
+        renderShell();
+      } catch (e) {
+        toast(e.message || "Live-Veröffentlichung fehlgeschlagen");
         publishStep = 0;
         renderShell();
       }

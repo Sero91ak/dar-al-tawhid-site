@@ -52,7 +52,7 @@ function buildShelfIds(all) {
 }
 
 async function main() {
-  const { suggestLibraryCategory } = await import(path.join(ROOT, "cloudflare/library-admin.js"));
+  const { suggestLibraryCategory, LIBRARY_ADMIN_META } = await import(path.join(ROOT, "cloudflare/library-admin.js"));
 
   const asma = suggestLibraryCategory("Die Namen und Eigenschaften Allahs al-Asmāʾ waṣ-Ṣifāt");
   assert(asma.category === "ʿAqīdah", "Kategorie-Vorschlag: ʿAqīdah für Asmāʾ");
@@ -81,6 +81,10 @@ async function main() {
   const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, "test/data/library-publications.json"), "utf8"));
   const pub = catalog.publications[0];
   assert(pub && pub.coverUrls && pub.coverUrls.medium, "Katalog: coverUrls vorhanden");
+
+  assert(LIBRARY_ADMIN_META.targets?.test?.path === "test/data/library-publications.json", "Worker: Test-Katalog-Pfad");
+  assert(LIBRARY_ADMIN_META.targets?.live?.path === "data/library-publications.json", "Worker: Live-Katalog-Pfad");
+  assert(LIBRARY_ADMIN_META.targets?.live?.pdfPrefix === "assets/library/pdfs/", "Worker: Live-PDF-Prefix");
 
   const liveIndex = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   assert(!liveIndex.includes('data-nav="bibliothek"') && !liveIndex.includes("#bibliothek"), "Live index.html: keine Bibliotheks-Route");

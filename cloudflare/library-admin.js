@@ -1,9 +1,26 @@
 /**
- * DAR AL TAWḤĪD Bibliothek — Cloudflare Worker (Admin, Test/Staging)
+ * DAR AL TAWḤĪD Bibliothek — Cloudflare Worker (Admin, Test + Live)
  */
-const LIBRARY_PATH = "test/data/library-publications.json";
-const LIBRARY_PDF_PREFIX = "test/assets/library/pdfs/";
-const LIBRARY_COVER_PREFIX = "test/assets/library/covers/";
+const LIBRARY_TARGETS = {
+  test: {
+    path: "test/data/library-publications.json",
+    pdfPrefix: "test/assets/library/pdfs/",
+    coverPrefix: "test/assets/library/covers/"
+  },
+  live: {
+    path: "data/library-publications.json",
+    pdfPrefix: "assets/library/pdfs/",
+    coverPrefix: "assets/library/covers/"
+  }
+};
+
+function resolveLibraryTarget(raw) {
+  return raw === "live" ? "live" : "test";
+}
+
+function libraryConfigForTarget(target) {
+  return LIBRARY_TARGETS[resolveLibraryTarget(target)];
+}
 
 const LIBRARY_STATUSES = new Set(["draft", "preparing", "published", "updated", "archived", "error"]);
 const LIBRARY_CATEGORIES = new Set([
@@ -108,11 +125,11 @@ function validatePdfBase64(base64) {
   return bytes;
 }
 
-function validateCoverFile(file) {
+function validateCoverFile(file, coverPrefix) {
   const path = String(file?.path || "").trim();
   const base64 = String(file?.contentBase64 || "").trim();
   if (!path || !base64) return null;
-  if (!path.startsWith(LIBRARY_COVER_PREFIX)) throw libraryError(`Cover-Pfad ungültig: ${path}`, 400);
+  if (!path.startsWith(coverPrefix)) throw libraryError(`Cover-Pfad ungültig: ${path}`, 400);
   if (!/\.(webp|avif|png|jpe?g|svg)$/i.test(path)) throw libraryError(`Cover-Format nicht erlaubt: ${path}`, 400);
   let bytes;
   try {
@@ -124,7 +141,8 @@ function validateCoverFile(file) {
   return { path, contentBase64: base64 };
 }
 
-function normalizeLibraryFilesInput(raw) {
+function normalizeLibraryFilesInput(raw, target) {
+  const config = libraryConfigForTarget(target);
   const files = Array.isArray(raw) ? raw : [];
   const pdfFiles = [];
   const coverFiles = [];
@@ -134,23 +152,25 @@ function normalizeLibraryFilesInput(raw) {
     const base64 = String(file.contentBase64 || "").trim();
     if (!path || !base64) continue;
     if (path.includes("..") || path.startsWith("/")) throw libraryError(`Ungültiger Pfad: ${path}`, 400);
-    if (path.startsWith(LIBRARY_PDF_PREFIX)) {
+    if (path.startsWith(config.pdfPrefix)) {
       validatePdfBase64(base64);
       if (!/\.pdf$/i.test(path)) throw libraryError("PDF-Pfad muss auf .pdf enden", 400);
       pdfFiles.push({ path, contentBase64: base64 });
       continue;
     }
-    const cover = validateCoverFile(file);
+    const cover = validateCoverFile(file, config.coverPrefix);
     if (cover) coverFiles.push(cover);
   }
   return { pdfFiles, coverFiles };
 }
 
-export async function readLibraryCatalog(env, helpers) {
+export async function readLibraryCatalog(env, helpers, options) {
+  const target = resolveLibraryTarget(options?.target);
+  const config = libraryConfigForTarget(target);
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
-  const file = await helpers.githubGet(env, owner, repo, LIBRARY_PATH, branch);
+  const file = await helpers.githubGet(env, owner, repo, config.path, branch);
   const parsed = file?.content ? JSON.parse(helpers.base64ToUtf8(file.content)) : emptyCatalog();
   const publications = (Array.isArray(parsed?.publications) ? parsed.publications : [])
     .map((p) => normalizePublication(p))
@@ -158,7 +178,8 @@ export async function readLibraryCatalog(env, helpers) {
   return {
     catalog: { version: 1, updatedAt: parsed?.updatedAt || new Date().toISOString(), publications },
     sha: file?.sha || "",
-    path: LIBRARY_PATH
+    path: config.path,
+    target
   };
 }
 
@@ -180,7 +201,8 @@ function findDuplicates(catalog, pub, ignoreId) {
 export async function saveLibraryPublication(env, input, helpers) {
   const nowIso = new Date().toISOString();
   const publish = input?.publish === true;
-  const { catalog, sha, path } = await readLibraryCatalog(env, helpers);
+  const target = resolveLibraryTarget(input?.target);
+  const { catalog, sha, path } = await readLibraryCatalog(env, helpers, { target });
   const incoming = normalizePublication({ ...input?.publication, updatedAt: nowIso.slice(0, 10) }, nowIso);
   if (!incoming?.title) throw libraryError("Titel fehlt", 400);
 
@@ -189,7 +211,7 @@ export async function saveLibraryPublication(env, input, helpers) {
     throw libraryError(warnings.find((w) => w.includes("identische")), 409);
   }
 
-  const { pdfFiles, coverFiles } = normalizeLibraryFilesInput(input?.libraryFiles || []);
+  const { pdfFiles, coverFiles } = normalizeLibraryFilesInput(input?.libraryFiles || [], target);
 
   if (pdfFiles.length) {
     const pdf = pdfFiles[pdfFiles.length - 1];
@@ -237,7 +259,7 @@ export async function saveLibraryPublication(env, input, helpers) {
     repo,
     branch,
     fileEntries,
-    `Bibliothek: ${incoming.title} (${incoming.status})`
+    `Bibliothek${target === "live" ? " (Live)" : ""}: ${incoming.title} (${incoming.status})`
   );
 
   return {
@@ -245,6 +267,7 @@ export async function saveLibraryPublication(env, input, helpers) {
     publication: incoming,
     warnings,
     path,
+    target,
     published: publish && incoming.status === "published"
   };
 }
@@ -253,7 +276,8 @@ export async function deleteLibraryPublication(env, input, helpers) {
   const id = String(input?.id || "").trim();
   if (!id) throw libraryError("ID fehlt", 400);
   const hard = input?.hard === true;
-  const { catalog, sha, path } = await readLibraryCatalog(env, helpers);
+  const target = resolveLibraryTarget(input?.target);
+  const { catalog, sha, path } = await readLibraryCatalog(env, helpers, { target });
   const idx = catalog.publications.findIndex((p) => p.id === id);
   if (idx < 0) throw libraryError("Veröffentlichung nicht gefunden", 404);
   if (hard) catalog.publications.splice(idx, 1);
@@ -270,11 +294,11 @@ export async function deleteLibraryPublication(env, input, helpers) {
     repo,
     path,
     `${JSON.stringify(catalog, null, 2)}\n`,
-    `Bibliothek: ${hard ? "gelöscht" : "archiviert"} ${id}`,
+    `Bibliothek${target === "live" ? " (Live)" : ""}: ${hard ? "gelöscht" : "archiviert"} ${id}`,
     branch,
     sha
   );
-  return { ok: true, id, archived: !hard };
+  return { ok: true, id, archived: !hard, target };
 }
 
 export function suggestLibraryCategory(text) {
@@ -304,6 +328,5 @@ export function suggestLibraryCategory(text) {
 
 export const LIBRARY_ADMIN_META = {
   categories: [...LIBRARY_CATEGORIES],
-  pdfPrefix: LIBRARY_PDF_PREFIX,
-  coverPrefix: LIBRARY_COVER_PREFIX
+  targets: LIBRARY_TARGETS
 };
