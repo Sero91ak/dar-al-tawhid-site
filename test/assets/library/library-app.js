@@ -22,6 +22,7 @@
     "Kufr und Ṭāghūt",
     "Sünden und Reue",
     "Gebet",
+    "Fiqh",
     "Familie",
     "Manhaj",
     "Widerlegungen"
@@ -104,7 +105,31 @@
   }
 
   function visiblePublications(list) {
-    return (list || []).filter((p) => p.status !== "archived");
+    return (list || []).filter((p) => !["archived", "draft", "error"].includes(String(p.status || "")));
+  }
+
+  function coverSources(pub) {
+    const urls = pub.coverUrls || {};
+    return {
+      small: urls.small || urls.coverSmall || pub.coverUrl || "",
+      medium: urls.medium || urls.coverMedium || pub.coverUrl || "",
+      master: urls.master || urls.coverMaster || pub.coverUrl || ""
+    };
+  }
+
+  function coverHtml(pub, className) {
+    const src = coverSources(pub);
+    const alt = `${pub.title} – Buchcover`;
+    const medium = src.medium || src.small || src.master;
+    if (medium) {
+      const srcset = [
+        src.small ? `${esc(src.small)} 400w` : "",
+        src.medium ? `${esc(src.medium)} 800w` : "",
+        src.master ? `${esc(src.master)} 1200w` : ""
+      ].filter(Boolean).join(", ");
+      return `<img class="${className || "lib-cover"}" src="${esc(medium)}" ${srcset ? `srcset="${srcset}" sizes="(max-width:520px) 42vw, 180px"` : ""} alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.hidden=false"><div class="lib-cover-fallback" hidden>${esc(pub.transliteratedTitle || pub.title)}</div>`;
+    }
+    return `<div class="lib-cover-fallback" role="img" aria-label="${esc(alt)}">${esc(pub.transliteratedTitle || pub.title)}</div>`;
   }
 
   function filteredPublications(list) {
@@ -183,15 +208,6 @@
     return canRead(pub) && pub.offlineEnabled !== false;
   }
 
-  function coverHtml(pub, className) {
-    const url = pub.coverUrl || "";
-    const alt = `${pub.title} – Buchcover`;
-    if (url) {
-      return `<img class="${className || "lib-cover"}" src="${esc(url)}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.hidden=false"><div class="lib-cover-fallback" hidden>${esc(pub.transliteratedTitle || pub.title)}</div>`;
-    }
-    return `<div class="lib-cover-fallback" role="img" aria-label="${esc(alt)}">${esc(pub.transliteratedTitle || pub.title)}</div>`;
-  }
-
   function badgeHtml(pub) {
     const badges = [];
     if (pub.isNew) badges.push('<span class="lib-badge">Neu</span>');
@@ -230,9 +246,48 @@
     </button>`;
   }
 
-  function sectionHtml(title, countLabel, cards) {
+  function sectionHtml(title, countLabel, cards, layout) {
     if (!cards) return "";
-    return `<section class="lib-section"><div class="lib-section-head"><h3>${esc(title)}</h3>${countLabel ? `<span>${esc(countLabel)}</span>` : ""}</div><div class="lib-grid">${cards}</div></section>`;
+    const inner = layout === "shelf" ? `<div class="lib-shelf-row">${cards}</div>` : `<div class="lib-grid">${cards}</div>`;
+    return `<section class="lib-section"><div class="lib-section-head"><h3>${esc(title)}</h3>${countLabel ? `<span>${esc(countLabel)}</span>` : ""}</div>${inner}</section>`;
+  }
+
+  function buildShelfSections(all, offlineIds) {
+    const count = all.length;
+    const compactCatalog = count <= 3;
+    const useHorizontal = count >= 4;
+    const sections = [];
+    const usedInFeatured = new Set();
+
+    const recommended = all.filter((p) => p.isRecommended);
+    const newestOnly = all.filter((p) => p.isNew && !p.isRecommended);
+    const recent = getRecentlyRead(all).slice(0, 8);
+
+    if (compactCatalog) {
+      if (recommended.length) {
+        recommended.forEach((p) => usedInFeatured.add(p.id));
+        sections.push(sectionHtml("Empfohlen", `${recommended.length}`, recommended.map((p) => cardHtml(p, offlineIds)).join(""), useHorizontal ? "shelf" : "grid"));
+      } else if (newestOnly.length) {
+        newestOnly.forEach((p) => usedInFeatured.add(p.id));
+        sections.push(sectionHtml("Neu erschienen", `${newestOnly.length}`, newestOnly.map((p) => cardHtml(p, offlineIds)).join(""), useHorizontal ? "shelf" : "grid"));
+      }
+    } else {
+      const shelfNewest = [...all]
+        .sort((a, b) => String(b.publishedAt || "").localeCompare(String(a.publishedAt || "")))
+        .filter((p) => p.isNew && !usedInFeatured.has(p.id))
+        .slice(0, 8);
+      const shelfRecommended = recommended.filter((p) => !usedInFeatured.has(p.id)).slice(0, 8);
+      shelfRecommended.forEach((p) => usedInFeatured.add(p.id));
+      shelfNewest.forEach((p) => usedInFeatured.add(p.id));
+      if (shelfNewest.length) sections.push(sectionHtml("Neu erschienen", `${shelfNewest.length}`, shelfNewest.map((p) => cardHtml(p, offlineIds)).join(""), "shelf"));
+      if (shelfRecommended.length) sections.push(sectionHtml("Empfohlen", `${shelfRecommended.length}`, shelfRecommended.map((p) => cardHtml(p, offlineIds)).join(""), "shelf"));
+    }
+
+    if (recent.length) {
+      sections.push(sectionHtml("Zuletzt gelesen", `${recent.length}`, recent.map((p) => cardHtml(p, offlineIds)).join(""), useHorizontal ? "shelf" : "grid"));
+    }
+
+    return sections;
   }
 
   function renderLoading() {
@@ -246,9 +301,6 @@
   function renderBibliothekMain(offlineIds) {
     const all = visiblePublications(catalog.publications || []);
     const filtered = filteredPublications(all);
-    const newest = [...all].sort((a, b) => String(b.publishedAt || "").localeCompare(String(a.publishedAt || ""))).slice(0, 8);
-    const recommended = all.filter((p) => p.isRecommended).slice(0, 8);
-    const recent = getRecentlyRead(all).slice(0, 8);
     const byTopic = uiState.category !== "Alle" ? filtered : [];
 
     const catButtons = CATEGORIES.map((cat) =>
@@ -259,9 +311,7 @@
     const showShelves = !uiState.query && uiState.category === "Alle";
 
     if (showShelves) {
-      if (newest.length) sections += sectionHtml("Neu erschienen", `${newest.length}`, newest.map((p) => cardHtml(p, offlineIds)).join(""));
-      if (recommended.length) sections += sectionHtml("Empfohlen", `${recommended.length}`, recommended.map((p) => cardHtml(p, offlineIds)).join(""));
-      if (recent.length) sections += sectionHtml("Zuletzt gelesen", `${recent.length}`, recent.map((p) => cardHtml(p, offlineIds)).join(""));
+      sections += buildShelfSections(all, offlineIds).join("");
     }
 
     if (uiState.category !== "Alle") {
@@ -274,7 +324,7 @@
       .join("");
     if (allCards && (uiState.query || !showShelves || uiState.category !== "Alle")) {
       sections += sectionHtml(uiState.query ? "Suchergebnisse" : "Alle Veröffentlichungen", `${filtered.length}`, allCards);
-    } else if (showShelves) {
+    } else if (showShelves && all.length) {
       sections += sectionHtml("Alle Veröffentlichungen", `${all.length}`, all.map((p) => cardHtml(p, offlineIds)).join(""));
     }
 
@@ -287,7 +337,8 @@
         <div class="lib-hero-inner">
           <h2>DAR AL TAWḤĪD Bibliothek</h2>
           <p>Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik</p>
-          <p class="lib-hero-note">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
+          <p class="lib-hero-note is-short">Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.</p>
+          <p class="lib-hero-note is-full">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
         </div>
       </header>
       <div class="lib-toolbar">
