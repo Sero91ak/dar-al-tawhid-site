@@ -543,7 +543,7 @@ main#panel.panel{
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/library-cover-gen.js?v=4"></script>
-<script src="/admin/library-manager.js?v=7"></script>
+<script src="/admin/library-manager.js?v=8"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=5">
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -587,6 +587,7 @@ const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
 const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
+window.getAdminCurrentTab=()=>currentTab;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
 let sourceLibraryCache=null,sourceLibraryBusy=false,sourceDraftPending=null,sourceUploadQueue=[],sourceEditorContext="draft";
 let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayoutBusy=false,categoryLayoutLoaded=false;
@@ -611,6 +612,7 @@ function adminIsEditing(){
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
+  if(window.getAdminCurrentTab&&window.getAdminCurrentTab()==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.hasLibraryWork==="function"&&window.DARLibraryAdmin.hasLibraryWork())return true;
   return tag==="input"||tag==="textarea"||tag==="select"||!!(active&&active.isContentEditable)||Date.now()-lastAdminFormPointerAt<1500;
 }
 document.addEventListener("pointerdown",e=>{if(adminEditableTarget(e.target))lastAdminFormPointerAt=Date.now()},{capture:true,passive:true});
