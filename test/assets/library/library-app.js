@@ -31,7 +31,7 @@
   let catalog = null;
   let catalogError = "";
   let catalogLoading = null;
-  let uiState = { query: "", category: "Alle" };
+  let uiState = { query: "", category: "Alle", catOpen: false };
   let readerState = null;
 
   function esc(s) {
@@ -246,48 +246,59 @@
     </button>`;
   }
 
+  function compactCardHtml(pub, offlineIds) {
+    const offline = offlineIds && offlineIds.has(pub.id);
+    const progress = getProgress(pub.id);
+    return `<button class="lib-card lib-card-compact" type="button" data-library-open="${esc(pub.slug)}" aria-label="${esc(pub.title)} öffnen">
+      <div class="lib-cover-wrap">
+        ${coverHtml(pub, "lib-cover")}
+        ${offline ? '<div class="lib-badges"><span class="lib-badge is-offline">Offline</span></div>' : ""}
+        ${progress && progress.lastPage ? progressHtml(pub) : ""}
+      </div>
+      <div class="lib-card-body"><h4>${esc(pub.title)}</h4></div>
+    </button>`;
+  }
+
   function sectionHtml(title, countLabel, cards, layout) {
     if (!cards) return "";
-    const inner = layout === "shelf" ? `<div class="lib-shelf-row">${cards}</div>` : `<div class="lib-grid">${cards}</div>`;
-    return `<section class="lib-section"><div class="lib-section-head"><h3>${esc(title)}</h3>${countLabel ? `<span>${esc(countLabel)}</span>` : ""}</div>${inner}</section>`;
+    const innerClass = layout === "shelf"
+      ? "lib-shelf-row"
+      : layout === "grid-compact"
+        ? "lib-grid lib-grid-compact"
+        : "lib-grid";
+    const inner = `<div class="${innerClass}">${cards}</div>`;
+    const compactClass = layout === "grid-compact" ? " lib-section-compact" : "";
+    return `<section class="lib-section${compactClass}"><div class="lib-section-head"><h3>${esc(title)}</h3>${countLabel ? `<span>${esc(countLabel)}</span>` : ""}</div>${inner}</section>`;
   }
 
   function buildShelfSections(all, offlineIds) {
-    const count = all.length;
-    const compactCatalog = count <= 3;
-    const useHorizontal = count >= 4;
     const sections = [];
-    const usedInFeatured = new Set();
-
-    const recommended = all.filter((p) => p.isRecommended);
-    const newestOnly = all.filter((p) => p.isNew && !p.isRecommended);
-    const recent = getRecentlyRead(all).slice(0, 8);
-
-    if (compactCatalog) {
-      if (recommended.length) {
-        recommended.forEach((p) => usedInFeatured.add(p.id));
-        sections.push(sectionHtml("Empfohlen", `${recommended.length}`, recommended.map((p) => cardHtml(p, offlineIds)).join(""), useHorizontal ? "shelf" : "grid"));
-      } else if (newestOnly.length) {
-        newestOnly.forEach((p) => usedInFeatured.add(p.id));
-        sections.push(sectionHtml("Neu erschienen", `${newestOnly.length}`, newestOnly.map((p) => cardHtml(p, offlineIds)).join(""), useHorizontal ? "shelf" : "grid"));
-      }
-    } else {
-      const shelfNewest = [...all]
-        .sort((a, b) => String(b.publishedAt || "").localeCompare(String(a.publishedAt || "")))
-        .filter((p) => p.isNew && !usedInFeatured.has(p.id))
-        .slice(0, 8);
-      const shelfRecommended = recommended.filter((p) => !usedInFeatured.has(p.id)).slice(0, 8);
-      shelfRecommended.forEach((p) => usedInFeatured.add(p.id));
-      shelfNewest.forEach((p) => usedInFeatured.add(p.id));
-      if (shelfNewest.length) sections.push(sectionHtml("Neu erschienen", `${shelfNewest.length}`, shelfNewest.map((p) => cardHtml(p, offlineIds)).join(""), "shelf"));
-      if (shelfRecommended.length) sections.push(sectionHtml("Empfohlen", `${shelfRecommended.length}`, shelfRecommended.map((p) => cardHtml(p, offlineIds)).join(""), "shelf"));
-    }
-
+    const recent = getRecentlyRead(all).slice(0, 9);
     if (recent.length) {
-      sections.push(sectionHtml("Zuletzt gelesen", `${recent.length}`, recent.map((p) => cardHtml(p, offlineIds)).join(""), useHorizontal ? "shelf" : "grid"));
+      sections.push(sectionHtml("Zuletzt gelesen", `${recent.length}`, recent.map((p) => compactCardHtml(p, offlineIds)).join(""), "grid-compact"));
     }
-
+    const newest = [...all]
+      .filter((p) => p.isNew)
+      .sort((a, b) => String(b.publishedAt || "").localeCompare(String(a.publishedAt || "")))
+      .slice(0, 9);
+    if (newest.length) {
+      sections.push(sectionHtml("Neu erschienen", `${newest.length}`, newest.map((p) => compactCardHtml(p, offlineIds)).join(""), "grid-compact"));
+    }
     return sections;
+  }
+
+  function renderCategoryPicker() {
+    const label = uiState.category === "Alle" ? "Alle Kategorien" : uiState.category;
+    const options = CATEGORIES.map((cat) =>
+      `<button class="lib-cat-option" type="button" data-library-cat="${esc(cat)}" aria-pressed="${uiState.category === cat ? "true" : "false"}">${esc(cat)}</button>`
+    ).join("");
+    return `<div class="lib-cat-picker">
+      <button class="lib-cat-toggle" type="button" data-library-cat-toggle aria-expanded="${uiState.catOpen ? "true" : "false"}" aria-controls="libraryCatPanel">
+        <span class="lib-cat-toggle-label">Thema: ${esc(label)}</span>
+        <span class="lib-cat-chevron" aria-hidden="true">${uiState.catOpen ? "▴" : "▾"}</span>
+      </button>
+      <div id="libraryCatPanel" class="lib-cat-panel${uiState.catOpen ? " is-open" : ""}" ${uiState.catOpen ? "" : "hidden"}>${options}</div>
+    </div>`;
   }
 
   function renderLoading() {
@@ -303,9 +314,7 @@
     const filtered = filteredPublications(all);
     const byTopic = uiState.category !== "Alle" ? filtered : [];
 
-    const catButtons = CATEGORIES.map((cat) =>
-      `<button class="lib-cat" type="button" data-library-cat="${esc(cat)}" aria-pressed="${uiState.category === cat ? "true" : "false"}">${esc(cat)}</button>`
-    ).join("");
+    const catButtons = renderCategoryPicker();
 
     let sections = "";
     const showShelves = !uiState.query && uiState.category === "Alle";
@@ -344,7 +353,7 @@
       <div class="lib-toolbar">
         <label class="visually-hidden" for="librarySearch">Bücher und Themen durchsuchen</label>
         <input id="librarySearch" class="lib-search" type="search" placeholder="Bücher und Themen durchsuchen" autocomplete="off" value="${esc(uiState.query)}">
-        <div class="lib-cats" role="toolbar" aria-label="Kategorien">${catButtons}</div>
+        <div class="lib-cats">${catButtons}</div>
       </div>
       ${sections}
     </section>`;
@@ -690,9 +699,29 @@
       root.querySelectorAll("[data-library-cat]").forEach((btn) => {
         btn.onclick = () => {
           uiState.category = btn.getAttribute("data-library-cat") || "Alle";
+          uiState.catOpen = false;
           if (typeof global.render === "function") global.render();
         };
       });
+      const catToggle = root.querySelector("[data-library-cat-toggle]");
+      const catPanel = root.querySelector(".lib-cat-panel");
+      if (catToggle) {
+        catToggle.onclick = (ev) => {
+          ev.stopPropagation();
+          uiState.catOpen = !uiState.catOpen;
+          if (typeof global.render === "function") global.render();
+        };
+      }
+      if (catPanel && uiState.catOpen) {
+        const closeOnOutside = (ev) => {
+          if (!root.contains(ev.target)) {
+            uiState.catOpen = false;
+            document.removeEventListener("click", closeOnOutside);
+            if (typeof global.render === "function") global.render();
+          }
+        };
+        setTimeout(() => document.addEventListener("click", closeOnOutside), 0);
+      }
       root.querySelectorAll("[data-library-open]").forEach((btn) => {
         btn.onclick = () => navigateDetail(btn.getAttribute("data-library-open") || "");
       });
@@ -832,7 +861,7 @@
     saveProgress,
     listOfflineIds,
     resetUiState: () => {
-      uiState = { query: "", category: "Alle" };
+      uiState = { query: "", category: "Alle", catOpen: false };
     }
   };
 })(window);
