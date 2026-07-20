@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v291";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v294";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -9257,7 +9257,7 @@ window.DAR_ANALYTICS_CONFIG={
 </script>
 <script src="assets/site-analytics.js?v=4" defer></script>
 <script src="/assets/zakat-engine.js?v=11" defer></script>
-<script src="/assets/zakat-pdf.js?v=3" defer></script>
+<script src="/assets/zakat-pdf.js?v=4" defer></script>
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js"></script>
@@ -9266,7 +9266,7 @@ window.DAR_ANALYTICS_CONFIG={
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/app-card-layout.css?v=3">
+<link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
 
 
@@ -14658,7 +14658,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v291";
+const APP_BUILD_ID="app-shell-v294";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -14953,13 +14953,13 @@ function ensureLibraryModule(){
     if(!document.querySelector("link[data-library-css]")){
       const css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/test/assets/library/library-app.css?v=2";
+      css.href="/test/assets/library/library-app.css?v=4";
       css.setAttribute("data-library-css","1");
       document.head.appendChild(css);
     }
     if(window.DARLibraryApp){window.__libraryAssetsReady=true;resolve(window.DARLibraryApp);return}
     const s=document.createElement("script");
-    s.src="/test/assets/library/library-app.js?v=2";
+    s.src="/test/assets/library/library-app.js?v=4";
     s.defer=true;
     s.onload=()=>{window.__libraryAssetsReady=true;resolve(window.DARLibraryApp)};
     s.onerror=reject;

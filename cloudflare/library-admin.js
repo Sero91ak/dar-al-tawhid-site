@@ -275,30 +275,44 @@ export async function saveLibraryPublication(env, input, helpers) {
 export async function deleteLibraryPublication(env, input, helpers) {
   const id = String(input?.id || "").trim();
   if (!id) throw libraryError("ID fehlt", 400);
-  const hard = input?.hard === true;
+  const action = String(input?.action || "").trim().toLowerCase();
+  const hard = input?.hard === true || action === "delete";
+  const unpublish = action === "unpublish" || action === "offline";
   const target = resolveLibraryTarget(input?.target);
   const { catalog, sha, path } = await readLibraryCatalog(env, helpers, { target });
   const idx = catalog.publications.findIndex((p) => p.id === id);
   if (idx < 0) throw libraryError("Veröffentlichung nicht gefunden", 404);
-  if (hard) catalog.publications.splice(idx, 1);
-  else {
-    catalog.publications[idx] = { ...catalog.publications[idx], status: "archived", updatedAt: new Date().toISOString().slice(0, 10) };
+  if (hard) {
+    catalog.publications.splice(idx, 1);
+  } else if (unpublish) {
+    catalog.publications[idx] = {
+      ...catalog.publications[idx],
+      status: "draft",
+      updatedAt: new Date().toISOString().slice(0, 10)
+    };
+  } else {
+    catalog.publications[idx] = {
+      ...catalog.publications[idx],
+      status: "archived",
+      updatedAt: new Date().toISOString().slice(0, 10)
+    };
   }
   catalog.updatedAt = new Date().toISOString();
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
+  const verb = hard ? "gelöscht" : unpublish ? "offline genommen" : "archiviert";
   await helpers.githubPut(
     env,
     owner,
     repo,
     path,
     `${JSON.stringify(catalog, null, 2)}\n`,
-    `Bibliothek${target === "live" ? " (Live)" : ""}: ${hard ? "gelöscht" : "archiviert"} ${id}`,
+    `Bibliothek${target === "live" ? " (Live)" : ""}: ${verb} ${id}`,
     branch,
     sha
   );
-  return { ok: true, id, archived: !hard, target };
+  return { ok: true, id, archived: !hard && !unpublish, unpublished: unpublish, deleted: hard, target };
 }
 
 export function suggestLibraryCategory(text) {
