@@ -73,6 +73,13 @@ import {
   blockFeedBackgroundImage
 } from "./feed-backgrounds-sync.js";
 import { handleQuizStatsRequest } from "./quiz-stats-admin.js";
+import {
+  readLibraryCatalog,
+  saveLibraryPublication,
+  deleteLibraryPublication,
+  suggestLibraryCategory,
+  LIBRARY_ADMIN_META
+} from "./library-admin.js";
 export { PrayerStatusStore } from "./prayer-status-store.js";
 
 const DEFAULT_OWNER = "Sero91ak";
@@ -434,6 +441,46 @@ export default {
         const input = await request.json().catch(() => ({}));
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         return json(await reorderFeedItems(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/library" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const helpers = { githubGet, base64ToUtf8 };
+        const { catalog, sha, path } = await readLibraryCatalog(env, helpers);
+        return json({ ok: true, catalog, sha, path, meta: LIBRARY_ADMIN_META, count: (catalog.publications || []).length }, cors);
+      }
+
+      if (url.pathname === "/api/admin/library/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          return json(await saveLibraryPublication(env, input, helpers), cors);
+        } catch (e) {
+          return json({ ok: false, error: e.message || "Speichern fehlgeschlagen" }, cors, e.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/library/delete" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          return json(await deleteLibraryPublication(env, input, helpers), cors);
+        } catch (e) {
+          return json({ ok: false, error: e.message || "Löschen fehlgeschlagen" }, cors, e.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/library/suggest" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const suggestion = suggestLibraryCategory(String(input?.text || ""));
+        return json({ ok: true, suggestion }, cors);
       }
 
       if (url.pathname === "/api/feed-backgrounds" && request.method === "GET") {
