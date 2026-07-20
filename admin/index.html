@@ -543,8 +543,8 @@ main#panel.panel{
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/library-cover-gen.js?v=4"></script>
-<script src="/admin/library-manager.js?v=8"></script>
-<link rel="stylesheet" href="/admin/library-admin.css?v=5">
+<script src="/admin/library-manager.js?v=9"></script>
+<link rel="stylesheet" href="/admin/library-admin.css?v=6">
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -609,6 +609,7 @@ let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
 function adminIsEditing(){
+  if(currentTab==="bibliothek")return true;
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
@@ -2166,7 +2167,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"&&window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -3715,6 +3716,7 @@ async function uploadBulkPackViaWorker(){
   }
 }
 async function renderDashboard({force=false}={}){
+  if(currentTab==="bibliothek")return;
   if(!force&&adminIsEditing())return;
   const panel=document.getElementById("panel");
   if(!lastData)panel.innerHTML=`<div class="empty">Statistik wird geladen...</div>`;
@@ -3730,7 +3732,7 @@ function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderL
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)setTimeout(()=>renderDashboard(),260)});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed&&currentTab!=="bibliothek")setTimeout(()=>renderDashboard(),260)});
 let adminSwipe=null;
 document.addEventListener("touchstart",e=>{
   const t=e.touches&&e.touches[0];if(!t)return;
