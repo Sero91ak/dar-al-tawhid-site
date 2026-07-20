@@ -3,8 +3,12 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v291';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v292';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
+const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
+const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
+const OFFLINE_FETCH_TIMEOUT_MS = 22000;
+const OFFLINE_BATCH_SIZE = 10;
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -66,26 +70,96 @@ function normalizeOfflineUrls(urls) {
   return Array.from(out);
 }
 
-async function cacheOfflineUrl(cache, url) {
-  const req = new Request(url, { cache: 'reload' });
-  const response = await fetch(req);
-  if (!response || !response.ok) throw new Error(`HTTP ${response ? response.status : 0}`);
-  await cache.put(req, response.clone());
-  return Number(response.headers.get('content-length') || 0);
+async function readJsonCacheEntry(cache, key) {
+  try {
+    const res = await cache.match(key);
+    if (!res) return null;
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
 }
 
-async function prepareOfflineBundle(urls, requestedBy = 'user') {
+async function writeJsonCacheEntry(cache, key, data) {
+  await cache.put(
+    key,
+    new Response(JSON.stringify(data), {
+      headers: { 'content-type': 'application/json; charset=utf-8' }
+    })
+  );
+}
+
+async function isOfflineUrlCached(cache, url) {
+  try {
+    const res = await cache.match(url);
+    return !!(res && res.ok);
+  } catch (e) {
+    return false;
+  }
+}
+
+async function cacheOfflineUrl(cache, url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), OFFLINE_FETCH_TIMEOUT_MS);
+  try {
+    const req = new Request(url, { cache: 'reload', signal: controller.signal });
+    const response = await fetch(req);
+    if (!response || !response.ok) throw new Error(`HTTP ${response ? response.status : 0}`);
+    await cache.put(req, response.clone());
+    return Number(response.headers.get('content-length') || 0);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function persistOfflineProgress(cache, payload) {
+  await writeJsonCacheEntry(cache, OFFLINE_PREP_PROGRESS_KEY, payload);
+}
+
+function offlinePrepareSucceeded(total, loaded, failed) {
+  const success = Math.max(0, Number(loaded || 0) - Number(failed || 0));
+  if (!total) return true;
+  if (success >= total) return true;
+  return success / total >= 0.9;
+}
+
+async function prepareOfflineBundle(urls, requestedBy = 'user', options = {}) {
+  const resume = options.resume === true;
   if (offlinePrepareRunning) {
     await postToClients({ type: 'OFFLINE_PREPARE_BUSY' });
     return;
   }
   offlinePrepareRunning = true;
   const startedAt = new Date().toISOString();
-  const normalized = normalizeOfflineUrls(urls);
+  let normalized = normalizeOfflineUrls(urls);
+  const cache = await caches.open(CACHE_VERSION);
+
+  if (!normalized.length && resume) {
+    const pending = await readJsonCacheEntry(cache, OFFLINE_PREP_PENDING_KEY);
+    normalized = normalizeOfflineUrls(pending?.urls || []);
+  }
+
+  if (!normalized.length) {
+    offlinePrepareRunning = false;
+    await postToClients({ type: 'OFFLINE_PREPARE_DONE', ok: false, total: 0, loaded: 0, failed: 0, bytes: 0, partial: false });
+    return;
+  }
+
+  await writeJsonCacheEntry(cache, OFFLINE_PREP_PENDING_KEY, { urls: normalized, startedAt, requestedBy });
+
+  const toFetch = [];
+  let skipped = 0;
+  for (let i = 0; i < normalized.length; i += 1) {
+    const url = normalized[i];
+    if (await isOfflineUrlCached(cache, url)) skipped += 1;
+    else toFetch.push(url);
+  }
+
   const total = normalized.length;
-  let loaded = 0;
+  let loaded = skipped;
   let bytes = 0;
   let failed = 0;
+
   await postToClients({
     type: 'OFFLINE_PREPARE_START',
     total,
@@ -93,30 +167,43 @@ async function prepareOfflineBundle(urls, requestedBy = 'user') {
     failed,
     bytes,
     startedAt,
-    requestedBy
+    requestedBy,
+    resumed: resume || skipped > 0
   });
+
+  const reportProgress = async (url) => {
+    const percent = total ? Math.round((loaded / total) * 100) : 100;
+    const payload = {
+      total,
+      loaded,
+      failed,
+      bytes,
+      percent,
+      url,
+      updatedAt: new Date().toISOString()
+    };
+    await postToClients({ type: 'OFFLINE_PREPARE_PROGRESS', ...payload });
+    await persistOfflineProgress(cache, payload);
+  };
+
   try {
-    const cache = await caches.open(CACHE_VERSION);
-    for (const url of normalized) {
-      try {
-        bytes += await cacheOfflineUrl(cache, url);
-      } catch (e) {
-        failed += 1;
-      } finally {
-        loaded += 1;
-        const percent = total ? Math.round((loaded / total) * 100) : 100;
-        await postToClients({
-          type: 'OFFLINE_PREPARE_PROGRESS',
-          total,
-          loaded,
-          failed,
-          bytes,
-          percent,
-          url
-        });
-      }
+    for (let i = 0; i < toFetch.length; i += OFFLINE_BATCH_SIZE) {
+      const batch = toFetch.slice(i, i + OFFLINE_BATCH_SIZE);
+      await Promise.all(batch.map(async (url) => {
+        try {
+          bytes += await cacheOfflineUrl(cache, url);
+        } catch (e) {
+          failed += 1;
+        } finally {
+          loaded += 1;
+          await reportProgress(url);
+        }
+      }));
     }
+
     const completedAt = new Date().toISOString();
+    const ok = offlinePrepareSucceeded(total, loaded, failed);
+    const partial = failed > 0 && ok;
     const meta = {
       version: CACHE_VERSION,
       total,
@@ -125,17 +212,18 @@ async function prepareOfflineBundle(urls, requestedBy = 'user') {
       bytes,
       startedAt,
       completedAt,
-      requestedBy
+      requestedBy,
+      ok,
+      partial
     };
-    await cache.put(
-      OFFLINE_META_KEY,
-      new Response(JSON.stringify(meta), {
-        headers: { 'content-type': 'application/json; charset=utf-8' }
-      })
-    );
+
+    await writeJsonCacheEntry(cache, OFFLINE_META_KEY, meta);
+    if (ok) await cache.delete(OFFLINE_PREP_PENDING_KEY);
+
     await postToClients({
       type: 'OFFLINE_PREPARE_DONE',
-      ok: failed === 0,
+      ok,
+      partial,
       ...meta
     });
   } finally {
@@ -234,25 +322,34 @@ async function focusClientToPost(clientList, targetUrl, postId) {
 self.addEventListener('message', (event) => {
   const data = event.data || {};
   if (data.type === 'OFFLINE_PREPARE') {
-    event.waitUntil(prepareOfflineBundle(data.urls, data.requestedBy || 'user'));
+    event.waitUntil(prepareOfflineBundle(data.urls, data.requestedBy || 'user', { resume: data.resume === true }));
+    return;
+  }
+  if (data.type === 'OFFLINE_PREPARE_RESUME') {
+    event.waitUntil(prepareOfflineBundle([], 'resume', { resume: true }));
     return;
   }
   if (data.type === 'OFFLINE_PREPARE_STATUS') {
     event.waitUntil((async () => {
       try {
         const cache = await caches.open(CACHE_VERSION);
-        const res = await cache.match(OFFLINE_META_KEY);
-        const json = res ? await res.json() : null;
+        const meta = await readJsonCacheEntry(cache, OFFLINE_META_KEY);
+        const progress = await readJsonCacheEntry(cache, OFFLINE_PREP_PROGRESS_KEY);
+        const pending = await readJsonCacheEntry(cache, OFFLINE_PREP_PENDING_KEY);
         await postToClients({
           type: 'OFFLINE_PREPARE_STATUS',
           running: offlinePrepareRunning,
-          meta: json || null
+          meta: meta || null,
+          progress: progress || null,
+          pending: pending || null
         });
       } catch (e) {
         await postToClients({
           type: 'OFFLINE_PREPARE_STATUS',
           running: offlinePrepareRunning,
-          meta: null
+          meta: null,
+          progress: null,
+          pending: null
         });
       }
     })());
