@@ -423,6 +423,64 @@
   line-height: 1.4;
 }
 
+.lib-admin-list-fold {
+  margin-top: 14px;
+  border: 1px solid rgba(239, 215, 142, 0.14);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lib-admin-list-fold summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--ink);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.lib-admin-list-fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.lib-admin-list-scroll {
+  max-height: min(42vh, 360px);
+  overflow: auto;
+  padding: 0 10px 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.lib-admin-edit-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(140, 190, 230, 0.28);
+  background: rgba(40, 90, 140, 0.12);
+}
+
+.lib-admin-edit-banner b {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.lib-admin-edit-banner p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .lib-admin-list-item {
   display: flex;
   flex-wrap: wrap;
