@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-20T06:40:56.244Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-20T07:01:05.569Z",
   "usersChecked": 19,
-  "duaCandidates": 0,
+  "duaCandidates": 19,
   "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 0,
+  "errors": 19,
   "dailyContentDate": "2026-07-20",
   "currentRecommendation": {
     "id": "sifat-allah-yamin-allah-001",
@@ -24,5 +24,15 @@
     "category": "Tawakkul"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "batch": true,
+      "count": 19,
+      "contentId": "dua-022-tawakkalna-anabna",
+      "recipients": "3deb9256-c64b-41fb-83c5-ed1f7fae4e8b",
+      "ok": false,
+      "invalid": 8
+    }
+  ]
 }
