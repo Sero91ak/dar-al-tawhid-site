@@ -51,6 +51,13 @@
 
   function safeRender(options) {
     if (processingPdf && !options?.force) return;
+    if (typeof global.renderLibraryAdminPartial === "function" && global.getAdminCurrentTab?.() === "bibliothek") {
+      try {
+        if (global.renderLibraryAdminPartial()) return;
+      } catch (e) {
+        console.warn("[Bibliothek Admin] Partial render:", e);
+      }
+    }
     if (typeof global.renderShell === "function") {
       try {
         global.renderShell();
@@ -58,6 +65,13 @@
         console.error("[Bibliothek Admin] renderShell:", e);
       }
     }
+  }
+
+  function isAppleTouchDevice() {
+    if (typeof navigator === "undefined") return false;
+    const ua = String(navigator.userAgent || "");
+    const ipad = /iPad/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    return ipad || /iPhone|iPod/.test(ua);
   }
 
   function pdfSelectionKey(file) {
@@ -346,7 +360,7 @@
     showCategoryEdit = true;
     successSlug = "";
     publishStep = 0;
-    if (global.DARLibraryCoverGen && draft.title) {
+    if (global.DARLibraryCoverGen && draft.title && !isAppleTouchDevice()) {
       try {
         await refreshCoverPreview();
       } catch (e) {
@@ -387,11 +401,6 @@
         await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
         applyCategorySuggestion();
         coverMode = "template";
-      }
-      try {
-        await refreshCoverPreview();
-      } catch (e) {
-        console.warn("[Bibliothek Admin] Cover-Vorschau nach PDF-Auswahl:", e);
       }
       successSlug = "";
       successTarget = "test";
@@ -449,7 +458,7 @@
 
   function canPublish() {
     const hasPdf = !!(pdfFile || draft?.pdfUrl);
-    const hasCover = !!(coverVariants || draft?.coverUrl);
+    const hasCover = !!(coverVariants || draft?.coverUrl || (coverMode === "template" && draft?.title?.trim()));
     return !!(hasPdf && draft?.title?.trim() && hasCover && (draft.category || categorySuggestion?.category));
   }
 
@@ -758,15 +767,16 @@
 
   function renderLibraryTab() {
     if (loading && !loaded) {
-      return `<section class="lib-admin"><p class="lib-admin-category">Bibliothek wird geladen…</p></section>`;
+      return `<section class="lib-admin" id="libAdminMount"><p class="lib-admin-category">Bibliothek wird geladen…</p></section>`;
     }
-    return `<section class="lib-admin">
+    return `<section class="lib-admin" id="libAdminMount">
       ${successSlug ? renderSuccess() : renderUploadForm()}
       <section class="lib-admin-list">${renderListFold()}</section>
     </section>`;
   }
 
   function scheduleCoverRefresh() {
+    if (processingPdf || busy || isAppleTouchDevice()) return;
     if (coverTimer) clearTimeout(coverTimer);
     coverTimer = setTimeout(async () => {
       readMainForm();
@@ -824,6 +834,10 @@
 
     document.getElementById("libAdminTitle")?.addEventListener("input", () => {
       scheduleCoverRefresh();
+    });
+
+    document.getElementById("libAdminVersion")?.addEventListener("input", () => {
+      pdfReplaceVersion = "";
     });
 
     document.querySelectorAll('input[name="libCoverMode"]').forEach((input) => {

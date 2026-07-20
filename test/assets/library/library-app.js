@@ -271,22 +271,6 @@
     return `<section class="lib-section${compactClass}"><div class="lib-section-head"><h3>${esc(title)}</h3>${countLabel ? `<span>${esc(countLabel)}</span>` : ""}</div>${inner}</section>`;
   }
 
-  function buildShelfSections(all, offlineIds) {
-    const sections = [];
-    const recent = getRecentlyRead(all).slice(0, 9);
-    if (recent.length) {
-      sections.push(sectionHtml("Zuletzt gelesen", `${recent.length}`, recent.map((p) => compactCardHtml(p, offlineIds)).join(""), "grid-compact"));
-    }
-    const newest = [...all]
-      .filter((p) => p.isNew)
-      .sort((a, b) => String(b.publishedAt || "").localeCompare(String(a.publishedAt || "")))
-      .slice(0, 9);
-    if (newest.length) {
-      sections.push(sectionHtml("Neu erschienen", `${newest.length}`, newest.map((p) => compactCardHtml(p, offlineIds)).join(""), "grid-compact"));
-    }
-    return sections;
-  }
-
   function renderCategoryPicker() {
     const label = uiState.category === "Alle" ? "Alle Kategorien" : uiState.category;
     const options = CATEGORIES.map((cat) =>
@@ -297,8 +281,14 @@
         <span class="lib-cat-toggle-label">Thema: ${esc(label)}</span>
         <span class="lib-cat-chevron" aria-hidden="true">${uiState.catOpen ? "▴" : "▾"}</span>
       </button>
-      <div id="libraryCatPanel" class="lib-cat-panel${uiState.catOpen ? " is-open" : ""}" ${uiState.catOpen ? "" : "hidden"}>${options}</div>
+      <div id="libraryCatPanel" class="lib-cat-panel${uiState.catOpen ? " is-open" : ""}">${options}</div>
     </div>`;
+  }
+
+  function listSectionTitle() {
+    if (uiState.query) return "Suchergebnisse";
+    if (uiState.category !== "Alle") return uiState.category;
+    return "Alle Veröffentlichungen";
   }
 
   function renderLoading() {
@@ -312,34 +302,12 @@
   function renderBibliothekMain(offlineIds) {
     const all = visiblePublications(catalog.publications || []);
     const filtered = filteredPublications(all);
-    const byTopic = uiState.category !== "Alle" ? filtered : [];
-
     const catButtons = renderCategoryPicker();
-
-    let sections = "";
-    const showShelves = !uiState.query && uiState.category === "Alle";
-
-    if (showShelves) {
-      sections += buildShelfSections(all, offlineIds).join("");
-    }
-
-    if (uiState.category !== "Alle") {
-      const topicCards = byTopic.map((p) => cardHtml(p, offlineIds)).join("");
-      if (topicCards) sections += sectionHtml(`Nach Themen · ${uiState.category}`, `${byTopic.length}`, topicCards);
-    }
-
-    const allCards = (uiState.query || uiState.category !== "Alle" ? filtered : all)
-      .map((p) => cardHtml(p, offlineIds))
-      .join("");
-    if (allCards && (uiState.query || !showShelves || uiState.category !== "Alle")) {
-      sections += sectionHtml(uiState.query ? "Suchergebnisse" : "Alle Veröffentlichungen", `${filtered.length}`, allCards);
-    } else if (showShelves && all.length) {
-      sections += sectionHtml("Alle Veröffentlichungen", `${all.length}`, all.map((p) => cardHtml(p, offlineIds)).join(""));
-    }
-
-    if (!sections) {
-      sections = `<div class="lib-empty">Keine Veröffentlichungen für diese Auswahl gefunden.</div>`;
-    }
+    const list = filtered;
+    const cards = list.map((p) => cardHtml(p, offlineIds)).join("");
+    const sections = cards
+      ? sectionHtml(listSectionTitle(), `${list.length}`, cards)
+      : `<div class="lib-empty">Keine Veröffentlichungen für diese Auswahl gefunden.</div>`;
 
     return `<section class="lib-page" data-library-root>
       <header class="lib-hero" aria-label="Bibliothekskopf">

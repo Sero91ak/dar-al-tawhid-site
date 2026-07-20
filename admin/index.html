@@ -543,7 +543,7 @@ main#panel.panel{
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/library-cover-gen.js?v=4"></script>
-<script src="/admin/library-manager.js?v=10"></script>
+<script src="/admin/library-manager.js?v=11"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=6">
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -2155,7 +2155,20 @@ function renderFeedBgAdminPanel(){
   if(window.DARFeedBgAdmin&&typeof window.DARFeedBgAdmin.renderFeedBgTab==="function")return window.DARFeedBgAdmin.renderFeedBgTab();
   return `<section class="news-workspace"><div class="panel news-panel"><div class="section-head"><h3>Feed · Auto-Hintergründe</h3></div><div class="notice-note wide" style="color:#ffc9c3">Modul konnte nicht geladen werden. Bitte Seite mit <b>Strg+F5</b> neu laden. Skript: <code>/admin/feed-backgrounds-manager.js?v=3</code></div></div></section>`;
 }
+window.renderLibraryAdminPartial=function(){
+  if(currentTab!=="bibliothek"||!window.DARLibraryAdmin)return false;
+  const mount=document.getElementById("libAdminMount");
+  if(!mount)return false;
+  const wrap=document.createElement("div");
+  wrap.innerHTML=window.DARLibraryAdmin.renderLibraryTab();
+  const next=wrap.firstElementChild;
+  if(!next)return false;
+  mount.replaceWith(next);
+  if(window.DARLibraryAdmin.bindLibraryTab)window.DARLibraryAdmin.bindLibraryTab();
+  return true;
+};
 function renderShell(){
+  if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
   const posts=rows.filter(x=>x.content_type==="post"),duas=rows.filter(x=>x.content_type==="dua");
@@ -2185,7 +2198,7 @@ function renderShell(){
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
-  if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&!window.__darLibraryAdminLoaded)window.DARLibraryAdmin.ensureLibraryLoaded(false).then(()=>{window.__darLibraryAdminLoaded=true;if(currentTab==="bibliothek")renderShell()}).catch(()=>{});
+  if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&!window.__darLibraryAdminLoaded)window.DARLibraryAdmin.ensureLibraryLoaded(false).then(()=>{window.__darLibraryAdminLoaded=true;if(currentTab==="bibliothek"){if(window.DARLibraryAdmin.isLibraryBusy&&window.DARLibraryAdmin.isLibraryBusy())window.renderLibraryAdminPartial&&window.renderLibraryAdminPartial();else renderShell()}}).catch(()=>{});
   if(currentTab==="feed-bg"&&window.DARFeedBgAdmin&&!window.__darFeedBgAdminLoaded)window.DARFeedBgAdmin.ensureBgLoaded(false).then(()=>{if(currentTab==="feed-bg")renderShell()}).catch(()=>{});
   if(window.DARFeedBgAdmin&&!window.__darFeedBgAutoInit){window.__darFeedBgAutoInit=true;window.DARFeedBgAdmin.ensureBgLoaded(false).catch(()=>{});}
   if(currentTab==="quiz-stats"&&window.DARQuizStatsAdmin&&!quizStatsLoadedFlag()){
@@ -3746,6 +3759,7 @@ document.addEventListener("touchend",e=>{
   const dx=t.clientX-adminSwipe.x,dy=t.clientY-adminSwipe.y,dt=Date.now()-adminSwipe.t;
   adminSwipe=null;
   if(adminNavStack.length||currentTab!=="start"){
+    if(currentTab==="bibliothek"){adminSwipe=null;return}
     if(dx>78&&Math.abs(dy)<55&&dt<650)adminBack();
   }
 },{passive:true});
