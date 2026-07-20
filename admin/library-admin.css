@@ -386,6 +386,16 @@
   font-size: 0.72rem;
 }
 
+.lib-admin-btn-warn {
+  border-color: rgba(255, 196, 120, 0.45) !important;
+  color: #ffd9a0 !important;
+}
+
+.lib-admin-btn-danger {
+  border-color: rgba(255, 120, 120, 0.45) !important;
+  color: #ffb0b0 !important;
+}
+
 @media (max-width: 900px) {
   .lib-admin-layout {
     grid-template-columns: 1fr;

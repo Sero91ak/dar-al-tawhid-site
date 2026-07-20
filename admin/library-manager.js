@@ -537,14 +537,37 @@
     </div>`;
   }
 
+  function statusLabelAdmin(status) {
+    const map = {
+      published: "Veröffentlicht",
+      updated: "Aktualisiert",
+      preparing: "Vorbereitung",
+      draft: "Entwurf / offline",
+      archived: "Archiviert",
+      error: "Fehler"
+    };
+    return map[String(status || "").trim()] || String(status || "—");
+  }
+
+  function renderListActions(pub) {
+    const status = String(pub.status || "");
+    const actions = [];
+    if (status === "published" || status === "updated" || status === "preparing") {
+      actions.push(`<button class="lib-admin-btn lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(pub.id)}">Offline nehmen</button>`);
+    }
+    if (status !== "archived") {
+      actions.push(`<button class="lib-admin-btn" type="button" data-lib-archive="${esc(pub.id)}">Archivieren</button>`);
+    }
+    actions.push(`<button class="lib-admin-btn lib-admin-btn-danger" type="button" data-lib-delete="${esc(pub.id)}">Löschen</button>`);
+    return actions.join("");
+  }
+
   function renderList() {
     const items = (catalog.publications || []).slice().sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
     if (!items.length) return `<p class="lib-admin-category">Noch keine Veröffentlichungen vorhanden.</p>`;
     return items.map((p) => `<div class="lib-admin-list-item">
-      <div><b>${esc(p.title)}</b><br><span>${esc(p.category || "—")} · ${esc(p.status || "")} · v${esc(p.version || "")}</span></div>
-      <div class="lib-admin-list-actions">
-        <button class="lib-admin-btn" type="button" data-lib-archive="${esc(p.id)}">Archivieren</button>
-      </div>
+      <div><b>${esc(p.title)}</b><br><span>${esc(p.category || "—")} · ${esc(statusLabelAdmin(p.status))} · v${esc(p.version || "")}</span></div>
+      <div class="lib-admin-list-actions">${renderListActions(p)}</div>
     </div>`).join("");
   }
 
@@ -696,14 +719,44 @@
     document.querySelectorAll("[data-lib-archive]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-archive");
-        if (!confirm("Veröffentlichung archivieren?")) return;
+        if (!confirm("Veröffentlichung archivieren? Sie wird für Besucher ausgeblendet, bleibt aber im Admin erhalten.")) return;
         try {
-          await workerPost("api/admin/library/delete", { id });
+          await workerPost("api/admin/library/delete", { id, action: "archive" });
           toast("Archiviert");
           await ensureLibraryLoaded(true);
           renderShell();
         } catch (e) {
           toast(e.message || "Archivieren fehlgeschlagen");
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-lib-unpublish]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-lib-unpublish");
+        if (!confirm("Veröffentlichung offline nehmen? Sie verschwindet von der Bibliotheksseite und kann bearbeitet sowie erneut veröffentlicht werden.")) return;
+        try {
+          await workerPost("api/admin/library/delete", { id, action: "unpublish" });
+          toast("Offline genommen — Entwurf");
+          await ensureLibraryLoaded(true);
+          renderShell();
+        } catch (e) {
+          toast(e.message || "Offline nehmen fehlgeschlagen");
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-lib-delete]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-lib-delete");
+        if (!confirm("Veröffentlichung endgültig löschen? PDF, Cover und Eintrag werden entfernt.")) return;
+        try {
+          await workerPost("api/admin/library/delete", { id, action: "delete" });
+          toast("Gelöscht");
+          await ensureLibraryLoaded(true);
+          renderShell();
+        } catch (e) {
+          toast(e.message || "Löschen fehlgeschlagen");
         }
       });
     });

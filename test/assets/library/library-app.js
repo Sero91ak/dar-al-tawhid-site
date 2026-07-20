@@ -371,47 +371,44 @@
     const downloadEnabled = canDownload(pub);
     const offlineEnabled = canOffline(pub);
     const preparing = pub.status === "preparing" || !pub.pdfUrl;
+    const readLabel = progress && progress.lastPage > 1 ? `Weiterlesen · S. ${progress.lastPage}` : "Jetzt lesen";
 
     const toc = (pub.tableOfContents || []);
     const sources = pub.sources || [];
-    const versions = pub.versionHistory || [];
 
     return `<section class="lib-page lib-detail" data-library-detail="${esc(pub.slug)}">
-      <div class="lib-detail-hero">
+      <div class="lib-detail-hero lib-detail-hero-compact">
         <div class="lib-detail-cover">${coverHtml(pub)}</div>
-        <div>
-          <p class="lib-detail-kicker">${esc(pub.transliteratedTitle || "")}</p>
+        <div class="lib-detail-copy">
+          ${pub.transliteratedTitle ? `<p class="lib-detail-kicker">${esc(pub.transliteratedTitle)}</p>` : ""}
           <h2>${esc(pub.title)}</h2>
-          <p class="lib-detail-sub">${esc(pub.subtitle || "")}</p>
-          <p class="lib-detail-credit">${esc(pub.credit || "")}</p>
-          <p class="lib-detail-desc">${esc(pub.description || "")}</p>
+          ${pub.subtitle ? `<p class="lib-detail-sub">${esc(pub.subtitle)}</p>` : ""}
+          ${pub.description ? `<p class="lib-detail-desc">${esc(pub.description)}</p>` : ""}
         </div>
       </div>
-      ${progress && progress.lastPage ? `<p class="lib-resume">Weiterlesen ab Seite ${progress.lastPage}</p>` : ""}
       ${preparing ? `<div class="lib-status-note" role="status">Veröffentlichung wird vorbereitet</div>` : ""}
-      <div class="lib-actions">
-        <button class="lib-btn lib-btn-primary" type="button" data-library-read="${esc(pub.slug)}" ${readEnabled ? "" : "disabled"}>${progress && progress.lastPage ? "Weiterlesen" : "Jetzt lesen"}</button>
-        <button class="lib-btn" type="button" data-library-download="${esc(pub.slug)}" ${downloadEnabled ? "" : "disabled"}>PDF herunterladen</button>
-        <button class="lib-btn" type="button" data-library-offline="${esc(pub.slug)}" ${offlineEnabled && !offline ? "" : "disabled"}>${offline ? "Offline verfügbar" : "Offline speichern"}</button>
-        ${offline && offlineEnabled ? `<button class="lib-btn lib-btn-ghost" type="button" data-library-offline-remove="${esc(pub.slug)}">Offline-Datei entfernen</button>` : ""}
-        <button class="lib-btn lib-btn-ghost" type="button" data-library-share="${esc(pub.slug)}">Teilen</button>
+      <div class="lib-actions lib-actions-compact">
+        <div class="lib-actions-row">
+          <button class="lib-btn lib-btn-primary" type="button" data-library-read="${esc(pub.slug)}" ${readEnabled ? "" : "disabled"}>${readLabel}</button>
+          <button class="lib-btn" type="button" data-library-download="${esc(pub.slug)}" ${downloadEnabled ? "" : "disabled"}>PDF</button>
+          <button class="lib-btn" type="button" data-library-share="${esc(pub.slug)}">Teilen</button>
+        </div>
+        <div class="lib-actions-row lib-actions-row-secondary">
+          <button class="lib-btn lib-btn-ghost" type="button" data-library-offline="${esc(pub.slug)}" ${offlineEnabled && !offline ? "" : "disabled"}>${offline ? "Offline gespeichert" : "Offline speichern"}</button>
+          ${offline && offlineEnabled ? `<button class="lib-btn lib-btn-ghost" type="button" data-library-offline-remove="${esc(pub.slug)}">Offline entfernen</button>` : ""}
+        </div>
       </div>
-      <div class="lib-meta-grid">
+      <div class="lib-meta-grid lib-meta-grid-compact">
         <div class="lib-meta-item"><b>Kategorie</b><span>${esc(pub.category || "—")}</span></div>
         <div class="lib-meta-item"><b>Thema</b><span>${esc(pub.topic || "—")}</span></div>
-        <div class="lib-meta-item"><b>Seiten</b><span>${pub.pageCount ? esc(String(pub.pageCount)) : "—"}</span></div>
         <div class="lib-meta-item"><b>Sprache</b><span>${esc(pub.language || "—")}</span></div>
-        <div class="lib-meta-item"><b>Version</b><span>${esc(pub.version || "—")}</span></div>
-        <div class="lib-meta-item"><b>Veröffentlicht</b><span>${esc(formatDate(pub.publishedAt))}</span></div>
-        <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Dateigröße</b><span>${esc(pub.fileSize || "—")}</span></div>
-        <div class="lib-meta-item"><b>Status</b><span>${esc(statusLabel(pub))}</span></div>
-        <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : "Noch nicht begonnen"}</span></div>
+        <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
+        <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
       </div>
       ${toc.length ? `<section class="lib-panel"><h3>Inhaltsverzeichnis</h3><ul>${toc.map((item) => `<li>${esc(item.title || item)}</li>`).join("")}</ul></section>` : ""}
       ${pub.about ? `<section class="lib-panel"><h3>Über diese Veröffentlichung</h3><p>${esc(pub.about)}</p></section>` : ""}
       ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((s) => `<li>${esc(typeof s === "string" ? s : s.title || s.name || "")}</li>`).join("")}</ul></section>` : ""}
-      ${versions.length ? `<section class="lib-panel"><h3>Versionsverlauf</h3><ul>${versions.map((v) => `<li><b>${esc(v.version || "")}</b> · ${esc(formatDate(v.date))} — ${esc(v.note || "")}</li>`).join("")}</ul></section>` : ""}
       ${relatedHtml(pub, list)}
     </section>`;
   }
@@ -423,17 +420,17 @@
     }
     const progress = getProgress(pub.id);
     return `<div class="lib-reader" data-library-reader="${esc(pub.slug)}" role="dialog" aria-label="PDF-Leser: ${esc(pub.title)}">
-      <div class="lib-reader-toolbar">
-        <button class="lib-btn lib-btn-ghost" type="button" data-library-reader-close aria-label="Zurück zur Buchdetailseite">Zurück</button>
-        <button class="lib-btn" type="button" data-library-reader-prev aria-label="Vorherige Seite">‹</button>
-        <button class="lib-btn" type="button" data-library-reader-next aria-label="Nächste Seite">›</button>
-        <label class="lib-reader-page">Seite <input type="number" min="1" data-library-reader-input value="${progress?.lastPage || 1}" aria-label="Seitennummer"> / <span data-library-reader-total>—</span></label>
-        <button class="lib-btn" type="button" data-library-reader-zoom-out aria-label="Verkleinern">−</button>
-        <button class="lib-btn" type="button" data-library-reader-zoom-in aria-label="Vergrößern">+</button>
-        <button class="lib-btn" type="button" data-library-reader-fullscreen aria-label="Vollbild">Vollbild</button>
-        <button class="lib-btn" type="button" data-library-reader-download aria-label="Download">Download</button>
-        <button class="lib-btn" type="button" data-library-reader-share aria-label="Teilen">Teilen</button>
+      <div class="lib-reader-toolbar lib-reader-toolbar-compact">
+        <button class="lib-btn lib-btn-ghost lib-reader-icon" type="button" data-library-reader-close aria-label="Zurück zur Buchdetailseite">←</button>
+        <button class="lib-btn lib-reader-icon" type="button" data-library-reader-prev aria-label="Vorherige Seite">▲</button>
+        <label class="lib-reader-page"><input type="number" min="1" data-library-reader-input value="${progress?.lastPage || 1}" aria-label="Seitennummer"> / <span data-library-reader-total>—</span></label>
+        <button class="lib-btn lib-reader-icon" type="button" data-library-reader-next aria-label="Nächste Seite">▼</button>
+        <div class="lib-reader-toolbar-end">
+          <button class="lib-btn lib-reader-icon" type="button" data-library-reader-download aria-label="Download">↓</button>
+          <button class="lib-btn lib-reader-icon" type="button" data-library-reader-share aria-label="Teilen">⤴</button>
+        </div>
       </div>
+      <div class="lib-reader-titlebar">${esc(pub.title)}</div>
       <div class="lib-reader-stage" data-library-reader-stage>
         <div class="lib-reader-msg">PDF wird geladen…</div>
       </div>
@@ -581,6 +578,74 @@
     return global.__pdfJsLoading;
   }
 
+  let readerPageObserver = null;
+
+  function scrollToReaderPage(pageNum, behavior) {
+    if (!readerState) return;
+    const page = Math.max(1, Math.min(readerState.total, Number(pageNum) || 1));
+    readerState.page = page;
+    const target = document.querySelector(`.lib-reader-sheet[data-page="${page}"]`);
+    if (target) target.scrollIntoView({ behavior: behavior || "smooth", block: "start" });
+    const input = document.querySelector("[data-library-reader-input]");
+    if (input) input.value = String(page);
+    saveProgress(readerState.pub.id, page, readerState.total);
+  }
+
+  function setupReaderScrollTracking(stack, stage) {
+    if (readerPageObserver) readerPageObserver.disconnect();
+    const pages = stack.querySelectorAll(".lib-reader-sheet");
+    if (!pages.length) return;
+    readerPageObserver = new IntersectionObserver((entries) => {
+      let best = null;
+      let bestRatio = 0;
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > bestRatio) {
+          bestRatio = entry.intersectionRatio;
+          best = entry.target;
+        }
+      });
+      if (!best || !readerState || bestRatio < 0.2) return;
+      const page = Number(best.dataset.page) || 1;
+      if (page === readerState.page) return;
+      readerState.page = page;
+      const input = document.querySelector("[data-library-reader-input]");
+      if (input) input.value = String(page);
+      saveProgress(readerState.pub.id, page, readerState.total);
+    }, { root: stage, threshold: [0.2, 0.45, 0.7] });
+    pages.forEach((pageEl) => readerPageObserver.observe(pageEl));
+  }
+
+  async function renderReaderScroll(options) {
+    if (!readerState || !readerState.doc) return;
+    const stage = document.querySelector("[data-library-reader-stage]");
+    if (!stage) return;
+    const width = Math.max(280, stage.clientWidth - 12);
+    stage.innerHTML = '<div class="lib-reader-msg">Seiten werden geladen…</div>';
+    const stack = document.createElement("div");
+    stack.className = "lib-reader-stack";
+    for (let pageNum = 1; pageNum <= readerState.total; pageNum += 1) {
+      const page = await readerState.doc.getPage(pageNum);
+      const baseViewport = page.getViewport({ scale: 1 });
+      const scale = width / baseViewport.width;
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      canvas.className = "lib-reader-page-canvas";
+      const wrap = document.createElement("div");
+      wrap.className = "lib-reader-sheet";
+      wrap.dataset.page = String(pageNum);
+      wrap.appendChild(canvas);
+      stack.appendChild(wrap);
+      await page.render({ canvasContext: ctx, viewport }).promise;
+    }
+    stage.innerHTML = "";
+    stage.appendChild(stack);
+    setupReaderScrollTracking(stack, stage);
+    if (!options || !options.skipScroll) scrollToReaderPage(readerState.page, "auto");
+  }
+
   async function initReader(pub) {
     const root = document.querySelector("[data-library-reader]");
     const stage = document.querySelector("[data-library-reader-stage]");
@@ -590,7 +655,6 @@
       pub,
       page: getProgress(pub.id)?.lastPage || 1,
       total: 0,
-      scale: 1.1,
       doc: null
     };
 
@@ -603,35 +667,10 @@
       readerState.total = doc.numPages;
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
-      await renderReaderPage();
+      await renderReaderScroll();
     } catch (e) {
-      stage.innerHTML = `<div class="lib-reader-msg">Diese Veröffentlichung wird momentan vorbereitet.</div>`;
+      stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
-  }
-
-  async function renderReaderPage() {
-    if (!readerState || !readerState.doc) return;
-    const stage = document.querySelector("[data-library-reader-stage]");
-    const input = document.querySelector("[data-library-reader-input]");
-    if (!stage) return;
-
-    const pageNum = Math.max(1, Math.min(readerState.total, Number(readerState.page) || 1));
-    readerState.page = pageNum;
-    if (input) input.value = String(pageNum);
-
-    const page = await readerState.doc.getPage(pageNum);
-    const viewport = page.getViewport({ scale: readerState.scale });
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-    stage.innerHTML = "";
-    const wrap = document.createElement("div");
-    wrap.className = "lib-reader-canvas-wrap";
-    wrap.appendChild(canvas);
-    stage.appendChild(wrap);
-    await page.render({ canvasContext: ctx, viewport }).promise;
-    saveProgress(readerState.pub.id, pageNum, readerState.total);
   }
 
   function findPublication(slug) {
@@ -740,28 +779,13 @@
         if (reader) {
           reader.querySelector("[data-library-reader-close]")?.addEventListener("click", () => navigateDetail(pub.slug));
           reader.querySelector("[data-library-reader-prev]")?.addEventListener("click", () => {
-            readerState.page = Math.max(1, readerState.page - 1);
-            renderReaderPage();
+            scrollToReaderPage(readerState.page - 1);
           });
           reader.querySelector("[data-library-reader-next]")?.addEventListener("click", () => {
-            readerState.page = Math.min(readerState.total, readerState.page + 1);
-            renderReaderPage();
+            scrollToReaderPage(readerState.page + 1);
           });
           reader.querySelector("[data-library-reader-input]")?.addEventListener("change", (ev) => {
-            readerState.page = Number(ev.target.value) || 1;
-            renderReaderPage();
-          });
-          reader.querySelector("[data-library-reader-zoom-in]")?.addEventListener("click", () => {
-            readerState.scale = Math.min(2.4, readerState.scale + 0.15);
-            renderReaderPage();
-          });
-          reader.querySelector("[data-library-reader-zoom-out]")?.addEventListener("click", () => {
-            readerState.scale = Math.max(0.7, readerState.scale - 0.15);
-            renderReaderPage();
-          });
-          reader.querySelector("[data-library-reader-fullscreen]")?.addEventListener("click", () => {
-            const el = reader;
-            if (el.requestFullscreen) el.requestFullscreen();
+            scrollToReaderPage(Number(ev.target.value) || 1, "auto");
           });
           reader.querySelector("[data-library-reader-download]")?.addEventListener("click", async () => {
             try {
@@ -781,6 +805,10 @@
       }
     } else {
       document.body.classList.remove("is-library-reader-route");
+      if (readerPageObserver) {
+        readerPageObserver.disconnect();
+        readerPageObserver = null;
+      }
       readerState = null;
     }
   }

@@ -362,7 +362,48 @@
 
 .lib-detail {
   display: grid;
-  gap: 14px;
+  gap: 10px;
+}
+
+.lib-detail-hero-compact {
+  gap: 10px;
+}
+
+.lib-detail-copy {
+  min-width: 0;
+}
+
+.lib-actions-compact {
+  display: grid;
+  gap: 6px;
+}
+
+.lib-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lib-actions-row .lib-btn {
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  flex: 1 1 auto;
+}
+
+.lib-actions-row-secondary .lib-btn {
+  min-height: 36px;
+  padding: 7px 10px;
+  font-size: 0.76rem;
+  flex: 1 1 calc(50% - 6px);
+}
+
+.lib-meta-grid-compact {
+  gap: 6px;
+}
+
+.lib-meta-grid-compact .lib-meta-item {
+  padding: 8px 10px;
 }
 
 .lib-detail-hero {
@@ -525,6 +566,28 @@
   color: var(--text);
 }
 
+body.is-library-reader-route .top-shell,
+body.is-library-reader-route .app-bar,
+body.is-library-reader-route .isnad,
+body.is-library-reader-route .footer,
+body.is-library-reader-route .float-actions,
+body.is-library-reader-route .bottom-nav,
+body.is-library-reader-route .new-posts-banner,
+body.is-library-reader-route .top-edge-fade,
+body.is-library-reader-route .top-swim-aura {
+  display: none !important;
+}
+
+body.is-library-reader-route .app,
+body.is-library-reader-route .view {
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
 .lib-reader-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -533,6 +596,40 @@
   padding: calc(env(safe-area-inset-top, 0px) + 8px) 10px 8px;
   background: color-mix(in srgb, var(--panel) 94%, var(--bg));
   border-bottom: 1px solid var(--line2);
+}
+
+.lib-reader-toolbar-compact {
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: calc(env(safe-area-inset-top, 0px) + 6px) 8px 6px;
+}
+
+.lib-reader-toolbar-compact .lib-btn {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 6px 8px;
+  font-size: 0.82rem;
+}
+
+.lib-reader-icon {
+  flex: 0 0 auto;
+}
+
+.lib-reader-toolbar-end {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+
+.lib-reader-titlebar {
+  padding: 4px 10px 6px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid var(--line2);
+  background: color-mix(in srgb, var(--panel) 88%, var(--bg));
 }
 
 .lib-reader-toolbar .lib-btn {
@@ -544,29 +641,54 @@
 .lib-reader-page {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: auto;
-  font-size: 0.8rem;
+  gap: 4px;
+  font-size: 0.76rem;
   color: var(--muted);
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
 }
 
 .lib-reader-page input {
-  width: 52px;
-  min-height: 36px;
+  width: 44px;
+  min-height: 32px;
   border-radius: 8px;
   border: 1px solid var(--line2);
   background: color-mix(in srgb, var(--card) 70%, var(--bg));
   color: var(--text);
   text-align: center;
+  font-size: 0.76rem;
 }
 
 .lib-reader-stage {
   flex: 1;
   overflow: auto;
-  display: grid;
-  place-items: start center;
-  padding: 12px;
-  background: var(--bg);
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 6px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: color-mix(in srgb, var(--bg) 92%, #000);
+}
+
+.lib-reader-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.lib-reader-sheet {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--bg) 55%, transparent);
+  background: #fff;
+}
+
+.lib-reader-page-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .lib-reader-msg {
