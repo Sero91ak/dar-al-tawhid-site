@@ -69,7 +69,8 @@
 .list-card:hover,
 .dua-card:hover,
 .info-card:hover,
-.more-feature-row:hover {
+.more-feature-row:hover,
+.quran-surah-card:hover {
   transform: none !important;
   filter: none !important;
 }
@@ -187,6 +188,12 @@ body {
 .more-feature-row:hover {
   border-color: var(--depth-border) !important;
   box-shadow: var(--depth-shadow-2), var(--depth-inset-top) !important;
+}
+
+.quran-surah-card:hover {
+  border-color: var(--depth-border) !important;
+  box-shadow: var(--depth-shadow-2), var(--depth-inset-top) !important;
+  transform: none !important;
 }
 
 .folder-card .folder-icon,
