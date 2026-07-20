@@ -1,0 +1,441 @@
+/**
+ * DAR AL TAWḤĪD — Premium Depth Design System
+ * Visual-only: surfaces, depth, typography, motion. No icon/content changes.
+ */
+
+/* —— PHASE 2: Central geometry tokens (identical in all themes) —— */
+:root {
+  --depth-page-radius: 28px;
+  --depth-section-radius: 22px;
+  --depth-card-radius: 18px;
+  --depth-card-radius-sm: 16px;
+  --depth-control-radius: 16px;
+  --depth-pill-radius: 999px;
+
+  --depth-gap-section: 13px;
+  --depth-gap-card: 8px;
+  --depth-card-pad-y: 9px;
+  --depth-card-pad-x: 11px;
+  --depth-card-icon: 30px;
+
+  --depth-shadow-0: none;
+  --depth-shadow-1: 0 4px 14px rgba(0, 0, 0, 0.12);
+  --depth-shadow-2: 0 8px 22px rgba(0, 0, 0, 0.16);
+  --depth-shadow-nav: 0 6px 20px rgba(0, 0, 0, 0.14);
+  --depth-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --depth-inset-top-strong: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  --depth-nav-height: 58px;
+  --depth-btn-min-h: 40px;
+  --depth-input-min-h: 44px;
+
+  --depth-type-section: clamp(0.92rem, 2.8vw, 1rem);
+  --depth-type-card-title: clamp(15px, 3.6vw, 17px);
+  --depth-type-meta: 10px;
+  --depth-type-num: clamp(1.1rem, 4vw, 1.35rem);
+
+  --depth-motion-fast: 130ms;
+  --depth-motion-ui: 180ms;
+  --depth-motion-card: 220ms;
+  --depth-motion-page: 300ms;
+  --depth-ease: cubic-bezier(0.22, 0.84, 0.32, 1);
+
+  --depth-surface-page: var(--theme-page-bg, var(--bg));
+  --depth-surface-area: color-mix(in srgb, var(--card) 88%, var(--bg) 12%);
+  --depth-surface-card: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--card) 94%, #fff 6%) 0%,
+    color-mix(in srgb, var(--panel) 92%, var(--bg) 8%) 100%
+  );
+  --depth-surface-raised: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--card) 96%, #fff 4%) 0%,
+    color-mix(in srgb, var(--panel) 90%, var(--bg) 10%) 100%
+  );
+  --depth-border: color-mix(in srgb, var(--line) 72%, transparent);
+  --depth-border-soft: color-mix(in srgb, var(--line2) 85%, transparent);
+  --depth-focus-ring: 0 0 0 2px color-mix(in srgb, var(--gold2) 28%, transparent);
+}
+
+/* —— PHASE 1: Rollback faulty 3D / decorative overrides —— */
+.emoji-emblem {
+  filter: none !important;
+  transform: none !important;
+  text-shadow: none !important;
+}
+
+.folder-card:hover,
+.post-card:hover,
+.list-card:hover,
+.dua-card:hover,
+.info-card:hover,
+.more-feature-row:hover {
+  transform: none !important;
+  filter: none !important;
+}
+
+.bottom-nav-btn .nav-icon,
+.bottom-nav-btn.active .nav-icon,
+.bottom-nav-btn.is-pressed .nav-icon,
+.bottom-nav-btn:active .nav-icon,
+.bottom-nav-btn.active:not(:active):not(.is-pressed) .nav-icon {
+  transform: none !important;
+  filter: none !important;
+}
+
+.bottom-nav-btn.is-pressed,
+.bottom-nav-btn:active {
+  transform: scale(0.985) !important;
+  filter: none !important;
+}
+
+.bottom-nav-btn.active {
+  filter: none !important;
+}
+
+/* —— Page background depth —— */
+body {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -12%, color-mix(in srgb, var(--gold2) 5%, transparent), transparent 52%),
+    linear-gradient(180deg, var(--depth-surface-page) 0%, color-mix(in srgb, var(--bg) 92%, #000 8%) 100%) !important;
+}
+
+.top-shell,
+.view {
+  border-radius: var(--depth-page-radius);
+}
+
+/* —— Typography & numbers —— */
+.section-head h3,
+.view-head h2,
+.folder-card h3,
+.list-card h3,
+.more-group h3,
+.feature-head h3 {
+  font-family: var(--sans) !important;
+  font-size: var(--depth-type-section) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.01em;
+}
+
+.folder-card h3,
+.list-card h3,
+.post-card h3,
+.dua-card h3,
+.more-feature-row h4,
+.quran-surah-card h3 {
+  font-size: var(--depth-type-card-title) !important;
+  line-height: 1.12 !important;
+}
+
+.folder-meta span,
+.list-card .count,
+.more-feature-row p,
+.quran-surah-card small,
+.prayer-time-value,
+.prayer-countdown,
+.stat-card b,
+.zakat-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* —— Cards: compact spatial surfaces —— */
+.folder-grid,
+.latest-grid,
+.grid-list,
+.post-grid,
+.more-group-grid {
+  gap: var(--depth-gap-card) !important;
+}
+
+.section-block {
+  margin-top: var(--depth-gap-section) !important;
+}
+
+.section-head {
+  margin-bottom: 8px !important;
+}
+
+.folder-card,
+.post-card,
+.list-card,
+.info-card,
+.dua-card,
+.event-card,
+.quran-surah-card,
+.quran-result-card,
+.current-focus-row,
+.daily-box,
+.recommended-box,
+.more-feature-row {
+  border-radius: var(--depth-card-radius) !important;
+  padding: var(--depth-card-pad-y) var(--depth-card-pad-x) !important;
+  border: 1px solid var(--depth-border-soft) !important;
+  background: var(--depth-surface-card) !important;
+  box-shadow: var(--depth-shadow-1), var(--depth-inset-top) !important;
+  transition:
+    border-color var(--depth-motion-card) var(--depth-ease),
+    box-shadow var(--depth-motion-card) var(--depth-ease),
+    background var(--depth-motion-card) var(--depth-ease);
+}
+
+.folder-card:hover,
+.post-card:hover,
+.list-card:hover,
+.dua-card:hover,
+.more-feature-row:hover {
+  border-color: var(--depth-border) !important;
+  box-shadow: var(--depth-shadow-2), var(--depth-inset-top) !important;
+}
+
+.folder-card .folder-icon,
+.list-card .folder-icon,
+.more-feature-row .feature-icon,
+.quran-surah-card .quran-num {
+  width: var(--depth-card-icon) !important;
+  height: var(--depth-card-icon) !important;
+  border-radius: 11px !important;
+  margin: 0 !important;
+  border: 1px solid var(--depth-border-soft) !important;
+  background: color-mix(in srgb, var(--gold2) 10%, var(--card) 90%) !important;
+  box-shadow: var(--depth-inset-top) !important;
+}
+
+.folder-card p,
+.list-card .count,
+.folder-meta span {
+  font-size: var(--depth-type-meta) !important;
+  line-height: 1.2 !important;
+}
+
+/* —— Home pilot —— */
+.home-refresh-panel,
+.current-focus,
+.popular-panel,
+.feature-section,
+.daily-box,
+.recommended-box {
+  border-radius: var(--depth-section-radius) !important;
+  border: 1px solid var(--depth-border-soft) !important;
+  background: var(--depth-surface-raised) !important;
+  box-shadow: var(--depth-shadow-1), var(--depth-inset-top) !important;
+}
+
+.current-focus-row,
+.home-refresh-btn,
+.home-refresh-panel .home-refresh-btn {
+  border-radius: var(--depth-control-radius) !important;
+}
+
+.prayer-quick-card,
+.prayer-panel .prayer-time-row {
+  border-radius: var(--depth-card-radius) !important;
+  box-shadow: var(--depth-shadow-1), var(--depth-inset-top) !important;
+}
+
+.prayer-time-value {
+  font-size: var(--depth-type-num) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+}
+
+/* —— More pilot —— */
+.more-search,
+.feature-section,
+.more-group {
+  border-radius: var(--depth-section-radius) !important;
+  border: 1px solid var(--depth-border-soft) !important;
+  background: var(--depth-surface-area) !important;
+  box-shadow: var(--depth-shadow-1), var(--depth-inset-top) !important;
+}
+
+.more-search {
+  min-height: var(--depth-input-min-h) !important;
+  border-radius: var(--depth-pill-radius) !important;
+  padding: 10px 14px !important;
+  transition:
+    border-color var(--depth-motion-ui) var(--depth-ease),
+    box-shadow var(--depth-motion-ui) var(--depth-ease);
+}
+
+.more-feature-row {
+  border-radius: var(--depth-card-radius-sm) !important;
+  text-align: left;
+}
+
+.more-group h3 {
+  margin-bottom: 8px !important;
+}
+
+/* —— Qurʾān overview pilot —— */
+.quran-surah-card {
+  align-items: center !important;
+}
+
+.quran-surah-card h3 {
+  color: var(--text) !important;
+}
+
+.quran-surah-card .quran-ar-name {
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+}
+
+.quran-search,
+.quran-filter select,
+.filter-select,
+.search-pro-input,
+input[type="search"],
+input[type="text"]:not(.font-range),
+textarea,
+select {
+  min-height: var(--depth-input-min-h);
+  border-radius: var(--depth-control-radius) !important;
+  border: 1px solid var(--depth-border-soft) !important;
+  background: color-mix(in srgb, var(--card) 82%, var(--bg) 18%) !important;
+  color: var(--text) !important;
+  transition:
+    border-color var(--depth-motion-ui) var(--depth-ease),
+    box-shadow var(--depth-motion-ui) var(--depth-ease);
+}
+
+.quran-search:focus,
+.more-search:focus,
+.filter-select:focus,
+.search-pro-input:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  border-color: color-mix(in srgb, var(--gold2) 42%, var(--line)) !important;
+  box-shadow: var(--depth-focus-ring) !important;
+}
+
+/* —— Buttons —— */
+button,
+.btn,
+.home-refresh-btn,
+.feature-open,
+.action-btn,
+.share-btn,
+.prayer-btn,
+.quiz-btn {
+  min-height: var(--depth-btn-min-h);
+  border-radius: var(--depth-control-radius) !important;
+  transition:
+    transform var(--depth-motion-fast) var(--depth-ease),
+    box-shadow var(--depth-motion-fast) var(--depth-ease),
+    filter var(--depth-motion-fast) var(--depth-ease);
+}
+
+button:active:not(:disabled),
+.btn:active:not(:disabled),
+.home-refresh-btn:active,
+.feature-open:active {
+  transform: scale(0.985) !important;
+}
+
+/* —— Bottom navigation —— */
+.bottom-nav {
+  height: var(--depth-nav-height) !important;
+  min-height: var(--depth-nav-height) !important;
+  max-height: var(--depth-nav-height) !important;
+  border-radius: 24px !important;
+  padding: 4px !important;
+  border: 1px solid var(--depth-border-soft) !important;
+  background: color-mix(in srgb, var(--card) 78%, transparent) !important;
+  box-shadow: var(--depth-shadow-nav), var(--depth-inset-top-strong) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.05);
+  backdrop-filter: blur(10px) saturate(1.05);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .bottom-nav {
+    background: color-mix(in srgb, var(--card) 94%, var(--bg) 6%) !important;
+  }
+}
+
+.bottom-nav-btn {
+  min-height: calc(var(--depth-nav-height) - 10px) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  color: color-mix(in srgb, var(--text) 68%, transparent) !important;
+  transition: color var(--depth-motion-ui) var(--depth-ease);
+}
+
+.bottom-nav-btn .nav-icon {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  width: 22px !important;
+  height: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.bottom-nav-btn.active {
+  color: var(--gold2) !important;
+}
+
+/* —— App bar / segment nav —— */
+.app-bar,
+.segment-nav,
+.view-nav-row {
+  border-radius: var(--depth-control-radius) !important;
+  overflow: hidden;
+  border: 1px solid var(--depth-border-soft) !important;
+  box-shadow: var(--depth-shadow-1), var(--depth-inset-top) !important;
+}
+
+.segment-nav button,
+.view-nav-row button,
+.app-bar button {
+  border-radius: 0 !important;
+}
+
+/* —— Modals / sheets —— */
+.modal-sheet,
+.bottom-sheet,
+.reading-font-sheet,
+.intro-modal {
+  border-radius: var(--depth-section-radius) var(--depth-section-radius) 0 0 !important;
+  box-shadow: var(--depth-shadow-2) !important;
+}
+
+/* —— Light themes: readable contrast —— */
+html[data-theme="light"] .bottom-nav-btn,
+html[data-theme="soft"] .bottom-nav-btn {
+  color: color-mix(in srgb, var(--text) 72%, transparent) !important;
+}
+
+html[data-theme="light"] .bottom-nav-btn.active,
+html[data-theme="soft"] .bottom-nav-btn.active {
+  color: var(--gold2) !important;
+}
+
+html[data-theme="light"] .folder-card,
+html[data-theme="soft"] .folder-card,
+html[data-theme="light"] .list-card,
+html[data-theme="soft"] .list-card {
+  box-shadow: 0 6px 16px rgba(80, 60, 30, 0.08), var(--depth-inset-top) !important;
+}
+
+/* —— Dār al-Layl: no harsh black shadows —— */
+html[data-theme="dar-al-layl"] .folder-card,
+html[data-theme="dar-al-layl"] .post-card,
+html[data-theme="dar-al-layl"] .bottom-nav {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28), var(--depth-inset-top) !important;
+}
+
+/* —— Reduced motion —— */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
