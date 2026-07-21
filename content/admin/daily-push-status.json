@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-07-21T07:00:49.662Z",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-07-21T07:05:49.661Z",
   "usersChecked": 19,
   "duaCandidates": 19,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 19,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 19,
+  "errors": 0,
   "dailyContentDate": "2026-07-21",
   "currentRecommendation": {
     "id": "tawakkul-binde-sie-und-vertraue-001",
@@ -31,8 +31,8 @@
       "count": 19,
       "contentId": "dua-023-la-tajalna-fitna",
       "recipients": "58ab2beb-5087-41c0-b32d-7b8ab7680fff",
-      "ok": false,
-      "invalid": 8
+      "ok": true,
+      "invalid": 0
     }
   ]
 }
