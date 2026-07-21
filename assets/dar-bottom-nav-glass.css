@@ -4,6 +4,14 @@
  * Frosted nav bar + compact floating glass capsule on active tab only.
  */
 
+:root,
+html[data-theme] {
+  --bottom-tab-capsule-w: 70px;
+  --bottom-tab-capsule-h: 48px;
+  --bottom-tab-capsule-radius: 999px;
+  --bottom-tab-capsule-indicator-w: 18px;
+}
+
 /* —— Klassisch Dunkel —— */
 :root,
 html[data-theme="dark"],
@@ -226,11 +234,13 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
   position: absolute !important;
   left: 50% !important;
   top: 50% !important;
-  width: clamp(68px, 78%, 84px) !important;
-  height: clamp(54px, 88%, 60px) !important;
-  max-height: 60px !important;
-  border-radius: 20px !important;
-  transform: translate(-50%, calc(-50% + 2px)) scale(0.96) !important;
+  width: var(--bottom-tab-capsule-w) !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 14px) !important;
+  height: var(--bottom-tab-capsule-h) !important;
+  max-height: calc(100% - 10px) !important;
+  border-radius: var(--bottom-tab-capsule-radius) !important;
+  transform: translate(-50%, -50%) scale(0.98) !important;
   opacity: 0 !important;
   pointer-events: none !important;
   z-index: 0 !important;
@@ -239,11 +249,11 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
   -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
   backdrop-filter: blur(10px) saturate(120%) !important;
   box-shadow:
-    0 5px 16px var(--bottom-tab-active-shadow),
+    0 4px 12px var(--bottom-tab-active-shadow),
     inset 0 1px 0 var(--bottom-tab-active-highlight) !important;
   transition:
-    opacity 190ms cubic-bezier(0.22, 0.84, 0.32, 1),
-    transform 190ms cubic-bezier(0.22, 0.84, 0.32, 1);
+    opacity 120ms linear,
+    transform 120ms cubic-bezier(0.22, 0.84, 0.32, 1);
 }
 
 /* Position indicator line under label */
@@ -254,9 +264,9 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::after,
   display: block !important;
   position: absolute !important;
   left: 50% !important;
-  bottom: 8px !important;
-  width: 20px !important;
-  height: 2.5px !important;
+  bottom: 9px !important;
+  width: var(--bottom-tab-capsule-indicator-w) !important;
+  height: 2px !important;
   border-radius: 999px !important;
   transform: translateX(-50%) scaleX(0.72) !important;
   opacity: 0 !important;
@@ -309,7 +319,14 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active,
 #bottomNav.bottom-nav .bottom-nav-btn:active,
 .bottom-nav .bottom-nav-btn:active {
-  transform: scale(0.985) !important;
+  transform: none !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+#bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+.bottom-nav .bottom-nav-btn.is-pressed {
+  transform: none !important;
+  filter: none !important;
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
@@ -341,6 +358,15 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
 .bottom-nav .bottom-nav-pill {
   display: none !important;
+}
+
+@media (min-width: 768px) {
+  :root,
+  html[data-theme] {
+    --bottom-tab-capsule-w: 62px;
+    --bottom-tab-capsule-h: 44px;
+    --bottom-tab-capsule-indicator-w: 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
