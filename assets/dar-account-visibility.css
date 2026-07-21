@@ -1,0 +1,188 @@
+/* DAR AL TAWḤĪD — Konto & Synchronisierung (Sichtbarkeit) */
+.account-hub-card,
+.account-home-hint {
+  display: grid;
+  gap: 10px;
+  padding: 14px 15px;
+  margin: 0 0 14px;
+  border-radius: 22px;
+  border: 1px solid var(--line2);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.account-hub-head,
+.account-home-hint-head {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.account-card-icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+  color: var(--gold2);
+}
+
+.account-hub-title,
+.account-home-hint-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.1;
+  color: var(--gold2);
+}
+
+.account-hub-status,
+.account-home-hint-status {
+  margin: 3px 0 0;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.account-hub-status.is-synced,
+.account-home-hint-status.is-synced {
+  color: #9fd4a2;
+}
+
+.account-hub-status.is-offline,
+.account-home-hint-status.is-offline,
+.account-hub-status.is-pending,
+.account-home-hint-status.is-pending {
+  color: var(--gold2);
+}
+
+.account-hub-status.is-error,
+.account-home-hint-status.is-error {
+  color: #e8b4a8;
+}
+
+.account-hub-desc,
+.account-home-hint-desc,
+.account-hub-note,
+.account-home-hint-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.account-hub-actions,
+.account-home-hint-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.account-hub-actions button,
+.account-home-hint-actions button {
+  flex: 1 1 120px;
+  min-height: 40px;
+  border: 1px solid var(--line2);
+  border-radius: 999px;
+  background: rgba(239, 215, 142, 0.08);
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 950;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.account-hub-actions button.primary,
+.account-home-hint-actions button.primary {
+  background: linear-gradient(180deg, rgba(239, 215, 142, 0.22), rgba(155, 122, 60, 0.1));
+  border-color: rgba(239, 215, 142, 0.42);
+}
+
+.account-home-hint.is-compact {
+  padding: 11px 13px;
+  gap: 8px;
+}
+
+.account-home-hint.is-compact .account-home-hint-desc,
+.account-home-hint.is-compact .account-home-hint-note,
+.account-home-hint.is-compact .account-home-hint-actions {
+  display: none;
+}
+
+.account-home-hint.is-compact .account-home-hint-title {
+  font-size: 14px;
+}
+
+.account-sync-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-sync-list li {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+  padding-left: 14px;
+  position: relative;
+}
+
+.account-sync-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--gold2);
+  opacity: 0.75;
+}
+
+.account-offline-box {
+  border: 1px dashed var(--line2);
+  border-radius: 16px;
+  padding: 11px 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.account-form-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 12px;
+}
+
+.account-form-links button {
+  border: 0;
+  background: transparent;
+  color: var(--gold2);
+  font-weight: 900;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.account-merge-dialog {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line2);
+  border-radius: 18px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 520px) {
+  .account-hub-actions button,
+  .account-home-hint-actions button {
+    flex: 1 1 100%;
+  }
+}
