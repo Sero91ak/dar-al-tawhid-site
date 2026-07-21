@@ -179,13 +179,15 @@
     let desc = "";
     let note = "";
     let actions = "";
+    let actionsClass = "account-hub-actions account-hub-actions-inline";
 
     if (!hasRealAccountSystem()) {
-      desc = "Schütze deinen persönlichen Bereich mit Anmeldename und PIN.";
-      note = "Diese Funktion synchronisiert derzeit keine Daten zwischen mehreren Geräten.";
-      actions = '<button type="button" class="primary" data-nav="account">Bereich öffnen</button>';
+      desc = "Persönlicher Bereich mit Anmeldename und PIN.";
+      note = "Synchronisiert derzeit keine Daten zwischen Geräten.";
+      actions = '<button type="button" class="primary" data-nav="account">Öffnen</button>';
+      actionsClass = "account-hub-actions";
     } else if (meta.state === "logged_out") {
-      desc = "Melde dich an oder registriere dich, um unterstützte Daten auf allen Geräten zu sichern.";
+      desc = "Daten auf allen Geräten sichern.";
       note = "Die App bleibt auch ohne Konto nutzbar.";
       actions =
         '<button type="button" class="primary" data-account-open-login>Anmelden</button><button type="button" data-account-open-register>Registrieren</button>';
@@ -194,11 +196,11 @@
       desc = `${esc(meta.username || "")} · ${syncLine}`;
       actions =
         meta.state === "error" || meta.state === "pending" || meta.state === "offline"
-          ? '<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Jetzt synchronisieren</button>'
+          ? '<button type="button" class="primary" data-nav="account">Konto</button><button type="button" data-account-retry-sync>Sync</button>'
           : '<button type="button" class="primary" data-nav="account">Konto öffnen</button>';
     }
 
-    return `<section class="account-hub-card premium-surface" data-account-hub-card><div class="account-hub-head">${accountIconSvg()}<div><h3 class="account-hub-title">${esc(title)}</h3><p class="account-hub-status ${statusClass(meta.state)}">${esc(status)}</p></div></div><p class="account-hub-desc">${desc}</p><div class="account-hub-actions">${actions}</div>${note ? `<p class="account-hub-note">${esc(note)}</p>` : ""}</section>`;
+    return `<section class="account-hub-card account-hub-card--compact premium-surface" data-account-hub-card>${note ? `<p class="account-hub-note account-hub-note-top">${esc(note)}</p>` : ""}<div class="account-hub-head">${accountIconSvg()}<div><h3 class="account-hub-title">${esc(title)}</h3><p class="account-hub-status ${statusClass(meta.state)}">${esc(status)}</p></div></div>${desc ? `<p class="account-hub-desc">${desc}</p>` : ""}<div class="${actionsClass}">${actions}</div></section>`;
   }
 
   function accountFormMode() {
