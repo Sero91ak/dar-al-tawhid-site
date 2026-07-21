@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v306";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v307";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -46,10 +46,13 @@
   --text:#f6edd2;--muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
   --danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --display:"Cinzel",Georgia,"Times New Roman",serif;
+  --font-display:"Fraunces","Georgia",serif;
+  --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-arabic:"Noto Naskh Arabic","Amiri",serif;
+  --serif:var(--font-display);
+  --display:var(--font-display);
   --script:"Allura","Brush Script MT",cursive;
-  --sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --sans:var(--font-ui);
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --page-cover:#060604;--page-cover-mid:#0b0a07;
   --page-gutter-x:max(4px,env(safe-area-inset-left,0px));--page-gutter-y:max(4px,env(safe-area-inset-right,0px));--app-frame-inset-x:10px;--app-frame-inset-left:max(var(--app-frame-inset-x),env(safe-area-inset-left,0px));--app-frame-inset-right:max(var(--app-frame-inset-x),env(safe-area-inset-right,0px));--page-padding-x:4px;--page-padding-left:var(--page-gutter-x);--page-padding-right:var(--page-gutter-y);--content-inset:12px;--section-gap:13px;--card-padding-x:15px;--card-padding-y:15px;--content-max-width:min(1420px,100%);--panel-radius:20px;--card-radius:22px;--view-padding-y:16px;
@@ -1457,10 +1460,13 @@ html.is-standalone-pwa{background:var(--page-cover)}
   --gold:#c8a85b;--gold2:#f0d98f;--bronze:#9a7435;--cream:#f7efd6;
   --text:#f4ebd1;--muted:#c7bda3;--muted2:#9c927b;
   --line:rgba(214,183,106,.34);--line2:rgba(214,183,106,.18);
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --display:"Cinzel",Georgia,"Times New Roman",serif;
+  --font-display:"Fraunces","Georgia",serif;
+  --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-arabic:"Noto Naskh Arabic","Amiri",serif;
+  --serif:var(--font-display);
+  --display:var(--font-display);
   --script:"Allura","Brush Script MT",cursive;
-  --sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --sans:var(--font-ui);
 }
 html{background:#050706}
 body{
@@ -1481,8 +1487,11 @@ h1{font-family:var(--display)!important;color:var(--gold2)!important;text-shadow
 .brand small,.eyebrow,.isnad-label{font-family:var(--display)!important;letter-spacing:.22em!important}
 .salam{font-family:var(--serif)!important;color:#f4dda0!important;text-shadow:0 2px 16px rgba(0,0,0,.35)}
 .intro,.view-desc,.folder-card p,.info-card p,.dua-card p,.event-note,.profile-desc,.book-desc{color:#cfc4aa!important}
-.view h2,.overview-title h3,.section-head h3,.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3,.profile-title,.book-profile-title,.series-title,.pinned-title,.calendar-title h3,.daily-title,.recommended-title{
-  font-family:var(--serif)!important;color:var(--gold2)!important;font-weight:700!important;text-shadow:0 2px 14px rgba(0,0,0,.30)
+.view h2,.overview-title h3,.section-head h3,.profile-title,.book-profile-title,.series-title,.pinned-title,.calendar-title h3,.daily-title,.recommended-title{
+  font-family:var(--font-display)!important;color:var(--gold2)!important;font-weight:600!important;text-shadow:none!important
+}
+.folder-card h3,.post-card h3,.list-card h3,.info-card h3,.dua-card h3{
+  font-family:var(--font-ui)!important;color:var(--gold2)!important;font-weight:650!important;text-shadow:none!important
 }
 .folder-card,.post-card,.list-card,.info-card,.dua-card,.overview-panel,.direct-pick-panel,.search-pro-panel,.profile-box,.book-profile-box,.series-box,.pinned-box,.daily-box,.recommended-box,.source-strong,.statement,.dua-detail-box{
   border-color:rgba(214,183,106,.34)!important;
@@ -8360,12 +8369,15 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
 .post-after-kicker{font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin:0}
 .post-after-source{color:var(--cream);font-family:var(--serif);font-size:clamp(13px,3.4vw,15px);line-height:1.48;font-weight:650;overflow-wrap:anywhere;white-space:normal;word-break:break-word;margin:0}
 .post-after-state{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line2);border-radius:999px;padding:5px 7px;color:var(--theme-surface-elevated-accent);font-size:9px;font-weight:950;white-space:nowrap;background:var(--theme-chip-default-bg)}
-.post-after-links-wrap{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line2)}
-.post-after-links-toggle{width:100%;border:0;background:transparent;color:var(--gold2);font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;cursor:pointer;text-align:left}
-.post-after-links-toggle-icon{color:var(--muted);font-size:14px;line-height:1;font-weight:700}
+.post-after-links-wrap{margin-top:10px;padding-top:0;border-top:0}
+.post-after-links-toggle{display:inline-flex;width:auto;max-width:100%;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(239,215,142,.44);border-radius:999px;background:radial-gradient(circle at 0% 0%,rgba(239,215,142,.16),transparent 58%),linear-gradient(135deg,rgba(239,215,142,.12),rgba(8,8,6,.82));color:var(--gold2);font-family:var(--font-ui,var(--sans));font-size:11.5px;font-weight:650;letter-spacing:.04em;text-transform:uppercase;padding:8px 12px 8px 14px;min-height:36px;line-height:1.2;cursor:pointer;text-align:left;box-shadow:0 5px 16px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,248,220,.08);transition:border-color .2s ease,filter .2s ease,box-shadow .2s ease}
+.post-after-links-toggle:hover{filter:brightness(1.06);border-color:rgba(239,215,142,.62)}
+.post-after-links-toggle[aria-expanded="true"]{border-color:rgba(239,215,142,.58);background:radial-gradient(circle at 0% 0%,rgba(239,215,142,.2),transparent 58%),linear-gradient(135deg,rgba(239,215,142,.16),rgba(12,10,8,.88))}
+.post-after-links-toggle-label{white-space:nowrap}
+.post-after-links-toggle-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;border:1px solid rgba(239,215,142,.34);background:rgba(0,0,0,.24);color:var(--gold2);font-size:13px;line-height:1;font-weight:700;flex:0 0 20px}
 .post-after-links-toggle[aria-expanded="true"] .post-after-links-toggle-icon::before{content:"−"}
 .post-after-links-toggle[aria-expanded="false"] .post-after-links-toggle-icon::before,.post-after-links-toggle:not([aria-expanded="true"]) .post-after-links-toggle-icon::before{content:"+"}
-.post-after-links-body{display:grid;gap:6px;padding:0 0 4px}
+.post-after-links-body{display:grid;gap:8px;padding:10px 0 2px;margin-top:2px}
 .post-after-links-body[hidden]{display:none!important}
 .post-after-links{display:flex;flex-wrap:wrap;gap:6px}
 .post-after-links a{border:1px solid var(--line2);border-radius:999px;background:rgba(239,215,142,.06);color:var(--cream);text-decoration:none;padding:6px 10px;font-size:10.5px;font-weight:900;min-height:32px;display:inline-flex;align-items:center}
@@ -9266,11 +9278,14 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js"></script>
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
+<link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
+<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=1">
 
 
 <style id="feature-final-v202">
@@ -9314,13 +9329,13 @@ body.is-home-route .float-actions{display:none!important}
 /* v204: compact start dashboard, one recommended block only */
 body.is-home-route .view-head{padding-bottom:8px!important;margin-bottom:10px!important}
 body.is-home-route .view-head .eyebrow{font-size:8px!important;letter-spacing:.16em!important;margin-bottom:3px!important}
-body.is-home-route .view-head h2.home-start-title{font-family:var(--serif)!important;font-weight:600!important;font-size:clamp(24px,5.4vw,32px)!important;line-height:1.06!important;letter-spacing:.015em!important;color:var(--premium-title,var(--gold2))!important;text-shadow:0 2px 16px rgba(214,183,106,.14)!important}
+body.is-home-route .view-head h2.home-start-title{font-family:var(--font-display)!important;font-weight:600!important;font-size:clamp(24px,5.4vw,32px)!important;line-height:1.06!important;letter-spacing:.015em!important;color:var(--premium-title,var(--gold2))!important;text-shadow:none!important}
 body.is-home-route .view-head h2{font-size:clamp(25px,6vw,36px)!important;line-height:1!important}
 body.is-home-route .view-head.view-head-home{padding-bottom:6px!important}
 .view-head-home-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 10px}.view-head-home-row h2{margin:0;min-width:0}
 .home-hijri-frame{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(214,183,106,.44);border-radius:12px;background:radial-gradient(circle at 0% 0%,rgba(239,215,142,.14),transparent 52%),linear-gradient(135deg,rgba(214,183,106,.11),rgba(8,8,6,.9));box-shadow:0 6px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,248,220,.1);padding:5px 10px 5px 8px;min-height:36px;max-width:min(52vw,204px);cursor:pointer;flex:0 0 auto;color:inherit;font:inherit}
 .home-hijri-frame-icon{font-size:17px;line-height:1;flex:0 0 auto;filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}
-.home-hijri-frame-date{font-family:var(--serif);font-size:clamp(12px,3.4vw,14px);font-weight:650;line-height:1.08;color:var(--gold2);letter-spacing:.012em;white-space:nowrap;min-width:0}
+.home-hijri-frame-date{font-family:var(--font-display);font-size:clamp(12px,3.4vw,14px);font-weight:600;line-height:1.08;color:var(--gold2);letter-spacing:.012em;white-space:nowrap;min-width:0;font-variant-numeric:tabular-nums}
 .home-hijri-frame:hover{filter:brightness(1.05);border-color:rgba(239,215,142,.58)}
 .home-hijri-frame:active{transform:translateY(1px)}
 .view-head-home-chips{display:flex;align-items:center;gap:6px;margin-top:2px}
