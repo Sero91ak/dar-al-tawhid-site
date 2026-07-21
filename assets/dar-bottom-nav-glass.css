@@ -9,7 +9,6 @@ html[data-theme] {
   --bottom-tab-capsule-w: 70px;
   --bottom-tab-capsule-h: 48px;
   --bottom-tab-capsule-radius: 999px;
-  --bottom-tab-capsule-indicator-w: 18px;
 }
 
 /* —— Klassisch Dunkel —— */
@@ -256,29 +255,6 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
     transform 120ms cubic-bezier(0.22, 0.84, 0.32, 1);
 }
 
-/* Position indicator line under label */
-html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::after,
-#bottomNav.bottom-nav .bottom-nav-btn::after,
-.bottom-nav .bottom-nav-btn::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  left: 50% !important;
-  bottom: 9px !important;
-  width: var(--bottom-tab-capsule-indicator-w) !important;
-  height: 2px !important;
-  border-radius: 999px !important;
-  transform: translateX(-50%) scaleX(0.72) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  z-index: 1 !important;
-  background: var(--bottom-tab-active-indicator) !important;
-  box-shadow: none !important;
-  transition:
-    opacity 190ms cubic-bezier(0.22, 0.84, 0.32, 1),
-    transform 190ms cubic-bezier(0.22, 0.84, 0.32, 1);
-}
-
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active,
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 #bottomNav.bottom-nav .bottom-nav-btn.active,
@@ -296,13 +272,6 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active::before,
 .bottom-nav .bottom-nav-btn.active::before {
   opacity: 1 !important;
   transform: translate(-50%, -50%) scale(1) !important;
-}
-
-html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active::after,
-#bottomNav.bottom-nav .bottom-nav-btn.active::after,
-.bottom-nav .bottom-nav-btn.active::after {
-  opacity: 1 !important;
-  transform: translateX(-50%) scaleX(1) !important;
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
@@ -338,15 +307,6 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active::before,
   opacity: 0.88 !important;
 }
 
-html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::after,
-html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active::after,
-#bottomNav.bottom-nav .bottom-nav-btn.is-pressed::after,
-#bottomNav.bottom-nav .bottom-nav-btn:active::after,
-.bottom-nav .bottom-nav-btn.is-pressed::after,
-.bottom-nav .bottom-nav-btn:active::after {
-  opacity: 0 !important;
-}
-
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
 .bottom-nav .bottom-nav-btn:active .nav-icon {
@@ -365,7 +325,6 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
   html[data-theme] {
     --bottom-tab-capsule-w: 62px;
     --bottom-tab-capsule-h: 44px;
-    --bottom-tab-capsule-indicator-w: 16px;
   }
 }
 
@@ -373,9 +332,7 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
   html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
   .bottom-nav .bottom-nav-btn,
   html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
-  .bottom-nav .bottom-nav-btn::before,
-  html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::after,
-  .bottom-nav .bottom-nav-btn::after {
+  .bottom-nav .bottom-nav-btn::before {
     transition-duration: 0.01ms !important;
     transition-property: color, opacity, background-color !important;
   }
