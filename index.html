@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v299";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v300";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v273"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -9729,7 +9729,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
-<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=2">
+<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=4">
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -10635,7 +10635,7 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const pressOn=()=>btn.classList.add("is-pressed");const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn);btn.addEventListener("pointerup",pressOff);btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.onclick=()=>{const tab=btn.getAttribute("data-bottom-nav");pressOff();try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)}})}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const tab=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -13963,7 +13963,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v299";
+const APP_BUILD_ID="app-shell-v300";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

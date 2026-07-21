@@ -1,8 +1,16 @@
 /**
- * DAR AL TAWḤĪD — Bottom Navigation iOS Glass
+ * DAR AL TAWḤĪD — Bottom Navigation iOS Glass + Active Tab Capsule
  * Component: #bottomNav.bottom-nav
- * Frosted, semi-transparent — theme tint preserved.
+ * Frosted nav bar + compact floating glass capsule on active tab only.
  */
+
+:root,
+html[data-theme] {
+  --bottom-tab-capsule-w: 70px;
+  --bottom-tab-capsule-h: 48px;
+  --bottom-tab-capsule-radius: 999px;
+  --bottom-tab-capsule-indicator-w: 18px;
+}
 
 /* —— Klassisch Dunkel —— */
 :root,
@@ -13,11 +21,18 @@ html:not([data-theme]) {
   --bottom-nav-border: rgba(255, 255, 255, 0.12);
   --bottom-nav-highlight: rgba(255, 255, 255, 0.22);
   --bottom-nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-  --bottom-nav-text-inactive: rgba(248, 239, 212, 0.62);
-  --bottom-nav-active-bg: rgba(239, 215, 142, 0.14);
-  --bottom-nav-active-text: var(--gold2, #efd78e);
   --bottom-nav-blur: 24px;
   --bottom-nav-saturation: 1.35;
+
+  --bottom-tab-active-bg: rgba(239, 215, 142, 0.14);
+  --bottom-tab-active-border: rgba(239, 215, 142, 0.24);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.2);
+  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.16);
+  --bottom-tab-active-icon: #efd78e;
+  --bottom-tab-active-text: #f8efd4;
+  --bottom-tab-active-indicator: rgba(239, 215, 142, 0.88);
+  --bottom-tab-inactive-icon: rgba(248, 239, 212, 0.7);
+  --bottom-tab-inactive-text: rgba(248, 239, 212, 0.7);
 }
 
 /* —— Klassisch Hell —— */
@@ -27,11 +42,18 @@ html[data-theme="light"] {
   --bottom-nav-border: rgba(155, 122, 60, 0.16);
   --bottom-nav-highlight: rgba(255, 255, 255, 0.65);
   --bottom-nav-shadow: 0 8px 24px rgba(120, 90, 40, 0.1);
-  --bottom-nav-text-inactive: rgba(74, 55, 32, 0.55);
-  --bottom-nav-active-bg: rgba(255, 248, 228, 0.52);
-  --bottom-nav-active-text: #4a3720;
   --bottom-nav-blur: 24px;
   --bottom-nav-saturation: 1.4;
+
+  --bottom-tab-active-bg: rgba(155, 122, 60, 0.14);
+  --bottom-tab-active-border: rgba(155, 122, 60, 0.24);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.55);
+  --bottom-tab-active-shadow: rgba(120, 90, 40, 0.1);
+  --bottom-tab-active-icon: #4a3720;
+  --bottom-tab-active-text: #4a3720;
+  --bottom-tab-active-indicator: rgba(122, 92, 44, 0.82);
+  --bottom-tab-inactive-icon: rgba(74, 55, 32, 0.68);
+  --bottom-tab-inactive-text: rgba(74, 55, 32, 0.68);
 }
 
 /* —— Sanft Elegant —— */
@@ -41,11 +63,18 @@ html[data-theme="soft"] {
   --bottom-nav-border: rgba(116, 76, 98, 0.16);
   --bottom-nav-highlight: rgba(255, 255, 255, 0.58);
   --bottom-nav-shadow: 0 8px 24px rgba(96, 62, 78, 0.1);
-  --bottom-nav-text-inactive: rgba(58, 38, 48, 0.55);
-  --bottom-nav-active-bg: rgba(255, 251, 247, 0.5);
-  --bottom-nav-active-text: #3a2630;
   --bottom-nav-blur: 24px;
   --bottom-nav-saturation: 1.38;
+
+  --bottom-tab-active-bg: rgba(116, 76, 98, 0.13);
+  --bottom-tab-active-border: rgba(116, 76, 98, 0.24);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.5);
+  --bottom-tab-active-shadow: rgba(96, 62, 78, 0.1);
+  --bottom-tab-active-icon: #3a2630;
+  --bottom-tab-active-text: #3a2630;
+  --bottom-tab-active-indicator: rgba(90, 56, 72, 0.8);
+  --bottom-tab-inactive-icon: rgba(58, 38, 48, 0.68);
+  --bottom-tab-inactive-text: rgba(58, 38, 48, 0.68);
 }
 
 /* —— Royal Nachtblau —— */
@@ -55,11 +84,18 @@ html[data-theme="royal"] {
   --bottom-nav-border: rgba(239, 215, 142, 0.16);
   --bottom-nav-highlight: rgba(255, 255, 255, 0.14);
   --bottom-nav-shadow: 0 8px 26px rgba(0, 0, 0, 0.28);
-  --bottom-nav-text-inactive: rgba(248, 236, 204, 0.62);
-  --bottom-nav-active-bg: rgba(239, 215, 142, 0.12);
-  --bottom-nav-active-text: var(--gold2, #efd78e);
   --bottom-nav-blur: 24px;
   --bottom-nav-saturation: 1.36;
+
+  --bottom-tab-active-bg: rgba(239, 215, 142, 0.13);
+  --bottom-tab-active-border: rgba(239, 215, 142, 0.24);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.16);
+  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.2);
+  --bottom-tab-active-icon: #efd78e;
+  --bottom-tab-active-text: #f8ecce;
+  --bottom-tab-active-indicator: rgba(239, 215, 142, 0.88);
+  --bottom-tab-inactive-icon: rgba(248, 236, 204, 0.7);
+  --bottom-tab-inactive-text: rgba(248, 236, 204, 0.7);
 }
 
 /* —— Bordeaux Royal Premium —— */
@@ -69,11 +105,18 @@ html[data-theme="bordeaux"] {
   --bottom-nav-border: rgba(214, 190, 132, 0.16);
   --bottom-nav-highlight: rgba(255, 255, 255, 0.12);
   --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
-  --bottom-nav-text-inactive: rgba(247, 238, 216, 0.58);
-  --bottom-nav-active-bg: rgba(214, 190, 132, 0.14);
-  --bottom-nav-active-text: #d6be84;
   --bottom-nav-blur: 24px;
   --bottom-nav-saturation: 1.34;
+
+  --bottom-tab-active-bg: rgba(214, 190, 132, 0.14);
+  --bottom-tab-active-border: rgba(214, 190, 132, 0.26);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.14);
+  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.22);
+  --bottom-tab-active-icon: #e7d59d;
+  --bottom-tab-active-text: #f7eed8;
+  --bottom-tab-active-indicator: rgba(214, 190, 132, 0.9);
+  --bottom-tab-inactive-icon: rgba(247, 238, 216, 0.7);
+  --bottom-tab-inactive-text: rgba(247, 238, 216, 0.7);
 }
 
 /* —— Dār al-Layl —— */
@@ -83,11 +126,31 @@ html[data-theme="dar-al-layl"] {
   --bottom-nav-border: rgba(168, 139, 79, 0.14);
   --bottom-nav-highlight: rgba(216, 193, 139, 0.16);
   --bottom-nav-shadow: 0 8px 26px rgba(0, 0, 0, 0.3);
-  --bottom-nav-text-inactive: rgba(140, 147, 140, 0.88);
-  --bottom-nav-active-bg: rgba(168, 139, 79, 0.16);
-  --bottom-nav-active-text: #e8d7b3;
   --bottom-nav-blur: 24px;
   --bottom-nav-saturation: 1.32;
+
+  --bottom-tab-active-bg: rgba(168, 139, 79, 0.15);
+  --bottom-tab-active-border: rgba(216, 193, 139, 0.26);
+  --bottom-tab-active-highlight: rgba(232, 215, 179, 0.18);
+  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.22);
+  --bottom-tab-active-icon: #e8d7b3;
+  --bottom-tab-active-text: #efe4c8;
+  --bottom-tab-active-indicator: rgba(216, 193, 139, 0.9);
+  --bottom-tab-inactive-icon: rgba(140, 147, 140, 0.72);
+  --bottom-tab-inactive-text: rgba(140, 147, 140, 0.72);
+}
+
+/* —— Aurora (legacy theme) —— */
+html[data-theme="aurora"] {
+  --bottom-tab-active-bg: rgba(231, 213, 157, 0.14);
+  --bottom-tab-active-border: rgba(231, 213, 157, 0.24);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.16);
+  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.18);
+  --bottom-tab-active-icon: #e7d59d;
+  --bottom-tab-active-text: #f6f1e3;
+  --bottom-tab-active-indicator: rgba(231, 213, 157, 0.88);
+  --bottom-tab-inactive-icon: rgba(246, 241, 227, 0.68);
+  --bottom-tab-inactive-text: rgba(246, 241, 227, 0.68);
 }
 
 /* —— iOS frosted glass surface —— */
@@ -125,11 +188,13 @@ html[data-theme] #appChromeDock #bottomNav.bottom-nav,
   }
 }
 
-/* —— Tabs —— */
+/* —— Tabs: touch area unchanged, visual capsule via ::before —— */
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
 #bottomNav.bottom-nav .bottom-nav-btn,
 .bottom-nav .bottom-nav-btn {
-  color: var(--bottom-nav-text-inactive) !important;
+  position: relative !important;
+  z-index: 1 !important;
+  color: var(--bottom-tab-inactive-text) !important;
   text-shadow: none !important;
   background: transparent !important;
   border: 0 !important;
@@ -138,18 +203,80 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
   backdrop-filter: none !important;
   border-radius: 12px !important;
   transition:
-    color 180ms cubic-bezier(0.22, 0.84, 0.32, 1),
-    background 180ms cubic-bezier(0.22, 0.84, 0.32, 1),
-    box-shadow 180ms cubic-bezier(0.22, 0.84, 0.32, 1),
+    color 190ms cubic-bezier(0.22, 0.84, 0.32, 1),
+    filter 190ms cubic-bezier(0.22, 0.84, 0.32, 1),
     transform 130ms cubic-bezier(0.22, 0.84, 0.32, 1);
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
 .bottom-nav .bottom-nav-btn .nav-icon {
-  color: inherit !important;
+  color: var(--bottom-tab-inactive-icon) !important;
   transform: none !important;
   filter: none !important;
+  transition: color 190ms cubic-bezier(0.22, 0.84, 0.32, 1);
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon),
+#bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon),
+.bottom-nav .bottom-nav-btn > span:not(.nav-icon) {
+  position: relative;
+  z-index: 1;
+  color: inherit !important;
+}
+
+/* Compact floating glass capsule — only visible on active tab */
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
+#bottomNav.bottom-nav .bottom-nav-btn::before,
+.bottom-nav .bottom-nav-btn::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: var(--bottom-tab-capsule-w) !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 14px) !important;
+  height: var(--bottom-tab-capsule-h) !important;
+  max-height: calc(100% - 10px) !important;
+  border-radius: var(--bottom-tab-capsule-radius) !important;
+  transform: translate(-50%, -50%) scale(0.98) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  background: var(--bottom-tab-active-bg) !important;
+  border: 1px solid var(--bottom-tab-active-border) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+  box-shadow:
+    0 4px 12px var(--bottom-tab-active-shadow),
+    inset 0 1px 0 var(--bottom-tab-active-highlight) !important;
+  transition:
+    opacity 120ms linear,
+    transform 120ms cubic-bezier(0.22, 0.84, 0.32, 1);
+}
+
+/* Position indicator line under label */
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::after,
+#bottomNav.bottom-nav .bottom-nav-btn::after,
+.bottom-nav .bottom-nav-btn::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 9px !important;
+  width: var(--bottom-tab-capsule-indicator-w) !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  transform: translateX(-50%) scaleX(0.72) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  background: var(--bottom-tab-active-indicator) !important;
+  box-shadow: none !important;
+  transition:
+    opacity 190ms cubic-bezier(0.22, 0.84, 0.32, 1),
+    transform 190ms cubic-bezier(0.22, 0.84, 0.32, 1);
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active,
@@ -158,41 +285,111 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 .bottom-nav .bottom-nav-btn.active,
 .bottom-nav .bottom-nav-btn.is-pressed {
-  color: var(--bottom-nav-active-text) !important;
-  background: var(--bottom-nav-active-bg) !important;
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bottom-nav-highlight) 55%, transparent) !important;
+  color: var(--bottom-tab-active-text) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+#bottomNav.bottom-nav .bottom-nav-btn.active::before,
+.bottom-nav .bottom-nav-btn.active::before {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active::after,
+#bottomNav.bottom-nav .bottom-nav-btn.active::after,
+.bottom-nav .bottom-nav-btn.active::after {
+  opacity: 1 !important;
+  transform: translateX(-50%) scaleX(1) !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+#bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+#bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+.bottom-nav .bottom-nav-btn.active .nav-icon,
+.bottom-nav .bottom-nav-btn.is-pressed .nav-icon {
+  color: var(--bottom-tab-active-icon) !important;
+  transform: none !important;
   filter: none !important;
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active,
 #bottomNav.bottom-nav .bottom-nav-btn:active,
 .bottom-nav .bottom-nav-btn:active {
-  transform: scale(0.985) !important;
+  transform: none !important;
 }
 
-html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
-html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+#bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+.bottom-nav .bottom-nav-btn.is-pressed {
+  transform: none !important;
+  filter: none !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active::before,
+#bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+#bottomNav.bottom-nav .bottom-nav-btn:active::before,
+.bottom-nav .bottom-nav-btn.is-pressed::before,
+.bottom-nav .bottom-nav-btn:active::before {
+  opacity: 0.88 !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::after,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active::after,
+#bottomNav.bottom-nav .bottom-nav-btn.is-pressed::after,
+#bottomNav.bottom-nav .bottom-nav-btn:active::after,
+.bottom-nav .bottom-nav-btn.is-pressed::after,
+.bottom-nav .bottom-nav-btn:active::after {
+  opacity: 0 !important;
+}
+
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
-#bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
-#bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
-.bottom-nav .bottom-nav-btn.active .nav-icon,
-.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
 .bottom-nav .bottom-nav-btn:active .nav-icon {
   transform: none !important;
   filter: none !important;
 }
 
+/* Legacy sliding pill — hidden; capsule is per-tab */
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
 .bottom-nav .bottom-nav-pill {
-  background: var(--bottom-nav-active-bg) !important;
-  border: 1px solid color-mix(in srgb, var(--bottom-nav-border) 70%, transparent) !important;
-  box-shadow: inset 0 1px 0 var(--bottom-nav-highlight) !important;
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  :root,
+  html[data-theme] {
+    --bottom-tab-capsule-w: 62px;
+    --bottom-tab-capsule-h: 44px;
+    --bottom-tab-capsule-indicator-w: 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
-  .bottom-nav .bottom-nav-btn {
+  .bottom-nav .bottom-nav-btn,
+  html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
+  .bottom-nav .bottom-nav-btn::before,
+  html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::after,
+  .bottom-nav .bottom-nav-btn::after {
     transition-duration: 0.01ms !important;
+    transition-property: color, opacity, background-color !important;
+  }
+
+  html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
+  .bottom-nav .bottom-nav-btn::before {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
+  .bottom-nav .bottom-nav-btn::before {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 }
