@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v311";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v314";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v273"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -7750,7 +7750,7 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 .home-more-body .series-card.has-icon .folder-icon,.home-more-body .pinned-card.has-icon .folder-icon{width:29px!important;height:29px!important;flex-basis:29px!important;border-radius:10px!important;font-size:14px!important}
 .home-more-body .series-card.has-icon h3,.home-more-body .pinned-card.has-icon h3{font-size:14px!important;line-height:1.05!important}.home-more-body .series-card.has-icon p,.home-more-body .pinned-card.has-icon p{font-size:10px!important;line-height:1.22!important;-webkit-line-clamp:1!important}
 .post-after-panel,.related-compact-card{background:var(--theme-surface-elevated)!important}
-.post-after-share .share-btn{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))!important;border-color:var(--line2)!important}
+.post-after-share .share-btn:not(.tg):not(.wa):not(.ig){background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))!important;border-color:var(--line2)!important}
 .post-after-share .share-btn.ig{order:1!important}.post-after-share .share-btn.tg{order:2!important}.post-after-share .share-btn.wa{order:3!important}.post-after-share .share-btn.native{order:4!important}.post-after-share .share-btn.image-post{order:5!important}.post-after-share .share-btn.link{order:6!important}
 .post-after-share{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 .view .post-grid:not(#latestGrid):not(#folderGrid) .post-card{min-height:96px!important;grid-template-columns:32px minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;align-items:start!important}
@@ -9900,6 +9900,18 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 .daily-box,.recommended-box,.current-focus-row{
   min-height:0!important;
 }
+</style>
+<style id="share-brand-borders-v314">
+/* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
+.share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
+.share-btn.wa,.post-after-share .share-btn.wa,.share-row-v11 .share-btn.wa,.share-row-v9 .share-btn.wa,.share-row-v2 .share-btn.wa{border-color:#25D366!important}
+.share-btn.ig,.post-after-share .share-btn.ig,.share-row-v11 .share-btn.ig,.share-row-v9 .share-btn.ig,.share-row-v2 .share-btn.ig{border-color:#fa7e1e!important}
+.share-btn.tg:hover,.post-after-share .share-btn.tg:hover{border-color:#2AABEE!important}
+.share-btn.wa:hover,.post-after-share .share-btn.wa:hover{border-color:#25D366!important}
+.share-btn.ig:hover,.post-after-share .share-btn.ig:hover{border-color:#fa7e1e!important}
+html[data-theme] .share-btn.tg,html[data-theme] .post-after-share .share-btn.tg{border-color:#2AABEE!important}
+html[data-theme] .share-btn.wa,html[data-theme] .post-after-share .share-btn.wa{border-color:#25D366!important}
+html[data-theme] .share-btn.ig,html[data-theme] .post-after-share .share-btn.ig{border-color:#fa7e1e!important}
 </style>
 </head>
 <body class="has-bottom-nav">
