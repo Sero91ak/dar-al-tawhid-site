@@ -168,17 +168,27 @@
 .header-top-chips {
   display: flex;
   align-items: stretch;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 6px;
-  flex: 0 1 auto;
+  flex: 1 1 100%;
+  width: 100%;
   min-width: 0;
   flex-wrap: wrap;
+  overflow: visible;
 }
 
-.header-top-chips .home-account-pill,
-.header-top-chips .hijri-header-pill {
+.header-top-chips .home-account-pill {
   flex: 0 1 auto;
   min-width: 0;
+  max-width: 48%;
+}
+
+.header-top-chips .hijri-header-pill {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  visibility: visible;
+  opacity: 1;
 }
 
 .home-account-slot:empty {

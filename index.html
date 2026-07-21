@@ -9744,10 +9744,54 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
   }
 }
 </style>
+<style id="home-hijri-restore-v302">
+/* Islamic date must stay visible in the hero header on all screen sizes */
+.top-shell.theme-hero-shell .brand-kicker-row{
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:8px!important;
+}
+.top-shell.theme-hero-shell .brand small{
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+}
+.top-shell.theme-hero-shell .header-top-chips{
+  display:flex!important;
+  width:100%!important;
+  flex:1 1 100%!important;
+  min-width:0!important;
+  justify-content:space-between!important;
+  align-items:stretch!important;
+  gap:6px!important;
+  overflow:visible!important;
+}
+.top-shell.theme-hero-shell .header-top-chips .hijri-header-pill{
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  width:auto!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+.top-shell.theme-hero-shell .header-top-chips .home-account-pill{
+  flex:0 1 auto!important;
+  max-width:48%!important;
+}
+@media(max-width:700px){
+  .top-shell.theme-hero-shell .hijri-header-pill,
+  .hijri-header-pill{
+    max-width:none!important;
+  }
+}
+</style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=1">
-<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=5">
+<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=6">
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -13987,7 +14031,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v301";
+const APP_BUILD_ID="app-shell-v302";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -15018,6 +15062,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=5"></script>
+  <script src="/assets/dar-account-visibility.js?v=6"></script>
 </body>
 </html>
