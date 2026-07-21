@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-21T08:45:49.663Z",
+  "updatedAt": "2026-07-21T10:55:49.662Z",
   "usersChecked": 19,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 19,
+  "sent": 19,
   "skipped": 0,
   "duplicates": 19,
   "errors": 0,
@@ -24,5 +24,15 @@
     "category": "Schutz"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 19,
+      "contentId": "tawakkul-binde-sie-und-vertraue-001",
+      "recipients": "dd65e984-560d-492b-86de-e6a9183ab938",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
