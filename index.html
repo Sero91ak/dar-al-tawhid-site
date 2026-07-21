@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v303";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v304";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v273"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -8540,6 +8540,7 @@ body.is-home-route .app-bar{display:none!important;margin:0!important;min-height
 body.is-home-route #appView.view{padding-top:2px!important;margin-top:0!important}
 body.is-home-route .view-head{padding-bottom:8px!important;margin-bottom:10px!important;margin-top:0!important}
 body.is-home-route .view-head .eyebrow{font-size:8px!important;letter-spacing:.16em!important;margin-bottom:3px!important}
+body.is-home-route .view-head h2.home-start-title{font-family:var(--serif)!important;font-weight:600!important;font-size:clamp(24px,5.4vw,32px)!important;line-height:1.06!important;letter-spacing:.015em!important;color:var(--premium-title,var(--gold2))!important;text-shadow:0 2px 16px rgba(214,183,106,.14)!important}
 body.is-home-route .view-head h2{font-size:clamp(25px,6vw,36px)!important;line-height:1!important}
 body.is-home-route .view-head.view-head-home{padding-bottom:6px!important}
 .view-head-home-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 10px}.view-head-home-row h2{margin:0;min-width:0}
@@ -9666,6 +9667,13 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
     gap:8px!important;
     align-items:stretch!important;
   }
+  .view-head-home-row h2.home-start-title{
+    font-family:var(--serif)!important;
+    font-weight:600!important;
+    font-size:clamp(22px,5.2vw,28px)!important;
+    line-height:1.06!important;
+    letter-spacing:.012em!important;
+  }
   .view-head-home-row h2{
     font-size:clamp(22px,5.5vw,28px)!important;
   }
@@ -9794,7 +9802,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=1">
-<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=7">
+<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=8">
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -10711,7 +10719,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/";return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriBtn=`<button id="homeHijriDayBtn" class="home-hijri-day-btn" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen">🗓️ Islamisches Datum</button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2>${esc(title)}</h2><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span>${hijriBtn}</div></div>`:`<h2>${esc(title)}</h2>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}"><div class="eyebrow">${esc(eyebrow)}</div>${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriBtn=`<button id="homeHijriDayBtn" class="home-hijri-day-btn" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen">🗓️ Islamisches Datum</button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span>${hijriBtn}</div></div>`:`<h2>${esc(title)}</h2>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}"><div class="eyebrow">${esc(eyebrow)}</div>${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -14032,7 +14040,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v303";
+const APP_BUILD_ID="app-shell-v304";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -15063,6 +15071,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=7"></script>
+  <script src="/assets/dar-account-visibility.js?v=8"></script>
 </body>
 </html>
