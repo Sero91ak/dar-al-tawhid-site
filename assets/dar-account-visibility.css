@@ -109,6 +109,26 @@
   border-color: rgba(239, 215, 142, 0.42);
 }
 
+.header-top-chips {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 6px;
+  flex: 0 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.header-top-chips .home-account-pill,
+.header-top-chips .hijri-header-pill {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.home-account-slot:empty {
+  display: none;
+}
+
 .view-head-home-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -127,7 +147,7 @@
   justify-content: flex-end;
   gap: 6px;
   min-width: 0;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .home-account-pill {

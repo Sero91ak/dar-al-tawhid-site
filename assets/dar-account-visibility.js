@@ -150,8 +150,26 @@
   function renderHomeHeaderChipsHtml() {
     const pill = renderHomeAccountPill();
     const hijriBtn = `<button id="homeHijriDayBtn" class="home-hijri-day-btn" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen">🗓️ Islamisches Datum</button>`;
-    if (!pill) return hijriBtn;
-    return `<div class="view-head-home-chips">${pill}${hijriBtn}</div>`;
+    return `<div class="view-head-home-chips">${pill || ""}${hijriBtn}</div>`;
+  }
+
+  function syncHomeAccountSlots() {
+    const pill = renderHomeAccountPill();
+    document.querySelectorAll("[data-home-account-slot]").forEach((slot) => {
+      slot.innerHTML = pill || "";
+      slot.style.display = pill ? "" : "none";
+    });
+    const top = document.querySelector("[data-header-top-chips]");
+    if (top) {
+      top.querySelectorAll(".home-account-pill").forEach((el) => el.remove());
+      if (pill) {
+        const wrap = document.createElement("span");
+        wrap.innerHTML = pill;
+        const btn = wrap.firstElementChild;
+        if (btn) top.insertBefore(btn, top.firstChild);
+      }
+    }
+    bindAccountVisibilityEvents();
   }
 
   function renderMoreAccountCard() {
@@ -371,7 +389,24 @@
     });
   }
 
+  function patchSetHeader() {
+    if (typeof setHeader !== "function" || setHeader.__darAccountPatched) return;
+    const originalSetHeader = setHeader;
+    setHeader = function (title, desc, eyebrow, headClass) {
+      if (title === "Startseite") {
+        const eyebrowText = eyebrow || "DAR AL TAWḤID";
+        const headClassAttr = headClass ? ` ${headClass}` : "";
+        const safe = (v) => (typeof esc === "function" ? esc(v) : String(v == null ? "" : v));
+        return `<div class="view-head view-head-home${headClassAttr}"><div class="eyebrow">${safe(eyebrowText)}</div><div class="view-head-home-row"><h2>${safe(title)}</h2>${renderHomeHeaderChipsHtml()}</div>${desc ? `<div class="view-desc">${safe(desc)}</div>` : ""}</div>`;
+      }
+      return originalSetHeader(title, desc, eyebrow, headClass);
+    };
+    setHeader.__darAccountPatched = true;
+  }
+
   function patchCore() {
+    patchSetHeader();
+
     if (typeof featureCatalog !== "function") return;
 
     const originalFeatureCatalog = featureCatalog;
@@ -394,19 +429,6 @@
       const originalRenderMore = renderMore;
       renderMore = function () {
         return insertAfterViewHead(originalRenderMore(), renderMoreAccountCard());
-      };
-    }
-
-    if (typeof setHeader === "function") {
-      const originalSetHeader = setHeader;
-      setHeader = function (title, desc, eyebrow, headClass) {
-        if (title === "Startseite" && hasRealAccountSystem()) {
-          const eyebrowText = eyebrow || "DAR AL TAWḤID";
-          const headClassAttr = headClass ? ` ${headClass}` : "";
-          const safe = (v) => (typeof esc === "function" ? esc(v) : String(v == null ? "" : v));
-          return `<div class="view-head view-head-home${headClassAttr}"><div class="eyebrow">${safe(eyebrowText)}</div><div class="view-head-home-row"><h2>${safe(title)}</h2>${renderHomeHeaderChipsHtml()}</div>${desc ? `<div class="view-desc">${safe(desc)}</div>` : ""}</div>`;
-        }
-        return originalSetHeader(title, desc, eyebrow, headClass);
       };
     }
 
@@ -515,10 +537,17 @@
           };
         }
         if (currentRoute?.view === "account" && typeof accountSession === "function" && accountSession()) {
-          syncAllAccountData({ silent: true }).then((ok) => {
-            if (ok && typeof render === "function") render();
-          });
+          syncAllAccountData({ silent: true });
         }
+      };
+    }
+
+    if (typeof render === "function") {
+      const originalRender = render;
+      render = function () {
+        const result = originalRender();
+        syncHomeAccountSlots();
+        return result;
       };
     }
 
@@ -526,6 +555,7 @@
       const originalUpdateChrome = updateChrome;
       updateChrome = function (route) {
         originalUpdateChrome(route);
+        syncHomeAccountSlots();
         if (route?.view !== "account") return;
         const crumb = $("crumb");
         if (!crumb) return;
@@ -537,21 +567,21 @@
 
     window.addEventListener("online", () => {
       if (typeof accountSession !== "function" || !accountSession()) return;
-      syncAllAccountData({ silent: true }).then((ok) => {
-        if (ok && typeof render === "function") render();
-      });
+      syncAllAccountData({ silent: true }).then(() => syncHomeAccountSlots());
     });
 
     if (typeof accountSession === "function" && accountSession() && navigator.onLine) {
-      syncAllAccountData({ silent: true });
+      syncAllAccountData({ silent: true }).then(() => syncHomeAccountSlots());
     }
   }
 
   patchCore();
+  syncHomeAccountSlots();
   window.DAR_ACCOUNT_VISIBILITY = {
     getAccountSyncMeta,
     renderMoreAccountCard,
     renderHomeAccountPill,
     syncAllAccountData,
+    syncHomeAccountSlots,
   };
 })();
