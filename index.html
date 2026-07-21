@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v300";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v303";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v273"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -9744,54 +9744,57 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
   }
 }
 </style>
-<style id="home-hijri-restore-v302">
-/* Islamic date must stay visible in the hero header on all screen sizes */
-.top-shell.theme-hero-shell .brand-kicker-row{
-  flex-direction:column!important;
-  align-items:stretch!important;
-  gap:8px!important;
-}
-.top-shell.theme-hero-shell .brand small{
-  flex:0 0 auto!important;
-  width:100%!important;
-  max-width:100%!important;
-}
-.top-shell.theme-hero-shell .header-top-chips{
-  display:flex!important;
-  width:100%!important;
-  flex:1 1 100%!important;
-  min-width:0!important;
-  justify-content:space-between!important;
-  align-items:stretch!important;
-  gap:6px!important;
+<style id="home-hijri-restore-v303">
+/* Classic Hijri bar above logo — last known good layout */
+.top-shell.theme-hero-shell .brand-main{
+  position:relative!important;
+  padding-top:clamp(30px,8vw,36px)!important;
   overflow:visible!important;
 }
-.top-shell.theme-hero-shell .header-top-chips .hijri-header-pill{
+.top-shell.theme-hero-shell .hijri-header-pill-inline{
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  z-index:4!important;
   display:inline-flex!important;
   visibility:visible!important;
   opacity:1!important;
-  flex:1 1 auto!important;
-  min-width:0!important;
   max-width:none!important;
-  width:auto!important;
-  overflow:visible!important;
-  white-space:nowrap!important;
+  min-width:0!important;
+  width:max-content!important;
+  margin:0!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.28)!important;
 }
-.top-shell.theme-hero-shell .header-top-chips .home-account-pill{
+.top-shell.theme-hero-shell .brand-kicker-row{
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  flex-wrap:wrap!important;
+  gap:8px!important;
+}
+.top-shell.theme-hero-shell .header-top-chips{
+  display:flex!important;
+  width:auto!important;
   flex:0 1 auto!important;
-  max-width:48%!important;
+  justify-content:flex-end!important;
+  margin-left:auto!important;
 }
 @media(max-width:700px){
-  .top-shell.theme-hero-shell .hijri-header-pill,
-  .hijri-header-pill{
-    max-width:none!important;
+  .top-shell.theme-hero-shell .brand-main{
+    padding-top:30px!important;
+  }
+  .top-shell.theme-hero-shell .hijri-header-pill-inline{
+    font-size:9px!important;
+    min-height:29px!important;
+    padding:5px 9px!important;
+    max-width:calc(100vw - 56px)!important;
   }
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=1">
-<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=6">
+<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=7">
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -9803,11 +9806,9 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
         <div class="brand">
           <div class="brand-kicker-row">
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
-            <div class="header-top-chips" id="headerTopChips" data-header-top-chips>
-            <button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Islamisches Datum</button>
-            </div>
+            <div class="header-top-chips" id="headerTopChips" data-header-top-chips></div>
           </div>
-          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
+          <div class="brand-main"><button id="hijriHeaderDate" class="hijri-header-pill hijri-header-pill-inline" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Islamisches Datum</button><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
         </div>
         <div class="header-tools">
           <nav class="socials" aria-label="Social Media">
@@ -14031,7 +14032,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v302";
+const APP_BUILD_ID="app-shell-v303";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -15062,6 +15063,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=6"></script>
+  <script src="/assets/dar-account-visibility.js?v=7"></script>
 </body>
 </html>
