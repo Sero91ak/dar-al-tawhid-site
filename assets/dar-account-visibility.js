@@ -147,10 +147,13 @@
     return `<button type="button" class="home-account-pill is-logged-in ${statusClass(meta.state)}" data-nav="account" aria-label="Konto öffnen"><span class="home-account-pill-label">${esc(icon)} ${esc(shortName)}</span></button>`;
   }
 
+  function renderHomeHijriFrameHtml() {
+    return `<button id="homeHijriDayBtn" class="home-hijri-frame" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-frame-kicker">Islamischer Kalender</span><span class="home-hijri-frame-date" data-hijri-date-text>🗓️ Islamisches Datum</span></button>`;
+  }
+
   function renderHomeHeaderChipsHtml() {
     const pill = renderHomeAccountPill();
-    const hijriBtn = `<button id="homeHijriDayBtn" class="home-hijri-day-btn" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen">🗓️ Islamisches Datum</button>`;
-    return `<div class="view-head-home-chips">${pill || ""}${hijriBtn}</div>`;
+    return pill ? `<div class="view-head-home-chips">${pill}</div>` : "";
   }
 
   function syncHomeAccountSlots() {
@@ -400,7 +403,7 @@
         const eyebrowText = eyebrow || "DAR AL TAWḤID";
         const headClassAttr = headClass ? ` ${headClass}` : "";
         const safe = (v) => (typeof esc === "function" ? esc(v) : String(v == null ? "" : v));
-        return `<div class="view-head view-head-home${headClassAttr}"><div class="eyebrow">${safe(eyebrowText)}</div><div class="view-head-home-row"><h2 class="home-start-title">${safe(title)}</h2>${renderHomeHeaderChipsHtml()}</div>${desc ? `<div class="view-desc">${safe(desc)}</div>` : ""}</div>`;
+        return `<div class="view-head view-head-home${headClassAttr}"><div class="eyebrow">${safe(eyebrowText)}</div><div class="view-head-home-row"><h2 class="home-start-title">${safe(title)}</h2>${renderHomeHijriFrameHtml()}</div>${renderHomeHeaderChipsHtml()}${desc ? `<div class="view-desc">${safe(desc)}</div>` : ""}</div>`;
       }
       return originalSetHeader(title, desc, eyebrow, headClass);
     };
