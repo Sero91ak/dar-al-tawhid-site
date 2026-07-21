@@ -9730,6 +9730,7 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
+<link rel="stylesheet" href="/assets/dar-account-visibility.css?v=1">
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -14974,7 +14975,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var missing = req.filter(function(k) { return typeof window.DAR_AUTO_REFRESH[k] !== 'function'; });
       if (missing.length) console.error('VERSION_UPDATE_GUARD runtime: fehlende DAR_AUTO_REFRESH API:', missing.join(', '));
     })();
-  })();
+    })();
   </script>
+  <script src="/assets/dar-account-visibility.js?v=1"></script>
 </body>
 </html>
