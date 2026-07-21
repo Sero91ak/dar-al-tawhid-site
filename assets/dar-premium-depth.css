@@ -644,7 +644,7 @@ button:active:not(:disabled),
 }
 
 /* ================================================================== */
-/* Navigation                                                         */
+/* Navigation — geometry only (glass material: dar-bottom-nav-glass.css) */
 /* ================================================================== */
 .bottom-nav {
   height: var(--app-bottom-nav-height) !important;
@@ -652,26 +652,12 @@ button:active:not(:disabled),
   max-height: var(--app-bottom-nav-height) !important;
   border-radius: var(--app-bottom-nav-radius) !important;
   padding: var(--app-bottom-nav-padding) !important;
-  border: 1px solid var(--depth-border-soft) !important;
-  background: color-mix(in srgb, var(--card) 78%, transparent) !important;
-  box-shadow: var(--app-shadow-nav), var(--depth-inset-top-strong) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(1.05);
-  backdrop-filter: blur(10px) saturate(1.05);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .bottom-nav {
-    background: color-mix(in srgb, var(--card) 94%, var(--bg) 6%) !important;
-  }
 }
 
 .bottom-nav-btn {
   min-height: calc(var(--app-bottom-nav-height) - 10px) !important;
   font-size: var(--app-bottom-nav-label) !important;
   font-weight: 800 !important;
-  color: color-mix(in srgb, var(--text) 68%, transparent) !important;
-  text-shadow: none !important;
-  transition: color var(--app-motion-ui) var(--app-ease);
 }
 
 .bottom-nav-btn .nav-icon {
@@ -684,8 +670,9 @@ button:active:not(:disabled),
   justify-content: center !important;
 }
 
-.bottom-nav-btn.active {
-  color: var(--gold2) !important;
+.bottom-nav-btn.is-pressed,
+.bottom-nav-btn:active {
+  transform: scale(var(--app-button-press-scale)) !important;
 }
 
 .app-bar,
@@ -713,18 +700,6 @@ button:active:not(:disabled),
 .post-intro-dialog {
   border-radius: var(--app-modal-radius) var(--app-modal-radius) 0 0 !important;
   box-shadow: var(--app-shadow-card-hover) !important;
-}
-
-/* Bottom nav contrast — color only */
-html[data-theme="light"] .bottom-nav-btn,
-html[data-theme="soft"] .bottom-nav-btn {
-  color: color-mix(in srgb, var(--text) 72%, transparent) !important;
-}
-
-html[data-theme="light"] .bottom-nav-btn.active,
-html[data-theme="soft"] .bottom-nav-btn.active,
-html[data-theme="dar-al-layl"] .bottom-nav-btn.active {
-  color: var(--gold2) !important;
 }
 
 @media (max-width: 700px) {
