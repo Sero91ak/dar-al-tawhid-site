@@ -1,0 +1,379 @@
+/* DAR AL TAWḤID — Globales Premium-Typografiesystem (Fraunces / Manrope / Noto Naskh Arabic) */
+
+/* ── Lokale Schriftdateien ── */
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("/assets/fonts/fraunces-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("/assets/fonts/fraunces-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/assets/fonts/manrope-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/assets/fonts/manrope-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/noto-naskh-arabic-arabic-400.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0898-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/noto-naskh-arabic-arabic-600.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0898-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/noto-naskh-arabic-latin-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── Zentrale Typografie-Tokens ── */
+:root {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-ui: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-arabic: "Noto Naskh Arabic", "Amiri", serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-page-title: clamp(30px, 5.4vw, 36px);
+  --font-size-section-title: clamp(27px, 4.8vw, 32px);
+  --font-size-card-title: clamp(18px, 3.6vw, 22px);
+  --font-size-body: clamp(16px, 2.2vw, 18px);
+  --font-size-secondary: clamp(14px, 2vw, 16px);
+  --font-size-label: clamp(11px, 1.8vw, 13px);
+  --font-size-meta: 12px;
+  --font-size-button: clamp(15px, 2.1vw, 17px);
+
+  --line-height-display: 1.12;
+  --line-height-heading: 1.18;
+  --line-height-body: 1.55;
+  --line-height-compact: 1.35;
+  --line-height-arabic: 1.85;
+
+  --letter-spacing-display: 0.01em;
+  --letter-spacing-heading: 0.005em;
+  --letter-spacing-label: 0.1em;
+
+  /* Legacy-Aliase für bestehende Regeln */
+  --serif: var(--font-display);
+  --display: var(--font-display);
+  --sans: var(--font-ui);
+}
+
+/* ── UI-Basis ── */
+body,
+button,
+input,
+select,
+textarea,
+.bottom-nav,
+.bottom-nav-btn,
+.app-bar,
+.search,
+.direct-pick,
+.filter-select,
+.pill,
+.btn,
+.icon-btn,
+.social-link,
+.back-btn,
+.home-btn,
+.action-btn,
+.footer-action-btn {
+  font-family: var(--font-ui);
+}
+
+body {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+}
+
+/* ── Display: Seiten- und Abschnittstitel ── */
+h1,
+.view h2,
+.home-start-title,
+.overview-title h3,
+.section-head h3,
+.feature-head h3,
+.more-group > h3,
+.direct-pick-title h3,
+.calendar-title h3,
+.daily-title,
+.recommended-title,
+.stats-section-head h3,
+.profile-title,
+.book-profile-title,
+.series-title,
+.pinned-title,
+.article-title h2,
+.post-intro-head h3,
+.current-focus-head h3,
+.salam {
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+  letter-spacing: var(--letter-spacing-display);
+  text-shadow: none !important;
+}
+
+h1 {
+  font-size: clamp(27px, 8.7vw, 36px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.view h2,
+.home-start-title {
+  font-size: var(--font-size-page-title) !important;
+  line-height: var(--line-height-display) !important;
+}
+
+.section-head h3,
+.popular-panel .section-head h3,
+.feature-head h3,
+.more-group > h3,
+.overview-title h3,
+.direct-pick-title h3,
+.calendar-title h3,
+.stats-section-head h3 {
+  font-size: var(--font-size-section-title) !important;
+  line-height: var(--line-height-heading) !important;
+  letter-spacing: var(--letter-spacing-heading) !important;
+}
+
+/* Neueste Beiträge / Meist gelesen — gezielte Korrektur */
+.section-block:has(#latestGrid) .section-head h3,
+.popular-panel .section-head h3 {
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+  font-size: clamp(27px, 4.6vw, 30px) !important;
+  line-height: 1.14 !important;
+  letter-spacing: 0.004em !important;
+  text-shadow: none !important;
+}
+
+/* ── UI: Kartentitel, Beschreibungen, Labels ── */
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.info-card h3,
+.dua-card h3,
+.feature-card h4,
+.popular-row-text h4 {
+  font-family: var(--font-ui) !important;
+  font-weight: 650 !important;
+  font-size: var(--font-size-card-title) !important;
+  line-height: 1.26 !important;
+  text-shadow: none !important;
+}
+
+.folder-card p,
+.info-card p,
+.dua-card p,
+.view-desc,
+.intro,
+.feature-head span,
+.feature-card p,
+.post-intro-copy,
+.home-update-banner span {
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+}
+
+/* Labels / Eyebrows / kleine Kennungen */
+.eyebrow,
+.daily-label,
+.recommended-label,
+.brand small,
+.isnad-label,
+.section-head span,
+.direct-pick-title span,
+.stats-section-head span,
+.account-summary-card span {
+  font-family: var(--font-ui) !important;
+  font-weight: 650 !important;
+  font-size: var(--font-size-label) !important;
+  letter-spacing: var(--letter-spacing-label) !important;
+  text-transform: uppercase;
+}
+
+/* Buttons & Navigation */
+.bottom-nav-btn,
+.social-link,
+.pill,
+.btn,
+.back-btn,
+.home-btn,
+.action-btn,
+.collapse-toggle,
+.hijri-header-pill,
+.folder-meta span,
+.badge,
+.search-match {
+  font-family: var(--font-ui) !important;
+  font-weight: 600 !important;
+  font-size: var(--font-size-button);
+}
+
+.bottom-nav-btn {
+  font-size: 9px !important;
+  font-weight: 650 !important;
+}
+
+/* Fließtext & Sekundärtext */
+.excerpt,
+.source-preview,
+.source-row,
+.isnad-quote,
+.isnad-source,
+.crumb,
+.list-card .count,
+.book-author,
+.popular-row-text span {
+  font-family: var(--font-ui) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+/* Beitrags-Statement bleibt Display, aber ohne Extreme */
+.statement {
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  line-height: 1.72 !important;
+}
+
+.statement strong {
+  font-weight: 600 !important;
+}
+
+.statement em,
+.dua-trans,
+.script-accent {
+  font-family: var(--script, "Allura", cursive) !important;
+  font-weight: 400 !important;
+}
+
+/* ── Zahlen & Uhrzeiten ── */
+.stat-card b,
+.prayer-time-card span,
+.prayer-time-card b,
+.prayer-time-card small,
+.prayer-countdown,
+.prayer-next-time,
+.quiz-stat-value,
+.quiz-progress-count,
+.zakat-home-teaser-countdown,
+.event-date,
+.home-hijri-frame-date,
+[data-numeric],
+.tabular-nums {
+  font-family: var(--font-ui) !important;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.prayer-time-card span {
+  font-weight: 700 !important;
+}
+
+.prayer-time-card small,
+.prayer-time-card b {
+  font-weight: 600 !important;
+}
+
+/* ── Arabische Schrift (Duʿāʾ & allgemein; Qurʾān unverändert) ── */
+.dua-arabic,
+.dua-detail-box .dua-arabic,
+.arabic-text:not(.quran-ayah-ar) {
+  font-family: var(--font-arabic) !important;
+  line-height: var(--line-height-arabic) !important;
+  letter-spacing: normal !important;
+}
+
+/* Hijri-Datum im Startkopf: Display, kompakt */
+.home-hijri-frame-date {
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Abschneide-Schutz ── */
+.view h2,
+.section-head h3,
+.feature-head h3,
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.feature-card h4,
+.view-head-home-row h2,
+.popular-row-text h4 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.section-head,
+.feature-head,
+.view-head,
+.view-head-home-row {
+  padding-bottom: 2px;
+}
+
+.section-head {
+  margin-bottom: max(14px, 12px) !important;
+}
+
+.section-block:has(#latestGrid) .section-head,
+.popular-panel .section-head {
+  margin-bottom: max(12px, 10px) !important;
+}
+
+/* Gewichts-Korrektur: keine Extreme in UI */
+html[data-theme] .folder-card h3,
+html[data-theme] .post-card h3,
+html[data-theme] .list-card h3,
+html[data-theme] .section-head h3,
+html[data-theme] .view h2 {
+  font-synthesis: none;
+}
+
+/* Theme-übergreifend identische Typografiegeometrie (nur Farben variieren je Theme) */
+html[data-theme] body,
+html[data-theme] .bottom-nav-btn,
+html[data-theme] .section-head h3,
+html[data-theme] .view h2,
+html[data-theme] .folder-card h3 {
+  font-size: inherit;
+}
