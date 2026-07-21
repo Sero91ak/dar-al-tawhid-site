@@ -1,144 +1,114 @@
 /**
- * DAR AL TAWḤĪD — Bottom Navigation Glass (global component)
+ * DAR AL TAWḤĪD — Bottom Navigation iOS Glass
  * Component: #bottomNav.bottom-nav
- * Geometry unchanged — material only via theme tokens.
+ * Frosted, semi-transparent — theme tint preserved.
  */
 
-/* —— Klassisch Dunkel (default) —— */
+/* —— Klassisch Dunkel —— */
 :root,
 html[data-theme="dark"],
 html:not([data-theme]) {
-  --bottom-nav-bg: rgba(12, 10, 8, 0.94);
-  --bottom-nav-bg-glass: linear-gradient(
-    180deg,
-    rgba(22, 19, 14, 0.8) 0%,
-    rgba(8, 8, 6, 0.76) 100%
-  );
-  --bottom-nav-border: rgba(255, 255, 255, 0.1);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.12);
-  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
-  --bottom-nav-text: var(--cream, #f8efd4);
-  --bottom-nav-text-inactive: rgba(248, 239, 212, 0.68);
-  --bottom-nav-icon: var(--bottom-nav-text);
-  --bottom-nav-icon-inactive: var(--bottom-nav-text-inactive);
-  --bottom-nav-active-bg: rgba(239, 215, 142, 0.11);
+  --bottom-nav-bg: rgba(14, 12, 10, 0.88);
+  --bottom-nav-bg-glass: rgba(18, 16, 12, 0.38);
+  --bottom-nav-border: rgba(255, 255, 255, 0.12);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.22);
+  --bottom-nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  --bottom-nav-text-inactive: rgba(248, 239, 212, 0.62);
+  --bottom-nav-active-bg: rgba(239, 215, 142, 0.14);
   --bottom-nav-active-text: var(--gold2, #efd78e);
-  --bottom-nav-active-icon: var(--bottom-nav-active-text);
-  --bottom-nav-blur: 20px;
-  --bottom-nav-saturation: 1.22;
+  --bottom-nav-blur: 24px;
+  --bottom-nav-saturation: 1.35;
 }
 
 /* —— Klassisch Hell —— */
 html[data-theme="light"] {
-  --bottom-nav-bg: rgba(255, 248, 228, 0.94);
-  --bottom-nav-bg-glass: linear-gradient(
-    180deg,
-    rgba(255, 252, 242, 0.82) 0%,
-    rgba(255, 246, 229, 0.76) 100%
-  );
-  --bottom-nav-border: rgba(155, 122, 60, 0.18);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.58);
-  --bottom-nav-shadow: 0 10px 28px rgba(120, 90, 40, 0.11);
-  --bottom-nav-text-inactive: rgba(74, 55, 32, 0.58);
-  --bottom-nav-active-bg: linear-gradient(135deg, rgba(255, 248, 228, 0.72), rgba(245, 222, 175, 0.58));
+  --bottom-nav-bg: rgba(255, 248, 228, 0.9);
+  --bottom-nav-bg-glass: rgba(255, 252, 242, 0.44);
+  --bottom-nav-border: rgba(155, 122, 60, 0.16);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.65);
+  --bottom-nav-shadow: 0 8px 24px rgba(120, 90, 40, 0.1);
+  --bottom-nav-text-inactive: rgba(74, 55, 32, 0.55);
+  --bottom-nav-active-bg: rgba(255, 248, 228, 0.52);
   --bottom-nav-active-text: #4a3720;
-  --bottom-nav-active-icon: var(--bottom-nav-active-text);
-  --bottom-nav-blur: 20px;
-  --bottom-nav-saturation: 1.24;
+  --bottom-nav-blur: 24px;
+  --bottom-nav-saturation: 1.4;
 }
 
 /* —— Sanft Elegant —— */
 html[data-theme="soft"] {
-  --bottom-nav-bg: rgba(255, 251, 247, 0.94);
-  --bottom-nav-bg-glass: linear-gradient(
-    180deg,
-    rgba(255, 248, 242, 0.82) 0%,
-    rgba(240, 222, 217, 0.76) 100%
-  );
-  --bottom-nav-border: rgba(116, 76, 98, 0.2);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.52);
-  --bottom-nav-shadow: 0 10px 28px rgba(96, 62, 78, 0.1);
-  --bottom-nav-text-inactive: rgba(58, 38, 48, 0.58);
-  --bottom-nav-active-bg: linear-gradient(135deg, rgba(255, 251, 247, 0.72), rgba(238, 217, 225, 0.58));
+  --bottom-nav-bg: rgba(255, 251, 247, 0.9);
+  --bottom-nav-bg-glass: rgba(255, 248, 242, 0.42);
+  --bottom-nav-border: rgba(116, 76, 98, 0.16);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.58);
+  --bottom-nav-shadow: 0 8px 24px rgba(96, 62, 78, 0.1);
+  --bottom-nav-text-inactive: rgba(58, 38, 48, 0.55);
+  --bottom-nav-active-bg: rgba(255, 251, 247, 0.5);
   --bottom-nav-active-text: #3a2630;
-  --bottom-nav-active-icon: var(--bottom-nav-active-text);
-  --bottom-nav-blur: 20px;
-  --bottom-nav-saturation: 1.24;
+  --bottom-nav-blur: 24px;
+  --bottom-nav-saturation: 1.38;
 }
 
 /* —— Royal Nachtblau —— */
 html[data-theme="royal"] {
-  --bottom-nav-bg: rgba(7, 21, 43, 0.94);
-  --bottom-nav-bg-glass: linear-gradient(
-    180deg,
-    rgba(8, 27, 48, 0.8) 0%,
-    rgba(4, 12, 24, 0.76) 100%
-  );
-  --bottom-nav-border: rgba(239, 215, 142, 0.2);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.1);
-  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
-  --bottom-nav-text-inactive: rgba(248, 236, 204, 0.68);
-  --bottom-nav-active-bg: linear-gradient(135deg, rgba(239, 215, 142, 0.16), rgba(42, 93, 145, 0.2));
+  --bottom-nav-bg: rgba(7, 21, 43, 0.9);
+  --bottom-nav-bg-glass: rgba(8, 27, 48, 0.4);
+  --bottom-nav-border: rgba(239, 215, 142, 0.16);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.14);
+  --bottom-nav-shadow: 0 8px 26px rgba(0, 0, 0, 0.28);
+  --bottom-nav-text-inactive: rgba(248, 236, 204, 0.62);
+  --bottom-nav-active-bg: rgba(239, 215, 142, 0.12);
   --bottom-nav-active-text: var(--gold2, #efd78e);
-  --bottom-nav-active-icon: var(--bottom-nav-active-text);
-  --bottom-nav-blur: 20px;
-  --bottom-nav-saturation: 1.26;
+  --bottom-nav-blur: 24px;
+  --bottom-nav-saturation: 1.36;
 }
 
 /* —— Bordeaux Royal Premium —— */
 html[data-theme="bordeaux"] {
-  --bottom-nav-bg: rgba(20, 11, 12, 0.95);
-  --bottom-nav-bg-glass: linear-gradient(
-    180deg,
-    rgba(74, 31, 36, 0.78) 0%,
-    rgba(20, 11, 12, 0.82) 100%
-  );
-  --bottom-nav-border: rgba(214, 190, 132, 0.2);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.08);
-  --bottom-nav-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
-  --bottom-nav-text-inactive: rgba(247, 238, 216, 0.6);
-  --bottom-nav-active-bg: linear-gradient(135deg, rgba(214, 190, 132, 0.16), rgba(91, 35, 42, 0.28));
+  --bottom-nav-bg: rgba(20, 11, 12, 0.9);
+  --bottom-nav-bg-glass: rgba(74, 31, 36, 0.42);
+  --bottom-nav-border: rgba(214, 190, 132, 0.16);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.12);
+  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  --bottom-nav-text-inactive: rgba(247, 238, 216, 0.58);
+  --bottom-nav-active-bg: rgba(214, 190, 132, 0.14);
   --bottom-nav-active-text: #d6be84;
-  --bottom-nav-active-icon: var(--bottom-nav-active-text);
-  --bottom-nav-blur: 22px;
-  --bottom-nav-saturation: 1.28;
+  --bottom-nav-blur: 24px;
+  --bottom-nav-saturation: 1.34;
 }
 
 /* —— Dār al-Layl —— */
 html[data-theme="dar-al-layl"] {
-  --bottom-nav-bg: rgba(7, 11, 9, 0.96);
-  --bottom-nav-bg-glass: linear-gradient(
-    180deg,
-    rgba(18, 23, 20, 0.82) 0%,
-    rgba(7, 11, 9, 0.86) 100%
-  );
+  --bottom-nav-bg: rgba(7, 11, 9, 0.9);
+  --bottom-nav-bg-glass: rgba(18, 23, 20, 0.4);
   --bottom-nav-border: rgba(168, 139, 79, 0.14);
-  --bottom-nav-highlight: rgba(216, 193, 139, 0.1);
-  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
-  --bottom-nav-text-inactive: #8c938c;
-  --bottom-nav-active-bg: rgba(168, 139, 79, 0.1);
+  --bottom-nav-highlight: rgba(216, 193, 139, 0.16);
+  --bottom-nav-shadow: 0 8px 26px rgba(0, 0, 0, 0.3);
+  --bottom-nav-text-inactive: rgba(140, 147, 140, 0.88);
+  --bottom-nav-active-bg: rgba(168, 139, 79, 0.16);
   --bottom-nav-active-text: #e8d7b3;
-  --bottom-nav-active-icon: var(--bottom-nav-active-text);
-  --bottom-nav-blur: 20px;
-  --bottom-nav-saturation: 1.24;
+  --bottom-nav-blur: 24px;
+  --bottom-nav-saturation: 1.32;
 }
 
-/* —— Glass surface (single blur layer) —— */
+/* —— iOS frosted glass surface —— */
+html[data-theme] #bottomNav.bottom-nav,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav,
 #bottomNav.bottom-nav,
 .bottom-nav {
   background: var(--bottom-nav-bg-glass) !important;
+  background-image: none !important;
   border: 1px solid var(--bottom-nav-border) !important;
   box-shadow: var(--bottom-nav-shadow), inset 0 1px 0 var(--bottom-nav-highlight) !important;
-  -webkit-backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation));
-  backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation));
-  isolation: isolate !important;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  -webkit-backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
+  backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
+  contain: none !important;
+  isolation: auto !important;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-theme] #bottomNav.bottom-nav,
   #bottomNav.bottom-nav,
   .bottom-nav {
     background: var(--bottom-nav-bg) !important;
@@ -146,6 +116,7 @@ html[data-theme="dar-al-layl"] {
 }
 
 @media (prefers-reduced-transparency: reduce) {
+  html[data-theme] #bottomNav.bottom-nav,
   #bottomNav.bottom-nav,
   .bottom-nav {
     -webkit-backdrop-filter: none !important;
@@ -154,7 +125,8 @@ html[data-theme="dar-al-layl"] {
   }
 }
 
-/* —— Tab buttons —— */
+/* —— Tabs —— */
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
 #bottomNav.bottom-nav .bottom-nav-btn,
 .bottom-nav .bottom-nav-btn {
   color: var(--bottom-nav-text-inactive) !important;
@@ -164,6 +136,7 @@ html[data-theme="dar-al-layl"] {
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+  border-radius: 12px !important;
   transition:
     color 180ms cubic-bezier(0.22, 0.84, 0.32, 1),
     background 180ms cubic-bezier(0.22, 0.84, 0.32, 1),
@@ -171,29 +144,35 @@ html[data-theme="dar-al-layl"] {
     transform 130ms cubic-bezier(0.22, 0.84, 0.32, 1);
 }
 
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
 .bottom-nav .bottom-nav-btn .nav-icon {
   color: inherit !important;
   transform: none !important;
   filter: none !important;
-  transition: color 180ms cubic-bezier(0.22, 0.84, 0.32, 1);
 }
 
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 #bottomNav.bottom-nav .bottom-nav-btn.active,
 #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 .bottom-nav .bottom-nav-btn.active,
 .bottom-nav .bottom-nav-btn.is-pressed {
   color: var(--bottom-nav-active-text) !important;
   background: var(--bottom-nav-active-bg) !important;
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bottom-nav-highlight) 70%, transparent) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bottom-nav-highlight) 55%, transparent) !important;
   filter: none !important;
 }
 
-#bottomNav.bottom-nav .bottom-nav-btn:active:not(.active),
-.bottom-nav .bottom-nav-btn:active:not(.active) {
-  color: color-mix(in srgb, var(--bottom-nav-active-text) 88%, var(--bottom-nav-text-inactive)) !important;
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active,
+#bottomNav.bottom-nav .bottom-nav-btn:active,
+.bottom-nav .bottom-nav-btn:active {
+  transform: scale(0.985) !important;
 }
 
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
 #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
@@ -204,19 +183,16 @@ html[data-theme="dar-al-layl"] {
   filter: none !important;
 }
 
-/* Optional sliding pill (if enabled in future) */
-#bottomNav.bottom-nav .bottom-nav-pill,
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
 .bottom-nav .bottom-nav-pill {
   background: var(--bottom-nav-active-bg) !important;
-  border: 1px solid color-mix(in srgb, var(--bottom-nav-border) 80%, transparent) !important;
-  box-shadow: var(--bottom-nav-shadow), inset 0 1px 0 var(--bottom-nav-highlight) !important;
+  border: 1px solid color-mix(in srgb, var(--bottom-nav-border) 70%, transparent) !important;
+  box-shadow: inset 0 1px 0 var(--bottom-nav-highlight) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #bottomNav.bottom-nav .bottom-nav-btn,
-  .bottom-nav .bottom-nav-btn,
-  #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
-  .bottom-nav .bottom-nav-btn .nav-icon {
+  html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
+  .bottom-nav .bottom-nav-btn {
     transition-duration: 0.01ms !important;
   }
 }
