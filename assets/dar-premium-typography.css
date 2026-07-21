@@ -1,21 +1,39 @@
-/* DAR AL TAWḤID — Globales Premium-Typografiesystem (Fraunces / Manrope / Noto Naskh Arabic) */
+/* DAR AL TAWḤID — Premium-Typografie: Cinzel + Cormorant Garamond + Manrope */
 
-/* ── Lokale Schriftdateien ── */
 @font-face {
-  font-family: "Fraunces";
+  font-family: "Cinzel";
   font-style: normal;
-  font-weight: 300 900;
+  font-weight: 500;
   font-display: swap;
-  src: url("/assets/fonts/fraunces-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("/assets/fonts/cinzel-latin-500-normal.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Fraunces";
+  font-family: "Cinzel";
   font-style: normal;
-  font-weight: 300 900;
+  font-weight: 600;
   font-display: swap;
-  src: url("/assets/fonts/fraunces-latin-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  src: url("/assets/fonts/cinzel-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2");
 }
 @font-face {
   font-family: "Manrope";
@@ -23,7 +41,6 @@
   font-weight: 200 800;
   font-display: swap;
   src: url("/assets/fonts/manrope-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: "Manrope";
@@ -31,7 +48,6 @@
   font-weight: 200 800;
   font-display: swap;
   src: url("/assets/fonts/manrope-latin-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: "Noto Naskh Arabic";
@@ -55,12 +71,11 @@
   font-weight: 400;
   font-display: swap;
   src: url("/assets/fonts/noto-naskh-arabic-latin-400.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* ── Zentrale Typografie-Tokens ── */
 :root {
-  --font-display: "Fraunces", "Georgia", serif;
+  --font-brand: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-ui: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-arabic: "Noto Naskh Arabic", "Amiri", serif;
 
@@ -69,32 +84,30 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --font-size-page-title: clamp(30px, 5.4vw, 36px);
-  --font-size-section-title: clamp(27px, 4.8vw, 32px);
-  --font-size-card-title: clamp(18px, 3.6vw, 22px);
+  --font-size-page-title: clamp(24px, 4.6vw, 30px);
+  --font-size-section-title: clamp(21px, 3.8vw, 24px);
+  --font-size-card-title: clamp(17px, 3.2vw, 20px);
   --font-size-body: clamp(16px, 2.2vw, 18px);
   --font-size-secondary: clamp(14px, 2vw, 16px);
   --font-size-label: clamp(11px, 1.8vw, 13px);
   --font-size-meta: 12px;
   --font-size-button: clamp(15px, 2.1vw, 17px);
 
-  --line-height-display: 1.12;
-  --line-height-heading: 1.18;
+  --line-height-display: 1.1;
+  --line-height-heading: 1.14;
   --line-height-body: 1.55;
   --line-height-compact: 1.35;
   --line-height-arabic: 1.85;
 
-  --letter-spacing-display: 0.01em;
-  --letter-spacing-heading: 0.005em;
+  --letter-spacing-display: 0.02em;
+  --letter-spacing-heading: 0.012em;
   --letter-spacing-label: 0.1em;
 
-  /* Legacy-Aliase für bestehende Regeln */
   --serif: var(--font-display);
-  --display: var(--font-display);
+  --display: var(--font-brand);
   --sans: var(--font-ui);
 }
 
-/* ── UI-Basis ── */
 body,
 button,
 input,
@@ -123,8 +136,17 @@ body {
   font-weight: var(--font-weight-regular);
 }
 
-/* ── Display: Seiten- und Abschnittstitel ── */
+/* Marken-Titel: Cinzel — edel, klassisch, geschwungen */
 h1,
+.top-shell.theme-hero-shell h1,
+.footer strong {
+  font-family: var(--font-brand) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-shadow: none !important;
+}
+
+/* Seiten- & Abschnittstitel: Cormorant Garamond — elegant, geschwungen, leichter */
 .view h2,
 .home-start-title,
 .overview-title h3,
@@ -143,17 +165,16 @@ h1,
 .article-title h2,
 .post-intro-head h3,
 .current-focus-head h3,
-.salam {
+.salam,
+.quran-home-teaser h3,
+.quran-quick-pick .direct-pick-title h3,
+.post-slide h3,
+.related-compact-card h4,
+.popular-row-text h4 {
   font-family: var(--font-display) !important;
   font-weight: 600 !important;
-  letter-spacing: var(--letter-spacing-display);
+  letter-spacing: var(--letter-spacing-heading) !important;
   text-shadow: none !important;
-}
-
-h1 {
-  font-size: clamp(27px, 8.7vw, 36px) !important;
-  line-height: 1.02 !important;
-  letter-spacing: 0.02em !important;
 }
 
 .view h2,
@@ -169,31 +190,30 @@ h1 {
 .overview-title h3,
 .direct-pick-title h3,
 .calendar-title h3,
-.stats-section-head h3 {
+.stats-section-head h3,
+.daily-title,
+.recommended-title,
+.quran-home-teaser h3 {
   font-size: var(--font-size-section-title) !important;
   line-height: var(--line-height-heading) !important;
-  letter-spacing: var(--letter-spacing-heading) !important;
 }
 
-/* Neueste Beiträge / Meist gelesen — gezielte Korrektur */
 .section-block:has(#latestGrid) .section-head h3,
 .popular-panel .section-head h3 {
   font-family: var(--font-display) !important;
   font-weight: 600 !important;
-  font-size: clamp(27px, 4.6vw, 30px) !important;
-  line-height: 1.14 !important;
-  letter-spacing: 0.004em !important;
-  text-shadow: none !important;
+  font-size: clamp(21px, 3.6vw, 23px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0.01em !important;
 }
 
-/* ── UI: Kartentitel, Beschreibungen, Labels ── */
+/* UI: Kartentitel in Manrope */
 .folder-card h3,
 .post-card h3,
 .list-card h3,
 .info-card h3,
 .dua-card h3,
-.feature-card h4,
-.popular-row-text h4 {
+.feature-card h4 {
   font-family: var(--font-ui) !important;
   font-weight: 650 !important;
   font-size: var(--font-size-card-title) !important;
@@ -215,7 +235,6 @@ h1 {
   line-height: var(--line-height-body);
 }
 
-/* Labels / Eyebrows / kleine Kennungen */
 .eyebrow,
 .daily-label,
 .recommended-label,
@@ -232,7 +251,6 @@ h1 {
   text-transform: uppercase;
 }
 
-/* Buttons & Navigation */
 .bottom-nav-btn,
 .social-link,
 .pill,
@@ -255,7 +273,6 @@ h1 {
   font-weight: 650 !important;
 }
 
-/* Fließtext & Sekundärtext */
 .excerpt,
 .source-preview,
 .source-row,
@@ -269,7 +286,6 @@ h1 {
   font-weight: var(--font-weight-medium) !important;
 }
 
-/* Beitrags-Statement bleibt Display, aber ohne Extreme */
 .statement {
   font-family: var(--font-display) !important;
   font-weight: 500 !important;
@@ -287,7 +303,6 @@ h1 {
   font-weight: 400 !important;
 }
 
-/* ── Zahlen & Uhrzeiten ── */
 .stat-card b,
 .prayer-time-card span,
 .prayer-time-card b,
@@ -306,16 +321,6 @@ h1 {
   font-feature-settings: "tnum" 1;
 }
 
-.prayer-time-card span {
-  font-weight: 700 !important;
-}
-
-.prayer-time-card small,
-.prayer-time-card b {
-  font-weight: 600 !important;
-}
-
-/* ── Arabische Schrift (Duʿāʾ & allgemein; Qurʾān unverändert) ── */
 .dua-arabic,
 .dua-detail-box .dua-arabic,
 .arabic-text:not(.quran-ayah-ar) {
@@ -324,13 +329,11 @@ h1 {
   letter-spacing: normal !important;
 }
 
-/* Hijri-Datum im Startkopf: Display, kompakt */
 .home-hijri-frame-date {
   font-family: var(--font-display) !important;
   font-weight: 600 !important;
 }
 
-/* ── Abschneide-Schutz ── */
 .view h2,
 .section-head h3,
 .feature-head h3,
@@ -344,36 +347,15 @@ h1 {
   overflow-wrap: anywhere;
 }
 
-.section-head,
-.feature-head,
-.view-head,
-.view-head-home-row {
-  padding-bottom: 2px;
-}
-
 .section-head {
-  margin-bottom: max(14px, 12px) !important;
-}
-
-.section-block:has(#latestGrid) .section-head,
-.popular-panel .section-head {
   margin-bottom: max(12px, 10px) !important;
 }
 
-/* Gewichts-Korrektur: keine Extreme in UI */
 html[data-theme] .folder-card h3,
 html[data-theme] .post-card h3,
 html[data-theme] .list-card h3,
 html[data-theme] .section-head h3,
-html[data-theme] .view h2 {
-  font-synthesis: none;
-}
-
-/* Theme-übergreifend identische Typografiegeometrie (nur Farben variieren je Theme) */
-html[data-theme] body,
-html[data-theme] .bottom-nav-btn,
-html[data-theme] .section-head h3,
 html[data-theme] .view h2,
 html[data-theme] .folder-card h3 {
-  font-size: inherit;
+  font-synthesis: none;
 }

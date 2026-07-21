@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v308";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v309";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v273"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -46,11 +46,12 @@
   --text:#f6edd2;--muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
   --danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);
-  --font-display:"Fraunces","Georgia",serif;
+  --font-brand:"Cinzel","Cormorant Garamond",Georgia,serif;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-arabic:"Noto Naskh Arabic","Amiri",serif;
   --serif:var(--font-display);
-  --display:var(--font-display);
+  --display:var(--font-brand);
   --script:"Allura","Brush Script MT",cursive;
   --sans:var(--font-ui);
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
@@ -1150,11 +1151,12 @@ html.is-standalone-pwa{background:var(--page-cover)}
   --gold:#c8a85b;--gold2:#f0d98f;--bronze:#9a7435;--cream:#f7efd6;
   --text:#f4ebd1;--muted:#c7bda3;--muted2:#9c927b;
   --line:rgba(214,183,106,.34);--line2:rgba(214,183,106,.18);
-  --font-display:"Fraunces","Georgia",serif;
+  --font-brand:"Cinzel","Cormorant Garamond",Georgia,serif;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-arabic:"Noto Naskh Arabic","Amiri",serif;
   --serif:var(--font-display);
-  --display:var(--font-display);
+  --display:var(--font-brand);
   --script:"Allura","Brush Script MT",cursive;
   --sans:var(--font-ui);
 }
@@ -8504,14 +8506,15 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js"></script>
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
-<link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/cinzel-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=3">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
-<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=1">
+<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=2">
 
 
 <style id="feature-final-v202">
