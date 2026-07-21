@@ -1,19 +1,5 @@
-/* DAR AL TAWḤID — Premium-Typografie: Cinzel + Cormorant Garamond + Manrope */
+/* DAR AL TAWḤID — Kompakte Premium-Typografie: Cormorant Garamond + Manrope */
 
-@font-face {
-  font-family: "Cinzel";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("/assets/fonts/cinzel-latin-500-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Cinzel";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/assets/fonts/cinzel-latin-600-normal.woff2") format("woff2");
-}
 @font-face {
   font-family: "Cormorant Garamond";
   font-style: normal;
@@ -27,13 +13,6 @@
   font-weight: 600;
   font-display: swap;
   src: url("/assets/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Cormorant Garamond";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/assets/fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2");
 }
 @font-face {
   font-family: "Manrope";
@@ -74,37 +53,31 @@
 }
 
 :root {
-  --font-brand: "Cinzel", "Cormorant Garamond", Georgia, serif;
-  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
   --font-ui: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-arabic: "Noto Naskh Arabic", "Amiri", serif;
 
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  --font-size-page-title: clamp(24px, 4.6vw, 30px);
-  --font-size-section-title: clamp(21px, 3.8vw, 24px);
+  --font-size-page-title: clamp(28px, 5vw, 32px);
+  --font-size-section-title: clamp(25px, 4.2vw, 28px);
+  --font-size-feature-title: clamp(23px, 4vw, 27px);
   --font-size-card-title: clamp(17px, 3.2vw, 20px);
-  --font-size-body: clamp(16px, 2.2vw, 18px);
-  --font-size-secondary: clamp(14px, 2vw, 16px);
-  --font-size-label: clamp(11px, 1.8vw, 13px);
-  --font-size-meta: 12px;
-  --font-size-button: clamp(15px, 2.1vw, 17px);
+  --font-size-body: clamp(15px, 2.1vw, 17px);
+  --font-size-secondary: clamp(13px, 1.9vw, 15px);
+  --font-size-label: clamp(10px, 1.7vw, 12px);
+  --font-size-button: clamp(14px, 2vw, 16px);
 
-  --line-height-display: 1.1;
-  --line-height-heading: 1.14;
-  --line-height-body: 1.55;
+  --line-height-display: 1.08;
+  --line-height-heading: 1.1;
+  --line-height-body: 1.5;
   --line-height-compact: 1.35;
   --line-height-arabic: 1.85;
 
-  --letter-spacing-display: 0.02em;
-  --letter-spacing-heading: 0.012em;
+  --letter-spacing-display: -0.005em;
+  --letter-spacing-heading: 0;
   --letter-spacing-label: 0.1em;
 
   --serif: var(--font-display);
-  --display: var(--font-brand);
+  --display: var(--font-display);
   --sans: var(--font-ui);
 }
 
@@ -133,20 +106,12 @@ textarea,
 body {
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
 }
 
-/* Marken-Titel: Cinzel — edel, klassisch, geschwungen */
+/* Display: Cormorant Garamond 500 — schlank, kurvig, kompakt */
 h1,
 .top-shell.theme-hero-shell h1,
-.footer strong {
-  font-family: var(--font-brand) !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
-  text-shadow: none !important;
-}
-
-/* Seiten- & Abschnittstitel: Cormorant Garamond — elegant, geschwungen, leichter */
 .view h2,
 .home-start-title,
 .overview-title h3,
@@ -168,13 +133,27 @@ h1,
 .salam,
 .quran-home-teaser h3,
 .quran-quick-pick .direct-pick-title h3,
+.prayer-overview__today-label,
 .post-slide h3,
 .related-compact-card h4,
-.popular-row-text h4 {
+.popular-row-text h4,
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.info-card h3,
+.dua-card h3 {
   font-family: var(--font-display) !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   letter-spacing: var(--letter-spacing-heading) !important;
   text-shadow: none !important;
+}
+
+h1,
+.top-shell.theme-hero-shell h1 {
+  font-size: var(--font-size-page-title) !important;
+  line-height: var(--line-height-display) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
 }
 
 .view h2,
@@ -188,56 +167,44 @@ h1,
 .feature-head h3,
 .more-group > h3,
 .overview-title h3,
-.direct-pick-title h3,
-.calendar-title h3,
-.stats-section-head h3,
-.daily-title,
-.recommended-title,
-.quran-home-teaser h3 {
+.stats-section-head h3 {
   font-size: var(--font-size-section-title) !important;
   line-height: var(--line-height-heading) !important;
 }
 
-.section-block:has(#latestGrid) .section-head h3,
-.popular-panel .section-head h3 {
-  font-family: var(--font-display) !important;
-  font-weight: 600 !important;
-  font-size: clamp(21px, 3.6vw, 23px) !important;
-  line-height: 1.12 !important;
-  letter-spacing: 0.01em !important;
+.quran-home-teaser h3,
+.prayer-overview__today-label,
+.current-focus-head h3,
+.direct-pick-title h3,
+.calendar-title h3 {
+  font-size: var(--font-size-feature-title) !important;
+  line-height: 1.1 !important;
 }
 
-/* UI: Kartentitel in Manrope */
+.daily-title,
+.recommended-title {
+  font-size: clamp(22px, 3.8vw, 25px) !important;
+  line-height: 1.1 !important;
+  margin: 0 0 4px !important;
+}
+
 .folder-card h3,
 .post-card h3,
 .list-card h3,
 .info-card h3,
 .dua-card h3,
-.feature-card h4 {
-  font-family: var(--font-ui) !important;
-  font-weight: 650 !important;
+.popular-row-text h4 {
   font-size: var(--font-size-card-title) !important;
-  line-height: 1.26 !important;
-  text-shadow: none !important;
+  line-height: 1.24 !important;
 }
 
-.folder-card p,
-.info-card p,
-.dua-card p,
-.view-desc,
-.intro,
-.feature-head span,
-.feature-card p,
-.post-intro-copy,
-.home-update-banner span {
-  font-family: var(--font-ui);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-}
-
+/* UI-Labels — keine Display-Schrift */
 .eyebrow,
 .daily-label,
 .recommended-label,
+.quran-home-teaser-label,
+.current-focus-head span,
+.prayer-overview__kicker,
 .brand small,
 .isnad-label,
 .section-head span,
@@ -251,6 +218,28 @@ h1,
   text-transform: uppercase;
 }
 
+.feature-card h4 {
+  font-family: var(--font-ui) !important;
+  font-weight: 600 !important;
+  font-size: var(--font-size-card-title) !important;
+}
+
+.folder-card p,
+.info-card p,
+.dua-card p,
+.view-desc,
+.intro,
+.feature-head span,
+.feature-card p,
+.daily-text,
+.recommended-text,
+.excerpt,
+.popular-row-text span {
+  font-family: var(--font-ui) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-body);
+}
+
 .bottom-nav-btn,
 .social-link,
 .pill,
@@ -261,8 +250,7 @@ h1,
 .collapse-toggle,
 .hijri-header-pill,
 .folder-meta span,
-.badge,
-.search-match {
+.badge {
   font-family: var(--font-ui) !important;
   font-weight: 600 !important;
   font-size: var(--font-size-button);
@@ -273,23 +261,10 @@ h1,
   font-weight: 650 !important;
 }
 
-.excerpt,
-.source-preview,
-.source-row,
-.isnad-quote,
-.isnad-source,
-.crumb,
-.list-card .count,
-.book-author,
-.popular-row-text span {
-  font-family: var(--font-ui) !important;
-  font-weight: var(--font-weight-medium) !important;
-}
-
 .statement {
   font-family: var(--font-display) !important;
   font-weight: 500 !important;
-  line-height: 1.72 !important;
+  line-height: 1.65 !important;
 }
 
 .statement strong {
@@ -303,17 +278,16 @@ h1,
   font-weight: 400 !important;
 }
 
+.prayer-overview__time-line,
+.prayer-overview__time-hour,
+.prayer-overview__time-countdown,
+.prayer-overview__location-text,
 .stat-card b,
 .prayer-time-card span,
 .prayer-time-card b,
 .prayer-time-card small,
-.prayer-countdown,
-.prayer-next-time,
-.quiz-stat-value,
-.quiz-progress-count,
-.zakat-home-teaser-countdown,
-.event-date,
-.home-hijri-frame-date,
+.header-prayer-item span,
+.header-prayer-item small,
 [data-numeric],
 .tabular-nums {
   font-family: var(--font-ui) !important;
@@ -331,7 +305,7 @@ h1,
 
 .home-hijri-frame-date {
   font-family: var(--font-display) !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 
 .view h2,
@@ -340,22 +314,24 @@ h1,
 .folder-card h3,
 .post-card h3,
 .list-card h3,
-.feature-card h4,
 .view-head-home-row h2,
-.popular-row-text h4 {
+.popular-row-text h4,
+.daily-title,
+.recommended-title,
+.quran-home-teaser h3,
+.prayer-overview__today-label {
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
-.section-head {
-  margin-bottom: max(12px, 10px) !important;
+.section-head,
+.popular-panel .section-head {
+  margin-bottom: 8px !important;
 }
 
-html[data-theme] .folder-card h3,
-html[data-theme] .post-card h3,
-html[data-theme] .list-card h3,
 html[data-theme] .section-head h3,
 html[data-theme] .view h2,
-html[data-theme] .folder-card h3 {
+html[data-theme] .folder-card h3,
+html[data-theme] .post-card h3 {
   font-synthesis: none;
 }
