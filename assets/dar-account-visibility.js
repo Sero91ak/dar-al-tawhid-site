@@ -139,12 +139,19 @@
     if (!hasRealAccountSystem()) return "";
     const meta = getAccountSyncMeta();
     if (meta.state === "logged_out") {
-      return `<button type="button" class="home-account-pill is-guest" data-account-open-login aria-label="Konto anmelden oder registrieren">🔐 Konto</button>`;
+      return `<button type="button" class="home-account-pill is-guest is-guest-neon" data-account-open-register aria-label="Konto erstellen und auf allen Geräten synchronisieren"><span class="home-account-pill-label">Konto &amp; Sync</span></button>`;
     }
     const icon =
       meta.state === "synced" ? "✓" : meta.state === "offline" ? "◌" : meta.state === "pending" ? "↻" : "!";
-    const shortName = String(meta.username || "Konto").slice(0, 14);
-    return `<button type="button" class="home-account-pill ${statusClass(meta.state)}" data-nav="account" aria-label="Konto öffnen">${esc(icon)} ${esc(shortName)}</button>`;
+    const shortName = String(meta.username || "Konto").slice(0, 12);
+    return `<button type="button" class="home-account-pill is-logged-in ${statusClass(meta.state)}" data-nav="account" aria-label="Konto öffnen"><span class="home-account-pill-label">${esc(icon)} ${esc(shortName)}</span></button>`;
+  }
+
+  function renderHomeHeaderChipsHtml() {
+    const pill = renderHomeAccountPill();
+    const hijriBtn = `<button id="homeHijriDayBtn" class="home-hijri-day-btn" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen">🗓️ Islamisches Datum</button>`;
+    if (!pill) return hijriBtn;
+    return `<div class="view-head-home-chips">${pill}${hijriBtn}</div>`;
   }
 
   function renderMoreAccountCard() {
@@ -336,15 +343,6 @@
     if (typeof navigate === "function") navigate("account", mode === "register" ? "register" : "login");
   }
 
-  function injectHomeAccountPill(html) {
-    const pill = renderHomeAccountPill();
-    if (!pill || !html.includes("view-head-home-row")) return html;
-    return html.replace(
-      /(<div class="view-head-home-row">[\s\S]*?<h2>[\s\S]*?<\/h2>)(\s*<button id="homeHijriDayBtn"[\s\S]*?<\/button>)/,
-      `$1<div class="view-head-home-side">${pill}$2</div>`
-    );
-  }
-
   function bindAccountVisibilityEvents() {
     document.querySelectorAll("[data-account-open-login]").forEach((btn) => {
       btn.onclick = (ev) => {
@@ -402,11 +400,13 @@
     if (typeof setHeader === "function") {
       const originalSetHeader = setHeader;
       setHeader = function (title, desc, eyebrow, headClass) {
-        let html = originalSetHeader(title, desc, eyebrow, headClass);
         if (title === "Startseite" && hasRealAccountSystem()) {
-          html = injectHomeAccountPill(html);
+          const eyebrowText = eyebrow || "DAR AL TAWḤID";
+          const headClassAttr = headClass ? ` ${headClass}` : "";
+          const safe = (v) => (typeof esc === "function" ? esc(v) : String(v == null ? "" : v));
+          return `<div class="view-head view-head-home${headClassAttr}"><div class="eyebrow">${safe(eyebrowText)}</div><div class="view-head-home-row"><h2>${safe(title)}</h2>${renderHomeHeaderChipsHtml()}</div>${desc ? `<div class="view-desc">${safe(desc)}</div>` : ""}</div>`;
         }
-        return html;
+        return originalSetHeader(title, desc, eyebrow, headClass);
       };
     }
 
