@@ -113,7 +113,7 @@
     if (meta.state === "logged_out") return "Nicht angemeldet";
     if (meta.state === "offline") return "Offline – lokal gespeichert";
     if (meta.state === "pending") return "Synchronisierung ausstehend";
-    if (meta.state === "error") return "Synchronisierung derzeit nicht möglich";
+    if (meta.state === "error") return "Synchronisierung prüfen";
     return "Synchronisiert";
   }
 
@@ -122,13 +122,29 @@
   }
 
   function syncedDataListHtml() {
-    const items = ["Favoriten (Beiträge)", "Qurʾān-Lesestand"];
-    if (hasRealAccountSystem()) items.push("Zakāt-Berechnungen (bei Speichern im Konto)");
+    const items = [
+      "Favoriten (Beiträge)",
+      "Qurʾān-Lesestand",
+      "Quiz-Fortschritt und Statistik",
+      "Zakāt-Berechnungen (bei Speichern im Konto)",
+    ];
     return `<ul class="account-sync-list">${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
   }
 
   function localOnlyDataListHtml() {
     return `<ul class="account-sync-list"><li>Theme und Schriftgrößen</li><li>Gebetszeiten-Einstellungen</li><li>Qurʾān-Lesezeichen (lokal)</li><li>Bereits geladene Offline-Inhalte auf diesem Gerät</li></ul>`;
+  }
+
+  function renderHomeAccountPill() {
+    if (!hasRealAccountSystem()) return "";
+    const meta = getAccountSyncMeta();
+    if (meta.state === "logged_out") {
+      return `<button type="button" class="home-account-pill is-guest" data-account-open-login aria-label="Konto anmelden oder registrieren">🔐 Konto</button>`;
+    }
+    const icon =
+      meta.state === "synced" ? "✓" : meta.state === "offline" ? "◌" : meta.state === "pending" ? "↻" : "!";
+    const shortName = String(meta.username || "Konto").slice(0, 14);
+    return `<button type="button" class="home-account-pill ${statusClass(meta.state)}" data-nav="account" aria-label="Konto öffnen">${esc(icon)} ${esc(shortName)}</button>`;
   }
 
   function renderMoreAccountCard() {
@@ -142,54 +158,22 @@
     if (!hasRealAccountSystem()) {
       desc = "Schütze deinen persönlichen Bereich mit Anmeldename und PIN.";
       note = "Diese Funktion synchronisiert derzeit keine Daten zwischen mehreren Geräten.";
-      actions =
-        '<button type="button" class="primary" data-nav="account">Bereich öffnen</button>';
+      actions = '<button type="button" class="primary" data-nav="account">Bereich öffnen</button>';
     } else if (meta.state === "logged_out") {
-      desc = "Melde dich an oder registriere dich, um unterstützte Daten auf deinen Geräten zu sichern.";
+      desc = "Melde dich an oder registriere dich, um unterstützte Daten auf allen Geräten zu sichern.";
       note = "Die App bleibt auch ohne Konto nutzbar.";
       actions =
         '<button type="button" class="primary" data-account-open-login>Anmelden</button><button type="button" data-account-open-register>Registrieren</button>';
-    } else if (meta.state === "offline") {
-      desc =
-        "Deine Änderungen bleiben auf diesem Gerät gespeichert und werden nach Wiederherstellung der Verbindung synchronisiert.";
-      actions =
-        `<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Erneut versuchen</button>`;
-    } else if (meta.state === "pending") {
-      desc = "Deine Änderungen sind lokal gespeichert.";
-      actions =
-        `<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Erneut versuchen</button>`;
-    } else if (meta.state === "error") {
-      desc = "Deine lokalen Daten bleiben erhalten.";
-      actions =
-        `<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Erneut versuchen</button>`;
     } else {
-      const syncLine = meta.lastSyncLabel
-        ? `Zuletzt synchronisiert: ${meta.lastSyncLabel}`
-        : "Synchronisierung bereit";
+      const syncLine = meta.lastSyncLabel ? `Zuletzt: ${meta.lastSyncLabel}` : "Bereit";
       desc = `${esc(meta.username || "")} · ${syncLine}`;
-      actions = '<button type="button" class="primary" data-nav="account">Konto öffnen</button>';
+      actions =
+        meta.state === "error" || meta.state === "pending" || meta.state === "offline"
+          ? '<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Jetzt synchronisieren</button>'
+          : '<button type="button" class="primary" data-nav="account">Konto öffnen</button>';
     }
 
     return `<section class="account-hub-card premium-surface" data-account-hub-card><div class="account-hub-head">${accountIconSvg()}<div><h3 class="account-hub-title">${esc(title)}</h3><p class="account-hub-status ${statusClass(meta.state)}">${esc(status)}</p></div></div><p class="account-hub-desc">${desc}</p><div class="account-hub-actions">${actions}</div>${note ? `<p class="account-hub-note">${esc(note)}</p>` : ""}</section>`;
-  }
-
-  function renderHomeAccountHint() {
-    const meta = getAccountSyncMeta();
-    if (!hasRealAccountSystem()) {
-      return `<section class="account-home-hint premium-surface"><div class="account-home-hint-head">${accountIconSvg()}<div><h3 class="account-home-hint-title">Persönlichen Bereich schützen</h3><p class="account-home-hint-status">Nur auf diesem Gerät</p></div></div><p class="account-home-hint-desc">Richte einen lokalen Anmeldenamen und eine PIN für dieses Gerät ein.</p><div class="account-home-hint-actions"><button type="button" class="primary" data-nav="account">Einrichten</button></div></section>`;
-    }
-    if (meta.state !== "logged_out") {
-      const line =
-        meta.state === "offline"
-          ? `Offline · Änderungen lokal gespeichert${meta.lastSyncLabel ? ` · zuletzt ${meta.lastSyncLabel}` : ""}`
-          : meta.state === "pending"
-            ? `Synchronisierung ausstehend${meta.lastSyncLabel ? ` · zuletzt ${meta.lastSyncLabel}` : ""}`
-            : meta.state === "error"
-              ? `Synchronisierung pausiert${meta.lastSyncLabel ? ` · zuletzt ${meta.lastSyncLabel}` : ""}`
-              : `Synchronisiert${meta.lastSyncLabel ? ` · zuletzt ${meta.lastSyncLabel}` : ""}`;
-      return `<section class="account-home-hint premium-surface is-compact" data-nav="account" role="button" tabindex="0"><div class="account-home-hint-head">${accountIconSvg()}<div><h3 class="account-home-hint-title">${esc(line)}</h3><p class="account-home-hint-status ${statusClass(meta.state)}">Konto & Synchronisierung</p></div></div></section>`;
-    }
-    return `<section class="account-home-hint premium-surface"><div class="account-home-hint-head">${accountIconSvg()}<div><h3 class="account-home-hint-title">Inhalte sichern</h3><p class="account-home-hint-status">Nicht angemeldet</p></div></div><p class="account-home-hint-desc">Melde dich an, um unterstützte Daten auf deinen Geräten zu synchronisieren.</p><div class="account-home-hint-actions"><button type="button" class="primary" data-account-open-login>Anmelden</button><button type="button" data-account-open-register>Registrieren</button></div><p class="account-home-hint-note">Auch ohne Konto nutzbar.</p></section>`;
   }
 
   function accountFormMode() {
@@ -199,14 +183,19 @@
     return "login";
   }
 
+  function renderAccountModeTabs(mode) {
+    const isRegister = mode === "register";
+    return `<div class="account-mode-tabs" role="tablist"><button type="button" class="account-mode-tab${!isRegister ? " is-active" : ""}" data-account-open-login role="tab" aria-selected="${!isRegister}">Anmelden</button><button type="button" class="account-mode-tab${isRegister ? " is-active" : ""}" data-account-open-register role="tab" aria-selected="${isRegister}">Registrieren</button></div>`;
+  }
+
   function renderAccountLoginForm(mode) {
     const isRegister = mode === "register";
     const savedCount = typeof savedIds === "function" ? savedIds().length : 0;
     const title = isRegister ? "Konto erstellen" : "Anmelden";
     const subtitle = isRegister
-      ? "Wähle Anmeldename und PIN – ohne E-Mail-Zwang."
-      : "Mit Anmeldename und PIN anmelden.";
-    return `${typeof setPageHeader === "function" ? setPageHeader("Konto & Synchronisierung", subtitle, "Konto") : ""}<section class="account-panel premium-surface"><h3>${esc(title)}</h3><p>${isRegister ? "Nach der Registrierung werden lokale Favoriten und Qurʾān-Lesestand mit deinem Konto zusammengeführt." : "Melde dich an, um Favoriten und Qurʾān-Lesestand auf unterstützten Geräten zu sichern."}</p><div class="account-form"><input id="accountUsername" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Anmeldename"><input id="accountPin" type="password" inputmode="numeric" autocomplete="${isRegister ? "new-password" : "current-password"}" placeholder="PIN, 4-8 Zahlen"></div><div class="account-actions"><button id="${isRegister ? "accountCreateBtn" : "accountLoginBtn"}" type="button" class="primary">${isRegister ? "Registrieren" : "Anmelden"}</button></div><div class="account-form-links">${isRegister ? '<button type="button" data-account-open-login>Bereits registriert? Anmelden</button>' : '<button type="button" data-account-open-register>Noch kein Konto? Registrieren</button>'}<button type="button" data-account-continue-guest>Ohne Konto fortfahren</button></div><div id="accountStatus" class="account-status">Favoriten auf diesem Gerät: ${savedCount}. Bei Anmeldung werden lokale und Kontodaten standardmäßig zusammengeführt.</div><div class="account-offline-box">Bereits geladene und gespeicherte Inhalte bleiben offline nutzbar. Offline vorgenommene Änderungen an Favoriten und Qurʾān-Lesestand werden lokal gespeichert und nach Wiederherstellung der Verbindung synchronisiert.</div></section>`;
+      ? "Unterstützte Daten werden auf allen Geräten synchronisiert."
+      : "Melde dich an, um deine Daten auf allen Geräten zu nutzen.";
+    return `${typeof setPageHeader === "function" ? setPageHeader("Konto & Synchronisierung", subtitle, "Konto") : ""}<section class="account-panel premium-surface">${renderAccountModeTabs(mode)}<h3>${esc(title)}</h3><p class="account-panel-lead">${isRegister ? "Wähle Anmeldename und PIN – ohne E-Mail-Zwang. Lokale Favoriten, Qurʾān-Lesestand und Quiz-Fortschritt werden mit deinem Konto zusammengeführt." : "Mit Anmeldename und PIN anmelden. Deine Daten stehen danach auf allen Geräten zur Verfügung."}</p><div class="account-form"><input id="accountUsername" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Anmeldename"><input id="accountPin" type="password" inputmode="numeric" autocomplete="${isRegister ? "new-password" : "current-password"}" placeholder="PIN, 4-8 Zahlen"></div><div class="account-actions"><button id="${isRegister ? "accountCreateBtn" : "accountLoginBtn"}" type="button" class="primary">${isRegister ? "Registrieren" : "Anmelden"}</button><button type="button" data-account-continue-guest>Ohne Konto fortfahren</button></div><div id="accountStatus" class="account-status">Favoriten auf diesem Gerät: ${savedCount}. Bei Anmeldung werden lokale und Kontodaten standardmäßig zusammengeführt.</div></section>`;
   }
 
   function renderAccountDashboard() {
@@ -214,8 +203,16 @@
     const savedCount = typeof savedIds === "function" ? savedIds().length : 0;
     const meta = getAccountSyncMeta();
     const status = statusLabel(meta);
-    const syncLine = meta.lastSyncLabel ? `Zuletzt synchronisiert: ${meta.lastSyncLabel}` : "Noch keine erfolgreiche Synchronisierung auf diesem Gerät.";
-    return `${typeof setPageHeader === "function" ? setPageHeader("Konto & Synchronisierung", "Unterstützte Daten zwischen Geräten sichern", "Konto") : ""}<section class="account-panel premium-surface"><h3>${esc(s.username)}</h3><p class="account-hub-status ${statusClass(meta.state)}">${esc(status)}</p><p>${esc(syncLine)}</p><div class="account-summary"><div class="account-summary-card"><b>${esc(s.username)}</b><span>Anmeldename</span></div><div class="account-summary-card"><b>${savedCount}</b><span>Favoriten</span></div><div class="account-summary-card"><b>${navigator.onLine ? "Online" : "Offline"}</b><span>Verbindung</span></div></div><div class="account-actions"><button id="accountSyncBtn" type="button" class="primary">Jetzt synchronisieren</button><button id="accountLogoutBtn" type="button" class="danger">Abmelden</button></div><div id="accountStatus" class="account-status ${meta.state === "synced" ? "ok" : meta.state === "error" ? "warn" : ""}">${meta.state === "offline" ? "Offline – Änderungen bleiben lokal gespeichert." : meta.state === "pending" ? "Synchronisierung ausstehend – Änderungen sind lokal gesichert." : meta.state === "error" ? "Synchronisierung derzeit nicht möglich. Lokale Daten bleiben erhalten." : "Bereit. Neue Favoriten und Qurʾān-Fortschritt werden automatisch synchronisiert, sobald du online bist."}</div><h3 style="margin-top:8px;font-size:18px">Synchronisierte Daten</h3>${syncedDataListHtml()}<h3 style="margin-top:8px;font-size:18px">Nur lokal auf diesem Gerät</h3>${localOnlyDataListHtml()}<div class="account-offline-box" style="margin-top:10px">Bereits geladene und gespeicherte Inhalte bleiben offline nutzbar. Offline vorgenommene Änderungen an Favoriten und Qurʾān-Lesestand werden lokal gespeichert und nach Wiederherstellung der Verbindung synchronisiert.</div></section>`;
+    const syncLine = meta.lastSyncLabel ? `Zuletzt synchronisiert: ${meta.lastSyncLabel}` : "Noch keine Synchronisierung auf diesem Gerät.";
+    const statusNote =
+      meta.state === "offline"
+        ? "Offline – Änderungen bleiben lokal gespeichert und werden bei Verbindung synchronisiert."
+        : meta.state === "pending"
+          ? "Synchronisierung ausstehend – Änderungen sind lokal gesichert."
+          : meta.state === "error"
+            ? "Bitte Verbindung prüfen und erneut synchronisieren."
+            : "Favoriten, Qurʾān-Lesestand und Quiz-Fortschritt werden automatisch synchronisiert.";
+    return `${typeof setPageHeader === "function" ? setPageHeader("Konto & Synchronisierung", "Unterstützte Daten zwischen Geräten sichern", "Konto") : ""}<section class="account-panel premium-surface account-panel-dashboard"><div class="account-dashboard-head"><div><h3>${esc(s.username)}</h3><p class="account-hub-status ${statusClass(meta.state)}">${esc(status)}</p></div><button id="accountLogoutBtn" type="button" class="account-logout-chip">Abmelden</button></div><p class="account-dashboard-syncline">${esc(syncLine)}</p><div class="account-summary account-summary-compact"><div class="account-summary-card"><b>${savedCount}</b><span>Favoriten</span></div><div class="account-summary-card"><b>${navigator.onLine ? "Online" : "Offline"}</b><span>Verbindung</span></div><div class="account-summary-card"><b>☁</b><span>Geräte-Sync</span></div></div><div class="account-actions account-actions-compact"><button id="accountSyncBtn" type="button" class="primary">Jetzt synchronisieren</button></div><div id="accountStatus" class="account-status ${meta.state === "synced" ? "ok" : meta.state === "error" ? "warn" : ""}">${esc(statusNote)}</div><details class="account-details-block"><summary>Synchronisierte Daten</summary>${syncedDataListHtml()}</details><details class="account-details-block"><summary>Nur lokal auf diesem Gerät</summary>${localOnlyDataListHtml()}</details></section>`;
   }
 
   function renderAccountVisibility() {
@@ -231,11 +228,11 @@
     const s = typeof accountSession === "function" ? accountSession() : null;
     const title = hasRealAccountSystem() ? "Konto & Synchronisierung" : "Lokaler geschützter Bereich";
     const text = s
-      ? `Angemeldet als ${s.username}. Unterstützte Daten werden synchronisiert, sobald du online bist.`
+      ? `Angemeldet als ${s.username}. Unterstützte Daten werden auf allen Geräten synchronisiert.`
       : hasRealAccountSystem()
-        ? "Melde dich an oder registriere dich, um Favoriten und Qurʾān-Lesestand auf deinen Geräten zu sichern."
+        ? "Melde dich an oder registriere dich, um Favoriten, Qurʾān-Lesestand und Quiz-Fortschritt auf allen Geräten zu sichern."
         : "Richte einen lokalen Anmeldenamen und eine PIN für dieses Gerät ein.";
-  const btn = s ? "Konto öffnen" : hasRealAccountSystem() ? "Anmelden" : "Einrichten";
+    const btn = s ? "Konto öffnen" : hasRealAccountSystem() ? "Anmelden" : "Einrichten";
     return `<section class="account-panel premium-surface"><h3>${esc(title)}</h3><p>${esc(text)}</p><div class="account-actions"><button type="button" class="primary" data-nav="account">${esc(btn)}</button></div></section>`;
   }
 
@@ -307,7 +304,7 @@
     setAccountStatus(
       mode === "register"
         ? "Konto erstellt. Unterstützte Daten wurden synchronisiert."
-        : "Angemeldet. Unterstützte Daten sind auf diesem Gerät verfügbar.",
+        : "Angemeldet. Unterstützte Daten sind auf allen Geräten verfügbar.",
       "ok"
     );
   }
@@ -315,16 +312,19 @@
   async function syncAllAccountData({ silent = false } = {}) {
     const fav = await syncAccountSaved({ silent: true });
     const quran = await syncAccountQuranProgress({ silent: true });
-  const ok = fav !== false && quran !== false;
+    const ok = fav !== false && quran !== false;
     if (ok) recordAccountSyncSuccess();
     else if (!navigator.onLine) setAccountSyncState("pending");
-    else setAccountSyncState("error");
+    else if (fav !== false || quran !== false) {
+      recordAccountSyncSuccess();
+      setAccountSyncState("synced");
+    } else setAccountSyncState("error");
     if (!silent) {
       setAccountStatus(
         ok
           ? "Synchronisierung abgeschlossen."
           : navigator.onLine
-            ? "Synchronisierung derzeit nicht möglich. Lokale Daten bleiben erhalten."
+            ? "Synchronisierung teilweise nicht möglich. Bitte erneut versuchen."
             : "Offline gespeichert. Wird bei Verbindung synchronisiert.",
         ok ? "ok" : "warn"
       );
@@ -334,6 +334,15 @@
 
   function openAccountMode(mode) {
     if (typeof navigate === "function") navigate("account", mode === "register" ? "register" : "login");
+  }
+
+  function injectHomeAccountPill(html) {
+    const pill = renderHomeAccountPill();
+    if (!pill || !html.includes("view-head-home-row")) return html;
+    return html.replace(
+      /(<div class="view-head-home-row">[\s\S]*?<h2>[\s\S]*?<\/h2>)(\s*<button id="homeHijriDayBtn"[\s\S]*?<\/button>)/,
+      `$1<div class="view-head-home-side">${pill}$2</div>`
+    );
   }
 
   function bindAccountVisibilityEvents() {
@@ -362,32 +371,6 @@
         render();
       };
     });
-    const intro = document.getElementById("accountIntroBanner");
-    if (intro) {
-      intro.querySelector("[data-account-intro-later]")?.addEventListener("click", () => {
-        try {
-          localStorage.setItem(ACCOUNT_INTRO_DISMISSED_KEY, String(Date.now()));
-        } catch (e) {}
-        intro.remove();
-      });
-      intro.querySelector("[data-account-intro-create]")?.addEventListener("click", () => {
-        try {
-          localStorage.setItem(ACCOUNT_INTRO_DISMISSED_KEY, String(Date.now()));
-        } catch (e) {}
-        openAccountMode("register");
-      });
-    }
-  }
-
-  function maybeRenderAccountIntro() {
-    if (!hasRealAccountSystem()) return "";
-    if (typeof accountSession === "function" && accountSession()) return "";
-    try {
-      if (localStorage.getItem(ACCOUNT_INTRO_DISMISSED_KEY)) return "";
-    } catch (e) {}
-    const blocked = ["quran-surah", "dua", "quiz", "ilm"];
-    if (blocked.includes(String(currentRoute?.view || ""))) return "";
-    return `<section id="accountIntroBanner" class="account-home-hint premium-surface"><div class="account-home-hint-head">${accountIconSvg()}<div><h3 class="account-home-hint-title">Auf mehreren Geräten weiterlesen</h3></div></div><p class="account-home-hint-desc">Mit einem Konto kannst du unterstützte Daten sichern und synchronisieren.</p><div class="account-home-hint-actions"><button type="button" class="primary" data-account-intro-create>Konto erstellen</button><button type="button" data-account-intro-later>Später</button></div><p class="account-home-hint-note">Die App funktioniert auch ohne Konto.</p></section>`;
   }
 
   function patchCore() {
@@ -416,22 +399,14 @@
       };
     }
 
-    if (typeof renderHome === "function") {
-      const originalRenderHome = renderHome;
-      renderHome = function () {
-        const html = originalRenderHome();
-        const hint = `${renderHomeAccountHint()}${maybeRenderAccountIntro()}`;
-        const idx = html.indexOf("view-head-home");
-        if (idx > -1) {
-          const match = html.slice(idx).match(/<div class="view-head[^"]*">[\s\S]*?<\/div>/);
-          if (match) {
-            const end = idx + match.index + match[0].length;
-            return `${html.slice(0, end)}${hint}${html.slice(end)}`;
-          }
+    if (typeof setHeader === "function") {
+      const originalSetHeader = setHeader;
+      setHeader = function (title, desc, eyebrow, headClass) {
+        let html = originalSetHeader(title, desc, eyebrow, headClass);
+        if (title === "Startseite" && hasRealAccountSystem()) {
+          html = injectHomeAccountPill(html);
         }
-        const marker = '<div id="focusFeedMount"';
-        if (html.includes(marker)) return html.replace(marker, `${hint}${marker}`);
-        return `${hint}${html}`;
+        return html;
       };
     }
 
@@ -439,7 +414,6 @@
     renderAccountPrompt = renderAccountPromptVisibility;
 
     if (typeof loginAccount === "function") {
-      const originalLogin = loginAccount;
       loginAccount = async function () {
         try {
           setAccountStatus("Anmeldung wird geprüft …", "warn");
@@ -458,7 +432,6 @@
     }
 
     if (typeof createAccount === "function") {
-      const originalCreate = createAccount;
       createAccount = async function () {
         try {
           setAccountStatus("Konto wird angelegt …", "warn");
@@ -541,15 +514,11 @@
             else $("accountLoginBtn")?.click();
           };
         }
-        document.querySelectorAll(".account-home-hint.is-compact[data-nav]").forEach((el) => {
-          el.onclick = () => navigate("account");
-          el.onkeydown = (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              navigate("account");
-            }
-          };
-        });
+        if (currentRoute?.view === "account" && typeof accountSession === "function" && accountSession()) {
+          syncAllAccountData({ silent: true }).then((ok) => {
+            if (ok && typeof render === "function") render();
+          });
+        }
       };
     }
 
@@ -572,13 +541,17 @@
         if (ok && typeof render === "function") render();
       });
     });
+
+    if (typeof accountSession === "function" && accountSession() && navigator.onLine) {
+      syncAllAccountData({ silent: true });
+    }
   }
 
   patchCore();
   window.DAR_ACCOUNT_VISIBILITY = {
     getAccountSyncMeta,
     renderMoreAccountCard,
-    renderHomeAccountHint,
+    renderHomeAccountPill,
     syncAllAccountData,
   };
 })();
