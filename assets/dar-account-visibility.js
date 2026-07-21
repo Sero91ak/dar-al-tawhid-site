@@ -170,6 +170,7 @@
       }
     }
     bindAccountVisibilityEvents();
+    if (typeof updateHijriHeaderDate === "function") updateHijriHeaderDate();
   }
 
   function renderMoreAccountCard() {
