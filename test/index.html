@@ -10454,6 +10454,20 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
     font-size:clamp(18px,5.2vw,24px)!important;
   }
 }
+
+/* TEST ONLY: obere Aktionsleiste ausblenden (Zurück · Startseite · Speichern · Teilen) */
+.app-bar{
+  display:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+  height:0!important;
+  overflow:hidden!important;
+  border:none!important;
+}
+body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
+  margin-top:0!important;
+}
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
