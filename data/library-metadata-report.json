@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-07-22T16:52:47.832Z",
+  "publicOutputIsVerifiedOnly": true,
+  "rules": [
+    "A quoted scholar is never inferred as the author of a cited work.",
+    "Only works present in the authority registry with a verified author are public.",
+    "Unknown, ambiguous or incomplete works are quarantined and excluded from every public list.",
+    "Books are merged by canonical work id.",
+    "Scholars are merged by normalized person name.",
+    "Duplicate ids and identical content are excluded before grouping.",
+    "The public interface must read data/books-library.json and data/scholars-library.json only.",
+    "The deployment build fails if unverified, duplicated or incomplete metadata reaches public output."
+  ],
+  "authorityErrors": [],
+  "duplicateIds": [],
+  "duplicateContent": [],
+  "quarantinedWorks": [
+    {
+      "postId": "dar-al-tawhid-total-014",
+      "title": "📖 Folge und erfinde nicht",
+      "rawBook": "Sunan ad-Dārimī",
+      "scholar": "Ibn Masʿūd",
+      "source": "📝 ad-Dārimī, as-Sunan, Muqaddimah, Athar von ʿAbdullāh ibn Masʿūd; überliefert u.a. bei ad-Dārimī Nr. 211.",
+      "reason": "unverified",
+      "publicVisibility": "hidden"
+    },
+    {
+      "postId": "dar-al-tawhid-total-015",
+      "title": "📖 Die Sunnah als Rettung",
+      "rawBook": "Tārīkh Dimashq",
+      "scholar": "Mālik ibn Anas",
+      "source": "📝 Ibn ʿAsākir, Tārīkh Dimashq, Bericht über Imām Mālik; bekannt als Aussage über die Sunnah als Arche Nūḥ.",
+      "reason": "unverified",
+      "publicVisibility": "hidden"
+    }
+  ],
+  "suspiciousRoleCollisions": []
+}

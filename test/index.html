@@ -12088,7 +12088,7 @@ function isDetailRoute(route){return ["post","dua","quran-surah","news-detail"].
 function migrateLegacyTopicsRoute(){const hash=decodeURIComponent((location.hash||"").replace(/^#/,""));if(hash==="feed/topics"||hash.startsWith("feed/topics/")){try{history.replaceState(null,"",routeToHash("topics",""))}catch(e){location.replace(routeToHash("topics",""))}return true}return false}
 function migrateTopicsScrollKey(){try{const map=JSON.parse(sessionStorage.getItem(NAV_SCROLL_KEY)||"{}");if(map["feed/topics"]!=null&&map.topics==null){map.topics=map["feed/topics"];sessionStorage.setItem(NAV_SCROLL_KEY,JSON.stringify(map))}}catch(e){}}
 function setPageHeader(title,subtitle="",eyebrow=""){return setHeader(title,subtitle,eyebrow||title)}
-const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
+const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
 function normalizeRouteSlug(slug){return String(slug||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 function looksLikePostId(val){if(!val)return false;const id=String(val).split("/")[0];if(posts.some(p=>String(p.id)===id))return true;if(/^\d+$/.test(id))return true;if(/^[a-z0-9][a-z0-9_-]*-\d{2,}$/i.test(id))return true;return false}
 function isLikelyPostId(val){return looksLikePostId(val)}
@@ -12198,6 +12198,7 @@ function parentRoute(route){
   if(route.view==="about")return{view:"more"};
   if(route.view==="hadith")return{view:"more"};
   if(route.view==="scholars")return{view:"more"};
+  if(route.view==="quellen-book"||route.view==="quellen-scholar")return{view:"books"};
   if(route.view==="books")return{view:"more"};
   if(route.view==="image-editor")return{view:"more"};
   if(route.view==="image-editor-test")return{view:"more"};
@@ -12213,7 +12214,7 @@ function parentRoute(route){
   if(route.view!=="home")return{view:"home"};
   return{view:"home"};
 }
-function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(view==="ilm")return"ilm";if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","calendar","saved","account","about","hadith","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news"].includes(view))return"more";return""}
+function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(view==="ilm")return"ilm";if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news"].includes(view))return"more";return""}
 const BOTTOM_NAV_TABS=["home","ilm","feed","quran","more"];
 let bottomNavDrag=null;
 function bottomNavTabIndex(tab){const i=BOTTOM_NAV_TABS.indexOf(tab);return i>=0?i:0}
@@ -12275,7 +12276,7 @@ function bookLibraryItems(){return[...countBy("book").entries()].filter(([name])
 function bookLibraryGroups(items){const groups=new Map();items.forEach(item=>{const key=item.author||"Weitere Werke";if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item)});return[...groups.entries()].sort((a,b)=>{if(a[0]==="Weitere Werke")return 1;if(b[0]==="Weitere Werke")return-1;return a[0].localeCompare(b[0],"de")})}
 function bookCard(bookName,count,author){const search=[bookName,author].filter(Boolean).join(" ").toLowerCase();return`<article class="book-library-card" data-nav="book" data-value="${esc(bookName)}" data-book-search="${esc(search)}"><div class="book-library-icon">${iconMarkup("book",bookName)}</div><div class="book-library-body"><h3 class="book-library-title">${esc(bookName)}</h3><p class="book-library-count">${count} ${count===1?"Beitrag":"Beiträge"}</p></div><span class="book-library-chevron" aria-hidden="true">›</span></article>`}
 function filterBooksLibrary(){const input=$("booksSearchInput");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".book-library-card").forEach(card=>{card.classList.toggle("is-hidden",!!q&&!String(card.getAttribute("data-book-search")||"").includes(q))});document.querySelectorAll(".books-library-group").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".book-library-card:not(.is-hidden)"))});const total=$("booksLibraryTotal");if(total){const visible=document.querySelectorAll(".book-library-card:not(.is-hidden)").length;const all=document.querySelectorAll(".book-library-card").length;total.textContent=q?`${visible} von ${all} Bücher`:`${all} Bücher`}}
-function renderBooks(){const items=bookLibraryItems();const groups=bookLibraryGroups(items);const listHtml=groups.map(([author,books])=>`<section class="books-library-group"><header class="books-library-group-head"><span class="books-library-group-label">Autor</span><h3>${esc(author)}</h3><span class="books-library-group-count">${books.length} ${books.length===1?"Werk":"Werke"}</span></header><div class="books-library-list">${books.map(({name,count})=>bookCard(name,count,author)).join("")}</div></section>`).join("");return`${setPageHeader("Bücher",`${items.length} Werke nach Autor und Titel geordnet`,"Bücher")}<section class="books-library-shell"><div class="books-library-toolbar"><input id="booksSearchInput" class="books-library-search" type="search" placeholder="Buch oder Autor suchen…" autocomplete="off" enterkeyhint="search"><span id="booksLibraryTotal" class="books-library-total">${items.length} Bücher</span></div>${items.length?listHtml:`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
+function renderBooks(){if(typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH&&window.DARCanonicalSourceLibrary)return DARCanonicalSourceLibrary.renderRoute(currentRoute);const items=bookLibraryItems();const groups=bookLibraryGroups(items);const listHtml=groups.map(([author,books])=>`<section class="books-library-group"><header class="books-library-group-head"><span class="books-library-group-label">Autor</span><h3>${esc(author)}</h3><span class="books-library-group-count">${books.length} ${books.length===1?"Werk":"Werke"}</span></header><div class="books-library-list">${books.map(({name,count})=>bookCard(name,count,author)).join("")}</div></section>`).join("");return`${setPageHeader("Bücher",`${items.length} Werke nach Autor und Titel geordnet`,"Bücher")}<section class="books-library-shell"><div class="books-library-toolbar"><input id="booksSearchInput" class="books-library-search" type="search" placeholder="Buch oder Autor suchen…" autocomplete="off" enterkeyhint="search"><span id="booksLibraryTotal" class="books-library-total">${items.length} Bücher</span></div>${items.length?listHtml:`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
 const DUA_CAT_ORDER=["Morgen & Abend","Aufwachen","Schlaf","Schutz","Vergebung","Gebet","Nach dem Gebet","Moschee","Essen","Reise","Krankheit","Eltern","Familie","Wissen","Rizq","Tawakkul","Rechtleitung","Qurʾān","Allgemein"];
 function duaCatRank(name){const i=DUA_CAT_ORDER.indexOf(name);return i>=0?i:500}
 const DUA_THEMES=[
@@ -15405,7 +15406,7 @@ function featureCatalog(){
     {id:"quran",title:"Qurʾān",icon:"📖",desc:"114 Suren mit Arabisch und Lautschrift.",button:"Öffnen",nav:"quran",group:"Lernen & Wissen",badge:"Empfohlen"},
     {id:"duas",title:"Duʿāʾ",icon:"🤲",desc:(DUAS?.length||0)+" bekannte Duʿāʾ nach Themen.",button:"Öffnen",nav:"duas",group:"Lernen & Wissen"},
     {id:"scholars",title:"Gelehrte",icon:"👤",desc:scholarCount+" Namen und Zuordnungen.",button:"Ansehen",nav:"scholars",group:"Lernen & Wissen"},
-    {id:"books",title:"Bücher",icon:"📘",desc:bookCount+" Werke und Quellenordner.",button:"Ansehen",nav:"books",group:"Lernen & Wissen"},
+    {id:"books",title:testOnly?"Quellenbibliothek":"Bücher",icon:"📘",desc:testOnly?(typeof window.DARCanonicalSourceLibrary?.getBookCount==="function"?`${window.DARCanonicalSourceLibrary.getBookCount()} geprüfte Werke und zitierte Gelehrte.`:"Geprüfte historische Werke und zitierte Gelehrte."):bookCount+" Werke und Quellenordner.",button:"Ansehen",nav:"books",group:"Lernen & Wissen",badge:testOnly?"Geprüft":""},
     {id:"prayer",title:"Gebetszeiten",icon:"🕌",desc:"Zeiten, Standort, Qibla und Erinnerungen.",button:"Öffnen",nav:"prayer",group:"Alltag & Gebet",badge:"Praktisch"},
     {id:"jummah",title:"Jumuʿah",icon:"🕌",desc:"Freitagsgebet und Erinnerung.",button:"Öffnen",nav:"jummah",group:"Alltag & Gebet"},
     {id:"qibla",title:"Qibla",icon:"🕋",desc:"Qibla-Richtung im Gebetsbereich anzeigen.",button:"Starten",nav:"prayer",group:"Alltag & Gebet"},
@@ -15913,6 +15914,27 @@ function ensureLibraryModule(){
   });
   return window.__libraryModuleLoading;
 }
+function ensureCanonicalSourceLibrary(){
+  if(typeof IS_TEST_PATH==="undefined"||!IS_TEST_PATH)return Promise.resolve(null);
+  if(window.DARCanonicalSourceLibrary&&window.DARCanonicalSourceLibrary.isReady())return Promise.resolve(window.DARCanonicalSourceLibrary);
+  if(window.__canonicalSourceLoading)return window.__canonicalSourceLoading;
+  window.__canonicalSourceLoading=new Promise((resolve,reject)=>{
+    if(window.DARCanonicalSourceLibrary){
+      window.DARCanonicalSourceLibrary.ensureModule().then(()=>resolve(window.DARCanonicalSourceLibrary)).catch(reject);
+      return;
+    }
+    const s=document.createElement("script");
+    s.src="/test/assets/library/canonical-source-library.js?v=1";
+    s.defer=true;
+    s.onload=()=>{
+      if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}
+      window.DARCanonicalSourceLibrary.ensureModule().then(()=>resolve(window.DARCanonicalSourceLibrary)).catch(reject);
+    };
+    s.onerror=reject;
+    document.head.appendChild(s);
+  }).finally(()=>{window.__canonicalSourceLoading=null});
+  return window.__canonicalSourceLoading;
+}
 function renderLibraryRoute(view,value){
   if(!window.DARLibraryApp)return `<section class="empty">Bibliothek lädt…</section>`;
   if(view==="bibliothek")return `<div id="libraryMount">${DARLibraryApp.renderBibliothek()}</div>`;
@@ -15960,6 +15982,15 @@ function render(){
         }).catch(()=>{});
       }
     }
+    if(["books","quellen-book","quellen-scholar"].includes(currentRoute.view)&&IS_TEST_PATH){
+      const needsCanonicalBoot=!window.DARCanonicalSourceLibrary||(!window.DARCanonicalSourceLibrary.isReady()&&!window.DARCanonicalSourceLibrary.hasError());
+      if(needsCanonicalBoot){
+        ensureCanonicalSourceLibrary().then(()=>{
+          const r=readRoute();
+          if(["books","quellen-book","quellen-scholar"].includes(r.view))render();
+        }).catch(()=>{});
+      }
+    }
     let html="";
     if(currentRoute.view==="home")html=renderHome();
     else if(currentRoute.view==="feed")html=renderFeed();
@@ -15968,6 +15999,8 @@ function render(){
     else if(currentRoute.view==="topics")html=renderTopics();
     else if(currentRoute.view==="scholars")html=renderScholars();
     else if(currentRoute.view==="books")html=renderBooks();
+    else if(currentRoute.view==="quellen-book"&&IS_TEST_PATH)html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderBookDetail(currentRoute.value):renderBooks();
+    else if(currentRoute.view==="quellen-scholar"&&IS_TEST_PATH)html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderScholarDetail(currentRoute.value):renderBooks();
     else if(currentRoute.view==="topic")html=renderFiltered("category",currentRoute.value);
     else if(currentRoute.view==="scholar")html=renderFiltered("scholar",currentRoute.value);
     else if(currentRoute.view==="book")html=renderFiltered("book",currentRoute.value);
@@ -16140,6 +16173,7 @@ function bindEvents(){
   document.querySelectorAll("[data-feature-hint-dismiss]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const key="seenFeatureHint_"+(btn.getAttribute("data-feature-hint-dismiss")||"");try{localStorage.setItem(key,"true")}catch(e){}btn.closest(".feature-hint")?.remove()}});
   const moreFeatureSearch=$("moreFeatureSearch");if(moreFeatureSearch)moreFeatureSearch.oninput=filterMoreFeatures;
   const booksSearchInput=$("booksSearchInput");if(booksSearchInput)booksSearchInput.oninput=filterBooksLibrary;
+  if(IS_TEST_PATH&&window.DARCanonicalSourceLibrary)DARCanonicalSourceLibrary.bind();
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
   if(advancedFilterBtn&&homeFilterPanel){advancedFilterBtn.onclick=()=>{const open=homeFilterPanel.classList.contains("advanced-visible");homeFilterPanel.classList.toggle("advanced-visible",!open);homeFilterPanel.classList.toggle("advanced-hidden",open);advancedFilterBtn.classList.toggle("active",!open);advancedFilterBtn.textContent=open?"Filter anzeigen":"Filter ausblenden"}}
   const homeSearchInput=$("homeSearchInput");
@@ -16695,5 +16729,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
   </script>
   <script src="/assets/dar-account-visibility.js?v=14"></script>
+<script src="/test/assets/library/canonical-source-library.js?v=1"></script>
 </body>
 </html>

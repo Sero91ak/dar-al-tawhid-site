@@ -6,13 +6,21 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const TEST_INDEX = path.join(ROOT, 'test', 'index.html');
 const SERVICE_WORKER = path.join(ROOT, 'service-worker.js');
-const ADDON_SRC = '/test/assets/library/canonical-library-addon.js';
+const SOURCE_SRC = '/test/assets/library/canonical-source-library.js';
+const LEGACY_ADDON_SRC = '/test/assets/library/canonical-library-addon.js';
 
 function patchTestIndex() {
   let html = fs.readFileSync(TEST_INDEX, 'utf8');
-  if (html.includes(ADDON_SRC)) return;
+  if (html.includes(SOURCE_SRC)) {
+    if (html.includes(LEGACY_ADDON_SRC)) {
+      html = html.replace(`<script src="${LEGACY_ADDON_SRC}"></script>\n`, '');
+      fs.writeFileSync(TEST_INDEX, html);
+    }
+    return;
+  }
 
   const patterns = [
+    new RegExp(`<script[^>]+src=["']${LEGACY_ADDON_SRC.replace(/\//g, '\\/')}[^"']*["'][^>]*><\\/script>`, 'i'),
     /(<script[^>]+src=["'][^"']*assets\/library\/library-app\.js[^"']*["'][^>]*><\/script>)/i,
     /(<script[^>]+src=["']\/test\/assets\/library\/library-app\.js[^"']*["'][^>]*><\/script>)/i
   ];
@@ -20,7 +28,12 @@ function patchTestIndex() {
   let patched = false;
   for (const pattern of patterns) {
     if (!pattern.test(html)) continue;
-    html = html.replace(pattern, `$1\n<script src="${ADDON_SRC}"></script>`);
+    html = html.replace(pattern, (match) => {
+      if (match.includes('canonical-library-addon') || match.includes('canonical-source-library')) {
+        return `<script src="${SOURCE_SRC}?v=1"></script>`;
+      }
+      return `${match}\n<script src="${SOURCE_SRC}?v=1"></script>`;
+    });
     patched = true;
     break;
   }
@@ -30,7 +43,7 @@ function patchTestIndex() {
     if (!closingBody.test(html)) {
       throw new Error('Test index has no </body> and library-app.js script could not be located.');
     }
-    html = html.replace(closingBody, `<script src="${ADDON_SRC}"></script>\n</body>`);
+    html = html.replace(closingBody, `<script src="${SOURCE_SRC}?v=1"></script>\n</body>`);
   }
 
   fs.writeFileSync(TEST_INDEX, html);
@@ -39,7 +52,7 @@ function patchTestIndex() {
 function bumpTestCache() {
   if (!fs.existsSync(SERVICE_WORKER)) return;
   let sw = fs.readFileSync(SERVICE_WORKER, 'utf8');
-  const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v301-test-canonical';";
+  const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v302-test-canonical';";
   const pattern = /const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-[^'"]+['"];?/;
   if (!pattern.test(sw)) throw new Error('Service worker cache version declaration not found.');
   sw = sw.replace(pattern, next);
@@ -47,13 +60,17 @@ function bumpTestCache() {
   const required = [
     "  '/data/books-library.json',",
     "  '/data/scholars-library.json',",
-    "  '/test/assets/library/canonical-library-addon.js',"
+    `  '${SOURCE_SRC}',`
   ];
   const anchor = "  '/data/offline-content-manifest.json',";
   if (!sw.includes(anchor)) throw new Error('Service worker APP_SHELL anchor not found.');
-  const missing = required.filter((entry) => !sw.includes(entry));
-  if (missing.length) sw = sw.replace(anchor, `${anchor}\n${missing.join('\n')}`);
-  fs.writeFileSync(SERVICE_WORKER, sw);
+  let block = sw;
+  if (block.includes(LEGACY_ADDON_SRC)) {
+    block = block.replace(`  '${LEGACY_ADDON_SRC}',\n`, '');
+  }
+  const missing = required.filter((entry) => !block.includes(entry.split('?')[0]));
+  if (missing.length) block = block.replace(anchor, `${anchor}\n${missing.join('\n')}`);
+  fs.writeFileSync(SERVICE_WORKER, block);
 }
 
 patchTestIndex();

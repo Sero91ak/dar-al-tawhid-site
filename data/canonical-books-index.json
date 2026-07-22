@@ -1,0 +1,315 @@
+{
+  "version": 3,
+  "generatedAt": "2026-07-22T16:52:47.832Z",
+  "policy": {
+    "verifiedOnly": true,
+    "hideUnverifiedWorks": true,
+    "hideUnverifiedAuthors": true,
+    "neverInferAuthorFromScholar": true,
+    "deduplicateBooksByCanonicalId": true,
+    "deduplicateScholarsByNormalizedName": true,
+    "failBuildOnPublicMetadataError": true
+  },
+  "stats": {
+    "sourcePosts": 50,
+    "publicCanonicalBooks": 6,
+    "publicQuotedScholars": 7,
+    "duplicateIdsRemoved": 0,
+    "duplicateContentRemoved": 0,
+    "quarantinedPosts": 2
+  },
+  "categories": [
+    "Ḥadīṯ",
+    "ʿAqīdah und Sunnah"
+  ],
+  "books": [
+    {
+      "id": "sunan-abi-dawud",
+      "title": "Sunan Abī Dāwūd",
+      "author": "Abū Dāwūd Sulaymān ibn al-Ashʿath as-Sijistānī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sunan Abu Dawud",
+        "Sunan Abū Dāwūd"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-020"
+      ],
+      "quotedScholars": [
+        "Prophet ﷺ"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "sahih-al-bukhari",
+      "title": "Ṣaḥīḥ al-Bukhārī",
+      "author": "Muḥammad ibn Ismāʿīl al-Bukhārī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sahih al-Bukhari",
+        "Ṣaḥīḥ Bukhārī",
+        "al-Jāmiʿ aṣ-Ṣaḥīḥ"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-002",
+        "dar-al-tawhid-total-004",
+        "dar-al-tawhid-total-005",
+        "dar-al-tawhid-total-008",
+        "dar-al-tawhid-total-011",
+        "dar-al-tawhid-total-017",
+        "dar-al-tawhid-total-018",
+        "dar-al-tawhid-total-019",
+        "dar-al-tawhid-total-022",
+        "dar-al-tawhid-total-023",
+        "dar-al-tawhid-total-025",
+        "dar-al-tawhid-total-027",
+        "dar-al-tawhid-total-028",
+        "dar-al-tawhid-total-030",
+        "dar-al-tawhid-total-031",
+        "dar-al-tawhid-total-034",
+        "dar-al-tawhid-total-035",
+        "dar-al-tawhid-total-037"
+      ],
+      "quotedScholars": [
+        "Prophet ﷺ"
+      ],
+      "postCount": 18
+    },
+    {
+      "id": "jami-at-tirmidhi",
+      "title": "Jāmiʿ at-Tirmidhī",
+      "author": "Muḥammad ibn ʿĪsā at-Tirmidhī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sunan at-Tirmidhi",
+        "Jami at-Tirmidhi"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-024",
+        "dar-al-tawhid-total-032",
+        "dar-al-tawhid-total-033",
+        "dar-al-tawhid-total-038"
+      ],
+      "quotedScholars": [
+        "Prophet ﷺ"
+      ],
+      "postCount": 4
+    },
+    {
+      "id": "sahih-muslim",
+      "title": "Ṣaḥīḥ Muslim",
+      "author": "Muslim ibn al-Ḥajjāj an-Naysābūrī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sahih Muslim",
+        "al-Musnad aṣ-Ṣaḥīḥ"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-001",
+        "dar-al-tawhid-total-003",
+        "dar-al-tawhid-total-006",
+        "dar-al-tawhid-total-007",
+        "dar-al-tawhid-total-009",
+        "dar-al-tawhid-total-010",
+        "dar-al-tawhid-total-012",
+        "dar-al-tawhid-total-013",
+        "dar-al-tawhid-total-021",
+        "dar-al-tawhid-total-026",
+        "dar-al-tawhid-total-029",
+        "dar-al-tawhid-total-036",
+        "dar-al-tawhid-total-039",
+        "dar-al-tawhid-total-040"
+      ],
+      "quotedScholars": [
+        "Ibn Sīrīn",
+        "Prophet ﷺ"
+      ],
+      "postCount": 14
+    },
+    {
+      "id": "ash-shariah-al-ajurri",
+      "title": "ash-Sharīʿah",
+      "author": "Abū Bakr al-Ājurrī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "al-Shari'ah",
+        "aš-Šarīʿah",
+        "Kitab ash-Shariah"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-016"
+      ],
+      "quotedScholars": [
+        "al-Awzāʿī"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "sharh-usul-itiqad-lalakai",
+      "title": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Jamāʿah",
+      "author": "Hibat Allāh al-Lālakāʾī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "Sharh Usul I'tiqad",
+        "Uṣūl Iʿtiqād al-Lālakāʾī"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-041",
+        "dar-al-tawhid-total-042",
+        "dar-al-tawhid-total-043",
+        "dar-al-tawhid-total-044",
+        "dar-al-tawhid-total-045",
+        "dar-al-tawhid-total-046",
+        "dar-al-tawhid-total-047",
+        "dar-al-tawhid-total-048",
+        "dar-al-tawhid-total-049",
+        "dar-al-tawhid-total-050"
+      ],
+      "quotedScholars": [
+        "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī",
+        "Aḥmad ibn Ḥanbal",
+        "al-Awzāʿī",
+        "Sufyān ath-Thawrī",
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 10
+    }
+  ],
+  "scholars": [
+    {
+      "id": "abu-hatim-ar-razi-und-abu-zurah-ar-razi",
+      "name": "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-044",
+        "dar-al-tawhid-total-045",
+        "dar-al-tawhid-total-046"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "ahmad-ibn-hanbal",
+      "name": "Aḥmad ibn Ḥanbal",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-041",
+        "dar-al-tawhid-total-042",
+        "dar-al-tawhid-total-043"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "al-awzai",
+      "name": "al-Awzāʿī",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-016",
+        "dar-al-tawhid-total-049"
+      ],
+      "citedWorkIds": [
+        "ash-shariah-al-ajurri",
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "ibn-sirin",
+      "name": "Ibn Sīrīn",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-013"
+      ],
+      "citedWorkIds": [
+        "sahih-muslim"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "prophet",
+      "name": "Prophet ﷺ",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-001",
+        "dar-al-tawhid-total-002",
+        "dar-al-tawhid-total-003",
+        "dar-al-tawhid-total-004",
+        "dar-al-tawhid-total-005",
+        "dar-al-tawhid-total-006",
+        "dar-al-tawhid-total-007",
+        "dar-al-tawhid-total-008",
+        "dar-al-tawhid-total-009",
+        "dar-al-tawhid-total-010",
+        "dar-al-tawhid-total-011",
+        "dar-al-tawhid-total-012",
+        "dar-al-tawhid-total-017",
+        "dar-al-tawhid-total-018",
+        "dar-al-tawhid-total-019",
+        "dar-al-tawhid-total-020",
+        "dar-al-tawhid-total-021",
+        "dar-al-tawhid-total-022",
+        "dar-al-tawhid-total-023",
+        "dar-al-tawhid-total-024",
+        "dar-al-tawhid-total-025",
+        "dar-al-tawhid-total-026",
+        "dar-al-tawhid-total-027",
+        "dar-al-tawhid-total-028",
+        "dar-al-tawhid-total-029",
+        "dar-al-tawhid-total-030",
+        "dar-al-tawhid-total-031",
+        "dar-al-tawhid-total-032",
+        "dar-al-tawhid-total-033",
+        "dar-al-tawhid-total-034",
+        "dar-al-tawhid-total-035",
+        "dar-al-tawhid-total-036",
+        "dar-al-tawhid-total-037",
+        "dar-al-tawhid-total-038",
+        "dar-al-tawhid-total-039",
+        "dar-al-tawhid-total-040"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi",
+        "sahih-al-bukhari",
+        "sahih-muslim",
+        "sunan-abi-dawud"
+      ],
+      "postCount": 36
+    },
+    {
+      "id": "sufyan-ath-thawri",
+      "name": "Sufyān ath-Thawrī",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-047",
+        "dar-al-tawhid-total-048"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "abdullah-ibn-masud",
+      "name": "ʿAbdullāh ibn Masʿūd",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-050"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    }
+  ]
+}

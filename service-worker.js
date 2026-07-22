@@ -3,7 +3,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v300';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v302-test-canonical';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -21,6 +21,9 @@ const APP_SHELL = [
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
   '/data/offline-content-manifest.json',
+  '/test/assets/library/canonical-source-library.js',
+  '/data/books-library.json',
+  '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
   '/test-app-icon-512.png',
