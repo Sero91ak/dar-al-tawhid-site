@@ -1,3 +1,15 @@
 #!/usr/bin/env node
-/* Statische Besucher-App — kein Build nötig (Cloudflare Pages). */
-console.log("CF Pages: statisches Deploy aus Repo-Root (index.html, assets/, content/).");
+
+const { execFileSync } = require('child_process');
+const path = require('path');
+
+const root = path.resolve(__dirname, '..');
+const canonicalLibraryBuilder = path.join(__dirname, 'build-canonical-books-index.js');
+
+execFileSync(process.execPath, [canonicalLibraryBuilder], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
+console.log('CF Pages: kanonischer Bücher-/Autorenindex geprüft und erstellt.');
+console.log('CF Pages: statisches Deploy aus Repo-Root (index.html, assets/, content/, data/).');
