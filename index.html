@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v335";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v336";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -10886,7 +10886,7 @@ function normalizePostDedupeText(text){return String(text||"").replace(/[^\p{L}\
 function postDedupeSignature(post){const scholar=normalizePostDedupeText(post?.scholar||"");const body=normalizePostDedupeText(stripMd(post?.statement||""));const quoteMatch=body.match(/sagte\s+(.{20,240})/)||body.match(/(.{40,240})/);const core=(quoteMatch?quoteMatch[1]:body).slice(0,220);return scholar+"::"+core}
 function dedupePostsByContent(list){const sorted=[...(Array.isArray(list)?list:[])].sort(comparePostsNewestFirst);const seen=new Map();const out=[];for(const post of sorted){if(!post||!post.id)continue;const sig=postDedupeSignature(post);if(sig.length>25&&seen.has(sig))continue;if(sig.length>25)seen.set(sig,true);out.push(post)}return out.sort(comparePostsNewestFirst)}
 function notifyFeedPostsUpdated(){if(window.DAR_PREMIUM_FEED?.onPostsUpdated)window.DAR_PREMIUM_FEED.onPostsUpdated();else if(document.getElementById("premiumFeedMount"))initPremiumFeedTab(false)}
-function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?list:[]).map(post=>({...post,statement:cleanBodyText(post.statement)})));normalizeLoadedPosts();ilmKnowledgeState.ready=false;ilmKnowledgeState.signature="";if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function"&&document.getElementById("focusFeedMount"))window.DAR_FOCUS_FEED.onAppReady();if(!postsSyncSilent)notifyFeedPostsUpdated()}
+function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?list:[]).map(post=>({...post,statement:cleanBodyText(post.statement)})));normalizeLoadedPosts();ilmKnowledgeState.ready=false;ilmKnowledgeState.signature="";if(typeof window.DAR_FOCUS_FEED?.onAppReady==="function"&&document.getElementById("focusFeedMount"))window.DAR_FOCUS_FEED.onAppReady();if(!postsSyncSilent)notifyFeedPostsUpdated();if(["books","quellen-book","quellen-scholar"].includes(currentRoute?.view)&&typeof render==="function")render()}
 function darAppContentContext(){return{posts:posts||[],duas:typeof DUAS!=="undefined"?DUAS:[],categoryLayout:CATEGORY_LAYOUT||null,quranMeta:quranMeta||null}}
 function darFocusFeedAppContext(){return darAppContentContext()}
 function darPremiumFeedAppContext(){return darAppContentContext()}
@@ -14865,7 +14865,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v335";
+const APP_BUILD_ID="app-shell-v336";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -15164,7 +15164,7 @@ function ensureCanonicalSourceLibrary(){
       return;
     }
     const s=document.createElement("script");
-    s.src="/assets/library/canonical-source-library.js?v=14";
+    s.src="/assets/library/canonical-source-library.js?v=15";
     s.defer=true;
     s.onload=()=>{
       if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}

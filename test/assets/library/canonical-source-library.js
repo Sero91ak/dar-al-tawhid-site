@@ -705,7 +705,58 @@
         border:1px solid var(--line2,rgba(127,127,127,.16));
         color:var(--text,inherit);
       }
-      .qsrc-post-list{display:grid;gap:5px}
+      .qsrc-post-list{
+        display:flex;
+        flex-direction:column;
+        gap:0;
+        margin-top:6px;
+        border:1px solid var(--line2,rgba(127,127,127,.22));
+        border-radius:10px;
+        overflow:hidden;
+        background:color-mix(in srgb,var(--card,#14120e) 88%,transparent);
+      }
+      .qsrc-post-item{
+        display:grid;
+        gap:2px;
+        width:100%;
+        padding:8px 10px;
+        margin:0;
+        border:0;
+        border-bottom:1px solid var(--line2,rgba(127,127,127,.18));
+        border-radius:0;
+        background:transparent;
+        color:inherit;
+        text-align:left;
+        font:inherit;
+        cursor:pointer;
+      }
+      .qsrc-post-item:last-child{border-bottom:0}
+      .qsrc-post-item:active{background:rgba(239,215,142,.05)}
+      .qsrc-post-item-title{
+        font-size:13px;
+        line-height:1.28;
+        font-weight:700;
+        color:var(--gold2,#efd78e);
+      }
+      .qsrc-post-item-meta{
+        font-size:10px;
+        line-height:1.3;
+        color:var(--muted,#a89f88);
+      }
+      .qsrc-post-item-excerpt{
+        font-size:11px;
+        line-height:1.35;
+        color:var(--premium-body,#d9cfb0);
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .qsrc-post-list .qsrc-empty{
+        border:0;
+        border-radius:0;
+        margin:0;
+      }
       .lib-canonical-wrap{margin:16px 0 4px;padding-top:14px;border-top:1px solid var(--line2,rgba(127,127,127,.16))}
       .lib-canonical-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:8px}
       .lib-canonical-head h3{margin:0;font-size:1rem;color:var(--gold2,#efd78e)}
@@ -743,8 +794,21 @@
     return `<div class="view-head"><h2>${esc(title)}</h2>${subtitle ? `<div class="view-desc">${esc(subtitle)}</div>` : ""}</div>`;
   }
 
-  function postsByIds(ids) {
-    const posts = Array.isArray(global.posts) ? global.posts : [];
+  function resolveAppPosts() {
+    if (Array.isArray(global.posts) && global.posts.length) return global.posts;
+    if (typeof global.darAppContentContext === "function") {
+      const ctx = global.darAppContentContext();
+      if (Array.isArray(ctx?.posts) && ctx.posts.length) return ctx.posts;
+    }
+    if (typeof global.getLoadedPosts === "function") {
+      const loaded = global.getLoadedPosts();
+      if (Array.isArray(loaded) && loaded.length) return loaded;
+    }
+    return [];
+  }
+
+  function postsByIds(ids, sourcePosts) {
+    const posts = Array.isArray(sourcePosts) ? sourcePosts : resolveAppPosts();
     const map = new Map(posts.map((post) => [String(post.id), post]));
     return (ids || []).map((id) => map.get(String(id))).filter(Boolean);
   }
@@ -769,18 +833,21 @@
   }
 
   function postsForBook(book) {
-    const allPosts = Array.isArray(global.posts) ? global.posts : [];
     if (!book) return [];
+    const allPosts = resolveAppPosts();
+    const byIds = postsByIds(book.postIds, allPosts);
+    if (byIds.length) return byIds.sort(comparePosts);
     if (allPosts.length) {
-      const matched = allPosts.filter((post) => postMatchesBook(post, book)).sort(comparePosts);
-      if (matched.length) return matched;
+      return allPosts.filter((post) => postMatchesBook(post, book)).sort(comparePosts);
     }
-    return postsByIds(book.postIds).sort(comparePosts);
+    return [];
   }
 
   function postsForScholar(scholar) {
-    const allPosts = Array.isArray(global.posts) ? global.posts : [];
     if (!scholar) return [];
+    const allPosts = resolveAppPosts();
+    const byIds = postsByIds(scholar.postIds, allPosts);
+    if (byIds.length) return byIds.sort(comparePosts);
     if (typeof global.postsForScholarKey === "function") {
       for (const key of [scholar.id, scholar.name].filter(Boolean)) {
         const matched = global.postsForScholarKey(key);
@@ -803,7 +870,23 @@
       }).sort(comparePosts);
       if (matched.length) return matched;
     }
-    return postsByIds(scholar.postIds).sort(comparePosts);
+    return postsByIds(scholar.postIds, allPosts).sort(comparePosts);
+  }
+
+  function postExcerpt(post) {
+    if (typeof global.findQuote === "function") return String(global.findQuote(post) || "").trim();
+    const text = String(post?.statement || post?.excerpt || "").replace(/\s+/g, " ").trim();
+    return text.slice(0, 140);
+  }
+
+  function qsrcPostItemHtml(post) {
+    const excerpt = postExcerpt(post);
+    const meta = [post?.category, post?.scholar].filter(Boolean).map((value) => esc(value)).join(" · ");
+    return `<button type="button" class="qsrc-post-item" data-nav="post" data-value="${esc(post.id)}" aria-label="${esc(post.title)} öffnen">
+      <span class="qsrc-post-item-title">${esc(post.title)}</span>
+      ${meta ? `<span class="qsrc-post-item-meta">${meta}</span>` : ""}
+      ${excerpt ? `<span class="qsrc-post-item-excerpt">${esc(excerpt)}</span>` : ""}
+    </button>`;
   }
 
   function postCardHtml(post) {
@@ -996,6 +1079,7 @@
     const aliases = (book.aliases || []).filter((alias) => alias && !isHiddenPlaceholder(alias));
     const quoted = (book.quotedScholars || []).filter((name) => name && !isHiddenPlaceholder(name));
     const relatedPosts = postsForBook(book);
+    const postCount = relatedPosts.length || Number(book.postCount || 0);
 
     return `${setPageHeader(book.title, book.category || "Geprüftes Werk", "Quellenbibliothek")}
 <section class="qsrc-detail">
@@ -1012,8 +1096,8 @@
   ${quoted.length ? `<article class="qsrc-detail-block"><h3>Zitierte Gelehrte</h3><p>Diese Gelehrten werden in Beiträgen aus diesem Werk zitiert. Sie sind nicht die historischen Autoren des Werkes.</p><div class="qsrc-alias-list">${quoted.map((name) => `<span class="qsrc-chip">${esc(name)}</span>`).join("")}</div></article>` : ""}
   <article class="qsrc-detail-block">
     <h3>Beiträge aus diesem Werk</h3>
-    <p>${Number(book.postCount || relatedPosts.length || 0)} ${Number(book.postCount || relatedPosts.length || 0) === 1 ? "Beitrag" : "Beiträge"}</p>
-    <div class="qsrc-post-list">${relatedPosts.length ? relatedPosts.map(postCardHtml).join("") : `<div class="qsrc-empty">Keine Beiträge verknüpft.</div>`}</div>
+    <p>${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}</p>
+    <div class="qsrc-post-list">${relatedPosts.length ? relatedPosts.map(qsrcPostItemHtml).join("") : `<div class="qsrc-empty">Keine Beiträge verknüpft.</div>`}</div>
   </article>
 </section>`;
   }
