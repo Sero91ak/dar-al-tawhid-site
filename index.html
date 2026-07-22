@@ -15164,7 +15164,7 @@ function ensureCanonicalSourceLibrary(){
       return;
     }
     const s=document.createElement("script");
-    s.src="/assets/library/canonical-source-library.js?v=1";
+    s.src="/assets/library/canonical-source-library.js?v=2";
     s.defer=true;
     s.onload=()=>{
       if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}
