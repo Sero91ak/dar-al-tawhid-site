@@ -11167,6 +11167,177 @@ html[data-theme] .prayer-overview__push.prayer-push-accordion--compact{
 html[data-theme] .prayer-overview__time-label{color:var(--premium-label,var(--muted2))!important}
 html[data-theme] .prayer-overview__time-countdown{color:var(--premium-body,var(--muted))!important}
 </style>
+<style id="brand-underline-unify-v338">
+/* Marken-Unterstreichung: dezent, links leicht, rechts verblassend — wie Dar al-Layl, alle Themes */
+.brand-main h1.brand-title-refined::after,
+html[data-theme] .brand-main h1.brand-title-refined::after{
+  display:block!important;
+  content:""!important;
+  width:min(100%,180px)!important;
+  height:1px!important;
+  margin-top:9px!important;
+  opacity:.82!important;
+  border:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 50%,transparent),transparent 100%)!important;
+}
+@media(max-width:700px){
+  .brand-main h1.brand-title-refined::after,
+  html[data-theme] .brand-main h1.brand-title-refined::after{
+    width:min(100%,140px)!important;
+    margin-top:7px!important;
+  }
+}
+</style>
+<style id="global-surface-unify-v339">
+/* Isnad: Aussage kompakt (1–2 Zeilen), Überlieferung unten mit Auslauf — alle Erscheinungsbilder */
+html[data-theme] .isnad-quote{
+  display:block!important;
+  margin-top:6px!important;
+  font-size:clamp(11.5px,3.1vw,13px)!important;
+  line-height:1.32!important;
+  font-weight:800!important;
+}
+html[data-theme] .isnad-speaker,
+html[data-theme] .isnad-words{
+  display:inline!important;
+  white-space:normal!important;
+}
+html[data-theme] .isnad-speaker{margin-right:.2em!important}
+@media(min-width:520px){
+  html[data-theme] .isnad-quote{
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+}
+@media(max-width:519px){
+  html[data-theme] .isnad-quote{
+    display:-webkit-box!important;
+    -webkit-line-clamp:2!important;
+    -webkit-box-orient:vertical!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+}
+html[data-theme] .isnad-source{
+  display:block!important;
+  margin-top:5px!important;
+  padding-top:4px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-size:clamp(9px,2.5vw,10.5px)!important;
+  line-height:1.24!important;
+  max-width:100%!important;
+  -webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%)!important;
+  mask-image:linear-gradient(90deg,#000 70%,transparent 100%)!important;
+}
+@media(max-width:430px){
+  html[data-theme] .isnad-quote{font-size:clamp(10.5px,2.9vw,11.5px)!important;line-height:1.3!important}
+  html[data-theme] .isnad-source{
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    font-size:clamp(8.5px,2.35vw,9.5px)!important;
+  }
+  html[data-theme] .isnad-speaker,
+  html[data-theme] .isnad-words{display:inline!important}
+}
+
+/* Startseite: dezente Trennlinie zwischen Kopf und Schnellaktion */
+body.is-home-route .view-head.view-head-home{
+  padding-bottom:10px!important;
+  margin-bottom:2px!important;
+}
+body.is-home-route .view-head.view-head-home::after{
+  content:""!important;
+  display:block!important;
+  width:min(100%,min(72vw,260px))!important;
+  height:1px!important;
+  margin:12px 0 0!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 55%,transparent),transparent 88%)!important;
+  opacity:.9!important;
+}
+body.is-home-route .home-refresh-panel{margin-top:10px!important}
+
+/* Hijri-Kalender: edler, themenangepasster Rahmen */
+html[data-theme] .home-hijri-dayframe{
+  border:1.5px solid color-mix(in srgb,var(--gold2) 62%,var(--line))!important;
+  background:color-mix(in srgb,var(--card) 86%,var(--gold2) 14%)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 14%,transparent),0 0 14px color-mix(in srgb,var(--gold2) 16%,transparent)!important;
+}
+html[data-theme="light"] .home-hijri-dayframe,
+html[data-theme="soft"] .home-hijri-dayframe{
+  border-color:color-mix(in srgb,#8a6530 48%,var(--gold2))!important;
+  background:color-mix(in srgb,#fffaf4 88%,var(--gold2))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 0 10px color-mix(in srgb,var(--gold2) 12%,transparent)!important;
+}
+html[data-theme="royal"] .home-hijri-dayframe{
+  border-color:color-mix(in srgb,#e3c97f 55%,#1a3a5c)!important;
+  background:color-mix(in srgb,#0a1c32 82%,#e3c97f)!important;
+}
+html[data-theme="bordeaux"] .home-hijri-dayframe{
+  border-color:color-mix(in srgb,#d9bb78 52%,#4a2030)!important;
+  background:color-mix(in srgb,#211015 84%,#d9bb78)!important;
+}
+html[data-theme="dar-al-layl"] .home-hijri-dayframe{
+  border-color:color-mix(in srgb,#a88b4f 58%,#1a2018)!important;
+  background:color-mix(in srgb,#111612 85%,#a88b4f)!important;
+}
+html[data-theme] .home-hijri-dayframe [data-hijri-date-text]{
+  color:color-mix(in srgb,var(--gold2) 88%,var(--premium-title,var(--text)))!important;
+  text-shadow:none!important;
+}
+html[data-theme="light"] .home-hijri-dayframe [data-hijri-date-text],
+html[data-theme="soft"] .home-hijri-dayframe [data-hijri-date-text]{color:#4a3520!important}
+
+/* Quiz: eine Ebene, lesbare Kontraste — alle Erscheinungsbilder */
+html[data-theme="light"] .quiz-shell.quiz-shell-pro,
+html[data-theme="soft"] .quiz-shell.quiz-shell-pro{
+  --quiz-text-primary:var(--quiz-text)!important;
+  --quiz-text-secondary:var(--quiz-muted)!important;
+  --quiz-text-label:var(--quiz-accent)!important;
+  --quiz-text-body:var(--quiz-text)!important;
+}
+html[data-theme="royal"] .quiz-shell.quiz-shell-pro,
+html[data-theme="bordeaux"] .quiz-shell.quiz-shell-pro,
+html[data-theme="dar-al-layl"] .quiz-shell.quiz-shell-pro{
+  --quiz-text-primary:var(--quiz-text)!important;
+  --quiz-text-secondary:var(--quiz-muted)!important;
+}
+html[data-theme] .quiz-shell .quiz-field,
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-field{
+  border:0!important;
+  background:transparent!important;
+  padding:0!important;
+  min-height:auto!important;
+  box-shadow:none!important;
+  gap:5px!important;
+}
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-control{
+  border:1px solid color-mix(in srgb,var(--quiz-border) 80%,var(--quiz-accent) 20%)!important;
+  border-left:3px solid color-mix(in srgb,var(--quiz-accent) 75%,transparent)!important;
+  background:color-mix(in srgb,var(--quiz-card) 92%,var(--quiz-accent) 8%)!important;
+  box-shadow:none!important;
+}
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-control select,
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-control{
+  color:var(--quiz-text-primary)!important;
+  -webkit-text-fill-color:var(--quiz-text-primary)!important;
+}
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-chevron{color:var(--quiz-text-secondary,var(--quiz-muted))!important}
+html[data-theme="light"] .quiz-shell.quiz-shell-pro .quiz-btn.secondary,
+html[data-theme="soft"] .quiz-shell.quiz-shell-pro .quiz-btn.secondary{
+  background:color-mix(in srgb,var(--quiz-surface-active) 72%,var(--quiz-card))!important;
+  color:var(--quiz-text)!important;
+  border-color:var(--quiz-border)!important;
+}
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-btn:not(.primary):not(.secondary){
+  color:var(--quiz-text-primary)!important;
+}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
