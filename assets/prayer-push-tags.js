@@ -1,10 +1,39 @@
-// DAR AL TAWḤID – Standortbasierte Gebetszeiten-Tags für OneSignal
+// DAR AL TAWḤĪD – Standortbasierte Gebetszeiten-Tags für OneSignal
 // Diese Datei verändert kein Layout.
-// Sie speichert pro Nutzer: Push aktiv, Standort, Zeitzone, Methode.
+// Sie speichert pro Installation Push-Status, Standort und App-Umgebung.
 
 (function () {
+  const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
+  const INSTALLATION_KEY = "darPrayerInstallationIdV1";
+
   function log() {
     try { console.log("[PrayerPushTags]", ...arguments); } catch (e) {}
+  }
+
+  function currentEnvironment() {
+    const path = String(location.pathname || "");
+    return window.__DAR_STAGING_APP === true || path === "/test" || path.startsWith("/test/")
+      ? "test"
+      : "production";
+  }
+
+  function currentAppName() {
+    return currentEnvironment() === "test" ? "Dar Test" : "DAR AL TAWHID";
+  }
+
+  function getInstallationId() {
+    try {
+      let id = localStorage.getItem(INSTALLATION_KEY);
+      if (id) return id;
+      id = typeof crypto?.randomUUID === "function"
+        ? crypto.randomUUID()
+        : `install-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      localStorage.setItem(INSTALLATION_KEY, id);
+      return id;
+    } catch (e) {
+      return `install-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    }
   }
 
   async function waitForOneSignal(timeoutMs = 15000) {
@@ -18,6 +47,16 @@
     }
 
     return null;
+  }
+
+  async function waitForSubscriptionId(OneSignal, timeoutMs = 15000) {
+    const started = Date.now();
+    while (Date.now() - started < timeoutMs) {
+      const id = String(OneSignal?.User?.PushSubscription?.id || "").trim();
+      if (id) return id;
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    return "";
   }
 
   function getPosition() {
@@ -37,6 +76,58 @@
         }
       );
     });
+  }
+
+  async function syncRegistrationEnvironment(OneSignal) {
+    const subscriptionId = await waitForSubscriptionId(OneSignal);
+    if (!subscriptionId) {
+      log("Keine OneSignal-Subscription für Umgebungs-Sync gefunden.");
+      return false;
+    }
+
+    const appEnvironment = currentEnvironment();
+    const appName = currentAppName();
+    const installationId = getInstallationId();
+
+    try {
+      await OneSignal.User.addTags({
+        prayer_environment: appEnvironment,
+        prayer_app_name: appName,
+        prayer_installation_id: installationId,
+        prayer_version: "4"
+      });
+    } catch (err) {
+      log("OneSignal-Umgebungs-Tags konnten nicht gesetzt werden:", err);
+    }
+
+    try {
+      const url = `${SUPABASE_URL}/rest/v1/prayer_push_registrations?subscription_id=eq.${encodeURIComponent(subscriptionId)}`;
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal"
+        },
+        body: JSON.stringify({
+          app_environment: appEnvironment,
+          app_name: appName,
+          installation_id: installationId
+        })
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Supabase ${response.status}: ${text.slice(0, 200)}`);
+      }
+
+      log("Push-Installation gekennzeichnet:", { appEnvironment, appName, installationId });
+      return true;
+    } catch (err) {
+      log("Supabase-Umgebungs-Sync fehlgeschlagen:", err);
+      return false;
+    }
   }
 
   async function setPrayerTags() {
@@ -60,6 +151,9 @@
     const lat = Number(position.coords.latitude).toFixed(5);
     const lon = Number(position.coords.longitude).toFixed(5);
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Berlin";
+    const appEnvironment = currentEnvironment();
+    const appName = currentAppName();
+    const installationId = getInstallationId();
 
     try {
       await OneSignal.User.addTags({
@@ -72,13 +166,19 @@
         prayer_location_mode: "device",
         prayer_site: "dar-al-tawhid",
         prayer_source: "pwa",
-        prayer_version: "2"
+        prayer_environment: appEnvironment,
+        prayer_app_name: appName,
+        prayer_installation_id: installationId,
+        prayer_version: "4"
       });
+
+      await syncRegistrationEnvironment(OneSignal);
 
       log("Gebetszeiten-Tags gesetzt:", {
         prayer_lat: lat,
         prayer_lon: lon,
-        prayer_timezone: timezone
+        prayer_timezone: timezone,
+        prayer_environment: appEnvironment
       });
 
       return true;
@@ -110,5 +210,15 @@
     }
   }, true);
 
+  // Bei jedem App-Start Test- und Live-Installation erneut eindeutig markieren.
+  setTimeout(async function () {
+    const OneSignal = await waitForOneSignal(20000);
+    if (OneSignal) await syncRegistrationEnvironment(OneSignal);
+  }, 1200);
+
   window.DarAlTawhidSetPrayerPushTags = setPrayerTags;
+  window.DarAlTawhidSyncPrayerEnvironment = async function () {
+    const OneSignal = await waitForOneSignal(20000);
+    return OneSignal ? syncRegistrationEnvironment(OneSignal) : false;
+  };
 })();
