@@ -9901,6 +9901,54 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
   min-height:0!important;
 }
 </style>
+<style id="brand-header-air-v320">
+/* Mehr Luft im Header + edler Markentitel + kräftigere Bereichsüberschriften */
+.top-shell.theme-hero-shell .brand-kicker-row{
+  margin-bottom:clamp(18px,4.6vw,28px)!important;
+  gap:10px!important;
+}
+.brand-kicker-row{
+  margin-bottom:clamp(14px,3.8vw,22px)!important;
+}
+.top-shell.theme-hero-shell .brand-main{
+  column-gap:clamp(18px,5vw,28px)!important;
+  margin-top:2px!important;
+}
+.brand-main{
+  gap:clamp(18px,5vw,28px)!important;
+}
+.top-shell.theme-hero-shell h1,
+.brand-main h1{
+  font-family:var(--serif)!important;
+  font-weight:700!important;
+  letter-spacing:clamp(.06em,.095em,.13em)!important;
+  text-shadow:0 2px 18px rgba(214,183,106,.14),0 1px 0 rgba(0,0,0,.42)!important;
+}
+.section-head h3,
+.popular-panel .section-head h3,
+.section-block:has(#latestGrid) .section-head h3,
+.home-more-section .collapsible-head h3{
+  font-family:var(--serif)!important;
+  font-weight:800!important;
+  letter-spacing:.012em!important;
+}
+body.is-home-route .view-head h2.home-start-title,
+.view-head-home-row h2.home-start-title{
+  font-family:var(--serif)!important;
+  font-weight:800!important;
+  letter-spacing:.015em!important;
+}
+@media(max-width:700px){
+  .top-shell.theme-hero-shell .brand-kicker-row{margin-bottom:16px!important}
+  .brand-kicker-row{margin-bottom:14px!important}
+  .top-shell.theme-hero-shell .brand-main,.brand-main{column-gap:16px!important;gap:16px!important}
+}
+@media(max-width:430px){
+  .top-shell.theme-hero-shell .brand-kicker-row{margin-bottom:14px!important}
+  .top-shell.theme-hero-shell .brand-main{column-gap:14px!important}
+  .brand-main{gap:14px!important}
+}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
