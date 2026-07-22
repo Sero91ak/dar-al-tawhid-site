@@ -2,7 +2,8 @@
   "name": "dar-al-tawhid-site",
   "private": true,
   "scripts": {
-    "build": "node scripts/cf-pages-build.js"
+    "build": "node scripts/cf-pages-build.js",
+    "sync-build-ids": "node scripts/sync-app-build-ids.js"
   },
   "devDependencies": {
     "wrangler": "^4.86.0"
