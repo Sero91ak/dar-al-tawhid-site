@@ -10764,44 +10764,38 @@ body.is-home-route .view-head h2.home-start-title,
 .highlight-sections .gold-divider{margin:8px 0!important}
 </style>
 <style id="brand-gold-home-v324">
-/* Startseite: echtes Gold-Wordmark-Bild statt CSS-Schrift */
-.brand-wordmark-img{display:none}
-body.is-home-route .brand-wordmark-text{display:none!important}
-body.is-home-route .brand-wordmark-img{
-  display:block!important;
-  width:clamp(210px,54vw,360px)!important;
-  max-width:100%!important;
-  height:auto!important;
-  max-height:clamp(38px,9.5vw,62px)!important;
-  object-fit:contain!important;
-  object-position:left center!important;
-  margin:0!important;
-  filter:drop-shadow(0 3px 14px rgba(200,148,58,.34));
-}
+/* Startseite: Gold-Markentitel als echte Schrift (kein Bild) */
 body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
-  font-size:0!important;
-  line-height:0!important;
-  letter-spacing:0!important;
-  text-shadow:none!important;
-  background:none!important;
-  color:transparent!important;
-  -webkit-text-fill-color:transparent!important;
-  filter:none!important;
-  min-width:0!important;
-  flex:1 1 auto!important;
+  font-family:"Cinzel Decorative","Cinzel",var(--display)!important;
+  font-weight:700!important;
+  font-size:clamp(24px,5.8vw,42px)!important;
+  line-height:1.1!important;
+  letter-spacing:.05em!important;
+  word-spacing:.18em!important;
+  text-transform:uppercase;
+  color:#eccc7a!important;
+  -webkit-text-fill-color:#eccc7a!important;
+  text-shadow:0 0 1px rgba(255,248,220,.85),0 1px 0 rgba(90,68,24,.9),0 2px 12px rgba(200,148,58,.38),1px 1px 0 rgba(184,137,50,.55)!important;
   white-space:normal!important;
   overflow:visible!important;
+  min-width:0!important;
+  flex:1 1 auto!important;
+  background:none!important;
+  background-clip:border-box!important;
+  -webkit-background-clip:border-box!important;
+  filter:none!important;
 }
 @media(max-width:700px){
-  body.is-home-route .brand-wordmark-img{
-    width:clamp(190px,58vw,300px)!important;
-    max-height:clamp(34px,8.8vw,50px)!important;
+  body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
+    font-size:clamp(22px,5.6vw,34px)!important;
+    word-spacing:.14em!important;
+    letter-spacing:.04em!important;
   }
 }
 @media(max-width:430px){
-  body.is-home-route .brand-wordmark-img{
-    width:clamp(170px,62vw,260px)!important;
-    max-height:clamp(30px,8.2vw,44px)!important;
+  body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
+    font-size:clamp(20px,5.2vw,30px)!important;
+    word-spacing:.12em!important;
   }
 }
 </style>
@@ -10830,7 +10824,7 @@ html[data-theme] .share-btn.ig,html[data-theme] .post-after-share .share-btn.ig{
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
             <div class="header-top-chips" id="headerTopChips" data-header-top-chips><button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Islamisches Datum</button></div>
           </div>
-          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1><span class="brand-wordmark-text">DAR AL TAWḤID</span><img class="brand-wordmark-img" src="/assets/brand-wordmark-gold.png" alt="DAR AL TAWḤID" width="640" height="200" decoding="async"></h1></div>
+          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1>DAR AL TAWḤID</h1></div>
         </div>
         <div class="header-tools">
           <nav class="socials" aria-label="Social Media">
