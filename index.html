@@ -10163,6 +10163,101 @@ html[data-theme="soft"] .brand-main .logo{
   }
 }
 </style>
+<style id="golden-luminous-borders-v333">
+/* Leuchtende Gold-Linien — edel, dünn, app-weit, theme-passend */
+:root{
+  --glow-accent:var(--gold2);
+  --glow-line:color-mix(in srgb,var(--glow-accent) 56%,transparent);
+  --glow-line-strong:color-mix(in srgb,var(--glow-accent) 80%,transparent);
+  --glow-halo:0 0 11px color-mix(in srgb,var(--glow-accent) 17%,transparent);
+  --glow-halo-strong:0 0 15px color-mix(in srgb,var(--glow-accent) 26%,transparent);
+  --glow-inset:inset 0 1px 0 color-mix(in srgb,var(--glow-accent) 22%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--glow-accent) 12%,transparent);
+}
+html[data-theme="light"]{--glow-accent:#b99245}
+html[data-theme="soft"]{--glow-accent:#c49aaa}
+html[data-theme="royal"]{--glow-accent:#efd78e}
+html[data-theme="bordeaux"]{--glow-accent:#d6be84}
+html[data-theme="dar-al-layl"]{--glow-accent:#d8c18b}
+
+/* Karten & Menüzeilen — voller leuchtender Rand statt nur linker Akzent */
+.popular-row,.folder-card,.post-card,.list-card,.dua-card,.series-card,.pinned-card,
+.daily-box,.recommended-box,.current-focus-row,.quran-surah-card,.quran-result-card,
+.feature-card,.ramadan-teaser,.quran-home-teaser,.zakat-home-teaser,.home-refresh-panel,
+.prayer-quick-card,.quiz-home-quick-card,.info-card,.event-card,.stat-card,
+.overview-panel,.direct-pick-panel,.filter-panel,.popular-panel,.profile-box,.book-profile-box,
+.series-box,.pinned-box,.calendar-panel,.home-more-section,.feature-section,
+.home-more-body .series-card.has-icon,.home-more-body .pinned-card.has-icon,
+.home-more-body .overview-compact .stat-card{
+  border:1px solid var(--glow-line)!important;
+  border-left-width:1px!important;
+  box-shadow:var(--glow-halo),var(--glow-inset),0 10px 26px rgba(0,0,0,.20)!important;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .15s ease!important;
+}
+.popular-row:hover,.folder-card:hover,.post-card:hover,.list-card:hover,.dua-card:hover,
+.series-card:hover,.pinned-card:hover,.feature-card:hover,.quran-surah-card:hover,
+.quran-result-card:hover,.current-focus-row:hover,.prayer-quick-card:hover,
+.quiz-home-quick-card:hover,.event-card:hover,.stat-card:hover{
+  border-color:var(--glow-line-strong)!important;
+  box-shadow:var(--glow-halo-strong),var(--glow-inset),0 12px 30px rgba(0,0,0,.24)!important;
+}
+
+/* Icon-Kästchen in Ordnern & Mehr-Karte */
+.folder-icon,.popular-rank,.feature-icon,
+.home-more-body .series-card.has-icon .folder-icon,
+.home-more-body .pinned-card.has-icon .folder-icon{
+  border:1px solid color-mix(in srgb,var(--glow-accent) 44%,transparent)!important;
+  box-shadow:0 0 8px color-mix(in srgb,var(--glow-accent) 12%,transparent),inset 0 1px 0 color-mix(in srgb,var(--glow-accent) 18%,transparent)!important;
+}
+
+/* Haupt-Container — dezente leuchtende Ecken */
+.top-shell,.view{
+  border-color:color-mix(in srgb,var(--glow-accent) 38%,var(--line))!important;
+  box-shadow:var(--shadow),0 0 18px color-mix(in srgb,var(--glow-accent) 8%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--glow-accent) 8%,transparent)!important;
+}
+
+/* Theme-Overrides: schwache Rahmen aus älteren Blöcken ersetzen */
+html[data-theme="light"] .popular-row,
+html[data-theme="light"] .folder-card,
+html[data-theme="light"] .list-card,
+html[data-theme="light"] .stat-card,
+html[data-theme="light"] .prayer-time-card,
+html[data-theme="light"] .home-more-body .overview-compact .stat-card{
+  border-color:color-mix(in srgb,#9b7a3c 50%,transparent)!important;
+  box-shadow:0 0 10px color-mix(in srgb,#b99245 14%,transparent),inset 0 1px 0 rgba(255,255,255,.42),inset 0 0 0 1px color-mix(in srgb,#b99245 16%,transparent)!important;
+}
+html[data-theme="soft"] .popular-row,
+html[data-theme="soft"] .folder-card,
+html[data-theme="soft"] .list-card,
+html[data-theme="soft"] .stat-card,
+html[data-theme="soft"] .home-more-body .overview-compact .stat-card{
+  border-color:color-mix(in srgb,#9f6e78 46%,transparent)!important;
+  box-shadow:0 0 10px color-mix(in srgb,#c49aaa 13%,transparent),inset 0 1px 0 rgba(255,255,255,.44),inset 0 0 0 1px color-mix(in srgb,#c49aaa 14%,transparent)!important;
+}
+html[data-theme="royal"] .popular-row,
+html[data-theme="royal"] .folder-card,
+html[data-theme="royal"] .list-card,
+html[data-theme="royal"] .stat-card,
+html[data-theme="royal"] .home-more-body .overview-compact .stat-card{
+  border-color:color-mix(in srgb,#efd78e 48%,transparent)!important;
+  box-shadow:0 0 11px color-mix(in srgb,#efd78e 15%,transparent),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 0 1px color-mix(in srgb,#efd78e 12%,transparent)!important;
+}
+html[data-theme="bordeaux"] .popular-row,
+html[data-theme="bordeaux"] .folder-card,
+html[data-theme="bordeaux"] .list-card,
+html[data-theme="bordeaux"] .stat-card,
+html[data-theme="bordeaux"] .home-more-body .overview-compact .stat-card{
+  border-color:color-mix(in srgb,#d6be84 46%,transparent)!important;
+  box-shadow:0 0 11px color-mix(in srgb,#d6be84 14%,transparent),inset 0 0 0 1px color-mix(in srgb,#d6be84 11%,transparent)!important;
+}
+html[data-theme="dar-al-layl"] .popular-row,
+html[data-theme="dar-al-layl"] .folder-card,
+html[data-theme="dar-al-layl"] .list-card,
+html[data-theme="dar-al-layl"] .stat-card,
+html[data-theme="dar-al-layl"] .home-more-body .overview-compact .stat-card{
+  border-color:color-mix(in srgb,#d8c18b 44%,transparent)!important;
+  box-shadow:0 0 10px color-mix(in srgb,#a88b4f 13%,transparent),inset 0 0 0 1px color-mix(in srgb,#d8c18b 10%,transparent)!important;
+}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
