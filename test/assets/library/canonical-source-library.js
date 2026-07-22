@@ -378,7 +378,7 @@
       .qsrc-lib-card{
         display:flex;
         flex-direction:column;
-        gap:6px;
+        gap:0;
         min-width:0;
         padding:0;
         border:0;
@@ -398,11 +398,12 @@
         position:relative;
         width:100%;
         aspect-ratio:2/3;
-        border-radius:10px;
+        border-radius:10px 10px 0 0;
         overflow:hidden;
         background:color-mix(in srgb,var(--panel,#12100c) 80%,var(--bg,#070706));
         box-shadow:0 8px 18px color-mix(in srgb,var(--bg,#070706) 55%,transparent);
         border:1px solid var(--line2,rgba(127,127,127,.18));
+        border-bottom:0;
       }
       .qsrc-lib-cover{
         width:100%;
@@ -423,29 +424,85 @@
         line-height:1.3;
         background:radial-gradient(circle at 50% 16%,rgba(239,215,142,.10),transparent 55%),linear-gradient(160deg,color-mix(in srgb,var(--panel,#12100c) 90%,var(--bg,#070706)),color-mix(in srgb,var(--card,#14120e) 85%,var(--bg,#070706)));
       }
+      .qsrc-lib-card-body{
+        display:flex;
+        flex-direction:column;
+        gap:5px;
+        min-width:0;
+        flex:1 1 auto;
+        padding:8px 9px 9px;
+        border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 22%,var(--line2,rgba(127,127,127,.22)));
+        border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 14%,var(--line2,rgba(127,127,127,.16)));
+        border-radius:0 0 10px 10px;
+        background:linear-gradient(180deg,color-mix(in srgb,var(--card,#14120e) 94%,var(--bg,#070706)),color-mix(in srgb,var(--panel,#12100c) 90%,var(--bg,#070706)));
+        box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2,#efd78e) 8%,transparent);
+      }
+      .qsrc-lib-card:hover .qsrc-lib-cover-wrap,
+      .qsrc-lib-card:focus-visible .qsrc-lib-cover-wrap{
+        border-color:color-mix(in srgb,var(--gold2,#efd78e) 28%,var(--line2,rgba(127,127,127,.22)));
+      }
+      .qsrc-lib-card:hover .qsrc-lib-card-body,
+      .qsrc-lib-card:focus-visible .qsrc-lib-card-body{
+        border-color:color-mix(in srgb,var(--gold2,#efd78e) 34%,var(--line2,rgba(127,127,127,.22)));
+        background:linear-gradient(180deg,color-mix(in srgb,var(--card,#14120e) 96%,var(--bg,#070706)),color-mix(in srgb,var(--panel,#12100c) 92%,var(--bg,#070706)));
+      }
       .qsrc-lib-card-body h4{
         margin:0;
         font-family:var(--serif,Georgia,"Times New Roman",serif);
         font-size:0.82rem;
-        line-height:1.28;
-        font-weight:650;
-        color:var(--text,inherit);
+        line-height:1.3;
+        font-weight:700;
+        color:var(--gold2,#efd78e);
         display:-webkit-box;
         -webkit-line-clamp:2;
         -webkit-box-orient:vertical;
         overflow:hidden;
       }
+      .qsrc-lib-card-kicker{
+        display:block;
+        font-size:0.56rem;
+        font-weight:900;
+        letter-spacing:.11em;
+        text-transform:uppercase;
+        color:var(--muted2,var(--muted,#a89f88));
+        margin-bottom:1px;
+      }
       .qsrc-lib-card-meta{
+        display:grid;
+        gap:2px;
+        min-width:0;
+        font-size:0.68rem;
+        line-height:1.28;
+      }
+      .qsrc-lib-card-meta-row{
         display:flex;
         flex-wrap:wrap;
-        gap:2px 4px;
-        color:var(--muted2,var(--muted,#a89f88));
-        font-size:0.68rem;
-        line-height:1.25;
+        align-items:baseline;
+        gap:2px 5px;
       }
       .qsrc-lib-card-meta span{overflow-wrap:anywhere}
-      .qsrc-lib-card-meta--author span{
+      .qsrc-lib-card-meta--category{
+        padding-bottom:4px;
+        border-bottom:1px dashed color-mix(in srgb,var(--gold2,#efd78e) 16%,var(--line2,rgba(127,127,127,.18)));
+      }
+      .qsrc-lib-card-meta--category .qsrc-lib-card-category{
+        color:var(--cream,var(--text,inherit));
+        font-weight:750;
+      }
+      .qsrc-lib-card-meta--category .qsrc-lib-card-badge{
+        color:var(--muted2,var(--muted,#a89f88));
+        font-size:0.62rem;
+        font-weight:700;
+      }
+      .qsrc-lib-card-meta--author{
+        padding-top:1px;
+      }
+      .qsrc-lib-card-meta--author .qsrc-lib-card-author-name{
+        font-family:var(--serif,Georgia,"Times New Roman",serif);
         font-style:italic;
+        font-size:0.7rem;
+        line-height:1.32;
+        font-weight:600;
         color:var(--premium-body,#d9cfb0);
         display:-webkit-box;
         -webkit-line-clamp:2;
@@ -457,7 +514,7 @@
         flex-direction:column;
         grid-template-columns:unset;
         align-items:stretch;
-        gap:6px;
+        gap:0;
         padding:0;
         border:0;
         border-left:0;
@@ -671,9 +728,11 @@
         .qsrc-meta-pill{justify-self:start}
         .qsrc-toolbar{grid-template-columns:1fr}
         .qsrc-control-btn{justify-content:center;width:100%}
-        .qsrc-lib-grid{gap:8px 6px}
-        .qsrc-lib-card-body h4{font-size:0.76rem}
-        .qsrc-lib-card-meta{font-size:0.62rem}
+        .qsrc-lib-grid{gap:10px 8px}
+        .qsrc-lib-card-body{padding:7px 8px 8px;gap:4px}
+        .qsrc-lib-card-body h4{font-size:0.78rem}
+        .qsrc-lib-card-meta{font-size:0.64rem}
+        .qsrc-lib-card-meta--author .qsrc-lib-card-author-name{font-size:0.66rem}
       }
     `;
     document.head.appendChild(style);
@@ -776,11 +835,17 @@
       ${libCoverHtml(book)}
       <div class="qsrc-lib-card-body">
         <h4>${esc(book.title)}</h4>
-        <div class="qsrc-lib-card-meta">
-          <span>${esc(book.category || "Werk")}</span>
-          <span>${esc(postLabel)}</span>
+        <div class="qsrc-lib-card-meta qsrc-lib-card-meta--category">
+          <span class="qsrc-lib-card-kicker">Katalog</span>
+          <div class="qsrc-lib-card-meta-row">
+            <span class="qsrc-lib-card-category">${esc(book.category || "Werk")}</span>
+            <span class="qsrc-lib-card-badge">${esc(postLabel)}</span>
+          </div>
         </div>
-        <div class="qsrc-lib-card-meta qsrc-lib-card-meta--author"><span>${esc(book.author)}</span></div>
+        <div class="qsrc-lib-card-meta qsrc-lib-card-meta--author">
+          <span class="qsrc-lib-card-kicker">Autor</span>
+          <span class="qsrc-lib-card-author-name">${esc(book.author)}</span>
+        </div>
       </div>
     </button>`;
   }
