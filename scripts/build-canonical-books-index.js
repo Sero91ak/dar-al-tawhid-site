@@ -33,16 +33,37 @@ function normalizePerson(value) {
     .trim();
 }
 
+function uniqueSorted(values) {
+  return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, 'de'));
+}
+
 function buildAuthorityLookup(authority) {
   const lookup = new Map();
+  const authorityErrors = [];
+  const seenIds = new Set();
+  const seenTitles = new Map();
+
   for (const work of authority.works || []) {
-    if (!work || !work.id || !work.title || !work.author || work.verified === false) continue;
+    if (!work || !work.id || !work.title || !work.author || work.verified === false) {
+      authorityErrors.push({ work, reason: 'incomplete-or-unverified-authority-entry' });
+      continue;
+    }
+    if (seenIds.has(work.id)) authorityErrors.push({ workId: work.id, reason: 'duplicate-authority-id' });
+    seenIds.add(work.id);
+
     for (const title of [work.title, ...(work.aliases || [])]) {
       const key = normalize(title);
-      if (key) lookup.set(key, work);
+      if (!key) continue;
+      if (seenTitles.has(key) && seenTitles.get(key) !== work.id) {
+        authorityErrors.push({ normalizedTitle: key, workIds: [seenTitles.get(key), work.id], reason: 'authority-title-collision' });
+        continue;
+      }
+      seenTitles.set(key, work.id);
+      lookup.set(key, work);
     }
   }
-  return lookup;
+
+  return { lookup, authorityErrors };
 }
 
 function resolveVerifiedWork(post, lookup) {
@@ -65,22 +86,63 @@ function resolveVerifiedWork(post, lookup) {
 }
 
 function postFingerprint(post) {
-  return [
-    normalize(post.title),
-    normalize(post.book),
-    normalize(post.source),
-    normalize(post.statement)
-  ].join('|');
+  return [normalize(post.title), normalize(post.book), normalize(post.source), normalize(post.statement)].join('|');
 }
 
-function uniqueSorted(values) {
-  return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, 'de'));
+function assertPublicOutput(bookList, scholarList) {
+  const errors = [];
+  const bookIds = new Set();
+  const normalizedBookTitles = new Map();
+  const scholarIds = new Set();
+  const normalizedScholarNames = new Map();
+
+  for (const book of bookList) {
+    if (!book.id || !book.title || !book.author || !book.category) errors.push({ type: 'incomplete-public-book', book });
+    if (book.verification !== 'verified') errors.push({ type: 'unverified-public-book', bookId: book.id });
+    if (/nicht verifiziert|unbekannt|nicht angegeben/i.test(`${book.author} ${book.title}`)) {
+      errors.push({ type: 'placeholder-visible-publicly', bookId: book.id });
+    }
+    if (bookIds.has(book.id)) errors.push({ type: 'duplicate-public-book-id', bookId: book.id });
+    bookIds.add(book.id);
+
+    const titleKey = normalize(book.title);
+    if (normalizedBookTitles.has(titleKey) && normalizedBookTitles.get(titleKey) !== book.id) {
+      errors.push({ type: 'duplicate-public-book-title', title: book.title, bookIds: [normalizedBookTitles.get(titleKey), book.id] });
+    }
+    normalizedBookTitles.set(titleKey, book.id);
+  }
+
+  for (const scholar of scholarList) {
+    if (!scholar.id || !scholar.name || scholar.role !== 'quotedScholar') errors.push({ type: 'invalid-public-scholar', scholar });
+    if (!scholar.citedWorkIds?.length || scholar.citedWorkIds.some((id) => !bookIds.has(id))) {
+      errors.push({ type: 'scholar-linked-to-hidden-work', scholarId: scholar.id });
+    }
+    if (scholarIds.has(scholar.id)) errors.push({ type: 'duplicate-public-scholar-id', scholarId: scholar.id });
+    scholarIds.add(scholar.id);
+
+    const nameKey = normalizePerson(scholar.name);
+    if (normalizedScholarNames.has(nameKey) && normalizedScholarNames.get(nameKey) !== scholar.id) {
+      errors.push({ type: 'duplicate-public-scholar-name', name: scholar.name, scholarIds: [normalizedScholarNames.get(nameKey), scholar.id] });
+    }
+    normalizedScholarNames.set(nameKey, scholar.id);
+  }
+
+  if (errors.length) {
+    const error = new Error(`Strict library validation failed with ${errors.length} public metadata error(s).`);
+    error.validationErrors = errors;
+    throw error;
+  }
 }
 
 function main() {
   const posts = readJson(POSTS_PATH);
   const authority = readJson(AUTHORITY_PATH);
-  const lookup = buildAuthorityLookup(authority);
+  const { lookup, authorityErrors } = buildAuthorityLookup(authority);
+
+  if (authorityErrors.length) {
+    fs.writeFileSync(REPORT_PATH, `${JSON.stringify({ generatedAt: new Date().toISOString(), authorityErrors }, null, 2)}\n`);
+    throw new Error(`Authority registry contains ${authorityErrors.length} invalid or colliding entry/entries.`);
+  }
 
   const books = new Map();
   const scholars = new Map();
@@ -103,12 +165,7 @@ function main() {
     const fingerprint = postFingerprint(post);
     if (fingerprint.replace(/\|/g, '')) {
       if (seenFingerprints.has(fingerprint)) {
-        duplicateContent.push({
-          keptId: seenFingerprints.get(fingerprint),
-          duplicateId: id,
-          title: post.title || '',
-          book: post.book || ''
-        });
+        duplicateContent.push({ keptId: seenFingerprints.get(fingerprint), duplicateId: id, title: post.title || '', book: post.book || '' });
         continue;
       }
       seenFingerprints.set(fingerprint, id);
@@ -122,7 +179,8 @@ function main() {
         rawBook: post.book || '',
         scholar: post.scholar || '',
         source: post.source || '',
-        reason: resolved.confidence
+        reason: resolved.confidence,
+        publicVisibility: 'hidden'
       });
       continue;
     }
@@ -130,18 +188,6 @@ function main() {
     const work = resolved.work;
     const quotedScholar = String(post.scholar || '').trim();
     const actualAuthor = String(work.author || '').trim();
-
-    if (!actualAuthor || actualAuthor === authority?.policy?.unverifiedAuthorLabel) {
-      quarantinedWorks.push({
-        postId: id,
-        title: post.title || '',
-        rawBook: post.book || '',
-        scholar: quotedScholar,
-        source: post.source || '',
-        reason: 'authority-entry-without-verified-author'
-      });
-      continue;
-    }
 
     if (quotedScholar && normalizePerson(quotedScholar) === normalizePerson(actualAuthor)) {
       const source = normalize(post.source);
@@ -207,6 +253,8 @@ function main() {
     .map((scholar) => ({ ...scholar, postCount: scholar.postIds.length }))
     .sort((a, b) => a.name.localeCompare(b.name, 'de'));
 
+  assertPublicOutput(bookList, scholarList);
+
   const generatedAt = new Date().toISOString();
   const publicPolicy = {
     verifiedOnly: true,
@@ -214,11 +262,12 @@ function main() {
     hideUnverifiedAuthors: true,
     neverInferAuthorFromScholar: true,
     deduplicateBooksByCanonicalId: true,
-    deduplicateScholarsByNormalizedName: true
+    deduplicateScholarsByNormalizedName: true,
+    failBuildOnPublicMetadataError: true
   };
 
   const output = {
-    version: 2,
+    version: 3,
     generatedAt,
     policy: publicPolicy,
     stats: {
@@ -234,21 +283,8 @@ function main() {
     scholars: scholarList
   };
 
-  const publicBooks = {
-    version: output.version,
-    generatedAt,
-    policy: publicPolicy,
-    categories: output.categories,
-    books: bookList
-  };
-
-  const publicScholars = {
-    version: output.version,
-    generatedAt,
-    policy: publicPolicy,
-    scholars: scholarList
-  };
-
+  const publicBooks = { version: output.version, generatedAt, policy: publicPolicy, categories: output.categories, books: bookList };
+  const publicScholars = { version: output.version, generatedAt, policy: publicPolicy, scholars: scholarList };
   const report = {
     generatedAt,
     publicOutputIsVerifiedOnly: true,
@@ -259,8 +295,10 @@ function main() {
       'Books are merged by canonical work id.',
       'Scholars are merged by normalized person name.',
       'Duplicate ids and identical content are excluded before grouping.',
-      'The public interface must read data/books-library.json and data/scholars-library.json only.'
+      'The public interface must read data/books-library.json and data/scholars-library.json only.',
+      'The deployment build fails if unverified, duplicated or incomplete metadata reaches public output.'
     ],
+    authorityErrors,
     duplicateIds,
     duplicateContent,
     quarantinedWorks,
@@ -276,4 +314,12 @@ function main() {
   console.log(`Removed duplicates: ${duplicateIds.length + duplicateContent.length}; quarantined: ${quarantinedWorks.length}.`);
 }
 
-main();
+try {
+  main();
+} catch (error) {
+  if (error.validationErrors) {
+    console.error(JSON.stringify({ validationErrors: error.validationErrors }, null, 2));
+  }
+  console.error(error.stack || error.message || error);
+  process.exit(1);
+}
