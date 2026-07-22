@@ -13,7 +13,11 @@ const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 
 const DEFAULT_PRAYER_ADVANCE_MINUTES = 15;
-const SCHEDULE_LOOKAHEAD_MINUTES = 90;
+const SCHEDULE_LOOKAHEAD_BASE_MINUTES = 90;
+const SCHEDULE_CRON_BUFFER_MINUTES = 5;
+// Vorab-Erinnerung liegt 15 Min vor der Gebetszeit – Planungsfenster muss das abdecken.
+const SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES;
+const SCHEDULE_LOOKAHEAD_MAX_MINUTES = 120;
 const SCHEDULE_GRACE_MINUTES = 15;
 const PRAYER_COPY_MIGRATION_UNTIL = Date.parse("2026-07-24T23:59:59Z");
 const PREVIOUS_COPY_VERSIONS = Object.freeze(["v3"]);
@@ -164,6 +168,20 @@ function formatHour(hour) {
 function normAdvance(value) {
   const number = Number(value);
   return [5, 10, 15].includes(number) ? number : DEFAULT_PRAYER_ADVANCE_MINUTES;
+}
+
+function resolveScheduleLookahead(env) {
+  const configured = Number(env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || SCHEDULE_LOOKAHEAD_MINUTES);
+  const base = Number.isFinite(configured) ? configured : SCHEDULE_LOOKAHEAD_MINUTES;
+  return Math.min(SCHEDULE_LOOKAHEAD_MAX_MINUTES, Math.max(30, base));
+}
+
+function resolvePrayerSlotSendAfter(slot, entryAt, now) {
+  if (slot.mode !== "advance" || !(entryAt instanceof Date) || entryAt <= now) return slot.sendAfter;
+  if (slot.sendAfter > now) return slot.sendAfter;
+  // Vorab-Zeit vorbei, Gebetszeit noch nicht – Erinnerung sofort nachholen.
+  if (slot.sendAfter < entryAt) return new Date(now.getTime() + 1500);
+  return slot.sendAfter;
 }
 
 function normTahajjud(value) {
@@ -578,8 +596,7 @@ async function persistPrayerStatus(env, statusReport, deps) {
 
 export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   const onlySubscriptionId = String(options.subscriptionId || options.subscription_id || "").trim();
-  const configuredLookahead = Number(env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || SCHEDULE_LOOKAHEAD_MINUTES);
-  const lookahead = Math.min(90, Math.max(15, Number.isFinite(configuredLookahead) ? configuredLookahead : SCHEDULE_LOOKAHEAD_MINUTES));
+  const lookahead = resolveScheduleLookahead(env);
   const configuredGrace = Number(env.PRAYER_SCHEDULE_GRACE_MINUTES || SCHEDULE_GRACE_MINUTES);
   const grace = Math.min(30, Math.max(0, Number.isFinite(configuredGrace) ? configuredGrace : SCHEDULE_GRACE_MINUTES));
 
@@ -658,16 +675,23 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
         }
 
         for (const slot of slots) {
-          if (slot.sendAfter < windowStart) {
-            stats.skippedPast += 1;
-            stats.skippedPastDetails.push({
-              key: prayer.key,
-              mode: slot.mode,
-              sendAfter: slot.sendAfter.toISOString(),
-              time: prayer.time == null ? null : formatHour(prayer.time),
-              timeZone: group.timeZone
-            });
-            continue;
+          const plannedSendAfter = resolvePrayerSlotSendAfter(slot, entryAt, now);
+          if (plannedSendAfter < windowStart) {
+            if (slot.mode === "advance" && entryAt > now) {
+              slot.sendAfter = new Date(now.getTime() + 1500);
+            } else {
+              stats.skippedPast += 1;
+              stats.skippedPastDetails.push({
+                key: prayer.key,
+                mode: slot.mode,
+                sendAfter: slot.sendAfter.toISOString(),
+                time: prayer.time == null ? null : formatHour(prayer.time),
+                timeZone: group.timeZone
+              });
+              continue;
+            }
+          } else {
+            slot.sendAfter = plannedSendAfter;
           }
           if (slot.sendAfter > windowEnd) {
             stats.skippedWindow += 1;

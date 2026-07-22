@@ -61,7 +61,7 @@ requireText("Scheduler", scheduler, [
   'app_environment=eq.production',
   'userSource: "supabase-production-only"',
   'PRAYER_PUSH_COPY_VERSION',
-  'SCHEDULE_LOOKAHEAD_MINUTES = 90',
+  'SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES',
   'dedupeRegistrations',
   'writePrayerStatusToStore',
   'environment: "production"'

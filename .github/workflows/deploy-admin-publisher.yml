@@ -120,7 +120,7 @@ jobs:
           if (result.status?.appEnvironment !== "production") {
             throw new Error(`Falsche Push-Umgebung aktiv: ${result.status?.appEnvironment || "fehlt"}`);
           }
-          if (Number(result.status?.lookaheadMinutes) > 90) {
+          if (Number(result.status?.lookaheadMinutes) > 120) {
             throw new Error(`Planungsfenster zu groß: ${result.status?.lookaheadMinutes}`);
           }
           console.log(`Gebets-Push-Livestatus aktuell: ${result.status.updatedAt}`);
