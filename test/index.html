@@ -15582,7 +15582,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v318";
+const APP_BUILD_ID="app-shell-v319";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -15924,7 +15924,7 @@ function ensureCanonicalSourceLibrary(){
       return;
     }
     const s=document.createElement("script");
-    s.src="/test/assets/library/canonical-source-library.js?v=1";
+    s.src="/test/assets/library/canonical-source-library.js?v=3";
     s.defer=true;
     s.onload=()=>{
       if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}
@@ -16730,6 +16730,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
   </script>
   <script src="/assets/dar-account-visibility.js?v=14"></script>
-<script src="/test/assets/library/canonical-source-library.js?v=2"></script>
+<script src="/test/assets/library/canonical-source-library.js?v=3"></script>
 </body>
 </html>

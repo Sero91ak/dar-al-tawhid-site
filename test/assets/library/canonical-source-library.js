@@ -170,43 +170,47 @@
     const style = document.createElement("style");
     style.id = "canonical-source-library-styles";
     style.textContent = `
-      .qsrc-shell{display:grid;gap:14px;margin-top:4px}
-      .qsrc-tabs{display:flex;gap:8px;flex-wrap:wrap}
-      .qsrc-tab{border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 92%,transparent);color:inherit;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+      .qsrc-shell{display:grid;gap:6px;margin-top:2px}
+      .qsrc-sticky{position:sticky;top:0;z-index:18;display:grid;gap:8px;padding:6px 0 10px;margin:0 -2px;background:color-mix(in srgb,var(--bg,#111) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line2,rgba(127,127,127,.16))}
+      .qsrc-tabs{display:flex;gap:6px}
+      .qsrc-tab{border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 92%,transparent);color:inherit;border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
       .qsrc-tab.is-active{border-color:var(--gold2,#c9a227);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,#c9a227) 35%,transparent)}
-      .qsrc-toolbar{display:grid;gap:10px}
-      .qsrc-filters{display:flex;gap:8px;flex-wrap:wrap}
-      .qsrc-filter{border:1px solid var(--line2,rgba(127,127,127,.22));background:transparent;color:inherit;border-radius:999px;padding:6px 11px;font:inherit;font-size:12px;cursor:pointer}
-      .qsrc-filter.is-active{border-color:var(--gold2,#c9a227);background:color-mix(in srgb,var(--gold2,#c9a227) 12%,transparent)}
-      .qsrc-grid{display:grid;gap:10px}
-      .qsrc-card{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line2,rgba(127,127,127,.22));border-radius:16px;padding:14px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent);color:inherit;text-align:left;width:100%;cursor:pointer}
+      .qsrc-toolbar{display:grid;gap:8px}
+      .qsrc-search-row{align-items:center}
+      .qsrc-search{min-height:38px;padding:8px 11px;font-size:13px}
+      .qsrc-filter-bar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 0 4px}
+      .qsrc-filter-bar::-webkit-scrollbar{display:none}
+      .qsrc-filter{flex:0 0 auto;border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:999px;padding:6px 10px;font:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+      .qsrc-filter.is-active{border-color:var(--gold2,#c9a227);background:color-mix(in srgb,var(--gold2,#c9a227) 14%,transparent)}
+      .qsrc-filter-count{opacity:.72;font-weight:800;margin-left:4px}
+      .qsrc-grid{display:grid;gap:6px}
+      .qsrc-grid-compact{padding-top:2px}
+      .qsrc-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2,rgba(127,127,127,.18));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent);color:inherit;text-align:left;width:100%;cursor:pointer}
+      .qsrc-card-compact{min-height:0}
       .qsrc-card.is-hidden{display:none!important}
-      .qsrc-card-icon{font-size:1.35rem;line-height:1}
       .qsrc-card-body{min-width:0}
-      .qsrc-card-kicker{display:block;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#888);margin-bottom:4px}
-      .qsrc-card-title{display:block;font-family:var(--serif,serif);font-size:clamp(16px,4vw,19px);line-height:1.2;color:var(--premium-title,var(--gold2,#c9a227));margin:0 0 6px;overflow-wrap:anywhere}
-      .qsrc-card-line{display:block;font-size:13px;color:var(--muted,#888);overflow-wrap:anywhere}
-      .qsrc-card-line strong{font-weight:700;color:var(--text,inherit)}
-      .qsrc-card-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-      .qsrc-pill{font-size:11px;border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:999px;padding:3px 8px;color:var(--muted,#888)}
-      .qsrc-chevron{opacity:.45;font-size:1.2rem}
-      .qsrc-empty,.qsrc-error,.qsrc-loading{border:1px dashed var(--line2,rgba(127,127,127,.25));border-radius:16px;padding:18px;text-align:center;color:var(--muted,#888)}
-      .qsrc-error button,.qsrc-retry{margin-top:12px;border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:12px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}
-      .qsrc-detail{display:grid;gap:14px}
-      .qsrc-detail-block{border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:16px;padding:14px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent)}
-      .qsrc-detail-block h3{margin:0 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#888)}
-      .qsrc-detail-block p{margin:0;line-height:1.45}
-      .qsrc-alias-list,.qsrc-link-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-      .qsrc-chip{font-size:12px;border-radius:999px;padding:6px 10px;background:rgba(127,127,127,.1)}
-      .qsrc-post-list{display:grid;gap:8px}
-      .lib-canonical-wrap{margin:24px 0 8px;padding-top:22px;border-top:1px solid rgba(127,127,127,.22)}
-      .lib-canonical-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px}
-      .lib-canonical-head h3{margin:0;font-size:1.15rem}
-      .lib-canonical-head p{margin:4px 0 0;opacity:.72;font-size:.9rem;max-width:52ch}
-      .lib-canonical-count{white-space:nowrap;font-size:.82rem;opacity:.68}
-      .lib-canonical-actions{margin-top:12px}
-      .lib-canonical-open{border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:12px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}
-      @media(max-width:640px){.lib-canonical-head{align-items:flex-start;flex-direction:column}}
+      .qsrc-card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+      .qsrc-card-title{display:block;font-family:var(--serif,serif);font-size:15px;line-height:1.22;color:var(--premium-title,var(--gold2,#c9a227));overflow-wrap:anywhere}
+      .qsrc-card-count{flex:0 0 auto;font-size:10px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;color:var(--muted,#888);white-space:nowrap;padding-top:2px}
+      .qsrc-card-sub{display:block;margin-top:3px;font-size:11px;line-height:1.3;color:var(--muted,#888);overflow-wrap:anywhere}
+      .qsrc-chevron{opacity:.4;font-size:1rem;line-height:1}
+      .qsrc-empty,.qsrc-error,.qsrc-loading{border:1px dashed var(--line2,rgba(127,127,127,.25));border-radius:12px;padding:14px;text-align:center;color:var(--muted,#888);font-size:13px}
+      .qsrc-error button,.qsrc-retry{margin-top:10px;border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
+      .qsrc-detail{display:grid;gap:12px}
+      .qsrc-detail-block{border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:12px;padding:12px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent)}
+      .qsrc-detail-block h3{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#888)}
+      .qsrc-detail-block p{margin:0;line-height:1.4;font-size:13px}
+      .qsrc-alias-list,.qsrc-link-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+      .qsrc-chip{font-size:11px;border-radius:999px;padding:5px 9px;background:rgba(127,127,127,.1)}
+      .qsrc-post-list{display:grid;gap:6px}
+      .lib-canonical-wrap{margin:20px 0 6px;padding-top:18px;border-top:1px solid rgba(127,127,127,.22)}
+      .lib-canonical-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
+      .lib-canonical-head h3{margin:0;font-size:1.05rem}
+      .lib-canonical-head p{margin:4px 0 0;opacity:.72;font-size:.86rem;max-width:52ch}
+      .lib-canonical-count{white-space:nowrap;font-size:.8rem;opacity:.68}
+      .lib-canonical-actions{margin-top:10px}
+      .lib-canonical-open{border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
+      @media(max-width:640px){.lib-canonical-head{align-items:flex-start;flex-direction:column}.qsrc-card-title{font-size:14px}}
     `;
     document.head.appendChild(style);
   }
@@ -246,31 +250,38 @@
     return `${setPageHeader("Quellenbibliothek", "Geprüfte historische Werke und zitierte Gelehrte", "Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-error"><p>Die Quellenbibliothek konnte momentan nicht geladen werden.</p><button type="button" class="qsrc-retry" data-qsrc-retry>Erneut versuchen</button></div></section>`;
   }
 
+  function categoryBookCounts() {
+    const counts = new Map();
+    state.books.forEach((book) => {
+      const cat = book.category || "Sonstige";
+      counts.set(cat, (counts.get(cat) || 0) + 1);
+    });
+    return counts;
+  }
+
   function renderCategoryFilters() {
-    const cats = ["", ...state.categories];
-    return `<div class="qsrc-filters" role="toolbar" aria-label="Kategorien">${cats.map((cat) => {
-      const label = cat || "Alle Bücher";
+    const counts = categoryBookCounts();
+    const cats = [...counts.keys()].sort((a, b) => a.localeCompare(b, "de"));
+    const allCount = state.books.length;
+    const buttons = [`<button type="button" class="qsrc-filter${state.ui.category === "" ? " is-active" : ""}" data-qsrc-category="">Alle <span class="qsrc-filter-count">${allCount}</span></button>`];
+    cats.forEach((cat) => {
       const active = state.ui.category === cat ? " is-active" : "";
-      return `<button type="button" class="qsrc-filter${active}" data-qsrc-category="${esc(cat)}">${esc(label)}</button>`;
-    }).join("")}</div>`;
+      buttons.push(`<button type="button" class="qsrc-filter${active}" data-qsrc-category="${esc(cat)}">${esc(cat)} <span class="qsrc-filter-count">${counts.get(cat) || 0}</span></button>`);
+    });
+    return `<div class="qsrc-filter-bar" role="toolbar" aria-label="Kategorien">${buttons.join("")}</div>`;
   }
 
   function renderBookCard(book) {
     const search = bookSearchBlob(book);
-    const scholars = (book.quotedScholars || []).slice(0, 2);
-    const scholarHtml = scholars.length
-      ? `<span class="qsrc-pill">Zitierte Gelehrte: ${scholars.map((name) => esc(name)).join(", ")}</span>`
-      : "";
-    return `<button type="button" class="qsrc-card" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}">
-      <span class="qsrc-card-icon" aria-hidden="true">📖</span>
+    const postCount = Number(book.postCount || 0);
+    const postLabel = postCount ? `${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}` : "Katalog";
+    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}">
       <span class="qsrc-card-body">
-        <span class="qsrc-card-kicker">${esc(book.category || "Werk")}</span>
-        <span class="qsrc-card-title">${esc(book.title)}</span>
-        <span class="qsrc-card-line"><strong>Autor:</strong> ${esc(book.author)}</span>
-        <span class="qsrc-card-meta">
-          <span class="qsrc-pill">${Number(book.postCount || 0)} ${Number(book.postCount || 0) === 1 ? "Beitrag" : "Beiträge"}</span>
-          ${scholarHtml}
+        <span class="qsrc-card-row">
+          <span class="qsrc-card-title">${esc(book.title)}</span>
+          <span class="qsrc-card-count">${esc(postLabel)}</span>
         </span>
+        <span class="qsrc-card-sub">${esc(book.author)} · ${esc(book.category || "Werk")}</span>
       </span>
       <span class="qsrc-chevron" aria-hidden="true">›</span>
     </button>`;
@@ -280,19 +291,17 @@
     const works = (scholar.citedWorkIds || [])
       .map((id) => state.booksById.get(id))
       .filter(Boolean)
-      .slice(0, 3);
+      .slice(0, 2);
     const workTitles = works.map((book) => book.title).join(", ");
     const search = scholarSearchBlob(scholar);
-    return `<button type="button" class="qsrc-card" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}">
-      <span class="qsrc-card-icon" aria-hidden="true">👤</span>
+    const postCount = Number(scholar.postCount || 0);
+    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}">
       <span class="qsrc-card-body">
-        <span class="qsrc-card-kicker">Zitierter Gelehrter</span>
-        <span class="qsrc-card-title">${esc(scholar.name)}</span>
-        <span class="qsrc-card-line"><strong>Rolle:</strong> zitierter Gelehrter</span>
-        <span class="qsrc-card-meta">
-          <span class="qsrc-pill">${Number(scholar.postCount || 0)} ${Number(scholar.postCount || 0) === 1 ? "Beitrag" : "Beiträge"}</span>
-          ${workTitles ? `<span class="qsrc-pill">${esc(workTitles)}</span>` : ""}
+        <span class="qsrc-card-row">
+          <span class="qsrc-card-title">${esc(scholar.name)}</span>
+          <span class="qsrc-card-count">${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}</span>
         </span>
+        <span class="qsrc-card-sub">zitierter Gelehrter${workTitles ? ` · ${esc(workTitles)}` : ""}</span>
       </span>
       <span class="qsrc-chevron" aria-hidden="true">›</span>
     </button>`;
@@ -320,18 +329,20 @@
 
     return `${setPageHeader("Quellenbibliothek", "Historische Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.", "Quellenbibliothek")}
 <section class="qsrc-shell">
-  <div class="qsrc-tabs" role="tablist">
-    <button type="button" class="qsrc-tab${activeTab === "books" ? " is-active" : ""}" data-qsrc-tab="books" role="tab" aria-selected="${activeTab === "books"}">Bücher</button>
-    <button type="button" class="qsrc-tab${activeTab === "scholars" ? " is-active" : ""}" data-qsrc-tab="scholars" role="tab" aria-selected="${activeTab === "scholars"}">Gelehrte</button>
-  </div>
-  <div class="qsrc-toolbar">
-    <div class="books-library-toolbar">
-      <input id="qsrcSearchInput" class="books-library-search" type="search" placeholder="Titel, Autor, Kategorie oder Gelehrten suchen…" autocomplete="off" enterkeyhint="search" value="${esc(state.ui.query)}">
-      <span id="qsrcTotal" class="books-library-total">${esc(totalLabel)}</span>
+  <div class="qsrc-sticky">
+    <div class="qsrc-tabs" role="tablist">
+      <button type="button" class="qsrc-tab${activeTab === "books" ? " is-active" : ""}" data-qsrc-tab="books" role="tab" aria-selected="${activeTab === "books"}">Bücher</button>
+      <button type="button" class="qsrc-tab${activeTab === "scholars" ? " is-active" : ""}" data-qsrc-tab="scholars" role="tab" aria-selected="${activeTab === "scholars"}">Gelehrte</button>
     </div>
-    ${activeTab === "books" ? renderCategoryFilters() : ""}
+    <div class="qsrc-toolbar">
+      <div class="books-library-toolbar qsrc-search-row">
+        <input id="qsrcSearchInput" class="books-library-search qsrc-search" type="search" placeholder="Suchen…" autocomplete="off" enterkeyhint="search" value="${esc(state.ui.query)}">
+        <span id="qsrcTotal" class="books-library-total">${esc(totalLabel)}</span>
+      </div>
+      ${activeTab === "books" ? renderCategoryFilters() : ""}
+    </div>
   </div>
-  <div class="qsrc-grid" id="qsrcResults">${listHtml}</div>
+  <div class="qsrc-grid qsrc-grid-compact" id="qsrcResults">${listHtml}</div>
 </section>`;
   }
 

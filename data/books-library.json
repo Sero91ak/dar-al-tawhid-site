@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generatedAt": "2026-07-22T17:11:21.452Z",
+  "generatedAt": "2026-07-22T17:20:58.336Z",
   "policy": {
     "verifiedOnly": true,
     "hideUnverifiedWorks": true,
@@ -11,10 +11,90 @@
     "failBuildOnPublicMetadataError": true
   },
   "categories": [
+    "Āthār und Ḥadīṯ",
+    "Biografien",
+    "Biografien und Āthār",
+    "Fatāwā und ʿAqīdah",
     "Ḥadīṯ",
-    "ʿAqīdah und Sunnah"
+    "Ḥadīṯ und Fiqh",
+    "Rijāl und Biografien",
+    "Tafsīr",
+    "Tawḥīd",
+    "Wissen und Adab",
+    "ʿAqīdah und Sunnah",
+    "ʿAqīdah und Widerlegungen"
   ],
   "books": [
+    {
+      "id": "musannaf-ibn-abi-shaybah",
+      "title": "Muṣannaf Ibn Abī Shaybah",
+      "author": "Abū Bakr ʿAbd Allāh ibn Muḥammad Ibn Abī Shaybah",
+      "category": "Āthār und Ḥadīṯ",
+      "aliases": [
+        "Musannaf Ibn Abi Shaybah",
+        "al-Musannaf von Ibn Abi Shaybah"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "musannaf-abd-ar-razzaq",
+      "title": "Muṣannaf ʿAbd ar-Razzāq",
+      "author": "ʿAbd ar-Razzāq ibn Hammām aṣ-Ṣanʿānī",
+      "category": "Āthār und Ḥadīṯ",
+      "aliases": [
+        "Musannaf Abd ar-Razzaq",
+        "al-Musannaf von Abd ar-Razzaq"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "siyar-alam-an-nubala",
+      "title": "Siyar Aʿlām an-Nubalāʾ",
+      "author": "Shams ad-Dīn adh-Dhahabī",
+      "category": "Biografien",
+      "aliases": [
+        "Siyar Alam an-Nubala",
+        "Siyar A'lam al-Nubala"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "hilyat-al-awliya",
+      "title": "Ḥilyat al-Awliyāʾ wa Ṭabaqāt al-Aṣfiyāʾ",
+      "author": "Abū Nuʿaym al-Aṣbahānī",
+      "category": "Biografien und Āthār",
+      "aliases": [
+        "Hilyat al-Awliya",
+        "Ḥilyat al-Awliyāʾ"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "majmu-al-fatawa",
+      "title": "Majmūʿ al-Fatāwā",
+      "author": "Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah",
+      "category": "Fatāwā und ʿAqīdah",
+      "aliases": [
+        "Majmu al-Fatawa",
+        "Majmūʿ Fatāwā Ibn Taymiyyah"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
     {
       "id": "sunan-abi-dawud",
       "title": "Sunan Abī Dāwūd",
@@ -32,6 +112,34 @@
         "Prophet ﷺ"
       ],
       "postCount": 1
+    },
+    {
+      "id": "musnad-ahmad",
+      "title": "Musnad Aḥmad",
+      "author": "Aḥmad ibn Ḥanbal",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Musnad Imam Ahmad",
+        "Musnad Aḥmad ibn Ḥanbal"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "sunan-an-nasai",
+      "title": "Sunan an-Nasāʾī",
+      "author": "Aḥmad ibn Shuʿayb an-Nasāʾī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sunan an-Nasai",
+        "al-Mujtabā"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
     },
     {
       "id": "sahih-al-bukhari",
@@ -68,6 +176,19 @@
         "Prophet ﷺ"
       ],
       "postCount": 18
+    },
+    {
+      "id": "sunan-ibn-majah",
+      "title": "Sunan Ibn Mājah",
+      "author": "Muḥammad ibn Yazīd Ibn Mājah al-Qazwīnī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sunan Ibn Majah"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
     },
     {
       "id": "jami-at-tirmidhi",
@@ -123,6 +244,90 @@
       "postCount": 14
     },
     {
+      "id": "muwatta-malik",
+      "title": "al-Muwaṭṭaʾ",
+      "author": "Mālik ibn Anas",
+      "category": "Ḥadīṯ und Fiqh",
+      "aliases": [
+        "Muwatta Malik",
+        "al-Muwatta"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "tahdhib-al-kamal",
+      "title": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+      "author": "Jamāl ad-Dīn al-Mizzī",
+      "category": "Rijāl und Biografien",
+      "aliases": [
+        "Tahdhib al-Kamal"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "tafsir-ibn-kathir",
+      "title": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "author": "Ismāʿīl ibn ʿUmar Ibn Kathīr",
+      "category": "Tafsīr",
+      "aliases": [
+        "Tafsir Ibn Kathir",
+        "Tafsīr Ibn Kathīr"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "tafsir-at-tabari",
+      "title": "Jāmiʿ al-Bayān ʿan Taʾwīl Āy al-Qurʾān",
+      "author": "Muḥammad ibn Jarīr aṭ-Ṭabarī",
+      "category": "Tafsīr",
+      "aliases": [
+        "Tafsir at-Tabari",
+        "Tafsīr aṭ-Ṭabarī",
+        "Jami al-Bayan"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "kitab-at-tawhid-miaw",
+      "title": "Kitāb at-Tawḥīd",
+      "author": "Muḥammad ibn ʿAbd al-Wahhāb",
+      "category": "Tawḥīd",
+      "aliases": [
+        "Kitab at-Tawhid",
+        "Das Buch des Tawhid"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "jami-bayan-al-ilm",
+      "title": "Jāmiʿ Bayān al-ʿIlm wa Faḍlih",
+      "author": "Ibn ʿAbd al-Barr",
+      "category": "Wissen und Adab",
+      "aliases": [
+        "Jami Bayan al-Ilm",
+        "Jāmiʿ Bayān al-ʿIlm"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
       "id": "ash-shariah-al-ajurri",
       "title": "ash-Sharīʿah",
       "author": "Abū Bakr al-Ājurrī",
@@ -130,7 +335,8 @@
       "aliases": [
         "al-Shari'ah",
         "aš-Šarīʿah",
-        "Kitab ash-Shariah"
+        "Kitab ash-Shariah",
+        "ash-Sharīʿah von al-Ājurrī"
       ],
       "verification": "verified",
       "postIds": [
@@ -142,13 +348,28 @@
       "postCount": 1
     },
     {
+      "id": "as-sunnah-al-khallal",
+      "title": "as-Sunnah von al-Khallāl",
+      "author": "Abū Bakr al-Khallāl",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "Kitāb as-Sunnah al-Khallal",
+        "as-Sunnah al-Khallāl"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
       "id": "sharh-usul-itiqad-lalakai",
       "title": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Jamāʿah",
       "author": "Hibat Allāh al-Lālakāʾī",
       "category": "ʿAqīdah und Sunnah",
       "aliases": [
         "Sharh Usul I'tiqad",
-        "Uṣūl Iʿtiqād al-Lālakāʾī"
+        "Uṣūl Iʿtiqād al-Lālakāʾī",
+        "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah"
       ],
       "verification": "verified",
       "postIds": [
@@ -171,6 +392,61 @@
         "ʿAbdullāh ibn Masʿūd"
       ],
       "postCount": 10
+    },
+    {
+      "id": "al-ibanah-ibn-battah",
+      "title": "al-Ibānah al-Kubrā",
+      "author": "Ibn Baṭṭah al-ʿUkbarī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "al-Ibanah",
+        "al-Ibānah von Ibn Baṭṭah"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "as-sunnah-abdullah-ahmad",
+      "title": "as-Sunnah",
+      "author": "ʿAbd Allāh ibn Aḥmad ibn Ḥanbal",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "Kitāb as-Sunnah von ʿAbd Allāh ibn Aḥmad",
+        "Sunnah Abdullah ibn Ahmad"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "dar-taarud-al-aql-wan-naql",
+      "title": "Darʾ Taʿāruḍ al-ʿAql wa-n-Naql",
+      "author": "Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah",
+      "category": "ʿAqīdah und Widerlegungen",
+      "aliases": [
+        "Dar Ta'arud al-Aql wan-Naql"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
+    },
+    {
+      "id": "ar-radd-ala-al-jahmiyyah-ad-darimi",
+      "title": "ar-Radd ʿalā al-Jahmiyyah",
+      "author": "ʿUthmān ibn Saʿīd ad-Dārimī",
+      "category": "ʿAqīdah und Widerlegungen",
+      "aliases": [
+        "Radd ala al-Jahmiyyah",
+        "Widerlegung der Jahmiyyah von ad-Darimi"
+      ],
+      "verification": "verified",
+      "postIds": [],
+      "quotedScholars": [],
+      "postCount": 0
     }
   ]
 }
