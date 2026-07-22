@@ -9950,13 +9950,13 @@ body.is-home-route .view-head h2.home-start-title,
 }
 </style>
 <style id="home-overview-polish-v321">
-/* Startseite: kompakter Kopf, größere Überschrift, edler Hijri-Kalender */
+/* Startseite: kompakter Kopf, größere Überschrift, Tageskalender */
 body.is-home-route #appView.view{padding-top:0!important;margin-top:0!important}
-body.is-home-route .top-shell{margin-bottom:8px!important}
-body.is-home-route .view{padding-top:12px!important}
-body.is-home-route .view-head{margin-bottom:6px!important;padding-bottom:4px!important}
-body.is-home-route .view-head.view-head-home{padding-bottom:3px!important}
-body.is-home-route .view-head .eyebrow{margin-bottom:2px!important;font-size:7.5px!important;letter-spacing:.14em!important}
+body.is-home-route .top-shell{margin-bottom:4px!important}
+body.is-home-route .view{padding-top:6px!important}
+body.is-home-route .view-head{margin-bottom:4px!important;padding-bottom:0!important;border-bottom:none!important}
+body.is-home-route .view-head.view-head-home{padding-bottom:0!important}
+body.is-home-route .view-head .eyebrow{display:none!important;height:0!important;margin:0!important;padding:0!important}
 body.is-home-route .view-head h2.home-start-title,
 .view-head-home-row h2.home-start-title{
   font-size:clamp(28px,6.8vw,40px)!important;
@@ -9964,37 +9964,27 @@ body.is-home-route .view-head h2.home-start-title,
   line-height:1.02!important;
   letter-spacing:.012em!important;
 }
-.view-head-home-row{gap:4px 12px!important;align-items:end!important}
-.home-hijri-cal{
-  display:flex;flex-direction:column;align-items:stretch;width:clamp(74px,18vw,90px);min-width:74px;
-  border:1px solid rgba(214,183,106,.58);border-radius:13px 13px 11px 11px;
-  background:linear-gradient(180deg,rgba(34,26,18,.97) 0%,rgba(10,8,6,.99) 100%);
-  box-shadow:0 10px 22px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,248,220,.1);
-  padding:0;overflow:hidden;cursor:pointer;flex:0 0 auto;color:inherit;font:inherit;position:relative;
+.view-head-home-row{gap:6px 10px!important;align-items:center!important}
+.home-hijri-desk{
+  display:flex;flex-direction:column;align-items:stretch;width:clamp(104px,25vw,124px);min-width:104px;max-width:128px;
+  border:1px solid #c4ad82;border-radius:8px 8px 10px 10px;
+  background:linear-gradient(180deg,#faf3e4 0%,#efe2c8 100%);
+  box-shadow:0 5px 14px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.68);
+  padding:0;overflow:hidden;cursor:pointer;flex:0 0 auto;color:#3a2a18;font:inherit;position:relative;
 }
-.home-hijri-cal::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:5px;pointer-events:none;
-  background:repeating-linear-gradient(90deg,transparent 0 12px,rgba(214,183,106,.34) 12px 14px,transparent 14px 28px);
-  opacity:.55;
+.home-hijri-desk-ribbon{
+  display:flex;align-items:center;justify-content:space-between;gap:4px;padding:4px 7px 3px;
+  background:linear-gradient(180deg,#a63f35,#7f2e28);color:#fff8ef;font-family:var(--font-ui);
+  font-size:8.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1;
 }
-.home-hijri-cal-month{
-  display:block;text-align:center;font-family:var(--serif);font-size:clamp(10px,2.6vw,11.5px);font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--gold2);
-  background:linear-gradient(180deg,rgba(214,183,106,.3),rgba(214,183,106,.11));
-  border-bottom:1px solid rgba(214,183,106,.42);padding:7px 4px 5px;line-height:1;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+.home-hijri-desk-year{font-size:8px;font-weight:750;opacity:.94;letter-spacing:.04em}
+.home-hijri-desk-date{
+  display:block;text-align:center;padding:7px 6px 6px;font-family:var(--serif);
+  font-size:clamp(11.5px,3vw,12.5px);font-weight:700;line-height:1.18;color:#3a2a18;
+  letter-spacing:.01em;font-variant-numeric:tabular-nums;
 }
-.home-hijri-cal-day{
-  display:flex;align-items:center;justify-content:center;min-height:clamp(44px,11vw,54px);
-  font-family:var(--serif);font-size:clamp(34px,8.4vw,42px);font-weight:700;line-height:1;color:var(--cream);
-  font-variant-numeric:tabular-nums;letter-spacing:-.02em;padding:3px 2px 1px;
-}
-.home-hijri-cal-year{
-  display:block;text-align:center;font-family:var(--font-ui);font-size:clamp(9px,2.4vw,10px);font-weight:750;
-  letter-spacing:.08em;color:var(--muted2);border-top:1px dashed rgba(214,183,106,.3);padding:5px 4px 6px;line-height:1.1;
-}
-.home-hijri-cal:hover{filter:brightness(1.06);border-color:rgba(239,215,142,.68)}
-.home-hijri-cal:active{transform:translateY(1px)}
+.home-hijri-desk:hover{filter:brightness(1.03);box-shadow:0 6px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.72)}
+.home-hijri-desk:active{transform:translateY(1px)}
 .highlight-sections .recommended-box,.highlight-sections .daily-box{
   padding-bottom:11px!important;border-radius:16px!important;border:1px solid rgba(214,183,106,.22)!important;
 }
@@ -10011,8 +10001,8 @@ body.is-home-route .view-head h2.home-start-title,
 @media(max-width:520px){
   body.is-home-route .view-head h2.home-start-title,
   .view-head-home-row h2.home-start-title{font-size:clamp(26px,6.4vw,34px)!important}
-  .home-hijri-cal{width:clamp(70px,17vw,82px);min-width:70px}
-  .home-hijri-cal-day{min-height:42px;font-size:clamp(30px,7.8vw,36px)}
+  .home-hijri-desk{width:clamp(100px,24vw,118px);min-width:100px}
+  .home-hijri-desk-date{font-size:11px;padding:6px 5px 5px}
 }
 </style>
 <style id="share-brand-borders-v314">
@@ -10943,7 +10933,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/";return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-cal" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-cal-month" data-hijri-month-text>—</span><span class="home-hijri-cal-day" data-hijri-day-num aria-hidden="true">—</span><span class="home-hijri-cal-year" data-hijri-year-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}"><div class="eyebrow">${esc(eyebrow)}</div>${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-desk" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-desk-ribbon"><span data-hijri-month-text>—</span><span class="home-hijri-desk-year" data-hijri-year-text>—</span></span><span class="home-hijri-desk-date" data-hijri-date-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -14135,7 +14125,7 @@ function islamicCalendarForDate(date){const d=date instanceof Date?date:new Date
 function islamicCalendarNow(){return islamicCalendarForDate(new Date())}
 function hijriTodayLine(){try{const t=islamicCalendarForDate(new Date());return `Heute ${t.day}. ${t.month} ${t.year}`}catch(e){return "Islamisches Datum"}}
 function hijriTodayTomorrowLine(){try{const t=islamicCalendarForDate(new Date());const tm=islamicCalendarForDate(new Date(Date.now()+86400000));return `Heute ${t.day}. ${t.month} ${t.year} · Morgen ${tm.day}. ${tm.month} ${tm.year}`}catch(e){return "Islamisches Datum"}}
-function updateHijriHeaderDate(){const nodes=[...document.querySelectorAll("[data-hijri-today]")];if(!nodes.length)return;try{const h=islamicCalendarNow();const text=`${h.day}. ${h.month} ${h.year} AH`;const yearText=`${h.year} AH`;nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent=String(h.day);if(monthEl)monthEl.textContent=String(h.month);if(yearEl)yearEl.textContent=yearText;if(dateEl)dateEl.textContent=text;else if(!monthEl&&!dayEl)el.textContent=text;el.setAttribute("aria-label",`Islamisches Datum heute: ${text}`)})}catch(e){nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent="—";if(monthEl)monthEl.textContent="—";if(yearEl)yearEl.textContent="—";if(dateEl)dateEl.textContent="Islamisches Datum";else if(!monthEl&&!dayEl)el.textContent="Islamisches Datum"})}}
+function updateHijriHeaderDate(){const nodes=[...document.querySelectorAll("[data-hijri-today]")];if(!nodes.length)return;try{const h=islamicCalendarNow();const text=`${h.day}. ${h.month} ${h.year} AH`;const yearText=String(h.year);nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent=String(h.day);if(monthEl)monthEl.textContent=String(h.month);if(yearEl)yearEl.textContent=yearText;if(dateEl)dateEl.textContent=text;else if(!monthEl&&!dayEl)el.textContent=text;el.setAttribute("aria-label",`Islamisches Datum heute: ${text}`)})}catch(e){nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent="—";if(monthEl)monthEl.textContent="—";if(yearEl)yearEl.textContent="—";if(dateEl)dateEl.textContent="Islamisches Datum";else if(!monthEl&&!dayEl)el.textContent="Islamisches Datum"})}}
 function gregorianToHijri(date){const d=date.getUTCDate();const m=date.getUTCMonth()+1;const y=date.getUTCFullYear();const jd=Math.floor((1461*(y+4800+Math.floor((m-14)/12)))/4)+Math.floor((367*(m-2-12*Math.floor((m-14)/12)))/12)-Math.floor((3*Math.floor((y+4900+Math.floor((m-14)/12))/100))/4)+d-32075;let l=jd-1948440+10632;let n=Math.floor((l-1)/10631);l=l-10631*n+354;let j=(Math.floor((10985-l)/5316))*Math.floor((50*l)/17719)+Math.floor(l/5670)*Math.floor((43*l)/15238);l=l-(Math.floor((30-j)/15))*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;let month=Math.floor((24*l)/709);let day=l-Math.floor((709*month)/24);let year=30*n+j-30;return{day,month,year}}
 function approxHijriParts(){try{const parts=new Intl.DateTimeFormat("en-TN-u-ca-islamic",{day:"numeric",month:"numeric",year:"numeric"}).formatToParts(new Date());const day=Number(parts.find(p=>p.type==="day")?.value||1);const month=Number(parts.find(p=>p.type==="month")?.value||1);const year=Number(parts.find(p=>p.type==="year")?.value||1447);if(day&&month&&year){return{day,month,year}}}catch(e){}return gregorianToHijri(new Date())}
 function calendarEventsForYear(){const h=approxHijriParts();const today=new Date();today.setHours(0,0,0,0);const years=[h.year,h.year+1];const items=[];years.forEach(y=>{ISLAMIC_EVENTS.forEach(ev=>{const g=gregorianFromHijri(y,ev.m,ev.d);g.setHours(0,0,0,0);const diff=Math.round((g-today)/86400000);if(diff>=-2&&diff<=390){items.push({...ev,hYear:y,gDate:g,diff})}})});return items.sort((a,b)=>a.gDate-b.gDate).slice(0,10)}
@@ -14271,7 +14261,7 @@ function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount"
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){const latest=posts.slice(0,4);const latestSection=`<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>`;return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite","","App-Übersicht")}<div id="focusFeedMount" style="display:none"></div>${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${latestSection}${renderFeatureHint()}${renderPinnedFeaturesSection()}${renderTodayRecommendedFeatures()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>`}
+function renderHome(){const latest=posts.slice(0,4);const latestSection=`<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>`;return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div>${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${latestSection}${renderFeatureHint()}${renderPinnedFeaturesSection()}${renderTodayRecommendedFeatures()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>`}
 function renderTopicsHubSection(){const categoryCount=countBy("category").size;const scholarCount=buildScholarCatalog().length;const bookCount=[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length;const duaCount=DUAS.length;return`<section class="section-block"><div class="section-head"><h3>Inhaltsbereiche</h3><span>alle Bibliotheken</span></div><div class="topics-hub-grid"><article class="list-card" data-nav="recent"><div class="folder-icon"><span class="emoji-emblem">🆕</span></div><h3>Neueste Beiträge</h3><div class="count">${posts.length} Beiträge gesamt</div></article><article class="list-card" data-nav="quran"><div class="folder-icon"><span class="emoji-emblem">📖</span></div><h3>Qurʾān</h3><div class="count">114 Suren · Verse &amp; Themen</div></article><article class="list-card" data-nav="duas"><div class="folder-icon"><span class="emoji-emblem">🤲</span></div><h3>Duʿāʾ</h3><div class="count">${duaCount} Duʿāʾ nach Themen</div></article><article class="list-card" data-nav="scholars"><div class="folder-icon"><span class="emoji-emblem">👤</span></div><h3>Gelehrte</h3><div class="count">${scholarCount} Namen</div></article><article class="list-card" data-nav="books"><div class="folder-icon"><span class="emoji-emblem">📘</span></div><h3>Bücher</h3><div class="count">${bookCount} Werke</div></article><article class="list-card" data-nav="topics"><div class="folder-icon"><span class="emoji-emblem">📚</span></div><h3>Kategorien</h3><div class="count">${categoryCount} Themenbereiche</div></article></div></section>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Globale Suche · Filter · Themen und Quellen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${renderTopicsHubSection()}${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
 function renderScholars(){const items=buildScholarCatalog();return`${setPageHeader("Gelehrte","Beiträge nach Imāmen, Ṣaḥābah und frühen Gelehrten","Gelehrte")}<section class="grid-list">${items.length?items.map(s=>listCard(s.label,s.count+" Beiträge","scholar",s.key,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
