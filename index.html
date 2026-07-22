@@ -8509,7 +8509,7 @@ window.DAR_ANALYTICS_CONFIG={
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=3">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
 
@@ -9924,6 +9924,12 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
   letter-spacing:clamp(.06em,.095em,.13em)!important;
   text-shadow:0 2px 18px rgba(214,183,106,.14),0 1px 0 rgba(0,0,0,.42)!important;
 }
+body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
+  font-family:"Cinzel Decorative","Elsie Swash Caps",var(--display)!important;
+  font-weight:900!important;
+  letter-spacing:.015em!important;
+  text-shadow:none!important;
+}
 .section-head h3,
 .popular-panel .section-head h3,
 .section-block:has(#latestGrid) .section-head h3,
@@ -10023,38 +10029,48 @@ body.is-home-route .view-head h2.home-start-title,
 .highlight-sections .gold-divider{margin:8px 0!important}
 </style>
 <style id="brand-gold-home-v324">
-/* Startseite: Gold-Markentitel als echte Schrift (kein Bild) */
+/* Startseite: ornamentale Gold-Schrift mit Schwüngen (kein Bild) */
 body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
-  font-family:"Cinzel Decorative","Cinzel",var(--display)!important;
-  font-weight:700!important;
-  font-size:clamp(24px,5.8vw,42px)!important;
-  line-height:1.1!important;
-  letter-spacing:.05em!important;
-  word-spacing:.18em!important;
+  font-family:"Cinzel Decorative","Elsie Swash Caps",var(--display)!important;
+  font-weight:900!important;
+  font-size:clamp(26px,6.2vw,44px)!important;
+  line-height:1.06!important;
+  letter-spacing:.015em!important;
+  word-spacing:.1em!important;
   text-transform:uppercase;
-  color:#eccc7a!important;
-  -webkit-text-fill-color:#eccc7a!important;
-  text-shadow:0 0 1px rgba(255,248,220,.85),0 1px 0 rgba(90,68,24,.9),0 2px 12px rgba(200,148,58,.38),1px 1px 0 rgba(184,137,50,.55)!important;
+  background:linear-gradient(180deg,#fff9e8 0%,#f7e4a8 18%,#d4af57 42%,#fff6d8 62%,#c89b3c 82%,#a67c2e 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;
+  filter:drop-shadow(0 2px 7px rgba(120,90,30,.42));
   white-space:normal!important;
   overflow:visible!important;
   min-width:0!important;
   flex:1 1 auto!important;
-  background:none!important;
-  background-clip:border-box!important;
-  -webkit-background-clip:border-box!important;
-  filter:none!important;
+  -webkit-font-smoothing:antialiased;
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
+    color:#f0d88a!important;
+    -webkit-text-fill-color:#f0d88a!important;
+    background:none!important;
+    text-shadow:0 0 1px rgba(255,248,220,.8),0 2px 10px rgba(200,148,58,.4)!important;
+    filter:none;
+  }
 }
 @media(max-width:700px){
   body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
-    font-size:clamp(22px,5.6vw,34px)!important;
-    word-spacing:.14em!important;
-    letter-spacing:.04em!important;
+    font-size:clamp(23px,5.8vw,34px)!important;
+    word-spacing:.08em!important;
+    letter-spacing:.012em!important;
   }
 }
 @media(max-width:430px){
   body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
-    font-size:clamp(20px,5.2vw,30px)!important;
-    word-spacing:.12em!important;
+    font-size:clamp(21px,5.4vw,30px)!important;
+    word-spacing:.06em!important;
   }
 }
 </style>
