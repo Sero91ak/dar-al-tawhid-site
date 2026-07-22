@@ -10810,6 +10810,70 @@ body.is-home-route .view-head h2.home-start-title,
   }
 }
 </style>
+<style id="global-ui-polish-v331">
+/* Hijri-Datum: sichtbar, größer, edler Rahmen — alle Erscheinungsbilder */
+.home-hijri-dayframe{
+  padding:7px 13px 8px!important;min-height:34px!important;min-width:min(44vw,228px)!important;
+  max-width:min(64vw,248px)!important;border-radius:10px!important;
+  border:1.5px solid color-mix(in srgb,var(--gold2) 82%,transparent)!important;
+  background:color-mix(in srgb,var(--gold2) 15%,var(--card))!important;
+  box-shadow:0 0 16px color-mix(in srgb,var(--gold2) 24%,transparent),inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+.home-hijri-dayframe [data-hijri-date-text]{
+  color:var(--gold2)!important;font-size:clamp(12px,3.25vw,14.5px)!important;font-weight:650!important;
+  letter-spacing:.018em!important;text-shadow:0 1px 10px color-mix(in srgb,var(--gold2) 32%,transparent);
+}
+html[data-theme="light"] .home-hijri-dayframe,
+html[data-theme="soft"] .home-hijri-dayframe{
+  background:color-mix(in srgb,var(--gold2) 10%,#fffaf0)!important;
+  border-color:color-mix(in srgb,#8a6530 55%,var(--gold2))!important;
+}
+html[data-theme="light"] .home-hijri-dayframe [data-hijri-date-text],
+html[data-theme="soft"] .home-hijri-dayframe [data-hijri-date-text]{color:#5a4018!important;text-shadow:none}
+html[data-theme="royal"] .home-hijri-dayframe,
+html[data-theme="bordeaux"] .home-hijri-dayframe,
+html[data-theme="dar-al-layl"] .home-hijri-dayframe{
+  background:color-mix(in srgb,var(--gold2) 12%,var(--card))!important;
+}
+/* Gold-Trennlinien — edler, sichtbarer */
+.gold-divider,.isnad-label:after{
+  opacity:1!important;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2) 78%,transparent),transparent)!important;
+}
+/* Gold-Akzentkante — app-weit */
+.popular-row,.folder-card,.post-card,.list-card,.dua-card,.series-card,.pinned-card,
+.daily-box,.recommended-box,.current-focus-row,.quran-surah-card,.quran-result-card,
+.feature-card,.ramadan-teaser,.quran-home-teaser,.zakat-home-teaser,.home-refresh-panel,
+.prayer-quick-card,.quiz-home-quick-card{
+  border-left:3px solid color-mix(in srgb,var(--gold2) 88%,transparent)!important;
+}
+.popular-row:hover,.folder-card:hover,.post-card:hover,.list-card:hover,.dua-card:hover{
+  border-left-color:var(--gold2)!important;
+  box-shadow:inset 3px 0 0 color-mix(in srgb,var(--gold2) 35%,transparent);
+}
+/* Quiz: kein Kasten im Kasten — eine Ebene */
+.quiz-field{
+  border:0!important;background:transparent!important;padding:0!important;min-height:auto!important;
+  box-shadow:none!important;gap:5px!important;
+}
+.quiz-control{
+  min-height:var(--quiz-control-height);border:1px solid color-mix(in srgb,var(--line2) 70%,var(--gold2) 30%)!important;
+  border-left:3px solid color-mix(in srgb,var(--gold2) 92%,transparent)!important;
+  border-radius:12px!important;background:color-mix(in srgb,var(--card) 92%,var(--gold2) 8%)!important;
+  padding:0 14px!important;
+}
+.quiz-control:focus-within{
+  border-color:color-mix(in srgb,var(--gold2) 65%,var(--line2))!important;
+  border-left-color:var(--gold2)!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2) 28%,transparent),0 0 14px color-mix(in srgb,var(--gold2) 18%,transparent)!important;
+}
+.quiz-shell.quiz-shell-pro .quiz-field{border:0!important;background:transparent!important;box-shadow:none!important}
+.quiz-shell.quiz-shell-home .quiz-home-panel{border-left:3px solid color-mix(in srgb,var(--gold2) 75%,transparent)!important}
+@media(max-width:520px){
+  .home-hijri-dayframe{padding:6px 11px 7px!important;min-width:min(48vw,210px)!important}
+  .home-hijri-dayframe [data-hijri-date-text]{font-size:11.5px!important}
+}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
