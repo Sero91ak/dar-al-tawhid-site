@@ -22,6 +22,7 @@ const APP_SHELL = [
   '/data/quran-search-index.json',
   '/data/offline-content-manifest.json',
   '/test/assets/library/canonical-source-library.js',
+  '/assets/library/canonical-source-library.js',
   '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
