@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generatedAt": "2026-07-22T20:18:26.109Z",
+  "generatedAt": "2026-07-22T20:35:40.769Z",
   "policy": {
     "verifiedOnly": true,
     "hideUnverifiedWorks": true,
@@ -11,12 +11,12 @@
     "failBuildOnPublicMetadataError": true
   },
   "stats": {
-    "sourcePosts": 50,
+    "sourcePosts": 451,
     "publicCanonicalBooks": 27,
-    "publicQuotedScholars": 9,
+    "publicQuotedScholars": 101,
     "duplicateIdsRemoved": 0,
     "duplicateContentRemoved": 0,
-    "quarantinedPosts": 0
+    "quarantinedPosts": 100
   },
   "categories": [
     "Āthār und Ḥadīṯ",
@@ -44,10 +44,24 @@
         "al-Musannaf von Ibn Abi Shaybah"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/musannaf-ibn-abi-shaybah.svg"
+      "postIds": [
+        "abdullah-ibn-amr-schweigen-rettung-395",
+        "abu-ad-darda-beginne-mit-deiner-eigenen-seele-435",
+        "ata-fudul-al-kalam-zungen-disziplin-taqwa-168",
+        "ibn-masud-opfere-vergaengliche-fuer-bleibende-34519",
+        "iyas-reine-herzen-wenig-ghibah-546",
+        "liebe-und-hass-mussen-fur-allah-gebunden-sein-234"
+      ],
+      "quotedScholars": [
+        "Abdullah ibn Amr",
+        "Abū ad-Dardāʾ",
+        "Der Prophet ﷺ",
+        "Iyās b. Muʿāwiyah",
+        "ʿAbdullāh ibn Masʿūd",
+        "ʿAṭāʾ b. Abī Rabāḥ"
+      ],
+      "postCount": 6,
+      "coverUrl": "/assets/library/covers/qsrc/musannaf-ibn-abi-shaybah.svg"
     },
     {
       "id": "musannaf-abd-ar-razzaq",
@@ -62,7 +76,7 @@
       "postIds": [],
       "quotedScholars": [],
       "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/musannaf-abd-ar-razzaq.svg"
+      "coverUrl": "/assets/library/covers/qsrc/musannaf-abd-ar-razzaq.svg"
     },
     {
       "id": "siyar-alam-an-nubala",
@@ -74,10 +88,37 @@
         "Siyar A'lam al-Nubala"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/siyar-alam-an-nubala.svg"
+      "postIds": [
+        "abd-ar-rahman-ibn-mahdi-imam-im-wissen-413",
+        "ahmad-wer-hadith-zurueckweist-001",
+        "bukhari-sahih-ehrfurcht-411",
+        "imam-ash-shafii-weder-rafidi-noch-kafir-115",
+        "imam-ash-shafii-wissen-ist-das-was-nuetzt-288",
+        "malik-ibn-dinar-das-beste-dieser-dunya-448",
+        "refutation-093-ahl-al-kalam-la-yuflihoun",
+        "shafii-buch-widerspricht-sunnah-001",
+        "shafii-iman-wort-und-tat-001",
+        "shafii-keine-zuschreibung-zu-mir-001",
+        "shafii-sunnah-vor-meinem-wort-001",
+        "shafii-taten-und-worte-001",
+        "takfir-auf-imam-ahmad-und-imam-ash-shafii-120",
+        "wissen-muss-im-verhalten-sichtbar-werden-447",
+        "yahya-bin-main-ayat-al-kursi-im-haus-409"
+      ],
+      "quotedScholars": [
+        "Abū Ḥātim ar-Rāzī und Aḥmad ibn Ḥanbal",
+        "Aḥmad ibn Ḥanbal",
+        "al-Ḥasan al-Baṣrī",
+        "ash-Shāfiʿī, Aḥmad ibn Ḥanbal und adh-Dhahabī",
+        "Imām ash-Shāfiʿī",
+        "Mālik ibn Dīnār رحمه الله",
+        "Muḥammad b. Ismāʿīl al-Bukhārī",
+        "Muḥammad ibn Idrīs ash-Shāfiʿī",
+        "Yaḥyā b. Maʿīn",
+        "ʿAbd ar-Raḥmān b. Mahdī"
+      ],
+      "postCount": 15,
+      "coverUrl": "/assets/library/covers/qsrc/siyar-alam-an-nubala.svg"
     },
     {
       "id": "hilyat-al-awliya",
@@ -89,10 +130,33 @@
         "Ḥilyat al-Awliyāʾ"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/hilyat-al-awliya.svg"
+      "postIds": [
+        "al-fudayl-zuhd-qanaah-001",
+        "hasan-al-basri-geld-im-herzen-macht-mensch-klein-163",
+        "hinter-ihm-beten-ist-kein-shirk-ritual-119",
+        "malik-adab-vor-wissen-001",
+        "malik-adab-vor-wissen-396",
+        "malik-ibn-dinar-haerte-des-herzens-444",
+        "shafii-debatte-als-nasiha-001",
+        "shafii-ich-wollte-seine-rechtleitung-001",
+        "sufyan-ath-thawri-gewissheit-allah-nicht-anklagen-431",
+        "sufyan-ath-thawri-handle-nach-dem-wissen-291",
+        "sufyan-ath-thawri-wenig-essen-und-wenig-schlaf-staerken-das-herz-292",
+        "sufyan-ibn-uyaynah-zuhd-001",
+        "sufyan-thawri-zuhd-001"
+      ],
+      "quotedScholars": [
+        "al-Fuḍayl ibn ʿIyāḍ",
+        "al-Ḥasan al-Baṣrī",
+        "Mālik ibn Anas",
+        "Mālik ibn Dīnār رحمه الله",
+        "Muḥammad ibn Idrīs ash-Shāfiʿī",
+        "Sufyān ath-Thawrī",
+        "Sufyān ath-Thawrī und ʿAbdullāh ibn al-Mubārak",
+        "Sufyān ibn ʿUyaynah"
+      ],
+      "postCount": 13,
+      "coverUrl": "/assets/library/covers/qsrc/hilyat-al-awliya.svg"
     },
     {
       "id": "tarikh-dimashq",
@@ -107,13 +171,15 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-015"
+        "al-fudayl-ibn-iyad-folge-der-rechtleitung-440",
+        "athar-widerlegung-die-sunnah-ist-arche-nuh-317"
       ],
       "quotedScholars": [
+        "al-Fuḍayl ibn ʿIyāḍ",
         "Mālik ibn Anas"
       ],
-      "postCount": 1,
-      "coverUrl": "/test/assets/library/covers/qsrc/tarikh-dimashq.svg"
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/tarikh-dimashq.svg"
     },
     {
       "id": "majmu-al-fatawa",
@@ -125,10 +191,30 @@
         "Majmūʿ Fatāwā Ibn Taymiyyah"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/majmu-al-fatawa.svg"
+      "postIds": [
+        "allahs-stimme-nicht-wie-die-stimmen-der-schoepfung-112",
+        "gueltigkeit-des-gebets-vs-urteil-ueber-personen-124",
+        "ibn-taymiyyah-ghulat-takfir-durch-suenden-352",
+        "ibn-taymiyyah-mittler-zur-anrufung-gemacht-164",
+        "muhakamah-ablehnung-des-urteils-ist-ablehnung-der-herrschaft-allahs-332",
+        "muhakamah-gehorsam-gegenueber-gelehrten-hat-grenzen-338",
+        "recht-zurueckholen-nicht-automatisch-schirk-akbar-162",
+        "refutation-094-allah-mutakallim",
+        "shirk-durch-anrufung-der-toten-und-abwesenden-207",
+        "shirk-in-der-not-die-hilfe-gehort-allah-allein-206",
+        "shirk-ist-der-grote-ungehorsam-205",
+        "shirk-wenn-der-mittler-angerufen-wird-204",
+        "wahrer-zuhd-ist-zu-lassen-was-der-akhirah-nicht-nutzt-239"
+      ],
+      "quotedScholars": [
+        "Aḥmad ibn Ḥanbal",
+        "al-Bukhārī, Aḥmad ibn Ḥanbal und Ibn Taymiyyah",
+        "aṭ-Ṭabarī, al-Māwardī, Ibn Qudāmah und Ibn Taymiyyah",
+        "Ibn Taymiyyah",
+        "Ibn ʿUmar, al-Ḥasan al-Baṣrī und Ibn Taymiyyah"
+      ],
+      "postCount": 13,
+      "coverUrl": "/assets/library/covers/qsrc/majmu-al-fatawa.svg"
     },
     {
       "id": "sunan-abi-dawud",
@@ -141,13 +227,27 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-020"
+        "abdullah-ibn-amr-fitnah-huete-deine-zunge-449",
+        "akhlak-schwerste-tat-waage-001",
+        "bei-bedraengnis-zur-salah-001",
+        "fiqh-frauen-sind-die-schwestern-der-maenner-240",
+        "kinder-frueh-an-alah-gewoehnen-181",
+        "nichts-ist-schwerer-auf-der-waage-als-guter-charakter-171",
+        "osmanen-khilafah-der-nubuwwah-116",
+        "tarbiyah-kinder-auf-das-gebet-hinweisen-259",
+        "wer-barmherzig-ist-dem-wird-barmherzigkeit-erwiesen-176"
       ],
       "quotedScholars": [
-        "Prophet ﷺ"
+        "Abū ad-Dardāʾ",
+        "Der Prophet ﷺ",
+        "Der Prophet ﷺ, an-Nawawī und al-ʿAynī",
+        "Prophet ﷺ",
+        "ʿAbdullāh b. ʿAmr",
+        "ʿAbdullāh ibn ʿAmr رضي الله عنهما",
+        "ʿAmr b. Shuʿayb"
       ],
-      "postCount": 1,
-      "coverUrl": "/test/assets/library/covers/qsrc/sunan-abi-dawud.svg"
+      "postCount": 9,
+      "coverUrl": "/assets/library/covers/qsrc/sunan-abi-dawud.svg"
     },
     {
       "id": "musnad-ahmad",
@@ -159,10 +259,18 @@
         "Musnad Aḥmad ibn Ḥanbal"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/musnad-ahmad.svg"
+      "postIds": [
+        "der-prophet-vor-der-offenbarung-war-kein-muschrik-111",
+        "dunya-liebe-beschadigt-die-akhirah-238",
+        "takfir-bil-umum-404"
+      ],
+      "quotedScholars": [
+        "Der Prophet ﷺ",
+        "Der Prophet ﷺ und al-Qāḍī ʿIyāḍ",
+        "Salmān al-Fārisī"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/musnad-ahmad.svg"
     },
     {
       "id": "sunan-an-nasai",
@@ -177,7 +285,7 @@
       "postIds": [],
       "quotedScholars": [],
       "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/sunan-an-nasai.svg"
+      "coverUrl": "/assets/library/covers/qsrc/sunan-an-nasai.svg"
     },
     {
       "id": "sahih-al-bukhari",
@@ -191,30 +299,93 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-002",
-        "dar-al-tawhid-total-004",
-        "dar-al-tawhid-total-005",
-        "dar-al-tawhid-total-008",
-        "dar-al-tawhid-total-011",
-        "dar-al-tawhid-total-017",
-        "dar-al-tawhid-total-018",
-        "dar-al-tawhid-total-019",
-        "dar-al-tawhid-total-022",
-        "dar-al-tawhid-total-023",
-        "dar-al-tawhid-total-025",
-        "dar-al-tawhid-total-027",
-        "dar-al-tawhid-total-028",
-        "dar-al-tawhid-total-030",
-        "dar-al-tawhid-total-031",
-        "dar-al-tawhid-total-034",
-        "dar-al-tawhid-total-035",
-        "dar-al-tawhid-total-037"
+        "adab-ist-nicht-mit-worten-zu-verletzen-235",
+        "adab-sprich-gutes-oder-schweige-001",
+        "aishah-frauen-ansar-wissen-551",
+        "akhirah-macht-die-zunge-ernst-228",
+        "akhlak-besten-mit-charakter-001",
+        "amali-sind-nur-nach-niyyah-199",
+        "aqidah-076-die-glaeubigen-sehen-ihren-herrn",
+        "aqidah-allah-wird-im-jenseits-gesehen-248",
+        "aqidah-iman-ist-wort-und-tat-250",
+        "aya-bringt-nur-gutes-191",
+        "aya-gehoert-zum-iman-178",
+        "der-beste-unterricht-ist-quran-lernen-und-lehren-183",
+        "der-mensch-wird-mit-dem-sein-den-er-liebt-233",
+        "der-muslim-verletzt-nicht-mit-zunge-und-hand-193",
+        "der-nachbar-muss-vor-deinem-schaden-sicher-sein-189",
+        "der-verlust-des-glaubens-wegen-suenden-125",
+        "die-mutter-hat-das-groesste-recht-auf-gute-begleitung-184",
+        "erlaubnis-wird-dreimal-erbeten-192",
+        "fiqh-die-frau-wird-nicht-gegen-ihren-willen-verheiratet-243",
+        "fiqh-halal-haram-schubuhat-001",
+        "fiqh-takwa-nach-vermogen-001",
+        "ghulat-099-die-gefahr-des-vorschnellen-takfir",
+        "ghulat-101-nicht-nach-mir-zu-kuffar-zurueckkehren",
+        "ghulat-102-hast-du-sein-herz-aufgeschnitten",
+        "ghulat-105-verse-ueber-kuffar-auf-muslime-anwenden",
+        "ghulat-107-junge-im-alter-schwach-im-verstand",
+        "ghulat-widerlegt-urteil-nach-dem-offenkundigen-114",
+        "hudhayfah-das-schlechte-erkennen-446",
+        "hudhayfah-nifaq-offen-getragen-441",
+        "ibn-abbas-rabbaniyin-hilm-fiqh-549",
+        "ibn-masud-glaeubige-fuerchtet-suenden-165",
+        "jeder-ist-hirte-und-verantwortlich-180",
+        "keine-gegenseitige-abwendung-und-kein-hass-197",
+        "liebe-fuer-deinen-bruder-was-du-fuer-dich-liebst-179",
+        "liebe-zum-propheten-gehort-zum-iman-231",
+        "prophet-dunya-konkurrenz-ummah-548",
+        "salman-gib-jedem-sein-recht-451",
+        "schlechter-verdacht-zerstoert-bruederlichkeit-182",
+        "sifat-allah-dahik-ohne-takyif-001",
+        "sifat-allah-yad-adam-001",
+        "sifat-allah-yamin-allah-001",
+        "sue-des-iman-durch-liebe-fur-allah-232",
+        "takfir-bil-umum-405",
+        "takfir-bil-umum-406",
+        "takfir-bil-umum-407",
+        "tarbiyah-das-kind-wird-auf-reinheit-geboren-255",
+        "tarbiyah-jeder-traegt-verantwortung-254",
+        "tarbiyah-wer-nicht-barmherzig-ist-erfaehrt-keine-barmherzigkeit-252",
+        "tawakkul-hasbunallah-001",
+        "tawhid-079-haqq-allah-ala-al-ibad",
+        "tawhid-081-dua-an-andere-als-allah",
+        "tawhid-082-la-ilaha-illa-allah-um-allahs-angesicht",
+        "tawhid-085-keine-uebertreibung-beim-propheten",
+        "tawhid-087-dhikr-der-einzigkeit-allahs",
+        "tazkiyyah-ist-nicht-selbstlob-225",
+        "verwandtschaftspflege-bringt-barakah-185",
+        "wahre-staerke-ist-kontrolle-bei-zorn-173",
+        "wer-seine-zunge-bewahrt-dem-wird-paradies-versprochen-186",
+        "wiederhole-nicht-den-zorn-188"
       ],
       "quotedScholars": [
-        "Prophet ﷺ"
+        "Abū Hurayrah",
+        "Abū Saʿīd al-Khudrī",
+        "Abū Shurayḥ",
+        "al-Bukhārī",
+        "al-Ḥasan al-Baṣrī",
+        "Anas b. Mālik",
+        "Der Prophet ﷺ",
+        "Der Prophet ﷺ und Ibn Ḥajar",
+        "Ḥuḏayfah ibn al-Yamān",
+        "Ḥudhayfah ibn al-Yamān",
+        "Ibn ʿAbbās",
+        "Prophet ﷺ",
+        "Sahl b. Saʿd",
+        "Salmān al-Fārisī",
+        "Zayd ibn ʿAmr ibn Nufayl",
+        "ʿAbdullāh b. ʿAmr",
+        "ʿAbdullāh ibn Masʿūd",
+        "ʿAbdullāh ibn ʿAbbās",
+        "ʿAbdullāh ibn ʿUmar",
+        "ʿĀʾishah bint Abī Bakr",
+        "ʿImrān b. Ḥuṣayn",
+        "ʿUmar ibn al-Khaṭṭāb, al-Ḥasan al-Baṣrī und Maymūn ibn Mihrān",
+        "ʿUthmān b. ʿAffān"
       ],
-      "postCount": 18,
-      "coverUrl": "/test/assets/library/covers/qsrc/sahih-al-bukhari.svg"
+      "postCount": 59,
+      "coverUrl": "/assets/library/covers/qsrc/sahih-al-bukhari.svg"
     },
     {
       "id": "sunan-ibn-majah",
@@ -225,10 +396,14 @@
         "Sunan Ibn Majah"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/sunan-ibn-majah.svg"
+      "postIds": [
+        "kein-schaden-und-kein-gegenschaden-194"
+      ],
+      "quotedScholars": [
+        "ʿUbādah b. aṣ-Ṣāmit"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/sunan-ibn-majah.svg"
     },
     {
       "id": "jami-at-tirmidhi",
@@ -241,16 +416,48 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-024",
-        "dar-al-tawhid-total-032",
-        "dar-al-tawhid-total-033",
-        "dar-al-tawhid-total-038"
+        "adab-lass-was-dich-nicht-angeht-001",
+        "akhlak-vollkommener-iman-001",
+        "akhlaq-bedeutet-gute-zur-familie-236",
+        "allahs-hand-und-die-groesse-der-schoepfung-in-seiner-hand-117",
+        "allahs-rechte-hand-widerlegung-gegen-tawil-109",
+        "aqidah-077-dua-ist-anbetung",
+        "der-beste-ist-der-beste-zu-seiner-familie-195",
+        "der-stift-widerlegt-den-nur-muhammadi-hadith-110",
+        "der-vollstaendigere-iman-zeigt-sich-im-charakter-169",
+        "die-nachsten-zum-propheten-am-jungsten-tag-221",
+        "dua-dhi-nun-001",
+        "dua-ist-ibadah-001",
+        "ein-laecheln-kann-adaqah-sein-187",
+        "fiqh-der-beste-mann-ist-gut-zu-seiner-familie-241",
+        "ghulat-100-einen-muslim-des-kufr-zu-beschuldigen",
+        "ghulat-108-die-hunde-des-feuers",
+        "naehe-zum-propheten-durch-schoenen-charakter-170",
+        "sabr-und-sieg-001",
+        "tawakkul-binde-sie-und-vertraue-001",
+        "tawakkul-frag-nur-allah-001",
+        "tawakkul-wie-die-voegel-001",
+        "tawhid-084-das-beste-wort-der-propheten",
+        "tawhid-086-kein-shirk-und-vergebung",
+        "tawhid-344-dua-ist-ibadah",
+        "vollkommener-iman-zeigt-sich-im-charakter-220",
+        "wer-sich-aus-unnotigem-zuruckhalt-222",
+        "ya-hayyu-ya-qayyum-001"
       ],
       "quotedScholars": [
-        "Prophet ﷺ"
+        "Abū Dharr",
+        "Abū Hurairah und Abū ʿĪsā at-Tirmidhī",
+        "Abū Hurayrah",
+        "Abū Umāmah al-Bāhilī",
+        "Der Prophet ﷺ",
+        "Der Prophet ﷺ und aṭ-Ṭabarī",
+        "Ibn ʿAbbās und Abū ʿĪsā at-Tirmidhī",
+        "Jābir b. ʿAbdillāh",
+        "Prophet ﷺ",
+        "ʿĀʾishah"
       ],
-      "postCount": 4,
-      "coverUrl": "/test/assets/library/covers/qsrc/jami-at-tirmidhi.svg"
+      "postCount": 27,
+      "coverUrl": "/assets/library/covers/qsrc/jami-at-tirmidhi.svg"
     },
     {
       "id": "sahih-muslim",
@@ -263,27 +470,57 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-001",
-        "dar-al-tawhid-total-003",
-        "dar-al-tawhid-total-006",
-        "dar-al-tawhid-total-007",
-        "dar-al-tawhid-total-009",
-        "dar-al-tawhid-total-010",
-        "dar-al-tawhid-total-012",
-        "dar-al-tawhid-total-013",
-        "dar-al-tawhid-total-021",
-        "dar-al-tawhid-total-026",
-        "dar-al-tawhid-total-029",
-        "dar-al-tawhid-total-036",
-        "dar-al-tawhid-total-039",
-        "dar-al-tawhid-total-040"
+        "ahmadiyyah-akhir-al-masajid-129",
+        "ahmadiyyah-al-aqib-letzter-prophet-130",
+        "aishah-scham-darf-nicht-vom-wissen-abhalten-450",
+        "aqidah-069-dieses-wissen-ist-din",
+        "aqidah-078-der-massstab-bei-ahl-al-ahwa",
+        "athar-widerlegung-dieses-wissen-ist-din-310",
+        "athar-widerlegung-qadar-wird-nicht-mit-meinung-bestritten-304",
+        "athar-widerlegung-wissen-ist-nicht-von-ahl-al-ahwa-zu-nehmen-318",
+        "die-akhirah-lasst-weltliche-harte-klein-werden-237",
+        "diese-welt-ist-nicht-der-ruheort-des-glaubigen-226",
+        "ein-einziger-tauchgang-zeigt-die-wahrheit-der-dunya-227",
+        "ein-gutes-wort-ist-sadaqah-445",
+        "entferne-schaden-vom-weg-196",
+        "fiqh-dunya-und-offenbarung-001",
+        "fitrah-schayatin-irrefuehrung-410",
+        "ghulat-103-der-quran-ueberschreitet-ihre-kehlen-nicht",
+        "ghulat-104-sie-toeten-die-muslime-und-lassen-die-goetzendiener",
+        "ghulat-106-die-schlimmsten-der-schoepfung",
+        "herzen-und-taten-001",
+        "ikhlas-allah-sieht-auf-herzen-und-taten-350",
+        "jahannam-wird-durch-begierden-leicht-gemacht-230",
+        "jannah-ist-hinter-dingen-die-der-nafs-schwerfallen-229",
+        "milde-schmueckt-jede-sache-175",
+        "sprich-gutes-oder-schweige-172",
+        "takfir-bil-umum-400",
+        "tarbiyah-erziehung-beginnt-mit-sanftmut-253",
+        "tawakkul-und-nutzen-001",
+        "tawhid-080-tawhid-fuehrt-zur-jannah",
+        "tawhid-083-wissen-ueber-la-ilaha-illa-allah",
+        "tawhid-088-tawhid-und-kufr-an-falscher-anbetung",
+        "wahrhaftigkeit-fuehrt-zum-paradies-174",
+        "was-ist-wirkliche-ueble-nachrede-190",
+        "wer-gutes-zeigt-bekommt-anteil-am-lohn-198",
+        "zuflucht-bei-allah-001"
       ],
       "quotedScholars": [
+        "Abū Hurayrah",
+        "Abū Masʿūd al-Anṣārī",
+        "Der Prophet ﷺ",
         "Ibn Sīrīn",
-        "Prophet ﷺ"
+        "Ibn ʿUmar",
+        "Muḥammad ibn Sīrīn",
+        "Prophet Muḥammad ﷺ",
+        "Prophet ﷺ",
+        "ʿAbdullāh ibn Masʿūd",
+        "ʿAmr ibn ʿAbasah as-Sulamī",
+        "ʿĀʾishah",
+        "ʿĀʾishah رضي الله عنها"
       ],
-      "postCount": 14,
-      "coverUrl": "/test/assets/library/covers/qsrc/sahih-muslim.svg"
+      "postCount": 34,
+      "coverUrl": "/assets/library/covers/qsrc/sahih-muslim.svg"
     },
     {
       "id": "sunan-ad-darimi",
@@ -298,13 +535,27 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-014"
+        "athar-widerlegung-ahl-al-ahwa-nicht-zuhoeren-309",
+        "athar-widerlegung-die-khawarij-verliessen-durch-fehlverstaendnis-305",
+        "athar-widerlegung-nicht-jede-gute-absicht-trifft-die-sunnah-300",
+        "die-schonste-erziehung-war-der-quran-223",
+        "manhaj-bidah-beginnt-oft-mit-guter-absicht-208",
+        "manhaj-nicht-mit-ahl-al-ahwa-spielen-209",
+        "shafii-schmuck-des-wissens-001",
+        "shafii-wissen-das-nuetzt-001",
+        "usul-des-manhaj-ahl-al-ahwa-nicht-das-herz-oeffnen-257",
+        "usul-des-manhaj-nicht-jede-schoene-tat-ist-sunnah-246"
       ],
       "quotedScholars": [
-        "Ibn Masʿūd"
+        "Ibn Sīrīn",
+        "Ibn ʿAbbās",
+        "Muḥammad ibn Idrīs ash-Shāfiʿī",
+        "Muḥammad ibn Sīrīn",
+        "ʿAbdullāh ibn Masʿūd",
+        "ʿĀʾishah رضي الله عنها"
       ],
-      "postCount": 1,
-      "coverUrl": "/test/assets/library/covers/qsrc/sunan-ad-darimi.svg"
+      "postCount": 10,
+      "coverUrl": "/assets/library/covers/qsrc/sunan-ad-darimi.svg"
     },
     {
       "id": "muwatta-malik",
@@ -316,10 +567,16 @@
         "al-Muwatta"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/muwatta-malik.svg"
+      "postIds": [
+        "fiqh-kein-falsches-recht-durch-urteil-nehmen-213",
+        "ibn-masud-wenn-fiqh-wenig-wird-443"
+      ],
+      "quotedScholars": [
+        "Der Prophet ﷺ",
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/muwatta-malik.svg"
     },
     {
       "id": "tahdhib-al-kamal",
@@ -333,7 +590,7 @@
       "postIds": [],
       "quotedScholars": [],
       "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/tahdhib-al-kamal.svg"
+      "coverUrl": "/assets/library/covers/qsrc/tahdhib-al-kamal.svg"
     },
     {
       "id": "tafsir-ibn-kathir",
@@ -345,10 +602,100 @@
         "Tafsīr Ibn Kathīr"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/tafsir-ibn-kathir.svg"
+      "postIds": [
+        "fiqh-frauen-haben-rechte-wie-pflichten-242",
+        "fiqh-maenner-sollen-frauen-nicht-schaden-256",
+        "hukm-muhakamah-abwendung-vom-herabgesandten-395",
+        "hukm-muhakamah-allah-ist-bester-richter-400",
+        "hukm-muhakamah-allah-weiss-was-in-herzen-ist-397",
+        "hukm-muhakamah-bestes-wort-als-massstab-431",
+        "hukm-muhakamah-bund-und-gehorchen-425",
+        "hukm-muhakamah-bundbruch-und-tahrif-426",
+        "hukm-muhakamah-das-urteil-gehoert-allah-367",
+        "hukm-muhakamah-folge-der-shariah-nicht-hawa-402",
+        "hukm-muhakamah-gehorsam-und-warnung-410",
+        "hukm-muhakamah-gerechtigkeit-auch-gegen-gegner-405",
+        "hukm-muhakamah-gerechtigkeit-auch-gegen-sich-406",
+        "hukm-muhakamah-gesandte-warnen-und-verkuenden-411",
+        "hukm-muhakamah-gesandter-zum-gehorsam-398",
+        "hukm-muhakamah-glaeubige-brueder-im-streit-409",
+        "hukm-muhakamah-halal-haram-ohne-erlaubnis-377",
+        "hukm-muhakamah-heimliche-intrige-gegen-urteil-417",
+        "hukm-muhakamah-ibn-abbas-kufr-duna-kufr-354",
+        "hukm-muhakamah-ibn-masud-rishwa-im-urteil-358",
+        "hukm-muhakamah-islam-ganz-annehmen-424",
+        "hukm-muhakamah-jenseits-von-allahs-urteil-401",
+        "hukm-muhakamah-kein-herzenswiderstand-399",
+        "hukm-muhakamah-kein-iman-ohne-taslim-374",
+        "hukm-muhakamah-kein-urteil-ohne-wissen-407",
+        "hukm-muhakamah-keiner-traegt-schuld-eines-anderen-413",
+        "hukm-muhakamah-kufr-begriff-braucht-tafsil-383",
+        "hukm-muhakamah-leugnung-und-anerkennung-372",
+        "hukm-muhakamah-luege-gegen-allah-halal-haram-380",
+        "hukm-muhakamah-nicht-fuer-verraeter-streiten-416",
+        "hukm-muhakamah-offenbarung-muss-uebermittelt-werden-430",
+        "hukm-muhakamah-partner-in-gesetzgebung-379",
+        "hukm-muhakamah-rabbiner-als-herren-376",
+        "hukm-muhakamah-reform-mit-gerechtigkeit-408",
+        "hukm-muhakamah-richter-braucht-istighfar-415",
+        "hukm-muhakamah-scheinargumente-der-heuchler-396",
+        "hukm-muhakamah-schlussstein-kufr-duna-kufr-393",
+        "hukm-muhakamah-schuld-auf-sich-selbst-419",
+        "hukm-muhakamah-schuld-nicht-auf-unschuldige-420",
+        "hukm-muhakamah-sicherheit-durch-tauhid-412",
+        "hukm-muhakamah-streit-zurueck-zu-allah-und-gesandtem-404",
+        "hukm-muhakamah-suddi-544-warnung-an-juden-364",
+        "hukm-muhakamah-suht-und-luegenhoeren-384",
+        "hukm-muhakamah-sunnah-erklaert-den-quran-423",
+        "hukm-muhakamah-sura-verpflichtend-gemacht-391",
+        "hukm-muhakamah-taghut-verleugnen-394",
+        "hukm-muhakamah-tahrif-wenn-urteil-nur-passt-368",
+        "hukm-muhakamah-taschri-von-satanswegen-403",
+        "hukm-muhakamah-taubah-nach-sunde-418",
+        "hukm-muhakamah-tawakkul-im-gehorsam-433",
+        "hukm-muhakamah-tawus-kein-austritt-aus-millah-365",
+        "hukm-muhakamah-urteil-der-jahiliyyah-366",
+        "hukm-muhakamah-urteil-nach-dem-was-allah-zeigte-414",
+        "hukm-muhakamah-verbietet-nicht-das-erlaubte-378",
+        "hukm-muhakamah-verborgenes-wird-offengelegt-428",
+        "hukm-muhakamah-vergessen-des-geoffenbarten-427",
+        "hukm-muhakamah-verpflichtende-verse-422",
+        "hukm-muhakamah-vom-dunkel-zum-licht-429",
+        "hukm-muhakamah-weg-der-glaeubigen-421",
+        "hukm-muhakamah-wenn-es-passt-nehmen-sie-es-388",
+        "hukm-muhakamah-wir-hoeren-und-gehorchen-375",
+        "muhakamah-das-urteil-der-jahiliyyah-324",
+        "muhakamah-der-hukm-gehoert-allah-allein-320",
+        "muhakamah-der-streit-wird-zu-quran-und-sunnah-zurueckgebracht-326",
+        "muhakamah-die-entscheidung-gehoert-allah-und-seinem-gesandten-325",
+        "muhakamah-gesetzgebung-ohne-erlaubnis-allahs-336",
+        "muhakamah-kein-iman-ohne-annahme-des-urteils-des-propheten-323",
+        "muhakamah-keine-vorziehung-vor-allah-und-seinem-gesandten-337",
+        "muhakamah-taghut-urteil-wird-verworfen-322",
+        "takfir-bil-umum-408",
+        "tawhid-342-nur-dich-beten-wir-an",
+        "tawhid-343-die-mushrikun-verstanden-die-bedeutung-von-einem-gott",
+        "tawhid-345-fuersprecher-werden-nicht-angebetet",
+        "tawhid-346-naehe-zu-allah-wird-nicht-ueber-goetzen-gesucht",
+        "tawhid-347-millah-ibrahim-ist-lossagung-vom-shirk",
+        "tawhid-348-allah-liebt-ikhlas-in-der-ibadah",
+        "yusuf-hatte-echte-muhakamah-kein-nur-dialog-121"
+      ],
+      "quotedScholars": [
+        "as-Suddī",
+        "aṭ-Ṭabarī",
+        "aṭ-Ṭabarī / Ibn Kathīr",
+        "aṭ-Ṭabarī, Ibn Kathīr und Ibn al-ʿArabī",
+        "Ibn Kathīr",
+        "Ibn Kathīr / aṭ-Ṭabarī",
+        "Ibn Masʿūd",
+        "Ibn ʿAbbās",
+        "Ibn ʿAbbās / Ṭāwūs",
+        "Mujāhid ibn Jabr",
+        "Ṭāwūs"
+      ],
+      "postCount": 77,
+      "coverUrl": "/assets/library/covers/qsrc/tafsir-ibn-kathir.svg"
     },
     {
       "id": "tafsir-at-tabari",
@@ -361,10 +708,44 @@
         "Jami al-Bayan"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/tafsir-at-tabari.svg"
+      "postIds": [
+        "at-tabari-muhakamah-wir-hoeren-und-gehorchen-353",
+        "hukm-muhakamah-abu-mijlaz-ordnung-als-din-355",
+        "hukm-muhakamah-gesandter-wird-gehorcht-381",
+        "hukm-muhakamah-heuchler-rechtfertigen-abwendung-382",
+        "hukm-muhakamah-hukm-und-ibadah-389",
+        "hukm-muhakamah-kufr-zulm-fisq-zusammen-386",
+        "hukm-muhakamah-muhkam-und-mutashabih-371",
+        "hukm-muhakamah-nicht-fuer-verraeter-streiten-392",
+        "hukm-muhakamah-nifaq-abwendung-vom-urteil-369",
+        "hukm-muhakamah-rajm-fall-tahrif-359",
+        "hukm-muhakamah-shariah-als-befehl-allahs-390",
+        "hukm-muhakamah-tabari-tahrif-und-ersetzung-356",
+        "hukm-muhakamah-tahakum-zum-taghut-360",
+        "hukm-muhakamah-zwei-wege-glaube-und-ablehnung-432",
+        "im-himmel-ein-ilah-und-auf-der-erde-ein-ilah-127",
+        "makan-tabari-uluw-makan-422",
+        "muhakamah-allahs-gesetz-wird-nicht-durch-begierde-ersetzt-330",
+        "muhakamah-kein-urteil-besser-als-allahs-urteil-327",
+        "muhakamah-wer-nicht-nach-allahs-offenbarung-richtet-321",
+        "mujahid-und-ein-zeuge-bedeutet-hukm-hakim-118",
+        "tagut-ist-eine-falsche-autoritat-201",
+        "tagut-urteil-willentlich-zu-suchen-ist-der-getadelte-fall-202",
+        "tagut-wenn-urteil-beim-kahin-gesucht-wird-200",
+        "tawhid-341-allah-allein-wird-angebetet",
+        "tawhid-349-keine-ibadah-neben-allah"
+      ],
+      "quotedScholars": [
+        "Abū Mijlaz",
+        "at-Ṭabarī",
+        "aṭ-Ṭabarī",
+        "Ibn ʿAbbās",
+        "Mujāhid ibn Jabr",
+        "Mujāhid ibn Jabr und al-Farrāʾ",
+        "Qatādah, Mujāhid und Ibn al-Jawzī"
+      ],
+      "postCount": 25,
+      "coverUrl": "/assets/library/covers/qsrc/tafsir-at-tabari.svg"
     },
     {
       "id": "kitab-at-tawhid-miaw",
@@ -379,7 +760,7 @@
       "postIds": [],
       "quotedScholars": [],
       "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/kitab-at-tawhid-miaw.svg"
+      "coverUrl": "/assets/library/covers/qsrc/kitab-at-tawhid-miaw.svg"
     },
     {
       "id": "jami-bayan-al-ilm",
@@ -391,10 +772,16 @@
         "Jāmiʿ Bayān al-ʿIlm"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/jami-bayan-al-ilm.svg"
+      "postIds": [
+        "manhaj-der-sichere-weg-ist-die-sunnah-210",
+        "sufyan-ath-thawri-wissen-erleichterung-vertrauenswuerdiger-442"
+      ],
+      "quotedScholars": [
+        "Sufyān ath-Thawrī",
+        "ʿUmar ibn ʿAbd al-ʿAzīz"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/jami-bayan-al-ilm.svg"
     },
     {
       "id": "ash-shariah-al-ajurri",
@@ -409,13 +796,13 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-016"
+        "al-ajurri-groesstes-geschenk-im-paradies-161"
       ],
       "quotedScholars": [
-        "al-Awzāʿī"
+        "Abū Bakr al-Ājurrī"
       ],
       "postCount": 1,
-      "coverUrl": "/test/assets/library/covers/qsrc/ash-shariah-al-ajurri.svg"
+      "coverUrl": "/assets/library/covers/qsrc/ash-shariah-al-ajurri.svg"
     },
     {
       "id": "as-sunnah-al-khallal",
@@ -430,7 +817,7 @@
       "postIds": [],
       "quotedScholars": [],
       "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/as-sunnah-al-khallal.svg"
+      "coverUrl": "/assets/library/covers/qsrc/as-sunnah-al-khallal.svg"
     },
     {
       "id": "sharh-usul-itiqad-lalakai",
@@ -444,26 +831,66 @@
       ],
       "verification": "verified",
       "postIds": [
-        "dar-al-tawhid-total-041",
-        "dar-al-tawhid-total-042",
-        "dar-al-tawhid-total-043",
-        "dar-al-tawhid-total-044",
-        "dar-al-tawhid-total-045",
-        "dar-al-tawhid-total-046",
-        "dar-al-tawhid-total-047",
-        "dar-al-tawhid-total-048",
-        "dar-al-tawhid-total-049",
-        "dar-al-tawhid-total-050"
+        "abdurrahman-ibn-mahdi-kalam-allah-musa-001",
+        "abu-hatim-ar-razi-unser-weg-ist-festhalten-an-den-athar-299",
+        "abu-hatim-jahmiyyah-mushabbihah-001",
+        "abu-hatim-quran-kalam-allah-001",
+        "abu-hatim-ruyah-allah-im-jenseits-001",
+        "abu-hatim-sifat-allah-ohne-takyif-001",
+        "abu-hatim-zeichen-ahl-al-bidah-001",
+        "ahmad-grundlage-der-sunnah-001",
+        "ahmad-quran-kalam-allah-001",
+        "al-awzai-sunnah-athar-001",
+        "al-lalakai-sifat-durch-offenbarung-001",
+        "aqidah-070-der-quran-ist-nicht-erschaffen",
+        "athar-widerlegung-ahl-al-bidah-erkennt-man-an-ihrem-angriff-auf-ahl-al-athar-301",
+        "athar-widerlegung-ahl-al-kalam-verwerfen-die-athar-302",
+        "athar-widerlegung-ahl-al-ray-greifen-ahl-al-hadith-an-303",
+        "athar-widerlegung-der-weg-ist-athar-nicht-spekulation-311",
+        "athar-widerlegung-kein-reden-vor-den-sahabah-319",
+        "athar-widerlegung-murjiah-trennen-handlung-vom-iman-306",
+        "az-zuhri-festhalten-an-der-sunnah-rettung-432",
+        "eid-zaehlt-quran-rezitation-als-sprechen-122",
+        "ishaq-ibn-rahawayh-der-weg-der-fruehen-imame-ist-buch-und-sunnah-286",
+        "ishaq-ibn-rahawayh-die-sunnah-wird-nicht-verlassen-285",
+        "ishaq-ibn-rahawayh-ruyah-allahs-ist-wahrheit-284",
+        "makan-fudayl-ibn-iyad-rabb-yafal-ma-yasha-415",
+        "rabiah-istiwa-nicht-unbekannt-134",
+        "refutation-089-quran-kalam-allah-ghayr-makhluq",
+        "refutation-090-tabari-quran-makhluq",
+        "refutation-091-lafziyyah-jahmiyyah",
+        "refutation-092-abu-ubayd-quran-birammatihi",
+        "refutation-095-nuzul-bila-kayf",
+        "refutation-096-istiwa-ohne-takyif",
+        "refutation-097-ruyah-bila-kayf",
+        "refutation-098-ibn-uyaynah-jahmi",
+        "sufyan-thawri-iman-athar-001",
+        "ubayy-sunnah-besser-als-uebertreibung-392"
       ],
       "quotedScholars": [
+        "Abū Ḥātim ar-Rāzī",
         "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī",
+        "Abū Jaʿfar Muḥammad ibn Jarīr aṭ-Ṭabarī",
+        "Abū Zurʿah ar-Rāzī",
+        "Abū Zurʿah und Abū Ḥātim ar-Rāzī",
+        "Abū ʿUbayd al-Qāsim ibn Sallām",
         "Aḥmad ibn Ḥanbal",
         "al-Awzāʿī",
+        "al-Awzāʿī, Sufyān ath-Thawrī, Mālik ibn Anas und al-Layth ibn Saʿd",
+        "al-Fuḍayl b. ʿIyāḍ",
+        "al-Lālakāʾī",
+        "Isḥāq ibn Rāhawayh",
+        "Muḥammad ibn Jaʿfar",
+        "Muḥammad ibn Shihāb az-Zuhrī",
+        "Rabīʿah",
         "Sufyān ath-Thawrī",
-        "ʿAbdullāh ibn Masʿūd"
+        "Sufyān ibn ʿUyaynah",
+        "Ubayy ibn Kaʿb",
+        "ʿAbd ar-Raḥmān ibn Mahdī",
+        "ʿAmr ibn Dīnār"
       ],
-      "postCount": 10,
-      "coverUrl": "/test/assets/library/covers/qsrc/sharh-usul-itiqad-lalakai.svg"
+      "postCount": 35,
+      "coverUrl": "/assets/library/covers/qsrc/sharh-usul-itiqad-lalakai.svg"
     },
     {
       "id": "al-ibanah-ibn-battah",
@@ -475,10 +902,22 @@
         "al-Ibānah von Ibn Baṭṭah"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/al-ibanah-ibn-battah.svg"
+      "postIds": [
+        "athar-widerlegung-mit-ahl-al-bidah-nicht-sitzen-316",
+        "das-lachen-allahs-bestaetigung-ohne-gleichsetzung-113",
+        "ibn-battah-ahl-al-bidah-nicht-zum-herzen-lassen-294",
+        "ibn-battah-das-fundament-ist-festhalten-an-der-jamaah-293",
+        "ibn-battah-die-sunnah-ist-rettung-vor-spaltung-295",
+        "ibn-masud-wenig-sunnah-besser-als-viel-bidah-351",
+        "makan-ibn-battah-aala-makan-419"
+      ],
+      "quotedScholars": [
+        "Aḥmad ibn Ḥanbal",
+        "Ibn Baṭṭah al-ʿUkbarī",
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 7,
+      "coverUrl": "/assets/library/covers/qsrc/al-ibanah-ibn-battah.svg"
     },
     {
       "id": "as-sunnah-abdullah-ahmad",
@@ -490,10 +929,28 @@
         "Sunnah Abdullah ibn Ahmad"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/as-sunnah-abdullah-ahmad.svg"
+      "postIds": [
+        "354-547",
+        "aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran",
+        "athar-widerlegung-bidah-ist-nicht-kleinzureden-315",
+        "athar-widerlegung-der-quran-ist-nicht-erschaffen-307",
+        "nuzul-allahs-ist-haqq-424",
+        "takfir-bil-umum-401",
+        "takfir-bil-umum-402",
+        "yazid-harun-fitrah-istiwa-jahmiyyah-428"
+      ],
+      "quotedScholars": [
+        "Abū Zurʿah ar-Rāzī und Abū Ḥātim ar-Rāzī",
+        "Aḥmad ibn Ḥanbal",
+        "al-Barbahārī",
+        "Imām Aḥmad ibn Ḥanbal",
+        "Imām Mālik ibn Anas",
+        "Ismāʿīl ibn Yaḥyā al-Muzanī",
+        "Yazīd ibn Hārūn",
+        "Zuhayr ibn ʿAbbād"
+      ],
+      "postCount": 8,
+      "coverUrl": "/assets/library/covers/qsrc/as-sunnah-abdullah-ahmad.svg"
     },
     {
       "id": "dar-taarud-al-aql-wan-naql",
@@ -507,7 +964,7 @@
       "postIds": [],
       "quotedScholars": [],
       "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/dar-taarud-al-aql-wan-naql.svg"
+      "coverUrl": "/assets/library/covers/qsrc/dar-taarud-al-aql-wan-naql.svg"
     },
     {
       "id": "ar-radd-ala-al-jahmiyyah-ad-darimi",
@@ -519,64 +976,766 @@
         "Widerlegung der Jahmiyyah von ad-Darimi"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
-      "coverUrl": "/test/assets/library/covers/qsrc/ar-radd-ala-al-jahmiyyah-ad-darimi.svg"
+      "postIds": [
+        "ad-darimi-ityan-allahs-bedeutung-klar-132",
+        "ad-darimi-sifat-nuzul-001"
+      ],
+      "quotedScholars": [
+        "ʿUthmān ibn Saʿīd ad-Dārimī"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/ar-radd-ala-al-jahmiyyah-ad-darimi.svg"
     }
   ],
   "scholars": [
+    {
+      "id": "abdullah-ibn-amr",
+      "name": "Abdullah ibn Amr",
+      "role": "quotedScholar",
+      "postIds": [
+        "abdullah-ibn-amr-fitnah-huete-deine-zunge-449",
+        "abdullah-ibn-amr-schweigen-rettung-395"
+      ],
+      "citedWorkIds": [
+        "musannaf-ibn-abi-shaybah",
+        "sunan-abi-dawud"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "abu-ad-darda",
+      "name": "Abū ad-Dardāʾ",
+      "role": "quotedScholar",
+      "postIds": [
+        "abu-ad-darda-beginne-mit-deiner-eigenen-seele-435",
+        "nichts-ist-schwerer-auf-der-waage-als-guter-charakter-171"
+      ],
+      "citedWorkIds": [
+        "musannaf-ibn-abi-shaybah",
+        "sunan-abi-dawud"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "abu-bakr-al-ajurri",
+      "name": "Abū Bakr al-Ājurrī",
+      "role": "quotedScholar",
+      "postIds": [
+        "al-ajurri-groesstes-geschenk-im-paradies-161"
+      ],
+      "citedWorkIds": [
+        "ash-shariah-al-ajurri"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-dharr",
+      "name": "Abū Dharr",
+      "role": "quotedScholar",
+      "postIds": [
+        "ein-laecheln-kann-adaqah-sein-187"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-hatim-ar-razi",
+      "name": "Abū Ḥātim ar-Rāzī",
+      "role": "quotedScholar",
+      "postIds": [
+        "abu-hatim-ar-razi-unser-weg-ist-festhalten-an-den-athar-299",
+        "abu-hatim-jahmiyyah-mushabbihah-001",
+        "abu-hatim-zeichen-ahl-al-bidah-001",
+        "athar-widerlegung-ahl-al-bidah-erkennt-man-an-ihrem-angriff-auf-ahl-al-athar-301",
+        "athar-widerlegung-ahl-al-ray-greifen-ahl-al-hadith-an-303"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 5
+    },
     {
       "id": "abu-hatim-ar-razi-und-abu-zurah-ar-razi",
       "name": "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-044",
-        "dar-al-tawhid-total-045",
-        "dar-al-tawhid-total-046"
+        "abu-hatim-quran-kalam-allah-001",
+        "abu-hatim-ruyah-allah-im-jenseits-001",
+        "abu-hatim-sifat-allah-ohne-takyif-001"
       ],
       "citedWorkIds": [
         "sharh-usul-itiqad-lalakai"
       ],
       "postCount": 3
+    },
+    {
+      "id": "abu-hatim-ar-razi-und-ahmad-ibn-hanbal",
+      "name": "Abū Ḥātim ar-Rāzī und Aḥmad ibn Ḥanbal",
+      "role": "quotedScholar",
+      "postIds": [
+        "takfir-auf-imam-ahmad-und-imam-ash-shafii-120"
+      ],
+      "citedWorkIds": [
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-hurairah-und-abu-isa-at-tirmidhi",
+      "name": "Abū Hurairah und Abū ʿĪsā at-Tirmidhī",
+      "role": "quotedScholar",
+      "postIds": [
+        "allahs-rechte-hand-widerlegung-gegen-tawil-109"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-hurayrah",
+      "name": "Abū Hurayrah",
+      "role": "quotedScholar",
+      "postIds": [
+        "aya-gehoert-zum-iman-178",
+        "der-vollstaendigere-iman-zeigt-sich-im-charakter-169",
+        "die-mutter-hat-das-groesste-recht-auf-gute-begleitung-184",
+        "entferne-schaden-vom-weg-196",
+        "schlechter-verdacht-zerstoert-bruederlichkeit-182",
+        "sprich-gutes-oder-schweige-172",
+        "wahre-staerke-ist-kontrolle-bei-zorn-173",
+        "was-ist-wirkliche-ueble-nachrede-190",
+        "wiederhole-nicht-den-zorn-188"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi",
+        "sahih-al-bukhari",
+        "sahih-muslim"
+      ],
+      "postCount": 9
+    },
+    {
+      "id": "abu-jafar-muhammad-ibn-jarir-at-tabari",
+      "name": "Abū Jaʿfar Muḥammad ibn Jarīr aṭ-Ṭabarī",
+      "role": "quotedScholar",
+      "postIds": [
+        "refutation-090-tabari-quran-makhluq"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-masud-al-ansari",
+      "name": "Abū Masʿūd al-Anṣārī",
+      "role": "quotedScholar",
+      "postIds": [
+        "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"
+      ],
+      "citedWorkIds": [
+        "sahih-muslim"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-mijlaz",
+      "name": "Abū Mijlaz",
+      "role": "quotedScholar",
+      "postIds": [
+        "hukm-muhakamah-abu-mijlaz-ordnung-als-din-355"
+      ],
+      "citedWorkIds": [
+        "tafsir-at-tabari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-said-al-khudri",
+      "name": "Abū Saʿīd al-Khudrī",
+      "role": "quotedScholar",
+      "postIds": [
+        "erlaubnis-wird-dreimal-erbeten-192"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-shurayh",
+      "name": "Abū Shurayḥ",
+      "role": "quotedScholar",
+      "postIds": [
+        "der-nachbar-muss-vor-deinem-schaden-sicher-sein-189"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-umamah-al-bahili",
+      "name": "Abū Umāmah al-Bāhilī",
+      "role": "quotedScholar",
+      "postIds": [
+        "ghulat-108-die-hunde-des-feuers"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-zurah-ar-razi",
+      "name": "Abū Zurʿah ar-Rāzī",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-ahl-al-kalam-verwerfen-die-athar-302"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-zurah-ar-razi-und-abu-hatim-ar-razi",
+      "name": "Abū Zurʿah ar-Rāzī und Abū Ḥātim ar-Rāzī",
+      "role": "quotedScholar",
+      "postIds": [
+        "takfir-bil-umum-401"
+      ],
+      "citedWorkIds": [
+        "as-sunnah-abdullah-ahmad"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-zurah-und-abu-hatim-ar-razi",
+      "name": "Abū Zurʿah und Abū Ḥātim ar-Rāzī",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-der-weg-ist-athar-nicht-spekulation-311"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abu-ubayd-al-qasim-ibn-sallam",
+      "name": "Abū ʿUbayd al-Qāsim ibn Sallām",
+      "role": "quotedScholar",
+      "postIds": [
+        "eid-zaehlt-quran-rezitation-als-sprechen-122",
+        "refutation-092-abu-ubayd-quran-birammatihi"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 2
     },
     {
       "id": "ahmad-ibn-hanbal",
       "name": "Aḥmad ibn Ḥanbal",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-041",
-        "dar-al-tawhid-total-042",
-        "dar-al-tawhid-total-043"
+        "ahmad-grundlage-der-sunnah-001",
+        "ahmad-quran-kalam-allah-001",
+        "ahmad-wer-hadith-zurueckweist-001",
+        "aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran",
+        "athar-widerlegung-der-quran-ist-nicht-erschaffen-307",
+        "das-lachen-allahs-bestaetigung-ohne-gleichsetzung-113",
+        "refutation-091-lafziyyah-jahmiyyah",
+        "refutation-093-ahl-al-kalam-la-yuflihoun",
+        "refutation-094-allah-mutakallim",
+        "refutation-095-nuzul-bila-kayf"
       ],
       "citedWorkIds": [
-        "sharh-usul-itiqad-lalakai"
+        "al-ibanah-ibn-battah",
+        "as-sunnah-abdullah-ahmad",
+        "majmu-al-fatawa",
+        "sharh-usul-itiqad-lalakai",
+        "siyar-alam-an-nubala"
       ],
-      "postCount": 3
+      "postCount": 10
     },
     {
       "id": "al-awzai",
       "name": "al-Awzāʿī",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-016",
-        "dar-al-tawhid-total-049"
+        "al-awzai-sunnah-athar-001",
+        "athar-widerlegung-kein-reden-vor-den-sahabah-319"
       ],
       "citedWorkIds": [
-        "ash-shariah-al-ajurri",
         "sharh-usul-itiqad-lalakai"
       ],
       "postCount": 2
+    },
+    {
+      "id": "al-awzai-sufyan-ath-thawri-malik-ibn-anas-und-al-layth-ibn-sad",
+      "name": "al-Awzāʿī, Sufyān ath-Thawrī, Mālik ibn Anas und al-Layth ibn Saʿd",
+      "role": "quotedScholar",
+      "postIds": [
+        "refutation-097-ruyah-bila-kayf"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "al-barbahari",
+      "name": "al-Barbahārī",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-bidah-ist-nicht-kleinzureden-315"
+      ],
+      "citedWorkIds": [
+        "as-sunnah-abdullah-ahmad"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "al-bukhari",
+      "name": "al-Bukhārī",
+      "role": "quotedScholar",
+      "postIds": [
+        "aqidah-iman-ist-wort-und-tat-250"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "al-bukhari-ahmad-ibn-hanbal-und-ibn-taymiyyah",
+      "name": "al-Bukhārī, Aḥmad ibn Ḥanbal und Ibn Taymiyyah",
+      "role": "quotedScholar",
+      "postIds": [
+        "allahs-stimme-nicht-wie-die-stimmen-der-schoepfung-112"
+      ],
+      "citedWorkIds": [
+        "majmu-al-fatawa"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "al-fudayl-b-iyad",
+      "name": "al-Fuḍayl b. ʿIyāḍ",
+      "role": "quotedScholar",
+      "postIds": [
+        "makan-fudayl-ibn-iyad-rabb-yafal-ma-yasha-415"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "al-fudayl-ibn-iyad",
+      "name": "al-Fuḍayl ibn ʿIyāḍ",
+      "role": "quotedScholar",
+      "postIds": [
+        "al-fudayl-ibn-iyad-folge-der-rechtleitung-440",
+        "al-fudayl-zuhd-qanaah-001"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya",
+        "tarikh-dimashq"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "al-hasan-al-basri",
+      "name": "al-Ḥasan al-Baṣrī",
+      "role": "quotedScholar",
+      "postIds": [
+        "hasan-al-basri-geld-im-herzen-macht-mensch-klein-163",
+        "tazkiyyah-ist-nicht-selbstlob-225",
+        "wissen-muss-im-verhalten-sichtbar-werden-447"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya",
+        "sahih-al-bukhari",
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "al-lalakai",
+      "name": "al-Lālakāʾī",
+      "role": "quotedScholar",
+      "postIds": [
+        "al-lalakai-sifat-durch-offenbarung-001"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "anas-b-malik",
+      "name": "Anas b. Mālik",
+      "role": "quotedScholar",
+      "postIds": [
+        "keine-gegenseitige-abwendung-und-kein-hass-197",
+        "liebe-fuer-deinen-bruder-was-du-fuer-dich-liebst-179",
+        "verwandtschaftspflege-bringt-barakah-185"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "as-suddi",
+      "name": "as-Suddī",
+      "role": "quotedScholar",
+      "postIds": [
+        "hukm-muhakamah-suddi-544-warnung-an-juden-364"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ash-shafii-ahmad-ibn-hanbal-und-adh-dhahabi",
+      "name": "ash-Shāfiʿī, Aḥmad ibn Ḥanbal und adh-Dhahabī",
+      "role": "quotedScholar",
+      "postIds": [
+        "imam-ash-shafii-weder-rafidi-noch-kafir-115"
+      ],
+      "citedWorkIds": [
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "at-tabari",
+      "name": "aṭ-Ṭabarī",
+      "role": "quotedScholar",
+      "postIds": [
+        "at-tabari-muhakamah-wir-hoeren-und-gehorchen-353",
+        "hukm-muhakamah-gesandter-wird-gehorcht-381",
+        "hukm-muhakamah-heuchler-rechtfertigen-abwendung-382",
+        "hukm-muhakamah-hukm-und-ibadah-389",
+        "hukm-muhakamah-kufr-zulm-fisq-zusammen-386",
+        "hukm-muhakamah-muhkam-und-mutashabih-371",
+        "hukm-muhakamah-nicht-fuer-verraeter-streiten-392",
+        "hukm-muhakamah-nifaq-abwendung-vom-urteil-369",
+        "hukm-muhakamah-rajm-fall-tahrif-359",
+        "hukm-muhakamah-shariah-als-befehl-allahs-390",
+        "hukm-muhakamah-tabari-tahrif-und-ersetzung-356",
+        "hukm-muhakamah-tahakum-zum-taghut-360",
+        "hukm-muhakamah-tahrif-wenn-urteil-nur-passt-368",
+        "hukm-muhakamah-zwei-wege-glaube-und-ablehnung-432",
+        "makan-tabari-uluw-makan-422",
+        "muhakamah-allahs-gesetz-wird-nicht-durch-begierde-ersetzt-330",
+        "muhakamah-kein-urteil-besser-als-allahs-urteil-327",
+        "tagut-urteil-willentlich-zu-suchen-ist-der-getadelte-fall-202",
+        "tagut-wenn-urteil-beim-kahin-gesucht-wird-200",
+        "tawhid-341-allah-allein-wird-angebetet",
+        "tawhid-349-keine-ibadah-neben-allah"
+      ],
+      "citedWorkIds": [
+        "tafsir-at-tabari",
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 21
+    },
+    {
+      "id": "at-tabari-ibn-kathir",
+      "name": "aṭ-Ṭabarī / Ibn Kathīr",
+      "role": "quotedScholar",
+      "postIds": [
+        "hukm-muhakamah-abwendung-vom-herabgesandten-395",
+        "hukm-muhakamah-allah-ist-bester-richter-400",
+        "hukm-muhakamah-allah-weiss-was-in-herzen-ist-397",
+        "hukm-muhakamah-bestes-wort-als-massstab-431",
+        "hukm-muhakamah-bund-und-gehorchen-425",
+        "hukm-muhakamah-bundbruch-und-tahrif-426",
+        "hukm-muhakamah-folge-der-shariah-nicht-hawa-402",
+        "hukm-muhakamah-gehorsam-und-warnung-410",
+        "hukm-muhakamah-gerechtigkeit-auch-gegen-gegner-405",
+        "hukm-muhakamah-gerechtigkeit-auch-gegen-sich-406",
+        "hukm-muhakamah-gesandte-warnen-und-verkuenden-411",
+        "hukm-muhakamah-gesandter-zum-gehorsam-398",
+        "hukm-muhakamah-glaeubige-brueder-im-streit-409",
+        "hukm-muhakamah-halal-haram-ohne-erlaubnis-377",
+        "hukm-muhakamah-heimliche-intrige-gegen-urteil-417",
+        "hukm-muhakamah-islam-ganz-annehmen-424",
+        "hukm-muhakamah-kein-herzenswiderstand-399",
+        "hukm-muhakamah-kein-iman-ohne-taslim-374",
+        "hukm-muhakamah-kein-urteil-ohne-wissen-407",
+        "hukm-muhakamah-keiner-traegt-schuld-eines-anderen-413",
+        "hukm-muhakamah-luege-gegen-allah-halal-haram-380",
+        "hukm-muhakamah-nicht-fuer-verraeter-streiten-416",
+        "hukm-muhakamah-offenbarung-muss-uebermittelt-werden-430",
+        "hukm-muhakamah-partner-in-gesetzgebung-379",
+        "hukm-muhakamah-reform-mit-gerechtigkeit-408",
+        "hukm-muhakamah-richter-braucht-istighfar-415",
+        "hukm-muhakamah-scheinargumente-der-heuchler-396",
+        "hukm-muhakamah-schuld-auf-sich-selbst-419",
+        "hukm-muhakamah-schuld-nicht-auf-unschuldige-420",
+        "hukm-muhakamah-sicherheit-durch-tauhid-412",
+        "hukm-muhakamah-streit-zurueck-zu-allah-und-gesandtem-404",
+        "hukm-muhakamah-suht-und-luegenhoeren-384",
+        "hukm-muhakamah-sunnah-erklaert-den-quran-423",
+        "hukm-muhakamah-sura-verpflichtend-gemacht-391",
+        "hukm-muhakamah-taghut-verleugnen-394",
+        "hukm-muhakamah-taschri-von-satanswegen-403",
+        "hukm-muhakamah-taubah-nach-sunde-418",
+        "hukm-muhakamah-tawakkul-im-gehorsam-433",
+        "hukm-muhakamah-urteil-nach-dem-was-allah-zeigte-414",
+        "hukm-muhakamah-verbietet-nicht-das-erlaubte-378",
+        "hukm-muhakamah-verborgenes-wird-offengelegt-428",
+        "hukm-muhakamah-vergessen-des-geoffenbarten-427",
+        "hukm-muhakamah-verpflichtende-verse-422",
+        "hukm-muhakamah-vom-dunkel-zum-licht-429",
+        "hukm-muhakamah-weg-der-glaeubigen-421",
+        "hukm-muhakamah-wir-hoeren-und-gehorchen-375"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 46
+    },
+    {
+      "id": "at-tabari-al-mawardi-ibn-qudamah-und-ibn-taymiyyah",
+      "name": "aṭ-Ṭabarī, al-Māwardī, Ibn Qudāmah und Ibn Taymiyyah",
+      "role": "quotedScholar",
+      "postIds": [
+        "recht-zurueckholen-nicht-automatisch-schirk-akbar-162"
+      ],
+      "citedWorkIds": [
+        "majmu-al-fatawa"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "at-tabari-ibn-kathir-und-ibn-al-arabi",
+      "name": "aṭ-Ṭabarī, Ibn Kathīr und Ibn al-ʿArabī",
+      "role": "quotedScholar",
+      "postIds": [
+        "yusuf-hatte-echte-muhakamah-kein-nur-dialog-121"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "der-prophet",
+      "name": "Der Prophet ﷺ",
+      "role": "quotedScholar",
+      "postIds": [
+        "adab-ist-nicht-mit-worten-zu-verletzen-235",
+        "akhirah-macht-die-zunge-ernst-228",
+        "akhlaq-bedeutet-gute-zur-familie-236",
+        "aqidah-076-die-glaeubigen-sehen-ihren-herrn",
+        "aqidah-077-dua-ist-anbetung",
+        "aqidah-allah-wird-im-jenseits-gesehen-248",
+        "der-mensch-wird-mit-dem-sein-den-er-liebt-233",
+        "die-akhirah-lasst-weltliche-harte-klein-werden-237",
+        "die-nachsten-zum-propheten-am-jungsten-tag-221",
+        "diese-welt-ist-nicht-der-ruheort-des-glaubigen-226",
+        "dunya-liebe-beschadigt-die-akhirah-238",
+        "ein-einziger-tauchgang-zeigt-die-wahrheit-der-dunya-227",
+        "ein-gutes-wort-ist-sadaqah-445",
+        "fiqh-der-beste-mann-ist-gut-zu-seiner-familie-241",
+        "fiqh-die-frau-wird-nicht-gegen-ihren-willen-verheiratet-243",
+        "fiqh-frauen-sind-die-schwestern-der-maenner-240",
+        "fiqh-kein-falsches-recht-durch-urteil-nehmen-213",
+        "ghulat-099-die-gefahr-des-vorschnellen-takfir",
+        "ghulat-100-einen-muslim-des-kufr-zu-beschuldigen",
+        "ghulat-101-nicht-nach-mir-zu-kuffar-zurueckkehren",
+        "ghulat-102-hast-du-sein-herz-aufgeschnitten",
+        "ghulat-103-der-quran-ueberschreitet-ihre-kehlen-nicht",
+        "ghulat-104-sie-toeten-die-muslime-und-lassen-die-goetzendiener",
+        "ghulat-106-die-schlimmsten-der-schoepfung",
+        "ghulat-107-junge-im-alter-schwach-im-verstand",
+        "jahannam-wird-durch-begierden-leicht-gemacht-230",
+        "jannah-ist-hinter-dingen-die-der-nafs-schwerfallen-229",
+        "liebe-und-hass-mussen-fur-allah-gebunden-sein-234",
+        "liebe-zum-propheten-gehort-zum-iman-231",
+        "prophet-dunya-konkurrenz-ummah-548",
+        "sue-des-iman-durch-liebe-fur-allah-232",
+        "tarbiyah-das-kind-wird-auf-reinheit-geboren-255",
+        "tarbiyah-erziehung-beginnt-mit-sanftmut-253",
+        "tarbiyah-jeder-traegt-verantwortung-254",
+        "tarbiyah-kinder-auf-das-gebet-hinweisen-259",
+        "tarbiyah-wer-nicht-barmherzig-ist-erfaehrt-keine-barmherzigkeit-252",
+        "tawhid-079-haqq-allah-ala-al-ibad",
+        "tawhid-080-tawhid-fuehrt-zur-jannah",
+        "tawhid-081-dua-an-andere-als-allah",
+        "tawhid-082-la-ilaha-illa-allah-um-allahs-angesicht",
+        "tawhid-083-wissen-ueber-la-ilaha-illa-allah",
+        "tawhid-084-das-beste-wort-der-propheten",
+        "tawhid-085-keine-uebertreibung-beim-propheten",
+        "tawhid-086-kein-shirk-und-vergebung",
+        "tawhid-087-dhikr-der-einzigkeit-allahs",
+        "tawhid-088-tawhid-und-kufr-an-falscher-anbetung",
+        "tawhid-344-dua-ist-ibadah",
+        "vollkommener-iman-zeigt-sich-im-charakter-220",
+        "wer-sich-aus-unnotigem-zuruckhalt-222"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi",
+        "musannaf-ibn-abi-shaybah",
+        "musnad-ahmad",
+        "muwatta-malik",
+        "sahih-al-bukhari",
+        "sahih-muslim",
+        "sunan-abi-dawud"
+      ],
+      "postCount": 49
+    },
+    {
+      "id": "der-prophet-und-al-qadi-iyad",
+      "name": "Der Prophet ﷺ und al-Qāḍī ʿIyāḍ",
+      "role": "quotedScholar",
+      "postIds": [
+        "der-prophet-vor-der-offenbarung-war-kein-muschrik-111"
+      ],
+      "citedWorkIds": [
+        "musnad-ahmad"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "der-prophet-und-at-tabari",
+      "name": "Der Prophet ﷺ und aṭ-Ṭabarī",
+      "role": "quotedScholar",
+      "postIds": [
+        "der-stift-widerlegt-den-nur-muhammadi-hadith-110"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "der-prophet-und-ibn-hajar",
+      "name": "Der Prophet ﷺ und Ibn Ḥajar",
+      "role": "quotedScholar",
+      "postIds": [
+        "der-verlust-des-glaubens-wegen-suenden-125"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "der-prophet-an-nawawi-und-al-ayni",
+      "name": "Der Prophet ﷺ, an-Nawawī und al-ʿAynī",
+      "role": "quotedScholar",
+      "postIds": [
+        "osmanen-khilafah-der-nubuwwah-116"
+      ],
+      "citedWorkIds": [
+        "sunan-abi-dawud"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "hudayfah-ibn-al-yaman",
+      "name": "Ḥuḏayfah ibn al-Yamān",
+      "role": "quotedScholar",
+      "postIds": [
+        "hudhayfah-das-schlechte-erkennen-446"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "hudhayfah-ibn-al-yaman",
+      "name": "Ḥudhayfah ibn al-Yamān",
+      "role": "quotedScholar",
+      "postIds": [
+        "hudhayfah-nifaq-offen-getragen-441"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ibn-battah-al-ukbari",
+      "name": "Ibn Baṭṭah al-ʿUkbarī",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-mit-ahl-al-bidah-nicht-sitzen-316",
+        "ibn-battah-ahl-al-bidah-nicht-zum-herzen-lassen-294",
+        "ibn-battah-das-fundament-ist-festhalten-an-der-jamaah-293",
+        "ibn-battah-die-sunnah-ist-rettung-vor-spaltung-295",
+        "makan-ibn-battah-aala-makan-419"
+      ],
+      "citedWorkIds": [
+        "al-ibanah-ibn-battah"
+      ],
+      "postCount": 5
+    },
+    {
+      "id": "ibn-kathir",
+      "name": "Ibn Kathīr",
+      "role": "quotedScholar",
+      "postIds": [
+        "fiqh-frauen-haben-rechte-wie-pflichten-242",
+        "fiqh-maenner-sollen-frauen-nicht-schaden-256",
+        "hukm-muhakamah-das-urteil-gehoert-allah-367",
+        "hukm-muhakamah-jenseits-von-allahs-urteil-401",
+        "hukm-muhakamah-urteil-der-jahiliyyah-366",
+        "muhakamah-das-urteil-der-jahiliyyah-324",
+        "muhakamah-der-hukm-gehoert-allah-allein-320",
+        "muhakamah-der-streit-wird-zu-quran-und-sunnah-zurueckgebracht-326",
+        "muhakamah-die-entscheidung-gehoert-allah-und-seinem-gesandten-325",
+        "muhakamah-gesetzgebung-ohne-erlaubnis-allahs-336",
+        "muhakamah-kein-iman-ohne-annahme-des-urteils-des-propheten-323",
+        "muhakamah-keine-vorziehung-vor-allah-und-seinem-gesandten-337",
+        "muhakamah-taghut-urteil-wird-verworfen-322",
+        "tawhid-342-nur-dich-beten-wir-an",
+        "tawhid-343-die-mushrikun-verstanden-die-bedeutung-von-einem-gott",
+        "tawhid-345-fuersprecher-werden-nicht-angebetet",
+        "tawhid-346-naehe-zu-allah-wird-nicht-ueber-goetzen-gesucht",
+        "tawhid-347-millah-ibrahim-ist-lossagung-vom-shirk",
+        "tawhid-348-allah-liebt-ikhlas-in-der-ibadah"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 19
+    },
+    {
+      "id": "ibn-kathir-at-tabari",
+      "name": "Ibn Kathīr / aṭ-Ṭabarī",
+      "role": "quotedScholar",
+      "postIds": [
+        "hukm-muhakamah-kufr-begriff-braucht-tafsil-383",
+        "hukm-muhakamah-rabbiner-als-herren-376",
+        "hukm-muhakamah-wenn-es-passt-nehmen-sie-es-388"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 3
     },
     {
       "id": "ibn-masud",
       "name": "Ibn Masʿūd",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-014"
+        "hukm-muhakamah-ibn-masud-rishwa-im-urteil-358"
       ],
       "citedWorkIds": [
-        "sunan-ad-darimi"
+        "tafsir-ibn-kathir"
       ],
       "postCount": 1
     },
@@ -585,10 +1744,163 @@
       "name": "Ibn Sīrīn",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-013"
+        "aqidah-069-dieses-wissen-ist-din",
+        "aqidah-078-der-massstab-bei-ahl-al-ahwa",
+        "athar-widerlegung-wissen-ist-nicht-von-ahl-al-ahwa-zu-nehmen-318",
+        "manhaj-nicht-mit-ahl-al-ahwa-spielen-209"
+      ],
+      "citedWorkIds": [
+        "sahih-muslim",
+        "sunan-ad-darimi"
+      ],
+      "postCount": 4
+    },
+    {
+      "id": "ibn-taymiyyah",
+      "name": "Ibn Taymiyyah",
+      "role": "quotedScholar",
+      "postIds": [
+        "ibn-taymiyyah-ghulat-takfir-durch-suenden-352",
+        "ibn-taymiyyah-mittler-zur-anrufung-gemacht-164",
+        "muhakamah-ablehnung-des-urteils-ist-ablehnung-der-herrschaft-allahs-332",
+        "muhakamah-gehorsam-gegenueber-gelehrten-hat-grenzen-338",
+        "shirk-durch-anrufung-der-toten-und-abwesenden-207",
+        "shirk-in-der-not-die-hilfe-gehort-allah-allein-206",
+        "shirk-ist-der-grote-ungehorsam-205",
+        "shirk-wenn-der-mittler-angerufen-wird-204",
+        "wahrer-zuhd-ist-zu-lassen-was-der-akhirah-nicht-nutzt-239"
+      ],
+      "citedWorkIds": [
+        "majmu-al-fatawa"
+      ],
+      "postCount": 9
+    },
+    {
+      "id": "ibn-abbas",
+      "name": "Ibn ʿAbbās",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-die-khawarij-verliessen-durch-fehlverstaendnis-305",
+        "hukm-muhakamah-ibn-abbas-kufr-duna-kufr-354",
+        "hukm-muhakamah-leugnung-und-anerkennung-372",
+        "muhakamah-wer-nicht-nach-allahs-offenbarung-richtet-321",
+        "tawakkul-hasbunallah-001"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari",
+        "sunan-ad-darimi",
+        "tafsir-at-tabari",
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 5
+    },
+    {
+      "id": "ibn-abbas-tawus",
+      "name": "Ibn ʿAbbās / Ṭāwūs",
+      "role": "quotedScholar",
+      "postIds": [
+        "hukm-muhakamah-schlussstein-kufr-duna-kufr-393"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ibn-abbas-und-abu-isa-at-tirmidhi",
+      "name": "Ibn ʿAbbās und Abū ʿĪsā at-Tirmidhī",
+      "role": "quotedScholar",
+      "postIds": [
+        "allahs-hand-und-die-groesse-der-schoepfung-in-seiner-hand-117"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ibn-umar",
+      "name": "Ibn ʿUmar",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-qadar-wird-nicht-mit-meinung-bestritten-304"
       ],
       "citedWorkIds": [
         "sahih-muslim"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ibn-umar-al-hasan-al-basri-und-ibn-taymiyyah",
+      "name": "Ibn ʿUmar, al-Ḥasan al-Baṣrī und Ibn Taymiyyah",
+      "role": "quotedScholar",
+      "postIds": [
+        "gueltigkeit-des-gebets-vs-urteil-ueber-personen-124"
+      ],
+      "citedWorkIds": [
+        "majmu-al-fatawa"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ash-shafii",
+      "name": "Imām ash-Shāfiʿī",
+      "role": "quotedScholar",
+      "postIds": [
+        "imam-ash-shafii-wissen-ist-das-was-nuetzt-288"
+      ],
+      "citedWorkIds": [
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ishaq-ibn-rahawayh",
+      "name": "Isḥāq ibn Rāhawayh",
+      "role": "quotedScholar",
+      "postIds": [
+        "ishaq-ibn-rahawayh-der-weg-der-fruehen-imame-ist-buch-und-sunnah-286",
+        "ishaq-ibn-rahawayh-die-sunnah-wird-nicht-verlassen-285",
+        "ishaq-ibn-rahawayh-ruyah-allahs-ist-wahrheit-284"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "ismail-ibn-yahya-al-muzani",
+      "name": "Ismāʿīl ibn Yaḥyā al-Muzanī",
+      "role": "quotedScholar",
+      "postIds": [
+        "354-547"
+      ],
+      "citedWorkIds": [
+        "as-sunnah-abdullah-ahmad"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "iyas-b-muawiyah",
+      "name": "Iyās b. Muʿāwiyah",
+      "role": "quotedScholar",
+      "postIds": [
+        "iyas-reine-herzen-wenig-ghibah-546"
+      ],
+      "citedWorkIds": [
+        "musannaf-ibn-abi-shaybah"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "jabir-b-abdillah",
+      "name": "Jābir b. ʿAbdillāh",
+      "role": "quotedScholar",
+      "postIds": [
+        "naehe-zum-propheten-durch-schoenen-charakter-170"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi"
       ],
       "postCount": 1
     },
@@ -597,10 +1909,140 @@
       "name": "Mālik ibn Anas",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-015"
+        "athar-widerlegung-die-sunnah-ist-arche-nuh-317",
+        "malik-adab-vor-wissen-001",
+        "malik-adab-vor-wissen-396",
+        "takfir-bil-umum-402"
       ],
       "citedWorkIds": [
+        "as-sunnah-abdullah-ahmad",
+        "hilyat-al-awliya",
         "tarikh-dimashq"
+      ],
+      "postCount": 4
+    },
+    {
+      "id": "malik-ibn-dinar",
+      "name": "Mālik ibn Dīnār رحمه الله",
+      "role": "quotedScholar",
+      "postIds": [
+        "malik-ibn-dinar-das-beste-dieser-dunya-448",
+        "malik-ibn-dinar-haerte-des-herzens-444"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya",
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "muhammad-b-ismail-al-bukhari",
+      "name": "Muḥammad b. Ismāʿīl al-Bukhārī",
+      "role": "quotedScholar",
+      "postIds": [
+        "bukhari-sahih-ehrfurcht-411"
+      ],
+      "citedWorkIds": [
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "muhammad-ibn-idris-ash-shafii",
+      "name": "Muḥammad ibn Idrīs ash-Shāfiʿī",
+      "role": "quotedScholar",
+      "postIds": [
+        "shafii-buch-widerspricht-sunnah-001",
+        "shafii-debatte-als-nasiha-001",
+        "shafii-ich-wollte-seine-rechtleitung-001",
+        "shafii-iman-wort-und-tat-001",
+        "shafii-keine-zuschreibung-zu-mir-001",
+        "shafii-schmuck-des-wissens-001",
+        "shafii-sunnah-vor-meinem-wort-001",
+        "shafii-taten-und-worte-001",
+        "shafii-wissen-das-nuetzt-001"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya",
+        "siyar-alam-an-nubala",
+        "sunan-ad-darimi"
+      ],
+      "postCount": 9
+    },
+    {
+      "id": "muhammad-ibn-jafar",
+      "name": "Muḥammad ibn Jaʿfar",
+      "role": "quotedScholar",
+      "postIds": [
+        "refutation-096-istiwa-ohne-takyif"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "muhammad-ibn-shihab-az-zuhri",
+      "name": "Muḥammad ibn Shihāb az-Zuhrī",
+      "role": "quotedScholar",
+      "postIds": [
+        "az-zuhri-festhalten-an-der-sunnah-rettung-432"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "muhammad-ibn-sirin",
+      "name": "Muḥammad ibn Sīrīn",
+      "role": "quotedScholar",
+      "postIds": [
+        "athar-widerlegung-ahl-al-ahwa-nicht-zuhoeren-309",
+        "athar-widerlegung-dieses-wissen-ist-din-310",
+        "usul-des-manhaj-ahl-al-ahwa-nicht-das-herz-oeffnen-257"
+      ],
+      "citedWorkIds": [
+        "sahih-muslim",
+        "sunan-ad-darimi"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "mujahid-ibn-jabr",
+      "name": "Mujāhid ibn Jabr",
+      "role": "quotedScholar",
+      "postIds": [
+        "tagut-ist-eine-falsche-autoritat-201",
+        "takfir-bil-umum-408"
+      ],
+      "citedWorkIds": [
+        "tafsir-at-tabari",
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "mujahid-ibn-jabr-und-al-farra",
+      "name": "Mujāhid ibn Jabr und al-Farrāʾ",
+      "role": "quotedScholar",
+      "postIds": [
+        "mujahid-und-ein-zeuge-bedeutet-hukm-hakim-118"
+      ],
+      "citedWorkIds": [
+        "tafsir-at-tabari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "prophet-muhammad",
+      "name": "Prophet Muḥammad ﷺ",
+      "role": "quotedScholar",
+      "postIds": [
+        "fitrah-schayatin-irrefuehrung-410"
+      ],
+      "citedWorkIds": [
+        "sahih-muslim"
       ],
       "postCount": 1
     },
@@ -609,42 +2051,32 @@
       "name": "Prophet ﷺ",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-001",
-        "dar-al-tawhid-total-002",
-        "dar-al-tawhid-total-003",
-        "dar-al-tawhid-total-004",
-        "dar-al-tawhid-total-005",
-        "dar-al-tawhid-total-006",
-        "dar-al-tawhid-total-007",
-        "dar-al-tawhid-total-008",
-        "dar-al-tawhid-total-009",
-        "dar-al-tawhid-total-010",
-        "dar-al-tawhid-total-011",
-        "dar-al-tawhid-total-012",
-        "dar-al-tawhid-total-017",
-        "dar-al-tawhid-total-018",
-        "dar-al-tawhid-total-019",
-        "dar-al-tawhid-total-020",
-        "dar-al-tawhid-total-021",
-        "dar-al-tawhid-total-022",
-        "dar-al-tawhid-total-023",
-        "dar-al-tawhid-total-024",
-        "dar-al-tawhid-total-025",
-        "dar-al-tawhid-total-026",
-        "dar-al-tawhid-total-027",
-        "dar-al-tawhid-total-028",
-        "dar-al-tawhid-total-029",
-        "dar-al-tawhid-total-030",
-        "dar-al-tawhid-total-031",
-        "dar-al-tawhid-total-032",
-        "dar-al-tawhid-total-033",
-        "dar-al-tawhid-total-034",
-        "dar-al-tawhid-total-035",
-        "dar-al-tawhid-total-036",
-        "dar-al-tawhid-total-037",
-        "dar-al-tawhid-total-038",
-        "dar-al-tawhid-total-039",
-        "dar-al-tawhid-total-040"
+        "adab-lass-was-dich-nicht-angeht-001",
+        "adab-sprich-gutes-oder-schweige-001",
+        "ahmadiyyah-akhir-al-masajid-129",
+        "ahmadiyyah-al-aqib-letzter-prophet-130",
+        "akhlak-besten-mit-charakter-001",
+        "akhlak-schwerste-tat-waage-001",
+        "akhlak-vollkommener-iman-001",
+        "amali-sind-nur-nach-niyyah-199",
+        "bei-bedraengnis-zur-salah-001",
+        "dua-dhi-nun-001",
+        "dua-ist-ibadah-001",
+        "fiqh-dunya-und-offenbarung-001",
+        "fiqh-halal-haram-schubuhat-001",
+        "fiqh-takwa-nach-vermogen-001",
+        "herzen-und-taten-001",
+        "ikhlas-allah-sieht-auf-herzen-und-taten-350",
+        "sabr-und-sieg-001",
+        "sifat-allah-dahik-ohne-takyif-001",
+        "sifat-allah-yad-adam-001",
+        "sifat-allah-yamin-allah-001",
+        "tawakkul-binde-sie-und-vertraue-001",
+        "tawakkul-frag-nur-allah-001",
+        "tawakkul-und-nutzen-001",
+        "tawakkul-wie-die-voegel-001",
+        "ya-hayyu-ya-qayyum-001",
+        "zuflucht-bei-allah-001"
       ],
       "citedWorkIds": [
         "jami-at-tirmidhi",
@@ -652,18 +2084,213 @@
         "sahih-muslim",
         "sunan-abi-dawud"
       ],
-      "postCount": 36
+      "postCount": 26
+    },
+    {
+      "id": "qatadah-mujahid-und-ibn-al-jawzi",
+      "name": "Qatādah, Mujāhid und Ibn al-Jawzī",
+      "role": "quotedScholar",
+      "postIds": [
+        "im-himmel-ein-ilah-und-auf-der-erde-ein-ilah-127"
+      ],
+      "citedWorkIds": [
+        "tafsir-at-tabari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "rabiah",
+      "name": "Rabīʿah",
+      "role": "quotedScholar",
+      "postIds": [
+        "rabiah-istiwa-nicht-unbekannt-134"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "sahl-b-sad",
+      "name": "Sahl b. Saʿd",
+      "role": "quotedScholar",
+      "postIds": [
+        "wer-seine-zunge-bewahrt-dem-wird-paradies-versprochen-186"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "salman-al-farisi",
+      "name": "Salmān al-Fārisī",
+      "role": "quotedScholar",
+      "postIds": [
+        "salman-gib-jedem-sein-recht-451",
+        "takfir-bil-umum-404"
+      ],
+      "citedWorkIds": [
+        "musnad-ahmad",
+        "sahih-al-bukhari"
+      ],
+      "postCount": 2
     },
     {
       "id": "sufyan-ath-thawri",
       "name": "Sufyān ath-Thawrī",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-047",
-        "dar-al-tawhid-total-048"
+        "athar-widerlegung-murjiah-trennen-handlung-vom-iman-306",
+        "sufyan-ath-thawri-gewissheit-allah-nicht-anklagen-431",
+        "sufyan-ath-thawri-handle-nach-dem-wissen-291",
+        "sufyan-ath-thawri-wenig-essen-und-wenig-schlaf-staerken-das-herz-292",
+        "sufyan-ath-thawri-wissen-erleichterung-vertrauenswuerdiger-442",
+        "sufyan-thawri-iman-athar-001",
+        "sufyan-thawri-zuhd-001"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya",
+        "jami-bayan-al-ilm",
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 7
+    },
+    {
+      "id": "sufyan-ath-thawri-und-abdullah-ibn-al-mubarak",
+      "name": "Sufyān ath-Thawrī und ʿAbdullāh ibn al-Mubārak",
+      "role": "quotedScholar",
+      "postIds": [
+        "hinter-ihm-beten-ist-kein-shirk-ritual-119"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "sufyan-ibn-uyaynah",
+      "name": "Sufyān ibn ʿUyaynah",
+      "role": "quotedScholar",
+      "postIds": [
+        "refutation-098-ibn-uyaynah-jahmi",
+        "sufyan-ibn-uyaynah-zuhd-001"
+      ],
+      "citedWorkIds": [
+        "hilyat-al-awliya",
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "tawus",
+      "name": "Ṭāwūs",
+      "role": "quotedScholar",
+      "postIds": [
+        "hukm-muhakamah-tawus-kein-austritt-aus-millah-365"
+      ],
+      "citedWorkIds": [
+        "tafsir-ibn-kathir"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ubayy-ibn-kab",
+      "name": "Ubayy ibn Kaʿb",
+      "role": "quotedScholar",
+      "postIds": [
+        "ubayy-sunnah-besser-als-uebertreibung-392"
       ],
       "citedWorkIds": [
         "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "yahya-b-main",
+      "name": "Yaḥyā b. Maʿīn",
+      "role": "quotedScholar",
+      "postIds": [
+        "yahya-bin-main-ayat-al-kursi-im-haus-409"
+      ],
+      "citedWorkIds": [
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "yazid-ibn-harun",
+      "name": "Yazīd ibn Hārūn",
+      "role": "quotedScholar",
+      "postIds": [
+        "yazid-harun-fitrah-istiwa-jahmiyyah-428"
+      ],
+      "citedWorkIds": [
+        "as-sunnah-abdullah-ahmad"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "zayd-ibn-amr-ibn-nufayl",
+      "name": "Zayd ibn ʿAmr ibn Nufayl",
+      "role": "quotedScholar",
+      "postIds": [
+        "takfir-bil-umum-405",
+        "takfir-bil-umum-406",
+        "takfir-bil-umum-407"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 3
+    },
+    {
+      "id": "zuhayr-ibn-abbad",
+      "name": "Zuhayr ibn ʿAbbād",
+      "role": "quotedScholar",
+      "postIds": [
+        "nuzul-allahs-ist-haqq-424"
+      ],
+      "citedWorkIds": [
+        "as-sunnah-abdullah-ahmad"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abd-ar-rahman-b-mahdi",
+      "name": "ʿAbd ar-Raḥmān b. Mahdī",
+      "role": "quotedScholar",
+      "postIds": [
+        "abd-ar-rahman-ibn-mahdi-imam-im-wissen-413"
+      ],
+      "citedWorkIds": [
+        "siyar-alam-an-nubala"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abd-ar-rahman-ibn-mahdi",
+      "name": "ʿAbd ar-Raḥmān ibn Mahdī",
+      "role": "quotedScholar",
+      "postIds": [
+        "abdurrahman-ibn-mahdi-kalam-allah-musa-001"
+      ],
+      "citedWorkIds": [
+        "sharh-usul-itiqad-lalakai"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abdullah-b-amr",
+      "name": "ʿAbdullāh b. ʿAmr",
+      "role": "quotedScholar",
+      "postIds": [
+        "der-muslim-verletzt-nicht-mit-zunge-und-hand-193",
+        "wer-barmherzig-ist-dem-wird-barmherzigkeit-erwiesen-176"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari",
+        "sunan-abi-dawud"
       ],
       "postCount": 2
     },
@@ -672,12 +2299,200 @@
       "name": "ʿAbdullāh ibn Masʿūd",
       "role": "quotedScholar",
       "postIds": [
-        "dar-al-tawhid-total-050"
+        "athar-widerlegung-nicht-jede-gute-absicht-trifft-die-sunnah-300",
+        "ibn-masud-glaeubige-fuerchtet-suenden-165",
+        "ibn-masud-opfere-vergaengliche-fuer-bleibende-34519",
+        "ibn-masud-wenig-sunnah-besser-als-viel-bidah-351",
+        "ibn-masud-wenn-fiqh-wenig-wird-443",
+        "manhaj-bidah-beginnt-oft-mit-guter-absicht-208",
+        "usul-des-manhaj-nicht-jede-schoene-tat-ist-sunnah-246",
+        "wahrhaftigkeit-fuehrt-zum-paradies-174"
+      ],
+      "citedWorkIds": [
+        "al-ibanah-ibn-battah",
+        "musannaf-ibn-abi-shaybah",
+        "muwatta-malik",
+        "sahih-al-bukhari",
+        "sahih-muslim",
+        "sunan-ad-darimi"
+      ],
+      "postCount": 8
+    },
+    {
+      "id": "abdullah-ibn-abbas",
+      "name": "ʿAbdullāh ibn ʿAbbās",
+      "role": "quotedScholar",
+      "postIds": [
+        "ibn-abbas-rabbaniyin-hilm-fiqh-549"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "abdullah-ibn-umar",
+      "name": "ʿAbdullāh ibn ʿUmar",
+      "role": "quotedScholar",
+      "postIds": [
+        "ghulat-105-verse-ueber-kuffar-auf-muslime-anwenden",
+        "jeder-ist-hirte-und-verantwortlich-180"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 2
+    },
+    {
+      "id": "amr-b-shuayb",
+      "name": "ʿAmr b. Shuʿayb",
+      "role": "quotedScholar",
+      "postIds": [
+        "kinder-frueh-an-alah-gewoehnen-181"
+      ],
+      "citedWorkIds": [
+        "sunan-abi-dawud"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "amr-ibn-dinar",
+      "name": "ʿAmr ibn Dīnār",
+      "role": "quotedScholar",
+      "postIds": [
+        "aqidah-070-der-quran-ist-nicht-erschaffen",
+        "refutation-089-quran-kalam-allah-ghayr-makhluq"
       ],
       "citedWorkIds": [
         "sharh-usul-itiqad-lalakai"
       ],
+      "postCount": 2
+    },
+    {
+      "id": "amr-ibn-abasah-as-sulami",
+      "name": "ʿAmr ibn ʿAbasah as-Sulamī",
+      "role": "quotedScholar",
+      "postIds": [
+        "takfir-bil-umum-400"
+      ],
+      "citedWorkIds": [
+        "sahih-muslim"
+      ],
       "postCount": 1
+    },
+    {
+      "id": "ata-b-abi-rabah",
+      "name": "ʿAṭāʾ b. Abī Rabāḥ",
+      "role": "quotedScholar",
+      "postIds": [
+        "ata-fudul-al-kalam-zungen-disziplin-taqwa-168"
+      ],
+      "citedWorkIds": [
+        "musannaf-ibn-abi-shaybah"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "aishah-bint-abi-bakr",
+      "name": "ʿĀʾishah bint Abī Bakr",
+      "role": "quotedScholar",
+      "postIds": [
+        "aishah-frauen-ansar-wissen-551"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "aishah",
+      "name": "ʿĀʾishah رضي الله عنها",
+      "role": "quotedScholar",
+      "postIds": [
+        "aishah-scham-darf-nicht-vom-wissen-abhalten-450",
+        "der-beste-ist-der-beste-zu-seiner-familie-195",
+        "die-schonste-erziehung-war-der-quran-223",
+        "milde-schmueckt-jede-sache-175"
+      ],
+      "citedWorkIds": [
+        "jami-at-tirmidhi",
+        "sahih-muslim",
+        "sunan-ad-darimi"
+      ],
+      "postCount": 4
+    },
+    {
+      "id": "imran-b-husayn",
+      "name": "ʿImrān b. Ḥuṣayn",
+      "role": "quotedScholar",
+      "postIds": [
+        "aya-bringt-nur-gutes-191"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "ubadah-b-as-samit",
+      "name": "ʿUbādah b. aṣ-Ṣāmit",
+      "role": "quotedScholar",
+      "postIds": [
+        "kein-schaden-und-kein-gegenschaden-194"
+      ],
+      "citedWorkIds": [
+        "sunan-ibn-majah"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "umar-ibn-al-khattab-al-hasan-al-basri-und-maymun-ibn-mihran",
+      "name": "ʿUmar ibn al-Khaṭṭāb, al-Ḥasan al-Baṣrī und Maymūn ibn Mihrān",
+      "role": "quotedScholar",
+      "postIds": [
+        "ghulat-widerlegt-urteil-nach-dem-offenkundigen-114"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "umar-ibn-abd-al-aziz",
+      "name": "ʿUmar ibn ʿAbd al-ʿAzīz",
+      "role": "quotedScholar",
+      "postIds": [
+        "manhaj-der-sichere-weg-ist-die-sunnah-210"
+      ],
+      "citedWorkIds": [
+        "jami-bayan-al-ilm"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "uthman-b-affan",
+      "name": "ʿUthmān b. ʿAffān",
+      "role": "quotedScholar",
+      "postIds": [
+        "der-beste-unterricht-ist-quran-lernen-und-lehren-183"
+      ],
+      "citedWorkIds": [
+        "sahih-al-bukhari"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "uthman-ibn-said-ad-darimi",
+      "name": "ʿUthmān ibn Saʿīd ad-Dārimī",
+      "role": "quotedScholar",
+      "postIds": [
+        "ad-darimi-ityan-allahs-bedeutung-klar-132",
+        "ad-darimi-sifat-nuzul-001"
+      ],
+      "citedWorkIds": [
+        "ar-radd-ala-al-jahmiyyah-ad-darimi"
+      ],
+      "postCount": 2
     }
   ]
 }

@@ -749,6 +749,63 @@
     return (ids || []).map((id) => map.get(String(id))).filter(Boolean);
   }
 
+  function comparePosts(a, b) {
+    if (typeof global.comparePostsNewestFirst === "function") {
+      return global.comparePostsNewestFirst(a, b);
+    }
+    return String(b?.id || "").localeCompare(String(a?.id || ""), undefined, { numeric: true });
+  }
+
+  function bookTitleKeys(book) {
+    return [book?.title, ...(book?.aliases || [])].map(normalizeSearchText).filter(Boolean);
+  }
+
+  function postMatchesBook(post, book) {
+    const postBook = normalizeSearchText(post?.book);
+    if (!postBook || !book) return false;
+    const keys = bookTitleKeys(book);
+    if (keys.includes(postBook)) return true;
+    return keys.some((key) => postBook.includes(key) || key.includes(postBook));
+  }
+
+  function postsForBook(book) {
+    const allPosts = Array.isArray(global.posts) ? global.posts : [];
+    if (!book) return [];
+    if (allPosts.length) {
+      const matched = allPosts.filter((post) => postMatchesBook(post, book)).sort(comparePosts);
+      if (matched.length) return matched;
+    }
+    return postsByIds(book.postIds).sort(comparePosts);
+  }
+
+  function postsForScholar(scholar) {
+    const allPosts = Array.isArray(global.posts) ? global.posts : [];
+    if (!scholar) return [];
+    if (typeof global.postsForScholarKey === "function") {
+      for (const key of [scholar.id, scholar.name].filter(Boolean)) {
+        const matched = global.postsForScholarKey(key);
+        if (matched?.length) return [...matched].sort(comparePosts);
+      }
+    }
+    const nameKey = normalizeSearchText(scholar.name);
+    if (allPosts.length && nameKey) {
+      const matched = allPosts.filter((post) => {
+        const scholarText = String(post?.scholar || "");
+        if (!scholarText) return false;
+        if (typeof global.splitScholarParts === "function" && typeof global.mapScholarPart === "function") {
+          return global.splitScholarParts(scholarText).some((part) => {
+            const mapped = global.mapScholarPart(part);
+            return mapped?.key === scholar.id || normalizeSearchText(mapped?.label) === nameKey;
+          });
+        }
+        const key = normalizeSearchText(scholarText);
+        return key === nameKey || key.includes(nameKey) || nameKey.includes(key);
+      }).sort(comparePosts);
+      if (matched.length) return matched;
+    }
+    return postsByIds(scholar.postIds).sort(comparePosts);
+  }
+
   function postCardHtml(post) {
     if (typeof global.postCard === "function") return global.postCard(post);
     return `<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><h3>${esc(post.title)}</h3></article>`;
@@ -836,7 +893,8 @@
 
   function renderBookCard(book) {
     const search = bookSearchBlob(book);
-    const postCount = Number(book.postCount || 0);
+    const relatedPosts = postsForBook(book);
+    const postCount = relatedPosts.length || Number(book.postCount || 0);
     const postLabel = postCount ? `${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}` : "Katalog";
     return `<button type="button" class="qsrc-lib-card qsrc-card" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}" aria-label="${esc(book.title)} öffnen">
       ${libCoverHtml(book)}
@@ -864,7 +922,7 @@
       .slice(0, 2);
     const workTitles = works.map((book) => book.title).join(", ");
     const search = scholarSearchBlob(scholar);
-    const postCount = Number(scholar.postCount || 0);
+    const postCount = (postsForScholar(scholar).length) || Number(scholar.postCount || 0);
     const accent = categoryAccent(works[0]?.category || "gelehrter");
     return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
       <div class="qsrc-cover-wrap" aria-hidden="true"><div class="qsrc-cover-fallback">ʿIlm</div></div>
@@ -937,7 +995,7 @@
 
     const aliases = (book.aliases || []).filter((alias) => alias && !isHiddenPlaceholder(alias));
     const quoted = (book.quotedScholars || []).filter((name) => name && !isHiddenPlaceholder(name));
-    const relatedPosts = postsByIds(book.postIds);
+    const relatedPosts = postsForBook(book);
 
     return `${setPageHeader(book.title, book.category || "Geprüftes Werk", "Quellenbibliothek")}
 <section class="qsrc-detail">
@@ -973,7 +1031,7 @@
     const works = (scholar.citedWorkIds || [])
       .map((id) => state.booksById.get(id))
       .filter(Boolean);
-    const relatedPosts = postsByIds(scholar.postIds);
+    const relatedPosts = postsForScholar(scholar);
 
     return `${setPageHeader(scholar.name, "Zitierter Gelehrter", "Quellenbibliothek")}
 <section class="qsrc-detail">

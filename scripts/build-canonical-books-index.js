@@ -5,11 +5,59 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const POSTS_PATH = path.join(ROOT, 'posts.json');
+const POSTS_INDEX_PATH = path.join(ROOT, 'content', 'posts', 'posts-index.json');
+const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const AUTHORITY_PATH = path.join(ROOT, 'data', 'library-authority.json');
 const OUTPUT_PATH = path.join(ROOT, 'data', 'canonical-books-index.json');
 const PUBLIC_BOOKS_PATH = path.join(ROOT, 'data', 'books-library.json');
 const PUBLIC_SCHOLARS_PATH = path.join(ROOT, 'data', 'scholars-library.json');
 const REPORT_PATH = path.join(ROOT, 'data', 'library-metadata-report.json');
+
+function parseValue(value) {
+  const text = String(value || '').trim();
+  if (!text) return '';
+  if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith("'") && text.endsWith("'"))) {
+    return text.slice(1, -1);
+  }
+  return text;
+}
+
+function parseFrontMatter(markdown, filename) {
+  const src = String(markdown || '').replace(/^\uFEFF/, '');
+  const match = src.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  const yaml = match ? match[1] || '' : '';
+  const frontmatter = {};
+  for (const line of yaml.split(/\r?\n/)) {
+    const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!keyMatch) continue;
+    const key = keyMatch[1];
+    const raw = keyMatch[2].trim();
+    frontmatter[key] = raw === '' ? '' : parseValue(raw);
+  }
+  return {
+    id: frontmatter.id || filename.replace(/\.md$/i, ''),
+    title: frontmatter.title || filename.replace(/\.md$/i, ''),
+    book: frontmatter.book || '',
+    scholar: frontmatter.scholar || '',
+    source: frontmatter.source || '',
+    category: frontmatter.category || ''
+  };
+}
+
+function loadProductionPosts() {
+  if (fs.existsSync(POSTS_INDEX_PATH)) {
+    const index = readJson(POSTS_INDEX_PATH);
+    const posts = [];
+    for (const entry of index.files || []) {
+      const filePath = path.join(POSTS_DIR, entry.name);
+      if (!fs.existsSync(filePath)) continue;
+      posts.push(parseFrontMatter(fs.readFileSync(filePath, 'utf8'), entry.name));
+    }
+    if (posts.length) return posts;
+  }
+  if (fs.existsSync(POSTS_PATH)) return readJson(POSTS_PATH);
+  return [];
+}
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -135,7 +183,7 @@ function assertPublicOutput(bookList, scholarList) {
 }
 
 function main() {
-  const posts = readJson(POSTS_PATH);
+  const posts = loadProductionPosts();
   const authority = readJson(AUTHORITY_PATH);
   const { lookup, authorityErrors } = buildAuthorityLookup(authority);
 
@@ -253,7 +301,7 @@ function main() {
       postIds: uniqueSorted(book.postIds),
       quotedScholars: uniqueSorted(book.quotedScholars),
       postCount: new Set(book.postIds).size,
-      coverUrl: `/test/assets/library/covers/qsrc/${book.id}.svg`
+      coverUrl: `/assets/library/covers/qsrc/${book.id}.svg`
     }))
     .filter((book) => book.verification === 'verified')
     .sort((a, b) => a.category.localeCompare(b.category, 'de') || a.author.localeCompare(b.author, 'de') || a.title.localeCompare(b.title, 'de'));
