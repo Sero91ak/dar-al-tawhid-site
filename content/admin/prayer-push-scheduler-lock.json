@@ -1,0 +1,23 @@
+{
+  "locked": true,
+  "incident": "Maghrib-15-Min-Push-Schleife 2026-07-22",
+  "fixPr": 283,
+  "fixMergeCommit": "1f03835458d56821495dc78452763bcbd2e01f64",
+  "lockedAt": "2026-07-22T19:45:00.000Z",
+  "lockedPaths": [
+    "cloudflare/prayer-push-scheduler.js",
+    "scripts/prayer-push-loop-guard.js",
+    "scripts/prayer-push-integrity-guard.js"
+  ],
+  "unlockPolicy": "Änderungen nur nach ausdrücklicher Nutzer-Freigabe (z. B. „prayer-push-scheduler freigeben“). Deploy/CI blockiert gefährliche Muster automatisch.",
+  "requiredMarkers": [
+    "slotDayKey",
+    "scheduleSeedBySendAfter",
+    "plannedSendAfter == null",
+    "PRAYER_PUSH_LOOP_GUARD"
+  ],
+  "forbiddenPatterns": [
+    "if (slot.mode === \"advance\" && entryAt > now)",
+    "sendAfter.toISOString(),\\n    group.lat.toFixed(3)"
+  ]
+}

@@ -170,6 +170,7 @@ function normAdvance(value) {
   return [5, 10, 15].includes(number) ? number : DEFAULT_PRAYER_ADVANCE_MINUTES;
 }
 
+// PRAYER_PUSH_LOOP_GUARD: stabiler slotDay-Idempotency-Key – nicht ohne Nutzer-Freigabe ändern.
 function slotDayKey(localDate) {
   return `${localDate.year}-${String(localDate.month).padStart(2, "0")}-${String(localDate.day).padStart(2, "0")}`;
 }

@@ -16,6 +16,8 @@ on:
       - cloudflare/feed-backgrounds-*.js
       - assets/prayer-push-tags.js
       - scripts/prayer-push-integrity-guard.js
+      - scripts/prayer-push-loop-guard.js
+      - content/admin/prayer-push-scheduler-lock.json
       - scripts/send-prayer-push.js
       - .github/workflows/prayer-push.yml
       - .github/workflows/setup-feed-api-keys.yml
@@ -57,6 +59,12 @@ jobs:
 
       - name: Prayer push integrity guard
         run: node ../scripts/prayer-push-integrity-guard.js
+
+      - name: Prayer push loop guard
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before }}
+        run: node ../scripts/prayer-push-loop-guard.js
 
       - name: Install Wrangler
         run: npm install -g wrangler

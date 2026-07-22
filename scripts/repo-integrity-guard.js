@@ -55,6 +55,8 @@ const NEVER_DELETE_PREFIXES = [
   "cloudflare/worker.js",
   "scripts/app-health-check.js",
   "scripts/push-system-guard.js",
+  "scripts/prayer-push-loop-guard.js",
+  "content/admin/prayer-push-scheduler-lock.json",
   "scripts/version-update-guard.js",
   "manifest.json",
   "wrangler.toml",
