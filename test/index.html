@@ -46,18 +46,13 @@
   --text:#f6edd2;--muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
   --danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);
-  --font-display:"Instrument Serif","Baskerville","Georgia",serif;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-arabic:"Noto Naskh Arabic","Amiri",serif;
-  --font-arabic-ui:"Noto Naskh Arabic","Noto Naskh Arabic",serif;
-  --font-transliteration:"Source Serif 4","Noto Serif","Georgia",serif;
-  --font-reader:"Source Serif 4","Noto Serif","Georgia",serif;
-  --font-signature:"Allura","Brush Script MT",cursive;
   --serif:var(--font-display);
   --display:var(--font-display);
-  --script:var(--font-signature);
+  --script:"Allura","Brush Script MT",cursive;
   --sans:var(--font-ui);
-  --font-serif:var(--font-transliteration);
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --page-cover:#060604;--page-cover-mid:#0b0a07;
   --page-gutter-x:max(4px,env(safe-area-inset-left,0px));--page-gutter-y:max(4px,env(safe-area-inset-right,0px));--app-frame-inset-x:10px;--app-frame-inset-left:max(var(--app-frame-inset-x),env(safe-area-inset-left,0px));--app-frame-inset-right:max(var(--app-frame-inset-x),env(safe-area-inset-right,0px));--page-padding-x:4px;--page-padding-left:var(--page-gutter-x);--page-padding-right:var(--page-gutter-y);--content-inset:12px;--section-gap:13px;--card-padding-x:15px;--card-padding-y:15px;--content-max-width:min(1420px,100%);--panel-radius:20px;--card-radius:22px;--view-padding-y:16px;
@@ -1465,17 +1460,13 @@ html.is-standalone-pwa{background:var(--page-cover)}
   --gold:#c8a85b;--gold2:#f0d98f;--bronze:#9a7435;--cream:#f7efd6;
   --text:#f4ebd1;--muted:#c7bda3;--muted2:#9c927b;
   --line:rgba(214,183,106,.34);--line2:rgba(214,183,106,.18);
-  --font-display:"Instrument Serif","Baskerville","Georgia",serif;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-arabic:"Noto Naskh Arabic","Amiri",serif;
-  --font-transliteration:"Source Serif 4","Noto Serif","Georgia",serif;
-  --font-reader:"Source Serif 4","Noto Serif","Georgia",serif;
-  --font-signature:"Allura","Brush Script MT",cursive;
   --serif:var(--font-display);
   --display:var(--font-display);
-  --script:var(--font-signature);
+  --script:"Allura","Brush Script MT",cursive;
   --sans:var(--font-ui);
-  --font-serif:var(--font-transliteration);
 }
 html{background:#050706}
 body{
@@ -9287,15 +9278,14 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js"></script>
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
+<link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/source-serif-4-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
-<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=5">
+<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=3">
 
 
 <style id="feature-final-v202">
@@ -9347,11 +9337,11 @@ body.is-home-route .view-head.view-head-home{padding-bottom:6px!important}
 .home-hijri-frame-day{display:inline-flex;align-items:center;justify-content:center;width:36px;height:40px;border-radius:10px;border:1px solid rgba(214,183,106,.44);background:linear-gradient(180deg,rgba(239,215,142,.18),rgba(12,10,8,.9));color:var(--gold2);font-family:var(--font-ui);font-size:19px;font-weight:700;line-height:1;flex:0 0 36px;font-variant-numeric:tabular-nums}
 .home-hijri-frame-copy{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;flex:1 1 auto}
 .home-hijri-frame-kicker{font-family:var(--font-ui);font-size:9px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);line-height:1.1;white-space:nowrap}
-.home-hijri-frame-date{font-family:var(--font-display);font-size:clamp(14px,3.7vw,16.5px);font-weight:500;line-height:1.12;color:var(--gold2);letter-spacing:0;white-space:nowrap;min-width:0;font-variant-numeric:tabular-nums}
+.home-hijri-frame-date{font-family:var(--font-display);font-size:clamp(12px,3.4vw,14px);font-weight:600;line-height:1.08;color:var(--gold2);letter-spacing:.012em;white-space:nowrap;min-width:0;font-variant-numeric:tabular-nums}
 .home-hijri-frame:hover{filter:brightness(1.06);border-color:rgba(239,215,142,.62)}
 .home-hijri-frame:active{transform:translateY(1px)}
 .view-head-home-chips{display:flex;align-items:center;gap:6px;margin-top:2px}
-@media(max-width:520px){.view-head-home-row{grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important}.view-head-home-chips{width:100%;justify-content:flex-start;flex-wrap:wrap}.home-hijri-frame{padding:7px 12px 7px 7px;gap:9px;min-width:min(58vw,220px);max-width:min(76vw,250px)}.home-hijri-frame-day{width:34px;height:38px;font-size:18px;flex-basis:34px}.home-hijri-frame-kicker{font-size:8.5px}.home-hijri-frame-date{font-size:13.5px}}
+@media(max-width:520px){.view-head-home-row{grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important}.view-head-home-chips{width:100%;justify-content:flex-start;flex-wrap:wrap}.home-hijri-frame{padding:7px 12px 7px 7px;gap:9px;min-width:min(58vw,220px);max-width:min(76vw,250px)}.home-hijri-frame-day{width:34px;height:38px;font-size:18px;flex-basis:34px}.home-hijri-frame-kicker{font-size:8.5px}.home-hijri-frame-date{font-size:11.5px}}
 .home-refresh-panel{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important;padding:8px 10px!important;margin:0 0 8px!important;border-radius:16px!important;box-shadow:none!important}
 .home-refresh-copy span{font-size:8px!important;margin-bottom:1px!important}
 .home-refresh-copy b{font-family:inherit!important;font-size:13px!important;line-height:1.1!important}
