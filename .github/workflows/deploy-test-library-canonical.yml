@@ -74,7 +74,7 @@ jobs:
             echo "$url -> $code"
             test "$code" = "200"
           done
-          html=$(curl -s "https://dar-al-tawhid.de/test/index.html")
-          echo "$html" | rg -q "canonical-source-library.js"
-          echo "$html" | rg -q "Quellenbibliothek"
+          html=$(curl -sSL "https://dar-al-tawhid.de/test/index.html")
+          echo "$html" | grep -q "canonical-source-library.js"
+          echo "$html" | grep -q "Quellenbibliothek"
           echo "Test-App Quellenbibliothek live OK"
