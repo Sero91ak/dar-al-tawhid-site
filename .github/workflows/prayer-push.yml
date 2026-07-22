@@ -1,31 +1,74 @@
-name: Prayer Push
+name: Prayer Push Watchdog
 
-# Backup-Scheduler – Haupt-Scheduler ist Cloudflare Worker Cron (alle 5 Min).
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: read
-  actions: read
 
 jobs:
-  send-prayer-push:
+  verify-prayer-worker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Send scheduled prayer notifications
-        env:
-          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
-          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+      - name: Check current prayer scheduler status
+        id: status
         run: |
-          echo "Berechne und sende Gebetszeiten-Pushs..."
-          node scripts/send-prayer-push.js
+          STATUS="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/status" || true)"
+          echo "$STATUS"
+          STATUS_JSON="$STATUS" node <<'NODE'
+          const raw = process.env.STATUS_JSON || "";
+          let response = {};
+          try { response = JSON.parse(raw); } catch (_) {}
+          const updatedAt = Date.parse(response?.status?.updatedAt || "");
+          const ageMinutes = Number.isFinite(updatedAt) ? (Date.now() - updatedAt) / 60000 : Infinity;
+          const source = String(response?.source || "");
+          const schedulerStatus = String(response?.status?.schedulerStatus || "");
+          const fresh = response?.ok === true && ageMinutes <= 12 && schedulerStatus !== "error";
+          console.log(JSON.stringify({ fresh, ageMinutes, source, schedulerStatus }));
+          require("node:fs").appendFileSync(process.env.GITHUB_OUTPUT, `fresh=${fresh ? "true" : "false"}\n`);
+          NODE
+
+      - name: Recover stale scheduler through the single Cloudflare path
+        if: steps.status.outputs.fresh != 'true'
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Watchdog kann den Scheduler nicht wiederherstellen"
+            exit 1
+          fi
+
+          RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/prayer/run" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{}')"
+          echo "$RESULT"
+
+          RESULT_JSON="$RESULT" node <<'NODE'
+          const result = JSON.parse(process.env.RESULT_JSON || "{}");
+          if (!result?.status?.updatedAt) {
+            throw new Error(result?.reason || result?.error || "Scheduler ohne aktuellen Status beendet");
+          }
+          if (result?.statusWrite?.saved !== true) {
+            throw new Error(`Status nicht dauerhaft gespeichert: ${JSON.stringify(result?.statusWrite || null)}`);
+          }
+          console.log(`Scheduler wiederhergestellt: ${result.status.updatedAt}`);
+          NODE
+
+      - name: Verify fresh status after watchdog
+        if: steps.status.outputs.fresh != 'true'
+        run: |
+          sleep 5
+          STATUS="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/status")"
+          echo "$STATUS"
+          STATUS_JSON="$STATUS" node <<'NODE'
+          const response = JSON.parse(process.env.STATUS_JSON || "{}");
+          const updatedAt = Date.parse(response?.status?.updatedAt || "");
+          const ageMinutes = Number.isFinite(updatedAt) ? (Date.now() - updatedAt) / 60000 : Infinity;
+          if (response?.ok !== true || ageMinutes > 12) {
+            throw new Error(`Gebets-Push-Status weiterhin veraltet: ${ageMinutes.toFixed(1)} Minuten`);
+          }
+          console.log(`Gebets-Push-Status aktuell: ${response.status.updatedAt} (${response.source || "unbekannte Quelle"})`);
+          NODE
