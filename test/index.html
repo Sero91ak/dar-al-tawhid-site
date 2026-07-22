@@ -10713,23 +10713,20 @@ body.is-home-route .view-head h2.home-start-title,
   line-height:1.02!important;
   letter-spacing:.012em!important;
 }
-.view-head-home-row{gap:6px 10px!important;align-items:center!important}
-.home-hijri-chip{
-  display:inline-flex;align-items:center;gap:7px;padding:5px 11px 5px 7px;
-  border:1px solid rgba(196,168,106,.65);border-radius:11px;
-  background:linear-gradient(180deg,#faf6ee 0%,#efe5d4 100%);
-  box-shadow:0 2px 10px rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,248,230,.55),inset 0 1px 0 rgba(255,255,255,.82);
-  cursor:pointer;flex:0 0 auto;font:inherit;max-width:min(58vw,232px);min-height:34px;
+.view-head-home-row{gap:8px 12px!important;align-items:center!important}
+.home-hijri-dayframe{
+  display:inline-flex;align-items:center;justify-content:center;align-self:center;
+  padding:5px 10px;border:1px solid rgba(196,168,106,.58);border-radius:9px;
+  background:rgba(250,244,232,.94);box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+  cursor:pointer;flex:0 0 auto;font:inherit;max-width:min(54vw,204px);min-height:0;
 }
-.home-hijri-chip-icon{display:flex;align-items:center;justify-content:center;flex:0 0 20px;width:20px;height:24px}
-.home-hijri-chip-svg{display:block;width:20px;height:24px}
-.home-hijri-chip-date{
-  font-family:var(--serif)!important;font-size:clamp(11.5px,3.15vw,13.5px)!important;font-weight:650!important;
-  line-height:1.18!important;letter-spacing:.012em!important;color:#3f3020!important;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;font-variant-numeric:tabular-nums;
+.home-hijri-dayframe [data-hijri-date-text]{
+  font-family:var(--serif)!important;font-size:clamp(11px,2.9vw,12.5px)!important;font-weight:600!important;
+  line-height:1.2!important;letter-spacing:.015em!important;color:#3f3222!important;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;font-variant-numeric:tabular-nums;
 }
-.home-hijri-chip:hover{filter:brightness(1.02);border-color:rgba(214,183,106,.78);box-shadow:0 3px 12px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,248,230,.62),inset 0 1px 0 rgba(255,255,255,.88)}
-.home-hijri-chip:active{transform:translateY(1px)}
+.home-hijri-dayframe:hover{border-color:rgba(214,183,106,.72);background:rgba(252,248,238,.98)}
+.home-hijri-dayframe:active{transform:translateY(1px)}
 .highlight-sections .recommended-box,.highlight-sections .daily-box{
   padding-bottom:11px!important;border-radius:16px!important;border:1px solid rgba(214,183,106,.22)!important;
 }
@@ -10746,8 +10743,8 @@ body.is-home-route .view-head h2.home-start-title,
 @media(max-width:520px){
   body.is-home-route .view-head h2.home-start-title,
   .view-head-home-row h2.home-start-title{font-size:clamp(26px,6.4vw,34px)!important}
-  .home-hijri-chip{max-width:min(62vw,210px);padding:5px 9px 5px 6px;gap:6px}
-  .home-hijri-chip-date{font-size:11px!important}
+  .home-hijri-dayframe{padding:4px 8px;max-width:min(58vw,188px)}
+  .home-hijri-dayframe [data-hijri-date-text]{font-size:10.5px!important}
 }
 </style>
 <style id="remove-card-tag-pills-v323">
@@ -11740,7 +11737,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-chip" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-chip-icon" aria-hidden="true"><svg class="home-hijri-chip-svg" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3.5" width="20" height="21.5" rx="2.5" fill="#FBF6EC" stroke="#C4A86A" stroke-width="1"/><path d="M1 9h20" stroke="#9A4A42" stroke-width="5.5"/><line x1="6" y1="1.2" x2="6" y2="5.8" stroke="#B8954A" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="1.2" x2="16" y2="5.8" stroke="#B8954A" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="13.5" x2="17" y2="13.5" stroke="#D8C8A8" stroke-width=".65" opacity=".65"/><line x1="5" y1="17.5" x2="17" y2="17.5" stroke="#D8C8A8" stroke-width=".65" opacity=".45"/></svg></span><span class="home-hijri-chip-date" data-hijri-date-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-dayframe" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span data-hijri-date-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -16156,6 +16153,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=12"></script>
+  <script src="/assets/dar-account-visibility.js?v=13"></script>
 </body>
 </html>
