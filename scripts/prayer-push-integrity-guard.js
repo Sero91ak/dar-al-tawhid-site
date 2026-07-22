@@ -64,8 +64,28 @@ requireText("Scheduler", scheduler, [
   'SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES',
   'dedupeRegistrations',
   'writePrayerStatusToStore',
-  'environment: "production"'
+  'environment: "production"',
+  'slotDayKey',
+  'resolvePrayerSlotSendAfter',
+  'return null',
+  'PRAYER_PUSH_LOOP_GUARD',
+  'scheduleSeedBySendAfter',
+  'plannedSendAfter == null'
 ]);
+
+const loopGuard = read("scripts/prayer-push-loop-guard.js");
+requireText("Loop-Guard", loopGuard, [
+  "PRAYER_PUSH_LOOP_GUARD",
+  "slotDayKey",
+  "plannedSendAfter == null",
+  "forbiddenPatterns"
+]);
+
+if (!fs.existsSync(path.join(root, "content/admin/prayer-push-scheduler-lock.json"))) {
+  fail("content/admin/prayer-push-scheduler-lock.json fehlt – Scheduler-Schloss nicht gesetzt");
+} else {
+  pass("Scheduler-Schloss-Datei vorhanden");
+}
 forbidText("Scheduler", scheduler, [
   'SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60',
   'userRegistry:',

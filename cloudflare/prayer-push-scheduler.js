@@ -170,18 +170,25 @@ function normAdvance(value) {
   return [5, 10, 15].includes(number) ? number : DEFAULT_PRAYER_ADVANCE_MINUTES;
 }
 
+// PRAYER_PUSH_LOOP_GUARD: stabiler slotDay-Idempotency-Key – nicht ohne Nutzer-Freigabe ändern.
+function slotDayKey(localDate) {
+  return `${localDate.year}-${String(localDate.month).padStart(2, "0")}-${String(localDate.day).padStart(2, "0")}`;
+}
+
 function resolveScheduleLookahead(env) {
   const configured = Number(env.PRAYER_SCHEDULE_LOOKAHEAD_MINUTES || SCHEDULE_LOOKAHEAD_MINUTES);
   const base = Number.isFinite(configured) ? configured : SCHEDULE_LOOKAHEAD_MINUTES;
   return Math.min(SCHEDULE_LOOKAHEAD_MAX_MINUTES, Math.max(30, base));
 }
 
-function resolvePrayerSlotSendAfter(slot, entryAt, now) {
+function resolvePrayerSlotSendAfter(slot, entryAt, now, graceMinutes = SCHEDULE_GRACE_MINUTES) {
   if (slot.mode !== "advance" || !(entryAt instanceof Date) || entryAt <= now) return slot.sendAfter;
-  if (slot.sendAfter > now) return slot.sendAfter;
-  // Vorab-Zeit vorbei, Gebetszeit noch nicht – Erinnerung sofort nachholen.
-  if (slot.sendAfter < entryAt) return new Date(now.getTime() + 1500);
-  return slot.sendAfter;
+  const originalAdvance = slot.sendAfter;
+  if (originalAdvance > now) return originalAdvance;
+  // Vorab-Zeit vorbei, Gebetszeit noch nicht – höchstens einmal innerhalb der Grace nachholen.
+  const graceEnd = new Date(originalAdvance.getTime() + graceMinutes * 60000);
+  if (now <= graceEnd && now < entryAt) return new Date(now.getTime() + 1500);
+  return null;
 }
 
 function normTahajjud(value) {
@@ -340,7 +347,24 @@ async function uuidFrom(seed) {
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
-function scheduleSeed(version, group, prayer, sendAfter, mode) {
+function scheduleSeed(version, group, prayer, slotDay, mode) {
+  return [
+    "prayer",
+    version,
+    mode,
+    prayer.key,
+    slotDay,
+    group.lat.toFixed(3),
+    group.lon.toFixed(3),
+    group.timeZone,
+    group.methodAngle,
+    group.asrFactor,
+    group.advanceMinutes,
+    group.tahajjudMode
+  ].join("|");
+}
+
+function scheduleSeedBySendAfter(version, group, prayer, sendAfter, mode) {
   return [
     "prayer",
     version,
@@ -403,7 +427,7 @@ async function cancelOneSignal(env, notificationId, appId) {
 async function cancelObsoleteSchedules(env, body, group, prayer, sendAfter, mode, stats) {
   if (!body.send_after || Date.now() >= PRAYER_COPY_MIGRATION_UNTIL) return;
   const obsoleteSeeds = [
-    ...PREVIOUS_COPY_VERSIONS.map(version => scheduleSeed(version, group, prayer, sendAfter, mode)),
+    ...PREVIOUS_COPY_VERSIONS.map(version => scheduleSeedBySendAfter(version, group, prayer, sendAfter, mode)),
     legacyScheduleSeed(group, prayer, sendAfter, mode)
   ];
   for (const seed of obsoleteSeeds) {
@@ -422,10 +446,10 @@ async function cancelObsoleteSchedules(env, body, group, prayer, sendAfter, mode
   }
 }
 
-async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
+async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun, slotDay) {
   const subscriptionIds = group.subscriptionIds.slice(0, 2000);
   if (!subscriptionIds.length) return;
-  const seed = scheduleSeed(PRAYER_PUSH_COPY_VERSION, group, prayer, sendAfter, mode);
+  const seed = scheduleSeed(PRAYER_PUSH_COPY_VERSION, group, prayer, slotDay, mode);
   if (sentInRun.has(seed)) {
     stats.duplicates += 1;
     return;
@@ -675,30 +699,37 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
         }
 
         for (const slot of slots) {
-          const plannedSendAfter = resolvePrayerSlotSendAfter(slot, entryAt, now);
-          if (plannedSendAfter < windowStart) {
-            if (slot.mode === "advance" && entryAt > now) {
-              slot.sendAfter = new Date(now.getTime() + 1500);
-            } else {
-              stats.skippedPast += 1;
-              stats.skippedPastDetails.push({
-                key: prayer.key,
-                mode: slot.mode,
-                sendAfter: slot.sendAfter.toISOString(),
-                time: prayer.time == null ? null : formatHour(prayer.time),
-                timeZone: group.timeZone
-              });
-              continue;
-            }
-          } else {
-            slot.sendAfter = plannedSendAfter;
+          const slotDay = slotDayKey(day);
+          const plannedSendAfter = resolvePrayerSlotSendAfter(slot, entryAt, now, grace);
+          if (plannedSendAfter == null) {
+            stats.skippedPast += 1;
+            stats.skippedPastDetails.push({
+              key: prayer.key,
+              mode: slot.mode,
+              sendAfter: slot.sendAfter.toISOString(),
+              time: prayer.time == null ? null : formatHour(prayer.time),
+              timeZone: group.timeZone
+            });
+            continue;
           }
+          if (plannedSendAfter < windowStart) {
+            stats.skippedPast += 1;
+            stats.skippedPastDetails.push({
+              key: prayer.key,
+              mode: slot.mode,
+              sendAfter: slot.sendAfter.toISOString(),
+              time: prayer.time == null ? null : formatHour(prayer.time),
+              timeZone: group.timeZone
+            });
+            continue;
+          }
+          slot.sendAfter = plannedSendAfter;
           if (slot.sendAfter > windowEnd) {
             stats.skippedWindow += 1;
             continue;
           }
           try {
-            await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);
+            await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun, slotDay);
           } catch (error) {
             stats.errors += 1;
             stats.errorDetails.push(`${slot.mode} ${prayer.name}: ${error.message || error}`);

@@ -139,12 +139,61 @@
     if (!hasRealAccountSystem()) return "";
     const meta = getAccountSyncMeta();
     if (meta.state === "logged_out") {
-      return `<button type="button" class="home-account-pill is-guest is-guest-neon" data-account-open-register aria-label="Konto erstellen und auf allen Geräten synchronisieren"><span class="home-account-pill-label">Konto &amp; Sync</span></button>`;
+      return `<button type="button" class="home-account-pill is-guest is-guest-neon" data-account-open-register aria-label="Konto erstellen und auf allen Geräten synchronisieren"><span class="home-account-pill-label">Registrieren · Sync</span></button>`;
     }
     const icon =
       meta.state === "synced" ? "✓" : meta.state === "offline" ? "◌" : meta.state === "pending" ? "↻" : "!";
     const shortName = String(meta.username || "Konto").slice(0, 12);
     return `<button type="button" class="home-account-pill is-logged-in ${statusClass(meta.state)}" data-nav="account" aria-label="Konto öffnen"><span class="home-account-pill-label">${esc(icon)} ${esc(shortName)}</span></button>`;
+  }
+
+  function isAccountHomeBannerDismissed() {
+    try {
+      return localStorage.getItem(ACCOUNT_INTRO_DISMISSED_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function dismissAccountHomeBanner() {
+    try {
+      localStorage.setItem(ACCOUNT_INTRO_DISMISSED_KEY, "1");
+    } catch (e) {}
+  }
+
+  function renderHomeAccountBanner() {
+    if (!hasRealAccountSystem()) return "";
+    const meta = getAccountSyncMeta();
+    if (meta.state === "logged_out") {
+      return `<section class="account-home-hint premium-surface" data-account-home-banner aria-label="Konto und Synchronisierung">
+        <div class="account-home-hint-head">${accountIconSvg()}<div>
+          <h3 class="account-home-hint-title">Konto &amp; Synchronisierung</h3>
+          <p class="account-home-hint-status">Auf Handy, iPad und Tablet</p>
+        </div></div>
+        <p class="account-home-hint-desc">Sichere Favoriten, Qurʾān-Lesestand und Quiz-Fortschritt auf allen deinen Geräten. Ohne E-Mail – nur Anmeldename und PIN.</p>
+        <div class="account-home-hint-actions">
+          <button type="button" class="primary" data-account-open-register>Registrieren</button>
+          <button type="button" data-account-open-login>Anmelden</button>
+        </div>
+        <p class="account-home-hint-note">Die App bleibt auch ohne Konto voll nutzbar.</p>
+      </section>`;
+    }
+    if (isAccountHomeBannerDismissed()) return "";
+    const syncLine = meta.lastSyncLabel ? `Zuletzt synchronisiert: ${meta.lastSyncLabel}` : "Bereit zur Synchronisierung";
+    const status = statusLabel(meta);
+    const actions =
+      meta.state === "error" || meta.state === "pending" || meta.state === "offline"
+        ? `<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Jetzt synchronisieren</button>`
+        : `<button type="button" class="primary" data-nav="account">Konto öffnen</button>`;
+    return `<section class="account-home-hint account-home-hint--synced premium-surface ${statusClass(meta.state)}" data-account-home-banner aria-label="Konto synchronisiert">
+      <div class="account-home-hint-head">${accountIconSvg()}<div>
+        <h3 class="account-home-hint-title">✓ ${esc(meta.username || "Konto")}</h3>
+        <p class="account-home-hint-status ${statusClass(meta.state)}">${esc(status)}</p>
+      </div>
+      <button type="button" class="account-home-hint-dismiss" data-account-home-dismiss aria-label="Hinweis ausblenden">×</button></div>
+      <p class="account-home-hint-desc">${esc(syncLine)} · Favoriten, Qurʾān und Quiz werden automatisch synchronisiert.</p>
+      <div class="account-home-hint-actions">${actions}</div>
+    </section>`;
   }
 
   function renderHomeHijriFrameHtml() {
@@ -393,6 +442,13 @@
         render();
       };
     });
+    document.querySelectorAll("[data-account-home-dismiss]").forEach((btn) => {
+      btn.onclick = (ev) => {
+        ev.preventDefault();
+        dismissAccountHomeBanner();
+        document.querySelectorAll("[data-account-home-banner]").forEach((el) => el.remove());
+      };
+    });
   }
 
   function patchSetHeader() {
@@ -435,6 +491,15 @@
       const originalRenderMore = renderMore;
       renderMore = function () {
         return insertAfterViewHead(originalRenderMore(), renderMoreAccountCard());
+      };
+    }
+
+    if (typeof renderHome === "function") {
+      const originalRenderHome = renderHome;
+      renderHome = function () {
+        const html = originalRenderHome();
+        const banner = renderHomeAccountBanner();
+        return banner ? insertAfterViewHead(html, banner) : html;
       };
     }
 
@@ -587,6 +652,7 @@
     getAccountSyncMeta,
     renderMoreAccountCard,
     renderHomeAccountPill,
+    renderHomeAccountBanner,
     syncAllAccountData,
     syncHomeAccountSlots,
   };

@@ -80,6 +80,12 @@ jobs:
       - name: Push system guard (Worker Cron + API + App-Sync)
         run: node scripts/push-system-guard.js
 
+      - name: Prayer push loop guard
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before }}
+        run: node scripts/prayer-push-loop-guard.js
+
       - name: App health check script
         run: node scripts/app-health-check.js
 
