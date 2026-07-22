@@ -27,7 +27,7 @@ function patchScheduler(source) {
   out = replaceRequired(
     out,
     'const SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60;\nconst SCHEDULE_GRACE_MINUTES = 15;',
-    'const SCHEDULE_LOOKAHEAD_MINUTES = 90;\nconst SCHEDULE_GRACE_MINUTES = 15;\nconst PRAYER_COPY_MIGRATION_UNTIL = Date.parse("2026-07-22T00:00:00Z");\nconst PRAYER_PUSH_EMOJI = Object.freeze({ fajr: "✨", dhuhr: "☀️", asr: "🌤️", maghrib: "🌥️", isha: "🌙", tahajjud: "🌙" });',
+    'const SCHEDULE_LOOKAHEAD_MINUTES = 90;\nconst SCHEDULE_GRACE_MINUTES = 15;\nconst PRAYER_COPY_MIGRATION_UNTIL = Date.parse("2026-07-24T00:00:00Z");\nconst PRAYER_PUSH_EMOJI = Object.freeze({ fajr: "✨", dhuhr: "☀️", asr: "🌤️", maghrib: "🌥️", isha: "🌙", tahajjud: "🌙" });',
     "scheduler constants"
   );
 
@@ -41,22 +41,22 @@ function patchScheduler(source) {
   out = replaceRequired(
     out,
     'function schedId(group, prayer, sendAfter, mode) {\n  return ["prayer", mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");\n}',
-    'function schedId(group, prayer, sendAfter, mode) {\n  return ["prayer", PRAYER_PUSH_COPY_VERSION, mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");\n}\n\nfunction legacySchedId(group, prayer, sendAfter, mode) {\n  return ["prayer", mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");\n}',
+    'function schedId(group, prayer, sendAfter, mode) {\n  return ["prayer", PRAYER_PUSH_COPY_VERSION, mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");\n}\n\nfunction previousSchedId(group, prayer, sendAfter, mode) {\n  return ["prayer", "v3", mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");\n}\n\nfunction legacySchedId(group, prayer, sendAfter, mode) {\n  return ["prayer", mode, prayer.key, sendAfter.toISOString(), group.lat.toFixed(3), group.lon.toFixed(3), group.timeZone].join("|");\n}',
     "idempotency version"
   );
 
   out = replaceRequired(
     out,
     'async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {\n  const ids = group.subscriptionIds.slice(0, 2000);\n  if (!ids.length) return;\n  const idKey = schedId(group, prayer, sendAfter, mode);',
-    'async function cancelOneSignal(env, notificationId, appId) {\n  if (!notificationId) return false;\n  const key = oneSignalApiKey(env);\n  const url = `https://api.onesignal.com/notifications/${encodeURIComponent(notificationId)}?app_id=${encodeURIComponent(appId)}`;\n  const res = await fetch(url, { method: "DELETE", headers: { Authorization: `Key ${key}` } });\n  if (res.ok || res.status === 404) return true;\n  const text = await res.text();\n  throw new Error(`OneSignal cancel ${res.status}: ${text.slice(0, 200)}`);\n}\n\nasync function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {\n  const ids = group.subscriptionIds.slice(0, 2000);\n  if (!ids.length) return;\n  const idKey = schedId(group, prayer, sendAfter, mode);\n  const oldIdKey = legacySchedId(group, prayer, sendAfter, mode);',
+    'async function cancelOneSignal(env, notificationId, appId) {\n  if (!notificationId) return false;\n  const key = oneSignalApiKey(env);\n  const url = `https://api.onesignal.com/notifications/${encodeURIComponent(notificationId)}?app_id=${encodeURIComponent(appId)}`;\n  const res = await fetch(url, { method: "DELETE", headers: { Authorization: `Key ${key}` } });\n  if (res.ok || res.status === 404) return true;\n  const text = await res.text();\n  throw new Error(`OneSignal cancel ${res.status}: ${text.slice(0, 200)}`);\n}\n\nasync function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {\n  const ids = group.subscriptionIds.slice(0, 2000);\n  if (!ids.length) return;\n  const idKey = schedId(group, prayer, sendAfter, mode);\n  const previousIdKey = previousSchedId(group, prayer, sendAfter, mode);\n  const oldIdKey = legacySchedId(group, prayer, sendAfter, mode);',
     "legacy cancellation helper"
   );
 
   out = replaceRequired(
     out,
     '  const result = await postOneSignal(env, body);\n  stats.scheduled += 1;',
-    '  if (Date.now() < PRAYER_COPY_MIGRATION_UNTIL && body.send_after) {\n    try {\n      const legacyBody = { ...body, idempotency_key: await uuidFrom(oldIdKey) };\n      const legacyResult = await postOneSignal(env, legacyBody);\n      const legacyNotificationId = String(legacyResult.parsed?.id || "").trim();\n      if (legacyNotificationId) await cancelOneSignal(env, legacyNotificationId, body.app_id);\n    } catch (migrationError) {\n      stats.errorDetails.push(`Migration ${prayer.name}: ${migrationError.message || migrationError}`);\n    }\n  }\n\n  const result = await postOneSignal(env, body);\n  stats.scheduled += 1;',
-    "replace scheduled legacy message"
+    '  if (Date.now() < PRAYER_COPY_MIGRATION_UNTIL && body.send_after) {\n    for (const obsoleteIdKey of [previousIdKey, oldIdKey]) {\n      try {\n        const obsoleteBody = { ...body, idempotency_key: await uuidFrom(obsoleteIdKey) };\n        const obsoleteResult = await postOneSignal(env, obsoleteBody);\n        const obsoleteNotificationId = String(obsoleteResult.parsed?.id || "").trim();\n        if (obsoleteNotificationId) await cancelOneSignal(env, obsoleteNotificationId, body.app_id);\n      } catch (migrationError) {\n        stats.errorDetails.push(`Migration ${prayer.name}: ${migrationError.message || migrationError}`);\n      }\n    }\n  }\n\n  const result = await postOneSignal(env, body);\n  stats.scheduled += 1;',
+    "replace scheduled old messages"
   );
 
   out = replaceRequired(
@@ -89,7 +89,7 @@ function patchAdmin(source) {
   out = replaceRequired(
     out,
     'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";',
-    'import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";\nimport { readPrayerStatusFromStore, writePrayerStatusToStore } from "./prayer-status-store.js";',
+    'import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";\nimport { readPrayerStatusFromStore, writePrayerStatusToStore } from "./prayer-status-store.js";',
     "durable status helpers import"
   );
 
@@ -117,7 +117,7 @@ function patchAdmin(source) {
   out = replaceRequired(
     out,
     'export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {\n  if (options.force) {\n    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });\n  }\n\n  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });\n}',
-    'export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {\n  const result = await runPrayerSchedulerNow(\n    env,\n    { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },\n    { force: true, subscriptionId: options.subscriptionId || "" }\n  );\n\n  if (!result?.status?.updatedAt) {\n    const heartbeat = {\n      updatedAt: new Date().toISOString(),\n      ok: false,\n      schedulerStatus: "error",\n      schedulerEngine: "cloudflare-worker-cron-v3",\n      prayerCopyVersion: "v3",\n      cronIntervalMinutes: 5,\n      lastCronRun: new Date().toISOString(),\n      lastError: result?.lastError || result?.reason || "Gebets-Push-Cron ohne Status beendet",\n      scheduled: Number(result?.scheduled || 0),\n      recipients: Number(result?.recipients || 0),\n      usersWithLocation: Number(result?.usersWithLocation || 0)\n    };\n    await writePrayerStatusToStore(env, heartbeat);\n  }\n\n  return result;\n}',
+    'export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {\n  const result = await runPrayerSchedulerNow(\n    env,\n    { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },\n    { force: true, subscriptionId: options.subscriptionId || "" }\n  );\n\n  if (!result?.status?.updatedAt) {\n    const heartbeat = {\n      updatedAt: new Date().toISOString(),\n      ok: false,\n      schedulerStatus: "error",\n      schedulerEngine: "cloudflare-worker-cron-v3",\n      prayerCopyVersion: PRAYER_PUSH_COPY_VERSION,\n      cronIntervalMinutes: 5,\n      lastCronRun: new Date().toISOString(),\n      lastError: result?.lastError || result?.reason || "Gebets-Push-Cron ohne Status beendet",\n      scheduled: Number(result?.scheduled || 0),\n      recipients: Number(result?.recipients || 0),\n      usersWithLocation: Number(result?.usersWithLocation || 0)\n    };\n    await writePrayerStatusToStore(env, heartbeat);\n  }\n\n  return result;\n}',
     "error heartbeat persistence"
   );
 
@@ -150,4 +150,4 @@ fs.writeFileSync(schedulerPath, patchScheduler(schedulerBefore), "utf8");
 fs.writeFileSync(adminPath, patchAdmin(adminBefore), "utf8");
 fs.writeFileSync(workerPath, patchWorker(workerBefore), "utf8");
 
-console.log("Gebets-Push-Runtime v3 aktiv: Emojis, 90-Minuten-Fenster, OneSignal-Migration und dauerhafter Live-Status mit Fehler-Heartbeat.");
+console.log("Gebets-Push-Runtime v4 aktiv: Gebetsname immer sichtbar, 90-Minuten-Fenster, Ablösung alter v3-Planungen und dauerhafter Live-Status.");
