@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-22T16:25:03.018Z",
+  "updatedAt": "2026-07-22T16:55:03.163Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3646.4,
-    "pricePerGram": 117.23,
+    "pricePerOunce": 3640.7,
+    "pricePerGram": 117.05,
     "nisabGrams": 85,
-    "nisabEur": 9964.55,
+    "nisabEur": 9949.25,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-07-22T16:25:03.018Z",
+    "fetchedAt": "2026-07-22T16:55:03.163Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 52.99,
+    "pricePerOunce": 52.95,
     "pricePerGram": 1.7,
     "nisabGrams": 595,
     "nisabEur": 1011.5,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-07-22T16:25:03.018Z",
+    "fetchedAt": "2026-07-22T16:55:03.163Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1011.5,
-  "lastSuccessAt": "2026-07-22T16:25:03.018Z",
+  "lastSuccessAt": "2026-07-22T16:55:03.163Z",
   "lastError": "",
-  "lastFetchAt": "2026-07-22T16:25:03.018Z",
+  "lastFetchAt": "2026-07-22T16:55:03.163Z",
   "fetchLogs": [
+    {
+      "id": "log-1784739303163",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-07-22T16:55:03.163Z",
+      "durationMs": 847,
+      "goldPerGram": 117.05,
+      "silverPerGram": 1.7
+    },
     {
       "id": "log-1784737503018",
       "provider": "aurumrates.com",
@@ -525,16 +535,6 @@
       "durationMs": 814,
       "goldPerGram": 112.87,
       "silverPerGram": 1.6
-    },
-    {
-      "id": "log-1784551856751",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-07-20T12:50:56.751Z",
-      "durationMs": 480,
-      "goldPerGram": 112.93,
-      "silverPerGram": 1.61
     }
   ]
 }
