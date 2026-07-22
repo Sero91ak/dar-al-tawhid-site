@@ -7,6 +7,8 @@ const ROOT = path.resolve(__dirname, '..');
 const POSTS_PATH = path.join(ROOT, 'posts.json');
 const AUTHORITY_PATH = path.join(ROOT, 'data', 'library-authority.json');
 const OUTPUT_PATH = path.join(ROOT, 'data', 'canonical-books-index.json');
+const PUBLIC_BOOKS_PATH = path.join(ROOT, 'data', 'books-library.json');
+const PUBLIC_SCHOLARS_PATH = path.join(ROOT, 'data', 'scholars-library.json');
 const REPORT_PATH = path.join(ROOT, 'data', 'library-metadata-report.json');
 
 function readJson(file) {
@@ -34,8 +36,8 @@ function normalizePerson(value) {
 function buildAuthorityLookup(authority) {
   const lookup = new Map();
   for (const work of authority.works || []) {
-    const titles = [work.title, ...(work.aliases || [])];
-    for (const title of titles) {
+    if (!work || !work.id || !work.title || !work.author || work.verified === false) continue;
+    for (const title of [work.title, ...(work.aliases || [])]) {
       const key = normalize(title);
       if (key) lookup.set(key, work);
     }
@@ -43,40 +45,23 @@ function buildAuthorityLookup(authority) {
   return lookup;
 }
 
-function sourceAuthor(post) {
-  const source = String(post.source || '');
-  const match = source.match(/^📝\s*([^,;]+),\s*/u);
-  return match ? match[1].trim() : '';
-}
-
-function resolveWork(post, lookup) {
+function resolveVerifiedWork(post, lookup) {
   const rawTitle = String(post.book || '').trim();
   const key = normalize(rawTitle);
+  if (!key) return { work: null, confidence: 'missing-book' };
+
   const exact = lookup.get(key);
   if (exact) return { work: exact, confidence: 'verified-registry' };
 
   let best = null;
   for (const [alias, work] of lookup.entries()) {
-    if (!alias || !key) continue;
     if (key === alias || key.includes(alias) || alias.includes(key)) {
       if (!best || alias.length > best.alias.length) best = { alias, work };
     }
   }
   if (best) return { work: best.work, confidence: 'verified-alias' };
 
-  const explicitAuthor = String(post.author || '').trim();
-  const parsedSourceAuthor = sourceAuthor(post);
-  const safeAuthor = explicitAuthor || parsedSourceAuthor;
-  return {
-    work: {
-      id: `unverified-${key || 'unknown'}`,
-      title: rawTitle || 'Werk nicht angegeben',
-      aliases: [],
-      author: safeAuthor || 'Autor nicht verifiziert',
-      category: String(post.category || 'Nicht eingeordnet')
-    },
-    confidence: explicitAuthor ? 'explicit-post-author' : parsedSourceAuthor ? 'source-prefix-review-required' : 'unverified'
-  };
+  return { work: null, confidence: 'unverified' };
 }
 
 function postFingerprint(post) {
@@ -86,6 +71,10 @@ function postFingerprint(post) {
     normalize(post.source),
     normalize(post.statement)
   ].join('|');
+}
+
+function uniqueSorted(values) {
+  return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, 'de'));
 }
 
 function main() {
@@ -99,8 +88,9 @@ function main() {
   const seenFingerprints = new Map();
   const duplicateIds = [];
   const duplicateContent = [];
-  const unverifiedWorks = [];
+  const quarantinedWorks = [];
   const suspiciousRoleCollisions = [];
+  const acceptedPostIds = new Set();
 
   for (const post of Array.isArray(posts) ? posts : []) {
     const id = String(post.id || '').trim();
@@ -124,45 +114,60 @@ function main() {
       seenFingerprints.set(fingerprint, id);
     }
 
-    const resolved = resolveWork(post, lookup);
-    const work = resolved.work;
-    const quotedScholar = String(post.scholar || '').trim();
-    const actualAuthor = String(work.author || 'Autor nicht verifiziert').trim();
-
-    if (resolved.confidence === 'unverified' || resolved.confidence === 'source-prefix-review-required') {
-      unverifiedWorks.push({
+    const resolved = resolveVerifiedWork(post, lookup);
+    if (!resolved.work) {
+      quarantinedWorks.push({
         postId: id,
         title: post.title || '',
         rawBook: post.book || '',
-        candidateAuthor: actualAuthor,
-        confidence: resolved.confidence
+        scholar: post.scholar || '',
+        source: post.source || '',
+        reason: resolved.confidence
       });
+      continue;
     }
 
-    if (quotedScholar && actualAuthor && actualAuthor !== 'Autor nicht verifiziert' && normalizePerson(quotedScholar) === normalizePerson(actualAuthor)) {
+    const work = resolved.work;
+    const quotedScholar = String(post.scholar || '').trim();
+    const actualAuthor = String(work.author || '').trim();
+
+    if (!actualAuthor || actualAuthor === authority?.policy?.unverifiedAuthorLabel) {
+      quarantinedWorks.push({
+        postId: id,
+        title: post.title || '',
+        rawBook: post.book || '',
+        scholar: quotedScholar,
+        source: post.source || '',
+        reason: 'authority-entry-without-verified-author'
+      });
+      continue;
+    }
+
+    if (quotedScholar && normalizePerson(quotedScholar) === normalizePerson(actualAuthor)) {
       const source = normalize(post.source);
       if (!source.includes(normalizePerson(actualAuthor))) {
         suspiciousRoleCollisions.push({ postId: id, scholar: quotedScholar, book: work.title, author: actualAuthor });
       }
     }
 
-    const bookId = work.id;
-    if (!books.has(bookId)) {
-      books.set(bookId, {
-        id: bookId,
+    acceptedPostIds.add(id);
+
+    if (!books.has(work.id)) {
+      books.set(work.id, {
+        id: work.id,
         title: work.title,
         author: actualAuthor,
         category: work.category || 'Nicht eingeordnet',
         aliases: work.aliases || [],
-        verification: resolved.confidence.startsWith('verified') ? 'verified' : 'review-required',
+        verification: 'verified',
         postIds: [],
         quotedScholars: []
       });
     }
 
-    const book = books.get(bookId);
+    const book = books.get(work.id);
     book.postIds.push(id);
-    if (quotedScholar && !book.quotedScholars.includes(quotedScholar)) book.quotedScholars.push(quotedScholar);
+    if (quotedScholar) book.quotedScholars.push(quotedScholar);
 
     if (quotedScholar) {
       const scholarKey = normalizePerson(quotedScholar) || quotedScholar;
@@ -177,64 +182,98 @@ function main() {
       }
       const scholar = scholars.get(scholarKey);
       scholar.postIds.push(id);
-      if (!scholar.citedWorkIds.includes(bookId)) scholar.citedWorkIds.push(bookId);
+      scholar.citedWorkIds.push(work.id);
     }
   }
 
   const bookList = [...books.values()]
     .map((book) => ({
       ...book,
-      postIds: [...new Set(book.postIds)],
-      quotedScholars: [...new Set(book.quotedScholars)].sort((a, b) => a.localeCompare(b, 'de')),
+      postIds: uniqueSorted(book.postIds),
+      quotedScholars: uniqueSorted(book.quotedScholars),
       postCount: new Set(book.postIds).size
     }))
+    .filter((book) => book.postCount > 0 && book.verification === 'verified')
     .sort((a, b) => a.category.localeCompare(b.category, 'de') || a.author.localeCompare(b.author, 'de') || a.title.localeCompare(b.title, 'de'));
 
+  const visibleBookIds = new Set(bookList.map((book) => book.id));
   const scholarList = [...scholars.values()]
     .map((scholar) => ({
       ...scholar,
-      postIds: [...new Set(scholar.postIds)],
-      citedWorkIds: [...new Set(scholar.citedWorkIds)],
-      postCount: new Set(scholar.postIds).size
+      postIds: uniqueSorted(scholar.postIds.filter((id) => acceptedPostIds.has(id))),
+      citedWorkIds: uniqueSorted(scholar.citedWorkIds.filter((id) => visibleBookIds.has(id)))
     }))
+    .filter((scholar) => scholar.postIds.length > 0 && scholar.citedWorkIds.length > 0)
+    .map((scholar) => ({ ...scholar, postCount: scholar.postIds.length }))
     .sort((a, b) => a.name.localeCompare(b.name, 'de'));
 
+  const generatedAt = new Date().toISOString();
+  const publicPolicy = {
+    verifiedOnly: true,
+    hideUnverifiedWorks: true,
+    hideUnverifiedAuthors: true,
+    neverInferAuthorFromScholar: true,
+    deduplicateBooksByCanonicalId: true,
+    deduplicateScholarsByNormalizedName: true
+  };
+
   const output = {
-    version: 1,
-    generatedAt: new Date().toISOString(),
-    policy: authority.policy,
+    version: 2,
+    generatedAt,
+    policy: publicPolicy,
     stats: {
       sourcePosts: Array.isArray(posts) ? posts.length : 0,
-      canonicalBooks: bookList.length,
-      quotedScholars: scholarList.length,
+      publicCanonicalBooks: bookList.length,
+      publicQuotedScholars: scholarList.length,
       duplicateIdsRemoved: duplicateIds.length,
       duplicateContentRemoved: duplicateContent.length,
-      unverifiedWorks: unverifiedWorks.length
+      quarantinedPosts: quarantinedWorks.length
     },
-    categories: [...new Set(bookList.map((book) => book.category))].sort((a, b) => a.localeCompare(b, 'de')),
+    categories: uniqueSorted(bookList.map((book) => book.category)),
     books: bookList,
     scholars: scholarList
   };
 
+  const publicBooks = {
+    version: output.version,
+    generatedAt,
+    policy: publicPolicy,
+    categories: output.categories,
+    books: bookList
+  };
+
+  const publicScholars = {
+    version: output.version,
+    generatedAt,
+    policy: publicPolicy,
+    scholars: scholarList
+  };
+
   const report = {
-    generatedAt: output.generatedAt,
+    generatedAt,
+    publicOutputIsVerifiedOnly: true,
     rules: [
-      'scholar is always a quoted person, never an inferred book author',
-      'author comes only from the authority registry or an explicit author field',
-      'same work is merged by canonical work id',
-      'duplicate ids and identical content are excluded',
-      'unverified authors are not presented as verified authors'
+      'A quoted scholar is never inferred as the author of a cited work.',
+      'Only works present in the authority registry with a verified author are public.',
+      'Unknown, ambiguous or incomplete works are quarantined and excluded from every public list.',
+      'Books are merged by canonical work id.',
+      'Scholars are merged by normalized person name.',
+      'Duplicate ids and identical content are excluded before grouping.',
+      'The public interface must read data/books-library.json and data/scholars-library.json only.'
     ],
     duplicateIds,
     duplicateContent,
-    unverifiedWorks,
+    quarantinedWorks,
     suspiciousRoleCollisions
   };
 
   fs.writeFileSync(OUTPUT_PATH, `${JSON.stringify(output, null, 2)}\n`);
+  fs.writeFileSync(PUBLIC_BOOKS_PATH, `${JSON.stringify(publicBooks, null, 2)}\n`);
+  fs.writeFileSync(PUBLIC_SCHOLARS_PATH, `${JSON.stringify(publicScholars, null, 2)}\n`);
   fs.writeFileSync(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`);
-  console.log(`Canonical library index built: ${bookList.length} books, ${scholarList.length} quoted scholars.`);
-  console.log(`Duplicates removed: ${duplicateIds.length + duplicateContent.length}; unverified works: ${unverifiedWorks.length}.`);
+
+  console.log(`Public verified library built: ${bookList.length} books, ${scholarList.length} quoted scholars.`);
+  console.log(`Removed duplicates: ${duplicateIds.length + duplicateContent.length}; quarantined: ${quarantinedWorks.length}.`);
 }
 
 main();
