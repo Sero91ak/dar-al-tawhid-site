@@ -30,6 +30,12 @@ jobs:
       - name: Push system guard
         run: node scripts/push-system-guard.js
 
+      - name: Prayer push loop guard
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before }}
+        run: node scripts/prayer-push-loop-guard.js
+
       - name: Version update guard (Banner-Schleife + Willkommens-Push)
         run: node scripts/version-update-guard.js
 
