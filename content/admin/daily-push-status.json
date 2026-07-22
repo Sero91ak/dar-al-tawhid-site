@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-22T06:00:01.072Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-22T07:30:01.093Z",
   "usersChecked": 18,
-  "duaCandidates": 0,
+  "duaCandidates": 18,
   "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 0,
+  "errors": 18,
   "dailyContentDate": "2026-07-22",
   "currentRecommendation": {
     "id": "amali-sind-nur-nach-niyyah-199",
@@ -24,5 +24,15 @@
     "category": "Licht"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "batch": true,
+      "count": 18,
+      "contentId": "dua-024-atmim-nurana",
+      "recipients": "1ab75e36-9292-4caf-ba20-d702480a38b1",
+      "ok": false,
+      "invalid": 9
+    }
+  ]
 }
