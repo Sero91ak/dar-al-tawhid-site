@@ -10304,21 +10304,6 @@ html[data-theme="soft"] .brand-main h1.brand-title-refined{
   color:#1a1410!important;
   -webkit-text-fill-color:#1a1410!important;
 }
-html[data-theme="light"] .brand-main h1.brand-title-refined::after,
-html[data-theme="soft"] .brand-main h1.brand-title-refined::after{
-  height:1.5px!important;
-  width:min(100%,200px)!important;
-  opacity:1!important;
-  background:linear-gradient(90deg,transparent 0%,#b99245 12%,#efd78e 50%,#d4b060 88%,transparent 100%)!important;
-  box-shadow:0 1px 10px rgba(200,168,91,.42),0 0 14px rgba(239,215,142,.28)!important;
-}
-@media(max-width:700px){
-  html[data-theme="light"] .brand-main h1.brand-title-refined::after,
-  html[data-theme="soft"] .brand-main h1.brand-title-refined::after{
-    width:min(100%,160px)!important;
-    margin-top:8px!important;
-  }
-}
 </style>
 <style id="theme-readability-v336">
 /* Globale Lesbarkeit: Karten, Texte, Ränder — alle Erscheinungsbilder */
@@ -10430,6 +10415,29 @@ html[data-theme] .prayer-overview__push.prayer-push-accordion--compact{
 }
 html[data-theme] .prayer-overview__time-label{color:var(--premium-label,var(--muted2))!important}
 html[data-theme] .prayer-overview__time-countdown{color:var(--premium-body,var(--muted))!important}
+</style>
+<style id="brand-underline-unify-v338">
+/* Marken-Unterstreichung: dezent, links leicht, rechts verblassend — wie Dar al-Layl, alle Themes */
+.brand-main h1.brand-title-refined::after,
+html[data-theme] .brand-main h1.brand-title-refined::after{
+  display:block!important;
+  content:""!important;
+  width:min(100%,180px)!important;
+  height:1px!important;
+  margin-top:9px!important;
+  opacity:.82!important;
+  border:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 50%,transparent),transparent 100%)!important;
+}
+@media(max-width:700px){
+  .brand-main h1.brand-title-refined::after,
+  html[data-theme] .brand-main h1.brand-title-refined::after{
+    width:min(100%,140px)!important;
+    margin-top:7px!important;
+  }
+}
 </style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
