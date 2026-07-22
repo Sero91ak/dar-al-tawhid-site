@@ -463,8 +463,55 @@
     setHeader.__darAccountPatched = true;
   }
 
+  function findViewHeadEnd(html, startIdx) {
+    const slice = html.slice(startIdx);
+    const tagRe = /<(\/?)div\b[^>]*>/gi;
+    let depth = 0;
+    let match;
+    while ((match = tagRe.exec(slice)) !== null) {
+      if (match[1] === "/") depth--;
+      else depth++;
+      if (depth === 0) return startIdx + match.index + match[0].length;
+    }
+    return -1;
+  }
+
+  function insertBeforeViewHead(html, injection) {
+    const token = '<div class="view-head';
+    const start = html.indexOf(token);
+    if (start === -1) {
+      const marker = '<section class="feature-section">';
+      if (html.includes(marker)) return html.replace(marker, `${injection}${marker}`);
+      return `${injection}${html}`;
+    }
+    return `${html.slice(0, start)}${injection}${html.slice(start)}`;
+  }
+
+  function insertAfterViewHead(html, injection) {
+    const token = '<div class="view-head';
+    const start = html.indexOf(token);
+    if (start === -1) {
+      const marker = '<section class="feature-section">';
+      if (html.includes(marker)) return html.replace(marker, `${injection}${marker}`);
+      return `${injection}${html}`;
+    }
+    const end = findViewHeadEnd(html, start);
+    if (end === -1) return `${html}${injection}`;
+    return `${html.slice(0, end)}${injection}${html.slice(end)}`;
+  }
+
   function patchCore() {
     patchSetHeader();
+
+    if (typeof renderHome === "function" && !renderHome.__darAccountPatched) {
+      const originalRenderHome = renderHome;
+      renderHome = function () {
+        const html = originalRenderHome();
+        const banner = renderHomeAccountBanner();
+        return banner ? insertBeforeViewHead(html, banner) : html;
+      };
+      renderHome.__darAccountPatched = true;
+    }
 
     if (typeof featureCatalog !== "function") return;
 
@@ -473,31 +520,12 @@
       return originalFeatureCatalog().filter((item) => item.id !== "account");
     };
 
-    function insertAfterViewHead(html, injection) {
-      const match = html.match(/<div class="view-head[^"]*">[\s\S]*?<\/div>/);
-      if (match) {
-        const end = match.index + match[0].length;
-        return `${html.slice(0, end)}${injection}${html.slice(end)}`;
-      }
-      const marker = '<section class="feature-section">';
-      if (html.includes(marker)) return html.replace(marker, `${injection}${marker}`);
-      return `${injection}${html}`;
-    }
-
-    if (typeof renderMore === "function") {
+    if (typeof renderMore === "function" && !renderMore.__darAccountPatched) {
       const originalRenderMore = renderMore;
       renderMore = function () {
         return insertAfterViewHead(originalRenderMore(), renderMoreAccountCard());
       };
-    }
-
-    if (typeof renderHome === "function") {
-      const originalRenderHome = renderHome;
-      renderHome = function () {
-        const html = originalRenderHome();
-        const banner = renderHomeAccountBanner();
-        return banner ? insertAfterViewHead(html, banner) : html;
-      };
+      renderMore.__darAccountPatched = true;
     }
 
     renderAccount = renderAccountVisibility;
