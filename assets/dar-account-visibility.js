@@ -147,13 +147,11 @@
     return `<button type="button" class="home-account-pill is-logged-in ${statusClass(meta.state)}" data-nav="account" aria-label="Konto öffnen"><span class="home-account-pill-label">${esc(icon)} ${esc(shortName)}</span></button>`;
   }
 
+  const HIJRI_CHIP_ICON =
+    '<svg class="home-hijri-chip-svg" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3.5" width="20" height="21.5" rx="2.5" fill="#FBF6EC" stroke="#C4A86A" stroke-width="1"/><path d="M1 9h20" stroke="#9A4A42" stroke-width="5.5"/><line x1="6" y1="1.2" x2="6" y2="5.8" stroke="#B8954A" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="1.2" x2="16" y2="5.8" stroke="#B8954A" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="13.5" x2="17" y2="13.5" stroke="#D8C8A8" stroke-width=".65" opacity=".65"/><line x1="5" y1="17.5" x2="17" y2="17.5" stroke="#D8C8A8" stroke-width=".65" opacity=".45"/></svg>';
+
   function renderHomeHijriFrameHtml() {
-    const isTest =
-      location.pathname.indexOf("/test/") === 0 || location.pathname === "/test";
-    if (isTest) {
-      return `<button id="homeHijriDayBtn" class="home-hijri-mini" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-mini-ribbon"><span data-hijri-month-text>—</span><span class="home-hijri-mini-year" data-hijri-year-text>—</span></span><span class="home-hijri-mini-sheet"><span class="home-hijri-mini-day" data-hijri-day-num>—</span><span class="home-hijri-mini-line" data-hijri-date-text>—</span></span></button>`;
-    }
-    return `<button id="homeHijriDayBtn" class="home-hijri-frame" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-frame-day" data-hijri-day-num aria-hidden="true">—</span><span class="home-hijri-frame-copy"><span class="home-hijri-frame-kicker">Islam. Kalender</span><span class="home-hijri-frame-date" data-hijri-date-text>Islamisches Datum</span></span></button>`;
+    return `<button id="homeHijriDayBtn" class="home-hijri-chip" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-chip-icon" aria-hidden="true">${HIJRI_CHIP_ICON}</span><span class="home-hijri-chip-date" data-hijri-date-text>—</span></button>`;
   }
 
   function renderHomeHeaderChipsHtml() {
