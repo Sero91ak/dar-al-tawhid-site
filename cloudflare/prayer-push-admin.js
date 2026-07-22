@@ -28,6 +28,27 @@ const PRAYER_PUSH_EMOJI = Object.freeze({
   tahajjud: "🌙"
 });
 
+function sanitizePublicPrayerStatus(status) {
+  if (!status || typeof status !== "object") return status || null;
+  const safe = { ...status };
+  delete safe.userRegistry;
+  delete safe.oneSignalResponses;
+  delete safe.skippedPastDetails;
+  delete safe.errorDetails;
+  if (Array.isArray(safe.planned)) {
+    safe.planned = safe.planned.slice(0, 40).map(item => ({
+      prayer: item?.prayer || "",
+      key: item?.key || "",
+      mode: item?.mode || "",
+      time: item?.time ?? null,
+      sendAfter: item?.sendAfter || null,
+      recipients: Number(item?.recipients || 0),
+      timeZone: item?.timeZone || ""
+    }));
+  }
+  return safe;
+}
+
 export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
   const name = PRAYER_NAMES[key] || "Maghrib";
@@ -49,12 +70,12 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
   const cached = readPrayerPushStatusFromKv();
   if (cached?.updatedAt) {
-    return { ok: true, status: cached, source: "worker-memory" };
+    return { ok: true, status: sanitizePublicPrayerStatus(cached), source: "worker-memory" };
   }
 
   const durable = await readPrayerStatusFromStore(env);
   if (durable?.status?.updatedAt) {
-    return { ok: true, status: durable.status, source: "durable-object" };
+    return { ok: true, status: sanitizePublicPrayerStatus(durable.status), source: "durable-object" };
   }
 
   const owner = env.GITHUB_OWNER || "Sero91ak";
@@ -69,7 +90,7 @@ export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
     if (!status?.updatedAt) {
       return { ok: false, error: "Noch kein Scheduler-Lauf gespeichert", status: null };
     }
-    return { ok: true, status, source: "github-fallback" };
+    return { ok: true, status: sanitizePublicPrayerStatus(status), source: "github-fallback" };
   } catch (err) {
     return { ok: false, error: err.message || String(err) };
   }
@@ -185,7 +206,7 @@ export async function triggerPrayerWorkflowForSubscription(env, subscriptionId, 
     scheduled: result.scheduled,
     recipients: result.recipients,
     usersWithLocation: result.usersWithLocation,
-    status: result.status
+    status: sanitizePublicPrayerStatus(result.status)
   };
 }
 
