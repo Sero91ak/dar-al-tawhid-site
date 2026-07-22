@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-07-22T19:39:49.827Z",
+  "publicOutputIsVerifiedOnly": true,
+  "rules": [
+    "A quoted scholar is never inferred as the author of a cited work.",
+    "Only works present in the authority registry with a verified author are public.",
+    "Unknown, ambiguous or incomplete works are quarantined and excluded from every public list.",
+    "Books are merged by canonical work id.",
+    "Scholars are merged by normalized person name.",
+    "Duplicate ids and identical content are excluded before grouping.",
+    "The public interface must read data/books-library.json and data/scholars-library.json only.",
+    "The deployment build fails if unverified, duplicated or incomplete metadata reaches public output."
+  ],
+  "authorityErrors": [],
+  "duplicateIds": [],
+  "duplicateContent": [],
+  "quarantinedWorks": [],
+  "suspiciousRoleCollisions": []
+}

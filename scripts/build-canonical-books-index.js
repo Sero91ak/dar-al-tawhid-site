@@ -232,14 +232,30 @@ function main() {
     }
   }
 
+  for (const work of authority.works || []) {
+    if (!work?.id || !work?.title || !work?.author || work.verified === false) continue;
+    if (books.has(work.id)) continue;
+    books.set(work.id, {
+      id: work.id,
+      title: work.title,
+      author: String(work.author || '').trim(),
+      category: work.category || 'Nicht eingeordnet',
+      aliases: work.aliases || [],
+      verification: 'verified',
+      postIds: [],
+      quotedScholars: []
+    });
+  }
+
   const bookList = [...books.values()]
     .map((book) => ({
       ...book,
       postIds: uniqueSorted(book.postIds),
       quotedScholars: uniqueSorted(book.quotedScholars),
-      postCount: new Set(book.postIds).size
+      postCount: new Set(book.postIds).size,
+      coverUrl: `/test/assets/library/covers/qsrc/${book.id}.svg`
     }))
-    .filter((book) => book.postCount > 0 && book.verification === 'verified')
+    .filter((book) => book.verification === 'verified')
     .sort((a, b) => a.category.localeCompare(b.category, 'de') || a.author.localeCompare(b.author, 'de') || a.title.localeCompare(b.title, 'de'));
 
   const visibleBookIds = new Set(bookList.map((book) => book.id));

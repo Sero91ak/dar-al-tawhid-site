@@ -1,37 +1,26 @@
-name: Deploy Besucher-App (Cloudflare Workers)
+name: Deploy Test-App (Quellenbibliothek)
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - test-library-canonical
     paths:
-      - index.html
+      - test/**
       - test/index.html
-      - test/assets/library/**
-      - wasiyyah/**
-      - test/wasiyyah/**
-      - version.json
-      - test/version.json
-      - service-worker.js
-      - assets/**
-      - content/**
-      - data/**
-      - admin/index.html
-      - admin/library-*.js
-      - admin/library-admin.css
-      - admin/quiz-stats-manager.js
-      - wrangler.toml
-      - .assetsignore
-      - package.json
-      - _headers
-      - scripts/cf-pages-build.js
+      - data/books-library.json
+      - data/scholars-library.json
+      - data/library-authority.json
+      - data/canonical-books-index.json
+      - scripts/build-canonical-books-index.js
+      - scripts/patch-test-canonical-library.js
       - scripts/sync-app-build-ids.js
-      - scripts/overlay-test-staging-from-branch.js
       - scripts/verify-live-deploy.js
-      - scripts/app-health-check.js
-      - scripts/repo-integrity-guard.js
-      - .github/workflows/cloudflare-pages-deploy.yml
+      - scripts/cf-pages-build.js
+      - service-worker.js
+      - wrangler.toml
+      - package.json
+      - .github/workflows/deploy-test-library-canonical.yml
 
 permissions:
   contents: read
@@ -41,8 +30,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -51,21 +38,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Test-App Staging aus test-library-canonical übernehmen
-        run: |
-          git fetch origin test-library-canonical
-          node scripts/overlay-test-staging-from-branch.js
-
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
-      - name: Health checks (Syntax, Push-Guard, Version)
+      - name: Health checks (Syntax, Push-Guard)
         run: |
           node scripts/app-health-check.js
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
 
-      - name: Deploy statische App (Workers Static Assets)
+      - name: Deploy Test-App (Workers Static Assets)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -83,9 +65,8 @@ jobs:
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
 
-      - name: Live-Deploy verifizieren (Besucher + Test)
+      - name: Test-App Quellenbibliothek verifizieren
         env:
           SITE_URL: "https://dar-al-tawhid.de"
-          DEPLOY_VERIFY_MODE: "all"
-          EXPECT_ZAKAT_VERSION: "18"
+          DEPLOY_VERIFY_MODE: "test"
         run: node scripts/verify-live-deploy.js
