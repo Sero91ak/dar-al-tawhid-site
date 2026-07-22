@@ -370,6 +370,103 @@
         opacity:.85;
       }
       .qsrc-grid{display:grid;gap:6px}
+      .qsrc-shelf{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+        align-items:stretch;
+      }
+      .qsrc-shelf-tile{
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+        align-items:stretch;
+        border:1px solid var(--line,rgba(127,127,127,.16));
+        border-radius:14px;
+        padding:8px 7px 9px;
+        background:radial-gradient(circle at 50% 0%,rgba(239,215,142,.07),transparent 55%),linear-gradient(145deg,color-mix(in srgb,var(--card,#14120e) 95%,transparent),color-mix(in srgb,var(--panel,#12100c) 92%,transparent));
+        color:inherit;
+        text-align:center;
+        width:100%;
+        min-width:0;
+        cursor:pointer;
+        box-shadow:0 8px 18px rgba(0,0,0,.16);
+        transition:transform .14s ease,border-color .14s ease;
+      }
+      .qsrc-shelf-tile:hover{
+        transform:translateY(-2px);
+        border-color:rgba(239,215,142,.30);
+      }
+      .qsrc-shelf-cover-wrap{
+        width:100%;
+        aspect-ratio:2/3;
+        max-height:172px;
+        margin:0 auto;
+        border-radius:9px;
+        overflow:hidden;
+        border:1px solid rgba(239,215,142,.20);
+        box-shadow:0 10px 22px rgba(0,0,0,.26),inset 0 0 0 1px rgba(255,255,255,.04);
+        background:linear-gradient(145deg,rgba(24,20,14,.95),rgba(10,10,8,.95));
+      }
+      .qsrc-shelf-cover{
+        display:block;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center top;
+      }
+      .qsrc-shelf-meta{
+        display:grid;
+        gap:3px;
+        min-width:0;
+        padding:0 2px;
+      }
+      .qsrc-shelf-title{
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:2;
+        overflow:hidden;
+        font-family:var(--serif,Georgia,"Times New Roman",serif);
+        font-size:11.5px;
+        font-weight:650;
+        line-height:1.24;
+        color:var(--qsrc-accent-title,var(--gold2,#efd78e));
+      }
+      .qsrc-shelf-author{
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:2;
+        overflow:hidden;
+        font-size:10px;
+        line-height:1.28;
+        font-style:italic;
+        color:var(--premium-body,#d9cfb0);
+      }
+      .qsrc-shelf-category{
+        display:inline-block;
+        align-self:center;
+        max-width:100%;
+        margin-top:1px;
+        padding:2px 6px;
+        border-radius:999px;
+        font-size:7.5px;
+        font-weight:800;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        color:var(--gold2,#efd78e);
+        background:var(--qsrc-accent-chip,rgba(239,215,142,.08));
+        border:1px solid rgba(239,215,142,.12);
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      }
+      .qsrc-shelf-badge{
+        font-size:7px;
+        font-weight:800;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        color:var(--muted,#a89f88);
+      }
       .qsrc-card{
         display:grid;
         grid-template-columns:46px minmax(0,1fr) auto;
@@ -502,7 +599,7 @@
         border-radius:14px;
         background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.08),transparent 42%),linear-gradient(145deg,color-mix(in srgb,var(--card,#14120e) 95%,transparent),color-mix(in srgb,var(--panel,#12100c) 92%,transparent));
       }
-      .qsrc-detail-hero .qsrc-cover-wrap{width:92px;height:128px;border-radius:9px}
+      .qsrc-detail-hero .qsrc-cover-wrap{width:110px;height:154px;border-radius:10px}
       .qsrc-detail-hero h4{margin:0 0 4px;font-family:var(--serif,Georgia,serif);font-size:18px;line-height:1.2;color:var(--gold2,#efd78e)}
       .qsrc-detail-hero p{margin:0;font-size:12px;line-height:1.35;color:var(--premium-body,#d9cfb0);font-style:italic}
       .qsrc-detail-hero .qsrc-card-category{margin-top:8px}
@@ -567,6 +664,9 @@
         .qsrc-meta-pill{justify-self:start}
         .qsrc-toolbar{grid-template-columns:1fr}
         .qsrc-control-btn{justify-content:center;width:100%}
+        .qsrc-shelf{gap:7px}
+        .qsrc-shelf-cover-wrap{max-height:156px}
+        .qsrc-shelf-title{font-size:11px}
         .qsrc-card-title{font-size:14px}
       }
     `;
@@ -653,23 +753,28 @@
     return `<div class="qsrc-cover-wrap"><img class="${className || "qsrc-cover"}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.hidden=false"><div class="qsrc-cover-fallback" hidden>${esc((book.title || "").split(" ").slice(0, 3).join(" "))}</div></div>`;
   }
 
+  function shelfCoverHtml(book) {
+    const src = bookCoverUrl(book);
+    const alt = `${book.title} – Buchcover`;
+    if (!src) {
+      return `<div class="qsrc-shelf-cover-wrap"><div class="qsrc-cover-fallback" role="img" aria-label="${esc(alt)}">${esc((book.title || "").split(" ").slice(0, 4).join(" "))}</div></div>`;
+    }
+    return `<div class="qsrc-shelf-cover-wrap"><img class="qsrc-shelf-cover" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.hidden=false"><div class="qsrc-cover-fallback" hidden>${esc((book.title || "").split(" ").slice(0, 4).join(" "))}</div></div>`;
+  }
+
   function renderBookCard(book) {
     const search = bookSearchBlob(book);
     const postCount = Number(book.postCount || 0);
-    const postLabel = postCount ? `${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}` : "Katalog";
+    const postLabel = postCount ? `${postCount} Beiträge` : "Katalog";
     const accent = categoryAccent(book.category);
-    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
-      ${coverHtml(book)}
-      <span class="qsrc-card-body">
-        <span class="qsrc-card-kicker">Werk</span>
-        <span class="qsrc-card-head">
-          <span class="qsrc-card-title">${esc(book.title)}</span>
-          <span class="qsrc-card-badge">${esc(postLabel)}</span>
-        </span>
-        <span class="qsrc-card-author"><span class="qsrc-label">Autor des Werkes</span><span class="qsrc-author-name">${esc(book.author)}</span></span>
-        <span class="qsrc-card-foot"><span class="qsrc-card-category">${esc(book.category || "Werk")}</span></span>
+    return `<button type="button" class="qsrc-shelf-tile qsrc-card" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
+      ${shelfCoverHtml(book)}
+      <span class="qsrc-shelf-meta">
+        <span class="qsrc-shelf-title">${esc(book.title)}</span>
+        <span class="qsrc-shelf-author">${esc(book.author)}</span>
+        <span class="qsrc-shelf-category">${esc(book.category || "Werk")}</span>
+        <span class="qsrc-shelf-badge">${esc(postLabel)}</span>
       </span>
-      <span class="qsrc-chevron" aria-hidden="true">›</span>
     </button>`;
   }
 
@@ -737,7 +842,7 @@
       ${activeTab === "books" ? renderCategoryFilters() : ""}
     </div>
   </div>
-  <div class="qsrc-grid qsrc-grid-compact" id="qsrcResults">${listHtml}</div>
+  <div class="${activeTab === "books" ? "qsrc-shelf" : "qsrc-grid"}" id="qsrcResults">${listHtml}</div>
 </section>`;
   }
 

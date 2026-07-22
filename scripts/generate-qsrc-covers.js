@@ -44,7 +44,7 @@ function escXml(value) {
     .replace(/"/g, "&quot;");
 }
 
-function wrapLines(text, maxLen) {
+function wrapLines(text, maxLen, maxLines) {
   const words = String(text || "").split(/\s+/).filter(Boolean);
   const lines = [];
   let line = "";
@@ -56,23 +56,30 @@ function wrapLines(text, maxLen) {
     } else {
       line = next;
     }
+    if (lines.length >= maxLines) break;
   }
-  if (line) lines.push(line);
-  return lines.slice(0, 4);
+  if (line && lines.length < maxLines) lines.push(line);
+  return lines.slice(0, maxLines);
+}
+
+function shortCategory(category) {
+  const raw = String(category || "Werk");
+  const parts = raw.split(/\s+und\s+/i);
+  return parts[0].length > 18 ? parts[0].slice(0, 16) + "…" : parts[0];
 }
 
 function coverSvg(book) {
   const colors = paletteForCategory(book.category);
-  const titleLines = wrapLines(book.title, 22);
-  const authorLines = wrapLines(book.author, 24);
-  const category = String(book.category || "Werk").toUpperCase();
-  const titleY = 250 - titleLines.length * 8;
-  const authorY = 390;
+  const titleLines = wrapLines(book.title, 14, 3);
+  const authorLines = wrapLines(book.author, 16, 2);
+  const category = shortCategory(book.category).toUpperCase();
+  const titleStartY = 228 - (titleLines.length - 1) * 10;
+  const authorStartY = 400;
   const titleSvg = titleLines.map((line, i) =>
-    `<text x="200" y="${titleY + i * 24}" text-anchor="middle" fill="#f4ecd8" font-family="Georgia,'Times New Roman',serif" font-size="16" font-weight="600">${escXml(line)}</text>`
+    `<text x="212" y="${titleStartY + i * 28}" text-anchor="middle" fill="#f8f0dc" font-family="Georgia,'Times New Roman',serif" font-size="21" font-weight="700">${escXml(line)}</text>`
   ).join("");
   const authorSvg = authorLines.map((line, i) =>
-    `<text x="200" y="${authorY + i * 16}" text-anchor="middle" fill="#c9b896" font-family="Georgia,serif" font-size="10" opacity="0.92">${escXml(line)}</text>`
+    `<text x="212" y="${authorStartY + i * 18}" text-anchor="middle" fill="#d8c8a0" font-family="Georgia,serif" font-size="13" font-style="italic">${escXml(line)}</text>`
   ).join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -88,17 +95,23 @@ function coverSvg(book) {
       <stop offset="50%" stop-color="#e8d49a"/>
       <stop offset="100%" stop-color="#a67c3d"/>
     </linearGradient>
+    <linearGradient id="spine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a0806"/>
+      <stop offset="100%" stop-color="${colors.top}"/>
+    </linearGradient>
   </defs>
   <rect width="400" height="600" fill="url(#bg)"/>
-  <rect x="16" y="16" width="368" height="568" rx="6" fill="none" stroke="url(#gold)" stroke-width="1.2" opacity="0.55"/>
-  <rect x="26" y="26" width="348" height="548" rx="4" fill="none" stroke="url(#gold)" stroke-width="0.6" opacity="0.28"/>
-  <text x="200" y="120" text-anchor="middle" fill="#e8d49a" font-family="Georgia,serif" font-size="10" letter-spacing="2.2">${escXml(category)}</text>
-  <line x1="90" y1="136" x2="310" y2="136" stroke="url(#gold)" stroke-width="0.8" opacity="0.45"/>
+  <rect x="0" y="0" width="34" height="600" fill="url(#spine)" opacity="0.92"/>
+  <rect x="8" y="40" width="10" height="520" rx="2" fill="url(#gold)" opacity="0.35"/>
+  <rect x="20" y="18" width="360" height="564" rx="6" fill="none" stroke="url(#gold)" stroke-width="1.4" opacity="0.62"/>
+  <rect x="30" y="30" width="340" height="544" rx="4" fill="none" stroke="url(#gold)" stroke-width="0.7" opacity="0.28"/>
+  <text x="212" y="108" text-anchor="middle" fill="#e8d49a" font-family="Georgia,serif" font-size="11" font-weight="700" letter-spacing="1.8">${escXml(category)}</text>
+  <line x1="78" y1="124" x2="346" y2="124" stroke="url(#gold)" stroke-width="0.9" opacity="0.48"/>
   ${titleSvg}
-  <line x1="90" y1="360" x2="310" y2="360" stroke="url(#gold)" stroke-width="0.6" opacity="0.35"/>
-  <text x="200" y="378" text-anchor="middle" fill="#9a8b6e" font-family="Georgia,serif" font-size="8" letter-spacing="1.4">AUTOR</text>
+  <line x1="78" y1="372" x2="346" y2="372" stroke="url(#gold)" stroke-width="0.7" opacity="0.38"/>
+  <text x="212" y="390" text-anchor="middle" fill="#9a8b6e" font-family="Georgia,serif" font-size="9" font-weight="700" letter-spacing="1.6">AUTOR</text>
   ${authorSvg}
-  <text x="200" y="548" text-anchor="middle" fill="#9a8b6e" font-family="Georgia,serif" font-size="9" letter-spacing="1.4">QUELLENBIBLIOTHEK</text>
+  <text x="212" y="556" text-anchor="middle" fill="#9a8b6e" font-family="Georgia,serif" font-size="8" letter-spacing="1.2">DAR AL TAWḤĪD</text>
 </svg>
 `;
 }
