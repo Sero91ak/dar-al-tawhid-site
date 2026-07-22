@@ -10994,6 +10994,45 @@ html[data-theme="dar-al-layl"] .home-more-body .overview-compact .stat-card{
   box-shadow:0 0 10px color-mix(in srgb,#a88b4f 13%,transparent),inset 0 0 0 1px color-mix(in srgb,#d8c18b 10%,transparent)!important;
 }
 </style>
+<style id="hijri-dayframe-v334">
+/* Hijri-Datum: kompakt, rote Umrandung, Kalender-Emoji */
+.home-hijri-dayframe{
+  display:inline-flex!important;align-items:center!important;gap:5px!important;
+  padding:3px 9px 4px!important;min-height:0!important;min-width:0!important;
+  max-width:min(62vw,232px)!important;width:auto!important;border-radius:8px!important;
+  border:1px solid rgba(186,78,78,.72)!important;
+  background:color-mix(in srgb,var(--card) 88%,rgba(186,78,78,.08))!important;
+  box-shadow:0 0 8px rgba(186,78,78,.14),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+.home-hijri-dayframe .home-hijri-ico{
+  font-size:clamp(13px,3.4vw,15px)!important;line-height:1!important;flex:0 0 auto!important;
+}
+.home-hijri-dayframe [data-hijri-date-text]{
+  font-size:clamp(13px,3.5vw,15.5px)!important;font-weight:650!important;
+  line-height:1.15!important;letter-spacing:.012em!important;color:var(--gold2)!important;
+  text-shadow:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.home-hijri-dayframe:hover{
+  border-color:rgba(210,96,96,.88)!important;
+  box-shadow:0 0 10px rgba(186,78,78,.22)!important;
+}
+html[data-theme="light"] .home-hijri-dayframe,
+html[data-theme="soft"] .home-hijri-dayframe{
+  border-color:rgba(158,64,64,.62)!important;
+  background:color-mix(in srgb,#fffaf0 92%,rgba(158,64,64,.06))!important;
+}
+html[data-theme="light"] .home-hijri-dayframe [data-hijri-date-text],
+html[data-theme="soft"] .home-hijri-dayframe [data-hijri-date-text]{color:#5a4018!important}
+html[data-theme="bordeaux"] .home-hijri-dayframe{
+  border-color:rgba(200,110,110,.68)!important;
+  box-shadow:0 0 9px rgba(166,72,72,.16)!important;
+}
+@media(max-width:520px){
+  .home-hijri-dayframe{padding:3px 8px 4px!important;max-width:min(58vw,212px)!important;gap:4px!important}
+  .home-hijri-dayframe [data-hijri-date-text]{font-size:clamp(12.5px,3.6vw,14.5px)!important}
+  .home-hijri-dayframe .home-hijri-ico{font-size:clamp(12px,3.3vw,14px)!important}
+}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
@@ -11921,7 +11960,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-dayframe" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span data-hijri-date-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-dayframe" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -16337,6 +16376,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=13"></script>
+  <script src="/assets/dar-account-visibility.js?v=14"></script>
 </body>
 </html>
