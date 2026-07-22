@@ -64,7 +64,10 @@ requireText("Scheduler", scheduler, [
   'SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES',
   'dedupeRegistrations',
   'writePrayerStatusToStore',
-  'environment: "production"'
+  'environment: "production"',
+  'slotDayKey',
+  'resolvePrayerSlotSendAfter',
+  'return null'
 ]);
 forbidText("Scheduler", scheduler, [
   'SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60',
