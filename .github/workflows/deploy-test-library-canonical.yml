@@ -13,6 +13,7 @@ on:
       - data/library-authority.json
       - data/canonical-books-index.json
       - scripts/build-canonical-books-index.js
+      - scripts/sync-library-authority-from-posts.js
       - scripts/patch-test-canonical-library.js
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js

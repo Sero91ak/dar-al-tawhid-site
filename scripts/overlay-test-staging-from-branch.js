@@ -21,13 +21,18 @@ const OVERLAY_FILES = [
   "data/library-authority.json",
   "data/canonical-books-index.json",
   "data/library-metadata-report.json",
+  "data/library-authority-sync-report.json",
   "scripts/build-canonical-books-index.js",
+  "scripts/sync-library-authority-from-posts.js",
   "scripts/cf-pages-build.js",
   "scripts/generate-qsrc-covers.js",
   "scripts/patch-test-canonical-library.js"
 ];
 
-const OVERLAY_DIRS = ["test/assets/library/covers/qsrc"];
+const OVERLAY_DIRS = [
+  "test/assets/library/covers/qsrc",
+  "assets/library/covers/qsrc"
+];
 
 function runGit(args) {
   return execFileSync("git", args, { cwd: ROOT, encoding: "utf8" }).trim();

@@ -7,36 +7,940 @@
     "hideUnverifiedWorks": true,
     "hideUnverifiedAuthors": true,
     "failBuildOnPublicMetadataError": true,
-    "deduplicateBy": ["canonicalWorkId", "normalizedTitle"],
-    "roles": ["author", "compiler", "commentator", "editor", "translator", "narrator", "quotedScholar"]
+    "deduplicateBy": [
+      "canonicalWorkId",
+      "normalizedTitle"
+    ],
+    "roles": [
+      "author",
+      "compiler",
+      "commentator",
+      "editor",
+      "translator",
+      "narrator",
+      "quotedScholar"
+    ]
   },
   "works": [
-    {"id":"sahih-al-bukhari","title":"Ṣaḥīḥ al-Bukhārī","aliases":["Sahih al-Bukhari","Ṣaḥīḥ Bukhārī","al-Jāmiʿ aṣ-Ṣaḥīḥ"],"author":"Muḥammad ibn Ismāʿīl al-Bukhārī","category":"Ḥadīṯ","verified":true},
-    {"id":"sahih-muslim","title":"Ṣaḥīḥ Muslim","aliases":["Sahih Muslim","al-Musnad aṣ-Ṣaḥīḥ"],"author":"Muslim ibn al-Ḥajjāj an-Naysābūrī","category":"Ḥadīṯ","verified":true},
-    {"id":"sunan-abi-dawud","title":"Sunan Abī Dāwūd","aliases":["Sunan Abu Dawud","Sunan Abū Dāwūd"],"author":"Abū Dāwūd Sulaymān ibn al-Ashʿath as-Sijistānī","category":"Ḥadīṯ","verified":true},
-    {"id":"jami-at-tirmidhi","title":"Jāmiʿ at-Tirmidhī","aliases":["Sunan at-Tirmidhi","Jami at-Tirmidhi"],"author":"Muḥammad ibn ʿĪsā at-Tirmidhī","category":"Ḥadīṯ","verified":true},
-    {"id":"sunan-an-nasai","title":"Sunan an-Nasāʾī","aliases":["Sunan an-Nasai","al-Mujtabā"],"author":"Aḥmad ibn Shuʿayb an-Nasāʾī","category":"Ḥadīṯ","verified":true},
-    {"id":"sunan-ibn-majah","title":"Sunan Ibn Mājah","aliases":["Sunan Ibn Majah"],"author":"Muḥammad ibn Yazīd Ibn Mājah al-Qazwīnī","category":"Ḥadīṯ","verified":true},
-    {"id":"musnad-ahmad","title":"Musnad Aḥmad","aliases":["Musnad Imam Ahmad","Musnad Aḥmad ibn Ḥanbal"],"author":"Aḥmad ibn Ḥanbal","category":"Ḥadīṯ","verified":true},
-    {"id":"muwatta-malik","title":"al-Muwaṭṭaʾ","aliases":["Muwatta Malik","al-Muwatta"],"author":"Mālik ibn Anas","category":"Ḥadīṯ und Fiqh","verified":true},
-    {"id":"musannaf-ibn-abi-shaybah","title":"Muṣannaf Ibn Abī Shaybah","aliases":["Musannaf Ibn Abi Shaybah","al-Musannaf von Ibn Abi Shaybah"],"author":"Abū Bakr ʿAbd Allāh ibn Muḥammad Ibn Abī Shaybah","category":"Āthār und Ḥadīṯ","verified":true},
-    {"id":"musannaf-abd-ar-razzaq","title":"Muṣannaf ʿAbd ar-Razzāq","aliases":["Musannaf Abd ar-Razzaq","al-Musannaf von Abd ar-Razzaq"],"author":"ʿAbd ar-Razzāq ibn Hammām aṣ-Ṣanʿānī","category":"Āthār und Ḥadīṯ","verified":true},
-    {"id":"hilyat-al-awliya","title":"Ḥilyat al-Awliyāʾ wa Ṭabaqāt al-Aṣfiyāʾ","aliases":["Hilyat al-Awliya","Ḥilyat al-Awliyāʾ"],"author":"Abū Nuʿaym al-Aṣbahānī","category":"Biografien und Āthār","verified":true},
-    {"id":"siyar-alam-an-nubala","title":"Siyar Aʿlām an-Nubalāʾ","aliases":["Siyar Alam an-Nubala","Siyar A'lam al-Nubala"],"author":"Shams ad-Dīn adh-Dhahabī","category":"Biografien","verified":true},
-    {"id":"tahdhib-al-kamal","title":"Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl","aliases":["Tahdhib al-Kamal"],"author":"Jamāl ad-Dīn al-Mizzī","category":"Rijāl und Biografien","verified":true},
-    {"id":"jami-bayan-al-ilm","title":"Jāmiʿ Bayān al-ʿIlm wa Faḍlih","aliases":["Jami Bayan al-Ilm","Jāmiʿ Bayān al-ʿIlm"],"author":"Ibn ʿAbd al-Barr","category":"Wissen und Adab","verified":true},
-    {"id":"ash-shariah-al-ajurri","title":"ash-Sharīʿah","aliases":["al-Shari'ah","aš-Šarīʿah","Kitab ash-Shariah","ash-Sharīʿah von al-Ājurrī"],"author":"Abū Bakr al-Ājurrī","category":"ʿAqīdah und Sunnah","verified":true},
-    {"id":"as-sunnah-abdullah-ahmad","title":"as-Sunnah","aliases":["Kitāb as-Sunnah von ʿAbd Allāh ibn Aḥmad","Sunnah Abdullah ibn Ahmad"],"author":"ʿAbd Allāh ibn Aḥmad ibn Ḥanbal","category":"ʿAqīdah und Sunnah","verified":true},
-    {"id":"as-sunnah-al-khallal","title":"as-Sunnah von al-Khallāl","aliases":["Kitāb as-Sunnah al-Khallal","as-Sunnah al-Khallāl"],"author":"Abū Bakr al-Khallāl","category":"ʿAqīdah und Sunnah","verified":true},
-    {"id":"al-ibanah-ibn-battah","title":"al-Ibānah al-Kubrā","aliases":["al-Ibanah","al-Ibānah von Ibn Baṭṭah"],"author":"Ibn Baṭṭah al-ʿUkbarī","category":"ʿAqīdah und Sunnah","verified":true},
-    {"id":"sharh-usul-itiqad-lalakai","title":"Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Jamāʿah","aliases":["Sharh Usul I'tiqad","Uṣūl Iʿtiqād al-Lālakāʾī","al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah"],"author":"Hibat Allāh al-Lālakāʾī","category":"ʿAqīdah und Sunnah","verified":true},
-    {"id":"sunan-ad-darimi","title":"Sunan ad-Dārimī","aliases":["Sunan ad-Darimi","as-Sunan","ad-Dārimī, as-Sunan","Sunan ad-Dārimī, Muqaddimah"],"author":"ʿUthmān ibn Saʿīd ad-Dārimī","category":"Ḥadīṯ","verified":true},
-    {"id":"tarikh-dimashq","title":"Tārīkh Dimashq","aliases":["Tarikh Dimashq","Tārīkh Madīnat Dimashq","Tārīkh Dimashq / al-Iʿtiṣām","Ibn Asakir Tarikh Dimashq"],"author":"Abū al-Qāsim ʿAlī ibn al-Ḥasan Ibn ʿAsākir","category":"Biografien und Tārīkh","verified":true},
-    {"id":"ar-radd-ala-al-jahmiyyah-ad-darimi","title":"ar-Radd ʿalā al-Jahmiyyah","aliases":["Radd ala al-Jahmiyyah","Widerlegung der Jahmiyyah von ad-Darimi"],"author":"ʿUthmān ibn Saʿīd ad-Dārimī","category":"ʿAqīdah und Widerlegungen","verified":true},
-    {"id":"tafsir-at-tabari","title":"Jāmiʿ al-Bayān ʿan Taʾwīl Āy al-Qurʾān","aliases":["Tafsir at-Tabari","Tafsīr aṭ-Ṭabarī","Jami al-Bayan"],"author":"Muḥammad ibn Jarīr aṭ-Ṭabarī","category":"Tafsīr","verified":true},
-    {"id":"tafsir-ibn-kathir","title":"Tafsīr al-Qurʾān al-ʿAẓīm","aliases":["Tafsir Ibn Kathir","Tafsīr Ibn Kathīr"],"author":"Ismāʿīl ibn ʿUmar Ibn Kathīr","category":"Tafsīr","verified":true},
-    {"id":"majmu-al-fatawa","title":"Majmūʿ al-Fatāwā","aliases":["Majmu al-Fatawa","Majmūʿ Fatāwā Ibn Taymiyyah"],"author":"Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah","category":"Fatāwā und ʿAqīdah","verified":true},
-    {"id":"dar-taarud-al-aql-wan-naql","title":"Darʾ Taʿāruḍ al-ʿAql wa-n-Naql","aliases":["Dar Ta'arud al-Aql wan-Naql"],"author":"Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah","category":"ʿAqīdah und Widerlegungen","verified":true},
-    {"id":"kitab-at-tawhid-miaw","title":"Kitāb at-Tawḥīd","aliases":["Kitab at-Tawhid","Das Buch des Tawhid"],"author":"Muḥammad ibn ʿAbd al-Wahhāb","category":"Tawḥīd","verified":true}
+    {
+      "id": "al-adab-al-mufrad",
+      "title": "al-Adab al-Mufrad",
+      "aliases": [],
+      "author": "ʿAmr b. Shuʿayb.",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-adab-ash-shariyyah",
+      "title": "al-Ādāb ash-Sharʿiyyah",
+      "aliases": [
+        "al-Ādāb ash-Sharʿiyyah; Siyar Aʿlām an-Nubalāʾ"
+      ],
+      "author": "Ibn Mufliḥ",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-jami-li-akhlaq-ar-rawi-wa-adab-as-sami",
+      "title": "al-Jāmiʿ li-Akhlāq ar-Rāwī wa Ādāb as-Sāmiʿ",
+      "aliases": [],
+      "author": "al-Khaṭīb al-Baghdādī",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "as-samt-wa-adab-al-lisan",
+      "title": "aṣ-Ṣamt wa Ādāb al-Lisān",
+      "aliases": [],
+      "author": "Ibn Abī ad-Dunyā",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "az-zuhd-li-ahmad",
+      "title": "az-Zuhd li-Aḥmad",
+      "aliases": [
+        "az-Zuhd"
+      ],
+      "author": "Aḥmad ibn Ḥanbal",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "az-zuhd-war-raqaiq",
+      "title": "az-Zuhd wa’r-Raqāʾiq",
+      "aliases": [],
+      "author": "ʿAbdullāh ibn al-Mubārak",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "diwan-ash-shafii-manaqib-ash-shafii",
+      "title": "Dīwān ash-Shāfiʿī / Manāqib ash-Shāfiʿī",
+      "aliases": [],
+      "author": "ash-Shāfiʿī in seinen bekannten Weisheiten über Wissen und Geduld.",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "sualat-ibn-al-junayd-li-yahya-b-main",
+      "title": "Suʾālāt Ibn al-Junayd li-Yaḥyā b. Maʿīn",
+      "aliases": [],
+      "author": "Ibn al-Junayd",
+      "category": "Adab und Tazkiyah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "musannaf-ibn-abi-shaybah",
+      "title": "Muṣannaf Ibn Abī Shaybah",
+      "aliases": [
+        "Musannaf Ibn Abi Shaybah",
+        "al-Musannaf von Ibn Abi Shaybah",
+        "al-Muṣannaf von Ibn Abī Shaybah",
+        "Musannaf Ibn Abī Shaybah"
+      ],
+      "author": "Abū Bakr ʿAbd Allāh ibn Muḥammad Ibn Abī Shaybah",
+      "category": "Āthār und Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "musannaf-abd-ar-razzaq",
+      "title": "Muṣannaf ʿAbd ar-Razzāq",
+      "aliases": [
+        "Musannaf Abd ar-Razzaq",
+        "al-Musannaf von Abd ar-Razzaq",
+        "al-Musannaf",
+        "al-Muṣannaf"
+      ],
+      "author": "ʿAbd ar-Razzāq ibn Hammām aṣ-Ṣanʿānī",
+      "category": "Āthār und Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "siyar-alam-an-nubala",
+      "title": "Siyar Aʿlām an-Nubalāʾ",
+      "aliases": [
+        "Siyar Alam an-Nubala",
+        "Siyar A'lam al-Nubala",
+        "Siyar Aʿlām an-Nubalāʾ / Ḥilyat al-Awliyāʾ",
+        "Ḥilyat al-Awliyāʾ / Siyar Aʿlām an-Nubalāʾ",
+        "Tahdhīb al-Kamāl / Siyar Aʿlām an-Nubalāʾ"
+      ],
+      "author": "Shams ad-Dīn adh-Dhahabī",
+      "category": "Biografien",
+      "verified": true
+    },
+    {
+      "id": "hilyat-al-awliya",
+      "title": "Ḥilyat al-Awliyāʾ wa Ṭabaqāt al-Aṣfiyāʾ",
+      "aliases": [
+        "Hilyat al-Awliya",
+        "Ḥilyat al-Awliyāʾ",
+        "Gharāʾib Mālik ibn Anas / Ḥilyat al-Awliyāʾ"
+      ],
+      "author": "Abū Nuʿaym al-Aṣbahānī",
+      "category": "Biografien und Āthār",
+      "verified": true
+    },
+    {
+      "id": "tarikh-dimashq",
+      "title": "Tārīkh Dimashq",
+      "aliases": [
+        "Tarikh Dimashq",
+        "Tārīkh Madīnat Dimashq",
+        "Tārīkh Dimashq / al-Iʿtiṣām",
+        "Ibn Asakir Tarikh Dimashq",
+        "al-Iʿtiṣām"
+      ],
+      "author": "Abū al-Qāsim ʿAlī ibn al-Ḥasan Ibn ʿAsākir",
+      "category": "Biografien und Tārīkh",
+      "verified": true
+    },
+    {
+      "id": "ilam-al-muwaqqiin",
+      "title": "Iʿlām al-Muwaqqiʿīn",
+      "aliases": [
+        "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn"
+      ],
+      "author": "Ibn al-Qayyim",
+      "category": "Fatāwā",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "majmu-al-fatawa",
+      "title": "Majmūʿ al-Fatāwā",
+      "aliases": [
+        "Majmu al-Fatawa",
+        "Majmūʿ Fatāwā Ibn Taymiyyah",
+        "al-Muṣannaf / al-Awsaṭ / al-Mughnī / Majmūʿ al-Fatāwā"
+      ],
+      "author": "Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah",
+      "category": "Fatāwā und ʿAqīdah",
+      "verified": true
+    },
+    {
+      "id": "adwa-al-bayan",
+      "title": "Aḍwāʾ al-Bayān",
+      "aliases": [],
+      "author": "ash-Shanqīṭī",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-bidayah-wa-n-nihayah",
+      "title": "al-Bidāyah wa-n-Nihāyah",
+      "aliases": [],
+      "author": "Ibn Kathīr",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-mughni",
+      "title": "al-Mughnī",
+      "aliases": [],
+      "author": "Ibn Qudāmah",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "irsad-al-fuhul",
+      "title": "Iršād al-Fuḥūl",
+      "aliases": [],
+      "author": "aš-Šawkānī",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "juma-al-ilm",
+      "title": "Jumāʿ al-ʿIlm",
+      "aliases": [],
+      "author": "ash-Shāfiʿī",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "madarij-as-salikin",
+      "title": "Madārij as-Sālikīn",
+      "aliases": [],
+      "author": "Ibn al-Qayyim",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "masail-al-imam-ahmad-riwayat-ibnuhu-abdullah",
+      "title": "Masāʾil al-Imām Aḥmad riwāyat ibnuhu ʿAbdullāh",
+      "aliases": [
+        "Masāʾil al-Imām Aḥmad riwāyat ʿAbdullāh"
+      ],
+      "author": "ibnuhu ʿAbdullāh",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "minhag-at-tasis-wa-t-taqdis",
+      "title": "Minhāǧ at-Taʾsīs wa-t-Taqdīs",
+      "aliases": [],
+      "author": "ʿAbd al-Laṭīf b. ʿAbd ar-Raḥmān Āl aš-Šaykh",
+      "category": "Fiqh und Uṣūl",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-jarh-wa-t-tadil",
+      "title": "al-Jarḥ wa-t-Taʿdīl",
+      "aliases": [],
+      "author": "Ibn Abī Ḥātim",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-umm-ikhtilaf-al-hadith",
+      "title": "al-Umm / Ikhtilāf al-Ḥadīth",
+      "aliases": [
+        "al-Umm"
+      ],
+      "author": "ash-Shāfiʿī",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "as-silsilah-as-sahihah",
+      "title": "as-Silsilah aṣ-Ṣaḥīḥah",
+      "aliases": [],
+      "author": "al-Albānī",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "alam-al-muwaqqiin",
+      "title": "Aʿlām al-Muwaqqiʿīn",
+      "aliases": [
+        "Aʿlām al-Muwaqqiʿīn / überliefert von Ibn al-Qayyim"
+      ],
+      "author": "Ibn al-Qayyim",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "gharib-al-hadith",
+      "title": "Gharīb al-Ḥadīth",
+      "aliases": [
+        "Gharib al-Hadith"
+      ],
+      "author": "Abū ʿUbaid al-Qāsim ibn Sallām",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "jami-at-tirmidhi",
+      "title": "Jāmiʿ at-Tirmidhī",
+      "aliases": [
+        "Sunan at-Tirmidhi",
+        "Jami at-Tirmidhi",
+        "Tafsīr aṭ-Ṭabarī / Jāmiʿ at-Tirmidhī",
+        "al-Muṣannaf / Jāmiʿ at-Tirmidhī",
+        "Sunan at-Tirmidhī",
+        "Ṣaḥīḥ Muslim / Jāmiʿ at-Tirmidhī / Tafsīr aṭ-Ṭabarī"
+      ],
+      "author": "Muḥammad ibn ʿĪsā at-Tirmidhī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "kitab-al-iman",
+      "title": "Kitāb al-Īmān",
+      "aliases": [],
+      "author": "Ibn Mandah",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "musnad-ahmad",
+      "title": "Musnad Aḥmad",
+      "aliases": [
+        "Musnad Imam Ahmad",
+        "Musnad Aḥmad ibn Ḥanbal",
+        "Musnad Aḥmad / ash-Shifāʾ",
+        "al-Mustadrak; Musnad Aḥmad; as-Sunan al-Kubrā lil-Bayhaqī"
+      ],
+      "author": "Aḥmad ibn Ḥanbal",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "musnad-al-bazzar",
+      "title": "Musnad al-Bazzār",
+      "aliases": [],
+      "author": "ʿImrān ibn Ḥuṣayn.",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "sahih-al-bukhari",
+      "title": "Ṣaḥīḥ al-Bukhārī",
+      "aliases": [
+        "Sahih al-Bukhari",
+        "Ṣaḥīḥ Bukhārī",
+        "al-Jāmiʿ aṣ-Ṣaḥīḥ",
+        "Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim",
+        "Ṣaḥīḥ al-Bukhārī / Musnad Aḥmad / al-Muwaṭṭaʾ / Fatḥ al-Bārī",
+        "Ṣaḥīḥ al-Bukhārī / Fatḥ al-Bārī",
+        "Ṣaḥīḥ al-Bukhārī / Fatḥ al-Bārī Ibn Rajab / as-Sunan al-Kubrā",
+        "Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim",
+        "Ṣaḥīḥ al-Bukhārī / Ṣaḥīḥ Muslim"
+      ],
+      "author": "Muḥammad ibn Ismāʿīl al-Bukhārī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "sahih-ibn-hibban",
+      "title": "Ṣaḥīḥ Ibn Ḥibbān",
+      "aliases": [],
+      "author": "Anas ibn Mālik.",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "sahih-muslim",
+      "title": "Ṣaḥīḥ Muslim",
+      "aliases": [
+        "Sahih Muslim",
+        "al-Musnad aṣ-Ṣaḥīḥ",
+        "Ṣaḥīḥ Muslim, Muqaddimah"
+      ],
+      "author": "Muslim ibn al-Ḥajjāj an-Naysābūrī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "sharh-hadith-an-nuzul",
+      "title": "Sharḥ Ḥadīth an-Nuzūl",
+      "aliases": [],
+      "author": "Ibn Taymiyyah",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "sunan-abi-dawud",
+      "title": "Sunan Abī Dāwūd",
+      "aliases": [
+        "Sunan Abu Dawud",
+        "Sunan Abū Dāwūd",
+        "Sunan Abī Dāwūd / Sharḥ Muslim / ʿUmdat al-Qārī"
+      ],
+      "author": "Abū Dāwūd Sulaymān ibn al-Ashʿath as-Sijistānī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "sunan-ad-darimi",
+      "title": "Sunan ad-Dārimī",
+      "aliases": [
+        "Sunan ad-Darimi",
+        "as-Sunan",
+        "ad-Dārimī, as-Sunan",
+        "Sunan ad-Dārimī, Muqaddimah",
+        "al-Madkhal ilā as-Sunan al-Kubrā",
+        "al-Mustadrak / as-Sunan al-Kubrā"
+      ],
+      "author": "ʿUthmān ibn Saʿīd ad-Dārimī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "sunan-an-nasai",
+      "title": "Sunan an-Nasāʾī",
+      "aliases": [
+        "Sunan an-Nasai",
+        "al-Mujtabā"
+      ],
+      "author": "Aḥmad ibn Shuʿayb an-Nasāʾī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "sunan-ibn-majah",
+      "title": "Sunan Ibn Mājah",
+      "aliases": [
+        "Sunan Ibn Majah",
+        "Sunan Ibn Mājah / al-Muwaṭṭaʾ"
+      ],
+      "author": "Muḥammad ibn Yazīd Ibn Mājah al-Qazwīnī",
+      "category": "Ḥadīṯ",
+      "verified": true
+    },
+    {
+      "id": "tawil-mukhtalif-al-hadith",
+      "title": "Taʾwīl Mukhtalif al-Ḥadīth",
+      "aliases": [],
+      "author": "Ibn Qutaybah",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "taliqat-ash-shaykh-al-barrak-ala-al-mukhalafat-al-aqdiyyah-fi-fath-al-ba",
+      "title": "Taʿlīqāt ash-Shaykh al-Barrāk ʿalā al-Mukhālafāt al-ʿAqdiyyah fī Fatḥ al-Bārī",
+      "aliases": [
+        "Taʿlīqāt ʿalā al-Mukhālafāt al-ʿAqdiyyah fī Fatḥ al-Bārī"
+      ],
+      "author": "ʿAbd ar-Raḥmān b. Nāṣir al-Barrāk",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "zitiert-in-manhaj-an-naqd-fi-ulum-al-hadith",
+      "title": "zitiert in Manhaj an-Naqd fī ʿUlūm al-Ḥadīth",
+      "aliases": [
+        "Manhaj an-Naqd fī ʿUlūm al-Ḥadīth"
+      ],
+      "author": "Sufyān ath-Thawrī",
+      "category": "Ḥadīṯ",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "muwatta-malik",
+      "title": "al-Muwaṭṭaʾ",
+      "aliases": [
+        "Muwatta Malik",
+        "al-Muwatta"
+      ],
+      "author": "Mālik ibn Anas",
+      "category": "Ḥadīṯ und Fiqh",
+      "verified": true
+    },
+    {
+      "id": "al-asma-wa-s-sifat",
+      "title": "al-Asmāʾ wa-ṣ-Ṣifāt",
+      "aliases": [],
+      "author": "al-Bayhaqī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-faqih-wa-l-mutafaqqih",
+      "title": "al-Faqīh wa-l-Mutafaqqih",
+      "aliases": [],
+      "author": "al-Khaṭīb al-Baghdādī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-furu-wa-tashih-al-furu",
+      "title": "al-Furūʿ wa-Taṣḥīḥ al-Furūʿ",
+      "aliases": [],
+      "author": "Ibn Mufliḥ",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-hawi-al-kabir",
+      "title": "al-Ḥāwī al-Kabīr",
+      "aliases": [
+        "Jāmiʿ al-Bayān, al-Ḥāwī al-Kabīr, al-Muġnī und Majmūʿ al-Fatāwā"
+      ],
+      "author": "al-Māwardī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-mujam-al-kabir",
+      "title": "al-Muʿjam al-Kabīr",
+      "aliases": [],
+      "author": "al-Ṭabarānī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-uluw-lil-aliyy-al-ghaffar",
+      "title": "al-ʿUluw lil-ʿAliyy al-Ghaffār",
+      "aliases": [],
+      "author": "adh-Dhahabī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "ibtal-al-hiyal",
+      "title": "Ibṭāl al-Ḥiyal",
+      "aliases": [],
+      "author": "Ibn Baṭṭah al-ʿUkbarī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "in-ad-durar-as-saniyyah-fi-l-ajwibah-an-najdiyyah",
+      "title": "in: ad-Durar as-Saniyyah fī l-Ajwibah an-Najdiyyah",
+      "aliases": [
+        "ad-Durar as-Saniyyah fī l-Ajwibah an-Najdiyyah"
+      ],
+      "author": "Ḥamad ibn ʿAtīq",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "manaqib-al-imam-ahmad",
+      "title": "Manāqib al-Imām Aḥmad",
+      "aliases": [],
+      "author": "Ibn al-Jawzī",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-istidhkar",
+      "title": "al-Istidhkār",
+      "aliases": [],
+      "author": "Ibn ʿAbd al-Barr",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-jami-li-ahkam-al-quran",
+      "title": "al-Jāmiʿ li-Aḥkām al-Qurʾān",
+      "aliases": [],
+      "author": "al-Qurṭubī",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-maidah-5-42",
+      "title": "al-Māʾidah 5:42",
+      "aliases": [],
+      "author": "aṭ-Ṭabarī und Ibn Kathīr",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "an-nahl-16-89-al-gathiyah-45-18",
+      "title": "an-Naḥl 16:89 / al-Ǧāthiyah 45:18",
+      "aliases": [],
+      "author": "Muḥammad ibn Jarīr aṭ-Ṭabarī / Ismāʿīl ibn ʿUmar Ibn Kathīr",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "quran-khalq-afal-al-ibad",
+      "title": "Qurʾān / Khalq Afʿāl al-ʿIbād",
+      "aliases": [],
+      "author": "Qurʾān",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "surah-an-nisa-4-105",
+      "title": "Sūrah an-Nisāʾ 4:105.",
+      "aliases": [
+        "an-Nisāʾ 4:105"
+      ],
+      "author": "Qurʾān",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "surah-asch-schura-42-21-surah-an-nahl-16-116",
+      "title": "Sūrah asch-Schūrā 42:21; Sūrah an-Naḥl 16:116.",
+      "aliases": [
+        "asch-Schūrā 42:21 und an-Naḥl 16:116"
+      ],
+      "author": "Qurʾān",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "tawil-mushkil-al-quran",
+      "title": "Taʾwīl Mushkil al-Qurʾān",
+      "aliases": [],
+      "author": "Ibn Qutaybah",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "zusammenfuhrung-der-salaf-aussagen",
+      "title": "Zusammenführung der Salaf-Aussagen",
+      "aliases": [],
+      "author": "Zusammenführung der Belege aus Tafsīr aṭ-Ṭabarī",
+      "category": "Qurʾān",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "tahdhib-al-kamal",
+      "title": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+      "aliases": [
+        "Tahdhib al-Kamal"
+      ],
+      "author": "Jamāl ad-Dīn al-Mizzī",
+      "category": "Rijāl und Biografien",
+      "verified": true
+    },
+    {
+      "id": "tafsir-at-tabari",
+      "title": "Jāmiʿ al-Bayān ʿan Taʾwīl Āy al-Qurʾān",
+      "aliases": [
+        "Tafsir at-Tabari",
+        "Tafsīr aṭ-Ṭabarī",
+        "Jami al-Bayan",
+        "Jāmiʿ al-Bayān",
+        "Tafsīr aṭ-Ṭabarī / Zād al-Masīr",
+        "Maʿānī al-Qurʾān / Tafsīr aṭ-Ṭabarī"
+      ],
+      "author": "Muḥammad ibn Jarīr aṭ-Ṭabarī",
+      "category": "Tafsīr",
+      "verified": true
+    },
+    {
+      "id": "madarik-at-tanzil",
+      "title": "Madārik at-Tanzīl",
+      "aliases": [],
+      "author": "an-Nasafī",
+      "category": "Tafsīr",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "tafsir-ibn-kathir",
+      "title": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "aliases": [
+        "Tafsir Ibn Kathir",
+        "Tafsīr Ibn Kathīr",
+        "Jāmiʿ al-Bayān / Tafsīr Ibn Kathīr",
+        "Tafsīr Ibn Kathīr / Tafsīr aṭ-Ṭabarī",
+        "Tafsīr Ibn Kathīr / Jāmiʿ al-Bayān",
+        "Tafsīr al-Qurṭubī / Tafsīr Ibn Kathīr",
+        "Tafsīr Ibn Kathīr / Tafsīr al-Qurṭubī",
+        "Jāmiʿ al-Bayān / Tafsīr Ibn Kathīr / Aḥkām al-Qurʾān"
+      ],
+      "author": "Ismāʿīl ibn ʿUmar Ibn Kathīr",
+      "category": "Tafsīr",
+      "verified": true
+    },
+    {
+      "id": "kitab-at-tawhid-miaw",
+      "title": "Kitāb at-Tawḥīd",
+      "aliases": [
+        "Kitab at-Tawhid",
+        "Das Buch des Tawhid"
+      ],
+      "author": "Muḥammad ibn ʿAbd al-Wahhāb",
+      "category": "Tawḥīd",
+      "verified": true
+    },
+    {
+      "id": "jami-bayan-al-ilm",
+      "title": "Jāmiʿ Bayān al-ʿIlm wa Faḍlih",
+      "aliases": [
+        "Jami Bayan al-Ilm",
+        "Jāmiʿ Bayān al-ʿIlm"
+      ],
+      "author": "Ibn ʿAbd al-Barr",
+      "category": "Wissen und Adab",
+      "verified": true
+    },
+    {
+      "id": "al-asma-was-sifat",
+      "title": "al-Asmāʾ wa’ṣ-Ṣifāt",
+      "aliases": [],
+      "author": "al-Bayhaqī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "al-ibanah-ibn-battah",
+      "title": "al-Ibānah al-Kubrā",
+      "aliases": [
+        "al-Ibanah",
+        "al-Ibānah von Ibn Baṭṭah"
+      ],
+      "author": "Ibn Baṭṭah al-ʿUkbarī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true
+    },
+    {
+      "id": "ar-risalah",
+      "title": "ar-Risālah",
+      "aliases": [],
+      "author": "ash-Shāfiʿī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "as-sunnah-abdullah-ahmad",
+      "title": "as-Sunnah",
+      "aliases": [
+        "Kitāb as-Sunnah von ʿAbd Allāh ibn Aḥmad",
+        "Sunnah Abdullah ibn Ahmad",
+        "Uṣūl as-Sunnah",
+        "Sharḥ as-Sunnah"
+      ],
+      "author": "ʿAbd Allāh ibn Aḥmad ibn Ḥanbal",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true
+    },
+    {
+      "id": "as-sunnah-al-khallal",
+      "title": "as-Sunnah von al-Khallāl",
+      "aliases": [
+        "Kitāb as-Sunnah al-Khallal",
+        "as-Sunnah al-Khallāl",
+        "Kitāb as-Sunnah"
+      ],
+      "author": "Abū Bakr al-Khallāl",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true
+    },
+    {
+      "id": "ash-shariah-al-ajurri",
+      "title": "ash-Sharīʿah",
+      "aliases": [
+        "al-Shari'ah",
+        "aš-Šarīʿah",
+        "Kitab ash-Shariah",
+        "ash-Sharīʿah von al-Ājurrī"
+      ],
+      "author": "Abū Bakr al-Ājurrī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true
+    },
+    {
+      "id": "at-tamhid",
+      "title": "at-Tamhīd",
+      "aliases": [],
+      "author": "Ibn ʿAbd al-Barr",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "bayan-talbis-al-jahmiyyah",
+      "title": "Bayān Talbīs al-Jahmiyyah",
+      "aliases": [
+        "al-Ibānah al-Kubrā / Bayān Talbīs al-Jahmiyyah"
+      ],
+      "author": "Ibn Taymiyyah",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "kitab-al-arsh",
+      "title": "Kitāb al-ʿArsh",
+      "aliases": [],
+      "author": "Abū Jaʿfar Muḥammad ibn ʿUthmān ibn Abī Shaybah",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "kitab-az-zuhd",
+      "title": "Kitāb az-Zuhd",
+      "aliases": [
+        "Kitāb az-Zuhd wa-r-Raqāʾiq",
+        "az-Zuhd wa-r-Raqāʾiq"
+      ],
+      "author": "Asad ibn Mūsā",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "lawami-al-anwar-al-bahiyyah",
+      "title": "Lawāmiʿ al-Anwār al-Bahiyyah",
+      "aliases": [],
+      "author": "as-Saffārīnī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "lumat-al-itiqad",
+      "title": "Lumʿat al-Iʿtiqād",
+      "aliases": [],
+      "author": "Ibn Qudāmah",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "majma-az-zawaid-wa-manba-al-fawaid",
+      "title": "Majmaʿ az-Zawāʾid wa Manbaʿ al-Fawāʾid",
+      "aliases": [],
+      "author": "al-Haythamī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "masail-al-imam-ahmad-ahl-al-sunnah-wa-l-jamaah",
+      "title": "Masāʾil al-Imām Aḥmad / Ahl al-Sunnah wa-l-Jamāʿah",
+      "aliases": [],
+      "author": "Über Imām Aḥmad",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "sharh-al-aqidah-at-tahawiyyah",
+      "title": "Sharḥ al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+      "aliases": [],
+      "author": "Ibn Abī al-ʿIzz",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "sharh-usul-itiqad-lalakai",
+      "title": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Jamāʿah",
+      "aliases": [
+        "Sharh Usul I'tiqad",
+        "Uṣūl Iʿtiqād al-Lālakāʾī",
+        "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah",
+        "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Khalq Afʿāl al-ʿIbād; Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah"
+      ],
+      "author": "Hibat Allāh al-Lālakāʾī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true
+    },
+    {
+      "id": "tabaqat-al-hanabilah",
+      "title": "Ṭabaqāt al-Ḥanābilah",
+      "aliases": [
+        "Khalq Afʿāl al-ʿIbād / Ṭabaqāt al-Ḥanābilah / Majmūʿ al-Fatāwā"
+      ],
+      "author": "Ibn Abī Yaʿlā",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "ar-radd-ala-al-jahmiyyah-ad-darimi",
+      "title": "ar-Radd ʿalā al-Jahmiyyah",
+      "aliases": [
+        "Radd ala al-Jahmiyyah",
+        "Widerlegung der Jahmiyyah von ad-Darimi",
+        "ar-Radd ʿalā az-Zanādiqah wa-l-Jahmiyyah"
+      ],
+      "author": "ʿUthmān ibn Saʿīd ad-Dārimī",
+      "category": "ʿAqīdah und Widerlegungen",
+      "verified": true
+    },
+    {
+      "id": "dar-taarud-al-aql-wan-naql",
+      "title": "Darʾ Taʿāruḍ al-ʿAql wa-n-Naql",
+      "aliases": [
+        "Dar Ta'arud al-Aql wan-Naql"
+      ],
+      "author": "Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah",
+      "category": "ʿAqīdah und Widerlegungen",
+      "verified": true
+    }
   ]
 }
