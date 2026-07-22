@@ -2,7 +2,7 @@ import {
   runPrayerPushScheduler,
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
-import { pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
+import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
 import { readPrayerStatusFromStore, writePrayerStatusToStore } from "./prayer-status-store.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
@@ -18,18 +18,30 @@ const PRAYER_NAMES = {
   isha: "ʿIshāʾ",
   tahajjud: "Taḥajjud"
 };
-const PRAYER_PUSH_EMOJI = Object.freeze({ fajr: "✨", dhuhr: "☀️", asr: "🌤️", maghrib: "🌥️", isha: "🌙", tahajjud: "🌙" });
+
+const PRAYER_PUSH_EMOJI = Object.freeze({
+  fajr: "✨",
+  dhuhr: "☀️",
+  asr: "🌤️",
+  maghrib: "🌥️",
+  isha: "🌙",
+  tahajjud: "🌙"
+});
 
 export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
   const name = PRAYER_NAMES[key] || "Maghrib";
   const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
   const timeLabel = "21:46";
+
   if (mode === "advance") {
     const emoji = PRAYER_PUSH_EMOJI[key] || "🔔";
-    const title = key === "tahajjud" ? `${emoji} Taḥajjud-Erinnerung` : `${emoji} ${name} in ${minutes} Min`;
+    const title = key === "tahajjud"
+      ? `${emoji} Taḥajjud-Erinnerung`
+      : `${emoji} ${name} in ${minutes} Min`;
     return { title: `[Test] ${title}`, body: buildAdvancePushBody(key, minutes, timeLabel), key, mode };
   }
+
   const variant = pickPrayerEntryVariant(key, timeLabel);
   return { title: `[Test] ${variant.title}`, body: variant.body, key, mode };
 }
@@ -49,6 +61,7 @@ export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
   const statusPath = env.PRAYER_STATUS_PATH || DEFAULT_PRAYER_STATUS_PATH;
+
   try {
     const file = await githubGet(env, owner, repo, statusPath, branch);
     if (!file?.content) return { ok: false, error: "Status-Datei fehlt" };
@@ -56,7 +69,7 @@ export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
     if (!status?.updatedAt) {
       return { ok: false, error: "Noch kein Scheduler-Lauf gespeichert", status: null };
     }
-    return { ok: true, status, source: "github" };
+    return { ok: true, status, source: "github-fallback" };
   } catch (err) {
     return { ok: false, error: err.message || String(err) };
   }
@@ -112,11 +125,11 @@ export async function sendPrayerTestPush(env, input = {}) {
     headings: { de: copy.title, en: copy.title },
     contents: { de: copy.body, en: copy.body },
     url: `${site}/#prayer`,
-    data: { type: "prayer-test", prayer: prayerKey, mode, test: true },
+    data: { type: "prayer-test", prayer: prayerKey, mode, test: true, copyVersion: PRAYER_PUSH_COPY_VERSION },
     chrome_web_icon: icon,
     chrome_web_badge: badge,
     firefox_icon: icon,
-    name: `prayer-test-${prayerKey}-${mode}-${Date.now()}`
+    name: `prayer-test-${PRAYER_PUSH_COPY_VERSION}-${prayerKey}-${mode}-${Date.now()}`
   };
 
   try {
@@ -128,6 +141,7 @@ export async function sendPrayerTestPush(env, input = {}) {
       delivered: delivery.delivered,
       prayer: prayerKey,
       mode,
+      copyVersion: PRAYER_PUSH_COPY_VERSION,
       title: copy.title,
       body: copy.body,
       subscriptionId,
@@ -142,6 +156,7 @@ export async function sendPrayerTestPush(env, input = {}) {
       delivered: false,
       prayer: prayerKey,
       mode,
+      copyVersion: PRAYER_PUSH_COPY_VERSION,
       subscriptionId,
       reason: err.message || String(err)
     };
@@ -190,14 +205,15 @@ export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, g
   );
 
   if (!result?.status?.updatedAt) {
+    const now = new Date().toISOString();
     const heartbeat = {
-      updatedAt: new Date().toISOString(),
+      updatedAt: now,
       ok: false,
       schedulerStatus: "error",
       schedulerEngine: "cloudflare-worker-cron-v3",
-      prayerCopyVersion: "v3",
+      prayerCopyVersion: PRAYER_PUSH_COPY_VERSION,
       cronIntervalMinutes: 5,
-      lastCronRun: new Date().toISOString(),
+      lastCronRun: now,
       lastError: result?.lastError || result?.reason || "Gebets-Push-Cron ohne Status beendet",
       scheduled: Number(result?.scheduled || 0),
       recipients: Number(result?.recipients || 0),
