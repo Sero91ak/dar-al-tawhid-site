@@ -10374,6 +10374,63 @@ html[data-theme] .book-desc,
 html[data-theme] .view-desc,
 html[data-theme] .intro{color:var(--premium-body,var(--muted))!important;font-style:normal!important}
 </style>
+<style id="surface-polish-v337">
+/* Logo: kein grauer Kasten auf hellen Erscheinungsbildern */
+html[data-theme="light"] .brand-main .logo,
+html[data-theme="soft"] .brand-main .logo,
+html[data-theme="light"] .top-shell .logo,
+html[data-theme="soft"] .top-shell .logo{
+  box-shadow:none!important;
+  filter:none!important;
+  background:transparent!important;
+}
+
+/* Isnad / Maßstab: Zitat + Quelle voll lesbar — alle Themes */
+html[data-theme] .isnad{
+  background:color-mix(in srgb,var(--card) 90%,var(--premium-title) 5%)!important;
+  border-top:1px solid var(--glow-line,var(--line))!important;
+}
+html[data-theme] .isnad-label{color:var(--premium-label,var(--muted2))!important}
+html[data-theme] .isnad-quote{
+  color:var(--premium-title,var(--text))!important;
+  font-size:clamp(12px,3.2vw,13.5px)!important;
+  line-height:1.48!important;
+  font-weight:800!important;
+}
+html[data-theme] .isnad-speaker{color:var(--premium-label,var(--gold2))!important}
+html[data-theme] .isnad-source{
+  color:var(--premium-body,var(--muted))!important;
+  font-size:clamp(10.5px,2.8vw,11.5px)!important;
+  font-weight:750!important;
+  line-height:1.42!important;
+  opacity:1!important;
+  margin-top:6px!important;
+}
+html[data-theme="light"] .isnad-source{color:#5a4a38!important}
+html[data-theme="soft"] .isnad-source{color:#51434a!important}
+
+/* Gebetszeiten: edle Umrandungen, Bereiche erkennbar */
+html[data-theme] .prayer-overview.premium-surface,
+html[data-theme] .prayer-quick-card.prayer-overview{
+  border:1px solid var(--glow-line,var(--line))!important;
+  box-shadow:var(--glow-halo),var(--glow-inset),var(--shadow)!important;
+}
+html[data-theme] .prayer-overview__time-card{
+  border:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 46%,var(--line))!important;
+  background:color-mix(in srgb,var(--card) 90%,var(--glow-accent,var(--gold2)) 10%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 9px color-mix(in srgb,var(--glow-accent) 12%,transparent)!important;
+}
+html[data-theme] .prayer-overview__location{
+  border:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 40%,var(--line))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+html[data-theme] .prayer-overview__push.prayer-push-accordion--compact{
+  border:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 44%,var(--line))!important;
+  background:color-mix(in srgb,var(--card) 92%,var(--glow-accent,var(--gold2)) 8%)!important;
+}
+html[data-theme] .prayer-overview__time-label{color:var(--premium-label,var(--muted2))!important}
+html[data-theme] .prayer-overview__time-countdown{color:var(--premium-body,var(--muted))!important}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
