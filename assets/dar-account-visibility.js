@@ -148,6 +148,11 @@
   }
 
   function renderHomeHijriFrameHtml() {
+    const isTest =
+      location.pathname.indexOf("/test/") === 0 || location.pathname === "/test";
+    if (isTest) {
+      return `<button id="homeHijriDayBtn" class="home-hijri-mini" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-mini-ribbon"><span data-hijri-month-text>—</span><span class="home-hijri-mini-year" data-hijri-year-text>—</span></span><span class="home-hijri-mini-sheet"><span class="home-hijri-mini-day" data-hijri-day-num>—</span><span class="home-hijri-mini-line" data-hijri-date-text>—</span></span></button>`;
+    }
     return `<button id="homeHijriDayBtn" class="home-hijri-frame" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-frame-day" data-hijri-day-num aria-hidden="true">—</span><span class="home-hijri-frame-copy"><span class="home-hijri-frame-kicker">Islam. Kalender</span><span class="home-hijri-frame-date" data-hijri-date-text>Islamisches Datum</span></span></button>`;
   }
 

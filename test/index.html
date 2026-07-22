@@ -10714,26 +10714,32 @@ body.is-home-route .view-head h2.home-start-title,
   letter-spacing:.012em!important;
 }
 .view-head-home-row{gap:6px 10px!important;align-items:center!important}
-.home-hijri-desk{
-  display:flex;flex-direction:column;align-items:stretch;width:clamp(104px,25vw,124px);min-width:104px;max-width:128px;
-  border:1px solid #c4ad82;border-radius:8px 8px 10px 10px;
-  background:linear-gradient(180deg,#faf3e4 0%,#efe2c8 100%);
-  box-shadow:0 5px 14px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.68);
+.home-hijri-mini{
+  display:flex;flex-direction:column;align-items:stretch;width:clamp(80px,21vw,92px);min-width:80px;max-width:94px;
+  border:1px solid rgba(188,162,118,.62);border-radius:7px 7px 9px 9px;
+  background:linear-gradient(180deg,#faf4e8 0%,#efe3cc 100%);
+  box-shadow:0 3px 9px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.7);
   padding:0;overflow:hidden;cursor:pointer;flex:0 0 auto;color:#3a2a18;font:inherit;position:relative;
 }
-.home-hijri-desk-ribbon{
-  display:flex;align-items:center;justify-content:space-between;gap:4px;padding:4px 7px 3px;
-  background:linear-gradient(180deg,#a63f35,#7f2e28);color:#fff8ef;font-family:var(--font-ui);
-  font-size:8.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1;
+.home-hijri-mini-ribbon{
+  display:flex;align-items:center;justify-content:space-between;gap:3px;padding:3px 6px 2px;
+  background:linear-gradient(180deg,#9a4a42,#74352f);color:#fff8f0;font-family:var(--font-ui);
+  font-size:7px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.1;
 }
-.home-hijri-desk-year{font-size:8px;font-weight:750;opacity:.94;letter-spacing:.04em}
-.home-hijri-desk-date{
-  display:block;text-align:center;padding:7px 6px 6px;font-family:var(--serif);
-  font-size:clamp(11.5px,3vw,12.5px);font-weight:700;line-height:1.18;color:#3a2a18;
-  letter-spacing:.01em;font-variant-numeric:tabular-nums;
+.home-hijri-mini-year{font-size:6.5px;font-weight:650;opacity:.92;letter-spacing:.03em}
+.home-hijri-mini-sheet{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 4px 5px;text-align:center;gap:2px;
 }
-.home-hijri-desk:hover{filter:brightness(1.03);box-shadow:0 6px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.72)}
-.home-hijri-desk:active{transform:translateY(1px)}
+.home-hijri-mini-day{
+  font-family:var(--serif);font-size:15px;font-weight:700;line-height:1;color:#8f4a38;
+  font-variant-numeric:tabular-nums;
+}
+.home-hijri-mini-line{
+  font-family:var(--font-ui);font-size:7.5px;font-weight:600;line-height:1.15;color:#5c4a32;
+  letter-spacing:.02em;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+}
+.home-hijri-mini:hover{filter:brightness(1.02);box-shadow:0 4px 11px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.75)}
+.home-hijri-mini:active{transform:translateY(1px)}
 .highlight-sections .recommended-box,.highlight-sections .daily-box{
   padding-bottom:11px!important;border-radius:16px!important;border:1px solid rgba(214,183,106,.22)!important;
 }
@@ -10750,8 +10756,9 @@ body.is-home-route .view-head h2.home-start-title,
 @media(max-width:520px){
   body.is-home-route .view-head h2.home-start-title,
   .view-head-home-row h2.home-start-title{font-size:clamp(26px,6.4vw,34px)!important}
-  .home-hijri-desk{width:clamp(100px,24vw,118px);min-width:100px}
-  .home-hijri-desk-date{font-size:11px;padding:6px 5px 5px}
+  .home-hijri-mini{width:clamp(76px,20vw,88px);min-width:76px}
+  .home-hijri-mini-day{font-size:14px}
+  .home-hijri-mini-line{font-size:7px}
 }
 </style>
 <style id="remove-card-tag-pills-v323">
@@ -10842,7 +10849,7 @@ html[data-theme] .share-btn.ig,html[data-theme] .post-after-share .share-btn.ig{
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
             <div class="header-top-chips" id="headerTopChips" data-header-top-chips><button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Islamisches Datum</button></div>
           </div>
-          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1 class="brand-title-refined">DAR AL TA<span class="brand-w" aria-hidden="true">W</span>ḤĪD</h1></div>
+          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1 class="brand-title-refined">DAR AL TAWḤĪD</h1></div>
         </div>
         <div class="header-tools">
           <nav class="socials" aria-label="Social Media">
@@ -11744,7 +11751,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-desk" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-desk-ribbon"><span data-hijri-month-text>—</span><span class="home-hijri-desk-year" data-hijri-year-text>—</span></span><span class="home-hijri-desk-date" data-hijri-date-text>—</span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=`<button id="homeHijriDayBtn" class="home-hijri-mini" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischen Kalender öffnen"><span class="home-hijri-mini-ribbon"><span data-hijri-month-text>—</span><span class="home-hijri-mini-year" data-hijri-year-text>—</span></span><span class="home-hijri-mini-sheet"><span class="home-hijri-mini-day" data-hijri-day-num>—</span><span class="home-hijri-mini-line" data-hijri-date-text>—</span></span></button>`;const homeRow=isHome?`<div class="view-head-home-row"><h2 class="home-start-title">${esc(title)}</h2>${hijriFrame}</div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -14918,7 +14925,7 @@ function islamicCalendarForDate(date){const d=date instanceof Date?date:new Date
 function islamicCalendarNow(){return islamicCalendarForDate(new Date())}
 function hijriTodayLine(){try{const t=islamicCalendarForDate(new Date());return `Heute ${t.day}. ${t.month} ${t.year}`}catch(e){return "Islamisches Datum"}}
 function hijriTodayTomorrowLine(){try{const t=islamicCalendarForDate(new Date());const tm=islamicCalendarForDate(new Date(Date.now()+86400000));return `Heute ${t.day}. ${t.month} ${t.year} · Morgen ${tm.day}. ${tm.month} ${tm.year}`}catch(e){return "Islamisches Datum"}}
-function updateHijriHeaderDate(){const nodes=[...document.querySelectorAll("[data-hijri-today]")];if(!nodes.length)return;try{const h=islamicCalendarNow();const text=`${h.day}. ${h.month} ${h.year} AH`;const yearText=String(h.year);nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent=String(h.day);if(monthEl)monthEl.textContent=String(h.month);if(yearEl)yearEl.textContent=yearText;if(dateEl)dateEl.textContent=text;else if(!monthEl&&!dayEl)el.textContent=text;el.setAttribute("aria-label",`Islamisches Datum heute: ${text}`)})}catch(e){nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent="—";if(monthEl)monthEl.textContent="—";if(yearEl)yearEl.textContent="—";if(dateEl)dateEl.textContent="Islamisches Datum";else if(!monthEl&&!dayEl)el.textContent="Islamisches Datum"})}}
+function updateHijriHeaderDate(){const nodes=[...document.querySelectorAll("[data-hijri-today]")];if(!nodes.length)return;try{const h=islamicCalendarNow();const text=`${h.day}. ${h.month} ${h.year} AH`;const yearText=String(h.year);nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent=String(h.day);if(monthEl)monthEl.textContent=String(h.month);if(yearEl)yearEl.textContent=yearText;if(dateEl)dateEl.textContent=dateEl.classList.contains("home-hijri-mini-line")?`${h.day}. ${h.month}`:text;else if(!monthEl&&!dayEl)el.textContent=text;el.setAttribute("aria-label",`Islamisches Datum heute: ${text}`)})}catch(e){nodes.forEach(el=>{const dateEl=el.querySelector("[data-hijri-date-text]");const dayEl=el.querySelector("[data-hijri-day-num]");const monthEl=el.querySelector("[data-hijri-month-text]");const yearEl=el.querySelector("[data-hijri-year-text]");if(dayEl)dayEl.textContent="—";if(monthEl)monthEl.textContent="—";if(yearEl)yearEl.textContent="—";if(dateEl)dateEl.textContent="Islamisches Datum";else if(!monthEl&&!dayEl)el.textContent="Islamisches Datum"})}}
 function gregorianToHijri(date){const d=date.getUTCDate();const m=date.getUTCMonth()+1;const y=date.getUTCFullYear();const jd=Math.floor((1461*(y+4800+Math.floor((m-14)/12)))/4)+Math.floor((367*(m-2-12*Math.floor((m-14)/12)))/12)-Math.floor((3*Math.floor((y+4900+Math.floor((m-14)/12))/100))/4)+d-32075;let l=jd-1948440+10632;let n=Math.floor((l-1)/10631);l=l-10631*n+354;let j=(Math.floor((10985-l)/5316))*Math.floor((50*l)/17719)+Math.floor(l/5670)*Math.floor((43*l)/15238);l=l-(Math.floor((30-j)/15))*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;let month=Math.floor((24*l)/709);let day=l-Math.floor((709*month)/24);let year=30*n+j-30;return{day,month,year}}
 function approxHijriParts(){try{const parts=new Intl.DateTimeFormat("en-TN-u-ca-islamic",{day:"numeric",month:"numeric",year:"numeric"}).formatToParts(new Date());const day=Number(parts.find(p=>p.type==="day")?.value||1);const month=Number(parts.find(p=>p.type==="month")?.value||1);const year=Number(parts.find(p=>p.type==="year")?.value||1447);if(day&&month&&year){return{day,month,year}}}catch(e){}return gregorianToHijri(new Date())}
 function calendarEventsForYear(){const h=approxHijriParts();const today=new Date();today.setHours(0,0,0,0);const years=[h.year,h.year+1];const items=[];years.forEach(y=>{ISLAMIC_EVENTS.forEach(ev=>{const g=gregorianFromHijri(y,ev.m,ev.d);g.setHours(0,0,0,0);const diff=Math.round((g-today)/86400000);if(diff>=-2&&diff<=390){items.push({...ev,hYear:y,gDate:g,diff})}})});return items.sort((a,b)=>a.gDate-b.gDate).slice(0,10)}
@@ -16160,6 +16167,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=10"></script>
+  <script src="/assets/dar-account-visibility.js?v=11"></script>
 </body>
 </html>
