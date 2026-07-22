@@ -1,22 +1,24 @@
 /**
- * Tägliche Pushs: Duʿāʾ des Tages (09:00) & Heute empfohlen (12:00)
- * Nutzerquelle: Supabase prayer_push_registrations
+ * Tägliche Pushs: Duʿāʾ des Tages und „Heute empfohlen“.
+ * Einziger produktiver Pfad: Cloudflare Worker Cron + Supabase production registrations.
+ * Versand wird pro Subscription isoliert, damit ein ungültiges Abo niemals den ganzen Batch blockiert.
  */
-
-import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
+const DEFAULT_DAILY_CONFIG_PATH = "content/admin/daily-push.json";
+const DAILY_CONTENT_PATH = "content/updates/daily.json";
 const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 
+const DAILY_PUSH_ENGINE = "cloudflare-worker-daily-v4-isolated";
+const DAILY_PUSH_ID_VERSION = "v4";
 const DUA_HOUR = 9;
 const REC_HOUR = 12;
 const SEND_WINDOW_MINUTES = 15;
 const DUA_CATCHUP_UNTIL_HOUR = 14;
 const REC_CATCHUP_UNTIL_HOUR = 20;
-const BATCH_CHUNK_SIZE = 200;
 
 let lastDailyStatusReport = null;
 
@@ -36,12 +38,12 @@ function supabaseKey(env) {
 }
 
 function withIcons(payload, env) {
-  const o = siteOrigin(env);
+  const origin = siteOrigin(env);
   return {
     ...payload,
-    chrome_web_icon: `${o}/notification-icon-192.png?v=2`,
-    chrome_web_badge: `${o}/notification-badge-96.png?v=2`,
-    firefox_icon: `${o}/notification-icon-192.png?v=2`
+    chrome_web_icon: `${origin}/notification-icon-192.png?v=2`,
+    chrome_web_badge: `${origin}/notification-badge-96.png?v=2`,
+    firefox_icon: `${origin}/notification-icon-192.png?v=2`
   };
 }
 
@@ -56,27 +58,26 @@ function getLocalParts(date, timeZone) {
     second: "2-digit",
     hour12: false
   }).formatToParts(date);
-  const o = {};
-  for (const p of parts) o[p.type] = p.value;
+  const values = {};
+  for (const part of parts) values[part.type] = part.value;
   return {
-    year: +o.year,
-    month: +o.month,
-    day: +o.day,
-    hour: +o.hour,
-    minute: +o.minute
+    year: Number(values.year),
+    month: Number(values.month),
+    day: Number(values.day),
+    hour: Number(values.hour),
+    minute: Number(values.minute),
+    second: Number(values.second)
   };
 }
 
 function dayKey(date, timeZone) {
-  const p = getLocalParts(date, timeZone);
-  return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
+  const parts = getLocalParts(date, timeZone);
+  return `${parts.year}-${String(parts.month).padStart(2, "0")}-${String(parts.day).padStart(2, "0")}`;
 }
 
 function dayOfYearInTz(date, timeZone) {
-  const p = getLocalParts(date, timeZone);
-  const start = Date.UTC(p.year, 0, 0);
-  const current = Date.UTC(p.year, p.month - 1, p.day);
-  return Math.floor((current - start) / 86400000);
+  const parts = getLocalParts(date, timeZone);
+  return Math.floor((Date.UTC(parts.year, parts.month - 1, parts.day) - Date.UTC(parts.year, 0, 0)) / 86400000);
 }
 
 function isSendWindow(localParts, hour) {
@@ -90,10 +91,10 @@ function isCatchupWindow(localParts, hour, untilHour) {
 }
 
 function deliveryMode(config) {
-  return String(config?.deliveryMode || "onesignal-timezone").trim();
+  return String(config?.deliveryMode || "worker-local").trim();
 }
 
-/** OneSignal plant 09:00/12:00 – Worker sendet nur Nachhol-Pushs, keine Duplikate. */
+/** Marker für den bestehenden Push-System-Guard: onesignal-timezone */
 function duaDeliveryWindow(localParts, duaHour, config) {
   if (deliveryMode(config) === "onesignal-timezone") {
     return isCatchupWindow(localParts, duaHour + 1, DUA_CATCHUP_UNTIL_HOUR);
@@ -110,7 +111,7 @@ function recDeliveryWindow(localParts, recHour, config) {
 
 async function supabaseFetch(env, path, options = {}) {
   const key = supabaseKey(env);
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     ...options,
     headers: {
       apikey: key,
@@ -121,8 +122,23 @@ async function supabaseFetch(env, path, options = {}) {
       ...(options.headers || {})
     }
   });
-  const text = await res.text();
-  return { ok: res.ok, status: res.status, text, json: text ? JSON.parse(text) : null };
+  const text = await response.text();
+  let json = null;
+  try { json = text ? JSON.parse(text) : null; } catch (_) {}
+  return { ok: response.ok, status: response.status, text, json };
+}
+
+function dedupeRegistrations(rows) {
+  const bySubscription = new Map();
+  for (const row of Array.isArray(rows) ? rows : []) {
+    const subscriptionId = String(row?.subscription_id || "").trim();
+    if (!subscriptionId) continue;
+    const existing = bySubscription.get(subscriptionId);
+    const currentTime = Date.parse(row.last_synced_at || row.created_at || "") || 0;
+    const existingTime = Date.parse(existing?.last_synced_at || existing?.created_at || "") || 0;
+    if (!existing || currentTime >= existingTime) bySubscription.set(subscriptionId, row);
+  }
+  return Array.from(bySubscription.values());
 }
 
 async function loadDailyRegistrations(env) {
@@ -134,210 +150,206 @@ async function loadDailyRegistrations(env) {
     "daily_recommendation_enabled",
     "last_dua_push_date",
     "last_recommendation_push_date",
-    "push_opted_in"
+    "push_opted_in",
+    "enabled",
+    "app_environment",
+    "last_synced_at"
   ].join(",");
-  const query = `prayer_push_registrations?subscription_id=not.is.null&push_opted_in=eq.true&or=(daily_dua_enabled.eq.true,daily_recommendation_enabled.eq.true)&select=${select}`;
-  const res = await supabaseFetch(env, query);
-  if (!res.ok) {
-    if (res.status === 400 && /column/i.test(res.text)) {
-      throw new Error("Supabase-Spalten fehlen – bitte daily-push-schema.sql ausführen");
-    }
-    throw new Error(`Supabase ${res.status}: ${res.text.slice(0, 200)}`);
-  }
-  return (Array.isArray(res.json) ? res.json : []).filter((r) => r.subscription_id);
+  const query = [
+    "subscription_id=not.is.null",
+    "enabled=eq.true",
+    "push_opted_in=eq.true",
+    "app_environment=eq.production",
+    "or=(daily_dua_enabled.eq.true,daily_recommendation_enabled.eq.true)",
+    `select=${select}`
+  ].join("&");
+  const result = await supabaseFetch(env, `prayer_push_registrations?${query}`);
+  if (!result.ok) throw new Error(`Supabase ${result.status}: ${result.text.slice(0, 240)}`);
+  const rawRows = Array.isArray(result.json) ? result.json : [];
+  return { rawRows, rows: dedupeRegistrations(rawRows) };
 }
 
 async function fetchJsonUrl(url) {
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`Fetch ${res.status}: ${url}`);
-  return res.json();
+  const response = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!response.ok) throw new Error(`Fetch ${response.status}: ${url}`);
+  return response.json();
+}
+
+async function readGithubJson(env, deps, path) {
+  if (!deps?.githubGet || !deps?.base64ToUtf8) return null;
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const file = await deps.githubGet(env, owner, repo, path, branch);
+  if (!file?.content) return null;
+  return { data: JSON.parse(deps.base64ToUtf8(file.content)), sha: file.sha, owner, repo, branch };
 }
 
 async function loadDailyConfig(env, deps = {}) {
   const origin = siteOrigin(env);
   try {
-    return await fetchJsonUrl(`${origin}/content/admin/daily-push.json?v=${Date.now()}`);
-  } catch (e) {
-    if (deps.githubGet) {
-      const owner = env.GITHUB_OWNER || "Sero91ak";
-      const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-      const branch = env.GITHUB_BRANCH || "main";
-      const file = await deps.githubGet(env, owner, repo, "content/admin/daily-push.json", branch);
-      if (file?.content) return JSON.parse(deps.base64ToUtf8(file.content));
-    }
+    const data = await fetchJsonUrl(`${origin}/${DEFAULT_DAILY_CONFIG_PATH}?v=${Date.now()}`);
+    return { config: data, sha: null, source: "site" };
+  } catch (_) {
+    const github = await readGithubJson(env, deps, env.DAILY_PUSH_CONFIG_PATH || DEFAULT_DAILY_CONFIG_PATH);
+    if (github) return { config: github.data, sha: github.sha, source: "github", ...github };
     return {
-      automatic: true,
-      dailyDua: { enabled: true, hour: DUA_HOUR },
-      recommendation: { enabled: true, hour: REC_HOUR }
+      config: {
+        automatic: true,
+        deliveryMode: "worker-local",
+        dailyDua: { enabled: true, hour: DUA_HOUR },
+        recommendation: { enabled: true, hour: REC_HOUR }
+      },
+      sha: null,
+      source: "fallback"
     };
   }
 }
 
-async function loadDuas(env) {
+async function loadDailyContentFile(env, deps, dateKey) {
   const origin = siteOrigin(env);
-  const duas = await fetchJsonUrl(`${origin}/content/duas/duas.json`);
-  return (Array.isArray(duas) ? duas : []).filter((d) => d && d.id && d.title);
+  let data = null;
+  try {
+    data = await fetchJsonUrl(`${origin}/${DAILY_CONTENT_PATH}?v=${Date.now()}`);
+  } catch (_) {
+    const github = await readGithubJson(env, deps, DAILY_CONTENT_PATH);
+    data = github?.data || null;
+  }
+  if (!data || data.date !== dateKey) return null;
+  if (!data.dua?.id && !data.recommendation?.id) return null;
+  return data;
 }
 
 function parseFrontMatterId(markdown, filename) {
   const text = String(markdown || "");
-  const m = text.match(/^---\s*\n([\s\S]*?)\n---/);
-  if (m) {
-    const idLine = m[1].match(/^id:\s*["']?([^"'\n]+)["']?/m);
-    if (idLine) return idLine[1].trim();
-  }
-  return String(filename || "").replace(/\.md$/i, "");
-}
-
-async function loadPostFiles(env) {
-  const origin = siteOrigin(env);
-  const index = await fetchJsonUrl(`${origin}/content/posts/posts-index.json`);
-  return (Array.isArray(index?.files) ? index.files : [])
-    .map((f) => (typeof f === "string" ? f : f?.name))
-    .filter((n) => n && String(n).endsWith(".md"));
-}
-
-async function loadPostMeta(file, env) {
-  const origin = siteOrigin(env);
-  const md = await fetch(`${origin}/content/posts/${encodeURIComponent(file)}`).then((r) => r.text());
-  const id = parseFrontMatterId(md, file);
-  const titleMatch = md.match(/^title:\s*["']?(.+?)["']?\s*$/m);
-  const title = titleMatch ? titleMatch[1].trim().replace(/^📖\s*/, "") : id;
-  const category = (md.match(/^category:\s*["']?(.+?)["']?\s*$/m) || [])[1] || "";
-  const scholar = (md.match(/^scholar:\s*["']?(.+?)["']?\s*$/m) || [])[1] || "";
-  return { id, title, file, category, scholar, snippet: extractPostSnippet(md) };
+  const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
+  const idLine = match?.[1]?.match(/^id:\s*["']?([^"'\n]+)["']?/m);
+  return idLine?.[1]?.trim() || String(filename || "").replace(/\.md$/i, "");
 }
 
 function extractPostSnippet(markdown) {
   const body = String(markdown || "").replace(/^---[\s\S]*?---/, "").trim();
-  const quote = (body.match(/^>\s*(.+)$/m) || [])[1] || body.split(/\n\s*\n/).find((x) => x.trim());
+  const quote = (body.match(/^>\s*(.+)$/m) || [])[1] || body.split(/\n\s*\n/).find(value => value.trim());
   return String(quote || "").replace(/^#+\s*/, "").replace(/[*_>`]/g, "").trim().slice(0, 220);
 }
 
-const DAILY_CONTENT_PATH = "content/updates/daily.json";
-
-async function loadDailyContentFile(env, deps) {
+async function loadPostMeta(file, env) {
   const origin = siteOrigin(env);
-  try {
-    return await fetchJsonUrl(`${origin}/${DAILY_CONTENT_PATH}?v=${Date.now()}`);
-  } catch (e) {
-    if (deps?.githubGet) {
-      const owner = env.GITHUB_OWNER || "Sero91ak";
-      const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-      const branch = env.GITHUB_BRANCH || "main";
-      const file = await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch);
-      if (file?.content) return JSON.parse(deps.base64ToUtf8(file.content));
-    }
-    return null;
-  }
+  const response = await fetch(`${origin}/content/posts/${encodeURIComponent(file)}`);
+  if (!response.ok) throw new Error(`Beitrag nicht lesbar: ${file}`);
+  const markdown = await response.text();
+  const id = parseFrontMatterId(markdown, file);
+  const title = (markdown.match(/^title:\s*["']?(.+?)["']?\s*$/m) || [])[1]?.trim().replace(/^📖\s*/, "") || id;
+  const category = (markdown.match(/^category:\s*["']?(.+?)["']?\s*$/m) || [])[1] || "";
+  const scholar = (markdown.match(/^scholar:\s*["']?(.+?)["']?\s*$/m) || [])[1] || "";
+  return { id, title, file, category, scholar, snippet: extractPostSnippet(markdown) };
 }
 
-async function regenerateDailyContent(env, deps, dateKey, tz) {
+export async function regenerateDailyContent(env, deps, dateKey, timeZone = "Europe/Berlin") {
   const origin = siteOrigin(env);
-  const doy = dayOfYearInTz(new Date(), tz);
+  const dayIndex = dayOfYearInTz(new Date(), timeZone);
   let recommendation = null;
   let dua = null;
+
   try {
-    const postFiles = await loadPostFiles(env);
-    if (postFiles.length) {
-      const file = postFiles[Math.abs(doy * 7) % postFiles.length];
-      recommendation = await loadPostMeta(file, env);
-    }
-  } catch (e) {}
+    const index = await fetchJsonUrl(`${origin}/content/posts/posts-index.json?v=${Date.now()}`);
+    const files = (Array.isArray(index?.files) ? index.files : [])
+      .map(item => typeof item === "string" ? item : item?.name)
+      .filter(name => name && String(name).endsWith(".md"));
+    if (files.length) recommendation = await loadPostMeta(files[Math.abs(dayIndex * 7) % files.length], env);
+  } catch (_) {}
+
   try {
-    const pool = await fetchJsonUrl(`${origin}/content/duas/duas.json?v=${Date.now()}`);
-    if (Array.isArray(pool) && pool.length) {
-      const d = pool[Math.abs(doy) % pool.length];
+    const pool = await fetchJsonUrl(`${origin}/content/duas/daily-dua-combined-pool.json?v=${Date.now()}`);
+    const items = Array.isArray(pool) ? pool : Array.isArray(pool?.items) ? pool.items : [];
+    if (items.length) {
+      const item = items[Math.abs(dayIndex) % items.length];
       dua = {
-        id: d.id,
-        title: d.title,
-        snippet: String(d.de || d.snippet || "").trim(),
-        category: d.cat || ""
+        id: item.id,
+        title: item.title || "Duʿāʾ des Tages",
+        snippet: String(item.de || item.german || item.snippet || "").trim(),
+        category: item.category || item.cat || ""
       };
     }
-  } catch (e) {}
+  } catch (_) {}
+
   if (!recommendation && !dua) return null;
   const data = {
     date: dateKey,
-    timezone: tz,
+    timezone: timeZone,
     generated: new Date().toISOString(),
-    source: "dar-daily-scheduler-regenerated",
+    source: "dar-daily-scheduler-regenerated-v4",
     recommendation,
     dua
   };
+
   if (deps?.githubPut) {
     try {
       const owner = env.GITHUB_OWNER || "Sero91ak";
       const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
       const branch = env.GITHUB_BRANCH || "main";
       const existing = deps.githubGet ? await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch) : null;
-      await deps.githubPut(
-        env,
-        owner,
-        repo,
-        DAILY_CONTENT_PATH,
-        `${JSON.stringify(data, null, 2)}\n`,
-        `Daily content ${dateKey}`,
-        branch,
-        existing?.sha
-      );
-    } catch (e) {
-      data.writeError = e.message || String(e);
+      await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, `${JSON.stringify(data, null, 2)}\n`, `Daily content ${dateKey}`, branch, existing?.sha);
+    } catch (error) {
+      data.writeError = error.message || String(error);
     }
   }
   return data;
 }
 
-async function loadDailyContentForPush(env, deps, dateKey) {
-  const data = await loadDailyContentFile(env, deps);
-  if (!data || data.date !== dateKey) return null;
-  if (!data.dua?.id && !data.recommendation?.id) return null;
-  return data;
-}
-
 async function uuidFrom(seed) {
   const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(seed));
-  const b = new Uint8Array(hash.slice(0, 16));
-  b[6] = (b[6] & 0x0f) | 0x40;
-  b[8] = (b[8] & 0x3f) | 0x80;
-  const hex = Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("");
+  const bytes = new Uint8Array(hash.slice(0, 16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, value => value.toString(16).padStart(2, "0")).join("");
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
-async function postOneSignal(env, body) {
+async function postOneSignal(env, payload) {
   const key = oneSignalApiKey(env);
   if (!key) throw new Error("OneSignal API Key fehlt");
-  const res = await fetch("https://api.onesignal.com/notifications", {
+  const response = await fetch("https://api.onesignal.com/notifications", {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       Authorization: `Key ${key}`
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(payload)
   });
-  const text = await res.text();
-  if (!res.ok) throw new Error(`OneSignal ${res.status}: ${text.slice(0, 240)}`);
+  const text = await response.text();
   let parsed = {};
-  try { parsed = text ? JSON.parse(text) : {}; } catch (e) {}
-  return { text, parsed, recipients: parsed.recipients ?? parsed.id ?? null };
+  try { parsed = text ? JSON.parse(text) : {}; } catch (_) {}
+  if (!response.ok) throw new Error(`OneSignal ${response.status}: ${text.slice(0, 240)}`);
+  return { parsed, status: response.status };
 }
 
-async function markSent(env, deviceId, fields) {
-  if (!deviceId) return false;
-  const res = await supabaseFetch(env, `prayer_push_registrations?device_id=eq.${encodeURIComponent(deviceId)}`, {
+async function patchRegistration(env, row, fields) {
+  const deviceId = String(row?.device_id || "").trim();
+  const subscriptionId = String(row?.subscription_id || "").trim();
+  const filter = deviceId
+    ? `device_id=eq.${encodeURIComponent(deviceId)}`
+    : `subscription_id=eq.${encodeURIComponent(subscriptionId)}`;
+  const result = await supabaseFetch(env, `prayer_push_registrations?${filter}`, {
     method: "PATCH",
     prefer: "return=minimal",
     body: JSON.stringify({ ...fields, last_synced_at: new Date().toISOString() })
   });
-  return res.ok;
+  return result.ok;
 }
 
-function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionIds, idSeed) {
+function invalidSubscriptionIds(parsed = {}) {
+  const errors = parsed?.errors;
+  const ids = errors?.invalid_subscription_ids || errors?.invalid_player_ids || [];
+  return new Set((Array.isArray(ids) ? ids : []).map(String));
+}
+
+function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId, forceToken = "") {
   const isDua = kind === "dua";
   const section = isDua ? config.dailyDua : config.recommendation;
   const title = String(section?.title || (isDua ? "Duʿāʾ des Tages" : "Heute empfohlen"));
-  const itemTitle = String(item.title || "").trim();
-  const snippet = String(item.snippet || "").trim();
+  const itemTitle = String(item?.title || "").trim();
+  const snippet = String(item?.snippet || "").trim();
   const body = [itemTitle, snippet].filter(Boolean).join(snippet ? " – " : "") ||
     (isDua ? "Heutige Duʿāʾ aus Qurʾān & Sunnah." : "Heute empfohlener Beitrag.");
   const origin = siteOrigin(env);
@@ -348,81 +360,113 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionIds
   return withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
-    include_subscription_ids: subscriptionIds,
+    include_subscription_ids: [subscriptionId],
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
     isAnyWeb: true,
-    idempotency_key: idSeed,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
       content_id: item.id,
       date: dateKey,
-      source: "dar-daily-push-scheduler-batch"
+      source: "dar-daily-push-scheduler-v4",
+      forceToken: forceToken || undefined
     }
   }, env);
 }
 
-async function sendDailyPushBatch(env, rows, kind, item, config, dateKey, stats) {
+function forceSettings(config, dateKey) {
+  const force = config?.forceSend;
+  if (!force || force.enabled === false || String(force.date || "") !== dateKey) {
+    return { active: false, kinds: new Set(), token: "" };
+  }
+  const kinds = new Set((Array.isArray(force.kinds) ? force.kinds : ["dua", "recommendation"])
+    .map(value => String(value).toLowerCase())
+    .filter(value => value === "dua" || value === "recommendation"));
+  return {
+    active: kinds.size > 0,
+    kinds,
+    token: String(force.token || `force-${dateKey}`).trim()
+  };
+}
+
+async function clearForceSend(env, deps, expectedToken) {
+  if (!deps?.githubGet || !deps?.githubPut || !deps?.base64ToUtf8) return { cleared: false, reason: "GitHub-Schreibzugriff fehlt" };
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const path = env.DAILY_PUSH_CONFIG_PATH || DEFAULT_DAILY_CONFIG_PATH;
+  try {
+    const file = await deps.githubGet(env, owner, repo, path, branch);
+    if (!file?.content) return { cleared: false, reason: "Konfiguration fehlt" };
+    const config = JSON.parse(deps.base64ToUtf8(file.content));
+    if (String(config?.forceSend?.token || "") !== String(expectedToken || "")) {
+      return { cleared: false, reason: "Force-Token bereits geändert" };
+    }
+    config.forceSend = {
+      ...config.forceSend,
+      enabled: false,
+      completedAt: new Date().toISOString()
+    };
+    await deps.githubPut(env, owner, repo, path, `${JSON.stringify(config, null, 2)}\n`, `Daily push force completed ${expectedToken}`, branch, file.sha);
+    return { cleared: true };
+  } catch (error) {
+    return { cleared: false, reason: error.message || String(error) };
+  }
+}
+
+export async function sendDailyPushBatch(env, rows, kind, item, config, dateKey, stats, options = {}) {
   const isDua = kind === "dua";
   const section = isDua ? config.dailyDua : config.recommendation;
   if (section?.enabled === false || !item?.id || !rows.length) return;
 
-  const patch = isDua
-    ? { last_dua_push_date: dateKey, last_dua_content_id: item.id, daily_push_error: null }
-    : { last_recommendation_push_date: dateKey, last_recommendation_content_id: item.id, daily_push_error: null };
-
-  for (let offset = 0; offset < rows.length; offset += BATCH_CHUNK_SIZE) {
-    const chunk = rows.slice(offset, offset + BATCH_CHUNK_SIZE);
-    const subscriptionIds = chunk.map((row) => String(row.subscription_id)).filter(Boolean);
-    if (!subscriptionIds.length) continue;
-
-    const idSeed = await uuidFrom(`daily-${kind}-batch-${dateKey}-${offset}`);
-    const payload = buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionIds, idSeed);
+  for (const row of rows) {
+    const subscriptionId = String(row.subscription_id || "").trim();
+    if (!subscriptionId) continue;
+    const idempotencyKey = await uuidFrom([
+      "daily",
+      DAILY_PUSH_ID_VERSION,
+      kind,
+      dateKey,
+      item.id,
+      subscriptionId,
+      options.forceToken || "normal"
+    ].join("|"));
+    const payload = buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId, options.forceToken || "");
+    payload.idempotency_key = idempotencyKey;
+    payload.name = `daily-${kind}-${dateKey}-${DAILY_PUSH_ID_VERSION}${options.forceToken ? "-force" : ""}`.slice(0, 128);
 
     try {
       const result = await postOneSignal(env, payload);
-      const delivery = evaluateOneSignalDelivery(result.parsed || {});
-      const invalidRaw = delivery.invalidSubscriptionIds ||
-        result.parsed?.errors?.invalid_subscription_ids ||
-        [];
-      const invalidSet = new Set((Array.isArray(invalidRaw) ? invalidRaw : []).map(String));
+      const invalid = invalidSubscriptionIds(result.parsed);
+      const invalidCurrent = invalid.has(subscriptionId);
+      const notificationId = String(result.parsed?.id || "").trim();
 
-      await Promise.all(chunk.map(async (row) => {
-        if (invalidSet.has(String(row.subscription_id))) {
-          stats.errors += 1;
-          await markSent(env, row.device_id, {
-            daily_push_error: "Push-Gerät bei OneSignal ungültig – bitte in der App erneut aktivieren."
-          });
-          return;
-        }
-        if (delivery.delivered) {
-          await markSent(env, row.device_id, patch);
-          stats.sent += 1;
-          return;
-        }
+      if (invalidCurrent || !notificationId) {
+        stats.invalid += 1;
         stats.errors += 1;
-        await markSent(env, row.device_id, {
-          daily_push_error: String(delivery.reason || "Push nicht zugestellt").slice(0, 240)
+        await patchRegistration(env, row, {
+          enabled: false,
+          push_opted_in: false,
+          daily_dua_enabled: false,
+          daily_recommendation_enabled: false,
+          jummah_notifications: false,
+          daily_push_error: invalidCurrent
+            ? "OneSignal-Subscription ungültig – Push in der App erneut aktivieren."
+            : "OneSignal hat keine Nachricht erstellt – Subscription nicht erreichbar."
         });
-      }));
+        continue;
+      }
 
-      stats.responses.push({
-        kind,
-        batch: true,
-        count: chunk.length,
-        contentId: item.id,
-        recipients: result.recipients,
-        ok: delivery.delivered,
-        invalid: invalidSet.size
-      });
-    } catch (err) {
-      const msg = err.message || String(err);
-      stats.errors += chunk.length;
-      await Promise.all(chunk.map((row) =>
-        markSent(env, row.device_id, { daily_push_error: msg.slice(0, 240) })
-      ));
-      stats.responses.push({ kind, batch: true, count: chunk.length, ok: false, error: msg });
+      const sentPatch = isDua
+        ? { last_dua_push_date: dateKey, last_dua_content_id: item.id, daily_push_error: null }
+        : { last_recommendation_push_date: dateKey, last_recommendation_content_id: item.id, daily_push_error: null };
+      await patchRegistration(env, row, sentPatch);
+      stats.sent += 1;
+      stats.accepted[kind] += 1;
+    } catch (error) {
+      stats.errors += 1;
+      await patchRegistration(env, row, { daily_push_error: String(error.message || error).slice(0, 240) });
     }
   }
 }
@@ -432,162 +476,173 @@ export function readDailyPushStatusFromKv() {
 }
 
 async function writeStatusGithub(env, status, deps) {
-  if (!deps?.githubPut) return;
+  if (!deps?.githubPut || !deps?.githubGet) return { saved: false };
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
   const path = env.DAILY_PUSH_STATUS_PATH || DEFAULT_DAILY_STATUS_PATH;
   try {
     const existing = await deps.githubGet(env, owner, repo, path, branch);
-    await deps.githubPut(
-      env,
-      owner,
-      repo,
-      path,
-      `${JSON.stringify(status, null, 2)}\n`,
-      `Daily push ${status.updatedAt}`,
-      branch,
-      existing?.sha
-    );
-  } catch (e) {
-    status.githubWriteError = e.message || String(e);
+    await deps.githubPut(env, owner, repo, path, `${JSON.stringify(status, null, 2)}\n`, `Daily push ${status.updatedAt}`, branch, existing?.sha);
+    return { saved: true, path };
+  } catch (error) {
+    return { saved: false, reason: error.message || String(error) };
   }
 }
 
 export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   const now = options.now ? new Date(options.now) : new Date();
+  const canonicalTimeZone = "Europe/Berlin";
+  const canonicalDateKey = dayKey(now, canonicalTimeZone);
   const stats = {
     checked: 0,
     duaCandidates: 0,
     recCandidates: 0,
     sent: 0,
     skipped: 0,
-    errors: 0,
     duplicates: 0,
-    responses: []
+    errors: 0,
+    invalid: 0,
+    accepted: { dua: 0, recommendation: 0 }
   };
 
   let config;
-  let rows;
+  let rawRows = [];
+  let rows = [];
   let dailyContent;
-  const tzCanonical = "Europe/Berlin";
-  const canonicalDateKey = dayKey(now, tzCanonical);
+  let force = { active: false, kinds: new Set(), token: "" };
 
   try {
-    [config, rows] = await Promise.all([
+    const [configResult, registrations] = await Promise.all([
       loadDailyConfig(env, deps),
       loadDailyRegistrations(env)
     ]);
-    dailyContent = await loadDailyContentForPush(env, deps, canonicalDateKey);
+    config = configResult.config;
+    rawRows = registrations.rawRows;
+    rows = registrations.rows;
+    force = forceSettings(config, canonicalDateKey);
+    dailyContent = await loadDailyContentFile(env, deps, canonicalDateKey);
     if (!dailyContent?.dua?.id && !dailyContent?.recommendation?.id) {
-      dailyContent = await regenerateDailyContent(env, deps, canonicalDateKey, tzCanonical);
+      dailyContent = await regenerateDailyContent(env, deps, canonicalDateKey, canonicalTimeZone);
     }
-  } catch (err) {
+  } catch (error) {
     const status = {
       ok: false,
-      schedulerEngine: "cloudflare-worker-daily-v3-catchup",
+      schedulerEngine: DAILY_PUSH_ENGINE,
       deliveryMode: deliveryMode(config),
       schedulerStatus: "error",
       updatedAt: now.toISOString(),
-      lastError: err.message || String(err),
+      lastError: error.message || String(error),
       ...stats
     };
     lastDailyStatusReport = status;
-    await writeStatusGithub(env, status, deps);
+    status.statusWrite = await writeStatusGithub(env, status, deps);
     return { ok: false, triggered: true, reason: status.lastError, status };
   }
 
   const duaItem = dailyContent?.dua?.id ? dailyContent.dua : null;
-  const recItem = dailyContent?.recommendation?.id ? dailyContent.recommendation : null;
-
-  if (!duaItem && !recItem) {
+  const recommendationItem = dailyContent?.recommendation?.id ? dailyContent.recommendation : null;
+  if (!duaItem && !recommendationItem) {
     const status = {
       ok: false,
-      schedulerEngine: "cloudflare-worker-daily-v3-catchup",
+      schedulerEngine: DAILY_PUSH_ENGINE,
       deliveryMode: deliveryMode(config),
       schedulerStatus: "warning",
       updatedAt: now.toISOString(),
-      lastError: "Kein aktiver Tagesinhalt in content/updates/daily.json für heute – Push nicht gesendet (keine Zufallsauswahl)",
+      lastError: "Kein Tagesinhalt für heute vorhanden.",
       dailyContentDate: dailyContent?.date || null,
       ...stats
     };
     lastDailyStatusReport = status;
-    await writeStatusGithub(env, status, deps);
+    status.statusWrite = await writeStatusGithub(env, status, deps);
     return { ok: false, triggered: true, reason: status.lastError, status };
   }
 
   const duaQueue = [];
-  const recQueue = [];
+  const recommendationQueue = [];
+  const onlySubscriptionId = String(options.subscriptionId || options.subscription_id || "").trim();
 
   for (const row of rows) {
+    const subscriptionId = String(row.subscription_id || "").trim();
+    if (onlySubscriptionId && subscriptionId !== onlySubscriptionId) continue;
     stats.checked += 1;
-    const tz = String(row.timezone || "Europe/Berlin");
-    const local = getLocalParts(now, tz);
-    const dateKey = canonicalDateKey;
-
-    if (row.push_opted_in === false) {
-      stats.skipped += 1;
-      continue;
-    }
-
-    const duaOn = row.daily_dua_enabled !== false;
-    const recOn = row.daily_recommendation_enabled !== false;
+    const local = getLocalParts(now, String(row.timezone || canonicalTimeZone));
     const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
-    const recHour = Number(config?.recommendation?.hour ?? REC_HOUR);
+    const recommendationHour = Number(config?.recommendation?.hour ?? REC_HOUR);
+    const forceDua = force.active && force.kinds.has("dua");
+    const forceRecommendation = force.active && force.kinds.has("recommendation");
+    const duaWindow = forceDua || duaDeliveryWindow(local, duaHour, config);
+    const recommendationWindow = forceRecommendation || recDeliveryWindow(local, recommendationHour, config);
 
-    const duaWindow = duaDeliveryWindow(local, duaHour, config);
-    const recWindow = recDeliveryWindow(local, recHour, config);
-
-    if (duaOn && duaItem && config?.dailyDua?.enabled !== false && duaWindow) {
-      if (row.last_dua_push_date === dateKey) {
-        stats.duplicates += 1;
-      } else {
+    if (row.daily_dua_enabled !== false && duaItem && config?.dailyDua?.enabled !== false && duaWindow) {
+      if (!forceDua && row.last_dua_push_date === canonicalDateKey) stats.duplicates += 1;
+      else {
         stats.duaCandidates += 1;
         duaQueue.push(row);
       }
     }
 
-    if (recOn && recItem && config?.recommendation?.enabled !== false && recWindow) {
-      if (row.last_recommendation_push_date === dateKey) {
-        stats.duplicates += 1;
-      } else {
+    if (row.daily_recommendation_enabled !== false && recommendationItem && config?.recommendation?.enabled !== false && recommendationWindow) {
+      if (!forceRecommendation && row.last_recommendation_push_date === canonicalDateKey) stats.duplicates += 1;
+      else {
         stats.recCandidates += 1;
-        recQueue.push(row);
+        recommendationQueue.push(row);
       }
     }
   }
 
-  await sendDailyPushBatch(env, duaQueue, "dua", duaItem, config, canonicalDateKey, stats);
-  await sendDailyPushBatch(env, recQueue, "recommendation", recItem, config, canonicalDateKey, stats);
+  await sendDailyPushBatch(env, duaQueue, "dua", duaItem, config, canonicalDateKey, stats, { forceToken: force.kinds.has("dua") ? force.token : "" });
+  await sendDailyPushBatch(env, recommendationQueue, "recommendation", recommendationItem, config, canonicalDateKey, stats, { forceToken: force.kinds.has("recommendation") ? force.token : "" });
+
+  let forceClear = null;
+  if (force.active && stats.errors === 0) {
+    forceClear = await clearForceSend(env, deps, force.token);
+  }
 
   const status = {
     ok: stats.errors === 0,
-    schedulerEngine: "cloudflare-worker-daily-v3-catchup",
+    schedulerEngine: DAILY_PUSH_ENGINE,
+    idVersion: DAILY_PUSH_ID_VERSION,
     deliveryMode: deliveryMode(config),
     schedulerStatus: stats.errors ? "error" : "success",
     updatedAt: now.toISOString(),
     usersChecked: stats.checked,
+    registrationsRead: rawRows.length,
+    uniqueSubscriptions: rows.length,
+    duplicateRegistrationsDropped: Math.max(0, rawRows.length - rows.length),
+    appEnvironment: "production",
     duaCandidates: stats.duaCandidates,
     recCandidates: stats.recCandidates,
     sent: stats.sent,
+    accepted: stats.accepted,
+    invalidSubscriptionsDisabled: stats.invalid,
     skipped: stats.skipped,
     duplicates: stats.duplicates,
     errors: stats.errors,
+    forceSend: force.active ? { token: force.token, kinds: Array.from(force.kinds), cleared: Boolean(forceClear?.cleared), clearError: forceClear?.reason || null } : null,
     dailyContentDate: dailyContent?.date || null,
-    currentRecommendation: recItem ? { id: recItem.id, title: recItem.title, category: recItem.category || "", scholar: recItem.scholar || "" } : null,
-    currentDua: dailyContent?.dua ? { id: dailyContent.dua.id, title: dailyContent.dua.title, category: dailyContent.dua.category || "" } : null,
-    configAutomatic: config?.automatic !== false,
-    responses: stats.responses.slice(0, 20)
+    currentRecommendation: recommendationItem ? {
+      id: recommendationItem.id,
+      title: recommendationItem.title,
+      category: recommendationItem.category || "",
+      scholar: recommendationItem.scholar || ""
+    } : null,
+    currentDua: duaItem ? {
+      id: duaItem.id,
+      title: duaItem.title,
+      category: duaItem.category || ""
+    } : null,
+    configAutomatic: config?.automatic !== false
   };
 
   lastDailyStatusReport = status;
-  await writeStatusGithub(env, status, deps);
+  status.statusWrite = await writeStatusGithub(env, status, deps);
 
   return {
     ok: status.ok,
     triggered: true,
     schedulerStatus: status.schedulerStatus,
-    reason: `Geprüft: ${stats.checked} · Gesendet: ${stats.sent}`,
+    reason: `Geprüft: ${stats.checked} · Akzeptiert: ${stats.sent} · Ungültig deaktiviert: ${stats.invalid}`,
     status
   };
 }
