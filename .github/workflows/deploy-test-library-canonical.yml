@@ -14,6 +14,8 @@ on:
       - data/canonical-books-index.json
       - scripts/build-canonical-books-index.js
       - scripts/patch-test-canonical-library.js
+      - scripts/sync-app-build-ids.js
+      - scripts/verify-live-deploy.js
       - scripts/cf-pages-build.js
       - service-worker.js
       - wrangler.toml
@@ -36,13 +38,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build kanonische Quellenbibliothek
+      - name: Build + Build-IDs synchronisieren
         run: npm run build
 
       - name: Health checks (Syntax, Push-Guard)
         run: |
           node scripts/app-health-check.js
           node scripts/push-system-guard.js
+          node scripts/version-update-guard.js
 
       - name: Deploy Test-App (Workers Static Assets)
         uses: cloudflare/wrangler-action@v3
@@ -63,18 +66,7 @@ jobs:
         continue-on-error: true
 
       - name: Test-App Quellenbibliothek verifizieren
-        run: |
-          set -e
-          for url in \
-            "https://dar-al-tawhid.de/test/assets/library/canonical-source-library.js" \
-            "https://dar-al-tawhid.de/data/books-library.json" \
-            "https://dar-al-tawhid.de/data/scholars-library.json"
-          do
-            code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
-            echo "$url -> $code"
-            test "$code" = "200"
-          done
-          html=$(curl -sSL "https://dar-al-tawhid.de/test/index.html")
-          echo "$html" | grep -q "canonical-source-library.js"
-          echo "$html" | grep -q "Quellenbibliothek"
-          echo "Test-App Quellenbibliothek live OK"
+        env:
+          SITE_URL: "https://dar-al-tawhid.de"
+          DEPLOY_VERIFY_MODE: "test"
+        run: node scripts/verify-live-deploy.js

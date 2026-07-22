@@ -11,6 +11,7 @@ on:
       - wasiyyah/**
       - test/wasiyyah/**
       - version.json
+      - test/version.json
       - service-worker.js
       - assets/**
       - content/**
@@ -24,6 +25,9 @@ on:
       - package.json
       - _headers
       - scripts/cf-pages-build.js
+      - scripts/sync-app-build-ids.js
+      - scripts/overlay-test-staging-from-branch.js
+      - scripts/verify-live-deploy.js
       - scripts/app-health-check.js
       - scripts/repo-integrity-guard.js
       - .github/workflows/cloudflare-pages-deploy.yml
@@ -36,10 +40,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test-App Staging aus test-library-canonical übernehmen
+        run: |
+          git fetch origin test-library-canonical
+          node scripts/overlay-test-staging-from-branch.js
+
+      - name: Build + Build-IDs synchronisieren
+        run: npm run build
 
       - name: Health checks (Syntax, Push-Guard, Version)
         run: |
@@ -61,14 +78,13 @@ jobs:
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v317"
           CLOUDFLARE_DEV_MODE: "1"
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
 
-      - name: Live-Besucher-App verifizieren
+      - name: Live-Deploy verifizieren (Besucher + Test)
         env:
           SITE_URL: "https://dar-al-tawhid.de"
-          EXPECT_BUILD: "app-shell-v317"
+          DEPLOY_VERIFY_MODE: "all"
           EXPECT_ZAKAT_VERSION: "18"
-        run: node scripts/verify-live-visitor-app.js
+        run: node scripts/verify-live-deploy.js

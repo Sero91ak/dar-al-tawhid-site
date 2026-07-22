@@ -4,8 +4,14 @@ const { execFileSync } = require('child_process');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
+const syncBuildIds = path.join(__dirname, 'sync-app-build-ids.js');
 const canonicalLibraryBuilder = path.join(__dirname, 'build-canonical-books-index.js');
 const testLibraryPatcher = path.join(__dirname, 'patch-test-canonical-library.js');
+
+execFileSync(process.execPath, [syncBuildIds], {
+  cwd: root,
+  stdio: 'inherit'
+});
 
 execFileSync(process.execPath, [canonicalLibraryBuilder], {
   cwd: root,
@@ -13,6 +19,11 @@ execFileSync(process.execPath, [canonicalLibraryBuilder], {
 });
 
 execFileSync(process.execPath, [testLibraryPatcher], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
+execFileSync(process.execPath, [syncBuildIds], {
   cwd: root,
   stdio: 'inherit'
 });
