@@ -14,50 +14,40 @@ jobs:
   resend-todays-daily-pushes:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for repaired daily scheduler
-        run: |
-          for attempt in $(seq 1 40); do
-            STATUS="$(curl -fsS 'https://dar-admin-publisher.sero91ak.workers.dev/api/daily/status' || true)"
-            echo "Versuch ${attempt}: ${STATUS}"
-            if printf '%s' "$STATUS" | grep -q 'cloudflare-worker-daily-v4-isolated'; then
-              exit 0
-            fi
-            sleep 15
-          done
-          echo '::error::Reparierter Tages-Push-Scheduler wurde nicht rechtzeitig live'
-          exit 1
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Send both daily pushes now
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send Duʿāʾ and recommendation separately to every production subscription
         env:
-          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          DAILY_REPAIR_TOKEN: "daily-live-repair-2026-07-22-v2"
+        run: node scripts/send-daily-live-repair.js
+
+      - name: Validate live repair result
         run: |
-          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
-            echo '::error::ADMIN_PUBLISH_SECRET fehlt'
-            exit 1
-          fi
-
-          RESULT="$(curl -fsS -X POST 'https://dar-admin-publisher.sero91ak.workers.dev/api/admin/daily/run' \
-            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
-            -H 'Content-Type: application/json' \
-            -d '{}')"
-          echo "$RESULT" | tee daily-live-result.json
-
           node <<'NODE'
           const fs = require('fs');
-          const result = JSON.parse(fs.readFileSync('daily-live-result.json', 'utf8'));
-          const status = result.status || {};
-          if (status.schedulerEngine !== 'cloudflare-worker-daily-v4-isolated') {
-            throw new Error(`Falscher Scheduler: ${status.schedulerEngine || 'fehlt'}`);
-          }
-          const dua = Number(status.accepted?.dua || 0);
-          const recommendation = Number(status.accepted?.recommendation || 0);
+          const result = JSON.parse(fs.readFileSync('daily-live-repair-result.json', 'utf8'));
+          const dua = Number(result.dua?.accepted || 0);
+          const recommendation = Number(result.recommendation?.accepted || 0);
           if (dua < 1 || recommendation < 1) {
-            throw new Error(`Live-Nachversand unvollständig: dua=${dua}, recommendation=${recommendation}, errors=${status.errors}`);
+            throw new Error(`Nachversand fehlgeschlagen: Duʿāʾ=${dua}, Empfehlung=${recommendation}`);
           }
-          console.log(`Live-Nachversand bestätigt: Duʿāʾ=${dua}, Empfehlung=${recommendation}, ungültig deaktiviert=${status.invalidSubscriptionsDisabled || 0}`);
+          console.log(`Live bestätigt: Duʿāʾ=${dua}, Empfehlung=${recommendation}, ungültige Abos=${Number(result.dua?.invalid || 0)}`);
           NODE
 
-      - name: Verify database-backed status
-        run: |
-          sleep 5
-          curl -fsS 'https://dar-admin-publisher.sero91ak.workers.dev/api/daily/status'
+      - name: Upload repair report
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-push-live-repair-result
+          path: daily-live-repair-result.json
+          retention-days: 7
