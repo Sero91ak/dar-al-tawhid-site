@@ -16,14 +16,20 @@
     "body": "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār."
   },
   "forceSend": {
-    "enabled": true,
+    "enabled": false,
     "date": "2026-07-22",
     "kinds": [
       "dua",
       "recommendation"
     ],
-    "token": "daily-live-repair-2026-07-22-v1",
-    "requestedAt": "2026-07-22T08:40:00Z",
-    "reason": "Fehlerhafter Sammelversand mit ungültigen OneSignal-Subscriptions"
+    "token": "daily-live-repair-2026-07-22-v2",
+    "requestedAt": "2026-07-22T08:52:00Z",
+    "completedAt": "2026-07-22T08:54:00Z",
+    "result": {
+      "acceptedDua": 9,
+      "acceptedRecommendation": 9,
+      "invalidSubscriptionsDisabled": 9
+    },
+    "reason": "Direkter isolierter Live-Nachversand erfolgreich abgeschlossen"
   }
 }
