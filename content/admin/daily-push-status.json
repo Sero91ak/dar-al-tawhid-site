@@ -1,16 +1,27 @@
 {
   "ok": true,
-  "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
+  "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
+  "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-22T08:45:01.072Z",
-  "usersChecked": 18,
+  "updatedAt": "2026-07-22T09:00:17.790Z",
+  "usersChecked": 9,
+  "registrationsRead": 9,
+  "uniqueSubscriptions": 9,
+  "duplicateRegistrationsDropped": 0,
+  "appEnvironment": "production",
   "duaCandidates": 0,
   "recCandidates": 0,
   "sent": 0,
+  "accepted": {
+    "dua": 0,
+    "recommendation": 0
+  },
+  "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 18,
+  "duplicates": 9,
   "errors": 0,
+  "forceSend": null,
   "dailyContentDate": "2026-07-22",
   "currentRecommendation": {
     "id": "amali-sind-nur-nach-niyyah-199",
@@ -23,6 +34,5 @@
     "title": "Vollende unser Licht und vergib uns",
     "category": "Licht"
   },
-  "configAutomatic": true,
-  "responses": []
+  "configAutomatic": true
 }
