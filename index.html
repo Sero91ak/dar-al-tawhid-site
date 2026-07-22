@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v342";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v343";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -10329,14 +10329,14 @@ html[data-theme="dar-al-layl"] .home-more-body .overview-compact .stat-card{
 }
 </style>
 <style id="hijri-dayframe-v334">
-/* Hijri-Datum: kompakt, rote Umrandung, Kalender-Emoji */
+/* Hijri-Datum: kompakt, dezenter Rand, Kalender-Emoji */
 .home-hijri-dayframe{
   display:inline-flex!important;align-items:center!important;gap:5px!important;
   padding:3px 9px 4px!important;min-height:0!important;min-width:0!important;
   max-width:min(62vw,232px)!important;width:auto!important;border-radius:8px!important;
-  border:1px solid rgba(186,78,78,.72)!important;
-  background:color-mix(in srgb,var(--card) 88%,rgba(186,78,78,.08))!important;
-  box-shadow:0 0 8px rgba(186,78,78,.14),inset 0 1px 0 rgba(255,255,255,.08)!important;
+  border:1px solid rgba(186,78,78,.36)!important;
+  background:color-mix(in srgb,var(--card) 92%,rgba(186,78,78,.06))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;
 }
 .home-hijri-dayframe .home-hijri-ico{
   font-size:clamp(13px,3.4vw,15px)!important;line-height:1!important;flex:0 0 auto!important;
@@ -10347,19 +10347,19 @@ html[data-theme="dar-al-layl"] .home-more-body .overview-compact .stat-card{
   text-shadow:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .home-hijri-dayframe:hover{
-  border-color:rgba(210,96,96,.88)!important;
-  box-shadow:0 0 10px rgba(186,78,78,.22)!important;
+  border-color:rgba(186,78,78,.46)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;
 }
 html[data-theme="light"] .home-hijri-dayframe,
 html[data-theme="soft"] .home-hijri-dayframe{
-  border-color:rgba(158,64,64,.62)!important;
-  background:color-mix(in srgb,#fffaf0 92%,rgba(158,64,64,.06))!important;
+  border-color:rgba(158,64,64,.32)!important;
+  background:color-mix(in srgb,#fffaf4 94%,rgba(158,64,64,.05))!important;
 }
 html[data-theme="light"] .home-hijri-dayframe [data-hijri-date-text],
 html[data-theme="soft"] .home-hijri-dayframe [data-hijri-date-text]{color:#5a4018!important}
 html[data-theme="bordeaux"] .home-hijri-dayframe{
-  border-color:rgba(200,110,110,.68)!important;
-  box-shadow:0 0 9px rgba(166,72,72,.16)!important;
+  border-color:rgba(217,187,120,.38)!important;
+  background:color-mix(in srgb,#211015 90%,rgba(217,187,120,.07))!important;
 }
 @media(max-width:520px){
   .home-hijri-dayframe{padding:3px 8px 4px!important;max-width:min(58vw,212px)!important;gap:4px!important}
@@ -10596,32 +10596,44 @@ body.is-home-route .view-head.view-head-home::after{
 }
 body.is-home-route .home-refresh-panel{margin-top:10px!important}
 
-/* Hijri-Kalender: edler, themenangepasster Rahmen */
+/* Hijri-Kalender: dezenter Rand, ohne Leuchten — alle Erscheinungsbilder */
 html[data-theme] .home-hijri-dayframe{
-  border:1.5px solid color-mix(in srgb,var(--gold2) 62%,var(--line))!important;
-  background:color-mix(in srgb,var(--card) 86%,var(--gold2) 14%)!important;
-  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 14%,transparent),0 0 14px color-mix(in srgb,var(--gold2) 16%,transparent)!important;
+  border:1px solid rgba(186,92,92,.36)!important;
+  background:color-mix(in srgb,var(--card) 92%,rgba(186,92,92,.06))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+html[data-theme] .home-hijri-dayframe:hover{
+  border-color:rgba(186,92,92,.46)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;
+  filter:none!important;
 }
 html[data-theme="light"] .home-hijri-dayframe,
 html[data-theme="soft"] .home-hijri-dayframe{
-  border-color:color-mix(in srgb,#8a6530 48%,var(--gold2))!important;
-  background:color-mix(in srgb,#fffaf4 88%,var(--gold2))!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 0 10px color-mix(in srgb,var(--gold2) 12%,transparent)!important;
+  border:1px solid rgba(158,72,72,.32)!important;
+  background:color-mix(in srgb,#fffaf4 94%,rgba(158,72,72,.05))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55)!important;
 }
 html[data-theme="royal"] .home-hijri-dayframe{
-  border-color:color-mix(in srgb,#e3c97f 55%,#1a3a5c)!important;
-  background:color-mix(in srgb,#0a1c32 82%,#e3c97f)!important;
+  border:1px solid rgba(227,201,127,.40)!important;
+  background:color-mix(in srgb,#0a1c32 90%,rgba(227,201,127,.08))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
 }
 html[data-theme="bordeaux"] .home-hijri-dayframe{
-  border-color:color-mix(in srgb,#d9bb78 52%,#4a2030)!important;
-  background:color-mix(in srgb,#211015 84%,#d9bb78)!important;
+  border:1px solid rgba(217,187,120,.38)!important;
+  background:color-mix(in srgb,#211015 90%,rgba(217,187,120,.07))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
 }
 html[data-theme="dar-al-layl"] .home-hijri-dayframe{
-  border-color:color-mix(in srgb,#a88b4f 58%,#1a2018)!important;
-  background:color-mix(in srgb,#111612 85%,#a88b4f)!important;
+  border:1px solid rgba(186,92,92,.34)!important;
+  background:color-mix(in srgb,#111612 90%,rgba(186,92,92,.05))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+html[data-theme="dark"] .home-hijri-dayframe{
+  border:1px solid rgba(186,92,92,.36)!important;
+  background:color-mix(in srgb,var(--card) 90%,rgba(186,92,92,.06))!important;
 }
 html[data-theme] .home-hijri-dayframe [data-hijri-date-text]{
-  color:color-mix(in srgb,var(--gold2) 88%,var(--premium-title,var(--text)))!important;
+  color:color-mix(in srgb,var(--gold2) 82%,var(--text))!important;
   text-shadow:none!important;
 }
 html[data-theme="light"] .home-hijri-dayframe [data-hijri-date-text],
@@ -14943,7 +14955,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v342";
+const APP_BUILD_ID="app-shell-v343";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
