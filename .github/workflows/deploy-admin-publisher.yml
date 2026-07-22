@@ -14,7 +14,6 @@ on:
       - cloudflare/daily-push-*.js
       - cloudflare/jummah-push-*.js
       - cloudflare/feed-backgrounds-*.js
-      - scripts/patch-prayer-push-runtime.js
       - .github/workflows/setup-feed-api-keys.yml
       - cloudflare/onesignal-delivery.js
       - cloudflare/kurzlink-admin.js
@@ -42,27 +41,27 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Apply prayer push runtime migration
-        run: node ../scripts/patch-prayer-push-runtime.js
-
-      - name: Validate patched worker modules
+      - name: Validate worker modules directly from source
         run: |
           node --check prayer-push-copy.js
           node --check prayer-push-scheduler.js
           node --check prayer-push-admin.js
           node --check prayer-status-store.js
           node --check worker.js
+          grep -q 'PRAYER_PUSH_COPY_VERSION = "v4"' prayer-push-copy.js
+          grep -q 'push_opted_in=eq.true' prayer-push-scheduler.js
+          grep -q 'app_environment=eq.production' prayer-push-scheduler.js
 
       - name: Install Wrangler
         run: npm install -g wrangler
 
-      - name: Push system guard (block deploy if scheduler missing)
+      - name: Push system guard
         run: node ../scripts/push-system-guard.js
 
-      - name: Publish isolation guard (Admin darf Besucher nicht überlasten)
+      - name: Publish isolation guard
         run: node ../scripts/publish-isolation-guard.js
 
-      - name: Post markdown guard (Admin-YAML reparieren vor Upload)
+      - name: Post markdown guard
         run: node ../scripts/post-markdown-guard.js
 
       - name: Deploy worker
@@ -83,7 +82,7 @@ jobs:
             fi
             sleep 15
           done
-          echo "::error::Worker-Binding nach Deploy nicht aktiv (prayerStatusStore / cron-v3 / libraryApi)"
+          echo "::error::Worker-Binding nach Deploy nicht aktiv"
           exit 1
 
       - name: Refresh prayer push live status immediately
@@ -91,8 +90,8 @@ jobs:
           ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
         run: |
           if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
-            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Livestatus wird spätestens durch den nächsten 5-Minuten-Cron aktualisiert"
-            exit 0
+            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Livestatus kann nicht sofort geprüft werden"
+            exit 1
           fi
 
           RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/prayer/run" \
@@ -109,7 +108,10 @@ jobs:
           if (!result.status?.updatedAt) {
             throw new Error("Gebets-Scheduler ohne aktuellen Zeitstempel beendet");
           }
-          console.log(`Gebets-Push-Livestatus aktuell: ${result.status.updatedAt} (Scheduler: ${result.schedulerStatus || result.status?.schedulerStatus || "unbekannt"})`);
+          if (result.status?.prayerCopyVersion !== "v4") {
+            throw new Error(`Falsche Gebets-Push-Copy aktiv: ${result.status?.prayerCopyVersion || "fehlt"}`);
+          }
+          console.log(`Gebets-Push-Livestatus aktuell: ${result.status.updatedAt}`);
           NODE
 
       - name: Sync optional feed image API secrets
@@ -136,11 +138,7 @@ jobs:
         env:
           ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
         run: |
-          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
-            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Post-Deploy Sync übersprungen"
-            exit 0
-          fi
           curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/feed-backgrounds/sync" \
             -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
             -H "Content-Type: application/json" \
-            -d '{"staging":true,"force":false,"maxDownloads":20}' || echo "::warning::Feed-BG Sync nach Deploy fehlgeschlagen (Bootstrap-Seed bleibt aktiv)"
+            -d '{"staging":true,"force":false,"maxDownloads":20}' || echo "::warning::Feed-BG Sync nach Deploy fehlgeschlagen"
