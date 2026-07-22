@@ -1,5 +1,5 @@
 -- DAR AL TAWḤĪD – eindeutige Trennung von Test- und Live-Push-Installationen
--- Produktion wurde am 22.07.2026 über Supabase Migration aktiviert.
+-- In Supabase produktiv aktiviert am 22.07.2026.
 
 ALTER TABLE public.prayer_push_registrations
   ADD COLUMN IF NOT EXISTS app_environment text NOT NULL DEFAULT 'production',
@@ -32,7 +32,33 @@ CREATE INDEX IF NOT EXISTS idx_ppr_installation_id
   ON public.prayer_push_registrations (installation_id)
   WHERE installation_id IS NOT NULL;
 
--- Der produktive Scheduler darf ausschließlich folgende Zeilen verwenden:
+-- Selbst bei einem späteren fehlerhaften App-Sync darf eine Testinstallation
+-- keine automatischen Gebets-, Tages- oder Jumuʿah-Pushs erhalten.
+CREATE OR REPLACE FUNCTION public.enforce_test_push_isolation()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  IF NEW.app_environment = 'test' THEN
+    NEW.enabled := false;
+    NEW.push_opted_in := false;
+    NEW.daily_dua_enabled := false;
+    NEW.daily_recommendation_enabled := false;
+    NEW.jummah_notifications := false;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS trg_enforce_test_push_isolation
+  ON public.prayer_push_registrations;
+
+CREATE TRIGGER trg_enforce_test_push_isolation
+BEFORE INSERT OR UPDATE ON public.prayer_push_registrations
+FOR EACH ROW
+EXECUTE FUNCTION public.enforce_test_push_isolation();
+
+-- Der produktive Gebets-Scheduler verwendet ausschließlich:
 -- enabled = true
 -- push_opted_in = true
 -- app_environment = 'production'
