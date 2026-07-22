@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generatedAt": "2026-07-22T20:35:40.769Z",
+  "generatedAt": "2026-07-22T20:47:54.218Z",
   "policy": {
     "verifiedOnly": true,
     "hideUnverifiedWorks": true,
@@ -11,13 +11,18 @@
     "failBuildOnPublicMetadataError": true
   },
   "categories": [
+    "Adab und Tazkiyah",
     "Āthār und Ḥadīṯ",
     "Biografien",
     "Biografien und Āthār",
     "Biografien und Tārīkh",
+    "Fatāwā",
     "Fatāwā und ʿAqīdah",
+    "Fiqh und Uṣūl",
     "Ḥadīṯ",
     "Ḥadīṯ und Fiqh",
+    "Quellenwerk",
+    "Qurʾān",
     "Rijāl und Biografien",
     "Tafsīr",
     "Tawḥīd",
@@ -27,32 +32,171 @@
   ],
   "books": [
     {
+      "id": "az-zuhd-li-ahmad",
+      "title": "az-Zuhd li-Aḥmad",
+      "author": "Aḥmad ibn Ḥanbal",
+      "category": "Adab und Tazkiyah",
+      "aliases": [
+        "az-Zuhd"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "ali-ibn-abi-talib-kinder-der-akhirah-437",
+        "tazkiyyah-beginnt-mit-rechenschaft-224"
+      ],
+      "quotedScholars": [
+        "ʿAlī ibn Abī Ṭālib",
+        "ʿUmar ibn al-Khaṭṭāb"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/az-zuhd-li-ahmad.svg"
+    },
+    {
+      "id": "al-jami-li-akhlaq-ar-rawi-wa-adab-as-sami",
+      "title": "al-Jāmiʿ li-Akhlāq ar-Rāwī wa Ādāb as-Sāmiʿ",
+      "author": "al-Khaṭīb al-Baghdādī",
+      "category": "Adab und Tazkiyah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "mukhlad-adab-vor-hadith-001"
+      ],
+      "quotedScholars": [
+        "Mukhlad ibn al-Ḥusayn"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-jami-li-akhlaq-ar-rawi-wa-adab-as-sami.svg"
+    },
+    {
+      "id": "diwan-ash-shafii-manaqib-ash-shafii",
+      "title": "Dīwān ash-Shāfiʿī / Manāqib ash-Shāfiʿī",
+      "author": "ash-Shāfiʿī in seinen bekannten Weisheiten über Wissen und Geduld.",
+      "category": "Adab und Tazkiyah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "imam-ash-shafii-wissen-braucht-geduld-289"
+      ],
+      "quotedScholars": [
+        "Imām ash-Shāfiʿī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/diwan-ash-shafii-manaqib-ash-shafii.svg"
+    },
+    {
+      "id": "as-samt-wa-adab-al-lisan",
+      "title": "aṣ-Ṣamt wa Ādāb al-Lisān",
+      "author": "Ibn Abī ad-Dunyā",
+      "category": "Adab und Tazkiyah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ibn-masud-mira-zerstoert-mehr-als-sie-klaert-427"
+      ],
+      "quotedScholars": [
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/as-samt-wa-adab-al-lisan.svg"
+    },
+    {
+      "id": "sualat-ibn-al-junayd-li-yahya-b-main",
+      "title": "Suʾālāt Ibn al-Junayd li-Yaḥyā b. Maʿīn",
+      "author": "Ibn al-Junayd",
+      "category": "Adab und Tazkiyah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "yahya-bin-main-dunya-kein-ort-der-ruhe-429",
+        "yahya-bin-main-dunya-nichts-wenn-fuer-allah-frei-166"
+      ],
+      "quotedScholars": [
+        "Yaḥyā b. Maʿīn"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/sualat-ibn-al-junayd-li-yahya-b-main.svg"
+    },
+    {
+      "id": "al-adab-ash-shariyyah",
+      "title": "al-Ādāb ash-Sharʿiyyah",
+      "author": "Ibn Mufliḥ",
+      "category": "Adab und Tazkiyah",
+      "aliases": [
+        "al-Ādāb ash-Sharʿiyyah; Siyar Aʿlām an-Nubalāʾ"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "ahmad-besser-als-sie-denken-001",
+        "ahmad-lob-kann-herz-verderben-001",
+        "ahmad-mehr-wissen-mehr-handeln-001",
+        "ahmad-taqwa-und-akhirah-001",
+        "ahmad-zeichen-des-suchenden-001",
+        "shafii-drei-grundlagen-des-wissens-001",
+        "wissen-muss-im-verhalten-sichtbar-werden-447"
+      ],
+      "quotedScholars": [
+        "Aḥmad ibn Ḥanbal",
+        "al-Ḥasan al-Baṣrī",
+        "Muḥammad ibn Idrīs ash-Shāfiʿī"
+      ],
+      "postCount": 7,
+      "coverUrl": "/assets/library/covers/qsrc/al-adab-ash-shariyyah.svg"
+    },
+    {
+      "id": "az-zuhd-war-raqaiq",
+      "title": "az-Zuhd wa’r-Raqāʾiq",
+      "author": "ʿAbdullāh ibn al-Mubārak",
+      "category": "Adab und Tazkiyah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ibn-al-mubarak-zuhd-001"
+      ],
+      "quotedScholars": [
+        "ʿAbdullāh ibn al-Mubārak"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/az-zuhd-war-raqaiq.svg"
+    },
+    {
+      "id": "al-adab-al-mufrad",
+      "title": "al-Adab al-Mufrad",
+      "author": "ʿAmr b. Shuʿayb.",
+      "category": "Adab und Tazkiyah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "wer-die-kleinen-nicht-erbarmt-und-die-grossen-nicht-achtet-177"
+      ],
+      "quotedScholars": [
+        "ʿAmr b. Shuʿayb"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-adab-al-mufrad.svg"
+    },
+    {
       "id": "musannaf-ibn-abi-shaybah",
       "title": "Muṣannaf Ibn Abī Shaybah",
       "author": "Abū Bakr ʿAbd Allāh ibn Muḥammad Ibn Abī Shaybah",
       "category": "Āthār und Ḥadīṯ",
       "aliases": [
         "Musannaf Ibn Abi Shaybah",
-        "al-Musannaf von Ibn Abi Shaybah"
+        "al-Musannaf von Ibn Abi Shaybah",
+        "al-Muṣannaf von Ibn Abī Shaybah",
+        "Musannaf Ibn Abī Shaybah"
       ],
       "verification": "verified",
       "postIds": [
-        "abdullah-ibn-amr-schweigen-rettung-395",
-        "abu-ad-darda-beginne-mit-deiner-eigenen-seele-435",
         "ata-fudul-al-kalam-zungen-disziplin-taqwa-168",
-        "ibn-masud-opfere-vergaengliche-fuer-bleibende-34519",
         "iyas-reine-herzen-wenig-ghibah-546",
         "liebe-und-hass-mussen-fur-allah-gebunden-sein-234"
       ],
       "quotedScholars": [
-        "Abdullah ibn Amr",
-        "Abū ad-Dardāʾ",
         "Der Prophet ﷺ",
         "Iyās b. Muʿāwiyah",
-        "ʿAbdullāh ibn Masʿūd",
         "ʿAṭāʾ b. Abī Rabāḥ"
       ],
-      "postCount": 6,
+      "postCount": 3,
       "coverUrl": "/assets/library/covers/qsrc/musannaf-ibn-abi-shaybah.svg"
     },
     {
@@ -62,12 +206,22 @@
       "category": "Āthār und Ḥadīṯ",
       "aliases": [
         "Musannaf Abd ar-Razzaq",
-        "al-Musannaf von Abd ar-Razzaq"
+        "al-Musannaf von Abd ar-Razzaq",
+        "al-Musannaf",
+        "al-Muṣannaf"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
+      "postIds": [
+        "abdullah-ibn-amr-schweigen-rettung-395",
+        "abu-ad-darda-beginne-mit-deiner-eigenen-seele-435",
+        "ibn-masud-opfere-vergaengliche-fuer-bleibende-34519"
+      ],
+      "quotedScholars": [
+        "Abdullah ibn Amr",
+        "Abū ad-Dardāʾ",
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 3,
       "coverUrl": "/assets/library/covers/qsrc/musannaf-abd-ar-razzaq.svg"
     },
     {
@@ -77,7 +231,10 @@
       "category": "Biografien",
       "aliases": [
         "Siyar Alam an-Nubala",
-        "Siyar A'lam al-Nubala"
+        "Siyar A'lam al-Nubala",
+        "Siyar Aʿlām an-Nubalāʾ / Ḥilyat al-Awliyāʾ",
+        "Ḥilyat al-Awliyāʾ / Siyar Aʿlām an-Nubalāʾ",
+        "Tahdhīb al-Kamāl / Siyar Aʿlām an-Nubalāʾ"
       ],
       "verification": "verified",
       "postIds": [
@@ -94,13 +251,11 @@
         "shafii-sunnah-vor-meinem-wort-001",
         "shafii-taten-und-worte-001",
         "takfir-auf-imam-ahmad-und-imam-ash-shafii-120",
-        "wissen-muss-im-verhalten-sichtbar-werden-447",
         "yahya-bin-main-ayat-al-kursi-im-haus-409"
       ],
       "quotedScholars": [
         "Abū Ḥātim ar-Rāzī und Aḥmad ibn Ḥanbal",
         "Aḥmad ibn Ḥanbal",
-        "al-Ḥasan al-Baṣrī",
         "ash-Shāfiʿī, Aḥmad ibn Ḥanbal und adh-Dhahabī",
         "Imām ash-Shāfiʿī",
         "Mālik ibn Dīnār رحمه الله",
@@ -109,7 +264,7 @@
         "Yaḥyā b. Maʿīn",
         "ʿAbd ar-Raḥmān b. Mahdī"
       ],
-      "postCount": 15,
+      "postCount": 14,
       "coverUrl": "/assets/library/covers/qsrc/siyar-alam-an-nubala.svg"
     },
     {
@@ -119,7 +274,8 @@
       "category": "Biografien und Āthār",
       "aliases": [
         "Hilyat al-Awliya",
-        "Ḥilyat al-Awliyāʾ"
+        "Ḥilyat al-Awliyāʾ",
+        "Gharāʾib Mālik ibn Anas / Ḥilyat al-Awliyāʾ"
       ],
       "verification": "verified",
       "postIds": [
@@ -159,7 +315,8 @@
         "Tarikh Dimashq",
         "Tārīkh Madīnat Dimashq",
         "Tārīkh Dimashq / al-Iʿtiṣām",
-        "Ibn Asakir Tarikh Dimashq"
+        "Ibn Asakir Tarikh Dimashq",
+        "al-Iʿtiṣām"
       ],
       "verification": "verified",
       "postIds": [
@@ -174,23 +331,50 @@
       "coverUrl": "/assets/library/covers/qsrc/tarikh-dimashq.svg"
     },
     {
+      "id": "ilam-al-muwaqqiin",
+      "title": "Iʿlām al-Muwaqqiʿīn",
+      "author": "Ibn al-Qayyim",
+      "category": "Fatāwā",
+      "aliases": [
+        "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "ahmad-nicht-blind-folgen-001",
+        "ahmad-sprich-nicht-ohne-imam-001",
+        "ahmad-vorsicht-bei-ijma-behauptung-001",
+        "ahmad-wissen-gleicht-nichts-001",
+        "imam-ahmad-nicht-jeder-darf-fatwa-geben-436",
+        "muhakamah-die-shariah-ist-gerechtigkeit-und-barmherzigkeit-339",
+        "muhakamah-taghut-beginnt-mit-uberschreitung-der-grenze-333",
+        "umar-qiyas-gueltig-wenn-kein-text-430"
+      ],
+      "quotedScholars": [
+        "Aḥmad ibn Ḥanbal",
+        "Ibn al-Qayyim",
+        "Imām Aḥmad ibn Ḥanbal",
+        "ʿUmar b. al-Ḫaṭṭāb"
+      ],
+      "postCount": 8,
+      "coverUrl": "/assets/library/covers/qsrc/ilam-al-muwaqqiin.svg"
+    },
+    {
       "id": "majmu-al-fatawa",
       "title": "Majmūʿ al-Fatāwā",
       "author": "Aḥmad ibn ʿAbd al-Ḥalīm Ibn Taymiyyah",
       "category": "Fatāwā und ʿAqīdah",
       "aliases": [
         "Majmu al-Fatawa",
-        "Majmūʿ Fatāwā Ibn Taymiyyah"
+        "Majmūʿ Fatāwā Ibn Taymiyyah",
+        "al-Muṣannaf / al-Awsaṭ / al-Mughnī / Majmūʿ al-Fatāwā"
       ],
       "verification": "verified",
       "postIds": [
-        "allahs-stimme-nicht-wie-die-stimmen-der-schoepfung-112",
         "gueltigkeit-des-gebets-vs-urteil-ueber-personen-124",
         "ibn-taymiyyah-ghulat-takfir-durch-suenden-352",
         "ibn-taymiyyah-mittler-zur-anrufung-gemacht-164",
         "muhakamah-ablehnung-des-urteils-ist-ablehnung-der-herrschaft-allahs-332",
         "muhakamah-gehorsam-gegenueber-gelehrten-hat-grenzen-338",
-        "recht-zurueckholen-nicht-automatisch-schirk-akbar-162",
         "refutation-094-allah-mutakallim",
         "shirk-durch-anrufung-der-toten-und-abwesenden-207",
         "shirk-in-der-not-die-hilfe-gehort-allah-allein-206",
@@ -200,13 +384,146 @@
       ],
       "quotedScholars": [
         "Aḥmad ibn Ḥanbal",
-        "al-Bukhārī, Aḥmad ibn Ḥanbal und Ibn Taymiyyah",
-        "aṭ-Ṭabarī, al-Māwardī, Ibn Qudāmah und Ibn Taymiyyah",
         "Ibn Taymiyyah",
         "Ibn ʿUmar, al-Ḥasan al-Baṣrī und Ibn Taymiyyah"
       ],
-      "postCount": 13,
+      "postCount": 11,
       "coverUrl": "/assets/library/covers/qsrc/majmu-al-fatawa.svg"
+    },
+    {
+      "id": "irsad-al-fuhul",
+      "title": "Iršād al-Fuḥūl",
+      "author": "aš-Šawkānī",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ijma-auch-einzeln-uberlieferter-konsens-hat-beweiskraft-217"
+      ],
+      "quotedScholars": [
+        "aš-Šawkānī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/irsad-al-fuhul.svg"
+    },
+    {
+      "id": "juma-al-ilm",
+      "title": "Jumāʿ al-ʿIlm",
+      "author": "ash-Shāfiʿī",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ash-shafii-ijma-nicht-leichtfertig-behaupten-438"
+      ],
+      "quotedScholars": [
+        "Imām ash-Shāfiʿī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/juma-al-ilm.svg"
+    },
+    {
+      "id": "adwa-al-bayan",
+      "title": "Aḍwāʾ al-Bayān",
+      "author": "ash-Shanqīṭī",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "muhakamah-rabbi-und-gesetzgeber-sind-nicht-zu-trennen-328"
+      ],
+      "quotedScholars": [
+        "ash-Shanqīṭī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/adwa-al-bayan.svg"
+    },
+    {
+      "id": "madarij-as-salikin",
+      "title": "Madārij as-Sālikīn",
+      "author": "Ibn al-Qayyim",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "muhakamah-die-herzen-muessen-das-urteil-akzeptieren-331",
+        "muhakamah-wer-allahs-urteil-verlaesst-muss-differenziert-beurteilt-werden-334"
+      ],
+      "quotedScholars": [
+        "Ibn al-Qayyim"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/madarij-as-salikin.svg"
+    },
+    {
+      "id": "al-bidayah-wa-n-nihayah",
+      "title": "al-Bidāyah wa-n-Nihāyah",
+      "author": "Ibn Kathīr",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "muhakamah-wer-anderes-urteil-schoener-findet-329"
+      ],
+      "quotedScholars": [
+        "Ibn Kathīr"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-bidayah-wa-n-nihayah.svg"
+    },
+    {
+      "id": "al-mughni",
+      "title": "al-Mughnī",
+      "author": "Ibn Qudāmah",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "fiqh-der-richter-ist-weg-zur-ruckholung-des-rechts-212",
+        "hudud-nicht-in-dar-al-harb-136",
+        "ijma-nafaqah-ist-durch-buch-sunnah-und-konsens-verpflichtend-219"
+      ],
+      "quotedScholars": [
+        "Ibn Qudāmah"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/al-mughni.svg"
+    },
+    {
+      "id": "masail-al-imam-ahmad-riwayat-ibnuhu-abdullah",
+      "title": "Masāʾil al-Imām Aḥmad riwāyat ibnuhu ʿAbdullāh",
+      "author": "ibnuhu ʿAbdullāh",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [
+        "Masāʾil al-Imām Aḥmad riwāyat ʿAbdullāh"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "fiqh-haram-bleibt-haram-aber-unrecht-bleibt-unrecht-215",
+        "imam-ahmad-gerechtigkeit-haram-nicht-aufwerten-159",
+        "imam-ahmad-witr-anfang-der-nacht-397"
+      ],
+      "quotedScholars": [
+        "Imām Aḥmad ibn Ḥanbal"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/masail-al-imam-ahmad-riwayat-ibnuhu-abdullah.svg"
+    },
+    {
+      "id": "minhag-at-tasis-wa-t-taqdis",
+      "title": "Minhāǧ at-Taʾsīs wa-t-Taqdīs",
+      "author": "ʿAbd al-Laṭīf b. ʿAbd ar-Raḥmān Āl aš-Šaykh",
+      "category": "Fiqh und Uṣūl",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "hukm-muhakamah-tahkim-fremder-gesetze-istihlal-545"
+      ],
+      "quotedScholars": [
+        "ʿAbd al-Laṭīf b. ʿAbd ar-Raḥmān Āl aš-Šaykh"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/minhag-at-tasis-wa-t-taqdis.svg"
     },
     {
       "id": "sunan-abi-dawud",
@@ -215,7 +532,8 @@
       "category": "Ḥadīṯ",
       "aliases": [
         "Sunan Abu Dawud",
-        "Sunan Abū Dāwūd"
+        "Sunan Abū Dāwūd",
+        "Sunan Abī Dāwūd / Sharḥ Muslim / ʿUmdat al-Qārī"
       ],
       "verification": "verified",
       "postIds": [
@@ -242,13 +560,35 @@
       "coverUrl": "/assets/library/covers/qsrc/sunan-abi-dawud.svg"
     },
     {
+      "id": "gharib-al-hadith",
+      "title": "Gharīb al-Ḥadīth",
+      "author": "Abū ʿUbaid al-Qāsim ibn Sallām",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Gharib al-Hadith"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
+        "abu-ubaid-hayaa-keine-ausrede-gutes-zu-verlassen-160"
+      ],
+      "quotedScholars": [
+        "Abu Ubaid al-Qasim ibn Sallam",
+        "Abū ʿUbaid al-Qāsim b. Sallām"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/gharib-al-hadith.svg"
+    },
+    {
       "id": "musnad-ahmad",
       "title": "Musnad Aḥmad",
       "author": "Aḥmad ibn Ḥanbal",
       "category": "Ḥadīṯ",
       "aliases": [
         "Musnad Imam Ahmad",
-        "Musnad Aḥmad ibn Ḥanbal"
+        "Musnad Aḥmad ibn Ḥanbal",
+        "Musnad Aḥmad / ash-Shifāʾ",
+        "al-Mustadrak; Musnad Aḥmad; as-Sunan al-Kubrā lil-Bayhaqī"
       ],
       "verification": "verified",
       "postIds": [
@@ -280,6 +620,149 @@
       "coverUrl": "/assets/library/covers/qsrc/sunan-an-nasai.svg"
     },
     {
+      "id": "as-silsilah-as-sahihah",
+      "title": "as-Silsilah aṣ-Ṣaḥīḥah",
+      "author": "al-Albānī",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "akhlak-schlechter-charakter-verdirbt-taten-001"
+      ],
+      "quotedScholars": [
+        "Prophet ﷺ"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/as-silsilah-as-sahihah.svg"
+    },
+    {
+      "id": "sahih-ibn-hibban",
+      "title": "Ṣaḥīḥ Ibn Ḥibbān",
+      "author": "Anas ibn Mālik.",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "dua-bei-schwierigkeit-001",
+        "mahdi-bayah-makkah-nicht-istanbul-138"
+      ],
+      "quotedScholars": [
+        "Prophet ﷺ"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/sahih-ibn-hibban.svg"
+    },
+    {
+      "id": "al-umm-ikhtilaf-al-hadith",
+      "title": "al-Umm / Ikhtilāf al-Ḥadīth",
+      "author": "ash-Shāfiʿī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "al-Umm"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "fiqh-monche-werden-nicht-gezielt-getotet-214",
+        "imam-ash-shafii-ueber-tahakum-weniger-als-shirk-123",
+        "imam-shafii-moenche-nicht-gezielt-getoetet-167",
+        "imam-shafii-wasser-wird-durch-veraenderung-unrein-354"
+      ],
+      "quotedScholars": [
+        "ash-Shāfiʿī",
+        "Imām aš-Šāfiʿī",
+        "Imām ash-Shāfiʿī"
+      ],
+      "postCount": 4,
+      "coverUrl": "/assets/library/covers/qsrc/al-umm-ikhtilaf-al-hadith.svg"
+    },
+    {
+      "id": "al-jarh-wa-t-tadil",
+      "title": "al-Jarḥ wa-t-Taʿdīl",
+      "author": "Ibn Abī Ḥātim",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "abu-hatim-hadithkritik-ist-wissen-393"
+      ],
+      "quotedScholars": [
+        "Abū Ḥātim ar-Rāzī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-jarh-wa-t-tadil.svg"
+    },
+    {
+      "id": "alam-al-muwaqqiin",
+      "title": "Aʿlām al-Muwaqqiʿīn",
+      "author": "Ibn al-Qayyim",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Aʿlām al-Muwaqqiʿīn / überliefert von Ibn al-Qayyim"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "athar-widerlegung-der-hadith-wird-nicht-wegen-meinung-verlassen-312",
+        "imam-ahmad-nimm-von-dort-wo-die-imame-nahmen-283"
+      ],
+      "quotedScholars": [
+        "Imām Aḥmad ibn Ḥanbal",
+        "Imām ash-Shāfiʿī"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/alam-al-muwaqqiin.svg"
+    },
+    {
+      "id": "kitab-al-iman",
+      "title": "Kitāb al-Īmān",
+      "author": "Ibn Mandah",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "makan-ibn-mandah-himmel-tauhid-420"
+      ],
+      "quotedScholars": [
+        "Ibn Mandah"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/kitab-al-iman.svg"
+    },
+    {
+      "id": "tawil-mukhtalif-al-hadith",
+      "title": "Taʾwīl Mukhtalif al-Ḥadīth",
+      "author": "Ibn Qutaybah",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ibn-qutaybah-ahl-al-hadith-bewahren-die-uberlieferung-296",
+        "ibn-qutaybah-scheinbarer-widerspruch-wird-mit-wissen-geloest-297"
+      ],
+      "quotedScholars": [
+        "Ibn Qutaybah"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/tawil-mukhtalif-al-hadith.svg"
+    },
+    {
+      "id": "sharh-hadith-an-nuzul",
+      "title": "Sharḥ Ḥadīth an-Nuzūl",
+      "author": "Ibn Taymiyyah",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "makan-hammad-bin-zayd-nuzul-416",
+        "makan-uluw-nuzul-salaf-423"
+      ],
+      "quotedScholars": [
+        "Ḥammād b. Zayd",
+        "Ḥammād b. Zayd, Isḥāq b. Rāhawayh, al-Fuḍayl b. ʿIyāḍ"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/sharh-hadith-an-nuzul.svg"
+    },
+    {
       "id": "sahih-al-bukhari",
       "title": "Ṣaḥīḥ al-Bukhārī",
       "author": "Muḥammad ibn Ismāʿīl al-Bukhārī",
@@ -287,7 +770,13 @@
       "aliases": [
         "Sahih al-Bukhari",
         "Ṣaḥīḥ Bukhārī",
-        "al-Jāmiʿ aṣ-Ṣaḥīḥ"
+        "al-Jāmiʿ aṣ-Ṣaḥīḥ",
+        "Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim",
+        "Ṣaḥīḥ al-Bukhārī / Musnad Aḥmad / al-Muwaṭṭaʾ / Fatḥ al-Bārī",
+        "Ṣaḥīḥ al-Bukhārī / Fatḥ al-Bārī",
+        "Ṣaḥīḥ al-Bukhārī / Fatḥ al-Bārī Ibn Rajab / as-Sunan al-Kubrā",
+        "Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim",
+        "Ṣaḥīḥ al-Bukhārī / Ṣaḥīḥ Muslim"
       ],
       "verification": "verified",
       "postIds": [
@@ -308,6 +797,7 @@
         "der-nachbar-muss-vor-deinem-schaden-sicher-sein-189",
         "der-verlust-des-glaubens-wegen-suenden-125",
         "die-mutter-hat-das-groesste-recht-auf-gute-begleitung-184",
+        "ein-gutes-wort-ist-sadaqah-445",
         "erlaubnis-wird-dreimal-erbeten-192",
         "fiqh-die-frau-wird-nicht-gegen-ihren-willen-verheiratet-243",
         "fiqh-halal-haram-schubuhat-001",
@@ -376,7 +866,7 @@
         "ʿUmar ibn al-Khaṭṭāb, al-Ḥasan al-Baṣrī und Maymūn ibn Mihrān",
         "ʿUthmān b. ʿAffān"
       ],
-      "postCount": 59,
+      "postCount": 60,
       "coverUrl": "/assets/library/covers/qsrc/sahih-al-bukhari.svg"
     },
     {
@@ -385,7 +875,8 @@
       "author": "Muḥammad ibn Yazīd Ibn Mājah al-Qazwīnī",
       "category": "Ḥadīṯ",
       "aliases": [
-        "Sunan Ibn Majah"
+        "Sunan Ibn Majah",
+        "Sunan Ibn Mājah / al-Muwaṭṭaʾ"
       ],
       "verification": "verified",
       "postIds": [
@@ -404,7 +895,11 @@
       "category": "Ḥadīṯ",
       "aliases": [
         "Sunan at-Tirmidhi",
-        "Jami at-Tirmidhi"
+        "Jami at-Tirmidhi",
+        "Tafsīr aṭ-Ṭabarī / Jāmiʿ at-Tirmidhī",
+        "al-Muṣannaf / Jāmiʿ at-Tirmidhī",
+        "Sunan at-Tirmidhī",
+        "Ṣaḥīḥ Muslim / Jāmiʿ at-Tirmidhī / Tafsīr aṭ-Ṭabarī"
       ],
       "verification": "verified",
       "postIds": [
@@ -458,7 +953,8 @@
       "category": "Ḥadīṯ",
       "aliases": [
         "Sahih Muslim",
-        "al-Musnad aṣ-Ṣaḥīḥ"
+        "al-Musnad aṣ-Ṣaḥīḥ",
+        "Ṣaḥīḥ Muslim, Muqaddimah"
       ],
       "verification": "verified",
       "postIds": [
@@ -473,7 +969,6 @@
         "die-akhirah-lasst-weltliche-harte-klein-werden-237",
         "diese-welt-ist-nicht-der-ruheort-des-glaubigen-226",
         "ein-einziger-tauchgang-zeigt-die-wahrheit-der-dunya-227",
-        "ein-gutes-wort-ist-sadaqah-445",
         "entferne-schaden-vom-weg-196",
         "fiqh-dunya-und-offenbarung-001",
         "fitrah-schayatin-irrefuehrung-410",
@@ -511,8 +1006,60 @@
         "ʿĀʾishah",
         "ʿĀʾishah رضي الله عنها"
       ],
-      "postCount": 34,
+      "postCount": 33,
       "coverUrl": "/assets/library/covers/qsrc/sahih-muslim.svg"
+    },
+    {
+      "id": "zitiert-in-manhaj-an-naqd-fi-ulum-al-hadith",
+      "title": "zitiert in Manhaj an-Naqd fī ʿUlūm al-Ḥadīth",
+      "author": "Sufyān ath-Thawrī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Manhaj an-Naqd fī ʿUlūm al-Ḥadīth"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "athar-widerlegung-isnad-ist-die-waffe-des-glaeubigen-314"
+      ],
+      "quotedScholars": [
+        "Sufyān ath-Thawrī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/zitiert-in-manhaj-an-naqd-fi-ulum-al-hadith.svg"
+    },
+    {
+      "id": "taliqat-ash-shaykh-al-barrak-ala-al-mukhalafat-al-aqdiyyah-fi-fath-al-ba",
+      "title": "Taʿlīqāt ash-Shaykh al-Barrāk ʿalā al-Mukhālafāt al-ʿAqdiyyah fī Fatḥ al-Bārī",
+      "author": "ʿAbd ar-Raḥmān b. Nāṣir al-Barrāk",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Taʿlīqāt ʿalā al-Mukhālafāt al-ʿAqdiyyah fī Fatḥ al-Bārī"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "makan-mujmal-al-barrak-421"
+      ],
+      "quotedScholars": [
+        "ʿAbd ar-Raḥmān b. Nāṣir al-Barrāk"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/taliqat-ash-shaykh-al-barrak-ala-al-mukhalafat-al-aqdiyyah-fi-fath-al-ba.svg"
+    },
+    {
+      "id": "musnad-al-bazzar",
+      "title": "Musnad al-Bazzār",
+      "author": "ʿImrān ibn Ḥuṣayn.",
+      "category": "Ḥadīṯ",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "keine-tiyarah-001"
+      ],
+      "quotedScholars": [
+        "Prophet ﷺ"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/musnad-al-bazzar.svg"
     },
     {
       "id": "sunan-ad-darimi",
@@ -523,7 +1070,9 @@
         "Sunan ad-Darimi",
         "as-Sunan",
         "ad-Dārimī, as-Sunan",
-        "Sunan ad-Dārimī, Muqaddimah"
+        "Sunan ad-Dārimī, Muqaddimah",
+        "al-Madkhal ilā as-Sunan al-Kubrā",
+        "al-Mustadrak / as-Sunan al-Kubrā"
       ],
       "verification": "verified",
       "postIds": [
@@ -571,6 +1120,311 @@
       "coverUrl": "/assets/library/covers/qsrc/muwatta-malik.svg"
     },
     {
+      "id": "al-uluw-lil-aliyy-al-ghaffar",
+      "title": "al-ʿUluw lil-ʿAliyy al-Ghaffār",
+      "author": "adh-Dhahabī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "makan-harb-kirmani-jahmiyyah-417"
+      ],
+      "quotedScholars": [
+        "Ḥarb al-Kirmānī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-uluw-lil-aliyy-al-ghaffar.svg"
+    },
+    {
+      "id": "al-asma-wa-s-sifat",
+      "title": "al-Asmāʾ wa-ṣ-Ṣifāt",
+      "author": "al-Bayhaqī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "athar-widerlegung-istiwa-wird-bestaetigt-ohne-wie-308"
+      ],
+      "quotedScholars": [
+        "Imām Mālik ibn Anas"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-asma-wa-s-sifat.svg"
+    },
+    {
+      "id": "al-faqih-wa-l-mutafaqqih",
+      "title": "al-Faqīh wa-l-Mutafaqqih",
+      "author": "al-Khaṭīb al-Baghdādī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "manhaj-wahrheit-ist-nicht-an-personen-gebunden-211"
+      ],
+      "quotedScholars": [
+        "ʿAlī ibn Abī Ṭālib"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-faqih-wa-l-mutafaqqih.svg"
+    },
+    {
+      "id": "al-hawi-al-kabir",
+      "title": "al-Ḥāwī al-Kabīr",
+      "author": "al-Māwardī",
+      "category": "Quellenwerk",
+      "aliases": [
+        "Jāmiʿ al-Bayān, al-Ḥāwī al-Kabīr, al-Muġnī und Majmūʿ al-Fatāwā"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "ijma-riba-ist-durch-quran-sunnah-und-konsens-verboten-216",
+        "recht-zuruckholen-ist-nicht-automatisch-tahakum-zum-tagut-203",
+        "recht-zurueckholen-nicht-automatisch-schirk-akbar-162"
+      ],
+      "quotedScholars": [
+        "Abū l-Ḥasan al-Māwardī",
+        "al-Māwardī",
+        "aṭ-Ṭabarī, al-Māwardī, Ibn Qudāmah und Ibn Taymiyyah"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/al-hawi-al-kabir.svg"
+    },
+    {
+      "id": "al-mujam-al-kabir",
+      "title": "al-Muʿjam al-Kabīr",
+      "author": "al-Ṭabarānī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "takfir-bil-umum-399"
+      ],
+      "quotedScholars": [
+        "Quss ibn Saʿīdah al-Iyādī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-mujam-al-kabir.svg"
+    },
+    {
+      "id": "in-ad-durar-as-saniyyah-fi-l-ajwibah-an-najdiyyah",
+      "title": "in: ad-Durar as-Saniyyah fī l-Ajwibah an-Najdiyyah",
+      "author": "Ḥamad ibn ʿAtīq",
+      "category": "Quellenwerk",
+      "aliases": [
+        "ad-Durar as-Saniyyah fī l-Ajwibah an-Najdiyyah"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "takfir-bil-umum-403"
+      ],
+      "quotedScholars": [
+        "Ḥamad ibn ʿAtīq"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/in-ad-durar-as-saniyyah-fi-l-ajwibah-an-najdiyyah.svg"
+    },
+    {
+      "id": "manaqib-al-imam-ahmad",
+      "title": "Manāqib al-Imām Aḥmad",
+      "author": "Ibn al-Jawzī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "athar-widerlegung-wer-den-hadith-zurueckweist-313"
+      ],
+      "quotedScholars": [
+        "Imām Aḥmad ibn Ḥanbal"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/manaqib-al-imam-ahmad.svg"
+    },
+    {
+      "id": "ibtal-al-hiyal",
+      "title": "Ibṭāl al-Ḥiyal",
+      "author": "Ibn Baṭṭah al-ʿUkbarī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "abdullah-ibn-masud-wissen-gottesfurcht-412"
+      ],
+      "quotedScholars": [
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/ibtal-al-hiyal.svg"
+    },
+    {
+      "id": "al-furu-wa-tashih-al-furu",
+      "title": "al-Furūʿ wa-Taṣḥīḥ al-Furūʿ",
+      "author": "Ibn Mufliḥ",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "imam-ahmad-und-tawassul-mit-dem-propheten-128"
+      ],
+      "quotedScholars": [
+        "Ibn Mufliḥ und Aḥmad ibn Ḥanbal"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-furu-wa-tashih-al-furu.svg"
+    },
+    {
+      "id": "al-jami-li-ahkam-al-quran",
+      "title": "al-Jāmiʿ li-Aḥkām al-Qurʾān",
+      "author": "al-Qurṭubī",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "al-qurtubi-istiwa-bedeutung-bekannt-133",
+        "hukm-muhakamah-fasiq-muslim-bei-sunde-373",
+        "hukm-muhakamah-qurtubi-zwei-faelle-357",
+        "hukm-muhakamah-radd-des-quran-387",
+        "ijma-keine-totung-unter-zwang-218"
+      ],
+      "quotedScholars": [
+        "al-Qurṭubī"
+      ],
+      "postCount": 5,
+      "coverUrl": "/assets/library/covers/qsrc/al-jami-li-ahkam-al-quran.svg"
+    },
+    {
+      "id": "al-maidah-5-42",
+      "title": "al-Māʾidah 5:42",
+      "author": "aṭ-Ṭabarī und Ibn Kathīr",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "hukm-muhakamah-richte-mit-gerechtigkeit-385"
+      ],
+      "quotedScholars": [
+        "Qurʾān"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-maidah-5-42.svg"
+    },
+    {
+      "id": "tawil-mushkil-al-quran",
+      "title": "Taʾwīl Mushkil al-Qurʾān",
+      "author": "Ibn Qutaybah",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "imrar-nicht-tafwid-ibn-qutaybah-131"
+      ],
+      "quotedScholars": [
+        "Ibn Qutaybah"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/tawil-mushkil-al-quran.svg"
+    },
+    {
+      "id": "al-istidhkar",
+      "title": "al-Istidhkār",
+      "author": "Ibn ʿAbd al-Barr",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ibn-abd-al-barr-nuzul-ohne-kayf-137",
+        "ibn-abd-al-barr-nuzul-ohne-kayf-slides-426"
+      ],
+      "quotedScholars": [
+        "Ibn ʿAbd al-Barr"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/al-istidhkar.svg"
+    },
+    {
+      "id": "an-nahl-16-89-al-gathiyah-45-18",
+      "title": "an-Naḥl 16:89 / al-Ǧāthiyah 45:18",
+      "author": "Muḥammad ibn Jarīr aṭ-Ṭabarī / Ismāʿīl ibn ʿUmar Ibn Kathīr",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "hukm-muhakamah-offenbarung-erklaert-alles-370"
+      ],
+      "quotedScholars": [
+        "Qurʾān"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/an-nahl-16-89-al-gathiyah-45-18.svg"
+    },
+    {
+      "id": "quran-khalq-afal-al-ibad",
+      "title": "Qurʾān / Khalq Afʿāl al-ʿIbād",
+      "author": "Qurʾān",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "yusufs-brueder-verteidigten-sich-vor-einem-fremden-system-126"
+      ],
+      "quotedScholars": [
+        "Yūsufs Brüder und al-Bukhārī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/quran-khalq-afal-al-ibad.svg"
+    },
+    {
+      "id": "surah-an-nisa-4-105",
+      "title": "Sūrah an-Nisāʾ 4:105.",
+      "author": "Qurʾān",
+      "category": "Qurʾān",
+      "aliases": [
+        "an-Nisāʾ 4:105"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "hukm-muhakamah-richten-nach-offenbarung-362"
+      ],
+      "quotedScholars": [
+        "Qurʾān"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/surah-an-nisa-4-105.svg"
+    },
+    {
+      "id": "surah-asch-schura-42-21-surah-an-nahl-16-116",
+      "title": "Sūrah asch-Schūrā 42:21; Sūrah an-Naḥl 16:116.",
+      "author": "Qurʾān",
+      "category": "Qurʾān",
+      "aliases": [
+        "asch-Schūrā 42:21 und an-Naḥl 16:116"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "hukm-muhakamah-taschri-ohne-erlaubnis-allahs-361"
+      ],
+      "quotedScholars": [
+        "Qurʾān"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/surah-asch-schura-42-21-surah-an-nahl-16-116.svg"
+    },
+    {
+      "id": "zusammenfuhrung-der-salaf-aussagen",
+      "title": "Zusammenführung der Salaf-Aussagen",
+      "author": "Zusammenführung der Belege aus Tafsīr aṭ-Ṭabarī",
+      "category": "Qurʾān",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "hukm-muhakamah-zusammenfassung-grenze-kufr-363"
+      ],
+      "quotedScholars": [
+        "Ahlus-Sunnah"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/zusammenfuhrung-der-salaf-aussagen.svg"
+    },
+    {
       "id": "tahdhib-al-kamal",
       "title": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
       "author": "Jamāl ad-Dīn al-Mizzī",
@@ -585,13 +1439,35 @@
       "coverUrl": "/assets/library/covers/qsrc/tahdhib-al-kamal.svg"
     },
     {
+      "id": "madarik-at-tanzil",
+      "title": "Madārik at-Tanzīl",
+      "author": "an-Nasafī",
+      "category": "Tafsīr",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "tawhid-340-der-sinn-der-schoepfung-ist-ibadah"
+      ],
+      "quotedScholars": [
+        "Ibn ʿAbbās"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/madarik-at-tanzil.svg"
+    },
+    {
       "id": "tafsir-ibn-kathir",
       "title": "Tafsīr al-Qurʾān al-ʿAẓīm",
       "author": "Ismāʿīl ibn ʿUmar Ibn Kathīr",
       "category": "Tafsīr",
       "aliases": [
         "Tafsir Ibn Kathir",
-        "Tafsīr Ibn Kathīr"
+        "Tafsīr Ibn Kathīr",
+        "Jāmiʿ al-Bayān / Tafsīr Ibn Kathīr",
+        "Tafsīr Ibn Kathīr / Tafsīr aṭ-Ṭabarī",
+        "Tafsīr Ibn Kathīr / Jāmiʿ al-Bayān",
+        "Tafsīr al-Qurṭubī / Tafsīr Ibn Kathīr",
+        "Tafsīr Ibn Kathīr / Tafsīr al-Qurṭubī",
+        "Jāmiʿ al-Bayān / Tafsīr Ibn Kathīr / Aḥkām al-Qurʾān"
       ],
       "verification": "verified",
       "postIds": [
@@ -697,7 +1573,10 @@
       "aliases": [
         "Tafsir at-Tabari",
         "Tafsīr aṭ-Ṭabarī",
-        "Jami al-Bayan"
+        "Jami al-Bayan",
+        "Jāmiʿ al-Bayān",
+        "Tafsīr aṭ-Ṭabarī / Zād al-Masīr",
+        "Maʿānī al-Qurʾān / Tafsīr aṭ-Ṭabarī"
       ],
       "verification": "verified",
       "postIds": [
@@ -803,13 +1682,127 @@
       "category": "ʿAqīdah und Sunnah",
       "aliases": [
         "Kitāb as-Sunnah al-Khallal",
-        "as-Sunnah al-Khallāl"
+        "as-Sunnah al-Khallāl",
+        "Kitāb as-Sunnah"
       ],
       "verification": "verified",
-      "postIds": [],
-      "quotedScholars": [],
-      "postCount": 0,
+      "postIds": [
+        "aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran",
+        "yazid-harun-fitrah-istiwa-jahmiyyah-428"
+      ],
+      "quotedScholars": [
+        "Aḥmad ibn Ḥanbal",
+        "Yazīd ibn Hārūn"
+      ],
+      "postCount": 2,
       "coverUrl": "/assets/library/covers/qsrc/as-sunnah-al-khallal.svg"
+    },
+    {
+      "id": "kitab-al-arsh",
+      "title": "Kitāb al-ʿArsh",
+      "author": "Abū Jaʿfar Muḥammad ibn ʿUthmān ibn Abī Shaybah",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-439"
+      ],
+      "quotedScholars": [
+        "Abū Jaʿfar Muḥammad ibn ʿUthmān ibn Abī Shaybah"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/kitab-al-arsh.svg"
+    },
+    {
+      "id": "al-asma-was-sifat",
+      "title": "al-Asmāʾ wa’ṣ-Ṣifāt",
+      "author": "al-Bayhaqī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "al-awzai-sifat-allah-ueber-dem-thron-001"
+      ],
+      "quotedScholars": [
+        "al-Awzāʿī"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/al-asma-was-sifat.svg"
+    },
+    {
+      "id": "majma-az-zawaid-wa-manba-al-fawaid",
+      "title": "Majmaʿ az-Zawāʾid wa Manbaʿ al-Fawāʾid",
+      "author": "al-Haythamī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "ibn-masud-ittiba-athar-001"
+      ],
+      "quotedScholars": [
+        "ʿAbdullāh ibn Masʿūd"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/majma-az-zawaid-wa-manba-al-fawaid.svg"
+    },
+    {
+      "id": "lawami-al-anwar-al-bahiyyah",
+      "title": "Lawāmiʿ al-Anwār al-Bahiyyah",
+      "author": "as-Saffārīnī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "aqidah-074-die-sifat-ohne-wie-frage"
+      ],
+      "quotedScholars": [
+        "Umm Salamah und Imām Mālik"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/lawami-al-anwar-al-bahiyyah.svg"
+    },
+    {
+      "id": "kitab-az-zuhd",
+      "title": "Kitāb az-Zuhd",
+      "author": "Asad ibn Mūsā",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "Kitāb az-Zuhd wa-r-Raqāʾiq",
+        "az-Zuhd wa-r-Raqāʾiq"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "al-hasan-al-basri-gute-taten-und-furcht-434",
+        "asad-musa-nuzul-zur-abrechnung-425",
+        "zuhd-409"
+      ],
+      "quotedScholars": [
+        "al-Ḥasan al-Baṣrī",
+        "Asad ibn Mūsā",
+        "ʿAbdullāh ibn al-Mubārak"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/kitab-az-zuhd.svg"
+    },
+    {
+      "id": "ar-risalah",
+      "title": "ar-Risālah",
+      "author": "ash-Shāfiʿī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "makan-ibn-abi-zayd-fawq-arsh-bi-dhatih-418",
+        "muhakamah-das-urteil-des-propheten-ist-verpflichtend-335",
+        "usul-des-manhaj-beweis-vor-meinung-244"
+      ],
+      "quotedScholars": [
+        "ash-Shāfiʿī",
+        "Ibn Abī Zayd al-Qayrawānī",
+        "Imām ash-Shāfiʿī"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/ar-risalah.svg"
     },
     {
       "id": "sharh-usul-itiqad-lalakai",
@@ -819,7 +1812,11 @@
       "aliases": [
         "Sharh Usul I'tiqad",
         "Uṣūl Iʿtiqād al-Lālakāʾī",
-        "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah"
+        "al-Lālakāʾī, Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah",
+        "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Khalq Afʿāl al-ʿIbād; Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah"
       ],
       "verification": "verified",
       "postIds": [
@@ -857,6 +1854,8 @@
         "refutation-097-ruyah-bila-kayf",
         "refutation-098-ibn-uyaynah-jahmi",
         "sufyan-thawri-iman-athar-001",
+        "takfir-bil-umum-401",
+        "takfir-bil-umum-402",
         "ubayy-sunnah-besser-als-uebertreibung-392"
       ],
       "quotedScholars": [
@@ -864,6 +1863,7 @@
         "Abū Ḥātim ar-Rāzī und Abū Zurʿah ar-Rāzī",
         "Abū Jaʿfar Muḥammad ibn Jarīr aṭ-Ṭabarī",
         "Abū Zurʿah ar-Rāzī",
+        "Abū Zurʿah ar-Rāzī und Abū Ḥātim ar-Rāzī",
         "Abū Zurʿah und Abū Ḥātim ar-Rāzī",
         "Abū ʿUbayd al-Qāsim ibn Sallām",
         "Aḥmad ibn Ḥanbal",
@@ -871,6 +1871,7 @@
         "al-Awzāʿī, Sufyān ath-Thawrī, Mālik ibn Anas und al-Layth ibn Saʿd",
         "al-Fuḍayl b. ʿIyāḍ",
         "al-Lālakāʾī",
+        "Imām Mālik ibn Anas",
         "Isḥāq ibn Rāhawayh",
         "Muḥammad ibn Jaʿfar",
         "Muḥammad ibn Shihāb az-Zuhrī",
@@ -881,8 +1882,44 @@
         "ʿAbd ar-Raḥmān ibn Mahdī",
         "ʿAmr ibn Dīnār"
       ],
-      "postCount": 35,
+      "postCount": 37,
       "coverUrl": "/assets/library/covers/qsrc/sharh-usul-itiqad-lalakai.svg"
+    },
+    {
+      "id": "sharh-al-aqidah-at-tahawiyyah",
+      "title": "Sharḥ al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+      "author": "Ibn Abī al-ʿIzz",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "aqidah-075-paradies-und-hoelle-sind-erschaffen"
+      ],
+      "quotedScholars": [
+        "Ibn Abī al-ʿIzz"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/sharh-al-aqidah-at-tahawiyyah.svg"
+    },
+    {
+      "id": "tabaqat-al-hanabilah",
+      "title": "Ṭabaqāt al-Ḥanābilah",
+      "author": "Ibn Abī Yaʿlā",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "Khalq Afʿāl al-ʿIbād / Ṭabaqāt al-Ḥanābilah / Majmūʿ al-Fatāwā"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "al-barbahari-bidah-athar-001",
+        "allahs-stimme-nicht-wie-die-stimmen-der-schoepfung-112"
+      ],
+      "quotedScholars": [
+        "al-Barbahārī",
+        "al-Bukhārī, Aḥmad ibn Ḥanbal und Ibn Taymiyyah"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/tabaqat-al-hanabilah.svg"
     },
     {
       "id": "al-ibanah-ibn-battah",
@@ -896,7 +1933,6 @@
       "verification": "verified",
       "postIds": [
         "athar-widerlegung-mit-ahl-al-bidah-nicht-sitzen-316",
-        "das-lachen-allahs-bestaetigung-ohne-gleichsetzung-113",
         "ibn-battah-ahl-al-bidah-nicht-zum-herzen-lassen-294",
         "ibn-battah-das-fundament-ist-festhalten-an-der-jamaah-293",
         "ibn-battah-die-sunnah-ist-rettung-vor-spaltung-295",
@@ -904,12 +1940,81 @@
         "makan-ibn-battah-aala-makan-419"
       ],
       "quotedScholars": [
-        "Aḥmad ibn Ḥanbal",
         "Ibn Baṭṭah al-ʿUkbarī",
         "ʿAbdullāh ibn Masʿūd"
       ],
-      "postCount": 7,
+      "postCount": 6,
       "coverUrl": "/assets/library/covers/qsrc/al-ibanah-ibn-battah.svg"
+    },
+    {
+      "id": "lumat-al-itiqad",
+      "title": "Lumʿat al-Iʿtiqād",
+      "author": "Ibn Qudāmah",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "aqidah-die-waage-am-juengsten-tag-ist-wahr-258"
+      ],
+      "quotedScholars": [
+        "Ibn Qudāmah"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/lumat-al-itiqad.svg"
+    },
+    {
+      "id": "bayan-talbis-al-jahmiyyah",
+      "title": "Bayān Talbīs al-Jahmiyyah",
+      "author": "Ibn Taymiyyah",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [
+        "al-Ibānah al-Kubrā / Bayān Talbīs al-Jahmiyyah"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "das-lachen-allahs-bestaetigung-ohne-gleichsetzung-113",
+        "malik-istiva-ohne-wie-001"
+      ],
+      "quotedScholars": [
+        "Aḥmad ibn Ḥanbal",
+        "Mālik ibn Anas"
+      ],
+      "postCount": 2,
+      "coverUrl": "/assets/library/covers/qsrc/bayan-talbis-al-jahmiyyah.svg"
+    },
+    {
+      "id": "at-tamhid",
+      "title": "at-Tamhīd",
+      "author": "Ibn ʿAbd al-Barr",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "aqidah-072-iman-ist-wort-und-tat",
+        "aqidah-073-der-iman-nimmt-zu-und-ab",
+        "ibn-abd-al-barr-istiwa-sprache-bekannt-135"
+      ],
+      "quotedScholars": [
+        "Ibn ʿAbd al-Barr"
+      ],
+      "postCount": 3,
+      "coverUrl": "/assets/library/covers/qsrc/at-tamhid.svg"
+    },
+    {
+      "id": "masail-al-imam-ahmad-ahl-al-sunnah-wa-l-jamaah",
+      "title": "Masāʾil al-Imām Aḥmad / Ahl al-Sunnah wa-l-Jamāʿah",
+      "author": "Über Imām Aḥmad",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "verification": "verified",
+      "postIds": [
+        "imam-ahmad-iman-steigt-und-sinkt-282"
+      ],
+      "quotedScholars": [
+        "Imām Aḥmad ibn Ḥanbal"
+      ],
+      "postCount": 1,
+      "coverUrl": "/assets/library/covers/qsrc/masail-al-imam-ahmad-ahl-al-sunnah-wa-l-jamaah.svg"
     },
     {
       "id": "as-sunnah-abdullah-ahmad",
@@ -918,30 +2023,24 @@
       "category": "ʿAqīdah und Sunnah",
       "aliases": [
         "Kitāb as-Sunnah von ʿAbd Allāh ibn Aḥmad",
-        "Sunnah Abdullah ibn Ahmad"
+        "Sunnah Abdullah ibn Ahmad",
+        "Uṣūl as-Sunnah",
+        "Sharḥ as-Sunnah"
       ],
       "verification": "verified",
       "postIds": [
         "354-547",
-        "aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran",
         "athar-widerlegung-bidah-ist-nicht-kleinzureden-315",
         "athar-widerlegung-der-quran-ist-nicht-erschaffen-307",
-        "nuzul-allahs-ist-haqq-424",
-        "takfir-bil-umum-401",
-        "takfir-bil-umum-402",
-        "yazid-harun-fitrah-istiwa-jahmiyyah-428"
+        "nuzul-allahs-ist-haqq-424"
       ],
       "quotedScholars": [
-        "Abū Zurʿah ar-Rāzī und Abū Ḥātim ar-Rāzī",
-        "Aḥmad ibn Ḥanbal",
         "al-Barbahārī",
         "Imām Aḥmad ibn Ḥanbal",
-        "Imām Mālik ibn Anas",
         "Ismāʿīl ibn Yaḥyā al-Muzanī",
-        "Yazīd ibn Hārūn",
         "Zuhayr ibn ʿAbbād"
       ],
-      "postCount": 8,
+      "postCount": 4,
       "coverUrl": "/assets/library/covers/qsrc/as-sunnah-abdullah-ahmad.svg"
     },
     {
@@ -965,17 +2064,20 @@
       "category": "ʿAqīdah und Widerlegungen",
       "aliases": [
         "Radd ala al-Jahmiyyah",
-        "Widerlegung der Jahmiyyah von ad-Darimi"
+        "Widerlegung der Jahmiyyah von ad-Darimi",
+        "ar-Radd ʿalā az-Zanādiqah wa-l-Jahmiyyah"
       ],
       "verification": "verified",
       "postIds": [
         "ad-darimi-ityan-allahs-bedeutung-klar-132",
-        "ad-darimi-sifat-nuzul-001"
+        "ad-darimi-sifat-nuzul-001",
+        "makan-abdullah-ahmad-jahmiyyah-nicht-ueberall-414"
       ],
       "quotedScholars": [
+        "ʿAbdullāh ibn Aḥmad ibn Ḥanbal",
         "ʿUthmān ibn Saʿīd ad-Dārimī"
       ],
-      "postCount": 2,
+      "postCount": 3,
       "coverUrl": "/assets/library/covers/qsrc/ar-radd-ala-al-jahmiyyah-ad-darimi.svg"
     }
   ]

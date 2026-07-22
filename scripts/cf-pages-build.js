@@ -5,11 +5,17 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const syncBuildIds = path.join(__dirname, 'sync-app-build-ids.js');
+const authoritySync = path.join(__dirname, 'sync-library-authority-from-posts.js');
 const canonicalLibraryBuilder = path.join(__dirname, 'build-canonical-books-index.js');
 const testLibraryPatcher = path.join(__dirname, 'patch-test-canonical-library.js');
 const visitorLibraryPublisher = path.join(__dirname, 'publish-visitor-canonical-library.js');
 
 execFileSync(process.execPath, [syncBuildIds], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
+execFileSync(process.execPath, [authoritySync], {
   cwd: root,
   stdio: 'inherit'
 });
