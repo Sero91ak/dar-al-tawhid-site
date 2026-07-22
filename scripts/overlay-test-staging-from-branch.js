@@ -22,9 +22,12 @@ const OVERLAY_FILES = [
   "data/canonical-books-index.json",
   "data/library-metadata-report.json",
   "scripts/build-canonical-books-index.js",
+  "scripts/cf-pages-build.js",
   "scripts/generate-qsrc-covers.js",
   "scripts/patch-test-canonical-library.js"
 ];
+
+const OVERLAY_DIRS = ["test/assets/library/covers/qsrc"];
 
 function runGit(args) {
   return execFileSync("git", args, { cwd: ROOT, encoding: "utf8" }).trim();
@@ -36,6 +39,15 @@ function fileExistsOnRef(ref, file) {
     return true;
   } catch {
     return false;
+  }
+}
+
+function listFilesOnRef(ref, dir) {
+  try {
+    const out = runGit(["ls-tree", "-r", "--name-only", ref, "--", dir]);
+    return out ? out.split("\n").filter(Boolean) : [];
+  } catch {
+    return [];
   }
 }
 
@@ -51,12 +63,16 @@ function main() {
 
   const present = OVERLAY_FILES.filter((file) => fileExistsOnRef(REMOTE_REF, file));
   const missing = OVERLAY_FILES.filter((file) => !present.includes(file));
+  const coverFiles = OVERLAY_DIRS.flatMap((dir) => listFilesOnRef(REMOTE_REF, dir));
+  const checkoutFiles = [...new Set([...present, ...coverFiles])];
   if (!present.length) {
     throw new Error(`Keine Test-Staging-Dateien auf ${REMOTE_REF} gefunden.`);
   }
 
-  runGit(["checkout", REMOTE_REF, "--", ...present]);
-  console.log(`overlay-test-staging: ${present.length} Datei(en) von ${REMOTE_REF} übernommen`);
+  runGit(["checkout", REMOTE_REF, "--", ...checkoutFiles]);
+  console.log(
+    `overlay-test-staging: ${present.length} Datei(en) + ${coverFiles.length} Cover von ${REMOTE_REF} übernommen`
+  );
   if (missing.length) {
     console.log(`overlay-test-staging: optional fehlend (${missing.length}): ${missing.join(", ")}`);
   }
@@ -77,4 +93,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { OVERLAY_FILES, main };
+module.exports = { OVERLAY_FILES, OVERLAY_DIRS, main };

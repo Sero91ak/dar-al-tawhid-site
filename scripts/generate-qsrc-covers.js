@@ -5,6 +5,7 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const BOOKS_PATH = path.join(ROOT, "data", "books-library.json");
+const AUTHORITY_PATH = path.join(ROOT, "data", "library-authority.json");
 const COVERS_DIR = path.join(ROOT, "test", "assets", "library", "covers", "qsrc");
 
 function normalize(value) {
@@ -103,17 +104,45 @@ function coverSvg(book) {
 `;
 }
 
+function loadBooks() {
+  const byId = new Map();
+  if (fs.existsSync(AUTHORITY_PATH)) {
+    const authority = JSON.parse(fs.readFileSync(AUTHORITY_PATH, "utf8"));
+    for (const work of authority.works || []) {
+      if (!work?.id || work.verified === false) continue;
+      byId.set(work.id, {
+        id: work.id,
+        title: work.title,
+        author: work.author,
+        category: work.category
+      });
+    }
+  }
+  if (fs.existsSync(BOOKS_PATH)) {
+    const data = JSON.parse(fs.readFileSync(BOOKS_PATH, "utf8"));
+    for (const book of data.books || []) {
+      if (!book?.id) continue;
+      byId.set(book.id, {
+        id: book.id,
+        title: book.title || byId.get(book.id)?.title,
+        author: book.author || byId.get(book.id)?.author,
+        category: book.category || byId.get(book.id)?.category
+      });
+    }
+  }
+  return [...byId.values()];
+}
+
 function main() {
-  if (!fs.existsSync(BOOKS_PATH)) {
-    console.log("generate-qsrc-covers: books-library.json fehlt, übersprungen.");
+  const books = loadBooks();
+  if (!books.length) {
+    console.log("generate-qsrc-covers: keine Bücher gefunden, übersprungen.");
     return;
   }
-  const data = JSON.parse(fs.readFileSync(BOOKS_PATH, "utf8"));
-  const books = Array.isArray(data.books) ? data.books : [];
   fs.mkdirSync(COVERS_DIR, { recursive: true });
   let count = 0;
   for (const book of books) {
-    if (!book?.id) continue;
+    if (!book?.id || !book.title) continue;
     const file = path.join(COVERS_DIR, `${book.id}.svg`);
     fs.writeFileSync(file, coverSvg(book));
     count += 1;

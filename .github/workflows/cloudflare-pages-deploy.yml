@@ -8,6 +8,7 @@ on:
     paths:
       - index.html
       - test/index.html
+      - test/assets/library/**
       - wasiyyah/**
       - test/wasiyyah/**
       - version.json

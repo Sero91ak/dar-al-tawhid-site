@@ -140,6 +140,57 @@
   border-color: rgba(239, 215, 142, 0.42);
 }
 
+.account-home-hint--compact {
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 0 0 10px;
+  border-radius: 16px;
+}
+
+.account-home-hint--compact .account-home-hint-head {
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding-right: 24px;
+}
+
+.account-home-hint--compact .account-card-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.account-home-hint--compact .account-home-hint-title {
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.account-home-hint--compact .account-home-hint-desc {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.account-home-hint--compact .account-home-hint-dismiss {
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+}
+
+.account-home-hint-actions--inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.account-home-hint--compact .account-home-hint-actions button {
+  flex: none;
+  min-height: 34px;
+  font-size: 11px;
+  padding: 6px 8px;
+}
+
 .account-hub-card--compact {
   gap: 7px;
   padding: 10px 12px;

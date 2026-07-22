@@ -165,34 +165,31 @@
     if (!hasRealAccountSystem()) return "";
     const meta = getAccountSyncMeta();
     if (meta.state === "logged_out") {
-      return `<section class="account-home-hint premium-surface" data-account-home-banner aria-label="Konto und Synchronisierung">
+      return `<section class="account-home-hint account-home-hint--compact premium-surface" data-account-home-banner aria-label="Konto und Synchronisierung">
         <div class="account-home-hint-head">${accountIconSvg()}<div>
           <h3 class="account-home-hint-title">Konto &amp; Synchronisierung</h3>
-          <p class="account-home-hint-status">Auf Handy, iPad und Tablet</p>
+          <p class="account-home-hint-desc">Favoriten, Qurʾān &amp; Quiz auf allen Geräten · ohne E-Mail</p>
         </div></div>
-        <p class="account-home-hint-desc">Sichere Favoriten, Qurʾān-Lesestand und Quiz-Fortschritt auf allen deinen Geräten. Ohne E-Mail – nur Anmeldename und PIN.</p>
-        <div class="account-home-hint-actions">
+        <div class="account-home-hint-actions account-home-hint-actions--inline">
           <button type="button" class="primary" data-account-open-register>Registrieren</button>
           <button type="button" data-account-open-login>Anmelden</button>
         </div>
-        <p class="account-home-hint-note">Die App bleibt auch ohne Konto voll nutzbar.</p>
       </section>`;
     }
     if (isAccountHomeBannerDismissed()) return "";
-    const syncLine = meta.lastSyncLabel ? `Zuletzt synchronisiert: ${meta.lastSyncLabel}` : "Bereit zur Synchronisierung";
+    const syncLine = meta.lastSyncLabel ? `Zuletzt: ${meta.lastSyncLabel}` : "Bereit";
     const status = statusLabel(meta);
     const actions =
       meta.state === "error" || meta.state === "pending" || meta.state === "offline"
-        ? `<button type="button" class="primary" data-nav="account">Konto öffnen</button><button type="button" data-account-retry-sync>Jetzt synchronisieren</button>`
+        ? `<button type="button" class="primary" data-nav="account">Konto</button><button type="button" data-account-retry-sync>Sync</button>`
         : `<button type="button" class="primary" data-nav="account">Konto öffnen</button>`;
-    return `<section class="account-home-hint account-home-hint--synced premium-surface ${statusClass(meta.state)}" data-account-home-banner aria-label="Konto synchronisiert">
+    return `<section class="account-home-hint account-home-hint--compact account-home-hint--synced premium-surface ${statusClass(meta.state)}" data-account-home-banner aria-label="Konto synchronisiert">
       <div class="account-home-hint-head">${accountIconSvg()}<div>
         <h3 class="account-home-hint-title">✓ ${esc(meta.username || "Konto")}</h3>
-        <p class="account-home-hint-status ${statusClass(meta.state)}">${esc(status)}</p>
+        <p class="account-home-hint-desc">${esc(syncLine)} · Favoriten, Qurʾān &amp; Quiz synchronisiert</p>
       </div>
       <button type="button" class="account-home-hint-dismiss" data-account-home-dismiss aria-label="Hinweis ausblenden">×</button></div>
-      <p class="account-home-hint-desc">${esc(syncLine)} · Favoriten, Qurʾān und Quiz werden automatisch synchronisiert.</p>
-      <div class="account-home-hint-actions">${actions}</div>
+      <div class="account-home-hint-actions account-home-hint-actions--inline">${actions}</div>
     </section>`;
   }
 
