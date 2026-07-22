@@ -23,6 +23,12 @@ execFileSync(process.execPath, [testLibraryPatcher], {
   stdio: 'inherit'
 });
 
+const coverGenerator = path.join(__dirname, 'generate-qsrc-covers.js');
+execFileSync(process.execPath, [coverGenerator], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
 execFileSync(process.execPath, [syncBuildIds], {
   cwd: root,
   stdio: 'inherit'

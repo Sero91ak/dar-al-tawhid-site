@@ -22,6 +22,7 @@ const OVERLAY_FILES = [
   "data/canonical-books-index.json",
   "data/library-metadata-report.json",
   "scripts/build-canonical-books-index.js",
+  "scripts/generate-qsrc-covers.js",
   "scripts/patch-test-canonical-library.js"
 ];
 

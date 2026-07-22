@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generatedAt": "2026-07-22T17:46:41.572Z",
+  "generatedAt": "2026-07-22T18:23:06.763Z",
   "policy": {
     "verifiedOnly": true,
     "hideUnverifiedWorks": true,
@@ -12,16 +12,17 @@
   },
   "stats": {
     "sourcePosts": 50,
-    "publicCanonicalBooks": 25,
-    "publicQuotedScholars": 7,
+    "publicCanonicalBooks": 27,
+    "publicQuotedScholars": 9,
     "duplicateIdsRemoved": 0,
     "duplicateContentRemoved": 0,
-    "quarantinedPosts": 2
+    "quarantinedPosts": 0
   },
   "categories": [
     "Āthār und Ḥadīṯ",
     "Biografien",
     "Biografien und Āthār",
+    "Biografien und Tārīkh",
     "Fatāwā und ʿAqīdah",
     "Ḥadīṯ",
     "Ḥadīṯ und Fiqh",
@@ -45,7 +46,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/musannaf-ibn-abi-shaybah.svg"
     },
     {
       "id": "musannaf-abd-ar-razzaq",
@@ -59,7 +61,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/musannaf-abd-ar-razzaq.svg"
     },
     {
       "id": "siyar-alam-an-nubala",
@@ -73,7 +76,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/siyar-alam-an-nubala.svg"
     },
     {
       "id": "hilyat-al-awliya",
@@ -87,7 +91,29 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/hilyat-al-awliya.svg"
+    },
+    {
+      "id": "tarikh-dimashq",
+      "title": "Tārīkh Dimashq",
+      "author": "Abū al-Qāsim ʿAlī ibn al-Ḥasan Ibn ʿAsākir",
+      "category": "Biografien und Tārīkh",
+      "aliases": [
+        "Tarikh Dimashq",
+        "Tārīkh Madīnat Dimashq",
+        "Tārīkh Dimashq / al-Iʿtiṣām",
+        "Ibn Asakir Tarikh Dimashq"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-015"
+      ],
+      "quotedScholars": [
+        "Mālik ibn Anas"
+      ],
+      "postCount": 1,
+      "coverUrl": "/test/assets/library/covers/qsrc/tarikh-dimashq.svg"
     },
     {
       "id": "majmu-al-fatawa",
@@ -101,7 +127,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/majmu-al-fatawa.svg"
     },
     {
       "id": "sunan-abi-dawud",
@@ -119,7 +146,8 @@
       "quotedScholars": [
         "Prophet ﷺ"
       ],
-      "postCount": 1
+      "postCount": 1,
+      "coverUrl": "/test/assets/library/covers/qsrc/sunan-abi-dawud.svg"
     },
     {
       "id": "musnad-ahmad",
@@ -133,7 +161,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/musnad-ahmad.svg"
     },
     {
       "id": "sunan-an-nasai",
@@ -147,7 +176,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/sunan-an-nasai.svg"
     },
     {
       "id": "sahih-al-bukhari",
@@ -183,7 +213,8 @@
       "quotedScholars": [
         "Prophet ﷺ"
       ],
-      "postCount": 18
+      "postCount": 18,
+      "coverUrl": "/test/assets/library/covers/qsrc/sahih-al-bukhari.svg"
     },
     {
       "id": "sunan-ibn-majah",
@@ -196,7 +227,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/sunan-ibn-majah.svg"
     },
     {
       "id": "jami-at-tirmidhi",
@@ -217,7 +249,8 @@
       "quotedScholars": [
         "Prophet ﷺ"
       ],
-      "postCount": 4
+      "postCount": 4,
+      "coverUrl": "/test/assets/library/covers/qsrc/jami-at-tirmidhi.svg"
     },
     {
       "id": "sahih-muslim",
@@ -249,7 +282,29 @@
         "Ibn Sīrīn",
         "Prophet ﷺ"
       ],
-      "postCount": 14
+      "postCount": 14,
+      "coverUrl": "/test/assets/library/covers/qsrc/sahih-muslim.svg"
+    },
+    {
+      "id": "sunan-ad-darimi",
+      "title": "Sunan ad-Dārimī",
+      "author": "ʿUthmān ibn Saʿīd ad-Dārimī",
+      "category": "Ḥadīṯ",
+      "aliases": [
+        "Sunan ad-Darimi",
+        "as-Sunan",
+        "ad-Dārimī, as-Sunan",
+        "Sunan ad-Dārimī, Muqaddimah"
+      ],
+      "verification": "verified",
+      "postIds": [
+        "dar-al-tawhid-total-014"
+      ],
+      "quotedScholars": [
+        "Ibn Masʿūd"
+      ],
+      "postCount": 1,
+      "coverUrl": "/test/assets/library/covers/qsrc/sunan-ad-darimi.svg"
     },
     {
       "id": "muwatta-malik",
@@ -263,7 +318,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/muwatta-malik.svg"
     },
     {
       "id": "tahdhib-al-kamal",
@@ -276,7 +332,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/tahdhib-al-kamal.svg"
     },
     {
       "id": "tafsir-ibn-kathir",
@@ -290,7 +347,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/tafsir-ibn-kathir.svg"
     },
     {
       "id": "tafsir-at-tabari",
@@ -305,7 +363,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/tafsir-at-tabari.svg"
     },
     {
       "id": "kitab-at-tawhid-miaw",
@@ -319,7 +378,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/kitab-at-tawhid-miaw.svg"
     },
     {
       "id": "jami-bayan-al-ilm",
@@ -333,7 +393,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/jami-bayan-al-ilm.svg"
     },
     {
       "id": "ash-shariah-al-ajurri",
@@ -353,7 +414,8 @@
       "quotedScholars": [
         "al-Awzāʿī"
       ],
-      "postCount": 1
+      "postCount": 1,
+      "coverUrl": "/test/assets/library/covers/qsrc/ash-shariah-al-ajurri.svg"
     },
     {
       "id": "as-sunnah-al-khallal",
@@ -367,7 +429,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/as-sunnah-al-khallal.svg"
     },
     {
       "id": "sharh-usul-itiqad-lalakai",
@@ -399,7 +462,8 @@
         "Sufyān ath-Thawrī",
         "ʿAbdullāh ibn Masʿūd"
       ],
-      "postCount": 10
+      "postCount": 10,
+      "coverUrl": "/test/assets/library/covers/qsrc/sharh-usul-itiqad-lalakai.svg"
     },
     {
       "id": "al-ibanah-ibn-battah",
@@ -413,7 +477,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/al-ibanah-ibn-battah.svg"
     },
     {
       "id": "as-sunnah-abdullah-ahmad",
@@ -427,7 +492,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/as-sunnah-abdullah-ahmad.svg"
     },
     {
       "id": "dar-taarud-al-aql-wan-naql",
@@ -440,7 +506,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/dar-taarud-al-aql-wan-naql.svg"
     },
     {
       "id": "ar-radd-ala-al-jahmiyyah-ad-darimi",
@@ -454,7 +521,8 @@
       "verification": "verified",
       "postIds": [],
       "quotedScholars": [],
-      "postCount": 0
+      "postCount": 0,
+      "coverUrl": "/test/assets/library/covers/qsrc/ar-radd-ala-al-jahmiyyah-ad-darimi.svg"
     }
   ],
   "scholars": [
@@ -501,6 +569,18 @@
       "postCount": 2
     },
     {
+      "id": "ibn-masud",
+      "name": "Ibn Masʿūd",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-014"
+      ],
+      "citedWorkIds": [
+        "sunan-ad-darimi"
+      ],
+      "postCount": 1
+    },
+    {
       "id": "ibn-sirin",
       "name": "Ibn Sīrīn",
       "role": "quotedScholar",
@@ -509,6 +589,18 @@
       ],
       "citedWorkIds": [
         "sahih-muslim"
+      ],
+      "postCount": 1
+    },
+    {
+      "id": "malik-ibn-anas",
+      "name": "Mālik ibn Anas",
+      "role": "quotedScholar",
+      "postIds": [
+        "dar-al-tawhid-total-015"
+      ],
+      "citedWorkIds": [
+        "tarikh-dimashq"
       ],
       "postCount": 1
     },

@@ -180,7 +180,7 @@
     const key = normalizeSearchText(category || "");
     if (key.includes("hadith") || key.includes("fiqh")) return CATEGORY_ACCENTS.hadith;
     if (key.includes("athar") || key.includes("athar")) return CATEGORY_ACCENTS.athar;
-    if (key.includes("bio") || key.includes("rijal")) return CATEGORY_ACCENTS.bio;
+    if (key.includes("bio") || key.includes("rijal") || key.includes("tarikh")) return CATEGORY_ACCENTS.bio;
     if (key.includes("aqidah") || key.includes("sunnah") || key.includes("widerleg")) return CATEGORY_ACCENTS.aqidah;
     if (key.includes("tafsir")) return CATEGORY_ACCENTS.tafsir;
     if (key.includes("fatawa")) return CATEGORY_ACCENTS.fatawa;
@@ -372,8 +372,8 @@
       .qsrc-grid{display:grid;gap:6px}
       .qsrc-card{
         display:grid;
-        grid-template-columns:minmax(0,1fr) auto;
-        gap:8px;
+        grid-template-columns:46px minmax(0,1fr) auto;
+        gap:9px;
         align-items:center;
         border:1px solid var(--line,rgba(127,127,127,.16));
         border-left:3px solid var(--qsrc-accent-border, rgba(239,215,142,.34));
@@ -464,6 +464,48 @@
         border:1px solid rgba(239,215,142,.12);
       }
       .qsrc-chevron{opacity:.32;font-size:.95rem;line-height:1;color:var(--gold2,#efd78e)}
+      .qsrc-cover-wrap{
+        width:46px;
+        height:64px;
+        border-radius:7px;
+        overflow:hidden;
+        flex-shrink:0;
+        border:1px solid rgba(239,215,142,.18);
+        box-shadow:0 6px 14px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.04);
+        background:linear-gradient(145deg,rgba(24,20,14,.95),rgba(10,10,8,.95));
+      }
+      .qsrc-cover{
+        display:block;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
+      .qsrc-cover-fallback{
+        display:grid;
+        place-items:center;
+        width:100%;
+        height:100%;
+        padding:4px;
+        text-align:center;
+        font-size:7px;
+        line-height:1.15;
+        color:var(--gold2,#efd78e);
+        font-family:var(--serif,Georgia,serif);
+      }
+      .qsrc-detail-hero{
+        display:grid;
+        grid-template-columns:92px minmax(0,1fr);
+        gap:12px;
+        align-items:start;
+        padding:11px;
+        border:1px solid var(--line2,rgba(127,127,127,.16));
+        border-radius:14px;
+        background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.08),transparent 42%),linear-gradient(145deg,color-mix(in srgb,var(--card,#14120e) 95%,transparent),color-mix(in srgb,var(--panel,#12100c) 92%,transparent));
+      }
+      .qsrc-detail-hero .qsrc-cover-wrap{width:92px;height:128px;border-radius:9px}
+      .qsrc-detail-hero h4{margin:0 0 4px;font-family:var(--serif,Georgia,serif);font-size:18px;line-height:1.2;color:var(--gold2,#efd78e)}
+      .qsrc-detail-hero p{margin:0;font-size:12px;line-height:1.35;color:var(--premium-body,#d9cfb0);font-style:italic}
+      .qsrc-detail-hero .qsrc-card-category{margin-top:8px}
       .qsrc-empty,.qsrc-error,.qsrc-loading{
         border:1px dashed var(--line2,rgba(127,127,127,.18));
         border-radius:12px;
@@ -596,12 +638,28 @@
     </div>`;
   }
 
+  function bookCoverUrl(book) {
+    if (book?.coverUrl) return book.coverUrl;
+    if (book?.id) return `/test/assets/library/covers/qsrc/${book.id}.svg`;
+    return "";
+  }
+
+  function coverHtml(book, className) {
+    const src = bookCoverUrl(book);
+    const alt = `${book.title} – Buchcover`;
+    if (!src) {
+      return `<div class="qsrc-cover-wrap"><div class="qsrc-cover-fallback" role="img" aria-label="${esc(alt)}">${esc((book.title || "").split(" ").slice(0, 3).join(" "))}</div></div>`;
+    }
+    return `<div class="qsrc-cover-wrap"><img class="${className || "qsrc-cover"}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.hidden=false"><div class="qsrc-cover-fallback" hidden>${esc((book.title || "").split(" ").slice(0, 3).join(" "))}</div></div>`;
+  }
+
   function renderBookCard(book) {
     const search = bookSearchBlob(book);
     const postCount = Number(book.postCount || 0);
     const postLabel = postCount ? `${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}` : "Katalog";
     const accent = categoryAccent(book.category);
     return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
+      ${coverHtml(book)}
       <span class="qsrc-card-body">
         <span class="qsrc-card-kicker">Werk</span>
         <span class="qsrc-card-head">
@@ -625,6 +683,7 @@
     const postCount = Number(scholar.postCount || 0);
     const accent = categoryAccent(works[0]?.category || "gelehrter");
     return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
+      <div class="qsrc-cover-wrap" aria-hidden="true"><div class="qsrc-cover-fallback">ʿIlm</div></div>
       <span class="qsrc-card-body">
         <span class="qsrc-card-kicker">Gelehrter</span>
         <span class="qsrc-card-head">
@@ -650,6 +709,7 @@
       ? (state.ui.query ? `${scholars.length} von ${state.scholars.length} Gelehrte` : `${state.scholars.length} Gelehrte`)
       : (state.ui.query || state.ui.category ? `${books.length} von ${state.books.length} Werke` : `${state.books.length} Werke · Gesamtkatalog`);
 
+    const bookCount = state.books.length;
     const listHtml = activeTab === "scholars"
       ? (scholars.length
         ? scholars.map(renderScholarCard).join("")
@@ -658,7 +718,7 @@
         ? books.map(renderBookCard).join("")
         : `<div class="qsrc-empty">Keine Bücher gefunden.</div>`);
 
-    return `${setPageHeader("Quellenbibliothek", "Alle ${state.books.length} geprüften Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.", "Quellenbibliothek")}
+    return `${setPageHeader("Quellenbibliothek", `Alle ${bookCount} geprüften Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.`, "Quellenbibliothek")}
 <section class="qsrc-shell">
   <div class="qsrc-sticky">
     <div class="qsrc-control-head">
@@ -697,9 +757,14 @@
 
     return `${setPageHeader(book.title, book.category || "Geprüftes Werk", "Quellenbibliothek")}
 <section class="qsrc-detail">
-  <article class="qsrc-detail-block">
-    <h3>Autor</h3>
-    <p>${esc(book.author)}</p>
+  <article class="qsrc-detail-hero">
+    ${coverHtml(book)}
+    <div>
+      <span class="qsrc-card-kicker">Autor des Werkes</span>
+      <h4>${esc(book.title)}</h4>
+      <p>${esc(book.author)}</p>
+      <span class="qsrc-card-category">${esc(book.category || "Werk")}</span>
+    </div>
   </article>
   ${aliases.length ? `<article class="qsrc-detail-block"><h3>Alternative Titel</h3><div class="qsrc-alias-list">${aliases.map((alias) => `<span class="qsrc-chip">${esc(alias)}</span>`).join("")}</div></article>` : ""}
   ${quoted.length ? `<article class="qsrc-detail-block"><h3>Zitierte Gelehrte</h3><p>Diese Gelehrten werden in Beiträgen aus diesem Werk zitiert. Sie sind nicht die historischen Autoren des Werkes.</p><div class="qsrc-alias-list">${quoted.map((name) => `<span class="qsrc-chip">${esc(name)}</span>`).join("")}</div></article>` : ""}
@@ -822,11 +887,14 @@
     if (!isReady() || !state.books.length) return "";
     const preview = state.books.slice(0, 3).map((book) => {
       const accent = categoryAccent(book.category);
-      return `<article class="lib-canonical-card qsrc-card" style="cursor:default;grid-template-columns:1fr;--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
+      return `<article class="lib-canonical-card qsrc-card" style="cursor:default;grid-template-columns:46px 1fr;--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
+      ${coverHtml(book)}
+      <span class="qsrc-card-body">
       <span class="qsrc-card-kicker">${esc(book.category || "Geprüftes Werk")}</span>
       <span class="qsrc-card-title">${esc(book.title)}</span>
       <span class="qsrc-card-author"><span class="qsrc-label">Autor</span><span class="qsrc-author-name">${esc(book.author)}</span></span>
       <span class="qsrc-card-foot"><span class="qsrc-card-badge">${Number(book.postCount || 0)} Beiträge</span></span>
+      </span>
     </article>`;
     }).join("");
 

@@ -252,7 +252,8 @@ function main() {
       ...book,
       postIds: uniqueSorted(book.postIds),
       quotedScholars: uniqueSorted(book.quotedScholars),
-      postCount: new Set(book.postIds).size
+      postCount: new Set(book.postIds).size,
+      coverUrl: `/test/assets/library/covers/qsrc/${book.id}.svg`
     }))
     .filter((book) => book.verification === 'verified')
     .sort((a, b) => a.category.localeCompare(b.category, 'de') || a.author.localeCompare(b.author, 'de') || a.title.localeCompare(b.title, 'de'));
