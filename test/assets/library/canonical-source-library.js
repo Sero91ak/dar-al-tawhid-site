@@ -165,63 +165,401 @@
     return state.status === "error";
   }
 
+  function categoryAccent(category) {
+    const key = normalizeSearchText(category || "werk");
+    const palette = [
+      { border: "rgba(201,168,106,.42)", title: "#e8d4a8", chip: "rgba(201,168,106,.14)" },
+      { border: "rgba(143,176,201,.38)", title: "#d4e4ef", chip: "rgba(143,176,201,.14)" },
+      { border: "rgba(168,143,201,.38)", title: "#dfd0f0", chip: "rgba(168,143,201,.14)" },
+      { border: "rgba(143,201,168,.34)", title: "#d2efdf", chip: "rgba(143,201,168,.13)" },
+      { border: "rgba(201,143,143,.34)", title: "#efd4d4", chip: "rgba(201,143,143,.13)" }
+    ];
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) hash = (hash + key.charCodeAt(i) * (i + 3)) % palette.length;
+    return palette[hash];
+  }
+
   function ensureStyles() {
     if (document.getElementById("canonical-source-library-styles")) return;
     const style = document.createElement("style");
     style.id = "canonical-source-library-styles";
     style.textContent = `
-      .qsrc-shell{display:grid;gap:6px;margin-top:2px}
-      .qsrc-sticky{position:sticky;top:0;z-index:18;display:grid;gap:8px;padding:6px 0 10px;margin:0 -2px;background:color-mix(in srgb,var(--bg,#111) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line2,rgba(127,127,127,.14))}
-      .qsrc-tabs{display:flex;gap:6px}
-      .qsrc-tab{border:1px solid var(--line2,rgba(127,127,127,.2));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:999px;padding:7px 13px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
-      .qsrc-tab.is-active{border-color:color-mix(in srgb,var(--gold2,#c9a227) 55%,transparent);background:color-mix(in srgb,var(--gold2,#c9a227) 10%,transparent);color:var(--premium-title,var(--gold2,#d4b86a))}
-      .qsrc-toolbar{display:grid;gap:7px}
-      .qsrc-search-wrap{position:relative}
-      .qsrc-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;opacity:.45;pointer-events:none}
-      .qsrc-search{width:100%;min-height:40px;border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:12px;background:color-mix(in srgb,var(--card,#fff) 88%,transparent);color:var(--text,inherit);padding:9px 12px 9px 36px;font:inherit;font-size:14px}
-      .qsrc-search::placeholder{color:var(--muted,#888);opacity:.85}
-      .qsrc-meta-line{margin:0;font-size:11px;letter-spacing:.06em;color:var(--muted,#888)}
-      .qsrc-control-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-      .qsrc-control-btn{border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:999px;padding:7px 12px;font:inherit;font-size:11px;font-weight:750;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-      .qsrc-control-btn.is-active{border-color:color-mix(in srgb,var(--gold2,#c9a227) 50%,transparent);background:color-mix(in srgb,var(--gold2,#c9a227) 12%,transparent);color:var(--premium-title,var(--gold2,#d4b86a))}
-      .qsrc-control-btn .qsrc-caret{opacity:.7;font-size:10px}
-      .qsrc-filter-panel{display:grid;gap:6px;padding:8px;border:1px solid var(--line2,rgba(127,127,127,.18));border-radius:12px;background:color-mix(in srgb,var(--card,#fff) 92%,transparent)}
+      .qsrc-shell{
+        --qsrc-bg:#121018;
+        --qsrc-bg-soft:#18141f;
+        --qsrc-panel:rgba(24,20,30,.94);
+        --qsrc-line:rgba(214,194,150,.14);
+        --qsrc-line-soft:rgba(255,255,255,.06);
+        --qsrc-gold:#d8c08e;
+        --qsrc-gold-soft:rgba(216,192,142,.16);
+        --qsrc-text:#f3eee4;
+        --qsrc-muted:rgba(243,238,228,.58);
+        --qsrc-muted2:rgba(243,238,228,.42);
+        display:grid;
+        gap:10px;
+        margin:0 auto;
+        width:100%;
+        max-width:100%;
+        padding:2px 0 8px;
+        color:var(--qsrc-text);
+        background:
+          radial-gradient(120% 80% at 50% -10%, rgba(216,192,142,.08), transparent 55%),
+          radial-gradient(90% 60% at 100% 0%, rgba(120,96,160,.07), transparent 50%),
+          linear-gradient(180deg, var(--qsrc-bg-soft), var(--qsrc-bg));
+        border-radius:18px;
+      }
+      .qsrc-sticky{
+        position:sticky;
+        top:0;
+        z-index:18;
+        padding:10px 12px 12px;
+        margin:0;
+        border:1px solid var(--qsrc-line);
+        border-radius:16px;
+        background:var(--qsrc-panel);
+        backdrop-filter:blur(18px);
+        -webkit-backdrop-filter:blur(18px);
+        box-shadow:0 10px 28px rgba(0,0,0,.22);
+      }
+      .qsrc-control-head{
+        display:grid;
+        grid-template-columns:1fr auto;
+        gap:10px;
+        align-items:center;
+        margin-bottom:10px;
+      }
+      .qsrc-tabs{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:0;
+        padding:3px;
+        border:1px solid var(--qsrc-line-soft);
+        border-radius:999px;
+        background:rgba(0,0,0,.18);
+      }
+      .qsrc-tab{
+        border:0;
+        background:transparent;
+        color:var(--qsrc-muted);
+        border-radius:999px;
+        padding:8px 12px;
+        font:inherit;
+        font-size:12px;
+        font-weight:700;
+        letter-spacing:.03em;
+        cursor:pointer;
+        text-align:center;
+        transition:background .18s ease,color .18s ease;
+      }
+      .qsrc-tab.is-active{
+        background:linear-gradient(180deg, rgba(216,192,142,.22), rgba(216,192,142,.10));
+        color:var(--qsrc-gold);
+        box-shadow:inset 0 0 0 1px rgba(216,192,142,.22);
+      }
+      .qsrc-meta-pill{
+        justify-self:end;
+        align-self:center;
+        margin:0;
+        padding:6px 10px;
+        border-radius:999px;
+        border:1px solid var(--qsrc-line-soft);
+        background:rgba(255,255,255,.03);
+        color:var(--qsrc-muted);
+        font-size:10px;
+        font-weight:700;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        white-space:nowrap;
+      }
+      .qsrc-toolbar{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto;
+        gap:8px;
+        align-items:center;
+      }
+      .qsrc-search-wrap{position:relative;min-width:0}
+      .qsrc-search-icon{
+        position:absolute;
+        left:13px;
+        top:50%;
+        transform:translateY(-50%);
+        width:15px;
+        height:15px;
+        opacity:.45;
+        pointer-events:none;
+        color:var(--qsrc-muted);
+      }
+      .qsrc-search{
+        width:100%;
+        min-height:42px;
+        border:1px solid var(--qsrc-line-soft);
+        border-radius:12px;
+        background:rgba(0,0,0,.22);
+        color:var(--qsrc-text);
+        padding:10px 12px 10px 38px;
+        font:inherit;
+        font-size:14px;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+      }
+      .qsrc-search::placeholder{color:var(--qsrc-muted2)}
+      .qsrc-search:focus{
+        outline:none;
+        border-color:rgba(216,192,142,.34);
+        box-shadow:0 0 0 3px rgba(216,192,142,.08);
+      }
+      .qsrc-control-btn{
+        border:1px solid var(--qsrc-line-soft);
+        background:rgba(255,255,255,.03);
+        color:var(--qsrc-text);
+        border-radius:12px;
+        min-height:42px;
+        padding:0 12px;
+        font:inherit;
+        font-size:11px;
+        font-weight:750;
+        cursor:pointer;
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        white-space:nowrap;
+      }
+      .qsrc-control-btn.is-active{
+        border-color:rgba(216,192,142,.34);
+        background:var(--qsrc-gold-soft);
+        color:var(--qsrc-gold);
+      }
+      .qsrc-control-btn .qsrc-caret{opacity:.72;font-size:10px}
+      .qsrc-filter-panel{
+        grid-column:1 / -1;
+        display:grid;
+        gap:8px;
+        padding:10px;
+        margin-top:2px;
+        border:1px solid var(--qsrc-line-soft);
+        border-radius:12px;
+        background:rgba(0,0,0,.18);
+      }
       .qsrc-filter-panel[hidden]{display:none!important}
-      .qsrc-filter-grid{display:flex;flex-wrap:wrap;gap:6px}
-      .qsrc-filter{border:1px solid var(--line2,rgba(127,127,127,.2));background:transparent;color:inherit;border-radius:999px;padding:6px 10px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
-      .qsrc-filter.is-active{border-color:color-mix(in srgb,var(--gold2,#c9a227) 55%,transparent);background:color-mix(in srgb,var(--gold2,#c9a227) 14%,transparent);color:var(--premium-title,var(--gold2,#d4b86a))}
-      .qsrc-filter-count{opacity:.65;font-weight:800;margin-left:3px}
-      .qsrc-grid{display:grid;gap:6px}
-      .qsrc-grid-compact{padding-top:2px}
-      .qsrc-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2,rgba(127,127,127,.16));border-radius:12px;padding:11px 12px;background:color-mix(in srgb,var(--card,#fff) 93%,transparent);color:inherit;text-align:left;width:100%;cursor:pointer}
+      .qsrc-filter-grid{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start}
+      .qsrc-filter{
+        border:1px solid var(--qsrc-line-soft);
+        background:transparent;
+        color:var(--qsrc-muted);
+        border-radius:999px;
+        padding:6px 10px;
+        font:inherit;
+        font-size:11px;
+        font-weight:700;
+        cursor:pointer;
+      }
+      .qsrc-filter.is-active{
+        border-color:rgba(216,192,142,.34);
+        background:var(--qsrc-gold-soft);
+        color:var(--qsrc-gold);
+      }
+      .qsrc-filter-count{opacity:.7;font-weight:800;margin-left:3px}
+      .qsrc-active-chip{
+        grid-column:1 / -1;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:8px;
+        padding:7px 10px;
+        border-radius:10px;
+        border:1px dashed rgba(216,192,142,.24);
+        background:rgba(216,192,142,.06);
+        color:var(--qsrc-gold);
+        font-size:11px;
+      }
+      .qsrc-active-chip button{
+        border:0;
+        background:transparent;
+        color:inherit;
+        font:inherit;
+        font-weight:700;
+        cursor:pointer;
+        opacity:.85;
+      }
+      .qsrc-grid{display:grid;gap:8px;padding:0 2px}
+      .qsrc-grid-compact{padding-top:0}
+      .qsrc-card{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto;
+        gap:12px;
+        align-items:center;
+        border:1px solid var(--qsrc-line-soft);
+        border-left:3px solid var(--qsrc-accent-border, rgba(216,192,142,.34));
+        border-radius:14px;
+        padding:12px 13px;
+        background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+        color:inherit;
+        text-align:left;
+        width:100%;
+        cursor:pointer;
+        box-shadow:0 8px 20px rgba(0,0,0,.14);
+        transition:transform .16s ease,border-color .16s ease,background .16s ease;
+      }
+      .qsrc-card:hover{
+        transform:translateY(-1px);
+        border-color:rgba(216,192,142,.22);
+        background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      }
       .qsrc-card-compact{min-height:0}
       .qsrc-card.is-hidden{display:none!important}
-      .qsrc-card-body{min-width:0;display:grid;gap:4px}
-      .qsrc-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-      .qsrc-card-title{display:block;font-family:var(--serif,Georgia,"Times New Roman",serif);font-size:16px;font-weight:650;line-height:1.24;color:var(--premium-title,var(--gold2,#d4b86a));letter-spacing:.01em;overflow-wrap:anywhere}
-      .qsrc-card-badge{flex:0 0 auto;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--gold2,#c9a227) 72%,var(--muted,#888));white-space:nowrap;padding-top:3px}
-      .qsrc-card-author{display:block;font-family:var(--sans,system-ui,sans-serif);font-size:12px;line-height:1.35;color:color-mix(in srgb,var(--text,inherit) 78%,var(--muted,#888));overflow-wrap:anywhere}
-      .qsrc-card-author .qsrc-label{display:inline-block;margin-right:6px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2,var(--muted,#777));opacity:.9}
-      .qsrc-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:1px}
-      .qsrc-card-category{font-size:10px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#888);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-      .qsrc-chevron{opacity:.35;font-size:.95rem;line-height:1;align-self:center}
-      .qsrc-empty,.qsrc-error,.qsrc-loading{border:1px dashed var(--line2,rgba(127,127,127,.22));border-radius:12px;padding:14px;text-align:center;color:var(--muted,#888);font-size:13px}
-      .qsrc-error button,.qsrc-retry{margin-top:10px;border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
-      .qsrc-detail{display:grid;gap:12px}
-      .qsrc-detail-block{border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:12px;padding:12px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent)}
-      .qsrc-detail-block h3{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#888)}
-      .qsrc-detail-block p{margin:0;line-height:1.4;font-size:13px}
+      .qsrc-card-body{min-width:0;display:grid;gap:6px}
+      .qsrc-card-kicker{
+        display:block;
+        font-size:9px;
+        font-weight:800;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+        color:var(--qsrc-muted2);
+      }
+      .qsrc-card-head{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:10px;
+      }
+      .qsrc-card-title{
+        display:block;
+        font-family:var(--serif,Georgia,"Times New Roman",serif);
+        font-size:17px;
+        font-weight:650;
+        line-height:1.28;
+        color:var(--qsrc-accent-title,var(--qsrc-gold));
+        letter-spacing:.01em;
+        overflow-wrap:anywhere;
+      }
+      .qsrc-card-badge{
+        flex:0 0 auto;
+        font-size:9px;
+        font-weight:800;
+        letter-spacing:.1em;
+        text-transform:uppercase;
+        color:var(--qsrc-muted);
+        white-space:nowrap;
+        padding:4px 7px;
+        border-radius:999px;
+        border:1px solid var(--qsrc-line-soft);
+        background:rgba(0,0,0,.16);
+      }
+      .qsrc-card-author{
+        display:grid;
+        gap:2px;
+        font-family:var(--sans,system-ui,sans-serif);
+        overflow-wrap:anywhere;
+      }
+      .qsrc-card-author .qsrc-label{
+        display:block;
+        font-size:9px;
+        font-weight:800;
+        letter-spacing:.14em;
+        text-transform:uppercase;
+        color:var(--qsrc-muted2);
+      }
+      .qsrc-card-author .qsrc-author-name{
+        display:block;
+        font-size:13px;
+        line-height:1.38;
+        font-style:italic;
+        color:var(--qsrc-text);
+        opacity:.88;
+      }
+      .qsrc-card-foot{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:8px;
+        margin-top:2px;
+      }
+      .qsrc-card-category{
+        display:inline-flex;
+        align-items:center;
+        max-width:100%;
+        font-size:10px;
+        font-weight:750;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        color:var(--qsrc-gold);
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        padding:4px 8px;
+        border-radius:999px;
+        background:var(--qsrc-accent-chip, var(--qsrc-gold-soft));
+        border:1px solid rgba(216,192,142,.12);
+      }
+      .qsrc-chevron{
+        opacity:.34;
+        font-size:1.05rem;
+        line-height:1;
+        align-self:center;
+        color:var(--qsrc-gold);
+      }
+      .qsrc-empty,.qsrc-error,.qsrc-loading{
+        border:1px dashed var(--qsrc-line-soft);
+        border-radius:14px;
+        padding:16px;
+        text-align:center;
+        color:var(--qsrc-muted);
+        font-size:13px;
+        background:rgba(0,0,0,.14);
+      }
+      .qsrc-error button,.qsrc-retry{
+        margin-top:10px;
+        border:1px solid var(--qsrc-line-soft);
+        background:rgba(255,255,255,.04);
+        color:var(--qsrc-text);
+        border-radius:10px;
+        padding:8px 12px;
+        font:inherit;
+        font-weight:700;
+        cursor:pointer;
+      }
+      .qsrc-detail{display:grid;gap:12px;padding:0 2px}
+      .qsrc-detail-block{
+        border:1px solid var(--qsrc-line-soft);
+        border-radius:14px;
+        padding:12px;
+        background:rgba(255,255,255,.03);
+      }
+      .qsrc-detail-block h3{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--qsrc-muted)}
+      .qsrc-detail-block p{margin:0;line-height:1.45;font-size:13px;color:var(--qsrc-text)}
       .qsrc-alias-list,.qsrc-link-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-      .qsrc-chip{font-size:11px;border-radius:999px;padding:5px 9px;background:rgba(127,127,127,.1)}
+      .qsrc-chip{
+        font-size:11px;
+        border-radius:999px;
+        padding:5px 9px;
+        background:rgba(255,255,255,.06);
+        border:1px solid var(--qsrc-line-soft);
+        color:var(--qsrc-text);
+      }
       .qsrc-post-list{display:grid;gap:6px}
-      .lib-canonical-wrap{margin:20px 0 6px;padding-top:18px;border-top:1px solid rgba(127,127,127,.22)}
+      .lib-canonical-wrap{margin:20px 0 6px;padding-top:18px;border-top:1px solid var(--qsrc-line-soft)}
       .lib-canonical-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
-      .lib-canonical-head h3{margin:0;font-size:1.05rem}
-      .lib-canonical-head p{margin:4px 0 0;opacity:.72;font-size:.86rem;max-width:52ch}
-      .lib-canonical-count{white-space:nowrap;font-size:.8rem;opacity:.68}
+      .lib-canonical-head h3{margin:0;font-size:1.05rem;color:var(--qsrc-gold)}
+      .lib-canonical-head p{margin:4px 0 0;opacity:.72;font-size:.86rem;max-width:52ch;color:var(--qsrc-muted)}
+      .lib-canonical-count{white-space:nowrap;font-size:.8rem;opacity:.68;color:var(--qsrc-muted)}
       .lib-canonical-actions{margin-top:10px}
-      .lib-canonical-open{border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
-      @media(max-width:640px){.lib-canonical-head{align-items:flex-start;flex-direction:column}.qsrc-card-title{font-size:15px}}
+      .lib-canonical-open{
+        border:1px solid var(--qsrc-line-soft);
+        background:rgba(255,255,255,.04);
+        color:var(--qsrc-text);
+        border-radius:10px;
+        padding:8px 12px;
+        font:inherit;
+        font-weight:700;
+        cursor:pointer;
+      }
+      @media(max-width:640px){
+        .qsrc-sticky{padding:9px 10px 10px}
+        .qsrc-control-head{grid-template-columns:1fr;gap:8px}
+        .qsrc-meta-pill{justify-self:start}
+        .qsrc-toolbar{grid-template-columns:1fr}
+        .qsrc-control-btn{justify-content:center;width:100%}
+        .qsrc-card-title{font-size:16px}
+      }
     `;
     document.head.appendChild(style);
   }
@@ -285,12 +623,7 @@
       const active = state.ui.category === cat ? " is-active" : "";
       buttons.push(`<button type="button" class="qsrc-filter${active}" data-qsrc-category="${esc(cat)}">${esc(cat)} <span class="qsrc-filter-count">${counts.get(cat) || 0}</span></button>`);
     });
-    return `<div class="qsrc-control-row">
-      <button type="button" class="qsrc-control-btn${panelOpen || state.ui.category ? " is-active" : ""}" data-qsrc-filter-toggle aria-expanded="${panelOpen}">
-        Kategorien <span class="qsrc-caret">${panelOpen ? "▴" : "▾"}</span>
-      </button>
-      ${state.ui.category ? `<button type="button" class="qsrc-control-btn is-active" data-qsrc-category="">${esc(activeCategoryLabel())} · zurücksetzen</button>` : ""}
-    </div>
+    return `${state.ui.category ? `<div class="qsrc-active-chip"><span>${esc(activeCategoryLabel())}</span><button type="button" data-qsrc-category="">Zurücksetzen</button></div>` : ""}
     <div class="qsrc-filter-panel" id="qsrcFilterPanel" ${panelOpen ? "" : "hidden"}>
       <div class="qsrc-filter-grid" role="toolbar" aria-label="Kategorien">${buttons.join("")}</div>
     </div>`;
@@ -300,13 +633,15 @@
     const search = bookSearchBlob(book);
     const postCount = Number(book.postCount || 0);
     const postLabel = postCount ? `${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}` : "Katalog";
-    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}">
+    const accent = categoryAccent(book.category);
+    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
       <span class="qsrc-card-body">
+        <span class="qsrc-card-kicker">Werk</span>
         <span class="qsrc-card-head">
           <span class="qsrc-card-title">${esc(book.title)}</span>
           <span class="qsrc-card-badge">${esc(postLabel)}</span>
         </span>
-        <span class="qsrc-card-author"><span class="qsrc-label">Autor</span>${esc(book.author)}</span>
+        <span class="qsrc-card-author"><span class="qsrc-label">Autor des Werkes</span><span class="qsrc-author-name">${esc(book.author)}</span></span>
         <span class="qsrc-card-foot"><span class="qsrc-card-category">${esc(book.category || "Werk")}</span></span>
       </span>
       <span class="qsrc-chevron" aria-hidden="true">›</span>
@@ -321,13 +656,15 @@
     const workTitles = works.map((book) => book.title).join(", ");
     const search = scholarSearchBlob(scholar);
     const postCount = Number(scholar.postCount || 0);
-    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}">
+    const accent = categoryAccent(works[0]?.category || "gelehrter");
+    return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}" style="--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
       <span class="qsrc-card-body">
+        <span class="qsrc-card-kicker">Gelehrter</span>
         <span class="qsrc-card-head">
           <span class="qsrc-card-title">${esc(scholar.name)}</span>
           <span class="qsrc-card-badge">${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}</span>
         </span>
-        <span class="qsrc-card-author"><span class="qsrc-label">Rolle</span>zitierter Gelehrter</span>
+        <span class="qsrc-card-author"><span class="qsrc-label">Rolle</span><span class="qsrc-author-name">zitierter Gelehrter</span></span>
         ${workTitles ? `<span class="qsrc-card-foot"><span class="qsrc-card-category">${esc(workTitles)}</span></span>` : ""}
       </span>
       <span class="qsrc-chevron" aria-hidden="true">›</span>
@@ -357,16 +694,19 @@
     return `${setPageHeader("Quellenbibliothek", "Historische Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.", "Quellenbibliothek")}
 <section class="qsrc-shell">
   <div class="qsrc-sticky">
-    <div class="qsrc-tabs" role="tablist">
-      <button type="button" class="qsrc-tab${activeTab === "books" ? " is-active" : ""}" data-qsrc-tab="books" role="tab" aria-selected="${activeTab === "books"}">Bücher</button>
-      <button type="button" class="qsrc-tab${activeTab === "scholars" ? " is-active" : ""}" data-qsrc-tab="scholars" role="tab" aria-selected="${activeTab === "scholars"}">Gelehrte</button>
+    <div class="qsrc-control-head">
+      <div class="qsrc-tabs" role="tablist">
+        <button type="button" class="qsrc-tab${activeTab === "books" ? " is-active" : ""}" data-qsrc-tab="books" role="tab" aria-selected="${activeTab === "books"}">Bücher</button>
+        <button type="button" class="qsrc-tab${activeTab === "scholars" ? " is-active" : ""}" data-qsrc-tab="scholars" role="tab" aria-selected="${activeTab === "scholars"}">Gelehrte</button>
+      </div>
+      <p id="qsrcMetaLine" class="qsrc-meta-pill">${esc(totalLabel)}</p>
     </div>
     <div class="qsrc-toolbar">
       <div class="qsrc-search-wrap">
         <svg class="qsrc-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input id="qsrcSearchInput" class="qsrc-search" type="search" placeholder="Werk, Autor oder Kategorie suchen…" autocomplete="off" enterkeyhint="search" value="${esc(state.ui.query)}">
       </div>
-      <p id="qsrcMetaLine" class="qsrc-meta-line">${esc(totalLabel)}</p>
+      ${activeTab === "books" ? `<button type="button" class="qsrc-control-btn${state.ui.filtersOpen || state.ui.category ? " is-active" : ""}" data-qsrc-filter-toggle aria-expanded="${!!state.ui.filtersOpen}">Kategorien <span class="qsrc-caret">${state.ui.filtersOpen ? "▴" : "▾"}</span></button>` : ""}
       ${activeTab === "books" ? renderCategoryFilters() : ""}
     </div>
   </div>
@@ -513,12 +853,15 @@
 
   function renderBibliothekAddon() {
     if (!isReady() || !state.books.length) return "";
-    const preview = state.books.slice(0, 3).map((book) => `<article class="lib-canonical-card qsrc-card" style="cursor:default;grid-template-columns:1fr">
+    const preview = state.books.slice(0, 3).map((book) => {
+      const accent = categoryAccent(book.category);
+      return `<article class="lib-canonical-card qsrc-card" style="cursor:default;grid-template-columns:1fr;--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
       <span class="qsrc-card-kicker">${esc(book.category || "Geprüftes Werk")}</span>
       <span class="qsrc-card-title">${esc(book.title)}</span>
-      <span class="qsrc-card-line"><strong>Autor:</strong> ${esc(book.author)}</span>
-      <span class="qsrc-card-meta"><span class="qsrc-pill">${Number(book.postCount || 0)} Beiträge</span></span>
-    </article>`).join("");
+      <span class="qsrc-card-author"><span class="qsrc-label">Autor</span><span class="qsrc-author-name">${esc(book.author)}</span></span>
+      <span class="qsrc-card-foot"><span class="qsrc-card-badge">${Number(book.postCount || 0)} Beiträge</span></span>
+    </article>`;
+    }).join("");
 
     return `<section class="lib-canonical-wrap" aria-label="Quellenbibliothek">
       <div class="lib-canonical-head">
