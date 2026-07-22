@@ -1,5 +1,29 @@
-/* DAR AL TAWḤID — Kompakte Premium-Typografie: Cormorant Garamond + Manrope */
+/* DAR AL TAWḤID — Kompakte Premium-Typografie: Cormorant Garamond + Manrope + Source Serif 4 */
 
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/source-serif-4-latin-500-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 @font-face {
   font-family: "Cormorant Garamond";
   font-style: normal;
@@ -56,6 +80,7 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-ui: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-arabic: "Noto Naskh Arabic", "Amiri", serif;
+  --font-transliteration: "Source Serif 4", "Noto Serif", Georgia, serif;
 
   --font-size-page-title: clamp(28px, 5vw, 32px);
   --font-size-section-title: clamp(25px, 4.2vw, 28px);
@@ -79,6 +104,7 @@
   --serif: var(--font-display);
   --display: var(--font-display);
   --sans: var(--font-ui);
+  --font-serif: var(--font-transliteration);
 }
 
 body,
@@ -123,25 +149,16 @@ h1,
 .daily-title,
 .recommended-title,
 .stats-section-head h3,
-.profile-title,
-.book-profile-title,
 .series-title,
 .pinned-title,
-.article-title h2,
 .post-intro-head h3,
 .current-focus-head h3,
 .salam,
-.quran-home-teaser h3,
 .quran-quick-pick .direct-pick-title h3,
 .prayer-overview__today-label,
 .post-slide h3,
 .related-compact-card h4,
-.popular-row-text h4,
-.folder-card h3,
-.post-card h3,
-.list-card h3,
-.info-card h3,
-.dua-card h3 {
+.info-card h3 {
   font-family: var(--font-display) !important;
   font-weight: 500 !important;
   letter-spacing: var(--letter-spacing-heading) !important;
@@ -172,7 +189,6 @@ h1,
   line-height: var(--line-height-heading) !important;
 }
 
-.quran-home-teaser h3,
 .prayer-overview__today-label,
 .current-focus-head h3,
 .direct-pick-title h3,
@@ -188,12 +204,7 @@ h1,
   margin: 0 0 4px !important;
 }
 
-.folder-card h3,
-.post-card h3,
-.list-card h3,
-.info-card h3,
-.dua-card h3,
-.popular-row-text h4 {
+.info-card h3 {
   font-size: var(--font-size-card-title) !important;
   line-height: 1.24 !important;
 }
@@ -233,7 +244,6 @@ h1,
 .feature-card p,
 .daily-text,
 .recommended-text,
-.excerpt,
 .popular-row-text span {
   font-family: var(--font-ui) !important;
   font-weight: 400 !important;
@@ -272,7 +282,6 @@ h1,
 }
 
 .statement em,
-.dua-trans,
 .script-accent {
   font-family: var(--script, "Allura", cursive) !important;
   font-weight: 400 !important;
@@ -311,14 +320,9 @@ h1,
 .view h2,
 .section-head h3,
 .feature-head h3,
-.folder-card h3,
-.post-card h3,
-.list-card h3,
 .view-head-home-row h2,
-.popular-row-text h4,
 .daily-title,
 .recommended-title,
-.quran-home-teaser h3,
 .prayer-overview__today-label {
   min-width: 0;
   overflow-wrap: anywhere;
@@ -330,8 +334,125 @@ h1,
 }
 
 html[data-theme] .section-head h3,
-html[data-theme] .view h2,
-html[data-theme] .folder-card h3,
-html[data-theme] .post-card h3 {
+html[data-theme] .view h2 {
   font-synthesis: none;
+}
+
+/* Transliteration: Source Serif 4 — volle Diakritika, kein Font-Mixing */
+.quran-surah-card h3,
+.quran-surah-head h2,
+.quran-result-top h3,
+.quran-result-top strong,
+.quran-home-teaser h3,
+.quran-athar-card h4,
+.quran-athar-source b,
+.quran-ayah-tr,
+.quran-result-tr,
+.quran-popular-btn,
+.quran-meta-note,
+.dua-trans,
+.dua-card h3,
+.article-title h2,
+.profile-title,
+.book-profile-title,
+.book-author,
+.list-card h3,
+.folder-card h3,
+.post-card h3,
+.popular-row-text h4,
+.excerpt,
+.isnad-speaker,
+.isnad-quote,
+.hadith-book-card h3,
+.hadith-panel-head h3,
+.hadith-card-title,
+.hadith-chapter-card b,
+.hadith-hero h3,
+.quiz-main-title,
+.quiz-question,
+.quiz-home-title,
+.quiz-hero h2,
+.ilm-welcome h2,
+.event-name,
+.font-slider-preview[data-preview="quranTransliterationScale"],
+.font-slider-preview[data-preview="duaTransliterationScale"] {
+  font-family: var(--font-transliteration) !important;
+  font-synthesis: none !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  text-shadow: none !important;
+}
+
+.quran-surah-card h3,
+.quran-surah-head h2,
+.quran-result-top h3,
+.quran-result-top strong,
+.quran-home-teaser h3,
+.quran-athar-card h4,
+.dua-card h3,
+.article-title h2,
+.profile-title,
+.book-profile-title,
+.list-card h3,
+.folder-card h3,
+.post-card h3,
+.popular-row-text h4,
+.hadith-book-card h3,
+.hadith-panel-head h3,
+.hadith-card-title,
+.hadith-chapter-card b,
+.hadith-hero h3,
+.quiz-main-title,
+.quiz-question,
+.quiz-home-title,
+.quiz-hero h2,
+.ilm-welcome h2 {
+  font-weight: 500 !important;
+}
+
+.quran-ayah-tr,
+.quran-result-tr,
+.dua-trans,
+.quran-meta-note,
+.excerpt,
+.isnad-quote,
+.book-author,
+.event-name {
+  font-weight: 400 !important;
+}
+
+.isnad-speaker,
+.quran-athar-source b {
+  font-weight: 500 !important;
+}
+
+.quran-home-teaser h3 {
+  font-size: var(--font-size-feature-title) !important;
+  line-height: 1.1 !important;
+}
+
+.folder-card h3,
+.post-card h3,
+.list-card h3,
+.dua-card h3,
+.popular-row-text h4 {
+  font-size: var(--font-size-card-title) !important;
+  line-height: 1.24 !important;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+html[data-theme] .quran-surah-card h3,
+html[data-theme] .quran-surah-head h2,
+html[data-theme] .quran-result-top strong,
+html[data-theme] .quran-ayah-tr,
+html[data-theme] .quran-result-tr,
+html[data-theme] .dua-trans,
+html[data-theme] .profile-title,
+html[data-theme] .book-profile-title,
+html[data-theme] .list-card h3,
+html[data-theme] .folder-card h3,
+html[data-theme] .post-card h3,
+html[data-theme] .dua-card h3 {
+  font-synthesis: none !important;
 }
