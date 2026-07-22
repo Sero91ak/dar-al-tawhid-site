@@ -6,7 +6,10 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const BOOKS_PATH = path.join(ROOT, "data", "books-library.json");
 const AUTHORITY_PATH = path.join(ROOT, "data", "library-authority.json");
-const COVERS_DIR = path.join(ROOT, "test", "assets", "library", "covers", "qsrc");
+const COVERS_DIRS = [
+  path.join(ROOT, "test", "assets", "library", "covers", "qsrc"),
+  path.join(ROOT, "assets", "library", "covers", "qsrc")
+];
 
 function normalize(value) {
   return String(value || "")
@@ -139,15 +142,17 @@ function main() {
     console.log("generate-qsrc-covers: keine Bücher gefunden, übersprungen.");
     return;
   }
-  fs.mkdirSync(COVERS_DIR, { recursive: true });
   let count = 0;
   for (const book of books) {
     if (!book?.id || !book.title) continue;
-    const file = path.join(COVERS_DIR, `${book.id}.svg`);
-    fs.writeFileSync(file, coverSvg(book));
+    const svg = coverSvg(book);
+    for (const dir of COVERS_DIRS) {
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, `${book.id}.svg`), svg);
+    }
     count += 1;
   }
-  console.log(`generate-qsrc-covers: ${count} Buchcover erstellt.`);
+  console.log(`generate-qsrc-covers: ${count} Buchcover in ${COVERS_DIRS.length} Verzeichnisse erstellt.`);
 }
 
 main();
