@@ -10029,7 +10029,7 @@ body.is-home-route .view-head h2.home-start-title,
 .highlight-sections .gold-divider{margin:8px 0!important}
 </style>
 <style id="brand-gold-home-v324">
-/* Startseite: ornamentale Gold-Schrift mit Schwüngen (kein Bild) */
+/* Startseite: ornamentale Gold-Schrift – immer sichtbar (kein transparent) */
 body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
   font-family:"Cinzel Decorative","Elsie Swash Caps",var(--display)!important;
   font-weight:900!important;
@@ -10038,27 +10038,18 @@ body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
   letter-spacing:.015em!important;
   word-spacing:.1em!important;
   text-transform:uppercase;
-  background:linear-gradient(180deg,#fff9e8 0%,#f7e4a8 18%,#d4af57 42%,#fff6d8 62%,#c89b3c 82%,#a67c2e 100%)!important;
-  -webkit-background-clip:text!important;
-  background-clip:text!important;
-  color:transparent!important;
-  -webkit-text-fill-color:transparent!important;
-  text-shadow:none!important;
-  filter:drop-shadow(0 2px 7px rgba(120,90,30,.42));
+  color:#f0d88a!important;
+  -webkit-text-fill-color:#f0d88a!important;
+  background:none!important;
+  background-clip:border-box!important;
+  -webkit-background-clip:border-box!important;
+  text-shadow:0 0 1px rgba(255,248,220,.9),0 1px 0 rgba(90,68,24,.75),0 2px 12px rgba(200,148,58,.42)!important;
+  filter:none!important;
   white-space:normal!important;
   overflow:visible!important;
   min-width:0!important;
   flex:1 1 auto!important;
   -webkit-font-smoothing:antialiased;
-}
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){
-  body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
-    color:#f0d88a!important;
-    -webkit-text-fill-color:#f0d88a!important;
-    background:none!important;
-    text-shadow:0 0 1px rgba(255,248,220,.8),0 2px 10px rgba(200,148,58,.4)!important;
-    filter:none;
-  }
 }
 @media(max-width:700px){
   body.is-home-route .top-shell.theme-hero-shell .brand-main h1{
