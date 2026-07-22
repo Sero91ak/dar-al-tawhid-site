@@ -10297,6 +10297,29 @@ html[data-theme="bordeaux"] .home-hijri-dayframe{
   .home-hijri-dayframe .home-hijri-ico{font-size:clamp(12px,3.3vw,14px)!important}
 }
 </style>
+<style id="brand-light-readability-v335">
+/* Helle Erscheinungsbilder: Titel schwarz lesbar, goldene leuchtende Linie */
+html[data-theme="light"] .brand-main h1.brand-title-refined,
+html[data-theme="soft"] .brand-main h1.brand-title-refined{
+  color:#1a1410!important;
+  -webkit-text-fill-color:#1a1410!important;
+}
+html[data-theme="light"] .brand-main h1.brand-title-refined::after,
+html[data-theme="soft"] .brand-main h1.brand-title-refined::after{
+  height:1.5px!important;
+  width:min(100%,200px)!important;
+  opacity:1!important;
+  background:linear-gradient(90deg,transparent 0%,#b99245 12%,#efd78e 50%,#d4b060 88%,transparent 100%)!important;
+  box-shadow:0 1px 10px rgba(200,168,91,.42),0 0 14px rgba(239,215,142,.28)!important;
+}
+@media(max-width:700px){
+  html[data-theme="light"] .brand-main h1.brand-title-refined::after,
+  html[data-theme="soft"] .brand-main h1.brand-title-refined::after{
+    width:min(100%,160px)!important;
+    margin-top:8px!important;
+  }
+}
+</style>
 <style id="share-brand-borders-v314">
 /* Teilen: Markenfarben-Rand für Telegram, WhatsApp, Instagram — alle Themes */
 .share-btn.tg,.post-after-share .share-btn.tg,.share-row-v11 .share-btn.tg,.share-row-v9 .share-btn.tg,.share-row-v2 .share-btn.tg{border-color:#2AABEE!important}
