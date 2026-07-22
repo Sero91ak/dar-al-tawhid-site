@@ -20,7 +20,7 @@
     scholarsById: new Map(),
     status: "idle",
     error: "",
-    ui: { tab: "books", query: "", category: "" }
+    ui: { tab: "books", query: "", category: "", filtersOpen: false }
   };
 
   let loading = null;
@@ -171,30 +171,41 @@
     style.id = "canonical-source-library-styles";
     style.textContent = `
       .qsrc-shell{display:grid;gap:6px;margin-top:2px}
-      .qsrc-sticky{position:sticky;top:0;z-index:18;display:grid;gap:8px;padding:6px 0 10px;margin:0 -2px;background:color-mix(in srgb,var(--bg,#111) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line2,rgba(127,127,127,.16))}
+      .qsrc-sticky{position:sticky;top:0;z-index:18;display:grid;gap:8px;padding:6px 0 10px;margin:0 -2px;background:color-mix(in srgb,var(--bg,#111) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line2,rgba(127,127,127,.14))}
       .qsrc-tabs{display:flex;gap:6px}
-      .qsrc-tab{border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 92%,transparent);color:inherit;border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
-      .qsrc-tab.is-active{border-color:var(--gold2,#c9a227);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,#c9a227) 35%,transparent)}
-      .qsrc-toolbar{display:grid;gap:8px}
-      .qsrc-search-row{align-items:center}
-      .qsrc-search{min-height:38px;padding:8px 11px;font-size:13px}
-      .qsrc-filter-bar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 0 4px}
-      .qsrc-filter-bar::-webkit-scrollbar{display:none}
-      .qsrc-filter{flex:0 0 auto;border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:999px;padding:6px 10px;font:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
-      .qsrc-filter.is-active{border-color:var(--gold2,#c9a227);background:color-mix(in srgb,var(--gold2,#c9a227) 14%,transparent)}
-      .qsrc-filter-count{opacity:.72;font-weight:800;margin-left:4px}
+      .qsrc-tab{border:1px solid var(--line2,rgba(127,127,127,.2));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:999px;padding:7px 13px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+      .qsrc-tab.is-active{border-color:color-mix(in srgb,var(--gold2,#c9a227) 55%,transparent);background:color-mix(in srgb,var(--gold2,#c9a227) 10%,transparent);color:var(--premium-title,var(--gold2,#d4b86a))}
+      .qsrc-toolbar{display:grid;gap:7px}
+      .qsrc-search-wrap{position:relative}
+      .qsrc-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;opacity:.45;pointer-events:none}
+      .qsrc-search{width:100%;min-height:40px;border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:12px;background:color-mix(in srgb,var(--card,#fff) 88%,transparent);color:var(--text,inherit);padding:9px 12px 9px 36px;font:inherit;font-size:14px}
+      .qsrc-search::placeholder{color:var(--muted,#888);opacity:.85}
+      .qsrc-meta-line{margin:0;font-size:11px;letter-spacing:.06em;color:var(--muted,#888)}
+      .qsrc-control-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+      .qsrc-control-btn{border:1px solid var(--line2,rgba(127,127,127,.22));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:999px;padding:7px 12px;font:inherit;font-size:11px;font-weight:750;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+      .qsrc-control-btn.is-active{border-color:color-mix(in srgb,var(--gold2,#c9a227) 50%,transparent);background:color-mix(in srgb,var(--gold2,#c9a227) 12%,transparent);color:var(--premium-title,var(--gold2,#d4b86a))}
+      .qsrc-control-btn .qsrc-caret{opacity:.7;font-size:10px}
+      .qsrc-filter-panel{display:grid;gap:6px;padding:8px;border:1px solid var(--line2,rgba(127,127,127,.18));border-radius:12px;background:color-mix(in srgb,var(--card,#fff) 92%,transparent)}
+      .qsrc-filter-panel[hidden]{display:none!important}
+      .qsrc-filter-grid{display:flex;flex-wrap:wrap;gap:6px}
+      .qsrc-filter{border:1px solid var(--line2,rgba(127,127,127,.2));background:transparent;color:inherit;border-radius:999px;padding:6px 10px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
+      .qsrc-filter.is-active{border-color:color-mix(in srgb,var(--gold2,#c9a227) 55%,transparent);background:color-mix(in srgb,var(--gold2,#c9a227) 14%,transparent);color:var(--premium-title,var(--gold2,#d4b86a))}
+      .qsrc-filter-count{opacity:.65;font-weight:800;margin-left:3px}
       .qsrc-grid{display:grid;gap:6px}
       .qsrc-grid-compact{padding-top:2px}
-      .qsrc-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2,rgba(127,127,127,.18));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent);color:inherit;text-align:left;width:100%;cursor:pointer}
+      .qsrc-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2,rgba(127,127,127,.16));border-radius:12px;padding:11px 12px;background:color-mix(in srgb,var(--card,#fff) 93%,transparent);color:inherit;text-align:left;width:100%;cursor:pointer}
       .qsrc-card-compact{min-height:0}
       .qsrc-card.is-hidden{display:none!important}
-      .qsrc-card-body{min-width:0}
-      .qsrc-card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-      .qsrc-card-title{display:block;font-family:var(--serif,serif);font-size:15px;line-height:1.22;color:var(--premium-title,var(--gold2,#c9a227));overflow-wrap:anywhere}
-      .qsrc-card-count{flex:0 0 auto;font-size:10px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;color:var(--muted,#888);white-space:nowrap;padding-top:2px}
-      .qsrc-card-sub{display:block;margin-top:3px;font-size:11px;line-height:1.3;color:var(--muted,#888);overflow-wrap:anywhere}
-      .qsrc-chevron{opacity:.4;font-size:1rem;line-height:1}
-      .qsrc-empty,.qsrc-error,.qsrc-loading{border:1px dashed var(--line2,rgba(127,127,127,.25));border-radius:12px;padding:14px;text-align:center;color:var(--muted,#888);font-size:13px}
+      .qsrc-card-body{min-width:0;display:grid;gap:4px}
+      .qsrc-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+      .qsrc-card-title{display:block;font-family:var(--serif,Georgia,"Times New Roman",serif);font-size:16px;font-weight:650;line-height:1.24;color:var(--premium-title,var(--gold2,#d4b86a));letter-spacing:.01em;overflow-wrap:anywhere}
+      .qsrc-card-badge{flex:0 0 auto;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--gold2,#c9a227) 72%,var(--muted,#888));white-space:nowrap;padding-top:3px}
+      .qsrc-card-author{display:block;font-family:var(--sans,system-ui,sans-serif);font-size:12px;line-height:1.35;color:color-mix(in srgb,var(--text,inherit) 78%,var(--muted,#888));overflow-wrap:anywhere}
+      .qsrc-card-author .qsrc-label{display:inline-block;margin-right:6px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2,var(--muted,#777));opacity:.9}
+      .qsrc-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:1px}
+      .qsrc-card-category{font-size:10px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#888);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .qsrc-chevron{opacity:.35;font-size:.95rem;line-height:1;align-self:center}
+      .qsrc-empty,.qsrc-error,.qsrc-loading{border:1px dashed var(--line2,rgba(127,127,127,.22));border-radius:12px;padding:14px;text-align:center;color:var(--muted,#888);font-size:13px}
       .qsrc-error button,.qsrc-retry{margin-top:10px;border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
       .qsrc-detail{display:grid;gap:12px}
       .qsrc-detail-block{border:1px solid var(--line2,rgba(127,127,127,.2));border-radius:12px;padding:12px;background:color-mix(in srgb,var(--card,#fff) 94%,transparent)}
@@ -210,7 +221,7 @@
       .lib-canonical-count{white-space:nowrap;font-size:.8rem;opacity:.68}
       .lib-canonical-actions{margin-top:10px}
       .lib-canonical-open{border:1px solid var(--line2,rgba(127,127,127,.25));background:color-mix(in srgb,var(--card,#fff) 90%,transparent);color:inherit;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
-      @media(max-width:640px){.lib-canonical-head{align-items:flex-start;flex-direction:column}.qsrc-card-title{font-size:14px}}
+      @media(max-width:640px){.lib-canonical-head{align-items:flex-start;flex-direction:column}.qsrc-card-title{font-size:15px}}
     `;
     document.head.appendChild(style);
   }
@@ -259,16 +270,30 @@
     return counts;
   }
 
+  function activeCategoryLabel() {
+    if (!state.ui.category) return "Alle Kategorien";
+    return state.ui.category;
+  }
+
   function renderCategoryFilters() {
     const counts = categoryBookCounts();
     const cats = [...counts.keys()].sort((a, b) => a.localeCompare(b, "de"));
     const allCount = state.books.length;
+    const panelOpen = !!state.ui.filtersOpen;
     const buttons = [`<button type="button" class="qsrc-filter${state.ui.category === "" ? " is-active" : ""}" data-qsrc-category="">Alle <span class="qsrc-filter-count">${allCount}</span></button>`];
     cats.forEach((cat) => {
       const active = state.ui.category === cat ? " is-active" : "";
       buttons.push(`<button type="button" class="qsrc-filter${active}" data-qsrc-category="${esc(cat)}">${esc(cat)} <span class="qsrc-filter-count">${counts.get(cat) || 0}</span></button>`);
     });
-    return `<div class="qsrc-filter-bar" role="toolbar" aria-label="Kategorien">${buttons.join("")}</div>`;
+    return `<div class="qsrc-control-row">
+      <button type="button" class="qsrc-control-btn${panelOpen || state.ui.category ? " is-active" : ""}" data-qsrc-filter-toggle aria-expanded="${panelOpen}">
+        Kategorien <span class="qsrc-caret">${panelOpen ? "▴" : "▾"}</span>
+      </button>
+      ${state.ui.category ? `<button type="button" class="qsrc-control-btn is-active" data-qsrc-category="">${esc(activeCategoryLabel())} · zurücksetzen</button>` : ""}
+    </div>
+    <div class="qsrc-filter-panel" id="qsrcFilterPanel" ${panelOpen ? "" : "hidden"}>
+      <div class="qsrc-filter-grid" role="toolbar" aria-label="Kategorien">${buttons.join("")}</div>
+    </div>`;
   }
 
   function renderBookCard(book) {
@@ -277,11 +302,12 @@
     const postLabel = postCount ? `${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}` : "Katalog";
     return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" data-qsrc-search="${esc(search)}">
       <span class="qsrc-card-body">
-        <span class="qsrc-card-row">
+        <span class="qsrc-card-head">
           <span class="qsrc-card-title">${esc(book.title)}</span>
-          <span class="qsrc-card-count">${esc(postLabel)}</span>
+          <span class="qsrc-card-badge">${esc(postLabel)}</span>
         </span>
-        <span class="qsrc-card-sub">${esc(book.author)} · ${esc(book.category || "Werk")}</span>
+        <span class="qsrc-card-author"><span class="qsrc-label">Autor</span>${esc(book.author)}</span>
+        <span class="qsrc-card-foot"><span class="qsrc-card-category">${esc(book.category || "Werk")}</span></span>
       </span>
       <span class="qsrc-chevron" aria-hidden="true">›</span>
     </button>`;
@@ -297,11 +323,12 @@
     const postCount = Number(scholar.postCount || 0);
     return `<button type="button" class="qsrc-card qsrc-card-compact" data-nav="quellen-scholar" data-value="${esc(scholar.id)}" data-qsrc-search="${esc(search)}">
       <span class="qsrc-card-body">
-        <span class="qsrc-card-row">
+        <span class="qsrc-card-head">
           <span class="qsrc-card-title">${esc(scholar.name)}</span>
-          <span class="qsrc-card-count">${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}</span>
+          <span class="qsrc-card-badge">${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}</span>
         </span>
-        <span class="qsrc-card-sub">zitierter Gelehrter${workTitles ? ` · ${esc(workTitles)}` : ""}</span>
+        <span class="qsrc-card-author"><span class="qsrc-label">Rolle</span>zitierter Gelehrter</span>
+        ${workTitles ? `<span class="qsrc-card-foot"><span class="qsrc-card-category">${esc(workTitles)}</span></span>` : ""}
       </span>
       <span class="qsrc-chevron" aria-hidden="true">›</span>
     </button>`;
@@ -316,8 +343,8 @@
     const scholars = filteredScholars();
     const activeTab = state.ui.tab === "scholars" ? "scholars" : "books";
     const totalLabel = activeTab === "scholars"
-      ? `${scholars.length} Gelehrte`
-      : (state.ui.query || state.ui.category ? `${books.length} von ${state.books.length} Bücher` : `${state.books.length} Bücher`);
+      ? (state.ui.query ? `${scholars.length} von ${state.scholars.length} Gelehrte` : `${state.scholars.length} verifizierte Gelehrte`)
+      : (state.ui.query || state.ui.category ? `${books.length} von ${state.books.length} Werke` : `${state.books.length} verifizierte Werke`);
 
     const listHtml = activeTab === "scholars"
       ? (scholars.length
@@ -335,10 +362,11 @@
       <button type="button" class="qsrc-tab${activeTab === "scholars" ? " is-active" : ""}" data-qsrc-tab="scholars" role="tab" aria-selected="${activeTab === "scholars"}">Gelehrte</button>
     </div>
     <div class="qsrc-toolbar">
-      <div class="books-library-toolbar qsrc-search-row">
-        <input id="qsrcSearchInput" class="books-library-search qsrc-search" type="search" placeholder="Suchen…" autocomplete="off" enterkeyhint="search" value="${esc(state.ui.query)}">
-        <span id="qsrcTotal" class="books-library-total">${esc(totalLabel)}</span>
+      <div class="qsrc-search-wrap">
+        <svg class="qsrc-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="qsrcSearchInput" class="qsrc-search" type="search" placeholder="Werk, Autor oder Kategorie suchen…" autocomplete="off" enterkeyhint="search" value="${esc(state.ui.query)}">
       </div>
+      <p id="qsrcMetaLine" class="qsrc-meta-line">${esc(totalLabel)}</p>
       ${activeTab === "books" ? renderCategoryFilters() : ""}
     </div>
   </div>
@@ -420,7 +448,7 @@
 
   function applyClientFilters() {
     const input = document.getElementById("qsrcSearchInput");
-    const total = document.getElementById("qsrcTotal");
+    const meta = document.getElementById("qsrcMetaLine");
     const q = input ? input.value.trim() : state.ui.query;
     state.ui.query = q;
 
@@ -429,13 +457,13 @@
       card.classList.toggle("is-hidden", !!q && !matchesQuery(blob, q));
     });
 
-    if (!total) return;
+    if (!meta) return;
     const visible = document.querySelectorAll("#qsrcResults .qsrc-card:not(.is-hidden)").length;
     const all = document.querySelectorAll("#qsrcResults .qsrc-card").length;
     if (state.ui.tab === "scholars") {
-      total.textContent = q ? `${visible} von ${all} Gelehrte` : `${all} Gelehrte`;
+      meta.textContent = q ? `${visible} von ${all} Gelehrte` : `${all} verifizierte Gelehrte`;
     } else {
-      total.textContent = q || state.ui.category ? `${visible} von ${all} Bücher` : `${all} Bücher`;
+      meta.textContent = q || state.ui.category ? `${visible} von ${all} Werke` : `${all} verifizierte Werke`;
     }
   }
 
@@ -443,6 +471,14 @@
     document.querySelectorAll("[data-qsrc-tab]").forEach((btn) => {
       btn.onclick = () => {
         state.ui.tab = btn.getAttribute("data-qsrc-tab") || "books";
+        state.ui.filtersOpen = false;
+        if (typeof global.render === "function") global.render();
+      };
+    });
+
+    document.querySelectorAll("[data-qsrc-filter-toggle]").forEach((btn) => {
+      btn.onclick = () => {
+        state.ui.filtersOpen = !state.ui.filtersOpen;
         if (typeof global.render === "function") global.render();
       };
     });
@@ -450,6 +486,7 @@
     document.querySelectorAll("[data-qsrc-category]").forEach((btn) => {
       btn.onclick = () => {
         state.ui.category = btn.getAttribute("data-qsrc-category") || "";
+        state.ui.filtersOpen = false;
         if (typeof global.render === "function") global.render();
       };
     });
