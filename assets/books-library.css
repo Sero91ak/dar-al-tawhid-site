@@ -17,7 +17,7 @@
   min-height: 42px;
   border: 1px solid var(--line2);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in srgb, var(--card) 92%, var(--premium-title, var(--gold2)) 8%);
   color: var(--text);
   padding: 10px 12px;
   font: inherit;
@@ -66,7 +66,7 @@
 .books-library-group-head h3 {
   margin: 0;
   font-family: var(--serif);
-  color: var(--gold2);
+  color: var(--premium-title, var(--gold2));
   font-size: clamp(17px, 4.2vw, 21px);
   line-height: 1.15;
   overflow-wrap: anywhere;
@@ -90,21 +90,22 @@
   grid-template-columns: 38px minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
-  border: 1px solid var(--line2);
+  border: 1px solid var(--line);
   border-radius: 16px;
-  background: linear-gradient(145deg, rgba(22, 19, 14, 0.94), rgba(10, 10, 8, 0.94));
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: var(--theme-surface-elevated, linear-gradient(145deg, var(--card), var(--panel)));
+  box-shadow: var(--shadow, 0 10px 24px rgba(0, 0, 0, 0.15)), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   padding: 11px 12px;
   cursor: pointer;
   text-align: left;
   min-height: 0 !important;
+  color: var(--text);
   transition: transform 0.15s ease, border-color 0.15s ease, filter 0.15s ease;
 }
 
 .book-library-card:hover {
   transform: translateY(-1px);
-  border-color: rgba(239, 215, 142, 0.45);
-  filter: brightness(1.03);
+  border-color: color-mix(in srgb, var(--premium-title, var(--gold2)) 42%, var(--line));
+  filter: brightness(1.02);
 }
 
 .book-library-card.is-hidden {
@@ -117,7 +118,7 @@
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: linear-gradient(180deg, rgba(239, 215, 142, 0.18), rgba(155, 122, 60, 0.08));
+  background: color-mix(in srgb, var(--premium-title, var(--gold2)) 10%, var(--card));
   border: 1px solid var(--line2);
   font-size: 18px;
   margin: 0 !important;
@@ -135,7 +136,7 @@
 .book-library-title {
   margin: 0 0 4px !important;
   font-family: var(--serif);
-  color: var(--gold2);
+  color: var(--premium-title, var(--gold2));
   font-size: clamp(15px, 3.8vw, 18px) !important;
   line-height: 1.22 !important;
   font-weight: 700;
@@ -159,7 +160,7 @@
 }
 
 .book-library-chevron {
-  color: var(--gold2);
+  color: var(--premium-title, var(--gold2));
   font-size: 20px;
   line-height: 1;
   opacity: 0.72;
