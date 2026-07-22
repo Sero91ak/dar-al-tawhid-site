@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v316";</script>
-<script defer src="/assets/live-boot.js?v=app-shell-v316"></script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v317";</script>
+<script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
 <title>DAR AL TAWḤID</title>
@@ -46,13 +46,16 @@
   --text:#f6edd2;--muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
   --danger:#ffd1c5;--shadow:0 22px 65px rgba(0,0,0,.42);
-  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-display:"Instrument Serif","Baskerville","Georgia",serif;
   --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-arabic:"Noto Naskh Arabic","Amiri",serif;
-  --font-transliteration:"Source Serif 4","Noto Serif",Georgia,serif;
+  --font-arabic-ui:"Noto Naskh Arabic","Noto Naskh Arabic",serif;
+  --font-transliteration:"Source Serif 4","Noto Serif","Georgia",serif;
+  --font-reader:"Source Serif 4","Noto Serif","Georgia",serif;
+  --font-signature:"Allura","Brush Script MT",cursive;
   --serif:var(--font-display);
   --display:var(--font-display);
-  --script:"Allura","Brush Script MT",cursive;
+  --script:var(--font-signature);
   --sans:var(--font-ui);
   --font-serif:var(--font-transliteration);
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
@@ -1152,13 +1155,16 @@ html.is-standalone-pwa{background:var(--page-cover)}
   --gold:#c8a85b;--gold2:#f0d98f;--bronze:#9a7435;--cream:#f7efd6;
   --text:#f4ebd1;--muted:#c7bda3;--muted2:#9c927b;
   --line:rgba(214,183,106,.34);--line2:rgba(214,183,106,.18);
-  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-display:"Instrument Serif","Baskerville","Georgia",serif;
   --font-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-arabic:"Noto Naskh Arabic","Amiri",serif;
-  --font-transliteration:"Source Serif 4","Noto Serif",Georgia,serif;
+  --font-arabic-ui:"Noto Naskh Arabic","Noto Naskh Arabic",serif;
+  --font-transliteration:"Source Serif 4","Noto Serif","Georgia",serif;
+  --font-reader:"Source Serif 4","Noto Serif","Georgia",serif;
+  --font-signature:"Allura","Brush Script MT",cursive;
   --serif:var(--font-display);
   --display:var(--font-display);
-  --script:"Allura","Brush Script MT",cursive;
+  --script:var(--font-signature);
   --sans:var(--font-ui);
   --font-serif:var(--font-transliteration);
 }
@@ -8508,15 +8514,15 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js"></script>
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1"></script>
-<link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/source-serif-4-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=3">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=1">
-<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=4">
+<link rel="stylesheet" href="/assets/dar-premium-typography.css?v=5">
 
 
 <style id="feature-final-v202">
@@ -9917,24 +9923,6 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 html[data-theme] .share-btn.tg,html[data-theme] .post-after-share .share-btn.tg{border-color:#2AABEE!important}
 html[data-theme] .share-btn.wa,html[data-theme] .post-after-share .share-btn.wa{border-color:#25D366!important}
 html[data-theme] .share-btn.ig,html[data-theme] .post-after-share .share-btn.ig{border-color:#fa7e1e!important}
-</style>
-<style id="header-brand-polish-v315">
-@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:500;font-display:swap;src:url("/assets/fonts/source-serif-4-v14-latin_latin-ext-500.woff2") format("woff2")}
-@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:600;font-display:swap;src:url("/assets/fonts/source-serif-4-v14-latin_latin-ext-600.woff2") format("woff2")}
-.top-shell.theme-hero-shell .brand-kicker-row,.brand-kicker-row{margin-bottom:17px!important}
-.top-shell.theme-hero-shell .brand-main,.brand-main{margin-top:3px!important;padding-top:0!important}
-.top-shell.theme-hero-shell .brand small,.brand-kicker-row small,.brand small{font-family:"Source Serif 4",var(--font-display),Georgia,serif!important;font-weight:500!important;font-size:10.5px!important;letter-spacing:.14em!important;text-transform:uppercase;font-synthesis:none!important;color:var(--muted2)!important;line-height:1.4!important}
-.top-shell.theme-hero-shell h1,.brand-main h1,h1{font-family:"Source Serif 4",var(--font-display),Georgia,serif!important;font-weight:600!important;letter-spacing:.05em!important;line-height:1.02!important;font-synthesis:none!important;text-shadow:none!important}
-@media(max-width:700px){.top-shell.theme-hero-shell .brand-kicker-row,.brand-kicker-row{margin-bottom:14px!important}.top-shell.theme-hero-shell .brand small,.brand small{font-size:9px!important;letter-spacing:.12em!important}.top-shell.theme-hero-shell h1,.brand-main h1{letter-spacing:.032em!important}}
-</style>
-<style id="typography-transliteration-v313">
-/* Transliteration — Source Serif 4, gewinnt gegen Compact-Fix + Inline-Cormorant */
-.quran-surah-card h3,.quran-surah-head h2,.quran-result-top h3,.quran-result-top strong,.quran-home-teaser h3,.quran-athar-card h4,.quran-athar-source b,.quran-ayah-tr,.quran-result-tr,.quran-popular-btn,.quran-meta-note,.dua-trans,.dua-card h3,.article-title h2,.profile-title,.book-profile-title,.book-author,.list-card h3,.folder-card h3,.post-card h3,.popular-row-text h4,.excerpt,.isnad-speaker,.isnad-quote,.hadith-book-card h3,.hadith-panel-head h3,.hadith-card-title,.hadith-chapter-card b,.hadith-hero h3,.quiz-main-title,.quiz-question,.quiz-home-title,.quiz-hero h2,.ilm-welcome h2,.event-name,.font-slider-preview[data-preview="quranTransliterationScale"],.font-slider-preview[data-preview="duaTransliterationScale"]{font-family:var(--font-transliteration)!important;font-synthesis:none!important;font-style:normal!important;letter-spacing:normal!important;text-shadow:none!important}
-.quran-surah-card h3,.quran-surah-head h2,.quran-result-top h3,.quran-result-top strong,.quran-home-teaser h3,.quran-athar-card h4,.dua-card h3,.article-title h2,.profile-title,.book-profile-title,.list-card h3,.folder-card h3,.post-card h3,.popular-row-text h4,.hadith-book-card h3,.hadith-panel-head h3,.hadith-card-title,.hadith-chapter-card b,.hadith-hero h3,.quiz-main-title,.quiz-question,.quiz-home-title,.quiz-hero h2,.ilm-welcome h2{font-weight:500!important}
-.quran-ayah-tr,.quran-result-tr,.dua-trans,.quran-meta-note,.excerpt,.isnad-quote,.book-author,.event-name{font-weight:400!important}
-.isnad-speaker,.quran-athar-source b{font-weight:500!important}
-.quran-home-teaser h3{font-size:clamp(24px,4vw,27px)!important;line-height:1.1!important}
-.post-card h3,.folder-card h3,.list-card h3,.popular-row-text h4{font-size:clamp(17px,3.2vw,19px)!important;line-height:1.22!important}
 </style>
 </head>
 <body class="has-bottom-nav">
@@ -14173,7 +14161,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v316";
+const APP_BUILD_ID="app-shell-v317";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

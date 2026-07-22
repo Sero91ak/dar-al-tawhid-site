@@ -1,5 +1,26 @@
-/* DAR AL TAWḤID — Kompakte Premium-Typografie: Cormorant Garamond + Manrope + Source Serif 4 */
+/* DAR AL TAWḤID — Globales Premium-Typografiesystem v5
+   Display: Instrument Serif | Transliteration/Lesen: Source Serif 4
+   UI: Manrope | Arabisch: Noto Naskh Arabic | Qurʾān: unverändert */
 
+/* ── Instrument Serif (Display, rein deutsch) ── */
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/instrument-serif-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── Source Serif 4 (Transliteration + Lesen) ── */
 @font-face {
   font-family: "Source Serif 4";
   font-style: normal;
@@ -24,20 +45,8 @@
   src: url("/assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-@font-face {
-  font-family: "Cormorant Garamond";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("/assets/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Cormorant Garamond";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/assets/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2");
-}
+
+/* ── Manrope (UI, variabel) ── */
 @font-face {
   font-family: "Manrope";
   font-style: normal;
@@ -52,6 +61,8 @@
   font-display: swap;
   src: url("/assets/fonts/manrope-latin-ext.woff2") format("woff2");
 }
+
+/* ── Noto Naskh Arabic ── */
 @font-face {
   font-family: "Noto Naskh Arabic";
   font-style: normal;
@@ -77,36 +88,162 @@
 }
 
 :root {
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Instrument Serif", "Baskerville", "Georgia", serif;
+  --font-transliteration: "Source Serif 4", "Noto Serif", "Georgia", serif;
+  --font-reader: "Source Serif 4", "Noto Serif", "Georgia", serif;
   --font-ui: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-arabic: "Noto Naskh Arabic", "Amiri", serif;
-  --font-transliteration: "Source Serif 4", "Noto Serif", Georgia, serif;
+  --font-arabic-ui: "Noto Naskh Arabic", "Noto Naskh Arabic", serif;
+  --font-signature: "Allura", "Brush Script MT", cursive;
 
-  --font-size-page-title: clamp(28px, 5vw, 32px);
-  --font-size-section-title: clamp(25px, 4.2vw, 28px);
-  --font-size-feature-title: clamp(23px, 4vw, 27px);
-  --font-size-card-title: clamp(17px, 3.2vw, 20px);
+  --font-size-page-title: clamp(28px, 5vw, 31px);
+  --font-size-section-title: clamp(24px, 4.2vw, 27px);
+  --font-size-feature-title: clamp(22px, 3.8vw, 25px);
+  --font-size-card-title: clamp(17px, 3.2vw, 19px);
+  --font-size-card-title-serif: clamp(17px, 3.2vw, 20px);
   --font-size-body: clamp(15px, 2.1vw, 17px);
+  --font-size-reader: clamp(16px, 2.2vw, 18px);
   --font-size-secondary: clamp(13px, 1.9vw, 15px);
   --font-size-label: clamp(10px, 1.7vw, 12px);
   --font-size-button: clamp(14px, 2vw, 16px);
+  --font-size-nav: clamp(12px, 1.8vw, 14px);
 
   --line-height-display: 1.08;
-  --line-height-heading: 1.1;
+  --line-height-section: 1.12;
+  --line-height-feature: 1.14;
   --line-height-body: 1.5;
+  --line-height-reader: 1.65;
   --line-height-compact: 1.35;
-  --line-height-arabic: 1.85;
+  --line-height-arabic: 1.9;
 
-  --letter-spacing-display: -0.005em;
-  --letter-spacing-heading: 0;
+  --letter-spacing-display: 0.01em;
   --letter-spacing-label: 0.1em;
 
   --serif: var(--font-display);
   --display: var(--font-display);
   --sans: var(--font-ui);
   --font-serif: var(--font-transliteration);
+  --script: var(--font-signature);
 }
 
+/* ── Semantische Typografie-Klassen ── */
+.typo-page-title,
+[data-typo="pageTitle"] {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-page-title) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-display) !important;
+  letter-spacing: var(--letter-spacing-display) !important;
+  font-synthesis: none !important;
+  text-shadow: none !important;
+  min-width: 0;
+  text-wrap: balance;
+}
+
+.typo-section-title,
+[data-typo="sectionTitle"] {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-section-title) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-section) !important;
+  font-synthesis: none !important;
+  text-shadow: none !important;
+  min-width: 0;
+}
+
+.typo-feature-title,
+[data-typo="featureTitle"] {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-feature-title) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-feature) !important;
+  font-synthesis: none !important;
+  text-shadow: none !important;
+  min-width: 0;
+}
+
+.typo-card-title,
+[data-typo="cardTitle"] {
+  font-family: var(--font-ui) !important;
+  font-size: var(--font-size-card-title) !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  font-synthesis: none !important;
+  min-width: 0;
+}
+
+.typo-card-title-serif,
+[data-typo="cardTitleSerif"] {
+  font-family: var(--font-transliteration) !important;
+  font-size: var(--font-size-card-title-serif) !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+  font-synthesis: none !important;
+  min-width: 0;
+}
+
+.typo-body,
+[data-typo="body"] {
+  font-family: var(--font-ui) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-body) !important;
+}
+
+.typo-reader,
+[data-typo="reader"] {
+  font-family: var(--font-reader) !important;
+  font-size: var(--font-size-reader) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-reader) !important;
+  font-synthesis: none !important;
+}
+
+.typo-secondary,
+[data-typo="secondary"] {
+  font-family: var(--font-ui) !important;
+  font-size: var(--font-size-secondary) !important;
+  font-weight: 400 !important;
+  line-height: 1.48 !important;
+}
+
+.typo-meta,
+[data-typo="meta"] {
+  font-family: var(--font-ui) !important;
+  font-size: var(--font-size-secondary) !important;
+  font-weight: 500 !important;
+  line-height: 1.45 !important;
+}
+
+.typo-label,
+[data-typo="label"] {
+  font-family: var(--font-ui) !important;
+  font-size: var(--font-size-label) !important;
+  font-weight: 650 !important;
+  letter-spacing: var(--letter-spacing-label) !important;
+  text-transform: uppercase;
+  font-synthesis: none !important;
+}
+
+.typo-transliteration,
+[data-typo="transliteration"] {
+  font-family: var(--font-transliteration) !important;
+  font-weight: 500 !important;
+  font-synthesis: none !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  text-shadow: none !important;
+}
+
+.typo-arabic,
+[data-typo="arabic"] {
+  font-family: var(--font-arabic) !important;
+  line-height: var(--line-height-arabic) !important;
+  letter-spacing: normal !important;
+  font-synthesis: none !important;
+}
+
+/* ── UI-Basis: Manrope ── */
 body,
 button,
 input,
@@ -125,8 +262,12 @@ textarea,
 .back-btn,
 .home-btn,
 .action-btn,
-.footer-action-btn {
-  font-family: var(--font-ui);
+.footer-action-btn,
+.modal,
+.sheet,
+.toast {
+  font-family: var(--font-ui) !important;
+  font-synthesis: none;
 }
 
 body {
@@ -135,13 +276,28 @@ body {
   font-weight: 400;
 }
 
-/* Display: Cormorant Garamond 500 — schlank, kurvig, kompakt */
-h1,
-.top-shell.theme-hero-shell h1,
+.bottom-nav-btn {
+  font-size: var(--font-size-nav) !important;
+  font-weight: 600 !important;
+}
+
+.btn,
+.pill,
+.back-btn,
+.home-btn,
+.action-btn,
+.direct-pick,
+.filter-select {
+  font-size: var(--font-size-button) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Display: Instrument Serif (rein deutsch) ── */
 .view h2,
 .home-start-title,
 .overview-title h3,
 .section-head h3,
+.popular-panel .section-head h3,
 .feature-head h3,
 .more-group > h3,
 .direct-pick-title h3,
@@ -158,19 +314,21 @@ h1,
 .prayer-overview__today-label,
 .post-slide h3,
 .related-compact-card h4,
-.info-card h3 {
+.info-card h3,
+.home-more-section .collapsible-head h3,
+.category-cluster h3,
+.app-save-box h3,
+.ramadan-teaser h3,
+.ramadan-panel h3,
+.zakat-home-teaser h3,
+.view-head-home-row h2 {
   font-family: var(--font-display) !important;
-  font-weight: 500 !important;
-  letter-spacing: var(--letter-spacing-heading) !important;
+  font-weight: 400 !important;
+  letter-spacing: var(--letter-spacing-display) !important;
   text-shadow: none !important;
-}
-
-h1,
-.top-shell.theme-hero-shell h1 {
-  font-size: var(--font-size-page-title) !important;
-  line-height: var(--line-height-display) !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
+  font-synthesis: none !important;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .view h2,
@@ -184,39 +342,100 @@ h1,
 .feature-head h3,
 .more-group > h3,
 .overview-title h3,
-.stats-section-head h3 {
+.stats-section-head h3,
+.category-cluster h3 {
   font-size: var(--font-size-section-title) !important;
-  line-height: var(--line-height-heading) !important;
+  line-height: var(--line-height-section) !important;
 }
 
 .prayer-overview__today-label,
 .current-focus-head h3,
 .direct-pick-title h3,
-.calendar-title h3 {
+.calendar-title h3,
+.post-intro-head h3 {
   font-size: var(--font-size-feature-title) !important;
-  line-height: 1.1 !important;
+  line-height: var(--line-height-feature) !important;
 }
 
 .daily-title,
 .recommended-title {
-  font-size: clamp(22px, 3.8vw, 25px) !important;
-  line-height: 1.1 !important;
+  font-size: var(--font-size-feature-title) !important;
+  line-height: var(--line-height-feature) !important;
   margin: 0 0 4px !important;
 }
 
-.info-card h3 {
+.info-card h3,
+.feature-card h4 {
   font-size: var(--font-size-card-title) !important;
   line-height: 1.24 !important;
 }
 
-/* UI-Labels — keine Display-Schrift */
+.feature-card h4 {
+  font-family: var(--font-ui) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Header: Transliteration (Source Serif 4) ── */
+.top-shell.theme-hero-shell .brand-kicker-row,
+.brand-kicker-row {
+  margin-bottom: 17px !important;
+}
+
+.top-shell.theme-hero-shell .brand-main,
+.brand-main {
+  margin-top: 3px !important;
+  padding-top: 0 !important;
+}
+
+.top-shell.theme-hero-shell .brand small,
+.brand-kicker-row small,
+.brand small {
+  font-family: var(--font-transliteration) !important;
+  font-weight: 500 !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase;
+  font-synthesis: none !important;
+  color: var(--muted2) !important;
+  line-height: 1.4 !important;
+}
+
+.top-shell.theme-hero-shell h1,
+.brand-main h1,
+.brand h1 {
+  font-family: var(--font-transliteration) !important;
+  font-weight: 500 !important;
+  font-size: clamp(28px, 5vw, 31px) !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.06 !important;
+  font-synthesis: none !important;
+  text-shadow: none !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .top-shell.theme-hero-shell .brand-kicker-row,
+  .brand-kicker-row {
+    margin-bottom: 14px !important;
+  }
+  .top-shell.theme-hero-shell .brand small,
+  .brand small {
+    font-size: 9px !important;
+    letter-spacing: 0.1em !important;
+  }
+  .top-shell.theme-hero-shell h1,
+  .brand-main h1 {
+    letter-spacing: 0.028em !important;
+  }
+}
+
+/* ── UI-Labels ── */
 .eyebrow,
 .daily-label,
 .recommended-label,
 .quran-home-teaser-label,
 .current-focus-head span,
 .prayer-overview__kicker,
-.brand small,
 .isnad-label,
 .section-head span,
 .direct-pick-title span,
@@ -227,14 +446,10 @@ h1,
   font-size: var(--font-size-label) !important;
   letter-spacing: var(--letter-spacing-label) !important;
   text-transform: uppercase;
+  font-synthesis: none !important;
 }
 
-.feature-card h4 {
-  font-family: var(--font-ui) !important;
-  font-weight: 600 !important;
-  font-size: var(--font-size-card-title) !important;
-}
-
+/* ── Fließtext UI ── */
 .folder-card p,
 .info-card p,
 .dua-card p,
@@ -247,98 +462,41 @@ h1,
 .popular-row-text span {
   font-family: var(--font-ui) !important;
   font-weight: 400 !important;
-  line-height: var(--line-height-body);
+  line-height: var(--line-height-body) !important;
 }
 
-.bottom-nav-btn,
-.social-link,
-.pill,
-.btn,
-.back-btn,
-.home-btn,
-.action-btn,
-.collapse-toggle,
-.hijri-header-pill,
-.folder-meta span,
-.badge {
-  font-family: var(--font-ui) !important;
-  font-weight: 600 !important;
-  font-size: var(--font-size-button);
-}
-
-.bottom-nav-btn {
-  font-size: 9px !important;
-  font-weight: 650 !important;
+/* ── Lesetext (Source Serif 4) ── */
+.statement,
+.article-body,
+.post-body,
+.post-content,
+.dua-detail-box .dua-de,
+.isnad-quote,
+.excerpt,
+.reader-text {
+  font-family: var(--font-reader) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-reader) !important;
+  font-synthesis: none !important;
 }
 
 .statement {
-  font-family: var(--font-display) !important;
-  font-weight: 500 !important;
-  line-height: 1.65 !important;
+  font-size: var(--font-size-reader) !important;
+  line-height: 1.68 !important;
 }
 
 .statement strong {
-  font-weight: 600 !important;
-}
-
-.statement em,
-.script-accent {
-  font-family: var(--script, "Allura", cursive) !important;
-  font-weight: 400 !important;
-}
-
-.prayer-overview__time-line,
-.prayer-overview__time-hour,
-.prayer-overview__time-countdown,
-.prayer-overview__location-text,
-.stat-card b,
-.prayer-time-card span,
-.prayer-time-card b,
-.prayer-time-card small,
-.header-prayer-item span,
-.header-prayer-item small,
-[data-numeric],
-.tabular-nums {
-  font-family: var(--font-ui) !important;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-.dua-arabic,
-.dua-detail-box .dua-arabic,
-.arabic-text:not(.quran-ayah-ar) {
-  font-family: var(--font-arabic) !important;
-  line-height: var(--line-height-arabic) !important;
-  letter-spacing: normal !important;
-}
-
-.home-hijri-frame-date {
-  font-family: var(--font-display) !important;
   font-weight: 500 !important;
 }
 
-.view h2,
-.section-head h3,
-.feature-head h3,
-.view-head-home-row h2,
-.daily-title,
-.recommended-title,
-.prayer-overview__today-label {
-  min-width: 0;
-  overflow-wrap: anywhere;
+/* ── Signatur: nur .signature ── */
+.signature {
+  font-family: var(--font-signature) !important;
+  font-weight: 400 !important;
+  font-synthesis: none !important;
 }
 
-.section-head,
-.popular-panel .section-head {
-  margin-bottom: 8px !important;
-}
-
-html[data-theme] .section-head h3,
-html[data-theme] .view h2 {
-  font-synthesis: none;
-}
-
-/* Transliteration: Source Serif 4 — volle Diakritika, kein Font-Mixing */
+/* ── Transliteration (Source Serif 4) ── */
 .quran-surah-card h3,
 .quran-surah-head h2,
 .quran-result-top h3,
@@ -360,9 +518,7 @@ html[data-theme] .view h2 {
 .folder-card h3,
 .post-card h3,
 .popular-row-text h4,
-.excerpt,
 .isnad-speaker,
-.isnad-quote,
 .hadith-book-card h3,
 .hadith-panel-head h3,
 .hadith-card-title,
@@ -374,6 +530,8 @@ html[data-theme] .view h2 {
 .quiz-hero h2,
 .ilm-welcome h2,
 .event-name,
+.current-focus-text b,
+.home-refresh-copy b,
 .font-slider-preview[data-preview="quranTransliterationScale"],
 .font-slider-preview[data-preview="duaTransliterationScale"] {
   font-family: var(--font-transliteration) !important;
@@ -381,6 +539,8 @@ html[data-theme] .view h2 {
   font-style: normal !important;
   letter-spacing: normal !important;
   text-shadow: none !important;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .quran-surah-card h3,
@@ -428,31 +588,168 @@ html[data-theme] .view h2 {
 
 .quran-home-teaser h3 {
   font-size: var(--font-size-feature-title) !important;
-  line-height: 1.1 !important;
+  line-height: var(--line-height-feature) !important;
 }
 
 .folder-card h3,
 .post-card h3,
 .list-card h3,
 .dua-card h3,
-.popular-row-text h4 {
-  font-size: var(--font-size-card-title) !important;
+.popular-row-text h4,
+.article-title h2 {
+  font-size: var(--font-size-card-title-serif) !important;
   line-height: 1.24 !important;
-  min-width: 0;
-  overflow-wrap: anywhere;
 }
 
+/* ── Arabisch (Noto Naskh) — Qurʾān-Verse unberührt ── */
+.dua-arabic,
+.dua-detail-box .dua-arabic,
+.arabic-text:not(.quran-ayah-ar),
+.hadith-card-ar {
+  font-family: var(--font-arabic) !important;
+  line-height: var(--line-height-arabic) !important;
+  letter-spacing: normal !important;
+  font-synthesis: none !important;
+}
+
+/* ── Zahlen, Zeiten, Statistik ── */
+.prayer-overview__time-line,
+.prayer-overview__time-hour,
+.prayer-overview__time-countdown,
+.prayer-overview__location-text,
+.stat-card b,
+.prayer-time-card span,
+.prayer-time-card b,
+.prayer-time-card small,
+.header-prayer-item span,
+.header-prayer-item small,
+.home-hijri-frame-date,
+.ramadan-countdown,
+.suhur-iftar-row span,
+[data-numeric],
+.tabular-nums {
+  font-family: var(--font-ui) !important;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  font-weight: 600 !important;
+  font-synthesis: none !important;
+}
+
+.home-hijri-frame-date {
+  font-weight: 500 !important;
+  font-size: clamp(14px, 3.7vw, 16.5px) !important;
+}
+
+/* ── Gewichtskorrektur: keine klobige Fettschrift ── */
+h1, h2, h3, h4, h5, h6,
+.view h2,
+.section-head h3,
+.salam,
+.daily-title,
+.recommended-title,
+.post-card h3,
+.folder-card h3,
+.popular-row-text h4,
+.hadith-card-title {
+  font-weight: inherit;
+}
+
+.eyebrow,
+.daily-label,
+.recommended-label,
+.folder-meta span,
+.badge,
+.direct-pick,
+.filter-select {
+  font-weight: 650 !important;
+}
+
+.stat-card b {
+  font-weight: 600 !important;
+}
+
+/* ── Kompakt: keine übergroßen Legacy-Überschriften ── */
+h1:not(.brand h1) {
+  font-size: var(--font-size-page-title) !important;
+  line-height: var(--line-height-display) !important;
+  font-weight: 400 !important;
+}
+
+.salam {
+  font-size: var(--font-size-feature-title) !important;
+  line-height: var(--line-height-feature) !important;
+  font-weight: 400 !important;
+  white-space: nowrap;
+}
+
+/* ── Abstände zu Dividern ── */
+.section-head,
+.popular-panel .section-head,
+.view-head {
+  margin-bottom: 10px !important;
+}
+
+/* ── Theme-neutral: keine Schrift-Überschreibung in Themes ── */
+body.is-home-route .view-head h2.home-start-title {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  font-size: var(--font-size-page-title) !important;
+  line-height: var(--line-height-display) !important;
+  letter-spacing: var(--letter-spacing-display) !important;
+  text-shadow: none !important;
+  font-synthesis: none !important;
+}
+
+/* Transliteration-Feature-Titel (nicht Instrument Serif) */
+.quran-home-teaser h3,
+.zakat-home-teaser h3,
+.quiz-home-title,
+.quiz-hero h2,
+.ilm-welcome h2 {
+  font-family: var(--font-transliteration) !important;
+  font-weight: 500 !important;
+  font-size: var(--font-size-feature-title) !important;
+  line-height: var(--line-height-feature) !important;
+  font-synthesis: none !important;
+}
+
+/* Funktionskarten Mehr-Bereich */
+.more-group .feature-card h4,
+.folder-card:not(.post-card) h3 {
+  font-family: var(--font-ui) !important;
+  font-weight: 600 !important;
+}
+
+/* Beitrags-Lesetext */
+.post-body p,
+.post-content p,
+.article .statement,
+.dua-detail-box {
+  font-family: var(--font-reader) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-reader) !important;
+  font-synthesis: none !important;
+}
+
+/* Fazit */
+.fazit-label,
+.post-fazit-label,
+[data-fazit-label] {
+  font-family: var(--font-ui) !important;
+  font-weight: 650 !important;
+  font-size: var(--font-size-label) !important;
+  letter-spacing: var(--letter-spacing-label) !important;
+  text-transform: uppercase;
+}
+
+/* Theme-neutral: keine Schrift-Überschreibung in Themes */
+html[data-theme] .view h2,
+html[data-theme] .section-head h3,
 html[data-theme] .quran-surah-card h3,
 html[data-theme] .quran-surah-head h2,
-html[data-theme] .quran-result-top strong,
 html[data-theme] .quran-ayah-tr,
-html[data-theme] .quran-result-tr,
 html[data-theme] .dua-trans,
-html[data-theme] .profile-title,
-html[data-theme] .book-profile-title,
-html[data-theme] .list-card h3,
-html[data-theme] .folder-card h3,
 html[data-theme] .post-card h3,
-html[data-theme] .dua-card h3 {
+html[data-theme] .folder-card h3 {
   font-synthesis: none !important;
 }
