@@ -1,0 +1,63 @@
+name: Daily Push Live Repair
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - content/admin/daily-push-live-repair-trigger.json
+
+permissions:
+  contents: read
+
+jobs:
+  resend-todays-daily-pushes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for repaired daily scheduler
+        run: |
+          for attempt in $(seq 1 40); do
+            STATUS="$(curl -fsS 'https://dar-admin-publisher.sero91ak.workers.dev/api/daily/status' || true)"
+            echo "Versuch ${attempt}: ${STATUS}"
+            if printf '%s' "$STATUS" | grep -q 'cloudflare-worker-daily-v4-isolated'; then
+              exit 0
+            fi
+            sleep 15
+          done
+          echo '::error::Reparierter Tages-Push-Scheduler wurde nicht rechtzeitig live'
+          exit 1
+
+      - name: Send both daily pushes now
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo '::error::ADMIN_PUBLISH_SECRET fehlt'
+            exit 1
+          fi
+
+          RESULT="$(curl -fsS -X POST 'https://dar-admin-publisher.sero91ak.workers.dev/api/admin/daily/run' \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H 'Content-Type: application/json' \
+            -d '{}')"
+          echo "$RESULT" | tee daily-live-result.json
+
+          node <<'NODE'
+          const fs = require('fs');
+          const result = JSON.parse(fs.readFileSync('daily-live-result.json', 'utf8'));
+          const status = result.status || {};
+          if (status.schedulerEngine !== 'cloudflare-worker-daily-v4-isolated') {
+            throw new Error(`Falscher Scheduler: ${status.schedulerEngine || 'fehlt'}`);
+          }
+          const dua = Number(status.accepted?.dua || 0);
+          const recommendation = Number(status.accepted?.recommendation || 0);
+          if (dua < 1 || recommendation < 1) {
+            throw new Error(`Live-Nachversand unvollständig: dua=${dua}, recommendation=${recommendation}, errors=${status.errors}`);
+          }
+          console.log(`Live-Nachversand bestätigt: Duʿāʾ=${dua}, Empfehlung=${recommendation}, ungültig deaktiviert=${status.invalidSubscriptionsDisabled || 0}`);
+          NODE
+
+      - name: Verify database-backed status
+        run: |
+          sleep 5
+          curl -fsS 'https://dar-admin-publisher.sero91ak.workers.dev/api/daily/status'
