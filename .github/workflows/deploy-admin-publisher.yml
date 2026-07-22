@@ -51,6 +51,8 @@ jobs:
           node --check prayer-push-scheduler.js
           node --check prayer-push-admin.js
           node --check prayer-status-store.js
+          node --check daily-push-scheduler.js
+          node --check daily-push-admin.js
           node --check worker.js
 
       - name: Prayer push integrity guard
@@ -122,6 +124,39 @@ jobs:
             throw new Error(`Planungsfenster zu groß: ${result.status?.lookaheadMinutes}`);
           }
           console.log(`Gebets-Push-Livestatus aktuell: ${result.status.updatedAt}`);
+          NODE
+
+      - name: Refresh and verify daily push scheduler
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Tages-Push kann nicht geprüft werden"
+            exit 1
+          fi
+
+          RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/daily/run" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{}')"
+          echo "$RESULT"
+
+          RESULT_JSON="$RESULT" node <<'NODE'
+          const result = JSON.parse(process.env.RESULT_JSON || "{}");
+          const status = result.status || {};
+          if (status.schedulerEngine !== "cloudflare-worker-daily-v4-isolated") {
+            throw new Error(`Falscher Tages-Push-Scheduler aktiv: ${status.schedulerEngine || "fehlt"}`);
+          }
+          if (status.appEnvironment !== "production") {
+            throw new Error(`Falsche Tages-Push-Umgebung: ${status.appEnvironment || "fehlt"}`);
+          }
+          if (!status.updatedAt) {
+            throw new Error("Tages-Push-Scheduler ohne aktuellen Zeitstempel");
+          }
+          if (Number(status.errors || 0) > 0) {
+            throw new Error(`Tages-Push-Scheduler meldet ${status.errors} Fehler`);
+          }
+          console.log(`Tages-Push-v4 aktiv: ${status.updatedAt} · aktive Abos=${status.uniqueSubscriptions || 0} · Duʿāʾ=${status.accepted?.dua || 0} · Empfehlung=${status.accepted?.recommendation || 0}`);
           NODE
 
       - name: Sync optional feed image API secrets
