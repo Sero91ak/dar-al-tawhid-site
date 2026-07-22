@@ -1,0 +1,80 @@
+name: Deploy Test-App (Quellenbibliothek)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - test-library-canonical
+    paths:
+      - test/**
+      - test/index.html
+      - data/books-library.json
+      - data/scholars-library.json
+      - data/library-authority.json
+      - data/canonical-books-index.json
+      - scripts/build-canonical-books-index.js
+      - scripts/patch-test-canonical-library.js
+      - scripts/cf-pages-build.js
+      - service-worker.js
+      - wrangler.toml
+      - package.json
+      - .github/workflows/deploy-test-library-canonical.yml
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build kanonische Quellenbibliothek
+        run: npm run build
+
+      - name: Health checks (Syntax, Push-Guard)
+        run: |
+          node scripts/app-health-check.js
+          node scripts/push-system-guard.js
+
+      - name: Deploy Test-App (Workers Static Assets)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Cloudflare CDN Cache leeren
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          CLOUDFLARE_DEV_MODE: "1"
+        run: node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
+
+      - name: Test-App Quellenbibliothek verifizieren
+        run: |
+          set -e
+          for url in \
+            "https://dar-al-tawhid.de/test/assets/library/canonical-source-library.js" \
+            "https://dar-al-tawhid.de/data/books-library.json" \
+            "https://dar-al-tawhid.de/data/scholars-library.json"
+          do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+            echo "$url -> $code"
+            test "$code" = "200"
+          done
+          html=$(curl -s "https://dar-al-tawhid.de/test/index.html")
+          echo "$html" | rg -q "canonical-source-library.js"
+          echo "$html" | rg -q "Quellenbibliothek"
+          echo "Test-App Quellenbibliothek live OK"
