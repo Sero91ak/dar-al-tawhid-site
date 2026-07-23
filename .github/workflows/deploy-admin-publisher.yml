@@ -99,6 +99,20 @@ jobs:
           echo "::error::Worker-Binding nach Deploy nicht aktiv"
           exit 1
 
+      - name: Repair prayer registrations disabled by daily push
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Gebets-Push-Reparatur nicht möglich"
+            exit 1
+          fi
+          RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/prayer/repair-registrations" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{}')"
+          echo "$RESULT"
+
       - name: Refresh prayer push live status immediately
         env:
           ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}

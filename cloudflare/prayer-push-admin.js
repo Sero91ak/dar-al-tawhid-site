@@ -9,6 +9,7 @@ import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
+const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 
 const PRAYER_NAMES = {
   fajr: "Fajr",
@@ -216,6 +217,47 @@ export async function runPrayerSchedulerNow(env, deps = {}, options = {}) {
     { force: Boolean(options.force), subscriptionId: options.subscriptionId || "" },
     schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
   );
+}
+
+function supabaseServiceKey(env) {
+  return String(env.SUPABASE_SERVICE_KEY || env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
+}
+
+export async function repairPrayerRegistrationsDisabledByDaily(env) {
+  const key = supabaseServiceKey(env);
+  if (!key) return { ok: false, reason: "SUPABASE_SERVICE_KEY fehlt am Worker" };
+  const filter = [
+    "app_environment=eq.production",
+    "enabled=eq.false",
+    "push_opted_in=eq.false",
+    "daily_push_error=not.is.null"
+  ].join("&");
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/prayer_push_registrations?${filter}`, {
+    method: "PATCH",
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation"
+    },
+    body: JSON.stringify({
+      enabled: true,
+      push_opted_in: true,
+      daily_push_error: null,
+      last_synced_at: new Date().toISOString()
+    })
+  });
+  const text = await response.text();
+  let rows = [];
+  try { rows = text ? JSON.parse(text) : []; } catch (_) {}
+  if (!response.ok) {
+    return { ok: false, reason: `Supabase ${response.status}: ${text.slice(0, 240)}`, restored: 0 };
+  }
+  return {
+    ok: true,
+    restored: Array.isArray(rows) ? rows.length : 0,
+    subscriptionIds: Array.isArray(rows) ? rows.map(row => row.subscription_id).filter(Boolean) : []
+  };
 }
 
 export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {

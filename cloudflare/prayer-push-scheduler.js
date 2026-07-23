@@ -791,7 +791,9 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     planned: stats.planned.slice(0, 80)
   };
 
-  const statusWrite = await persistPrayerStatus(env, status, deps);
+  const statusWrite = onlySubscriptionId
+    ? { saved: false, skipped: "subscription-scoped-run", source: "partial" }
+    : await persistPrayerStatus(env, status, deps);
   const reason = stats.errors
     ? `Fehler: ${stats.errorDetails[0]} (${stats.scheduled} geplant, ${stats.errors} Fehler)`
     : userCount === 0

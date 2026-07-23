@@ -147,11 +147,8 @@ async function sendOne(kind, item, row) {
   const notificationId = String(data.id || "").trim();
   if (isInvalid || !notificationId) {
     await patchRow(row, {
-      enabled: false,
-      push_opted_in: false,
       daily_dua_enabled: false,
       daily_recommendation_enabled: false,
-      jummah_notifications: false,
       daily_push_error: isInvalid
         ? "OneSignal-Subscription ungültig – Push in der App erneut aktivieren."
         : "OneSignal hat für diese Subscription keine Nachricht erstellt."
