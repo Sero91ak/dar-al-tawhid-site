@@ -28,6 +28,41 @@
   ],
   "unlockedScopes": [
     {
+      "id": "version-update-loop-fix-v370-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Dauerhaft „Neue App-Version verfügbar“ in Test- und Besucher-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/apply-version-update-loop-fix.js",
+        "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "welcome-push-delivery-fix-v368-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Server verbunden aber Willkommens-/Geräte-Push kommt nicht an",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/apply-welcome-push-delivery-fix.js",
+        "scripts/apply-push-subscription-resolve-fix.js",
+        "scripts/version-update-guard.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "prayer-overview-compact-v365-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Screenshot: GEBETSZEITEN zu viel Abstand + Test-App formatQuranProgressTime",

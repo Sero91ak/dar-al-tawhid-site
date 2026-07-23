@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v365";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v370";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -8648,7 +8648,7 @@ OneSignalDeferred.push(async function(OneSignal){
   window.OneSignal=OneSignal;
   window.DAR_ONE_SIGNAL_READY=true;
   try{await ensurePushUserLogin(OneSignal)}catch(e){}
-  try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationOnly().catch(()=>{})})}catch(e){}
+  try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationOnly().catch(()=>{});try{refreshPushConnectionStatusUI()}catch(e){}try{updatePushFloatButton()}catch(e){}})}catch(e){}
   try{if(getPrayerSettings().reminder)await syncPrayerPushTags()}catch(e){}
   try{startPushHealthMonitor()}catch(e){}
   try{updatePushFloatButton()}catch(e){}
@@ -13648,11 +13648,11 @@ function bindPrayerPushAccordion(){const btn=document.getElementById("prayerPush
 function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben",compactBar=false}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);const open=isPrayerPushAccordionOpen();const summary=prayerPushSettingsSummary(settings);const inner=`<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderJummahPushPanel()}${renderDailyPushPanel()}${renderPushConnectionStatus()}${renderPrayerPushHints(settings)}`;if(compactBar){return`<div class="prayer-overview__push prayer-push-accordion prayer-push-accordion--compact ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-overview__push-toggle" aria-expanded="${open?"true":"false"}" aria-controls="prayerPushSettingsBody"><span class="prayer-overview__push-bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="prayer-overview__push-copy" id="prayerPushSettingsSummary"><span class="prayer-overview__push-title" id="prayerPushAccordionTitle">Push-Erinnerungen</span><span class="prayer-overview__push-sep" aria-hidden="true">·</span><span class="prayer-overview__push-status-text" id="prayerPushStatusText">${esc(prayerPushStatusInline(settings))}</span></span><span class="prayer-overview__push-chevron" aria-hidden="true">${prayerOverviewChevronSvg()}</span></button><div id="prayerPushSettingsBody" class="prayer-overview__push-body prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}return `<div class="prayer-push-accordion ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-accordion-toggle" aria-expanded="${open?"true":"false"}"><span class="prayer-push-accordion-icon">${open?"▾":"▸"}</span><span class="prayer-push-accordion-title">${open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen"}</span><span class="prayer-push-accordion-summary">${esc(summary)}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}
 function updatePrayerReminderButtons(){const s=getPrayerSettings();document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(s.reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"});document.querySelectorAll("#enableJummahPushBtn").forEach(btn=>{const active=jummahPref(s,"jummahNotifications");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Jumuʿah-Erinnerung aktivieren"});document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Duʿāʾ des Tages · 09:00"});document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Heute empfohlen · 12:00"});updatePrayerPushAccordionUi()}
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
-function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const optedIn=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn);const subId=String(window.OneSignal?.User?.PushSubscription?.id||"").trim();const active=optedIn&&!!subId;btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}
+function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const state=readOneSignalPushSubscriptionState(window.OneSignal);const active=state.ready;btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
-async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:3}).catch(()=>false);if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:!!synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}else if(OS?.User?.PushSubscription?.optedIn){await savePushRegistration(s,OS)}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:2}).catch(()=>false);if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:1}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
+async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS);await sendWelcomePushIfNeeded(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:3}).catch(()=>false);if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:!!synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}else if(OS?.User?.PushSubscription?.optedIn){await savePushRegistration(s,OS)}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:2}).catch(()=>false);if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:1}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
 function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(()=>{maintainPushHealth({silent:true}).catch(()=>{})},PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")maintainPushHealth({silent:true}).catch(()=>{})});window.addEventListener("online",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}
 let prayerCountdownTimer=null;
 let headerPrayerDisplayKey="";
@@ -13706,7 +13706,43 @@ function tahajjudNotificationsEnabled(settings=getPrayerSettings()){return norma
 function buildPrayerPushTags(settings){const lat=Number(settings.lat),lon=Number(settings.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return null;const advance=normalizeAdvanceMinutes(settings.advanceMinutes);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);return{prayer_notifications:"true",prayer_lat:lat.toFixed(5),prayer_lon:lon.toFixed(5),prayer_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",prayer_method:String(settings.angle||12),prayer_asr_factor:String(settings.asrFactor||1),prayer_advance_minutes:String(advance),prayer_tahajjud_mode:tahajjud}}
 function prayerPushDebug(){return getJson(PRAYER_PUSH_DEBUG_KEY,{})||{}}
 function setPrayerPushDebug(value){setJson(PRAYER_PUSH_DEBUG_KEY,{...prayerPushDebug(),...value,updatedAt:new Date().toISOString()})}
-function currentOneSignalPushIds(OS){const sub=OS?.User?.PushSubscription||{};return{externalId:localStorage.getItem(PUSH_USER_KEY)||"",subscriptionId:String(sub.id||""),token:String(sub.token||"")}}
+function readOneSignalPushSubscriptionState(OS){
+  const sub=OS?.User?.PushSubscription||{};
+  let subscriptionId=String(sub.id||"").trim();
+  if(!subscriptionId){try{subscriptionId=String(prayerPushDebug().subscriptionId||"").trim()}catch(e){}}
+  const token=String(sub.token||"").trim();
+  const optedIn=Boolean(sub.optedIn);
+  return {subscriptionId,token,optedIn,ready:Boolean(subscriptionId&&optedIn)};
+}
+async function waitForPushSubscriptionReady(OS,{timeoutMs=25000,request=false}={}){
+  const os=OS||await waitForOneSignalReady(timeoutMs);
+  if(!os?.User?.PushSubscription)return {os:null,externalId:localStorage.getItem(PUSH_USER_KEY)||"",subscriptionId:"",token:"",optedIn:false,ready:false};
+  await ensureOneSignalPushSubscription(os,{timeoutMs,request:Boolean(request)});
+  const sub=os.User.PushSubscription;
+  const start=Date.now();
+  let state=readOneSignalPushSubscriptionState(os);
+  while(!state.ready&&Date.now()-start<timeoutMs){
+    await sleep(300);
+    state=readOneSignalPushSubscriptionState(os);
+    if(!state.optedIn&&request&&typeof sub.optIn==="function"){try{await sub.optIn()}catch(e){}}
+  }
+  if(!state.ready&&typeof sub.addEventListener==="function"){
+    const remaining=Math.max(0,timeoutMs-(Date.now()-start));
+    if(remaining>0){
+      state=await new Promise(resolve=>{
+        let settled=false;
+        const done=(v)=>{if(settled)return;settled=true;try{sub.removeEventListener("change",onChange)}catch(e){}resolve(v)};
+        const onChange=()=>{const s=readOneSignalPushSubscriptionState(os);if(s.ready)done(s)};
+        sub.addEventListener("change",onChange);
+        setTimeout(()=>done(readOneSignalPushSubscriptionState(os)),remaining);
+        const now=readOneSignalPushSubscriptionState(os);
+        if(now.ready)done(now);
+      });
+    }
+  }
+  return {os,externalId:localStorage.getItem(PUSH_USER_KEY)||"",...state};
+}
+function currentOneSignalPushIds(OS){const state=readOneSignalPushSubscriptionState(OS);return{externalId:localStorage.getItem(PUSH_USER_KEY)||"",subscriptionId:state.subscriptionId,token:state.token}}
 async function savePushRegistration(settings,OS){
   if(!hasSupabaseCfg())return false;
   const ids=currentOneSignalPushIds(OS);
@@ -13816,19 +13852,21 @@ async function triggerPrayerPushScheduleNow(subscriptionId){
 const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
 let welcomePushInFlight=false;
 function welcomePushStorageKey(subId){return "dar_welcome_push_v2_"+String(subId||"").trim()}
-function welcomePushAlreadySent(subId){if(!subId)return true;try{if(localStorage.getItem(welcomePushStorageKey(subId))==="1")return true;if(localStorage.getItem(WELCOME_PUSH_SENT_KEY)==="1")return true}catch(e){}return false}
+function welcomePushAlreadySent(subId){if(!subId)return true;try{if(localStorage.getItem(welcomePushStorageKey(subId))==="1")return true}catch(e){}return false}
 function markWelcomePushSent(subId){if(!subId)return;try{localStorage.setItem(welcomePushStorageKey(subId),"1");localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1")}catch(e){}}
 async function sendWelcomePushIfNeeded(OS){
   try{
-    const os=OS||await waitForOneSignalReady(8000);
-    const subId=String(os?.User?.PushSubscription?.id||"").trim();
-    if(!subId||!os?.User?.PushSubscription?.optedIn)return false;
+    const resolved=await waitForPushSubscriptionReady(OS,{timeoutMs:20000,request:false});
+    const subId=resolved.subscriptionId;
+    if(!subId||!resolved.optedIn)return false;
+    const os=resolved.os;
     if(welcomePushAlreadySent(subId))return false;
     if(welcomePushInFlight)return false;
     welcomePushInFlight=true;
     const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:subId})});
     const data=await r.json().catch(()=>({}));
-    if(r.ok){markWelcomePushSent(subId);return Boolean(data.sent)}
+    if(r.ok&&data.sent&&data.delivered!==false){markWelcomePushSent(subId);return true}
+    if(!r.ok||!data.sent)console.warn("Willkommens-Push nicht zugestellt:",data.reason||r.status);
   }catch(e){console.warn("Willkommens-Push:",e)}finally{welcomePushInFlight=false}
   return false;
 }
@@ -13841,10 +13879,10 @@ async function syncPushRegistrationOnly(OS){
   return await savePushRegistration(getPrayerSettings(),os);
 }
 async function syncPushRegistrationAndWelcome(OS){
-  const os=OS||await waitForOneSignalReady(12000);
-  if(!os)return false;
+  const resolved=await waitForPushSubscriptionReady(OS,{timeoutMs:20000,request:true});
+  const os=resolved.os;
+  if(!os||!resolved.ready)return false;
   await ensurePushUserLogin(os);
-  if(!os.User?.PushSubscription?.optedIn)await waitForPushOptIn(os,20000);
   await ensurePostPushTags(os);
   await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
   const saved=await savePushRegistration(getPrayerSettings(),os);
@@ -13867,8 +13905,9 @@ function renderPrayerPushHints(settings=getPrayerSettings()){
 }
 function getPushConnectionStatus(){
   const permission=getNotificationPermission();
-  const optedIn=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn);
-  const subId=String(window.OneSignal?.User?.PushSubscription?.id||"").trim();
+  const state=readOneSignalPushSubscriptionState(window.OneSignal);
+  const optedIn=state.optedIn;
+  const subId=state.subscriptionId;
   const pwa=isStandalonePwa();
   const ios=isIOSDevice();
   return {permission,optedIn,subId,pwa,ios,serverOk:optedIn&&!!subId,ready:permission==="granted"&&optedIn&&!!subId&&(!ios||pwa)};
@@ -13881,6 +13920,19 @@ function renderPushConnectionStatus(){
     ["Server verbunden",s.serverOk,s.serverOk?`…${s.subId.slice(-8)}`:"fehlt – Aktualisieren"]
   ];
   return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">Bei rotem Status: Startseite → Aktualisieren. Ein Klick stellt Push und Inhalte wieder her.</p></div></details>`;
+}
+function refreshPushConnectionStatusUI(){
+  try{
+    const root=document.querySelector(".prayer-push-status .prayer-push-status-grid");
+    if(!root)return;
+    const s=getPushConnectionStatus();
+    const rows=[
+      ["App gespeichert",s.pwa||!s.ios,s.pwa?"Home-Bildschirm":(s.ios?"Safari-Tab – bitte speichern":"Browser")],
+      ["Erlaubnis",s.permission==="granted",s.permission==="granted"?"erlaubt":s.permission],
+      ["Server verbunden",s.serverOk,s.serverOk?`…${s.subId.slice(-8)}`:"fehlt – Aktualisieren"]
+    ];
+    root.innerHTML=rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("");
+  }catch(e){}
 }
 async function ensureOneSignalServiceWorkerReady(){
   let reg=await getOneSignalServiceWorkerRegistration();
@@ -13954,15 +14006,23 @@ async function repairPushConnection({silent=false}={}){
   const settings=getPrayerSettings();
   if(settings.reminder&&hasPrayerLocation(settings))await syncPrayerPushTags(settings,{retries:5});
   else await savePushRegistration(settings,OS);
-  const ids=currentOneSignalPushIds(OS);
-  const ok=Boolean(subscribed&&ids.subscriptionId&&(!isIOSDevice()||isStandalonePwa()));
+  const resolved=await waitForPushSubscriptionReady(OS,{timeoutMs:12000,request:false});
+  const ids=currentOneSignalPushIds(resolved.os||OS);
+  const ok=Boolean(subscribed&&ids.subscriptionId&&resolved.optedIn&&(!isIOSDevice()||isStandalonePwa()));
   setPrayerPushDebug({repairAt:new Date().toISOString(),subscriptionId:ids.subscriptionId,repairOk:ok});
   updatePushFloatButton();
+  let welcomed=false;
+  if(ok){
+    const freshOS=await waitForOneSignalReady(8000);
+    if(!silent){try{const repairSub=String(freshOS?.User?.PushSubscription?.id||ids.subscriptionId||"").trim();if(repairSub)localStorage.removeItem(welcomePushStorageKey(repairSub))}catch(e){}}
+    welcomed=await sendWelcomePushIfNeeded(freshOS||OS);
+  }
   if(!silent){
-    if(ok)alert("✓ Push-Verbindung repariert.\n\nBitte jetzt „Test senden“ antippen und Sperrbildschirm prüfen.");
+    if(ok&&welcomed)alert("✓ Push-Verbindung repariert – Willkommens-Nachricht wurde gesendet.\n\nBitte Sperrbildschirm prüfen.");
+    else if(ok)alert("✓ Push-Verbindung repariert.\n\nBitte jetzt „Test senden“ antippen und Sperrbildschirm prüfen.");
     else alert("Push konnte nicht vollständig repariert werden:\n\n"+issues.join("\n")+(isIOSDevice()&&!isStandalonePwa()?"\n\nWichtig: App vom Home-Bildschirm-Icon öffnen, nicht aus Safari.":""));
   }
-  return {ok,issues,subscriptionId:ids.subscriptionId};
+  return {ok,issues,subscriptionId:ids.subscriptionId,welcomed};
 }
 async function requestServerPrayerTest(subId,prayerKey,mode,settings){
   try{
@@ -14300,14 +14360,19 @@ async function sendPrayerTestNotification(){
     const title=`[Test] ${copy.title}`;
     const body=copy.body;
     await ensureOneSignalServiceWorkerReady();
-    let OS=await waitForOneSignalReady(12000);
+    let resolved=await waitForPushSubscriptionReady(null,{timeoutMs:20000,request:true});
+    if(!resolved.ready){
+      await repairPushConnection({silent:true});
+      resolved=await waitForPushSubscriptionReady(null,{timeoutMs:20000,request:true});
+    }
+    let OS=resolved.os;
     if(OS){
       await ensurePushUserLogin(OS);
-      if(settings.reminder&&hasPrayerLocation(settings))await syncPrayerPushTags(settings,{retries:3});
-      else{await ensureOneSignalPushSubscription(OS,{timeoutMs:20000,request:false});await savePushRegistration(settings,OS)}
+      if(settings.reminder&&hasPrayerLocation(settings))syncPrayerPushTags(settings,{retries:3}).catch(()=>{});
+      else savePushRegistration(settings,OS).catch(()=>{});
     }
-    let subId=String(OS?.User?.PushSubscription?.id||"").trim();
-    let optedIn=Boolean(OS?.User?.PushSubscription?.optedIn);
+    let subId=resolved.subscriptionId;
+    let optedIn=resolved.optedIn;
     let serverOk=false;
     let serverReason="";
     if(subId&&optedIn){
@@ -14316,16 +14381,17 @@ async function sendPrayerTestNotification(){
         serverReason=test.reason;
         const repaired=await repairPushConnection({silent:true});
         if(repaired.ok){
-          OS=await waitForOneSignalReady(8000);
-          subId=String(OS?.User?.PushSubscription?.id||"").trim();
-          optedIn=Boolean(OS?.User?.PushSubscription?.optedIn);
+          resolved=await waitForPushSubscriptionReady(OS,{timeoutMs:15000,request:false});
+          OS=resolved.os||OS;
+          subId=resolved.subscriptionId||String(repaired.subscriptionId||"").trim();
+          optedIn=resolved.optedIn;
           if(subId&&optedIn){
             test=await requestServerPrayerTest(subId,prayerKey,mode,settings);
             if(test.ok)serverOk=true;else serverReason=test.reason;
           }
         }
       }
-    }else{serverReason="Push-Verbindung zum Server fehlt (keine gültige Geräte-ID)."}
+    }else{serverReason="Push-Verbindung zum Server fehlt (keine gültige Geräte-ID). Bitte Startseite → Aktualisieren."}
     const shown=await showPrayerNotification(title,{body,tag:`prayer-test-${prayerKey}-${mode}`,renotify:true,data:{url:"/#prayer",test:true}});
     const pwaHint=isIOSDevice()&&!isStandalonePwa()?"\n\niPhone/iPad: App über Safari → Teilen → Zum Home-Bildschirm speichern und dann über das Icon öffnen.":"";
     if(serverOk){
@@ -14381,6 +14447,7 @@ async function activatePrayerReminder(){
         await ensurePostPushTags(OS);
         await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
         await savePushRegistration(getPrayerSettings(),OS);
+        await sendWelcomePushIfNeeded(OS);
       }
     }
     const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
@@ -15433,7 +15500,7 @@ function renderMiniCalendar(){const events=calendarEventsForYear(5);const next=e
 function renderCalendarHighlightWrap(upcoming){if(!upcoming.length)return"";return`<div class="cal-tl-highlight-wrap" data-cal-highlight-wrap>${upcoming.map(ev=>`<div class="cal-tl-highlight-candidate" hidden data-calendar-tags="${esc(calendarEventTags(ev).join(" "))}">${renderCalendarHighlight(ev)}</div>`).join("")}</div>`}
 function renderCalendar(){const h=islamicCalendarNow();const hp=approxHijriParts();const events=calendarEventsForYear();const upcoming=events.filter(ev=>ev.diff>=0);const nextEvent=upcoming[0]||null;const openMonthKey=nextEvent?calendarMonthKey(nextEvent.gDate):(groupCalendarEventsByMonth(events)[0]?.key||"");const groups=groupCalendarEventsByMonth(events);const monthSections=groups.map(g=>renderCalendarMonthSection(g,g.key===openMonthKey)).filter(Boolean).join("");return`<div class="calendar-premium calendar-premium-page"><header class="cal-tl-head"><div class="cal-tl-head-top"><div class="cal-tl-eyebrow">Kalender</div><div class="cal-tl-year" aria-label="Islamisches Jahr">${hp.year} AH</div></div><h2 class="cal-tl-title">Islamischer Kalender</h2><div class="cal-tl-today-row"><span>Heute: ${esc(h.day)}. ${esc(h.month)} ${esc(h.year)} AH · ${esc(h.greg)}</span><button type="button" class="cal-tl-info-btn" data-cal-info-open aria-label="Informationen zur Kalenderberechnung">i</button></div></header>${renderCalendarFilters()}${renderCalendarHighlightWrap(upcoming)}<div class="cal-tl-months" id="calTimelineMonths">${monthSections}</div>${renderCalendarInfoSheet()}</div>`}
 function bindCalendarPremiumFilters(){const root=document.querySelector(".calendar-premium:not(.calendar-premium-mini)");if(!root||root.dataset.calendarBound==="1")return;root.dataset.calendarBound="1";const itemVisible=(item,filter)=>{const tags=(item.getAttribute("data-calendar-tags")||"").split(/\s+/).filter(Boolean);return filter==="all"||tags.includes(filter)};const syncHighlight=filter=>{const wrap=root.querySelector("[data-cal-highlight-wrap]");if(!wrap)return;const candidates=[...wrap.querySelectorAll(".cal-tl-highlight-candidate")];let match=null;candidates.forEach(c=>{const tags=(c.getAttribute("data-calendar-tags")||"").split(/\s+/).filter(Boolean);if((filter==="all"||tags.includes(filter))&&!match)match=c});candidates.forEach(c=>{c.hidden=c!==match});wrap.style.display=match?"":"none"};const applyFilter=filter=>{root.querySelectorAll("[data-calendar-filter]").forEach(b=>{const on=(b.getAttribute("data-calendar-filter")||"")===filter;b.classList.toggle("is-active",on);b.setAttribute("aria-selected",on?"true":"false")});root.querySelectorAll(".cal-tl-item[data-calendar-tags]").forEach(item=>{item.style.display=itemVisible(item,filter)?"":"none"});root.querySelectorAll(".cal-tl-month").forEach(month=>{const items=[...month.querySelectorAll(".cal-tl-item[data-calendar-tags]")];const visible=items.filter(item=>item.style.display!=="none");const countEl=month.querySelector("[data-cal-month-count]");const n=filter==="all"?Number(month.getAttribute("data-cal-month-total")||visible.length):visible.length;if(countEl)countEl.textContent=`${n} Termin${n===1?"":"e"}`;month.style.display=(filter==="all"?Number(month.getAttribute("data-cal-month-total")||0):n)?"":"none"});syncHighlight(filter)};root.querySelectorAll("[data-calendar-filter]").forEach(btn=>{btn.onclick=()=>applyFilter(btn.getAttribute("data-calendar-filter")||"all")});root.querySelectorAll(".cal-tl-month-toggle").forEach(btn=>{btn.onclick=()=>{const month=btn.closest(".cal-tl-month");if(!month)return;const collapsed=month.classList.toggle("is-collapsed");btn.setAttribute("aria-expanded",collapsed?"false":"true")}});const sheet=document.getElementById("calTimelineInfoSheet");const openInfo=()=>{if(!sheet)return;sheet.hidden=false;requestAnimationFrame(()=>sheet.classList.add("is-open"))};const closeInfo=()=>{if(!sheet)return;sheet.classList.remove("is-open");setTimeout(()=>{sheet.hidden=true},180)};root.querySelectorAll("[data-cal-info-open]").forEach(btn=>{btn.onclick=openInfo});sheet?.querySelectorAll("[data-cal-info-close]").forEach(btn=>{btn.onclick=closeInfo});applyFilter("all")}
-function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;const banner=newer?`<section class="home-update-banner"><div><strong>Update verfügbar</strong><span>Neue Inhalte oder Verbesserungen sind bereit.</span></div><button id="hardRefreshTopBtn" class="home-refresh-btn" type="button">Jetzt aktualisieren</button></section>`:"";return `${banner}<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>🔄 Aktualisieren</b><p>Neue Beiträge laden und App synchronisieren.</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
+function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;return `<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>${newer?"Neue Version verfügbar":"🔄 Aktualisieren"}</b><p>${newer?"Neue App-Version laden und Inhalte synchronisieren.":"Neue Beiträge laden und App synchronisieren."}</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
 async function syncAppServices({silent=true}={}){
   let pushOk=false;
   try{
@@ -15540,6 +15607,7 @@ function hardRefreshApp(){
     window.__darAppVersionAvailable=false;
     try{
       var appliedId=String(window.__darRemoteBuildId||APP_BUILD_ID||"").trim();
+      try{var stuckId=appliedId;if(stuckId)sessionStorage.setItem("dar_version_stuck_guard_v1",JSON.stringify({buildId:stuckId,tries:1,at:Date.now()}))}catch(e){}
       if(appliedId&&typeof localStorage!=="undefined"){
         var raw=localStorage.getItem("dar_app_version_state_v1");
         var state=raw?JSON.parse(raw):{};
@@ -15555,7 +15623,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v363";
+const APP_BUILD_ID="app-shell-v370";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -16369,6 +16437,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     const CHECK_INTERVAL = 30 * 60 * 1000;
     const VERSION_UPDATE_KEY = 'dar_version_update_pending';
     const VERSION_STATE_KEY = 'dar_app_version_state_v1';
+    const VERSION_UPDATE_COOLDOWN_MS = 6 * 60 * 60 * 1000;
+    const VERSION_STUCK_KEY = 'dar_version_stuck_guard_v1';
     let isChecking = false;
     let bannerMode = null;
     let remoteBuildId = null;
@@ -16388,6 +16458,27 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         localStorage.setItem(VERSION_STATE_KEY, JSON.stringify(next));
         return next;
       } catch (e) { return readVersionState(); }
+    }
+    function parseShellBuildNum(buildId) {
+      var match = String(buildId || '').match(/app-shell-v(\d+)/);
+      return match ? parseInt(match[1], 10) : 0;
+    }
+    function markVersionUpdateStuck(remoteBuildId) {
+      try {
+        var id = String(remoteBuildId || '').trim();
+        if (!id) return;
+        var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
+        var tries = String(stuck.buildId) === id ? (Number(stuck.tries) || 0) + 1 : 1;
+        sessionStorage.setItem(VERSION_STUCK_KEY, JSON.stringify({ buildId: id, tries: tries, at: Date.now() }));
+        if (tries >= 2) {
+          writeVersionState({
+            acknowledgedBuildId: id,
+            appliedBuildId: id,
+            updateOfferBlockedBuildId: id,
+            updateOfferBlockedUntil: Date.now() + VERSION_UPDATE_COOLDOWN_MS
+          });
+        }
+      } catch (e) {}
     }
     function rememberAppliedBuild(buildId) {
       var id = String(buildId || '').trim();
@@ -16427,6 +16518,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var state = readVersionState();
       if (String(state.appliedBuildId || '') === id) return false;
       if (String(state.acknowledgedBuildId || '') === id) return false;
+      if (state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || '') === id) return false;
+      try {
+        var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
+        if (String(stuck.buildId) === id && (Number(stuck.tries) || 0) >= 2) return false;
+      } catch (e) {}
       return true;
     }
     function presentShellUpdate(remoteBuildId) {
@@ -16520,10 +16616,24 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
             if (vr.ok) {
               var remote = await vr.json();
               if (remote && remote.buildId && String(remote.buildId) !== String(APP_BUILD_ID)) {
-                versionMismatch = true;
-                remoteBuildId = String(remote.buildId);
-                window.__darRemoteBuildId = remoteBuildId;
-                writeVersionState({ lastSeenRemoteBuildId: remoteBuildId, lastSeenAt: Date.now() });
+                var remoteNum = parseShellBuildNum(remote.buildId);
+                var localNum = parseShellBuildNum(APP_BUILD_ID);
+                if (localNum > remoteNum) {
+                  rememberAppliedBuild(APP_BUILD_ID);
+                  clearVersionUpdatePending();
+                  setHomeRefreshHint(false);
+                  hideAllBanners();
+                } else if (!shouldOfferShellUpdate(remote.buildId)) {
+                  rememberAppliedBuild(remote.buildId);
+                  clearVersionUpdatePending();
+                  setHomeRefreshHint(false);
+                  hideAllBanners();
+                } else {
+                  versionMismatch = true;
+                  remoteBuildId = String(remote.buildId);
+                  window.__darRemoteBuildId = remoteBuildId;
+                  writeVersionState({ lastSeenRemoteBuildId: remoteBuildId, lastSeenAt: Date.now() });
+                }
               }
             }
           } catch (e) {}
@@ -16574,7 +16684,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     }
     function onBannerActivate() {
       if (bannerMode === 'version') {
-        markVersionUpdatePending(remoteBuildId || window.__darRemoteBuildId || '');
+        var targetBuild = remoteBuildId || window.__darRemoteBuildId || '';
+        markVersionUpdatePending(targetBuild);
+        markVersionUpdateStuck(targetBuild);
         hideAllBanners();
         if (typeof hardRefreshApp === 'function') hardRefreshApp();
         else location.reload();
@@ -16582,8 +16694,24 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       if (bannerMode === 'posts') refreshPosts();
     }
+    async function seedVersionStateOnBoot() {
+      if (typeof APP_BUILD_ID !== 'string' || !APP_BUILD_ID) return;
+      var versionPath = String(location.pathname || '').indexOf('/test') >= 0 ? '/test/version.json' : '/version.json';
+      try {
+        var vr = await fetch(versionPath, { cache: 'no-store' });
+        if (!vr.ok) return;
+        var remote = await vr.json();
+        if (remote && remote.buildId && String(remote.buildId) === String(APP_BUILD_ID)) {
+          rememberAppliedBuild(APP_BUILD_ID);
+          clearVersionUpdatePending();
+          window.__darRemoteBuildId = '';
+          window.__darAppVersionAvailable = false;
+          setHomeRefreshHint(false);
+          hideAllBanners();
+        }
+      } catch (e) {}
+    }
     function initAutoRefresh() {
-      rememberAppliedBuild(APP_BUILD_ID);
       window.__darAppVersionAvailable = false;
       setHomeRefreshHint(false);
       var banner = getBanner();
@@ -16595,8 +16723,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       window.addEventListener('dar:version-mismatch', function(ev) {
         var remoteId = ev && ev.detail && ev.detail.buildId;
-        if (remoteId) presentShellUpdate(remoteId);
+        if (remoteId && shouldOfferShellUpdate(remoteId)) presentShellUpdate(remoteId);
       });
+      seedVersionStateOnBoot();
       setTimeout(function() { checkForUpdates(); }, 2500);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { setTimeout(checkForUpdates, 1200); });
