@@ -78,7 +78,7 @@ requireText("Loop-Guard", loopGuard, [
   "PRAYER_PUSH_LOOP_GUARD",
   "slotDayKey",
   "plannedSendAfter == null",
-  "forbiddenPatterns"
+  "FORBIDDEN_PATTERNS"
 ]);
 
 if (!fs.existsSync(path.join(root, "content/admin/prayer-push-scheduler-lock.json"))) {
