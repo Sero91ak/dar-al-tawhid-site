@@ -1,30 +1,34 @@
 {
   "version": 3,
-  "updatedAt": "2026-07-19T11:31:12.971Z",
-  "date": "2026-07-19",
+  "updatedAt": "2026-07-23T08:27:30.635Z",
+  "date": "2026-07-23",
   "recommendation": {
     "cycle": 0,
     "usedKeys": [
       "2026-06-05-shafii-wenn-mein-buch-der-sunnah-widerspricht.md",
-      "2026-06-05-sifat-allah-yad-adam.md"
+      "2026-06-05-sifat-allah-yad-adam.md",
+      "hukm-muhakamah-weg-der-glaeubigen-421.md"
     ],
-    "lastKey": "2026-06-05-sifat-allah-yad-adam.md",
-    "poolSize": 450,
+    "lastKey": "hukm-muhakamah-weg-der-glaeubigen-421.md",
+    "poolSize": 451,
     "remaining": 448,
-    "updatedAt": "2026-07-19T11:31:12.998Z"
+    "updatedAt": "2026-07-23T08:27:30.659Z"
   },
   "dua": {
     "cycle": 0,
-    "usedKeys": [],
-    "lastKey": "",
-    "poolSize": 70,
-    "remaining": 70,
-    "updatedAt": "2026-07-19T11:31:12.999Z"
+    "usedKeys": [
+      "dua-024-atmim-nurana",
+      "dua-036-rabbana-amanna-bima-anzalta"
+    ],
+    "lastKey": "dua-036-rabbana-amanna-bima-anzalta",
+    "poolSize": 90,
+    "remaining": 88,
+    "updatedAt": "2026-07-23T08:27:30.659Z"
   },
   "duaSources": {
-    "markdown": 70,
-    "total": 70,
-    "poolSize": 70,
+    "markdown": 90,
+    "total": 90,
+    "poolSize": 90,
     "canonicalSource": "content/duas/dua-*.md"
   }
 }
