@@ -261,10 +261,15 @@ export async function repairPrayerRegistrationsDisabledByDaily(env) {
 }
 
 export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {
+  const scopedSubscriptionId = String(options.subscriptionId || "").trim();
+  if (!scopedSubscriptionId) {
+    await repairPrayerRegistrationsDisabledByDaily(env).catch(() => null);
+  }
+
   const result = await runPrayerSchedulerNow(
     env,
     { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },
-    { force: true, subscriptionId: options.subscriptionId || "" }
+    { force: true, subscriptionId: scopedSubscriptionId }
   );
 
   if (!result?.status?.updatedAt) {

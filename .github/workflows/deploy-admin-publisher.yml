@@ -84,6 +84,11 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: wrangler deploy
 
+      - name: Change scope lock guard (nur freigeschaltete Bereiche)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
+        run: node ../scripts/change-scope-lock-guard.js
+
       - name: Verify worker and durable prayer status binding
         run: |
           for attempt in 1 2 3 4 5 6; do
