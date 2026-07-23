@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v345";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v346";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -9911,6 +9911,67 @@ html .footer-actions .footer-action-save:hover{
   opacity:.94;
 }
 </style>
+<style id="footer-neutral-final-v346">
+/* Footer: kein Neon/Glow — nur dezente Ränder, lesbare Schrift pro Theme */
+html .footer-actions .footer-action-tg,
+html[data-theme] .footer-actions .footer-action-tg{
+  border:1px solid rgba(42,171,238,.34)!important;
+  background:linear-gradient(160deg,rgba(42,171,238,.07),rgba(8,8,6,.92))!important;
+  box-shadow:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+}
+html .footer-actions .footer-action-ig,
+html[data-theme] .footer-actions .footer-action-ig{
+  border:1px solid rgba(250,126,30,.32)!important;
+  background:linear-gradient(160deg,rgba(250,126,30,.07),rgba(214,41,118,.03),rgba(8,8,6,.92))!important;
+  box-shadow:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+}
+html .footer-actions .footer-action-save,
+html[data-theme="dark"] .footer-actions .footer-action-save,
+html[data-theme="royal"] .footer-actions .footer-action-save,
+html[data-theme="bordeaux"] .footer-actions .footer-action-save,
+html[data-theme="aurora"] .footer-actions .footer-action-save,
+html[data-theme="dar-al-layl"] .footer-actions .footer-action-save{
+  border:1px solid rgba(214,183,106,.28)!important;
+  background:linear-gradient(135deg,rgba(214,183,106,.08),rgba(9,15,10,.78))!important;
+  color:#f7efd6!important;
+  box-shadow:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+}
+html[data-theme="light"] .footer-actions .footer-action-save,
+html[data-theme="soft"] .footer-actions .footer-action-save{
+  border:1px solid rgba(155,122,60,.22)!important;
+  background:linear-gradient(135deg,rgba(214,183,106,.07),rgba(255,252,248,.96))!important;
+  color:#1f1a14!important;
+  box-shadow:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+}
+html[data-theme="soft"] .footer-actions .footer-action-save{
+  background:linear-gradient(135deg,rgba(214,183,106,.07),rgba(255,251,247,.98))!important;
+  border-color:rgba(155,122,60,.20)!important;
+}
+html[data-theme="light"] .footer-actions .footer-action-tg{
+  background:linear-gradient(160deg,rgba(42,171,238,.07),rgba(255,252,248,.96))!important;
+  border-color:rgba(42,171,238,.30)!important;
+  color:#2a6fa8!important;
+}
+html[data-theme="light"] .footer-actions .footer-action-ig,
+html[data-theme="soft"] .footer-actions .footer-action-ig{
+  background:linear-gradient(160deg,rgba(250,126,30,.06),rgba(214,41,118,.02),rgba(255,252,248,.96))!important;
+  border-color:rgba(250,126,30,.28)!important;
+  color:#a84d12!important;
+}
+html[data-theme="soft"] .footer-actions .footer-action-tg{
+  background:linear-gradient(160deg,rgba(42,171,238,.07),rgba(255,251,247,.98))!important;
+  border-color:rgba(42,171,238,.28)!important;
+  color:#2a6fa8!important;
+}
+</style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
@@ -14968,7 +15029,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v345";
+const APP_BUILD_ID="app-shell-v346";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

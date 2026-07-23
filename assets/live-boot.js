@@ -180,6 +180,11 @@
     }
   }
 
+  function parseShellBuildNum(buildId) {
+    var match = String(buildId || "").match(/app-shell-v(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  }
+
   function runVersionCheck() {
     var local = String(window.__DAR_EXPECTED_BUILD || "").trim();
     if (!local) return;
@@ -189,9 +194,20 @@
         return r.ok ? r.json() : null;
       })
       .then(function (remote) {
-        if (!remote || !remote.buildId || String(remote.buildId) === local) return;
-        var state = readVersionState();
+        if (!remote || !remote.buildId) return;
         var remoteBuildId = String(remote.buildId);
+        if (remoteBuildId === local) return;
+        var localNum = parseShellBuildNum(local);
+        var remoteNum = parseShellBuildNum(remoteBuildId);
+        if (localNum > remoteNum) return;
+        if (remoteNum > localNum) {
+          try {
+            var stuckKey = "dar_version_stuck_guard_v1";
+            var stuck = JSON.parse(sessionStorage.getItem(stuckKey) || "{}");
+            if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 2) return;
+          } catch (e) {}
+        }
+        var state = readVersionState();
         if (state && (state.appliedBuildId === remoteBuildId || state.acknowledgedBuildId === remoteBuildId)) return;
         window.__darRemoteBuildId = remoteBuildId;
         window.__darAppVersionAvailable = true;
