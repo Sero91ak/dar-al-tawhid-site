@@ -72,6 +72,11 @@ jobs:
           grep -q 'data-daily-push' index.html || { echo "::error::Home push buttons missing from index.html"; exit 1; }
           echo "Daily push feature OK."
 
+      - name: Change scope lock guard (nur freigeschaltete Bereiche)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/change-scope-lock-guard.js
+
       - name: Repo integrity guard (Massen-Löschung blockieren)
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}

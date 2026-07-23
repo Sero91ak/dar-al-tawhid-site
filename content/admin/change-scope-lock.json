@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "globalLock": true,
+  "lockedAt": "2026-07-23T19:30:00.000Z",
+  "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
+  "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
+  "alwaysAllowed": [
+    "content/admin/change-scope-lock.json",
+    "data/quiz-questions.json",
+    "data/quiz-questions-test.json"
+  ],
+  "protectedPrefixes": [
+    "index.html",
+    "test/index.html",
+    "version.json",
+    "test/version.json",
+    "manifest.json",
+    "test/manifest.json",
+    "service-worker.js",
+    "admin/",
+    "cloudflare/",
+    "scripts/",
+    "content/",
+    "assets/",
+    ".github/workflows/",
+    "wrangler.toml",
+    "AGENTS.md"
+  ],
+  "unlockedScopes": [
+    {
+      "id": "prayer-push-maghrib-repair-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Maghrib-Push Notfall: Migration-Subrequest-Limit + globale Änderungssperre",
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/daily-push-scheduler.js",
+        "scripts/change-scope-lock-guard.js",
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "scripts/push-system-guard.js",
+        "scripts/repo-integrity-guard.js"
+      ],
+      "expiresAt": "2026-07-24T06:00:00.000Z"
+    }
+  ]
+}

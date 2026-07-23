@@ -60,9 +60,10 @@ jobs:
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
-      - name: Health checks (Syntax, Push-Guard, Version)
+      - name: Health checks (Syntax, Push-Guard, Version, Scope-Lock)
         run: |
           node scripts/app-health-check.js
+          node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
 

@@ -19,7 +19,9 @@ const SCHEDULE_CRON_BUFFER_MINUTES = 5;
 const SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES;
 const SCHEDULE_LOOKAHEAD_MAX_MINUTES = 120;
 const SCHEDULE_GRACE_MINUTES = 15;
-const PRAYER_COPY_MIGRATION_UNTIL = Date.parse("2026-07-24T23:59:59Z");
+// Migration abgeschlossen – kein cancelObsoleteSchedules mehr im Cron (verhindert Subrequest-Limit).
+const PRAYER_COPY_MIGRATION_UNTIL = 0;
+const MIGRATION_MAX_PER_RUN = 0;
 const PREVIOUS_COPY_VERSIONS = Object.freeze(["v3"]);
 const PRAYER_PUSH_EMOJI = Object.freeze({
   fajr: "✨",
@@ -425,7 +427,8 @@ async function cancelOneSignal(env, notificationId, appId) {
 }
 
 async function cancelObsoleteSchedules(env, body, group, prayer, sendAfter, mode, stats) {
-  if (!body.send_after || Date.now() >= PRAYER_COPY_MIGRATION_UNTIL) return;
+  if (MIGRATION_MAX_PER_RUN <= 0 || !body.send_after || Date.now() >= PRAYER_COPY_MIGRATION_UNTIL) return;
+  if (stats.migratedSchedules >= MIGRATION_MAX_PER_RUN) return;
   const obsoleteSeeds = [
     ...PREVIOUS_COPY_VERSIONS.map(version => scheduleSeedBySendAfter(version, group, prayer, sendAfter, mode)),
     legacyScheduleSeed(group, prayer, sendAfter, mode)
@@ -443,6 +446,7 @@ async function cancelObsoleteSchedules(env, body, group, prayer, sendAfter, mode
       stats.migrationErrors += 1;
       stats.errorDetails.push(`Migration ${prayer.name}: ${error.message || error}`);
     }
+    if (stats.migratedSchedules >= MIGRATION_MAX_PER_RUN) return;
   }
 }
 
@@ -748,7 +752,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     schedulerStatus: stats.errors ? "error" : userCount ? "success" : "warning",
     schedulerEngine: "cloudflare-worker-cron-v3",
     prayerCopyVersion: PRAYER_PUSH_COPY_VERSION,
-    migrationActive: Date.now() < PRAYER_COPY_MIGRATION_UNTIL,
+    migrationActive: false,
     userSource: "supabase-production-only",
     appEnvironment: "production",
     cronIntervalMinutes: 5,
