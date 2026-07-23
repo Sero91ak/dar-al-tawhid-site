@@ -11,7 +11,8 @@ import {
   readPrayerPushStatus,
   sendPrayerTestPush,
   ensurePrayerSchedulerFresh,
-  triggerPrayerWorkflowForSubscription
+  triggerPrayerWorkflowForSubscription,
+  repairPrayerRegistrationsDisabledByDaily
 } from "./prayer-push-admin.js";
 import {
   readDailyPushStatus,
@@ -628,7 +629,8 @@ export default {
       const prayerPaths = new Set([
         "/api/admin/prayer/status",
         "/api/admin/prayer/test",
-        "/api/admin/prayer/run"
+        "/api/admin/prayer/run",
+        "/api/admin/prayer/repair-registrations"
       ]);
       const dailyPaths = new Set([
         "/api/admin/daily/status",
@@ -742,6 +744,11 @@ export default {
       if (prayerPaths.has(url.pathname)) {
         if (url.pathname.endsWith("/test")) {
           return json(await sendPrayerTestPush(env, input), cors);
+        }
+        if (url.pathname.endsWith("/repair-registrations")) {
+          const repair = await repairPrayerRegistrationsDisabledByDaily(env);
+          const result = await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
+          return json({ ok: repair.ok !== false, repair, scheduler: result }, cors, repair.ok === false ? 503 : 200);
         }
         if (url.pathname.endsWith("/run")) {
           const result = await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });

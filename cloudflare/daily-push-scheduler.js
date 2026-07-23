@@ -446,11 +446,8 @@ export async function sendDailyPushBatch(env, rows, kind, item, config, dateKey,
         stats.invalid += 1;
         stats.errors += 1;
         await patchRegistration(env, row, {
-          enabled: false,
-          push_opted_in: false,
           daily_dua_enabled: false,
           daily_recommendation_enabled: false,
-          jummah_notifications: false,
           daily_push_error: invalidCurrent
             ? "OneSignal-Subscription ungültig – Push in der App erneut aktivieren."
             : "OneSignal hat keine Nachricht erstellt – Subscription nicht erreichbar."
