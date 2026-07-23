@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v360-fix1";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v362-test";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -12262,10 +12262,6 @@ function saveQuranAutomaticProgress(data,{force=false,allowWhileManual=false}={}
 function saveQuranManualProgress(data){const state=getQuranReadingState();const entry=normalizeQuranProgressEntry({...data,progressType:"manual",updatedAt:new Date().toISOString()},"manual");if(!entry)return state;state.manual=entry;state.settings.lastOpenedAt=new Date().toISOString();setQuranReadingState(state);return state}
 function clearQuranManualProgress(){const state=getQuranReadingState();state.manual=null;setQuranReadingState(state)}
 function clearQuranAllProgress(){const state=getQuranReadingState();state.manual=null;state.automatic=null;setQuranReadingState(state)}
-function quranContinueMetaLine(entry){if(!entry)return"";const parts=[`Sūrah ${entry.surahName||entry.surahNumber}`,`Āyah ${entry.ayahNumber}`];if(entry.juzNumber)parts.push(`Juzʾ ${entry.juzNumber}`);return parts.join(" · ")}
-function formatQuranProgressTime(value){const ts=Date.parse(String(value||""));if(!Number.isFinite(ts))return"";const d=new Date(ts);return d.toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})}
-function quranProgressPreviewText(surahId,ayahId){const surah=quranSurahCache.get(Number(surahId));const verse=surah?.verses?.find(v=>Number(v.id)===Number(ayahId));return String(verse?.de||"").trim()}
-function quranSurahProgressPercent(surahId){const prog=getPreferredQuranProgress();const meta=quranSurahMeta(surahId);if(!meta||!meta.total_verses||!prog)return 0;if(Number(prog.surahNumber)>Number(surahId))return 100;if(Number(prog.surahNumber)<Number(surahId))return 0;return Math.min(100,Math.round((Number(prog.ayahNumber||0)/meta.total_verses)*100))}
 /* Inserted into index.html — Quran overview v360 */
 const QURAN_SURAH_FAV_KEY="darQuranSurahFavoritesV1";
 const QURAN_OVERVIEW_FILTER_KEY="darQuranOverviewFilterV1";
@@ -12491,6 +12487,11 @@ function renderQuranSurah(rawValue){const parts=String(rawValue||'').split('/');
 async function ensureQuranRouteData(route){await loadQuranIndex();if(route.view==="quran"){syncQuranOfflinePrecache();return}if(route.view==="quran-topic"){await loadQuranTopics();return}if(route.view==="quran-surah"){const id=Number(String(route.value||"").split("/")[0]);if(Number.isFinite(id)){await loadQuranSurah(id)}}}
 function offlineLibrarySummary(){const live=`${posts.length} Beiträge, ${DUAS.length} Duʿāʾ`;try{const meta=getJson(OFFLINE_LIB_KEY,null);if(meta&&meta.updated&&!posts.length&&!DUAS.length)return `${meta.posts||0} Beiträge, ${meta.duas||0} Duʿāʾ`}catch(e){}return live}
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+/* QURAN_PROGRESS_HELPERS_GUARD: Start nie wegen fehlender Qurʾān-Helfer abstürzen */
+function formatQuranProgressTime(value){const ts=Date.parse(String(value||""));if(!Number.isFinite(ts))return"";const d=new Date(ts);return d.toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})}
+function quranContinueMetaLine(entry){if(!entry)return"";const parts=[`Sūrah ${entry.surahName||entry.surahNumber}`,`Āyah ${entry.ayahNumber}`];if(entry.juzNumber)parts.push(`Juzʾ ${entry.juzNumber}`);return parts.join(" · ")}
+function quranProgressPreviewText(surahId,ayahId){const surah=typeof quranSurahCache!=="undefined"?quranSurahCache.get(Number(surahId)):null;const verse=surah?.verses?.find(v=>Number(v.id)===Number(ayahId));return String(verse?.de||"").trim()}
+function quranSurahProgressPercent(surahId){const prog=typeof getPreferredQuranProgress==="function"?getPreferredQuranProgress():null;const meta=typeof quranSurahMeta==="function"?quranSurahMeta(surahId):null;if(!meta||!meta.total_verses||!prog)return 0;if(Number(prog.surahNumber)>Number(surahId))return 100;if(Number(prog.surahNumber)<Number(surahId))return 0;return Math.min(100,Math.round((Number(prog.ayahNumber||0)/meta.total_verses)*100))}
 function stripMd(value){return String(value??"").replace(/\*\*\*(.*?)\*\*\*/g,"$1").replace(/\*\*(.*?)\*\*/g,"$1").replace(/\*(.*?)\*/g,"$1").replace(/<[^>]+>/g,"")}
 function formatText(raw){return esc(raw).replace(/\*\*\*(.*?)\*\*\*/g,"<strong><em>$1</em></strong>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").replace(/\n/g,"<br>")}
 function getJson(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch(e){return fallback}}
@@ -16250,7 +16251,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v360-fix1";
+const APP_BUILD_ID="app-shell-v362-test";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
