@@ -46,6 +46,18 @@
       "expiresAt": "2026-07-24T12:00:00.000Z"
     },
     {
+      "id": "header-prayer-hub-v372-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Oberen Startseitenbereich kompakt neu gestalten (Gebetszeiten-Hub)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "version-update-loop-fix-v371-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Meldung: Test-App Versions-Update-Schleife nach v370 weiterhin aktiv",
