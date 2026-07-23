@@ -1,0 +1,64 @@
+/* HEADER_PRAYER_DISPLAY_GUARD: v367 – kompakter, weniger Luft Jetzt/Nächstes/Countdown */
+@media(max-width:980px){
+  .top-shell.theme-hero-shell .header-tools,
+  .header-tools{
+    grid-template-columns:auto auto!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-status,
+  .header-prayer-status{
+    width:fit-content!important;
+    max-width:calc(100% - 84px)!important;
+    flex:0 0 auto!important;
+    align-self:flex-start!important;
+    padding:4px 7px!important;
+    gap:1px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-track,
+  .header-prayer-track{
+    display:inline-flex!important;
+    flex-direction:row!important;
+    align-items:flex-start!important;
+    gap:6px!important;
+    width:auto!important;
+    min-width:0!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item--next,
+  .header-prayer-item--next{
+    align-items:flex-start!important;
+    text-align:left!important;
+    border-left:1px solid rgba(214,183,106,.14)!important;
+    padding-left:6px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-countdown,
+  .header-prayer-countdown{
+    width:auto!important;
+    align-self:flex-start!important;
+    justify-content:flex-start!important;
+    padding-top:1px!important;
+    margin-top:1px!important;
+    gap:3px!important;
+    border-top:1px solid rgba(214,183,106,.08)!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-countdown-digits,
+  .header-prayer-countdown-digits{
+    min-width:4.4ch!important;
+  }
+}
+@media(min-width:981px){
+  .header-prayer-status{
+    width:fit-content!important;
+    max-width:100%!important;
+  }
+  .header-prayer-track{
+    gap:6px!important;
+    flex:0 1 auto!important;
+  }
+  .header-prayer-item{
+    flex:0 1 auto!important;
+  }
+  .header-prayer-item+.header-prayer-item{
+    padding-left:6px!important;
+  }
+}

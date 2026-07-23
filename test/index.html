@@ -4,7 +4,7 @@
 <!-- workers-deploy-stamp:1784841871924 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v365-test";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v367-test";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -10577,6 +10577,73 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 }
 </style>
 
+<style id="header-prayer-compact-v367">
+/* HEADER_PRAYER_DISPLAY_GUARD: v367 – kompakter, weniger Luft Jetzt/Nächstes/Countdown */
+@media(max-width:980px){
+  .top-shell.theme-hero-shell .header-tools,
+  .header-tools{
+    grid-template-columns:auto auto!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-status,
+  .header-prayer-status{
+    width:fit-content!important;
+    max-width:calc(100% - 84px)!important;
+    flex:0 0 auto!important;
+    align-self:flex-start!important;
+    padding:4px 7px!important;
+    gap:1px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-track,
+  .header-prayer-track{
+    display:inline-flex!important;
+    flex-direction:row!important;
+    align-items:flex-start!important;
+    gap:6px!important;
+    width:auto!important;
+    min-width:0!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-item--next,
+  .header-prayer-item--next{
+    align-items:flex-start!important;
+    text-align:left!important;
+    border-left:1px solid rgba(214,183,106,.14)!important;
+    padding-left:6px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-countdown,
+  .header-prayer-countdown{
+    width:auto!important;
+    align-self:flex-start!important;
+    justify-content:flex-start!important;
+    padding-top:1px!important;
+    margin-top:1px!important;
+    gap:3px!important;
+    border-top:1px solid rgba(214,183,106,.08)!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-countdown-digits,
+  .header-prayer-countdown-digits{
+    min-width:4.4ch!important;
+  }
+}
+@media(min-width:981px){
+  .header-prayer-status{
+    width:fit-content!important;
+    max-width:100%!important;
+  }
+  .header-prayer-track{
+    gap:6px!important;
+    flex:0 1 auto!important;
+  }
+  .header-prayer-item{
+    flex:0 1 auto!important;
+  }
+  .header-prayer-item+.header-prayer-item{
+    padding-left:6px!important;
+  }
+}
+</style>
+
 <style id="iphone-compact-v4">
 /* iPhone 13/14/15 (390–430px) + schmale Split-View: Text lesbar, nicht abgeschnitten */
 @media(max-width:430px){
@@ -16411,7 +16478,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v363-test";
+const APP_BUILD_ID="app-shell-v367-test";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
