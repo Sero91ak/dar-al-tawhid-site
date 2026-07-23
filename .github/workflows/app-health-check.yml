@@ -22,6 +22,9 @@ jobs:
       - name: Run app health check
         run: node scripts/app-health-check.js
 
+      - name: Header prayer display guard (Maghrib/Zeit im Header)
+        run: node scripts/header-prayer-display-guard.js
+
       - name: Repo integrity guard (Massen-Löschung blockieren)
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}

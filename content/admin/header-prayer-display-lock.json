@@ -1,0 +1,31 @@
+{
+  "locked": true,
+  "lockedAt": "2026-07-23T19:30:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: Header-Gebetszeit (Maghrib) Darstellung darf nicht ohne Freigabe geändert werden.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Header-Gebetszeit freigeben“.",
+  "lockedPaths": [
+    "index.html",
+    "test/index.html"
+  ],
+  "lockedSections": [
+    "HEADER_PRAYER_DISPLAY_GUARD",
+    "header-prayer-display-guard-v1",
+    "headerPrayerLineHtml",
+    "headerPrayerDisplayKey",
+    "updateHeaderPrayerStatus",
+    "updatePrayerCountdowns"
+  ],
+  "requiredMarkers": [
+    "HEADER_PRAYER_DISPLAY_GUARD",
+    "header-prayer-display-guard-v1",
+    "function headerPrayerLineHtml",
+    "headerPrayerDisplayKey",
+    "header-prayer-line",
+    "header-prayer-hour",
+    "flex-shrink:0!important"
+  ],
+  "forbiddenPatterns": [
+    "updateHeaderPrayerStatus\\(\\);if\\(!quick",
+    "Maghrib · \\$\\{esc\\(formatPrayerHour"
+  ]
+}
