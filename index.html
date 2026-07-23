@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v369";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v370";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -15500,7 +15500,7 @@ function renderMiniCalendar(){const events=calendarEventsForYear(5);const next=e
 function renderCalendarHighlightWrap(upcoming){if(!upcoming.length)return"";return`<div class="cal-tl-highlight-wrap" data-cal-highlight-wrap>${upcoming.map(ev=>`<div class="cal-tl-highlight-candidate" hidden data-calendar-tags="${esc(calendarEventTags(ev).join(" "))}">${renderCalendarHighlight(ev)}</div>`).join("")}</div>`}
 function renderCalendar(){const h=islamicCalendarNow();const hp=approxHijriParts();const events=calendarEventsForYear();const upcoming=events.filter(ev=>ev.diff>=0);const nextEvent=upcoming[0]||null;const openMonthKey=nextEvent?calendarMonthKey(nextEvent.gDate):(groupCalendarEventsByMonth(events)[0]?.key||"");const groups=groupCalendarEventsByMonth(events);const monthSections=groups.map(g=>renderCalendarMonthSection(g,g.key===openMonthKey)).filter(Boolean).join("");return`<div class="calendar-premium calendar-premium-page"><header class="cal-tl-head"><div class="cal-tl-head-top"><div class="cal-tl-eyebrow">Kalender</div><div class="cal-tl-year" aria-label="Islamisches Jahr">${hp.year} AH</div></div><h2 class="cal-tl-title">Islamischer Kalender</h2><div class="cal-tl-today-row"><span>Heute: ${esc(h.day)}. ${esc(h.month)} ${esc(h.year)} AH · ${esc(h.greg)}</span><button type="button" class="cal-tl-info-btn" data-cal-info-open aria-label="Informationen zur Kalenderberechnung">i</button></div></header>${renderCalendarFilters()}${renderCalendarHighlightWrap(upcoming)}<div class="cal-tl-months" id="calTimelineMonths">${monthSections}</div>${renderCalendarInfoSheet()}</div>`}
 function bindCalendarPremiumFilters(){const root=document.querySelector(".calendar-premium:not(.calendar-premium-mini)");if(!root||root.dataset.calendarBound==="1")return;root.dataset.calendarBound="1";const itemVisible=(item,filter)=>{const tags=(item.getAttribute("data-calendar-tags")||"").split(/\s+/).filter(Boolean);return filter==="all"||tags.includes(filter)};const syncHighlight=filter=>{const wrap=root.querySelector("[data-cal-highlight-wrap]");if(!wrap)return;const candidates=[...wrap.querySelectorAll(".cal-tl-highlight-candidate")];let match=null;candidates.forEach(c=>{const tags=(c.getAttribute("data-calendar-tags")||"").split(/\s+/).filter(Boolean);if((filter==="all"||tags.includes(filter))&&!match)match=c});candidates.forEach(c=>{c.hidden=c!==match});wrap.style.display=match?"":"none"};const applyFilter=filter=>{root.querySelectorAll("[data-calendar-filter]").forEach(b=>{const on=(b.getAttribute("data-calendar-filter")||"")===filter;b.classList.toggle("is-active",on);b.setAttribute("aria-selected",on?"true":"false")});root.querySelectorAll(".cal-tl-item[data-calendar-tags]").forEach(item=>{item.style.display=itemVisible(item,filter)?"":"none"});root.querySelectorAll(".cal-tl-month").forEach(month=>{const items=[...month.querySelectorAll(".cal-tl-item[data-calendar-tags]")];const visible=items.filter(item=>item.style.display!=="none");const countEl=month.querySelector("[data-cal-month-count]");const n=filter==="all"?Number(month.getAttribute("data-cal-month-total")||visible.length):visible.length;if(countEl)countEl.textContent=`${n} Termin${n===1?"":"e"}`;month.style.display=(filter==="all"?Number(month.getAttribute("data-cal-month-total")||0):n)?"":"none"});syncHighlight(filter)};root.querySelectorAll("[data-calendar-filter]").forEach(btn=>{btn.onclick=()=>applyFilter(btn.getAttribute("data-calendar-filter")||"all")});root.querySelectorAll(".cal-tl-month-toggle").forEach(btn=>{btn.onclick=()=>{const month=btn.closest(".cal-tl-month");if(!month)return;const collapsed=month.classList.toggle("is-collapsed");btn.setAttribute("aria-expanded",collapsed?"false":"true")}});const sheet=document.getElementById("calTimelineInfoSheet");const openInfo=()=>{if(!sheet)return;sheet.hidden=false;requestAnimationFrame(()=>sheet.classList.add("is-open"))};const closeInfo=()=>{if(!sheet)return;sheet.classList.remove("is-open");setTimeout(()=>{sheet.hidden=true},180)};root.querySelectorAll("[data-cal-info-open]").forEach(btn=>{btn.onclick=openInfo});sheet?.querySelectorAll("[data-cal-info-close]").forEach(btn=>{btn.onclick=closeInfo});applyFilter("all")}
-function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;const banner=newer?`<section class="home-update-banner"><div><strong>Update verfügbar</strong><span>Neue Inhalte oder Verbesserungen sind bereit.</span></div><button id="hardRefreshTopBtn" class="home-refresh-btn" type="button">Jetzt aktualisieren</button></section>`:"";return `${banner}<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>🔄 Aktualisieren</b><p>Neue Beiträge laden und App synchronisieren.</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
+function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;return `<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>${newer?"Neue Version verfügbar":"🔄 Aktualisieren"}</b><p>${newer?"Neue App-Version laden und Inhalte synchronisieren.":"Neue Beiträge laden und App synchronisieren."}</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
 async function syncAppServices({silent=true}={}){
   let pushOk=false;
   try{
@@ -15607,6 +15607,7 @@ function hardRefreshApp(){
     window.__darAppVersionAvailable=false;
     try{
       var appliedId=String(window.__darRemoteBuildId||APP_BUILD_ID||"").trim();
+      try{var stuckId=appliedId;if(stuckId)sessionStorage.setItem("dar_version_stuck_guard_v1",JSON.stringify({buildId:stuckId,tries:1,at:Date.now()}))}catch(e){}
       if(appliedId&&typeof localStorage!=="undefined"){
         var raw=localStorage.getItem("dar_app_version_state_v1");
         var state=raw?JSON.parse(raw):{};
@@ -15622,7 +15623,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v369";
+const APP_BUILD_ID="app-shell-v370";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -16436,6 +16437,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     const CHECK_INTERVAL = 30 * 60 * 1000;
     const VERSION_UPDATE_KEY = 'dar_version_update_pending';
     const VERSION_STATE_KEY = 'dar_app_version_state_v1';
+    const VERSION_UPDATE_COOLDOWN_MS = 6 * 60 * 60 * 1000;
+    const VERSION_STUCK_KEY = 'dar_version_stuck_guard_v1';
     let isChecking = false;
     let bannerMode = null;
     let remoteBuildId = null;
@@ -16455,6 +16458,27 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         localStorage.setItem(VERSION_STATE_KEY, JSON.stringify(next));
         return next;
       } catch (e) { return readVersionState(); }
+    }
+    function parseShellBuildNum(buildId) {
+      var match = String(buildId || '').match(/app-shell-v(\d+)/);
+      return match ? parseInt(match[1], 10) : 0;
+    }
+    function markVersionUpdateStuck(remoteBuildId) {
+      try {
+        var id = String(remoteBuildId || '').trim();
+        if (!id) return;
+        var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
+        var tries = String(stuck.buildId) === id ? (Number(stuck.tries) || 0) + 1 : 1;
+        sessionStorage.setItem(VERSION_STUCK_KEY, JSON.stringify({ buildId: id, tries: tries, at: Date.now() }));
+        if (tries >= 2) {
+          writeVersionState({
+            acknowledgedBuildId: id,
+            appliedBuildId: id,
+            updateOfferBlockedBuildId: id,
+            updateOfferBlockedUntil: Date.now() + VERSION_UPDATE_COOLDOWN_MS
+          });
+        }
+      } catch (e) {}
     }
     function rememberAppliedBuild(buildId) {
       var id = String(buildId || '').trim();
@@ -16494,6 +16518,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var state = readVersionState();
       if (String(state.appliedBuildId || '') === id) return false;
       if (String(state.acknowledgedBuildId || '') === id) return false;
+      if (state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || '') === id) return false;
+      try {
+        var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
+        if (String(stuck.buildId) === id && (Number(stuck.tries) || 0) >= 2) return false;
+      } catch (e) {}
       return true;
     }
     function presentShellUpdate(remoteBuildId) {
@@ -16587,10 +16616,24 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
             if (vr.ok) {
               var remote = await vr.json();
               if (remote && remote.buildId && String(remote.buildId) !== String(APP_BUILD_ID)) {
-                versionMismatch = true;
-                remoteBuildId = String(remote.buildId);
-                window.__darRemoteBuildId = remoteBuildId;
-                writeVersionState({ lastSeenRemoteBuildId: remoteBuildId, lastSeenAt: Date.now() });
+                var remoteNum = parseShellBuildNum(remote.buildId);
+                var localNum = parseShellBuildNum(APP_BUILD_ID);
+                if (localNum > remoteNum) {
+                  rememberAppliedBuild(APP_BUILD_ID);
+                  clearVersionUpdatePending();
+                  setHomeRefreshHint(false);
+                  hideAllBanners();
+                } else if (!shouldOfferShellUpdate(remote.buildId)) {
+                  rememberAppliedBuild(remote.buildId);
+                  clearVersionUpdatePending();
+                  setHomeRefreshHint(false);
+                  hideAllBanners();
+                } else {
+                  versionMismatch = true;
+                  remoteBuildId = String(remote.buildId);
+                  window.__darRemoteBuildId = remoteBuildId;
+                  writeVersionState({ lastSeenRemoteBuildId: remoteBuildId, lastSeenAt: Date.now() });
+                }
               }
             }
           } catch (e) {}
@@ -16641,7 +16684,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     }
     function onBannerActivate() {
       if (bannerMode === 'version') {
-        markVersionUpdatePending(remoteBuildId || window.__darRemoteBuildId || '');
+        var targetBuild = remoteBuildId || window.__darRemoteBuildId || '';
+        markVersionUpdatePending(targetBuild);
+        markVersionUpdateStuck(targetBuild);
         hideAllBanners();
         if (typeof hardRefreshApp === 'function') hardRefreshApp();
         else location.reload();
@@ -16649,8 +16694,24 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       if (bannerMode === 'posts') refreshPosts();
     }
+    async function seedVersionStateOnBoot() {
+      if (typeof APP_BUILD_ID !== 'string' || !APP_BUILD_ID) return;
+      var versionPath = String(location.pathname || '').indexOf('/test') >= 0 ? '/test/version.json' : '/version.json';
+      try {
+        var vr = await fetch(versionPath, { cache: 'no-store' });
+        if (!vr.ok) return;
+        var remote = await vr.json();
+        if (remote && remote.buildId && String(remote.buildId) === String(APP_BUILD_ID)) {
+          rememberAppliedBuild(APP_BUILD_ID);
+          clearVersionUpdatePending();
+          window.__darRemoteBuildId = '';
+          window.__darAppVersionAvailable = false;
+          setHomeRefreshHint(false);
+          hideAllBanners();
+        }
+      } catch (e) {}
+    }
     function initAutoRefresh() {
-      rememberAppliedBuild(APP_BUILD_ID);
       window.__darAppVersionAvailable = false;
       setHomeRefreshHint(false);
       var banner = getBanner();
@@ -16662,8 +16723,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       window.addEventListener('dar:version-mismatch', function(ev) {
         var remoteId = ev && ev.detail && ev.detail.buildId;
-        if (remoteId) presentShellUpdate(remoteId);
+        if (remoteId && shouldOfferShellUpdate(remoteId)) presentShellUpdate(remoteId);
       });
+      seedVersionStateOnBoot();
       setTimeout(function() { checkForUpdates(); }, 2500);
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { setTimeout(checkForUpdates, 1200); });

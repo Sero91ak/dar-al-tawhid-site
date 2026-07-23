@@ -209,7 +209,16 @@
         }
         var state = readVersionState();
         if (state && (state.appliedBuildId === remoteBuildId || state.acknowledgedBuildId === remoteBuildId)) return;
+        if (state && state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || "") === remoteBuildId) return;
+        try {
+          var stuck = JSON.parse(sessionStorage.getItem("dar_version_stuck_guard_v1") || "{}");
+          if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 2) return;
+        } catch (e) {}
         window.__darRemoteBuildId = remoteBuildId;
+        if (typeof window.DAR_AUTO_REFRESH === "object" && typeof window.DAR_AUTO_REFRESH.check === "function") {
+          try { window.dispatchEvent(new CustomEvent("dar:version-mismatch", { detail: { buildId: remoteBuildId, localBuildId: local } })); } catch (e) {}
+          return;
+        }
         window.__darAppVersionAvailable = true;
         try {
           window.dispatchEvent(new CustomEvent("dar:version-mismatch", {
