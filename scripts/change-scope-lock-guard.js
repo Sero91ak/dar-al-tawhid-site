@@ -67,9 +67,13 @@ function changedFiles(baseRef) {
     || String(process.env.INTEGRITY_BASE_REF || "").trim()
     || String(process.env.GITHUB_EVENT_BEFORE || "").trim()
   );
+  const commitOnly = String(process.env.CHANGE_SCOPE_LOCK_COMMIT_ONLY || "").trim() === "1"
+    || (inCi && baseRef && String(process.env.GITHUB_EVENT_NAME || "") === "push");
   if (inCi && baseRef) add(gitLines(`git diff --name-only ${baseRef} HEAD`));
-  add(gitLines("git diff --name-only HEAD"));
-  add(gitLines("git diff --name-only --cached HEAD"));
+  if (!commitOnly) {
+    add(gitLines("git diff --name-only HEAD"));
+    add(gitLines("git diff --name-only --cached HEAD"));
+  }
   return Array.from(files);
 }
 
