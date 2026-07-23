@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v355";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v356";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -10851,27 +10851,27 @@ html[data-theme] button.share-btn.ig,
   --cal-shadow:0 8px 22px rgba(0,0,0,.14);
   --cal-radius:20px;
   --cal-radius-sm:14px;
-  --cal-nav-pad:calc(var(--bottom-nav-height,74px) + env(safe-area-inset-bottom,0px) + 32px);
+  --cal-nav-pad:calc(var(--bottom-nav-height,74px) + env(safe-area-inset-bottom,0px) + 56px);
   height:auto;min-height:0;max-width:920px;margin:0 auto 12px;padding:24px 16px var(--cal-nav-pad);
   border:1px solid var(--cal-border);border-radius:var(--cal-radius);background:var(--cal-bg);
   box-shadow:var(--cal-shadow),inset 0 1px 0 rgba(255,255,255,.03);
 }
-.cal-tl-head{margin:0 0 17px;padding:0 0 18px;border-bottom:1px solid var(--cal-border-soft)}
-.cal-tl-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:9px;padding-top:2px}
+.cal-tl-head{margin:0 0 12px;padding:0 0 12px;border-bottom:1px solid var(--cal-border-soft)}
+.cal-tl-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px;padding-top:2px}
 .cal-tl-eyebrow{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cal-muted);line-height:1.2}
 .cal-tl-year{font-family:var(--sans);font-size:15px;font-weight:600;line-height:1;color:var(--cal-accent);border:1px solid var(--cal-border-soft);border-radius:20px;padding:0 17px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:var(--cal-accent-soft);white-space:nowrap;flex-shrink:0;margin-top:0}
 .cal-tl-title{font-family:var(--serif);font-size:clamp(30px,5vw,33px);font-weight:450;line-height:1.12;color:var(--cal-title);margin:0;letter-spacing:.012em}
-.cal-tl-today-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px}
+.cal-tl-today-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}
 .cal-tl-today-row span{font-family:var(--sans);font-size:13px;font-weight:500;line-height:1.4;color:var(--cal-text);flex:1;min-width:0}
 .cal-tl-info-btn{width:38px;height:38px;min-width:44px;min-height:44px;padding:0;border:1px solid var(--cal-border-soft);border-radius:999px;background:var(--cal-surface);color:var(--cal-muted);font-family:var(--serif);font-size:14px;font-weight:600;line-height:1;cursor:pointer;display:grid;place-items:center;flex-shrink:0;box-shadow:none;margin:0}
 .cal-tl-info-btn:focus-visible{outline:2px solid var(--cal-accent);outline-offset:2px}
-.cal-tl-filters-wrap{margin:0 -16px 22px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cal-tl-filters-wrap{margin:0 -16px 14px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .cal-tl-filters-wrap::-webkit-scrollbar{display:none}
 .cal-tl-filters{display:flex;flex-wrap:nowrap;gap:9px;min-width:min-content;padding:3px 0}
 .cal-tl-filter{font-family:var(--sans);font-size:14px;font-weight:600;border:1px solid transparent;border-radius:999px;padding:0 15px;height:36px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.02);color:var(--cal-muted);cursor:pointer;white-space:nowrap;transition:background .17s ease,border-color .17s ease,color .17s ease,box-shadow .17s ease}
 .cal-tl-filter.is-active{color:var(--cal-title);border-color:var(--cal-border-soft);background:var(--cal-accent-soft);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
 .cal-tl-filter:focus-visible{outline:2px solid var(--cal-accent);outline-offset:2px}
-.cal-tl-highlight-wrap{margin-bottom:16px}
+.cal-tl-highlight-wrap{margin-bottom:12px}
 .cal-tl-highlight-candidate[hidden]{display:none!important}
 .cal-tl-highlight{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:flex-start;padding:14px 18px;min-height:108px;height:auto;border:1px solid var(--cal-border);border-radius:var(--cal-radius-sm);background:var(--cal-highlight);box-shadow:var(--cal-shadow)}
 .cal-tl-highlight-icon{width:44px;height:44px;border-radius:12px;border:1px solid var(--cal-border-soft);background:var(--cal-surface);display:grid;place-items:center;color:var(--cal-accent);flex-shrink:0}
@@ -10892,7 +10892,7 @@ html[data-theme] button.share-btn.ig,
 .cal-tl-month.is-collapsed .cal-tl-chevron{transform:rotate(-90deg)}
 .cal-tl-month-body{overflow:visible;padding:0 16px 14px;transition:opacity .2s ease,transform .2s ease}
 .cal-tl-month.is-collapsed .cal-tl-month-body{display:none}
-.cal-tl-timeline{display:flex;flex-direction:column;gap:18px;padding:4px 0 0;height:auto;min-height:0}
+.cal-tl-timeline{display:flex;flex-direction:column;gap:14px;padding:4px 0 0;height:auto;min-height:0}
 .cal-tl-item{display:grid;grid-template-columns:44px 20px minmax(0,1fr);gap:0 11px;align-items:flex-start;min-height:0;padding:0;border:0;height:auto}
 .cal-tl-item.is-past{opacity:.72}
 .cal-tl-item.is-primary .cal-tl-dot{background:var(--cal-accent);box-shadow:0 0 0 3px var(--cal-accent-soft)}
@@ -10908,7 +10908,7 @@ html[data-theme] button.share-btn.ig,
 .cal-tl-body-main{min-width:0}
 .cal-tl-item-title{font-family:var(--serif);font-size:clamp(18px,3.5vw,20px);font-weight:500;line-height:1.24;color:var(--cal-title);margin:0 0 6px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:break-word}
 .cal-tl-hijri{font-family:var(--sans);font-size:13px;font-weight:500;line-height:1.32;color:var(--cal-muted);margin-bottom:6px}
-.cal-tl-note{font-family:var(--sans);font-size:14px;font-weight:450;line-height:1.5;color:var(--cal-text);margin:0;display:block;white-space:normal;overflow:visible;text-overflow:clip;-webkit-line-clamp:unset;line-clamp:unset;overflow-wrap:break-word;hyphens:auto}
+.cal-tl-note{font-family:var(--sans);font-size:14px;font-weight:450;line-height:1.45;color:var(--cal-text);margin:0;display:block;white-space:normal;overflow:visible;text-overflow:clip;-webkit-line-clamp:unset;line-clamp:unset;overflow-wrap:break-word;hyphens:none;word-break:normal}
 .cal-tl-count{display:none}
 .cal-tl-info-sheet{position:fixed;inset:0;z-index:120;display:grid;place-items:end center;padding:0 14px calc(var(--cal-nav-pad) - 24px);pointer-events:none}
 .cal-tl-info-sheet[hidden]{display:none!important}
@@ -10934,10 +10934,13 @@ html[data-theme="soft"] .calendar-premium{--cal-bg:linear-gradient(155deg,rgba(2
 html[data-theme="royal"] .calendar-premium{--cal-bg:linear-gradient(155deg,rgba(10,28,52,.98),rgba(4,17,38,.97));--cal-surface:rgba(255,255,255,.05);--cal-highlight:linear-gradient(145deg,rgba(12,32,58,.98),rgba(4,17,38,.97));--cal-border:rgba(239,215,142,.26);--cal-border-soft:rgba(239,215,142,.12);--cal-title:#fff2c6;--cal-text:#d5e0ef;--cal-muted:#9eb0c8;--cal-accent:#efd78e;--cal-accent-soft:rgba(239,215,142,.12);--cal-shadow:0 8px 22px rgba(4,12,28,.2)}
 html[data-theme="bordeaux"] .calendar-premium{--cal-bg:linear-gradient(155deg,rgba(50,19,23,.98),rgba(20,11,12,.97));--cal-surface:rgba(255,255,255,.04);--cal-highlight:linear-gradient(145deg,rgba(56,24,28,.98),rgba(20,11,12,.97));--cal-border:rgba(214,190,132,.26);--cal-border-soft:rgba(214,190,132,.12);--cal-title:#F7EED8;--cal-text:#e8ddd0;--cal-muted:#c4b5a8;--cal-accent:#D6BE84;--cal-accent-soft:rgba(214,190,132,.10);--cal-shadow:0 8px 22px rgba(20,11,12,.22)}
 html[data-theme="dar-al-layl"] .calendar-premium{--cal-bg:linear-gradient(155deg,rgba(14,19,17,.98),rgba(8,11,10,.97));--cal-surface:rgba(255,255,255,.03);--cal-highlight:linear-gradient(145deg,rgba(18,23,21,.98),rgba(8,11,10,.97));--cal-border:rgba(168,139,79,.24);--cal-border-soft:rgba(168,139,79,.12);--cal-title:#F1EDE3;--cal-text:#d4cfc4;--cal-muted:#a8a399;--cal-accent:#D8C18B;--cal-accent-soft:rgba(168,139,79,.10);--cal-shadow:0 8px 22px rgba(0,0,0,.2)}
-#appView.view:has(> .calendar-premium-page){padding:0!important;min-height:0;overflow:visible}
-.calendar-premium-page{width:100%;max-width:none;margin:0;border:0;border-radius:inherit;box-shadow:none;background:var(--cal-bg);padding:22px 14px var(--cal-nav-pad)}
-.calendar-premium-page .cal-tl-filters-wrap{margin:0 -14px 22px;padding:0 14px}
-@media(max-width:700px){.calendar-premium-page{padding:20px 12px var(--cal-nav-pad)}.calendar-premium-page .cal-tl-filters-wrap{margin:0 -12px 22px;padding:0 12px}}
+body.is-calendar-route #appView.view{padding:0!important;min-height:0!important;overflow:visible}
+#appView.view:has(> .calendar-premium-page){padding:0!important;min-height:0!important;overflow:visible}
+body.is-calendar-route .calendar-premium-page,
+.calendar-premium-page{width:100%;max-width:none;margin:0;border:0;border-radius:inherit;box-shadow:none;background:transparent;padding:16px 14px var(--cal-nav-pad)}
+body.is-calendar-route .calendar-premium-page .cal-tl-filters-wrap,
+.calendar-premium-page .cal-tl-filters-wrap{margin:0 -14px 14px;padding:0 14px}
+@media(max-width:700px){body.is-calendar-route .calendar-premium-page,.calendar-premium-page{padding:14px 12px var(--cal-nav-pad)}body.is-calendar-route .calendar-premium-page .cal-tl-filters-wrap,.calendar-premium-page .cal-tl-filters-wrap{margin:0 -12px 14px;padding:0 12px}}
 
 </style>
 </head>
@@ -15209,7 +15212,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v355";
+const APP_BUILD_ID="app-shell-v356";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -15462,6 +15465,7 @@ function updateChrome(route){
   document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");
   document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
+  document.body.classList.toggle("is-calendar-route",route.view==="calendar");
   document.body.classList.toggle("is-hadith-route",route.view==="hadith");
   document.body.classList.toggle("is-post-route",isPost);
   if(appBar)appBar.classList.toggle("is-more-route",isMore);
