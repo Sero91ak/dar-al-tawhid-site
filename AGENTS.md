@@ -57,3 +57,15 @@ Geschützt durch `content/admin/header-prayer-display-lock.json` und `scripts/he
 - Entfernen von `HEADER_PRAYER_DISPLAY_GUARD`, `header-prayer-line`, `headerPrayerLineHtml`
 
 **Freigabe:** nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Header-Gebetszeit freigeben“.
+
+## Globale Änderungssperre (streng – nicht verletzen)
+
+Geschützt durch `content/admin/change-scope-lock.json` und `scripts/change-scope-lock-guard.js` (CI: Canonical State Guard, App Health Check, Worker-Deploy).
+
+**Solange `globalLock: true`:**
+- Keine Änderung an App, Layout, Push, Admin, Content, Assets oder Workflows – **außer** der Nutzer hat den Bereich ausdrücklich freigegeben.
+- Freigabe nur durch Eintrag in `unlockedScopes` in `change-scope-lock.json` (mit `paths`, `reason`, optional `expiresAt`).
+- Ausnahmen ohne Freigabe: `alwaysAllowed` (z. B. Quiz-JSON laut Sonderregel, Lock-Datei selbst).
+- **Kein Agent darf** bei gesperrtem Zustand andere Dateien „nebenbei“ mitändern – nur der explizit beauftragte Bereich.
+
+**Vor jedem Merge:** `node scripts/change-scope-lock-guard.js` muss grün sein.

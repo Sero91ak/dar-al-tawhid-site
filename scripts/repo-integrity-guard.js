@@ -59,6 +59,8 @@ const NEVER_DELETE_PREFIXES = [
   "content/admin/prayer-push-scheduler-lock.json",
   "content/admin/header-prayer-display-lock.json",
   "scripts/header-prayer-display-guard.js",
+  "content/admin/change-scope-lock.json",
+  "scripts/change-scope-lock-guard.js",
   "scripts/version-update-guard.js",
   "manifest.json",
   "wrangler.toml",
