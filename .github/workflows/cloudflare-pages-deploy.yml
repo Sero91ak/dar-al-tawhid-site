@@ -29,6 +29,7 @@ on:
       - scripts/cf-pages-build.js
       - scripts/sync-app-build-ids.js
       - scripts/overlay-test-staging-from-branch.js
+      - scripts/force-workers-test-upload.js
       - scripts/verify-live-deploy.js
       - scripts/app-health-check.js
       - scripts/repo-integrity-guard.js

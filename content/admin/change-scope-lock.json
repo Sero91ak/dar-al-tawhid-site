@@ -36,8 +36,13 @@
         "test/version.json",
         "service-worker.js",
         "scripts/patch-test-canonical-library.js",
+        "scripts/cf-pages-build.js",
+        "scripts/force-workers-test-upload.js",
         "scripts/sync-quran-overview-to-test.py",
+        "scripts/force-workers-test-upload.js",
+        "scripts/verify-live-deploy.js",
         "scripts/overlay-test-staging-from-branch.js",
+        ".github/workflows/cloudflare-pages-deploy.yml",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-24T12:00:00.000Z"

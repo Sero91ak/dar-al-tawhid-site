@@ -65,7 +65,8 @@ async function main() {
     const htmlOk = await waitForHtmlIncludes(`${SITE_URL}/test/index.html`, [
       testBuild,
       "canonical-source-library.js",
-      "Quellenbibliothek"
+      "Quellenbibliothek",
+      testBuild.includes("v360") ? "QURAN_OVERVIEW_V360" : "quran-surah-card"
     ]);
     if (!assetOk || !booksOk || !scholarsOk || !htmlOk) failed += 1;
     else console.log(`verify: Test-App Quellenbibliothek live OK (${testBuild})`);
