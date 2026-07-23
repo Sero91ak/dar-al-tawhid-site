@@ -204,7 +204,7 @@
           try {
             var stuckKey = "dar_version_stuck_guard_v1";
             var stuck = JSON.parse(sessionStorage.getItem(stuckKey) || "{}");
-            if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 2) return;
+            if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 1) return;
           } catch (e) {}
         }
         var state = readVersionState();
@@ -212,7 +212,7 @@
         if (state && state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || "") === remoteBuildId) return;
         try {
           var stuck = JSON.parse(sessionStorage.getItem("dar_version_stuck_guard_v1") || "{}");
-          if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 2) return;
+          if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 1) return;
         } catch (e) {}
         window.__darRemoteBuildId = remoteBuildId;
         if (typeof window.DAR_AUTO_REFRESH === "object" && typeof window.DAR_AUTO_REFRESH.check === "function") {
