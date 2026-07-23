@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v344";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v345";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -373,9 +373,9 @@ body.is-area-route .view-desc{font-size:12px;line-height:1.55;margin-top:6px}
   box-shadow:none!important;
 }
 .footer-action-save{
-  border:1px solid rgba(155,122,60,.24)!important;
-  background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(255,252,248,.94))!important;
-  color:#1f1a14!important;
+  border:1px solid rgba(214,183,106,.28)!important;
+  background:linear-gradient(135deg,rgba(214,183,106,.08),rgba(9,15,10,.78))!important;
+  color:#f7efd6!important;
   box-shadow:none!important;
   cursor:pointer;
 }
@@ -1202,7 +1202,7 @@ h1{font-family:var(--display)!important;color:var(--gold2)!important;text-shadow
 .social-link,.footer-action-btn:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save),.footer-social-link:not(.footer-action-tg):not(.footer-action-ig),.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,.footer-app-save:not(.footer-action-save){border-color:rgba(214,183,106,.30)!important;background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(9,15,10,.72))!important;color:#f7efd6!important}
 .footer-action-tg{border:1px solid rgba(42,171,238,.34)!important;background:linear-gradient(160deg,rgba(42,171,238,.07),rgba(8,8,6,.92))!important;box-shadow:none!important;color:#e8f4fc!important}
 .footer-action-ig{border:1px solid rgba(250,126,30,.32)!important;background:linear-gradient(160deg,rgba(250,126,30,.07),rgba(214,41,118,.03),rgba(8,8,6,.92))!important;box-shadow:none!important;color:#f2ebe6!important}
-.footer-action-save{border:1px solid rgba(155,122,60,.24)!important;background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(255,252,248,.94))!important;box-shadow:none!important;color:#1f1a14!important}
+.footer-action-save{border:1px solid rgba(214,183,106,.28)!important;background:linear-gradient(135deg,rgba(214,183,106,.08),rgba(9,15,10,.78))!important;box-shadow:none!important;color:#f7efd6!important}
 .statement{color:#fff8e8!important;font-family:var(--serif)!important}
 .statement em,.dua-trans,.script-accent{font-family:var(--script)!important;font-size:1.34em;line-height:.75;color:#dec078!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:7px;font-weight:400!important}
 .statement strong em{font-family:var(--script)!important;font-size:1.34em;color:#f0d98f!important}
@@ -9866,11 +9866,26 @@ html[data-theme] .footer-actions .footer-action-ig{
   box-shadow:none!important;
 }
 html .footer-actions .footer-action-save,
-html[data-theme] .footer-actions .footer-action-save{
-  border:1px solid rgba(155,122,60,.24)!important;
-  background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(255,252,248,.94))!important;
+html[data-theme="dark"] .footer-actions .footer-action-save,
+html[data-theme="royal"] .footer-actions .footer-action-save,
+html[data-theme="bordeaux"] .footer-actions .footer-action-save,
+html[data-theme="aurora"] .footer-actions .footer-action-save,
+html[data-theme="dar-al-layl"] .footer-actions .footer-action-save{
+  border:1px solid rgba(214,183,106,.28)!important;
+  background:linear-gradient(135deg,rgba(214,183,106,.08),rgba(9,15,10,.78))!important;
+  color:#f7efd6!important;
+  box-shadow:none!important;
+}
+html[data-theme="light"] .footer-actions .footer-action-save,
+html[data-theme="soft"] .footer-actions .footer-action-save{
+  border:1px solid rgba(155,122,60,.22)!important;
+  background:linear-gradient(135deg,rgba(214,183,106,.07),rgba(255,252,248,.96))!important;
   color:#1f1a14!important;
   box-shadow:none!important;
+}
+html[data-theme="soft"] .footer-actions .footer-action-save{
+  background:linear-gradient(135deg,rgba(214,183,106,.07),rgba(255,251,247,.98))!important;
+  border-color:rgba(155,122,60,.20)!important;
 }
 html[data-theme="light"] .footer-actions .footer-action-tg{
   background:linear-gradient(160deg,rgba(42,171,238,.07),rgba(255,252,248,.96))!important;
@@ -14953,7 +14968,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v344";
+const APP_BUILD_ID="app-shell-v345";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
