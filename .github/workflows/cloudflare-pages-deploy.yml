@@ -61,6 +61,9 @@ jobs:
         run: npm run build
 
       - name: Health checks (Syntax, Push-Guard, Version, Scope-Lock)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
+          CHANGE_SCOPE_LOCK_COMMIT_ONLY: "1"
         run: |
           node scripts/app-health-check.js
           node scripts/change-scope-lock-guard.js
