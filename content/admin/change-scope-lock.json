@@ -28,6 +28,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "header-prayer-mobile-v363-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten Smartphone ohne Überlappung/Kasten",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "test-app-cache-bust-v362-test-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Screenshot: Test-App noch auf altem Cache (formatQuranProgressTime)",

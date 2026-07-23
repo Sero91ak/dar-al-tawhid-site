@@ -52,7 +52,7 @@ function patchTestIndex() {
 function bumpTestCache() {
   if (!fs.existsSync(SERVICE_WORKER)) return;
   let sw = fs.readFileSync(SERVICE_WORKER, 'utf8');
-  const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v356-test-v362-sync';";
+  const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v357-header-prayer-mobile-v363';";
   const pattern = /const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-[^'"]+['"];?/;
   if (!pattern.test(sw)) throw new Error('Service worker cache version declaration not found.');
   sw = sw.replace(pattern, next);
