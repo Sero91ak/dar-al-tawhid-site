@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="de">
 <head>
+<!-- workers-deploy-stamp:1784841871924 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v363-test";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v365-test";</script>
+<script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -2787,7 +2789,7 @@ html[data-theme="bordeaux"] .zakat-form-grid .field,html[data-theme="bordeaux"] 
 /* prayer-overview — kompakte Startseiten-Gebetszeiten-Komponente */
 .prayer-overview.premium-surface{
   --po-pad-x:15px;--po-pad-top:14px;--po-pad-bottom:11px;
-  --po-gap-kicker-title:6px;--po-gap-title-times:10px;--po-gap-times-push:9px;--po-time-gap:8px;
+  --po-gap-kicker-title:6px;--po-gap-title-times:8px;--po-gap-times-push:9px;--po-time-gap:0px;
   --po-kicker-size:10.5px;--po-title-size:24px;--po-loc-size:12.5px;
   --po-label-size:9.5px;--po-time-line-size:16px;--po-time-hour-size:20px;--po-count-size:11.5px;
   --po-push-h:40px;--po-radius-card:12px;--po-radius-loc:10px;--po-radius-push:11px;
@@ -2804,8 +2806,9 @@ html[data-theme="bordeaux"] .zakat-form-grid .field,html[data-theme="bordeaux"] 
 .prayer-overview__location-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--gold2);width:13px;height:13px}
 .prayer-overview__location-svg{display:block;width:12px;height:12px}
 .prayer-overview__location-text{font-size:var(--po-loc-size);font-weight:700;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.prayer-overview__times{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--po-time-gap);margin-top:var(--po-gap-title-times)}
-.prayer-overview__time-card{display:flex;flex-direction:column;align-items:flex-start;border:1px solid rgba(239,215,142,.11);border-radius:var(--po-radius-card);background:rgba(239,215,142,.025);padding:10px 13px;min-height:0;box-shadow:none}
+.prayer-overview__times{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--po-time-gap);margin-top:var(--po-gap-title-times);border:1px solid rgba(239,215,142,.14);border-radius:var(--po-radius-card);overflow:hidden;background:rgba(239,215,142,.02)}
+.prayer-overview__time-card{display:flex;flex-direction:column;align-items:flex-start;border:0;border-radius:0;background:transparent;padding:7px 9px;min-height:0;box-shadow:none}
+.prayer-overview__time-card+.prayer-overview__time-card{border-left:1px solid rgba(239,215,142,.14)}
 .prayer-overview__time-label{display:block;color:var(--muted2);font-size:var(--po-label-size);font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.1;margin:0 0 3px}
 .prayer-overview__time-line{display:block;color:var(--cream);font-size:clamp(15px,3.8vw,17px);font-weight:650;line-height:1.12;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .prayer-overview__time-hour{color:var(--gold2);font-size:clamp(19px,4.8vw,21px);font-weight:800;font-variant-numeric:tabular-nums}
@@ -8192,8 +8195,8 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 .prayer-overview__mosque-svg{width:21px!important;height:20px!important}
 .prayer-overview__location{min-height:24px!important;padding:3px 8px!important;max-width:48%!important}
 .prayer-overview__location-text{font-size:12px!important}
-.prayer-overview__times{gap:8px!important;margin-top:10px!important}
-.prayer-overview__time-card{padding:9px 12px!important;border-radius:12px!important}
+.prayer-overview__times{gap:0!important;margin-top:8px!important;border-radius:12px!important}
+.prayer-overview__time-card{padding:7px 9px!important;border-radius:0!important}
 .prayer-overview__time-label{font-size:9px!important;margin-bottom:2px!important;letter-spacing:.1em!important}
 .prayer-overview__time-line{font-size:15.5px!important}
 .prayer-overview__time-hour{font-size:19.5px!important}
@@ -11589,9 +11592,16 @@ html[data-theme] .prayer-quick-card.prayer-overview{
   box-shadow:var(--glow-halo),var(--glow-inset),var(--shadow)!important;
 }
 html[data-theme] .prayer-overview__time-card{
-  border:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 46%,var(--line))!important;
-  background:color-mix(in srgb,var(--card) 90%,var(--glow-accent,var(--gold2)) 10%)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 9px color-mix(in srgb,var(--glow-accent) 12%,transparent)!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] .prayer-overview__time-card+.prayer-overview__time-card{
+  border-left:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 32%,var(--line))!important;
+}
+html[data-theme] .prayer-overview__times{
+  border:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 38%,var(--line))!important;
+  background:color-mix(in srgb,var(--card) 94%,var(--glow-accent,var(--gold2)) 6%)!important;
 }
 html[data-theme] .prayer-overview__location{
   border:1px solid color-mix(in srgb,var(--glow-accent,var(--gold2)) 40%,var(--line))!important;
