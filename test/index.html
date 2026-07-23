@@ -1952,8 +1952,8 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
 .share-row-v11 .share-btn.wa{background:linear-gradient(145deg,rgba(37,211,102,.18),rgba(8,14,10,.90))!important}
 .share-row-v11 .share-btn.ig{background:linear-gradient(145deg,rgba(214,41,118,.18),rgba(8,14,10,.90))!important}
 .share-row-v11 .share-btn.link{background:linear-gradient(145deg,rgba(214,183,106,.14),rgba(8,14,10,.90))!important}
-@media(max-width:980px){.share-row-v11{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(max-width:520px){.share-row-v11{grid-template-columns:1fr!important}}
+@media(max-width:980px){.share-row-v11:not(.share-row-primary):not(.share-row-secondary){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:520px){.share-row-v11:not(.share-row-primary):not(.share-row-secondary){grid-template-columns:1fr!important}}
 .share-layout-v12{display:grid!important;gap:10px!important;margin:0!important}
 .share-layout-v12 .share-row-primary,
 .share-layout-v12 .share-row-secondary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
@@ -1983,7 +1983,7 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
     min-width:0!important;
     min-height:46px!important;
   }
-  .share-row-v11,
+  .share-row-v11:not(.share-row-primary):not(.share-row-secondary),
   .share-row-v9,
   .share-row-v2{
     display:grid!important;
@@ -2093,7 +2093,7 @@ mark.search-hit{background:rgba(240,217,143,.28)!important;color:#fff7dc!importa
 }
 @media(max-width:980px){
   .article-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
-  .share-row-v11,.share-row-v9,.share-row-v2{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .share-row-v11:not(.share-row-primary):not(.share-row-secondary),.share-row-v9,.share-row-v2{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
   .status-chip-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
   .link-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
 }
@@ -3602,18 +3602,18 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
   backdrop-filter:blur(10px) saturate(1.12)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.10)!important;
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):hover{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):hover{
   border-color:rgba(255,255,255,.20)!important;
   filter:brightness(1.03);
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):active{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):active{
   transform:scale(.98);
 }
 :where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill,[data-nav]):not(.bottom-nav-btn):focus,
@@ -8464,7 +8464,7 @@ body.has-bottom-nav .float-actions{bottom:calc(64px + 0.5cm + max(0px,calc(env(s
 @media(max-width:390px){
   .post-after-panel{padding:10px;border-radius:19px}
   .post-after-share{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .article>.share-panel-v11 .share-row-v11{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .article>.share-panel-v11 .share-row-v11:not(.share-row-primary):not(.share-row-secondary){grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 
 /* APP LAYOUT PROPORTION FINAL — Seitenverhältnis wie Live/Bild 2, alle Themes */
@@ -11526,6 +11526,50 @@ html .share-btn.tg:hover,html .share-btn.wa:hover,html .share-btn.ig:hover,
 html[data-theme] .share-btn.tg:hover,html[data-theme] .share-btn.wa:hover,html[data-theme] .share-btn.ig:hover{
   filter:brightness(1.06);
   transform:translateY(-1px);
+}
+</style>
+<style id="dua-share-layout-v348">
+/* Duʿāʾ-Teilen: 3+3 kompakt auf allen Viewports, Instagram orange wie Telegram/WhatsApp */
+.share-panel-v11 .share-layout-v12>.share-row-v11.share-row-primary,
+.share-panel-v11 .share-layout-v12>.share-row-v11.share-row-secondary,
+.article>.share-panel-v11 .share-layout-v12>.share-row-v11{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  margin:0!important;
+}
+.share-panel-v11 .share-layout-v12 .share-btn,
+.article>.share-panel-v11 .share-layout-v12 .share-btn{
+  min-height:42px!important;
+  min-width:0!important;
+  padding:7px 5px!important;
+  font-size:11px!important;
+  border-radius:15px!important;
+  gap:5px!important;
+  width:auto!important;
+  flex:initial!important;
+}
+.share-panel-v11 .share-layout-v12 .share-btn svg,
+.article>.share-panel-v11 .share-layout-v12 .share-btn svg{
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px!important;
+}
+.share-panel-v11 .share-layout-v12 .share-btn span,
+.article>.share-panel-v11 .share-layout-v12 .share-btn span{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+html button.share-btn.ig.share-btn,
+html[data-theme] button.share-btn.ig,
+.share-panel-v11 .share-layout-v12 button.share-btn.ig,
+.article>.share-panel-v11 .share-layout-v12 button.share-btn.ig{
+  border:1.5px solid rgba(250,126,30,.88)!important;
+  background:linear-gradient(145deg,rgba(250,126,30,.14),rgba(214,41,118,.08),rgba(8,14,10,.90))!important;
+  box-shadow:0 0 0 1px rgba(250,126,30,.4),0 0 14px rgba(250,126,30,.38),0 0 24px rgba(214,41,118,.2),inset 0 1px 0 rgba(255,180,120,.2)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
 }
 </style>
 </head>
