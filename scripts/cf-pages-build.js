@@ -46,6 +46,12 @@ execFileSync(process.execPath, [syncBuildIds], {
   stdio: 'inherit'
 });
 
+const forceWorkersTestUpload = path.join(__dirname, 'force-workers-test-upload.js');
+execFileSync(process.execPath, [forceWorkersTestUpload], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
 console.log('CF Pages: kanonischer Bücher-/Autorenindex geprüft und erstellt.');
 console.log('CF Pages: Besucher-App mit geprüfter Quellenbibliothek verbunden.');
 console.log('CF Pages: statisches Deploy aus Repo-Root (index.html, assets/, content/, data/).');

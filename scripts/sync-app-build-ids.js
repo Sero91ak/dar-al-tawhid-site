@@ -11,7 +11,8 @@ const ROOT = path.join(__dirname, "..");
 function readBuildId(versionFile) {
   const full = path.join(ROOT, versionFile);
   const data = JSON.parse(fs.readFileSync(full, "utf8"));
-  if (!data.buildId || !/^app-shell-v\d+$/.test(data.buildId)) {
+  const pattern = versionFile.includes("test/") ? /^app-shell-v\d+(?:-test)?$/ : /^app-shell-v\d+$/;
+  if (!data.buildId || !pattern.test(data.buildId)) {
     throw new Error(`${versionFile}: gültige buildId fehlt`);
   }
   return data.buildId;
@@ -22,9 +23,9 @@ function syncHtml(htmlFile, buildId) {
   let html = fs.readFileSync(full, "utf8");
   const before = html;
 
-  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/, `const APP_BUILD_ID="${buildId}"`);
+  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+(?:-test)?"/, `const APP_BUILD_ID="${buildId}"`);
   html = html.replace(
-    /window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/,
+    /window\.__DAR_EXPECTED_BUILD="app-shell-v\d+(?:-test)?"/,
     `window.__DAR_EXPECTED_BUILD="${buildId}"`
   );
 
