@@ -28,6 +28,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "live-push-repair-v370-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Push/Gebets-Benachrichtigungen sofort live für Besucher reparieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/sync-app-build-ids.js",
+        "scripts/cf-pages-build.js",
+        "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "version-update-loop-fix-v370-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Meldung: Dauerhaft „Neue App-Version verfügbar“ in Test- und Besucher-App",
