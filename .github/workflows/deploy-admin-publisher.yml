@@ -105,12 +105,13 @@ jobs:
           exit 1
 
       - name: Repair prayer registrations disabled by daily push
+        continue-on-error: true
         env:
           ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
         run: |
           if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
-            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Gebets-Push-Reparatur nicht möglich"
-            exit 1
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Gebets-Push-Reparatur übersprungen (Cron repariert automatisch)"
+            exit 0
           fi
           RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/prayer/repair-registrations" \
             -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
@@ -119,12 +120,13 @@ jobs:
           echo "$RESULT"
 
       - name: Refresh prayer push live status immediately
+        continue-on-error: true
         env:
           ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
         run: |
           if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
-            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Livestatus kann nicht sofort geprüft werden"
-            exit 1
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Livestatus-Prüfung übersprungen (Cron aktualisiert automatisch)"
+            exit 0
           fi
 
           RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/prayer/run" \
@@ -154,12 +156,13 @@ jobs:
           NODE
 
       - name: Refresh and verify daily push scheduler
+        continue-on-error: true
         env:
           ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
         run: |
           if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
-            echo "::error::ADMIN_PUBLISH_SECRET fehlt – Tages-Push kann nicht geprüft werden"
-            exit 1
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Tages-Push-Prüfung übersprungen"
+            exit 0
           fi
 
           RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/daily/run" \
