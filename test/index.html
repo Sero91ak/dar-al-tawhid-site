@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v350";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v351";</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -15772,7 +15772,6 @@ const CALENDAR_FILTERS=[{id:"all",label:"Alle"},{id:"ramadan",label:"Ramaḍān"
 function calendarEventTags(ev){const tags=new Set(["all"]);if(ev.m===9){tags.add("ramadan");tags.add("fast")}if(ev.m===12)tags.add("hajj");if(/ʿĪd/i.test(ev.name)||(ev.m===10&&ev.d===1)||(ev.m===12&&ev.d===10))tags.add("eid");if(ev.m===1&&ev.d===10)tags.add("fast");return[...tags]}
 function calendarEventMatchesFilter(ev,filter){if(!filter||filter==="all")return true;return calendarEventTags(ev).includes(filter)}
 function isCalendarImportantEvent(ev){return(ev.m===9&&ev.d===1)||(ev.m===10&&ev.d===1)||(ev.m===12&&ev.d===9)||(ev.m===12&&ev.d===10)}
-function calendarEventStatus(ev){if(ev.diff===0)return{code:"today",label:"Heute"};if(ev.diff>0&&ev.diff<=7)return{code:"soon",label:"Bald"};if(isCalendarImportantEvent(ev)&&ev.diff>=0)return{code:"important",label:"Wichtig"};if(ev.diff>0&&ev.diff<=45)return{code:"upcoming",label:"Bevorstehend"};return null}
 function calendarMonthKey(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`}
 function calendarMonthLabel(d){return new Intl.DateTimeFormat("de-DE",{month:"long",year:"numeric"}).format(d)}
 function groupCalendarEventsByMonth(events){const map=new Map();events.forEach(ev=>{const key=calendarMonthKey(ev.gDate);if(!map.has(key))map.set(key,{key,label:calendarMonthLabel(ev.gDate),sort:ev.gDate.getTime(),events:[]});map.get(key).events.push(ev)});return[...map.values()].sort((a,b)=>a.sort-b.sort)}
@@ -15912,7 +15911,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v350";
+const APP_BUILD_ID="app-shell-v351";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -16970,11 +16969,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
                 var remoteNum = parseShellBuildNum(remote.buildId);
                 var localNum = parseShellBuildNum(APP_BUILD_ID);
                 if (localNum > remoteNum) {
-                  rememberAppliedBuild(APP_BUILD_ID);
-                  clearVersionUpdatePending();
-                  setHomeRefreshHint(false);
-                  hideAllBanners();
-                } else if (remoteNum > localNum && !hasWaitingWorker) {
                   rememberAppliedBuild(APP_BUILD_ID);
                   clearVersionUpdatePending();
                   setHomeRefreshHint(false);
