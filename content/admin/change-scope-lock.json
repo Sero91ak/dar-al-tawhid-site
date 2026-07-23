@@ -28,6 +28,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-overview-test-v360-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht in Test-App deployen (v360)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "scripts/sync-quran-overview-to-test.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "prayer-push-maghrib-repair-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Maghrib-Push Notfall: Migration-Subrequest-Limit + globale Änderungssperre",
