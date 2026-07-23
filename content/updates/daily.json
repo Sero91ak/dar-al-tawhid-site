@@ -1,38 +1,15 @@
 {
-  "date": "2026-07-23",
+  "date": "2026-07-24",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-23T09:10:00.000Z",
-  "source": "dar-daily-no-repeat-rotation",
+  "generated": "2026-07-23T22:00:02.163Z",
+  "source": "dar-daily-scheduler-regenerated-v4",
   "recommendation": {
-    "id": "hukm-muhakamah-weg-der-glaeubigen-421",
-    "title": "Wer dem Gesandten widerspricht und einem anderen Weg folgt",
-    "file": "hukm-muhakamah-weg-der-glaeubigen-421.md",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
-    "snippet": "🖋️ Allah ʿazza wa jalla:"
+    "id": "al-ajurri-groesstes-geschenk-im-paradies-161",
+    "title": "Das größte Geschenk im Paradies",
+    "file": "al-ajurri-groesstes-geschenk-im-paradies-161.md",
+    "category": "Aqīdah",
+    "scholar": "Abū Bakr al-Ājurrī",
+    "snippet": "„Wenn die Bewohner des Paradieses ins Paradies eintreten, wird ihnen zugerufen: O Bewohner des Paradieses, ihr habt bei Allah einen Termin, den ihr noch nicht gesehen habt.“"
   },
-  "dua": {
-    "id": "dua-036-rabbana-amanna-bima-anzalta",
-    "title": "Duʿāʾ um Zugehörigkeit zu den Bezeugenden",
-    "snippet": "Unser Herr, wir glauben an das, was Du herabgesandt hast, und folgen dem Gesandten; so schreibe uns unter die Bezeugenden.",
-    "category": "Īmān & Zeugenschaft"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 451,
-      "remaining": 448
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 90,
-      "remaining": 88,
-      "sources": {
-        "markdown": 90,
-        "total": 90,
-        "poolSize": 90,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
-  }
+  "dua": null
 }
