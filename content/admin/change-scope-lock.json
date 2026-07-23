@@ -28,6 +28,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "header-prayer-countdown-v362-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Countdown Sekunden lesbar (Pill, feste Breite)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "test-quran-progress-fix-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Meldung: Test-App Absturz formatQuranProgressTime",

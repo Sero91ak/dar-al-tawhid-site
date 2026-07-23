@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v361";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v362";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -2931,6 +2931,60 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   border-left:1px solid rgba(214,183,106,.22);
   padding-left:8px;
 }
+.header-prayer-item--now{
+  flex:0 1 42%;
+}
+.header-prayer-item--next{
+  flex:1 1 58%;
+  min-width:0;
+  justify-content:flex-end;
+}
+.header-prayer-item--next .header-prayer-line{
+  flex:0 1 auto;
+  min-width:0;
+}
+.header-prayer-item--next .header-prayer-name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:5.2em;
+}
+.header-prayer-countdown{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  flex:0 0 auto;
+  margin-left:2px;
+  padding:2px 7px;
+  border-radius:9px;
+  background:rgba(214,183,106,.14);
+  border:1px solid rgba(214,183,106,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  color:var(--gold2);
+  font-size:9px;
+  font-weight:900;
+  line-height:1;
+  white-space:nowrap;
+  overflow:visible;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;
+}
+.header-prayer-countdown-prefix{
+  color:var(--muted2);
+  font-size:6.8px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  flex:0 0 auto;
+}
+.header-prayer-countdown-digits{
+  display:inline-block;
+  min-width:7ch;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;
+  letter-spacing:.03em;
+  flex:0 0 auto;
+}
 .header-prayer-item b{
   display:inline;
   color:var(--muted2);
@@ -2993,15 +3047,10 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   flex-shrink:0;
 }
 .header-prayer-item small{
-  display:inline;
-  color:var(--muted);
-  font-size:9px;
-  font-weight:800;
-  line-height:1;
-  margin:0;
-  white-space:nowrap;
-  flex:0 0 auto;
-  font-variant-numeric:tabular-nums;
+  display:none;
+}
+.header-prayer-item .header-prayer-countdown{
+  display:inline-flex;
 }
 .header-prayer-item:first-child small{
   display:none;
@@ -3034,7 +3083,10 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   .header-prayer-item>span:not(.header-prayer-line){font-size:10px}
   .header-prayer-line .header-prayer-name{font-size:10.2px}
   .header-prayer-line .header-prayer-hour{font-size:9.2px}
-  .header-prayer-item small{font-size:8px}
+  .header-prayer-item--next .header-prayer-name{max-width:4.2em}
+  .header-prayer-countdown{padding:2px 6px;font-size:8.2px}
+  .header-prayer-countdown-digits{min-width:6.6ch}
+  .header-prayer-countdown-prefix{font-size:6.4px}
 }
 @media(max-width:390px){
   .header-tools{gap:6px}
@@ -9652,6 +9704,13 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
 .header-prayer-status .header-prayer-line .header-prayer-sep{
   flex-shrink:0!important;
 }
+.header-prayer-status .header-prayer-countdown,
+.header-prayer-status .header-prayer-countdown-digits{
+  flex-shrink:0!important;
+  min-width:max-content!important;
+  overflow:visible!important;
+  text-overflow:unset!important;
+}
 @media(max-width:700px){
   .header-prayer-status .header-prayer-line .header-prayer-name{font-size:10.2px!important}
   .header-prayer-status .header-prayer-line .header-prayer-hour{font-size:9.2px!important}
@@ -13451,6 +13510,17 @@ let headerPrayerDisplayKey="";
 function headerPrayerLineHtml(name,time){
   return `<span class="header-prayer-line" role="text"><span class="header-prayer-name">${esc(name)}</span><span class="header-prayer-sep" aria-hidden="true">·</span><span class="header-prayer-hour">${esc(time)}</span></span>`;
 }
+function headerPrayerCountdownHtml(ms){
+  return `<span class="header-prayer-countdown" id="headerPrayerCountdown" aria-live="polite" aria-label="Countdown bis zum nächsten Gebet"><span class="header-prayer-countdown-prefix">in</span><span class="header-prayer-countdown-digits">${esc(formatCountdown(ms))}</span></span>`;
+}
+function setHeaderPrayerCountdownText(ms){
+  const wrap=$("headerPrayerCountdown");
+  if(!wrap)return;
+  const digits=wrap.querySelector(".header-prayer-countdown-digits");
+  const text=formatCountdown(ms);
+  if(digits)digits.textContent=text;
+  else wrap.textContent=text;
+}
 let prayerReminderTimeouts=[];
 let qiblaOrientationHandler=null;
 let qiblaCompassActive=false;
@@ -14026,7 +14096,7 @@ function updateHeaderPrayerStatus(){
   const displayKey=[current?current.key:"",next?.key||"",formatPrayerHour(next?.time),settings.city||""].join("|");
   if(displayKey===headerPrayerDisplayKey&&$("headerPrayerCountdown"))return;
   headerPrayerDisplayKey=displayKey;
-  el.innerHTML=`<div class="header-prayer-item"><b>Jetzt</b>${headerPrayerLineHtml(current?current.name:"Gebet",current?formatPrayerHour(current.time):"--:--")}</div><div class="header-prayer-item"><b>Nächstes</b>${headerPrayerLineHtml(next.name,formatPrayerHour(next.time))}<small id="headerPrayerCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div>`;
+  el.innerHTML=`<div class="header-prayer-item header-prayer-item--now"><b>Jetzt</b>${headerPrayerLineHtml(current?current.name:"Gebet",current?formatPrayerHour(current.time):"--:--")}</div><div class="header-prayer-item header-prayer-item--next"><b>Nächstes</b>${headerPrayerLineHtml(next.name,formatPrayerHour(next.time))}${headerPrayerCountdownHtml(next.date-new Date())}</div>`;
 }
 function updatePrayerCountdowns(){
   const quick=$("prayerQuickCountdown"),detail=$("prayerDetailCountdown"),headerCountdown=$("headerPrayerCountdown");
@@ -14043,7 +14113,7 @@ function updatePrayerCountdowns(){
   if(displayKey!==headerPrayerDisplayKey||!headerCountdown){
     updateHeaderPrayerStatus();
   }else if(headerCountdown){
-    headerCountdown.textContent=formatCountdown(ms);
+    setHeaderPrayerCountdownText(ms);
   }
   if(quick)quick.textContent=formatCountdownShort(ms);
   if(detail)detail.textContent=formatCountdown(ms);
@@ -15327,7 +15397,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v361";
+const APP_BUILD_ID="app-shell-v362";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
