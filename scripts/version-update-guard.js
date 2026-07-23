@@ -221,7 +221,7 @@ function runVersionUpdateGuard() {
 
   const indexHtml = visitorHtml["index.html"];
   const buildMatch = indexHtml.match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
-  const testBuildMatch = visitorHtml["test/index.html"].match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
+  const testBuildMatch = visitorHtml["test/index.html"].match(/const APP_BUILD_ID="(app-shell-v\d+(?:-test)?)"/);
   const version = JSON.parse(read("version.json"));
   let testVersion = version;
   try {

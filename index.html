@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v365";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v368";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -13652,7 +13652,7 @@ function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const o
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
-async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:3}).catch(()=>false);if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:!!synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}else if(OS?.User?.PushSubscription?.optedIn){await savePushRegistration(s,OS)}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:2}).catch(()=>false);if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:1}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
+async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS);await sendWelcomePushIfNeeded(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:3}).catch(()=>false);if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:!!synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}else if(OS?.User?.PushSubscription?.optedIn){await savePushRegistration(s,OS)}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:2}).catch(()=>false);if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:1}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
 function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(()=>{maintainPushHealth({silent:true}).catch(()=>{})},PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")maintainPushHealth({silent:true}).catch(()=>{})});window.addEventListener("online",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}
 let prayerCountdownTimer=null;
 let headerPrayerDisplayKey="";
@@ -13816,7 +13816,7 @@ async function triggerPrayerPushScheduleNow(subscriptionId){
 const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
 let welcomePushInFlight=false;
 function welcomePushStorageKey(subId){return "dar_welcome_push_v2_"+String(subId||"").trim()}
-function welcomePushAlreadySent(subId){if(!subId)return true;try{if(localStorage.getItem(welcomePushStorageKey(subId))==="1")return true;if(localStorage.getItem(WELCOME_PUSH_SENT_KEY)==="1")return true}catch(e){}return false}
+function welcomePushAlreadySent(subId){if(!subId)return true;try{if(localStorage.getItem(welcomePushStorageKey(subId))==="1")return true}catch(e){}return false}
 function markWelcomePushSent(subId){if(!subId)return;try{localStorage.setItem(welcomePushStorageKey(subId),"1");localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1")}catch(e){}}
 async function sendWelcomePushIfNeeded(OS){
   try{
@@ -13828,7 +13828,8 @@ async function sendWelcomePushIfNeeded(OS){
     welcomePushInFlight=true;
     const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:subId})});
     const data=await r.json().catch(()=>({}));
-    if(r.ok){markWelcomePushSent(subId);return Boolean(data.sent)}
+    if(r.ok&&data.sent&&data.delivered!==false){markWelcomePushSent(subId);return true}
+    if(!r.ok||!data.sent)console.warn("Willkommens-Push nicht zugestellt:",data.reason||r.status);
   }catch(e){console.warn("Willkommens-Push:",e)}finally{welcomePushInFlight=false}
   return false;
 }
@@ -13958,11 +13959,18 @@ async function repairPushConnection({silent=false}={}){
   const ok=Boolean(subscribed&&ids.subscriptionId&&(!isIOSDevice()||isStandalonePwa()));
   setPrayerPushDebug({repairAt:new Date().toISOString(),subscriptionId:ids.subscriptionId,repairOk:ok});
   updatePushFloatButton();
+  let welcomed=false;
+  if(ok){
+    const freshOS=await waitForOneSignalReady(8000);
+    if(!silent){try{const repairSub=String(freshOS?.User?.PushSubscription?.id||ids.subscriptionId||"").trim();if(repairSub)localStorage.removeItem(welcomePushStorageKey(repairSub))}catch(e){}}
+    welcomed=await sendWelcomePushIfNeeded(freshOS||OS);
+  }
   if(!silent){
-    if(ok)alert("✓ Push-Verbindung repariert.\n\nBitte jetzt „Test senden“ antippen und Sperrbildschirm prüfen.");
+    if(ok&&welcomed)alert("✓ Push-Verbindung repariert – Willkommens-Nachricht wurde gesendet.\n\nBitte Sperrbildschirm prüfen.");
+    else if(ok)alert("✓ Push-Verbindung repariert.\n\nBitte jetzt „Test senden“ antippen und Sperrbildschirm prüfen.");
     else alert("Push konnte nicht vollständig repariert werden:\n\n"+issues.join("\n")+(isIOSDevice()&&!isStandalonePwa()?"\n\nWichtig: App vom Home-Bildschirm-Icon öffnen, nicht aus Safari.":""));
   }
-  return {ok,issues,subscriptionId:ids.subscriptionId};
+  return {ok,issues,subscriptionId:ids.subscriptionId,welcomed};
 }
 async function requestServerPrayerTest(subId,prayerKey,mode,settings){
   try{
@@ -14381,6 +14389,7 @@ async function activatePrayerReminder(){
         await ensurePostPushTags(OS);
         await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
         await savePushRegistration(getPrayerSettings(),OS);
+        await sendWelcomePushIfNeeded(OS);
       }
     }
     const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
@@ -15555,7 +15564,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v363";
+const APP_BUILD_ID="app-shell-v368";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
