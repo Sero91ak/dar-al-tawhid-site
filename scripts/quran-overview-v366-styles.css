@@ -76,7 +76,8 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-direct-label{display:block;font-size:12px;font-weight:900;color:var(--quran-text-primary)}
 .qov-direct-hint{display:block;margin-top:2px;font-size:10.5px;color:var(--quran-text-muted)}
 .qov-direct-arrow{color:var(--quran-accent-primary);font-size:16px;flex:0 0 auto}
-.qov-filter-bar{display:flex;align-items:center;gap:8px;margin:10px 0 6px}
+.qov-filter-bar{position:sticky;top:calc(52px + env(safe-area-inset-top));z-index:18;display:flex;align-items:center;gap:8px;margin:10px 0 6px;padding:4px 0;background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.qov-header.is-compact~.qov-layout .qov-filter-bar{top:calc(44px + env(safe-area-inset-top))}
 .qov-segment-bar{display:flex;flex:1;min-width:0;overflow-x:auto;border:1px solid var(--quran-line-secondary);border-radius:12px;background:var(--quran-surface-secondary);padding:3px;gap:2px;-webkit-overflow-scrolling:touch}
 .qov-segment-bar::-webkit-scrollbar{display:none}
 .qov-segment-btn{flex:1 0 auto;min-height:36px;border:0;border-radius:9px;background:transparent;color:var(--quran-text-muted);font-size:10.5px;font-weight:900;padding:0 10px;cursor:pointer;white-space:nowrap;transition:background .18s ease,color .18s ease}
@@ -149,6 +150,11 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 @media(min-width:1024px){
   .qov-layout{grid-template-columns:minmax(280px,340px) minmax(0,1fr);gap:24px}
 }
+@media(min-width:760px){
+  .qov-sheet-backdrop{align-items:center;justify-items:center;padding:24px}
+  .qov-sheet{max-height:min(82vh,720px);width:min(480px,100%);border-radius:20px;animation:qov-dialog-in .22s ease}
+}
+@keyframes qov-dialog-in{from{transform:translateY(8px) scale(.98);opacity:.8}to{transform:translateY(0) scale(1);opacity:1}}
 @media(max-width:520px){
   .qov-row{min-height:68px;grid-template-columns:30px minmax(0,1fr) auto}
   .qov-row-ar{font-size:13px}

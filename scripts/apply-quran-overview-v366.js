@@ -11,7 +11,7 @@ let html = fs.readFileSync(TEST, 'utf8');
 const css = fs.readFileSync(STYLES, 'utf8');
 const renderJs = fs.readFileSync(RENDER, 'utf8');
 
-const cssStart = html.indexOf('/* QURAN_OVERVIEW_V360:');
+const cssStart = html.indexOf('/* QURAN_OVERVIEW_V366:');
 const cssEnd = html.indexOf('</style>', cssStart);
 if (cssStart < 0 || cssEnd < 0) throw new Error('QURAN overview CSS block not found');
 html = html.slice(0, cssStart) + css + '\n' + html.slice(cssEnd);
