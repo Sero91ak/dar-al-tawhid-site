@@ -46,3 +46,14 @@ Geschützt durch `scripts/repo-integrity-guard.js` und CI (Canonical State Guard
 - Entfernen von `assets/live-boot.js`, `manifest.json`, `wrangler.toml`, `content/posts/`, `admin/index.html`
 
 **CI blockiert** Push/Merge/Deploy wenn zu wenige Dateien im Repo sind oder geschützte Pfade gelöscht würden.
+
+## Header-Gebetszeit-Darstellung (streng – nicht verletzen)
+
+Geschützt durch `content/admin/header-prayer-display-lock.json` und `scripts/header-prayer-display-guard.js` (CI: Canonical State Guard, App Health Check).
+
+**Verboten ohne ausdrückliche Freigabe des Nutzers:**
+- Zurück zum Einzeilen-Format `Gebet · Uhrzeit` mit Ellipsis (`Maghrib · 21…`) im Header
+- `updatePrayerCountdowns()` darf den Header nicht jede Sekunde per `innerHTML` neu rendern
+- Entfernen von `HEADER_PRAYER_DISPLAY_GUARD`, `header-prayer-line`, `headerPrayerLineHtml`
+
+**Freigabe:** nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Header-Gebetszeit freigeben“.

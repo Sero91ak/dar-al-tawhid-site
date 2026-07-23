@@ -72,6 +72,9 @@ jobs:
           grep -q 'data-daily-push' index.html || { echo "::error::Home push buttons missing from index.html"; exit 1; }
           echo "Daily push feature OK."
 
+      - name: Header prayer display guard (Maghrib/Zeit im Header)
+        run: node scripts/header-prayer-display-guard.js
+
       - name: Repo integrity guard (Massen-Löschung blockieren)
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
