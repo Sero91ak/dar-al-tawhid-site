@@ -28,6 +28,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "header-prayer-unified-v364-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten einheitlich auf allen Geräten (Pro Max + iPhone 13)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "header-prayer-mobile-v363-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Header-Gebetszeiten Smartphone ohne Überlappung/Kasten",
