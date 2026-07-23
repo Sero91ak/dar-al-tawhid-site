@@ -34,7 +34,9 @@
       "paths": [
         "test/index.html",
         "test/version.json",
-        "scripts/sync-quran-overview-to-test.js",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/sync-quran-overview-to-test.py",
         "scripts/overlay-test-staging-from-branch.js",
         "content/admin/change-scope-lock.json"
       ],
