@@ -28,6 +28,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "live-visitor-v405-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: v401–v405 live für Besucher-App (Qurʾān, App-Absturz, Isnad, UI)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T20:00:00.000Z"
+    },
+    {
       "id": "isnad-compact-read-v405-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Feedback: Ibn Sīrīn-Zitat im Maßstab der Überlieferung vollständig lesbar, kompakt",
