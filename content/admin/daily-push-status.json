@@ -1,26 +1,26 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
   "idVersion": "v4",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-07-23T22:00:01.619Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-07-24T08:40:01.620Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "duaCandidates": 0,
+  "duaCandidates": 1,
   "recCandidates": 0,
   "sent": 0,
   "accepted": {
     "dua": 0,
     "recommendation": 0
   },
-  "invalidSubscriptionsDisabled": 0,
+  "invalidSubscriptionsDisabled": 1,
   "skipped": 0,
-  "duplicates": 0,
-  "errors": 0,
+  "duplicates": 10,
+  "errors": 1,
   "forceSend": null,
   "dailyContentDate": "2026-07-24",
   "currentRecommendation": {
@@ -29,6 +29,10 @@
     "category": "Aqīdah",
     "scholar": "Abū Bakr al-Ājurrī"
   },
-  "currentDua": null,
+  "currentDua": {
+    "id": "dua-037-rabbana-ghfir-lana-dhunubana",
+    "title": "Duʿāʾ um Vergebung, Festigkeit und Sieg",
+    "category": "Vergebung & Standhaftigkeit"
+  },
   "configAutomatic": true
 }
