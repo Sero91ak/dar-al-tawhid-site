@@ -453,10 +453,7 @@
     const originalSetHeader = setHeader;
     setHeader = function (title, desc, eyebrow, headClass) {
       if (title === "Startseite") {
-        const eyebrowText = eyebrow || "DAR AL TAWḤID";
-        const headClassAttr = headClass ? ` ${headClass}` : "";
-        const safe = (v) => (typeof esc === "function" ? esc(v) : String(v == null ? "" : v));
-        return `<div class="view-head view-head-home${headClassAttr}"><div class="eyebrow">${safe(eyebrowText)}</div><div class="view-head-home-row"><h2 class="home-start-title">${safe(title)}</h2>${renderHomeHijriFrameHtml()}</div>${renderHomeHeaderChipsHtml()}${desc ? `<div class="view-desc">${safe(desc)}</div>` : ""}</div>`;
+        return originalSetHeader(title, desc, eyebrow, headClass);
       }
       return originalSetHeader(title, desc, eyebrow, headClass);
     };
