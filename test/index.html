@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- workers-deploy-stamp:1784841871924 -->
+<!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v370-test";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v373-test";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -11973,100 +11973,368 @@ body.is-calendar-route .calendar-premium-page .cal-tl-filters-wrap,
 @media(max-width:700px){body.is-calendar-route .calendar-premium-page,.calendar-premium-page{padding:14px 12px var(--cal-nav-pad)}body.is-calendar-route .calendar-premium-page .cal-tl-filters-wrap,.calendar-premium-page .cal-tl-filters-wrap{margin:0 -12px 14px;padding:0 12px}}
 
 
-/* QURAN_OVERVIEW_V360: moderne Übersicht – nur #quran Route */
+/* QURAN_OVERVIEW_V366: entkacheln, theme tokens, kompakte Liste */
 body.is-quran-overview .top-shell,body.is-quran-overview .isnad,body.is-quran-overview .app-bar{display:none!important}
 body.is-quran-overview .float-actions{display:none!important}
-body.is-quran-overview #appView.view{padding-top:max(8px,env(safe-area-inset-top))}
-body.is-quran-overview.qov-search-active .qov-main{opacity:.42;pointer-events:none;filter:blur(1px);transition:opacity .22s ease,filter .22s ease}
-@media(prefers-reduced-motion:reduce){body.is-quran-overview.qov-search-active .qov-main{filter:none;transition:none}}
-.qov-page{max-width:min(720px,100%);margin:0 auto;padding:0 2px calc(96px + env(safe-area-inset-bottom))}
-.qov-header{position:sticky;top:0;z-index:24;margin:0 -2px 12px;padding:10px 4px 8px;background:linear-gradient(180deg,rgba(8,8,6,.96) 72%,rgba(8,8,6,0));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:padding .24s ease}
-.qov-header.is-compact{padding-top:6px;padding-bottom:4px}
+body.is-quran-overview #appView.view{padding-top:max(6px,env(safe-area-inset-top))}
+body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:none;filter:blur(1px);transition:opacity .2s ease,filter .2s ease}
+@media(prefers-reduced-motion:reduce){body.is-quran-overview.qov-search-active .qov-main{filter:none;transition:none}.qov-header,.qov-sheet,.qov-row,.qov-segment-btn{transition:none!important;animation:none!important}}
+
+.qov-page{
+  --quran-page-bg:var(--bg);
+  --quran-header-bg:linear-gradient(180deg,color-mix(in srgb,var(--bg) 94%,var(--gold2) 6%) 0%,transparent 100%);
+  --quran-surface-primary:color-mix(in srgb,var(--card) 88%,var(--gold2) 12%);
+  --quran-surface-secondary:color-mix(in srgb,var(--card) 92%,transparent);
+  --quran-surface-active:color-mix(in srgb,var(--card) 78%,var(--gold2) 22%);
+  --quran-text-primary:var(--premium-title,var(--text));
+  --quran-text-secondary:var(--premium-body,var(--cream));
+  --quran-text-muted:var(--muted);
+  --quran-text-arabic:var(--gold2);
+  --quran-accent-primary:var(--gold2);
+  --quran-accent-secondary:var(--bronze,var(--gold));
+  --quran-accent-soft:color-mix(in srgb,var(--gold2) 18%,transparent);
+  --quran-line-primary:color-mix(in srgb,var(--gold2) 42%,var(--line));
+  --quran-line-secondary:var(--line2);
+  --quran-line-muted:color-mix(in srgb,var(--line2) 70%,transparent);
+  --quran-gradient-page:linear-gradient(180deg,color-mix(in srgb,var(--bg) 96%,var(--gold2) 4%) 0%,var(--bg) 38%,color-mix(in srgb,var(--bg2,var(--bg)) 94%,var(--gold2) 6%) 100%);
+  --quran-gradient-header:var(--quran-header-bg);
+  --quran-gradient-section:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 22%,transparent),transparent 72%);
+  --quran-gradient-line:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2) 38%,var(--line)) 18%,color-mix(in srgb,var(--gold2) 38%,var(--line)) 82%,transparent);
+  --quran-gradient-active:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 24%,transparent),transparent);
+  --quran-focus-ring:0 0 0 2px color-mix(in srgb,var(--gold2) 28%,transparent);
+  --quran-shadow-soft:0 8px 24px color-mix(in srgb,#000 22%,transparent);
+  --quran-glow-soft:0 0 18px color-mix(in srgb,var(--gold2) 8%,transparent);
+  max-width:min(1240px,100%);margin:0 auto;padding:0 10px calc(92px + env(safe-area-inset-bottom));
+  background:var(--quran-gradient-page);color:var(--quran-text-secondary);
+}
+.qov-divider{height:1px;margin:12px 0;background:var(--quran-gradient-line);border:0}
+.qov-divider--tight{margin:8px 0}
+.qov-header{position:sticky;top:0;z-index:24;margin:0 -4px;padding:8px 4px 6px;background:var(--quran-gradient-header);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:padding .22s ease}
+.qov-header.is-compact{padding-top:4px;padding-bottom:2px}
 .qov-header-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px}
-.qov-back{min-width:44px;min-height:44px;border:1px solid var(--line2);border-radius:14px;background:rgba(239,215,142,.06);color:var(--cream);font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.qov-back{min-width:44px;min-height:44px;border:1px solid var(--quran-line-secondary);border-radius:12px;background:color-mix(in srgb,var(--quran-surface-secondary) 80%,transparent);color:var(--quran-text-secondary);font-size:18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.qov-back:focus-visible{outline:none;box-shadow:var(--quran-focus-ring)}
 .qov-title-wrap{min-width:0}
-.qov-title{margin:0;font-family:var(--serif);font-size:clamp(22px,5vw,28px);line-height:1.05;color:var(--gold2)}
-.qov-subtitle{margin:2px 0 0;color:var(--muted);font-size:11px;font-weight:800;line-height:1.3}
+.qov-title{margin:0;font-family:var(--serif);font-size:clamp(20px,4.8vw,26px);line-height:1.05;color:var(--quran-text-primary);letter-spacing:.04em}
+.qov-subtitle{margin:2px 0 0;color:var(--quran-text-muted);font-size:10.5px;font-weight:750;line-height:1.3}
 .qov-header.is-compact .qov-subtitle{display:none}
 .qov-icon-actions{display:flex;align-items:center;gap:4px}
-.qov-icon-btn{min-width:44px;min-height:44px;border:1px solid transparent;border-radius:14px;background:transparent;color:var(--cream);font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.qov-icon-btn:hover,.qov-icon-btn:focus-visible{border-color:rgba(239,215,142,.35);background:rgba(239,215,142,.08);outline:none}
-.qov-resume{border:1px solid var(--line2);border-radius:18px;background:radial-gradient(circle at 10% 0%,rgba(239,215,142,.1),transparent 42%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.92));padding:14px;margin-bottom:12px}
-.qov-resume-label{font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
-.qov-resume h3{margin:0;font-family:var(--serif);font-size:20px;color:#fff6dc;line-height:1.15}
-.qov-resume-meta{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
-.qov-resume-time{margin-top:4px;color:var(--muted2);font-size:11px}
-.qov-progress{height:4px;border-radius:999px;background:rgba(239,215,142,.12);margin:10px 0 12px;overflow:hidden}
-.qov-progress span{display:block;height:100%;background:linear-gradient(90deg,rgba(239,215,142,.55),rgba(155,122,60,.75));border-radius:999px}
-.qov-resume-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.qov-btn-primary{min-height:48px;border:0;border-radius:16px;padding:0 18px;background:linear-gradient(180deg,rgba(214,180,106,.92),rgba(139,104,38,.88));color:#1a1408;font-family:var(--sans);font-size:13px;font-weight:900;cursor:pointer}
-.qov-btn-primary:active{transform:scale(.98)}
-.qov-btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.qov-btn-secondary{min-height:40px;border:1px solid var(--line2);border-radius:14px;padding:0 14px;background:rgba(239,215,142,.04);color:var(--cream);font-size:12px;font-weight:850;cursor:pointer}
-.qov-menu-btn{min-width:40px;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:transparent;color:var(--muted);font-size:18px;cursor:pointer;line-height:1}
-.qov-search-wrap{margin-bottom:12px}
-.qov-search{width:100%;min-height:48px;border:1px solid var(--line2);border-radius:16px;background:rgba(0,0,0,.18);color:var(--cream);padding:0 14px;font-size:15px}
-.qov-search:focus{border-color:rgba(239,215,142,.5);outline:none;box-shadow:0 0 0 2px rgba(239,215,142,.15)}
-.qov-search-hint{margin:6px 2px 0;color:var(--muted2);font-size:10.5px}
-.qov-section-title{margin:0 0 8px;font-family:var(--sans);font-size:13px;font-weight:900;color:var(--cream);letter-spacing:.02em}
-.qov-direct{border:1px solid var(--line2);border-radius:16px;padding:12px;margin-bottom:12px;background:rgba(239,215,142,.03)}
-.qov-direct-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.7fr) auto;gap:7px;align-items:center}
-.qov-direct-grid select,.qov-direct-grid button{min-height:42px;border-radius:13px;border:1px solid var(--line2);background:rgba(0,0,0,.14);color:var(--cream);font-size:12px;font-weight:850;padding:0 10px}
-.qov-chip-row{display:flex;gap:6px;overflow-x:auto;padding:10px 0 4px;margin:0 -2px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.qov-chip-row::-webkit-scrollbar{display:none}
-.qov-chip{flex:0 0 auto;scroll-snap-align:start;border:1px solid var(--line2);border-radius:999px;padding:8px 12px;background:rgba(239,215,142,.05);color:var(--cream);font-size:11px;font-weight:900;cursor:pointer;white-space:nowrap}
-.qov-chip.active{border-color:rgba(239,215,142,.55);background:rgba(239,215,142,.14);color:#fff6dc}
-.qov-chip-link{margin-top:6px}
-.qov-filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
-.qov-filter-chips{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto}
-.qov-sort-btn{min-width:44px;min-height:40px;border:1px solid var(--line2);border-radius:12px;background:rgba(239,215,142,.05);color:var(--cream);font-size:16px;cursor:pointer}
-.qov-surah-list{display:grid;gap:8px}
-.qov-surah-card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;min-height:88px;border:1px solid var(--line2);border-radius:16px;padding:10px 12px;background:radial-gradient(circle at 8% 0%,rgba(239,215,142,.07),transparent 40%),linear-gradient(145deg,rgba(22,19,14,.92),rgba(8,8,6,.9));cursor:pointer;text-align:left}
-.qov-surah-card:hover{border-color:rgba(239,215,142,.45)}
-.qov-surah-card.is-last-read{border-color:rgba(239,215,142,.38);box-shadow:inset 0 0 0 1px rgba(239,215,142,.12)}
-.qov-surah-num{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(239,215,142,.1);border:1px solid rgba(239,215,142,.2);color:var(--gold2);font-size:12px;font-weight:950}
-.qov-surah-main{min-width:0}
-.qov-surah-main h3{margin:0;font-family:var(--serif);font-size:16px;color:#fff6dc;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.qov-surah-meta{margin-top:4px;color:var(--muted);font-size:10.5px;font-weight:850;line-height:1.3}
-.qov-surah-badge{display:inline-block;margin-top:4px;font-size:9px;font-weight:950;color:var(--gold2);letter-spacing:.06em;text-transform:uppercase}
-.qov-surah-ar{font-size:15px;color:var(--gold2);direction:rtl;text-align:right;line-height:1.35;white-space:nowrap}
-.qov-surah-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.qov-surah-fav{font-size:14px;line-height:1;opacity:.9}
-.qov-surah-chevron{color:var(--muted);font-size:14px}
-.qov-search-panel{margin-bottom:12px}
-.qov-search-group{margin-bottom:12px}
-.qov-search-group h4{margin:0 0 6px;font-size:11px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2)}
-.qov-sheet-backdrop{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.55);display:grid;align-items:end}
-.qov-sheet{max-height:min(86dvh,760px);overflow:auto;border:1px solid var(--line2);border-radius:22px 22px 0 0;background:linear-gradient(180deg,rgba(24,20,14,.98),rgba(8,8,6,.98));padding:14px 14px max(16px,env(safe-area-inset-bottom));animation:qov-sheet-in .26s ease}
-@keyframes qov-sheet-in{from{transform:translateY(12px);opacity:.7}to{transform:translateY(0);opacity:1}}
-@media(prefers-reduced-motion:reduce){.qov-sheet{animation:none}.qov-header{transition:none}}
+.qov-icon-btn{min-width:44px;min-height:44px;border:0;border-radius:12px;background:transparent;color:var(--quran-text-secondary);font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.qov-icon-btn:hover,.qov-icon-btn:focus-visible{background:var(--quran-accent-soft);outline:none;box-shadow:var(--quran-focus-ring)}
+.qov-layout{display:block}
+.qov-side,.qov-main{min-width:0}
+.qov-resume{position:relative;margin:0 0 10px;padding:10px 0 10px 12px;background:var(--quran-gradient-section);border:0;border-radius:0}
+.qov-resume::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:999px;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 70%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 55%,transparent))}
+.qov-resume-label{font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:var(--quran-text-muted);margin-bottom:4px}
+.qov-resume h3{margin:0;font-family:var(--serif);font-size:clamp(17px,4.2vw,20px);color:var(--quran-text-primary);line-height:1.15}
+.qov-resume-meta{margin:4px 0 0;color:var(--quran-text-muted);font-size:11.5px;line-height:1.4}
+.qov-resume-time{margin-top:2px;color:var(--quran-text-muted);font-size:10.5px}
+.qov-resume-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;flex-wrap:wrap}
+.qov-resume-link{border:0;background:transparent;padding:0;color:var(--quran-accent-primary);font-size:12.5px;font-weight:900;cursor:pointer;text-decoration:none}
+.qov-resume-link:hover,.qov-resume-link:focus-visible{text-decoration:underline;outline:none}
+.qov-resume-progress{font-size:10px;font-weight:850;color:var(--quran-text-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.qov-progress{height:3px;border-radius:999px;background:var(--quran-line-muted);margin:6px 0 0;overflow:hidden;max-width:120px}
+.qov-progress span{display:block;height:100%;background:var(--quran-gradient-active);border-radius:999px}
+.qov-search-wrap{margin-bottom:8px}
+.qov-search-shell{position:relative;display:flex;align-items:center}
+.qov-search-icon{position:absolute;left:12px;color:var(--quran-text-muted);font-size:14px;pointer-events:none}
+.qov-search{width:100%;min-height:46px;border:0;border-bottom:1px solid var(--quran-line-secondary);border-radius:12px 12px 0 0;background:var(--quran-surface-primary);color:var(--quran-text-secondary);padding:0 40px 0 36px;font-size:15px;transition:border-color .18s ease,box-shadow .18s ease}
+.qov-search:focus{border-bottom-color:var(--quran-accent-primary);outline:none;box-shadow:var(--quran-focus-ring)}
+.qov-search-clear{position:absolute;right:6px;min-width:36px;min-height:36px;border:0;border-radius:10px;background:transparent;color:var(--quran-text-muted);font-size:16px;cursor:pointer;display:none}
+.qov-search-clear.is-visible{display:inline-flex;align-items:center;justify-content:center}
+.qov-search-hint{margin:5px 2px 0;color:var(--quran-text-muted);font-size:10px;line-height:1.35}
+.qov-recent-row{display:flex;gap:6px;overflow-x:auto;margin-top:6px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.qov-recent-row::-webkit-scrollbar{display:none}
+.qov-recent-chip{flex:0 0 auto;border:0;border-bottom:1px solid var(--quran-line-muted);border-radius:0;background:transparent;color:var(--quran-text-muted);font-size:10.5px;font-weight:800;padding:4px 2px;cursor:pointer;white-space:nowrap}
+.qov-direct-row{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;padding:8px 2px;border:0;border-top:1px solid var(--quran-line-muted);border-bottom:1px solid var(--quran-line-muted);background:transparent;color:inherit;text-align:left;cursor:pointer}
+.qov-direct-row:focus-visible{outline:none;box-shadow:var(--quran-focus-ring)}
+.qov-direct-label{display:block;font-size:12px;font-weight:900;color:var(--quran-text-primary)}
+.qov-direct-hint{display:block;margin-top:2px;font-size:10.5px;color:var(--quran-text-muted)}
+.qov-direct-arrow{color:var(--quran-accent-primary);font-size:16px;flex:0 0 auto}
+.qov-filter-bar{position:sticky;top:calc(52px + env(safe-area-inset-top));z-index:18;display:flex;align-items:center;gap:8px;margin:10px 0 6px;padding:4px 0;background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.qov-header.is-compact~.qov-layout .qov-filter-bar{top:calc(44px + env(safe-area-inset-top))}
+.qov-segment-bar{display:flex;flex:1;min-width:0;overflow-x:auto;border:1px solid var(--quran-line-secondary);border-radius:12px;background:var(--quran-surface-secondary);padding:3px;gap:2px;-webkit-overflow-scrolling:touch}
+.qov-segment-bar::-webkit-scrollbar{display:none}
+.qov-segment-btn{flex:1 0 auto;min-height:36px;border:0;border-radius:9px;background:transparent;color:var(--quran-text-muted);font-size:10.5px;font-weight:900;padding:0 10px;cursor:pointer;white-space:nowrap;transition:background .18s ease,color .18s ease}
+.qov-segment-btn[aria-selected="true"],.qov-segment-btn.active{color:var(--quran-text-primary);background:var(--quran-surface-active);box-shadow:inset 0 -2px 0 var(--quran-accent-primary)}
+.qov-segment-btn:focus-visible{outline:none;box-shadow:var(--quran-focus-ring)}
+.qov-sort-btn{min-width:40px;min-height:40px;border:1px solid var(--quran-line-secondary);border-radius:11px;background:var(--quran-surface-secondary);color:var(--quran-text-secondary);font-size:15px;cursor:pointer;flex:0 0 auto}
+.qov-sort-btn:focus-visible{outline:none;box-shadow:var(--quran-focus-ring)}
+.qov-list-head{margin:8px 0 4px;padding:0 2px;font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;color:var(--quran-text-muted)}
+.qov-surah-list{display:flex;flex-direction:column;gap:0;margin:0;padding:0}
+#quranSurahGrid.qov-surah-list{display:flex!important;grid-template-columns:none!important}
+.qov-row{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:64px;padding:8px 2px;border:0;border-radius:0;background:transparent;cursor:pointer;text-align:left;width:100%;color:inherit;font:inherit;transition:background .16s ease}
+.qov-row::after{content:"";position:absolute;left:34px;right:0;bottom:0;height:1px;background:var(--quran-gradient-line);pointer-events:none}
+.qov-row:last-child::after{display:none}
+.qov-row:hover,.qov-row:focus-visible{background:color-mix(in srgb,var(--quran-surface-active) 35%,transparent);outline:none}
+.qov-row.is-last-read,.qov-row.is-active{background:var(--quran-gradient-active)}
+.qov-row.is-last-read::before,.qov-row.is-active::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:999px;background:linear-gradient(180deg,var(--quran-accent-primary),var(--quran-accent-secondary))}
+.qov-row.is-search-hit{background:color-mix(in srgb,var(--quran-surface-active) 55%,transparent)}
+.qov-row-num{font-size:11px;font-weight:950;color:var(--quran-text-muted);font-variant-numeric:tabular-nums;text-align:center}
+.qov-row-main{min-width:0}
+.qov-row-main h3{margin:0;font-family:var(--serif);font-size:15px;color:var(--quran-text-primary);line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qov-row-meta{display:block;margin-top:2px;color:var(--quran-text-muted);font-size:10px;font-weight:800;line-height:1.25}
+.qov-row-side{display:flex;align-items:center;gap:6px;min-width:0;max-width:42%}
+.qov-row-ar{font-size:14px;color:var(--quran-text-arabic);direction:rtl;text-align:right;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1 1 auto;min-width:0}
+.qov-row-indicators{display:inline-flex;gap:4px;flex:0 0 auto;font-size:11px;line-height:1}
+.qov-row-chevron{color:var(--quran-text-muted);font-size:13px;flex:0 0 auto}
+.qov-search-panel{margin-bottom:8px}
+.qov-search-group{margin-bottom:10px}
+.qov-search-group h4{margin:0 0 6px;font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--quran-text-muted)}
+.qov-sheet-backdrop{position:fixed;inset:0;z-index:80;background:color-mix(in srgb,#000 55%,transparent);display:grid;align-items:end}
+.qov-sheet{max-height:min(86dvh,760px);overflow:auto;border:1px solid var(--quran-line-secondary);border-radius:20px 20px 0 0;background:color-mix(in srgb,var(--card) 96%,var(--bg) 4%);padding:14px 14px max(16px,env(safe-area-inset-bottom));animation:qov-sheet-in .24s ease;color:var(--quran-text-secondary)}
+@keyframes qov-sheet-in{from{transform:translateY(10px);opacity:.75}to{transform:translateY(0);opacity:1}}
 .qov-sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.qov-sheet-head h3{margin:0;font-family:var(--serif);font-size:20px;color:var(--gold2)}
-.qov-sheet-section{margin-bottom:14px}
-.qov-sheet-section b{display:block;font-size:12px;margin-bottom:6px;color:var(--cream)}
-.qov-toggle-row{display:grid;gap:8px}
-.qov-toggle-row label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--cream)}
-.qov-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-.qov-seg button{min-height:42px;border:1px solid var(--line2);border-radius:12px;background:rgba(239,215,142,.05);color:var(--cream);font-size:11px;font-weight:900;cursor:pointer}
-.qov-seg button.active{border-color:rgba(239,215,142,.55);background:rgba(239,215,142,.14);color:#fff6dc}
-.qov-seg-note{margin:6px 0 0;color:var(--muted);font-size:10.5px;line-height:1.4;min-height:2.8em}
-.qov-preview{border:1px dashed rgba(239,215,142,.22);border-radius:14px;padding:10px;margin:8px 0;background:rgba(239,215,142,.03)}
-.qov-preview-ar{direction:rtl;text-align:right;font-size:var(--quran-arabic-size,23px);line-height:1.7;color:#fff9e8}
-.qov-preview-tr{color:#e8d7a8;font-size:var(--quran-trans-size,16px);margin-top:6px}
-.qov-preview-de{color:var(--cream);font-size:var(--quran-de-size,16px);margin-top:6px}
+.qov-sheet-head h3{margin:0;font-family:var(--serif);font-size:19px;color:var(--quran-text-primary)}
+.qov-sheet-section{margin-bottom:12px}
+.qov-sheet-section b{display:block;font-size:11px;margin-bottom:6px;color:var(--quran-text-primary)}
 .qov-sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-.qov-empty{padding:14px;border:1px dashed var(--line2);border-radius:14px;color:var(--muted);font-size:13px;line-height:1.5;text-align:center}
-.qov-skeleton{height:88px;border-radius:16px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:qov-shimmer 1.2s linear infinite}
+.qov-btn-primary,.qov-btn-secondary{min-height:44px;border-radius:12px;font-size:12.5px;font-weight:900;cursor:pointer}
+.qov-btn-primary{border:0;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 88%,#fff 12%),color-mix(in srgb,var(--quran-accent-secondary) 82%,#000 18%));color:color-mix(in srgb,var(--bg) 88%,#000)}
+.qov-btn-secondary{border:1px solid var(--quran-line-secondary);background:transparent;color:var(--quran-text-secondary)}
+.qov-btn-primary:disabled{opacity:.45;cursor:not-allowed}
+.qov-direct-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:8px}
+.qov-direct-grid select,.qov-direct-grid input{min-height:44px;border:1px solid var(--quran-line-secondary);border-radius:11px;background:var(--quran-surface-secondary);color:var(--quran-text-secondary);font-size:12px;padding:0 10px}
+.qov-direct-grid button{grid-column:1/-1}
+.qov-tools-list{display:grid;gap:4px}
+.qov-tools-item{display:flex;align-items:center;gap:10px;min-height:48px;border:0;border-bottom:1px solid var(--quran-line-muted);background:transparent;color:var(--quran-text-secondary);font-size:13px;font-weight:850;text-align:left;cursor:pointer;padding:8px 2px}
+.qov-tools-item:last-child{border-bottom:0}
+.qov-toggle-row{display:grid;gap:8px}
+.qov-toggle-row label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--quran-text-secondary)}
+.qov-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.qov-seg button{min-height:40px;border:1px solid var(--quran-line-secondary);border-radius:10px;background:transparent;color:var(--quran-text-secondary);font-size:10.5px;font-weight:900;cursor:pointer}
+.qov-seg button.active{border-color:var(--quran-accent-primary);background:var(--quran-accent-soft);color:var(--quran-text-primary)}
+.qov-seg-note{margin:6px 0 0;color:var(--quran-text-muted);font-size:10px;line-height:1.4;min-height:2.6em}
+.qov-preview{border:1px dashed var(--quran-line-secondary);border-radius:12px;padding:10px;margin:8px 0;background:var(--quran-surface-secondary)}
+.qov-preview-ar{direction:rtl;text-align:right;font-size:var(--quran-arabic-size,23px);line-height:1.7;color:var(--quran-text-arabic)}
+.qov-preview-tr{color:var(--quran-text-muted);font-size:var(--quran-trans-size,16px);margin-top:6px}
+.qov-preview-de{color:var(--quran-text-secondary);font-size:var(--quran-de-size,16px);margin-top:6px}
+.qov-empty{padding:14px 6px;color:var(--quran-text-muted);font-size:12.5px;line-height:1.5;text-align:center}
+.qov-skeleton{height:64px;border-radius:0;background:linear-gradient(90deg,color-mix(in srgb,var(--quran-line-muted) 40%,transparent),color-mix(in srgb,var(--quran-line-secondary) 80%,transparent),color-mix(in srgb,var(--quran-line-muted) 40%,transparent));background-size:200% 100%;animation:qov-shimmer 1.2s linear infinite}
 @keyframes qov-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-@media(prefers-reduced-motion:reduce){.qov-skeleton{animation:none}}
 .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.qov-search-hit{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line2);border-radius:14px;background:rgba(239,215,142,.04);margin-bottom:6px;cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
-.qov-search-hit:hover,.qov-search-hit:focus-visible{border-color:rgba(239,215,142,.45);outline:none}
-.qov-search-hit strong{display:block;font-size:13px;color:#fff6dc}
-.qov-search-hit span{font-size:11px;color:var(--muted)}
-@media(max-width:520px){.qov-surah-card{min-height:82px}.qov-direct-grid{grid-template-columns:1fr 1fr}.qov-direct-grid button{grid-column:1/-1}}
-@media(min-width:760px){.qov-page{padding-left:8px;padding-right:8px}}
+.qov-search-hit{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 4px;border:0;border-bottom:1px solid var(--quran-line-muted);background:transparent;margin:0;cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
+.qov-search-hit:hover,.qov-search-hit:focus-visible{background:var(--quran-accent-soft);outline:none}
+.qov-search-hit strong{display:block;font-size:13px;color:var(--quran-text-primary)}
+.qov-search-hit span{font-size:11px;color:var(--quran-text-muted)}
+@media(min-width:760px){
+  .qov-layout{display:grid;grid-template-columns:minmax(260px,320px) minmax(0,1fr);gap:20px;align-items:start}
+  .qov-header{grid-column:1/-1}
+  .qov-page{padding-left:16px;padding-right:16px}
+}
+@media(min-width:1024px){
+  .qov-layout{grid-template-columns:minmax(280px,340px) minmax(0,1fr);gap:24px}
+}
+@media(min-width:760px){
+  .qov-sheet-backdrop{align-items:center;justify-items:center;padding:24px}
+  .qov-sheet{max-height:min(82vh,720px);width:min(480px,100%);border-radius:20px;animation:qov-dialog-in .22s ease}
+}
+@keyframes qov-dialog-in{from{transform:translateY(8px) scale(.98);opacity:.8}to{transform:translateY(0) scale(1);opacity:1}}
+@media(max-width:520px){
+  .qov-row{min-height:68px;grid-template-columns:30px minmax(0,1fr) auto}
+  .qov-row-ar{font-size:13px}
+}
 
+</style>
+
+<style id="header-prayer-hub-v372">
+/* Header-Gebetszeiten-Hub: eine Fläche, drei Zonen, Statuszeile – voll themeabhängig */
+.top-shell.theme-hero-shell .header-row--brand-only{display:block!important}
+.top-shell.theme-hero-shell .header-prayer-hub{
+  display:block;
+  width:100%;
+  margin-top:clamp(14px,3.2vw,22px);
+  padding:clamp(12px,2.8vw,16px) clamp(12px,3vw,18px);
+  border-radius:16px;
+  border:1px solid color-mix(in srgb,var(--theme-border) 78%,transparent);
+  background:linear-gradient(145deg,color-mix(in srgb,var(--theme-accent) 7%,transparent),color-mix(in srgb,var(--theme-surface) 88%,transparent));
+  box-shadow:0 10px 28px color-mix(in srgb,var(--theme-text) 8%,transparent),inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 12%,transparent);
+  color:var(--theme-text);
+  cursor:pointer;
+  text-align:left;
+  min-height:92px;
+  transition:border-color .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+.top-shell.theme-hero-shell .header-prayer-hub:hover,
+.top-shell.theme-hero-shell .header-prayer-hub:focus-visible{
+  border-color:color-mix(in srgb,var(--theme-accent) 42%,var(--theme-border));
+  box-shadow:0 12px 32px color-mix(in srgb,var(--theme-text) 10%,transparent),0 0 0 1px color-mix(in srgb,var(--theme-accent) 14%,transparent);
+  filter:brightness(1.03);
+  outline:none;
+}
+.header-prayer-hub__main{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);
+  align-items:stretch;
+  gap:0;
+  min-width:0;
+}
+.header-prayer-hub__main--empty{
+  display:block;
+  min-height:48px;
+}
+.header-prayer-hub__empty{
+  color:var(--theme-muted);
+  font-size:12px;
+  font-weight:800;
+  line-height:1.45;
+  text-align:center;
+  padding:8px 4px 2px;
+}
+.header-prayer-zone{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-start;
+  gap:3px;
+  min-width:0;
+  padding:2px clamp(6px,1.8vw,10px);
+}
+.header-prayer-zone--count{
+  align-items:center;
+  text-align:center;
+}
+.header-prayer-zone--next{
+  align-items:flex-end;
+  text-align:right;
+}
+.header-prayer-zone--now{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--theme-accent) 10%,transparent),transparent 72%);
+  border-radius:10px 0 0 10px;
+}
+.header-prayer-zone--count::before,
+.header-prayer-zone--count::after{
+  content:"";
+  position:absolute;
+  top:10%;
+  bottom:10%;
+  width:1px;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--theme-border) 55%,var(--theme-accent) 45%),transparent);
+  pointer-events:none;
+}
+.header-prayer-zone--count::before{left:0}
+.header-prayer-zone--count::after{right:0}
+.header-prayer-zone__label{
+  display:block;
+  color:var(--theme-muted);
+  font-family:var(--display);
+  font-size:clamp(7px,.95vw,8px);
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  line-height:1;
+  white-space:nowrap;
+}
+.header-prayer-zone__main{
+  display:inline-flex;
+  align-items:baseline;
+  gap:4px;
+  min-width:0;
+  max-width:100%;
+  color:var(--theme-text);
+  line-height:1.1;
+}
+.header-prayer-zone__name{
+  font-family:var(--serif);
+  font-size:clamp(11px,2.6vw,14px);
+  font-weight:800;
+  color:var(--theme-text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:7.5em;
+}
+.header-prayer-zone__sep{
+  color:var(--theme-muted);
+  opacity:.75;
+  flex:0 0 auto;
+  font-size:10px;
+}
+.header-prayer-zone__time{
+  color:var(--theme-accent);
+  font-size:clamp(10px,2.3vw,12px);
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+.header-prayer-zone__countdown{
+  display:block;
+  color:var(--theme-accent);
+  font-family:var(--display);
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.04em;
+  line-height:1;
+  white-space:nowrap;
+}
+.header-prayer-zone__countdown-full{
+  display:block;
+  font-size:clamp(18px,4.8vw,28px);
+}
+.header-prayer-zone__countdown-short{
+  display:none;
+  font-size:clamp(16px,4.2vw,22px);
+}
+.header-prayer-zone__sub{
+  display:block;
+  color:var(--theme-muted);
+  font-size:clamp(8.5px,2vw,10px);
+  font-weight:800;
+  line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+.header-prayer-hub__status{
+  position:relative;
+  margin-top:clamp(10px,2.4vw,12px);
+  padding-top:clamp(9px,2.2vw,11px);
+  color:var(--theme-muted);
+  font-size:clamp(9.5px,2.2vw,11px);
+  font-weight:800;
+  line-height:1.35;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.header-prayer-hub__status::before{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:8%;
+  top:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--theme-border) 50%,var(--theme-accent) 50%),transparent);
+}
+.header-prayer-hub__status>span+span::before{
+  content:" · ";
+  opacity:.72;
+}
+.header-prayer-hub__date-short{display:none}
+@media(max-width:700px){
+  .header-prayer-zone__countdown-full{display:none}
+  .header-prayer-zone__countdown-short{display:block}
+  .header-prayer-hub__date-full{display:none}
+  .header-prayer-hub__date-short{display:inline}
+  .header-prayer-zone__name{max-width:5.2em;font-size:10px}
+  .header-prayer-zone__time{font-size:9.5px}
+  .header-prayer-zone{padding-inline:4px}
+  .header-prayer-zone__sub{font-size:8px}
+}
+@media(min-width:981px){
+  .header-prayer-hub__main{gap:0}
+  .header-prayer-zone{padding-inline:12px}
+  .header-prayer-zone__name{max-width:none}
+}
+/* Alte Header-Gebetszeiten-/Social-Layouts in diesem Bereich deaktivieren */
+.top-shell.theme-hero-shell .header-tools,
+.top-shell.theme-hero-shell .header .socials{display:none!important}
+.top-shell.theme-hero-shell .header-prayer-status{display:none!important}
+.top-shell.theme-hero-shell .header-top-chips{display:none!important}
 </style>
 </head>
 <body class="has-bottom-nav">
@@ -12075,25 +12343,15 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.42;pointer-events:no
 <div class="app">
   <section class="top-shell theme-hero-shell">
     <header class="header theme-hero-surface">
-      <div class="header-row">
+      <div class="header-row header-row--brand-only">
         <div class="brand">
           <div class="brand-kicker-row">
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
-            <div class="header-top-chips" id="headerTopChips" data-header-top-chips><button id="hijriHeaderDate" class="hijri-header-pill" type="button" data-hijri-today data-nav="calendar" aria-label="Islamischer Kalender">🗓️ Islamisches Datum</button></div>
           </div>
           <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤID Logo"><h1 class="brand-title-refined">DAR AL TAWḤĪD</h1></div>
         </div>
-        <div class="header-tools">
-          <div id="headerPrayerStatus" class="header-prayer-status" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen">
-            <div class="header-prayer-item"><b>Jetzt</b><span>Standort freigeben</span></div>
-            <div class="header-prayer-item"><b>Nächstes</b><span>nach Freigabe</span></div>
-          </div>
-          <nav class="socials" aria-label="Social Media">
-            <a class="social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener" aria-label="Telegram öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a>
-            <a class="social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igHead" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igHead)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></a>
-          </nav>
-        </div>
       </div>
+      <div id="headerPrayerStatus" class="header-prayer-hub" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen"></div>
       <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro">Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</div></div>
     </header>
     <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn, Band 1, S. 14.</div></section>
@@ -12442,13 +12700,21 @@ function formatQuranProgressRelative(value){const ts=Date.parse(String(value||""
 function renderQuranContinueBanner(){return ""}
 function renderQuranOverviewProgressCard(){return ""}
 function quranOverviewFilteredSurahs(){if(!quranMeta)return [];let rows=quranMeta.surahs.slice();const filter=getQuranOverviewFilter();const favs=new Set(getQuranSurahFavorites());if(filter==="meccan")rows=rows.filter(s=>s.type!=="medinan");else if(filter==="medinan")rows=rows.filter(s=>s.type==="medinan");else if(filter==="favorites")rows=rows.filter(s=>favs.has(s.id));const sort=getQuranOverviewSort();const opened=getJson(QURAN_SURAH_LAST_OPENED_KEY,{})||{};if(sort==="alpha")rows.sort((a,b)=>String(a.transliteration).localeCompare(String(b.transliteration),"de"));else if(sort==="recent")rows.sort((a,b)=>(Date.parse(opened[String(b.id)]||0)||0)-(Date.parse(opened[String(a.id)]||0)||0));else if(sort==="favorites")rows.sort((a,b)=>(favs.has(b.id)?1:0)-(favs.has(a.id)?1:0)||a.id-b.id);return rows}
-function quranSurahCard(s){const pct=quranSurahProgressPercent(s.id);const prog=getPreferredQuranProgress();const isLast=prog&&Number(prog.surahNumber)===Number(s.id);const fav=isQuranSurahFavorite(s.id);return `<article class="qov-surah-card quran-surah-card${isLast?" is-last-read":""}" data-nav="quran-surah" data-value="${s.id}" data-qov-surah="${s.id}"><div class="qov-surah-num quran-num" aria-hidden="true">${s.id}</div><div class="qov-surah-main"><h3>${esc(s.transliteration)}</h3><div class="qov-surah-meta">${s.total_verses} Āyāt · ${quranTypeLabel(s.type)}</div>${isLast?'<span class="qov-surah-badge">Zuletzt gelesen</span>':""}${pct>0&&isLast?`<div class="quran-surah-progress qov-progress" aria-hidden="true"><span style="width:${pct}%"></span></div>`:""}</div><div class="qov-surah-side"><span class="qov-surah-ar" lang="ar" dir="rtl">${esc(s.name)}</span>${fav?'<span class="qov-surah-fav" aria-label="Favorit">🔖</span>':""}<span class="qov-surah-chevron" aria-hidden="true">›</span></div></article>`}
-const QURAN_POPULAR_SURAHS=[{id:1,label:"al-Fātiḥah"},{id:2,label:"al-Baqarah"},{id:36,label:"Yā-Sīn"},{id:55,label:"ar-Raḥmān"},{id:67,label:"al-Mulk"},{id:112,label:"al-Iḫlāṣ"},{id:18,label:"al-Kahf"}];
-function renderQuranQuickPick(){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}">${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="qov-direct"><h2 class="qov-section-title">Direkt öffnen</h2><div class="qov-direct-grid"><select id="quranQuickSurah" class="direct-pick" aria-label="Sūrah wählen"><option value="">Sūrah</option>${options}</select><select id="quranQuickAyah" class="direct-pick" disabled aria-label="Āyah wählen"><option value="">Āyah</option></select><button id="quranQuickGo" class="qov-btn-primary" type="button" disabled>Öffnen</button></div><div class="qov-chip-row" role="list" aria-label="Häufige Sūren">${QURAN_POPULAR_SURAHS.map(s=>`<button type="button" class="qov-chip quran-popular-btn" data-quran-surah="${s.id}" role="listitem">${esc(s.label)}</button>`).join("")}</div><button type="button" class="qov-btn-secondary qov-chip-link" data-qov-show-all-surahs>Alle anzeigen</button></section>`}
-function renderQuranOverviewHeader(totalAyat){return `<header class="qov-header" id="qovHeader"><div class="qov-header-row"><button type="button" class="qov-back" id="qovBackBtn" aria-label="Zurück">←</button><div class="qov-title-wrap"><h1 class="qov-title">Qurʾān</h1><p class="qov-subtitle">114 Sūren · ${totalAyat} Āyāt</p></div><div class="qov-icon-actions"><button type="button" class="qov-icon-btn" id="qovSearchBtn" aria-label="Suche">🔍</button><button type="button" class="qov-icon-btn" id="qovFavBtn" aria-label="Favoriten">🔖</button><button type="button" class="qov-icon-btn" id="qovDisplayBtn" aria-label="Darstellung">Aa</button></div></div></header>`}
-function renderQuranResumeCard(){const prog=getPreferredQuranProgress();if(!prog){return `<section class="qov-resume"><div class="qov-resume-label">Einstieg</div><h3>Mit dem Qurʾān beginnen</h3><p class="qov-resume-meta">Öffne Sūrat al-Fātiḥah als ruhigen Start in den edlen Qurʾān.</p><div class="qov-resume-actions"><button type="button" class="qov-btn-primary" data-quran-continue="1:1">Al-Fātiḥah öffnen</button></div></section>`}const meta=quranSurahMeta(prog.surahNumber);const total=meta?.total_verses||"";const pct=quranSurahProgressPercent(prog.surahNumber);return `<section class="qov-resume"><div class="qov-resume-label">Weiterlesen</div><h3>Sūrat ${esc(meta?.transliteration||prog.surahName||prog.surahNumber)}</h3><p class="qov-resume-meta">Āyah ${prog.ayahNumber}${total?` von ${total}`:""}</p><p class="qov-resume-time">${esc(formatQuranProgressRelative(prog.updatedAt))}</p>${pct>0?`<div class="qov-progress" aria-hidden="true"><span style="width:${pct}%"></span></div>`:""}<div class="qov-resume-actions"><button type="button" class="qov-btn-primary" data-quran-continue="${esc(prog.surahNumber)}:${esc(prog.ayahNumber)}">Weiterlesen</button><button type="button" class="qov-menu-btn" data-quran-progress-menu="${esc(prog.surahNumber)}:${esc(prog.ayahNumber)}" aria-label="Weitere Optionen">⋯</button></div></section>`}
-function renderQuranOverviewSearch(){return `<section class="qov-search-wrap qov-search-panel"><label class="visually-hidden" for="quranSearchInput">Qurʾān durchsuchen</label><input id="quranSearchInput" class="qov-search search" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(quranSearchQuery)}" placeholder="Sūrah, Āyah oder Begriff suchen" aria-label="Sūrah, Āyah oder Begriff suchen"><p class="qov-search-hint">Suche in Deutsch, Arabisch und Lautschrift</p><section id="quranSearchBlock" class="qov-search-panel" style="display:none"><div class="section-head"><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section>${!quranSearchQuery?`<div id="qovSearchRecent" class="qov-search-group"><h4>Zuletzt gesucht</h4><div class="qov-chip-row">${(getQuranSearchRecent().length?getQuranSearchRecent():["Tawḥīd","2:255","Geduld"]).map(t=>`<button type="button" class="qov-chip" data-qov-recent-search="${esc(t)}">${esc(t)}</button>`).join("")}</div></div>`:""}</section>`}
-function renderQuranOverviewFilters(){const f=getQuranOverviewFilter();const chips=[["all","Alle"],["meccan","Mekkanisch"],["medinan","Medinensisch"],["favorites","Favoriten"]];return `<div class="qov-filter-bar"><div class="qov-filter-chips" role="tablist" aria-label="Sūren filtern">${chips.map(([id,label])=>`<button type="button" class="qov-chip${f===id?" active":""}" data-qov-filter="${id}" role="tab" aria-selected="${f===id?"true":"false"}">${label}</button>`).join("")}</div><button type="button" class="qov-sort-btn" id="qovSortBtn" aria-label="Sortierung">⇅</button></div>`}
+function quranSurahCard(s){const prog=getPreferredQuranProgress();const isLast=prog&&Number(prog.surahNumber)===Number(s.id);const fav=isQuranSurahFavorite(s.id);const opened=String(currentRoute.view)==="quran-surah"&&Number(String(currentRoute.value||"").split("/")[0])===Number(s.id);const q=normalizeQuranSearchText(quranSearchQuery||"");const isHit=!!q&&normalizeQuranSearchText([s.transliteration,s.name,s.type,String(s.id)].join(" ")).includes(q);const num=String(s.id).padStart(2,"0");const indicators=[isLast?'<span class="qov-row-indicators" title="Zuletzt gelesen" aria-label="Zuletzt gelesen">▌</span>':"",fav?'<span class="qov-row-indicators" title="Favorit" aria-label="Favorit">★</span>':""].filter(Boolean).join("");return `<button type="button" class="qov-row quran-surah-card${isLast?" is-last-read":""}${opened?" is-active":""}${isHit?" is-search-hit":""}" data-nav="quran-surah" data-value="${s.id}" data-qov-surah="${s.id}" aria-label="Sūrah ${esc(s.transliteration)} öffnen"><span class="qov-row-num quran-num" aria-hidden="true">${num}</span><span class="qov-row-main"><h3>${esc(s.transliteration)}</h3><span class="qov-row-meta">${s.total_verses} Āyāt · ${quranTypeLabel(s.type)}</span></span><span class="qov-row-side"><span class="qov-row-ar" lang="ar" dir="rtl">${esc(s.name)}</span>${indicators}<span class="qov-row-chevron" aria-hidden="true">›</span></span></button>`}
+let qovLastFocusEl=null;
+let qovDirectSheetDraft=null;
+function renderQuranQuickPick(){return `<section class="qov-direct"><button type="button" class="qov-direct-row" id="qovDirectOpenBtn" aria-haspopup="dialog" aria-controls="qovDirectMount"><span><span class="qov-direct-label">Sūrah oder Āyah direkt öffnen</span><span class="qov-direct-hint">2:255 eingeben oder auswählen</span></span><span class="qov-direct-arrow" aria-hidden="true">→</span></button></section>`}
+function renderQuranDirectOpenSheet(){if(!quranMeta)return "";const draft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${String(draft.surah)===String(s.id)?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");const meta=draft.surah?quranSurahMeta(Number(draft.surah)):null;const ayahOpts=meta?quranAyahOptions(meta.total_verses,draft.ayah):"<option value=\"\">Āyah</option>";const valid=Number(draft.surah)>=1&&Number(draft.surah)<=114&&(!draft.ayah||Number(draft.ayah)>=1&&meta&&Number(draft.ayah)<=meta.total_verses);return `<div class="qov-sheet-backdrop" id="qovDirectBackdrop" data-qov-direct-backdrop role="presentation"><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovDirectTitle" id="qovDirectSheet"><div class="qov-sheet-head"><h3 id="qovDirectTitle">Direkt öffnen</h3><button type="button" class="qov-icon-btn" data-qov-direct-close aria-label="Schließen">×</button></div><div class="qov-sheet-section"><label class="visually-hidden" for="quranQuickSurah">Sūrah</label><div class="qov-direct-grid"><select id="quranQuickSurah" class="direct-pick" aria-label="Sūrah wählen"><option value="">Sūrah</option>${options}</select><select id="quranQuickAyah" class="direct-pick" aria-label="Āyah wählen" ${meta?"":"disabled"}>${ayahOpts}</select><input id="qovDirectRef" type="text" inputmode="text" placeholder="z. B. 2:255" value="${esc(draft.ref||"")}" aria-label="Referenz eingeben"><button id="quranQuickGo" class="qov-btn-primary" type="button" ${valid?"":"disabled"}>Öffnen</button></div></div><div class="qov-sheet-actions"><button type="button" class="qov-btn-secondary" data-qov-direct-close>Abbrechen</button></div></section></div>`}
+function renderQuranToolsSheet(){return `<div class="qov-sheet-backdrop" id="qovToolsBackdrop" data-qov-tools-backdrop role="presentation"><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovToolsTitle"><div class="qov-sheet-head"><h3 id="qovToolsTitle">Werkzeuge</h3><button type="button" class="qov-icon-btn" data-qov-tools-close aria-label="Schließen">×</button></div><div class="qov-tools-list"><button type="button" class="qov-tools-item" data-qov-tools-display>Darstellung &amp; Schrift</button><button type="button" class="qov-tools-item" data-nav="quran-topic" data-value="saved">Notizen &amp; Merkliste</button><button type="button" class="qov-tools-item" data-qov-tools-favorites>Favoriten anzeigen</button><button type="button" class="qov-tools-item" data-nav="quran-topic">Themen</button></div></section></div>`}
+function renderQuranOverviewHeader(totalAyat){return `<header class="qov-header" id="qovHeader"><div class="qov-header-row"><button type="button" class="qov-back" id="qovBackBtn" aria-label="Zurück">←</button><div class="qov-title-wrap"><h1 class="qov-title">Qurʾān</h1><p class="qov-subtitle">114 Sūren · ${totalAyat} Āyāt</p></div><div class="qov-icon-actions"><button type="button" class="qov-icon-btn" id="qovSearchBtn" aria-label="Suche fokussieren">🔍</button><button type="button" class="qov-icon-btn" id="qovToolsBtn" aria-label="Werkzeuge" aria-haspopup="dialog">⋯</button></div></div></header>`}
+function renderQuranResumeCard(){const prog=getPreferredQuranProgress();if(!prog||!quranSurahMeta(prog.surahNumber)){return `<section class="qov-resume" aria-label="Einstieg"><div class="qov-resume-label">Einstieg</div><h3>Beginne deine Qurʾān-Lesung</h3><p class="qov-resume-meta">Wähle eine Sūrah oder starte mit al-Fātiḥah.</p><div class="qov-resume-foot"><button type="button" class="qov-resume-link" data-quran-continue="1:1">Sūrah auswählen →</button></div></section>`}const meta=quranSurahMeta(prog.surahNumber);if(!meta)return `<section class="qov-resume"><div class="qov-resume-label">Weiterlesen</div><h3>Lesestand zurücksetzen</h3><p class="qov-resume-meta">Gespeicherter Stand ist ungültig.</p><div class="qov-resume-foot"><button type="button" class="qov-resume-link" data-quran-continue="1:1">Neu beginnen →</button></div></section>`;const ay=Math.max(1,Math.min(Number(prog.ayahNumber)||1,meta.total_verses));const pct=quranSurahProgressPercent(prog.surahNumber);return `<section class="qov-resume" aria-label="Weiterlesen"><div class="qov-resume-label">Weiterlesen</div><h3>Sūrat ${esc(meta.transliteration)}</h3><p class="qov-resume-meta">Āyah ${ay} von ${meta.total_verses}${formatQuranProgressRelative(prog.updatedAt)?` · ${esc(formatQuranProgressRelative(prog.updatedAt).replace(/^Zuletzt gelesen /,""))}`:""}</p><div class="qov-resume-foot"><button type="button" class="qov-resume-link" data-quran-continue="${esc(prog.surahNumber)}:${esc(ay)}">Weiterlesen →</button><span class="qov-resume-progress">${ay} / ${meta.total_verses}</span></div>${pct>0?`<div class="qov-progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Fortschritt in dieser Sūrah"><span style="width:${pct}%"></span></div>`:""}<button type="button" class="visually-hidden" data-quran-progress-menu="${esc(prog.surahNumber)}:${esc(ay)}">Lesestand verwalten</button></section>`}
+function renderQuranOverviewSearch(){const recent=getQuranSearchRecent();const q=String(quranSearchQuery||"");return `<section class="qov-search-wrap qov-search-panel"><label class="visually-hidden" for="quranSearchInput">Qurʾān durchsuchen</label><div class="qov-search-shell"><span class="qov-search-icon" aria-hidden="true">🔍</span><input id="quranSearchInput" class="qov-search search" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(q)}" placeholder="Sūrah, Āyah oder Begriff suchen" aria-label="Sūrah, Āyah oder Begriff suchen"><button type="button" class="qov-search-clear${q?" is-visible":""}" id="qovSearchClear" aria-label="Suche löschen"${q?"":" hidden"}>×</button></div><p class="qov-search-hint">Deutsch · Arabisch · Lautschrift · Begriffe</p><section id="quranSearchBlock" class="qov-search-panel" style="display:none"><div class="section-head"><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section>${recent.length?`<div id="qovSearchRecent" class="qov-recent-row" aria-label="Zuletzt gesucht">${recent.map(t=>`<button type="button" class="qov-recent-chip" data-qov-recent-search="${esc(t)}">${esc(t)}</button>`).join("")}</div>`:""}</section>`}
+function renderQuranOverviewFilters(){const f=getQuranOverviewFilter();const chips=[["all","Alle"],["meccan","Mekkanisch"],["medinan","Medinensisch"],["favorites","Favoriten"]];return `<div class="qov-filter-bar"><div class="qov-segment-bar" role="tablist" aria-label="Sūren filtern">${chips.map(([id,label])=>`<button type="button" class="qov-segment-btn${f===id?" active":""}" data-qov-filter="${id}" role="tab" aria-selected="${f===id?"true":"false"}">${label}</button>`).join("")}</div><button type="button" class="qov-sort-btn" id="qovSortBtn" aria-label="Sortierung wechseln">⇅</button></div><div class="qov-list-head">Suren</div>`}
+function openQuranDirectSheet(){qovLastFocusEl=document.activeElement;qovDirectSheetDraft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const mount=$("qovDirectMount");if(!mount)return;mount.innerHTML=renderQuranDirectOpenSheet();bindQuranDirectSheet();document.body.style.overflow="hidden"}
+function closeQuranDirectSheet(){const mount=$("qovDirectMount");if(mount)mount.innerHTML="";qovDirectSheetDraft=null;document.body.style.overflow="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()}
+function bindQuranDirectSheet(){const backdrop=$("qovDirectBackdrop");const close=()=>closeQuranDirectSheet();backdrop?.addEventListener("click",e=>{if(e.target===backdrop)close()});backdrop?.querySelectorAll("[data-qov-direct-close]").forEach(btn=>btn.addEventListener("click",close));const surah=$("quranQuickSurah");const ayah=$("quranQuickAyah");const ref=$("qovDirectRef");const go=$("quranQuickGo");const sync=()=>{const sid=Number(surah?.value);const meta=sid?quranSurahMeta(sid):null;if(ayah&&meta)ayah.innerHTML=quranAyahOptions(meta.total_verses,ayah.value);if(ayah)ayah.disabled=!meta;const ay=Number(ayah?.value)||0;const ok=sid>=1&&sid<=114&&(!ay||meta&&ay>=1&&ay<=meta.total_verses);if(go)go.disabled=!ok};if(surah){surah.onchange=()=>{qovDirectSheetDraft={surah:surah.value,ayah:"",ref:ref?.value||""};sync()};sync()}if(ayah)ayah.onchange=sync;if(ref){ref.oninput=()=>{const parsed=quranSearchParseRef(ref.value);if(parsed){surah.value=String(parsed.surah);sync();if(ayah)ayah.value=String(parsed.ayah||"")}sync()}}if(go){go.onclick=()=>{const sid=Number(surah?.value);if(!sid)return;const ay=Number(ayah?.value)||1;const meta=quranSurahMeta(sid);if(meta&&ay>meta.total_verses)return;closeQuranDirectSheet();openQuranSurah(sid,ay)}};backdrop?.querySelector("#qovDirectSheet")?.focus();const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
+function openQuranToolsSheet(){qovLastFocusEl=document.activeElement;const mount=$("qovToolsMount");if(!mount)return;mount.innerHTML=renderQuranToolsSheet();const close=()=>{mount.innerHTML="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()};$("qovToolsBackdrop")?.addEventListener("click",e=>{if(e.target===$("qovToolsBackdrop"))close()});mount.querySelectorAll("[data-qov-tools-close]").forEach(btn=>btn.addEventListener("click",close));mount.querySelector("[data-qov-tools-display]")?.addEventListener("click",()=>{close();openQuranDisplaySheet()});mount.querySelector("[data-qov-tools-favorites]")?.addEventListener("click",()=>{close();setQuranOverviewFilter("favorites");render()});mount.querySelectorAll("[data-nav]").forEach(btn=>btn.addEventListener("click",()=>{close();navigate(btn.getAttribute("data-nav"),btn.getAttribute("data-value")||"")}));const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
+function bindQuranOverviewUi(){const header=$("qovHeader");const onScroll=()=>{if(!header)return;header.classList.toggle("is-compact",(window.scrollY||0)>36)};onScroll();window.removeEventListener("scroll",window.__qovScrollFn||(()=>{}));window.__qovScrollFn=onScroll;window.addEventListener("scroll",onScroll,{passive:true});$("qovBackBtn")?.addEventListener("click",()=>goBack());$("qovSearchBtn")?.addEventListener("click",()=>{$("quranSearchInput")?.focus()});$("qovToolsBtn")?.addEventListener("click",()=>openQuranToolsSheet());$("qovDirectOpenBtn")?.addEventListener("click",()=>openQuranDirectSheet());$("qovSearchClear")?.addEventListener("click",()=>{const input=$("quranSearchInput");if(!input)return;input.value="";quranSearchQuery="";input.dispatchEvent(new Event("input",{bubbles:true}));input.focus()});document.querySelectorAll("[data-qov-filter]").forEach(btn=>{btn.onclick=()=>{setQuranOverviewFilter(btn.getAttribute("data-qov-filter"));render()}});$("qovSortBtn")?.addEventListener("click",()=>{const order=["order","alpha","recent","favorites"];const cur=getQuranOverviewSort();const next=order[(order.indexOf(cur)+1)%order.length];setQuranOverviewSort(next);render()});document.querySelectorAll("[data-qov-recent-search]").forEach(btn=>{btn.onclick=()=>{const input=$("quranSearchInput");if(!input)return;input.value=btn.getAttribute("data-qov-recent-search")||"";quranSearchQuery=input.value;input.dispatchEvent(new Event("input",{bubbles:true}))}});document.querySelectorAll("[data-qov-surah]").forEach(card=>{card.addEventListener("contextmenu",ev=>{ev.preventDefault();const id=card.getAttribute("data-qov-surah");quranSurahContextMenu(id,ev.clientX,ev.clientY)})});const input=$("quranSearchInput");if(input){const syncClear=()=>{const btn=$("qovSearchClear");if(!btn)return;const on=!!String(input.value||"").trim();btn.classList.toggle("is-visible",on);btn.hidden=!on};syncClear();input.addEventListener("input",syncClear)}}
 function renderQuranDisplaySheet(){const settings=quranDisplaySheetDraft||{view:getQuranViewSettings(),tr:getQuranTrMode(),spacing:getQuranLineSpacing(),arabic:getFontScale("quranArabicScale"),trans:getFontScale("quranTransliterationScale"),german:getFontScale("quranGermanScale")};const mode=settings.tr;const info=QURAN_TR_MODES[mode]||QURAN_TR_MODES.readable;const previewAr="رَبَّنَا تَقَبَّلْ مِنَّا";const previewTr=quranVerseTr({tr:"Rabbana taqabbal minna",tr_readable:"Rabbana taqabbal minna",tr_academic:"Rabbana taqabbal minna"},mode);return `<div class="qov-sheet-backdrop" id="qovDisplayBackdrop" data-qov-display-backdrop><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovDisplayTitle"><div class="qov-sheet-head"><h3 id="qovDisplayTitle">Darstellung</h3><button type="button" class="qov-icon-btn" data-qov-display-close aria-label="Schließen">×</button></div><div class="qov-sheet-section"><b>Textbestandteile</b><div class="qov-toggle-row"><label><input type="checkbox" data-qov-draft-view="showArabic"${settings.view.showArabic?" checked":""}> Arabisch anzeigen</label><label><input type="checkbox" data-qov-draft-view="showTransliteration"${settings.view.showTransliteration?" checked":""}> Lautschrift anzeigen</label><label><input type="checkbox" data-qov-draft-view="showGerman"${settings.view.showGerman?" checked":""}> Deutsch anzeigen</label></div></div><div class="qov-sheet-section"><b>Lautschriftart</b><div class="qov-seg">${Object.entries(QURAN_TR_MODES).map(([key,m])=>`<button type="button" data-qov-draft-tr="${key}" class="${mode===key?"active":""}">${esc(m.label)}</button>`).join("")}</div><p class="qov-seg-note" id="qovTrNote">${esc(info.hint)}</p></div><div class="qov-sheet-section"><b>Schriftgröße</b><div class="font-range-shell"><input class="font-range" type="range" min="0" max="10" step="1" value="${settings.arabic}" data-qov-draft-scale="quranArabicScale" aria-label="Arabisch"><input class="font-range" type="range" min="0" max="10" step="1" value="${settings.trans}" data-qov-draft-scale="quranTransliterationScale" aria-label="Lautschrift"><input class="font-range" type="range" min="0" max="10" step="1" value="${settings.german}" data-qov-draft-scale="quranGermanScale" aria-label="Deutsch"></div><div class="qov-preview"><div class="qov-preview-ar" data-qov-preview-ar>${esc(previewAr)}</div><div class="qov-preview-tr" data-qov-preview-tr>${esc(previewTr)}</div><div class="qov-preview-de" data-qov-preview-de>Unser Herr, nimm es von uns an.</div></div></div><div class="qov-sheet-section"><b>Zeilenabstand</b><div class="qov-seg">${[["compact","Kompakt"],["standard","Standard"],["generous","Großzügig"]].map(([id,label])=>`<button type="button" data-qov-draft-spacing="${id}" class="${settings.spacing===id?"active":""}">${label}</button>`).join("")}</div></div><div class="qov-sheet-section"><b>Übersetzung</b><p class="qov-search-hint">Bubenheim &amp; Elyas</p></div><div class="qov-sheet-actions"><button type="button" class="qov-btn-secondary" data-qov-display-reset>Zurücksetzen</button><button type="button" class="qov-btn-primary" data-qov-display-apply>Anwenden</button></div></section></div>`}
 function quranAyahOptions(total,selected=0){const n=Number(total)||0;let html=`<option value="">Ayah</option>`;for(let i=1;i<=n;i++)html+=`<option value="${i}"${Number(selected)===i?" selected":""}>${i}</option>`;return html}
 function renderQuranJumpBar(surahId,totalVerses,selectedAyah=0){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${s.id===surahId?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="quran-jump-bar"><select id="quranJumpSurah" class="direct-pick">${options}</select><select id="quranJumpAyah" class="direct-pick">${quranAyahOptions(totalVerses,selectedAyah)}</select><button id="quranJumpBtn" class="quran-jump-btn" type="button">Öffnen</button></section>`}
@@ -12615,13 +12881,11 @@ function quranCurrentSurahContext(){if(currentRoute.view!=="quran-surah")return 
 function saveQuranAutoFromVisible(force){const ctx=quranCurrentSurahContext();if(!ctx)return;const hit=visibleQuranAyahEntry();if(!hit||(!force&&hit.ratio<0.5))return;saveQuranAutomaticProgress({...ctx,ayahNumber:hit.ayahNumber,scrollOffset:hit.scrollOffset},{force:!!force,allowWhileManual:false})}
 function clearQuranProgressObserver(){if(quranProgressAutoTimer){clearTimeout(quranProgressAutoTimer);quranProgressAutoTimer=null}quranProgressCandidateKey="";quranProgressCandidateSince=0;if(quranProgressObserver){quranProgressObserver.disconnect();quranProgressObserver=null}quranProgressVisibilityMap=new Map()}
 function refreshQuranAutoCandidate(){const ranked=[...quranProgressVisibilityMap.entries()].sort((a,b)=>b[1]-a[1]);const best=ranked[0];if(!best||best[1]<0.5){quranProgressCandidateKey="";if(quranProgressAutoTimer){clearTimeout(quranProgressAutoTimer);quranProgressAutoTimer=null}return}if(quranProgressCandidateKey===best[0])return;quranProgressCandidateKey=best[0];quranProgressCandidateSince=Date.now();if(quranProgressAutoTimer)clearTimeout(quranProgressAutoTimer);quranProgressAutoTimer=setTimeout(()=>{const ratio=quranProgressVisibilityMap.get(quranProgressCandidateKey)||0;if(ratio<0.5)return;saveQuranAutoFromVisible(false)},2300)}
-function bindQuranOverviewUi(){const header=$("qovHeader");const onScroll=()=>{if(!header)return;header.classList.toggle("is-compact",(window.scrollY||0)>36)};onScroll();window.removeEventListener("scroll",window.__qovScrollFn||(()=>{}));window.__qovScrollFn=onScroll;window.addEventListener("scroll",onScroll,{passive:true});$("qovBackBtn")?.addEventListener("click",()=>goBack());$("qovSearchBtn")?.addEventListener("click",()=>{$("quranSearchInput")?.focus();document.body.classList.add("qov-search-active")});$("qovFavBtn")?.addEventListener("click",()=>{setQuranOverviewFilter("favorites");render()});$("qovDisplayBtn")?.addEventListener("click",()=>openQuranDisplaySheet());document.querySelectorAll("[data-qov-filter]").forEach(btn=>{btn.onclick=()=>{setQuranOverviewFilter(btn.getAttribute("data-qov-filter"));render()}});$("qovSortBtn")?.addEventListener("click",()=>{const order=["order","alpha","recent","favorites"];const cur=getQuranOverviewSort();const next=order[(order.indexOf(cur)+1)%order.length];setQuranOverviewSort(next);render()});document.querySelectorAll("[data-qov-recent-search]").forEach(btn=>{btn.onclick=()=>{const input=$("quranSearchInput");if(!input)return;input.value=btn.getAttribute("data-qov-recent-search")||"";quranSearchQuery=input.value;input.dispatchEvent(new Event("input",{bubbles:true}))}});document.querySelectorAll("[data-qov-show-all-surahs]").forEach(btn=>{btn.onclick=()=>{setQuranOverviewFilter("all");$("quranSurahGrid")?.scrollIntoView({behavior:"auto",block:"start"})}});document.querySelectorAll("[data-qov-surah]").forEach(card=>{card.addEventListener("contextmenu",ev=>{ev.preventDefault();const id=card.getAttribute("data-qov-surah");quranSurahContextMenu(id,ev.clientX,ev.clientY)})});const input=$("quranSearchInput");if(input){input.addEventListener("focus",()=>document.body.classList.add("qov-search-active"));input.addEventListener("blur",()=>{setTimeout(()=>{if(document.activeElement!==input)document.body.classList.remove("qov-search-active")},120)})}}
 function quranSurahContextMenu(id,x,y){const fav=isQuranSurahFavorite(id);const choice=String(prompt(`Sūrah ${id}\n1 = ${fav?"Favorit entfernen":"Als Favorit speichern"}\n2 = Ab Āyah öffnen\n3 = Teilen`,"")||"").trim();if(choice==="1"){toggleQuranSurahFavorite(id);render();return}if(choice==="2"){const ay=Number(prompt("Āyah-Nummer:","1"));const meta=quranSurahMeta(id);if(meta&&ay>=1&&ay<=meta.total_verses)openQuranSurah(id,ay);return}if(choice==="3"){const meta=quranSurahMeta(id);const url=`${location.origin}${location.pathname}#quran-surah/${id}`;const text=`${meta?.transliteration||"Sūrah"} (${id})\n${url}`;navigator.share?.({title:meta?.transliteration||"Qurʾān",text,url}).catch(()=>navigator.clipboard?.writeText(text))}}
 function openQuranDisplaySheet(){quranDisplaySheetDraft={view:getQuranViewSettings(),tr:getQuranTrMode(),spacing:getQuranLineSpacing(),arabic:getFontScale("quranArabicScale"),trans:getFontScale("quranTransliterationScale"),german:getFontScale("quranGermanScale")};const mount=$("qovDisplayMount");if(!mount)return;mount.innerHTML=renderQuranDisplaySheet();bindQuranDisplaySheet()}
 function closeQuranDisplaySheet(){quranDisplaySheetDraft=null;const mount=$("qovDisplayMount");if(mount)mount.innerHTML=""}
 function bindQuranDisplaySheet(){const backdrop=$("qovDisplayBackdrop");const mount=$("qovDisplayMount");const close=()=>closeQuranDisplaySheet();backdrop?.addEventListener("click",e=>{if(e.target===backdrop)close()});backdrop?.querySelector("[data-qov-display-close]")?.addEventListener("click",close);const draft=()=>{if(!quranDisplaySheetDraft)quranDisplaySheetDraft={view:getQuranViewSettings(),tr:getQuranTrMode(),spacing:getQuranLineSpacing(),arabic:5,trans:5,german:5};return quranDisplaySheetDraft};backdrop?.querySelectorAll("[data-qov-draft-view]").forEach(input=>{input.onchange=()=>{const d=draft();const key=input.getAttribute("data-qov-draft-view");const next={...d.view,[key]:input.checked};const enabled=Object.values(next).filter(Boolean).length;if(!enabled){input.checked=true;return}d.view=next}});backdrop?.querySelectorAll("[data-qov-draft-tr]").forEach(btn=>{btn.onclick=()=>{const d=draft();d.tr=btn.getAttribute("data-qov-draft-tr");backdrop.querySelectorAll("[data-qov-draft-tr]").forEach(b=>b.classList.toggle("active",b===btn));const note=$("qovTrNote");if(note)note.textContent=QURAN_TR_MODES[d.tr]?.hint||"";const trEl=backdrop.querySelector("[data-qov-preview-tr]");if(trEl)trEl.textContent=quranVerseTr({tr:"Rabbana taqabbal minna",tr_readable:"Rabbana taqabbal minna",tr_academic:"Rabbana taqabbal minna"},d.tr)}});backdrop?.querySelectorAll("[data-qov-draft-scale]").forEach(input=>{input.oninput=()=>{const d=draft();const key=input.getAttribute("data-qov-draft-scale");d[key==="quranArabicScale"?"arabic":key==="quranTransliterationScale"?"trans":"german"]=clampFontScale(input.value);applyFontScale(key,input.value,{save:false})}});backdrop?.querySelectorAll("[data-qov-draft-spacing]").forEach(btn=>{btn.onclick=()=>{const d=draft();d.spacing=btn.getAttribute("data-qov-draft-spacing");backdrop.querySelectorAll("[data-qov-draft-spacing]").forEach(b=>b.classList.toggle("active",b===btn))}});backdrop?.querySelector("[data-qov-display-reset]")?.addEventListener("click",()=>{quranDisplaySheetDraft={view:{showArabic:true,showGerman:true,showTransliteration:true},tr:"readable",spacing:"standard",arabic:5,trans:5,german:5};if(mount){mount.innerHTML=renderQuranDisplaySheet();bindQuranDisplaySheet()}});backdrop?.querySelector("[data-qov-display-apply]")?.addEventListener("click",()=>{const d=draft();setQuranViewSettings(d.view);setQuranTrMode(d.tr);applyQuranLineSpacing(d.spacing);applyFontScale("quranArabicScale",d.arabic);applyFontScale("quranTransliterationScale",d.trans);applyFontScale("quranGermanScale",d.german);applyQuranTransliterationMode();applyQuranViewSettingsToDom();close()})}
 function bindQuranQuickPick(){const goBtn=$("quranQuickGo");const quickSurah=$("quranQuickSurah");const quickAyah=$("quranQuickAyah");const fillQuickAyahs=()=>{if(!quickSurah||!quickAyah)return;const meta=quranSurahMeta(Number(quickSurah.value));quickAyah.innerHTML=meta?quranAyahOptions(meta.total_verses):`<option value="">Āyah</option>`;quickAyah.disabled=!meta};const openQuick=()=>{const sid=Number(quickSurah?.value);if(!sid)return;const ay=Number(quickAyah?.value)||1;const meta=quranSurahMeta(sid);if(meta&&ay>meta.total_verses)return;openQuranSurah(sid,ay)};const syncGo=()=>{if(goBtn)goBtn.disabled=!Number(quickSurah?.value)};if(goBtn){goBtn.onclick=openQuick;syncGo()}if(quickSurah){quickSurah.onchange=()=>{fillQuickAyahs();syncGo()};fillQuickAyahs();syncGo()}document.querySelectorAll("[data-quran-surah]").forEach(btn=>{btn.onclick=()=>openQuranSurah(btn.getAttribute("data-quran-surah"))});const jumpBtn=$("quranJumpBtn");const jumpSurah=$("quranJumpSurah");const jumpAyah=$("quranJumpAyah");if(jumpBtn){jumpBtn.onclick=()=>{const sid=Number(jumpSurah?.value)||Number(String(currentRoute.value||"").split("/")[0]);const ay=Number(jumpAyah?.value);if(sid&&sid!==Number(String(currentRoute.value||"").split("/")[0]))openQuranSurah(sid,ay);else if(ay>0)scrollToQuranAyah(ay);else if(sid)openQuranSurah(sid)}}if(jumpSurah){jumpSurah.onchange=()=>{const sid=Number(jumpSurah.value);if(sid)openQuranSurah(sid,jumpAyah?.value)}}if(jumpAyah){jumpAyah.onchange=()=>{const ay=Number(jumpAyah.value);if(ay>0)scrollToQuranAyah(ay)}}}
-function renderQuran(){quranOverviewFilter=getQuranOverviewFilter();quranOverviewSort=getQuranOverviewSort();applyQuranLineSpacing(getQuranLineSpacing());if(!quranMeta)return `<div class="qov-page"><div class="qov-skeleton"></div><div class="loading">Qurʾān wird geladen…</div></div>`;const total=quranMeta.surahs.reduce((sum,s)=>sum+(s.total_verses||0),0);const list=quranOverviewFilteredSurahs();const favFilter=getQuranOverviewFilter()==="favorites";const listHtml=list.length?list.map(quranSurahCard).join(""):favFilter?`<div class="qov-empty">Noch keine Favoriten gespeichert.<br><br>Tippe bei einer Sūrah auf das Lesezeichen, um sie hier schneller wiederzufinden.</div>`:`<div class="qov-empty">Keine Sūren für diesen Filter.</div>`;return `<div class="qov-page"><div class="qov-main">${renderQuranOverviewHeader(total)}${renderQuranResumeCard()}${renderQuranOverviewSearch()}${renderQuranQuickPick()}${renderQuranOverviewFilters()}<section class="qov-surah-list quran-surah-grid" id="quranSurahGrid">${listHtml}</section></div><div id="qovDisplayMount"></div></div>`}
 function quranWakeSupported(){return"wakeLock" in navigator}
 function isQuranSurahRoute(route){return route?.view==="quran-surah"}
 function isQuranWakeActive(){return!!(quranWakeLockRef&&!quranWakeLockRef.released)}
@@ -14530,28 +14794,60 @@ async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return 
 function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(()=>{maintainPushHealth({silent:true}).catch(()=>{})},PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")maintainPushHealth({silent:true}).catch(()=>{})});window.addEventListener("online",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}
 let prayerCountdownTimer=null;
 let headerPrayerDisplayKey="";
-function headerPrayerLineHtml(name,time){
-  return `<span class="header-prayer-line" role="text"><span class="header-prayer-name">${esc(name)}</span><span class="header-prayer-sep" aria-hidden="true">·</span><span class="header-prayer-hour">${esc(time)}</span></span>`;
+let headerPrayerStatusMinuteKey="";
+function headerPrayerMainLineHtml(name,time){
+  return `<span class="header-prayer-zone__main" role="text"><span class="header-prayer-zone__name">${esc(name)}</span><span class="header-prayer-zone__sep" aria-hidden="true">·</span><span class="header-prayer-zone__time">${esc(time)}</span></span>`;
 }
-function headerPrayerCountdownHtml(ms){
-  return `<span class="header-prayer-countdown" id="headerPrayerCountdown" aria-live="polite" aria-label="Countdown bis zum nächsten Gebet"><span class="header-prayer-countdown-prefix">noch</span><span class="header-prayer-countdown-digits">${esc(formatHeaderPrayerCountdown(ms))}</span></span>`;
-}
-function formatHeaderPrayerCountdown(ms){
+function formatHeaderPrayerCountdownFull(ms){
   if(ms<0)ms=0;
   const total=Math.floor(ms/1000);
   const h=Math.floor(total/3600);
   const m=Math.floor((total%3600)/60);
   const s=total%60;
-  if(h>0)return `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-  return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+function formatHeaderPrayerCountdownCompact(ms){
+  if(ms<0)ms=0;
+  const total=Math.floor(ms/1000);
+  const h=Math.floor(total/3600);
+  const m=Math.floor((total%3600)/60);
+  if(h>0)return `${h}:${String(m).padStart(2,"0")}`;
+  return `${String(m).padStart(2,"0")}`;
+}
+function formatHeaderPrayerCountdown(ms){return formatHeaderPrayerCountdownFull(ms)}
+function buildHeaderPrayerHubAriaLabel(current,next){
+  const curName=current?current.name:"Gebet";
+  const nextName=next?next.name:"";
+  const nextTime=next?(next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time)):"";
+  return `Gebetszeiten öffnen. Aktuell ${curName}, nächstes Gebet ${nextName} um ${nextTime}.`;
+}
+function renderHeaderPrayerStatusLineHtml(){
+  const now=new Date();
+  const gregFull=new Intl.DateTimeFormat("de-DE",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(now);
+  const gregShort=new Intl.DateTimeFormat("de-DE",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
+  const timeStr=`${new Intl.DateTimeFormat("de-DE",{hour:"2-digit",minute:"2-digit"}).format(now)} Uhr`;
+  let hijriHtml="";
+  try{const h=islamicCalendarNow();if(h&&h.day&&h.month&&h.year)hijriHtml=`<span class="header-prayer-hub__hijri">${esc(`${h.day}. ${h.month} ${h.year}`)}</span>`}catch(e){}
+  return `<span class="header-prayer-hub__date-full">${esc(gregFull)}</span><span class="header-prayer-hub__date-short">${esc(gregShort)}</span>${hijriHtml}<span class="header-prayer-hub__clock">${esc(timeStr)}</span>`;
+}
+function updateHeaderPrayerStatusLine(){
+  const el=document.getElementById("headerPrayerStatusLine");
+  if(!el)return;
+  const now=new Date();
+  const minuteKey=`${now.getFullYear()}-${now.getMonth()}-${now.getDate()}-${now.getHours()}-${now.getMinutes()}`;
+  if(minuteKey===headerPrayerStatusMinuteKey)return;
+  headerPrayerStatusMinuteKey=minuteKey;
+  el.innerHTML=renderHeaderPrayerStatusLineHtml();
 }
 function setHeaderPrayerCountdownText(ms){
+  if(ms<0)ms=0;
   const wrap=$("headerPrayerCountdown");
   if(!wrap)return;
-  const digits=wrap.querySelector(".header-prayer-countdown-digits");
-  const text=formatHeaderPrayerCountdown(ms);
-  if(digits)digits.textContent=text;
-  else wrap.textContent=text;
+  const full=wrap.querySelector(".header-prayer-zone__countdown-full");
+  const short=wrap.querySelector(".header-prayer-zone__countdown-short");
+  if(full)full.textContent=formatHeaderPrayerCountdownFull(ms);
+  if(short)short.textContent=formatHeaderPrayerCountdownCompact(ms);
+  else if(!full)wrap.textContent=formatHeaderPrayerCountdownFull(ms);
 }
 let prayerReminderTimeouts=[];
 let qiblaOrientationHandler=null;
@@ -15129,19 +15425,32 @@ function updateHeaderPrayerStatus(){
   const settings=getPrayerSettings();
   if(!hasPrayerLocation(settings)){
     headerPrayerDisplayKey="";
-    el.innerHTML=`<div class="header-prayer-track"><div class="header-prayer-item header-prayer-item--now"><b>Jetzt</b><span>Standort freigeben</span></div><div class="header-prayer-item header-prayer-item--next"><b>Nächstes</b><span>nach Freigabe</span></div></div>`;
+    el.setAttribute("aria-label","Gebetszeiten öffnen");
+    el.innerHTML=`<div class="header-prayer-hub__main header-prayer-hub__main--empty"><div class="header-prayer-hub__empty">Gebetszeiten derzeit nicht verfügbar</div></div><div class="header-prayer-hub__status" id="headerPrayerStatusLine"></div>`;
+    headerPrayerStatusMinuteKey="";
+    updateHeaderPrayerStatusLine();
     return;
   }
   const current=currentPrayerInfo(settings);
   const next=nextPrayerInfo(settings);
   const displayKey=[current?current.key:"",next?.key||"",formatPrayerHour(next?.time),settings.city||""].join("|");
-  if(displayKey===headerPrayerDisplayKey&&$("headerPrayerCountdown"))return;
+  if(displayKey===headerPrayerDisplayKey&&$("headerPrayerCountdown")){
+    updateHeaderPrayerStatusLine();
+    return;
+  }
   headerPrayerDisplayKey=displayKey;
-  el.innerHTML=`<div class="header-prayer-track"><div class="header-prayer-item header-prayer-item--now"><b>Jetzt</b>${headerPrayerLineHtml(current?current.name:"Gebet",current?formatPrayerHour(current.time):"--:--")}</div><div class="header-prayer-item header-prayer-item--next"><b>Nächstes</b>${headerPrayerLineHtml(next.name,formatPrayerHour(next.time))}</div></div>${headerPrayerCountdownHtml(next.date-new Date())}`;
+  const curTime=current?(current.key==="tahajjud"?formatPrayerTimeDisplay(current):formatPrayerHour(current.time)):"--:--";
+  const nextTime=next?(next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time)):"--:--";
+  const ms=Math.max(0,next.date-new Date());
+  el.setAttribute("aria-label",buildHeaderPrayerHubAriaLabel(current,next));
+  el.innerHTML=`<div class="header-prayer-hub__main"><div class="header-prayer-zone header-prayer-zone--now"><span class="header-prayer-zone__label">Jetzt</span>${headerPrayerMainLineHtml(current?current.name:"Gebet",curTime)}<span class="header-prayer-zone__sub">Aktuelles Gebet</span></div><div class="header-prayer-zone header-prayer-zone--count" aria-live="polite"><span class="header-prayer-zone__label">Noch</span><span class="header-prayer-zone__countdown" id="headerPrayerCountdown"><span class="header-prayer-zone__countdown-full">${esc(formatHeaderPrayerCountdownFull(ms))}</span><span class="header-prayer-zone__countdown-short">${esc(formatHeaderPrayerCountdownCompact(ms))}</span></span><span class="header-prayer-zone__sub">bis ${esc(next.name)}</span></div><div class="header-prayer-zone header-prayer-zone--next"><span class="header-prayer-zone__label">Nächstes</span>${headerPrayerMainLineHtml(next.name,nextTime)}<span class="header-prayer-zone__sub">${esc(settings.city||"Standort")}</span></div></div><div class="header-prayer-hub__status" id="headerPrayerStatusLine"></div>`;
+  headerPrayerStatusMinuteKey="";
+  updateHeaderPrayerStatusLine();
 }
 function updatePrayerCountdowns(){
   const quick=$("prayerQuickCountdown"),detail=$("prayerDetailCountdown"),headerCountdown=$("headerPrayerCountdown");
   const settings=getPrayerSettings();
+  updateHeaderPrayerStatusLine();
   if(!hasPrayerLocation(settings)){
     updateHeaderPrayerStatus();
     if(quick)quick.textContent="Standort freigeben";
@@ -15149,7 +15458,7 @@ function updatePrayerCountdowns(){
     return;
   }
   const next=nextPrayerInfo(settings);
-  const ms=next.date-new Date();
+  const ms=Math.max(0,next.date-new Date());
   const displayKey=[currentPrayerInfo(settings)?.key||"",next?.key||"",formatPrayerHour(next?.time),settings.city||""].join("|");
   if(displayKey!==headerPrayerDisplayKey||!headerCountdown){
     updateHeaderPrayerStatus();
@@ -15294,7 +15603,7 @@ async function activatePrayerReminder(){
     updateHighlightPushButtons();
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
@@ -16462,7 +16771,15 @@ function hardRefreshApp(){
     try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
     window.__darAppVersionAvailable=false;
     try{
-      var appliedId=String(window.__darRemoteBuildId||APP_BUILD_ID||"").trim();
+      var appliedId=String(window.__darRemoteBuildId||"").trim();
+      if(!appliedId){
+        try{
+          var versionPath=String(location.pathname||"").indexOf("/test")>=0?"/test/version.json":"/version.json";
+          var vr=await fetch(versionPath,{cache:"no-store"});
+          if(vr.ok){var remote=await vr.json();appliedId=String(remote&&remote.buildId||"").trim()}
+        }catch(e){}
+      }
+      if(!appliedId)appliedId=String(APP_BUILD_ID||"").trim();
       try{var stuckId=appliedId;if(stuckId)sessionStorage.setItem("dar_version_stuck_guard_v1",JSON.stringify({buildId:stuckId,tries:1,at:Date.now()}))}catch(e){}
       if(appliedId&&typeof localStorage!=="undefined"){
         var raw=localStorage.getItem("dar_app_version_state_v1");
@@ -16479,7 +16796,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v370-test";
+const APP_BUILD_ID="app-shell-v373-test";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -16751,6 +17068,7 @@ function updateChrome(route){
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
   document.body.classList.toggle("is-calendar-route",route.view==="calendar");
   document.body.classList.toggle("is-hadith-route",route.view==="hadith");
+  document.body.classList.toggle("is-quran-overview",route.view==="quran");
   document.body.classList.toggle("is-library-route",["bibliothek","bibliothek-detail","bibliothek-reader"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.body.classList.toggle("is-post-route",isPost);
@@ -17042,6 +17360,7 @@ function bindEvents(){
   bindQuizEvents();
   bindDirectPickPanel();
   bindQuranQuickPick();
+  bindQuranOverviewUi();
   bindQuranTransliterationPick();
   bindGenericShareButtons();
   bindPostSlideCarousels();
@@ -17393,7 +17712,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
         var tries = String(stuck.buildId) === id ? (Number(stuck.tries) || 0) + 1 : 1;
         sessionStorage.setItem(VERSION_STUCK_KEY, JSON.stringify({ buildId: id, tries: tries, at: Date.now() }));
-        if (tries >= 2) {
+        if (tries >= 1) {
           writeVersionState({
             acknowledgedBuildId: id,
             appliedBuildId: id,
@@ -17464,7 +17783,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || '') === id) return false;
       try {
         var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
-        if (String(stuck.buildId) === id && (Number(stuck.tries) || 0) >= 2) return false;
+        if (String(stuck.buildId) === id && (Number(stuck.tries) || 0) >= 1) return false;
       } catch (e) {}
       return true;
     }
@@ -17551,6 +17870,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       try {
         remoteBuildId = null;
         var versionMismatch = false;
+        var mismatchSuppressed = false;
         var reg = await getShellRegistration();
         var hasWaitingWorker = !!(reg && reg.waiting);
         if (typeof APP_BUILD_ID === 'string') {
@@ -17570,9 +17890,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
                   var state = readVersionState();
                   var pendingId = String(state.pendingBuildId || '');
                   if (pendingId === String(remote.buildId) && pendingId && String(state.appliedBuildId || '') === pendingId) {
-                    rememberAppliedBuild(APP_BUILD_ID);
+                    rememberAppliedBuild(remote.buildId);
+                    mismatchSuppressed = true;
                   } else if (!shouldOfferShellUpdate(remote.buildId)) {
                     rememberAppliedBuild(remote.buildId);
+                    mismatchSuppressed = true;
                     clearVersionUpdatePending();
                     setHomeRefreshHint(false);
                     hideAllBanners();
@@ -17589,8 +17911,10 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         }
         if (!versionMismatch) {
           window.__darRemoteBuildId = '';
-          clearVersionUpdatePending();
-          rememberAppliedBuild(APP_BUILD_ID);
+          if (!mismatchSuppressed) {
+            clearVersionUpdatePending();
+            rememberAppliedBuild(APP_BUILD_ID);
+          }
           setHomeRefreshHint(false);
           hideAllBanners();
         } else {
@@ -17670,8 +17994,14 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBannerActivate(); }
         });
       }
-      seedVersionStateOnBoot();
-      setTimeout(function() { checkForUpdates(); }, 2500);
+      window.addEventListener('dar:version-mismatch', function(ev) {
+        var remoteId = ev && ev.detail && ev.detail.buildId;
+        if (remoteId && shouldOfferShellUpdate(remoteId)) presentShellUpdate(remoteId);
+      });
+      (async function() {
+        await seedVersionStateOnBoot();
+        setTimeout(function() { checkForUpdates(); }, 800);
+      })();
       setInterval(function() { checkForUpdates(); }, CHECK_INTERVAL);
       window.addEventListener('online', function() { checkForUpdates(); });
     }
