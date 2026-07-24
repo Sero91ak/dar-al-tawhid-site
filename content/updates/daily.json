@@ -1,38 +1,15 @@
 {
-  "date": "2026-07-24",
+  "date": "2026-07-25",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-24T20:07:53.147Z",
-  "source": "dar-daily-no-repeat-rotation",
+  "generated": "2026-07-24T23:40:02.050Z",
+  "source": "dar-daily-scheduler-regenerated-v4",
   "recommendation": {
-    "id": "muhakamah-das-urteil-der-jahiliyyah-324",
-    "title": "Muḥākamah: Das Urteil der Jāhiliyyah",
-    "file": "muhakamah-das-urteil-der-jahiliyyah-324.md",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "Ibn Kathīr",
-    "snippet": "🖋️ Ibn Kathīr sagte:"
+    "id": "aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran",
+    "title": "Aḥmad ibn Ḥanbal über den erschaffenen Qurʾān",
+    "file": "aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran.md",
+    "category": "Aqīdah",
+    "scholar": "Aḥmad ibn Ḥanbal",
+    "snippet": "„Wer sagt, der Qurʾān sei erschaffen, der ist bei uns Kāfir; denn der Qurʾān gehört zum Wissen Allahs.“"
   },
-  "dua": {
-    "id": "dua-050-rabbi-la-tadharni-fardan",
-    "title": "Duʿāʾ von Zakariyyā um Nachkommen",
-    "snippet": "Mein Herr, lass mich nicht allein zurück, und Du bist der beste Erbe.",
-    "category": "Kinder & Nachkommen"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 451,
-      "remaining": 446
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 90,
-      "remaining": 86,
-      "sources": {
-        "markdown": 90,
-        "total": 90,
-        "poolSize": 90,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
-  }
+  "dua": null
 }
