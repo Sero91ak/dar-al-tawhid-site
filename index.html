@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v411";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v412";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -13758,6 +13758,32 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
   max-width:min(68vw,260px)!important;
 }
 </style>
+<style id="home-libraries-grid-v412">
+/* v412 · Bibliotheken: festes 2-Spalten-Raster überall, kein empfindlicher Swipe-Slider */
+.home-v380-lib-grid.home-v380-lib-grid--fixed,
+.home-v380-lib-grid--fixed{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  overflow:visible!important;
+  scroll-snap-type:none!important;
+  padding:0!important;
+  margin:0!important;
+}
+.home-v380-lib-grid.home-v380-lib-grid--fixed > .home-v380-lib-card,
+.home-v380-lib-grid--fixed > .home-v380-lib-card{
+  flex:none!important;
+  width:auto!important;
+  min-height:96px!important;
+  touch-action:manipulation!important;
+  scroll-snap-align:unset!important;
+  scroll-snap-stop:normal!important;
+}
+@media(max-width:359px){
+  .home-v380-lib-grid.home-v380-lib-grid--fixed,
+  .home-v380-lib-grid--fixed{grid-template-columns:1fr!important}
+}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -14716,7 +14742,7 @@ const restoreScrollPosition=getNavScroll;
 const setActiveTab=updateBottomNav;
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
-function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
+function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;if(Math.hypot(ev.clientX-swipeStart.x,ev.clientY-swipeStart.y)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
 function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const syncChip=isHome&&typeof renderHomeHeaderSyncChip==="function"?renderHomeHeaderSyncChip():"";const homeActions=isHome?`<div class="view-head-home-actions">${hijriFrame}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${homeActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips>${syncChip}<span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
@@ -18417,16 +18443,16 @@ function renderHomeDiscoverSection(){
 }
 function renderHomeLibrariesSection(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
-  const defs=[];
-  if(testOnly)defs.push({nav:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",desc:"Eigene PDFs, Bücher und thematische Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
-  defs.push({nav:"books",title:"Quellenbibliothek",desc:"Geprüfte historische Werke und klassische Quellen",aria:"Quellenbibliothek öffnen"});
-  defs.push({nav:"scholars",title:"Gelehrte",desc:"Imāme, Ṣaḥābah, Tābiʿīn und frühe Gelehrte",aria:"Gelehrten-Bibliothek öffnen"});
-  defs.push({nav:"duas",title:"Duʿāʾ",desc:"Sammlung aus Qurʾān und Sunnah mit Quellen",aria:"Duʿāʾ-Sammlung öffnen"});
-  defs.push({nav:"hadith",title:"Hadith-Bibliothek",desc:"Bücher, Kapitel und geprüfte Übersetzungen",aria:"Hadith-Bibliothek öffnen"});
+  const defs=[
+    {nav:"books",title:"Quellenbibliothek",desc:"Geprüfte historische Werke und klassische Quellen",aria:"Quellenbibliothek öffnen"},
+    {nav:"scholars",title:"Gelehrte",desc:"Imāme, Ṣaḥābah, Tābiʿīn und frühe Gelehrte",aria:"Gelehrten-Bibliothek öffnen"},
+    {nav:"duas",title:"Duʿāʾ",desc:"Sammlung aus Qurʾān und Sunnah mit Quellen",aria:"Duʿāʾ-Sammlung öffnen"},
+    {nav:"hadith",title:"Hadith-Bibliothek",desc:"Bücher, Kapitel und geprüfte Übersetzungen",aria:"Hadith-Bibliothek öffnen"}
+  ];
+  if(testOnly)defs.unshift({nav:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",desc:"Eigene PDFs, Bücher und thematische Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
   if(!defs.length)return"";
-  const sliderClass=defs.length>1?" home-v380-lib-grid--slider":"";
   const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></button>`).join("");
-  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards}</div></section>`;
+  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed">${cards}</div></section>`;
 }
 function renderHomeSearchSection(){
   const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
@@ -18664,7 +18690,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v411";
+const APP_BUILD_ID="app-shell-v412";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
