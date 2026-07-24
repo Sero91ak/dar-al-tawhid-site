@@ -524,7 +524,7 @@
 
   function sharePublication(pub) {
     const text = `${pub.title}\nEine Veröffentlichung von DAR AL TAWḤĪD\nZusammengestellt und herausgegeben von Serhat Abu Malik\ndar-al-tawhid.de`;
-    const url = `${global.location.origin}/test/#bibliothek/${encodeURIComponent(pub.slug)}`;
+    const url = `${global.location.origin}${LIB_BASE}/#bibliothek/${encodeURIComponent(pub.slug)}`;
     if (navigator.share) {
       return navigator.share({ title: pub.title, text, url }).catch(() => {});
     }
@@ -557,71 +557,109 @@
   }
 
   let readerPageObserver = null;
+  let readerRenderToken = 0;
+
+  function waitForReaderLayout(stage) {
+    return new Promise((resolve) => {
+      const measure = () => Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0);
+      if (measure() > 40) {
+        resolve(measure());
+        return;
+      }
+      let tries = 0;
+      const tick = () => {
+        const width = measure();
+        if (width > 40 || tries >= 12) {
+          resolve(Math.max(width, 280));
+          return;
+        }
+        tries += 1;
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
 
   function scrollToReaderPage(pageNum, behavior) {
     if (!readerState) return;
-    const page = Math.max(1, Math.min(readerState.total, Number(pageNum) || 1));
+    const page = Math.max(1, Math.min(readerState.total || 1, Number(pageNum) || 1));
+    renderReaderPage(page);
+  }
+
+  async function renderReaderPage(pageNum) {
+    if (!readerState || !readerState.doc) return;
+    const stage = document.querySelector("[data-library-reader-stage]");
+    if (!stage) return;
+
+    const token = ++readerRenderToken;
+    const page = Math.max(1, Math.min(readerState.total || 1, Number(pageNum) || 1));
     readerState.page = page;
-    const target = document.querySelector(`.lib-reader-sheet[data-page="${page}"]`);
-    if (target) target.scrollIntoView({ behavior: behavior || "smooth", block: "start" });
-    const input = document.querySelector("[data-library-reader-input]");
-    if (input) input.value = String(page);
-    saveProgress(readerState.pub.id, page, readerState.total);
+    stage.innerHTML = '<div class="lib-reader-msg">Seite wird geladen…</div>';
+
+    try {
+      const layoutWidth = await waitForReaderLayout(stage);
+      if (token !== readerRenderToken) return;
+
+      const width = Math.max(280, layoutWidth - 12);
+      const pdfPage = await readerState.doc.getPage(page);
+      if (token !== readerRenderToken) return;
+
+      const baseViewport = pdfPage.getViewport({ scale: 1 });
+      const scale = baseViewport.width > 0 ? width / baseViewport.width : 1;
+      const viewport = pdfPage.getViewport({ scale: Math.max(scale, 0.1) });
+      const dpr = Math.min(Math.max(window.devicePixelRatio || 1, 1), 2);
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      if (!ctx) throw new Error("canvas unavailable");
+
+      canvas.width = Math.max(1, Math.floor(viewport.width * dpr));
+      canvas.height = Math.max(1, Math.floor(viewport.height * dpr));
+      canvas.style.width = `${Math.floor(viewport.width)}px`;
+      canvas.style.height = `${Math.floor(viewport.height)}px`;
+      canvas.className = "lib-reader-page-canvas";
+
+      const wrap = document.createElement("div");
+      wrap.className = "lib-reader-sheet";
+      wrap.dataset.page = String(page);
+      wrap.appendChild(canvas);
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, viewport.width, viewport.height);
+
+      await pdfPage.render({
+        canvasContext: ctx,
+        viewport,
+        background: "#ffffff"
+      }).promise;
+      if (token !== readerRenderToken) return;
+
+      stage.innerHTML = "";
+      const stack = document.createElement("div");
+      stack.className = "lib-reader-stack lib-reader-stack-single";
+      stack.appendChild(wrap);
+      stage.appendChild(stack);
+      stage.scrollTop = 0;
+
+      const input = document.querySelector("[data-library-reader-input]");
+      if (input) input.value = String(page);
+      saveProgress(readerState.pub.id, page, readerState.total);
+    } catch (e) {
+      if (token !== readerRenderToken) return;
+      stage.innerHTML = `<div class="lib-reader-msg">Seite konnte nicht angezeigt werden. Bitte erneut versuchen oder die PDF herunterladen.</div>`;
+    }
   }
 
   function setupReaderScrollTracking(stack, stage) {
     if (readerPageObserver) readerPageObserver.disconnect();
-    const pages = stack.querySelectorAll(".lib-reader-sheet");
-    if (!pages.length) return;
-    readerPageObserver = new IntersectionObserver((entries) => {
-      let best = null;
-      let bestRatio = 0;
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > bestRatio) {
-          bestRatio = entry.intersectionRatio;
-          best = entry.target;
-        }
-      });
-      if (!best || !readerState || bestRatio < 0.2) return;
-      const page = Number(best.dataset.page) || 1;
-      if (page === readerState.page) return;
-      readerState.page = page;
-      const input = document.querySelector("[data-library-reader-input]");
-      if (input) input.value = String(page);
-      saveProgress(readerState.pub.id, page, readerState.total);
-    }, { root: stage, threshold: [0.2, 0.45, 0.7] });
-    pages.forEach((pageEl) => readerPageObserver.observe(pageEl));
+    readerPageObserver = null;
   }
 
   async function renderReaderScroll(options) {
     if (!readerState || !readerState.doc) return;
-    const stage = document.querySelector("[data-library-reader-stage]");
-    if (!stage) return;
-    const width = Math.max(280, stage.clientWidth - 12);
-    stage.innerHTML = '<div class="lib-reader-msg">Seiten werden geladen…</div>';
-    const stack = document.createElement("div");
-    stack.className = "lib-reader-stack";
-    for (let pageNum = 1; pageNum <= readerState.total; pageNum += 1) {
-      const page = await readerState.doc.getPage(pageNum);
-      const baseViewport = page.getViewport({ scale: 1 });
-      const scale = width / baseViewport.width;
-      const viewport = page.getViewport({ scale });
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      canvas.className = "lib-reader-page-canvas";
-      const wrap = document.createElement("div");
-      wrap.className = "lib-reader-sheet";
-      wrap.dataset.page = String(pageNum);
-      wrap.appendChild(canvas);
-      stack.appendChild(wrap);
-      await page.render({ canvasContext: ctx, viewport }).promise;
-    }
-    stage.innerHTML = "";
-    stage.appendChild(stack);
-    setupReaderScrollTracking(stack, stage);
-    if (!options || !options.skipScroll) scrollToReaderPage(readerState.page, "auto");
+    const startPage = options?.page || readerState.page || 1;
+    await renderReaderPage(startPage);
   }
 
   async function initReader(pub) {
@@ -645,7 +683,7 @@
       readerState.total = doc.numPages;
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
-      await renderReaderScroll();
+      await renderReaderScroll({ page: readerState.page });
     } catch (e) {
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
