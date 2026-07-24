@@ -82,6 +82,13 @@ import {
   suggestLibraryCategory,
   LIBRARY_ADMIN_META
 } from "./library-admin.js";
+import {
+  libraryPushRegistryKey,
+  buildLibraryPushPendingRecord,
+  buildLibraryPushUrl,
+  verifyLibraryLiveAvailability,
+  sendLibraryPublicationPush
+} from "./library-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -460,7 +467,12 @@ export default {
         const input = await request.json().catch(() => ({}));
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         try {
-          return json(await saveLibraryPublication(env, input, helpers), cors);
+          const result = await saveLibraryPublication(env, input, helpers);
+          if (result.published && result.target === "live" && result.publication) {
+            const push = await queueLibraryPublicationPush(env, result.publication);
+            return json({ ...result, push }, cors);
+          }
+          return json(result, cors);
         } catch (e) {
           return json({ ok: false, error: e.message || "Speichern fehlgeschlagen" }, cors, e.status || 400);
         }
@@ -624,6 +636,7 @@ export default {
       ]);
       const pushPaths = new Set([
         "/api/admin/push/retry",
+        "/api/admin/push/library/retry",
         "/api/admin/push/status"
       ]);
       const prayerPaths = new Set([
@@ -736,6 +749,9 @@ export default {
       }
 
       if (pushPaths.has(url.pathname)) {
+        if (url.pathname.endsWith("/library/retry")) {
+          return json(await retryPendingLibraryPush(env, input), cors);
+        }
         if (url.pathname.endsWith("/retry")) {
           return json(await retryPendingPostPush(env, input), cors);
         }
@@ -2746,6 +2762,10 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
 }
 
 async function processPendingPushUntilLive(env, record) {
+  if (record?.kind === "library") {
+    return processPendingLibraryPushUntilLive(env, record);
+  }
+
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
 
@@ -2809,6 +2829,116 @@ async function processPendingPushUntilLive(env, record) {
   }
 
   return { ...push, liveCheck, pending: !push.sent };
+}
+
+async function queueLibraryPublicationPush(env, publication) {
+  const key = libraryPushRegistryKey(publication?.id);
+  if (!key) {
+    return { sent: false, reason: "publicationId fehlt" };
+  }
+  const pendingRecord = buildLibraryPushPendingRecord(publication);
+  await writePendingPushStatus(env, key, pendingRecord);
+  return {
+    sent: false,
+    pending: true,
+    waitingForApproval: true,
+    reason: "Push wartet auf deine Freigabe im Admin („Live Push freigeben“).",
+    targetUrl: buildLibraryPushUrl(env, pendingRecord.slug, Date.now()),
+    publicationId: pendingRecord.publicationId
+  };
+}
+
+async function processPendingLibraryPushUntilLive(env, record) {
+  const key = libraryPushRegistryKey(record?.publicationId);
+  if (!key) return { sent: false, reason: "publicationId fehlt" };
+
+  const registry = await readPendingPushesRegistry(env);
+  if (registry.pushes?.[key]?.status === "sent") {
+    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
+  }
+
+  const current = registry.pushes?.[key] || record;
+  if (!isPostPushApproved(current)) {
+    return {
+      sent: false,
+      pending: true,
+      waitingForApproval: true,
+      reason: "Push wartet auf Admin-Freigabe."
+    };
+  }
+
+  const liveCheck = await verifyLibraryLiveAvailability(env, current);
+  await writePendingPushStatus(env, key, {
+    lastCheckAt: new Date().toISOString(),
+    liveCheck,
+    lastError: liveCheck.ok ? "" : liveCheck.diagnosis
+  });
+
+  if (!liveCheck.ok) {
+    return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+  }
+
+  const push = await sendLibraryPublicationPush(env, current);
+  if (push.sent) {
+    await writePendingPushStatus(env, key, {
+      status: "sent",
+      sentAt: new Date().toISOString(),
+      lastError: "",
+      pushResult: { target: push.target, targetUrl: push.targetUrl }
+    });
+  } else {
+    await writePendingPushStatus(env, key, {
+      status: "failed",
+      lastError: push.reason || "OneSignal Push fehlgeschlagen"
+    });
+  }
+
+  return { ...push, liveCheck, pending: !push.sent };
+}
+
+async function retryPendingLibraryPush(env, input) {
+  const publicationId = String(input.publicationId || "").trim();
+  const slug = String(input.slug || publicationId).trim();
+  const publicationTitle = String(input.publicationTitle || input.title || "").trim() || "Neue PDF";
+  const pdfUrl = String(input.pdfUrl || "").trim();
+  const publishedAt = String(input.publishedAt || new Date().toISOString());
+  if (!publicationId) throw httpError("publicationId fehlt", 400);
+
+  const key = libraryPushRegistryKey(publicationId);
+  const registry = await readPendingPushesRegistry(env);
+  const existing = registry.pushes?.[key];
+  if (existing?.status === "sent" && !input.forceResend) {
+    return {
+      ok: true,
+      sent: true,
+      skipped: true,
+      reason: "Push wurde bereits gesendet.",
+      liveCheck: existing.liveCheck || null,
+      push: { sent: true, targetUrl: buildLibraryPushUrl(env, slug, Date.now()) }
+    };
+  }
+
+  const record = {
+    kind: "library",
+    publicationId,
+    slug: existing?.slug || slug,
+    publicationTitle: existing?.publicationTitle || publicationTitle,
+    pdfUrl: existing?.pdfUrl || pdfUrl,
+    catalogPath: existing?.catalogPath || "data/library-publications.json",
+    publishedAt: existing?.publishedAt || publishedAt,
+    status: "pending",
+    pushApproved: true,
+    pushApprovedAt: new Date().toISOString()
+  };
+  await writePendingPushStatus(env, key, record);
+  const push = await processPendingLibraryPushUntilLive(env, record);
+  return {
+    ok: true,
+    publicationId,
+    slug: record.slug,
+    liveCheck: push.liveCheck || null,
+    push
+  };
 }
 
 async function processAllPendingPushes(env) {

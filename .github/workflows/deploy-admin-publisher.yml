@@ -26,6 +26,7 @@ on:
       - cloudflare/zakat-prices.js
       - cloudflare/zakat-admin.js
       - cloudflare/library-admin.js
+      - cloudflare/library-push-admin.js
       - .github/workflows/deploy-admin-publisher.yml
       - .github/workflows/feed-bg-auto-sync.yml
 
@@ -55,6 +56,7 @@ jobs:
           node --check prayer-status-store.js
           node --check daily-push-scheduler.js
           node --check daily-push-admin.js
+          node --check library-push-admin.js
           node --check worker.js
 
       - name: Prayer push integrity guard
