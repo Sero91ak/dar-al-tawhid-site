@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v388";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v392";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -11863,12 +11863,55 @@ html[data-theme] .share-btn.tg:hover,html[data-theme] .share-btn.wa:hover,html[d
 html button.share-btn.ig.share-btn,
 html[data-theme] button.share-btn.ig,
 .share-panel-v11 .share-layout-v12 button.share-btn.ig,
-.article>.share-panel-v11 .share-layout-v12 button.share-btn.ig{
+.article>.share-panel-v11 .share-layout-v12 button.share-btn.ig,
+.share-panel-v11 .share-layout-v13 button.share-btn.ig,
+.article>.share-panel-v11 .share-layout-v13 button.share-btn.ig{
   border:1.5px solid rgba(250,126,30,.88)!important;
   background:linear-gradient(145deg,rgba(250,126,30,.14),rgba(214,41,118,.08),rgba(8,14,10,.90))!important;
   box-shadow:0 0 0 1px rgba(250,126,30,.4),0 0 14px rgba(250,126,30,.38),0 0 24px rgba(214,41,118,.2),inset 0 1px 0 rgba(255,180,120,.2)!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
+}
+</style>
+<style id="dua-share-layout-v392">
+/* Duʿāʾ/Beitrag teilen: fest 2 Zeilen à 3 Buttons – WhatsApp|Telegram, Kopieren|Bild */
+.share-panel-v11 .share-layout-v13,
+.article>.share-panel-v11 .share-layout-v13{
+  display:grid!important;gap:8px!important;margin:0!important;
+}
+.share-panel-v11 .share-layout-v13>.share-row-v11,
+.article>.share-panel-v11 .share-layout-v13>.share-row-v11{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin:0!important;
+}
+.share-panel-v11 .share-layout-v13 .share-btn,
+.article>.share-panel-v11 .share-layout-v13 .share-btn{
+  min-height:42px!important;min-width:0!important;width:auto!important;
+  padding:7px 5px!important;font-size:10.5px!important;border-radius:15px!important;gap:5px!important;
+}
+.share-panel-v11 .share-layout-v13 .share-btn svg,
+.article>.share-panel-v11 .share-layout-v13 .share-btn svg{
+  width:20px!important;height:20px!important;flex:0 0 20px!important;
+}
+.share-panel-v11 .share-layout-v13 .share-btn span,
+.article>.share-panel-v11 .share-layout-v13 .share-btn span{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+@media(max-width:520px){
+  .share-panel-v11 .share-layout-v13>.share-row-v11,
+  .article>.share-panel-v11 .share-layout-v13>.share-row-v11{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  .share-panel-v11 .share-layout-v13 .share-btn,
+  .article>.share-panel-v11 .share-layout-v13 .share-btn{
+    min-height:40px!important;padding:6px 3px!important;font-size:9.5px!important;gap:4px!important;
+  }
+  .share-panel-v11 .share-layout-v13 .share-btn svg,
+  .article>.share-panel-v11 .share-layout-v13 .share-btn svg{
+    width:18px!important;height:18px!important;flex-basis:18px!important;
+  }
 }
 </style>
 <style id="calendar-final-v352">
@@ -17984,7 +18027,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v388";
+const APP_BUILD_ID="app-shell-v392";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -18038,7 +18081,7 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
   const shareText=encodeURIComponent(text||"");
   const shareTitle=encodeURIComponent(title||"DAR AL TAWḤID");
   const shareUrl=encodeURIComponent(url||location.href);
-  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-layout-v12"><div class="share-row share-row-v11 share-row-primary"><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><circle cx="12" cy="12" r="12" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a></div><div class="share-row share-row-v11 share-row-secondary"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button>${extraAction}<button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button></div></div>${helpText?`<div class="share-help">${esc(helpText)}</div>`:""}</section>`;
+  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-layout-v13"><div class="share-row share-row-v11 share-row-primary"><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><circle cx="12" cy="12" r="12" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a></div><div class="share-row share-row-v11 share-row-secondary"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button>${extraAction}</div></div>${helpText?`<div class="share-help">${esc(helpText)}</div>`:""}</section>`;
 }
 
 function postNarratorLine(post){
