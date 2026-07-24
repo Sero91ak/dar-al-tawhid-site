@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v412";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v413";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -13784,6 +13784,33 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
   .home-v380-lib-grid--fixed{grid-template-columns:1fr!important}
 }
 </style>
+<style id="home-popular-lib-compact-v413">
+/* v413 · Meist gelesen: weißen Rand entfernen · Bibliotheken kompakt mit Emoji */
+.home-v380-popular-wrap .home-v380-popular-row::before{display:none!important}
+.home-v380-popular-wrap .home-v380-popular-row{
+  overflow:visible!important;
+  border-left:0!important;
+  box-shadow:none!important;
+}
+.home-v380-lib-grid--compact{gap:8px!important}
+.home-v380-lib-card--compact{
+  display:flex!important;flex-direction:row!important;align-items:center!important;
+  gap:8px!important;min-height:52px!important;padding:8px 10px!important;
+  text-align:left!important;
+}
+.home-v380-lib-card__ico{
+  flex:0 0 auto;font-size:clamp(15px,3.6vw,17px);line-height:1;opacity:.92;
+}
+.home-v380-lib-card__body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px}
+.home-v380-lib-card--compact h3{
+  margin:0!important;font-size:clamp(12px,2.85vw,13.5px)!important;line-height:1.15!important;
+  font-weight:800!important;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
+}
+.home-v380-lib-card--compact p{
+  margin:0!important;font-size:clamp(9px,2.05vw,10px)!important;line-height:1.25!important;
+  -webkit-line-clamp:1!important;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;
+}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -18444,15 +18471,15 @@ function renderHomeDiscoverSection(){
 function renderHomeLibrariesSection(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
   const defs=[
-    {nav:"books",title:"Quellenbibliothek",desc:"Geprüfte historische Werke und klassische Quellen",aria:"Quellenbibliothek öffnen"},
-    {nav:"scholars",title:"Gelehrte",desc:"Imāme, Ṣaḥābah, Tābiʿīn und frühe Gelehrte",aria:"Gelehrten-Bibliothek öffnen"},
-    {nav:"duas",title:"Duʿāʾ",desc:"Sammlung aus Qurʾān und Sunnah mit Quellen",aria:"Duʿāʾ-Sammlung öffnen"},
-    {nav:"hadith",title:"Hadith-Bibliothek",desc:"Bücher, Kapitel und geprüfte Übersetzungen",aria:"Hadith-Bibliothek öffnen"}
+    {nav:"books",icon:"📚",title:"Quellenbibliothek",desc:"Geprüfte Werke & Quellen",aria:"Quellenbibliothek öffnen"},
+    {nav:"scholars",icon:"👤",title:"Gelehrte",desc:"Imāme, Ṣaḥābah & Tābiʿīn",aria:"Gelehrten-Bibliothek öffnen"},
+    {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"},
+    {nav:"hadith",icon:"📜",title:"Hadith-Bibliothek",desc:"Bücher & Übersetzungen",aria:"Hadith-Bibliothek öffnen"}
   ];
-  if(testOnly)defs.unshift({nav:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",desc:"Eigene PDFs, Bücher und thematische Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
+  if(testOnly)defs.unshift({nav:"bibliothek",icon:"📖",title:"DAR AL TAWḤĪD Bibliothek",desc:"PDFs & Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
   if(!defs.length)return"";
-  const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></button>`).join("");
-  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed">${cards}</div></section>`;
+  const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card home-v380-lib-card--compact" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><span class="home-v380-lib-card__ico" aria-hidden="true">${c.icon}</span><div class="home-v380-lib-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></button>`).join("");
+  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed home-v380-lib-grid--compact">${cards}</div></section>`;
 }
 function renderHomeSearchSection(){
   const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
@@ -18690,7 +18717,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v412";
+const APP_BUILD_ID="app-shell-v413";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
