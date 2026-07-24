@@ -14776,6 +14776,7 @@ function readRoute(){
   const slug=normalizeRouteSlug(head);
   if(slug&&slug!==normalizeRouteSlug(route.view)&&ROUTE_ALIASES[slug])canonicalizeRouteHash(route);
   else if(head==="feed"&&bare.startsWith("feed/topics"))canonicalizeRouteHash(route);
+  if(route.view==="hadith"&&!(typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH)){canonicalizeRouteHash({view:"more",value:""});return{view:"more",value:""}}
   return route;
 }
 function parentRoute(route){
@@ -14872,7 +14873,7 @@ const restoreScrollPosition=getNavScroll;
 const setActiveTab=updateBottomNav;
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
-function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;if(Math.hypot(ev.clientX-swipeStart.x,ev.clientY-swipeStart.y)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
+function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;if(Math.hypot(ev.clientX-swipeStart.x,ev.clientY-swipeStart.y)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}if(typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH){const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`/test/${slug}`}else{window.__smoothNav=true;navigate("more","")}return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
 function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeActions=isHome?`<div class="view-head-home-actions">${hijriFrame}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${homeActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
@@ -18365,7 +18366,6 @@ function featureCatalog(){
   const items=[
     {id:"feed",title:"Feed",icon:"✦",desc:"Neue Bildbeiträge und ruhige Empfehlungen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
     {id:"quiz",title:"Din-Quiz",icon:"🧠",desc:"Strukturierte Wissensprüfung nach Themen und Stufen.",button:"Öffnen",nav:"quiz",group:"Lernen & Wissen",badge:"Lernen"},
-    {id:"hadith",title:"Hadith-Bibliothek",icon:"📜",desc:"Hadith-Werke mit Büchern, Kapiteln und Filterung.",button:"Öffnen",nav:"hadith",group:"Lernen & Wissen",badge:"Hadith"},
     {id:"topics",title:"Beiträge",icon:"📚",desc:(posts?.length||0)+" Aussagen mit Quellen.",button:"Lesen",nav:"topics",group:"Lernen & Wissen"},
     {id:"quran",title:"Qurʾān",icon:"📖",desc:"114 Suren mit Arabisch und Lautschrift.",button:"Öffnen",nav:"quran",group:"Lernen & Wissen",badge:"Empfohlen"},
     {id:"duas",title:"Duʿāʾ",icon:"🤲",desc:(DUAS?.length||0)+" bekannte Duʿāʾ nach Themen.",button:"Öffnen",nav:"duas",group:"Lernen & Wissen"},
@@ -18385,6 +18385,7 @@ function featureCatalog(){
     {id:"settings",title:"Einstellungen",icon:"⚙️",desc:"Theme, Schriftgröße und App-Verhalten.",button:"Öffnen",nav:"settings",group:"App"},
     {id:"about",title:"Über die App",icon:"ℹ️",desc:"Maßstab, Quellenordnung und Aufbau.",button:"Lesen",nav:"about",group:"App"}
   ];
+  if(testOnly)items.splice(2,0,{id:"hadith",title:"Hadith-Bibliothek",icon:"📜",desc:"Hadith-Werke mit Büchern, Kapiteln und Filterung.",button:"Öffnen",nav:"hadith",group:"Lernen & Wissen",badge:"Hadith"});
   if(typeof seasonalIslamicContext==="function"&&seasonalIslamicContext())items.push({id:"ramadan",title:"Ramaḍān & ʿĪd",icon:"🌙",desc:"Saisonale Beiträge und Zeiten.",button:"Öffnen",nav:"ramadan",group:"Alltag & Gebet",badge:"Saison"});
   {const qIdx=items.findIndex(x=>x.id==="quran");items.splice(qIdx>=0?qIdx+1:3,0,{id:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",icon:"📚",desc:"PDFs, Bücher und Themenhefte von DAR AL TAWḤĪD.",button:"Öffnen",nav:"bibliothek",group:"Lernen & Wissen",badge:"Neu"})}
   return items;
@@ -18594,12 +18595,13 @@ function renderHomeDiscoverSection(){
   return `<section class="home-v380-section" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2><button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div>${latestHtml}</section>`;
 }
 function renderHomeLibrariesSection(){
+  const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
   const defs=[
     {nav:"bibliothek",icon:"📚",title:"DAR AL TAWḤĪD Bibliothek",desc:"PDFs & Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"},
     {nav:"books",icon:"📚",title:"Quellenbibliothek",desc:"Geprüfte Werke & Quellen",aria:"Quellenbibliothek öffnen"},
     {nav:"scholars",icon:"👤",title:"Gelehrte",desc:"Imāme, Ṣaḥābah & Tābiʿīn",aria:"Gelehrten-Bibliothek öffnen"},
     {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"},
-    {nav:"hadith",icon:"📜",title:"Hadith-Bibliothek",desc:"Bücher & Übersetzungen",aria:"Hadith-Bibliothek öffnen"}
+    ...(testOnly?[{nav:"hadith",icon:"📜",title:"Hadith-Bibliothek",desc:"Bücher & Übersetzungen",aria:"Hadith-Bibliothek öffnen"}]:[])
   ];
   if(!defs.length)return"";
   const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card home-v380-lib-card--compact" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><span class="home-v380-lib-card__ico" aria-hidden="true">${c.icon}</span><div class="home-v380-lib-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></button>`).join("");
@@ -18844,7 +18846,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v416";
+const APP_BUILD_ID="app-shell-v417";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
