@@ -28,6 +28,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-remove-push-status-v385-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Gebets-/Duʿāʾ-/Empfehlungs-Status von Startseite entfernen, Sync-Button woanders platzieren",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
       "id": "quran-render-fix-v384-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Meldung: Qurʾān-Tab stürzt ab – renderQuran fehlte nach v373-Sync",
