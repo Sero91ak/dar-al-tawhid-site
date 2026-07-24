@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v404";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v405";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -9725,19 +9725,22 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
   font-size:var(--measure-quote-size)!important;
   line-height:var(--measure-quote-line)!important;
   font-weight:800!important;
-  display:-webkit-box!important;
-  -webkit-line-clamp:2!important;
-  -webkit-box-orient:vertical!important;
-  overflow:hidden!important;
+  display:block!important;
+  overflow:visible!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  text-overflow:unset!important;
+  white-space:normal!important;
   text-wrap:pretty!important;
 }
 .isnad-speaker{
   color:var(--gold2)!important;
-  white-space:nowrap!important;
-  display:inline!important;
+  white-space:normal!important;
+  display:block!important;
+  margin:0 0 1px!important;
 }
 .isnad-words{
-  display:inline!important;
+  display:block!important;
   text-wrap:pretty!important;
 }
 .isnad-source{
@@ -11654,21 +11657,22 @@ html[data-theme] .isnad-words{
   display:inline!important;
   white-space:normal!important;
 }
-html[data-theme] .isnad-speaker{margin-right:.2em!important}
+html[data-theme] .isnad-speaker{margin-right:0!important;margin-bottom:1px!important}
 @media(min-width:520px){
   html[data-theme] .isnad-quote{
-    white-space:nowrap!important;
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
   }
 }
 @media(max-width:519px){
   html[data-theme] .isnad-quote{
-    display:-webkit-box!important;
-    -webkit-line-clamp:2!important;
-    -webkit-box-orient:vertical!important;
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
+    display:block!important;
+    -webkit-line-clamp:unset!important;
+    line-clamp:unset!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    white-space:normal!important;
   }
 }
 html[data-theme] .isnad-source{
@@ -12947,17 +12951,28 @@ body.is-home-route .footer strong{font-size:14px}
 }
 .top-shell.theme-hero-shell .isnad-speaker,
 .top-shell.theme-hero-shell .isnad-words{
-  display:inline!important;
+  display:block!important;
   white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:unset!important;
+}
+.top-shell.theme-hero-shell .isnad-speaker{
+  margin:0 0 1px!important;
+  font-size:clamp(9.5px,2.35vw,10.5px)!important;
+  line-height:1.18!important;
+}
+.top-shell.theme-hero-shell .isnad-words{
+  line-height:1.28!important;
 }
 .top-shell.theme-hero-shell .isnad-source{
   margin-top:3px!important;
   padding-top:0!important;
   font-size:clamp(8px,2.05vw,9px)!important;
   line-height:1.28!important;
-  white-space:nowrap!important;
+  white-space:normal!important;
   overflow:visible!important;
   text-overflow:unset!important;
+  text-wrap:pretty!important;
   opacity:.92!important;
 }
 @media(max-width:390px){
@@ -13051,16 +13066,7 @@ body.is-home-route .footer strong{font-size:14px}
   min-height:40px;padding:8px 10px;font-size:clamp(9.5px,2.1vw,11px);border-radius:12px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;
 }
-.top-shell.theme-hero-shell .isnad-quote{
-  display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
-  margin-top:4px!important;line-height:1.22!important;
-}
-.top-shell.theme-hero-shell .isnad-speaker,.top-shell.theme-hero-shell .isnad-words{display:inline!important;white-space:inherit!important}
-.top-shell.theme-hero-shell .isnad-source{
-  margin-top:4px!important;padding-top:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
-}
 @media(max-width:390px){
-  .top-shell.theme-hero-shell .isnad-quote,.top-shell.theme-hero-shell .isnad-source{white-space:normal!important;text-overflow:unset!important}
   .view-head-home-actions{max-width:min(72vw,240px);gap:6px}
 }
 /* Qurʾān-Übersicht v389 */
@@ -13273,7 +13279,7 @@ html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-g
       <div id="headerPrayerStatus" class="header-prayer-hub" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen"></div>
       <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro">Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</div></div>
     </header>
-    <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.</div></section>
+    <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span><span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.</div></section>
   </section>
   <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Beitrag teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
   <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Neue Beiträge anzeigen">
@@ -18160,7 +18166,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v404";
+const APP_BUILD_ID="app-shell-v405";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
