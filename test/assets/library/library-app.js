@@ -846,7 +846,6 @@
       detail.querySelectorAll("[data-library-read]").forEach((btn) => {
         btn.onclick = () => {
           if (!canRead(pub)) return;
-          trackLibraryEvent("library_read", pub);
           navigateReader(pub.slug);
         };
       });

@@ -95,16 +95,10 @@
     }
   }
 
-  function renderLibraryStatsPanel(pub) {
-    return `<section class="lib-stats-panel" data-library-stats="${esc(pub.id)}" aria-label="Statistik dieser Veröffentlichung">
-      <h3 class="lib-stats-title">Statistik</h3>
-      <div class="lib-stats-grid">
-        <div class="lib-stats-item"><b data-library-stat-clicks>—</b><span>Klicks</span></div>
-        <div class="lib-stats-item"><b data-library-stat-reads>—</b><span>Gelesen</span></div>
-        <div class="lib-stats-item"><b data-library-stat-downloads>—</b><span>Downloads</span></div>
-      </div>
-      <p class="lib-stats-note">Öffentliche Besucherzahlen — jeder Aufruf, Lesevorgang und Download wird gezählt.</p>
-    </section>`;
+  function renderLibraryStatsItems() {
+    return `<div class="lib-meta-item"><b>Klicks</b><span data-library-stat-clicks>—</span></div>
+        <div class="lib-meta-item"><b>Gelesen</b><span data-library-stat-reads>—</span></div>
+        <div class="lib-meta-item"><b>Downloads</b><span data-library-stat-downloads>—</span></div>`;
   }
 
   async function hydrateLibraryStats(publicationId) {
@@ -461,15 +455,15 @@
           ${offline && offlineEnabled ? `<button class="lib-btn lib-btn-ghost" type="button" data-library-offline-remove="${esc(pub.slug)}">Offline entfernen</button>` : ""}
         </div>
       </div>
-      <div class="lib-meta-grid lib-meta-grid-compact">
+      <div class="lib-meta-grid lib-meta-grid-compact" data-library-stats="${esc(pub.id)}">
         <div class="lib-meta-item"><b>Kategorie</b><span>${esc(pub.category || "—")}</span></div>
         <div class="lib-meta-item"><b>Thema</b><span>${esc(pub.topic || "—")}</span></div>
         <div class="lib-meta-item"><b>Sprache</b><span>${esc(pub.language || "—")}</span></div>
         <div class="lib-meta-item"><b>Dateigröße</b><span>${esc(pub.fileSize || "—")}</span></div>
         <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
+        ${renderLibraryStatsItems()}
       </div>
-      ${renderLibraryStatsPanel(pub)}
       ${toc.length ? `<section class="lib-panel"><h3>Inhaltsverzeichnis</h3><ul>${toc.map((item) => `<li>${esc(item.title || item)}</li>`).join("")}</ul></section>` : ""}
       ${pub.about ? `<section class="lib-panel"><h3>Über diese Veröffentlichung</h3><p>${esc(pub.about)}</p></section>` : ""}
       ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((s) => `<li>${esc(typeof s === "string" ? s : s.title || s.name || "")}</li>`).join("")}</ul></section>` : ""}
