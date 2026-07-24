@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v405";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v406";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -13261,6 +13261,153 @@ html[data-theme="royal"] body.is-quran-overview .qov-page{
 html[data-theme="light"] .qov-page{--quran-on-accent:#2a1a08;}
 html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-go.qov-btn-primary{color:var(--quran-on-accent,#2a1a08)!important;}
 </style>
+<style id="noble-border-refine-v406">
+/* v406 · Edle dünne Ränder, zentrierte Aktions-Buttons, dezentes Hover-Leuchten */
+:root{
+  --noble-accent:var(--glow-accent,var(--gold2,#d6b76a));
+  --noble-line:color-mix(in srgb,var(--noble-accent) 34%,transparent);
+  --noble-line-hover:color-mix(in srgb,var(--noble-accent) 52%,transparent);
+  --noble-glow:0 0 6px color-mix(in srgb,var(--noble-accent) 7%,transparent);
+  --noble-glow-hover:0 0 10px color-mix(in srgb,var(--noble-accent) 13%,transparent);
+  --noble-inset:inset 0 1px 0 color-mix(in srgb,var(--noble-accent) 9%,transparent);
+  --noble-pill-bg:color-mix(in srgb,var(--theme-surface,var(--bg)) 91%,var(--noble-accent) 4%);
+  --noble-card-shadow:0 6px 18px color-mix(in srgb,var(--theme-text,var(--cream)) 4%,transparent);
+}
+html[data-theme="light"]{
+  --noble-pill-bg:color-mix(in srgb,var(--theme-surface,#fff) 95%,var(--noble-accent) 5%);
+  --noble-line:color-mix(in srgb,var(--noble-accent) 30%,transparent);
+}
+
+/* Pill- & Aktions-Buttons: zentriert, symmetrisch, edler Rand */
+.home-v380-text-link,
+.collapse-toggle,
+.current-focus-all,
+.premium-pill:not(.bottom-nav-btn),
+.home-refresh-btn,
+.section-head .collapse-toggle,
+.home-more-section .collapse-toggle,
+.collapsible-head .collapse-toggle{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  gap:.32em!important;
+  border-width:0.5px!important;
+  border-style:solid!important;
+  border-color:var(--noble-line)!important;
+  border-radius:999px!important;
+  box-shadow:var(--noble-glow),var(--noble-inset)!important;
+  padding:5px 12px!important;
+  min-height:30px!important;
+  min-width:0!important;
+  line-height:1.15!important;
+  letter-spacing:.03em!important;
+  margin-left:0!important;
+  transition:border-color .2s ease,box-shadow .22s ease,filter .15s ease!important;
+}
+.collapse-toggle,
+.current-focus-all,
+.premium-pill:not(.bottom-nav-btn),
+.home-refresh-btn{
+  background:var(--premium-pill-bg,var(--noble-pill-bg))!important;
+  color:var(--premium-pill-text,color-mix(in srgb,var(--theme-accent) 90%,var(--theme-text) 10%))!important;
+}
+.home-v380-text-link{
+  background:var(--noble-pill-bg)!important;
+  padding:5px 12px!important;
+  font-size:clamp(10px,2.2vw,11px)!important;
+  font-weight:800!important;
+  color:color-mix(in srgb,var(--theme-accent) 90%,var(--theme-text) 10%)!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  flex-shrink:0!important;
+  cursor:pointer!important;
+}
+.home-v380-text-link:hover,
+.home-v380-text-link:focus-visible,
+.collapse-toggle:hover,
+.collapse-toggle:focus-visible,
+.current-focus-all:hover,
+.current-focus-all:focus-visible,
+.premium-pill:not(.bottom-nav-btn):hover,
+.premium-pill:not(.bottom-nav-btn):focus-visible,
+.home-refresh-btn:hover,
+.home-refresh-btn:focus-visible{
+  border-color:var(--noble-line-hover)!important;
+  box-shadow:var(--noble-glow-hover),var(--noble-inset)!important;
+  filter:brightness(1.04)!important;
+  outline:none!important;
+  text-decoration:none!important;
+}
+
+/* Home-Karten: dünnere Ränder, dezentes Leuchten */
+.home-v380-post-preview,
+.home-v380-lib-card,
+.home-v380-quran-hero,
+.home-v380-app-status,
+.home-v380-search-box{
+  border-width:0.5px!important;
+  border-style:solid!important;
+  border-color:var(--noble-line)!important;
+  box-shadow:var(--noble-card-shadow),var(--noble-glow),var(--noble-inset)!important;
+  transition:border-color .2s ease,box-shadow .22s ease!important;
+}
+.home-v380-post-preview:hover,
+.home-v380-post-preview:focus-visible,
+.home-v380-lib-card:hover,
+.home-v380-lib-card:focus-visible,
+.home-v380-quran-hero:hover,
+.home-v380-quran-hero:focus-visible{
+  border-color:var(--noble-line-hover)!important;
+  box-shadow:var(--noble-card-shadow),var(--noble-glow-hover),var(--noble-inset)!important;
+  outline:none!important;
+}
+.home-v380-post-action,
+.home-v380-lib-card__foot{
+  align-self:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  width:100%!important;
+  padding-right:0!important;
+}
+
+/* App-weite Karten: goldene Linien verfeinern */
+.popular-row,.folder-card,.post-card,.list-card,.dua-card,.series-card,.pinned-card,
+.daily-box,.recommended-box,.current-focus-row,.quran-surah-card,.quran-result-card,
+.feature-card,.ramadan-teaser,.quran-home-teaser,.zakat-home-teaser,.home-refresh-panel,
+.prayer-quick-card,.quiz-home-quick-card,.info-card,.event-card,.stat-card,
+.overview-panel,.direct-pick-panel,.filter-panel,.popular-panel,.profile-box,.book-profile-box,
+.series-box,.pinned-box,.calendar-panel,.home-more-section,.feature-section,
+.home-more-body .series-card.has-icon,.home-more-body .pinned-card.has-icon,
+.home-more-body .overview-compact .stat-card,.current-focus.premium-surface{
+  border-width:0.5px!important;
+  box-shadow:var(--noble-glow),var(--noble-inset),0 8px 20px color-mix(in srgb,#000 16%,transparent)!important;
+}
+.popular-row:hover,.folder-card:hover,.post-card:hover,.list-card:hover,.dua-card:hover,
+.series-card:hover,.pinned-card:hover,.feature-card:hover,.quran-surah-card:hover,
+.quran-result-card:hover,.current-focus-row:hover,.prayer-quick-card:hover,
+.quiz-home-quick-card:hover,.event-card:hover,.stat-card:hover{
+  border-color:var(--noble-line-hover)!important;
+  box-shadow:var(--noble-glow-hover),var(--noble-inset),0 10px 22px color-mix(in srgb,#000 18%,transparent)!important;
+}
+
+/* Icon-Kästchen: dezenter */
+.folder-icon,.popular-rank,.feature-icon,
+.home-more-body .series-card.has-icon .folder-icon,
+.home-more-body .pinned-card.has-icon .folder-icon{
+  border-width:0.5px!important;
+  box-shadow:var(--noble-glow),var(--noble-inset)!important;
+}
+
+/* Kopfzeilen: Aktions-Buttons vertikal mittig */
+.section-head,.home-v380-section-head,.collapsible-head,.current-focus-head{
+  align-items:center!important;
+}
+.section-head .collapse-toggle,
+.collapsible-head .collapse-toggle{
+  margin-left:auto!important;
+}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -18165,7 +18312,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v405";
+const APP_BUILD_ID="app-shell-v406";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
