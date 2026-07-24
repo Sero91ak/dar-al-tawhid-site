@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v393";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v394";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -10709,9 +10709,13 @@ html[data-theme="dar-al-layl"] .home-more-body .overview-compact .stat-card{
   box-shadow:0 0 8px -5px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)!important;
 }
 .qov-row.is-last-read::before,.qov-row.is-active::before{
-  top:6px!important;bottom:6px!important;width:1px!important;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 56%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 22%,transparent))!important;
-  box-shadow:0 0 8px -5px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)!important;
+  display:none;
+  border-left-color:color-mix(in srgb,var(--quran-accent-primary) 52%,transparent)!important;
+  box-shadow:inset 1px 0 12px -10px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)!important;
+}
+.qov-row.is-last-read,.qov-row.is-active{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 15%,var(--card) 85%) 0,color-mix(in srgb,var(--gold2) 7%,transparent) 38%,transparent 100%)!important;
+  box-shadow:inset 1px 0 0 color-mix(in srgb,var(--glow-accent,var(--gold2)) 44%,transparent)!important;
 }
 </style>
 <style id="hijri-dayframe-v334">
@@ -15685,7 +15689,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v393";
+const APP_BUILD_ID="app-shell-v394";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
