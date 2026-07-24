@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v407";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v408";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -13446,6 +13446,103 @@ html[data-theme="light"]{
 }
 .home-v380-popular-row{grid-template-columns:auto 1fr!important}
 </style>
+<style id="post-reader-unify-v408">
+/* v408 · Beitrag: Titel eine Zeile, Überlieferer mit Goldlinie, ein Rahmen */
+.post-reader-title{
+  gap:6px!important;
+  padding:4px 2px 0!important;
+}
+.post-reader-title h2{
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  max-width:100%!important;
+  font-size:clamp(21px,5.4vw,36px)!important;
+  line-height:1.08!important;
+  letter-spacing:.01em!important;
+}
+.post-reader-speaker{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:8px 10px!important;
+  margin:2px 2px 10px!important;
+  padding:0!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+}
+.post-reader-speaker__label{
+  flex:0 0 auto!important;
+  color:var(--premium-label)!important;
+  text-transform:uppercase!important;
+  letter-spacing:.14em!important;
+  font-size:10px!important;
+  font-weight:900!important;
+}
+.post-reader-speaker__rule{
+  flex:1 1 28px!important;
+  min-width:24px!important;
+  height:1px!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2,var(--theme-accent)) 58%,transparent),transparent 92%)!important;
+  opacity:.95!important;
+}
+.post-reader-speaker__name{
+  flex:0 1 auto!important;
+  color:var(--cream,var(--theme-text))!important;
+  min-width:0!important;
+}
+.post-reader-speaker__said{
+  flex:0 0 auto!important;
+  color:color-mix(in srgb,var(--theme-muted) 72%,var(--theme-text) 28%)!important;
+  font-size:.92em!important;
+  font-weight:650!important;
+}
+.post-reader-speaker .honorific{
+  margin-inline-start:4px!important;
+}
+
+/* Ein edler Rahmen: äußerer Container, innen flush ohne Doppelrand */
+.post-reader-main{
+  border-width:0.5px!important;
+  border-color:color-mix(in srgb,var(--glow-accent,var(--gold2)) 36%,transparent)!important;
+  border-radius:20px!important;
+  padding:clamp(14px,3.6vw,20px)!important;
+  box-shadow:0 0 6px color-mix(in srgb,var(--glow-accent,var(--gold2)) 7%,transparent),inset 0 1px 0 color-mix(in srgb,var(--glow-accent,var(--gold2)) 9%,transparent)!important;
+}
+.post-reader-main > .statement,
+.post-reader .statement,
+.post-reader-main .post-slide-quote,
+:is(.post-reader-main,.post-slides) > .statement{
+  border:none!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0!important;
+}
+.post-reader-main > .post-slides,
+.post-reader-main .post-slides{
+  border:none!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  margin:0!important;
+}
+.post-reader-main .post-slide{
+  padding:0!important;
+  gap:10px!important;
+}
+.post-reader-main .post-key-message{
+  margin-top:12px!important;
+  padding:12px 0 0!important;
+  border-left:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 28%,transparent)!important;
+}
+.post-reader-main .post-key-message h3{
+  margin-bottom:5px!important;
+}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -18351,7 +18448,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v407";
+const APP_BUILD_ID="app-shell-v408";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -18412,7 +18509,7 @@ function postNarratorLine(post){
   const raw=String(post?.scholar||post?.speaker||"").trim();
   if(!raw)return "";
   const honorific=/رضي الله عنه|رضي الله عنها|رحمه الله|حفظه الله/.test(raw)?"":"<span class='honorific'>رضي الله عنه</span>";
-  return `<div class="post-reader-speaker"><small>Überliefert von</small><span>${esc(raw)} ${honorific}</span> sagte:</div>`;
+  return `<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(raw)} ${honorific}</span><span class="post-reader-speaker__said">sagte:</span></div>`;
 }
 function normalizeStatementText(value){
   return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
@@ -18565,7 +18662,7 @@ function renderPost(id){
   const keyMessage=String(post.summary||post.fazit||post.fazitText||post.conclusion||"").trim();
   const keyBlock=keyMessage?`<section class="post-key-message"><h3>Kerngedanke</h3><p>${esc(keyMessage)}</p></section>`:"";
   const intro=renderPostIntroButton(post);
-  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2>${narrator}</header>${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
