@@ -762,6 +762,16 @@ body.is-library-reader-route .view {
   height: auto;
 }
 
+.lib-reader-stack-single {
+  min-height: calc(100% - 8px);
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lib-reader-stack-single .lib-reader-sheet {
+  max-width: 100%;
+}
+
 .lib-reader-msg {
   padding: 24px;
   text-align: center;
@@ -769,6 +779,7 @@ body.is-library-reader-route .view {
 }
 
 body.is-library-reader-route .bottom-nav,
+body.is-library-reader-route .app-chrome-dock,
 body.is-library-reader-route .float-actions {
   display: none !important;
 }
