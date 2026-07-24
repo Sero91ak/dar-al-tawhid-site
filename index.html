@@ -14092,8 +14092,11 @@ html[data-app-path="visitor"] .folder-card[data-nav="hadith"]{display:none!impor
   grid-column:1!important;grid-row:1!important;
   justify-self:start!important;align-self:center!important;
   min-width:0!important;margin:0!important;
-  max-width:calc(50% - 52px)!important;
+  max-width:calc(100% - min(48vw,228px) - 8px)!important;
   padding-right:4px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
 }
 .view-head-home-row.view-head-home-row--v423 .view-head-home-hijri-end{
   grid-column:2!important;grid-row:1!important;
@@ -14134,7 +14137,7 @@ html[data-app-path="visitor"] .folder-card[data-nav="hadith"]{display:none!impor
 }
 @media(max-width:520px){
   .view-head-home-row.view-head-home-row--v423{min-height:40px!important;gap:4px 6px!important}
-  .view-head-home-row.view-head-home-row--v423 .home-start-title{max-width:calc(50% - 40px)!important}
+  .view-head-home-row.view-head-home-row--v423 .home-start-title{max-width:calc(100% - min(52vw,196px) - 6px)!important}
   .view-head-home-row.view-head-home-row--v423 .view-head-home-hijri-end{max-width:min(52vw,196px)!important}
   .view-head-home-row.view-head-home-row--v423 #homeUpdateBtn,
   .view-head-home-row.view-head-home-row--v423 .home-header-update-chip{
@@ -19113,7 +19116,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v427";
+const APP_BUILD_ID="app-shell-v428";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
