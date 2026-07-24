@@ -12525,9 +12525,6 @@ body.home-push-sheet-open{overflow:hidden}
 <style id="home-premium-v380">
 /* Startseite ab „Startseite“: Premium-Hierarchie v380 */
 :root{--bottom-navigation-height:70px}
-body.is-home-route #appView.view{
-  padding-bottom:calc(var(--bottom-navigation-height) + env(safe-area-inset-bottom,0px) + 24px)!important;
-}
 .home-v380-shell{display:flex;flex-direction:column;gap:0;min-width:0}
 .home-v380-shell > * + .home-v380-section{margin-top:clamp(28px,6vw,34px)}
 .view-head-home-row--v380{display:block!important;grid-template-columns:unset!important}
@@ -12560,51 +12557,63 @@ body.is-home-route #appView.view{
   white-space:nowrap;
 }
 .home-v380-text-link:hover,.home-v380-text-link:focus-visible{filter:brightness(1.06);outline:none;text-decoration:underline}
-/* Typ B: App-Status */
-.home-v380-app-status{
-  display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:56px;margin-top:12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 68%,transparent);
-  border-radius:12px;
-  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
-  overflow:hidden;
+/* Typ B: App-Status – flache Doppelzeile, kein Kasten-auf-Kasten */
+.home-v380-status{
+  margin-top:14px;
+  border-top:1px solid color-mix(in srgb,var(--theme-border) 42%,transparent);
+  border-bottom:1px solid color-mix(in srgb,var(--theme-border) 42%,transparent);
+  background:color-mix(in srgb,var(--theme-surface) 35%,transparent);
 }
-.home-v380-app-status__half{
-  display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;min-height:56px;
-  padding:10px 12px;border:0;background:transparent;color:var(--theme-text);cursor:pointer;text-align:left;
+.home-v380-status__row{
+  display:flex;align-items:flex-start;gap:10px;width:100%;min-height:48px;
+  padding:11px 2px;border:0;background:transparent;color:var(--theme-text);
+  cursor:pointer;text-align:left;
 }
-.home-v380-app-status__half + .home-v380-app-status__half{
-  border-left:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+.home-v380-status__row + .home-v380-status__row{
+  border-top:1px solid color-mix(in srgb,var(--theme-border) 38%,transparent);
 }
-.home-v380-app-status__label{
-  font-size:clamp(7.5px,1.7vw,8.5px);font-weight:850;letter-spacing:.13em;text-transform:uppercase;
-  color:color-mix(in srgb,var(--theme-muted) 78%,var(--theme-text) 22%);
+.home-v380-status__ico{
+  flex:0 0 auto;width:18px;font-size:15px;line-height:1.35;
+  color:color-mix(in srgb,var(--theme-accent) 82%,var(--theme-text) 18%);
+  font-weight:800;text-align:center;
 }
-.home-v380-app-status__line{
-  font-size:clamp(10px,2.35vw,11.5px);font-weight:750;line-height:1.32;
-  color:color-mix(in srgb,var(--theme-text) 90%,var(--theme-muted) 10%);
+.home-v380-status__ico--bell{display:inline-flex;align-items:center;justify-content:center}
+.home-v380-status__ico--bell .prayer-overview__push-bell-svg{width:15px;height:15px}
+.home-v380-status__text{
+  flex:1 1 auto;min-width:0;font-size:clamp(10.5px,2.4vw,11.5px);font-weight:750;line-height:1.36;
+  color:color-mix(in srgb,var(--theme-text) 92%,var(--theme-muted) 8%);
   white-space:normal;text-wrap:pretty;
 }
-.home-v380-app-status__half.is-update .home-v380-app-status__line{color:var(--theme-accent)}
-.home-v380-app-status__half.is-error .home-v380-app-status__line{color:color-mix(in srgb,var(--theme-accent) 70%,#c44 30%)}
-.home-v380-app-status__half:hover,.home-v380-app-status__half:focus-visible{
-  background:color-mix(in srgb,var(--theme-accent) 5%,transparent);outline:none;
-  box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--theme-accent) 20%,transparent);
+.home-v380-status__row.is-update .home-v380-status__text{color:var(--theme-accent)}
+.home-v380-status__row.is-error .home-v380-status__text{color:color-mix(in srgb,var(--theme-accent) 65%,#c44 35%)}
+.home-v380-status__row:hover,.home-v380-status__row:focus-visible{
+  background:color-mix(in srgb,var(--theme-accent) 4%,transparent);outline:none;
 }
-@media(max-width:520px){
-  .home-v380-app-status{grid-template-columns:1fr}
-  .home-v380-app-status__half + .home-v380-app-status__half{border-left:0;border-top:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent)}
+body.is-home-route .view-head.view-head-home--v380::after{display:none!important}
+.home-v380-today .home-v380-section-title{margin-bottom:16px}
+.home-v380-today__list{display:flex;flex-direction:column;gap:0}
+.home-v380-search-wrap .home-v380-section-title{margin-bottom:12px}
+.home-v380-search-panel .search-pro-panel{
+  margin:0;padding:0;border:0;background:transparent;box-shadow:none;
+}
+.home-v380-search-panel .search-helper{display:none}
+body.is-home-route #appView.view{
+  padding-bottom:calc(var(--bottom-navigation-height) + env(safe-area-inset-bottom,0px) + 48px)!important;
+}
+body.is-home-route .footer{
+  margin-top:clamp(28px,6vw,34px);padding-top:14px;
+  padding-bottom:calc(28px + env(safe-area-inset-bottom,0px) + 12px);
+  border-top:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
 }
 /* Typ A: Qurʾān Hero */
 .home-v380-quran-hero{
-  display:flex;align-items:center;gap:12px;width:100%;min-height:88px;margin-top:clamp(14px,3.5vw,18px);
-  padding:clamp(14px,3.2vw,18px) clamp(14px,3.4vw,18px);
-  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%);
-  border-radius:16px;
-  background:
-    radial-gradient(120% 100% at 0% 0%,color-mix(in srgb,var(--theme-accent) 9%,transparent),transparent 58%),
-    linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 95%,transparent),color-mix(in srgb,var(--theme-surface) 82%,var(--theme-text) 5%));
+  display:flex;align-items:center;gap:12px;width:100%;min-height:84px;margin-top:clamp(14px,3.5vw,18px);
+  padding:clamp(14px,3.2vw,16px) clamp(14px,3.4vw,16px);
+  border:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+  border-radius:14px;
+  background:color-mix(in srgb,var(--theme-surface) 88%,transparent);
   color:var(--theme-text);cursor:pointer;text-align:left;
-  box-shadow:0 10px 28px color-mix(in srgb,var(--theme-text) 6%,transparent);
+  box-shadow:none;
 }
 .home-v380-quran-hero__body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:5px}
 .home-v380-quran-hero__title{margin:0;font-family:var(--serif);font-size:clamp(18px,4.4vw,22px);font-weight:800;line-height:1.12}
@@ -12621,8 +12630,8 @@ body.is-home-route #appView.view{
 }
 /* Typ C: offene Zeilen */
 .home-v380-open-row{
-  display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px 0;
-  border:0;border-bottom:1px solid color-mix(in srgb,var(--theme-border) 50%,transparent);
+  display:flex;align-items:flex-start;gap:12px;width:100%;padding:16px 0;
+  border:0;border-bottom:1px solid color-mix(in srgb,var(--theme-border) 32%,transparent);
   background:transparent;color:var(--theme-text);cursor:pointer;text-align:left;
 }
 .home-v380-open-row:last-child{border-bottom:0}
@@ -12746,10 +12755,6 @@ body.is-home-route #appView.view{
 .home-v380-filter-panel-wrap{display:none}
 .home-v380-filter-panel-wrap.advanced-visible{display:block}
 /* Footer kompakt */
-body.is-home-route .footer{
-  margin-top:clamp(28px,6vw,34px);padding-top:14px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
-}
 body.is-home-route .footer-actions{gap:8px;margin-top:10px}
 body.is-home-route .footer-action-btn,body.is-home-route .footer-social-link{
   min-height:40px;padding:8px 11px;font-size:11px;border-radius:12px;
@@ -13772,7 +13777,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -17332,7 +17337,7 @@ function renderHomePushSheetOnly(){
 function renderHomeAppStatus(){
   const sync=homeSyncStatusSummary();
   const push=homePushStatusCompact();
-  return `<section class="home-v380-app-status" aria-label="App-Status"><button type="button" id="homeAppStatusSync" class="home-v380-app-status__half${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}" aria-label="${esc(sync.aria)}"><span class="home-v380-app-status__label">App-Status</span><span class="home-v380-app-status__line" id="homeAppStatusSyncLine">${esc(sync.line)}</span></button><button type="button" id="homeAppStatusPush" class="home-v380-app-status__half" aria-label="${esc(push.ariaLabel)}"><span class="home-v380-app-status__label">Erinnerungen</span><span class="home-v380-app-status__line" id="homeAppStatusPushLine">${esc(push.line)}</span></button></section>${renderHomePushSheetOnly()}`;
+  return `<section class="home-v380-status" aria-label="App-Status"><button type="button" id="homeAppStatusSync" class="home-v380-status__row${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}" aria-label="${esc(sync.aria)}"><span class="home-v380-status__ico" aria-hidden="true">↻</span><span class="home-v380-status__text" id="homeAppStatusSyncLine">${esc(sync.line)}</span></button><button type="button" id="homeAppStatusPush" class="home-v380-status__row" aria-label="${esc(push.ariaLabel)}"><span class="home-v380-status__ico home-v380-status__ico--bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="home-v380-status__text" id="homeAppStatusPushLine">${esc(push.line)}</span></button></section>${renderHomePushSheetOnly()}`;
 }
 function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={}){
   if(!post)return"";
@@ -17378,7 +17383,7 @@ function renderHomeTodaySection(){
   const ramadan=renderHomeRamadanRow();
   const rows=[ramadan,dua,rec].filter(Boolean).join("");
   if(!rows)return"";
-  return `<section class="home-v380-section" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2><div class="home-v380-section-rule" aria-hidden="true"></div>${rows}</section>`;
+  return `<section class="home-v380-section home-v380-today" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2><div class="home-v380-today__list">${rows}</div></section>`;
 }
 function homeDiscoverPosts(excludeIds=new Set()){
   const rec=recommendedPost();
@@ -17423,10 +17428,7 @@ function renderHomeLibrariesSection(){
   return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards.join("")}</div></section>`;
 }
 function renderHomeSearchSection(){
-  const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
-  const scholars=renderScholarOptions();
-  const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
-  return `<section class="home-v380-section home-v380-search" aria-labelledby="homeSearchTitle"><h2 class="home-v380-section-title" id="homeSearchTitle">Suche und Filter</h2><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-search-field"><span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="homeSearchInput" class="search search-input-field" type="search" placeholder="Beiträge, Duʿāʾ, Themen, Gelehrte und Bücher durchsuchen" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Beiträge, Duʿāʾ, Themen, Gelehrte und Bücher durchsuchen"><button type="button" id="homeSearchClear" class="home-v380-search-clear" hidden aria-label="Suche löschen">×</button></div><div class="home-v380-filter-chips" role="toolbar" aria-label="Filter"><button type="button" class="home-v380-filter-chip" data-home-filter-open="cat">Thema</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="scholar">Gelehrter</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="book">Buch</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="more">Weitere Filter</button></div><div id="homeActiveFilters" class="home-v380-active-filters" hidden></div><div id="homeFilterPanel" class="home-v380-filter-panel-wrap advanced-hidden"><div class="filter-grid"><select id="homeFilterCat" class="filter-select" aria-label="Thema filtern"><option value="">Alle Kategorien</option>${cats}</select><select id="homeFilterScholar" class="filter-select" aria-label="Gelehrten filtern"><option value="">Alle Gelehrten</option>${scholars}</select><select id="homeFilterBook" class="filter-select" aria-label="Buch filtern"><option value="">Alle Bücher</option>${books}</select><select id="homeFilterType" class="filter-select" aria-label="Quellentyp filtern"><option value="">Qurʾān / Sunnah / Athar</option><option value="quran">Qurʾān / Tafsīr</option><option value="sunnah">Sunnah / Hadith</option><option value="athar">Āthār</option><option value="other">Sonstige</option></select></div></div><div id="homeFilterSheetBackdrop" class="home-push-sheet-backdrop" hidden tabindex="-1"><div class="home-push-sheet" role="dialog" aria-modal="true" aria-labelledby="homeFilterSheetTitle"><div class="home-push-sheet__head"><h3 id="homeFilterSheetTitle">Filter</h3><button type="button" id="homeFilterSheetClose" class="home-push-sheet__close" aria-label="Schließen">×</button></div><div class="home-push-sheet__body" id="homeFilterSheetBody"></div></div></div></section>`;
+  return `<section class="home-v380-section home-v380-search-wrap" aria-labelledby="homeSearchTitle"><h2 class="home-v380-section-title" id="homeSearchTitle">Suche und Filter</h2><div class="home-v380-search-panel">${renderSearchPanel()}</div></section>`;
 }
 function updateHomeActiveFilterChips(){
   const wrap=document.getElementById("homeActiveFilters");
@@ -17485,49 +17487,13 @@ function bindHomeV380Events(){
     openHomePushRemindersSheet();
   };
   bindHomePushRemindersSheet();
-  const clearBtn=document.getElementById("homeSearchClear");
-  const searchInput=$("homeSearchInput");
-  const syncSearchClear=()=>{if(!clearBtn||!searchInput)return;const has=!!searchInput.value.trim();clearBtn.hidden=!has};
-  if(searchInput){searchInput.oninput=()=>{syncSearchClear();applyHomeFilters()};syncSearchClear()}
-  if(clearBtn)clearBtn.onclick=()=>{if(searchInput){searchInput.value="";syncSearchClear();applyHomeFilters();searchInput.focus()}};
-  document.querySelectorAll("[data-home-filter-open]").forEach(btn=>{
-    btn.onclick=()=>openHomeFilterSheet(btn.getAttribute("data-home-filter-open")||"more");
-  });
-  const filterClose=document.getElementById("homeFilterSheetClose");
-  if(filterClose)filterClose.onclick=e=>{e.stopPropagation();closeHomeFilterSheet()};
-  const filterBackdrop=document.getElementById("homeFilterSheetBackdrop");
-  if(filterBackdrop)filterBackdrop.onclick=e=>{if(e.target===filterBackdrop)closeHomeFilterSheet()};
-  const activeWrap=document.getElementById("homeActiveFilters");
-  if(activeWrap&&!activeWrap.dataset.bound){
-    activeWrap.dataset.bound="1";
-    activeWrap.addEventListener("click",e=>{
-    if(e.target.id==="homeFilterResetAll"||e.target.closest("#homeFilterResetAll")){
-      ["homeFilterCat","homeFilterScholar","homeFilterBook","homeFilterType"].forEach(id=>{const el=$(id);if(el)el.value=""});
-      applyHomeFilters();updateHomeActiveFilterChips();return;
-    }
-    const btn=e.target.closest("[data-home-filter-clear]");
-    if(!btn)return;
-    const key=btn.getAttribute("data-home-filter-clear");
-    if(key==="cat"&&$("homeFilterCat"))$("homeFilterCat").value="";
-    if(key==="scholar"&&$("homeFilterScholar"))$("homeFilterScholar").value="";
-    if(key==="book"&&$("homeFilterBook"))$("homeFilterBook").value="";
-    if(key==="type"&&$("homeFilterType"))$("homeFilterType").value="";
-    applyHomeFilters();updateHomeActiveFilterChips();
-    });
-  }
-  updateHomeActiveFilterChips();
   updateFooterAppSaveVisibility();
-}
-function shouldShowFooterAppSave(){
-  if(isStandalonePwa())return false;
-  if(isIOSDevice())return true;
-  return typeof window!=="undefined";
 }
 function updateFooterAppSaveVisibility(){
   const btn=document.getElementById("footerAppSave");
   if(!btn)return;
-  const show=shouldShowFooterAppSave();
-  if(show){btn.removeAttribute("hidden");btn.style.display=""}else{btn.setAttribute("hidden","");btn.style.display="none"}
+  if(isStandalonePwa()){btn.setAttribute("hidden","");btn.style.display="none"}
+  else{btn.removeAttribute("hidden");btn.style.display=""}
 }
 function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;return `<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>${newer?"Neue Version verfügbar":"🔄 Aktualisieren"}</b><p>${newer?"Neue App-Version laden und Inhalte synchronisieren.":"Neue Beiträge laden und App synchronisieren."}</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
 async function syncAppServices({silent=true}={}){
@@ -17660,7 +17626,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v380-test";
+const APP_BUILD_ID="app-shell-v381-test";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -18890,7 +18856,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
     })();
   </script>
-  <script src="/assets/dar-account-visibility.js?v=16"></script>
+  <script src="/assets/dar-account-visibility.js?v=17"></script>
 <script src="/test/assets/library/canonical-source-library.js?v=14"></script>
 </body>
 </html>
