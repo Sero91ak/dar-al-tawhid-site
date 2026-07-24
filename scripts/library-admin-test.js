@@ -64,6 +64,10 @@ async function main() {
   const unknown = suggestLibraryCategory("xyz unbekannt");
   assert(unknown.confidence === "none", "Unbekanntes Thema: confidence none");
 
+  const hukm = suggestLibraryCategory("Hukm al Majhul al Hal");
+  assert(hukm.category === "Fiqh", "Kategorie-Vorschlag: Fiqh für Hukm al-Majhul");
+  assert(hukm.confidence !== "none", "Hukm-Titel: confidence nicht none");
+
   const oneBook = [{ id: "a", isNew: true, isRecommended: true, publishedAt: "2026-01-01" }];
   const shelves = buildShelfIds(oneBook);
   assert(shelves.length === 1, "1 Buch: nur ein Regal");
