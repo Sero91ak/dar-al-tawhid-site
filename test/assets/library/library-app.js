@@ -1,10 +1,11 @@
 /**
- * DAR AL TAWḤĪD Bibliothek — Test-App
+ * DAR AL TAWḤĪD Bibliothek — Test- und Besucher-App
  */
 (function (global) {
   "use strict";
 
-  const DATA_URL = "/test/data/library-publications.json";
+  const LIB_BASE = (typeof global.IS_TEST_PATH !== "undefined" && global.IS_TEST_PATH) ? "/test" : "";
+  const DATA_URL = `${LIB_BASE}/data/library-publications.json`;
   const PROGRESS_KEY = "darLibraryProgressV1";
   const OFFLINE_DB = "darLibraryOfflineV1";
   const OFFLINE_STORE = "pdfs";
@@ -523,7 +524,7 @@
 
   function sharePublication(pub) {
     const text = `${pub.title}\nEine Veröffentlichung von DAR AL TAWḤĪD\nZusammengestellt und herausgegeben von Serhat Abu Malik\ndar-al-tawhid.de`;
-    const url = `${global.location.origin}/test/#bibliothek/${encodeURIComponent(pub.slug)}`;
+    const url = `${global.location.origin}${LIB_BASE}/#bibliothek/${encodeURIComponent(pub.slug)}`;
     if (navigator.share) {
       return navigator.share({ title: pub.title, text, url }).catch(() => {});
     }
