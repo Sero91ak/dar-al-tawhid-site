@@ -18964,7 +18964,7 @@ function initAppCrashGuard(){
 }
 function hardRefreshApp(){
   (async()=>{
-    ["homeUpdateBtn","postHardRefreshBtn"].forEach(id=>{const el=$(id);if(el){el.disabled=true;el.textContent="Wird aktualisiert..."}});
+    ["homeUpdateBtn","postHardRefreshBtn"].forEach(id=>{const el=$(id);if(el){el.disabled=true;const textEl=el.querySelector&&el.querySelector(".home-header-update-text");if(textEl)textEl.textContent="…";else el.textContent="Wird aktualisiert..."}});
     resetTabSwipePreview();ensureBottomNavDock();
     try{if(typeof window.DAR_AUTO_REFRESH?.markVersionUpdatePending==="function")window.DAR_AUTO_REFRESH.markVersionUpdatePending(window.__darRemoteBuildId||"")}catch(e){}
     try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
