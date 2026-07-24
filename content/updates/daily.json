@@ -1,15 +1,38 @@
 {
   "date": "2026-07-24",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-24T13:50:02.562Z",
-  "source": "dar-daily-scheduler-regenerated-v4",
+  "generated": "2026-07-24T15:07:38.146Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "al-ajurri-groesstes-geschenk-im-paradies-161",
-    "title": "Das größte Geschenk im Paradies",
-    "file": "al-ajurri-groesstes-geschenk-im-paradies-161.md",
-    "category": "Aqīdah",
-    "scholar": "Abū Bakr al-Ājurrī",
-    "snippet": "„Wenn die Bewohner des Paradieses ins Paradies eintreten, wird ihnen zugerufen: O Bewohner des Paradieses, ihr habt bei Allah einen Termin, den ihr noch nicht gesehen habt.“"
+    "id": "athar-widerlegung-bidah-ist-nicht-kleinzureden-315",
+    "title": "Athar-Widerlegung: Bidʿah ist nicht kleinzureden",
+    "file": "athar-widerlegung-bidah-ist-nicht-kleinzureden-315.md",
+    "category": "Widerlegung",
+    "scholar": "al-Barbahārī",
+    "snippet": "🖋️ al-Barbahārī sagte:"
   },
-  "dua": null
+  "dua": {
+    "id": "dua-011-najji-mina-zalimin",
+    "title": "Rette mich vor dem ungerechten Volk",
+    "snippet": "Mein Herr, rette mich vor dem ungerechten Volk.",
+    "category": "Schutz"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 451,
+      "remaining": 447
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 90,
+      "remaining": 87,
+      "sources": {
+        "markdown": 90,
+        "total": 90,
+        "poolSize": 90,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
+  }
 }
