@@ -13879,7 +13879,83 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
 <style id="home-update-lib-focus-v416">
 /* v416 · Ein Aktualisieren-Button + 72h Bibliothek-Fokus-Kachel */
 .home-update-row-v416{
-  display:flex;justify-content:flex-start;width:100%;margin:0 0 10px!important;
+  display:none!important;
+}
+.home-header-update-chip{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;
+  flex:0 0 auto!important;min-width:0!important;max-width:none!important;width:auto!important;
+  padding:3px 8px 4px!important;min-height:0!important;
+  border-radius:8px!important;cursor:pointer;white-space:nowrap;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)!important;
+  background:
+    linear-gradient(152deg,
+      color-mix(in srgb,var(--theme-accent) 7%,var(--theme-surface) 93%),
+      color-mix(in srgb,var(--theme-surface) 96%,transparent) 45%,
+      color-mix(in srgb,var(--theme-surface) 90%,var(--theme-text) 2%)
+    )!important;
+  color:color-mix(in srgb,var(--theme-accent) 82%,var(--theme-text) 18%)!important;
+  font-size:clamp(10.5px,2.6vw,12px)!important;font-weight:700!important;letter-spacing:.02em!important;line-height:1.15!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 10%,transparent),
+    0 1px 5px color-mix(in srgb,var(--theme-text) 3%,transparent)!important;
+  transition:border-color .22s ease,box-shadow .22s ease,background .22s ease,transform .12s ease;
+}
+.home-header-update-ico{
+  font-size:clamp(11px,2.8vw,12.5px)!important;line-height:1!important;opacity:.92;
+}
+.home-header-update-text{
+  font-size:clamp(9.5px,2.2vw,10.5px)!important;font-weight:750!important;letter-spacing:.03em!important;
+}
+.home-header-update-chip:hover,
+.home-header-update-chip:focus-visible{
+  outline:none!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 38%,var(--theme-border) 62%)!important;
+  background:
+    linear-gradient(152deg,
+      color-mix(in srgb,var(--theme-accent) 11%,var(--theme-surface) 89%),
+      color-mix(in srgb,var(--theme-surface) 95%,transparent) 42%,
+      color-mix(in srgb,var(--theme-surface) 87%,var(--theme-text) 3%)
+    )!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 18%,transparent),
+    0 0 10px color-mix(in srgb,var(--theme-accent) 11%,transparent),
+    0 2px 8px color-mix(in srgb,var(--theme-accent) 6%,transparent)!important;
+}
+.home-header-update-chip:active{transform:translateY(1px)}
+.home-header-update-chip.is-update{
+  border-color:color-mix(in srgb,var(--theme-accent) 44%,var(--theme-border) 56%)!important;
+  color:var(--theme-accent)!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 20%,transparent),
+    0 0 12px color-mix(in srgb,var(--theme-accent) 14%,transparent)!important;
+}
+.home-header-update-chip.is-update:hover,
+.home-header-update-chip.is-update:focus-visible{
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 24%,transparent),
+    0 0 14px color-mix(in srgb,var(--theme-accent) 20%,transparent),
+    0 2px 10px color-mix(in srgb,var(--theme-accent) 10%,transparent)!important;
+}
+.home-header-update-chip.is-error{
+  border-color:color-mix(in srgb,var(--theme-accent) 30%,#c44 70%)!important;
+  color:color-mix(in srgb,var(--theme-accent) 50%,#e88 50%)!important;
+}
+.home-header-update-chip.is-busy,
+.home-header-update-chip:disabled{opacity:.72;cursor:wait}
+.view-head-home-row--v380 .view-head-home-actions{
+  display:inline-flex!important;align-items:center!important;gap:6px!important;
+  flex:0 0 auto!important;max-width:min(74vw,300px)!important;
+}
+.view-head-home-row--v380 .view-head-home-actions .home-hijri-dayframe{
+  flex:1 1 auto!important;min-width:0!important;
+}
+.view-head-home-row--v380 .view-head-home-actions .home-header-update-chip{
+  flex:0 0 auto!important;
+}
+@media(max-width:390px){
+  .view-head-home-row--v380 .view-head-home-actions{max-width:min(78vw,268px)!important;gap:5px!important}
+  .home-header-update-text{display:none}
+  .home-header-update-chip{padding:3px 7px 4px!important}
 }
 .home-update-btn-v416{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
@@ -14939,7 +15015,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;if(Math.hypot(ev.clientX-swipeStart.x,ev.clientY-swipeStart.y)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeActions=isHome?`<div class="view-head-home-actions">${hijriFrame}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${homeActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const updateBtn=isHome?renderHomeUpdateButton():"";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeActions=isHome?`<div class="view-head-home-actions">${updateBtn}${hijriFrame}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${homeActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -18514,6 +18590,12 @@ function markHomeLastSyncOk(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.s
 function markHomeLastSyncError(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:false}));window.__darHomeSyncError=true}catch(e){}if(typeof updateHomeAppStatusUi==="function")updateHomeAppStatusUi()}
 function formatHomeSyncClock(ts){if(!ts)return"";const d=new Date(ts);if(!Number.isFinite(d.getTime()))return"";return d.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}
 function homeHasNewContentSignal(){return window.__darAppVersionAvailable===true||window.__darNewPostsAvailable===true}
+function homeHeaderUpdateShortLabel(){
+  if(postsSyncBusy)return"…";
+  if(window.__darAppVersionAvailable===true||window.__darNewPostsAvailable===true)return"Neu";
+  if(window.__darHomeSyncError)return"Sync";
+  return"Aktualisieren";
+}
 function homeUpdateButtonLabel(){
   if(postsSyncBusy)return"Wird aktualisiert…";
   if(window.__darAppVersionAvailable===true)return"↻ Neue Version laden";
@@ -18523,11 +18605,11 @@ function homeUpdateButtonLabel(){
 }
 function renderHomeUpdateButton(){
   const sync=homeSyncStatusSummary();
-  const cls=["home-update-btn-v416"];
+  const cls=["home-header-update-chip","dar-click-glow","home-update-btn-v416"];
   if(sync.state==="update"||window.__darAppVersionAvailable===true||window.__darNewPostsAvailable===true)cls.push("is-update");
   if(sync.state==="error")cls.push("is-error");
   if(sync.state==="busy")cls.push("is-busy");
-  return `<div class="home-update-row-v416"><button type="button" id="homeUpdateBtn" class="${cls.join(" ")}" aria-label="App aktualisieren und Inhalte synchronisieren">${esc(homeUpdateButtonLabel())}</button></div>`;
+  return `<button type="button" id="homeUpdateBtn" class="${cls.join(" ")}" aria-label="${esc(sync.aria)}" title="${esc(sync.line)}"><span class="home-header-update-ico" aria-hidden="true">↻</span><span class="home-header-update-text">${esc(homeHeaderUpdateShortLabel())}</span></button>`;
 }
 function homeSyncStatusSummary(){
   if(postsSyncBusy)return{line:"Inhalte werden synchronisiert…",state:"busy",aria:"Synchronisierung läuft"};
@@ -18577,7 +18659,11 @@ function updateHomeAppStatusUi(){
     syncBtn.classList.toggle("is-update",sync.state==="update"||window.__darAppVersionAvailable===true||window.__darNewPostsAvailable===true);
     syncBtn.classList.toggle("is-error",sync.state==="error");
     syncBtn.classList.toggle("is-busy",sync.state==="busy");
-    if(!syncBtn.disabled)syncBtn.textContent=homeUpdateButtonLabel();
+    if(!syncBtn.disabled){
+      const textEl=syncBtn.querySelector(".home-header-update-text");
+      if(textEl)textEl.textContent=homeHeaderUpdateShortLabel();
+      else syncBtn.textContent=homeUpdateButtonLabel();
+    }
   }
   const strip=document.getElementById("homePushRemindersStrip");
   if(strip)updateHomePushRemindersSummary();
@@ -18878,7 +18964,7 @@ function initAppCrashGuard(){
 }
 function hardRefreshApp(){
   (async()=>{
-    ["homeUpdateBtn","postHardRefreshBtn"].forEach(id=>{const el=$(id);if(el){el.disabled=true;el.textContent="Wird aktualisiert..."}});
+    ["homeUpdateBtn","postHardRefreshBtn"].forEach(id=>{const el=$(id);if(el){el.disabled=true;const textEl=el.querySelector&&el.querySelector(".home-header-update-text");if(textEl)textEl.textContent="…";else el.textContent="Wird aktualisiert..."}});
     resetTabSwipePreview();ensureBottomNavDock();
     try{if(typeof window.DAR_AUTO_REFRESH?.markVersionUpdatePending==="function")window.DAR_AUTO_REFRESH.markVersionUpdatePending(window.__darRemoteBuildId||"")}catch(e){}
     try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
@@ -18909,14 +18995,14 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v416";
+const APP_BUILD_ID="app-shell-v418";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderHomeUpdateButton()}${renderLibraryHomeFocusTile()}${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
+function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderLibraryHomeFocusTile()}${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
 function renderScholars(){const items=buildScholarCatalog();return`${setPageHeader("Gelehrte","Beiträge nach Imāmen, Ṣaḥābah und frühen Gelehrten","Gelehrte")}<section class="grid-list">${items.length?items.map(s=>listCard(s.label,s.count+" Beiträge","scholar",s.key,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section>`}
