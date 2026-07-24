@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <!-- pages-deploy-stamp:1784899983185 -->
-<!-- workers-deploy-stamp:1784844487885 -->
+<!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v398";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v412";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -3756,7 +3756,7 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
@@ -9725,19 +9725,22 @@ body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
   font-size:var(--measure-quote-size)!important;
   line-height:var(--measure-quote-line)!important;
   font-weight:800!important;
-  display:-webkit-box!important;
-  -webkit-line-clamp:2!important;
-  -webkit-box-orient:vertical!important;
-  overflow:hidden!important;
+  display:block!important;
+  overflow:visible!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  text-overflow:unset!important;
+  white-space:normal!important;
   text-wrap:pretty!important;
 }
 .isnad-speaker{
   color:var(--gold2)!important;
-  white-space:nowrap!important;
-  display:inline!important;
+  white-space:normal!important;
+  display:block!important;
+  margin:0 0 1px!important;
 }
 .isnad-words{
-  display:inline!important;
+  display:block!important;
   text-wrap:pretty!important;
 }
 .isnad-source{
@@ -11654,21 +11657,22 @@ html[data-theme] .isnad-words{
   display:inline!important;
   white-space:normal!important;
 }
-html[data-theme] .isnad-speaker{margin-right:.2em!important}
+html[data-theme] .isnad-speaker{margin-right:0!important;margin-bottom:1px!important}
 @media(min-width:520px){
   html[data-theme] .isnad-quote{
-    white-space:nowrap!important;
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
   }
 }
 @media(max-width:519px){
   html[data-theme] .isnad-quote{
-    display:-webkit-box!important;
-    -webkit-line-clamp:2!important;
-    -webkit-box-orient:vertical!important;
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
+    display:block!important;
+    -webkit-line-clamp:unset!important;
+    line-clamp:unset!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    white-space:normal!important;
   }
 }
 html[data-theme] .isnad-source{
@@ -12035,6 +12039,8 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
   --quran-surface-primary:color-mix(in srgb,var(--card) 88%,var(--gold2) 12%);
   --quran-surface-secondary:color-mix(in srgb,var(--card) 92%,transparent);
   --quran-surface-active:color-mix(in srgb,var(--card) 78%,var(--gold2) 22%);
+  --quran-on-accent:var(--cream);
+  --quran-on-surface:var(--quran-text-secondary);
   --quran-text-primary:var(--premium-title,var(--text));
   --quran-text-secondary:var(--premium-body,var(--cream));
   --quran-text-muted:var(--muted);
@@ -12143,7 +12149,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-sheet-section b{display:block;font-size:11px;margin-bottom:6px;color:var(--quran-text-primary)}
 .qov-sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .qov-btn-primary,.qov-btn-secondary{min-height:44px;border-radius:12px;font-size:12.5px;font-weight:900;cursor:pointer}
-.qov-btn-primary{border:0;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 88%,#fff 12%),color-mix(in srgb,var(--quran-accent-secondary) 82%,#000 18%));color:color-mix(in srgb,var(--bg) 88%,#000)}
+.qov-btn-primary{border:0;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 88%,#fff 12%),color-mix(in srgb,var(--quran-accent-secondary) 82%,#000 18%));color:var(--quran-on-accent,var(--cream))}
 .qov-btn-secondary{border:1px solid var(--quran-line-secondary);background:transparent;color:var(--quran-text-secondary)}
 .qov-btn-primary:disabled{opacity:.45;cursor:not-allowed}
 .qov-direct-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:8px}
@@ -12945,17 +12951,28 @@ body.is-home-route .footer strong{font-size:14px}
 }
 .top-shell.theme-hero-shell .isnad-speaker,
 .top-shell.theme-hero-shell .isnad-words{
-  display:inline!important;
+  display:block!important;
   white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:unset!important;
+}
+.top-shell.theme-hero-shell .isnad-speaker{
+  margin:0 0 1px!important;
+  font-size:clamp(9.5px,2.35vw,10.5px)!important;
+  line-height:1.18!important;
+}
+.top-shell.theme-hero-shell .isnad-words{
+  line-height:1.28!important;
 }
 .top-shell.theme-hero-shell .isnad-source{
   margin-top:3px!important;
   padding-top:0!important;
   font-size:clamp(8px,2.05vw,9px)!important;
   line-height:1.28!important;
-  white-space:nowrap!important;
+  white-space:normal!important;
   overflow:visible!important;
   text-overflow:unset!important;
+  text-wrap:pretty!important;
   opacity:.92!important;
 }
 @media(max-width:390px){
@@ -13049,16 +13066,7 @@ body.is-home-route .footer strong{font-size:14px}
   min-height:40px;padding:8px 10px;font-size:clamp(9.5px,2.1vw,11px);border-radius:12px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;
 }
-.top-shell.theme-hero-shell .isnad-quote{
-  display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
-  margin-top:4px!important;line-height:1.22!important;
-}
-.top-shell.theme-hero-shell .isnad-speaker,.top-shell.theme-hero-shell .isnad-words{display:inline!important;white-space:inherit!important}
-.top-shell.theme-hero-shell .isnad-source{
-  margin-top:4px!important;padding-top:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
-}
 @media(max-width:390px){
-  .top-shell.theme-hero-shell .isnad-quote,.top-shell.theme-hero-shell .isnad-source{white-space:normal!important;text-overflow:unset!important}
   .view-head-home-actions{max-width:min(72vw,240px);gap:6px}
 }
 /* Qurʾān-Übersicht v389 */
@@ -13238,6 +13246,543 @@ html[data-theme="royal"] body.is-quran-overview .qov-page{
   grid-column:auto!important;padding:0 14px!important;white-space:nowrap;
   min-width:max(74px,18vw)!important;
 }
+.qov-btn-primary,.qov-direct-go.qov-btn-primary{
+  border:1px solid color-mix(in srgb,var(--quran-accent-primary) 46%,transparent)!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 90%,#fff 10%),color-mix(in srgb,var(--quran-accent-secondary) 78%,#000 22%))!important;
+  color:var(--quran-on-accent,var(--cream))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 22%,transparent),0 4px 14px color-mix(in srgb,var(--quran-accent-primary) 16%,transparent)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.qov-btn-primary:disabled,.qov-direct-go.qov-btn-primary:disabled{
+  color:var(--quran-on-accent,var(--cream))!important;
+  opacity:.5!important;
+}
+html[data-theme="light"] .qov-page{--quran-on-accent:#2a1a08;}
+html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-go.qov-btn-primary{color:var(--quran-on-accent,#2a1a08)!important;}
+</style>
+<style id="noble-border-refine-v406">
+/* v406 · Edle dünne Ränder, zentrierte Aktions-Buttons, dezentes Hover-Leuchten */
+:root{
+  --noble-accent:var(--glow-accent,var(--gold2,#d6b76a));
+  --noble-line:color-mix(in srgb,var(--noble-accent) 34%,transparent);
+  --noble-line-hover:color-mix(in srgb,var(--noble-accent) 52%,transparent);
+  --noble-glow:0 0 6px color-mix(in srgb,var(--noble-accent) 7%,transparent);
+  --noble-glow-hover:0 0 10px color-mix(in srgb,var(--noble-accent) 13%,transparent);
+  --noble-inset:inset 0 1px 0 color-mix(in srgb,var(--noble-accent) 9%,transparent);
+  --noble-pill-bg:color-mix(in srgb,var(--theme-surface,var(--bg)) 91%,var(--noble-accent) 4%);
+  --noble-card-shadow:0 6px 18px color-mix(in srgb,var(--theme-text,var(--cream)) 4%,transparent);
+}
+html[data-theme="light"]{
+  --noble-pill-bg:color-mix(in srgb,var(--theme-surface,#fff) 95%,var(--noble-accent) 5%);
+  --noble-line:color-mix(in srgb,var(--noble-accent) 30%,transparent);
+}
+
+/* Pill- & Aktions-Buttons: zentriert, symmetrisch, edler Rand */
+.home-v380-text-link,
+.collapse-toggle,
+.current-focus-all,
+.premium-pill:not(.bottom-nav-btn),
+.home-refresh-btn,
+.section-head .collapse-toggle,
+.home-more-section .collapse-toggle,
+.collapsible-head .collapse-toggle{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  gap:.32em!important;
+  border-width:0.5px!important;
+  border-style:solid!important;
+  border-color:var(--noble-line)!important;
+  border-radius:999px!important;
+  box-shadow:var(--noble-glow),var(--noble-inset)!important;
+  padding:5px 12px!important;
+  min-height:30px!important;
+  min-width:0!important;
+  line-height:1.15!important;
+  letter-spacing:.03em!important;
+  margin-left:0!important;
+  transition:border-color .2s ease,box-shadow .22s ease,filter .15s ease!important;
+}
+.collapse-toggle,
+.current-focus-all,
+.premium-pill:not(.bottom-nav-btn),
+.home-refresh-btn{
+  background:var(--premium-pill-bg,var(--noble-pill-bg))!important;
+  color:var(--premium-pill-text,color-mix(in srgb,var(--theme-accent) 90%,var(--theme-text) 10%))!important;
+}
+.home-v380-text-link{
+  background:var(--noble-pill-bg)!important;
+  padding:5px 12px!important;
+  font-size:clamp(10px,2.2vw,11px)!important;
+  font-weight:800!important;
+  color:color-mix(in srgb,var(--theme-accent) 90%,var(--theme-text) 10%)!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  flex-shrink:0!important;
+  cursor:pointer!important;
+}
+.home-v380-text-link:hover,
+.home-v380-text-link:focus-visible,
+.collapse-toggle:hover,
+.collapse-toggle:focus-visible,
+.current-focus-all:hover,
+.current-focus-all:focus-visible,
+.premium-pill:not(.bottom-nav-btn):hover,
+.premium-pill:not(.bottom-nav-btn):focus-visible,
+.home-refresh-btn:hover,
+.home-refresh-btn:focus-visible{
+  border-color:var(--noble-line-hover)!important;
+  box-shadow:var(--noble-glow-hover),var(--noble-inset)!important;
+  filter:brightness(1.04)!important;
+  outline:none!important;
+  text-decoration:none!important;
+}
+
+/* Home-Karten: dünnere Ränder, dezentes Leuchten */
+.home-v380-post-preview,
+.home-v380-lib-card,
+.home-v380-quran-hero,
+.home-v380-app-status,
+.home-v380-search-box{
+  border-width:0.5px!important;
+  border-style:solid!important;
+  border-color:var(--noble-line)!important;
+  box-shadow:var(--noble-card-shadow),var(--noble-glow),var(--noble-inset)!important;
+  transition:border-color .2s ease,box-shadow .22s ease!important;
+}
+.home-v380-post-preview:hover,
+.home-v380-post-preview:focus-visible,
+.home-v380-lib-card:hover,
+.home-v380-lib-card:focus-visible,
+.home-v380-quran-hero:hover,
+.home-v380-quran-hero:focus-visible{
+  border-color:var(--noble-line-hover)!important;
+  box-shadow:var(--noble-card-shadow),var(--noble-glow-hover),var(--noble-inset)!important;
+  outline:none!important;
+}
+.home-v380-post-action,
+.home-v380-lib-card__foot{
+  align-self:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  width:100%!important;
+  padding-right:0!important;
+}
+
+/* App-weite Karten: goldene Linien verfeinern */
+.popular-row,.folder-card,.post-card,.list-card,.dua-card,.series-card,.pinned-card,
+.daily-box,.recommended-box,.current-focus-row,.quran-surah-card,.quran-result-card,
+.feature-card,.ramadan-teaser,.quran-home-teaser,.zakat-home-teaser,.home-refresh-panel,
+.prayer-quick-card,.quiz-home-quick-card,.info-card,.event-card,.stat-card,
+.overview-panel,.direct-pick-panel,.filter-panel,.popular-panel,.profile-box,.book-profile-box,
+.series-box,.pinned-box,.calendar-panel,.home-more-section,.feature-section,
+.home-more-body .series-card.has-icon,.home-more-body .pinned-card.has-icon,
+.home-more-body .overview-compact .stat-card,.current-focus.premium-surface{
+  border-width:0.5px!important;
+  box-shadow:var(--noble-glow),var(--noble-inset),0 8px 20px color-mix(in srgb,#000 16%,transparent)!important;
+}
+.popular-row:hover,.folder-card:hover,.post-card:hover,.list-card:hover,.dua-card:hover,
+.series-card:hover,.pinned-card:hover,.feature-card:hover,.quran-surah-card:hover,
+.quran-result-card:hover,.current-focus-row:hover,.prayer-quick-card:hover,
+.quiz-home-quick-card:hover,.event-card:hover,.stat-card:hover{
+  border-color:var(--noble-line-hover)!important;
+  box-shadow:var(--noble-glow-hover),var(--noble-inset),0 10px 22px color-mix(in srgb,#000 18%,transparent)!important;
+}
+
+/* Icon-Kästchen: dezenter */
+.folder-icon,.popular-rank,.feature-icon,
+.home-more-body .series-card.has-icon .folder-icon,
+.home-more-body .pinned-card.has-icon .folder-icon{
+  border-width:0.5px!important;
+  box-shadow:var(--noble-glow),var(--noble-inset)!important;
+}
+
+/* Kopfzeilen: Aktions-Buttons vertikal mittig */
+.section-head,.home-v380-section-head,.collapsible-head,.current-focus-head{
+  align-items:center!important;
+}
+.section-head .collapse-toggle,
+.collapsible-head .collapse-toggle{
+  margin-left:auto!important;
+}
+</style>
+<style id="home-compact-v407">
+/* v407 · Kein Öffnen-Text, keine Pfeile, kompaktere Karten */
+.home-v380-post-action,.home-v380-lib-card__foot,.home-v380-open-row__action,.home-v380-quran-hero__chevron,
+.current-focus-arrow,.book-library-chevron,.qov-row-chevron,.stats-open-hint{display:none!important}
+.home-v380-post-preview{
+  padding:12px 14px 10px!important;gap:5px!important;
+}
+.home-v380-post-meta{margin-bottom:0!important}
+.home-v380-lib-card{
+  min-height:96px!important;padding:12px 14px 10px!important;gap:6px!important;
+}
+.home-v380-lib-card p{margin-bottom:0!important;-webkit-line-clamp:2}
+.home-v380-open-row{padding:12px 0!important}
+.home-v380-quran-hero--compact{
+  min-height:48px!important;padding:9px 12px!important;
+}
+.home-v380-quran-hero__place{
+  font-family:var(--serif)!important;font-size:clamp(14px,3.4vw,17px)!important;font-weight:800!important;
+  color:color-mix(in srgb,var(--theme-text) 88%,var(--theme-accent) 12%)!important;
+}
+.home-v380-quran-hero__label{
+  font-size:clamp(10px,2.2vw,11px)!important;font-weight:850!important;letter-spacing:.08em;text-transform:uppercase;
+  color:color-mix(in srgb,var(--theme-muted) 70%,var(--theme-accent) 30%)!important;
+}
+.home-v380-lib-grid--slider{
+  display:flex!important;gap:12px!important;overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;padding:2px 2px 4px!important;margin:0 -2px!important;
+}
+.home-v380-lib-grid--slider::-webkit-scrollbar{display:none}
+.home-v380-lib-grid--slider > .home-v380-lib-card{
+  flex:0 0 clamp(78%,82vw,86%)!important;scroll-snap-align:start!important;scroll-snap-stop:always!important;
+}
+@media(min-width:760px){
+  .home-v380-lib-grid--slider > .home-v380-lib-card{flex-basis:min(44%,360px)!important}
+}
+.home-v380-popular-row{grid-template-columns:auto 1fr!important}
+</style>
+<style id="post-reader-unify-v408">
+/* v408 · Beitrag: Titel eine Zeile, Überlieferer mit Goldlinie, ein Rahmen */
+.post-reader-title{
+  gap:6px!important;
+  padding:4px 2px 0!important;
+}
+.post-reader-title h2{
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  max-width:100%!important;
+  font-size:clamp(21px,5.4vw,36px)!important;
+  line-height:1.08!important;
+  letter-spacing:.01em!important;
+}
+.post-reader-speaker{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:8px 10px!important;
+  margin:2px 2px 10px!important;
+  padding:0!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+}
+.post-reader-speaker__label{
+  flex:0 0 auto!important;
+  color:var(--premium-label)!important;
+  text-transform:uppercase!important;
+  letter-spacing:.14em!important;
+  font-size:10px!important;
+  font-weight:900!important;
+}
+.post-reader-speaker__rule{
+  flex:1 1 28px!important;
+  min-width:24px!important;
+  height:1px!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2,var(--theme-accent)) 58%,transparent),transparent 92%)!important;
+  opacity:.95!important;
+}
+.post-reader-speaker__name{
+  flex:0 1 auto!important;
+  color:var(--cream,var(--theme-text))!important;
+  min-width:0!important;
+}
+.post-reader-speaker__said{
+  flex:0 0 auto!important;
+  color:color-mix(in srgb,var(--theme-muted) 72%,var(--theme-text) 28%)!important;
+  font-size:.92em!important;
+  font-weight:650!important;
+}
+.post-reader-speaker .honorific{
+  margin-inline-start:4px!important;
+}
+
+/* Ein edler Rahmen: äußerer Container, innen flush ohne Doppelrand */
+.post-reader-main{
+  border-width:0.5px!important;
+  border-color:color-mix(in srgb,var(--glow-accent,var(--gold2)) 36%,transparent)!important;
+  border-radius:20px!important;
+  padding:clamp(14px,3.6vw,20px)!important;
+  box-shadow:0 0 6px color-mix(in srgb,var(--glow-accent,var(--gold2)) 7%,transparent),inset 0 1px 0 color-mix(in srgb,var(--glow-accent,var(--gold2)) 9%,transparent)!important;
+}
+.post-reader-main > .statement,
+.post-reader .statement,
+.post-reader-main .post-slide-quote,
+:is(.post-reader-main,.post-slides) > .statement{
+  border:none!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0!important;
+}
+.post-reader-main > .post-slides,
+.post-reader-main .post-slides{
+  border:none!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  margin:0!important;
+}
+.post-reader-main .post-slide{
+  padding:0!important;
+  gap:10px!important;
+}
+.post-reader-main .post-key-message{
+  margin-top:12px!important;
+  padding:12px 0 0!important;
+  border-left:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 28%,transparent)!important;
+}
+.post-reader-main .post-key-message h3{
+  margin-bottom:5px!important;
+}
+</style>
+<style id="display-polish-v409">
+/* v409 · Global: Titel geordnet, ein Rahmen, Duʿāʾ 3+3, Gebetsstatus, Qurʾān-Letztstand */
+.post-reader-title h2{
+  white-space:normal!important;
+  overflow:hidden!important;
+  text-overflow:unset!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  text-wrap:balance!important;
+  word-break:normal!important;
+  overflow-wrap:break-word!important;
+  hyphens:auto!important;
+  line-height:1.14!important;
+  max-width:100%!important;
+}
+.post-reader-main{
+  background:color-mix(in srgb,var(--theme-surface,var(--card)) 96%,var(--theme-text,var(--text)) 2%)!important;
+  border-width:.5px!important;
+  border-color:color-mix(in srgb,var(--glow-accent,var(--gold2)) 36%,transparent)!important;
+  box-shadow:0 0 6px color-mix(in srgb,var(--glow-accent,var(--gold2)) 7%,transparent),inset 0 1px 0 color-mix(in srgb,var(--glow-accent,var(--gold2)) 9%,transparent)!important;
+}
+.post-reader-main::before{display:none!important}
+.post-reader-main > .statement,
+.post-reader .post-reader-main .statement,
+.post-reader-main .post-slide-quote,
+html[data-theme] .post-reader-main .statement,
+html[data-theme] .post-reader .post-reader-main .statement{
+  border:none!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0!important;
+  font-size:clamp(18px,4.15vw,23px)!important;
+  line-height:1.58!important;
+  letter-spacing:.01em!important;
+  text-align:left!important;
+}
+.post-reader-main .statement p{margin:0 0 .82em!important}
+.post-reader-main .statement p:last-child{margin-bottom:0!important}
+.post-reader-main .statement em,
+.post-reader-main .statement strong em{
+  color:color-mix(in srgb,var(--gold2,var(--theme-accent)) 72%,var(--theme-text,var(--text)) 28%)!important;
+  font-style:normal!important;
+  text-decoration:none!important;
+}
+html body .share-panel-v11 .share-layout-v13>.share-row-v11.share-row-primary,
+html body .share-panel-v11 .share-layout-v13>.share-row-v11.share-row-secondary,
+html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-primary,
+html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-secondary{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin:0!important;
+}
+@media(max-width:980px){
+  html body .share-panel-v11 .share-layout-v13>.share-row-v11.share-row-primary,
+  html body .share-panel-v11 .share-layout-v13>.share-row-v11.share-row-secondary,
+  html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-primary,
+  html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-secondary{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:520px){
+  html body .share-panel-v11 .share-layout-v13>.share-row-v11.share-row-primary,
+  html body .share-panel-v11 .share-layout-v13>.share-row-v11.share-row-secondary,
+  html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-primary,
+  html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-secondary{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+}
+.header-prayer-hub__status{
+  font-size:clamp(10px,2.35vw,12px)!important;
+  padding-top:clamp(9px,2.1vw,11px)!important;
+  margin-top:clamp(9px,2.1vw,12px)!important;
+  line-height:1.35!important;
+}
+.header-prayer-hub__status>span{gap:4px!important}
+.header-prayer-hub__ico{font-size:.95em!important;opacity:.82!important}
+@media(max-width:430px){
+  .header-prayer-hub__status{font-size:clamp(9.5px,2.2vw,11px)!important}
+}
+.home-v380-quran-hero--compact{
+  justify-content:space-between!important;
+  gap:10px!important;
+}
+.home-v380-quran-hero--compact .home-v380-quran-hero__body{
+  flex-direction:row!important;
+  align-items:center!important;
+  flex:1 1 auto!important;
+  gap:0!important;
+}
+.home-v380-quran-hero--compact .home-v380-quran-hero__label{display:none!important}
+.home-v380-quran-hero--compact .home-v380-quran-hero__place,
+.home-v380-quran-hero__title{
+  margin:0!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(15px,3.65vw,18px)!important;
+  font-weight:800!important;
+  line-height:1.12!important;
+  color:var(--theme-accent)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.home-v380-quran-hero__resume{
+  flex:0 1 min(46%,168px);
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:center;
+  gap:2px;
+  text-align:right;
+  padding-left:8px;
+}
+.home-v380-quran-hero__resume .home-v380-quran-hero__meta,
+.home-v380-quran-hero__resume .home-v380-quran-hero__when{
+  margin:0!important;
+  font-size:clamp(9.5px,2.15vw,11px)!important;
+  font-weight:700!important;
+  line-height:1.28!important;
+  color:color-mix(in srgb,var(--theme-muted) 78%,var(--theme-text) 22%)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  max-width:100%!important;
+}
+.home-v380-quran-hero__resume .home-v380-quran-hero__when{
+  font-size:clamp(8.8px,2vw,10px)!important;
+  opacity:.9!important;
+}
+@media(max-width:390px){
+  .home-v380-quran-hero__resume{flex-basis:min(52%,150px)}
+}
+</style>
+<style id="dua-share-flat-v410">
+/* v410 · Duʿāʾ/Beitrag teilen: flaches 3×2-Raster — umgeht share-row-v11 Mobile-Konflikte */
+.share-flat-v410{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.share-flat-v410 .share-btn{
+  min-height:42px!important;
+  min-width:0!important;
+  width:auto!important;
+  padding:7px 5px!important;
+  font-size:10.5px!important;
+  border-radius:15px!important;
+  gap:5px!important;
+  grid-column:auto!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.share-flat-v410 .share-btn svg{
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px!important;
+}
+.share-flat-v410 .share-btn span{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.share-flat-v410 .share-btn:not(.tg):not(.wa):not(.ig){
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))!important;
+  border-color:var(--line2)!important;
+}
+@media(max-width:700px){
+  .share-flat-v410{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+  .share-flat-v410 .share-btn{
+    min-height:40px!important;
+    grid-column:auto!important;
+    width:auto!important;
+  }
+}
+@media(max-width:390px){
+  .share-flat-v410{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+  .share-flat-v410 .share-btn{min-height:38px!important;padding:6px 3px!important;font-size:9.5px!important}
+  .share-flat-v410 .share-btn svg{width:18px!important;height:18px!important;flex-basis:18px!important}
+}
+</style>
+<style id="home-sync-chip-visible-v411">
+/* v411 · Sync-Chip unter Startseite — nicht mehr vom Hijri-Kalender verdrängt */
+.view-head-home--v380 .view-head-home-chips{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex-wrap:wrap!important;
+  gap:8px!important;
+  width:100%!important;
+  margin-top:10px!important;
+}
+.view-head-home--v380 .view-head-home-chips .home-header-sync-chip{
+  flex:0 0 auto!important;
+  min-height:34px!important;
+  padding:7px 12px!important;
+  font-size:clamp(10px,2.25vw,11px)!important;
+}
+.view-head-home--v380 .view-head-home-chips .home-account-slot{
+  margin-left:auto!important;
+}
+.view-head-home--v380 .view-head-home-actions{
+  max-width:min(68vw,260px)!important;
+}
+</style>
+<style id="home-libraries-grid-v412">
+/* v412 · Bibliotheken: festes 2-Spalten-Raster überall, kein empfindlicher Swipe-Slider */
+.home-v380-lib-grid.home-v380-lib-grid--fixed,
+.home-v380-lib-grid--fixed{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  overflow:visible!important;
+  scroll-snap-type:none!important;
+  padding:0!important;
+  margin:0!important;
+}
+.home-v380-lib-grid.home-v380-lib-grid--fixed > .home-v380-lib-card,
+.home-v380-lib-grid--fixed > .home-v380-lib-card{
+  flex:none!important;
+  width:auto!important;
+  min-height:96px!important;
+  touch-action:manipulation!important;
+  scroll-snap-align:unset!important;
+  scroll-snap-stop:normal!important;
+}
+@media(max-width:359px){
+  .home-v380-lib-grid.home-v380-lib-grid--fixed,
+  .home-v380-lib-grid--fixed{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 <body class="has-bottom-nav">
@@ -13257,7 +13802,7 @@ html[data-theme="royal"] body.is-quran-overview .qov-page{
       <div id="headerPrayerStatus" class="header-prayer-hub" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen"></div>
       <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro">Willkommen bei <strong>DAR AL TAWḤID</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</div></div>
     </header>
-    <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span> <span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.</div></section>
+    <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">🖋️ Ibn Sīrīn sagte:</span><span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.">📝 Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.</div></section>
   </section>
   <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Beitrag teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
   <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Neue Beiträge anzeigen">
@@ -13603,13 +14148,13 @@ function formatQuranProgressRelative(value){const ts=Date.parse(String(value||""
 function renderQuranContinueBanner(){return ""}
 function renderQuranOverviewProgressCard(){return ""}
 function quranOverviewFilteredSurahs(){if(!quranMeta)return [];let rows=quranMeta.surahs.slice();const filter=getQuranOverviewFilter();const favs=new Set(getQuranSurahFavorites());if(filter==="meccan")rows=rows.filter(s=>s.type!=="medinan");else if(filter==="medinan")rows=rows.filter(s=>s.type==="medinan");else if(filter==="favorites")rows=rows.filter(s=>favs.has(s.id));const sort=getQuranOverviewSort();const opened=getJson(QURAN_SURAH_LAST_OPENED_KEY,{})||{};if(sort==="alpha")rows.sort((a,b)=>String(a.transliteration).localeCompare(String(b.transliteration),"de"));else if(sort==="recent")rows.sort((a,b)=>(Date.parse(opened[String(b.id)]||0)||0)-(Date.parse(opened[String(a.id)]||0)||0));else if(sort==="favorites")rows.sort((a,b)=>(favs.has(b.id)?1:0)-(favs.has(a.id)?1:0)||a.id-b.id);return rows}
-function quranSurahCard(s){const prog=getPreferredQuranProgress();const isLast=prog&&Number(prog.surahNumber)===Number(s.id);const fav=isQuranSurahFavorite(s.id);const opened=String(currentRoute.view)==="quran-surah"&&Number(String(currentRoute.value||"").split("/")[0])===Number(s.id);const q=normalizeQuranSearchText(quranSearchQuery||"");const isHit=!!q&&normalizeQuranSearchText([s.transliteration,s.name,s.type,String(s.id)].join(" ")).includes(q);const num=String(s.id).padStart(2,"0");const indicators=[fav?'<span class="qov-row-indicators" title="Favorit" aria-label="Favorit">★</span>':""].filter(Boolean).join("");return `<button type="button" class="qov-row quran-surah-card${isLast?" is-last-read":""}${opened?" is-active":""}${isHit?" is-search-hit":""}" data-nav="quran-surah" data-value="${s.id}" data-qov-surah="${s.id}" aria-label="Sūrah ${esc(s.transliteration)} öffnen"><span class="qov-row-num quran-num" aria-hidden="true">${num}</span><span class="qov-row-main"><h3>${esc(s.transliteration)}</h3><span class="qov-row-meta">${s.total_verses} Āyāt · ${quranTypeLabel(s.type)}</span></span><span class="qov-row-side"><span class="qov-row-ar" lang="ar" dir="rtl">${esc(s.name)}</span>${indicators}<span class="qov-row-chevron" aria-hidden="true">›</span></span></button>`}
+function quranSurahCard(s){const prog=getPreferredQuranProgress();const isLast=prog&&Number(prog.surahNumber)===Number(s.id);const fav=isQuranSurahFavorite(s.id);const opened=String(currentRoute.view)==="quran-surah"&&Number(String(currentRoute.value||"").split("/")[0])===Number(s.id);const q=normalizeQuranSearchText(quranSearchQuery||"");const isHit=!!q&&normalizeQuranSearchText([s.transliteration,s.name,s.type,String(s.id)].join(" ")).includes(q);const num=String(s.id).padStart(2,"0");const indicators=[fav?'<span class="qov-row-indicators" title="Favorit" aria-label="Favorit">★</span>':""].filter(Boolean).join("");return `<button type="button" class="qov-row quran-surah-card${isLast?" is-last-read":""}${opened?" is-active":""}${isHit?" is-search-hit":""}" data-nav="quran-surah" data-value="${s.id}" data-qov-surah="${s.id}" aria-label="Sūrah ${esc(s.transliteration)} öffnen"><span class="qov-row-num quran-num" aria-hidden="true">${num}</span><span class="qov-row-main"><h3>${esc(s.transliteration)}</h3><span class="qov-row-meta">${s.total_verses} Āyāt · ${quranTypeLabel(s.type)}</span></span><span class="qov-row-side"><span class="qov-row-ar" lang="ar" dir="rtl">${esc(s.name)}</span>${indicators}</span></button>`}
 let qovLastFocusEl=null;
 let qovDirectSheetDraft=null;
 function renderQuranQuickPick(){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}">${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="qov-direct qov-direct--inline qov-direct--compact" aria-label="Sūrah oder Āyah direkt öffnen"><div class="qov-direct-head qov-direct-head--compact"><span class="qov-direct-label">Sūrah oder Āyah direkt öffnen</span></div><div class="qov-direct-grid qov-direct-grid--compact"><select id="quranQuickSurah" class="direct-pick" aria-label="Sūrah wählen"><option value="">Sūrah</option>${options}</select><select id="quranQuickAyah" class="direct-pick" aria-label="Āyah wählen" disabled><option value="">Āyah</option></select><button id="quranQuickGo" class="qov-btn-primary qov-direct-go" type="button" disabled>Öffnen</button></div></section>`}
 function renderQuranDirectOpenSheet(){if(!quranMeta)return "";const draft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${String(draft.surah)===String(s.id)?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");const meta=draft.surah?quranSurahMeta(Number(draft.surah)):null;const ayahOpts=meta?quranAyahOptions(meta.total_verses,draft.ayah):"<option value=\"\">Āyah</option>";const valid=Number(draft.surah)>=1&&Number(draft.surah)<=114&&(!draft.ayah||Number(draft.ayah)>=1&&meta&&Number(draft.ayah)<=meta.total_verses);return `<div class="qov-sheet-backdrop" id="qovDirectBackdrop" data-qov-direct-backdrop role="presentation"><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovDirectTitle" id="qovDirectSheet"><div class="qov-sheet-head"><h3 id="qovDirectTitle">Direkt öffnen</h3><button type="button" class="qov-icon-btn" data-qov-direct-close aria-label="Schließen">×</button></div><div class="qov-sheet-section"><label class="visually-hidden" for="quranQuickSurah">Sūrah</label><div class="qov-direct-grid"><select id="quranQuickSurah" class="direct-pick" aria-label="Sūrah wählen"><option value="">Sūrah</option>${options}</select><select id="quranQuickAyah" class="direct-pick" aria-label="Āyah wählen" ${meta?"":"disabled"}>${ayahOpts}</select><input id="qovDirectRef" type="text" inputmode="text" placeholder="z. B. 2:255" value="${esc(draft.ref||"")}" aria-label="Referenz eingeben"><button id="quranQuickGo" class="qov-btn-primary" type="button" ${valid?"":"disabled"}>Öffnen</button></div></div><div class="qov-sheet-actions"><button type="button" class="qov-btn-secondary" data-qov-direct-close>Abbrechen</button></div></section></div>`}
 function renderQuranToolsSheet(){return `<div class="qov-sheet-backdrop" id="qovToolsBackdrop" data-qov-tools-backdrop role="presentation"><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovToolsTitle"><div class="qov-sheet-head"><h3 id="qovToolsTitle">Werkzeuge</h3><button type="button" class="qov-icon-btn" data-qov-tools-close aria-label="Schließen">×</button></div><div class="qov-tools-list"><button type="button" class="qov-tools-item" data-qov-tools-display>Darstellung &amp; Schrift</button><button type="button" class="qov-tools-item" data-nav="quran-topic" data-value="saved">Notizen &amp; Merkliste</button><button type="button" class="qov-tools-item" data-qov-tools-favorites>Favoriten anzeigen</button><button type="button" class="qov-tools-item" data-nav="quran-topic">Themen</button></div></section></div>`}
-function renderQuranOverviewHeader(totalAyat){return `<header class="qov-header" id="qovHeader"><div class="qov-header-row"><button type="button" class="qov-back" id="qovBackBtn" aria-label="Zurück">←</button><div class="qov-title-wrap"><h1 class="qov-title">Qurʾān</h1><p class="qov-subtitle">114 Sūren · ${totalAyat} Āyāt</p></div><div class="qov-icon-actions"><button type="button" class="qov-icon-btn" id="qovSearchBtn" aria-label="Suche fokussieren">🔍</button><button type="button" class="qov-icon-btn" id="qovToolsBtn" aria-label="Werkzeuge" aria-haspopup="dialog">⋯</button></div></div></header>`}
+function renderQuranOverviewHeader(totalAyat){return `<header class="qov-header" id="qovHeader"><div class="qov-header-row"><button type="button" class="qov-back" id="qovBackBtn" aria-label="Zurück">←</button><div class="qov-title-wrap"><h1 class="qov-title">Qurʾān</h1><p class="qov-subtitle">114 Sūren · ${totalAyat} Āyāt</p></div></div></header>`}
 function renderQuranResumeCard(){const prog=getPreferredQuranProgress();if(!prog||!quranSurahMeta(prog.surahNumber)){return `<section class="qov-resume" aria-label="Einstieg"><button type="button" class="qov-resume-card qov-resume-card--compact dar-click-glow" data-quran-continue="1:1"><span class="qov-resume-inner qov-resume-inner--compact"><span class="qov-resume-line">Qurʾān lesen · Sūrah auswählen</span></span></button></section>`}const meta=quranSurahMeta(prog.surahNumber);if(!meta)return `<section class="qov-resume" aria-label="Weiterlesen"><button type="button" class="qov-resume-card qov-resume-card--compact dar-click-glow" data-quran-continue="1:1"><span class="qov-resume-inner qov-resume-inner--compact"><span class="qov-resume-line">Qurʾān weiterlesen · Neu beginnen</span></span></button></section>`;const ay=Math.max(1,Math.min(Number(prog.ayahNumber)||1,meta.total_verses));return `<section class="qov-resume" aria-label="Weiterlesen"><button type="button" class="qov-resume-card qov-resume-card--compact dar-click-glow" data-quran-continue="${esc(prog.surahNumber)}:${esc(ay)}" aria-label="Qurʾān weiterlesen: Sūrat ${esc(meta.transliteration)} ${ay}"><span class="qov-resume-inner qov-resume-inner--compact"><span class="qov-resume-line">Qurʾān weiterlesen · Sūrat ${esc(meta.transliteration)} ${ay}</span></span></button></section>`}
 function renderQuranOverviewSearch(){const recent=getQuranSearchRecent();const q=String(quranSearchQuery||"");const searchIcon=`<span class="qov-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>`;return `<section class="qov-search-wrap qov-search-panel"><label class="visually-hidden" for="quranSearchInput">Qurʾān durchsuchen</label><div class="qov-search-shell">${searchIcon}<input id="quranSearchInput" class="qov-search search" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(q)}" placeholder="Sūrah, Āyah oder Begriff suchen" aria-label="Sūrah, Āyah oder Begriff suchen"><button type="button" class="qov-search-clear${q?" is-visible":""}" id="qovSearchClear" aria-label="Suche löschen"${q?"":" hidden"}>×</button></div><p class="qov-search-hint">Deutsch · Arabisch · Lautschrift · Begriffe</p><section id="quranSearchBlock" class="qov-search-panel" style="display:none"><div class="section-head"><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section>${recent.length?`<div id="qovSearchRecent" class="qov-recent-row" aria-label="Zuletzt gesucht">${recent.map(t=>`<button type="button" class="qov-recent-chip" data-qov-recent-search="${esc(t)}">${esc(t)}</button>`).join("")}</div>`:""}</section>`}
 function renderQuranOverviewFilters(){const f=getQuranOverviewFilter();const chips=[["all","Alle"],["meccan","Mekkanisch"],["medinan","Medinensisch"],["favorites","Favoriten"]];return `<div class="qov-filter-bar"><div class="qov-segment-bar" role="tablist" aria-label="Sūren filtern">${chips.map(([id,label])=>`<button type="button" class="qov-segment-btn${f===id?" active":""}" data-qov-filter="${id}" role="tab" aria-selected="${f===id?"true":"false"}">${label}</button>`).join("")}</div><button type="button" class="qov-sort-btn" id="qovSortBtn" aria-label="Sortierung wechseln">⇅</button></div><div class="qov-list-head">Suren</div>`}
@@ -13618,7 +14163,7 @@ function openQuranDirectSheet(){qovLastFocusEl=document.activeElement;qovDirectS
 function closeQuranDirectSheet(){const mount=$("qovDirectMount");if(mount)mount.innerHTML="";qovDirectSheetDraft=null;document.body.style.overflow="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()}
 function bindQuranDirectSheet(){const backdrop=$("qovDirectBackdrop");const close=()=>closeQuranDirectSheet();backdrop?.addEventListener("click",e=>{if(e.target===backdrop)close()});backdrop?.querySelectorAll("[data-qov-direct-close]").forEach(btn=>btn.addEventListener("click",close));const surah=$("quranQuickSurah");const ayah=$("quranQuickAyah");const ref=$("qovDirectRef");const go=$("quranQuickGo");const sync=()=>{const sid=Number(surah?.value);const meta=sid?quranSurahMeta(sid):null;if(ayah&&meta)ayah.innerHTML=quranAyahOptions(meta.total_verses,ayah.value);if(ayah)ayah.disabled=!meta;const ay=Number(ayah?.value)||0;const ok=sid>=1&&sid<=114&&(!ay||meta&&ay>=1&&ay<=meta.total_verses);if(go)go.disabled=!ok};if(surah){surah.onchange=()=>{qovDirectSheetDraft={surah:surah.value,ayah:"",ref:ref?.value||""};sync()};sync()}if(ayah)ayah.onchange=sync;if(ref){ref.oninput=()=>{const parsed=quranSearchParseRef(ref.value);if(parsed){surah.value=String(parsed.surah);sync();if(ayah)ayah.value=String(parsed.ayah||"")}sync()}}if(go){go.onclick=()=>{const sid=Number(surah?.value);if(!sid)return;const ay=Number(ayah?.value)||1;const meta=quranSurahMeta(sid);if(meta&&ay>meta.total_verses)return;closeQuranDirectSheet();openQuranSurah(sid,ay)}};backdrop?.querySelector("#qovDirectSheet")?.focus();const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
 function openQuranToolsSheet(){qovLastFocusEl=document.activeElement;const mount=$("qovToolsMount");if(!mount)return;mount.innerHTML=renderQuranToolsSheet();const close=()=>{mount.innerHTML="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()};$("qovToolsBackdrop")?.addEventListener("click",e=>{if(e.target===$("qovToolsBackdrop"))close()});mount.querySelectorAll("[data-qov-tools-close]").forEach(btn=>btn.addEventListener("click",close));mount.querySelector("[data-qov-tools-display]")?.addEventListener("click",()=>{close();openQuranDisplaySheet()});mount.querySelector("[data-qov-tools-favorites]")?.addEventListener("click",()=>{close();setQuranOverviewFilter("favorites");render()});mount.querySelectorAll("[data-nav]").forEach(btn=>btn.addEventListener("click",()=>{close();navigate(btn.getAttribute("data-nav"),btn.getAttribute("data-value")||"")}));const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
-function bindQuranOverviewUi(){const header=$("qovHeader");const onScroll=()=>{if(!header)return;header.classList.toggle("is-compact",(window.scrollY||0)>36)};onScroll();window.removeEventListener("scroll",window.__qovScrollFn||(()=>{}));window.__qovScrollFn=onScroll;window.addEventListener("scroll",onScroll,{passive:true});const backBtn=$("qovBackBtn");if(backBtn)bindFastAction(backBtn,()=>goBack());const searchBtn=$("qovSearchBtn");if(searchBtn)bindFastAction(searchBtn,()=>{const input=$("quranSearchInput");if(!input)return;input.scrollIntoView({behavior:"smooth",block:"center"});try{input.focus({preventScroll:true})}catch(e){input.focus()}});const toolsBtn=$("qovToolsBtn");if(toolsBtn)bindFastAction(toolsBtn,()=>openQuranToolsSheet());const clearBtn=$("qovSearchClear");if(clearBtn)bindFastAction(clearBtn,()=>{const input=$("quranSearchInput");if(!input)return;input.value="";quranSearchQuery="";input.dispatchEvent(new Event("input",{bubbles:true}));input.focus()});document.querySelectorAll("[data-qov-filter]").forEach(btn=>{btn.onclick=()=>{setQuranOverviewFilter(btn.getAttribute("data-qov-filter"));render()}});const sortBtn=$("qovSortBtn");if(sortBtn)bindFastAction(sortBtn,()=>{const order=["order","alpha","recent","favorites"];const cur=getQuranOverviewSort();const next=order[(order.indexOf(cur)+1)%order.length];setQuranOverviewSort(next);render()});document.querySelectorAll("[data-qov-recent-search]").forEach(btn=>{btn.onclick=()=>{const input=$("quranSearchInput");if(!input)return;input.value=btn.getAttribute("data-qov-recent-search")||"";quranSearchQuery=input.value;input.dispatchEvent(new Event("input",{bubbles:true}))}});document.querySelectorAll("[data-qov-surah]").forEach(card=>{card.addEventListener("contextmenu",ev=>{ev.preventDefault();const id=card.getAttribute("data-qov-surah");quranSurahContextMenu(id,ev.clientX,ev.clientY)})});const input=$("quranSearchInput");if(input){const syncClear=()=>{const btn=$("qovSearchClear");if(!btn)return;const on=!!String(input.value||"").trim();btn.classList.toggle("is-visible",on);btn.hidden=!on};syncClear();input.addEventListener("input",syncClear)}}
+function bindQuranOverviewUi(){const header=$("qovHeader");const onScroll=()=>{if(!header)return;header.classList.toggle("is-compact",(window.scrollY||0)>36)};onScroll();window.removeEventListener("scroll",window.__qovScrollFn||(()=>{}));window.__qovScrollFn=onScroll;window.addEventListener("scroll",onScroll,{passive:true});const backBtn=$("qovBackBtn");if(backBtn)bindFastAction(backBtn,()=>goBack());const clearBtn=$("qovSearchClear");if(clearBtn)bindFastAction(clearBtn,()=>{const input=$("quranSearchInput");if(!input)return;input.value="";quranSearchQuery="";input.dispatchEvent(new Event("input",{bubbles:true}));input.focus()});document.querySelectorAll("[data-qov-filter]").forEach(btn=>{btn.onclick=()=>{setQuranOverviewFilter(btn.getAttribute("data-qov-filter"));render()}});const sortBtn=$("qovSortBtn");if(sortBtn)bindFastAction(sortBtn,()=>{const order=["order","alpha","recent","favorites"];const cur=getQuranOverviewSort();const next=order[(order.indexOf(cur)+1)%order.length];setQuranOverviewSort(next);render()});document.querySelectorAll("[data-qov-recent-search]").forEach(btn=>{btn.onclick=()=>{const input=$("quranSearchInput");if(!input)return;input.value=btn.getAttribute("data-qov-recent-search")||"";quranSearchQuery=input.value;input.dispatchEvent(new Event("input",{bubbles:true}))}});document.querySelectorAll("[data-qov-surah]").forEach(card=>{card.addEventListener("contextmenu",ev=>{ev.preventDefault();const id=card.getAttribute("data-qov-surah");quranSurahContextMenu(id,ev.clientX,ev.clientY)})});const input=$("quranSearchInput");if(input){const syncClear=()=>{const btn=$("qovSearchClear");if(!btn)return;const on=!!String(input.value||"").trim();btn.classList.toggle("is-visible",on);btn.hidden=!on};syncClear();input.addEventListener("input",syncClear)}}
 function renderQuranDisplaySheet(){const settings=quranDisplaySheetDraft||{view:getQuranViewSettings(),tr:getQuranTrMode(),spacing:getQuranLineSpacing(),arabic:getFontScale("quranArabicScale"),trans:getFontScale("quranTransliterationScale"),german:getFontScale("quranGermanScale")};const mode=settings.tr;const info=QURAN_TR_MODES[mode]||QURAN_TR_MODES.readable;const previewAr="رَبَّنَا تَقَبَّلْ مِنَّا";const previewTr=quranVerseTr({tr:"Rabbana taqabbal minna",tr_readable:"Rabbana taqabbal minna",tr_academic:"Rabbana taqabbal minna"},mode);return `<div class="qov-sheet-backdrop" id="qovDisplayBackdrop" data-qov-display-backdrop><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovDisplayTitle"><div class="qov-sheet-head"><h3 id="qovDisplayTitle">Darstellung</h3><button type="button" class="qov-icon-btn" data-qov-display-close aria-label="Schließen">×</button></div><div class="qov-sheet-section"><b>Textbestandteile</b><div class="qov-toggle-row"><label><input type="checkbox" data-qov-draft-view="showArabic"${settings.view.showArabic?" checked":""}> Arabisch anzeigen</label><label><input type="checkbox" data-qov-draft-view="showTransliteration"${settings.view.showTransliteration?" checked":""}> Lautschrift anzeigen</label><label><input type="checkbox" data-qov-draft-view="showGerman"${settings.view.showGerman?" checked":""}> Deutsch anzeigen</label></div></div><div class="qov-sheet-section"><b>Lautschriftart</b><div class="qov-seg">${Object.entries(QURAN_TR_MODES).map(([key,m])=>`<button type="button" data-qov-draft-tr="${key}" class="${mode===key?"active":""}">${esc(m.label)}</button>`).join("")}</div><p class="qov-seg-note" id="qovTrNote">${esc(info.hint)}</p></div><div class="qov-sheet-section"><b>Schriftgröße</b><div class="font-range-shell"><input class="font-range" type="range" min="0" max="10" step="1" value="${settings.arabic}" data-qov-draft-scale="quranArabicScale" aria-label="Arabisch"><input class="font-range" type="range" min="0" max="10" step="1" value="${settings.trans}" data-qov-draft-scale="quranTransliterationScale" aria-label="Lautschrift"><input class="font-range" type="range" min="0" max="10" step="1" value="${settings.german}" data-qov-draft-scale="quranGermanScale" aria-label="Deutsch"></div><div class="qov-preview"><div class="qov-preview-ar" data-qov-preview-ar>${esc(previewAr)}</div><div class="qov-preview-tr" data-qov-preview-tr>${esc(previewTr)}</div><div class="qov-preview-de" data-qov-preview-de>Unser Herr, nimm es von uns an.</div></div></div><div class="qov-sheet-section"><b>Zeilenabstand</b><div class="qov-seg">${[["compact","Kompakt"],["standard","Standard"],["generous","Großzügig"]].map(([id,label])=>`<button type="button" data-qov-draft-spacing="${id}" class="${settings.spacing===id?"active":""}">${label}</button>`).join("")}</div></div><div class="qov-sheet-section"><b>Übersetzung</b><p class="qov-search-hint">Bubenheim &amp; Elyas</p></div><div class="qov-sheet-actions"><button type="button" class="qov-btn-secondary" data-qov-display-reset>Zurücksetzen</button><button type="button" class="qov-btn-primary" data-qov-display-apply>Anwenden</button></div></section></div>`}
 function quranAyahOptions(total,selected=0){const n=Number(total)||0;let html=`<option value="">Ayah</option>`;for(let i=1;i<=n;i++)html+=`<option value="${i}"${Number(selected)===i?" selected":""}>${i}</option>`;return html}
 function renderQuranJumpBar(surahId,totalVerses,selectedAyah=0){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${s.id===surahId?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="quran-jump-bar"><select id="quranJumpSurah" class="direct-pick">${options}</select><select id="quranJumpAyah" class="direct-pick">${quranAyahOptions(totalVerses,selectedAyah)}</select><button id="quranJumpBtn" class="quran-jump-btn" type="button">Öffnen</button></section>`}
@@ -13785,6 +14330,7 @@ function quranCurrentSurahContext(){if(currentRoute.view!=="quran-surah")return 
 function saveQuranAutoFromVisible(force){const ctx=quranCurrentSurahContext();if(!ctx)return;const hit=visibleQuranAyahEntry();if(!hit||(!force&&hit.ratio<0.5))return;saveQuranAutomaticProgress({...ctx,ayahNumber:hit.ayahNumber,scrollOffset:hit.scrollOffset},{force:!!force,allowWhileManual:false})}
 function clearQuranProgressObserver(){if(quranProgressAutoTimer){clearTimeout(quranProgressAutoTimer);quranProgressAutoTimer=null}quranProgressCandidateKey="";quranProgressCandidateSince=0;if(quranProgressObserver){quranProgressObserver.disconnect();quranProgressObserver=null}quranProgressVisibilityMap=new Map()}
 function refreshQuranAutoCandidate(){const ranked=[...quranProgressVisibilityMap.entries()].sort((a,b)=>b[1]-a[1]);const best=ranked[0];if(!best||best[1]<0.5){quranProgressCandidateKey="";if(quranProgressAutoTimer){clearTimeout(quranProgressAutoTimer);quranProgressAutoTimer=null}return}if(quranProgressCandidateKey===best[0])return;quranProgressCandidateKey=best[0];quranProgressCandidateSince=Date.now();if(quranProgressAutoTimer)clearTimeout(quranProgressAutoTimer);quranProgressAutoTimer=setTimeout(()=>{const ratio=quranProgressVisibilityMap.get(quranProgressCandidateKey)||0;if(ratio<0.5)return;saveQuranAutoFromVisible(false)},2300)}
+function initQuranProgressObserver(){clearQuranProgressObserver();if(currentRoute.view!=="quran-surah")return;const settings=getQuranReadingSettings();if(settings.automaticProgressEnabled===false)return;const nodes=[...document.querySelectorAll(".quran-ayah[id^='ayah-']")];if(!nodes.length)return;quranProgressObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{const id=entry.target?.id||"";if(!id)return;quranProgressVisibilityMap.set(id,entry.intersectionRatio||0)});refreshQuranAutoCandidate()},{threshold:[0,0.2,0.5,0.75,1]});nodes.forEach(node=>quranProgressObserver.observe(node))}
 function quranSurahContextMenu(id,x,y){const fav=isQuranSurahFavorite(id);const choice=String(prompt(`Sūrah ${id}\n1 = ${fav?"Favorit entfernen":"Als Favorit speichern"}\n2 = Ab Āyah öffnen\n3 = Teilen`,"")||"").trim();if(choice==="1"){toggleQuranSurahFavorite(id);render();return}if(choice==="2"){const ay=Number(prompt("Āyah-Nummer:","1"));const meta=quranSurahMeta(id);if(meta&&ay>=1&&ay<=meta.total_verses)openQuranSurah(id,ay);return}if(choice==="3"){const meta=quranSurahMeta(id);const url=`${location.origin}${location.pathname}#quran-surah/${id}`;const text=`${meta?.transliteration||"Sūrah"} (${id})\n${url}`;navigator.share?.({title:meta?.transliteration||"Qurʾān",text,url}).catch(()=>navigator.clipboard?.writeText(text))}}
 function openQuranDisplaySheet(){quranDisplaySheetDraft={view:getQuranViewSettings(),tr:getQuranTrMode(),spacing:getQuranLineSpacing(),arabic:getFontScale("quranArabicScale"),trans:getFontScale("quranTransliterationScale"),german:getFontScale("quranGermanScale")};const mount=$("qovDisplayMount");if(!mount)return;mount.innerHTML=renderQuranDisplaySheet();bindQuranDisplaySheet()}
 function closeQuranDisplaySheet(){quranDisplaySheetDraft=null;const mount=$("qovDisplayMount");if(mount)mount.innerHTML=""}
@@ -13962,7 +14508,7 @@ function trackDuaShare(id){const d=DUAS.find(x=>x.id===id);trackAnalytics("dua_s
 function trackCurrentRoute(){if(currentRoute.view==="statistik")return;const r=currentRoute;if(r.view==="post"){const post=posts.find(p=>String(p.id)===String(r.value));trackAnalytics("post_view",{contentType:"post",contentId:r.value,contentTitle:post?.title})}else if(r.view==="dua"){const d=DUAS.find(x=>x.id===r.value);trackAnalytics("dua_view",{contentType:"dua",contentId:r.value,contentTitle:d?.title})}else{trackAnalytics("page_view",{contentType:"page",contentId:r.view,contentTitle:r.view})}}
 function statsTypeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":"Seite"}
 function cleanStatsTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
-function statsRankCard(row,idx){const nav=row.content_type==="post"?"post":row.content_type==="dua"?"dua":"";const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);const title=cleanStatsTitle(row.content_title||row.content_id);const attrs=nav?` data-nav="${nav}" data-value="${esc(row.content_id)}" role="button" tabindex="0"`:"";return`<article class="stats-rank-card"${attrs}><div class="stats-rank-num">${idx+1}</div><div class="stats-rank-body"><div class="stats-rank-top"><span class="stats-type-badge">${esc(statsTypeLabel(row.content_type))}</span>${nav?`<span class="stats-open-hint">Tippen zum Öffnen →</span>`:""}</div><h3 class="stats-rank-title">${esc(title)}</h3><div class="stats-rank-metrics"><span class="stats-metric-pill">👁 ${views} gelesen</span><span class="stats-metric-pill">↗ ${shares} geteilt</span><span class="stats-metric-pill">♡ ${saves} gespeichert</span></div></div></article>`}
+function statsRankCard(row,idx){const nav=row.content_type==="post"?"post":row.content_type==="dua"?"dua":"";const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);const title=cleanStatsTitle(row.content_title||row.content_id);const attrs=nav?` data-nav="${nav}" data-value="${esc(row.content_id)}" role="button" tabindex="0"`:"";return`<article class="stats-rank-card"${attrs}><div class="stats-rank-num">${idx+1}</div><div class="stats-rank-body"><div class="stats-rank-top"><span class="stats-type-badge">${esc(statsTypeLabel(row.content_type))}</span></div><h3 class="stats-rank-title">${esc(title)}</h3><div class="stats-rank-metrics"><span class="stats-metric-pill">👁 ${views} gelesen</span><span class="stats-metric-pill">↗ ${shares} geteilt</span><span class="stats-metric-pill">♡ ${saves} gespeichert</span></div></div></article>`}
 async function loadStatsPanel(){const el=$("statsDashboard");if(!el)return;if(!hasSupabaseCfg()){el.innerHTML=`<div class="stats-empty">Supabase ist noch nicht eingerichtet.</div>`;return}try{const data=await fetchAnalyticsDashboard();const live=data.live||{};const totals=(data.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua").sort((a,b)=>(Number(b.views||0)+Number(b.shares||0)+Number(b.saves||0))-(Number(a.views||0)+Number(a.shares||0)+Number(a.saves||0)));el.innerHTML=`<div class="stats-dashboard"><div class="stats-hero-grid"><div class="stats-hero-card accent"><b>Jetzt online</b><span>${Number(live.live_now||0)}</span><small>letzte 5 Minuten</small></div><div class="stats-hero-card"><b>Heute Besucher</b><span>${Number(live.today_sessions||0)}</span><small>einzigartige Sitzungen</small></div></div><div class="stats-kpi-grid"><div class="stats-kpi-card"><b>Heute Aufrufe</b><span>${Number(live.today_views||0)}</span><small>Seiten + Beiträge</small></div><div class="stats-kpi-card"><b>Heute geteilt</b><span>${Number(live.today_shares||0)}</span><small>Beiträge + Duʿāʾ</small></div><div class="stats-kpi-card"><b>Heute gespeichert</b><span>${Number(live.today_saves||0)}</span><small>Beiträge</small></div><div class="stats-kpi-card"><b>Einträge gesamt</b><span>${totals.length}</span><small>in der Liste</small></div></div><section class="stats-list-section"><div class="stats-section-head"><h3>Top Inhalte</h3><span>${totals.length} Einträge · tippen zum Öffnen</span></div><div class="stats-rank-list">${totals.length?totals.map((r,i)=>statsRankCard(r,i)).join(""):`<div class="stats-empty">Noch keine Beitrags-Daten. Öffne Beiträge und tippe teilen oder speichern.</div>`}</div></section><div class="stats-meta">Aktualisiert: ${esc(new Date().toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div></div>`;bindEvents()}catch(e){el.innerHTML=`<div class="stats-empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}}
 function startStatsRefresh(){stopStatsRefresh();loadStatsPanel();statsRefreshTimer=setInterval(loadStatsPanel,30000)}
 function renderStats(){if(!isStatsAuthed()){return`${setHeader("Statistik","Nur für Admin-Zugang.","🔒")}<section class="stats-login"><input id="statsPinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort"><button id="statsPinBtn" type="button">Statistik öffnen</button><div class="stats-meta">Direktlink: <strong>#statistik</strong> · Login bleibt gespeichert.</div></section>`}return`${setHeader("Live-Statistik","Übersichtliche Auswertung – jeder Eintrag ist antippbar und öffnet den Beitrag oder die Duʿāʾ.","📊")}<div id="statsDashboard"><div class="stats-empty">Statistik wird geladen…</div></div><div class="stats-meta"><button id="statsLogoutBtn" type="button" class="premium-pill">Admin abmelden</button></div>`}
@@ -14196,10 +14742,10 @@ const restoreScrollPosition=getNavScroll;
 const setActiveTab=updateBottomNav;
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
-function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
+function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;if(Math.hypot(ev.clientX-swipeStart.x,ev.clientY-swipeStart.y)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const syncChip=isHome&&typeof renderHomeHeaderSyncChip==="function"?renderHomeHeaderSyncChip():"";const homeActions=isHome?`<div class="view-head-home-actions">${hijriFrame}${syncChip}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${homeActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const syncChip=isHome&&typeof renderHomeHeaderSyncChip==="function"?renderHomeHeaderSyncChip():"";const homeActions=isHome?`<div class="view-head-home-actions">${hijriFrame}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${homeActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips>${syncChip}<span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -14207,7 +14753,7 @@ function listCard(title,count,view,value,icon=""){return`<article class="list-ca
 function getBookAuthor(bookName){const direct=posts.find(post=>String(post.book||"")===String(bookName)&&(post.author||post.bookAuthor));if(direct)return direct.author||direct.bookAuthor;const related=posts.find(post=>String(post.book||"")===String(bookName)&&post.scholar);return related?related.scholar:""}
 function bookLibraryItems(){return[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").map(([name,count])=>({name,count,author:getBookAuthor(name)})).sort((a,b)=>a.name.localeCompare(b.name,"de"))}
 function bookLibraryGroups(items){const groups=new Map();items.forEach(item=>{const key=item.author||"Weitere Werke";if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item)});return[...groups.entries()].sort((a,b)=>{if(a[0]==="Weitere Werke")return 1;if(b[0]==="Weitere Werke")return-1;return a[0].localeCompare(b[0],"de")})}
-function bookCard(bookName,count,author){const search=[bookName,author].filter(Boolean).join(" ").toLowerCase();return`<article class="book-library-card" data-nav="book" data-value="${esc(bookName)}" data-book-search="${esc(search)}"><div class="book-library-icon">${iconMarkup("book",bookName)}</div><div class="book-library-body"><h3 class="book-library-title">${esc(bookName)}</h3><p class="book-library-count">${count} ${count===1?"Beitrag":"Beiträge"}</p></div><span class="book-library-chevron" aria-hidden="true">›</span></article>`}
+function bookCard(bookName,count,author){const search=[bookName,author].filter(Boolean).join(" ").toLowerCase();return`<article class="book-library-card" data-nav="book" data-value="${esc(bookName)}" data-book-search="${esc(search)}"><div class="book-library-icon">${iconMarkup("book",bookName)}</div><div class="book-library-body"><h3 class="book-library-title">${esc(bookName)}</h3><p class="book-library-count">${count} ${count===1?"Beitrag":"Beiträge"}</p></div></article>`}
 function filterBooksLibrary(){const input=$("booksSearchInput");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".book-library-card").forEach(card=>{card.classList.toggle("is-hidden",!!q&&!String(card.getAttribute("data-book-search")||"").includes(q))});document.querySelectorAll(".books-library-group").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".book-library-card:not(.is-hidden)"))});const total=$("booksLibraryTotal");if(total){const visible=document.querySelectorAll(".book-library-card:not(.is-hidden)").length;const all=document.querySelectorAll(".book-library-card").length;total.textContent=q?`${visible} von ${all} Bücher`:`${all} Bücher`}}
 function renderBooks(){if(typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH){if(window.DARCanonicalSourceLibrary)return DARCanonicalSourceLibrary.renderRoute(currentRoute);return`${setPageHeader("Quellenbibliothek","Geprüfte historische Werke und zitierte Gelehrte","Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-loading">Quellenbibliothek wird geladen…</div></section>`}const items=bookLibraryItems();const groups=bookLibraryGroups(items);const listHtml=groups.map(([author,books])=>`<section class="books-library-group"><header class="books-library-group-head"><span class="books-library-group-label">Autor</span><h3>${esc(author)}</h3><span class="books-library-group-count">${books.length} ${books.length===1?"Werk":"Werke"}</span></header><div class="books-library-list">${books.map(({name,count})=>bookCard(name,count,author)).join("")}</div></section>`).join("");return`${setPageHeader("Bücher",`${items.length} Werke nach Autor und Titel geordnet`,"Bücher")}<section class="books-library-shell"><div class="books-library-toolbar"><input id="booksSearchInput" class="books-library-search" type="search" placeholder="Buch oder Autor suchen…" autocomplete="off" enterkeyhint="search"><span id="booksLibraryTotal" class="books-library-total">${items.length} Bücher</span></div>${items.length?listHtml:`<div class="empty">Noch keine Bücher erkannt.</div>`}</section>`}
 const DUA_CAT_ORDER=["Morgen & Abend","Aufwachen","Schlaf","Schutz","Vergebung","Gebet","Nach dem Gebet","Moschee","Essen","Reise","Krankheit","Eltern","Familie","Wissen","Rizq","Tawakkul","Rechtleitung","Qurʾān","Allgemein"];
@@ -16794,12 +17340,12 @@ window.addEventListener("appinstalled",()=>trackPwaInstall(installPlatform(),"ap
 function needsPrayerPushHint(){const s=getPrayerSettings();if(s.reminder)return false;try{if(localStorage.getItem(PRAYER_HINT_KEY))return false}catch(e){}return true}
 function renderPrayerPushHint(){if(!needsPrayerPushHint())return "";const step=!hasPrayerLocation(getPrayerSettings())?"1. Standort freigeben · 2. Erinnerung aktivieren":"1. Gebetszeiten öffnen · 2. Erinnerung aktivieren";return `<section id="prayerPushHint" class="hint-banner prayer-hint"><div><strong>🔔 Gebets-Push auf dem Sperrbildschirm</strong><p>${step}. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung.</p></div><div class="hint-banner-actions"><button id="prayerHintGoBtn" class="hint-btn" type="button">Jetzt aktivieren</button><button id="prayerHintDismissBtn" class="hint-btn ghost" type="button">Später</button></div></section>`}
 function renderPopularPostsBlock(){return `<section id="popularPostsBlock" class="popular-panel premium-surface"><div class="section-head"><h3>Meist gelesen</h3><span id="popularPostsLabel">Beliebt bei Besuchern</span></div><div id="popularPostsContent" class="popular-list collapsed"><div class="loading" style="padding:12px;margin:0">Wird geladen …</div></div><button id="popularPostsToggle" class="popular-toggle" type="button" hidden>Mehr anzeigen</button></section>`}
-function fillPopularPosts(el,items){const isHomeV380=el?.classList?.contains("home-v380-popular-list");const maxItems=isHomeV380?3:5;const used=new Set();if(isHomeV380){const rec=recommendedPost();if(rec)used.add(String(rec.id));homeDiscoverPosts(new Set(used)).slice(0,6).forEach(p=>used.add(String(p.id)))}const rows=items.filter(it=>{if(!isHomeV380)return true;const id=String(it.id);if(used.has(id))return false;used.add(id);return true}).slice(0,maxItems).map((it,idx)=>{const post=posts.find(p=>String(p.id)===String(it.id));if(!post)return "";const rank=String(it.rank||idx+1).padStart(2,"0");const meta=post.category?esc(normalizePostCategory(post.category)):"Beitrag";if(isHomeV380)return `<button type="button" class="home-v380-popular-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Meist gelesen Platz ${rank}: ${esc(post.title)}"><span class="home-v380-popular-rank">${rank}</span><div class="home-v380-popular-text"><h4>${esc(post.title)}</h4><span>${meta}</span></div><span class="home-v380-open-row__action" aria-hidden="true">›</span></button>`;const metaLegacy=it.views>0?`${it.views} Aufrufe · ${esc(post.category||"Beitrag")}`:`${esc(post.category||"Beitrag")}`;return `<article class="popular-row" data-nav="post" data-value="${esc(post.id)}"><span class="popular-rank">${it.rank}</span><div class="popular-row-text"><h4>${esc(post.title)}</h4><span>${metaLegacy}</span></div></article>`}).filter(Boolean).join("");el.innerHTML=rows||`<div class="empty">${isHomeV380?"":"Noch keine Statistik – lies Beiträge, dann erscheinen hier die Favoriten."}</div>`;if(isHomeV380){const wrap=el.closest(".home-v380-popular-wrap");if(wrap&&!rows)wrap.style.display="none"}const toggle=$("popularPostsToggle");if(toggle){toggle.hidden=el.querySelectorAll(".popular-row").length<=2;toggle.textContent=el.classList.contains("collapsed")?"Mehr anzeigen":"Zuklappen"}bindEvents()}
+function fillPopularPosts(el,items){const isHomeV380=el?.classList?.contains("home-v380-popular-list");const maxItems=isHomeV380?3:5;const used=new Set();if(isHomeV380){const rec=recommendedPost();if(rec)used.add(String(rec.id));homeDiscoverPosts(new Set(used)).slice(0,6).forEach(p=>used.add(String(p.id)))}const rows=items.filter(it=>{if(!isHomeV380)return true;const id=String(it.id);if(used.has(id))return false;used.add(id);return true}).slice(0,maxItems).map((it,idx)=>{const post=posts.find(p=>String(p.id)===String(it.id));if(!post)return "";const rank=String(it.rank||idx+1).padStart(2,"0");const meta=post.category?esc(normalizePostCategory(post.category)):"Beitrag";if(isHomeV380)return `<button type="button" class="home-v380-popular-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Meist gelesen Platz ${rank}: ${esc(post.title)}"><span class="home-v380-popular-rank">${rank}</span><div class="home-v380-popular-text"><h4>${esc(post.title)}</h4><span>${meta}</span></div></button>`;const metaLegacy=it.views>0?`${it.views} Aufrufe · ${esc(post.category||"Beitrag")}`:`${esc(post.category||"Beitrag")}`;return `<article class="popular-row" data-nav="post" data-value="${esc(post.id)}"><span class="popular-rank">${it.rank}</span><div class="popular-row-text"><h4>${esc(post.title)}</h4><span>${metaLegacy}</span></div></article>`}).filter(Boolean).join("");el.innerHTML=rows||`<div class="empty">${isHomeV380?"":"Noch keine Statistik – lies Beiträge, dann erscheinen hier die Favoriten."}</div>`;if(isHomeV380){const wrap=el.closest(".home-v380-popular-wrap");if(wrap&&!rows)wrap.style.display="none"}const toggle=$("popularPostsToggle");if(toggle){toggle.hidden=el.querySelectorAll(".popular-row").length<=2;toggle.textContent=el.classList.contains("collapsed")?"Mehr anzeigen":"Zuklappen"}bindEvents()}
 function fillPopularPostsFallback(el){const items=posts.slice(0,Math.min(5,posts.length)).map((p,i)=>({id:p.id,views:0,rank:i+1}));fillPopularPosts(el,items);const label=$("popularPostsLabel");if(label)label.textContent="Empfohlene Beiträge"}
 async function loadPopularPostsBlock(){const content=$("popularPostsContent");if(!content||currentRoute.view!=="home")return;const maxFetch=content.classList.contains("home-v380-popular-list")?8:5;try{const raw=sessionStorage.getItem(POPULAR_CACHE_KEY);if(raw){const cached=JSON.parse(raw);if(cached&&Array.isArray(cached.items)&&Date.now()-Number(cached.ts||0)<300000){fillPopularPosts(content,cached.items);return}}}catch(e){}if(!hasSupabaseCfg()){fillPopularPostsFallback(content);return}try{const totals=(await fetchAnalyticsDashboard()).totals||[];const top=totals.filter(x=>x.content_type==="post"&&Number(x.views)>0).slice(0,maxFetch);const items=top.map((t,i)=>{const post=posts.find(p=>String(p.id)===String(t.content_id));return post?{id:post.id,views:Number(t.views||0),rank:i+1}:null}).filter(Boolean);if(items.length){try{sessionStorage.setItem(POPULAR_CACHE_KEY,JSON.stringify({ts:Date.now(),items}))}catch(e){}fillPopularPosts(content,items)}else fillPopularPostsFallback(content)}catch(e){fillPopularPostsFallback(content)}}
 function currentUpdateIcon(item){const key=String([item.type,item.title,item.badge,item.nav,item.value].filter(Boolean).join(" ")).toLowerCase();if(/zakat|zakāt/.test(key))return"🕌";if(/dua|duʿā|bitt/.test(key))return"🤲";if(/serie|hukm|muhakamah|muḥākamah/.test(key))return"⚖️";if(/qur|tafsir/.test(key))return"📖";if(/post|beitrag/.test(key))return"📚";return"✨"}
 function currentUpdateMeta(item){const parts=[];if(item.badge)parts.push(item.badge);else{const ttl=Number(item.ttlHours)||24;parts.push(ttl>=48?`${Math.round(ttl/24)} Tage`:`${ttl} Std.`)}if(item.count)parts.push(`${item.count} neu`);return parts.join(" · ")}
-function renderCurrentFocus(){const items=activeCurrentUpdates().slice(0,4);if(!items.length)return"";return `<section class="current-focus premium-surface"><div class="current-focus-head"><div><span>Aktuell</span><h3>Neu im Fokus</h3></div><button class="current-focus-all" type="button" data-nav="news">Alles Neue</button></div><div class="current-focus-list">${items.map((item,idx)=>{const newsId=item.id||String(idx);const directNav=item.nav&&item.nav!=="news-detail";const navView=directNav?item.nav:"news-detail";const navValue=directNav?(item.value||""):newsId;const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":"current-focus-row";return `<article class="${rowClass}" data-nav="${esc(navView)}" data-value="${esc(navValue)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DAR AL TAWḤID.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">→</span></article>`}).join("")}</div></section>`}
+function renderCurrentFocus(){const items=activeCurrentUpdates().slice(0,4);if(!items.length)return"";return `<section class="current-focus premium-surface"><div class="current-focus-head"><div><span>Aktuell</span><h3>Neu im Fokus</h3></div><button class="current-focus-all" type="button" data-nav="news">Alles Neue</button></div><div class="current-focus-list">${items.map((item,idx)=>{const newsId=item.id||String(idx);const directNav=item.nav&&item.nav!=="news-detail";const navView=directNav?item.nav:"news-detail";const navValue=directNav?(item.value||""):newsId;const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":"current-focus-row";return `<article class="${rowClass}" data-nav="${esc(navView)}" data-value="${esc(navValue)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DAR AL TAWḤID.")}</p><small>${esc(currentUpdateMeta(item))}</small></div></article>`}).join("")}</div></section>`}
 
   function renderNewsDetail(newsId){
     const item=activeCurrentUpdates().find((x,i)=>(x.id||String(i))===newsId)||activeCurrentUpdates()[0];
@@ -17820,43 +18366,42 @@ function updateHomeAppStatusUi(){
   const strip=document.getElementById("homePushRemindersStrip");
   if(strip)updateHomePushRemindersSummary();
 }
-function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={}){
+function homePostPreviewCard(post,{label="NEUESTER BEITRAG"}={}){
   if(!post)return"";
   const excerpt=findQuote(post);
   const meta=[post.scholar,post.source].filter(Boolean).join(" · ");
-  return `<article class="home-v380-post-preview" data-nav="post" data-value="${esc(post.id)}" tabindex="0" role="link" aria-label="${esc(post.title)} öffnen"><span class="home-v380-kicker">${esc(label)}</span><h3 class="home-v380-post-title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-post-excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-post-meta">${esc(meta)}</p>`:""}<span class="home-v380-post-action" aria-hidden="true">${esc(action)} →</span></article>`;
+  return `<article class="home-v380-post-preview" data-nav="post" data-value="${esc(post.id)}" tabindex="0" role="link" aria-label="${esc(post.title)} öffnen"><span class="home-v380-kicker">${esc(label)}</span><h3 class="home-v380-post-title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-post-excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-post-meta">${esc(meta)}</p>`:""}</article>`;
 }
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
   if(!prog){
-    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Lesung beginnen</span><span class="home-v380-quran-hero__place">Qurʾān öffnen</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div></button>`;
   }
-  const meta=quranSurahMeta(prog.surahNumber);
-  const surahName=meta?.transliteration||prog.surahName||`Sūrah ${prog.surahNumber}`;
   const ay=Math.max(1,Number(prog.ayahNumber)||1);
-  const place=`Sūrat ${surahName} · Āyah ${ay}`;
   const target=`${esc(prog.surahNumber)}:${esc(ay)}`;
-  const aria=`Weiterlesen: ${place}`;
-  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Weiterlesen</span><span class="home-v380-quran-hero__place">${esc(place)}</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+  const meta=quranContinueMetaLine(prog);
+  const when=formatQuranProgressTime(prog.updatedAt);
+  const aria=`Qurʾān weiterlesen${meta?`. ${meta}`:""}${when?`. Zuletzt ${when}`:""}`;
+  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div><div class="home-v380-quran-hero__resume">${meta?`<span class="home-v380-quran-hero__meta">${esc(meta)}</span>`:""}${when?`<span class="home-v380-quran-hero__when">Zuletzt ${esc(when)}</span>`:""}</div></button>`;
 }
 function renderHomeDailyDuaRow(){
   const d=dailyDua();
   if(!d)return"";
   const preview=String(d.de||d.occasion||"").trim();
-  return `<button type="button" class="home-v380-open-row" data-nav="dua" data-value="${esc(d.id)}" aria-label="Duʿāʾ des Tages öffnen: ${esc(d.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Duʿāʾ des Tages</span><h3 class="home-v380-open-row__title">${esc(d.title)}</h3>${preview?`<p class="home-v380-open-row__excerpt">${esc(preview)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Öffnen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="dua" data-value="${esc(d.id)}" aria-label="Duʿāʾ des Tages öffnen: ${esc(d.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Duʿāʾ des Tages</span><h3 class="home-v380-open-row__title">${esc(d.title)}</h3>${preview?`<p class="home-v380-open-row__excerpt">${esc(preview)}</p>`:""}</div></button>`;
 }
 function renderHomeRecommendedRow(excludeIds=new Set()){
   const post=recommendedPost();
   if(!post||excludeIds.has(String(post.id)))return"";
   const excerpt=findQuote(post);
   const meta=[post.category?normalizePostCategory(post.category):"",post.scholar].filter(Boolean).join(" · ");
-  return `<button type="button" class="home-v380-open-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Lesen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div></button>`;
 }
 function renderHomeRamadanRow(){
   const ctx=seasonalIslamicContext();
   if(!ctx)return"";
   const headline=ctx.phase==="countdown"?`Noch ca. ${ctx.daysLeft} Tage bis Ramaḍān`:ctx.phase==="ramadan"?`Tag ${ctx.day} im Fastenmonat`:ctx.title;
-  return `<button type="button" class="home-v380-open-row" data-nav="ramadan" aria-label="Ramaḍān-Bereich öffnen"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Saison</span><h3 class="home-v380-open-row__title">${esc(headline)}</h3><p class="home-v380-open-row__excerpt">${esc(ctx.subtitle)} · Suḥūr, Iftār, Duʿāʾ & Beiträge</p></div><span class="home-v380-open-row__action" aria-hidden="true">Öffnen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="ramadan" aria-label="Ramaḍān-Bereich öffnen"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Saison</span><h3 class="home-v380-open-row__title">${esc(headline)}</h3><p class="home-v380-open-row__excerpt">${esc(ctx.subtitle)} · Suḥūr, Iftār, Duʿāʾ & Beiträge</p></div></button>`;
 }
 function renderHomeTodaySection(){
   const highlights=renderHighlightSections();
@@ -17875,8 +18420,8 @@ function renderHomeLatestBlock(excludeIds=new Set()){
   const pool=homeDiscoverPosts(new Set(excludeIds));
   const latest=pool.slice(0,6);
   if(!latest.length)return"";
-  if(latest.length===1)return homePostPreviewCard(latest[0],{label:"Neuester Beitrag",action:"Öffnen"});
-  return `<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag",action:"Öffnen"})).join("")}</div>`;
+  if(latest.length===1)return homePostPreviewCard(latest[0],{label:"Neuester Beitrag"});
+  return `<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag"})).join("")}</div>`;
 }
 function renderHomePopularSection(){
   const exclude=new Set();
@@ -17892,20 +18437,23 @@ function renderHomeDiscoverSection(){
   const pool=homeDiscoverPosts(new Set(exclude));
   const latest=pool.slice(0,6);
   let latestHtml="";
-  if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag",action:"Öffnen"});
-  else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag",action:"Öffnen"})).join("")}</div>`;
+  if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag"});
+  else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag"})).join("")}</div>`;
   if(!latestHtml)return"";
   return `<section class="home-v380-section" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2><button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div>${latestHtml}</section>`;
 }
 function renderHomeLibrariesSection(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
-  const cards=[];
-  if(testOnly)cards.push(`<button type="button" class="home-v380-lib-card" data-nav="bibliothek" aria-label="DAR AL TAWḤĪD Bibliothek öffnen"><h3>DAR AL TAWḤĪD Bibliothek</h3><p>Eigene PDFs, Bücher und thematische Lernmaterialien</p><span class="home-v380-lib-card__foot" aria-hidden="true">Öffnen →</span></button>`);
-  if(testOnly)cards.push(`<button type="button" class="home-v380-lib-card" data-nav="books" aria-label="Quellenbibliothek öffnen"><h3>Quellenbibliothek</h3><p>Geprüfte historische Werke und klassische Quellen</p><span class="home-v380-lib-card__foot" aria-hidden="true">Öffnen →</span></button>`);
-  else cards.push(`<button type="button" class="home-v380-lib-card" data-nav="books" aria-label="Quellenbibliothek öffnen"><h3>Quellenbibliothek</h3><p>Geprüfte historische Werke und klassische Quellen</p><span class="home-v380-lib-card__foot" aria-hidden="true">Öffnen →</span></button>`);
-  if(!cards.length)return"";
-  const sliderClass=" home-v380-lib-grid--slider";
-  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards.join("")}</div></section>`;
+  const defs=[
+    {nav:"books",title:"Quellenbibliothek",desc:"Geprüfte historische Werke und klassische Quellen",aria:"Quellenbibliothek öffnen"},
+    {nav:"scholars",title:"Gelehrte",desc:"Imāme, Ṣaḥābah, Tābiʿīn und frühe Gelehrte",aria:"Gelehrten-Bibliothek öffnen"},
+    {nav:"duas",title:"Duʿāʾ",desc:"Sammlung aus Qurʾān und Sunnah mit Quellen",aria:"Duʿāʾ-Sammlung öffnen"},
+    {nav:"hadith",title:"Hadith-Bibliothek",desc:"Bücher, Kapitel und geprüfte Übersetzungen",aria:"Hadith-Bibliothek öffnen"}
+  ];
+  if(testOnly)defs.unshift({nav:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",desc:"Eigene PDFs, Bücher und thematische Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
+  if(!defs.length)return"";
+  const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></button>`).join("");
+  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed">${cards}</div></section>`;
 }
 function renderHomeSearchSection(){
   const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
@@ -18143,7 +18691,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v398";
+const APP_BUILD_ID="app-shell-v412";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -18197,14 +18745,19 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
   const shareText=encodeURIComponent(text||"");
   const shareTitle=encodeURIComponent(title||"DAR AL TAWḤID");
   const shareUrl=encodeURIComponent(url||location.href);
-  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-layout-v13"><div class="share-row share-row-v11 share-row-primary"><button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><circle cx="12" cy="12" r="12" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a></div><div class="share-row share-row-v11 share-row-secondary"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button>${extraAction}</div></div>${helpText?`<div class="share-help">${esc(helpText)}</div>`:""}</section>`;
+  const igBtn=`<button class="share-btn ig" data-share-instagram data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igShareGeneric" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><circle cx="12" cy="12" r="12" fill="url(#igShareGeneric)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></button>`;
+  const waBtn=`<a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.6-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/><path fill="#fff" d="M12 3.6a8.3 8.3 0 0 0-7.1 12.6l-1 3.6 3.7-1a8.4 8.4 0 1 0 4.4-15.2Zm0 15.2c-1.4 0-2.7-.4-3.8-1.1l-.3-.2-2.2.6.6-2.1-.2-.3a6.9 6.9 0 1 1 5.9 3.1Z" opacity=".95"/></svg><span>WhatsApp</span></a>`;
+  const tgBtn=`<a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a>`;
+  const nativeBtn=`<button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(shareText)}" data-share-url="${esc(shareUrl)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button>`;
+  const copyBtn=`<button class="share-btn link" data-share-copy data-share-text="${esc(shareText)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg><span>${esc(copyLabel)}</span></button>`;
+  return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-flat-v410">${igBtn}${waBtn}${tgBtn}${nativeBtn}${copyBtn}${extraAction}</div>${helpText?`<div class="share-help">${esc(helpText)}</div>`:""}</section>`;
 }
 
 function postNarratorLine(post){
   const raw=String(post?.scholar||post?.speaker||"").trim();
   if(!raw)return "";
   const honorific=/رضي الله عنه|رضي الله عنها|رحمه الله|حفظه الله/.test(raw)?"":"<span class='honorific'>رضي الله عنه</span>";
-  return `<div class="post-reader-speaker"><small>Überliefert von</small><span>${esc(raw)} ${honorific}</span> sagte:</div>`;
+  return `<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(raw)} ${honorific}</span><span class="post-reader-speaker__said">sagte:</span></div>`;
 }
 function normalizeStatementText(value){
   return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
@@ -18228,6 +18781,7 @@ function renderPostSourceDetails(post,links,sourceText){
 function getRelatedPosts(post){
   return posts.filter(p=>p.id!==post.id && (p.category===post.category || p.scholar===post.scholar || p.book===post.book)).slice(0,3);
 }
+function compactRelatedTags(...values){return values.filter(Boolean).slice(0,2).map(v=>`<span>${esc(v)}</span>`).join("")}
 function relatedCompactCard(post){
   const meta=[post.scholar,post.book].filter(Boolean).join(" · ");
   return `<article class="related-compact-card" data-nav="post" data-value="${esc(post.id)}"><div class="related-compact-icon">📖</div><div><h4>${esc(post.title)}</h4><p>${esc(meta||findQuote(post)||"Beitrag öffnen")}</p></div><div class="related-compact-open">›</div></article>`;
@@ -18356,7 +18910,7 @@ function renderPost(id){
   const keyMessage=String(post.summary||post.fazit||post.fazitText||post.conclusion||"").trim();
   const keyBlock=keyMessage?`<section class="post-key-message"><h3>Kerngedanke</h3><p>${esc(keyMessage)}</p></section>`:"";
   const intro=renderPostIntroButton(post);
-  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2>${narrator}</header>${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
