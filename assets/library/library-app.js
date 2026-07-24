@@ -638,10 +638,36 @@
 
   let readerPageObserver = null;
   let readerRenderToken = 0;
+  let readerSessionId = 0;
+
+  function removeReaderOverlay() {
+    document.querySelectorAll("[data-library-reader-portal]").forEach((el) => el.remove());
+  }
+
+  function mountReaderOverlay() {
+    const reader = document.querySelector("[data-library-reader]");
+    if (!reader) return null;
+    if (reader.parentElement === document.body && reader.hasAttribute("data-library-reader-portal")) {
+      return reader;
+    }
+    removeReaderOverlay();
+    reader.setAttribute("data-library-reader-portal", "1");
+    document.body.appendChild(reader);
+    try {
+      window.scrollTo(0, 0);
+    } catch (e) {
+      /* Lesen darf nie blockieren */
+    }
+    return reader;
+  }
 
   function waitForReaderLayout(stage) {
     return new Promise((resolve) => {
-      const measure = () => Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0);
+      const measure = () => {
+        const stageWidth = Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0);
+        const viewportWidth = Math.max(document.documentElement?.clientWidth || 0, window.innerWidth || 0);
+        return Math.max(stageWidth, viewportWidth - 24);
+      };
       if (measure() > 40) {
         resolve(measure());
         return;
@@ -649,7 +675,7 @@
       let tries = 0;
       const tick = () => {
         const width = measure();
-        if (width > 40 || tries >= 12) {
+        if (width > 40 || tries >= 20) {
           resolve(Math.max(width, 280));
           return;
         }
@@ -693,10 +719,14 @@
       const ctx = canvas.getContext("2d", { alpha: false });
       if (!ctx) throw new Error("canvas unavailable");
 
+      const cssWidth = Math.max(1, Math.floor(viewport.width));
+      const cssHeight = Math.max(1, Math.floor(viewport.height));
       canvas.width = Math.max(1, Math.floor(viewport.width * dpr));
       canvas.height = Math.max(1, Math.floor(viewport.height * dpr));
-      canvas.style.width = `${Math.floor(viewport.width)}px`;
-      canvas.style.height = `${Math.floor(viewport.height)}px`;
+      canvas.style.width = `${cssWidth}px`;
+      canvas.style.height = `${cssHeight}px`;
+      canvas.setAttribute("width", String(canvas.width));
+      canvas.setAttribute("height", String(canvas.height));
       canvas.className = "lib-reader-page-canvas";
 
       const wrap = document.createElement("div");
@@ -727,6 +757,10 @@
       saveProgress(readerState.pub.id, page, readerState.total);
     } catch (e) {
       if (token !== readerRenderToken) return;
+      if (readerState?.blobUrl) {
+        stage.innerHTML = `<iframe class="lib-reader-fallback" src="${readerState.blobUrl}#page=${page}" title="PDF"></iframe>`;
+        return;
+      }
       stage.innerHTML = `<div class="lib-reader-msg">Seite konnte nicht angezeigt werden. Bitte erneut versuchen oder die PDF herunterladen.</div>`;
     }
   }
@@ -743,29 +777,51 @@
   }
 
   async function initReader(pub) {
+    const session = ++readerSessionId;
+    mountReaderOverlay();
     const root = document.querySelector("[data-library-reader]");
     const stage = document.querySelector("[data-library-reader-stage]");
     if (!root || !stage) return;
+
+    if (readerState?.blobUrl) {
+      try {
+        URL.revokeObjectURL(readerState.blobUrl);
+      } catch (e) {
+        /* Lesen darf nie blockieren */
+      }
+    }
 
     readerState = {
       pub,
       page: getProgress(pub.id)?.lastPage || 1,
       total: 0,
-      doc: null
+      doc: null,
+      blobUrl: ""
     };
 
     try {
       const pdfjs = await loadPdfJs();
+      if (session !== readerSessionId) return;
       const blob = await fetchPdfBlob(pub);
+      if (session !== readerSessionId) return;
+      readerState.blobUrl = URL.createObjectURL(blob);
       const data = await blob.arrayBuffer();
+      if (session !== readerSessionId) return;
       const doc = await pdfjs.getDocument({ data }).promise;
+      if (session !== readerSessionId) return;
       readerState.doc = doc;
       readerState.total = doc.numPages;
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
       await renderReaderScroll({ page: readerState.page });
+      if (session !== readerSessionId) return;
       trackLibraryEvent("library_read", pub);
     } catch (e) {
+      if (session !== readerSessionId) return;
+      if (readerState?.blobUrl) {
+        stage.innerHTML = `<iframe class="lib-reader-fallback" src="${readerState.blobUrl}" title="PDF"></iframe>`;
+        return;
+      }
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
   }
@@ -937,7 +993,15 @@
         }
       }
     } else {
-      document.body.classList.remove("is-library-reader-route");
+      readerSessionId += 1;
+      removeReaderOverlay();
+      if (readerState?.blobUrl) {
+        try {
+          URL.revokeObjectURL(readerState.blobUrl);
+        } catch (e) {
+          /* Lesen darf nie blockieren */
+        }
+      }
       if (readerPageObserver) {
         readerPageObserver.disconnect();
         readerPageObserver = null;

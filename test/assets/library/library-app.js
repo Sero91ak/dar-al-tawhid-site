@@ -95,16 +95,10 @@
     }
   }
 
-  function renderLibraryStatsPanel(pub) {
-    return `<section class="lib-stats-panel" data-library-stats="${esc(pub.id)}" aria-label="Statistik dieser Veröffentlichung">
-      <h3 class="lib-stats-title">Statistik</h3>
-      <div class="lib-stats-grid">
-        <div class="lib-stats-item"><b data-library-stat-clicks>—</b><span>Klicks</span></div>
-        <div class="lib-stats-item"><b data-library-stat-reads>—</b><span>Gelesen</span></div>
-        <div class="lib-stats-item"><b data-library-stat-downloads>—</b><span>Downloads</span></div>
-      </div>
-      <p class="lib-stats-note">Öffentliche Besucherzahlen — jeder Aufruf, Lesevorgang und Download wird gezählt.</p>
-    </section>`;
+  function renderLibraryStatsItems() {
+    return `<div class="lib-meta-item"><b>Klicks</b><span data-library-stat-clicks>—</span></div>
+        <div class="lib-meta-item"><b>Gelesen</b><span data-library-stat-reads>—</span></div>
+        <div class="lib-meta-item"><b>Downloads</b><span data-library-stat-downloads>—</span></div>`;
   }
 
   async function hydrateLibraryStats(publicationId) {
@@ -461,15 +455,15 @@
           ${offline && offlineEnabled ? `<button class="lib-btn lib-btn-ghost" type="button" data-library-offline-remove="${esc(pub.slug)}">Offline entfernen</button>` : ""}
         </div>
       </div>
-      <div class="lib-meta-grid lib-meta-grid-compact">
+      <div class="lib-meta-grid lib-meta-grid-compact" data-library-stats="${esc(pub.id)}">
         <div class="lib-meta-item"><b>Kategorie</b><span>${esc(pub.category || "—")}</span></div>
         <div class="lib-meta-item"><b>Thema</b><span>${esc(pub.topic || "—")}</span></div>
         <div class="lib-meta-item"><b>Sprache</b><span>${esc(pub.language || "—")}</span></div>
         <div class="lib-meta-item"><b>Dateigröße</b><span>${esc(pub.fileSize || "—")}</span></div>
         <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
+        ${renderLibraryStatsItems()}
       </div>
-      ${renderLibraryStatsPanel(pub)}
       ${toc.length ? `<section class="lib-panel"><h3>Inhaltsverzeichnis</h3><ul>${toc.map((item) => `<li>${esc(item.title || item)}</li>`).join("")}</ul></section>` : ""}
       ${pub.about ? `<section class="lib-panel"><h3>Über diese Veröffentlichung</h3><p>${esc(pub.about)}</p></section>` : ""}
       ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((s) => `<li>${esc(typeof s === "string" ? s : s.title || s.name || "")}</li>`).join("")}</ul></section>` : ""}
@@ -644,10 +638,36 @@
 
   let readerPageObserver = null;
   let readerRenderToken = 0;
+  let readerSessionId = 0;
+
+  function removeReaderOverlay() {
+    document.querySelectorAll("[data-library-reader-portal]").forEach((el) => el.remove());
+  }
+
+  function mountReaderOverlay() {
+    const reader = document.querySelector("[data-library-reader]");
+    if (!reader) return null;
+    if (reader.parentElement === document.body && reader.hasAttribute("data-library-reader-portal")) {
+      return reader;
+    }
+    removeReaderOverlay();
+    reader.setAttribute("data-library-reader-portal", "1");
+    document.body.appendChild(reader);
+    try {
+      window.scrollTo(0, 0);
+    } catch (e) {
+      /* Lesen darf nie blockieren */
+    }
+    return reader;
+  }
 
   function waitForReaderLayout(stage) {
     return new Promise((resolve) => {
-      const measure = () => Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0);
+      const measure = () => {
+        const stageWidth = Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0);
+        const viewportWidth = Math.max(document.documentElement?.clientWidth || 0, window.innerWidth || 0);
+        return Math.max(stageWidth, viewportWidth - 24);
+      };
       if (measure() > 40) {
         resolve(measure());
         return;
@@ -655,7 +675,7 @@
       let tries = 0;
       const tick = () => {
         const width = measure();
-        if (width > 40 || tries >= 12) {
+        if (width > 40 || tries >= 20) {
           resolve(Math.max(width, 280));
           return;
         }
@@ -699,10 +719,14 @@
       const ctx = canvas.getContext("2d", { alpha: false });
       if (!ctx) throw new Error("canvas unavailable");
 
+      const cssWidth = Math.max(1, Math.floor(viewport.width));
+      const cssHeight = Math.max(1, Math.floor(viewport.height));
       canvas.width = Math.max(1, Math.floor(viewport.width * dpr));
       canvas.height = Math.max(1, Math.floor(viewport.height * dpr));
-      canvas.style.width = `${Math.floor(viewport.width)}px`;
-      canvas.style.height = `${Math.floor(viewport.height)}px`;
+      canvas.style.width = `${cssWidth}px`;
+      canvas.style.height = `${cssHeight}px`;
+      canvas.setAttribute("width", String(canvas.width));
+      canvas.setAttribute("height", String(canvas.height));
       canvas.className = "lib-reader-page-canvas";
 
       const wrap = document.createElement("div");
@@ -733,6 +757,10 @@
       saveProgress(readerState.pub.id, page, readerState.total);
     } catch (e) {
       if (token !== readerRenderToken) return;
+      if (readerState?.blobUrl) {
+        stage.innerHTML = `<iframe class="lib-reader-fallback" src="${readerState.blobUrl}#page=${page}" title="PDF"></iframe>`;
+        return;
+      }
       stage.innerHTML = `<div class="lib-reader-msg">Seite konnte nicht angezeigt werden. Bitte erneut versuchen oder die PDF herunterladen.</div>`;
     }
   }
@@ -749,29 +777,51 @@
   }
 
   async function initReader(pub) {
+    const session = ++readerSessionId;
+    mountReaderOverlay();
     const root = document.querySelector("[data-library-reader]");
     const stage = document.querySelector("[data-library-reader-stage]");
     if (!root || !stage) return;
+
+    if (readerState?.blobUrl) {
+      try {
+        URL.revokeObjectURL(readerState.blobUrl);
+      } catch (e) {
+        /* Lesen darf nie blockieren */
+      }
+    }
 
     readerState = {
       pub,
       page: getProgress(pub.id)?.lastPage || 1,
       total: 0,
-      doc: null
+      doc: null,
+      blobUrl: ""
     };
 
     try {
       const pdfjs = await loadPdfJs();
+      if (session !== readerSessionId) return;
       const blob = await fetchPdfBlob(pub);
+      if (session !== readerSessionId) return;
+      readerState.blobUrl = URL.createObjectURL(blob);
       const data = await blob.arrayBuffer();
+      if (session !== readerSessionId) return;
       const doc = await pdfjs.getDocument({ data }).promise;
+      if (session !== readerSessionId) return;
       readerState.doc = doc;
       readerState.total = doc.numPages;
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
       await renderReaderScroll({ page: readerState.page });
+      if (session !== readerSessionId) return;
       trackLibraryEvent("library_read", pub);
     } catch (e) {
+      if (session !== readerSessionId) return;
+      if (readerState?.blobUrl) {
+        stage.innerHTML = `<iframe class="lib-reader-fallback" src="${readerState.blobUrl}" title="PDF"></iframe>`;
+        return;
+      }
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
   }
@@ -943,7 +993,15 @@
         }
       }
     } else {
-      document.body.classList.remove("is-library-reader-route");
+      readerSessionId += 1;
+      removeReaderOverlay();
+      if (readerState?.blobUrl) {
+        try {
+          URL.revokeObjectURL(readerState.blobUrl);
+        } catch (e) {
+          /* Lesen darf nie blockieren */
+        }
+      }
       if (readerPageObserver) {
         readerPageObserver.disconnect();
         readerPageObserver = null;

@@ -633,8 +633,14 @@
   z-index: 120;
   display: flex;
   flex-direction: column;
+  min-height: 100dvh;
+  min-height: 100vh;
   background: var(--bg);
   color: var(--text);
+}
+
+body.is-library-reader-route #appView {
+  transform: none !important;
 }
 
 body.is-library-reader-route .top-shell,
@@ -732,7 +738,8 @@ body.is-library-reader-route .view {
 }
 
 .lib-reader-stage {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 6px 6px calc(10px + env(safe-area-inset-bottom, 0px));
@@ -758,8 +765,18 @@ body.is-library-reader-route .view {
 
 .lib-reader-page-canvas {
   display: block;
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   height: auto;
+}
+
+.lib-reader-fallback {
+  display: block;
+  width: 100%;
+  min-height: calc(100dvh - 120px);
+  min-height: calc(100vh - 120px);
+  border: 0;
+  background: #fff;
 }
 
 .lib-reader-stack-single {
