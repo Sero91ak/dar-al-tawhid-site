@@ -15333,6 +15333,7 @@ function openHomePushRemindersSheet(){
   document.body.classList.add("home-push-sheet-open");
   const closeBtn=document.getElementById("homePushRemindersClose");
   if(closeBtn)closeBtn.focus();
+  if(typeof bindPrayerPushSettingsControls==="function")bindPrayerPushSettingsControls();
   if(typeof refreshPushConnectionStatusUI==="function")refreshPushConnectionStatusUI();
 }
 function closeHomePushRemindersSheet(){
@@ -15687,14 +15688,15 @@ function getPushConnectionStatus(){
   const ios=isIOSDevice();
   return {permission,optedIn,subId,pwa,ios,serverOk:optedIn&&!!subId,ready:permission==="granted"&&optedIn&&!!subId&&(!ios||pwa)};
 }
+function pushSyncRefreshHint(){return "Startseite → ↻ Sync in der Statusleiste, dann erneut testen."}
 function renderPushConnectionStatus(){
   const s=getPushConnectionStatus();
   const rows=[
     ["App gespeichert",s.pwa||!s.ios,s.pwa?"Home-Bildschirm":(s.ios?"Safari-Tab – bitte speichern":"Browser")],
     ["Erlaubnis",s.permission==="granted",s.permission==="granted"?"erlaubt":s.permission],
-    ["Server verbunden",s.serverOk,s.serverOk?`…${s.subId.slice(-8)}`:"fehlt – Aktualisieren"]
+    ["Server verbunden",s.serverOk,s.serverOk?`…${s.subId.slice(-8)}`:"fehlt – Sync"]
   ];
-  return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">Bei rotem Status: Startseite → Aktualisieren. Ein Klick stellt Push und Inhalte wieder her.</p></div></details>`;
+  return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">Bei rotem Status: ${esc(pushSyncRefreshHint())}</p></div></details>`;
 }
 function refreshPushConnectionStatusUI(){
   try{
@@ -16082,8 +16084,8 @@ function updatePrayerCountdowns(){
 function scheduleLocalPrayerReminders({silent=false}={}){const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){if(!silent)alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}clearPrayerReminders();const now=new Date();const advanceMs=prayerPushAdvanceMinutes(settings)*60*1000;const scheduledTags=new Set();[-1,0,1].forEach(offset=>{const base=new Date(now);base.setDate(now.getDate()+offset);calculatePrayerTimes(base,settings).filter(x=>x.key!=="sunrise"&&(x.key!=="tahajjud"||tahajjudNotificationsEnabled(settings))).forEach(p=>{const d=p.eventDate||prayerEventDate(base,p);if(d<=now)return;const tagBase=`${p.key}-${d.getTime()}`;if(!scheduledTags.has(tagBase+"-entry")){scheduledTags.add(tagBase+"-entry");const entryCopy=prayerEntryNotificationCopy(p,settings,d);const entryId=setTimeout(async()=>{await showPrayerNotification(entryCopy.title,{body:entryCopy.body,tag:entryCopy.tag,renotify:true,data:{url:"/#prayer"}});setTimeout(async()=>{const synced=await syncPrayerPushTags(getPrayerSettings(),{retries:2}).catch(()=>false);await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:!!synced})},60000)},d-now);prayerReminderTimeouts.push(entryId)}const advanceAt=new Date(d.getTime()-advanceMs);if((advanceAt>now||(advanceAt<=now&&d>now))&&!scheduledTags.has(tagBase+"-advance")){scheduledTags.add(tagBase+"-advance");const advanceCopy=prayerAdvanceNotificationCopy(p,settings,d);const advanceId=setTimeout(async()=>{await showPrayerNotification(advanceCopy.title,{body:advanceCopy.body,tag:advanceCopy.tag,renotify:true,data:{url:"/#prayer"}})},Math.max(1000,advanceAt-now));prayerReminderTimeouts.push(advanceId)}})})}
 async function enablePrayerServerPush(settings){return syncPrayerPushTags(settings)}
 async function disablePrayerServerPush(){try{const OS=await waitForOneSignalReady();if(OS&&OS.User&&typeof OS.User.addTags==="function")await OS.User.addTags({prayer_notifications:"false"});const id=localStorage.getItem(PUSH_USER_KEY);if(id&&hasSupabaseCfg())await supabaseRest(`prayer_push_registrations?device_id=eq.${encodeURIComponent(id)}`,{method:"PATCH",prefer:"return=minimal",body:{enabled:false,last_synced_at:new Date().toISOString()}})}catch(e){}}
-async function sendPrayerTestNotification(){
-  const btn=$("testPrayerReminderBtn");
+async function sendPrayerTestNotification(clickedBtn){
+  const btn=clickedBtn||document.querySelector("#homePushRemindersBackdrop:not([hidden]) #testPrayerReminderBtn")||$("testPrayerReminderBtn");
   const oldText=btn?btn.textContent:"";
   if(btn){btn.disabled=true;btn.textContent="Wird gesendet…"}
   try{
@@ -16134,9 +16136,10 @@ async function sendPrayerTestNotification(){
           }
         }
       }
-    }else{serverReason="Push-Verbindung zum Server fehlt (keine gültige Geräte-ID). Bitte Startseite → Aktualisieren."}
+    }else{serverReason="Push-Verbindung zum Server fehlt (keine gültige Geräte-ID). "+pushSyncRefreshHint()}
     const shown=await showPrayerNotification(title,{body,tag:`prayer-test-${prayerKey}-${mode}`,renotify:true,data:{url:"/#prayer",test:true}});
     const pwaHint=isIOSDevice()&&!isStandalonePwa()?"\n\niPhone/iPad: App über Safari → Teilen → Zum Home-Bildschirm speichern und dann über das Icon öffnen.":"";
+    const refreshHint="\n\n"+pushSyncRefreshHint();
     if(serverOk){
       setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"onesignal",subscriptionId:subId});
       alert(shown?"✓ Test-Push gesendet. Du solltest jetzt eine Meldung sehen – sonst Sperrbildschirm prüfen.":"✓ Server-Push wurde abgeschickt. App kurz schließen und Sperrbildschirm prüfen."+pwaHint);
@@ -16144,11 +16147,11 @@ async function sendPrayerTestNotification(){
     }
     if(shown){
       setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"local",lastError:serverReason,subscriptionId:subId});
-      alert("⚠ Server-Push nicht angekommen:\n"+serverReason+"\n\nLokaler Test wurde angezeigt. Startseite → Aktualisieren, dann erneut testen."+pwaHint);
+      alert("⚠ Server-Push nicht angekommen:\n"+serverReason+"\n\nLokaler Test wurde angezeigt. "+pushSyncRefreshHint()+pwaHint);
       return;
     }
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:serverReason,subscriptionId:subId||""});
-    alert("Test-Push konnte nicht zugestellt werden.\n\n"+serverReason+pwaHint+"\n\nStartseite → Aktualisieren, dann erneut testen.");
+    alert("Test-Push konnte nicht zugestellt werden.\n\n"+serverReason+pwaHint+refreshHint);
   }catch(e){
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:e.message||String(e)});
     alert("Test-Push konnte nicht gesendet werden.");
@@ -16214,7 +16217,64 @@ async function activatePrayerReminder(){
     updateHighlightPushButtons();
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();bindHomePushRemindersSheet();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerPushSettingsControls(){
+  document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};
+  });
+  document.querySelectorAll("#testPrayerReminderBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();sendPrayerTestNotification(btn)};
+  });
+  document.querySelectorAll("#prayerAdvanceSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(sel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};
+  });
+  document.querySelectorAll("#tahajjudModeSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(sel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};
+  });
+  document.querySelectorAll("#useLocationBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(btn)};
+  });
+  document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{})};
+  });
+  document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{})};
+  });
+  document.querySelectorAll("#enableJummahPushBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{})};
+  });
+  document.querySelectorAll("#jummahTimeModeSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({jummahUseManualTime:sel.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};
+  });
+  document.querySelectorAll("#jummahManualTimeInput").forEach(inp=>{
+    if(inp.dataset.prayerPushBound==="1")return;
+    inp.dataset.prayerPushBound="1";
+    inp.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(inp.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};
+  });
+  document.querySelectorAll("#jummahAdvanceSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(sel.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};
+  });
+}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();bindHomePushRemindersSheet();bindPrayerPushSettingsControls();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
@@ -17626,7 +17686,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v381-test";
+const APP_BUILD_ID="app-shell-v382";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

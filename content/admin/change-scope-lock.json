@@ -1,0 +1,399 @@
+{
+  "version": 1,
+  "globalLock": true,
+  "lockedAt": "2026-07-23T19:30:00.000Z",
+  "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
+  "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
+  "alwaysAllowed": [
+    "content/admin/change-scope-lock.json",
+    "data/quiz-questions.json",
+    "data/quiz-questions-test.json"
+  ],
+  "protectedPrefixes": [
+    "index.html",
+    "test/index.html",
+    "version.json",
+    "test/version.json",
+    "manifest.json",
+    "test/manifest.json",
+    "service-worker.js",
+    "admin/",
+    "cloudflare/",
+    "scripts/",
+    "content/",
+    "assets/",
+    ".github/workflows/",
+    "wrangler.toml",
+    "AGENTS.md"
+  ],
+  "unlockedScopes": [
+    {
+      "id": "home-push-test-fix-v382-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Push-Test in Test-App funktioniert nicht – Sheet-Bindings und Sync-Hinweise reparieren",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T16:00:00.000Z"
+    },
+    {
+      "id": "home-premium-hotfix-v381-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Suche reparieren, Status ohne Kasten, Hijrī-Doppelung, App speichern, Lesbarkeit",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "assets/dar-account-visibility.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T16:00:00.000Z"
+    },
+    {
+      "id": "home-premium-reorder-v380-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite ab Überschrift Startseite Premium-Neuordnung, App-Status, Entdecken, Suche, Footer",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T14:00:00.000Z"
+    },
+    {
+      "id": "home-push-strip-v379-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Doppelte Gebetszeiten auf Startseite entfernen, Push-Erinnerungen kompakt eigenständig",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-refine-v378-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetszeiten zu groß, moderne Ziffern, Status-Emojis zurück, kein Abschneiden",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "isnad-compact-v377-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Maßstab der Überlieferung kompakter, Quelle gekürzt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-premium-v376-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetszeiten zu klein (CSS-Konflikt), Rheinbach nicht extra Zeile",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-premium-v375-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetsnamen/-zeiten größer, Countdown zweizeilig, Isnad-Quelle ohne Abschneiden",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-premium-v374-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Premium-Header Design-Freeze 10/10 – eine Fläche, Gebetszeiten dominant, Countdown dezent",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "quran-test-sync-v373-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Qurʾān-Bereich noch nicht in Test-App deployed – Staging-Overlay sync",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "scripts/cf-pages-build.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "live-push-repair-v370-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Push/Gebets-Benachrichtigungen sofort live für Besucher reparieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/sync-app-build-ids.js",
+        "scripts/cf-pages-build.js",
+        "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-hub-v372-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Oberen Startseitenbereich kompakt neu gestalten (Gebetszeiten-Hub)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-entkacheln-v366-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht entkacheln, theme-fähig, kompakt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/quran-overview-v366-styles.css",
+        "scripts/quran-overview-v366-render.js",
+        "scripts/apply-quran-overview-v366.js",
+        "scripts/version-update-guard.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "version-update-loop-fix-v371-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Test-App Versions-Update-Schleife nach v370 weiterhin aktiv",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/apply-version-update-loop-fix.js",
+        "scripts/version-update-guard.js",
+        "scripts/sync-app-build-ids.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "version-update-loop-fix-v370-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Dauerhaft „Neue App-Version verfügbar“ in Test- und Besucher-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/apply-version-update-loop-fix.js",
+        "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "welcome-push-delivery-fix-v368-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Server verbunden aber Willkommens-/Geräte-Push kommt nicht an",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/apply-welcome-push-delivery-fix.js",
+        "scripts/apply-push-subscription-resolve-fix.js",
+        "scripts/version-update-guard.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "prayer-overview-compact-v365-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Screenshot: GEBETSZEITEN zu viel Abstand + Test-App formatQuranProgressTime",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-unified-v364-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten einheitlich auf allen Geräten (Pro Max + iPhone 13)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-mobile-v363-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten Smartphone ohne Überlappung/Kasten",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "test-app-cache-bust-v362-test-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Screenshot: Test-App noch auf altem Cache (formatQuranProgressTime)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-countdown-v362-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Countdown Sekunden lesbar (Pill, feste Breite)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "test-quran-progress-fix-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Test-App Absturz formatQuranProgressTime",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-compact-live-v361-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten kompakt einzeilig live veröffentlichen (Test-App schließen)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "content/admin/header-prayer-display-lock.json",
+        "content/admin/change-scope-lock.json",
+        "scripts/patch-test-canonical-library.js"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-test-v360-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht in Test-App deployen (v360)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/cf-pages-build.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/sync-quran-overview-to-test.py",
+        "scripts/force-workers-test-upload.js",
+        "scripts/verify-live-deploy.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "prayer-push-maghrib-repair-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Maghrib-Push Notfall: Migration-Subrequest-Limit + globale Änderungssperre",
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/daily-push-scheduler.js",
+        "scripts/change-scope-lock-guard.js",
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "scripts/push-system-guard.js",
+        "scripts/repo-integrity-guard.js"
+      ],
+      "expiresAt": "2026-07-24T06:00:00.000Z"
+    }
+  ]
+}
