@@ -4,7 +4,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v378-test";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v379-test";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -12389,6 +12389,140 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .top-shell.theme-hero-shell .header-prayer-status{display:none!important}
 .top-shell.theme-hero-shell .header-top-chips{display:none!important}
 </style>
+<style id="home-push-reminders-v379">
+/* Startseite: kompakte Erinnerungszeile, themeabhängig */
+.home-push-strip{
+  display:block;
+  width:100%;
+  min-height:56px;
+  margin:0 0 12px;
+  padding:clamp(11px,2.6vw,13px) clamp(13px,3vw,16px);
+  border-radius:16px;
+  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);
+  background:
+    radial-gradient(110% 90% at 0% 0%,color-mix(in srgb,var(--theme-accent) 7%,transparent),transparent 55%),
+    linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 93%,transparent),color-mix(in srgb,var(--theme-surface) 80%,var(--theme-text) 4%));
+  color:var(--theme-text);
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--theme-text) 5%,transparent);
+  transition:border-color .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.home-push-strip:hover,
+.home-push-strip:focus-visible{
+  border-color:color-mix(in srgb,var(--theme-accent) 36%,var(--theme-border));
+  filter:brightness(1.02);
+  outline:none;
+  box-shadow:0 10px 26px color-mix(in srgb,var(--theme-text) 7%,transparent),0 0 0 2px color-mix(in srgb,var(--theme-accent) 22%,transparent);
+}
+.home-push-strip__inner{display:flex;flex-direction:column;gap:4px;min-width:0}
+.home-push-strip__row--head{display:flex;align-items:center;gap:8px;min-width:0}
+.home-push-strip__bell{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:15px;height:15px;color:color-mix(in srgb,var(--theme-accent) 88%,var(--theme-text) 12%)}
+.home-push-strip__bell .prayer-overview__push-bell-svg{width:15px;height:15px}
+.home-push-strip__title{
+  flex:1 1 auto;
+  min-width:0;
+  font-family:var(--display);
+  font-size:clamp(8px,1.9vw,9.5px);
+  font-weight:850;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  line-height:1.15;
+  color:color-mix(in srgb,var(--theme-text) 88%,var(--theme-muted) 12%);
+}
+.home-push-strip__trail{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto}
+.home-push-strip__action{
+  font-size:clamp(8px,1.85vw,9px);
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--theme-accent);
+  white-space:nowrap;
+}
+.home-push-strip__action[hidden]{display:none!important}
+.home-push-strip__chevron{
+  font-size:15px;
+  line-height:1;
+  color:color-mix(in srgb,var(--theme-accent) 80%,var(--theme-muted) 20%);
+  opacity:.9;
+}
+.home-push-strip__status{
+  margin:0;
+  padding:0;
+  font-size:clamp(10px,2.35vw,11.5px);
+  font-weight:750;
+  line-height:1.32;
+  color:color-mix(in srgb,var(--theme-muted) 82%,var(--theme-text) 18%);
+  white-space:normal;
+  overflow:visible;
+  text-overflow:unset;
+  text-wrap:pretty;
+}
+.home-push-strip.is-off .home-push-strip__title,
+.home-push-strip.is-permission-denied .home-push-strip__title{color:color-mix(in srgb,var(--theme-text) 92%,var(--theme-accent) 8%)}
+body.home-push-sheet-open{overflow:hidden}
+.home-push-sheet-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:88;
+  display:grid;
+  align-items:end;
+  padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--theme-text) 42%,transparent);
+  backdrop-filter:blur(4px);
+}
+.home-push-sheet-backdrop[hidden]{display:none!important}
+.home-push-sheet{
+  width:100%;
+  max-height:min(86dvh,calc(100dvh - env(safe-area-inset-top,0px) - 12px));
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  border:1px solid color-mix(in srgb,var(--theme-border) 72%,transparent);
+  border-radius:20px 20px 16px 16px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 96%,transparent),color-mix(in srgb,var(--theme-surface) 84%,var(--theme-text) 5%));
+  color:var(--theme-text);
+  box-shadow:0 18px 48px color-mix(in srgb,var(--theme-text) 14%,transparent);
+}
+.home-push-sheet__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 14px 10px;
+  border-bottom:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+}
+.home-push-sheet__head h3{
+  margin:0;
+  font-family:var(--serif);
+  font-size:clamp(16px,4vw,18px);
+  font-weight:800;
+  line-height:1.15;
+  color:var(--theme-text);
+}
+.home-push-sheet__close{
+  border:1px solid color-mix(in srgb,var(--theme-border) 65%,transparent);
+  background:color-mix(in srgb,var(--theme-surface) 88%,transparent);
+  color:var(--theme-text);
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+}
+.home-push-sheet__body{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+@media(min-width:760px){
+  .home-push-sheet-backdrop{align-items:center;justify-items:center}
+  .home-push-sheet{width:min(480px,92vw);border-radius:18px;max-height:min(82dvh,760px)}
+}
+</style>
 <style id="isnad-compact-v377">
 /* Maßstab der Überlieferung: kompakt, Zitat + kurze Quelle */
 .top-shell.theme-hero-shell .isnad{
@@ -14875,6 +15009,118 @@ async function setDailyPushPreference(key,active){const next={};next[key]=!!acti
 const PRAYER_PUSH_ACCORDION_KEY="darPrayerPushAccordionOpenV1";
 function isPrayerPushAccordionOpen(){try{return localStorage.getItem(PRAYER_PUSH_ACCORDION_KEY)==="1"}catch(e){return false}}
 function setPrayerPushAccordionOpen(open){try{localStorage.setItem(PRAYER_PUSH_ACCORDION_KEY,open?"1":"0")}catch(e){}}
+function prayerPushHomeSummary(settings=getPrayerSettings()){
+  if(hasNotificationApi()&&getNotificationPermission()==="denied"){
+    return{
+      title:"MITTEILUNGEN NICHT ERLAUBT",
+      line:"In den Geräteeinstellungen aktivieren",
+      actionLabel:"",
+      state:"permission-denied",
+      ariaLabel:"Push-Erinnerungen. Mitteilungen nicht erlaubt. In den Geräteeinstellungen aktivieren."
+    };
+  }
+  const prayerOn=Boolean(settings.reminder);
+  const duaOn=dailyPushPref(settings,"dailyDua");
+  const recOn=dailyPushPref(settings,"dailyRecommendation");
+  const jummahOn=jummahPref(settings,"jummahNotifications");
+  if(!prayerOn&&!duaOn&&!recOn&&!jummahOn){
+    return{
+      title:"ERINNERUNGEN SIND AUS",
+      line:"Aktivieren, um Gebets- und Duʿāʾ-Hinweise zu erhalten",
+      actionLabel:"Aktivieren",
+      state:"all-off",
+      ariaLabel:"Push-Erinnerungen sind aus. Aktivieren, um Gebets- und Duʿāʾ-Hinweise zu erhalten."
+    };
+  }
+  const activeParts=[],inactiveParts=[];
+  if(prayerOn)activeParts.push("5 Gebete aktiv");else inactiveParts.push("Gebete deaktiviert");
+  if(duaOn)activeParts.push("Duʿāʾ 09:00");else inactiveParts.push("Duʿāʾ deaktiviert");
+  if(recOn)activeParts.push("Empfehlung 12:00");else inactiveParts.push("Empfehlung deaktiviert");
+  if(jummahOn)activeParts.push("Jumuʿah aktiv");
+  const allMain=prayerOn&&duaOn&&recOn;
+  const title=allMain?"GEBETS- & DUʿĀʾ-ERINNERUNGEN":"ERINNERUNGEN";
+  let line;
+  if(allMain&&!jummahOn)line="5 Gebete aktiv · Duʿāʾ 09:00 · Empfehlung 12:00";
+  else if(activeParts.length&&inactiveParts.length)line=activeParts.join(" · ")+" · "+inactiveParts[0];
+  else line=[...activeParts,...inactiveParts].join(" · ");
+  return{
+    title,
+    line,
+    actionLabel:"",
+    state:allMain?"full":"partial",
+    ariaLabel:`Push-Erinnerungen öffnen. ${line.replace(/\s*·\s*/g,", ")}.`
+  };
+}
+function updateHomePushRemindersSummary(){
+  const s=prayerPushHomeSummary();
+  const strip=document.getElementById("homePushRemindersStrip");
+  if(!strip)return;
+  const titleEl=document.getElementById("homePushRemindersTitle");
+  const lineEl=document.getElementById("homePushRemindersStatus");
+  const actionEl=document.getElementById("homePushRemindersAction");
+  if(titleEl)titleEl.textContent=s.title;
+  if(lineEl)lineEl.textContent=s.line;
+  if(actionEl){
+    actionEl.textContent=s.actionLabel||"";
+    if(s.actionLabel)actionEl.removeAttribute("hidden");else actionEl.setAttribute("hidden","");
+  }
+  strip.setAttribute("aria-label",s.ariaLabel);
+  strip.classList.toggle("is-off",s.state==="all-off");
+  strip.classList.toggle("is-permission-denied",s.state==="permission-denied");
+}
+function renderPrayerReminderSettingsInner({withLocationBtn=false,locationLabel="📍 Standort freigeben"}={}){
+  const settings=getPrayerSettings();
+  const active=Boolean(settings.reminder);
+  const cls=active?"prayer-action-btn active":"prayer-action-btn";
+  const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";
+  const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";
+  const advance=prayerPushAdvanceMinutes(settings);
+  const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);
+  return `<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderJummahPushPanel()}${renderDailyPushPanel()}${renderPushConnectionStatus()}${renderPrayerPushHints(settings)}`;
+}
+function renderHomePushRemindersStrip(){
+  const s=prayerPushHomeSummary();
+  return `<section class="home-push-strip premium-surface" id="homePushRemindersStrip" role="button" tabindex="0" aria-label="${esc(s.ariaLabel)}"><div class="home-push-strip__inner"><div class="home-push-strip__row home-push-strip__row--head"><span class="home-push-strip__bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="home-push-strip__title" id="homePushRemindersTitle">${esc(s.title)}</span><span class="home-push-strip__trail"><span class="home-push-strip__action" id="homePushRemindersAction"${s.actionLabel?"":" hidden"}>${esc(s.actionLabel||"")}</span><span class="home-push-strip__chevron" aria-hidden="true">›</span></span></div><p class="home-push-strip__status" id="homePushRemindersStatus">${esc(s.line)}</p></div></section><div id="homePushRemindersBackdrop" class="home-push-sheet-backdrop" hidden tabindex="-1"><div class="home-push-sheet" role="dialog" aria-modal="true" aria-labelledby="homePushSheetTitle"><div class="home-push-sheet__head"><h3 id="homePushSheetTitle">Gebets- & Duʿāʾ-Erinnerungen</h3><button type="button" id="homePushRemindersClose" class="home-push-sheet__close" aria-label="Schließen">×</button></div><div class="home-push-sheet__body" id="prayerPushSettingsBody">${renderPrayerReminderSettingsInner()}</div></div></div>`;
+}
+function openHomePushRemindersSheet(){
+  const backdrop=document.getElementById("homePushRemindersBackdrop");
+  if(!backdrop)return;
+  backdrop.removeAttribute("hidden");
+  document.body.classList.add("home-push-sheet-open");
+  const closeBtn=document.getElementById("homePushRemindersClose");
+  if(closeBtn)closeBtn.focus();
+  if(typeof refreshPushConnectionStatusUI==="function")refreshPushConnectionStatusUI();
+}
+function closeHomePushRemindersSheet(){
+  const backdrop=document.getElementById("homePushRemindersBackdrop");
+  if(!backdrop)return;
+  backdrop.setAttribute("hidden","");
+  document.body.classList.remove("home-push-sheet-open");
+  document.getElementById("homePushRemindersStrip")?.focus();
+}
+function bindHomePushRemindersSheet(){
+  const strip=document.getElementById("homePushRemindersStrip");
+  if(!strip)return;
+  updateHomePushRemindersSummary();
+  strip.onclick=()=>{
+    const s=prayerPushHomeSummary();
+    if(s.state==="permission-denied"&&hasNotificationApi()){requestNotificationPermission().then(()=>{updateHomePushRemindersSummary();openHomePushRemindersSheet()}).catch(()=>openHomePushRemindersSheet());return}
+    openHomePushRemindersSheet();
+  };
+  strip.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();strip.click()}};
+  const closeBtn=document.getElementById("homePushRemindersClose");
+  if(closeBtn)closeBtn.onclick=e=>{e.stopPropagation();closeHomePushRemindersSheet()};
+  const backdrop=document.getElementById("homePushRemindersBackdrop");
+  if(backdrop)backdrop.onclick=e=>{if(e.target===backdrop)closeHomePushRemindersSheet()};
+  if(!window.__darHomePushSheetEscBound){
+    window.__darHomePushSheetEscBound=true;
+    document.addEventListener("keydown",e=>{
+      if(e.key!=="Escape")return;
+      const bd=document.getElementById("homePushRemindersBackdrop");
+      if(bd&&!bd.hasAttribute("hidden"))closeHomePushRemindersSheet();
+    });
+  }
+}
 function prayerPushSettingsSummary(settings=getPrayerSettings()){const parts=[];if(settings.reminder)parts.push("Gebete aktiv");if(jummahPref(settings,"jummahNotifications"))parts.push("Jumuʿah aktiv");if(dailyPushPref(settings,"dailyDua"))parts.push("Duʿāʾ 09:00");if(dailyPushPref(settings,"dailyRecommendation"))parts.push("Empfehlung 12:00");return parts.length?parts.join(" · "):"Noch nichts aktiv"}
 function prayerPushStatusChips(settings=getPrayerSettings()){return{prayer:settings.reminder?"Gebete aktiv":"Gebete aus",dua:dailyPushPref(settings,"dailyDua")?"Duʿāʾ 09:00":"Duʿāʾ aus",rec:dailyPushPref(settings,"dailyRecommendation")?"Empfehlung 12:00":"Empfehlung aus"}}
 function prayerPushStatusInline(settings=getPrayerSettings()){const c=prayerPushStatusChips(settings);return`${c.prayer} · ${c.dua} · ${c.rec}`}
@@ -14885,9 +15131,9 @@ function prayerOverviewBellIconSvg(){return'<svg class="prayer-overview__push-be
 function prayerOverviewChevronSvg(){return'<svg class="prayer-overview__push-chevron-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M7 10l5 5 5-5"/></svg>'}
 function prayerQuickMosqueIconSvg(){return prayerOverviewMosqueIconSvg()}
 function prayerPushBellIconSvg(){return prayerOverviewBellIconSvg()}
-function updatePrayerPushAccordionUi(open=isPrayerPushAccordionOpen()){const btn=document.getElementById("prayerPushAccordionToggle");const body=document.getElementById("prayerPushSettingsBody");const wrap=btn?.closest(".prayer-push-accordion");if(!btn||!body)return;const settings=getPrayerSettings();if(open){body.removeAttribute("hidden");btn.setAttribute("aria-expanded","true");wrap?.classList.add("is-open")}else{body.setAttribute("hidden","");btn.setAttribute("aria-expanded","false");wrap?.classList.remove("is-open")}if(wrap?.classList.contains("prayer-push-accordion--compact")){const title=document.getElementById("prayerPushAccordionTitle");if(title)title.textContent="Push-Erinnerungen";const summary=document.getElementById("prayerPushSettingsSummary");if(summary){if(wrap.classList.contains("prayer-overview__push")){const st=document.getElementById("prayerPushStatusText");if(st)st.textContent=prayerPushStatusInline(settings);else summary.textContent=prayerPushStatusInline(settings)}else summary.innerHTML=renderPrayerPushStatusChipsHtml(settings)}return}const summary=prayerPushSettingsSummary(settings);const icon=btn.querySelector(".prayer-push-accordion-icon");const title=btn.querySelector(".prayer-push-accordion-title");if(icon)icon.textContent=open?"▾":"▸";if(title)title.textContent=open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen";const sum=btn.querySelector(".prayer-push-accordion-summary");if(sum)sum.textContent=summary}
+function updatePrayerPushAccordionUi(open=isPrayerPushAccordionOpen()){updateHomePushRemindersSummary();const btn=document.getElementById("prayerPushAccordionToggle");const body=document.getElementById("prayerPushSettingsBody");const wrap=btn?.closest(".prayer-push-accordion");if(!btn||!body||wrap?.closest(".home-push-sheet"))return;const settings=getPrayerSettings();if(open){body.removeAttribute("hidden");btn.setAttribute("aria-expanded","true");wrap?.classList.add("is-open")}else{body.setAttribute("hidden","");btn.setAttribute("aria-expanded","false");wrap?.classList.remove("is-open")}if(wrap?.classList.contains("prayer-push-accordion--compact")){const title=document.getElementById("prayerPushAccordionTitle");if(title)title.textContent="Push-Erinnerungen";const summary=document.getElementById("prayerPushSettingsSummary");if(summary){if(wrap.classList.contains("prayer-overview__push")){const st=document.getElementById("prayerPushStatusText");if(st)st.textContent=prayerPushStatusInline(settings);else summary.textContent=prayerPushStatusInline(settings)}else summary.innerHTML=renderPrayerPushStatusChipsHtml(settings)}return}const summary=prayerPushSettingsSummary(settings);const icon=btn.querySelector(".prayer-push-accordion-icon");const title=btn.querySelector(".prayer-push-accordion-title");if(icon)icon.textContent=open?"▾":"▸";if(title)title.textContent=open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen";const sum=btn.querySelector(".prayer-push-accordion-summary");if(sum)sum.textContent=summary}
 function bindPrayerPushAccordion(){const btn=document.getElementById("prayerPushAccordionToggle");if(!btn||btn.dataset.bound==="1")return;btn.dataset.bound="1";btn.onclick=ev=>{ev.stopPropagation();const open=isPrayerPushAccordionOpen();setPrayerPushAccordionOpen(!open);updatePrayerPushAccordionUi(!open)};updatePrayerPushAccordionUi(isPrayerPushAccordionOpen())}
-function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben",compactBar=false}={}){const settings=getPrayerSettings();const active=Boolean(settings.reminder);const cls=active?"prayer-action-btn active":"prayer-action-btn";const label=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren";const locBtn=withLocationBtn?`<button id="useLocationBtn" class="prayer-action-btn" type="button">${locationLabel}</button>`:"";const advance=prayerPushAdvanceMinutes(settings);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);const open=isPrayerPushAccordionOpen();const summary=prayerPushSettingsSummary(settings);const inner=`<div class="prayer-subsection-label">Gebetszeiten</div><div class="prayer-action-row">${locBtn}<button id="enablePrayerReminderBtn" class="${cls}" type="button" aria-pressed="${active}">${label}</button><button id="testPrayerReminderBtn" class="prayer-action-btn" type="button">🔔 Test senden</button></div><div class="prayer-settings-grid prayer-push-settings-grid"><select id="prayerAdvanceSelect" class="filter-select" aria-label="Erinnerung vor dem Gebet"><option value="5" ${advance===5?"selected":""}>5 Min vorher</option><option value="10" ${advance===10?"selected":""}>10 Min vorher</option><option value="15" ${advance===15?"selected":""}>15 Min vorher</option></select><select id="tahajjudModeSelect" class="filter-select" aria-label="Taḥajjud-Erinnerung"><option value="off" ${tahajjud==="off"?"selected":""}>Taḥajjud aus</option><option value="before30" ${tahajjud==="before30"?"selected":""}>Taḥajjud · 30 Min vor Fajr</option><option value="before60" ${tahajjud==="before60"?"selected":""}>Taḥajjud · 60 Min vor Fajr</option><option value="before90" ${tahajjud==="before90"?"selected":""}>Taḥajjud · 90 Min vor Fajr</option><option value="lastThird" ${tahajjud==="lastThird"?"selected":""}>Taḥajjud · letztes Drittel</option></select></div>${renderJummahPushPanel()}${renderDailyPushPanel()}${renderPushConnectionStatus()}${renderPrayerPushHints(settings)}`;if(compactBar){return`<div class="prayer-overview__push prayer-push-accordion prayer-push-accordion--compact ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-overview__push-toggle" aria-expanded="${open?"true":"false"}" aria-controls="prayerPushSettingsBody"><span class="prayer-overview__push-bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="prayer-overview__push-copy" id="prayerPushSettingsSummary"><span class="prayer-overview__push-title" id="prayerPushAccordionTitle">Push-Erinnerungen</span><span class="prayer-overview__push-sep" aria-hidden="true">·</span><span class="prayer-overview__push-status-text" id="prayerPushStatusText">${esc(prayerPushStatusInline(settings))}</span></span><span class="prayer-overview__push-chevron" aria-hidden="true">${prayerOverviewChevronSvg()}</span></button><div id="prayerPushSettingsBody" class="prayer-overview__push-body prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}return `<div class="prayer-push-accordion ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-accordion-toggle" aria-expanded="${open?"true":"false"}"><span class="prayer-push-accordion-icon">${open?"▾":"▸"}</span><span class="prayer-push-accordion-title">${open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen"}</span><span class="prayer-push-accordion-summary">${esc(summary)}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}
+function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben",compactBar=false}={}){const settings=getPrayerSettings();const open=isPrayerPushAccordionOpen();const summary=prayerPushSettingsSummary(settings);const inner=renderPrayerReminderSettingsInner({withLocationBtn,locationLabel});if(compactBar){return`<div class="prayer-overview__push prayer-push-accordion prayer-push-accordion--compact ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-overview__push-toggle" aria-expanded="${open?"true":"false"}" aria-controls="prayerPushSettingsBody"><span class="prayer-overview__push-bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="prayer-overview__push-copy" id="prayerPushSettingsSummary"><span class="prayer-overview__push-title" id="prayerPushAccordionTitle">Push-Erinnerungen</span><span class="prayer-overview__push-sep" aria-hidden="true">·</span><span class="prayer-overview__push-status-text" id="prayerPushStatusText">${esc(prayerPushStatusInline(settings))}</span></span><span class="prayer-overview__push-chevron" aria-hidden="true">${prayerOverviewChevronSvg()}</span></button><div id="prayerPushSettingsBody" class="prayer-overview__push-body prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}return `<div class="prayer-push-accordion ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-accordion-toggle" aria-expanded="${open?"true":"false"}"><span class="prayer-push-accordion-icon">${open?"▾":"▸"}</span><span class="prayer-push-accordion-title">${open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen"}</span><span class="prayer-push-accordion-summary">${esc(summary)}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}
 function updatePrayerReminderButtons(){const s=getPrayerSettings();document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(s.reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"});document.querySelectorAll("#enableJummahPushBtn").forEach(btn=>{const active=jummahPref(s,"jummahNotifications");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Jumuʿah-Erinnerung aktivieren"});document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Duʿāʾ des Tages · 09:00"});document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Heute empfohlen · 12:00"});updatePrayerPushAccordionUi()}
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
 function updatePushFloatButton(){const btn=$("pushFloat");if(!btn)return;const state=readOneSignalPushSubscriptionState(window.OneSignal);const active=state.ready;btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}
@@ -15723,7 +15969,7 @@ async function activatePrayerReminder(){
     updateHighlightPushButtons();
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();bindHomePushRemindersSheet();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
@@ -16916,14 +17162,14 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v378-test";
+const APP_BUILD_ID="app-shell-v379-test";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){const latest=posts.slice(0,4);const latestSection=`<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>`;return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div>${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderPrayerPushHint()}${renderCurrentFocus()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderPrayerQuickCard()}${latestSection}${renderFeatureHint()}${renderPinnedFeaturesSection()}${renderTodayRecommendedFeatures()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>`}
+function renderHome(){const latest=posts.slice(0,4);const latestSection=`<section class="section-block"><div class="section-head"><h3>Neueste Beiträge</h3><span>${latest.length} aktuell angezeigt</span><button class="collapse-toggle" type="button" data-collapse-target="latestGrid">Alle anzeigen</button></div><div id="latestGrid" class="latest-grid collapsible-grid collapsed">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden. Prüfe content/posts oder lade die Seite nach dem Commit neu.</div>`}</div></section>`;return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div>${renderOfflineBox()}${renderPwaInstallBanner()}${renderHomeRefreshPanel()}${renderQuranHomeTeaser()}${renderRamadanHomeTeaser()}${renderHomePushRemindersStrip()}${renderCurrentFocus()}${latestSection}${renderFeatureHint()}${renderPinnedFeaturesSection()}${renderTodayRecommendedFeatures()}${renderPopularPostsBlock()}${renderHighlightSections()}${renderHomeFolderSection()}${renderDirectPickPanel("home-direct-pick")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
 function renderScholars(){const items=buildScholarCatalog();return`${setPageHeader("Gelehrte","Beiträge nach Imāmen, Ṣaḥābah und frühen Gelehrten","Gelehrte")}<section class="grid-list">${items.length?items.map(s=>listCard(s.label,s.count+" Beiträge","scholar",s.key,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section>`}
