@@ -28,6 +28,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-compact-no-open-v407-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Öffnen-Text und Pfeile entfernen, kompakter, Qurʾān-Weiterlesen, Bibliotheken-Swipe — Test-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
       "id": "noble-border-refine-v406-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Edle dünne Ränder, zentrierte Aktions-Buttons (Alle Beiträge etc.), dezentes Hover-Leuchten app-weit — Test-App",

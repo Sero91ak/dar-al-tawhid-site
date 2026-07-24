@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v406";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v407";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -13408,6 +13408,44 @@ html[data-theme="light"]{
   margin-left:auto!important;
 }
 </style>
+<style id="home-compact-v407">
+/* v407 · Kein Öffnen-Text, keine Pfeile, kompaktere Karten */
+.home-v380-post-action,.home-v380-lib-card__foot,.home-v380-open-row__action,.home-v380-quran-hero__chevron,
+.current-focus-arrow,.book-library-chevron,.qov-row-chevron,.stats-open-hint{display:none!important}
+.home-v380-post-preview{
+  padding:12px 14px 10px!important;gap:5px!important;
+}
+.home-v380-post-meta{margin-bottom:0!important}
+.home-v380-lib-card{
+  min-height:96px!important;padding:12px 14px 10px!important;gap:6px!important;
+}
+.home-v380-lib-card p{margin-bottom:0!important;-webkit-line-clamp:2}
+.home-v380-open-row{padding:12px 0!important}
+.home-v380-quran-hero--compact{
+  min-height:48px!important;padding:9px 12px!important;
+}
+.home-v380-quran-hero__place{
+  font-family:var(--serif)!important;font-size:clamp(14px,3.4vw,17px)!important;font-weight:800!important;
+  color:color-mix(in srgb,var(--theme-text) 88%,var(--theme-accent) 12%)!important;
+}
+.home-v380-quran-hero__label{
+  font-size:clamp(10px,2.2vw,11px)!important;font-weight:850!important;letter-spacing:.08em;text-transform:uppercase;
+  color:color-mix(in srgb,var(--theme-muted) 70%,var(--theme-accent) 30%)!important;
+}
+.home-v380-lib-grid--slider{
+  display:flex!important;gap:12px!important;overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;padding:2px 2px 4px!important;margin:0 -2px!important;
+}
+.home-v380-lib-grid--slider::-webkit-scrollbar{display:none}
+.home-v380-lib-grid--slider > .home-v380-lib-card{
+  flex:0 0 clamp(78%,82vw,86%)!important;scroll-snap-align:start!important;scroll-snap-stop:always!important;
+}
+@media(min-width:760px){
+  .home-v380-lib-grid--slider > .home-v380-lib-card{flex-basis:min(44%,360px)!important}
+}
+.home-v380-popular-row{grid-template-columns:auto 1fr!important}
+</style>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -13772,7 +13810,7 @@ function formatQuranProgressRelative(value){const ts=Date.parse(String(value||""
 function renderQuranContinueBanner(){return ""}
 function renderQuranOverviewProgressCard(){return ""}
 function quranOverviewFilteredSurahs(){if(!quranMeta)return [];let rows=quranMeta.surahs.slice();const filter=getQuranOverviewFilter();const favs=new Set(getQuranSurahFavorites());if(filter==="meccan")rows=rows.filter(s=>s.type!=="medinan");else if(filter==="medinan")rows=rows.filter(s=>s.type==="medinan");else if(filter==="favorites")rows=rows.filter(s=>favs.has(s.id));const sort=getQuranOverviewSort();const opened=getJson(QURAN_SURAH_LAST_OPENED_KEY,{})||{};if(sort==="alpha")rows.sort((a,b)=>String(a.transliteration).localeCompare(String(b.transliteration),"de"));else if(sort==="recent")rows.sort((a,b)=>(Date.parse(opened[String(b.id)]||0)||0)-(Date.parse(opened[String(a.id)]||0)||0));else if(sort==="favorites")rows.sort((a,b)=>(favs.has(b.id)?1:0)-(favs.has(a.id)?1:0)||a.id-b.id);return rows}
-function quranSurahCard(s){const prog=getPreferredQuranProgress();const isLast=prog&&Number(prog.surahNumber)===Number(s.id);const fav=isQuranSurahFavorite(s.id);const opened=String(currentRoute.view)==="quran-surah"&&Number(String(currentRoute.value||"").split("/")[0])===Number(s.id);const q=normalizeQuranSearchText(quranSearchQuery||"");const isHit=!!q&&normalizeQuranSearchText([s.transliteration,s.name,s.type,String(s.id)].join(" ")).includes(q);const num=String(s.id).padStart(2,"0");const indicators=[fav?'<span class="qov-row-indicators" title="Favorit" aria-label="Favorit">★</span>':""].filter(Boolean).join("");return `<button type="button" class="qov-row quran-surah-card${isLast?" is-last-read":""}${opened?" is-active":""}${isHit?" is-search-hit":""}" data-nav="quran-surah" data-value="${s.id}" data-qov-surah="${s.id}" aria-label="Sūrah ${esc(s.transliteration)} öffnen"><span class="qov-row-num quran-num" aria-hidden="true">${num}</span><span class="qov-row-main"><h3>${esc(s.transliteration)}</h3><span class="qov-row-meta">${s.total_verses} Āyāt · ${quranTypeLabel(s.type)}</span></span><span class="qov-row-side"><span class="qov-row-ar" lang="ar" dir="rtl">${esc(s.name)}</span>${indicators}<span class="qov-row-chevron" aria-hidden="true">›</span></span></button>`}
+function quranSurahCard(s){const prog=getPreferredQuranProgress();const isLast=prog&&Number(prog.surahNumber)===Number(s.id);const fav=isQuranSurahFavorite(s.id);const opened=String(currentRoute.view)==="quran-surah"&&Number(String(currentRoute.value||"").split("/")[0])===Number(s.id);const q=normalizeQuranSearchText(quranSearchQuery||"");const isHit=!!q&&normalizeQuranSearchText([s.transliteration,s.name,s.type,String(s.id)].join(" ")).includes(q);const num=String(s.id).padStart(2,"0");const indicators=[fav?'<span class="qov-row-indicators" title="Favorit" aria-label="Favorit">★</span>':""].filter(Boolean).join("");return `<button type="button" class="qov-row quran-surah-card${isLast?" is-last-read":""}${opened?" is-active":""}${isHit?" is-search-hit":""}" data-nav="quran-surah" data-value="${s.id}" data-qov-surah="${s.id}" aria-label="Sūrah ${esc(s.transliteration)} öffnen"><span class="qov-row-num quran-num" aria-hidden="true">${num}</span><span class="qov-row-main"><h3>${esc(s.transliteration)}</h3><span class="qov-row-meta">${s.total_verses} Āyāt · ${quranTypeLabel(s.type)}</span></span><span class="qov-row-side"><span class="qov-row-ar" lang="ar" dir="rtl">${esc(s.name)}</span>${indicators}</span></button>`}
 let qovLastFocusEl=null;
 let qovDirectSheetDraft=null;
 function renderQuranQuickPick(){if(!quranMeta)return "";const options=quranMeta.surahs.map(s=>`<option value="${s.id}">${s.id}. ${esc(s.transliteration)}</option>`).join("");return `<section class="qov-direct qov-direct--inline qov-direct--compact" aria-label="Sūrah oder Āyah direkt öffnen"><div class="qov-direct-head qov-direct-head--compact"><span class="qov-direct-label">Sūrah oder Āyah direkt öffnen</span></div><div class="qov-direct-grid qov-direct-grid--compact"><select id="quranQuickSurah" class="direct-pick" aria-label="Sūrah wählen"><option value="">Sūrah</option>${options}</select><select id="quranQuickAyah" class="direct-pick" aria-label="Āyah wählen" disabled><option value="">Āyah</option></select><button id="quranQuickGo" class="qov-btn-primary qov-direct-go" type="button" disabled>Öffnen</button></div></section>`}
@@ -14132,7 +14170,7 @@ function trackDuaShare(id){const d=DUAS.find(x=>x.id===id);trackAnalytics("dua_s
 function trackCurrentRoute(){if(currentRoute.view==="statistik")return;const r=currentRoute;if(r.view==="post"){const post=posts.find(p=>String(p.id)===String(r.value));trackAnalytics("post_view",{contentType:"post",contentId:r.value,contentTitle:post?.title})}else if(r.view==="dua"){const d=DUAS.find(x=>x.id===r.value);trackAnalytics("dua_view",{contentType:"dua",contentId:r.value,contentTitle:d?.title})}else{trackAnalytics("page_view",{contentType:"page",contentId:r.view,contentTitle:r.view})}}
 function statsTypeLabel(t){return t==="post"?"Beitrag":t==="dua"?"Duʿāʾ":"Seite"}
 function cleanStatsTitle(t){return String(t||"").replace(/^[\s\p{Extended_Pictographic}📖🤲📚🕌🗓️]+/u,"").trim()||"Ohne Titel"}
-function statsRankCard(row,idx){const nav=row.content_type==="post"?"post":row.content_type==="dua"?"dua":"";const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);const title=cleanStatsTitle(row.content_title||row.content_id);const attrs=nav?` data-nav="${nav}" data-value="${esc(row.content_id)}" role="button" tabindex="0"`:"";return`<article class="stats-rank-card"${attrs}><div class="stats-rank-num">${idx+1}</div><div class="stats-rank-body"><div class="stats-rank-top"><span class="stats-type-badge">${esc(statsTypeLabel(row.content_type))}</span>${nav?`<span class="stats-open-hint">Tippen zum Öffnen →</span>`:""}</div><h3 class="stats-rank-title">${esc(title)}</h3><div class="stats-rank-metrics"><span class="stats-metric-pill">👁 ${views} gelesen</span><span class="stats-metric-pill">↗ ${shares} geteilt</span><span class="stats-metric-pill">♡ ${saves} gespeichert</span></div></div></article>`}
+function statsRankCard(row,idx){const nav=row.content_type==="post"?"post":row.content_type==="dua"?"dua":"";const views=Number(row.views||0),shares=Number(row.shares||0),saves=Number(row.saves||0);const title=cleanStatsTitle(row.content_title||row.content_id);const attrs=nav?` data-nav="${nav}" data-value="${esc(row.content_id)}" role="button" tabindex="0"`:"";return`<article class="stats-rank-card"${attrs}><div class="stats-rank-num">${idx+1}</div><div class="stats-rank-body"><div class="stats-rank-top"><span class="stats-type-badge">${esc(statsTypeLabel(row.content_type))}</span></div><h3 class="stats-rank-title">${esc(title)}</h3><div class="stats-rank-metrics"><span class="stats-metric-pill">👁 ${views} gelesen</span><span class="stats-metric-pill">↗ ${shares} geteilt</span><span class="stats-metric-pill">♡ ${saves} gespeichert</span></div></div></article>`}
 async function loadStatsPanel(){const el=$("statsDashboard");if(!el)return;if(!hasSupabaseCfg()){el.innerHTML=`<div class="stats-empty">Supabase ist noch nicht eingerichtet.</div>`;return}try{const data=await fetchAnalyticsDashboard();const live=data.live||{};const totals=(data.totals||[]).filter(x=>x.content_type==="post"||x.content_type==="dua").sort((a,b)=>(Number(b.views||0)+Number(b.shares||0)+Number(b.saves||0))-(Number(a.views||0)+Number(a.shares||0)+Number(a.saves||0)));el.innerHTML=`<div class="stats-dashboard"><div class="stats-hero-grid"><div class="stats-hero-card accent"><b>Jetzt online</b><span>${Number(live.live_now||0)}</span><small>letzte 5 Minuten</small></div><div class="stats-hero-card"><b>Heute Besucher</b><span>${Number(live.today_sessions||0)}</span><small>einzigartige Sitzungen</small></div></div><div class="stats-kpi-grid"><div class="stats-kpi-card"><b>Heute Aufrufe</b><span>${Number(live.today_views||0)}</span><small>Seiten + Beiträge</small></div><div class="stats-kpi-card"><b>Heute geteilt</b><span>${Number(live.today_shares||0)}</span><small>Beiträge + Duʿāʾ</small></div><div class="stats-kpi-card"><b>Heute gespeichert</b><span>${Number(live.today_saves||0)}</span><small>Beiträge</small></div><div class="stats-kpi-card"><b>Einträge gesamt</b><span>${totals.length}</span><small>in der Liste</small></div></div><section class="stats-list-section"><div class="stats-section-head"><h3>Top Inhalte</h3><span>${totals.length} Einträge · tippen zum Öffnen</span></div><div class="stats-rank-list">${totals.length?totals.map((r,i)=>statsRankCard(r,i)).join(""):`<div class="stats-empty">Noch keine Beitrags-Daten. Öffne Beiträge und tippe teilen oder speichern.</div>`}</div></section><div class="stats-meta">Aktualisiert: ${esc(new Date().toLocaleString("de-DE"))} · Auto-Refresh alle 30 Sekunden</div></div>`;bindEvents()}catch(e){el.innerHTML=`<div class="stats-empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}}
 function startStatsRefresh(){stopStatsRefresh();loadStatsPanel();statsRefreshTimer=setInterval(loadStatsPanel,30000)}
 function renderStats(){if(!isStatsAuthed()){return`${setHeader("Statistik","Nur für Admin-Zugang.","🔒")}<section class="stats-login"><input id="statsPinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort"><button id="statsPinBtn" type="button">Statistik öffnen</button><div class="stats-meta">Direktlink: <strong>#statistik</strong> · Login bleibt gespeichert.</div></section>`}return`${setHeader("Live-Statistik","Übersichtliche Auswertung – jeder Eintrag ist antippbar und öffnet den Beitrag oder die Duʿāʾ.","📊")}<div id="statsDashboard"><div class="stats-empty">Statistik wird geladen…</div></div><div class="stats-meta"><button id="statsLogoutBtn" type="button" class="premium-pill">Admin abmelden</button></div>`}
@@ -14377,7 +14415,7 @@ function listCard(title,count,view,value,icon=""){return`<article class="list-ca
 function getBookAuthor(bookName){const direct=posts.find(post=>String(post.book||"")===String(bookName)&&(post.author||post.bookAuthor));if(direct)return direct.author||direct.bookAuthor;const related=posts.find(post=>String(post.book||"")===String(bookName)&&post.scholar);return related?related.scholar:""}
 function bookLibraryItems(){return[...countBy("book").entries()].filter(([name])=>name&&name!=="Unbekannt").map(([name,count])=>({name,count,author:getBookAuthor(name)})).sort((a,b)=>a.name.localeCompare(b.name,"de"))}
 function bookLibraryGroups(items){const groups=new Map();items.forEach(item=>{const key=item.author||"Weitere Werke";if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item)});return[...groups.entries()].sort((a,b)=>{if(a[0]==="Weitere Werke")return 1;if(b[0]==="Weitere Werke")return-1;return a[0].localeCompare(b[0],"de")})}
-function bookCard(bookName,count,author){const search=[bookName,author].filter(Boolean).join(" ").toLowerCase();return`<article class="book-library-card" data-nav="book" data-value="${esc(bookName)}" data-book-search="${esc(search)}"><div class="book-library-icon">${iconMarkup("book",bookName)}</div><div class="book-library-body"><h3 class="book-library-title">${esc(bookName)}</h3><p class="book-library-count">${count} ${count===1?"Beitrag":"Beiträge"}</p></div><span class="book-library-chevron" aria-hidden="true">›</span></article>`}
+function bookCard(bookName,count,author){const search=[bookName,author].filter(Boolean).join(" ").toLowerCase();return`<article class="book-library-card" data-nav="book" data-value="${esc(bookName)}" data-book-search="${esc(search)}"><div class="book-library-icon">${iconMarkup("book",bookName)}</div><div class="book-library-body"><h3 class="book-library-title">${esc(bookName)}</h3><p class="book-library-count">${count} ${count===1?"Beitrag":"Beiträge"}</p></div></article>`}
 function filterBooksLibrary(){const input=$("booksSearchInput");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".book-library-card").forEach(card=>{card.classList.toggle("is-hidden",!!q&&!String(card.getAttribute("data-book-search")||"").includes(q))});document.querySelectorAll(".books-library-group").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".book-library-card:not(.is-hidden)"))});const total=$("booksLibraryTotal");if(total){const visible=document.querySelectorAll(".book-library-card:not(.is-hidden)").length;const all=document.querySelectorAll(".book-library-card").length;total.textContent=q?`${visible} von ${all} Bücher`:`${all} Bücher`}}
 function renderBooks(){if(window.DARCanonicalSourceLibrary)return DARCanonicalSourceLibrary.renderRoute(currentRoute);return`${setPageHeader("Quellenbibliothek","Geprüfte historische Werke und zitierte Gelehrte","Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-loading">Quellenbibliothek wird geladen…</div></section>`}
 const DUA_CAT_ORDER=["Morgen & Abend","Aufwachen","Schlaf","Schutz","Vergebung","Gebet","Nach dem Gebet","Moschee","Essen","Reise","Krankheit","Eltern","Familie","Wissen","Rizq","Tawakkul","Rechtleitung","Qurʾān","Allgemein"];
@@ -16964,12 +17002,12 @@ window.addEventListener("appinstalled",()=>trackPwaInstall(installPlatform(),"ap
 function needsPrayerPushHint(){const s=getPrayerSettings();if(s.reminder)return false;try{if(localStorage.getItem(PRAYER_HINT_KEY))return false}catch(e){}return true}
 function renderPrayerPushHint(){if(!needsPrayerPushHint())return "";const step=!hasPrayerLocation(getPrayerSettings())?"1. Standort freigeben · 2. Erinnerung aktivieren":"1. Gebetszeiten öffnen · 2. Erinnerung aktivieren";return `<section id="prayerPushHint" class="hint-banner prayer-hint"><div><strong>🔔 Gebets-Push auf dem Sperrbildschirm</strong><p>${step}. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung.</p></div><div class="hint-banner-actions"><button id="prayerHintGoBtn" class="hint-btn" type="button">Jetzt aktivieren</button><button id="prayerHintDismissBtn" class="hint-btn ghost" type="button">Später</button></div></section>`}
 function renderPopularPostsBlock(){return `<section id="popularPostsBlock" class="popular-panel premium-surface"><div class="section-head"><h3>Meist gelesen</h3><span id="popularPostsLabel">Beliebt bei Besuchern</span></div><div id="popularPostsContent" class="popular-list collapsed"><div class="loading" style="padding:12px;margin:0">Wird geladen …</div></div><button id="popularPostsToggle" class="popular-toggle" type="button" hidden>Mehr anzeigen</button></section>`}
-function fillPopularPosts(el,items){const isHomeV380=el?.classList?.contains("home-v380-popular-list");const maxItems=isHomeV380?3:5;const used=new Set();if(isHomeV380){const rec=recommendedPost();if(rec)used.add(String(rec.id));homeDiscoverPosts(new Set(used)).slice(0,6).forEach(p=>used.add(String(p.id)))}const rows=items.filter(it=>{if(!isHomeV380)return true;const id=String(it.id);if(used.has(id))return false;used.add(id);return true}).slice(0,maxItems).map((it,idx)=>{const post=posts.find(p=>String(p.id)===String(it.id));if(!post)return "";const rank=String(it.rank||idx+1).padStart(2,"0");const meta=post.category?esc(normalizePostCategory(post.category)):"Beitrag";if(isHomeV380)return `<button type="button" class="home-v380-popular-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Meist gelesen Platz ${rank}: ${esc(post.title)}"><span class="home-v380-popular-rank">${rank}</span><div class="home-v380-popular-text"><h4>${esc(post.title)}</h4><span>${meta}</span></div><span class="home-v380-open-row__action" aria-hidden="true">›</span></button>`;const metaLegacy=it.views>0?`${it.views} Aufrufe · ${esc(post.category||"Beitrag")}`:`${esc(post.category||"Beitrag")}`;return `<article class="popular-row" data-nav="post" data-value="${esc(post.id)}"><span class="popular-rank">${it.rank}</span><div class="popular-row-text"><h4>${esc(post.title)}</h4><span>${metaLegacy}</span></div></article>`}).filter(Boolean).join("");el.innerHTML=rows||`<div class="empty">${isHomeV380?"":"Noch keine Statistik – lies Beiträge, dann erscheinen hier die Favoriten."}</div>`;if(isHomeV380){const wrap=el.closest(".home-v380-popular-wrap");if(wrap&&!rows)wrap.style.display="none"}const toggle=$("popularPostsToggle");if(toggle){toggle.hidden=el.querySelectorAll(".popular-row").length<=2;toggle.textContent=el.classList.contains("collapsed")?"Mehr anzeigen":"Zuklappen"}bindEvents()}
+function fillPopularPosts(el,items){const isHomeV380=el?.classList?.contains("home-v380-popular-list");const maxItems=isHomeV380?3:5;const used=new Set();if(isHomeV380){const rec=recommendedPost();if(rec)used.add(String(rec.id));homeDiscoverPosts(new Set(used)).slice(0,6).forEach(p=>used.add(String(p.id)))}const rows=items.filter(it=>{if(!isHomeV380)return true;const id=String(it.id);if(used.has(id))return false;used.add(id);return true}).slice(0,maxItems).map((it,idx)=>{const post=posts.find(p=>String(p.id)===String(it.id));if(!post)return "";const rank=String(it.rank||idx+1).padStart(2,"0");const meta=post.category?esc(normalizePostCategory(post.category)):"Beitrag";if(isHomeV380)return `<button type="button" class="home-v380-popular-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Meist gelesen Platz ${rank}: ${esc(post.title)}"><span class="home-v380-popular-rank">${rank}</span><div class="home-v380-popular-text"><h4>${esc(post.title)}</h4><span>${meta}</span></div></button>`;const metaLegacy=it.views>0?`${it.views} Aufrufe · ${esc(post.category||"Beitrag")}`:`${esc(post.category||"Beitrag")}`;return `<article class="popular-row" data-nav="post" data-value="${esc(post.id)}"><span class="popular-rank">${it.rank}</span><div class="popular-row-text"><h4>${esc(post.title)}</h4><span>${metaLegacy}</span></div></article>`}).filter(Boolean).join("");el.innerHTML=rows||`<div class="empty">${isHomeV380?"":"Noch keine Statistik – lies Beiträge, dann erscheinen hier die Favoriten."}</div>`;if(isHomeV380){const wrap=el.closest(".home-v380-popular-wrap");if(wrap&&!rows)wrap.style.display="none"}const toggle=$("popularPostsToggle");if(toggle){toggle.hidden=el.querySelectorAll(".popular-row").length<=2;toggle.textContent=el.classList.contains("collapsed")?"Mehr anzeigen":"Zuklappen"}bindEvents()}
 function fillPopularPostsFallback(el){const items=posts.slice(0,Math.min(5,posts.length)).map((p,i)=>({id:p.id,views:0,rank:i+1}));fillPopularPosts(el,items);const label=$("popularPostsLabel");if(label)label.textContent="Empfohlene Beiträge"}
 async function loadPopularPostsBlock(){const content=$("popularPostsContent");if(!content||currentRoute.view!=="home")return;const maxFetch=content.classList.contains("home-v380-popular-list")?8:5;try{const raw=sessionStorage.getItem(POPULAR_CACHE_KEY);if(raw){const cached=JSON.parse(raw);if(cached&&Array.isArray(cached.items)&&Date.now()-Number(cached.ts||0)<300000){fillPopularPosts(content,cached.items);return}}}catch(e){}if(!hasSupabaseCfg()){fillPopularPostsFallback(content);return}try{const totals=(await fetchAnalyticsDashboard()).totals||[];const top=totals.filter(x=>x.content_type==="post"&&Number(x.views)>0).slice(0,maxFetch);const items=top.map((t,i)=>{const post=posts.find(p=>String(p.id)===String(t.content_id));return post?{id:post.id,views:Number(t.views||0),rank:i+1}:null}).filter(Boolean);if(items.length){try{sessionStorage.setItem(POPULAR_CACHE_KEY,JSON.stringify({ts:Date.now(),items}))}catch(e){}fillPopularPosts(content,items)}else fillPopularPostsFallback(content)}catch(e){fillPopularPostsFallback(content)}}
 function currentUpdateIcon(item){const key=String([item.type,item.title,item.badge,item.nav,item.value].filter(Boolean).join(" ")).toLowerCase();if(/zakat|zakāt/.test(key))return"🕌";if(/dua|duʿā|bitt/.test(key))return"🤲";if(/serie|hukm|muhakamah|muḥākamah/.test(key))return"⚖️";if(/qur|tafsir/.test(key))return"📖";if(/post|beitrag/.test(key))return"📚";return"✨"}
 function currentUpdateMeta(item){const parts=[];if(item.badge)parts.push(item.badge);else{const ttl=Number(item.ttlHours)||24;parts.push(ttl>=48?`${Math.round(ttl/24)} Tage`:`${ttl} Std.`)}if(item.count)parts.push(`${item.count} neu`);return parts.join(" · ")}
-function renderCurrentFocus(){const items=activeCurrentUpdates().slice(0,4);if(!items.length)return"";return `<section class="current-focus premium-surface"><div class="current-focus-head"><div><span>Aktuell</span><h3>Neu im Fokus</h3></div><button class="current-focus-all" type="button" data-nav="news">Alles Neue</button></div><div class="current-focus-list">${items.map((item,idx)=>{const newsId=item.id||String(idx);const directNav=item.nav&&item.nav!=="news-detail";const navView=directNav?item.nav:"news-detail";const navValue=directNav?(item.value||""):newsId;const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":"current-focus-row";return `<article class="${rowClass}" data-nav="${esc(navView)}" data-value="${esc(navValue)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DAR AL TAWḤID.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">→</span></article>`}).join("")}</div></section>`}
+function renderCurrentFocus(){const items=activeCurrentUpdates().slice(0,4);if(!items.length)return"";return `<section class="current-focus premium-surface"><div class="current-focus-head"><div><span>Aktuell</span><h3>Neu im Fokus</h3></div><button class="current-focus-all" type="button" data-nav="news">Alles Neue</button></div><div class="current-focus-list">${items.map((item,idx)=>{const newsId=item.id||String(idx);const directNav=item.nav&&item.nav!=="news-detail";const navView=directNav?item.nav:"news-detail";const navValue=directNav?(item.value||""):newsId;const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":"current-focus-row";return `<article class="${rowClass}" data-nav="${esc(navView)}" data-value="${esc(navValue)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DAR AL TAWḤID.")}</p><small>${esc(currentUpdateMeta(item))}</small></div></article>`}).join("")}</div></section>`}
 
   function renderNewsDetail(newsId){
     const item=activeCurrentUpdates().find((x,i)=>(x.id||String(i))===newsId)||activeCurrentUpdates()[0];
@@ -17989,43 +18027,41 @@ function updateHomeAppStatusUi(){
   const strip=document.getElementById("homePushRemindersStrip");
   if(strip)updateHomePushRemindersSummary();
 }
-function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={}){
+function homePostPreviewCard(post,{label="NEUESTER BEITRAG"}={}){
   if(!post)return"";
   const excerpt=findQuote(post);
   const meta=[post.scholar,post.source].filter(Boolean).join(" · ");
-  return `<article class="home-v380-post-preview" data-nav="post" data-value="${esc(post.id)}" tabindex="0" role="link" aria-label="${esc(post.title)} öffnen"><span class="home-v380-kicker">${esc(label)}</span><h3 class="home-v380-post-title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-post-excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-post-meta">${esc(meta)}</p>`:""}<span class="home-v380-post-action" aria-hidden="true">${esc(action)} →</span></article>`;
+  return `<article class="home-v380-post-preview" data-nav="post" data-value="${esc(post.id)}" tabindex="0" role="link" aria-label="${esc(post.title)} öffnen"><span class="home-v380-kicker">${esc(label)}</span><h3 class="home-v380-post-title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-post-excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-post-meta">${esc(meta)}</p>`:""}</article>`;
 }
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
   if(!prog){
-    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Lesung beginnen</span><span class="home-v380-quran-hero__place">Qurʾān öffnen</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Qurʾān</span><span class="home-v380-quran-hero__place">Lesung beginnen</span></div></button>`;
   }
-  const meta=quranSurahMeta(prog.surahNumber);
-  const surahName=meta?.transliteration||prog.surahName||`Sūrah ${prog.surahNumber}`;
   const ay=Math.max(1,Number(prog.ayahNumber)||1);
-  const place=`Sūrat ${surahName} · Āyah ${ay}`;
   const target=`${esc(prog.surahNumber)}:${esc(ay)}`;
-  const aria=`Weiterlesen: ${place}`;
-  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Weiterlesen</span><span class="home-v380-quran-hero__place">${esc(place)}</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+  const meta=quranContinueMetaLine(prog);
+  const aria=`Qurʾān weiterlesen${meta?`. ${meta}`:""}`;
+  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Weiterlesen</span><span class="home-v380-quran-hero__place">Qurʾān weiterlesen</span></div></button>`;
 }
 function renderHomeDailyDuaRow(){
   const d=dailyDua();
   if(!d)return"";
   const preview=String(d.de||d.occasion||"").trim();
-  return `<button type="button" class="home-v380-open-row" data-nav="dua" data-value="${esc(d.id)}" aria-label="Duʿāʾ des Tages öffnen: ${esc(d.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Duʿāʾ des Tages</span><h3 class="home-v380-open-row__title">${esc(d.title)}</h3>${preview?`<p class="home-v380-open-row__excerpt">${esc(preview)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Öffnen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="dua" data-value="${esc(d.id)}" aria-label="Duʿāʾ des Tages öffnen: ${esc(d.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Duʿāʾ des Tages</span><h3 class="home-v380-open-row__title">${esc(d.title)}</h3>${preview?`<p class="home-v380-open-row__excerpt">${esc(preview)}</p>`:""}</div></button>`;
 }
 function renderHomeRecommendedRow(excludeIds=new Set()){
   const post=recommendedPost();
   if(!post||excludeIds.has(String(post.id)))return"";
   const excerpt=findQuote(post);
   const meta=[post.category?normalizePostCategory(post.category):"",post.scholar].filter(Boolean).join(" · ");
-  return `<button type="button" class="home-v380-open-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Lesen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div></button>`;
 }
 function renderHomeRamadanRow(){
   const ctx=seasonalIslamicContext();
   if(!ctx)return"";
   const headline=ctx.phase==="countdown"?`Noch ca. ${ctx.daysLeft} Tage bis Ramaḍān`:ctx.phase==="ramadan"?`Tag ${ctx.day} im Fastenmonat`:ctx.title;
-  return `<button type="button" class="home-v380-open-row" data-nav="ramadan" aria-label="Ramaḍān-Bereich öffnen"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Saison</span><h3 class="home-v380-open-row__title">${esc(headline)}</h3><p class="home-v380-open-row__excerpt">${esc(ctx.subtitle)} · Suḥūr, Iftār, Duʿāʾ & Beiträge</p></div><span class="home-v380-open-row__action" aria-hidden="true">Öffnen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="ramadan" aria-label="Ramaḍān-Bereich öffnen"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Saison</span><h3 class="home-v380-open-row__title">${esc(headline)}</h3><p class="home-v380-open-row__excerpt">${esc(ctx.subtitle)} · Suḥūr, Iftār, Duʿāʾ & Beiträge</p></div></button>`;
 }
 function renderHomeTodaySection(){
   const highlights=renderHighlightSections();
@@ -18044,8 +18080,8 @@ function renderHomeLatestBlock(excludeIds=new Set()){
   const pool=homeDiscoverPosts(new Set(excludeIds));
   const latest=pool.slice(0,6);
   if(!latest.length)return"";
-  if(latest.length===1)return homePostPreviewCard(latest[0],{label:"Neuester Beitrag",action:"Öffnen"});
-  return `<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag",action:"Öffnen"})).join("")}</div>`;
+  if(latest.length===1)return homePostPreviewCard(latest[0],{label:"Neuester Beitrag"});
+  return `<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag"})).join("")}</div>`;
 }
 function renderHomePopularSection(){
   const exclude=new Set();
@@ -18061,20 +18097,23 @@ function renderHomeDiscoverSection(){
   const pool=homeDiscoverPosts(new Set(exclude));
   const latest=pool.slice(0,6);
   let latestHtml="";
-  if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag",action:"Öffnen"});
-  else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag",action:"Öffnen"})).join("")}</div>`;
+  if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag"});
+  else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag"})).join("")}</div>`;
   if(!latestHtml)return"";
   return `<section class="home-v380-section" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2><button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div>${latestHtml}</section>`;
 }
 function renderHomeLibrariesSection(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
-  const cards=[];
-  if(testOnly)cards.push(`<button type="button" class="home-v380-lib-card" data-nav="bibliothek" aria-label="DAR AL TAWḤĪD Bibliothek öffnen"><h3>DAR AL TAWḤĪD Bibliothek</h3><p>Eigene PDFs, Bücher und thematische Lernmaterialien</p><span class="home-v380-lib-card__foot" aria-hidden="true">Öffnen →</span></button>`);
-  if(testOnly)cards.push(`<button type="button" class="home-v380-lib-card" data-nav="books" aria-label="Quellenbibliothek öffnen"><h3>Quellenbibliothek</h3><p>Geprüfte historische Werke und klassische Quellen</p><span class="home-v380-lib-card__foot" aria-hidden="true">Öffnen →</span></button>`);
-  else cards.push(`<button type="button" class="home-v380-lib-card" data-nav="books" aria-label="Quellenbibliothek öffnen"><h3>Quellenbibliothek</h3><p>Geprüfte historische Werke und klassische Quellen</p><span class="home-v380-lib-card__foot" aria-hidden="true">Öffnen →</span></button>`);
-  if(!cards.length)return"";
-  const sliderClass=" home-v380-lib-grid--slider";
-  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards.join("")}</div></section>`;
+  const defs=[];
+  if(testOnly)defs.push({nav:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",desc:"Eigene PDFs, Bücher und thematische Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
+  defs.push({nav:"books",title:"Quellenbibliothek",desc:"Geprüfte historische Werke und klassische Quellen",aria:"Quellenbibliothek öffnen"});
+  defs.push({nav:"scholars",title:"Gelehrte",desc:"Imāme, Ṣaḥābah, Tābiʿīn und frühe Gelehrte",aria:"Gelehrten-Bibliothek öffnen"});
+  defs.push({nav:"duas",title:"Duʿāʾ",desc:"Sammlung aus Qurʾān und Sunnah mit Quellen",aria:"Duʿāʾ-Sammlung öffnen"});
+  defs.push({nav:"hadith",title:"Hadith-Bibliothek",desc:"Bücher, Kapitel und geprüfte Übersetzungen",aria:"Hadith-Bibliothek öffnen"});
+  if(!defs.length)return"";
+  const sliderClass=defs.length>1?" home-v380-lib-grid--slider":"";
+  const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></button>`).join("");
+  return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards}</div></section>`;
 }
 function renderHomeSearchSection(){
   const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
@@ -18312,7 +18351,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v406";
+const APP_BUILD_ID="app-shell-v407";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
