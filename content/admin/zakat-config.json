@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": "2026-07-24T21:15:08.127Z",
+  "updatedAt": "2026-07-24T21:35:08.117Z",
   "nisab": {
     "goldGrams": 85,
     "silverGrams": 595,
@@ -14,12 +14,18 @@
     "silverPerGramEur": 1.65,
     "currency": "EUR",
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
-    "verifiedAt": "2026-07-24T21:15:08.127Z",
+    "verifiedAt": "2026-07-24T21:35:08.117Z",
     "verifiedBy": "price-engine",
     "active": true,
     "apiFallback": false
   },
   "priceHistory": [
+    {
+      "goldPerGramEur": 114.61,
+      "silverPerGramEur": 1.65,
+      "verifiedAt": "2026-07-24T21:15:08.127Z",
+      "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB"
+    },
     {
       "goldPerGramEur": 114.59,
       "silverPerGramEur": 1.65,
@@ -192,12 +198,6 @@
       "goldPerGramEur": 115.11,
       "silverPerGramEur": 1.65,
       "verifiedAt": "2026-07-23T12:25:08.185Z",
-      "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB"
-    },
-    {
-      "goldPerGramEur": 115.09,
-      "silverPerGramEur": 1.65,
-      "verifiedAt": "2026-07-23T11:45:08.335Z",
       "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB"
     }
   ],
