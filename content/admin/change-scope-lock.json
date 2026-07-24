@@ -28,6 +28,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-sync-chip-visible-v411-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Aktualisieren-Chip auf Startseite nicht sichtbar — unter Titel platzieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
       "id": "dua-share-flat-v410-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Notfall: Duʿāʾ-Teilen hart reparieren — 3×2 Raster wie Beiträge, Telegram nicht mehr allein unten",
