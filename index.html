@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v401";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v402";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -3756,7 +3756,7 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
@@ -12035,6 +12035,8 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
   --quran-surface-primary:color-mix(in srgb,var(--card) 88%,var(--gold2) 12%);
   --quran-surface-secondary:color-mix(in srgb,var(--card) 92%,transparent);
   --quran-surface-active:color-mix(in srgb,var(--card) 78%,var(--gold2) 22%);
+  --quran-on-accent:var(--cream);
+  --quran-on-surface:var(--quran-text-secondary);
   --quran-text-primary:var(--premium-title,var(--text));
   --quran-text-secondary:var(--premium-body,var(--cream));
   --quran-text-muted:var(--muted);
@@ -12143,7 +12145,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-sheet-section b{display:block;font-size:11px;margin-bottom:6px;color:var(--quran-text-primary)}
 .qov-sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .qov-btn-primary,.qov-btn-secondary{min-height:44px;border-radius:12px;font-size:12.5px;font-weight:900;cursor:pointer}
-.qov-btn-primary{border:0;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 88%,#fff 12%),color-mix(in srgb,var(--quran-accent-secondary) 82%,#000 18%));color:color-mix(in srgb,var(--bg) 88%,#000)}
+.qov-btn-primary{border:0;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 88%,#fff 12%),color-mix(in srgb,var(--quran-accent-secondary) 82%,#000 18%));color:var(--quran-on-accent,var(--cream))}
 .qov-btn-secondary{border:1px solid var(--quran-line-secondary);background:transparent;color:var(--quran-text-secondary)}
 .qov-btn-primary:disabled{opacity:.45;cursor:not-allowed}
 .qov-direct-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:8px}
@@ -13238,6 +13240,20 @@ html[data-theme="royal"] body.is-quran-overview .qov-page{
   grid-column:auto!important;padding:0 14px!important;white-space:nowrap;
   min-width:max(74px,18vw)!important;
 }
+.qov-btn-primary,.qov-direct-go.qov-btn-primary{
+  border:1px solid color-mix(in srgb,var(--quran-accent-primary) 46%,transparent)!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 90%,#fff 10%),color-mix(in srgb,var(--quran-accent-secondary) 78%,#000 22%))!important;
+  color:var(--quran-on-accent,var(--cream))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 22%,transparent),0 4px 14px color-mix(in srgb,var(--quran-accent-primary) 16%,transparent)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.qov-btn-primary:disabled,.qov-direct-go.qov-btn-primary:disabled{
+  color:var(--quran-on-accent,var(--cream))!important;
+  opacity:.5!important;
+}
+html[data-theme="light"] .qov-page{--quran-on-accent:#2a1a08;}
+html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-go.qov-btn-primary{color:var(--quran-on-accent,#2a1a08)!important;}
 </style>
 </head>
 <body class="has-bottom-nav">
@@ -18143,7 +18159,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v401";
+const APP_BUILD_ID="app-shell-v402";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
