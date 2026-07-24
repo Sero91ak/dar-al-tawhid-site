@@ -28,6 +28,76 @@
   ],
   "unlockedScopes": [
     {
+      "id": "isnad-compact-read-v405-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Ibn Sīrīn-Zitat im Maßstab der Überlieferung vollständig lesbar, kompakt",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "compact-related-tags-v404-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: App-Reparatur-Absturz compactRelatedTags in Besucher- und Test-App beheben",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "quran-header-cleanup-v403-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Lupe und Drei-Punkte-Menü im Qurʾān-Header entfernen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "quran-contrast-v402-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Öffnen-Button und Qurʾān-Controls auf dunklen Flächen hell lesbar",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "quran-progress-fix-v401-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Qurʾān-Absturz initQuranProgressObserver in Besucher- und Test-App reparieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
       "id": "visitor-quiz-tab-v400-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Quiz in Besucher-App wiederherstellen, unten als Tab, ʿIlm entfernen",
