@@ -28,6 +28,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "library-visitor-stats-v424-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek-Besucherstatistik auf PDF-Detailseite (Klicks, Gelesen, Downloads)",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/library-stats-migration.sql",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T00:00:00.000Z"
+    },
+    {
       "id": "library-reader-black-fix-v422-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Bibliothek PDF-Leser schwarzer Bildschirm sofort reparieren",

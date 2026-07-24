@@ -34,6 +34,90 @@
   let catalogLoading = null;
   let uiState = { query: "", category: "Alle", catOpen: false };
   let readerState = null;
+  const LIBRARY_STATS_CACHE = new Map();
+
+  function trackLibraryEvent(eventType, pub) {
+    if (!pub) return;
+    try {
+      const track = global.trackAnalytics || (global.DarAnalytics && global.DarAnalytics.track.bind(global.DarAnalytics));
+      if (typeof track === "function") {
+        track(eventType, {
+          contentType: "library",
+          contentId: String(pub.id || ""),
+          contentTitle: pub.title || ""
+        });
+      }
+    } catch (e) {
+      /* Statistik darf Lesen nie blockieren */
+    }
+  }
+
+  function formatStatCount(value) {
+    const n = Number(value) || 0;
+    try {
+      return new Intl.NumberFormat("de-DE").format(n);
+    } catch (e) {
+      return String(n);
+    }
+  }
+
+  async function fetchLibraryStats(publicationId) {
+    const id = String(publicationId || "").trim();
+    if (!id) return { clicks: 0, reads: 0, downloads: 0 };
+    if (LIBRARY_STATS_CACHE.has(id)) return LIBRARY_STATS_CACHE.get(id);
+    const cfg = global.DAR_ANALYTICS_CONFIG || {};
+    const baseUrl = String(cfg.supabaseUrl || "").replace(/\/$/, "");
+    const key = String(cfg.supabaseKey || "");
+    if (!baseUrl || !key) {
+      const empty = { clicks: 0, reads: 0, downloads: 0 };
+      LIBRARY_STATS_CACHE.set(id, empty);
+      return empty;
+    }
+    try {
+      const res = await fetch(
+        `${baseUrl}/rest/v1/stats_totals?content_type=eq.library&content_id=eq.${encodeURIComponent(id)}&select=views,shares,saves&limit=1`,
+        { headers: { apikey: key, Authorization: `Bearer ${key}` } }
+      );
+      if (!res.ok) throw new Error("stats " + res.status);
+      const rows = await res.json();
+      const row = Array.isArray(rows) ? rows[0] : null;
+      const stats = {
+        clicks: Number(row?.views) || 0,
+        reads: Number(row?.shares) || 0,
+        downloads: Number(row?.saves) || 0
+      };
+      LIBRARY_STATS_CACHE.set(id, stats);
+      return stats;
+    } catch (e) {
+      const empty = { clicks: 0, reads: 0, downloads: 0 };
+      LIBRARY_STATS_CACHE.set(id, empty);
+      return empty;
+    }
+  }
+
+  function renderLibraryStatsPanel(pub) {
+    return `<section class="lib-stats-panel" data-library-stats="${esc(pub.id)}" aria-label="Statistik dieser Veröffentlichung">
+      <h3 class="lib-stats-title">Statistik</h3>
+      <div class="lib-stats-grid">
+        <div class="lib-stats-item"><b data-library-stat-clicks>—</b><span>Klicks</span></div>
+        <div class="lib-stats-item"><b data-library-stat-reads>—</b><span>Gelesen</span></div>
+        <div class="lib-stats-item"><b data-library-stat-downloads>—</b><span>Downloads</span></div>
+      </div>
+      <p class="lib-stats-note">Öffentliche Besucherzahlen — jeder Aufruf, Lesevorgang und Download wird gezählt.</p>
+    </section>`;
+  }
+
+  async function hydrateLibraryStats(publicationId) {
+    const panel = document.querySelector(`[data-library-stats="${publicationId}"]`);
+    if (!panel) return;
+    const stats = await fetchLibraryStats(publicationId);
+    const clicksEl = panel.querySelector("[data-library-stat-clicks]");
+    const readsEl = panel.querySelector("[data-library-stat-reads]");
+    const downloadsEl = panel.querySelector("[data-library-stat-downloads]");
+    if (clicksEl) clicksEl.textContent = formatStatCount(stats.clicks);
+    if (readsEl) readsEl.textContent = formatStatCount(stats.reads);
+    if (downloadsEl) downloadsEl.textContent = formatStatCount(stats.downloads);
+  }
 
   function esc(s) {
     return global.esc ? global.esc(s) : String(s ?? "")
@@ -343,6 +427,7 @@
     }
 
     markOpened(pub.id);
+    trackLibraryEvent("library_view", pub);
     const progress = getProgress(pub.id);
     const offline = offlineIds && offlineIds.has(pub.id);
     const readEnabled = canRead(pub);
@@ -384,6 +469,7 @@
         <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
       </div>
+      ${renderLibraryStatsPanel(pub)}
       ${toc.length ? `<section class="lib-panel"><h3>Inhaltsverzeichnis</h3><ul>${toc.map((item) => `<li>${esc(item.title || item)}</li>`).join("")}</ul></section>` : ""}
       ${pub.about ? `<section class="lib-panel"><h3>Über diese Veröffentlichung</h3><p>${esc(pub.about)}</p></section>` : ""}
       ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((s) => `<li>${esc(typeof s === "string" ? s : s.title || s.name || "")}</li>`).join("")}</ul></section>` : ""}
@@ -684,6 +770,7 @@
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
       await renderReaderScroll({ page: readerState.page });
+      trackLibraryEvent("library_read", pub);
     } catch (e) {
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
@@ -730,7 +817,12 @@
         setTimeout(() => document.addEventListener("click", closeOnOutside), 0);
       }
       root.querySelectorAll("[data-library-open]").forEach((btn) => {
-        btn.onclick = () => navigateDetail(btn.getAttribute("data-library-open") || "");
+        btn.onclick = () => {
+          const slug = btn.getAttribute("data-library-open") || "";
+          const pub = findPublication(slug);
+          if (pub) trackLibraryEvent("library_click", pub);
+          navigateDetail(slug);
+        };
       });
     }
 
@@ -769,6 +861,9 @@
             a.download = `${pub.slug || pub.id}.pdf`;
             a.click();
             setTimeout(() => URL.revokeObjectURL(url), 4000);
+            trackLibraryEvent("library_download", pub);
+            LIBRARY_STATS_CACHE.delete(String(pub.id));
+            hydrateLibraryStats(pub.id);
           } catch (e) {
             alert("Der Download konnte nicht abgeschlossen werden. Bitte versuche es erneut.");
           }
@@ -802,8 +897,15 @@
       });
 
       detail.querySelectorAll("[data-library-open]").forEach((btn) => {
-        btn.onclick = () => navigateDetail(btn.getAttribute("data-library-open") || "");
+        btn.onclick = () => {
+          const slug = btn.getAttribute("data-library-open") || "";
+          const related = findPublication(slug);
+          if (related) trackLibraryEvent("library_click", related);
+          navigateDetail(slug);
+        };
       });
+
+      hydrateLibraryStats(pub.id);
     }
 
     if (route && route.view === "bibliothek-reader") {
@@ -832,6 +934,7 @@
               a.download = `${pub.slug || pub.id}.pdf`;
               a.click();
               setTimeout(() => URL.revokeObjectURL(url), 4000);
+              trackLibraryEvent("library_download", pub);
             } catch (e) {
               alert("Der Download konnte nicht abgeschlossen werden. Bitte versuche es erneut.");
             }
