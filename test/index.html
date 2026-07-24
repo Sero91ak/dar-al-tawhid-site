@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- pages-deploy-stamp:1784899446815 -->
+<!-- pages-deploy-stamp:1784899754534 -->
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -12042,11 +12042,12 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-progress{height:3px;border-radius:999px;background:var(--quran-line-muted);margin:6px 0 0;overflow:hidden;max-width:120px}
 .qov-progress span{display:block;height:100%;background:var(--quran-gradient-active);border-radius:999px}
 .qov-search-wrap{margin-bottom:8px}
-.qov-search-shell{position:relative;display:flex;align-items:center}
-.qov-search-icon{position:absolute;left:12px;color:var(--quran-text-muted);font-size:14px;pointer-events:none}
-.qov-search{width:100%;min-height:46px;border:0;border-bottom:1px solid var(--quran-line-secondary);border-radius:12px 12px 0 0;background:var(--quran-surface-primary);color:var(--quran-text-secondary);padding:0 40px 0 36px;font-size:15px;transition:border-color .18s ease,box-shadow .18s ease}
-.qov-search:focus{border-bottom-color:var(--quran-accent-primary);outline:none;box-shadow:var(--quran-focus-ring)}
-.qov-search-clear{position:absolute;right:6px;min-width:36px;min-height:36px;border:0;border-radius:10px;background:transparent;color:var(--quran-text-muted);font-size:16px;cursor:pointer;display:none}
+.qov-search-shell{position:relative;display:flex;align-items:center;gap:10px;padding:0 14px;min-height:48px}
+.qov-search-icon{position:static;left:auto;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;color:var(--quran-text-muted);font-size:14px;pointer-events:none;line-height:1}
+.qov-search-icon svg{width:17px;height:17px;display:block}
+.qov-search{width:100%;min-height:48px;flex:1 1 auto;min-width:0;border:0;border-radius:0;background:transparent;color:var(--quran-text-secondary);padding:12px 0;font-size:15px;outline:none;box-shadow:none;-webkit-appearance:none;appearance:none}
+.qov-search:focus{border:0;outline:none;box-shadow:none}
+.qov-search-clear{position:static;right:auto;flex:0 0 auto;min-width:32px;min-height:32px;border:0;border-radius:10px;background:transparent;color:var(--quran-text-muted);font-size:16px;cursor:pointer;display:none}
 .qov-search-clear.is-visible{display:inline-flex;align-items:center;justify-content:center}
 .qov-search-hint{margin:5px 2px 0;color:var(--quran-text-muted);font-size:10px;line-height:1.35}
 .qov-recent-row{display:flex;gap:6px;overflow-x:auto;margin-top:6px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
@@ -12987,45 +12988,45 @@ body.is-home-route .footer strong{font-size:14px}
 .qov-resume::before{display:none!important}
 .qov-resume-card{
   display:flex;align-items:stretch;width:100%;padding:0;border:1px solid color-mix(in srgb,var(--quran-accent-primary) 32%,var(--quran-line-secondary));
-  border-radius:16px;overflow:hidden;
+  border-radius:14px;overflow:hidden;
   background:
-    radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--quran-accent-primary) 16%,transparent),transparent 58%),
-    radial-gradient(90% 80% at 100% 100%,color-mix(in srgb,var(--quran-accent-secondary) 10%,transparent),transparent 52%),
-    linear-gradient(168deg,color-mix(in srgb,var(--quran-surface-primary) 88%,transparent),color-mix(in srgb,var(--quran-page-bg,var(--bg)) 92%,var(--quran-accent-primary) 8%));
-  box-shadow:0 10px 28px color-mix(in srgb,#000 14%,transparent),inset 0 1px 0 color-mix(in srgb,var(--quran-accent-primary) 12%,transparent);
+    radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--quran-accent-primary) 14%,transparent),transparent 58%),
+    linear-gradient(168deg,color-mix(in srgb,var(--quran-surface-primary) 86%,transparent),color-mix(in srgb,var(--quran-page-bg,var(--bg)) 94%,var(--quran-accent-primary) 6%));
+  box-shadow:0 8px 22px color-mix(in srgb,#000 12%,transparent);
   transition:border-color .2s ease,box-shadow .2s ease,filter .2s ease;
 }
 .qov-resume-card:hover,.qov-resume-card:focus-visible{
   border-color:color-mix(in srgb,var(--quran-accent-primary) 48%,var(--quran-line-secondary));
-  box-shadow:0 12px 32px color-mix(in srgb,#000 16%,transparent),0 0 0 2px color-mix(in srgb,var(--quran-accent-primary) 18%,transparent);
+  box-shadow:0 10px 26px color-mix(in srgb,#000 14%,transparent),0 0 0 2px color-mix(in srgb,var(--quran-accent-primary) 16%,transparent);
   filter:brightness(1.02);outline:none;
 }
 .qov-resume-inner{
-  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 12px;width:100%;
-  padding:14px 16px 13px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;font:inherit;
+  display:block;width:100%;padding:10px 14px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;font:inherit;
 }
-.qov-resume-inner .qov-resume-label{grid-column:1/-1;margin:0 0 2px}
-.qov-resume-inner h3,.qov-resume-inner .qov-resume-line{
-  margin:0;font-family:var(--serif);font-size:clamp(16px,4vw,19px);color:var(--quran-text-primary);line-height:1.15;
+.qov-resume-inner--compact .qov-resume-line{
+  margin:0;font-family:var(--serif);font-size:clamp(14px,3.6vw,16.5px);font-weight:800;line-height:1.22;color:var(--quran-text-primary);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.qov-resume-inner .qov-resume-meta{margin:0;font-size:11px;line-height:1.35;color:var(--quran-text-muted)}
-.qov-resume-inner .qov-resume-arrow{
-  grid-row:1/span 3;align-self:center;font-size:18px;color:var(--quran-accent-primary);padding:0 2px 0 6px;
-}
+.qov-resume-inner .qov-resume-label{display:none}
+.qov-resume-inner .qov-resume-meta{display:none}
+.qov-resume-inner .qov-resume-arrow{display:none!important}
 .qov-search-shell{
-  border:1px solid var(--quran-line-secondary);border-radius:14px;
-  background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 92%,var(--quran-accent-primary) 8%);
+  border:1px solid color-mix(in srgb,var(--quran-accent-primary) 22%,var(--quran-line-secondary));
+  border-radius:14px;
+  background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 96%,var(--quran-accent-primary) 4%);
   overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease;
+  box-shadow:none;
 }
 .qov-search-shell:focus-within{
   border-color:color-mix(in srgb,var(--quran-accent-primary) 42%,var(--quran-line-secondary));
-  box-shadow:0 0 0 2px color-mix(in srgb,var(--quran-accent-primary) 16%,transparent);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent);
 }
+.qov-search-shell:focus-within .qov-search-icon{color:color-mix(in srgb,var(--quran-accent-primary) 72%,var(--quran-text-muted) 28%)}
 .qov-search{
-  min-height:48px!important;border:0!important;border-radius:0!important;
-  background:transparent!important;padding:0 40px 0 38px!important;
+  min-height:48px!important;border:0!important;border-bottom:0!important;border-radius:0!important;
+  background:transparent!important;padding:12px 0!important;box-shadow:none!important;outline:none!important;
 }
-.qov-search:focus{box-shadow:none!important}
+.qov-search:focus,.qov-search:focus-visible{border:0!important;border-bottom:0!important;box-shadow:none!important;outline:none!important}
 .qov-direct-row{
   min-height:54px!important;padding:12px 14px!important;margin:4px 0 8px!important;
   border:1px solid var(--quran-line-muted)!important;border-radius:14px!important;
@@ -13446,8 +13447,8 @@ function renderQuranQuickPick(){return `<section class="qov-direct"><button type
 function renderQuranDirectOpenSheet(){if(!quranMeta)return "";const draft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const options=quranMeta.surahs.map(s=>`<option value="${s.id}"${String(draft.surah)===String(s.id)?" selected":""}>${s.id}. ${esc(s.transliteration)}</option>`).join("");const meta=draft.surah?quranSurahMeta(Number(draft.surah)):null;const ayahOpts=meta?quranAyahOptions(meta.total_verses,draft.ayah):"<option value=\"\">Āyah</option>";const valid=Number(draft.surah)>=1&&Number(draft.surah)<=114&&(!draft.ayah||Number(draft.ayah)>=1&&meta&&Number(draft.ayah)<=meta.total_verses);return `<div class="qov-sheet-backdrop" id="qovDirectBackdrop" data-qov-direct-backdrop role="presentation"><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovDirectTitle" id="qovDirectSheet"><div class="qov-sheet-head"><h3 id="qovDirectTitle">Direkt öffnen</h3><button type="button" class="qov-icon-btn" data-qov-direct-close aria-label="Schließen">×</button></div><div class="qov-sheet-section"><label class="visually-hidden" for="quranQuickSurah">Sūrah</label><div class="qov-direct-grid"><select id="quranQuickSurah" class="direct-pick" aria-label="Sūrah wählen"><option value="">Sūrah</option>${options}</select><select id="quranQuickAyah" class="direct-pick" aria-label="Āyah wählen" ${meta?"":"disabled"}>${ayahOpts}</select><input id="qovDirectRef" type="text" inputmode="text" placeholder="z. B. 2:255" value="${esc(draft.ref||"")}" aria-label="Referenz eingeben"><button id="quranQuickGo" class="qov-btn-primary" type="button" ${valid?"":"disabled"}>Öffnen</button></div></div><div class="qov-sheet-actions"><button type="button" class="qov-btn-secondary" data-qov-direct-close>Abbrechen</button></div></section></div>`}
 function renderQuranToolsSheet(){return `<div class="qov-sheet-backdrop" id="qovToolsBackdrop" data-qov-tools-backdrop role="presentation"><section class="qov-sheet" role="dialog" aria-modal="true" aria-labelledby="qovToolsTitle"><div class="qov-sheet-head"><h3 id="qovToolsTitle">Werkzeuge</h3><button type="button" class="qov-icon-btn" data-qov-tools-close aria-label="Schließen">×</button></div><div class="qov-tools-list"><button type="button" class="qov-tools-item" data-qov-tools-display>Darstellung &amp; Schrift</button><button type="button" class="qov-tools-item" data-nav="quran-topic" data-value="saved">Notizen &amp; Merkliste</button><button type="button" class="qov-tools-item" data-qov-tools-favorites>Favoriten anzeigen</button><button type="button" class="qov-tools-item" data-nav="quran-topic">Themen</button></div></section></div>`}
 function renderQuranOverviewHeader(totalAyat){return `<header class="qov-header" id="qovHeader"><div class="qov-header-row"><button type="button" class="qov-back" id="qovBackBtn" aria-label="Zurück">←</button><div class="qov-title-wrap"><h1 class="qov-title">Qurʾān</h1><p class="qov-subtitle">114 Sūren · ${totalAyat} Āyāt</p></div><div class="qov-icon-actions"><button type="button" class="qov-icon-btn" id="qovSearchBtn" aria-label="Suche fokussieren">🔍</button><button type="button" class="qov-icon-btn" id="qovToolsBtn" aria-label="Werkzeuge" aria-haspopup="dialog">⋯</button></div></div></header>`}
-function renderQuranResumeCard(){const prog=getPreferredQuranProgress();if(!prog||!quranSurahMeta(prog.surahNumber)){return `<section class="qov-resume" aria-label="Einstieg"><button type="button" class="qov-resume-card dar-click-glow" data-quran-continue="1:1"><span class="qov-resume-inner"><span class="qov-resume-label">Einstieg</span><span class="qov-resume-line">Beginne deine Qurʾān-Lesung</span><span class="qov-resume-meta">Wähle eine Sūrah oder starte mit al-Fātiḥah.</span><span class="qov-resume-arrow" aria-hidden="true">→</span></span></button></section>`}const meta=quranSurahMeta(prog.surahNumber);if(!meta)return `<section class="qov-resume" aria-label="Weiterlesen"><button type="button" class="qov-resume-card dar-click-glow" data-quran-continue="1:1"><span class="qov-resume-inner"><span class="qov-resume-label">Weiterlesen</span><span class="qov-resume-line">Lesestand zurücksetzen</span><span class="qov-resume-meta">Gespeicherter Stand ist ungültig.</span><span class="qov-resume-arrow" aria-hidden="true">→</span></span></button></section>`;const ay=Math.max(1,Math.min(Number(prog.ayahNumber)||1,meta.total_verses));const rel=formatQuranProgressRelative(prog.updatedAt);const relShort=rel?rel.replace(/^Zuletzt gelesen /,""):"";return `<section class="qov-resume" aria-label="Weiterlesen"><button type="button" class="qov-resume-card dar-click-glow" data-quran-continue="${esc(prog.surahNumber)}:${esc(ay)}"><span class="qov-resume-inner"><span class="qov-resume-label">Weiterlesen</span><span class="qov-resume-line">Sūrat ${esc(meta.transliteration)} ${ay}</span><span class="qov-resume-meta">Āyah ${ay} von ${meta.total_verses}${relShort?` · ${esc(relShort)}`:""}</span><span class="qov-resume-arrow" aria-hidden="true">→</span></span></button></section>`}
-function renderQuranOverviewSearch(){const recent=getQuranSearchRecent();const q=String(quranSearchQuery||"");return `<section class="qov-search-wrap qov-search-panel"><label class="visually-hidden" for="quranSearchInput">Qurʾān durchsuchen</label><div class="qov-search-shell"><span class="qov-search-icon" aria-hidden="true">🔍</span><input id="quranSearchInput" class="qov-search search" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(q)}" placeholder="Sūrah, Āyah oder Begriff suchen" aria-label="Sūrah, Āyah oder Begriff suchen"><button type="button" class="qov-search-clear${q?" is-visible":""}" id="qovSearchClear" aria-label="Suche löschen"${q?"":" hidden"}>×</button></div><p class="qov-search-hint">Deutsch · Arabisch · Lautschrift · Begriffe</p><section id="quranSearchBlock" class="qov-search-panel" style="display:none"><div class="section-head"><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section>${recent.length?`<div id="qovSearchRecent" class="qov-recent-row" aria-label="Zuletzt gesucht">${recent.map(t=>`<button type="button" class="qov-recent-chip" data-qov-recent-search="${esc(t)}">${esc(t)}</button>`).join("")}</div>`:""}</section>`}
+function renderQuranResumeCard(){const prog=getPreferredQuranProgress();if(!prog||!quranSurahMeta(prog.surahNumber)){return `<section class="qov-resume" aria-label="Einstieg"><button type="button" class="qov-resume-card qov-resume-card--compact dar-click-glow" data-quran-continue="1:1"><span class="qov-resume-inner qov-resume-inner--compact"><span class="qov-resume-line">Koran lesen · Sūrah auswählen</span></span></button></section>`}const meta=quranSurahMeta(prog.surahNumber);if(!meta)return `<section class="qov-resume" aria-label="Weiterlesen"><button type="button" class="qov-resume-card qov-resume-card--compact dar-click-glow" data-quran-continue="1:1"><span class="qov-resume-inner qov-resume-inner--compact"><span class="qov-resume-line">Koran weiterlesen · Neu beginnen</span></span></button></section>`;const ay=Math.max(1,Math.min(Number(prog.ayahNumber)||1,meta.total_verses));return `<section class="qov-resume" aria-label="Weiterlesen"><button type="button" class="qov-resume-card qov-resume-card--compact dar-click-glow" data-quran-continue="${esc(prog.surahNumber)}:${esc(ay)}" aria-label="Koran weiterlesen: Sūrat ${esc(meta.transliteration)} ${ay}"><span class="qov-resume-inner qov-resume-inner--compact"><span class="qov-resume-line">Koran weiterlesen · Sūrat ${esc(meta.transliteration)} ${ay}</span></span></button></section>`}
+function renderQuranOverviewSearch(){const recent=getQuranSearchRecent();const q=String(quranSearchQuery||"");const searchIcon=`<span class="qov-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>`;return `<section class="qov-search-wrap qov-search-panel"><label class="visually-hidden" for="quranSearchInput">Qurʾān durchsuchen</label><div class="qov-search-shell">${searchIcon}<input id="quranSearchInput" class="qov-search search" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(q)}" placeholder="Sūrah, Āyah oder Begriff suchen" aria-label="Sūrah, Āyah oder Begriff suchen"><button type="button" class="qov-search-clear${q?" is-visible":""}" id="qovSearchClear" aria-label="Suche löschen"${q?"":" hidden"}>×</button></div><p class="qov-search-hint">Deutsch · Arabisch · Lautschrift · Begriffe</p><section id="quranSearchBlock" class="qov-search-panel" style="display:none"><div class="section-head"><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section>${recent.length?`<div id="qovSearchRecent" class="qov-recent-row" aria-label="Zuletzt gesucht">${recent.map(t=>`<button type="button" class="qov-recent-chip" data-qov-recent-search="${esc(t)}">${esc(t)}</button>`).join("")}</div>`:""}</section>`}
 function renderQuranOverviewFilters(){const f=getQuranOverviewFilter();const chips=[["all","Alle"],["meccan","Mekkanisch"],["medinan","Medinensisch"],["favorites","Favoriten"]];return `<div class="qov-filter-bar"><div class="qov-segment-bar" role="tablist" aria-label="Sūren filtern">${chips.map(([id,label])=>`<button type="button" class="qov-segment-btn${f===id?" active":""}" data-qov-filter="${id}" role="tab" aria-selected="${f===id?"true":"false"}">${label}</button>`).join("")}</div><button type="button" class="qov-sort-btn" id="qovSortBtn" aria-label="Sortierung wechseln">⇅</button></div><div class="qov-list-head">Suren</div>`}
 function renderQuran(){quranOverviewFilter=getQuranOverviewFilter();quranOverviewSort=getQuranOverviewSort();applyQuranLineSpacing(getQuranLineSpacing());if(!quranMeta)return `<div class="qov-page"><div class="qov-skeleton"></div><div class="loading">Qurʾān wird geladen…</div></div>`;const total=quranMeta.surahs.reduce((sum,s)=>sum+(s.total_verses||0),0);const list=quranOverviewFilteredSurahs();const favFilter=getQuranOverviewFilter()==="favorites";const listHtml=list.length?list.map(quranSurahCard).join(""):favFilter?`<div class="qov-empty">Noch keine Favoriten gespeichert.<br><br>Tippe bei einer Sūrah auf das Lesezeichen, um sie hier schneller wiederzufinden.</div>`:`<div class="qov-empty">Keine Sūren für diesen Filter.</div>`;return `<div class="qov-page"><div class="qov-main">${renderQuranOverviewHeader(total)}${renderQuranResumeCard()}${renderQuranOverviewSearch()}${renderQuranQuickPick()}${renderQuranOverviewFilters()}<section class="qov-surah-list quran-surah-grid" id="quranSurahGrid">${listHtml}</section></div><div id="qovDisplayMount"></div><div id="qovDirectMount"></div><div id="qovToolsMount"></div></div>`}
 function openQuranDirectSheet(){qovLastFocusEl=document.activeElement;qovDirectSheetDraft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const mount=$("qovDirectMount");if(!mount)return;mount.innerHTML=renderQuranDirectOpenSheet();bindQuranDirectSheet();document.body.style.overflow="hidden"}
