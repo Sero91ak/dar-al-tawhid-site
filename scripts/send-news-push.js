@@ -24,6 +24,8 @@ function buildNewsPushUrl({ newsId, nav, value }) {
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
   if (targetNav === "zakat") return `${site}/#zakat`;
+  if (targetNav === "bibliothek") return `${site}/#bibliothek`;
+  if (targetNav === "quiz") return `${site}/#quiz`;
   if (targetNav && targetValue && targetNav !== "news-detail") {
     return `${site}/#${targetNav}/${encodeURIComponent(targetValue)}`;
   }
