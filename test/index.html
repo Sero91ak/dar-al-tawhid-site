@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v396";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v397";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -12673,6 +12673,38 @@ body.is-home-route .view-head.view-head-home--v380::after{display:none!important
 }
 .home-v380-today .home-v380-open-row:last-child{border-bottom:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)}
 .home-v380-today .home-v380-open-row__action{padding-top:2px;padding-right:2px}
+.home-v380-today__highlights{margin-top:2px}
+.home-v380-today__season{margin-bottom:10px}
+.home-v380-today .highlight-sections{margin:0;gap:0}
+.home-v380-today .highlight-sections .recommended-box,
+.home-v380-today .highlight-sections .daily-box{
+  position:relative;overflow:hidden;margin:0;
+  border-radius:14px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)!important;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%))!important;
+  box-shadow:none!important;
+}
+.home-v380-today .highlight-sections .recommended-box::before,
+.home-v380-today .highlight-sections .daily-box::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  border-left:1px solid color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 44%,transparent);
+  box-shadow:inset 1px 0 14px -12px color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 12%,transparent);
+}
+.home-v380-today .highlight-sections .gold-divider{margin:10px 0!important;opacity:.78}
+.home-v380-popular-wrap{margin-top:clamp(18px,4vw,24px)}
+.home-v380-popular-wrap .home-v380-popular-list{gap:8px}
+.home-v380-popular-wrap .home-v380-popular-row{
+  position:relative;overflow:hidden;
+  padding:12px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border) 78%)!important;
+  border-radius:14px!important;margin-bottom:0;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%));
+}
+.home-v380-popular-wrap .home-v380-popular-row::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  border-left:1px solid color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 38%,transparent);
+  box-shadow:inset 1px 0 12px -12px color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 10%,transparent);
+}
 .home-v380-search-wrap .home-v380-section-title{margin-bottom:12px}
 .home-v380-search-wrap{margin-bottom:clamp(22px,5vw,30px)}
 .home-v380-search-box{
@@ -17772,15 +17804,12 @@ function renderHomeRamadanRow(){
   return `<button type="button" class="home-v380-open-row" data-nav="ramadan" aria-label="Ramaḍān-Bereich öffnen"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Saison</span><h3 class="home-v380-open-row__title">${esc(headline)}</h3><p class="home-v380-open-row__excerpt">${esc(ctx.subtitle)} · Suḥūr, Iftār, Duʿāʾ & Beiträge</p></div><span class="home-v380-open-row__action" aria-hidden="true">Öffnen →</span></button>`;
 }
 function renderHomeTodaySection(){
-  const used=new Set();
-  const recPost=recommendedPost();
-  if(recPost)used.add(String(recPost.id));
-  const dua=renderHomeDailyDuaRow();
-  const rec=renderHomeRecommendedRow(used);
+  const highlights=renderHighlightSections();
   const ramadan=renderHomeRamadanRow();
-  const rows=[ramadan,dua,rec].filter(Boolean).join("");
-  if(!rows)return"";
-  return `<section class="home-v380-section home-v380-today" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2><div class="home-v380-today__list">${rows}</div></section>`;
+  if(!highlights&&!ramadan)return"";
+  const ramadanWrap=ramadan?`<div class="home-v380-today__season">${ramadan}</div>`:"";
+  const highlightsWrap=highlights?`<div class="home-v380-today__highlights">${highlights}</div>`:"";
+  return `<section class="home-v380-section home-v380-today" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2>${ramadanWrap}${highlightsWrap}</section>`;
 }
 function homeDiscoverPosts(excludeIds=new Set()){
   const rec=recommendedPost();
@@ -17794,11 +17823,12 @@ function renderHomeLatestBlock(excludeIds=new Set()){
   if(latest.length===1)return homePostPreviewCard(latest[0],{label:"Neuester Beitrag",action:"Öffnen"});
   return `<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag",action:"Öffnen"})).join("")}</div>`;
 }
-function renderHomePopularBlock(excludeIds=new Set()){
+function renderHomePopularSection(){
+  const exclude=new Set();
   const rec=recommendedPost();
-  if(rec)excludeIds.add(String(rec.id));
-  posts.slice(0,8).forEach(p=>excludeIds.add(String(p.id)));
-  return `<section class="home-v380-section home-v380-popular-wrap" aria-labelledby="homePopularTitle"><h3 class="home-v380-kicker" id="homePopularTitle">Meist gelesen</h3><div id="popularPostsContent" class="home-v380-popular-list"><div class="loading" style="padding:12px 0;margin:0">Wird geladen …</div></div></section>`;
+  if(rec)exclude.add(String(rec.id));
+  homeDiscoverPosts(new Set(exclude)).slice(0,6).forEach(p=>exclude.add(String(p.id)));
+  return `<section class="home-v380-section home-v380-popular-wrap" aria-labelledby="homePopularTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homePopularTitle">Meist gelesen</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Beliebt bei Besuchern</p></div></div><div class="home-v380-section-rule" aria-hidden="true"></div><div id="popularPostsContent" class="home-v380-popular-list"><div class="loading" style="padding:12px 0;margin:0">Wird geladen …</div></div></section>`;
 }
 function renderHomeDiscoverSection(){
   const exclude=new Set();
@@ -17806,13 +17836,11 @@ function renderHomeDiscoverSection(){
   if(rec)exclude.add(String(rec.id));
   const pool=homeDiscoverPosts(new Set(exclude));
   const latest=pool.slice(0,6);
-  latest.forEach(p=>exclude.add(String(p.id)));
   let latestHtml="";
   if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag",action:"Öffnen"});
   else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag",action:"Öffnen"})).join("")}</div>`;
-  const popular=renderHomePopularBlock(exclude);
-  if(!latestHtml&&!popular)return"";
-  return `<section class="home-v380-section" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2><button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div>${latestHtml}${popular}</section>`;
+  if(!latestHtml)return"";
+  return `<section class="home-v380-section" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2><button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div>${latestHtml}</section>`;
 }
 function renderHomeLibrariesSection(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
@@ -18060,14 +18088,14 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v396";
+const APP_BUILD_ID="app-shell-v397";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
+function renderHome(){return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
 function renderScholars(){const items=buildScholarCatalog();return`${setPageHeader("Gelehrte","Beiträge nach Imāmen, Ṣaḥābah und frühen Gelehrten","Gelehrte")}<section class="grid-list">${items.length?items.map(s=>listCard(s.label,s.count+" Beiträge","scholar",s.key,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section>`}
