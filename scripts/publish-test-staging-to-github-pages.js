@@ -54,8 +54,25 @@ function readBuildId() {
   return String(data.buildId || "");
 }
 
+function ensureGitIdentity() {
+  const name = process.env.GIT_AUTHOR_NAME || "DAR AL TAWHID Deploy";
+  const email = process.env.GIT_AUTHOR_EMAIL || "deploy@dar-al-tawhid.de";
+  try {
+    if (!runOut("git", ["config", "user.name"])) {
+      run("git", ["config", "user.name", name], { silent: true });
+    }
+    if (!runOut("git", ["config", "user.email"])) {
+      run("git", ["config", "user.email", email], { silent: true });
+    }
+  } catch {
+    run("git", ["config", "user.name", name], { silent: true });
+    run("git", ["config", "user.email", email], { silent: true });
+  }
+}
+
 function main() {
   ensureOnStagingBranch();
+  ensureGitIdentity();
   const buildId = readBuildId();
   if (!buildId) throw new Error("test/version.json: buildId fehlt");
 
