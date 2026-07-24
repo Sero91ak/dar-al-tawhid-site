@@ -28,6 +28,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-test-sync-v373-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Qurʾān-Bereich noch nicht in Test-App deployed – Staging-Overlay sync",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "scripts/cf-pages-build.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
       "id": "live-push-repair-v370-2026-07-23",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Freigabe: Push/Gebets-Benachrichtigungen sofort live für Besucher reparieren",
@@ -41,6 +56,53 @@
         "scripts/sync-app-build-ids.js",
         "scripts/cf-pages-build.js",
         "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-hub-v372-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Oberen Startseitenbereich kompakt neu gestalten (Gebetszeiten-Hub)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-entkacheln-v366-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht entkacheln, theme-fähig, kompakt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/quran-overview-v366-styles.css",
+        "scripts/quran-overview-v366-render.js",
+        "scripts/apply-quran-overview-v366.js",
+        "scripts/version-update-guard.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "version-update-loop-fix-v371-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Test-App Versions-Update-Schleife nach v370 weiterhin aktiv",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/apply-version-update-loop-fix.js",
+        "scripts/version-update-guard.js",
+        "scripts/sync-app-build-ids.js",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-24T12:00:00.000Z"
