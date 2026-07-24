@@ -586,7 +586,7 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
   min-width:0;
   width:100%;
 }
-.search-input-icon{
+.search-input-shell .search-input-icon{
   position:absolute;
   left:14px;
   top:50%;
@@ -598,7 +598,7 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
   z-index:1;
   opacity:.88;
 }
-.search-input-icon svg{
+.search-input-shell .search-input-icon svg{
   width:18px;
   height:18px;
   display:block;
@@ -8148,8 +8148,8 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 .direct-pick-panel.home-direct-pick .direct-pick{height:36px!important;min-height:36px!important;border-radius:13px!important;font-size:11.5px!important;padding:0 8px!important}
 .search-pro-panel{padding:9px 10px!important;margin-bottom:8px!important;border-radius:17px!important}
 .search-pro-panel .search-line{gap:7px!important}
-.search-input-icon{left:11px!important;width:16px!important;height:16px!important}
-.search-input-icon svg{width:16px!important;height:16px!important}
+.search-input-shell .search-input-icon{left:11px!important;width:16px!important;height:16px!important}
+.search-input-shell .search-input-icon svg{width:16px!important;height:16px!important}
 .search-input-shell .search{height:40px!important;min-height:40px!important;border-radius:14px!important;padding-left:35px!important;font-size:13.5px!important}
 .advanced-toggle{min-height:40px!important;height:40px!important;border-radius:14px!important;padding:0 12px!important;font-size:11px!important}
 .search-helper{display:none!important}
@@ -12866,7 +12866,10 @@ body.is-home-route .footer{
 .home-v380-search-box:has(#homeSearchInput:focus) .home-v380-search-field .search-input-icon{
   color:color-mix(in srgb,var(--theme-accent) 72%,var(--theme-muted) 28%);
 }
-.home-v380-search-field .search-input-icon{display:inline-flex;color:color-mix(in srgb,var(--theme-muted) 80%,var(--theme-accent) 20%)}
+.home-v380-search-field .search-input-icon{
+  position:static!important;left:auto!important;top:auto!important;transform:none!important;
+  display:inline-flex;flex:0 0 auto;color:color-mix(in srgb,var(--theme-muted) 80%,var(--theme-accent) 20%);
+}
 .home-v380-search-field .search-input-icon svg{width:18px;height:18px}
 .home-v380-search-field .search{
   flex:1 1 auto;min-width:0;height:46px;border:0;background:transparent;padding:0;
@@ -13809,6 +13812,21 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
 .home-v380-lib-card--compact p{
   margin:0!important;font-size:clamp(9px,2.05vw,10px)!important;line-height:1.25!important;
   -webkit-line-clamp:1!important;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;
+}
+</style>
+<style id="home-lib-search-icon-fix-v414">
+/* v414 · Such-Lupe darf Bibliotheken-Karten nicht überlappen */
+.home-v380-section:has(#homeLibrariesTitle){
+  position:relative;z-index:2;isolation:isolate;
+}
+.home-v380-search-wrap{
+  position:relative;z-index:1;isolation:isolate;
+}
+.home-v380-search-field{
+  position:relative;overflow:hidden;
+}
+.home-v380-lib-card__ico{
+  position:relative;z-index:1;
 }
 </style>
 </head>
@@ -18476,7 +18494,7 @@ function renderHomeLibrariesSection(){
     {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"},
     {nav:"hadith",icon:"📜",title:"Hadith-Bibliothek",desc:"Bücher & Übersetzungen",aria:"Hadith-Bibliothek öffnen"}
   ];
-  if(testOnly)defs.unshift({nav:"bibliothek",icon:"📖",title:"DAR AL TAWḤĪD Bibliothek",desc:"PDFs & Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
+  if(testOnly)defs.unshift({nav:"bibliothek",icon:"📚",title:"DAR AL TAWḤĪD Bibliothek",desc:"PDFs & Lernmaterialien",aria:"DAR AL TAWḤĪD Bibliothek öffnen"});
   if(!defs.length)return"";
   const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card home-v380-lib-card--compact" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><span class="home-v380-lib-card__ico" aria-hidden="true">${c.icon}</span><div class="home-v380-lib-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></button>`).join("");
   return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed home-v380-lib-grid--compact">${cards}</div></section>`;
