@@ -12029,7 +12029,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-layout{display:block}
 .qov-side,.qov-main{min-width:0}
 .qov-resume{position:relative;margin:0 0 10px;padding:10px 0 10px 12px;background:var(--quran-gradient-section);border:0;border-radius:0}
-.qov-resume::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:999px;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 70%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 55%,transparent))}
+.qov-resume::before{content:"";position:absolute;left:2px;top:10px;bottom:10px;width:1.5px;border-radius:999px;background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--quran-accent-primary) 84%,transparent) 18%,color-mix(in srgb,var(--quran-accent-secondary) 76%,transparent) 82%,transparent 100%);box-shadow:0 0 0 1px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)}
 .qov-resume-label{font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:var(--quran-text-muted);margin-bottom:4px}
 .qov-resume h3{margin:0;font-family:var(--serif);font-size:clamp(17px,4.2vw,20px);color:var(--quran-text-primary);line-height:1.15}
 .qov-resume-meta{margin:4px 0 0;color:var(--quran-text-muted);font-size:11.5px;line-height:1.4}
@@ -12073,7 +12073,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-row:last-child::after{display:none}
 .qov-row:hover,.qov-row:focus-visible{background:color-mix(in srgb,var(--quran-surface-active) 35%,transparent);outline:none}
 .qov-row.is-last-read,.qov-row.is-active{background:var(--quran-gradient-active)}
-.qov-row.is-last-read::before,.qov-row.is-active::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:999px;background:linear-gradient(180deg,var(--quran-accent-primary),var(--quran-accent-secondary))}
+.qov-row.is-last-read::before,.qov-row.is-active::before{content:"";position:absolute;left:4px;top:12px;bottom:12px;width:1.5px;border-radius:999px;background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--quran-accent-primary) 88%,transparent) 16%,color-mix(in srgb,var(--quran-accent-secondary) 78%,transparent) 84%,transparent 100%);box-shadow:0 0 0 1px color-mix(in srgb,var(--quran-accent-primary) 12%,transparent)}
 .qov-row.is-search-hit{background:color-mix(in srgb,var(--quran-surface-active) 55%,transparent)}
 .qov-row-num{font-size:11px;font-weight:950;color:var(--quran-text-muted);font-variant-numeric:tabular-nums;text-align:center}
 .qov-row-main{min-width:0}
@@ -12532,6 +12532,17 @@ body.home-push-sheet-open{overflow:hidden}
   gap:10px!important;grid-template-columns:unset!important;
 }
 .view-head-home-row--v380 .home-start-title{flex:1 1 auto;min-width:0;margin:0}
+.home-head-actions{
+  display:inline-flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;flex:0 0 auto;
+}
+.view-head-home-row--v380 .home-hijri-dayframe{
+  min-height:36px;
+  padding:5px 10px 6px!important;
+  border-radius:12px!important;
+  max-width:min(66vw,230px);
+  box-shadow:0 10px 24px color-mix(in srgb,var(--theme-text) 10%,transparent),inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 24%,transparent)!important;
+}
+.view-head-home-row--v380 .home-hijri-dayframe [data-hijri-date-text]{font-size:clamp(11px,2.5vw,12.5px)!important;line-height:1.15}
 .home-header-sync-chip{
   display:inline-flex;align-items:center;justify-content:center;gap:5px;
   min-height:36px;padding:8px 13px;flex:0 0 auto;
@@ -12666,11 +12677,14 @@ body.is-home-route .footer{
 .home-v380-quran-hero{
   display:flex;align-items:center;gap:12px;width:100%;min-height:84px;margin-top:clamp(14px,3.5vw,18px);
   padding:clamp(14px,3.2vw,16px) clamp(16px,3.6vw,18px);
-  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%);
-  border-radius:14px;
-  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
+  border:1px solid color-mix(in srgb,var(--theme-accent) 52%,var(--theme-border) 48%);
+  border-radius:16px;
+  background:
+    radial-gradient(120% 80% at 0% 0%,color-mix(in srgb,var(--theme-accent) 12%,transparent),transparent 54%),
+    radial-gradient(80% 60% at 100% 100%,color-mix(in srgb,var(--theme-accent) 9%,transparent),transparent 62%),
+    linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 96%,transparent),color-mix(in srgb,var(--theme-surface) 84%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
-  box-shadow:0 8px 22px color-mix(in srgb,var(--theme-text) 5%,transparent);
+  box-shadow:0 10px 28px color-mix(in srgb,var(--theme-text) 8%,transparent),inset 0 1px 0 color-mix(in srgb,var(--theme-accent) 20%,transparent);
 }
 .home-v380-quran-hero__body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:5px}
 .home-v380-quran-hero__title{margin:0;font-family:var(--serif);font-size:clamp(18px,4.4vw,22px);font-weight:800;line-height:1.12}
@@ -12681,9 +12695,16 @@ body.is-home-route .footer{
 }
 .home-v380-quran-hero__chevron{flex:0 0 auto;font-size:20px;line-height:1;color:var(--theme-accent);opacity:.92;padding-right:2px}
 .home-v380-quran-hero:hover,.home-v380-quran-hero:focus-visible{
-  border-color:color-mix(in srgb,var(--theme-accent) 42%,var(--theme-border));
+  border-color:color-mix(in srgb,var(--theme-accent) 68%,var(--theme-border));
   outline:none;filter:brightness(1.02);
-  box-shadow:0 12px 32px color-mix(in srgb,var(--theme-text) 8%,transparent),0 0 0 2px color-mix(in srgb,var(--theme-accent) 18%,transparent);
+  box-shadow:0 14px 34px color-mix(in srgb,var(--theme-text) 10%,transparent),0 0 0 2px color-mix(in srgb,var(--theme-accent) 24%,transparent);
+}
+@media(max-width:520px){
+  .home-head-actions{gap:6px}
+  .view-head-home-row--v380 .home-hijri-dayframe{
+    padding:4px 8px 5px!important;
+    max-width:min(56vw,188px);
+  }
 }
 /* Typ C: offene Zeilen */
 .home-v380-open-row{
@@ -13841,7 +13862,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const syncChip=isHome&&typeof renderHomeHeaderSyncChip==="function"?renderHomeHeaderSyncChip():"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${syncChip}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const syncChip=isHome&&typeof renderHomeHeaderSyncChip==="function"?renderHomeHeaderSyncChip():"";const hijriChip=isHome&&typeof renderHomeHeaderHijriChip==="function"?renderHomeHeaderHijriChip():"";const topActions=isHome?`<div class="home-head-actions">${hijriChip}${syncChip}</div>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${topActions}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -17443,6 +17464,9 @@ function homeHeaderSyncChipLabel(sync){
   if(sync.state==="busy")return"↻ …";
   return"↻ Aktualisieren";
 }
+function renderHomeHeaderHijriChip(){
+  return `<button type="button" class="home-hijri-dayframe" data-nav="calendar" data-hijri-today aria-label="Islamischen Kalender öffnen" title="Islamischen Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">🗓️</span><span data-hijri-date-text>Islamisches Datum</span></button>`;
+}
 function renderHomeHeaderSyncChip(){
   const sync=homeSyncStatusSummary();
   const cta=homeHeaderSyncChipLabel(sync);
@@ -17471,12 +17495,12 @@ function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={})
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
   if(!prog){
-    return `<button type="button" class="home-v380-quran-hero" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><div class="home-v380-quran-hero__body"><span class="home-v380-kicker">Qurʾān</span><h3 class="home-v380-quran-hero__title">Qurʾān-Lesung beginnen</h3><p class="home-v380-quran-hero__meta">Wähle eine Sūrah und beginne deine Lesung</p></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+    return `<button type="button" class="home-v380-quran-hero" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><div class="home-v380-quran-hero__body"><h3 class="home-v380-quran-hero__title">Qurʾān-Lesung beginnen</h3><p class="home-v380-quran-hero__meta">Wähle eine Sūrah und beginne deine Lesung</p></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
   }
   const when=formatQuranProgressTime(prog.updatedAt);
   const target=`${esc(prog.surahNumber)}:${esc(prog.ayahNumber)}`;
   const aria=`Qurʾān weiterlesen. ${quranContinueMetaLine(prog)}${when?`. Zuletzt gelesen ${when}`:""}`;
-  return `<button type="button" class="home-v380-quran-hero" data-quran-continue="${target}" aria-label="${esc(aria)}"><div class="home-v380-quran-hero__body"><span class="home-v380-kicker">Weiterlesen</span><h3 class="home-v380-quran-hero__title">Qurʾān weiterlesen</h3><p class="home-v380-quran-hero__meta">${esc(quranContinueMetaLine(prog))}</p>${when?`<p class="home-v380-quran-hero__when">Zuletzt gelesen: ${esc(when)}</p>`:""}</div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+  return `<button type="button" class="home-v380-quran-hero" data-quran-continue="${target}" aria-label="${esc(aria)}"><div class="home-v380-quran-hero__body"><h3 class="home-v380-quran-hero__title">Qurʾān weiterlesen</h3><p class="home-v380-quran-hero__meta">${esc(quranContinueMetaLine(prog))}</p>${when?`<p class="home-v380-quran-hero__when">Zuletzt gelesen: ${esc(when)}</p>`:""}</div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
 }
 function renderHomeDailyDuaRow(){
   const d=dailyDua();
