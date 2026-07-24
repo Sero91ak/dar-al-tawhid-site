@@ -12769,9 +12769,17 @@ body.is-home-route .footer{
   display:flex;align-items:center;gap:8px;min-height:52px;padding:0 14px;
   margin:0;border:0;border-radius:0;
   background:transparent;
+  transition:border-color .2s ease,box-shadow .2s ease;
 }
 .home-v380-search-field:focus-within{
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-accent) 22%,transparent);
+  box-shadow:none;outline:none;background:transparent;
+}
+.home-v380-search-box:has(#homeSearchInput:focus){
+  border-color:color-mix(in srgb,var(--theme-accent) 42%,var(--theme-border) 58%);
+  box-shadow:0 10px 28px color-mix(in srgb,var(--theme-text) 6%,transparent),0 0 0 2px color-mix(in srgb,var(--theme-accent) 14%,transparent);
+}
+.home-v380-search-box:has(#homeSearchInput:focus) .home-v380-search-field .search-input-icon{
+  color:color-mix(in srgb,var(--theme-accent) 72%,var(--theme-muted) 28%);
 }
 .home-v380-search-field .search-input-icon{display:inline-flex;color:color-mix(in srgb,var(--theme-muted) 80%,var(--theme-accent) 20%)}
 .home-v380-search-field .search-input-icon svg{width:18px;height:18px}
@@ -12894,22 +12902,36 @@ body.is-home-route .footer strong{font-size:14px}
   outline:none;filter:brightness(1.03);
 }
 .home-v380-quran-hero--compact{
-  min-height:58px!important;padding:11px 16px 11px 14px!important;margin-top:clamp(12px,3vw,16px)!important;
+  min-height:52px!important;padding:10px 14px 10px 12px!important;margin-top:clamp(12px,3vw,16px)!important;
   align-items:center!important;
   transition:border-color .2s ease,box-shadow .2s ease,filter .2s ease;
 }
-.home-v380-quran-hero--compact .home-v380-quran-hero__body{flex-direction:row;align-items:baseline;flex-wrap:wrap;gap:6px 8px}
-.home-v380-quran-hero--compact .home-v380-kicker{margin:0;font-size:9px;letter-spacing:.12em}
-.home-v380-quran-hero--compact .home-v380-quran-hero__title{
-  margin:0;font-size:clamp(14px,3.6vw,17px)!important;font-weight:800;line-height:1.2;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+.home-v380-quran-hero--reading{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--theme-accent) 10%,transparent),transparent 58%),
+    linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%))!important;
 }
-.home-v380-quran-hero--compact .home-v380-quran-hero__meta{
-  margin:0;font-size:clamp(10px,2.3vw,11.5px);font-weight:700;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+.home-v380-quran-hero--reading::before{
+  content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:999px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--theme-accent) 78%,transparent),color-mix(in srgb,var(--theme-accent) 42%,transparent));
+}
+.home-v380-quran-hero__mark{
+  flex:0 0 auto;font-size:clamp(15px,3.6vw,17px);line-height:1;opacity:.92;padding-left:4px;
+}
+.home-v380-quran-hero--compact .home-v380-quran-hero__body{
+  flex-direction:column!important;align-items:flex-start!important;gap:2px!important;min-width:0;padding-left:2px;
+}
+.home-v380-quran-hero__label{
+  margin:0;font-family:var(--serif);font-size:clamp(15px,3.7vw,18px)!important;font-weight:800;line-height:1.12;
+  color:var(--theme-accent);white-space:nowrap;
+}
+.home-v380-quran-hero__place{
+  margin:0;font-size:clamp(11px,2.45vw,12.5px);font-weight:700;line-height:1.25;
   color:color-mix(in srgb,var(--theme-muted) 72%,var(--theme-text) 28%);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
 }
-.home-v380-quran-hero--compact .home-v380-quran-hero__chevron{padding-right:4px;font-size:18px}
+.home-v380-quran-hero--compact .home-v380-quran-hero__chevron{padding-right:4px;font-size:17px}
 .home-v380-quran-hero.dar-click-glow:hover,.home-v380-quran-hero.dar-click-glow:focus-visible{
   border-color:color-mix(in srgb,var(--theme-accent) 40%,var(--theme-border));
   box-shadow:0 12px 32px color-mix(in srgb,var(--theme-text) 8%,transparent),0 0 0 2px color-mix(in srgb,var(--theme-accent) 20%,transparent);
@@ -12930,12 +12952,13 @@ body.is-home-route .footer strong{font-size:14px}
 .home-v380-search-divider{margin:6px 14px 8px!important}
 .home-v380-search-divider--soft{margin:8px 14px 10px!important}
 .home-v380-search-field{
-  min-height:54px;padding:6px 14px 8px!important;margin:0 2px 2px;
+  min-height:54px;padding:8px 14px 10px!important;margin:0;
   border-radius:0 0 14px 14px;
 }
 .home-v380-search-field:focus-within{
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-accent) 28%,transparent),0 0 0 2px color-mix(in srgb,var(--theme-accent) 10%,transparent);
+  box-shadow:none!important;outline:none!important;background:transparent!important;
 }
+.home-v380-search-box{transition:border-color .2s ease,box-shadow .2s ease}
 .footer-actions{
   gap:8px!important;margin-top:12px!important;max-width:100%!important;width:100%;
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
@@ -17642,15 +17665,15 @@ function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={})
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
   if(!prog){
-    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><div class="home-v380-quran-hero__body"><span class="home-v380-kicker">Qurʾān</span><span class="home-v380-quran-hero__title">Lesung beginnen</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Lesung beginnen</span><span class="home-v380-quran-hero__place">Qurʾān öffnen</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
   }
   const meta=quranSurahMeta(prog.surahNumber);
   const surahName=meta?.transliteration||prog.surahName||`Sūrah ${prog.surahNumber}`;
   const ay=Math.max(1,Number(prog.ayahNumber)||1);
-  const line=`Sūrat ${surahName} ${ay} · zuletzt gelesen`;
+  const place=`Sūrat ${surahName} · Āyah ${ay}`;
   const target=`${esc(prog.surahNumber)}:${esc(ay)}`;
-  const aria=`Qurʾān weiterlesen: ${line}`;
-  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><div class="home-v380-quran-hero__body"><span class="home-v380-kicker">Weiterlesen</span><span class="home-v380-quran-hero__title">${esc(line)}</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
+  const aria=`Weiterlesen: ${place}`;
+  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__label">Weiterlesen</span><span class="home-v380-quran-hero__place">${esc(place)}</span></div><span class="home-v380-quran-hero__chevron" aria-hidden="true">→</span></button>`;
 }
 function renderHomeDailyDuaRow(){
   const d=dailyDua();
