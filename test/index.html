@@ -4,7 +4,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v382";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v383";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -12551,48 +12551,75 @@ body.home-push-sheet-open{overflow:hidden}
   background:linear-gradient(90deg,color-mix(in srgb,var(--theme-border,var(--line)) 80%,var(--theme-accent) 20%),transparent 88%);
 }
 .home-v380-text-link{
-  border:0;background:transparent;padding:0;margin:0;cursor:pointer;
+  border:0;background:transparent;padding:6px 10px 6px 4px;margin:0;cursor:pointer;
   font-size:clamp(10px,2.2vw,11px);font-weight:800;letter-spacing:.04em;
   color:color-mix(in srgb,var(--theme-accent) 88%,var(--theme-text) 12%);
-  white-space:nowrap;
+  white-space:nowrap;flex-shrink:0;
 }
 .home-v380-text-link:hover,.home-v380-text-link:focus-visible{filter:brightness(1.06);outline:none;text-decoration:underline}
-/* Typ B: App-Status – flache Doppelzeile, kein Kasten-auf-Kasten */
-.home-v380-status{
-  margin-top:14px;
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 42%,transparent);
-  border-bottom:1px solid color-mix(in srgb,var(--theme-border) 42%,transparent);
-  background:color-mix(in srgb,var(--theme-surface) 35%,transparent);
+/* Typ B: App-Status – zwei klar erkennbare Karten */
+.home-v380-app-status{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:56px;margin-top:14px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 30%,var(--theme-border) 70%);
+  border-radius:14px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
+  overflow:hidden;
+  box-shadow:0 8px 24px color-mix(in srgb,var(--theme-text) 5%,transparent);
 }
-.home-v380-status__row{
-  display:flex;align-items:flex-start;gap:10px;width:100%;min-height:48px;
-  padding:11px 2px;border:0;background:transparent;color:var(--theme-text);
-  cursor:pointer;text-align:left;
+.home-v380-app-status__half{
+  display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0;min-height:56px;
+  padding:11px 14px;border:0;background:transparent;color:var(--theme-text);cursor:pointer;text-align:left;
 }
-.home-v380-status__row + .home-v380-status__row{
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 38%,transparent);
+.home-v380-app-status__half + .home-v380-app-status__half{
+  border-left:1px solid color-mix(in srgb,var(--theme-accent) 18%,var(--theme-border) 82%);
 }
-.home-v380-status__ico{
-  flex:0 0 auto;width:18px;font-size:15px;line-height:1.35;
-  color:color-mix(in srgb,var(--theme-accent) 82%,var(--theme-text) 18%);
-  font-weight:800;text-align:center;
+.home-v380-app-status__label{
+  font-size:clamp(7.5px,1.7vw,8.5px);font-weight:850;letter-spacing:.13em;text-transform:uppercase;
+  color:color-mix(in srgb,var(--theme-muted) 78%,var(--theme-text) 22%);
 }
-.home-v380-status__ico--bell{display:inline-flex;align-items:center;justify-content:center}
-.home-v380-status__ico--bell .prayer-overview__push-bell-svg{width:15px;height:15px}
-.home-v380-status__text{
-  flex:1 1 auto;min-width:0;font-size:clamp(10.5px,2.4vw,11.5px);font-weight:750;line-height:1.36;
-  color:color-mix(in srgb,var(--theme-text) 92%,var(--theme-muted) 8%);
+.home-v380-app-status__line{
+  font-size:clamp(10px,2.35vw,11.5px);font-weight:750;line-height:1.34;
+  color:color-mix(in srgb,var(--theme-text) 90%,var(--theme-muted) 10%);
   white-space:normal;text-wrap:pretty;
 }
-.home-v380-status__row.is-update .home-v380-status__text{color:var(--theme-accent)}
-.home-v380-status__row.is-error .home-v380-status__text{color:color-mix(in srgb,var(--theme-accent) 65%,#c44 35%)}
-.home-v380-status__row:hover,.home-v380-status__row:focus-visible{
-  background:color-mix(in srgb,var(--theme-accent) 4%,transparent);outline:none;
+.home-v380-app-status__half.is-update{
+  background:color-mix(in srgb,var(--theme-accent) 10%,var(--theme-surface));
+}
+.home-v380-app-status__half.is-update .home-v380-app-status__line{color:var(--theme-accent);font-weight:800}
+.home-v380-app-status__half.is-error .home-v380-app-status__line{color:color-mix(in srgb,var(--theme-accent) 70%,#c44 30%)}
+.home-v380-app-status__half:hover,.home-v380-app-status__half:focus-visible{
+  background:color-mix(in srgb,var(--theme-accent) 6%,transparent);outline:none;
+  box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--theme-accent) 22%,transparent);
+}
+@media(max-width:520px){
+  .home-v380-app-status{grid-template-columns:1fr}
+  .home-v380-app-status__half + .home-v380-app-status__half{border-left:0;border-top:1px solid color-mix(in srgb,var(--theme-accent) 18%,var(--theme-border) 82%)}
 }
 body.is-home-route .view-head.view-head-home--v380::after{display:none!important}
-.home-v380-today .home-v380-section-title{margin-bottom:16px}
-.home-v380-today__list{display:flex;flex-direction:column;gap:0}
+.home-v380-today .home-v380-section-title{margin-bottom:14px}
+.home-v380-today__list{display:flex;flex-direction:column;gap:10px}
+.home-v380-today .home-v380-open-row{
+  padding:14px 14px 13px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);
+  border-radius:14px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%));
+}
+.home-v380-today .home-v380-open-row:last-child{border-bottom:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)}
+.home-v380-today .home-v380-open-row__action{padding-top:2px;padding-right:2px}
 .home-v380-search-wrap .home-v380-section-title{margin-bottom:12px}
+.home-v380-search-box{
+  display:flex;flex-direction:column;gap:12px;
+  padding:14px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 26%,var(--theme-border) 74%);
+  border-radius:16px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 95%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%));
+}
+.home-v380-search-box .direct-pick-panel.home-direct-pick{
+  margin:0!important;padding:12px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border) 78%)!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--theme-surface) 70%,transparent)!important;
+}
 .home-v380-search-panel .search-pro-panel{
   margin:0;padding:0;border:0;background:transparent;box-shadow:none;
 }
@@ -12602,18 +12629,18 @@ body.is-home-route #appView.view{
 }
 body.is-home-route .footer{
   margin-top:clamp(28px,6vw,34px);padding-top:14px;
-  padding-bottom:calc(28px + env(safe-area-inset-bottom,0px) + 12px);
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 18px)!important;
+  border-top:1px solid color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border) 78%);
 }
 /* Typ A: Qurʾān Hero */
 .home-v380-quran-hero{
   display:flex;align-items:center;gap:12px;width:100%;min-height:84px;margin-top:clamp(14px,3.5vw,18px);
-  padding:clamp(14px,3.2vw,16px) clamp(14px,3.4vw,16px);
-  border:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+  padding:clamp(14px,3.2vw,16px) clamp(16px,3.6vw,18px);
+  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%);
   border-radius:14px;
-  background:color-mix(in srgb,var(--theme-surface) 88%,transparent);
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
-  box-shadow:none;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--theme-text) 5%,transparent);
 }
 .home-v380-quran-hero__body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:5px}
 .home-v380-quran-hero__title{margin:0;font-family:var(--serif);font-size:clamp(18px,4.4vw,22px);font-weight:800;line-height:1.12}
@@ -12622,7 +12649,7 @@ body.is-home-route .footer{
   color:color-mix(in srgb,var(--theme-muted) 80%,var(--theme-text) 20%);
   overflow:visible;text-overflow:unset;white-space:normal;
 }
-.home-v380-quran-hero__chevron{flex:0 0 auto;font-size:20px;line-height:1;color:var(--theme-accent);opacity:.92}
+.home-v380-quran-hero__chevron{flex:0 0 auto;font-size:20px;line-height:1;color:var(--theme-accent);opacity:.92;padding-right:2px}
 .home-v380-quran-hero:hover,.home-v380-quran-hero:focus-visible{
   border-color:color-mix(in srgb,var(--theme-accent) 42%,var(--theme-border));
   outline:none;filter:brightness(1.02);
@@ -12643,13 +12670,13 @@ body.is-home-route .footer{
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
 .home-v380-open-row__meta{-webkit-line-clamp:2}
-.home-v380-open-row__action{flex:0 0 auto;font-size:11px;font-weight:800;color:var(--theme-accent);white-space:nowrap;padding-top:4px}
+.home-v380-open-row__action{flex:0 0 auto;font-size:11px;font-weight:800;color:var(--theme-accent);white-space:nowrap;padding:2px 4px 0 8px}
 .home-v380-open-row:hover .home-v380-open-row__title,.home-v380-open-row:focus-visible .home-v380-open-row__title{color:var(--theme-accent)}
 .home-v380-open-row:focus-visible{outline:none;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--theme-accent) 35%,transparent)}
 /* Typ A: Post preview / slider */
 .home-v380-post-preview{
-  display:flex;flex-direction:column;gap:6px;min-height:100%;padding:14px 14px 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-radius:14px;
+  display:flex;flex-direction:column;gap:6px;min-height:100%;padding:14px 16px 12px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);border-radius:14px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
 }
@@ -12698,18 +12725,18 @@ body.is-home-route .footer{
   .home-v380-lib-grid.home-v380-lib-grid--slider > .home-v380-lib-card{flex:0 0 clamp(82%,85vw,88%);scroll-snap-align:start}
 }
 .home-v380-lib-card{
-  display:flex;flex-direction:column;gap:8px;min-height:120px;height:100%;padding:14px 14px 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-radius:14px;
+  display:flex;flex-direction:column;gap:8px;min-height:120px;height:100%;padding:14px 16px 12px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);border-radius:14px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
 }
 .home-v380-lib-card h3{margin:0;font-family:var(--serif);font-size:clamp(15px,3.5vw,18px);font-weight:800;line-height:1.14;overflow:visible;white-space:normal}
 .home-v380-lib-card p{margin:0;font-size:clamp(10.5px,2.3vw,11.5px);line-height:1.38;font-weight:650;color:color-mix(in srgb,var(--theme-muted) 82%,var(--theme-text) 18%);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.home-v380-lib-card__foot{margin-top:auto;display:flex;justify-content:flex-end;font-size:11px;font-weight:850;color:var(--theme-accent)}
+.home-v380-lib-card__foot{margin-top:auto;display:flex;justify-content:flex-end;font-size:11px;font-weight:850;color:var(--theme-accent);padding-right:2px}
 /* Suche */
 .home-v380-search-field{
-  display:flex;align-items:center;gap:8px;min-height:48px;padding:0 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 72%,transparent);border-radius:14px;
+  display:flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border) 78%);border-radius:14px;
   background:color-mix(in srgb,var(--theme-surface) 92%,transparent);
 }
 .home-v380-search-field:focus-within{
@@ -12731,8 +12758,8 @@ body.is-home-route .footer{
 }
 .home-v380-filter-chips::-webkit-scrollbar{display:none}
 .home-v380-filter-chip{
-  flex:0 0 auto;min-height:36px;padding:8px 12px;border-radius:10px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);
+  flex:0 0 auto;min-height:36px;padding:8px 14px;border-radius:10px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 20%,var(--theme-border) 80%);
   background:color-mix(in srgb,var(--theme-surface) 90%,transparent);
   color:color-mix(in srgb,var(--theme-text) 88%,var(--theme-muted) 12%);
   font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;
@@ -12755,9 +12782,13 @@ body.is-home-route .footer{
 .home-v380-filter-panel-wrap{display:none}
 .home-v380-filter-panel-wrap.advanced-visible{display:block}
 /* Footer kompakt */
-body.is-home-route .footer-actions{gap:8px;margin-top:10px}
-body.is-home-route .footer-action-btn,body.is-home-route .footer-social-link{
-  min-height:40px;padding:8px 11px;font-size:11px;border-radius:12px;
+body.is-home-route .footer-actions{
+  gap:8px;margin-top:10px;max-width:100%!important;width:100%;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+body.is-home-route .footer-action-btn,body.is-home-route .footer-social-link,body.is-home-route .footer-app-save{
+  min-height:40px;padding:8px 10px;font-size:clamp(9.5px,2.1vw,11px);border-radius:12px;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;
 }
 body.is-home-route .footer .signature{margin-top:10px;font-size:10px}
 body.is-home-route .footer strong{font-size:14px}
@@ -17386,6 +17417,11 @@ function updateHomeAppStatusUi(){
     syncBtn.setAttribute("aria-label",sync.aria);
     syncBtn.classList.toggle("is-update",sync.state==="update");
     syncBtn.classList.toggle("is-error",sync.state==="error");
+    const syncLabel=syncBtn.querySelector(".home-v380-app-status__label");
+    if(syncLabel){
+      const syncCta=sync.state==="update"?"Aktualisieren":sync.state==="error"?"Erneut versuchen":"Synchronisieren";
+      syncLabel.textContent=`Inhalte · ${syncCta}`;
+    }
   }
   if(pushBtn)pushBtn.setAttribute("aria-label",push.ariaLabel);
   const strip=document.getElementById("homePushRemindersStrip");
@@ -17397,7 +17433,8 @@ function renderHomePushSheetOnly(){
 function renderHomeAppStatus(){
   const sync=homeSyncStatusSummary();
   const push=homePushStatusCompact();
-  return `<section class="home-v380-status" aria-label="App-Status"><button type="button" id="homeAppStatusSync" class="home-v380-status__row${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}" aria-label="${esc(sync.aria)}"><span class="home-v380-status__ico" aria-hidden="true">↻</span><span class="home-v380-status__text" id="homeAppStatusSyncLine">${esc(sync.line)}</span></button><button type="button" id="homeAppStatusPush" class="home-v380-status__row" aria-label="${esc(push.ariaLabel)}"><span class="home-v380-status__ico home-v380-status__ico--bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="home-v380-status__text" id="homeAppStatusPushLine">${esc(push.line)}</span></button></section>${renderHomePushSheetOnly()}`;
+  const syncCta=sync.state==="update"?"Aktualisieren":sync.state==="error"?"Erneut versuchen":"Synchronisieren";
+  return `<section class="home-v380-app-status" aria-label="App-Status"><button type="button" id="homeAppStatusSync" class="home-v380-app-status__half${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}" aria-label="${esc(sync.aria)}"><span class="home-v380-app-status__label">Inhalte · ${esc(syncCta)}</span><span class="home-v380-app-status__line" id="homeAppStatusSyncLine">${esc(sync.line)}</span></button><button type="button" id="homeAppStatusPush" class="home-v380-app-status__half" aria-label="${esc(push.ariaLabel)}"><span class="home-v380-app-status__label">Erinnerungen</span><span class="home-v380-app-status__line" id="homeAppStatusPushLine">${esc(push.line)}</span></button></section>${renderHomePushSheetOnly()}`;
 }
 function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={}){
   if(!post)return"";
@@ -17488,7 +17525,10 @@ function renderHomeLibrariesSection(){
   return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards.join("")}</div></section>`;
 }
 function renderHomeSearchSection(){
-  return `<section class="home-v380-section home-v380-search-wrap" aria-labelledby="homeSearchTitle"><h2 class="home-v380-section-title" id="homeSearchTitle">Suche und Filter</h2><div class="home-v380-search-panel">${renderSearchPanel()}</div></section>`;
+  const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  const scholars=renderScholarOptions();
+  const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  return `<section class="home-v380-section home-v380-search-wrap" aria-labelledby="homeSearchTitle"><h2 class="home-v380-section-title" id="homeSearchTitle">Suche und Filter</h2><div class="home-v380-search-box"><div class="home-v380-search-panel">${renderDirectPickPanel("home-direct-pick")}<div class="home-v380-search-field"><span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="homeSearchInput" class="search search-input-field" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Beiträge, Duʿāʾ, Themen, Gelehrte und Bücher durchsuchen"><button type="button" id="homeSearchClear" class="home-v380-search-clear" hidden aria-label="Suche löschen">×</button></div><div class="home-v380-filter-chips" role="toolbar" aria-label="Schnellauswahl Filter"><button type="button" class="home-v380-filter-chip" data-home-filter-open="cat">Thema</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="scholar">Gelehrter</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="book">Buch</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="more">Weitere Filter</button></div><div id="homeActiveFilters" class="home-v380-active-filters" hidden></div><div id="homeFilterPanel" class="home-v380-filter-panel-wrap advanced-hidden"><div class="filter-grid"><select id="homeFilterCat" class="filter-select" aria-label="Thema filtern"><option value="">Alle Kategorien</option>${cats}</select><select id="homeFilterScholar" class="filter-select" aria-label="Gelehrten filtern"><option value="">Alle Gelehrten</option>${scholars}</select><select id="homeFilterBook" class="filter-select" aria-label="Buch filtern"><option value="">Alle Bücher</option>${books}</select><select id="homeFilterType" class="filter-select" aria-label="Quellentyp filtern"><option value="">Qurʾān / Sunnah / Athar</option><option value="quran">Qurʾān / Tafsīr</option><option value="sunnah">Sunnah / Hadith</option><option value="athar">Āthār</option><option value="other">Sonstige</option></select></div></div></div><div id="homeFilterSheetBackdrop" class="home-push-sheet-backdrop" hidden tabindex="-1"><div class="home-push-sheet" role="dialog" aria-modal="true" aria-labelledby="homeFilterSheetTitle"><div class="home-push-sheet__head"><h3 id="homeFilterSheetTitle">Filter</h3><button type="button" id="homeFilterSheetClose" class="home-push-sheet__close" aria-label="Schließen">×</button></div><div class="home-push-sheet__body" id="homeFilterSheetBody"></div></div></div></div></section>`;
 }
 function updateHomeActiveFilterChips(){
   const wrap=document.getElementById("homeActiveFilters");
@@ -17547,13 +17587,48 @@ function bindHomeV380Events(){
     openHomePushRemindersSheet();
   };
   bindHomePushRemindersSheet();
+  const clearBtn=document.getElementById("homeSearchClear");
+  const searchInput=$("homeSearchInput");
+  const syncSearchClear=()=>{if(!clearBtn||!searchInput)return;const has=!!searchInput.value.trim();clearBtn.hidden=!has};
+  if(searchInput){searchInput.oninput=()=>{syncSearchClear();applyHomeFilters()};syncSearchClear()}
+  if(clearBtn)clearBtn.onclick=()=>{if(searchInput){searchInput.value="";syncSearchClear();applyHomeFilters();searchInput.focus()}};
+  document.querySelectorAll("[data-home-filter-open]").forEach(btn=>{
+    btn.onclick=()=>openHomeFilterSheet(btn.getAttribute("data-home-filter-open")||"more");
+  });
+  const filterClose=document.getElementById("homeFilterSheetClose");
+  if(filterClose)filterClose.onclick=e=>{e.stopPropagation();closeHomeFilterSheet()};
+  const filterBackdrop=document.getElementById("homeFilterSheetBackdrop");
+  if(filterBackdrop)filterBackdrop.onclick=e=>{if(e.target===filterBackdrop)closeHomeFilterSheet()};
+  const activeWrap=document.getElementById("homeActiveFilters");
+  if(activeWrap&&!activeWrap.dataset.bound){
+    activeWrap.dataset.bound="1";
+    activeWrap.addEventListener("click",e=>{
+    if(e.target.id==="homeFilterResetAll"||e.target.closest("#homeFilterResetAll")){
+      ["homeFilterCat","homeFilterScholar","homeFilterBook","homeFilterType"].forEach(id=>{const el=$(id);if(el)el.value=""});
+      applyHomeFilters();updateHomeActiveFilterChips();return;
+    }
+    const btn=e.target.closest("[data-home-filter-clear]");
+    if(!btn)return;
+    const key=btn.getAttribute("data-home-filter-clear");
+    if(key==="cat"&&$("homeFilterCat"))$("homeFilterCat").value="";
+    if(key==="scholar"&&$("homeFilterScholar"))$("homeFilterScholar").value="";
+    if(key==="book"&&$("homeFilterBook"))$("homeFilterBook").value="";
+    if(key==="type"&&$("homeFilterType"))$("homeFilterType").value="";
+    applyHomeFilters();updateHomeActiveFilterChips();
+    });
+  }
+  updateHomeActiveFilterChips();
   updateFooterAppSaveVisibility();
+}
+function shouldShowFooterAppSave(){
+  if(isStandalonePwa())return false;
+  return true;
 }
 function updateFooterAppSaveVisibility(){
   const btn=document.getElementById("footerAppSave");
   if(!btn)return;
-  if(isStandalonePwa()){btn.setAttribute("hidden","");btn.style.display="none"}
-  else{btn.removeAttribute("hidden");btn.style.display=""}
+  const show=shouldShowFooterAppSave();
+  if(show){btn.removeAttribute("hidden");btn.style.display=""}else{btn.setAttribute("hidden","");btn.style.display="none"}
 }
 function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;return `<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>${newer?"Neue Version verfügbar":"🔄 Aktualisieren"}</b><p>${newer?"Neue App-Version laden und Inhalte synchronisieren.":"Neue Beiträge laden und App synchronisieren."}</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
 async function syncAppServices({silent=true}={}){
@@ -17686,7 +17761,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v382";
+const APP_BUILD_ID="app-shell-v383";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
