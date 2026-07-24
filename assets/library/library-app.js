@@ -524,7 +524,7 @@
 
   function sharePublication(pub) {
     const text = `${pub.title}\nEine Veröffentlichung von DAR AL TAWḤĪD\nZusammengestellt und herausgegeben von Serhat Abu Malik\ndar-al-tawhid.de`;
-    const url = `${global.location.origin}${LIB_BASE}/#bibliothek/${encodeURIComponent(pub.slug)}`;
+    const url = `${global.location.origin}/test/#bibliothek/${encodeURIComponent(pub.slug)}`;
     if (navigator.share) {
       return navigator.share({ title: pub.title, text, url }).catch(() => {});
     }
