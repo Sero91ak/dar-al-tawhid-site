@@ -4,7 +4,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v379-test";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v388";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -12527,7 +12527,26 @@ body.home-push-sheet-open{overflow:hidden}
 :root{--bottom-navigation-height:70px}
 .home-v380-shell{display:flex;flex-direction:column;gap:0;min-width:0}
 .home-v380-shell > * + .home-v380-section{margin-top:clamp(28px,6vw,34px)}
-.view-head-home-row--v380{display:block!important;grid-template-columns:unset!important}
+.view-head-home-row--v380{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:10px!important;grid-template-columns:unset!important;
+}
+.view-head-home-row--v380 .home-start-title{flex:1 1 auto;min-width:0;margin:0}
+.home-header-sync-chip{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  min-height:36px;padding:8px 13px;flex:0 0 auto;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 38%,var(--theme-border) 62%);
+  border-radius:999px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-accent) 14%,var(--theme-surface)),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 4%));
+  color:color-mix(in srgb,var(--theme-accent) 88%,var(--theme-text) 12%);
+  font-size:clamp(10px,2.2vw,11px);font-weight:850;letter-spacing:.04em;line-height:1.2;
+  cursor:pointer;white-space:nowrap;
+  box-shadow:0 6px 18px color-mix(in srgb,var(--theme-text) 6%,transparent);
+}
+.home-header-sync-chip:hover,.home-header-sync-chip:focus-visible{filter:brightness(1.06);outline:none;border-color:color-mix(in srgb,var(--theme-accent) 55%,var(--theme-border) 45%)}
+.home-header-sync-chip.is-update{border-color:color-mix(in srgb,var(--theme-accent) 62%,var(--theme-border) 38%);color:var(--theme-accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--theme-accent) 24%,transparent)}
+.home-header-sync-chip.is-error{border-color:color-mix(in srgb,var(--theme-accent) 40%,#c44 60%);color:color-mix(in srgb,var(--theme-accent) 55%,#e88 45%)}
+.home-header-sync-chip.is-busy,.home-header-sync-chip:disabled{opacity:.72;cursor:wait}
 .home-start-rule{
   display:block;width:min(100%,min(78vw,320px));height:1px;margin:10px 0 0;
   background:linear-gradient(90deg,color-mix(in srgb,var(--theme-accent,var(--gold2)) 58%,transparent),transparent 92%);
@@ -12551,48 +12570,86 @@ body.home-push-sheet-open{overflow:hidden}
   background:linear-gradient(90deg,color-mix(in srgb,var(--theme-border,var(--line)) 80%,var(--theme-accent) 20%),transparent 88%);
 }
 .home-v380-text-link{
-  border:0;background:transparent;padding:0;margin:0;cursor:pointer;
+  border:0;background:transparent;padding:6px 10px 6px 4px;margin:0;cursor:pointer;
   font-size:clamp(10px,2.2vw,11px);font-weight:800;letter-spacing:.04em;
   color:color-mix(in srgb,var(--theme-accent) 88%,var(--theme-text) 12%);
-  white-space:nowrap;
+  white-space:nowrap;flex-shrink:0;
 }
 .home-v380-text-link:hover,.home-v380-text-link:focus-visible{filter:brightness(1.06);outline:none;text-decoration:underline}
-/* Typ B: App-Status – flache Doppelzeile, kein Kasten-auf-Kasten */
-.home-v380-status{
-  margin-top:14px;
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 42%,transparent);
-  border-bottom:1px solid color-mix(in srgb,var(--theme-border) 42%,transparent);
-  background:color-mix(in srgb,var(--theme-surface) 35%,transparent);
+/* Typ B: App-Status – zwei klar erkennbare Karten */
+.home-v380-app-status{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:56px;margin-top:14px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 30%,var(--theme-border) 70%);
+  border-radius:14px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
+  overflow:hidden;
+  box-shadow:0 8px 24px color-mix(in srgb,var(--theme-text) 5%,transparent);
 }
-.home-v380-status__row{
-  display:flex;align-items:flex-start;gap:10px;width:100%;min-height:48px;
-  padding:11px 2px;border:0;background:transparent;color:var(--theme-text);
-  cursor:pointer;text-align:left;
+.home-v380-app-status__half{
+  display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0;min-height:56px;
+  padding:11px 14px;border:0;background:transparent;color:var(--theme-text);cursor:pointer;text-align:left;
 }
-.home-v380-status__row + .home-v380-status__row{
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 38%,transparent);
+.home-v380-app-status__half + .home-v380-app-status__half{
+  border-left:1px solid color-mix(in srgb,var(--theme-accent) 18%,var(--theme-border) 82%);
 }
-.home-v380-status__ico{
-  flex:0 0 auto;width:18px;font-size:15px;line-height:1.35;
-  color:color-mix(in srgb,var(--theme-accent) 82%,var(--theme-text) 18%);
-  font-weight:800;text-align:center;
+.home-v380-app-status__label{
+  font-size:clamp(7.5px,1.7vw,8.5px);font-weight:850;letter-spacing:.13em;text-transform:uppercase;
+  color:color-mix(in srgb,var(--theme-muted) 78%,var(--theme-text) 22%);
 }
-.home-v380-status__ico--bell{display:inline-flex;align-items:center;justify-content:center}
-.home-v380-status__ico--bell .prayer-overview__push-bell-svg{width:15px;height:15px}
-.home-v380-status__text{
-  flex:1 1 auto;min-width:0;font-size:clamp(10.5px,2.4vw,11.5px);font-weight:750;line-height:1.36;
-  color:color-mix(in srgb,var(--theme-text) 92%,var(--theme-muted) 8%);
+.home-v380-app-status__line{
+  font-size:clamp(10px,2.35vw,11.5px);font-weight:750;line-height:1.34;
+  color:color-mix(in srgb,var(--theme-text) 90%,var(--theme-muted) 10%);
   white-space:normal;text-wrap:pretty;
 }
-.home-v380-status__row.is-update .home-v380-status__text{color:var(--theme-accent)}
-.home-v380-status__row.is-error .home-v380-status__text{color:color-mix(in srgb,var(--theme-accent) 65%,#c44 35%)}
-.home-v380-status__row:hover,.home-v380-status__row:focus-visible{
-  background:color-mix(in srgb,var(--theme-accent) 4%,transparent);outline:none;
+.home-v380-app-status__half.is-update{
+  background:color-mix(in srgb,var(--theme-accent) 10%,var(--theme-surface));
+}
+.home-v380-app-status__half.is-update .home-v380-app-status__line{color:var(--theme-accent);font-weight:800}
+.home-v380-app-status__half.is-error .home-v380-app-status__line{color:color-mix(in srgb,var(--theme-accent) 70%,#c44 30%)}
+.home-v380-app-status__half:hover,.home-v380-app-status__half:focus-visible{
+  background:color-mix(in srgb,var(--theme-accent) 6%,transparent);outline:none;
+  box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--theme-accent) 22%,transparent);
+}
+@media(max-width:520px){
+  .home-v380-app-status{grid-template-columns:1fr}
+  .home-v380-app-status__half + .home-v380-app-status__half{border-left:0;border-top:1px solid color-mix(in srgb,var(--theme-accent) 18%,var(--theme-border) 82%)}
 }
 body.is-home-route .view-head.view-head-home--v380::after{display:none!important}
-.home-v380-today .home-v380-section-title{margin-bottom:16px}
-.home-v380-today__list{display:flex;flex-direction:column;gap:0}
+.home-v380-today .home-v380-section-title{margin-bottom:14px}
+.home-v380-today__list{display:flex;flex-direction:column;gap:10px}
+.home-v380-today .home-v380-open-row{
+  padding:14px 14px 13px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);
+  border-radius:14px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%));
+}
+.home-v380-today .home-v380-open-row:last-child{border-bottom:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)}
+.home-v380-today .home-v380-open-row__action{padding-top:2px;padding-right:2px}
 .home-v380-search-wrap .home-v380-section-title{margin-bottom:12px}
+.home-v380-search-wrap{margin-bottom:clamp(22px,5vw,30px)}
+.home-v380-search-box{
+  display:flex;flex-direction:column;gap:0;
+  padding:0;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 26%,var(--theme-border) 74%);
+  border-radius:16px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 95%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%));
+  overflow:hidden;
+}
+.home-v380-search-panel{display:flex;flex-direction:column;gap:0;min-width:0}
+.home-v380-search-box .direct-pick-panel.home-direct-pick{
+  margin:0!important;padding:14px!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+}
+.home-v380-search-divider{
+  display:block;height:1px;margin:0 14px;flex:0 0 auto;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--theme-accent) 46%,var(--theme-border) 54%) 16%,color-mix(in srgb,var(--theme-accent) 46%,var(--theme-border) 54%) 84%,transparent);
+  opacity:.92;
+}
+.home-v380-search-divider--soft{
+  opacity:.72;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%) 20%,color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%) 80%,transparent);
+}
 .home-v380-search-panel .search-pro-panel{
   margin:0;padding:0;border:0;background:transparent;box-shadow:none;
 }
@@ -12601,19 +12658,19 @@ body.is-home-route #appView.view{
   padding-bottom:calc(var(--bottom-navigation-height) + env(safe-area-inset-bottom,0px) + 48px)!important;
 }
 body.is-home-route .footer{
-  margin-top:clamp(28px,6vw,34px);padding-top:14px;
-  padding-bottom:calc(28px + env(safe-area-inset-bottom,0px) + 12px);
-  border-top:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+  margin-top:clamp(34px,7vw,42px);padding-top:16px;
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 18px)!important;
+  border-top:1px solid color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border) 78%);
 }
 /* Typ A: Qurʾān Hero */
 .home-v380-quran-hero{
   display:flex;align-items:center;gap:12px;width:100%;min-height:84px;margin-top:clamp(14px,3.5vw,18px);
-  padding:clamp(14px,3.2vw,16px) clamp(14px,3.4vw,16px);
-  border:1px solid color-mix(in srgb,var(--theme-border) 55%,transparent);
+  padding:clamp(14px,3.2vw,16px) clamp(16px,3.6vw,18px);
+  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%);
   border-radius:14px;
-  background:color-mix(in srgb,var(--theme-surface) 88%,transparent);
+  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
-  box-shadow:none;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--theme-text) 5%,transparent);
 }
 .home-v380-quran-hero__body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:5px}
 .home-v380-quran-hero__title{margin:0;font-family:var(--serif);font-size:clamp(18px,4.4vw,22px);font-weight:800;line-height:1.12}
@@ -12622,7 +12679,7 @@ body.is-home-route .footer{
   color:color-mix(in srgb,var(--theme-muted) 80%,var(--theme-text) 20%);
   overflow:visible;text-overflow:unset;white-space:normal;
 }
-.home-v380-quran-hero__chevron{flex:0 0 auto;font-size:20px;line-height:1;color:var(--theme-accent);opacity:.92}
+.home-v380-quran-hero__chevron{flex:0 0 auto;font-size:20px;line-height:1;color:var(--theme-accent);opacity:.92;padding-right:2px}
 .home-v380-quran-hero:hover,.home-v380-quran-hero:focus-visible{
   border-color:color-mix(in srgb,var(--theme-accent) 42%,var(--theme-border));
   outline:none;filter:brightness(1.02);
@@ -12643,13 +12700,13 @@ body.is-home-route .footer{
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
 .home-v380-open-row__meta{-webkit-line-clamp:2}
-.home-v380-open-row__action{flex:0 0 auto;font-size:11px;font-weight:800;color:var(--theme-accent);white-space:nowrap;padding-top:4px}
+.home-v380-open-row__action{flex:0 0 auto;font-size:11px;font-weight:800;color:var(--theme-accent);white-space:nowrap;padding:2px 4px 0 8px}
 .home-v380-open-row:hover .home-v380-open-row__title,.home-v380-open-row:focus-visible .home-v380-open-row__title{color:var(--theme-accent)}
 .home-v380-open-row:focus-visible{outline:none;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--theme-accent) 35%,transparent)}
 /* Typ A: Post preview / slider */
 .home-v380-post-preview{
-  display:flex;flex-direction:column;gap:6px;min-height:100%;padding:14px 14px 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-radius:14px;
+  display:flex;flex-direction:column;gap:6px;min-height:100%;padding:14px 16px 12px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);border-radius:14px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
 }
@@ -12698,23 +12755,22 @@ body.is-home-route .footer{
   .home-v380-lib-grid.home-v380-lib-grid--slider > .home-v380-lib-card{flex:0 0 clamp(82%,85vw,88%);scroll-snap-align:start}
 }
 .home-v380-lib-card{
-  display:flex;flex-direction:column;gap:8px;min-height:120px;height:100%;padding:14px 14px 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-radius:14px;
+  display:flex;flex-direction:column;gap:8px;min-height:120px;height:100%;padding:14px 16px 12px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);border-radius:14px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
 }
 .home-v380-lib-card h3{margin:0;font-family:var(--serif);font-size:clamp(15px,3.5vw,18px);font-weight:800;line-height:1.14;overflow:visible;white-space:normal}
 .home-v380-lib-card p{margin:0;font-size:clamp(10.5px,2.3vw,11.5px);line-height:1.38;font-weight:650;color:color-mix(in srgb,var(--theme-muted) 82%,var(--theme-text) 18%);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.home-v380-lib-card__foot{margin-top:auto;display:flex;justify-content:flex-end;font-size:11px;font-weight:850;color:var(--theme-accent)}
+.home-v380-lib-card__foot{margin-top:auto;display:flex;justify-content:flex-end;font-size:11px;font-weight:850;color:var(--theme-accent);padding-right:2px}
 /* Suche */
 .home-v380-search-field{
-  display:flex;align-items:center;gap:8px;min-height:48px;padding:0 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 72%,transparent);border-radius:14px;
-  background:color-mix(in srgb,var(--theme-surface) 92%,transparent);
+  display:flex;align-items:center;gap:8px;min-height:52px;padding:0 14px;
+  margin:0;border:0;border-radius:0;
+  background:transparent;
 }
 .home-v380-search-field:focus-within{
-  border-color:color-mix(in srgb,var(--theme-accent) 40%,var(--theme-border));
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent) 14%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-accent) 22%,transparent);
 }
 .home-v380-search-field .search-input-icon{display:inline-flex;color:color-mix(in srgb,var(--theme-muted) 80%,var(--theme-accent) 20%)}
 .home-v380-search-field .search-input-icon svg{width:18px;height:18px}
@@ -12727,12 +12783,12 @@ body.is-home-route .footer{
   width:32px;height:32px;border-radius:999px;cursor:pointer;font-size:16px;line-height:1;
 }
 .home-v380-filter-chips{
-  display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:2px;scrollbar-width:none;
+  display:flex;gap:8px;overflow-x:auto;margin:0;padding:12px 14px 14px;scrollbar-width:none;
 }
 .home-v380-filter-chips::-webkit-scrollbar{display:none}
 .home-v380-filter-chip{
-  flex:0 0 auto;min-height:36px;padding:8px 12px;border-radius:10px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);
+  flex:0 0 auto;min-height:36px;padding:8px 14px;border-radius:10px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 20%,var(--theme-border) 80%);
   background:color-mix(in srgb,var(--theme-surface) 90%,transparent);
   color:color-mix(in srgb,var(--theme-text) 88%,var(--theme-muted) 12%);
   font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;
@@ -12742,7 +12798,7 @@ body.is-home-route .footer{
   background:color-mix(in srgb,var(--theme-accent) 14%,var(--theme-surface));
   color:var(--theme-text);
 }
-.home-v380-active-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.home-v380-active-filters{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0 14px 12px;align-items:center}
 .home-v380-active-filters[hidden]{display:none!important}
 .home-v380-active-chip{
   display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:6px 10px;border-radius:999px;
@@ -12755,9 +12811,16 @@ body.is-home-route .footer{
 .home-v380-filter-panel-wrap{display:none}
 .home-v380-filter-panel-wrap.advanced-visible{display:block}
 /* Footer kompakt */
-body.is-home-route .footer-actions{gap:8px;margin-top:10px}
-body.is-home-route .footer-action-btn,body.is-home-route .footer-social-link{
-  min-height:40px;padding:8px 11px;font-size:11px;border-radius:12px;
+body.is-home-route .footer-actions{
+  gap:8px;margin-top:12px;max-width:100%!important;width:100%;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+body.is-home-route #footerAppSave{
+  display:inline-flex!important;
+}
+body.is-home-route .footer-action-btn,body.is-home-route .footer-social-link,body.is-home-route .footer-app-save{
+  min-height:40px;padding:8px 10px;font-size:clamp(9.5px,2.1vw,11px);border-radius:12px;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;
 }
 body.is-home-route .footer .signature{margin-top:10px;font-size:10px}
 body.is-home-route .footer strong{font-size:14px}
@@ -13192,6 +13255,7 @@ function renderQuranOverviewHeader(totalAyat){return `<header class="qov-header"
 function renderQuranResumeCard(){const prog=getPreferredQuranProgress();if(!prog||!quranSurahMeta(prog.surahNumber)){return `<section class="qov-resume" aria-label="Einstieg"><div class="qov-resume-label">Einstieg</div><h3>Beginne deine Qurʾān-Lesung</h3><p class="qov-resume-meta">Wähle eine Sūrah oder starte mit al-Fātiḥah.</p><div class="qov-resume-foot"><button type="button" class="qov-resume-link" data-quran-continue="1:1">Sūrah auswählen →</button></div></section>`}const meta=quranSurahMeta(prog.surahNumber);if(!meta)return `<section class="qov-resume"><div class="qov-resume-label">Weiterlesen</div><h3>Lesestand zurücksetzen</h3><p class="qov-resume-meta">Gespeicherter Stand ist ungültig.</p><div class="qov-resume-foot"><button type="button" class="qov-resume-link" data-quran-continue="1:1">Neu beginnen →</button></div></section>`;const ay=Math.max(1,Math.min(Number(prog.ayahNumber)||1,meta.total_verses));const pct=quranSurahProgressPercent(prog.surahNumber);return `<section class="qov-resume" aria-label="Weiterlesen"><div class="qov-resume-label">Weiterlesen</div><h3>Sūrat ${esc(meta.transliteration)}</h3><p class="qov-resume-meta">Āyah ${ay} von ${meta.total_verses}${formatQuranProgressRelative(prog.updatedAt)?` · ${esc(formatQuranProgressRelative(prog.updatedAt).replace(/^Zuletzt gelesen /,""))}`:""}</p><div class="qov-resume-foot"><button type="button" class="qov-resume-link" data-quran-continue="${esc(prog.surahNumber)}:${esc(ay)}">Weiterlesen →</button><span class="qov-resume-progress">${ay} / ${meta.total_verses}</span></div>${pct>0?`<div class="qov-progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Fortschritt in dieser Sūrah"><span style="width:${pct}%"></span></div>`:""}<button type="button" class="visually-hidden" data-quran-progress-menu="${esc(prog.surahNumber)}:${esc(ay)}">Lesestand verwalten</button></section>`}
 function renderQuranOverviewSearch(){const recent=getQuranSearchRecent();const q=String(quranSearchQuery||"");return `<section class="qov-search-wrap qov-search-panel"><label class="visually-hidden" for="quranSearchInput">Qurʾān durchsuchen</label><div class="qov-search-shell"><span class="qov-search-icon" aria-hidden="true">🔍</span><input id="quranSearchInput" class="qov-search search" type="search" inputmode="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(q)}" placeholder="Sūrah, Āyah oder Begriff suchen" aria-label="Sūrah, Āyah oder Begriff suchen"><button type="button" class="qov-search-clear${q?" is-visible":""}" id="qovSearchClear" aria-label="Suche löschen"${q?"":" hidden"}>×</button></div><p class="qov-search-hint">Deutsch · Arabisch · Lautschrift · Begriffe</p><section id="quranSearchBlock" class="qov-search-panel" style="display:none"><div class="section-head"><span id="quranSearchCount">0 Treffer</span></div><div id="quranSearchResults" class="quran-search-results"></div></section>${recent.length?`<div id="qovSearchRecent" class="qov-recent-row" aria-label="Zuletzt gesucht">${recent.map(t=>`<button type="button" class="qov-recent-chip" data-qov-recent-search="${esc(t)}">${esc(t)}</button>`).join("")}</div>`:""}</section>`}
 function renderQuranOverviewFilters(){const f=getQuranOverviewFilter();const chips=[["all","Alle"],["meccan","Mekkanisch"],["medinan","Medinensisch"],["favorites","Favoriten"]];return `<div class="qov-filter-bar"><div class="qov-segment-bar" role="tablist" aria-label="Sūren filtern">${chips.map(([id,label])=>`<button type="button" class="qov-segment-btn${f===id?" active":""}" data-qov-filter="${id}" role="tab" aria-selected="${f===id?"true":"false"}">${label}</button>`).join("")}</div><button type="button" class="qov-sort-btn" id="qovSortBtn" aria-label="Sortierung wechseln">⇅</button></div><div class="qov-list-head">Suren</div>`}
+function renderQuran(){quranOverviewFilter=getQuranOverviewFilter();quranOverviewSort=getQuranOverviewSort();applyQuranLineSpacing(getQuranLineSpacing());if(!quranMeta)return `<div class="qov-page"><div class="qov-skeleton"></div><div class="loading">Qurʾān wird geladen…</div></div>`;const total=quranMeta.surahs.reduce((sum,s)=>sum+(s.total_verses||0),0);const list=quranOverviewFilteredSurahs();const favFilter=getQuranOverviewFilter()==="favorites";const listHtml=list.length?list.map(quranSurahCard).join(""):favFilter?`<div class="qov-empty">Noch keine Favoriten gespeichert.<br><br>Tippe bei einer Sūrah auf das Lesezeichen, um sie hier schneller wiederzufinden.</div>`:`<div class="qov-empty">Keine Sūren für diesen Filter.</div>`;return `<div class="qov-page"><div class="qov-main">${renderQuranOverviewHeader(total)}${renderQuranResumeCard()}${renderQuranOverviewSearch()}${renderQuranQuickPick()}${renderQuranOverviewFilters()}<section class="qov-surah-list quran-surah-grid" id="quranSurahGrid">${listHtml}</section></div><div id="qovDisplayMount"></div><div id="qovDirectMount"></div><div id="qovToolsMount"></div></div>`}
 function openQuranDirectSheet(){qovLastFocusEl=document.activeElement;qovDirectSheetDraft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const mount=$("qovDirectMount");if(!mount)return;mount.innerHTML=renderQuranDirectOpenSheet();bindQuranDirectSheet();document.body.style.overflow="hidden"}
 function closeQuranDirectSheet(){const mount=$("qovDirectMount");if(mount)mount.innerHTML="";qovDirectSheetDraft=null;document.body.style.overflow="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()}
 function bindQuranDirectSheet(){const backdrop=$("qovDirectBackdrop");const close=()=>closeQuranDirectSheet();backdrop?.addEventListener("click",e=>{if(e.target===backdrop)close()});backdrop?.querySelectorAll("[data-qov-direct-close]").forEach(btn=>btn.addEventListener("click",close));const surah=$("quranQuickSurah");const ayah=$("quranQuickAyah");const ref=$("qovDirectRef");const go=$("quranQuickGo");const sync=()=>{const sid=Number(surah?.value);const meta=sid?quranSurahMeta(sid):null;if(ayah&&meta)ayah.innerHTML=quranAyahOptions(meta.total_verses,ayah.value);if(ayah)ayah.disabled=!meta;const ay=Number(ayah?.value)||0;const ok=sid>=1&&sid<=114&&(!ay||meta&&ay>=1&&ay<=meta.total_verses);if(go)go.disabled=!ok};if(surah){surah.onchange=()=>{qovDirectSheetDraft={surah:surah.value,ayah:"",ref:ref?.value||""};sync()};sync()}if(ayah)ayah.onchange=sync;if(ref){ref.oninput=()=>{const parsed=quranSearchParseRef(ref.value);if(parsed){surah.value=String(parsed.surah);sync();if(ayah)ayah.value=String(parsed.ayah||"")}sync()}}if(go){go.onclick=()=>{const sid=Number(surah?.value);if(!sid)return;const ay=Number(ayah?.value)||1;const meta=quranSurahMeta(sid);if(meta&&ay>meta.total_verses)return;closeQuranDirectSheet();openQuranSurah(sid,ay)}};backdrop?.querySelector("#qovDirectSheet")?.focus();const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
@@ -13777,7 +13841,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="quiz"||view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const syncChip=isHome&&typeof renderHomeHeaderSyncChip==="function"?renderHomeHeaderSyncChip():"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380"><h2 class="home-start-title">${esc(title)}</h2>${syncChip}</div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -15333,6 +15397,7 @@ function openHomePushRemindersSheet(){
   document.body.classList.add("home-push-sheet-open");
   const closeBtn=document.getElementById("homePushRemindersClose");
   if(closeBtn)closeBtn.focus();
+  if(typeof bindPrayerPushSettingsControls==="function")bindPrayerPushSettingsControls();
   if(typeof refreshPushConnectionStatusUI==="function")refreshPushConnectionStatusUI();
 }
 function closeHomePushRemindersSheet(){
@@ -15687,14 +15752,15 @@ function getPushConnectionStatus(){
   const ios=isIOSDevice();
   return {permission,optedIn,subId,pwa,ios,serverOk:optedIn&&!!subId,ready:permission==="granted"&&optedIn&&!!subId&&(!ios||pwa)};
 }
+function pushSyncRefreshHint(){return "Startseite → ↻ Sync in der Statusleiste, dann erneut testen."}
 function renderPushConnectionStatus(){
   const s=getPushConnectionStatus();
   const rows=[
     ["App gespeichert",s.pwa||!s.ios,s.pwa?"Home-Bildschirm":(s.ios?"Safari-Tab – bitte speichern":"Browser")],
     ["Erlaubnis",s.permission==="granted",s.permission==="granted"?"erlaubt":s.permission],
-    ["Server verbunden",s.serverOk,s.serverOk?`…${s.subId.slice(-8)}`:"fehlt – Aktualisieren"]
+    ["Server verbunden",s.serverOk,s.serverOk?`…${s.subId.slice(-8)}`:"fehlt – Sync"]
   ];
-  return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">Bei rotem Status: Startseite → Aktualisieren. Ein Klick stellt Push und Inhalte wieder her.</p></div></details>`;
+  return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">Bei rotem Status: ${esc(pushSyncRefreshHint())}</p></div></details>`;
 }
 function refreshPushConnectionStatusUI(){
   try{
@@ -16082,8 +16148,8 @@ function updatePrayerCountdowns(){
 function scheduleLocalPrayerReminders({silent=false}={}){const settings=getPrayerSettings();if(!hasPrayerLocation(settings)){if(!silent)alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}clearPrayerReminders();const now=new Date();const advanceMs=prayerPushAdvanceMinutes(settings)*60*1000;const scheduledTags=new Set();[-1,0,1].forEach(offset=>{const base=new Date(now);base.setDate(now.getDate()+offset);calculatePrayerTimes(base,settings).filter(x=>x.key!=="sunrise"&&(x.key!=="tahajjud"||tahajjudNotificationsEnabled(settings))).forEach(p=>{const d=p.eventDate||prayerEventDate(base,p);if(d<=now)return;const tagBase=`${p.key}-${d.getTime()}`;if(!scheduledTags.has(tagBase+"-entry")){scheduledTags.add(tagBase+"-entry");const entryCopy=prayerEntryNotificationCopy(p,settings,d);const entryId=setTimeout(async()=>{await showPrayerNotification(entryCopy.title,{body:entryCopy.body,tag:entryCopy.tag,renotify:true,data:{url:"/#prayer"}});setTimeout(async()=>{const synced=await syncPrayerPushTags(getPrayerSettings(),{retries:2}).catch(()=>false);await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:!!synced})},60000)},d-now);prayerReminderTimeouts.push(entryId)}const advanceAt=new Date(d.getTime()-advanceMs);if((advanceAt>now||(advanceAt<=now&&d>now))&&!scheduledTags.has(tagBase+"-advance")){scheduledTags.add(tagBase+"-advance");const advanceCopy=prayerAdvanceNotificationCopy(p,settings,d);const advanceId=setTimeout(async()=>{await showPrayerNotification(advanceCopy.title,{body:advanceCopy.body,tag:advanceCopy.tag,renotify:true,data:{url:"/#prayer"}})},Math.max(1000,advanceAt-now));prayerReminderTimeouts.push(advanceId)}})})}
 async function enablePrayerServerPush(settings){return syncPrayerPushTags(settings)}
 async function disablePrayerServerPush(){try{const OS=await waitForOneSignalReady();if(OS&&OS.User&&typeof OS.User.addTags==="function")await OS.User.addTags({prayer_notifications:"false"});const id=localStorage.getItem(PUSH_USER_KEY);if(id&&hasSupabaseCfg())await supabaseRest(`prayer_push_registrations?device_id=eq.${encodeURIComponent(id)}`,{method:"PATCH",prefer:"return=minimal",body:{enabled:false,last_synced_at:new Date().toISOString()}})}catch(e){}}
-async function sendPrayerTestNotification(){
-  const btn=$("testPrayerReminderBtn");
+async function sendPrayerTestNotification(clickedBtn){
+  const btn=clickedBtn||document.querySelector("#homePushRemindersBackdrop:not([hidden]) #testPrayerReminderBtn")||$("testPrayerReminderBtn");
   const oldText=btn?btn.textContent:"";
   if(btn){btn.disabled=true;btn.textContent="Wird gesendet…"}
   try{
@@ -16134,9 +16200,10 @@ async function sendPrayerTestNotification(){
           }
         }
       }
-    }else{serverReason="Push-Verbindung zum Server fehlt (keine gültige Geräte-ID). Bitte Startseite → Aktualisieren."}
+    }else{serverReason="Push-Verbindung zum Server fehlt (keine gültige Geräte-ID). "+pushSyncRefreshHint()}
     const shown=await showPrayerNotification(title,{body,tag:`prayer-test-${prayerKey}-${mode}`,renotify:true,data:{url:"/#prayer",test:true}});
     const pwaHint=isIOSDevice()&&!isStandalonePwa()?"\n\niPhone/iPad: App über Safari → Teilen → Zum Home-Bildschirm speichern und dann über das Icon öffnen.":"";
+    const refreshHint="\n\n"+pushSyncRefreshHint();
     if(serverOk){
       setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:true,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"onesignal",subscriptionId:subId});
       alert(shown?"✓ Test-Push gesendet. Du solltest jetzt eine Meldung sehen – sonst Sperrbildschirm prüfen.":"✓ Server-Push wurde abgeschickt. App kurz schließen und Sperrbildschirm prüfen."+pwaHint);
@@ -16144,11 +16211,11 @@ async function sendPrayerTestNotification(){
     }
     if(shown){
       setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastTestPrayer:prayerKey,lastTestMode:mode,lastTestVia:"local",lastError:serverReason,subscriptionId:subId});
-      alert("⚠ Server-Push nicht angekommen:\n"+serverReason+"\n\nLokaler Test wurde angezeigt. Startseite → Aktualisieren, dann erneut testen."+pwaHint);
+      alert("⚠ Server-Push nicht angekommen:\n"+serverReason+"\n\nLokaler Test wurde angezeigt. "+pushSyncRefreshHint()+pwaHint);
       return;
     }
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:serverReason,subscriptionId:subId||""});
-    alert("Test-Push konnte nicht zugestellt werden.\n\n"+serverReason+pwaHint+"\n\nStartseite → Aktualisieren, dann erneut testen.");
+    alert("Test-Push konnte nicht zugestellt werden.\n\n"+serverReason+pwaHint+refreshHint);
   }catch(e){
     setPrayerPushDebug({lastTestAt:new Date().toISOString(),lastTestOk:false,lastError:e.message||String(e)});
     alert("Test-Push konnte nicht gesendet werden.");
@@ -16214,7 +16281,64 @@ async function activatePrayerReminder(){
     updateHighlightPushButtons();
   }
 }
-function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();bindHomePushRemindersSheet();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const advanceSel=$("prayerAdvanceSelect");if(advanceSel)advanceSel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(advanceSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const tahajjudSel=$("tahajjudModeSelect");if(tahajjudSel)tahajjudSel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(tahajjudSel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const loc=$("useLocationBtn");if(loc)loc.onclick=()=>requestPrayerLocation(loc);const reminder=$("enablePrayerReminderBtn");if(reminder)reminder.onclick=()=>{if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};const dailyDuaBtn=$("enableDailyDuaPushBtn");if(dailyDuaBtn)dailyDuaBtn.onclick=()=>setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{});const dailyRecBtn=$("enableDailyRecommendationPushBtn");if(dailyRecBtn)dailyRecBtn.onclick=()=>setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{});const jummahBtn=$("enableJummahPushBtn");if(jummahBtn)jummahBtn.onclick=()=>setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{});const jummahMode=$("jummahTimeModeSelect");if(jummahMode)jummahMode.onchange=()=>{setPrayerSettings({jummahUseManualTime:jummahMode.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};const jummahManual=$("jummahManualTimeInput");if(jummahManual)jummahManual.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(jummahManual.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const jummahAdvance=$("jummahAdvanceSelect");if(jummahAdvance)jummahAdvance.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(jummahAdvance.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};const testReminder=$("testPrayerReminderBtn");if(testReminder)testReminder.onclick=()=>sendPrayerTestNotification();const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
+function bindPrayerPushSettingsControls(){
+  document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();if(getPrayerSettings().reminder)maintainPushHealth({silent:false}).catch(()=>{});else activatePrayerReminder()};
+  });
+  document.querySelectorAll("#testPrayerReminderBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();sendPrayerTestNotification(btn)};
+  });
+  document.querySelectorAll("#prayerAdvanceSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({advanceMinutes:normalizeAdvanceMinutes(sel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};
+  });
+  document.querySelectorAll("#tahajjudModeSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({tahajjudMode:normalizeTahajjudMode(sel.value)});scheduleLocalPrayerReminders({silent:true});maintainPushHealth({silent:true}).catch(()=>{});render()};
+  });
+  document.querySelectorAll("#useLocationBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(btn)};
+  });
+  document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();setDailyPushPreference("dailyDua",!dailyPushPref(getPrayerSettings(),"dailyDua")).catch(()=>{})};
+  });
+  document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();setDailyPushPreference("dailyRecommendation",!dailyPushPref(getPrayerSettings(),"dailyRecommendation")).catch(()=>{})};
+  });
+  document.querySelectorAll("#enableJummahPushBtn").forEach(btn=>{
+    if(btn.dataset.prayerPushBound==="1")return;
+    btn.dataset.prayerPushBound="1";
+    btn.onclick=ev=>{ev.stopPropagation();setJummahPushPreference(!jummahPref(getPrayerSettings(),"jummahNotifications")).catch(()=>{})};
+  });
+  document.querySelectorAll("#jummahTimeModeSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({jummahUseManualTime:sel.value==="manual"});syncJummahPushTags(getPrayerSettings()).catch(()=>{});render()};
+  });
+  document.querySelectorAll("#jummahManualTimeInput").forEach(inp=>{
+    if(inp.dataset.prayerPushBound==="1")return;
+    inp.dataset.prayerPushBound="1";
+    inp.onchange=()=>{setPrayerSettings({jummahManualTime:normalizeTimeHHMM(inp.value,"13:30")});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};
+  });
+  document.querySelectorAll("#jummahAdvanceSelect").forEach(sel=>{
+    if(sel.dataset.prayerPushBound==="1")return;
+    sel.dataset.prayerPushBound="1";
+    sel.onchange=()=>{setPrayerSettings({jummahAdvanceMinutes:normalizeJummahAdvanceMinutes(sel.value)});syncJummahPushTags(getPrayerSettings()).catch(()=>{})};
+  });
+}
+function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();bindHomePushRemindersSheet();bindPrayerPushSettingsControls();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
@@ -17279,8 +17403,8 @@ function bindCalendarPremiumFilters(){const root=document.querySelector(".calend
 
 const HOME_LAST_SYNC_KEY="darHomeLastSyncV1";
 function getHomeLastSyncTime(){try{const raw=localStorage.getItem(HOME_LAST_SYNC_KEY);return raw?JSON.parse(raw):null}catch(e){return null}}
-function markHomeLastSyncOk(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:true}))}catch(e){}}
-function markHomeLastSyncError(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:false}));window.__darHomeSyncError=true}catch(e){}}
+function markHomeLastSyncOk(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:true}));window.__darHomeSyncError=false}catch(e){}if(typeof updateHomeAppStatusUi==="function")updateHomeAppStatusUi()}
+function markHomeLastSyncError(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:false}));window.__darHomeSyncError=true}catch(e){}if(typeof updateHomeAppStatusUi==="function")updateHomeAppStatusUi()}
 function formatHomeSyncClock(ts){if(!ts)return"";const d=new Date(ts);if(!Number.isFinite(d.getTime()))return"";return d.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}
 function homeHasNewContentSignal(){if(window.__darAppVersionAvailable===true)return true;const banner=document.getElementById("newPostsBanner");return !!(banner&&!banner.classList.contains("hidden"))}
 function homeSyncStatusSummary(){
@@ -17313,31 +17437,30 @@ function homePushStatusCompact(settings=getPrayerSettings()){
   const line=parts.join(" · ");
   return{line,actionLabel:"",state:prayerOn&&duaOn&&recOn?"full":"partial",ariaLabel:`Push-Erinnerungen öffnen. ${line.replace(/\s*·\s*/g,", ")}.`};
 }
+function homeHeaderSyncChipLabel(sync){
+  if(sync.state==="update")return"↻ Aktualisieren";
+  if(sync.state==="error")return"↻ Erneut";
+  if(sync.state==="busy")return"↻ …";
+  return"↻ Aktualisieren";
+}
+function renderHomeHeaderSyncChip(){
+  const sync=homeSyncStatusSummary();
+  const cta=homeHeaderSyncChipLabel(sync);
+  return `<button type="button" id="hardRefreshTopBtn" class="home-header-sync-chip${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}${sync.state==="busy"?" is-busy":""}" aria-label="${esc(sync.aria)}" title="${esc(sync.line)}">${esc(cta)}</button>`;
+}
 function updateHomeAppStatusUi(){
   const sync=homeSyncStatusSummary();
-  const push=homePushStatusCompact();
-  const syncLine=document.getElementById("homeAppStatusSyncLine");
-  const pushLine=document.getElementById("homeAppStatusPushLine");
-  const syncBtn=document.getElementById("homeAppStatusSync");
-  const pushBtn=document.getElementById("homeAppStatusPush");
-  if(syncLine)syncLine.textContent=sync.line;
-  if(pushLine)pushLine.textContent=push.line;
+  const syncBtn=document.getElementById("hardRefreshTopBtn");
   if(syncBtn){
     syncBtn.setAttribute("aria-label",sync.aria);
+    syncBtn.setAttribute("title",sync.line);
     syncBtn.classList.toggle("is-update",sync.state==="update");
     syncBtn.classList.toggle("is-error",sync.state==="error");
+    syncBtn.classList.toggle("is-busy",sync.state==="busy");
+    if(!syncBtn.disabled)syncBtn.textContent=homeHeaderSyncChipLabel(sync);
   }
-  if(pushBtn)pushBtn.setAttribute("aria-label",push.ariaLabel);
   const strip=document.getElementById("homePushRemindersStrip");
   if(strip)updateHomePushRemindersSummary();
-}
-function renderHomePushSheetOnly(){
-  return `<div id="homePushRemindersBackdrop" class="home-push-sheet-backdrop" hidden tabindex="-1"><div class="home-push-sheet" role="dialog" aria-modal="true" aria-labelledby="homePushSheetTitle"><div class="home-push-sheet__head"><h3 id="homePushSheetTitle">Gebets- & Duʿāʾ-Erinnerungen</h3><button type="button" id="homePushRemindersClose" class="home-push-sheet__close" aria-label="Schließen">×</button></div><div class="home-push-sheet__body" id="prayerPushSettingsBody">${renderPrayerReminderSettingsInner()}</div></div></div>`;
-}
-function renderHomeAppStatus(){
-  const sync=homeSyncStatusSummary();
-  const push=homePushStatusCompact();
-  return `<section class="home-v380-status" aria-label="App-Status"><button type="button" id="homeAppStatusSync" class="home-v380-status__row${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}" aria-label="${esc(sync.aria)}"><span class="home-v380-status__ico" aria-hidden="true">↻</span><span class="home-v380-status__text" id="homeAppStatusSyncLine">${esc(sync.line)}</span></button><button type="button" id="homeAppStatusPush" class="home-v380-status__row" aria-label="${esc(push.ariaLabel)}"><span class="home-v380-status__ico home-v380-status__ico--bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="home-v380-status__text" id="homeAppStatusPushLine">${esc(push.line)}</span></button></section>${renderHomePushSheetOnly()}`;
 }
 function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={}){
   if(!post)return"";
@@ -17428,7 +17551,10 @@ function renderHomeLibrariesSection(){
   return `<section class="home-v380-section" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Bibliotheken</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Wissen und Quellen gezielt durchsuchen</p></div><button type="button" class="home-v380-text-link" data-nav="topics">Alle anzeigen →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid${sliderClass}">${cards.join("")}</div></section>`;
 }
 function renderHomeSearchSection(){
-  return `<section class="home-v380-section home-v380-search-wrap" aria-labelledby="homeSearchTitle"><h2 class="home-v380-section-title" id="homeSearchTitle">Suche und Filter</h2><div class="home-v380-search-panel">${renderSearchPanel()}</div></section>`;
+  const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  const scholars=renderScholarOptions();
+  const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  return `<section class="home-v380-section home-v380-search-wrap" aria-labelledby="homeSearchTitle"><h2 class="home-v380-section-title" id="homeSearchTitle">Suche und Filter</h2><div class="home-v380-search-box"><div class="home-v380-search-panel">${renderDirectPickPanel("home-direct-pick")}<div class="home-v380-search-divider" aria-hidden="true"></div><div class="home-v380-search-field"><span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="homeSearchInput" class="search search-input-field" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Beiträge, Duʿāʾ, Themen, Gelehrte und Bücher durchsuchen"><button type="button" id="homeSearchClear" class="home-v380-search-clear" hidden aria-label="Suche löschen">×</button></div><div class="home-v380-search-divider home-v380-search-divider--soft" aria-hidden="true"></div><div class="home-v380-filter-chips" role="toolbar" aria-label="Schnellauswahl Filter"><button type="button" class="home-v380-filter-chip" data-home-filter-open="cat">Thema</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="scholar">Gelehrter</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="book">Buch</button><button type="button" class="home-v380-filter-chip" data-home-filter-open="more">Weitere Filter</button></div><div id="homeActiveFilters" class="home-v380-active-filters" hidden></div><div id="homeFilterPanel" class="home-v380-filter-panel-wrap advanced-hidden"><div class="filter-grid"><select id="homeFilterCat" class="filter-select" aria-label="Thema filtern"><option value="">Alle Kategorien</option>${cats}</select><select id="homeFilterScholar" class="filter-select" aria-label="Gelehrten filtern"><option value="">Alle Gelehrten</option>${scholars}</select><select id="homeFilterBook" class="filter-select" aria-label="Buch filtern"><option value="">Alle Bücher</option>${books}</select><select id="homeFilterType" class="filter-select" aria-label="Quellentyp filtern"><option value="">Qurʾān / Sunnah / Athar</option><option value="quran">Qurʾān / Tafsīr</option><option value="sunnah">Sunnah / Hadith</option><option value="athar">Āthār</option><option value="other">Sonstige</option></select></div></div></div><div id="homeFilterSheetBackdrop" class="home-push-sheet-backdrop" hidden tabindex="-1"><div class="home-push-sheet" role="dialog" aria-modal="true" aria-labelledby="homeFilterSheetTitle"><div class="home-push-sheet__head"><h3 id="homeFilterSheetTitle">Filter</h3><button type="button" id="homeFilterSheetClose" class="home-push-sheet__close" aria-label="Schließen">×</button></div><div class="home-push-sheet__body" id="homeFilterSheetBody"></div></div></div></div></section>`;
 }
 function updateHomeActiveFilterChips(){
   const wrap=document.getElementById("homeActiveFilters");
@@ -17478,22 +17604,60 @@ function closeHomeFilterSheet(){
 }
 function bindHomeV380Events(){
   updateHomeAppStatusUi();
-  const syncBtn=document.getElementById("homeAppStatusSync");
+  const syncBtn=document.getElementById("hardRefreshTopBtn");
   if(syncBtn)syncBtn.onclick=()=>hardRefreshApp();
-  const pushBtn=document.getElementById("homeAppStatusPush");
-  if(pushBtn)pushBtn.onclick=()=>{
-    const s=homePushStatusCompact();
-    if(s.state==="permission-denied"&&hasNotificationApi()){requestNotificationPermission().then(()=>{updateHomeAppStatusUi();openHomePushRemindersSheet()}).catch(()=>openHomePushRemindersSheet());return}
-    openHomePushRemindersSheet();
-  };
   bindHomePushRemindersSheet();
+  const clearBtn=document.getElementById("homeSearchClear");
+  const searchInput=$("homeSearchInput");
+  const syncSearchClear=()=>{if(!clearBtn||!searchInput)return;const has=!!searchInput.value.trim();clearBtn.hidden=!has};
+  if(searchInput){searchInput.oninput=()=>{syncSearchClear();applyHomeFilters()};syncSearchClear()}
+  if(clearBtn)clearBtn.onclick=()=>{if(searchInput){searchInput.value="";syncSearchClear();applyHomeFilters();searchInput.focus()}};
+  document.querySelectorAll("[data-home-filter-open]").forEach(btn=>{
+    btn.onclick=()=>openHomeFilterSheet(btn.getAttribute("data-home-filter-open")||"more");
+  });
+  const filterClose=document.getElementById("homeFilterSheetClose");
+  if(filterClose)filterClose.onclick=e=>{e.stopPropagation();closeHomeFilterSheet()};
+  const filterBackdrop=document.getElementById("homeFilterSheetBackdrop");
+  if(filterBackdrop)filterBackdrop.onclick=e=>{if(e.target===filterBackdrop)closeHomeFilterSheet()};
+  const activeWrap=document.getElementById("homeActiveFilters");
+  if(activeWrap&&!activeWrap.dataset.bound){
+    activeWrap.dataset.bound="1";
+    activeWrap.addEventListener("click",e=>{
+    if(e.target.id==="homeFilterResetAll"||e.target.closest("#homeFilterResetAll")){
+      ["homeFilterCat","homeFilterScholar","homeFilterBook","homeFilterType"].forEach(id=>{const el=$(id);if(el)el.value=""});
+      applyHomeFilters();updateHomeActiveFilterChips();return;
+    }
+    const btn=e.target.closest("[data-home-filter-clear]");
+    if(!btn)return;
+    const key=btn.getAttribute("data-home-filter-clear");
+    if(key==="cat"&&$("homeFilterCat"))$("homeFilterCat").value="";
+    if(key==="scholar"&&$("homeFilterScholar"))$("homeFilterScholar").value="";
+    if(key==="book"&&$("homeFilterBook"))$("homeFilterBook").value="";
+    if(key==="type"&&$("homeFilterType"))$("homeFilterType").value="";
+    applyHomeFilters();updateHomeActiveFilterChips();
+    });
+  }
+  updateHomeActiveFilterChips();
   updateFooterAppSaveVisibility();
+}
+function shouldShowFooterAppSave(){
+  if(currentRoute?.view==="home")return true;
+  if(isStandalonePwa())return false;
+  return true;
 }
 function updateFooterAppSaveVisibility(){
   const btn=document.getElementById("footerAppSave");
   if(!btn)return;
-  if(isStandalonePwa()){btn.setAttribute("hidden","");btn.style.display="none"}
-  else{btn.removeAttribute("hidden");btn.style.display=""}
+  const show=shouldShowFooterAppSave();
+  const standalone=isStandalonePwa();
+  if(show){btn.removeAttribute("hidden");btn.style.display=""}else{btn.setAttribute("hidden","");btn.style.display="none"}
+  if(show&&currentRoute?.view==="home"&&standalone){
+    btn.textContent="App gespeichert";
+    btn.setAttribute("aria-label","App ist bereits gespeichert");
+  }else if(show){
+    btn.textContent="App speichern";
+    btn.setAttribute("aria-label","App speichern");
+  }
 }
 function renderHomeRefreshPanel(){const newer=window.__darAppVersionAvailable===true;return `<section class="home-refresh-panel${newer?" is-update-available":""}"><div class="home-refresh-copy"><span>Schnellaktion</span><b>${newer?"Neue Version verfügbar":"🔄 Aktualisieren"}</b><p>${newer?"Neue App-Version laden und Inhalte synchronisieren.":"Neue Beiträge laden und App synchronisieren."}</p></div><button id="hardRefreshBtn" class="home-refresh-btn" type="button">${newer?"Jetzt laden":"Sync"}</button></section>`}
 async function syncAppServices({silent=true}={}){
@@ -17626,14 +17790,14 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v381-test";
+const APP_BUILD_ID="app-shell-v388";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderOfflineBox()}${renderHomeAppStatus()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
+function renderHome(){return`${renderStagingBanner()}${renderPostsSyncBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
 function renderScholars(){const items=buildScholarCatalog();return`${setPageHeader("Gelehrte","Beiträge nach Imāmen, Ṣaḥābah und frühen Gelehrten","Gelehrte")}<section class="grid-list">${items.length?items.map(s=>listCard(s.label,s.count+" Beiträge","scholar",s.key,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section>`}
@@ -18656,6 +18820,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var btn = document.getElementById('hardRefreshBtn');
       if (btn && on && !btn.disabled) btn.textContent = 'Jetzt laden';
       else if (btn && !btn.disabled) btn.textContent = 'Aktualisieren';
+      if (typeof updateHomeAppStatusUi === 'function') updateHomeAppStatusUi();
     }
     function showVersionBanner() {
       var banner = getBanner();
