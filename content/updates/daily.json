@@ -1,15 +1,38 @@
 {
   "date": "2026-07-24",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-24T19:50:02.075Z",
-  "source": "dar-daily-scheduler-regenerated-v4",
+  "generated": "2026-07-24T20:07:53.147Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "al-ajurri-groesstes-geschenk-im-paradies-161",
-    "title": "Das größte Geschenk im Paradies",
-    "file": "al-ajurri-groesstes-geschenk-im-paradies-161.md",
-    "category": "Aqīdah",
-    "scholar": "Abū Bakr al-Ājurrī",
-    "snippet": "„Wenn die Bewohner des Paradieses ins Paradies eintreten, wird ihnen zugerufen: O Bewohner des Paradieses, ihr habt bei Allah einen Termin, den ihr noch nicht gesehen habt.“"
+    "id": "muhakamah-das-urteil-der-jahiliyyah-324",
+    "title": "Muḥākamah: Das Urteil der Jāhiliyyah",
+    "file": "muhakamah-das-urteil-der-jahiliyyah-324.md",
+    "category": "Hukm & Muḥākamah",
+    "scholar": "Ibn Kathīr",
+    "snippet": "🖋️ Ibn Kathīr sagte:"
   },
-  "dua": null
+  "dua": {
+    "id": "dua-050-rabbi-la-tadharni-fardan",
+    "title": "Duʿāʾ von Zakariyyā um Nachkommen",
+    "snippet": "Mein Herr, lass mich nicht allein zurück, und Du bist der beste Erbe.",
+    "category": "Kinder & Nachkommen"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 451,
+      "remaining": 446
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 90,
+      "remaining": 86,
+      "sources": {
+        "markdown": 90,
+        "total": 90,
+        "poolSize": 90,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
+  }
 }
