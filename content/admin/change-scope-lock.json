@@ -28,6 +28,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "header-prayer-premium-v376-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetszeiten zu klein (CSS-Konflikt), Rheinbach nicht extra Zeile",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
       "id": "header-prayer-premium-v375-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Feedback: Gebetsnamen/-zeiten größer, Countdown zweizeilig, Isnad-Quelle ohne Abschneiden",
