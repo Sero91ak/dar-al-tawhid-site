@@ -40,6 +40,9 @@
   let publishStep = 0;
   let successSlug = "";
   let successTarget = "test";
+  let successPublicationId = "";
+  let successPdfUrl = "";
+  let lastLivePush = null;
   let editingPublicationId = "";
   let dragActive = false;
   let processingPdf = false;
@@ -576,6 +579,9 @@
       publishStep = 4;
       successSlug = draft.slug;
       successTarget = publishTarget;
+      successPublicationId = draft.id || "";
+      successPdfUrl = draft.pdfUrl || "";
+      lastLivePush = publishTarget === "live" ? (res?.push || null) : null;
       editingPublicationId = "";
       pdfReplaceVersion = "";
       await ensureLibraryLoaded(true);
@@ -600,6 +606,9 @@
     showCategoryEdit = false;
     successSlug = "";
     successTarget = "test";
+    successPublicationId = "";
+    successPdfUrl = "";
+    lastLivePush = null;
     publishStep = 0;
   }
 
@@ -719,15 +728,59 @@
       ? "Die Veröffentlichung wurde erfolgreich für die Besucher-App (Live) veröffentlicht."
       : "Die Veröffentlichung wurde erfolgreich in der Test-Bibliothek veröffentlicht.";
     const viewBtn = isLive
-      ? `<span class="lib-admin-btn lib-admin-btn-live" style="opacity:.72;cursor:default">Live-Katalog aktualisiert</span>`
+      ? `<a class="lib-admin-btn lib-admin-btn-live" href="/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Besucher-Bibliothek ansehen</a>`
       : `<a class="lib-admin-btn lib-admin-btn-primary" href="/test/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Test-Bibliothek ansehen</a>`;
+    const push = lastLivePush || {};
+    const pushSent = push.sent === true;
+    const pushWaiting = push.waitingForApproval || (push.pending && !push.waitingForLive);
+    const pushNote = isLive
+      ? pushSent
+        ? "Besucher-Push wurde gesendet."
+        : pushWaiting
+          ? "Besucher-Push wartet auf deine Freigabe — erst „Live Push freigeben“ senden."
+          : push.waitingForLive
+            ? "Besucher-Push wartet auf stabile Live-Verfügbarkeit."
+            : "Besucher-Push: nach Freigabe an alle registrierten Besucher."
+      : "Test-Veröffentlichung: kein Besucher-Push.";
+    const pushBtn = isLive && !pushSent
+      ? `<button class="lib-admin-btn lib-admin-btn-primary" type="button" id="libAdminRetryPush">Live Push freigeben</button>`
+      : "";
     return `<div class="lib-admin-success">
       <p><b>${esc(headline)}</b></p>
+      <p class="lib-admin-category" style="margin-top:8px">${esc(pushNote)}</p>
       <div class="lib-admin-actions" style="margin-top:12px">
         ${viewBtn}
+        ${pushBtn}
         <button class="lib-admin-btn" type="button" id="libAdminNewUpload">Weitere PDF hochladen</button>
       </div>
     </div>`;
+  }
+
+  async function retryLibraryLivePush() {
+    if (!successPublicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
+    if (!confirm("Live Push freigeben?\n\nDer PDF-Push wird jetzt an alle registrierten Besucher gesendet.")) return;
+    const btn = document.getElementById("libAdminRetryPush");
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Push wird gesendet…";
+    }
+    try {
+      const result = await workerPost("api/admin/push/library/retry", {
+        publicationId: successPublicationId,
+        slug: successSlug,
+        publicationTitle: draft?.title || "",
+        pdfUrl: successPdfUrl
+      });
+      lastLivePush = result?.push || result || null;
+      const sent = result?.push?.sent === true;
+      toast(sent ? "Live Push gesendet" : (result?.push?.reason || "Push mit Hinweis"));
+      safeRender();
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Live Push freigeben";
+      }
+    }
   }
 
   function statusLabelAdmin(status) {
@@ -877,6 +930,14 @@
     document.getElementById("libAdminNewUpload")?.addEventListener("click", () => {
       resetUploadForm();
       safeRender();
+    });
+
+    document.getElementById("libAdminRetryPush")?.addEventListener("click", async () => {
+      try {
+        await retryLibraryLivePush();
+      } catch (e) {
+        toast(e.message || "Push fehlgeschlagen");
+      }
     });
 
     document.getElementById("libAdminCancelEdit")?.addEventListener("click", () => {
