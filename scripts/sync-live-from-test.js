@@ -23,17 +23,26 @@ const replacements = [
   ['href="/favicon-32.png?v=dar-test-v3"', 'href="/favicon-32.png?v=source-under-statement-v12"'],
   ['href="/favicon-48.png?v=dar-test-v3"', 'href="/favicon-48.png?v=source-under-statement-v12"'],
   ['href="/test-apple-touch-icon.png?v=dar-test-v3"', 'href="/apple-touch-icon.png?v=source-under-statement-v12"'],
+  ['href="/test-apple-touch-icon.png?v=dar-test-v4"', 'href="/apple-touch-icon.png?v=source-under-statement-v12"'],
   ['href="/test/manifest.json?v=dar-test-v3"', 'href="/manifest.json?v=source-under-statement-v12"'],
+  ['href="/test/manifest.json?v=dar-test-v4"', 'href="/manifest.json?v=source-under-statement-v12"'],
   ['content="Dar Test"', 'content="DAR AL TAWḤID"'],
   [
     'content="Dar Test — private DAR AL TAWḤID Vorschau vor Live-Veröffentlichung."',
     'content="DAR AL TAWḤID - geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah, Athar, Duʿaʾ, Qurʾan-Bereich und Gebetszeiten."'
   ],
+  [
+    'content="DAR AL TAWḤID Test-App für private Vorschau, Qurʾān, Sunnah, Āthār, Duʿāʾ und Gebetszeiten."',
+    'content="DAR AL TAWḤID - geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah, Athar, Duʿaʾ, Qurʾan-Bereich und Gebetszeiten."'
+  ],
   ['content="Private Vorschau der DAR AL TAWḤID App — nicht für Besucher live."', 'content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar."'],
+  ['content="Private Vorschau-App für DAR AL TAWḤID."', 'content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar."'],
   ['content="/test-app-icon-512.png?v=dar-test-v3"', 'content="/app-icon-512.png?v=source-under-statement-v12"'],
+  ['content="/test-app-icon-512.png?v=dar-test-v4"', 'content="/app-icon-512.png?v=source-under-statement-v12"'],
   ['content="https://dar-al-tawhid.de/test/"', 'content="https://dar-al-tawhid.de/"'],
   ['content="Private Vorschau der DAR AL TAWḤID App."', 'content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar."'],
   ['content="/test-app-icon-192.png?v=dar-test-v3"', 'content="/app-icon-192.png?v=source-under-statement-v12"'],
+  ['content="/test-app-icon-192.png?v=dar-test-v4"', 'content="/app-icon-192.png?v=source-under-statement-v12"'],
   ['content="#061826"', 'content="#080806"']
 ];
 
