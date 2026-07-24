@@ -28,6 +28,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-github-pages-sync-v388-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Test-App Änderungen nicht sichtbar – GitHub Pages liest main, nicht Workers-Staging",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/publish-test-staging-to-github-pages.js",
+        ".github/workflows/deploy-test-library-canonical.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
       "id": "home-search-footer-v387-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Feedback: Aktualisieren-Button sichtbar, Suche bis goldene Linie, Abstand Footer, App speichern",
