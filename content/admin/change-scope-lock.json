@@ -28,6 +28,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-startseite-no-update-v429-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite voll + Aktualisieren-Button aus Kopf entfernen — live Besucher + Test",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T02:00:00.000Z"
+    },
+    {
       "id": "home-startseite-oneline-v428-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Startseite-Titel nicht auf zwei Zeilen umbrechen — live Besucher + Test",
