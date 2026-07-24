@@ -333,7 +333,9 @@ export function suggestLibraryCategory(text) {
   if (/sunnah|hadith|ahadith/i.test(blob)) return { category: "Sunnah", topic: "Sunnah", confidence: "low" };
   if (/quran|qurʾān|tafsir/i.test(blob)) return { category: "Qurʾān", topic: "Qurʾān", confidence: "low" };
   if (/gebet|salah|salat/i.test(blob)) return { category: "Gebet", topic: "Gebet", confidence: "low" };
-  if (/fiqh|zakat|zakāt/i.test(blob)) return { category: "Fiqh", topic: "Fiqh", confidence: "low" };
+  if (/hukm|hukum|ahkam|fiqh|majhul|mashhur|halal|haram|tahara|wudu|ghusl|zakat|zakah|zakāt/i.test(blob)) {
+    return { category: "Fiqh", topic: "Fiqh", confidence: "medium" };
+  }
   if (/familie|ehe|kinder/i.test(blob)) return { category: "Familie", topic: "Familie", confidence: "low" };
   if (/manhaj|methodology/i.test(blob)) return { category: "Manhaj", topic: "Manhaj", confidence: "low" };
   if (/widerleg|radd|refutation/i.test(blob)) return { category: "Widerlegungen", topic: "Widerlegungen", confidence: "low" };

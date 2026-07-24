@@ -28,6 +28,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "library-pdf-category-fix-v424-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF-Upload in Dar Admin blockiert wenn Kategorie nicht erkannt — Fiqh-Erkennung + Kategorie-Auswahl reparieren",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/index.html",
+        "cloudflare/library-admin.js",
+        "scripts/library-admin-test.js",
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-07-25T23:30:00.000Z"
+    },
+    {
       "id": "library-reader-black-fix-v422-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Bibliothek PDF-Leser schwarzer Bildschirm sofort reparieren",

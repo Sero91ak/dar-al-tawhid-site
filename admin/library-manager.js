@@ -165,6 +165,62 @@
     return String(value || "").replace(/\.pdf$/i, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
   }
 
+  function inferLocalCategory(text) {
+    const blob = String(text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[ʾʿḥṣḍṭẓġāīū]/g, (ch) => {
+        const map = { ʾ: "", ʿ: "", ḥ: "h", ṣ: "s", ḍ: "d", ṭ: "t", ẓ: "z", ġ: "g", ā: "a", ī: "i", ū: "u" };
+        return map[ch] || ch;
+      });
+    if (/asma|sifat|eigenschaft|uluw|nuzul|istiw|husna|asmaul/i.test(blob)) {
+      return { category: "ʿAqīdah", topic: "al-Asmāʾ waṣ-Ṣifāt", confidence: "medium" };
+    }
+    if (/tawhid|tauhid/i.test(blob)) return { category: "Tawḥīd", topic: "Tawḥīd", confidence: "medium" };
+    if (/schirk|shirk/i.test(blob)) return { category: "Schirk", topic: "Schirk", confidence: "medium" };
+    if (/kufr|taghut|taaghut/i.test(blob)) return { category: "Kufr und Ṭāghūt", topic: "Kufr und Ṭāghūt", confidence: "low" };
+    if (/sunnah|hadith|ahadith/i.test(blob)) return { category: "Sunnah", topic: "Sunnah", confidence: "low" };
+    if (/quran|qur|tafsir/i.test(blob)) return { category: "Qurʾān", topic: "Qurʾān", confidence: "low" };
+    if (/gebet|salah|salat/i.test(blob)) return { category: "Gebet", topic: "Gebet", confidence: "low" };
+    if (/hukm|hukum|ahkam|fiqh|majhul|mashhur|halal|haram|tahara|wudu|ghusl|zakat|zakah/i.test(blob)) {
+      return { category: "Fiqh", topic: "Fiqh", confidence: "medium" };
+    }
+    if (/familie|ehe|kinder/i.test(blob)) return { category: "Familie", topic: "Familie", confidence: "low" };
+    if (/manhaj|methodology/i.test(blob)) return { category: "Manhaj", topic: "Manhaj", confidence: "low" };
+    if (/widerleg|radd|refutation/i.test(blob)) return { category: "Widerlegungen", topic: "Widerlegungen", confidence: "low" };
+    return { category: "", topic: "", confidence: "none" };
+  }
+
+  function getEffectiveCategory() {
+    if (draft?.category) return draft.category;
+    if (categorySuggestion?.category && categorySuggestion.confidence !== "none") return categorySuggestion.category;
+    const sel = document.getElementById("libAdminCategory");
+    if (sel?.value) return sel.value;
+    return "";
+  }
+
+  function ensureCategoryReadyForPublish() {
+    if (!draft) draft = defaultDraft();
+    if (draft.category) return;
+    if (categorySuggestion?.category && categorySuggestion.confidence !== "none") {
+      applyCategorySuggestion();
+      return;
+    }
+    const inferred = inferLocalCategory([draft.title, pdfMeta?.author, pdfMeta?.fileName].filter(Boolean).join(" "));
+    if (inferred.category) {
+      draft.category = inferred.category;
+      draft.topic = inferred.topic || inferred.category;
+      categorySuggestion = inferred;
+      return;
+    }
+    const sel = document.getElementById("libAdminCategory");
+    if (sel?.value) {
+      draft.category = sel.value;
+      draft.topic = document.getElementById("libAdminTopic")?.value || draft.category;
+    }
+  }
+
   function defaultDraft() {
     const today = new Date().toISOString().slice(0, 10);
     return {
@@ -348,6 +404,10 @@
     } catch (e) {
       categorySuggestion = null;
     }
+    if (!categorySuggestion?.category || categorySuggestion.confidence === "none") {
+      const local = inferLocalCategory(text);
+      if (local.category) categorySuggestion = local;
+    }
     return categorySuggestion;
   }
 
@@ -440,6 +500,7 @@
       if (!replaceMode) {
         await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
         applyCategorySuggestion();
+        if (!draft.category) showCategoryEdit = true;
       }
       successSlug = "";
       successTarget = "test";
@@ -484,7 +545,7 @@
 
   function canPublish() {
     const hasPdf = !!(pdfFile || draft?.pdfUrl);
-    return !!(hasPdf && draft?.title?.trim() && (draft.category || categorySuggestion?.category));
+    return !!(hasPdf && draft?.title?.trim() && getEffectiveCategory());
   }
 
   function readMainForm() {
@@ -513,6 +574,7 @@
 
   async function saveDraft() {
     readMainForm();
+    ensureCategoryReadyForPublish();
     if (!draft.title) throw new Error("Titel fehlt");
     if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
     busy = true;
@@ -538,11 +600,13 @@
   async function publishDraft(target) {
     const publishTarget = target === "live" ? "live" : "test";
     readMainForm();
+    ensureCategoryReadyForPublish();
     if (!draft.category) {
       if (categorySuggestion?.category && categorySuggestion.confidence !== "none") {
         applyCategorySuggestion();
       } else {
         showCategoryEdit = true;
+        safeRender();
         throw new Error("Bitte wähle eine Kategorie aus");
       }
     }
@@ -614,7 +678,7 @@
 
   function renderCategoryLine() {
     if (!draft?.category && (!categorySuggestion || categorySuggestion.confidence === "none")) {
-      return `<p class="lib-admin-category">Kategorie konnte nicht sicher erkannt werden. <a href="#" id="libAdminChangeCategory">Kategorie auswählen</a></p>`;
+      return `<p class="lib-admin-category">Kategorie konnte nicht sicher erkannt werden — bitte unten auswählen oder anpassen.</p>`;
     }
     const cat = draft.category || categorySuggestion?.category || "";
     const topic = draft.topic || categorySuggestion?.topic || "";
@@ -623,9 +687,12 @@
   }
 
   function renderCategoryEdit() {
-    return `<div class="lib-admin-category-edit ${showCategoryEdit ? "is-open" : ""}" id="libAdminCategoryEdit">
-      <label class="lib-admin-field">Kategorie<select id="libAdminCategory">${CATEGORIES.map((c) => `<option value="${esc(c)}" ${draft?.category === c ? "selected" : ""}>${esc(c)}</option>`).join("")}</select></label>
-      <label class="lib-admin-field">Themenbereich<input id="libAdminTopic" value="${esc(draft?.topic || "")}"></label>
+    const open = showCategoryEdit || !draft?.category;
+    const selectedCategory = draft?.category || categorySuggestion?.category || CATEGORIES[0];
+    const selectedTopic = draft?.topic || categorySuggestion?.topic || selectedCategory;
+    return `<div class="lib-admin-category-edit ${open ? "is-open" : ""}" id="libAdminCategoryEdit">
+      <label class="lib-admin-field">Kategorie<select id="libAdminCategory">${CATEGORIES.map((c) => `<option value="${esc(c)}" ${selectedCategory === c ? "selected" : ""}>${esc(c)}</option>`).join("")}</select></label>
+      <label class="lib-admin-field">Themenbereich<input id="libAdminTopic" value="${esc(selectedTopic)}"></label>
     </div>`;
   }
 
@@ -889,8 +956,23 @@
     document.getElementById("libAdminChangeCategory")?.addEventListener("click", (ev) => {
       ev.preventDefault();
       showCategoryEdit = true;
+      if (!draft.category) {
+        const sel = document.getElementById("libAdminCategory");
+        draft.category = sel?.value || CATEGORIES[0];
+        draft.topic = document.getElementById("libAdminTopic")?.value || draft.category;
+      }
       safeRender();
     });
+
+    const syncCategoryFields = () => {
+      if (!draft) draft = defaultDraft();
+      draft.category = document.getElementById("libAdminCategory")?.value || draft.category;
+      draft.topic = document.getElementById("libAdminTopic")?.value || draft.topic || draft.category;
+      showCategoryEdit = true;
+      safeRender();
+    };
+    document.getElementById("libAdminCategory")?.addEventListener("change", syncCategoryFields);
+    document.getElementById("libAdminTopic")?.addEventListener("input", syncCategoryFields);
 
     document.getElementById("libAdminSaveDraft")?.addEventListener("click", async () => {
       try {
