@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v392";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v393";</script>
 <script defer src="/assets/live-boot.js?v=app-shell-v317"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
@@ -10695,6 +10695,25 @@ html[data-theme="dar-al-layl"] .home-more-body .overview-compact .stat-card{
   box-shadow:0 0 10px color-mix(in srgb,#a88b4f 13%,transparent),inset 0 0 0 1px color-mix(in srgb,#d8c18b 10%,transparent)!important;
 }
 </style>
+<style id="noble-accent-rail-v393">
+/* Edle dünne Gold-Linie — folgt der Rundung, kein dicker Streifen */
+.home-v380-quran-hero--reading::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  border-left:1px solid color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 44%,transparent);
+  background:transparent;
+  box-shadow:inset 1px 0 14px -12px color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 12%,transparent);
+}
+.qov-resume::before{
+  top:0!important;bottom:0!important;width:1px!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 52%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 20%,transparent))!important;
+  box-shadow:0 0 8px -5px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)!important;
+}
+.qov-row.is-last-read::before,.qov-row.is-active::before{
+  top:6px!important;bottom:6px!important;width:1px!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 56%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 22%,transparent))!important;
+  box-shadow:0 0 8px -5px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)!important;
+}
+</style>
 <style id="hijri-dayframe-v334">
 /* Hijri-Datum: kompakt, dezenter Rand, Kalender-Emoji */
 .home-hijri-dayframe{
@@ -15666,7 +15685,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v392";
+const APP_BUILD_ID="app-shell-v393";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

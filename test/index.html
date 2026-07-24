@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v392";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v393";</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -12073,7 +12073,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-layout{display:block}
 .qov-side,.qov-main{min-width:0}
 .qov-resume{position:relative;margin:0 0 10px;padding:10px 0 10px 12px;background:var(--quran-gradient-section);border:0;border-radius:0}
-.qov-resume::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:999px;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 70%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 55%,transparent))}
+.qov-resume::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;border-radius:999px;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 52%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 20%,transparent));box-shadow:0 0 8px -5px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)}
 .qov-resume-label{font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:var(--quran-text-muted);margin-bottom:4px}
 .qov-resume h3{margin:0;font-family:var(--serif);font-size:clamp(17px,4.2vw,20px);color:var(--quran-text-primary);line-height:1.15}
 .qov-resume-meta{margin:4px 0 0;color:var(--quran-text-muted);font-size:11.5px;line-height:1.4}
@@ -12118,7 +12118,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .qov-row:last-child::after{display:none}
 .qov-row:hover,.qov-row:focus-visible{background:color-mix(in srgb,var(--quran-surface-active) 35%,transparent);outline:none}
 .qov-row.is-last-read,.qov-row.is-active{background:var(--quran-gradient-active)}
-.qov-row.is-last-read::before,.qov-row.is-active::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:999px;background:linear-gradient(180deg,var(--quran-accent-primary),var(--quran-accent-secondary))}
+.qov-row.is-last-read::before,.qov-row.is-active::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;border-radius:999px;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-accent-primary) 56%,transparent),color-mix(in srgb,var(--quran-accent-secondary) 22%,transparent));box-shadow:0 0 8px -5px color-mix(in srgb,var(--quran-accent-primary) 14%,transparent)}
 .qov-row.is-search-hit{background:color-mix(in srgb,var(--quran-surface-active) 55%,transparent)}
 .qov-row-num{font-size:11px;font-weight:950;color:var(--quran-text-muted);font-variant-numeric:tabular-nums;text-align:center}
 .qov-row-main{min-width:0}
@@ -12957,8 +12957,10 @@ body.is-home-route .footer strong{font-size:14px}
     linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%))!important;
 }
 .home-v380-quran-hero--reading::before{
-  content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:999px;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--theme-accent) 78%,transparent),color-mix(in srgb,var(--theme-accent) 42%,transparent));
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  border-left:1px solid color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 44%,transparent);
+  background:transparent;
+  box-shadow:inset 1px 0 14px -12px color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 12%,transparent);
 }
 .home-v380-quran-hero__mark{
   flex:0 0 auto;font-size:clamp(15px,3.6vw,17px);line-height:1;opacity:.92;padding-left:4px;
@@ -18027,7 +18029,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v392";
+const APP_BUILD_ID="app-shell-v393";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
