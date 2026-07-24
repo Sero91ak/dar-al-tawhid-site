@@ -28,6 +28,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-premium-reorder-v380-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite ab Überschrift Startseite Premium-Neuordnung, App-Status, Entdecken, Suche, Footer",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T14:00:00.000Z"
+    },
+    {
       "id": "home-push-strip-v379-2026-07-24",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Doppelte Gebetszeiten auf Startseite entfernen, Push-Erinnerungen kompakt eigenständig",
