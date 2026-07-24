@@ -49,13 +49,29 @@ function patchTestIndex() {
   fs.writeFileSync(TEST_INDEX, html);
 }
 
+function readTestCacheVersion() {
+  const versionPath = path.join(ROOT, 'test', 'version.json');
+  const data = JSON.parse(fs.readFileSync(versionPath, 'utf8'));
+  const buildId = String(data.buildId || '');
+  const match = buildId.match(/app-shell-v(\d+)$/);
+  if (!match) throw new Error('test/version.json: gültige buildId fehlt');
+  return `dar-al-tawhid-offline-light-v${match[1]}-test`;
+}
+
 function bumpTestCache() {
   if (!fs.existsSync(SERVICE_WORKER)) return;
   let sw = fs.readFileSync(SERVICE_WORKER, 'utf8');
-  const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v351-test-canonical';";
+  const cacheVersion = readTestCacheVersion();
+  const next = `const CACHE_VERSION = '${cacheVersion}';`;
   const pattern = /const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-[^'"]+['"];?/;
   if (!pattern.test(sw)) throw new Error('Service worker cache version declaration not found.');
   sw = sw.replace(pattern, next);
+  const stamp = Date.now();
+  if (/\/\/ workers-deploy-stamp:\d+/.test(sw)) {
+    sw = sw.replace(/\/\/ workers-deploy-stamp:\d+/, `// workers-deploy-stamp:${stamp}`);
+  } else {
+    sw = `// workers-deploy-stamp:${stamp}\n${sw}`;
+  }
 
   const required = [
     "  '/data/books-library.json',",
