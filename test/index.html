@@ -14795,9 +14795,10 @@ function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTim
 let prayerCountdownTimer=null;
 let headerPrayerDisplayKey="";
 let headerPrayerStatusMinuteKey="";
-function headerPrayerMainLineHtml(name,time){
-  return `<span class="header-prayer-zone__main" role="text"><span class="header-prayer-zone__name">${esc(name)}</span><span class="header-prayer-zone__sep" aria-hidden="true">·</span><span class="header-prayer-zone__time">${esc(time)}</span></span>`;
+function headerPrayerLineHtml(name,time){
+  return `<span class="header-prayer-line" role="text"><span class="header-prayer-name">${esc(name)}</span><span class="header-prayer-sep" aria-hidden="true">·</span><span class="header-prayer-hour">${esc(time)}</span></span>`;
 }
+function headerPrayerMainLineHtml(name,time){return headerPrayerLineHtml(name,time)}
 function formatHeaderPrayerCountdownFull(ms){
   if(ms<0)ms=0;
   const total=Math.floor(ms/1000);
