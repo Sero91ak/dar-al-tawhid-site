@@ -14140,6 +14140,40 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
   box-shadow:0 0 14px color-mix(in srgb,var(--gold2) 10%,transparent)!important;
 }
 </style>
+<style id="home-discover-pdf-v437">
+/* v437 · Entdecken: neueste PDF-Uploads mit Cover links, Text rechts */
+.home-discover-pdf-list{display:flex;flex-direction:column;gap:10px;margin-bottom:0}
+.home-discover-pdf-list:empty{display:none}
+.home-discover-pdf-card{
+  display:flex;align-items:stretch;gap:10px;width:100%;text-align:left;
+  padding:10px;border-radius:14px;cursor:pointer;
+  border:1px solid color-mix(in srgb,var(--gold2) 32%,var(--line));
+  background:linear-gradient(145deg,color-mix(in srgb,var(--gold2) 8%,var(--card)),color-mix(in srgb,var(--card) 92%,var(--bg)));
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2) 18%,transparent),0 4px 14px color-mix(in srgb,#000 18%,transparent);
+  transition:border-color .2s ease,box-shadow .2s ease,transform .15s ease;
+}
+.home-discover-pdf-cover{
+  flex:0 0 clamp(56px,18vw,72px);width:clamp(56px,18vw,72px);
+  border-radius:9px;overflow:hidden;position:relative;
+  border:1px solid color-mix(in srgb,var(--gold2) 28%,transparent);
+  background:color-mix(in srgb,var(--gold2) 10%,var(--card));
+  box-shadow:0 2px 8px color-mix(in srgb,#000 22%,transparent);
+}
+.home-discover-pdf-cover__img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:3/4;min-height:72px}
+.home-discover-pdf-cover__fallback{display:grid;place-items:center;width:100%;min-height:72px;font-size:22px;opacity:.7}
+.home-discover-pdf-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:4px;justify-content:center}
+.home-discover-pdf-title{margin:0;font-family:var(--serif);font-size:clamp(14px,3.4vw,17px);font-weight:800;line-height:1.16;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.home-discover-pdf-meta{margin:0;font-size:clamp(10px,2.2vw,11px);font-weight:650;color:color-mix(in srgb,var(--theme-muted) 84%,var(--theme-text) 16%);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.home-discover-pdf-card:hover,.home-discover-pdf-card:focus-visible{
+  border-color:color-mix(in srgb,var(--gold2) 58%,var(--line));
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2) 26%,transparent),0 0 18px color-mix(in srgb,var(--gold2) 14%,transparent),0 6px 16px color-mix(in srgb,#000 22%,transparent);
+  transform:translateY(-1px);outline:none;
+}
+.home-discover-pdf-card .home-v380-kicker{font-size:9px;letter-spacing:.1em}
+.home-discover-pdf-loading{padding:8px 0;font-size:11px;color:var(--theme-muted);opacity:.7}
+.home-discover-posts{margin-top:2px}
+.home-discover-pdf-list:not(:empty) + .home-discover-posts{margin-top:14px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--theme-accent) 16%,var(--theme-border) 84%)}
+</style>
 <style id="visitor-hadith-test-only-v419">
 /* v419 · Hadith-Bibliothek nur in der Test-App */
 html[data-app-path="visitor"] .home-v380-lib-card[data-nav="hadith"],
@@ -18972,6 +19006,92 @@ function renderHomePopularSection(){
   homeDiscoverPosts(new Set(exclude)).slice(0,6).forEach(p=>exclude.add(String(p.id)));
   return `<section class="home-v380-section home-v380-popular-wrap" aria-labelledby="homePopularTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homePopularTitle">Meist gelesen</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Beliebt bei Besuchern</p></div></div><div class="home-v380-section-rule" aria-hidden="true"></div><div id="popularPostsContent" class="home-v380-popular-list"><div class="loading" style="padding:12px 0;margin:0">Wird geladen …</div></div></section>`;
 }
+const HOME_LIBRARY_DISCOVER_CACHE_KEY="darHomeLibraryDiscoverV1";
+const HOME_LIBRARY_DISCOVER_MAX=3;
+function homeLibraryDiscoverDataUrl(){return (isTestAppPath()?"/test":"")+"/data/library-publications.json"}
+function homeLibraryVisiblePubs(pubs){return (pubs||[]).filter(p=>!["archived","draft","error","preparing"].includes(String(p.status||""))&&p.pdfUrl)}
+function sortHomeLibraryPubs(pubs){return [...pubs].sort((a,b)=>String(b.updatedAt||b.publishedAt||"").localeCompare(String(a.updatedAt||a.publishedAt||"")))}
+function homeLibraryDiscoverKicker(pub,index){
+  if(index===0){
+    if(pub.status==="updated")return "Aktualisiert · Bibliothek";
+    if(pub.isNew)return "Neues PDF · Bibliothek";
+    return "Zuletzt hochgeladen · Bibliothek";
+  }
+  return "PDF · Bibliothek";
+}
+function homeLibraryCoverThumb(pub){
+  const urls=pub.coverUrls||{};
+  const src=urls.small||urls.medium||pub.coverUrl||"";
+  if(!src)return `<div class="home-discover-pdf-cover__fallback" aria-hidden="true">📄</div>`;
+  return `<img class="home-discover-pdf-cover__img" src="${esc(src)}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.hidden=false"><div class="home-discover-pdf-cover__fallback" hidden aria-hidden="true">📄</div>`;
+}
+function homeLibraryDiscoverMeta(pub){
+  const parts=[];
+  if(pub.category)parts.push(pub.category);
+  if(pub.pageCount)parts.push(`${pub.pageCount} Seiten`);
+  const date=pub.updatedAt||pub.publishedAt;
+  if(date){try{parts.push(new Intl.DateTimeFormat("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(date)))}catch(e){}}
+  return parts.join(" · ");
+}
+function homeLibraryDiscoverCard(pub,{index=0}={}){
+  if(!pub||!pub.slug)return"";
+  const kicker=homeLibraryDiscoverKicker(pub,index);
+  const meta=homeLibraryDiscoverMeta(pub);
+  const title=pub.title||"PDF-Veröffentlichung";
+  return `<button type="button" class="home-discover-pdf-card" data-nav="bibliothek-detail" data-value="${esc(pub.slug)}" aria-label="${esc(title)} in der Bibliothek öffnen"><div class="home-discover-pdf-cover">${homeLibraryCoverThumb(pub)}</div><div class="home-discover-pdf-body"><span class="home-v380-kicker">${esc(kicker)}</span><h3 class="home-discover-pdf-title">${esc(title)}</h3>${meta?`<p class="home-discover-pdf-meta">${esc(meta)}</p>`:""}</div></button>`;
+}
+function renderHomeDiscoverLibraryBlock(pubs){
+  const visible=sortHomeLibraryPubs(homeLibraryVisiblePubs(pubs)).slice(0,HOME_LIBRARY_DISCOVER_MAX);
+  if(!visible.length)return"";
+  return visible.map((p,i)=>homeLibraryDiscoverCard(p,{index:i})).join("");
+}
+async function fetchHomeLibraryDiscoverCatalog(){
+  if(window.__homeLibraryDiscoverPubs)return window.__homeLibraryDiscoverPubs;
+  try{
+    const raw=sessionStorage.getItem(HOME_LIBRARY_DISCOVER_CACHE_KEY);
+    if(raw){
+      const cached=JSON.parse(raw);
+      if(cached&&Array.isArray(cached.pubs)&&Date.now()-Number(cached.ts||0)<300000){
+        window.__homeLibraryDiscoverPubs=cached.pubs;
+        return cached.pubs;
+      }
+    }
+  }catch(e){}
+  try{
+    const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw new Error("catalog load failed");
+    const data=await res.json();
+    const pubs=homeLibraryVisiblePubs(data.publications||[]);
+    window.__homeLibraryDiscoverPubs=pubs;
+    try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}
+    return pubs;
+  }catch(e){
+    return window.__homeLibraryDiscoverPubs||[];
+  }
+}
+function syncHomeDiscoverSectionVisibility(){
+  const section=document.querySelector(".home-v380-discover");
+  if(!section)return;
+  const libSlot=section.querySelector("#homeDiscoverLibraryContent");
+  const hasLib=libSlot&&libSlot.children.length>0;
+  const hasPosts=section.querySelector(".home-v380-post-preview,.home-v380-post-slider");
+  section.style.display=hasLib||hasPosts?"":"none";
+}
+function fillHomeDiscoverLibraryBlock(pubs){
+  const el=document.getElementById("homeDiscoverLibraryContent");
+  if(!el||currentRoute.view!=="home")return;
+  const html=renderHomeDiscoverLibraryBlock(pubs);
+  el.innerHTML=html;
+  syncHomeDiscoverSectionVisibility();
+  if(html)bindEvents();
+}
+async function hydrateHomeDiscoverLibrary(){
+  const el=document.getElementById("homeDiscoverLibraryContent");
+  if(!el||currentRoute.view!=="home")return;
+  if(window.__homeLibraryDiscoverPubs&&window.__homeLibraryDiscoverPubs.length){fillHomeDiscoverLibraryBlock(window.__homeLibraryDiscoverPubs);return}
+  const pubs=await fetchHomeLibraryDiscoverCatalog();
+  fillHomeDiscoverLibraryBlock(pubs);
+}
 function renderHomeDiscoverSection(){
   const exclude=new Set();
   const rec=recommendedPost();
@@ -18981,8 +19101,10 @@ function renderHomeDiscoverSection(){
   let latestHtml="";
   if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag"});
   else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag"})).join("")}</div>`;
-  if(!latestHtml)return"";
-  return `<section class="home-v380-section" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2><button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div>${latestHtml}</section>`;
+  const librarySlot=`<div id="homeDiscoverLibraryContent" class="home-discover-pdf-list" aria-live="polite"></div>`;
+  const postsBlock=latestHtml?`<div class="home-discover-posts">${latestHtml}</div>`:"";
+  const linkBtn=latestHtml?`<button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button>`:`<button type="button" class="home-v380-text-link" data-nav="bibliothek">Bibliothek →</button>`;
+  return `<section class="home-v380-section home-v380-discover" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2>${linkBtn}</div><div class="home-v380-section-rule" aria-hidden="true"></div>${librarySlot}${postsBlock}</section>`;
 }
 function renderHomeLibrariesSection(){
   const defs=[
@@ -19253,7 +19375,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v436";
+const APP_BUILD_ID="app-shell-v437";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -19747,7 +19869,7 @@ function render(){
     syncQuranWakeLock(currentRoute);
     trackCurrentRoute();
     updateOfflineBox();
-    if(currentRoute.view==="home")loadPopularPostsBlock();
+    if(currentRoute.view==="home"){loadPopularPostsBlock();hydrateHomeDiscoverLibrary()}
     if(currentRoute.view==="home"&&window.DAR_FOCUS_FEED){(window.DAR_FOCUS_FEED.onAppReady||window.DAR_FOCUS_FEED.refresh).call(window.DAR_FOCUS_FEED,{force:true})}
     if(currentRoute.view==="feed"){const pfMount=document.getElementById("premiumFeedMount");if(pfMount&&!pfMount.querySelector(".sf-app"))initPremiumFeedTab(true)}
     else if(window.DAR_PREMIUM_FEED&&typeof window.DAR_PREMIUM_FEED.destroy==="function")window.DAR_PREMIUM_FEED.destroy();
