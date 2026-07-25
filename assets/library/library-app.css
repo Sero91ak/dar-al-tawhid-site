@@ -836,6 +836,28 @@ body.is-library-reader-route .view {
   background: #fff;
 }
 
+.lib-reader-native {
+  width: 100%;
+  min-height: calc(100dvh - 120px);
+  min-height: calc(100vh - 120px);
+  background: #fff;
+}
+
+.lib-reader-native-embed,
+.lib-reader-native-object {
+  display: block;
+  width: 100%;
+  min-height: calc(100dvh - 120px);
+  min-height: calc(100vh - 120px);
+  border: 0;
+  background: #fff;
+}
+
+.lib-reader-native-object .lib-reader-fallback {
+  min-height: calc(100dvh - 120px);
+  min-height: calc(100vh - 120px);
+}
+
 .lib-reader-stack-single {
   min-height: calc(100% - 8px);
   justify-content: flex-start;
