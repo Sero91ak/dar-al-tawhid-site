@@ -20213,7 +20213,7 @@ function ensureCanonicalSourceLibrary(){
       return;
     }
     const s=document.createElement("script");
-    s.src="/assets/library/canonical-source-library.js?v=16";
+    s.src="/assets/library/canonical-source-library.js?v=17";
     s.defer=true;
     s.onload=()=>{
       if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}
@@ -21210,6 +21210,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
   </script>
   <script src="/assets/dar-account-visibility.js?v=17"></script>
-<script src="/assets/library/canonical-source-library.js?v=16"></script>
+<script src="/assets/library/canonical-source-library.js?v=17"></script>
 </body>
 </html>

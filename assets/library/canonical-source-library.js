@@ -1245,6 +1245,17 @@
     const wrap = document.querySelector(".lib-canonical-wrap");
     if (!wrap) return;
     wrap.querySelectorAll("[data-nav]").forEach((el) => {
+      if (el.dataset.libCanonicalNavBound === "1") return;
+      el.dataset.libCanonicalNavBound = "1";
+      el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const view = el.getAttribute("data-nav");
+        const value = el.getAttribute("data-value") || "";
+        if (!view || typeof global.navigate !== "function") return;
+        global.__smoothNav = true;
+        global.navigate(view, value);
+      });
       if (typeof global.bindNavActivation === "function") global.bindNavActivation(el);
     });
   }
