@@ -70,6 +70,7 @@ jobs:
           node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
+          node scripts/app-update-recovery-guard.js
 
       - name: Deploy statische App (Workers Static Assets)
         uses: cloudflare/wrangler-action@v3

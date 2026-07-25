@@ -1,0 +1,37 @@
+{
+  "locked": true,
+  "lockedAt": "2026-07-25T12:00:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: App-Update/Reparatur-Banner nur bei echtem Fehler, blaues Update-Design, ohne Auto-Schleife.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „App-Update-Banner freigeben“.",
+  "lockedPaths": [
+    "index.html",
+    "test/index.html"
+  ],
+  "lockedSections": [
+    "APP_UPDATE_RECOVERY_GUARD",
+    "VERSION_UPDATE_GUARD",
+    "initAppCrashGuard",
+    "showRecoveryBanner",
+    "isAppViewStuck",
+    "markAppBootComplete",
+    "requestAppRecoveryUpdate"
+  ],
+  "requiredMarkers": [
+    "APP_UPDATE_RECOVERY_GUARD",
+    "isAppViewStuck",
+    "markAppBootComplete",
+    "requestAppRecoveryUpdate",
+    "showRecoveryBanner",
+    "App-Update erforderlich",
+    "Jetzt aktualisieren",
+    "RECOVERY_BANNER_KEY",
+    "getBannerMode"
+  ],
+  "forbiddenPatterns": [
+    "App-Start dauert zu lange",
+    "showRepairBanner",
+    "scheduleAutoRepair",
+    "classList.add('is-app-repair')",
+    "auto:true,delayMs"
+  ]
+}

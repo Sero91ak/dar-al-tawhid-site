@@ -75,6 +75,9 @@ jobs:
       - name: Header prayer display guard (Maghrib/Zeit im Header)
         run: node scripts/header-prayer-display-guard.js
 
+      - name: App update recovery guard (Update-Banner nur bei echtem Fehler)
+        run: node scripts/app-update-recovery-guard.js
+
       - name: Change scope lock guard (nur freigeschaltete Bereiche)
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}

@@ -14144,18 +14144,7 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
 }
 </style>
 <style id="home-header-startseite-v429">
-/* v433 · Top-Banner für Updates + automatische Reparatur bei Fehlern */
-.new-posts-banner.is-app-repair{
-  background:linear-gradient(135deg,rgba(255,150,120,.18),rgba(239,215,142,.12))!important;
-  border-color:rgba(255,150,120,.45)!important;
-  border-bottom-color:rgba(255,150,120,.62)!important;
-}
-.new-posts-banner.is-app-repair .new-posts-text{color:#ffe8df!important}
-.new-posts-banner.is-app-repair .new-posts-refresh{
-  color:#fff4ef!important;
-  background:rgba(255,140,100,.18)!important;
-  border-color:rgba(255,140,100,.38)!important;
-}
+/* v434 · Top-Banner: blaues App-Update nur bei echtem Fehler (APP_UPDATE_RECOVERY_GUARD) */
 
 /* v429 · Startseite voll ausgeschrieben, kein Aktualisieren im Kopf */
 .view-head-home-row.view-head-home-row--v429{
@@ -18726,7 +18715,7 @@ function bindCalendarPremiumFilters(){const root=document.querySelector(".calend
 const HOME_LAST_SYNC_KEY="darHomeLastSyncV1";
 function getHomeLastSyncTime(){try{const raw=localStorage.getItem(HOME_LAST_SYNC_KEY);return raw?JSON.parse(raw):null}catch(e){return null}}
 function markHomeLastSyncOk(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:true}));window.__darHomeSyncError=false}catch(e){}if(typeof updateHomeAppStatusUi==="function")updateHomeAppStatusUi()}
-function markHomeLastSyncError(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:false}));window.__darHomeSyncError=true}catch(e){}if(typeof updateHomeAppStatusUi==="function")updateHomeAppStatusUi();try{if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.showRepairBanner==="function")window.DAR_AUTO_REFRESH.showRepairBanner("Inhalte konnten nicht geladen werden",{auto:true,delayMs:15000})}catch(e){}}
+function markHomeLastSyncError(){try{localStorage.setItem(HOME_LAST_SYNC_KEY,JSON.stringify({at:Date.now(),ok:false}));window.__darHomeSyncError=true}catch(e){}if(typeof updateHomeAppStatusUi==="function")updateHomeAppStatusUi()}
 function formatHomeSyncClock(ts){if(!ts)return"";const d=new Date(ts);if(!Number.isFinite(d.getTime()))return"";return d.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})}
 function homeHasNewContentSignal(){return window.__darAppVersionAvailable===true||window.__darNewPostsAvailable===true}
 function homeHeaderUpdateShortLabel(){
@@ -19066,36 +19055,50 @@ function renderAppRecovery(error,stage="App-Start"){
   const home=document.getElementById("appRepairHomeBtn");
   if(repair)repair.onclick=()=>appRecoveryReload();
   if(home)home.onclick=()=>{location.hash="#home";setTimeout(()=>{try{render()}catch(e){appRecoveryReload()}},40)};
-  try{if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.showRepairBanner==="function")window.DAR_AUTO_REFRESH.showRepairBanner("App-Fehler erkannt — wird repariert",{auto:true,delayMs:12000})}catch(e){}
+}
+/* APP_UPDATE_RECOVERY_GUARD: Update-Banner nur bei echtem Fehler; kein Auto-Reparieren */
+function isAppViewStuck(){
+  const el=document.getElementById("appView");
+  const text=(el?.textContent||"").trim();
+  return !el||!text||text==="App wird geladen…";
+}
+function markAppBootComplete(){
+  if(window.__darAppBootOk)return;
+  window.__darAppBootOk=true;
+  window.__darAppBootAt=Date.now();
+  try{
+    if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.cancelAutoRepair==="function")window.DAR_AUTO_REFRESH.cancelAutoRepair();
+    if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.getBannerMode==="function"&&window.DAR_AUTO_REFRESH.getBannerMode()==="recovery"&&typeof window.DAR_AUTO_REFRESH.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners();
+  }catch(e){}
+}
+function requestAppRecoveryUpdate(stage,error){
+  if(window.__darAppBootOk&&!isAppViewStuck())return;
+  const message=error&&(error.message||error)||error||window.__darLastRuntimeError||"";
+  renderAppRecovery(message,stage);
+  try{if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.showRecoveryBanner==="function")window.DAR_AUTO_REFRESH.showRecoveryBanner()}catch(e){}
 }
 function initAppCrashGuard(){
   if(window.__darAppCrashGuardBound)return;
   window.__darAppCrashGuardBound=true;
   window.addEventListener("error",event=>{
     window.__darLastRuntimeError=event.error||event.message||"Unbekannter Fehler";
-    try{if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.showRepairBanner==="function")window.DAR_AUTO_REFRESH.showRepairBanner("JavaScript-Fehler erkannt",{auto:true,delayMs:12000})}catch(e){}
     setTimeout(()=>{
-      const el=document.getElementById("appView");
-      const text=(el?.textContent||"").trim();
-      if(!el||!text||text==="App wird geladen…")renderAppRecovery(window.__darLastRuntimeError,"JavaScript-Fehler");
-    },0);
+      if(window.__darAppBootOk||!isAppViewStuck())return;
+      requestAppRecoveryUpdate("JavaScript-Fehler",window.__darLastRuntimeError);
+    },800);
   });
   window.addEventListener("unhandledrejection",event=>{
     window.__darLastRuntimeError=event.reason||"Nicht abgefangener Fehler";
-    try{if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.showRepairBanner==="function")window.DAR_AUTO_REFRESH.showRepairBanner("Ladefehler erkannt",{auto:true,delayMs:12000})}catch(e){}
     setTimeout(()=>{
-      const el=document.getElementById("appView");
-      const text=(el?.textContent||"").trim();
-      if(!el||!text||text==="App wird geladen…")renderAppRecovery(window.__darLastRuntimeError,"Ladefehler");
-    },0);
+      if(window.__darAppBootOk||!isAppViewStuck())return;
+      requestAppRecoveryUpdate("Ladefehler",window.__darLastRuntimeError);
+    },800);
   });
   setTimeout(()=>{
-    const el=document.getElementById("appView");
-    const text=(el?.textContent||"").trim();
-    if(!el)return;
-    if(!text||text==="App wird geladen…")renderAppRecovery(window.__darLastRuntimeError||"Start hat zu lange gedauert.","Start-Watchdog");
-    try{if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.showRepairBanner==="function")window.DAR_AUTO_REFRESH.showRepairBanner("App-Start dauert zu lange",{auto:true,delayMs:10000})}catch(e){}
-  },6500);
+    if(window.__darAppBootOk)return;
+    if(!isAppViewStuck()){markAppBootComplete();return;}
+    requestAppRecoveryUpdate("Start-Watchdog",window.__darLastRuntimeError||"Start hat zu lange gedauert.");
+  },22000);
 }
 function hardRefreshApp(){
   (async()=>{
@@ -19130,7 +19133,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v433";
+const APP_BUILD_ID="app-shell-v434";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -19590,6 +19593,7 @@ function render(){
     else if(currentRoute.view==="hadith")html=renderHadith();
     else html=renderHome();
     $("appView").innerHTML=html;
+    markAppBootComplete();
     if(currentRoute.view==="feed")stripFeedPageHeader();
     const appView=$("appView");
     const fromGesture=window.__tabSwipeFromGesture;
@@ -20023,17 +20027,20 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
 </script>
 <script>
   /* VERSION_UPDATE_GUARD: Banner nur bei echtem Update; Schleifen-Schutz + HARD_REFRESH + Willkommens-Push */
+  /* APP_UPDATE_RECOVERY_GUARD: blaues Update-Banner nur bei echtem Fehler, kein Auto-Reparieren */
   (function() {
     const CHECK_INTERVAL = 60 * 1000;
     const VERSION_UPDATE_KEY = 'dar_version_update_pending';
     const VERSION_STATE_KEY = 'dar_app_version_state_v1';
     const VERSION_UPDATE_COOLDOWN_MS = 6 * 60 * 60 * 1000;
     const VERSION_STUCK_KEY = 'dar_version_stuck_guard_v1';
+    const RECOVERY_BANNER_KEY = 'dar_app_recovery_banner_v1';
+    const RECOVERY_BANNER_COOLDOWN_MS = 6 * 60 * 60 * 1000;
     let isChecking = false;
     let bannerMode = null;
-    let autoRepairTimer = null;
     let remoteBuildId = null;
     function getBanner() { return document.getElementById('newPostsBanner'); }
+    function getBannerMode() { return bannerMode; }
     function showBanner(mode, label) {
       var banner = getBanner();
       if (!banner) return;
@@ -20042,21 +20049,17 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var text = banner.querySelector('.new-posts-text');
       var refresh = banner.querySelector('.new-posts-refresh');
       banner.classList.remove('is-app-version', 'is-app-repair');
-      if (mode === 'version') {
-        if (icon) icon.textContent = '✨';
-        if (text) text.textContent = 'Neue App-Version verfügbar';
-        if (refresh) refresh.textContent = 'Jetzt laden';
-        banner.setAttribute('aria-label', 'Neue App-Version laden');
+      if (mode === 'version' || mode === 'recovery') {
+        if (icon) icon.textContent = mode === 'recovery' ? '↻' : '✨';
+        if (text) text.textContent = mode === 'recovery' ? (label || 'App-Update erforderlich') : 'Neue App-Version verfügbar';
+        if (refresh) refresh.textContent = mode === 'recovery' ? 'Jetzt aktualisieren' : 'Jetzt laden';
+        banner.setAttribute('aria-label', mode === 'recovery' ? 'App aktualisieren und reparieren' : 'Neue App-Version laden');
         banner.classList.add('is-app-version');
-        window.__darAppVersionAvailable = true;
-        window.__darNewPostsAvailable = false;
-        setHomeRefreshHint(true);
-      } else if (mode === 'repair') {
-        if (icon) icon.textContent = '🔧';
-        if (text) text.textContent = label || 'Fehler erkannt — App wird repariert';
-        if (refresh) refresh.textContent = 'Jetzt reparieren';
-        banner.setAttribute('aria-label', 'App reparieren und neu laden');
-        banner.classList.add('is-app-repair');
+        if (mode === 'version') {
+          window.__darAppVersionAvailable = true;
+          window.__darNewPostsAvailable = false;
+          setHomeRefreshHint(true);
+        }
       } else {
         if (icon) icon.textContent = '⏳';
         if (text) text.textContent = label || 'Neue Beiträge verfügbar';
@@ -20077,22 +20080,21 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       bannerMode = null;
     }
-    function cancelAutoRepair() {
-      if (autoRepairTimer) {
-        clearTimeout(autoRepairTimer);
-        autoRepairTimer = null;
+    function cancelAutoRepair() {}
+    function canShowRecoveryBanner() {
+      if (typeof isAppViewStuck === 'function' && typeof markAppBootComplete === 'function') {
+        if (window.__darAppBootOk && !isAppViewStuck()) return false;
       }
+      try {
+        var raw = sessionStorage.getItem(RECOVERY_BANNER_KEY);
+        if (!raw) return true;
+        var data = JSON.parse(raw);
+        if (data.dismissed && Date.now() - Number(data.at || 0) < RECOVERY_BANNER_COOLDOWN_MS) return false;
+        return true;
+      } catch (e) { return true; }
     }
-    function scheduleAutoRepair(reason, delayMs) {
-      if (autoRepairTimer) return;
-      showBanner('repair', reason || 'Ladefehler — App wird automatisch repariert');
-      autoRepairTimer = setTimeout(function() {
-        autoRepairTimer = null;
-        hideAllBanners();
-        if (typeof hardRefreshApp === 'function') hardRefreshApp();
-        else if (typeof appRecoveryReload === 'function') appRecoveryReload();
-        else location.reload();
-      }, Math.max(5000, Number(delayMs) || 10000));
+    function rememberRecoveryBannerShown() {
+      try { sessionStorage.setItem(RECOVERY_BANNER_KEY, JSON.stringify({ at: Date.now(), shown: true })); } catch (e) {}
     }
     function getUpdateBtn() { return document.getElementById('homeUpdateBtn'); }
     function versionJsonPath() { return String(location.pathname || '').indexOf('/test') >= 0 ? '/test/version.json' : '/version.json'; }
@@ -20252,10 +20254,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function showPostsBanner(label) {
       showBanner('posts', label);
     }
-    function showRepairBanner(reason, options) {
-      var opts = options || {};
-      showBanner('repair', reason);
-      if (opts.auto !== false) scheduleAutoRepair(reason, opts.delayMs);
+    function showRecoveryBanner(label) {
+      if (!canShowRecoveryBanner()) return false;
+      rememberRecoveryBannerShown();
+      showBanner('recovery', label || 'App-Update erforderlich');
+      return true;
     }
     function hideAllBanners() {
       cancelAutoRepair();
@@ -20358,17 +20361,12 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
     }
     function onBannerActivate() {
-      if (bannerMode === 'version') {
+      if (bannerMode === 'version' || bannerMode === 'recovery') {
         var targetBuild = remoteBuildId || window.__darRemoteBuildId || '';
-        markVersionUpdatePending(targetBuild);
-        markVersionUpdateStuck(targetBuild);
-        hideAllBanners();
-        if (typeof hardRefreshApp === 'function') hardRefreshApp();
-        else location.reload();
-        return;
-      }
-      if (bannerMode === 'repair') {
-        cancelAutoRepair();
+        if (bannerMode === 'version') {
+          markVersionUpdatePending(targetBuild);
+          markVersionUpdateStuck(targetBuild);
+        }
         hideAllBanners();
         if (typeof hardRefreshApp === 'function') hardRefreshApp();
         else if (typeof appRecoveryReload === 'function') appRecoveryReload();
@@ -20428,8 +20426,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       hideAllBanners: hideAllBanners,
       hidePostsBanner: hideAllBanners,
       hideBanner: hideAllBanners,
-      showRepairBanner: showRepairBanner,
+      showRecoveryBanner: showRecoveryBanner,
       cancelAutoRepair: cancelAutoRepair,
+      getBannerMode: getBannerMode,
       markVersionUpdatePending: markVersionUpdatePending
     };
     (function assertDarAutoRefreshGuard() {

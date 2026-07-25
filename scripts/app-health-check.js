@@ -124,6 +124,12 @@ if (pushGuardFails) failed += pushGuardFails;
 const versionGuardFails = require("./version-update-guard.js").runVersionUpdateGuard();
 if (versionGuardFails) failed += versionGuardFails;
 
+try {
+  require("./app-update-recovery-guard.js");
+} catch (e) {
+  fail(`app-update-recovery-guard: ${e.message}`);
+}
+
 // Push scripts
 if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-prayer-push.js fehlt");
 if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");
