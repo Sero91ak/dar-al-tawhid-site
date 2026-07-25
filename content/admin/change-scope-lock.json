@@ -1101,6 +1101,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-27T06:00:00.000Z"
+    },
+    {
+      "id": "library-stats-live-v448-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Besucherstatistik korrekt anzeigen + PDF-Lesen iOS mit direkter PDF-URL",
+      "paths": [
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
     }
   ]
 }

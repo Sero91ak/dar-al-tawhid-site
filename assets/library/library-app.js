@@ -38,6 +38,7 @@
   let libraryStatsPollTimer = null;
   let libraryStatsPollId = "";
   const LIBRARY_STATS_POLL_MS = 15000;
+  const LIBRARY_VIEWED_SESSION = new Set();
 
   function trackLibraryEvent(eventType, pub) {
     if (!pub) return;
@@ -117,21 +118,46 @@
     } catch (e) {
       const cached = LIBRARY_STATS_CACHE.get(id);
       if (cached) return cached;
-      const empty = emptyLibraryStats();
-      LIBRARY_STATS_CACHE.set(id, empty);
-      return empty;
+      return emptyLibraryStats();
+    }
+  }
+
+  async function prefetchLibraryStatsForCatalog() {
+    const cfg = global.DAR_ANALYTICS_CONFIG || {};
+    const baseUrl = String(cfg.supabaseUrl || "").replace(/\/$/, "");
+    const key = String(cfg.supabaseKey || "");
+    if (!baseUrl || !key) return;
+    try {
+      const res = await fetch(
+        `${baseUrl}/rest/v1/stats_totals?content_type=eq.library&select=content_id,views,shares,saves&limit=500&_ts=${Date.now()}`,
+        { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: "no-store" }
+      );
+      if (!res.ok) return;
+      const rows = await res.json();
+      (Array.isArray(rows) ? rows : []).forEach((row) => {
+        const id = String(row?.content_id || "").trim();
+        if (!id) return;
+        const remote = parseLibraryStatsRow(row);
+        LIBRARY_STATS_CACHE.set(id, mergeLibraryStats(LIBRARY_STATS_CACHE.get(id), remote));
+      });
+    } catch (e) {
+      /* Statistik-Prefetch darf Bibliothek nie blockieren */
     }
   }
 
   function applyLibraryStatsToPanel(publicationId, stats) {
-    const panel = document.querySelector(`[data-library-stats="${publicationId}"]`);
+    const id = String(publicationId || "").trim();
+    if (!id) return;
+    const merged = mergeLibraryStats(LIBRARY_STATS_CACHE.get(id), stats);
+    LIBRARY_STATS_CACHE.set(id, merged);
+    const panel = document.querySelector(`[data-library-stats="${id}"]`);
     if (!panel) return;
     const clicksEl = panel.querySelector("[data-library-stat-clicks]");
     const readsEl = panel.querySelector("[data-library-stat-reads]");
     const downloadsEl = panel.querySelector("[data-library-stat-downloads]");
-    if (clicksEl) clicksEl.textContent = formatStatCount(stats.clicks);
-    if (readsEl) readsEl.textContent = formatStatCount(stats.reads);
-    if (downloadsEl) downloadsEl.textContent = formatStatCount(stats.downloads);
+    if (clicksEl) clicksEl.textContent = formatStatCount(merged.clicks);
+    if (readsEl) readsEl.textContent = formatStatCount(merged.reads);
+    if (downloadsEl) downloadsEl.textContent = formatStatCount(merged.downloads);
   }
 
   function bumpLibraryStatOptimistic(publicationId, eventType) {
@@ -149,10 +175,7 @@
     const id = String(publicationId || "").trim();
     if (!id) return;
     [1200, 4500].forEach((delay) => {
-      setTimeout(() => {
-        LIBRARY_STATS_CACHE.delete(id);
-        hydrateLibraryStats(id);
-      }, delay);
+      setTimeout(() => hydrateLibraryStats(id), delay);
     });
   }
 
@@ -171,36 +194,49 @@
     stopLibraryStatsPolling();
     libraryStatsPollId = id;
     libraryStatsPollTimer = setInterval(() => {
-      LIBRARY_STATS_CACHE.delete(id);
       hydrateLibraryStats(id);
     }, LIBRARY_STATS_POLL_MS);
   }
 
   function renderLibraryStatsPanel(publicationId) {
-    return `<section class="lib-stats-live" data-library-stats="${esc(publicationId)}" aria-label="Besucherstatistik">
+    const id = String(publicationId || "").trim();
+    const cached = LIBRARY_STATS_CACHE.get(id);
+    const clicks = cached ? formatStatCount(cached.clicks) : "—";
+    const reads = cached ? formatStatCount(cached.reads) : "—";
+    const downloads = cached ? formatStatCount(cached.downloads) : "—";
+    return `<section class="lib-stats-live" data-library-stats="${esc(id)}" aria-label="Besucherstatistik">
       <div class="lib-stats-live-head">
         <span class="lib-stats-live-label">Besucherstatistik</span>
       </div>
       <div class="lib-stats-live-row">
         <div class="lib-stats-live-item">
           <b>Klicks</b>
-          <span data-library-stat-clicks>—</span>
+          <span data-library-stat-clicks>${clicks}</span>
         </div>
         <div class="lib-stats-live-item">
           <b>Gelesen</b>
-          <span data-library-stat-reads>—</span>
+          <span data-library-stat-reads>${reads}</span>
         </div>
         <div class="lib-stats-live-item">
           <b>Downloads</b>
-          <span data-library-stat-downloads>—</span>
+          <span data-library-stat-downloads>${downloads}</span>
         </div>
       </div>
     </section>`;
   }
 
   async function hydrateLibraryStats(publicationId) {
-    const stats = await fetchLibraryStats(publicationId, { force: true });
-    applyLibraryStatsToPanel(publicationId, stats);
+    const id = String(publicationId || "").trim();
+    if (!id) return;
+    const stats = await fetchLibraryStats(id, { force: true });
+    applyLibraryStatsToPanel(id, stats);
+  }
+
+  function trackLibraryDetailView(pub) {
+    const id = String(pub?.id || "").trim();
+    if (!id || LIBRARY_VIEWED_SESSION.has(id)) return;
+    LIBRARY_VIEWED_SESSION.add(id);
+    trackLibraryEvent("library_view", pub);
   }
 
   function esc(s) {
@@ -511,7 +547,6 @@
     }
 
     markOpened(pub.id);
-    trackLibraryEvent("library_view", pub);
     const progress = getProgress(pub.id);
     const offline = offlineIds && offlineIds.has(pub.id);
     const readEnabled = canRead(pub);
@@ -614,6 +649,7 @@
       .then((data) => {
         catalog = data;
         catalogError = "";
+        prefetchLibraryStatsForCatalog();
         return data;
       })
       .catch((e) => {
@@ -770,10 +806,21 @@
     return mobile || (touch && narrow);
   }
 
-  function renderReaderNativeFallback(stage, page) {
-    if (!stage || !readerState?.blobUrl) return false;
+  function readerPdfDisplayUrl(page) {
     const pageHash = page ? `#page=${page}` : "";
-    stage.innerHTML = `<div class="lib-reader-native"><embed class="lib-reader-fallback lib-reader-native-embed" src="${readerState.blobUrl}${pageHash}" type="application/pdf" title="PDF"><object class="lib-reader-fallback lib-reader-native-object" data="${readerState.blobUrl}${pageHash}" type="application/pdf" title="PDF"><iframe class="lib-reader-fallback" src="${readerState.blobUrl}${pageHash}" title="PDF"></iframe></object></div>`;
+    const pub = readerState?.pub;
+    if (pub?.pdfUrl && !readerState?.useOfflineBlob) {
+      const path = String(pub.pdfUrl).startsWith("/") ? `${LIB_BASE}${pub.pdfUrl}` : pub.pdfUrl;
+      return `${path}${pageHash}`;
+    }
+    if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
+    return "";
+  }
+
+  function renderReaderNativeFallback(stage, page) {
+    const src = readerPdfDisplayUrl(page);
+    if (!stage || !src) return false;
+    stage.innerHTML = `<div class="lib-reader-native"><embed class="lib-reader-fallback lib-reader-native-embed" src="${src}" type="application/pdf" title="PDF"><object class="lib-reader-fallback lib-reader-native-object" data="${src}" type="application/pdf" title="PDF"><iframe class="lib-reader-fallback" src="${src}" title="PDF"></iframe></object></div>`;
     return true;
   }
 
@@ -987,14 +1034,17 @@
       page: getProgress(pub.id)?.lastPage || 1,
       total: 0,
       doc: null,
-      blobUrl: ""
+      blobUrl: "",
+      useOfflineBlob: false
     };
 
     try {
       const pdfjs = await loadPdfJs();
       if (session !== readerSessionId) return;
-      const blob = await fetchPdfBlob(pub);
+      const offline = await getOfflineBlob(pub.id);
+      const blob = offline || await fetchPdfBlob(pub);
       if (session !== readerSessionId) return;
+      readerState.useOfflineBlob = !!offline;
       readerState.blobUrl = URL.createObjectURL(blob);
       const data = await blob.arrayBuffer();
       if (session !== readerSessionId) return;
@@ -1004,7 +1054,14 @@
       readerState.total = doc.numPages;
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
-      await renderReaderScroll({ page: readerState.page });
+      if (shouldUseNativePdfViewer()) {
+        const stage = root.querySelector("[data-library-reader-stage]");
+        if (stage) renderReaderNativeFallback(stage, readerState.page);
+        const input = root.querySelector("[data-library-reader-input]");
+        if (input) input.value = String(readerState.page);
+      } else {
+        await renderReaderScroll({ page: readerState.page });
+      }
       if (session !== readerSessionId) return;
       trackLibraryEvent("library_read", pub);
     } catch (e) {
@@ -1144,6 +1201,7 @@
 
       hydrateLibraryStats(pub.id);
       startLibraryStatsPolling(pub.id);
+      trackLibraryDetailView(pub);
     } else {
       stopLibraryStatsPolling();
     }
