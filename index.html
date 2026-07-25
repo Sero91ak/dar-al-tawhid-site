@@ -14465,6 +14465,48 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
 }
 .home-v380-popular-toggle{margin-top:6px!important;padding:7px 12px!important;border-radius:999px!important}
 </style>
+<style id="home-discover-popular-v444">
+/* v444 · PDF kompakt wie Beiträge: Cover links, Text rechts, Portrait-Format */
+.home-discover-pdf-card{
+  flex:0 0 clamp(82%,85vw,88%)!important;width:clamp(82%,85vw,88%)!important;max-width:none!important;
+  flex-direction:row!important;align-items:center!important;align-self:auto!important;
+  gap:10px!important;padding:12px 14px!important;min-height:0!important;
+  scroll-snap-align:start!important;scroll-snap-stop:always!important;
+}
+.home-discover-pdf-cover{
+  flex:0 0 50px!important;width:50px!important;height:66px!important;
+  border-radius:7px!important;overflow:hidden!important;
+  background:rgba(239,215,142,.06)!important;
+}
+.home-discover-pdf-cover__img{
+  width:100%!important;height:100%!important;min-height:0!important;
+  object-fit:cover!important;object-position:center top!important;
+}
+.home-discover-pdf-cover__fallback{height:66px!important;font-size:18px!important}
+.home-discover-pdf-body{flex:1 1 auto!important;min-width:0!important;gap:3px!important;justify-content:center!important}
+.home-discover-pdf-title{
+  font-size:clamp(14px,3.4vw,17px)!important;line-height:1.14!important;
+  -webkit-line-clamp:2!important;
+}
+.home-discover-pdf-card .home-v380-kicker{font-size:clamp(7px,1.7vw,8px)!important}
+.home-discover-pdf-meta{font-size:clamp(9.5px,2.1vw,10.5px)!important;line-height:1.28!important}
+@media(min-width:760px){.home-discover-pdf-card{flex-basis:min(48%,420px)!important;width:min(48%,420px)!important}}
+.home-v380-popular-wrap--noble .home-v380-popular-list{gap:8px!important}
+.home-v380-popular-wrap--noble .home-v380-popular-row{
+  padding:9px 8px!important;margin:0!important;
+  border-bottom:0!important;border-radius:11px!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-text{
+  display:flex!important;flex-direction:column!important;gap:4px!important;min-width:0!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-text h4{
+  line-height:1.2!important;margin:0!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-source,
+.home-v380-popular-wrap--noble .home-v380-popular-text span{
+  margin-top:0!important;line-height:1.32!important;
+}
+</style>
 <style id="visitor-hadith-test-only-v419">
 /* v419 · Hadith-Bibliothek nur in der Test-App */
 html[data-app-path="visitor"] .home-v380-lib-card[data-nav="hadith"],
@@ -19688,7 +19730,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v443";
+const APP_BUILD_ID="app-shell-v444";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
