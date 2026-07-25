@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-25T13:10:00.307Z",
+  "generated": "2026-07-25T13:10:02.107Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -680,10 +680,23 @@
       "status": "pending",
       "pushApproved": true,
       "createdAt": "2026-07-25T12:52:29.715Z",
-      "lastError": "Push wartet auf Admin-Freigabe",
+      "lastError": "",
       "postId": "lib:pub-20260725-002",
-      "updatedAt": "2026-07-25T13:10:00.307Z",
-      "pushApprovedAt": "2026-07-25T13:10:00.016Z"
+      "updatedAt": "2026-07-25T13:10:02.107Z",
+      "pushApprovedAt": "2026-07-25T13:10:00.016Z",
+      "lastCheckAt": "2026-07-25T13:10:01.715Z",
+      "liveCheck": {
+        "ok": true,
+        "diagnosis": "",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260725-002",
+        "slug": "ahl-al-fatrah",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": true,
+        "pdfFilePublic": true,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1784985001503#bibliothek/ahl-al-fatrah"
+      }
     }
   }
 }
