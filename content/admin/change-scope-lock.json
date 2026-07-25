@@ -28,6 +28,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-library-live-deploy-v431b-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Admin Bibliothek v431 live deployen — daily.json Push-Guard reparieren",
+      "paths": [
+        "content/updates/daily.json",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T04:30:00.000Z"
+    },
+    {
       "id": "admin-library-manage-all-v431-2026-07-25",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: DAR Admin Bibliothek verwalten — alle PDFs Test+Live, bearbeiten, ersetzen, offline, archivieren, löschen",
