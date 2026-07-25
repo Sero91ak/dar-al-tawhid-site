@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-25T10:01:12.133Z",
+  "generated": "2026-07-25T10:01:13.617Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -646,10 +646,24 @@
       "status": "pending",
       "pushApproved": true,
       "createdAt": "2026-07-25T10:01:07.950Z",
-      "lastError": "Push wartet auf Admin-Freigabe",
+      "lastError": "PDF noch nicht im Live-Katalog enthalten.",
       "postId": "lib:pub-20260725-001",
-      "updatedAt": "2026-07-25T10:01:12.133Z",
-      "pushApprovedAt": "2026-07-25T10:01:11.939Z"
+      "updatedAt": "2026-07-25T10:01:13.617Z",
+      "pushApprovedAt": "2026-07-25T10:01:11.939Z",
+      "lastCheckAt": "2026-07-25T10:01:13.281Z",
+      "liveCheck": {
+        "ok": false,
+        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260725-001",
+        "slug": "hukm-al-majhul-al-hal",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": false,
+        "pdfFilePublic": false,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1784973673202#bibliothek/hukm-al-majhul-al-hal",
+        "pdfHttpStatus": 404
+      }
     }
   }
 }
