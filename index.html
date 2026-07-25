@@ -14150,39 +14150,46 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
   box-shadow:0 0 14px color-mix(in srgb,var(--gold2) 10%,transparent)!important;
 }
 </style>
-<style id="home-discover-pdf-v437">
-/* v437 · Entdecken: neueste PDF-Uploads mit Cover links, Text rechts */
-.home-discover-pdf-list{display:flex;flex-direction:column;gap:10px;margin-bottom:0}
+<style id="home-discover-pdf-compact-v440">
+/* v440 · Entdecken PDFs: sehr kompakt, horizontal wischen */
+.home-discover-pdf-list{
+  display:flex;flex-direction:row;gap:8px;
+  overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding:1px 0 3px;margin-bottom:0;
+}
+.home-discover-pdf-list::-webkit-scrollbar{display:none}
 .home-discover-pdf-list:empty{display:none}
 .home-discover-pdf-card{
-  display:flex;align-items:stretch;gap:10px;width:100%;text-align:left;
-  padding:10px;border-radius:14px;cursor:pointer;
-  border:1px solid color-mix(in srgb,var(--gold2) 32%,var(--line));
-  background:linear-gradient(145deg,color-mix(in srgb,var(--gold2) 8%,var(--card)),color-mix(in srgb,var(--card) 92%,var(--bg)));
-  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2) 18%,transparent),0 4px 14px color-mix(in srgb,#000 18%,transparent);
-  transition:border-color .2s ease,box-shadow .2s ease,transform .15s ease;
+  flex:0 0 min(58%,210px);width:min(58%,210px);max-width:210px;
+  scroll-snap-align:start;
+  display:flex;align-items:center;gap:6px;text-align:left;
+  padding:5px 6px;border-radius:9px;cursor:pointer;
+  border:1px solid rgba(239,215,142,.2);
+  background:linear-gradient(145deg,rgba(239,215,142,.05),rgba(12,12,12,.38));
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.08),0 2px 7px rgba(0,0,0,.12);
+  transition:border-color .18s ease,box-shadow .18s ease;
 }
 .home-discover-pdf-cover{
-  flex:0 0 clamp(56px,18vw,72px);width:clamp(56px,18vw,72px);
-  border-radius:9px;overflow:hidden;position:relative;
-  border:1px solid color-mix(in srgb,var(--gold2) 28%,transparent);
-  background:color-mix(in srgb,var(--gold2) 10%,var(--card));
-  box-shadow:0 2px 8px color-mix(in srgb,#000 22%,transparent);
+  flex:0 0 34px;width:34px;height:46px;
+  border-radius:5px;overflow:hidden;
+  border:1px solid rgba(239,215,142,.18);
+  background:rgba(239,215,142,.06);
 }
-.home-discover-pdf-cover__img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:3/4;min-height:72px}
-.home-discover-pdf-cover__fallback{display:grid;place-items:center;width:100%;min-height:72px;font-size:22px;opacity:.7}
-.home-discover-pdf-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:4px;justify-content:center}
-.home-discover-pdf-title{margin:0;font-family:var(--serif);font-size:clamp(14px,3.4vw,17px);font-weight:800;line-height:1.16;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.home-discover-pdf-meta{margin:0;font-size:clamp(10px,2.2vw,11px);font-weight:650;color:color-mix(in srgb,var(--theme-muted) 84%,var(--theme-text) 16%);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.home-discover-pdf-cover__img{width:100%;height:100%;object-fit:cover;display:block;min-height:46px}
+.home-discover-pdf-cover__fallback{display:grid;place-items:center;width:100%;height:46px;font-size:13px;opacity:.7}
+.home-discover-pdf-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px;justify-content:center}
+.home-discover-pdf-title{margin:0;font-family:var(--serif);font-size:clamp(10px,2.5vw,11px);font-weight:800;line-height:1.12;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.home-discover-pdf-meta{margin:0;font-size:clamp(7.5px,1.9vw,8.5px);font-weight:650;color:color-mix(in srgb,var(--theme-muted) 88%,var(--theme-text) 12%);line-height:1.2;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 .home-discover-pdf-card:hover,.home-discover-pdf-card:focus-visible{
-  border-color:color-mix(in srgb,var(--gold2) 58%,var(--line));
-  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2) 26%,transparent),0 0 18px color-mix(in srgb,var(--gold2) 14%,transparent),0 6px 16px color-mix(in srgb,#000 22%,transparent);
-  transform:translateY(-1px);outline:none;
+  border-color:rgba(239,215,142,.32);
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.1),0 0 10px rgba(239,215,142,.09);
+  outline:none;
 }
-.home-discover-pdf-card .home-v380-kicker{font-size:9px;letter-spacing:.1em}
-.home-discover-pdf-loading{padding:8px 0;font-size:11px;color:var(--theme-muted);opacity:.7}
+.home-discover-pdf-card .home-v380-kicker{font-size:6.5px;letter-spacing:.07em;line-height:1.15}
+.home-discover-pdf-loading{padding:4px 0;font-size:9px;color:var(--theme-muted);opacity:.7}
 .home-discover-posts{margin-top:2px}
-.home-discover-pdf-list:not(:empty) + .home-discover-posts{margin-top:14px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--theme-accent) 16%,var(--theme-border) 84%)}
+.home-discover-pdf-list:not(:empty) + .home-discover-posts{margin-top:10px;padding-top:10px;border-top:1px solid color-mix(in srgb,var(--theme-accent) 14%,var(--theme-border) 86%)}
+@media(min-width:760px){.home-discover-pdf-card{flex-basis:min(34%,220px);width:min(34%,220px)}}
 </style>
 <style id="home-source-smart-v439">
 /* v439 · Quellenbereich: hellere Gold-Kante, kompakter, minimaler, +2% Kacheln */
@@ -19103,7 +19110,7 @@ function renderHomePopularSection(){
   return `<section class="home-v380-section home-v380-popular-wrap" aria-labelledby="homePopularTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homePopularTitle">Meist gelesen</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Beliebt bei Besuchern</p></div></div><div class="home-v380-section-rule" aria-hidden="true"></div><div id="popularPostsContent" class="home-v380-popular-list"><div class="loading" style="padding:12px 0;margin:0">Wird geladen …</div></div></section>`;
 }
 const HOME_LIBRARY_DISCOVER_CACHE_KEY="darHomeLibraryDiscoverV1";
-const HOME_LIBRARY_DISCOVER_MAX=3;
+const HOME_LIBRARY_DISCOVER_MAX=6;
 function homeLibraryDiscoverDataUrl(){return (isTestAppPath()?"/test":"")+"/data/library-publications.json"}
 function homeLibraryVisiblePubs(pubs){return (pubs||[]).filter(p=>!["archived","draft","error","preparing"].includes(String(p.status||""))&&p.pdfUrl)}
 function sortHomeLibraryPubs(pubs){return [...pubs].sort((a,b)=>String(b.updatedAt||b.publishedAt||"").localeCompare(String(a.updatedAt||a.publishedAt||"")))}
@@ -19134,7 +19141,7 @@ function homeLibraryDiscoverCard(pub,{index=0}={}){
   const kicker=homeLibraryDiscoverKicker(pub,index);
   const meta=homeLibraryDiscoverMeta(pub);
   const title=pub.title||"PDF-Veröffentlichung";
-  return `<button type="button" class="home-discover-pdf-card" data-nav="bibliothek-detail" data-value="${esc(pub.slug)}" aria-label="${esc(title)} in der Bibliothek öffnen"><div class="home-discover-pdf-cover">${homeLibraryCoverThumb(pub)}</div><div class="home-discover-pdf-body"><span class="home-v380-kicker">${esc(kicker)}</span><h3 class="home-discover-pdf-title">${esc(title)}</h3>${meta?`<p class="home-discover-pdf-meta">${esc(meta)}</p>`:""}</div></button>`;
+  return `<button type="button" class="home-discover-pdf-card" role="listitem" data-nav="bibliothek-detail" data-value="${esc(pub.slug)}" aria-label="${esc(title)} in der Bibliothek öffnen"><div class="home-discover-pdf-cover">${homeLibraryCoverThumb(pub)}</div><div class="home-discover-pdf-body"><span class="home-v380-kicker">${esc(kicker)}</span><h3 class="home-discover-pdf-title">${esc(title)}</h3>${meta?`<p class="home-discover-pdf-meta">${esc(meta)}</p>`:""}</div></button>`;
 }
 function renderHomeDiscoverLibraryBlock(pubs){
   const visible=sortHomeLibraryPubs(homeLibraryVisiblePubs(pubs)).slice(0,HOME_LIBRARY_DISCOVER_MAX);
@@ -19197,7 +19204,7 @@ function renderHomeDiscoverSection(){
   let latestHtml="";
   if(latest.length===1)latestHtml=homePostPreviewCard(latest[0],{label:"Neuester Beitrag"});
   else if(latest.length>1)latestHtml=`<div class="home-v380-post-slider" role="list">${latest.map((p,i)=>homePostPreviewCard(p,{label:i===0?"Neuester Beitrag":"Beitrag"})).join("")}</div>`;
-  const librarySlot=`<div id="homeDiscoverLibraryContent" class="home-discover-pdf-list" aria-live="polite"></div>`;
+  const librarySlot=`<div id="homeDiscoverLibraryContent" class="home-discover-pdf-list" role="list" aria-live="polite"></div>`;
   const postsBlock=latestHtml?`<div class="home-discover-posts">${latestHtml}</div>`:"";
   const linkBtn=latestHtml?`<button type="button" class="home-v380-text-link" data-nav="recent">Alle Beiträge →</button>`:`<button type="button" class="home-v380-text-link" data-nav="bibliothek">Bibliothek →</button>`;
   return `<section class="home-v380-section home-v380-discover" aria-labelledby="homeDiscoverTitle"><div class="home-v380-section-head"><h2 class="home-v380-section-title" id="homeDiscoverTitle">Entdecken</h2>${linkBtn}</div><div class="home-v380-section-rule" aria-hidden="true"></div>${librarySlot}${postsBlock}</section>`;
@@ -19471,7 +19478,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v439";
+const APP_BUILD_ID="app-shell-v440";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

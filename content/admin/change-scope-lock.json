@@ -976,6 +976,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-pdf-compact-v440-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Entdecken PDF-Karten sehr kompakt, halbes Cover, horizontal wischen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
     }
   ]
 }
