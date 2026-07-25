@@ -341,12 +341,48 @@
     draft.fileHash = pdfMeta.fileHash;
   }
 
+  function localSuggestCategory(text) {
+    const blob = String(text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[ʾʿḥṣḍṭẓġāīū]/g, (ch) => {
+        const map = { ʾ: "", ʿ: "", ḥ: "h", ṣ: "s", ḍ: "d", ṭ: "t", ẓ: "z", ġ: "g", ā: "a", ī: "i", ū: "u" };
+        return map[ch] || ch;
+      });
+    if (/asma|sifat|eigenschaft|uluw|nuzul|istiw|husna/i.test(blob)) {
+      return { category: "ʿAqīdah", topic: "al-Asmāʾ waṣ-Ṣifāt", confidence: "medium" };
+    }
+    if (/tawhid|tauhid/i.test(blob)) return { category: "Tawḥīd", topic: "Tawḥīd", confidence: "medium" };
+    if (/schirk|shirk/i.test(blob)) return { category: "Schirk", topic: "Schirk", confidence: "medium" };
+    if (/kufr|taghut|tawagut/i.test(blob)) return { category: "Kufr und Ṭāghūt", topic: "Kufr und Ṭāghūt", confidence: "low" };
+    if (/sunnah|hadith|ahadith/i.test(blob)) return { category: "Sunnah", topic: "Sunnah", confidence: "low" };
+    if (/quran|tafsir/i.test(blob)) return { category: "Qurʾān", topic: "Qurʾān", confidence: "low" };
+    if (/gebet|salah|salat/i.test(blob)) return { category: "Gebet", topic: "Gebet", confidence: "low" };
+    if (/fiqh|zakat|zakāt|hukm|hokm|ahkam|ahkaam|majhul|majhool|fatwa/i.test(blob)) {
+      return { category: "Fiqh", topic: "Fiqh", confidence: "medium" };
+    }
+    if (/familie|ehe|kinder/i.test(blob)) return { category: "Familie", topic: "Familie", confidence: "low" };
+    if (/manhaj|methodology/i.test(blob)) return { category: "Manhaj", topic: "Manhaj", confidence: "low" };
+    if (/widerleg|radd|refutation/i.test(blob)) return { category: "Widerlegungen", topic: "Widerlegungen", confidence: "low" };
+    return { category: "", topic: "", confidence: "none" };
+  }
+
   async function suggestCategory(text) {
+    let remote = null;
     try {
       const res = await workerPost("api/admin/library/suggest", { text });
-      categorySuggestion = res.suggestion || null;
+      remote = res.suggestion || null;
     } catch (e) {
-      categorySuggestion = null;
+      remote = null;
+    }
+    const local = localSuggestCategory(text);
+    if (remote?.category && remote.confidence !== "none") {
+      categorySuggestion = remote;
+    } else if (local?.category) {
+      categorySuggestion = local;
+    } else {
+      categorySuggestion = remote || local;
     }
     return categorySuggestion;
   }
@@ -440,6 +476,7 @@
       if (!replaceMode) {
         await suggestCategory([draft.title, pdfMeta.author, pdfMeta.fileName].join(" "));
         applyCategorySuggestion();
+        if (!draft.category) showCategoryEdit = true;
       }
       successSlug = "";
       successTarget = "test";
@@ -447,6 +484,11 @@
     } finally {
       processingPdf = false;
       setProcessingStatus("");
+    }
+    if (pdfFile) {
+      generateCoverFromPdf()
+        .then(() => safeRender({ force: true }))
+        .catch(() => {});
     }
   }
 
@@ -484,7 +526,9 @@
 
   function canPublish() {
     const hasPdf = !!(pdfFile || draft?.pdfUrl);
-    return !!(hasPdf && draft?.title?.trim() && (draft.category || categorySuggestion?.category));
+    const pickedCategory = document.getElementById("libAdminCategory")?.value || "";
+    const category = draft?.category || pickedCategory || categorySuggestion?.category;
+    return !!(hasPdf && draft?.title?.trim() && category);
   }
 
   function readMainForm() {
@@ -638,18 +682,39 @@
     </div>`;
   }
 
-  function renderPreviewPanel() {
+  function renderCoverTile(label) {
     const cover = coverPreviewUrl
-      ? `<img src="${esc(coverPreviewUrl)}" alt="Cover-Vorschau">`
-      : `<div class="lib-admin-cover-placeholder">Cover: erste PDF-Seite (wird beim Veröffentlichen erstellt)</div>`;
+      ? `<img src="${esc(coverPreviewUrl)}" alt="${esc(label || "Cover-Vorschau")}">`
+      : `<span class="lib-admin-cover-tile-ph" aria-hidden="true">📄</span>`;
+    return `<div class="lib-admin-cover-tile" aria-label="Cover aus PDF-Seite 1">${cover}</div>`;
+  }
+
+  function renderPreviewPanel() {
     return `<aside class="lib-admin-preview" aria-label="Live-Vorschau">
-      <h3>Live-Vorschau</h3>
-      <div class="lib-admin-preview-cover">${cover}</div>
+      <h3>Vorschau</h3>
+      ${renderCoverTile("Cover-Vorschau")}
       <div class="lib-admin-card-preview">
         <h4>${esc(draft?.title || "Titel der Veröffentlichung")}</h4>
         <span>${esc(draft?.category || categorySuggestion?.category || "Kategorie")}</span>
       </div>
     </aside>`;
+  }
+
+  function renderCompactUploadCard(isEditing) {
+    const metaLine = `${pdfMeta?.pageCount ? `${esc(String(pdfMeta.pageCount))} Seiten · ` : ""}${esc(pdfMeta?.fileSize || draft.fileSize || "PDF bereit")}${pdfFile ? " · geprüft" : ""}`;
+    return `<div class="lib-admin-compact-card">
+      ${renderCoverTile(draft?.title || pdfMeta?.fileName || "PDF")}
+      <div class="lib-admin-compact-body">
+        <p class="lib-admin-pdf-meta"><b>${esc(pdfMeta?.fileName || "Bestehende PDF")}</b><br>${metaLine}</p>
+        <label class="lib-admin-field" id="libAdminTitleWrap">
+          <span>Titel</span>
+          <input id="libAdminTitle" type="text" value="${esc(draft.title)}" placeholder="Titel der Veröffentlichung">
+        </label>
+        <p class="lib-admin-cover-note">Cover automatisch aus <b>Seite 1</b> — keine separate Datei nötig.</p>
+        ${renderCategoryLine()}
+        ${renderCategoryEdit()}
+      </div>
+    </div>`;
   }
 
   function renderEditBanner() {
@@ -681,17 +746,7 @@
           <span>oder Datei auswählen</span>
         </label>
 
-        ${pdfReady ? `<p class="lib-admin-pdf-meta"><b>${esc(pdfMeta?.fileName || "Bestehende PDF")}</b><br>${pdfMeta?.pageCount ? `${esc(String(pdfMeta.pageCount))} Seiten · ` : ""}${esc(pdfMeta?.fileSize || draft.fileSize || "PDF bereit")}${pdfFile ? " · PDF geprüft" : ""}</p>` : ""}
-
-        <label class="lib-admin-field" id="libAdminTitleWrap" style="${pdfReady ? "" : "display:none"}">
-          <span>Titel</span>
-          <input id="libAdminTitle" type="text" value="${esc(draft.title)}" placeholder="Die Namen und Eigenschaften Allahs">
-        </label>
-
-        ${pdfReady ? `<p class="lib-admin-cover-note">Cover wird automatisch aus der <b>ersten Seite des PDFs</b> erstellt — keine separate Auswahl nötig.</p>` : ""}
-
-        ${pdfReady ? renderCategoryLine() : ""}
-        ${pdfReady ? renderCategoryEdit() : ""}
+        ${pdfReady ? renderCompactUploadCard(isEditing) : ""}
 
         <details class="lib-admin-details" id="libAdminMoreSettings" style="${pdfReady ? "" : "display:none"}">
           <summary>Weitere Einstellungen</summary>
@@ -889,7 +944,22 @@
     document.getElementById("libAdminChangeCategory")?.addEventListener("click", (ev) => {
       ev.preventDefault();
       showCategoryEdit = true;
+      if (draft && !draft.category && categorySuggestion?.category) {
+        draft.category = categorySuggestion.category;
+        draft.topic = categorySuggestion.topic || categorySuggestion.category;
+      }
       safeRender();
+    });
+
+    document.getElementById("libAdminCategory")?.addEventListener("change", (ev) => {
+      if (!draft) draft = defaultDraft();
+      draft.category = ev.target.value || "";
+      if (!draft.topic) draft.topic = draft.category;
+      safeRender();
+    });
+
+    document.getElementById("libAdminTopic")?.addEventListener("input", (ev) => {
+      if (draft) draft.topic = ev.target.value || "";
     });
 
     document.getElementById("libAdminSaveDraft")?.addEventListener("click", async () => {

@@ -1,20 +1,20 @@
 /* DAR AL TAWḤĪD — Bibliothek verwalten (vereinfacht) */
 .lib-admin {
   display: grid;
-  gap: 20px;
-  max-width: 1100px;
+  gap: 14px;
+  max-width: 960px;
 }
 
 .lib-admin-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, 200px);
+  gap: 14px;
   align-items: start;
 }
 
 .lib-admin-main {
   display: grid;
-  gap: 16px;
+  gap: 12px;
   min-width: 0;
 }
 
@@ -34,9 +34,9 @@
   position: relative;
   display: grid;
   place-items: center;
-  gap: 6px;
-  min-height: 132px;
-  padding: 18px 14px;
+  gap: 4px;
+  min-height: 108px;
+  padding: 14px 12px;
   border-radius: 16px;
   border: 1.5px dashed rgba(239, 215, 142, 0.28);
   background: rgba(255, 255, 255, 0.02);
@@ -104,14 +104,64 @@
 }
 
 .lib-admin-cover-note {
-  margin: 0 0 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
   border: 1px solid var(--line2, rgba(140, 190, 255, 0.24));
   background: color-mix(in srgb, var(--panel2, #101a29) 70%, transparent);
   color: var(--soft, #d2c9b7);
-  font-size: 0.84rem;
-  line-height: 1.4;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.lib-admin-compact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(239, 215, 142, 0.14);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.lib-admin-cover-tile {
+  flex: 0 0 72px;
+  width: 72px;
+  aspect-ratio: 2 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(239, 215, 142, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
+  display: grid;
+  place-items: center;
+}
+
+.lib-admin-cover-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lib-admin-cover-tile-ph {
+  font-size: 1.35rem;
+  line-height: 1;
+  opacity: 0.72;
+}
+
+.lib-admin-compact-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.lib-admin-compact-body .lib-admin-pdf-meta {
+  margin: 0;
+}
+
+.lib-admin-compact-body .lib-admin-field {
+  margin: 0;
 }
 
 .lib-admin-cover-options {
@@ -290,9 +340,9 @@
   position: sticky;
   top: 12px;
   display: grid;
-  gap: 12px;
-  padding: 14px;
-  border-radius: 16px;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
   border: 1px solid rgba(239, 215, 142, 0.12);
   background: rgba(255, 255, 255, 0.02);
 }
@@ -304,10 +354,18 @@
   font-weight: 800;
 }
 
+.lib-admin-preview .lib-admin-cover-tile {
+  width: 100%;
+  max-width: 112px;
+  margin: 0 auto;
+}
+
 .lib-admin-preview-cover {
   width: 100%;
+  max-width: 112px;
+  margin: 0 auto;
   aspect-ratio: 2 / 3;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.18));
   border: 1px solid rgba(239, 215, 142, 0.1);
@@ -828,9 +886,49 @@
   }
 
   .lib-admin-preview {
-    position: static;
+    display: none;
   }
 
+  .lib-admin-compact-card {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .lib-admin-cover-tile {
+    flex-basis: 64px;
+    width: 64px;
+  }
+
+  .lib-admin-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .lib-admin-actions .lib-admin-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 901px) {
+  .lib-admin-compact-card .lib-admin-cover-tile {
+    display: none;
+  }
+
+  .lib-admin-compact-card {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .lib-admin-compact-body {
+    display: grid;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 900px) {
   .lib-admin-modal {
     padding: 0;
     place-items: stretch;
