@@ -52,6 +52,8 @@
   let manageSearch = "";
   let manageFilter = "all";
   let manageSelectedId = "";
+  let manageExpandedIds = new Set();
+  let manageSectionOpen = true;
   let editSourceTarget = "test";
   let adminLibraryStatsMap = {};
   let adminLibraryStatsLoading = false;
@@ -333,11 +335,11 @@
 
   function renderAdminStatsLine(publicationId) {
     const stats = adminLibraryStatsMap[String(publicationId || "")] || { clicks: 0, reads: 0, downloads: 0 };
-    return `<div class="lib-admin-live-stats" data-lib-admin-stats="${esc(publicationId)}">
+    return `<div class="lib-admin-live-stats lib-admin-live-stats--compact" data-lib-admin-stats="${esc(publicationId)}">
       <span class="lib-admin-live-stats-label">Live</span>
-      <span><b>Klicks</b> ${formatAdminStatCount(stats.clicks)}</span>
-      <span><b>Gelesen</b> ${formatAdminStatCount(stats.reads)}</span>
-      <span><b>Downloads</b> ${formatAdminStatCount(stats.downloads)}</span>
+      <span class="lib-admin-live-stat"><b>Klicks</b>${formatAdminStatCount(stats.clicks)}</span>
+      <span class="lib-admin-live-stat"><b>Gelesen</b>${formatAdminStatCount(stats.reads)}</span>
+      <span class="lib-admin-live-stat"><b>DL</b>${formatAdminStatCount(stats.downloads)}</span>
     </div>`;
   }
 
@@ -1130,42 +1132,66 @@
     return parts.join("");
   }
 
+  function renderManageViewLinks(entry, pub, mode) {
+    const mini = mode === "mini";
+    const links = [];
+    if (entry.inTest && isOnlineStatus(entry.testStatus) && pub.slug) {
+      links.push(`<a class="lib-admin-btn ${mini ? "lib-admin-btn-mini" : "lib-admin-btn-mini lib-admin-btn-wide"}" href="/test/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">${mini ? "Test" : "Test ansehen"}</a>`);
+    }
+    if (entry.inLive && isOnlineStatus(entry.liveStatus) && pub.slug) {
+      links.push(`<a class="lib-admin-btn ${mini ? "lib-admin-btn-mini lib-admin-btn-live" : "lib-admin-btn-mini lib-admin-btn-wide lib-admin-btn-live"}" href="/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">${mini ? "Live" : "Live ansehen"}</a>`);
+    }
+    return links;
+  }
+
   function renderManageRow(entry) {
     const pub = entry.display || {};
     const cover = pub.coverUrls?.small || pub.coverUrl || "";
+    const expanded = manageExpandedIds.has(entry.id);
     const rowClass = [
       "lib-admin-list-item",
+      "lib-admin-manage-card",
+      expanded ? "is-open" : "",
       isOnlineStatus(entry.testStatus) || isOnlineStatus(entry.liveStatus) ? "is-online" : "",
       entry.testStatus === "archived" || entry.liveStatus === "archived" ? "is-archived" : "",
       manageSelectedId === entry.id ? "is-selected" : ""
     ].filter(Boolean).join(" ");
     const canUnpublish = mergedTargetsForAction(entry, "unpublish").length > 0;
     const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
-    const viewLinks = [];
-    if (entry.inTest && isOnlineStatus(entry.testStatus) && pub.slug) {
-      viewLinks.push(`<a class="lib-admin-btn" href="/test/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Test ansehen</a>`);
-    }
-    if (entry.inLive && isOnlineStatus(entry.liveStatus) && pub.slug) {
-      viewLinks.push(`<a class="lib-admin-btn lib-admin-btn-live" href="/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Live ansehen</a>`);
-    }
+    const quickLinks = renderManageViewLinks(entry, pub, "mini").join("");
+    const panelLinks = renderManageViewLinks(entry, pub, "panel").join("");
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
-      <div class="lib-admin-list-cover">${cover ? `<img src="${esc(cover)}" alt="">` : `<span aria-hidden="true">📄</span>`}</div>
-      <div class="lib-admin-list-main">
-        <div class="lib-admin-list-title-row">
-          <b>${esc(pub.title || "Ohne Titel")}</b>
-          <span class="lib-admin-status-pill">v${esc(pub.version || "1.0")}</span>
+      <div class="lib-admin-manage-card-head">
+        <div class="lib-admin-manage-card-top">
+          <div class="lib-admin-list-cover">${cover ? `<img src="${esc(cover)}" alt="">` : `<span aria-hidden="true">📄</span>`}</div>
+          <div class="lib-admin-list-main">
+            <div class="lib-admin-list-title-row">
+              <b class="lib-admin-manage-title">${esc(pub.title || "Ohne Titel")}</b>
+              <span class="lib-admin-status-pill">v${esc(pub.version || "1.0")}</span>
+            </div>
+            <p class="lib-admin-list-meta">${esc(pub.category || "—")} · ${esc(pub.pageCount || 0)} S. · ${esc(pub.updatedAt || "—")}</p>
+            <div class="lib-admin-target-badges">${renderTargetBadges(entry)}</div>
+          </div>
+          <button class="lib-admin-manage-toggle" type="button" data-lib-toggle="${esc(entry.id)}" aria-expanded="${expanded ? "true" : "false"}" aria-label="${expanded ? "Details schließen" : "Details öffnen"}">
+            <span class="lib-admin-manage-toggle-text">${expanded ? "Schließen" : "Details"}</span>
+            <span class="lib-admin-manage-chevron" aria-hidden="true"></span>
+          </button>
         </div>
-        <p class="lib-admin-list-meta">${esc(pub.category || "—")} · ${esc(pub.pageCount || 0)} Seiten · ${esc(pub.updatedAt || "—")}</p>
-        <div class="lib-admin-target-badges">${renderTargetBadges(entry)}</div>
-        ${renderAdminStatsLine(entry.id)}
+        <div class="lib-admin-manage-quick">
+          <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
+          ${quickLinks}
+        </div>
       </div>
-      <div class="lib-admin-list-actions">
-        <button class="lib-admin-btn lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
-        <button class="lib-admin-btn" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
-        ${viewLinks.join("")}
-        ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
-        ${canArchive ? `<button class="lib-admin-btn" type="button" data-lib-archive="${esc(entry.id)}">Archivieren</button>` : ""}
-        <button class="lib-admin-btn lib-admin-btn-danger" type="button" data-lib-delete="${esc(entry.id)}">Löschen</button>
+      <div class="lib-admin-manage-card-panel"${expanded ? "" : " hidden"}>
+        ${renderAdminStatsLine(entry.id)}
+        <div class="lib-admin-list-actions lib-admin-list-actions--compact">
+          <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
+          <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
+          ${panelLinks}
+          ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
+          ${canArchive ? `<button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-archive="${esc(entry.id)}">Archiv</button>` : ""}
+          <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-danger" type="button" data-lib-delete="${esc(entry.id)}">Löschen</button>
+        </div>
       </div>
     </article>`;
   }
@@ -1199,26 +1225,30 @@
       </section>`;
     }
     return `<section class="lib-admin-manage" id="libAdminManage">
-      <header class="lib-admin-manage-head">
-        <div>
-          <h2>Bibliothek verwalten</h2>
-          <p><b>${total}</b> PDFs gesamt · Test <b>${testCount}</b> · Live <b>${liveCount}</b> — alle Kataloge zusammengeführt</p>
+      <details class="lib-admin-manage-fold" id="libAdminManageFold"${manageSectionOpen ? " open" : ""}>
+        <summary class="lib-admin-manage-fold-summary">
+          <span class="lib-admin-manage-fold-title">Bibliothek verwalten</span>
+          <span class="lib-admin-manage-fold-meta"><b>${total}</b> PDFs · Test <b>${testCount}</b> · Live <b>${liveCount}</b></span>
+        </summary>
+        <div class="lib-admin-manage-fold-body">
+          <div class="lib-admin-manage-toolbar">
+            <label class="lib-admin-modal-search lib-admin-modal-search--compact">
+              <span>Suche</span>
+              <input id="libAdminManageSearch" type="search" value="${esc(manageSearch)}" placeholder="Titel, Kategorie, Slug …" autocomplete="off">
+            </label>
+            <div class="lib-admin-manage-actions">
+              <button class="lib-admin-btn lib-admin-btn-mini" type="button" id="libAdminManageCollapseAll">Alle zu</button>
+              <button class="lib-admin-btn lib-admin-btn-mini" type="button" id="libAdminManageExpandAll">Alle auf</button>
+              <button class="lib-admin-btn lib-admin-btn-mini" type="button" id="libAdminManageRefresh">Aktualisieren</button>
+            </div>
+          </div>
+          <div class="lib-admin-filter-tabs lib-admin-filter-tabs--compact" id="libAdminManageFilters">${renderManageFilters()}</div>
+          <p class="lib-admin-manage-hint">${items.length} von ${total} · Live-Statistik 15s</p>
+          <div class="lib-admin-manage-list" id="libAdminManageList">
+            ${items.length ? items.map((entry) => renderManageRow(entry)).join("") : `<p class="lib-admin-manage-empty">Keine Treffer für Suche oder Filter.</p>`}
+          </div>
         </div>
-        <div class="lib-admin-manage-actions">
-          <button class="lib-admin-btn" type="button" id="libAdminManageRefresh">Aktualisieren</button>
-        </div>
-      </header>
-      <div class="lib-admin-modal-toolbar">
-        <label class="lib-admin-modal-search">
-          <span>Suche</span>
-          <input id="libAdminManageSearch" type="search" value="${esc(manageSearch)}" placeholder="Titel, Kategorie, Slug …" autocomplete="off">
-        </label>
-        <div class="lib-admin-filter-tabs" id="libAdminManageFilters">${renderManageFilters()}</div>
-      </div>
-      <p class="lib-admin-manage-hint">${items.length} von ${total} angezeigt — Live-Statistik alle 15 Sekunden · Bearbeiten, PDF ersetzen, offline nehmen, archivieren oder löschen.</p>
-      <div class="lib-admin-manage-list" id="libAdminManageList">
-        ${items.length ? items.map((entry) => renderManageRow(entry)).join("") : `<p class="lib-admin-manage-empty">Keine Treffer für Suche oder Filter.</p>`}
-      </div>
+      </details>
     </section>`;
   }
 
@@ -1367,6 +1397,38 @@
       } catch (e) {
         toast(e.message || "Aktualisieren fehlgeschlagen");
       }
+    });
+
+    document.getElementById("libAdminManageFold")?.addEventListener("toggle", (ev) => {
+      manageSectionOpen = !!ev.currentTarget?.open;
+    });
+
+    document.getElementById("libAdminManageCollapseAll")?.addEventListener("click", () => {
+      manageExpandedIds.clear();
+      safeRender({ force: true });
+    });
+
+    document.getElementById("libAdminManageExpandAll")?.addEventListener("click", () => {
+      getFilteredManageList().forEach((entry) => manageExpandedIds.add(entry.id));
+      safeRender({ force: true });
+    });
+
+    document.querySelectorAll("[data-lib-toggle]").forEach((btn) => {
+      btn.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        const id = btn.getAttribute("data-lib-toggle");
+        if (!id) return;
+        if (manageExpandedIds.has(id)) manageExpandedIds.delete(id);
+        else manageExpandedIds.add(id);
+        const card = btn.closest(".lib-admin-manage-card");
+        const panel = card?.querySelector(".lib-admin-manage-card-panel");
+        const open = manageExpandedIds.has(id);
+        card?.classList.toggle("is-open", open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        const label = btn.querySelector(".lib-admin-manage-toggle-text");
+        if (label) label.textContent = open ? "Schließen" : "Details";
+        if (panel) panel.hidden = !open;
+      });
     });
 
     document.getElementById("libAdminManageSearch")?.addEventListener("input", (ev) => {
