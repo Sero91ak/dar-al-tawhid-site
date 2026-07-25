@@ -1066,6 +1066,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "library-pdf-reader-fix-v446-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF direkt in der App lesen reparieren — Besucher + Test live",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T06:00:00.000Z"
     }
   ]
 }
