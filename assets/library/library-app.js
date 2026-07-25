@@ -165,11 +165,9 @@
   }
 
   function renderLibraryStatsPanel(publicationId) {
-    return `<section class="lib-stats-live" data-library-stats="${esc(publicationId)}" aria-label="Live-Besucherstatistik">
+    return `<section class="lib-stats-live" data-library-stats="${esc(publicationId)}" aria-label="Besucherstatistik">
       <div class="lib-stats-live-head">
         <span class="lib-stats-live-label">Besucherstatistik</span>
-        <span class="lib-stats-live-pulse" aria-hidden="true"></span>
-        <span class="lib-stats-live-note">Live</span>
       </div>
       <div class="lib-stats-live-row">
         <div class="lib-stats-live-item">

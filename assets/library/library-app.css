@@ -625,28 +625,6 @@
   color: var(--gold2);
 }
 
-.lib-stats-live-note {
-  margin-left: auto;
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--muted2);
-}
-
-.lib-stats-live-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #6fd38b;
-  box-shadow: 0 0 0 0 rgba(111, 211, 139, 0.55);
-  animation: lib-stats-pulse 2s ease-out infinite;
-}
-
-@keyframes lib-stats-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(111, 211, 139, 0.55); }
-  70% { box-shadow: 0 0 0 8px rgba(111, 211, 139, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(111, 211, 139, 0); }
-}
-
 .lib-stats-live-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
