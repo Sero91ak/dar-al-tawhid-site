@@ -28,6 +28,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "library-live-stats-row-v432-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek-Statistik Klicks/Gelesen/Downloads in einer Zeile, live, Admin+App",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T06:00:00.000Z"
+    },
+    {
       "id": "admin-library-live-deploy-v431b-2026-07-25",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Freigabe: Admin Bibliothek v431 live deployen — daily.json Push-Guard reparieren",
