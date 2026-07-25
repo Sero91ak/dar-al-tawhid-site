@@ -19849,7 +19849,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v450";
+const APP_BUILD_ID="app-shell-v451";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -20189,7 +20189,7 @@ function ensureLibraryModule(){
     }
     if(window.DARLibraryApp){window.__libraryAssetsReady=true;resolve(window.DARLibraryApp);return}
     const s=document.createElement("script");
-    s.src=`${base}/assets/library/library-app.js?v=15`;
+    s.src=`${base}/assets/library/library-app.js?v=16`;
     s.defer=true;
     s.onload=()=>{window.__libraryAssetsReady=true;resolve(window.DARLibraryApp)};
     s.onerror=reject;
@@ -20207,7 +20207,7 @@ function ensureCanonicalSourceLibrary(){
       return;
     }
     const s=document.createElement("script");
-    s.src="/test/assets/library/canonical-source-library.js?v=14";
+    s.src="/test/assets/library/canonical-source-library.js?v=16";
     s.defer=true;
     s.onload=()=>{
       if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}
@@ -21204,6 +21204,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     })();
   </script>
   <script src="/assets/dar-account-visibility.js?v=17"></script>
-<script src="/test/assets/library/canonical-source-library.js?v=14"></script>
+<script src="/test/assets/library/canonical-source-library.js?v=16"></script>
 </body>
 </html>
