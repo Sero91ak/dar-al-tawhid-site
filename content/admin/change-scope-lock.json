@@ -1116,6 +1116,31 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "royal-edge-to-edge-v449-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Royal Deluxe Gold-Rahmen entfernen, volle Bildschirmbreite wie Dār al-Layl (Test zuerst)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "app-edge-to-edge-v450-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Alle Erscheinungsbilder edge-to-edge wie Dār al-Layl — Test- und Live-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/updates/daily.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
     }
   ]
 }
