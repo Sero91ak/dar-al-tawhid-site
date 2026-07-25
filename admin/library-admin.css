@@ -506,25 +506,28 @@
 
 .lib-admin-manage-card {
   display: block;
-  padding: 8px 10px;
+  padding: 7px 9px;
   gap: 0;
+  border-radius: 13px;
+  border: 1px solid rgba(239, 215, 142, 0.14);
+  background: linear-gradient(168deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.012));
 }
 
 .lib-admin-manage-card-head {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .lib-admin-manage-card-top {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) auto;
-  gap: 8px;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 7px;
   align-items: start;
 }
 
 .lib-admin-manage-card .lib-admin-list-cover {
-  flex: 0 0 44px;
-  width: 44px;
+  flex: 0 0 40px;
+  width: 40px;
 }
 
 .lib-admin-manage-title {
@@ -559,9 +562,9 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  min-width: 52px;
-  min-height: 44px;
-  padding: 4px 6px;
+  min-width: 48px;
+  min-height: 40px;
+  padding: 3px 5px;
   border-radius: 10px;
   border: 1px solid rgba(239, 215, 142, 0.16);
   background: rgba(255, 255, 255, 0.03);
@@ -593,16 +596,26 @@
 .lib-admin-manage-quick {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  padding-left: 52px;
+  gap: 5px;
+  padding-left: 47px;
 }
 
 .lib-admin-manage-card-panel {
   display: grid;
-  gap: 8px;
-  margin-top: 8px;
-  padding-top: 8px;
+  gap: 7px;
+  margin-top: 7px;
+  padding-top: 7px;
   border-top: 1px solid rgba(239, 215, 142, 0.1);
+}
+
+.lib-admin-manage-card-panel[hidden] {
+  display: none !important;
+}
+
+.lib-admin-btn-push {
+  background: linear-gradient(180deg, rgba(180, 130, 255, 0.16), rgba(90, 50, 150, 0.12)) !important;
+  border-color: rgba(190, 150, 255, 0.34) !important;
+  color: #eadcff !important;
 }
 
 .lib-admin-live-stats--compact {
@@ -678,7 +691,7 @@
 
 .lib-admin-manage-list {
   display: grid;
-  gap: 8px;
+  gap: 7px;
   max-height: min(68vh, 720px);
   overflow: auto;
   padding-right: 2px;

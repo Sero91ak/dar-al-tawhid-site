@@ -337,16 +337,30 @@
     const stats = adminLibraryStatsMap[String(publicationId || "")] || { clicks: 0, reads: 0, downloads: 0 };
     return `<div class="lib-admin-live-stats lib-admin-live-stats--compact" data-lib-admin-stats="${esc(publicationId)}">
       <span class="lib-admin-live-stats-label">Live</span>
-      <span class="lib-admin-live-stat"><b>Klicks</b>${formatAdminStatCount(stats.clicks)}</span>
-      <span class="lib-admin-live-stat"><b>Gelesen</b>${formatAdminStatCount(stats.reads)}</span>
-      <span class="lib-admin-live-stat"><b>DL</b>${formatAdminStatCount(stats.downloads)}</span>
+      <span class="lib-admin-live-stat" data-lib-stat="clicks"><b>Klicks</b>${formatAdminStatCount(stats.clicks)}</span>
+      <span class="lib-admin-live-stat" data-lib-stat="reads"><b>Gelesen</b>${formatAdminStatCount(stats.reads)}</span>
+      <span class="lib-admin-live-stat" data-lib-stat="downloads"><b>DL</b>${formatAdminStatCount(stats.downloads)}</span>
     </div>`;
+  }
+
+  function updateAdminStatsDom() {
+    document.querySelectorAll("[data-lib-admin-stats]").forEach((wrap) => {
+      const id = wrap.getAttribute("data-lib-admin-stats");
+      const stats = adminLibraryStatsMap[String(id || "")] || { clicks: 0, reads: 0, downloads: 0 };
+      const map = { clicks: stats.clicks, reads: stats.reads, downloads: stats.downloads };
+      wrap.querySelectorAll("[data-lib-stat]").forEach((el) => {
+        const key = el.getAttribute("data-lib-stat");
+        if (!key || !(key in map)) return;
+        const label = key === "clicks" ? "Klicks" : key === "reads" ? "Gelesen" : "DL";
+        el.innerHTML = `<b>${label}</b>${formatAdminStatCount(map[key])}`;
+      });
+    });
   }
 
   function startAdminLibraryStatsPolling() {
     if (adminLibraryStatsPollTimer) return;
     adminLibraryStatsPollTimer = setInterval(() => {
-      fetchAdminLibraryStatsMap(true).then(() => safeRender({ force: true })).catch(() => {});
+      fetchAdminLibraryStatsMap(true).then(() => updateAdminStatsDom()).catch(() => {});
     }, 15000);
   }
 
@@ -996,29 +1010,46 @@
     </div>`;
   }
 
-  async function retryLibraryLivePush() {
-    if (!successPublicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
-    if (!confirm("Live Push freigeben?\n\nDer PDF-Push wird jetzt an alle registrierten Besucher gesendet.")) return;
-    const btn = document.getElementById("libAdminRetryPush");
+  function livePushPayloadForEntry(entry) {
+    const merged = entry?.id ? getMergedEntry(entry.id) || entry : entry;
+    const pub = merged?.live || merged?.display || {};
+    return {
+      publicationId: String(merged?.id || "").trim(),
+      slug: String(pub.slug || merged?.id || "").trim(),
+      publicationTitle: String(pub.title || "").trim(),
+      pdfUrl: String(pub.pdfUrl || "").trim(),
+      publishedAt: String(pub.updatedAt || pub.publishedAt || "").trim()
+    };
+  }
+
+  async function retryLibraryLivePush(options = {}) {
+    const merged = options.publicationId ? getMergedEntry(options.publicationId) : null;
+    const payload = {
+      publicationId: String(options.publicationId || successPublicationId || "").trim(),
+      slug: String(options.slug || successSlug || merged?.live?.slug || merged?.display?.slug || "").trim(),
+      publicationTitle: String(options.publicationTitle || draft?.title || merged?.live?.title || merged?.display?.title || "").trim(),
+      pdfUrl: String(options.pdfUrl || successPdfUrl || merged?.live?.pdfUrl || merged?.display?.pdfUrl || "").trim(),
+      publishedAt: String(options.publishedAt || merged?.live?.updatedAt || merged?.live?.publishedAt || "").trim()
+    };
+    if (!payload.publicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
+    const title = payload.publicationTitle || "PDF";
+    if (!confirm(`Live Push für „${title}“ freigeben?\n\nDer Push wird an alle registrierten Besucher gesendet.`)) return;
+    const btn = options.button || document.getElementById("libAdminRetryPush");
+    const btnLabel = btn?.textContent || "";
     if (btn) {
       btn.disabled = true;
       btn.textContent = "Push wird gesendet…";
     }
     try {
-      const result = await workerPost("api/admin/push/library/retry", {
-        publicationId: successPublicationId,
-        slug: successSlug,
-        publicationTitle: draft?.title || "",
-        pdfUrl: successPdfUrl
-      });
+      const result = await workerPost("api/admin/push/library/retry", payload);
       lastLivePush = result?.push || result || null;
       const sent = result?.push?.sent === true;
-      toast(sent ? "Live Push gesendet" : (result?.push?.reason || "Push mit Hinweis"));
-      safeRender();
+      toast(sent ? "Live Push gesendet" : (result?.push?.reason || result?.reason || "Push mit Hinweis"));
+      if (!options.publicationId || options.publicationId === successPublicationId) safeRender();
     } finally {
       if (btn) {
         btn.disabled = false;
-        btn.textContent = "Live Push freigeben";
+        btn.textContent = btnLabel || "Live Push freigeben";
       }
     }
   }
@@ -1144,6 +1175,11 @@
     return links;
   }
 
+  function renderLivePushButton(entry, { mini = false } = {}) {
+    if (!entry?.inLive || !isOnlineStatus(entry.liveStatus)) return "";
+    return `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-push" type="button" data-lib-live-push="${esc(entry.id)}">${mini ? "Push" : "Live Push"}</button>`;
+  }
+
   function renderManageRow(entry) {
     const pub = entry.display || {};
     const cover = pub.coverUrls?.small || pub.coverUrl || "";
@@ -1160,6 +1196,8 @@
     const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
     const quickLinks = renderManageViewLinks(entry, pub, "mini").join("");
     const panelLinks = renderManageViewLinks(entry, pub, "panel").join("");
+    const livePushQuick = renderLivePushButton(entry, { mini: true });
+    const livePushPanel = renderLivePushButton(entry);
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
       <div class="lib-admin-manage-card-head">
         <div class="lib-admin-manage-card-top">
@@ -1180,6 +1218,7 @@
         <div class="lib-admin-manage-quick">
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
           ${quickLinks}
+          ${livePushQuick}
         </div>
       </div>
       <div class="lib-admin-manage-card-panel"${expanded ? "" : " hidden"}>
@@ -1187,6 +1226,7 @@
         <div class="lib-admin-list-actions lib-admin-list-actions--compact">
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
           <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
+          ${livePushPanel}
           ${panelLinks}
           ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
           ${canArchive ? `<button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-archive="${esc(entry.id)}">Archiv</button>` : ""}
@@ -1413,24 +1453,6 @@
       safeRender({ force: true });
     });
 
-    document.querySelectorAll("[data-lib-toggle]").forEach((btn) => {
-      btn.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        const id = btn.getAttribute("data-lib-toggle");
-        if (!id) return;
-        if (manageExpandedIds.has(id)) manageExpandedIds.delete(id);
-        else manageExpandedIds.add(id);
-        const card = btn.closest(".lib-admin-manage-card");
-        const panel = card?.querySelector(".lib-admin-manage-card-panel");
-        const open = manageExpandedIds.has(id);
-        card?.classList.toggle("is-open", open);
-        btn.setAttribute("aria-expanded", open ? "true" : "false");
-        const label = btn.querySelector(".lib-admin-manage-toggle-text");
-        if (label) label.textContent = open ? "Schließen" : "Details";
-        if (panel) panel.hidden = !open;
-      });
-    });
-
     document.getElementById("libAdminManageSearch")?.addEventListener("input", (ev) => {
       manageSearch = ev.target.value || "";
       safeRender({ force: true });
@@ -1536,6 +1558,39 @@
       });
     });
   }
+
+  function ensureManageSectionDelegation() {
+    if (global.__darLibAdminManageDelegation) return;
+    global.__darLibAdminManageDelegation = true;
+    document.addEventListener("click", async (ev) => {
+      const toggleBtn = ev.target.closest("[data-lib-toggle]");
+      if (toggleBtn && toggleBtn.closest("#libAdminManage")) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const id = toggleBtn.getAttribute("data-lib-toggle");
+        if (!id) return;
+        if (manageExpandedIds.has(id)) manageExpandedIds.delete(id);
+        else manageExpandedIds.add(id);
+        safeRender({ force: true });
+        return;
+      }
+      const pushBtn = ev.target.closest("[data-lib-live-push]");
+      if (pushBtn && pushBtn.closest("#libAdminManage")) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const id = pushBtn.getAttribute("data-lib-live-push");
+        const entry = id ? getMergedEntry(id) : null;
+        if (!entry) return;
+        try {
+          await retryLibraryLivePush({ ...livePushPayloadForEntry(entry), button: pushBtn });
+        } catch (e) {
+          toast(e.message || "Push fehlgeschlagen");
+        }
+      }
+    });
+  }
+
+  ensureManageSectionDelegation();
 
   global.DARLibraryAdmin = {
     ensureLibraryLoaded,

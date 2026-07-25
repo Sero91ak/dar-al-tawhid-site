@@ -1041,6 +1041,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "admin-library-manage-v445-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Admin Bibliothek verwalten kompakter, Auf/Zu-Fix, Live-Push pro PDF",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
     }
   ]
 }
