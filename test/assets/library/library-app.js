@@ -1243,6 +1243,10 @@
       }
       readerState = null;
     }
+
+    if (global.DARCanonicalSourceLibrary && typeof global.DARCanonicalSourceLibrary.bindBibliothekAddon === "function") {
+      global.DARCanonicalSourceLibrary.bindBibliothekAddon();
+    }
   }
 
   async function enrichWithOffline(renderFn, slug) {
