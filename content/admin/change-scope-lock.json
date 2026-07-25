@@ -28,6 +28,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-library-manage-all-v431-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: DAR Admin Bibliothek verwalten — alle PDFs Test+Live, bearbeiten, ersetzen, offline, archivieren, löschen",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T04:00:00.000Z"
+    },
+    {
       "id": "admin-library-compact-v430-2026-07-25",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: DAR Admin Bibliothek kompakter + PDF-Upload/Kategorie-Fix",
