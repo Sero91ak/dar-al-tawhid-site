@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-25T13:36:40.440Z",
+  "generated": "2026-07-25T13:36:41.978Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -714,23 +714,22 @@
       "status": "pending",
       "pushApproved": true,
       "createdAt": "2026-07-25T13:33:44.541Z",
-      "lastError": "PDF noch nicht im Live-Katalog enthalten.",
+      "lastError": "",
       "postId": "lib:pub-20260725-003",
-      "updatedAt": "2026-07-25T13:36:40.440Z",
+      "updatedAt": "2026-07-25T13:36:41.978Z",
       "pushApprovedAt": "2026-07-25T13:36:40.248Z",
-      "lastCheckAt": "2026-07-25T13:34:11.759Z",
+      "lastCheckAt": "2026-07-25T13:36:41.790Z",
       "liveCheck": {
-        "ok": false,
-        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "ok": true,
+        "diagnosis": "",
         "site": "https://dar-al-tawhid.de",
         "publicationId": "pub-20260725-003",
         "slug": "al-udhr-bi-al-tawil-fi-masail-al-kufr",
         "catalogFoundPublic": true,
-        "publicationInCatalog": false,
-        "pdfFilePublic": false,
+        "publicationInCatalog": true,
+        "pdfFilePublic": true,
         "visitorUrlOk": true,
-        "visitorUrl": "https://dar-al-tawhid.de/?v=1784986451714#bibliothek/al-udhr-bi-al-tawil-fi-masail-al-kufr",
-        "pdfHttpStatus": 404
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1784986601602#bibliothek/al-udhr-bi-al-tawil-fi-masail-al-kufr"
       }
     }
   }
