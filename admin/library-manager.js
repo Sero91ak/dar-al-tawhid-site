@@ -27,6 +27,9 @@
   ];
 
   let catalog = { version: 1, publications: [] };
+  let catalogTest = { version: 1, publications: [] };
+  let catalogLive = { version: 1, publications: [] };
+  let mergedPublications = [];
   let loaded = false;
   let loading = false;
   let draft = null;
@@ -46,7 +49,10 @@
   let editingPublicationId = "";
   let dragActive = false;
   let processingPdf = false;
-  let listFoldOpen = false;
+  let manageSearch = "";
+  let manageFilter = "all";
+  let manageSelectedId = "";
+  let editSourceTarget = "test";
   let pdfFileKey = "";
   let pdfReplaceVersion = "";
 
@@ -215,13 +221,92 @@
     return res.json();
   }
 
+  function isOnlineStatus(status) {
+    const s = String(status || "").trim();
+    return s === "published" || s === "updated" || s === "preparing";
+  }
+
+  function pickDisplayPublication(entry) {
+    const live = entry.live;
+    const test = entry.test;
+    if (live && isOnlineStatus(live.status)) return { ...live, _primaryTarget: "live" };
+    if (test && isOnlineStatus(test.status)) return { ...test, _primaryTarget: "test" };
+    if (live) return { ...live, _primaryTarget: "live" };
+    if (test) return { ...test, _primaryTarget: "test" };
+    return test || live;
+  }
+
+  function mergeCatalogs(testCat, liveCat) {
+    const byId = new Map();
+    (testCat?.publications || []).forEach((p) => {
+      if (!p?.id) return;
+      byId.set(p.id, { id: p.id, test: p, live: null });
+    });
+    (liveCat?.publications || []).forEach((p) => {
+      if (!p?.id) return;
+      const existing = byId.get(p.id);
+      if (existing) existing.live = p;
+      else byId.set(p.id, { id: p.id, test: null, live: p });
+    });
+    return [...byId.values()].map((entry) => {
+      const display = pickDisplayPublication(entry);
+      return {
+        ...entry,
+        inTest: !!entry.test,
+        inLive: !!entry.live,
+        testStatus: String(entry.test?.status || ""),
+        liveStatus: String(entry.live?.status || ""),
+        display
+      };
+    });
+  }
+
+  function allCatalogPublications() {
+    const byId = new Map();
+    (catalogTest.publications || []).forEach((p) => byId.set(p.id, p));
+    (catalogLive.publications || []).forEach((p) => {
+      if (!byId.has(p.id)) byId.set(p.id, p);
+    });
+    return [...byId.values()];
+  }
+
+  function getMergedEntry(id) {
+    return mergedPublications.find((m) => m.id === id) || null;
+  }
+
+  function syncMergedCatalogView() {
+    mergedPublications = mergeCatalogs(catalogTest, catalogLive);
+    catalog = {
+      version: 1,
+      updatedAt: catalogLive?.updatedAt || catalogTest?.updatedAt || new Date().toISOString(),
+      publications: mergedPublications.map((m) => m.display).filter(Boolean)
+    };
+  }
+
   async function ensureLibraryLoaded(force) {
     if (loaded && !force) return catalog;
     if (loading) return catalog;
     loading = true;
     try {
-      const res = await workerGet("api/admin/library");
-      catalog = res.catalog || { version: 1, publications: [] };
+      const [testRes, liveRes] = await Promise.all([
+        workerGet("api/admin/library", { target: "test" }).catch(() => null),
+        workerGet("api/admin/library", { target: "live" }).catch(() => null)
+      ]);
+      if (testRes?.catalog) catalogTest = testRes.catalog;
+      else if (!loaded || force) {
+        const staticCatalog = await loadStaticCatalog().catch(() => null);
+        catalogTest = staticCatalog || { version: 1, publications: [] };
+      }
+      if (liveRes?.catalog) catalogLive = liveRes.catalog;
+      else if (!catalogLive.publications?.length) {
+        try {
+          const liveStatic = await fetch("/data/library-publications.json", { cache: "no-store" });
+          if (liveStatic.ok) catalogLive = await liveStatic.json();
+        } catch (e) {
+          catalogLive = catalogLive || { version: 1, publications: [] };
+        }
+      }
+      syncMergedCatalogView();
       loaded = true;
       return catalog;
     } catch (e) {
@@ -230,14 +315,18 @@
       try {
         const staticCatalog = await loadStaticCatalog();
         if (staticCatalog) {
-          catalog = staticCatalog;
+          catalogTest = staticCatalog;
+          catalogLive = catalogLive?.publications?.length ? catalogLive : { version: 1, publications: [] };
+          syncMergedCatalogView();
           loaded = true;
           return catalog;
         }
       } catch (err) {
         console.warn("[Bibliothek Admin] Statischer Katalog nicht verfügbar:", err);
       }
-      catalog = { version: 1, publications: [] };
+      catalogTest = { version: 1, publications: [] };
+      catalogLive = { version: 1, publications: [] };
+      syncMergedCatalogView();
       loaded = true;
       return catalog;
     } finally {
@@ -249,7 +338,7 @@
     const today = new Date().toISOString().slice(0, 10).replace(/-/g, "");
     const prefix = `pub-${today}-`;
     let max = 0;
-    (catalog.publications || []).forEach((p) => {
+    allCatalogPublications().forEach((p) => {
       if (!String(p.id || "").startsWith(prefix)) return;
       const n = parseInt(String(p.id).slice(prefix.length), 10);
       if (n > max) max = n;
@@ -261,7 +350,7 @@
     let base = slugify(title) || "publikation";
     let slug = base;
     let n = 2;
-    const taken = new Set((catalog.publications || []).filter((p) => p.id !== excludeId).map((p) => p.slug));
+    const taken = new Set(allCatalogPublications().filter((p) => p.id !== excludeId).map((p) => p.slug));
     while (taken.has(slug)) {
       slug = `${base}-${n}`;
       n += 1;
@@ -412,10 +501,18 @@
     return `${major}.${minor}`;
   }
 
-  async function loadPublicationForEdit(id) {
+  async function loadPublicationForEdit(id, preferredTarget) {
     await ensureLibraryLoaded(true);
-    const pub = (catalog.publications || []).find((p) => p.id === id);
+    const merged = getMergedEntry(id);
+    if (!merged) throw new Error("Veröffentlichung nicht gefunden");
+    const pub = preferredTarget === "live" && merged.live
+      ? merged.live
+      : preferredTarget === "test" && merged.test
+        ? merged.test
+        : merged.display;
     if (!pub) throw new Error("Veröffentlichung nicht gefunden");
+    editSourceTarget = merged.live && (!merged.test || preferredTarget === "live") ? "live" : "test";
+    manageSelectedId = id;
     editingPublicationId = pub.id;
     draft = {
       ...pub,
@@ -638,6 +735,8 @@
 
   function resetUploadForm() {
     editingPublicationId = "";
+    manageSelectedId = "";
+    editSourceTarget = "test";
     draft = defaultDraft();
     pdfFile = null;
     pdfFileKey = "";
@@ -719,10 +818,16 @@
 
   function renderEditBanner() {
     if (!editingPublicationId || !draft) return "";
+    const merged = getMergedEntry(editingPublicationId);
+    const envNote = merged?.inTest && merged?.inLive
+      ? "In Test und Live vorhanden"
+      : merged?.inLive
+        ? "Nur in Besucher-App (Live)"
+        : "In Test-Bibliothek";
     return `<div class="lib-admin-edit-banner" id="libAdminEditPanel">
       <div>
         <b>Bearbeitung: ${esc(draft.title || "Veröffentlichung")}</b>
-        <p>Metadaten ändern oder neues PDF wählen. Anschließend erneut veröffentlichen.</p>
+        <p>${esc(envNote)} — Metadaten ändern oder neues PDF wählen, dann erneut veröffentlichen.</p>
       </div>
       <button class="lib-admin-btn" type="button" id="libAdminCancelEdit">Abbrechen</button>
     </div>`;
@@ -850,39 +955,197 @@
     return map[String(status || "").trim()] || String(status || "—");
   }
 
-  function renderListActions(pub) {
-    const status = String(pub.status || "");
-    const actions = [];
-    actions.push(`<button class="lib-admin-btn lib-admin-btn-primary" type="button" data-lib-edit="${esc(pub.id)}">Bearbeiten</button>`);
-    if (status === "published" || status === "updated" || status === "preparing") {
-      actions.push(`<button class="lib-admin-btn lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(pub.id)}">Offline nehmen</button>`);
-    }
-    if (status !== "archived") {
-      actions.push(`<button class="lib-admin-btn" type="button" data-lib-archive="${esc(pub.id)}">Archivieren</button>`);
-    }
-    actions.push(`<button class="lib-admin-btn lib-admin-btn-danger" type="button" data-lib-delete="${esc(pub.id)}">Löschen</button>`);
-    return actions.join("");
+  function targetLabel(target) {
+    return target === "live" ? "Besucher-App (Live)" : "Test-Bibliothek";
   }
 
-  function renderList() {
-    const items = (catalog.publications || []).slice().sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
-    if (!items.length) return `<p class="lib-admin-category">Noch keine Veröffentlichungen vorhanden.</p>`;
-    return items.map((p) => `<div class="lib-admin-list-item">
-      <div><b>${esc(p.title)}</b><br><span>${esc(p.category || "—")} · ${esc(statusLabelAdmin(p.status))} · v${esc(p.version || "")}</span></div>
-      <div class="lib-admin-list-actions">${renderListActions(p)}</div>
-    </div>`).join("");
+  function mergedTargetsForAction(merged, action) {
+    const targets = [];
+    if (!merged) return targets;
+    if (action === "unpublish") {
+      if (merged.inTest && isOnlineStatus(merged.testStatus)) targets.push("test");
+      if (merged.inLive && isOnlineStatus(merged.liveStatus)) targets.push("live");
+      return targets;
+    }
+    if (action === "archive") {
+      if (merged.inTest && merged.testStatus !== "archived") targets.push("test");
+      if (merged.inLive && merged.liveStatus !== "archived") targets.push("live");
+      return targets;
+    }
+    if (action === "delete") {
+      if (merged.inTest) targets.push("test");
+      if (merged.inLive) targets.push("live");
+    }
+    return targets;
   }
 
-  function renderListFold() {
-    const items = (catalog.publications || []).slice().sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
-    const count = items.length;
-    if (!count) {
-      return `<p class="lib-admin-category">Noch keine Veröffentlichungen im Katalog.</p>`;
+  function actionTargetLabel(targets) {
+    if (!targets.length) return "";
+    if (targets.length === 2) return "Test und Besucher-App (Live)";
+    return targetLabel(targets[0]);
+  }
+
+  async function runLibraryCatalogAction(id, action) {
+    const merged = getMergedEntry(id);
+    if (!merged) throw new Error("Veröffentlichung nicht gefunden");
+    const targets = mergedTargetsForAction(merged, action);
+    if (!targets.length) throw new Error("Keine Aktion für diesen Eintrag möglich");
+    for (const target of targets) {
+      const body = { id, target };
+      if (action === "delete") body.action = "delete";
+      else if (action === "unpublish") body.action = "unpublish";
+      else body.action = "archive";
+      await workerPost("api/admin/library/delete", body);
     }
-    return `<details class="lib-admin-list-fold" id="libAdminListFold" ${listFoldOpen ? "open" : ""}>
-      <summary>Bestehende Veröffentlichungen (${count}) — zum Verwalten aufklappen</summary>
-      <div class="lib-admin-list-scroll">${renderList()}</div>
-    </details>`;
+  }
+
+  function manageEntryMatchesFilter(entry) {
+    const display = entry.display || {};
+    const filter = manageFilter;
+    if (filter === "published") {
+      return isOnlineStatus(entry.testStatus) || isOnlineStatus(entry.liveStatus);
+    }
+    if (filter === "draft") {
+      return (entry.inTest && entry.testStatus === "draft") || (entry.inLive && entry.liveStatus === "draft");
+    }
+    if (filter === "archived") {
+      return entry.testStatus === "archived" || entry.liveStatus === "archived";
+    }
+    if (filter === "test") return entry.inTest;
+    if (filter === "live") return entry.inLive;
+    if (filter === "live-only") return entry.inLive && !entry.inTest;
+    return true;
+  }
+
+  function manageEntryMatchesSearch(entry) {
+    const q = String(manageSearch || "").trim().toLowerCase();
+    if (!q) return true;
+    const display = entry.display || {};
+    const blob = [
+      display.title,
+      display.category,
+      display.slug,
+      display.id,
+      display.transliteratedTitle,
+      ...(display.tags || [])
+    ].join(" ").toLowerCase();
+    return blob.includes(q);
+  }
+
+  function getFilteredManageList() {
+    return mergedPublications
+      .filter((entry) => manageEntryMatchesFilter(entry) && manageEntryMatchesSearch(entry))
+      .slice()
+      .sort((a, b) => String(b.display?.updatedAt || "").localeCompare(String(a.display?.updatedAt || "")));
+  }
+
+  function renderTargetBadges(entry) {
+    const parts = [];
+    if (entry.inTest) {
+      const cls = isOnlineStatus(entry.testStatus) ? "is-online" : entry.testStatus === "archived" ? "is-archived" : "is-draft";
+      parts.push(`<span class="lib-admin-target-pill ${cls}">Test: ${esc(statusLabelAdmin(entry.testStatus || "—"))}</span>`);
+    }
+    if (entry.inLive) {
+      const cls = isOnlineStatus(entry.liveStatus) ? "is-online" : entry.liveStatus === "archived" ? "is-archived" : "is-draft";
+      parts.push(`<span class="lib-admin-target-pill ${cls}">Live: ${esc(statusLabelAdmin(entry.liveStatus || "—"))}</span>`);
+    }
+    return parts.join("");
+  }
+
+  function renderManageRow(entry) {
+    const pub = entry.display || {};
+    const cover = pub.coverUrls?.small || pub.coverUrl || "";
+    const rowClass = [
+      "lib-admin-list-item",
+      isOnlineStatus(entry.testStatus) || isOnlineStatus(entry.liveStatus) ? "is-online" : "",
+      entry.testStatus === "archived" || entry.liveStatus === "archived" ? "is-archived" : "",
+      manageSelectedId === entry.id ? "is-selected" : ""
+    ].filter(Boolean).join(" ");
+    const canUnpublish = mergedTargetsForAction(entry, "unpublish").length > 0;
+    const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
+    const viewLinks = [];
+    if (entry.inTest && isOnlineStatus(entry.testStatus) && pub.slug) {
+      viewLinks.push(`<a class="lib-admin-btn" href="/test/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Test ansehen</a>`);
+    }
+    if (entry.inLive && isOnlineStatus(entry.liveStatus) && pub.slug) {
+      viewLinks.push(`<a class="lib-admin-btn lib-admin-btn-live" href="/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Live ansehen</a>`);
+    }
+    return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
+      <div class="lib-admin-list-cover">${cover ? `<img src="${esc(cover)}" alt="">` : `<span aria-hidden="true">📄</span>`}</div>
+      <div class="lib-admin-list-main">
+        <div class="lib-admin-list-title-row">
+          <b>${esc(pub.title || "Ohne Titel")}</b>
+          <span class="lib-admin-status-pill">v${esc(pub.version || "1.0")}</span>
+        </div>
+        <p class="lib-admin-list-meta">${esc(pub.category || "—")} · ${esc(pub.pageCount || 0)} Seiten · ${esc(pub.updatedAt || "—")}</p>
+        <div class="lib-admin-target-badges">${renderTargetBadges(entry)}</div>
+      </div>
+      <div class="lib-admin-list-actions">
+        <button class="lib-admin-btn lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
+        <button class="lib-admin-btn" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
+        ${viewLinks.join("")}
+        ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
+        ${canArchive ? `<button class="lib-admin-btn" type="button" data-lib-archive="${esc(entry.id)}">Archivieren</button>` : ""}
+        <button class="lib-admin-btn lib-admin-btn-danger" type="button" data-lib-delete="${esc(entry.id)}">Löschen</button>
+      </div>
+    </article>`;
+  }
+
+  function renderManageFilters() {
+    const filters = [
+      { id: "all", label: "Alle", count: mergedPublications.length },
+      { id: "published", label: "Online", count: mergedPublications.filter((e) => isOnlineStatus(e.testStatus) || isOnlineStatus(e.liveStatus)).length },
+      { id: "draft", label: "Entwurf", count: mergedPublications.filter((e) => e.testStatus === "draft" || e.liveStatus === "draft").length },
+      { id: "archived", label: "Archiv", count: mergedPublications.filter((e) => e.testStatus === "archived" || e.liveStatus === "archived").length },
+      { id: "test", label: "Test", count: mergedPublications.filter((e) => e.inTest).length },
+      { id: "live", label: "Live", count: mergedPublications.filter((e) => e.inLive).length },
+      { id: "live-only", label: "Nur Live", count: mergedPublications.filter((e) => e.inLive && !e.inTest).length }
+    ];
+    return filters.map((f) => `<button type="button" class="lib-admin-filter-tab ${manageFilter === f.id ? "is-active" : ""}" data-lib-filter="${f.id}">${esc(f.label)} <span>(${f.count})</span></button>`).join("");
+  }
+
+  function renderManageSection() {
+    const items = getFilteredManageList();
+    const total = mergedPublications.length;
+    const testCount = mergedPublications.filter((m) => m.inTest).length;
+    const liveCount = mergedPublications.filter((m) => m.inLive).length;
+    if (!total && !loading) {
+      return `<section class="lib-admin-manage" id="libAdminManage">
+        <header class="lib-admin-manage-head">
+          <div>
+            <h2>Bibliothek verwalten</h2>
+            <p>Noch keine PDFs im Katalog. Lade oben eine Datei hoch.</p>
+          </div>
+        </header>
+      </section>`;
+    }
+    return `<section class="lib-admin-manage" id="libAdminManage">
+      <header class="lib-admin-manage-head">
+        <div>
+          <h2>Bibliothek verwalten</h2>
+          <p><b>${total}</b> PDFs gesamt · Test <b>${testCount}</b> · Live <b>${liveCount}</b> — alle Kataloge zusammengeführt</p>
+        </div>
+        <div class="lib-admin-manage-actions">
+          <button class="lib-admin-btn" type="button" id="libAdminManageRefresh">Aktualisieren</button>
+        </div>
+      </header>
+      <div class="lib-admin-modal-toolbar">
+        <label class="lib-admin-modal-search">
+          <span>Suche</span>
+          <input id="libAdminManageSearch" type="search" value="${esc(manageSearch)}" placeholder="Titel, Kategorie, Slug …" autocomplete="off">
+        </label>
+        <div class="lib-admin-filter-tabs" id="libAdminManageFilters">${renderManageFilters()}</div>
+      </div>
+      <p class="lib-admin-manage-hint">${items.length} von ${total} angezeigt — Bearbeiten, PDF ersetzen, offline nehmen, archivieren oder löschen.</p>
+      <div class="lib-admin-manage-list" id="libAdminManageList">
+        ${items.length ? items.map((entry) => renderManageRow(entry)).join("") : `<p class="lib-admin-manage-empty">Keine Treffer für Suche oder Filter.</p>`}
+      </div>
+    </section>`;
+  }
+
+  function scrollToUploadSection() {
+    const el = document.getElementById("libAdminUploadSection");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function renderLibraryTab() {
@@ -891,7 +1154,7 @@
     }
     return `<section class="lib-admin" id="libAdminMount">
       ${successSlug ? renderSuccess() : renderUploadForm()}
-      <section class="lib-admin-list">${renderListFold()}</section>
+      ${renderManageSection()}
     </section>`;
   }
 
@@ -1011,22 +1274,45 @@
     });
 
     document.getElementById("libAdminCancelEdit")?.addEventListener("click", () => {
+      manageSelectedId = "";
       resetUploadForm();
       safeRender();
     });
 
-    const listFold = document.getElementById("libAdminListFold");
-    if (listFold) {
-      listFold.addEventListener("toggle", () => {
-        listFoldOpen = listFold.open;
+    document.getElementById("libAdminManageRefresh")?.addEventListener("click", async () => {
+      try {
+        await ensureLibraryLoaded(true);
+        toast("Katalog aktualisiert");
+        safeRender();
+      } catch (e) {
+        toast(e.message || "Aktualisieren fehlgeschlagen");
+      }
+    });
+
+    document.getElementById("libAdminManageSearch")?.addEventListener("input", (ev) => {
+      manageSearch = ev.target.value || "";
+      safeRender({ force: true });
+      const input = document.getElementById("libAdminManageSearch");
+      if (input) {
+        input.focus();
+        const len = input.value.length;
+        input.setSelectionRange(len, len);
+      }
+    });
+
+    document.querySelectorAll("[data-lib-filter]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        manageFilter = btn.getAttribute("data-lib-filter") || "all";
+        safeRender();
       });
-    }
+    });
 
     document.querySelectorAll("[data-lib-edit]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-edit");
         try {
           await loadPublicationForEdit(id);
+          scrollToUploadSection();
           safeRender();
         } catch (e) {
           toast(e.message || "Bearbeitung konnte nicht gestartet werden");
@@ -1034,13 +1320,31 @@
       });
     });
 
+    document.querySelectorAll("[data-lib-replace]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-lib-replace");
+        try {
+          await loadPublicationForEdit(id);
+          scrollToUploadSection();
+          safeRender();
+          document.getElementById("libAdminPdfInput")?.click();
+        } catch (e) {
+          toast(e.message || "PDF-Ersetzen konnte nicht gestartet werden");
+        }
+      });
+    });
+
     document.querySelectorAll("[data-lib-archive]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-archive");
-        if (!confirm("Veröffentlichung archivieren? Sie wird für Besucher ausgeblendet, bleibt aber im Admin erhalten.")) return;
+        const merged = getMergedEntry(id);
+        const targets = mergedTargetsForAction(merged, "archive");
+        if (!targets.length) return;
+        if (!confirm(`Veröffentlichung archivieren (${actionTargetLabel(targets)})?\n\nSie wird für Besucher ausgeblendet, bleibt aber im Admin erhalten.`)) return;
         try {
-          await workerPost("api/admin/library/delete", { id, action: "archive" });
+          await runLibraryCatalogAction(id, "archive");
           if (editingPublicationId === id) resetUploadForm();
+          manageSelectedId = "";
           toast("Archiviert");
           await ensureLibraryLoaded(true);
           safeRender();
@@ -1053,10 +1357,14 @@
     document.querySelectorAll("[data-lib-unpublish]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-unpublish");
-        if (!confirm("Veröffentlichung offline nehmen? Sie verschwindet von der Bibliotheksseite und kann bearbeitet sowie erneut veröffentlicht werden.")) return;
+        const merged = getMergedEntry(id);
+        const targets = mergedTargetsForAction(merged, "unpublish");
+        if (!targets.length) return;
+        if (!confirm(`Veröffentlichung offline nehmen (${actionTargetLabel(targets)})?\n\nSie verschwindet von der Bibliotheksseite und kann bearbeitet sowie erneut veröffentlicht werden.`)) return;
         try {
-          await workerPost("api/admin/library/delete", { id, action: "unpublish" });
+          await runLibraryCatalogAction(id, "unpublish");
           if (editingPublicationId === id) resetUploadForm();
+          manageSelectedId = "";
           toast("Offline genommen — Entwurf");
           await ensureLibraryLoaded(true);
           safeRender();
@@ -1069,10 +1377,14 @@
     document.querySelectorAll("[data-lib-delete]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.getAttribute("data-lib-delete");
-        if (!confirm("Veröffentlichung endgültig löschen? PDF, Cover und Eintrag werden entfernt.")) return;
+        const merged = getMergedEntry(id);
+        const targets = mergedTargetsForAction(merged, "delete");
+        if (!targets.length) return;
+        if (!confirm(`Veröffentlichung endgültig löschen (${actionTargetLabel(targets)})?\n\nPDF, Cover und Eintrag werden aus dem Katalog entfernt.`)) return;
         try {
-          await workerPost("api/admin/library/delete", { id, action: "delete" });
+          await runLibraryCatalogAction(id, "delete");
           if (editingPublicationId === id) resetUploadForm();
+          manageSelectedId = "";
           toast("Gelöscht");
           await ensureLibraryLoaded(true);
           safeRender();
