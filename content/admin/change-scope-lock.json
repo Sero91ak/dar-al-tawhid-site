@@ -1083,6 +1083,24 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-27T06:00:00.000Z"
+    },
+    {
+      "id": "library-reader-stats-fix-v447-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF-Lesen + Besucherstatistik (0-Fehler) sofort reparieren, live Besucher+Test",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/library-site-events-migration.sql",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T06:00:00.000Z"
     }
   ]
 }

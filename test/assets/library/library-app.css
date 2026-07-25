@@ -795,7 +795,6 @@ body.is-library-reader-route .view {
 
 .lib-reader-stage {
   flex: 1 1 auto;
-  min-height: 0;
   min-height: min(50dvh, 100%);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
