@@ -14184,6 +14184,83 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
 .home-discover-posts{margin-top:2px}
 .home-discover-pdf-list:not(:empty) + .home-discover-posts{margin-top:14px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--theme-accent) 16%,var(--theme-border) 84%)}
 </style>
+<style id="home-source-smart-v439">
+/* v439 · Quellenbereich: hellere Gold-Kante, kompakter, minimaler, +2% Kacheln */
+.home-v380-popular-wrap + .home-v380-libraries--noble,
+.home-v380-discover + .home-v380-libraries--noble,
+.home-v380-libraries--noble{
+  margin-top:clamp(14px,3.2vw,18px)!important;
+}
+.home-v380-libraries--noble + .home-v380-search-wrap--noble{
+  margin-top:clamp(10px,2.4vw,14px)!important;
+}
+.home-v380-libraries--noble{
+  padding:9px 10px 10px!important;
+  margin-bottom:4px!important;
+  border-radius:15px!important;
+  border:1px solid rgba(239,215,142,.24)!important;
+  background:linear-gradient(180deg,rgba(239,215,142,.045),rgba(255,255,255,.018))!important;
+  box-shadow:0 0 0 .5px rgba(239,215,142,.08),0 8px 22px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,236,190,.12)!important;
+}
+.home-v380-libraries--noble .home-v380-section-head{margin-bottom:5px!important}
+.home-v380-libraries--noble .home-v380-section-rule{
+  height:.5px!important;margin-bottom:6px!important;
+  background:linear-gradient(90deg,transparent,rgba(239,215,142,.42),transparent)!important;
+}
+.home-v380-libraries--noble .home-v380-lib-grid--noble{gap:7px!important}
+.home-v380-libraries--noble .home-v380-lib-grid--fixed > .home-v380-lib-card--noble{min-height:65px!important}
+.home-v380-lib-card--noble{
+  min-height:65px!important;padding:9px 10px!important;gap:9px!important;
+  border-radius:12px!important;
+  border:1px solid rgba(239,215,142,.22)!important;
+  background:linear-gradient(158deg,rgba(239,215,142,.06),rgba(255,255,255,.02) 42%,rgba(12,12,12,.35))!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.1),0 2px 10px rgba(0,0,0,.12)!important;
+  transition:border-color .2s ease,box-shadow .2s ease,transform .15s ease!important;
+}
+.home-v380-lib-card--noble:hover,.home-v380-lib-card--noble:focus-visible{
+  border-color:rgba(239,215,142,.38)!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.16),0 0 16px rgba(239,215,142,.12),0 4px 14px rgba(0,0,0,.16)!important;
+  transform:translateY(-.5px)!important;
+}
+.home-v380-lib-card--noble .home-v380-lib-card__ico{
+  width:33px!important;height:33px!important;flex:0 0 33px!important;
+  border-radius:9px!important;font-size:16.5px!important;
+  background:rgba(239,215,142,.1)!important;
+  border:1px solid rgba(239,215,142,.2)!important;
+}
+.home-v380-lib-card--noble h3{
+  font-size:clamp(12.75px,3.06vw,14.28px)!important;line-height:1.14!important;
+}
+.home-v380-lib-card--noble p{
+  font-size:clamp(10px,2.29vw,11px)!important;line-height:1.22!important;
+  color:color-mix(in srgb,var(--muted) 84%,#efd78e 16%)!important;
+}
+.home-v380-search-wrap--noble{margin-bottom:8px!important}
+.home-v380-search-wrap--noble .home-v380-section-title{margin-bottom:6px!important}
+.home-v380-search-wrap--noble .home-v380-search-box{
+  border:1px solid rgba(239,215,142,.2)!important;
+  border-radius:13px!important;
+  background:linear-gradient(180deg,rgba(239,215,142,.035),rgba(255,255,255,.015))!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.1),0 5px 16px rgba(0,0,0,.12)!important;
+}
+.home-v380-search-wrap--noble .home-v380-search-box:has(#homeSearchInput:focus){
+  border-color:rgba(239,215,142,.36)!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.14),0 0 0 1px rgba(239,215,142,.12),0 0 18px rgba(239,215,142,.1)!important;
+}
+.home-v380-search-wrap--noble .direct-pick-panel.home-direct-pick .direct-pick{
+  border-color:rgba(239,215,142,.18)!important;
+  background:rgba(239,215,142,.04)!important;
+}
+.home-v380-search-wrap--noble .direct-pick-panel.home-direct-pick .direct-pick:focus-within,
+.home-v380-search-wrap--noble .direct-pick-panel.home-direct-pick .direct-pick:hover{
+  border-color:rgba(239,215,142,.3)!important;
+  box-shadow:0 0 12px rgba(239,215,142,.08)!important;
+}
+.home-v380-search-wrap--noble .home-v380-search-divider{
+  background:linear-gradient(90deg,transparent,rgba(239,215,142,.16),transparent)!important;
+  opacity:1!important;
+}
+</style>
 <style id="visitor-hadith-test-only-v419">
 /* v419 · Hadith-Bibliothek nur in der Test-App */
 html[data-app-path="visitor"] .home-v380-lib-card[data-nav="hadith"],
@@ -19394,7 +19471,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v438";
+const APP_BUILD_ID="app-shell-v439";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
