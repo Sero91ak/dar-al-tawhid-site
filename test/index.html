@@ -14268,6 +14268,68 @@ html body .article>.share-panel-v11 .share-layout-v13>.share-row-v11.share-row-s
   opacity:1!important;
 }
 </style>
+<style id="home-popular-pdf-v441">
+/* v441 · PDF +4% · Meist gelesen wieder 5 Einträge, edle Kante */
+.home-discover-pdf-card{
+  flex:0 0 min(60%,218px)!important;width:min(60%,218px)!important;max-width:218px!important;
+  gap:7px!important;padding:6px 7px!important;border-radius:10px!important;
+  border:1px solid rgba(239,215,142,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.1),0 2px 8px rgba(0,0,0,.13)!important;
+}
+.home-discover-pdf-cover{
+  flex:0 0 35px!important;width:35px!important;height:48px!important;
+  border-radius:6px!important;border:1px solid rgba(239,215,142,.22)!important;
+}
+.home-discover-pdf-cover__img{min-height:48px!important}
+.home-discover-pdf-cover__fallback{height:48px!important;font-size:14px!important}
+.home-discover-pdf-title{font-size:clamp(10.5px,2.6vw,11.5px)!important}
+.home-discover-pdf-meta{font-size:clamp(7.8px,2vw,8.8px)!important}
+.home-discover-pdf-card .home-v380-kicker{font-size:6.8px!important}
+.home-discover-pdf-list:not(:empty) + .home-discover-posts{
+  border-top:1px solid rgba(239,215,142,.14)!important;
+}
+@media(min-width:760px){.home-discover-pdf-card{flex-basis:min(36%,228px)!important;width:min(36%,228px)!important}}
+.home-v380-popular-wrap--noble{
+  padding:10px 10px 8px!important;margin-bottom:6px!important;
+  border-radius:15px!important;
+  border:1px solid rgba(239,215,142,.24)!important;
+  background:linear-gradient(180deg,rgba(239,215,142,.045),rgba(255,255,255,.016))!important;
+  box-shadow:0 0 0 .5px rgba(239,215,142,.08),0 8px 20px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,236,190,.11)!important;
+}
+.home-v380-popular-wrap--noble .home-v380-section-head{margin-bottom:5px!important}
+.home-v380-popular-wrap--noble .home-v380-section-rule{
+  height:.5px!important;margin-bottom:8px!important;opacity:1!important;
+  background:linear-gradient(90deg,transparent,rgba(239,215,142,.42),transparent)!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-list{display:flex!important;flex-direction:column!important;gap:6px!important}
+.home-v380-popular-wrap--noble .home-v380-popular-row{
+  display:grid!important;grid-template-columns:auto 1fr!important;align-items:center!important;
+  gap:10px!important;padding:8px 10px!important;margin:0!important;
+  border-radius:11px!important;
+  border:1px solid rgba(239,215,142,.2)!important;
+  background:linear-gradient(158deg,rgba(239,215,142,.055),rgba(12,12,12,.34))!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.09)!important;
+  border-bottom:1px solid rgba(239,215,142,.2)!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-row:last-child{border-bottom:1px solid rgba(239,215,142,.2)!important}
+.home-v380-popular-wrap--noble .home-v380-popular-row:hover,
+.home-v380-popular-wrap--noble .home-v380-popular-row:focus-visible{
+  border-color:rgba(239,215,142,.34)!important;
+  box-shadow:inset 0 1px 0 rgba(255,236,190,.13),0 0 12px rgba(239,215,142,.09)!important;
+  outline:none!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-rank{
+  font-size:clamp(13px,3vw,15px)!important;min-width:28px!important;
+  color:rgba(239,215,142,.92)!important;font-weight:900!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-text h4{
+  font-size:clamp(13.5px,3.1vw,16px)!important;line-height:1.16!important;
+}
+.home-v380-popular-wrap--noble .home-v380-popular-text span{
+  font-size:clamp(9.5px,2.2vw,10.5px)!important;
+  color:color-mix(in srgb,var(--theme-muted) 80%,#efd78e 20%)!important;
+}
+</style>
 <style id="home-header-update-v423">
 /* v423 · Aktualisieren absolut zentriert — umgeht Flex/Grid-Konflikte mit Hijri */
 .view-head-home-row.view-head-home-row--v380.view-head-home-row--v423,
@@ -17997,9 +18059,9 @@ window.addEventListener("appinstalled",()=>trackPwaInstall(installPlatform(),"ap
 function needsPrayerPushHint(){const s=getPrayerSettings();if(s.reminder)return false;try{if(localStorage.getItem(PRAYER_HINT_KEY))return false}catch(e){}return true}
 function renderPrayerPushHint(){if(!needsPrayerPushHint())return "";const step=!hasPrayerLocation(getPrayerSettings())?"1. Standort freigeben · 2. Erinnerung aktivieren":"1. Gebetszeiten öffnen · 2. Erinnerung aktivieren";return `<section id="prayerPushHint" class="hint-banner prayer-hint"><div><strong>🔔 Gebets-Push auf dem Sperrbildschirm</strong><p>${step}. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung.</p></div><div class="hint-banner-actions"><button id="prayerHintGoBtn" class="hint-btn" type="button">Jetzt aktivieren</button><button id="prayerHintDismissBtn" class="hint-btn ghost" type="button">Später</button></div></section>`}
 function renderPopularPostsBlock(){return `<section id="popularPostsBlock" class="popular-panel premium-surface"><div class="section-head"><h3>Meist gelesen</h3><span id="popularPostsLabel">Beliebt bei Besuchern</span></div><div id="popularPostsContent" class="popular-list collapsed"><div class="loading" style="padding:12px;margin:0">Wird geladen …</div></div><button id="popularPostsToggle" class="popular-toggle" type="button" hidden>Mehr anzeigen</button></section>`}
-function fillPopularPosts(el,items){const isHomeV380=el?.classList?.contains("home-v380-popular-list");const maxItems=isHomeV380?3:5;const used=new Set();if(isHomeV380){const rec=recommendedPost();if(rec)used.add(String(rec.id));homeDiscoverPosts(new Set(used)).slice(0,6).forEach(p=>used.add(String(p.id)))}const rows=items.filter(it=>{if(!isHomeV380)return true;const id=String(it.id);if(used.has(id))return false;used.add(id);return true}).slice(0,maxItems).map((it,idx)=>{const post=posts.find(p=>String(p.id)===String(it.id));if(!post)return "";const rank=String(it.rank||idx+1).padStart(2,"0");const meta=post.category?esc(normalizePostCategory(post.category)):"Beitrag";if(isHomeV380)return `<button type="button" class="home-v380-popular-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Meist gelesen Platz ${rank}: ${esc(post.title)}"><span class="home-v380-popular-rank">${rank}</span><div class="home-v380-popular-text"><h4>${esc(post.title)}</h4><span>${meta}</span></div></button>`;const metaLegacy=it.views>0?`${it.views} Aufrufe · ${esc(post.category||"Beitrag")}`:`${esc(post.category||"Beitrag")}`;return `<article class="popular-row" data-nav="post" data-value="${esc(post.id)}"><span class="popular-rank">${it.rank}</span><div class="popular-row-text"><h4>${esc(post.title)}</h4><span>${metaLegacy}</span></div></article>`}).filter(Boolean).join("");el.innerHTML=rows||`<div class="empty">${isHomeV380?"":"Noch keine Statistik – lies Beiträge, dann erscheinen hier die Favoriten."}</div>`;if(isHomeV380){const wrap=el.closest(".home-v380-popular-wrap");if(wrap&&!rows)wrap.style.display="none"}const toggle=$("popularPostsToggle");if(toggle){toggle.hidden=el.querySelectorAll(".popular-row").length<=2;toggle.textContent=el.classList.contains("collapsed")?"Mehr anzeigen":"Zuklappen"}bindEvents()}
+function fillPopularPosts(el,items){const isHomeV380=el?.classList?.contains("home-v380-popular-list");const maxItems=isHomeV380?5:5;const used=new Set();if(isHomeV380){const rec=recommendedPost();if(rec)used.add(String(rec.id))}const rows=items.filter(it=>{if(!isHomeV380)return true;const id=String(it.id);if(used.has(id))return false;used.add(id);return true}).slice(0,maxItems).map((it,idx)=>{const post=posts.find(p=>String(p.id)===String(it.id));if(!post)return "";const rank=String(it.rank||idx+1).padStart(2,"0");const meta=post.category?esc(normalizePostCategory(post.category)):"Beitrag";if(isHomeV380)return `<button type="button" class="home-v380-popular-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Meist gelesen Platz ${rank}: ${esc(post.title)}"><span class="home-v380-popular-rank">${rank}</span><div class="home-v380-popular-text"><h4>${esc(post.title)}</h4><span>${meta}</span></div></button>`;const metaLegacy=it.views>0?`${it.views} Aufrufe · ${esc(post.category||"Beitrag")}`:`${esc(post.category||"Beitrag")}`;return `<article class="popular-row" data-nav="post" data-value="${esc(post.id)}"><span class="popular-rank">${it.rank}</span><div class="popular-row-text"><h4>${esc(post.title)}</h4><span>${metaLegacy}</span></div></article>`}).filter(Boolean).join("");el.innerHTML=rows||`<div class="empty">${isHomeV380?"":"Noch keine Statistik – lies Beiträge, dann erscheinen hier die Favoriten."}</div>`;if(isHomeV380){const wrap=el.closest(".home-v380-popular-wrap");if(wrap){wrap.style.display=rows?"":"none"}}const toggle=$("popularPostsToggle");if(toggle){toggle.hidden=el.querySelectorAll(".popular-row").length<=2;toggle.textContent=el.classList.contains("collapsed")?"Mehr anzeigen":"Zuklappen"}bindEvents()}
 function fillPopularPostsFallback(el){const items=posts.slice(0,Math.min(5,posts.length)).map((p,i)=>({id:p.id,views:0,rank:i+1}));fillPopularPosts(el,items);const label=$("popularPostsLabel");if(label)label.textContent="Empfohlene Beiträge"}
-async function loadPopularPostsBlock(){const content=$("popularPostsContent");if(!content||currentRoute.view!=="home")return;const maxFetch=content.classList.contains("home-v380-popular-list")?8:5;try{const raw=sessionStorage.getItem(POPULAR_CACHE_KEY);if(raw){const cached=JSON.parse(raw);if(cached&&Array.isArray(cached.items)&&Date.now()-Number(cached.ts||0)<300000){fillPopularPosts(content,cached.items);return}}}catch(e){}if(!hasSupabaseCfg()){fillPopularPostsFallback(content);return}try{const totals=(await fetchAnalyticsDashboard()).totals||[];const top=totals.filter(x=>x.content_type==="post"&&Number(x.views)>0).slice(0,maxFetch);const items=top.map((t,i)=>{const post=posts.find(p=>String(p.id)===String(t.content_id));return post?{id:post.id,views:Number(t.views||0),rank:i+1}:null}).filter(Boolean);if(items.length){try{sessionStorage.setItem(POPULAR_CACHE_KEY,JSON.stringify({ts:Date.now(),items}))}catch(e){}fillPopularPosts(content,items)}else fillPopularPostsFallback(content)}catch(e){fillPopularPostsFallback(content)}}
+async function loadPopularPostsBlock(){const content=$("popularPostsContent");if(!content||currentRoute.view!=="home")return;const maxFetch=content.classList.contains("home-v380-popular-list")?12:5;try{const raw=sessionStorage.getItem(POPULAR_CACHE_KEY);if(raw){const cached=JSON.parse(raw);if(cached&&Array.isArray(cached.items)&&Date.now()-Number(cached.ts||0)<300000){fillPopularPosts(content,cached.items);return}}}catch(e){}if(!hasSupabaseCfg()){fillPopularPostsFallback(content);return}try{const totals=(await fetchAnalyticsDashboard()).totals||[];const top=totals.filter(x=>x.content_type==="post"&&Number(x.views)>0).slice(0,maxFetch);const items=top.map((t,i)=>{const post=posts.find(p=>String(p.id)===String(t.content_id));return post?{id:post.id,views:Number(t.views||0),rank:i+1}:null}).filter(Boolean);if(items.length){try{sessionStorage.setItem(POPULAR_CACHE_KEY,JSON.stringify({ts:Date.now(),items}))}catch(e){}fillPopularPosts(content,items)}else fillPopularPostsFallback(content)}catch(e){fillPopularPostsFallback(content)}}
 function currentUpdateIcon(item){const key=String([item.type,item.title,item.badge,item.nav,item.value].filter(Boolean).join(" ")).toLowerCase();if(/zakat|zakāt/.test(key))return"🕌";if(/library|bibliothek|pdf/.test(key))return"📚";if(/dua|duʿā|bitt/.test(key))return"🤲";if(/serie|hukm|muhakamah|muḥākamah/.test(key))return"⚖️";if(/qur|tafsir/.test(key))return"📖";if(/post|beitrag/.test(key))return"📚";return"✨"}
 function currentUpdateMeta(item){const parts=[];if(item.badge)parts.push(item.badge);else{const ttl=Number(item.ttlHours)||24;parts.push(ttl>=48?`${Math.round(ttl/24)} Tage`:`${ttl} Std.`)}if(item.count)parts.push(`${item.count} neu`);return parts.join(" · ")}
 function renderCurrentFocus(){const items=activeCurrentUpdates().slice(0,4);if(!items.length)return"";return `<section class="current-focus premium-surface"><div class="current-focus-head"><div><span>Aktuell</span><h3>Neu im Fokus</h3></div><button class="current-focus-all" type="button" data-nav="news">Alles Neue</button></div><div class="current-focus-list">${items.map((item,idx)=>{const newsId=item.id||String(idx);const directNav=item.nav&&item.nav!=="news-detail";const navView=directNav?item.nav:"news-detail";const navValue=directNav?(item.value||""):newsId;const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":item.type==="library"||item.nav==="bibliothek"?"current-focus-row current-focus-row--library":"current-focus-row";return `<article class="${rowClass}" data-nav="${esc(navView)}" data-value="${esc(navValue)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DAR AL TAWḤID.")}</p><small>${esc(currentUpdateMeta(item))}</small></div></article>`}).join("")}</div></section>`}
@@ -19100,7 +19162,7 @@ function renderHomePopularSection(){
   const rec=recommendedPost();
   if(rec)exclude.add(String(rec.id));
   homeDiscoverPosts(new Set(exclude)).slice(0,6).forEach(p=>exclude.add(String(p.id)));
-  return `<section class="home-v380-section home-v380-popular-wrap" aria-labelledby="homePopularTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homePopularTitle">Meist gelesen</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Beliebt bei Besuchern</p></div></div><div class="home-v380-section-rule" aria-hidden="true"></div><div id="popularPostsContent" class="home-v380-popular-list"><div class="loading" style="padding:12px 0;margin:0">Wird geladen …</div></div></section>`;
+  return `<section class="home-v380-section home-v380-popular-wrap home-v380-popular-wrap--noble" aria-labelledby="homePopularTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homePopularTitle">Meist gelesen</h2><p class="home-v380-open-row__meta" style="margin-top:4px">Beliebt bei Besuchern</p></div></div><div class="home-v380-section-rule" aria-hidden="true"></div><div id="popularPostsContent" class="home-v380-popular-list"><div class="loading" style="padding:12px 0;margin:0">Wird geladen …</div></div></section>`;
 }
 const HOME_LIBRARY_DISCOVER_CACHE_KEY="darHomeLibraryDiscoverV1";
 const HOME_LIBRARY_DISCOVER_MAX=6;
@@ -19471,7 +19533,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v440";
+const APP_BUILD_ID="app-shell-v441";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
