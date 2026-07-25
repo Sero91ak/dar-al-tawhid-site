@@ -53,6 +53,9 @@
   let manageFilter = "all";
   let manageSelectedId = "";
   let editSourceTarget = "test";
+  let adminLibraryStatsMap = {};
+  let adminLibraryStatsLoading = false;
+  let adminLibraryStatsPollTimer = null;
   let pdfFileKey = "";
   let pdfReplaceVersion = "";
 
@@ -283,6 +286,75 @@
     };
   }
 
+  function formatAdminStatCount(value) {
+    const n = Number(value) || 0;
+    try {
+      return new Intl.NumberFormat("de-DE").format(n);
+    } catch (e) {
+      return String(n);
+    }
+  }
+
+  async function fetchAdminLibraryStatsMap(force) {
+    if (!force && Object.keys(adminLibraryStatsMap).length) return adminLibraryStatsMap;
+    if (adminLibraryStatsLoading) return adminLibraryStatsMap;
+    const cfg = global.DAR_ANALYTICS_CONFIG || {};
+    const baseUrl = String(cfg.supabaseUrl || "").replace(/\/$/, "");
+    const key = String(cfg.supabaseKey || "");
+    if (!baseUrl || !key) return adminLibraryStatsMap;
+    adminLibraryStatsLoading = true;
+    try {
+      const res = await fetch(
+        `${baseUrl}/rest/v1/stats_totals?content_type=eq.library&select=content_id,content_title,views,shares,saves&order=views.desc&limit=500&_ts=${Date.now()}`,
+        { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: "no-store" }
+      );
+      if (!res.ok) throw new Error("stats " + res.status);
+      const rows = await res.json();
+      const map = {};
+      (Array.isArray(rows) ? rows : []).forEach((row) => {
+        const id = String(row?.content_id || "").trim();
+        if (!id) return;
+        map[id] = {
+          clicks: Number(row.views) || 0,
+          reads: Number(row.shares) || 0,
+          downloads: Number(row.saves) || 0,
+          title: String(row.content_title || "")
+        };
+      });
+      adminLibraryStatsMap = map;
+      return map;
+    } catch (e) {
+      console.warn("[Bibliothek Admin] Live-Statistik nicht verfügbar:", e);
+      return adminLibraryStatsMap;
+    } finally {
+      adminLibraryStatsLoading = false;
+    }
+  }
+
+  function renderAdminStatsLine(publicationId) {
+    const stats = adminLibraryStatsMap[String(publicationId || "")] || { clicks: 0, reads: 0, downloads: 0 };
+    return `<div class="lib-admin-live-stats" data-lib-admin-stats="${esc(publicationId)}">
+      <span class="lib-admin-live-stats-label">Live</span>
+      <span><b>Klicks</b> ${formatAdminStatCount(stats.clicks)}</span>
+      <span><b>Gelesen</b> ${formatAdminStatCount(stats.reads)}</span>
+      <span><b>Downloads</b> ${formatAdminStatCount(stats.downloads)}</span>
+    </div>`;
+  }
+
+  function startAdminLibraryStatsPolling() {
+    if (adminLibraryStatsPollTimer) return;
+    adminLibraryStatsPollTimer = setInterval(() => {
+      fetchAdminLibraryStatsMap(true).then(() => safeRender({ force: true })).catch(() => {});
+    }, 15000);
+  }
+
+  function stopAdminLibraryStatsPolling() {
+    if (adminLibraryStatsPollTimer) {
+      clearInterval(adminLibraryStatsPollTimer);
+      adminLibraryStatsPollTimer = null;
+    }
+  }
+
   async function ensureLibraryLoaded(force) {
     if (loaded && !force) return catalog;
     if (loading) return catalog;
@@ -308,6 +380,8 @@
       }
       syncMergedCatalogView();
       loaded = true;
+      fetchAdminLibraryStatsMap(force).catch(() => {});
+      startAdminLibraryStatsPolling();
       return catalog;
     } catch (e) {
       console.warn("[Bibliothek Admin] Worker-Laden fehlgeschlagen:", e);
@@ -319,6 +393,8 @@
           catalogLive = catalogLive?.publications?.length ? catalogLive : { version: 1, publications: [] };
           syncMergedCatalogView();
           loaded = true;
+          fetchAdminLibraryStatsMap(force).catch(() => {});
+          startAdminLibraryStatsPolling();
           return catalog;
         }
       } catch (err) {
@@ -328,6 +404,8 @@
       catalogLive = { version: 1, publications: [] };
       syncMergedCatalogView();
       loaded = true;
+      fetchAdminLibraryStatsMap(force).catch(() => {});
+      startAdminLibraryStatsPolling();
       return catalog;
     } finally {
       loading = false;
@@ -1079,6 +1157,7 @@
         </div>
         <p class="lib-admin-list-meta">${esc(pub.category || "—")} · ${esc(pub.pageCount || 0)} Seiten · ${esc(pub.updatedAt || "—")}</p>
         <div class="lib-admin-target-badges">${renderTargetBadges(entry)}</div>
+        ${renderAdminStatsLine(entry.id)}
       </div>
       <div class="lib-admin-list-actions">
         <button class="lib-admin-btn lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
@@ -1136,7 +1215,7 @@
         </label>
         <div class="lib-admin-filter-tabs" id="libAdminManageFilters">${renderManageFilters()}</div>
       </div>
-      <p class="lib-admin-manage-hint">${items.length} von ${total} angezeigt — Bearbeiten, PDF ersetzen, offline nehmen, archivieren oder löschen.</p>
+      <p class="lib-admin-manage-hint">${items.length} von ${total} angezeigt — Live-Statistik alle 15 Sekunden · Bearbeiten, PDF ersetzen, offline nehmen, archivieren oder löschen.</p>
       <div class="lib-admin-manage-list" id="libAdminManageList">
         ${items.length ? items.map((entry) => renderManageRow(entry)).join("") : `<p class="lib-admin-manage-empty">Keine Treffer für Suche oder Filter.</p>`}
       </div>
@@ -1282,6 +1361,7 @@
     document.getElementById("libAdminManageRefresh")?.addEventListener("click", async () => {
       try {
         await ensureLibraryLoaded(true);
+        await fetchAdminLibraryStatsMap(true);
         toast("Katalog aktualisiert");
         safeRender();
       } catch (e) {

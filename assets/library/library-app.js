@@ -35,6 +35,9 @@
   let uiState = { query: "", category: "Alle", catOpen: false };
   let readerState = null;
   const LIBRARY_STATS_CACHE = new Map();
+  let libraryStatsPollTimer = null;
+  let libraryStatsPollId = "";
+  const LIBRARY_STATS_POLL_MS = 15000;
 
   function trackLibraryEvent(eventType, pub) {
     if (!pub) return;
@@ -50,6 +53,8 @@
     } catch (e) {
       /* Statistik darf Lesen nie blockieren */
     }
+    bumpLibraryStatOptimistic(pub.id, eventType);
+    scheduleLibraryStatsRefresh(pub.id);
   }
 
   function formatStatCount(value) {
@@ -61,56 +66,131 @@
     }
   }
 
-  async function fetchLibraryStats(publicationId) {
+  function emptyLibraryStats() {
+    return { clicks: 0, reads: 0, downloads: 0 };
+  }
+
+  function parseLibraryStatsRow(row) {
+    return {
+      clicks: Number(row?.views) || 0,
+      reads: Number(row?.shares) || 0,
+      downloads: Number(row?.saves) || 0
+    };
+  }
+
+  async function fetchLibraryStats(publicationId, options) {
     const id = String(publicationId || "").trim();
-    if (!id) return { clicks: 0, reads: 0, downloads: 0 };
-    if (LIBRARY_STATS_CACHE.has(id)) return LIBRARY_STATS_CACHE.get(id);
+    if (!id) return emptyLibraryStats();
+    const force = options?.force === true;
+    if (!force && LIBRARY_STATS_CACHE.has(id)) return LIBRARY_STATS_CACHE.get(id);
     const cfg = global.DAR_ANALYTICS_CONFIG || {};
     const baseUrl = String(cfg.supabaseUrl || "").replace(/\/$/, "");
     const key = String(cfg.supabaseKey || "");
     if (!baseUrl || !key) {
-      const empty = { clicks: 0, reads: 0, downloads: 0 };
+      const empty = emptyLibraryStats();
       LIBRARY_STATS_CACHE.set(id, empty);
       return empty;
     }
     try {
       const res = await fetch(
-        `${baseUrl}/rest/v1/stats_totals?content_type=eq.library&content_id=eq.${encodeURIComponent(id)}&select=views,shares,saves&limit=1`,
-        { headers: { apikey: key, Authorization: `Bearer ${key}` } }
+        `${baseUrl}/rest/v1/stats_totals?content_type=eq.library&content_id=eq.${encodeURIComponent(id)}&select=views,shares,saves&limit=1&_ts=${Date.now()}`,
+        { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: "no-store" }
       );
       if (!res.ok) throw new Error("stats " + res.status);
       const rows = await res.json();
       const row = Array.isArray(rows) ? rows[0] : null;
-      const stats = {
-        clicks: Number(row?.views) || 0,
-        reads: Number(row?.shares) || 0,
-        downloads: Number(row?.saves) || 0
-      };
+      const stats = parseLibraryStatsRow(row);
       LIBRARY_STATS_CACHE.set(id, stats);
       return stats;
     } catch (e) {
-      const empty = { clicks: 0, reads: 0, downloads: 0 };
+      const cached = LIBRARY_STATS_CACHE.get(id);
+      if (cached) return cached;
+      const empty = emptyLibraryStats();
       LIBRARY_STATS_CACHE.set(id, empty);
       return empty;
     }
   }
 
-  function renderLibraryStatsItems() {
-    return `<div class="lib-meta-item"><b>Klicks</b><span data-library-stat-clicks>—</span></div>
-        <div class="lib-meta-item"><b>Gelesen</b><span data-library-stat-reads>—</span></div>
-        <div class="lib-meta-item"><b>Downloads</b><span data-library-stat-downloads>—</span></div>`;
-  }
-
-  async function hydrateLibraryStats(publicationId) {
+  function applyLibraryStatsToPanel(publicationId, stats) {
     const panel = document.querySelector(`[data-library-stats="${publicationId}"]`);
     if (!panel) return;
-    const stats = await fetchLibraryStats(publicationId);
     const clicksEl = panel.querySelector("[data-library-stat-clicks]");
     const readsEl = panel.querySelector("[data-library-stat-reads]");
     const downloadsEl = panel.querySelector("[data-library-stat-downloads]");
     if (clicksEl) clicksEl.textContent = formatStatCount(stats.clicks);
     if (readsEl) readsEl.textContent = formatStatCount(stats.reads);
     if (downloadsEl) downloadsEl.textContent = formatStatCount(stats.downloads);
+  }
+
+  function bumpLibraryStatOptimistic(publicationId, eventType) {
+    const id = String(publicationId || "").trim();
+    if (!id) return;
+    const stats = { ...(LIBRARY_STATS_CACHE.get(id) || emptyLibraryStats()) };
+    if (eventType === "library_click" || eventType === "library_view") stats.clicks += 1;
+    else if (eventType === "library_read") stats.reads += 1;
+    else if (eventType === "library_download") stats.downloads += 1;
+    LIBRARY_STATS_CACHE.set(id, stats);
+    applyLibraryStatsToPanel(id, stats);
+  }
+
+  function scheduleLibraryStatsRefresh(publicationId) {
+    const id = String(publicationId || "").trim();
+    if (!id) return;
+    [1200, 4500].forEach((delay) => {
+      setTimeout(() => {
+        LIBRARY_STATS_CACHE.delete(id);
+        hydrateLibraryStats(id);
+      }, delay);
+    });
+  }
+
+  function stopLibraryStatsPolling() {
+    if (libraryStatsPollTimer) {
+      clearInterval(libraryStatsPollTimer);
+      libraryStatsPollTimer = null;
+    }
+    libraryStatsPollId = "";
+  }
+
+  function startLibraryStatsPolling(publicationId) {
+    const id = String(publicationId || "").trim();
+    if (!id) return;
+    if (libraryStatsPollId === id && libraryStatsPollTimer) return;
+    stopLibraryStatsPolling();
+    libraryStatsPollId = id;
+    libraryStatsPollTimer = setInterval(() => {
+      LIBRARY_STATS_CACHE.delete(id);
+      hydrateLibraryStats(id);
+    }, LIBRARY_STATS_POLL_MS);
+  }
+
+  function renderLibraryStatsPanel(publicationId) {
+    return `<section class="lib-stats-live" data-library-stats="${esc(publicationId)}" aria-label="Live-Besucherstatistik">
+      <div class="lib-stats-live-head">
+        <span class="lib-stats-live-label">Besucherstatistik</span>
+        <span class="lib-stats-live-pulse" aria-hidden="true"></span>
+        <span class="lib-stats-live-note">Live</span>
+      </div>
+      <div class="lib-stats-live-row">
+        <div class="lib-stats-live-item">
+          <b>Klicks</b>
+          <span data-library-stat-clicks>—</span>
+        </div>
+        <div class="lib-stats-live-item">
+          <b>Gelesen</b>
+          <span data-library-stat-reads>—</span>
+        </div>
+        <div class="lib-stats-live-item">
+          <b>Downloads</b>
+          <span data-library-stat-downloads>—</span>
+        </div>
+      </div>
+    </section>`;
+  }
+
+  async function hydrateLibraryStats(publicationId) {
+    const stats = await fetchLibraryStats(publicationId, { force: true });
+    applyLibraryStatsToPanel(publicationId, stats);
   }
 
   function esc(s) {
@@ -455,15 +535,15 @@
           ${offline && offlineEnabled ? `<button class="lib-btn lib-btn-ghost" type="button" data-library-offline-remove="${esc(pub.slug)}">Offline entfernen</button>` : ""}
         </div>
       </div>
-      <div class="lib-meta-grid lib-meta-grid-compact" data-library-stats="${esc(pub.id)}">
+      <div class="lib-meta-grid lib-meta-grid-compact">
         <div class="lib-meta-item"><b>Kategorie</b><span>${esc(pub.category || "—")}</span></div>
         <div class="lib-meta-item"><b>Thema</b><span>${esc(pub.topic || "—")}</span></div>
         <div class="lib-meta-item"><b>Sprache</b><span>${esc(pub.language || "—")}</span></div>
         <div class="lib-meta-item"><b>Dateigröße</b><span>${esc(pub.fileSize || "—")}</span></div>
         <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
-        ${renderLibraryStatsItems()}
       </div>
+      ${renderLibraryStatsPanel(pub.id)}
       ${toc.length ? `<section class="lib-panel"><h3>Inhaltsverzeichnis</h3><ul>${toc.map((item) => `<li>${esc(item.title || item)}</li>`).join("")}</ul></section>` : ""}
       ${pub.about ? `<section class="lib-panel"><h3>Über diese Veröffentlichung</h3><p>${esc(pub.about)}</p></section>` : ""}
       ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((s) => `<li>${esc(typeof s === "string" ? s : s.title || s.name || "")}</li>`).join("")}</ul></section>` : ""}
@@ -912,8 +992,7 @@
             a.click();
             setTimeout(() => URL.revokeObjectURL(url), 4000);
             trackLibraryEvent("library_download", pub);
-            LIBRARY_STATS_CACHE.delete(String(pub.id));
-            hydrateLibraryStats(pub.id);
+            scheduleLibraryStatsRefresh(pub.id);
           } catch (e) {
             alert("Der Download konnte nicht abgeschlossen werden. Bitte versuche es erneut.");
           }
@@ -956,6 +1035,9 @@
       });
 
       hydrateLibraryStats(pub.id);
+      startLibraryStatsPolling(pub.id);
+    } else {
+      stopLibraryStatsPolling();
     }
 
     if (route && route.view === "bibliothek-reader") {
@@ -985,6 +1067,7 @@
               a.click();
               setTimeout(() => URL.revokeObjectURL(url), 4000);
               trackLibraryEvent("library_download", pub);
+              scheduleLibraryStatsRefresh(pub.id);
             } catch (e) {
               alert("Der Download konnte nicht abgeschlossen werden. Bitte versuche es erneut.");
             }
