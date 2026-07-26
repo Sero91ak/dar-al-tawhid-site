@@ -593,15 +593,6 @@
     const hasSearch = Boolean(uiState.query);
 
     return `<section class="lib-page" data-library-root>
-      <header class="lib-hero" aria-label="Bibliothekskopf">
-        <div class="lib-hero-inner">
-          <h2>DAR AL TAWḤĪD Bibliothek</h2>
-          <p class="lib-hero-lead">Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik</p>
-          <p class="lib-hero-note is-short">Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.</p>
-          <p class="lib-hero-note is-full">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
-        </div>
-        <div class="lib-hero-line" aria-hidden="true"></div>
-      </header>
       <div class="lib-toolbar${uiState.catOpen ? " is-cat-open" : ""}">
         <div class="lib-search-wrap">
           <label class="visually-hidden" for="librarySearch">Bücher und Themen durchsuchen</label>
@@ -611,7 +602,6 @@
         <div class="lib-cats">${catButtons}</div>
         ${renderFilterChip()}
       </div>
-      <div class="lib-toolbar-divider" aria-hidden="true"></div>
       ${sections}
     </section>`;
   }

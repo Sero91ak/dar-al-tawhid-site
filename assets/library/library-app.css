@@ -1,104 +1,47 @@
-/* DAR AL TAWḤĪD Bibliothek — theme-kompatibel, kompakt */
+/* DAR AL TAWḤĪD Bibliothek — flach & modern v457 */
 .lib-page {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 24px);
+  padding-bottom: calc(var(--bottom-navigation-height, 70px) + env(safe-area-inset-bottom, 0px) + 32px);
 }
 
-.lib-hero {
-  position: relative;
-  margin: 0 0 10px;
-  padding: 12px 14px 14px;
-  border-radius: var(--card-radius, 18px);
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 16% 8%, color-mix(in srgb, var(--gold2) 10%, transparent), transparent 44%),
-    linear-gradient(145deg, color-mix(in srgb, var(--card) 92%, var(--bg)), color-mix(in srgb, var(--panel) 88%, var(--bg)));
-  border: 1px solid var(--line2);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--bg) 70%, transparent);
-  max-height: 190px;
-}
-
-.lib-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 12%, transparent), transparent 30%, transparent 70%, color-mix(in srgb, var(--bg) 12%, transparent));
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.lib-hero-inner {
-  position: relative;
-  z-index: 1;
-}
-
-.lib-hero h2 {
-  margin: 0 0 4px;
-  font-family: inherit;
-  font-size: clamp(1.15rem, 3.6vw, 1.55rem);
-  font-weight: 800;
-  color: var(--gold2);
-  line-height: 1.15;
-}
-
-.lib-hero p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.84rem;
-  line-height: 1.38;
-  max-width: 36rem;
-}
-
-.lib-hero-note {
-  margin-top: 6px !important;
-  font-size: 0.78rem !important;
-  color: var(--muted2) !important;
-}
-
-.lib-hero-note.is-short {
-  display: block;
-}
-
-.lib-hero-note.is-full {
-  display: none;
-}
-
-@media (min-width: 720px) {
-  .lib-hero {
-    padding: 14px 16px 16px;
-    max-height: none;
-  }
-  .lib-hero-note.is-short {
-    display: none;
-  }
-  .lib-hero-note.is-full {
-    display: block;
-  }
-}
-
+/* —— Suche & Filter (flach, ohne Kartenflächen) —— */
 .lib-toolbar {
   display: grid;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin: 0 0 14px;
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 2px);
+  z-index: 5;
+  padding: 0;
+  background: transparent;
+}
+
+.lib-search-wrap {
+  position: relative;
+  width: 100%;
 }
 
 .lib-search {
   width: 100%;
   box-sizing: border-box;
-  min-height: 48px;
-  max-height: 54px;
-  padding: 9px 12px 9px 38px;
-  border-radius: 14px;
-  border: 1px solid var(--line2);
-  background: color-mix(in srgb, var(--card) 88%, var(--bg));
+  min-height: 44px;
+  max-height: 44px;
+  padding: 8px 36px 8px 34px;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line2);
+  background: transparent;
   color: var(--text);
   font-size: 0.94rem;
+  -webkit-appearance: none;
+  appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238f856f' stroke-width='2'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cpath d='M10.5 10.5L14 14'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: 11px center;
+  background-position: 0 center;
+  box-shadow: none;
 }
 
 .lib-search::placeholder {
@@ -106,9 +49,42 @@
 }
 
 .lib-search:focus {
+  outline: none;
+  border-bottom-color: color-mix(in srgb, var(--gold2) 45%, var(--line2));
+}
+
+.lib-search::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.lib-search-clear {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lib-search-clear.is-visible {
+  display: flex;
+}
+
+.lib-search-clear:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--gold2) 45%, transparent);
   outline-offset: 1px;
-  border-color: var(--line);
 }
 
 .lib-cats {
@@ -126,14 +102,22 @@
   justify-content: space-between;
   gap: 10px;
   width: 100%;
-  min-height: 42px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--line2);
-  background: color-mix(in srgb, var(--card) 78%, var(--bg));
+  min-height: 44px;
+  max-height: 44px;
+  padding: 8px 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line2);
+  background: transparent;
   color: var(--text);
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   cursor: pointer;
+  box-shadow: none;
+}
+
+.lib-cat-toggle:focus-visible {
+  outline: none;
+  border-bottom-color: color-mix(in srgb, var(--gold2) 45%, var(--line2));
 }
 
 .lib-cat-toggle-label {
@@ -155,11 +139,12 @@
   gap: 6px;
   max-height: min(46vh, 320px);
   overflow: auto;
-  margin-top: 6px;
-  padding: 8px;
-  border-radius: 14px;
-  border: 1px solid var(--line2);
-  background: color-mix(in srgb, var(--panel) 96%, var(--bg));
+  margin-top: 8px;
+  padding: 8px 0;
+  border-radius: 0;
+  border: 0;
+  border-top: 1px solid var(--line2);
+  background: transparent;
   box-shadow: none;
 }
 
@@ -170,9 +155,9 @@
 .lib-cat-option {
   min-height: 38px;
   padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--line2);
-  background: color-mix(in srgb, var(--card) 65%, transparent);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--muted);
   font-size: 0.74rem;
   text-align: left;
@@ -181,10 +166,35 @@
 
 .lib-cat-option[aria-pressed="true"] {
   color: var(--text);
-  border-color: var(--line);
-  background: color-mix(in srgb, var(--gold2) 14%, var(--card));
+  border-color: var(--line2);
+  background: color-mix(in srgb, var(--gold2) 8%, transparent);
 }
 
+.lib-filter-chip-wrap {
+  margin-top: -2px;
+}
+
+.lib-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 2px 10px 2px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line2);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.lib-filter-chip-x {
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+/* —— Abschnittsüberschrift —— */
 .lib-section {
   margin: 0 0 18px;
 }
@@ -201,6 +211,41 @@
   font-size: 0.86rem;
 }
 
+.lib-section-head {
+  margin: 0 0 12px;
+}
+
+.lib-section-head-main {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lib-section-head h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--gold2);
+  font-family: inherit;
+  line-height: 1.2;
+}
+
+.lib-section-count {
+  color: var(--muted2);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.lib-section-head-line {
+  height: 1px;
+  margin-top: 8px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--gold2) 38%, transparent), color-mix(in srgb, var(--gold2) 10%, transparent) 45%, transparent 100%);
+}
+
+/* —— Publikationsraster —— */
 .lib-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -237,6 +282,123 @@
   }
 }
 
+/* —— Publikationskarten —— */
+.lib-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.lib-card:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--gold2) 55%, transparent);
+  outline-offset: 3px;
+}
+
+.lib-card:active {
+  transform: translateY(1px);
+  opacity: 0.92;
+}
+
+.lib-cover-wrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 80%, var(--bg));
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--bg) 62%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line2) 80%, transparent);
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.lib-card:hover .lib-cover-wrap,
+.lib-card:focus-visible .lib-cover-wrap {
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--bg) 55%, transparent);
+  border-color: color-mix(in srgb, var(--line) 70%, var(--line2));
+}
+
+.lib-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.lib-cover-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  text-align: center;
+  color: var(--gold2);
+  font-family: inherit;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  background:
+    radial-gradient(circle at 50% 16%, color-mix(in srgb, var(--gold2) 10%, transparent), transparent 55%),
+    linear-gradient(160deg, color-mix(in srgb, var(--panel) 90%, var(--bg)), color-mix(in srgb, var(--card) 85%, var(--bg)));
+}
+
+.lib-card-body {
+  min-width: 0;
+  padding: 0 1px;
+}
+
+.lib-card-divider {
+  height: 1px;
+  margin: 0 0 5px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--line2) 90%, transparent), transparent 85%);
+}
+
+.lib-card-body h4 {
+  margin: 0 0 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.lib-card-meta-line,
+.lib-card-date {
+  margin: 0;
+  font-size: 0.62rem;
+  line-height: 1.3;
+}
+
+.lib-card-meta-line {
+  color: var(--muted);
+}
+
+.lib-card-date {
+  margin-top: 2px;
+  color: var(--muted2);
+}
+
+.lib-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  color: var(--muted2);
+  font-size: 0.62rem;
+  line-height: 1.25;
+}
+
 .lib-card-compact .lib-card-body h4 {
   font-size: 0.68rem;
   line-height: 1.25;
@@ -260,94 +422,6 @@
 
 .lib-card-compact .lib-progress-bar {
   height: 2px;
-}
-
-.lib-section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  margin: 0 0 12px;
-}
-
-.lib-section-head h3 {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--gold2);
-  font-family: inherit;
-}
-
-.lib-section-head span {
-  color: var(--muted2);
-  font-size: 0.72rem;
-}
-
-.lib-shelf-row {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 2px 2px 8px;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-}
-
-.lib-shelf-row .lib-card {
-  flex: 0 0 clamp(108px, 34vw, 148px);
-  scroll-snap-align: start;
-}
-
-.lib-card {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  text-align: left;
-  color: inherit;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
-.lib-card:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--gold2) 55%, transparent);
-  outline-offset: 3px;
-}
-
-.lib-cover-wrap {
-  position: relative;
-  aspect-ratio: 2 / 3;
-  border-radius: 10px;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--panel) 80%, var(--bg));
-  box-shadow: 0 8px 18px color-mix(in srgb, var(--bg) 55%, transparent);
-  border: 1px solid var(--line2);
-}
-
-.lib-cover {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.lib-cover-fallback {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  padding: 10px;
-  text-align: center;
-  color: var(--gold2);
-  font-family: inherit;
-  font-size: 0.82rem;
-  line-height: 1.3;
-  background:
-    radial-gradient(circle at 50% 16%, color-mix(in srgb, var(--gold2) 10%, transparent), transparent 55%),
-    linear-gradient(160deg, color-mix(in srgb, var(--panel) 90%, var(--bg)), color-mix(in srgb, var(--card) 85%, var(--bg)));
 }
 
 .lib-badges {
@@ -389,24 +463,43 @@
   background: linear-gradient(90deg, color-mix(in srgb, var(--gold) 75%, transparent), var(--gold2));
 }
 
-.lib-card-body h4 {
-  margin: 0;
-  font-size: 0.72rem;
-  line-height: 1.28;
-  color: var(--text);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* —— Leerer Zustand —— */
+.lib-empty-state {
+  padding: 20px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line2);
+  background: color-mix(in srgb, var(--card) 55%, transparent);
+  text-align: center;
 }
 
-.lib-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 4px;
-  color: var(--muted2);
-  font-size: 0.62rem;
-  line-height: 1.25;
+.lib-empty-title {
+  margin: 0 0 6px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.lib-empty-hint {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.lib-empty-reset {
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line2);
+  background: color-mix(in srgb, var(--gold2) 10%, var(--card));
+  color: var(--text);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.lib-empty-reset:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--gold2) 45%, transparent);
+  outline-offset: 2px;
 }
 
 .lib-empty,
@@ -431,6 +524,22 @@
   cursor: pointer;
 }
 
+.lib-shelf-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.lib-shelf-row .lib-card {
+  flex: 0 0 clamp(108px, 34vw, 148px);
+  scroll-snap-align: start;
+}
+
+/* —— Detail & Leser (unverändert) —— */
 .lib-detail {
   display: grid;
   gap: 10px;
@@ -836,28 +945,6 @@ body.is-library-reader-route .view {
   background: #fff;
 }
 
-.lib-reader-native {
-  width: 100%;
-  min-height: calc(100dvh - 120px);
-  min-height: calc(100vh - 120px);
-  background: #fff;
-}
-
-.lib-reader-native-embed,
-.lib-reader-native-object {
-  display: block;
-  width: 100%;
-  min-height: calc(100dvh - 120px);
-  min-height: calc(100vh - 120px);
-  border: 0;
-  background: #fff;
-}
-
-.lib-reader-native-object .lib-reader-fallback {
-  min-height: calc(100dvh - 120px);
-  min-height: calc(100vh - 120px);
-}
-
 .lib-reader-stack-single {
   min-height: calc(100% - 8px);
   justify-content: flex-start;
@@ -894,7 +981,10 @@ body.is-library-reader-route .float-actions {
 
 @media (prefers-reduced-motion: reduce) {
   .lib-cat,
-  .lib-card {
+  .lib-card,
+  .lib-cover-wrap,
+  .lib-search,
+  .lib-cat-toggle {
     transition: none;
   }
 }

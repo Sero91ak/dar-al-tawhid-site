@@ -1192,6 +1192,23 @@
       "expiresAt": "2026-07-28T06:00:00.000Z"
     },
     {
+      "id": "library-flat-ui-v457-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek Kopfbereich entfernen, Suche/Filter ohne Kartenflächen — Live + Test",
+      "paths": [
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T16:00:00.000Z"
+    },
+    {
       "id": "library-premium-v455-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: DAR AL TAWḤĪD Bibliothek Premium-Veredelung ohne Größen-/Grid-Änderung — nur Test-App",

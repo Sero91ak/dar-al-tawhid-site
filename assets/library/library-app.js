@@ -33,6 +33,10 @@
   let catalogError = "";
   let catalogLoading = null;
   let uiState = { query: "", category: "Alle", catOpen: false };
+  let libraryPreserveScroll = false;
+  let libraryPreserveFocus = false;
+  let libraryListScrollY = 0;
+  let librarySearchSelection = 0;
   let readerState = null;
   const LIBRARY_STATS_CACHE = new Map();
   let libraryStatsPollTimer = null;
@@ -175,7 +179,10 @@
     const id = String(publicationId || "").trim();
     if (!id) return;
     [1200, 4500].forEach((delay) => {
-      setTimeout(() => hydrateLibraryStats(id), delay);
+      setTimeout(() => {
+        LIBRARY_STATS_CACHE.delete(id);
+        hydrateLibraryStats(id);
+      }, delay);
     });
   }
 
@@ -194,6 +201,7 @@
     stopLibraryStatsPolling();
     libraryStatsPollId = id;
     libraryStatsPollTimer = setInterval(() => {
+      LIBRARY_STATS_CACHE.delete(id);
       hydrateLibraryStats(id);
     }, LIBRARY_STATS_POLL_MS);
   }
@@ -394,6 +402,50 @@
     }
   }
 
+  function formatCardDate(value) {
+    if (!value) return "";
+    try {
+      return new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(value));
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function cardMetaPrimary(pub) {
+    const parts = [];
+    const cat = String(pub.category || "").trim();
+    const pages = pub.pageCount && Number(pub.pageCount) > 0 ? `${pub.pageCount} Seiten` : "";
+    if (cat) parts.push(cat);
+    if (pages) parts.push(pages);
+    return parts.join(" · ");
+  }
+
+  function cardDate(pub) {
+    return formatCardDate(pub.updatedAt || pub.publishedAt || "");
+  }
+
+  function cardAriaLabel(pub) {
+    const parts = [pub.title];
+    const meta = cardMetaPrimary(pub);
+    const date = cardDate(pub);
+    if (meta) parts.push(meta);
+    if (date) parts.push(date);
+    return parts.join(", ");
+  }
+
+  function publicationCountLabel(count, isFiltered) {
+    const n = Number(count) || 0;
+    if (isFiltered) return n === 1 ? "1 Treffer" : `${n} Treffer`;
+    return n === 1 ? "1 Titel" : `${n} Titel`;
+  }
+
+  function markLibraryRenderPreserve(scrollY, focusSearch, selection) {
+    libraryListScrollY = Number(scrollY) || 0;
+    libraryPreserveScroll = true;
+    libraryPreserveFocus = focusSearch === true;
+    librarySearchSelection = Number(selection) || 0;
+  }
+
   function statusLabel(pub) {
     if (pub.status === "preparing") return "Veröffentlichung wird vorbereitet";
     if (pub.status === "updated") return "Aktualisiert";
@@ -430,23 +482,20 @@
 
   function cardHtml(pub, offlineIds) {
     const offline = offlineIds && offlineIds.has(pub.id);
-    const progress = getProgress(pub.id);
-    const date = pub.updatedAt || pub.publishedAt || "";
-    const pages = pub.pageCount ? `${pub.pageCount} Seiten` : "";
-    return `<button class="lib-card" type="button" data-library-open="${esc(pub.slug)}" aria-label="${esc(pub.title)} öffnen">
+    const meta = cardMetaPrimary(pub);
+    const date = cardDate(pub);
+    const aria = cardAriaLabel(pub);
+    return `<button class="lib-card" type="button" data-library-open="${esc(pub.slug)}" aria-label="${esc(aria)} öffnen" title="${esc(pub.title)}">
       <div class="lib-cover-wrap">
         ${coverHtml(pub)}
         <div class="lib-badges">${badgeHtml(pub)}${offline ? '<span class="lib-badge is-offline">Offline</span>' : ""}</div>
         ${progressHtml(pub)}
       </div>
       <div class="lib-card-body">
+        <div class="lib-card-divider" aria-hidden="true"></div>
         <h4>${esc(pub.title)}</h4>
-        <div class="lib-card-meta">
-          <span>${esc(pub.category || "")}</span>
-          ${pages ? `<span>${esc(pages)}</span>` : ""}
-          ${date ? `<span>${esc(formatDate(date))}</span>` : ""}
-          ${progress && progress.lastPage ? `<span>Seite ${progress.lastPage}</span>` : ""}
-        </div>
+        ${meta ? `<p class="lib-card-meta-line">${esc(meta)}</p>` : ""}
+        ${date ? `<p class="lib-card-date">${esc(date)}</p>` : ""}
       </div>
     </button>`;
   }
@@ -473,7 +522,16 @@
         : "lib-grid";
     const inner = `<div class="${innerClass}">${cards}</div>`;
     const compactClass = layout === "grid-compact" ? " lib-section-compact" : "";
-    return `<section class="lib-section${compactClass}"><div class="lib-section-head"><h3>${esc(title)}</h3>${countLabel ? `<span>${esc(countLabel)}</span>` : ""}</div>${inner}</section>`;
+    return `<section class="lib-section${compactClass}">
+      <div class="lib-section-head">
+        <div class="lib-section-head-main">
+          <h3>${esc(title)}</h3>
+          ${countLabel ? `<span class="lib-section-count">${esc(countLabel)}</span>` : ""}
+        </div>
+        <div class="lib-section-head-line" aria-hidden="true"></div>
+      </div>
+      ${inner}
+    </section>`;
   }
 
   function renderCategoryPicker() {
@@ -504,29 +562,45 @@
     return `<section class="lib-page"><div class="lib-error">Die Bibliothek konnte momentan nicht geladen werden. Bitte versuche es erneut.<br><button type="button" data-library-retry>Erneut versuchen</button></div></section>`;
   }
 
+  function renderEmptyState() {
+    return `<div class="lib-empty-state" role="status">
+      <p class="lib-empty-title">Keine Veröffentlichung gefunden</p>
+      <p class="lib-empty-hint">Prüfe den Suchbegriff oder wähle eine andere Kategorie.</p>
+      <button class="lib-empty-reset" type="button" data-library-reset-filters>Filter zurücksetzen</button>
+    </div>`;
+  }
+
+  function renderFilterChip() {
+    if (uiState.category === "Alle") return "";
+    return `<div class="lib-filter-chip-wrap">
+      <button class="lib-filter-chip" type="button" data-library-filter-clear aria-label="Filter ${esc(uiState.category)} entfernen">
+        <span>${esc(uiState.category)}</span>
+        <span class="lib-filter-chip-x" aria-hidden="true">×</span>
+      </button>
+    </div>`;
+  }
+
   function renderBibliothekMain(offlineIds) {
     const all = visiblePublications(catalog.publications || []);
     const filtered = filteredPublications(all);
+    const isFiltered = Boolean(uiState.query) || uiState.category !== "Alle";
+    const countLabel = publicationCountLabel(filtered.length, isFiltered);
     const catButtons = renderCategoryPicker();
-    const list = filtered;
-    const cards = list.map((p) => cardHtml(p, offlineIds)).join("");
+    const cards = filtered.map((p) => cardHtml(p, offlineIds)).join("");
     const sections = cards
-      ? sectionHtml(listSectionTitle(), `${list.length}`, cards)
-      : `<div class="lib-empty">Keine Veröffentlichungen für diese Auswahl gefunden.</div>`;
+      ? sectionHtml(listSectionTitle(), countLabel, cards)
+      : renderEmptyState();
+    const hasSearch = Boolean(uiState.query);
 
     return `<section class="lib-page" data-library-root>
-      <header class="lib-hero" aria-label="Bibliothekskopf">
-        <div class="lib-hero-inner">
-          <h2>DAR AL TAWḤĪD Bibliothek</h2>
-          <p>Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik</p>
-          <p class="lib-hero-note is-short">Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.</p>
-          <p class="lib-hero-note is-full">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
+      <div class="lib-toolbar${uiState.catOpen ? " is-cat-open" : ""}">
+        <div class="lib-search-wrap">
+          <label class="visually-hidden" for="librarySearch">Bücher und Themen durchsuchen</label>
+          <input id="librarySearch" class="lib-search" type="search" placeholder="Bücher und Themen durchsuchen" autocomplete="off" enterkeyhint="search" value="${esc(uiState.query)}">
+          <button class="lib-search-clear${hasSearch ? " is-visible" : ""}" type="button" data-library-search-clear aria-label="Suche löschen"${hasSearch ? "" : " hidden"}>×</button>
         </div>
-      </header>
-      <div class="lib-toolbar">
-        <label class="visually-hidden" for="librarySearch">Bücher und Themen durchsuchen</label>
-        <input id="librarySearch" class="lib-search" type="search" placeholder="Bücher und Themen durchsuchen" autocomplete="off" value="${esc(uiState.query)}">
         <div class="lib-cats">${catButtons}</div>
+        ${renderFilterChip()}
       </div>
       ${sections}
     </section>`;
@@ -1075,6 +1149,33 @@
     return (catalog?.publications || []).find((p) => p.slug === slug || p.id === slug);
   }
 
+  function restoreLibraryListUi() {
+    if (libraryPreserveScroll) {
+      const y = libraryListScrollY;
+      requestAnimationFrame(() => {
+        if (global.DARScrollManager?.stableScrollTo) {
+          global.DARScrollManager.stableScrollTo(y, { force: true });
+        } else {
+          global.scrollTo({ top: y, behavior: "auto" });
+        }
+        libraryPreserveScroll = false;
+      });
+    }
+    if (libraryPreserveFocus) {
+      const search = document.getElementById("librarySearch");
+      if (search) {
+        search.focus();
+        try {
+          const pos = librarySearchSelection;
+          search.setSelectionRange(pos, pos);
+        } catch (e) {
+          /* Sucheingabe darf nie blockieren */
+        }
+      }
+      libraryPreserveFocus = false;
+    }
+  }
+
   async function bindLibrary(route) {
     const root = document.querySelector("[data-library-root]");
     if (root) {
@@ -1082,13 +1183,32 @@
       if (search) {
         search.oninput = () => {
           uiState.query = search.value || "";
+          markLibraryRenderPreserve(window.scrollY || 0, true, search.selectionStart);
           if (typeof global.render === "function") global.render();
         };
       }
+      root.querySelector("[data-library-search-clear]")?.addEventListener("click", () => {
+        uiState.query = "";
+        markLibraryRenderPreserve(window.scrollY || 0, true, 0);
+        if (typeof global.render === "function") global.render();
+      });
+      root.querySelector("[data-library-filter-clear]")?.addEventListener("click", () => {
+        uiState.category = "Alle";
+        uiState.catOpen = false;
+        markLibraryRenderPreserve(window.scrollY || 0, false, 0);
+        if (typeof global.render === "function") global.render();
+      });
+      root.querySelector("[data-library-reset-filters]")?.addEventListener("click", () => {
+        uiState.query = "";
+        uiState.category = "Alle";
+        uiState.catOpen = false;
+        if (typeof global.render === "function") global.render();
+      });
       root.querySelectorAll("[data-library-cat]").forEach((btn) => {
         btn.onclick = () => {
           uiState.category = btn.getAttribute("data-library-cat") || "Alle";
           uiState.catOpen = false;
+          markLibraryRenderPreserve(window.scrollY || 0, false, 0);
           if (typeof global.render === "function") global.render();
         };
       });
@@ -1098,6 +1218,7 @@
         catToggle.onclick = (ev) => {
           ev.stopPropagation();
           uiState.catOpen = !uiState.catOpen;
+          markLibraryRenderPreserve(window.scrollY || 0, false, 0);
           if (typeof global.render === "function") global.render();
         };
       }
@@ -1119,6 +1240,7 @@
           navigateDetail(slug);
         };
       });
+      restoreLibraryListUi();
     }
 
     document.querySelectorAll("[data-library-retry]").forEach((btn) => {
