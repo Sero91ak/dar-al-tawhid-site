@@ -20600,6 +20600,7 @@ function bindEvents(){
   const pwaGuideBtn=$("pwaBannerGuideBtn");if(pwaGuideBtn)pwaGuideBtn.onclick=()=>showPwaInstallModalIfNeeded(true);
   const pwaDismissBtn=$("pwaBannerDismissBtn");if(pwaDismissBtn)pwaDismissBtn.onclick=()=>dismissPwaInstallGuide(false);
   const hardRefreshBtn=$("hardRefreshBtn");if(hardRefreshBtn)hardRefreshBtn.onclick=()=>hardRefreshApp();
+  bindHomeRefreshButton();
   const postRetryBtn=$("postRetryBtn");if(postRetryBtn&&currentRoute.view==="post"){postRetryBtn.onclick=async()=>{clearPostRouteState();const id=String(currentRoute.value);postRouteLoadingId=id;render();if(await loadSinglePostFresh(id)||posts.some(p=>String(p.id)===id)){clearPostRouteState();render();return}await refreshContent({forceRender:true});clearPostRouteState();if(!posts.some(p=>String(p.id)===id)){postRouteFailedId=id;postRouteError="Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.";render()}}}
   const postHardRefreshBtn=$("postHardRefreshBtn");if(postHardRefreshBtn&&currentRoute.view==="post")postHardRefreshBtn.onclick=()=>hardRefreshApp();
   const prayerHintGo=$("prayerHintGoBtn");if(prayerHintGo)prayerHintGo.onclick=()=>{window.__smoothNav=true;navigate("prayer")};
