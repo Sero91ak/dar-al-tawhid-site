@@ -1,10 +1,103 @@
-/* DAR AL TAWḤĪD Bibliothek — flach & modern v457 */
+/* DAR AL TAWḤĪD Bibliothek — flach & modern v460 */
 .lib-page {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
   padding-bottom: calc(var(--bottom-navigation-height, 70px) + env(safe-area-inset-bottom, 0px) + 32px);
+}
+
+/* —— Bibliothekskopf —— */
+.lib-hero {
+  position: relative;
+  margin: 0 0 12px;
+  padding: 12px 14px 16px;
+  border-radius: var(--card-radius, 18px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--gold2) 7%, transparent), transparent 50%),
+    linear-gradient(155deg, color-mix(in srgb, var(--card) 94%, var(--bg)), color-mix(in srgb, var(--panel) 90%, var(--bg)));
+  border: 1px solid color-mix(in srgb, var(--line2) 85%, transparent);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--bg) 78%, transparent);
+}
+
+.lib-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 8%, transparent), transparent 35%, transparent 65%, color-mix(in srgb, var(--bg) 8%, transparent));
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.lib-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.lib-hero h2 {
+  margin: 0 0 5px;
+  font-family: inherit;
+  font-size: clamp(1.18rem, 3.6vw, 1.58rem);
+  font-weight: 800;
+  color: var(--gold2);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.lib-hero-lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.42;
+  max-width: 36rem;
+  font-weight: 500;
+}
+
+.lib-hero-note {
+  margin: 5px 0 0;
+  font-size: 0.76rem;
+  color: var(--muted2);
+  line-height: 1.36;
+}
+
+.lib-hero-note.is-short {
+  display: block;
+}
+
+.lib-hero-note.is-full {
+  display: none;
+}
+
+.lib-hero-line {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 10px;
+  height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--gold2) 55%, transparent), color-mix(in srgb, var(--gold2) 18%, transparent) 55%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 760px) {
+  .lib-hero {
+    padding: 14px 16px 18px;
+  }
+
+  .lib-hero-line {
+    left: 16px;
+    right: 16px;
+    bottom: 12px;
+  }
+
+  .lib-hero-note.is-short {
+    display: none;
+  }
+
+  .lib-hero-note.is-full {
+    display: block;
+  }
 }
 
 /* —— Suche & Filter (flach, ohne Kartenflächen) —— */
@@ -29,7 +122,7 @@
   box-sizing: border-box;
   min-height: 44px;
   max-height: 44px;
-  padding: 8px 36px 8px 34px;
+  padding: 8px 40px 8px 38px;
   border-radius: 0;
   border: 0;
   border-bottom: 1px solid var(--line2);
@@ -40,7 +133,7 @@
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238f856f' stroke-width='2'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cpath d='M10.5 10.5L14 14'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: 0 center;
+  background-position: 12px center;
   box-shadow: none;
 }
 
@@ -60,7 +153,7 @@
 
 .lib-search-clear {
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   display: none;
@@ -100,11 +193,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
   min-height: 44px;
   max-height: 44px;
-  padding: 8px 0;
+  padding: 8px 14px;
   border-radius: 0;
   border: 0;
   border-bottom: 1px solid var(--line2);
@@ -131,6 +224,7 @@
   color: var(--muted);
   font-size: 0.72rem;
   flex: 0 0 auto;
+  margin-right: 2px;
 }
 
 .lib-cat-panel {

@@ -1244,6 +1244,23 @@
       "expiresAt": "2026-07-28T12:00:00.000Z"
     },
     {
+      "id": "library-hero-restore-v460-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek Titelbereich zurück, Kategorie-Leiste Innenabstand — Live + Test",
+      "paths": [
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T20:00:00.000Z"
+    },
+    {
       "id": "quran-overview-structure-v459-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Qurʾān Startseite professionell strukturieren, Springen-Leiste statt Karten, Picker als Bar — nur Test-App",
