@@ -1514,6 +1514,31 @@
       "expiresAt": "2026-07-28T22:00:00.000Z"
     },
     {
+      "id": "float-touchbar-home-live-v483-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe live: Float-Touchbar rechts auf Startseite; App-Status/Erinnerungen entfernen — Test + Besucher",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:30:00.000Z"
+    },
+    {
+      "id": "admin-library-live-push-v484-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Admin Bibliothek nur Live veröffentlichen, Test/Push-Buttons entfernen, Besucher-Push automatisch",
+      "paths": [
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "cloudflare/library-push-admin.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:45:00.000Z"
+    },
+    {
       "id": "scholars-index-modernize-v482-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Gelehrten-Seite modernisieren — Suche, Filter, Sortierung, historische Gruppierung, Monogramme",
@@ -1527,6 +1552,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T23:00:00.000Z"
+    },
+    {
+      "id": "scholars-index-live-v485-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Gelehrten-Index v482 in Test-App live deployen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "scripts/build-scholar-index-meta.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:50:00.000Z"
     }
   ]
 }

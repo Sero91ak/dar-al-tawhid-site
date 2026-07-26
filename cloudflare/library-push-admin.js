@@ -5,6 +5,11 @@
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const LIVE_CATALOG_PATH = "data/library-publications.json";
+const LIBRARY_LIVE_CHECK_SCHEDULE_MS = [0, 3000, 6000, 9000, 12000, 15000, 20000, 30000, 45000, 60000];
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function oneSignalApiKey(env) {
   return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "")
@@ -45,9 +50,10 @@ export function buildLibraryPushPendingRecord(publication) {
     catalogPath: LIVE_CATALOG_PATH,
     publishedAt,
     status: "pending",
-    pushApproved: false,
+    pushApproved: true,
+    pushApprovedAt: publishedAt,
     createdAt: publishedAt,
-    lastError: "Push wartet auf Admin-Freigabe"
+    lastError: ""
   };
 }
 
@@ -114,6 +120,27 @@ export async function verifyLibraryLiveAvailability(env, record) {
   else if (!result.pdfFilePublic) diagnosis = "PDF-Datei öffentlich noch nicht erreichbar.";
 
   return { ok, diagnosis, ...result };
+}
+
+export async function verifyLibraryLiveAvailabilityWithRetry(env, record, options = {}) {
+  const delays = Array.isArray(options.delays) && options.delays.length
+    ? options.delays
+    : LIBRARY_LIVE_CHECK_SCHEDULE_MS;
+  let lastResult = null;
+  let elapsed = 0;
+
+  for (let i = 0; i < delays.length; i++) {
+    const target = delays[i];
+    const waitMs = target - elapsed;
+    if (waitMs > 0) await sleep(waitMs);
+    elapsed = target;
+
+    lastResult = await verifyLibraryLiveAvailability(env, record);
+    lastResult.attempt = i + 1;
+    if (lastResult.ok) return lastResult;
+  }
+
+  return lastResult;
 }
 
 export async function sendLibraryPublicationPush(env, record) {
