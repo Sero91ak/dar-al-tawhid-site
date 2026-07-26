@@ -29,6 +29,9 @@ on:
       - scripts/cf-pages-build.js
       - scripts/sync-app-build-ids.js
       - scripts/overlay-test-staging-from-branch.js
+      - scripts/library-deploy-guard.js
+      - scripts/library-deploy-repair.js
+      - scripts/library-live-parity-check.js
       - scripts/force-workers-test-upload.js
       - scripts/verify-live-deploy.js
       - scripts/app-health-check.js
@@ -57,6 +60,7 @@ jobs:
         run: |
           git fetch origin test-library-canonical
           node scripts/overlay-test-staging-from-branch.js
+          node scripts/library-deploy-repair.js
 
       - name: Build + Build-IDs synchronisieren
         run: npm run build
@@ -71,6 +75,7 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
           node scripts/app-update-recovery-guard.js
+          node scripts/library-deploy-guard.js
 
       - name: Deploy statische App (Workers Static Assets)
         uses: cloudflare/wrangler-action@v3
@@ -95,4 +100,6 @@ jobs:
           SITE_URL: "https://dar-al-tawhid.de"
           DEPLOY_VERIFY_MODE: "all"
           EXPECT_ZAKAT_VERSION: "18"
-        run: node scripts/verify-live-deploy.js
+        run: |
+          node scripts/verify-live-deploy.js
+          node scripts/library-live-parity-check.js

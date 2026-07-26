@@ -1,0 +1,39 @@
+{
+  "locked": true,
+  "lockedAt": "2026-07-26T11:05:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: Bibliothek-PDF-Uploads dürfen nicht erneut durch blockierte Deploys scheitern. Overlay darf test/index.html nicht überschreiben; Live-Katalog und Assets müssen nach Publish erreichbar sein.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Bibliothek-Deploy-Sperre aufheben“.",
+  "lockedPaths": [
+    "scripts/overlay-test-staging-from-branch.js",
+    "scripts/library-deploy-guard.js",
+    "scripts/library-deploy-repair.js",
+    "scripts/library-live-parity-check.js",
+    ".github/workflows/library-deploy-watchdog.yml",
+    ".github/workflows/cloudflare-pages-deploy.yml"
+  ],
+  "forbiddenOverlayFiles": [
+    "test/index.html",
+    "test/version.json"
+  ],
+  "guardFiles": [
+    "test/index.html"
+  ],
+  "requiredMarkers": [
+    "APP_UPDATE_RECOVERY_GUARD",
+    "isAppViewStuck",
+    "markAppBootComplete",
+    "requestAppRecoveryUpdate",
+    "showRecoveryBanner"
+  ],
+  "deployWorkflowMarkers": [
+    "overlay-test-staging-from-branch.js",
+    "library-deploy-repair.js",
+    "library-deploy-guard.js",
+    "app-update-recovery-guard.js"
+  ],
+  "onlineStatuses": [
+    "published",
+    "updated",
+    "preparing"
+  ]
+}
