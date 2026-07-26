@@ -1305,6 +1305,17 @@
       "expiresAt": "2026-07-28T22:00:00.000Z"
     },
     {
+      "id": "quran-labels-search-v464-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Juz/Sūrah/Āyah-Beschriftung sichtbar + Suche professionell einheitlich",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
       "id": "app-boot-autonomous-repair-v461-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Notfall: Test- und Besucher-App hängt bei App wird geladen — autonome Boot-Reparatur",
