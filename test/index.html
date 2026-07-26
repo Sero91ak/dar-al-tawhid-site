@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v475";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v476";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -15885,6 +15885,7 @@ async function refreshContent({forceRender=false}={}){
       await loadExternalDuas();
       await loadCurrentUpdates();
       await loadDailyContent();
+      await refreshLibraryCatalog();
       normalizeLoadedDuas();
       persistOfflineLibrary();
       const changed=before!==postsSignature()+"::"+DUAS.length+"::"+JSON.stringify(currentUpdates)+"::"+dailySig();
@@ -19931,6 +19932,10 @@ function renderHomePopularSection(){
 const HOME_LIBRARY_DISCOVER_CACHE_KEY="darHomeLibraryDiscoverV1";
 const HOME_LIBRARY_DISCOVER_MAX=6;
 function homeLibraryDiscoverDataUrl(){return (isTestAppPath()?"/test":"")+"/data/library-publications.json"}
+function libraryCatalogSignature(pubs){return (pubs||[]).map(p=>`${p.id}|${p.updatedAt||""}|${p.pdfUrl||""}|${p.status||""}|${p.coverUrl||""}`).sort().join(";")}
+function invalidateHomeLibraryDiscoverCache(){window.__homeLibraryDiscoverPubs=null;try{sessionStorage.removeItem(HOME_LIBRARY_DISCOVER_CACHE_KEY)}catch(e){}}
+async function fetchLibraryCatalogRemote(){const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("catalog load failed");const data=await res.json();return homeLibraryVisiblePubs(data.publications||[])}
+async function refreshLibraryCatalog({force=false}={}){if(!navigator.onLine)return false;try{const pubs=await fetchLibraryCatalogRemote();const sig=libraryCatalogSignature(pubs);const prevSig=window.__libraryCatalogSig||"";const changed=force||!prevSig||prevSig!==sig;if(!changed)return false;window.__libraryCatalogSig=sig;window.__homeLibraryDiscoverPubs=pubs;try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}if(window.DARLibraryApp&&typeof window.DARLibraryApp.invalidateCatalog==="function")window.DARLibraryApp.invalidateCatalog();if(currentRoute.view==="home")fillHomeDiscoverLibraryBlock(pubs);else if(currentRoute.view==="bibliothek"&&typeof render==="function")render();return true}catch(e){return false}}
 function homeLibraryVisiblePubs(pubs){return (pubs||[]).filter(p=>!["archived","draft","error","preparing"].includes(String(p.status||""))&&p.pdfUrl)}
 function sortHomeLibraryPubs(pubs){return [...pubs].sort((a,b)=>String(b.updatedAt||b.publishedAt||"").localeCompare(String(a.updatedAt||a.publishedAt||"")))}
 function homeLibraryDiscoverKicker(pub,index){
@@ -19967,8 +19972,8 @@ function renderHomeDiscoverLibraryBlock(pubs){
   if(!visible.length)return"";
   return visible.map((p,i)=>homeLibraryDiscoverCard(p,{index:i})).join("");
 }
-async function fetchHomeLibraryDiscoverCatalog(){
-  if(window.__homeLibraryDiscoverPubs)return window.__homeLibraryDiscoverPubs;
+async function fetchHomeLibraryDiscoverCatalog({force=false}={}){
+  if(!force&&window.__homeLibraryDiscoverPubs)return window.__homeLibraryDiscoverPubs;
   try{
     const raw=sessionStorage.getItem(HOME_LIBRARY_DISCOVER_CACHE_KEY);
     if(raw){
@@ -20011,7 +20016,7 @@ async function hydrateHomeDiscoverLibrary(){
   const el=document.getElementById("homeDiscoverLibraryContent");
   if(!el||currentRoute.view!=="home")return;
   if(window.__homeLibraryDiscoverPubs&&window.__homeLibraryDiscoverPubs.length){fillHomeDiscoverLibraryBlock(window.__homeLibraryDiscoverPubs);return}
-  const pubs=await fetchHomeLibraryDiscoverCatalog();
+  const pubs=await fetchHomeLibraryDiscoverCatalog({force:true});
   fillHomeDiscoverLibraryBlock(pubs);
 }
 function renderHomeDiscoverSection(){
@@ -20349,7 +20354,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v475";
+const APP_BUILD_ID="app-shell-v476";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -20694,7 +20699,7 @@ function ensureLibraryModule(){
     }
     if(window.DARLibraryApp){window.__libraryAssetsReady=true;resolve(window.DARLibraryApp);return}
     const s=document.createElement("script");
-    s.src=`${base}/assets/library/library-app.js?v=19`;
+    s.src=`${base}/assets/library/library-app.js?v=20`;
     s.defer=true;
     s.onload=()=>{window.__libraryAssetsReady=true;resolve(window.DARLibraryApp)};
     s.onerror=reject;
@@ -21605,9 +21610,12 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
           var remoteCount = Array.isArray(meta) ? meta.length : 0;
           var currentCount = Array.isArray(posts) ? posts.length : 0;
           if (remoteCount > currentCount) {
-            showPostsBanner((remoteCount - currentCount) + ' neue Beiträge verfügbar');
+            refreshPosts();
             return;
           }
+        }
+        if (typeof refreshLibraryCatalog === 'function') {
+          await refreshLibraryCatalog();
         }
         hideAllBanners();
       } catch (e) {
@@ -21619,6 +21627,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     async function refreshPosts() {
       hideAllBanners();
       if (typeof syncAppServices === 'function') await syncAppServices({ silent: true });
+      if (typeof refreshLibraryCatalog === 'function') await refreshLibraryCatalog({ force: true });
       if (typeof refreshContent === 'function') await refreshContent({ forceRender: true });
       else {
         if (typeof loadPosts === 'function') await loadPosts();

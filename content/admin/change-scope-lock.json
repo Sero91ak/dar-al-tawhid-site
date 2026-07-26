@@ -1460,6 +1460,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "autonomous-content-refresh-v476-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Beiträge und PDF-Bibliothek autonom im Hintergrund aktualisieren; Banner nur bei großem Darstellungs-Update",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
     }
   ]
 }
