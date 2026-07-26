@@ -1447,6 +1447,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "home-refresh-start-v475-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Aktualisieren-Button rechts neben Startseite, leicht rote Umrandung, Neon-Glow, live auf Besucher-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
     }
   ]
 }
