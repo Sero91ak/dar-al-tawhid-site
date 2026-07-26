@@ -1192,6 +1192,17 @@
       "expiresAt": "2026-07-28T06:00:00.000Z"
     },
     {
+      "id": "quran-reader-chrome-v454-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Leser mit ausblendbarer Kopfleiste, Einstellungsmenü und Juz/Sure/Āyah-Auswahl — nur Test-App",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T12:00:00.000Z"
+    },
+    {
       "id": "app-stability-system-v453-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: App-weite autonome Stabilität — Guard, Repair, Parity, Watchdog für alle Bereiche",
