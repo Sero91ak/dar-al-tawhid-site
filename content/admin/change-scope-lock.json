@@ -1525,6 +1525,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T23:30:00.000Z"
+    },
+    {
+      "id": "admin-library-live-push-v484-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Admin Bibliothek nur Live veröffentlichen, Test/Push-Buttons entfernen, Besucher-Push automatisch",
+      "paths": [
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "cloudflare/library-push-admin.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:45:00.000Z"
     }
   ]
 }
