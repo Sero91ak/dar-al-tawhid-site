@@ -1172,6 +1172,24 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "library-deploy-guard-v452-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Sperre gegen blockierte Bibliothek-PDF-Uploads + autonome Reparatur bei Deploy-Ausfall",
+      "paths": [
+        "content/admin/library-deploy-lock.json",
+        "scripts/library-deploy-guard.js",
+        "scripts/library-deploy-repair.js",
+        "scripts/library-live-parity-check.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "scripts/app-health-check.js",
+        "cloudflare/library-admin.js",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".github/workflows/library-deploy-watchdog.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
     }
   ]
 }

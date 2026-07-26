@@ -198,6 +198,65 @@ function findDuplicates(catalog, pub, ignoreId) {
   return warnings;
 }
 
+function toTestRepoPath(assetPath) {
+  const p = String(assetPath || "").trim().replace(/^\//, "");
+  if (!p) return "";
+  if (p.startsWith("test/")) return p;
+  if (p.startsWith("assets/")) return `test/${p}`;
+  return p;
+}
+
+function mirrorPublicationForTest(pub, nowIso) {
+  const mirrored = normalizePublication(
+    {
+      ...pub,
+      pdfUrl: pub.pdfUrl ? `/${toTestRepoPath(pub.pdfUrl)}` : "",
+      coverUrl: pub.coverUrl ? `/${toTestRepoPath(pub.coverUrl)}` : "",
+      coverUrls: {
+        small: pub.coverUrls?.small ? `/${toTestRepoPath(pub.coverUrls.small)}` : "",
+        medium: pub.coverUrls?.medium ? `/${toTestRepoPath(pub.coverUrls.medium)}` : "",
+        master: pub.coverUrls?.master ? `/${toTestRepoPath(pub.coverUrls.master)}` : ""
+      }
+    },
+    nowIso
+  );
+  return mirrored;
+}
+
+async function appendTestCatalogMirror(env, incoming, pdfFiles, coverFiles, helpers, fileEntries, nowIso) {
+  const testConfig = libraryConfigForTarget("test");
+  let testCatalog;
+  try {
+    testCatalog = (await readLibraryCatalog(env, helpers, { target: "test" })).catalog;
+  } catch {
+    testCatalog = emptyCatalog();
+  }
+
+  const testPub = mirrorPublicationForTest(incoming, nowIso);
+  const idx = testCatalog.publications.findIndex((p) => p.id === testPub.id);
+  if (idx >= 0) testCatalog.publications[idx] = { ...testCatalog.publications[idx], ...testPub };
+  else testCatalog.publications.unshift(testPub);
+  testCatalog.updatedAt = nowIso;
+
+  fileEntries.push({
+    path: testConfig.path,
+    content: `${JSON.stringify(testCatalog, null, 2)}\n`
+  });
+
+  const mirrorBinary = (files) => {
+    for (const file of files) {
+      const testPath = toTestRepoPath(file.path);
+      if (!testPath || testPath === file.path) continue;
+      const exists = fileEntries.some((entry) => entry.path === testPath);
+      if (!exists) {
+        fileEntries.push({ path: testPath, binary: true, contentBase64: file.contentBase64 });
+      }
+    }
+  };
+  mirrorBinary(pdfFiles);
+  mirrorBinary(coverFiles);
+}
+
 export async function saveLibraryPublication(env, input, helpers) {
   const nowIso = new Date().toISOString();
   const publish = input?.publish === true;
@@ -253,6 +312,11 @@ export async function saveLibraryPublication(env, input, helpers) {
     ...coverFiles.map((f) => ({ path: f.path, binary: true, contentBase64: f.contentBase64 })),
     { path, content: `${JSON.stringify(catalog, null, 2)}\n` }
   ];
+
+  if (publish && target === "live") {
+    await appendTestCatalogMirror(env, incoming, pdfFiles, coverFiles, helpers, fileEntries, nowIso);
+  }
+
   await helpers.githubCommitBatch(
     env,
     owner,

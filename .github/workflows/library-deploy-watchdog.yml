@@ -1,0 +1,38 @@
+name: Bibliothek Deploy Watchdog
+
+# Autonome Reparatur: Wenn Live-Katalog/PDFs hinter GitHub zurückliegen, Deploy erneut auslösen.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15,45 * * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  library-deploy-watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Live-Bibliothek mit Repo abgleichen
+        id: parity
+        continue-on-error: true
+        env:
+          SITE_URL: "https://dar-al-tawhid.de"
+        run: node scripts/library-live-parity-check.js
+
+      - name: Deploy erneut auslösen (Live hinter GitHub)
+        if: steps.parity.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Bibliothek-Watchdog: Live-Parität fehlgeschlagen — Deploy wird ausgelöst"
+          gh workflow run "Deploy Besucher-App (Cloudflare Workers)" --ref main

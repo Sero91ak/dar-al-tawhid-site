@@ -2,14 +2,22 @@
 /**
  * Legt Test-App-Staging-Dateien aus test-library-canonical über main-Deploy.
  * Verhindert, dass häufige main-Deploys die Test-App wieder entfernen.
+ *
+ * LIBRARY_DEPLOY_GUARD: test/index.html und test/version.json dürfen NIEMALS
+ * überschrieben werden — sonst blockiert APP_UPDATE_RECOVERY_GUARD den Deploy
+ * und Bibliothek-PDFs erreichen Besucher nicht.
  */
 const { execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const { runLibraryDeployRepair } = require("./library-deploy-repair.js");
 
 const ROOT = path.resolve(__dirname, "..");
 const BRANCH = process.env.TEST_STAGING_BRANCH || "test-library-canonical";
 const REMOTE_REF = `origin/${BRANCH}`;
+
+/** LIBRARY_DEPLOY_GUARD: diese Dateien dürfen nie aus test-library-canonical überschrieben werden */
+const FORBIDDEN_OVERLAY_FILES = ["test/index.html", "test/version.json"];
 
 const OVERLAY_FILES = [
   "test/assets/library/canonical-source-library.js",
@@ -54,7 +62,18 @@ function listFilesOnRef(ref, dir) {
   }
 }
 
+function snapshotGuardFiles() {
+  const snapshots = {};
+  for (const file of FORBIDDEN_OVERLAY_FILES) {
+    const full = path.join(ROOT, file);
+    if (fs.existsSync(full)) snapshots[file] = fs.readFileSync(full);
+  }
+  return snapshots;
+}
+
 function main() {
+  const guardSnapshots = snapshotGuardFiles();
+
   try {
     runGit(["rev-parse", "--verify", REMOTE_REF]);
   } catch {
@@ -67,9 +86,18 @@ function main() {
   const present = OVERLAY_FILES.filter((file) => fileExistsOnRef(REMOTE_REF, file));
   const missing = OVERLAY_FILES.filter((file) => !present.includes(file));
   const coverFiles = OVERLAY_DIRS.flatMap((dir) => listFilesOnRef(REMOTE_REF, dir));
-  const checkoutFiles = [...new Set([...present, ...coverFiles])];
+  const checkoutFiles = [...new Set([...present, ...coverFiles])].filter(
+    (file) => !FORBIDDEN_OVERLAY_FILES.includes(file)
+  );
   if (!present.length) {
     throw new Error(`Keine Test-Staging-Dateien auf ${REMOTE_REF} gefunden.`);
+  }
+
+  const blocked = [...present, ...coverFiles].filter((file) => FORBIDDEN_OVERLAY_FILES.includes(file));
+  if (blocked.length) {
+    console.warn(
+      `overlay-test-staging: LIBRARY_DEPLOY_GUARD blockiert ${blocked.length} verbotene Datei(en): ${blocked.join(", ")}`
+    );
   }
 
   runGit(["checkout", REMOTE_REF, "--", ...checkoutFiles]);
@@ -79,6 +107,8 @@ function main() {
   if (missing.length) {
     console.log(`overlay-test-staging: optional fehlend (${missing.length}): ${missing.join(", ")}`);
   }
+
+  runLibraryDeployRepair(guardSnapshots);
 
   const required = [
     "test/index.html",
@@ -96,4 +126,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { OVERLAY_FILES, OVERLAY_DIRS, main };
+module.exports = { OVERLAY_FILES, OVERLAY_DIRS, FORBIDDEN_OVERLAY_FILES, main };

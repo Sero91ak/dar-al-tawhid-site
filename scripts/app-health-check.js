@@ -130,6 +130,13 @@ try {
   fail(`app-update-recovery-guard: ${e.message}`);
 }
 
+try {
+  const libraryDeployFails = require("./library-deploy-guard.js").runLibraryDeployGuard();
+  if (libraryDeployFails) failed += libraryDeployFails;
+} catch (e) {
+  fail(`library-deploy-guard: ${e.message}`);
+}
+
 // Push scripts
 if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-prayer-push.js fehlt");
 if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");
