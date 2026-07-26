@@ -1201,7 +1201,7 @@
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
       <div class="lib-admin-manage-card-head">
         <div class="lib-admin-manage-card-top">
-          <div class="lib-admin-list-cover">${cover ? `<img src="${esc(cover)}" alt="">` : `<span aria-hidden="true">📄</span>`}</div>
+          <div class="lib-admin-list-cover">${cover ? `<img src="${esc(cover)}" alt="" onerror="this.style.display='none';this.nextElementSibling?.removeAttribute('hidden')"><span class="lib-admin-cover-fallback" hidden aria-hidden="true">📄</span>` : `<span aria-hidden="true">📄</span>`}</div>
           <div class="lib-admin-list-main">
             <div class="lib-admin-list-title-row">
               <b class="lib-admin-manage-title">${esc(pub.title || "Ohne Titel")}</b>

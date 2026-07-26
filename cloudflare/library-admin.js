@@ -332,7 +332,7 @@ export async function saveLibraryPublication(env, input, helpers) {
     warnings,
     path,
     target,
-    published: publish && incoming.status === "published"
+    published: publish && (incoming.status === "published" || incoming.status === "updated")
   };
 }
 
