@@ -8,7 +8,7 @@
     "scripts/library-deploy-guard.js",
     "scripts/library-deploy-repair.js",
     "scripts/library-live-parity-check.js",
-    ".github/workflows/library-deploy-watchdog.yml",
+    ".github/workflows/app-stability-watchdog.yml",
     ".github/workflows/cloudflare-pages-deploy.yml"
   ],
   "forbiddenOverlayFiles": [
@@ -27,9 +27,9 @@
   ],
   "deployWorkflowMarkers": [
     "overlay-test-staging-from-branch.js",
-    "library-deploy-repair.js",
-    "library-deploy-guard.js",
-    "app-update-recovery-guard.js"
+    "app-stability-repair.js",
+    "app-stability-guard.js",
+    "app-live-parity-check.js"
   ],
   "onlineStatuses": [
     "published",

@@ -11,6 +11,7 @@ const { execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const { runLibraryDeployRepair } = require("./library-deploy-repair.js");
+const { runAppStabilityRepair } = require("./app-stability-repair.js");
 
 const ROOT = path.resolve(__dirname, "..");
 const BRANCH = process.env.TEST_STAGING_BRANCH || "test-library-canonical";
@@ -109,6 +110,7 @@ function main() {
   }
 
   runLibraryDeployRepair(guardSnapshots);
+  runAppStabilityRepair(guardSnapshots);
 
   const required = [
     "test/index.html",

@@ -1,0 +1,66 @@
+{
+  "locked": true,
+  "lockedAt": "2026-07-26T11:15:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: App-weite autonome Stabilität — Guard, Repair, Live-Parität und Watchdog für alle kritischen Bereiche (Deploy, Bibliothek, App-Update, Build-Sync, Beiträge).",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „App-Stabilitäts-Sperre aufheben“.",
+  "lockedPaths": [
+    "content/admin/app-stability-lock.json",
+    "scripts/app-stability-guard.js",
+    "scripts/app-stability-repair.js",
+    "scripts/app-live-parity-check.js",
+    ".github/workflows/app-stability-watchdog.yml",
+    ".github/workflows/cloudflare-pages-deploy.yml",
+    "scripts/app-health-check.js",
+    "scripts/overlay-test-staging-from-branch.js"
+  ],
+  "deployWorkflowMarkers": [
+    "overlay-test-staging-from-branch.js",
+    "app-stability-repair.js",
+    "app-stability-guard.js",
+    "app-live-parity-check.js"
+  ],
+  "watchdog": {
+    "workflow": ".github/workflows/app-stability-watchdog.yml",
+    "deployWorkflow": "Deploy Besucher-App (Cloudflare Workers)",
+    "purgeWorkflow": "Purge live site cache",
+    "schedule": "15,45 * * * *"
+  },
+  "domains": [
+    {
+      "id": "deploy-overlay",
+      "label": "Deploy-Overlay / Bibliothek",
+      "lockFile": "content/admin/library-deploy-lock.json",
+      "guardModule": "library-deploy-guard.js",
+      "guardExport": "runLibraryDeployGuard",
+      "repairModule": "library-deploy-repair.js",
+      "repairExport": "runLibraryDeployRepair",
+      "parityModule": "library-live-parity-check.js",
+      "parityExport": "checkLibraryLiveParity",
+      "parityOptions": { "catalogPath": "data/library-publications.json" }
+    },
+    {
+      "id": "test-library",
+      "label": "Test-Bibliothek",
+      "parityModule": "library-live-parity-check.js",
+      "parityExport": "checkLibraryLiveParity",
+      "parityOptions": { "catalogPath": "test/data/library-publications.json" }
+    },
+    {
+      "id": "app-update-recovery",
+      "label": "App-Update / Recovery-Banner",
+      "lockFile": "content/admin/app-update-recovery-lock.json",
+      "guardModule": "app-update-recovery-guard.js",
+      "guardExport": "runAppUpdateRecoveryGuard"
+    },
+    {
+      "id": "build-sync",
+      "label": "Build-ID Besucher + Test",
+      "parityKind": "build-sync"
+    },
+    {
+      "id": "posts-index",
+      "label": "Beitrags-Index",
+      "parityKind": "posts-index"
+    }
+  ]
+}
