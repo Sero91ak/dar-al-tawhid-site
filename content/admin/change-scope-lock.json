@@ -1283,6 +1283,17 @@
       "expiresAt": "2026-07-28T18:00:00.000Z"
     },
     {
+      "id": "test-js-syntax-fix-v462-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Test-App hängt bei App wird geladen — JS-Syntaxfehler bindQuranDisplaySheet",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
       "id": "app-boot-autonomous-repair-v461-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Notfall: Test- und Besucher-App hängt bei App wird geladen — autonome Boot-Reparatur",
