@@ -8954,7 +8954,7 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
 }
 
 /* v202 feature-discovery final overrides */
-body.is-home-route .float-actions,body.is-area-route .float-actions{display:none!important}
+body.is-area-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:0 10px 24px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin,.feature-card .feature-dismiss{color:var(--text)!important}
 </style>
@@ -9497,14 +9497,12 @@ window.DAR_ANALYTICS_CONFIG={
 
 
 <style id="feature-final-v202">
-body.is-home-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{color:var(--text)!important;border-color:rgba(214,180,106,.42)!important;background:linear-gradient(135deg,rgba(214,180,106,.18),rgba(255,255,255,.08))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 22px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin{color:var(--text)!important}
 </style>
 
 <style id="feature-layout-v204">
 /* v203: compact full-width feature discovery, no overlap */
-body.is-home-route .float-actions{display:none!important}
 .feature-section,.more-group{width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important;box-sizing:border-box!important}
 .feature-section{padding:12px!important;border-radius:22px!important}
 .feature-head{margin-bottom:9px!important}
@@ -14747,40 +14745,6 @@ html[data-theme="dark"]{--home-refresh-ring:rgba(220,92,92,.50);--home-refresh-g
   .view-head-home-row.view-head-home-row--v475 .view-head-home-hijri-end{max-width:min(48vw,196px)!important}
 }
 </style>
-<style id="home-header-quick-v479">
-/* v479 · Startseite: Favoriten, Glocke und Konto-Chip rechts in der Kopfzeile */
-.view-head-home--v380 .view-head-home-chips{
-  display:flex!important;align-items:center!important;justify-content:space-between!important;
-  flex-wrap:wrap!important;gap:8px!important;width:100%!important;margin-top:10px!important;
-}
-.home-header-quick-actions{
-  display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;margin-right:auto;
-}
-.home-header-quick-btn{
-  width:36px;height:36px;min-width:36px;min-height:36px;padding:0;border-radius:12px;
-  border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2)) 32%,var(--theme-border,var(--line)) 68%);
-  background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface,var(--card)) 92%,var(--theme-accent,var(--gold2)) 8%),color-mix(in srgb,var(--theme-surface,var(--card)) 88%,var(--theme-text,var(--cream)) 4%));
-  color:color-mix(in srgb,var(--theme-accent,var(--gold2)) 88%,var(--theme-text,var(--cream)) 12%);
-  font-size:17px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
-  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--theme-accent,var(--gold2)) 10%,transparent);
-  transition:border-color .18s ease,box-shadow .18s ease,filter .15s ease;
-}
-.home-header-quick-btn:hover,.home-header-quick-btn:focus-visible{
-  filter:brightness(1.06);outline:none;
-  border-color:color-mix(in srgb,var(--theme-accent,var(--gold2)) 55%,var(--theme-border) 45%);
-}
-.home-header-quick-btn.is-push-active{
-  border-color:rgba(140,255,154,.55)!important;
-  color:#ebffdf!important;
-  box-shadow:0 0 0 1px rgba(140,255,154,.22),0 0 12px rgba(140,255,154,.18)!important;
-}
-.view-head-home--v380 .view-head-home-chips .home-account-slot{
-  margin-left:auto!important;flex:0 1 auto!important;min-width:0!important;
-}
-@media(max-width:520px){
-  .home-header-quick-btn{width:34px;height:34px;min-width:34px;min-height:34px;font-size:16px}
-}
-</style>
 <style id="about-page-smart-v435">
 /* v435 · Über diese App: kompakt, lesbar, modern */
 .about-page--smart{display:grid;gap:12px;margin-bottom:12px}
@@ -15863,7 +15827,7 @@ function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;e
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card")||el.classList.contains("home-discover-pdf-card");const swipePdf=el.classList.contains("home-discover-pdf-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;const dx=ev.clientX-swipeStart.x,dy=ev.clientY-swipeStart.y;if(swipePdf){if(Math.abs(dx)>10&&Math.abs(dx)>=Math.abs(dy))el.dataset.navSwipeCancel="1"}else if(Math.hypot(dx,dy)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointerup",()=>{swipeStart=null},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/widgets/?from=test";return}if(view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(isTestAppPath()?view:"more",isTestAppPath()?value:"");return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
-function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380 view-head-home-row--v475"><div class="view-head-home-leading"><h2 class="home-start-title">${esc(title)}</h2>${renderHomeRefreshButton()}</div><div class="view-head-home-hijri-end">${hijriFrame}</div><span id="homeRefreshLive" class="home-refresh-live-header" aria-live="polite"></span></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><div class="home-header-quick-actions" data-home-header-quick><button type="button" id="homeHeaderSavedBtn" class="home-header-quick-btn" aria-label="Favoriten" title="Favoriten">♡</button><button type="button" id="homeHeaderPushBtn" class="home-header-quick-btn" aria-label="Benachrichtigungen" title="Benachrichtigungen">🔔</button></div><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
+function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380 view-head-home-row--v475"><div class="view-head-home-leading"><h2 class="home-start-title">${esc(title)}</h2>${renderHomeRefreshButton()}</div><div class="view-head-home-hijri-end">${hijriFrame}</div><span id="homeRefreshLive" class="home-refresh-live-header" aria-live="polite"></span></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
@@ -17472,7 +17436,7 @@ function bindPrayerPushAccordion(){const btn=document.getElementById("prayerPush
 function renderPrayerReminderControls({withLocationBtn=false,locationLabel="📍 Standort freigeben",compactBar=false}={}){const settings=getPrayerSettings();const open=isPrayerPushAccordionOpen();const summary=prayerPushSettingsSummary(settings);const inner=renderPrayerReminderSettingsInner({withLocationBtn,locationLabel});if(compactBar){return`<div class="prayer-overview__push prayer-push-accordion prayer-push-accordion--compact ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-overview__push-toggle" aria-expanded="${open?"true":"false"}" aria-controls="prayerPushSettingsBody"><span class="prayer-overview__push-bell" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><span class="prayer-overview__push-copy" id="prayerPushSettingsSummary"><span class="prayer-overview__push-title" id="prayerPushAccordionTitle">Push-Erinnerungen</span><span class="prayer-overview__push-sep" aria-hidden="true">·</span><span class="prayer-overview__push-status-text" id="prayerPushStatusText">${esc(prayerPushStatusInline(settings))}</span></span><span class="prayer-overview__push-chevron" aria-hidden="true">${prayerOverviewChevronSvg()}</span></button><div id="prayerPushSettingsBody" class="prayer-overview__push-body prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}return `<div class="prayer-push-accordion ${open?"is-open":""}"><button type="button" id="prayerPushAccordionToggle" class="prayer-push-accordion-toggle" aria-expanded="${open?"true":"false"}"><span class="prayer-push-accordion-icon">${open?"▾":"▸"}</span><span class="prayer-push-accordion-title">${open?"🔔 Push-Einstellungen schließen":"🔔 Push-Einstellungen öffnen"}</span><span class="prayer-push-accordion-summary">${esc(summary)}</span></button><div id="prayerPushSettingsBody" class="prayer-push-accordion-body" ${open?"":"hidden"}>${inner}</div></div>`}
 function updatePrayerReminderButtons(){const s=getPrayerSettings();document.querySelectorAll("#enablePrayerReminderBtn").forEach(btn=>{const active=Boolean(s.reminder);btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=active?"✓ Erinnerung aktiv":"🔔 Erinnerung aktivieren"});document.querySelectorAll("#enableJummahPushBtn").forEach(btn=>{const active=jummahPref(s,"jummahNotifications");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Jumuʿah-Erinnerung aktivieren"});document.querySelectorAll("#enableDailyDuaPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Duʿāʾ des Tages · 09:00"});document.querySelectorAll("#enableDailyRecommendationPushBtn").forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Heute empfohlen · 12:00"});updatePrayerPushAccordionUi()}
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
-function updatePushFloatButton(){const state=readOneSignalPushSubscriptionState(window.OneSignal);const active=state.ready;const btn=$("pushFloat");if(btn){btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}const headerPush=$("homeHeaderPushBtn");if(headerPush)headerPush.classList.toggle("is-push-active",active)}
+function updatePushFloatButton(){const state=readOneSignalPushSubscriptionState(window.OneSignal);const active=state.ready;const btn=$("pushFloat");if(btn){btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
@@ -19486,45 +19450,12 @@ function homePushStatusCompact(settings=getPrayerSettings()){
   return{line,actionLabel:"",state:prayerOn&&duaOn&&recOn?"full":"partial",ariaLabel:`Push-Erinnerungen öffnen. ${line.replace(/\s*·\s*/g,", ")}.`};
 }
 function homeHeaderSyncChipLabel(){return ""}
-function bindHomeHeaderQuickActions(){
-  const savedBtn=$("homeHeaderSavedBtn");
-  if(savedBtn&&!savedBtn.dataset.bound){savedBtn.dataset.bound="1";savedBtn.onclick=()=>navigate("saved")}
-  const pushBtn=$("homeHeaderPushBtn");
-  if(pushBtn&&!pushBtn.dataset.bound){
-    pushBtn.dataset.bound="1";
-    pushBtn.onclick=()=>{
-      const s=homePushStatusCompact();
-      if(s.state==="permission-denied"&&hasNotificationApi()){requestNotificationPermission().then(()=>{updateHomeAppStatusUi();openHomePushRemindersSheet()}).catch(()=>openHomePushRemindersSheet());return}
-      openHomePushRemindersSheet();
-    };
-  }
-  const headerPush=$("homeHeaderPushBtn");
-  if(headerPush&&typeof readOneSignalPushSubscriptionState==="function"){
-    const state=readOneSignalPushSubscriptionState(window.OneSignal);
-    headerPush.classList.toggle("is-push-active",!!state.ready);
-  }
-}
 function renderHomeHeaderSyncChip(){return ""}
 function updateHomeAppStatusUi(){
   ensureHomeUpdateButtonVisible();
   bindHomeRefreshButton();
-  bindHomeHeaderQuickActions();
   if(window.DAR_ACCOUNT_VISIBILITY&&typeof window.DAR_ACCOUNT_VISIBILITY.syncHomeAccountSlots==="function")window.DAR_ACCOUNT_VISIBILITY.syncHomeAccountSlots();
   updateHomeRefreshButtonUi({busy:!!homeRefreshPromise||postsSyncBusy});
-  const sync=homeSyncStatusSummary();
-  const push=homePushStatusCompact();
-  const syncLine=document.getElementById("homeAppStatusSyncLine");
-  const pushLine=document.getElementById("homeAppStatusPushLine");
-  const syncBtn=document.getElementById("homeAppStatusSync");
-  const pushBtn=document.getElementById("homeAppStatusPush");
-  if(syncLine)syncLine.textContent=sync.line;
-  if(pushLine)pushLine.textContent=push.line;
-  if(syncBtn){
-    syncBtn.setAttribute("aria-label",sync.aria);
-    syncBtn.classList.toggle("is-update",sync.state==="update");
-    syncBtn.classList.toggle("is-error",sync.state==="error");
-  }
-  if(pushBtn)pushBtn.setAttribute("aria-label",push.ariaLabel);
   const strip=document.getElementById("homePushRemindersStrip");
   if(strip)updateHomePushRemindersSummary();
 }
@@ -19783,14 +19714,6 @@ function bindHomeDiscoverPdfSwipeGuard(){
 function bindHomeV380Events(){
   updateHomeAppStatusUi();
   bindHomeRefreshButton();
-  const syncBtn=document.getElementById("homeAppStatusSync");
-  if(syncBtn)syncBtn.onclick=()=>refreshHomeData();
-  const pushBtn=document.getElementById("homeAppStatusPush");
-  if(pushBtn)pushBtn.onclick=()=>{
-    const s=homePushStatusCompact();
-    if(s.state==="permission-denied"&&hasNotificationApi()){requestNotificationPermission().then(()=>{updateHomeAppStatusUi();openHomePushRemindersSheet()}).catch(()=>openHomePushRemindersSheet());return}
-    openHomePushRemindersSheet();
-  };
   bindHomePushRemindersSheet();
   const clearBtn=document.getElementById("homeSearchClear");
   const searchInput=$("homeSearchInput");
@@ -20040,7 +19963,7 @@ function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount"
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderLibraryHomeFocusTile()}${renderOfflineBox()}${renderHomeAppStatus()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
+function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderLibraryHomeFocusTile()}${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
 function renderScholars(){const items=buildScholarCatalog();return`${setPageHeader("Gelehrte","Beiträge nach Imāmen, Ṣaḥābah und frühen Gelehrten","Gelehrte")}<section class="grid-list">${items.length?items.map(s=>listCard(s.label,s.count+" Beiträge","scholar",s.key,"👤")).join(""):`<div class="empty">Noch keine Gelehrten erkannt.</div>`}</section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section>`}
