@@ -2868,11 +2868,13 @@ async function processPendingLibraryPushUntilLive(env, record) {
   }
 
   const liveCheck = await verifyLibraryLiveAvailability(env, current);
-  await writePendingPushStatus(env, key, {
+  const statusPatch = {
     lastCheckAt: new Date().toISOString(),
     liveCheck,
     lastError: liveCheck.ok ? "" : liveCheck.diagnosis
-  });
+  };
+  if (liveCheck.resolvedPdfUrl) statusPatch.pdfUrl = liveCheck.resolvedPdfUrl;
+  await writePendingPushStatus(env, key, statusPatch);
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
@@ -2921,11 +2923,11 @@ async function retryPendingLibraryPush(env, input) {
   const record = {
     kind: "library",
     publicationId,
-    slug: existing?.slug || slug,
-    publicationTitle: existing?.publicationTitle || publicationTitle,
-    pdfUrl: existing?.pdfUrl || pdfUrl,
+    slug: slug || existing?.slug || publicationId,
+    publicationTitle: publicationTitle || existing?.publicationTitle || "Neue PDF",
+    pdfUrl: pdfUrl || existing?.pdfUrl || "",
     catalogPath: existing?.catalogPath || "data/library-publications.json",
-    publishedAt: existing?.publishedAt || publishedAt,
+    publishedAt: publishedAt || existing?.publishedAt || new Date().toISOString(),
     status: "pending",
     pushApproved: true,
     pushApprovedAt: new Date().toISOString()

@@ -1393,6 +1393,27 @@
       "expiresAt": "2026-07-28T22:00:00.000Z"
     },
     {
+      "id": "library-live-publish-v473-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Bibliothek Live-PDF Deploy blockiert (Muhakamah), Cover/Push nicht in Besucher-App — dauerhafte Freigabe für Admin-Live-Veröffentlichungen",
+      "paths": [
+        "data/library-publications.json",
+        "test/data/library-publications.json",
+        "assets/library/pdfs/",
+        "assets/library/covers/",
+        "test/assets/library/pdfs/",
+        "test/assets/library/covers/",
+        "content/admin/pending-pushes.json",
+        "cloudflare/library-admin.js",
+        "cloudflare/library-push-admin.js",
+        "cloudflare/worker.js",
+        "admin/library-manager.js",
+        "scripts/library-live-parity-check.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T06:00:00.000Z"
+    },
+    {
       "id": "app-boot-autonomous-repair-v461-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Notfall: Test- und Besucher-App hängt bei App wird geladen — autonome Boot-Reparatur",

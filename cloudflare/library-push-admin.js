@@ -56,7 +56,7 @@ export async function verifyLibraryLiveAvailability(env, record) {
   const bust = Date.now();
   const publicationId = String(record?.publicationId || "").trim();
   const slug = String(record?.slug || "").trim();
-  const pdfPath = String(record?.pdfUrl || "").trim().replace(/^\//, "");
+  let pdfPath = String(record?.pdfUrl || "").trim().replace(/^\//, "");
   const catalogPath = String(record?.catalogPath || LIVE_CATALOG_PATH).trim();
   const result = {
     site,
@@ -69,17 +69,23 @@ export async function verifyLibraryLiveAvailability(env, record) {
     visitorUrl: buildLibraryPushUrl(env, slug, bust)
   };
 
+  let publications = [];
   try {
     const catalogRes = await fetch(`${site}/${catalogPath}?v=${bust}`, { cache: "no-store" });
     if (catalogRes.ok) {
       result.catalogFoundPublic = true;
       const catalog = await catalogRes.json();
-      const publications = Array.isArray(catalog?.publications) ? catalog.publications : [];
-      result.publicationInCatalog = publications.some((item) => {
+      publications = Array.isArray(catalog?.publications) ? catalog.publications : [];
+      const pubEntry = publications.find((item) => {
         const id = String(item?.id || "").trim();
         const itemSlug = String(item?.slug || "").trim();
         return (publicationId && id === publicationId) || (slug && itemSlug === slug);
       });
+      result.publicationInCatalog = Boolean(pubEntry);
+      if (pubEntry?.pdfUrl) {
+        pdfPath = String(pubEntry.pdfUrl).trim().replace(/^\//, "");
+        result.resolvedPdfUrl = `/${pdfPath}`;
+      }
     } else {
       result.catalogHttpStatus = catalogRes.status;
     }
