@@ -12,8 +12,6 @@ const BRANCH = process.env.TEST_STAGING_BRANCH || "test-library-canonical";
 const REMOTE_REF = `origin/${BRANCH}`;
 
 const OVERLAY_FILES = [
-  "test/index.html",
-  "test/version.json",
   "test/assets/library/canonical-source-library.js",
   "test/assets/library/canonical-library-addon.js",
   "data/books-library.json",

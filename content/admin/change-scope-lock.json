@@ -1159,6 +1159,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "library-la-ilaha-deploy-sync-v452-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Bedingungen von La ilaha illa Allah — Deploy blockiert, Test-Katalog fehlt, Cover/PDF nicht live",
+      "paths": [
+        "scripts/overlay-test-staging-from-branch.js",
+        "test/data/library-publications.json",
+        "test/assets/library/pdfs/pub-20260726-001-v1-1.pdf",
+        "test/assets/library/covers/pub-20260726-001/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
     }
   ]
 }
