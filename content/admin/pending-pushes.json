@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-26T19:56:20.441Z",
+  "generated": "2026-07-26T19:56:22.065Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -865,11 +865,11 @@
       "status": "pending",
       "pushApproved": true,
       "createdAt": "2026-07-26T19:55:14.531Z",
-      "lastError": "Push wartet auf Admin-Freigabe",
+      "lastError": "PDF noch nicht im Live-Katalog enthalten.",
       "postId": "lib:pub-20260726-003",
-      "updatedAt": "2026-07-26T19:56:20.441Z",
+      "updatedAt": "2026-07-26T19:56:22.065Z",
       "pushApprovedAt": "2026-07-26T19:56:20.168Z",
-      "lastCheckAt": "2026-07-26T19:54:08.243Z",
+      "lastCheckAt": "2026-07-26T19:56:21.862Z",
       "liveCheck": {
         "ok": false,
         "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
@@ -878,10 +878,9 @@
         "slug": "muhakamah-tahakum-tahkim",
         "catalogFoundPublic": true,
         "publicationInCatalog": false,
-        "pdfFilePublic": false,
+        "pdfFilePublic": true,
         "visitorUrlOk": true,
-        "visitorUrl": "https://dar-al-tawhid.de/?v=1785095648199#bibliothek/muhakamah-tahakum-tahkim",
-        "pdfHttpStatus": 404
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1785095781572#bibliothek/muhakamah-tahakum-tahkim"
       }
     }
   }
