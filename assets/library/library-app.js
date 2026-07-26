@@ -721,6 +721,17 @@
     return renderBibliothekReader(slug);
   }
 
+  function invalidateCatalog() {
+    catalog = null;
+    catalogError = "";
+    catalogLoading = null;
+  }
+
+  function refreshCatalog() {
+    invalidateCatalog();
+    return ensureCatalog();
+  }
+
   function ensureCatalog() {
     if (catalog) return Promise.resolve(catalog);
     if (catalogLoading) return catalogLoading;
@@ -1385,6 +1396,8 @@
   global.DARLibraryApp = {
     CATEGORIES,
     ensureCatalog,
+    invalidateCatalog,
+    refreshCatalog,
     renderBibliothek: () => renderBibliothek(),
     renderBibliothekDetail: (slug) => renderBibliothekDetailView(slug),
     renderBibliothekReader: (slug) => renderBibliothekReaderView(slug),
