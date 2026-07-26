@@ -1499,6 +1499,32 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "float-touchbar-home-restore-v481-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Korrektur: Float-Touchbar rechts (Qibla/Favoriten/Glocke) auf Startseite wiederherstellen; v479 App-Status/Header-Chips entfernen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "float-touchbar-home-live-v483-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe live: Float-Touchbar rechts auf Startseite; App-Status/Erinnerungen entfernen — Test + Besucher",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:30:00.000Z"
     }
   ]
 }
