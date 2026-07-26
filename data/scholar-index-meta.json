@@ -1,0 +1,1522 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-26T22:14:54.578Z",
+  "groups": {
+    "prophet": {
+      "filterLabel": "Prophet",
+      "sectionLabel": "PROPHET",
+      "order": 0
+    },
+    "sahabah": {
+      "filterLabel": "Ṣaḥābah",
+      "sectionLabel": "ṢAḤĀBAH",
+      "order": 1
+    },
+    "tabiun": {
+      "filterLabel": "Tābiʿūn",
+      "sectionLabel": "TĀBIʿŪN",
+      "order": 2
+    },
+    "atba": {
+      "filterLabel": "Atbāʿ at-Tābiʿīn",
+      "sectionLabel": "ATBĀʿ AT-TĀBIʿĪN",
+      "order": 3
+    },
+    "imam": {
+      "filterLabel": "Imāme",
+      "sectionLabel": "FRÜHE IMĀME UND MUḤADDITHŪN",
+      "order": 4
+    },
+    "muhaddith": {
+      "filterLabel": "Muḥaddithūn",
+      "sectionLabel": "FRÜHE IMĀME UND MUḤADDITHŪN",
+      "order": 4
+    },
+    "faqih": {
+      "filterLabel": "Fuqahāʾ",
+      "sectionLabel": "FRÜHE IMĀME UND MUḤADDITHŪN",
+      "order": 4
+    },
+    "mufassir": {
+      "filterLabel": "Mufassirūn",
+      "sectionLabel": "SPÄTERE GELEHRTE",
+      "order": 5
+    },
+    "weitere": {
+      "filterLabel": "Weitere",
+      "sectionLabel": "WEITERE",
+      "order": 6
+    }
+  },
+  "sections": [
+    {
+      "id": "prophet",
+      "label": "PROPHET"
+    },
+    {
+      "id": "sahabah",
+      "label": "ṢAḤĀBAH"
+    },
+    {
+      "id": "tabiun",
+      "label": "TĀBIʿŪN"
+    },
+    {
+      "id": "atba",
+      "label": "ATBĀʿ AT-TĀBIʿĪN"
+    },
+    {
+      "id": "early_imam",
+      "label": "FRÜHE IMĀME UND MUḤADDITHŪN"
+    },
+    {
+      "id": "later",
+      "label": "SPÄTERE GELEHRTE"
+    },
+    {
+      "id": "weitere",
+      "label": "WEITERE"
+    }
+  ],
+  "scholars": {
+    "ahmad-ibn-hanbal": {
+      "displayName": "Aḥmad ibn Ḥanbal",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 100,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Ahmad ibn Hanbal",
+        "Imam Ahmad",
+        "Ahmad ibn Hambal"
+      ],
+      "monogram": "AḤ",
+      "kuniyah": ""
+    },
+    "__prophet__": {
+      "displayName": "Prophet Muhammad ﷺ",
+      "primaryGroup": "prophet",
+      "generationGroup": "prophet",
+      "generationOrder": 0,
+      "roles": [
+        "prophet"
+      ],
+      "aliases": [
+        "Prophet ﷺ",
+        "Der Prophet ﷺ",
+        "Muhammad ﷺ",
+        "Prophet Muhammad"
+      ],
+      "monogram": "PM",
+      "kuniyah": ""
+    },
+    "abu-hatim-ar-razi": {
+      "displayName": "Abū Ḥātim ar-Rāzī",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 104,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Abu Hatim ar-Razi",
+        "Abu Hatim"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-awzai": {
+      "displayName": "al-Awzāʿī",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 44,
+      "roles": [
+        "tabi",
+        "faqih"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdarrahmanibnmahdi": {
+      "displayName": "ʿAbd ar-Raḥmān ibn Mahdī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "abu-zurah-ar-razi": {
+      "displayName": "Abū Zurʿah ar-Rāzī",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 105,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Abu Zurah ar-Razi"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:uthmanibnsaidaddarimi": {
+      "displayName": "ʿUthmān ibn Saʿīd ad-Dārimī",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 114,
+      "roles": [
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-barbahari": {
+      "displayName": "al-Barbahārī",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 107,
+      "roles": [
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-fudayl": {
+      "displayName": "al-Fuḍayl ibn ʿIyāḍ",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 53,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-lalakai": {
+      "displayName": "al-Lālakāʾī",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 110,
+      "roles": [
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdullahibnalmubarak": {
+      "displayName": "ʿAbdullāh ibn al-Mubārak",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "atba",
+      "generationOrder": 61,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "abdullah-ibn-masud": {
+      "displayName": "ʿAbdullāh ibn Masʿūd",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 11,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Abdullah ibn Masud",
+        "Ibn Masud"
+      ],
+      "monogram": "ʿA",
+      "kuniyah": ""
+    },
+    "malik-ibn-anas": {
+      "displayName": "Mālik ibn Anas",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 50,
+      "roles": [
+        "imam",
+        "faqih",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Malik ibn Anas",
+        "Imam Malik"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:mukhladibnalhusayn": {
+      "displayName": "Mukhlad ibn al-Ḥusayn",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ash-shafii": {
+      "displayName": "ash-Shāfiʿī",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 101,
+      "roles": [
+        "imam",
+        "faqih"
+      ],
+      "aliases": [
+        "ash-Shafii",
+        "Imam Shafii",
+        "Muhammad ibn Idris ash-Shafii"
+      ],
+      "monogram": "AS",
+      "kuniyah": ""
+    },
+    "s:sufyanaththawri": {
+      "displayName": "Sufyān ath-Thawrī",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 42,
+      "roles": [
+        "tabi",
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Sufyan al-Thawri"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "sufyan-ibn-uyaynah": {
+      "displayName": "Sufyān ibn ʿUyaynah",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 43,
+      "roles": [
+        "tabi",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-abbas": {
+      "displayName": "Ibn ʿAbbās",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 12,
+      "roles": [
+        "sahabi",
+        "mufassir"
+      ],
+      "aliases": [
+        "Ibn Abbas",
+        "Abdullah ibn Abbas"
+      ],
+      "monogram": "Iʿ",
+      "kuniyah": ""
+    },
+    "abu-ubayd": {
+      "displayName": "Abū ʿUbayd al-Qāsim ibn Sallām",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 106,
+      "roles": [
+        "muhaddith"
+      ],
+      "aliases": [
+        "Abu Ubaid",
+        "Abu Ubayd al-Qasim ibn Sallam"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-hasan-al-basri": {
+      "displayName": "al-Ḥasan al-Baṣrī",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 41,
+      "roles": [
+        "tabi",
+        "imam"
+      ],
+      "aliases": [
+        "Hasan al-Basri"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:yahyabmain": {
+      "displayName": "Yaḥyā b. Maʿīn",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 115,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Yahya ibn Main"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdullahibnamr": {
+      "displayName": "Abdullah ibn Amr",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 14,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Abdullah ibn Amr"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abubakralajurri": {
+      "displayName": "Abū Bakr al-Ājurrī",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 40,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-qurtubi": {
+      "displayName": "al-Qurṭubī",
+      "primaryGroup": "mufassir",
+      "generationGroup": "later",
+      "generationOrder": 205,
+      "roles": [
+        "mufassir",
+        "faqih"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "abu-isa-at-tirmidhi": {
+      "displayName": "Abū ʿĪsā at-Tirmidhī",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 103,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "at-Tirmidhi",
+        "Tirmidhi",
+        "Abu Isa at-Tirmidhi"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "abu-hurayrah": {
+      "displayName": "Abū Hurayrah",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 10,
+      "roles": [
+        "sahabi",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Abu Hurayrah",
+        "Abu Hurairah"
+      ],
+      "monogram": "AH",
+      "kuniyah": ""
+    },
+    "al-bukhari": {
+      "displayName": "al-Bukhārī",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 102,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "al-Bukhari",
+        "Bukhari",
+        "Imam al-Bukhari"
+      ],
+      "monogram": "AB",
+      "kuniyah": ""
+    },
+    "ibn-taymiyyah": {
+      "displayName": "Ibn Taymiyyah",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 202,
+      "roles": [
+        "imam",
+        "faqih"
+      ],
+      "aliases": [
+        "Ibn Taymiyyah"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-sirin": {
+      "displayName": "Ibn Sīrīn",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 45,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:amribndinar": {
+      "displayName": "ʿAmr ibn Dīnār",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 49,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-abd-al-barr": {
+      "displayName": "Ibn ʿAbd al-Barr",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "later",
+      "generationOrder": 206,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ummsalamah": {
+      "displayName": "Umm Salamah",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnabializz": {
+      "displayName": "Ibn Abī al-ʿIzz",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 212,
+      "roles": [
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:zuhayribnabbad": {
+      "displayName": "Zuhayr ibn ʿAbbād",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:asadibnmusa": {
+      "displayName": "Asad ibn Mūsā",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:yazidibnharun": {
+      "displayName": "Yazīd ibn Hārūn",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abujafarmuhammadibnuthmanibnabishaybah": {
+      "displayName": "Abū Jaʿfar Muḥammad ibn ʿUthmān ibn Abī Shaybah",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 111,
+      "roles": [
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ismailibnyahyaalmuzani": {
+      "displayName": "Ismāʿīl ibn Yaḥyā al-Muzanī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-qudamah": {
+      "displayName": "Ibn Qudāmah",
+      "primaryGroup": "faqih",
+      "generationGroup": "early_imam",
+      "generationOrder": 109,
+      "roles": [
+        "faqih",
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:atababirabah": {
+      "displayName": "ʿAṭāʾ b. Abī Rabāḥ",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 48,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:malikibndinar": {
+      "displayName": "Mālik ibn Dīnār رحمه الله",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 49,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abuzurah": {
+      "displayName": "Abū Zurʿah",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 105,
+      "roles": [
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnbattahalukbari": {
+      "displayName": "Ibn Baṭṭah al-ʿUkbarī",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 112,
+      "roles": [
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnumar": {
+      "displayName": "Ibn ʿUmar",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 21,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:aishah": {
+      "displayName": "ʿĀʾishah رضي الله عنها",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 24,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Aisha",
+        "Aishah"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:imranbhusayn": {
+      "displayName": "ʿImrān b. Ḥuṣayn",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 30,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "at-tabari": {
+      "displayName": "aṭ-Ṭabarī",
+      "primaryGroup": "mufassir",
+      "generationGroup": "later",
+      "generationOrder": 200,
+      "roles": [
+        "imam",
+        "mufassir",
+        "faqih"
+      ],
+      "aliases": [
+        "at-Tabari",
+        "Tabari",
+        "Ibn Jarir at-Tabari"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:uthmanbaffan": {
+      "displayName": "ʿUthmān b. ʿAffān",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 29,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdullahbamr": {
+      "displayName": "ʿAbdullāh b. ʿAmr",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 14,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Abdullah b. Amr"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abushurayh": {
+      "displayName": "Abū Shurayḥ",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 19,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-qadi-iyad": {
+      "displayName": "al-Qāḍī ʿIyāḍ",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 210,
+      "roles": [
+        "imam",
+        "faqih"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-hajar": {
+      "displayName": "Ibn Ḥajar",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "later",
+      "generationOrder": 208,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abudharr": {
+      "displayName": "Abū Dharr",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 16,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Abu Dharr"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abusaidalkhudri": {
+      "displayName": "Abū Saʿīd al-Khudrī",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 18,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-kathir": {
+      "displayName": "Ibn Kathīr",
+      "primaryGroup": "mufassir",
+      "generationGroup": "later",
+      "generationOrder": 201,
+      "roles": [
+        "imam",
+        "mufassir",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Ibn Kathir"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdullahibnumar": {
+      "displayName": "ʿAbdullāh ibn ʿUmar",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 21,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Abdullah ibn Umar"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abuumamahalbahili": {
+      "displayName": "Abū Umāmah al-Bāhilī",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 20,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:umaribnalkhattab": {
+      "displayName": "ʿUmar ibn al-Khaṭṭāb",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 34,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:maymunibnmihran": {
+      "displayName": "Maymūn ibn Mihrān",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdarrahmanbmahdi": {
+      "displayName": "ʿAbd ar-Raḥmān b. Mahdī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdallatifbabdarrahmanalassaykh": {
+      "displayName": "ʿAbd al-Laṭīf b. ʿAbd ar-Raḥmān Āl aš-Šaykh",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abumijlaz": {
+      "displayName": "Abū Mijlaz",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 54,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnmasud": {
+      "displayName": "Ibn Masʿūd",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 22,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:quran": {
+      "displayName": "Qurʾān",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 9000,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:assuddi": {
+      "displayName": "as-Suddī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:tawus": {
+      "displayName": "Ṭāwūs",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 51,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ahlussunnah": {
+      "displayName": "Ahlus-Sunnah",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 9001,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnqutaybah": {
+      "displayName": "Ibn Qutaybah",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "early_imam",
+      "generationOrder": 113,
+      "roles": [
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:assawkani": {
+      "displayName": "aš-Šawkānī",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 213,
+      "roles": [
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-mawardi": {
+      "displayName": "al-Māwardī",
+      "primaryGroup": "faqih",
+      "generationGroup": "later",
+      "generationOrder": 204,
+      "roles": [
+        "faqih",
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:qatadah": {
+      "displayName": "Qatādah",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "mujahid": {
+      "displayName": "Mujāhid",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 46,
+      "roles": [
+        "tabi",
+        "mufassir"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-al-jawzi": {
+      "displayName": "Ibn al-Jawzī",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 209,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnmuflih": {
+      "displayName": "Ibn Mufliḥ",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "adh-dhahabi": {
+      "displayName": "adh-Dhahabī",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "later",
+      "generationOrder": 203,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "adh-Dhahabi",
+        "Dhahabi",
+        "ad-Dhahabi"
+      ],
+      "monogram": "AD",
+      "kuniyah": ""
+    },
+    "s:imamassafii": {
+      "displayName": "Imām aš-Šāfiʿī",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 101,
+      "roles": [
+        "imam",
+        "faqih"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ishaqibnrahawayh": {
+      "displayName": "Isḥāq ibn Rāhawayh",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 108,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ubadahbassamit": {
+      "displayName": "ʿUbādah b. aṣ-Ṣāmit",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 31,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "anas-b-malik": {
+      "displayName": "Anas b. Mālik",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 13,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Anas ibn Malik"
+      ],
+      "monogram": "AM",
+      "kuniyah": ""
+    },
+    "s:amrbshuayb": {
+      "displayName": "ʿAmr b. Shuʿayb",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 33,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:alfudaylbiyad": {
+      "displayName": "al-Fuḍayl b. ʿIyāḍ",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 53,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:hammadbzayd": {
+      "displayName": "Ḥammād b. Zayd",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 52,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:harbalkirmani": {
+      "displayName": "Ḥarb al-Kirmānī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnabizaydalqayrawani": {
+      "displayName": "Ibn Abī Zayd al-Qayrawānī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnmandah": {
+      "displayName": "Ibn Mandah",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abdarrahmanbnasiralbarrak": {
+      "displayName": "ʿAbd ar-Raḥmān b. Nāṣir al-Barrāk",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ishaqbrahawayh": {
+      "displayName": "Isḥāq b. Rāhawayh",
+      "primaryGroup": "imam",
+      "generationGroup": "early_imam",
+      "generationOrder": 108,
+      "roles": [
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:umaribnabdalaziz": {
+      "displayName": "ʿUmar ibn ʿAbd al-ʿAzīz",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 55,
+      "roles": [
+        "tabi",
+        "imam"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:aliibnabitalib": {
+      "displayName": "ʿAlī ibn Abī Ṭālib",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 23,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ibnalqayyim": {
+      "displayName": "Ibn al-Qayyim",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 211,
+      "roles": [
+        "imam",
+        "faqih"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ashshanqiti": {
+      "displayName": "ash-Shanqīṭī",
+      "primaryGroup": "mufassir",
+      "generationGroup": "later",
+      "generationOrder": 214,
+      "roles": [
+        "mufassir"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:alfarra": {
+      "displayName": "al-Farrāʾ",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:jabirbabdillah": {
+      "displayName": "Jābir b. ʿAbdillāh",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 25,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abuaddarda": {
+      "displayName": "Abū ad-Dardāʾ",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 15,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Abu ad-Darda"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "an-nawawi": {
+      "displayName": "an-Nawawī",
+      "primaryGroup": "imam",
+      "generationGroup": "later",
+      "generationOrder": 207,
+      "roles": [
+        "imam",
+        "faqih",
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-ayni": {
+      "displayName": "al-ʿAynī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8001,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:rabiah": {
+      "displayName": "Rabīʿah",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 50,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:muhammadibnjafar": {
+      "displayName": "Muḥammad ibn Jaʿfar",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "al-layth": {
+      "displayName": "al-Layth ibn Saʿd",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 47,
+      "roles": [
+        "tabi",
+        "faqih"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:ubayyibnkab": {
+      "displayName": "Ubayy ibn Kaʿb",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 28,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:hudayfahibnalyaman": {
+      "displayName": "Ḥuḏayfah ibn al-Yamān",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 32,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:salmanalfarisi": {
+      "displayName": "Salmān al-Fārisī",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 27,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:aishahbintabibakr": {
+      "displayName": "ʿĀʾishah bint Abī Bakr",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 24,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:muhammadibnshihabazzuhri": {
+      "displayName": "Muḥammad ibn Shihāb az-Zuhrī",
+      "primaryGroup": "muhaddith",
+      "generationGroup": "atba",
+      "generationOrder": 60,
+      "roles": [
+        "muhaddith"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:qussibnsaidahaliyadi": {
+      "displayName": "Quss ibn Saʿīdah al-Iyādī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:amribnabasahassulami": {
+      "displayName": "ʿAmr ibn ʿAbasah as-Sulamī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:hamadibnatiq": {
+      "displayName": "Ḥamad ibn ʿAtīq",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:zaydibnamribnnufayl": {
+      "displayName": "Zayd ibn ʿAmr ibn Nufayl",
+      "primaryGroup": "tabiun",
+      "generationGroup": "tabiun",
+      "generationOrder": 56,
+      "roles": [
+        "tabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:hudhayfahibnalyaman": {
+      "displayName": "Ḥudhayfah ibn al-Yamān",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 32,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:iyasbmuawiyah": {
+      "displayName": "Iyās b. Muʿāwiyah",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:umarbalhattab": {
+      "displayName": "ʿUmar b. al-Ḫaṭṭāb",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 34,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [
+        "Umar ibn al-Khattab"
+      ],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:abumasudalansari": {
+      "displayName": "Abū Masʿūd al-Anṣārī",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 17,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:sahlbsad": {
+      "displayName": "Sahl b. Saʿd",
+      "primaryGroup": "sahabah",
+      "generationGroup": "sahabah",
+      "generationOrder": 26,
+      "roles": [
+        "sahabi"
+      ],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "ibn-al-arabi": {
+      "displayName": "Ibn al-ʿArabī",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8001,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    },
+    "s:yusufsbruder": {
+      "displayName": "Yūsufs Brüder",
+      "primaryGroup": "weitere",
+      "generationGroup": "weitere",
+      "generationOrder": 8999,
+      "roles": [],
+      "aliases": [],
+      "monogram": "",
+      "kuniyah": ""
+    }
+  }
+}

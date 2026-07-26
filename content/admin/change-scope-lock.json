@@ -1537,6 +1537,36 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T23:45:00.000Z"
+    },
+    {
+      "id": "scholars-index-modernize-v482-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Gelehrten-Seite modernisieren — Suche, Filter, Sortierung, historische Gruppierung, Monogramme",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "scripts/build-scholar-index-meta.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:00:00.000Z"
+    },
+    {
+      "id": "scholars-index-live-v485-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Gelehrten-Index v482 in Test-App live deployen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "scripts/build-scholar-index-meta.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:50:00.000Z"
     }
   ]
 }
