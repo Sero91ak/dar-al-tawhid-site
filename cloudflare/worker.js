@@ -86,7 +86,7 @@ import {
   libraryPushRegistryKey,
   buildLibraryPushPendingRecord,
   buildLibraryPushUrl,
-  verifyLibraryLiveAvailability,
+  verifyLibraryLiveAvailabilityWithRetry,
   sendLibraryPublicationPush
 } from "./library-push-admin.js";
 
@@ -470,6 +470,16 @@ export default {
           const result = await saveLibraryPublication(env, input, helpers);
           if (result.published && result.target === "live" && result.publication) {
             const push = await queueLibraryPublicationPush(env, result.publication);
+            const pushRecord = {
+              ...buildLibraryPushPendingRecord(result.publication),
+              pushApproved: true,
+              pushApprovedAt: new Date().toISOString()
+            };
+            ctx.waitUntil(
+              processPendingLibraryPushUntilLive(env, pushRecord).catch((error) => {
+                console.error("library auto-push failed", error);
+              })
+            );
             return json({ ...result, push }, cors);
           }
           return json(result, cors);
@@ -2841,8 +2851,8 @@ async function queueLibraryPublicationPush(env, publication) {
   return {
     sent: false,
     pending: true,
-    waitingForApproval: true,
-    reason: "Push wartet auf deine Freigabe im Admin („Live Push freigeben“).",
+    autoSending: true,
+    reason: "Besucher-Push wird automatisch gesendet.",
     targetUrl: buildLibraryPushUrl(env, pendingRecord.slug, Date.now()),
     publicationId: pendingRecord.publicationId
   };
@@ -2867,10 +2877,11 @@ async function processPendingLibraryPushUntilLive(env, record) {
     };
   }
 
-  const liveCheck = await verifyLibraryLiveAvailability(env, current);
+  const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current);
   await writePendingPushStatus(env, key, {
     lastCheckAt: new Date().toISOString(),
     liveCheck,
+    attempts: liveCheck.attempt,
     lastError: liveCheck.ok ? "" : liveCheck.diagnosis
   });
 
