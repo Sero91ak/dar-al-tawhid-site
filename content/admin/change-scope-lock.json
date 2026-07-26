@@ -1477,9 +1477,22 @@
       "expiresAt": "2026-07-28T22:00:00.000Z"
     },
     {
-      "id": "quran-overview-repair-v477-2026-07-26",
+      "id": "home-header-chips-refresh-v479-2026-07-26",
       "approvedBy": "user-explicit-order",
-      "reason": "Nutzer-Auftrag: Qurʾān Scroll/Suche sticky, Vers-Picker beim Lesen, rechtwinklige Dunkelblau-Übergänge entfernen, Reader-Buttons/Sheets reparieren",
+      "reason": "Nutzer-Freigabe live: Startseite Favoriten/Glocke/Konto-Chips rechts, App-Status/Erinnerungen, schneller Refresh-Button",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-repair-v480-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān Scroll/Suche sticky, Vers-Picker, Reader-Buttons/Sheets reparieren (Test-App)",
       "paths": [
         "test/index.html",
         "test/version.json",
