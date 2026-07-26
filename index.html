@@ -5,8 +5,9 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v460";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v461";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
+<script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
@@ -15705,7 +15706,7 @@ function ensureBottomNavDock(){if(window.__bottomNavDockBusy)return;if(document.
 function verifyBottomNavDock(){if(document.body.classList.contains("is-ilm-chat-route"))return;const nav=$("bottomNav");const dock=$("appChromeDock");if(!nav||!dock||document.documentElement.classList.contains("reader-mode"))return;if(dock.parentElement!==document.body||nav.parentElement!==dock||bottomNavDockMisplaced(dock)||bottomNavDockMisplaced(nav)){ensureBottomNavDock();return}if(getComputedStyle(nav).position!=="fixed"){ensureBottomNavDock();return}const rect=nav.getBoundingClientRect();const vh=window.innerHeight||0;if(rect.height>0&&vh>0&&(rect.top>vh||rect.bottom<40))ensureBottomNavDock()}
 function initBottomNavGuard(){if(window.__bottomNavGuardBound)return;window.__bottomNavGuardBound=true;ensureBottomNavDock();let scrollTimer=0,mutTimer=0,lastCheck=0;const check=(force)=>{if(window.__bottomNavDockBusy)return;const now=Date.now();if(!force&&now-lastCheck<500)return;lastCheck=now;verifyBottomNavDock();updatePostNavVisibility()};const onScroll=()=>{updatePostNavVisibility();clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>check(false),120)};window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",()=>check(true),{passive:true});if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>check(true),{passive:true})}try{const obs=new MutationObserver(muts=>{if(window.__bottomNavDockBusy)return;if(!muts.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))||Array.from(m.removedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))))return;clearTimeout(mutTimer);mutTimer=setTimeout(()=>check(true),180)});obs.observe(document.body,{childList:true})}catch(e){}setTimeout(()=>check(true),1200)}
 function resetTabSwipePreview(){const view=$("appView");if(view){view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}const nav=$("bottomNav");if(nav){nav.classList.remove("is-pill-dragging");nav.style.removeProperty("--nav-pill-left");nav.style.removeProperty("--nav-pill-width")}if(!document.body.classList.contains("is-ilm-chat-route"))ensureBottomNavDock();updateBottomNav(currentRoute)}
-function cleanRefreshQueryParam(){try{if(!/[?&]r=/.test(location.search))return;const u=new URL(location.href);u.searchParams.delete("r");history.replaceState(null,"",u.pathname+(u.search||"")+(location.hash||""))}catch(e){}}
+function cleanRefreshQueryParam(){try{if(!/[?&](r|repair)=/.test(location.search))return;const u=new URL(location.href);u.searchParams.delete("r");u.searchParams.delete("repair");history.replaceState(null,"",u.pathname+(u.search||"")+(location.hash||""))}catch(e){}}
 function bottomNavMetrics(){const nav=$("bottomNav");if(!nav)return[];const navRect=nav.getBoundingClientRect();return[...nav.querySelectorAll("[data-bottom-nav]")].map(btn=>{const r=btn.getBoundingClientRect();return{left:r.left-navRect.left,width:r.width,center:r.left-navRect.left+r.width/2,tab:btn.getAttribute("data-bottom-nav")}})}
 function setBottomNavPill(left,width,dragging){const nav=$("bottomNav");if(!nav)return;nav.classList.toggle("is-pill-dragging",!!dragging);nav.style.setProperty("--nav-pill-left",`${left}px`);nav.style.setProperty("--nav-pill-width",`${width}px`)}
 function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-nav]").forEach((btn,i)=>btn.classList.toggle("active",i===idx))}
@@ -19773,23 +19774,41 @@ function renderAppRecovery(error,stage="App-Start"){
   if(!el)return;
   const message=error&&error.message?error.message:error;
   try{localStorage.setItem("darLastAppCrashV1",JSON.stringify({stage,message:String(message||""),at:new Date().toISOString(),build:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:""}))}catch(e){}
-  el.innerHTML=`<section class="premium-surface app-recovery-panel"><div class="eyebrow">App-Schutz</div><h2>App wird repariert</h2><p>Der Start wurde abgefangen, damit kein schwarzer Bildschirm bleibt. Tippe auf Reparieren, dann lädt die App frisch ohne alten Cache.</p><div class="error">Bereich: ${appRecoveryEscape(stage)}${message?`<br>Fehler: ${appRecoveryEscape(message)}`:""}</div><div class="article-actions"><button id="appRepairNowBtn" class="action-btn primary" type="button">App reparieren</button><button id="appRepairHomeBtn" class="action-btn" type="button">Startseite öffnen</button></div></section>`;
+  el.innerHTML=`<section class="premium-surface app-recovery-panel"><div class="eyebrow">App-Schutz</div><h2>App wird repariert</h2><p>Der Start wurde abgefangen, damit kein schwarzer Bildschirm bleibt. Die App repariert sich gleich automatisch — oder tippe sofort auf Reparieren.</p><div class="error">Bereich: ${appRecoveryEscape(stage)}${message?`<br>Fehler: ${appRecoveryEscape(message)}`:""}</div><div class="article-actions"><button id="appRepairNowBtn" class="action-btn primary" type="button">App reparieren</button><button id="appRepairHomeBtn" class="action-btn" type="button">Startseite öffnen</button></div></section>`;
   const repair=document.getElementById("appRepairNowBtn");
   const home=document.getElementById("appRepairHomeBtn");
   if(repair)repair.onclick=()=>appRecoveryReload();
   if(home)home.onclick=()=>{location.hash="#home";setTimeout(()=>{try{render()}catch(e){appRecoveryReload()}},40)};
+  scheduleBootAutonomousRepair(stage,3500);
 }
-/* APP_UPDATE_RECOVERY_GUARD: Update-Banner nur bei echtem Fehler; kein Auto-Reparieren */
+/* APP_UPDATE_RECOVERY_GUARD: Update-Banner nur bei echtem Fehler; autonome Boot-Reparatur bei hängendem Laden */
 function isAppViewStuck(){
   const el=document.getElementById("appView");
   const text=(el?.textContent||"").trim();
   return !el||!text||text==="App wird geladen…";
 }
+let __darBootRepairTimer=null;
+function cancelBootAutonomousRepair(){if(__darBootRepairTimer){clearTimeout(__darBootRepairTimer);__darBootRepairTimer=null}}
+function scheduleBootAutonomousRepair(stage,delayMs){
+  cancelBootAutonomousRepair();
+  const wait=Math.max(1200,Number(delayMs)||4000);
+  __darBootRepairTimer=setTimeout(()=>{
+    __darBootRepairTimer=null;
+    if(window.__darAppBootOk&&!isAppViewStuck())return;
+    try{if(typeof render==="function"){render();setTimeout(()=>{if(window.__darAppBootOk||!isAppViewStuck())return;appRecoveryReload()},1500);return}}catch(e){}
+    appRecoveryReload();
+  },wait);
+}
+window.__darCancelBootRepair=cancelBootAutonomousRepair;
+window.__darScheduleBootRepair=scheduleBootAutonomousRepair;
 function markAppBootComplete(){
   if(window.__darAppBootOk)return;
   window.__darAppBootOk=true;
   window.__darAppBootAt=Date.now();
   try{
+    cancelBootAutonomousRepair();
+    sessionStorage.removeItem("dar_boot_autonomous_guard_v1");
+    if(/[?&]repair=/.test(location.search))cleanRefreshQueryParam();
     if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.cancelAutoRepair==="function")window.DAR_AUTO_REFRESH.cancelAutoRepair();
     if(window.DAR_AUTO_REFRESH&&typeof window.DAR_AUTO_REFRESH.getBannerMode==="function"&&window.DAR_AUTO_REFRESH.getBannerMode()==="recovery"&&typeof window.DAR_AUTO_REFRESH.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners();
   }catch(e){}
@@ -19807,21 +19826,34 @@ function initAppCrashGuard(){
     window.__darLastRuntimeError=event.error||event.message||"Unbekannter Fehler";
     setTimeout(()=>{
       if(window.__darAppBootOk||!isAppViewStuck())return;
+      try{if(typeof render==="function")render()}catch(e){}
+    },400);
+    setTimeout(()=>{
+      if(window.__darAppBootOk||!isAppViewStuck())return;
       requestAppRecoveryUpdate("JavaScript-Fehler",window.__darLastRuntimeError);
-    },800);
+    },1200);
   });
   window.addEventListener("unhandledrejection",event=>{
     window.__darLastRuntimeError=event.reason||"Nicht abgefangener Fehler";
     setTimeout(()=>{
       if(window.__darAppBootOk||!isAppViewStuck())return;
+      try{if(typeof render==="function")render()}catch(e){}
+    },400);
+    setTimeout(()=>{
+      if(window.__darAppBootOk||!isAppViewStuck())return;
       requestAppRecoveryUpdate("Ladefehler",window.__darLastRuntimeError);
-    },800);
+    },1200);
   });
   setTimeout(()=>{
     if(window.__darAppBootOk)return;
     if(!isAppViewStuck()){markAppBootComplete();return;}
+    try{if(typeof render==="function")render()}catch(e){}
+  },6000);
+  setTimeout(()=>{
+    if(window.__darAppBootOk)return;
+    if(!isAppViewStuck()){markAppBootComplete();return;}
     requestAppRecoveryUpdate("Start-Watchdog",window.__darLastRuntimeError||"Start hat zu lange gedauert.");
-  },22000);
+  },12000);
 }
 function hardRefreshApp(){
   (async()=>{
@@ -19856,7 +19888,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v460";
+const APP_BUILD_ID="app-shell-v461";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -20757,7 +20789,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
 </script>
 <script>
   /* VERSION_UPDATE_GUARD: Banner nur bei echtem Update; Schleifen-Schutz + HARD_REFRESH + Willkommens-Push */
-  /* APP_UPDATE_RECOVERY_GUARD: blaues Update-Banner nur bei echtem Fehler, kein Auto-Reparieren */
+  /* APP_UPDATE_RECOVERY_GUARD: blaues Update-Banner nur bei echtem Fehler; autonome Boot-Reparatur bei hängendem Laden */
   (function() {
     const CHECK_INTERVAL = 60 * 1000;
     const VERSION_UPDATE_KEY = 'dar_version_update_pending';
@@ -20837,7 +20869,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       bannerMode = null;
     }
-    function cancelAutoRepair() {}
+    function cancelAutoRepair() { try { if (typeof window.__darCancelBootRepair === 'function') window.__darCancelBootRepair(); } catch (e) {} }
     function canShowRecoveryBanner() {
       if (typeof isAppViewStuck === 'function' && typeof markAppBootComplete === 'function') {
         if (window.__darAppBootOk && !isAppViewStuck()) return false;
@@ -21015,6 +21047,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (!canShowRecoveryBanner()) return false;
       rememberRecoveryBannerShown();
       showUpdateModal('recovery', label || 'App-Update erforderlich');
+      setTimeout(function() {
+        if (typeof isAppViewStuck === 'function' && isAppViewStuck() && typeof window.__darScheduleBootRepair === 'function') {
+          window.__darScheduleBootRepair('recovery-banner', 5000);
+        }
+      }, 100);
       return true;
     }
     function hideAllBanners() {

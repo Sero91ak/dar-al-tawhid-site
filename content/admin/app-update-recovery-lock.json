@@ -1,8 +1,8 @@
 {
   "locked": true,
   "lockedAt": "2026-07-25T12:00:00.000Z",
-  "lockedReason": "Nutzer-Auftrag: App-Update/Reparatur-Banner nur bei echtem Fehler, blaues Update-Design, ohne Auto-Schleife.",
-  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „App-Update-Banner freigeben“.",
+  "lockedReason": "Nutzer-Auftrag: Autonome Boot-Reparatur bei hängendem Laden; Update-Banner nur bei echtem Fehler, blaues Design, keine Endlos-Schleife.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „App-Update-Banner freigeben“ oder „autonome Reparatur“.",
   "lockedPaths": [
     "index.html",
     "test/index.html"
@@ -18,10 +18,12 @@
   ],
   "requiredMarkers": [
     "APP_UPDATE_RECOVERY_GUARD",
+    "BOOT_AUTONOMOUS_GUARD",
     "isAppViewStuck",
     "markAppBootComplete",
     "requestAppRecoveryUpdate",
     "showRecoveryBanner",
+    "scheduleBootAutonomousRepair",
     "App-Update erforderlich",
     "Jetzt aktualisieren",
     "RECOVERY_BANNER_KEY",
