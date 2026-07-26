@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-26T22:24:32.015Z",
+  "generated": "2026-07-26T22:24:33.719Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -899,10 +899,24 @@
       "status": "pending",
       "pushApproved": true,
       "createdAt": "2026-07-26T22:24:22.200Z",
-      "lastError": "Push wartet auf Admin-Freigabe",
+      "lastError": "PDF noch nicht im Live-Katalog enthalten.",
       "postId": "lib:pub-20260726-004",
-      "updatedAt": "2026-07-26T22:24:32.015Z",
-      "pushApprovedAt": "2026-07-26T22:24:31.831Z"
+      "updatedAt": "2026-07-26T22:24:33.719Z",
+      "pushApprovedAt": "2026-07-26T22:24:31.831Z",
+      "lastCheckAt": "2026-07-26T22:24:33.542Z",
+      "liveCheck": {
+        "ok": false,
+        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260726-004",
+        "slug": "das-verweigern-der-zakah-im-islam",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": false,
+        "pdfFilePublic": false,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1785104673469#bibliothek/das-verweigern-der-zakah-im-islam",
+        "pdfHttpStatus": 404
+      }
     }
   }
 }
