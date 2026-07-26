@@ -1205,6 +1205,17 @@
       "expiresAt": "2026-07-28T12:00:00.000Z"
     },
     {
+      "id": "quran-reader-chrome-fix-v456-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Leser Buttons reparieren, Scroll-Reveal, Bottom-Sheet Picker, Karten-Optik — nur Test-App",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T14:00:00.000Z"
+    },
+    {
       "id": "quran-reader-chrome-v454-2026-07-26",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer-Auftrag: Qurʾān-Leser mit ausblendbarer Kopfleiste, Einstellungsmenü und Juz/Sure/Āyah-Auswahl — nur Test-App",
