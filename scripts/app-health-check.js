@@ -125,16 +125,10 @@ const versionGuardFails = require("./version-update-guard.js").runVersionUpdateG
 if (versionGuardFails) failed += versionGuardFails;
 
 try {
-  require("./app-update-recovery-guard.js");
+  const stabilityFails = require("./app-stability-guard.js").runAppStabilityGuard();
+  if (stabilityFails) failed += stabilityFails;
 } catch (e) {
-  fail(`app-update-recovery-guard: ${e.message}`);
-}
-
-try {
-  const libraryDeployFails = require("./library-deploy-guard.js").runLibraryDeployGuard();
-  if (libraryDeployFails) failed += libraryDeployFails;
-} catch (e) {
-  fail(`library-deploy-guard: ${e.message}`);
+  fail(`app-stability-guard: ${e.message}`);
 }
 
 // Push scripts

@@ -10,6 +10,14 @@ const ROOT = path.join(__dirname, "..");
 const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\/$/, "");
 const CATALOG_PATH = process.env.LIBRARY_CATALOG_PATH || "data/library-publications.json";
 
+function resolveSiteUrl(options) {
+  return String(options?.siteUrl || SITE_URL).replace(/\/$/, "");
+}
+
+function resolveCatalogPath(options) {
+  return String(options?.catalogPath || CATALOG_PATH).trim();
+}
+
 async function fetchJson(url) {
   const res = await fetch(url, {
     cache: "no-store",
@@ -24,16 +32,19 @@ async function headOk(url) {
   return res.ok;
 }
 
-function readRepoCatalog() {
-  const full = path.join(ROOT, CATALOG_PATH);
-  if (!fs.existsSync(full)) throw new Error(`${CATALOG_PATH} fehlt im Repo`);
+function readRepoCatalog(catalogPath) {
+  const rel = catalogPath || CATALOG_PATH;
+  const full = path.join(ROOT, rel);
+  if (!fs.existsSync(full)) throw new Error(`${rel} fehlt im Repo`);
   return JSON.parse(fs.readFileSync(full, "utf8"));
 }
 
 async function checkLibraryLiveParity(options = {}) {
   const bust = Date.now();
-  const repoCatalog = options.repoCatalog || readRepoCatalog();
-  const liveCatalog = await fetchJson(`${SITE_URL}/${CATALOG_PATH}?v=${bust}`);
+  const site = resolveSiteUrl(options);
+  const catalogPath = resolveCatalogPath(options);
+  const repoCatalog = options.repoCatalog || readRepoCatalog(catalogPath);
+  const liveCatalog = await fetchJson(`${site}/${catalogPath}?v=${bust}`);
   const repoUpdatedAt = String(repoCatalog.updatedAt || "");
   const liveUpdatedAt = String(liveCatalog.updatedAt || "");
   const stale = repoUpdatedAt && liveUpdatedAt && repoUpdatedAt !== liveUpdatedAt;
@@ -48,7 +59,7 @@ async function checkLibraryLiveParity(options = {}) {
     if (!online.has(String(pub.status || ""))) continue;
     const pdfUrl = String(pub.pdfUrl || "").trim();
     if (!pdfUrl) continue;
-    const ok = await headOk(`${SITE_URL}${pdfUrl}?v=${bust}`);
+    const ok = await headOk(`${site}${pdfUrl}?v=${bust}`);
     assetChecks.push({ id: pub.id, pdfUrl, ok });
   }
 
@@ -57,7 +68,7 @@ async function checkLibraryLiveParity(options = {}) {
 
   return {
     ok,
-    site: SITE_URL,
+    site,
     repoUpdatedAt,
     liveUpdatedAt,
     stale,

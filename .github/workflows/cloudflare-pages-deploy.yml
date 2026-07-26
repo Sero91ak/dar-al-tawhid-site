@@ -29,6 +29,9 @@ on:
       - scripts/cf-pages-build.js
       - scripts/sync-app-build-ids.js
       - scripts/overlay-test-staging-from-branch.js
+      - scripts/app-stability-guard.js
+      - scripts/app-stability-repair.js
+      - scripts/app-live-parity-check.js
       - scripts/library-deploy-guard.js
       - scripts/library-deploy-repair.js
       - scripts/library-live-parity-check.js
@@ -36,7 +39,9 @@ on:
       - scripts/verify-live-deploy.js
       - scripts/app-health-check.js
       - scripts/repo-integrity-guard.js
+      - content/admin/app-stability-lock.json
       - .github/workflows/cloudflare-pages-deploy.yml
+      - .github/workflows/app-stability-watchdog.yml
 
 permissions:
   contents: read
@@ -60,7 +65,7 @@ jobs:
         run: |
           git fetch origin test-library-canonical
           node scripts/overlay-test-staging-from-branch.js
-          node scripts/library-deploy-repair.js
+          node scripts/app-stability-repair.js
 
       - name: Build + Build-IDs synchronisieren
         run: npm run build
@@ -74,8 +79,7 @@ jobs:
           node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
           node scripts/version-update-guard.js
-          node scripts/app-update-recovery-guard.js
-          node scripts/library-deploy-guard.js
+          node scripts/app-stability-guard.js
 
       - name: Deploy statische App (Workers Static Assets)
         uses: cloudflare/wrangler-action@v3
@@ -95,11 +99,11 @@ jobs:
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
 
-      - name: Live-Deploy verifizieren (Besucher + Test)
+      - name: Live-Deploy verifizieren (Besucher + Test + Stabilität)
         env:
           SITE_URL: "https://dar-al-tawhid.de"
           DEPLOY_VERIFY_MODE: "all"
           EXPECT_ZAKAT_VERSION: "18"
         run: |
           node scripts/verify-live-deploy.js
-          node scripts/library-live-parity-check.js
+          node scripts/app-live-parity-check.js

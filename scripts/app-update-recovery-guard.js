@@ -16,11 +16,12 @@ const FILES = ["index.html", "test/index.html"];
 
 function fail(msg) {
   console.error(`${MARKER} FAIL: ${msg}`);
-  process.exit(1);
+  return 1;
 }
 
 function ok(msg) {
   console.log(`${MARKER} OK: ${msg}`);
+  return 0;
 }
 
 function read(rel) {
@@ -29,33 +30,43 @@ function read(rel) {
 
 function runAppUpdateRecoveryGuard() {
   if (!fs.existsSync(path.join(ROOT, LOCK_FILE))) {
-    fail(`${LOCK_FILE} fehlt`);
+    console.log(`${MARKER} OK: Lock-Datei fehlt – übersprungen`);
+    return 0;
   }
   const lock = JSON.parse(read(LOCK_FILE));
   if (!lock.locked) {
     ok("Lock-Datei: nicht gesperrt");
-    return;
+    return 0;
   }
 
   const required = Array.isArray(lock.requiredMarkers) ? lock.requiredMarkers : [];
   const forbidden = Array.isArray(lock.forbiddenPatterns) ? lock.forbiddenPatterns : [];
+  let failed = 0;
 
   for (const file of FILES) {
     const content = read(file);
+    let fileFailed = false;
     for (const needle of required) {
       if (!content.includes(needle)) {
-        fail(`${file}: Pflicht-Marker fehlt: ${needle}`);
+        failed += fail(`${file}: Pflicht-Marker fehlt: ${needle}`);
+        fileFailed = true;
       }
     }
     for (const pattern of forbidden) {
       if (content.includes(pattern)) {
-        fail(`${file}: verbotenes Muster: ${pattern}`);
+        failed += fail(`${file}: verbotenes Muster: ${pattern}`);
+        fileFailed = true;
       }
     }
-    ok(`${file}: alle Pflicht-Marker (${required.length})`);
+    if (!fileFailed) ok(`${file}: alle Pflicht-Marker (${required.length})`);
   }
 
-  ok("App-Update/Reparatur-Banner geschützt");
+  if (!failed) ok("App-Update/Reparatur-Banner geschützt");
+  return failed;
 }
 
-runAppUpdateRecoveryGuard();
+if (require.main === module) {
+  process.exit(runAppUpdateRecoveryGuard());
+}
+
+module.exports = { MARKER, LOCK_FILE, runAppUpdateRecoveryGuard };

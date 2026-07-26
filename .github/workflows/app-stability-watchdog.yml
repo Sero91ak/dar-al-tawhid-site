@@ -1,6 +1,6 @@
-name: Bibliothek Deploy Watchdog
+name: App Stabilität Watchdog
 
-# Autonome Reparatur: Wenn Live-Katalog/PDFs hinter GitHub zurückliegen, Deploy erneut auslösen.
+# Autonome Reparatur für alle Bereiche: Live-Parität prüfen, bei Abweichung Deploy + Cache-Purge auslösen.
 on:
   workflow_dispatch:
   schedule:
@@ -11,7 +11,7 @@ permissions:
   actions: write
 
 jobs:
-  library-deploy-watchdog:
+  app-stability-watchdog:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,17 +22,25 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Live-Bibliothek mit Repo abgleichen
+      - name: Live-Parität aller Bereiche prüfen
         id: parity
         continue-on-error: true
         env:
           SITE_URL: "https://dar-al-tawhid.de"
-        run: node scripts/library-live-parity-check.js
+        run: node scripts/app-live-parity-check.js
 
       - name: Deploy erneut auslösen (Live hinter GitHub)
         if: steps.parity.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "Bibliothek-Watchdog: Live-Parität fehlgeschlagen — Deploy wird ausgelöst"
+          echo "App-Stabilität-Watchdog: Live-Parität fehlgeschlagen — Deploy wird ausgelöst"
           gh workflow run "Deploy Besucher-App (Cloudflare Workers)" --ref main
+
+      - name: CDN-Cache leeren nach Reparatur-Deploy
+        if: steps.parity.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sleep 45
+          gh workflow run "Purge live site cache" --ref main || true
