@@ -20263,13 +20263,13 @@ function ensureLibraryModule(){
     if(!document.querySelector("link[data-library-css]")){
       const css=document.createElement("link");
       css.rel="stylesheet";
-      css.href=`${base}/assets/library/library-app.css?v=12`;
+      css.href=`${base}/assets/library/library-app.css?v=13`;
       css.setAttribute("data-library-css","1");
       document.head.appendChild(css);
     }
     if(window.DARLibraryApp){window.__libraryAssetsReady=true;resolve(window.DARLibraryApp);return}
     const s=document.createElement("script");
-    s.src=`${base}/assets/library/library-app.js?v=16`;
+    s.src=`${base}/assets/library/library-app.js?v=17`;
     s.defer=true;
     s.onload=()=>{window.__libraryAssetsReady=true;resolve(window.DARLibraryApp)};
     s.onerror=reject;
