@@ -5,7 +5,14 @@
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const LIVE_CATALOG_PATH = "data/library-publications.json";
-const LIBRARY_LIVE_CHECK_SCHEDULE_MS = [0, 3000, 6000, 9000, 12000, 15000, 20000, 30000, 45000, 60000];
+/** Bis ~8 Min. warten, früh häufig prüfen (Deploy dauert typ. 45–90 s). */
+const LIBRARY_LIVE_CHECK_SCHEDULE_MS = [
+  0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 75000, 90000,
+  105000, 120000, 150000, 180000, 240000, 300000, 360000, 420000, 480000
+];
+const LIBRARY_LIVE_CHECK_QUICK_MS = [0, 5000, 10000, 15000, 20000];
+/** Push 15 s nach Live-Bestätigung (Ziel: 10–20 s). */
+export const LIBRARY_PUSH_DELAY_AFTER_LIVE_MS = 15000;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -123,9 +130,8 @@ export async function verifyLibraryLiveAvailability(env, record) {
 }
 
 export async function verifyLibraryLiveAvailabilityWithRetry(env, record, options = {}) {
-  const delays = Array.isArray(options.delays) && options.delays.length
-    ? options.delays
-    : LIBRARY_LIVE_CHECK_SCHEDULE_MS;
+  const schedule = options.schedule === "quick" ? LIBRARY_LIVE_CHECK_QUICK_MS : LIBRARY_LIVE_CHECK_SCHEDULE_MS;
+  const delays = Array.isArray(options.delays) && options.delays.length ? options.delays : schedule;
   let lastResult = null;
   let elapsed = 0;
 

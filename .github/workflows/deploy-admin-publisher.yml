@@ -98,7 +98,7 @@ jobs:
             echo "Versuch ${attempt}: $HEALTH"
             if printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true' \
               && printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"' \
-              && printf '%s' "$HEALTH" | grep -q '"libraryApi":"v1"'; then
+              && printf '%s' "$HEALTH" | grep -q '"libraryApi":"v3-split-push"'; then
               exit 0
             fi
             sleep 15
