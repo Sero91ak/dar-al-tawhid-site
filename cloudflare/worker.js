@@ -11,8 +11,7 @@ import {
   readPrayerPushStatus,
   sendPrayerTestPush,
   ensurePrayerSchedulerFresh,
-  triggerPrayerWorkflowForSubscription,
-  repairPrayerRegistrationsDisabledByDaily
+  triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
 import {
   readDailyPushStatus,
@@ -73,8 +72,6 @@ import {
   cleanupFeedBackgroundPool,
   blockFeedBackgroundImage
 } from "./feed-backgrounds-sync.js";
-import { handleQuizStatsRequest } from "./quiz-stats-admin.js";
-export { PrayerStatusStore } from "./prayer-status-store.js";
 import {
   readLibraryCatalog,
   saveLibraryPublication,
@@ -109,26 +106,8 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-const LIVE_CHECK_SCHEDULE_FULL_MS = [
-  0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 90000, 120000,
-  180000, 240000, 300000, 360000, 420000, 480000
-];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 6000, 10000, 15000, 20000];
-const POST_PUSH_DELAY_AFTER_LIVE_MS = 15000;
-const PUSH_RETRY_COOLDOWN_MS = 90000;
-const PUSH_CRON_BATCH_SIZE = 4;
-const ILM_EXTERNAL_RESEARCH_SOURCES = [
-  { id: "dorar", label: "Dorar", host: "dorar.net", searchUrl: (q) => `https://dorar.net/search?q=${encodeURIComponent(q)}` },
-  { id: "shamela", label: "Shamela", host: "shamela.ws", searchUrl: (q) => `https://shamela.ws/search?term=${encodeURIComponent(q)}` },
-  { id: "almaktaba", label: "al-Maktaba", host: "al-maktaba.org", searchUrl: (q) => `https://al-maktaba.org/search?q=${encodeURIComponent(q)}` },
-  { id: "ketabonline", label: "Ketab Online", host: "ketabonline.com", searchUrl: (q) => `https://ketabonline.com/ar/search?q=${encodeURIComponent(q)}` },
-  { id: "turath", label: "Turāth", host: "app.turath.io", searchUrl: (q) => `https://app.turath.io/search?query=${encodeURIComponent(q)}` },
-  { id: "waqfeya", label: "Waqfeya", host: "waqfeya.net", searchUrl: (q) => `https://waqfeya.net/search.php?search=${encodeURIComponent(q)}` },
-  { id: "archive", label: "Archive.org", host: "archive.org", searchUrl: (q) => `https://archive.org/search?query=${encodeURIComponent(q)}` },
-  { id: "quran-ksu", label: "Quran KSU", host: "quran.ksu.edu.sa", searchUrl: (q) => `https://quran.ksu.edu.sa/#:~:text=${encodeURIComponent(q.slice(0, 80))}` }
-];
-const ilmResearchRateBuckets = new Map();
-
+const LIVE_CHECK_SCHEDULE_FULL_MS = [30000, 60000, 120000, 180000, 240000, 300000];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -140,7 +119,6 @@ export default {
 
     try {
       if (url.pathname === "/health" || url.pathname === "/api/admin/health") {
-        const pushRegistry = await readPendingPushesRegistry(env).catch(() => ({ pushes: {} }));
         return json({
           ok: true,
           service: "dar-admin-publisher",
@@ -153,43 +131,14 @@ export default {
           telegramChannel: telegramChannelId(env),
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
-          prayerScheduler: "cloudflare-worker-cron-v3",
+          prayerScheduler: "cloudflare-worker-cron",
           prayerCron: "*/5 * * * *",
-          prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
           jummahPushCron: "*/5 * * * *",
-          libraryApi: "v3-split-push",
-          libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
-          postPushDelayMs: POST_PUSH_DELAY_AFTER_LIVE_MS,
-          pushQueue: summarizePendingPushes(pushRegistry),
           scheduler: "ready"
         }, cors);
-      }
-
-      if (
-        url.pathname === "/api/quiz/stats/ingest" ||
-        url.pathname === "/api/quiz/stats/ingest-test" ||
-        url.pathname.startsWith("/api/admin/quiz-stats")
-      ) {
-        const quizResult = await handleQuizStatsRequest(request, env, url, { assertAuthorized });
-        if (quizResult != null) {
-          if (quizResult.contentType === "text/csv;charset=utf-8") {
-            return new Response(quizResult.csv, {
-              status: 200,
-              headers: { ...cors, "Content-Type": quizResult.contentType, "Content-Disposition": "attachment; filename=quiz-stats.csv" }
-            });
-          }
-          return json(quizResult, cors);
-        }
-      }
-
-      if (url.pathname === "/api/ilm/research" && request.method === "POST") {
-        assertIlmResearchRateLimit(request, env);
-        const input = await request.json().catch(() => ({}));
-        const result = await handleIlmExternalResearch(input, env);
-        return json(result, cors, result.ok ? 200 : 400);
       }
 
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
@@ -455,14 +404,6 @@ export default {
         return json(await deleteFeedEntry(env, input, helpers), cors);
       }
 
-      if (url.pathname === "/api/admin/feed/reorder" && request.method === "POST") {
-        assertConfigured(env);
-        assertAuthorized(request, env);
-        const input = await request.json().catch(() => ({}));
-        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
-        return json(await reorderFeedItems(env, input, helpers), cors);
-      }
-
       if (url.pathname === "/api/admin/library" && request.method === "GET") {
         assertConfigured(env);
         assertAuthorized(request, env);
@@ -513,6 +454,14 @@ export default {
         const input = await request.json().catch(() => ({}));
         const suggestion = suggestLibraryCategory(String(input?.text || ""));
         return json({ ok: true, suggestion }, cors);
+      }
+
+      if (url.pathname === "/api/admin/feed/reorder" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await reorderFeedItems(env, input, helpers), cors);
       }
 
       if (url.pathname === "/api/feed-backgrounds" && request.method === "GET") {
@@ -654,14 +603,12 @@ export default {
       const pushPaths = new Set([
         "/api/admin/push/retry",
         "/api/admin/push/library/retry",
-        "/api/admin/push/status",
-        "/api/admin/push/process"
+        "/api/admin/push/status"
       ]);
       const prayerPaths = new Set([
         "/api/admin/prayer/status",
         "/api/admin/prayer/test",
-        "/api/admin/prayer/run",
-        "/api/admin/prayer/repair-registrations"
+        "/api/admin/prayer/run"
       ]);
       const dailyPaths = new Set([
         "/api/admin/daily/status",
@@ -700,20 +647,8 @@ export default {
         assertConfigured(env);
         assertAuthorized(request, env);
         const postId = String(url.searchParams.get("postId") || "").trim();
-        const publicationId = String(url.searchParams.get("publicationId") || "").trim();
         const registry = await readPendingPushesRegistry(env);
-        const key = publicationId ? libraryPushRegistryKey(publicationId) : postId;
-        if (key) {
-          return json({ ok: true, key, status: registry.pushes?.[key] || null, summary: summarizePendingPushes(registry) }, cors);
-        }
-        return json({ ok: true, summary: summarizePendingPushes(registry), registry }, cors);
-      }
-
-      if (url.pathname === "/api/admin/push/process" && request.method === "POST") {
-        assertConfigured(env);
-        assertAuthorized(request, env);
-        const result = await processAllPendingPushes(env);
-        return json({ ok: true, ...result }, cors);
+        return json({ ok: true, postId, status: postId ? registry.pushes?.[postId] || null : registry }, cors);
       }
 
       if (url.pathname === "/api/admin/prayer/status") {
@@ -780,21 +715,16 @@ export default {
 
       if (pushPaths.has(url.pathname)) {
         if (url.pathname.endsWith("/library/retry")) {
-          return json(await retryPendingLibraryPush(env, input), cors);
+          return json(await retryPendingLibraryPush(env, input, ctx), cors);
         }
         if (url.pathname.endsWith("/retry")) {
-          return json(await retryPendingPostPush(env, input), cors);
+          return json(await retryPendingPostPush(env, input, ctx), cors);
         }
       }
 
       if (prayerPaths.has(url.pathname)) {
         if (url.pathname.endsWith("/test")) {
           return json(await sendPrayerTestPush(env, input), cors);
-        }
-        if (url.pathname.endsWith("/repair-registrations")) {
-          const repair = await repairPrayerRegistrationsDisabledByDaily(env);
-          const result = await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
-          return json({ ok: repair.ok !== false, repair, scheduler: result }, cors, repair.ok === false ? 503 : 200);
         }
         if (url.pathname.endsWith("/run")) {
           const result = await ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, { force: true });
@@ -1237,19 +1167,21 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       publishedAt,
       postPath,
       status: "pending",
-      pushApproved: false,
       createdAt: publishedAt,
-      lastError: "Push wartet auf Admin-Freigabe"
+      lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     if (postId) await writePendingPushStatus(env, postId, pendingRecord);
     push = {
       sent: false,
       pending: true,
-      waitingForApproval: true,
-      reason: "Push wartet auf deine Freigabe im Admin („Live Push freigeben“).",
+      reason: "Push wird im Hintergrund nach Live-Prüfung gesendet.",
+      waitingForLive: true,
       liveCheck,
       targetUrl: buildPostPushUrl(env, postId, Date.now())
     };
+    if (ctx && postId) {
+      ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
+    }
   }
 
   let telegram = { sent: false, skipped: true, status: "not_sent" };
@@ -1378,19 +1310,19 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
       publishedAt,
       postPath: lastPost.postPath,
       status: "pending",
-      pushApproved: false,
       createdAt: publishedAt,
-      lastError: "Push wartet auf Admin-Freigabe"
+      lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     await writePendingPushStatus(env, lastPost.postId, pendingRecord);
     push = {
       sent: false,
       pending: true,
-      waitingForApproval: true,
-      reason: `Push für letzten Beitrag (${published.length} gesamt) wartet auf deine Freigabe im Admin.`,
+      reason: `Push für letzten Beitrag (${published.length} gesamt) wird im Hintergrund gesendet.`,
+      waitingForLive: true,
       liveCheck,
       targetUrl: buildPostPushUrl(env, lastPost.postId, Date.now())
     };
+    if (ctx) ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
   } else if (skipPush) {
     push = { sent: false, skipped: true, reason: "Push übersprungen", liveCheck };
   }
@@ -1944,157 +1876,6 @@ function json(data, headers, status = 200) {
   });
 }
 
-function assertIlmResearchRateLimit(request, env) {
-  const max = Number(env.ILM_RESEARCH_RATE_MAX || 18);
-  const windowMs = Number(env.ILM_RESEARCH_RATE_WINDOW_MS || 60_000);
-  const key =
-    request.headers.get("CF-Connecting-IP") ||
-    request.headers.get("X-Forwarded-For") ||
-    request.headers.get("Origin") ||
-    "unknown";
-  const now = Date.now();
-  const bucket = ilmResearchRateBuckets.get(key) || { count: 0, resetAt: now + windowMs };
-  if (now > bucket.resetAt) {
-    bucket.count = 0;
-    bucket.resetAt = now + windowMs;
-  }
-  bucket.count += 1;
-  ilmResearchRateBuckets.set(key, bucket);
-  if (bucket.count > max) throw httpError("Zu viele Recherche-Anfragen. Bitte kurz warten.", 429);
-}
-
-function normalizeIlmResearchQuery(value) {
-  return String(value || "")
-    .replace(/[\u0000-\u001f<>`{}]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 180);
-}
-
-function decodeHtmlEntities(value) {
-  return String(value || "")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&#(\d+);/g, (_, n) => {
-      const code = Number(n);
-      return Number.isFinite(code) ? String.fromCharCode(code) : "";
-    });
-}
-
-function htmlToPlainText(html) {
-  return decodeHtmlEntities(String(html || "")
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<noscript[\s\S]*?<\/noscript>/gi, " ")
-    .replace(/<!--[\s\S]*?-->/g, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim());
-}
-
-function ilmResearchTokens(query) {
-  return normalizeIlmResearchQuery(query)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .split(/[^a-z0-9\u0600-\u06ff]+/i)
-    .filter((token) => token.length >= 3)
-    .slice(0, 8);
-}
-
-function buildIlmSnippet(text, query) {
-  const clean = String(text || "").replace(/\s+/g, " ").trim();
-  if (!clean) return "";
-  const lower = clean.toLowerCase();
-  const tokens = ilmResearchTokens(query);
-  const first = tokens.map((token) => lower.indexOf(token)).filter((idx) => idx >= 0).sort((a, b) => a - b)[0] ?? 0;
-  const start = Math.max(0, first - 110);
-  const snippet = clean.slice(start, start + 360).trim();
-  return `${start > 0 ? "… " : ""}${snippet}${start + 360 < clean.length ? " …" : ""}`;
-}
-
-function buildTextFragmentUrl(url, snippet) {
-  const text = String(snippet || "").replace(/^…\s*/, "").slice(0, 90).trim();
-  if (!text) return url;
-  return `${url}#:~:text=${encodeURIComponent(text)}`;
-}
-
-async function fetchIlmAllowedSource(source, query) {
-  const url = source.searchUrl(query);
-  const parsed = new URL(url);
-  if (parsed.hostname !== source.host) throw new Error("Domain nicht erlaubt");
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 4200);
-  try {
-    const res = await fetch(url, {
-      redirect: "follow",
-      signal: controller.signal,
-      headers: {
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "User-Agent": "DAR-AL-TAWHID-Ilm-Research/1.0 (+https://dar-al-tawhid.de)"
-      }
-    });
-    const finalUrl = res.url || url;
-    const finalHost = new URL(finalUrl).hostname;
-    if (finalHost !== source.host && !finalHost.endsWith(`.${source.host}`)) throw new Error("Weiterleitung auf nicht erlaubte Domain");
-    const contentType = res.headers.get("Content-Type") || "";
-    const body = contentType.includes("text") || contentType.includes("html") ? await res.text() : "";
-    const plain = htmlToPlainText(body).slice(0, 12000);
-    const snippet = buildIlmSnippet(plain, query);
-    return {
-      id: `external-${source.id}`,
-      label: source.label,
-      host: source.host,
-      url,
-      finalUrl,
-      markedUrl: buildTextFragmentUrl(finalUrl, snippet || query),
-      reachable: res.ok,
-      status: res.status,
-      snippet,
-      verified: false,
-      note: "Externe Fundstelle zur Prüfung. Nicht automatisch als geprüfter religiöser Beleg übernommen."
-    };
-  } catch (error) {
-    return {
-      id: `external-${source.id}`,
-      label: source.label,
-      host: source.host,
-      url,
-      finalUrl: url,
-      markedUrl: url,
-      reachable: false,
-      status: 0,
-      snippet: "",
-      verified: false,
-      note: error?.name === "AbortError" ? "Quelle hat nicht rechtzeitig geantwortet." : "Quelle konnte nicht automatisch gelesen werden."
-    };
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-async function handleIlmExternalResearch(input, env) {
-  const query = normalizeIlmResearchQuery(input?.query);
-  if (query.length < 3) return { ok: false, error: "query fehlt oder ist zu kurz" };
-  const requested = Array.isArray(input?.sources) ? new Set(input.sources.map((item) => String(item))) : null;
-  const sources = ILM_EXTERNAL_RESEARCH_SOURCES
-    .filter((source) => !requested || requested.has(source.id) || requested.has(source.host))
-    .slice(0, Math.min(Number(input?.limit || env.ILM_RESEARCH_SOURCE_LIMIT || 6), 8));
-  const results = await Promise.all(sources.map((source) => fetchIlmAllowedSource(source, query)));
-  return {
-    ok: true,
-    query,
-    mode: "allowlisted-server-research",
-    generatedAt: new Date().toISOString(),
-    sourcePolicy: "Nur serverseitig erlaubte Domains; externe Treffer bleiben ungeprüft, bis sie administrativ bestätigt werden.",
-    results
-  };
-}
-
 function assertConfigured(env) {
   if (!env.GITHUB_TOKEN) throw httpError("Cloudflare Secret GITHUB_TOKEN fehlt", 500);
   if (!env.ADMIN_PUBLISH_SECRET) throw httpError("Cloudflare Secret ADMIN_PUBLISH_SECRET fehlt", 500);
@@ -2251,28 +2032,55 @@ function githubHeaders(env) {
   };
 }
 
-async function triggerSiteDeployWorkflow(env, reason = "library-live") {
-  const token = env.GITHUB_TOKEN;
-  if (!token) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
+async function githubWorkflowDispatch(env, owner, repo, workflowId, ref, inputs = {}) {
+  const token = String(env.GITHUB_WORKFLOW_TOKEN || env.GITHUB_TOKEN || "").trim();
+  if (!token) {
+    return { ok: false, skipped: true, reason: "Kein GitHub-Token für Workflow-Dispatch vorhanden." };
+  }
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/${encodeURIComponent(workflowId)}/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": "dar-admin-cloudflare-worker",
+      "X-GitHub-Api-Version": "2022-11-28",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ref: String(ref || DEFAULT_BRANCH),
+      inputs
+    })
+  });
+  if (res.status === 204) {
+    return { ok: true, workflowId, ref };
+  }
+  const data = await res.json().catch(() => ({}));
+  return {
+    ok: false,
+    status: res.status,
+    workflowId,
+    ref,
+    reason: data.message || `Workflow-Dispatch fehlgeschlagen (${res.status})`
+  };
+}
+
+async function triggerSiteDeployWorkflow(env, reason = "manual") {
   const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const workflowId = String(env.GITHUB_DEPLOY_WORKFLOW_ID || "cloudflare-pages-deploy.yml").trim();
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/actions/workflows/cloudflare-pages-deploy.yml/dispatches`,
-      {
-        method: "POST",
-        headers: { ...githubHeaders(env), "Content-Type": "application/json" },
-        body: JSON.stringify({ ref: branch, inputs: {} })
-      }
-    );
-    if (res.status === 204) {
-      return { triggered: true, workflow: "cloudflare-pages-deploy.yml", reason };
+    const result = await githubWorkflowDispatch(env, owner, repo, workflowId, branch, {
+      reason: String(reason || "manual").slice(0, 120),
+      source: "admin-worker"
+    });
+    if (!result.ok) {
+      console.warn("Site deploy workflow dispatch failed:", result.reason || result.status || "unknown");
     }
-    const text = await res.text().catch(() => "");
-    return { triggered: false, reason: `Deploy-Workflow ${res.status}: ${text.slice(0, 180)}` };
+    return result;
   } catch (error) {
-    return { triggered: false, reason: error.message || String(error) };
+    console.warn("Site deploy workflow dispatch crashed:", error?.message || String(error));
+    return { ok: false, reason: error?.message || String(error) };
   }
 }
 
@@ -2642,31 +2450,6 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function isPostPushApproved(record) {
-  return record?.pushApproved === true;
-}
-
-function summarizePendingPushes(registry) {
-  const items = Object.values(registry?.pushes || {});
-  const pendingApproved = items.filter((p) => p?.status === "pending" && isPostPushApproved(p));
-  return {
-    total: items.length,
-    sent: items.filter((p) => p?.status === "sent").length,
-    failed: items.filter((p) => p?.status === "failed").length,
-    pending: items.filter((p) => p?.status === "pending").length,
-    pendingApproved: pendingApproved.length,
-    awaitingApproval: items.filter((p) => p?.status === "pending" && !isPostPushApproved(p)).length,
-    libraryPending: pendingApproved.filter((p) => p?.kind === "library").length,
-    postPending: pendingApproved.filter((p) => p?.kind !== "library").length
-  };
-}
-
-function pushRetryCooldownElapsed(record, nowMs = Date.now()) {
-  const last = Date.parse(record?.lastCheckAt || "");
-  if (!Number.isFinite(last)) return true;
-  return nowMs - last >= PUSH_RETRY_COOLDOWN_MS;
-}
-
 function pendingPushesPath(env) {
   return trimSlashes(env.PENDING_PUSHES_PATH || DEFAULT_PENDING_PUSHES_PATH);
 }
@@ -2837,27 +2620,13 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
   return lastResult;
 }
 
-async function processPendingPushUntilLive(env, record, options = {}) {
-  if (record?.kind === "library") {
-    return processPendingLibraryPushUntilLive(env, record, options);
-  }
-
+async function processPendingPushUntilLive(env, record) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
 
   const registry = await readPendingPushesRegistry(env);
   if (registry.pushes?.[postId]?.status === "sent") {
     return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
-  }
-
-  const current = registry.pushes?.[postId] || record;
-  if (!isPostPushApproved(current)) {
-    return {
-      sent: false,
-      pending: true,
-      waitingForApproval: true,
-      reason: "Push wartet auf Admin-Freigabe."
-    };
   }
 
   const liveCheck = await verifyPostLiveAvailability(
@@ -2868,7 +2637,7 @@ async function processPendingPushUntilLive(env, record, options = {}) {
       postPath: record.postPath,
       githubSteps: { postCreated: true, indexUpdated: true }
     },
-    { schedule: options.extendedWait ? "full" : "quick" }
+    { schedule: "full" }
   );
 
   await writePendingPushStatus(env, postId, {
@@ -2880,10 +2649,6 @@ async function processPendingPushUntilLive(env, record, options = {}) {
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
-  }
-
-  if (POST_PUSH_DELAY_AFTER_LIVE_MS > 0) {
-    await sleep(POST_PUSH_DELAY_AFTER_LIVE_MS);
   }
 
   const push = await sendNewPostPush(env, {
@@ -2911,21 +2676,19 @@ async function processPendingPushUntilLive(env, record, options = {}) {
   return { ...push, liveCheck, pending: !push.sent };
 }
 
-async function queueLibraryPublicationPush(env, publication) {
-  const key = libraryPushRegistryKey(publication?.id);
-  if (!key) {
-    return { sent: false, reason: "publicationId fehlt" };
+async function processAllPendingPushes(env) {
+  const registry = await readPendingPushesRegistry(env);
+  const pending = Object.values(registry.pushes || {}).filter(
+    (item) => item?.status === "pending" && isPostPushApproved(item)
+  );
+  const results = [];
+  for (const record of pending) {
+    const handler = record?.kind === "library"
+      ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
+      : () => processPendingPushUntilLive(env, record);
+    results.push(await handler());
   }
-  const pendingRecord = buildLibraryPushPendingRecord(publication);
-  await writePendingPushStatus(env, key, pendingRecord);
-  return {
-    sent: false,
-    pending: true,
-    autoSending: true,
-    reason: "Besucher-Push wird automatisch gesendet.",
-    targetUrl: buildLibraryPushUrl(env, pendingRecord.slug, Date.now()),
-    publicationId: pendingRecord.publicationId
-  };
+  return { processed: pending.length, results };
 }
 
 async function processPendingLibraryPushUntilLive(env, record, options = {}) {
@@ -2983,7 +2746,7 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   return { ...push, liveCheck, pending: !push.sent };
 }
 
-async function retryPendingLibraryPush(env, input) {
+async function retryPendingLibraryPush(env, input, ctx) {
   const publicationId = String(input.publicationId || "").trim();
   const slug = String(input.slug || publicationId).trim();
   const publicationTitle = String(input.publicationTitle || input.title || "").trim() || "Neue PDF";
@@ -3019,6 +2782,9 @@ async function retryPendingLibraryPush(env, input) {
   };
   await writePendingPushStatus(env, key, record);
   const push = await processPendingLibraryPushUntilLive(env, record);
+  if (ctx && push?.pending) {
+    ctx.waitUntil(processPendingLibraryPushUntilLive(env, record, { extendedWait: true }));
+  }
   return {
     ok: true,
     publicationId,
@@ -3028,34 +2794,7 @@ async function retryPendingLibraryPush(env, input) {
   };
 }
 
-async function processAllPendingPushes(env) {
-  const registry = await readPendingPushesRegistry(env);
-  const now = Date.now();
-  const pending = Object.values(registry.pushes || {})
-    .filter((item) => item?.status === "pending" && isPostPushApproved(item))
-    .filter((item) => pushRetryCooldownElapsed(item, now))
-    .sort((a, b) => String(a.updatedAt || "").localeCompare(String(b.updatedAt || "")))
-    .slice(0, PUSH_CRON_BATCH_SIZE);
-
-  const results = [];
-  for (const record of pending) {
-    try {
-      const push = record?.kind === "library"
-        ? await processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
-        : await processPendingPushUntilLive(env, record, { extendedWait: false });
-      results.push({ key: record.postId || libraryPushRegistryKey(record.publicationId), ...push });
-    } catch (error) {
-      results.push({
-        key: record.postId || libraryPushRegistryKey(record.publicationId),
-        sent: false,
-        error: error.message || String(error)
-      });
-    }
-  }
-  return { processed: pending.length, summary: summarizePendingPushes(registry), results };
-}
-
-async function retryPendingPostPush(env, input) {
+async function retryPendingPostPush(env, input, ctx) {
   const postId = String(input.postId || "").trim();
   const filename = sanitizeFilename(String(input.filename || "").trim());
   const postTitle = String(input.postTitle || "").trim() || "Neuer Beitrag";
@@ -3083,12 +2822,13 @@ async function retryPendingPostPush(env, input) {
     postTitle: existing?.postTitle || postTitle,
     publishedAt: existing?.publishedAt || publishedAt,
     postPath: existing?.postPath || postPath,
-    status: "pending",
-    pushApproved: true,
-    pushApprovedAt: new Date().toISOString()
+    status: "pending"
   };
   await writePendingPushStatus(env, postId, record);
-  const push = await processPendingPushUntilLive(env, record, { extendedWait: false });
+  const push = await processPendingPushUntilLive(env, record);
+  if (ctx && push?.pending) {
+    ctx.waitUntil(processPendingPushUntilLive(env, record));
+  }
   return {
     ok: true,
     postId,
@@ -3202,9 +2942,6 @@ function buildNewsPushUrl(env, { newsId, nav, value }) {
   const id = String(newsId || "").trim();
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
-  if (targetNav === "zakat") return `${site}/#zakat`;
-  if (targetNav === "bibliothek") return `${site}/#bibliothek`;
-  if (targetNav === "quiz") return `${site}/#quiz`;
   if (targetNav && targetValue && targetNav !== "news-detail") {
     return `${site}/#${targetNav}/${encodeURIComponent(targetValue)}`;
   }
