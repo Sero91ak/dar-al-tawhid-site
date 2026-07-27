@@ -468,7 +468,9 @@ export default {
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         try {
           const result = await saveLibraryPublication(env, input, helpers);
-          if (result.published && result.target === "live" && result.publication) {
+          const skipPush = input?.skipPush === true;
+          const shouldPush = result.published && result.target === "live" && result.publication && !skipPush;
+          if (shouldPush) {
             const push = await queueLibraryPublicationPush(env, result.publication);
             const pushRecord = {
               ...buildLibraryPushPendingRecord(result.publication),
@@ -481,6 +483,9 @@ export default {
               })
             );
             return json({ ...result, push }, cors);
+          }
+          if (result.published && result.target === "live" && skipPush) {
+            return json({ ...result, push: { sent: false, skipped: true, reason: "Korrektur ohne Push" } }, cors);
           }
           return json(result, cors);
         } catch (e) {

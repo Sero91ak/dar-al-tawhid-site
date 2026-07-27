@@ -726,10 +726,11 @@
     if (!draft) draft = defaultDraft();
     draft.title = document.getElementById("libAdminTitle")?.value?.trim() || "";
     draft.slug = nextUniqueSlug(draft.title, draft.id);
-    if (showCategoryEdit) {
-      draft.category = document.getElementById("libAdminCategory")?.value || draft.category;
-      draft.topic = document.getElementById("libAdminTopic")?.value || draft.topic;
-    }
+    const pickedCategory = document.getElementById("libAdminCategory")?.value || "";
+    const pickedTopic = document.getElementById("libAdminTopic")?.value || "";
+    if (pickedCategory) draft.category = pickedCategory;
+    if (pickedTopic) draft.topic = pickedTopic;
+    else if (pickedCategory && !draft.topic) draft.topic = pickedCategory;
     draft.subtitle = document.getElementById("libAdminSubtitle")?.value || "";
     draft.description = document.getElementById("libAdminDescription")?.value || "";
     draft.tags = String(document.getElementById("libAdminTags")?.value || "").split(",").map((t) => t.trim()).filter(Boolean);
@@ -770,8 +771,9 @@
     }
   }
 
-  async function publishDraft(target) {
+  async function publishDraft(target, options = {}) {
     const publishTarget = target === "live" ? "live" : "test";
+    const skipPush = options.skipPush === true;
     readMainForm();
     if (!draft.category) {
       if (categorySuggestion?.category && categorySuggestion.confidence !== "none") {
@@ -782,8 +784,8 @@
       }
     }
     if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
-    if (publishTarget === "live") {
-      const ok = confirm("Diese Veröffentlichung in der Besucher-App (Live) veröffentlichen?\n\nDie Dateien werden in den Live-Bibliotheks-Pfad geschrieben.");
+    if (publishTarget === "live" && !skipPush) {
+      const ok = confirm("Diese Veröffentlichung in der Besucher-App (Live) veröffentlichen?\n\nDie Dateien werden in den Live-Bibliotheks-Pfad geschrieben und ein Besucher-Push wird gesendet.");
       if (!ok) throw new Error("Live-Veröffentlichung abgebrochen");
     }
     busy = true;
@@ -795,7 +797,7 @@
       safeRender();
       if (pdfFile) {
         await generateCoverFromPdf();
-      } else if (!coverVariants && draft?.coverUrl) {
+      } else if (draft?.coverUrl || draft?.coverUrls?.medium) {
         /* bestehendes Cover bleibt */
       } else if (!coverVariants) {
         throw new Error("Cover konnte nicht aus der ersten PDF-Seite erstellt werden");
@@ -809,14 +811,15 @@
         publication: { ...draft, status: nextStatus, isNew: !!draft.isNew },
         libraryFiles,
         publish: true,
-        target: publishTarget
+        target: publishTarget,
+        skipPush
       });
       publishStep = 4;
       successSlug = draft.slug;
       successTarget = publishTarget;
       successPublicationId = draft.id || "";
       successPdfUrl = draft.pdfUrl || "";
-      lastLivePush = publishTarget === "live" ? (res?.push || null) : null;
+      lastLivePush = publishTarget === "live" && !skipPush ? (res?.push || null) : skipPush ? { skipped: true } : null;
       editingPublicationId = "";
       pdfReplaceVersion = "";
       await ensureLibraryLoaded(true);
@@ -921,10 +924,28 @@
     return `<div class="lib-admin-edit-banner" id="libAdminEditPanel">
       <div>
         <b>Bearbeitung: ${esc(draft.title || "Veröffentlichung")}</b>
-        <p>${esc(envNote)} — Metadaten ändern oder neues PDF wählen, dann erneut veröffentlichen.</p>
+        <p>${esc(envNote)} — Metadaten ändern oder neues PDF wählen. „Ohne Push“ nur aktualisieren, „+ Push“ benachrichtigt Besucher.</p>
       </div>
       <button class="lib-admin-btn" type="button" id="libAdminCancelEdit">Abbrechen</button>
     </div>`;
+  }
+
+  function getEditingMergedEntry() {
+    return editingPublicationId ? getMergedEntry(editingPublicationId) : null;
+  }
+
+  function isEditingLivePublication() {
+    const merged = getEditingMergedEntry();
+    return !!(merged?.inLive && isOnlineStatus(merged.liveStatus));
+  }
+
+  function renderPublishActionButtons(isEditing) {
+    const liveEdit = isEditing && isEditingLivePublication();
+    if (liveEdit) {
+      return `<button class="lib-admin-btn lib-admin-btn-primary" type="button" id="libAdminUpdateLive" ${busy || !canPublish() ? "disabled" : ""} title="Änderungen in der Besucher-App speichern — ohne Push">Besucher-App aktualisieren (ohne Push)</button>
+          <button class="lib-admin-btn lib-admin-btn-live" type="button" id="libAdminPublishLivePush" ${busy || !canPublish() ? "disabled" : ""} title="In Besucher-App speichern und Besucher-Push senden">Live veröffentlichen + Push</button>`;
+    }
+    return `<button class="lib-admin-btn lib-admin-btn-live" type="button" id="libAdminPublishLive" ${busy || !canPublish() ? "disabled" : ""} title="Veröffentlicht in der Besucher-App und sendet den Besucher-Push">Live veröffentlichen (+ Push)</button>`;
   }
 
   function renderUploadForm() {
@@ -968,7 +989,7 @@
 
         <div class="lib-admin-actions" id="libAdminActions" style="${pdfReady && !processingPdf ? "" : "display:none"}">
           <button class="lib-admin-btn" type="button" id="libAdminSaveDraft" ${busy ? "disabled" : ""}>Als Entwurf speichern</button>
-          <button class="lib-admin-btn lib-admin-btn-live" type="button" id="libAdminPublishLive" ${busy || !canPublish() ? "disabled" : ""} title="Veröffentlicht direkt in der Besucher-App und sendet den Besucher-Push automatisch">Live veröffentlichen</button>
+          ${renderPublishActionButtons(isEditing)}
         </div>
       </div>
       ${renderPreviewPanel()}
@@ -977,23 +998,28 @@
 
   function renderSuccess() {
     const isLive = successTarget === "live";
-    const headline = isLive
-      ? "Die Veröffentlichung wurde erfolgreich für die Besucher-App (Live) veröffentlicht."
-      : "Die Veröffentlichung wurde erfolgreich gespeichert.";
+    const push = lastLivePush || {};
+    const pushSkipped = push.skipped === true;
+    const headline = pushSkipped
+      ? "Die Veröffentlichung wurde in der Besucher-App (Live) aktualisiert."
+      : isLive
+        ? "Die Veröffentlichung wurde erfolgreich für die Besucher-App (Live) veröffentlicht."
+        : "Die Veröffentlichung wurde erfolgreich gespeichert.";
     const viewBtn = isLive
       ? `<a class="lib-admin-btn lib-admin-btn-live" href="/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Besucher-Bibliothek ansehen</a>`
       : "";
-    const push = lastLivePush || {};
     const pushSent = push.sent === true;
     const pushAuto = push.autoSending || (push.pending && !push.waitingForApproval);
     const pushNote = isLive
-      ? pushSent
-        ? "Besucher-Push wurde gesendet."
-        : pushAuto
-          ? "Besucher-Push wird automatisch gesendet, sobald die PDF live erreichbar ist (ca. 10–60 Sekunden)."
-          : push.waitingForLive
-            ? "Besucher-Push wartet auf stabile Live-Verfügbarkeit."
-            : push.reason || "Besucher-Push wird vorbereitet."
+      ? pushSkipped
+        ? "Besucher-App aktualisiert — kein Push gesendet."
+        : pushSent
+          ? "Besucher-Push wurde gesendet."
+          : pushAuto
+            ? "Besucher-Push wird automatisch gesendet, sobald die PDF live erreichbar ist (ca. 10–60 Sekunden)."
+            : push.waitingForLive
+              ? "Besucher-Push wartet auf stabile Live-Verfügbarkeit."
+              : push.reason || "Besucher-Push wird vorbereitet."
       : "";
     return `<div class="lib-admin-success">
       <p><b>${esc(headline)}</b></p>
@@ -1003,6 +1029,51 @@
         <button class="lib-admin-btn" type="button" id="libAdminNewUpload">Weitere PDF hochladen</button>
       </div>
     </div>`;
+  }
+
+  function livePushPayloadForEntry(entry) {
+    const merged = entry?.id ? getMergedEntry(entry.id) || entry : entry;
+    const pub = merged?.live || merged?.display || {};
+    return {
+      publicationId: String(merged?.id || "").trim(),
+      slug: String(pub.slug || merged?.id || "").trim(),
+      publicationTitle: String(pub.title || "").trim(),
+      pdfUrl: String(pub.pdfUrl || "").trim(),
+      publishedAt: String(pub.updatedAt || pub.publishedAt || "").trim()
+    };
+  }
+
+  async function retryLibraryLivePush(options = {}) {
+    const merged = options.publicationId ? getMergedEntry(options.publicationId) : null;
+    const payload = {
+      publicationId: String(options.publicationId || successPublicationId || "").trim(),
+      slug: String(options.slug || successSlug || merged?.live?.slug || merged?.display?.slug || "").trim(),
+      publicationTitle: String(options.publicationTitle || draft?.title || merged?.live?.title || merged?.display?.title || "").trim(),
+      pdfUrl: String(options.pdfUrl || successPdfUrl || merged?.live?.pdfUrl || merged?.display?.pdfUrl || "").trim(),
+      publishedAt: String(options.publishedAt || merged?.live?.updatedAt || merged?.live?.publishedAt || "").trim()
+    };
+    if (!payload.publicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
+    const title = payload.publicationTitle || "PDF";
+    if (!confirm(`Live Push für „${title}“ senden?\n\nDer Push geht an alle registrierten Besucher.`)) return;
+    const btn = options.button || null;
+    const btnLabel = btn?.textContent || "";
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Push wird gesendet…";
+    }
+    try {
+      const result = await workerPost("api/admin/push/library/retry", payload);
+      lastLivePush = result?.push || result || null;
+      const sent = result?.push?.sent === true;
+      toast(sent ? "Live Push gesendet" : (result?.push?.reason || result?.reason || "Push mit Hinweis"));
+      if (!options.publicationId || options.publicationId === successPublicationId) safeRender();
+      return result;
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = btnLabel || "Live Push";
+      }
+    }
   }
 
   function statusLabelAdmin(status) {
@@ -1126,6 +1197,11 @@
     return links;
   }
 
+  function renderLivePushButton(entry, { mini = false } = {}) {
+    if (!entry?.inLive || !isOnlineStatus(entry.liveStatus)) return "";
+    return `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-push" type="button" data-lib-live-push="${esc(entry.id)}">${mini ? "Push" : "Live Push"}</button>`;
+  }
+
   function renderManageRow(entry) {
     const pub = entry.display || {};
     const cover = pub.coverUrls?.small || pub.coverUrl || "";
@@ -1142,6 +1218,8 @@
     const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
     const quickLinks = renderManageViewLinks(entry, pub, "mini").join("");
     const panelLinks = renderManageViewLinks(entry, pub, "panel").join("");
+    const livePushQuick = renderLivePushButton(entry, { mini: true });
+    const livePushPanel = renderLivePushButton(entry);
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
       <div class="lib-admin-manage-card-head">
         <div class="lib-admin-manage-card-top">
@@ -1162,6 +1240,7 @@
         <div class="lib-admin-manage-quick">
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
           ${quickLinks}
+          ${livePushQuick}
         </div>
       </div>
       <div class="lib-admin-manage-card-panel"${expanded ? "" : " hidden"}>
@@ -1169,6 +1248,7 @@
         <div class="lib-admin-list-actions lib-admin-list-actions--compact">
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
           <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
+          ${livePushPanel}
           ${panelLinks}
           ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
           ${canArchive ? `<button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-archive="${esc(entry.id)}">Archiv</button>` : ""}
@@ -1339,6 +1419,30 @@
       }
     });
 
+    document.getElementById("libAdminPublishLivePush")?.addEventListener("click", async () => {
+      try {
+        await publishDraft("live", { skipPush: false });
+        toast("Live veröffentlicht — Besucher-Push wird automatisch gesendet");
+        safeRender();
+      } catch (e) {
+        toast(e.message || "Live-Veröffentlichung fehlgeschlagen");
+        publishStep = 0;
+        safeRender();
+      }
+    });
+
+    document.getElementById("libAdminUpdateLive")?.addEventListener("click", async () => {
+      try {
+        await publishDraft("live", { skipPush: true });
+        toast("Besucher-App aktualisiert (ohne Push)");
+        safeRender();
+      } catch (e) {
+        toast(e.message || "Aktualisierung fehlgeschlagen");
+        publishStep = 0;
+        safeRender();
+      }
+    });
+
     document.getElementById("libAdminNewUpload")?.addEventListener("click", () => {
       resetUploadForm();
       safeRender();
@@ -1495,6 +1599,19 @@
         else manageExpandedIds.add(id);
         safeRender({ force: true });
         return;
+      }
+      const pushBtn = ev.target.closest("[data-lib-live-push]");
+      if (pushBtn && pushBtn.closest("#libAdminManage")) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const id = pushBtn.getAttribute("data-lib-live-push");
+        const entry = id ? getMergedEntry(id) : null;
+        if (!entry) return;
+        try {
+          await retryLibraryLivePush({ ...livePushPayloadForEntry(entry), button: pushBtn });
+        } catch (e) {
+          toast(e.message || "Push fehlgeschlagen");
+        }
       }
     });
   }
