@@ -1,12 +1,13 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v482
- * Search, filter, sort, historical grouping, scroll state.
+ * DAR AL TAWḤID — Gelehrten-Index v488
+ * Kompakt, klappbare Gruppen, korrekte Sortierung.
  */
 (function (global) {
   'use strict';
 
   const STATE_KEY = 'darScholarsIndexStateV1';
   const SORT_KEY = 'darScholarsIndexSortV1';
+  const FOLD_KEY = 'darScholarsIndexFoldV1';
   const RECENT_KEY = 'darScholarsRecentV1';
   const META_URL = '/data/scholar-index-meta.json';
 
@@ -18,12 +19,14 @@
     { id: 'recent', label: 'Zuletzt angesehen' },
   ];
 
+  const GROUPED_SORTS = new Set(['generation', 'alpha']);
+
   const FILTER_DEFS = [
     { id: 'all', label: 'Alle' },
     { id: 'prophet', label: 'Prophet' },
     { id: 'sahabah', label: 'Ṣaḥābah' },
     { id: 'tabiun', label: 'Tābiʿūn' },
-    { id: 'atba', label: 'Atbāʿ at-Tābiʿīn' },
+    { id: 'atba', label: 'Atbāʿ' },
     { id: 'imam', label: 'Imāme' },
     { id: 'muhaddith', label: 'Muḥaddithūn' },
     { id: 'faqih', label: 'Fuqahāʾ' },
@@ -46,12 +49,18 @@
     sahabah: 'ṢAḤĀBAH',
     tabiun: 'TĀBIʿŪN',
     atba: 'ATBĀʿ AT-TĀBIʿĪN',
-    early_imam: 'FRÜHE IMĀME UND MUḤADDITHŪN',
+    early_imam: 'FRÜHE IMĀME',
     later: 'SPÄTERE GELEHRTE',
     weitere: 'WEITERE',
   };
 
   const SECTION_ORDER = ['prophet', 'sahabah', 'tabiun', 'atba', 'early_imam', 'later', 'weitere'];
+
+  const FLAT_LABELS = {
+    count_desc: 'MEISTE BEITRÄGE',
+    count_asc: 'WENIGSTE BEITRÄGE',
+    recent: 'ZULETZT ANGESEHEN',
+  };
 
   let metaCache = null;
   let metaPromise = null;
@@ -177,6 +186,15 @@
     writeSession(STATE_KEY, { ...prev, ...patch });
   }
 
+  function readFoldState() {
+    const raw = readSession(FOLD_KEY, {});
+    return raw && typeof raw === 'object' ? raw : {};
+  }
+
+  function saveFoldState(foldMap) {
+    writeSession(FOLD_KEY, foldMap);
+  }
+
   function readRecent() {
     const list = getJson(RECENT_KEY, []);
     return Array.isArray(list) ? list.slice(0, 3) : [];
@@ -237,6 +255,15 @@
   }
 
   function groupScholars(items, sortId) {
+    if (!GROUPED_SORTS.has(sortId)) {
+      return [{
+        id: 'flat-' + sortId,
+        label: FLAT_LABELS[sortId] || 'ALLE',
+        count: items.length,
+        items,
+        flat: true,
+      }];
+    }
     if (sortId === 'alpha') {
       const map = new Map();
       items.forEach((s) => {
@@ -262,6 +289,38 @@
     }));
   }
 
+  function isBrowsingFullList(state, totalCount, filteredCount) {
+    return !state.query && state.filter === 'all' && filteredCount === totalCount;
+  }
+
+  function resolveFoldMap(groups, state, totalCount, filteredCount) {
+    const saved = readFoldState();
+    const browsing = isBrowsingFullList(state, totalCount, filteredCount);
+    const searching = !!state.query || state.filter !== 'all';
+    const map = {};
+
+    groups.forEach((g, index) => {
+      if (g.flat) {
+        map[g.id] = true;
+        return;
+      }
+      if (searching) {
+        map[g.id] = true;
+        return;
+      }
+      if (Object.prototype.hasOwnProperty.call(saved, g.id)) {
+        map[g.id] = !!saved[g.id];
+        return;
+      }
+      if (browsing && groups.length > 2) {
+        map[g.id] = index === 0;
+        return;
+      }
+      map[g.id] = true;
+    });
+    return map;
+  }
+
   function availableFilters(items) {
     const set = new Set(['all']);
     items.forEach((s) => {
@@ -275,13 +334,13 @@
 
   function renderRow(s, esc) {
     const roles = roleLine(s.roles);
-    const aria = `${s.displayName}${roles ? ', ' + roles.replace(/ · /g, ', ') : ''}, ${contributionLabel(s.count)} öffnen`;
+    const meta = roles ? `${roles} · ${contributionLabel(s.count)}` : contributionLabel(s.count);
+    const aria = `${s.displayName}, ${meta.replace(/ · /g, ', ')}, öffnen`;
     return `<button type="button" class="scholars-index__row" data-scholar-open="${esc(s.id)}" aria-label="${esc(aria)}">
       <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" aria-hidden="true">${esc(s.monogram)}</span>
       <span class="scholars-index__copy">
         <span class="scholars-index__name">${esc(s.displayName)}</span>
-        ${roles ? `<span class="scholars-index__roles">${esc(roles)}</span>` : ''}
-        <span class="scholars-index__countline">${esc(contributionLabel(s.count))}</span>
+        <span class="scholars-index__roles">${esc(meta)}</span>
       </span>
       <span class="scholars-index__chev" aria-hidden="true">›</span>
     </button>`;
@@ -299,6 +358,32 @@
     </div>`;
   }
 
+  function renderGroup(g, esc, useCols, foldMap) {
+    const expanded = foldMap[g.id] !== false;
+    if (g.flat) {
+      return `<section class="scholars-index__group" id="scholars-group-${esc(g.id)}">
+        <p class="scholars-index__flat-label">${esc(g.label)} · ${g.count}</p>
+        <div class="scholars-index__list${useCols ? ' scholars-index__list--cols' : ''}" role="list">
+          ${g.items.map((s) => renderRow(s, esc)).join('')}
+        </div>
+      </section>`;
+    }
+    return `<section class="scholars-index__group${expanded ? '' : ' is-collapsed'}" id="scholars-group-${esc(g.id)}" data-scholars-group="${esc(g.id)}">
+      <button type="button" class="scholars-index__group-head" data-scholars-fold="${esc(g.id)}" aria-expanded="${expanded ? 'true' : 'false'}" aria-controls="scholars-group-body-${esc(g.id)}">
+        <h2 class="scholars-index__group-title" id="scholars-group-label-${esc(g.id)}">${esc(g.label)}</h2>
+        <span class="scholars-index__group-meta">
+          <span class="scholars-index__group-count">${g.count}</span>
+          <span class="scholars-index__group-chev" aria-hidden="true">▾</span>
+        </span>
+      </button>
+      <div class="scholars-index__group-body" id="scholars-group-body-${esc(g.id)}" role="region" aria-labelledby="scholars-group-label-${esc(g.id)}">
+        <div class="scholars-index__list${useCols ? ' scholars-index__list--cols' : ''}" role="list">
+          ${g.items.map((s) => renderRow(s, esc)).join('')}
+        </div>
+      </div>
+    </section>`;
+  }
+
   function renderPage(catalog, esc, opts) {
     opts = opts || {};
     const state = opts.state || readState();
@@ -310,6 +395,7 @@
     const recentIds = recent.map((r) => r.id);
     const sorted = sortScholars(filtered, state.sort, recentIds);
     const groups = groupScholars(sorted, state.sort);
+    const foldMap = resolveFoldMap(groups, state, items.length, filtered.length);
     const filters = availableFilters(items);
     const sortLabel = (SORT_OPTIONS.find((o) => o.id === state.sort) || SORT_OPTIONS[0]).label;
     const useCols = global.innerWidth >= 720;
@@ -320,7 +406,7 @@
     const recentHtml =
       recent.length && !state.query
         ? `<section class="scholars-index__recent" aria-label="Zuletzt angesehen">
-            <span class="scholars-index__recent-label">ZULETZT ANGESEHEN</span>
+            <span class="scholars-index__recent-label">ZULETZT</span>
             <div class="scholars-index__recent-links">${recent
               .map(
                 (r) =>
@@ -332,49 +418,39 @@
 
     let bodyHtml = '';
     if (loading) {
-      bodyHtml = `<div class="scholars-index__skeleton" aria-busy="true">${Array.from({ length: 8 })
+      bodyHtml = `<div class="scholars-index__skeleton" aria-busy="true">${Array.from({ length: 10 })
         .map(() => '<div class="scholars-index__skel-row"></div>')
         .join('')}</div>`;
     } else if (error) {
-      bodyHtml = `<div class="scholars-index__error" role="alert"><h3>Gelehrte konnten nicht geladen werden</h3><p>Bitte Verbindung prüfen und erneut versuchen.</p><button type="button" class="scholars-index__reset" id="scholarsRetryBtn">Erneut versuchen</button></div>`;
+      bodyHtml = `<div class="scholars-index__error" role="alert"><h3>Laden fehlgeschlagen</h3><p>Bitte Verbindung prüfen.</p><button type="button" class="scholars-index__reset" id="scholarsRetryBtn">Erneut</button></div>`;
     } else if (!sorted.length) {
       bodyHtml = `<div class="scholars-index__empty" role="status">
-        <h3>Keine passende Person gefunden</h3>
-        <p>Prüfe die Schreibweise oder entferne einen aktiven Filter.</p>
-        <button type="button" class="scholars-index__reset" id="scholarsResetBtn">Filter zurücksetzen</button>
+        <h3>Keine Person gefunden</h3>
+        <p>Schreibweise prüfen oder Filter entfernen.</p>
+        <button type="button" class="scholars-index__reset" id="scholarsResetBtn">Zurücksetzen</button>
       </div>`;
     } else {
       bodyHtml = `<div class="scholars-index__body">${groups
-        .map(
-          (g) => `<section class="scholars-index__group" id="scholars-group-${esc(g.id)}" aria-labelledby="scholars-group-label-${esc(g.id)}">
-            <header class="scholars-index__group-head">
-              <h2 class="scholars-index__group-title" id="scholars-group-label-${esc(g.id)}">${esc(g.label)}</h2>
-              <span class="scholars-index__group-count">${g.count}</span>
-            </header>
-            <div class="scholars-index__list${useCols ? ' scholars-index__list--cols' : ''}" role="list">
-              ${g.items.map((s) => renderRow(s, esc)).join('')}
-            </div>
-          </section>`
-        )
+        .map((g) => renderGroup(g, esc, useCols, foldMap))
         .join('')}</div>`;
     }
 
     return `<section class="scholars-index" id="scholarsIndexRoot" data-scholars-index>
       <header class="scholars-index__header">
-        <p class="scholars-index__eyebrow">PERSONEN &amp; ÜBERLIEFERER</p>
+        <p class="scholars-index__eyebrow">Personen &amp; Überlieferer</p>
         <h1 class="scholars-index__title">Gelehrte</h1>
-        <p class="scholars-index__subtitle">Beiträge nach Ṣaḥābah, Tābiʿīn, Imāmen und frühen Gelehrten</p>
+        <p class="scholars-index__subtitle">Ṣaḥābah, Tābiʿīn, Imāme und frühe Gelehrte</p>
         <hr class="scholars-index__rule" aria-hidden="true">
       </header>
       <div class="scholars-index__sticky">
         <div class="scholars-index__search-wrap">
           <svg class="scholars-index__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input id="scholarsSearchInput" class="scholars-index__search" type="search" placeholder="Gelehrte nach Name, Kuniyah oder Schreibweise suchen" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte suchen">
+          <input id="scholarsSearchInput" class="scholars-index__search" type="search" placeholder="Name, Kuniyah oder Schreibweise" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte suchen">
           <button type="button" id="scholarsSearchClear" class="scholars-index__search-clear" aria-label="Suche löschen" ${state.query ? '' : 'hidden'}>×</button>
         </div>
         <div class="scholars-index__meta-row">
-          <span id="scholarsResultCount" class="scholars-index__count">${filtered.length} ${filtered.length === 1 ? 'Treffer' : 'Treffer'}</span>
-          <button type="button" id="scholarsSortBtn" class="scholars-index__sort-btn" aria-haspopup="dialog" aria-controls="scholarsSortSheet">Sortierung: ${esc(sortLabel)}</button>
+          <span id="scholarsResultCount" class="scholars-index__count">${filtered.length} Treffer</span>
+          <button type="button" id="scholarsSortBtn" class="scholars-index__sort-btn" aria-haspopup="dialog" aria-controls="scholarsSortSheet">${esc(sortLabel)}</button>
         </div>
         <div class="scholars-index__filters" role="toolbar" aria-label="Gelehrten filtern">
           ${filters
@@ -405,8 +481,10 @@
     const state = { ...readState(), ...patch };
     saveState(state);
     if (patch && Object.keys(patch).every((k) => k === 'scrollY')) {
-      saveState(state);
       return;
+    }
+    if (patch && patch.sort) {
+      writeSession(FOLD_KEY, {});
     }
     const html = renderPage(catalog, esc, { state });
     root.outerHTML = html;
@@ -415,6 +493,17 @@
       delete next.dataset.bound;
       bind(next, catalog, esc);
     }
+  }
+
+  function toggleFold(root, groupId) {
+    const section = root.querySelector(`[data-scholars-group="${CSS.escape(groupId)}"]`);
+    if (!section) return;
+    const expanded = section.classList.toggle('is-collapsed') === false;
+    const btn = section.querySelector('[data-scholars-fold]');
+    if (btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    const foldMap = readFoldState();
+    foldMap[groupId] = expanded;
+    saveFoldState(foldMap);
   }
 
   function openSortSheet(root) {
@@ -450,10 +539,22 @@
       btn.onclick = () => {
         const letter = btn.getAttribute('data-scholars-alpha');
         const target = root.querySelector(`#scholars-group-alpha-${CSS.escape(letter)}`);
-        if (target) {
-          const top = target.getBoundingClientRect().top + global.scrollY - 120;
-          global.DARScrollManager?.stableScrollTo?.(top, { force: true }) || global.scrollTo({ top, behavior: 'auto' });
+        if (!target) return;
+        if (target.classList.contains('is-collapsed')) {
+          const groupId = target.getAttribute('data-scholars-group');
+          if (groupId) toggleFold(root, groupId);
         }
+        const top = target.getBoundingClientRect().top + global.scrollY - 96;
+        global.DARScrollManager?.stableScrollTo?.(top, { force: true }) || global.scrollTo({ top, behavior: 'auto' });
+      };
+    });
+  }
+
+  function bindFold(root) {
+    root.querySelectorAll('[data-scholars-fold]').forEach((btn) => {
+      btn.onclick = () => {
+        const groupId = btn.getAttribute('data-scholars-fold');
+        if (groupId) toggleFold(root, groupId);
       };
     });
   }
@@ -507,6 +608,7 @@
     }
     bindRowActions(root, esc);
     bindAlpha(root);
+    bindFold(root);
     const retry = root.querySelector('#scholarsRetryBtn');
     if (retry) retry.onclick = () => global.render?.();
     const reset = root.querySelector('#scholarsResetBtn');
