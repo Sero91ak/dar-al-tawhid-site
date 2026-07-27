@@ -1481,11 +1481,23 @@ async function workerPostRequest(path,payload){
   if(!secret)throw new Error("Admin Worker Secret fehlt");
   saveWorkerPublishUrl(publishUrl);
   if(remember)setSavedWorkerSecret(secret);else if(document.getElementById("rememberWorkerSecret"))setSavedWorkerSecret("");
-  const res=await fetch(workerEndpoint(path),{
-    method:"POST",
-    headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
-    body:JSON.stringify(payload||{})
-  });
+  const controller=new AbortController();
+  const timeoutMs=90000;
+  const timeoutId=setTimeout(()=>controller.abort(new Error("timeout")),timeoutMs);
+  let res;
+  try{
+    res=await fetch(workerEndpoint(path),{
+      method:"POST",
+      headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+      body:JSON.stringify(payload||{}),
+      signal:controller.signal
+    });
+  }catch(error){
+    if(error?.name==="AbortError")throw new Error("Admin-Worker antwortet nicht rechtzeitig. Veröffentlichung läuft möglicherweise bereits im Hintergrund.");
+    throw error;
+  }finally{
+    clearTimeout(timeoutId);
+  }
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
@@ -1496,7 +1508,17 @@ async function workerGetRequest(path,{admin=false}={}){
     throw new Error("Admin Worker Secret fehlt — bitte unter Einstellungen eintragen");
   }
   const headers=admin&&secret?{"X-Admin-Secret":secret}:{};
-  const res=await fetch(workerEndpoint(path),{cache:"no-store",headers});
+  const controller=new AbortController();
+  const timeoutId=setTimeout(()=>controller.abort(new Error("timeout")),30000);
+  let res;
+  try{
+    res=await fetch(workerEndpoint(path),{cache:"no-store",headers,signal:controller.signal});
+  }catch(error){
+    if(error?.name==="AbortError")throw new Error("Admin-Worker antwortet nicht rechtzeitig.");
+    throw error;
+  }finally{
+    clearTimeout(timeoutId);
+  }
   const data=await res.json().catch(()=>({}));
   if(!res.ok){
     const msg=String(data.error||`Worker Fehler ${res.status}`);
