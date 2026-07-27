@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-27T18:06:44.371Z",
+  "generated": "2026-07-27T18:07:00.870Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -1025,11 +1025,11 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260727-005-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-07-27T18:04:20.856Z",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-07-27T18:06:42.009Z",
       "postId": "lib:pub-20260727-005",
-      "updatedAt": "2026-07-27T18:06:44.371Z",
+      "updatedAt": "2026-07-27T18:07:00.870Z",
       "lastCheckAt": "2026-07-27T18:06:43.996Z",
       "liveCheck": {
         "ok": true,
@@ -1045,7 +1045,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-07-27T18:07:00.656Z",
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1785175620538#bibliothek/die-wichtigsten-grundlagen-des-tawhid-fur-kinder"
+      }
     }
   }
 }
