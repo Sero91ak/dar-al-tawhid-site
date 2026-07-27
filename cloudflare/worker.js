@@ -714,8 +714,8 @@ export default {
       }
 
       if (pushPaths.has(url.pathname)) {
-        if (url.pathname.endsWith("/library/retry")) {
-          return json(await retryPendingLibraryPush(env, input, ctx), cors);
+        if (url.pathname.endsWith("/library/send") || url.pathname.endsWith("/library/retry")) {
+          return json(await sendLibraryLivePushNow(env, input), cors);
         }
         if (url.pathname.endsWith("/retry")) {
           return json(await retryPendingPostPush(env, input, ctx), cors);
@@ -2759,6 +2759,10 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
 }
 
 async function retryPendingLibraryPush(env, input, ctx) {
+  return sendLibraryLivePushNow(env, input);
+}
+
+async function sendLibraryLivePushNow(env, input) {
   const publicationId = String(input.publicationId || "").trim();
   const slug = String(input.slug || publicationId).trim();
   const publicationTitle = String(input.publicationTitle || input.title || "").trim() || "Neue PDF";
@@ -2793,15 +2797,60 @@ async function retryPendingLibraryPush(env, input, ctx) {
     pushApprovedAt: new Date().toISOString()
   };
   await writePendingPushStatus(env, key, record);
-  const push = await processPendingLibraryPushUntilLive(env, record);
-  if (ctx && push?.pending) {
-    ctx.waitUntil(processPendingLibraryPushUntilLive(env, record, { extendedWait: true }));
+  const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, record, { schedule: "quick" });
+  await writePendingPushStatus(env, key, {
+    lastCheckAt: new Date().toISOString(),
+    liveCheck,
+    attempts: liveCheck?.attempt || 0,
+    lastError: liveCheck?.ok ? "" : (liveCheck?.diagnosis || "")
+  });
+  if (!liveCheck?.ok) {
+    return {
+      ok: false,
+      publicationId,
+      slug: record.slug,
+      reason: liveCheck?.diagnosis || "PDF noch nicht live.",
+      liveCheck,
+      push: {
+        sent: false,
+        waitingForLive: true,
+        reason: liveCheck?.diagnosis || "PDF noch nicht live."
+      }
+    };
+  }
+  if (LIBRARY_PUSH_DELAY_AFTER_LIVE_MS > 0) {
+    await sleep(LIBRARY_PUSH_DELAY_AFTER_LIVE_MS);
+  }
+  const push = await sendLibraryPublicationPush(env, record);
+  if (push.sent) {
+    await writePendingPushStatus(env, key, {
+      status: "sent",
+      sentAt: new Date().toISOString(),
+      lastError: "",
+      pushResult: {
+        target: push.target,
+        targetUrl: push.targetUrl,
+        subscriptionCount: push.subscriptionCount || 0
+      }
+    });
+  } else {
+    await writePendingPushStatus(env, key, {
+      status: "failed",
+      lastError: push.reason || "OneSignal Push fehlgeschlagen",
+      pushResult: {
+        target: push.target || "",
+        targetUrl: push.targetUrl || "",
+        subscriptionCount: push.subscriptionCount || 0,
+        attempts: push.attempts || []
+      }
+    });
   }
   return {
-    ok: true,
+    ok: Boolean(push.sent),
     publicationId,
     slug: record.slug,
-    liveCheck: push.liveCheck || null,
+    reason: push.sent ? "" : (push.reason || "OneSignal Push fehlgeschlagen"),
+    liveCheck,
     push
   };
 }
