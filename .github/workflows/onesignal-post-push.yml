@@ -66,4 +66,5 @@ jobs:
             echo "Hinweis: Kein OneSignal API-Key in GitHub Secrets gesetzt."
             echo "Der Cloudflare Worker kann Push trotzdem senden, wenn ONESIGNAL_API_KEY_NEW dort gesetzt ist."
           fi
+          echo "Hinweis: Beitrags-Pushs ohne Admin-Freigabe werden übersprungen (pending-pushes.json)."
           node scripts/send-post-push.js

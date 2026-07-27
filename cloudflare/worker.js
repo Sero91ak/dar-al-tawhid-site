@@ -109,8 +109,14 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-const LIVE_CHECK_SCHEDULE_FULL_MS = [30000, 60000, 120000, 180000, 240000, 300000];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
+const LIVE_CHECK_SCHEDULE_FULL_MS = [
+  0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 90000, 120000,
+  180000, 240000, 300000, 360000, 420000, 480000
+];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 6000, 10000, 15000, 20000];
+const POST_PUSH_DELAY_AFTER_LIVE_MS = 15000;
+const PUSH_RETRY_COOLDOWN_MS = 90000;
+const PUSH_CRON_BATCH_SIZE = 4;
 const ILM_EXTERNAL_RESEARCH_SOURCES = [
   { id: "dorar", label: "Dorar", host: "dorar.net", searchUrl: (q) => `https://dorar.net/search?q=${encodeURIComponent(q)}` },
   { id: "shamela", label: "Shamela", host: "shamela.ws", searchUrl: (q) => `https://shamela.ws/search?term=${encodeURIComponent(q)}` },
@@ -134,6 +140,7 @@ export default {
 
     try {
       if (url.pathname === "/health" || url.pathname === "/api/admin/health") {
+        const pushRegistry = await readPendingPushesRegistry(env).catch(() => ({ pushes: {} }));
         return json({
           ok: true,
           service: "dar-admin-publisher",
@@ -155,6 +162,8 @@ export default {
           jummahPushCron: "*/5 * * * *",
           libraryApi: "v3-split-push",
           libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
+          postPushDelayMs: POST_PUSH_DELAY_AFTER_LIVE_MS,
+          pushQueue: summarizePendingPushes(pushRegistry),
           scheduler: "ready"
         }, cors);
       }
@@ -645,7 +654,8 @@ export default {
       const pushPaths = new Set([
         "/api/admin/push/retry",
         "/api/admin/push/library/retry",
-        "/api/admin/push/status"
+        "/api/admin/push/status",
+        "/api/admin/push/process"
       ]);
       const prayerPaths = new Set([
         "/api/admin/prayer/status",
@@ -690,8 +700,20 @@ export default {
         assertConfigured(env);
         assertAuthorized(request, env);
         const postId = String(url.searchParams.get("postId") || "").trim();
+        const publicationId = String(url.searchParams.get("publicationId") || "").trim();
         const registry = await readPendingPushesRegistry(env);
-        return json({ ok: true, postId, status: postId ? registry.pushes?.[postId] || null : registry }, cors);
+        const key = publicationId ? libraryPushRegistryKey(publicationId) : postId;
+        if (key) {
+          return json({ ok: true, key, status: registry.pushes?.[key] || null, summary: summarizePendingPushes(registry) }, cors);
+        }
+        return json({ ok: true, summary: summarizePendingPushes(registry), registry }, cors);
+      }
+
+      if (url.pathname === "/api/admin/push/process" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const result = await processAllPendingPushes(env);
+        return json({ ok: true, ...result }, cors);
       }
 
       if (url.pathname === "/api/admin/prayer/status") {
@@ -2624,6 +2646,27 @@ function isPostPushApproved(record) {
   return record?.pushApproved === true;
 }
 
+function summarizePendingPushes(registry) {
+  const items = Object.values(registry?.pushes || {});
+  const pendingApproved = items.filter((p) => p?.status === "pending" && isPostPushApproved(p));
+  return {
+    total: items.length,
+    sent: items.filter((p) => p?.status === "sent").length,
+    failed: items.filter((p) => p?.status === "failed").length,
+    pending: items.filter((p) => p?.status === "pending").length,
+    pendingApproved: pendingApproved.length,
+    awaitingApproval: items.filter((p) => p?.status === "pending" && !isPostPushApproved(p)).length,
+    libraryPending: pendingApproved.filter((p) => p?.kind === "library").length,
+    postPending: pendingApproved.filter((p) => p?.kind !== "library").length
+  };
+}
+
+function pushRetryCooldownElapsed(record, nowMs = Date.now()) {
+  const last = Date.parse(record?.lastCheckAt || "");
+  if (!Number.isFinite(last)) return true;
+  return nowMs - last >= PUSH_RETRY_COOLDOWN_MS;
+}
+
 function pendingPushesPath(env) {
   return trimSlashes(env.PENDING_PUSHES_PATH || DEFAULT_PENDING_PUSHES_PATH);
 }
@@ -2794,9 +2837,9 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
   return lastResult;
 }
 
-async function processPendingPushUntilLive(env, record) {
+async function processPendingPushUntilLive(env, record, options = {}) {
   if (record?.kind === "library") {
-    return processPendingLibraryPushUntilLive(env, record);
+    return processPendingLibraryPushUntilLive(env, record, options);
   }
 
   const postId = String(record?.postId || "").trim();
@@ -2825,7 +2868,7 @@ async function processPendingPushUntilLive(env, record) {
       postPath: record.postPath,
       githubSteps: { postCreated: true, indexUpdated: true }
     },
-    { schedule: "full" }
+    { schedule: options.extendedWait ? "full" : "quick" }
   );
 
   await writePendingPushStatus(env, postId, {
@@ -2837,6 +2880,10 @@ async function processPendingPushUntilLive(env, record) {
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+  }
+
+  if (POST_PUSH_DELAY_AFTER_LIVE_MS > 0) {
+    await sleep(POST_PUSH_DELAY_AFTER_LIVE_MS);
   }
 
   const push = await sendNewPostPush(env, {
@@ -2983,17 +3030,29 @@ async function retryPendingLibraryPush(env, input) {
 
 async function processAllPendingPushes(env) {
   const registry = await readPendingPushesRegistry(env);
-  const pending = Object.values(registry.pushes || {}).filter(
-    (item) => item?.status === "pending" && isPostPushApproved(item)
-  );
+  const now = Date.now();
+  const pending = Object.values(registry.pushes || {})
+    .filter((item) => item?.status === "pending" && isPostPushApproved(item))
+    .filter((item) => pushRetryCooldownElapsed(item, now))
+    .sort((a, b) => String(a.updatedAt || "").localeCompare(String(b.updatedAt || "")))
+    .slice(0, PUSH_CRON_BATCH_SIZE);
+
   const results = [];
   for (const record of pending) {
-    const handler = record?.kind === "library"
-      ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
-      : () => processPendingPushUntilLive(env, record);
-    results.push(await handler());
+    try {
+      const push = record?.kind === "library"
+        ? await processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
+        : await processPendingPushUntilLive(env, record, { extendedWait: false });
+      results.push({ key: record.postId || libraryPushRegistryKey(record.publicationId), ...push });
+    } catch (error) {
+      results.push({
+        key: record.postId || libraryPushRegistryKey(record.publicationId),
+        sent: false,
+        error: error.message || String(error)
+      });
+    }
   }
-  return { processed: pending.length, results };
+  return { processed: pending.length, summary: summarizePendingPushes(registry), results };
 }
 
 async function retryPendingPostPush(env, input) {
@@ -3029,7 +3088,7 @@ async function retryPendingPostPush(env, input) {
     pushApprovedAt: new Date().toISOString()
   };
   await writePendingPushStatus(env, postId, record);
-  const push = await processPendingPushUntilLive(env, record);
+  const push = await processPendingPushUntilLive(env, record, { extendedWait: false });
   return {
     ok: true,
     postId,
