@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-27T15:16:17.784Z",
+  "generated": "2026-07-27T15:16:20.308Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -994,24 +994,23 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-07-27T14:35:48.981Z",
       "postId": "lib:pub-20260727-003",
-      "updatedAt": "2026-07-27T14:36:11.350Z",
-      "lastCheckAt": "2026-07-27T14:36:11.048Z",
+      "updatedAt": "2026-07-27T15:16:20.308Z",
+      "lastCheckAt": "2026-07-27T15:16:19.798Z",
       "liveCheck": {
-        "ok": false,
-        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "ok": true,
+        "diagnosis": "",
         "site": "https://dar-al-tawhid.de",
         "publicationId": "pub-20260727-003",
         "slug": "ahkam-huquq-al-marah-fi-l-islam",
         "catalogFoundPublic": true,
-        "publicationInCatalog": false,
-        "pdfFilePublic": false,
+        "publicationInCatalog": true,
+        "pdfFilePublic": true,
         "visitorUrlOk": true,
-        "visitorUrl": "https://dar-al-tawhid.de/?v=1785162970999#bibliothek/ahkam-huquq-al-marah-fi-l-islam",
-        "pdfHttpStatus": 404,
-        "attempt": 5
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1785165379545#bibliothek/ahkam-huquq-al-marah-fi-l-islam",
+        "attempt": 1
       },
-      "attempts": 5,
-      "lastError": "PDF noch nicht im Live-Katalog enthalten."
+      "attempts": 1,
+      "lastError": ""
     }
   }
 }
