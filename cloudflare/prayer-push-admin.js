@@ -230,7 +230,8 @@ export async function repairPrayerRegistrationsDisabledByDaily(env) {
     "app_environment=eq.production",
     "enabled=eq.false",
     "push_opted_in=eq.false",
-    "daily_push_error=not.is.null"
+    "lat=not.is.null",
+    "lon=not.is.null"
   ].join("&");
   const response = await fetch(`${SUPABASE_URL}/rest/v1/prayer_push_registrations?${filter}`, {
     method: "PATCH",
