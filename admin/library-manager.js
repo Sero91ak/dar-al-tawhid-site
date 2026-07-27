@@ -48,6 +48,10 @@
   let lastLivePush = null;
   let editingPublicationId = "";
   let dragActive = false;
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
   let processingPdf = false;
   let manageSearch = "";
   let manageFilter = "all";
@@ -811,7 +815,8 @@
         libraryFiles,
         publish: true,
         target: publishTarget,
-        skipPush: true
+        skipPush: true,
+        triggerDeploy: publishTarget === "live"
       });
       publishStep = 4;
       successSlug = draft.slug;
@@ -1023,7 +1028,7 @@
       ? `<a class="lib-admin-btn lib-admin-btn-live" href="/#bibliothek/${esc(successSlug)}" target="_blank" rel="noopener">In Besucher-Bibliothek ansehen</a>`
       : "";
     const pushNote = isLive
-      ? "In Besucher-App veröffentlicht — kein Push. Bei Bedarf „Live Push senden“ nutzen."
+      ? "Besucher-App wird aktualisiert — kein Push. Deploy läuft (ca. 1 Min.). Danach „Live Push senden“."
       : "";
     const pushBtn = isLive && successPublicationId
       ? `<button class="lib-admin-btn lib-admin-btn-live" type="button" id="libAdminSuccessLivePush">Live Push senden</button>`
@@ -1037,6 +1042,36 @@
         <button class="lib-admin-btn" type="button" id="libAdminNewUpload">Weitere PDF hochladen</button>
       </div>
     </div>`;
+  }
+
+  async function publishLiveFromCard(id) {
+    await ensureLibraryLoaded(true);
+    const merged = getMergedEntry(id);
+    if (!merged) throw new Error("Veröffentlichung nicht gefunden");
+    const pub = merged.live || merged.test || merged.display;
+    if (!pub?.pdfUrl) throw new Error("PDF fehlt — zuerst hochladen");
+    const title = pub.title || "PDF";
+    const ok = confirm(
+      `„${title}“ in der Besucher-App veröffentlichen?\n\nNur Inhalt aktualisieren — kein Push.\n\nPush separat über „Live Push“.`
+    );
+    if (!ok) return;
+    busy = true;
+    safeRender();
+    try {
+      const wasLive = merged.inLive && isOnlineStatus(merged.liveStatus);
+      await workerPost("api/admin/library/save", {
+        publication: { ...pub, status: wasLive ? "updated" : "published" },
+        publish: true,
+        target: "live",
+        skipPush: true,
+        triggerDeploy: true
+      });
+      toast("Besucher-App wird aktualisiert (ohne Push) — Deploy läuft");
+      await ensureLibraryLoaded(true);
+    } finally {
+      busy = false;
+      safeRender();
+    }
   }
 
   function livePushPayloadForEntry(entry) {
@@ -1062,20 +1097,34 @@
     };
     if (!payload.publicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
     const title = payload.publicationTitle || "PDF";
-    if (!confirm(`Live Push für „${title}“ senden?\n\nDer Push geht an alle registrierten Besucher.`)) return;
+    if (!options.skipConfirm && !confirm(`Live Push für „${title}“ senden?\n\nWartet bis die PDF live ist, dann Push in ca. 15 s.`)) return;
     const btn = options.button || null;
     const btnLabel = btn?.textContent || "";
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = "Push wird gesendet…";
-    }
+    const maxAttempts = Number(options.maxAttempts) || 36;
+    let lastResult = null;
     try {
-      const result = await workerPost("api/admin/push/library/retry", payload);
-      lastLivePush = result?.push || result || null;
-      const sent = result?.push?.sent === true;
-      toast(sent ? "Live Push gesendet" : (result?.push?.reason || result?.reason || "Push mit Hinweis"));
-      if (!options.publicationId || options.publicationId === successPublicationId) safeRender();
-      return result;
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Warte auf Live…";
+      }
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        if (btn) btn.textContent = attempt === 1 ? "Prüfe Live-Status…" : `Warte auf Live… (${attempt}/${maxAttempts})`;
+        lastResult = await workerPost("api/admin/push/library/retry", payload);
+        lastLivePush = lastResult?.push || lastResult || null;
+        const sent = lastResult?.push?.sent === true;
+        const skipped = lastResult?.push?.skipped === true && /bereits/i.test(String(lastResult?.push?.reason || lastResult?.reason || ""));
+        if (sent || skipped) {
+          toast(sent ? "Live Push gesendet" : (lastResult?.push?.reason || lastResult?.reason || "Push bereits gesendet"));
+          if (!options.publicationId || options.publicationId === successPublicationId) safeRender();
+          return lastResult;
+        }
+        const waiting = lastResult?.push?.waitingForLive === true || lastResult?.push?.pending === true;
+        if (!waiting && lastResult?.push?.reason) {
+          throw new Error(lastResult.push.reason);
+        }
+        if (attempt < maxAttempts) await sleep(10000);
+      }
+      throw new Error("PDF noch nicht live — bitte 1–2 Min. warten und „Live Push“ erneut tippen.");
     } finally {
       if (btn) {
         btn.disabled = false;
@@ -1193,21 +1242,25 @@
     return parts.join("");
   }
 
-  function renderManageViewLinks(entry, pub, mode) {
-    const mini = mode === "mini";
+  function renderManageViewLinks(entry, pub) {
     const links = [];
     if (entry.inTest && isOnlineStatus(entry.testStatus) && pub.slug) {
-      links.push(`<a class="lib-admin-btn ${mini ? "lib-admin-btn-mini" : "lib-admin-btn-mini lib-admin-btn-wide"}" href="/test/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">${mini ? "Test" : "Test ansehen"}</a>`);
+      links.push(`<a class="lib-admin-link-mini" href="/test/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Test ↗</a>`);
     }
     if (entry.inLive && isOnlineStatus(entry.liveStatus) && pub.slug) {
-      links.push(`<a class="lib-admin-btn ${mini ? "lib-admin-btn-mini lib-admin-btn-live" : "lib-admin-btn-mini lib-admin-btn-wide lib-admin-btn-live"}" href="/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">${mini ? "Live" : "Live ansehen"}</a>`);
+      links.push(`<a class="lib-admin-link-mini" href="/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Besucher ↗</a>`);
     }
     return links;
   }
 
+  function renderLivePublishButton(entry, { mini = false } = {}) {
+    const label = mini ? "Veröffentlichen" : "In Besucher-App veröffentlichen";
+    return `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-publish-live="${esc(entry.id)}" title="Nur in Besucher-App aktualisieren — ohne Push">${label}</button>`;
+  }
+
   function renderLivePushButton(entry, { mini = false } = {}) {
     if (!entry?.inLive || !isOnlineStatus(entry.liveStatus)) return "";
-    return `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-push" type="button" data-lib-live-push="${esc(entry.id)}">${mini ? "Push" : "Live Push"}</button>`;
+    return `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-push" type="button" data-lib-live-push="${esc(entry.id)}" title="Besucher-Benachrichtigung senden">${mini ? "Live Push" : "Live Push senden"}</button>`;
   }
 
   function renderManageRow(entry) {
@@ -1224,9 +1277,10 @@
     ].filter(Boolean).join(" ");
     const canUnpublish = mergedTargetsForAction(entry, "unpublish").length > 0;
     const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
-    const quickLinks = renderManageViewLinks(entry, pub, "mini").join("");
-    const panelLinks = renderManageViewLinks(entry, pub, "panel").join("");
+    const viewLinks = renderManageViewLinks(entry, pub).join("");
+    const livePublishQuick = renderLivePublishButton(entry, { mini: true });
     const livePushQuick = renderLivePushButton(entry, { mini: true });
+    const livePublishPanel = renderLivePublishButton(entry);
     const livePushPanel = renderLivePushButton(entry);
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
       <div class="lib-admin-manage-card-head">
@@ -1247,17 +1301,19 @@
         </div>
         <div class="lib-admin-manage-quick">
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
-          ${quickLinks}
+          ${livePublishQuick}
           ${livePushQuick}
+          ${viewLinks ? `<span class="lib-admin-manage-links">${viewLinks}</span>` : ""}
         </div>
       </div>
       <div class="lib-admin-manage-card-panel"${expanded ? "" : " hidden"}>
         ${renderAdminStatsLine(entry.id)}
         <div class="lib-admin-list-actions lib-admin-list-actions--compact">
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-primary" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
-          <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
+          ${livePublishPanel}
           ${livePushPanel}
-          ${panelLinks}
+          <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
+          ${viewLinks ? `<span class="lib-admin-manage-links">${viewLinks}</span>` : ""}
           ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
           ${canArchive ? `<button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-archive="${esc(entry.id)}">Archiv</button>` : ""}
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-danger" type="button" data-lib-delete="${esc(entry.id)}">Löschen</button>
@@ -1418,7 +1474,7 @@
     document.getElementById("libAdminPublishLive")?.addEventListener("click", async () => {
       try {
         await publishDraft("live");
-        toast("In Besucher-App veröffentlicht (ohne Push)");
+        toast("Besucher-App wird veröffentlicht (ohne Push) — Deploy läuft");
         safeRender();
       } catch (e) {
         toast(e.message || "Veröffentlichung fehlgeschlagen");
@@ -1618,6 +1674,19 @@
           await retryLibraryLivePush({ ...livePushPayloadForEntry(entry), button: pushBtn });
         } catch (e) {
           toast(e.message || "Push fehlgeschlagen");
+        }
+        return;
+      }
+      const publishBtn = ev.target.closest("[data-lib-publish-live]");
+      if (publishBtn && publishBtn.closest("#libAdminManage")) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const id = publishBtn.getAttribute("data-lib-publish-live");
+        if (!id) return;
+        try {
+          await publishLiveFromCard(id);
+        } catch (e) {
+          toast(e.message || "Veröffentlichen fehlgeschlagen");
         }
       }
     });

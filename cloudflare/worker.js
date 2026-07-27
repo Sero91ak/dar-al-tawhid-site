@@ -87,7 +87,8 @@ import {
   buildLibraryPushPendingRecord,
   buildLibraryPushUrl,
   verifyLibraryLiveAvailabilityWithRetry,
-  sendLibraryPublicationPush
+  sendLibraryPublicationPush,
+  LIBRARY_PUSH_DELAY_AFTER_LIVE_MS
 } from "./library-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
@@ -153,6 +154,7 @@ export default {
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
           jummahPushCron: "*/5 * * * *",
           libraryApi: "v3-split-push",
+          libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
           scheduler: "ready"
         }, cors);
       }
@@ -468,8 +470,15 @@ export default {
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         try {
           const result = await saveLibraryPublication(env, input, helpers);
+          if (result.published && result.target === "live" && input.triggerDeploy !== false) {
+            ctx.waitUntil(triggerSiteDeployWorkflow(env, `library-live:${result.publication?.id || "save"}`));
+          }
           if (result.published && result.target === "live") {
-            return json({ ...result, push: { sent: false, skipped: true, reason: "Veröffentlicht ohne Push — Live Push separat im Admin" } }, cors);
+            return json({
+              ...result,
+              push: { sent: false, skipped: true, reason: "Veröffentlicht ohne Push — Live Push separat im Admin" },
+              deploy: { triggered: input.triggerDeploy !== false }
+            }, cors);
           }
           return json(result, cors);
         } catch (e) {
@@ -2220,6 +2229,31 @@ function githubHeaders(env) {
   };
 }
 
+async function triggerSiteDeployWorkflow(env, reason = "library-live") {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return { triggered: false, reason: "GITHUB_TOKEN fehlt" };
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/actions/workflows/cloudflare-pages-deploy.yml/dispatches`,
+      {
+        method: "POST",
+        headers: { ...githubHeaders(env), "Content-Type": "application/json" },
+        body: JSON.stringify({ ref: branch, inputs: {} })
+      }
+    );
+    if (res.status === 204) {
+      return { triggered: true, workflow: "cloudflare-pages-deploy.yml", reason };
+    }
+    const text = await res.text().catch(() => "");
+    return { triggered: false, reason: `Deploy-Workflow ${res.status}: ${text.slice(0, 180)}` };
+  } catch (error) {
+    return { triggered: false, reason: error.message || String(error) };
+  }
+}
+
 function encodeURIComponentPath(path) {
   return String(path).split("/").map(encodeURIComponent).join("/");
 }
@@ -2847,7 +2881,7 @@ async function queueLibraryPublicationPush(env, publication) {
   };
 }
 
-async function processPendingLibraryPushUntilLive(env, record) {
+async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   const key = libraryPushRegistryKey(record?.publicationId);
   if (!key) return { sent: false, reason: "publicationId fehlt" };
 
@@ -2866,7 +2900,9 @@ async function processPendingLibraryPushUntilLive(env, record) {
     };
   }
 
-  const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current);
+  const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
+    schedule: options.extendedWait ? "full" : "quick"
+  });
   await writePendingPushStatus(env, key, {
     lastCheckAt: new Date().toISOString(),
     liveCheck,
@@ -2876,6 +2912,10 @@ async function processPendingLibraryPushUntilLive(env, record) {
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+  }
+
+  if (LIBRARY_PUSH_DELAY_AFTER_LIVE_MS > 0) {
+    await sleep(LIBRARY_PUSH_DELAY_AFTER_LIVE_MS);
   }
 
   const push = await sendLibraryPublicationPush(env, current);
@@ -2948,7 +2988,10 @@ async function processAllPendingPushes(env) {
   );
   const results = [];
   for (const record of pending) {
-    results.push(await processPendingPushUntilLive(env, record));
+    const handler = record?.kind === "library"
+      ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
+      : () => processPendingPushUntilLive(env, record);
+    results.push(await handler());
   }
   return { processed: pending.length, results };
 }

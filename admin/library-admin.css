@@ -500,6 +500,25 @@
   border-radius: 999px !important;
 }
 
+.lib-admin-manage-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 2px;
+}
+
+.lib-admin-link-mini {
+  font-size: 0.65rem;
+  color: var(--muted, #9a9588);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lib-admin-link-mini:hover {
+  color: var(--gold2, #efd78e);
+  text-decoration: underline;
+}
+
 .lib-admin-btn-wide {
   min-width: 0;
 }
@@ -596,6 +615,7 @@
 .lib-admin-manage-quick {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 5px;
   padding-left: 47px;
 }
