@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v45";
+  var ADMIN_SW_CACHE="dar-admin-stats-v43";
   var MIG_KEY="darAdminSwFixV25";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -497,23 +497,6 @@ main#panel.panel{
 .feed-legacy-panel .feed-legacy-body{padding-top:8px}
 @media(max-width:720px){.feed-post-row{grid-template-columns:48px minmax(0,1fr)}.feed-post-actions{grid-column:1/-1;justify-content:flex-start}}
 }
-.quiz-admin-root{display:block;position:relative}
-.quiz-admin-subnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
-.quiz-admin-subtab{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
-.quiz-admin-subtab.active{background:rgba(212,175,55,.18);border-color:rgba(212,175,55,.45);color:var(--gold)}
-.quiz-admin-kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:10px 0}
-.quiz-admin-kpi-grid.compact{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
-.quiz-admin-kpi{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px;background:rgba(0,0,0,.18);display:grid;gap:3px}
-.quiz-admin-kpi b{font-size:18px;color:var(--gold)}
-.quiz-admin-kpi span{font-size:11px;color:var(--muted);font-weight:800}
-.quiz-admin-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:0 0 12px}
-.quiz-admin-filters label{display:grid;gap:4px;font-size:11px;color:var(--muted);font-weight:800}
-.quiz-admin-table{width:100%;border-collapse:collapse;font-size:12px}
-.quiz-admin-table th,.quiz-admin-table td{border-bottom:1px solid rgba(255,255,255,.08);padding:8px 6px;text-align:left;vertical-align:top}
-.quiz-admin-split{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
-.quiz-admin-detail{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;background:rgba(0,0,0,.16)}
-.quiz-admin-export-grid{display:flex;flex-wrap:wrap;gap:8px}
-@media(max-width:900px){.quiz-admin-split{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -541,9 +524,8 @@ main#panel.panel{
 <script src="/admin/kurzlink-manager.js?v=6"></script>
 <script src="/admin/focus-feed-manager.js?v=5"></script>
 <script src="/admin/feed-backgrounds-manager.js?v=4"></script>
-<script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/library-cover-gen.js?v=5"></script>
-<script src="/admin/library-manager.js?v=20"></script>
+<script src="/admin/library-manager.js?v=21"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=11">
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -576,7 +558,6 @@ const DEFAULT_ADMIN_TABS=[
   ["actions","Neuer Beitrag"],
   ["news","News"],
   ["besucher","Besucher"],
-  ["quiz-stats","Quiz-Statistik"],
   ["settings","Einstellungen"],
   ["ordner","Ordner (Studio)"],
   ["feed","Feed / Im Fokus"],
@@ -587,7 +568,6 @@ const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
 const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
-window.getAdminCurrentTab=()=>currentTab;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
 let sourceLibraryCache=null,sourceLibraryBusy=false,sourceDraftPending=null,sourceUploadQueue=[],sourceEditorContext="draft";
 let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayoutBusy=false,categoryLayoutLoaded=false;
@@ -1417,7 +1397,7 @@ function renderPublishTracker(filterType){
     <div class="publish-step-grid">${(track.steps||[]).map(s=>`<div class="publish-step" data-state="${esc(s.state||"wait")}"><span class="publish-step-dot"></span><div><b>${esc(s.label)}</b><small>${esc(publishStateLabel(s.state))}${s.note?` · ${esc(s.note)}`:""}</small></div></div>`).join("")}</div>
     ${(track.items||[]).length?`<div class="upload-status" style="margin-top:9px">${track.items.slice(0,8).map(item=>`${esc(item.title||item.filename)}: <strong>${esc(item.status||"ok")}</strong>`).join("<br>")}${track.items.length>8?`<br>… +${track.items.length-8} weitere`:""}</div>`:""}
     ${track.error?`<div class="upload-status" style="margin-top:9px;color:#ffb8b8">Fehler: ${esc(track.error)}</div>`:""}
-    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button">Live Push freigeben</button></div>
+    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button">Live erneut prüfen &amp; Push senden</button></div>
   </div>`;
 }
 async function verifyPublishedPost(filename,postId){
@@ -2177,6 +2157,7 @@ function renderFeedBgAdminPanel(){
   if(window.DARFeedBgAdmin&&typeof window.DARFeedBgAdmin.renderFeedBgTab==="function")return window.DARFeedBgAdmin.renderFeedBgTab();
   return `<section class="news-workspace"><div class="panel news-panel"><div class="section-head"><h3>Feed · Auto-Hintergründe</h3></div><div class="notice-note wide" style="color:#ffc9c3">Modul konnte nicht geladen werden. Bitte Seite mit <b>Strg+F5</b> neu laden. Skript: <code>/admin/feed-backgrounds-manager.js?v=3</code></div></div></section>`;
 }
+window.getAdminCurrentTab=()=>currentTab;
 window.renderLibraryAdminPartial=function(){
   if(currentTab!=="bibliothek"||!window.DARLibraryAdmin)return false;
   const mount=document.getElementById("libAdminMount");
@@ -2203,7 +2184,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2224,12 +2205,8 @@ function renderShell(){
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&!window.__darLibraryAdminLoaded)window.DARLibraryAdmin.ensureLibraryLoaded(false).then(()=>{window.__darLibraryAdminLoaded=true;if(currentTab==="bibliothek"){if(window.DARLibraryAdmin.isLibraryBusy&&window.DARLibraryAdmin.isLibraryBusy())window.renderLibraryAdminPartial&&window.renderLibraryAdminPartial();else renderShell()}}).catch(()=>{});
   if(currentTab==="feed-bg"&&window.DARFeedBgAdmin&&!window.__darFeedBgAdminLoaded)window.DARFeedBgAdmin.ensureBgLoaded(false).then(()=>{if(currentTab==="feed-bg")renderShell()}).catch(()=>{});
   if(window.DARFeedBgAdmin&&!window.__darFeedBgAutoInit){window.__darFeedBgAutoInit=true;window.DARFeedBgAdmin.ensureBgLoaded(false).catch(()=>{});}
-  if(currentTab==="quiz-stats"&&window.DARQuizStatsAdmin&&!quizStatsLoadedFlag()){
-    window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{window.__darQuizStatsLoaded=true;if(currentTab==="quiz-stats")renderShell()}).catch(()=>{});
-  }
 }
 function feedLoadedFlag(){return window.__darFeedAdminLoaded===true}
-function quizStatsLoadedFlag(){return window.__darQuizStatsLoaded===true||Boolean(window.DARQuizStatsAdmin?.isQuizStatsInitialLoaded?.())}
 async function ensureFeedAdminData(force){
   if(!window.DARFeedAdmin)return;
   await window.DARFeedAdmin.ensureFeedLoaded(!!force);
@@ -2242,16 +2219,14 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!tab||tab===currentTab&&!scrollToBulk)return;
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
-  if(tab==="bibliothek")stopRefresh();
-  else restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
+  restartRefreshInterval();
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed")ensureFeedAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed-bg"&&window.DARFeedBgAdmin)window.DARFeedBgAdmin.ensureBgLoaded(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
-    if(tab==="quiz-stats"&&window.DARQuizStatsAdmin&&!quizStatsLoadedFlag())window.DARQuizStatsAdmin.ensureQuizStatsLoaded().then(()=>{window.__darQuizStatsLoaded=true;if(currentTab===tab)renderShell()}).catch(()=>{});
     fetchLiveNewsItems({force:tab==="news"}).then(()=>{if(currentTab===tab)renderShell()});
   }
   renderShell();
@@ -2267,7 +2242,6 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
 function adminBack(){
   const prev=adminNavStack.pop();
   if(prev){currentTab=prev}else if(currentTab!=="start"){currentTab="start"}else{return}
-  if(currentTab==="bibliothek")stopRefresh();else restartRefreshInterval();
   renderShell();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -2291,7 +2265,6 @@ function renderStart(ctx){
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
         <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
-        <button class="btn" data-tab="quiz-stats" type="button">Quiz-Statistik</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
       </div>
     </div>
@@ -2301,8 +2274,7 @@ function renderStart(ctx){
     ${folderCard("②","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
     ${folderCard("③","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
     ${folderCard("④","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
-    ${folderCard("📚","Bibliothek","PDF-Veröffentlichungen für die Test-Bibliothek verwalten.","bibliothek","Admin")}
+    ${folderCard("⑤","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -2786,11 +2758,10 @@ function renderActions(rows){
               <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
               <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
               <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-              <button class="btn primary" id="adminRetryPushBtn" type="button">Live Push freigeben</button>
+              <button class="btn" id="adminRetryPushBtn" type="button">Live erneut prüfen &amp; Push senden</button>
             </div>
           </div>
           <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown einfügen, optional PDF/Bild anhängen, dann bewusst veröffentlichen."}</div>
-          <div class="upload-status" style="margin-top:8px">Besucher-Pushs werden nicht automatisch gesendet. Erst nach der Veröffentlichung „Live Push freigeben“.</div>
           ${renderPublishTracker("single")}
         </div>
       </details>
@@ -3334,9 +3305,8 @@ function bindUi(){
   bindKurzlinksUi();
   bindZakatAdminUi();
   if(window.DARFeedAdmin)window.DARFeedAdmin.bindFeedUi();
-  if(window.DARLibraryAdmin)window.DARLibraryAdmin.bindLibraryTab();
-  if(window.DARQuizStatsAdmin)window.DARQuizStatsAdmin.bindQuizStatsTab(document.getElementById("panel"));
   if(window.DARFeedBgAdmin)window.DARFeedBgAdmin.bindFeedBgUi();
+  if(window.DARLibraryAdmin)window.DARLibraryAdmin.bindLibraryTab();
   bindSourceFilesUi(document.getElementById("sourceFilesPanel")?.dataset?.sourceContext||"draft");
   bindFeedImagePanels();
 }
@@ -3491,7 +3461,6 @@ function saveLastPublishPushContext(ctx){
 function formatPushStatusLine(push){
   if(!push)return "";
   if(push.sent)return `<br>Push: <strong style="color:#8fd7a8">gesendet</strong>${push.id?` · ID ${esc(String(push.id))}`:""}${push.url?`<br>Push-Ziel: ${esc(push.url)}`:""}`;
-  if(push.waitingForApproval||push.pending&&!push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf deine Freigabe</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
   if(push.pending||push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf stabile Live-Verfügbarkeit</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
   return `<br>Push: <strong style="color:#ff9f9f">fehlgeschlagen</strong> · ${esc(String(push.reason||push.message||"unbekannt"))}`;
 }
@@ -3500,8 +3469,7 @@ async function retryLivePush(){
   const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||ctx?.markdown||"";
   const filename=(ctx?.filename||draftFilename||"").trim();
   const postId=ctx?.postId||frontmatterValue(markdown,"id")||filename.replace(/\.md$/i,"");
-  if(!filename){toast("Kein Beitrag für Push-Freigabe – zuerst veröffentlichen");return}
-  if(!confirm("Live Push freigeben?\n\nDer Beitrags-Push wird jetzt an alle registrierten Besucher gesendet."))return;
+  if(!filename){toast("Kein Beitrag für Push-Retry – zuerst veröffentlichen");return}
   const btn=document.getElementById("adminRetryPushBtn");
   if(btn){btn.disabled=true;btn.textContent="Prüfe Live & Push …"}
   setUploadStatus("Prüfe Index, Beitrag und Live-Verfügbarkeit … Push wird bei Erfolg gesendet.");
@@ -3528,7 +3496,7 @@ async function retryLivePush(){
     setUploadStatus(`Push-Retry fehlgeschlagen: ${esc(e.message||e)}`);
     toast(e.message||"Push-Retry fehlgeschlagen");
   }finally{
-    if(btn){btn.disabled=false;btn.textContent="Live Push freigeben"}
+    if(btn){btn.disabled=false;btn.textContent="Live erneut prüfen & Push senden"}
   }
 }
 async function prepareNextPostNumber(){
@@ -3616,10 +3584,10 @@ async function uploadPostViaWorker(){
     updatePublishStep("urlLive",live.url?"ok":"skip",live.url?"Besucher-Link vorbereitet":"Besucher-Link wartet auf Index/Datei");
     const push=result.push||null;
     updatePublishStep("pushReady",push?"ok":"skip",push?"Push-Antwort vom Worker":"Kein Push-Status vom Worker");
-    updatePublishStep("onesignal",push?.pending?"skip":push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?.waitingForApproval?"Wartet auf Admin-Freigabe":push?.pending?"Wartet auf stabile Live-Prüfung":push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
-    updatePublishStep("pushSent",push?.pending?"skip":push&&push.sent?"ok":"error",push?.waitingForApproval?"Erst nach „Live Push freigeben“":push?.pending?"Wird nach Freigabe gesendet, sobald der Beitrag stabil online ist":push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
-    updatePublishStep("done",(push&&push.sent||push?.pending)&&live.file?"ok":"skip",push?.waitingForApproval?"Beitrag erstellt · Push wartet auf Freigabe":push?.pending?"Beitrag erstellt · Push wartet":push&&push.sent&&live.file?"Fertig":"Fertig mit Hinweis");
-    updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.waitingForApproval?"wartet auf Freigabe":push?.pending?"wartet auf Live-Verfügbarkeit":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
+    updatePublishStep("onesignal",push?.pending?"skip":push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?.pending?"Wartet auf stabile Live-Prüfung":push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
+    updatePublishStep("pushSent",push?.pending?"skip":push&&push.sent?"ok":"error",push?.pending?"Wird automatisch gesendet, sobald der Beitrag stabil online ist":push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
+    updatePublishStep("done",(push&&push.sent||push?.pending)&&live.file?"ok":"skip",push?.pending?"Beitrag erstellt · Push wartet":push&&push.sent&&live.file?"Fertig":"Fertig mit Hinweis");
+    updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live-Verfügbarkeit":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     finishPublishTrack(live.file?"ok":"error",live.file?"":live.reason||"Live-Datei noch nicht erreichbar");
     setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(result.push)}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
@@ -3754,7 +3722,6 @@ async function uploadBulkPackViaWorker(){
   }
 }
 async function renderDashboard({force=false}={}){
-  if(currentTab==="bibliothek")return;
   if(!force&&adminIsEditing())return;
   const panel=document.getElementById("panel");
   if(!lastData)panel.innerHTML=`<div class="empty">Statistik wird geladen...</div>`;
@@ -3764,18 +3731,13 @@ async function renderDashboard({force=false}={}){
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
-function restartRefreshInterval(){if(!authed)return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
-document.addEventListener("visibilitychange",()=>{
-  if(document.visibilityState!=="visible"||!authed)return;
-  if(currentTab==="bibliothek")return;
-  if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
-  setTimeout(()=>renderDashboard(),260);
-});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)setTimeout(()=>renderDashboard(),260)});
 let adminSwipe=null;
 document.addEventListener("touchstart",e=>{
   const t=e.touches&&e.touches[0];if(!t)return;
@@ -3789,7 +3751,6 @@ document.addEventListener("touchend",e=>{
   const dx=t.clientX-adminSwipe.x,dy=t.clientY-adminSwipe.y,dt=Date.now()-adminSwipe.t;
   adminSwipe=null;
   if(adminNavStack.length||currentTab!=="start"){
-    if(currentTab==="bibliothek"){adminSwipe=null;return}
     if(dx>78&&Math.abs(dy)<55&&dt<650)adminBack();
   }
 },{passive:true});
