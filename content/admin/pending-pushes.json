@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-27T10:35:40.119Z",
+  "generated": "2026-07-27T10:35:41.277Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -968,13 +968,13 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260727-002-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-07-27T09:32:33.501Z",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-07-27T09:32:33.501Z",
       "createdAt": "2026-07-27T09:32:33.501Z",
       "lastError": "",
       "postId": "lib:pub-20260727-002",
-      "updatedAt": "2026-07-27T10:35:40.119Z",
+      "updatedAt": "2026-07-27T10:35:41.277Z",
       "lastCheckAt": "2026-07-27T10:35:39.948Z",
       "liveCheck": {
         "ok": true,
@@ -989,7 +989,12 @@
         "visitorUrl": "https://dar-al-tawhid.de/?v=1785148539889#bibliothek/der-hukm-der-jumuah-und-ihrer-unterlassung",
         "attempt": 1
       },
-      "attempts": 1
+      "attempts": 1,
+      "sentAt": "2026-07-27T10:35:41.152Z",
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1785148540951#bibliothek/der-hukm-der-jumuah-und-ihrer-unterlassung"
+      }
     }
   }
 }
