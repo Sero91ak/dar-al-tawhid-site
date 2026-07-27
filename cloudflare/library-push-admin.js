@@ -4,7 +4,10 @@
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
+const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const LIVE_CATALOG_PATH = "data/library-publications.json";
+const ONESIGNAL_BATCH_SIZE = 2000;
 /** Bis ~8 Min. warten, früh häufig prüfen (Deploy dauert typ. 45–90 s). */
 const LIBRARY_LIVE_CHECK_SCHEDULE_MS = [
   0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 75000, 90000,
@@ -25,6 +28,10 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
+function supabaseApiKey(env) {
+  return String(env.SUPABASE_SERVICE_KEY || env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY || SUPABASE_ANON_KEY).trim();
+}
+
 function parseOneSignalAcceptedRecipients(raw) {
   try {
     const data = typeof raw === "string" ? JSON.parse(raw) : raw;
@@ -35,6 +42,63 @@ function parseOneSignalAcceptedRecipients(raw) {
     }
   } catch (error) {}
   return null;
+}
+
+function uniqueValues(values) {
+  return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
+}
+
+function chunkValues(values, size) {
+  const out = [];
+  for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
+  return out;
+}
+
+async function loadLibraryPushSubscriptionIds(env) {
+  const key = supabaseApiKey(env);
+  if (!key) return [];
+  const base = `${SUPABASE_URL}/rest/v1/prayer_push_registrations`;
+  const queries = [
+    "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at",
+    "subscription_id=not.is.null&select=subscription_id,last_synced_at"
+  ];
+
+  for (const query of queries) {
+    try {
+      const res = await fetch(`${base}?${query}`, {
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          Accept: "application/json"
+        }
+      });
+      const text = await res.text();
+      if (!res.ok) {
+        if (res.status === 400 && query.includes("push_opted_in")) continue;
+        throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
+      }
+      const rows = text ? JSON.parse(text) : [];
+      return uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
+    } catch (error) {
+      if (!query.includes("push_opted_in")) return [];
+    }
+  }
+
+  return [];
+}
+
+function buildLibraryPushAttempts(basePayload, subscriptionIds) {
+  const attempts = [];
+  for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
+    attempts.push({ ...basePayload, include_subscription_ids: ids });
+  }
+  attempts.push(
+    { ...basePayload, included_segments: ["DAR_PUSH"] },
+    { ...basePayload, included_segments: ["Subscribed Users"] },
+    { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] },
+    { ...basePayload, filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }] }
+  );
+  return attempts;
 }
 
 function siteOrigin(env) {
@@ -200,20 +264,11 @@ export async function sendLibraryPublicationPush(env, record) {
     name: `library-publish-${Date.now()}`
   };
 
-  const attempts = [
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
-  ];
+  const subscriptionIds = await loadLibraryPushSubscriptionIds(env);
+  const attempts = buildLibraryPushAttempts(basePayload, subscriptionIds);
 
-  let lastError = "Unbekannter Fehler";
+  let lastError = "Kein Empfänger gefunden – alle Zielgruppen lieferten 0 Empfänger oder Fehler";
+  const attemptLog = [];
   for (const payload of attempts) {
     for (const authMode of ["Key", "Basic"]) {
       try {
@@ -230,28 +285,69 @@ export async function sendLibraryPublicationPush(env, record) {
           const accepted = parseOneSignalAcceptedRecipients(text);
           if (accepted !== null && accepted <= 0) {
             lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+            attemptLog.push({
+              target: payload.include_subscription_ids?.length
+                ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+                : (payload.included_segments?.[0] || "tag-filter"),
+              httpStatus: res.status,
+              authMode,
+              sent: false,
+              recipients: accepted,
+              reason: lastError
+            });
             continue;
           }
           return {
             sent: true,
-            target: payload.included_segments?.[0] || "tag-filter",
+            target: payload.include_subscription_ids?.length
+              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+              : (payload.included_segments?.[0] || "tag-filter"),
             authMode,
             targetUrl: url,
             data: pushData,
             recipients: accepted,
-            response: text.slice(0, 400)
+            response: text.slice(0, 400),
+            subscriptionCount: subscriptionIds.length,
+            attempts: attemptLog
           };
         }
         if (res.status === 400 || res.status === 401 || res.status === 403) {
           lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
+          attemptLog.push({
+            target: payload.include_subscription_ids?.length
+              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+              : (payload.included_segments?.[0] || "tag-filter"),
+            httpStatus: res.status,
+            authMode,
+            sent: false,
+            reason: lastError
+          });
           continue;
         }
         lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
+        attemptLog.push({
+          target: payload.include_subscription_ids?.length
+            ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+            : (payload.included_segments?.[0] || "tag-filter"),
+          httpStatus: res.status,
+          authMode,
+          sent: false,
+          reason: lastError
+        });
       } catch (error) {
         lastError = error.message || String(error);
+        attemptLog.push({
+          target: payload.include_subscription_ids?.length
+            ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+            : (payload.included_segments?.[0] || "tag-filter"),
+          httpStatus: 0,
+          authMode,
+          sent: false,
+          reason: lastError
+        });
       }
     }
   }
 
-  return { sent: false, reason: lastError };
+  return { sent: false, reason: lastError, subscriptionCount: subscriptionIds.length, attempts: attemptLog };
 }
