@@ -152,7 +152,7 @@ export default {
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
           jummahPushCron: "*/5 * * * *",
-          libraryApi: "v2-skip-push",
+          libraryApi: "v3-split-push",
           scheduler: "ready"
         }, cors);
       }
@@ -468,24 +468,8 @@ export default {
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         try {
           const result = await saveLibraryPublication(env, input, helpers);
-          const skipPush = input?.skipPush === true;
-          const shouldPush = result.published && result.target === "live" && result.publication && !skipPush;
-          if (shouldPush) {
-            const push = await queueLibraryPublicationPush(env, result.publication);
-            const pushRecord = {
-              ...buildLibraryPushPendingRecord(result.publication),
-              pushApproved: true,
-              pushApprovedAt: new Date().toISOString()
-            };
-            ctx.waitUntil(
-              processPendingLibraryPushUntilLive(env, pushRecord).catch((error) => {
-                console.error("library auto-push failed", error);
-              })
-            );
-            return json({ ...result, push }, cors);
-          }
-          if (result.published && result.target === "live" && skipPush) {
-            return json({ ...result, push: { sent: false, skipped: true, reason: "Korrektur ohne Push" } }, cors);
+          if (result.published && result.target === "live") {
+            return json({ ...result, push: { sent: false, skipped: true, reason: "Veröffentlicht ohne Push — Live Push separat im Admin" } }, cors);
           }
           return json(result, cors);
         } catch (e) {
