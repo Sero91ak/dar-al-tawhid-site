@@ -1097,26 +1097,34 @@
     };
     if (!payload.publicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
     const title = payload.publicationTitle || "PDF";
-    if (!options.skipConfirm && !confirm(`Live Push für „${title}“ senden?\n\nDie Besucher-Mitteilung wird direkt gesendet, sobald die PDF live erreichbar ist.`)) return;
+    if (!options.skipConfirm && !confirm(`Live Push für „${title}“ senden?\n\nWartet bis die PDF live ist, dann Push in ca. 15 s.`)) return;
     const btn = options.button || null;
     const btnLabel = btn?.textContent || "";
+    const maxAttempts = Number(options.maxAttempts) || 36;
     let lastResult = null;
     try {
       if (btn) {
         btn.disabled = true;
-        btn.textContent = "Sende Live Push…";
+        btn.textContent = "Warte auf Live…";
       }
-      lastResult = await workerPost("api/admin/push/library/send", payload);
-      lastLivePush = lastResult?.push || lastResult || null;
-      const sent = lastResult?.push?.sent === true;
-      const skipped = lastResult?.skipped === true || (lastResult?.push?.skipped === true);
-      if (sent || skipped) {
-        toast(sent ? "Live Push gesendet" : (lastResult?.push?.reason || lastResult?.reason || "Push bereits gesendet"));
-        if (!options.publicationId || options.publicationId === successPublicationId) safeRender();
-        return lastResult;
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        if (btn) btn.textContent = attempt === 1 ? "Prüfe Live-Status…" : `Warte auf Live… (${attempt}/${maxAttempts})`;
+        lastResult = await workerPost("api/admin/push/library/retry", payload);
+        lastLivePush = lastResult?.push || lastResult || null;
+        const sent = lastResult?.push?.sent === true;
+        const skipped = lastResult?.push?.skipped === true && /bereits/i.test(String(lastResult?.push?.reason || lastResult?.reason || ""));
+        if (sent || skipped) {
+          toast(sent ? "Live Push gesendet" : (lastResult?.push?.reason || lastResult?.reason || "Push bereits gesendet"));
+          if (!options.publicationId || options.publicationId === successPublicationId) safeRender();
+          return lastResult;
+        }
+        const waiting = lastResult?.push?.waitingForLive === true || lastResult?.push?.pending === true;
+        if (!waiting && lastResult?.push?.reason) {
+          throw new Error(lastResult.push.reason);
+        }
+        if (attempt < maxAttempts) await sleep(10000);
       }
-      const reason = lastResult?.push?.reason || lastResult?.reason || "Live Push fehlgeschlagen";
-      throw new Error(reason);
+      throw new Error("PDF noch nicht live — bitte 1–2 Min. warten und „Live Push“ erneut tippen.");
     } finally {
       if (btn) {
         btn.disabled = false;
