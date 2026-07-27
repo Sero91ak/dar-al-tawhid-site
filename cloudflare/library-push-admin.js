@@ -25,6 +25,18 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
+function parseOneSignalAcceptedRecipients(raw) {
+  try {
+    const data = typeof raw === "string" ? JSON.parse(raw) : raw;
+    const candidates = [data?.recipients, data?.total_count, data?.successful];
+    for (const value of candidates) {
+      const count = Number(value);
+      if (Number.isFinite(count)) return count;
+    }
+  } catch (error) {}
+  return null;
+}
+
 function siteOrigin(env) {
   return String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
 }
@@ -215,12 +227,18 @@ export async function sendLibraryPublicationPush(env, record) {
         });
         const text = await res.text();
         if (res.ok) {
+          const accepted = parseOneSignalAcceptedRecipients(text);
+          if (accepted !== null && accepted <= 0) {
+            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+            continue;
+          }
           return {
             sent: true,
             target: payload.included_segments?.[0] || "tag-filter",
             authMode,
             targetUrl: url,
             data: pushData,
+            recipients: accepted,
             response: text.slice(0, 400)
           };
         }
