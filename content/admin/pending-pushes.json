@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-27T14:36:13.245Z",
+  "generated": "2026-07-27T15:15:59.777Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -959,24 +959,23 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-07-27T14:35:51.212Z",
       "postId": "lib:pub-20260727-004",
-      "updatedAt": "2026-07-27T14:36:13.245Z",
-      "lastCheckAt": "2026-07-27T14:36:13.042Z",
+      "updatedAt": "2026-07-27T15:15:59.777Z",
+      "lastCheckAt": "2026-07-27T15:15:59.250Z",
       "liveCheck": {
-        "ok": false,
-        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "ok": true,
+        "diagnosis": "",
         "site": "https://dar-al-tawhid.de",
         "publicationId": "pub-20260727-004",
         "slug": "ahkam-al-ishrah-bayna-az-zawjayn",
         "catalogFoundPublic": true,
-        "publicationInCatalog": false,
-        "pdfFilePublic": false,
+        "publicationInCatalog": true,
+        "pdfFilePublic": true,
         "visitorUrlOk": true,
-        "visitorUrl": "https://dar-al-tawhid.de/?v=1785162973002#bibliothek/ahkam-al-ishrah-bayna-az-zawjayn",
-        "pdfHttpStatus": 404,
-        "attempt": 5
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1785165358727#bibliothek/ahkam-al-ishrah-bayna-az-zawjayn",
+        "attempt": 1
       },
-      "attempts": 5,
-      "lastError": "PDF noch nicht im Live-Katalog enthalten."
+      "attempts": 1,
+      "lastError": ""
     },
     "lib:pub-20260727-003": {
       "kind": "library",
