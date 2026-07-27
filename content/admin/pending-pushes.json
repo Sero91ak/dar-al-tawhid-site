@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-27T10:05:40.087Z",
+  "generated": "2026-07-27T10:05:41.305Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -932,13 +932,13 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260727-001-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-07-27T09:31:35.815Z",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-07-27T09:31:35.815Z",
       "createdAt": "2026-07-27T09:31:35.815Z",
       "lastError": "",
       "postId": "lib:pub-20260727-001",
-      "updatedAt": "2026-07-27T10:05:40.087Z",
+      "updatedAt": "2026-07-27T10:05:41.305Z",
       "lastCheckAt": "2026-07-27T10:05:39.978Z",
       "liveCheck": {
         "ok": true,
@@ -953,7 +953,12 @@
         "visitorUrl": "https://dar-al-tawhid.de/?v=1785146739812#bibliothek/der-hukm-ueber-das-unterlassen-des-hajj",
         "attempt": 1
       },
-      "attempts": 1
+      "attempts": 1,
+      "sentAt": "2026-07-27T10:05:41.011Z",
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1785146740800#bibliothek/der-hukm-ueber-das-unterlassen-des-hajj"
+      }
     },
     "lib:pub-20260727-002": {
       "kind": "library",
