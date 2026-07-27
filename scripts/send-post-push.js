@@ -17,7 +17,12 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIs
 const EVENT_NAME = process.env.GITHUB_EVENT_NAME || "";
 const RUN_ID = process.env.GITHUB_RUN_ID || "manual";
 const POSTS_DIR = process.env.POSTS_DIR || "content/posts";
-const LIVE_CHECK_SCHEDULE_MS = [0, 10000, 30000, 60000, 120000, 180000, 240000, 300000];
+const LIVE_CHECK_SCHEDULE_MS = [
+  0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 90000, 120000,
+  180000, 240000, 300000, 360000, 420000, 480000
+];
+const POST_PUSH_DELAY_MS = 15000;
+const PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const ONESIGNAL_BATCH_SIZE = 2000;
 
 function frontmatterValue(text, key) {
@@ -45,6 +50,31 @@ function chunk(values, size) {
   const out = [];
   for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
   return out;
+}
+
+function loadPendingRegistry() {
+  const file = path.join(process.cwd(), PENDING_PUSHES_PATH);
+  if (!fs.existsSync(file)) return { pushes: {} };
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch {
+    return { pushes: {} };
+  }
+}
+
+function shouldSkipGhPostPush(postId, registry) {
+  if (!postId) return false;
+  const entry = registry?.pushes?.[postId];
+  if (!entry) return false;
+  if (entry.status === "sent") {
+    console.log(`Push für ${postId} bereits gesendet — GitHub Action übersprungen.`);
+    return true;
+  }
+  if (entry.pushApproved !== true) {
+    console.log(`Push für ${postId} wartet auf Admin-Freigabe — GitHub Action übersprungen (Worker-Queue).`);
+    return true;
+  }
+  return false;
 }
 
 async function fetchRegisteredSubscriptionIds() {
@@ -258,10 +288,15 @@ async function sendWithFallbacks(basePayload) {
 
 (async function main() {
   const files = changedPostFiles();
+  const registry = loadPendingRegistry();
   const copy = buildMessage(files);
 
   if (!copy) {
     console.log("Keine neuen Markdown-Beiträge erkannt. Keine Push gesendet.");
+    return;
+  }
+
+  if (EVENT_NAME !== "workflow_dispatch" && copy.postId && shouldSkipGhPostPush(copy.postId, registry)) {
     return;
   }
 
@@ -277,6 +312,10 @@ async function sendWithFallbacks(basePayload) {
       return;
     }
     console.log("Live-Prüfung erfolgreich:", JSON.stringify(live, null, 2));
+    if (POST_PUSH_DELAY_MS > 0) {
+      console.log(`Warte ${POST_PUSH_DELAY_MS / 1000}s vor Push …`);
+      await sleep(POST_PUSH_DELAY_MS);
+    }
   }
 
   const pushData = copy.postId ? {
