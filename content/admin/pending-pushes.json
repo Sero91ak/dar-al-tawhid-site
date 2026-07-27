@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-27T15:16:20.308Z",
+  "generated": "2026-07-27T15:16:37.345Z",
   "pushes": {
     "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394": {
       "postId": "abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
@@ -990,11 +990,11 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260727-003-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-07-27",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-07-27T14:35:48.981Z",
       "postId": "lib:pub-20260727-003",
-      "updatedAt": "2026-07-27T15:16:20.308Z",
+      "updatedAt": "2026-07-27T15:16:37.345Z",
       "lastCheckAt": "2026-07-27T15:16:19.798Z",
       "liveCheck": {
         "ok": true,
@@ -1010,7 +1010,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-07-27T15:16:37.009Z",
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1785165396570#bibliothek/ahkam-huquq-al-marah-fi-l-islam"
+      }
     }
   }
 }
