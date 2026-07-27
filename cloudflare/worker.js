@@ -2439,6 +2439,18 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
+function parseOneSignalAcceptedRecipients(raw) {
+  try {
+    const data = typeof raw === "string" ? JSON.parse(raw) : raw;
+    const candidates = [data?.recipients, data?.total_count, data?.successful];
+    for (const value of candidates) {
+      const count = Number(value);
+      if (Number.isFinite(count)) return count;
+    }
+  } catch (error) {}
+  return null;
+}
+
 function buildPostPushUrl(env, postId, cacheVersion) {
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const slug = String(postId || "").trim();
@@ -2903,12 +2915,18 @@ async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, 
         });
         const text = await res.text();
         if (res.ok) {
+          const accepted = parseOneSignalAcceptedRecipients(text);
+          if (accepted !== null && accepted <= 0) {
+            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+            continue;
+          }
           return {
             sent: true,
             target: payload.included_segments?.[0] || "tag-filter",
             authMode,
             targetUrl: url,
             data: pushData,
+            recipients: accepted,
             response: text.slice(0, 400)
           };
         }
@@ -3014,6 +3032,11 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
         });
         const textResp = await res.text();
         if (res.ok) {
+          const accepted = parseOneSignalAcceptedRecipients(textResp);
+          if (accepted !== null && accepted <= 0) {
+            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+            continue;
+          }
           return {
             sent: true,
             target: payload.included_segments?.[0] || "tag-filter",
@@ -3022,6 +3045,7 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
             title: pushTitle,
             message: pushMessage,
             data: pushData,
+            recipients: accepted,
             response: textResp.slice(0, 400)
           };
         }
