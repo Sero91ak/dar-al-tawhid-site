@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v480";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v489";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -253,7 +253,7 @@ body.is-area-route .view-desc{font-size:12px;line-height:1.55;margin-top:6px}
 .calendar-panel{border:1px solid rgba(255,255,255,.36);border-radius:22px;background:radial-gradient(circle at 16% 0%,rgba(255,255,255,.20),transparent 36%),radial-gradient(circle at 90% 10%,rgba(239,215,142,.20),transparent 38%),linear-gradient(145deg,rgba(48,44,31,.98),rgba(18,17,13,.98));padding:15px;margin-bottom:13px;box-shadow:0 20px 48px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.035)}.calendar-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.calendar-title h3{font-family:var(--serif);color:#fff8dd;font-size:25px;line-height:1.08;margin:0}.calendar-title p{color:var(--muted);font-size:11px;line-height:1.45;margin:5px 0 0}.event-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.event-card{border:1px solid rgba(255,255,255,.24);border-radius:17px;background:linear-gradient(145deg,rgba(255,255,255,.115),rgba(239,215,142,.055));padding:11px}.event-date{color:#fff1b0;font-size:12px;font-weight:950;margin-bottom:4px}.event-name{font-family:var(--serif);color:#fff4c7;font-size:18px;font-weight:850;line-height:1.1}.event-note{color:var(--muted);font-size:10.5px;line-height:1.35;margin-top:5px}.event-soon{border-color:rgba(255,244,190,.78);background:linear-gradient(145deg,rgba(255,244,190,.22),rgba(255,255,255,.08))}.calendar-note{color:#d8ccb1;font-size:10px;line-height:1.45;margin-top:10px}
 .article{max-width:900px;margin:0 auto}.article-title{text-align:center;margin-bottom:14px}.article-title h2{font-size:clamp(31px,5vw,58px)}.article-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:12px 0 18px}.statement,.dua-detail-box{border:1px solid var(--line);border-radius:26px;background:radial-gradient(circle at 50% 0%,rgba(239,215,142,.09),transparent 42%),linear-gradient(180deg,rgba(19,17,13,.94),rgba(8,8,6,.94));padding:28px;color:#fff8e8;font-family:var(--serif);font-size:clamp(20px,2.4vw,29px);line-height:1.78;text-align:center;white-space:pre-wrap}.statement strong{color:#fff7df;font-weight:950}.statement em{color:var(--gold2);font-style:italic;font-weight:850;text-decoration:underline;text-underline-offset:5px}.dua-detail-box{text-align:left;font-size:17px;padding:17px 18px;line-height:1.5;white-space:normal}.dua-arabic{direction:rtl;text-align:right;font-family:"Times New Roman",Georgia,serif;font-size:25px;line-height:1.8;color:#fff9e8}.dua-trans{color:var(--gold2);font-style:italic;font-size:15.5px;line-height:1.5;margin-top:8px}.dua-de{font-size:15.5px;line-height:1.5;margin-top:8px;color:#fff8e8}.dua-label{color:var(--muted2);font-family:var(--sans);font-size:10.5px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;margin-top:12px;margin-bottom:4px}.article-actions,.share-row{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:18px 0}.action-btn{border:1px solid var(--line);border-radius:999px;background:rgba(239,215,142,.075);color:var(--cream);min-height:42px;padding:10px 14px;font-size:12px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.action-btn.active{color:#ebffdf;border-color:rgba(105,190,115,.58);background:rgba(105,190,115,.10)}.source-strong{border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 30% 0%,rgba(239,215,142,.10),transparent 45%),linear-gradient(180deg,rgba(19,17,13,.95),rgba(7,7,6,.95));margin-top:16px;padding:16px;text-align:left}.source-strong h3{font-family:var(--serif);color:var(--gold2);font-size:25px;margin:0 0 10px;text-align:center}.source-row{border-top:1px solid var(--line2);padding:10px 0;color:var(--muted);font-size:12px;line-height:1.55}.source-row:first-of-type{border-top:0}.source-row b{display:block;color:var(--cream);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}.source-note{color:var(--gold2);font-size:11px;line-height:1.5;text-align:center;margin-top:10px}.link-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}.link-row a{border:1px solid var(--line);background:rgba(239,215,142,.075);color:var(--cream);text-decoration:none;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:900}.nav-posts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.nav-posts button{border:1px solid var(--line);border-radius:17px;background:rgba(239,215,142,.075);color:var(--cream);min-height:46px;padding:10px;font-size:12px;font-weight:900;cursor:pointer}.related-block{margin-top:22px;border-top:1px solid var(--line2);padding-top:16px}.related-block h3{font-family:var(--serif);color:var(--gold2);font-size:25px;margin:0 0 10px}
 .post-intro-modal[hidden]{display:none}.post-intro-modal{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;padding:max(18px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) max(18px,env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));background:rgba(0,0,0,.58);backdrop-filter:blur(12px)}.post-intro-dialog{width:min(560px,100%);max-height:min(76vh,720px);overflow:auto;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 24% 0%,rgba(239,215,142,.14),transparent 42%),linear-gradient(180deg,rgba(27,24,18,.98),rgba(7,7,6,.98));box-shadow:0 28px 90px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06);padding:18px}.post-intro-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;border-bottom:1px solid var(--line2);padding-bottom:12px;margin-bottom:12px}.post-intro-head h3{font-family:var(--serif);font-size:26px;line-height:1.12;color:var(--gold2);margin:0}.post-intro-close{width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:rgba(239,215,142,.08);color:var(--cream);font-size:21px;line-height:1;cursor:pointer}.post-intro-body{color:var(--cream);font-size:15px;line-height:1.68;white-space:normal}.post-intro-body strong{color:var(--gold2);font-weight:950}.post-intro-body em{color:var(--gold2);font-style:italic}.post-intro-actions{margin:0 0 16px}.post-intro-btn{border-color:rgba(239,215,142,.48)!important;background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.10))!important;color:var(--gold2)!important;min-height:44px}.html.post-intro-open{overflow:hidden}
-.about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:var(--muted);padding:22px 0 calc(26px + var(--safe-bottom))}.footer strong{color:var(--gold2)}.footer-socials{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}.footer-socials span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:850}.footer-socials svg{width:19px;height:19px}.signature{display:block;color:var(--gold2);font-family:cursive;font-size:25px;margin-top:8px}.float-actions{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:calc(14px + 0.5cm + env(safe-area-inset-bottom));top:auto;z-index:35;display:flex;flex-direction:row-reverse;align-items:flex-end;gap:0;padding:0;pointer-events:auto;touch-action:none;transition:right .46s cubic-bezier(.22,.8,.2,1)}.float-actions.is-collapsed{right:0}.float-actions-panel{display:flex;flex-direction:column;gap:12px;align-items:flex-end;padding-right:8px;transform:translateX(calc(100% + 16px));opacity:0;will-change:transform,opacity;transition:transform .46s cubic-bezier(.22,.8,.2,1),opacity .36s ease;pointer-events:none}.float-actions.is-expanded .float-actions-panel{transform:translateX(0);opacity:1;pointer-events:auto}.float-actions.is-dragging .float-actions-panel{transition:none}.float-touch-handle{position:relative;width:18px;min-height:78px;border:1px solid rgba(239,215,142,.42);border-right:0;border-radius:14px 0 0 14px;background:linear-gradient(180deg,rgba(22,19,14,.97),rgba(7,7,6,.97));color:var(--gold2);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:-10px 0 24px rgba(0,0,0,.32);padding:8px 0;margin-right:0;flex:0 0 auto;transition:min-height .34s ease;touch-action:none}.float-actions.is-collapsed .float-touch-handle{margin-right:0;min-height:108px;padding:14px 0}.float-actions.is-expanded .float-touch-handle{min-height:54px;padding:8px 0}.float-handle-icons{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:9px;line-height:1;pointer-events:none}.float-actions.is-collapsed .float-handle-icons{gap:12px}.float-handle-icons span{display:block;opacity:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}.float-touch-handle:active{filter:brightness(1.08)}.float-item{display:flex;flex-direction:row;align-items:center;gap:9px}.float-tip{border:1px solid rgba(239,215,142,.45);background:rgba(18,16,12,.96);color:var(--cream);font-size:11px;font-weight:850;line-height:1.25;padding:8px 11px;border-radius:14px;white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.34);animation:floatTipIn .35s ease}.float-tip.hide{animation:floatTipOut .28s ease forwards}@keyframes floatTipIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}@keyframes floatTipOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(8px)}}.float-actions.is-intro .float-btn{animation:floatIntroPulse 2.1s ease-in-out 3}@keyframes floatIntroPulse{0%,100%{box-shadow:0 18px 44px rgba(0,0,0,.35)}50%{box-shadow:0 18px 44px rgba(0,0,0,.35),0 0 0 3px rgba(239,215,142,.34)}}.float-btn{width:54px;height:54px;border-radius:18px;border:1px solid rgba(239,215,142,.58);background:radial-gradient(circle at top left,rgba(239,215,142,.18),transparent 42%),linear-gradient(180deg,rgba(22,19,14,.98),rgba(7,7,6,.98));color:var(--gold2);box-shadow:0 18px 44px rgba(0,0,0,.35);cursor:pointer;font-size:20px;display:grid;place-items:center;padding:0;flex:0 0 54px}.qibla-float{border-color:rgba(140,255,154,.55);background:radial-gradient(circle at top left,rgba(140,255,154,.16),transparent 42%),linear-gradient(180deg,rgba(22,19,14,.98),rgba(7,7,6,.98))}.float-btn:active{transform:scale(.96)}
+.about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info-card{cursor:default}.footer{text-align:center;color:var(--muted);padding:22px 0 calc(26px + var(--safe-bottom))}.footer strong{color:var(--gold2)}.footer-socials{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}.footer-socials span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:850}.footer-socials svg{width:19px;height:19px}.signature{display:block;color:var(--gold2);font-family:cursive;font-size:25px;margin-top:8px}:root{--bottom-navigation-height:64px;--quick-access-closed-height:44px;--quick-access-open-height:52px;--quick-access-bottom-gap:10px;--quick-access-max-width:min(92vw,420px);--quick-access-layer:39;--quick-access-bg:color-mix(in srgb,var(--bg) 84%,var(--panel,rgba(255,255,255,.08)) 16%);--quick-access-bg-open:color-mix(in srgb,var(--bg) 78%,var(--panel,rgba(255,255,255,.08)) 22%);--quick-access-border:var(--line);--quick-access-divider:var(--line2);--quick-access-icon:var(--gold2);--quick-access-text:var(--cream);--quick-access-active-bg:rgba(255,255,255,.05);--quick-access-active-text:var(--cream);--quick-access-focus-ring:rgba(239,215,142,.22);--quick-access-shadow:0 10px 26px rgba(0,0,0,.18);--quick-access-badge-bg:var(--gold2);--quick-access-badge-text:#16120d}.float-actions{position:fixed;left:50%;right:auto;top:auto;bottom:calc(var(--bottom-navigation-height) + var(--quick-access-bottom-gap) + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm);transform:translateX(-50%);z-index:var(--quick-access-layer);display:flex;align-items:center;justify-content:center;width:auto;max-width:var(--quick-access-max-width);pointer-events:auto;touch-action:manipulation;transition:opacity .18s ease,transform .18s ease}.float-actions[data-mode="disabled"]{display:none!important}.float-actions.is-scrolling{opacity:.72;transform:translateX(-50%) translateY(6px)}.float-actions-panel{display:flex;align-items:stretch;justify-content:center;width:auto;min-width:44px;max-width:var(--quick-access-max-width);min-height:var(--quick-access-closed-height);border:1px solid var(--quick-access-border);border-radius:999px;background:var(--quick-access-bg);box-shadow:var(--quick-access-shadow);-webkit-backdrop-filter:blur(8px) saturate(1.02);backdrop-filter:blur(8px) saturate(1.02);overflow:hidden;transition:min-width .2s cubic-bezier(.22,1,.36,1),opacity .18s ease,background .18s ease,border-color .18s ease}.float-actions.is-expanded .float-actions-panel{min-width:var(--quick-access-max-width);background:var(--quick-access-bg-open)}.float-touch-handle,.float-btn{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--quick-access-icon);font:inherit;cursor:pointer}.float-touch-handle{display:grid;place-items:center;width:44px;height:44px;min-width:44px;flex:0 0 44px;border-radius:999px;position:relative;z-index:2;overflow:hidden;transition:width .18s cubic-bezier(.22,1,.36,1),min-width .18s cubic-bezier(.22,1,.36,1),opacity .12s ease,padding .18s cubic-bezier(.22,1,.36,1)}.float-actions.is-expanded .float-touch-handle{width:0;min-width:0;opacity:0;padding:0}.float-touch-handle:hover{background:var(--quick-access-active-bg)}.float-touch-handle:focus-visible,.float-btn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--quick-access-focus-ring) inset}.float-handle-grid{display:grid;grid-template-columns:repeat(2,4px);grid-template-rows:repeat(2,4px);gap:4px;pointer-events:none}.float-handle-grid span{display:block;width:4px;height:4px;border-radius:999px;background:currentColor;opacity:.92}.float-item{display:flex;align-items:center;min-width:0;flex:1 1 0;opacity:0;max-width:0;overflow:hidden;transition:max-width .2s cubic-bezier(.22,1,.36,1),opacity .14s ease}.float-actions.is-expanded .float-item{opacity:1;max-width:140px}.float-item + .float-item{border-left:1px solid var(--quick-access-divider)}.float-tip{display:none!important}.float-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-width:0;min-height:var(--quick-access-open-height);padding:0 12px;color:var(--quick-access-text);font-size:13px;font-weight:800;line-height:1.1;text-align:center}.float-btn:hover{background:var(--quick-access-active-bg)}.float-btn svg,.float-touch-handle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}.float-btn-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.float-btn-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--quick-access-badge-bg);color:var(--quick-access-badge-text);font-size:10px;font-weight:900;line-height:1}@media(max-width:380px){.float-actions{max-width:min(92vw,250px)}.float-actions.is-expanded .float-actions-panel{min-width:min(92vw,250px)}.float-btn{padding:0 8px}.float-btn-label{display:none}}@media(prefers-reduced-motion:reduce){.float-actions,.float-actions-panel,.float-item{transition:opacity .12s ease!important}}
 .reader-mode .top-shell,.reader-mode .app-bar,.reader-mode .footer,.reader-mode .float-actions{display:none!important}.reader-mode body,.reader-mode{background:#050504!important}.reader-mode .app{width:min(880px,100%)}.reader-mode .view{border-color:transparent;box-shadow:none;background:transparent}.reader-mode .statement{font-size:clamp(26px,3.4vw,38px);line-height:1.95;background:rgba(18,16,12,.88)}
 
 /* Premium Post Reader */
@@ -1318,8 +1318,8 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 .bottom-nav-btn *{-webkit-tap-highlight-color:transparent}
 .bottom-nav-btn.is-pressed,.bottom-nav-btn:active{transform:scale(.88)!important;filter:brightness(1.14)!important;color:#fff9e5!important;transition:transform .12s cubic-bezier(.2,.8,.2,1),filter .12s ease,color .12s ease}
 .bottom-nav-btn.is-pressed .nav-icon,.bottom-nav-btn:active .nav-icon{transform:scale(.94)!important}
-body.has-bottom-nav{padding-bottom:calc(70px + max(0px,calc(env(safe-area-inset-bottom) - 22px)))}
-body.has-bottom-nav .float-actions{bottom:calc(76px + 0.5cm + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)}
+body.has-bottom-nav{padding-bottom:calc(var(--bottom-navigation-height) + var(--quick-access-closed-height) + env(safe-area-inset-bottom) + 28px)!important}
+body.has-bottom-nav .float-actions{bottom:calc(var(--bottom-navigation-height) + var(--quick-access-bottom-gap) + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))!important;color:var(--theme-text,var(--text))!important;overflow-x:hidden!important}
 body.is-feed-fullscreen .top-shell,body.is-feed-fullscreen .isnad,body.is-feed-fullscreen .app-bar,body.is-feed-fullscreen .footer,body.is-feed-fullscreen .float-actions,body.is-feed-fullscreen .new-posts-banner,body.is-feed-fullscreen .top-edge-fade,body.is-feed-fullscreen .top-swim-aura{display:none!important}
@@ -8791,9 +8791,13 @@ html[data-theme] .zakat-shell{
 }
 html[data-theme] .float-actions{
   position:fixed!important;
-  z-index:35!important;
-  pointer-events:none!important;
-  right:max(4px,env(safe-area-inset-right,0px))!important;
+  z-index:var(--quick-access-layer)!important;
+  pointer-events:auto!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  bottom:calc(var(--bottom-navigation-height) + var(--quick-access-bottom-gap) + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)!important;
+  max-width:var(--quick-access-max-width)!important;
 }
 html[data-theme] .float-actions-panel,
 html[data-theme] .float-touch-handle,
@@ -15320,22 +15324,28 @@ html[data-theme] #bottomNav.bottom-nav{
 </nav>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
-<div class="float-actions is-expanded" id="floatActions" aria-label="Schnellzugriff">
-  <button type="button" class="float-touch-handle" id="floatTouchHandle" aria-label="Schnellzugriff ein- oder ausklappen" title="Schnellzugriff">
-    <span class="float-handle-icons" aria-hidden="true"><span>🧭</span><span>♡</span><span>🔔</span></span>
-  </button>
+<div class="float-actions is-collapsed" id="floatActions" aria-label="Schnellzugriff" data-mode="bottom-capsule">
   <div class="float-actions-panel" id="floatActionsPanel">
+    <button type="button" class="float-touch-handle" id="floatTouchHandle" aria-label="Schnellzugriff öffnen" aria-expanded="false" title="Schnellzugriff">
+      <span class="float-handle-grid" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+    </button>
     <div class="float-item">
-      <span id="qiblaFloatTip" class="float-tip" hidden>Qibla-Kompass öffnen</span>
-      <button id="qiblaFloat" class="float-btn qibla-float" type="button" aria-label="Qibla-Kompass öffnen" title="Qibla-Kompass">🧭</button>
+      <button id="qiblaFloat" class="float-btn qibla-float" type="button" aria-label="Orientierung öffnen" title="Orientierung">
+        <span aria-hidden="true">🧭</span>
+        <span class="float-btn-label">Orientierung</span>
+      </button>
     </div>
     <div class="float-item">
-      <span id="savedFloatTip" class="float-tip" hidden>Favoriten</span>
-      <button id="savedFloat" class="float-btn saved-float" type="button" aria-label="Favoriten" title="Favoriten">♡</button>
+      <button id="savedFloat" class="float-btn saved-float" type="button" aria-label="Merkliste öffnen" title="Merkliste">
+        <span aria-hidden="true">♡</span>
+        <span class="float-btn-label">Merkliste</span>
+      </button>
     </div>
     <div class="float-item">
-      <span id="pushFloatTip" class="float-tip" hidden>Benachrichtigungen aktivieren</span>
-      <button id="pushFloat" class="float-btn" type="button" aria-label="Benachrichtigungen" title="Benachrichtigungen">🔔</button>
+      <button id="pushFloat" class="float-btn" type="button" aria-label="Erinnerungen öffnen" title="Erinnerungen">
+        <span aria-hidden="true">🔔</span>
+        <span class="float-btn-label">Erinnerungen</span>
+      </button>
     </div>
   </div>
 </div>
@@ -20412,7 +20422,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v480";
+const APP_BUILD_ID="app-shell-v489";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21093,51 +21103,27 @@ function bindEvents(){
 bindFastAction($("backBtn"),()=>goBack());const homeBtnEl=$("homeBtn");if(homeBtnEl)bindFastAction(homeBtnEl,()=>hardGoHome());
 window.addEventListener("hashchange",render);
 const FLOAT_TIPS_KEY="darFloatTipsShownV1";
-function showFloatTipsOnce(){
-  try{if(localStorage.getItem(FLOAT_TIPS_KEY))return}catch(e){}
-  const qTip=$("qiblaFloatTip"),sTip=$("savedFloatTip"),pTip=$("pushFloatTip");
-  if(qTip)qTip.hidden=false;
-  if(sTip)sTip.hidden=false;
-  if(pTip)pTip.hidden=false;
-  setTimeout(()=>{
-    [qTip,sTip,pTip].forEach(t=>{
-      if(!t)return;
-      t.classList.add("hide");
-      setTimeout(()=>{t.hidden=true;t.classList.remove("hide")},320);
-    });
-    try{localStorage.setItem(FLOAT_TIPS_KEY,"1")}catch(e){}
-  },6500);
-}
+function showFloatTipsOnce(){return}
 const FLOAT_TOUCHBAR_KEY="darFloatTouchbarActivatedV1";
-function resetFloatTouchbarPanel(){
-  const panel=$("floatActionsPanel");
-  if(!panel)return;
-  panel.style.transform="";
-  panel.style.opacity="";
-  panel.style.pointerEvents="";
-}
 function collapseFloatTouchbar(){
   const bar=$("floatActions");
-  if(!bar)return;
-  bar.classList.remove("is-expanded","is-intro","is-dragging");
+  const handle=$("floatTouchHandle");
+  if(!bar||bar.dataset.mode==="disabled")return;
+  bar.classList.remove("is-expanded","is-intro","is-dragging","is-scrolling");
   bar.classList.add("is-collapsed");
-  resetFloatTouchbarPanel();
+  if(handle)handle.setAttribute("aria-expanded","false");
 }
 function expandFloatTouchbar(){
   const bar=$("floatActions");
-  if(!bar)return;
-  bar.classList.remove("is-collapsed","is-dragging");
+  const handle=$("floatTouchHandle");
+  if(!bar||bar.dataset.mode==="disabled")return;
+  bar.classList.remove("is-collapsed","is-dragging","is-scrolling");
   bar.classList.add("is-expanded");
-  resetFloatTouchbarPanel();
+  if(handle)handle.setAttribute("aria-expanded","true");
 }
 function markFloatTouchbarActivated(){
-  let done=false;
-  try{done=localStorage.getItem(FLOAT_TOUCHBAR_KEY)==="1"}catch(e){}
-  if(done)return;
   try{localStorage.setItem(FLOAT_TOUCHBAR_KEY,"1")}catch(e){}
-  const bar=$("floatActions");
-  if(bar)bar.classList.remove("is-intro");
-  setTimeout(collapseFloatTouchbar,320);
+  collapseFloatTouchbar();
 }
 function initAppZoomLock(){
   if(window.__appZoomLockBound)return;
@@ -21151,87 +21137,28 @@ function initAppZoomLock(){
 }
 function initFloatTouchbar(){
   const bar=$("floatActions");
-  const panel=$("floatActionsPanel");
   const handle=$("floatTouchHandle");
-  if(!bar||!panel)return;
+  if(!bar||!handle)return;
+  if(bar.dataset.mode==="disabled"){bar.hidden=true;return}
   let activated=false;
   try{activated=localStorage.getItem(FLOAT_TOUCHBAR_KEY)==="1"}catch(e){}
-  if(activated){
-    bar.classList.add("is-collapsed");
-    bar.classList.remove("is-expanded","is-intro");
-  }else{
-    bar.classList.add("is-expanded","is-intro");
-    bar.classList.remove("is-collapsed");
-  }
-  const getOpen=()=>bar.classList.contains("is-expanded")?1:0;
-  const panelHide=()=>panel.offsetWidth+16;
-  let dragActive=false,dragAxis=null,dragStartX=0,dragStartY=0,dragStartOpen=0,dragLastX=0,dragLastT=0;
-  const applyDragOpen=open=>{
-    const hide=panelHide();
-    const clamped=Math.max(0,Math.min(1,open));
-    panel.style.transform=`translateX(${hide*(1-clamped)}px)`;
-    panel.style.opacity=String(0.18+clamped*0.82);
-    panel.style.pointerEvents=clamped>0.55?"auto":"none";
-    return clamped;
-  };
-  const finishDrag=open=>{
-    bar.classList.remove("is-dragging");
-    dragActive=false;
-    dragAxis=null;
-    if(open>=0.4)expandFloatTouchbar();
-    else collapseFloatTouchbar();
-  };
-  const onDragStart=(e)=>{
-    const t=e.touches[0];
-    if(!t)return;
-    const fromEdge=t.clientX>=window.innerWidth-30;
-    const onBar=bar.contains(e.target);
-    if(!fromEdge&&!onBar)return;
-    dragActive=true;
-    dragAxis=null;
-    dragStartX=dragLastX=t.clientX;
-    dragStartY=t.clientY;
-    dragStartOpen=getOpen();
-    dragLastT=Date.now();
-    bar.classList.add("is-dragging");
-  };
-  const onDragMove=(e)=>{
-    if(!dragActive)return;
-    const t=e.touches[0];
-    if(!t)return;
-    const dx=t.clientX-dragStartX;
-    const dy=t.clientY-dragStartY;
-    if(dragAxis===null){
-      if(Math.abs(dx)<8&&Math.abs(dy)<8)return;
-      dragAxis=Math.abs(dx)>Math.abs(dy)?"x":"y";
-      if(dragAxis!=="x"){dragActive=false;bar.classList.remove("is-dragging");return}
-    }
-    if(dragAxis!=="x")return;
-    e.preventDefault();
-    applyDragOpen(dragStartOpen+(-dx/panelHide()));
-    dragLastX=t.clientX;
-    dragLastT=Date.now();
-  };
-  const onDragEnd=()=>{
-    if(!dragActive)return;
-    const hide=panelHide();
-    const dx=dragLastX-dragStartX;
-    const dt=Math.max(16,Date.now()-dragLastT);
-    const velocity=-dx/dt;
-    let open=dragStartOpen+(-dx/hide);
-    if(velocity>0.45)open=Math.max(open,0.72);
-    if(velocity<-0.45)open=Math.min(open,0.28);
-    finishDrag(applyDragOpen(open));
-  };
+  if(activated)collapseFloatTouchbar();else expandFloatTouchbar();
   if(handle)handle.onclick=(e)=>{
     e.stopPropagation();
     bar.classList.contains("is-expanded")?collapseFloatTouchbar():expandFloatTouchbar();
   };
+  const closeIfOpen=()=>{
+    if(bar.classList.contains("is-expanded"))collapseFloatTouchbar();
+  };
   bar.querySelectorAll(".float-btn").forEach(btn=>btn.addEventListener("click",markFloatTouchbarActivated));
-  document.addEventListener("touchstart",onDragStart,{passive:true});
-  document.addEventListener("touchmove",onDragMove,{passive:false});
-  document.addEventListener("touchend",onDragEnd,{passive:true});
-  document.addEventListener("touchcancel",onDragEnd,{passive:true});
+  document.addEventListener("click",(e)=>{if(!bar.contains(e.target))closeIfOpen()},{passive:true});
+  document.addEventListener("keydown",(e)=>{if(e.key==="Escape")closeIfOpen()});
+  window.addEventListener("scroll",()=>{if(bar.classList.contains("is-expanded"))collapseFloatTouchbar();else{bar.classList.add("is-scrolling");clearTimeout(window.__darQuickAccessScrollTimer);window.__darQuickAccessScrollTimer=setTimeout(()=>bar.classList.remove("is-scrolling"),140)}},{passive:true});
+  window.addEventListener("hashchange",closeIfOpen,{passive:true});
+  window.addEventListener("pagehide",closeIfOpen,{passive:true});
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState!=="visible")closeIfOpen()});
+  document.addEventListener("focusin",(e)=>{if(e.target?.closest?.("input,textarea,select,[contenteditable='true']"))closeIfOpen()},{passive:true});
+  if(window.visualViewport)window.visualViewport.addEventListener("resize",()=>{if(Math.abs(window.visualViewport.height-window.innerHeight)>120)closeIfOpen()},{passive:true});
 }
 window.addEventListener("DOMContentLoaded",()=>{
   try{
