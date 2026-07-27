@@ -17463,7 +17463,7 @@ function updatePushFloatButton(){const state=readOneSignalPushSubscriptionState(
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
-async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS);await sendWelcomePushIfNeeded(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:5});if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:3});if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:2}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
+async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS);const welcomed=await sendWelcomePushIfNeeded(OS);if(!welcomed)scheduleWelcomePushRetries(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:5});if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:3});if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:2}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
 function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(()=>{maintainPushHealth({silent:true}).catch(()=>{})},PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")maintainPushHealth({silent:true}).catch(()=>{})});window.addEventListener("online",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}
 let prayerCountdownTimer=null;
 let headerPrayerDisplayKey="";
@@ -17704,9 +17704,35 @@ async function triggerPrayerPushScheduleNow(subscriptionId){
 }
 const WELCOME_PUSH_SENT_KEY="dar_welcome_push_sent";
 let welcomePushInFlight=false;
+let welcomePushRetryTimer=null;
+const WELCOME_PUSH_RETRY_DELAYS_MS=[8000,20000,45000,90000,180000,300000];
 function welcomePushStorageKey(subId){return "dar_welcome_push_v2_"+String(subId||"").trim()}
 function welcomePushAlreadySent(subId){if(!subId)return true;try{if(localStorage.getItem(welcomePushStorageKey(subId))==="1")return true}catch(e){}return false}
 function markWelcomePushSent(subId){if(!subId)return;try{localStorage.setItem(welcomePushStorageKey(subId),"1");localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1")}catch(e){}}
+function clearWelcomePushRetries(){if(welcomePushRetryTimer){clearTimeout(welcomePushRetryTimer);welcomePushRetryTimer=null}}
+function scheduleWelcomePushRetries(OS){
+  try{
+    const state=readOneSignalPushSubscriptionState(OS||window.OneSignal);
+    if(welcomePushAlreadySent(state.subscriptionId))return;
+    clearWelcomePushRetries();
+    let step=0;
+    const run=async()=>{
+      const os=OS||await waitForOneSignalReady(12000);
+      const current=readOneSignalPushSubscriptionState(os);
+      if(!current.optedIn||!current.subscriptionId){scheduleNext();return}
+      if(welcomePushAlreadySent(current.subscriptionId)){clearWelcomePushRetries();return}
+      const sent=await sendWelcomePushIfNeeded(os);
+      if(sent){clearWelcomePushRetries();return}
+      scheduleNext();
+    };
+    const scheduleNext=()=>{
+      if(step>=WELCOME_PUSH_RETRY_DELAYS_MS.length){clearWelcomePushRetries();return}
+      const delay=WELCOME_PUSH_RETRY_DELAYS_MS[step++];
+      welcomePushRetryTimer=setTimeout(run,delay);
+    };
+    run();
+  }catch(e){console.warn("Willkommens-Push Retry:",e)}
+}
 async function sendWelcomePushIfNeeded(OS){
   try{
     const resolved=await waitForPushSubscriptionReady(OS,{timeoutMs:20000,request:false});
@@ -17718,7 +17744,7 @@ async function sendWelcomePushIfNeeded(OS){
     welcomePushInFlight=true;
     const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscriptionId:subId})});
     const data=await r.json().catch(()=>({}));
-    if(r.ok&&data.sent&&data.delivered!==false){markWelcomePushSent(subId);return true}
+    if(r.ok&&data.sent&&data.delivered!==false){markWelcomePushSent(subId);clearWelcomePushRetries();return true}
     if(!r.ok||!data.sent)console.warn("Willkommens-Push nicht zugestellt:",data.reason||r.status);
   }catch(e){console.warn("Willkommens-Push:",e)}finally{welcomePushInFlight=false}
   return false;
@@ -17739,7 +17765,8 @@ async function syncPushRegistrationAndWelcome(OS){
   await ensurePostPushTags(os);
   await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
   const saved=await savePushRegistration(getPrayerSettings(),os);
-  await sendWelcomePushIfNeeded(os);
+  const welcomed=await sendWelcomePushIfNeeded(os);
+  if(!welcomed)scheduleWelcomePushRetries(os);
   return saved;
 }
 function renderPrayerPushHints(settings=getPrayerSettings()){

@@ -244,7 +244,7 @@ function buildPostPushAttempts(basePayload, subscriptionIds, { singleSubscriptio
   return attempts;
 }
 
-export async function sendNewPostPush(env, options = {}) {
+export async function sendBroadcastPush(env, basePayload, meta = {}) {
   const apiKey = oneSignalApiKey(env);
   if (!apiKey) {
     return {
@@ -256,11 +256,8 @@ export async function sendNewPostPush(env, options = {}) {
   }
 
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  if (!appId) {
-    return { sent: false, prepared: false, oneSignalCalled: false, reason: "OneSignal App-ID fehlt" };
-  }
-
-  const { payload: basePayload, pushData, targetUrl } = buildPostPushPayload(env, options);
+  const targetUrl = String(meta.targetUrl || basePayload?.url || "").trim();
+  const pushData = meta.pushData || basePayload?.data || null;
   const subscriptionIds = await loadPostPushSubscriptionIds(env);
   const attempts = buildPostPushAttempts(basePayload, subscriptionIds);
   const attemptLog = [];
@@ -327,6 +324,26 @@ export async function sendNewPostPush(env, options = {}) {
     attempts: attemptLog,
     oneSignal: attemptLog.length ? { httpStatus: attemptLog[attemptLog.length - 1].httpStatus, recipients: 0 } : null
   };
+}
+
+export async function sendNewPostPush(env, options = {}) {
+  const apiKey = oneSignalApiKey(env);
+  if (!apiKey) {
+    return {
+      sent: false,
+      prepared: false,
+      oneSignalCalled: false,
+      reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)"
+    };
+  }
+
+  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
+  if (!appId) {
+    return { sent: false, prepared: false, oneSignalCalled: false, reason: "OneSignal App-ID fehlt" };
+  }
+
+  const { payload: basePayload, pushData, targetUrl } = buildPostPushPayload(env, options);
+  return sendBroadcastPush(env, basePayload, { targetUrl, pushData });
 }
 
 export async function sendPostPushTest(env, input = {}) {
