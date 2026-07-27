@@ -152,7 +152,7 @@ export default {
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
           jummahPushCron: "*/5 * * * *",
-          libraryApi: "v1",
+          libraryApi: "v2-skip-push",
           scheduler: "ready"
         }, cors);
       }
