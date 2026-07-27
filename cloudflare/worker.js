@@ -2791,13 +2791,19 @@ async function retryPendingLibraryPush(env, input, ctx) {
     catalogPath: existing?.catalogPath || "data/library-publications.json",
     publishedAt: existing?.publishedAt || publishedAt,
     status: "pending",
+    pushApproved: false,
+    pushApprovedAt: existing?.pushApprovedAt || null
+  };
+  await writePendingPushStatus(env, key, record);
+  const approvedRecord = {
+    ...record,
     pushApproved: true,
     pushApprovedAt: new Date().toISOString()
   };
-  await writePendingPushStatus(env, key, record);
-  const push = await processPendingLibraryPushUntilLive(env, record);
+  await writePendingPushStatus(env, key, approvedRecord);
+  const push = await processPendingLibraryPushUntilLive(env, approvedRecord);
   if (ctx && push?.pending) {
-    ctx.waitUntil(processPendingLibraryPushUntilLive(env, record, { extendedWait: true }));
+    ctx.waitUntil(processPendingLibraryPushUntilLive(env, approvedRecord, { extendedWait: true }));
   }
   return {
     ok: true,
