@@ -788,7 +788,7 @@
     }
     if (!pdfFile && !draft.pdfUrl) throw new Error("PDF fehlt");
     if (publishTarget === "live") {
-      const ok = confirm("In der Besucher-App (Live) veröffentlichen?\n\nDie PDF wird für Besucher sichtbar — ohne Push-Benachrichtigung.\n\nPush separat über „Live Push senden“.");
+      const ok = confirm("In der Besucher-App (Live) veröffentlichen?\n\nDie PDF wird für Besucher sichtbar. Der Live Push startet danach automatisch (ca. 1 Min. bis Zustellung).");
       if (!ok) throw new Error("Veröffentlichung abgebrochen");
     }
     busy = true;
@@ -827,6 +827,15 @@
       editingPublicationId = "";
       pdfReplaceVersion = "";
       await ensureLibraryLoaded(true);
+      if (publishTarget === "live" && successPublicationId) {
+        retryLibraryLivePush({
+          skipConfirm: true,
+          publicationId: successPublicationId,
+          slug: successSlug,
+          publicationTitle: draft.title,
+          pdfUrl: successPdfUrl
+        }).catch((err) => console.warn("Auto Live Push:", err));
+      }
       return res;
     } finally {
       busy = false;

@@ -2,6 +2,8 @@
  * DAR AL TAWḤĪD Bibliothek — Besucher-Push bei Live-PDF-Veröffentlichung
  */
 
+import { broadcastPushAttemptSucceeded } from "./onesignal-delivery.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
@@ -13,7 +15,7 @@ const LIBRARY_LIVE_CHECK_SCHEDULE_MS = [
   0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 75000, 90000,
   105000, 120000, 150000, 180000, 240000, 300000, 360000, 420000, 480000
 ];
-const LIBRARY_LIVE_CHECK_QUICK_MS = [0, 5000, 10000, 15000, 20000];
+const LIBRARY_LIVE_CHECK_QUICK_MS = [0, 3000, 6000, 10000];
 /** Push 15 s nach Live-Bestätigung (Ziel: 10–20 s). */
 export const LIBRARY_PUSH_DELAY_AFTER_LIVE_MS = 15000;
 
@@ -206,6 +208,12 @@ export async function verifyLibraryLiveAvailability(env, record) {
 }
 
 export async function verifyLibraryLiveAvailabilityWithRetry(env, record, options = {}) {
+  if (options.singleCheck) {
+    const result = await verifyLibraryLiveAvailability(env, record);
+    result.attempt = 1;
+    return result;
+  }
+
   const schedule = options.schedule === "quick" ? LIBRARY_LIVE_CHECK_QUICK_MS : LIBRARY_LIVE_CHECK_SCHEDULE_MS;
   const delays = Array.isArray(options.delays) && options.delays.length ? options.delays : schedule;
   let lastResult = null;
@@ -282,21 +290,25 @@ export async function sendLibraryPublicationPush(env, record) {
         });
         const text = await res.text();
         if (res.ok) {
-          const accepted = parseOneSignalAcceptedRecipients(text);
-          if (accepted !== null && accepted <= 0) {
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+          let parsed = {};
+          try {
+            parsed = text ? JSON.parse(text) : {};
+          } catch (error) {}
+          if (!broadcastPushAttemptSucceeded(parsed, payload)) {
+            const targetLabel = payload.include_subscription_ids?.length
+              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+              : (payload.included_segments?.[0] || "tag-filter");
+            lastError = `OneSignal 200: keine Empfänger im Ziel ${targetLabel}`;
             attemptLog.push({
-              target: payload.include_subscription_ids?.length
-                ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-                : (payload.included_segments?.[0] || "tag-filter"),
+              target: targetLabel,
               httpStatus: res.status,
               authMode,
               sent: false,
-              recipients: accepted,
               reason: lastError
             });
             continue;
           }
+          const accepted = parseOneSignalAcceptedRecipients(parsed);
           return {
             sent: true,
             target: payload.include_subscription_ids?.length
