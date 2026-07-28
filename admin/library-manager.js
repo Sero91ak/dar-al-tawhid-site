@@ -827,11 +827,20 @@
       successPdfUrl = draft.pdfUrl || "";
       lastLivePush = res?.push || null;
       pushStatusText = publishTarget === "live"
-        ? (res?.push?.queued ? "Push wird automatisch gesendet (ca. 1 Min.)" : "")
+        ? (res?.push?.queued ? "Push wird automatisch gesendet — autonome Reparatur aktiv." : "")
         : "";
       editingPublicationId = "";
       pdfReplaceVersion = "";
       await ensureLibraryLoaded(true);
+      if (publishTarget === "live" && (res?.push?.queued || successPublicationId)) {
+        scheduleAutonomousLibraryLivePushRepair({
+          publicationId: successPublicationId || draft.id || "",
+          slug: successSlug || draft.slug || "",
+          publicationTitle: draft.title || "",
+          pdfUrl: successPdfUrl || draft.pdfUrl || "",
+          publishedAt: draft.updatedAt || draft.publishedAt || ""
+        });
+      }
       return res;
     } finally {
       busy = false;
@@ -1045,6 +1054,15 @@
       });
       toast(res?.push?.queued ? "Live + Push gestartet" : "Besucher-App wird aktualisiert");
       await ensureLibraryLoaded(true);
+      if (res?.push?.queued || pub?.id) {
+        scheduleAutonomousLibraryLivePushRepair({
+          publicationId: String(pub.id || id || "").trim(),
+          slug: String(pub.slug || "").trim(),
+          publicationTitle: String(pub.title || "").trim(),
+          pdfUrl: String(pub.pdfUrl || "").trim(),
+          publishedAt: String(pub.updatedAt || pub.publishedAt || "").trim()
+        });
+      }
     } finally {
       busy = false;
       safeRender();
@@ -1061,6 +1079,59 @@
       pdfUrl: String(pub.pdfUrl || "").trim(),
       publishedAt: String(pub.updatedAt || pub.publishedAt || "").trim()
     };
+  }
+
+  function scheduleAutonomousLibraryLivePushRepair(payload = {}) {
+    const publicationId = String(payload.publicationId || "").trim();
+    if (!publicationId || window.__darLibAutoRepairBusy === publicationId) return;
+    window.__darLibAutoRepairBusy = publicationId;
+    const delayMs = 3000;
+    const maxRounds = 4;
+    pushStatusText = "Autonome Prüfung in 3 Sekunden…";
+    safeRender();
+    const runRound = async (round) => {
+      try {
+        pushStatusText = round === 1
+          ? "Autonome Live-Prüfung läuft…"
+          : `Autonome Reparatur ${round}/${maxRounds}…`;
+        safeRender();
+        const result = await retryLibraryLivePush({
+          ...payload,
+          publicationId,
+          skipConfirm: true,
+          maxAttempts: round === 1 ? 6 : 8,
+          forceResend: false
+        });
+        const sent = result?.push?.sent === true || result?.push?.skipped === true;
+        if (sent) {
+          pushStatusText = "Push gesendet.";
+          lastLivePush = result?.push || result || lastLivePush;
+          safeRender();
+          window.__darLibAutoRepairBusy = "";
+          return;
+        }
+        if (round < maxRounds) {
+          pushStatusText = `Noch nicht live — automatische Reparatur in 3s (${round}/${maxRounds})…`;
+          safeRender();
+          setTimeout(() => { runRound(round + 1).catch(() => {}); }, delayMs);
+          return;
+        }
+        pushStatusText = "Automatische Reparatur: Push wartet weiter auf Live. Bitte „Push erneut senden“ prüfen.";
+        safeRender();
+        window.__darLibAutoRepairBusy = "";
+      } catch (error) {
+        if (round < maxRounds) {
+          pushStatusText = `Fehler — autonome Reparatur in 3s (${round}/${maxRounds}): ${error?.message || error}`;
+          safeRender();
+          setTimeout(() => { runRound(round + 1).catch(() => {}); }, delayMs);
+          return;
+        }
+        pushStatusText = error?.message || "Autonome Push-Reparatur fehlgeschlagen";
+        safeRender();
+        window.__darLibAutoRepairBusy = "";
+      }
+    };
+    setTimeout(() => { runRound(1).catch(() => {}); }, delayMs);
   }
 
   async function retryLibraryLivePush(options = {}) {
