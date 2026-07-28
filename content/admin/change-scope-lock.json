@@ -1656,6 +1656,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-quickaccess-compact-v493-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Schnellzugriff kompakt mit Emojis, ohne Vollbild-Blur, nur Chip-Glow beim Antippen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
     }
   ]
 }
