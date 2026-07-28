@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v493";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v494";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8964,23 +8964,29 @@ body.is-area-route .float-actions{display:none!important}
 /* MEHR_LONGPRESS_QUICKACCESS_CSS */
 
 .float-actions,.float-touch-handle,.float-actions-panel,.float-item,.float-btn,.float-tip{display:none!important}
-.quick-access-layer{position:fixed;inset:0;pointer-events:none;z-index:41}
+.quick-access-layer{position:fixed;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
 .quick-access-layer[hidden]{display:none!important}
-.quick-access-scrim{position:absolute;inset:0;background:transparent;border:0;padding:0;margin:0;pointer-events:auto;-webkit-backdrop-filter:none;backdrop-filter:none}
-.quick-access-menu{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + 10px);display:flex;align-items:center;gap:8px;width:auto;max-width:none;padding:5px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 92%,var(--panel,rgba(255,255,255,.08)) 8%);box-shadow:0 8px 22px color-mix(in srgb,var(--text) 12%,transparent);overflow:visible;pointer-events:auto;transform-origin:calc(100% - 22px) calc(100% + 14px);opacity:0;transform:translateY(8px) scale(.96);transition:opacity .18s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1);-webkit-backdrop-filter:none;backdrop-filter:none}
-.quick-access-layer.is-open .quick-access-menu{opacity:1;transform:translateY(0) scale(1)}
-.quick-access-chip{appearance:none;-webkit-appearance:none;position:relative;display:grid;place-items:center;width:42px;height:42px;min-width:42px;padding:0;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 88%,var(--panel,rgba(255,255,255,.1)) 12%);color:var(--text);font:inherit;line-height:1;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease}
-.quick-access-chip:hover,.quick-access-chip:focus-visible{border-color:color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));box-shadow:0 0 0 2px color-mix(in srgb,var(--gold2,var(--gold)) 24%,transparent),0 4px 14px color-mix(in srgb,var(--gold2,var(--gold)) 16%,transparent)}
-.quick-access-chip:active{transform:scale(.96);border-color:var(--gold2,var(--gold));box-shadow:0 0 0 2px color-mix(in srgb,var(--gold2,var(--gold)) 34%,transparent),0 6px 16px color-mix(in srgb,var(--gold2,var(--gold)) 22%,transparent);background:color-mix(in srgb,var(--gold2,var(--gold)) 10%,var(--bg) 90%)}
+.quick-access-scrim{display:none!important}
+.quick-access-menu{display:none;flex-direction:column;align-items:flex-end;gap:8px}
+.quick-access-layer.is-open .quick-access-menu{display:flex}
+.quick-access-layer.is-hint-only .quick-access-menu{display:none!important}
+.quick-access-layer.is-open .quick-access-menu .quick-access-chip{animation:quickAccessChipIn .18s cubic-bezier(.22,1,.36,1) both}
+.quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(1){animation-delay:0ms}
+.quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(2){animation-delay:35ms}
+.quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(3){animation-delay:70ms}
+@keyframes quickAccessChipIn{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+.quick-access-chip{appearance:none;-webkit-appearance:none;position:relative;display:grid;place-items:center;width:46px;height:46px;min-width:46px;padding:0;border:2px solid color-mix(in srgb,var(--gold2,var(--gold)) 38%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--bg) 96%,#000 4%);color:var(--text);font:inherit;line-height:1;cursor:pointer;pointer-events:auto;box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold)) 18%,transparent),0 6px 18px color-mix(in srgb,#000 28%,transparent);transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease}
+.quick-access-chip.is-lit,.quick-access-chip:hover,.quick-access-chip:focus-visible{border-color:var(--gold2,var(--gold));box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2,var(--gold)) 34%,transparent),0 0 18px color-mix(in srgb,var(--gold2,var(--gold)) 42%,transparent),0 8px 22px color-mix(in srgb,#000 34%,transparent);background:color-mix(in srgb,var(--gold2,var(--gold)) 12%,var(--bg) 88%)}
+.quick-access-chip:active{transform:scale(.94)}
 .quick-access-chip:focus-visible{outline:none}
-.quick-access-emoji{font-size:19px;line-height:1;pointer-events:none}
-.quick-access-chip-badge{position:absolute;top:-3px;right:-3px;display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;padding:0 3px;border-radius:999px;background:var(--gold2,var(--gold));color:var(--bg);font-size:9px;font-weight:900;line-height:1;box-shadow:0 0 0 1px color-mix(in srgb,var(--bg) 88%,#000 12%)}
-.quick-access-chip-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:999px;background:var(--gold2,var(--gold));box-shadow:0 0 0 1px color-mix(in srgb,var(--bg) 88%,#000 12%),0 0 8px color-mix(in srgb,var(--gold2,var(--gold)) 55%,transparent)}
-.quick-access-hint{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + 14px);max-width:min(210px,calc(100vw - 24px));padding:8px 11px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--bg) 92%,var(--panel,rgba(255,255,255,.08)) 8%);color:var(--text);font-size:11px;font-weight:700;line-height:1.3;box-shadow:0 6px 16px color-mix(in srgb,var(--text) 10%,transparent);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .18s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1);-webkit-backdrop-filter:none;backdrop-filter:none}
+.quick-access-emoji{font-size:22px;line-height:1;pointer-events:none;display:block}
+.quick-access-chip-badge{position:absolute;top:-4px;right:-4px;display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--gold2,var(--gold));color:var(--bg);font-size:9px;font-weight:900;line-height:1;box-shadow:0 0 0 2px color-mix(in srgb,var(--bg) 92%,#000 8%)}
+.quick-access-chip-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:999px;background:var(--gold2,var(--gold));box-shadow:0 0 0 2px color-mix(in srgb,var(--bg) 92%,#000 8%),0 0 10px color-mix(in srgb,var(--gold2,var(--gold)) 65%,transparent)}
+.quick-access-hint{position:relative;max-width:min(200px,calc(100vw - 24px));padding:7px 10px;border:1px solid color-mix(in srgb,var(--gold2,var(--gold)) 28%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--bg) 96%,#000 4%);color:var(--text);font-size:11px;font-weight:700;line-height:1.3;box-shadow:0 4px 14px color-mix(in srgb,#000 24%,transparent);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .18s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1);-webkit-backdrop-filter:none;backdrop-filter:none}
 .quick-access-hint.is-visible{opacity:1;transform:translateY(0)}
-@media (prefers-reduced-motion:reduce){.quick-access-menu,.quick-access-hint,.quick-access-chip{transition:none!important}}
+@media (prefers-reduced-motion:reduce){.quick-access-menu .quick-access-chip{animation:none!important;opacity:1!important;transform:none!important}}
 .more-quick-access{margin:0 0 12px;padding:0;border:0;background:transparent;overflow:visible}
-.more-quick-access__list{display:flex;align-items:center;gap:10px}
+.more-quick-access__list{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .more-quick-access__chip{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 88%,var(--panel,rgba(255,255,255,.06)) 12%);font-size:20px;line-height:1;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
 .more-quick-access__chip:hover,.more-quick-access__chip:active{border-color:color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));box-shadow:0 0 0 2px color-mix(in srgb,var(--gold2,var(--gold)) 24%,transparent),0 4px 14px color-mix(in srgb,var(--gold2,var(--gold)) 16%,transparent)}
 .bottom-nav-btn[data-bottom-nav="more"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -15350,11 +15356,10 @@ html[data-theme] #bottomNav.bottom-nav{
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
 <div id="quickAccessLayer" class="quick-access-layer" hidden>
-  <button type="button" id="quickAccessScrim" class="quick-access-scrim" aria-label="Schnellzugriff schließen"></button>
-  <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten für Schnellzugriff</div>
-  <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" hidden>
+  <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten</div>
+  <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff">
     <button id="quickAccessOrientBtn" class="quick-access-chip" type="button" role="menuitem" aria-label="Orientierung" title="Orientierung"><span class="quick-access-emoji" aria-hidden="true">🧭</span></button>
-    <button id="quickAccessSavedBtn" class="quick-access-chip" type="button" role="menuitem" aria-label="Merkliste" title="Merkliste"><span class="quick-access-emoji" aria-hidden="true">🔖</span><span id="quickAccessSavedBadge" class="quick-access-chip-badge" hidden>0</span></button>
+    <button id="quickAccessSavedBtn" class="quick-access-chip" type="button" role="menuitem" aria-label="Merkliste" title="Merkliste"><span class="quick-access-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-access-chip-badge" hidden>0</span></button>
     <button id="quickAccessRemindBtn" class="quick-access-chip" type="button" role="menuitem" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-access-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-access-chip-dot" hidden></span></button>
   </div>
 </div>
@@ -19864,7 +19869,7 @@ function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)retur
 
 
 function renderMoreQuickAccessSection(){
-  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">🔖</span></button><button type="button" class="more-quick-access__chip" data-more-quick="remind" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button></div></section>`;
+  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="remind" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button></div></section>`;
 }
 
 function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
@@ -20463,7 +20468,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v493";
+const APP_BUILD_ID="app-shell-v494";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21168,44 +21173,47 @@ let longPressTriggered=false;
 let quickMenuAnchorRect=null;
 function closeQuickAccessMenu({restoreFocus=false,hideHint=false}={}){
   const layer=$("quickAccessLayer");
-  const menu=$("quickAccessMenu");
   const hint=$("quickAccessHint");
   const moreBtn=document.querySelector('[data-bottom-nav="more"]');
   if(hideHint&&hint){hint.hidden=true;hint.classList.remove("is-visible")}
-  if(layer)layer.classList.remove("is-open");
-  if(menu)menu.hidden=true;
+  if(layer){layer.classList.remove("is-open","is-hint-only")}
+  document.querySelectorAll(".quick-access-chip.is-lit").forEach(el=>el.classList.remove("is-lit"));
   isQuickMenuOpen=false;quickMenuAnchorRect=null;
-  if(layer&&menu&&hint&&menu.hidden&&hint.hidden)layer.hidden=true;
+  if(layer){const hintHidden=!hint||hint.hidden;if(hintHidden)layer.hidden=true}
   if(restoreFocus&&moreBtn&&typeof moreBtn.focus==="function"){try{moreBtn.focus({preventScroll:true})}catch(e){try{moreBtn.focus()}catch(_){}}}
 }
 function positionQuickAccessUi(anchorRect){
-  const menu=$("quickAccessMenu");const hint=$("quickAccessHint");if(!anchorRect)return;
-  const menuRight=Math.max(12,window.innerWidth-anchorRect.right);
+  const layer=$("quickAccessLayer");if(!anchorRect||!layer)return;
+  const chipSize=46;
   const keyboardLift=window.visualViewport?Math.max(0,window.innerHeight-window.visualViewport.height):0;
-  const bottomGap=10+keyboardLift;
-  if(menu){menu.style.right=`${menuRight}px`;menu.style.bottom=`calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + ${bottomGap}px)`}
-  if(hint){hint.style.right=`${menuRight}px`;hint.style.bottom=`calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + ${bottomGap+4}px)`}
+  const centerX=anchorRect.left+anchorRect.width/2;
+  const right=Math.max(10,Math.round(window.innerWidth-centerX-chipSize/2));
+  const bottom=Math.max(10,Math.round(window.innerHeight-anchorRect.top+10+keyboardLift));
+  layer.style.right=`${right}px`;
+  layer.style.left="auto";
+  layer.style.bottom=`${bottom}px`;
+  layer.style.top="auto";
 }
 function openQuickAccessMenu(anchorBtn){
-  const layer=$("quickAccessLayer");const menu=$("quickAccessMenu");const hint=$("quickAccessHint");
-  if(!layer||!menu||!anchorBtn)return;
+  const layer=$("quickAccessLayer");const hint=$("quickAccessHint");
+  if(!layer||!anchorBtn)return;
   quickMenuAnchorRect=anchorBtn.getBoundingClientRect();positionQuickAccessUi(quickMenuAnchorRect);
-  layer.hidden=false;menu.hidden=false;layer.classList.add("is-open");isQuickMenuOpen=true;
+  layer.hidden=false;layer.classList.remove("is-hint-only");layer.classList.add("is-open");isQuickMenuOpen=true;
   if(hint){hint.hidden=true;hint.classList.remove("is-visible")}
   try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"1")}catch(e){}
   try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}
   updateQuickAccessIndicators();
 }
 function showQuickAccessHint(anchorBtn){
-  const layer=$("quickAccessLayer");const hint=$("quickAccessHint");const menu=$("quickAccessMenu");
+  const layer=$("quickAccessLayer");const hint=$("quickAccessHint");
   if(!layer||!hint||!anchorBtn||isQuickMenuOpen)return;
   let seen=false;try{seen=localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="1"}catch(e){}
   if(seen)return;
   quickMenuAnchorRect=anchorBtn.getBoundingClientRect();positionQuickAccessUi(quickMenuAnchorRect);
-  layer.hidden=false;if(menu)menu.hidden=true;hint.hidden=false;
+  layer.hidden=false;layer.classList.remove("is-open");layer.classList.add("is-hint-only");hint.hidden=false;
   requestAnimationFrame(()=>hint.classList.add("is-visible"));
   clearTimeout(window.__quickAccessHintTimer);
-  window.__quickAccessHintTimer=setTimeout(()=>{hint.classList.remove("is-visible");setTimeout(()=>{hint.hidden=true;if(!isQuickMenuOpen)layer.hidden=true},160)},5000);
+  window.__quickAccessHintTimer=setTimeout(()=>{hint.classList.remove("is-visible");setTimeout(()=>{hint.hidden=true;layer.classList.remove("is-hint-only");if(!isQuickMenuOpen)layer.hidden=true},160)},5000);
   try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"1")}catch(e){}
 }
 function updateQuickAccessIndicators(){
@@ -21238,10 +21246,10 @@ function bindMoreQuickAccessPageButtons(){
 }
 function initQuickAccessMenu(){
   if(window.__darQuickAccessMenuBound)return;window.__darQuickAccessMenuBound=true;
-  const layer=$("quickAccessLayer");const scrim=$("quickAccessScrim");const menu=$("quickAccessMenu");
+  const layer=$("quickAccessLayer");const menu=$("quickAccessMenu");
   const moreBtn=document.querySelector('[data-bottom-nav="more"]');
-  if(!layer||!scrim||!menu||!moreBtn)return;
-  scrim.addEventListener("click",()=>closeQuickAccessMenu({restoreFocus:true}));
+  if(!layer||!menu||!moreBtn)return;
+  document.addEventListener("pointerdown",e=>{if(!isQuickMenuOpen)return;if(e.target?.closest?.("#quickAccessMenu,[data-bottom-nav='more']"))return;closeQuickAccessMenu()},{capture:true});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isQuickMenuOpen){e.preventDefault();closeQuickAccessMenu({restoreFocus:true})}});
   document.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true});
   document.addEventListener("focusin",e=>{if(e.target?.closest?.("input,textarea,[contenteditable='true']"))closeQuickAccessMenu()});
@@ -21250,6 +21258,12 @@ function initQuickAccessMenu(){
   window.addEventListener("pagehide",()=>closeQuickAccessMenu(),{passive:true});
   window.addEventListener("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect())},{passive:true});
   window.visualViewport?.addEventListener?.("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());else closeQuickAccessMenu()},{passive:true});
+  menu.querySelectorAll(".quick-access-chip").forEach(chip=>{
+    const litOn=()=>chip.classList.add("is-lit");
+    const litOff=()=>chip.classList.remove("is-lit");
+    chip.addEventListener("pointerdown",litOn,{passive:true});
+    ["pointerup","pointercancel","pointerleave"].forEach(type=>chip.addEventListener(type,litOff,{passive:true}));
+  });
   const orientBtn=$("quickAccessOrientBtn");if(orientBtn)orientBtn.onclick=()=>{closeQuickAccessMenu();openQiblaFromFloat()};
   const savedBtn=$("quickAccessSavedBtn");if(savedBtn)savedBtn.onclick=()=>{closeQuickAccessMenu();navigate("saved")};
   const remindBtn=$("quickAccessRemindBtn");if(remindBtn)remindBtn.onclick=()=>{closeQuickAccessMenu();navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)};
