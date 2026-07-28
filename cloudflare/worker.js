@@ -1,4 +1,4 @@
-/* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
+/* PUSH_SYSTEM_GUARD:v491  Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js). */
 import {
   parsePostForTelegram,
