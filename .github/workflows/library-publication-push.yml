@@ -1,0 +1,47 @@
+name: Send Bibliothek PDF publication push
+
+on:
+  workflow_dispatch:
+    inputs:
+      publication_id:
+        description: "Publication ID (z. B. pub-20260728-001)"
+        required: false
+        default: "pub-20260728-001"
+      slug:
+        description: "Slug"
+        required: false
+        default: "die-pflichten-der-eltern-gegenuber-ihren-kindern"
+      title:
+        description: "Push-Text (Titel)"
+        required: false
+        default: "Die Pflichten der Eltern gegenüber ihren Kindern"
+
+jobs:
+  notify:
+    name: Broadcast Bibliothek-PDF an Besucher
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SITE_URL: "https://dar-al-tawhid.de"
+      ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send Bibliothek PDF push
+        env:
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          LIBRARY_PUBLICATION_ID: ${{ github.event.inputs.publication_id }}
+          LIBRARY_PUBLICATION_SLUG: ${{ github.event.inputs.slug }}
+          LIBRARY_PUBLICATION_TITLE: ${{ github.event.inputs.title }}
+        run: node scripts/send-library-publication-push.js
