@@ -88,6 +88,7 @@ import {
   sendLibraryPublicationPush,
   LIBRARY_PUSH_DELAY_AFTER_LIVE_MS
 } from "./library-push-admin.js";
+import { sendNewPostPush, sendBroadcastPush } from "./post-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -426,9 +427,24 @@ export default {
             ctx.waitUntil(triggerSiteDeployWorkflow(env, `library-live:${result.publication?.id || "save"}`));
           }
           if (result.published && result.target === "live") {
+            let push = { queued: false, reason: "Push nicht angefordert" };
+            const wantsPush = input.queuePush === true;
+            const publication = result.publication || input.publication;
+            if (wantsPush && publication?.id) {
+              const key = libraryPushRegistryKey(publication.id);
+              const pendingRecord = buildLibraryPushPendingRecord(publication);
+              await writePendingPushStatus(env, key, pendingRecord);
+              push = {
+                queued: true,
+                pending: true,
+                publicationId: publication.id,
+                reason: "Besucher-Push wird automatisch gesendet."
+              };
+              ctx.waitUntil(processPendingLibraryPushUntilLive(env, pendingRecord, { extendedWait: true }));
+            }
             return json({
               ...result,
-              push: { sent: false, skipped: true, reason: "Veröffentlicht ohne Push — Live Push separat im Admin" },
+              push,
               deploy: { triggered: input.triggerDeploy !== false }
             }, cors);
           }
@@ -2441,18 +2457,6 @@ function oneSignalApiKey(env) {
     .trim();
 }
 
-function parseOneSignalAcceptedRecipients(raw) {
-  try {
-    const data = typeof raw === "string" ? JSON.parse(raw) : raw;
-    const candidates = [data?.recipients, data?.total_count, data?.successful];
-    for (const value of candidates) {
-      const count = Number(value);
-      if (Number.isFinite(count)) return count;
-    }
-  } catch (error) {}
-  return null;
-}
-
 function buildPostPushUrl(env, postId, cacheVersion) {
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const slug = String(postId || "").trim();
@@ -2725,7 +2729,8 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   }
 
   const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
-    schedule: options.extendedWait ? "full" : "quick"
+    schedule: options.extendedWait ? "full" : "quick",
+    singleCheck: Boolean(options.singleCheck)
   });
   await writePendingPushStatus(env, key, {
     lastCheckAt: new Date().toISOString(),
@@ -2801,7 +2806,7 @@ async function retryPendingLibraryPush(env, input, ctx) {
     pushApprovedAt: new Date().toISOString()
   };
   await writePendingPushStatus(env, key, approvedRecord);
-  const push = await processPendingLibraryPushUntilLive(env, approvedRecord);
+  const push = await processPendingLibraryPushUntilLive(env, approvedRecord, { singleCheck: true });
   if (ctx && push?.pending) {
     ctx.waitUntil(processPendingLibraryPushUntilLive(env, approvedRecord, { extendedWait: true }));
   }
@@ -2857,100 +2862,6 @@ async function retryPendingPostPush(env, input, ctx) {
     push
   };
 }
-async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion }) {
-  const apiKey = oneSignalApiKey(env);
-  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  if (!apiKey) {
-    return { sent: false, reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)" };
-  }
-
-  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
-  const title = "Neuer Beitrag online";
-  const message = String(postTitle || "Neuer Beitrag").trim();
-  const slug = String(postId || "").trim();
-  const version = cacheVersion || Date.now();
-  const url = slug ? buildPostPushUrl(env, slug, version) : `${site}/#recent`;
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
-  const pushData = {
-    type: "post",
-    postId: slug,
-    slug,
-    filename: String(filename || "").trim(),
-    url,
-    publishedAt: publishedAt || new Date().toISOString(),
-    cacheVersion: String(version)
-  };
-
-  const basePayload = {
-    app_id: appId,
-    target_channel: "push",
-    headings: { en: title, de: title },
-    contents: { en: message, de: message },
-    url,
-    data: pushData,
-    chrome_web_icon: icon,
-    chrome_web_badge: badge,
-    firefox_icon: icon,
-    name: `admin-publish-${Date.now()}`
-  };
-
-  const attempts = [
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
-  ];
-
-  let lastError = "Unbekannter Fehler";
-
-  for (const payload of attempts) {
-    for (const authMode of ["Key", "Basic"]) {
-      try {
-        const res = await fetch("https://api.onesignal.com/notifications", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            Authorization: `${authMode} ${apiKey}`
-          },
-          body: JSON.stringify(payload)
-        });
-        const text = await res.text();
-        if (res.ok) {
-          const accepted = parseOneSignalAcceptedRecipients(text);
-          if (accepted !== null && accepted <= 0) {
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
-            continue;
-          }
-          return {
-            sent: true,
-            target: payload.included_segments?.[0] || "tag-filter",
-            authMode,
-            targetUrl: url,
-            data: pushData,
-            recipients: accepted,
-            response: text.slice(0, 400)
-          };
-        }
-        if (res.status === 400 || res.status === 401 || res.status === 403) {
-          lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
-          continue;
-        }
-        lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
-      } catch (error) {
-        lastError = error.message || String(error);
-      }
-    }
-  }
-
-  return { sent: false, reason: lastError };
-}
 
 function newsPushBody(text) {
   const raw = String(text || "").replace(/\s+/g, " ").trim();
@@ -2975,9 +2886,8 @@ function buildNewsPushUrl(env, { newsId, nav, value }) {
 }
 
 async function sendNewsPush(env, { newsId, title, text, nav, value }) {
-  const apiKey = oneSignalApiKey(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  if (!apiKey) {
+  if (!oneSignalApiKey(env)) {
     return { sent: false, reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)" };
   }
   if (!appId) {
@@ -3012,63 +2922,20 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
     name: `admin-news-${Date.now()}`
   };
 
-  const attempts = [
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
-  ];
-
-  let lastError = "Kein Empfänger gefunden";
-
-  for (const payload of attempts) {
-    for (const authMode of ["Key", "Basic"]) {
-      try {
-        const res = await fetch("https://api.onesignal.com/notifications", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            Authorization: `${authMode} ${apiKey}`
-          },
-          body: JSON.stringify(payload)
-        });
-        const textResp = await res.text();
-        if (res.ok) {
-          const accepted = parseOneSignalAcceptedRecipients(textResp);
-          if (accepted !== null && accepted <= 0) {
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
-            continue;
-          }
-          return {
-            sent: true,
-            target: payload.included_segments?.[0] || "tag-filter",
-            authMode,
-            targetUrl: url,
-            title: pushTitle,
-            message: pushMessage,
-            data: pushData,
-            recipients: accepted,
-            response: textResp.slice(0, 400)
-          };
-        }
-        if (res.status === 400 || res.status === 401 || res.status === 403) {
-          lastError = `OneSignal ${res.status} (${authMode}): ${textResp.slice(0, 240)}`;
-          continue;
-        }
-        lastError = `OneSignal ${res.status}: ${textResp.slice(0, 240)}`;
-      } catch (error) {
-        lastError = error.message || String(error);
-      }
-    }
-  }
-
-  return { sent: false, reason: lastError, title: pushTitle, message: pushMessage, targetUrl: url };
+  const result = await sendBroadcastPush(env, basePayload, { targetUrl: url, pushData });
+  return {
+    sent: result.sent,
+    reason: result.reason || "",
+    target: result.target || null,
+    authMode: result.authMode || null,
+    targetUrl: url,
+    title: pushTitle,
+    message: pushMessage,
+    data: pushData,
+    recipients: result.oneSignal?.recipients ?? null,
+    subscriptionCount: result.subscriptionCount ?? null,
+    response: result.oneSignal?.text || null
+  };
 }
 
 function telegramBotToken(env) {

@@ -48,3 +48,26 @@ export function evaluateOneSignalDelivery(parsed = {}) {
     reason: null
   };
 }
+
+function parseAcceptedRecipientCount(parsed = {}) {
+  const candidates = [parsed?.recipients, parsed?.total_count, parsed?.successful];
+  for (const value of candidates) {
+    const count = Number(value);
+    if (Number.isFinite(count)) return count;
+  }
+  return null;
+}
+
+/** True when a broadcast attempt (Supabase batch, segment, or tag filter) actually reached someone. */
+export function broadcastPushAttemptSucceeded(parsed, payload = {}) {
+  const delivery = evaluateOneSignalDelivery(parsed);
+  if (!delivery.delivered) return false;
+
+  const subscriptionIds = Array.isArray(payload.include_subscription_ids)
+    ? payload.include_subscription_ids.filter(Boolean)
+    : [];
+  if (subscriptionIds.length) return true;
+
+  const accepted = parseAcceptedRecipientCount(parsed);
+  return Number.isFinite(accepted) && accepted > 0;
+}
