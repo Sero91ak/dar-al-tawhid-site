@@ -1667,6 +1667,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-quickaccess-vertical-v495-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Emoji-Chips vertikal sichtbar, Gold-Ring beim Antippen, kein Vollbild-Blur",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
     }
   ]
 }
