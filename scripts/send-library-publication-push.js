@@ -94,10 +94,16 @@ async function sendWithFallbacks(basePayload, subscriptionIds) {
   if (!API_KEY) throw new Error("OneSignal API-Key fehlt");
 
   const attempts = [
-    ...chunk(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
+    ...subscriptionIds.slice(0, 40).map((id) => ({
       ...basePayload,
-      include_subscription_ids: ids
+      include_subscription_ids: [id]
     })),
+    ...(subscriptionIds.length > 40
+      ? chunk(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
+          ...basePayload,
+          include_subscription_ids: ids
+        }))
+      : []),
     { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
     {
@@ -111,6 +117,8 @@ async function sendWithFallbacks(basePayload, subscriptionIds) {
   ];
 
   let lastError = null;
+  let delivered = 0;
+  let lastOk = null;
   for (const payload of attempts) {
     try {
       const result = await postOneSignalNotification(payload, API_KEY, { retries: 2 });
@@ -120,7 +128,9 @@ async function sendWithFallbacks(basePayload, subscriptionIds) {
       } catch (error) {}
       const recipients = Number(parsed.recipients);
       const target = payload.include_subscription_ids
-        ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+        ? (payload.include_subscription_ids.length === 1
+          ? `subscription:${payload.include_subscription_ids[0]}`
+          : `supabase-subscriptions:${payload.include_subscription_ids.length}`)
         : payload.included_segments?.[0] || "tag-filter";
       if (!parsed.id) {
         lastError = new Error(`OneSignal ohne Notification-ID (${target}): ${result.text.slice(0, 240)}`);
@@ -132,13 +142,18 @@ async function sendWithFallbacks(basePayload, subscriptionIds) {
         console.warn(lastError.message);
         continue;
       }
+      delivered += 1;
+      lastOk = { result, target, parsed, delivered };
       console.log(`Bibliothek-PDF-Push gesendet (${target}, recipients=${Number.isFinite(recipients) ? recipients : "n/a"}):`, result.text.slice(0, 400));
-      return { result, target, parsed };
+      if (!(payload.include_subscription_ids?.length === 1 && subscriptionIds.length > 1)) {
+        return lastOk;
+      }
     } catch (err) {
       lastError = err;
       console.warn("Bibliothek-PDF-Push Versuch fehlgeschlagen:", err.message || err);
     }
   }
+  if (lastOk) return lastOk;
   throw lastError || new Error("Bibliothek-PDF-Push fehlgeschlagen");
 }
 
