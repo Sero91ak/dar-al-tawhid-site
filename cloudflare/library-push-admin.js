@@ -12,10 +12,13 @@ const LIVE_CATALOG_PATH = "data/library-publications.json";
 const ONESIGNAL_BATCH_SIZE = 2000;
 /** Bis ~8 Min. warten, früh häufig prüfen (Deploy dauert typ. 45–90 s). */
 const LIBRARY_LIVE_CHECK_SCHEDULE_MS = [
-  0, 5000, 10000, 15000, 20000, 30000, 45000, 60000, 75000, 90000,
+  0, 3000, 6000, 10000, 15000, 20000, 30000, 45000, 60000, 75000, 90000,
   105000, 120000, 150000, 180000, 240000, 300000, 360000, 420000, 480000
 ];
-const LIBRARY_LIVE_CHECK_QUICK_MS = [0, 3000, 6000, 10000];
+const LIBRARY_LIVE_CHECK_QUICK_MS = [0, 3000, 6000, 10000, 15000];
+/** Autonome Sofort-Reparatur nach fehlgeschlagener Live-Prüfung. */
+export const LIBRARY_PUSH_AUTOREPAIR_DELAY_MS = 3000;
+export const LIBRARY_PUSH_AUTOREPAIR_ROUNDS = 3;
 /** Push 15 s nach Live-Bestätigung (Ziel: 10–20 s). */
 export const LIBRARY_PUSH_DELAY_AFTER_LIVE_MS = 15000;
 

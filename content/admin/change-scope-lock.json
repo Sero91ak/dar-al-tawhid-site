@@ -7,7 +7,14 @@
   "alwaysAllowed": [
     "content/admin/change-scope-lock.json",
     "data/quiz-questions.json",
-    "data/quiz-questions-test.json"
+    "data/quiz-questions-test.json",
+    "data/library-publications.json",
+    "test/data/library-publications.json",
+    "assets/library/pdfs/",
+    "assets/library/covers/",
+    "test/assets/library/pdfs/",
+    "test/assets/library/covers/",
+    "content/admin/pending-pushes.json"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -1715,6 +1722,25 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-live-push-autorepair-v503-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Live-PDF fehlt in Besucher-App + kein Push — Scope-Lock blockierte Deploy; autonome 3s-Reparatur",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/pending-pushes.json",
+        "data/library-publications.json",
+        "test/data/library-publications.json",
+        "assets/library/pdfs/",
+        "assets/library/covers/",
+        "test/assets/library/pdfs/",
+        "test/assets/library/covers/",
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "cloudflare/library-push-admin.js"
+      ],
+      "expiresAt": "2026-08-15T23:59:00.000Z"
     }
   ]
 }

@@ -86,7 +86,9 @@ import {
   buildLibraryPushUrl,
   verifyLibraryLiveAvailabilityWithRetry,
   sendLibraryPublicationPush,
-  LIBRARY_PUSH_DELAY_AFTER_LIVE_MS
+  LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
+  LIBRARY_PUSH_AUTOREPAIR_DELAY_MS,
+  LIBRARY_PUSH_AUTOREPAIR_ROUNDS
 } from "./library-push-admin.js";
 import { sendNewPostPush, sendBroadcastPush } from "./post-push-admin.js";
 
@@ -136,7 +138,7 @@ export default {
           prayerScheduler: "cloudflare-worker-cron-v3",
           prayerCron: "*/5 * * * *",
           prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),
-          libraryApi: "v3-split-push",
+          libraryApi: "v4-auto-repair",
           libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
@@ -2730,6 +2732,11 @@ async function processAllPendingPushes(env) {
       const handler = record?.kind === "library"
         ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
         : () => processPendingPushUntilLive(env, record);
+      // Stecken gebliebene Live-Prüfung sofort erneut anstoßen
+      if (record?.kind === "library" && /Live-Prüfung läuft|Autonome Reparatur/i.test(String(record?.lastError || ""))) {
+        try { await triggerSiteDeployWorkflow(env, `library-stuck-repair:${record.publicationId || "pending"}`); } catch (e) {}
+        await sleep(3000);
+      }
       results.push(await handler());
     } catch (error) {
       const key = record?.kind === "library"
@@ -2776,19 +2783,67 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
       lastError: "Live-Prüfung läuft…"
     });
 
-    const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
-      schedule: options.extendedWait ? "full" : "quick",
+    const delayMs = Number(LIBRARY_PUSH_AUTOREPAIR_DELAY_MS) || 3000;
+    const rounds = Number(LIBRARY_PUSH_AUTOREPAIR_ROUNDS) || 3;
+
+    // 1) Sofort prüfen
+    let liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
+      schedule: "quick",
       singleCheck: Boolean(options.singleCheck)
     });
-    await writePendingPushStatus(env, key, {
-      lastCheckAt: new Date().toISOString(),
-      liveCheck,
-      attempts: liveCheck.attempt,
-      lastError: liveCheck.ok ? "" : liveCheck.diagnosis
-    });
+
+    // 2) Frühe autonome Reparatur: Deploy + 3s, dann erneut kurz prüfen
+    if (!liveCheck.ok && !options.skipAutoRepair && !options.singleCheck) {
+      for (let round = 1; round <= rounds && !liveCheck.ok; round++) {
+        await writePendingPushStatus(env, key, {
+          lastCheckAt: new Date().toISOString(),
+          lastError: `Autonome Reparatur ${round}/${rounds}: Deploy + erneute Prüfung in ${Math.round(delayMs / 1000)}s…`
+        });
+        try {
+          await triggerSiteDeployWorkflow(env, `library-autorepair:${current.publicationId || key}:r${round}`);
+        } catch (deployError) {}
+        await sleep(delayMs);
+        liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
+          schedule: "quick",
+          singleCheck: false
+        });
+        await writePendingPushStatus(env, key, {
+          lastCheckAt: new Date().toISOString(),
+          liveCheck,
+          attempts: Number(liveCheck.attempt || 0) + round,
+          lastError: liveCheck.ok ? "" : (liveCheck.diagnosis || "Live noch nicht erreichbar"),
+          autoRepairRound: round
+        });
+      }
+    }
+
+    // 3) Längere Live-Warteschleife (Deploy kann 45–90s dauern)
+    if (!liveCheck.ok && options.extendedWait && !options.singleCheck) {
+      await writePendingPushStatus(env, key, {
+        lastCheckAt: new Date().toISOString(),
+        lastError: "Warte auf Live-Deploy…"
+      });
+      liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
+        schedule: "full",
+        singleCheck: false
+      });
+      await writePendingPushStatus(env, key, {
+        lastCheckAt: new Date().toISOString(),
+        liveCheck,
+        attempts: liveCheck.attempt,
+        lastError: liveCheck.ok ? "" : liveCheck.diagnosis
+      });
+    } else if (!options.extendedWait || options.singleCheck) {
+      await writePendingPushStatus(env, key, {
+        lastCheckAt: new Date().toISOString(),
+        liveCheck,
+        attempts: liveCheck.attempt,
+        lastError: liveCheck.ok ? "" : liveCheck.diagnosis
+      });
+    }
 
     if (!liveCheck.ok) {
-      return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+      return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis, autoRepairTried: true };
     }
 
     if (LIBRARY_PUSH_DELAY_AFTER_LIVE_MS > 0) {
