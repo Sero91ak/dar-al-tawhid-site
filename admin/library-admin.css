@@ -2,7 +2,9 @@
 .lib-admin {
   display: grid;
   gap: 14px;
-  max-width: 960px;
+  max-width: min(1100px, 100%);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .lib-admin-layout {
