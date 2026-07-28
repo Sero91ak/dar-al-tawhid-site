@@ -1669,9 +1669,9 @@
       "expiresAt": "2026-07-29T23:59:00.000Z"
     },
     {
-      "id": "mehr-quickaccess-touch-fix-v496-2026-07-28",
+      "id": "mehr-quickaccess-mobile-v497-2026-07-28",
       "approvedBy": "user-explicit-order",
-      "reason": "Nutzer-Notfall: Mehr Long-Press und Emoji-Chips funktionieren nicht — Touch-Reparatur",
+      "reason": "Nutzer-Notfall: Mehr Long-Press und Emoji-Chips auf iOS/Android — Touch-Handler reparieren",
       "paths": [
         "test/index.html",
         "test/version.json",
