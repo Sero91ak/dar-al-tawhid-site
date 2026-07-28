@@ -14,7 +14,8 @@
     "assets/library/covers/",
     "test/assets/library/pdfs/",
     "test/assets/library/covers/",
-    "content/admin/pending-pushes.json"
+    "content/admin/pending-pushes.json",
+    "content/admin/push-triggers/"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -1741,6 +1742,17 @@
         "cloudflare/library-push-admin.js"
       ],
       "expiresAt": "2026-08-15T23:59:00.000Z"
+    },
+    {
+      "id": "library-push-002-forcesend-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Autonome Nachsendung Push für Live-PDF pub-20260728-002 nach Scope-Lock-Reparatur",
+      "paths": [
+        "content/admin/push-triggers/library-publication-live.json",
+        "content/admin/pending-pushes.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-30T23:59:00.000Z"
     }
   ]
 }
