@@ -71,7 +71,8 @@ async function loadLibraryPushSubscriptionIds(env) {
         headers: {
           apikey: key,
           Authorization: `Bearer ${key}`,
-          Accept: "application/json"
+          Accept: "application/json",
+          Prefer: "count=exact"
         }
       });
       const text = await res.text();
@@ -294,16 +295,18 @@ export async function sendLibraryPublicationPush(env, record) {
           try {
             parsed = text ? JSON.parse(text) : {};
           } catch (error) {}
+          const targetLabel = payload.include_subscription_ids?.length
+            ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
+            : (payload.included_segments?.[0] || "tag-filter");
           if (!broadcastPushAttemptSucceeded(parsed, payload)) {
-            const targetLabel = payload.include_subscription_ids?.length
-              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-              : (payload.included_segments?.[0] || "tag-filter");
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${targetLabel}`;
+            lastError = `OneSignal 200: keine Empfänger im Ziel ${targetLabel} (recipients=${parsed?.recipients ?? "n/a"})`;
             attemptLog.push({
               target: targetLabel,
               httpStatus: res.status,
               authMode,
               sent: false,
+              recipients: parsed?.recipients ?? null,
+              notificationId: parsed?.id || null,
               reason: lastError
             });
             continue;
@@ -311,9 +314,7 @@ export async function sendLibraryPublicationPush(env, record) {
           const accepted = parseOneSignalAcceptedRecipients(parsed);
           return {
             sent: true,
-            target: payload.include_subscription_ids?.length
-              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-              : (payload.included_segments?.[0] || "tag-filter"),
+            target: targetLabel,
             authMode,
             targetUrl: url,
             data: pushData,

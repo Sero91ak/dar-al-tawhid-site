@@ -69,5 +69,8 @@ export function broadcastPushAttemptSucceeded(parsed, payload = {}) {
   if (subscriptionIds.length) return true;
 
   const accepted = parseAcceptedRecipientCount(parsed);
-  return Number.isFinite(accepted) && accepted > 0;
+  // OneSignal liefert bei Segment-/Tag-Sends manchmal keine recipients-Zahl —
+  // fehlendes Feld darf einen gültigen Notification-ID-Send nicht verwerfen.
+  if (!Number.isFinite(accepted)) return true;
+  return accepted > 0;
 }

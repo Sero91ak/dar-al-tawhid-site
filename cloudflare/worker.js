@@ -2806,7 +2806,9 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
     } else {
       await writePendingPushStatus(env, key, {
         status: "failed",
-        lastError: push.reason || "OneSignal Push fehlgeschlagen"
+        lastError: push.reason || "OneSignal Push fehlgeschlagen",
+        pushAttempts: Array.isArray(push.attempts) ? push.attempts.slice(0, 12) : [],
+        subscriptionCount: Number(push.subscriptionCount || 0)
       });
     }
 
