@@ -92,8 +92,16 @@ async function loadLibraryPushSubscriptionIds(env) {
 
 function buildLibraryPushAttempts(basePayload, subscriptionIds) {
   const attempts = [];
-  for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
-    attempts.push({ ...basePayload, include_subscription_ids: ids });
+  const ids = uniqueValues(subscriptionIds);
+  // Kleine Listen einzeln (wie Gebets-/Tages-Push) – robuster bei ungültigen IDs
+  if (ids.length > 0 && ids.length <= 40) {
+    for (const id of ids) {
+      attempts.push({ ...basePayload, include_subscription_ids: [id] });
+    }
+  } else {
+    for (const batch of chunkValues(ids, ONESIGNAL_BATCH_SIZE)) {
+      attempts.push({ ...basePayload, include_subscription_ids: batch });
+    }
   }
   attempts.push(
     { ...basePayload, included_segments: ["DAR_PUSH"] },
@@ -276,8 +284,13 @@ export async function sendLibraryPublicationPush(env, record) {
   const subscriptionIds = await loadLibraryPushSubscriptionIds(env);
   const attempts = buildLibraryPushAttempts(basePayload, subscriptionIds);
 
-  let lastError = "Kein Empfänger gefunden – alle Zielgruppen lieferten 0 Empfänger oder Fehler";
+  let lastError = subscriptionIds.length
+    ? "Kein Empfänger gefunden – Abo-/Segment-Versuche ohne Zustellung"
+    : "Keine Supabase-Abos geladen – Segment-/Tag-Ziele ohne Empfänger";
   const attemptLog = [];
+  let deliveredCount = 0;
+  let lastSuccess = null;
+
   for (const payload of attempts) {
     for (const authMode of ["Key", "Basic"]) {
       try {
@@ -290,14 +303,16 @@ export async function sendLibraryPublicationPush(env, record) {
           body: JSON.stringify(payload)
         });
         const text = await res.text();
+        const targetLabel = payload.include_subscription_ids?.length
+          ? (payload.include_subscription_ids.length === 1
+            ? `subscription:${payload.include_subscription_ids[0]}`
+            : `supabase-subscriptions:${payload.include_subscription_ids.length}`)
+          : (payload.included_segments?.[0] || "tag-filter");
         if (res.ok) {
           let parsed = {};
           try {
             parsed = text ? JSON.parse(text) : {};
           } catch (error) {}
-          const targetLabel = payload.include_subscription_ids?.length
-            ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-            : (payload.included_segments?.[0] || "tag-filter");
           if (!broadcastPushAttemptSucceeded(parsed, payload)) {
             lastError = `OneSignal 200: keine Empfänger im Ziel ${targetLabel} (recipients=${parsed?.recipients ?? "n/a"})`;
             attemptLog.push({
@@ -312,7 +327,8 @@ export async function sendLibraryPublicationPush(env, record) {
             continue;
           }
           const accepted = parseOneSignalAcceptedRecipients(parsed);
-          return {
+          deliveredCount += 1;
+          lastSuccess = {
             sent: true,
             target: targetLabel,
             authMode,
@@ -321,15 +337,19 @@ export async function sendLibraryPublicationPush(env, record) {
             recipients: accepted,
             response: text.slice(0, 400),
             subscriptionCount: subscriptionIds.length,
+            deliveredCount,
             attempts: attemptLog
           };
+          // Einzel-Abos: weiter, damit möglichst viele Nutzer erreicht werden
+          if (!(payload.include_subscription_ids?.length === 1 && subscriptionIds.length > 1)) {
+            return lastSuccess;
+          }
+          break;
         }
-        if (res.status === 400 || res.status === 401 || res.status === 403) {
+        if (res.status === 401 || res.status === 403) {
           lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
           attemptLog.push({
-            target: payload.include_subscription_ids?.length
-              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-              : (payload.included_segments?.[0] || "tag-filter"),
+            target: targetLabel,
             httpStatus: res.status,
             authMode,
             sent: false,
@@ -337,16 +357,26 @@ export async function sendLibraryPublicationPush(env, record) {
           });
           continue;
         }
+        if (res.status === 400) {
+          lastError = `OneSignal 400 (${authMode}/${targetLabel}): ${text.slice(0, 240)}`;
+          attemptLog.push({
+            target: targetLabel,
+            httpStatus: res.status,
+            authMode,
+            sent: false,
+            reason: lastError
+          });
+          break;
+        }
         lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
         attemptLog.push({
-          target: payload.include_subscription_ids?.length
-            ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-            : (payload.included_segments?.[0] || "tag-filter"),
+          target: targetLabel,
           httpStatus: res.status,
           authMode,
           sent: false,
           reason: lastError
         });
+        break;
       } catch (error) {
         lastError = error.message || String(error);
         attemptLog.push({
@@ -358,8 +388,13 @@ export async function sendLibraryPublicationPush(env, record) {
           sent: false,
           reason: lastError
         });
+        break;
       }
     }
+  }
+
+  if (lastSuccess) {
+    return { ...lastSuccess, deliveredCount, attempts: attemptLog };
   }
 
   return { sent: false, reason: lastError, subscriptionCount: subscriptionIds.length, attempts: attemptLog };
