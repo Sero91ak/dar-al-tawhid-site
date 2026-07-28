@@ -1070,11 +1070,12 @@
       slug: String(options.slug || successSlug || merged?.live?.slug || merged?.display?.slug || "").trim(),
       publicationTitle: String(options.publicationTitle || draft?.title || merged?.live?.title || merged?.display?.title || "").trim(),
       pdfUrl: String(options.pdfUrl || successPdfUrl || merged?.live?.pdfUrl || merged?.display?.pdfUrl || "").trim(),
-      publishedAt: String(options.publishedAt || merged?.live?.updatedAt || merged?.live?.publishedAt || "").trim()
+      publishedAt: String(options.publishedAt || merged?.live?.updatedAt || merged?.live?.publishedAt || "").trim(),
+      forceResend: options.forceResend === true
     };
     if (!payload.publicationId) throw new Error("Keine Veröffentlichung für Push gefunden");
     const title = payload.publicationTitle || "PDF";
-    if (!options.skipConfirm && !confirm(`Live Push für „${title}“ senden?\n\nWartet bis die PDF live ist, dann Push in ca. 15 s.`)) return;
+    if (!options.skipConfirm && !confirm(`Live Push für „${title}“ senden?\n\nBesucher werden benachrichtigt (auch erneut, falls nötig).`)) return;
     const btn = options.button || null;
     const btnLabel = btn?.textContent || "";
     const maxAttempts = Number(options.maxAttempts) || 36;
@@ -1233,6 +1234,7 @@
     ].filter(Boolean).join(" ");
     const canUnpublish = mergedTargetsForAction(entry, "unpublish").length > 0;
     const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
+    const canLivePush = entry.inLive && isOnlineStatus(entry.liveStatus);
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
       <div class="lib-admin-manage-card-head">
         <div class="lib-admin-manage-card-top">
@@ -1253,11 +1255,10 @@
       </div>
       <div class="lib-admin-manage-card-panel"${expanded ? "" : " hidden"}>
         ${renderAdminStatsLine(entry.id)}
-        <div class="lib-admin-action-row">
+        <div class="lib-admin-actions-compact" role="group" aria-label="PDF-Aktionen">
+          ${canLivePush ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-push" type="button" data-lib-live-push="${esc(entry.id)}" title="Besucher-Push erneut senden">Live Push</button>` : ""}
           <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
           <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
-        </div>
-        <div class="lib-admin-action-danger">
           ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
           ${canArchive ? `<button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-archive="${esc(entry.id)}">Archiv</button>` : ""}
           <button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-danger" type="button" data-lib-delete="${esc(entry.id)}">Löschen</button>
@@ -1607,6 +1608,24 @@
         if (manageExpandedIds.has(id)) manageExpandedIds.delete(id);
         else manageExpandedIds.add(id);
         safeRender({ force: true });
+        return;
+      }
+      const pushBtn = ev.target.closest("[data-lib-live-push]");
+      if (pushBtn && pushBtn.closest("#libAdminManage")) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const id = pushBtn.getAttribute("data-lib-live-push");
+        const entry = id ? getMergedEntry(id) : null;
+        if (!entry) return;
+        try {
+          await retryLibraryLivePush({
+            ...livePushPayloadForEntry(entry),
+            button: pushBtn,
+            forceResend: true
+          });
+        } catch (e) {
+          toast(e.message || "Live Push fehlgeschlagen");
+        }
       }
     });
   }

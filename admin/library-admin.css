@@ -2,7 +2,9 @@
 .lib-admin {
   display: grid;
   gap: 14px;
-  max-width: 960px;
+  max-width: min(1100px, 100%);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .lib-admin-layout {
@@ -335,6 +337,30 @@
 
 .lib-admin-action-primary .lib-admin-btn-hero {
   width: 100%;
+}
+
+.lib-admin-actions-compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.lib-admin-actions-compact .lib-admin-btn-mini {
+  flex: 1 1 auto;
+  min-width: calc(33.333% - 6px);
+  min-height: 40px !important;
+  padding: 8px 10px !important;
+  font-size: 0.74rem !important;
+  border-radius: 10px !important;
+  white-space: nowrap;
+}
+
+.lib-admin-actions-compact .lib-admin-btn-push {
+  flex: 1 1 100%;
+  min-width: 100%;
+  order: -1;
+  font-weight: 800;
 }
 
 .lib-admin-action-row,
@@ -1422,6 +1448,15 @@
     font-size: 1.1rem;
   }
 
+  .lib-admin {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .lib-admin-manage {
+    padding: 10px;
+  }
+
   .lib-admin-manage-fold-meta {
     width: 100%;
   }
@@ -1433,21 +1468,56 @@
 
   .lib-admin-manage-actions {
     width: 100%;
-    justify-content: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
   .lib-admin-manage-actions .lib-admin-btn-mini {
-    flex: 1 1 auto;
+    flex: 1 1 calc(33.333% - 6px);
     min-height: 40px !important;
+  }
+
+  .lib-admin-actions-compact .lib-admin-btn-mini {
+    flex: 1 1 calc(50% - 6px);
+    min-width: calc(50% - 6px);
+  }
+
+  .lib-admin-actions-compact .lib-admin-btn-push {
+    flex: 1 1 100%;
+    min-width: 100%;
   }
 
   .lib-admin-action-row,
   .lib-admin-action-danger {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+@media (min-width: 521px) {
+  .lib-admin-actions-compact .lib-admin-btn-mini {
+    flex: 0 1 auto;
+    min-width: 0;
   }
 
-  .lib-admin-action-danger .lib-admin-btn-danger {
-    grid-column: 1 / -1;
+  .lib-admin-actions-compact .lib-admin-btn-push {
+    flex: 0 0 auto;
+    min-width: 110px;
+  }
+}
+
+@media (min-width: 900px) {
+  .lib-admin {
+    max-width: min(1100px, 100%);
+  }
+
+  .lib-admin-actions-compact {
+    gap: 8px;
+  }
+
+  .lib-admin-actions-compact .lib-admin-btn-mini {
+    flex: 0 0 auto;
   }
 }
