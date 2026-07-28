@@ -1219,27 +1219,6 @@
     return parts.join("");
   }
 
-  function renderManageViewLinks(entry, pub) {
-    const links = [];
-    if (entry.inTest && isOnlineStatus(entry.testStatus) && pub.slug) {
-      links.push(`<a class="lib-admin-link-mini" href="/test/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Test ↗</a>`);
-    }
-    if (entry.inLive && isOnlineStatus(entry.liveStatus) && pub.slug) {
-      links.push(`<a class="lib-admin-link-mini" href="/#bibliothek/${esc(pub.slug)}" target="_blank" rel="noopener">Besucher ↗</a>`);
-    }
-    return links;
-  }
-
-  function renderLivePublishButton(entry) {
-    if (entry?.inLive && isOnlineStatus(entry.liveStatus)) return "";
-    return `<button class="lib-admin-btn lib-admin-btn-live lib-admin-btn-hero" type="button" data-lib-publish-live="${esc(entry.id)}" title="Live veröffentlichen und Besucher benachrichtigen">Live + Push</button>`;
-  }
-
-  function renderLivePushButton(entry) {
-    if (!entry?.inLive || !isOnlineStatus(entry.liveStatus)) return "";
-    return `<button class="lib-admin-btn lib-admin-btn-live lib-admin-btn-hero" type="button" data-lib-live-push="${esc(entry.id)}" title="Besucher-Benachrichtigung senden">Push senden</button>`;
-  }
-
   function renderManageRow(entry) {
     const pub = entry.display || {};
     const cover = pub.coverUrls?.small || pub.coverUrl || "";
@@ -1254,9 +1233,6 @@
     ].filter(Boolean).join(" ");
     const canUnpublish = mergedTargetsForAction(entry, "unpublish").length > 0;
     const canArchive = mergedTargetsForAction(entry, "archive").length > 0;
-    const viewLinks = renderManageViewLinks(entry, pub).join("");
-    const primaryAction = renderLivePushButton(entry) || renderLivePublishButton(entry);
-    const viewLinksHtml = viewLinks ? `<div class="lib-admin-manage-links-row">${viewLinks}</div>` : "";
     return `<article class="${rowClass}" data-lib-row="${esc(entry.id)}">
       <div class="lib-admin-manage-card-head">
         <div class="lib-admin-manage-card-top">
@@ -1277,12 +1253,10 @@
       </div>
       <div class="lib-admin-manage-card-panel"${expanded ? "" : " hidden"}>
         ${renderAdminStatsLine(entry.id)}
-        ${primaryAction ? `<div class="lib-admin-action-primary">${primaryAction}</div>` : ""}
         <div class="lib-admin-action-row">
           <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-edit="${esc(entry.id)}">Bearbeiten</button>
           <button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-replace="${esc(entry.id)}">PDF ersetzen</button>
         </div>
-        ${viewLinksHtml}
         <div class="lib-admin-action-danger">
           ${canUnpublish ? `<button class="lib-admin-btn lib-admin-btn-mini lib-admin-btn-warn" type="button" data-lib-unpublish="${esc(entry.id)}">Offline</button>` : ""}
           ${canArchive ? `<button class="lib-admin-btn lib-admin-btn-mini" type="button" data-lib-archive="${esc(entry.id)}">Archiv</button>` : ""}
@@ -1633,33 +1607,6 @@
         if (manageExpandedIds.has(id)) manageExpandedIds.delete(id);
         else manageExpandedIds.add(id);
         safeRender({ force: true });
-        return;
-      }
-      const pushBtn = ev.target.closest("[data-lib-live-push]");
-      if (pushBtn && pushBtn.closest("#libAdminManage")) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        const id = pushBtn.getAttribute("data-lib-live-push");
-        const entry = id ? getMergedEntry(id) : null;
-        if (!entry) return;
-        try {
-          await retryLibraryLivePush({ ...livePushPayloadForEntry(entry), button: pushBtn });
-        } catch (e) {
-          toast(e.message || "Push fehlgeschlagen");
-        }
-        return;
-      }
-      const publishBtn = ev.target.closest("[data-lib-publish-live]");
-      if (publishBtn && publishBtn.closest("#libAdminManage")) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        const id = publishBtn.getAttribute("data-lib-publish-live");
-        if (!id) return;
-        try {
-          await publishLiveFromCard(id);
-        } catch (e) {
-          toast(e.message || "Veröffentlichen fehlgeschlagen");
-        }
       }
     });
   }
