@@ -1691,6 +1691,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-31T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-quickaccess-glow-v501-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: keine Hintergrundunschärfe, Icons korrigieren, Umrandungen dezent edel aufleuchten",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-31T23:59:00.000Z"
     }
   ]
 }
