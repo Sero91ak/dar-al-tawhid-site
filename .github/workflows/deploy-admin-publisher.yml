@@ -106,6 +106,54 @@ jobs:
           echo "::error::Worker-Binding nach Deploy nicht aktiv"
           exit 1
 
+      - name: Flush stuck approved library pushes
+        continue-on-error: true
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Library-Push-Flush übersprungen"
+            exit 0
+          fi
+          node <<'NODE'
+          const fs = require("fs");
+          const secret = process.env.ADMIN_PUBLISH_SECRET;
+          const registry = JSON.parse(fs.readFileSync("../content/admin/pending-pushes.json", "utf8"));
+          const pending = Object.values(registry.pushes || {}).filter(
+            (item) => item?.kind === "library" && item?.status === "pending" && item?.pushApproved === true
+          );
+          if (!pending.length) {
+            console.log("Keine freigegebenen Bibliothek-Pending-Pushes");
+            process.exit(0);
+          }
+          (async () => {
+            for (const item of pending) {
+              const body = {
+                publicationId: item.publicationId,
+                slug: item.slug,
+                publicationTitle: item.publicationTitle,
+                pdfUrl: item.pdfUrl,
+                publishedAt: item.publishedAt,
+                forceResend: true
+              };
+              const res = await fetch("https://dar-admin-publisher.sero91ak.workers.dev/api/admin/push/library/retry", {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${secret}`,
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+              const text = await res.text();
+              console.log(`${item.publicationId}: ${res.status} ${text.slice(0, 500)}`);
+              if (!res.ok) process.exitCode = 1;
+            }
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
       - name: Repair prayer registrations disabled by daily push
         continue-on-error: true
         env:

@@ -1,4 +1,4 @@
-/* PUSH_SYSTEM_GUARD:v491  Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
+/* PUSH_SYSTEM_GUARD:v492  Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js). */
 import {
   parsePostForTelegram,
@@ -2470,6 +2470,11 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/** Beitrags-/Bibliothek-Push nur bei expliziter Freigabe (pushApproved: true). */
+function isPostPushApproved(record) {
+  return record?.pushApproved === true;
+}
+
 function pendingPushesPath(env) {
   return trimSlashes(env.PENDING_PUSHES_PATH || DEFAULT_PENDING_PUSHES_PATH);
 }
@@ -2494,28 +2499,40 @@ async function writePendingPushStatus(env, postId, patch) {
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
   const path = pendingPushesPath(env);
-  const registry = await readPendingPushesRegistry(env);
-  const pushes = { ...(registry.pushes || {}) };
   const key = String(postId || "").trim();
   if (!key) return null;
-  pushes[key] = {
-    ...(pushes[key] || {}),
-    ...patch,
-    postId: key,
-    updatedAt: new Date().toISOString()
-  };
-  const payload = { version: 1, generated: new Date().toISOString(), pushes };
-  await githubPut(
-    env,
-    owner,
-    repo,
-    path,
-    `${JSON.stringify(payload, null, 2)}\n`,
-    `Update pending push ${key}`,
-    branch,
-    registry.sha
-  );
-  return pushes[key];
+
+  let lastError = null;
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      const registry = await readPendingPushesRegistry(env);
+      const pushes = { ...(registry.pushes || {}) };
+      pushes[key] = {
+        ...(pushes[key] || {}),
+        ...patch,
+        postId: key,
+        updatedAt: new Date().toISOString()
+      };
+      const payload = { version: 1, generated: new Date().toISOString(), pushes };
+      await githubPut(
+        env,
+        owner,
+        repo,
+        path,
+        `${JSON.stringify(payload, null, 2)}\n`,
+        `Update pending push ${key}`,
+        branch,
+        registry.sha
+      );
+      return pushes[key];
+    } catch (error) {
+      lastError = error;
+      const status = Number(error?.status || 0);
+      if (status !== 409 && status !== 422) throw error;
+      await sleep(250 * attempt);
+    }
+  }
+  throw lastError || httpError(`Pending-Push Status für ${key} konnte nicht geschrieben werden`, 500);
 }
 
 function diagnoseLiveFailure(steps, live = {}) {
@@ -2698,15 +2715,37 @@ async function processPendingPushUntilLive(env, record) {
 
 async function processAllPendingPushes(env) {
   const registry = await readPendingPushesRegistry(env);
-  const pending = Object.values(registry.pushes || {}).filter(
-    (item) => item?.status === "pending" && isPostPushApproved(item)
-  );
+  const pending = Object.values(registry.pushes || {})
+    .filter((item) => item?.status === "pending" && isPostPushApproved(item))
+    .sort((a, b) => {
+      const la = a?.kind === "library" ? 0 : 1;
+      const lb = b?.kind === "library" ? 0 : 1;
+      if (la !== lb) return la - lb;
+      return String(a.updatedAt || a.createdAt || "").localeCompare(String(b.updatedAt || b.createdAt || ""));
+    })
+    .slice(0, 4);
   const results = [];
   for (const record of pending) {
-    const handler = record?.kind === "library"
-      ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
-      : () => processPendingPushUntilLive(env, record);
-    results.push(await handler());
+    try {
+      const handler = record?.kind === "library"
+        ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
+        : () => processPendingPushUntilLive(env, record);
+      results.push(await handler());
+    } catch (error) {
+      const key = record?.kind === "library"
+        ? libraryPushRegistryKey(record?.publicationId)
+        : String(record?.postId || "").trim();
+      const reason = error?.message || String(error);
+      if (key) {
+        try {
+          await writePendingPushStatus(env, key, {
+            lastCheckAt: new Date().toISOString(),
+            lastError: reason
+          });
+        } catch (writeError) {}
+      }
+      results.push({ sent: false, pending: true, reason, error: true });
+    }
   }
   return { processed: pending.length, results };
 }
@@ -2715,56 +2754,73 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   const key = libraryPushRegistryKey(record?.publicationId);
   if (!key) return { sent: false, reason: "publicationId fehlt" };
 
-  const registry = await readPendingPushesRegistry(env);
-  if (registry.pushes?.[key]?.status === "sent") {
-    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
-  }
+  try {
+    const registry = await readPendingPushesRegistry(env);
+    if (registry.pushes?.[key]?.status === "sent") {
+      return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
+    }
 
-  const current = registry.pushes?.[key] || record;
-  if (!isPostPushApproved(current)) {
-    return {
-      sent: false,
-      pending: true,
-      waitingForApproval: true,
-      reason: "Push wartet auf Admin-Freigabe."
-    };
-  }
+    const current = registry.pushes?.[key] || record;
+    if (!isPostPushApproved(current)) {
+      return {
+        sent: false,
+        pending: true,
+        waitingForApproval: true,
+        reason: "Push wartet auf Admin-Freigabe."
+      };
+    }
 
-  const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
-    schedule: options.extendedWait ? "full" : "quick",
-    singleCheck: Boolean(options.singleCheck)
-  });
-  await writePendingPushStatus(env, key, {
-    lastCheckAt: new Date().toISOString(),
-    liveCheck,
-    attempts: liveCheck.attempt,
-    lastError: liveCheck.ok ? "" : liveCheck.diagnosis
-  });
-
-  if (!liveCheck.ok) {
-    return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
-  }
-
-  if (LIBRARY_PUSH_DELAY_AFTER_LIVE_MS > 0) {
-    await sleep(LIBRARY_PUSH_DELAY_AFTER_LIVE_MS);
-  }
-
-  const push = await sendLibraryPublicationPush(env, current);
-  if (push.sent) {
+    // Sofort-Status schreiben, damit stecken gebliebene Queues sichtbar bleiben
     await writePendingPushStatus(env, key, {
-      status: "sent",
-      sentAt: new Date().toISOString(),
-      lastError: "",
-      pushResult: { target: push.target, targetUrl: push.targetUrl }
+      lastCheckAt: new Date().toISOString(),
+      lastError: "Live-Prüfung läuft…"
     });
-  } else {
-    await writePendingPushStatus(env, key, {
-      status: "failed",
-      lastError: push.reason || "OneSignal Push fehlgeschlagen"
-    });
-  }
 
-  return { ...push, liveCheck, pending: !push.sent };
+    const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
+      schedule: options.extendedWait ? "full" : "quick",
+      singleCheck: Boolean(options.singleCheck)
+    });
+    await writePendingPushStatus(env, key, {
+      lastCheckAt: new Date().toISOString(),
+      liveCheck,
+      attempts: liveCheck.attempt,
+      lastError: liveCheck.ok ? "" : liveCheck.diagnosis
+    });
+
+    if (!liveCheck.ok) {
+      return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+    }
+
+    if (LIBRARY_PUSH_DELAY_AFTER_LIVE_MS > 0) {
+      await sleep(LIBRARY_PUSH_DELAY_AFTER_LIVE_MS);
+    }
+
+    const push = await sendLibraryPublicationPush(env, current);
+    if (push.sent) {
+      await writePendingPushStatus(env, key, {
+        status: "sent",
+        sentAt: new Date().toISOString(),
+        lastError: "",
+        pushResult: { target: push.target, targetUrl: push.targetUrl }
+      });
+    } else {
+      await writePendingPushStatus(env, key, {
+        status: "failed",
+        lastError: push.reason || "OneSignal Push fehlgeschlagen"
+      });
+    }
+
+    return { ...push, liveCheck, pending: !push.sent };
+  } catch (error) {
+    const reason = error?.message || String(error);
+    try {
+      await writePendingPushStatus(env, key, {
+        lastCheckAt: new Date().toISOString(),
+        lastError: reason
+      });
+    } catch (writeError) {}
+    return { sent: false, pending: true, reason, error: true };
+  }
 }
 
 async function retryPendingLibraryPush(env, input, ctx) {
