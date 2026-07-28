@@ -1623,6 +1623,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-28T14:00:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-test-deploy-v490-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Long-Press-Schnellzugriff auf Mehr in Dar Test bereitstellen — schwebender 4-Punkte-Button entfernen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
     }
   ]
 }
