@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785270000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v499";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v500";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8962,114 +8962,227 @@ body.is-area-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:0 10px 24px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin,.feature-card .feature-dismiss{color:var(--text)!important}
 /* MEHR_LONGPRESS_QUICKACCESS_CSS */
-/* ROOT CAUSE FIX: Long-Press/Rail war kaputt. Rechte Float-Leiste wiederherstellen (immer sichtbar). */
+/* v500: Compact popover anchored above Mehr — no right-edge rail */
 
-.quick-access-layer,.quick-access-scrim,.quick-access-hint,.quick-access-menu{display:none!important}
+:root{
+  --quick-menu-bg:color-mix(in srgb,var(--bg) 92%,var(--panel,rgba(255,255,255,.08)) 8%);
+  --quick-menu-border:color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));
+  --quick-menu-border-glow:color-mix(in srgb,var(--gold2,var(--gold)) 38%,transparent);
+  --quick-menu-icon:var(--gold2,var(--gold));
+  --quick-menu-icon-active:var(--gold2,var(--gold));
+  --quick-menu-pressed-bg:color-mix(in srgb,var(--gold2,var(--gold)) 14%,var(--bg) 86%);
+  --quick-menu-focus-ring:color-mix(in srgb,var(--gold2,var(--gold)) 28%,transparent);
+  --quick-menu-shadow:0 8px 20px color-mix(in srgb,#000 28%,transparent);
+  --quick-menu-layer:120;
+}
+html[data-theme="royal"]{
+  --quick-menu-bg:color-mix(in srgb,var(--bg) 90%,#0a1b30 10%);
+  --quick-menu-border:color-mix(in srgb,var(--gold2,var(--gold)) 52%,var(--line));
+  --quick-menu-border-glow:color-mix(in srgb,var(--gold2,var(--gold)) 45%,transparent);
+}
+html[data-theme="bordeaux"]{
+  --quick-menu-bg:color-mix(in srgb,var(--bg) 90%,#211315 10%);
+  --quick-menu-border:color-mix(in srgb,var(--gold2,var(--gold)) 48%,var(--line));
+  --quick-menu-border-glow:color-mix(in srgb,var(--gold2,var(--gold)) 40%,transparent);
+}
+html[data-theme="dark"],html[data-theme="classic"]{
+  --quick-menu-bg:color-mix(in srgb,var(--bg) 92%,#000 8%);
+  --quick-menu-border:color-mix(in srgb,var(--gold2,var(--gold)) 40%,var(--line));
+  --quick-menu-border-glow:color-mix(in srgb,var(--gold2,var(--gold)) 34%,transparent);
+}
+html[data-theme="soft"],html[data-theme="light"]{
+  --quick-menu-bg:color-mix(in srgb,var(--bg) 94%,#fff 6%);
+  --quick-menu-border:color-mix(in srgb,var(--gold2,var(--gold)) 36%,var(--line));
+  --quick-menu-border-glow:color-mix(in srgb,var(--gold2,var(--gold)) 28%,transparent);
+  --quick-menu-shadow:0 8px 18px color-mix(in srgb,#000 14%,transparent);
+}
 
 html[data-theme] .float-actions,
 body.has-bottom-nav .float-actions,
-.float-actions{
-  position:fixed!important;
-  right:max(10px,env(safe-area-inset-right))!important;
-  left:auto!important;
-  top:auto!important;
-  bottom:calc(var(--bottom-navigation-height,64px) + max(10px,env(safe-area-inset-bottom)) + 8px)!important;
-  transform:none!important;
-  z-index:120!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:flex-end!important;
-  justify-content:flex-end!important;
-  gap:10px!important;
-  width:auto!important;
-  max-width:none!important;
-  padding:0!important;
-  margin:0!important;
-  pointer-events:auto!important;
-  touch-action:manipulation!important;
+.float-actions,
+.float-touch-handle,
+.float-actions-panel,
+.float-item,
+.float-btn,
+.float-tip{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+.quick-access-layer{
+  position:fixed;
+  inset:0;
+  z-index:var(--quick-menu-layer);
+  pointer-events:none;
   background:none!important;
   border:0!important;
   box-shadow:none!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
-  opacity:1!important;
+  filter:none!important;
 }
-html[data-theme] .float-actions-panel,
-.float-actions-panel{
-  position:relative!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  gap:10px!important;
-  width:auto!important;
-  min-width:0!important;
-  max-width:none!important;
-  min-height:0!important;
-  padding:0!important;
-  margin:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:none!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  overflow:visible!important;
-  opacity:1!important;
-  transform:none!important;
-  pointer-events:auto!important;
+.quick-access-layer[hidden]{display:none!important}
+.quick-access-scrim{
+  position:absolute;
+  inset:0;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  pointer-events:auto;
+  cursor:default;
 }
-.float-touch-handle,.float-tip{display:none!important}
-.float-item{
-  display:flex!important;
-  flex-direction:row!important;
-  align-items:center!important;
-  opacity:1!important;
-  max-width:none!important;
-  overflow:visible!important;
-  border:0!important;
+.quick-access-menu{
+  position:absolute;
+  left:0;
+  top:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  width:44px;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
 }
-html[data-theme] .float-btn,
-.float-btn{
-  appearance:none!important;
-  -webkit-appearance:none!important;
-  width:52px!important;
-  height:52px!important;
-  min-width:52px!important;
-  min-height:52px!important;
-  padding:0!important;
-  border:2px solid color-mix(in srgb,var(--gold2,var(--gold)) 48%,var(--line))!important;
-  border-radius:999px!important;
-  background:color-mix(in srgb,var(--bg) 94%,#000 6%)!important;
-  color:var(--text)!important;
-  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold)) 18%,transparent),0 8px 20px color-mix(in srgb,#000 30%,transparent)!important;
-  display:grid!important;
-  place-items:center!important;
-  font-size:22px!important;
-  line-height:1!important;
-  cursor:pointer!important;
-  pointer-events:auto!important;
-  touch-action:manipulation!important;
-  -webkit-tap-highlight-color:transparent!important;
-  user-select:none!important;
-  -webkit-user-select:none!important;
-  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;
+.quick-access-layer.is-open .quick-access-menu{pointer-events:auto}
+.quick-access-layer.is-hint-only .quick-access-menu{display:none!important}
+
+.quick-action{
+  appearance:none;
+  -webkit-appearance:none;
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  min-width:44px;
+  min-height:44px;
+  padding:0;
+  margin:0;
+  border:1.5px solid var(--quick-menu-border);
+  border-radius:14px;
+  background:var(--quick-menu-bg);
+  color:var(--quick-menu-icon);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--quick-menu-border-glow) 35%,transparent),var(--quick-menu-shadow);
+  cursor:pointer;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;
+  user-select:none;
+  opacity:0;
+  transform:translateY(10px) scale(.96);
+  transition:
+    opacity 180ms cubic-bezier(.22,1,.36,1),
+    transform 180ms cubic-bezier(.22,1,.36,1),
+    background 110ms ease,
+    border-color 110ms ease,
+    box-shadow 110ms ease,
+    color 110ms ease;
 }
-html[data-theme] .float-btn:active,
-.float-btn:active,
-.float-btn.is-lit{
-  transform:scale(.94)!important;
-  border-color:var(--gold2,var(--gold))!important;
-  box-shadow:0 0 0 4px color-mix(in srgb,var(--gold2,var(--gold)) 42%,transparent),0 0 22px color-mix(in srgb,var(--gold2,var(--gold)) 55%,transparent)!important;
-  background:color-mix(in srgb,var(--gold2,var(--gold)) 16%,var(--bg) 84%)!important;
+.quick-access-layer.is-open .quick-action{
+  opacity:1;
+  transform:translateY(0) scale(1);
 }
-.float-btn svg{display:none!important}
-.float-btn-label,.float-btn-badge{display:none!important}
-body.reader-mode .float-actions,
-body.is-feed-fullscreen .float-actions,
-body.image-editor-mode .float-actions,
-body.image-editor-test-mode .float-actions,
-body.is-ilm-chat-route .float-actions,
-body.app-update-modal-open .float-actions{display:none!important}
+.quick-access-layer.is-open .quick-action:nth-child(3){transition-delay:0ms}
+.quick-access-layer.is-open .quick-action:nth-child(2){transition-delay:30ms}
+.quick-access-layer.is-open .quick-action:nth-child(1){transition-delay:60ms}
+
+.quick-action svg{
+  width:19px;
+  height:19px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.85;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  pointer-events:none;
+}
+.quick-action:hover,
+.quick-action:focus-visible{
+  border-color:var(--quick-menu-icon-active);
+  color:var(--quick-menu-icon-active);
+  box-shadow:0 0 0 2px var(--quick-menu-focus-ring),0 0 16px var(--quick-menu-border-glow),var(--quick-menu-shadow);
+  outline:none;
+}
+.quick-action:active,
+.quick-action.is-pressed{
+  transform:scale(.97);
+  background:var(--quick-menu-pressed-bg);
+  border-color:var(--quick-menu-icon-active);
+  color:var(--quick-menu-icon-active);
+  box-shadow:0 0 16px var(--quick-menu-border-glow),var(--quick-menu-shadow);
+  transition-duration:100ms;
+}
+
+.quick-action-badge{
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:15px;
+  height:15px;
+  padding:0 4px;
+  border-radius:999px;
+  background:var(--quick-menu-icon);
+  color:var(--bg);
+  font-size:9px;
+  font-weight:900;
+  line-height:1;
+  box-shadow:0 0 0 2px var(--quick-menu-bg);
+}
+.quick-action-dot{
+  position:absolute;
+  top:5px;
+  right:5px;
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:var(--quick-menu-icon);
+  box-shadow:0 0 0 2px var(--quick-menu-bg);
+}
+
+.quick-access-hint{
+  position:absolute;
+  left:0;
+  top:0;
+  max-width:min(200px,calc(100vw - 28px));
+  padding:8px 10px;
+  border:1px solid var(--quick-menu-border);
+  border-radius:12px;
+  background:var(--quick-menu-bg);
+  color:var(--text);
+  font-size:11.5px;
+  font-weight:700;
+  line-height:1.35;
+  text-align:center;
+  box-shadow:var(--quick-menu-shadow);
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-100%) translateY(6px);
+  transition:opacity 180ms cubic-bezier(.22,1,.36,1),transform 180ms cubic-bezier(.22,1,.36,1);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+.quick-access-hint.is-visible{
+  opacity:1;
+  transform:translate(-50%,-100%) translateY(0);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .quick-action,.quick-access-hint{
+    transition:opacity 120ms ease!important;
+    transform:none!important;
+  }
+  .quick-access-layer.is-open .quick-action{opacity:1!important}
+}
+
+.bottom-nav-btn[data-bottom-nav="more"],
+.bottom-nav-more{
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+  touch-action:manipulation;
+}
 
 /* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
 </style>
@@ -15434,21 +15547,31 @@ html[data-theme] #bottomNav.bottom-nav{
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
 </div>
-<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),f=document.getElementById("floatActions");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(f&&f.parentElement!==document.body)document.body.appendChild(f);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
-<div class="float-actions is-expanded" id="floatActions" aria-label="Schnellzugriff">
+<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
+<div class="float-actions" id="floatActions" hidden aria-hidden="true" data-mode="disabled">
   <div class="float-actions-panel" id="floatActionsPanel">
-    <div class="float-item">
-      <button id="qiblaFloat" class="float-btn qibla-float" type="button" aria-label="Orientierung" title="Orientierung">🧭</button>
-    </div>
-    <div class="float-item">
-      <button id="savedFloat" class="float-btn saved-float" type="button" aria-label="Merkliste" title="Merkliste">❤️</button>
-    </div>
-    <div class="float-item">
-      <button id="pushFloat" class="float-btn" type="button" aria-label="Erinnerungen" title="Erinnerungen">🔔</button>
-    </div>
+    <button id="qiblaFloat" class="float-btn" type="button" tabindex="-1" aria-hidden="true"></button>
+    <button id="savedFloat" class="float-btn" type="button" tabindex="-1" aria-hidden="true"></button>
+    <button id="pushFloat" class="float-btn" type="button" tabindex="-1" aria-hidden="true"></button>
   </div>
 </div>
-<div id="quickAccessLayer" class="quick-access-layer" hidden aria-hidden="true"></div>
+<div id="quickAccessLayer" class="quick-access-layer" hidden aria-hidden="true">
+  <button type="button" id="quickAccessScrim" class="quick-access-scrim" aria-label="Schnellzugriff schließen"></button>
+  <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten für Schnellzugriff</div>
+  <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" hidden>
+    <button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" aria-label="Orientierung" title="Orientierung">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polygon points="12,5 14.2,12 12,10.4 9.8,12"/><circle cx="12" cy="12" r="1.2"/></svg>
+    </button>
+    <button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" aria-label="Merkliste" title="Merkliste">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.2L6 20V5.5a1 1 0 0 1 1-1z"/></svg>
+      <span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span>
+    </button>
+    <button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" aria-label="Erinnerungen" title="Erinnerungen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.5a5.5 5.5 0 0 1 11 0c0 5 1.5 6.2 1.5 6.2H5s1.5-1.2 1.5-6.2"/><path d="M10 18.2a2 2 0 0 0 4 0"/></svg>
+      <span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span>
+    </button>
+  </div>
+</div>
 
 <script src="/assets/slide-post-parser.js?v=2"></script>
 <script src="/assets/ilm-majlis-v2.js?v=1"></script>
@@ -16381,7 +16504,7 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const tab=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindMoreQuickAccessTrigger(btn);return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -20554,7 +20677,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v499";
+const APP_BUILD_ID="app-shell-v500";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21238,47 +21361,10 @@ const FLOAT_TIPS_KEY="darFloatTipsShownV1";
 function showFloatTipsOnce(){return}
 const FLOAT_TOUCHBAR_KEY="darFloatTouchbarActivatedV1";
 function collapseFloatTouchbar(){}
-function expandFloatTouchbar(){
-  const bar=$("floatActions");
-  if(!bar)return;
-  bar.classList.add("is-expanded");
-  bar.classList.remove("is-collapsed");
-}
-function markFloatTouchbarActivated(){
-  try{localStorage.setItem(FLOAT_TOUCHBAR_KEY,"1")}catch(e){}
-}
-function bindFloatActionButton(btn,fn){
-  if(!btn||btn.dataset.floatBound==="1")return;btn.dataset.floatBound="1";
-  let lastTouch=0;
-  const run=ev=>{
-    if(ev.cancelable)ev.preventDefault();
-    ev.stopPropagation();
-    btn.classList.add("is-lit");
-    setTimeout(()=>btn.classList.remove("is-lit"),180);
-    markFloatTouchbarActivated();
-    try{fn()}catch(e){console.warn("Float-Aktion:",e)}
-  };
-  btn.addEventListener("touchend",ev=>{lastTouch=Date.now();run(ev)},{passive:false});
-  btn.addEventListener("pointerup",ev=>{if(ev.pointerType==="touch")return;run(ev)},{passive:false});
-  btn.addEventListener("click",ev=>{if(Date.now()-lastTouch<500){ev.preventDefault();ev.stopPropagation();return}run(ev)});
-}
-function initFloatTouchbar(){
-  if(window.__darFloatTouchbarBound)return;
-  const bar=$("floatActions");
-  const panel=$("floatActionsPanel");
-  if(!bar||!panel)return;
-  window.__darFloatTouchbarBound=true;
-  if(bar.parentElement!==document.body)document.body.appendChild(bar);
-  bar.classList.add("is-expanded");
-  bar.classList.remove("is-collapsed","is-intro","is-dragging");
-  panel.style.transform="none";
-  panel.style.opacity="1";
-  panel.style.pointerEvents="auto";
-  bindFloatActionButton($("qiblaFloat"),()=>openQiblaFromFloat());
-  bindFloatActionButton($("savedFloat"),()=>navigate("saved"));
-  bindFloatActionButton($("pushFloat"),()=>{navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)});
-  try{if(typeof updatePushFloatButton==="function")updatePushFloatButton()}catch(e){}
-}
+function expandFloatTouchbar(){}
+function markFloatTouchbarActivated(){}
+function bindFloatActionButton(){}
+function initFloatTouchbar(){const bar=$("floatActions");if(bar){bar.hidden=true;bar.setAttribute("aria-hidden","true");bar.setAttribute("data-mode","disabled")}}
 function initAppZoomLock(){
   if(window.__appZoomLockBound)return;
   window.__appZoomLockBound=true;
@@ -21290,45 +21376,253 @@ function initAppZoomLock(){
   },{passive:false});
 }
 const QUICK_ACCESS_HINT_KEY="quickAccessLongPressHintSeen";
+const LONG_PRESS_DELAY=500;
+const MOVE_TOLERANCE=8;
 let isQuickMenuOpen=false;
 let longPressTriggered=false;
-function closeQuickAccessMenu(){
-  document.querySelectorAll(".quick-access-chip.is-lit").forEach(el=>el.classList.remove("is-lit"));
-  isQuickMenuOpen=false;
+let quickMenuAnchorRect=null;
+let suppressClickUntil=0;
+let quickAccessDocListenersBound=false;
+
+function triggerLightHapticFeedback(){
+  try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}
 }
+
+function closeQuickAccessMenu({restoreFocus=false,hideHint=false}={}){
+  const layer=$("quickAccessLayer");
+  const menu=$("quickAccessMenu");
+  const hint=$("quickAccessHint");
+  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  document.querySelectorAll(".quick-action.is-pressed").forEach(el=>el.classList.remove("is-pressed"));
+  if(hideHint&&hint){hint.hidden=true;hint.classList.remove("is-visible")}
+  if(layer){layer.classList.remove("is-open","is-hint-only");layer.setAttribute("aria-hidden","true")}
+  if(menu)menu.hidden=true;
+  isQuickMenuOpen=false;quickMenuAnchorRect=null;
+  if(layer&&menu&&hint&&menu.hidden&&hint.hidden)layer.hidden=true;
+  if(restoreFocus&&moreBtn&&typeof moreBtn.focus==="function"){try{moreBtn.focus({preventScroll:true})}catch(e){try{moreBtn.focus()}catch(_){}}}
+}
+
+function positionQuickAccessUi(anchorRect){
+  const menu=$("quickAccessMenu");
+  const hint=$("quickAccessHint");
+  if(!anchorRect||!anchorRect.width)return;
+  quickMenuAnchorRect=anchorRect;
+  const anchorCenterX=anchorRect.left+anchorRect.width/2;
+  const anchorTopY=anchorRect.top;
+  const keyboardLift=window.visualViewport?Math.max(0,window.innerHeight-window.visualViewport.height-window.visualViewport.offsetTop):0;
+  const gap=12;
+  const safeLeft=Math.max(10,(window.visualViewport?window.visualViewport.offsetLeft:0)+10);
+  const safeRight=window.innerWidth-Math.max(10,(window.visualViewport?(window.innerWidth-window.visualViewport.offsetLeft-window.visualViewport.width):0)+10);
+  const clampedX=Math.min(Math.max(anchorCenterX,safeLeft+22),safeRight-22);
+  const bottomFromTop=Math.max(8,anchorTopY-gap-keyboardLift);
+  if(menu){
+    menu.style.left=`${Math.round(clampedX)}px`;
+    menu.style.top=`${Math.round(bottomFromTop)}px`;
+    menu.style.right="auto";
+    menu.style.bottom="auto";
+  }
+  if(hint){
+    hint.style.left=`${Math.round(clampedX)}px`;
+    hint.style.top=`${Math.round(Math.max(8,bottomFromTop-8))}px`;
+    hint.style.right="auto";
+    hint.style.bottom="auto";
+  }
+}
+
+function openQuickAccessMenu(anchorBtn){
+  if(shouldHideQuickAccessRail())return;
+  const layer=$("quickAccessLayer");
+  const menu=$("quickAccessMenu");
+  const hint=$("quickAccessHint");
+  const btn=anchorBtn||document.querySelector('[data-bottom-nav="more"]');
+  if(!layer||!menu||!btn)return;
+  if(layer.parentElement!==document.body)document.body.appendChild(layer);
+  const rect=btn.getBoundingClientRect();
+  positionQuickAccessUi(rect);
+  if(hint){hint.hidden=true;hint.classList.remove("is-visible")}
+  layer.hidden=false;
+  layer.classList.remove("is-hint-only");
+  layer.setAttribute("aria-hidden","false");
+  menu.hidden=false;
+  // force reflow so open transitions run
+  void menu.offsetWidth;
+  layer.classList.add("is-open");
+  isQuickMenuOpen=true;
+  try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"true")}catch(e){}
+  triggerLightHapticFeedback();
+  updateQuickAccessIndicators();
+}
+
+function showQuickAccessHint(anchorBtn){
+  const layer=$("quickAccessLayer");
+  const hint=$("quickAccessHint");
+  const menu=$("quickAccessMenu");
+  const btn=anchorBtn||document.querySelector('[data-bottom-nav="more"]');
+  if(!layer||!hint||!btn||isQuickMenuOpen||shouldHideQuickAccessRail())return;
+  let seen=false;
+  try{seen=localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="true"||localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="1"}catch(e){}
+  if(seen)return;
+  if(layer.parentElement!==document.body)document.body.appendChild(layer);
+  positionQuickAccessUi(btn.getBoundingClientRect());
+  layer.hidden=false;
+  layer.classList.add("is-hint-only");
+  layer.setAttribute("aria-hidden","false");
+  if(menu)menu.hidden=true;
+  hint.hidden=false;
+  requestAnimationFrame(()=>hint.classList.add("is-visible"));
+  clearTimeout(window.__quickAccessHintTimer);
+  window.__quickAccessHintTimer=setTimeout(()=>{
+    hint.classList.remove("is-visible");
+    setTimeout(()=>{
+      hint.hidden=true;
+      if(!isQuickMenuOpen){layer.hidden=true;layer.classList.remove("is-hint-only");layer.setAttribute("aria-hidden","true")}
+    },180);
+  },5200);
+  try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"true")}catch(e){}
+}
+
 function shouldHideQuickAccessRail(){
   const b=document.body;
   return !!(b.classList.contains("reader-mode")||b.classList.contains("is-feed-fullscreen")||b.classList.contains("image-editor-mode")||b.classList.contains("image-editor-test-mode")||b.classList.contains("is-ilm-chat-route")||b.classList.contains("app-update-modal-open")||document.documentElement.classList.contains("reader-mode"));
 }
-function positionQuickAccessUi(anchorRect){
-  const layer=$("quickAccessLayer");if(!layer)return;
-  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
-  const rect=anchorRect||moreBtn?.getBoundingClientRect?.();
-  if(!rect||!rect.width){
-    layer.style.right="12px";
-    layer.style.bottom=`calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom,0px) + 18px)`;
-    layer.style.left="auto";
-    layer.style.top="auto";
-    return;
-  }
-  const chipSize=48;
-  const keyboardLift=window.visualViewport?Math.max(0,window.innerHeight-window.visualViewport.height):0;
-  const centerX=rect.left+rect.width/2;
-  const right=Math.max(8,Math.round(window.innerWidth-centerX-chipSize/2));
-  const bottom=Math.max(8,Math.round(window.innerHeight-rect.top+8+keyboardLift));
-  layer.style.right=`${right}px`;
-  layer.style.left="auto";
-  layer.style.bottom=`${bottom}px`;
-  layer.style.top="auto";
-}
-function syncQuickAccessRail(){}
-function openQuickAccessMenu(){}
-function showQuickAccessHint(){}
+
 function updateQuickAccessIndicators(){
   try{bindMoreQuickAccessPageButtons()}catch(e){}
+  const savedBadge=$("quickAccessSavedBadge");
+  const pushStatus=$("quickAccessRemindStatus");
+  if(savedBadge){
+    const count=(typeof savedIds==="function"?savedIds():[]).length;
+    savedBadge.hidden=!count;
+    if(count)savedBadge.textContent=String(Math.min(count,99));
+  }
+  if(pushStatus){
+    let active=false;
+    try{
+      const state=typeof readOneSignalPushSubscriptionState==="function"?readOneSignalPushSubscriptionState(window.OneSignal):null;
+      active=!!(state&&state.ready);
+    }catch(e){
+      active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)&&!!String(window.OneSignal?.User?.PushSubscription?.id||"").trim();
+    }
+    pushStatus.hidden=!active;
+  }
 }
-function bindQuickAccessChip(){}
-function bindMoreQuickAccessTrigger(){}
+
+function runQuickAccessAction(kind,btn){
+  if(btn){
+    btn.classList.add("is-pressed");
+    setTimeout(()=>btn.classList.remove("is-pressed"),120);
+  }
+  const go=()=>{
+    closeQuickAccessMenu();
+    if(kind==="orient"){openQiblaFromFloat();return}
+    if(kind==="saved"){navigate("saved");return}
+    if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)}
+  };
+  setTimeout(go,120);
+}
+
+function suppressNextClick(){suppressClickUntil=Date.now()+700}
+
+function bindMoreQuickAccessTrigger(btn){
+  if(!btn||btn.dataset.quickMenuBound==="1")return;
+  btn.dataset.quickMenuBound="1";
+  let longPressTimer=null;
+  let startX=0;
+  let startY=0;
+  let activePointerId=null;
+
+  const cancelLongPress=()=>{
+    if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
+    btn.classList.remove("is-pressed");
+  };
+
+  const openExistingMorePage=()=>{
+    try{btn.blur&&btn.blur()}catch(e){}
+    navigateBottomNavTab("more");
+  };
+
+  btn.addEventListener("pointerdown",ev=>{
+    if(ev.pointerType==="mouse"&&ev.button!==0)return;
+    longPressTriggered=false;
+    startX=ev.clientX;
+    startY=ev.clientY;
+    activePointerId=ev.pointerId;
+    if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
+    btn.classList.add("is-pressed");
+    longPressTimer=window.setTimeout(()=>{
+      longPressTimer=null;
+      longPressTriggered=true;
+      suppressNextClick();
+      openQuickAccessMenu(btn);
+    },LONG_PRESS_DELAY);
+    try{btn.setPointerCapture&&btn.setPointerCapture(ev.pointerId)}catch(e){}
+  });
+
+  btn.addEventListener("pointermove",ev=>{
+    if(activePointerId!=null&&ev.pointerId!==activePointerId)return;
+    if(!longPressTimer)return;
+    const dx=Math.abs(ev.clientX-startX);
+    const dy=Math.abs(ev.clientY-startY);
+    if(dx>MOVE_TOLERANCE||dy>MOVE_TOLERANCE){
+      cancelLongPress();
+      longPressTriggered=false;
+    }
+  },{passive:true});
+
+  const onPointerEnd=ev=>{
+    if(activePointerId!=null&&ev.pointerId!==activePointerId)return;
+    activePointerId=null;
+    const wasLong=longPressTriggered;
+    const hadPendingTimer=!!longPressTimer;
+    cancelLongPress();
+    if(wasLong){
+      if(ev.cancelable)ev.preventDefault();
+      ev.stopPropagation();
+      suppressNextClick();
+      return;
+    }
+    if(ev.type==="pointercancel"){longPressTriggered=false;return}
+    // Short tap: timer still pending means long-press never fired → open Mehr
+    if(ev.type==="pointerup"&&hadPendingTimer){
+      if(ev.cancelable)ev.preventDefault();
+      openExistingMorePage();
+    }
+  };
+
+  btn.addEventListener("pointerup",onPointerEnd,{passive:false});
+  btn.addEventListener("pointercancel",onPointerEnd,{passive:false});
+
+  btn.addEventListener("click",ev=>{
+    if(longPressTriggered||Date.now()<suppressClickUntil){
+      ev.preventDefault();
+      ev.stopPropagation();
+      longPressTriggered=false;
+      return;
+    }
+    // pointerup already navigated; suppress duplicate click
+    ev.preventDefault();
+    ev.stopPropagation();
+  });
+
+  btn.addEventListener("contextmenu",ev=>{
+    ev.preventDefault();
+    cancelLongPress();
+    longPressTriggered=true;
+    suppressNextClick();
+    openQuickAccessMenu(btn);
+  });
+
+  btn.addEventListener("keydown",ev=>{
+    if((ev.shiftKey&&ev.key==="F10")||ev.key==="ContextMenu"){
+      ev.preventDefault();
+      openQuickAccessMenu(btn);
+    }else if(ev.key==="Enter"||ev.key===" "){
+      ev.preventDefault();
+      openExistingMorePage();
+    }
+  });
+}
+
 function bindMoreQuickAccessPageButtons(){
   document.querySelectorAll("[data-more-quick]").forEach(btn=>{
     if(btn.dataset.bound==="1")return;btn.dataset.bound="1";
@@ -21340,8 +21634,46 @@ function bindMoreQuickAccessPageButtons(){
     });
   });
 }
-function ensureQuickAccessBindings(){try{initFloatTouchbar()}catch(e){}}
-function initQuickAccessMenu(){}
+
+function ensureQuickAccessBindings(){try{initQuickAccessMenu()}catch(e){}}
+function bindQuickAccessChip(){}
+function syncQuickAccessRail(){if(isQuickMenuOpen)closeQuickAccessMenu()}
+
+function initQuickAccessMenu(){
+  if(window.__darQuickAccessMenuBound)return;
+  window.__darQuickAccessMenuBound=true;
+  const layer=$("quickAccessLayer");
+  const scrim=$("quickAccessScrim");
+  const menu=$("quickAccessMenu");
+  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  if(layer&&layer.parentElement!==document.body)document.body.appendChild(layer);
+  if(scrim)scrim.addEventListener("click",()=>closeQuickAccessMenu({restoreFocus:true}));
+  if(!quickAccessDocListenersBound){
+    quickAccessDocListenersBound=true;
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isQuickMenuOpen){e.preventDefault();closeQuickAccessMenu({restoreFocus:true})}});
+    document.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true,capture:true});
+    window.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true});
+    document.addEventListener("focusin",e=>{if(e.target?.closest?.("input,textarea,[contenteditable='true']"))closeQuickAccessMenu()});
+    document.addEventListener("visibilitychange",()=>{if(document.hidden)closeQuickAccessMenu()});
+    window.addEventListener("hashchange",()=>closeQuickAccessMenu(),{passive:true});
+    window.addEventListener("pagehide",()=>closeQuickAccessMenu(),{passive:true});
+    window.addEventListener("resize",()=>{
+      if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());
+    },{passive:true});
+    window.visualViewport?.addEventListener?.("resize",()=>{
+      if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());
+    },{passive:true});
+  }
+  const orientBtn=$("quickAccessOrientBtn");
+  if(orientBtn&&orientBtn.dataset.bound!=="1"){orientBtn.dataset.bound="1";orientBtn.addEventListener("click",()=>runQuickAccessAction("orient",orientBtn))}
+  const savedBtn=$("quickAccessSavedBtn");
+  if(savedBtn&&savedBtn.dataset.bound!=="1"){savedBtn.dataset.bound="1";savedBtn.addEventListener("click",()=>runQuickAccessAction("saved",savedBtn))}
+  const remindBtn=$("quickAccessRemindBtn");
+  if(remindBtn&&remindBtn.dataset.bound!=="1"){remindBtn.dataset.bound="1";remindBtn.addEventListener("click",()=>runQuickAccessAction("remind",remindBtn))}
+  updateQuickAccessIndicators();
+  if(moreBtn)setTimeout(()=>showQuickAccessHint(moreBtn),900);
+}
+
 window.addEventListener("DOMContentLoaded",()=>{
   try{
     if("scrollRestoration" in history)history.scrollRestoration="manual";
@@ -21365,6 +21697,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     initAppZoomLock();
     bindBottomNav();
     initFloatTouchbar();
+    initQuickAccessMenu();
     initBottomNavSwipe();
     initBottomNavContentSwipe();
     initBottomNavGuard();
@@ -21376,8 +21709,6 @@ window.addEventListener("DOMContentLoaded",()=>{
     window.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
-    setTimeout(()=>{try{initFloatTouchbar()}catch(e){}},200);
-    setTimeout(()=>{try{initFloatTouchbar()}catch(e){}},900);
     window.addEventListener("pageshow",e=>{ensureBottomNavDock();initFloatTouchbar();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>{ensureBottomNavDock();initFloatTouchbar()})},{passive:true});
   }catch(e){
     console.error("App-Start fehlgeschlagen:",e);

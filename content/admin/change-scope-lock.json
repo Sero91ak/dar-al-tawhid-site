@@ -1679,6 +1679,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-30T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-popover-v500-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Verbindlicher Programmiererauftrag: Schnellzugriff korrekt über Mehr positionieren und iOS-Long-Press umsetzen (Dar Test)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-31T23:59:00.000Z"
     }
   ]
 }
