@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v494";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v495";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8967,7 +8967,7 @@ body.is-area-route .float-actions{display:none!important}
 .quick-access-layer{position:fixed;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
 .quick-access-layer[hidden]{display:none!important}
 .quick-access-scrim{display:none!important}
-.quick-access-menu{display:none;flex-direction:column;align-items:flex-end;gap:8px}
+.quick-access-menu{display:none;flex-direction:column;align-items:center;gap:10px}
 .quick-access-layer.is-open .quick-access-menu{display:flex}
 .quick-access-layer.is-hint-only .quick-access-menu{display:none!important}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip{animation:quickAccessChipIn .18s cubic-bezier(.22,1,.36,1) both}
@@ -8976,7 +8976,7 @@ body.is-area-route .float-actions{display:none!important}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(3){animation-delay:70ms}
 @keyframes quickAccessChipIn{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
 .quick-access-chip{appearance:none;-webkit-appearance:none;position:relative;display:grid;place-items:center;width:46px;height:46px;min-width:46px;padding:0;border:2px solid color-mix(in srgb,var(--gold2,var(--gold)) 38%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--bg) 96%,#000 4%);color:var(--text);font:inherit;line-height:1;cursor:pointer;pointer-events:auto;box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold)) 18%,transparent),0 6px 18px color-mix(in srgb,#000 28%,transparent);transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease}
-.quick-access-chip.is-lit,.quick-access-chip:hover,.quick-access-chip:focus-visible{border-color:var(--gold2,var(--gold));box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2,var(--gold)) 34%,transparent),0 0 18px color-mix(in srgb,var(--gold2,var(--gold)) 42%,transparent),0 8px 22px color-mix(in srgb,#000 34%,transparent);background:color-mix(in srgb,var(--gold2,var(--gold)) 12%,var(--bg) 88%)}
+.quick-access-chip.is-lit,.quick-access-chip:hover,.quick-access-chip:focus-visible{border-color:var(--gold2,var(--gold));box-shadow:0 0 0 4px color-mix(in srgb,var(--gold2,var(--gold)) 42%,transparent),0 0 22px color-mix(in srgb,var(--gold2,var(--gold)) 55%,transparent),0 10px 24px color-mix(in srgb,#000 36%,transparent);background:color-mix(in srgb,var(--gold2,var(--gold)) 16%,var(--bg) 84%)}
 .quick-access-chip:active{transform:scale(.94)}
 .quick-access-chip:focus-visible{outline:none}
 .quick-access-emoji{font-size:22px;line-height:1;pointer-events:none;display:block}
@@ -15354,7 +15354,7 @@ html[data-theme] #bottomNav.bottom-nav{
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
 </div>
-<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
+<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
 <div id="quickAccessLayer" class="quick-access-layer" hidden>
   <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten</div>
   <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff">
@@ -20468,7 +20468,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v494";
+const APP_BUILD_ID="app-shell-v495";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21198,6 +21198,7 @@ function openQuickAccessMenu(anchorBtn){
   const layer=$("quickAccessLayer");const hint=$("quickAccessHint");
   if(!layer||!anchorBtn)return;
   quickMenuAnchorRect=anchorBtn.getBoundingClientRect();positionQuickAccessUi(quickMenuAnchorRect);
+  anchorBtn.classList.remove("is-pressed");
   layer.hidden=false;layer.classList.remove("is-hint-only");layer.classList.add("is-open");isQuickMenuOpen=true;
   if(hint){hint.hidden=true;hint.classList.remove("is-visible")}
   try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"1")}catch(e){}
