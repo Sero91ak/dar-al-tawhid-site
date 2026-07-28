@@ -1318,7 +1318,7 @@ body.is-ilm-chat-route{--ilm-page-bg:#080806;--ilm-header-bg:#10100d;--ilm-user-
 .bottom-nav-btn *{-webkit-tap-highlight-color:transparent}
 .bottom-nav-btn.is-pressed,.bottom-nav-btn:active{transform:scale(.88)!important;filter:brightness(1.14)!important;color:#fff9e5!important;transition:transform .12s cubic-bezier(.2,.8,.2,1),filter .12s ease,color .12s ease}
 .bottom-nav-btn.is-pressed .nav-icon,.bottom-nav-btn:active .nav-icon{transform:scale(.94)!important}
-body.has-bottom-nav{padding-bottom:calc(var(--bottom-navigation-height) + var(--quick-access-closed-height) + env(safe-area-inset-bottom) + 28px)!important}
+body.has-bottom-nav{padding-bottom:calc(var(--bottom-navigation-height) + env(safe-area-inset-bottom) + 28px)!important}
 body.has-bottom-nav .float-actions{bottom:calc(var(--bottom-navigation-height) + var(--quick-access-bottom-gap) + max(0px,calc(env(safe-area-inset-bottom) - 22px)) + 3mm)}
 body.has-bottom-nav .footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 body.is-feed-fullscreen{padding-left:0!important;padding-right:0!important;background:var(--theme-feed-bg,var(--outer-bg,var(--bg)))!important;color:var(--theme-text,var(--text))!important;overflow-x:hidden!important}
@@ -8961,6 +8961,40 @@ html[data-theme] body.is-feed-fullscreen .sf-post__img{
 body.is-area-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:0 10px 24px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin,.feature-card .feature-dismiss{color:var(--text)!important}
+/* MEHR_LONGPRESS_QUICKACCESS_CSS */
+
+.float-actions,.float-touch-handle,.float-actions-panel,.float-item,.float-btn,.float-tip{display:none!important}
+.quick-access-layer{position:fixed;inset:0;pointer-events:none;z-index:41}
+.quick-access-layer[hidden]{display:none!important}
+.quick-access-scrim{position:absolute;inset:0;background:transparent;border:0;padding:0;margin:0;pointer-events:auto}
+.quick-access-menu{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + 10px);width:min(248px,calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--bg) 84%,var(--panel,rgba(255,255,255,.08)) 16%);box-shadow:0 10px 26px color-mix(in srgb,var(--text) 14%,transparent);-webkit-backdrop-filter:blur(12px) saturate(1.04);backdrop-filter:blur(12px) saturate(1.04);overflow:hidden;pointer-events:auto;transform-origin:calc(100% - 28px) calc(100% + 18px);opacity:0;transform:translateY(10px) scale(.97);transition:opacity .18s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1)}
+.quick-access-layer.is-open .quick-access-menu{opacity:1;transform:translateY(0) scale(1)}
+.quick-access-item{appearance:none;-webkit-appearance:none;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 15px;border:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.quick-access-item + .quick-access-item{border-top:1px solid var(--line2,var(--line))}
+.quick-access-item:hover,.quick-access-item:active{background:color-mix(in srgb,var(--text) 6%,transparent)}
+.quick-access-item:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2,var(--gold)) 28%,transparent) inset}
+.quick-access-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;color:var(--gold2,var(--gold))}
+.quick-access-item-copy{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.quick-access-item-label{font-size:14px;font-weight:800;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quick-access-item-meta{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--gold2,var(--gold));color:var(--bg);font-size:10px;font-weight:900;line-height:1}
+.quick-access-item-status{margin-left:auto;width:8px;height:8px;border-radius:999px;background:var(--gold2,var(--gold));box-shadow:0 0 0 1px color-mix(in srgb,var(--text) 12%,transparent)}
+.quick-access-item-chevron{margin-left:auto;color:var(--muted);font-size:16px;font-weight:700;line-height:1}
+.quick-access-hint{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + 14px);max-width:min(240px,calc(100vw - 24px));padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--bg) 84%,var(--panel,rgba(255,255,255,.08)) 16%);color:var(--text);font-size:12px;font-weight:700;line-height:1.35;box-shadow:0 8px 20px color-mix(in srgb,var(--text) 12%,transparent);pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .18s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1)}
+.quick-access-hint.is-visible{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.quick-access-menu,.quick-access-hint{transition:none!important}}
+.more-quick-access{margin:0 0 14px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--bg) 88%,var(--panel,rgba(255,255,255,.06)) 12%);overflow:hidden}
+.more-quick-access__head{padding:12px 14px 6px}
+.more-quick-access__head h3{margin:0;font-size:15px;font-weight:850;color:var(--text)}
+.more-quick-access__head p{margin:4px 0 0;font-size:12px;line-height:1.35;color:var(--muted)}
+.more-quick-access__list{display:grid}
+.more-quick-access__btn{appearance:none;-webkit-appearance:none;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 14px;border:0;border-top:1px solid var(--line2,var(--line));background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.more-quick-access__btn:hover,.more-quick-access__btn:active{background:color-mix(in srgb,var(--text) 6%,transparent)}
+.more-quick-access__btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;color:var(--gold2,var(--gold));flex:0 0 auto}
+.more-quick-access__label{flex:1;font-size:14px;font-weight:800}
+.more-quick-access__chevron{color:var(--muted);font-size:16px;font-weight:700}
+.bottom-nav-btn[data-bottom-nav="more"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
+/* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
 </style>
 <style>
 .quiz-shell{display:grid;gap:14px;padding-bottom:calc(var(--bottom-nav-space,92px) + 18px)}
@@ -15320,33 +15354,31 @@ html[data-theme] #bottomNav.bottom-nav{
   <button class="bottom-nav-btn" type="button" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon" aria-hidden="true">📘</span><span>ʿIlm</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="feed" aria-label="Feed"><span class="nav-icon" aria-hidden="true">✦</span><span>Feed</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān"><span class="nav-icon" aria-hidden="true">📖</span><span>Qurʾān</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Weitere Bereiche"><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
-<div class="float-actions is-collapsed" id="floatActions" aria-label="Schnellzugriff" data-mode="bottom-capsule">
-  <div class="float-actions-panel" id="floatActionsPanel">
-    <button type="button" class="float-touch-handle" id="floatTouchHandle" aria-label="Schnellzugriff öffnen" aria-expanded="false" title="Schnellzugriff">
-      <span class="float-handle-grid" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+<div id="quickAccessLayer" class="quick-access-layer" hidden>
+  <button type="button" id="quickAccessScrim" class="quick-access-scrim" aria-label="Schnellzugriff schließen"></button>
+  <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten für Schnellzugriff</div>
+  <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" hidden>
+    <button id="quickAccessOrientBtn" class="quick-access-item" type="button" role="menuitem" aria-label="Orientierung öffnen" title="Orientierung">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.2"/><path d="M12 4.8v2.2M12 17v2.2M4.8 12h2.2M17 12h2.2"/><path d="M12 8.2 14.6 12 12 15.8 9.4 12Z"/></svg>
+      <span class="quick-access-item-copy"><span class="quick-access-item-label">Orientierung</span></span>
+      <span class="quick-access-item-chevron" aria-hidden="true">›</span>
     </button>
-    <div class="float-item">
-      <button id="qiblaFloat" class="float-btn qibla-float" type="button" aria-label="Orientierung öffnen" title="Orientierung">
-        <span aria-hidden="true">🧭</span>
-        <span class="float-btn-label">Orientierung</span>
-      </button>
-    </div>
-    <div class="float-item">
-      <button id="savedFloat" class="float-btn saved-float" type="button" aria-label="Merkliste öffnen" title="Merkliste">
-        <span aria-hidden="true">♡</span>
-        <span class="float-btn-label">Merkliste</span>
-      </button>
-    </div>
-    <div class="float-item">
-      <button id="pushFloat" class="float-btn" type="button" aria-label="Erinnerungen öffnen" title="Erinnerungen">
-        <span aria-hidden="true">🔔</span>
-        <span class="float-btn-label">Erinnerungen</span>
-      </button>
-    </div>
+    <button id="quickAccessSavedBtn" class="quick-access-item" type="button" role="menuitem" aria-label="Merkliste öffnen" title="Merkliste">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.4L6 20V5.5a1 1 0 0 1 1-1Z"/></svg>
+      <span class="quick-access-item-copy"><span class="quick-access-item-label">Merkliste</span></span>
+      <span id="quickAccessSavedBadge" class="quick-access-item-meta" hidden>0</span>
+      <span class="quick-access-item-chevron" aria-hidden="true">›</span>
+    </button>
+    <button id="quickAccessRemindBtn" class="quick-access-item" type="button" role="menuitem" aria-label="Erinnerungen öffnen" title="Erinnerungen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a4 4 0 0 0-4 4v1.2c0 .9-.3 1.78-.86 2.48L5.8 13.5A1.5 1.5 0 0 0 7 16h10a1.5 1.5 0 0 0 1.2-2.5l-1.34-1.82A4 4 0 0 1 16 9.2V8a4 4 0 0 0-4-4"/><path d="M10 18a2 2 0 0 0 4 0"/></svg>
+      <span class="quick-access-item-copy"><span class="quick-access-item-label">Erinnerungen</span></span>
+      <span id="quickAccessRemindStatus" class="quick-access-item-status" hidden></span>
+      <span class="quick-access-item-chevron" aria-hidden="true">›</span>
+    </button>
   </div>
 </div>
 
@@ -16257,7 +16289,7 @@ function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage
 const BOTTOM_TAB_ROOTS={home:{view:"home",value:""},ilm:{view:"ilm",value:""},quiz:{view:"quiz",value:""},feed:{view:"feed",value:""},quran:{view:"quran",value:""},more:{view:"more",value:""}};
 function bottomTabRootRoute(tab){return BOTTOM_TAB_ROOTS[tab]?{view:BOTTOM_TAB_ROOTS[tab].view,value:BOTTOM_TAB_ROOTS[tab].value||""}:null}
 function isExactBottomTabRoot(tab,route=currentRoute){const r=route||readRoute();if(bottomNavTabForRoute(r)!==tab)return false;if(tab==="home")return r.view==="home"&&!r.value;if(tab==="quiz"){if(r.view!=="quiz")return false;const mode=String(r.value||"").trim().toLowerCase();return !mode||mode==="home"}const root=bottomTabRootRoute(tab);return !!(root&&routeEqual(r,root))}
-function closeTransientNavOverlays(){try{if(typeof closeQuranExplanationPanel==="function"&&quranExplanationState)closeQuranExplanationPanel({fromPop:true})}catch(e){}try{if(typeof closeIlmSheet==="function")closeIlmSheet()}catch(e){}const hist=$("ilmHistoryDrawer");if(hist)hist.setAttribute("hidden","");const menu=$("ilmMenuPopover");if(menu)menu.setAttribute("hidden","");if(typeof syncIlmOverlayState==="function")syncIlmOverlayState();document.querySelectorAll(".cal-tl-info-sheet").forEach(el=>{el.hidden=true;el.classList.remove("is-open")})}
+function closeTransientNavOverlays(){try{if(typeof closeQuickAccessMenu==='function')closeQuickAccessMenu()}catch(e){}try{if(typeof closeQuranExplanationPanel==="function"&&quranExplanationState)closeQuranExplanationPanel({fromPop:true})}catch(e){}try{if(typeof closeIlmSheet==="function")closeIlmSheet()}catch(e){}const hist=$("ilmHistoryDrawer");if(hist)hist.setAttribute("hidden","");const menu=$("ilmMenuPopover");if(menu)menu.setAttribute("hidden","");if(typeof syncIlmOverlayState==="function")syncIlmOverlayState();document.querySelectorAll(".cal-tl-info-sheet").forEach(el=>{el.hidden=true;el.classList.remove("is-open")})}
 function scrollTabRootToTop(tab){window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();const run=()=>{if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(0,{force:true});else window.scrollTo({top:0,behavior:"auto"})};requestAnimationFrame(()=>requestAnimationFrame(run))}
 function navigateToTabRootReplace(view,value=""){const from=readRoute();const to={view,value:value||""};if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(from.view==="quran-surah"&&view==="quran"&&typeof saveQuranAutoFromVisible==="function")saveQuranAutoFromVisible(true);saveNavScroll(from);clearNavStack();window.__restoreScrollY=0;window.__smoothNav=false;window.__pageNavDir=null;const hash=routeToHash(view,value);try{history.replaceState(null,"",location.pathname+(location.search||"")+hash)}catch(e){location.replace(hash);return}render();scrollTabRootToTop(bottomNavTabForRoute(to))}
 function rememberIlmReturnRoute(route=currentRoute,scroll=window.scrollY||0){try{if(route&&route.view&&route.view!=="ilm")sessionStorage.setItem("darIlmReturnRouteV1",JSON.stringify({route,scroll:Number(scroll)||0,at:Date.now()}))}catch(e){}}
@@ -16281,7 +16313,7 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const tab=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){bindMoreQuickAccessTrigger(btn);return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const tab=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -19853,17 +19885,15 @@ function renderMoreFeatureRow(item){const search=[item.title,item.desc,item.grou
 function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><h3>${esc(title)}</h3><div class="more-group-grid">${items.map(renderMoreFeatureRow).join("")}</div></section>`}
 function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
 
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog().filter(item=>item.id!=="quiz");return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
-function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
-function dailyDua(){const d=dailyContentToday();if(d?.dua?.id){const match=DUAS.find(x=>String(x.id)===String(d.dua.id));if(match)return match}if(!DUAS.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return DUAS[Math.abs(day)%DUAS.length]}
-function renderDailyDua(){const d=dailyDua();if(!d)return"";return`<section class="daily-box premium-surface" data-nav="dua" data-value="${esc(d.id)}"><div class="daily-label">Duʿāʾ des Tages</div><h3 class="daily-title">${esc(d.title)}</h3><div class="daily-text">${esc(d.de||d.occasion||"")}</div><div class="folder-meta"><span>${esc(d.cat)}</span><span>${esc(d.type)}</span></div></section>`}
-function recommendedPost(){const d=dailyContentToday();if(d?.recommendation?.id){const match=posts.find(p=>String(p.id)===String(d.recommendation.id));if(match)return match}if(!posts.length)return null;const start=new Date(new Date().getFullYear(),0,0);const day=Math.floor((new Date()-start)/86400000);return posts[Math.abs(day*7)%posts.length]}
-function renderRecommendedPost(){const post=recommendedPost();if(!post)return"";return`<section class="recommended-box premium-surface" data-nav="post" data-value="${esc(post.id)}"><div class="recommended-label">Heute empfohlen</div><h3 class="recommended-title">${esc(post.title)}</h3><div class="recommended-text">${esc(findQuote(post))}</div><div class="folder-meta">${post.category?`<span>${esc(normalizePostCategory(post.category))}</span>`:""}${post.scholar?`<span>${esc(post.scholar)}</span>`:""}</div></section>`}
-function renderHighlightSections(){const rec=renderRecommendedPost();const dua=renderDailyDua();if(!rec&&!dua)return"";if(rec&&dua)return`<div class="highlight-sections">${rec}<hr class="gold-divider" aria-hidden="true">${dua}</div>`;return`<div class="highlight-sections">${rec||dua}</div>`}
-const ISLAMIC_EVENTS=[{m:1,d:1,name:"Islamisches Neujahr",note:"Beginn des Monats Muḥarram."},{m:1,d:10,name:"ʿĀshūrāʾ",note:"10. Muḥarram."},{m:9,d:1,name:"Beginn Ramaḍān",note:"Beginn des Fastenmonats, abhängig von Mondsichtung."},{m:9,d:21,name:"Letzte zehn Nächte",note:"Besonders wichtige Nächte im Ramaḍān."},{m:10,d:1,name:"ʿĪd al-Fiṭr",note:"Fest nach Ramaḍān, abhängig von Mondsichtung."},{m:12,d:8,name:"Yawm at-Tarwiyah",note:"8. Dhū al-Ḥijjah."},{m:12,d:9,name:"Tag von ʿArafah",note:"9. Dhū al-Ḥijjah."},{m:12,d:10,name:"ʿĪd al-Aḍḥā",note:"10. Dhū al-Ḥijjah, abhängig von Mondsichtung."},{m:12,d:11,name:"Ayyām at-Tashrīq",note:"11.–13. Dhū al-Ḥijjah."}];
-function hijriMonthName(n){return["","Muḥarram","Ṣafar","Rabīʿ al-Awwal","Rabīʿ ath-Thānī","Jumādā al-Ūlā","Jumādā ath-Thāniyah","Rajab","Shaʿbān","Ramaḍān","Shawwāl","Dhū al-Qaʿdah","Dhū al-Ḥijjah"][Number(n)]||""}
-function gregorianFromHijri(hYear,hMonth,hDay){const jd=Math.floor((11*hYear+3)/30)+354*hYear+30*hMonth-Math.floor((hMonth-1)/2)+hDay+1948440-385;let l=jd+68569;let n=Math.floor(4*l/146097);l=l-Math.floor((146097*n+3)/4);let i=Math.floor(4000*(l+1)/1461001);l=l-Math.floor(1461*i/4)+31;let j=Math.floor(80*l/2447);let day=l-Math.floor(2447*j/80);l=Math.floor(j/11);let month=j+2-12*l;let year=100*(n-49)+i+l;return new Date(year,month-1,day)}
-function islamicCalendarForDate(date){const d=date instanceof Date?date:new Date(date||Date.now());const greg=new Intl.DateTimeFormat("de-DE",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}).format(d);const gregorianMonths=["januar","februar","märz","april","mai","juni","juli","august","september","oktober","november","dezember"];try{const fmt=new Intl.DateTimeFormat("de-DE-u-ca-islamic",{day:"numeric",month:"long",year:"numeric"});const parts=fmt.formatToParts(d);const day=parts.find(p=>p.type==="day")?.value||"";const month=parts.find(p=>p.type==="month")?.value||"";const year=parts.find(p=>p.type==="year")?.value||"";if(day&&month&&year&&!gregorianMonths.includes(month.toLowerCase())){return{day,month,year,greg}}}catch(e){}const fallback=gregorianToHijri(d);return{day:String(fallback.day),month:hijriMonthName(fallback.month),year:String(fallback.year),greg}}
+
+function renderMoreQuickAccessSection(){
+  const compass='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.2"/><path d="M12 4.8v2.2M12 17v2.2M4.8 12h2.2M17 12h2.2"/><path d="M12 8.2 14.6 12 12 15.8 9.4 12Z"/></svg>';
+  const bookmark='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.4L6 20V5.5a1 1 0 0 1 1-1Z"/></svg>';
+  const bell='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a4 4 0 0 0-4 4v1.2c0 .9-.3 1.78-.86 2.48L5.8 13.5A1.5 1.5 0 0 0 7 16h10a1.5 1.5 0 0 0 1.2-2.5l-1.34-1.82A4 4 0 0 1 16 9.2V8a4 4 0 0 0-4-4"/><path d="M10 18a2 2 0 0 0 4 0"/></svg>';
+  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__head"><h3>Schnellzugriff</h3><p>Orientierung, Merkliste und Erinnerungen.</p></div><div class="more-quick-access__list"><button type="button" class="more-quick-access__btn" data-more-quick="orient">${compass}<span class="more-quick-access__label">Orientierung</span><span class="more-quick-access__chevron" aria-hidden="true">›</span></button><button type="button" class="more-quick-access__btn" data-more-quick="saved">${bookmark}<span class="more-quick-access__label">Merkliste</span><span class="more-quick-access__chevron" aria-hidden="true">›</span></button><button type="button" class="more-quick-access__btn" data-more-quick="remind">${bell}<span class="more-quick-access__label">Erinnerungen</span><span class="more-quick-access__chevron" aria-hidden="true">›</span></button></div></section>`;
+}
+
+function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}}catch(e){}const fallback=gregorianToHijri(d);return{day:String(fallback.day),month:hijriMonthName(fallback.month),year:String(fallback.year),greg}}
 function islamicCalendarNow(){return islamicCalendarForDate(new Date())}
 function hijriTodayLine(){try{const t=islamicCalendarForDate(new Date());return `Heute ${t.day}. ${t.month} ${t.year}`}catch(e){return "Islamisches Datum"}}
 function hijriTodayTomorrowLine(){try{const t=islamicCalendarForDate(new Date());const tm=islamicCalendarForDate(new Date(Date.now()+86400000));return `Heute ${t.day}. ${t.month} ${t.year} · Morgen ${tm.day}. ${tm.month} ${tm.year}`}catch(e){return "Islamisches Datum"}}
@@ -21132,26 +21162,9 @@ window.addEventListener("hashchange",render);
 const FLOAT_TIPS_KEY="darFloatTipsShownV1";
 function showFloatTipsOnce(){return}
 const FLOAT_TOUCHBAR_KEY="darFloatTouchbarActivatedV1";
-function collapseFloatTouchbar(){
-  const bar=$("floatActions");
-  const handle=$("floatTouchHandle");
-  if(!bar||bar.dataset.mode==="disabled")return;
-  bar.classList.remove("is-expanded","is-intro","is-dragging","is-scrolling");
-  bar.classList.add("is-collapsed");
-  if(handle)handle.setAttribute("aria-expanded","false");
-}
-function expandFloatTouchbar(){
-  const bar=$("floatActions");
-  const handle=$("floatTouchHandle");
-  if(!bar||bar.dataset.mode==="disabled")return;
-  bar.classList.remove("is-collapsed","is-dragging","is-scrolling");
-  bar.classList.add("is-expanded");
-  if(handle)handle.setAttribute("aria-expanded","true");
-}
-function markFloatTouchbarActivated(){
-  try{localStorage.setItem(FLOAT_TOUCHBAR_KEY,"1")}catch(e){}
-  collapseFloatTouchbar();
-}
+function collapseFloatTouchbar(){}
+function expandFloatTouchbar(){}
+function markFloatTouchbarActivated(){}
 function initAppZoomLock(){
   if(window.__appZoomLockBound)return;
   window.__appZoomLockBound=true;
@@ -21162,30 +21175,100 @@ function initAppZoomLock(){
     e.preventDefault();
   },{passive:false});
 }
-function initFloatTouchbar(){
-  const bar=$("floatActions");
-  const handle=$("floatTouchHandle");
-  if(!bar||!handle)return;
-  if(bar.dataset.mode==="disabled"){bar.hidden=true;return}
-  let activated=false;
-  try{activated=localStorage.getItem(FLOAT_TOUCHBAR_KEY)==="1"}catch(e){}
-  if(activated)collapseFloatTouchbar();else expandFloatTouchbar();
-  if(handle)handle.onclick=(e)=>{
-    e.stopPropagation();
-    bar.classList.contains("is-expanded")?collapseFloatTouchbar():expandFloatTouchbar();
-  };
-  const closeIfOpen=()=>{
-    if(bar.classList.contains("is-expanded"))collapseFloatTouchbar();
-  };
-  bar.querySelectorAll(".float-btn").forEach(btn=>btn.addEventListener("click",markFloatTouchbarActivated));
-  document.addEventListener("click",(e)=>{if(!bar.contains(e.target))closeIfOpen()},{passive:true});
-  document.addEventListener("keydown",(e)=>{if(e.key==="Escape")closeIfOpen()});
-  window.addEventListener("scroll",()=>{if(bar.classList.contains("is-expanded"))collapseFloatTouchbar();else{bar.classList.add("is-scrolling");clearTimeout(window.__darQuickAccessScrollTimer);window.__darQuickAccessScrollTimer=setTimeout(()=>bar.classList.remove("is-scrolling"),140)}},{passive:true});
-  window.addEventListener("hashchange",closeIfOpen,{passive:true});
-  window.addEventListener("pagehide",closeIfOpen,{passive:true});
-  document.addEventListener("visibilitychange",()=>{if(document.visibilityState!=="visible")closeIfOpen()});
-  document.addEventListener("focusin",(e)=>{if(e.target?.closest?.("input,textarea,select,[contenteditable='true']"))closeIfOpen()},{passive:true});
-  if(window.visualViewport)window.visualViewport.addEventListener("resize",()=>{if(Math.abs(window.visualViewport.height-window.innerHeight)>120)closeIfOpen()},{passive:true});
+const QUICK_ACCESS_HINT_KEY="quickAccessLongPressHintSeen";
+const LONG_PRESS_DELAY=500;
+const MOVE_TOLERANCE=8;
+let isQuickMenuOpen=false;
+let longPressTriggered=false;
+let quickMenuAnchorRect=null;
+function closeQuickAccessMenu({restoreFocus=false,hideHint=false}={}){
+  const layer=$("quickAccessLayer");
+  const menu=$("quickAccessMenu");
+  const hint=$("quickAccessHint");
+  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  if(hideHint&&hint){hint.hidden=true;hint.classList.remove("is-visible")}
+  if(layer)layer.classList.remove("is-open");
+  if(menu)menu.hidden=true;
+  isQuickMenuOpen=false;quickMenuAnchorRect=null;
+  if(layer&&menu&&hint&&menu.hidden&&hint.hidden)layer.hidden=true;
+  if(restoreFocus&&moreBtn&&typeof moreBtn.focus==="function"){try{moreBtn.focus({preventScroll:true})}catch(e){try{moreBtn.focus()}catch(_){}}}
+}
+function positionQuickAccessUi(anchorRect){
+  const menu=$("quickAccessMenu");const hint=$("quickAccessHint");if(!anchorRect)return;
+  const menuRight=Math.max(12,window.innerWidth-anchorRect.right);
+  const keyboardLift=window.visualViewport?Math.max(0,window.innerHeight-window.visualViewport.height):0;
+  const bottomGap=10+keyboardLift;
+  if(menu){menu.style.right=`${menuRight}px`;menu.style.bottom=`calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + ${bottomGap}px)`}
+  if(hint){hint.style.right=`${menuRight}px`;hint.style.bottom=`calc(var(--bottom-navigation-height,64px) + env(safe-area-inset-bottom) + ${bottomGap+4}px)`}
+}
+function openQuickAccessMenu(anchorBtn){
+  const layer=$("quickAccessLayer");const menu=$("quickAccessMenu");const hint=$("quickAccessHint");
+  if(!layer||!menu||!anchorBtn)return;
+  quickMenuAnchorRect=anchorBtn.getBoundingClientRect();positionQuickAccessUi(quickMenuAnchorRect);
+  layer.hidden=false;menu.hidden=false;layer.classList.add("is-open");isQuickMenuOpen=true;
+  if(hint){hint.hidden=true;hint.classList.remove("is-visible")}
+  try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"1")}catch(e){}
+  try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}
+  updateQuickAccessIndicators();
+}
+function showQuickAccessHint(anchorBtn){
+  const layer=$("quickAccessLayer");const hint=$("quickAccessHint");const menu=$("quickAccessMenu");
+  if(!layer||!hint||!anchorBtn||isQuickMenuOpen)return;
+  let seen=false;try{seen=localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="1"}catch(e){}
+  if(seen)return;
+  quickMenuAnchorRect=anchorBtn.getBoundingClientRect();positionQuickAccessUi(quickMenuAnchorRect);
+  layer.hidden=false;if(menu)menu.hidden=true;hint.hidden=false;
+  requestAnimationFrame(()=>hint.classList.add("is-visible"));
+  clearTimeout(window.__quickAccessHintTimer);
+  window.__quickAccessHintTimer=setTimeout(()=>{hint.classList.remove("is-visible");setTimeout(()=>{hint.hidden=true;if(!isQuickMenuOpen)layer.hidden=true},160)},5000);
+  try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"1")}catch(e){}
+}
+function updateQuickAccessIndicators(){
+  try{bindMoreQuickAccessPageButtons()}catch(e){}
+  const savedBadge=$("quickAccessSavedBadge");const pushStatus=$("quickAccessRemindStatus");
+  if(savedBadge){const count=(typeof savedIds==="function"?savedIds():[]).length;savedBadge.hidden=!count;if(count)savedBadge.textContent=String(Math.min(count,99))}
+  if(pushStatus){const active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)&&!!String(window.OneSignal?.User?.PushSubscription?.id||"").trim();pushStatus.hidden=!active}
+}
+function bindMoreQuickAccessTrigger(btn){
+  if(!btn||btn.dataset.quickMenuBound==="1")return;btn.dataset.quickMenuBound="1";
+  let longPressTimer=null;let suppressClickUntil=0;let pointerStartX=0;let pointerStartY=0;
+  const clearPress=(resetTrigger=false)=>{if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}btn.classList.remove("is-pressed");if(resetTrigger)longPressTriggered=false};
+  btn.addEventListener("pointerdown",ev=>{if(ev.pointerType==="mouse"&&ev.button!==0)return;longPressTriggered=false;pointerStartX=ev.clientX;pointerStartY=ev.clientY;btn.classList.add("is-pressed");longPressTimer=setTimeout(()=>{longPressTriggered=true;suppressClickUntil=Date.now()+700;openQuickAccessMenu(btn)},LONG_PRESS_DELAY)});
+  btn.addEventListener("pointermove",ev=>{if(!longPressTimer)return;if(Math.abs(ev.clientX-pointerStartX)>MOVE_TOLERANCE||Math.abs(ev.clientY-pointerStartY)>MOVE_TOLERANCE)clearPress(true)},{passive:true});
+  ["pointerup","pointercancel","pointerleave"].forEach(type=>btn.addEventListener(type,()=>clearPress(false),{passive:true}));
+  btn.addEventListener("click",ev=>{clearPress(false);if(longPressTriggered||Date.now()<suppressClickUntil){ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return}try{btn.blur&&btn.blur()}catch(e){}navigateBottomNavTab("more")});
+  btn.addEventListener("contextmenu",ev=>{ev.preventDefault();longPressTriggered=true;openQuickAccessMenu(btn)});
+  btn.addEventListener("keydown",ev=>{if((ev.shiftKey&&ev.key==="F10")||ev.key==="ContextMenu"){ev.preventDefault();openQuickAccessMenu(btn)}});
+}
+function bindMoreQuickAccessPageButtons(){
+  document.querySelectorAll("[data-more-quick]").forEach(btn=>{
+    if(btn.dataset.bound==="1")return;btn.dataset.bound="1";
+    btn.addEventListener("click",()=>{
+      const kind=btn.getAttribute("data-more-quick");
+      if(kind==="orient"){openQiblaFromFloat();return}
+      if(kind==="saved"){navigate("saved");return}
+      if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)}
+    });
+  });
+}
+function initQuickAccessMenu(){
+  if(window.__darQuickAccessMenuBound)return;window.__darQuickAccessMenuBound=true;
+  const layer=$("quickAccessLayer");const scrim=$("quickAccessScrim");const menu=$("quickAccessMenu");
+  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  if(!layer||!scrim||!menu||!moreBtn)return;
+  scrim.addEventListener("click",()=>closeQuickAccessMenu({restoreFocus:true}));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isQuickMenuOpen){e.preventDefault();closeQuickAccessMenu({restoreFocus:true})}});
+  document.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true});
+  document.addEventListener("focusin",e=>{if(e.target?.closest?.("input,textarea,[contenteditable='true']"))closeQuickAccessMenu()});
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)closeQuickAccessMenu()});
+  window.addEventListener("hashchange",()=>closeQuickAccessMenu(),{passive:true});
+  window.addEventListener("pagehide",()=>closeQuickAccessMenu(),{passive:true});
+  window.addEventListener("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect())},{passive:true});
+  window.visualViewport?.addEventListener?.("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());else closeQuickAccessMenu()},{passive:true});
+  const orientBtn=$("quickAccessOrientBtn");if(orientBtn)orientBtn.onclick=()=>{closeQuickAccessMenu();openQiblaFromFloat()};
+  const savedBtn=$("quickAccessSavedBtn");if(savedBtn)savedBtn.onclick=()=>{closeQuickAccessMenu();navigate("saved")};
+  const remindBtn=$("quickAccessRemindBtn");if(remindBtn)remindBtn.onclick=()=>{closeQuickAccessMenu();navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)};
+  updateQuickAccessIndicators();setTimeout(()=>showQuickAccessHint(moreBtn),900);
 }
 window.addEventListener("DOMContentLoaded",()=>{
   try{
@@ -21212,6 +21295,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     initBottomNavSwipe();
     initBottomNavContentSwipe();
     initBottomNavGuard();
+    initQuickAccessMenu();
     initFloatTouchbar();
     initQuranWakeLock();
     updateHijriHeaderDate();
@@ -21221,11 +21305,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     window.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
-    const qiblaFloatBtn=$("qiblaFloat");
-    if(qiblaFloatBtn)qiblaFloatBtn.onclick=()=>{markFloatTouchbarActivated();openQiblaFromFloat()};
-    const savedFloatBtn=$("savedFloat");
-    if(savedFloatBtn)savedFloatBtn.onclick=()=>{markFloatTouchbarActivated();navigate("saved")};
-    setTimeout(showFloatTipsOnce,900);
+    setTimeout(()=>{try{const moreBtn=document.querySelector('[data-bottom-nav="more"]');if(moreBtn)showQuickAccessHint(moreBtn)}catch(e){}},900);
     window.addEventListener("pageshow",e=>{ensureBottomNavDock();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>ensureBottomNavDock())},{passive:true});
   }catch(e){
     console.error("App-Start fehlgeschlagen:",e);
@@ -21262,7 +21342,7 @@ window.addEventListener("load",()=>{
 });
 </script>
 <script>
-(function(){const pushBtn=document.getElementById("pushFloat");if(!pushBtn)return;async function waitForOneSignal(timeoutMs){const start=Date.now();while(Date.now()-start<(timeoutMs||10000)){try{if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY)return window.OneSignal}catch(e){}await new Promise(resolve=>setTimeout(resolve,180))}return window.OneSignal||null}pushBtn.addEventListener("click",async function(){const permission=typeof getNotificationPermission==="function"?getNotificationPermission():"default";if(permission==="denied"){alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");return}const OneSignal=await waitForOneSignal();try{if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.isPushSupported==="function"&&!OneSignal.Notifications.isPushSupported()){alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");return}if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&typeof OneSignal.User.PushSubscription.optIn==="function"){await OneSignal.User.PushSubscription.optIn()}else if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.requestPermission==="function"){await OneSignal.Notifications.requestPermission()}else if(typeof requestNotificationPermission==="function"){await requestNotificationPermission()}await new Promise(r=>setTimeout(r,400));if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&OneSignal.User.PushSubscription.optedIn){const welcomed=typeof syncPushRegistrationAndWelcome==="function"?await syncPushRegistrationAndWelcome(OneSignal):false;if(getPrayerSettings().reminder&&typeof syncPrayerPushTags==="function"){await syncPrayerPushTags(undefined,{retries:5})}if(typeof maintainPushHealth==="function")await maintainPushHealth({silent:true});if(typeof updatePushFloatButton==="function")updatePushFloatButton();alert(welcomed?"✓ Push aktiv – Willkommens-Nachricht wurde gesendet.":"✓ Push-Benachrichtigungen sind aktiv – für Beiträge, Tagesinhalt und Gebetszeiten.")}}catch(e){console.error(e);alert("Push konnte nicht aktiviert werden. Bitte prüfe Browser-Berechtigung und OneSignal-Service-Worker.")}})})();
+(function(){const pushBtn=document.getElementById("pushFloatLegacyRemoved");if(!pushBtn)return;async function waitForOneSignal(timeoutMs){const start=Date.now();while(Date.now()-start<(timeoutMs||10000)){try{if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY)return window.OneSignal}catch(e){}await new Promise(resolve=>setTimeout(resolve,180))}return window.OneSignal||null}pushBtn.addEventListener("click",async function(){const permission=typeof getNotificationPermission==="function"?getNotificationPermission():"default";if(permission==="denied"){alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");return}const OneSignal=await waitForOneSignal();try{if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.isPushSupported==="function"&&!OneSignal.Notifications.isPushSupported()){alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");return}if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&typeof OneSignal.User.PushSubscription.optIn==="function"){await OneSignal.User.PushSubscription.optIn()}else if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.requestPermission==="function"){await OneSignal.Notifications.requestPermission()}else if(typeof requestNotificationPermission==="function"){await requestNotificationPermission()}await new Promise(r=>setTimeout(r,400));if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&OneSignal.User.PushSubscription.optedIn){const welcomed=typeof syncPushRegistrationAndWelcome==="function"?await syncPushRegistrationAndWelcome(OneSignal):false;if(getPrayerSettings().reminder&&typeof syncPrayerPushTags==="function"){await syncPrayerPushTags(undefined,{retries:5})}if(typeof maintainPushHealth==="function")await maintainPushHealth({silent:true});if(typeof updatePushFloatButton==="function")updatePushFloatButton();alert(welcomed?"✓ Push aktiv – Willkommens-Nachricht wurde gesendet.":"✓ Push-Benachrichtigungen sind aktiv – für Beiträge, Tagesinhalt und Gebetszeiten.")}}catch(e){console.error(e);alert("Push konnte nicht aktiviert werden. Bitte prüfe Browser-Berechtigung und OneSignal-Service-Worker.")}})})();
 </script>
 <script>
 if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/service-worker.js",{updateViaCache:"none"}).catch(function(e){console.warn("Service Worker konnte nicht registriert werden:",e)})})}
