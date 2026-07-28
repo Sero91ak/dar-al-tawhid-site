@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v495";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v496";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8968,7 +8968,7 @@ body.is-area-route .float-actions{display:none!important}
 .quick-access-layer[hidden]{display:none!important}
 .quick-access-scrim{display:none!important}
 .quick-access-menu{display:none;flex-direction:column;align-items:center;gap:10px}
-.quick-access-layer.is-open .quick-access-menu{display:flex}
+.quick-access-layer.is-open .quick-access-menu{display:flex;pointer-events:auto}
 .quick-access-layer.is-hint-only .quick-access-menu{display:none!important}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip{animation:quickAccessChipIn .18s cubic-bezier(.22,1,.36,1) both}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(1){animation-delay:0ms}
@@ -8989,7 +8989,8 @@ body.is-area-route .float-actions{display:none!important}
 .more-quick-access__list{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .more-quick-access__chip{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 88%,var(--panel,rgba(255,255,255,.06)) 12%);font-size:20px;line-height:1;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
 .more-quick-access__chip:hover,.more-quick-access__chip:active{border-color:color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));box-shadow:0 0 0 2px color-mix(in srgb,var(--gold2,var(--gold)) 24%,transparent),0 4px 14px color-mix(in srgb,var(--gold2,var(--gold)) 16%,transparent)}
-.bottom-nav-btn[data-bottom-nav="more"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.bottom-nav-btn[data-bottom-nav="more"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.bottom-nav-btn[data-bottom-nav="more"].is-pressed,.bottom-nav-btn[data-bottom-nav="more"]:active{transform:none!important}
 
 /* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
 </style>
@@ -20468,7 +20469,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v495";
+const APP_BUILD_ID="app-shell-v496";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21223,15 +21224,52 @@ function updateQuickAccessIndicators(){
   if(savedBadge){const count=(typeof savedIds==="function"?savedIds():[]).length;savedBadge.hidden=!count;if(count)savedBadge.textContent=String(Math.min(count,99))}
   if(pushStatus){const active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)&&!!String(window.OneSignal?.User?.PushSubscription?.id||"").trim();pushStatus.hidden=!active}
 }
+function bindQuickAccessChip(chip,fn){
+  if(!chip||chip.dataset.quickChipBound==="1")return;chip.dataset.quickChipBound="1";
+  let lastTouch=0;
+  const run=(ev,fromPointer)=>{
+    if(fromPointer&&ev.pointerType==="mouse")return;
+    if(ev.type==="click"&&Date.now()-lastTouch<420){ev.preventDefault();ev.stopPropagation();return}
+    if(fromPointer)lastTouch=Date.now();
+    if(ev.cancelable)ev.preventDefault();
+    ev.stopPropagation();
+    fn();
+  };
+  chip.addEventListener("pointerup",ev=>run(ev,true),{passive:false});
+  chip.addEventListener("click",ev=>run(ev,false));
+}
 function bindMoreQuickAccessTrigger(btn){
   if(!btn||btn.dataset.quickMenuBound==="1")return;btn.dataset.quickMenuBound="1";
-  let longPressTimer=null;let suppressClickUntil=0;let pointerStartX=0;let pointerStartY=0;
-  const clearPress=(resetTrigger=false)=>{if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}btn.classList.remove("is-pressed");if(resetTrigger)longPressTriggered=false};
-  btn.addEventListener("pointerdown",ev=>{if(ev.pointerType==="mouse"&&ev.button!==0)return;longPressTriggered=false;pointerStartX=ev.clientX;pointerStartY=ev.clientY;btn.classList.add("is-pressed");longPressTimer=setTimeout(()=>{longPressTriggered=true;suppressClickUntil=Date.now()+700;openQuickAccessMenu(btn)},LONG_PRESS_DELAY)});
-  btn.addEventListener("pointermove",ev=>{if(!longPressTimer)return;if(Math.abs(ev.clientX-pointerStartX)>MOVE_TOLERANCE||Math.abs(ev.clientY-pointerStartY)>MOVE_TOLERANCE)clearPress(true)},{passive:true});
-  ["pointerup","pointercancel","pointerleave"].forEach(type=>btn.addEventListener(type,()=>clearPress(false),{passive:true}));
-  btn.addEventListener("click",ev=>{clearPress(false);if(longPressTriggered||Date.now()<suppressClickUntil){ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return}try{btn.blur&&btn.blur()}catch(e){}navigateBottomNavTab("more")});
-  btn.addEventListener("contextmenu",ev=>{ev.preventDefault();longPressTriggered=true;openQuickAccessMenu(btn)});
+  let longPressTimer=null;let suppressClickUntil=0;let pointerStartX=0;let pointerStartY=0;let activePointerId=null;
+  const clearTimer=()=>{if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}};
+  const endPress=({cancel=false}={})=>{clearTimer();btn.classList.remove("is-pressed");activePointerId=null;if(cancel)longPressTriggered=false};
+  const openMorePage=()=>{try{btn.blur&&btn.blur()}catch(e){}navigateBottomNavTab("more")};
+  btn.addEventListener("pointerdown",ev=>{
+    if(ev.pointerType==="mouse"&&ev.button!==0)return;
+    if(activePointerId!=null)return;
+    activePointerId=ev.pointerId;longPressTriggered=false;pointerStartX=ev.clientX;pointerStartY=ev.clientY;
+    btn.classList.add("is-pressed");
+    longPressTimer=setTimeout(()=>{longPressTriggered=true;suppressClickUntil=Date.now()+700;openQuickAccessMenu(btn)},LONG_PRESS_DELAY);
+  },{passive:true});
+  btn.addEventListener("pointermove",ev=>{
+    if(ev.pointerId!==activePointerId||!longPressTimer)return;
+    if(Math.abs(ev.clientX-pointerStartX)>MOVE_TOLERANCE||Math.abs(ev.clientY-pointerStartY)>MOVE_TOLERANCE)endPress({cancel:true});
+  },{passive:true});
+  btn.addEventListener("pointerup",ev=>{
+    if(ev.pointerId!==activePointerId)return;
+    const wasLong=longPressTriggered||Date.now()<suppressClickUntil;
+    endPress();
+    if(wasLong){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return}
+    if(ev.cancelable)ev.preventDefault();
+    ev.stopPropagation();
+    openMorePage();
+  },{passive:false});
+  btn.addEventListener("pointercancel",ev=>{if(ev.pointerId!==activePointerId)return;endPress({cancel:true})},{passive:true});
+  btn.addEventListener("click",ev=>{
+    if(longPressTriggered||Date.now()<suppressClickUntil){ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return}
+    ev.preventDefault();ev.stopPropagation();openMorePage();
+  });
+  btn.addEventListener("contextmenu",ev=>{ev.preventDefault();longPressTriggered=true;suppressClickUntil=Date.now()+700;openQuickAccessMenu(btn)});
   btn.addEventListener("keydown",ev=>{if((ev.shiftKey&&ev.key==="F10")||ev.key==="ContextMenu"){ev.preventDefault();openQuickAccessMenu(btn)}});
 }
 function bindMoreQuickAccessPageButtons(){
@@ -21258,16 +21296,16 @@ function initQuickAccessMenu(){
   window.addEventListener("hashchange",()=>closeQuickAccessMenu(),{passive:true});
   window.addEventListener("pagehide",()=>closeQuickAccessMenu(),{passive:true});
   window.addEventListener("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect())},{passive:true});
-  window.visualViewport?.addEventListener?.("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());else closeQuickAccessMenu()},{passive:true});
+  window.visualViewport?.addEventListener?.("resize",()=>{if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect())},{passive:true});
   menu.querySelectorAll(".quick-access-chip").forEach(chip=>{
     const litOn=()=>chip.classList.add("is-lit");
     const litOff=()=>chip.classList.remove("is-lit");
     chip.addEventListener("pointerdown",litOn,{passive:true});
     ["pointerup","pointercancel","pointerleave"].forEach(type=>chip.addEventListener(type,litOff,{passive:true}));
   });
-  const orientBtn=$("quickAccessOrientBtn");if(orientBtn)orientBtn.onclick=()=>{closeQuickAccessMenu();openQiblaFromFloat()};
-  const savedBtn=$("quickAccessSavedBtn");if(savedBtn)savedBtn.onclick=()=>{closeQuickAccessMenu();navigate("saved")};
-  const remindBtn=$("quickAccessRemindBtn");if(remindBtn)remindBtn.onclick=()=>{closeQuickAccessMenu();navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)};
+  bindQuickAccessChip($("quickAccessOrientBtn"),()=>{closeQuickAccessMenu();openQiblaFromFloat()});
+  bindQuickAccessChip($("quickAccessSavedBtn"),()=>{closeQuickAccessMenu();navigate("saved")});
+  bindQuickAccessChip($("quickAccessRemindBtn"),()=>{closeQuickAccessMenu();navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)});
   updateQuickAccessIndicators();setTimeout(()=>showQuickAccessHint(moreBtn),900);
 }
 window.addEventListener("DOMContentLoaded",()=>{
