@@ -1669,15 +1669,16 @@
       "expiresAt": "2026-07-29T23:59:00.000Z"
     },
     {
-      "id": "mehr-quickaccess-mobile-v497-2026-07-28",
+      "id": "mehr-quickaccess-always-v498-2026-07-28",
       "approvedBy": "user-explicit-order",
-      "reason": "Nutzer-Notfall: Mehr Long-Press und Emoji-Chips auf iOS/Android — Touch-Handler reparieren",
+      "reason": "Nutzer-Notfall Hard-Overwrite: Schnellzugriff immer sichtbar, iOS/Android/Tablet, Cache-Bust",
       "paths": [
         "test/index.html",
         "test/version.json",
+        "service-worker.js",
         "content/admin/change-scope-lock.json"
       ],
-      "expiresAt": "2026-07-29T23:59:00.000Z"
+      "expiresAt": "2026-07-30T23:59:00.000Z"
     }
   ]
 }
