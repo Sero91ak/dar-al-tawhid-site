@@ -427,9 +427,24 @@ export default {
             ctx.waitUntil(triggerSiteDeployWorkflow(env, `library-live:${result.publication?.id || "save"}`));
           }
           if (result.published && result.target === "live") {
+            let push = { queued: false, reason: "Push nicht angefordert" };
+            const wantsPush = input.queuePush === true;
+            const publication = result.publication || input.publication;
+            if (wantsPush && publication?.id) {
+              const key = libraryPushRegistryKey(publication.id);
+              const pendingRecord = buildLibraryPushPendingRecord(publication);
+              await writePendingPushStatus(env, key, pendingRecord);
+              push = {
+                queued: true,
+                pending: true,
+                publicationId: publication.id,
+                reason: "Besucher-Push wird automatisch gesendet."
+              };
+              ctx.waitUntil(processPendingLibraryPushUntilLive(env, pendingRecord, { extendedWait: true }));
+            }
             return json({
               ...result,
-              push: { sent: false, skipped: true, reason: "Veröffentlicht ohne Push — Live Push separat im Admin" },
+              push,
               deploy: { triggered: input.triggerDeploy !== false }
             }, cors);
           }
