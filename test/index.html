@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785270000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v501";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v502";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8962,7 +8962,7 @@ body.is-area-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:0 10px 24px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin,.feature-card .feature-dismiss{color:var(--text)!important}
 /* MEHR_LONGPRESS_QUICKACCESS_CSS */
-/* v501: Kein Vollbild-Blur, edler Kontur-Glow, klare SVG-Icons, Anker über Mehr */
+/* v502: Native System-Emojis + dezent leuchtender Rahmen, Anker über Mehr */
 
 :root{
   --quick-menu-bg:color-mix(in srgb,var(--bg) 94%,var(--panel,rgba(255,255,255,.06)) 6%);
@@ -9099,25 +9099,26 @@ body.has-bottom-nav .float-actions,
   transform:translateY(0) scale(1);
   border-color:var(--quick-menu-icon-active);
   box-shadow:
-    0 0 0 1.5px color-mix(in srgb,var(--quick-menu-border-glow) 70%,transparent),
-    0 0 18px color-mix(in srgb,var(--quick-menu-border-glow) 72%,transparent),
-    0 0 28px color-mix(in srgb,var(--quick-menu-border-glow) 38%,transparent),
+    0 0 0 1px color-mix(in srgb,var(--quick-menu-border-glow) 55%,transparent),
+    0 0 12px color-mix(in srgb,var(--quick-menu-border-glow) 58%,transparent),
+    0 0 22px color-mix(in srgb,var(--quick-menu-border-glow) 32%,transparent),
     var(--quick-menu-shadow);
 }
 .quick-access-layer.is-open .quick-action:nth-child(3){transition-delay:0ms}
 .quick-access-layer.is-open .quick-action:nth-child(2){transition-delay:30ms}
 .quick-access-layer.is-open .quick-action:nth-child(1){transition-delay:60ms}
 
-.quick-action svg{
-  width:18px;
-  height:18px;
-  stroke:currentColor;
-  fill:none!important;
-  stroke-width:1.75;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+.quick-action svg{display:none!important}
+.quick-action-emoji{
+  display:block;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji",emoji,sans-serif;
+  font-size:22px;
+  line-height:1;
   pointer-events:none;
-  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--quick-menu-border-glow) 55%,transparent));
+  user-select:none;
+  -webkit-user-select:none;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--quick-menu-border-glow) 45%,transparent));
+  transform:translateZ(0);
 }
 .quick-action:hover,
 .quick-action:focus-visible{
@@ -15606,14 +15607,14 @@ html[data-theme] #bottomNav.bottom-nav{
   <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten für Schnellzugriff</div>
   <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" hidden>
     <button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" aria-label="Orientierung" title="Orientierung">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75v2.1"/><path d="M12 18.15v2.1"/><path d="M3.75 12h2.1"/><path d="M18.15 12h2.1"/><path d="M12 8.2l1.55 3.8H10.45L12 8.2z"/><circle cx="12" cy="12.9" r=".9"/></svg>
+      <span class="quick-action-emoji" aria-hidden="true">🧭</span>
     </button>
     <button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" aria-label="Merkliste" title="Merkliste">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.25 4.75h9.5a.75.75 0 0 1 .75.75v13.2l-5.5-2.85-5.5 2.85V5.5a.75.75 0 0 1 .75-.75z"/></svg>
+      <span class="quick-action-emoji" aria-hidden="true">❤️</span>
       <span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span>
     </button>
     <button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" aria-label="Erinnerungen" title="Erinnerungen">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 9.6a5.4 5.4 0 0 1 10.8 0c0 4.7 1.45 5.9 1.45 5.9H5.15S6.6 14.3 6.6 9.6"/><path d="M10.15 18.35a1.85 1.85 0 0 0 3.7 0"/><path d="M12 4.4v1.35"/></svg>
+      <span class="quick-action-emoji" aria-hidden="true">🔔</span>
       <span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span>
     </button>
   </div>
@@ -20723,7 +20724,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v501";
+const APP_BUILD_ID="app-shell-v502";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
