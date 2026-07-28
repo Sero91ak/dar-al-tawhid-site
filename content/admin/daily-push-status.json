@@ -4,17 +4,17 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-28T07:30:00.458Z",
+  "updatedAt": "2026-07-28T07:45:14.679Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "duaCandidates": 0,
+  "duaCandidates": 11,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 11,
   "accepted": {
-    "dua": 0,
+    "dua": 11,
     "recommendation": 0
   },
   "invalidSubscriptionsDisabled": 0,
@@ -29,6 +29,10 @@
     "category": "Āthār",
     "scholar": "Mālik ibn Dīnār رحمه الله"
   },
-  "currentDua": null,
+  "currentDua": {
+    "id": "dua-026-ya-muqallib",
+    "title": "O Wender der Herzen, festige mein Herz",
+    "category": "Standhaftigkeit"
+  },
   "configAutomatic": true
 }
