@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784920000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v496";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v497";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8964,13 +8964,13 @@ body.is-area-route .float-actions{display:none!important}
 /* MEHR_LONGPRESS_QUICKACCESS_CSS */
 
 .float-actions,.float-touch-handle,.float-actions-panel,.float-item,.float-btn,.float-tip{display:none!important}
-.quick-access-layer{position:fixed;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
+.quick-access-layer{position:fixed;z-index:200;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
 .quick-access-layer[hidden]{display:none!important}
 .quick-access-scrim{display:none!important}
 .quick-access-menu{display:none;flex-direction:column;align-items:center;gap:10px}
-.quick-access-layer.is-open .quick-access-menu{display:flex;pointer-events:auto}
+.quick-access-layer.is-open .quick-access-menu{display:flex;pointer-events:auto;touch-action:manipulation}
+.quick-access-layer.is-open .quick-access-menu .quick-access-chip{opacity:1;animation:quickAccessChipIn .18s cubic-bezier(.22,1,.36,1) both}
 .quick-access-layer.is-hint-only .quick-access-menu{display:none!important}
-.quick-access-layer.is-open .quick-access-menu .quick-access-chip{animation:quickAccessChipIn .18s cubic-bezier(.22,1,.36,1) both}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(1){animation-delay:0ms}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(2){animation-delay:35ms}
 .quick-access-layer.is-open .quick-access-menu .quick-access-chip:nth-child(3){animation-delay:70ms}
@@ -8989,7 +8989,7 @@ body.is-area-route .float-actions{display:none!important}
 .more-quick-access__list{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .more-quick-access__chip{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 88%,var(--panel,rgba(255,255,255,.06)) 12%);font-size:20px;line-height:1;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
 .more-quick-access__chip:hover,.more-quick-access__chip:active{border-color:color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));box-shadow:0 0 0 2px color-mix(in srgb,var(--gold2,var(--gold)) 24%,transparent),0 4px 14px color-mix(in srgb,var(--gold2,var(--gold)) 16%,transparent)}
-.bottom-nav-btn[data-bottom-nav="more"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.bottom-nav-btn[data-bottom-nav="more"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:none}
 .bottom-nav-btn[data-bottom-nav="more"].is-pressed,.bottom-nav-btn[data-bottom-nav="more"]:active{transform:none!important}
 
 /* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
@@ -20469,7 +20469,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v496";
+const APP_BUILD_ID="app-shell-v497";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21167,11 +21167,14 @@ function initAppZoomLock(){
   },{passive:false});
 }
 const QUICK_ACCESS_HINT_KEY="quickAccessLongPressHintSeen";
-const LONG_PRESS_DELAY=500;
-const MOVE_TOLERANCE=8;
+const LONG_PRESS_DELAY=480;
+const MOVE_TOLERANCE=10;
+const MOVE_TOLERANCE_TOUCH=26;
 let isQuickMenuOpen=false;
 let longPressTriggered=false;
 let quickMenuAnchorRect=null;
+let quickMenuOpenedAt=0;
+function quickAccessMoveTolerance(){return window.matchMedia("(pointer: coarse)").matches?MOVE_TOLERANCE_TOUCH:MOVE_TOLERANCE}
 function closeQuickAccessMenu({restoreFocus=false,hideHint=false}={}){
   const layer=$("quickAccessLayer");
   const hint=$("quickAccessHint");
@@ -21200,7 +21203,7 @@ function openQuickAccessMenu(anchorBtn){
   if(!layer||!anchorBtn)return;
   quickMenuAnchorRect=anchorBtn.getBoundingClientRect();positionQuickAccessUi(quickMenuAnchorRect);
   anchorBtn.classList.remove("is-pressed");
-  layer.hidden=false;layer.classList.remove("is-hint-only");layer.classList.add("is-open");isQuickMenuOpen=true;
+  layer.hidden=false;layer.classList.remove("is-hint-only");layer.classList.add("is-open");isQuickMenuOpen=true;quickMenuOpenedAt=Date.now();
   if(hint){hint.hidden=true;hint.classList.remove("is-visible")}
   try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"1")}catch(e){}
   try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}
@@ -21227,49 +21230,99 @@ function updateQuickAccessIndicators(){
 function bindQuickAccessChip(chip,fn){
   if(!chip||chip.dataset.quickChipBound==="1")return;chip.dataset.quickChipBound="1";
   let lastTouch=0;
-  const run=(ev,fromPointer)=>{
-    if(fromPointer&&ev.pointerType==="mouse")return;
-    if(ev.type==="click"&&Date.now()-lastTouch<420){ev.preventDefault();ev.stopPropagation();return}
-    if(fromPointer)lastTouch=Date.now();
+  const run=ev=>{
     if(ev.cancelable)ev.preventDefault();
     ev.stopPropagation();
     fn();
   };
-  chip.addEventListener("pointerup",ev=>run(ev,true),{passive:false});
-  chip.addEventListener("click",ev=>run(ev,false));
+  chip.addEventListener("touchend",ev=>{lastTouch=Date.now();run(ev)},{passive:false});
+  chip.addEventListener("pointerup",ev=>{if(ev.pointerType==="touch")return;run(ev)},{passive:false});
+  chip.addEventListener("click",ev=>{if(Date.now()-lastTouch<500){ev.preventDefault();ev.stopPropagation();return}run(ev)});
 }
 function bindMoreQuickAccessTrigger(btn){
   if(!btn||btn.dataset.quickMenuBound==="1")return;btn.dataset.quickMenuBound="1";
-  let longPressTimer=null;let suppressClickUntil=0;let pointerStartX=0;let pointerStartY=0;let activePointerId=null;
-  const clearTimer=()=>{if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}};
-  const endPress=({cancel=false}={})=>{clearTimer();btn.classList.remove("is-pressed");activePointerId=null;if(cancel)longPressTriggered=false};
+  let pressTimer=null;let suppressTapUntil=0;let startX=0;let startY=0;let pressActive=false;let longFired=false;let touchSession=false;
+  const clearTimer=()=>{if(pressTimer){clearTimeout(pressTimer);pressTimer=null}};
+  const stopPress=()=>{clearTimer();pressActive=false;btn.classList.remove("is-pressed");btn.classList.remove("is-longpress-armed")};
   const openMorePage=()=>{try{btn.blur&&btn.blur()}catch(e){}navigateBottomNavTab("more")};
+  const fireLong=()=>{
+    if(!pressActive)return;
+    longFired=true;longPressTriggered=true;suppressTapUntil=Date.now()+900;
+    btn.classList.add("is-longpress-armed");
+    openQuickAccessMenu(btn);
+  };
+  const beginPress=(x,y,{touch=false}={})=>{
+    if(pressActive)return;
+    if(touch)touchSession=true;
+    else if(touchSession)return;
+    pressActive=true;longFired=false;longPressTriggered=false;startX=x;startY=y;
+    btn.classList.add("is-pressed");
+    clearTimer();
+    pressTimer=setTimeout(fireLong,LONG_PRESS_DELAY);
+  };
+  const movePress=(x,y)=>{
+    if(!pressActive||!pressTimer)return;
+    const tol=quickAccessMoveTolerance();
+    if(Math.abs(x-startX)>tol||Math.abs(y-startY)>tol){clearTimer();longPressTriggered=false}
+  };
+  const endPress=ev=>{
+    if(!pressActive)return;
+    const wasLong=longFired||longPressTriggered||Date.now()<suppressTapUntil;
+    stopPress();
+    if(wasLong){
+      if(ev&&ev.cancelable)ev.preventDefault();
+      if(ev)ev.stopPropagation();
+      longPressTriggered=false;longFired=false;
+      return;
+    }
+    openMorePage();
+    if(ev&&ev.cancelable)ev.preventDefault();
+    if(ev)ev.stopPropagation();
+  };
+  btn.addEventListener("touchstart",ev=>{
+    if(ev.touches.length!==1)return;
+    const t=ev.touches[0];
+    beginPress(t.clientX,t.clientY,{touch:true});
+  },{passive:true});
+  btn.addEventListener("touchmove",ev=>{
+    if(!pressActive||ev.touches.length!==1)return;
+    const t=ev.touches[0];
+    movePress(t.clientX,t.clientY);
+  },{passive:true});
+  btn.addEventListener("touchend",ev=>{
+    if(!pressActive)return;
+    endPress(ev);
+    setTimeout(()=>{touchSession=false},420);
+  },{passive:false});
+  btn.addEventListener("touchcancel",()=>{
+    stopPress();longPressTriggered=false;longFired=false;
+    setTimeout(()=>{touchSession=false},420);
+  },{passive:true});
   btn.addEventListener("pointerdown",ev=>{
     if(ev.pointerType==="mouse"&&ev.button!==0)return;
-    if(activePointerId!=null)return;
-    activePointerId=ev.pointerId;longPressTriggered=false;pointerStartX=ev.clientX;pointerStartY=ev.clientY;
-    btn.classList.add("is-pressed");
-    longPressTimer=setTimeout(()=>{longPressTriggered=true;suppressClickUntil=Date.now()+700;openQuickAccessMenu(btn)},LONG_PRESS_DELAY);
+    if(touchSession||ev.pointerType==="touch")return;
+    beginPress(ev.clientX,ev.clientY);
   },{passive:true});
   btn.addEventListener("pointermove",ev=>{
-    if(ev.pointerId!==activePointerId||!longPressTimer)return;
-    if(Math.abs(ev.clientX-pointerStartX)>MOVE_TOLERANCE||Math.abs(ev.clientY-pointerStartY)>MOVE_TOLERANCE)endPress({cancel:true});
+    if(touchSession||!pressActive)return;
+    movePress(ev.clientX,ev.clientY);
   },{passive:true});
   btn.addEventListener("pointerup",ev=>{
-    if(ev.pointerId!==activePointerId)return;
-    const wasLong=longPressTriggered||Date.now()<suppressClickUntil;
-    endPress();
-    if(wasLong){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return}
-    if(ev.cancelable)ev.preventDefault();
-    ev.stopPropagation();
-    openMorePage();
+    if(touchSession||ev.pointerType==="touch")return;
+    if(ev.pointerType==="mouse"&&ev.button!==0)return;
+    endPress(ev);
   },{passive:false});
-  btn.addEventListener("pointercancel",ev=>{if(ev.pointerId!==activePointerId)return;endPress({cancel:true})},{passive:true});
+  btn.addEventListener("pointercancel",()=>{
+    if(touchSession)return;
+    stopPress();longPressTriggered=false;longFired=false;
+  },{passive:true});
   btn.addEventListener("click",ev=>{
-    if(longPressTriggered||Date.now()<suppressClickUntil){ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return}
+    if(longPressTriggered||Date.now()<suppressTapUntil||touchSession){
+      ev.preventDefault();ev.stopPropagation();longPressTriggered=false;return;
+    }
     ev.preventDefault();ev.stopPropagation();openMorePage();
   });
-  btn.addEventListener("contextmenu",ev=>{ev.preventDefault();longPressTriggered=true;suppressClickUntil=Date.now()+700;openQuickAccessMenu(btn)});
+  btn.addEventListener("contextmenu",ev=>{ev.preventDefault();longPressTriggered=true;suppressTapUntil=Date.now()+900;openQuickAccessMenu(btn)});
   btn.addEventListener("keydown",ev=>{if((ev.shiftKey&&ev.key==="F10")||ev.key==="ContextMenu"){ev.preventDefault();openQuickAccessMenu(btn)}});
 }
 function bindMoreQuickAccessPageButtons(){
@@ -21283,14 +21336,26 @@ function bindMoreQuickAccessPageButtons(){
     });
   });
 }
+function ensureQuickAccessBindings(){
+  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  if(moreBtn)bindMoreQuickAccessTrigger(moreBtn);
+  if($("quickAccessLayer")&&$("quickAccessMenu"))initQuickAccessMenu();
+}
 function initQuickAccessMenu(){
-  if(window.__darQuickAccessMenuBound)return;window.__darQuickAccessMenuBound=true;
+  if(window.__darQuickAccessMenuBound)return;
   const layer=$("quickAccessLayer");const menu=$("quickAccessMenu");
   const moreBtn=document.querySelector('[data-bottom-nav="more"]');
   if(!layer||!menu||!moreBtn)return;
-  document.addEventListener("pointerdown",e=>{if(!isQuickMenuOpen)return;if(e.target?.closest?.("#quickAccessMenu,[data-bottom-nav='more']"))return;closeQuickAccessMenu()},{capture:true});
+  window.__darQuickAccessMenuBound=true;
+  const onOutside=e=>{
+    if(!isQuickMenuOpen)return;
+    if(e.target?.closest?.("#quickAccessMenu,[data-bottom-nav='more']"))return;
+    closeQuickAccessMenu();
+  };
+  document.addEventListener("pointerdown",onOutside,{capture:true});
+  document.addEventListener("touchstart",onOutside,{capture:true,passive:true});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isQuickMenuOpen){e.preventDefault();closeQuickAccessMenu({restoreFocus:true})}});
-  document.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true});
+  document.addEventListener("scroll",()=>{if(!isQuickMenuOpen)return;if(Date.now()-quickMenuOpenedAt<500)return;closeQuickAccessMenu()},{passive:true});
   document.addEventListener("focusin",e=>{if(e.target?.closest?.("input,textarea,[contenteditable='true']"))closeQuickAccessMenu()});
   document.addEventListener("visibilitychange",()=>{if(document.hidden)closeQuickAccessMenu()});
   window.addEventListener("hashchange",()=>closeQuickAccessMenu(),{passive:true});
@@ -21300,8 +21365,9 @@ function initQuickAccessMenu(){
   menu.querySelectorAll(".quick-access-chip").forEach(chip=>{
     const litOn=()=>chip.classList.add("is-lit");
     const litOff=()=>chip.classList.remove("is-lit");
+    chip.addEventListener("touchstart",litOn,{passive:true});
     chip.addEventListener("pointerdown",litOn,{passive:true});
-    ["pointerup","pointercancel","pointerleave"].forEach(type=>chip.addEventListener(type,litOff,{passive:true}));
+    ["touchend","touchcancel","pointerup","pointercancel"].forEach(type=>chip.addEventListener(type,litOff,{passive:true}));
   });
   bindQuickAccessChip($("quickAccessOrientBtn"),()=>{closeQuickAccessMenu();openQiblaFromFloat()});
   bindQuickAccessChip($("quickAccessSavedBtn"),()=>{closeQuickAccessMenu();navigate("saved")});
@@ -21330,10 +21396,10 @@ window.addEventListener("DOMContentLoaded",()=>{
     initAndroidTapCleanup();
     initAppZoomLock();
     bindBottomNav();
+    ensureQuickAccessBindings();
     initBottomNavSwipe();
     initBottomNavContentSwipe();
     initBottomNavGuard();
-    initQuickAccessMenu();
     initFloatTouchbar();
     initQuranWakeLock();
     updateHijriHeaderDate();
@@ -21344,7 +21410,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
     setTimeout(()=>{try{const moreBtn=document.querySelector('[data-bottom-nav="more"]');if(moreBtn)showQuickAccessHint(moreBtn)}catch(e){}},900);
-    window.addEventListener("pageshow",e=>{ensureBottomNavDock();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>ensureBottomNavDock())},{passive:true});
+    window.addEventListener("pageshow",e=>{ensureBottomNavDock();ensureQuickAccessBindings();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>{ensureBottomNavDock();ensureQuickAccessBindings()})},{passive:true});
   }catch(e){
     console.error("App-Start fehlgeschlagen:",e);
     renderAppRecovery(e,"App-Start");
