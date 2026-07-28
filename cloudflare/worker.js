@@ -80,6 +80,7 @@ import {
   suggestLibraryCategory,
   LIBRARY_ADMIN_META
 } from "./library-admin.js";
+import { handleQuizStatsRequest } from "./quiz-stats-admin.js";
 import {
   libraryPushRegistryKey,
   buildLibraryPushPendingRecord,
@@ -146,6 +147,23 @@ export default {
           jummahPushCron: "*/5 * * * *",
           scheduler: "ready"
         }, cors);
+      }
+
+      if (
+        url.pathname === "/api/quiz/stats/ingest" ||
+        url.pathname === "/api/quiz/stats/ingest-test" ||
+        url.pathname.startsWith("/api/admin/quiz-stats")
+      ) {
+        const quizResult = await handleQuizStatsRequest(request, env, url, { assertAuthorized });
+        if (quizResult != null) {
+          if (quizResult.contentType === "text/csv;charset=utf-8") {
+            return new Response(quizResult.csv, {
+              status: 200,
+              headers: { ...cors, "Content-Type": quizResult.contentType, "Content-Disposition": "attachment; filename=quiz-stats.csv" }
+            });
+          }
+          return json(quizResult, cors);
+        }
       }
 
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {

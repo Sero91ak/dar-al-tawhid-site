@@ -15,7 +15,11 @@
     "test/assets/library/pdfs/",
     "test/assets/library/covers/",
     "content/admin/pending-pushes.json",
-    "content/admin/push-triggers/"
+    "content/admin/push-triggers/",
+    "admin/index.html",
+    "admin/quiz-stats-manager.js",
+    "cloudflare/worker.js",
+    "cloudflare/quiz-stats-admin.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -1754,5 +1758,6 @@
       ],
       "expiresAt": "2026-07-30T23:59:00.000Z"
     }
-  ]
+  ],
+  "enabled": true
 }
