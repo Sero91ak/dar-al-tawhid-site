@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <!-- pages-deploy-stamp:1784899983185 -->
-<!-- workers-deploy-stamp:1785267000000 -->
+<!-- workers-deploy-stamp:1785270000000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v498";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v499";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -8962,30 +8962,114 @@ body.is-area-route .float-actions{display:none!important}
 .feature-card .feature-open,.feature-hint .feature-open{background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--gold) 76%,#fff 24%))!important;color:#211703!important;border-color:transparent!important;box-shadow:0 10px 24px rgba(0,0,0,.14)!important;text-shadow:none!important}
 .feature-card .feature-pin,.feature-card .feature-dismiss{color:var(--text)!important}
 /* MEHR_LONGPRESS_QUICKACCESS_CSS */
+/* ROOT CAUSE FIX: Long-Press/Rail war kaputt. Rechte Float-Leiste wiederherstellen (immer sichtbar). */
 
-.float-actions,.float-touch-handle,.float-actions-panel,.float-item,.float-btn,.float-tip{display:none!important}
-.quick-access-layer{position:fixed;z-index:200;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
-.quick-access-layer[hidden],.quick-access-layer.is-rail-hidden{display:none!important}
-.quick-access-scrim{display:none!important}
-.quick-access-hint{display:none!important}
-.quick-access-menu{display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:auto;touch-action:manipulation}
-.quick-access-chip{appearance:none;-webkit-appearance:none;position:relative;display:grid;place-items:center;width:48px;height:48px;min-width:48px;padding:0;border:2px solid color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--bg) 96%,#000 4%);color:var(--text);font:inherit;line-height:1;cursor:pointer;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold)) 18%,transparent),0 6px 18px color-mix(in srgb,#000 28%,transparent);transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease}
-.quick-access-chip.is-lit,.quick-access-chip:hover,.quick-access-chip:focus-visible,.quick-access-chip:active{border-color:var(--gold2,var(--gold));box-shadow:0 0 0 4px color-mix(in srgb,var(--gold2,var(--gold)) 42%,transparent),0 0 22px color-mix(in srgb,var(--gold2,var(--gold)) 55%,transparent),0 10px 24px color-mix(in srgb,#000 36%,transparent);background:color-mix(in srgb,var(--gold2,var(--gold)) 16%,var(--bg) 84%)}
-.quick-access-chip:active{transform:scale(.94)}
-.quick-access-chip:focus-visible{outline:none}
-.quick-access-emoji{font-size:22px;line-height:1;pointer-events:none;display:block}
-.quick-access-chip-badge{position:absolute;top:-4px;right:-4px;display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--gold2,var(--gold));color:var(--bg);font-size:9px;font-weight:900;line-height:1;box-shadow:0 0 0 2px color-mix(in srgb,var(--bg) 92%,#000 8%)}
-.quick-access-chip-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:999px;background:var(--gold2,var(--gold));box-shadow:0 0 0 2px color-mix(in srgb,var(--bg) 92%,#000 8%),0 0 10px color-mix(in srgb,var(--gold2,var(--gold)) 65%,transparent)}
-.more-quick-access{margin:0 0 12px;padding:0;border:0;background:transparent;overflow:visible}
-.more-quick-access__list{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-.more-quick-access__chip{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 88%,var(--panel,rgba(255,255,255,.06)) 12%);font-size:20px;line-height:1;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
-.more-quick-access__chip:hover,.more-quick-access__chip:active{border-color:color-mix(in srgb,var(--gold2,var(--gold)) 42%,var(--line));box-shadow:0 0 0 2px color-mix(in srgb,var(--gold2,var(--gold)) 24%,transparent),0 4px 14px color-mix(in srgb,var(--gold2,var(--gold)) 16%,transparent)}
-body.reader-mode .quick-access-layer,
-body.is-feed-fullscreen .quick-access-layer,
-body.image-editor-mode .quick-access-layer,
-body.image-editor-test-mode .quick-access-layer,
-body.is-ilm-chat-route .quick-access-layer,
-body.app-update-modal-open .quick-access-layer{display:none!important}
+.quick-access-layer,.quick-access-scrim,.quick-access-hint,.quick-access-menu{display:none!important}
+
+html[data-theme] .float-actions,
+body.has-bottom-nav .float-actions,
+.float-actions{
+  position:fixed!important;
+  right:max(10px,env(safe-area-inset-right))!important;
+  left:auto!important;
+  top:auto!important;
+  bottom:calc(var(--bottom-navigation-height,64px) + max(10px,env(safe-area-inset-bottom)) + 8px)!important;
+  transform:none!important;
+  z-index:120!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  justify-content:flex-end!important;
+  gap:10px!important;
+  width:auto!important;
+  max-width:none!important;
+  padding:0!important;
+  margin:0!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  opacity:1!important;
+}
+html[data-theme] .float-actions-panel,
+.float-actions-panel{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:10px!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  overflow:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  pointer-events:auto!important;
+}
+.float-touch-handle,.float-tip{display:none!important}
+.float-item{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  opacity:1!important;
+  max-width:none!important;
+  overflow:visible!important;
+  border:0!important;
+}
+html[data-theme] .float-btn,
+.float-btn{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  min-height:52px!important;
+  padding:0!important;
+  border:2px solid color-mix(in srgb,var(--gold2,var(--gold)) 48%,var(--line))!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--bg) 94%,#000 6%)!important;
+  color:var(--text)!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold)) 18%,transparent),0 8px 20px color-mix(in srgb,#000 30%,transparent)!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:22px!important;
+  line-height:1!important;
+  cursor:pointer!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;
+}
+html[data-theme] .float-btn:active,
+.float-btn:active,
+.float-btn.is-lit{
+  transform:scale(.94)!important;
+  border-color:var(--gold2,var(--gold))!important;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--gold2,var(--gold)) 42%,transparent),0 0 22px color-mix(in srgb,var(--gold2,var(--gold)) 55%,transparent)!important;
+  background:color-mix(in srgb,var(--gold2,var(--gold)) 16%,var(--bg) 84%)!important;
+}
+.float-btn svg{display:none!important}
+.float-btn-label,.float-btn-badge{display:none!important}
+body.reader-mode .float-actions,
+body.is-feed-fullscreen .float-actions,
+body.image-editor-mode .float-actions,
+body.image-editor-test-mode .float-actions,
+body.is-ilm-chat-route .float-actions,
+body.app-update-modal-open .float-actions{display:none!important}
 
 /* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
 </style>
@@ -15350,15 +15434,21 @@ html[data-theme] #bottomNav.bottom-nav{
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
 </div>
-<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
-<div id="quickAccessLayer" class="quick-access-layer" aria-label="Schnellzugriff">
-  <div id="quickAccessHint" class="quick-access-hint" hidden>Schnellzugriff</div>
-  <div id="quickAccessMenu" class="quick-access-menu" role="toolbar" aria-label="Schnellzugriff">
-    <button id="quickAccessOrientBtn" class="quick-access-chip" type="button" aria-label="Orientierung" title="Orientierung"><span class="quick-access-emoji" aria-hidden="true">🧭</span></button>
-    <button id="quickAccessSavedBtn" class="quick-access-chip" type="button" aria-label="Merkliste" title="Merkliste"><span class="quick-access-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-access-chip-badge" hidden>0</span></button>
-    <button id="quickAccessRemindBtn" class="quick-access-chip" type="button" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-access-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-access-chip-dot" hidden></span></button>
+<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),f=document.getElementById("floatActions");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(f&&f.parentElement!==document.body)document.body.appendChild(f);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
+<div class="float-actions is-expanded" id="floatActions" aria-label="Schnellzugriff">
+  <div class="float-actions-panel" id="floatActionsPanel">
+    <div class="float-item">
+      <button id="qiblaFloat" class="float-btn qibla-float" type="button" aria-label="Orientierung" title="Orientierung">🧭</button>
+    </div>
+    <div class="float-item">
+      <button id="savedFloat" class="float-btn saved-float" type="button" aria-label="Merkliste" title="Merkliste">❤️</button>
+    </div>
+    <div class="float-item">
+      <button id="pushFloat" class="float-btn" type="button" aria-label="Erinnerungen" title="Erinnerungen">🔔</button>
+    </div>
   </div>
 </div>
+<div id="quickAccessLayer" class="quick-access-layer" hidden aria-hidden="true"></div>
 
 <script src="/assets/slide-post-parser.js?v=2"></script>
 <script src="/assets/ilm-majlis-v2.js?v=1"></script>
@@ -16291,7 +16381,7 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){bindMoreQuickAccessTrigger(btn);return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const tab=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const tab=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!tab)return;navigateBottomNavTab(tab)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -20464,7 +20554,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v498";
+const APP_BUILD_ID="app-shell-v499";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21148,9 +21238,47 @@ const FLOAT_TIPS_KEY="darFloatTipsShownV1";
 function showFloatTipsOnce(){return}
 const FLOAT_TOUCHBAR_KEY="darFloatTouchbarActivatedV1";
 function collapseFloatTouchbar(){}
-function expandFloatTouchbar(){}
-function markFloatTouchbarActivated(){}
-function initFloatTouchbar(){}
+function expandFloatTouchbar(){
+  const bar=$("floatActions");
+  if(!bar)return;
+  bar.classList.add("is-expanded");
+  bar.classList.remove("is-collapsed");
+}
+function markFloatTouchbarActivated(){
+  try{localStorage.setItem(FLOAT_TOUCHBAR_KEY,"1")}catch(e){}
+}
+function bindFloatActionButton(btn,fn){
+  if(!btn||btn.dataset.floatBound==="1")return;btn.dataset.floatBound="1";
+  let lastTouch=0;
+  const run=ev=>{
+    if(ev.cancelable)ev.preventDefault();
+    ev.stopPropagation();
+    btn.classList.add("is-lit");
+    setTimeout(()=>btn.classList.remove("is-lit"),180);
+    markFloatTouchbarActivated();
+    try{fn()}catch(e){console.warn("Float-Aktion:",e)}
+  };
+  btn.addEventListener("touchend",ev=>{lastTouch=Date.now();run(ev)},{passive:false});
+  btn.addEventListener("pointerup",ev=>{if(ev.pointerType==="touch")return;run(ev)},{passive:false});
+  btn.addEventListener("click",ev=>{if(Date.now()-lastTouch<500){ev.preventDefault();ev.stopPropagation();return}run(ev)});
+}
+function initFloatTouchbar(){
+  if(window.__darFloatTouchbarBound)return;
+  const bar=$("floatActions");
+  const panel=$("floatActionsPanel");
+  if(!bar||!panel)return;
+  window.__darFloatTouchbarBound=true;
+  if(bar.parentElement!==document.body)document.body.appendChild(bar);
+  bar.classList.add("is-expanded");
+  bar.classList.remove("is-collapsed","is-intro","is-dragging");
+  panel.style.transform="none";
+  panel.style.opacity="1";
+  panel.style.pointerEvents="auto";
+  bindFloatActionButton($("qiblaFloat"),()=>openQiblaFromFloat());
+  bindFloatActionButton($("savedFloat"),()=>navigate("saved"));
+  bindFloatActionButton($("pushFloat"),()=>{navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)});
+  try{if(typeof updatePushFloatButton==="function")updatePushFloatButton()}catch(e){}
+}
 function initAppZoomLock(){
   if(window.__appZoomLockBound)return;
   window.__appZoomLockBound=true;
@@ -21193,62 +21321,14 @@ function positionQuickAccessUi(anchorRect){
   layer.style.bottom=`${bottom}px`;
   layer.style.top="auto";
 }
-function syncQuickAccessRail(){
-  const layer=$("quickAccessLayer");
-  if(!layer)return;
-  if(shouldHideQuickAccessRail()){
-    layer.classList.add("is-rail-hidden");
-    layer.hidden=true;
-    return;
-  }
-  layer.hidden=false;
-  layer.classList.remove("is-rail-hidden","is-hint-only");
-  layer.classList.add("is-open");
-  positionQuickAccessUi();
-  updateQuickAccessIndicators();
-}
-function openQuickAccessMenu(){syncQuickAccessRail();try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}}
+function syncQuickAccessRail(){}
+function openQuickAccessMenu(){}
 function showQuickAccessHint(){}
 function updateQuickAccessIndicators(){
   try{bindMoreQuickAccessPageButtons()}catch(e){}
-  const savedBadge=$("quickAccessSavedBadge");const pushStatus=$("quickAccessRemindStatus");
-  if(savedBadge){const count=(typeof savedIds==="function"?savedIds():[]).length;savedBadge.hidden=!count;if(count)savedBadge.textContent=String(Math.min(count,99))}
-  if(pushStatus){const active=Boolean(window.OneSignal?.User?.PushSubscription?.optedIn)&&!!String(window.OneSignal?.User?.PushSubscription?.id||"").trim();pushStatus.hidden=!active}
 }
-function bindQuickAccessChip(chip,fn){
-  if(!chip||chip.dataset.quickChipBound==="1")return;chip.dataset.quickChipBound="1";
-  let lastTouch=0;let armed=false;
-  const litOn=()=>{chip.classList.add("is-lit");armed=true};
-  const litOff=()=>{chip.classList.remove("is-lit");armed=false};
-  const run=ev=>{
-    if(ev.cancelable)ev.preventDefault();
-    ev.stopPropagation();
-    litOn();
-    try{fn()}catch(e){console.warn("Schnellzugriff:",e)}
-    setTimeout(litOff,180);
-  };
-  chip.addEventListener("touchstart",litOn,{passive:true});
-  chip.addEventListener("touchend",ev=>{lastTouch=Date.now();run(ev)},{passive:false});
-  chip.addEventListener("touchcancel",litOff,{passive:true});
-  chip.addEventListener("pointerdown",ev=>{if(ev.pointerType==="touch")return;litOn()},{passive:true});
-  chip.addEventListener("pointerup",ev=>{if(ev.pointerType==="touch")return;run(ev)},{passive:false});
-  chip.addEventListener("pointercancel",litOff,{passive:true});
-  chip.addEventListener("click",ev=>{if(Date.now()-lastTouch<500){ev.preventDefault();ev.stopPropagation();return}run(ev)});
-}
-function bindMoreQuickAccessTrigger(btn){
-  if(!btn||btn.dataset.quickMenuBound==="1")return;btn.dataset.quickMenuBound="1";
-  let lastTouch=0;
-  const openMore=()=>{try{btn.blur&&btn.blur()}catch(e){}navigateBottomNavTab("more")};
-  const run=(ev,fromTouch)=>{
-    if(fromTouch)lastTouch=Date.now();
-    if(ev.cancelable)ev.preventDefault();
-    ev.stopPropagation();
-    openMore();
-  };
-  btn.addEventListener("touchend",ev=>{if(ev.changedTouches?.length>1)return;run(ev,true)},{passive:false});
-  btn.addEventListener("pointerup",ev=>{if(ev.pointerType==="touch")return;if(ev.pointerType==="mouse"&&ev.button!==0)return;run(ev,false)},{passive:false});
-  btn.addEventListener("click",ev=>{if(Date.now()-lastTouch<500){ev.preventDefault();ev.stopPropagation();return}run(ev,false)});
-}
+function bindQuickAccessChip(){}
+function bindMoreQuickAccessTrigger(){}
 function bindMoreQuickAccessPageButtons(){
   document.querySelectorAll("[data-more-quick]").forEach(btn=>{
     if(btn.dataset.bound==="1")return;btn.dataset.bound="1";
@@ -21260,37 +21340,8 @@ function bindMoreQuickAccessPageButtons(){
     });
   });
 }
-function ensureQuickAccessBindings(){
-  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
-  if(moreBtn)bindMoreQuickAccessTrigger(moreBtn);
-  if($("quickAccessLayer")&&$("quickAccessMenu"))initQuickAccessMenu();
-  syncQuickAccessRail();
-}
-function initQuickAccessMenu(){
-  if(window.__darQuickAccessMenuBound)return;
-  const layer=$("quickAccessLayer");const menu=$("quickAccessMenu");
-  if(!layer||!menu)return;
-  window.__darQuickAccessMenuBound=true;
-  if(layer.parentElement!==document.body)document.body.appendChild(layer);
-  bindQuickAccessChip($("quickAccessOrientBtn"),()=>{openQiblaFromFloat()});
-  bindQuickAccessChip($("quickAccessSavedBtn"),()=>{navigate("saved")});
-  bindQuickAccessChip($("quickAccessRemindBtn"),()=>{navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)});
-  const reposition=()=>syncQuickAccessRail();
-  window.addEventListener("resize",reposition,{passive:true});
-  window.visualViewport?.addEventListener?.("resize",reposition,{passive:true});
-  window.visualViewport?.addEventListener?.("scroll",reposition,{passive:true});
-  window.addEventListener("hashchange",reposition,{passive:true});
-  document.addEventListener("scroll",reposition,{passive:true});
-  try{
-    const obs=new MutationObserver(()=>reposition());
-    obs.observe(document.body,{attributes:true,attributeFilter:["class"]});
-    obs.observe(document.documentElement,{attributes:true,attributeFilter:["class"]});
-  }catch(e){}
-  updateQuickAccessIndicators();
-  requestAnimationFrame(reposition);
-  setTimeout(reposition,120);
-  setTimeout(reposition,600);
-}
+function ensureQuickAccessBindings(){try{initFloatTouchbar()}catch(e){}}
+function initQuickAccessMenu(){}
 window.addEventListener("DOMContentLoaded",()=>{
   try{
     if("scrollRestoration" in history)history.scrollRestoration="manual";
@@ -21313,11 +21364,10 @@ window.addEventListener("DOMContentLoaded",()=>{
     initAndroidTapCleanup();
     initAppZoomLock();
     bindBottomNav();
-    ensureQuickAccessBindings();
+    initFloatTouchbar();
     initBottomNavSwipe();
     initBottomNavContentSwipe();
     initBottomNavGuard();
-    initFloatTouchbar();
     initQuranWakeLock();
     updateHijriHeaderDate();
     updateHeaderPrayerStatus();
@@ -21326,9 +21376,9 @@ window.addEventListener("DOMContentLoaded",()=>{
     window.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
     if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
-    setTimeout(()=>{try{syncQuickAccessRail()}catch(e){}},200);
-    setTimeout(()=>{try{syncQuickAccessRail()}catch(e){}},900);
-    window.addEventListener("pageshow",e=>{ensureBottomNavDock();ensureQuickAccessBindings();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>{ensureBottomNavDock();ensureQuickAccessBindings()})},{passive:true});
+    setTimeout(()=>{try{initFloatTouchbar()}catch(e){}},200);
+    setTimeout(()=>{try{initFloatTouchbar()}catch(e){}},900);
+    window.addEventListener("pageshow",e=>{ensureBottomNavDock();initFloatTouchbar();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>{ensureBottomNavDock();initFloatTouchbar()})},{passive:true});
   }catch(e){
     console.error("App-Start fehlgeschlagen:",e);
     renderAppRecovery(e,"App-Start");

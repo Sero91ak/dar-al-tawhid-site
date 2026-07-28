@@ -1669,9 +1669,9 @@
       "expiresAt": "2026-07-29T23:59:00.000Z"
     },
     {
-      "id": "mehr-quickaccess-always-v498-2026-07-28",
+      "id": "mehr-float-restore-v499-2026-07-28",
       "approvedBy": "user-explicit-order",
-      "reason": "Nutzer-Notfall Hard-Overwrite: Schnellzugriff immer sichtbar, iOS/Android/Tablet, Cache-Bust",
+      "reason": "Nutzer-Notfall: Root-Cause — Float-Leiste entfernt/versteckt; wiederherstellen + Hard Overwrite",
       "paths": [
         "test/index.html",
         "test/version.json",
