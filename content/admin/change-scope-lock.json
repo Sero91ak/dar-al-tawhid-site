@@ -1634,6 +1634,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-boot-fix-v491-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Dar Test startet nicht — fehlende initFloatTouchbar nach Long-Press-Deploy",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
     }
   ]
 }
