@@ -24,7 +24,16 @@
     "test/index.html",
     "test/version.json",
     "service-worker.js",
-    "content/updates/daily.json"
+    "content/updates/daily.json",
+    "admin/live-edit.js",
+    "admin/live-edit.css",
+    "cloudflare/live-edit-admin.js",
+    "content/admin/live-audit-log.json",
+    "content/admin/live-versions.json",
+    "content/admin/live-scholars.json",
+    "content/admin/live-books.json",
+    "admin/sw.js",
+    "assets/site-analytics.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -44,6 +53,31 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "admin-live-bearbeitung-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Verbindlicher Gesamtauftrag: Live-Bearbeitung in DAR-Admin-App vollständig umsetzen",
+      "paths": [
+        "admin/index.html",
+        "admin/live-edit.js",
+        "admin/live-edit.css",
+        "admin/sw.js",
+        "cloudflare/worker.js",
+        "cloudflare/live-edit-admin.js",
+        "assets/site-analytics.js",
+        "index.html",
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json",
+        "content/admin/live-audit-log.json",
+        "content/admin/live-versions.json",
+        "content/duas/",
+        "service-worker.js",
+        "content/admin/live-scholars.json",
+        "content/admin/live-books.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
     {
       "id": "admin-library-compact-push-v491-2026-07-28",
       "approvedBy": "user-explicit-order",
