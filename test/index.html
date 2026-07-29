@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785314705803 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v509";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v510";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -989,7 +989,7 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
 .quran-result-de{color:var(--cream);font-size:13.5px;line-height:1.58}
 .quran-result-tr{color:var(--muted);font-size:11.5px;line-height:1.5;margin-top:7px}
 .quran-result-card mark.search-hit{border-radius:5px;padding:0 .14em;background:rgba(239,215,142,.28);color:#fff6dc}
-.quran-surah-card{border:1px solid var(--line2);border-radius:16px;background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.08),transparent 38%),linear-gradient(145deg,rgba(22,19,14,.94),rgba(8,8,6,.94));padding:11px 12px;cursor:pointer;text-align:left;min-height:74px}
+.quran-surah-card{border:1px solid var(--line2);border-radius:16px;background:var(--card);padding:11px 12px;cursor:pointer;text-align:left;min-height:74px}
 .quran-surah-card:hover{border-color:rgba(239,215,142,.48);transform:translateY(-1px)}
 .quran-surah-card .quran-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:10px;background:rgba(239,215,142,.12);border:1px solid rgba(239,215,142,.22);color:var(--gold2);font-size:12px;font-weight:950;margin-bottom:7px}
 .quran-surah-card h3{margin:0;color:#fff6dc;font-family:var(--serif);font-size:16px;line-height:1.15}
@@ -8223,7 +8223,7 @@ html[data-theme] .theme-hero-surface{background:var(--theme-hero-surface)!import
 }
 /* STRICT VISUAL GUARD V152: nur Listen/Karten/Dock, keine Theme- oder Deckblatt-Basisfarben */
 #quranSurahGrid.quran-surah-grid{display:grid!important;grid-template-columns:1fr!important;gap:6px!important}
-#quranSurahGrid .quran-surah-card{min-height:72px!important;padding:8px 10px!important;border-radius:15px!important;display:grid!important;grid-template-columns:30px minmax(0,1fr) minmax(74px,auto)!important;grid-template-rows:auto auto!important;column-gap:9px!important;row-gap:2px!important;align-items:center!important;box-shadow:0 7px 18px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.035)!important}
+#quranSurahGrid .quran-surah-card{min-height:72px!important;padding:8px 10px!important;border-radius:15px!important;display:grid!important;grid-template-columns:30px minmax(0,1fr) minmax(74px,auto)!important;grid-template-rows:auto auto!important;column-gap:9px!important;row-gap:2px!important;align-items:center!important;box-shadow:none!important}
 #quranSurahGrid .quran-surah-card .quran-num{grid-row:1 / span 2!important;grid-column:1!important;width:27px!important;height:27px!important;border-radius:10px!important;margin:0!important;font-size:11px!important}
 #quranSurahGrid .quran-surah-card h3{grid-column:2!important;grid-row:1!important;font-size:16px!important;line-height:1.05!important;margin:0!important;-webkit-line-clamp:1!important}
 #quranSurahGrid .quran-surah-card small{grid-column:2!important;grid-row:2!important;font-size:9.8px!important;line-height:1.15!important;margin:2px 0 0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
@@ -13694,7 +13694,7 @@ html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-g
 .qov-jump-bar{display:grid;grid-template-columns:minmax(68px,.55fr) minmax(0,1.35fr) minmax(58px,.45fr) auto;gap:8px;align-items:end;padding:10px 12px;border:1px solid color-mix(in srgb,var(--quran-accent-primary) 22%,var(--quran-line-secondary));border-radius:16px;background:color-mix(in srgb,var(--quran-surface-secondary) 88%,transparent)}
 .qov-jump-field{display:grid;gap:4px;min-width:0}
 .qov-jump-label{font-size:9px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;color:var(--quran-text-muted)}
-.qov-jump-pick{width:100%;min-height:42px;border:1px solid var(--quran-line-secondary);border-radius:12px;background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 90%,var(--quran-surface-secondary));color:var(--quran-text-primary);font-size:13px;font-weight:800;padding:0 10px}
+.qov-jump-pick{width:100%;min-height:42px;border:1px solid var(--quran-line-secondary);border-radius:12px;background:var(--quran-page-bg,var(--bg));color:var(--quran-text-primary);font-size:13px;font-weight:800;padding:0 10px}
 .qov-jump-go{min-height:42px;padding:0 14px;border-radius:12px;white-space:nowrap;font-size:12px;font-weight:900}
 .qov-resume--list{margin:4px 0 8px}
 .qrc-sheet--picker-bar{max-height:min(72dvh,520px)!important}
@@ -13736,9 +13736,9 @@ html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-g
   display:flex!important;align-items:center!important;gap:8px!important;
   padding:0 14px!important;min-height:46px!important;overflow:hidden!important;
   border-radius:14px!important;
-  background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 90%,var(--quran-accent-primary) 4%)!important;
+  background:transparent!important;
   border:1px solid color-mix(in srgb,var(--quran-accent-primary) 24%,var(--quran-line-secondary))!important;
-  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--quran-accent-primary) 6%,transparent)!important;
+  box-shadow:none!important;
 }
 .qov-search-panel .qov-search-shell .qov-search-icon,.qov-search-wrap .qov-search-shell .qov-search-icon{
   flex:0 0 auto!important;margin:0!important;
@@ -13780,8 +13780,8 @@ body.is-quran-overview .qov-header::before{content:"";position:absolute;left:0;r
   border:1px solid color-mix(in srgb,var(--quran-accent-primary) 24%,var(--quran-line-secondary));
   border-radius:14px;
   overflow:hidden;
-  background:color-mix(in srgb,var(--quran-page-bg,var(--bg)) 90%,var(--quran-accent-primary) 4%);
-  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--quran-accent-primary) 6%,transparent);
+  background:transparent;
+  box-shadow:none;
 }
 .qov-nav-stack .qov-nav-stack-search{
   border:0!important;border-radius:0!important;
@@ -15654,15 +15654,17 @@ html[data-theme] #bottomNav.bottom-nav{
   }
 }
 </style>
-<style id="theme-surface-cleanup-v509">
-/* v509 · Fremdflächen bereinigen: Theme-Tokens statt hartem Hex / Fremdblöcken */
+<style id="theme-surface-cleanup-v510">
+/* v510 · Fremdflächen hart entfernen: Suche/Selects/Suren-Zeilen exakt Seitenfarbe */
 html[data-theme].is-quran-overview,
 html[data-theme].is-quran-overview body,
 html[data-theme].is-quran-reader-route,
-html[data-theme].is-quran-reader-route body{
-  --quran-page-bg:var(--bg);
-  --quran-gradient-page:var(--bg);
-  --quran-gradient-header:var(--bg);
+html[data-theme].is-quran-reader-route body,
+body.is-quran-overview,
+body.is-quran-reader-route{
+  --quran-page-bg:var(--bg)!important;
+  --quran-gradient-page:var(--bg)!important;
+  --quran-gradient-header:var(--bg)!important;
   background:var(--bg)!important;
   background-color:var(--bg)!important;
   background-image:none!important;
@@ -15674,78 +15676,150 @@ html[data-theme].is-quran-reader-route #appView.view,
 html[data-theme].is-quran-overview .qov-page,
 html[data-theme].is-quran-overview .qov-header,
 html[data-theme].is-quran-overview .qov-sticky-tools,
+html[data-theme].is-quran-overview .qov-main,
 html[data-theme].is-quran-reader-route .qrc-shell,
 html[data-theme].is-quran-reader-route .qrc-body,
-html[data-theme].is-quran-reader-route .qrc-backblatt{
+html[data-theme].is-quran-reader-route .qrc-backblatt,
+body.is-quran-overview #appView.view,
+body.is-quran-overview .qov-page,
+body.is-quran-overview .qov-header,
+body.is-quran-overview .qov-sticky-tools{
   background:var(--bg)!important;
   background-color:var(--bg)!important;
   background-image:none!important;
+  box-shadow:none!important;
 }
+html.is-quran-overview body:before,
+html.is-quran-reader-route body:before,
+body.is-quran-overview:before,
+body.is-quran-reader-route:before,
 html[data-theme].is-quran-overview body:before,
 html[data-theme].is-quran-reader-route body:before{
-  display:none!important;
-  content:none!important;
-  opacity:0!important;
-  background:none!important;
+  display:none!important;content:none!important;opacity:0!important;background:none!important;
 }
+/* Nav-Stack: kein eigener Farbblock — nur dezente Linie */
+body.is-quran-overview .qov-nav-stack,
 html[data-theme].is-quran-overview .qov-nav-stack{
-  background:var(--bg)!important;
-  box-shadow:none!important;
-}
-html[data-theme].is-quran-overview .qov-nav-stack .qov-nav-stack-search,
-html[data-theme].is-quran-overview .qov-search-shell,
-html[data-theme].is-quran-overview .qov-search-panel .qov-search-shell{
   background:transparent!important;
   background-color:transparent!important;
+  background-image:none!important;
   box-shadow:none!important;
+  border:1px solid color-mix(in srgb,var(--line2) 78%,var(--gold2) 22%)!important;
 }
+body.is-quran-overview .qov-nav-stack .qov-nav-stack-search,
+body.is-quran-overview .qov-search-shell,
+body.is-quran-overview .qov-search-panel .qov-search-shell,
+html[data-theme].is-quran-overview .qov-nav-stack .qov-nav-stack-search,
+html[data-theme].is-quran-overview .qov-search-shell{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-color:color-mix(in srgb,var(--line2) 70%,var(--gold2) 30%)!important;
+}
+body.is-quran-overview .qov-search-shell input.qov-search,
+body.is-quran-overview .qov-search-shell input.search,
+body.is-quran-overview .qov-search-shell input[type="search"],
 html[data-theme].is-quran-overview .qov-search-shell input.qov-search,
 html[data-theme].is-quran-overview .qov-search-shell input.search,
-html[data-theme].is-quran-overview .qov-search-shell input[type="search"],
-html[data-theme] .home-v380-search-field .search,
-html[data-theme] .home-v380-search-field input.search,
-html[data-theme] .home-v380-search-field input[type="search"]{
+html[data-theme].is-quran-overview .qov-search-shell input[type="search"]{
   background:transparent!important;
   background-color:transparent!important;
+  background-image:none!important;
   box-shadow:none!important;
+  border:0!important;
   -webkit-appearance:none!important;
   appearance:none!important;
   color:var(--cream)!important;
   -webkit-text-fill-color:var(--cream)!important;
 }
-html[data-theme="light"] .home-v380-search-field .search,
-html[data-theme="soft"] .home-v380-search-field .search,
 html[data-theme="light"].is-quran-overview .qov-search-shell input,
 html[data-theme="soft"].is-quran-overview .qov-search-shell input{
   color:var(--text)!important;
   -webkit-text-fill-color:var(--text)!important;
 }
-html[data-theme] .home-v380-search-box .direct-pick,
-html[data-theme] .home-v380-search-box .filter-select,
-html[data-theme].is-quran-overview .qov-jump-pick{
-  background:var(--card)!important;
+/* Selects exakt Seitenfarbe — kein helleres --card */
+body.is-quran-overview .qov-jump-pick,
+body.is-quran-overview .qov-nav-stack .qov-jump-pick,
+body.is-quran-overview select.direct-pick,
+html[data-theme].is-quran-overview .qov-jump-pick,
+html[data-theme].is-quran-overview .qov-nav-stack .qov-jump-pick,
+html[data-theme].is-quran-overview select.direct-pick{
+  background:var(--bg)!important;
+  background-color:var(--bg)!important;
+  background-image:none!important;
   color:var(--cream)!important;
-  border-color:var(--line)!important;
+  border:1px solid color-mix(in srgb,var(--line2) 75%,var(--gold2) 25%)!important;
+  box-shadow:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
 }
-html[data-theme="light"] .home-v380-search-box .direct-pick,
-html[data-theme="soft"] .home-v380-search-box .direct-pick,
 html[data-theme="light"].is-quran-overview .qov-jump-pick,
 html[data-theme="soft"].is-quran-overview .qov-jump-pick{
   color:var(--text)!important;
-  background:var(--panel)!important;
-}
-html[data-theme] .home-v380-search-box{
-  background:var(--card)!important;
-  background-image:none!important;
-}
-html[data-theme].is-quran-overview .qov-filter-bar{
   background:var(--bg)!important;
+}
+body.is-quran-overview .qov-filter-bar,
+html[data-theme].is-quran-overview .qov-filter-bar{
+  background:transparent!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
-/* globale Eingabe-Chrome an Token binden (Shell-Kinder bleiben transparent) */
+/* Suren-Liste: Karten-Fremdflächen / Schatten / Dreiecksreste entfernen */
+body.is-quran-overview #quranSurahGrid,
+body.is-quran-overview #quranSurahGrid.quran-surah-grid,
+body.is-quran-overview #quranSurahGrid.qov-surah-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  background:transparent!important;
+}
+body.is-quran-overview #quranSurahGrid .quran-surah-card,
+body.is-quran-overview #quranSurahGrid .qov-row,
+body.is-quran-overview .qov-row.quran-surah-card{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  filter:none!important;
+  outline:0!important;
+  min-height:64px!important;
+  padding:8px 2px!important;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) auto!important;
+  grid-template-rows:auto auto!important;
+}
+body.is-quran-overview #quranSurahGrid .quran-surah-card::before,
+body.is-quran-overview #quranSurahGrid .quran-surah-card::after,
+body.is-quran-overview .qov-row.quran-surah-card::before{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+body.is-quran-overview #quranSurahGrid .quran-surah-card::after,
+body.is-quran-overview .qov-row::after{
+  content:""!important;
+  position:absolute!important;
+  left:34px!important;right:0!important;bottom:0!important;
+  height:1px!important;width:auto!important;
+  border:0!important;border-radius:0!important;
+  background:color-mix(in srgb,var(--line2) 80%,transparent)!important;
+  clip-path:none!important;transform:none!important;
+}
+body.is-quran-overview #quranSurahGrid .quran-surah-card .quran-num,
+body.is-quran-overview .qov-row .quran-num{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  color:var(--muted)!important;
+  border-radius:0!important;
+}
+body.is-quran-overview .qov-row-chevron{display:none!important}
+/* globale Eingaben weiter an Tokens, Shell-Kinder transparent */
 html[data-theme] .search:not(.qov-search),
-html[data-theme] .direct-pick,
+html[data-theme] .direct-pick:not(.qov-jump-pick),
 html[data-theme] .filter-select{
   background:var(--card)!important;
   color:var(--cream)!important;
@@ -15753,27 +15827,46 @@ html[data-theme] .filter-select{
 }
 html[data-theme="light"] .search:not(.qov-search),
 html[data-theme="soft"] .search:not(.qov-search),
-html[data-theme="light"] .direct-pick,
-html[data-theme="soft"] .direct-pick,
+html[data-theme="light"] .direct-pick:not(.qov-jump-pick),
+html[data-theme="soft"] .direct-pick:not(.qov-jump-pick),
 html[data-theme="light"] .filter-select,
 html[data-theme="soft"] .filter-select{
   background:var(--panel)!important;
+  color:var(--text)!important;
+}
+html[data-theme] .home-v380-search-field .search,
+html[data-theme] .home-v380-search-field input[type="search"]{
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--cream)!important;
+  -webkit-text-fill-color:var(--cream)!important;
+}
+html[data-theme="light"] .home-v380-search-field .search,
+html[data-theme="soft"] .home-v380-search-field .search{
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
+}
+html[data-theme] .home-v380-search-box{
+  background:var(--card)!important;
+  background-image:none!important;
+}
+html[data-theme] .home-v380-search-box .direct-pick,
+html[data-theme] .home-v380-search-box .filter-select{
+  background:var(--bg)!important;
+  color:var(--cream)!important;
+  border-color:var(--line)!important;
+}
+html[data-theme="light"] .home-v380-search-box .direct-pick,
+html[data-theme="soft"] .home-v380-search-box .direct-pick{
   color:var(--text)!important;
 }
 html[data-theme] .search-input-shell .search{
   background:var(--card)!important;
   box-shadow:none!important;
 }
-html[data-theme] .home-v380-search-field .search-input-shell .search,
-html[data-theme] .home-v380-search-field .search{
+html[data-theme] .home-v380-search-field .search-input-shell .search{
   background:transparent!important;
   box-shadow:none!important;
-}
-/* Abrupte Sticky-Bänder glätten */
-html[data-theme] .qov-sticky-tools,
-html[data-theme] .qov-header{
-  background:var(--bg)!important;
-  background-image:none!important;
 }
 </style>
 <body class="has-bottom-nav">
