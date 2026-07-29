@@ -118,8 +118,9 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-const LIVE_CHECK_SCHEDULE_FULL_MS = [30000, 60000, 120000, 180000, 240000, 300000];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
+// Sofort prüfen, dann gestaffelt nachziehen — nicht erst 30s warten (Admin-Retry hing sonst).
+const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 15000, 30000, 60000, 120000, 180000, 240000, 300000];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 8000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -2784,31 +2785,32 @@ async function claimPendingPushSend(env, postId) {
   throw lastError || httpError(`Push-Claim für ${key} fehlgeschlagen`, 500);
 }
 
-async function processPendingPushUntilLive(env, record) {
+async function processPendingPushUntilLive(env, record, options = {}) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
+  const schedule = options.schedule === "quick" || options.singleCheck ? "quick" : "full";
 
   const registry = await readPendingPushesRegistry(env);
   const existing = registry.pushes?.[postId];
   if (existing?.status === "sent") {
-    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
+    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet.", liveCheck: existing.liveCheck || null };
   }
   if (existing?.status === "sending") {
     const started = Date.parse(existing.sendingAt || "");
     if (Number.isFinite(started) && Date.now() - started < 10 * 60 * 1000) {
-      return { sent: false, skipped: true, reason: "Push wird bereits gesendet." };
+      return { sent: false, skipped: true, reason: "Push wird bereits gesendet.", liveCheck: existing.liveCheck || null };
     }
   }
 
   const liveCheck = await verifyPostLiveAvailability(
     env,
     {
-      filename: record.filename,
+      filename: record.filename || existing?.filename,
       postId,
-      postPath: record.postPath,
+      postPath: record.postPath || existing?.postPath,
       githubSteps: { postCreated: true, indexUpdated: true }
     },
-    { schedule: "full" }
+    { schedule }
   );
 
   await writePendingPushStatus(env, postId, {
@@ -2824,8 +2826,9 @@ async function processPendingPushUntilLive(env, record) {
 
   const claim = await claimPendingPushSend(env, postId);
   if (!claim.claimed) {
+    const alreadySent = Boolean(claim.skipped && /bereits gesendet/i.test(String(claim.reason || "")));
     return {
-      sent: Boolean(claim.skipped && /bereits gesendet/i.test(String(claim.reason || ""))),
+      sent: alreadySent,
       skipped: true,
       reason: claim.reason || "Push-Claim abgelehnt",
       liveCheck
@@ -2833,10 +2836,10 @@ async function processPendingPushUntilLive(env, record) {
   }
 
   const push = await sendNewPostPush(env, {
-    postTitle: record.postTitle,
+    postTitle: record.postTitle || existing?.postTitle,
     postId,
-    filename: record.filename,
-    publishedAt: record.publishedAt,
+    filename: record.filename || existing?.filename,
+    publishedAt: record.publishedAt || existing?.publishedAt,
     cacheVersion: Date.now()
   });
 
@@ -3093,28 +3096,37 @@ async function retryPendingPostPush(env, input, ctx) {
       sent: true,
       skipped: true,
       reason: "Push wurde bereits gesendet.",
-      liveCheck: existing.liveCheck || null,
-      push: { sent: true, targetUrl: buildPostPushUrl(env, postId, Date.now()) }
+      liveCheck: existing.liveCheck || { ok: true },
+      push: {
+        sent: true,
+        skipped: true,
+        reason: "Push wurde bereits gesendet.",
+        targetUrl: existing.pushResult?.targetUrl || buildPostPushUrl(env, postId, Date.now())
+      }
     };
   }
 
   const record = {
     postId,
-    filename,
+    filename: existing?.filename || filename,
     postTitle: existing?.postTitle || postTitle,
     publishedAt: existing?.publishedAt || publishedAt,
     postPath: existing?.postPath || postPath,
     status: "pending"
   };
-  await writePendingPushStatus(env, postId, record);
-  const push = await processPendingPushUntilLive(env, record);
+  if (existing?.status !== "pending" && existing?.status !== "sending") {
+    await writePendingPushStatus(env, postId, record);
+  }
+
+  // Admin-Request: nur Quick-Check (max ~8s). Lange Wartezeit läuft im Hintergrund.
+  const push = await processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "quick", singleCheck: true });
   if (ctx && push?.pending) {
-    ctx.waitUntil(processPendingPushUntilLive(env, record));
+    ctx.waitUntil(processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "full" }));
   }
   return {
     ok: true,
     postId,
-    filename,
+    filename: record.filename,
     liveCheck: push.liveCheck || null,
     push
   };
