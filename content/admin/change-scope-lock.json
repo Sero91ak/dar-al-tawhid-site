@@ -54,6 +54,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-reader-ayah-strip-v522-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Leser: Kästen weg, noble Trennlinien, Āyah-Pill mit Aktions-Strip",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-overview-tone-fix-v517-2026-07-29",
       "approvedBy": "user-explicit-order",
       "reason": "Qurʾān-Übersicht: helle Ränder und Header-Farbkästen korrigieren",
