@@ -20,7 +20,10 @@
     "admin/quiz-stats-manager.js",
     "cloudflare/worker.js",
     "cloudflare/quiz-stats-admin.js",
-    "index.html"
+    "index.html",
+    "test/index.html",
+    "test/version.json",
+    "service-worker.js"
   ],
   "protectedPrefixes": [
     "index.html",
