@@ -54,6 +54,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-reader-surface-fix-v524-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Leser: einheitlicher Hintergrund, volle Trennlinien, seitengleiche Typografie",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-test-live-v523-2026-07-29",
       "approvedBy": "user-explicit-order",
       "reason": "Dar Test ausliefern: noble Āyah-Strip + Weißbildschirm-Fix + Suchfeld/Labels",
