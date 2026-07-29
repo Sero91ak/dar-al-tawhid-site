@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785314705803 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v514";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v515";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -9113,28 +9113,25 @@ body.has-bottom-nav .float-actions,
 
 .quick-action svg{display:none!important}
 .quick-action.uses-line-icon svg{
-  display:block!important;
-  width:20px;
-  height:20px;
-  stroke:currentColor;
-  fill:none;
-  stroke-width:2.1;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  pointer-events:none;
-  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--quick-menu-border-glow) 45%,transparent));
+  display:none!important;
 }
-.quick-action.uses-line-icon .quick-action-emoji{display:none!important}
+.quick-action.uses-line-icon .quick-action-emoji{display:block!important}
 .quick-action-emoji{
-  display:block;
-  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji",emoji,sans-serif;
-  font-size:22px;
-  line-height:1;
+  display:block!important;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji","EmojiOne Color","Twemoji Mozilla",emoji,sans-serif!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  font-size:22px!important;
+  line-height:1!important;
+  color:initial!important;
+  -webkit-text-fill-color:initial!important;
+  font-variant-emoji:emoji!important;
   pointer-events:none;
   user-select:none;
   -webkit-user-select:none;
-  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--quick-menu-border-glow) 45%,transparent));
+  filter:none!important;
   transform:translateZ(0);
+  text-rendering:auto!important;
 }
 .quick-action:hover,
 .quick-action:focus-visible{
@@ -20854,7 +20851,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v514";
+const APP_BUILD_ID="app-shell-v515";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21571,7 +21568,7 @@ let quickAccessDocListenersBound=false;
 
 const NAV_LONGPRESS_MENU_HTML={
   more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button>`,
-  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button><button type="button" id="quickAccessQuranBookmarksBtn" class="quick-action" role="menuitem" data-qa-action="quran-bookmarks" aria-label="Lesezeichen" title="Lesezeichen"><span class="quick-action-emoji" aria-hidden="true">⭐</span></button>`
+  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button><button type="button" id="quickAccessQuranBookmarksBtn" class="quick-action" role="menuitem" data-qa-action="quran-bookmarks" aria-label="Lesezeichen" title="Lesezeichen"><span class="quick-action-emoji" aria-hidden="true">🔖</span></button>`
 };
 
 function triggerLightHapticFeedback(){
@@ -21643,6 +21640,9 @@ function setQuickAccessProfile(profile){
   menu.setAttribute("data-profile",next);
   menu.setAttribute("aria-label",next==="quran"?"Qurʾān-Schnellzugriff":"Schnellzugriff");
   menu.innerHTML=NAV_LONGPRESS_MENU_HTML[next]||NAV_LONGPRESS_MENU_HTML.more;
+  // Nie SVG-/Linien-Icons im Schnellzugriff — nur System-Emojis wie bei Mehr
+  menu.querySelectorAll("svg").forEach(el=>{try{el.remove()}catch(e){}});
+  menu.querySelectorAll(".quick-action").forEach(btn=>btn.classList.remove("uses-line-icon"));
   bindQuickAccessActionButtons();
   if(next==="more")updateQuickAccessIndicators();
 }
