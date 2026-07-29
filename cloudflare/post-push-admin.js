@@ -1,9 +1,20 @@
+import { broadcastPushAttemptSucceeded } from "./onesignal-delivery.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_POST_PUSH_LOG_PATH = "content/admin/post-push-log.json";
 const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const ONESIGNAL_BATCH_SIZE = 2000;
+
+async function uuidFrom(seed) {
+  const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(seed || "")));
+  const bytes = new Uint8Array(hash.slice(0, 16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, "0")).join("");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
 
 function oneSignalApiKey(env) {
   return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "")
@@ -151,11 +162,7 @@ async function postOneSignalAttempt(env, payload) {
       });
       const text = await res.text();
       const oneSignal = parseOneSignalResponse(text, res.status);
-      const hasInvalidSubs = Array.isArray(oneSignal.invalidSubscriptions) && oneSignal.invalidSubscriptions.length > 0;
-      const hasErrors = oneSignal.errors && (Array.isArray(oneSignal.errors) ? oneSignal.errors.length : true);
-      const zeroRecipients = oneSignal.recipients === 0;
-      const hasNotificationId = !!oneSignal.notificationId;
-      const success = res.ok && hasNotificationId && !zeroRecipients && !hasInvalidSubs && !hasErrors;
+      const success = res.ok && broadcastPushAttemptSucceeded(oneSignal.raw || {}, payload);
 
       lastResult = {
         ok: res.ok,
@@ -167,8 +174,10 @@ async function postOneSignalAttempt(env, payload) {
         reason: success ? "" : classifyPushFailure(res.status, oneSignal, target)
       };
 
-      if (res.ok && success) return lastResult;
-      if (res.status === 401 || res.status === 403) return lastResult;
+      // Nach HTTP 200 niemals denselben Payload mit anderem Auth erneut senden —
+      // sonst Doppelzustellung, wenn die erste Antwort gemischte invalid_player_ids enthält.
+      if (res.ok) return lastResult;
+      if (res.status !== 401 && res.status !== 403) return lastResult;
     } catch (error) {
       lastResult = {
         ok: false,
@@ -206,6 +215,7 @@ function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, c
     test: test || undefined
   };
 
+  const collapse = slug ? `post-${slug}`.slice(0, 64) : "";
   return {
     payload: {
       app_id: appId,
@@ -217,7 +227,13 @@ function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, c
       chrome_web_icon: icon,
       chrome_web_badge: badge,
       firefox_icon: icon,
-      name: test ? `admin-post-test-${Date.now()}` : `admin-publish-${Date.now()}`
+      name: test ? `admin-post-test-${slug || Date.now()}` : `admin-publish-${slug || Date.now()}`,
+      ...(collapse && !test
+        ? {
+            collapse_id: collapse,
+            web_push_topic: collapse.slice(0, 32)
+          }
+        : {})
     },
     pushData,
     targetUrl: url,
@@ -343,6 +359,10 @@ export async function sendNewPostPush(env, options = {}) {
   }
 
   const { payload: basePayload, pushData, targetUrl } = buildPostPushPayload(env, options);
+  const postId = String(options.postId || "").trim();
+  if (postId && !options.test) {
+    basePayload.idempotency_key = await uuidFrom(`post-push:v1:${postId}`);
+  }
   return sendBroadcastPush(env, basePayload, { targetUrl, pushData });
 }
 

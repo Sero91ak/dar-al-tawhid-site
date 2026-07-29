@@ -327,7 +327,8 @@ export async function sendLibraryPublicationPush(env, record) {
               notificationId: parsed?.id || null,
               reason: lastError
             });
-            continue;
+            // HTTP 200: nicht mit Basic-Auth denselben Payload erneut senden
+            break;
           }
           const accepted = parseOneSignalAcceptedRecipients(parsed);
           deliveredCount += 1;

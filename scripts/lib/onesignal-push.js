@@ -53,9 +53,16 @@ async function postOneSignalNotification(body, apiKey, { retries = 3 } = {}) {
           return { ok: true, status: res.status, text, attempt, authMode };
         }
 
-        if (res.status === 400 || res.status === 401 || res.status === 403) {
+        // Nur Auth-Fehler mit anderem Header erneut versuchen — nie denselben
+        // Payload nach nicht-auth Fehlern (oder erneutem 200-Pfad) doppelt senden.
+        if (res.status === 401 || res.status === 403) {
           lastError = new Error(`OneSignal ${res.status} (${authMode}): ${text}`);
           continue;
+        }
+
+        if (res.status === 400) {
+          lastError = new Error(`OneSignal ${res.status} (${authMode}): ${text}`);
+          break;
         }
 
         lastError = new Error(`OneSignal ${res.status}: ${text}`);

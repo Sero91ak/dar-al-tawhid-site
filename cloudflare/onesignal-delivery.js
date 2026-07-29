@@ -60,17 +60,23 @@ function parseAcceptedRecipientCount(parsed = {}) {
 
 /** True when a broadcast attempt (Supabase batch, segment, or tag filter) actually reached someone. */
 export function broadcastPushAttemptSucceeded(parsed, payload = {}) {
-  const delivery = evaluateOneSignalDelivery(parsed);
-  if (!delivery.delivered) return false;
+  const notificationId = parsed?.id || parsed?.notificationId || null;
+  if (!notificationId) return false;
+
+  const accepted = parseAcceptedRecipientCount(parsed);
+  // Explizit 0 Empfänger = kein Erfolg. Fehlendes Feld darf einen gültigen ID-Send nicht verwerfen.
+  if (Number.isFinite(accepted) && accepted === 0) return false;
 
   const subscriptionIds = Array.isArray(payload.include_subscription_ids)
     ? payload.include_subscription_ids.filter(Boolean)
     : [];
+
+  // Batch-Send: Notification-ID bedeutet Annahme durch OneSignal.
+  // invalid_player_ids / invalid_subscription_ids betreffen nur tote IDs —
+  // gültige Empfänger haben die Push bereits erhalten. Nicht als Totalausfall werten,
+  // sonst folgen Segment-Fallbacks und Doppelzustellung.
   if (subscriptionIds.length) return true;
 
-  const accepted = parseAcceptedRecipientCount(parsed);
-  // OneSignal liefert bei Segment-/Tag-Sends manchmal keine recipients-Zahl —
-  // fehlendes Feld darf einen gültigen Notification-ID-Send nicht verwerfen.
   if (!Number.isFinite(accepted)) return true;
   return accepted > 0;
 }

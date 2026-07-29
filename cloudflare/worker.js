@@ -2728,13 +2728,76 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
   return lastResult;
 }
 
+async function claimPendingPushSend(env, postId) {
+  const key = String(postId || "").trim();
+  if (!key) return { claimed: false, reason: "postId fehlt" };
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const path = pendingPushesPath(env);
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      const registry = await readPendingPushesRegistry(env);
+      const current = registry.pushes?.[key];
+      if (!current) return { claimed: false, reason: "Pending-Eintrag fehlt" };
+      if (current.status === "sent") {
+        return { claimed: false, skipped: true, reason: "Push wurde bereits gesendet." };
+      }
+      if (current.status === "sending") {
+        const started = Date.parse(current.sendingAt || "");
+        if (Number.isFinite(started) && Date.now() - started < 10 * 60 * 1000) {
+          return { claimed: false, skipped: true, reason: "Push wird bereits gesendet." };
+        }
+      }
+
+      const pushes = { ...(registry.pushes || {}) };
+      pushes[key] = {
+        ...current,
+        postId: key,
+        status: "sending",
+        sendingAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      const payload = { version: 1, generated: new Date().toISOString(), pushes };
+      await githubPut(
+        env,
+        owner,
+        repo,
+        path,
+        `${JSON.stringify(payload, null, 2)}\n`,
+        `Claim pending push ${key}`,
+        branch,
+        registry.sha
+      );
+      return { claimed: true };
+    } catch (error) {
+      lastError = error;
+      const status = Number(error?.status || 0);
+      if (status !== 409 && status !== 422) throw error;
+      await sleep(250 * attempt);
+    }
+  }
+
+  throw lastError || httpError(`Push-Claim für ${key} fehlgeschlagen`, 500);
+}
+
 async function processPendingPushUntilLive(env, record) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
 
   const registry = await readPendingPushesRegistry(env);
-  if (registry.pushes?.[postId]?.status === "sent") {
+  const existing = registry.pushes?.[postId];
+  if (existing?.status === "sent") {
     return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
+  }
+  if (existing?.status === "sending") {
+    const started = Date.parse(existing.sendingAt || "");
+    if (Number.isFinite(started) && Date.now() - started < 10 * 60 * 1000) {
+      return { sent: false, skipped: true, reason: "Push wird bereits gesendet." };
+    }
   }
 
   const liveCheck = await verifyPostLiveAvailability(
@@ -2757,6 +2820,16 @@ async function processPendingPushUntilLive(env, record) {
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+  }
+
+  const claim = await claimPendingPushSend(env, postId);
+  if (!claim.claimed) {
+    return {
+      sent: Boolean(claim.skipped && /bereits gesendet/i.test(String(claim.reason || ""))),
+      skipped: true,
+      reason: claim.reason || "Push-Claim abgelehnt",
+      liveCheck
+    };
   }
 
   const push = await sendNewPostPush(env, {

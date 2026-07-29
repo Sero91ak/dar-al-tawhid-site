@@ -3513,7 +3513,7 @@ async function retryLivePush(){
       postId,
       postTitle:ctx?.postTitle||frontmatterValue(markdown,"title")||"Neuer Beitrag",
       markdown,
-      forceResend:true
+      forceResend:false
     });
     const push=result.push||{};
     const live=result.liveCheck||{};

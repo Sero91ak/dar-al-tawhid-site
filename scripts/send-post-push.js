@@ -328,6 +328,7 @@ async function sendWithFallbacks(basePayload) {
     cacheVersion: String(copy.cacheVersion || Date.now())
   } : undefined;
 
+  const collapse = copy.postId ? `post-${copy.postId}`.slice(0, 64) : "";
   const payload = withNotificationIcons({
     app_id: APP_ID,
     target_channel: "push",
@@ -335,7 +336,14 @@ async function sendWithFallbacks(basePayload) {
     contents: { en: copy.message, de: copy.message },
     url: copy.url,
     data: pushData,
-    name: `github-posts-auto-${RUN_ID}`
+    name: copy.postId ? `github-posts-auto-${copy.postId}` : `github-posts-auto-${RUN_ID}`,
+    ...(collapse
+      ? {
+          collapse_id: collapse,
+          web_push_topic: collapse.slice(0, 32),
+          idempotency_key: collapse
+        }
+      : {})
   }, SITE_URL);
 
   await sendWithFallbacks(payload);
