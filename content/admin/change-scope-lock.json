@@ -54,6 +54,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-longpress-emoji-v515-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Schnellzugriff: System-Emojis statt flacher SVG-/Linien-Icons",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-longpress-fix-v514-2026-07-29",
       "approvedBy": "user-explicit-order",
       "reason": "Reparatur: Qurʾān-Nav Long-Press öffnet nicht zuverlässig",
