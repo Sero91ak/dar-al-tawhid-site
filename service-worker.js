@@ -1,10 +1,10 @@
-// workers-deploy-stamp:1785270000000
+// workers-deploy-stamp:1785314705816
 /* DAR AL TAWḤID – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v503-quran-chrome';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v504-quran-bild2';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
