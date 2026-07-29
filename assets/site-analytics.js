@@ -68,13 +68,6 @@
 
   function track(eventType, meta) {
     meta = meta || {};
-    try {
-      if (window.__DAR_ANALYTICS_EXCLUDED === true) return;
-      const q = new URLSearchParams(location.search || "");
-      if (q.get("adminPreview") === "1" || q.get("adminLive") === "1") return;
-      if (sessionStorage.getItem("darAdminLivePreview") === "1") return;
-      if (q.get("sourceApp") === "dar-admin") return;
-    } catch (e) {}
     initGA4();
     gaEvent(eventType, {
       content_type: meta.contentType,

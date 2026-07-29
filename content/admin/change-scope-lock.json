@@ -25,13 +25,6 @@
     "test/version.json",
     "service-worker.js",
     "content/updates/daily.json",
-    "admin/live-edit.js",
-    "admin/live-edit.css",
-    "cloudflare/live-edit-admin.js",
-    "content/admin/live-audit-log.json",
-    "content/admin/live-versions.json",
-    "content/admin/live-scholars.json",
-    "content/admin/live-books.json",
     "admin/sw.js",
     "assets/site-analytics.js"
   ],
@@ -54,9 +47,9 @@
   ],
   "unlockedScopes": [
     {
-      "id": "admin-live-bearbeitung-2026-07-29",
+      "id": "remove-live-bearbeitung-2026-07-29",
       "approvedBy": "user-explicit-order",
-      "reason": "Verbindlicher Gesamtauftrag: Live-Bearbeitung in DAR-Admin-App vollständig umsetzen",
+      "reason": "Verbindlicher Löschauftrag: Live-Bearbeitung vollständig aus DAR-Admin entfernen",
       "paths": [
         "admin/index.html",
         "admin/live-edit.js",
@@ -67,12 +60,9 @@
         "assets/site-analytics.js",
         "index.html",
         "test/index.html",
-        "test/version.json",
         "content/admin/change-scope-lock.json",
         "content/admin/live-audit-log.json",
         "content/admin/live-versions.json",
-        "content/duas/",
-        "service-worker.js",
         "content/admin/live-scholars.json",
         "content/admin/live-books.json"
       ],

@@ -544,9 +544,7 @@ main#panel.panel{
 <script src="/admin/library-cover-gen.js?v=5"></script>
 <script src="/admin/library-manager.js?v=26"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
-<script src="/admin/live-edit.js?v=1"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=14">
-<link rel="stylesheet" href="/admin/live-edit.css?v=1">
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -574,7 +572,6 @@ const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
-  ["live-edit","Live-Bearbeitung"],
   ["quellen","Beiträge"],
   ["actions","Neuer Beitrag"],
   ["news","News"],
@@ -589,6 +586,10 @@ const DEFAULT_ADMIN_TABS=[
 const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
 const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
+try{
+  ["darAdminLiveAutosaveV1","darAdminLiveModeV1","darAdminLiveDeviceV1","darAdminLiveLocalVersionsV1","darAdminLiveAuditLocalV1","darAdminLivePreview","liveEditingEnabled","adminPreviewMode","lastLiveEditRoute","livePreviewDevice","livePreviewTheme"].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+  try{sessionStorage.removeItem("darAdminLivePreview")}catch(e){}
+}catch(e){}
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
 let sourceLibraryCache=null,sourceLibraryBusy=false,sourceDraftPending=null,sourceUploadQueue=[],sourceEditorContext="draft";
@@ -611,7 +612,7 @@ let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
 function adminIsEditing(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")return true;
+  if(currentTab==="bibliothek")return true;
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
@@ -726,7 +727,7 @@ function normalizeAdminTab(tab){
   if(id==="stats"||id==="overview")return"besucher";
   if(id==="preview")return"actions";
   if(id==="stories")return"start";
-  if(id==="live"||id==="live-bearbeitung"||id==="livebearbeitung")return"live-edit";
+  if(id==="live"||id==="live-edit"||id==="live-bearbeitung"||id==="livebearbeitung"||id==="visitor-preview"||id==="live-preview")return"start";
   if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
   return id||"start";
 }
@@ -2194,7 +2195,7 @@ window.renderLibraryAdminPartial=function(){
   return true;
 };
 function renderShell(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")stopRefresh();
+  if(currentTab==="bibliothek")stopRefresh();
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -2207,7 +2208,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2216,11 +2217,10 @@ function renderShell(){
       </select>
     </nav>
     ${body}
-    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}${currentTab==="live-edit"?" · Live-Bearbeitung (ohne Statistik)":""}</div>`;
+    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
-  if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
@@ -2301,12 +2301,11 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Live-Bearbeitung","Besucheransicht mit kontextbezogenem Bearbeiten.","live-edit","Neu")}
-    ${folderCard("②","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
-    ${folderCard("③","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
-    ${folderCard("④","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
-    ${folderCard("⑤","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑥","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
+    ${folderCard("①","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
+    ${folderCard("②","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
+    ${folderCard("③","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
+    ${folderCard("④","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑤","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
     ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
   </section>
   <section class="command-grid">
@@ -3765,7 +3764,7 @@ async function renderDashboard({force=false}={}){
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
-function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
