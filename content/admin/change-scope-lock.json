@@ -54,6 +54,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-longpress-quickaccess-v512-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Verbindlicher Auftrag: Qurʾān-Schnellzugriff durch Gedrückthalten wie Mehr",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
       "id": "admin-live-bearbeitung-2026-07-29",
       "approvedBy": "user-explicit-order",
       "reason": "Verbindlicher Gesamtauftrag: Live-Bearbeitung in DAR-Admin-App vollständig umsetzen",

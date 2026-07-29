@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785314705803 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v507";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v512";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -9109,6 +9109,19 @@ body.has-bottom-nav .float-actions,
 .quick-access-layer.is-open .quick-action:nth-child(1){transition-delay:60ms}
 
 .quick-action svg{display:none!important}
+.quick-action.uses-line-icon svg{
+  display:block!important;
+  width:20px;
+  height:20px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  pointer-events:none;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--quick-menu-border-glow) 45%,transparent));
+}
+.quick-action.uses-line-icon .quick-action-emoji{display:none!important}
 .quick-action-emoji{
   display:block;
   font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji",emoji,sans-serif;
@@ -9224,7 +9237,9 @@ body.quick-menu-open .view{
 }
 
 .bottom-nav-btn[data-bottom-nav="more"],
-.bottom-nav-more{
+.bottom-nav-more,
+.bottom-nav-btn[data-bottom-nav="quran"],
+.bottom-nav-quran{
   -webkit-touch-callout:none;
   -webkit-user-select:none;
   user-select:none;
@@ -15697,7 +15712,7 @@ html[data-theme] #bottomNav.bottom-nav{
   <button class="bottom-nav-btn" type="button" data-bottom-nav="home" aria-label="Startseite"><span class="nav-icon" aria-hidden="true">⌂</span><span>Start</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon" aria-hidden="true">📘</span><span>ʿIlm</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="feed" aria-label="Feed"><span class="nav-icon" aria-hidden="true">✦</span><span>Feed</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān"><span class="nav-icon" aria-hidden="true">📖</span><span>Qurʾān</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">📖</span><span>Qurʾān</span></button>
   <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
 </nav>
 </div>
@@ -15712,15 +15727,15 @@ html[data-theme] #bottomNav.bottom-nav{
 <div id="quickAccessLayer" class="quick-access-layer" hidden aria-hidden="true">
   <button type="button" id="quickAccessScrim" class="quick-access-scrim" aria-label="Schnellzugriff schließen"></button>
   <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten für Schnellzugriff</div>
-  <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" hidden>
-    <button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" aria-label="Orientierung" title="Orientierung">
+  <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" data-profile="more" hidden>
+    <button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung">
       <span class="quick-action-emoji" aria-hidden="true">🧭</span>
     </button>
-    <button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" aria-label="Merkliste" title="Merkliste">
+    <button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste">
       <span class="quick-action-emoji" aria-hidden="true">❤️</span>
       <span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span>
     </button>
-    <button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" aria-label="Erinnerungen" title="Erinnerungen">
+    <button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen">
       <span class="quick-action-emoji" aria-hidden="true">🔔</span>
       <span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span>
     </button>
@@ -16663,7 +16678,7 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindMoreQuickAccessTrigger(btn);return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more");return}if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran");return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -20836,7 +20851,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v507";
+const APP_BUILD_ID="app-shell-v512";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21472,6 +21487,10 @@ function bindEvents(){
   document.querySelectorAll("[data-quran-explain]").forEach(btn=>{btn.onclick=()=>{const parts=String(btn.getAttribute("data-quran-explain")||"").split(":");openQuranExplanationPanel(Number(parts[0]),Number(parts[1]))}});
   document.querySelectorAll("[data-quran-save-ayah]").forEach(btn=>{btn.onclick=()=>{try{const value=btn.getAttribute("data-quran-save-ayah")||"";const parts=String(value).split(":");const surahNumber=Number(parts[0]);const ayahNumber=Number(parts[1]);if(!Number.isFinite(surahNumber)||!Number.isFinite(ayahNumber))return;const state=getQuranReadingState();const isActiveManual=state.manual&&state.manual.surahNumber===surahNumber&&state.manual.ayahNumber===ayahNumber;const mode=String(prompt(isActiveManual?"Dieser Vers ist dein manueller Lesestand.\n1 = Lesestand beibehalten\n2 = Lesestand entfernen\n3 = Zusätzlich als Lesezeichen speichern":"Aktion wählen:\n1 = Lesezeichen hinzufügen\n2 = Lesestand hier speichern","2")||"").trim();if(mode==="1"&&!isActiveManual){const key="darSavedQuranAyahsV1";const list=getJson(key,[]);if(value&&!list.includes(value))list.push(value);setJson(key,list);btn.textContent="★";return}if(mode==="2"&&isActiveManual){clearQuranManualProgress();render();return}if(mode==="3"&&isActiveManual){const key="darSavedQuranAyahsV1";const list=getJson(key,[]);if(value&&!list.includes(value))list.push(value);setJson(key,list);btn.textContent="★";return}if(mode==="2"||mode===""){saveQuranManualProgress({surahNumber,ayahNumber,scrollOffset:visibleQuranAyahEntry()?.scrollOffset||0});alert(`Lesestand bei Sūrah ${surahNumber}, Āyah ${ayahNumber} gespeichert.`);render();return}const key="darSavedQuranAyahsV1";const list=getJson(key,[]);if(value&&!list.includes(value))list.push(value);setJson(key,list);btn.textContent="★"}catch(e){}}});
   document.querySelectorAll("[data-quran-focus-search]").forEach(btn=>{btn.onclick=()=>{setTimeout(()=>$("quranSearchInput")?.focus(),80)}});
+  if(window.__darQuranFocusSearchPending&&currentRoute.view==="quran"){
+    window.__darQuranFocusSearchPending=false;
+    setTimeout(()=>{const input=$("quranSearchInput");if(!input)return;try{input.focus();if(typeof input.setSelectionRange==="function")input.setSelectionRange(input.value.length,input.value.length)}catch(e){}},80);
+  }
   document.querySelectorAll("[data-quran-open-font]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const toggle=document.querySelector("[data-reading-panel-toggle]");const target=toggle||document.querySelector(".quran-translit-picker");if(toggle)toggle.click();if(target){requestAnimationFrame(()=>{const top=Math.max(0,target.getBoundingClientRect().top+window.scrollY-scrollChromeOffset()-12);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"})})}}});
   if(currentRoute.view==="quran-surah"){
     const parts=String(currentRoute.value||"").split("/");
@@ -21535,31 +21554,51 @@ function initAppZoomLock(){
   },{passive:false});
 }
 const QUICK_ACCESS_HINT_KEY="quickAccessLongPressHintSeen";
+const QURAN_QUICK_ACCESS_HINT_KEY="quranQuickAccessLongPressHintSeen";
 const LONG_PRESS_DELAY=500;
 const MOVE_TOLERANCE=8;
 let isQuickMenuOpen=false;
 let longPressTriggered=false;
 let quickMenuAnchorRect=null;
+let quickMenuAnchorBtn=null;
+let quickMenuProfile="more";
 let suppressClickUntil=0;
 let quickAccessDocListenersBound=false;
 
+const NAV_LONGPRESS_MENU_HTML={
+  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button>`,
+  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action uses-line-icon" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h7.2a2.8 2.8 0 0 1 2.8 2.8V20c-1.5-.9-3.1-1.2-4.8-1.2H4V5.5Z"/><path d="M20 5.5h-7.2A2.8 2.8 0 0 0 10 8.3V20c1.5-.9 3.1-1.2 4.8-1.2H20V5.5Z"/><path d="M12 8.2v10.6"/></svg></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action uses-line-icon" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button><button type="button" id="quickAccessQuranBookmarksBtn" class="quick-action uses-line-icon" role="menuitem" data-qa-action="quran-bookmarks" aria-label="Lesezeichen" title="Lesezeichen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10a1.2 1.2 0 0 1 1.2 1.2v14.2L12 16.4 5.8 19.9V5.7A1.2 1.2 0 0 1 7 4.5Z"/></svg></button>`
+};
+
 function triggerLightHapticFeedback(){
   try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}
+}
+
+function navLongPressHintKey(profile){
+  return profile==="quran"?QURAN_QUICK_ACCESS_HINT_KEY:QUICK_ACCESS_HINT_KEY;
+}
+
+function navLongPressHintText(profile){
+  return profile==="quran"?"Qurʾān gedrückt halten für Schnellzugriff":"Mehr gedrückt halten für Schnellzugriff";
+}
+
+function navLongPressAnchorSelector(profile){
+  return profile==="quran"?'[data-bottom-nav="quran"]':'[data-bottom-nav="more"]';
 }
 
 function closeQuickAccessMenu({restoreFocus=false,hideHint=false}={}){
   const layer=$("quickAccessLayer");
   const menu=$("quickAccessMenu");
   const hint=$("quickAccessHint");
-  const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  const anchorBtn=quickMenuAnchorBtn||document.querySelector(navLongPressAnchorSelector(quickMenuProfile));
   document.querySelectorAll(".quick-action.is-pressed").forEach(el=>el.classList.remove("is-pressed"));
   if(hideHint&&hint){hint.hidden=true;hint.classList.remove("is-visible")}
   if(layer){layer.classList.remove("is-open","is-hint-only");layer.setAttribute("aria-hidden","true")}
   if(menu)menu.hidden=true;
-  isQuickMenuOpen=false;quickMenuAnchorRect=null;
+  isQuickMenuOpen=false;quickMenuAnchorRect=null;quickMenuAnchorBtn=null;
   try{document.body.classList.remove("quick-menu-open")}catch(e){}
   if(layer&&menu&&hint&&menu.hidden&&hint.hidden)layer.hidden=true;
-  if(restoreFocus&&moreBtn&&typeof moreBtn.focus==="function"){try{moreBtn.focus({preventScroll:true})}catch(e){try{moreBtn.focus()}catch(_){}}}
+  if(restoreFocus&&anchorBtn&&typeof anchorBtn.focus==="function"){try{anchorBtn.focus({preventScroll:true})}catch(e){try{anchorBtn.focus()}catch(_){}}}
 }
 
 function positionQuickAccessUi(anchorRect){
@@ -21592,14 +21631,29 @@ function positionQuickAccessUi(anchorRect){
   }
 }
 
-function openQuickAccessMenu(anchorBtn){
+function setQuickAccessProfile(profile){
+  const next=profile==="quran"?"quran":"more";
+  quickMenuProfile=next;
+  const menu=$("quickAccessMenu");
+  if(!menu)return;
+  menu.setAttribute("data-profile",next);
+  menu.setAttribute("aria-label",next==="quran"?"Qurʾān-Schnellzugriff":"Schnellzugriff");
+  menu.innerHTML=NAV_LONGPRESS_MENU_HTML[next]||NAV_LONGPRESS_MENU_HTML.more;
+  bindQuickAccessActionButtons();
+  if(next==="more")updateQuickAccessIndicators();
+}
+
+function openQuickAccessMenu(anchorBtn,profile){
   if(shouldHideQuickAccessRail())return;
   const layer=$("quickAccessLayer");
   const menu=$("quickAccessMenu");
   const hint=$("quickAccessHint");
-  const btn=anchorBtn||document.querySelector('[data-bottom-nav="more"]');
+  const nextProfile=profile||anchorBtn?.getAttribute?.("data-bottom-nav")||"more";
+  const btn=anchorBtn||document.querySelector(navLongPressAnchorSelector(nextProfile));
   if(!layer||!menu||!btn)return;
   if(layer.parentElement!==document.body)document.body.appendChild(layer);
+  setQuickAccessProfile(nextProfile==="quran"?"quran":"more");
+  quickMenuAnchorBtn=btn;
   const rect=btn.getBoundingClientRect();
   positionQuickAccessUi(rect);
   if(hint){hint.hidden=true;hint.classList.remove("is-visible")}
@@ -21611,21 +21665,25 @@ function openQuickAccessMenu(anchorBtn){
   layer.classList.add("is-open");
   isQuickMenuOpen=true;
   try{document.body.classList.add("quick-menu-open")}catch(e){}
-  try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"true")}catch(e){}
+  try{localStorage.setItem(navLongPressHintKey(quickMenuProfile),"true")}catch(e){}
   triggerLightHapticFeedback();
-  updateQuickAccessIndicators();
 }
 
-function showQuickAccessHint(anchorBtn){
+function showQuickAccessHint(anchorBtn,profile){
   const layer=$("quickAccessLayer");
   const hint=$("quickAccessHint");
   const menu=$("quickAccessMenu");
-  const btn=anchorBtn||document.querySelector('[data-bottom-nav="more"]');
+  const nextProfile=profile||anchorBtn?.getAttribute?.("data-bottom-nav")||"more";
+  const btn=anchorBtn||document.querySelector(navLongPressAnchorSelector(nextProfile));
   if(!layer||!hint||!btn||isQuickMenuOpen||shouldHideQuickAccessRail())return;
   let seen=false;
-  try{seen=localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="true"||localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="1"}catch(e){}
+  const key=navLongPressHintKey(nextProfile);
+  try{seen=localStorage.getItem(key)==="true"||localStorage.getItem(key)==="1"}catch(e){}
   if(seen)return;
   if(layer.parentElement!==document.body)document.body.appendChild(layer);
+  quickMenuProfile=nextProfile==="quran"?"quran":"more";
+  quickMenuAnchorBtn=btn;
+  hint.textContent=navLongPressHintText(quickMenuProfile);
   positionQuickAccessUi(btn.getBoundingClientRect());
   layer.hidden=false;
   layer.classList.add("is-hint-only");
@@ -21639,9 +21697,9 @@ function showQuickAccessHint(anchorBtn){
     setTimeout(()=>{
       hint.hidden=true;
       if(!isQuickMenuOpen){layer.hidden=true;layer.classList.remove("is-hint-only");layer.setAttribute("aria-hidden","true")}
-    },180);
+    },160);
   },5200);
-  try{localStorage.setItem(QUICK_ACCESS_HINT_KEY,"true")}catch(e){}
+  try{localStorage.setItem(key,"true")}catch(e){}
 }
 
 function shouldHideQuickAccessRail(){
@@ -21670,25 +21728,73 @@ function updateQuickAccessIndicators(){
   }
 }
 
+function focusQuranSearchFromQuickAccess(){
+  const run=()=>{
+    const input=$("quranSearchInput");
+    if(!input)return false;
+    try{
+      input.focus({preventScroll:false});
+      if(typeof input.setSelectionRange==="function")input.setSelectionRange(input.value.length,input.value.length);
+    }catch(e){try{input.focus()}catch(_){}}
+    return true;
+  };
+  if(String(currentRoute?.view||"")==="quran"){
+    if(run())return;
+  }
+  window.__darQuranFocusSearchPending=true;
+  navigate("quran");
+  setTimeout(()=>{if(window.__darQuranFocusSearchPending){window.__darQuranFocusSearchPending=false;run()}},120);
+  setTimeout(()=>{if(window.__darQuranFocusSearchPending){window.__darQuranFocusSearchPending=false;run()}},280);
+}
+
+function openQuranBookmarksFromQuickAccess(){
+  try{setQuranOverviewFilter("favorites")}catch(e){}
+  if(String(currentRoute?.view||"")==="quran"){render();return}
+  navigate("quran");
+}
+
+function openQuranContinueFromQuickAccess(){
+  const preferred=typeof getPreferredQuranProgress==="function"?getPreferredQuranProgress():null;
+  if(preferred&&preferred.surahNumber){
+    openQuranSurah(preferred.surahNumber,preferred.ayahNumber||1,{scrollOffset:preferred.scrollOffset||0});
+    return;
+  }
+  navigate("quran");
+}
+
 function runQuickAccessAction(kind,btn){
   if(btn){
     btn.classList.add("is-pressed");
     setTimeout(()=>btn.classList.remove("is-pressed"),120);
   }
+  triggerLightHapticFeedback();
   const go=()=>{
     closeQuickAccessMenu();
     if(kind==="orient"){openQiblaFromFloat();return}
     if(kind==="saved"){navigate("saved");return}
-    if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)}
+    if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180);return}
+    if(kind==="continue-reading"){openQuranContinueFromQuickAccess();return}
+    if(kind==="quran-search"){focusQuranSearchFromQuickAccess();return}
+    if(kind==="quran-bookmarks"){openQuranBookmarksFromQuickAccess();return}
   };
   setTimeout(go,120);
 }
 
 function suppressNextClick(){suppressClickUntil=Date.now()+700}
 
-function bindMoreQuickAccessTrigger(btn){
+function bindQuickAccessActionButtons(){
+  document.querySelectorAll("#quickAccessMenu [data-qa-action]").forEach(btn=>{
+    if(btn.dataset.bound==="1")return;
+    btn.dataset.bound="1";
+    btn.addEventListener("click",()=>runQuickAccessAction(btn.getAttribute("data-qa-action"),btn));
+  });
+}
+
+function bindNavLongPressTrigger(btn,profile){
   if(!btn||btn.dataset.quickMenuBound==="1")return;
   btn.dataset.quickMenuBound="1";
+  const menuProfile=profile==="quran"?"quran":"more";
+  const shortTapTab=menuProfile==="quran"?"quran":"more";
   let longPressTimer=null;
   let startX=0;
   let startY=0;
@@ -21699,9 +21805,9 @@ function bindMoreQuickAccessTrigger(btn){
     btn.classList.remove("is-pressed");
   };
 
-  const openExistingMorePage=()=>{
+  const openExistingTabPage=()=>{
     try{btn.blur&&btn.blur()}catch(e){}
-    navigateBottomNavTab("more");
+    navigateBottomNavTab(shortTapTab);
   };
 
   btn.addEventListener("pointerdown",ev=>{
@@ -21716,7 +21822,7 @@ function bindMoreQuickAccessTrigger(btn){
       longPressTimer=null;
       longPressTriggered=true;
       suppressNextClick();
-      openQuickAccessMenu(btn);
+      openQuickAccessMenu(btn,menuProfile);
     },LONG_PRESS_DELAY);
     try{btn.setPointerCapture&&btn.setPointerCapture(ev.pointerId)}catch(e){}
   });
@@ -21745,10 +21851,9 @@ function bindMoreQuickAccessTrigger(btn){
       return;
     }
     if(ev.type==="pointercancel"){longPressTriggered=false;return}
-    // Short tap: timer still pending means long-press never fired → open Mehr
     if(ev.type==="pointerup"&&hadPendingTimer){
       if(ev.cancelable)ev.preventDefault();
-      openExistingMorePage();
+      openExistingTabPage();
     }
   };
 
@@ -21762,7 +21867,6 @@ function bindMoreQuickAccessTrigger(btn){
       longPressTriggered=false;
       return;
     }
-    // pointerup already navigated; suppress duplicate click
     ev.preventDefault();
     ev.stopPropagation();
   });
@@ -21772,19 +21876,21 @@ function bindMoreQuickAccessTrigger(btn){
     cancelLongPress();
     longPressTriggered=true;
     suppressNextClick();
-    openQuickAccessMenu(btn);
+    openQuickAccessMenu(btn,menuProfile);
   });
 
   btn.addEventListener("keydown",ev=>{
     if((ev.shiftKey&&ev.key==="F10")||ev.key==="ContextMenu"){
       ev.preventDefault();
-      openQuickAccessMenu(btn);
+      openQuickAccessMenu(btn,menuProfile);
     }else if(ev.key==="Enter"||ev.key===" "){
       ev.preventDefault();
-      openExistingMorePage();
+      openExistingTabPage();
     }
   });
 }
+
+function bindMoreQuickAccessTrigger(btn){bindNavLongPressTrigger(btn,"more")}
 
 function bindMoreQuickAccessPageButtons(){
   document.querySelectorAll("[data-more-quick]").forEach(btn=>{
@@ -21808,13 +21914,14 @@ function initQuickAccessMenu(){
   const layer=$("quickAccessLayer");
   const menu=$("quickAccessMenu");
   const moreBtn=document.querySelector('[data-bottom-nav="more"]');
+  const quranBtn=document.querySelector('[data-bottom-nav="quran"]');
   if(layer&&layer.parentElement!==document.body)document.body.appendChild(layer);
   if(!quickAccessDocListenersBound){
     quickAccessDocListenersBound=true;
     document.addEventListener("pointerdown",e=>{
       if(!isQuickMenuOpen)return;
       const t=e.target;
-      if(t&&t.closest&&(t.closest("#quickAccessMenu")||t.closest('[data-bottom-nav="more"]')))return;
+      if(t&&t.closest&&(t.closest("#quickAccessMenu")||t.closest('[data-bottom-nav="more"]')||t.closest('[data-bottom-nav="quran"]')))return;
       closeQuickAccessMenu({restoreFocus:true});
     },true);
     document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isQuickMenuOpen){e.preventDefault();closeQuickAccessMenu({restoreFocus:true})}});
@@ -21824,21 +21931,26 @@ function initQuickAccessMenu(){
     document.addEventListener("visibilitychange",()=>{if(document.hidden)closeQuickAccessMenu()});
     window.addEventListener("hashchange",()=>closeQuickAccessMenu(),{passive:true});
     window.addEventListener("pagehide",()=>closeQuickAccessMenu(),{passive:true});
-    window.addEventListener("resize",()=>{
-      if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());
-    },{passive:true});
-    window.visualViewport?.addEventListener?.("resize",()=>{
-      if(isQuickMenuOpen&&moreBtn)positionQuickAccessUi(moreBtn.getBoundingClientRect());
-    },{passive:true});
+    const reposition=()=>{
+      if(!isQuickMenuOpen)return;
+      const anchor=quickMenuAnchorBtn||document.querySelector(navLongPressAnchorSelector(quickMenuProfile));
+      if(anchor)positionQuickAccessUi(anchor.getBoundingClientRect());
+    };
+    window.addEventListener("resize",reposition,{passive:true});
+    window.visualViewport?.addEventListener?.("resize",reposition,{passive:true});
   }
-  const orientBtn=$("quickAccessOrientBtn");
-  if(orientBtn&&orientBtn.dataset.bound!=="1"){orientBtn.dataset.bound="1";orientBtn.addEventListener("click",()=>runQuickAccessAction("orient",orientBtn))}
-  const savedBtn=$("quickAccessSavedBtn");
-  if(savedBtn&&savedBtn.dataset.bound!=="1"){savedBtn.dataset.bound="1";savedBtn.addEventListener("click",()=>runQuickAccessAction("saved",savedBtn))}
-  const remindBtn=$("quickAccessRemindBtn");
-  if(remindBtn&&remindBtn.dataset.bound!=="1"){remindBtn.dataset.bound="1";remindBtn.addEventListener("click",()=>runQuickAccessAction("remind",remindBtn))}
+  if(menu&&!menu.getAttribute("data-profile"))menu.setAttribute("data-profile","more");
+  bindQuickAccessActionButtons();
   updateQuickAccessIndicators();
-  if(moreBtn)setTimeout(()=>showQuickAccessHint(moreBtn),900);
+  if(moreBtn)setTimeout(()=>showQuickAccessHint(moreBtn,"more"),900);
+  if(quranBtn){
+    setTimeout(()=>{
+      let mehrSeen=false;
+      try{mehrSeen=localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="true"||localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="1"}catch(e){}
+      const wait=mehrSeen?500:5600;
+      setTimeout(()=>showQuickAccessHint(quranBtn,"quran"),wait);
+    },900);
+  }
 }
 
 window.addEventListener("DOMContentLoaded",()=>{
