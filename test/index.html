@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785314705803 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v513";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v514";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -20854,7 +20854,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v513";
+const APP_BUILD_ID="app-shell-v514";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -21559,18 +21559,19 @@ function initAppZoomLock(){
 const QUICK_ACCESS_HINT_KEY="quickAccessLongPressHintSeen";
 const QURAN_QUICK_ACCESS_HINT_KEY="quranQuickAccessLongPressHintSeen";
 const LONG_PRESS_DELAY=500;
-const MOVE_TOLERANCE=8;
+const MOVE_TOLERANCE=18;
 let isQuickMenuOpen=false;
 let longPressTriggered=false;
 let quickMenuAnchorRect=null;
 let quickMenuAnchorBtn=null;
 let quickMenuProfile="more";
 let suppressClickUntil=0;
+let quickMenuOpenedAt=0;
 let quickAccessDocListenersBound=false;
 
 const NAV_LONGPRESS_MENU_HTML={
   more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button>`,
-  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action uses-line-icon" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h7.2a2.8 2.8 0 0 1 2.8 2.8V20c-1.5-.9-3.1-1.2-4.8-1.2H4V5.5Z"/><path d="M20 5.5h-7.2A2.8 2.8 0 0 0 10 8.3V20c1.5-.9 3.1-1.2 4.8-1.2H20V5.5Z"/><path d="M12 8.2v10.6"/></svg></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action uses-line-icon" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button><button type="button" id="quickAccessQuranBookmarksBtn" class="quick-action uses-line-icon" role="menuitem" data-qa-action="quran-bookmarks" aria-label="Lesezeichen" title="Lesezeichen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10a1.2 1.2 0 0 1 1.2 1.2v14.2L12 16.4 5.8 19.9V5.7A1.2 1.2 0 0 1 7 4.5Z"/></svg></button>`
+  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button><button type="button" id="quickAccessQuranBookmarksBtn" class="quick-action" role="menuitem" data-qa-action="quran-bookmarks" aria-label="Lesezeichen" title="Lesezeichen"><span class="quick-action-emoji" aria-hidden="true">⭐</span></button>`
 };
 
 function triggerLightHapticFeedback(){
@@ -21666,7 +21667,7 @@ function openQuickAccessMenu(anchorBtn,profile){
   menu.hidden=false;
   void menu.offsetWidth;
   layer.classList.add("is-open");
-  isQuickMenuOpen=true;
+  isQuickMenuOpen=true;quickMenuOpenedAt=Date.now();
   try{document.body.classList.add("quick-menu-open")}catch(e){}
   try{localStorage.setItem(navLongPressHintKey(quickMenuProfile),"true")}catch(e){}
   triggerLightHapticFeedback();
@@ -21802,6 +21803,8 @@ function bindNavLongPressTrigger(btn,profile){
   let startX=0;
   let startY=0;
   let activePointerId=null;
+  let pressStartedAt=0;
+  let localLongPress=false;
 
   const cancelLongPress=()=>{
     if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
@@ -21813,9 +21816,18 @@ function bindNavLongPressTrigger(btn,profile){
     navigateBottomNavTab(shortTapTab);
   };
 
+  const fireLongPressMenu=()=>{
+    localLongPress=true;
+    longPressTriggered=true;
+    suppressNextClick();
+    openQuickAccessMenu(btn,menuProfile);
+  };
+
   btn.addEventListener("pointerdown",ev=>{
     if(ev.pointerType==="mouse"&&ev.button!==0)return;
+    localLongPress=false;
     longPressTriggered=false;
+    pressStartedAt=Date.now();
     startX=ev.clientX;
     startY=ev.clientY;
     activePointerId=ev.pointerId;
@@ -21823,20 +21835,18 @@ function bindNavLongPressTrigger(btn,profile){
     btn.classList.add("is-pressed");
     longPressTimer=window.setTimeout(()=>{
       longPressTimer=null;
-      longPressTriggered=true;
-      suppressNextClick();
-      openQuickAccessMenu(btn,menuProfile);
+      fireLongPressMenu();
     },LONG_PRESS_DELAY);
-    try{btn.setPointerCapture&&btn.setPointerCapture(ev.pointerId)}catch(e){}
   });
 
   btn.addEventListener("pointermove",ev=>{
     if(activePointerId!=null&&ev.pointerId!==activePointerId)return;
-    if(!longPressTimer)return;
+    if(!longPressTimer||localLongPress)return;
     const dx=Math.abs(ev.clientX-startX);
     const dy=Math.abs(ev.clientY-startY);
     if(dx>MOVE_TOLERANCE||dy>MOVE_TOLERANCE){
       cancelLongPress();
+      localLongPress=false;
       longPressTriggered=false;
     }
   },{passive:true});
@@ -21844,8 +21854,9 @@ function bindNavLongPressTrigger(btn,profile){
   const onPointerEnd=ev=>{
     if(activePointerId!=null&&ev.pointerId!==activePointerId)return;
     activePointerId=null;
-    const wasLong=longPressTriggered;
+    const wasLong=localLongPress||longPressTriggered;
     const hadPendingTimer=!!longPressTimer;
+    const heldMs=pressStartedAt?Date.now()-pressStartedAt:0;
     cancelLongPress();
     if(wasLong){
       if(ev.cancelable)ev.preventDefault();
@@ -21853,7 +21864,14 @@ function bindNavLongPressTrigger(btn,profile){
       suppressNextClick();
       return;
     }
-    if(ev.type==="pointercancel"){longPressTriggered=false;return}
+    // iOS/Android: pointercancel after ~500ms hold — treat as long-press
+    if((ev.type==="pointercancel"||ev.type==="pointerup")&&heldMs>=LONG_PRESS_DELAY-40){
+      if(ev.cancelable)ev.preventDefault();
+      ev.stopPropagation();
+      fireLongPressMenu();
+      return;
+    }
+    if(ev.type==="pointercancel"){localLongPress=false;longPressTriggered=false;return}
     if(ev.type==="pointerup"&&hadPendingTimer){
       if(ev.cancelable)ev.preventDefault();
       openExistingTabPage();
@@ -21864,9 +21882,10 @@ function bindNavLongPressTrigger(btn,profile){
   btn.addEventListener("pointercancel",onPointerEnd,{passive:false});
 
   btn.addEventListener("click",ev=>{
-    if(longPressTriggered||Date.now()<suppressClickUntil){
+    if(localLongPress||longPressTriggered||Date.now()<suppressClickUntil){
       ev.preventDefault();
       ev.stopPropagation();
+      localLongPress=false;
       longPressTriggered=false;
       return;
     }
@@ -21877,9 +21896,7 @@ function bindNavLongPressTrigger(btn,profile){
   btn.addEventListener("contextmenu",ev=>{
     ev.preventDefault();
     cancelLongPress();
-    longPressTriggered=true;
-    suppressNextClick();
-    openQuickAccessMenu(btn,menuProfile);
+    fireLongPressMenu();
   });
 
   btn.addEventListener("keydown",ev=>{
@@ -21928,8 +21945,9 @@ function initQuickAccessMenu(){
       closeQuickAccessMenu({restoreFocus:true});
     },true);
     document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isQuickMenuOpen){e.preventDefault();closeQuickAccessMenu({restoreFocus:true})}});
-    document.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true,capture:true});
-    window.addEventListener("scroll",()=>{if(isQuickMenuOpen)closeQuickAccessMenu()},{passive:true});
+    const maybeCloseQuickOnScroll=()=>{if(!isQuickMenuOpen)return;if(Date.now()-quickMenuOpenedAt<480)return;closeQuickAccessMenu()};
+    document.addEventListener("scroll",maybeCloseQuickOnScroll,{passive:true,capture:true});
+    window.addEventListener("scroll",maybeCloseQuickOnScroll,{passive:true});
     document.addEventListener("focusin",e=>{if(e.target?.closest?.("input,textarea,[contenteditable='true']"))closeQuickAccessMenu()});
     document.addEventListener("visibilitychange",()=>{if(document.hidden)closeQuickAccessMenu()});
     window.addEventListener("hashchange",()=>closeQuickAccessMenu(),{passive:true});
@@ -21945,8 +21963,14 @@ function initQuickAccessMenu(){
   if(menu&&!menu.getAttribute("data-profile"))menu.setAttribute("data-profile","more");
   bindQuickAccessActionButtons();
   updateQuickAccessIndicators();
-  if(moreBtn)setTimeout(()=>showQuickAccessHint(moreBtn,"more"),900);
+  if(moreBtn){
+    moreBtn.classList.add("bottom-nav-more");
+    bindNavLongPressTrigger(moreBtn,"more");
+    setTimeout(()=>showQuickAccessHint(moreBtn,"more"),900);
+  }
   if(quranBtn){
+    quranBtn.classList.add("bottom-nav-quran");
+    bindNavLongPressTrigger(quranBtn,"quran");
     setTimeout(()=>{
       let mehrSeen=false;
       try{mehrSeen=localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="true"||localStorage.getItem(QUICK_ACCESS_HINT_KEY)==="1"}catch(e){}
