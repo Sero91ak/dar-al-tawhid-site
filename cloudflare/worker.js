@@ -45,6 +45,13 @@ import {
   buildPublicStoriesResponse
 } from "./stories-admin.js";
 import {
+  appendLiveAudit,
+  appendLiveVersion,
+  getDuaAdmin,
+  saveDuaAdmin,
+  saveLiveMeta
+} from "./live-edit-admin.js";
+import {
   readFeedIndex,
   saveFeedEntry,
   deleteFeedEntry,
@@ -427,6 +434,50 @@ export default {
         const input = await request.json().catch(() => ({}));
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         return json(await deleteFeedEntry(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/live/audit" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await appendLiveAudit(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/live/version" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        return json(await appendLiveVersion(env, input, helpers), cors);
+      }
+
+      if (url.pathname === "/api/admin/dua" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const id = String(url.searchParams.get("id") || "").trim();
+        if (!id) return json({ ok: false, error: "id fehlt" }, cors, 400);
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        const result = await getDuaAdmin(env, id, helpers);
+        return json(result, cors, result.ok ? 200 : 404);
+      }
+
+      if (url.pathname === "/api/admin/dua/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        const result = await saveDuaAdmin(env, input, helpers);
+        return json(result, cors, result.ok ? 200 : 400);
+      }
+
+      if (url.pathname === "/api/admin/live/meta-save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        const result = await saveLiveMeta(env, input, helpers);
+        return json(result, cors, result.ok ? 200 : 400);
       }
 
       if (url.pathname === "/api/admin/library" && request.method === "GET") {
