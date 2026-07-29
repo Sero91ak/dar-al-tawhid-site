@@ -54,6 +54,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-overview-jump-labels-v519-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Übersicht: JUZ/SURA/AYAH-Labels kompakt + Suchfeld-Fehler bereinigen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-overview-tone-fix-v517-2026-07-29",
       "approvedBy": "user-explicit-order",
       "reason": "Qurʾān-Übersicht: helle Ränder und Header-Farbkästen korrigieren",
