@@ -4,22 +4,22 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-29T01:05:10.156Z",
+  "updatedAt": "2026-07-29T09:45:10.180Z",
   "usersChecked": 10,
   "registrationsRead": 11,
   "uniqueSubscriptions": 10,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "duaCandidates": 0,
+  "duaCandidates": 9,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 9,
   "accepted": {
-    "dua": 0,
+    "dua": 9,
     "recommendation": 0
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 1,
   "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-07-29",
@@ -29,6 +29,10 @@
     "category": "Widerlegung",
     "scholar": "Imām ash-Shāfiʿī"
   },
-  "currentDua": null,
+  "currentDua": {
+    "id": "dua-026-ya-muqallib",
+    "title": "O Wender der Herzen, festige mein Herz",
+    "category": "Standhaftigkeit"
+  },
   "configAutomatic": true
 }
