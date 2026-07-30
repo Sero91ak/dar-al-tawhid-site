@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-30T12:01:33.263Z",
-  "provider": "mintedmetal.com",
+  "updatedAt": "2026-07-30T13:01:13.181Z",
+  "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3534.43,
-    "pricePerGram": 113.63,
+    "pricePerOunce": 3633.37,
+    "pricePerGram": 116.82,
     "nisabGrams": 85,
-    "nisabEur": 9658.55,
-    "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB))",
-    "provider": "mintedmetal.com",
-    "fetchedAt": "2026-07-30T12:01:33.263Z",
+    "nisabEur": 9929.7,
+    "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
+    "provider": "aurumrates.com",
+    "fetchedAt": "2026-07-30T13:01:13.181Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 50.24,
-    "pricePerGram": 1.62,
+    "pricePerOunce": 51.16,
+    "pricePerGram": 1.64,
     "nisabGrams": 595,
-    "nisabEur": 963.9,
-    "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB))",
-    "provider": "mintedmetal.com",
-    "fetchedAt": "2026-07-30T12:01:33.263Z",
+    "nisabEur": 975.8,
+    "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
+    "provider": "aurumrates.com",
+    "fetchedAt": "2026-07-30T13:01:13.181Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
-  "standardNisabEur": 963.9,
-  "lastSuccessAt": "2026-07-30T12:01:33.263Z",
+  "standardNisabEur": 975.8,
+  "lastSuccessAt": "2026-07-30T13:01:13.181Z",
   "lastError": "",
-  "lastFetchAt": "2026-07-30T12:01:33.263Z",
+  "lastFetchAt": "2026-07-30T13:01:13.181Z",
   "fetchLogs": [
+    {
+      "id": "log-1785416473181",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-07-30T13:01:13.181Z",
+      "durationMs": 21600,
+      "goldPerGram": 116.82,
+      "silverPerGram": 1.64
+    },
     {
       "id": "log-1785412893263",
       "provider": "mintedmetal.com",
@@ -527,16 +537,6 @@
       "durationMs": 1360,
       "goldPerGram": 114.86,
       "silverPerGram": 1.66
-    },
-    {
-      "id": "log-1784915703517",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-07-24T17:55:03.517Z",
-      "durationMs": 890,
-      "goldPerGram": 115.01,
-      "silverPerGram": 1.67
     }
   ]
 }
