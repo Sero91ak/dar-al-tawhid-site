@@ -2728,7 +2728,7 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
   return lastResult;
 }
 
-async function processPendingPushUntilLive(env, record) {
+async function processPendingPushUntilLive(env, record, options = {}) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
 
@@ -2745,7 +2745,7 @@ async function processPendingPushUntilLive(env, record) {
       postPath: record.postPath,
       githubSteps: { postCreated: true, indexUpdated: true }
     },
-    { schedule: "full" }
+    { schedule: options.schedule || "full" }
   );
 
   await writePendingPushStatus(env, postId, {
@@ -2789,18 +2789,17 @@ async function processAllPendingPushes(env) {
   const pending = Object.values(registry.pushes || {})
     .filter((item) => item?.status === "pending" && isPostPushApproved(item))
     .sort((a, b) => {
-      const la = a?.kind === "library" ? 0 : 1;
-      const lb = b?.kind === "library" ? 0 : 1;
-      if (la !== lb) return la - lb;
-      return String(a.updatedAt || a.createdAt || "").localeCompare(String(b.updatedAt || b.createdAt || ""));
+      const aTime = Date.parse(a.updatedAt || a.createdAt || a.publishedAt || "");
+      const bTime = Date.parse(b.updatedAt || b.createdAt || b.publishedAt || "");
+      return (Number.isFinite(bTime) ? bTime : 0) - (Number.isFinite(aTime) ? aTime : 0);
     })
-    .slice(0, 4);
+    .slice(0, Number(env.PENDING_PUSH_CRON_BATCH_SIZE || 5));
   const results = [];
   for (const record of pending) {
     try {
       const handler = record?.kind === "library"
-        ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: true })
-        : () => processPendingPushUntilLive(env, record);
+        ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
+        : () => processPendingPushUntilLive(env, record, { schedule: "quick" });
       // Stecken gebliebene Live-Prüfung sofort erneut anstoßen
       if (record?.kind === "library" && /Live-Prüfung läuft|Autonome Reparatur/i.test(String(record?.lastError || ""))) {
         try { await triggerSiteDeployWorkflow(env, `library-stuck-repair:${record.publicationId || "pending"}`); } catch (e) {}
