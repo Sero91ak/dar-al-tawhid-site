@@ -3501,20 +3501,41 @@ function formatPushStatusLine(push){
   if(push.pending||push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf stabile Live-Verfügbarkeit</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
   return `<br>Push: <strong style="color:#ff9f9f">fehlgeschlagen</strong> · ${esc(String(push.reason||push.message||"unbekannt"))}`;
 }
+function resolvePushRetryTarget(){
+  const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||"";
+  const filenameInput=(document.getElementById("postFilenameInput")?.value||"").trim();
+  const filename=filenameInput||draftFilename||"";
+  const postId=frontmatterValue(markdown,"id")||filename.replace(/\.md$/i,"");
+  const postTitle=frontmatterValue(markdown,"title")||"Neuer Beitrag";
+  return {markdown,filename,postId,postTitle,filenameInput};
+}
 async function retryLivePush(){
+  const target=resolvePushRetryTarget();
   const ctx=readLastPublishPushContext();
-  const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||ctx?.markdown||"";
-  const filename=(ctx?.filename||draftFilename||"").trim();
-  const postId=ctx?.postId||frontmatterValue(markdown,"id")||filename.replace(/\.md$/i,"");
-  if(!filename){toast("Kein Beitrag für Push-Retry – zuerst veröffentlichen");return}
+  const filename=(target.filename||ctx?.filename||"").trim();
+  const postId=target.postId||ctx?.postId||filename.replace(/\.md$/i,"");
+  const markdown=target.markdown||ctx?.markdown||"";
+  if(!filename){toast("Kein Beitrag für Push-Retry – Dateiname oder letzte Veröffentlichung fehlt");return}
+  const publishedReady=ctx&&ctx.filename===filename&&ctx.commitSha;
+  if(!publishedReady){
+    setUploadStatus(`<span style="color:#ffb8b8"><strong>Push blockiert:</strong> <strong>${esc(filename)}</strong> ist noch nicht veröffentlicht.<br>Bitte zuerst „Online veröffentlichen“ – danach wird der Push automatisch gesendet.</span>`);
+    toast("Zuerst Online veröffentlichen");
+    addAdminLog("Push","Push blockiert – Beitrag noch nicht veröffentlicht",filename);
+    return;
+  }
+  if(target.filenameInput&&ctx?.filename&&target.filenameInput!==ctx.filename){
+    setUploadStatus(`<span style="color:#ffb8b8"><strong>Push blockiert:</strong> Im Formular steht <strong>${esc(target.filenameInput)}</strong>, zuletzt veröffentlicht wurde <strong>${esc(ctx.filename)}</strong>.<br>Bitte zuerst den neuen Beitrag veröffentlichen.</span>`);
+    toast("Neuer Entwurf – zuerst veröffentlichen");
+    return;
+  }
   const btn=document.getElementById("adminRetryPushBtn");
   if(btn){btn.disabled=true;btn.textContent="Prüfe Live & Push …"}
-  setUploadStatus("Kurze Live-Prüfung … (hängt nicht mehr – max. wenige Sekunden).");
+  setUploadStatus(`Kurze Live-Prüfung für <strong>${esc(filename)}</strong> …`);
   try{
     const result=await workerPostRequest("api/admin/push/retry",{
       filename,
       postId,
-      postTitle:ctx?.postTitle||frontmatterValue(markdown,"title")||"Neuer Beitrag",
+      postTitle:target.postTitle||ctx?.postTitle||frontmatterValue(markdown,"title")||"Neuer Beitrag",
       markdown,
       forceResend:false
     });
@@ -3622,19 +3643,19 @@ async function uploadPostViaWorker(){
     updatePublishStep("commit",result.commitSha?"ok":"skip",result.commitSha||"Worker meldet keinen Commit");
     updatePublishStep("index","ok","Worker hat Index aktualisiert");
     updatePublishStep("deploy","ok","Worker-Antwort erhalten");
-    updatePublishMeta({filename:uploadedFilename,number:uploadedNumber,postId,commitSha:result.commitSha||"",visitorUrl:`${SITE_ORIGIN}/#post/${postId}`});
+    updatePublishMeta({filename:uploadedFilename,number:uploadedNumber,postId:uploadedPostId,commitSha:result.commitSha||"",visitorUrl:`${SITE_ORIGIN}/#post/${encodeURIComponent(uploadedPostId)}`});
     saveLastPublishPushContext({
       filename:uploadedFilename,
       number:uploadedNumber,
-      postId,
-      postTitle:preview.title,
+      postId:uploadedPostId,
+      postTitle:frontmatterValue(markdown,"title")||preview.title||"Beitrag",
       markdown,
       commitSha:result.commitSha||"",
       push:result.push||null
     });
     updatePublishStep("indexContains","run","Prüfe öffentlichen Index");
     updatePublishStep("fileLive","run","Prüfe Beitragsdatei");
-    const live=await verifyPublishedPost(uploadedFilename,postId);
+    const live=await verifyPublishedPost(uploadedFilename,uploadedPostId);
     updatePublishStep("indexContains",live.index?"ok":"error",live.index?"Datei im Index":"Noch nicht im öffentlichen Index");
     updatePublishStep("fileLive",live.file?"ok":"error",live.file?"Datei erreichbar":live.reason||"Datei noch nicht erreichbar");
     updatePublishStep("urlLive",live.url?"ok":"skip",live.url?"Besucher-Link vorbereitet":"Besucher-Link wartet auf Index/Datei");
