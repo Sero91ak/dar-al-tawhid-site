@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <!-- pages-deploy-stamp:1784899983185 -->
-<!-- workers-deploy-stamp:1785410401219 -->
+<!-- workers-deploy-stamp:1785411723652 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v529";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v530";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -14477,6 +14477,28 @@ html[data-theme="light"] body.is-quran-reader-route .quran-ayah-ref-pill{
   color:var(--qrc-noble-text)!important;
   border-color:var(--qrc-noble-pill-border)!important;
 }
+/* v530 · Referenz exakt: keine Sure-Kopfleiste, nur Aya-Pille + zentrierte Vers-Spalte */
+body.is-quran-reader-route .qrc-chrome,
+body.is-quran-reader-route .qrc-chrome-spacer,
+body.is-quran-reader-route .qrc-backblatt,
+body.is-quran-reader-route .qrc-footer-nav,
+body.is-quran-reader-route .qrc-topic-bar,
+body.is-quran-reader-route .quran-topic-context{display:none!important;height:0!important;min-height:0!important;overflow:hidden!important;pointer-events:none!important}
+html.is-quran-reader-route::after{display:none!important}
+body.is-quran-reader-route .qrc-body{
+  padding:max(16px,env(safe-area-inset-top)) 18px calc(76px + env(safe-area-inset-bottom))!important;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-ar,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-de,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr-wrap{
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-ar[hidden],
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr-wrap[hidden],
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-de[hidden]{display:none!important}
 
 
 </style>
@@ -22028,7 +22050,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v529";
+const APP_BUILD_ID="app-shell-v530";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
