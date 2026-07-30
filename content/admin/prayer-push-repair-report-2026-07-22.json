@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-07-22T02:57:51Z",
+  "scope": "Gebets-Push-Doppelungen, Testisolierung, Copy v4 und Statusaktualität",
+  "database": {
+    "totalRows": 24,
+    "activeProductionRegistrations": 18,
+    "activeTestPushRows": 0,
+    "inconsistentEnabledRows": 0,
+    "identicalSubscriptionDuplicates": 0,
+    "testIsolationTriggerVerified": true
+  },
+  "scheduler": {
+    "singleProductionPath": "cloudflare-worker-cron-v3",
+    "copyVersion": "v4",
+    "lookaheadMinutesMax": 90,
+    "filters": [
+      "enabled=true",
+      "push_opted_in=true",
+      "app_environment=production"
+    ],
+    "globalSubscriptionDeduplication": true,
+    "obsoleteV3ScheduleMigration": true,
+    "durableStatusStore": true,
+    "publicStatusSanitized": true
+  },
+  "legacyPaths": {
+    "directGithubPrayerSenderDisabled": true,
+    "runtimePatchScriptRemoved": true,
+    "watchdogUsesWorkerOnly": true
+  },
+  "testInstallation": {
+    "databaseEnvironment": "test",
+    "automaticPrayerPush": false,
+    "automaticDailyDuaPush": false,
+    "automaticRecommendationPush": false,
+    "automaticJummahPush": false
+  },
+  "deployment": {
+    "workflowTriggeredBySourceChanges": true,
+    "independentLiveEndpointVerification": "not_available_from_current_tool_network",
+    "requiredWorkflow": "Deploy Admin Publisher Worker",
+    "requiredResult": "success"
+  },
+  "sensitiveIdentifiersStored": false
+}

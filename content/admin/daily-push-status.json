@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
+  "idVersion": "v4",
+  "deliveryMode": "worker-local",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-07-29T22:25:51.190Z",
+  "usersChecked": 11,
+  "registrationsRead": 12,
+  "uniqueSubscriptions": 11,
+  "duplicateRegistrationsDropped": 1,
+  "appEnvironment": "production",
+  "duaCandidates": 0,
+  "recCandidates": 0,
+  "sent": 0,
+  "accepted": {
+    "dua": 0,
+    "recommendation": 0
+  },
+  "invalidSubscriptionsDisabled": 0,
+  "skipped": 0,
+  "duplicates": 0,
+  "errors": 0,
+  "forceSend": null,
+  "dailyContentDate": "2026-07-30",
+  "currentRecommendation": {
+    "id": "athar-widerlegung-die-khawarij-verliessen-durch-fehlverstaendnis-305",
+    "title": "Athar-Widerlegung: Die Khawārij verließen durch Fehlverständnis",
+    "category": "Widerlegung",
+    "scholar": "Ibn ʿAbbās"
+  },
+  "currentDua": null,
+  "configAutomatic": true
+}

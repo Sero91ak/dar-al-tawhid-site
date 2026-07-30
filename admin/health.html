@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAR Admin · System Health</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico">
+<style>
+:root{--bg:#05080f;--ink:#f7f0df;--muted:#8f99a7;--gold:#efd78e;--ok:#8fd7a8;--bad:#ff9f9f;--line:rgba(140,190,255,.24)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:system-ui,sans-serif;padding:20px}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:22px;margin:0 0 6px;color:var(--gold)}
+p{color:var(--muted);font-size:13px;line-height:1.5}
+.card{border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;background:rgba(10,17,28,.92)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px}
+.row:last-child{border-bottom:none}
+.ok{color:var(--ok);font-weight:800}.bad{color:var(--bad);font-weight:800}.warn{color:#f0c674;font-weight:800}
+input,button{font:inherit;border-radius:10px;border:1px solid var(--line);padding:10px 12px;background:#0a111c;color:var(--ink)}
+button{background:rgba(239,215,142,.12);cursor:pointer;font-weight:800}
+.login{display:grid;gap:10px;max-width:320px;margin:24px 0}
+.meta{font-size:11px;color:var(--muted);margin-top:16px}
+a{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>System Health</h1>
+  <p>Interner Status für Besucher-App, Admin, Push und Daten. Bei Rot: kein Live-Deploy.</p>
+  <div id="gate" class="login">
+    <input id="pin" type="password" placeholder="Admin-PIN" autocomplete="current-password">
+    <button type="button" id="openBtn">Healthcheck öffnen</button>
+  </div>
+  <div id="panel" hidden>
+    <div class="card"><div id="summary">Lade …</div><button type="button" id="refreshBtn" style="margin-top:12px">Erneut prüfen</button></div>
+    <div class="card" id="rows"></div>
+    <p class="meta">Rollback: Branch <code>stable-last-working</code> · Siehe <code>STABILITY.md</code> · <a href="/admin/">← Admin</a></p>
+  </div>
+</div>
+<script>
+const PIN="Dawud26";
+const ORIGIN=location.origin;
+function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function row(label,ok,detail){return `<div class="row"><span>${esc(label)}</span><span class="${ok?"ok":"bad"}">${ok?"OK":"FEHLER"}${detail?` · ${esc(detail)}`:""}</span></div>`}
+function extractScript(html){const m=String(html||"").match(/<script>\nconst REPO_OWNER[\s\S]*?<\/script>/);return m?m[0].replace(/^<script>\n/,"").replace(/<\/script>$/,""):""}
+async function checkVisitor(){
+  const issues=[];
+  try{
+    const res=await fetch(`${ORIGIN}/index.html?health=${Date.now()}`,{cache:"no-store"});
+    if(!res.ok)issues.push("index HTTP "+res.status);
+    else{
+      const html=await res.text();
+      const code=extractScript(html);
+      if(!code.includes("function render("))issues.push("render fehlt");
+      try{new Function(code)}catch(e){issues.push(e.message)}
+    }
+  }catch(e){issues.push(e.message)}
+  try{
+    const r=await fetch(`${ORIGIN}/content/posts/posts-index.json?v=${Date.now()}`,{cache:"no-store"});
+    const d=await r.json();
+    if(!r.ok||!Array.isArray(d.files))issues.push("posts-index");
+    else return {ok:!issues.length,issues,count:d.files.length,last:d.files[d.files.length-1]?.name||"—"};
+  }catch(e){issues.push("posts-index")}
+  return {ok:false,issues,count:0,last:"—"};
+}
+async function checkAdmin(){
+  try{
+    const res=await fetch(`${ORIGIN}/admin/index.html?v=${Date.now()}`,{cache:"no-store"});
+    const html=await res.text();
+    const m=html.match(/<script>\nwindow\.DAR_ANALYTICS_CONFIG[\s\S]*?<\/script>/);
+    if(!m)return {ok:false,issues:["script fehlt"]};
+    new Function(m[0].replace(/^<script>\n/,"").replace(/<\/script>$/,""));
+    return {ok:true,issues:[]};
+  }catch(e){return {ok:false,issues:[e.message]}}
+}
+async function checkDaily(){
+  try{
+    const r=await fetch(`${ORIGIN}/content/updates/daily.json?v=${Date.now()}`,{cache:"no-store"});
+    const d=await r.json();
+    const ok=!!(d.date&&(d.recommendation?.id||d.dua?.id));
+    return {ok,date:d.date||"—",dua:d.dua?.title||"—",rec:d.recommendation?.title||"—"};
+  }catch(e){return {ok:false,date:"—",dua:"—",rec:"—"}}
+}
+async function checkJson(path){
+  try{const r=await fetch(`${ORIGIN}/${path}?v=${Date.now()}`,{cache:"no-store"});await r.json();return r.ok}catch(e){return false}
+}
+async function checkWorker(){
+  try{
+    const r=await fetch("https://dar-admin-publisher.sero91ak.workers.dev/health",{cache:"no-store"});
+    return r.ok;
+  }catch(e){return false}
+}
+async function runHealth(){
+  const [visitor,admin,daily,prayer,dailyStatus,swV]=await Promise.all([
+    checkVisitor(),checkAdmin(),checkDaily(),
+    checkJson("content/admin/prayer-push-status.json"),
+    checkJson("content/admin/daily-push-status.json"),
+    fetch(`${ORIGIN}/service-worker.js?v=${Date.now()}`,{cache:"no-store"}).then(r=>r.text()).then(t=>(t.match(/dar-al-tawhid-offline-light-v\d+/)||[""])[0]).catch(()=>""),
+  ]);
+  const worker=await checkWorker();
+  const allOk=visitor.ok&&admin.ok&&daily.ok&&prayer&&worker;
+  $("summary").innerHTML=allOk?'<span class="ok">System startklar</span>':'<span class="bad">Mindestens ein Bereich defekt – Live blockieren</span>';
+  $("rows").innerHTML=[
+    row("Besucher-App",visitor.ok,visitor.ok?`${visitor.count} Beiträge`:(visitor.issues||[]).join("; ")),
+    row("posts-index.json",visitor.count>0,`Letzter: ${visitor.last}`),
+    row("Admin-App",admin.ok,(admin.issues||[]).join("; ")),
+    row("daily.json (App = Push)",daily.ok,`${daily.date} · Duʿāʾ: ${daily.dua} · Empfehlung: ${daily.rec}`),
+    row("Gebetszeiten-Status",prayer),
+    row("Daily-Push-Status",dailyStatus),
+    row("Cloudflare Worker",worker),
+    row("Service Worker Version",!!swV,swV||"unbekannt")
+  ].join("");
+}
+function $(id){return document.getElementById(id)}
+$("openBtn").onclick=()=>{
+  if(($("pin").value||"").trim().toLowerCase()!==PIN.toLowerCase()){alert("Falsche PIN");return}
+  $("gate").hidden=true;$("panel").hidden=false;runHealth();
+};
+$("refreshBtn").onclick=()=>runHealth();
+</script>
+</body>
+</html>

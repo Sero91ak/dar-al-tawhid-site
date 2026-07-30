@@ -1,0 +1,1946 @@
+{
+  "version": 1,
+  "globalLock": true,
+  "lockedAt": "2026-07-23T19:30:00.000Z",
+  "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
+  "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
+  "alwaysAllowed": [
+    "content/admin/change-scope-lock.json",
+    "data/quiz-questions.json",
+    "data/quiz-questions-test.json",
+    "data/library-publications.json",
+    "test/data/library-publications.json",
+    "assets/library/pdfs/",
+    "assets/library/covers/",
+    "test/assets/library/pdfs/",
+    "test/assets/library/covers/",
+    "content/admin/pending-pushes.json",
+    "content/admin/push-triggers/",
+    "admin/index.html",
+    "admin/quiz-stats-manager.js",
+    "cloudflare/worker.js",
+    "cloudflare/quiz-stats-admin.js",
+    "index.html",
+    "test/index.html",
+    "test/version.json",
+    "service-worker.js",
+    "content/updates/daily.json",
+    "admin/live-edit.js",
+    "admin/live-edit.css",
+    "cloudflare/live-edit-admin.js",
+    "content/admin/live-audit-log.json",
+    "content/admin/live-versions.json",
+    "content/admin/live-scholars.json",
+    "content/admin/live-books.json",
+    "admin/sw.js",
+    "assets/site-analytics.js"
+  ],
+  "protectedPrefixes": [
+    "index.html",
+    "test/index.html",
+    "version.json",
+    "test/version.json",
+    "manifest.json",
+    "test/manifest.json",
+    "service-worker.js",
+    "admin/",
+    "cloudflare/",
+    "scripts/",
+    "content/",
+    "assets/",
+    ".github/workflows/",
+    "wrangler.toml",
+    "AGENTS.md"
+  ],
+  "unlockedScopes": [
+    {
+      "id": "quran-sheet-scroll-lock-v525-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān Einstellungen/Sheets: Seite darf beim Touch/Halten/Ziehen nicht mitlaufen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-reader-surface-fix-v524-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Leser: einheitlicher Hintergrund, volle Trennlinien, seitengleiche Typografie",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-test-live-v523-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Dar Test ausliefern: noble Āyah-Strip + Weißbildschirm-Fix + Suchfeld/Labels",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-reader-ayah-strip-v522-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Leser: Kästen weg, noble Trennlinien, Āyah-Pill mit Aktions-Strip",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-overview-tone-fix-v517-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Übersicht: helle Ränder und Header-Farbkästen korrigieren",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-overview-noble-v516-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Startseite edler gestalten (nur Übersicht, nicht Leseseite)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-longpress-emoji-v515-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Qurʾān-Schnellzugriff: System-Emojis statt flacher SVG-/Linien-Icons",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-longpress-fix-v514-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Reparatur: Qurʾān-Nav Long-Press öffnet nicht zuverlässig",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-restore-longpress-only-v513-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Korrektur: Qurʾān-Seite wiederherstellen + nur Long-Press am Nav-Button",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-longpress-quickaccess-v512-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Verbindlicher Auftrag: Qurʾān-Schnellzugriff durch Gedrückthalten wie Mehr",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "theme-surface-cleanup-v511-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nachbesserung: sichtbare Fremdflächen Suche/Selects/Suren-Karten in Qurʾān-Übersicht entfernen + Build-Sync für Deploy",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "theme-surface-cleanup-v510-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nachbesserung: sichtbare Fremdflächen Suche/Selects/Suren-Karten in Qurʾān-Übersicht entfernen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "admin-live-bearbeitung-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Verbindlicher Gesamtauftrag: Live-Bearbeitung in DAR-Admin-App vollständig umsetzen",
+      "paths": [
+        "admin/index.html",
+        "admin/live-edit.js",
+        "admin/live-edit.css",
+        "admin/sw.js",
+        "cloudflare/worker.js",
+        "cloudflare/live-edit-admin.js",
+        "assets/site-analytics.js",
+        "index.html",
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json",
+        "content/admin/live-audit-log.json",
+        "content/admin/live-versions.json",
+        "content/duas/",
+        "service-worker.js",
+        "content/admin/live-scholars.json",
+        "content/admin/live-books.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
+      "id": "admin-library-compact-push-v491-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Admin Bibliothek kompakt, Live-Push Retry, Smartphone/Tablet Layout — Freigeben sofort",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-30T23:59:00.000Z"
+    },
+    {
+      "id": "library-live-stats-row-v432-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek-Statistik Klicks/Gelesen/Downloads in einer Zeile, live, Admin+App",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T06:00:00.000Z"
+    },
+    {
+      "id": "admin-library-live-deploy-v431b-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Admin Bibliothek v431 live deployen — daily.json Push-Guard reparieren",
+      "paths": [
+        "content/updates/daily.json",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T04:30:00.000Z"
+    },
+    {
+      "id": "admin-library-manage-all-v431-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: DAR Admin Bibliothek verwalten — alle PDFs Test+Live, bearbeiten, ersetzen, offline, archivieren, löschen",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T04:00:00.000Z"
+    },
+    {
+      "id": "admin-library-compact-v430-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: DAR Admin Bibliothek kompakter + PDF-Upload/Kategorie-Fix",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "cloudflare/library-admin.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T02:00:00.000Z"
+    },
+    {
+      "id": "home-startseite-no-update-v429-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite voll + Aktualisieren-Button aus Kopf entfernen — live Besucher + Test",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T02:00:00.000Z"
+    },
+    {
+      "id": "home-startseite-oneline-v428-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite-Titel nicht auf zwei Zeilen umbrechen — live Besucher + Test",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T02:00:00.000Z"
+    },
+    {
+      "id": "library-pdf-reader-fix-v427-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF-Leser Jetzt lesen reparieren — live Besucher + Test",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T02:00:00.000Z"
+    },
+    {
+      "id": "library-stats-meta-grid-v426-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek-Statistik wie Meta-Kacheln (Klicks/Gelesen/Downloads) — live Besucher + Test",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T02:00:00.000Z"
+    },
+    {
+      "id": "live-release-v425-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: v425 live — Aktualisieren-Button Besucher-App + Bibliothek-Statistik Test und Besucher",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "content/admin/library-stats-migration.sql",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T01:00:00.000Z"
+    },
+    {
+      "id": "library-visitor-stats-v424-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek-Besucherstatistik auf PDF-Detailseite (Klicks, Gelesen, Downloads)",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/library-stats-migration.sql",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T00:00:00.000Z"
+    },
+    {
+      "id": "library-reader-black-fix-v422-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek PDF-Leser schwarzer Bildschirm sofort reparieren",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "library-pdf-push-v421-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Besucher-Push bei Live-PDF-Upload in der Bibliothek wie bei Beiträgen",
+      "paths": [
+        "cloudflare/worker.js",
+        "cloudflare/library-push-admin.js",
+        "admin/library-manager.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        ".github/workflows/deploy-admin-publisher.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-header-update-v423-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Aktualisieren-Button muss sichtbar zwischen Startseite und Hijri-Datum erscheinen — absolute Zentrierung + JS-Fallback",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T23:00:00.000Z"
+    },
+    {
+      "id": "home-header-update-v420-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Aktualisieren-Button wieder sichtbar zwischen Startseite und Hijri-Datum in edler Mittelposition",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "visitor-hadith-test-only-v419-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Hadith-Bibliothek mit Büchern & Übersetzungen nur in Test-App, vollständig aus Besucher-App entfernen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-update-lib-focus-v416-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Ein Aktualisieren-Button, alte Banner/Chips entfernen, 72h DAR AL TAWḤĪD Bibliothek-Fokus live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/updates/current.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-library-live-compact-v415-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Suche/Filter kompakter, DAR AL TAWḤĪD Bibliothek (PDFs) live in Besucher- und Test-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "data/library-publications.json",
+        "assets/library/pdfs/",
+        "assets/library/covers/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-lib-search-icon-fix-v414-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Lupe überlappt DAR AL TAWḤĪD Bibliothek-Karte links bei PDFs — Test + Besucher",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-popular-lib-compact-v413-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: weißer Rand bei Meist gelesen entfernen, Bibliotheken kompakt mit Emoji — Test + Besucher live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-libraries-grid-v412-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Bug: Bibliotheken-Swipe zu empfindlich, unterschiedliche Anzeige je Gerät — festes 2-Spalten-Raster",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-sync-chip-visible-v411-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Aktualisieren-Chip auf Startseite nicht sichtbar — unter Titel platzieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "dua-share-flat-v410-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Duʿāʾ-Teilen hart reparieren — 3×2 Raster wie Beiträge, Telegram nicht mehr allein unten",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "display-polish-v409-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Titel geordnet 2 Zeilen, einheitlicher Beitrags-Rahmen, Duʿāʾ-Teilen 3+3, Gebetsstatus lesbarer, Qurʾān-Letztstand — Test + Besucher",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "post-reader-border-unify-v408-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Beitrag-Titel eine Zeile, Überlieferer mit Goldlinie, Doppelrand entfernen — Test + Besucher live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "home-compact-no-open-v407-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Öffnen-Text und Pfeile entfernen, kompakter, Qurʾān-Weiterlesen, Bibliotheken-Swipe — Test-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "noble-border-refine-v406-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Edle dünne Ränder, zentrierte Aktions-Buttons (Alle Beiträge etc.), dezentes Hover-Leuchten app-weit — Test-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T22:00:00.000Z"
+    },
+    {
+      "id": "live-visitor-v405-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: v401–v405 live für Besucher-App (Qurʾān, App-Absturz, Isnad, UI)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T20:00:00.000Z"
+    },
+    {
+      "id": "isnad-compact-read-v405-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Ibn Sīrīn-Zitat im Maßstab der Überlieferung vollständig lesbar, kompakt",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "compact-related-tags-v404-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: App-Reparatur-Absturz compactRelatedTags in Besucher- und Test-App beheben",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "quran-header-cleanup-v403-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Lupe und Drei-Punkte-Menü im Qurʾān-Header entfernen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "quran-contrast-v402-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Öffnen-Button und Qurʾān-Controls auf dunklen Flächen hell lesbar",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "quran-progress-fix-v401-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Qurʾān-Absturz initQuranProgressObserver in Besucher- und Test-App reparieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "visitor-quiz-tab-v400-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Quiz in Besucher-App wiederherstellen, unten als Tab, ʿIlm entfernen",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "live-quellenbibliothek-v399-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Quellenbibliothek live für Besucher veröffentlichen (v399)",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/library/",
+        "content/updates/daily.json",
+        "content/admin/daily-content-rotation.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T18:00:00.000Z"
+    },
+    {
+      "id": "home-premium-hotfix-v381-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Suche reparieren, Status ohne Kasten, Hijrī-Doppelung, App speichern, Lesbarkeit",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "assets/dar-account-visibility.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T16:00:00.000Z"
+    },
+    {
+      "id": "home-premium-reorder-v380-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite ab Überschrift Startseite Premium-Neuordnung, App-Status, Entdecken, Suche, Footer",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T14:00:00.000Z"
+    },
+    {
+      "id": "home-push-strip-v379-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Doppelte Gebetszeiten auf Startseite entfernen, Push-Erinnerungen kompakt eigenständig",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-refine-v378-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetszeiten zu groß, moderne Ziffern, Status-Emojis zurück, kein Abschneiden",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "isnad-compact-v377-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Maßstab der Überlieferung kompakter, Quelle gekürzt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-premium-v376-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetszeiten zu klein (CSS-Konflikt), Rheinbach nicht extra Zeile",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-premium-v375-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Gebetsnamen/-zeiten größer, Countdown zweizeilig, Isnad-Quelle ohne Abschneiden",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-premium-v374-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Premium-Header Design-Freeze 10/10 – eine Fläche, Gebetszeiten dominant, Countdown dezent",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-25T12:00:00.000Z"
+    },
+    {
+      "id": "quran-test-sync-v373-2026-07-24",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Qurʾān-Bereich noch nicht in Test-App deployed – Staging-Overlay sync",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "scripts/cf-pages-build.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "live-push-repair-v370-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Push/Gebets-Benachrichtigungen sofort live für Besucher reparieren",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/sync-app-build-ids.js",
+        "scripts/cf-pages-build.js",
+        "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-hub-v372-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Oberen Startseitenbereich kompakt neu gestalten (Gebetszeiten-Hub)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-entkacheln-v366-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht entkacheln, theme-fähig, kompakt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/quran-overview-v366-styles.css",
+        "scripts/quran-overview-v366-render.js",
+        "scripts/apply-quran-overview-v366.js",
+        "scripts/version-update-guard.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "version-update-loop-fix-v371-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Test-App Versions-Update-Schleife nach v370 weiterhin aktiv",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/apply-version-update-loop-fix.js",
+        "scripts/version-update-guard.js",
+        "scripts/sync-app-build-ids.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "version-update-loop-fix-v370-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Dauerhaft „Neue App-Version verfügbar“ in Test- und Besucher-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/live-boot.js",
+        "scripts/apply-version-update-loop-fix.js",
+        "scripts/version-update-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "welcome-push-delivery-fix-v368-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Server verbunden aber Willkommens-/Geräte-Push kommt nicht an",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/apply-welcome-push-delivery-fix.js",
+        "scripts/apply-push-subscription-resolve-fix.js",
+        "scripts/version-update-guard.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "prayer-overview-compact-v365-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Screenshot: GEBETSZEITEN zu viel Abstand + Test-App formatQuranProgressTime",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-unified-v364-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten einheitlich auf allen Geräten (Pro Max + iPhone 13)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-mobile-v363-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten Smartphone ohne Überlappung/Kasten",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/force-workers-test-upload.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "test-app-cache-bust-v362-test-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Screenshot: Test-App noch auf altem Cache (formatQuranProgressTime)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-countdown-v362-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Countdown Sekunden lesbar (Pill, feste Breite)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "test-quran-progress-fix-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Test-App Absturz formatQuranProgressTime",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/patch-test-canonical-library.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "header-prayer-compact-live-v361-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Header-Gebetszeiten kompakt einzeilig live veröffentlichen (Test-App schließen)",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "content/admin/header-prayer-display-lock.json",
+        "content/admin/change-scope-lock.json",
+        "scripts/patch-test-canonical-library.js"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-test-v360-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht in Test-App deployen (v360)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/cf-pages-build.js",
+        "scripts/force-workers-test-upload.js",
+        "scripts/sync-quran-overview-to-test.py",
+        "scripts/force-workers-test-upload.js",
+        "scripts/verify-live-deploy.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-24T12:00:00.000Z"
+    },
+    {
+      "id": "prayer-push-maghrib-repair-2026-07-23",
+      "approvedBy": "user-explicit-order",
+      "reason": "Maghrib-Push Notfall: Migration-Subrequest-Limit + globale Änderungssperre",
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/daily-push-scheduler.js",
+        "scripts/change-scope-lock-guard.js",
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "scripts/push-system-guard.js",
+        "scripts/repo-integrity-guard.js"
+      ],
+      "expiresAt": "2026-07-24T06:00:00.000Z"
+    },
+    {
+      "id": "app-update-recovery-v434-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Update-Banner nur bei echtem Fehler, blaues Design, Schutz-Lock",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/app-update-recovery-lock.json",
+        "scripts/app-update-recovery-guard.js",
+        "scripts/app-health-check.js",
+        "scripts/repo-integrity-guard.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T18:00:00.000Z"
+    },
+    {
+      "id": "admin-library-compact-v435-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Admin Bibliothek verwalten kompakter mit Auf/Zu-Karten live",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T20:00:00.000Z"
+    },
+    {
+      "id": "about-page-smart-v435-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Über diese App kompakt, modern und lesbar live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-26T22:00:00.000Z"
+    },
+    {
+      "id": "home-library-noble-v436-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite Bibliothek mittelgroß mit goldener Kante live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-pdf-v437-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Entdecken zeigt neueste PDF-Uploads mit Cover links, Text rechts und Bibliothek-Badge",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "app-update-modal-v438-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Blockierendes Update-Popup bei App-Inhalts-/Darstellungsänderungen bis zur Aktualisierung",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-source-smart-v439-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Quellenbereich hellere Gold-Kante, kompakter, Kacheln +2% moderner",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-pdf-compact-v440-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Entdecken PDF-Karten sehr kompakt, halbes Cover, horizontal wischen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-popular-pdf-v441-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF-Bereich +4%, Meist gelesen wieder 5 Einträge mit edler Gold-Kante",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-popular-v442-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF größer/sichtbarer, Titel-Farbe passend, Meist gelesen 2+Klapp-Button, edle Kante dick-dünn",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-popular-v443-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF-Größe wie Beitrags-Kacheln, Meist gelesen ohne Kasten, Titel+Gelehrter statt Kategorie",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-popular-v444-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF kompakt wie Beiträge Cover links Portrait, Meist gelesen Zeilen mit Luft",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "admin-library-manage-v445-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Admin Bibliothek verwalten kompakter, Auf/Zu-Fix, Live-Push pro PDF",
+      "paths": [
+        "admin/library-manager.js",
+        "admin/library-admin.css",
+        "admin/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "home-discover-pdf-v445-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF +2–3%, Wisch-Bugfix, edle theme-sichere Doppellinien",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T00:00:00.000Z"
+    },
+    {
+      "id": "library-pdf-reader-fix-v446-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF direkt in der App lesen reparieren — Besucher + Test live",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T06:00:00.000Z"
+    },
+    {
+      "id": "library-reader-stats-fix-v447-2026-07-25",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: PDF-Lesen + Besucherstatistik (0-Fehler) sofort reparieren, live Besucher+Test",
+      "paths": [
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/library-site-events-migration.sql",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-27T06:00:00.000Z"
+    },
+    {
+      "id": "library-stats-live-v448-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Besucherstatistik korrekt anzeigen + PDF-Lesen iOS mit direkter PDF-URL",
+      "paths": [
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "royal-edge-to-edge-v449-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Royal Deluxe Gold-Rahmen entfernen, volle Bildschirmbreite wie Dār al-Layl (Test zuerst)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "app-edge-to-edge-v450-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Alle Erscheinungsbilder edge-to-edge wie Dār al-Layl — Test- und Live-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/updates/daily.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "quellenbibliothek-bibliothek-bind-v451-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Quellenbibliothek-Bereich in Bibliothek — Buttons und Karten klickbar",
+      "paths": [
+        "assets/library/canonical-source-library.js",
+        "assets/library/library-app.js",
+        "test/assets/library/canonical-source-library.js",
+        "test/assets/library/library-app.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/updates/daily.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "library-la-ilaha-deploy-sync-v452-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Meldung: Bedingungen von La ilaha illa Allah — Deploy blockiert, Test-Katalog fehlt, Cover/PDF nicht live",
+      "paths": [
+        "scripts/overlay-test-staging-from-branch.js",
+        "test/data/library-publications.json",
+        "test/assets/library/pdfs/pub-20260726-001-v1-1.pdf",
+        "test/assets/library/covers/pub-20260726-001/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "library-deploy-guard-v452-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Sperre gegen blockierte Bibliothek-PDF-Uploads + autonome Reparatur bei Deploy-Ausfall",
+      "paths": [
+        "content/admin/library-deploy-lock.json",
+        "scripts/library-deploy-guard.js",
+        "scripts/library-deploy-repair.js",
+        "scripts/library-live-parity-check.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "scripts/app-health-check.js",
+        "cloudflare/library-admin.js",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".github/workflows/library-deploy-watchdog.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "library-flat-ui-v457-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek Kopfbereich entfernen, Suche/Filter ohne Kartenflächen — Live + Test",
+      "paths": [
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T16:00:00.000Z"
+    },
+    {
+      "id": "library-premium-v455-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: DAR AL TAWḤĪD Bibliothek Premium-Veredelung ohne Größen-/Grid-Änderung — nur Test-App",
+      "paths": [
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T12:00:00.000Z"
+    },
+    {
+      "id": "quran-reader-chrome-fix-v456-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Leser Buttons reparieren, Scroll-Reveal, Bottom-Sheet Picker, Karten-Optik — nur Test-App",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T14:00:00.000Z"
+    },
+    {
+      "id": "quran-reader-chrome-v454-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Leser mit ausblendbarer Kopfleiste, Einstellungsmenü und Juz/Sure/Āyah-Auswahl — nur Test-App",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T12:00:00.000Z"
+    },
+    {
+      "id": "library-hero-restore-v460-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Bibliothek Titelbereich zurück, Kategorie-Leiste Innenabstand — Live + Test",
+      "paths": [
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T20:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-structure-v459-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān Startseite professionell strukturieren, Springen-Leiste statt Karten, Picker als Bar — nur Test-App",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T20:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-quick-v458-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān Startseite Schnellzugriff Lesen/Werkzeuge, Lautschrift-Vorschaukarten, professioneller Nav-Picker — nur Test-App",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T18:00:00.000Z"
+    },
+    {
+      "id": "test-js-syntax-fix-v462-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Test-App hängt bei App wird geladen — JS-Syntaxfehler bindQuranDisplaySheet",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-compact-v463-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht kompakt, Einstellungen/Leser reparieren, Suche und Filter bereinigen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-labels-search-v464-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Juz/Sūrah/Āyah-Beschriftung sichtbar + Suche professionell einheitlich",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "overscroll-header-guard-v465-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Overscroll-Farbfehler beim Ziehen (Al-Fatihah Header) global in Test-App beheben",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-header-scroll-shield-v466-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Vers-Text darf beim Scrollen nicht über Qurʾān-Lesekopf/Schrift erscheinen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-nav-unified-v467-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Suche + Juzʾ/Sūrah/Āyah/Öffnen in einem Block, ohne Zusatzbeschriftungen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "home-refresh-unified-v468-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Startseite — alte Refresh-Buttons bereinigen, ein Icon-Button neben Hijrī",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-wake-header-v469-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Header — Bildschirm-an/aus-Toggle links neben Zurück",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "home-prayer-search-v470-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Gebetsband kleiner, Refresh in Suchleiste, sofortige Aktualisierung",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-ayah1-shield-fix-v471-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Qurʾān-Leser Āyah 1 Textfeld verschwunden — Scroll-Schild an Kopfhöhe koppeln",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "home-refresh-header-v473-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Aktualisieren-Button zurück zwischen Startseite und Hijrī-Datum",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-polish-v474-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān-Übersicht Header/Suche optisch vereinheitlichen, Wake rechts beschriftet, Einstellungen reparieren",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "app-boot-autonomous-repair-v461-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Test- und Besucher-App hängt bei App wird geladen — autonome Boot-Reparatur",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/app-update-recovery-lock.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "app-stability-system-v453-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: App-weite autonome Stabilität — Guard, Repair, Parity, Watchdog für alle Bereiche",
+      "paths": [
+        "content/admin/app-stability-lock.json",
+        "scripts/app-stability-guard.js",
+        "scripts/app-stability-repair.js",
+        "scripts/app-live-parity-check.js",
+        "scripts/app-update-recovery-guard.js",
+        "scripts/library-live-parity-check.js",
+        "scripts/overlay-test-staging-from-branch.js",
+        "scripts/app-health-check.js",
+        ".github/workflows/app-stability-watchdog.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/library-deploy-lock.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T06:00:00.000Z"
+    },
+    {
+      "id": "home-refresh-start-v475-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Aktualisieren-Button rechts neben Startseite, leicht rote Umrandung, Neon-Glow, live auf Besucher-App",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "autonomous-content-refresh-v476-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Beiträge und PDF-Bibliothek autonom im Hintergrund aktualisieren; Banner nur bei großem Darstellungs-Update",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "home-header-chips-refresh-v479-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe live: Startseite Favoriten/Glocke/Konto-Chips rechts, App-Status/Erinnerungen, schneller Refresh-Button",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "quran-overview-repair-v480-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Qurʾān Scroll/Suche sticky, Vers-Picker, Reader-Buttons/Sheets reparieren (Test-App)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "float-touchbar-home-restore-v481-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Korrektur: Float-Touchbar rechts (Qibla/Favoriten/Glocke) auf Startseite wiederherstellen; v479 App-Status/Header-Chips entfernen",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T22:00:00.000Z"
+    },
+    {
+      "id": "float-touchbar-home-live-v483-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe live: Float-Touchbar rechts auf Startseite; App-Status/Erinnerungen entfernen — Test + Besucher",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:30:00.000Z"
+    },
+    {
+      "id": "admin-library-live-push-v484-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Admin Bibliothek nur Live veröffentlichen, Test/Push-Buttons entfernen, Besucher-Push automatisch",
+      "paths": [
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "cloudflare/library-push-admin.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:45:00.000Z"
+    },
+    {
+      "id": "scholars-index-modernize-v482-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Gelehrten-Seite modernisieren — Suche, Filter, Sortierung, historische Gruppierung, Monogramme",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "scripts/build-scholar-index-meta.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:00:00.000Z"
+    },
+    {
+      "id": "scholars-index-live-v485-2026-07-26",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Freigabe: Gelehrten-Index v482 in Test-App live deployen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "scripts/build-scholar-index-meta.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T23:50:00.000Z"
+    },
+    {
+      "id": "admin-library-edit-push-v486-2026-07-27",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Bibliothek Live-Upload/Bearbeitung reparieren — Update ohne Push, separater Live-Push",
+      "paths": [
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "cloudflare/library-admin.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T12:00:00.000Z"
+    },
+    {
+      "id": "daily-json-deploy-unblock-2026-07-27",
+      "approvedBy": "user-explicit-order",
+      "reason": "Deploy-Blocker: daily.json dua.id fehlt — Admin v486 live deployen",
+      "paths": [
+        "content/updates/daily.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T12:00:00.000Z"
+    },
+    {
+      "id": "worker-v486-redeploy-2026-07-27",
+      "approvedBy": "user-explicit-order",
+      "reason": "Worker v486 redeploy: skipPush + updated-status publish fix",
+      "paths": [
+        "cloudflare/worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T12:00:00.000Z"
+    },
+    {
+      "id": "admin-library-split-buttons-v487-2026-07-27",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Korrektur: Zwei getrennte Buttons — Veröffentlichen ohne Push + Live Push separat",
+      "paths": [
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "content/admin/pending-pushes.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-28T14:00:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-test-deploy-v490-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Auftrag: Long-Press-Schnellzugriff auf Mehr in Dar Test bereitstellen — schwebender 4-Punkte-Button entfernen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-boot-fix-v491-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Dar Test startet nicht — fehlende initFloatTouchbar nach Long-Press-Deploy",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-syntax-fix-v492-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Dar Test Syntaxfehler — renderMore/islamicCalendarForDate nach Long-Press beschädigt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-quickaccess-compact-v493-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: Schnellzugriff kompakt mit Emojis, ohne Vollbild-Blur, nur Chip-Glow beim Antippen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-29T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-float-restore-v499-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Root-Cause — Float-Leiste entfernt/versteckt; wiederherstellen + Hard Overwrite",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-30T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-longpress-popover-v500-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Verbindlicher Programmiererauftrag: Schnellzugriff korrekt über Mehr positionieren und iOS-Long-Press umsetzen (Dar Test)",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-31T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-quickaccess-glow-v501-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: keine Hintergrundunschärfe, Icons korrigieren, Umrandungen dezent edel aufleuchten",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-31T23:59:00.000Z"
+    },
+    {
+      "id": "mehr-quickaccess-emoji-v502-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Feedback: native iOS/Android System-Emojis + leicht leuchtender Rahmen",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-live-push-autorepair-v503-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer-Notfall: Live-PDF fehlt in Besucher-App + kein Push — Scope-Lock blockierte Deploy; autonome 3s-Reparatur",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/pending-pushes.json",
+        "data/library-publications.json",
+        "test/data/library-publications.json",
+        "assets/library/pdfs/",
+        "assets/library/covers/",
+        "test/assets/library/pdfs/",
+        "test/assets/library/covers/",
+        "admin/library-manager.js",
+        "cloudflare/worker.js",
+        "cloudflare/library-push-admin.js"
+      ],
+      "expiresAt": "2026-08-15T23:59:00.000Z"
+    },
+    {
+      "id": "library-push-002-forcesend-2026-07-28",
+      "approvedBy": "user-explicit-order",
+      "reason": "Autonome Nachsendung Push für Live-PDF pub-20260728-002 nach Scope-Lock-Reparatur",
+      "paths": [
+        "content/admin/push-triggers/library-publication-live.json",
+        "content/admin/pending-pushes.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-07-30T23:59:00.000Z"
+    }
+  ],
+  "enabled": true
+}

@@ -1,0 +1,35 @@
+{
+  "automatic": true,
+  "deliveryMode": "worker-local",
+  "dailyDua": {
+    "enabled": true,
+    "hour": 9,
+    "id": "",
+    "title": "Duʿāʾ des Tages",
+    "body": "Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ."
+  },
+  "recommendation": {
+    "enabled": true,
+    "hour": 12,
+    "id": "",
+    "title": "Heute empfohlen",
+    "body": "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār."
+  },
+  "forceSend": {
+    "enabled": false,
+    "date": "2026-07-22",
+    "kinds": [
+      "dua",
+      "recommendation"
+    ],
+    "token": "daily-live-repair-2026-07-22-v2",
+    "requestedAt": "2026-07-22T08:52:00Z",
+    "completedAt": "2026-07-22T08:54:00Z",
+    "result": {
+      "acceptedDua": 9,
+      "acceptedRecommendation": 9,
+      "invalidSubscriptionsDisabled": 9
+    },
+    "reason": "Direkter isolierter Live-Nachversand erfolgreich abgeschlossen"
+  }
+}

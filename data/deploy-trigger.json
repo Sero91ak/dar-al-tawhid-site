@@ -1,0 +1,6 @@
+{
+  "reason": "verified-only-books-library-live-rollout",
+  "requestedAt": "2026-07-22T15:20:00+02:00",
+  "targets": ["visitor-app", "test-app"],
+  "commitPolicy": "main-auto-deploy"
+}

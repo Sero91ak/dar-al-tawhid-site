@@ -1,0 +1,39 @@
+{
+  "locked": true,
+  "lockedAt": "2026-07-25T12:00:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: Autonome Boot-Reparatur bei hängendem Laden; Update-Banner nur bei echtem Fehler, blaues Design, keine Endlos-Schleife.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „App-Update-Banner freigeben“ oder „autonome Reparatur“.",
+  "lockedPaths": [
+    "index.html",
+    "test/index.html"
+  ],
+  "lockedSections": [
+    "APP_UPDATE_RECOVERY_GUARD",
+    "VERSION_UPDATE_GUARD",
+    "initAppCrashGuard",
+    "showRecoveryBanner",
+    "isAppViewStuck",
+    "markAppBootComplete",
+    "requestAppRecoveryUpdate"
+  ],
+  "requiredMarkers": [
+    "APP_UPDATE_RECOVERY_GUARD",
+    "BOOT_AUTONOMOUS_GUARD",
+    "isAppViewStuck",
+    "markAppBootComplete",
+    "requestAppRecoveryUpdate",
+    "showRecoveryBanner",
+    "scheduleBootAutonomousRepair",
+    "App-Update erforderlich",
+    "Jetzt aktualisieren",
+    "RECOVERY_BANNER_KEY",
+    "getBannerMode"
+  ],
+  "forbiddenPatterns": [
+    "App-Start dauert zu lange",
+    "showRepairBanner",
+    "scheduleAutoRepair",
+    "classList.add('is-app-repair')",
+    "auto:true,delayMs"
+  ]
+}
