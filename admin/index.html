@@ -1420,7 +1420,7 @@ function renderPublishTracker(filterType){
     <div class="publish-step-grid">${(track.steps||[]).map(s=>`<div class="publish-step" data-state="${esc(s.state||"wait")}"><span class="publish-step-dot"></span><div><b>${esc(s.label)}</b><small>${esc(publishStateLabel(s.state))}${s.note?` · ${esc(s.note)}`:""}</small></div></div>`).join("")}</div>
     ${(track.items||[]).length?`<div class="upload-status" style="margin-top:9px">${track.items.slice(0,8).map(item=>`${esc(item.title||item.filename)}: <strong>${esc(item.status||"ok")}</strong>`).join("<br>")}${track.items.length>8?`<br>… +${track.items.length-8} weitere`:""}</div>`:""}
     ${track.error?`<div class="upload-status" style="margin-top:9px;color:#ffb8b8">Fehler: ${esc(track.error)}</div>`:""}
-    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button">Live erneut prüfen &amp; Push senden</button></div>
+    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button" title="Nur für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push für letzten Beitrag prüfen</button></div>
   </div>`;
 }
 async function verifyPublishedPost(filename,postId){
@@ -3527,7 +3527,7 @@ async function retryLivePush(){
   const target=resolvePushRetryTarget();
   if(draftConflictsWithLastPublish(ctx,target)){
     const draftLabel=esc(target.filenameInput||target.postId||"neuer Entwurf");
-    setUploadStatus(`<span style="color:#ffb8b8"><strong>Push blockiert:</strong> Du bearbeitest <strong>${draftLabel}</strong>, der Retry-Button gilt aber nur für den zuletzt veröffentlichten Beitrag <strong>${esc(ctx.filename)}</strong> (${esc(ctx.postTitle||ctx.postId||"")}).<br>Bitte zuerst „Online veröffentlichen“ für deinen neuen Beitrag 453.</span>`);
+    setUploadStatus(`<span style="color:#ffb8b8"><strong>Push blockiert:</strong> Du bearbeitest <strong>${draftLabel}</strong>, der Retry-Button gilt aber nur für den zuletzt veröffentlichten Beitrag <strong>${esc(ctx.filename)}</strong> (${esc(ctx.postTitle||ctx.postId||"")}).<br>Bitte zuerst „Online veröffentlichen“ für deinen neuen Entwurf.</span>`);
     toast("Neuer Entwurf – zuerst Online veröffentlichen");
     addAdminLog("Push","Push blockiert – neuer Entwurf im Formular",target.filenameInput||target.postId||"Entwurf");
     return;
@@ -3625,7 +3625,6 @@ async function uploadPostViaWorker(){
     const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
     const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nTitel: ${postTitle}\nDatei: ${draftFilename}\nPush-ID: ${postId}\n\nDer Push geht an genau diesen Beitrag.\n„Push für letzten Beitrag prüfen“ sendet NICHT diesen Entwurf.`);
     if(!ok){finishPublishTrack("error","Veröffentlichung abgebrochen");setUploadStatus("Veröffentlichung abgebrochen.");uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
-    const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
     if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,postTitle,"draft",{sourceQueue:sourceUploadQueue});
     const sourceCheck=validateBeforeSourceSave("draft");
     if(sourceCheck.warnings?.length)addAdminLog("Quellen","Hinweise",sourceCheck.warnings.join(" · "));

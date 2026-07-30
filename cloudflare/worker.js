@@ -2482,10 +2482,23 @@ async function readPendingPushesRegistry(env) {
   const file = await githubGet(env, owner, repo, path, branch);
   if (!file?.content) return { pushes: {} };
   try {
-    const data = JSON.parse(base64ToUtf8(file.content));
+    const raw = base64ToUtf8(file.content);
+    if (/^<<<<<<<|^>>>>>>>|^=======/m.test(raw)) {
+      throw new Error("pending-pushes.json enthält Merge-Konflikt-Marker");
+    }
+    const data = JSON.parse(raw);
     return { pushes: data.pushes || {}, sha: file.sha };
   } catch (error) {
-    return { pushes: {}, sha: file.sha };
+    return { pushes: {}, sha: file.sha, parseError: error?.message || "JSON parse failed" };
+  }
+}
+
+function assertPendingPushesRegistryReadable(registry) {
+  if (registry?.parseError) {
+    throw httpError(
+      `Push-Registry defekt (${registry.parseError}). Kein erneuter Versand – bitte content/admin/pending-pushes.json reparieren.`,
+      503
+    );
   }
 }
 
@@ -2709,6 +2722,7 @@ async function processPendingPushUntilLive(env, record, options = {}) {
   const schedule = options.schedule === "quick" || options.singleCheck ? "quick" : "full";
 
   const registry = await readPendingPushesRegistry(env);
+  assertPendingPushesRegistryReadable(registry);
   const existing = registry.pushes?.[postId];
   if (existing?.status === "sent") {
     return { sent: true, skipped: true, reason: "Push wurde bereits gesendet.", liveCheck: existing.liveCheck || null };
@@ -2927,6 +2941,7 @@ async function retryPendingPostPush(env, input, ctx) {
   if (!postId || !filename) throw httpError("postId und filename fehlen", 400);
 
   const registry = await readPendingPushesRegistry(env);
+  assertPendingPushesRegistryReadable(registry);
   const existing = registry.pushes?.[postId];
   if (existing?.status === "sent" && !input.forceResend) {
     return {
