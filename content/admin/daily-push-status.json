@@ -1,16 +1,27 @@
 {
   "ok": true,
-  "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
+  "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
+  "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-30T09:45:51.184Z",
-  "usersChecked": 11,
+  "updatedAt": "2026-07-30T10:00:51.184Z",
+  "usersChecked": 10,
+  "registrationsRead": 11,
+  "uniqueSubscriptions": 10,
+  "duplicateRegistrationsDropped": 1,
+  "appEnvironment": "production",
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 9,
+  "sent": 9,
+  "accepted": {
+    "dua": 0,
+    "recommendation": 9
+  },
+  "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 11,
+  "duplicates": 10,
   "errors": 0,
+  "forceSend": null,
   "dailyContentDate": "2026-07-30",
   "currentRecommendation": {
     "id": "athar-widerlegung-die-khawarij-verliessen-durch-fehlverstaendnis-305",
@@ -23,6 +34,5 @@
     "title": "Unser Herr, gib uns Gutes in Dunyā und Ākhirah",
     "category": "Dunyā & Ākhirah"
   },
-  "configAutomatic": true,
-  "responses": []
+  "configAutomatic": true
 }
