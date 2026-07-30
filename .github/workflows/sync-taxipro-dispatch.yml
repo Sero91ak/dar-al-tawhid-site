@@ -1,0 +1,46 @@
+name: Sync to taxipro-dispatch
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'taxipro-dispatch-export/**'
+      - '.github/workflows/sync-taxipro-dispatch.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify export present
+        run: ls -la taxipro-dispatch-export/
+
+      - name: Push to taxipro-dispatch
+        env:
+          PAT: ${{ secrets.TAXIPRO_DISPATCH_PAT }}
+        run: |
+          set -e
+          if [ -z "$PAT" ]; then
+            echo "::error::Secret TAXIPRO_DISPATCH_PAT fehlt"
+            exit 1
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git clone "https://x-access-token:${PAT}@github.com/Sero91ak/taxipro-dispatch.git" repo
+          cd repo
+          git checkout -B main
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -a "$GITHUB_WORKSPACE/taxipro-dispatch-export/." ./
+          git add -A
+          if git diff --staged --quiet; then
+            echo "Already up to date"
+            exit 0
+          fi
+          git commit -m "Sync: Getrennte Zentrale- und Fahrer-PWA"
+          git push -f origin main

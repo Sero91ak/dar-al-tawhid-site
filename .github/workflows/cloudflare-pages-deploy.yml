@@ -1,0 +1,109 @@
+name: Deploy Besucher-App (Cloudflare Workers)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+      - test/index.html
+      - test/assets/library/**
+      - wasiyyah/**
+      - test/wasiyyah/**
+      - version.json
+      - test/version.json
+      - service-worker.js
+      - assets/**
+      - assets/library/**
+      - content/**
+      - data/**
+      - admin/index.html
+      - admin/library-*.js
+      - admin/library-admin.css
+      - admin/quiz-stats-manager.js
+      - wrangler.toml
+      - .assetsignore
+      - package.json
+      - _headers
+      - scripts/cf-pages-build.js
+      - scripts/sync-app-build-ids.js
+      - scripts/overlay-test-staging-from-branch.js
+      - scripts/app-stability-guard.js
+      - scripts/app-stability-repair.js
+      - scripts/app-live-parity-check.js
+      - scripts/library-deploy-guard.js
+      - scripts/library-deploy-repair.js
+      - scripts/library-live-parity-check.js
+      - scripts/force-workers-test-upload.js
+      - scripts/verify-live-deploy.js
+      - scripts/app-health-check.js
+      - scripts/repo-integrity-guard.js
+      - content/admin/app-stability-lock.json
+      - .github/workflows/cloudflare-pages-deploy.yml
+      - .github/workflows/app-stability-watchdog.yml
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test-App Staging aus test-library-canonical übernehmen
+        run: |
+          git fetch origin test-library-canonical
+          node scripts/overlay-test-staging-from-branch.js
+          node scripts/app-stability-repair.js
+
+      - name: Build + Build-IDs synchronisieren
+        run: npm run build
+
+      - name: Health checks (Syntax, Push-Guard, Version, Scope-Lock)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
+          CHANGE_SCOPE_LOCK_COMMIT_ONLY: "1"
+        run: |
+          node scripts/app-health-check.js
+          node scripts/change-scope-lock-guard.js
+          node scripts/push-system-guard.js
+          node scripts/version-update-guard.js
+          node scripts/app-stability-guard.js
+
+      - name: Deploy statische App (Workers Static Assets)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Cloudflare CDN Cache leeren
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          CLOUDFLARE_DEV_MODE: "1"
+        run: node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
+
+      - name: Live-Deploy verifizieren (Besucher + Test + Stabilität)
+        env:
+          SITE_URL: "https://dar-al-tawhid.de"
+          DEPLOY_VERIFY_MODE: "all"
+          EXPECT_ZAKAT_VERSION: "18"
+        run: |
+          node scripts/verify-live-deploy.js
+          node scripts/app-live-parity-check.js

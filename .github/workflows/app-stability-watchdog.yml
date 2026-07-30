@@ -1,0 +1,46 @@
+name: App Stabilität Watchdog
+
+# Autonome Reparatur für alle Bereiche: Live-Parität prüfen, bei Abweichung Deploy + Cache-Purge auslösen.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15,45 * * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  app-stability-watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Live-Parität aller Bereiche prüfen
+        id: parity
+        continue-on-error: true
+        env:
+          SITE_URL: "https://dar-al-tawhid.de"
+        run: node scripts/app-live-parity-check.js
+
+      - name: Deploy erneut auslösen (Live hinter GitHub)
+        if: steps.parity.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "App-Stabilität-Watchdog: Live-Parität fehlgeschlagen — Deploy wird ausgelöst"
+          gh workflow run "Deploy Besucher-App (Cloudflare Workers)" --ref main
+
+      - name: CDN-Cache leeren nach Reparatur-Deploy
+        if: steps.parity.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sleep 45
+          gh workflow run "Purge live site cache" --ref main || true

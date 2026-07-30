@@ -1,0 +1,36 @@
+name: Send Quiz focus push (live)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - content/admin/push-triggers/quiz-fokus-live.json
+
+jobs:
+  notify:
+    name: Broadcast Quiz 84h Fokus
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SITE_URL: "https://dar-al-tawhid.de"
+      ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send Quiz focus push to visitors
+        env:
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/send-quiz-focus-push.js

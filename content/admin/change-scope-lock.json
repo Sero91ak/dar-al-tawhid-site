@@ -54,6 +54,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "post-push-dedupe-2026-07-29",
+      "approvedBy": "user-explicit-order",
+      "reason": "Ein Klick/Publish darf nur eine Beitrags-Push senden (keine Key/Basic/Segment-Doppelzustellung)",
+      "paths": [
+        "cloudflare/post-push-admin.js",
+        "cloudflare/onesignal-delivery.js",
+        "cloudflare/library-push-admin.js",
+        "cloudflare/worker.js",
+        "scripts/send-post-push.js",
+        "scripts/lib/onesignal-push.js",
+        "admin/index.html",
+        ".github/workflows/deploy-admin-publisher.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-sheet-scroll-lock-v525-2026-07-29",
       "approvedBy": "user-explicit-order",
       "reason": "Qurʾān Einstellungen/Sheets: Seite darf beim Touch/Halten/Ziehen nicht mitlaufen",

@@ -1,0 +1,53 @@
+name: Daily Push Live Repair
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - content/admin/daily-push-live-repair-trigger.json
+
+permissions:
+  contents: read
+
+jobs:
+  resend-todays-daily-pushes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send Duʿāʾ and recommendation separately to every production subscription
+        env:
+          SITE_URL: "https://dar-al-tawhid.de"
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_API_KEY: ${{ secrets.ONESIGNAL_APP_API_KEY }}
+          DAILY_REPAIR_TOKEN: "daily-live-repair-2026-07-22-v2"
+        run: node scripts/send-daily-live-repair.js
+
+      - name: Validate live repair result
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const result = JSON.parse(fs.readFileSync('daily-live-repair-result.json', 'utf8'));
+          const dua = Number(result.dua?.accepted || 0);
+          const recommendation = Number(result.recommendation?.accepted || 0);
+          if (dua < 1 || recommendation < 1) {
+            throw new Error(`Nachversand fehlgeschlagen: Duʿāʾ=${dua}, Empfehlung=${recommendation}`);
+          }
+          console.log(`Live bestätigt: Duʿāʾ=${dua}, Empfehlung=${recommendation}, ungültige Abos=${Number(result.dua?.invalid || 0)}`);
+          NODE
+
+      - name: Upload repair report
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-push-live-repair-result
+          path: daily-live-repair-result.json
+          retention-days: 7
