@@ -92,7 +92,10 @@ function main() {
   fs.writeFileSync(indexPath, html);
 
   const stashName = `test-pages-sync-${stamp}`;
-  run("git", ["stash", "push", "-u", "-m", stashName, "--", ...SYNC_FILES]);
+  const dirty = runOut("git", ["status", "--porcelain"]);
+  if (dirty) {
+    run("git", ["stash", "push", "-u", "-m", stashName]);
+  }
 
   try {
     run("git", ["fetch", "origin", MAIN_BRANCH]);
@@ -117,7 +120,8 @@ function main() {
   } finally {
     run("git", ["checkout", "test-library-canonical"]);
     try {
-      run("git", ["stash", "pop"]);
+      const stashList = runOut("git", ["stash", "list"]);
+      if (stashList.includes(stashName)) run("git", ["stash", "pop"]);
     } catch {
       // Stash evtl. leer oder Konflikt – Staging-Branch unverändert lassen
     }
