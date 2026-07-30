@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-30T11:01:37.980Z",
+  "updatedAt": "2026-07-30T12:01:33.263Z",
   "provider": "mintedmetal.com",
   "active": true,
   "gold": {
@@ -12,7 +12,7 @@
     "nisabEur": 9658.55,
     "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB))",
     "provider": "mintedmetal.com",
-    "fetchedAt": "2026-07-30T11:01:37.980Z",
+    "fetchedAt": "2026-07-30T12:01:33.263Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 963.9,
     "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB))",
     "provider": "mintedmetal.com",
-    "fetchedAt": "2026-07-30T11:01:37.980Z",
+    "fetchedAt": "2026-07-30T12:01:33.263Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 963.9,
-  "lastSuccessAt": "2026-07-30T11:01:37.980Z",
+  "lastSuccessAt": "2026-07-30T12:01:33.263Z",
   "lastError": "",
-  "lastFetchAt": "2026-07-30T11:01:37.980Z",
+  "lastFetchAt": "2026-07-30T12:01:33.263Z",
   "fetchLogs": [
+    {
+      "id": "log-1785412893263",
+      "provider": "mintedmetal.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-07-30T12:01:33.263Z",
+      "durationMs": 41695,
+      "goldPerGram": 113.63,
+      "silverPerGram": 1.62
+    },
     {
       "id": "log-1785409297980",
       "provider": "mintedmetal.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-07-24T17:55:03.517Z",
       "durationMs": 890,
       "goldPerGram": 115.01,
-      "silverPerGram": 1.67
-    },
-    {
-      "id": "log-1784914803110",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-07-24T17:40:03.110Z",
-      "durationMs": 899,
-      "goldPerGram": 115.04,
       "silverPerGram": 1.67
     }
   ]
