@@ -2742,6 +2742,17 @@ async function processPendingPushUntilLive(env, record, options = {}) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
   }
 
+  const freshRegistry = await readPendingPushesRegistry(env);
+  const freshExisting = freshRegistry.pushes?.[postId];
+  if (freshExisting?.status === "sent" && !options.forceResend) {
+    return {
+      sent: true,
+      skipped: true,
+      reason: "Push wurde bereits gesendet.",
+      liveCheck: freshExisting.liveCheck || existing?.liveCheck || liveCheck
+    };
+  }
+
   const claim = await claimPendingPushSend(env, postId);
   if (!claim.claimed) {
     const alreadySent = Boolean(claim.skipped && /bereits gesendet/i.test(String(claim.reason || "")));
@@ -2961,9 +2972,9 @@ async function retryPendingPostPush(env, input, ctx) {
     };
   }
 
-  if (existing?.status !== "pending" && existing?.status !== "sending") {
+  if (existing?.status !== "pending" && existing?.status !== "sending" && existing?.status !== "sent") {
     await writePendingPushStatus(env, postId, record);
-  } else {
+  } else if (existing?.status !== "sent") {
     await writePendingPushStatus(env, postId, {
       pushApproved: true,
       pushApprovedAt: record.pushApprovedAt
