@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <!-- pages-deploy-stamp:1784899983185 -->
-<!-- workers-deploy-stamp:1785314705803 -->
+<!-- workers-deploy-stamp:1785407018661 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v525";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v526";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -14091,6 +14091,120 @@ html[data-theme="light"] body.is-quran-reader-route .quran-ayah-action-strip{
 html[data-theme="light"] body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble::after{
   background:color-mix(in srgb,#cbb58a 42%,#d9d0c0);
 }
+/* v526 · Reader kompakt/modern: kein linkes Leuchten, sichtbare Vers-Aktionen, Schrift passt bis Stufe 10 */
+body.is-quran-reader-route .top-edge-fade,
+body.is-quran-reader-route .top-swim-aura{display:none!important}
+body.is-quran-reader-route #appView.view{
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:var(--bg)!important;
+  background-image:none!important;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah::before,
+body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble::before{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+}
+body.is-quran-reader-route .quran-ayah.is-topic-highlight,
+body.is-quran-reader-route .quran-ayah.quran-ayah-highlight{
+  background:color-mix(in srgb,var(--gold2) 7%,var(--bg))!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble{
+  padding:7px 0 9px!important;
+}
+body.is-quran-reader-route .quran-ayah-toolbar--inline{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:0 0 5px;
+  width:100%;
+}
+body.is-quran-reader-route .quran-ayah-actions-left{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-shrink:0;
+}
+body.is-quran-reader-route .quran-ayah-icon-btn{
+  min-height:32px;
+  padding:0 9px;
+  border:1px solid color-mix(in srgb,var(--line2) 55%,transparent);
+  border-radius:10px;
+  background:color-mix(in srgb,var(--card) 30%,var(--bg));
+  color:var(--cream,var(--text));
+  font-size:11px;
+  font-weight:850;
+  line-height:1;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  -webkit-tap-highlight-color:transparent;
+}
+body.is-quran-reader-route .quran-ayah-icon-btn.quran-explain-btn{
+  border-color:color-mix(in srgb,var(--gold2) 38%,var(--line2));
+  color:var(--gold2);
+}
+body.is-quran-reader-route .quran-ayah-icon-btn.quran-share-ayah-btn{
+  border-color:color-mix(in srgb,var(--line2) 62%,transparent);
+}
+body.is-quran-reader-route .quran-ayah-icon-btn.quran-save-ayah-btn{
+  min-width:32px;
+  padding:0 8px;
+}
+body.is-quran-reader-route .quran-ayah-icon-btn.quran-save-ayah-btn.is-progress{
+  border-color:color-mix(in srgb,var(--gold2) 55%,transparent);
+  color:var(--gold2);
+}
+body.is-quran-reader-route .quran-ayah-ref-label{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  flex-shrink:0;
+}
+body.is-quran-reader-route .quran-ayah-ref-pill,
+body.is-quran-reader-route .quran-ayah-action-strip{display:none!important}
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-ar{
+  font-size:clamp(17px,var(--quran-arabic-size),26px)!important;
+  line-height:1.46!important;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr-wrap{
+  margin-top:3px!important;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr{
+  font-size:clamp(11px,var(--quran-trans-size),16px)!important;
+  line-height:1.26!important;
+  opacity:.86;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-de{
+  margin-top:2px!important;
+  font-size:clamp(11.5px,var(--quran-de-size),16.5px)!important;
+  line-height:1.32!important;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+html[data-theme="light"] body.is-quran-reader-route .quran-ayah-icon-btn{
+  background:color-mix(in srgb,#fff 82%,var(--bg));
+  color:#2a2218;
+  border-color:color-mix(in srgb,#8a7350 24%,transparent);
+}
+html[data-theme="light"] body.is-quran-reader-route .quran-ayah-icon-btn.quran-explain-btn{
+  color:#6f5528;
+  border-color:color-mix(in srgb,#9b7a3c 42%,transparent);
+}
 
 
 </style>
@@ -16995,7 +17109,7 @@ function setQuranTopicContext(data){try{setJson('darQuranTopicContextV1',data)}c
 function clearQuranTopicContext(){try{localStorage.removeItem('darQuranTopicContextV1')}catch(e){}}
 function renderQuranTopicContextBar(surahId,ayah){const ctx=quranTopicContext();if(!ctx||Number(ctx.surah)!==Number(surahId)||Number(ctx.ayah)!==Number(ayah))return '';const topic=quranTopicById(ctx.topicId)||{title:ctx.topicTitle||'Thema'};return '<section class="quran-topic-context"><span>Aus Thema: <strong>'+esc(topic.title)+'</strong></span><button type="button" class="quran-topic-back-btn" data-nav="quran-topic" data-value="'+esc(ctx.topicId||'')+'">← Zurück zum Thema</button></section>'}
 function bindQuranAyahActionStrips(){const closeAll=()=>{document.querySelectorAll(".quran-ayah-action-strip").forEach(s=>{s.setAttribute("hidden","");s.classList.remove("is-open")});document.querySelectorAll("[data-quran-ayah-menu]").forEach(b=>{b.setAttribute("aria-expanded","false");b.classList.remove("is-open")});document.querySelectorAll(".quran-ayah.is-menu-open").forEach(a=>a.classList.remove("is-menu-open"))};document.querySelectorAll("[data-quran-ayah-menu]").forEach(btn=>{btn.onclick=e=>{e.preventDefault();e.stopPropagation();const id=btn.getAttribute("data-quran-ayah-menu");const strip=id?document.getElementById(id):null;if(!strip)return;const willOpen=strip.hasAttribute("hidden")||!strip.classList.contains("is-open");closeAll();if(willOpen){strip.removeAttribute("hidden");strip.classList.add("is-open");btn.setAttribute("aria-expanded","true");btn.classList.add("is-open");btn.closest(".quran-ayah")?.classList.add("is-menu-open")}}});document.querySelectorAll(".quran-ayah-action-strip [data-quran-explain],.quran-ayah-action-strip [data-quran-share-ayah],.quran-ayah-action-strip [data-quran-save-ayah]").forEach(btn=>{btn.addEventListener("click",()=>{setTimeout(closeAll,0)},{passive:true})});if(!window.__quranAyahStripDocBound){window.__quranAyahStripDocBound=true;document.addEventListener("click",e=>{if(e.target.closest?.("[data-quran-ayah-menu],.quran-ayah-action-strip)"))return;closeAll()},{passive:true})}}
-function renderQuranExplainButton(surah,ayah,ayahData){const manual=getQuranReadingState().manual;const isManual=manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah);const icon=isManual?"★":"☆";const menuId="ayah-menu-"+surah+"-"+ayah;return '<div class="quran-ayah-toolbar"><button type="button" class="quran-ayah-ref-pill" data-quran-ayah-menu="'+esc(menuId)+'" aria-expanded="false" aria-controls="'+esc(menuId)+'" title="Aktionen"><span class="quran-ayah-ref-text">Āyah '+esc(surah)+':'+esc(ayah)+'</span><span class="quran-ayah-ref-chevron" aria-hidden="true">▾</span></button><div class="quran-ayah-action-strip" id="'+esc(menuId)+'" hidden><button type="button" class="quran-ayah-strip-btn quran-explain-btn" data-quran-explain="'+esc(surah)+':'+esc(ayah)+'">📖 Tafsīr</button><button type="button" class="quran-ayah-strip-btn quran-share-ayah-btn" data-quran-share-ayah="'+esc(ayahData||"")+'" title="Vers teilen">↗ Teilen</button><button type="button" class="quran-ayah-strip-btn quran-save-ayah-btn'+(isManual?' is-progress':'')+'" data-quran-save-ayah="'+esc(surah)+':'+esc(ayah)+'" title="Merken oder Lesestand speichern">'+icon+'</button></div></div>'}
+function renderQuranExplainButton(surah,ayah,ayahData){const manual=getQuranReadingState().manual;const isManual=manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah);const icon=isManual?"★":"☆";return '<div class="quran-ayah-toolbar quran-ayah-toolbar--inline"><div class="quran-ayah-actions-left"><button type="button" class="quran-ayah-icon-btn quran-explain-btn" data-quran-explain="'+esc(surah)+':'+esc(ayah)+'" title="Tafsīr-Erklärung"><span aria-hidden="true">📖</span><span class="quran-ayah-btn-label">Tafsīr</span></button><button type="button" class="quran-ayah-icon-btn quran-share-ayah-btn" data-quran-share-ayah="'+esc(ayahData||"")+'" title="Vers teilen"><span aria-hidden="true">↗</span><span class="quran-ayah-btn-label">Teilen</span></button><button type="button" class="quran-ayah-icon-btn quran-save-ayah-btn'+(isManual?' is-progress':'')+'" data-quran-save-ayah="'+esc(surah)+':'+esc(ayah)+'" title="Merken oder Lesestand">'+icon+'</button></div><span class="quran-ayah-ref-label">'+esc(surah)+':'+esc(ayah)+'</span></div>'}
 
 function parseQuranAyahShareData(value){try{return JSON.parse(decodeURIComponent(String(value||"")))}catch(e){return null}}
 function quranAyahShareUrl(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return location.href;return `${location.origin}${location.pathname}#quran-surah/${sid}/${aid}`}
@@ -21634,7 +21748,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v525";
+const APP_BUILD_ID="app-shell-v526";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
