@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-30T09:49:02.077Z",
+  "generated": "2026-07-30T09:49:03.346Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -11,7 +11,32 @@
       "status": "pending",
       "pushApproved": true,
       "pushApprovedAt": "2026-07-30T09:49:01.796Z",
-      "updatedAt": "2026-07-30T09:49:02.077Z"
+      "updatedAt": "2026-07-30T09:49:03.346Z",
+      "lastCheckAt": "2026-07-30T09:49:03.180Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
+        "indexGenerated": "2026-07-29T08:52:43.648Z",
+        "indexCount": 452,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=wahrer-iman-zeigt-sich-in-den-taten-452&v=1785404943121#post/wahrer-iman-zeigt-sich-in-den-taten-452"
+      },
+      "attempts": 1,
+      "lastError": ""
     }
   }
 }
