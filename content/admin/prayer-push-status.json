@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-07-30T09:31:45.973Z",
+  "updatedAt": "2026-07-30T09:39:38.331Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-07-30T09:31:45.973Z",
+  "lastCronRun": "2026-07-30T09:39:38.331Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-07-30T11:23:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-07-30T09:16:45.099Z",
-  "windowEnd": "2026-07-31T11:31:45.099Z",
+  "windowStart": "2026-07-30T09:24:37.382Z",
+  "windowEnd": "2026-07-31T11:39:37.382Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 2,
@@ -28,10 +28,10 @@
   "usersWithLocation": 2,
   "usersWithActivePush": 2,
   "locationGroups": 1,
-  "scheduled": 11,
-  "recipients": 11,
+  "scheduled": 12,
+  "recipients": 12,
   "skippedPast": 12,
-  "skippedWindow": 17,
+  "skippedWindow": 16,
   "duplicates": 0,
   "errors": 0,
   "lastError": null,
@@ -60,7 +60,7 @@
         },
         "entry": {
           "status": "geplant",
-          "recipients": 1
+          "recipients": 2
         }
       },
       "asr": {
@@ -136,7 +136,7 @@
       },
       "entry": {
         "status": "geplant",
-        "recipients": 1
+        "recipients": 2
       },
       "answer": "Dhuhr 13:38: Vorab und Gebetszeit geplant."
     },
@@ -287,6 +287,15 @@
       "mode": "advance",
       "time": "04:24",
       "sendAfter": "2026-07-31T02:09:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "entry",
+      "time": "13:38",
+      "sendAfter": "2026-07-31T11:38:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -449,6 +458,12 @@
     },
     {
       "prayer": "dhuhr",
+      "mode": "entry",
+      "recipients": 1,
+      "response": "{\"id\":\"45f0d10c-cb67-47a6-bbc7-230722d8af83\",\"external_id\":\"bcd711ce-b164-4ccd-941a-536245ea4ed7\"}"
+    },
+    {
+      "prayer": "dhuhr",
       "mode": "advance",
       "recipients": 1,
       "response": "{\"id\":\"49e4a557-6bdc-4891-9067-1cc063dc9ba7\",\"external_id\":\"14b52e31-221b-4085-88bb-a5d90bee4599\"}"
@@ -471,7 +486,13 @@
       "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-07-30T09:31:44.933+00:00"
+      "lastSyncedAt": "2026-07-30T09:31:45.979+00:00"
+    },
+    {
+      "subscriptionId": "b729a7b9-32dd-473b-a474-2c5b22b1a346",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-07-30T09:33:46.035+00:00"
     },
     {
       "subscriptionId": "187b4bf7-9cb5-4ef3-8a2b-986b792a43c4",
@@ -490,12 +511,6 @@
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-07-30T07:00:51.682+00:00"
-    },
-    {
-      "subscriptionId": "b729a7b9-32dd-473b-a474-2c5b22b1a346",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-07-30T07:00:52.625+00:00"
     },
     {
       "subscriptionId": "7fe8041e-fb2b-488c-9596-e0b4a9daeb38",
