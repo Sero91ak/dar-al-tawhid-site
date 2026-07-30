@@ -4,10 +4,10 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-07-29T22:25:51.190Z",
-  "usersChecked": 11,
-  "registrationsRead": 12,
-  "uniqueSubscriptions": 11,
+  "updatedAt": "2026-07-30T09:00:51.185Z",
+  "usersChecked": 10,
+  "registrationsRead": 11,
+  "uniqueSubscriptions": 10,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
   "duaCandidates": 0,
@@ -19,7 +19,7 @@
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 10,
   "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-07-30",
@@ -29,6 +29,10 @@
     "category": "Widerlegung",
     "scholar": "Ibn ʿAbbās"
   },
-  "currentDua": null,
+  "currentDua": {
+    "id": "dua-001-rabbana-atina",
+    "title": "Unser Herr, gib uns Gutes in Dunyā und Ākhirah",
+    "category": "Dunyā & Ākhirah"
+  },
   "configAutomatic": true
 }
