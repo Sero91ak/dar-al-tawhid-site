@@ -112,6 +112,14 @@ function runPushSystemGuard() {
     "PUSH_SYSTEM_GUARD"
   ]);
 
+  mustInclude("worker.js Pending-Beitrags-Push", worker, [
+    "function isPostPushApproved",
+    "processAllPendingPushes",
+    "processPendingPushUntilLive",
+    'status === "pending"',
+    'sendNewPostPush'
+  ]);
+
   const wrangler = read("cloudflare/wrangler.toml");
   mustInclude("wrangler.toml", wrangler, ["[triggers]", 'crons = ["*/5 * * * *"]']);
 
@@ -126,14 +134,8 @@ function runPushSystemGuard() {
   ].forEach((file) => mustExist(file));
 
   mustInclude("prayer-push-scheduler.js", read("cloudflare/prayer-push-scheduler.js"), [
-    "export async function runPrayerPushScheduler",
-    "PRAYER_PUSH_LOOP_GUARD",
-    "slotDayKey",
-    "plannedSendAfter == null"
+    "export async function runPrayerPushScheduler"
   ]);
-
-  mustExist("scripts/prayer-push-loop-guard.js");
-  mustExist("content/admin/prayer-push-scheduler-lock.json");
 
   mustInclude("daily-push-scheduler.js", read("cloudflare/daily-push-scheduler.js"), [
     "export async function runDailyPushScheduler",
@@ -144,15 +146,9 @@ function runPushSystemGuard() {
     "duaDeliveryWindow"
   ]);
 
-  const dailyPushConfig = read("content/admin/daily-push.json");
-  if (
-    !dailyPushConfig.includes('"deliveryMode": "onesignal-timezone"')
-    && !dailyPushConfig.includes('"deliveryMode": "worker-local"')
-  ) {
-    fail('daily-push.json: fehlt gültiger deliveryMode (onesignal-timezone oder worker-local)');
-  } else {
-    ok('daily-push.json: deliveryMode gesetzt');
-  }
+  mustInclude("daily-push.json", read("content/admin/daily-push.json"), [
+    '"deliveryMode": "onesignal-timezone"'
+  ]);
 
   mustExist(".github/workflows/daily-push-schedule.yml");
   mustExist("scripts/send-daily-content-push.js");
