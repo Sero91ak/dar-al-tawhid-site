@@ -111,6 +111,7 @@ const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
 // Sofort prüfen, dann gestaffelt nachziehen — nicht erst 30s warten (Admin-Retry hing sonst).
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 15000, 30000, 60000, 120000, 180000, 240000, 300000];
 const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 8000];
+const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -1186,7 +1187,12 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       targetUrl: buildPostPushUrl(env, postId, Date.now())
     };
     if (ctx && postId) {
-      ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
+      ctx.waitUntil((async () => {
+        const quick = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
+        if (!quick.sent && quick.pending) {
+          await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
+        }
+      })());
     }
   }
 
@@ -2641,7 +2647,12 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
 }
 
 async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {}) {
-  const delays = schedule === "quick" ? LIVE_CHECK_SCHEDULE_QUICK_MS : LIVE_CHECK_SCHEDULE_FULL_MS;
+  const delays =
+    schedule === "quick"
+      ? LIVE_CHECK_SCHEDULE_QUICK_MS
+      : schedule === "cron"
+        ? LIVE_CHECK_SCHEDULE_CRON_MS
+        : LIVE_CHECK_SCHEDULE_FULL_MS;
   let lastResult = null;
   let elapsed = 0;
 
@@ -2719,7 +2730,12 @@ async function claimPendingPushSend(env, postId) {
 async function processPendingPushUntilLive(env, record, options = {}) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
-  const schedule = options.schedule === "quick" || options.singleCheck ? "quick" : "full";
+  const schedule =
+    options.schedule === "quick" || options.singleCheck
+      ? "quick"
+      : options.schedule === "cron"
+        ? "cron"
+        : "full";
 
   const registry = await readPendingPushesRegistry(env);
   assertPendingPushesRegistryReadable(registry);
@@ -2816,7 +2832,7 @@ async function processAllPendingPushes(env) {
   for (const record of pending) {
     const handler = record?.kind === "library"
       ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
-      : () => processPendingPushUntilLive(env, record, { schedule: "quick" });
+      : () => processPendingPushUntilLive(env, record, { schedule: "cron" });
     results.push(await handler());
   }
   return { processed: pending.length, results };
