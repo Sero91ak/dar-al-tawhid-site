@@ -141,7 +141,9 @@ function sleep(ms) {
   const files = [
     `${SITE_URL}/`,
     `${SITE_URL}/index.html`,
+    `${SITE_URL}/test/`,
     `${SITE_URL}/test/index.html`,
+    `${SITE_URL}/test/version.json`,
     `${SITE_URL}/version.json`,
     `${SITE_URL}/service-worker.js`,
     `${SITE_URL}/content/updates/current.json`,
