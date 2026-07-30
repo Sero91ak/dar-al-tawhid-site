@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-07-30T09:49:04.345Z",
+  "generated": "2026-07-30T09:49:05.622Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -8,10 +8,10 @@
       "postTitle": "Wahrer Īmān zeigt sich in den Taten",
       "publishedAt": "2026-07-30T09:49:01.601Z",
       "postPath": "content/posts/aqidah-452-wahrer-iman-zeigt-sich-in-den-taten.md",
-      "status": "sending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-07-30T09:49:01.796Z",
-      "updatedAt": "2026-07-30T09:49:04.345Z",
+      "updatedAt": "2026-07-30T09:49:05.622Z",
       "lastCheckAt": "2026-07-30T09:49:03.180Z",
       "liveCheck": {
         "ok": true,
@@ -37,7 +37,12 @@
       },
       "attempts": 1,
       "lastError": "",
-      "sendingAt": "2026-07-30T09:49:04.345Z"
+      "sendingAt": "2026-07-30T09:49:04.345Z",
+      "sentAt": "2026-07-30T09:49:05.403Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:25",
+        "targetUrl": "https://dar-al-tawhid.de/?post=wahrer-iman-zeigt-sich-in-den-taten-452&v=1785404945236#post/wahrer-iman-zeigt-sich-in-den-taten-452"
+      }
     }
   }
 }
