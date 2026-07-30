@@ -816,7 +816,11 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(runScheduledPublishes(env));
-    ctx.waitUntil(processAllPendingPushes(env));
+    try {
+      await processAllPendingPushes(env);
+    } catch (error) {
+      console.error("processAllPendingPushes cron failed:", error?.message || error);
+    }
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureZakatPricesFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }));
@@ -2830,10 +2834,15 @@ async function processAllPendingPushes(env) {
   }).slice(0, Number(env.PENDING_PUSH_CRON_BATCH_SIZE || 5));
   const results = [];
   for (const record of pending) {
-    const handler = record?.kind === "library"
-      ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
-      : () => processPendingPushUntilLive(env, record, { schedule: "cron" });
-    results.push(await handler());
+    try {
+      const handler = record?.kind === "library"
+        ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
+        : () => processPendingPushUntilLive(env, record, { schedule: "cron" });
+      results.push(await handler());
+    } catch (error) {
+      console.error(`Pending push failed for ${record?.postId || record?.publicationId || "?"}:`, error?.message || error);
+      results.push({ sent: false, reason: error?.message || String(error) });
+    }
   }
   return { processed: pending.length, results };
 }
