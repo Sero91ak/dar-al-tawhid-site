@@ -88,6 +88,7 @@ import {
   sendLibraryPublicationPush,
   LIBRARY_PUSH_DELAY_AFTER_LIVE_MS
 } from "./library-push-admin.js";
+import { sendNewPostPush } from "./post-push-admin.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -1171,6 +1172,8 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       postPath,
       status: "pending",
       createdAt: publishedAt,
+      pushApproved: true,
+      pushApprovedAt: publishedAt,
       lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     if (postId) await writePendingPushStatus(env, postId, pendingRecord);
@@ -1314,6 +1317,8 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
       postPath: lastPost.postPath,
       status: "pending",
       createdAt: publishedAt,
+      pushApproved: true,
+      pushApprovedAt: publishedAt,
       lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     await writePendingPushStatus(env, lastPost.postId, pendingRecord);
@@ -2516,8 +2521,7 @@ async function writePendingPushStatus(env, postId, patch) {
 function isPostPushApproved(item) {
   if (!item) return false;
   if (item.kind === "library") return item.pushApproved === true;
-  if (Object.prototype.hasOwnProperty.call(item, "pushApproved")) return item.pushApproved === true;
-  return true;
+  return item.pushApproved === true;
 }
 
 function diagnoseLiveFailure(steps, live = {}) {
@@ -2935,10 +2939,35 @@ async function retryPendingPostPush(env, input, ctx) {
     postTitle: existing?.postTitle || postTitle,
     publishedAt: existing?.publishedAt || publishedAt,
     postPath: existing?.postPath || postPath,
-    status: "pending"
+    status: "pending",
+    pushApproved: true,
+    pushApprovedAt: new Date().toISOString()
   };
+
+  const liveProbe = await fetchLiveResources(env, { filename: record.filename, postId, postPath: record.postPath });
+  if (!liveProbe.postInIndex || !liveProbe.postFilePublic) {
+    const liveCheck = buildLiveCheckResult({ postCreated: true, indexUpdated: true }, liveProbe, 1);
+    return {
+      ok: true,
+      postId,
+      filename: record.filename,
+      liveCheck,
+      push: {
+        sent: false,
+        pending: true,
+        reason: "Beitrag ist noch nicht online – zuerst „Online veröffentlichen“, dann Push erneut prüfen.",
+        waitingForLive: true
+      }
+    };
+  }
+
   if (existing?.status !== "pending" && existing?.status !== "sending") {
     await writePendingPushStatus(env, postId, record);
+  } else {
+    await writePendingPushStatus(env, postId, {
+      pushApproved: true,
+      pushApprovedAt: record.pushApprovedAt
+    });
   }
 
   // Admin-Request: nur Quick-Check (max ~8s). Lange Wartezeit läuft im Hintergrund.
@@ -2953,100 +2982,6 @@ async function retryPendingPostPush(env, input, ctx) {
     liveCheck: push.liveCheck || null,
     push
   };
-}
-async function sendNewPostPush(env, { postTitle, postId, filename, publishedAt, cacheVersion }) {
-  const apiKey = oneSignalApiKey(env);
-  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  if (!apiKey) {
-    return { sent: false, reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)" };
-  }
-
-  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
-  const title = "Neuer Beitrag online";
-  const message = String(postTitle || "Neuer Beitrag").trim();
-  const slug = String(postId || "").trim();
-  const version = cacheVersion || Date.now();
-  const url = slug ? buildPostPushUrl(env, slug, version) : `${site}/#recent`;
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
-  const pushData = {
-    type: "post",
-    postId: slug,
-    slug,
-    filename: String(filename || "").trim(),
-    url,
-    publishedAt: publishedAt || new Date().toISOString(),
-    cacheVersion: String(version)
-  };
-
-  const basePayload = {
-    app_id: appId,
-    target_channel: "push",
-    headings: { en: title, de: title },
-    contents: { en: message, de: message },
-    url,
-    data: pushData,
-    chrome_web_icon: icon,
-    chrome_web_badge: badge,
-    firefox_icon: icon,
-    name: `admin-publish-${Date.now()}`
-  };
-
-  const attempts = [
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
-  ];
-
-  let lastError = "Unbekannter Fehler";
-
-  for (const payload of attempts) {
-    for (const authMode of ["Key", "Basic"]) {
-      try {
-        const res = await fetch("https://api.onesignal.com/notifications", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            Authorization: `${authMode} ${apiKey}`
-          },
-          body: JSON.stringify(payload)
-        });
-        const text = await res.text();
-        if (res.ok) {
-          const accepted = parseOneSignalAcceptedRecipients(text);
-          if (accepted !== null && accepted <= 0) {
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
-            continue;
-          }
-          return {
-            sent: true,
-            target: payload.included_segments?.[0] || "tag-filter",
-            authMode,
-            targetUrl: url,
-            data: pushData,
-            recipients: accepted,
-            response: text.slice(0, 400)
-          };
-        }
-        if (res.status === 400 || res.status === 401 || res.status === 403) {
-          lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
-          continue;
-        }
-        lastError = `OneSignal ${res.status}: ${text.slice(0, 240)}`;
-      } catch (error) {
-        lastError = error.message || String(error);
-      }
-    }
-  }
-
-  return { sent: false, reason: lastError };
 }
 
 function newsPushBody(text) {
