@@ -1420,7 +1420,7 @@ function renderPublishTracker(filterType){
     <div class="publish-step-grid">${(track.steps||[]).map(s=>`<div class="publish-step" data-state="${esc(s.state||"wait")}"><span class="publish-step-dot"></span><div><b>${esc(s.label)}</b><small>${esc(publishStateLabel(s.state))}${s.note?` · ${esc(s.note)}`:""}</small></div></div>`).join("")}</div>
     ${(track.items||[]).length?`<div class="upload-status" style="margin-top:9px">${track.items.slice(0,8).map(item=>`${esc(item.title||item.filename)}: <strong>${esc(item.status||"ok")}</strong>`).join("<br>")}${track.items.length>8?`<br>… +${track.items.length-8} weitere`:""}</div>`:""}
     ${track.error?`<div class="upload-status" style="margin-top:9px;color:#ffb8b8">Fehler: ${esc(track.error)}</div>`:""}
-    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button" title="Nur für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push für letzten Beitrag prüfen</button></div>
+    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button" title="Sendet Push für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push senden · Live prüfen</button></div>
   </div>`;
 }
 async function verifyPublishedPost(filename,postId){
@@ -2791,7 +2791,7 @@ function renderActions(rows){
               <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
               <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
               <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-              <button class="btn" id="adminRetryPushBtn" type="button" title="Nur für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push für letzten Beitrag prüfen</button>
+              <button class="btn" id="adminRetryPushBtn" type="button" title="Sendet Push für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push senden · Live prüfen</button>
             </div>
           </div>
           <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown einfügen, optional PDF/Bild anhängen, dann bewusst veröffentlichen."}</div>
@@ -3580,7 +3580,7 @@ async function retryLivePush(){
     setUploadStatus(`Push-Retry fehlgeschlagen: ${esc(e.message||e)}`);
     toast(e.message||"Push-Retry fehlgeschlagen");
   }finally{
-    if(btn){btn.disabled=false;btn.textContent="Push für letzten Beitrag prüfen"}
+    if(btn){btn.disabled=false;btn.textContent="Push senden · Live prüfen"}
   }
 }
 async function prepareNextPostNumber(){
@@ -3623,7 +3623,7 @@ async function uploadPostViaWorker(){
     let markdown=normalizeMarkdownForUpload(draftMarkdown,next);
     const postId=frontmatterValue(markdown,"id")||draftFilename.replace(/\.md$/i,"");
     const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
-    const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nTitel: ${postTitle}\nDatei: ${draftFilename}\nPush-ID: ${postId}\n\nDer Push geht an genau diesen Beitrag.\n„Push für letzten Beitrag prüfen“ sendet NICHT diesen Entwurf.`);
+    const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nTitel: ${postTitle}\nDatei: ${draftFilename}\nPush-ID: ${postId}\n\nDer Push an alle Nutzer wird automatisch gesendet, sobald der Beitrag live ist.`);
     if(!ok){finishPublishTrack("error","Veröffentlichung abgebrochen");setUploadStatus("Veröffentlichung abgebrochen.");uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Online veröffentlichen"}return}
     if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,postTitle,"draft",{sourceQueue:sourceUploadQueue});
     const sourceCheck=validateBeforeSourceSave("draft");
@@ -3667,7 +3667,23 @@ async function uploadPostViaWorker(){
     updatePublishStep("indexContains",live.index?"ok":"error",live.index?"Datei im Index":"Noch nicht im öffentlichen Index");
     updatePublishStep("fileLive",live.file?"ok":"error",live.file?"Datei erreichbar":live.reason||"Datei noch nicht erreichbar");
     updatePublishStep("urlLive",live.url?"ok":"skip",live.url?"Besucher-Link vorbereitet":"Besucher-Link wartet auf Index/Datei");
-    const push=result.push||null;
+    let push=result.push||null;
+    if(push?.pending&&live.file&&live.index){
+      updatePublishStep("pushReady","run","Beitrag live – sende Push …");
+      try{
+        const retryResult=await workerPostRequest("api/admin/push/retry",{
+          filename:uploadedFilename,
+          postId:uploadedPostId,
+          postTitle:frontmatterValue(markdown,"title")||preview.title||"Beitrag",
+          markdown,
+          forceResend:false
+        });
+        push={...(retryResult.push||{}),pending:!(retryResult.push?.sent||retryResult.skipped),sent:!!(retryResult.push?.sent||retryResult.sent),reason:retryResult.push?.reason||retryResult.reason||push.reason,targetUrl:retryResult.push?.targetUrl||push.targetUrl};
+        saveLastPublishPushContext({filename:uploadedFilename,number:uploadedNumber,postId:uploadedPostId,postTitle:frontmatterValue(markdown,"title")||preview.title||"Beitrag",markdown,commitSha:result.commitSha||"",pushSent:!!push.sent});
+      }catch(e){
+        addAdminLog("Push","Auto-Push nach Live-Prüfung fehlgeschlagen",String(e.message||e));
+      }
+    }
     updatePublishStep("pushReady",push?"ok":"skip",push?"Push-Antwort vom Worker":"Kein Push-Status vom Worker");
     updatePublishStep("onesignal",push?.pending?"skip":push?(push.sent||push.reason||push.message?"ok":"skip"):"skip",push?.pending?"Wartet auf stabile Live-Prüfung":push?(push.sent?"API erfolgreich":String(push.reason||push.message||"Status unklar")):"Nicht gemeldet");
     updatePublishStep("pushSent",push?.pending?"skip":push&&push.sent?"ok":"error",push?.pending?"Wird automatisch gesendet, sobald der Beitrag stabil online ist":push&&push.sent?`ID ${push.id||"ok"}`:String(push?.reason||push?.message||"Push nicht gesendet"));
@@ -3675,7 +3691,7 @@ async function uploadPostViaWorker(){
     updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live (Hintergrund)":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     // Beitrag erstellt + Push im Hintergrund = kein „Fehler“-Status (hängte die UI sonst als Fehler fest)
     finishPublishTrack(live.file||push?.pending||result.commitSha?"ok":"error",live.file||push?.pending||result.commitSha?"":live.reason||"Live-Datei noch nicht erreichbar");
-    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(result.push)}${push?.pending?"<br><span style=\"color:#f0d98f\">Push läuft im Hintergrund – Button blockiert die Seite nicht mehr.</span>":""}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
+    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(push||result.push)}${push?.pending?"<br><span style=\"color:#f0d98f\">Push wartet noch – bitte „Push senden · Live prüfen“ klicken (nur für diesen Beitrag).</span>":""}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
     draftMarkdown="";
     draftFilename="";
