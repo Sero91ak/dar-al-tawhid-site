@@ -347,6 +347,19 @@ async function writeStatusGithub(env, report, deps) {
   const path = env.JUMMAH_STATUS_PATH || DEFAULT_JUMMAH_STATUS_PATH;
   try {
     const existing = await deps.githubGet(env, owner, repo, path, branch);
+    let existingData = null;
+    try {
+      existingData = existing?.content ? JSON.parse(existing.content) : null;
+    } catch (_) {}
+    const strip = (value) => {
+      const copy = { ...(value || {}) };
+      delete copy.updatedAt;
+      delete copy.statusWrite;
+      return JSON.stringify(copy);
+    };
+    if (existingData && strip(existingData) === strip(report)) {
+      return { saved: false, skipped: true, path };
+    }
     await deps.githubPut(env, owner, repo, path, `${JSON.stringify(report, null, 2)}\n`, `Jumuʿah push ${report.updatedAt}`, branch, existing?.sha);
     return { saved: true, path };
   } catch (err) {

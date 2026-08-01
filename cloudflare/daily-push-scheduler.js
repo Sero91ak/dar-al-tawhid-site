@@ -273,6 +273,22 @@ export async function regenerateDailyContent(env, deps, dateKey, timeZone = "Eur
     }
   } catch (_) {}
 
+  if (!dua?.id) {
+    try {
+      const duas = await fetchJsonUrl(`${origin}/content/duas/duas.json?v=${Date.now()}`);
+      const items = Array.isArray(duas) ? duas : [];
+      if (items.length) {
+        const item = items[Math.abs(dayIndex) % items.length];
+        dua = {
+          id: item.id,
+          title: item.title || "Duʿāʾ des Tages",
+          snippet: String(item.de || item.snippet || "").trim(),
+          category: item.category || item.cat || ""
+        };
+      }
+    } catch (_) {}
+  }
+
   if (!recommendation && !dua) return null;
   const data = {
     date: dateKey,
@@ -472,6 +488,17 @@ export function readDailyPushStatusFromKv() {
   return lastDailyStatusReport;
 }
 
+function githubStatusUnchanged(existingData, nextStatus) {
+  if (!existingData || typeof existingData !== "object") return false;
+  const strip = (value) => {
+    const copy = { ...(value || {}) };
+    delete copy.updatedAt;
+    delete copy.statusWrite;
+    return JSON.stringify(copy);
+  };
+  return strip(existingData) === strip(nextStatus);
+}
+
 async function writeStatusGithub(env, status, deps) {
   if (!deps?.githubPut || !deps?.githubGet) return { saved: false };
   const owner = env.GITHUB_OWNER || "Sero91ak";
@@ -480,6 +507,13 @@ async function writeStatusGithub(env, status, deps) {
   const path = env.DAILY_PUSH_STATUS_PATH || DEFAULT_DAILY_STATUS_PATH;
   try {
     const existing = await deps.githubGet(env, owner, repo, path, branch);
+    let existingData = null;
+    try {
+      existingData = existing?.content ? JSON.parse(existing.content) : null;
+    } catch (_) {}
+    if (githubStatusUnchanged(existingData, status)) {
+      return { saved: false, skipped: true, path };
+    }
     await deps.githubPut(env, owner, repo, path, `${JSON.stringify(status, null, 2)}\n`, `Daily push ${status.updatedAt}`, branch, existing?.sha);
     return { saved: true, path };
   } catch (error) {

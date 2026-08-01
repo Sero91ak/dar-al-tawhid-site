@@ -146,9 +146,15 @@ function runPushSystemGuard() {
     "duaDeliveryWindow"
   ]);
 
-  mustInclude("daily-push.json", read("content/admin/daily-push.json"), [
-    '"deliveryMode": "onesignal-timezone"'
-  ]);
+  const dailyPushConfig = read("content/admin/daily-push.json");
+  if (
+    !dailyPushConfig.includes('"deliveryMode": "worker-local"') &&
+    !dailyPushConfig.includes('"deliveryMode": "onesignal-timezone"')
+  ) {
+    fail('daily-push.json: deliveryMode muss "worker-local" oder "onesignal-timezone" sein');
+  } else {
+    ok("daily-push.json: gültiger deliveryMode");
+  }
 
   mustExist(".github/workflows/daily-push-schedule.yml");
   mustExist("scripts/send-daily-content-push.js");

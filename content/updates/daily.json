@@ -1,15 +1,38 @@
 {
   "date": "2026-08-01",
   "timezone": "Europe/Berlin",
-  "generated": "2026-07-31T22:00:51.506Z",
-  "source": "dar-daily-scheduler-regenerated-v4",
+  "generated": "2026-08-01T08:00:51.385Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "athar-widerlegung-wissen-ist-nicht-von-ahl-al-ahwa-zu-nehmen-318",
-    "title": "Athar-Widerlegung: Wissen ist nicht von Ahl al-Ahwāʾ zu nehmen",
-    "file": "athar-widerlegung-wissen-ist-nicht-von-ahl-al-ahwa-zu-nehmen-318.md",
-    "category": "Widerlegung",
-    "scholar": "Ibn Sīrīn",
-    "snippet": "„Ibn Sīrīn sagte: „Früher fragte man nicht nach dem Isnād. Als die Fitnah eintrat, sagte man: Nennt uns eure Männer.““"
+    "id": "hukm-muhakamah-richter-braucht-istighfar-415",
+    "title": "Auch im Urteil braucht der Diener Istighfār",
+    "file": "hukm-muhakamah-richter-braucht-istighfar-415.md",
+    "category": "Hukm & Muḥākamah",
+    "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
+    "snippet": "🖋️ Allah ʿazza wa jalla:"
   },
-  "dua": null
+  "dua": {
+    "id": "dua-003-la-tuakhidhna",
+    "title": "Unser Herr, nimm uns nicht für Vergessen und Fehler zur Rechenschaft",
+    "snippet": "Unser Herr, nimm uns nicht zur Rechenschaft, wenn wir vergessen oder Fehler machen.",
+    "category": "Vergebung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 453,
+      "remaining": 447
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 90,
+      "remaining": 85,
+      "sources": {
+        "markdown": 90,
+        "total": 90,
+        "poolSize": 90,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
+  }
 }
