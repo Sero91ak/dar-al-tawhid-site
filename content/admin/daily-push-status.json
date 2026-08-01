@@ -4,17 +4,17 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-01T08:00:51.184Z",
+  "updatedAt": "2026-08-01T08:05:51.185Z",
   "usersChecked": 10,
   "registrationsRead": 11,
   "uniqueSubscriptions": 10,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "duaCandidates": 0,
+  "duaCandidates": 10,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 10,
   "accepted": {
-    "dua": 0,
+    "dua": 10,
     "recommendation": 0
   },
   "invalidSubscriptionsDisabled": 0,
@@ -24,11 +24,15 @@
   "forceSend": null,
   "dailyContentDate": "2026-08-01",
   "currentRecommendation": {
-    "id": "athar-widerlegung-wissen-ist-nicht-von-ahl-al-ahwa-zu-nehmen-318",
-    "title": "Athar-Widerlegung: Wissen ist nicht von Ahl al-Ahwāʾ zu nehmen",
-    "category": "Widerlegung",
-    "scholar": "Ibn Sīrīn"
+    "id": "hukm-muhakamah-richter-braucht-istighfar-415",
+    "title": "Auch im Urteil braucht der Diener Istighfār",
+    "category": "Hukm & Muḥākamah",
+    "scholar": "aṭ-Ṭabarī / Ibn Kathīr"
   },
-  "currentDua": null,
+  "currentDua": {
+    "id": "dua-003-la-tuakhidhna",
+    "title": "Unser Herr, nimm uns nicht für Vergessen und Fehler zur Rechenschaft",
+    "category": "Vergebung"
+  },
   "configAutomatic": true
 }
