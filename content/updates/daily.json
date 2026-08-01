@@ -1,38 +1,15 @@
 {
-  "date": "2026-08-01",
+  "date": "2026-08-02",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-01T08:00:51.385Z",
-  "source": "dar-daily-no-repeat-rotation",
+  "generated": "2026-08-01T22:00:59.654Z",
+  "source": "dar-daily-scheduler-regenerated-v4",
   "recommendation": {
-    "id": "hukm-muhakamah-richter-braucht-istighfar-415",
-    "title": "Auch im Urteil braucht der Diener Istighfār",
-    "file": "hukm-muhakamah-richter-braucht-istighfar-415.md",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
-    "snippet": "🖋️ Allah ʿazza wa jalla:"
+    "id": "der-beste-unterricht-ist-quran-lernen-und-lehren-183",
+    "title": "Der beste Unterricht ist Qurʾān lernen und lehren",
+    "file": "der-beste-unterricht-ist-quran-lernen-und-lehren-183.md",
+    "category": "Tarbiyyah",
+    "scholar": "ʿUthmān b. ʿAffān",
+    "snippet": "„Die Besten von euch sind diejenigen, die den Qurʾān lernen und ihn lehren.“"
   },
-  "dua": {
-    "id": "dua-003-la-tuakhidhna",
-    "title": "Unser Herr, nimm uns nicht für Vergessen und Fehler zur Rechenschaft",
-    "snippet": "Unser Herr, nimm uns nicht zur Rechenschaft, wenn wir vergessen oder Fehler machen.",
-    "category": "Vergebung"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 453,
-      "remaining": 447
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 90,
-      "remaining": 85,
-      "sources": {
-        "markdown": 90,
-        "total": 90,
-        "poolSize": 90,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
-  }
+  "dua": null
 }
