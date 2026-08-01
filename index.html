@@ -5,11 +5,11 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v482";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v483";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
-<script defer src="https://cdn.jsdelivr.net/gh/Sero91ak/dar-al-tawhid-site@main/assets/live-boot.js"></script>
+<script defer src="/assets/live-boot.js?v=483"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
 <title>DAR AL TAWḤID</title>
@@ -9439,8 +9439,8 @@ OneSignalDeferred.push(async function(OneSignal){
   window.DAR_ONE_SIGNAL_READY=true;
   try{await ensurePushUserLogin(OneSignal)}catch(e){}
   try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationOnly().catch(()=>{});try{refreshPushConnectionStatusUI()}catch(e){}try{updatePushFloatButton()}catch(e){}})}catch(e){}
-  try{if(getPrayerSettings().reminder)await syncPrayerPushTags()}catch(e){}
-  try{startPushHealthMonitor()}catch(e){}
+  try{if(getPrayerSettings().reminder)syncPrayerPushTags().catch(()=>{})}catch(e){}
+  try{setTimeout(function(){try{startPushHealthMonitor()}catch(e){}},8000)}catch(e){}
   try{updatePushFloatButton()}catch(e){}
   try{
     OneSignal.Notifications?.addEventListener?.("click",(event)=>{
@@ -9485,13 +9485,14 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-pdf.js?v=4" defer></script>
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
-<script src="/assets/html2canvas.min.js"></script>
+<script src="/assets/html2canvas.min.js" defer></script>
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
-<script src="/assets/app-scroll-manager.js?v=1"></script>
+<script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=2">
 
@@ -17286,7 +17287,7 @@ async function flushOfflineQueue(){
   setJson("darOfflineQueueCountV1",keep.length);
   return keep.length===0;
 }
-async function initOfflineEngine(){readOfflinePrepState();repairOfflinePrepState();await offlineDbSet("meta","versions",{appVersion:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",databaseSchemaVersion:OFFLINE_DB_VERSION,updatedAt:new Date().toISOString()});if("serviceWorker" in navigator&&!window.__darOfflineMessageBound){window.__darOfflineMessageBound=true;navigator.serviceWorker.addEventListener("message",(ev)=>handleOfflineWorkerMessage(ev.data||{}));try{const reg=await navigator.serviceWorker.ready;reg.active?.postMessage({type:"OFFLINE_PREPARE_STATUS"})}catch(e){}}offlinePrepFinalizeIfComplete();if(navigator.onLine){flushOfflineQueue().catch(()=>{});if(offlinePrepShouldResume()&&!window.__darOfflineAutoResumeStarted){window.__darOfflineAutoResumeStarted=true;setTimeout(()=>startOfflinePreparation(true).catch(()=>{}),1800)}}updateOfflineBox();}
+async function initOfflineEngine(){readOfflinePrepState();repairOfflinePrepState();await offlineDbSet("meta","versions",{appVersion:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",databaseSchemaVersion:OFFLINE_DB_VERSION,updatedAt:new Date().toISOString()});if("serviceWorker" in navigator&&!window.__darOfflineMessageBound){window.__darOfflineMessageBound=true;navigator.serviceWorker.addEventListener("message",(ev)=>handleOfflineWorkerMessage(ev.data||{}));try{navigator.serviceWorker.ready.then(reg=>reg.active?.postMessage({type:"OFFLINE_PREPARE_STATUS"})).catch(()=>{})}catch(e){}}offlinePrepFinalizeIfComplete();if(navigator.onLine){flushOfflineQueue().catch(()=>{});if(offlinePrepShouldResume()&&!window.__darOfflineAutoResumeStarted){window.__darOfflineAutoResumeStarted=true;setTimeout(()=>startOfflinePreparation(true).catch(()=>{}),8000)}}updateOfflineBox();}
 function searchMatchLabel(post,q){
   if(!q)return "";
   const checks=[["Titel",post.title],["Quelle",post.source],["Zitat",post.statement],["Gelehrter",post.scholar],["Buch",post.book]];
@@ -20008,7 +20009,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v482";
+const APP_BUILD_ID="app-shell-v483";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -20994,45 +20995,54 @@ function initFloatTouchbar(){
 }
 window.addEventListener("DOMContentLoaded",()=>{
   try{
-    if("scrollRestoration" in history)history.scrollRestoration="manual";
-    migrateTopicsScrollKey();
-    window.DARScrollManager?.init?.({saveNavScroll,getNavScroll,getCurrentRoute:()=>currentRoute});
-    cleanRefreshQueryParam();
     ensureBottomNavDock();
     if(!appBootHydrated){
       appBootHydrated=true;
       try{hydrateOfflineContent()}catch(e){console.warn("Offline-Inhalte konnten nicht vorbereitet werden:",e)}
-      initFontSettings();
-      ensureCanonicalSourceLibrary().catch(()=>{});
+      initTheme();
       render();
     }
-    restoreStatsAuth();
-    initTheme();
-    initFontSettings();
-    applyStandalonePwaClass();
-    trackStandaloneInstallIfNeeded();
-    initAndroidTapCleanup();
-    initAppZoomLock();
-    bindBottomNav();
-    initBottomNavSwipe();
-    initBottomNavContentSwipe();
-    initBottomNavGuard();
-    initQuickAccessMenu();
-    initFloatTouchbar();
-    initQuranWakeLock();
-    updateHijriHeaderDate();
-    updateHeaderPrayerStatus();
-    requestAnimationFrame(updateBottomNavPill);
-    window.addEventListener("resize",updateBottomNavPill,{passive:true});
-    window.addEventListener("resize",syncIlmViewport,{passive:true});
-    if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
-    if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
-    const qiblaFloatBtn=$("qiblaFloat");
-    if(qiblaFloatBtn)qiblaFloatBtn.onclick=()=>{markFloatTouchbarActivated();openQiblaFromFloat()};
-    const savedFloatBtn=$("savedFloat");
-    if(savedFloatBtn)savedFloatBtn.onclick=()=>{markFloatTouchbarActivated();navigate("saved")};
-    setTimeout(showFloatTipsOnce,900);
-    window.addEventListener("pageshow",e=>{ensureBottomNavDock();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>ensureBottomNavDock())},{passive:true});
+    const finishAppBoot=()=>{
+      try{
+        if("scrollRestoration" in history)history.scrollRestoration="manual";
+        migrateTopicsScrollKey();
+        window.DARScrollManager?.init?.({saveNavScroll,getNavScroll,getCurrentRoute:()=>currentRoute});
+        cleanRefreshQueryParam();
+        ensureBottomNavDock();
+        restoreStatsAuth();
+        initFontSettings();
+        ensureCanonicalSourceLibrary().catch(()=>{});
+        applyStandalonePwaClass();
+        trackStandaloneInstallIfNeeded();
+        initAndroidTapCleanup();
+        initAppZoomLock();
+        bindBottomNav();
+        initBottomNavSwipe();
+        initBottomNavContentSwipe();
+        initBottomNavGuard();
+        initQuickAccessMenu();
+        initFloatTouchbar();
+        initQuranWakeLock();
+        updateHijriHeaderDate();
+        updateHeaderPrayerStatus();
+        requestAnimationFrame(updateBottomNavPill);
+        window.addEventListener("resize",updateBottomNavPill,{passive:true});
+        window.addEventListener("resize",syncIlmViewport,{passive:true});
+        if(window.visualViewport)window.visualViewport.addEventListener("resize",syncIlmViewport,{passive:true});
+        if(window.visualViewport)window.visualViewport.addEventListener("scroll",syncIlmViewport,{passive:true});
+        const qiblaFloatBtn=$("qiblaFloat");
+        if(qiblaFloatBtn)qiblaFloatBtn.onclick=()=>{markFloatTouchbarActivated();openQiblaFromFloat()};
+        const savedFloatBtn=$("savedFloat");
+        if(savedFloatBtn)savedFloatBtn.onclick=()=>{markFloatTouchbarActivated();navigate("saved")};
+        setTimeout(showFloatTipsOnce,900);
+        window.addEventListener("pageshow",e=>{ensureBottomNavDock();resetTabSwipePreview();if(e.persisted)requestAnimationFrame(()=>ensureBottomNavDock())},{passive:true});
+      }catch(e){
+        console.error("App-Start (deferred) fehlgeschlagen:",e);
+        renderAppRecovery(e,"App-Start");
+      }
+    };
+    if(typeof requestIdleCallback==="function")requestIdleCallback(finishAppBoot,{timeout:120});
+    else setTimeout(finishAppBoot,0);
   }catch(e){
     console.error("App-Start fehlgeschlagen:",e);
     renderAppRecovery(e,"App-Start");
@@ -21055,8 +21065,8 @@ window.addEventListener("load",()=>{
         if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);
       });
     }
-    loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()}).catch(e=>console.warn("Qurʾān-Index:",e));
-    Promise.resolve().then(()=>refreshContent({forceRender:false})).catch(e=>console.warn("Inhalte aktualisieren:",e));
+    setTimeout(()=>{loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()}).catch(e=>console.warn("Qurʾān-Index:",e))},1500);
+    setTimeout(()=>{Promise.resolve().then(()=>refreshContent({forceRender:false})).catch(e=>console.warn("Inhalte aktualisieren:",e))},400);
     if(!location.hash){
       location.hash="#home";
     }
