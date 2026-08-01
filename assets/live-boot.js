@@ -1,6 +1,6 @@
 /**
  * DAR AL TAWḤID — Boot: Cache-Update + Feed-Doppelheader + Chip-Pruning.
- * Wird über jsDelivr geladen (nicht über dar-al-tawhid.de gecacht).
+ * Lokal aus /assets/live-boot.js (kein CDN-Wartezeit).
  */
 (function () {
   "use strict";
@@ -9,6 +9,27 @@
     try {
       if (typeof console !== "undefined" && console.debug) console.debug("[dar-live-boot] " + context, err);
     } catch (_e) {}
+  }
+
+  var domWorkScheduled = false;
+  var domWorkQueue = [];
+
+  function scheduleDomWork(fn) {
+    domWorkQueue.push(fn);
+    if (domWorkScheduled) return;
+    domWorkScheduled = true;
+    var flush = function () {
+      domWorkScheduled = false;
+      var queue = domWorkQueue.slice();
+      domWorkQueue.length = 0;
+      queue.forEach(function (run) {
+        try {
+          run();
+        } catch (e) {}
+      });
+    };
+    if (typeof requestAnimationFrame === "function") requestAnimationFrame(flush);
+    else setTimeout(flush, 16);
   }
 
   if (typeof location === "undefined") return;
@@ -117,10 +138,14 @@
   }
 
   function bindFeedHeaderGuard() {
-    stripFeedDuplicateHeader();
-    window.addEventListener("hashchange", stripFeedDuplicateHeader);
+    scheduleDomWork(stripFeedDuplicateHeader);
+    window.addEventListener("hashchange", function () {
+      scheduleDomWork(stripFeedDuplicateHeader);
+    });
     if (document.documentElement) {
-      new MutationObserver(stripFeedDuplicateHeader).observe(document.documentElement, {
+      new MutationObserver(function () {
+        scheduleDomWork(stripFeedDuplicateHeader);
+      }).observe(document.documentElement, {
         childList: true,
         subtree: true
       });
@@ -247,7 +272,7 @@
         subtree: true
       });
     }
-    runVersionCheck();
+    setTimeout(runVersionCheck, 2500);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
