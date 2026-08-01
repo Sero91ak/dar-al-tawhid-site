@@ -1,0 +1,77 @@
+name: Deploy Dar Test App
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - index.html
+      - test/**
+      - assets/**
+      - content/**
+      - data/**
+      - admin/index.html
+      - admin/library-*.js
+      - admin/library-admin.css
+      - admin/quiz-stats-manager.js
+      - service-worker.js
+      - manifest*.json
+      - wrangler.test.toml
+      - cloudflare/test-app-worker.js
+      - scripts/cf-pages-build.js
+      - scripts/sync-app-build-ids.js
+      - scripts/overlay-test-staging-from-branch.js
+      - scripts/app-stability-guard.js
+      - scripts/app-stability-repair.js
+      - scripts/library-deploy-guard.js
+      - scripts/library-deploy-repair.js
+      - scripts/test-app-health-check.js
+      - scripts/verify-test-app-deploy.js
+      - package.json
+      - _headers
+      - .assetsignore
+      - .github/workflows/deploy-test-app.yml
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test-App Staging aus test-library-canonical übernehmen
+        run: |
+          git fetch origin test-library-canonical
+          node scripts/overlay-test-staging-from-branch.js
+          node scripts/app-stability-repair.js
+
+      - name: Build + Build-IDs synchronisieren
+        run: npm run build
+
+      - name: Dar Test Health Check
+        run: |
+          node scripts/test-app-health-check.js
+          node scripts/library-deploy-guard.js
+          node scripts/app-stability-guard.js
+
+      - name: Deploy Dar Test (separat)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy -c wrangler.test.toml
+
+      - name: Dar Test verifizieren
+        env:
+          SITE_URL: ${{ secrets.DAR_TEST_SITE_URL }}
+        run: node scripts/verify-test-app-deploy.js

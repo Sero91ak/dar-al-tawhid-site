@@ -2,6 +2,7 @@
 /* DAR AL TAWḤID – Cloudflare-Cache für live Besucher-App leeren (nach GitHub Pages Deploy). */
 
 const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\/$/, "");
+const PURGE_SCOPE = String(process.env.PURGE_SCOPE || "both").toLowerCase();
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
 const GLOBAL_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY || process.env.CLOUDFLARE_API_KEY || "";
 const GLOBAL_EMAIL = process.env.CLOUDFLARE_EMAIL || "";
@@ -97,10 +98,13 @@ async function setDevelopmentMode(zoneId, on) {
 async function verifyLiveHtml() {
   const rootBuild = process.env.EXPECT_BUILD_ROOT || process.env.EXPECT_BUILD || await readExpectedBuild("/version.json");
   const testBuild = process.env.EXPECT_BUILD_TEST || process.env.EXPECT_TEST_BUILD || await readExpectedBuild("/test/version.json");
-  const checks = [
-    { label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`, `${SITE_URL}/index.html`] },
-    { label: "Dar Test", expected: testBuild, urls: [`${SITE_URL}/test/`, `${SITE_URL}/test/index.html`] }
-  ];
+  const checks = [];
+  if (PURGE_SCOPE === "both" || PURGE_SCOPE === "visitor") {
+    checks.push({ label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`, `${SITE_URL}/index.html`] });
+  }
+  if (PURGE_SCOPE === "both" || PURGE_SCOPE === "test") {
+    checks.push({ label: "Dar Test", expected: testBuild, urls: [`${SITE_URL}/test/`, `${SITE_URL}/test/index.html`] });
+  }
   let allOk = true;
   for (const check of checks) {
     let ok = false;
@@ -141,7 +145,6 @@ function sleep(ms) {
   const files = [
     `${SITE_URL}/`,
     `${SITE_URL}/index.html`,
-    `${SITE_URL}/test/index.html`,
     `${SITE_URL}/version.json`,
     `${SITE_URL}/service-worker.js`,
     `${SITE_URL}/content/updates/current.json`,
@@ -152,6 +155,9 @@ function sleep(ms) {
     `${SITE_URL}/assets/focus-feed-app.js`,
     `${SITE_URL}/assets/live-boot.js`
   ];
+  if (PURGE_SCOPE === "both" || PURGE_SCOPE === "test") {
+    files.push(`${SITE_URL}/test/`, `${SITE_URL}/test/index.html`, `${SITE_URL}/test/version.json`);
+  }
   await purgeFiles(zoneId, files);
   await sleep(2500);
 

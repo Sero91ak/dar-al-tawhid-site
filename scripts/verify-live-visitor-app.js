@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\/$/, "");
+const VERIFY_SCOPE = String(process.env.VERIFY_SCOPE || "both").toLowerCase();
 const ROOT_DIR = path.join(__dirname, "..");
 const VISITOR_EXPECT_BUILD =
   process.env.EXPECT_BUILD ||
@@ -35,12 +36,19 @@ function checkHtml(label, html, res, expectedBuild) {
 }
 
 (async function main() {
-  const targets = [
-    { url: `${SITE_URL}/`, expected: VISITOR_EXPECT_BUILD },
-    { url: `${SITE_URL}/index.html`, expected: VISITOR_EXPECT_BUILD },
-    { url: `${SITE_URL}/test/`, expected: TEST_EXPECT_BUILD },
-    { url: `${SITE_URL}/test/index.html`, expected: TEST_EXPECT_BUILD }
-  ];
+  const targets = [];
+  if (VERIFY_SCOPE === "both" || VERIFY_SCOPE === "visitor") {
+    targets.push(
+      { url: `${SITE_URL}/`, expected: VISITOR_EXPECT_BUILD },
+      { url: `${SITE_URL}/index.html`, expected: VISITOR_EXPECT_BUILD }
+    );
+  }
+  if (VERIFY_SCOPE === "both" || VERIFY_SCOPE === "test") {
+    targets.push(
+      { url: `${SITE_URL}/test/`, expected: TEST_EXPECT_BUILD },
+      { url: `${SITE_URL}/test/index.html`, expected: TEST_EXPECT_BUILD }
+    );
+  }
   let allOk = true;
   for (const { url, expected } of targets) {
     const { res, html } = await fetchHtml(url);
