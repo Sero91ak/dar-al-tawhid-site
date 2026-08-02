@@ -2517,28 +2517,41 @@ async function writePendingPushStatus(env, postId, patch) {
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
   const path = pendingPushesPath(env);
-  const registry = await readPendingPushesRegistry(env);
-  const pushes = { ...(registry.pushes || {}) };
   const key = String(postId || "").trim();
   if (!key) return null;
-  pushes[key] = {
-    ...(pushes[key] || {}),
-    ...patch,
-    postId: key,
-    updatedAt: new Date().toISOString()
-  };
-  const payload = { version: 1, generated: new Date().toISOString(), pushes };
-  await githubPut(
-    env,
-    owner,
-    repo,
-    path,
-    `${JSON.stringify(payload, null, 2)}\n`,
-    `Update pending push ${key}`,
-    branch,
-    registry.sha
-  );
-  return pushes[key];
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      const registry = await readPendingPushesRegistry(env);
+      const pushes = { ...(registry.pushes || {}) };
+      pushes[key] = {
+        ...(pushes[key] || {}),
+        ...patch,
+        postId: key,
+        updatedAt: new Date().toISOString()
+      };
+      const payload = { version: 1, generated: new Date().toISOString(), pushes };
+      await githubPut(
+        env,
+        owner,
+        repo,
+        path,
+        `${JSON.stringify(payload, null, 2)}\n`,
+        `Update pending push ${key}`,
+        branch,
+        registry.sha
+      );
+      return pushes[key];
+    } catch (error) {
+      lastError = error;
+      const status = Number(error?.status || 0);
+      if (status !== 409 && status !== 422) throw error;
+      await sleep(250 * attempt);
+    }
+  }
+
+  throw lastError || httpError(`Pending push update für ${key} fehlgeschlagen`, 500);
 }
 
 function isPostPushApproved(item) {
@@ -2573,7 +2586,7 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     visitorUrlOk: !!live.visitorUrlOk,
     cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
   };
-  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
+  const ok = steps.postInIndex && steps.postFilePublic;
   const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
   return {
     ok,
@@ -2644,6 +2657,35 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
       if (!navRes.ok) result.visitorHttpStatus = navRes.status;
     } catch (error) {
       result.visitorError = error.message || String(error);
+    }
+  }
+
+  if ((!result.postInIndex || !result.postFilePublic) && String(env.GITHUB_TOKEN || "").trim()) {
+    try {
+      const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+      const repo = env.GITHUB_REPO || DEFAULT_REPO;
+      const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+      if (!result.postInIndex) {
+        const indexFile = await githubGet(env, owner, repo, `${postsDir}/posts-index.json`, branch);
+        if (indexFile?.content) {
+          const indexData = JSON.parse(base64ToUtf8(indexFile.content));
+          result.indexGenerated = indexData.generated || result.indexGenerated;
+          result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || result.indexCount;
+          const files = listPostFiles(indexData.files || []);
+          result.postInIndex = files.some((file) => file.name === filename)
+            || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
+          if (result.postInIndex) result.githubIndexVerified = true;
+        }
+      }
+      if (!result.postFilePublic && postPath) {
+        const ghPost = await githubGet(env, owner, repo, postPath, branch);
+        if (ghPost?.content) {
+          result.postFilePublic = true;
+          result.githubPostVerified = true;
+        }
+      }
+    } catch (error) {
+      result.githubVerifyError = error.message || String(error);
     }
   }
 
@@ -2995,23 +3037,6 @@ async function retryPendingPostPush(env, input, ctx) {
     pushApprovedAt: new Date().toISOString()
   };
 
-  const liveProbe = await fetchLiveResources(env, { filename: record.filename, postId, postPath: record.postPath });
-  if (!liveProbe.postInIndex || !liveProbe.postFilePublic) {
-    const liveCheck = buildLiveCheckResult({ postCreated: true, indexUpdated: true }, liveProbe, 1);
-    return {
-      ok: true,
-      postId,
-      filename: record.filename,
-      liveCheck,
-      push: {
-        sent: false,
-        pending: true,
-        reason: "Beitrag ist noch nicht online – zuerst „Online veröffentlichen“, dann Push erneut prüfen.",
-        waitingForLive: true
-      }
-    };
-  }
-
   if (existing?.status !== "pending" && existing?.status !== "sending" && existing?.status !== "sent") {
     await writePendingPushStatus(env, postId, record);
   } else if (existing?.status !== "sent") {
@@ -3021,8 +3046,8 @@ async function retryPendingPostPush(env, input, ctx) {
     });
   }
 
-  // Admin-Request: nur Quick-Check (max ~8s). Lange Wartezeit läuft im Hintergrund.
-  const push = await processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "quick", singleCheck: true });
+  // Admin-Retry: längere Live-Prüfung (cron), danach volle Hintergrund-Wartezeit
+  const push = await processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "cron", singleCheck: false });
   if (ctx && push?.pending) {
     ctx.waitUntil(processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "full" }));
   }
