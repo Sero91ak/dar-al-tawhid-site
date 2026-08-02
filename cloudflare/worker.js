@@ -73,6 +73,8 @@ import {
   blockFeedBackgroundImage
 } from "./feed-backgrounds-sync.js";
 export { PrayerStatusStore } from "./prayer-status-store.js";
+export { VideoStudioStore } from "./video-studio/job-store.js";
+import { handleVideoStudioRequest, resumeStuckVideoStudioJobs } from "./video-studio/index.js";
 import {
   readLibraryCatalog,
   saveLibraryPublication,
@@ -142,8 +144,23 @@ export default {
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
           jummahPushCron: "*/5 * * * *",
+          videoStudioStore: Boolean(env.VIDEO_STUDIO_STORE),
+          videoStudioR2: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
+          videoStudioFal: Boolean(String(env.FAL_KEY || env.FAL_API_KEY || "").trim()),
+          videoStudioVoice: Boolean(String(env.ELEVENLABS_API_KEY || "").trim() && String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "").trim()),
           scheduler: "ready"
         }, cors);
+      }
+
+      // DAR KI-Video-Studio (Admin only, staging-first; no visitor push)
+      if (url.pathname.startsWith("/api/admin/video-studio")) {
+        assertConfigured(env);
+        const videoResponse = await handleVideoStudioRequest(request, env, ctx, {
+          cors,
+          assertAuthorized,
+          helpers: { githubGet, githubPut, githubCommitBatch, base64ToUtf8, utf8ToBase64 }
+        });
+        if (videoResponse) return videoResponse;
       }
 
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
@@ -825,6 +842,7 @@ export default {
     ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureZakatPricesFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }));
     ctx.waitUntil(ensureFeedBackgroundsFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }, { staging: true }));
+    ctx.waitUntil(resumeStuckVideoStudioJobs(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8, utf8ToBase64 }));
   }
 };
 
@@ -1880,7 +1898,7 @@ function corsHeaders(request, env) {
   const allowOrigin = origin.startsWith("http://127.0.0.1") || origin.startsWith("http://localhost") || origin === allowed ? origin || allowed : allowed;
   return {
     "Access-Control-Allow-Origin": allowOrigin,
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Admin-Secret",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin"
