@@ -2,8 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07111d">
+<meta name="color-scheme" content="dark">
 <title>DAR Admin · KI-Video-Studio</title>
 <style>
 :root{
@@ -11,52 +12,59 @@
   --gold:#efd78e;--gold2:#b8954b;--blue:#90c8ff;--line:rgba(140,190,255,.24);--line2:rgba(239,215,142,.16);
   --ok:#8be0bd;--warn:#ffd386;--bad:#ff9a90;--shadow:0 22px 70px rgba(0,0,0,.42);
   --serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
+  --safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);
+  --page-pad:clamp(10px,2.1vw,26px);--panel-pad:clamp(13px,2vw,22px);--radius:clamp(16px,2vw,22px)
 }
-*{box-sizing:border-box}
-html{min-height:100%;background:var(--bg)}
-body{margin:0;min-height:100dvh;color:var(--ink);font-family:var(--sans);background:
+*{box-sizing:border-box;min-width:0}
+html{width:100%;min-height:100%;background:var(--bg);overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+body{width:100%;margin:0;min-height:100vh;min-height:100svh;min-height:100dvh;overflow-x:hidden;color:var(--ink);font-family:var(--sans);background:
   radial-gradient(circle at 8% -8%,rgba(90,140,220,.28),transparent 34%),
   radial-gradient(circle at 92% 0%,rgba(239,215,142,.14),transparent 30%),
   linear-gradient(180deg,#05080f 0%,#09111d 52%,#05080f 100%);
-  padding:max(12px,var(--safe-top)) 14px max(24px,var(--safe-bottom))}
-button,input,textarea,select{font:inherit}
+  padding:max(var(--page-pad),var(--safe-top)) max(var(--page-pad),var(--safe-right)) max(calc(var(--page-pad) + 8px),var(--safe-bottom)) max(var(--page-pad),var(--safe-left))}
+button,input,textarea,select{font:inherit;color:inherit}
+button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
 button{cursor:pointer}
-.app{width:min(980px,100%);margin:0 auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.app{width:min(100%,1380px);margin:0 auto;container-type:inline-size;container-name:video-studio}
+.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;margin-bottom:14px}
 .brand{display:flex;align-items:center;gap:11px;min-width:0}
-.brand-mark{width:48px;height:48px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;background:linear-gradient(145deg,rgba(239,215,142,.16),rgba(90,140,220,.10));box-shadow:0 12px 28px rgba(0,0,0,.3);font-family:var(--serif);font-weight:900;color:var(--gold)}
-.brand h1{margin:0;font-family:var(--serif);font-size:20px;color:var(--gold);line-height:1.05}
-.brand p{margin:4px 0 0;color:var(--soft);font-size:11px;font-weight:800}
-.back{border:1px solid var(--line);background:rgba(90,140,220,.10);color:var(--ink);border-radius:12px;padding:9px 11px;text-decoration:none;font-size:12px;font-weight:900}
-.hero,.panel{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(10,17,28,.96),rgba(5,8,15,.98));box-shadow:var(--shadow)}
-.hero{position:relative;overflow:hidden;padding:22px;margin-bottom:12px}
-.hero:before{content:"";position:absolute;inset:14px;border:1px solid rgba(239,215,142,.11);border-radius:15px;pointer-events:none}
-.kicker{position:relative;color:var(--gold);font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
-.hero h2{position:relative;margin:10px 0 8px;font-family:var(--serif);font-size:clamp(30px,8vw,48px);line-height:.98;color:#fff4cc;max-width:720px}
-.hero p{position:relative;margin:0;color:var(--soft);font-size:13px;line-height:1.55;max-width:700px}
+.brand-mark{width:48px;height:48px;flex:0 0 48px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;background:linear-gradient(145deg,rgba(239,215,142,.16),rgba(90,140,220,.10));box-shadow:0 12px 28px rgba(0,0,0,.3);font-family:var(--serif);font-weight:900;color:var(--gold)}
+.brand h1{margin:0;font-family:var(--serif);font-size:clamp(18px,2.3vw,23px);color:var(--gold);line-height:1.05;overflow-wrap:anywhere}
+.brand p{margin:4px 0 0;color:var(--soft);font-size:clamp(9px,1.35vw,11px);font-weight:800;line-height:1.3}
+.back{min-height:44px;border:1px solid var(--line);background:rgba(90,140,220,.10);color:var(--ink);border-radius:12px;padding:10px 12px;text-decoration:none;font-size:12px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+.hero,.panel{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(10,17,28,.96),rgba(5,8,15,.98));box-shadow:var(--shadow);overflow:hidden}
+.hero{position:relative;padding:clamp(20px,4vw,38px);margin-bottom:12px;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:clamp(10px,1.5vw,18px);border:1px solid rgba(239,215,142,.11);border-radius:calc(var(--radius) - 4px);pointer-events:none;z-index:-1}
+.hero:after{content:"";position:absolute;right:-8%;top:-50%;width:min(46vw,520px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(90,140,220,.18),transparent 68%);filter:blur(4px);z-index:-2}
+.kicker{position:relative;color:var(--gold);font-size:clamp(9px,1vw,11px);font-weight:950;letter-spacing:.14em;text-transform:uppercase;line-height:1.35}
+.hero h2{position:relative;margin:10px 0 8px;font-family:var(--serif);font-size:clamp(30px,6.4vw,62px);line-height:.98;color:#fff4cc;max-width:920px;text-wrap:balance;overflow-wrap:anywhere}
+.hero p{position:relative;margin:0;color:var(--soft);font-size:clamp(12px,1.45vw,15px);line-height:1.6;max-width:820px;text-wrap:pretty}
 .status-line{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.chip{border:1px solid var(--line2);border-radius:999px;padding:7px 10px;color:var(--soft);background:rgba(0,0,0,.2);font-size:10.5px;font-weight:900}
+.chip{max-width:100%;border:1px solid var(--line2);border-radius:999px;padding:7px 10px;color:var(--soft);background:rgba(0,0,0,.2);font-size:clamp(9px,1vw,10.5px);font-weight:900;line-height:1.25;overflow-wrap:anywhere}
 .chip.ok{color:var(--ok);border-color:rgba(139,224,189,.28)}
-.panel{padding:15px;margin-bottom:12px}
+.panel{padding:var(--panel-pad);margin-bottom:12px}
 .section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
-.section-head h3{margin:0;font-family:var(--serif);color:var(--gold);font-size:21px}
-.section-head span{color:var(--muted);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.section-head h3{margin:0;font-family:var(--serif);color:var(--gold);font-size:clamp(19px,2.3vw,25px);line-height:1.08}
+.section-head span{color:var(--muted);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;text-align:right;line-height:1.35;overflow-wrap:anywhere}
 .label{display:block;color:var(--soft);font-size:11px;font-weight:900;margin:0 0 7px}
-textarea,input,select{width:100%;border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.28);color:var(--ink);padding:13px 14px;outline:none}
-textarea{min-height:96px;resize:vertical;line-height:1.45}
+textarea,input,select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.28);padding:13px 14px;outline:none}
+textarea{min-height:clamp(104px,18vh,170px);resize:vertical;line-height:1.48}
 textarea:focus,input:focus,select:focus{border-color:rgba(239,215,142,.52);box-shadow:0 0 0 3px rgba(239,215,142,.08)}
-.helper{color:var(--muted);font-size:10.5px;line-height:1.45;margin-top:7px}
-.primary{width:100%;margin-top:13px;border:1px solid rgba(239,215,142,.48);border-radius:17px;min-height:58px;padding:13px 18px;background:linear-gradient(135deg,rgba(239,215,142,.26),rgba(90,140,220,.13));color:#fff5d4;font-weight:950;letter-spacing:.035em;box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.helper{color:var(--muted);font-size:10.5px;line-height:1.5;margin:8px 0 0}
+.primary{width:100%;margin-top:13px;border:1px solid rgba(239,215,142,.48);border-radius:17px;min-height:58px;padding:13px 18px;background:linear-gradient(135deg,rgba(239,215,142,.26),rgba(90,140,220,.13));color:#fff5d4;font-weight:950;letter-spacing:.035em;box-shadow:0 16px 40px rgba(0,0,0,.3);white-space:normal;line-height:1.25}
 .primary:active{transform:scale(.988)}
 .primary:disabled{opacity:.48;cursor:not-allowed}
-.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);gap:12px;align-items:start}
+.grid>.panel{height:100%}
+.grid>aside{position:sticky;top:max(12px,var(--safe-top))}
 .timeline{display:grid;gap:8px}
-.step{display:grid;grid-template-columns:31px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:14px;padding:10px;background:rgba(0,0,0,.19)}
-.step-num{width:31px;height:31px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);font-size:11px;font-weight:950;color:var(--muted)}
-.step b{display:block;font-size:12px;color:var(--ink)}
-.step small{display:block;font-size:10px;color:var(--muted);margin-top:3px;line-height:1.35}
-.step-state{font-size:9px;font-weight:950;text-transform:uppercase;color:var(--muted)}
+.step{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:14px;padding:10px;background:rgba(0,0,0,.19)}
+.step-num{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);font-size:11px;font-weight:950;color:var(--muted)}
+.step b{display:block;font-size:12px;color:var(--ink);line-height:1.3;overflow-wrap:anywhere}
+.step small{display:block;font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
+.step-state{font-size:9px;font-weight:950;text-transform:uppercase;color:var(--muted);text-align:right}
 .step.is-active{border-color:rgba(239,215,142,.42);background:rgba(239,215,142,.07)}
 .step.is-active .step-num{color:var(--gold);border-color:rgba(239,215,142,.42);box-shadow:0 0 18px rgba(239,215,142,.12)}
 .step.is-active .step-state{color:var(--gold)}
@@ -66,28 +74,91 @@ textarea:focus,input:focus,select:focus{border-color:rgba(239,215,142,.52);box-s
 .step.is-error .step-state{color:var(--bad)}
 .summary-card{border:1px solid var(--line2);border-radius:16px;padding:13px;background:linear-gradient(145deg,rgba(90,140,220,.07),rgba(239,215,142,.035));margin-bottom:9px}
 .summary-card b{display:block;color:var(--muted);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
-.summary-card strong{display:block;color:#fff4cc;font-size:15px;line-height:1.35}
-.summary-card small{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:5px}
-.notice{border:1px dashed var(--line);border-radius:14px;padding:12px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.045)}
+.summary-card strong{display:block;color:#fff4cc;font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+.summary-card small{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:5px;overflow-wrap:anywhere}
+.notice{border:1px dashed var(--line);border-radius:14px;padding:12px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.045);overflow-wrap:anywhere}
 .notice.warn{border-color:rgba(255,211,134,.32);color:#ffe4b1;background:rgba(255,211,134,.045)}
 .notice.bad{border-color:rgba(255,154,144,.32);color:#ffd2cd;background:rgba(255,154,144,.045)}
 .actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-.btn{border:1px solid var(--line);border-radius:13px;padding:10px 11px;background:rgba(90,140,220,.08);color:var(--ink);font-size:11px;font-weight:900;min-height:42px}
+.btn{min-width:0;border:1px solid var(--line);border-radius:13px;padding:10px 11px;background:rgba(90,140,220,.08);color:var(--ink);font-size:11px;font-weight:900;min-height:44px;white-space:normal;line-height:1.25}
 .btn.primary-small{border-color:rgba(239,215,142,.4);color:#fff1bf;background:rgba(239,215,142,.1)}
 .btn.danger{border-color:rgba(255,154,144,.28);color:#ffd4cf;background:rgba(255,154,144,.06)}
 details{border:1px solid var(--line2);border-radius:16px;background:rgba(0,0,0,.16);overflow:hidden}
-summary{list-style:none;padding:13px 14px;font-size:12px;font-weight:950;color:var(--gold);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+summary{list-style:none;min-height:48px;padding:13px 14px;font-size:12px;font-weight:950;color:var(--gold);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
 summary::-webkit-details-marker{display:none}
 .settings{padding:0 13px 13px;display:grid;gap:11px}
-.setting-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.profile{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.profile div{border:1px solid var(--line2);border-radius:13px;padding:10px;background:rgba(0,0,0,.18)}
+.setting-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.profile{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.profile div{border:1px solid var(--line2);border-radius:13px;padding:11px;background:rgba(0,0,0,.18)}
 .profile b{display:block;color:var(--gold);font-size:10px;margin-bottom:4px}
-.profile span{display:block;color:var(--soft);font-size:9.5px;line-height:1.35}
+.profile span{display:block;color:var(--soft);font-size:9.5px;line-height:1.4;overflow-wrap:anywhere}
+.viewport-proof{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:12px}
+.viewport-proof div{border:1px solid var(--line2);border-radius:13px;padding:10px;background:rgba(0,0,0,.16);text-align:center}
+.viewport-proof b{display:block;color:#fff4cc;font-size:11px;line-height:1.25}
+.viewport-proof span{display:block;color:var(--muted);font-size:9px;line-height:1.35;margin-top:4px}
 .hidden{display:none!important}
 .loader{width:14px;height:14px;border:2px solid rgba(239,215,142,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;display:inline-block;vertical-align:-2px;margin-right:7px}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:720px){.grid{grid-template-columns:1fr}.setting-row{grid-template-columns:1fr}.actions{grid-template-columns:1fr}.hero{padding:20px 18px}.topbar{align-items:flex-start}.brand h1{font-size:18px}}
+
+@container video-studio (max-width:980px){
+  .grid{grid-template-columns:1fr}
+  .grid>aside{position:static}
+  .profile{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .viewport-proof{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  :root{--page-pad:12px;--panel-pad:14px}
+  .topbar{align-items:start}
+  .brand-mark{width:44px;height:44px;flex-basis:44px;border-radius:14px}
+  .hero h2{font-size:clamp(30px,10vw,44px)}
+  .setting-row{grid-template-columns:1fr}
+  .actions{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  :root{--page-pad:10px;--panel-pad:12px;--radius:17px}
+  .topbar{gap:8px;margin-bottom:10px}
+  .brand{gap:8px}
+  .brand-mark{width:40px;height:40px;flex-basis:40px;border-radius:13px;font-size:13px}
+  .brand p{max-width:190px}
+  .back{min-height:40px;padding:8px 9px;font-size:11px}
+  .hero{padding:19px 16px}
+  .hero:before{inset:9px}
+  .hero h2{font-size:clamp(28px,11.6vw,40px);line-height:1}
+  .hero p{font-size:12px;line-height:1.52}
+  .status-line{gap:6px;margin-top:13px}
+  .chip{padding:6px 8px}
+  .section-head{align-items:flex-start;gap:7px}
+  .section-head h3{font-size:20px}
+  .section-head span{font-size:8.5px;max-width:38%}
+  .step{grid-template-columns:30px minmax(0,1fr);gap:9px;padding:9px}
+  .step-num{width:30px;height:30px}
+  .step-state{grid-column:2;text-align:left;margin-top:-3px}
+  .profile{grid-template-columns:1fr}
+  .viewport-proof{grid-template-columns:repeat(2,minmax(0,1fr))}
+  summary{align-items:flex-start}
+}
+@media(max-width:350px){
+  .brand p{display:none}
+  .hero h2{font-size:27px}
+  .kicker{letter-spacing:.09em}
+  .viewport-proof{grid-template-columns:1fr}
+}
+@media(min-width:1200px){
+  .creator-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.38fr);gap:18px;align-items:end}
+  .creator-panel .creator-copy{grid-column:1}
+  .creator-panel .primary{grid-column:2;grid-row:1/span 3;margin:0;min-height:100%}
+}
+@media(orientation:landscape) and (max-height:600px){
+  body{padding-top:max(8px,var(--safe-top));padding-bottom:max(10px,var(--safe-bottom))}
+  .topbar{margin-bottom:8px}
+  .hero{padding:16px 18px}
+  .hero h2{font-size:clamp(27px,5.5vw,42px);margin:6px 0}
+  .hero p{font-size:11px;line-height:1.4}
+  .status-line{margin-top:10px}
+  textarea{min-height:90px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.loader{animation:none}.primary:active{transform:none}}
+@media(hover:hover){.back:hover,.btn:hover{border-color:rgba(239,215,142,.45);background:rgba(239,215,142,.09)}.primary:hover{filter:brightness(1.06)}}
 </style>
 </head>
 <body>
@@ -105,17 +176,20 @@ summary::-webkit-details-marker{display:none}
     <h2>Ein Auftrag. Ein fertiger Video-Beitrag.</h2>
     <p>Die spätere Produktion läuft serverseitig: geprüfte Aussage, Storyboard, gesichtslose Szenen, feste Stimme, Untertitel, Quelle, Logo und fertiger 9:16-Export.</p>
     <div class="status-line">
-      <span class="chip ok">Mobil optimiert</span>
-      <span class="chip">iPhone · iPad · Android</span>
+      <span class="chip ok">Responsiv geprüft</span>
+      <span class="chip" id="viewportProfile">Ansicht wird erkannt</span>
+      <span class="chip">iPhone · iPad · Android · Web</span>
       <span class="chip">Freigabe immer manuell</span>
     </div>
   </section>
 
-  <section class="panel">
-    <div class="section-head"><div><h3>Video-Beitrag erstellen</h3></div><span>DAR Standard</span></div>
-    <label class="label" for="brief">Thema oder Aussage – optional</label>
-    <textarea id="brief" placeholder="Leer lassen: Die App wählt automatisch eine neue, noch nicht verwendete und geprüfte Aussage aus."></textarea>
-    <p class="helper">Keine externe App, kein manueller Schnitt und keine wechselnde Stimme. Die Produktionsregeln bleiben fest gespeichert.</p>
+  <section class="panel creator-panel">
+    <div class="creator-copy">
+      <div class="section-head"><div><h3>Video-Beitrag erstellen</h3></div><span>DAR Standard</span></div>
+      <label class="label" for="brief">Thema oder Aussage – optional</label>
+      <textarea id="brief" placeholder="Leer lassen: Die App wählt automatisch eine neue, noch nicht verwendete und geprüfte Aussage aus."></textarea>
+      <p class="helper">Keine externe App, kein manueller Schnitt und keine wechselnde Stimme. Die Produktionsregeln bleiben fest gespeichert.</p>
+    </div>
     <button class="primary" id="createBtn" type="button">VIDEO-BEITRAG AUTONOM ERSTELLEN</button>
   </section>
 
@@ -161,11 +235,19 @@ summary::-webkit-details-marker{display:none}
     <div class="section-head"><h3>DAR-Video-Profil</h3><span>Verbindlich</span></div>
     <div class="profile">
       <div><b>Bildsprache</b><span>Fotorealistisch, filmisch, themenbezogen, keine zufälligen Standardhintergründe.</span></div>
-      <div><b>Personen</b><span>Anonyme Symbolfiguren, angemessen gekleidet, nur Rückenansicht/Silhouette/Ausschnitt.</span></div>
+      <div><b>Personen</b><span>Anonyme Symbolfiguren, angemessen gekleidet, nur Rückenansicht, Silhouette oder Ausschnitt.</span></div>
       <div><b>Stimme</b><span>Eine feste deutsche Männerstimme, warm, ruhig, würdevoll und ohne Werbeton.</span></div>
       <div><b>Ton</b><span>Natürliche Atmosphäre; keine Musik. Naschīd nur bei späterer ausdrücklicher Profiländerung.</span></div>
       <div><b>Branding</b><span>Original-Logo, dezentes Wasserzeichen, Quelle, Social-Kanäle und „by Serhat Abu Malik“.</span></div>
       <div><b>Sicherheit</b><span>Keine automatische Veröffentlichung. Zuerst Vorschau und ausdrückliche Freigabe.</span></div>
+    </div>
+    <div class="viewport-proof" aria-label="Verbindliche Darstellungsgrößen">
+      <div><b>320–359 px</b><span>Kleine Smartphones</span></div>
+      <div><b>360–479 px</b><span>Normale Smartphones</span></div>
+      <div><b>480–767 px</b><span>Große Smartphones</span></div>
+      <div><b>768–1023 px</b><span>Tablets Hochformat</span></div>
+      <div><b>1024–1199 px</b><span>Tablet quer / Laptop</span></div>
+      <div><b>ab 1200 px</b><span>Desktop und Webseite</span></div>
     </div>
   </section>
 </main>
@@ -189,6 +271,19 @@ summary::-webkit-details-marker{display:none}
   const state={job:null,pollTimer:null};
 
   function esc(value){return String(value??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+  function viewportLabel(){
+    const width=Math.round((window.visualViewport&&window.visualViewport.width)||window.innerWidth||document.documentElement.clientWidth||0);
+    const height=Math.round((window.visualViewport&&window.visualViewport.height)||window.innerHeight||document.documentElement.clientHeight||0);
+    const orientation=width>height?"Querformat":"Hochformat";
+    let device="Desktop / Webseite";
+    if(width<360)device="Kleines Smartphone";
+    else if(width<480)device="Smartphone";
+    else if(width<768)device="Großes Smartphone";
+    else if(width<1024)device="Tablet";
+    else if(width<1200)device="Tablet quer / Laptop";
+    return `${device} · ${width} × ${height} · ${orientation}`;
+  }
+  function updateViewportProfile(){const target=el("viewportProfile");if(target)target.textContent=viewportLabel()}
   function readSettings(){try{return {...{provider:"auto",budget:15,maxPerVideo:1.2,voice:"dar-male"},...JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}}catch{return{provider:"auto",budget:15,maxPerVideo:1.2,voice:"dar-male"}}}
   function saveSettings(){const value={provider:el("provider").value,budget:Number(el("budget").value)||15,maxPerVideo:Number(el("maxPerVideo").value)||1.2,voice:el("voice").value};localStorage.setItem(STORAGE_KEY,JSON.stringify(value));el("modeSummary").textContent=value.provider==="auto"?"Automatisch":el("provider").selectedOptions[0].textContent;notice("Einstellungen wurden auf diesem Gerät gespeichert.","ok")}
   function applySettings(){const s=readSettings();el("provider").value=s.provider;el("budget").value=s.budget;el("maxPerVideo").value=s.maxPerVideo;el("voice").value=s.voice;el("modeSummary").textContent=s.provider==="auto"?"Automatisch":el("provider").selectedOptions[0].textContent}
@@ -199,7 +294,7 @@ summary::-webkit-details-marker{display:none}
   async function api(path,options={}){const res=await fetch(API_BASE+path,{cache:"no-store",credentials:"same-origin",...options,headers:{...headers(),...(options.headers||{})}});const data=await res.json().catch(()=>({}));if(!res.ok){const err=new Error(data.message||data.error||`HTTP ${res.status}`);err.status=res.status;err.data=data;throw err}return data}
   function saveJob(job){state.job=job;try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}renderJob(job)}
   function renderJob(job){renderTimeline(job);el("jobId").textContent=job?.id?String(job.id).slice(0,12):"—";const status=job?.status||"ready";el("jobBadge").textContent={queued:"Warteschlange",running:"In Arbeit",completed:"Fertig",failed:"Fehler",setup_required:"Einrichtung nötig"}[status]||"Bereit";el("resultActions").classList.toggle("hidden",status!=="completed");if(status==="completed")notice("Der Video-Beitrag ist fertig und wartet auf deine Prüfung.","ok");else if(status==="failed")notice(esc(job.message||"Die Produktion wurde abgebrochen."),"bad");else if(status==="setup_required")notice(`<b>Das Studio ist eingebaut.</b><br>${esc(job.message||"Als Nächstes muss ein Video-Anbieter serverseitig verbunden werden.")}`,"warn");else if(status==="running"||status==="queued")notice("Der Auftrag läuft serverseitig. Du darfst die App schließen; der Status bleibt gespeichert.")}
-  async function startJob(){setBusy(true);const settings=readSettings();const payload={brief:el("brief").value.trim(),mode:settings.provider,voiceProfile:settings.voice,budget:{monthlyEur:settings.budget,maxPerVideoEur:settings.maxPerVideo},profile:"dar-standard-v1",format:"9:16",manualApproval:true};try{const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});saveJob(data.job||data);startPolling()}catch(error){if(error.status===404||error.status===501||error.status===503){const local={id:"setup-"+Date.now(),status:"setup_required",stage:"statement",completedStages:[],createdAt:new Date().toISOString(),message:"Die mobile Oberfläche und der vollständige Produktionsablauf sind vorbereitet. Für echte Videoclips fehlt noch die serverseitige Anbieter-API und der Render-Worker."};saveJob(local)}else{saveJob({id:"error-"+Date.now(),status:"failed",stage:"statement",completedStages:[],message:error.message})}}finally{setBusy(false)}}
+  async function startJob(){setBusy(true);const settings=readSettings();const payload={brief:el("brief").value.trim(),mode:settings.provider,voiceProfile:settings.voice,budget:{monthlyEur:settings.budget,maxPerVideoEur:settings.maxPerVideo},profile:"dar-standard-v1",format:"9:16",manualApproval:true,client:{viewport:viewportLabel(),userAgent:navigator.userAgent||""}};try{const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});saveJob(data.job||data);startPolling()}catch(error){if(error.status===404||error.status===501||error.status===503){const local={id:"setup-"+Date.now(),status:"setup_required",stage:"statement",completedStages:[],createdAt:new Date().toISOString(),message:"Die responsive Oberfläche und der vollständige Produktionsablauf sind vorbereitet. Für echte Videoclips fehlt noch die serverseitige Anbieter-API und der Render-Worker."};saveJob(local)}else{saveJob({id:"error-"+Date.now(),status:"failed",stage:"statement",completedStages:[],message:error.message})}}finally{setBusy(false)}}
   async function poll(){if(!state.job?.id||["completed","failed","setup_required"].includes(state.job.status))return;try{const data=await api("/jobs/"+encodeURIComponent(state.job.id));saveJob(data.job||data);if(!["completed","failed"].includes(state.job.status))state.pollTimer=setTimeout(poll,5000)}catch{state.pollTimer=setTimeout(poll,9000)}}
   function startPolling(){clearTimeout(state.pollTimer);poll()}
   function restore(){try{const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");if(job){saveJob(job);if(["queued","running"].includes(job.status))startPolling()}else renderTimeline(null)}catch{renderTimeline(null)}}
@@ -209,7 +304,12 @@ summary::-webkit-details-marker{display:none}
   el("retryBtn").addEventListener("click",startJob);
   el("deleteBtn").addEventListener("click",()=>{localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Der lokale Auftrag wurde entfernt.")});
   el("previewBtn").addEventListener("click",()=>{const url=state.job?.outputUrl;if(url)location.href=url;else notice("Für diesen Auftrag ist noch keine Videodatei vorhanden.","warn")});
-  applySettings();restore();
+  let viewportTimer=0;
+  function scheduleViewportUpdate(){clearTimeout(viewportTimer);viewportTimer=setTimeout(updateViewportProfile,80)}
+  window.addEventListener("resize",scheduleViewportUpdate,{passive:true});
+  window.addEventListener("orientationchange",scheduleViewportUpdate,{passive:true});
+  if(window.visualViewport)window.visualViewport.addEventListener("resize",scheduleViewportUpdate,{passive:true});
+  applySettings();restore();updateViewportProfile();
 })();
 </script>
 </body>
