@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-02T13:38:55.302Z",
+  "generated": "2026-08-02T13:38:57.058Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -154,8 +154,32 @@
       "createdAt": "2026-08-02T13:38:55.101Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-02T13:38:55.101Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-02T13:38:55.302Z"
+      "lastError": "",
+      "updatedAt": "2026-08-02T13:38:57.058Z",
+      "lastCheckAt": "2026-08-02T13:38:56.872Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "selbst-der-bissen-fuer-die-ehefrau-wird-belohnt-455",
+        "indexGenerated": "2026-08-02T13:38:49.346Z",
+        "indexCount": 455,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=selbst-der-bissen-fuer-die-ehefrau-wird-belohnt-455&v=1785677936213#post/selbst-der-bissen-fuer-die-ehefrau-wird-belohnt-455"
+      },
+      "attempts": 1
     }
   }
 }
