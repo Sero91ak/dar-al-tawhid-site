@@ -140,6 +140,8 @@ export default {
           prayerScheduler: "cloudflare-worker-cron-v3",
           prayerCron: "*/5 * * * *",
           prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),
+          libraryApi: "v3-split-push",
+          libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
