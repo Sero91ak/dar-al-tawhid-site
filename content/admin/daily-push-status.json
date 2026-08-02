@@ -4,31 +4,35 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-02T10:00:58.637Z",
+  "updatedAt": "2026-08-02T10:10:58.969Z",
   "usersChecked": 10,
   "registrationsRead": 11,
   "uniqueSubscriptions": 10,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "duaCandidates": 0,
-  "recCandidates": 9,
-  "sent": 9,
+  "duaCandidates": 10,
+  "recCandidates": 0,
+  "sent": 10,
   "accepted": {
-    "dua": 0,
-    "recommendation": 9
+    "dua": 10,
+    "recommendation": 0
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 9,
   "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-08-02",
   "currentRecommendation": {
-    "id": "der-beste-unterricht-ist-quran-lernen-und-lehren-183",
-    "title": "Der beste Unterricht ist Qurʾān lernen und lehren",
-    "category": "Tarbiyyah",
-    "scholar": "ʿUthmān b. ʿAffān"
+    "id": "ibn-battah-ahl-al-bidah-nicht-zum-herzen-lassen-294",
+    "title": "Ibn Baṭṭah: Ahl al-Bidʿah nicht zum Herzen lassen",
+    "category": "Manhaj",
+    "scholar": "Ibn Baṭṭah al-ʿUkbarī"
   },
-  "currentDua": null,
+  "currentDua": {
+    "id": "dua-028-allahumma-inni-audhu-bika-min-ilm-la-yanfa",
+    "title": "Schutz vor Wissen, das nicht nützt",
+    "category": "Wissen"
+  },
   "configAutomatic": true
 }
