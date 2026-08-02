@@ -110,7 +110,8 @@ const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
 // Sofort prüfen, dann gestaffelt nachziehen — nicht erst 30s warten (Admin-Retry hing sonst).
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 15000, 30000, 60000, 120000, 180000, 240000, 300000];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 8000];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 2000, 5000, 8000, 10000];
+const LIVE_CHECK_SCHEDULE_PUBLISH_MS = [0, 2000, 5000, 8000, 10000];
 const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
 export default {
   async fetch(request, env, ctx) {
@@ -1192,8 +1193,8 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     };
     if (ctx && postId) {
       ctx.waitUntil((async () => {
-        const quick = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
-        if (!quick.sent && quick.pending) {
+        const publishWait = await processPendingPushUntilLive(env, pendingRecord, { schedule: "publish" });
+        if (!publishWait.sent && publishWait.pending) {
           await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
         }
       })());
@@ -2586,7 +2587,7 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     visitorUrlOk: !!live.visitorUrlOk,
     cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
   };
-  const ok = steps.postInIndex && steps.postFilePublic;
+  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
   const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
   return {
     ok,
@@ -2669,18 +2670,15 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
         const indexFile = await githubGet(env, owner, repo, `${postsDir}/posts-index.json`, branch);
         if (indexFile?.content) {
           const indexData = JSON.parse(base64ToUtf8(indexFile.content));
-          result.indexGenerated = indexData.generated || result.indexGenerated;
-          result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || result.indexCount;
           const files = listPostFiles(indexData.files || []);
-          result.postInIndex = files.some((file) => file.name === filename)
+          result.githubPostInIndex = files.some((file) => file.name === filename)
             || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
-          if (result.postInIndex) result.githubIndexVerified = true;
+          if (result.githubPostInIndex) result.githubIndexVerified = true;
         }
       }
       if (!result.postFilePublic && postPath) {
         const ghPost = await githubGet(env, owner, repo, postPath, branch);
         if (ghPost?.content) {
-          result.postFilePublic = true;
           result.githubPostVerified = true;
         }
       }
@@ -2694,11 +2692,13 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
 
 async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {}) {
   const delays =
-    schedule === "quick"
-      ? LIVE_CHECK_SCHEDULE_QUICK_MS
-      : schedule === "cron"
-        ? LIVE_CHECK_SCHEDULE_CRON_MS
-        : LIVE_CHECK_SCHEDULE_FULL_MS;
+    schedule === "publish"
+      ? LIVE_CHECK_SCHEDULE_PUBLISH_MS
+      : schedule === "quick"
+        ? LIVE_CHECK_SCHEDULE_QUICK_MS
+        : schedule === "cron"
+          ? LIVE_CHECK_SCHEDULE_CRON_MS
+          : LIVE_CHECK_SCHEDULE_FULL_MS;
   let lastResult = null;
   let elapsed = 0;
 
@@ -2777,11 +2777,13 @@ async function processPendingPushUntilLive(env, record, options = {}) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
   const schedule =
-    options.schedule === "quick" || options.singleCheck
-      ? "quick"
-      : options.schedule === "cron"
-        ? "cron"
-        : "full";
+    options.schedule === "publish"
+      ? "publish"
+      : options.schedule === "quick" || options.singleCheck
+        ? "quick"
+        : options.schedule === "cron"
+          ? "cron"
+          : "full";
 
   const registry = await readPendingPushesRegistry(env);
   assertPendingPushesRegistryReadable(registry);
@@ -3046,8 +3048,8 @@ async function retryPendingPostPush(env, input, ctx) {
     });
   }
 
-  // Admin-Retry: längere Live-Prüfung (cron), danach volle Hintergrund-Wartezeit
-  const push = await processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "cron", singleCheck: false });
+  // Admin-Retry: zuerst öffentliche Live-Prüfung (~10 s), danach längere Hintergrund-Wartezeit
+  const push = await processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "publish", singleCheck: false });
   if (ctx && push?.pending) {
     ctx.waitUntil(processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "full" }));
   }
