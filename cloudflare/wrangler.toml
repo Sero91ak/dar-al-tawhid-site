@@ -17,9 +17,24 @@ DAILY_PUSH_STATUS_PATH = "content/admin/daily-push-status.json"
 name = "PRAYER_STATUS_STORE"
 class_name = "PrayerStatusStore"
 
+[[durable_objects.bindings]]
+name = "VIDEO_STUDIO_STORE"
+class_name = "VideoStudioStore"
+
 [[migrations]]
 tag = "v1_prayer_status_store"
 new_sqlite_classes = ["PrayerStatusStore"]
+
+[[migrations]]
+tag = "v2_video_studio_store"
+new_sqlite_classes = ["VideoStudioStore"]
+
+# R2 bucket for video studio assets (einmalig anlegen, dann entkommentieren):
+#   npx wrangler r2 bucket create dar-video-studio
+# [[r2_buckets]]
+# binding = "VIDEO_STUDIO_R2"
+# bucket_name = "dar-video-studio"
+# preview_bucket_name = "dar-video-studio"
 
 [triggers]
 crons = ["*/5 * * * *"]
@@ -34,3 +49,11 @@ crons = ["*/5 * * * *"]
 #   wrangler secret put PEXELS_API_KEY     (Feed-Hintergrund Auto-Sync)
 #   wrangler secret put UNSPLASH_ACCESS_KEY
 #   wrangler secret put PIXABAY_API_KEY
+# Video-Studio (Admin – nie im Frontend speichern):
+#   wrangler secret put FAL_KEY
+#   wrangler secret put ELEVENLABS_API_KEY
+#   wrangler secret put ELEVENLABS_VOICE_ID
+#   wrangler secret put SHOTSTACK_API_KEY
+#   wrangler secret put VIDEO_STUDIO_SIGNING_SECRET
+#   wrangler secret put RUNWAY_API_KEY             (optional)
+#   wrangler secret put VIDEO_STUDIO_LOGO_URL      (optional)

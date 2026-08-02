@@ -1957,6 +1957,27 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-07-30T23:59:00.000Z"
+    },
+    {
+      "id": "admin-video-studio-ship-2026-08-02",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Push KI-Video-Studio in die private Admin-App (Menü + APIs + Deploy)",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "admin/index.html",
+        "admin/sw.js",
+        "admin/video-studio.html",
+        "test/admin-video-studio.html",
+        "cloudflare/worker.js",
+        "cloudflare/wrangler.toml",
+        "cloudflare/video-studio/",
+        "content/admin/video-studio-statements.json",
+        "docs/dar-ai-video-studio-release-brief.md",
+        "docs/dar-ai-video-studio-secrets-and-costs.md",
+        "scripts/test-video-studio-unit.js",
+        "scripts/test-video-studio-responsive-static.js"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
     }
   ],
   "enabled": true
