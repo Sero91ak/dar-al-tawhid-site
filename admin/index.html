@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v50-admin-live";
+  var ADMIN_SW_CACHE="dar-admin-stats-v51-push-live";
   var MIG_KEY="darAdminSwFixV26";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -560,7 +560,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v50</p>
+        <p><span class="status-dot"></span>Command Center · Admin v51</p>
       </div>
     </div>
     <div class="toolbar">
@@ -1534,6 +1534,20 @@ async function verifyPublishedPost(filename,postId){
   }catch(e){out.reason=out.reason||e.message||String(e)}
   out.url=!!postId&&(out.index||out.file);
   return out;
+}
+async function waitForPublishedPostLive(filename,postId,maxMs=10000){
+  const delays=[0,2000,5000,8000,10000];
+  let last={index:false,file:false,url:false,reason:""};
+  let elapsed=0;
+  for(const target of delays){
+    if(target>maxMs)break;
+    const waitMs=target-elapsed;
+    if(waitMs>0)await new Promise(r=>setTimeout(r,waitMs));
+    elapsed=target;
+    last=await verifyPublishedPost(filename,postId);
+    if(last.index&&last.file)return last;
+  }
+  return last;
 }
 function renderBulkPackPanel(){
   return `<details class="admin-action-card" id="bulkPackPanel">
@@ -3767,9 +3781,10 @@ async function uploadPostViaWorker(){
       commitSha:result.commitSha||"",
       push:result.push||null
     });
-    updatePublishStep("indexContains","run","Prüfe öffentlichen Index");
-    updatePublishStep("fileLive","run","Prüfe Beitragsdatei");
-    const live=await verifyPublishedPost(uploadedFilename,uploadedPostId);
+    updatePublishStep("indexContains","run","Warte auf öffentlichen Index");
+    updatePublishStep("fileLive","run","Warte auf Beitragsdatei");
+    setUploadStatus(`Veröffentlicht: <strong>${esc(uploadedFilename)}</strong> · warte auf Live-Verfügbarkeit (max. 10 s) …`);
+    const live=await waitForPublishedPostLive(uploadedFilename,uploadedPostId,10000);
     updatePublishStep("indexContains",live.index?"ok":"error",live.index?"Datei im Index":"Noch nicht im öffentlichen Index");
     updatePublishStep("fileLive",live.file?"ok":"error",live.file?"Datei erreichbar":live.reason||"Datei noch nicht erreichbar");
     updatePublishStep("urlLive",live.url?"ok":"skip",live.url?"Besucher-Link vorbereitet":"Besucher-Link wartet auf Index/Datei");
