@@ -3625,7 +3625,7 @@ async function retryLivePush(){
   const markdown=ctx.markdown||target.markdown||"";
   const btn=document.getElementById("adminRetryPushBtn");
   if(btn){btn.disabled=true;btn.textContent="Prüfe Live & Push …"}
-  setUploadStatus(`Kurze Live-Prüfung für zuletzt veröffentlicht: <strong>${esc(filename)}</strong> …`);
+  setUploadStatus(`Prüfe Live & Push für <strong>${esc(filename)}</strong> …`);
   try{
     const result=await workerPostRequest("api/admin/push/retry",{
       filename,
@@ -3637,14 +3637,12 @@ async function retryLivePush(){
     const push=result.push||{};
     const live=result.liveCheck||result.live||{};
     const already=!!(result.skipped||push.skipped||(push.sent&&/bereits gesendet/i.test(String(result.reason||push.reason||""))));
-    let html=`Push-Retry für <strong>${esc(filename)}</strong><br>`;
-    html+=`Live erreichbar: <strong style="color:${live.ok||push.sent||already?"#8fd7a8":"#ff9f9f"}">${live.ok||push.sent||already?"ja":"nein"}</strong><br>`;
-    if(live.diagnosis&&!live.ok&&!already)html+=`${esc(live.diagnosis)}<br>`;
-    if(live.reason&&!live.ok&&!already)html+=`${esc(live.reason)}<br>`;
+    let html=`Push für <strong>${esc(filename)}</strong> · Live: <strong style="color:${live.ok||push.sent||already?"#8fd7a8":"#f0d98f"}">${live.ok||push.sent||already?"bereit":"prüft"}</strong>`;
+    if(live.diagnosis&&!live.ok&&!already&&!push.pending)html+=` · ${esc(live.diagnosis)}`;
     html+=formatPushStatusLine(push);
-    if(already)html+=`<br><span style="color:#8fd7a8">Hinweis: Push war bereits gesendet – kein erneuter Versand.</span>`;
-    else if(push.pending)html+=`<br><span style="color:#f0d98f">Hintergrund: Worker prüft weiter und sendet automatisch, sobald live.</span>`;
-    if(ctx?.commitSha)html+=`<br>Commit: <strong>${esc(ctx.commitSha)}</strong>`;
+    if(already)html+=` · <span style="color:#8fd7a8">bereits gesendet</span>`;
+    else if(push.pending)html+=` · <span style="color:#f0d98f">Worker sendet automatisch nach, sobald live</span>`;
+    else if(push.sent)html+=` · <span style="color:#8fd7a8">gesendet</span>`;
     setUploadStatus(html);
     saveLastPublishPushContext({...ctx,filename,postId,markdown,pushSent:!!(push.sent||already)});
     if(already||push.sent){
