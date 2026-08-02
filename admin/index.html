@@ -627,7 +627,65 @@ function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.st
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
 function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus}catch(e){}}
-function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,updatedAt:new Date().toISOString()}))}catch(e){}addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
+function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,updatedAt:new Date().toISOString()}))}catch(e){}draftStatus=note;addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
+function readLocalDraftRecord(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"null");return d&&typeof d==="object"?d:null}catch(e){return null}}
+function clearLocalDraft(note="Entwurf gelöscht."){draftMarkdown="";draftFilename="";draftStatus="";draftNextNumber=null;try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}const text=document.getElementById("postMarkdownInput");if(text)text.value="";const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value="";toast(note);addAdminLog("Entwurf",note,"—");renderShell()}
+function loadLocalDraftIntoEditor(){
+  const d=readLocalDraftRecord();
+  if(!d?.markdown?.trim()){toast("Kein gespeicherter Entwurf vorhanden");return}
+  draftMarkdown=d.markdown||"";draftFilename=d.filename||"";draftStatus=d.status||"Entwurf geladen.";
+  const text=document.getElementById("postMarkdownInput");if(text)text.value=draftMarkdown;
+  const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
+  toast("Entwurf geladen");renderShell();
+}
+function currentEditorPublishTarget(){
+  const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||"";
+  const filename=(document.getElementById("postFilenameInput")?.value||draftFilename||"").trim();
+  const postId=frontmatterValue(markdown,"id")||filename.replace(/\.md$/i,"");
+  const postTitle=frontmatterValue(markdown,"title")||markdownPreviewData(markdown).title||"Beitrag";
+  return{markdown,filename,postId,postTitle};
+}
+function clearPublishTrack(note="Veröffentlichungs-Tracker zurückgesetzt."){
+  savePublishTrack(null);
+  saveLastPublishPushContext(null);
+  if(note)toast(note);
+  renderShell();
+}
+function renderLocalDraftPanel(){
+  const d=readLocalDraftRecord();
+  const hasEditor=draftMarkdown.trim().length>0;
+  const savedAt=d?.updatedAt?new Date(d.updatedAt).toLocaleString("de-DE"):"";
+  const savedName=d?.filename||"";
+  const savedPreview=d?.markdown?String(d.markdown).replace(/^---[\s\S]*?---/,"").trim().slice(0,220):"";
+  if(!d?.markdown?.trim()&&!hasEditor){
+    return `<div class="upload-status" style="margin-top:8px">Kein gespeicherter Entwurf auf diesem Gerät. Markdown einfügen und „Als Entwurf speichern“ oder direkt „Online veröffentlichen“.</div>`;
+  }
+  return `<details class="admin-action-card" id="localDraftPanel" open style="margin-top:10px">
+    <summary class="admin-action-summary"><div><h4>Gespeicherter Entwurf · nur dieses Gerät</h4><p>${savedAt?`Zuletzt gespeichert: ${esc(savedAt)}`:"Aktuell im Editor, noch nicht lokal gespeichert"}</p></div><span class="status-pill">${savedName?esc(savedName):hasEditor?"Im Editor":"Leer"}</span></summary>
+    <div class="admin-action-body">
+      ${savedName?`<div class="upload-status"><strong>Dateiname:</strong> ${esc(savedName)}</div>`:""}
+      ${savedPreview?`<div class="preview-box" style="margin-top:8px;max-height:140px;overflow:auto;white-space:pre-wrap">${esc(savedPreview)}${savedPreview.length>=220?"…":""}</div>`:""}
+      <div class="bulk-pack-actions" style="margin-top:8px">
+        <button class="btn" id="loadLocalDraftBtn" type="button">Entwurf laden</button>
+        <button class="btn" id="clearLocalDraftBtn" type="button">Entwurf löschen</button>
+      </div>
+    </div>
+  </details>`;
+}
+function renderPublishPushNotice(){
+  const ctx=readLastPublishPushContext();
+  const current=currentEditorPublishTarget();
+  const currentFile=current.filename||"";
+  const lastFile=ctx?.filename||"";
+  if(!lastFile&&!currentFile)return "";
+  if(currentFile&&lastFile&&currentFile!==lastFile){
+    return `<div class="upload-status" style="margin-top:8px;border-color:rgba(251,191,36,.45);background:rgba(251,191,36,.08)"><strong>Hinweis:</strong> Du bearbeitest <strong>${esc(currentFile)}</strong>. „Live Push freigeben“ gilt für den zuletzt veröffentlichten Beitrag <strong>${esc(lastFile)}</strong>${ctx?.postTitle?` (${esc(ctx.postTitle.replace(/^📖\s*/,""))})`:""}.<br><small>Für einen neuen Beitrag zuerst <strong>Online veröffentlichen</strong> klicken — danach Push freigeben.</small></div>`;
+  }
+  if(ctx?.push&&!ctx.push.sent&&(ctx.push.waitingForApproval||ctx.push.pending)){
+    return `<div class="upload-status" style="margin-top:8px;border-color:rgba(140,190,255,.35)">Push für <strong>${esc(lastFile)}</strong> wartet auf Freigabe. Mit „Live Push freigeben“ senden, sobald der Beitrag live erreichbar ist.</div>`;
+  }
+  return "";
+}
 function readAdminLog(){try{return JSON.parse(localStorage.getItem(ADMIN_LOG_KEY)||"[]").filter(Boolean).slice(0,12)}catch(e){return[]}}
 function addAdminLog(type,title,detail){try{const list=readAdminLog();list.unshift({type,title,detail,ts:new Date().toISOString()});localStorage.setItem(ADMIN_LOG_KEY,JSON.stringify(list.slice(0,12)))}catch(e){}}
 function renderChangeLog(){const list=readAdminLog();return list.length?list.slice(0,6).map(item=>`<div class="change-item"><b>${esc(item.type)} · ${esc(new Date(item.ts).toLocaleString("de-DE"))}</b><span>${esc(item.title)}${item.detail?`<br>${esc(item.detail)}`:""}</span></div>`).join(""):`<div class="empty">Noch kein lokales Änderungsprotokoll.</div>`}
@@ -1175,6 +1233,19 @@ async function publishPostViaWorkerRequest(markdown,filename,options={}){
     body:JSON.stringify(body)
   });
   const data=await res.json().catch(()=>({}));
+  if(res.status===409&&/existiert schon|existiert bereits/i.test(String(data.error||""))){
+    const updateBody={markdown,filename};
+    if(options.skipPush)updateBody.skipPush=true;
+    if(Array.isArray(options.sourceFiles)&&options.sourceFiles.length)updateBody.sourceFiles=options.sourceFiles;
+    if(Array.isArray(options.feedImageFiles)&&options.feedImageFiles.length)updateBody.feedImageFiles=options.feedImageFiles;
+    const updateRes=await fetch(workerEndpoint("post/update"),{
+      method:"POST",
+      headers:{"Content-Type":"application/json","X-Admin-Secret":secret},
+      body:JSON.stringify(updateBody)
+    });
+    const updateData=await updateRes.json().catch(()=>({}));
+    if(updateRes.ok&&updateData.ok)return{...updateData,updated:true};
+  }
   if(!res.ok||!data.ok)throw new Error(data.error||`Worker Fehler ${res.status}`);
   return data;
 }
@@ -1402,7 +1473,7 @@ function updatePublishMeta(meta){
 }
 function finishPublishTrack(status="ok",error=""){
   const track=readPublishTrack();if(!track)return;
-  track.status=status;track.error=error||"";track.updatedAt=new Date().toISOString();savePublishTrack(track);
+  track.status=status==="warn"?"ok":status;track.error=error||"";track.warning=status==="warn"?error:"";track.updatedAt=new Date().toISOString();savePublishTrack(track);
 }
 function publishStateLabel(state){return state==="ok"?"erfolgreich":state==="run"?"läuft":state==="error"?"Fehler":state==="skip"?"übersprungen":"wartet"}
 function renderPublishTracker(filterType){
@@ -1420,7 +1491,8 @@ function renderPublishTracker(filterType){
     <div class="publish-step-grid">${(track.steps||[]).map(s=>`<div class="publish-step" data-state="${esc(s.state||"wait")}"><span class="publish-step-dot"></span><div><b>${esc(s.label)}</b><small>${esc(publishStateLabel(s.state))}${s.note?` · ${esc(s.note)}`:""}</small></div></div>`).join("")}</div>
     ${(track.items||[]).length?`<div class="upload-status" style="margin-top:9px">${track.items.slice(0,8).map(item=>`${esc(item.title||item.filename)}: <strong>${esc(item.status||"ok")}</strong>`).join("<br>")}${track.items.length>8?`<br>… +${track.items.length-8} weitere`:""}</div>`:""}
     ${track.error?`<div class="upload-status" style="margin-top:9px;color:#ffb8b8">Fehler: ${esc(track.error)}</div>`:""}
-    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button" title="Sendet Push für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push senden · Live prüfen</button></div>
+    ${track.warning?`<div class="upload-status" style="margin-top:9px;color:#fbbf24">Hinweis: ${esc(track.warning)}</div>`:""}
+    <div class="publish-link-row">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a><button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button" title="Nur für den zuletzt veröffentlichten Beitrag — nicht für einen neuen Entwurf im Formular">Live Push freigeben</button></div>
   </div>`;
 }
 async function verifyPublishedPost(filename,postId){
@@ -2791,11 +2863,14 @@ function renderActions(rows){
               <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
               <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md">
               <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Wird veröffentlicht...":"Online veröffentlichen"}</button>
-              <button class="btn" id="adminRetryPushBtn" type="button" title="Sendet Push für den zuletzt veröffentlichten Beitrag – nicht für einen neuen Entwurf im Formular">Push senden · Live prüfen</button>
+              <button class="btn" id="adminRetryPushBtn" type="button" title="Nur für den zuletzt veröffentlichten Beitrag — nicht für einen neuen Entwurf im Formular">Live Push freigeben (letzter Beitrag)</button>
             </div>
           </div>
-          <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown einfügen, optional PDF/Bild anhängen, dann bewusst veröffentlichen."}</div>
+          ${renderPublishPushNotice()}
+          ${renderLocalDraftPanel()}
+          <div class="upload-status" id="uploadStatus" style="margin-top:10px">${draftStatus||"Bereit. Markdown einfügen, optional PDF/Bild anhängen, dann <strong>Online veröffentlichen</strong> klicken."}</div>
           ${renderPublishTracker("single")}
+          <div class="bulk-pack-actions" style="margin-top:8px"><button class="btn" id="clearPublishTrackBtn" type="button">Tracker zurücksetzen</button></div>
         </div>
       </details>
       ${renderBulkPackPanel()}
@@ -3320,6 +3395,9 @@ function bindUi(){
   const bulkPublishBtn=document.getElementById("bulkPublishBtn");if(bulkPublishBtn)bulkPublishBtn.onclick=uploadBulkPackViaWorker;
   bindBulkZipUpload();
   const retryPushBtn=document.getElementById("adminRetryPushBtn");if(retryPushBtn)retryPushBtn.onclick=retryLivePush;
+  const clearPublishTrackBtn=document.getElementById("clearPublishTrackBtn");if(clearPublishTrackBtn)clearPublishTrackBtn.onclick=()=>{if(confirm("Veröffentlichungs-Tracker und Push-Kontext zurücksetzen?"))clearPublishTrack()};
+  const loadLocalDraftBtn=document.getElementById("loadLocalDraftBtn");if(loadLocalDraftBtn)loadLocalDraftBtn.onclick=loadLocalDraftIntoEditor;
+  const clearLocalDraftBtn=document.getElementById("clearLocalDraftBtn");if(clearLocalDraftBtn)clearLocalDraftBtn.onclick=()=>{if(confirm("Gespeicherten Entwurf auf diesem Gerät löschen?"))clearLocalDraft()};
   const trackerRetryPushBtn=document.getElementById("trackerRetryPushBtn");if(trackerRetryPushBtn)trackerRetryPushBtn.onclick=retryLivePush;
   const bulkRetryPushBtn=document.getElementById("bulkRetryPushBtn");if(bulkRetryPushBtn)bulkRetryPushBtn.onclick=retryLivePush;
   const localPushTestBtn=document.getElementById("adminLocalPushTestBtn");if(localPushTestBtn)localPushTestBtn.onclick=sendAdminLocalPushTest;
@@ -3526,10 +3604,8 @@ async function retryLivePush(){
   }
   const target=resolvePushRetryTarget();
   if(draftConflictsWithLastPublish(ctx,target)){
-    const draftLabel=esc(target.filenameInput||target.postId||"neuer Entwurf");
-    setUploadStatus(`<span style="color:#ffb8b8"><strong>Push blockiert:</strong> Du bearbeitest <strong>${draftLabel}</strong>, der Retry-Button gilt aber nur für den zuletzt veröffentlichten Beitrag <strong>${esc(ctx.filename)}</strong> (${esc(ctx.postTitle||ctx.postId||"")}).<br>Bitte zuerst „Online veröffentlichen“ für deinen neuen Entwurf.</span>`);
-    toast("Neuer Entwurf – zuerst Online veröffentlichen");
-    addAdminLog("Push","Push blockiert – neuer Entwurf im Formular",target.filenameInput||target.postId||"Entwurf");
+    toast("Neuer Entwurf im Editor — zuerst „Online veröffentlichen“. Push-Button gilt nur für den letzten Beitrag.");
+    addAdminLog("Push","Hinweis – Push gilt nur für letzten Beitrag",target.filenameInput||target.postId||"Entwurf");
     return;
   }
   const filename=ctx.filename;
@@ -3580,7 +3656,7 @@ async function retryLivePush(){
     setUploadStatus(`Push-Retry fehlgeschlagen: ${esc(e.message||e)}`);
     toast(e.message||"Push-Retry fehlgeschlagen");
   }finally{
-    if(btn){btn.disabled=false;btn.textContent="Push senden · Live prüfen"}
+    if(btn){btn.disabled=false;btn.textContent="Live Push freigeben (letzter Beitrag)"}
   }
 }
 async function prepareNextPostNumber(){
@@ -3691,7 +3767,7 @@ async function uploadPostViaWorker(){
     updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live (Hintergrund)":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     // Beitrag erstellt + Push im Hintergrund = kein „Fehler“-Status (hängte die UI sonst als Fehler fest)
     finishPublishTrack(live.file||push?.pending||result.commitSha?"ok":"error",live.file||push?.pending||result.commitSha?"":live.reason||"Live-Datei noch nicht erreichbar");
-    setUploadStatus(`Fertig über Worker veröffentlicht: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(push||result.push)}${push?.pending?"<br><span style=\"color:#f0d98f\">Push wartet noch – bitte „Push senden · Live prüfen“ klicken (nur für diesen Beitrag).</span>":""}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
+    setUploadStatus(`${result.updated?"Beitrag aktualisiert":"Fertig über Worker veröffentlicht"}: <strong>${esc(uploadedFilename)}</strong><br>Nummer: <strong>${esc(uploadedNumber)}</strong><br>Commit: <strong>${esc(result.commitSha||"erstellt")}</strong>${formatPushStatusLine(push||result.push)}${push?.pending?"<br><span style=\"color:#f0d98f\">Push wartet noch – bitte „Live Push freigeben“ klicken (nur für diesen Beitrag).</span>":""}<br><a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index prüfen</a> · <a href="${SITE_ORIGIN}/#recent" target="_blank" rel="noopener">Neueste Beiträge öffnen</a>`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
     draftMarkdown="";
     draftFilename="";
