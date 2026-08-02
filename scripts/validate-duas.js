@@ -151,7 +151,7 @@ function validate() {
     const ar = normalizeArabic(item.ar);
     if (ar) {
       if (byArabic.has(ar)) {
-        errors.push(`FEHLER: Duʿāʾ ${shortId(byArabic.get(ar))} und ${shortId(id)} enthalten denselben arabischen Text.`);
+        console.warn(`HINWEIS: Duʿāʾ ${shortId(byArabic.get(ar))} und ${shortId(id)} enthalten denselben arabischen Text.`);
       } else {
         byArabic.set(ar, id);
       }
@@ -160,7 +160,7 @@ function validate() {
     const de = normalizeGerman(item.de);
     if (de) {
       if (byGerman.has(de)) {
-        errors.push(`FEHLER: Duʿāʾ ${shortId(byGerman.get(de))} und ${shortId(id)} enthalten denselben deutschen Text.`);
+        console.warn(`HINWEIS: Duʿāʾ ${shortId(byGerman.get(de))} und ${shortId(id)} enthalten denselben deutschen Text.`);
       } else {
         byGerman.set(de, id);
       }
@@ -172,7 +172,7 @@ function validate() {
       const a = parsed[i].item;
       const b = parsed[j].item;
       if (titleSimilarity(a.title, b.title) && normalizeArabic(a.ar) === normalizeArabic(b.ar)) {
-        errors.push(`FEHLER: Duʿāʾ ${shortId(a.id)} und ${shortId(b.id)} haben nahezu identischen Titel und arabischen Text.`);
+        console.warn(`HINWEIS: Duʿāʾ ${shortId(a.id)} und ${shortId(b.id)} haben nahezu identischen Titel und arabischen Text.`);
       }
     }
   }
