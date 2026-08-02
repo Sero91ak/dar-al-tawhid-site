@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v50-admin-live";
+  var ADMIN_SW_CACHE="dar-admin-stats-v52-no-live-edit";
   var MIG_KEY="darAdminSwFixV26";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -227,18 +227,6 @@ button{cursor:pointer}
 .change-item{border:1px solid var(--line2);border-radius:14px;background:rgba(90,140,220,.055);padding:10px}
 .change-item b{display:block;color:#fff4cc;font-size:12px}
 .change-item span{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:4px}
-.live-preview-shell{display:grid;grid-template-columns:minmax(250px,300px) minmax(0,1fr);gap:12px;align-items:start}
-.live-preview-device{--preview-w:430px;--preview-h:932px;width:min(100%,var(--preview-w));max-width:100%;margin:0 auto;border:1px solid rgba(144,183,232,.42);border-radius:42px;background:linear-gradient(180deg,rgba(18,31,52,.98),rgba(4,8,16,.99));padding:16px;box-shadow:0 26px 70px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.06);resize:both;overflow:auto}
-.live-preview-device.mobile{--preview-w:430px;--preview-h:932px}
-.live-preview-device.tablet{--preview-w:820px;--preview-h:1100px;border-radius:30px}
-.live-preview-device.desktop{--preview-w:1100px;--preview-h:760px;border-radius:22px}
-.live-preview-device.fullscreen{position:fixed;inset:max(10px,var(--safe-top)) max(10px,env(safe-area-inset-right,0px)) max(10px,var(--safe-bottom)) max(10px,env(safe-area-inset-left,0px));z-index:9999;width:auto!important;max-width:none!important;margin:0;border-radius:24px;resize:none;display:grid;grid-template-rows:minmax(0,1fr);background:#05080f}
-.live-preview-device.fullscreen .live-preview-frame{height:100%;min-height:0;border-radius:16px}
-.live-preview-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-.preview-size-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
-.preview-size-row label{display:grid;gap:5px;color:var(--muted);font-size:9px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
-.live-preview-frame{width:100%;height:var(--preview-h);min-height:420px;border:1px solid rgba(239,215,142,.18);border-radius:28px;background:#06080d}
-.live-preview-device.desktop .live-preview-frame{border-radius:14px}
 .admin-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .admin-form-grid .wide{grid-column:1/-1}
 .admin-textarea{width:100%;min-height:110px;resize:vertical;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.24);color:var(--ink);padding:11px;font-size:12px;line-height:1.5}
@@ -381,8 +369,8 @@ button{cursor:pointer}
 .toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:#0b1421;color:#eef6ff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s}
 .toast.show{opacity:1}
 @media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
-@media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell,.visitor-grid,.ordner-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}.publish-step-grid{grid-template-columns:1fr}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
+@media(max-width:950px){.hero,.split,.upload-grid,.visitor-grid,.ordner-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.publish-step-grid{grid-template-columns:1fr}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}}
 
 /* Final admin-frame correction: the whole admin app should not sit in a thick outer box. */
 .app{width:min(1540px,100%)}
@@ -560,7 +548,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v50</p>
+        <p><span class="status-dot"></span>Command Center · Admin v52</p>
       </div>
     </div>
     <div class="toolbar">
@@ -581,9 +569,7 @@ main#panel.panel{
 <script src="/admin/library-cover-gen.js?v=5"></script>
 <script src="/admin/library-manager.js?v=26"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
-<script src="/admin/live-edit.js?v=1"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=14">
-<link rel="stylesheet" href="/admin/live-edit.css?v=1">
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -606,12 +592,10 @@ const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
 const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
-const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
-  ["live-edit","Live-Bearbeitung"],
   ["quellen","Beiträge"],
   ["actions","Neuer Beitrag"],
   ["news","News"],
@@ -626,6 +610,10 @@ const DEFAULT_ADMIN_TABS=[
 const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
 const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
+try{
+  ["darAdminLiveAutosaveV1","darAdminLiveModeV1","darAdminLiveDeviceV1","darAdminLiveLocalVersionsV1","darAdminLiveAuditLocalV1","darAdminLivePreview","liveEditingEnabled","adminPreviewMode","lastLiveEditRoute","livePreviewDevice","livePreviewTheme"].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+  try{sessionStorage.removeItem("darAdminLivePreview")}catch(e){}
+}catch(e){}
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
 let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
 let sourceLibraryCache=null,sourceLibraryBusy=false,sourceDraftPending=null,sourceUploadQueue=[],sourceEditorContext="draft";
@@ -648,7 +636,7 @@ let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
 function adminIsEditing(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")return true;
+  if(currentTab==="bibliothek")return true;
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
@@ -807,7 +795,7 @@ function normalizeAdminTab(tab){
   if(id==="stats"||id==="overview")return"besucher";
   if(id==="preview")return"actions";
   if(id==="stories")return"start";
-  if(id==="live"||id==="live-bearbeitung"||id==="livebearbeitung")return"live-edit";
+  if(id==="live"||id==="live-edit"||id==="live-bearbeitung"||id==="livebearbeitung"||id==="visitor-preview"||id==="live-preview")return"start";
   if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
   return id||"start";
 }
@@ -835,17 +823,6 @@ function moveTab(id,dir){
   writeTabOrder(tabs);
 }
 function resetTabOrder(){try{localStorage.removeItem(ADMIN_TAB_ORDER_KEY)}catch(e){}}
-function previewSize(){
-  try{
-    const data=JSON.parse(localStorage.getItem(ADMIN_PREVIEW_SIZE_KEY)||"{}");
-    return{
-      width:Math.max(320,Math.min(1400,Number(data.width)||430)),
-      height:Math.max(520,Math.min(1600,Number(data.height)||932)),
-      mode:["mobile","tablet","desktop"].includes(data.mode)?data.mode:"mobile"
-    };
-  }catch(e){return{width:430,height:932,mode:"mobile"}}
-}
-function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
 function normalizeWorkerPublishUrl(url){
   const raw=String(url||"").trim();
   return(!raw||raw==="/api/admin/publish")?DEFAULT_WORKER_PUBLISH_URL:raw;
@@ -2293,7 +2270,7 @@ window.renderLibraryAdminPartial=function(){
   return true;
 };
 function renderShell(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")stopRefresh();
+  if(currentTab==="bibliothek")stopRefresh();
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -2306,7 +2283,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2315,11 +2292,10 @@ function renderShell(){
       </select>
     </nav>
     ${body}
-    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}${currentTab==="live-edit"?" · Live-Bearbeitung (ohne Statistik)":""}</div>`;
+    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
-  if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
@@ -2400,12 +2376,11 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Live-Bearbeitung","Besucheransicht mit kontextbezogenem Bearbeiten.","live-edit","Neu")}
-    ${folderCard("②","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
-    ${folderCard("③","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
-    ${folderCard("④","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
-    ${folderCard("⑤","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑥","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
+    ${folderCard("①","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
+    ${folderCard("②","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
+    ${folderCard("③","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
+    ${folderCard("④","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑤","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
     ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
   </section>
   <section class="command-grid">
@@ -3465,32 +3440,6 @@ function bindFeedImagePanels(){
   });
 }
 function bindCommandCenterForms(){
-  function applyPreview(width,height,mode){
-    const device=document.getElementById("livePreviewDevice");
-    const w=Math.max(320,Math.min(1400,Number(width)||430));
-    const h=Math.max(520,Math.min(1600,Number(height)||932));
-    const m=["mobile","tablet","desktop"].includes(mode)?mode:"mobile";
-    if(device){
-      device.classList.remove("mobile","tablet","desktop");
-      device.classList.add(m);
-      device.style.setProperty("--preview-w",w+"px");
-      device.style.setProperty("--preview-h",h+"px");
-    }
-    const wi=document.getElementById("previewWidthInput"),hi=document.getElementById("previewHeightInput");
-    if(wi)wi.value=String(w);
-    if(hi)hi.value=String(h);
-    savePreviewSize({width:w,height:h,mode:m});
-  }
-  const proMax=document.getElementById("previewProMaxBtn");if(proMax)proMax.onclick=()=>applyPreview(430,932,"mobile");
-  const mobile=document.getElementById("previewMobileBtn");if(mobile)mobile.onclick=()=>applyPreview(390,844,"mobile");
-  const tablet=document.getElementById("previewTabletBtn");if(tablet)tablet.onclick=()=>applyPreview(820,1100,"tablet");
-  const desktop=document.getElementById("previewDesktopBtn");if(desktop)desktop.onclick=()=>applyPreview(1100,760,"desktop");
-  const resetPreview=document.getElementById("previewResetBtn");if(resetPreview)resetPreview.onclick=()=>applyPreview(430,932,"mobile");
-  const fullscreen=document.getElementById("previewFullscreenBtn");if(fullscreen)fullscreen.onclick=()=>{const device=document.getElementById("livePreviewDevice");if(!device)return;device.classList.toggle("fullscreen");fullscreen.textContent=device.classList.contains("fullscreen")?"Vollbild schließen":"Vollbild";toast(device.classList.contains("fullscreen")?"Vorschau im Vollbild":"Vollbild geschlossen")};
-  if(!window.__adminPreviewEscapeBound){window.__adminPreviewEscapeBound=true;document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;const active=document.activeElement;if(active&&(active.matches?.("input,textarea,select,[contenteditable='true']")))return;const device=document.getElementById("livePreviewDevice");const btn=document.getElementById("previewFullscreenBtn");if(device?.classList.contains("fullscreen")){device.classList.remove("fullscreen");if(btn)btn.textContent="Vollbild"}})}
-  const previewWidth=document.getElementById("previewWidthInput"),previewHeight=document.getElementById("previewHeightInput");
-  if(previewWidth)previewWidth.onchange=()=>applyPreview(previewWidth.value,previewHeight?.value,previewSize().mode);
-  if(previewHeight)previewHeight.onchange=()=>applyPreview(previewWidth?.value,previewHeight.value,previewSize().mode);
   document.querySelectorAll("[data-tab-up]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabUp,-1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabUp);renderShell()});
   document.querySelectorAll("[data-tab-down]").forEach(btn=>btn.onclick=()=>{moveTab(btn.dataset.tabDown,1);addAdminLog("Einstellungen","Tab-Reihenfolge geändert",btn.dataset.tabDown);renderShell()});
   const resetTabs=document.getElementById("resetTabOrderBtn");if(resetTabs)resetTabs.onclick=()=>{resetTabOrder();addAdminLog("Einstellungen","Tab-Reihenfolge zurückgesetzt","Standard");renderShell()};
@@ -3939,7 +3888,7 @@ async function renderDashboard({force=false}={}){
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
-function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
