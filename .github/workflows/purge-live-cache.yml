@@ -8,6 +8,7 @@ on:
     paths:
       - test/index.html
       - index.html
+      - admin/**
       - version.json
       - service-worker.js
       - _headers

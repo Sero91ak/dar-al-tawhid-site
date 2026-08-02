@@ -1,0 +1,53 @@
+name: Deploy live Admin App
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - admin/**
+      - wrangler.toml
+      - _headers
+      - .github/workflows/deploy-live-admin-app.yml
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-admin-live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy static site (includes /admin)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Purge Cloudflare cache (admin + visitor)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          CLOUDFLARE_DEV_MODE: "1"
+        run: node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
+
+      - name: Verify live Admin UI
+        run: |
+          html="$(curl -fsSL "https://dar-al-tawhid.de/admin/")"
+          echo "$html" | grep -q "Veröffentlichen & Live-Push" || (echo "::error::Admin UI not live yet" && exit 1)
+          echo "$html" | grep -q "dar-admin-stats-v50-admin-live" || (echo "::error::Admin SW version mismatch" && exit 1)
+          echo "Live Admin v50 verified."
