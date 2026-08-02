@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-02T10:26:00.239Z",
+  "generated": "2026-08-02T10:26:01.272Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -107,12 +107,12 @@
       "postTitle": "📖 Das gewaltige Recht des Nachbarn",
       "publishedAt": "2026-08-02T10:14:14.133Z",
       "postPath": "content/posts/adab-454-das-gewaltige-recht-des-nachbarn.md",
-      "status": "sending",
+      "status": "sent",
       "createdAt": "2026-08-02T10:14:14.133Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-02T10:19:46.429Z",
       "lastError": "",
-      "updatedAt": "2026-08-02T10:26:00.239Z",
+      "updatedAt": "2026-08-02T10:26:01.272Z",
       "lastCheckAt": "2026-08-02T10:25:59.259Z",
       "liveCheck": {
         "ok": true,
@@ -137,7 +137,12 @@
         "visitorUrl": "https://dar-al-tawhid.de/?post=das-gewaltige-recht-des-nachbarn-454&v=1785666359206#post/das-gewaltige-recht-des-nachbarn-454"
       },
       "attempts": 1,
-      "sendingAt": "2026-08-02T10:26:00.239Z"
+      "sendingAt": "2026-08-02T10:26:00.239Z",
+      "sentAt": "2026-08-02T10:26:01.168Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:25",
+        "targetUrl": "https://dar-al-tawhid.de/?post=das-gewaltige-recht-des-nachbarn-454&v=1785666360866#post/das-gewaltige-recht-des-nachbarn-454"
+      }
     }
   }
 }
