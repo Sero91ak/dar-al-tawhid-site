@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-02T10:19:46.699Z",
+  "generated": "2026-08-02T10:25:59.349Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -111,32 +111,32 @@
       "createdAt": "2026-08-02T10:14:14.133Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-02T10:19:46.429Z",
-      "lastError": "Beitrag ist nicht im öffentlichen Index enthalten.",
-      "updatedAt": "2026-08-02T10:19:46.699Z",
-      "lastCheckAt": "2026-08-02T10:14:23.406Z",
+      "lastError": "",
+      "updatedAt": "2026-08-02T10:25:59.349Z",
+      "lastCheckAt": "2026-08-02T10:25:59.259Z",
       "liveCheck": {
-        "ok": false,
+        "ok": true,
         "steps": {
           "githubFileCreated": true,
           "indexUpdatedGithub": true,
           "indexFoundPublic": true,
-          "postInIndex": false,
-          "postFilePublic": false,
+          "postInIndex": true,
+          "postFilePublic": true,
           "visitorUrlOk": true,
-          "cloudflareDeployed": false
+          "cloudflareDeployed": true
         },
-        "diagnosis": "Beitrag ist nicht im öffentlichen Index enthalten.",
-        "indexOk": false,
-        "postOk": false,
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
         "visitorUrlOk": true,
-        "attempts": 3,
+        "attempts": 1,
         "site": "https://dar-al-tawhid.de",
         "postId": "das-gewaltige-recht-des-nachbarn-454",
-        "indexGenerated": "2026-07-30T10:03:45.681Z",
-        "indexCount": 453,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=das-gewaltige-recht-des-nachbarn-454&v=1785665663364#post/das-gewaltige-recht-des-nachbarn-454"
+        "indexGenerated": "2026-08-02T10:14:08.641Z",
+        "indexCount": 454,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=das-gewaltige-recht-des-nachbarn-454&v=1785666359206#post/das-gewaltige-recht-des-nachbarn-454"
       },
-      "attempts": 3
+      "attempts": 1
     }
   }
 }
