@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v49-push-retry';
+const CACHE_VERSION = 'dar-admin-stats-v50-admin-live';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
@@ -26,6 +26,10 @@ self.addEventListener('activate', (event) => {
       ))
       .then(() => self.clients.claim())
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event?.data?.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('fetch', (event) => {

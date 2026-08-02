@@ -26,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v43";
-  var MIG_KEY="darAdminSwFixV25";
+  var ADMIN_SW_CACHE="dar-admin-stats-v50-admin-live";
+  var MIG_KEY="darAdminSwFixV26";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -49,7 +49,27 @@
   }
   function registerAdmin(){
     if(!("serviceWorker" in navigator))return Promise.resolve();
-    return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/",updateViaCache:"none"});
+    return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/",updateViaCache:"none"}).then(function(reg){
+      reg.update().catch(function(){});
+      if(reg.waiting&&navigator.serviceWorker.controller){
+        reg.waiting.postMessage({type:"SKIP_WAITING"});
+      }
+      reg.addEventListener("updatefound",function(){
+        var worker=reg.installing;
+        if(!worker)return;
+        worker.addEventListener("statechange",function(){
+          if(worker.state==="installed"&&navigator.serviceWorker.controller){
+            location.reload();
+          }
+        });
+      });
+      navigator.serviceWorker.addEventListener("controllerchange",function(){
+        if(sessionStorage.getItem("darAdminSwReloaded")!=="1"){
+          sessionStorage.setItem("darAdminSwReloaded","1");
+          location.reload();
+        }
+      });
+    });
   }
   window.__DAR_ADMIN_REPAIR__=function(){
     if(!("serviceWorker" in navigator))return cleanCaches().then(function(){location.replace("/admin/?repair=1")});
@@ -540,7 +560,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center</p>
+        <p><span class="status-dot"></span>Command Center · Admin v50</p>
       </div>
     </div>
     <div class="toolbar">
