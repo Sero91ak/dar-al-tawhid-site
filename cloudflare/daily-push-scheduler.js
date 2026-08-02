@@ -216,7 +216,6 @@ async function loadDailyContentFile(env, deps, dateKey) {
     data = github?.data || null;
   }
   if (!data || data.date !== dateKey) return null;
-  if (!data.dua?.id && !data.recommendation?.id) return null;
   return data;
 }
 
@@ -245,71 +244,113 @@ async function loadPostMeta(file, env) {
   return { id, title, file, category, scholar, snippet: extractPostSnippet(markdown) };
 }
 
-export async function regenerateDailyContent(env, deps, dateKey, timeZone = "Europe/Berlin") {
+async function pickDuaForDay(env, dayIndex) {
   const origin = siteOrigin(env);
-  const dayIndex = dayOfYearInTz(new Date(), timeZone);
-  let recommendation = null;
-  let dua = null;
+  try {
+    const duas = await fetchJsonUrl(`${origin}/content/duas/duas.json?v=${Date.now()}`);
+    const items = Array.isArray(duas) ? duas : [];
+    if (!items.length) return null;
+    const item = items[Math.abs(dayIndex) % items.length];
+    return {
+      id: item.id,
+      title: item.title || "Duʿāʾ des Tages",
+      snippet: String(item.de || item.snippet || "").trim(),
+      category: item.category || item.cat || ""
+    };
+  } catch (_) {
+    return null;
+  }
+}
 
+async function pickRecommendationForDay(env, dayIndex) {
+  const origin = siteOrigin(env);
   try {
     const index = await fetchJsonUrl(`${origin}/content/posts/posts-index.json?v=${Date.now()}`);
     const files = (Array.isArray(index?.files) ? index.files : [])
       .map(item => typeof item === "string" ? item : item?.name)
       .filter(name => name && String(name).endsWith(".md"));
-    if (files.length) recommendation = await loadPostMeta(files[Math.abs(dayIndex * 7) % files.length], env);
-  } catch (_) {}
-
-  try {
-    const pool = await fetchJsonUrl(`${origin}/content/duas/daily-dua-combined-pool.json?v=${Date.now()}`);
-    const items = Array.isArray(pool) ? pool : Array.isArray(pool?.items) ? pool.items : [];
-    if (items.length) {
-      const item = items[Math.abs(dayIndex) % items.length];
-      dua = {
-        id: item.id,
-        title: item.title || "Duʿāʾ des Tages",
-        snippet: String(item.de || item.german || item.snippet || "").trim(),
-        category: item.category || item.cat || ""
-      };
-    }
-  } catch (_) {}
-
-  if (!dua?.id) {
-    try {
-      const duas = await fetchJsonUrl(`${origin}/content/duas/duas.json?v=${Date.now()}`);
-      const items = Array.isArray(duas) ? duas : [];
-      if (items.length) {
-        const item = items[Math.abs(dayIndex) % items.length];
-        dua = {
-          id: item.id,
-          title: item.title || "Duʿāʾ des Tages",
-          snippet: String(item.de || item.snippet || "").trim(),
-          category: item.category || item.cat || ""
-        };
-      }
-    } catch (_) {}
+    if (!files.length) return null;
+    return loadPostMeta(files[Math.abs(dayIndex * 7) % files.length], env);
+  } catch (_) {
+    return null;
   }
+}
+
+async function writeDailyContentGithub(env, deps, data, message) {
+  if (!deps?.githubPut) return { ok: false, reason: "githubPut fehlt" };
+  try {
+    const owner = env.GITHUB_OWNER || "Sero91ak";
+    const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+    const branch = env.GITHUB_BRANCH || "main";
+    const existing = deps.githubGet ? await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch) : null;
+    await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, `${JSON.stringify(data, null, 2)}\n`, message, branch, existing?.sha);
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, reason: error.message || String(error) };
+  }
+}
+
+export async function repairDailyContent(env, deps, dateKey, timeZone = "Europe/Berlin", existing = null) {
+  const dayIndex = dayOfYearInTz(new Date(), timeZone);
+  const base = existing && existing.date === dateKey ? { ...existing } : { date: dateKey, timezone: timeZone };
+  let recommendation = base.recommendation?.id ? base.recommendation : null;
+  let dua = base.dua?.id ? base.dua : null;
+
+  if (base.source === "dar-daily-no-repeat-rotation" && recommendation?.id && dua?.id) {
+    return base;
+  }
+
+  if (!recommendation?.id) recommendation = await pickRecommendationForDay(env, dayIndex);
+  if (!dua?.id) dua = await pickDuaForDay(env, dayIndex);
+  if (!recommendation?.id && !dua?.id) return null;
+
+  const repaired = {
+    ...base,
+    date: dateKey,
+    timezone: timeZone,
+    generated: new Date().toISOString(),
+    source: base.source === "dar-daily-no-repeat-rotation" ? base.source : "dar-daily-scheduler-repaired-v5",
+    recommendation,
+    dua
+  };
+
+  const write = await writeDailyContentGithub(env, deps, repaired, `Daily content repair ${dateKey}`);
+  if (!write.ok) repaired.writeError = write.reason;
+  return repaired;
+}
+
+export async function regenerateDailyContent(env, deps, dateKey, timeZone = "Europe/Berlin") {
+  const githubExisting = await readGithubJson(env, deps, DAILY_CONTENT_PATH);
+  if (githubExisting?.data?.date === dateKey
+    && githubExisting.data.source === "dar-daily-no-repeat-rotation"
+    && githubExisting.data.dua?.id
+    && githubExisting.data.recommendation?.id) {
+    return githubExisting.data;
+  }
+
+  const dayIndex = dayOfYearInTz(new Date(), timeZone);
+  let recommendation = githubExisting?.data?.date === dateKey && githubExisting.data.recommendation?.id
+    ? githubExisting.data.recommendation
+    : null;
+  let dua = githubExisting?.data?.date === dateKey && githubExisting.data.dua?.id
+    ? githubExisting.data.dua
+    : null;
+
+  if (!recommendation?.id) recommendation = await pickRecommendationForDay(env, dayIndex);
+  if (!dua?.id) dua = await pickDuaForDay(env, dayIndex);
 
   if (!recommendation && !dua) return null;
   const data = {
     date: dateKey,
     timezone: timeZone,
     generated: new Date().toISOString(),
-    source: "dar-daily-scheduler-regenerated-v4",
+    source: githubExisting?.data?.source === "dar-daily-no-repeat-rotation" ? githubExisting.data.source : "dar-daily-scheduler-regenerated-v5",
     recommendation,
     dua
   };
 
-  if (deps?.githubPut) {
-    try {
-      const owner = env.GITHUB_OWNER || "Sero91ak";
-      const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-      const branch = env.GITHUB_BRANCH || "main";
-      const existing = deps.githubGet ? await deps.githubGet(env, owner, repo, DAILY_CONTENT_PATH, branch) : null;
-      await deps.githubPut(env, owner, repo, DAILY_CONTENT_PATH, `${JSON.stringify(data, null, 2)}\n`, `Daily content ${dateKey}`, branch, existing?.sha);
-    } catch (error) {
-      data.writeError = error.message || String(error);
-    }
-  }
+  const write = await writeDailyContentGithub(env, deps, data, `Daily content ${dateKey}`);
+  if (!write.ok) data.writeError = write.reason;
   return data;
 }
 
@@ -553,8 +594,10 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     rows = registrations.rows;
     force = forceSettings(config, canonicalDateKey);
     dailyContent = await loadDailyContentFile(env, deps, canonicalDateKey);
-    if (!dailyContent?.dua?.id && !dailyContent?.recommendation?.id) {
+    if (!dailyContent) {
       dailyContent = await regenerateDailyContent(env, deps, canonicalDateKey, canonicalTimeZone);
+    } else if (!dailyContent.dua?.id || !dailyContent.recommendation?.id) {
+      dailyContent = await repairDailyContent(env, deps, canonicalDateKey, canonicalTimeZone, dailyContent);
     }
   } catch (error) {
     const status = {
