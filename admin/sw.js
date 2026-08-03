@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v66-video-touch-editor';
+const CACHE_VERSION = 'dar-admin-stats-v67-video-editor-full';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',

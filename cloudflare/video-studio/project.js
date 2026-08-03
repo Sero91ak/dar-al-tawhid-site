@@ -420,3 +420,107 @@ export function projectToCaptionPlan(project) {
     captionLines: overlays.map((o) => ({ at: o.at, text: o.text, role: o.role }))
   };
 }
+
+export function applyTemplateToProject(project, templateId) {
+  const tpl = DAR_EDITOR_TEMPLATES.find((t) => t.id === templateId);
+  if (!tpl || !project) return project;
+  const colors = tpl.colors;
+  const elements = (project.elements || []).map((el) => {
+    const base = styleForRole(el.role === "quote" ? "quote" : el.role, colors);
+    return {
+      ...el,
+      style: {
+        ...base,
+        ...(el.style || {}),
+        color: el.role === "branding" || el.role === "watermark" ? colors.gold : (el.role === "source" ? "#e8dcc0" : colors.cream),
+        background: el.style?.background?.mode === "none"
+          ? { mode: "none" }
+          : { mode: "soft-panel", color: colors.panel }
+      }
+    };
+  });
+  return normalizeProject({
+    ...project,
+    templateId: tpl.id,
+    elements
+  });
+}
+
+export function groupElements(project, ids) {
+  const set = new Set(ids || []);
+  if (set.size < 2) return project;
+  const groupId = uid("grp");
+  const elements = (project.elements || []).map((el) =>
+    set.has(el.id) ? { ...el, groupId } : el
+  );
+  return normalizeProject({ ...project, elements });
+}
+
+export function ungroupElements(project, groupId) {
+  const elements = (project.elements || []).map((el) =>
+    el.groupId === groupId ? { ...el, groupId: null } : el
+  );
+  return normalizeProject({ ...project, elements });
+}
+
+export function moveElements(project, ids, dx, dy) {
+  const set = new Set(ids || []);
+  const elements = (project.elements || []).map((el) => {
+    if (!set.has(el.id) || el.locked) return el;
+    return {
+      ...el,
+      transform: {
+        ...el.transform,
+        x: Math.round(el.transform.x + dx),
+        y: Math.round(el.transform.y + dy)
+      }
+    };
+  });
+  return normalizeProject({ ...project, elements });
+}
+
+export function alignElements(project, ids, mode = "center-x") {
+  const set = new Set(ids || []);
+  const targets = (project.elements || []).filter((el) => set.has(el.id));
+  if (!targets.length) return project;
+  const canvasW = 1080;
+  const canvasH = 1920;
+  const elements = (project.elements || []).map((el) => {
+    if (!set.has(el.id) || el.locked) return el;
+    const t = { ...el.transform };
+    if (mode === "center-x" || mode === "center") t.x = Math.round((canvasW - t.width) / 2);
+    if (mode === "center-y" || mode === "center") t.y = Math.round(canvasH / 2 - 80);
+    if (mode === "top") t.y = 110;
+    if (mode === "bottom") t.y = canvasH - 360;
+    if (mode === "left") t.x = 70;
+    if (mode === "right") t.x = canvasW - t.width - 70;
+    return { ...el, transform: t };
+  });
+  return normalizeProject({ ...project, elements });
+}
+
+export function extractTemplatePayload(project) {
+  return {
+    id: uid("tpl"),
+    label: project.name || "Eigene DAR-Vorlage",
+    createdAt: nowIso(),
+    templateId: project.templateId,
+    duration: project.duration,
+    elements: (project.elements || []).map((el) => ({
+      role: el.role,
+      type: el.type,
+      style: el.style,
+      transform: el.transform,
+      opacity: el.opacity,
+      animationIn: el.animationIn,
+      animationOut: el.animationOut,
+      social: el.social,
+      scale: el.scale
+    })),
+    background: {
+      motionType: project.background?.motionType,
+      dimOpacity: project.background?.dimOpacity,
+      protectOriginalContent: project.background?.protectOriginalContent !== false
+    }
+  };
+}

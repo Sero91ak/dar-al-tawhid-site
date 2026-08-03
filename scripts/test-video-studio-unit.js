@@ -291,5 +291,43 @@ assert.equal(tl.meta.fromEditor, true);
 assert.equal(tl.meta.watermarkCount, 1);
 assert.ok(tl.meta.watermark.opacity <= 0.12);
 
+import {
+  recommendedReadingSeconds,
+  contrastRatio,
+  checkTextContrast,
+  redistributeTimings,
+  interpolateKeyframes,
+  addKeyframe,
+  applyHighlightToSelection,
+  snapshotVersion,
+  HIGHLIGHT_PRESETS,
+  ANIMATION_PRESETS
+} from "../cloudflare/video-studio/editor-lib.js";
+
+assert.ok(recommendedReadingSeconds("Kurzer Text.", { role: "source" }) >= 2);
+assert.ok(recommendedReadingSeconds("Ein etwas längerer Satz mit mehreren Wörtern für die Lesedauer.", { role: "quote" }) >= 2.4);
+assert.ok(contrastRatio("#fff8e8", "#12141a") >= 4.5);
+assert.equal(checkTextContrast({ color: "#fff8e8", background: { mode: "none" } }).ok, true);
+assert.ok(HIGHLIGHT_PRESETS["dar-gold"]);
+assert.ok(ANIMATION_PRESETS.fade);
+
+const redistributed = redistributeTimings(proj.elements, 15, voice);
+assert.ok(Array.isArray(redistributed));
+assert.ok(redistributed.every((e) => e.timing.end > e.timing.start));
+
+const withKf = addKeyframe({ transform: { x: 0, y: 0 }, opacity: 1 }, 0, { x: 10, y: 20, opacity: 1 });
+const withKf2 = addKeyframe(withKf, 2, { x: 30, y: 40, opacity: 0.5 });
+const mid = interpolateKeyframes(withKf2.keyframes, 1);
+assert.ok(mid.x > 10 && mid.x < 30);
+
+const hi = applyHighlightToSelection("Dies ist ein Testsatz.", { start: 9, end: 12 }, "dar-gold");
+assert.equal(hi.segments.length, 1);
+assert.equal(hi.segments[0].text, "ein");
+assert.equal(hi.segments[0].color, "#efd78e");
+
+const snap = snapshotVersion(proj, "unit");
+assert.equal(snap.label, "unit");
+assert.ok(snap.project.duration === 15);
+
 console.log("video-studio unit checks ok");
 

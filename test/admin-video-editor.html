@@ -24,9 +24,16 @@
     <button type="button" id="btnCheck">Prüfen</button>
     <button type="button" class="primary" id="btnExport">Export</button>
   </header>
-
+  <div class="multi-bar" id="multiBar">
+    <span id="multiCount">0 ausgewählt</span>
+    <button type="button" id="btnAlignC">Zentrieren</button>
+    <button type="button" id="btnGroup">Gruppieren</button>
+    <button type="button" id="btnUngroup">Auflösen</button>
+    <button type="button" id="btnDupMulti">Duplizieren</button>
+    <button type="button" id="btnLockMulti">Sperren</button>
+    <button type="button" id="btnClearMulti">Fertig</button>
+  </div>
   <aside class="layers" id="layers"></aside>
-
   <main class="workspace" id="workspace">
     <div class="stage-wrap" id="stageWrap">
       <div class="stage-bg" id="stageBg"></div>
@@ -36,9 +43,7 @@
       <div id="stage" style="position:absolute;inset:0"></div>
     </div>
   </main>
-
   <aside class="props" id="props"></aside>
-
   <section class="timeline">
     <div class="tl-head">
       <button type="button" id="btnPlay">▶</button>
@@ -46,24 +51,34 @@
       <button type="button" class="ghost" id="btnGuides">Hilfslinien</button>
       <button type="button" class="ghost" id="btnSafe">Safe Area</button>
       <button type="button" class="ghost" id="btnMode">Schnell/Profi</button>
+      <button type="button" class="ghost" id="btnKeyframe">Keyframe</button>
+      <button type="button" class="ghost" id="btnSnap">Einrasten</button>
     </div>
-    <div style="overflow:auto">
-      <div class="tl-track" id="tlTrack"></div>
-    </div>
+    <div style="overflow:auto"><div class="tl-track" id="tlTrack"></div></div>
   </section>
-
   <nav class="tools">
-    <div class="tool-scroll">
-      <button type="button" id="btnText">Text</button>
-      <button type="button" id="btnStyle">Schrift</button>
-      <button type="button" id="btnTime">Zeit & Dauer</button>
-      <button type="button" onclick="document.getElementById('btnCheck').click()">Prüfen</button>
-      <button type="button" class="primary" onclick="document.getElementById('btnExport').click()">Export</button>
+    <div class="tool-scroll" id="toolScroll">
+      <button type="button" data-tool="text">Text</button>
+      <button type="button" data-tool="font">Schrift</button>
+      <button type="button" data-tool="style">Stil</button>
+      <button type="button" data-tool="color">Farbe</button>
+      <button type="button" data-tool="position">Position</button>
+      <button type="button" data-tool="animation">Animation</button>
+      <button type="button" data-tool="time">Zeit & Dauer</button>
+      <button type="button" data-tool="bg">Hintergrund</button>
+      <button type="button" data-tool="voice">Stimme</button>
+      <button type="button" data-tool="audio">Audio</button>
+      <button type="button" data-tool="logo">Logo</button>
+      <button type="button" data-tool="source">Quelle</button>
+      <button type="button" data-tool="social">Social</button>
+      <button type="button" data-tool="layers">Ebenen</button>
+      <button type="button" data-tool="templates">Vorlagen</button>
+      <button type="button" data-tool="check">Prüfen</button>
+      <button type="button" class="primary" data-tool="export">Export</button>
     </div>
     <div class="notice" id="notice">Lade Projekt…</div>
   </nav>
 </div>
-
 <div class="backdrop" id="backdrop"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -72,7 +87,6 @@
   </div>
   <div id="sheetBody"></div>
 </div>
-
 <script src="/admin/video-editor.js"></script>
 </body>
 </html>
