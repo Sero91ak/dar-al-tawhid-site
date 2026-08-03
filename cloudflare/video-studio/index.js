@@ -12,7 +12,6 @@ import {
   savePronunciationDict
 } from "./job-store.js";
 import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop, refreshVideoStudioJobUrls } from "./pipeline.js";
-import { providersStatus, probeFalAuth } from "./providers/index.js";
 import { getVideoAsset, verifySignedAssetRequest, putVideoAsset, createSignedAssetUrl, deleteVideoPrefix } from "./storage.js";
 import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
 import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth, submitShotstackTimeline, composeFinalVideo } from "./compose.js";
@@ -37,7 +36,6 @@ import {
   snapshotVersion
 } from "./editor-lib.js";
 import { parseContributionText, estimateVideoCost } from "./text-parse.js";
-import { generateSceneImage } from "./scene-image.js";
 import { synthesizeDarVoice } from "./voice.js";
 import { prepareVoiceScript, stripVoiceNoise } from "./voice-prep.js";
 
@@ -77,15 +75,15 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
 
   if (request.method === "GET" && rest === "/providers/status") {
     const spentEur = await readMonthSpend(env);
-    const shotstack = shotstackEnvironment(env);
-    const [falProbe, voiceProbe, shotstackProbe] = await Promise.all([
-      probeFalAuth(env),
+    const shotstack = shotstackEnvironment(env, { final: true });
+    const [voiceProbe, shotstackProbe] = await Promise.all([
       probeElevenAuth(env),
       probeShotstackAuth(env)
     ]);
     return json({
       ok: true,
-      providers: providersStatus(env),
+      productName: "Sprach-Bildbeitrag",
+      mode: "speech-image",
       voiceConfigured: isVoiceConfigured(env),
       composerConfigured: isComposerConfigured(env),
       shotstackHost: shotstack.host,
@@ -95,10 +93,11 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       signingConfigured: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || env.ADMIN_PUBLISH_SECRET || "").trim()),
       monthSpendEur: spentEur,
       probes: {
-        fal: falProbe,
         elevenlabs: voiceProbe,
         shotstack: shotstackProbe
-      }
+      },
+      /* fal/Video-Provider bewusst nicht mehr im Produktionsstatus */
+      generativeVideoEnabled: false
     }, cors);
   }
 
@@ -115,39 +114,10 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
   }
 
   if (request.method === "POST" && rest === "/scene-image") {
-    await assertVideoStudioRateLimit(env, request);
-    const body = await request.json().catch(() => ({}));
-    let statement = body.statement;
-    if (!statement && (body.text || body.contributionText)) {
-      const parsed = parseContributionText(body.text || body.contributionText);
-      if (!parsed.ok) return json({ ok: false, error: parsed.reason }, cors, 422);
-      statement = parsed.statement;
-    }
-    if (!statement?.de) return json({ ok: false, error: "Text/Aussage für Szenenbild fehlt" }, cors, 422);
-    const generated = await generateSceneImage(env, { statement });
-    if (!generated.ok) {
-      return json({ ok: false, error: generated.reason || "Szenenbild fehlgeschlagen" }, cors, generated.setupRequired ? 503 : 502);
-    }
-    const sceneId = `scene_${Date.now().toString(36)}`;
-    const key = `library/scenes/${sceneId}.jpg`;
-    try {
-      const imgRes = await fetch(generated.url);
-      const bytes = await imgRes.arrayBuffer();
-      await putVideoAsset(env, key, bytes, imgRes.headers.get("content-type") || "image/jpeg");
-      const signed = await createSignedAssetUrl(env, { jobId: "library", key, ttlSec: 24 * 3600 });
-      return json({
-        ok: true,
-        sceneImage: {
-          id: sceneId,
-          url: signed.ok ? signed.url : generated.url,
-          sourceUrl: generated.url,
-          r2Key: key,
-          estimatedCostEur: generated.estimatedCostEur || 0.05
-        }
-      }, cors);
-    } catch {
-      return json({ ok: true, sceneImage: { id: sceneId, url: generated.url, r2Key: null, estimatedCostEur: generated.estimatedCostEur || 0.05 } }, cors);
-    }
+    return json({
+      ok: false,
+      error: "KI-Bildgenerierung ist deaktiviert. Bitte ein externes 4K-/9:16-Bild hochladen oder aus der Bibliothek wählen."
+    }, cors, 410);
   }
 
   if (request.method === "POST" && rest === "/scene-image/upload") {
@@ -518,13 +488,13 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       }
       project.background = {
         ...project.background,
-        clipUrls: media.clipUrls,
+        clipUrls: media.clipUrls || [],
         assetUrl: media.sceneImageUrl || project.background?.assetUrl || ""
       };
       if (project.audioTracks?.[0]) project.audioTracks[0].url = media.voiceUrl || project.audioTracks[0].url;
 
-      if (!media.clipUrls.length) {
-        return json({ ok: false, error: "Keine Bewegungsclips – zuerst Video erzeugen" }, cors, 409);
+      if (!media.sceneImageUrl && !media.clipUrls.length) {
+        return json({ ok: false, error: "Kein Ausgangsbild – zuerst Bild wählen und Sprach-Bildbeitrag erzeugen" }, cors, 409);
       }
 
       const timeline = buildTimelineFromProject(env, project);
@@ -798,13 +768,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
           error: "Stage-/Vorschau-Render mit Fremdwasserzeichen-Risiko – bitte Production-Endfassung erzeugen"
         }, cors, 409);
       }
-      if (job.artifacts?.render?.provider === "fal-ffmpeg" && !job.artifacts?.render?.brandingApplied) {
-        return json({
-          ok: false,
-          error: "fal-ffmpeg-Merge ohne DAR-Texte/Wasserzeichen – Freigabe erst nach Shotstack Production-Endfassung"
-        }, cors, 409);
-      }
-      if (job.validation?.blocked || (job.validation && job.validation.ok === false)) {
+            if (job.validation?.blocked || (job.validation && job.validation.ok === false)) {
         return json({
           ok: false,
           error: `Export-Validierung blockiert: ${(job.validation.errors || []).join(" · ") || "Pflichtchecks fehlgeschlagen"}`
@@ -912,7 +876,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     return json({ ok: true, job: publicJob(job || progressed) }, cors);
   }
 
-  return json({ ok: false, error: "Video-Studio Route nicht gefunden" }, cors, 404);
+  return json({ ok: false, error: "Sprach-Bildbeitrag Route nicht gefunden" }, cors, 404);
 }
 
 async function serveSignedAsset(request, env, url, rest, cors) {

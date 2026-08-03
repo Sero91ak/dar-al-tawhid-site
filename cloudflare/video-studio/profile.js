@@ -3,12 +3,15 @@
 import { DAR_VIDEO_DURATION_SEC, PRESERVE_SCENE_PROMPT } from "./timeline.js";
 
 export const DAR_VIDEO_PROFILE = Object.freeze({
-  id: "dar-standard-v4",
+  id: "dar-speech-image-v1",
+  productName: "Sprach-Bildbeitrag",
   format: "9:16",
   width: 1080,
   height: 1920,
   fps: 30,
+  /** Richtwert; echte Dauer folgt der Stimme */
   durationSec: DAR_VIDEO_DURATION_SEC,
+  durationMode: "voice-driven",
   codec: "h264",
   pixelFormat: "yuv420p",
   colorSpace: "bt709",
@@ -87,31 +90,40 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
     noModernVehicles: true,
     preserveUploadedScene: true,
     singleCenteredWatermark: true,
-    fixedDuration15s: true
+    fixedDuration15s: false,
+    noGenerativeVideo: true,
+    noFalVideo: true,
+    stillImageOnly: true,
+    subtleKenBurnsOnly: true
   }),
   preserveScenePrompt: PRESERVE_SCENE_PROMPT,
   promptSafetySuffix: [
-    "Photorealistic cinematic Islamic educational short film, vertical 9:16, premium calm atmosphere.",
-    "Theme-bound scene derived from the statement — not a generic stock mosque, desert, or library template.",
-    "Historically and temporally plausible architecture, clothing, tools, and lighting for the topic era.",
-    "Only anonymous symbolic figures when people appear: backs turned, cropped, or fully face-hidden; never identifiable portraits.",
-    "Never depict any prophet as a person in any form (no face, back, silhouette, shadow-person, veiled body, or body crop of a prophet).",
-    "Modest clothing, anatomically correct hands, gentle camera motion, real movement, no horror masks.",
-    "Absolutely no modern vehicles: no cars, automobiles, trucks, vans, buses, motorcycles, scooters, or traffic.",
-    "No text overlays in the generated clip, no logos, no watermarks, no music, no collage, no readable invented writing on props."
+    "Speech-image contribution only: preserve the uploaded 9:16 still.",
+    "No generative video, no new people, faces, clothing, architecture, or objects.",
+    "Only subtle non-generative camera motion (slow push-in / drift).",
+    "No music, no foreign watermarks, no text baked into the source image."
   ].join(" ")
 });
 
 export const PIPELINE_STAGES = Object.freeze([
   "statement",
-  "storyboard",
-  "references",
-  "clips",
+  "image",
   "voice",
-  "captions",
+  "layout",
   "render",
   "review"
 ]);
+
+/** Statusmeldungen für die kompakte Oberfläche */
+export const PIPELINE_STAGE_LABELS = Object.freeze({
+  statement: "Text geprüft",
+  image: "Bild vorbereitet",
+  voice: "Stimme wird erzeugt",
+  layout: "Gestaltung wird gesetzt",
+  render: "MP4 wird gerendert",
+  review: "Qualitätsprüfung",
+  completed: "Fertig"
+});
 
 export function emptyQualityChecks() {
   return {

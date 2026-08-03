@@ -1,5 +1,6 @@
 /**
- * Sprachtext-Vorbereitung für die feste DAR-Männerstimme (§14).
+ * Sprachtext-Vorbereitung für die feste DAR-Männerstimme.
+ * Standard: Sprecher + Aussage. Quelle und Social werden nicht vorgelesen.
  */
 
 export function stripVoiceNoise(text) {
@@ -17,12 +18,22 @@ export function stripVoiceNoise(text) {
     .trim();
 }
 
-export function prepareVoiceScript({ speakerLine, quote, source, followLine } = {}) {
+/**
+ * @param {{ speakerLine?: string, quote?: string, source?: string, followLine?: string, readSource?: boolean, readFollow?: boolean }} opts
+ */
+export function prepareVoiceScript({
+  speakerLine,
+  quote,
+  source,
+  followLine,
+  readSource = false,
+  readFollow = false
+} = {}) {
   const parts = [
     stripVoiceNoise(speakerLine),
-    stripVoiceNoise(quote),
-    source ? `Quelle: ${stripVoiceNoise(source)}.` : "",
-    stripVoiceNoise(followLine)
-  ].filter(Boolean);
-  return parts.join("\n\n");
+    stripVoiceNoise(quote)
+  ];
+  if (readSource && source) parts.push(`Quelle: ${stripVoiceNoise(source)}.`);
+  if (readFollow && followLine) parts.push(stripVoiceNoise(followLine));
+  return parts.filter(Boolean).join("\n\n");
 }

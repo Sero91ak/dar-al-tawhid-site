@@ -1,8 +1,8 @@
 /**
- * Pflichtprüfungen vor Export (DAR-Video-Spezifikation §15).
+ * Pflichtprüfungen vor Export (Sprach-Bildbeitrag).
  */
 import { DAR_VIDEO_PROFILE } from "./profile.js";
-import { DAR_CAPTION_SLOTS, DAR_VIDEO_DURATION_SEC, isForbiddenAutoLabel } from "./timeline.js";
+import { DAR_VIDEO_DURATION_SEC, isForbiddenAutoLabel } from "./timeline.js";
 import { validateGlyphCoverage } from "./glyphs.js";
 
 export function emptyVideoValidation() {
@@ -52,6 +52,11 @@ export function runVideoValidation({
   const roles = new Set(overlays.map((o) => o.role));
   const brandCfg = DAR_VIDEO_PROFILE.branding;
   const safe = DAR_VIDEO_PROFILE.safeArea;
+  const speechImage =
+    storyboard?.mode === "speech-image" ||
+    plan?.mode === "speech-image" ||
+    timelineMeta?.mode === "speech-image" ||
+    DAR_VIDEO_PROFILE.safety?.stillImageOnly === true;
 
   const glyph = validateGlyphCoverage(textBlob(statement, plan), {
     fonts: ["Amiri", "Noto Naskh Arabic", "Cormorant Garamond"]
@@ -66,9 +71,6 @@ export function runVideoValidation({
     String(render?.shotstackEnv || "") === "stage" ||
     render?.composeFallback === "shotstack-stage";
   checks.noForeignWatermark = Boolean(render?.ok) && !stageRisk;
-  if (render?.provider === "fal-ffmpeg" && render?.ok && !stageRisk) {
-    checks.noForeignWatermark = true;
-  }
   if (!checks.noForeignWatermark) {
     errors.push("Fremdwasserzeichen-Risiko (SHOTSTACK Stage o.ä.) – Export blockiert");
   }
@@ -97,9 +99,7 @@ export function runVideoValidation({
   const source = overlays.find((o) => o.role === "source");
   const sourceText = String(source?.text || statement?.source || "").trim();
   checks.sourceReadable =
-    sourceText.length >= 8 &&
-    Number(source?.length || 0) >= 2 &&
-    Math.abs(Number(source?.at || DAR_CAPTION_SLOTS.source.at) - DAR_CAPTION_SLOTS.source.at) < 0.35;
+    sourceText.length >= 8 && Number(source?.length || 0) >= 2;
   if (!checks.sourceReadable) errors.push("Quelle unlesbar oder zu kurz eingeblendet (<2s)");
 
   checks.textInsideSafeArea =
@@ -109,20 +109,28 @@ export function runVideoValidation({
     overlays.every((o) => Number(o.at || 0) >= 0 && Number(o.length || 0) >= 1.2);
   if (!checks.textInsideSafeArea) errors.push("Text/Safe-Area verletzt");
 
-  const prompts = (storyboard?.scenes || []).map((s) => `${s.fullPrompt || ""} ${s.negativePrompt || ""}`).join(" ").toLowerCase();
-  checks.noAnachronisticObjects =
-    /no modern|historically|preserve the original|no cars|automobile|vehicle/.test(prompts) &&
-    /car|vehicle|automobile|motorcycle/.test((storyboard?.scenes || []).map((s) => s.negativePrompt || "").join(" ").toLowerCase());
+  if (speechImage) {
+    // Standbild bleibt unverändert – keine generativen Prompt-Checks
+    checks.noAnachronisticObjects = Boolean(storyboard?.fromStill || storyboard?.sceneImageUrl || timelineMeta?.sceneImageUrl);
+    checks.noVisibleFaces = checks.noAnachronisticObjects;
+  } else {
+    const prompts = (storyboard?.scenes || []).map((s) => `${s.fullPrompt || ""} ${s.negativePrompt || ""}`).join(" ").toLowerCase();
+    checks.noAnachronisticObjects =
+      /no modern|historically|preserve the original|no cars|automobile|vehicle/.test(prompts) &&
+      /car|vehicle|automobile|motorcycle/.test((storyboard?.scenes || []).map((s) => s.negativePrompt || "").join(" ").toLowerCase());
+    checks.noVisibleFaces =
+      /face|hidden|silhouette|back|anonymous|cropped|shadow/.test(prompts) || Boolean(storyboard?.prophetRelated);
+  }
   if (!checks.noAnachronisticObjects) errors.push("Anachronismus-/Fahrzeug-Regeln unklar");
-
-  checks.noVisibleFaces =
-    /face|hidden|silhouette|back|anonymous|cropped|shadow/.test(prompts) || Boolean(storyboard?.prophetRelated);
   if (!checks.noVisibleFaces) errors.push("Gesichtsregeln unklar");
 
+  const duration = Number(
+    render?.durationSeconds || timelineMeta?.durationSec || storyboard?.durationSec || DAR_VIDEO_DURATION_SEC
+  );
   checks.noEmptyEndScreen = Boolean(
     roles.has("cta") &&
-      Number(cta?.at || 0) >= 12 &&
       Number(cta?.length || 0) >= 2 &&
+      Number(cta?.at || 0) + Number(cta?.length || 0) >= duration - 0.6 &&
       (timelineMeta?.lastClipCoversEnd === true || timelineMeta?.background !== "#070b14")
   );
   if (!checks.noEmptyEndScreen) errors.push("Leeres/schwarzes Schlussbild-Risiko");
@@ -130,7 +138,6 @@ export function runVideoValidation({
   const topic = String(statement?.topic || storyboard?.theme || "").trim();
   const hay = `${statement?.de || ""} ${statement?.raw || ""} ${statement?.fazit || ""}`;
   const brandOverlay = overlays.find((o) => o.role === "brand");
-  // Verbotene Labels nur blockieren, wenn sie im Video-Overlay erscheinen (nicht nur intern als Thema)
   checks.noInventedCategory = !brandOverlay?.topic && !overlays.some((o) =>
     o.role === "brand" && isForbiddenAutoLabel(o.text)
   );
@@ -144,10 +151,8 @@ export function runVideoValidation({
   checks.audioPresent = Boolean(render?.audioAttached) || render?.provider === "shotstack";
   if (render && !checks.audioPresent) errors.push("Audiospur fehlt");
 
-  const duration =
-    Number(render?.durationSeconds || timelineMeta?.durationSec || storyboard?.motionSeconds || DAR_VIDEO_DURATION_SEC);
-  checks.durationValid = duration >= 14.5 && duration <= 15.5;
-  if (!checks.durationValid) errors.push(`Dauer ungültig (${duration}s, erwartet 15s)`);
+  checks.durationValid = duration >= 8 && duration <= 180;
+  if (!checks.durationValid) errors.push(`Dauer ungültig (${duration}s, erwartet 8–180s je nach Stimme)`);
 
   const required = Object.keys(checks);
   const ok = required.every((k) => checks[k] === true);
@@ -156,7 +161,7 @@ export function runVideoValidation({
     checks,
     errors,
     glyph,
-    previewFrameHints: [2, 6, 11, 14],
+    previewFrameHints: timelineMeta?.previewFrames || [2, 6, 11, 14],
     blocked: !ok
   };
 }

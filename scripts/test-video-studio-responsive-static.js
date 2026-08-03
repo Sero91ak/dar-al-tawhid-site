@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Static responsive sanity checks for DAR video studio HTML (no browser). */
+/** Static responsive sanity checks for DAR Sprach-Bildbeitrag HTML (no browser). */
 import fs from "node:fs";
 import assert from "node:assert/strict";
 
@@ -11,24 +11,27 @@ const required = [
   "overflow-x:hidden",
   "min-height:44px",
   "object-fit:contain",
-  "KI-Video-Studio",
+  "Sprach-Bildbeitrag",
   "Textbeitrag einfügen",
   "Bild hochladen",
   "Aus Bibliothek",
-  "Optional: KI-Szenenbild",
-  "Optional erzeugen",
-  "Video-Beitrag erstellen",
-  "Video-Bild erstellen",
-  "Server-Aufträge",
+  "Sprach-Bildbeitrag erstellen",
+  "Sprach-Bildbeiträge",
   "api/admin/video-studio",
   "X-Admin-Secret",
   "costConfirmed",
+  "speech-image",
   "Im Feed veröffentlichen",
-  "Besucher-Push senden"
+  "Besucher-Push senden",
+  "Textaufteilung bearbeiten",
+  "Stimme &amp; Gestaltung"
 ];
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);
 }
-assert.ok(html.indexOf("Bild hochladen") < html.indexOf("Optional: KI-Szenenbild"), "Upload must appear before optional KI generation");
+assert.ok(!html.includes("KI-Video-Studio"), "old KI-Video-Studio title must be gone");
+assert.ok(!html.includes("Optional: KI-Szenenbild"), "optional KI scene gen must be gone");
+assert.ok(!html.includes("Video-Beitrag erstellen"), "old create button must be gone");
+assert.ok(!html.includes("Bewegungsclip"), "clip UI must be gone");
 assert.ok(!/FAL_KEY|ELEVENLABS_API_KEY|SHOTSTACK_API_KEY|sk-[a-zA-Z0-9]{10,}/.test(html), "no provider secrets in HTML");
 console.log("video-studio responsive static checks ok");

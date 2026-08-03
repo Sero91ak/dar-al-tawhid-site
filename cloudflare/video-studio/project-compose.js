@@ -100,25 +100,26 @@ function shotstackPositionFromTransform(el, canvasW = 1080, canvasH = 1920) {
  */
 export function buildTimelineFromProject(env, project) {
   const clipUrls = project.background?.clipUrls?.filter(Boolean) || [];
+  const sceneImageUrl = String(project.background?.assetUrl || project.background?.sceneImageUrl || "").trim();
   const voiceUrl = (project.audioTracks || []).find((a) => a.type === "voice")?.url || "";
   const captionPlan = projectToCaptionPlan(project);
+  const duration = Number(project.duration) || Number(captionPlan?.durationSec) || 15;
 
-  // Basis-Timeline (Clips + Meta), dann Textclips durch Editor-HTML ersetzen
   const base = buildShotstackTimeline({
-    clipUrls: clipUrls.length ? clipUrls : ["https://example.com/placeholder.mp4"],
+    sceneImageUrl: sceneImageUrl || undefined,
+    clipUrls: sceneImageUrl ? [] : clipUrls,
     voiceUrl,
     captionPlan,
     watermarkUrl: publicBrandAssetUrl(env || {}, DAR_VIDEO_PROFILE.branding.watermarkPublicPath),
     logoUrl: publicBrandAssetUrl(env || {}, DAR_VIDEO_PROFILE.branding.logoPublicPath),
-    sceneDurationSec: Math.max(3, (Number(project.duration) || 15) / 3)
+    durationSec: duration,
+    kenBurns: project.background?.kenBurns || "zoomIn"
   });
 
-  if (!clipUrls.length) {
-    // Kein echter Clip – nur Struktur für Validierung/Preview-Meta
+  if (!sceneImageUrl && !clipUrls.length) {
     return { ...base, previewOnly: true };
   }
 
-  const duration = Number(project.duration) || 15;
   const textElements = (project.elements || []).filter(
     (el) => el.visible && el.role !== "watermark" && (el.type === "text" || el.type === "social" || el.role === "social")
   );
@@ -178,19 +179,40 @@ export function buildTimelineFromProject(env, project) {
 
   tracks.push({ clips: [dimClip, ...textClips] });
 
-  const sceneLen = duration / Math.max(1, clipUrls.length);
-  const videoClips = clipUrls.map((src, index) => ({
-    asset: { type: "video", src, volume: 0 },
-    start: index * sceneLen,
-    length: index === clipUrls.length - 1 ? duration - index * sceneLen : sceneLen,
-    fit: "cover"
-  }));
-  tracks.push({ clips: videoClips });
+  if (sceneImageUrl) {
+    tracks.push({
+      clips: [{
+        asset: { type: "image", src: sceneImageUrl },
+        start: 0,
+        length: duration,
+        fit: "cover",
+        effect: project.background?.kenBurns || "zoomIn"
+      }]
+    });
+  } else {
+    const sceneLen = duration / Math.max(1, clipUrls.length);
+    const videoClips = clipUrls.map((src, index) => ({
+      asset: { type: "video", src, volume: 0 },
+      start: index * sceneLen,
+      length: index === clipUrls.length - 1 ? duration - index * sceneLen : sceneLen,
+      fit: "cover"
+    }));
+    tracks.push({ clips: videoClips });
+  }
+
+  if (voiceUrl) {
+    tracks.push({
+      clips: [{
+        asset: { type: "audio", src: voiceUrl, volume: 1 },
+        start: Number(project.background?.voiceStart ?? 1.8),
+        length: Math.max(4, duration - 2.2)
+      }]
+    });
+  }
 
   return {
     timeline: {
       background: "#1a1814",
-      soundtrack: voiceUrl ? { src: voiceUrl, effect: "fadeOut", volume: 1 } : undefined,
       tracks
     },
     output: {
@@ -202,6 +224,7 @@ export function buildTimelineFromProject(env, project) {
     },
     meta: {
       durationSec: duration,
+      mode: "speech-image",
       watermarkCount: wm ? 1 : 0,
       watermark: wm
         ? {

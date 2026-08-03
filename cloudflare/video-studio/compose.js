@@ -1,12 +1,12 @@
-import { falKey, falQueue, falStatus, falResult } from "./providers/base.js";
 import { DAR_VIDEO_PROFILE, publicBrandAssetUrl } from "./profile.js";
 import { emphasizeHtml, escapeHtml } from "./storyboard.js";
+import { DAR_INTRO_SEC, computeSpeechImageDurationSec } from "./timeline.js";
 
 function shotstackKey(env) {
   return String(env.SHOTSTACK_API_KEY || "").trim();
 }
 
-/** Stage = interne Vorschau (Fremdwasserzeichen möglich). v1 = Freigabe-Endfassung. */
+/** Stage = interne Tests (Fremdwasserzeichen möglich). v1 = Freigabe-Endfassung. */
 export function shotstackHost(env, { final = false } = {}) {
   if (final) {
     return String(env.SHOTSTACK_PROD_HOST || "https://api.shotstack.io/edit/v1").replace(/\/$/, "");
@@ -22,7 +22,7 @@ export function shotstackEnvironment(env, { final = false } = {}) {
 }
 
 export function isComposerConfigured(env) {
-  return Boolean(shotstackKey(env) || falKey(env));
+  return Boolean(shotstackKey(env));
 }
 
 export async function probeShotstackAuth(env) {
@@ -60,9 +60,7 @@ export async function probeShotstackAuth(env) {
       httpStatus: stageRes.status,
       prodHttpStatus: prodRes.status,
       prodOk,
-      reason: prodOk
-        ? null
-        : `Shotstack Production (v1) HTTP ${prodRes.status} – Endfassung nutzt fal-ffmpeg-Fallback`
+      reason: prodOk ? null : `Shotstack Production (v1) HTTP ${prodRes.status}`
     };
   } catch (error) {
     return { ok: false, present: true, host: stage.host, isStage: true, reason: error.message || String(error) };
@@ -100,7 +98,6 @@ function htmlShell(inner, { width = 980, height = 280, align = "center" } = {}) 
 }
 
 function socialRowHtml(b, typo) {
-  /* Offizielle Markenfarben – klare Telegram-/Instagram-/Web-Erkennung wie Social-Original */
   const tg = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Z" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.telegram)}</span></span>`;
   const ig = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igv" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f58529"/><stop offset="45%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#515bd4"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igv)"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.instagram)}</span></span>`;
   const web = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="${typo.gold}" stroke-width="1.6"/><path d="M3 12h18M12 3c2.8 3 4.2 6 4.2 9s-1.4 6-4.2 9c-2.8-3-4.2-6-4.2-9s1.4-6 4.2-9Z" fill="none" stroke="${typo.gold}" stroke-width="1.4"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.website)}</span></span>`;
@@ -175,13 +172,6 @@ function positionForRole(role) {
   return { position: "center", offset: { x: 0, y: 0 } };
 }
 
-function overlayEnd(overlays) {
-  return (overlays || []).reduce((max, o) => {
-    const end = Number(o.at || 0) + Number(o.length || 0);
-    return Math.max(max, end);
-  }, 0);
-}
-
 function minLengthForRole(role, length) {
   const n = Number(length || 0);
   if (role === "brand") return Math.max(1.2, Math.min(1.5, n || 1.5));
@@ -191,23 +181,22 @@ function minLengthForRole(role, length) {
   return Math.max(1.6, n || 3.0);
 }
 
+/**
+ * Sprach-Bildbeitrag: ein Standbild (Ken Burns) + Stimme + DAR-Texte.
+ * clipUrls werden nur als Legacy-Fallback genutzt, wenn kein sceneImageUrl gesetzt ist.
+ */
 export function buildShotstackTimeline({
+  sceneImageUrl,
   clipUrls,
   voiceUrl,
   captionPlan,
   captionLines,
   watermarkUrl,
   logoUrl,
-  sceneDurationSec = 5
-}) {
-  const sceneLen = Math.max(3, Number(sceneDurationSec) || 5);
-  const videoClips = (clipUrls || []).map((src, index) => ({
-    asset: { type: "video", src, volume: 0 },
-    start: index * sceneLen,
-    length: sceneLen,
-    fit: "cover"
-  }));
-
+  durationSec,
+  voiceStartSec,
+  kenBurns = "zoomIn"
+} = {}) {
   const overlays = captionPlan?.overlays?.length
     ? captionPlan.overlays
     : (captionLines || []).map((line, i) => ({
@@ -218,13 +207,29 @@ export function buildShotstackTimeline({
         htmlEmphasis: i === 1
       }));
 
-  const totalDuration = 15;
-  if (videoClips.length) {
-    const last = videoClips[videoClips.length - 1];
-    last.length = Math.max(last.length, totalDuration - last.start);
-  }
+  const planned =
+    Number(durationSec) ||
+    Number(captionPlan?.durationSec) ||
+    computeSpeechImageDurationSec(Number(captionPlan?.voiceDurationSec) || 8);
+  const overlayEnd = (overlays || []).reduce((max, o) => {
+    return Math.max(max, Number(o.at || 0) + Number(o.length || 0));
+  }, 0);
+  const totalDuration = Math.max(10, planned, overlayEnd + 0.2);
+  const voiceStart = Number(voiceStartSec ?? captionPlan?.voiceStart ?? DAR_INTRO_SEC);
+  const imageUrl = String(sceneImageUrl || "").trim() || String((clipUrls || [])[0] || "").trim();
+
+  const stillClip = imageUrl
+    ? {
+        asset: { type: "image", src: imageUrl },
+        start: 0,
+        length: totalDuration,
+        fit: "cover",
+        effect: kenBurns === "none" ? undefined : kenBurns || "zoomIn"
+      }
+    : null;
 
   const typo = DAR_VIDEO_PROFILE.typography;
+  const dimStart = Math.max(0, totalDuration - 2.8);
   const dimClip = {
     asset: {
       type: "html",
@@ -232,8 +237,8 @@ export function buildShotstackTimeline({
       width: 1080,
       height: 1920
     },
-    start: 12.5,
-    length: 2.5,
+    start: dimStart,
+    length: Number((totalDuration - dimStart).toFixed(2)),
     position: "center",
     opacity: 1
   };
@@ -276,29 +281,44 @@ export function buildShotstackTimeline({
       }
     : null;
 
+  const audioClips = voiceUrl
+    ? [
+        {
+          asset: { type: "audio", src: voiceUrl, volume: 1 },
+          start: Math.max(0, voiceStart),
+          length: Math.max(4, totalDuration - voiceStart - 0.4)
+        }
+      ]
+    : [];
+
   const tracks = [];
   if (watermarkClip) tracks.push({ clips: [watermarkClip] });
   tracks.push({ clips: [dimClip, ...textClips] });
-  tracks.push({ clips: videoClips });
+  if (stillClip) tracks.push({ clips: [stillClip] });
+  if (audioClips.length) tracks.push({ clips: audioClips });
 
-  const lastVideo = videoClips[videoClips.length - 1];
   const meta = {
     durationSec: totalDuration,
+    mode: "speech-image",
+    kenBurns: kenBurns || "zoomIn",
+    sceneImageUrl: imageUrl || null,
     watermarkCount: watermarkClip ? 1 : 0,
     watermark: watermarkClip
       ? { position: watermarkClip.position, scale: watermarkClip.scale, opacity: watermarkClip.opacity }
       : null,
-    lastClipCoversEnd: Boolean(lastVideo && lastVideo.start + lastVideo.length >= totalDuration - 0.05),
+    lastClipCoversEnd: Boolean(stillClip && stillClip.length >= totalDuration - 0.05),
     background: "#1a1814",
-    previewFrames: [2, 6, 11, 14]
+    previewFrames: [
+      Math.min(2, totalDuration - 0.5),
+      Math.min(Math.round(totalDuration * 0.35), totalDuration - 0.5),
+      Math.min(Math.round(totalDuration * 0.7), totalDuration - 0.5),
+      Math.max(1, totalDuration - 1.2)
+    ].map((n) => Number(n.toFixed(1)))
   };
 
   return {
     timeline: {
       background: "#1a1814",
-      soundtrack: voiceUrl
-        ? { src: voiceUrl, effect: "fadeOut", volume: 1 }
-        : undefined,
       tracks
     },
     output: {
@@ -314,47 +334,41 @@ export function buildShotstackTimeline({
 
 export async function composeFinalVideo(env, payload = {}) {
   const final = payload.final !== false;
-  if (shotstackKey(env)) {
-    const shot = await composeWithShotstack(env, payload, { final });
-    if (shot.ok) return shot;
-    const code = Number(shot.httpStatus || 0);
-    const authFail = code === 401 || code === 403 || /HTTP 401|HTTP 403/i.test(String(shot.reason || ""));
-    /*
-     * Production gesperrt → KEIN Stage-Fallback (Shotstack-Wasserzeichen verboten).
-     * Stattdessen fal-Merge als unvollständige Vorschau ohne Fremdwasserzeichen.
-     */
-    if (final && authFail && falKey(env)) {
-      const fal = await composeWithFalFfmpeg(env, payload);
-      if (fal.ok) {
-        return {
-          ...fal,
-          composeFallback: "fal-ffmpeg",
-          shotstackBlocked: shot.reason || `Shotstack HTTP ${code || "?"} (v1)`,
-          note: "Shotstack Production gesperrt – fal-Merge ohne Shotstack-Wasserzeichen; DAR-Texte fehlen bis Production frei"
-        };
-      }
-    }
-    return shot;
+  if (!shotstackKey(env)) {
+    return {
+      ok: false,
+      setupRequired: true,
+      reason: "SHOTSTACK_API_KEY fehlt – Sprach-Bildbeitrag braucht Shotstack für das MP4."
+    };
   }
-  if (falKey(env)) return composeWithFalFfmpeg(env, payload);
-  return {
-    ok: false,
-    setupRequired: true,
-    reason: "Kein Compose-Dienst verbunden (SHOTSTACK_API_KEY oder FAL_KEY für ffmpeg-api)."
-  };
+  if (!String(payload.sceneImageUrl || "").trim() && !(payload.clipUrls || []).length) {
+    return { ok: false, reason: "Ausgangsbild fehlt für den Sprach-Bildbeitrag" };
+  }
+  return composeWithShotstack(env, payload, { final });
 }
 
 async function composeWithShotstack(env, payload, { final }) {
   const envInfo = shotstackEnvironment(env, { final });
+  if (final && envInfo.isStage) {
+    return {
+      ok: false,
+      httpStatus: 0,
+      reason: "Endfassung darf nicht über Shotstack Stage laufen (Fremdwasserzeichen)",
+      shotstackEnv: "stage"
+    };
+  }
   const brands = brandUrls(env);
   const bodyFull = buildShotstackTimeline({
+    sceneImageUrl: payload.sceneImageUrl,
     clipUrls: payload.clipUrls,
     voiceUrl: payload.voiceUrl,
     captionPlan: payload.captionPlan,
     captionLines: payload.captionLines,
     watermarkUrl: brands.watermarkUrl,
     logoUrl: brands.logoUrl,
-    sceneDurationSec: payload.sceneDurationSec
+    durationSec: payload.durationSec,
+    voiceStartSec: payload.voiceStartSec,
+    kenBurns: payload.kenBurns || "zoomIn"
   });
   return submitShotstackTimeline(env, bodyFull, { final, envInfo });
 }
@@ -427,99 +441,7 @@ export async function pollShotstackRender(env, renderId, { final = true } = {}) 
   return { ok: true, status: "running", shotstackEnv: envInfo.isStage ? "stage" : "v1" };
 }
 
-async function composeWithFalFfmpeg(env, { clipUrls, voiceUrl }) {
-  const queued = await falQueue(env, "fal-ai/ffmpeg-api/merge-videos", {
-    video_urls: clipUrls,
-    target_fps: 30,
-    resolution: { width: 1080, height: 1920 }
-  }, { preferAsync: true });
-  const requestId = queued.request_id || queued.requestId;
-  const statusUrl = String(queued.status_url || queued.statusUrl || "").trim();
-  const responseUrl = String(queued.response_url || queued.responseUrl || "").trim();
-  return {
-    ok: true,
-    provider: "fal-ffmpeg",
-    renderId: requestId,
-    statusUrl,
-    responseUrl,
-    falPhase: "merge-videos",
-    voiceUrl: voiceUrl || "",
-    shotstackEnv: null,
-    foreignWatermarkRisk: false,
-    brandingApplied: false,
-    poll: async () => pollFalMerge(env, requestId, voiceUrl, { statusUrl, responseUrl, phase: "merge-videos" })
-  };
-}
-
-export async function pollFalMerge(
-  env,
-  requestId,
-  voiceUrl = "",
-  { statusUrl = "", responseUrl = "", phase = "merge-videos", mergedVideoUrl = "" } = {}
-) {
-  const model =
-    phase === "merge-audio" ? "fal-ai/ffmpeg-api/merge-audio-video" : "fal-ai/ffmpeg-api/merge-videos";
-  const status = await falStatus(env, model, requestId, { statusUrl });
-  const state = String(status.status || "").toUpperCase();
-  if (state === "COMPLETED" || state === "OK") {
-    const result = await falResult(env, model, requestId, { responseUrl });
-    const url = result?.video?.url || result?.video_url || result?.output?.url || "";
-    if (!url) return { ok: false, status: "failed", reason: "fal Merge ohne Video-URL" };
-
-    // Phase 1 fertig → Stimme muxen
-    if (phase !== "merge-audio" && voiceUrl) {
-      const audioJob = await falQueue(
-        env,
-        "fal-ai/ffmpeg-api/merge-audio-video",
-        { video_url: url, audio_url: voiceUrl, start_offset: 0 },
-        { preferAsync: true }
-      );
-      const audioId = audioJob.request_id || audioJob.requestId;
-      return {
-        ok: true,
-        status: "running",
-        provider: "fal-ffmpeg",
-        falPhase: "merge-audio",
-        renderId: audioId,
-        statusUrl: String(audioJob.status_url || audioJob.statusUrl || "").trim(),
-        responseUrl: String(audioJob.response_url || audioJob.responseUrl || "").trim(),
-        voiceUrl,
-        mergedVideoUrl: url,
-        brandingApplied: false,
-        audioAttached: false
-      };
-    }
-
-    const file = await fetch(url);
-    return {
-      ok: true,
-      status: "completed",
-      url,
-      bytes: await file.arrayBuffer(),
-      mime: "video/mp4",
-      width: 1080,
-      height: 1920,
-      fps: 30,
-      audioAttached: Boolean(voiceUrl) || phase === "merge-audio",
-      audioMuxed: phase === "merge-audio" || !voiceUrl,
-      hasMusic: false,
-      brandingApplied: false,
-      note: voiceUrl
-        ? "fal-ffmpeg mit Stimme – DAR-Texte/Wasserzeichen fehlen (Shotstack Production nötig)"
-        : "fal-ffmpeg ohne Stimme/DAR-Texte – Shotstack Production nötig"
-    };
-  }
-  if (state === "FAILED" || state === "ERROR") {
-    return { ok: false, status: "failed", reason: status.error || "fal merge failed" };
-  }
-  return {
-    ok: true,
-    status: "running",
-    falPhase: phase,
-    renderId: requestId,
-    statusUrl,
-    responseUrl,
-    voiceUrl,
-    mergedVideoUrl
-  };
+/** Legacy: fal-ffmpeg ist für Sprach-Bildbeiträge deaktiviert. */
+export async function pollFalMerge() {
+  return { ok: false, status: "failed", reason: "fal-ffmpeg ist für Sprach-Bildbeiträge deaktiviert" };
 }
