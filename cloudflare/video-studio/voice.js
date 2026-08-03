@@ -1,11 +1,20 @@
 export function elevenKey(env) {
   let key = String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
-  key = key.replace(/^["']+|["']+$/g, "").trim();
+  // Paste-Fehler: Anführungszeichen, Bearer/xi-api-key-Prefix, Whitespace/Zeilenumbrüche
+  key = key
+    .replace(/^["']+|["']+$/g, "")
+    .replace(/^Bearer\s+/i, "")
+    .replace(/^xi-api-key\s*[:=]\s*/i, "")
+    .replace(/\s+/g, "")
+    .trim();
   return key;
 }
 
 export function darVoiceId(env) {
-  return String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "").trim();
+  return String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "")
+    .trim()
+    .replace(/^["']+|["']+$/g, "")
+    .replace(/\s+/g, "");
 }
 
 export function isVoiceConfigured(env) {
@@ -15,29 +24,40 @@ export function isVoiceConfigured(env) {
 export async function probeElevenAuth(env) {
   const key = elevenKey(env);
   const voiceId = darVoiceId(env);
+  const fingerprint = {
+    present: Boolean(key),
+    voiceIdPresent: Boolean(voiceId),
+    length: key ? key.length : 0,
+    prefix: key ? key.slice(0, 5) : "",
+    voiceIdLength: voiceId ? voiceId.length : 0
+  };
   if (!key || !voiceId) {
-    return { ok: false, present: Boolean(key), voiceIdPresent: Boolean(voiceId), reason: "Key oder Voice-ID fehlt" };
+    return { ok: false, ...fingerprint, reason: "Key oder Voice-ID fehlt" };
   }
   try {
     const res = await fetch("https://api.elevenlabs.io/v1/user", {
-      headers: { "xi-api-key": key }
+      headers: { "xi-api-key": key, Accept: "application/json" }
     });
     if (!res.ok) {
       const text = await res.text().catch(() => "");
-      return { ok: false, present: true, voiceIdPresent: true, httpStatus: res.status, reason: text.slice(0, 120) || `HTTP ${res.status}` };
+      return {
+        ok: false,
+        ...fingerprint,
+        httpStatus: res.status,
+        reason: text.slice(0, 160) || `HTTP ${res.status}`
+      };
     }
     const voiceRes = await fetch(`https://api.elevenlabs.io/v1/voices/${encodeURIComponent(voiceId)}`, {
-      headers: { "xi-api-key": key }
+      headers: { "xi-api-key": key, Accept: "application/json" }
     });
     return {
       ok: voiceRes.ok,
-      present: true,
-      voiceIdPresent: true,
+      ...fingerprint,
       httpStatus: voiceRes.status,
-      reason: voiceRes.ok ? "" : `Voice-ID nicht erreichbar (HTTP ${voiceRes.status})`
+      reason: voiceRes.ok ? "" : `Voice-ID nicht erreichbar (HTTP ${voiceRes.status}) – ELEVENLABS_VOICE_ID prüfen`
     };
   } catch (error) {
-    return { ok: false, present: true, voiceIdPresent: true, reason: error.message || String(error) };
+    return { ok: false, ...fingerprint, reason: error.message || String(error) };
   }
 }
 
