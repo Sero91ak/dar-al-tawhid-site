@@ -61,6 +61,24 @@ npx wrangler secret put RUNWAY_API_KEY
 npx wrangler secret put VIDEO_STUDIO_LOGO_URL
 ```
 
+### Key-Prüfung (ohne Geheimnis preiszugeben)
+
+Nach dem Setzen der Secrets Worker deployen und als Admin prüfen:
+
+```bash
+curl -sS -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
+  https://dar-admin-publisher.sero91ak.workers.dev/api/admin/video-studio/providers/status \
+  | jq '.probes'
+```
+
+Erwartet:
+
+- `probes.fal.ok: true` (fal-Keys haben typisch `uuid:hex`, Länge oft ≥ 69)
+- `probes.elevenlabs.ok: true`
+- `probes.shotstack.ok: true` und Host mit `/edit/stage`
+
+Wenn `fal` oder `elevenlabs` `ok: false` mit HTTP 401 melden: Secret **neu** setzen (`wrangler secret put …`), ohne Anführungszeichen, ohne führendes `Key `, ohne Zeilenumbruch mitten im Key.
+
 R2 (einmalig):
 
 ```bash

@@ -68,6 +68,15 @@ async function main() {
   if (status.shotstackStageOnly === false) {
     throw new Error("Shotstack Host ist nicht Stage – Abbruch zum Schutz vor Prod-Kosten");
   }
+  if (status.probes?.fal && status.probes.fal.ok === false) {
+    throw new Error(`FAL_KEY ungültig: ${status.probes.fal.reason || "auth failed"} (length=${status.probes.fal.length})`);
+  }
+  if (status.probes?.elevenlabs && status.probes.elevenlabs.ok === false) {
+    throw new Error(`ELEVENLABS_API_KEY ungültig: ${status.probes.elevenlabs.reason || "auth failed"}`);
+  }
+  if (status.probes?.shotstack && status.probes.shotstack.ok === false) {
+    throw new Error(`SHOTSTACK_API_KEY ungültig: ${status.probes.shotstack.reason || "auth failed"}`);
+  }
 
   const created = await api(token, "/jobs", {
     method: "POST",
