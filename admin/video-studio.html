@@ -33,11 +33,16 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .chip.ok{color:var(--ok)}.chip.warn{color:var(--warn)}.chip.bad{color:var(--bad)}.chip.run{color:var(--gold)}
 .icon-btn{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink)}
 .back{min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;font-size:12px;font-weight:900}
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:10px}
-.step{border:1px solid var(--line2);border-radius:12px;padding:8px 6px;text-align:center;background:rgba(0,0,0,.18);font-size:10px;font-weight:900;color:var(--muted)}
-.step b{display:block;color:var(--ink);font-size:11px;margin-bottom:2px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.step{border:1px solid var(--line2);border-radius:12px;padding:8px 4px;text-align:center;background:rgba(0,0,0,.18);font-size:9px;font-weight:900;color:var(--muted)}
+.step b{display:block;color:var(--ink);font-size:10px;margin-bottom:2px}
 .step.active{border-color:rgba(239,215,142,.45);background:rgba(239,215,142,.08);color:var(--gold)}
 .step.done{border-color:rgba(139,224,189,.28);color:var(--ok)}
+.design-controls{display:grid;gap:10px;margin-top:10px}
+.design-controls label{display:grid;gap:4px;font-size:11px;font-weight:800;color:var(--soft)}
+.design-controls input[type=range]{width:100%;accent-color:var(--gold)}
+.voice-box{border:1px solid var(--line2);border-radius:12px;padding:10px;background:rgba(0,0,0,.22);margin-top:8px}
+.voice-box audio{width:100%;margin-top:8px}
 .panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(11,18,32,.98),rgba(5,8,15,.98));padding:12px;margin-bottom:10px}
 .label{display:block;font-size:11px;font-weight:900;color:var(--soft);margin:0 0 6px}
 textarea,input{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.28);padding:11px 12px;outline:none}
@@ -54,7 +59,7 @@ textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
 .comp-preview{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:7% 6% 6%;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06) 22%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.42))}
 .comp-preview .c-top{text-align:center;font-family:var(--serif);letter-spacing:.16em;font-size:10px;font-weight:900;color:var(--gold);text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .comp-preview .c-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 4px}
-.comp-preview .c-wm{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:42%;opacity:.09;pointer-events:none}
+.comp-preview .c-wm{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:34%;opacity:.065;pointer-events:none}
 .comp-preview .c-wm img{width:100%;display:block}
 .comp-preview .c-speaker{font-family:var(--serif);font-size:11px;color:#fff8e8;line-height:1.35;text-shadow:0 1px 8px #000}
 .comp-preview .c-quote{font-family:var(--serif);font-size:12px;color:#fff8e8;line-height:1.35;max-width:92%;text-shadow:0 1px 8px #000}
@@ -128,8 +133,9 @@ details.box summary::-webkit-details-marker{display:none}
   <nav class="steps" aria-label="Produktionsschritte">
     <div class="step active" data-step="text"><b>1 Text</b>einfügen</div>
     <div class="step" data-step="image"><b>2 Bild</b>Upload</div>
-    <div class="step" data-step="voice"><b>3 Stimme &amp; Gestaltung</b></div>
-    <div class="step" data-step="result"><b>4 Ergebnis</b>Export</div>
+    <div class="step" data-step="voice"><b>3 Stimme</b>Vorschau</div>
+    <div class="step" data-step="design"><b>4 Gestaltung</b>prüfen</div>
+    <div class="step" data-step="result"><b>5 Ergebnis</b>Export</div>
   </nav>
 
   <section class="panel" id="panelText">
@@ -193,17 +199,77 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="notice" id="imageNotice">Bitte 4K-/9:16-Ausgangsbild hochladen oder aus der Bibliothek wählen.</div>
   </section>
 
-  <section class="panel hidden" id="panelVideo">
+  <section class="panel hidden" id="panelVoice">
     <div class="cost" id="costBox">Dauer folgt der Stimme · Kosten nur Stimme + Rendering</div>
     <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
-    <div class="meta" id="prodMsg">Bereit zur Erzeugung</div>
-    <button class="btn primary dock" type="button" id="createVideoBtn" style="width:100%">Sprach-Bildbeitrag erstellen</button>
+    <div class="meta" id="prodMsg">Bereit – Stimme erzeugen und freigeben</div>
+    <button class="btn primary dock" type="button" id="createVoiceBtn" style="width:100%">Stimme erzeugen</button>
+    <div class="voice-box hidden" id="voicePreviewBox">
+      <strong style="font-family:var(--serif);color:var(--gold);font-size:13px">Audiovorschau</strong>
+      <p class="meta" style="margin:4px 0 0;line-height:1.4">Nur Sprecherzeile und Aussage. Quelle und Social Media werden nicht vorgelesen.</p>
+      <audio id="voiceAudio" controls preload="metadata"></audio>
+      <div class="actions" style="margin-top:8px">
+        <button class="btn" type="button" id="playVoiceBtn">Abspielen</button>
+        <button class="btn" type="button" id="stopVoiceBtn">Stoppen</button>
+        <button class="btn" type="button" id="regenVoiceBtn">Erneut erzeugen</button>
+        <button class="btn primary" type="button" id="approveVoiceBtn">Stimme freigeben</button>
+      </div>
+    </div>
     <button class="btn" type="button" id="resumeJobBtn" style="width:100%;margin-top:8px" hidden>Weiter erzeugen</button>
     <div class="actions" style="margin-top:8px">
       <button class="btn" type="button" id="backImageBtn">← Bild</button>
       <button class="btn danger" type="button" id="cancelJobBtn" disabled>Abbrechen</button>
     </div>
-    <div class="notice" id="videoNotice"></div>
+    <div class="notice" id="voiceNotice">Nach dem Bild die Stimme erzeugen, anhören und freigeben – erst danach Gestaltung und MP4.</div>
+  </section>
+
+  <section class="panel hidden" id="panelDesign">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px">
+      <strong style="font-family:var(--serif);color:var(--gold)">Gestaltung</strong>
+      <span class="meta">9:16 · volles DAR-Layout</span>
+    </div>
+    <div class="preview-wrap"><img id="designPreviewImg" alt="Gestaltung" class="hidden"><div class="comp-preview" id="designCompPreview" aria-hidden="true">
+      <div class="c-top">DAR AL TAWḤĪD</div>
+      <div class="c-wm" id="designWm"><img src="/watermark-my-logo-full.png" alt=""></div>
+      <div class="c-mid">
+        <div class="c-speaker" id="designSpeaker">Sprecher رحمه الله</div>
+        <div class="c-quote" id="designQuote">„Aussage erscheint hier im Lesebereich.“</div>
+        <div class="c-source" id="designSource">Quelle: …</div>
+      </div>
+      <div class="c-foot">
+        <b>Folgt für mehr Wissen aus Qurʾān &amp; Sunnah</b>
+        Telegram · Website · Instagram
+        <div class="credit">by Serhat Abu Malik</div>
+      </div>
+    </div></div>
+    <div class="design-controls">
+      <label>Layoutvariante
+        <select id="designVariant">
+          <option value="classic">Klassisch</option>
+          <option value="compact">Kompakt</option>
+          <option value="elevated">Leicht angehoben</option>
+        </select>
+      </label>
+      <label>Textgröße <span class="meta" id="textScaleVal">100 %</span>
+        <input id="designTextScale" type="range" min="85" max="120" value="100">
+      </label>
+      <label>Wasserzeichen-Deckkraft <span class="meta" id="wmOpacityVal">6,5 %</span>
+        <input id="designWmOpacity" type="range" min="5" max="8" step="0.5" value="6.5">
+      </label>
+      <label>Lesbarkeitszone <span class="meta" id="dimOpacityVal">18 %</span>
+        <input id="designDimOpacity" type="range" min="8" max="45" value="18">
+      </label>
+      <label>Textblock vertikal <span class="meta" id="textShiftVal">Mitte</span>
+        <input id="designTextShift" type="range" min="-12" max="12" value="0">
+      </label>
+    </div>
+    <button class="btn primary dock" type="button" id="createVideoBtn" style="width:100%;margin-top:12px">Sprach-Bildbeitrag erstellen</button>
+    <div class="actions" style="margin-top:8px">
+      <button class="btn" type="button" id="backVoiceBtn">← Stimme</button>
+      <button class="btn danger" type="button" id="cancelDesignBtn" disabled>Abbrechen</button>
+    </div>
+    <div class="meta" id="designMsg" style="margin-top:8px">Gestaltung prüfen – dann MP4 rendern.</div>
+    <div class="notice" id="designNotice">Vollständige DAR-Vorschau: Titel, Logo, Aussage, Quelle, Social Media dauerhaft – keine Endkarte.</div>
   </section>
 
   <section class="panel hidden" id="panelResult">
@@ -284,7 +350,7 @@ details.box summary::-webkit-details-marker{display:none}
   <details class="box hidden" id="helpBox">
     <summary><span>Kurzhilfe</span><span>▾</span></summary>
     <div class="box-body meta">
-      Text einfügen → Bild → Sprach-Bildbeitrag erstellen. Branding (Titel, Logo, Social) vom ersten bis letzten Frame – keine Endkarte. Aussage synchron zur Stimme. Keine Musik, keine Fremdwasserzeichen.
+      Text → Bild → Stimme vorhören &amp; freigeben → Gestaltung prüfen → Sprach-Bildbeitrag erstellen. Branding vom ersten bis letzten Frame – keine Endkarte. Keine Musik, keine Fremdwasserzeichen.
     </div>
   </details>
 </main>
@@ -310,11 +376,15 @@ details.box summary::-webkit-details-marker{display:none}
     references:"Bild vorbereitet",
     voice:"Stimme wird erzeugt",
     clips:"Stimme wird erzeugt",
-    layout:"Gestaltung wird gesetzt",
-    captions:"Gestaltung wird gesetzt",
+    voice_pending:"Stimme wartet auf Freigabe",
+    layout:"Gestaltung wird vorbereitet",
+    captions:"Gestaltung wird vorbereitet",
+    design_pending:"Gestaltung prüfen",
     render:"MP4 wird gerendert",
     review:"Qualitätsprüfung",
-    completed:"Fertig"
+    completed:"Fertig",
+    awaiting_voice_approval:"Stimme wartet auf Freigabe",
+    awaiting_design:"Gestaltung prüfen"
   };
   const el=id=>document.getElementById(id);
   const state={step:"text",job:null,parsed:null,scene:null,poll:null,estimate:null,editJob:null};
@@ -332,14 +402,15 @@ details.box summary::-webkit-details-marker{display:none}
   function setStatus(text,cls){el("statusChip").textContent=text;el("statusChip").className=cls||""}
   function showStep(step){
     state.step=step;
-    const map={text:"panelText",image:"panelImage",voice:"panelVideo",result:"panelResult"};
+    const map={text:"panelText",image:"panelImage",voice:"panelVoice",design:"panelDesign",result:"panelResult"};
     Object.keys(map).forEach(s=>el(map[s]).classList.toggle("hidden",s!==step));
     document.querySelectorAll(".step").forEach(n=>{
       const s=n.getAttribute("data-step");
       n.classList.toggle("active",s===step);
-      const order=["text","image","voice","result"];
+      const order=["text","image","voice","design","result"];
       n.classList.toggle("done",order.indexOf(s)<order.indexOf(step));
     });
+    if(step==="design")syncDesignPreview();
   }
   function saveDraft(){
     const draft={
@@ -406,11 +477,15 @@ details.box summary::-webkit-details-marker{display:none}
   }
   function stageLabel(job){
     if(job?.status==="completed")return STAGE_LABELS.completed;
+    if(job?.status==="awaiting_voice_approval")return STAGE_LABELS.awaiting_voice_approval;
+    if(job?.status==="awaiting_design")return STAGE_LABELS.awaiting_design;
     const key=String(job?.stage||"");
     return STAGE_LABELS[key]||STAGE_LABELS[normalizeStage(key)]||job?.message||"";
   }
   function stagePct(job){
     if(job?.status==="completed")return 100;
+    if(job?.status==="awaiting_voice_approval")return 52;
+    if(job?.status==="awaiting_design")return 72;
     const key=String(job?.stage||"statement");
     if(STAGE_PROGRESS[key]!=null)return STAGE_PROGRESS[key];
     const order=STAGE_ORDER;
@@ -449,12 +524,66 @@ details.box summary::-webkit-details-marker{display:none}
   }
   function updateCompPreview(){
     const stmt=currentStatement();
-    if(el("compSpeaker"))el("compSpeaker").textContent=stmt.speaker?(stmt.speaker.replace(/\s*sagte\s*:?\s*$/i,"")+" · Aussage"):"Sprecher";
-    if(el("compQuote")){
-      const q=String(stmt.de||"").trim();
-      el("compQuote").textContent=q?("„"+(q.length>110?q.slice(0,108)+"…":q)+"“"):"„Aussage erscheint hier im Lesebereich.“";
+    const speaker=stmt.speaker?stmt.speaker.replace(/\s*sagte\s*:?\s*$/i,""):"Sprecher";
+    const quote=(()=>{const q=String(stmt.de||"").trim();return q?("„"+(q.length>110?q.slice(0,108)+"…":q)+"“"):"„Aussage erscheint hier im Lesebereich.“";})();
+    const source=stmt.source?("Quelle: "+stmt.source):"Quelle: …";
+    if(el("compSpeaker"))el("compSpeaker").textContent=speaker;
+    if(el("compQuote"))el("compQuote").textContent=quote;
+    if(el("compSource"))el("compSource").textContent=source;
+    if(el("designSpeaker"))el("designSpeaker").textContent=speaker;
+    if(el("designQuote"))el("designQuote").textContent=quote;
+    if(el("designSource"))el("designSource").textContent=source;
+  }
+  function readDesign(){
+    return {
+      layoutVariant:el("designVariant")?.value||"classic",
+      textScale:Number(el("designTextScale")?.value||100)/100,
+      watermarkOpacity:Number(el("designWmOpacity")?.value||6.5)/100,
+      dimOpacity:Number(el("designDimOpacity")?.value||18)/100,
+      textShift:Number(el("designTextShift")?.value||0)
+    };
+  }
+  function syncDesignPreview(){
+    updateCompPreview();
+    const d=readDesign();
+    const img=el("designPreviewImg");
+    const url=state.scene?.url||state.job?.sceneImageUrl||state.job?.posterUrl||"";
+    if(img&&url){img.src=url;img.classList.remove("hidden")}
+    else if(img)img.classList.add("hidden");
+    const wm=el("designWm");
+    if(wm){wm.style.opacity=String(d.watermarkOpacity);wm.style.width=(d.layoutVariant==="compact"?"30%":d.layoutVariant==="elevated"?"36%":"34%")}
+    const mid=el("designCompPreview")?.querySelector(".c-mid");
+    if(mid){
+      const shift=Number(d.textShift||0);
+      mid.style.transform=`translateY(${shift}%)`;
+      mid.style.fontSize=d.textScale!==1?(d.textScale*100)+"%":"";
     }
-    if(el("compSource"))el("compSource").textContent=stmt.source?("Quelle: "+stmt.source):"Quelle: …";
+    const zone=el("designCompPreview");
+    if(zone){
+      const dim=d.dimOpacity;
+      zone.style.background=`linear-gradient(180deg,rgba(0,0,0,${(dim+0.06).toFixed(2)}),rgba(0,0,0,${(dim*0.45).toFixed(2)}) 22%,rgba(0,0,0,${(dim*0.55).toFixed(2)}) 55%,rgba(0,0,0,${Math.min(0.55,dim+0.28).toFixed(2)}))`;
+    }
+    if(el("textScaleVal"))el("textScaleVal").textContent=Math.round(d.textScale*100)+" %";
+    if(el("wmOpacityVal"))el("wmOpacityVal").textContent=(d.watermarkOpacity*100).toFixed(1).replace(".",",")+" %";
+    if(el("dimOpacityVal"))el("dimOpacityVal").textContent=Math.round(d.dimOpacity*100)+" %";
+    if(el("textShiftVal"))el("textShiftVal").textContent=d.textShift===0?"Mitte":(d.textShift<0?"oben":"unten")+" ("+d.textShift+")";
+  }
+  function showVoicePreview(job){
+    const box=el("voicePreviewBox");
+    const audio=el("voiceAudio");
+    const url=job?.voiceUrl||job?.artifacts?.voice?.url||"";
+    if(!box||!audio)return;
+    if(url){
+      audio.src=url;
+      box.classList.remove("hidden");
+      el("approveVoiceBtn").disabled=Boolean(job.voiceApproved);
+      el("voiceNotice").className="notice ok";
+      el("voiceNotice").textContent=job.voiceApproved
+        ?"Stimme freigegeben – weiter zur Gestaltung."
+        :"Stimme anhören und freigeben, bevor die Gestaltung bestätigt wird.";
+    }else{
+      box.classList.add("hidden");
+    }
   }
   function showScene(scene){
     state.scene=scene;
@@ -549,10 +678,10 @@ details.box summary::-webkit-details-marker{display:none}
   el("acceptImageBtn").addEventListener("click",async()=>{
     if(!state.scene?.url){alert("Kein Bild");return}
     try{await parseText()}catch{}
-    updateCompPreview();showStep("voice");setStatus("bereit zur Produktion");
+    updateCompPreview();showStep("voice");setStatus("Stimme erzeugen");
   });
 
-  async function createVideo(){
+  async function startVoiceJob(){
     if(!workerSecret()){alert("Bitte Worker-Secret unter ⚙ speichern.");return}
     if(!state.scene?.url){alert("Szenenbild fehlt");return}
     const stmt=currentStatement();
@@ -560,9 +689,9 @@ details.box summary::-webkit-details-marker{display:none}
     const max=Number(el("maxBudget").value||1.2);
     const est=state.estimate||{estimateMinEur:0.2,estimateMaxEur:0.4,mode:"Dauer folgt der Stimme · Kosten nur Stimme + Rendering"};
     const modeLine=est.mode||"Sprach-Bildbeitrag · Dauer folgt der Stimme";
-    if(!confirm(`Sprach-Bildbeitrag\n${modeLine}\nGeschätzte Kosten (Stimme+Render): ${Number(est.estimateMinEur||0).toFixed(2)}–${Number(est.estimateMaxEur||0).toFixed(2)} €\nMaximalbudget: ${max.toFixed(2)} €\n\nKostenpflichtige Erzeugung starten?`))return;
-    el("createVideoBtn").disabled=true;el("createVideoBtn").innerHTML='<span class="loader"></span>Startet…';
-    setStatus("in Produktion","run");
+    if(!confirm(`Stimme erzeugen\n${modeLine}\nGeschätzte Kosten (Stimme+Render später): ${Number(est.estimateMinEur||0).toFixed(2)}–${Number(est.estimateMaxEur||0).toFixed(2)} €\nMaximalbudget: ${max.toFixed(2)} €\n\nAudiovorschau starten?`))return;
+    el("createVoiceBtn").disabled=true;el("createVoiceBtn").innerHTML='<span class="loader"></span>Stimme…';
+    setStatus("Stimme","run");
     try{
       const payload={
         contributionText:el("textInput").value.trim(),
@@ -574,6 +703,10 @@ details.box summary::-webkit-details-marker{display:none}
         format:"9:16",
         manualApproval:true,
         composePreview:false,
+        pauseAfterVoice:true,
+        voiceApproved:false,
+        designConfirmed:false,
+        design:readDesign(),
         budget:{monthlyEur:15,maxPerVideoEur:max},
         mode:"speech-image",
         voiceProfile:"dar-male",
@@ -584,15 +717,68 @@ details.box summary::-webkit-details-marker{display:none}
       const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});
       state.job=data.job;try{localStorage.setItem(JOB_KEY,JSON.stringify(data.job))}catch{}
       el("cancelJobBtn").disabled=false;
-      el("videoNotice").className="notice";el("videoNotice").textContent=data.job.message||"Produktion gestartet";
+      el("voiceNotice").className="notice";el("voiceNotice").textContent=data.job.message||"Stimme wird erzeugt";
       startPoll();
-    }catch(e){el("videoNotice").className="notice bad";el("videoNotice").textContent=e.message;setStatus("Fehler","bad")}
-    finally{el("createVideoBtn").disabled=false;el("createVideoBtn").textContent="Sprach-Bildbeitrag erstellen"}
+    }catch(e){el("voiceNotice").className="notice bad";el("voiceNotice").textContent=e.message;setStatus("Fehler","bad")}
+    finally{el("createVoiceBtn").disabled=false;el("createVoiceBtn").textContent="Stimme erzeugen"}
   }
+
+  function handleJobTick(job){
+    state.job=job;
+    try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}
+    if(el("progBar"))el("progBar").style.width=stagePct(job)+"%";
+    const label=stageLabel(job);
+    if(el("prodMsg"))el("prodMsg").textContent=label||job.message||job.stage||"";
+    if(job.status==="awaiting_voice_approval"||(job.voiceUrl&&!job.voiceApproved&&!["completed","running","queued","awaiting_design"].includes(job.status))){
+      showStep("voice");
+      showVoicePreview(job);
+      setStatus("Stimme freigeben","warn");
+      el("createVoiceBtn").disabled=true;
+      return "pause";
+    }
+    if(job.status==="awaiting_design"){
+      showStep("design");
+      syncDesignPreview();
+      setStatus("Gestaltung","warn");
+      el("designMsg").textContent=job.message||"Gestaltung prüfen und MP4 starten";
+      el("designNotice").className="notice ok";
+      el("designNotice").textContent="Stimme freigegeben. Layout prüfen – dann Sprach-Bildbeitrag erstellen.";
+      el("cancelDesignBtn").disabled=false;
+      return "pause";
+    }
+    if(job.status==="completed"){
+      setStatus("fertig","ok");showStep("result");
+      return "done";
+    }
+    if(job.status==="failed"){
+      setStatus("Fehler","bad");
+      const notice=state.step==="design"?el("designNotice"):el("voiceNotice");
+      if(notice){notice.className="notice bad";notice.textContent=job.lastError||job.message||"Fehler"}
+      if(el("prodMsg"))el("prodMsg").textContent=job.lastError||job.message||"Fehler";
+      el("resumeJobBtn").hidden=false;
+      el("resumeJobBtn").textContent=/Shotstack|HTTP 403|Production|render/i.test(String(job.message||job.lastError||""))
+        ? "Erneut rendern"
+        : "Weiter erzeugen";
+      return "fail";
+    }
+    if(job.status==="cancelled"||job.status==="setup_required"){
+      setStatus(job.status==="cancelled"?"abgebrochen":"Setup","warn");
+      el("resumeJobBtn").hidden=job.status==="cancelled";
+      return "stop";
+    }
+    if(["render","review"].includes(normalizeStage(job.stage))||job.status==="running"){
+      if(state.step!=="design"&&state.step!=="result")showStep("design");
+      el("designMsg").textContent=label||job.message||"MP4 wird gerendert…";
+      setStatus("in Produktion","run");
+    }
+    return "continue";
+  }
+
   function startPoll(){
     clearTimeout(state.poll);
     el("resumeJobBtn").hidden=true;
     el("cancelJobBtn").disabled=!state.job?.id;
+    if(el("cancelDesignBtn"))el("cancelDesignBtn").disabled=!state.job?.id;
     setStatus("in Produktion","run");
     (async function tick(){
       if(!state.job?.id)return;
@@ -603,38 +789,14 @@ details.box summary::-webkit-details-marker{display:none}
           try{data=await api("/jobs/"+encodeURIComponent(state.job.id))}
           catch{throw procErr}
         }
-        const job=data.job||data;state.job=job;
-        try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}
-        el("progBar").style.width=stagePct(job)+"%";
-        const label=stageLabel(job);
-        el("prodMsg").textContent=label||job.message||job.stage||"";
-        el("videoNotice").className="notice";
-        el("videoNotice").textContent=label&&job.message&&label!==job.message?`${label} · ${job.message}`:(job.message||label||"");
-        if(job.status==="completed"){
-          setStatus("fertig","ok");showStep("result");await openResult(job);loadJobs();return;
-        }
-        if(job.status==="failed"){
-          setStatus("Fehler","bad");
-          el("videoNotice").className="notice bad";
-          el("videoNotice").textContent=job.lastError||job.message||"Fehler";
-          el("prodMsg").textContent=job.lastError||job.message||"Fehler";
-          el("resumeJobBtn").hidden=false;
-          el("resumeJobBtn").textContent=/Shotstack|HTTP 403|Production|render/i.test(String(job.message||job.lastError||""))
-            ? "Erneut rendern"
-            : "Weiter erzeugen";
-          loadJobs();
-          return;
-        }
-        if(job.status==="cancelled"||job.status==="setup_required"){
-          setStatus(job.status==="cancelled"?"abgebrochen":"Setup","warn");
-          el("resumeJobBtn").hidden=job.status==="cancelled";
-          return;
-        }
-        setStatus("in Produktion","run");
+        const job=data.job||data;
+        const outcome=handleJobTick(job);
+        if(outcome==="done"){await openResult(job);loadJobs();return}
+        if(outcome==="pause"||outcome==="fail"||outcome==="stop"){loadJobs();return}
         state.poll=setTimeout(tick,3500);
       }catch(e){
-        el("videoNotice").className="notice bad";
-        el("videoNotice").textContent="Verbindung kurz gestört – versuche weiter… ("+(e.message||"Netz")+")";
+        const notice=state.step==="design"?el("designNotice"):el("voiceNotice");
+        if(notice){notice.className="notice bad";notice.textContent="Verbindung kurz gestört – versuche weiter… ("+(e.message||"Netz")+")"}
         setStatus("warte","warn");
         el("resumeJobBtn").hidden=false;
         el("resumeJobBtn").textContent="Weiter erzeugen";
@@ -642,6 +804,53 @@ details.box summary::-webkit-details-marker{display:none}
       }
     })();
   }
+
+  async function approveVoice(){
+    if(!state.job?.id)return;
+    el("approveVoiceBtn").disabled=true;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve-voice",{method:"POST",body:"{}"});
+      state.job=d.job;
+      showVoicePreview(d.job);
+      el("voiceNotice").className="notice ok";
+      el("voiceNotice").textContent="Stimme freigegeben – Gestaltung wird vorbereitet.";
+      setStatus("Gestaltung","run");
+      startPoll();
+    }catch(e){el("approveVoiceBtn").disabled=false;alert(e.message)}
+  }
+  async function regenerateVoice(){
+    if(!state.job?.id)return;
+    if(!confirm("Stimme erneut erzeugen? Bisherige Freigabe wird zurückgesetzt."))return;
+    el("regenVoiceBtn").disabled=true;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/regenerate-voice",{method:"POST",body:"{}"});
+      state.job=d.job;
+      el("voicePreviewBox").classList.add("hidden");
+      el("voiceNotice").textContent="Stimme wird erneut erzeugt…";
+      setStatus("Stimme","run");
+      startPoll();
+    }catch(e){alert(e.message)}
+    finally{el("regenVoiceBtn").disabled=false}
+  }
+  async function confirmDesignAndRender(){
+    if(!state.job?.id){alert("Zuerst Stimme erzeugen und freigeben.");return}
+    if(!state.job.voiceApproved&&state.job.status!=="awaiting_design"){
+      alert("Bitte zuerst die Stimme freigeben.");showStep("voice");return;
+    }
+    if(!confirm("Gestaltung bestätigen und MP4 rendern?\nVollständiges DAR-Layout · 1080×1920 · keine Endkarte."))return;
+    el("createVideoBtn").disabled=true;el("createVideoBtn").innerHTML='<span class="loader"></span>Rendert…';
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/confirm-design",{method:"POST",body:JSON.stringify(readDesign())});
+      state.job=d.job;
+      el("designMsg").textContent=d.job.message||"MP4 wird gerendert";
+      el("designNotice").className="notice";
+      el("designNotice").textContent="Rendering gestartet – bitte warten.";
+      setStatus("Rendern","run");
+      startPoll();
+    }catch(e){el("designNotice").className="notice bad";el("designNotice").textContent=e.message;setStatus("Fehler","bad")}
+    finally{el("createVideoBtn").disabled=false;el("createVideoBtn").textContent="Sprach-Bildbeitrag erstellen"}
+  }
+
   el("resumeJobBtn").addEventListener("click",()=>{
     if(!state.job?.id)return;
     el("resumeJobBtn").hidden=true;
@@ -649,9 +858,28 @@ details.box summary::-webkit-details-marker{display:none}
     startPoll();
   });
   document.addEventListener("visibilitychange",()=>{
-    if(document.visibilityState==="visible"&&state.job&&["queued","running","failed"].includes(state.job.status)&&state.step==="voice"){
+    if(document.visibilityState==="visible"&&state.job&&["queued","running","failed"].includes(state.job.status)&&["voice","design"].includes(state.step)){
       startPoll();
     }
+  });
+
+  el("createVoiceBtn").addEventListener("click",startVoiceJob);
+  el("createVideoBtn").addEventListener("click",confirmDesignAndRender);
+  el("approveVoiceBtn").addEventListener("click",approveVoice);
+  el("regenVoiceBtn").addEventListener("click",regenerateVoice);
+  el("playVoiceBtn").addEventListener("click",()=>{const a=el("voiceAudio");if(a){try{a.play()}catch{}}});
+  el("stopVoiceBtn").addEventListener("click",()=>{const a=el("voiceAudio");if(a){try{a.pause();a.currentTime=0}catch{}}});
+  el("backVoiceBtn").addEventListener("click",()=>showStep("voice"));
+  ["designVariant","designTextScale","designWmOpacity","designDimOpacity","designTextShift"].forEach(id=>{
+    const node=el(id);if(node)node.addEventListener("input",syncDesignPreview);
+  });
+  el("cancelJobBtn").addEventListener("click",async()=>{
+    if(!state.job?.id)return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("voiceNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
+  });
+  el("cancelDesignBtn").addEventListener("click",async()=>{
+    if(!state.job?.id)return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("designNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
   });
 
   async function capturePreviewFrames(video, times){
@@ -705,11 +933,6 @@ details.box summary::-webkit-details-marker{display:none}
     if(j.qualityChecks&&Object.values(j.qualityChecks).every(Boolean))return "bestanden";
     return "siehe Details";
   }
-  el("createVideoBtn").addEventListener("click",createVideo);
-  el("cancelJobBtn").addEventListener("click",async()=>{
-    if(!state.job?.id)return;
-    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("videoNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
-  });
   el("editTouchBtn").addEventListener("click",()=>{
     if(!state.job?.id){alert("Kein Auftrag");return;}
     location.href="/admin/video-editor.html?job="+encodeURIComponent(state.job.id);
@@ -833,12 +1056,24 @@ details.box summary::-webkit-details-marker{display:none}
       loadJobs();
     }catch(e){alert(e.message)}
   });
+  function resumeJobUi(j){
+    state.job=j;
+    if(j.status==="completed"){showStep("result");openResult(j);return}
+    if(j.status==="awaiting_voice_approval"||(j.voiceUrl&&!j.voiceApproved)){
+      showStep("voice");showVoicePreview(j);setStatus("Stimme freigeben","warn");return;
+    }
+    if(j.status==="awaiting_design"||(j.voiceApproved&&!j.designConfirmed)){
+      showStep("design");syncDesignPreview();setStatus("Gestaltung","warn");return;
+    }
+    if(["render","review"].includes(normalizeStage(j.stage))||j.status==="running"||j.status==="queued"){
+      showStep(j.voiceApproved?"design":"voice");startPoll();return;
+    }
+    showStep("voice");startPoll();
+  }
   el("eResumeBtn").addEventListener("click",async()=>{
     if(!state.editJob?.id)return;
-    state.job=state.editJob;
     closeJobSheet();
-    showStep("voice");
-    startPoll();
+    resumeJobUi(state.editJob);
   });
   el("eRegenBtn").addEventListener("click",async()=>{
     if(!state.editJob?.id)return;
@@ -865,9 +1100,7 @@ details.box summary::-webkit-details-marker{display:none}
     if(!state.editJob?.id)return;
     const j=state.editJob;
     closeJobSheet();
-    state.job=j;
-    if(j.status==="completed"){showStep("result");await openResult(j)}
-    else{showStep("voice");startPoll()}
+    resumeJobUi(j);
   });
   el("eDeleteBtn").addEventListener("click",async()=>{
     if(!state.editJob?.id)return;
@@ -915,9 +1148,19 @@ details.box summary::-webkit-details-marker{display:none}
   loadDraft();showStep("text");loadStatus();loadJobs();
   try{
     const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");
-    if(job&&["queued","running"].includes(job.status)){state.job=job;showStep("voice");startPoll()}
-    else if(job&&job.status==="failed"){state.job=job;showStep("voice");el("prodMsg").textContent=job.lastError||job.message||"Fehler";el("videoNotice").className="notice bad";el("videoNotice").textContent=job.lastError||job.message||"Fehler";setStatus("Fehler","bad");el("resumeJobBtn").hidden=false;el("resumeJobBtn").textContent="Weiter erzeugen";el("cancelJobBtn").disabled=false}
     if(job&&job.status==="completed"){state.job=job;showStep("result");openResult(job)}
+    else if(job&&["queued","running","failed","awaiting_voice_approval","awaiting_design"].includes(job.status)){
+      resumeJobUi(job);
+      if(job.status==="failed"){
+        el("prodMsg").textContent=job.lastError||job.message||"Fehler";
+        el("voiceNotice").className="notice bad";
+        el("voiceNotice").textContent=job.lastError||job.message||"Fehler";
+        setStatus("Fehler","bad");
+        el("resumeJobBtn").hidden=false;
+        el("resumeJobBtn").textContent="Weiter erzeugen";
+        el("cancelJobBtn").disabled=false;
+      }
+    }
   }catch{}
 })();
 </script>

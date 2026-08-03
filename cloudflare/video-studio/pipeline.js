@@ -45,6 +45,13 @@ function publicJob(job) {
     sceneImageUrl: job.sceneImageUrl || job.artifacts?.sceneImage?.url || null,
     costBreakdown: job.costBreakdown || null,
     costConfirmed: Boolean(job.costConfirmed),
+    voiceApproved: Boolean(job.voiceApproved),
+    designConfirmed: Boolean(job.designConfirmed),
+    awaitingVoiceApproval: job.status === "awaiting_voice_approval",
+    awaitingDesign: job.status === "awaiting_design",
+    voiceUrl: job.artifacts?.voice?.url || null,
+    voiceDurationSec: job.artifacts?.voice?.durationSec || null,
+    design: job.design || null,
     qualityChecks: job.qualityChecks || emptyQualityChecks(),
     qualityIncomplete: Boolean(job.qualityIncomplete),
     validation: job.validation || null,
@@ -95,6 +102,17 @@ async function patchJob(env, id, patch) {
 
 function uniqueStages(list) {
   return [...new Set((list || []).filter(Boolean))];
+}
+
+function normalizeDesign(input = {}) {
+  const brand = DAR_VIDEO_PROFILE.branding;
+  return {
+    textScale: Math.min(1.2, Math.max(0.85, Number(input.textScale) || 1)),
+    watermarkOpacity: Math.min(0.08, Math.max(0.05, Number(input.watermarkOpacity) || Number(brand.watermarkOpacity) || 0.065)),
+    watermarkScale: Math.min(0.38, Math.max(0.3, Number(input.watermarkScale) || Number(brand.watermarkScale) || 0.34)),
+    dimOpacity: Math.min(0.45, Math.max(0.08, Number(input.dimOpacity) || 0.18)),
+    layoutVariant: String(input.layoutVariant || "classic").trim() || "classic"
+  };
 }
 
 /** Legacy + aktuelle Stufen für alte Jobs und UI-Kompatibilität */
@@ -193,6 +211,10 @@ export async function createVideoStudioJob(env, input = {}, helpers = {}, ctx = 
     format: "9:16",
     manualApproval: input.manualApproval !== false,
     composePreview: input.composePreview === true,
+    pauseAfterVoice: input.pauseAfterVoice !== false,
+    voiceApproved: input.voiceApproved === true,
+    designConfirmed: input.designConfirmed === true,
+    design: normalizeDesign(input.design),
     costConfirmed: input.costConfirmed === true,
     costBreakdown: costPreview,
     sceneImageUrl: sceneImageUrl || null,
@@ -234,7 +256,18 @@ export async function runVideoStudioPipelineLoop(env, jobId, helpers = {}, { max
   let last = null;
   for (let i = 0; i < maxTicks; i++) {
     last = await processVideoStudioJob(env, jobId, helpers);
-    if (["completed", "failed", "cancelled", "setup_required"].includes(last?.status)) return last;
+    if (
+      [
+        "completed",
+        "failed",
+        "cancelled",
+        "setup_required",
+        "awaiting_voice_approval",
+        "awaiting_design"
+      ].includes(last?.status)
+    ) {
+      return last;
+    }
     await sleep(delayMs);
   }
   return last;
@@ -247,7 +280,9 @@ export async function runVideoStudioPipelineLoop(env, jobId, helpers = {}, { max
 export async function processVideoStudioJob(env, jobId, helpers = {}) {
   let job = await readJob(env, jobId);
   if (!job) throw httpError("Auftrag nicht gefunden", 404);
-  if (["completed", "cancelled", "setup_required"].includes(job.status)) return publicJob(job);
+  if (["completed", "cancelled", "setup_required", "awaiting_voice_approval", "awaiting_design"].includes(job.status)) {
+    return publicJob(job);
+  }
 
   const setup = collectSetupGaps(env);
   if (setup.length) {
@@ -415,15 +450,29 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
             bytes: voice.bytes.byteLength,
             ok: true,
             url: voiceSigned.url || null,
-            durationSec: voiceDur
+            durationSec: voiceDur,
+            chars: voice.chars || 0,
+            estimatedCostEur: voice.estimatedCostEur || 0
           },
           clips: []
         },
         costEur: Number((Number(job.costEur || 0) + Number(voice.estimatedCostEur || 0)).toFixed(4)),
         completedStages: uniqueStages([...(job.completedStages || []), "voice"]),
-        message: "Stimme gespeichert"
+        status: job.voiceApproved || job.pauseAfterVoice === false ? "running" : "awaiting_voice_approval",
+        message:
+          job.voiceApproved || job.pauseAfterVoice === false
+            ? "Stimme gespeichert"
+            : PIPELINE_STAGE_LABELS.voice_pending
       });
       return publicJob(job);
+    }
+
+    if (!job.voiceApproved && job.pauseAfterVoice !== false) {
+      return publicJob(await patchJob(env, jobId, {
+        status: "awaiting_voice_approval",
+        stage: "voice",
+        message: PIPELINE_STAGE_LABELS.voice_pending
+      }));
     }
 
     // 6) Layout / Gestaltung (früher: captions)
@@ -448,9 +497,18 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
         storyboard: nextStoryboard,
         durationSeconds: captionPlan.durationSec,
         completedStages: uniqueStages([...(job.completedStages || []), "layout", "captions"]),
-        message: PIPELINE_STAGE_LABELS.layout
+        status: job.designConfirmed ? "running" : "awaiting_design",
+        message: job.designConfirmed ? PIPELINE_STAGE_LABELS.layout : PIPELINE_STAGE_LABELS.design_pending
       });
       return publicJob(job);
+    }
+
+    if (!job.designConfirmed) {
+      return publicJob(await patchJob(env, jobId, {
+        status: "awaiting_design",
+        stage: "layout",
+        message: PIPELINE_STAGE_LABELS.design_pending
+      }));
     }
 
     // 7) Render – Standbild + Stimme + Ken Burns (Shotstack)
@@ -500,6 +558,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
           durationSec: job.storyboard?.durationSec || job.durationSeconds,
           voiceStartSec: job.storyboard?.captionPlan?.voiceStart,
           kenBurns: "zoomIn",
+          design: job.design || normalizeDesign({}),
           final: wantFinal
         });
         if (!compose.ok) throw httpError(compose.reason || "Render fehlgeschlagen", compose.setupRequired ? 503 : 502);
@@ -698,7 +757,76 @@ async function pollCompose(env, renderMeta) {
   return pollShotstackRender(env, renderMeta.renderId, { final });
 }
 
-export { publicJob, collectSetupGaps };
+export { publicJob, collectSetupGaps, normalizeDesign };
+
+/** Stimme freigeben → Gestaltung prüfen. */
+export async function approveVideoStudioVoice(env, jobId, ctx = null) {
+  const job = await readJob(env, jobId);
+  if (!job) throw httpError("Auftrag nicht gefunden", 404);
+  if (!job.artifacts?.voice?.r2Key) throw httpError("Keine Stimme vorhanden", 409);
+  const next = await patchJob(env, jobId, {
+    voiceApproved: true,
+    status: "queued",
+    stage: "layout",
+    message: "Stimme freigegeben – Gestaltung wird vorbereitet"
+  });
+  if (ctx) {
+    ctx.waitUntil(runVideoStudioPipelineLoop(env, jobId, {}).catch((error) => {
+      console.error("approve voice continue failed", jobId, error?.message || error);
+    }));
+  }
+  return publicJob(next);
+}
+
+/** Stimme neu erzeugen (Freigabe zurücksetzen). */
+export async function regenerateVideoStudioVoice(env, jobId, ctx = null) {
+  const job = await readJob(env, jobId);
+  if (!job) throw httpError("Auftrag nicht gefunden", 404);
+  const next = await patchJob(env, jobId, {
+    voiceApproved: false,
+    designConfirmed: false,
+    status: "queued",
+    stage: "voice",
+    message: "Stimme wird erneut erzeugt",
+    completedStages: (job.completedStages || []).filter((s) => !["voice", "layout", "captions", "render", "review"].includes(s)),
+    artifacts: {
+      ...(job.artifacts || {}),
+      voice: null,
+      render: null
+    }
+  });
+  if (ctx) {
+    ctx.waitUntil(runVideoStudioPipelineLoop(env, jobId, {}).catch((error) => {
+      console.error("regenerate voice failed", jobId, error?.message || error);
+    }));
+  }
+  return publicJob(next);
+}
+
+/** Gestaltung bestätigen → MP4 rendern. */
+export async function confirmVideoStudioDesign(env, jobId, designInput = {}, ctx = null) {
+  const job = await readJob(env, jobId);
+  if (!job) throw httpError("Auftrag nicht gefunden", 404);
+  if (!job.voiceApproved) throw httpError("Zuerst die Stimme freigeben", 409);
+  const design = normalizeDesign({ ...(job.design || {}), ...designInput });
+  const next = await patchJob(env, jobId, {
+    design,
+    designConfirmed: true,
+    status: "queued",
+    stage: "render",
+    message: "Gestaltung bestätigt – MP4 wird gerendert",
+    artifacts: {
+      ...(job.artifacts || {}),
+      render: null
+    }
+  });
+  if (ctx) {
+    ctx.waitUntil(runVideoStudioPipelineLoop(env, jobId, {}).catch((error) => {
+      console.error("confirm design continue failed", jobId, error?.message || error);
+    }));
+  }
+  return publicJob(next);
+}
 
 /** Frische signierte Download-URLs für fertige Aufträge (Admin-Vorschau/Download). */
 export async function refreshVideoStudioJobUrls(env, jobId) {

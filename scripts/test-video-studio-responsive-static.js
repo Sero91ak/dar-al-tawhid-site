@@ -24,14 +24,21 @@ const required = [
   "Im Feed veröffentlichen",
   "Besucher-Push senden",
   "Textaufteilung bearbeiten",
-  "Stimme &amp; Gestaltung",
+  "Stimme freigeben",
+  "Gestaltung",
+  "panelVoice",
+  "panelDesign",
+  "approve-voice",
+  "confirm-design",
   "Kompositionsvorschau",
   "compPreview",
-  "by Serhat Abu Malik"
+  "by Serhat Abu Malik",
+  "Audiovorschau"
 ];
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);
 }
+assert.ok(!html.includes("Stimme &amp; Gestaltung"), "combined voice/design step must be gone");
 assert.ok(!html.includes("KI-Video-Studio"), "old KI-Video-Studio title must be gone");
 assert.ok(!html.includes("Optional: KI-Szenenbild"), "optional KI scene gen must be gone");
 assert.ok(!html.includes("Video-Beitrag erstellen"), "old create button must be gone");

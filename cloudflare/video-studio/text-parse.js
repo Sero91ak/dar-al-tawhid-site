@@ -42,7 +42,7 @@ function stripMdDecor(s) {
 function cleanSpeaker(raw) {
   return stripMdDecor(String(raw || ""))
     .replace(/^[🖋️📌📖]*\s*/u, "")
-    .replace(/\s*(رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام|ﷺ)\s*/giu, " ")
+    .replace(/\s+(رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام|ﷺ)\s*/giu, " $1")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -95,7 +95,7 @@ export function parseContributionText(raw) {
 
   // 1) Sprecher … sagte: „Aussage“
   const saidRe =
-    /(?:^|\n)\s*(?:🖋️\s*)?(?:\*\*)?([^\n*]{2,120}?)(?:\*\*)?\s*(?:رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام)?\s*sagte\s*[:：]\s*([\s\S]*?)(?=(?:\s*(?:📝|🌙)|(?:\n\s*)?(?:Quelle|Fundstelle|Fazit|Schluss|Folgt für)|$))/iu;
+    /(?:^|\n)\s*(?:🖋️\s*)?(?:\*\*)?([^\n*]{2,120}?(?:\s*(?:رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام|ﷺ))?)(?:\*\*)?\s*sagte\s*[:：]\s*([\s\S]*?)(?=(?:\s*(?:📝|🌙)|(?:\n\s*)?(?:Quelle|Fundstelle|Fazit|Schluss|Folgt für)|$))/iu;
   const said = text.match(saidRe);
   if (said) {
     speaker = cleanSpeaker(said[1]);

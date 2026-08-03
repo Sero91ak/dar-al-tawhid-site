@@ -201,8 +201,10 @@ export function buildShotstackTimeline({
   logoUrl,
   durationSec,
   voiceStartSec,
-  kenBurns = "zoomIn"
+  kenBurns = "zoomIn",
+  design = null
 } = {}) {
+  const designOpts = design && typeof design === "object" ? design : {};
   const overlays = captionPlan?.overlays?.length
     ? captionPlan.overlays
     : (captionLines || []).map((line, i) => ({
@@ -235,10 +237,11 @@ export function buildShotstackTimeline({
     : null;
 
   /* Leichte Lesbarkeitszone über die gesamte Dauer – keine Endkarte */
+  const dimStrength = Math.min(0.45, Math.max(0.08, Number(designOpts.dimOpacity) || 0.18));
   const readZone = {
     asset: {
       type: "html",
-      html: `<div style="width:1080px;height:1920px;background:linear-gradient(180deg,rgba(0,0,0,0.22) 0%,rgba(0,0,0,0.08) 18%,rgba(0,0,0,0.10) 52%,rgba(0,0,0,0.34) 78%,rgba(0,0,0,0.52) 100%)"></div>`,
+      html: `<div style="width:1080px;height:1920px;background:linear-gradient(180deg,rgba(0,0,0,${(dimStrength + 0.06).toFixed(2)}) 0%,rgba(0,0,0,${(dimStrength * 0.45).toFixed(2)}) 18%,rgba(0,0,0,${(dimStrength * 0.55).toFixed(2)}) 52%,rgba(0,0,0,${Math.min(0.55, dimStrength + 0.28).toFixed(2)}) 78%,rgba(0,0,0,${Math.min(0.62, dimStrength + 0.34).toFixed(2)}) 100%)"></div>`,
       width: 1080,
       height: 1920
     },
@@ -279,7 +282,14 @@ export function buildShotstackTimeline({
 
   const brand = DAR_VIDEO_PROFILE.branding;
   const markUrl = watermarkUrl || logoUrl;
-  const wmOpacity = Math.min(0.10, Math.max(0.08, Number(brand.watermarkOpacity) || 0.09));
+  const wmOpacity = Math.min(
+    0.08,
+    Math.max(0.05, Number(designOpts.watermarkOpacity) || Number(brand.watermarkOpacity) || 0.065)
+  );
+  const wmScale = Math.min(
+    0.38,
+    Math.max(0.3, Number(designOpts.watermarkScale) || Number(brand.watermarkScale) || 0.34)
+  );
   const watermarkClip = markUrl
     ? {
         asset: { type: "image", src: markUrl },
@@ -287,7 +297,7 @@ export function buildShotstackTimeline({
         length: totalDuration,
         position: "center",
         opacity: wmOpacity,
-        scale: Number(brand.watermarkScale) || 0.44,
+        scale: wmScale,
         offset: { x: 0, y: 0 }
       }
     : null;
@@ -388,7 +398,8 @@ async function composeWithShotstack(env, payload, { final }) {
     logoUrl: brands.logoUrl,
     durationSec: payload.durationSec,
     voiceStartSec: payload.voiceStartSec,
-    kenBurns: payload.kenBurns || "zoomIn"
+    kenBurns: payload.kenBurns || "zoomIn",
+    design: payload.design || null
   });
   return submitShotstackTimeline(env, bodyFull, { final, envInfo });
 }

@@ -11,7 +11,16 @@ import {
   readPronunciationDict,
   savePronunciationDict
 } from "./job-store.js";
-import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop, refreshVideoStudioJobUrls } from "./pipeline.js";
+import {
+  approveVideoStudioVoice,
+  confirmVideoStudioDesign,
+  createVideoStudioJob,
+  processVideoStudioJob,
+  publicJob,
+  regenerateVideoStudioVoice,
+  runVideoStudioPipelineLoop,
+  refreshVideoStudioJobUrls
+} from "./pipeline.js";
 import { getVideoAsset, verifySignedAssetRequest, putVideoAsset, createSignedAssetUrl, deleteVideoPrefix } from "./storage.js";
 import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
 import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth, submitShotstackTimeline, composeFinalVideo } from "./compose.js";
@@ -610,7 +619,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     }
   }
 
-  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls|publish-feed|request-push|regenerate))?$/);
+  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls|publish-feed|request-push|regenerate|approve-voice|regenerate-voice|confirm-design))?$/);
   if (jobMatch) {
     const jobId = decodeURIComponent(jobMatch[1]);
     const action = jobMatch[2] || "";
@@ -618,6 +627,21 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     if (request.method === "GET" && !action) {
       const job = await readJob(env, jobId);
       if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      let voiceUrl = job.artifacts?.voice?.url || null;
+      if (job.artifacts?.voice?.r2Key) {
+        const voiceSigned = await createSignedAssetUrl(env, {
+          jobId,
+          key: job.artifacts.voice.r2Key,
+          ttlSec: 7200
+        });
+        if (voiceSigned.ok && voiceSigned.url) {
+          voiceUrl = voiceSigned.url;
+          job.artifacts = {
+            ...(job.artifacts || {}),
+            voice: { ...(job.artifacts.voice || {}), url: voiceUrl }
+          };
+        }
+      }
       return json({ ok: true, job: publicJob(job) }, cors);
     }
 
@@ -678,6 +702,9 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         sceneImageUrl: job.sceneImageUrl || keepScene?.url || null,
         storyboard: null,
         completedStages: ["statement"],
+        voiceApproved: false,
+        designConfirmed: false,
+        pauseAfterVoice: true,
         artifacts: {
           sceneImage: keepScene?.r2Key || keepScene?.url ? keepScene : job.artifacts?.sceneImage || null,
           clips: [],
@@ -857,6 +884,26 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         sent: false,
         message: saved.message
       }, cors);
+    }
+
+    if (request.method === "POST" && action === "approve-voice") {
+      await assertVideoStudioRateLimit(env, request);
+      const job = await approveVideoStudioVoice(env, jobId, ctx);
+      return json({ ok: true, job }, cors);
+    }
+
+    if (request.method === "POST" && action === "regenerate-voice") {
+      await assertVideoStudioRateLimit(env, request);
+      const job = await regenerateVideoStudioVoice(env, jobId, ctx);
+      return json({ ok: true, job }, cors);
+    }
+
+    if (request.method === "POST" && action === "confirm-design") {
+      await assertVideoStudioRateLimit(env, request);
+      const body = await request.json().catch(() => ({}));
+      const design = body.design && typeof body.design === "object" ? body.design : body;
+      const job = await confirmVideoStudioDesign(env, jobId, design, ctx);
+      return json({ ok: true, job }, cors);
     }
 
     if (request.method === "POST" && action === "refresh-urls") {

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v69-sprach-bildbeitrag-frame';
+const CACHE_VERSION = 'dar-admin-stats-v70-sprach-bildbeitrag-steps';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
