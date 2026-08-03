@@ -163,12 +163,12 @@ export function buildTimelineFromProject(env, project) {
     });
   }
 
-  const dimFrom = Number(project.background?.dimFrom ?? duration - 2.5);
-  const dimOpacity = Number(project.background?.dimOpacity ?? 0.34);
+  const dimFrom = 0;
+  const dimOpacity = Number(project.background?.dimOpacity ?? 0.18);
   const dimClip = {
     asset: {
       type: "html",
-      html: `<div style="width:1080px;height:1920px;background:rgba(0,0,0,${dimOpacity})"></div>`,
+      html: `<div style="width:1080px;height:1920px;background:linear-gradient(180deg,rgba(0,0,0,${Math.min(0.28, dimOpacity + 0.08)}) 0%,rgba(0,0,0,${dimOpacity * 0.4}) 22%,rgba(0,0,0,${dimOpacity}) 55%,rgba(0,0,0,${Math.min(0.5, dimOpacity + 0.28)}) 100%)"></div>`,
       width: 1080,
       height: 1920
     },

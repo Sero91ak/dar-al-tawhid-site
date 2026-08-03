@@ -68,28 +68,33 @@ export function computeSpeechImageDurationSec(voiceDurationSec) {
   return Number((DAR_INTRO_SEC + voice + DAR_OUTRO_SEC).toFixed(2));
 }
 
+/**
+ * Branding (Titel + CTA/Social) gilt die gesamte Dauer.
+ * Nur Sprecher/Aussage/Quelle sind stimmbezogen getaktet.
+ */
 export function buildDynamicCaptionSlots(totalSec, voiceDurationSec) {
   const total = Math.max(10, Number(totalSec) || 15);
   const voice = Math.max(4, Number(voiceDurationSec) || total - DAR_INTRO_SEC - DAR_OUTRO_SEC);
   const voiceStart = DAR_INTRO_SEC;
   const voiceEnd = Math.min(total - DAR_OUTRO_SEC + 0.15, voiceStart + voice);
-  const brandLen = Math.min(1.5, DAR_INTRO_SEC);
-  const speakerAt = Math.max(0.9, voiceStart - 0.3);
-  const speakerLen = 2.0;
-  const statementAt = speakerAt + speakerLen - 0.15;
-  const statementEnd = Math.max(statementAt + 2.4, voiceEnd - 0.2);
-  const sourceAt = Math.max(statementEnd + 0.1, voiceEnd);
-  const sourceLen = 2.0;
-  const ctaLen = Math.min(2.8, Math.max(2.2, total - (sourceAt + sourceLen)));
-  const ctaAt = Math.max(sourceAt + sourceLen - 0.15, total - ctaLen);
+  const holdAfterSpeech = Math.min(2.5, Math.max(1.5, DAR_OUTRO_SEC - 0.4));
+  const speakerAt = Math.max(0.85, voiceStart - 0.35);
+  const statementAt = speakerAt + 1.55;
+  const statementEnd = Math.max(statementAt + 2.4, voiceEnd);
+  const sourceAt = Math.min(statementEnd + 0.08, Math.max(statementAt + 2.2, voiceEnd - 0.4));
   return {
-    brand: { at: 0, length: brandLen },
-    speaker: { at: speakerAt, length: speakerLen },
+    brand: { at: 0, length: total, persistent: true },
+    cta: { at: 0, length: total, persistent: true },
+    speaker: { at: speakerAt, length: Number(Math.max(2, statementEnd - speakerAt).toFixed(2)) },
     statement: { at: statementAt, end: statementEnd },
-    source: { at: sourceAt, length: sourceLen },
-    cta: { at: ctaAt, length: Math.min(ctaLen, Math.max(2.2, total - ctaAt)) },
+    source: {
+      at: sourceAt,
+      length: Number(Math.max(2, total - sourceAt).toFixed(2)),
+      holdThroughEnd: true
+    },
     voiceStart,
     voiceEnd,
+    holdAfterSpeech,
     total
   };
 }

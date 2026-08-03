@@ -106,13 +106,13 @@ function styleForRole(role, templateColors) {
 }
 
 function transformForRole(role) {
-  // Design-Koordinaten: 1080×1920, Ursprung oben links
-  if (role === "branding") return { x: 90, y: 110, width: 900, rotation: 0 };
-  if (role === "speaker") return { x: 70, y: 520, width: 940, rotation: 0 };
-  if (role === "quote") return { x: 60, y: 700, width: 960, rotation: 0 };
-  if (role === "source") return { x: 70, y: 1180, width: 940, rotation: 0 };
-  if (role === "watermark") return { x: 270, y: 660, width: 540, rotation: 0 };
-  if (role === "social" || role === "footer") return { x: 60, y: 1320, width: 960, rotation: 0 };
+  // Design-Koordinaten: 1080×1920 – feste Branding-Rahmen (nicht mit Ken Burns)
+  if (role === "branding") return { x: 90, y: 96, width: 900, rotation: 0 };
+  if (role === "speaker") return { x: 70, y: 420, width: 940, rotation: 0 };
+  if (role === "quote") return { x: 60, y: 600, width: 960, rotation: 0 };
+  if (role === "source") return { x: 70, y: 1120, width: 940, rotation: 0 };
+  if (role === "watermark") return { x: 270, y: 700, width: 540, rotation: 0 };
+  if (role === "social" || role === "footer") return { x: 50, y: 1580, width: 980, rotation: 0 };
   return { x: 90, y: 800, width: 900, rotation: 0 };
 }
 
@@ -192,14 +192,11 @@ export function createProjectFromJob({
 
   if (byRole.branding?.[0]) {
     pushText("branding", byRole.branding[0].text || brand.title, {
-      start: byRole.branding[0].at,
-      end: byRole.branding[0].at + byRole.branding[0].length
+      start: 0,
+      end: duration
     });
   } else {
-    pushText("branding", brand.title, {
-      start: DAR_CAPTION_SLOTS.brand.at,
-      end: DAR_CAPTION_SLOTS.brand.at + DAR_CAPTION_SLOTS.brand.length
-    });
+    pushText("branding", brand.title, { start: 0, end: duration });
   }
 
   if (byRole.speaker?.[0]) {
@@ -211,14 +208,14 @@ export function createProjectFromJob({
 
   (byRole.quote || []).forEach((o, i) => {
     const t = transformForRole("quote");
-    t.y = 640 + i * 40;
+    t.y = 560 + i * 36;
     pushText("quote", o.text, { start: o.at, end: o.at + o.length }, { transform: t, blockIndex: i });
   });
 
   if (byRole.source?.[0]) {
     pushText("source", byRole.source[0].text || statement.source || "", {
       start: byRole.source[0].at,
-      end: byRole.source[0].at + byRole.source[0].length
+      end: Math.max(byRole.source[0].at + byRole.source[0].length, duration)
     });
   }
 
@@ -233,8 +230,8 @@ export function createProjectFromJob({
       brand.credit
     ].join("\n"),
     {
-      start: social?.at ?? DAR_CAPTION_SLOTS.cta.at,
-      end: (social?.at ?? DAR_CAPTION_SLOTS.cta.at) + (social?.length ?? DAR_CAPTION_SLOTS.cta.length)
+      start: 0,
+      end: duration
     },
     {
       social: {
@@ -247,6 +244,7 @@ export function createProjectFromJob({
       }
     }
   );
+  void social;
 
   elements.push({
     id: uid("wm"),

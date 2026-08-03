@@ -98,10 +98,15 @@ function htmlShell(inner, { width = 980, height = 280, align = "center" } = {}) 
 }
 
 function socialRowHtml(b, typo) {
-  const tg = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Z" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.telegram)}</span></span>`;
-  const ig = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igv" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f58529"/><stop offset="45%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#515bd4"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igv)"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.instagram)}</span></span>`;
-  const web = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="${typo.gold}" stroke-width="1.6"/><path d="M3 12h18M12 3c2.8 3 4.2 6 4.2 9s-1.4 6-4.2 9c-2.8-3-4.2-6-4.2-9s1.4-6 4.2-9Z" fill="none" stroke="${typo.gold}" stroke-width="1.4"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.website)}</span></span>`;
+  const tg = `<span style="display:inline-flex;align-items:center;gap:6px;margin:0 8px;white-space:nowrap"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Z" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:18px;font-weight:600;color:${typo.cream}">${escapeHtml(b.telegram)}</span></span>`;
+  const ig = `<span style="display:inline-flex;align-items:center;gap:6px;margin:0 8px;white-space:nowrap"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igv" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f58529"/><stop offset="45%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#515bd4"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igv)"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:18px;font-weight:600;color:${typo.cream}">${escapeHtml(b.instagram)}</span></span>`;
+  const web = `<span style="display:inline-flex;align-items:center;gap:6px;margin:0 8px;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="${typo.gold}" stroke-width="1.6"/><path d="M3 12h18M12 3c2.8 3 4.2 6 4.2 9s-1.4 6-4.2 9c-2.8-3-4.2-6-4.2-9s1.4-6 4.2-9Z" fill="none" stroke="${typo.gold}" stroke-width="1.4"/></svg><span style="font-family:${typo.ui};font-size:18px;font-weight:600;color:${typo.cream}">${escapeHtml(b.website)}</span></span>`;
   return `${tg}${web}${ig}`;
+}
+
+function softPanel(extra = "") {
+  const typo = DAR_VIDEO_PROFILE.typography;
+  return `background:rgba(8,10,14,0.42);border:1px solid rgba(230,200,130,0.16);border-radius:16px;box-shadow:0 10px 36px rgba(0,0,0,.28);padding:16px 22px;box-sizing:border-box;${extra}`;
 }
 
 function mixScriptHtml(text, typo) {
@@ -118,65 +123,66 @@ function overlayHtml(overlay) {
 
   if (overlay.role === "brand") {
     return htmlShell(
-      `<div style="text-align:center;width:100%">
-        <div style="font-family:${typo.display};font-size:30px;letter-spacing:.16em;color:${typo.gold};font-weight:700;line-height:1.15;text-shadow:0 2px 14px rgba(0,0,0,.55)">${escapeHtml(b.title)}</div>
+      `<div style="text-align:center;width:100%;padding-top:8px">
+        <div style="font-family:${typo.display};font-size:26px;letter-spacing:.18em;color:${typo.gold};font-weight:700;line-height:1.15;text-shadow:0 2px 12px rgba(0,0,0,.55)">${escapeHtml(b.title)}</div>
       </div>`,
-      { height: 100 }
+      { height: 88 }
     );
   }
   if (overlay.role === "speaker") {
     return htmlShell(
-      `<div style="${panelStyle("max-width:900px;text-align:center")}">
-        <div style="font-family:${typo.display};font-size:40px;line-height:1.42;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${mixScriptHtml(overlay.text, typo)}</div>
+      `<div style="${softPanel("max-width:900px;text-align:center;padding:14px 20px")}">
+        <div style="font-family:${typo.display};font-size:34px;line-height:1.4;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${mixScriptHtml(overlay.text, typo)}</div>
       </div>`,
-      { height: 220 }
+      { height: 160 }
     );
   }
   if (overlay.role === "statement") {
     const body = overlay.htmlEmphasis ? emphasizeHtml(overlay.text) : escapeHtml(overlay.text);
     return htmlShell(
-      `<div style="${panelStyle("max-width:920px;text-align:center")}">
-        <div style="font-family:${typo.body};font-size:46px;line-height:1.45;color:${typo.cream};font-weight:600;letter-spacing:.01em;text-shadow:0 3px 16px rgba(0,0,0,.65)">${body}</div>
+      `<div style="${softPanel("max-width:920px;text-align:center")}">
+        <div style="font-family:${typo.body};font-size:42px;line-height:1.42;color:${typo.cream};font-weight:600;letter-spacing:.01em;text-shadow:0 3px 16px rgba(0,0,0,.65)">${body}</div>
       </div>`,
-      { height: 420 }
+      { height: 360 }
     );
   }
   if (overlay.role === "source") {
     return htmlShell(
-      `<div style="${panelStyle("max-width:900px;text-align:center;padding:18px 26px")}">
-        <div style="height:1px;width:46%;margin:0 auto 14px;background:linear-gradient(90deg,transparent,${typo.gold},transparent);opacity:.85"></div>
-        <div style="font-family:${typo.source};font-size:28px;font-style:italic;letter-spacing:.015em;line-height:1.45;color:${typo.soft};text-shadow:0 2px 12px rgba(0,0,0,.55)">${mixScriptHtml(overlay.text, typo)}</div>
+      `<div style="${softPanel("max-width:880px;text-align:center;padding:12px 20px")}">
+        <div style="font-family:${typo.source};font-size:24px;font-style:italic;letter-spacing:.015em;line-height:1.4;color:${typo.soft};text-shadow:0 2px 12px rgba(0,0,0,.55)">${mixScriptHtml(overlay.text, typo)}</div>
       </div>`,
-      { height: 200 }
+      { height: 120 }
     );
   }
   if (overlay.role === "cta") {
+    /* Kompakter dauerhafter Footer – kein Outro-Panel */
     return htmlShell(
-      `<div style="${panelStyle("max-width:940px;text-align:center;padding:26px 28px")}">
-        <div style="font-family:${typo.display};font-size:32px;line-height:1.35;margin-bottom:18px;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${escapeHtml(b.followLine)}</div>
-        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:16px">${socialRowHtml(b, typo)}</div>
-        <div style="font-family:${typo.display};font-size:22px;letter-spacing:.05em;color:${typo.gold};text-shadow:0 2px 10px rgba(0,0,0,.5)">${escapeHtml(b.credit)}</div>
+      `<div style="text-align:center;width:100%;padding:8px 10px 4px;box-sizing:border-box;background:linear-gradient(180deg,transparent,rgba(6,8,12,0.55) 28%,rgba(6,8,12,0.72));border-radius:0">
+        <div style="font-family:${typo.display};font-size:22px;line-height:1.3;margin-bottom:10px;color:${typo.cream};font-weight:600;text-shadow:0 2px 10px rgba(0,0,0,.55)">${escapeHtml(b.followLine)}</div>
+        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px">${socialRowHtml(b, typo)}</div>
+        <div style="font-family:${typo.display};font-size:18px;letter-spacing:.04em;color:${typo.gold};text-shadow:0 2px 8px rgba(0,0,0,.45)">${escapeHtml(b.credit)}</div>
       </div>`,
-      { height: 340 }
+      { height: 200 }
     );
   }
   return htmlShell(`<div style="color:#fff;font-size:36px;text-align:center">${escapeHtml(overlay.text || "")}</div>`);
 }
 
 function positionForRole(role) {
-  if (role === "brand") return { position: "top", offset: { x: 0, y: -0.035 } };
-  if (role === "speaker") return { position: "center", offset: { x: 0, y: -0.16 } };
-  if (role === "statement") return { position: "center", offset: { x: 0, y: 0.04 } };
-  if (role === "source") return { position: "center", offset: { x: 0, y: 0.22 } };
-  if (role === "cta") return { position: "center", offset: { x: 0, y: 0.1 } };
+  if (role === "brand") return { position: "top", offset: { x: 0, y: -0.02 } };
+  if (role === "speaker") return { position: "center", offset: { x: 0, y: -0.18 } };
+  if (role === "statement") return { position: "center", offset: { x: 0, y: -0.02 } };
+  if (role === "source") return { position: "center", offset: { x: 0, y: 0.18 } };
+  if (role === "cta") return { position: "bottom", offset: { x: 0, y: 0.02 } };
   return { position: "center", offset: { x: 0, y: 0 } };
 }
 
-function minLengthForRole(role, length) {
+function clipLengthForRole(role, length, totalDuration) {
   const n = Number(length || 0);
-  if (role === "brand") return Math.max(1.2, Math.min(1.5, n || 1.5));
+  if (role === "brand" || role === "cta") {
+    return Math.max(totalDuration - 0.02, n || totalDuration);
+  }
   if (role === "source") return Math.max(2.0, n || 2.0);
-  if (role === "cta") return Math.max(2.2, n || 2.5);
   if (role === "speaker") return Math.max(1.8, n || 2.0);
   return Math.max(1.6, n || 3.0);
 }
@@ -228,30 +234,32 @@ export function buildShotstackTimeline({
       }
     : null;
 
-  const typo = DAR_VIDEO_PROFILE.typography;
-  const dimStart = Math.max(0, totalDuration - 2.8);
-  const dimClip = {
+  /* Leichte Lesbarkeitszone über die gesamte Dauer – keine Endkarte */
+  const readZone = {
     asset: {
       type: "html",
-      html: `<div style="width:1080px;height:1920px;background:${typo.dimOverlay}"></div>`,
+      html: `<div style="width:1080px;height:1920px;background:linear-gradient(180deg,rgba(0,0,0,0.22) 0%,rgba(0,0,0,0.08) 18%,rgba(0,0,0,0.10) 52%,rgba(0,0,0,0.34) 78%,rgba(0,0,0,0.52) 100%)"></div>`,
       width: 1080,
       height: 1920
     },
-    start: dimStart,
-    length: Number((totalDuration - dimStart).toFixed(2)),
+    start: 0,
+    length: totalDuration,
     position: "center",
     opacity: 1
   };
 
-  const textClips = overlays.map((overlay) => {
+  const persistent = [];
+  const content = [];
+  for (const overlay of overlays) {
     const pos = positionForRole(overlay.role);
     const height =
-      overlay.role === "statement" ? 420 :
-      overlay.role === "cta" ? 340 :
-      overlay.role === "speaker" ? 220 :
-      overlay.role === "source" ? 200 :
-      overlay.role === "brand" ? 100 : 140;
-    return {
+      overlay.role === "statement" ? 360 :
+      overlay.role === "cta" ? 200 :
+      overlay.role === "speaker" ? 160 :
+      overlay.role === "source" ? 120 :
+      overlay.role === "brand" ? 88 : 140;
+    const isPersist = overlay.role === "brand" || overlay.role === "cta" || overlay.persistent;
+    const clip = {
       asset: {
         type: "html",
         html: overlayHtml(overlay),
@@ -259,23 +267,26 @@ export function buildShotstackTimeline({
         height
       },
       start: Math.max(0, Number(overlay.at || 0)),
-      length: minLengthForRole(overlay.role, overlay.length),
+      length: clipLengthForRole(overlay.role, overlay.length, totalDuration),
       position: pos.position,
       offset: pos.offset,
-      transition: { in: "fade", out: "fade" },
+      transition: isPersist ? { in: "fade" } : { in: "fade", out: "fade" },
       opacity: 1
     };
-  });
+    if (isPersist) persistent.push(clip);
+    else content.push(clip);
+  }
 
   const brand = DAR_VIDEO_PROFILE.branding;
   const markUrl = watermarkUrl || logoUrl;
+  const wmOpacity = Math.min(0.10, Math.max(0.08, Number(brand.watermarkOpacity) || 0.09));
   const watermarkClip = markUrl
     ? {
         asset: { type: "image", src: markUrl },
         start: 0,
         length: totalDuration,
         position: "center",
-        opacity: Number(brand.watermarkOpacity) || 0.09,
+        opacity: wmOpacity,
         scale: Number(brand.watermarkScale) || 0.44,
         offset: { x: 0, y: 0 }
       }
@@ -286,33 +297,42 @@ export function buildShotstackTimeline({
         {
           asset: { type: "audio", src: voiceUrl, volume: 1 },
           start: Math.max(0, voiceStart),
-          length: Math.max(4, totalDuration - voiceStart - 0.4)
+          length: Math.max(4, totalDuration - voiceStart - 0.35)
         }
       ]
     : [];
 
+  /* Ebenen: Branding/Text fest – Hintergrund separat (Ken Burns bewegt nur das Bild) */
   const tracks = [];
   if (watermarkClip) tracks.push({ clips: [watermarkClip] });
-  tracks.push({ clips: [dimClip, ...textClips] });
+  if (persistent.length) tracks.push({ clips: persistent });
+  if (content.length) tracks.push({ clips: content });
+  tracks.push({ clips: [readZone] });
   if (stillClip) tracks.push({ clips: [stillClip] });
   if (audioClips.length) tracks.push({ clips: audioClips });
 
+  const brandOverlay = overlays.find((o) => o.role === "brand");
+  const ctaOverlay = overlays.find((o) => o.role === "cta");
   const meta = {
     durationSec: totalDuration,
     mode: "speech-image",
+    layout: "full-brand-frame",
+    noEndCard: true,
     kenBurns: kenBurns || "zoomIn",
     sceneImageUrl: imageUrl || null,
     watermarkCount: watermarkClip ? 1 : 0,
     watermark: watermarkClip
       ? { position: watermarkClip.position, scale: watermarkClip.scale, opacity: watermarkClip.opacity }
       : null,
+    brandPersistent: Boolean(brandOverlay && Number(brandOverlay.length) >= totalDuration - 0.5),
+    ctaPersistent: Boolean(ctaOverlay && Number(ctaOverlay.length) >= totalDuration - 0.5),
     lastClipCoversEnd: Boolean(stillClip && stillClip.length >= totalDuration - 0.05),
     background: "#1a1814",
     previewFrames: [
-      Math.min(2, totalDuration - 0.5),
+      Math.min(1.2, totalDuration - 0.5),
       Math.min(Math.round(totalDuration * 0.35), totalDuration - 0.5),
       Math.min(Math.round(totalDuration * 0.7), totalDuration - 0.5),
-      Math.max(1, totalDuration - 1.2)
+      Math.max(1, totalDuration - 0.8)
     ].map((n) => Number(n.toFixed(1)))
   };
 

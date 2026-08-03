@@ -50,7 +50,18 @@ textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
 .btn.danger{border-color:rgba(255,154,144,.3);color:#ffd2cd;background:rgba(255,154,144,.06)}
 .grid2{display:grid;gap:10px}
 @media(min-width:768px){.grid2{grid-template-columns:1.1fr .9fr}.app{width:min(100%,1100px)}}
-.preview-wrap{border:1px solid var(--line2);border-radius:14px;background:#000;overflow:hidden;aspect-ratio:9/16;max-height:min(58vh,520px);margin:0 auto;width:min(100%,320px);display:grid;place-items:center}
+.preview-wrap{border:1px solid var(--line2);border-radius:14px;background:#000;overflow:hidden;aspect-ratio:9/16;max-height:min(58vh,520px);margin:0 auto;width:min(100%,320px);display:grid;place-items:center;position:relative}
+.comp-preview{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:7% 6% 6%;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06) 22%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.42))}
+.comp-preview .c-top{text-align:center;font-family:var(--serif);letter-spacing:.16em;font-size:10px;font-weight:900;color:var(--gold);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.comp-preview .c-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 4px}
+.comp-preview .c-wm{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:42%;opacity:.09;pointer-events:none}
+.comp-preview .c-wm img{width:100%;display:block}
+.comp-preview .c-speaker{font-family:var(--serif);font-size:11px;color:#fff8e8;line-height:1.35;text-shadow:0 1px 8px #000}
+.comp-preview .c-quote{font-family:var(--serif);font-size:12px;color:#fff8e8;line-height:1.35;max-width:92%;text-shadow:0 1px 8px #000}
+.comp-preview .c-source{font-family:var(--serif);font-size:9px;font-style:italic;color:#d2c9b7;margin-top:4px;text-shadow:0 1px 6px #000}
+.comp-preview .c-foot{text-align:center;font-size:8px;line-height:1.35;color:#e8dcc0;text-shadow:0 1px 8px #000}
+.comp-preview .c-foot b{display:block;color:#fff8e8;font-weight:800;margin-bottom:3px;font-size:8.5px}
+.comp-preview .c-foot .credit{color:var(--gold);margin-top:3px;letter-spacing:.03em}
 .preview-wrap img,.preview-wrap video{width:100%;height:100%;object-fit:contain;display:block}
 .frame-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
 .frame-strip button{border:1px solid var(--line2);border-radius:10px;background:rgba(0,0,0,.35);padding:0;overflow:hidden;min-height:72px;cursor:pointer}
@@ -158,7 +169,21 @@ details.box summary::-webkit-details-marker{display:none}
       <button class="btn primary" type="button" id="libraryBtn">Aus Bibliothek</button>
       <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" class="hidden">
     </div>
-    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Ausgangsbild" class="hidden"></div>
+    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Ausgangsbild" class="hidden"><div class="comp-preview hidden" id="compPreview" aria-hidden="true">
+      <div class="c-top">DAR AL TAWḤĪD</div>
+      <div class="c-wm"><img src="/watermark-my-logo-full.png" alt=""></div>
+      <div class="c-mid">
+        <div class="c-speaker" id="compSpeaker">Sprecher رحمه الله</div>
+        <div class="c-quote" id="compQuote">„Aussage erscheint hier im Lesebereich.“</div>
+        <div class="c-source" id="compSource">Quelle: …</div>
+      </div>
+      <div class="c-foot">
+        <b>Folgt für mehr Wissen aus Qurʾān &amp; Sunnah</b>
+        Telegram · Website · Instagram
+        <div class="credit">by Serhat Abu Malik</div>
+      </div>
+    </div></div>
+    <p class="meta" style="text-align:center;margin:6px 0 0">Kompositionsvorschau · Branding vom ersten bis letzten Frame</p>
     <div class="actions">
       <button class="btn primary" type="button" id="acceptImageBtn" disabled>Übernehmen</button>
       <button class="btn" type="button" id="replaceImageBtn" disabled>Ersetzen</button>
@@ -259,7 +284,7 @@ details.box summary::-webkit-details-marker{display:none}
   <details class="box hidden" id="helpBox">
     <summary><span>Kurzhilfe</span><span>▾</span></summary>
     <div class="box-body meta">
-      Text einfügen → Bild → Sprach-Bildbeitrag erstellen → Stimme+Gestaltung automatisch → Vorschau → Download/Teilen → optional Feed → optional Push. Keine KI-Videoclips, keine Musik, keine Fremdwasserzeichen.
+      Text einfügen → Bild → Sprach-Bildbeitrag erstellen. Branding (Titel, Logo, Social) vom ersten bis letzten Frame – keine Endkarte. Aussage synchron zur Stimme. Keine Musik, keine Fremdwasserzeichen.
     </div>
   </details>
 </main>
@@ -422,11 +447,28 @@ details.box summary::-webkit-details-marker{display:none}
     saveDraft();
     return data;
   }
+  function updateCompPreview(){
+    const stmt=currentStatement();
+    if(el("compSpeaker"))el("compSpeaker").textContent=stmt.speaker?(stmt.speaker.replace(/\s*sagte\s*:?\s*$/i,"")+" · Aussage"):"Sprecher";
+    if(el("compQuote")){
+      const q=String(stmt.de||"").trim();
+      el("compQuote").textContent=q?("„"+(q.length>110?q.slice(0,108)+"…":q)+"“"):"„Aussage erscheint hier im Lesebereich.“";
+    }
+    if(el("compSource"))el("compSource").textContent=stmt.source?("Quelle: "+stmt.source):"Quelle: …";
+  }
   function showScene(scene){
     state.scene=scene;
     const img=el("scenePreview");
-    if(scene?.url){img.src=scene.url;img.classList.remove("hidden");el("acceptImageBtn").disabled=false;el("replaceImageBtn").disabled=false;el("imageNotice").className="notice ok";el("imageNotice").textContent="Ausgangsbild bereit – Übernehmen tippen."}
-    else{img.classList.add("hidden");el("acceptImageBtn").disabled=true;el("replaceImageBtn").disabled=true}
+    const comp=el("compPreview");
+    if(scene?.url){
+      img.src=scene.url;img.classList.remove("hidden");
+      if(comp){comp.classList.remove("hidden");updateCompPreview();}
+      el("acceptImageBtn").disabled=false;el("replaceImageBtn").disabled=false;
+      el("imageNotice").className="notice ok";el("imageNotice").textContent="Ausgangsbild bereit – DAR-Komposition sichtbar.";
+    }else{
+      img.classList.add("hidden");if(comp)comp.classList.add("hidden");
+      el("acceptImageBtn").disabled=true;el("replaceImageBtn").disabled=true;
+    }
     saveDraft();
   }
   function libSave(scene){
@@ -507,7 +549,7 @@ details.box summary::-webkit-details-marker{display:none}
   el("acceptImageBtn").addEventListener("click",async()=>{
     if(!state.scene?.url){alert("Kein Bild");return}
     try{await parseText()}catch{}
-    showStep("voice");setStatus("bereit zur Produktion");
+    updateCompPreview();showStep("voice");setStatus("bereit zur Produktion");
   });
 
   async function createVideo(){

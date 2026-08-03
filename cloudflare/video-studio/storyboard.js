@@ -113,7 +113,8 @@ export function buildVoiceScript(statement, opts = {}) {
 }
 
 /**
- * Einblendungen folgen Stimmdauer: Einstieg → Aussage → Quelle → Social-Abschluss.
+ * Vollständiger DAR-Bildbeitrag: Branding + Social die gesamte Dauer.
+ * Nur Sprecher / Aussageblöcke / Quelle sind stimmbezogen getaktet – kein Outro.
  */
 export function buildCaptionPlan(statement, { totalSec, voiceDurationSec } = {}) {
   const brand = DAR_VIDEO_PROFILE.branding;
@@ -135,17 +136,32 @@ export function buildCaptionPlan(statement, { totalSec, voiceDurationSec } = {})
   const statementStart = slots.statement.at;
   const statementEnd = slots.statement.end;
   const statementWindow = Math.max(2.4, statementEnd - statementStart);
-  const gap = 0.22;
+  const gap = 0.28;
   const usable = statementWindow - gap * Math.max(0, blocks.length - 1);
   const totalChars = Math.max(1, blocks.reduce((n, b) => n + b.length, 0));
 
   const overlays = [
     {
       role: "brand",
-      at: slots.brand.at,
-      length: slots.brand.length,
+      at: 0,
+      length: slots.total,
       text: brand.title,
       topic: null,
+      persistent: true,
+      htmlEmphasis: false
+    },
+    {
+      role: "cta",
+      at: 0,
+      length: slots.total,
+      text: brand.followLine,
+      credit: brand.credit,
+      persistent: true,
+      social: {
+        telegram: brand.telegram,
+        website: brand.website,
+        instagram: brand.instagram
+      },
       htmlEmphasis: false
     },
     {
@@ -160,14 +176,16 @@ export function buildCaptionPlan(statement, { totalSec, voiceDurationSec } = {})
   let cursor = statementStart;
   blocks.forEach((block, index) => {
     const share = block.length / totalChars;
-    const length = Math.max(1.6, usable * share);
+    const length = Math.max(1.7, usable * share);
     const remainingBlocks = blocks.length - index - 1;
-    const maxLen = statementEnd - cursor - remainingBlocks * (1.6 + gap);
-    const len = Math.min(length, Math.max(1.6, maxLen));
+    const maxLen = statementEnd - cursor - remainingBlocks * (1.7 + gap);
+    const len = Math.min(length, Math.max(1.7, maxLen));
+    const isLast = index === blocks.length - 1;
+    const hold = isLast ? Number(slots.holdAfterSpeech || 1.8) : 0;
     overlays.push({
       role: "statement",
       at: Number(cursor.toFixed(2)),
-      length: Number(len.toFixed(2)),
+      length: Number((len + hold).toFixed(2)),
       text: block,
       htmlEmphasis: true,
       blockIndex: index
@@ -179,28 +197,17 @@ export function buildCaptionPlan(statement, { totalSec, voiceDurationSec } = {})
     role: "source",
     at: slots.source.at,
     length: slots.source.length,
-    text: source,
-    htmlEmphasis: false
-  });
-
-  overlays.push({
-    role: "cta",
-    at: slots.cta.at,
-    length: slots.cta.length,
-    text: brand.followLine,
-    credit: brand.credit,
-    social: {
-      telegram: brand.telegram,
-      website: brand.website,
-      instagram: brand.instagram
-    },
-    htmlEmphasis: false
+    text: source.startsWith("Quelle") ? source : `Quelle: ${source}`,
+    htmlEmphasis: false,
+    holdThroughEnd: true
   });
 
   return {
-    version: 6,
+    version: 7,
     templateId: DAR_VIDEO_PROFILE.id,
     mode: "speech-image",
+    layout: "full-brand-frame",
+    noEndCard: true,
     durationSec: slots.total,
     voiceDurationSec: voiceDur,
     voiceStart: slots.voiceStart,
@@ -211,7 +218,8 @@ export function buildCaptionPlan(statement, { totalSec, voiceDurationSec } = {})
       text: o.role === "cta"
         ? `${o.text} · ${brand.telegram} · ${brand.website} · ${brand.instagram} · ${brand.credit}`
         : o.text,
-      role: o.role
+      role: o.role,
+      persistent: Boolean(o.persistent)
     }))
   };
 }

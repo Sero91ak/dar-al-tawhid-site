@@ -24,7 +24,10 @@ const required = [
   "Im Feed veröffentlichen",
   "Besucher-Push senden",
   "Textaufteilung bearbeiten",
-  "Stimme &amp; Gestaltung"
+  "Stimme &amp; Gestaltung",
+  "Kompositionsvorschau",
+  "compPreview",
+  "by Serhat Abu Malik"
 ];
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);
@@ -33,5 +36,6 @@ assert.ok(!html.includes("KI-Video-Studio"), "old KI-Video-Studio title must be 
 assert.ok(!html.includes("Optional: KI-Szenenbild"), "optional KI scene gen must be gone");
 assert.ok(!html.includes("Video-Beitrag erstellen"), "old create button must be gone");
 assert.ok(!html.includes("Bewegungsclip"), "clip UI must be gone");
+assert.ok(html.includes("vom ersten bis letzten Frame") || html.includes("vom ersten bis zum letzten"), "full-frame branding copy missing");
 assert.ok(!/FAL_KEY|ELEVENLABS_API_KEY|SHOTSTACK_API_KEY|sk-[a-zA-Z0-9]{10,}/.test(html), "no provider secrets in HTML");
 console.log("video-studio responsive static checks ok");

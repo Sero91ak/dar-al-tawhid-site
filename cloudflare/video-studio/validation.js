@@ -129,11 +129,11 @@ export function runVideoValidation({
   );
   checks.noEmptyEndScreen = Boolean(
     roles.has("cta") &&
-      Number(cta?.length || 0) >= 2 &&
-      Number(cta?.at || 0) + Number(cta?.length || 0) >= duration - 0.6 &&
-      (timelineMeta?.lastClipCoversEnd === true || timelineMeta?.background !== "#070b14")
+      roles.has("brand") &&
+      Number(cta?.length || 0) >= Math.max(8, duration - 1) &&
+      (timelineMeta?.lastClipCoversEnd === true || timelineMeta?.noEndCard === true || timelineMeta?.background !== "#070b14")
   );
-  if (!checks.noEmptyEndScreen) errors.push("Leeres/schwarzes Schlussbild-Risiko");
+  if (!checks.noEmptyEndScreen) errors.push("Leeres/schwarzes Schlussbild-Risiko oder fehlendes Dauer-Branding");
 
   const topic = String(statement?.topic || storyboard?.theme || "").trim();
   const hay = `${statement?.de || ""} ${statement?.raw || ""} ${statement?.fazit || ""}`;
