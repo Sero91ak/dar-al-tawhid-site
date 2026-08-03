@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-03T20:50:24.784Z",
+  "generated": "2026-08-03T20:50:26.441Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -197,8 +197,32 @@
       "createdAt": "2026-08-03T20:50:24.574Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-03T20:50:24.574Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-03T20:50:24.784Z"
+      "lastError": "",
+      "updatedAt": "2026-08-03T20:50:26.441Z",
+      "lastCheckAt": "2026-08-03T20:50:26.266Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "die-eltern-im-alter-eine-geoeffnete-tuer-zum-paradies-456",
+        "indexGenerated": "2026-08-03T20:50:18.786Z",
+        "indexCount": 456,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=die-eltern-im-alter-eine-geoeffnete-tuer-zum-paradies-456&v=1785790225746#post/die-eltern-im-alter-eine-geoeffnete-tuer-zum-paradies-456"
+      },
+      "attempts": 1
     }
   }
 }
