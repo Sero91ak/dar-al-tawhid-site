@@ -12,6 +12,8 @@ UPDATES_PATH = "content/updates/current.json"
 SCHEDULE_PATH = "content/admin/planned-posts.json"
 PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json"
 DAILY_PUSH_STATUS_PATH = "content/admin/daily-push-status.json"
+SHOTSTACK_HOST = "https://api.shotstack.io/edit/stage"
+VIDEO_STUDIO_PUBLIC_BASE = "https://dar-admin-publisher.sero91ak.workers.dev"
 
 [[durable_objects.bindings]]
 name = "PRAYER_STATUS_STORE"
@@ -29,12 +31,10 @@ new_sqlite_classes = ["PrayerStatusStore"]
 tag = "v2_video_studio_store"
 new_sqlite_classes = ["VideoStudioStore"]
 
-# R2 bucket for video studio assets (einmalig anlegen, dann entkommentieren):
-#   npx wrangler r2 bucket create dar-video-studio
-# [[r2_buckets]]
-# binding = "VIDEO_STUDIO_R2"
-# bucket_name = "dar-video-studio"
-# preview_bucket_name = "dar-video-studio"
+[[r2_buckets]]
+binding = "VIDEO_STUDIO_R2"
+bucket_name = "dar-video-studio"
+preview_bucket_name = "dar-video-studio"
 
 [triggers]
 crons = ["*/5 * * * *"]
@@ -43,17 +43,9 @@ crons = ["*/5 * * * *"]
 #   wrangler secret put GITHUB_TOKEN
 #   wrangler secret put ADMIN_PUBLISH_SECRET
 #   wrangler secret put ONESIGNAL_API_KEY_NEW
-#   wrangler secret put ONESIGNAL_APP_ID   (optional, Standard ist gesetzt)
-#   wrangler secret put GOLDAPI_KEY        (optional Premium — sonst Auto LBMA+EUR)
-#   wrangler secret put METALS_API_KEY     (optional Alternative)
-#   wrangler secret put PEXELS_API_KEY     (Feed-Hintergrund Auto-Sync)
-#   wrangler secret put UNSPLASH_ACCESS_KEY
-#   wrangler secret put PIXABAY_API_KEY
-# Video-Studio (Admin – nie im Frontend speichern):
 #   wrangler secret put FAL_KEY
 #   wrangler secret put ELEVENLABS_API_KEY
 #   wrangler secret put ELEVENLABS_VOICE_ID
 #   wrangler secret put SHOTSTACK_API_KEY
 #   wrangler secret put VIDEO_STUDIO_SIGNING_SECRET
-#   wrangler secret put RUNWAY_API_KEY             (optional)
-#   wrangler secret put VIDEO_STUDIO_LOGO_URL      (optional)
+#   wrangler secret put VIDEO_STUDIO_TEST_TOKEN   (nur Staging-Autotest)
