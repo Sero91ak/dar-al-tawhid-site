@@ -8,10 +8,10 @@ import {
   saveJob
 } from "./job-store.js";
 import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop } from "./pipeline.js";
-import { providersStatus } from "./providers/index.js";
+import { providersStatus, probeFalAuth } from "./providers/index.js";
 import { getVideoAsset, verifySignedAssetRequest } from "./storage.js";
-import { isVoiceConfigured } from "./voice.js";
-import { isComposerConfigured, shotstackEnvironment } from "./compose.js";
+import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
+import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth } from "./compose.js";
 
 function json(data, cors, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -50,6 +50,11 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
   if (request.method === "GET" && rest === "/providers/status") {
     const spentEur = await readMonthSpend(env);
     const shotstack = shotstackEnvironment(env);
+    const [falProbe, voiceProbe, shotstackProbe] = await Promise.all([
+      probeFalAuth(env),
+      probeElevenAuth(env),
+      probeShotstackAuth(env)
+    ]);
     return json({
       ok: true,
       providers: providersStatus(env),
@@ -60,7 +65,12 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       r2Configured: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
       storeConfigured: Boolean(env.VIDEO_STUDIO_STORE),
       signingConfigured: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || env.ADMIN_PUBLISH_SECRET || "").trim()),
-      monthSpendEur: spentEur
+      monthSpendEur: spentEur,
+      probes: {
+        fal: falProbe,
+        elevenlabs: voiceProbe,
+        shotstack: shotstackProbe
+      }
     }, cors);
   }
 

@@ -29,7 +29,53 @@ export class BaseVideoProvider {
 }
 
 export function falKey(env) {
-  return String(env.FAL_KEY || env.FAL_API_KEY || "").trim();
+  let key = String(env.FAL_KEY || env.FAL_API_KEY || "").trim();
+  // Häufige Paste-Fehler: führendes "Key ", Anführungszeichen, Zeilenumbrüche
+  key = key.replace(/^Key\s+/i, "").replace(/^["']+|["']+$/g, "").replace(/\s+/g, "").trim();
+  return key;
+}
+
+/** Leichter Auth-Check ohne kostenpflichtigen Clip (ungültiger Body → 422 = Key ok). */
+export async function probeFalAuth(env) {
+  const key = falKey(env);
+  if (!key) return { ok: false, present: false, reason: "FAL_KEY fehlt" };
+  const fingerprint = {
+    present: true,
+    length: key.length,
+    hasColon: key.includes(":"),
+    prefix: key.slice(0, 4)
+  };
+  try {
+    const res = await fetch("https://queue.fal.run/fal-ai/fast-sdxl", {
+      method: "POST",
+      headers: {
+        Authorization: `Key ${key}`,
+        "Content-Type": "application/json"
+      },
+      body: "{}"
+    });
+    const text = await res.text().catch(() => "");
+    // 401/403 = Key ungültig; 422/400 = Key akzeptiert, Input fehlt
+    if (res.status === 401 || res.status === 403) {
+      return {
+        ok: false,
+        ...fingerprint,
+        httpStatus: res.status,
+        reason: "fal.ai lehnt den Key ab (invalid credentials) – bitte FAL_KEY neu setzen"
+      };
+    }
+    if (res.status === 422 || res.status === 400 || res.status === 200 || res.status === 201) {
+      return { ok: true, ...fingerprint, httpStatus: res.status };
+    }
+    return {
+      ok: res.ok,
+      ...fingerprint,
+      httpStatus: res.status,
+      reason: text.slice(0, 160) || `HTTP ${res.status}`
+    };
+  } catch (error) {
+    return { ok: false, ...fingerprint, reason: error.message || String(error) };
+  }
 }
 
 export async function falQueue(env, modelPath, input, { preferAsync = true } = {}) {

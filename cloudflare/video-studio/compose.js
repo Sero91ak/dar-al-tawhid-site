@@ -13,6 +13,24 @@ export function isComposerConfigured(env) {
   return Boolean(shotstackKey(env) || falKey(env));
 }
 
+export async function probeShotstackAuth(env) {
+  const key = shotstackKey(env);
+  const host = shotstackHost(env);
+  if (!key) return { ok: false, present: false, host, isStage: /stage/i.test(host), reason: "SHOTSTACK_API_KEY fehlt" };
+  try {
+    const res = await fetch(`${host}/templates`, {
+      headers: { "x-api-key": key, Accept: "application/json" }
+    });
+    // 200/404 ok genug als Auth; 401/403 = Key falsch
+    if (res.status === 401 || res.status === 403) {
+      return { ok: false, present: true, host, isStage: /stage/i.test(host), httpStatus: res.status, reason: "Shotstack Stage-Key ungültig" };
+    }
+    return { ok: true, present: true, host, isStage: /stage/i.test(host), httpStatus: res.status };
+  } catch (error) {
+    return { ok: false, present: true, host, isStage: /stage/i.test(host), reason: error.message || String(error) };
+  }
+}
+
 function buildShotstackTimeline({ clipUrls, voiceUrl, captionLines, logoUrl }) {
   const videoClips = clipUrls.map((src, index) => ({
     asset: { type: "video", src, volume: 0 },

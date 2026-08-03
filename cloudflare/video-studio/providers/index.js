@@ -1,4 +1,4 @@
-import { BaseVideoProvider, falKey, falQueue, falStatus, falResult, sceneToFalPrompt } from "./base.js";
+import { BaseVideoProvider, falKey, falQueue, falStatus, falResult, sceneToFalPrompt, probeFalAuth } from "./base.js";
 
 /**
  * Günstigster geeigneter Default über fal.ai:
@@ -250,3 +250,5 @@ export function providersStatus(env) {
     configured: p.isConfigured(env)
   }));
 }
+
+export { probeFalAuth };
