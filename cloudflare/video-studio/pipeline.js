@@ -257,11 +257,29 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
           sceneId: scene.id,
           providerJobId: created.providerJobId,
           modelPath: created.modelPath || provider.modelPath,
-          status: "running",
+          status: created.immediateUrl || String(created.status || "").toUpperCase() === "COMPLETED" ? "completed" : "running",
           estimatedCostEur: created.estimatedCostEur || 0,
-          durationSec: created.durationSec || scene.durationSec || 5
+          durationSec: created.durationSec || scene.durationSec || 5,
+          statusUrl: created.statusUrl || "",
+          responseUrl: created.responseUrl || "",
+          immediateUrl: created.immediateUrl || ""
         };
         clips = [...clips.filter((c) => c.sceneId !== scene.id), clip];
+        if (clip.status === "completed" && clip.immediateUrl) {
+          const downloaded = await provider.downloadResult(env, clip.providerJobId, clip.modelPath || provider.modelPath, clip);
+          const key = `jobs/${jobId}/clips/${scene.id}.mp4`;
+          await putVideoAsset(env, key, downloaded.bytes, downloaded.contentType || "video/mp4");
+          clip = { ...clip, url: downloaded.url, r2Key: key, bytes: downloaded.bytes.byteLength, status: "completed" };
+          clips = [...clips.filter((c) => c.sceneId !== scene.id), clip];
+          const clipCost = clips.reduce((n, c) => n + Number(c.estimatedCostEur || 0), 0);
+          job = await patchJob(env, jobId, {
+            stage: "clips",
+            artifacts: { ...(job.artifacts || {}), clips },
+            costEur: Number(clipCost.toFixed(4)),
+            message: `Clip ${i + 1}/${scenes.length} gespeichert`
+          });
+          return publicJob(job);
+        }
         job = await patchJob(env, jobId, {
           stage: "clips",
           artifacts: { ...(job.artifacts || {}), clips },
@@ -270,7 +288,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
         return publicJob(job);
       }
 
-      const st = await provider.getStatus(env, clip.providerJobId, clip.modelPath || provider.modelPath);
+      const st = await provider.getStatus(env, clip.providerJobId, clip.modelPath || provider.modelPath, clip);
       if (st.status === "running") {
         job = await patchJob(env, jobId, {
           stage: "clips",
@@ -281,7 +299,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       }
       if (st.status === "failed") throw httpError(st.reason || `Clip ${scene.id} fehlgeschlagen`, 502);
 
-      const downloaded = await provider.downloadResult(env, clip.providerJobId, clip.modelPath || provider.modelPath);
+      const downloaded = await provider.downloadResult(env, clip.providerJobId, clip.modelPath || provider.modelPath, clip);
       const key = `jobs/${jobId}/clips/${scene.id}.mp4`;
       await putVideoAsset(env, key, downloaded.bytes, downloaded.contentType || "video/mp4");
       clip = {
