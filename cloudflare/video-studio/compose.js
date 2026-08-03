@@ -13,6 +13,24 @@ export function isComposerConfigured(env) {
   return Boolean(shotstackKey(env) || falKey(env));
 }
 
+export async function probeShotstackAuth(env) {
+  const key = shotstackKey(env);
+  const host = shotstackHost(env);
+  if (!key) return { ok: false, present: false, host, isStage: /stage/i.test(host), reason: "SHOTSTACK_API_KEY fehlt" };
+  try {
+    const res = await fetch(`${host}/templates`, {
+      headers: { "x-api-key": key, Accept: "application/json" }
+    });
+    // 200/404 ok genug als Auth; 401/403 = Key falsch
+    if (res.status === 401 || res.status === 403) {
+      return { ok: false, present: true, host, isStage: /stage/i.test(host), httpStatus: res.status, reason: "Shotstack Stage-Key ungültig" };
+    }
+    return { ok: true, present: true, host, isStage: /stage/i.test(host), httpStatus: res.status };
+  } catch (error) {
+    return { ok: false, present: true, host, isStage: /stage/i.test(host), reason: error.message || String(error) };
+  }
+}
+
 function buildShotstackTimeline({ clipUrls, voiceUrl, captionLines, logoUrl }) {
   const videoClips = clipUrls.map((src, index) => ({
     asset: { type: "video", src, volume: 0 },
@@ -100,11 +118,12 @@ async function composeWithShotstack(env, { clipUrls, voiceUrl, captionLines, log
     ok: true,
     provider: "shotstack",
     renderId,
-    poll: async () => pollShotstack(env, renderId)
+    poll: async () => pollShotstackRender(env, renderId)
   };
 }
 
-async function pollShotstack(env, renderId) {
+/** Shotstack Stage/Sandbox status poll – exportiert für Pipeline-Ticks */
+export async function pollShotstackRender(env, renderId) {
   const res = await fetch(`${shotstackHost(env)}/render/${renderId}`, {
     headers: { "x-api-key": shotstackKey(env) }
   });
@@ -142,29 +161,42 @@ async function composeWithFalFfmpeg(env, { clipUrls, voiceUrl }) {
     provider: "fal-ffmpeg",
     renderId: requestId,
     voiceUrl,
-    poll: async () => {
-      const status = await falStatus(env, "fal-ai/ffmpeg-api/merge-videos", requestId);
-      const state = String(status.status || "").toUpperCase();
-      if (state === "COMPLETED" || state === "OK") {
-        const result = await falResult(env, "fal-ai/ffmpeg-api/merge-videos", requestId);
-        const url = result?.video?.url || result?.video_url || result?.output?.url || "";
-        const file = await fetch(url);
-        return {
-          ok: true,
-          status: "completed",
-          url,
-          bytes: await file.arrayBuffer(),
-          mime: "video/mp4",
-          width: 1080,
-          height: 1920,
-          fps: 30,
-          audioAttached: Boolean(voiceUrl),
-          hasMusic: false,
-          note: voiceUrl ? "Clips gemerged – Stimme/Untertitel ggf. in Nachbearbeitung ergänzen" : ""
-        };
-      }
-      if (state === "FAILED" || state === "ERROR") return { ok: false, status: "failed", reason: status.error || "fal merge failed" };
-      return { ok: true, status: "running" };
-    }
+    poll: async () => pollFalMerge(env, requestId, voiceUrl)
+  };
+}
+
+/** fal ffmpeg merge status poll – exportiert für Pipeline-Ticks */
+export async function pollFalMerge(env, requestId, voiceUrl = "") {
+  const status = await falStatus(env, "fal-ai/ffmpeg-api/merge-videos", requestId);
+  const state = String(status.status || "").toUpperCase();
+  if (state === "COMPLETED" || state === "OK") {
+    const result = await falResult(env, "fal-ai/ffmpeg-api/merge-videos", requestId);
+    const url = result?.video?.url || result?.video_url || result?.output?.url || "";
+    const file = await fetch(url);
+    return {
+      ok: true,
+      status: "completed",
+      url,
+      bytes: await file.arrayBuffer(),
+      mime: "video/mp4",
+      width: 1080,
+      height: 1920,
+      fps: 30,
+      audioAttached: Boolean(voiceUrl),
+      hasMusic: false,
+      note: voiceUrl ? "Clips gemerged – Stimme/Untertitel ggf. in Nachbearbeitung ergänzen" : ""
+    };
+  }
+  if (state === "FAILED" || state === "ERROR") {
+    return { ok: false, status: "failed", reason: status.error || "fal merge failed" };
+  }
+  return { ok: true, status: "running" };
+}
+
+export function shotstackEnvironment(env) {
+  const host = shotstackHost(env);
+  return {
+    host,
+    isStage: /\/stage\b|api\.shotstack\.io\/edit\/stage/i.test(host)
   };
 }

@@ -207,6 +207,7 @@ summary::-webkit-details-marker{display:none}
       <div class="summary-card"><b>Feste Regeln</b><strong>Gesichter vollständig verborgen</strong><small>Keine Darstellung des Propheten ﷺ, bestimmter Ṣaḥābah oder Salaf.</small></div>
       <div id="resultActions" class="actions hidden">
         <button class="btn primary-small" type="button" id="previewBtn">Vorschau</button>
+        <button class="btn primary-small" type="button" id="downloadBtn">MP4 laden</button>
         <button class="btn" type="button" id="approveBtn">Intern freigeben</button>
         <button class="btn" type="button" id="retryBtn">Neu erstellen</button>
         <button class="btn" type="button" id="cancelBtn">Abbrechen</button>
@@ -215,8 +216,15 @@ summary::-webkit-details-marker{display:none}
       <div id="previewBox" class="hidden" style="margin-top:10px">
         <video id="previewVideo" controls playsinline preload="metadata" style="width:100%;max-height:min(70vh,720px);border-radius:14px;background:#000;border:1px solid var(--line2)"></video>
         <p class="helper" id="previewMeta"></p>
+        <p class="helper" id="downloadHint" style="margin-top:6px"></p>
       </div>
       <div class="summary-card" style="margin-top:10px"><b>Anbieterstatus</b><strong id="providerStatus">Wird geladen…</strong><small id="providerStatusDetail">Serverseitig, keine Keys im Browser.</small></div>
+      <div class="summary-card" style="margin-top:10px">
+        <b>Aufträge auf dem Server</b>
+        <div id="jobList" style="margin-top:8px;display:grid;gap:8px"></div>
+        <button class="btn" type="button" id="reloadJobsBtn" style="margin-top:8px;min-height:44px">Liste aktualisieren</button>
+        <small>Fertige Videos hier öffnen · fehlgeschlagene Läufe (z. B. HTTP 405) erzeugen keine Datei.</small>
+      </div>
     </aside>
   </div>
 
@@ -328,12 +336,13 @@ summary::-webkit-details-marker{display:none}
   function saveJob(job){state.job=job;try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}renderJob(job)}
   function renderJob(job){
     renderTimeline(job);
-    el("jobId").textContent=job?.id?String(job.id).slice(0,18):"—";
+    el("jobId").textContent=job?.id?String(job.id).slice(0,22):"—";
     const status=job?.status||"ready";
     el("jobBadge").textContent={queued:"Warteschlange",running:"In Arbeit",completed:"Fertig",failed:"Fehler",cancelled:"Abgebrochen",setup_required:"Einrichtung nötig"}[status]||"Bereit";
     const showActions=["completed","failed","running","queued","cancelled","setup_required"].includes(status);
     el("resultActions").classList.toggle("hidden",!job||!showActions);
     el("previewBtn").disabled=!(job&&job.outputUrl);
+    el("downloadBtn").disabled=!(job&&job.outputUrl);
     el("approveBtn").disabled=!(job&&job.status==="completed");
     el("cancelBtn").disabled=!(job&&["queued","running"].includes(job.status));
     const preview=el("previewBox");
@@ -342,19 +351,77 @@ summary::-webkit-details-marker{display:none}
       preview.classList.remove("hidden");
       if(video.src!==job.outputUrl){video.src=job.outputUrl}
       el("previewMeta").textContent=`${job.provider||"Anbieter"} · ${Number(job.costEur||0).toFixed(2)} € · ${job.durationSeconds||"—"} s · manuelle Freigabe`;
+      el("downloadHint").innerHTML=`Download: <a href="${esc(job.outputUrl)}" target="_blank" rel="noopener">MP4 in neuem Tab öffnen</a>`;
     }else{
       preview.classList.add("hidden");
       video.removeAttribute("src");
       el("previewMeta").textContent="";
+      el("downloadHint").textContent=status==="failed"?"Dieser Auftrag hat keine Videodatei. Öffne unten einen fertigen Auftrag.":"";
     }
-    if(status==="completed")notice("Der Video-Beitrag ist fertig und wartet auf deine Prüfung. Kein Besucher-Push.","ok");
-    else if(status==="failed")notice(esc(job.message||"Die Produktion wurde abgebrochen."),"bad");
+    if(status==="completed")notice("Der Video-Beitrag ist fertig. Nutze Vorschau / MP4 laden. Kein Besucher-Push.","ok");
+    else if(status==="failed")notice(esc(job.message||"Die Produktion wurde abgebrochen.")+" — Fertige Videos stehen in der Auftragsliste unten.","bad");
     else if(status==="cancelled")notice("Auftrag abgebrochen.");
     else if(status==="setup_required")notice(`<b>Serverseitige Einrichtung nötig.</b><br>${esc(job.message||"Cloudflare Secrets und Bindings setzen – siehe docs/dar-ai-video-studio-secrets-and-costs.md")}`,"warn");
     else if(status==="running"||status==="queued")notice("Der Auftrag läuft serverseitig weiter, auch wenn du die App schließt.");
     if(job?.statement?.de){
       notice(`${status==="completed"?"Fertig":"Aussage"}: <b>${esc(job.statement.speaker||"")}</b> — ${esc(job.statement.de)}<br><small>${esc(job.statement.source||"")}</small>${job.message?`<br>${esc(job.message)}`:""}`,status==="failed"?"bad":status==="setup_required"?"warn":"ok");
     }
+  }
+  async function loadJobList(){
+    const box=el("jobList");
+    if(!box)return;
+    if(!workerSecret()){box.innerHTML="<small>Zuerst Worker-Secret speichern.</small>";return}
+    try{
+      const data=await api("/jobs?limit=12");
+      const jobs=data.jobs||[];
+      if(!jobs.length){box.innerHTML="<small>Noch keine Server-Aufträge.</small>";return}
+      box.innerHTML=jobs.map(j=>{
+        const label=j.status==="completed"?"Fertig":j.status==="failed"?"Fehler":j.status;
+        const title=esc((j.statement&&j.statement.speaker)||j.id||"—");
+        const sub=esc((j.statement&&j.statement.de)||j.message||"");
+        const cost=Number(j.costEur||0).toFixed(2);
+        return `<button type="button" class="btn" data-open-job="${esc(j.id)}" style="text-align:left;min-height:44px;white-space:normal;line-height:1.35"><b>${title}</b><br><small>${label} · ${cost} € · ${esc(String(j.id||"").slice(0,18))}</small><br><small>${sub.slice(0,110)}</small></button>`;
+      }).join("");
+      box.querySelectorAll("[data-open-job]").forEach(btn=>{
+        btn.addEventListener("click",()=>openJob(btn.getAttribute("data-open-job")));
+      });
+    }catch(error){
+      box.innerHTML=`<small>${esc(error.message||String(error))}</small>`;
+    }
+  }
+  async function openJob(id){
+    if(!id)return;
+    try{
+      let data=await api("/jobs/"+encodeURIComponent(id));
+      let job=data.job||data;
+      if(job.status==="completed"){
+        try{
+          const refreshed=await api("/jobs/"+encodeURIComponent(id)+"/refresh-urls",{method:"POST",body:"{}"});
+          job=refreshed.job||job;
+        }catch{}
+      }
+      saveJob(job);
+      if(["queued","running"].includes(job.status))startPolling();
+      notice(
+        job.status==="completed"
+          ? "Fertiger Auftrag geladen – Vorschau/Download bereit."
+          : esc(job.message||"Auftrag geladen."),
+        job.status==="failed"?"bad":"ok"
+      );
+    }catch(error){notice(esc(error.message),"bad")}
+  }
+  async function downloadJob(){
+    if(!state.job?.id)return;
+    try{
+      let job=state.job;
+      if(job.status==="completed"){
+        const refreshed=await api("/jobs/"+encodeURIComponent(job.id)+"/refresh-urls",{method:"POST",body:"{}"});
+        job=refreshed.job||job;
+        saveJob(job);
+      }
+      if(!job.outputUrl){notice("Keine MP4-URL für diesen Auftrag.","warn");return}
+      window.open(job.outputUrl,"_blank","noopener");
+    }catch(error){notice(esc(error.message),"bad")}
   }
   async function loadProviderStatus(){
     try{
@@ -376,6 +443,7 @@ summary::-webkit-details-marker{display:none}
       const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});
       saveJob(data.job||data);
       startPolling();
+      loadJobList();
     }catch(error){
       saveJob({id:"error-"+Date.now(),status:"failed",stage:"statement",completedStages:[],message:error.message});
     }finally{setBusy(false)}
@@ -384,30 +452,53 @@ summary::-webkit-details-marker{display:none}
     if(!state.job?.id||["completed","failed","setup_required","cancelled"].includes(state.job.status))return;
     if(String(state.job.id).startsWith("error-")||String(state.job.id).startsWith("setup-"))return;
     try{
-      const data=await api("/jobs/"+encodeURIComponent(state.job.id));
+      let data;
+      try{
+        data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/process",{method:"POST",body:"{}"});
+      }catch{
+        data=await api("/jobs/"+encodeURIComponent(state.job.id));
+      }
       saveJob(data.job||data);
       if(!["completed","failed","cancelled","setup_required"].includes(state.job.status))state.pollTimer=setTimeout(poll,4000);
     }catch{state.pollTimer=setTimeout(poll,9000)}
   }
   function startPolling(){clearTimeout(state.pollTimer);poll()}
-  function restore(){try{const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");if(job){saveJob(job);if(["queued","running"].includes(job.status))startPolling()}else renderTimeline(null)}catch{renderTimeline(null)}}
+  function restore(){
+    try{
+      const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");
+      if(job){
+        saveJob(job);
+        if(["queued","running"].includes(job.status))startPolling();
+      }else renderTimeline(null);
+    }catch{renderTimeline(null)}
+    loadJobList().then(async()=>{
+      // Wenn lokal nur ein Fehlerjob liegt: fertigen Server-Auftrag automatisch öffnen
+      if(state.job&&state.job.status==="failed"&&workerSecret()){
+        try{
+          const data=await api("/jobs?limit=12");
+          const completed=(data.jobs||[]).find(j=>j.status==="completed"&&j.outputUrl);
+          if(completed)await openJob(completed.id);
+        }catch{}
+      }
+    });
+  }
   async function cancelJob(){
     if(!state.job?.id)return;
-    try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});saveJob(data.job||data)}catch(error){notice(esc(error.message),"bad")}
+    try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});saveJob(data.job||data);loadJobList()}catch(error){notice(esc(error.message),"bad")}
   }
   async function approveJob(){
     if(!state.job?.id)return;
-    try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve",{method:"POST",body:"{}"});saveJob(data.job||data);notice("Intern freigegeben – noch keine Live-Veröffentlichung und kein Push.","ok")}catch(error){notice(esc(error.message),"bad")}
+    try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve",{method:"POST",body:"{}"});saveJob(data.job||data);notice("Intern freigegeben – noch keine Live-Veröffentlichung und kein Push.","ok");loadJobList()}catch(error){notice(esc(error.message),"bad")}
   }
   async function deleteRemoteJob(){
     if(!state.job?.id){localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Lokaler Auftrag entfernt.");return}
     try{
       if(!String(state.job.id).startsWith("error-"))await api("/jobs/"+encodeURIComponent(state.job.id),{method:"DELETE"});
     }catch{}
-    localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Auftrag gelöscht.");
+    localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Auftrag gelöscht.");loadJobList();
   }
   el("saveSettings").addEventListener("click",saveSettings);
-  el("saveWorker").addEventListener("click",saveWorker);
+  el("saveWorker").addEventListener("click",()=>{saveWorker();loadJobList()});
   el("provider").addEventListener("change",()=>{el("modeSummary").textContent=el("provider").value==="auto"?"Automatisch":el("provider").selectedOptions[0].textContent});
   el("createBtn").addEventListener("click",startJob);
   el("retryBtn").addEventListener("click",startJob);
@@ -415,6 +506,8 @@ summary::-webkit-details-marker{display:none}
   el("approveBtn").addEventListener("click",approveJob);
   el("deleteBtn").addEventListener("click",deleteRemoteJob);
   el("previewBtn").addEventListener("click",()=>{const url=state.job?.outputUrl;if(!url){notice("Noch keine Videodatei.","warn");return}el("previewBox").classList.remove("hidden");el("previewVideo").src=url;el("previewVideo").play?.().catch(()=>{})});
+  el("downloadBtn").addEventListener("click",downloadJob);
+  el("reloadJobsBtn").addEventListener("click",loadJobList);
   let viewportTimer=0;
   function scheduleViewportUpdate(){clearTimeout(viewportTimer);viewportTimer=setTimeout(updateViewportProfile,80)}
   window.addEventListener("resize",scheduleViewportUpdate,{passive:true});
