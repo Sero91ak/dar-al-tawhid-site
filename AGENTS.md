@@ -17,6 +17,11 @@ Bei jeder Aufgabe:
 10. Live-Veröffentlichung auf `main` oder in die Besucher-App nur nach ausdrücklicher Freigabe des Nutzers, z. B. „push live“, „live veröffentlichen“ oder „freigeben“.
 11. Push-Benachrichtigungen aus Test/Staging dürfen niemals an alle Besucher gehen; dort nur Admin-/Test-Pushs nutzen.
 
+## Admin-App (Sonderregel – immer aktuell halten)
+
+15. **Änderungen an der privaten Admin-App** (`admin/**`, inkl. KI-Video-Studio) werden **direkt gepusht und live für die Admin-App ausgerollt**, sobald sie fertig sind: Commit → Push auf `main` (bzw. Deploy-Workflow `deploy-live-admin-app`) → Admin-UI ist aktuell. Kein separates „push live“ abwarten.
+16. Das betrifft **nicht** die Besucher-App und **nicht** automatische Besucher-Pushs. Feed-/Push-Aktionen aus dem Video-Studio bleiben manuell.
+
 ## Quiz-Fragen (Sonderregel – immer live)
 
 12. **Neue geprüfte Quiz-Fragen** werden **ohne Rückfrage direkt live** in die Besucher-App übernommen: Batch erzeugen, in `data/quiz-questions.json` und `data/quiz-questions-test.json` einpflegen, auf `main` mergen und deployen. Keine Freigabe mit „push live“ abwarten.
