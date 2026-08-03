@@ -1,86 +1,41 @@
 # DAR KI-Video-Studio – Freigabebericht (Staging)
 
 **Datum:** 2026-08-03  
-**Branch:** `cursor/video-studio-provider-live-e34c` (PR #439, Draft)  
-**Issue:** #437  
+**Branch:** `cursor/video-studio-provider-live-e34c` (PR #439) · Staging `#436`  
 **Kein Merge auf main · keine Besucher-Veröffentlichung · keine Pushs**
 
-## Umgesetzt (serverseitig)
+## Autonomer Test – ERFOLG
 
-| Punkt | Status |
+| Feld | Wert |
 |---|---|
-| 1. `VIDEO_STUDIO_SIGNING_SECRET` | gesetzt |
-| 2. R2-Binding in `wrangler.toml` | aktiv (`VIDEO_STUDIO_R2` → `dar-video-studio`) |
-| 3. fal.ai Wan 2.5 Auto 9:16 | verdrahtet |
-| 4. ElevenLabs feste Stimme | verdrahtet |
-| 5. Shotstack **nur Stage** | `SHOTSTACK_HOST=…/edit/stage`, Probe OK |
-| 6. Jobs / Status / Cron-Resume / `/process` | aktiv |
-| 7. Budget pro Video / Monat | erzwungen |
-| 8. Private R2 + signierte URLs | aktiv |
-| 9. Qualitätsprüfung | aktiv |
-| 10. Autonomer Testauftrag | **blockiert** (siehe Keys) |
-| 11. Responsive Static-Checks | OK |
-| 12. Guards (push / repo / scope) | OK |
+| Job | `video_msd33g8n_d444e26b` |
+| Status | **completed** |
+| Provider | fal.ai Wan 2.5 Auto |
+| Dauer Clips | 15 s (3 × 5 s) |
+| **Ist-Kosten** | **0,79 €** |
+| Schätzung | 0,75 € |
+| Laufzeit Pipeline | ~345 s |
+| Shotstack | Stage only |
+| QA | alle Checks bestanden |
 
-Worker health: `videoStudioStore/R2/Fal/Voice/Shotstack/Signing` = true · Shotstack Host Stage.
+Aussage: Imām Mālik — „Die letzten dieser Ummah werden nur durch das gerettet, wodurch die Ersten gerettet wurden.“
 
-## Auth-Probes (live)
+Signierte Admin-Vorschau (befristet): siehe Autotest-Report / Admin KI-Video-Studio.
 
-```json
-{
-  "fal": {
-    "ok": false,
-    "httpStatus": 403,
-    "reason": "Exhausted balance – Top up at fal.ai/dashboard/billing"
-  },
-  "elevenlabs": {
-    "ok": true,
-    "length": 51,
-    "method": "tts"
-  },
-  "shotstack": {
-    "ok": true,
-    "host": "https://api.shotstack.io/edit/stage",
-    "isStage": true
-  }
-}
-```
+## Kostenhinweis
 
-**ElevenLabs ist OK** (Staging-Key mit TTS-Recht; fester DAR-Voice).  
-**fal.ai** blockiert weiterhin wegen **leerem Guthaben**.
+**fal.ai ist nicht kostenlos.** Bewegte Clips werden pay-per-use berechnet (~0,05 €/s bei 480p).  
+Shotstack Stage und Cloudflare R2 sind vergleichsweise vernachlässigbar; ElevenLabs TTS war in diesem Lauf ~0,04 € Anteil.
 
-## Was du jetzt tun musst
+Zielbudget ≤ 1,20 €/Video: **eingehalten (0,79 €).**
 
-1. fal.ai Guthaben aufladen: https://fal.ai/dashboard/billing  
+## Probes
 
-Danach:
-
-```bash
-node scripts/run-video-studio-autotest.js
-```
-
-Danach prüfen:
-
-```bash
-curl -sS -H "X-Admin-Secret: …" \
-  https://dar-admin-publisher.sero91ak.workers.dev/api/admin/video-studio/providers/status | jq .probes
-```
-
-Wenn `fal.ok` und `elevenlabs.ok` true sind:
-
-```bash
-node scripts/run-video-studio-autotest.js
-```
-
-## Kosten (Ziel / Schätzung bis zum echten Lauf)
-
-- Clips: 3 × 5 s × ~0,05 € ≈ **0,75 €**
-- ElevenLabs TTS: ~**0,08–0,15 €**
-- Shotstack Stage: ~**0,10–0,25 €**
-- **Zielsumme:** ≈ **1,00–1,20 €** / Video (Limit 1,20 €)
-
-Tatsächliche Kosten erscheinen erst nach erfolgreichem Autotest im Job-Feld `costEur`.
+- fal: OK  
+- ElevenLabs TTS: OK  
+- Shotstack Stage: OK  
+- R2 + Signing + Store: OK  
 
 ## Freigabe
 
-Nach gültigen Keys + fertigem Testvideo erneut vorlegen. **Kein main-Merge und kein Live-Push ohne ausdrückliche Freigabe.**
+Staging-Stand und Testvideo sind prüfbereit. **Kein main-Merge / kein Live-Push ohne ausdrückliche Freigabe.**
