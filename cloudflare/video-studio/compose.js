@@ -242,20 +242,31 @@ export async function composeFinalVideo(env, payload = {}) {
   if (shotstackKey(env)) {
     const shot = await composeWithShotstack(env, payload, { final });
     if (shot.ok) return shot;
-    // Production oft 403 (nur Stage-Plan) – kein Stage-Wasserzeichen als Endfassung.
-    // Stattdessen fal-ffmpeg-Merge ohne Fremdwasserzeichen (Download/Admin; Branding-Freigabe gesperrt).
     const code = Number(shot.httpStatus || 0);
     const authFail = code === 401 || code === 403 || /HTTP 401|HTTP 403/i.test(String(shot.reason || ""));
-    if (final && authFail && falKey(env)) {
-      const fal = await composeWithFalFfmpeg(env, payload);
-      if (fal.ok) {
+    // Production gesperrt → Stage-Vorschau MIT Stimme + DAR-Texten (Fremdwasserzeichen, keine Freigabe)
+    if (final && authFail) {
+      const stage = await composeWithShotstack(env, payload, { final: false });
+      if (stage.ok) {
         return {
-          ...fal,
-          composeFallback: "fal-ffmpeg",
+          ...stage,
+          composeFallback: "shotstack-stage",
           shotstackBlocked: shot.reason || `Shotstack HTTP ${code || "?"} (v1)`,
-          note: "Shotstack Production gesperrt – fal-ffmpeg-Merge ohne Fremdwasserzeichen"
+          note: "Shotstack Production gesperrt – Stage-Vorschau mit Stimme/Texten (Fremdwasserzeichen, nicht freigabefähig)"
         };
       }
+      if (falKey(env)) {
+        const fal = await composeWithFalFfmpeg(env, payload);
+        if (fal.ok) {
+          return {
+            ...fal,
+            composeFallback: "fal-ffmpeg",
+            shotstackBlocked: shot.reason || `Shotstack HTTP ${code || "?"} (v1)`,
+            note: "Shotstack Production/Stage nicht nutzbar – fal-Merge; Stimme wird gemuxt, DAR-Texte fehlen"
+          };
+        }
+      }
+      return stage.ok === false ? stage : shot;
     }
     return shot;
   }
@@ -358,20 +369,54 @@ async function composeWithFalFfmpeg(env, { clipUrls, voiceUrl }) {
     renderId: requestId,
     statusUrl,
     responseUrl,
+    falPhase: "merge-videos",
+    voiceUrl: voiceUrl || "",
     shotstackEnv: null,
     foreignWatermarkRisk: false,
     brandingApplied: false,
-    voiceUrl,
-    poll: async () => pollFalMerge(env, requestId, voiceUrl, { statusUrl, responseUrl })
+    poll: async () => pollFalMerge(env, requestId, voiceUrl, { statusUrl, responseUrl, phase: "merge-videos" })
   };
 }
 
-export async function pollFalMerge(env, requestId, voiceUrl = "", { statusUrl = "", responseUrl = "" } = {}) {
-  const status = await falStatus(env, "fal-ai/ffmpeg-api/merge-videos", requestId, { statusUrl });
+export async function pollFalMerge(
+  env,
+  requestId,
+  voiceUrl = "",
+  { statusUrl = "", responseUrl = "", phase = "merge-videos", mergedVideoUrl = "" } = {}
+) {
+  const model =
+    phase === "merge-audio" ? "fal-ai/ffmpeg-api/merge-audio-video" : "fal-ai/ffmpeg-api/merge-videos";
+  const status = await falStatus(env, model, requestId, { statusUrl });
   const state = String(status.status || "").toUpperCase();
   if (state === "COMPLETED" || state === "OK") {
-    const result = await falResult(env, "fal-ai/ffmpeg-api/merge-videos", requestId, { responseUrl });
+    const result = await falResult(env, model, requestId, { responseUrl });
     const url = result?.video?.url || result?.video_url || result?.output?.url || "";
+    if (!url) return { ok: false, status: "failed", reason: "fal Merge ohne Video-URL" };
+
+    // Phase 1 fertig → Stimme muxen
+    if (phase !== "merge-audio" && voiceUrl) {
+      const audioJob = await falQueue(
+        env,
+        "fal-ai/ffmpeg-api/merge-audio-video",
+        { video_url: url, audio_url: voiceUrl, start_offset: 0 },
+        { preferAsync: true }
+      );
+      const audioId = audioJob.request_id || audioJob.requestId;
+      return {
+        ok: true,
+        status: "running",
+        provider: "fal-ffmpeg",
+        falPhase: "merge-audio",
+        renderId: audioId,
+        statusUrl: String(audioJob.status_url || audioJob.statusUrl || "").trim(),
+        responseUrl: String(audioJob.response_url || audioJob.responseUrl || "").trim(),
+        voiceUrl,
+        mergedVideoUrl: url,
+        brandingApplied: false,
+        audioAttached: false
+      };
+    }
+
     const file = await fetch(url);
     return {
       ok: true,
@@ -382,14 +427,26 @@ export async function pollFalMerge(env, requestId, voiceUrl = "", { statusUrl = 
       width: 1080,
       height: 1920,
       fps: 30,
-      audioAttached: Boolean(voiceUrl),
+      audioAttached: Boolean(voiceUrl) || phase === "merge-audio",
+      audioMuxed: phase === "merge-audio" || !voiceUrl,
       hasMusic: false,
       brandingApplied: false,
-      note: "fal-ffmpeg Merge ohne DAR-Texthierarchie – Shotstack Production für Endfassung verwenden"
+      note: voiceUrl
+        ? "fal-ffmpeg mit Stimme – DAR-Texte/Wasserzeichen fehlen (Shotstack Production nötig)"
+        : "fal-ffmpeg ohne Stimme/DAR-Texte – Shotstack Production nötig"
     };
   }
   if (state === "FAILED" || state === "ERROR") {
     return { ok: false, status: "failed", reason: status.error || "fal merge failed" };
   }
-  return { ok: true, status: "running" };
+  return {
+    ok: true,
+    status: "running",
+    falPhase: phase,
+    renderId: requestId,
+    statusUrl,
+    responseUrl,
+    voiceUrl,
+    mergedVideoUrl
+  };
 }

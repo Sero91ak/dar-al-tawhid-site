@@ -563,9 +563,19 @@ details.box summary::-webkit-details-marker{display:none}
     el("resultMeta").innerHTML=`<div><span>Titel</span> · ${esc(j.statement?.speaker||"DAR Video")}</div>
       <div><span>Dauer</span> · ${esc(j.durationSeconds||15)} s · 1080×1920</div>
       <div><span>Kosten</span> · ${Number(j.costEur||0).toFixed(2)} € (Schätzung ${Number(j.estimateEur||0).toFixed(2)} €)</div>
-      <div><span>QA</span> · ${j.qualityChecks&&Object.values(j.qualityChecks).every(Boolean)?"bestanden":"siehe Details"}</div>`;
+      <div><span>QA</span> · ${qaLabel(j)}</div>`;
+    el("resultNotice").className=j.qualityIncomplete|| (j.renderMeta&& (j.renderMeta.isPreview||!j.renderMeta.brandingApplied)) ?"notice warn":"notice";
+    el("resultNotice").textContent=j.message||"Feed und Push nur manuell – nie automatisch.";
     const approved=Boolean(j.approval?.approved);
-    el("approveBtn").disabled=approved;el("feedBtn").disabled=!approved;el("pushBtn").disabled=!approved;
+    const canApprove=!(j.qualityIncomplete||j.renderMeta?.isPreview||(j.renderMeta&&j.renderMeta.brandingApplied===false));
+    el("approveBtn").disabled=approved||!canApprove;el("feedBtn").disabled=!approved;el("pushBtn").disabled=!approved;
+  }
+  function qaLabel(j){
+    if(j.qualityIncomplete)return "unvollständig (Vorschau)";
+    if(j.renderMeta?.isPreview)return "Vorschau – nicht freigeben";
+    if(j.renderMeta&&j.renderMeta.brandingApplied===false)return "ohne DAR-Texte";
+    if(j.qualityChecks&&Object.values(j.qualityChecks).every(Boolean))return "bestanden";
+    return "siehe Details";
   }
   el("createVideoBtn").addEventListener("click",createVideo);
   el("cancelJobBtn").addEventListener("click",async()=>{

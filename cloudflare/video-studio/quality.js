@@ -45,29 +45,39 @@ export function runQualityChecks({
   checks.noMusic = DAR_VIDEO_PROFILE.safety.noMusic === true && !Boolean(render?.hasMusic);
   if (!checks.noMusic) reasons.push("Musikspur erkannt oder erlaubt");
 
-  checks.audioValid = Boolean(voice?.ok && voice?.bytes > 1000) || Boolean(render?.audioAttached);
+  checks.audioValid =
+    Boolean(voice?.ok && voice?.bytes > 1000 && render?.audioAttached && render?.audioMuxed !== false) ||
+    Boolean(render?.audioAttached && render?.audioMuxed === true) ||
+    Boolean(render?.provider === "shotstack" && render?.audioAttached);
   if (!checks.audioValid) reasons.push("Stimme/Audio fehlt oder ist ungültig");
 
   const overlays = captionPlan?.overlays || storyboard?.captionPlan?.overlays || [];
   const roles = new Set(overlays.map((o) => o.role));
+  const burnedIn = Boolean(render?.brandingApplied) && render?.provider === "shotstack";
   checks.captionsSafe =
-    overlays.length >= 4 && roles.has("speaker") && roles.has("statement") && roles.has("source") && roles.has("cta");
-  if (!checks.captionsSafe) reasons.push("Texthierarchie/Einblendungen unvollständig");
+    burnedIn &&
+    overlays.length >= 4 &&
+    roles.has("speaker") &&
+    roles.has("statement") &&
+    roles.has("source") &&
+    roles.has("cta");
+  if (!checks.captionsSafe) reasons.push("Texthierarchie/Einblendungen fehlen im fertigen Video");
 
-  checks.textHierarchyOk = roles.has("speaker") && roles.has("statement") && roles.has("cta");
-  if (!checks.textHierarchyOk) reasons.push("Sprecher-/Aussage-/CTA-Hierarchie fehlt");
+  checks.textHierarchyOk = burnedIn && roles.has("speaker") && roles.has("statement") && roles.has("cta");
+  if (!checks.textHierarchyOk) reasons.push("Sprecher-/Aussage-/CTA-Hierarchie fehlt im fertigen Video");
 
   checks.brandingComplete = Boolean(
-    (render?.brandingApplied ||
-      overlays.some((o) => o.role === "brand" || o.role === "cta") ||
-      storyboard?.captionLines?.some((l) => /dar_al_tauhid|dar-al-tauhid|Serhat|DAR AL/i.test(l.text || ""))) &&
-      overlays.some((o) => o.role === "cta" && /Serhat|dar_al_tauhid|dar-al-tauhid/i.test(JSON.stringify(o)))
+    burnedIn &&
+      roles.has("brand") &&
+      roles.has("cta") &&
+      (overlays.some((o) => o.role === "cta" && /Serhat|dar_al_tauhid|dar-al-tauhid|Telegram|Instagram|Folgt/i.test(JSON.stringify(o))) ||
+        storyboard?.captionLines?.some((l) => /dar_al_tauhid|dar-al-tauhid|Serhat|DAR AL/i.test(l.text || "")))
   );
-  if (!checks.brandingComplete) reasons.push("DAR-Branding fehlt (Logo/CTA/Social/Credit)");
+  if (!checks.brandingComplete) reasons.push("DAR-Branding fehlt im fertigen Video (Logo/CTA/Social/Credit)");
 
   const stageRisk = Boolean(render?.foreignWatermarkRisk) || String(render?.shotstackEnv || "") === "stage";
   checks.noForeignWatermark = Boolean(render?.ok) && !stageRisk && String(render?.shotstackEnv || "") !== "stage";
-  if (render?.provider === "fal-ffmpeg" && !render?.brandingApplied) {
+  if (render?.provider === "fal-ffmpeg" && Boolean(render?.ok) && !stageRisk) {
     checks.noForeignWatermark = true;
   }
   if (!checks.noForeignWatermark) {
@@ -125,19 +135,17 @@ export function runQualityChecks({
     "historicallyPlausible",
     "motionSecondsOk"
   ];
-  // fal-ffmpeg-Fallback: Admin-Download ohne Fremdwasserzeichen erlauben.
-  // Freigabe/Feed bleibt gesperrt, solange brandingApplied fehlt (siehe approve).
+  const ok = required.every((key) => checks[key] === true) && !providerMeta?.simulated;
   const falFallback = render?.provider === "fal-ffmpeg" && !render?.brandingApplied;
-  const requiredNow = falFallback
-    ? required.filter((key) => !["brandingComplete", "captionsSafe", "textHierarchyOk", "safeAreasOk"].includes(key))
-    : required;
-  const ok = requiredNow.every((key) => checks[key] === true) && !providerMeta?.simulated;
+  const stagePreview = stageRisk || render?.composeFallback === "shotstack-stage";
 
   return {
     ok,
     checks,
     reasons,
     reviewedAt: new Date().toISOString(),
-    falComposeFallback: falFallback
+    falComposeFallback: falFallback,
+    stagePreview,
+    incomplete: !ok
   };
 }

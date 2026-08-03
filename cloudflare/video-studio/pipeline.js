@@ -44,6 +44,7 @@ function publicJob(job) {
     costBreakdown: job.costBreakdown || null,
     costConfirmed: Boolean(job.costConfirmed),
     qualityChecks: job.qualityChecks || emptyQualityChecks(),
+    qualityIncomplete: Boolean(job.qualityIncomplete),
     approval: job.approval || { approved: false },
     statement: job.statement
       ? {
@@ -533,7 +534,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
           sceneDurationSec: 5,
           final: wantFinal
         });
-        if (!compose.ok) throw httpError(compose.reason || "Render fehlgeschlagen", compose.setupRequired ? 503 : 502);
+      if (!compose.ok) throw httpError(compose.reason || "Render fehlgeschlagen", compose.setupRequired ? 503 : 502);
         job = await patchJob(env, jobId, {
           artifacts: {
             ...(job.artifacts || {}),
@@ -543,23 +544,50 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
               status: "running",
               statusUrl: compose.statusUrl || null,
               responseUrl: compose.responseUrl || null,
+              falPhase: compose.falPhase || null,
+              voiceUrl: compose.voiceUrl || null,
               shotstackEnv: compose.shotstackEnv || null,
               foreignWatermarkRisk: Boolean(compose.foreignWatermarkRisk),
               brandingApplied: Boolean(compose.brandingApplied),
               composeFallback: compose.composeFallback || null,
-              shotstackBlocked: compose.shotstackBlocked || null
+              shotstackBlocked: compose.shotstackBlocked || null,
+              isPreview: Boolean(compose.isPreview || compose.shotstackEnv === "stage")
             }
           },
-          message: compose.composeFallback
-            ? "Render läuft (fal-ffmpeg – ohne Shotstack-Wasserzeichen; DAR-Texte später mit Production)"
-            : compose.foreignWatermarkRisk
-              ? "Render läuft (Stage – nur interne Vorschau)"
-              : "Render läuft (Production / DAR-Branding)"
+          message: compose.composeFallback === "shotstack-stage"
+            ? "Render läuft (Stage-Vorschau mit Stimme/Texten – Fremdwasserzeichen, nicht freigeben)"
+            : compose.composeFallback === "fal-ffmpeg"
+              ? "Render läuft (fal-Merge + Stimme – DAR-Texte fehlen ohne Shotstack Production)"
+              : compose.foreignWatermarkRisk
+                ? "Render läuft (Stage – nur interne Vorschau)"
+                : "Render läuft (Production / DAR-Branding)"
         });
         return publicJob(job);
       }
 
       const renderState = await pollCompose(env, job.artifacts.render);
+      // fal Phase-Wechsel merge-videos → merge-audio speichern
+      if (renderState.status === "running" && renderState.falPhase === "merge-audio" && renderState.renderId) {
+        job = await patchJob(env, jobId, {
+          stage: "render",
+          artifacts: {
+            ...(job.artifacts || {}),
+            render: {
+              ...(job.artifacts?.render || {}),
+              provider: "fal-ffmpeg",
+              renderId: renderState.renderId,
+              statusUrl: renderState.statusUrl || null,
+              responseUrl: renderState.responseUrl || null,
+              falPhase: "merge-audio",
+              voiceUrl: renderState.voiceUrl || job.artifacts?.render?.voiceUrl || null,
+              mergedVideoUrl: renderState.mergedVideoUrl || null,
+              status: "running"
+            }
+          },
+          message: "Stimme wird mit dem Video gemuxt"
+        });
+        return publicJob(job);
+      }
       if (renderState.status === "running") {
         job = await patchJob(env, jobId, {
           stage: "render",
@@ -619,20 +647,21 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
             brandingApplied: Boolean(
               renderState.brandingApplied ??
               prevRender.brandingApplied ??
-              (prevRender.provider === "shotstack" && shotstackEnv !== "stage")
+              (prevRender.provider === "shotstack" && shotstackEnv !== "stage" && prevRender.composeFallback !== "shotstack-stage")
             ),
-            isPreview: shotstackEnv === "stage",
-            composeFallback: prevRender.composeFallback || renderState.composeFallback || null
+            isPreview: shotstackEnv === "stage" || prevRender.composeFallback === "shotstack-stage",
+            composeFallback: prevRender.composeFallback || renderState.composeFallback || null,
+            audioMuxed: Boolean(renderState.audioMuxed)
           }
         },
         outputUrl: outputSigned.url || null,
         posterUrl: (job.artifacts?.clips || [])[0]?.url || null,
         durationSeconds: (job.storyboard.scenes || []).reduce((n, s) => n + Number(s.durationSec || 0), 0),
         completedStages: uniqueStages([...(job.completedStages || []), "render"]),
-        message: foreignWatermarkRisk
-          ? "MP4-Vorschau gespeichert (Stage – nur intern)"
-          : prevRender.composeFallback || renderState.provider === "fal-ffmpeg"
-            ? "MP4 gespeichert (fal-ffmpeg ohne Fremdwasserzeichen – DAR-Endfassung braucht Shotstack Production)"
+        message: foreignWatermarkRisk || prevRender.composeFallback === "shotstack-stage"
+          ? "MP4-Vorschau gespeichert (Stage: Stimme+Texte, Fremdwasserzeichen – nicht freigeben)"
+          : prevRender.composeFallback === "fal-ffmpeg" || renderState.provider === "fal-ffmpeg"
+            ? "MP4 gespeichert (fal: Clips+Stimme – DAR-Texte fehlen, Shotstack Production nötig)"
             : "MP4 gespeichert (Production / DAR-Standard)"
       });
       return publicJob(job);
@@ -659,7 +688,14 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
         shotstackEnv: fresh.artifacts?.render?.shotstackEnv || null
       }
     });
-    if (!quality.ok) {
+    const draftPreview =
+      Boolean(fresh.artifacts?.render?.r2Key) &&
+      (Boolean(fresh.artifacts?.render?.isPreview) ||
+        fresh.artifacts?.render?.composeFallback === "shotstack-stage" ||
+        fresh.artifacts?.render?.composeFallback === "fal-ffmpeg" ||
+        (fresh.artifacts?.render?.provider === "fal-ffmpeg" && !fresh.artifacts?.render?.brandingApplied));
+
+    if (!quality.ok && !draftPreview) {
       return publicJob(await patchJob(env, jobId, {
         status: "failed",
         stage: "review",
@@ -669,12 +705,18 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
     }
 
     await addMonthSpend(env, Number(fresh.costEur || fresh.estimateEur || 0));
+    const incompleteMsg = draftPreview
+      ? quality.reasons?.length
+        ? `Video als Admin-Vorschau fertig – DAR-Standard noch offen: ${quality.reasons.slice(0, 3).join(" · ")}. Keine Freigabe/Feed/Push.`
+        : "Video als Admin-Vorschau fertig – DAR-Endfassung (Shotstack Production) noch nötig. Keine Freigabe/Feed/Push."
+      : "Video fertig – Vorschau/Download/Teilen möglich. Feed und Push nur manuell, nie automatisch.";
     return publicJob(await patchJob(env, jobId, {
       status: "completed",
       stage: "review",
       completedStages: PIPELINE_STAGES.slice(),
       qualityChecks: quality.checks,
-      message: "Video fertig – Vorschau/Download/Teilen möglich. Feed und Push nur manuell, nie automatisch.",
+      qualityIncomplete: Boolean(draftPreview || !quality.ok),
+      message: incompleteMsg,
       costEur: Number(fresh.costEur || fresh.estimateEur || 0)
     }));
   } catch (error) {
@@ -702,9 +744,11 @@ async function pollCompose(env, renderMeta) {
     const final = String(renderMeta.shotstackEnv || "") !== "stage";
     return pollShotstackRender(env, renderMeta.renderId, { final });
   }
-  return pollFalMerge(env, renderMeta.renderId, "", {
+  return pollFalMerge(env, renderMeta.renderId, renderMeta.voiceUrl || "", {
     statusUrl: renderMeta.statusUrl || "",
-    responseUrl: renderMeta.responseUrl || ""
+    responseUrl: renderMeta.responseUrl || "",
+    phase: renderMeta.falPhase || "merge-videos",
+    mergedVideoUrl: renderMeta.mergedVideoUrl || ""
   });
 }
 
