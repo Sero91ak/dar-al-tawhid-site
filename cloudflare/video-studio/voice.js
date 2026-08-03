@@ -1,5 +1,7 @@
 export function elevenKey(env) {
-  return String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
+  let key = String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
+  key = key.replace(/^["']+|["']+$/g, "").trim();
+  return key;
 }
 
 export function darVoiceId(env) {
@@ -8,6 +10,35 @@ export function darVoiceId(env) {
 
 export function isVoiceConfigured(env) {
   return Boolean(elevenKey(env) && darVoiceId(env));
+}
+
+export async function probeElevenAuth(env) {
+  const key = elevenKey(env);
+  const voiceId = darVoiceId(env);
+  if (!key || !voiceId) {
+    return { ok: false, present: Boolean(key), voiceIdPresent: Boolean(voiceId), reason: "Key oder Voice-ID fehlt" };
+  }
+  try {
+    const res = await fetch("https://api.elevenlabs.io/v1/user", {
+      headers: { "xi-api-key": key }
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      return { ok: false, present: true, voiceIdPresent: true, httpStatus: res.status, reason: text.slice(0, 120) || `HTTP ${res.status}` };
+    }
+    const voiceRes = await fetch(`https://api.elevenlabs.io/v1/voices/${encodeURIComponent(voiceId)}`, {
+      headers: { "xi-api-key": key }
+    });
+    return {
+      ok: voiceRes.ok,
+      present: true,
+      voiceIdPresent: true,
+      httpStatus: voiceRes.status,
+      reason: voiceRes.ok ? "" : `Voice-ID nicht erreichbar (HTTP ${voiceRes.status})`
+    };
+  } catch (error) {
+    return { ok: false, present: true, voiceIdPresent: true, reason: error.message || String(error) };
+  }
 }
 
 export async function synthesizeDarVoice(env, text) {

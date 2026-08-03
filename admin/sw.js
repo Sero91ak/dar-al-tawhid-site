@@ -1,10 +1,10 @@
-const CACHE_VERSION = 'dar-admin-stats-v53-video-studio-api';
+const CACHE_VERSION = 'dar-admin-stats-v54-video-studio';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
   '/admin/admin-icon-512.png',
-  '/test/admin-video-studio.html',
   '/admin/video-studio.html',
+  '/test/admin-video-studio.html',
   '/favicon.ico'
 ];
 
@@ -41,20 +41,6 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/push/onesignal/')) return;
   if (url.origin !== self.location.origin) return;
   if (!url.pathname.startsWith('/admin')) return;
-
-  // Staging-only route: the video studio is delivered inside the Admin-PWA scope
-  // without changing the live Admin dashboard or its protected navigation.
-  if (request.mode === 'navigate' && url.pathname === '/admin/video-studio.html') {
-    event.respondWith(
-      fetch('/test/admin-video-studio.html', { cache: 'no-store' })
-        .then((response) => {
-          if (!response || !response.ok) throw new Error('Video-Studio nicht erreichbar');
-          return response;
-        })
-        .catch(() => caches.match('/test/admin-video-studio.html'))
-    );
-    return;
-  }
 
   // Safari/iOS: never serve navigation or admin HTML via SW (307 redirect on index.html).
   if (request.mode === 'navigate') return;

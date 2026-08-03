@@ -166,7 +166,7 @@ summary::-webkit-details-marker{display:none}
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark">DT</div>
-      <div><h1>DAR Admin</h1><p>Privates KI-Video-Studio · Staging</p></div>
+      <div><h1>DAR Admin</h1><p>Privates KI-Video-Studio</p></div>
     </div>
     <a class="back" href="/admin/">← Admin</a>
   </header>
@@ -384,7 +384,12 @@ summary::-webkit-details-marker{display:none}
     if(!state.job?.id||["completed","failed","setup_required","cancelled"].includes(state.job.status))return;
     if(String(state.job.id).startsWith("error-")||String(state.job.id).startsWith("setup-"))return;
     try{
-      const data=await api("/jobs/"+encodeURIComponent(state.job.id));
+      let data;
+      try{
+        data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/process",{method:"POST",body:"{}"});
+      }catch{
+        data=await api("/jobs/"+encodeURIComponent(state.job.id));
+      }
       saveJob(data.job||data);
       if(!["completed","failed","cancelled","setup_required"].includes(state.job.status))state.pollTimer=setTimeout(poll,4000);
     }catch{state.pollTimer=setTimeout(poll,9000)}

@@ -140,6 +140,8 @@ export default {
           prayerScheduler: "cloudflare-worker-cron-v3",
           prayerCron: "*/5 * * * *",
           prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),
+          libraryApi: "v3-split-push",
+          libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
@@ -148,11 +150,14 @@ export default {
           videoStudioR2: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
           videoStudioFal: Boolean(String(env.FAL_KEY || env.FAL_API_KEY || "").trim()),
           videoStudioVoice: Boolean(String(env.ELEVENLABS_API_KEY || "").trim() && String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "").trim()),
+          videoStudioShotstack: Boolean(String(env.SHOTSTACK_API_KEY || "").trim()),
+          videoStudioSigning: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || "").trim()),
+          videoStudioShotstackHost: String(env.SHOTSTACK_HOST || "https://api.shotstack.io/edit/stage"),
           scheduler: "ready"
         }, cors);
       }
 
-      // DAR KI-Video-Studio (Admin only, staging-first; no visitor push)
+      // DAR KI-Video-Studio (Admin only; approve = no visitor push)
       if (url.pathname.startsWith("/api/admin/video-studio")) {
         assertConfigured(env);
         const videoResponse = await handleVideoStudioRequest(request, env, ctx, {

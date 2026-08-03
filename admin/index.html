@@ -26,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v50-admin-live";
-  var MIG_KEY="darAdminSwFixV26";
+  var ADMIN_SW_CACHE="dar-admin-stats-v54-video-studio";
+  var MIG_KEY="darAdminSwFixV27";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -560,7 +560,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v50</p>
+        <p><span class="status-dot"></span>Command Center · Admin v54</p>
       </div>
     </div>
     <div class="toolbar">
@@ -611,6 +611,7 @@ const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
+  ["video-studio","KI-Video-Studio"],
   ["live-edit","Live-Bearbeitung"],
   ["quellen","Beiträge"],
   ["actions","Neuer Beitrag"],
@@ -808,6 +809,7 @@ function normalizeAdminTab(tab){
   if(id==="preview")return"actions";
   if(id==="stories")return"start";
   if(id==="live"||id==="live-bearbeitung"||id==="livebearbeitung")return"live-edit";
+  if(id==="ki-video"||id==="video"||id==="videostudio"||id==="ki-video-studio")return"video-studio";
   if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
   return id||"start";
 }
@@ -2343,6 +2345,10 @@ function tabButton(id,label){return `<button class="tab ${currentTab===id?"activ
 function quizStatsLoadedFlag(){return window.__darQuizStatsLoaded===true||Boolean(window.DARQuizStatsAdmin?.isQuizStatsInitialLoaded?.())}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   tab=normalizeAdminTab(tab);
+  if(tab==="video-studio"){
+    location.assign("/admin/video-studio.html");
+    return;
+  }
   if(tab==="actions-bulk"){tab="actions";scrollToBulk=true}
   if(!tab||tab===currentTab&&!scrollToBulk)return;
   if(!skipStack)adminNavStack.push(currentTab);
@@ -2393,6 +2399,7 @@ function renderStart(ctx){
       <div class="cover-actions">
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
+        <button class="btn" data-tab="video-studio" type="button">KI-Video-Studio</button>
         <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
               <button class="btn" data-tab="quiz-stats" type="button">Quiz-Statistik</button>
@@ -2400,12 +2407,13 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","Live-Bearbeitung","Besucheransicht mit kontextbezogenem Bearbeiten.","live-edit","Neu")}
-    ${folderCard("②","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
-    ${folderCard("③","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
-    ${folderCard("④","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
-    ${folderCard("⑤","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑥","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
+    ${folderCard("①","KI-Video-Studio","Autonomer Video-Beitrag · Aussage, Stimme, 9:16-Export.","video-studio","Öffnen")}
+    ${folderCard("②","Live-Bearbeitung","Besucheransicht mit kontextbezogenem Bearbeiten.","live-edit","Neu")}
+    ${folderCard("③","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
+    ${folderCard("④","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
+    ${folderCard("⑤","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
+    ${folderCard("⑥","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑦","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
     ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
   </section>
   <section class="command-grid">

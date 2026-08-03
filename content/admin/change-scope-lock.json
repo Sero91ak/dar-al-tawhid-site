@@ -1959,22 +1959,27 @@
       "expiresAt": "2026-07-30T23:59:00.000Z"
     },
     {
-      "id": "dar-ai-video-studio-staging-2026-08-02",
+      "id": "admin-video-studio-ship-2026-08-02",
       "approvedBy": "user-explicit-order",
-      "reason": "Issue #437 / PR #436: DAR KI-Video-Studio vollständig serverseitig in Staging anbinden (APIs, Provider, Stimme, Jobs, R2/DO, Budget, QA) – kein Live-Merge",
+      "reason": "Nutzer: Push KI-Video-Studio in die private Admin-App (Menü + APIs + Deploy)",
       "paths": [
         "content/admin/change-scope-lock.json",
-        "cloudflare/worker.js",
-        "cloudflare/wrangler.toml",
-        "cloudflare/video-studio/",
+        "admin/index.html",
         "admin/sw.js",
         "admin/video-studio.html",
         "test/admin-video-studio.html",
+        "cloudflare/worker.js",
+        "cloudflare/wrangler.toml",
+        "cloudflare/video-studio/",
         "content/admin/video-studio-statements.json",
         "docs/dar-ai-video-studio-release-brief.md",
         "docs/dar-ai-video-studio-secrets-and-costs.md",
         "scripts/test-video-studio-unit.js",
-        "scripts/test-video-studio-responsive-static.js"
+        "scripts/test-video-studio-responsive-static.js",
+        "scripts/run-video-studio-autotest.js",
+        ".gitignore",
+        ".github/workflows/deploy-live-admin-app.yml",
+        "docs/dar-ai-video-studio-freigabebericht.md"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
     }
