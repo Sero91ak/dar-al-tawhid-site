@@ -10,15 +10,25 @@ const required = [
   "safe-area-inset-bottom",
   "overflow-x:hidden",
   "min-height:44px",
-  "prefers-reduced-motion",
-  "@container video-studio",
-  "orientation:landscape",
-  "VIDEO-BEITRAG AUTONOM ERSTELLEN",
+  "object-fit:contain",
+  "KI-Video-Studio",
+  "Textbeitrag einfügen",
+  "Bild hochladen",
+  "Aus Bibliothek",
+  "Optional: KI-Szenenbild",
+  "Optional erzeugen",
+  "Video-Beitrag erstellen",
+  "Video-Bild erstellen",
+  "Server-Aufträge",
   "api/admin/video-studio",
-  "X-Admin-Secret"
+  "X-Admin-Secret",
+  "costConfirmed",
+  "Im Feed veröffentlichen",
+  "Besucher-Push senden"
 ];
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);
 }
+assert.ok(html.indexOf("Bild hochladen") < html.indexOf("Optional: KI-Szenenbild"), "Upload must appear before optional KI generation");
 assert.ok(!/FAL_KEY|ELEVENLABS_API_KEY|SHOTSTACK_API_KEY|sk-[a-zA-Z0-9]{10,}/.test(html), "no provider secrets in HTML");
 console.log("video-studio responsive static checks ok");

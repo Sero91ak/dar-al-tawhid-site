@@ -28,6 +28,7 @@ on:
       - cloudflare/zakat-admin.js
       - cloudflare/library-admin.js
       - cloudflare/library-push-admin.js
+      - cloudflare/video-studio/**
       - .github/workflows/deploy-admin-publisher.yml
       - .github/workflows/feed-bg-auto-sync.yml
 
