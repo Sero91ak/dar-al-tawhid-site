@@ -87,7 +87,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     return json(result, cors, result.job?.status === "setup_required" ? 200 : 200);
   }
 
-  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls))?$/);
+  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls|publish-feed|request-push))?$/);
   if (jobMatch) {
     const jobId = decodeURIComponent(jobMatch[1]);
     const action = jobMatch[2] || "";
@@ -143,6 +143,12 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       if (job.status !== "completed") {
         return json({ ok: false, error: "Nur fertige Aufträge können freigegeben werden" }, cors, 409);
       }
+      if (job.artifacts?.render?.foreignWatermarkRisk || job.artifacts?.render?.shotstackEnv === "stage") {
+        return json({
+          ok: false,
+          error: "Stage-/Vorschau-Render mit Fremdwasserzeichen-Risiko – bitte Production-Endfassung erzeugen"
+        }, cors, 409);
+      }
       const saved = await saveJob(env, {
         ...job,
         approval: {
@@ -154,6 +160,78 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         updatedAt: new Date().toISOString()
       });
       return json({ ok: true, job: publicJob(saved) }, cors);
+    }
+
+    if (request.method === "POST" && action === "publish-feed") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      if (!job.approval?.approved) {
+        return json({ ok: false, error: "Zuerst intern freigeben" }, cors, 409);
+      }
+      if (body.confirm !== true) {
+        return json({ ok: false, error: "Feed-Veröffentlichung erfordert confirm:true" }, cors, 400);
+      }
+      // Nie automatisch und nie still an Live-Besucher – nur manuelle Markierung / Staging-Vorbereitung
+      const saved = await saveJob(env, {
+        ...job,
+        publication: {
+          ...(job.publication || {}),
+          feed: {
+            requested: true,
+            requestedAt: new Date().toISOString(),
+            status: "manual_pending",
+            note: "Manuell vorgemerkt – kein automatischer Live-Feed. Live nur nach ausdrücklicher Freigabe."
+          }
+        },
+        message: "Feed manuell vorgemerkt – noch nicht live veröffentlicht",
+        updatedAt: new Date().toISOString()
+      });
+      return json({
+        ok: true,
+        job: publicJob(saved),
+        published: false,
+        message: "Feed nur vorgemerkt. Keine automatische Live-Veröffentlichung."
+      }, cors);
+    }
+
+    if (request.method === "POST" && action === "request-push") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      if (!job.approval?.approved) {
+        return json({ ok: false, error: "Zuerst intern freigeben" }, cors, 409);
+      }
+      if (body.confirm !== true) {
+        return json({ ok: false, error: "Push erfordert confirm:true" }, cors, 400);
+      }
+      // Staging: niemals an alle Besucher senden
+      const allowVisitor = String(env.VIDEO_STUDIO_ALLOW_VISITOR_PUSH || "").trim() === "true";
+      const saved = await saveJob(env, {
+        ...job,
+        publication: {
+          ...(job.publication || {}),
+          push: {
+            requested: true,
+            requestedAt: new Date().toISOString(),
+            status: allowVisitor ? "manual_pending_live" : "blocked_staging",
+            sent: false,
+            note: allowVisitor
+              ? "Manuell vorgemerkt – noch kein Versand ohne separates Live-OK."
+              : "Staging-Schutz: kein Besucher-Push. Nur Admin-/Test-Pushs erlaubt."
+          }
+        },
+        message: allowVisitor
+          ? "Push manuell vorgemerkt – noch nicht versendet"
+          : "Push blockiert (Staging) – kein Versand an Besucher",
+        updatedAt: new Date().toISOString()
+      });
+      return json({
+        ok: true,
+        job: publicJob(saved),
+        sent: false,
+        message: saved.message
+      }, cors);
     }
 
     if (request.method === "POST" && action === "refresh-urls") {

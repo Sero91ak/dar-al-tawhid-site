@@ -1,4 +1,5 @@
 import { DAR_VIDEO_PROFILE } from "./profile.js";
+import { resolveThemeAtmosphere } from "./theme-presets.js";
 
 const HIGHLIGHT_WORDS = new Set([
   "allah", "allāh", "iman", "īmān", "glauben", "sunnah", "sunna", "qur", "qurʾān", "quran",
@@ -33,7 +34,7 @@ export function emphasizeHtml(text) {
       const bare = token.replace(/[^\p{L}\p{N}ʾʿāīūĀĪŪ]/gu, "").toLowerCase();
       const important = bare.length >= 7 || HIGHLIGHT_WORDS.has(bare) || /allāh|allah|qur/i.test(bare);
       if (!important) return escapeHtml(token);
-      return `<span style="color:#efd78e;font-weight:700">${escapeHtml(token)}</span>`;
+      return `<span style="color:#efd78e;font-weight:700;font-style:italic;border-bottom:1px solid rgba(239,215,142,.55);padding-bottom:2px">${escapeHtml(token)}</span>`;
     })
     .join("");
 }
@@ -91,6 +92,7 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
       at: 0.25,
       length: 2.4,
       text: brand.title,
+      topic: String(statement?.topic || "").trim() || null,
       htmlEmphasis: false
     },
     {
@@ -131,6 +133,7 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
     at: Math.max(duration - 5.8, overlays[overlays.length - 1].at + 2.8),
     length: 5.4,
     text: brand.followLine,
+    credit: brand.credit,
     social: {
       telegram: brand.telegram,
       website: brand.website,
@@ -140,13 +143,14 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
   });
 
   return {
-    version: 2,
+    version: 3,
+    templateId: DAR_VIDEO_PROFILE.id,
     voiceScript: buildVoiceScript(statement),
     overlays,
     captionLines: overlays.map((o) => ({
       at: o.at,
       text: o.role === "cta"
-        ? `${o.text} · ${brand.telegram} · ${brand.website} · ${brand.instagram}`
+        ? `${o.text} · ${brand.telegram} · ${brand.website} · ${brand.instagram} · ${brand.credit}`
         : o.text,
       role: o.role
     }))
@@ -156,32 +160,33 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
 export function buildStoryboard(statement) {
   const theme = String(statement?.topic || "Wissen").trim();
   const de = String(statement?.de || "").trim();
+  const atmosphere = resolveThemeAtmosphere(theme, de);
   const scenes = [
     {
       id: "s1",
       role: "opening",
       durationSec: 5,
       camera: "slow push-in, natural handheld micro-motion",
-      setting: `quiet scholarly study room at soft dawn, theme ${theme}, warm wooden shelves, parchment, calm islamic atmosphere`,
-      action: "anonymous figure enters from behind, walks slowly toward window light, face never visible",
-      promptFocus: "premium cinematic opening, dust motes, noble calm mood"
+      setting: atmosphere.opening,
+      action: "anonymous figure enters from behind, walks slowly toward window light, face never visible, modest clothing",
+      promptFocus: "premium cinematic opening, dust motes, noble calm DAR image-post mood"
     },
     {
       id: "s2",
       role: "reflection",
       durationSec: 5,
       camera: "gentle orbit around seated silhouette",
-      setting: `bookshelf and reading niche related to ${theme}, warm lamp light`,
+      setting: atmosphere.reflection,
       action: "anonymous figure seated with back to camera, reading quietly, modest robe, face fully hidden",
-      promptFocus: "consistent clothing and room palette, contemplative"
+      promptFocus: "consistent clothing and room palette, contemplative, no cheap stock look"
     },
     {
       id: "s3",
       role: "emphasis",
       durationSec: 5,
       camera: "slow tilt from hands to environment, never revealing face",
-      setting: `symbolic detail connected to: ${de.slice(0, 90)}`,
-      action: "hands carefully turn pages or hold a book; fingers anatomically correct; modest sleeves",
+      setting: `${atmosphere.emphasis}; thematic cue: ${de.slice(0, 90)}`,
+      action: "hands carefully interact with books or quiet objects; fingers anatomically correct; modest sleeves",
       promptFocus: "accurate hands, cinematic depth of field, no deformed anatomy"
     },
     {
@@ -189,9 +194,9 @@ export function buildStoryboard(statement) {
       role: "closing",
       durationSec: 5,
       camera: "pull-back revealing room silhouette",
-      setting: "peaceful corridor or courtyard at soft dusk, islamic architecture, quiet dignity",
+      setting: atmosphere.closing,
       action: "anonymous figure walks away into soft shadow, contemplative ending, real walking motion",
-      promptFocus: "real movement, no freeze, no zoom-only still"
+      promptFocus: "real movement, no freeze, no zoom-only still, premium closing frame"
     }
   ];
 
@@ -200,9 +205,12 @@ export function buildStoryboard(statement) {
   });
 
   return {
-    version: 2,
+    version: 3,
     profileId: DAR_VIDEO_PROFILE.id,
+    templateId: DAR_VIDEO_PROFILE.id,
     theme,
+    themePreset: atmosphere.id,
+    themeLabel: atmosphere.label,
     statementId: statement?.id || "",
     speaker: statement?.speaker || "",
     source: statement?.source || "",
@@ -212,7 +220,7 @@ export function buildStoryboard(statement) {
     scenes: scenes.map((scene) => ({
       ...scene,
       negativePrompt:
-        "face visible, front portrait, celebrity, prophet, named companion, deformed hands, extra fingers, horror, mask, music waveform, text, watermark, logo, collage, still image zoom, western office, neon",
+        "face visible, front portrait, celebrity, prophet, named companion, deformed hands, extra fingers, horror, mask, music waveform, text, watermark, logo, collage, still image zoom, western office, neon, tiktok captions, cartoon, fantasy creature",
       fullPrompt: [
         scene.setting,
         scene.action,

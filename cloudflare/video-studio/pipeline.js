@@ -62,7 +62,8 @@ function publicJob(job) {
       : null,
     staging: true,
     noVisitorPush: true,
-    noAutoFeedPublish: true
+    noAutoFeedPublish: true,
+    publication: job.publication || null
   };
 }
 

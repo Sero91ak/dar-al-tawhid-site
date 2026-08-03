@@ -4,17 +4,18 @@
 **Branch:** `cursor/video-studio-dar-brand-standard-e34c`  
 **Kein Merge auf main · keine Besucher-Veröffentlichung · keine Pushs**
 
-## Verbindlicher DAR-Standard (v2)
+## Verbindlicher DAR-Standard (v2 / Template v3)
 
-Umgesetzt in Worker + Admin:
+Umgesetzt in Worker + Admin gemäß `docs/dar-ai-video-studio-endauftrag.md`:
 
 1. **Kein Fremdwasserzeichen in der Endfassung** – Shotstack Stage nur interne Vorschau (`composePreview: true`). Standard-Render über **Production** (`SHOTSTACK_PROD_HOST` / `edit/v1`).
-2. **DAR-Branding** – dezentes Wasserzeichen (`watermark-my-logo-full.png` / Logo), Social-Block mit Emblemen (Telegram, Website, Instagram).
-3. **Bildbeitrags-Optik** – elegante Typografie, abschnittsweise Einblendungen (kein durchgehender Untertitelstreifen).
-4. **Texthierarchie** – optional Brand → Sprecher (`… رحمه الله sagte:`) → Aussage in 2–4 Blöcken → Quelle → CTA/Social.
-5. **Stimme** – exakter Vorlesetext, ruhigere ElevenLabs-Settings, keine Umformulierung.
-6. **QA-Gate** – u. a. `noForeignWatermark`, `brandingComplete`, `textHierarchyOk`, `voiceExact`, `safeAreasOk`.
-7. **Freigabeablauf** – erzeugen → Vorschau → Download → Teilen → intern freigeben. **Feed/Push nie automatisch.**
+2. **DAR-Branding** – Wasserzeichen, Social-Embleme, CTA, Credit `by Serhat Abu Malik`.
+3. **Themenatmosphäre** – Presets für Wissen / Dhikr / Adab / Manhaǧ.
+4. **Bildbeitrags-Optik** – elegante Typografie mit gezielter Wort-Hervorhebung, abschnittsweise Einblendungen.
+5. **Texthierarchie** – Brand → Sprecher → Aussage (2–4) → Quelle → CTA/Social/Credit.
+6. **Stimme** – exakter Vorlesetext, ruhige ElevenLabs-Settings.
+7. **QA-Gate** – u. a. `noForeignWatermark`, `brandingComplete`, `textHierarchyOk`, `voiceExact`.
+8. **Freigabeablauf** – erzeugen → Vorschau → Download → Teilen → intern freigeben → optional Feed/Push manuell (Staging: kein Besucher-Push).
 
 ## Früherer Autotest (technisch)
 

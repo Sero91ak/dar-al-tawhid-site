@@ -37,11 +37,12 @@ export function runQualityChecks({
   if (!checks.textHierarchyOk) reasons.push("Sprecher-/Aussage-/CTA-Hierarchie fehlt");
 
   checks.brandingComplete = Boolean(
-    render?.brandingApplied ||
-    overlays.some((o) => o.role === "brand" || o.role === "cta") ||
-    storyboard?.captionLines?.some((l) => /dar_al_tauhid|dar-al-tauhid|Serhat|DAR AL/i.test(l.text || ""))
+    (render?.brandingApplied ||
+      overlays.some((o) => o.role === "brand" || o.role === "cta") ||
+      storyboard?.captionLines?.some((l) => /dar_al_tauhid|dar-al-tauhid|Serhat|DAR AL/i.test(l.text || ""))) &&
+    overlays.some((o) => o.role === "cta" && /Serhat|dar_al_tauhid|dar-al-tauhid/i.test(JSON.stringify(o)))
   );
-  if (!checks.brandingComplete) reasons.push("DAR-Branding fehlt");
+  if (!checks.brandingComplete) reasons.push("DAR-Branding fehlt (Logo/CTA/Social/Credit)");
 
   // Endfassung: kein Shotstack-Stage (Fremdwasserzeichen)
   const stageRisk = Boolean(render?.foreignWatermarkRisk) || String(render?.shotstackEnv || "") === "stage";

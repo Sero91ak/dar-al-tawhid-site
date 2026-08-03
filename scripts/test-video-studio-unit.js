@@ -13,11 +13,17 @@ import { selectStatement } from "../cloudflare/video-studio/statements.js";
 import { DAR_VIDEO_PROFILE } from "../cloudflare/video-studio/profile.js";
 import { buildShotstackTimeline, shotstackEnvironment } from "../cloudflare/video-studio/compose.js";
 
+import { resolveThemeAtmosphere } from "../cloudflare/video-studio/theme-presets.js";
+
 assert.equal(DAR_VIDEO_PROFILE.id, "dar-standard-v2");
 assert.equal(DAR_VIDEO_PROFILE.width, 1080);
 assert.equal(DAR_VIDEO_PROFILE.height, 1920);
 assert.equal(DAR_VIDEO_PROFILE.safety.noForeignWatermarkOnFinal, true);
 assert.equal(DAR_VIDEO_PROFILE.safety.noAutoFeedPublish, true);
+assert.equal(DAR_VIDEO_PROFILE.branding.credit, "by Serhat Abu Malik");
+assert.equal(resolveThemeAtmosphere("Dhikr").id, "dhikr");
+assert.equal(resolveThemeAtmosphere("Sunnah").id, "manhaj");
+assert.equal(resolveThemeAtmosphere("Wissen").id, "ilm");
 
 const budget = normalizeBudget({ monthlyEur: 15, maxPerVideoEur: 1.2 });
 assert.equal(budget.maxPerVideoEur, 1.2);
@@ -53,7 +59,9 @@ assert.ok(roles.includes("statement"));
 assert.ok(roles.includes("source"));
 assert.ok(roles.includes("cta"));
 assert.ok(plan.overlays.filter((o) => o.role === "statement").length >= 2);
-assert.equal(plan.overlays.find((o) => o.role === "cta")?.social?.telegram, "@dar_al_tauhid");
+assert.ok(plan.overlays.find((o) => o.role === "cta")?.social?.telegram, "@dar_al_tauhid");
+assert.equal(plan.overlays.find((o) => o.role === "cta")?.credit, "by Serhat Abu Malik");
+assert.ok(board.themePreset);
 
 const stage = shotstackEnvironment({ SHOTSTACK_HOST: "https://api.shotstack.io/edit/stage" }, { final: false });
 assert.equal(stage.isStage, true);

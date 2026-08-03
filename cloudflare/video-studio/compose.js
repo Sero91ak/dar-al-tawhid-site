@@ -77,11 +77,13 @@ function htmlShell(inner, { width = 980, height = 280, align = "center" } = {}) 
 function overlayHtml(overlay) {
   const typo = DAR_VIDEO_PROFILE.typography;
   if (overlay.role === "brand") {
+    const topic = overlay.topic ? `<div style="margin-top:10px;font-family:${typo.ui};font-size:22px;letter-spacing:.08em;color:${typo.soft};text-shadow:0 2px 10px rgba(0,0,0,.5)">${escapeHtml(overlay.topic)}</div>` : "";
     return htmlShell(
       `<div style="text-align:center;width:100%">
         <div style="font-family:${typo.display};font-size:34px;letter-spacing:.18em;color:${typo.gold};font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.55)">DAR AL TAWḤĪD</div>
+        ${topic}
       </div>`,
-      { height: 120 }
+      { height: topic ? 150 : 120 }
     );
   }
   if (overlay.role === "speaker") {
@@ -116,10 +118,11 @@ function overlayHtml(overlay) {
     const web = `<span style="margin:0 10px">${escapeHtml(b.website)}</span>`;
     return htmlShell(
       `<div style="text-align:center;width:100%;color:${typo.cream}">
-        <div style="font-family:${typo.display};font-size:30px;line-height:1.35;margin-bottom:14px;text-shadow:0 2px 14px rgba(0,0,0,.65)">${escapeHtml(b.followLine)}</div>
-        <div style="font-family:${typo.ui};font-size:24px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;align-items:center;text-shadow:0 2px 10px rgba(0,0,0,.55)">${tg}${web}${ig}</div>
+        <div style="font-family:${typo.display};font-size:28px;line-height:1.35;margin-bottom:12px;text-shadow:0 2px 14px rgba(0,0,0,.65)">${escapeHtml(b.followLine)}</div>
+        <div style="font-family:${typo.ui};font-size:22px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;align-items:center;text-shadow:0 2px 10px rgba(0,0,0,.55);margin-bottom:12px">${tg}${web}${ig}</div>
+        <div style="font-family:${typo.display};font-size:20px;letter-spacing:.06em;color:${typo.soft};text-shadow:0 2px 10px rgba(0,0,0,.55)">${escapeHtml(b.credit)}</div>
       </div>`,
-      { height: 260 }
+      { height: 300 }
     );
   }
   return htmlShell(`<div style="color:#fff;font-size:36px;text-align:center">${escapeHtml(overlay.text || "")}</div>`);
@@ -131,7 +134,7 @@ function positionForRole(role) {
   if (role === "speaker") return { position: "center", offset: { x: 0, y: -0.18 } };
   if (role === "statement") return { position: "center", offset: { x: 0, y: 0.02 } };
   if (role === "source") return { position: "center", offset: { x: 0, y: 0.22 } };
-  if (role === "cta") return { position: "bottom", offset: { x: 0, y: 0.1 } };
+  if (role === "cta") return { position: "bottom", offset: { x: 0, y: 0.12 } };
   return { position: "center", offset: { x: 0, y: 0 } };
 }
 
@@ -167,7 +170,7 @@ export function buildShotstackTimeline({
     const pos = positionForRole(overlay.role);
     const height =
       overlay.role === "statement" ? 360 :
-      overlay.role === "cta" ? 260 :
+      overlay.role === "cta" ? 300 :
       overlay.role === "speaker" ? 200 :
       overlay.role === "brand" ? 120 : 140;
     return {

@@ -210,11 +210,13 @@ summary::-webkit-details-marker{display:none}
         <button class="btn primary-small" type="button" id="downloadBtn">MP4 laden</button>
         <button class="btn" type="button" id="shareBtn">Teilen</button>
         <button class="btn" type="button" id="approveBtn">Intern freigeben</button>
+        <button class="btn" type="button" id="feedBtn" disabled title="Nur nach interner Freigabe, nie automatisch">Optional: Feed</button>
+        <button class="btn" type="button" id="pushBtn" disabled title="Nur nach interner Freigabe, nie automatisch">Optional: Push</button>
         <button class="btn" type="button" id="retryBtn">Neu erstellen</button>
         <button class="btn" type="button" id="cancelBtn">Abbrechen</button>
         <button class="btn danger" type="button" id="deleteBtn">Löschen</button>
       </div>
-      <p class="helper" id="freigabeHint" style="margin-top:8px">Ablauf: Erzeugen → Vorschau → Download → Teilen → optional Feed/Push nur manuell. Nie automatisch.</p>
+      <p class="helper" id="freigabeHint" style="margin-top:8px">Ablauf: Erzeugen → Vorschau → Download → Teilen → intern freigeben → optional Feed/Push nur manuell. Nie automatisch.</p>
       <div id="previewBox" class="hidden" style="margin-top:10px">
         <video id="previewVideo" controls playsinline preload="metadata" style="width:100%;max-height:min(70vh,720px);border-radius:14px;background:#000;border:1px solid var(--line2)"></video>
         <p class="helper" id="previewMeta"></p>
@@ -347,7 +349,10 @@ summary::-webkit-details-marker{display:none}
     el("previewBtn").disabled=!(job&&job.outputUrl);
     el("downloadBtn").disabled=!(job&&job.outputUrl);
     el("shareBtn").disabled=!(job&&job.outputUrl);
-    el("approveBtn").disabled=!(job&&job.status==="completed");
+    el("approveBtn").disabled=!(job&&job.status==="completed"&&!(job.approval&&job.approval.approved));
+    const canPublish=Boolean(job&&job.status==="completed"&&job.approval&&job.approval.approved&&job.outputUrl);
+    el("feedBtn").disabled=!canPublish;
+    el("pushBtn").disabled=!canPublish;
     el("cancelBtn").disabled=!(job&&["queued","running"].includes(job.status));
     const preview=el("previewBox");
     const video=el("previewVideo");
@@ -519,6 +524,24 @@ summary::-webkit-details-marker{display:none}
     if(!state.job?.id)return;
     try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve",{method:"POST",body:"{}"});saveJob(data.job||data);notice("Intern freigegeben – noch keine Live-Veröffentlichung und kein Push.","ok");loadJobList()}catch(error){notice(esc(error.message),"bad")}
   }
+  async function publishFeed(){
+    if(!state.job?.id)return;
+    if(!window.confirm("Feed wirklich manuell vormerken? Es erfolgt KEINE automatische Live-Veröffentlichung."))return;
+    try{
+      const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/publish-feed",{method:"POST",body:JSON.stringify({confirm:true})});
+      saveJob(data.job||data);
+      notice(esc(data.message||"Feed vorgemerkt – nicht live."),"ok");
+    }catch(error){notice(esc(error.message),"bad")}
+  }
+  async function requestPush(){
+    if(!state.job?.id)return;
+    if(!window.confirm("Push wirklich manuell anfordern? Staging sendet KEINE Pushs an alle Besucher."))return;
+    try{
+      const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/request-push",{method:"POST",body:JSON.stringify({confirm:true})});
+      saveJob(data.job||data);
+      notice(esc(data.message||"Push nicht an Besucher gesendet."),"ok");
+    }catch(error){notice(esc(error.message),"bad")}
+  }
   async function deleteRemoteJob(){
     if(!state.job?.id){localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Lokaler Auftrag entfernt.");return}
     try{
@@ -533,6 +556,8 @@ summary::-webkit-details-marker{display:none}
   el("retryBtn").addEventListener("click",startJob);
   el("cancelBtn").addEventListener("click",cancelJob);
   el("approveBtn").addEventListener("click",approveJob);
+  el("feedBtn").addEventListener("click",publishFeed);
+  el("pushBtn").addEventListener("click",requestPush);
   el("deleteBtn").addEventListener("click",deleteRemoteJob);
   el("previewBtn").addEventListener("click",()=>{const url=state.job?.outputUrl;if(!url){notice("Noch keine Videodatei.","warn");return}el("previewBox").classList.remove("hidden");el("previewVideo").src=url;el("previewVideo").play?.().catch(()=>{})});
   el("downloadBtn").addEventListener("click",downloadJob);
