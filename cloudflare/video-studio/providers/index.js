@@ -33,17 +33,49 @@ export class FalAutoProvider extends BaseVideoProvider {
     };
     if (imageUrl) input.image_url = imageUrl;
     const queued = await falQueue(env, this.modelPath, input, { preferAsync: true });
+    const providerJobId = String(queued.request_id || queued.requestId || "").trim();
+    const statusUrl = String(queued.status_url || queued.statusUrl || "").trim();
+    const responseUrl = String(queued.response_url || queued.responseUrl || "").trim();
+    const immediateUrl =
+      queued?.video?.url ||
+      queued?.video_url ||
+      queued?.output?.url ||
+      "";
+
+    // Manche fal-Antworten liefern das Video sofort ohne Queue-ID
+    if (immediateUrl && !providerJobId) {
+      return {
+        providerJobId: `inline:${immediateUrl.slice(0, 48)}`,
+        status: "COMPLETED",
+        modelPath: this.modelPath,
+        durationSec: duration,
+        estimatedCostEur: Number((duration * this.costPerSec).toFixed(4)),
+        immediateUrl,
+        statusUrl: "",
+        responseUrl: ""
+      };
+    }
+    if (!providerJobId && !statusUrl) {
+      throw new Error("fal Queue ohne request_id – bitte erneut versuchen");
+    }
     return {
-      providerJobId: queued.request_id || queued.requestId || "",
+      providerJobId,
       status: queued.status || "IN_QUEUE",
       modelPath: this.modelPath,
       durationSec: duration,
-      estimatedCostEur: Number((duration * this.costPerSec).toFixed(4))
+      estimatedCostEur: Number((duration * this.costPerSec).toFixed(4)),
+      statusUrl,
+      responseUrl
     };
   }
 
-  async getStatus(env, providerJobId, modelPath = this.modelPath) {
-    const status = await falStatus(env, modelPath, providerJobId);
+  async getStatus(env, providerJobId, modelPath = this.modelPath, meta = {}) {
+    if (String(providerJobId || "").startsWith("inline:") || meta.immediateUrl) {
+      return { status: "completed", raw: { status: "COMPLETED" } };
+    }
+    const status = await falStatus(env, modelPath || this.modelPath, providerJobId, {
+      statusUrl: meta.statusUrl
+    });
     const state = String(status.status || "").toUpperCase();
     if (state === "COMPLETED" || state === "OK") return { status: "completed", raw: status };
     if (state === "FAILED" || state === "ERROR") {
@@ -52,8 +84,15 @@ export class FalAutoProvider extends BaseVideoProvider {
     return { status: "running", raw: status };
   }
 
-  async downloadResult(env, providerJobId, modelPath = this.modelPath) {
-    const result = await falResult(env, modelPath, providerJobId);
+  async downloadResult(env, providerJobId, modelPath = this.modelPath, meta = {}) {
+    if (meta.immediateUrl) {
+      const res = await fetch(meta.immediateUrl);
+      if (!res.ok) throw new Error(`fal Inline-Download HTTP ${res.status}`);
+      return { url: meta.immediateUrl, bytes: await res.arrayBuffer(), contentType: res.headers.get("content-type") || "video/mp4" };
+    }
+    const result = await falResult(env, modelPath || this.modelPath, providerJobId, {
+      responseUrl: meta.responseUrl
+    });
     const url =
       result?.video?.url ||
       result?.video_url ||

@@ -141,34 +141,62 @@ export async function falQueue(env, modelPath, input, { preferAsync = true } = {
     method: "POST",
     headers: {
       Authorization: `Key ${key}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Accept: "application/json"
     },
     body: JSON.stringify(input)
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error(data?.detail || data?.error || data?.message || `fal ${modelPath} HTTP ${res.status}`);
+    const detail = data?.detail || data?.error || data?.message;
+    throw new Error(typeof detail === "string" ? detail : (detail?.message || `fal ${modelPath} HTTP ${res.status}`));
   }
   return data;
 }
 
-export async function falStatus(env, modelPath, requestId) {
+export async function falStatus(env, modelPath, requestId, { statusUrl } = {}) {
   const key = falKey(env);
-  const res = await fetch(`https://queue.fal.run/${modelPath}/requests/${requestId}/status`, {
-    headers: { Authorization: `Key ${key}` }
+  const id = String(requestId || "").trim();
+  const url = String(statusUrl || "").trim()
+    || (id ? `https://queue.fal.run/${modelPath}/requests/${encodeURIComponent(id)}/status` : "");
+  if (!url) throw new Error("fal status: request_id fehlt");
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Key ${key}`,
+      Accept: "application/json"
+    }
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.detail || `fal status HTTP ${res.status}`);
+  if (!res.ok) {
+    const detail = data?.detail || data?.error || data?.message;
+    throw new Error(
+      typeof detail === "string"
+        ? detail
+        : (detail?.message || `fal status HTTP ${res.status} (${modelPath} · id=${id.slice(0, 12) || "—"})`)
+    );
+  }
   return data;
 }
 
-export async function falResult(env, modelPath, requestId) {
+export async function falResult(env, modelPath, requestId, { responseUrl } = {}) {
   const key = falKey(env);
-  const res = await fetch(`https://queue.fal.run/${modelPath}/requests/${requestId}`, {
-    headers: { Authorization: `Key ${key}` }
+  const id = String(requestId || "").trim();
+  const url = String(responseUrl || "").trim()
+    || (id ? `https://queue.fal.run/${modelPath}/requests/${encodeURIComponent(id)}` : "");
+  if (!url) throw new Error("fal result: request_id fehlt");
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Key ${key}`,
+      Accept: "application/json"
+    }
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.detail || `fal result HTTP ${res.status}`);
+  if (!res.ok) {
+    const detail = data?.detail || data?.error || data?.message;
+    throw new Error(typeof detail === "string" ? detail : (detail?.message || `fal result HTTP ${res.status}`));
+  }
   return data;
 }
 
