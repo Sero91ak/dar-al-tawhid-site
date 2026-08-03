@@ -44,23 +44,28 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
   }),
   safety: Object.freeze({
     noProphetDepiction: true,
+    noProphetSilhouette: true,
     noIdentifiableCompanions: true,
     anonymousFiguresOnly: true,
     facesFullyHidden: true,
+    historicallyPlausible: true,
+    themeBoundScenes: true,
     noMusic: true,
     naturalAtmosphereOnly: true,
     manualApprovalRequired: true,
     noVisitorPush: true,
     noAutoFeedPublish: true,
-    noForeignWatermarkOnFinal: true
+    noForeignWatermarkOnFinal: true,
+    uploadFirstSceneImage: true
   }),
   promptSafetySuffix: [
     "Photorealistic cinematic Islamic educational short film, vertical 9:16, premium calm atmosphere.",
-    "Theme-based realistic interiors or courtyards with warm natural light, wooden textures, soft dust.",
-    "Only anonymous symbolic figures: backs turned, silhouettes, deep shadow, or cropped so faces are completely hidden.",
-    "No depiction of the Prophet, no identifiable Sahabah, Salaf, or scholars.",
+    "Theme-bound scene derived from the statement — not a generic stock mosque, desert, or library template.",
+    "Historically and temporally plausible architecture, clothing, tools, and lighting for the topic era.",
+    "Only anonymous symbolic figures when people appear: backs turned, cropped, or fully face-hidden; never identifiable portraits.",
+    "Never depict any prophet as a person in any form (no face, back, silhouette, shadow-person, veiled body, or body crop of a prophet).",
     "Modest clothing, anatomically correct hands, gentle camera motion, real movement, no horror masks.",
-    "No text overlays in the generated clip, no logos, no watermarks, no music, no collage."
+    "No text overlays in the generated clip, no logos, no watermarks, no music, no collage, no readable invented writing on props."
   ].join(" ")
 });
 
@@ -90,7 +95,10 @@ export function emptyQualityChecks() {
     noForeignWatermark: false,
     textHierarchyOk: false,
     safeAreasOk: false,
-    voiceExact: false
+    voiceExact: false,
+    prophetSafe: false,
+    historicallyPlausible: false,
+    motionSecondsOk: false
   };
 }
 

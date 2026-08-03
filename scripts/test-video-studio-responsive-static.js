@@ -18,6 +18,7 @@ const required = [
   "Optional: KI-Szenenbild",
   "Optional erzeugen",
   "Video-Beitrag erstellen",
+  "Video-Bild erstellen",
   "Server-Aufträge",
   "api/admin/video-studio",
   "X-Admin-Secret",

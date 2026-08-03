@@ -14,16 +14,27 @@ import { DAR_VIDEO_PROFILE } from "../cloudflare/video-studio/profile.js";
 import { buildShotstackTimeline, shotstackEnvironment } from "../cloudflare/video-studio/compose.js";
 
 import { resolveThemeAtmosphere } from "../cloudflare/video-studio/theme-presets.js";
+import { isProphetRelatedStatement } from "../cloudflare/video-studio/depiction-rules.js";
 
 assert.equal(DAR_VIDEO_PROFILE.id, "dar-standard-v2");
 assert.equal(DAR_VIDEO_PROFILE.width, 1080);
 assert.equal(DAR_VIDEO_PROFILE.height, 1920);
 assert.equal(DAR_VIDEO_PROFILE.safety.noForeignWatermarkOnFinal, true);
 assert.equal(DAR_VIDEO_PROFILE.safety.noAutoFeedPublish, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.uploadFirstSceneImage, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.noProphetSilhouette, true);
 assert.equal(DAR_VIDEO_PROFILE.branding.credit, "by Serhat Abu Malik");
 assert.equal(resolveThemeAtmosphere("Dhikr").id, "dhikr");
 assert.equal(resolveThemeAtmosphere("Sunnah").id, "manhaj");
 assert.equal(resolveThemeAtmosphere("Wissen").id, "ilm");
+assert.equal(
+  isProphetRelatedStatement({ speaker: "Der Prophet ﷺ", de: "…", source: "x", topic: "y" }),
+  true
+);
+assert.equal(
+  isProphetRelatedStatement({ speaker: "Ibn Masʿūd", de: "Wissen suchen", source: "x", topic: "Wissen" }),
+  false
+);
 
 const budget = normalizeBudget({ monthlyEur: 15, maxPerVideoEur: 1.2 });
 assert.equal(budget.maxPerVideoEur, 1.2);

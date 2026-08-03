@@ -1,6 +1,7 @@
 import { falKey, falQueue, falStatus, falResult } from "./providers/base.js";
 import { resolveThemeAtmosphere } from "./theme-presets.js";
 import { DAR_VIDEO_PROFILE } from "./profile.js";
+import { depictionPromptBlock } from "./depiction-rules.js";
 
 const SCENE_IMAGE_MODEL = "fal-ai/flux/schnell";
 
@@ -12,9 +13,9 @@ export function buildSceneImagePrompt(statement) {
     "Photorealistic vertical 9:16 cinematic still frame for an Islamic educational short film.",
     "Premium DAR AL TAWHID visual style: noble, calm, elegant, realistic, not cartoon, not fantasy.",
     atmosphere.opening,
+    "Theme-bound to the statement — not a random stock background.",
     "Leave calm negative space in the center and lower third for later text overlays.",
-    "Anonymous figure only if needed: back turned, silhouette, or face fully hidden; modest clothing.",
-    "Anatomically correct hands if visible. Soft natural light, cinematic depth.",
+    depictionPromptBlock(statement),
     `Thematic mood related to: ${de}`,
     "Absolutely no text, no letters, no calligraphy overlays, no logos, no watermarks, no social icons, no UI."
   ].join(" ");

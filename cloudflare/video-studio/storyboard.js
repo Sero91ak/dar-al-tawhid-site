@@ -1,5 +1,6 @@
 import { DAR_VIDEO_PROFILE } from "./profile.js";
 import { resolveThemeAtmosphere } from "./theme-presets.js";
+import { depictionPromptBlock, isProphetRelatedStatement, motionNegativePrompt } from "./depiction-rules.js";
 
 const HIGHLIGHT_WORDS = new Set([
   "allah", "allāh", "iman", "īmān", "glauben", "sunnah", "sunna", "qur", "qurʾān", "quran",
@@ -162,6 +163,13 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
   const de = String(statement?.de || "").trim();
   const atmosphere = resolveThemeAtmosphere(theme, de);
   const fromStill = Boolean(sceneImageUrl);
+  const prophetSafe = isProphetRelatedStatement(statement);
+  const depiction = depictionPromptBlock(statement);
+
+  const figureAction = prophetSafe
+    ? "no human figure representing a prophet; only environment, objects, manuscripts, architecture, or distant anonymous people not portraying the prophet"
+    : "anonymous symbolic figure only — back/side/cropped/shadowed face, never identifiable as the named person";
+
   const motionScenes = [
     {
       id: "s1",
@@ -169,37 +177,49 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
       durationSec: 5,
       camera: "slow push-in, natural handheld micro-motion",
       setting: fromStill
-        ? "Continue the exact same scene identity as the provided still frame; preserve person, clothing, room, light and palette"
-        : atmosphere.opening,
+        ? "Continue the exact same scene identity as the provided still frame; preserve person, clothing, room, light, palette, and historical era"
+        : prophetSafe
+          ? `${atmosphere.opening}; empty or environment-led frame, no prophetic figure`
+          : atmosphere.opening,
       action: fromStill
-        ? "gentle atmospheric motion only: soft light shift, dust motes, fabric micro-movement; anonymous figure remains face-hidden"
-        : "anonymous figure enters from behind, walks slowly toward window light, face never visible, modest clothing",
-      promptFocus: "premium cinematic opening, real motion, noble calm DAR image-post mood, no text, no logos"
+        ? `gentle atmospheric motion only: soft light shift, dust motes, fabric micro-movement; ${figureAction}`
+        : prophetSafe
+          ? "slow reveal of historically fitting space with dust and light; no prophetic body depiction"
+          : "anonymous figure enters from behind, walks slowly toward window light, face never visible, modest historically fitting clothing",
+      promptFocus: "premium cinematic opening, real motion, noble calm DAR image-post mood, theme-bound, no text, no logos"
     },
     {
       id: "s2",
       role: "reflection",
       durationSec: 5,
-      camera: fromStill ? "gentle lateral drift / soft orbit" : "gentle orbit around seated silhouette",
+      camera: fromStill ? "gentle lateral drift / soft orbit" : "gentle orbit or slow drift",
       setting: fromStill
-        ? "Same locked visual identity as start frame; no wardrobe or architecture change"
-        : atmosphere.reflection,
+        ? "Same locked visual identity as start frame; no wardrobe, architecture, or era change"
+        : prophetSafe
+          ? atmosphere.reflection.replace(/anonymous figure[^,]*/gi, "quiet empty scholarly niche")
+          : atmosphere.reflection,
       action: fromStill
-        ? "subtle environmental motion and calm posture shift, face never visible"
-        : "anonymous figure seated with back to camera, reading quietly, modest robe, face fully hidden",
-      promptFocus: "consistent identity, contemplative, no cheap stock look, no morphing"
+        ? `subtle environmental motion; ${figureAction}`
+        : prophetSafe
+          ? "pages, light, or curtains move gently in an empty historically plausible room"
+          : "anonymous figure seated with back to camera, reading quietly, modest robe, face fully hidden",
+      promptFocus: "consistent identity, contemplative, historically plausible, no cheap stock look, no morphing"
     },
     {
       id: "s3",
       role: "emphasis",
       durationSec: 5,
-      camera: fromStill ? "slow pull-back revealing more of the same space" : "slow tilt from hands to environment, never revealing face",
+      camera: fromStill ? "slow pull-back revealing more of the same space" : "slow tilt or pull-back, never revealing a face",
       setting: fromStill
         ? `Same scene continuity; thematic calm: ${de.slice(0, 80)}`
-        : `${atmosphere.emphasis}; thematic cue: ${de.slice(0, 90)}`,
+        : prophetSafe
+          ? `${atmosphere.emphasis}; symbolic objects only; thematic cue: ${de.slice(0, 80)}`
+          : `${atmosphere.emphasis}; thematic cue: ${de.slice(0, 90)}`,
       action: fromStill
-        ? "natural light change, dust, modest anonymous figure remains consistent; anatomically correct hands if visible"
-        : "hands carefully interact with books or quiet objects; fingers anatomically correct; modest sleeves",
+        ? `natural light change, dust; ${figureAction}; anatomically correct hands if a non-prophet anonymous figure is visible`
+        : prophetSafe
+          ? "hands of anonymous non-prophet figure only if needed and face-hidden; else objects/manuscripts only; correct anatomy"
+          : "hands carefully interact with books or quiet objects; fingers anatomically correct; modest sleeves",
       promptFocus: "accurate anatomy, cinematic depth, real movement, no freeze-zoom fake motion"
     }
   ].slice(0, Math.max(1, Math.min(3, Number(clipCount) || 3)));
@@ -215,6 +235,7 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
     theme,
     themePreset: atmosphere.id,
     themeLabel: atmosphere.label,
+    prophetRelated: prophetSafe,
     sceneImageUrl: sceneImageUrl || null,
     motionSeconds: motionScenes.reduce((n, s) => n + s.durationSec, 0),
     statementId: statement?.id || "",
@@ -225,13 +246,13 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
     captionLines: captionPlan.captionLines,
     scenes: motionScenes.map((scene) => ({
       ...scene,
-      negativePrompt:
-        "face visible, front portrait, celebrity, prophet, named companion, deformed hands, extra fingers, horror, mask, music waveform, text, watermark, logo, collage, still image zoom only, wardrobe change, architecture change, new person, tiktok captions, cartoon, fantasy creature",
+      negativePrompt: motionNegativePrompt(statement),
       fullPrompt: [
         scene.setting,
         scene.action,
         scene.camera,
         scene.promptFocus,
+        depiction,
         DAR_VIDEO_PROFILE.promptSafetySuffix
       ].join(". ")
     })),
