@@ -15,7 +15,9 @@ const required = [
   "orientation:landscape",
   "VIDEO-BEITRAG AUTONOM ERSTELLEN",
   "api/admin/video-studio",
-  "X-Admin-Secret"
+  "X-Admin-Secret",
+  "MP4 laden",
+  "Aufträge auf dem Server"
 ];
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);
