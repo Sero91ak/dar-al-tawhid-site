@@ -16,14 +16,17 @@ import { buildShotstackTimeline, shotstackEnvironment } from "../cloudflare/vide
 import { resolveThemeAtmosphere } from "../cloudflare/video-studio/theme-presets.js";
 import { isProphetRelatedStatement } from "../cloudflare/video-studio/depiction-rules.js";
 
-assert.equal(DAR_VIDEO_PROFILE.id, "dar-standard-v2");
+assert.equal(DAR_VIDEO_PROFILE.id, "dar-standard-v3");
 assert.equal(DAR_VIDEO_PROFILE.width, 1080);
 assert.equal(DAR_VIDEO_PROFILE.height, 1920);
 assert.equal(DAR_VIDEO_PROFILE.safety.noForeignWatermarkOnFinal, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.noShotstackStageOnFinal, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.noModernVehicles, true);
 assert.equal(DAR_VIDEO_PROFILE.safety.noAutoFeedPublish, true);
 assert.equal(DAR_VIDEO_PROFILE.safety.uploadFirstSceneImage, true);
 assert.equal(DAR_VIDEO_PROFILE.safety.noProphetSilhouette, true);
 assert.equal(DAR_VIDEO_PROFILE.branding.credit, "by Serhat Abu Malik");
+assert.ok(Number(DAR_VIDEO_PROFILE.branding.watermarkScale) >= 0.35);
 assert.equal(resolveThemeAtmosphere("Dhikr").id, "dhikr");
 assert.equal(resolveThemeAtmosphere("Sunnah").id, "manhaj");
 assert.equal(resolveThemeAtmosphere("Wissen").id, "ilm");
@@ -63,17 +66,21 @@ assert.ok(board.scenes.every((s) => /silhouette|hidden|back|shadow|anonymous/i.t
 assert.ok(board.voiceScript.includes(DAR_VIDEO_PROFILE.branding.followLine));
 assert.ok(board.captionPlan?.overlays?.length >= 5);
 
-const plan = buildCaptionPlan(selected.statement, { totalSec: 20 });
+const plan = buildCaptionPlan({ ...selected.statement, topic: "Dhikr" }, { totalSec: 20 });
 const roles = plan.overlays.map((o) => o.role);
 assert.ok(roles.includes("brand"));
 assert.ok(roles.includes("speaker"));
 assert.ok(roles.includes("statement"));
 assert.ok(roles.includes("source"));
 assert.ok(roles.includes("cta"));
+assert.equal(plan.overlays.find((o) => o.role === "brand")?.topic, null, "Topic/Dhikr darf nicht im Brand-Overlay stehen");
+assert.equal(JSON.stringify(plan).includes("Dhikr"), false, "Dhikr nicht in Caption-Overlays");
 assert.ok(plan.overlays.filter((o) => o.role === "statement").length >= 2);
+assert.ok(plan.overlays.find((o) => o.role === "source")?.text?.startsWith("Quelle:"));
 assert.ok(plan.overlays.find((o) => o.role === "cta")?.social?.telegram, "@dar_al_tauhid");
 assert.equal(plan.overlays.find((o) => o.role === "cta")?.credit, "by Serhat Abu Malik");
 assert.ok(board.themePreset);
+assert.ok(/car|automobile|vehicle|motorcycle/i.test(board.scenes[0].negativePrompt));
 
 const stage = shotstackEnvironment({ SHOTSTACK_HOST: "https://api.shotstack.io/edit/stage" }, { final: false });
 assert.equal(stage.isStage, true);
@@ -90,7 +97,19 @@ const timeline = buildShotstackTimeline({
 assert.equal(timeline.output.size.width, 1080);
 assert.equal(timeline.output.size.height, 1920);
 assert.ok(timeline.timeline.tracks.length >= 2);
-assert.ok(JSON.stringify(timeline).includes("DAR AL TAWḤĪD") || JSON.stringify(timeline).includes("watermark"));
+assert.equal(timeline.timeline.background, "#1a1814");
+const markClip = timeline.timeline.tracks.flatMap((t) => t.clips).find((c) => c.asset?.type === "image");
+assert.ok(markClip, "DAR-Wasserzeichen-Clip fehlt");
+assert.equal(markClip.position, "center");
+assert.ok(Number(markClip.scale) >= 0.35, "Wasserzeichen muss groß mittig sein");
+assert.ok(JSON.stringify(timeline).includes("DAR AL TAWḤĪD"));
+assert.ok(JSON.stringify(timeline).includes("@dar_al_tauhid"));
+assert.ok(JSON.stringify(timeline).includes("Cormorant Garamond") || JSON.stringify(timeline).includes("Amiri"));
+assert.equal(JSON.stringify(timeline).includes("Dhikr"), false);
+const lastVideo = timeline.timeline.tracks.find((t) => t.clips?.some((c) => c.asset?.type === "video"))?.clips?.at(-1);
+const cta = plan.overlays.find((o) => o.role === "cta");
+assert.ok(lastVideo && cta);
+assert.ok(lastVideo.start + lastVideo.length >= cta.at + cta.length - 0.05, "Letzter Clip muss CTA abdecken (kein schwarzes Ende)");
 
 const qualityFail = runQualityChecks({
   statement: selected.statement,

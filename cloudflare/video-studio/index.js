@@ -305,7 +305,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         mode: job.mode || "auto",
         voiceProfile: job.voiceProfile || "dar-male",
         budget: normalizeBudget(job.budget || {}),
-        profile: job.profile || "dar-standard-v2",
+        profile: job.profile || "dar-standard-v3",
         format: "9:16",
         manualApproval: true,
         composePreview: job.composePreview === true,

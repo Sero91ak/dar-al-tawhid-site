@@ -1,7 +1,7 @@
-/* Verbindliches DAR-Video-Profil (dar-standard-v2) – Bildbeitrags-Optik */
+/* Verbindliches DAR-Video-Profil – Bildbeitrags-Optik (Lesbarkeit + Branding) */
 
 export const DAR_VIDEO_PROFILE = Object.freeze({
-  id: "dar-standard-v2",
+  id: "dar-standard-v3",
   format: "9:16",
   width: 1080,
   height: 1920,
@@ -14,13 +14,30 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
   fastStart: true,
   voiceProfile: "dar-male",
   typography: Object.freeze({
-    display: "Georgia, 'Times New Roman', serif",
-    body: "Georgia, 'Times New Roman', serif",
-    ui: "system-ui, -apple-system, 'Segoe UI', sans-serif",
+    /* Wie Bildbeitrag / Feed-Share */
+    display: "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
+    body: "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
+    source: "'EB Garamond', Georgia, 'Times New Roman', serif",
+    arabic: "'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif",
+    ui: "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
     gold: "#efd78e",
     cream: "#fff8e8",
-    soft: "#d9c9a4",
-    ink: "#0b1020"
+    soft: "#e8dcc0",
+    muted: "#c9b896",
+    ink: "#0b1020",
+    panelBg: "rgba(12,14,16,0.82)",
+    panelBorder: "rgba(230,200,130,0.28)"
+  }),
+  fonts: Object.freeze({
+    base: "https://dar-al-tawhid.de/assets/fonts",
+    faces: [
+      { family: "Cormorant Garamond", weight: 600, file: "cormorant-garamond-latin-600-normal.woff2" },
+      { family: "Cormorant Garamond", weight: 700, file: "cormorant-garamond-latin-700-normal.woff2" },
+      { family: "EB Garamond", weight: 500, style: "italic", file: "eb-garamond-latin-500-italic.woff2" },
+      { family: "Amiri", weight: 400, file: "amiri-arabic-400-normal.woff2" },
+      { family: "Amiri", weight: 700, file: "amiri-arabic-700-normal.woff2" },
+      { family: "Manrope", weight: 600, file: "manrope-latin-600-normal.woff2" }
+    ]
   }),
   safeArea: Object.freeze({
     topPx: 110,
@@ -30,9 +47,11 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
   branding: Object.freeze({
     title: "DAR AL TAWḤĪD",
     logoHint: "Original-Logo DAR AL TAWḤĪD",
-    watermark: "dezentes DAR-Wasserzeichen",
+    watermark: "großes DAR-Wasserzeichen mittig (gesamte Dauer)",
     logoPublicPath: "/app-logo-original.png",
     watermarkPublicPath: "/watermark-my-logo-full.png",
+    watermarkScale: 0.42,
+    watermarkOpacity: 0.28,
     followLine: "Folgt für mehr Wissen aus Qurʾān & Sunnah",
     telegram: "@dar_al_tauhid",
     telegramUrl: "https://t.me/dar_al_tauhid",
@@ -56,7 +75,9 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
     noVisitorPush: true,
     noAutoFeedPublish: true,
     noForeignWatermarkOnFinal: true,
-    uploadFirstSceneImage: true
+    noShotstackStageOnFinal: true,
+    uploadFirstSceneImage: true,
+    noModernVehicles: true
   }),
   promptSafetySuffix: [
     "Photorealistic cinematic Islamic educational short film, vertical 9:16, premium calm atmosphere.",
@@ -65,6 +86,7 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
     "Only anonymous symbolic figures when people appear: backs turned, cropped, or fully face-hidden; never identifiable portraits.",
     "Never depict any prophet as a person in any form (no face, back, silhouette, shadow-person, veiled body, or body crop of a prophet).",
     "Modest clothing, anatomically correct hands, gentle camera motion, real movement, no horror masks.",
+    "Absolutely no modern vehicles: no cars, automobiles, trucks, vans, buses, motorcycles, scooters, or traffic.",
     "No text overlays in the generated clip, no logos, no watermarks, no music, no collage, no readable invented writing on props."
   ].join(" ")
 });
