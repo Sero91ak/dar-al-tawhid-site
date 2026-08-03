@@ -208,11 +208,13 @@ summary::-webkit-details-marker{display:none}
       <div id="resultActions" class="actions hidden">
         <button class="btn primary-small" type="button" id="previewBtn">Vorschau</button>
         <button class="btn primary-small" type="button" id="downloadBtn">MP4 laden</button>
+        <button class="btn" type="button" id="shareBtn">Teilen</button>
         <button class="btn" type="button" id="approveBtn">Intern freigeben</button>
         <button class="btn" type="button" id="retryBtn">Neu erstellen</button>
         <button class="btn" type="button" id="cancelBtn">Abbrechen</button>
         <button class="btn danger" type="button" id="deleteBtn">Löschen</button>
       </div>
+      <p class="helper" id="freigabeHint" style="margin-top:8px">Ablauf: Erzeugen → Vorschau → Download → Teilen → optional Feed/Push nur manuell. Nie automatisch.</p>
       <div id="previewBox" class="hidden" style="margin-top:10px">
         <video id="previewVideo" controls playsinline preload="metadata" style="width:100%;max-height:min(70vh,720px);border-radius:14px;background:#000;border:1px solid var(--line2)"></video>
         <p class="helper" id="previewMeta"></p>
@@ -267,8 +269,9 @@ summary::-webkit-details-marker{display:none}
       <div><b>Personen</b><span>Anonyme Symbolfiguren, angemessen gekleidet, nur Rückenansicht, Silhouette oder Ausschnitt.</span></div>
       <div><b>Stimme</b><span>Eine feste deutsche Männerstimme, warm, ruhig, würdevoll und ohne Werbeton.</span></div>
       <div><b>Ton</b><span>Natürliche Atmosphäre; keine Musik. Naschīd nur bei späterer ausdrücklicher Profiländerung.</span></div>
-      <div><b>Branding</b><span>Original-Logo, dezentes Wasserzeichen, Quelle, Social-Kanäle und „by Serhat Abu Malik“.</span></div>
-      <div><b>Sicherheit</b><span>Keine automatische Veröffentlichung. Zuerst Vorschau und ausdrückliche Freigabe.</span></div>
+      <div><b>Branding</b><span>DAR-Wasserzeichen, Original-Embleme für Telegram/Website/Instagram, Quelle und Credit.</span></div>
+      <div><b>Export</b><span>1080×1920 · MP4 · Shotstack Production (kein Stage-Wasserzeichen in der Endfassung).</span></div>
+      <div><b>Sicherheit</b><span>Keine automatische Feed-/Push-Veröffentlichung. Reihenfolge: erzeugen → Vorschau → Download → Teilen → optional manuell.</span></div>
     </div>
     <div class="viewport-proof" aria-label="Verbindliche Darstellungsgrößen">
       <div><b>320–359 px</b><span>Kleine Smartphones</span></div>
@@ -294,9 +297,9 @@ summary::-webkit-details-marker{display:none}
     ["references","Referenzbilder erzeugen","Einheitliche Personen, Kleidung und Farbwelt"],
     ["clips","Videoclips generieren","Echte Bewegung über den verbundenen Video-Anbieter"],
     ["voice","DAR-Stimme erzeugen","Feste deutsche Männerstimme und korrekte Pausen"],
-    ["captions","Untertitel und Quellen setzen","Synchronisierte Aussage, Sprecher und Fundstelle"],
-    ["render","Video fertigstellen","Schnitt, Logo, Wasserzeichen, Ton und MP4-Export"],
-    ["review","Qualitätsprüfung","Gesichter, Hände, Lesbarkeit, Ton und technische Kompatibilität"]
+    ["captions","Texteinblendungen setzen","Sprecher → Aussage (Blöcke) → Quelle → Social/CTA, synchron zur Stimme"],
+    ["render","Video fertigstellen","Production 1080×1920, DAR-Wasserzeichen, Social-Block, ohne Fremdlogo"],
+    ["review","Qualitätsprüfung","Fremdwasserzeichen, Branding, Lesbarkeit, Stimme, Sync, Safe Areas"]
   ];
   const el=id=>document.getElementById(id);
   const state={job:null,pollTimer:null};
@@ -343,14 +346,19 @@ summary::-webkit-details-marker{display:none}
     el("resultActions").classList.toggle("hidden",!job||!showActions);
     el("previewBtn").disabled=!(job&&job.outputUrl);
     el("downloadBtn").disabled=!(job&&job.outputUrl);
+    el("shareBtn").disabled=!(job&&job.outputUrl);
     el("approveBtn").disabled=!(job&&job.status==="completed");
     el("cancelBtn").disabled=!(job&&["queued","running"].includes(job.status));
     const preview=el("previewBox");
     const video=el("previewVideo");
+    const metaBits=[];
+    if(job?.renderMeta?.shotstackEnv)metaBits.push(job.renderMeta.shotstackEnv==="stage"?"Stage-Vorschau":"Production");
+    if(job?.renderMeta?.foreignWatermarkRisk)metaBits.push("Fremdwasserzeichen-Risiko");
+    if(job?.renderMeta?.brandingApplied)metaBits.push("DAR-Branding");
     if(job?.outputUrl){
       preview.classList.remove("hidden");
       if(video.src!==job.outputUrl){video.src=job.outputUrl}
-      el("previewMeta").textContent=`${job.provider||"Anbieter"} · ${Number(job.costEur||0).toFixed(2)} € · ${job.durationSeconds||"—"} s · manuelle Freigabe`;
+      el("previewMeta").textContent=`${job.provider||"Anbieter"} · ${Number(job.costEur||0).toFixed(2)} € · ${job.durationSeconds||"—"} s · ${metaBits.join(" · ")||"manuelle Freigabe"}`;
       el("downloadHint").innerHTML=`Download: <a href="${esc(job.outputUrl)}" target="_blank" rel="noopener">MP4 in neuem Tab öffnen</a>`;
     }else{
       preview.classList.add("hidden");
@@ -358,7 +366,7 @@ summary::-webkit-details-marker{display:none}
       el("previewMeta").textContent="";
       el("downloadHint").textContent=status==="failed"?"Dieser Auftrag hat keine Videodatei. Öffne unten einen fertigen Auftrag.":"";
     }
-    if(status==="completed")notice("Der Video-Beitrag ist fertig. Nutze Vorschau / MP4 laden. Kein Besucher-Push.","ok");
+    if(status==="completed")notice("Fertig: Vorschau → MP4 laden → Teilen. Feed/Push nur manuell – nie automatisch.","ok");
     else if(status==="failed")notice(esc(job.message||"Die Produktion wurde abgebrochen.")+" — Fertige Videos stehen in der Auftragsliste unten.","bad");
     else if(status==="cancelled")notice("Auftrag abgebrochen.");
     else if(status==="setup_required")notice(`<b>Serverseitige Einrichtung nötig.</b><br>${esc(job.message||"Cloudflare Secrets und Bindings setzen – siehe docs/dar-ai-video-studio-secrets-and-costs.md")}`,"warn");
@@ -423,6 +431,27 @@ summary::-webkit-details-marker{display:none}
       window.open(job.outputUrl,"_blank","noopener");
     }catch(error){notice(esc(error.message),"bad")}
   }
+  async function shareJob(){
+    if(!state.job?.outputUrl){notice("Noch keine Videodatei zum Teilen.","warn");return}
+    const url=state.job.outputUrl;
+    const title="DAR AL TAWḤĪD · Video-Beitrag";
+    const text=(state.job.statement&&state.job.statement.de)||"DAR Video-Beitrag";
+    try{
+      if(navigator.share){
+        await navigator.share({title,text,url});
+        notice("Teilen geöffnet. Feed/Push wurden nicht ausgelöst.","ok");
+        return;
+      }
+    }catch(error){
+      if(error&&error.name==="AbortError")return;
+    }
+    try{
+      await navigator.clipboard.writeText(url);
+      notice("MP4-Link kopiert. Kein Feed und kein Push.","ok");
+    }catch{
+      notice(`Link zum Teilen: ${esc(url)}`,"ok");
+    }
+  }
   async function loadProviderStatus(){
     try{
       const data=await api("/providers/status");
@@ -438,7 +467,7 @@ summary::-webkit-details-marker{display:none}
     if(!workerSecret()){notice("Bitte zuerst Admin Worker Secret unter „Worker-Verbindung“ speichern.","warn");return}
     setBusy(true);
     const settings=readSettings();
-    const payload={brief:el("brief").value.trim(),mode:settings.provider,voiceProfile:settings.voice,budget:{monthlyEur:settings.budget,maxPerVideoEur:settings.maxPerVideo},profile:"dar-standard-v1",format:"9:16",manualApproval:true,client:{viewport:viewportLabel(),userAgent:navigator.userAgent||""}};
+    const payload={brief:el("brief").value.trim(),mode:settings.provider,voiceProfile:settings.voice,budget:{monthlyEur:settings.budget,maxPerVideoEur:settings.maxPerVideo},profile:"dar-standard-v2",format:"9:16",manualApproval:true,composePreview:false,client:{viewport:viewportLabel(),userAgent:navigator.userAgent||""}};
     try{
       const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});
       saveJob(data.job||data);
@@ -507,6 +536,7 @@ summary::-webkit-details-marker{display:none}
   el("deleteBtn").addEventListener("click",deleteRemoteJob);
   el("previewBtn").addEventListener("click",()=>{const url=state.job?.outputUrl;if(!url){notice("Noch keine Videodatei.","warn");return}el("previewBox").classList.remove("hidden");el("previewVideo").src=url;el("previewVideo").play?.().catch(()=>{})});
   el("downloadBtn").addEventListener("click",downloadJob);
+  el("shareBtn").addEventListener("click",shareJob);
   el("reloadJobsBtn").addEventListener("click",loadJobList);
   let viewportTimer=0;
   function scheduleViewportUpdate(){clearTimeout(viewportTimer);viewportTimer=setTimeout(updateViewportProfile,80)}

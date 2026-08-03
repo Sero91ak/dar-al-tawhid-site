@@ -42,7 +42,7 @@ Wenn das Limit 1,20 € fest bleibt: Auto-Modus bevorzugt kürzere Clips / güns
 1. **Cloudflare** (bereits vorhanden) – Worker, Durable Object, R2  
 2. **fal.ai** – Konto + API Key  
 3. **ElevenLabs** – Konto + feste Voice-ID der DAR-Männerstimme  
-4. **Shotstack** (empfohlen) – Stage-Key für Compose mit Untertiteln/Logo  
+4. **Shotstack** – API-Key für Compose. **Stage** (`SHOTSTACK_HOST`) nur interne Vorschau. **Production** (`SHOTSTACK_PROD_HOST` = `https://api.shotstack.io/edit/v1`) für Endfassungen ohne Anbieter-Wasserzeichen. 
 
 Optional später: Runway, Adobe, direkte Veo/Kling-Konten (Adapter sind vorbereitet).
 
@@ -54,11 +54,13 @@ npx wrangler secret put FAL_KEY
 npx wrangler secret put ELEVENLABS_API_KEY
 npx wrangler secret put ELEVENLABS_VOICE_ID
 npx wrangler secret put SHOTSTACK_API_KEY
+# Vars in wrangler.toml: SHOTSTACK_HOST=.../edit/stage , SHOTSTACK_PROD_HOST=.../edit/v1
 npx wrangler secret put VIDEO_STUDIO_SIGNING_SECRET
 npx wrangler secret put VIDEO_STUDIO_TEST_TOKEN   # nur Autotest/Staging
 # optional:
 npx wrangler secret put RUNWAY_API_KEY
 npx wrangler secret put VIDEO_STUDIO_LOGO_URL
+npx wrangler secret put VIDEO_STUDIO_WATERMARK_URL
 ```
 
 ### Key-Prüfung (ohne Geheimnis preiszugeben)
@@ -76,6 +78,7 @@ Erwartet:
 - `probes.fal.ok: true` (fal-Keys haben typisch `uuid:hex`, Länge oft ≥ 69)
 - `probes.elevenlabs.ok: true`
 - `probes.shotstack.ok: true` und Host mit `/edit/stage`
+- Endfassung nutzt Production (`edit/v1`) – Stage nur bei `composePreview: true`
 
 Wenn `fal` oder `elevenlabs` `ok: false` mit HTTP 401 melden: Secret **neu** setzen (`wrangler secret put …`), ohne Anführungszeichen, ohne führendes `Key `, ohne Zeilenumbruch mitten im Key.
 

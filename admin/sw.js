@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v55-video-studio-download';
+const CACHE_VERSION = 'dar-admin-stats-v56-video-studio-brand';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',

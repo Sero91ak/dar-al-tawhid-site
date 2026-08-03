@@ -127,9 +127,10 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         mode: job.mode || "auto",
         voiceProfile: job.voiceProfile || "dar-male",
         budget: normalizeBudget(job.budget || {}),
-        profile: job.profile || "dar-standard-v1",
+        profile: job.profile || "dar-standard-v2",
         format: "9:16",
         manualApproval: true,
+        composePreview: job.composePreview === true,
         client: job.client || {}
       };
       const result = await createVideoStudioJob(env, input, helpers, ctx);

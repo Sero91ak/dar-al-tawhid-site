@@ -98,10 +98,11 @@ export async function synthesizeDarVoice(env, text) {
     body: JSON.stringify({
       text: script,
       model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
+      // Ruhig, würdevoll, nicht hektisch – exakt den vorgegebenen Text lesen
       voice_settings: {
-        stability: 0.55,
-        similarity_boost: 0.8,
-        style: 0.15,
+        stability: 0.72,
+        similarity_boost: 0.78,
+        style: 0.08,
         use_speaker_boost: true
       }
     })

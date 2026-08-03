@@ -51,8 +51,18 @@ function publicJob(job) {
         }
       : null,
     setup: job.setup || null,
+    composePreview: job.composePreview === true,
+    renderMeta: job.artifacts?.render
+      ? {
+          shotstackEnv: job.artifacts.render.shotstackEnv || null,
+          foreignWatermarkRisk: Boolean(job.artifacts.render.foreignWatermarkRisk),
+          brandingApplied: Boolean(job.artifacts.render.brandingApplied),
+          isPreview: Boolean(job.artifacts.render.isPreview)
+        }
+      : null,
     staging: true,
-    noVisitorPush: true
+    noVisitorPush: true,
+    noAutoFeedPublish: true
   };
 }
 
@@ -108,10 +118,11 @@ export async function createVideoStudioJob(env, input = {}, helpers = {}, ctx = 
     profile: String(input.profile || DAR_VIDEO_PROFILE.id),
     format: "9:16",
     manualApproval: input.manualApproval !== false,
+    composePreview: input.composePreview === true,
     client: input.client || {},
     message: setup.length
       ? `Einrichtung nötig: ${setup.join(" · ")}`
-      : "Auftrag in Warteschlange",
+      : "Auftrag in Warteschlange (Endfassung ohne Fremdwasserzeichen)",
     setup: setup.length ? { missing: setup } : null,
     costEur: 0,
     qualityChecks: emptyQualityChecks(),
@@ -352,17 +363,17 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       return publicJob(job);
     }
 
-    // 6) Captions prepared
+    // 6) Captions / Texthierarchie
     if (!(job.completedStages || []).includes("captions")) {
       job = await patchJob(env, jobId, {
         stage: "captions",
         completedStages: uniqueStages([...(job.completedStages || []), "captions"]),
-        message: "Untertitel und Quellenzeilen gesetzt"
+        message: "DAR-Texthierarchie und Social-Block gesetzt"
       });
       return publicJob(job);
     }
 
-    // 7) Render / compose (Shotstack Stage bevorzugt; Clips/Stimme über signierte R2-URLs)
+    // 7) Render / compose – Endfassung über Shotstack Production (kein Stage-Wasserzeichen)
     if (!job.artifacts?.render?.r2Key) {
       const clipUrls = [];
       for (const clip of job.artifacts?.clips || []) {
@@ -386,13 +397,21 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
         if (voiceSigned.ok && voiceSigned.url) voiceUrl = voiceSigned.url;
       }
 
+      const wantFinal = job.composePreview !== true;
       if (!job.artifacts?.render?.renderId) {
-        job = await patchJob(env, jobId, { stage: "render", message: "Shotstack Stage-Render gestartet" });
+        job = await patchJob(env, jobId, {
+          stage: "render",
+          message: wantFinal
+            ? "DAR-Endfassung wird gerendert (Shotstack Production, ohne Fremdwasserzeichen)"
+            : "Interne Stage-Vorschau wird gerendert"
+        });
         const compose = await composeFinalVideo(env, {
           clipUrls,
           voiceUrl: voiceUrl || clipUrls[0],
-          captionLines: job.storyboard.captionLines,
-          logoUrl: String(env.VIDEO_STUDIO_LOGO_URL || "").trim() || undefined
+          captionPlan: job.storyboard?.captionPlan,
+          captionLines: job.storyboard?.captionLines,
+          sceneDurationSec: 5,
+          final: wantFinal
         });
         if (!compose.ok) throw httpError(compose.reason || "Render fehlgeschlagen", compose.setupRequired ? 503 : 502);
         job = await patchJob(env, jobId, {
@@ -401,12 +420,15 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
             render: {
               provider: compose.provider,
               renderId: compose.renderId,
-              status: "running"
+              status: "running",
+              shotstackEnv: compose.shotstackEnv || null,
+              foreignWatermarkRisk: Boolean(compose.foreignWatermarkRisk),
+              brandingApplied: compose.provider === "shotstack"
             }
           },
-          message: compose.provider === "shotstack"
-            ? "Render läuft (Shotstack Stage)"
-            : "Render läuft (fal ffmpeg Fallback)"
+          message: compose.foreignWatermarkRisk
+            ? "Render läuft (Stage – nur interne Vorschau)"
+            : "Render läuft (Production / DAR-Branding)"
         });
         return publicJob(job);
       }
@@ -427,11 +449,23 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       await putVideoAsset(env, finalKey, renderState.bytes, renderState.mime || "video/mp4");
       const outputSigned = await createSignedAssetUrl(env, { jobId, key: finalKey, ttlSec: 7200 });
       const posterKey = `jobs/${jobId}/final/poster.jpg`;
-      // Poster optional – use first clip URL metadata placeholder
+      const prevRender = job.artifacts?.render || {};
+      const shotstackEnv =
+        renderState.shotstackEnv ||
+        prevRender.shotstackEnv ||
+        (job.composePreview === true ? "stage" : "v1");
+      const foreignWatermarkRisk = Boolean(
+        renderState.foreignWatermarkRisk ??
+        prevRender.foreignWatermarkRisk ??
+        shotstackEnv === "stage"
+      );
       job = await patchJob(env, jobId, {
         artifacts: {
           ...(job.artifacts || {}),
           render: {
+            ...prevRender,
+            provider: prevRender.provider || renderState.provider || "shotstack",
+            renderId: prevRender.renderId || null,
             r2Key: finalKey,
             posterKey,
             mime: renderState.mime || "video/mp4",
@@ -441,28 +475,48 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
             ok: true,
             audioAttached: Boolean(renderState.audioAttached),
             hasMusic: Boolean(renderState.hasMusic),
-            status: "completed"
+            status: "completed",
+            shotstackEnv,
+            foreignWatermarkRisk,
+            brandingApplied: Boolean(
+              renderState.brandingApplied ??
+              prevRender.brandingApplied ??
+              prevRender.provider === "shotstack"
+            ),
+            isPreview: shotstackEnv === "stage"
           }
         },
         outputUrl: outputSigned.url || null,
         posterUrl: (job.artifacts?.clips || [])[0]?.url || null,
         durationSeconds: (job.storyboard.scenes || []).reduce((n, s) => n + Number(s.durationSec || 0), 0),
         completedStages: uniqueStages([...(job.completedStages || []), "render"]),
-        message: "MP4 gespeichert"
+        message: foreignWatermarkRisk
+          ? "MP4-Vorschau gespeichert (Stage – nur intern)"
+          : "MP4 gespeichert (Production / DAR-Standard)"
       });
       return publicJob(job);
     }
 
-    // 8) Review
-    job = await patchJob(env, jobId, { stage: "review", message: "Qualitätsprüfung" });
+    // 8) Review – DAR-Standard vor Freigabe
+    job = await patchJob(env, jobId, { stage: "review", message: "Qualitätsprüfung (DAR-Standard)" });
     const fresh = await readJob(env, jobId);
     const quality = runQualityChecks({
       statement: fresh.statement,
       storyboard: fresh.storyboard,
       clips: fresh.artifacts?.clips || [],
-      voice: { ok: true, bytes: fresh.artifacts?.voice?.bytes || 0 },
+      voice: {
+        ok: true,
+        bytes: fresh.artifacts?.voice?.bytes || 0,
+        script: fresh.storyboard?.voiceScript || ""
+      },
       render: fresh.artifacts?.render,
-      providerMeta: { simulated: false }
+      captionPlan: fresh.storyboard?.captionPlan || null,
+      providerMeta: {
+        simulated: false,
+        brandingApplied: Boolean(fresh.artifacts?.render?.brandingApplied),
+        foreignWatermarkRisk: Boolean(fresh.artifacts?.render?.foreignWatermarkRisk),
+        shotstackEnv: fresh.artifacts?.render?.shotstackEnv || null
+      }
     });
     if (!quality.ok) {
       return publicJob(await patchJob(env, jobId, {
@@ -479,7 +533,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       stage: "review",
       completedStages: PIPELINE_STAGES.slice(),
       qualityChecks: quality.checks,
-      message: "Video fertig – nur Admin-Vorschau, keine Besucher-Veröffentlichung",
+      message: "Video fertig – Vorschau/Download/Teilen möglich. Feed und Push nur manuell, nie automatisch.",
       costEur: Number(fresh.costEur || fresh.estimateEur || 0)
     }));
   } catch (error) {
@@ -494,7 +548,8 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
 
 async function pollCompose(env, renderMeta) {
   if (renderMeta.provider === "shotstack") {
-    return pollShotstackRender(env, renderMeta.renderId);
+    const final = String(renderMeta.shotstackEnv || "") !== "stage";
+    return pollShotstackRender(env, renderMeta.renderId, { final });
   }
   return pollFalMerge(env, renderMeta.renderId);
 }

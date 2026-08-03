@@ -1,41 +1,32 @@
 # DAR KI-Video-Studio – Freigabebericht (Staging)
 
 **Datum:** 2026-08-03  
-**Branch:** `cursor/video-studio-provider-live-e34c` (PR #439) · Staging `#436`  
+**Branch:** `cursor/video-studio-dar-brand-standard-e34c`  
 **Kein Merge auf main · keine Besucher-Veröffentlichung · keine Pushs**
 
-## Autonomer Test – ERFOLG
+## Verbindlicher DAR-Standard (v2)
+
+Umgesetzt in Worker + Admin:
+
+1. **Kein Fremdwasserzeichen in der Endfassung** – Shotstack Stage nur interne Vorschau (`composePreview: true`). Standard-Render über **Production** (`SHOTSTACK_PROD_HOST` / `edit/v1`).
+2. **DAR-Branding** – dezentes Wasserzeichen (`watermark-my-logo-full.png` / Logo), Social-Block mit Emblemen (Telegram, Website, Instagram).
+3. **Bildbeitrags-Optik** – elegante Typografie, abschnittsweise Einblendungen (kein durchgehender Untertitelstreifen).
+4. **Texthierarchie** – optional Brand → Sprecher (`… رحمه الله sagte:`) → Aussage in 2–4 Blöcken → Quelle → CTA/Social.
+5. **Stimme** – exakter Vorlesetext, ruhigere ElevenLabs-Settings, keine Umformulierung.
+6. **QA-Gate** – u. a. `noForeignWatermark`, `brandingComplete`, `textHierarchyOk`, `voiceExact`, `safeAreasOk`.
+7. **Freigabeablauf** – erzeugen → Vorschau → Download → Teilen → intern freigeben. **Feed/Push nie automatisch.**
+
+## Früherer Autotest (technisch)
 
 | Feld | Wert |
 |---|---|
 | Job | `video_msd33g8n_d444e26b` |
-| Status | **completed** |
-| Provider | fal.ai Wan 2.5 Auto |
-| Dauer Clips | 15 s (3 × 5 s) |
-| **Ist-Kosten** | **0,79 €** |
-| Schätzung | 0,75 € |
-| Laufzeit Pipeline | ~345 s |
-| Shotstack | Stage only |
-| QA | alle Checks bestanden |
+| Status | completed (damals **Shotstack Stage**) |
+| Ist-Kosten | ~0,79 € |
+| Hinweis | Stage-Wasserzeichen möglich – **nicht** als Marken-Endfassung freigeben |
 
-Aussage: Imām Mālik — „Die letzten dieser Ummah werden nur durch das gerettet, wodurch die Ersten gerettet wurden.“
-
-Signierte Admin-Vorschau (befristet): siehe Autotest-Report / Admin KI-Video-Studio.
-
-## Kostenhinweis
-
-**fal.ai ist nicht kostenlos.** Bewegte Clips werden pay-per-use berechnet (~0,05 €/s bei 480p).  
-Shotstack Stage und Cloudflare R2 sind vergleichsweise vernachlässigbar; ElevenLabs TTS war in diesem Lauf ~0,04 € Anteil.
-
-Zielbudget ≤ 1,20 €/Video: **eingehalten (0,79 €).**
-
-## Probes
-
-- fal: OK  
-- ElevenLabs TTS: OK  
-- Shotstack Stage: OK  
-- R2 + Signing + Store: OK  
+Neue Endfassungen müssen `shotstackEnv: v1` und QA `noForeignWatermark: true` haben.
 
 ## Freigabe
 
-Staging-Stand und Testvideo sind prüfbereit. **Kein main-Merge / kein Live-Push ohne ausdrückliche Freigabe.**
+Staging/Test prüfen. **Kein main-Merge / kein Live-Push / kein Besucher-Feed ohne ausdrückliche Freigabe.**
