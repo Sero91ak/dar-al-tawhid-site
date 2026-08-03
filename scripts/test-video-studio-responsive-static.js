@@ -13,7 +13,10 @@ const required = [
   "object-fit:contain",
   "KI-Video-Studio",
   "Textbeitrag einfügen",
-  "Szenenbild erzeugen",
+  "Bild hochladen",
+  "Aus Bibliothek",
+  "Optional: KI-Szenenbild",
+  "Optional erzeugen",
   "Video-Beitrag erstellen",
   "Server-Aufträge",
   "api/admin/video-studio",
@@ -25,5 +28,6 @@ const required = [
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);
 }
+assert.ok(html.indexOf("Bild hochladen") < html.indexOf("Optional: KI-Szenenbild"), "Upload must appear before optional KI generation");
 assert.ok(!/FAL_KEY|ELEVENLABS_API_KEY|SHOTSTACK_API_KEY|sk-[a-zA-Z0-9]{10,}/.test(html), "no provider secrets in HTML");
 console.log("video-studio responsive static checks ok");

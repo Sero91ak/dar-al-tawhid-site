@@ -1,28 +1,38 @@
 # DAR KI-Video-Studio – kompakter Autonomie-Stand
 
 **Branch:** `cursor/video-studio-compact-autonomous-e34c`  
-**Basis:** Endauftrag (zweistufig: Text → Szenenbild → 15 s Video)  
-**Staging zuerst · kein main-Merge · kein Auto-Feed/Push**
+**Staging zuerst · kein main-Merge · kein Auto-Feed/Push · keine Live-Veröffentlichung**
+
+## Verbindlicher Standardablauf
+
+1. Fertigen Textbeitrag manuell einfügen und bearbeiten  
+2. **Externes 4K-/9:16-Ausgangsbild** hochladen oder aus der Medienbibliothek wählen  
+3. 15 Sekunden echte Bewegung (3×5 s image-to-video)  
+4. DAR-Männerstimme automatisch  
+5. Text elegant synchron einblenden  
+6. Quelle, Logo, Wasserzeichen, CTA, Social  
+7. MP4-Vorschau  
+8. Download / Teilen  
+9. Feed und Push nur getrennt und manuell  
+
+### Ausgangsbild (extern, z. B. ChatGPT)
+
+Bereits vorausgesetzt: 4K, 9:16, textfrei, logofrei, fotorealistisch, themenbezogen, ohne klar erkennbare Gesichter, ohne Propheten/Ṣaḥābah/Salaf-Darstellung.
+
+**Interne KI-Bildgenerierung bleibt optional** und ist in der UI unter „Optional: KI-Szenenbild“ versteckt.  
+**Upload / Bibliothek sind der zentrale Standardweg.**
 
 ## Oberfläche
 
-Kompakte 4-Schritte-Produktion in `admin/video-studio.html` / `test/admin-video-studio.html`:
-
-1. Text einfügen (+ optionale Textaufteilung)
-2. Szenenbild erzeugen / hochladen / Bibliothek
-3. Kosten bestätigen → Video erzeugen
-4. Vorschau · Speichern · Teilen · optional Feed/Push
-
-Server-Aufträge standardmäßig eingeklappt.
+Kompakte 4-Schritte-Produktion in `admin/video-studio.html` / `test/admin-video-studio.html`.
 
 ## Backend
 
-- `POST /parse-text`, `/estimate`, `/scene-image`, `/scene-image/upload`
-- Jobs brauchen `sceneImageUrl` + `costConfirmed:true`
-- 3 × 5 s **image-to-video** (`fal-ai/wan-25-preview/image-to-video`)
-- Compose weiter Production ohne Fremdwasserzeichen
-- Feed/Push nur manuell nach Freigabe (Staging: kein Besucher-Push)
+- `POST /parse-text`, `/estimate`, `/scene-image/upload` (Standard)  
+- `POST /scene-image` nur optional  
+- Jobs: `sceneImageUrl` + `costConfirmed:true`  
+- fal Wan image-to-video · Shotstack Production ohne Fremdwasserzeichen  
 
-## Abnahme
+## Freigabe
 
-Neuen Text + Szenenbild in Staging prüfen, dann Testvideo manuell abnehmen.
+Vollständig in Staging prüfen. **Nicht auf main mergen, nicht live veröffentlichen.**

@@ -104,7 +104,7 @@ details.box summary::-webkit-details-marker{display:none}
 
   <nav class="steps" aria-label="Produktionsschritte">
     <div class="step active" data-step="text"><b>1 Text</b>einfügen</div>
-    <div class="step" data-step="image"><b>2 Bild</b>Szene</div>
+    <div class="step" data-step="image"><b>2 Bild</b>Upload</div>
     <div class="step" data-step="video"><b>3 Video</b>erzeugen</div>
     <div class="step" data-step="result"><b>4 Ergebnis</b>Export</div>
   </nav>
@@ -129,27 +129,35 @@ details.box summary::-webkit-details-marker{display:none}
         <div><label class="label" for="fTopic">Thema</label><input id="fTopic" placeholder="Wissen / Dhikr / Sunnah …"></div>
       </div>
     </details>
-    <button class="btn primary" type="button" id="toImageBtn" style="width:100%;margin-top:10px">Weiter zum Szenenbild</button>
+    <button class="btn primary" type="button" id="toImageBtn" style="width:100%;margin-top:10px">Weiter zum Bild-Upload</button>
   </section>
 
   <section class="panel hidden" id="panelImage">
     <div class="row" style="justify-content:space-between;margin-bottom:8px">
-      <strong style="font-family:var(--serif);color:var(--gold)">Szenenbild</strong>
-      <span class="meta">9:16 · textfrei · logofrei</span>
+      <strong style="font-family:var(--serif);color:var(--gold)">Ausgangsbild</strong>
+      <span class="meta">4K · 9:16 · textfrei · Standard: Upload</span>
     </div>
+    <p class="meta" style="margin:0 0 8px;line-height:1.45">Standardweg: extern erzeugtes Video-Bild (z. B. ChatGPT) hochladen oder aus der Bibliothek wählen. Interne KI-Bildgenerierung ist nur optional.</p>
     <div class="actions">
-      <button class="btn primary" type="button" id="genImageBtn">Szenenbild erzeugen</button>
-      <button class="btn" type="button" id="uploadImageBtn">Bild hochladen</button>
-      <button class="btn" type="button" id="libraryBtn">Aus Bibliothek</button>
-      <input id="fileInput" type="file" accept="image/*" class="hidden">
+      <button class="btn primary" type="button" id="uploadImageBtn">Bild hochladen</button>
+      <button class="btn primary" type="button" id="libraryBtn">Aus Bibliothek</button>
+      <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" class="hidden">
     </div>
-    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Szenenbild" class="hidden"></div>
+    <details class="box" id="optionalGenBox">
+      <summary><span>Optional: KI-Szenenbild</span><span>▾</span></summary>
+      <div class="box-body">
+        <p class="meta" style="margin:0;line-height:1.4">Nur falls kein externes 4K-Bild vorliegt. Erzeugt ein textfreies Themenbild – nicht der Standardweg.</p>
+        <button class="btn" type="button" id="genImageBtn" style="width:100%">Optional erzeugen</button>
+      </div>
+    </details>
+    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Ausgangsbild" class="hidden"></div>
     <div class="actions">
       <button class="btn primary" type="button" id="acceptImageBtn" disabled>Übernehmen</button>
-      <button class="btn" type="button" id="regenImageBtn" disabled>Neu erzeugen</button>
+      <button class="btn" type="button" id="replaceImageBtn" disabled>Ersetzen</button>
     </div>
+    <div id="libraryPicker" class="hidden" style="margin-top:8px;display:grid;gap:6px"></div>
     <button class="btn" type="button" id="backTextBtn" style="width:100%;margin-top:8px">← Text</button>
-    <div class="notice" id="imageNotice">Noch kein Bild gewählt.</div>
+    <div class="notice" id="imageNotice">Bitte 4K-/9:16-Ausgangsbild hochladen oder aus der Bibliothek wählen.</div>
   </section>
 
   <section class="panel hidden" id="panelVideo">
@@ -212,7 +220,7 @@ details.box summary::-webkit-details-marker{display:none}
   <details class="box hidden" id="helpBox">
     <summary><span>Kurzhilfe</span><span>▾</span></summary>
     <div class="box-body meta">
-      Text einfügen → Szenenbild erzeugen/wählen → Kosten bestätigen → Video erstellen → Vorschau → speichern/teilen → optional Feed/Push.
+      Text einfügen → externes 4K-Bild hochladen/Bibliothek → 15 s Bewegung → Stimme & DAR-Text → Vorschau → speichern/teilen → optional Feed/Push.
       Keine Musik, keine Fremdwasserzeichen, Gesichter verborgen.
     </div>
   </details>
@@ -305,8 +313,8 @@ details.box summary::-webkit-details-marker{display:none}
   function showScene(scene){
     state.scene=scene;
     const img=el("scenePreview");
-    if(scene?.url){img.src=scene.url;img.classList.remove("hidden");el("acceptImageBtn").disabled=false;el("regenImageBtn").disabled=false;el("imageNotice").textContent="Szenenbild bereit – Übernehmen tippen."}
-    else{img.classList.add("hidden");el("acceptImageBtn").disabled=true}
+    if(scene?.url){img.src=scene.url;img.classList.remove("hidden");el("acceptImageBtn").disabled=false;el("replaceImageBtn").disabled=false;el("imageNotice").className="notice ok";el("imageNotice").textContent="Ausgangsbild bereit – Übernehmen tippen."}
+    else{img.classList.add("hidden");el("acceptImageBtn").disabled=true;el("replaceImageBtn").disabled=true}
     saveDraft();
   }
   function libSave(scene){
@@ -316,9 +324,45 @@ details.box summary::-webkit-details-marker{display:none}
       localStorage.setItem(LIB_KEY,JSON.stringify(list.slice(0,24)));
     }catch{}
   }
+  /** 4K-Uploads für Worker/fal auf max. 2160×3840 JPEG normalisieren (Seitenverhältnis bleibt). */
+  function prepareUploadDataUrl(file){
+    return new Promise((resolve,reject)=>{
+      const url=URL.createObjectURL(file);
+      const img=new Image();
+      img.onload=()=>{
+        try{
+          const maxH=3840,maxW=2160;
+          let w=img.naturalWidth,h=img.naturalHeight;
+          const scale=Math.min(1,maxW/w,maxH/h);
+          w=Math.round(w*scale);h=Math.round(h*scale);
+          const canvas=document.createElement("canvas");
+          canvas.width=w;canvas.height=h;
+          const ctx=canvas.getContext("2d");
+          ctx.drawImage(img,0,0,w,h);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL("image/jpeg",0.9));
+        }catch(e){URL.revokeObjectURL(url);reject(e)}
+      };
+      img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error("Bild konnte nicht gelesen werden"))};
+      img.src=url;
+    });
+  }
+  function renderLibraryPicker(){
+    const box=el("libraryPicker");
+    let list=[];
+    try{list=JSON.parse(localStorage.getItem(LIB_KEY)||"[]")}catch{}
+    if(!list.length){box.classList.add("hidden");box.innerHTML="";alert("Bibliothek leer – bitte zuerst ein Bild hochladen.");return}
+    box.classList.remove("hidden");
+    box.style.display="grid";
+    box.innerHTML=list.slice(0,12).map((item,i)=>`<button type="button" class="btn" data-lib="${i}" style="text-align:left;display:grid;grid-template-columns:48px 1fr;gap:8px;align-items:center"><img src="${esc(item.url||"")}" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px;background:#111"><span><b>Bild ${i+1}</b><br><small class="meta">${esc(item.id||"Bibliothek")}</small></span></button>`).join("");
+    box.querySelectorAll("[data-lib]").forEach(btn=>btn.addEventListener("click",()=>{
+      const item=list[Number(btn.getAttribute("data-lib"))];
+      if(item){showScene(item);box.classList.add("hidden");el("imageNotice").textContent="Bibliotheksbild gewählt.";}
+    }));
+  }
 
   el("textInput").addEventListener("input",()=>{updateChars();clearTimeout(state._t);state._t=setTimeout(()=>{parseText().catch(()=>{})},450)});
-  el("pasteBtn").addEventListener("click",async()=>{try{el("textInput").value=await navigator.clipboard.readText();updateChars();await parseText()}catch{el("imageNotice")}});
+  el("pasteBtn").addEventListener("click",async()=>{try{el("textInput").value=await navigator.clipboard.readText();updateChars();await parseText()}catch{}});
   el("clearTextBtn").addEventListener("click",()=>{el("textInput").value="";el("fSpeaker").value="";el("fDe").value="";el("fSource").value="";el("fTopic").value="";renderStruct(null);updateChars()});
   el("toImageBtn").addEventListener("click",async()=>{
     try{if(!el("textInput").value.trim()){alert("Bitte Textbeitrag einfügen.");return}await parseText();showStep("image");setStatus("Bild wählen")}catch(e){alert(e.message)}
@@ -327,38 +371,29 @@ details.box summary::-webkit-details-marker{display:none}
   el("backImageBtn").addEventListener("click",()=>showStep("image"));
 
   el("genImageBtn").addEventListener("click",async()=>{
-    el("genImageBtn").disabled=true;el("imageNotice").textContent="Szenenbild wird erzeugt…";
+    el("genImageBtn").disabled=true;el("imageNotice").textContent="Optionales KI-Bild wird erzeugt…";
     try{
       await parseText();
       const data=await api("/scene-image",{method:"POST",body:JSON.stringify({statement:currentStatement()})});
       showScene(data.sceneImage);libSave(data.sceneImage);
-      el("imageNotice").className="notice ok";el("imageNotice").textContent="Bild erzeugt (textfrei).";
+      el("imageNotice").className="notice ok";el("imageNotice").textContent="Optionales KI-Bild erzeugt. Standard bleibt Upload.";
     }catch(e){el("imageNotice").className="notice bad";el("imageNotice").textContent=e.message}
     finally{el("genImageBtn").disabled=false}
   });
-  el("regenImageBtn").addEventListener("click",()=>el("genImageBtn").click());
+  el("replaceImageBtn").addEventListener("click",()=>el("fileInput").click());
   el("uploadImageBtn").addEventListener("click",()=>el("fileInput").click());
   el("fileInput").addEventListener("change",async()=>{
     const file=el("fileInput").files?.[0];if(!file)return;
-    const reader=new FileReader();
-    reader.onload=async()=>{
-      try{
-        const data=await api("/scene-image/upload",{method:"POST",body:JSON.stringify({dataUrl:reader.result})});
-        showScene(data.sceneImage);libSave(data.sceneImage);
-        el("imageNotice").className="notice ok";el("imageNotice").textContent="Bild hochgeladen.";
-      }catch(e){el("imageNotice").className="notice bad";el("imageNotice").textContent=e.message}
-    };
-    reader.readAsDataURL(file);
-  });
-  el("libraryBtn").addEventListener("click",()=>{
+    el("imageNotice").textContent="Bild wird vorbereitet und hochgeladen…";
     try{
-      const list=JSON.parse(localStorage.getItem(LIB_KEY)||"[]");
-      if(!list.length){alert("Bibliothek leer – zuerst erzeugen oder hochladen.");return}
-      const pick=list[0];
-      showScene(pick);
-      el("imageNotice").textContent="Letztes Bibliotheksbild geladen.";
-    }catch{alert("Bibliothek nicht lesbar")}
+      const dataUrl=await prepareUploadDataUrl(file);
+      const data=await api("/scene-image/upload",{method:"POST",body:JSON.stringify({dataUrl,source:"manual-4k",originalName:file.name||""})});
+      showScene(data.sceneImage);libSave(data.sceneImage);
+      el("imageNotice").className="notice ok";el("imageNotice").textContent="4K-Ausgangsbild übernommen (Upload).";
+    }catch(e){el("imageNotice").className="notice bad";el("imageNotice").textContent=e.message}
+    finally{el("fileInput").value=""}
   });
+  el("libraryBtn").addEventListener("click",renderLibraryPicker);
   el("acceptImageBtn").addEventListener("click",async()=>{
     if(!state.scene?.url){alert("Kein Bild");return}
     try{await parseText()}catch{}

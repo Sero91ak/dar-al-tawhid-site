@@ -130,8 +130,16 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     const dataUrl = String(body.dataUrl || "").trim();
     const match = dataUrl.match(/^data:(image\/(?:png|jpeg|jpg|webp));base64,(.+)$/i);
     if (!match) return json({ ok: false, error: "Ungültiges Bild (dataUrl erwartet)" }, cors, 422);
-    const mime = match[1].toLowerCase().replace("jpg", "jpeg");
-    const bin = Uint8Array.from(atob(match[2]), (c) => c.charCodeAt(0));
+    const mime = match[1].toLowerCase().replace("image/jpg", "image/jpeg");
+    let bin;
+    try {
+      bin = Uint8Array.from(atob(match[2]), (c) => c.charCodeAt(0));
+    } catch {
+      return json({ ok: false, error: "Bild-Base64 ungültig" }, cors, 422);
+    }
+    if (bin.byteLength > 12 * 1024 * 1024) {
+      return json({ ok: false, error: "Bild zu groß (max. 12 MB nach Vorbereitung)" }, cors, 413);
+    }
     const sceneId = `upload_${Date.now().toString(36)}`;
     const ext = mime.includes("png") ? "png" : mime.includes("webp") ? "webp" : "jpg";
     const key = `library/scenes/${sceneId}.${ext}`;
@@ -139,7 +147,14 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     const signed = await createSignedAssetUrl(env, { jobId: "library", key, ttlSec: 24 * 3600 });
     return json({
       ok: true,
-      sceneImage: { id: sceneId, url: signed.url || null, r2Key: key, uploaded: true }
+      sceneImage: {
+        id: sceneId,
+        url: signed.url || null,
+        r2Key: key,
+        uploaded: true,
+        source: String(body.source || "manual-upload"),
+        originalName: String(body.originalName || "").slice(0, 120)
+      }
     }, cors);
   }
 
