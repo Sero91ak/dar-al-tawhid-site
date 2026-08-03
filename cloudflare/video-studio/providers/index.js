@@ -1,11 +1,15 @@
 import { BaseVideoProvider, falKey, falQueue, falStatus, falResult, sceneToFalPrompt } from "./base.js";
 
-/** Günstigster geeigneter Default über fal.ai – Wan/Seedance-ähnlich, 9:16, echte Bewegung */
+/**
+ * Günstigster geeigneter Default über fal.ai:
+ * Wan 2.5 @ 480p · 9:16 · echte Bewegung (~0,05 €/s)
+ */
 export class FalAutoProvider extends BaseVideoProvider {
   constructor() {
-    super("fal-auto", "fal.ai · Auto (günstigster geeigneter Weg)");
-    this.modelPath = "fal-ai/minimax/video-01-live";
+    super("fal-auto", "fal.ai · Wan 2.5 Auto");
+    this.modelPath = "fal-ai/wan-25-preview/text-to-video";
     this.costPerSec = 0.05;
+    this.resolution = "480p";
   }
 
   isConfigured(env) {
@@ -19,10 +23,13 @@ export class FalAutoProvider extends BaseVideoProvider {
 
   async createClip(env, { scene, imageUrl }) {
     const prompt = sceneToFalPrompt(scene);
+    const rawDuration = Number(scene?.durationSec || 5);
+    const duration = rawDuration >= 8 ? 10 : 5;
     const input = {
       prompt,
-      prompt_optimizer: true,
-      aspect_ratio: "9:16"
+      aspect_ratio: "9:16",
+      resolution: this.resolution,
+      duration: String(duration)
     };
     if (imageUrl) input.image_url = imageUrl;
     const queued = await falQueue(env, this.modelPath, input, { preferAsync: true });
@@ -30,7 +37,8 @@ export class FalAutoProvider extends BaseVideoProvider {
       providerJobId: queued.request_id || queued.requestId || "",
       status: queued.status || "IN_QUEUE",
       modelPath: this.modelPath,
-      estimatedCostEur: Number(((Number(scene?.durationSec || 5)) * this.costPerSec).toFixed(4))
+      durationSec: duration,
+      estimatedCostEur: Number((duration * this.costPerSec).toFixed(4))
     };
   }
 
@@ -38,7 +46,9 @@ export class FalAutoProvider extends BaseVideoProvider {
     const status = await falStatus(env, modelPath, providerJobId);
     const state = String(status.status || "").toUpperCase();
     if (state === "COMPLETED" || state === "OK") return { status: "completed", raw: status };
-    if (state === "FAILED" || state === "ERROR") return { status: "failed", reason: status.error || "fal failed", raw: status };
+    if (state === "FAILED" || state === "ERROR") {
+      return { status: "failed", reason: status.error || status.detail || "fal failed", raw: status };
+    }
     return { status: "running", raw: status };
   }
 
@@ -65,6 +75,7 @@ export class KlingProvider extends FalAutoProvider {
     this.label = "Kling (via fal.ai)";
     this.modelPath = "fal-ai/kling-video/v2.1/standard/text-to-video";
     this.costPerSec = 0.07;
+    this.resolution = "720p";
   }
 }
 
@@ -73,7 +84,7 @@ export class LumaProvider extends FalAutoProvider {
     super();
     this.id = "luma";
     this.label = "Luma (via fal.ai)";
-    this.modelPath = "fal-ai/luma-dream-machine";
+    this.modelPath = "fal-ai/luma-dream-machine/ray-2";
     this.costPerSec = 0.12;
   }
 }
@@ -198,7 +209,7 @@ export async function chooseProvider(env, { mode = "auto", scenes = [], maxPerVi
   }
 
   if (preferred !== "auto") {
-    const exact = configured.find((p) => p.id === preferred);
+    const exact = configured.find((p) => p.id === preferred) || configured.find((p) => preferred === "fal" && p.id === "fal-auto");
     if (!exact) {
       return {
         ok: false,

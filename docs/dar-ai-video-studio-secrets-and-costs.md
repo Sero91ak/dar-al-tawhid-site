@@ -55,6 +55,7 @@ npx wrangler secret put ELEVENLABS_API_KEY
 npx wrangler secret put ELEVENLABS_VOICE_ID
 npx wrangler secret put SHOTSTACK_API_KEY
 npx wrangler secret put VIDEO_STUDIO_SIGNING_SECRET
+npx wrangler secret put VIDEO_STUDIO_TEST_TOKEN   # nur Autotest/Staging
 # optional:
 npx wrangler secret put RUNWAY_API_KEY
 npx wrangler secret put VIDEO_STUDIO_LOGO_URL

@@ -7,11 +7,11 @@ import {
   readMonthSpend,
   saveJob
 } from "./job-store.js";
-import { createVideoStudioJob, processVideoStudioJob, publicJob } from "./pipeline.js";
+import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop } from "./pipeline.js";
 import { providersStatus } from "./providers/index.js";
 import { getVideoAsset, verifySignedAssetRequest } from "./storage.js";
 import { isVoiceConfigured } from "./voice.js";
-import { isComposerConfigured } from "./compose.js";
+import { isComposerConfigured, shotstackEnvironment } from "./compose.js";
 
 function json(data, cors, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -27,6 +27,14 @@ function matchVideoStudioRoute(pathname) {
   return rest;
 }
 
+function assertVideoStudioAuthorized(request, env, assertAuthorized) {
+  const headerSecret = request.headers.get("X-Admin-Secret") || "";
+  const bearer = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  const testToken = String(env.VIDEO_STUDIO_TEST_TOKEN || "").trim();
+  if (testToken && (headerSecret === testToken || bearer === testToken)) return;
+  assertAuthorized(request, env);
+}
+
 export async function handleVideoStudioRequest(request, env, ctx, { cors, assertAuthorized, helpers }) {
   const url = new URL(request.url);
   const rest = matchVideoStudioRoute(url.pathname);
@@ -37,17 +45,21 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     return serveSignedAsset(request, env, url, rest, cors);
   }
 
-  assertAuthorized(request, env);
+  assertVideoStudioAuthorized(request, env, assertAuthorized);
 
   if (request.method === "GET" && rest === "/providers/status") {
     const spentEur = await readMonthSpend(env);
+    const shotstack = shotstackEnvironment(env);
     return json({
       ok: true,
       providers: providersStatus(env),
       voiceConfigured: isVoiceConfigured(env),
       composerConfigured: isComposerConfigured(env),
+      shotstackHost: shotstack.host,
+      shotstackStageOnly: shotstack.isStage,
       r2Configured: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
       storeConfigured: Boolean(env.VIDEO_STUDIO_STORE),
+      signingConfigured: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || env.ADMIN_PUBLISH_SECRET || "").trim()),
       monthSpendEur: spentEur
     }, cors);
   }
@@ -136,10 +148,13 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
 
   if (request.method === "POST" && rest.startsWith("/jobs/") && rest.endsWith("/process")) {
     const jobId = decodeURIComponent(rest.slice("/jobs/".length, -"/process".length));
-    if (ctx) ctx.waitUntil(processVideoStudioJob(env, jobId, helpers));
-    else await processVideoStudioJob(env, jobId, helpers);
+    // Ein Pipeline-Tick synchron (Client-Polling / Autotest), Rest läuft im Hintergrund weiter
+    const progressed = await processVideoStudioJob(env, jobId, helpers);
+    if (ctx && ["queued", "running"].includes(progressed?.status)) {
+      ctx.waitUntil(runVideoStudioPipelineLoop(env, jobId, helpers, { maxTicks: 20 }).catch(() => {}));
+    }
     const job = await readJob(env, jobId);
-    return json({ ok: true, job: publicJob(job) }, cors);
+    return json({ ok: true, job: publicJob(job || progressed) }, cors);
   }
 
   return json({ ok: false, error: "Video-Studio Route nicht gefunden" }, cors, 404);
@@ -167,7 +182,7 @@ export async function resumeStuckVideoStudioJobs(env, helpers = {}) {
   const results = [];
   for (const job of stuck.slice(0, 3)) {
     try {
-      results.push(await processVideoStudioJob(env, job.id, helpers));
+      results.push(await runVideoStudioPipelineLoop(env, job.id, helpers, { maxTicks: 12, delayMs: 2000 }));
     } catch (error) {
       results.push({ id: job.id, status: "failed", message: error.message || String(error) });
     }
