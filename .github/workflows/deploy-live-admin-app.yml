@@ -50,9 +50,10 @@ jobs:
           html="$(curl -fsSL "https://dar-al-tawhid.de/admin/")"
           echo "$html" | grep -q "Veröffentlichen & Live-Push" || (echo "::error::Admin UI not live yet" && exit 1)
           echo "$html" | grep -q "KI-Video-Studio" || (echo "::error::KI-Video-Studio menu missing" && exit 1)
-          echo "$html" | grep -q "dar-admin-stats-v55-video-studio-download" || (echo "::error::Admin SW version mismatch" && exit 1)
+          echo "$html" | grep -q "dar-admin-stats-v61-video-studio-compose-fallback" || (echo "::error::Admin SW version mismatch" && exit 1)
           studio="$(curl -fsSL "https://dar-al-tawhid.de/admin/video-studio")"
           echo "$studio" | grep -q "VIDEO-BEITRAG AUTONOM ERSTELLEN" || (echo "::error::Video studio page not live" && exit 1)
           echo "$studio" | grep -q "Aufträge auf dem Server" || (echo "::error::Job list missing" && exit 1)
           echo "$studio" | grep -q "MP4 laden" || (echo "::error::Download button missing" && exit 1)
-          echo "Live Admin v55 + KI-Video-Studio Download/Jobliste verified."
+          echo "$studio" | grep -q "resumeJobBtn" || (echo "::error::Resume button missing" && exit 1)
+          echo "Live Admin v61 + KI-Video-Studio Compose-Fallback verified."

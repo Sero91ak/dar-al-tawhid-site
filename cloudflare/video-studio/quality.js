@@ -125,13 +125,19 @@ export function runQualityChecks({
     "historicallyPlausible",
     "motionSecondsOk"
   ];
-  const brandingGate = !(render?.provider === "fal-ffmpeg" && !render?.brandingApplied);
-  const ok = required.every((key) => checks[key] === true) && !providerMeta?.simulated && brandingGate;
+  // fal-ffmpeg-Fallback: Admin-Download ohne Fremdwasserzeichen erlauben.
+  // Freigabe/Feed bleibt gesperrt, solange brandingApplied fehlt (siehe approve).
+  const falFallback = render?.provider === "fal-ffmpeg" && !render?.brandingApplied;
+  const requiredNow = falFallback
+    ? required.filter((key) => !["brandingComplete", "captionsSafe", "textHierarchyOk", "safeAreasOk"].includes(key))
+    : required;
+  const ok = requiredNow.every((key) => checks[key] === true) && !providerMeta?.simulated;
 
   return {
     ok,
     checks,
     reasons,
-    reviewedAt: new Date().toISOString()
+    reviewedAt: new Date().toISOString(),
+    falComposeFallback: falFallback
   };
 }

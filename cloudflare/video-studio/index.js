@@ -252,6 +252,12 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
           error: "Stage-/Vorschau-Render mit Fremdwasserzeichen-Risiko – bitte Production-Endfassung erzeugen"
         }, cors, 409);
       }
+      if (job.artifacts?.render?.provider === "fal-ffmpeg" && !job.artifacts?.render?.brandingApplied) {
+        return json({
+          ok: false,
+          error: "fal-ffmpeg-Merge ohne DAR-Texte/Wasserzeichen – Freigabe erst nach Shotstack Production-Endfassung"
+        }, cors, 409);
+      }
       const saved = await saveJob(env, {
         ...job,
         approval: {

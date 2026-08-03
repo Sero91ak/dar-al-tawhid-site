@@ -161,4 +161,34 @@ assert.equal(qualityOk.checks.brandingComplete, true);
 assert.equal(qualityOk.checks.textHierarchyOk, true);
 assert.equal(qualityOk.checks.voiceExact, true);
 
+const qualityFal = runQualityChecks({
+  statement: selected.statement,
+  storyboard: board,
+  clips: [
+    { r2Key: "a", durationSec: 5 },
+    { r2Key: "b", durationSec: 5 },
+    { r2Key: "c", durationSec: 5 }
+  ],
+  voice: { ok: true, bytes: 5000 },
+  render: {
+    ok: true,
+    width: 1080,
+    height: 1920,
+    fps: 30,
+    mime: "video/mp4",
+    audioAttached: true,
+    hasMusic: false,
+    brandingApplied: false,
+    shotstackEnv: null,
+    foreignWatermarkRisk: false,
+    provider: "fal-ffmpeg",
+    composeFallback: "fal-ffmpeg"
+  },
+  captionPlan: plan,
+  providerMeta: { simulated: false }
+});
+assert.equal(qualityFal.ok, true, qualityFal.reasons.join(" · "));
+assert.equal(qualityFal.falComposeFallback, true);
+assert.equal(qualityFal.checks.noForeignWatermark, true);
+
 console.log("video-studio unit checks ok");

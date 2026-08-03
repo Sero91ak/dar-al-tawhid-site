@@ -509,12 +509,16 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
               status: "running",
               shotstackEnv: compose.shotstackEnv || null,
               foreignWatermarkRisk: Boolean(compose.foreignWatermarkRisk),
-              brandingApplied: compose.provider === "shotstack"
+              brandingApplied: Boolean(compose.brandingApplied),
+              composeFallback: compose.composeFallback || null,
+              shotstackBlocked: compose.shotstackBlocked || null
             }
           },
-          message: compose.foreignWatermarkRisk
-            ? "Render läuft (Stage – nur interne Vorschau)"
-            : "Render läuft (Production / DAR-Branding)"
+          message: compose.composeFallback
+            ? "Render läuft (fal-ffmpeg – ohne Shotstack-Wasserzeichen; DAR-Texte später mit Production)"
+            : compose.foreignWatermarkRisk
+              ? "Render läuft (Stage – nur interne Vorschau)"
+              : "Render läuft (Production / DAR-Branding)"
         });
         return publicJob(job);
       }
@@ -539,7 +543,11 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       const shotstackEnv =
         renderState.shotstackEnv ||
         prevRender.shotstackEnv ||
-        (job.composePreview === true ? "stage" : "v1");
+        (prevRender.provider === "fal-ffmpeg" || renderState.provider === "fal-ffmpeg"
+          ? null
+          : job.composePreview === true
+            ? "stage"
+            : "v1");
       const foreignWatermarkRisk = Boolean(
         renderState.foreignWatermarkRisk ??
         prevRender.foreignWatermarkRisk ??
@@ -567,9 +575,10 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
             brandingApplied: Boolean(
               renderState.brandingApplied ??
               prevRender.brandingApplied ??
-              prevRender.provider === "shotstack"
+              (prevRender.provider === "shotstack" && shotstackEnv !== "stage")
             ),
-            isPreview: shotstackEnv === "stage"
+            isPreview: shotstackEnv === "stage",
+            composeFallback: prevRender.composeFallback || renderState.composeFallback || null
           }
         },
         outputUrl: outputSigned.url || null,
@@ -578,7 +587,9 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
         completedStages: uniqueStages([...(job.completedStages || []), "render"]),
         message: foreignWatermarkRisk
           ? "MP4-Vorschau gespeichert (Stage – nur intern)"
-          : "MP4 gespeichert (Production / DAR-Standard)"
+          : prevRender.composeFallback || renderState.provider === "fal-ffmpeg"
+            ? "MP4 gespeichert (fal-ffmpeg ohne Fremdwasserzeichen – DAR-Endfassung braucht Shotstack Production)"
+            : "MP4 gespeichert (Production / DAR-Standard)"
       });
       return publicJob(job);
     }

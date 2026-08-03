@@ -33,27 +33,36 @@ export async function probeShotstackAuth(env) {
     return { ok: false, present: false, host: stage.host, isStage: true, reason: "SHOTSTACK_API_KEY fehlt" };
   }
   try {
-    const res = await fetch(`${stage.host}/templates`, {
-      headers: { "x-api-key": key, Accept: "application/json" }
-    });
-    if (res.status === 401 || res.status === 403) {
+    const [stageRes, prodRes] = await Promise.all([
+      fetch(`${stage.host}/templates`, { headers: { "x-api-key": key, Accept: "application/json" } }),
+      fetch(`${prod.host}/templates`, { headers: { "x-api-key": key, Accept: "application/json" } })
+    ]);
+    if (stageRes.status === 401 || stageRes.status === 403) {
       return {
         ok: false,
         present: true,
         host: stage.host,
         isStage: true,
         prodHost: prod.host,
-        httpStatus: res.status,
-        reason: "Shotstack-Key ungültig"
+        httpStatus: stageRes.status,
+        prodHttpStatus: prodRes.status,
+        prodOk: prodRes.status >= 200 && prodRes.status < 400,
+        reason: "Shotstack-Key ungültig (Stage)"
       };
     }
+    const prodOk = prodRes.status >= 200 && prodRes.status < 400;
     return {
       ok: true,
       present: true,
       host: stage.host,
       isStage: stage.isStage,
       prodHost: prod.host,
-      httpStatus: res.status
+      httpStatus: stageRes.status,
+      prodHttpStatus: prodRes.status,
+      prodOk,
+      reason: prodOk
+        ? null
+        : `Shotstack Production (v1) HTTP ${prodRes.status} – Endfassung nutzt fal-ffmpeg-Fallback`
     };
   } catch (error) {
     return { ok: false, present: true, host: stage.host, isStage: true, reason: error.message || String(error) };
@@ -230,7 +239,26 @@ export function buildShotstackTimeline({
 
 export async function composeFinalVideo(env, payload = {}) {
   const final = payload.final !== false; // Endfassung standardmäßig Production
-  if (shotstackKey(env)) return composeWithShotstack(env, payload, { final });
+  if (shotstackKey(env)) {
+    const shot = await composeWithShotstack(env, payload, { final });
+    if (shot.ok) return shot;
+    // Production oft 403 (nur Stage-Plan) – kein Stage-Wasserzeichen als Endfassung.
+    // Stattdessen fal-ffmpeg-Merge ohne Fremdwasserzeichen (Download/Admin; Branding-Freigabe gesperrt).
+    const code = Number(shot.httpStatus || 0);
+    const authFail = code === 401 || code === 403 || /HTTP 401|HTTP 403/i.test(String(shot.reason || ""));
+    if (final && authFail && falKey(env)) {
+      const fal = await composeWithFalFfmpeg(env, payload);
+      if (fal.ok) {
+        return {
+          ...fal,
+          composeFallback: "fal-ffmpeg",
+          shotstackBlocked: shot.reason || `Shotstack HTTP ${code || "?"} (v1)`,
+          note: "Shotstack Production gesperrt – fal-ffmpeg-Merge ohne Fremdwasserzeichen"
+        };
+      }
+    }
+    return shot;
+  }
   if (falKey(env)) return composeWithFalFfmpeg(env, payload);
   return {
     ok: false,
@@ -264,6 +292,7 @@ async function composeWithShotstack(env, payload, { final }) {
     // Production fehlgeschlagen → klar melden (kein stilles Stage-Fallback für Endfassung)
     return {
       ok: false,
+      httpStatus: res.status,
       reason: data?.message || data?.response?.message || `Shotstack HTTP ${res.status} (${envInfo.isStage ? "stage" : "v1"})`,
       shotstackEnv: envInfo.isStage ? "stage" : "v1"
     };
