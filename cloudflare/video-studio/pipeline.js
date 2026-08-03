@@ -52,9 +52,12 @@ function publicJob(job) {
           de: job.statement.de,
           source: job.statement.source,
           topic: job.statement.topic,
+          fazit: job.statement.fazit || "",
+          cta: job.statement.cta || "",
           manual: Boolean(job.statement.manual)
         }
       : null,
+    contributionText: job.contributionText || job.statement?.raw || null,
     setup: job.setup || null,
     composePreview: job.composePreview === true,
     renderMeta: job.artifacts?.render

@@ -175,7 +175,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     }
   }
 
-  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls|publish-feed|request-push))?$/);
+  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls|publish-feed|request-push|regenerate))?$/);
   if (jobMatch) {
     const jobId = decodeURIComponent(jobMatch[1]);
     const action = jobMatch[2] || "";
@@ -184,6 +184,81 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       const job = await readJob(env, jobId);
       if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
       return json({ ok: true, job: publicJob(job) }, cors);
+    }
+
+    if (request.method === "PATCH" && !action) {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const nextStatement = {
+        ...(job.statement || {}),
+        ...(body.statement && typeof body.statement === "object" ? body.statement : {})
+      };
+      if (body.speaker != null) nextStatement.speaker = String(body.speaker).trim();
+      if (body.de != null) nextStatement.de = String(body.de).trim();
+      if (body.source != null) nextStatement.source = String(body.source).trim();
+      if (body.topic != null) nextStatement.topic = String(body.topic).trim();
+      if (body.fazit != null) nextStatement.fazit = String(body.fazit).trim();
+      if (!nextStatement.de) return json({ ok: false, error: "Aussage darf nicht leer sein" }, cors, 422);
+      const contributionText =
+        body.contributionText != null ? String(body.contributionText) : job.contributionText || "";
+      const saved = await saveJob(env, {
+        ...job,
+        statement: {
+          ...nextStatement,
+          manual: true,
+          verified: Boolean(nextStatement.speaker && nextStatement.de && nextStatement.source)
+        },
+        contributionText,
+        message: "Text aktualisiert (noch nicht neu gerendert)",
+        updatedAt: new Date().toISOString()
+      });
+      return json({ ok: true, job: publicJob(saved) }, cors);
+    }
+
+    if (request.method === "POST" && action === "regenerate") {
+      await assertVideoStudioRateLimit(env, request);
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      let statement = { ...(job.statement || {}) };
+      if (body.statement && typeof body.statement === "object") {
+        statement = { ...statement, ...body.statement };
+      }
+      ["speaker", "de", "source", "topic", "fazit"].forEach((k) => {
+        if (body[k] != null) statement[k] = String(body[k]).trim();
+      });
+      if (body.contributionText) {
+        const parsed = parseContributionText(body.contributionText);
+        if (parsed.ok) statement = { ...statement, ...parsed.statement, id: statement.id || parsed.statement.id };
+      }
+      if (!statement.de) return json({ ok: false, error: "Aussage fehlt für Neu-Erzeugung" }, cors, 422);
+      const keepScene = job.sceneImageUrl || job.artifacts?.sceneImage || null;
+      const saved = await saveJob(env, {
+        ...job,
+        status: "queued",
+        stage: "statement",
+        statement: { ...statement, manual: true, verified: true },
+        contributionText: body.contributionText || job.contributionText || "",
+        sceneImageUrl: job.sceneImageUrl || keepScene?.url || null,
+        storyboard: null,
+        completedStages: ["statement"],
+        artifacts: {
+          sceneImage: keepScene?.r2Key || keepScene?.url ? keepScene : job.artifacts?.sceneImage || null,
+          clips: [],
+          voice: null,
+          render: null
+        },
+        outputUrl: null,
+        posterUrl: null,
+        qualityChecks: null,
+        approval: { approved: false },
+        costEur: 0,
+        message: "Neu-Erzeugung vorbereitet – Produktion startet",
+        updatedAt: new Date().toISOString()
+      });
+      const progressed = await processVideoStudioJob(env, jobId, helpers);
+      return json({ ok: true, job: publicJob(progressed || saved), regenerated: true }, cors);
     }
 
     if (request.method === "DELETE" && !action) {
