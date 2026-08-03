@@ -35,7 +35,10 @@ export function falKey(env) {
   return key;
 }
 
-/** Leichter Auth-Check ohne kostenpflichtigen Clip (ungültiger Body → 422 = Key ok). */
+/** Leichter Auth-Check ohne teuren Videoclip.
+ * 422/400 = Key akzeptiert; request_id = Key ok; 401 = Key falsch.
+ * 403 oft Scope/Modell – dann zweiter Versuch mit flux/schnell.
+ */
 export async function probeFalAuth(env) {
   const key = falKey(env);
   if (!key) return { ok: false, present: false, reason: "FAL_KEY fehlt" };
@@ -45,33 +48,83 @@ export async function probeFalAuth(env) {
     hasColon: key.includes(":"),
     prefix: key.slice(0, 4)
   };
-  try {
-    const res = await fetch("https://queue.fal.run/fal-ai/fast-sdxl", {
+
+  async function hit(modelPath, body) {
+    const res = await fetch(`https://queue.fal.run/${modelPath}`, {
       method: "POST",
       headers: {
         Authorization: `Key ${key}`,
         "Content-Type": "application/json"
       },
-      body: "{}"
+      body: JSON.stringify(body)
     });
     const text = await res.text().catch(() => "");
-    // 401/403 = Key ungültig; 422/400 = Key akzeptiert, Input fehlt
-    if (res.status === 401 || res.status === 403) {
+    let data = {};
+    try { data = JSON.parse(text); } catch {}
+    return { res, text, data };
+  }
+
+  try {
+    // 1) leerer Body → bei gültigem Key meist 422
+    let { res, text, data } = await hit("fal-ai/flux/schnell", {});
+    if (res.status === 401) {
       return {
         ok: false,
         ...fingerprint,
-        httpStatus: res.status,
-        reason: "fal.ai lehnt den Key ab (invalid credentials) – bitte FAL_KEY neu setzen"
+        httpStatus: 401,
+        reason: "fal.ai: ungültiger API-Key – bitte FAL_KEY neu setzen",
+        detail: String(data?.detail || data?.message || text).slice(0, 180)
       };
     }
-    if (res.status === 422 || res.status === 400 || res.status === 200 || res.status === 201) {
-      return { ok: true, ...fingerprint, httpStatus: res.status };
+    if (res.status === 422 || res.status === 400) {
+      return { ok: true, ...fingerprint, httpStatus: res.status, model: "fal-ai/flux/schnell" };
+    }
+    if (res.ok || data?.request_id || data?.requestId) {
+      return { ok: true, ...fingerprint, httpStatus: res.status, model: "fal-ai/flux/schnell", queued: true };
+    }
+
+    // 2) Minimaler Prompt (sehr günstig) – bestätigt Key endgültig
+    ({ res, text, data } = await hit("fal-ai/flux/schnell", { prompt: "solid charcoal silhouette test frame", image_size: "square_hd", num_images: 1 }));
+    if (res.status === 401) {
+      return {
+        ok: false,
+        ...fingerprint,
+        httpStatus: 401,
+        reason: "fal.ai: ungültiger API-Key",
+        detail: String(data?.detail || text).slice(0, 180)
+      };
+    }
+    if (res.ok || data?.request_id || data?.requestId || res.status === 422) {
+      return {
+        ok: true,
+        ...fingerprint,
+        httpStatus: res.status,
+        model: "fal-ai/flux/schnell",
+        queued: Boolean(data?.request_id || data?.requestId)
+      };
+    }
+
+    // 3) Video-Modell erreichbar?
+    ({ res, text, data } = await hit("fal-ai/wan-25-preview/text-to-video", {
+      prompt: "anonymous silhouette walking away, face hidden, cinematic 9:16",
+      aspect_ratio: "9:16",
+      resolution: "480p",
+      duration: "5"
+    }));
+    if (res.ok || data?.request_id || data?.requestId) {
+      return {
+        ok: true,
+        ...fingerprint,
+        httpStatus: res.status,
+        model: "fal-ai/wan-25-preview/text-to-video",
+        queued: true
+      };
     }
     return {
-      ok: res.ok,
+      ok: false,
       ...fingerprint,
       httpStatus: res.status,
-      reason: text.slice(0, 160) || `HTTP ${res.status}`
+      reason: String(data?.detail || data?.message || text || `HTTP ${res.status}`).slice(0, 220)
     };
   } catch (error) {
     return { ok: false, ...fingerprint, reason: error.message || String(error) };
