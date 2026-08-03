@@ -107,25 +107,30 @@ function socialRowHtml(b, typo) {
   return `${tg}${web}${ig}`;
 }
 
+function mixScriptHtml(text, typo) {
+  const esc = escapeHtml(text);
+  return esc.replace(
+    /([\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFCﷺ]+)/g,
+    `<span style="font-family:${typo.arabic};font-size:1.06em;direction:rtl;unicode-bidi:embed;letter-spacing:0">$1</span>`
+  );
+}
+
 function overlayHtml(overlay) {
   const typo = DAR_VIDEO_PROFILE.typography;
   const b = DAR_VIDEO_PROFILE.branding;
 
   if (overlay.role === "brand") {
-    /* Nur dezente Markenzeile – kein Topic (Dhikr). Großes Logo läuft separat als Wasserzeichen. */
     return htmlShell(
-      `<div style="${panelStyle("max-width:720px;text-align:center;padding:16px 28px")}">
-        <div style="font-family:${typo.display};font-size:28px;letter-spacing:.14em;color:${typo.gold};font-weight:700;line-height:1.15;text-shadow:0 2px 12px rgba(0,0,0,.55)">${escapeHtml(b.title)}</div>
+      `<div style="text-align:center;width:100%">
+        <div style="font-family:${typo.display};font-size:30px;letter-spacing:.16em;color:${typo.gold};font-weight:700;line-height:1.15;text-shadow:0 2px 14px rgba(0,0,0,.55)">${escapeHtml(b.title)}</div>
       </div>`,
-      { height: 110 }
+      { height: 100 }
     );
   }
   if (overlay.role === "speaker") {
     return htmlShell(
       `<div style="${panelStyle("max-width:900px;text-align:center")}">
-        <div style="font-family:${typo.display};font-size:42px;line-height:1.4;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">
-          <span style="font-family:${typo.arabic};font-size:1.05em">${escapeHtml(overlay.text)}</span>
-        </div>
+        <div style="font-family:${typo.display};font-size:40px;line-height:1.42;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${mixScriptHtml(overlay.text, typo)}</div>
       </div>`,
       { height: 220 }
     );
@@ -134,25 +139,25 @@ function overlayHtml(overlay) {
     const body = overlay.htmlEmphasis ? emphasizeHtml(overlay.text) : escapeHtml(overlay.text);
     return htmlShell(
       `<div style="${panelStyle("max-width:920px;text-align:center")}">
-        <div style="font-family:${typo.body};font-size:48px;line-height:1.42;color:${typo.cream};font-weight:600;letter-spacing:.01em;text-shadow:0 3px 16px rgba(0,0,0,.65)">${body}</div>
+        <div style="font-family:${typo.body};font-size:46px;line-height:1.45;color:${typo.cream};font-weight:600;letter-spacing:.01em;text-shadow:0 3px 16px rgba(0,0,0,.65)">${body}</div>
       </div>`,
       { height: 420 }
     );
   }
   if (overlay.role === "source") {
     return htmlShell(
-      `<div style="${panelStyle("max-width:880px;text-align:center;padding:18px 26px")}">
-        <div style="height:1px;width:42%;margin:0 auto 14px;background:linear-gradient(90deg,transparent,${typo.gold},transparent);opacity:.85"></div>
-        <div style="font-family:${typo.source};font-size:30px;font-style:italic;letter-spacing:.02em;line-height:1.4;color:${typo.soft};text-shadow:0 2px 12px rgba(0,0,0,.55)">${escapeHtml(overlay.text)}</div>
+      `<div style="${panelStyle("max-width:900px;text-align:center;padding:18px 26px")}">
+        <div style="height:1px;width:46%;margin:0 auto 14px;background:linear-gradient(90deg,transparent,${typo.gold},transparent);opacity:.85"></div>
+        <div style="font-family:${typo.source};font-size:28px;font-style:italic;letter-spacing:.015em;line-height:1.45;color:${typo.soft};text-shadow:0 2px 12px rgba(0,0,0,.55)">${mixScriptHtml(overlay.text, typo)}</div>
       </div>`,
-      { height: 160 }
+      { height: 200 }
     );
   }
   if (overlay.role === "cta") {
     return htmlShell(
       `<div style="${panelStyle("max-width:940px;text-align:center;padding:26px 28px")}">
-        <div style="font-family:${typo.display};font-size:34px;line-height:1.35;margin-bottom:18px;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${escapeHtml(b.followLine)}</div>
-        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px">${socialRowHtml(b, typo)}</div>
+        <div style="font-family:${typo.display};font-size:32px;line-height:1.35;margin-bottom:18px;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${escapeHtml(b.followLine)}</div>
+        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:16px">${socialRowHtml(b, typo)}</div>
         <div style="font-family:${typo.display};font-size:22px;letter-spacing:.05em;color:${typo.gold};text-shadow:0 2px 10px rgba(0,0,0,.5)">${escapeHtml(b.credit)}</div>
       </div>`,
       { height: 340 }
@@ -162,11 +167,11 @@ function overlayHtml(overlay) {
 }
 
 function positionForRole(role) {
-  if (role === "brand") return { position: "top", offset: { x: 0, y: -0.04 } };
+  if (role === "brand") return { position: "top", offset: { x: 0, y: -0.035 } };
   if (role === "speaker") return { position: "center", offset: { x: 0, y: -0.16 } };
   if (role === "statement") return { position: "center", offset: { x: 0, y: 0.04 } };
-  if (role === "source") return { position: "center", offset: { x: 0, y: 0.24 } };
-  if (role === "cta") return { position: "center", offset: { x: 0, y: 0.12 } };
+  if (role === "source") return { position: "center", offset: { x: 0, y: 0.22 } };
+  if (role === "cta") return { position: "center", offset: { x: 0, y: 0.1 } };
   return { position: "center", offset: { x: 0, y: 0 } };
 }
 
@@ -175,6 +180,15 @@ function overlayEnd(overlays) {
     const end = Number(o.at || 0) + Number(o.length || 0);
     return Math.max(max, end);
   }, 0);
+}
+
+function minLengthForRole(role, length) {
+  const n = Number(length || 0);
+  if (role === "brand") return Math.max(1.2, Math.min(1.5, n || 1.5));
+  if (role === "source") return Math.max(2.0, n || 2.0);
+  if (role === "cta") return Math.max(2.2, n || 2.5);
+  if (role === "speaker") return Math.max(1.8, n || 2.0);
+  return Math.max(1.6, n || 3.0);
 }
 
 export function buildShotstackTimeline({
@@ -204,17 +218,25 @@ export function buildShotstackTimeline({
         htmlEmphasis: i === 1
       }));
 
-  const contentEnd = Math.max(
-    sceneLen * Math.max(1, videoClips.length),
-    overlayEnd(overlays),
-    15
-  );
-  /* Letzter Clip hält bis Ende – kein schwarzes Restbild hinter CTA */
+  const totalDuration = 15;
   if (videoClips.length) {
     const last = videoClips[videoClips.length - 1];
-    last.length = Math.max(last.length, contentEnd - last.start);
+    last.length = Math.max(last.length, totalDuration - last.start);
   }
-  const totalDuration = contentEnd;
+
+  const typo = DAR_VIDEO_PROFILE.typography;
+  const dimClip = {
+    asset: {
+      type: "html",
+      html: `<div style="width:1080px;height:1920px;background:${typo.dimOverlay}"></div>`,
+      width: 1080,
+      height: 1920
+    },
+    start: 12.5,
+    length: 2.5,
+    position: "center",
+    opacity: 1
+  };
 
   const textClips = overlays.map((overlay) => {
     const pos = positionForRole(overlay.role);
@@ -222,8 +244,8 @@ export function buildShotstackTimeline({
       overlay.role === "statement" ? 420 :
       overlay.role === "cta" ? 340 :
       overlay.role === "speaker" ? 220 :
-      overlay.role === "source" ? 160 :
-      overlay.role === "brand" ? 110 : 140;
+      overlay.role === "source" ? 200 :
+      overlay.role === "brand" ? 100 : 140;
     return {
       asset: {
         type: "html",
@@ -232,39 +254,47 @@ export function buildShotstackTimeline({
         height
       },
       start: Math.max(0, Number(overlay.at || 0)),
-      length: Math.max(2.0, Number(overlay.length || 3.5)),
+      length: minLengthForRole(overlay.role, overlay.length),
       position: pos.position,
       offset: pos.offset,
-      /* Sanfter Einblend – kein schnelles Flash-Out */
       transition: { in: "fade", out: "fade" },
-      opacity: overlay.role === "brand" ? 0.92 : 1
+      opacity: 1
     };
   });
 
-  const tracks = [
-    { clips: textClips },
-    { clips: videoClips }
-  ];
-
   const brand = DAR_VIDEO_PROFILE.branding;
   const markUrl = watermarkUrl || logoUrl;
-  if (markUrl) {
-    tracks.unshift({
-      clips: [{
+  const watermarkClip = markUrl
+    ? {
         asset: { type: "image", src: markUrl },
         start: 0,
         length: totalDuration,
         position: "center",
-        opacity: Number(brand.watermarkOpacity) || 0.28,
-        scale: Number(brand.watermarkScale) || 0.42,
+        opacity: Number(brand.watermarkOpacity) || 0.09,
+        scale: Number(brand.watermarkScale) || 0.44,
         offset: { x: 0, y: 0 }
-      }]
-    });
-  }
+      }
+    : null;
+
+  const tracks = [];
+  if (watermarkClip) tracks.push({ clips: [watermarkClip] });
+  tracks.push({ clips: [dimClip, ...textClips] });
+  tracks.push({ clips: videoClips });
+
+  const lastVideo = videoClips[videoClips.length - 1];
+  const meta = {
+    durationSec: totalDuration,
+    watermarkCount: watermarkClip ? 1 : 0,
+    watermark: watermarkClip
+      ? { position: watermarkClip.position, scale: watermarkClip.scale, opacity: watermarkClip.opacity }
+      : null,
+    lastClipCoversEnd: Boolean(lastVideo && lastVideo.start + lastVideo.length >= totalDuration - 0.05),
+    background: "#1a1814",
+    previewFrames: [2, 6, 11, 14]
+  };
 
   return {
     timeline: {
-      /* Warmer Bildbeitrag-Ton statt kaltem Schwarz */
       background: "#1a1814",
       soundtrack: voiceUrl
         ? { src: voiceUrl, effect: "fadeOut", volume: 1 }
@@ -277,7 +307,8 @@ export function buildShotstackTimeline({
       fps: DAR_VIDEO_PROFILE.fps,
       quality: "high",
       destinations: []
-    }
+    },
+    meta
   };
 }
 
@@ -316,7 +347,7 @@ export async function composeFinalVideo(env, payload = {}) {
 async function composeWithShotstack(env, payload, { final }) {
   const envInfo = shotstackEnvironment(env, { final });
   const brands = brandUrls(env);
-  const body = buildShotstackTimeline({
+  const bodyFull = buildShotstackTimeline({
     clipUrls: payload.clipUrls,
     voiceUrl: payload.voiceUrl,
     captionPlan: payload.captionPlan,
@@ -325,6 +356,7 @@ async function composeWithShotstack(env, payload, { final }) {
     logoUrl: brands.logoUrl,
     sceneDurationSec: payload.sceneDurationSec
   });
+  const { meta: timelineMeta, ...body } = bodyFull;
   const res = await fetch(`${envInfo.host}/render`, {
     method: "POST",
     headers: {
@@ -353,6 +385,8 @@ async function composeWithShotstack(env, payload, { final }) {
     foreignWatermarkRisk: envInfo.isStage,
     brandingApplied: true,
     isPreview: envInfo.isStage,
+    timelineMeta: timelineMeta || null,
+    durationSeconds: 15,
     poll: async () => pollShotstackRender(env, renderId, { final })
   };
 }

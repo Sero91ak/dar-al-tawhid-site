@@ -52,6 +52,10 @@ textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
 @media(min-width:768px){.grid2{grid-template-columns:1.1fr .9fr}.app{width:min(100%,1100px)}}
 .preview-wrap{border:1px solid var(--line2);border-radius:14px;background:#000;overflow:hidden;aspect-ratio:9/16;max-height:min(58vh,520px);margin:0 auto;width:min(100%,320px);display:grid;place-items:center}
 .preview-wrap img,.preview-wrap video{width:100%;height:100%;object-fit:contain;display:block}
+.frame-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
+.frame-strip button{border:1px solid var(--line2);border-radius:10px;background:rgba(0,0,0,.35);padding:0;overflow:hidden;min-height:72px;cursor:pointer}
+.frame-strip canvas,.frame-strip img{width:100%;height:72px;object-fit:cover;display:block;background:#111}
+.frame-strip small{display:block;text-align:center;font-size:10px;opacity:.75;margin-top:2px}
 .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .notice{margin-top:8px;border:1px dashed var(--line);border-radius:12px;padding:10px;font-size:11px;line-height:1.45;color:var(--soft);background:rgba(90,140,220,.04)}
 .notice.bad{border-color:rgba(255,154,144,.35);color:#ffd2cd}.notice.ok{border-color:rgba(139,224,189,.3);color:#c8f5e2}.notice.warn{border-color:rgba(255,211,134,.35);color:#ffe3b0}
@@ -185,6 +189,7 @@ details.box summary::-webkit-details-marker{display:none}
 
   <section class="panel hidden" id="panelResult">
     <div class="preview-wrap"><video id="resultVideo" controls playsinline preload="metadata" class="hidden"></video></div>
+    <div class="frame-strip" id="previewFrames" aria-label="Prüfbilder bei 2s, 6s, 11s, 14s"></div>
     <div class="struct" id="resultMeta" style="margin-top:8px"></div>
     <div class="actions">
       <button class="btn primary" type="button" id="saveBtn">Auf Gerät speichern</button>
@@ -259,7 +264,7 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="box-body meta">
       <b>ChatGPT:</b> „Video-Bild erstellen“ / „Video-Bildbeitrag“ / „Videobeitrag erstellen“ = nur das reine 4K-Ausgangsbild (textfrei, logofrei).<br><br>
       <b>Admin-Button „Video-Beitrag erstellen“:</b> Text + Ausgangsbild → 15 s Bewegung → Stimme → Texteinblendungen → Branding → MP4.<br><br>
-      Branding wie Bildbeitrag: großes DAR-Logo mittig als Wasserzeichen, lesbare Schrift (Cormorant/Amiri), Quelle klar, Social-Logos am Ende, kein Topic/Dhikr-Flash, kein Shotstack-Wasserzeichen.<br><br>
+      Spezifikation v4: feste 15s-Struktur, Logo mittig 7–10 %, Cormorant/Amiri, Quelle ≥2s, Social-Abschluss, Prüfbilder 2/6/11/14s, keine Auto-Labels (Dhikr…), kein Fremdwasserzeichen.<br><br>
       Standard: externes Bild hochladen/Bibliothek. KI-Bild nur optional. Feed/Push nie automatisch. Keine Musik, keine Fremdwasserzeichen, keine modernen Autos, Propheten nie körperlich dargestellt.
     </div>
   </details>
@@ -472,7 +477,7 @@ details.box summary::-webkit-details-marker{display:none}
         sceneImageUrl:state.scene.url,
         sceneImageR2Key:state.scene.r2Key||null,
         costConfirmed:true,
-        profile:"dar-standard-v3",
+        profile:"dar-standard-v4",
         format:"9:16",
         manualApproval:true,
         composePreview:false,
@@ -555,6 +560,34 @@ details.box summary::-webkit-details-marker{display:none}
       startPoll();
     }
   });
+
+  async function capturePreviewFrames(video, times){
+    const host=el("previewFrames"); if(!host||!video)return;
+    host.innerHTML="";
+    const list=times&&times.length?times:[2,6,11,14];
+    for(const sec of list){
+      const cell=document.createElement("div");
+      const btn=document.createElement("button");
+      btn.type="button";
+      const canvas=document.createElement("canvas");
+      canvas.width=180; canvas.height=320;
+      const label=document.createElement("small");
+      label.textContent=sec+"s";
+      btn.appendChild(canvas); cell.appendChild(btn); cell.appendChild(label); host.appendChild(cell);
+      btn.addEventListener("click",()=>{try{video.currentTime=sec;video.play().catch(()=>{});}catch{}});
+      try{
+        await new Promise((resolve,reject)=>{
+          const onSeek=()=>{video.removeEventListener("seeked",onSeek);resolve();};
+          video.addEventListener("seeked",onSeek);
+          video.currentTime=Math.min(sec, Math.max(0,(video.duration||15)-0.05));
+          setTimeout(()=>{video.removeEventListener("seeked",onSeek);resolve();},900);
+        });
+        const ctx=canvas.getContext("2d");
+        if(ctx && video.videoWidth){ctx.drawImage(video,0,0,canvas.width,canvas.height);}
+      }catch{}
+    }
+  }
+
   async function openResult(job){
     let j=job;
     try{const r=await api("/jobs/"+encodeURIComponent(job.id)+"/refresh-urls",{method:"POST",body:"{}"});j=r.job||job}catch{}

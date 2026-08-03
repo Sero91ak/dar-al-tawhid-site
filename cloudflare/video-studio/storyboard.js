@@ -1,13 +1,31 @@
 import { DAR_VIDEO_PROFILE } from "./profile.js";
 import { resolveThemeAtmosphere } from "./theme-presets.js";
 import { depictionPromptBlock, isProphetRelatedStatement, motionNegativePrompt } from "./depiction-rules.js";
+import {
+  DAR_CAPTION_SLOTS,
+  DAR_VIDEO_DURATION_SEC,
+  PRESERVE_SCENE_PROMPT,
+  PRESERVE_SCENE_NEGATIVE,
+  sanitizeTopicLabel
+} from "./timeline.js";
+import { prepareVoiceScript } from "./voice-prep.js";
 
+/** Kernbegriffe / Phrasen für elegante Hervorhebung (Script nur DE) */
 const HIGHLIGHT_WORDS = new Set([
-  "allah", "allāh", "iman", "īmān", "glauben", "sunnah", "sunna", "qur", "qurʾān", "quran",
-  "wissen", "demut", "geduld", "tawhid", "tawḥīd", "tauhid", "rechtleitung", "ummah", "umma"
+  "allah", "allāh", "iman", "īmān", "glauben", "sunnah", "sunna", "qurʾān", "quran",
+  "wissen", "demut", "geduld", "tawhid", "tawḥīd", "tauhid", "rechtleitung", "ummah", "umma",
+  "dunyā", "dunya", "jenseits", "ākhirah", "akhirah"
 ]);
 
-function splitStatementBlocks(text, minBlocks = 2, maxBlocks = 4) {
+const HIGHLIGHT_PHRASES = [
+  /besser als ihr/gi,
+  /enthaltsamer gegenüber der duny[aā]/gi,
+  /strebten stärker nach dem jenseits/gi,
+  /mehr im fasten/gi,
+  /herzen zählten/gi
+];
+
+function splitStatementBlocks(text, minBlocks = 2, maxBlocks = 3) {
   const clean = String(text || "").replace(/\s+/g, " ").trim();
   if (!clean) return [];
   const parts = clean.split(/(?<=[.,;:!?…])\s+/).map((p) => p.trim()).filter(Boolean);
@@ -18,27 +36,47 @@ function splitStatementBlocks(text, minBlocks = 2, maxBlocks = 4) {
     for (let i = 0; i < parts.length; i += size) out.push(parts.slice(i, i + size).join(" "));
     return out.slice(0, maxBlocks);
   }
-  // Wortweise in 2–4 Blöcke
   const words = clean.split(" ");
-  const blockCount = Math.min(maxBlocks, Math.max(minBlocks, Math.ceil(words.length / 10)));
+  const blockCount = Math.min(maxBlocks, Math.max(minBlocks, Math.ceil(words.length / 12)));
   const per = Math.ceil(words.length / blockCount);
   const blocks = [];
   for (let i = 0; i < words.length; i += per) blocks.push(words.slice(i, i + per).join(" "));
   return blocks.filter(Boolean);
 }
 
+function hasArabic(text) {
+  return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFC]/.test(String(text || ""));
+}
+
 export function emphasizeHtml(text) {
-  /* Bildbeitrag-Stil: nur Kernbegriffe dezent gold unterstreichen – kein Flash aller langen Wörter */
-  return String(text || "")
-    .split(/(\s+)/)
+  const raw = String(text || "");
+  const held = [];
+  let work = raw;
+  HIGHLIGHT_PHRASES.forEach((re) => {
+    work = work.replace(re, (m) => {
+      if (hasArabic(m)) return m;
+      const i = held.length;
+      held.push(
+        `<span style="font-family:${DAR_VIDEO_PROFILE.typography.script};font-size:1.12em;color:${DAR_VIDEO_PROFILE.typography.gold};font-weight:400;text-decoration:underline;text-decoration-color:rgba(239,215,142,.7);text-underline-offset:4px">${escapeHtml(m)}</span>`
+      );
+      return `\0PH${i}\0`;
+    });
+  });
+  const out = work
+    .split(/(\s+|\0PH\d+\0)/)
     .map((token) => {
+      if (!token) return "";
       if (/^\s+$/.test(token)) return token;
+      const ph = token.match(/^\0PH(\d+)\0$/);
+      if (ph) return held[Number(ph[1])] || "";
       const bare = token.replace(/[^\p{L}\p{N}ʾʿāīūĀĪŪ]/gu, "").toLowerCase();
+      if (hasArabic(token)) return escapeHtml(token);
       const important = HIGHLIGHT_WORDS.has(bare) || /allāh|allah|qurʾ?ān|quran|tawḥ?īd|tauhid/i.test(bare);
       if (!important) return escapeHtml(token);
-      return `<span style="color:#efd78e;font-weight:600;text-decoration:underline;text-decoration-color:rgba(239,215,142,.75);text-underline-offset:3px;text-decoration-thickness:1px">${escapeHtml(token)}</span>`;
+      return `<span style="color:${DAR_VIDEO_PROFILE.typography.gold};font-weight:600;text-decoration:underline;text-decoration-color:rgba(239,215,142,.75);text-underline-offset:3px;text-decoration-thickness:1px">${escapeHtml(token)}</span>`;
     })
     .join("");
+  return out;
 }
 
 function escapeHtml(value) {
@@ -49,92 +87,98 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+const HONORIFIC_RE = /رضي الله عنه|رضي الله عنها|رحمه الله|رحمها الله|عليه السلام|ﷺ/;
+
 export function buildSpeakerLine(statement) {
-  const speaker = String(statement?.speaker || "Überlieferung").trim();
-  return `${speaker} رحمه الله sagte:`;
+  let speaker = String(statement?.speaker || "Überlieferung").trim();
+  speaker = speaker.replace(/\s*sagte\s*:?\s*$/i, "").trim();
+  if (HONORIFIC_RE.test(speaker)) {
+    return `${speaker} sagte:`;
+  }
+  const honorific = String(statement?.honorific || "رحمه الله").trim() || "رحمه الله";
+  return `${speaker} ${honorific} sagte:`;
 }
 
 /**
- * Exakter Vorlesetext – keine Umformulierung.
- * Pausen nur über Satzzeichen (ElevenLabs liest SSML-Tags sonst ggf. vor).
+ * Exakter Vorlesetext – bereinigt (kein Markdown/Emoji/URL), keine Umformulierung.
  */
 export function buildVoiceScript(statement) {
-  const speakerLine = buildSpeakerLine(statement);
-  const de = String(statement?.de || "").trim();
-  const source = String(statement?.source || "").trim();
-  return [
-    speakerLine,
-    de,
-    source ? `Quelle: ${source}.` : "",
-    DAR_VIDEO_PROFILE.branding.followLine
-  ].filter(Boolean).join("\n\n");
+  return prepareVoiceScript({
+    speakerLine: buildSpeakerLine(statement),
+    quote: String(statement?.de || "").trim(),
+    source: String(statement?.source || "").trim(),
+    followLine: DAR_VIDEO_PROFILE.branding.followLine
+  });
 }
 
 /**
- * Abschnittsweise Einblendungen – ruhig, lesbar wie Bildbeitrag (kein Topic/Dhikr-Flash).
+ * Feste 15s-Einblendungen laut Spezifikation.
  */
-export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
+export function buildCaptionPlan(statement, { totalSec = DAR_VIDEO_DURATION_SEC } = {}) {
   const brand = DAR_VIDEO_PROFILE.branding;
+  const duration = DAR_VIDEO_DURATION_SEC;
+  void totalSec;
   const speakerLine = buildSpeakerLine(statement);
   const de = String(statement?.de || "").trim();
   const source = String(statement?.source || "").trim();
   const blocks = splitStatementBlocks(de, 2, 3);
-  const duration = Math.max(16, Number(totalSec) || 20);
+  const slots = DAR_CAPTION_SLOTS;
 
-  const speakerChars = speakerLine.length;
-  const statementChars = Math.max(1, de.length);
-  const sourceChars = source.length + 8;
-  const ctaChars = brand.followLine.length + 40;
-  const totalChars = speakerChars + statementChars + sourceChars + ctaChars;
+  const statementStart = slots.statement.at;
+  const statementEnd = slots.statement.end;
+  const statementWindow = statementEnd - statementStart;
+  const gap = 0.22;
+  const usable = statementWindow - gap * Math.max(0, blocks.length - 1);
+  const totalChars = Math.max(1, blocks.reduce((n, b) => n + b.length, 0));
 
-  let cursor = 0.45;
   const overlays = [
     {
       role: "brand",
-      at: 0.15,
-      length: 2.0,
+      at: slots.brand.at,
+      length: slots.brand.length,
       text: brand.title,
-      /* Kein Topic (Dhikr etc.) – Branding nur über Logo-Wasserzeichen + dezente Markenzeile */
       topic: null,
       htmlEmphasis: false
     },
     {
       role: "speaker",
-      at: cursor,
-      length: Math.max(3.2, Math.min(4.8, (speakerChars / totalChars) * duration + 1.6)),
+      at: slots.speaker.at,
+      length: slots.speaker.length,
       text: speakerLine,
       htmlEmphasis: false
     }
   ];
-  cursor += overlays[1].length + 0.35;
 
-  const statementBudget = Math.max(7, duration - cursor - 8);
+  let cursor = statementStart;
   blocks.forEach((block, index) => {
-    const share = block.length / statementChars;
-    const length = Math.max(3.4, Math.min(6.2, statementBudget * share));
+    const share = block.length / totalChars;
+    const length = Math.max(1.8, usable * share);
+    const remainingBlocks = blocks.length - index - 1;
+    const maxLen = statementEnd - cursor - remainingBlocks * (1.8 + gap);
+    const len = Math.min(length, Math.max(1.8, maxLen));
     overlays.push({
       role: "statement",
       at: cursor,
-      length,
+      length: len,
       text: block,
       htmlEmphasis: true,
       blockIndex: index
     });
-    cursor += length + 0.28;
+    cursor += len + gap;
   });
 
   overlays.push({
     role: "source",
-    at: Math.min(cursor + 0.2, duration - 7.0),
-    length: 4.0,
-    text: source ? `Quelle: ${source}` : "",
+    at: slots.source.at,
+    length: slots.source.length,
+    text: source,
     htmlEmphasis: false
   });
 
   overlays.push({
     role: "cta",
-    at: Math.max(duration - 6.2, overlays[overlays.length - 1].at + overlays[overlays.length - 1].length + 0.2),
-    length: 6.0,
+    at: slots.cta.at,
+    length: slots.cta.length,
     text: brand.followLine,
     credit: brand.credit,
     social: {
@@ -146,8 +190,9 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
   });
 
   return {
-    version: 4,
+    version: 5,
     templateId: DAR_VIDEO_PROFILE.id,
+    durationSec: duration,
     voiceScript: buildVoiceScript(statement),
     overlays,
     captionLines: overlays.map((o) => ({
@@ -161,7 +206,8 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
 }
 
 export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 } = {}) {
-  const theme = String(statement?.topic || "Wissen").trim();
+  const hay = `${statement?.de || ""} ${statement?.raw || ""} ${statement?.fazit || ""}`;
+  const theme = sanitizeTopicLabel(statement?.topic || "", hay) || "Wissen";
   const de = String(statement?.de || "").trim();
   const atmosphere = resolveThemeAtmosphere(theme, de);
   const fromStill = Boolean(sceneImageUrl);
@@ -169,17 +215,17 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
   const depiction = depictionPromptBlock(statement);
 
   const figureAction = prophetSafe
-    ? "no human figure representing a prophet; only environment, objects, manuscripts, architecture, or distant anonymous people not portraying the prophet"
-    : "anonymous symbolic figure only — back/side/cropped/shadowed face, never identifiable as the named person";
+    ? "no human figure representing a prophet; only environment, objects, manuscripts, architecture already in frame"
+    : "if a person already exists in the still, keep the same anonymous figure only — back/side/cropped/shadowed face";
 
   const motionScenes = [
     {
       id: "s1",
       role: "opening",
       durationSec: 5,
-      camera: "slow push-in, natural handheld micro-motion",
+      camera: "slow push-in, natural micro-motion, max subtle zoom",
       setting: fromStill
-        ? "Continue the exact same scene identity as the provided still frame; preserve person, clothing, room, light, palette, and historical era"
+        ? PRESERVE_SCENE_PROMPT
         : prophetSafe
           ? `${atmosphere.opening}; empty or environment-led frame, no prophetic figure`
           : atmosphere.opening,
@@ -188,15 +234,17 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
         : prophetSafe
           ? "slow reveal of historically fitting space with dust and light; no prophetic body depiction"
           : "anonymous figure enters from behind, walks slowly toward window light, face never visible, modest historically fitting clothing",
-      promptFocus: "premium cinematic opening, real motion, noble calm DAR image-post mood, theme-bound, no text, no logos"
+      promptFocus: fromStill
+        ? "preserve composition; subtle motion only; no new objects"
+        : "premium cinematic opening, real motion, noble calm DAR image-post mood, theme-bound, no text, no logos"
     },
     {
       id: "s2",
       role: "reflection",
       durationSec: 5,
-      camera: fromStill ? "gentle lateral drift / soft orbit" : "gentle orbit or slow drift",
+      camera: fromStill ? "gentle lateral drift" : "gentle orbit or slow drift",
       setting: fromStill
-        ? "Same locked visual identity as start frame; no wardrobe, architecture, or era change"
+        ? `${PRESERVE_SCENE_PROMPT} Same locked visual identity as start frame.`
         : prophetSafe
           ? atmosphere.reflection.replace(/anonymous figure[^,]*/gi, "quiet empty scholarly niche")
           : atmosphere.reflection,
@@ -205,41 +253,44 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
         : prophetSafe
           ? "pages, light, or curtains move gently in an empty historically plausible room"
           : "anonymous figure seated with back to camera, reading quietly, modest robe, face fully hidden",
-      promptFocus: "consistent identity, contemplative, historically plausible, no cheap stock look, no morphing"
+      promptFocus: fromStill
+        ? "no wardrobe, architecture, or era change; no new vehicles or people"
+        : "consistent identity, contemplative, historically plausible, no morphing"
     },
     {
       id: "s3",
       role: "emphasis",
       durationSec: 5,
-      camera: fromStill ? "slow pull-back revealing more of the same space" : "slow tilt or pull-back, never revealing a face",
+      camera: fromStill ? "slow pull-back within same space" : "slow tilt or pull-back, never revealing a face",
       setting: fromStill
-        ? `Same scene continuity; thematic calm: ${de.slice(0, 80)}`
+        ? `${PRESERVE_SCENE_PROMPT} Continuity of the uploaded still.`
         : prophetSafe
           ? `${atmosphere.emphasis}; symbolic objects only; thematic cue: ${de.slice(0, 80)}`
           : `${atmosphere.emphasis}; thematic cue: ${de.slice(0, 90)}`,
       action: fromStill
-        ? `natural light change, dust; ${figureAction}; anatomically correct hands if a non-prophet anonymous figure is visible`
+        ? `natural light change, dust; ${figureAction}`
         : prophetSafe
-          ? "hands of anonymous non-prophet figure only if needed and face-hidden; else objects/manuscripts only; correct anatomy"
+          ? "objects/manuscripts only; correct anatomy if any non-prophet anonymous hands"
           : "hands carefully interact with books or quiet objects; fingers anatomically correct; modest sleeves",
-      promptFocus: "accurate anatomy, cinematic depth, real movement, no freeze-zoom fake motion"
+      promptFocus: fromStill
+        ? "accurate continuity; no freeze-zoom fake motion; no new buildings or cars"
+        : "accurate anatomy, cinematic depth, real movement"
     }
   ].slice(0, Math.max(1, Math.min(3, Number(clipCount) || 3)));
 
-  const captionPlan = buildCaptionPlan(statement, {
-    totalSec: motionScenes.reduce((n, s) => n + s.durationSec, 0)
-  });
+  const captionPlan = buildCaptionPlan(statement, { totalSec: DAR_VIDEO_DURATION_SEC });
 
   return {
-    version: 3,
+    version: 4,
     profileId: DAR_VIDEO_PROFILE.id,
     templateId: DAR_VIDEO_PROFILE.id,
     theme,
     themePreset: atmosphere.id,
     themeLabel: atmosphere.label,
     prophetRelated: prophetSafe,
+    fromStill,
     sceneImageUrl: sceneImageUrl || null,
-    motionSeconds: motionScenes.reduce((n, s) => n + s.durationSec, 0),
+    motionSeconds: DAR_VIDEO_DURATION_SEC,
     statementId: statement?.id || "",
     speaker: statement?.speaker || "",
     source: statement?.source || "",
@@ -248,15 +299,19 @@ export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 }
     captionLines: captionPlan.captionLines,
     scenes: motionScenes.map((scene) => ({
       ...scene,
-      negativePrompt: motionNegativePrompt(statement),
-      fullPrompt: [
-        scene.setting,
-        scene.action,
-        scene.camera,
-        scene.promptFocus,
-        depiction,
-        DAR_VIDEO_PROFILE.promptSafetySuffix
-      ].join(". ")
+      negativePrompt: fromStill
+        ? `${PRESERVE_SCENE_NEGATIVE}, ${motionNegativePrompt(statement)}`
+        : motionNegativePrompt(statement),
+      fullPrompt: fromStill
+        ? [PRESERVE_SCENE_PROMPT, scene.action, scene.camera, scene.promptFocus, depiction].join(". ")
+        : [
+            scene.setting,
+            scene.action,
+            scene.camera,
+            scene.promptFocus,
+            depiction,
+            DAR_VIDEO_PROFILE.promptSafetySuffix
+          ].join(". ")
     })),
     createdAt: new Date().toISOString()
   };
